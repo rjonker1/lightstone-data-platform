@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Public.Messaging;
+﻿using Common.Logging;
+using DataPlatform.Shared.Public.Messaging;
 using DataPlatform.Workflow.RabbitMQ.Publishers;
 using EasyNetQ;
 
@@ -7,7 +8,7 @@ namespace DataPlatform.Workflow.RabbitMQ
     public class Publisher : IPublishMessages
     {
         private readonly IRabbitMQPublisher publisher;
-        private readonly 
+        private static readonly ILog log = LogManager.GetLogger<Publisher>();
 
         public Publisher(IBus bus)
         {
@@ -16,6 +17,8 @@ namespace DataPlatform.Workflow.RabbitMQ
 
         public void Publish(IPublishableMessage message)
         {
+            log.InfoFormat("Publishing {0} in RabbitMQ publisher", message.GetType());
+
             publisher.Publish(message);
         }
     }

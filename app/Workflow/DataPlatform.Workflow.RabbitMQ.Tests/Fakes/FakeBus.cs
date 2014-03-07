@@ -24,7 +24,8 @@ namespace DataPlatform.Workflow.RabbitMQ.Tests.Fakes
 
         public void Publish<T>(T message, string topic) where T : class
         {
-            throw new NotImplementedException();
+            TopicPublishedWasCalled = true;
+            PublishedMessage = message;
         }
 
         public Task PublishAsync<T>(T message) where T : class
