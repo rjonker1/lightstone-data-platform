@@ -26,7 +26,7 @@ namespace DataPlatform.Workflow.RabbitMQ.Tests.Publisher
         [Observation]
         public void the_underlying_bus_is_invoked()
         {
-            bus.PublishedWasCalled.ShouldBeTrue();
+            bus.PublishWasCalled.ShouldBeTrue();
         }
 
         [Observation]

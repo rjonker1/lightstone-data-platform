@@ -54,6 +54,7 @@
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="Mothers\Publisher\TestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publisher\when_publishing_a_null_message_to_rabbitmq.cs" />
     <Compile Include="Publisher\when_publishing_message_to_rabbitmq.cs" />
     <Compile Include="Publisher\when_publishing_topic_message_to_rabbitmq.cs" />
   </ItemGroup>

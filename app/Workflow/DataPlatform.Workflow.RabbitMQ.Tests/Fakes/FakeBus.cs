@@ -8,7 +8,7 @@ namespace DataPlatform.Workflow.RabbitMQ.Tests.Fakes
 {
     public class FakeBus : IBus
     {
-        public bool PublishedWasCalled { get; private set; }
+        public bool PublishWasCalled { get; private set; }
 
         public object PublishedMessage { get; private set; }
 
@@ -18,7 +18,7 @@ namespace DataPlatform.Workflow.RabbitMQ.Tests.Fakes
 
         public void Publish<T>(T message) where T : class
         {
-            PublishedWasCalled = true;
+            PublishWasCalled = true;
             PublishedMessage = message;
         }
 
