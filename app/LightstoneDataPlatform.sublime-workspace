@@ -1,0 +1,588 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"New",
+				"NewLine"
+			],
+			[
+				"cah",
+				"characterCounter"
+			],
+			[
+				"c",
+				"char"
+			],
+			[
+				"cha",
+				"characterCounter"
+			],
+			[
+				"map",
+				"mapCounter"
+			],
+			[
+				"ma",
+				"mapAvailable"
+			],
+			[
+				"att",
+				"attractionCounter"
+			],
+			[
+				"fi",
+				"firstChar"
+			],
+			[
+				"prev",
+				"previousSibling"
+			],
+			[
+				"cate",
+				"categoryUrlPart"
+			],
+			[
+				"ne",
+				"neighbourhoodId"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"an",
+				"answer"
+			],
+			[
+				"compe",
+				"competitionId"
+			],
+			[
+				"em",
+				"emailAddress"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"valid",
+				"_validateExpiryDate"
+			],
+			[
+				"is",
+				"is_valid"
+			],
+			[
+				"cur",
+				"current_date"
+			],
+			[
+				"expi",
+				"expiry_date"
+			],
+			[
+				"nu",
+				"number_of_invalid_elements"
+			],
+			[
+				"card",
+				"cardNumber"
+			],
+			[
+				"check",
+				"checkoutDate"
+			],
+			[
+				"che",
+				"checkin"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"paddn",
+				"padding-top"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"par",
+				"parseInt"
+			],
+			[
+				"date",
+				"datediff"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"margin-",
+				"margin-bottom"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"padding-",
+				"padding-bottom"
+			],
+			[
+				"im",
+				"important"
+			],
+			[
+				"ar",
+				"article	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 188.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Projects/LightstoneDataPlatform/app/Workflow/DataPlatform.Workflow.RabbitMQ/readme.md",
+		"/C/Projects/LightstoneDataPlatform/.git/config",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Office-Attractions.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/AttractionsNearby.cshtml",
+		"/C/Tools/Umbraco/7.0.1/test.htm",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Office-Details.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Homepage-Articles.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Office-Header.cshtml",
+		"/C/Tools/Umbraco/7.0.1/App_Data/Logs/UmbracoTraceLog.txt",
+		"/C/Tools/Umbraco/7.0.1/Css/main.css",
+		"/C/Tools/Umbraco/7.0.1/Umbraco/PartialViewMacros/Templates/LoginStatus.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Office-Listing.cshtml",
+		"/C/Projects/AMConnect/build2/build/office-article-map.html",
+		"/C/Projects/AMConnect/build2/build/offices.html",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Office-About-Links.cshtml",
+		"/C/Projects/AMConnect/build2/build/office-article-gallery.html",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Staff-Office-Address.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/AMConnect.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Office-Other-Offices.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/Offices.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/OfficeDetails.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Umbraco/Developer/RelationTypes/TreeMenu/ActionNewRelationType.js",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Staff-Directory-Staff-List.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Staff-Office-Name.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Service-Awards-List.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Staff-Our-People.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/Homepage.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/News-List.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Config/UrlRewriting.config",
+		"/C/Tools/Umbraco/7.0.1/Views/StartersLeavers.cshtml",
+		"/C/Projects/AMConnect/build2/build/starters-leavers.html",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Starters-Leavers.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Install/Steps/renaming.ascx",
+		"/C/Projects/AMConnect/build2/build/service-awards.html",
+		"/C/Tools/Umbraco/7.0.1/Views/StaffDirectory.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/ServiceAwards.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/Staff.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Umbraco/Dialogs/RegexWs.aspx",
+		"/C/Tools/Umbraco/7.0.1/bin/amd64/Microsoft.VC90.CRT/README_ENU.txt",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Generic-RenderDate.cshtml",
+		"/C/Projects/AMConnect/build/people-2.html",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Staff-Image.cshtml",
+		"/C/Windows/Microsoft.NET/Framework64/v4.0.30319/Temporary ASP.NET Files/root/65f4f5c9/414da41/App_Web_staff-office-address.cshtml.70df5e80.yd_zrxx-.0.cs",
+		"/C/Projects/AMConnect/build/staff-directory.html",
+		"/C/Tools/Umbraco/7.0.1/Scripts/listnav.min.js",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Staff-Directory-Offices.cshtml",
+		"/C/Projects/AMConnect/build/index.html",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Homepage-Key-Information.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/NewsList.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Views/NewsArticle.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/News-Categories.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/News-Search-Form.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Search-Form.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Recent-News.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Article-Header.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Article-Metadata.cshtml",
+		"/C/Tools/Umbraco/7.0.1/MacroScripts/Article-Pagination.cshtml",
+		"/C/Projects/AMConnect/build/news-page.html",
+		"/C/Tools/Umbraco/7.0.1/amconnect",
+		"/C/Tools/Umbraco/7.0/Config/connectionStrings.config",
+		"/C/Tools/Umbraco/7.0/Views/NewsList.cshtml",
+		"/C/Tools/Umbraco/7.0.1/Web.config",
+		"/C/Tools/Umbraco/7.0/Config/appSettings.config",
+		"/C/Tools/Umbraco/7.0/Web.config",
+		"/C/Tools/Umbraco/7.0/Views/Homepage.cshtml",
+		"/C/Projects/AMConnect/build/index - Copy.html",
+		"/C/Projects/AMConnect/build/news-list - Copy.html",
+		"/C/Users/john/Downloads/postinstall/pi.bat",
+		"/C/Temp/lightstone/log_2014_02_13.txt",
+		"/C/Temp/lightstone/AutoRequestLog_log_2014_02_13.txt",
+		"/C/Projects/tic/email/2.htm",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Projects/tic/Accommodation/BookingConfirmation.cshtml",
+		"/C/Projects/tic/Accommodation/StoreBooking.cshtml",
+		"/C/Projects/tic/email/1.htm",
+		"/C/Users/john/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Temp/web.config",
+		"/C/Tools/Ruby/bin/cls",
+		"/C/Projects/rivethead.github.io/.git/config",
+		"/C/Projects/rivethead.github.io/Rakefile",
+		"/C/Projects/rivethead.github.io/.git/packed-refs",
+		"/C/Projects/rivethead.github.io/.git/index",
+		"/C/Projects/rivethead.github.io/.git/HEAD",
+		"/C/Projects/rivethead.github.io/.git/description",
+		"/C/Projects/rivethead.github.io/.git/refs/heads/source",
+		"/C/Users/john/AppData/Roaming/Sublime Text 3/Packages/Theme - Flatron/Flatron.sublime-theme",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/_includes/head.html",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/_includes/nav.html",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/_includes/foot.html",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/_layouts/default.html",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/_layouts/home.html",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/index.md",
+		"/C/Projects/tic/Competitions/EssentialGuide.aspx",
+		"/C/Users/john/Documents/GitHub/rivethead.github.io/index.html",
+		"/C/Projects/tic/Competitions/CompetitionSideBar.cshtml",
+		"/C/Projects/tic/Competitions/CompetitionEntry.aspx",
+		"/C/Projects/tic/Competitions/style.css",
+		"/C/Projects/tic/Accommodation/BookingSummary.cshtml",
+		"/C/Projects/tic/Accommodation/BookRoom.cshtml",
+		"/C/Users/john/Documents/AT_NONVIN12.xml",
+		"/C/Program Files/Sublime Text 3/changelog.txt",
+		"/C/Projects/tic/Accommodation/StoreBooking.master",
+		"/C/Projects/tic/Accommodation/Bookings/Bookings/Views/Home/Index.cshtml",
+		"/C/Projects/bogota/.git/description",
+		"/C/Projects/bogota/.git/HEAD",
+		"/C/Projects/bogota/.git/config",
+		"/C/Projects/bogota/.git/info/exclude",
+		"/C/Projects/Samco/what is expected",
+		"/C/Projects/tic/Accommodation/AccommodationSearchResults.cshtml",
+		"/C/Projects/tic/Accommodation/AccommodationHomePageSearch.cshtml",
+		"/C/Projects/tic/Accommodation/BookRoom.master",
+		"/C/Projects/tic/Accommodation/Accommodation.master",
+		"/C/Projects/tic/Accommodation/style.css",
+		"/C/Projects/tic/Accommodation/site.js",
+		"/C/Users/john/Documents/51d_k0k02",
+		"/C/Projects/tic/Accommodation/AccommodationDetails.xslt",
+		"/C/Users/john/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Projects/tic/Accommodation/AccommodationNeighbourhood.cshtml",
+		"/C/Projects/tic/Accommodation/ImageGallery2.xslt",
+		"/C/Projects/tic/Accommodation/AccommodationSearch.cshtml"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"partHeading",
+			"map",
+			"attractionCounter",
+			"				<div>\n					@a.Address\n				</div>\n",
+			"h3",
+			"firstChild",
+			"o.Url",
+			"london",
+			"previous",
+			"\n					",
+			"\n	",
+			"addressNode",
+			"page",
+			"Page",
+			"page",
+			"Page",
+			"page",
+			"By",
+			"by",
+			"	<add name=\"newsArticlesByCategory\" \n		virtualUrl=\"~/news-list/by/Company%20News\" \n		rewriteUrlParameter=\"ExcludeFromClientQueryString\" \n		destinationUrl=\"http://amconnect/news-list/uttarakhand-relief-am-co-chips-in/\" \n		ignoreCase=\"true\" />\n\n",
+			"news-page.html",
+			"umbracoConfigurationStatus",
+			"CJ58PVGP",
+			"CJ 58 PV GP",
+			"CJ58PVGP",
+			"CJ 58 PV GP",
+			"text",
+			"neighbourhoodId",
+			"hidden",
+			".Url",
+			"\n		",
+			"  ",
+			"*|",
+			"h2",
+			"h3",
+			"000",
+			"bodyContent",
+			"#templateBody",
+			"footerContent",
+			"#F4F4F4",
+			"bodyContent",
+			"div",
+			"h4",
+			"h3",
+			"                        	<tr>\n                            	<td align=\"center\" valign=\"top\">\n                                	<!-- BEGIN HEADER // -->\n                                    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" id=\"templateHeader\">\n                                        <tr>\n                                            <td valign=\"top\" class=\"headerContent\">\n                                            	<img src=\"https://gallery.mailchimp.com/9ca4097b59bd6b82be648f435/images/top_left.png\" style=\"max-width:600px;\" id=\"headerImage\" mc:label=\"header_image\" mc:edit=\"header_image\" mc:allowdesigner mc:allowtext />\n                                            </td>\n                                        </tr>\n                                    </table>\n                                    <!-- // END HEADER -->\n                                </td>\n                            </tr>\n",
+			"    $(\"#guest-name\").live(\"focusout\", function(e) {\n      var $this = $(this)\n        , $error = $this.parent().find(\".error\");\n\n      var re = new RegExp(/[A-Za-z]/);\n      if(re.test($this.val())) {\n        $error.hide();\n        $this.removeAttr(\"data-valid\");\n        $this.data(\"valid\", \"true\");\n        $this.removeClass(\"form-error\");\n      } else {\n        $error.show();\n        $this.data(\"valid\", \"false\");\n        $this.addClass(\"form-error\");\n      }\n    });\n\n",
+			"guest",
+			"\"NA\"",
+			"NA",
+			"state",
+			"telephone-number",
+			"tele",
+			"Truncate",
+			"\" %>",
+			"<%@ Import namespace=\"",
+			"---",
+			"div",
+			"==",
+			"button",
+			"#competition_content table select",
+			"div",
+			"h3",
+			"inline",
+			"countries",
+			"lastName",
+			"firstName",
+			"/*",
+			"float: right",
+			"decoration",
+			"city-guide",
+			"135",
+			".offer-listing-item {\n    border-top: dashed 1px #A2A2A2;\n    background: url(\"../images/ico-sprite-travel.png\") no-repeat scroll 0 -155px transparent;\n    padding: 8px 0 0px 15px;\n}\n\n",
+			"newsNode",
+			"text",
+			"\n	",
+			"\n		",
+			"book__room-button",
+			"startitle",
+			"starTitle",
+			".starTitle",
+			".accommodation-list-rating",
+			"\n		$(\"#address-line-2\").live(\"focusout\", function(e) {\n			var $this = $(this)\n				, $error = $this.parent().find(\".error\");\n\n			var re = new RegExp(/[A-Za-z]/);\n\n			if(!re.test($this.val())) {\n				$error.hide();\n				$this.data(\"valid\", \"true\");\n			} else {\n				$error.show();\n				$this.data(\"valid\", \"false\");\n			}\n		});\n",
+			"span",
+			"booking-summary-part",
+			"h4",
+			".booking__room-button",
+			"atitle",
+			"text-trans",
+			"book__room-total-price",
+			"ignored",
+			"ul.tabs",
+			"tabs",
+			".tabs",
+			"tab2",
+			"tab1",
+			"		  \n			<div id=\"propertytabs\" class=\"Property-Tabs contain\">                       \n				<ul class=\"tabs\">\n					<li><a href=\"#tab1\"><umbraco:Item field=\"#Photos\" runat=\"server\" /></a></li>\n					<li><a href=\"#tab2\" id=\"showMap\"><umbraco:Item field=\"#Map\" runat=\"server\" /></a></li>\n				</ul>\n				<div class=\"socialLike3 contain\">\n					<umbraco:Macro Alias=\"FacebookLike\" runat=\"server\" />\n					<umbraco:Macro Alias=\"AccommodationBook\" runat=\"server\" />\n				</div>\n			  \n				<div class=\"tab_container\">\n				<div id=\"tab1\" class=\"tab_content\">\n					<umbraco:Macro Alias=\"ImageGallery1\" runat=\"server\"></umbraco:Macro>\n				  <div class=\"clear\"></div>\n				  </div>\n				  \n				  <div class=\"detail\">\n					<umbraco:Item field=\"description\"  runat=\"server\"></umbraco:Item>\n					<div class=\"socialLike4 contain\">\n					  <umbraco:Macro Alias=\"FacebookLike\" runat=\"server\" />\n					  <div class=\"tweet\"><a href=\"https://twitter.com/share\" class=\"twitter-share-button\">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"//platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script></div>\n					</div>\n				  </div>      \n				  <div class=\"info contain\">\n					<div class=\"floatLeft\">              \n					 <umbraco:Macro Alias=\"AccommodationDetails\" runat=\"server\"></umbraco:Macro>                         \n					</div>\n					<div class=\"floatRight\">\n					  <div id=\"map_canvas\" style=\"width:200px; height:200px\">&nbsp;</div>\n					  <umbraco:Macro Alias=\"GoogleMap\" runat=\"server\"></umbraco:Macro>\n					</div>\n				  </div>      \n				  <div class=\"facility contain\">\n					<umbraco:Macro Alias=\"AccommodationFacilities\" runat=\"server\"></umbraco:Macro>\n				  </div>      \n				  <div class=\"accommodationLast contain\">\n					<div class=\"ppn\">FROM \n					  <span class=\"currency\">USD$</span><span class=\"price\"><umbraco:Item field=\"pricePerNight\"  runat=\"server\" /></span>\n					  <br /> per night</div><div class=\"clear\"></div>\n					<umbraco:Macro Alias=\"AccommodationBook\" runat=\"server\" />\n				  </div>\n				  \n				</div><!-- end tab 1 -->\n				<div id=\"tab2\" class=\"tab_content\">\n					<div id=\"property-map\">\n					<div id=\"property_map_canvas\" style=\"width:400px; height:400px\">&nbsp;</div>\n					<umbraco:Macro Alias=\"PropertyMap\" runat=\"server\" />\n					</div>\n				</div>\n\n				</div>\n			</div>  \n		  \n",
+			"accommodationCheckOut",
+			"accommodation__search",
+			"mmm",
+			"()",
+			"  ",
+			"input",
+			"All",
+			" + \")\"",
+			"rating",
+			"location",
+			"numberOfHits",
+			"p",
+			"h3",
+			"h4",
+			"h2",
+			"ColFullMain",
+			".accommodation__price",
+			"25px",
+			".accommodation__search-children",
+			".accommodation__homepage-go {\n    background-color: #ed6123;\n    border-radius: 3px;\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    color: white;\n    font-weight: bold;\n    padding: 6px 25px 6px 25px;\n    border: 1px solid;\n}\n\n",
+			".accommodation-search-box",
+			".accommodation-search-box, .accommodation__item-list",
+			".accommodation__search-checkin input[type=\"text\"], .accommodation__search-type select, .accommodation__search-checkout input[type=\"text\"], .accommodation__search-rooms select, .accommodation__search-children select, .accommodation__search-adults select",
+			"c",
+			"C",
+			"c",
+			"types",
+			"<option"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"    "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "LightstoneDataPlatform.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"homepage-articles",
+				"MacroScripts\\Homepage-Articles.cshtml"
+			],
+			[
+				"main",
+				"Css\\main.css"
+			],
+			[
+				"mains.cs",
+				"MacroScripts\\Office-Attractions.cshtml"
+			],
+			[
+				"mani",
+				"Css\\main.css"
+			],
+			[
+				"rewr",
+				"Config\\UrlRewriting.config"
+			],
+			[
+				"main.",
+				"Css\\main.css"
+			],
+			[
+				"main.css",
+				"Css\\main.css"
+			],
+			[
+				"staff-directory-offices",
+				"MacroScripts\\Staff-Directory-Offices.cshtml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 464.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 272.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
