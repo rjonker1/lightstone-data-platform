@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}</ProjectGuid>
+    <ProjectGuid>{AB92C673-A7C0-4C58-8DE8-2C51F1781303}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataPlatform.Workflow.RabbitMQ.Tests</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Workflow.RabbitMQ.Tests</AssemblyName>
+    <RootNamespace>DataPlatform.BuildingBlocks</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.BuildingBlocks</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,11 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.1.105\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,44 +40,20 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.bdd">
-      <HintPath>..\..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fakes\FailingBus.cs" />
-    <Compile Include="Fakes\FakeBus.cs" />
-    <Compile Include="Fakes\TestingRetryStrategy.cs" />
-    <Compile Include="Mothers\Publisher\TestMessage.cs" />
+    <Compile Include="Extentions\IntegerExtentions.cs" />
+    <Compile Include="Fluency\Counter.cs" />
+    <Compile Include="Fluency\Seconds.cs" />
+    <Compile Include="Fluency\Times.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Publisher\when_publishing_a_message_and_the_underlying_bus_fails.cs" />
-    <Compile Include="Publisher\when_publishing_a_null_message_to_rabbitmq.cs" />
-    <Compile Include="Publisher\when_publishing_message_to_rabbitmq.cs" />
-    <Compile Include="Publisher\when_publishing_topic_message_to_rabbitmq.cs" />
+    <Compile Include="Recovery\Strategies\CustomisableRetryStrategy.cs" />
+    <Compile Include="Recovery\IRetryStrategy.cs" />
+    <Compile Include="Recovery\RetryAgent.cs" />
+    <Compile Include="Recovery\Strategies\RetryStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\DataPlatform.BuildingBlocks\DataPlatform.BuildingBlocks.csproj">
-      <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
-      <Name>DataPlatform.BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\DataPlatform.Shared.Public\DataPlatform.Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>DataPlatform.Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataPlatform.Workflow.RabbitMQ\DataPlatform.Workflow.RabbitMQ.csproj">
-      <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
-      <Name>DataPlatform.Workflow.RabbitMQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataPlatform.Workflow\DataPlatform.Workflow.csproj">
-      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>DataPlatform.Workflow</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultRabbitMQRetryStrategy.cs" />
     <Compile Include="Publishers\DefaultPublisher.cs" />
     <Compile Include="Publishers\IRabbitMQPublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,10 @@
     <Compile Include="Publishers\TopicBasedPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\DataPlatform.BuildingBlocks\DataPlatform.BuildingBlocks.csproj">
+      <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
+      <Name>DataPlatform.BuildingBlocks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\DataPlatform.Shared.Public\DataPlatform.Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>DataPlatform.Shared.Public</Name>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Logging;
+using DataPlatform.BuildingBlocks.Recovery;
 using DataPlatform.Shared.Public.Messaging;
 using DataPlatform.Workflow.RabbitMQ.Publishers;
 using EasyNetQ;
@@ -8,12 +9,18 @@ namespace DataPlatform.Workflow.RabbitMQ
 {
     public class Publisher : IPublishMessages
     {
-        private readonly IRabbitMQPublisher publisher;
         private static readonly ILog log = LogManager.GetLogger<Publisher>();
+        private readonly IRabbitMQPublisher publisher;
+        private readonly RetryAgent agent;
 
-        public Publisher(IBus bus)
+        public Publisher(IBus bus, IRetryStrategy retryStrategy)
         {
             publisher = new TopicBasedPublisher(bus, new DefaultPublisher(bus));
+            agent = new RetryAgent(retryStrategy);
+        }
+
+        public Publisher(IBus bus) : this(bus, new DefaultRabbitMQRetryStrategy())
+        {
         }
 
         public void Publish(IPublishableMessage message)
@@ -31,25 +38,18 @@ namespace DataPlatform.Workflow.RabbitMQ
 
         private void PublishWithRetry(IPublishableMessage message)
         {
-            var counter = 0;
-            var success = false;
+            Exception exception = null;
 
-            while(counter <= 1 && !success)
-            {
-                try
+            agent
+                .OnException(e =>
                 {
-                    publisher.Publish(message);
-                }
-                catch (Exception e)
-                {
-                    if (counter >= 1)
-                    {
-                        throw;
-                    }
-                    success = false;
-                }
-                counter++;
-            }
+                    log.ErrorFormat("Failed to publish message {0} to RabbitMQ, because '{1}'", message.GetType(), e);
+                    exception = e;
+                })
+                .Execute(() => publisher.Publish(message), () => true);
+
+            if (exception != null)
+                throw exception;
         }
     }
 }
