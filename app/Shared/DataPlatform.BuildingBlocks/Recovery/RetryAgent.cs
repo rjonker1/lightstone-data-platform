@@ -21,8 +21,10 @@ namespace DataPlatform.BuildingBlocks.Recovery
             return this;
         }
 
-        public void Execute(Action actionToRetry, Func<bool> successCondition)
+        public RetryAgentResults Execute(Action actionToRetry, Func<bool> successCondition)
         {
+            var results = new RetryAgentResults();
+
             Thread.Sleep(strategy.InitialDelay.AsMilliSeconds);
 
             var done = false;
@@ -34,12 +36,13 @@ namespace DataPlatform.BuildingBlocks.Recovery
                 {
                     actionToRetry();
                     done = strategy.Done(successCondition);
+                    results.AddResult(new RetryAgentResult());
                 }
                 catch (Exception e)
                 {
                     exceptionHandler(e);
-
                     done = strategy.Done();
+                    results.AddResult(new RetryAgentResult(e));
                 }
 
                 if (!done)
@@ -48,6 +51,8 @@ namespace DataPlatform.BuildingBlocks.Recovery
                 }
 
             } while (!done);
+
+            return results;
         }
     }
 }

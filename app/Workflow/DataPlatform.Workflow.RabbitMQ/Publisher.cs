@@ -10,8 +10,8 @@ namespace DataPlatform.Workflow.RabbitMQ
     public class Publisher : IPublishMessages
     {
         private static readonly ILog log = LogManager.GetLogger<Publisher>();
-        private readonly IRabbitMQPublisher publisher;
         private readonly RetryAgent agent;
+        private readonly IRabbitMQPublisher publisher;
 
         public Publisher(IBus bus, IRetryStrategy retryStrategy)
         {
@@ -38,18 +38,12 @@ namespace DataPlatform.Workflow.RabbitMQ
 
         private void PublishWithRetry(IPublishableMessage message)
         {
-            Exception exception = null;
-
-            agent
-                .OnException(e =>
-                {
-                    log.ErrorFormat("Failed to publish message {0} to RabbitMQ, because '{1}'", message.GetType(), e);
-                    exception = e;
-                })
+            var results = agent
+                .OnException(e => log.ErrorFormat("Failed to publish message {0} to RabbitMQ, because '{1}'", message.GetType(), e))
                 .Execute(() => publisher.Publish(message), () => true);
 
-            if (exception != null)
-                throw exception;
+            if (!results.Succeeded)
+                throw results.FirstFailure();
         }
     }
 }
