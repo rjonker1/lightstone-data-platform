@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fakes\FailingBus.cs" />
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="Mothers\Publisher\TestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

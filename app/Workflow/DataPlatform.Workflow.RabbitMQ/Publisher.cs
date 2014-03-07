@@ -26,7 +26,30 @@ namespace DataPlatform.Workflow.RabbitMQ
 
             log.InfoFormat("Publishing {0} in RabbitMQ publisher", message.GetType());
 
-            publisher.Publish(message);
+            PublishWithRetry(message);
+        }
+
+        private void PublishWithRetry(IPublishableMessage message)
+        {
+            var counter = 0;
+            var success = false;
+
+            while(counter <= 1 && !success)
+            {
+                try
+                {
+                    publisher.Publish(message);
+                }
+                catch (Exception e)
+                {
+                    if (counter >= 1)
+                    {
+                        throw;
+                    }
+                    success = false;
+                }
+                counter++;
+            }
         }
     }
 }
