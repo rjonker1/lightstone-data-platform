@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Configuration\AppSettingsReader.cs" />
+    <Compile Include="Configuration\ConnectionStrings.cs" />
     <Compile Include="Configuration\ServiceAppSettings.cs" />
     <Compile Include="Extentions\IntegerExtentions.cs" />
     <Compile Include="Fluency\Counter.cs" />
