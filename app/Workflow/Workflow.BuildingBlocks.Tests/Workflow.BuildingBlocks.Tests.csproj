@@ -54,7 +54,6 @@
     <Compile Include="Mothers\TestMessageConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="when_creating_a_new_rabbitMQ_bus.cs" />
-    <Compile Include="when_publishing_a_message_using_a_factory_created_bus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
