@@ -1,21 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPlatform.Shared", "Shared\DataPlatform.Shared\DataPlatform.Shared.csproj", "{49DF15E2-0A73-46D1-BF98-BE472678A28D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPlatform.Shared.Public", "Shared\DataPlatform.Shared.Public\DataPlatform.Shared.Public.csproj", "{A9E8B20A-E8F8-4549-83FC-921E26C64282}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{281DF20E-FF00-407C-958F-638B2791FF40}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPlatform.Workflow", "Workflow\DataPlatform.Workflow\DataPlatform.Workflow.csproj", "{2338D97A-0483-4335-9609-83D8C245FD4A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPlatform.Workflow.RabbitMQ", "Workflow\DataPlatform.Workflow.RabbitMQ\DataPlatform.Workflow.RabbitMQ.csproj", "{0EAAD289-F938-4986-B42C-A5B5A6A601AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{9C3F94A5-3C97-4D86-A193-8AC4CFB0889A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPlatform.Workflow.RabbitMQ.Tests", "Workflow\DataPlatform.Workflow.RabbitMQ.Tests\DataPlatform.Workflow.RabbitMQ.Tests.csproj", "{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{055ACE6A-3992-44CB-9628-7E0BB6F67D1B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPlatform.BuildingBlocks", "Shared\DataPlatform.BuildingBlocks\DataPlatform.BuildingBlocks.csproj", "{AB92C673-A7C0-4C58-8DE8-2C51F1781303}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "Shared\BuildingBlocks\BuildingBlocks.csproj", "{AB92C673-A7C0-4C58-8DE8-2C51F1781303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{49DF15E2-0A73-46D1-BF98-BE472678A28D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Public", "Shared\Shared.Public\Shared.Public.csproj", "{A9E8B20A-E8F8-4549-83FC-921E26C64282}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.RabbitMQ.Tests", "Workflow\Workflow.RabbitMQ.Tests\Workflow.RabbitMQ.Tests.csproj", "{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow", "Workflow\Workflow\Workflow.csproj", "{2338D97A-0483-4335-9609-83D8C245FD4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.RabbitMQ", "Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj", "{0EAAD289-F938-4986-B42C-A5B5A6A601AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +30,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49DF15E2-0A73-46D1-BF98-BE472678A28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49DF15E2-0A73-46D1-BF98-BE472678A28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49DF15E2-0A73-46D1-BF98-BE472678A28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +42,10 @@ Global
 		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2338D97A-0483-4335-9609-83D8C245FD4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2338D97A-0483-4335-9609-83D8C245FD4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2338D97A-0483-4335-9609-83D8C245FD4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,22 +54,14 @@ Global
 		{0EAAD289-F938-4986-B42C-A5B5A6A601AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EAAD289-F938-4986-B42C-A5B5A6A601AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EAAD289-F938-4986-B42C-A5B5A6A601AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB92C673-A7C0-4C58-8DE8-2C51F1781303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{9C3F94A5-3C97-4D86-A193-8AC4CFB0889A} = {281DF20E-FF00-407C-958F-638B2791FF40}
 		{2338D97A-0483-4335-9609-83D8C245FD4A} = {281DF20E-FF00-407C-958F-638B2791FF40}
 		{0EAAD289-F938-4986-B42C-A5B5A6A601AC} = {281DF20E-FF00-407C-958F-638B2791FF40}
-		{9C3F94A5-3C97-4D86-A193-8AC4CFB0889A} = {281DF20E-FF00-407C-958F-638B2791FF40}
 		{01AD0AE7-BA8F-4B0D-A6A7-770AAD7512AF} = {9C3F94A5-3C97-4D86-A193-8AC4CFB0889A}
 	EndGlobalSection
 EndGlobal
