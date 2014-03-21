@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BuildingBlocks.Recovery;
 using Common.Logging;
-using DataPlatform.BuildingBlocks.Recovery;
 using DataPlatform.Shared.Public.Messaging;
 using EasyNetQ;
 using Workflow.RabbitMQ.Publishers;

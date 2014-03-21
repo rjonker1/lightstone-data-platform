@@ -1,6 +1,6 @@
-﻿using DataPlatform.BuildingBlocks.Fluency;
+﻿using BuildingBlocks.Fluency;
 
-namespace DataPlatform.BuildingBlocks.Extentions
+namespace BuildingBlocks.Extentions
 {
     public static class IntegerExtentions
     {

@@ -7,7 +7,7 @@
     <ProjectGuid>{AB92C673-A7C0-4C58-8DE8-2C51F1781303}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataPlatform.BuildingBlocks</RootNamespace>
+    <RootNamespace>BuildingBlocks</RootNamespace>
     <AssemblyName>Lightstone.DataPlatform.BuildingBlocks</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -36,6 +36,7 @@
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AppSettings.cs" />
+    <Compile Include="Configuration\AppSettingsReader.cs" />
+    <Compile Include="Configuration\ServiceAppSettings.cs" />
     <Compile Include="Extentions\IntegerExtentions.cs" />
     <Compile Include="Fluency\Counter.cs" />
     <Compile Include="Fluency\Seconds.cs" />

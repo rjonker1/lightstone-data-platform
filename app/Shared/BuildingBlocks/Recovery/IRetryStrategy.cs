@@ -1,7 +1,7 @@
 ﻿using System;
-using DataPlatform.BuildingBlocks.Fluency;
+using BuildingBlocks.Fluency;
 
-namespace DataPlatform.BuildingBlocks.Recovery
+namespace BuildingBlocks.Recovery
 {
     public interface IRetryStrategy
     {

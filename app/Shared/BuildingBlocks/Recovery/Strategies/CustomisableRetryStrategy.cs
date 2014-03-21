@@ -1,6 +1,6 @@
-﻿using DataPlatform.BuildingBlocks.Fluency;
+﻿using BuildingBlocks.Fluency;
 
-namespace DataPlatform.BuildingBlocks.Recovery.Strategies
+namespace BuildingBlocks.Recovery.Strategies
 {
     public class CustomisableRetryStrategy : RetryStrategy
     {

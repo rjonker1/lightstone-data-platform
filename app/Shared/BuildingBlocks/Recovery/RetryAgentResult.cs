@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataPlatform.BuildingBlocks.Recovery
+namespace BuildingBlocks.Recovery
 {
     public class RetryAgentResult
     {

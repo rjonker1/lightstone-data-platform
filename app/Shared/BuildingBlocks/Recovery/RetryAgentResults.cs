@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataPlatform.BuildingBlocks.Recovery
+namespace BuildingBlocks.Recovery
 {
     public class RetryAgentResults
     {

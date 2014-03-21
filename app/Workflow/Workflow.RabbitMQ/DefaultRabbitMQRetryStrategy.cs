@@ -1,5 +1,5 @@
-﻿using DataPlatform.BuildingBlocks.Extentions;
-using DataPlatform.BuildingBlocks.Recovery.Strategies;
+﻿using BuildingBlocks.Extentions;
+using BuildingBlocks.Recovery.Strategies;
 
 namespace Workflow.RabbitMQ
 {

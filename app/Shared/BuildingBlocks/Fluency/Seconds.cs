@@ -1,4 +1,4 @@
-﻿namespace DataPlatform.BuildingBlocks.Fluency
+﻿namespace BuildingBlocks.Fluency
 {
     public class Seconds
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BuildingBlocks.Configuration;
 using Topshelf;
 
 namespace Workflow.Billing.Consumer
@@ -11,6 +7,8 @@ namespace Workflow.Billing.Consumer
     {
         static void Main(string[] args)
         {
+            var appSettings = new AppSettings();
+
             HostFactory.Run(x =>
             {
                 x.Service<IBillingService>(s =>
@@ -22,9 +20,9 @@ namespace Workflow.Billing.Consumer
 
                 x.RunAsLocalSystem();
 
-                x.SetDescription("Billing.service");
-                x.SetDisplayName("Billing.Service");
-                x.SetServiceName("Billing.Service");
+                x.SetDescription(appSettings.Service.Description);
+                x.SetDisplayName(appSettings.Service.DisplayName);
+                x.SetServiceName(appSettings.Service.Name);
             });
         }
     }
