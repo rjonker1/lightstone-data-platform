@@ -1,7 +1,6 @@
-﻿using System;
-using BuildingBlocks.Configuration;
-using Common.Logging;
+﻿using Common.Logging;
 using EasyNetQ;
+using Workflow.BuildingBlocks;
 
 namespace Workflow.Billing.Consumer
 {
@@ -9,30 +8,14 @@ namespace Workflow.Billing.Consumer
     {
         private readonly ILog log = LogManager.GetCurrentClassLogger();
         private IBus bus;
-        private const string defaultConnection = "host=localhost";
-
-        public BillingService()
-        {
-        }
 
         public void Start()
         {
             log.DebugFormat("Started billing service");
-            try
-            {
-                var connectionString = new AppSettings().ConnectionStrings.Get("workflow/billing/queue", () => defaultConnection);
 
-                log.InfoFormat("Connecting to RabbitMQ via {0}", connectionString);
+            bus = new BusFactory().Create("workflow/billing/queue");
 
-                var logger = new RabbitMQLogger();
-                bus = RabbitHutch.CreateBus(connectionString, x => x.Register<IEasyNetQLogger>(_ => logger));
-
-                log.DebugFormat("Connected to RabbitMQ on {0}", connectionString);
-            }
-            catch (Exception e)
-            {
-                log.ErrorFormat("Failed to create a bus for RabbitMQ because: {0}", e.Message);
-            }
+            log.DebugFormat("Billing service started");
         }
 
         public void Stop()
