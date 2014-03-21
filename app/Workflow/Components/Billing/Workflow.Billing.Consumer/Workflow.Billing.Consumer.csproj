@@ -83,10 +83,25 @@
       <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
       <Name>BuildingBlocks</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
       <Name>Workflow.BuildingBlocks</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
+      <Project>{ea4e1ff1-8581-4680-aa28-126294163093}</Project>
+      <Name>Workflow.Billing.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Billing\Workflow.Billing.csproj">
+      <Project>{74859ecc-2e2e-4016-8689-2fb29cdbbb02}</Project>
+      <Name>Workflow.Billing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
