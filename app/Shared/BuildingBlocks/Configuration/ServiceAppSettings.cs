@@ -14,27 +14,27 @@
         }
 
         /// <summary>
-        /// Finds an appSetting called service/name
+        /// Finds an appSetting called service/config/name
         /// </summary>
         public string Name
         {
-            get { return reader.GetString("service/name", () => "UNKNOWN_SERVICE_NAME"); }
+            get { return reader.GetString("service/config/name", () => "UNKNOWN_SERVICE_NAME"); }
         }
 
         /// <summary>
-        /// Finds an appSetting called service/description
+        /// Finds an appSetting called service/config/description
         /// </summary>
         public string Description
         {
-            get { return reader.GetString("service/description", () => "UNKNOWN SERVICE DESCRIPTION"); }
+            get { return reader.GetString("service/config/description", () => "UNKNOWN SERVICE DESCRIPTION"); }
         }
 
         /// <summary>
-        /// Finds an appSetting called service/name
+        /// Finds an appSetting called service/config/name
         /// </summary>
         public string DisplayName
         {
-            get { return reader.GetString("service/displayName", () => "UNKNOWN SERVICE DISPLAY NAME"); }
+            get { return reader.GetString("service/config/displayName", () => "UNKNOWN SERVICE DISPLAY NAME"); }
         }
     }
 }

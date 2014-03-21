@@ -1,29 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using BuildingBlocks.Configuration;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
+using Workflow.BuildingBlocks.Consumers;
+using Workflow.BuildingBlocks.Dispatcher;
 
 namespace Workflow.BuildingBlocks
 {
-    public class XXX
-    {
-    }
-
-    public class NullConsumer : IConsume<XXX>
-    {
-        public void Consume(XXX message)
-        {
-        }
-    }
-
     public class BusFactory
     {
         private const string defaultConnection = "host=localhost";
         private readonly ILog log = LogManager.GetCurrentClassLogger();
 
-        public IBus Create(string connectionStringKey, List<ConsumerRegistration> consumers)
+        public IBus Create(string connectionStringKey, ConsumerRegistration consumers)
         {
             var appSettings = new AppSettings();
             var connectionString = appSettings.ConnectionStrings.Get(connectionStringKey, () => defaultConnection);
@@ -42,6 +32,9 @@ namespace Workflow.BuildingBlocks
                                      {
                                          AutoSubscriberMessageDispatcher = dispatcher
                                      };
+
+                var consumerAssemblies = consumers.GetAssemblies();
+                autoSubscriber.Subscribe(consumerAssemblies);
                 
 
                 log.DebugFormat("Connected to RabbitMQ on {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);

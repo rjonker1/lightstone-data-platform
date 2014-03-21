@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Common.Logging;
+﻿using Common.Logging;
 using EasyNetQ;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Messages;
 using Workflow.BuildingBlocks;
+using Workflow.BuildingBlocks.Consumers;
 
 namespace Workflow.Billing.Consumer
 {
@@ -16,11 +16,8 @@ namespace Workflow.Billing.Consumer
         {
             log.DebugFormat("Started billing service");
 
-            var consumers = new List<ConsumerRegistration>()
-                            {
-                                new ConsumerRegistration(typeof(BillTransactionMessage), 
-                                    new ConsumerRegistrationConstruction(typeof(BillTransactionConsumer), () => new BillTransactionConsumer()))
-                            };
+            var consumers = new ConsumerRegistration()
+                .AddConsumer<BillTransactionConsumer, BillTransactionMessage>(() => new BillTransactionConsumer());
 
             bus = new BusFactory().Create("workflow/billing/queue", consumers);
 
