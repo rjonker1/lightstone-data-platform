@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using DataPlatform.BuildingBlocks.Recovery;
 using DataPlatform.Shared.Public.Messaging;
@@ -9,14 +11,18 @@ namespace Workflow.RabbitMQ
 {
     public class Publisher : IPublishMessages
     {
-        private static readonly ILog log = LogManager.GetLogger<Publisher>();
+        private readonly ILog log = LogManager.GetCurrentClassLogger();
         private readonly RetryAgent agent;
-        private readonly IRabbitMQPublisher publisher;
+        private readonly List<IRabbitMQPublisher> publishers;
 
         public Publisher(IBus bus, IRetryStrategy retryStrategy)
         {
-            publisher = new TopicBasedPublisher(bus, new DefaultPublisher(bus));
             agent = new RetryAgent(retryStrategy);
+            publishers = new List<IRabbitMQPublisher>()
+                         {
+                             new TopicBasedPublisher(bus),
+                             new DefaultPublisher(bus)
+                         };
         }
 
         public Publisher(IBus bus) : this(bus, new DefaultRabbitMQRetryStrategy())
@@ -40,10 +46,18 @@ namespace Workflow.RabbitMQ
         {
             var results = agent
                 .OnException(e => log.ErrorFormat("Failed to publish message {0} to RabbitMQ, because '{1}'", message.GetType(), e))
-                .Execute(() => publisher.Publish(message), () => true);
+                .Execute(() => PublishMessage(message), () => true);
 
             if (!results.Succeeded)
                 throw results.FirstFailure();
+        }
+
+        private void PublishMessage(IPublishableMessage message)
+        {
+            publishers
+                .Where(p => p.CanPublishMessage(message))
+                .ToList()
+                .ForEach(p => p.Publish(message));
         }
     }
 }

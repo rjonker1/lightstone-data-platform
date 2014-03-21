@@ -5,5 +5,6 @@ namespace Workflow.RabbitMQ.Publishers
     internal interface IRabbitMQPublisher
     {
         void Publish(IPublishableMessage message);
+        bool CanPublishMessage(IPublishableMessage message);
     }
 }

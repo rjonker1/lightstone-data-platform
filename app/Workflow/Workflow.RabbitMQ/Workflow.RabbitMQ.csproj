@@ -57,11 +57,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
       <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
-      <Name>DataPlatform.BuildingBlocks</Name>
+      <Name>BuildingBlocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>DataPlatform.Shared.Public</Name>
+      <Name>Shared.Public</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>

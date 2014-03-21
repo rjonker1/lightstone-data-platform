@@ -71,11 +71,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
       <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
-      <Name>DataPlatform.BuildingBlocks</Name>
+      <Name>BuildingBlocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>DataPlatform.Shared.Public</Name>
+      <Name>Shared.Public</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
       <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
