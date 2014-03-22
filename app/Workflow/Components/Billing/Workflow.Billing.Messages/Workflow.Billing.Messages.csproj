@@ -32,11 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillTransactionMessage.cs" />
@@ -46,10 +41,6 @@
     <ProjectReference Include="..\..\..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Workflow\Workflow.csproj">
-      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
