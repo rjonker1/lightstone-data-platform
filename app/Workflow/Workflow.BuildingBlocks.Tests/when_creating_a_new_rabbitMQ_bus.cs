@@ -21,7 +21,7 @@ namespace Workflow.BuildingBlocks.Tests
 
         public override void Observe()
         {
-            using (bus = factory.Create("test_rabbitmq_creation", consumers))
+            using (bus = factory.CreateConsumerBus("test_rabbitmq_creation", consumers))
             {
             }
         }

@@ -13,7 +13,40 @@ namespace Workflow.BuildingBlocks
         private const string defaultConnection = "host=localhost";
         private readonly ILog log = LogManager.GetCurrentClassLogger();
 
-        public IBus Create(string connectionStringKey, ConsumerRegistration consumers)
+        public IBus CreateConsumerBus(string connectionStringKey, ConsumerRegistration consumers)
+        {
+            var appSettings = new AppSettings();
+            var connectionString = appSettings.ConnectionStrings.Get(connectionStringKey, () => defaultConnection);
+            var subscriptionPrefix = appSettings.RabbitMQ.SubscriptionPrefix;
+
+            try
+            {
+                var bus = CreateBus(connectionStringKey);
+
+                var dispatcher = new NoMagicAutoDispatcher(consumers);
+                var autoSubscriber = new AutoSubscriber(bus, subscriptionPrefix)
+                                     {
+                                         AutoSubscriberMessageDispatcher = dispatcher
+                                     };
+
+                var consumerAssemblies = consumers.GetAssemblies();
+                autoSubscriber.Subscribe(consumerAssemblies);
+                
+
+                log.DebugFormat("Connected to RabbitMQ on {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);
+
+                return bus;
+            }
+            catch (Exception e)
+            {
+                log.ErrorFormat("Failed to create a bus for RabbitMQ with connectionstring: {0}", connectionString);
+                log.ErrorFormat("The failure was {0}", e.Message);
+
+                throw;
+            }
+        }
+
+        public IBus CreateBus(string connectionStringKey)
         {
             var appSettings = new AppSettings();
             var connectionString = appSettings.ConnectionStrings.Get(connectionStringKey, () => defaultConnection);
@@ -26,16 +59,6 @@ namespace Workflow.BuildingBlocks
 
                 var logger = new RabbitMQLogger();
                 var bus = RabbitHutch.CreateBus(connectionString, x => x.Register<IEasyNetQLogger>(_ => logger));
-
-                var dispatcher = new NoMagicAutoDispatcher(consumers);
-                var autoSubscriber = new AutoSubscriber(bus, subscriptionPrefix)
-                                     {
-                                         AutoSubscriberMessageDispatcher = dispatcher
-                                     };
-
-                var consumerAssemblies = consumers.GetAssemblies();
-                autoSubscriber.Subscribe(consumerAssemblies);
-                
 
                 log.DebugFormat("Connected to RabbitMQ on {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);
 

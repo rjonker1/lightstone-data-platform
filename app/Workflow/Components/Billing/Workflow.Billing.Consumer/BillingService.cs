@@ -19,7 +19,7 @@ namespace Workflow.Billing.Consumer
             var consumers = new ConsumerRegistration()
                 .AddConsumer<BillTransactionConsumer, BillTransactionMessage>(() => new BillTransactionConsumer());
 
-            bus = new BusFactory().Create("workflow/billing/queue", consumers);
+            bus = new BusFactory().CreateConsumerBus("workflow/billing/queue", consumers);
 
             log.DebugFormat("Billing service started");
         }
