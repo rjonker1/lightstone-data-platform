@@ -29,7 +29,7 @@ namespace Workflow.RabbitMQ
         {
         }
 
-        public void Publish(IPublishableMessage message)
+        public void Publish<TMessage>(TMessage message) where TMessage : IPublishableMessage
         {
             if (message == null)
             {

@@ -6,7 +6,7 @@ namespace Billing.Api.Tests.Fakes
 {
     public class FailingMessagePublisher : IPublishMessages
     {
-        public void Publish(IPublishableMessage message)
+        public void Publish<TMessage>(TMessage message) where TMessage : IPublishableMessage
         {
             throw new Exception("I will always fail");
         }

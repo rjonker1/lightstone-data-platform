@@ -15,6 +15,8 @@ namespace Billing.Api
 
         public Transaction(IPublishMessages publisher)
         {
+            Get["/transaction"] = _ => string.Format("Transaction API.");
+
             Post["/transaction"] = o =>
                                    {
                                        log.InfoFormat("Received post to create billing transaction");
