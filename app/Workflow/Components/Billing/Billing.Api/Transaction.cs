@@ -32,6 +32,8 @@ namespace Billing.Api
                                        {
                                            log.ErrorFormat("Failed to create a billing transaction");
                                            log.ErrorFormat("The reason was: {0}", e.Message);
+
+                                           return CannedResponses.Failure;
                                        }
 
 

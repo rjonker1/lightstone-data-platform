@@ -1,5 +1,4 @@
 ﻿using Billing.Api.Dtos;
-using Billing.Api.Infrastructure;
 using Billing.Api.Tests.Fakes;
 using Billing.Api.Tests.Mothers.CreatTransactionDto;
 using Nancy;
