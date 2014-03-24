@@ -14,7 +14,7 @@ namespace Workflow.RabbitMQ.Publishers
             this.bus = bus;
         }
 
-        public void Publish(IPublishableMessage message)
+        public void Publish<TMessage>(TMessage message) where TMessage : class, IPublishableMessage
         {
             log.InfoFormat("Publishing message {0}", message.GetType());
             bus.Publish(message);

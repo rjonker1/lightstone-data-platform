@@ -4,6 +4,6 @@ namespace Workflow
 {
     public interface IPublishMessages
     {
-        void Publish<TMessage>(TMessage message) where TMessage : IPublishableMessage;
+        void Publish<TMessage>(TMessage message) where TMessage : class, IPublishableMessage;
     }
 }

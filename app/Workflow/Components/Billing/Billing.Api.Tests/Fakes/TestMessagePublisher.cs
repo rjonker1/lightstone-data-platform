@@ -7,7 +7,7 @@ namespace Billing.Api.Tests.Fakes
     {
         public IPublishableMessage PublishedMessage { get; private set; }
 
-        public void Publish<TMessage>(TMessage message) where TMessage : IPublishableMessage
+        public void Publish<TMessage>(TMessage message) where TMessage : class, IPublishableMessage
         {
             PublishedMessage = message;
         }
