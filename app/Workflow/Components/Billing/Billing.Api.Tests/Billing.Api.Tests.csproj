@@ -63,8 +63,9 @@
     <Compile Include="Mothers\CreatTransactionDto\IDefineCreateTransactionData.cs" />
     <Compile Include="Mothers\CreatTransactionDto\CreateTransactionMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="when_creating_a_new_billing_transaction.cs" />
-    <Compile Include="when_creating_a_new_billing_transaction_and_a_failure_occurs.cs" />
+    <Compile Include="Transaction\TransactionModuleTestBase.cs" />
+    <Compile Include="Transaction\when_creating_a_new_billing_transaction.cs" />
+    <Compile Include="Transaction\when_creating_a_new_billing_transaction_and_a_failure_occurs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
