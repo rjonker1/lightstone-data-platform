@@ -42,7 +42,7 @@ namespace Workflow.RabbitMQ
             PublishWithRetry(message);
         }
 
-        private void PublishWithRetry(IPublishableMessage message)
+        private void PublishWithRetry<TMessage>(TMessage message) where TMessage : class, IPublishableMessage
         {
             var results = agent
                 .OnException(e => log.ErrorFormat("Failed to publish message {0} to RabbitMQ, because '{1}'", message.GetType(), e))
@@ -52,7 +52,7 @@ namespace Workflow.RabbitMQ
                 throw results.FirstFailure();
         }
 
-        private void PublishMessage(IPublishableMessage message)
+        private void PublishMessage<TMessage>(TMessage message) where TMessage : class, IPublishableMessage
         {
             publishers
                 .Where(p => p.CanPublishMessage(message))

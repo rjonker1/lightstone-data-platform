@@ -72,15 +72,19 @@ namespace Workflow.BuildingBlocks.Consumers
                     log.InfoFormat("Found {0} as consumer for message {1}", consumer.GetType(), messageType);
                     yield return consumer;
                 }
+                else
+                {
+                    string failureMessage =
+                        string.Format(
+                            "Failed to create consumer for message {0}. The supposed consumer is {1}. Moving to next consumer is available",
+                            messageType.FullName, blankConsumer.GetType());
 
-                string failureMessage =
-                    string.Format(
-                        "Failed to create consumer for message {0}. The supposed consumer is {1}. Moving to next consumer is available",
-                        messageType, blankConsumer.GetType());
+                    log.ErrorFormat(failureMessage);
 
-                log.ErrorFormat(failureMessage);
+                    throw new Exception(failureMessage);
+                }
 
-                throw new Exception(failureMessage);
+
             }
         }
 

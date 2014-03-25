@@ -26,7 +26,7 @@ namespace Workflow.RabbitMQ.Publishers
             bus.Publish(messageToPublish, messageToPublish.Topic.Topic);
         }
 
-        public bool CanPublishMessage(IPublishableMessage message)
+        public bool CanPublishMessage<TMessage>(TMessage message) where TMessage : class, IPublishableMessage
         {
             return message is ITopicPublishableMessage;
         }
