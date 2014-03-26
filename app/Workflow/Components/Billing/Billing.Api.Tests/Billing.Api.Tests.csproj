@@ -56,16 +56,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsUnautorisedUser.cs" />
     <Compile Include="Fakes\FailingMessagePublisher.cs" />
+    <Compile Include="Fakes\NullPublisher.cs" />
     <Compile Include="Fakes\TestMessagePublisher.cs" />
     <Compile Include="Mothers\CreatTransactionDto\CreateTransactionBuilder.cs" />
     <Compile Include="Mothers\CreatTransactionDto\DefaultCreateTransactionData.cs" />
     <Compile Include="Mothers\CreatTransactionDto\IDefineCreateTransactionData.cs" />
     <Compile Include="Mothers\CreatTransactionDto\CreateTransactionMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestingBootstrapper.cs" />
     <Compile Include="Transaction\TransactionModuleTestBase.cs" />
     <Compile Include="Transaction\when_creating_a_new_billing_transaction.cs" />
     <Compile Include="Transaction\when_creating_a_new_billing_transaction_and_a_failure_occurs.cs" />
+    <Compile Include="Transaction\when_creating_a_new_billing_transaction_as_an_unauthorised_user.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

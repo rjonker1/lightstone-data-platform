@@ -3,17 +3,17 @@ using Billing.Api.Tests.Fakes;
 using Billing.Api.Tests.Mothers.CreatTransactionDto;
 using Nancy;
 using Nancy.Testing;
-using Workflow;
 using Xunit.Extensions;
 
 namespace Billing.Api.Tests.Transaction
 {
-    public class when_creating_a_new_billing_transaction_and_a_failure_occurs : TransactionModuleTestBase
+    public class when_creating_a_new_billing_transaction_as_an_unauthorised_user : TransactionModuleTestBase, AsUnautorisedUser
     {
-        private BrowserResponse result;
         private readonly CreateTransaction transaction;
+        private BrowserResponse result;
 
-        public when_creating_a_new_billing_transaction_and_a_failure_occurs() : base(new FailingMessagePublisher())
+        public when_creating_a_new_billing_transaction_as_an_unauthorised_user()
+            : base(new NullPublisher())
         {
             transaction = new CreateTransactionMother().DefaultCreateTransaction();
         }
@@ -24,9 +24,10 @@ namespace Billing.Api.Tests.Transaction
         }
 
         [Observation]
-        public void an_error_code_is_returned()
+        public void an_unautorised_error_is_returned()
         {
-            result.StatusCode.ShouldEqual(HttpStatusCode.InternalServerError);
+            result.StatusCode.ShouldEqual(HttpStatusCode.Unauthorized);
         }
+
     }
 }

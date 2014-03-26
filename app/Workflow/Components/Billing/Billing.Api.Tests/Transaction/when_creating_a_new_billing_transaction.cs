@@ -21,7 +21,10 @@ namespace Billing.Api.Tests.Transaction
 
         public override void Observe()
         {
-            result = browser.Post(url, with => with.JsonBody(transaction));
+            result = Post(with =>
+            {
+                with.JsonBody(transaction);
+            });
         }
 
         private TestMessagePublisher ThePublisher

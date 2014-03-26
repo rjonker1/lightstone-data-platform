@@ -1,4 +1,5 @@
-﻿using Nancy.Testing;
+﻿using System;
+using Nancy.Testing;
 using Workflow;
 using Xunit.Extensions;
 
@@ -6,18 +7,31 @@ namespace Billing.Api.Tests.Transaction
 {
     public abstract class TransactionModuleTestBase : Specification
     {
-        protected readonly Browser browser;
+        private readonly Browser browser;
         protected readonly IPublishMessages publisher;
-        protected const string url = "/transaction";
+        private const string url = "/transaction";
 
         protected TransactionModuleTestBase(IPublishMessages publisher)
         {
             this.publisher = publisher;
-            browser = new Browser(with =>
+
+            browser = new Browser(new TestingBootstrapper(publisher));
+        }
+
+        protected BrowserResponse Post(Action<BrowserContext> browserContext)
+        {
+            Action<BrowserContext> wrappedContext = with =>
             {
-                with.Module<Api.Transaction>();
-                with.Dependency(publisher);
-            });
+                browserContext(with);
+
+                if (!(this is AsUnautorisedUser))
+                {
+                    with.Header("apikey", DateTime.Now.Millisecond.ToString());
+                }
+
+            };
+
+            return browser.Post(url, wrappedContext);
         }
     }
 }
