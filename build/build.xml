@@ -1,5 +1,31 @@
 <build>
 	<nugets>
-
+		<nuget deploy="false">
+			<name>Lightstone.Dataplatform.Shared.BuildingBlocks.Api</name>
+			<folder>Shared\Shared.BuildingBlocks.Api</folder>
+			<author>CustomApp</author>
+			<description>Building blocks for APIs</description>
+			<includes>
+				<include pattern="*.dll" to="lib\net45"/>
+				<include pattern="*.pdb" to="lib\net45"/>
+			</includes>
+			<dependencies>
+				<dependency id="Nancy" version="0.22.2" />
+				<dependency id="Nancy.Authentication.Stateless" version="0.22.2" />
+			</dependencies>
+		</nuget>
+		<nuget deploy="false">
+			<name>Lightstone.Dataplatform.BuildingBlocks</name>
+			<folder>Shared\BuildingBlocks</folder>
+			<author>CustomApp</author>
+			<description>Building blocks</description>
+			<includes>
+				<include pattern="*.dll" to="lib\net45"/>
+				<include pattern="*.pdb" to="lib\net45"/>
+			</includes>
+			<dependencies>
+				<dependency id="Common.Logging" version="2.0.0" />
+			</dependencies>
+		</nuget>
 	</nugets>
 </build>

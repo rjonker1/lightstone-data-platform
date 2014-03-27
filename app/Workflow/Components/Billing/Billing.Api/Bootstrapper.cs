@@ -21,7 +21,6 @@ namespace Billing.Api
 
         private IBus bus;
         private Publisher publisher;
-        private bool disposed;
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
@@ -40,33 +39,5 @@ namespace Billing.Api
             container.Register<IPublishMessages>(publisher);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    if (publisher != null)
-                    {
-                        publisher.Dispose();
-                    }
-
-                    if (bus != null)
-                    {
-                        bus.Dispose();
-                    }
-                }
-
-                disposed = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-
-            base.Dispose();
-        }
     }
 }
