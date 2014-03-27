@@ -9,11 +9,12 @@ using Workflow.RabbitMQ.Publishers;
 
 namespace Workflow.RabbitMQ
 {
-    public class Publisher : IPublishMessages
+    public class Publisher : IPublishMessages, IDisposable
     {
         private readonly ILog log = LogManager.GetCurrentClassLogger();
         private readonly RetryAgent agent;
         private readonly List<IRabbitMQPublisher> publishers;
+        private bool disposed;
 
         public Publisher(IBus bus, IRetryStrategy retryStrategy)
         {
@@ -27,6 +28,11 @@ namespace Workflow.RabbitMQ
 
         public Publisher(IBus bus) : this(bus, new DefaultRabbitMQRetryStrategy())
         {
+        }
+
+        ~Publisher()
+        {
+            Dispose(false);
         }
 
         public void Publish<TMessage>(TMessage message) where TMessage : class, IPublishableMessage
@@ -58,6 +64,25 @@ namespace Workflow.RabbitMQ
                 .Where(p => p.CanPublishMessage(message))
                 .ToList()
                 .ForEach(p => p.Publish(message));
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (publishers != null)
+                        publishers.ForEach(p => p.Dispose());
+                }
+            }
+            disposed = true;
         }
     }
 }

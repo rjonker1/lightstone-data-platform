@@ -455,6 +455,11 @@ task :team_city => [
 	] do
 end
 
+task :quick => ['environment:default',
+	'build:default',
+	'testing:unit'
+]
+
 task :test => ['convention:spec_generation', 'testing:unit', 'testing:acceptance_tests']
 
 task :acceptance_tests => ['testing:acceptance', 'testing:unit', 'testing:acceptance_tests'] do end

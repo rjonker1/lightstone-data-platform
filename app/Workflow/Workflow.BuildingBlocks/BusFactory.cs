@@ -58,6 +58,7 @@ namespace Workflow.BuildingBlocks
                 log.InfoFormat("Connecting to RabbitMQ via {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);
 
                 var logger = new RabbitMQLogger();
+
                 var bus = RabbitHutch.CreateBus(connectionString, x => x.Register<IEasyNetQLogger>(_ => logger));
 
                 log.DebugFormat("Connected to RabbitMQ on {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);

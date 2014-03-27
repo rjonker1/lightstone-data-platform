@@ -3,7 +3,6 @@ using Billing.Api.Tests.Fakes;
 using Billing.Api.Tests.Mothers.CreatTransactionDto;
 using Nancy;
 using Nancy.Testing;
-using Workflow;
 using Xunit.Extensions;
 
 namespace Billing.Api.Tests.Transaction

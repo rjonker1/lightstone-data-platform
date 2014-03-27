@@ -9,13 +9,15 @@ namespace Billing.Api.Tests.Transaction
     {
         private readonly Browser browser;
         protected readonly IPublishMessages publisher;
+        private readonly TestingBootstrapper bootstrapper;
         private const string url = "/transaction";
 
         protected TransactionModuleTestBase(IPublishMessages publisher)
         {
             this.publisher = publisher;
 
-            browser = new Browser(new TestingBootstrapper(publisher));
+            bootstrapper = new TestingBootstrapper(publisher);
+            browser = new Browser(bootstrapper);
         }
 
         protected BrowserResponse Post(Action<BrowserContext> browserContext)
@@ -32,6 +34,11 @@ namespace Billing.Api.Tests.Transaction
             };
 
             return browser.Post(url, wrappedContext);
+        }
+
+        ~TransactionModuleTestBase()
+        {
+            bootstrapper.Dispose();
         }
     }
 }
