@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lace.Response;
 
 namespace Lace.Source.RgtVin.ServiceCalls
 {
-    class HandleRgtVinServiceCall : IHandleServiceCall
+    public class HandleRgtVinServiceCall : IHandleServiceCall
     {
 
         public string ServiceName
@@ -22,9 +23,13 @@ namespace Lace.Source.RgtVin.ServiceCalls
 
         public ILaceResponse Call(Action<IRequestDataFromService> action)
         {
-            throw new NotImplementedException();
+            return new RgtVinServiceResponse()
+            {
+                Handled = true,
+                Response = new List<string>() {"Handle Rgt Vin Service Call"}
+            };
         }
 
-        
+
     }
 }

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServiceCalls\IvidServiceResponse.cs" />
     <None Include="IvidResponse.cs.old" />
     <None Include="Ivid.cs.old" />
     <Compile Include="ServiceCalls\HandleIvidServiceCall.cs" />

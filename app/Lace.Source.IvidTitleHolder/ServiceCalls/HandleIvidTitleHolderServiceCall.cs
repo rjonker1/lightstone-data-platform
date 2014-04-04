@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Lace.Response;
 using System;
 
@@ -22,7 +23,11 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 
         public ILaceResponse Call(Action<IRequestDataFromService> action)
         {
-            throw new NotImplementedException();
+            return new IvidTitleHolderServiceResponse()
+            {
+                Handled = true,
+                Response = new List<string>() { "Handle Ivid Title Holder Service Call" }
+            };
         }
 
 

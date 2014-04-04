@@ -12,7 +12,13 @@ namespace Lace
     {
         private Dictionary<object, Func<ILaceRequest, IEnumerable<ILaceResponse>>> _handlers;
         private ILaceRequest _request;
-        
+
+        public List<LaceResponse> LaceResponses { get; set; }
+
+        public Initialize()
+        {
+            LaceResponses = new List<LaceResponse>();
+        }
 
         public Initialize Bootstrap(ILaceRequest request)
         {
@@ -20,11 +26,27 @@ namespace Lace
             {
                 {typeof(LicensePlateNumberRequest), r => LicensePlateNumberSourceChain.Build(r).Responses }
             };
-
+            
             _request = request;
 
             return this;
         }
 
+        public Initialize Load()
+        {
+            foreach (var handler in _handlers)
+            {
+                LaceResponses.Add(new LaceResponse() {Responses = handler.Value(_request), Request = _request});
+            }
+
+            return this;
+        }
+
+    }
+
+    public class LaceResponse
+    {
+        public  IEnumerable<ILaceResponse> Responses { get; set; }
+        public  ILaceRequest Request { get; set; }
     }
 }

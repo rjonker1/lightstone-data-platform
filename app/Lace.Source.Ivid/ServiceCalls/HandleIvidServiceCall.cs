@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lace.Response;
 
@@ -22,7 +23,11 @@ namespace Lace.Source.Ivid.ServiceCalls
 
         public ILaceResponse Call(Action<IRequestDataFromService> action)
         {
-            throw new NotImplementedException();
+            return new IvidServiceResponse()
+            {
+                Handled = true,
+                Response = new List<string>() { "Handle Ivid Service Call" }
+            };
         }
 
 
