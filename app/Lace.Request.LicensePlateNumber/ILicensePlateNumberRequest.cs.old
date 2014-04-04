@@ -1,0 +1,7 @@
+﻿namespace Lace.Request.LicensePlateNumber
+{
+    public interface ILicensePlateNumberRequest : ILaceRequest
+    {
+        string LicensePlateNumber { get; set; }
+    }
+}
