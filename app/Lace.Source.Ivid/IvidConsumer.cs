@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid.ServiceCalls;
 
@@ -17,16 +15,15 @@ namespace Lace.Source.Ivid
             _handleServiceCall = new HandleIvidServiceCall();
         }
 
-        //public IvidConsumer(IHandleServiceCall handleServiceCall)
-        //{
-        //    _handleServiceCall = handleServiceCall;
-        //}
 
         public ILaceResponse CallIvidService()
         {
-           return _handleServiceCall.Call(c =>
-                c.FetchDataFromService(_request)
-                );
+            if (!_handleServiceCall.CanHandle(_request)) return new IvidServiceResponse() {Handled = false};
+
+            return
+                _handleServiceCall
+                    .Call(c =>
+                        c.FetchDataFromService(_request));
         }
     }
 }

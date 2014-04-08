@@ -47,8 +47,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="when_init_lace_sources_for_licensePlate_number_search.cs" />
+    <Compile Include="Data\LicensePlateNumberSliverIvidOnlyServiceRequest.cs" />
+    <Compile Include="Data\LicensePlateNumberSliverAllServicesRequest.cs" />
+    <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search_only_handle_ivid_service.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

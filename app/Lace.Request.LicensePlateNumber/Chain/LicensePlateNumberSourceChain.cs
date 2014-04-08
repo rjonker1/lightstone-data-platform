@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Lace.Request.LicensePlateNumber.Models;
 using Lace.Response;
 using Lace.Source.Ivid;
@@ -13,20 +12,12 @@ namespace Lace.Request.LicensePlateNumber.Chain
     {
         private static List<ILaceResponse> _responses;
 
-        //private static LicensePlateNumberResponse Response 
-        //{
-        //    get
-        //    {
-        //        return new LicensePlateNumberResponse() { Responses = _responses }; ;
-        //    }
-        //}
-
         public static LicensePlateNumberResponse Build(ILaceRequest request)
         {
             var handlers = new Dictionary<string, Func<ILaceRequest, ILaceResponse>>()
             {
                 {"Ivid", r => new IvidConsumer(r).CallIvidService()},
-                {"IvidTitleHolder", r => new IvidTitleHolderConsumer(r).CallIvidTitleHolderService() },
+                {"IvidTitleHolder", r => new IvidTitleHolderConsumer(r).CallIvidTitleHolderService()},
                 {"RgtVin", r => new RgtVinConsumer(r).CallRgtVinService()}
             };
 
@@ -36,7 +27,7 @@ namespace Lace.Request.LicensePlateNumber.Chain
                 _responses.Add(handler.Value(request));
             }
 
-            return new LicensePlateNumberResponse() { Responses = _responses }; ;
+            return new LicensePlateNumberResponse() {Responses = _responses};
         }
     }
 }

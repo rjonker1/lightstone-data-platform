@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lace.Request;
+using Lace.Source.Tests.Data;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests
 {
-    public class when_init_lace_sources_for_licensePlate_number_search : Specification
+    public class when_inititializing_lace_source_chain_for_licensePlate_number_search : Specification
     {
         private readonly ILaceRequest _request;
         private readonly Initialize _initialize;
         private List<LaceResponse> _laceResponses;
 
-        public when_init_lace_sources_for_licensePlate_number_search()
+        public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
             _request = BuildRequest();
             _initialize = new Initialize();
@@ -23,7 +24,7 @@ namespace Lace.Source.Tests
 
         private static ILaceRequest BuildRequest()
         {
-            return new Request();
+            return new LicensePlateNumberSliverAllServicesRequest();
         }
 
         public override void Observe()
@@ -42,75 +43,23 @@ namespace Lace.Source.Tests
         }
 
         [Observation]
-        public void TheNumberOfResponsesToBeReceived()
+        public void the_number_of_responses_to_be_received()
         {
             _laceResponses.First().Responses.Count().ShouldEqual(3);
         }
 
-         [Observation]
-        public void TheNumberOfServicesToBeConsumed()
+        [Observation]
+        public void the_number_of_services_to_be_consumed()
         {
             _laceResponses.First().Responses.Count(c => c.Handled).ShouldEqual(3);
         }
 
         [Observation]
-        public void TheNumberOfServicesToBeHandled()
+        public void the_number_of_services_to_be_handled()
         {
             foreach (var response in _laceResponses[0].Responses)
             {
                 response.Handled.ShouldBeTrue();
-            }
-        }
-    }
-
-    public class Request : ILaceRequest
-    {
-
-        public Guid UserId
-        {
-            get
-            {
-                return Guid.NewGuid();
-            }
-        }
-
-        public string CompanyId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public string ContractId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public DateTime RequestDate
-        {
-            get
-            {
-                return DateTime.Now;
-            }
-        }
-
-        public string LicensePlateNumber
-        {
-            get
-            {
-                return "XMC167GP";
-            }
-        }
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] {"Ivid", "IvidTitleHolder", "RgtVin"};
             }
         }
     }
