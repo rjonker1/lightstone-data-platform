@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chain\LicensePlateNumberSourceChain.cs" />
+    <Compile Include="Models\ILicensePlateNumberResponse.cs" />
     <Compile Include="Models\LicensePlateNumberRequest.cs" />
     <Compile Include="Models\LicensePlateNumberResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

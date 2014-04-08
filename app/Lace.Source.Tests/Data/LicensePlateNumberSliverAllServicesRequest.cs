@@ -53,5 +53,46 @@ namespace Lace.Source.Tests.Data
                 return new string[] { "Ivid", "IvidTitleHolder", "RgtVin" };
             }
         }
+
+
+        public string UserName
+        {
+            get { return string.Empty; }
+        }
+
+        public string EngineNo
+        {
+            get { return string.Empty; }
+        }
+
+        public string VinOrChassis
+        {
+            get { return string.Empty; }
+        }
+
+        public string Make
+        {
+            get { return string.Empty; }
+        }
+
+        public string RegisterNo
+        {
+            get { return string.Empty; }
+        }
+
+        public string LicenceNo
+        {
+            get { return string.Empty; }
+        }
+
+        public string Product
+        {
+            get { return string.Empty; }
+        }
+
+        public string ReasonForApplication
+        {
+            get { return string.Empty; }
+        }
     }
 }

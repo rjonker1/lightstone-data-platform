@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Services.cs" />
+    <Compile Include="Helpers\ConvertFunctions.cs" />
     <Compile Include="IHandleServiceCall.cs" />
     <Compile Include="IRequestDataFromService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

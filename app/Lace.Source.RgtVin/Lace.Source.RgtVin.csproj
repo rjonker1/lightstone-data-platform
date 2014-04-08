@@ -42,7 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RgtVinConsumer.cs" />
     <Compile Include="ServiceCalls\HandleRgtVinServiceCall.cs" />
-    <Compile Include="ServiceCalls\RgtVinServiceResponse.cs" />
+    <None Include="ServiceCalls\RgtVinServiceResponse.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">

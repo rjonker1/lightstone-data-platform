@@ -21,13 +21,24 @@ namespace Lace.Source.IvidTitleHolder
 
         public ILaceResponse CallIvidTitleHolderService()
         {
-            if (!_handleServiceCall.CanHandle(_request)) return new IvidTitleHolderServiceResponse() {Handled = false};
+            if (!_handleServiceCall.CanHandle(_request)) return NotHandledReponse();
 
             return
                 _handleServiceCall
                     .Call(c =>
                         c.FetchDataFromService(_request)
                     );
+
+
+            // return Helpers.ConvertFunctions.ConvertObject<IvidTitleHolderServiceResponse>(response);
+        }
+
+        private static ILaceResponse NotHandledReponse()
+        {
+            //var response = new IvidTitleHolderServiceResponse();
+            //response.NotHandled();
+            //return response;
+            return null;
         }
     }
 

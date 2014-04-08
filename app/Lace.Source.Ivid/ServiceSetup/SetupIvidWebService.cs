@@ -4,7 +4,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using Lace.Source.Ivid.IvidServiceReference;
 
-namespace Lace.Source.Ivid.WebServiceSetup
+namespace Lace.Source.Ivid.ServiceSetup
 {
     public class SetupIvidWebService
     {

@@ -2,11 +2,11 @@
 using Lace.Request;
 using Lace.Source.Ivid.IvidServiceReference;
 
-namespace Lace.Source.Ivid.WebServiceSetup
+namespace Lace.Source.Ivid.ServiceSetup
 {
     public class SetupIvidQueryRequestMessage
     {
-        public HpiStandardQueryRequest HprStandardQueryRequest
+        public HpiStandardQueryRequest HpiQueryRequest
         {
             get;
             private set;
@@ -22,7 +22,7 @@ namespace Lace.Source.Ivid.WebServiceSetup
 
         private void BuildStandardIvidQueryRequest()
         {
-            HprStandardQueryRequest = new HpiStandardQueryRequest()
+            HpiQueryRequest = new HpiStandardQueryRequest()
             {
                 ApplicantName = _request.UserName ?? string.Empty,
                 EngineNo = _request.EngineNo ?? string.Empty,

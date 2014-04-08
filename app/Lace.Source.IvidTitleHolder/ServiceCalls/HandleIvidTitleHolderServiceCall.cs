@@ -23,11 +23,18 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 
         public ILaceResponse Call(Action<IRequestDataFromService> action)
         {
-            return new IvidTitleHolderServiceResponse()
-            {
-                Handled = true,
-                Response = new List<string>() { "Handle Ivid Title Holder Service Call" }
-            };
+            //var response =  new IvidTitleHolderServiceResponse()
+            //{
+            //    Response = new List<string>() {"Handle Ivid Title Holder Service Call"}
+            //};
+            //response.IsHandled();
+            //return response;
+            return null;
+
+            //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
         }
+
+
+        
     }
 }

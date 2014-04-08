@@ -23,11 +23,16 @@ namespace Lace.Source.RgtVin.ServiceCalls
 
         public ILaceResponse Call(Action<IRequestDataFromService> action)
         {
-            return new RgtVinServiceResponse()
-            {
-                Handled = true,
-                Response = new List<string>() {"Handle Rgt Vin Service Call"}
-            };
+            //var response = new RgtVinServiceResponse()
+            //{
+            //    Response = new List<string>() {"Handle Rgt Vin Service Call"}
+            //};
+            //response.IsHandled();
+            //return response;
+
+            return null;
+
+            //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
         }
     }
 }

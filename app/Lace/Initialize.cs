@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Lace.Request;
 using Lace.Request.LicensePlateNumber.Chain;
 using Lace.Request.LicensePlateNumber.Models;

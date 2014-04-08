@@ -1,0 +1,21 @@
+﻿using Lace.Response;
+using System.Collections.Generic;
+
+namespace Lace.Source.RgtVin.ServiceCalls
+{
+    public class RgtVinServiceResponse : ILaceResponse
+    {
+        public bool Handled { get; private set; }
+        public List<string> Response { get; set; }
+
+        public void NotHandled()
+        {
+            Handled = false;
+        }
+
+        public void IsHandled()
+        {
+            Handled = true;
+        }
+    }
+}

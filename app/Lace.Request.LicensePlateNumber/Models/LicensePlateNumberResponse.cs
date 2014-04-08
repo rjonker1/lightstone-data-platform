@@ -5,6 +5,6 @@ namespace Lace.Request.LicensePlateNumber.Models
 {
     public class LicensePlateNumberResponse
     {
-        public IEnumerable<ILaceResponse> Responses { get; set;} 
+        public IEnumerable<ILaceResponse> Responses { get; set; } 
     }
 }

@@ -5,7 +5,20 @@ namespace Lace.Source.Ivid.ServiceCalls
 {
     public class IvidServiceResponse : ILaceResponse
     {
-        public bool Handled { get; set; }
+        public bool Handled { get; private set; }
         public List<string> Response { get; set; }
+
+
+        public void NotHandled()
+        {
+            Handled = false;
+        }
+
+        public void IsHandled()
+        {
+            Handled = true;
+        }
+
+
     }
 }
