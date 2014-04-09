@@ -47,7 +47,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <None Include="ServiceCalls\IvidServiceResponse.cs.old" />
     <Compile Include="ServiceCalls\HandleIvidServiceCall.cs" />
     <Compile Include="IvidConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

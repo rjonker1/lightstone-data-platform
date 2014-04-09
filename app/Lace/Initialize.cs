@@ -9,32 +9,33 @@ namespace Lace
 {
     public class Initialize
     {
-        private Dictionary<Type, Func<ILaceRequest, IEnumerable<ILaceResponse>>> _handlers;
+        private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
         private ILaceRequest _request;
 
-        public List<LaceResponse> LaceResponses { get; set; }
+        public List<LaceServiceResponse> LaceResponses { get; set; }
 
         public Initialize()
         {
-            LaceResponses = new List<LaceResponse>();
+            LaceResponses = new List<LaceServiceResponse>();
         }
 
         public Initialize Bootstrap(ILaceRequest request)
         {
-            _handlers = new Dictionary<Type, Func<ILaceRequest, IEnumerable<ILaceResponse>>>
+            _handlers = new Dictionary<Type, Func<ILaceRequest, ILaceResponse>>
             {
-                {typeof(LicensePlateNumberRequest), r => LicensePlateNumberSourceChain.Build(r).Responses }
+                {typeof(LicensePlateNumberRequest), r => LicensePlateNumberSourceChain.Build(r).Response }
             };
-            
+
             _request = request;
             return this;
         }
+
 
         public Initialize Load()
         {
             foreach (var handler in _handlers)
             {
-                LaceResponses.Add(new LaceResponse() {Responses = handler.Value(_request), Request = _request});
+                LaceResponses.Add(new LaceServiceResponse() {Response = handler.Value(_request), Request = _request});
             }
 
             return this;

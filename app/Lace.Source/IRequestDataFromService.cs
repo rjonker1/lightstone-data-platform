@@ -5,6 +5,6 @@ namespace Lace.Source
 {
     public interface IRequestDataFromService
     {
-        ILaceResponse FetchDataFromService(ILaceRequest request);
+        void FetchDataFromService(ILaceRequest request, ILaceResponse response);
     }
 }

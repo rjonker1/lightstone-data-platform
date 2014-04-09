@@ -1,4 +1,4 @@
-﻿namespace Lace.Models.Ivid
+﻿namespace Lace.Models.Ivid.Dto
 {
     public class VehicleSpecificInformation
     {

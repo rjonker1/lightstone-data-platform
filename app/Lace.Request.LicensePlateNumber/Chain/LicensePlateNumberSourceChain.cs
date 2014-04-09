@@ -10,24 +10,33 @@ namespace Lace.Request.LicensePlateNumber.Chain
 {
     public class LicensePlateNumberSourceChain
     {
-        private static List<ILaceResponse> _responses;
+        //private static List<ILaceResponse> _responses;
+
+        private static ILaceResponse _response;
 
         public static LicensePlateNumberResponse Build(ILaceRequest request)
         {
-            var handlers = new Dictionary<string, Func<ILaceRequest, ILaceResponse>>()
+            var handlers = new Dictionary<string, Func<ILaceRequest, ILaceResponse, bool>>()
             {
-                {"Ivid", r => new IvidConsumer(r).CallIvidService()},
-                {"IvidTitleHolder", r => new IvidTitleHolderConsumer(r).CallIvidTitleHolderService()},
-                {"RgtVin", r => new RgtVinConsumer(r).CallRgtVinService()}
+                {"Ivid", (req,resp) => new IvidConsumer(req).CallIvidService(resp)},
+                {"IvidTitleHolder", (req,resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
+                {"RgtVin", (req,resp) => new RgtVinConsumer(req).CallRgtVinService(resp)}
             };
 
-            _responses = new List<ILaceResponse>();
+            _response = new LaceResponse();
             foreach (var handler in handlers)
             {
-                _responses.Add(handler.Value(request));
+                handler.Value(request, _response);
             }
 
-            return new LicensePlateNumberResponse() {Responses = _responses};
+           
+            //_responses = new List<ILaceResponse>();
+            //foreach (var handler in handlers)
+            //{
+            //    _responses.Add(handler.Value(request));
+            //}
+
+            return new LicensePlateNumberResponse() { Response = _response };
         }
     }
 }

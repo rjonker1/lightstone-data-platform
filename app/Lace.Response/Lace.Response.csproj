@@ -45,9 +45,17 @@
     <Compile Include="ResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
+      <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
+      <Name>Lace.Models.IvidTitleHolder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
       <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
       <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
+      <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
+      <Name>Lace.Models.RgtVin</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

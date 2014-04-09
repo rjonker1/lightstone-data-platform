@@ -16,17 +16,17 @@ namespace Lace.Source.RgtVin
             _handleServiceCall = new HandleRgtVinServiceCall();
         }
 
-        public ILaceResponse CallRgtVinService()
+        public bool CallRgtVinService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request)) return NotHandledResponse();
+            if (!_handleServiceCall.CanHandle(_request)) return false;
 
-            return
-                _handleServiceCall
+            _handleServiceCall
                     .Call(c =>
-                        c.FetchDataFromService(_request)
+                        c.FetchDataFromService(_request,response)
                     );
 
-           // return Helpers.ConvertFunctions.ConvertObject<RgtVinServiceResponse>(response);
+            return true;
+            // return Helpers.ConvertFunctions.ConvertObject<RgtVinServiceResponse>(response);
         }
 
         private static ILaceResponse NotHandledResponse()

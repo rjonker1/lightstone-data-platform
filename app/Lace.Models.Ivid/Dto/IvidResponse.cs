@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lace.Models.Ivid.Enums;
 
-namespace Lace.Models.Ivid
+namespace Lace.Models.Ivid.Dto
 {
     public class IvidResponse
     {

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Response;
 
 namespace Lace
 {
-    public class LaceResponse
+    public class LaceServiceResponse
     {
-        public IEnumerable<ILaceResponse> Responses { get; set; }
+        public ILaceResponse Response { get; set; }
         public ILaceRequest Request { get; set; }
     }
 }

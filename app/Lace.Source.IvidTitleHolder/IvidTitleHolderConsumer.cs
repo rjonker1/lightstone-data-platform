@@ -19,17 +19,16 @@ namespace Lace.Source.IvidTitleHolder
         }
 
 
-        public ILaceResponse CallIvidTitleHolderService()
+        public bool CallIvidTitleHolderService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request)) return NotHandledReponse();
+            if (!_handleServiceCall.CanHandle(_request)) return false;
 
-            return
-                _handleServiceCall
+            _handleServiceCall
                     .Call(c =>
-                        c.FetchDataFromService(_request)
+                        c.FetchDataFromService(_request,response)
                     );
 
-
+            return true;
             // return Helpers.ConvertFunctions.ConvertObject<IvidTitleHolderServiceResponse>(response);
         }
 

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Lace.Models.Ivid;
+﻿using Lace.Models.Ivid.Dto;
+using Lace.Models.IvidTitleHolder.Dto;
+using Lace.Models.RgtVin.Dto;
 
 namespace Lace.Response
 {
@@ -8,6 +8,12 @@ namespace Lace.Response
     {
         IvidResponse IvidResponse { get; set; }
         ResponseHandled IvidResponseHandled { get; set; }
+
+        IvidTitleHolderResponse IvidTitleHolderResponse { get; set; }
+        ResponseHandled IvidTitleHolderResponseHandled { get; set; }
+
+        RgtVinResponse RgtVinResponse { get; set; }
+        ResponseHandled RgtVinResponseHandled { get; set; }
 
 
         //IDictionary<int, string> ErrorDictionary { get; }

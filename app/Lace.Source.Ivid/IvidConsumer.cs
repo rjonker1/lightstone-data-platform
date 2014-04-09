@@ -17,16 +17,17 @@ namespace Lace.Source.Ivid
         }
 
 
-        public ILaceResponse CallIvidService()
+        public bool CallIvidService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request)) return NotHandledResponse();
+            if (!_handleServiceCall.CanHandle(_request)) return false;
 
-            return 
-                _handleServiceCall
+           _handleServiceCall
                     .Call(c =>
-                        c.FetchDataFromService(_request));
+                        c.FetchDataFromService(_request,response));
 
-           // return Helpers.ConvertFunctions.ConvertObject<IvidResponse>(response);
+            return true;
+
+            // return Helpers.ConvertFunctions.ConvertObject<IvidResponse>(response);
         }
 
         private static ILaceResponse NotHandledResponse()
