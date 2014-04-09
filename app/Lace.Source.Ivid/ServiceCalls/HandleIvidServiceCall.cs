@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Lace.Request;
@@ -32,49 +33,10 @@ namespace Lace.Source.Ivid.ServiceCalls
             return request.Sources.Contains(Service.ToString());
         }
 
-        public ILaceResponse Call(Action<IRequestDataFromService> action)
+       
+        public void Call(Action<IRequestDataFromService> action)
         {
-            //return new IvidServiceResponse()
-            //{
-            //    Handled = true,
-            //    Response = new List<string>() { "Handle Ivid Service Call" }
-            //};
-            return null;
-        }
-
-        private void CallIvidWebService()
-        {
-            var ividWebService = new SetupIvidWebService();
-            using (var scope = new OperationContextScope(ividWebService.IvidServiceProxy.InnerChannel))
-            {
-                OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
-                    ividWebService.IvidRequestMessageProperty;
-
-                var ividRequest = new SetupIvidQueryRequestMessage(_request)
-                    .HpiQueryRequest;
-
-                //TODO: Need to Log the request to the database
-                //LogServiceReqeust(ividRequest);
-
-                var response = ividWebService
-                    .IvidServiceProxy
-                    .HpiStandardQuery(ividRequest);
-
-
-                if (response == null || !response.partialResponse)
-                    throw new Exception("LACE: Ivid Service call was not successfull");
-
-
-
-
-            }
-        }
-
-        
-
-        private static void LogServiceReqeust(string request)
-        {
-            //TODO: Implement
+            action.Invoke(new RequestDataFromIvidService());
         }
     }
 }

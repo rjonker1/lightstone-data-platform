@@ -1,6 +1,5 @@
 ﻿using System;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.Enums;
 
 namespace Lace.Source
@@ -9,6 +8,7 @@ namespace Lace.Source
     {
         Services Service { get; }
         bool CanHandle(ILaceRequest request);
-        ILaceResponse Call(Action<IRequestDataFromService> action);
+        //ILaceResponse Call(Action<IRequestDataFromService> action);
+        void Call(Action<IRequestDataFromService> action);
     }
 }

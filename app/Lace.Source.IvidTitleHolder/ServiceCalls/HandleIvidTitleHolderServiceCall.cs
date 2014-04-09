@@ -21,20 +21,18 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             return request.Sources.Contains(Service.ToString());
         }
 
-        public ILaceResponse Call(Action<IRequestDataFromService> action)
+        public void Call(Action<IRequestDataFromService> action)
         {
+            action.Invoke(new RequestDatafromIvidTitleHolderService());
             //var response =  new IvidTitleHolderServiceResponse()
             //{
             //    Response = new List<string>() {"Handle Ivid Title Holder Service Call"}
             //};
             //response.IsHandled();
             //return response;
-            return null;
+            //return null;
 
             //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
         }
-
-
-        
     }
 }

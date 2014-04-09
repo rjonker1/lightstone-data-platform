@@ -42,8 +42,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RgtVinConsumer.cs" />
     <Compile Include="ServiceCalls\HandleRgtVinServiceCall.cs" />
+    <Compile Include="ServiceCalls\RequestDataFromRgtVinService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
+      <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
+      <Name>Lace.Models.RgtVin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>

@@ -43,25 +43,27 @@ namespace Lace.Source.Tests
         }
 
         [Observation]
-        public void the_number_of_responses_to_be_received()
+        public void services_for_sliver_to_be_handled_must_be_true()
         {
-           // _laceResponses.First().Responses.Count().ShouldEqual(3);
+            _laceResponses.First().Response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _laceResponses.First().Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _laceResponses.First().Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
         }
 
-        [Observation]
-        public void the_number_of_services_to_be_consumed()
-        {
-          //  _laceResponses.First().Responses.Count(c => c.Handled).ShouldEqual(3);
-        }
+        //[Observation]
+        //public void the_number_of_services_to_be_consumed()
+        //{
+        //  //  _laceResponses.First().Responses.Count(c => c.Handled).ShouldEqual(3);
+        //}
 
-        [Observation]
-        public void the_number_of_services_to_be_handled()
-        {
-          //  foreach (var response in _laceResponses[0].Responses)
-          //  {
-          ////      response.Handled.ShouldBeTrue();
-          //  }
-        }
+        //[Observation]
+        //public void the_number_of_services_to_be_handled()
+        //{
+        //  //  foreach (var response in _laceResponses[0].Responses)
+        //  //  {
+        //  ////      response.Handled.ShouldBeTrue();
+        //  //  }
+        //}
     }
 
 }

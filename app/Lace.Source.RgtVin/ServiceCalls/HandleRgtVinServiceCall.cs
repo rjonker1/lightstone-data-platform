@@ -21,8 +21,9 @@ namespace Lace.Source.RgtVin.ServiceCalls
             return request.Sources.Contains(Service.ToString());
         }
 
-        public ILaceResponse Call(Action<IRequestDataFromService> action)
+        public void Call(Action<IRequestDataFromService> action)
         {
+            action.Invoke(new RequestDataFromRgtVinService());
             //var response = new RgtVinServiceResponse()
             //{
             //    Response = new List<string>() {"Handle Rgt Vin Service Call"}
@@ -30,7 +31,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             //response.IsHandled();
             //return response;
 
-            return null;
+            //return null;
 
             //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
         }

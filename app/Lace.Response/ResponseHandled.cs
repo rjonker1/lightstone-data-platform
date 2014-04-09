@@ -8,12 +8,12 @@
             private set;
         }
 
-        public void NotHandled()
+        public void HasNotBeenHandled()
         {
             Handled = false;
         }
 
-        public void IsHandled()
+        public void HasBeenHandled()
         {
             Handled = true;
         }

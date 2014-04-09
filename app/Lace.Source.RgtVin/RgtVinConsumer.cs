@@ -18,7 +18,11 @@ namespace Lace.Source.RgtVin
 
         public bool CallRgtVinService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request)) return false;
+            if (!_handleServiceCall.CanHandle(_request))
+            {
+                NotHandledResponse(response);
+                return true;
+            }
 
             _handleServiceCall
                     .Call(c =>
@@ -29,12 +33,11 @@ namespace Lace.Source.RgtVin
             // return Helpers.ConvertFunctions.ConvertObject<RgtVinServiceResponse>(response);
         }
 
-        private static ILaceResponse NotHandledResponse()
+        private static void NotHandledResponse(ILaceResponse response)
         {
-            //var response = new RgtVinServiceResponse();
-            //response.NotHandled();
-            //return response;
-            return null;
+            response.RgtVinResponse = null;
+            response.RgtVinResponseHandled = new ResponseHandled();
+            response.RgtVinResponseHandled.HasNotBeenHandled();
         }
     }
 }

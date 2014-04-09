@@ -19,9 +19,13 @@ namespace Lace.Source.Ivid
 
         public bool CallIvidService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request)) return false;
-
-           _handleServiceCall
+            if (!_handleServiceCall.CanHandle(_request))
+            {
+                NotHandledResponse(response);
+                return true;
+            }
+            
+            _handleServiceCall
                     .Call(c =>
                         c.FetchDataFromService(_request,response));
 
@@ -30,12 +34,11 @@ namespace Lace.Source.Ivid
             // return Helpers.ConvertFunctions.ConvertObject<IvidResponse>(response);
         }
 
-        private static ILaceResponse NotHandledResponse()
+        private static void NotHandledResponse(ILaceResponse response)
         {
-            //var response = new IvidResponse();
-            //response.NotHandled();
-            //return response;
-            return null;
+            response.IvidResponse = null;
+            response.IvidResponseHandled = new ResponseHandled();
+            response.IvidResponseHandled.HasNotBeenHandled();
         }
     }
 }

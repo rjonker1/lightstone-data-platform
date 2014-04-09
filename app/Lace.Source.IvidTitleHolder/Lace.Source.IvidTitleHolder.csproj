@@ -42,8 +42,13 @@
     <Compile Include="IvidTitleHolderConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCalls\HandleIvidTitleHolderServiceCall.cs" />
+    <Compile Include="ServiceCalls\RequestDatafromIvidTitleHolderService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
+      <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
+      <Name>Lace.Models.IvidTitleHolder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
