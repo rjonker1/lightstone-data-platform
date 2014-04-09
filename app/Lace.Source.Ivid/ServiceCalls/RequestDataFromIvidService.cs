@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using Lace.Models.Ivid;
 using Lace.Models.Ivid.Dto;
 using Lace.Request;
 using Lace.Response;
@@ -17,7 +18,7 @@ namespace Lace.Source.Ivid.ServiceCalls
         {
             _request = request;
             response.IvidResponse = new IvidResponse();
-            response.IvidResponseHandled = new ResponseHandled();
+            response.IvidResponseHandled = new IvidResponseHandled();
             response.IvidResponseHandled.HasBeenHandled();
         }
 

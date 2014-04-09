@@ -4,6 +4,7 @@ using Lace.Request;
 using Lace.Request.LicensePlateNumber.Chain;
 using Lace.Request.LicensePlateNumber.Models;
 using Lace.Response;
+using Lace.Response.ExternalServices;
 
 namespace Lace
 {
@@ -12,11 +13,11 @@ namespace Lace
         private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
         private ILaceRequest _request;
 
-        public List<LaceServiceResponse> LaceResponses { get; set; }
+        public List<LaceExternalServiceResponse> LaceResponses { get; set; }
 
         public Initialize()
         {
-            LaceResponses = new List<LaceServiceResponse>();
+            LaceResponses = new List<LaceExternalServiceResponse>();
         }
 
         public Initialize Bootstrap(ILaceRequest request)
@@ -35,7 +36,7 @@ namespace Lace
         {
             foreach (var handler in _handlers)
             {
-                LaceResponses.Add(new LaceServiceResponse() {Response = handler.Value(_request), Request = _request});
+                LaceResponses.Add(new LaceExternalServiceResponse() {Response = handler.Value(_request), Request = _request});
             }
 
             return this;

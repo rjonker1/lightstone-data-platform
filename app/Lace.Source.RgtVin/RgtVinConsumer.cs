@@ -1,6 +1,6 @@
-﻿using Lace.Request;
+﻿using Lace.Models.RgtVin;
+using Lace.Request;
 using Lace.Response;
-using System;
 using Lace.Source.RgtVin.ServiceCalls;
 
 namespace Lace.Source.RgtVin
@@ -16,28 +16,15 @@ namespace Lace.Source.RgtVin
             _handleServiceCall = new HandleRgtVinServiceCall();
         }
 
-        public bool CallRgtVinService(ILaceResponse response)
+        public void CallRgtVinService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request))
-            {
-                NotHandledResponse(response);
-                return true;
-            }
+            if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
-                    .Call(c =>
-                        c.FetchDataFromService(_request,response)
-                    );
-
-            return true;
+                .Call(c =>
+                    c.FetchDataFromService(_request, response)
+                );
             // return Helpers.ConvertFunctions.ConvertObject<RgtVinServiceResponse>(response);
-        }
-
-        private static void NotHandledResponse(ILaceResponse response)
-        {
-            response.RgtVinResponse = null;
-            response.RgtVinResponseHandled = new ResponseHandled();
-            response.RgtVinResponseHandled.HasNotBeenHandled();
         }
     }
 }

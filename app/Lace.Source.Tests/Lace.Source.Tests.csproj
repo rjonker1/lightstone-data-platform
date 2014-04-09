@@ -57,9 +57,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj">
+      <Project>{8d2ad71f-e6d2-44e5-bd9e-11ff68ef3a6d}</Project>
+      <Name>Lace.Response.ExternalServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>

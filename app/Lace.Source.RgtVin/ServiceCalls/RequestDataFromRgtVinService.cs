@@ -1,4 +1,5 @@
-﻿using Lace.Models.RgtVin.Dto;
+﻿using Lace.Models.RgtVin;
+using Lace.Models.RgtVin.Dto;
 using Lace.Request;
 using Lace.Response;
 
@@ -12,7 +13,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
         {
             _request = request;
             response.RgtVinResponse = new RgtVinResponse();
-            response.RgtVinResponseHandled = new ResponseHandled();
+            response.RgtVinResponseHandled = new RgtVinResponseHandled();
             response.RgtVinResponseHandled.HasBeenHandled();
         }
     }

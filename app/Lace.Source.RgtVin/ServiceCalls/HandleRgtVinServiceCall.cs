@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Lace.Models.RgtVin;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Enums;
 
@@ -16,24 +17,30 @@ namespace Lace.Source.RgtVin.ServiceCalls
             }
         }
 
-        public bool CanHandle(Request.ILaceRequest request)
+        private bool _canHandle;
+        public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
-            return request.Sources.Contains(Service.ToString());
+            _canHandle = request.Sources.Contains(Service.ToString());
+
+            if (!_canHandle)
+            {
+                NotHandledResponse(response);
+            }
+
+            return _canHandle;
         }
 
         public void Call(Action<IRequestDataFromService> action)
         {
-            action.Invoke(new RequestDataFromRgtVinService());
-            //var response = new RgtVinServiceResponse()
-            //{
-            //    Response = new List<string>() {"Handle Rgt Vin Service Call"}
-            //};
-            //response.IsHandled();
-            //return response;
-
-            //return null;
-
-            //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
+            action(new RequestDataFromRgtVinService());
         }
+
+        private static void NotHandledResponse(ILaceResponse response)
+        {
+            response.RgtVinResponse = null;
+            response.RgtVinResponseHandled = new RgtVinResponseHandled();
+            response.RgtVinResponseHandled.HasNotBeenHandled();
+        }
+
     }
 }

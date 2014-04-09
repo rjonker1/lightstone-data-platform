@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lace.Request;
+using Lace.Response.ExternalServices;
 using Lace.Source.Tests.Data;
 using Xunit.Extensions;
 
@@ -12,7 +13,7 @@ namespace Lace.Source.Tests
 
         private readonly ILaceRequest _request;
         private readonly Initialize _initialize;
-        private List<LaceServiceResponse> _laceResponses;
+        private List<LaceExternalServiceResponse> _laceResponses;
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search_only_handle_ivid_service()
         {

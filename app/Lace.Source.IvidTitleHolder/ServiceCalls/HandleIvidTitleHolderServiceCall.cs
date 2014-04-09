@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lace.Models.IvidTitleHolder;
+using Lace.Request;
 using Lace.Response;
 using System;
 using Lace.Source.Enums;
@@ -16,23 +18,31 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             }
         }
 
-        public bool CanHandle(Request.ILaceRequest request)
+        private bool _canHandle;
+        public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
-            return request.Sources.Contains(Service.ToString());
+            _canHandle = request.Sources.Contains(Service.ToString());
+
+            if (!_canHandle)
+            {
+                NotHandledResponse(response);
+            }
+
+            return _canHandle;
         }
 
         public void Call(Action<IRequestDataFromService> action)
         {
             action.Invoke(new RequestDatafromIvidTitleHolderService());
-            //var response =  new IvidTitleHolderServiceResponse()
-            //{
-            //    Response = new List<string>() {"Handle Ivid Title Holder Service Call"}
-            //};
-            //response.IsHandled();
-            //return response;
-            //return null;
-
+          
             //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
+        }
+
+        private static void NotHandledResponse(ILaceResponse response)
+        {
+            response.IvidTitleHolderResponse = null;
+            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
+            response.IvidTitleHolderResponseHandled.HasNotBeenHandled();
         }
     }
 }

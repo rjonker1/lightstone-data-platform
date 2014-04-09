@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
+using Lace.Models.Ivid;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Enums;
-using Lace.Source.Ivid.ServiceSetup;
 
 namespace Lace.Source.Ivid.ServiceCalls
 {
@@ -20,23 +17,32 @@ namespace Lace.Source.Ivid.ServiceCalls
             }
         }
 
-        private readonly ILaceRequest _request;
-
-        public HandleIvidServiceCall(ILaceRequest request)
+       
+        private bool _canHandle;
+        public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
-            _request = request;
-        }
+            _canHandle = request.Sources.Contains(Service.ToString());
 
+            if (!_canHandle)
+            {
+                NotHandledResponse(response);
+            }
 
-        public bool CanHandle(ILaceRequest request)
-        {
-            return request.Sources.Contains(Service.ToString());
+            return _canHandle;
         }
 
        
         public void Call(Action<IRequestDataFromService> action)
         {
-            action.Invoke(new RequestDataFromIvidService());
+            action(new RequestDataFromIvidService());
+        }
+
+
+        private static void NotHandledResponse(ILaceResponse response)
+        {
+            response.IvidResponse = null;
+            response.IvidResponseHandled = new IvidResponseHandled();
+            response.IvidResponseHandled.HasNotBeenHandled();
         }
     }
 }

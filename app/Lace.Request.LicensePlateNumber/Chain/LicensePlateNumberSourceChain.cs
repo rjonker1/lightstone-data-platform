@@ -16,7 +16,7 @@ namespace Lace.Request.LicensePlateNumber.Chain
 
         public static LicensePlateNumberResponse Build(ILaceRequest request)
         {
-            var handlers = new Dictionary<string, Func<ILaceRequest, ILaceResponse, bool>>()
+            var handlers = new Dictionary<string, Action<ILaceRequest,ILaceResponse>>()
             {
                 {"Ivid", (req,resp) => new IvidConsumer(req).CallIvidService(resp)},
                 {"IvidTitleHolder", (req,resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
@@ -29,12 +29,6 @@ namespace Lace.Request.LicensePlateNumber.Chain
                 handler.Value(request, _response);
             }
 
-           
-            //_responses = new List<ILaceResponse>();
-            //foreach (var handler in handlers)
-            //{
-            //    _responses.Add(handler.Value(request));
-            //}
 
             return new LicensePlateNumberResponse() { Response = _response };
         }

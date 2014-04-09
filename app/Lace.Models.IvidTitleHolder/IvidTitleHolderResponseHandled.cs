@@ -1,12 +1,8 @@
-﻿namespace Lace.Response
+﻿namespace Lace.Models.IvidTitleHolder
 {
-    public class ResponseHandled
+    public class IvidTitleHolderResponseHandled : IResponseHandled
     {
-        public bool Handled
-        {
-            get;
-            private set;
-        }
+        public bool Handled { get; private set; }
 
         public void HasNotBeenHandled()
         {

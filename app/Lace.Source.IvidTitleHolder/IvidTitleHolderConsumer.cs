@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.ServiceCalls;
@@ -19,29 +20,15 @@ namespace Lace.Source.IvidTitleHolder
         }
 
 
-        public bool CallIvidTitleHolderService(ILaceResponse response)
+        public void CallIvidTitleHolderService(ILaceResponse response)
         {
-            if (!_handleServiceCall.CanHandle(_request))
-            {
-                NotHandledReponse(response);
-                return true;
-            }
+            if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
-                    .Call(c =>
-                        c.FetchDataFromService(_request, response)
-                    );
-
-            return true;
+                .Call(c =>
+                    c.FetchDataFromService(_request, response)
+                );
             // return Helpers.ConvertFunctions.ConvertObject<IvidTitleHolderServiceResponse>(response);
         }
-
-        private static void NotHandledReponse(ILaceResponse response)
-        {
-            response.IvidTitleHolderResponse = null;
-            response.IvidTitleHolderResponseHandled = new ResponseHandled();
-            response.IvidTitleHolderResponseHandled.HasNotBeenHandled();
-        }
     }
-
 }

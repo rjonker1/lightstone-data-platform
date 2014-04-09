@@ -40,7 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\IvidTitleHolderResponse.cs" />
+    <Compile Include="IvidTitleHolderResponseHandled.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

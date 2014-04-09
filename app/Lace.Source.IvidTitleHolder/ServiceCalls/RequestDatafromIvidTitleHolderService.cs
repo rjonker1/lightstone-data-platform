@@ -1,4 +1,5 @@
-﻿using Lace.Models.IvidTitleHolder.Dto;
+﻿using Lace.Models.IvidTitleHolder;
+using Lace.Models.IvidTitleHolder.Dto;
 using Lace.Request;
 using Lace.Response;
 
@@ -11,7 +12,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         {
             _request = request;
             response.IvidTitleHolderResponse = new IvidTitleHolderResponse();
-            response.IvidTitleHolderResponseHandled = new ResponseHandled();
+            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
     }

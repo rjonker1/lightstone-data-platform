@@ -1,9 +1,7 @@
 ﻿using Lace.Request;
-using Lace.Response;
-
-namespace Lace
+namespace Lace.Response.ExternalServices
 {
-    public class LaceServiceResponse
+    public class LaceExternalServiceResponse
     {
         public ILaceResponse Response { get; set; }
         public ILaceRequest Request { get; set; }
