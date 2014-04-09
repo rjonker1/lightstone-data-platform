@@ -2,9 +2,9 @@
 using Lace.Request;
 using Lace.Source.Ivid.IvidServiceReference;
 
-namespace Lace.Source.Ivid.ServiceSetup
+namespace Lace.Source.Ivid.ServiceConfig
 {
-    public class SetupIvidQueryRequestMessage
+    public class ConfigureIvidRequestMessage
     {
         public HpiStandardQueryRequest HpiQueryRequest
         {
@@ -14,7 +14,7 @@ namespace Lace.Source.Ivid.ServiceSetup
 
         private readonly ILaceRequest _request;
 
-        public SetupIvidQueryRequestMessage(ILaceRequest request)
+        public ConfigureIvidRequestMessage(ILaceRequest request)
         {
             _request = request;
             BuildStandardIvidQueryRequest();

@@ -4,9 +4,9 @@ using System.ServiceModel.Channels;
 using System.Text;
 using Lace.Source.Ivid.IvidServiceReference;
 
-namespace Lace.Source.Ivid.ServiceSetup
+namespace Lace.Source.Ivid.ServiceConfig
 {
-    public class SetupIvidWebService
+    public class ConfigureIvidWebService
     {
         private readonly string _userName = System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserName"];
         private readonly string _userPassowrd = System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserPassword"];
@@ -14,18 +14,18 @@ namespace Lace.Source.Ivid.ServiceSetup
         public HpiServiceClient IvidServiceProxy { get; private set; }
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
 
-        public void SetupIvidWebServiceCredentials()
+        public void ConfigureIvidWebServiceCredentials()
         {
             IvidServiceProxy = new HpiServiceClient();
 
             if(IvidServiceProxy == null || IvidServiceProxy.ClientCredentials == null)
-                throw new Exception("LACE: Cannot setup IVID Web Service");
+                throw new Exception("Cannot configure IVID Web Service");
 
             IvidServiceProxy.ClientCredentials.UserName.UserName = _userName;
             IvidServiceProxy.ClientCredentials.UserName.Password = _userPassowrd;
         }
 
-        public void SetupIvidWebServiceRequestMessageProperty()
+        public void ConfigureIvidWebServiceRequestMessageProperty()
         {
             IvidRequestMessageProperty = new HttpRequestMessageProperty();
             IvidRequestMessageProperty

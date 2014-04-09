@@ -54,8 +54,8 @@
     <Compile Include="ServiceCalls\HandleIvidServiceCall.cs" />
     <Compile Include="IvidConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceSetup\SetupIvidQueryRequestMessage.cs" />
-    <Compile Include="ServiceSetup\SetupIvidWebService.cs" />
+    <Compile Include="ServiceConfig\ConfigureIvidRequestMessage.cs" />
+    <Compile Include="ServiceConfig\ConfigureIvidWebService.cs" />
     <Compile Include="Transform\TransformIvidWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>

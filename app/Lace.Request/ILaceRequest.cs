@@ -7,6 +7,7 @@ namespace Lace.Request
     {
         Guid UserId { get; }
         string UserName { get; }
+        string UserPassword { get; }
         string CompanyId { get; }
         string ContractId { get; }
         DateTime RequestDate { get; }

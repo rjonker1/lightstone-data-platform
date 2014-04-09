@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Lace.Models.IvidTitleHolder;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.ServiceCalls;
 
@@ -28,7 +25,6 @@ namespace Lace.Source.IvidTitleHolder
                 .Call(c =>
                     c.FetchDataFromService(_request, response)
                 );
-            // return Helpers.ConvertFunctions.ConvertObject<IvidTitleHolderServiceResponse>(response);
         }
     }
 }

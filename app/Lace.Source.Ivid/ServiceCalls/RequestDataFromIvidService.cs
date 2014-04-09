@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
 using Lace.Models.Ivid;
-using Lace.Models.Ivid.Dto;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid.IvidServiceReference;
-using Lace.Source.Ivid.ServiceSetup;
+using Lace.Source.Ivid.ServiceConfig;
 using Lace.Source.Ivid.Transform;
 
 namespace Lace.Source.Ivid.ServiceCalls
@@ -35,17 +33,17 @@ namespace Lace.Source.Ivid.ServiceCalls
             {
                 Log.Info("Calling Ivid Web Service");
 
-                var ividWebService = new SetupIvidWebService();
+                var ividWebService = new ConfigureIvidWebService();
 
-                ividWebService.SetupIvidWebServiceCredentials();
-                ividWebService.SetupIvidWebServiceRequestMessageProperty();
+                ividWebService.ConfigureIvidWebServiceCredentials();
+                ividWebService.ConfigureIvidWebServiceRequestMessageProperty();
 
                 using (var scope = new OperationContextScope(ividWebService.IvidServiceProxy.InnerChannel))
                 {
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividWebService.IvidRequestMessageProperty;
 
-                    var ividRequest = new SetupIvidQueryRequestMessage(_request)
+                    var ividRequest = new ConfigureIvidRequestMessage(_request)
                         .HpiQueryRequest;
 
                     LogServiceRequest(ividRequest);

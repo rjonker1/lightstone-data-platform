@@ -34,8 +34,6 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         public void Call(Action<IRequestDataFromService> action)
         {
             action.Invoke(new RequestDatafromIvidTitleHolderService());
-          
-            //return Helpers.ConvertFunctions.ConvertObject<Type>(response);
         }
 
         private static void NotHandledResponse(ILaceResponse response)
