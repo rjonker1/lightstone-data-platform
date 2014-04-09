@@ -41,8 +41,11 @@
   <ItemGroup>
     <Compile Include="Enums\Services.cs" />
     <Compile Include="Helpers\ConvertFunctions.cs" />
+    <Compile Include="Helpers\XmlFunctions.cs" />
     <Compile Include="IHandleServiceCall.cs" />
     <Compile Include="IRequestDataFromService.cs" />
+    <Compile Include="ITransform.cs" />
+    <Compile Include="ITransformToLaceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

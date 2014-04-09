@@ -47,16 +47,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\LicensePlateNumberIvidOnlyRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverIvidOnlyServiceRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverAllServicesRequest.cs" />
+    <Compile Include="ivid_service_must_be_handled.cs" />
     <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search_only_handle_ivid_service.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
+      <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
+      <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
       <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
       <Name>Lace.Models</Name>

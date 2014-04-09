@@ -8,6 +8,9 @@ using Lace.Response.ExternalServices;
 
 namespace Lace
 {
+    /// <summary>
+    /// TODO: Move Bootstrap to Interface - enable better testing with the ability to mock, etc.
+    /// </summary>
     public class Initialize
     {
         private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Lace.Source.Helpers
 {
     public static class ConvertFunctions
@@ -12,5 +7,6 @@ namespace Lace.Source.Helpers
         {
             return (T)Convert.ChangeType(input, typeof(T));
         }
+
     }
 }

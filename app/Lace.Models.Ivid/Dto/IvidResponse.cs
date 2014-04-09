@@ -5,7 +5,13 @@ namespace Lace.Models.Ivid.Dto
 {
     public class IvidResponse
     {
-        public List<VehicleSpecificInformation> SpecificInformation
+        //public List<VehicleSpecificInformation> SpecificInformation
+        //{
+        //    get;
+        //    set;
+        //}
+
+        public VehicleSpecificInformation SpecificInformation
         {
             get;
             set;
@@ -44,7 +50,7 @@ namespace Lace.Models.Ivid.Dto
         }
 
       
-        public string VIN
+        public string Vin
         {
             get;
             set;
