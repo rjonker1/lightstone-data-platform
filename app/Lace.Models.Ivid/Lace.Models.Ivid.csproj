@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\ServiceCallState.cs" />
     <Compile Include="Dto\IvidResponse.cs" />
     <Compile Include="IvidResponseHandled.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using Lace.Models.Ivid.Enums;
+﻿using Lace.Models.Enums;
 
 namespace Lace.Models.Ivid.Dto
 {
     public class IvidResponse
     {
-        //public List<VehicleSpecificInformation> SpecificInformation
-        //{
-        //    get;
-        //    set;
-        //}
-
         public VehicleSpecificInformation SpecificInformation
         {
             get;
@@ -217,8 +210,8 @@ namespace Lace.Models.Ivid.Dto
             get;
             set;
         }
-
-       
+        
         public ServiceCallState ServiceProviderCallState { get; set; }
+        
     }
 }

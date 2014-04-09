@@ -23,11 +23,7 @@ namespace Lace.Source.Ivid.ServiceCalls
         public void FetchDataFromService(ILaceRequest request, ILaceResponse response)
         {
             _request = request;
-
-            //response.IvidResponse = new IvidResponse();
-            //response.IvidResponseHandled = new IvidResponseHandled();
-            //response.IvidResponseHandled.HasBeenHandled();
-
+            
             CallIvidWebService();
             TransformWebResponse(response);
         }
@@ -65,14 +61,19 @@ namespace Lace.Source.Ivid.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
-                throw;
+                //throw;
             }
             
         }
 
         private static void LogServiceRequest(HpiStandardQueryRequest request)
         {
-            Log.InfoFormat("Ivid Request sent to Ivd Web Service: {0}", Helpers.XmlFunctions.ObjectToXml(request));
+            Log.InfoFormat("Ivid Request sent to Ivid Web Service: {0}", Helpers.XmlFunctions.ObjectToXml(request));
+        }
+
+        private void LogServiceResponse()
+        {
+            Log.InfoFormat("Response Received from Ivid Web Service {0}", Helpers.XmlFunctions.ObjectToXml(_ividResponse));
         }
 
         private void TransformWebResponse(ILaceResponse response)
@@ -81,12 +82,13 @@ namespace Lace.Source.Ivid.ServiceCalls
 
             if (transformer.Continue)
             {
+                LogServiceResponse();
                 transformer.Transform();
             }
 
             response.IvidResponse = transformer.Result;
             response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidTitleHolderResponseHandled.HasBeenHandled();
+            response.IvidResponseHandled.HasBeenHandled();
         }
     }
 }

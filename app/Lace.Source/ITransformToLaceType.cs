@@ -6,6 +6,6 @@ namespace Lace.Source
     {
         T Message { get; }
 
-        TResult Result { get; }
+        TResult Result { get; set; }
     }
 }

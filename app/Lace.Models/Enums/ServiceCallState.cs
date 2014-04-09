@@ -1,4 +1,10 @@
-﻿namespace Lace.Models.Ivid.Enums
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lace.Models.Enums
 {
     public enum ServiceCallState
     {
