@@ -10,7 +10,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return Guid.NewGuid();
+                return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
             }
         }
 
@@ -57,7 +57,7 @@ namespace Lace.Source.Tests.Data
 
         public string UserName
         {
-            get { return string.Empty; }
+            get { return "pennyl@lightstone.co.za"; }
         }
 
         public string EngineNo
@@ -94,5 +94,7 @@ namespace Lace.Source.Tests.Data
         {
             get { return string.Empty; }
         }
+
+       
     }
 }
