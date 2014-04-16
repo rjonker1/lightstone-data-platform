@@ -82,7 +82,10 @@ namespace Lace.Source.Tests.Data
 
         public string LicenceNo
         {
-            get { return string.Empty; }
+            get
+            {
+                return "XMC167GP";
+            }
         }
 
         public string Product
@@ -95,6 +98,12 @@ namespace Lace.Source.Tests.Data
             get { return string.Empty; }
         }
 
-       
+
+
+
+        public string UserPassword
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

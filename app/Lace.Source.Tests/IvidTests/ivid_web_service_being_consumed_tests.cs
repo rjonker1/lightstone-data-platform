@@ -4,14 +4,14 @@ using Lace.Source.Ivid;
 using Lace.Source.Tests.Data;
 using Xunit.Extensions;
 
-namespace Lace.Source.Tests
+namespace Lace.Source.Tests.IvidTests
 {
-    public class ivid_web_service_being_consumed : Specification
+    public class ivid_web_service_being_consumed_tests : Specification
     {
         private readonly ILaceRequest _request;
         private ILaceResponse _response;
 
-        public ivid_web_service_being_consumed()
+        public ivid_web_service_being_consumed_tests()
         {
             _request = new LicensePlateNumberIvidOnlyRequest();
             _response = new LaceResponse();

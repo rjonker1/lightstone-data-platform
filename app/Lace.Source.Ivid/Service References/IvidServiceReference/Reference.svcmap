@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://qa.ubiquitech.co.za/ivid/ws/hpiService.wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="hpiService.wsdl" MetadataType="Wsdl" ID="b7aa87eb-3b52-4a88-97ef-b4c361b4f078" SourceId="1" SourceUrl="https://qa.ubiquitech.co.za/ivid/ws/hpiService.wsdl" />
+    <MetadataFile FileName="hpiService1.wsdl" MetadataType="Wsdl" ID="9de6d85a-5d30-4175-a80e-b808c4349f48" SourceId="1" SourceUrl="https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

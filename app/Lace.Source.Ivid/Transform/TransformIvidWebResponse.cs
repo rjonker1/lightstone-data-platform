@@ -3,16 +3,18 @@ using Lace.Source.Ivid.IvidServiceReference;
 
 namespace Lace.Source.Ivid.Transform
 {
-    public class TransformIvidWebResponse : ITransformToLaceType<HpiStandardQueryResponse,IvidResponse>
+    public class TransformIvidWebResponse : ITransform // ITransformToLaceType<HpiStandardQueryResponse,IvidResponse>
     {
-        public HpiStandardQueryResponse Message { get; set; }
-        public IvidResponse Result { get; set; }
+        public HpiStandardQueryResponse Message { get; private set; }
+        public IvidResponse Result { get; private set; }
 
         public bool Continue { get; private set; }
 
         public TransformIvidWebResponse(HpiStandardQueryResponse response)
         {
             Continue = response != null;
+            Result = Continue ? new IvidResponse() : null;
+            Message = response;
         }
 
         public void Transform()
@@ -55,7 +57,7 @@ namespace Lace.Source.Ivid.Transform
                 VinNumber = Result.Vin,
                 LicenseNumber = Result.License,
                 EngineNumber = Result.Engine,
-                Odometer = "Not Available",
+                Odometer = "Odometer Not Available",
                 CategoryDescription = Result.CategoryDescription,
             };
 
@@ -65,7 +67,7 @@ namespace Lace.Source.Ivid.Transform
             }
         }
 
-        private const string NotAvailableError = "Error - Not Available";
+        private const string NotAvailableError = "Ivid Response Error - Not Available";
 
         private string CheckPartialResults(string value)
         {

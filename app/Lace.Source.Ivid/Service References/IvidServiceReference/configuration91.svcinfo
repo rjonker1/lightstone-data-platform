@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="2yauxEUZwm7nQRYDfRhl94aT5IM=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="iu+DmAC4YroSYXg8DYXHs1JtyG4=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="HpiServiceSoap11">
       <properties>
@@ -221,10 +221,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="HpiServiceSoap11" contract="IvidServiceReference.HpiService" bindingType="basicHttpBinding" address="https://qa.ubiquitech.co.za/ivid/ws/" bindingConfiguration="HpiServiceSoap11">
+    <endpoint name="HpiServiceSoap11" contract="IvidServiceReference.HpiService" bindingType="basicHttpBinding" address="https://secure1.ubiquitech.co.za/ivid/ws/" bindingConfiguration="HpiServiceSoap11">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://qa.ubiquitech.co.za:443/ivid/ws/</serializedValue>
+          <serializedValue>https://secure1.ubiquitech.co.za:443/ivid/ws/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -1,217 +1,217 @@
 ﻿using Lace.Models.Enums;
+using Lace.Models.Ivid.Dto;
 
-namespace Lace.Models.Ivid.Dto
+namespace Lace.Models.Ivid
 {
-    public class IvidResponse : IResponseFromIvid
+    public interface IResponseFromIvid
     {
-        public VehicleSpecificInformation SpecificInformation
-        {
-            get;
-            set;
-        }
-       
-        public string StatusMessage
+         VehicleSpecificInformation SpecificInformation
         {
             get;
             set;
         }
 
-        public string Reference
+         string StatusMessage
         {
             get;
             set;
         }
 
-        public string License
+         string Reference
         {
             get;
             set;
         }
 
-       
-        public string Registration
+         string License
         {
             get;
             set;
         }
 
-      
-        public string RegistrationDate
+
+         string Registration
         {
             get;
             set;
         }
 
-      
-        public string Vin
+
+         string RegistrationDate
         {
             get;
             set;
         }
 
-      
-        public string Engine
+
+         string Vin
         {
             get;
             set;
         }
 
-      
-        public string Displacement
+
+         string Engine
         {
             get;
             set;
         }
 
-       
-        public string Tare
+
+         string Displacement
         {
             get;
             set;
         }
 
-        public string MakeCode
+
+         string Tare
         {
             get;
             set;
         }
 
-   
-        public string MakeDescription
+         string MakeCode
         {
             get;
             set;
         }
 
-        
-        public string ModelCode
+
+         string MakeDescription
         {
             get;
             set;
         }
 
-      
-        public string ModelDescription
+
+         string ModelCode
         {
             get;
             set;
         }
 
-      
-        public string ColourCode
+
+         string ModelDescription
         {
             get;
             set;
         }
 
-      
-        public string ColourDescription
+
+         string ColourCode
         {
             get;
             set;
         }
 
-      
-        public string DrivenCode
+
+         string ColourDescription
         {
             get;
             set;
         }
 
-      
-        public string DrivenDescription
+
+         string DrivenCode
         {
             get;
             set;
         }
 
-       
-        public string CategoryCode
+
+         string DrivenDescription
         {
             get;
             set;
         }
 
-       
-        public string CategoryDescription
+
+         string CategoryCode
         {
             get;
             set;
         }
 
-       
-        public string DescriptionCode
+
+         string CategoryDescription
         {
             get;
             set;
         }
 
-       
-        public string Description
+
+         string DescriptionCode
         {
             get;
             set;
         }
 
-       
-        public string EconomicSectorCode
+
+         string Description
         {
             get;
             set;
         }
 
-     
-        public string EconomicSectorDescription
+
+         string EconomicSectorCode
         {
             get;
             set;
         }
 
-       
-        public string LifeStatusCode
+
+         string EconomicSectorDescription
         {
             get;
             set;
         }
 
-       
-        public string LifeStatusDescription
+
+         string LifeStatusCode
         {
             get;
             set;
         }
 
-        public string SapMarkCode
+
+         string LifeStatusDescription
         {
             get;
             set;
         }
 
-       
-        public string SapMarkDescription
+         string SapMarkCode
         {
             get;
             set;
         }
 
-     
-        public bool HasIssues
+
+         string SapMarkDescription
         {
             get;
             set;
         }
 
-       
-        public bool HasErrors { get; set; }
 
-       
-        public string CarFullname
+         bool HasIssues
         {
             get;
             set;
         }
-        
-        public ServiceCallState ServiceProviderCallState { get; set; }
-        
+
+
+         bool HasErrors { get; set; }
+
+
+         string CarFullname
+        {
+            get;
+            set;
+        }
+
+         ServiceCallState ServiceProviderCallState { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.RgtVin.Dto
 {
-    public class RgtVinResponse
+    public class RgtVinResponse : IResponseFromRgtVin
     {
         
     }

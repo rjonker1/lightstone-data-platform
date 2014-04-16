@@ -149,7 +149,7 @@
             <element name="ApplicantName">
               <simpleType>
                 <restriction base="string">
-                  <maxLength value="50" />
+                  <maxLength value="200" />
                 </restriction>
               </simpleType>
             </element>
@@ -264,7 +264,7 @@
   </wsdl:binding>
   <wsdl:service name="HpiServiceService">
     <wsdl:port name="HpiServiceSoap11" binding="sch0:HpiServiceSoap11">
-      <soap:address location="https://qa.ubiquitech.co.za:443/ivid/ws/" />
+      <soap:address location="https://secure1.ubiquitech.co.za:443/ivid/ws/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

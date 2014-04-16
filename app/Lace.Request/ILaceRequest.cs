@@ -11,7 +11,7 @@ namespace Lace.Request
         string ContractId { get; }
         DateTime RequestDate { get; }
 
-        string LicensePlateNumber { get; }
+        //string LicensePlateNumber { get; }
         
         string EngineNo { get; }
         string VinOrChassis { get; }

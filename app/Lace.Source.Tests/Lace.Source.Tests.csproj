@@ -32,6 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,15 +54,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Ivid\MockIvidHpiStandardQueryResponseData.cs" />
     <Compile Include="Data\LicensePlateNumberIvidOnlyRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverIvidOnlyServiceRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverAllServicesRequest.cs" />
-    <Compile Include="ivid_service_must_be_handled.cs" />
+    <Compile Include="IvidTests\ivid_transform_hpi_standard_query_response_test.cs" />
+    <Compile Include="IvidTests\ivid_web_service_being_consumed_tests.cs" />
     <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

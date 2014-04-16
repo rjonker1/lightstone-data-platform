@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\RgtVinResponse.cs" />
+    <Compile Include="IResponseFromRgtVin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RgtVinResponseHandled.cs" />
   </ItemGroup>

@@ -3,7 +3,7 @@ using System;
 
 namespace Lace.Source.Tests.Data
 {
-    class LicensePlateNumberSliverAllServicesRequest : ILaceRequest
+    public class LicensePlateNumberSliverAllServicesRequest : ILaceRequest
     {
 
         public Guid UserId
@@ -87,12 +87,21 @@ namespace Lace.Source.Tests.Data
 
         public string Product
         {
-            get { return string.Empty; }
+            get
+            {
+                return "XMC167GP";
+            }
         }
 
         public string ReasonForApplication
         {
             get { return string.Empty; }
+        }
+
+
+        public string UserPassword
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

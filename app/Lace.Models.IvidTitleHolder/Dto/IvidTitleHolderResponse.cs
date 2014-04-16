@@ -3,7 +3,7 @@ using Lace.Models.Enums;
 
 namespace Lace.Models.IvidTitleHolder.Dto
 {
-    public class IvidTitleHolderResponse
+    public class IvidTitleHolderResponse : IResponseFromIvidTitleHolder
     {
         public string BankName { get; set; }
         public string AccountNumber { get; set; }
