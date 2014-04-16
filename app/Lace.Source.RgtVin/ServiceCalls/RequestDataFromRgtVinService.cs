@@ -9,7 +9,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
     {
         private ILaceRequest _request;
 
-        public void FetchDataFromService(ILaceRequest request, ILaceResponse response)
+        public void FetchDataFromService(ILaceRequest request, ILaceResponse response, ICallTheExternalWebService externalWebService)
         {
             _request = request;
             response.RgtVinResponse = new RgtVinResponse();

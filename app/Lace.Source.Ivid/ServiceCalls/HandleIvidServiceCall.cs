@@ -16,7 +16,6 @@ namespace Lace.Source.Ivid.ServiceCalls
                 return Services.Ivid;
             }
         }
-
        
         private bool _canHandle;
         public bool CanHandle(ILaceRequest request, ILaceResponse response)
@@ -30,9 +29,8 @@ namespace Lace.Source.Ivid.ServiceCalls
 
             return _canHandle;
         }
-
-       
-        public void Call(Action<IRequestDataFromService> action)
+        
+        public void Request(Action<IRequestDataFromService> action)
         {
             action(new RequestDataFromIvidService());
         }

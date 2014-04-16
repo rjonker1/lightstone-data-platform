@@ -31,7 +31,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             return _canHandle;
         }
 
-        public void Call(Action<IRequestDataFromService> action)
+        public void Request(Action<IRequestDataFromService> action)
         {
             action.Invoke(new RequestDatafromIvidTitleHolderService());
         }

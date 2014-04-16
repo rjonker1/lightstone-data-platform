@@ -30,7 +30,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             return _canHandle;
         }
 
-        public void Call(Action<IRequestDataFromService> action)
+        public void Request(Action<IRequestDataFromService> action)
         {
             action(new RequestDataFromRgtVinService());
         }

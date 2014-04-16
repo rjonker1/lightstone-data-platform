@@ -53,6 +53,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ServiceCalls\CallIvidExternalWebService.cs" />
     <Compile Include="ServiceCalls\RequestDataFromIvidService.cs" />
     <Compile Include="ServiceCalls\HandleIvidServiceCall.cs" />
     <Compile Include="IvidConsumer.cs" />

@@ -9,11 +9,13 @@ namespace Lace.Source.RgtVin
     {
         private readonly IHandleServiceCall _handleServiceCall;
         private readonly ILaceRequest _request;
+        private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public RgtVinConsumer(ILaceRequest request)
         {
             _request = request;
             _handleServiceCall = new HandleRgtVinServiceCall();
+            _externalWebServiceCall = new CallRgtVinExternalWebService();
         }
 
         public void CallRgtVinService(ILaceResponse response)
@@ -21,8 +23,8 @@ namespace Lace.Source.RgtVin
             if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
-                .Call(c =>
-                    c.FetchDataFromService(_request, response)
+                .Request(c =>
+                    c.FetchDataFromService(_request, response, _externalWebServiceCall)
                 );
             // return Helpers.ConvertFunctions.ConvertObject<RgtVinServiceResponse>(response);
         }

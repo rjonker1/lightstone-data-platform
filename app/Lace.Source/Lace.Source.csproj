@@ -42,6 +42,7 @@
     <Compile Include="Enums\Services.cs" />
     <Compile Include="Helpers\ConvertFunctions.cs" />
     <Compile Include="Helpers\XmlFunctions.cs" />
+    <Compile Include="ICallTheExternalWebService.cs" />
     <Compile Include="IHandleServiceCall.cs" />
     <Compile Include="IRequestDataFromService.cs" />
     <Compile Include="ITransform.cs" />

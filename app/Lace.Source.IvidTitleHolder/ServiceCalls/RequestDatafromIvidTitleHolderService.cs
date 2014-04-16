@@ -10,7 +10,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         private static readonly ILog Log = LogManager.GetLogger<RequestDatafromIvidTitleHolderService>();
 
         private ILaceRequest _request;
-        public void FetchDataFromService(ILaceRequest request, ILaceResponse response)
+        public void FetchDataFromService(ILaceRequest request, ILaceResponse response, ICallTheExternalWebService externalWebService)
         {
             _request = request;
 

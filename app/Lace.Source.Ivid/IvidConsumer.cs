@@ -8,11 +8,13 @@ namespace Lace.Source.Ivid
     {
         private readonly IHandleServiceCall _handleServiceCall;
         private readonly ILaceRequest _request;
+        private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public IvidConsumer(ILaceRequest request)
         {
             _request = request;
             _handleServiceCall = new HandleIvidServiceCall();
+            _externalWebServiceCall = new CallIvidExternalWebService();
         }
         
         public void CallIvidService(ILaceResponse response)
@@ -20,8 +22,8 @@ namespace Lace.Source.Ivid
             if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
-                .Call(c =>
-                    c.FetchDataFromService(_request, response));
+                .Request(c =>
+                    c.FetchDataFromService(_request, response, _externalWebServiceCall));
         }
 
     }
