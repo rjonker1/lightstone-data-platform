@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Lace.Response;
+﻿using Lace.Response;
 
 namespace Lace.Request.LicensePlateNumber.Models
 {

@@ -1,0 +1,44 @@
+﻿using Lace.EventHandlers;
+using Lace.Request.LicensePlateNumber.Chain;
+using Lace.Request.LicensePlateNumber.Models;
+using Lace.Response.ExternalServices;
+
+namespace Lace.Operations
+{
+    public class Bootstrap
+    {
+        private IBootstrap _laceBootstrap;
+        public IBootstrap LaceBootstrap
+        {
+            get
+            {
+                return _laceBootstrap;
+            }
+            set
+            {
+                _laceBootstrap = value;
+                AttachEvents();
+            }
+
+        }
+
+        private void AttachEvents()
+        {
+            _laceBootstrap.Load += OnLoading;
+            _laceBootstrap.SetHandlers += OnSettingHandlers;
+        }
+
+        private static void OnSettingHandlers(object sender, SetHandlersEventArgs e)
+        {
+            e.Handlers.Add(typeof (LicensePlateNumberRequest), r => LicensePlateNumberSourceChain.Build(r).Response);
+        }
+
+        private static void OnLoading(object sender, LoadEventArgs e)
+        {
+            foreach (var handler in e.Handlers)
+            {
+                e.LaceResponses.Add(new LaceExternalServiceResponse() { Response = handler.Value(e.Request), Request = e.Request });
+            }
+        }
+    }
+}

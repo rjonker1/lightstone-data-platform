@@ -10,17 +10,15 @@ namespace Lace.Request.LicensePlateNumber.Chain
 {
     public class LicensePlateNumberSourceChain
     {
-        //private static List<ILaceResponse> _responses;
-
         private static ILaceResponse _response;
 
         public static LicensePlateNumberResponse Build(ILaceRequest request)
         {
-            var handlers = new Dictionary<string, Action<ILaceRequest,ILaceResponse>>()
+            var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
             {
-                {"Ivid", (req,resp) => new IvidConsumer(req).CallIvidService(resp)},
-                {"IvidTitleHolder", (req,resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
-                {"RgtVin", (req,resp) => new RgtVinConsumer(req).CallRgtVinService(resp)}
+                {"Ivid", (req, resp) => new IvidConsumer(req).CallIvidService(resp)},
+                {"IvidTitleHolder", (req, resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
+                {"RgtVin", (req, resp) => new RgtVinConsumer(req).CallRgtVinService(resp)}
             };
 
             _response = new LaceResponse();
@@ -30,7 +28,7 @@ namespace Lace.Request.LicensePlateNumber.Chain
             }
 
 
-            return new LicensePlateNumberResponse() { Response = _response };
+            return new LicensePlateNumberResponse() {Response = _response};
         }
     }
 }

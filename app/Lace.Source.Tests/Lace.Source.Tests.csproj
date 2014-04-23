@@ -54,6 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Initialization\MockLaceBuilder.cs" />
+    <Compile Include="Data\Initialization\MockLaceHandler.cs" />
+    <Compile Include="Data\Initialization\MockLaceInitializer.cs" />
     <Compile Include="Data\Ivid\MockCallingIvidExternalWebService.cs" />
     <Compile Include="Data\Ivid\MockIvidHpiStandardQueryResponseData.cs" />
     <Compile Include="Data\Ivid\MockIvidLicensePlateNumberRequestData.cs" />
@@ -63,7 +66,7 @@
     <Compile Include="IvidTests\ivid_request_data_from_ivid_service_tests.cs" />
     <Compile Include="IvidTests\ivid_transform_hpi_standard_query_response_test.cs" />
     <Compile Include="IvidTests\ivid_web_service_being_consumed_tests.cs" />
-    <None Include="when_inititializing_lace_source_chain_for_licensePlate_number_search.cs.old" />
+    <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

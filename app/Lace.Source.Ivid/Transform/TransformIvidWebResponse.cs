@@ -67,7 +67,7 @@ namespace Lace.Source.Ivid.Transform
             }
         }
 
-        private const string NotAvailableError = "Ivid Response Error - Not Available";
+        private const string NotAvailableError = "Error - Not Available";
 
         private string CheckPartialResults(string value)
         {

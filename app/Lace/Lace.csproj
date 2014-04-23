@@ -39,7 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\LaceBuilder.cs" />
+    <Compile Include="EventHandlers\SetHandlersEventArgs.cs" />
+    <Compile Include="EventHandlers\LoadEventArgs.cs" />
+    <Compile Include="Handler\LaceHandler.cs" />
+    <Compile Include="IBuild.cs" />
+    <Compile Include="IHandle.cs" />
     <Compile Include="Initialize.cs" />
+    <Compile Include="IBootstrap.cs" />
+    <Compile Include="Operations\LaceOperation.cs" />
+    <None Include="Operations\Bootstrap.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +69,7 @@
       <Name>Lace.Response</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

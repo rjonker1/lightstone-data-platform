@@ -51,7 +51,6 @@ namespace Lace.Source.Ivid.ServiceCalls
             {
                 Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
                 IvidResponseFailed(response);
-                //throw;
             }
         }
 
