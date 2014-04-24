@@ -57,7 +57,7 @@ namespace Lace.Source.Tests.Data
 
         public string UserName
         {
-            get { return "pennyl@lightstone.co.za"; }
+            get { return "rudi@customapp.co.za"; }
         }
 
         public string EngineNo

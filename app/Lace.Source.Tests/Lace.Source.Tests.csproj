@@ -54,14 +54,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Initialization\LicensePlateNumber\MockLicensePlateNumberResponse.cs" />
+    <Compile Include="Data\Initialization\LicensePlateNumber\MockLicensePlateNumberSourceChain.cs" />
     <Compile Include="Data\Initialization\MockLaceInitializer.cs" />
     <Compile Include="Data\Initialization\MockLaceLoader.cs" />
     <Compile Include="Data\Ivid\MockCallingIvidExternalWebService.cs" />
+    <Compile Include="Data\Ivid\MockHandleIvidServiceCall.cs" />
+    <Compile Include="Data\Ivid\MockIvidConsumer.cs" />
     <Compile Include="Data\Ivid\MockIvidHpiStandardQueryResponseData.cs" />
     <Compile Include="Data\Ivid\MockIvidLicensePlateNumberRequestData.cs" />
+    <Compile Include="Data\Ivid\MockRequestDataFromIvidService.cs" />
     <Compile Include="Data\LicensePlateNumberIvidOnlyRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverIvidOnlyServiceRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverAllServicesRequest.cs" />
+    <Compile Include="initialize_lace_handlers_for_request_test.cs" />
     <Compile Include="IvidTests\ivid_request_data_from_ivid_service_tests.cs" />
     <Compile Include="IvidTests\ivid_transform_hpi_standard_query_response_test.cs" />
     <Compile Include="IvidTests\ivid_web_service_being_consumed_tests.cs" />
@@ -83,6 +89,10 @@
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
       <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
       <Name>Lace.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request.LicensePlateNumber\Lace.Request.LicensePlateNumber.csproj">
+      <Project>{bc152cec-f6c7-41f0-9e97-eaf6c178fe6f}</Project>
+      <Name>Lace.Request.LicensePlateNumber</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>

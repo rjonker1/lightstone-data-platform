@@ -22,9 +22,9 @@ namespace Lace
         {
             _request = request;
 
-            InitializeHandlers();
-
             Set();
+
+            InitializeHandlers();
 
             LoadSources();
         }

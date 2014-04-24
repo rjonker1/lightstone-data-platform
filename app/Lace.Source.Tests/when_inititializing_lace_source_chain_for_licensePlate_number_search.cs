@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lace.EventHandlers;
 using Lace.Operations;
 using Lace.Request;
 using Lace.Response;
-using Lace.Response.ExternalServices;
-using Lace.Source.Tests.Data;
 using Lace.Source.Tests.Data.Initialization;
 using Xunit;
 using Xunit.Extensions;
@@ -49,7 +44,7 @@ namespace Lace.Source.Tests
             initialize.LoadTheExternalSourceHandlers(_request, _handlers);
             initialize.LaceResponses.ShouldNotBeNull();
 
-            initialize.LaceResponses.Count.ShouldEqual(3);
+            initialize.LaceResponses.Count.ShouldEqual(1);
 
 
             initialize.LaceResponses.First().Response.IvidResponseHandled.Handled.ShouldBeTrue();

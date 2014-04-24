@@ -12,6 +12,12 @@ namespace Lace.Loader
     {
         public List<LaceExternalServiceResponse> LaceResponses { get; private set; }
 
+        public LaceLoader()
+        {
+            LaceResponses = new List<LaceExternalServiceResponse>();
+        }
+
+
         public void HandleRequest(ILaceRequest request,
             Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
