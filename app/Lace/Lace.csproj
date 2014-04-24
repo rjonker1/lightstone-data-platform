@@ -39,16 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\LaceBuilder.cs" />
     <Compile Include="EventHandlers\SetHandlersEventArgs.cs" />
     <Compile Include="EventHandlers\LoadEventArgs.cs" />
-    <Compile Include="Handler\LaceHandler.cs" />
-    <Compile Include="IBuild.cs" />
-    <Compile Include="IHandle.cs" />
+    <Compile Include="ILoadRequestSources.cs" />
+    <Compile Include="Loader\LaceLoader.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="IBootstrap.cs" />
     <Compile Include="Operations\LaceOperation.cs" />
-    <None Include="Operations\Bootstrap.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

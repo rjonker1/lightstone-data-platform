@@ -6,14 +6,19 @@ using Lace.Response.ExternalServices;
 
 namespace Lace.Source.Tests.Data.Initialization
 {
-    public class MockLaceHandler : IHandle
+    public class MockLaceLoader : ILoadRequestSources
     {
         public List<LaceExternalServiceResponse> LaceResponses { get; private set; }
 
         public void HandleRequest(ILaceRequest request, Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
-           // throw new NotImplementedException();
-            LaceResponses= new List<LaceExternalServiceResponse>();
+            // throw new NotImplementedException();
+            LaceResponses = new List<LaceExternalServiceResponse>();
+        }
+
+        public void BuildLicensePlateNumberRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

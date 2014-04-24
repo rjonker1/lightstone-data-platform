@@ -20,8 +20,7 @@ namespace Lace.Source.Tests
 
 
         private MockLaceInitializer initialize;
-        private MockLaceBuilder builder;
-        private MockLaceHandler handler;
+        private MockLaceLoader loader;
 
         private LaceOperation bootstrap;
 
@@ -32,15 +31,12 @@ namespace Lace.Source.Tests
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
             initialize = new MockLaceInitializer();
-
-			builder = new MockLaceBuilder();
-			handler = new MockLaceHandler();
-         
+			loader = new MockLaceLoader();
         }
 		
         public override void Observe()
         {
-            bootstrap = new LaceOperation(handler, builder)
+            bootstrap = new LaceOperation(loader)
             {
                 LaceBootstrap = initialize
             };

@@ -4,13 +4,12 @@ namespace Lace.Operations
 {
     public class LaceOperation
     {
-        private readonly IHandle _laceHandler;
-        private readonly IBuild _laceBuilder;
+       
+        private readonly ILoadRequestSources _laceLoader;
 
-        public LaceOperation(IHandle handler, IBuild builder)
+        public LaceOperation(ILoadRequestSources laceLoader)
         {
-            _laceHandler = handler;
-            _laceBuilder = builder;
+            _laceLoader = laceLoader;
         }
 
         private IBootstrap _laceBootstrap;
@@ -36,13 +35,13 @@ namespace Lace.Operations
 
         private void OnSettingHandlers(object sender, SetHandlersEventArgs e)
         {
-           _laceBuilder.BuildLicensePlateNumberRequest(e.Handlers);
+            _laceLoader.BuildLicensePlateNumberRequest(e.Handlers);
         }
 
         private void OnLoading(object sender, LoadEventArgs e)
         {
-            _laceHandler.HandleRequest(e.Request, e.Handlers);
-            e.LaceResponses = _laceHandler.LaceResponses;
+            _laceLoader.HandleRequest(e.Request, e.Handlers);
+            e.LaceResponses = _laceLoader.LaceResponses;
         }
     }
 }

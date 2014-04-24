@@ -54,9 +54,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Initialization\MockLaceBuilder.cs" />
-    <Compile Include="Data\Initialization\MockLaceHandler.cs" />
     <Compile Include="Data\Initialization\MockLaceInitializer.cs" />
+    <Compile Include="Data\Initialization\MockLaceLoader.cs" />
     <Compile Include="Data\Ivid\MockCallingIvidExternalWebService.cs" />
     <Compile Include="Data\Ivid\MockIvidHpiStandardQueryResponseData.cs" />
     <Compile Include="Data\Ivid\MockIvidLicensePlateNumberRequestData.cs" />

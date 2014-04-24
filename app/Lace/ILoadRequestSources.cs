@@ -6,9 +6,10 @@ using Lace.Response.ExternalServices;
 
 namespace Lace
 {
-    public interface IHandle
+    public interface ILoadRequestSources
     {
         List<LaceExternalServiceResponse> LaceResponses { get; }
+        void BuildLicensePlateNumberRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers);
         void HandleRequest(ILaceRequest request, Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers);
     }
 }
