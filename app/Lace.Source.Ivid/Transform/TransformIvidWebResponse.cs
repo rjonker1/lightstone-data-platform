@@ -3,7 +3,7 @@ using Lace.Source.Ivid.IvidServiceReference;
 
 namespace Lace.Source.Ivid.Transform
 {
-    public class TransformIvidWebResponse : ITransform // ITransformToLaceType<HpiStandardQueryResponse,IvidResponse>
+    public class TransformIvidWebResponse : ITransform
     {
         public HpiStandardQueryResponse Message { get; private set; }
         public IvidResponse Result { get; private set; }

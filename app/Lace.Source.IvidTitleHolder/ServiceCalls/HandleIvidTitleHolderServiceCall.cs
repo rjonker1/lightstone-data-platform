@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
@@ -33,7 +32,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 
         public void Request(Action<IRequestDataFromService> action)
         {
-            action.Invoke(new RequestDatafromIvidTitleHolderService());
+            action(new RequestDatafromIvidTitleHolderService());
         }
 
         private static void NotHandledResponse(ILaceResponse response)

@@ -12,6 +12,12 @@ namespace Lace.Source.Tests.Data.Initialization
     {
         public List<LaceExternalServiceResponse> LaceResponses { get; private set; }
 
+
+        public MockLaceLoader()
+        {
+            LaceResponses = new List<LaceExternalServiceResponse>();
+        }
+
         public void HandleRequest(ILaceRequest request, Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
             foreach (var handler in handlers)

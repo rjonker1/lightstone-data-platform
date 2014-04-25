@@ -34,7 +34,10 @@
       <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,9 +47,17 @@
   <ItemGroup>
     <Compile Include="IvidTitleHolderConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\IvidTitleHolderServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ServiceCalls\CallIvidTitleHolderExternalWebService.cs" />
     <Compile Include="ServiceCalls\HandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="ServiceCalls\RequestDatafromIvidTitleHolderService.cs" />
+    <Compile Include="ServiceConfig\ConfigureIvidTitleHolderRequestMessage.cs" />
+    <Compile Include="ServiceConfig\ConfigureIvidTitleHolderWebService.cs" />
+    <Compile Include="Transform\TransformIvidTitleHolderWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
@@ -70,9 +81,40 @@
       <Name>Lace.Source</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ServiceConfig\" />
-    <Folder Include="Transform\" />
+    <None Include="App.config" />
+    <None Include="Service References\IvidTitleHolderServiceReference\ividTitleholderService.wsdl" />
+    <None Include="Service References\IvidTitleHolderServiceReference\Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference.RegistrationInformationQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\IvidTitleHolderServiceReference\Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference.RegistrationInformationQueryResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\IvidTitleHolderServiceReference\Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference.TitleholderQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\IvidTitleHolderServiceReference\Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference.TitleholderQueryResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\IvidTitleHolderServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\IvidTitleHolderServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\IvidTitleHolderServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\IvidTitleHolderServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

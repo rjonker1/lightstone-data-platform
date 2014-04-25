@@ -13,7 +13,7 @@ namespace Lace.Source.Ivid.ServiceCalls
 {
     public class CallIvidExternalWebService : ICallTheExternalWebService
     {
-        private static readonly ILog Log = LogManager.GetLogger<CallIvidExternalWebService>();
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private HpiStandardQueryResponse _ividResponse;
 
         public void CallTheExternalWebService(ILaceRequest request,ILaceResponse response)
@@ -41,7 +41,9 @@ namespace Lace.Source.Ivid.ServiceCalls
                         .IvidServiceProxy
                         .HpiStandardQuery(ividRequest);
 
-                    if (_ividResponse == null || !_ividResponse.partialResponse)
+                    ividWebService.CloseWebService();
+
+                    if (_ividResponse == null)
                         Log.Error("Response from Ivid Web Service is null or does not exist.");
 
                     TransformWebResponse(response);
@@ -56,12 +58,12 @@ namespace Lace.Source.Ivid.ServiceCalls
 
         private static void LogServiceRequest(HpiStandardQueryRequest request)
         {
-            Log.InfoFormat("Ivid Request sent to Ivid Web Service: {0}", Helpers.XmlFunctions.ObjectToXml(request));
+            Log.InfoFormat("Ivid Request sent to Ivid Web Service: {0}", Helpers.JsonFunctions.ObjectToJson(request));
         }
 
         private void LogServiceResponse()
         {
-            Log.InfoFormat("Response Received from Ivid Web Service {0}", Helpers.XmlFunctions.ObjectToXml(_ividResponse));
+            Log.InfoFormat("Response Received from Ivid Web Service {0}", Helpers.JsonFunctions.ObjectToJson(_ividResponse));
         }
 
         private static void IvidResponseFailed(ILaceResponse response)

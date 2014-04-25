@@ -67,7 +67,7 @@
     <Compile Include="Data\LicensePlateNumberIvidOnlyRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverIvidOnlyServiceRequest.cs" />
     <Compile Include="Data\LicensePlateNumberSliverAllServicesRequest.cs" />
-    <Compile Include="initialize_lace_handlers_for_request_test.cs" />
+    <Compile Include="initialize_lace_handlers_for_ivid_request_functional_test.cs" />
     <Compile Include="IvidTests\ivid_request_data_from_ivid_service_tests.cs" />
     <Compile Include="IvidTests\ivid_transform_hpi_standard_query_response_test.cs" />
     <Compile Include="IvidTests\ivid_web_service_being_consumed_tests.cs" />
@@ -82,9 +82,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
+      <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
+      <Name>Lace.Models.IvidTitleHolder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
       <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
       <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
+      <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
+      <Name>Lace.Models.RgtVin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
       <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
@@ -126,6 +134,9 @@
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
       <Name>Lace %28Lace\Lace%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

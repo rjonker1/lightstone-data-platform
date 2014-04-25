@@ -1,12 +1,15 @@
 ﻿using System;
-
 namespace Lace.Request
 {
     public interface ILaceRequest
     {
         Guid UserId { get; }
         string UserName { get; }
-        string UserPassword { get; }
+       // string UserPassword { get; }
+
+        string UserEmail { get; }
+        string UserPhone { get; }
+
         string CompanyId { get; }
         string ContractId { get; }
         DateTime RequestDate { get; }
@@ -20,6 +23,8 @@ namespace Lace.Request
         string LicenceNo { get; }
         string Product { get; }
         string ReasonForApplication { get; }
+
+        string Vin { get; }
 
         string[] Sources { get; }
     }

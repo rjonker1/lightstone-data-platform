@@ -1,17 +1,86 @@
-﻿using Lace.Request;
+﻿using System;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using Common.Logging;
+using Lace.Models.IvidTitleHolder;
+using Lace.Request;
+using Lace.Response;
+using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
+using Lace.Source.IvidTitleHolder.ServiceConfig;
+using Lace.Source.IvidTitleHolder.Transform;
 
 namespace Lace.Source.IvidTitleHolder.ServiceCalls
 {
     public class CallIvidTitleHolderExternalWebService : ICallTheExternalWebService
     {
-        public void CallTheExternalWebService(ILaceRequest request, Response.ILaceResponse response)
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private TitleholderQueryResponse _ividTitleHolderResponse;
+
+
+        public void CallTheExternalWebService(ILaceRequest request, ILaceResponse response)
         {
-            // throw new System.NotImplementedException();
+            try
+            {
+                Log.Info("Calling Ivid Title Holder Web Service");
+
+                var ividTitleHolderWebService = new ConfigureIvidTitleHolderWebService();
+
+                ividTitleHolderWebService.ConfigureIvidTitleHolderServiceCredentials();
+                ividTitleHolderWebService.ConfigureIvidTitleHolderWebServiceRequestMessageProperty();
+
+                using (var scope = new OperationContextScope(ividTitleHolderWebService.IvidTitleHolderProxy.InnerChannel))
+                {
+                    OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
+                        ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
+
+                    var ividTitleHolderRequest = new ConfigureIvidTitleHolderRequestMessage(request)
+                        .TitleholderQueryRequest;
+
+                    _ividTitleHolderResponse = ividTitleHolderWebService
+                        .IvidTitleHolderProxy
+                        .TitleholderQuery(ividTitleHolderRequest);
+
+                    ividTitleHolderWebService
+                        .CloseWebService();
+
+                   
+                    TransformWebResponse(response);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Error calling Ivid Title Holder Web Service {0}", ex.Message);
+                IvidTitleHolderResponseFailed(response);
+                throw;
+            }
         }
 
-        public void TransformWebResponse(Response.ILaceResponse response)
+        private static void IvidTitleHolderResponseFailed(ILaceResponse response)
         {
-            // throw new System.NotImplementedException();
+            response.IvidTitleHolderResponse = null;
+            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
+            response.IvidResponseHandled.HasBeenHandled();
+        }
+        
+        private void LogServiceResponse()
+        {
+            Log.InfoFormat("Response Received from Ivid Title Holder Web Service {0}", Helpers.JsonFunctions.ObjectToJson(_ividTitleHolderResponse));
+        }
+
+        public void TransformWebResponse(ILaceResponse response)
+        {
+            var transformer = new TransformIvidTitleHolderWebResponse(_ividTitleHolderResponse);
+
+            if (transformer.Continue)
+            {
+                LogServiceResponse();
+                transformer.Transform();
+            }
+
+            response.IvidTitleHolderResponse = transformer.Result;
+            response.IvidResponseHandled = new IvidTitleHolderResponseHandled();
+            response.IvidResponseHandled.HasBeenHandled();
         }
     }
 }

@@ -9,7 +9,9 @@ namespace Lace.Source.Ivid.ServiceConfig
     public class ConfigureIvidWebService
     {
         private readonly string _userName = System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserName"];
-        private readonly string _userPassowrd = System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserPassword"];
+
+        private readonly string _userPassowrd =
+            System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserPassword"];
 
         public HpiServiceClient IvidServiceProxy { get; private set; }
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
@@ -18,7 +20,7 @@ namespace Lace.Source.Ivid.ServiceConfig
         {
             IvidServiceProxy = new HpiServiceClient();
 
-            if(IvidServiceProxy == null || IvidServiceProxy.ClientCredentials == null)
+            if (IvidServiceProxy == null || IvidServiceProxy.ClientCredentials == null)
                 throw new Exception("Cannot configure IVID Web Service");
 
             IvidServiceProxy.ClientCredentials.UserName.UserName = _userName;
@@ -32,6 +34,13 @@ namespace Lace.Source.Ivid.ServiceConfig
                 .Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}",
                     Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", _userName, _userPassowrd))));
 
+        }
+
+        public void CloseWebService()
+        {
+            if (IvidServiceProxy == null) return;
+
+            IvidServiceProxy.Close();
         }
 
 

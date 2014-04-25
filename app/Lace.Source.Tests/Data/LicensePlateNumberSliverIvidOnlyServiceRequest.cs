@@ -98,10 +98,24 @@ namespace Lace.Source.Tests.Data
             get { return string.Empty; }
         }
 
-
-
-
+        
         public string UserPassword
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+
+        public string UserEmail
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string UserPhone
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Vin
         {
             get { throw new NotImplementedException(); }
         }
