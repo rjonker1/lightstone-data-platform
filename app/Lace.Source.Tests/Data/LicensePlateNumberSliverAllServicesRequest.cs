@@ -97,27 +97,47 @@ namespace Lace.Source.Tests.Data
         {
             get { return string.Empty; }
         }
-
-
-        public string UserPassword
-        {
-            get { throw new NotImplementedException(); }
-        }
-
+        
 
         public string UserEmail
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return "pennyl@lightstone.co.za";
+            }
         }
 
         public string UserPhone
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return null;
+            }
         }
 
         public string Vin
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return "AHT31UNK408007735";
+            }
+        }
+
+
+        public string UserFirstName
+        {
+            get
+            {
+                return "Penny";
+            }
+        }
+
+        public string UserLastName
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

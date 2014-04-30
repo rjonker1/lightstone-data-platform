@@ -44,9 +44,11 @@ namespace Lace.Source.Tests
 
 			initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
 
-			initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldEqual(true);
+			initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
 
-            //initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
+            initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
+
+            initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
 
             //initialize.LaceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
         }

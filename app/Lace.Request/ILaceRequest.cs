@@ -5,6 +5,8 @@ namespace Lace.Request
     {
         Guid UserId { get; }
         string UserName { get; }
+        string UserFirstName { get; }
+        string UserLastName { get; }
        // string UserPassword { get; }
 
         string UserEmail { get; }

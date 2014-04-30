@@ -18,8 +18,8 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
         {
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
             {
-                {"Ivid", (req, resp) => new MockIvidConsumer(req).CallIvidService(resp)} //,
-                //{"IvidTitleHolder", (req, resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
+                {"Ivid", (req, resp) => new MockIvidConsumer(req).CallIvidService(resp)},
+                {"IvidTitleHolder", (req, resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)} //,
                 //{"RgtVin", (req, resp) => new RgtVinConsumer(req).CallRgtVinService(resp)}
             };
 

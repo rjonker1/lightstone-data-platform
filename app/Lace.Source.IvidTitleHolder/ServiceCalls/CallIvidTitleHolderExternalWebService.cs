@@ -60,7 +60,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         {
             response.IvidTitleHolderResponse = null;
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
-            response.IvidResponseHandled.HasBeenHandled();
+            response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
         
         private void LogServiceResponse()
@@ -79,8 +79,8 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             }
 
             response.IvidTitleHolderResponse = transformer.Result;
-            response.IvidResponseHandled = new IvidTitleHolderResponseHandled();
-            response.IvidResponseHandled.HasBeenHandled();
+            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
+            response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
     }
 }

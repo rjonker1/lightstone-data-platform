@@ -1,10 +1,7 @@
-﻿using Common.Logging;
-
-namespace Lace.Events
+﻿namespace Lace.Events
 {
     public class LaceEvents
     {
-       // private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         public static void Raise(ILaceChainEvent laceEvent)
         {

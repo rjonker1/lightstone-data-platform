@@ -21,8 +21,8 @@ namespace Lace.Source.IvidTitleHolder.ServiceConfig
                 requesterDetails = new RequesterDetailsElement()
                 {
                     requesterEmail = _request.UserEmail ?? string.Empty,
-                    requesterName = _request.UserName ?? string.Empty,
-                    requesterPhone = _request.UserName ?? string.Empty
+                    requesterName = _request.UserFirstName ?? string.Empty,
+                    requesterPhone = _request.UserPhone ?? string.Empty
                 },
 
                 vin = _request.Vin ?? string.Empty

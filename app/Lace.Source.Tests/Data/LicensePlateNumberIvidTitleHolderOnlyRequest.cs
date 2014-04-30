@@ -3,7 +3,7 @@ using Lace.Request;
 
 namespace Lace.Source.Tests.Data
 {
-    class LicensePlateNumberIvidOnlyRequest : ILaceRequest
+    public class LicensePlateNumberIvidTitleHolderOnlyRequest : ILaceRequest
     {
 
         public Guid UserId
@@ -38,13 +38,13 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        
+
 
         public string[] Sources
         {
             get
             {
-                return new string[] { "Ivid" };
+                return new string[] {"IvidTitleHolder"};
             }
         }
 
@@ -94,23 +94,35 @@ namespace Lace.Source.Tests.Data
 
         public string UserEmail
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return "pennyl@lightstone.co.za";
+            }
         }
 
         public string UserPhone
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return null;
+            }
         }
 
         public string Vin
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return "AHT31UNK408007735";
+            }
         }
 
 
         public string UserFirstName
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return "Penny";
+            }
         }
 
         public string UserLastName

@@ -98,12 +98,6 @@ namespace Lace.Source.Tests.Data
             get { return string.Empty; }
         }
 
-        
-        public string UserPassword
-        {
-            get { throw new NotImplementedException(); }
-        }
-
 
         public string UserEmail
         {
@@ -116,6 +110,17 @@ namespace Lace.Source.Tests.Data
         }
 
         public string Vin
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+
+        public string UserFirstName
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string UserLastName
         {
             get { throw new NotImplementedException(); }
         }
