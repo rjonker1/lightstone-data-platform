@@ -1,9 +1,10 @@
 ﻿using Lace.Models;
+using Lace.Models.Audatex;
 using Lace.Models.Ivid;
 using Lace.Models.IvidTitleHolder;
-using Lace.Models.IvidTitleHolder.Dto;
+using Lace.Models.Lightstone;
+using Lace.Models.Rgt;
 using Lace.Models.RgtVin;
-using Lace.Models.RgtVin.Dto;
 
 namespace Lace.Response
 {
@@ -17,5 +18,14 @@ namespace Lace.Response
 
         public IResponseFromRgtVin RgtVinResponse { get; set; }
         public IResponseHandled RgtVinResponseHandled { get; set; }
+
+        public IResponseFromAudatex AudatexResponse { get; set; }
+        public IResponseHandled AudatexResponseHandled { get; set; }
+
+        public IResponseFromRgt RgtResponse { get; set; }
+        public IResponseHandled RgtResponseHandled { get; set; }
+
+        public IResponseFromLightstone LightstoneResponse { get; set; }
+        public IResponseHandled LighResponseHandled { get; set; }
     }
 }

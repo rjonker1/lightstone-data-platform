@@ -4,6 +4,7 @@
     {
         Ivid = 1,
         IvidTitleHolder = 2,
-        RgtVin = 3
+        RgtVin = 3,
+        Audatex = 4
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{957BD4B9-8F6B-49E5-A2A0-73CF1FF0C3F0}</ProjectGuid>
+    <ProjectGuid>{00668419-21AD-4310-B511-C2A1C6D9DCDF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Response</RootNamespace>
-    <AssemblyName>Lace.Response</AssemblyName>
+    <RootNamespace>Lace.Models.Lightstone</RootNamespace>
+    <AssemblyName>Lace.Models.Lightstone</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,35 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILaceResponse.cs" />
-    <Compile Include="LaceResponse.cs" />
+    <Compile Include="Dto\RgtVinResponse.cs" />
+    <Compile Include="IResponseFromLightstone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LightsoneResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
-      <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
-      <Name>Lace.Models.Audatex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
-      <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
-      <Name>Lace.Models.IvidTitleHolder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
-      <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
-      <Name>Lace.Models.Ivid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
-      <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
-      <Name>Lace.Models.Lightstone</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
-      <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
-      <Name>Lace.Models.RgtVin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Rgt\Lace.Models.Rgt.csproj">
-      <Project>{99c72578-05a3-4f67-87f6-280118c4c791}</Project>
-      <Name>Lace.Models.Rgt</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
       <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
       <Name>Lace.Models</Name>

@@ -4,13 +4,15 @@ namespace Lace.Source.RgtVin.ServiceConfig
 {
     public class ConfigureRgtVinWebService
     {
-        public wsVinCheckSoapClient RgtVinServiceProxy { get; private set; }
-
-        public ConfigureRgtVinWebService()
+        public wsVinCheckSoapClient RgtVinServiceProxy
         {
-            RgtVinServiceProxy = new wsVinCheckSoapClient();
+            get
+            {
+                return new wsVinCheckSoapClient();
+            }
         }
-        
+
+
         public void CloseWebService()
         {
             if(RgtVinServiceProxy == null)return;
