@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Lace.Request;
 using Lace.Response;
-using Lace.Source.Ivid;
-using Lace.Source.IvidTitleHolder;
-using Lace.Source.RgtVin;
 using Lace.Source.Tests.Data.Ivid;
+using Lace.Source.Tests.Data.IvidTitleHolder;
+using Lace.Source.Tests.Data.RgtVin;
 
 namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
 {
@@ -19,8 +17,11 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
             {
                 {"Ivid", (req, resp) => new MockIvidConsumer(req).CallIvidService(resp)},
-                {"IvidTitleHolder", (req, resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)} //,
-                //{"RgtVin", (req, resp) => new RgtVinConsumer(req).CallRgtVinService(resp)}
+                {
+                    "IvidTitleHolder",
+                    (req, resp) => new MockIvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)
+                },
+                {"RgtVin", (req, resp) => new MockRgtVinConsumer(req).CallRgtVinService(resp)}
             };
 
             _response = new LaceResponse();
@@ -30,17 +31,8 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
             }
 
 
-            return new MockLicensePlateNumberResponse() { Response = _response };
+            return new MockLicensePlateNumberResponse() {Response = _response};
         }
     }
-    
-    public class MockIvidTitleHolderConsumer
-    {
-        
-    }
 
-    public class MockRgtVinConsumer
-    {
-        
-    }
 }

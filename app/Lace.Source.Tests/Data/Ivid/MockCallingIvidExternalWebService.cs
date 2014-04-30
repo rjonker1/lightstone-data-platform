@@ -1,5 +1,4 @@
-﻿using System;
-using Lace.Models.Ivid;
+﻿using Lace.Models.Ivid;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid.IvidServiceReference;

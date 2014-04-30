@@ -124,5 +124,11 @@ namespace Lace.Source.Tests.Data
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public string SecurityCode
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

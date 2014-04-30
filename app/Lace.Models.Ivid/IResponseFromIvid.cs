@@ -5,213 +5,213 @@ namespace Lace.Models.Ivid
 {
     public interface IResponseFromIvid
     {
-         VehicleSpecificInformation SpecificInformation
+        VehicleSpecificInformation SpecificInformation
         {
             get;
             set;
         }
 
-         string StatusMessage
+        string StatusMessage
         {
             get;
             set;
         }
 
-         string Reference
+        string Reference
         {
             get;
             set;
         }
 
-         string License
-        {
-            get;
-            set;
-        }
-
-
-         string Registration
+        string License
         {
             get;
             set;
         }
 
 
-         string RegistrationDate
+        string Registration
         {
             get;
             set;
         }
 
 
-         string Vin
+        string RegistrationDate
         {
             get;
             set;
         }
 
 
-         string Engine
+        string Vin
         {
             get;
             set;
         }
 
 
-         string Displacement
+        string Engine
         {
             get;
             set;
         }
 
 
-         string Tare
-        {
-            get;
-            set;
-        }
-
-         string MakeCode
+        string Displacement
         {
             get;
             set;
         }
 
 
-         string MakeDescription
+        string Tare
+        {
+            get;
+            set;
+        }
+
+        string MakeCode
         {
             get;
             set;
         }
 
 
-         string ModelCode
+        string MakeDescription
         {
             get;
             set;
         }
 
 
-         string ModelDescription
+        string ModelCode
         {
             get;
             set;
         }
 
 
-         string ColourCode
+        string ModelDescription
         {
             get;
             set;
         }
 
 
-         string ColourDescription
+        string ColourCode
         {
             get;
             set;
         }
 
 
-         string DrivenCode
+        string ColourDescription
         {
             get;
             set;
         }
 
 
-         string DrivenDescription
+        string DrivenCode
         {
             get;
             set;
         }
 
 
-         string CategoryCode
+        string DrivenDescription
         {
             get;
             set;
         }
 
 
-         string CategoryDescription
+        string CategoryCode
         {
             get;
             set;
         }
 
 
-         string DescriptionCode
+        string CategoryDescription
         {
             get;
             set;
         }
 
 
-         string Description
+        string DescriptionCode
         {
             get;
             set;
         }
 
 
-         string EconomicSectorCode
+        string Description
         {
             get;
             set;
         }
 
 
-         string EconomicSectorDescription
+        string EconomicSectorCode
         {
             get;
             set;
         }
 
 
-         string LifeStatusCode
+        string EconomicSectorDescription
         {
             get;
             set;
         }
 
 
-         string LifeStatusDescription
-        {
-            get;
-            set;
-        }
-
-         string SapMarkCode
+        string LifeStatusCode
         {
             get;
             set;
         }
 
 
-         string SapMarkDescription
+        string LifeStatusDescription
+        {
+            get;
+            set;
+        }
+
+        string SapMarkCode
         {
             get;
             set;
         }
 
 
-         bool HasIssues
+        string SapMarkDescription
         {
             get;
             set;
         }
 
 
-         bool HasErrors { get; set; }
-
-
-         string CarFullname
+        bool HasIssues
         {
             get;
             set;
         }
 
-         ServiceCallState ServiceProviderCallState { get; set; }
+
+        bool HasErrors { get; set; }
+
+
+        string CarFullname
+        {
+            get;
+            set;
+        }
+
+        ServiceCallState ServiceProviderCallState { get; set; }
     }
 }

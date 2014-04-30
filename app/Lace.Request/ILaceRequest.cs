@@ -7,7 +7,6 @@ namespace Lace.Request
         string UserName { get; }
         string UserFirstName { get; }
         string UserLastName { get; }
-       // string UserPassword { get; }
 
         string UserEmail { get; }
         string UserPhone { get; }
@@ -15,8 +14,6 @@ namespace Lace.Request
         string CompanyId { get; }
         string ContractId { get; }
         DateTime RequestDate { get; }
-
-        //string LicensePlateNumber { get; }
         
         string EngineNo { get; }
         string VinOrChassis { get; }
@@ -27,6 +24,8 @@ namespace Lace.Request
         string ReasonForApplication { get; }
 
         string Vin { get; }
+
+        string SecurityCode { get; }
 
         string[] Sources { get; }
     }

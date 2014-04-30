@@ -1,21 +1,19 @@
-﻿using Lace.Models.RgtVin;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Response;
-using Lace.Source.RgtVin.ServiceCalls;
 
-namespace Lace.Source.RgtVin
+namespace Lace.Source.Tests.Data.RgtVin
 {
-    public class RgtVinConsumer
+    public class MockRgtVinConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
         private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
-        public RgtVinConsumer(ILaceRequest request)
+        public MockRgtVinConsumer(ILaceRequest request)
         {
             _request = request;
-            _handleServiceCall = new HandleRgtVinServiceCall();
-            _externalWebServiceCall = new CallRgtVinExternalWebService();
+            _handleServiceCall = new MockHandleRgtVinServiceCall();
+            _externalWebServiceCall = new MockCallingRgtVinExternalWebService();
         }
 
         public void CallRgtVinService(ILaceResponse response)

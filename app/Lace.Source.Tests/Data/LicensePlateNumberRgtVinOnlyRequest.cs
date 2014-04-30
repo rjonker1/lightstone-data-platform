@@ -1,9 +1,9 @@
-﻿using Lace.Request;
-using System;
+﻿using System;
+using Lace.Request;
 
 namespace Lace.Source.Tests.Data
 {
-    public class LicensePlateNumberSliverAllServicesRequest : ILaceRequest
+    public class LicensePlateNumberRgtVinOnlyRequest : ILaceRequest
     {
 
         public Guid UserId
@@ -38,19 +38,13 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public string LicensePlateNumber
-        {
-            get
-            {
-                return "XMC167GP";
-            }
-        }
+
 
         public string[] Sources
         {
             get
             {
-                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin" };
+                return new string[] { "RgtVin" };
             }
         }
 
@@ -82,22 +76,21 @@ namespace Lace.Source.Tests.Data
 
         public string LicenceNo
         {
-            get { return string.Empty; }
-        }
-
-        public string Product
-        {
             get
             {
                 return "XMC167GP";
             }
         }
 
+        public string Product
+        {
+            get { return string.Empty; }
+        }
+
         public string ReasonForApplication
         {
             get { return string.Empty; }
         }
-        
 
         public string UserEmail
         {
@@ -119,7 +112,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return "AHT31UNK408007735";
+                return "SB1KV58E40F039277";
             }
         }
 
@@ -134,10 +127,7 @@ namespace Lace.Source.Tests.Data
 
         public string UserLastName
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
 
