@@ -9,7 +9,7 @@ namespace Lace.Source.Tests.Data.RgtVin
 
         private string _rgtVinResponse;
 
-        public void CallTheExternalWebService(Request.ILaceRequest request, ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             _rgtVinResponse = MockRgtVinResponseData.GetRgtVinWebResponseForLicensePlateNumber();
             TransformWebResponse(response);

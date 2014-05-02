@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Linq;
 using Lace.Models.Audatex.Dto;
 using Lace.Request;
 using Lace.Response;
@@ -27,17 +27,14 @@ namespace Lace.Source.Audatex.Transform
         private readonly ILaceResponse _response;
         private readonly ILaceRequest _request;
 
-      
         private readonly string _manufacturer;
         private readonly int _warrantyYear;
         private readonly bool _canApplyRepairInfo;
 
-    
-
         public TransformAudatexWebResponse(GetDataResult audatexResponse, ILaceResponse response, ILaceRequest request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
-            Result = Continue ? new AudatexResponse() : null;
+            Result = Continue ? new AudatexResponse() {AccidentClaims = new List<AccidentClaim>()} : null;
             Message = audatexResponse;
 
             _response = response;
@@ -47,7 +44,6 @@ namespace Lace.Source.Audatex.Transform
             _canApplyRepairInfo = !string.IsNullOrEmpty(_manufacturer);
 
             _warrantyYear = GetYear();
-
         }
 
         public void Transform()
@@ -58,31 +54,41 @@ namespace Lace.Source.Audatex.Transform
             HistoryCheckResponses
                 .ForEach(f =>
                 {
-                    var claim = new AccidentClaim()
+                    if (CompareRequestedAndResponseData.ShowClaim(_request.Vin, _manufacturer, f.VIN, f.Manufacturer,
+                        _warrantyYear, f.CreationDate, _request.LicenceNo, f.Registration))
                     {
-                        AccidentDate = f.AccidentDate.HasValue ? f.AccidentDate.Value : notAvailbleDate,
-                        AssessmentNumber = f.AssessmentNumber,
-                        ClaimReferenceNumber = f.ClaimReferenceNumber,
-                        CreationDate = f.CreationDate,
-                        DataSource = f.DataSource,
-                        Manufacturer = f.Manufacturer,
-                        Mileage = f.Mileage,
-                        Model = f.Model,
-                        Originator = f.Originator,
-                        Registration = f.Registration,
-                        RepairCostExVat = f.RepairCostExVAT,
-                        RepairCostIncVat = f.RepairCostIncVAT,
-                        VersionDate = f.VersionDate,
-                        Vin = f.VIN,
-                        QuoteValueIndicator = string.Format("{0} {1}", TransformRepairCosts.Transform(f.RepairCostExVAT),
-                                                          CompareRequestedAndResponseData.MatchInformation(_request.Vin, _manufacturer, f.VIN, f.Manufacturer, _request.RegisterNo, f.Registration, _canApplyRepairInfo)),
+                        var claim = new AccidentClaim()
+                        {
+                            AccidentDate = f.AccidentDate.HasValue ? f.AccidentDate.Value : notAvailbleDate,
+                            AssessmentNumber = f.AssessmentNumber,
+                            ClaimReferenceNumber = f.ClaimReferenceNumber,
+                            CreationDate = f.CreationDate,
+                            DataSource = f.DataSource,
+                            Manufacturer = f.Manufacturer,
+                            Mileage = f.Mileage,
+                            Model = f.Model,
+                            Originator = f.Originator,
+                            Registration = f.Registration,
+                            RepairCostExVat = f.RepairCostExVAT,
+                            RepairCostIncVat = f.RepairCostIncVAT,
+                            VersionDate = f.VersionDate,
+                            Vin = f.VIN,
+                            QuoteValueIndicator =
+                                string.Format("{0} {1}", TransformRepairCosts.Transform(f.RepairCostExVAT),
+                                    CompareRequestedAndResponseData.MatchInformation(_request.Vin, _manufacturer, f.VIN,
+                                        f.Manufacturer, _request.LicenceNo, f.Registration, _canApplyRepairInfo)),
+                            CreationDateString = GetCreationDateString(f.CreationDate)
 
-                                                          
+                        };
 
-                    };
+                        Result.HasAccidentClaims |= !string.IsNullOrEmpty(claim.AssessmentNumber) ||
+                                                    claim.RepairCostExVat.HasValue;
+                        AddAccidentClaim(claim);
+                    }
 
                 });
 
+            AccidentClaimCleaner.CleanAccidentClaims(Result);
         }
 
 
@@ -107,5 +113,22 @@ namespace Lace.Source.Audatex.Transform
             return _response.LightstoneResponse.Year ?? 1900;
         }
 
+        private static string GetCreationDateString(DateTime? creationDate)
+        {
+            var creationDateString = creationDate.HasValue &&
+                                     (creationDate.Value.ToShortDateString() != "0001-01-01" &&
+                                      creationDate.Value.ToShortDateString() != "0001/01/01")
+                ? creationDate.Value.ToShortDateString()
+                : "Date Not Available";
+
+            return creationDateString;
+        }
+
+        private void AddAccidentClaim(AccidentClaim claim)
+        {
+            if (Result.AccidentClaims.Any(ac => ac.Equals(claim))) return;
+
+            Result.AccidentClaims.Add(claim);
+        }
     }
 }

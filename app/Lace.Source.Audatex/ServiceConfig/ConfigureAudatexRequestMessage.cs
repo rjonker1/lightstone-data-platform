@@ -37,7 +37,7 @@ namespace Lace.Source.Audatex.ServiceConfig
                         HistoryCheckRequest = new HistoryCheckRequestBody()
                         {
                             VIN = _request.Vin ?? string.Empty,
-                            Registration = _request.RegisterNo ?? string.Empty,
+                            Registration = _request.LicenceNo ?? string.Empty,
                             EngineNumber = _request.EngineNo ?? string.Empty
                         }
                     }

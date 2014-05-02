@@ -23,7 +23,7 @@ namespace Lace.Source.Tests.RgtVinTests
 
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_rgtVinRequest, _laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
         }
 
         [Observation]

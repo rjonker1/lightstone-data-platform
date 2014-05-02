@@ -9,7 +9,7 @@ namespace Lace.Source.Tests.IvidTests
     public class ivid_web_service_being_consumed_tests : Specification
     {
         private readonly ILaceRequest _request;
-        private ILaceResponse _response;
+        private readonly ILaceResponse _response;
 
         public ivid_web_service_being_consumed_tests()
         {

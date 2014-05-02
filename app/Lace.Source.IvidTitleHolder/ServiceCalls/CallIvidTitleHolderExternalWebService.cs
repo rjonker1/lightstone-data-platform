@@ -15,9 +15,14 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private TitleholderQueryResponse _ividTitleHolderResponse;
+        private readonly ILaceRequest _request;
 
+        public CallIvidTitleHolderExternalWebService(ILaceRequest request)
+        {
+            _request = request;
+        }
 
-        public void CallTheExternalWebService(ILaceRequest request, ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             try
             {
@@ -33,7 +38,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
-                    var ividTitleHolderRequest = new ConfigureIvidTitleHolderRequestMessage(request)
+                    var ividTitleHolderRequest = new ConfigureIvidTitleHolderRequestMessage(_request)
                         .TitleholderQueryRequest;
 
                     _ividTitleHolderResponse = ividTitleHolderWebService

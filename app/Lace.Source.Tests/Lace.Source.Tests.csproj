@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudatexTests\audatex_request_data_from_audatex_service_tests.cs" />
+    <Compile Include="AudatexTests\audatex_response_clean_remove_dupliates_test.cs.cs" />
+    <Compile Include="AudatexTests\audatex_transform_get_data_response_tests.cs" />
+    <Compile Include="AudatexTests\audatex_web_service_being_consumed_tests.cs" />
+    <Compile Include="Data\Audatex\MockCallingAudatexExternalWebService.cs" />
+    <Compile Include="Data\Audatex\MockAudatexWebResponseData.cs" />
+    <Compile Include="Data\Audatex\MockIvidLicensePlateNumberRequestData.cs" />
+    <Compile Include="Data\LicensePlateNumberAudatexOnlyRequest.cs" />
     <Compile Include="Data\IvidTitleHolder\MockHandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="Data\IvidTitleHolder\MockIvidTitleHolderConsumer.cs" />
     <Compile Include="Data\IvidTitleHolder\MockRequestDataFromIvidTitleHolderService.cs" />
@@ -100,12 +109,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Data\Audatex\Audatex.mock.data.xml" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
+      <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
+      <Name>Lace.Models.Audatex</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
       <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
       <Name>Lace.Models.IvidTitleHolder</Name>
@@ -113,6 +127,10 @@
     <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
       <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
       <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
+      <Project>{00668419-21AD-4310-B511-C2A1C6D9DCDF}</Project>
+      <Name>Lace.Models.Lightstone</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
@@ -137,6 +155,10 @@
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Audatex\Lace.Source.Audatex.csproj">
+      <Project>{bedbf9ba-5710-4f01-a88d-e7d217ba5164}</Project>
+      <Name>Lace.Source.Audatex</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj">
       <Project>{11458e6f-fca6-4d3f-8aaa-10863873bb1c}</Project>

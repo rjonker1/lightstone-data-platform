@@ -65,9 +65,9 @@
     <Compile Include="ServiceConfig\ConfigureAudatexRequestMessage.cs" />
     <Compile Include="ServiceConfig\ConfigureAudatexWebService.cs" />
     <Compile Include="ServiceConfig\SerializeAuduatexRequestData.cs" />
+    <Compile Include="Transform\AccidentClaimCleaner.cs" />
     <Compile Include="Transform\TransformAudatexWebResponse.cs" />
     <Compile Include="Transform\TransformRepairCosts.cs" />
-    <None Include="Transform\TransformAudatexWebServiceResponse.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

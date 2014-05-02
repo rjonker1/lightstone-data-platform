@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 namespace Lace.Source.Audatex.Transform
 {
@@ -12,26 +13,28 @@ namespace Lace.Source.Audatex.Transform
         public static string Transform(decimal? repairCost)
         {
             var result = DefaultResult;
-            var bands = new List<CostBand>();
-            bands.Add(new CostBand(null, 10000, false, false));
-            bands.Add(new CostBand(10000, 50000, true, false));
-            bands.Add(new CostBand(50000, 100000, true, false));
-            bands.Add(new CostBand(100000, null, true, false));
-
-            if (repairCost.HasValue)
+            var bands = new List<CostBand>()
             {
-                var band = bands.FirstOrDefault(b => b.Contains(repairCost.Value));
-                if (band != null)
-                {
-                    if (band.IsUnaryBoundary)
-                    {
-                        result = ToRepairCostBand(repairCost.Value, band.UnaryBoundary.Value);
-                    }
-                    else if (band.IsBinaryBoundary)
-                    {
-                        result = ToRepairCostBand(repairCost.Value, band.Item1.Value, band.Item2.Value);
-                    }
-                }
+                new CostBand(null, 10000, false, false),
+                new CostBand(10000, 50000, true, false),
+                new CostBand(50000, 100000, true, false),
+                new CostBand(100000, null, true, false)
+            };
+
+            if (!repairCost.HasValue) return result;
+
+
+            var band = bands.FirstOrDefault(b => b.Contains(repairCost.Value));
+
+            if (band == null) return result;
+
+            if (band.IsUnaryBoundary)
+            {
+                result = ToRepairCostBand(repairCost.Value, band.UnaryBoundary.Value);
+            }
+            else if (band.IsBinaryBoundary)
+            {
+                result = ToRepairCostBand(repairCost.Value, band.Item1.Value, band.Item2.Value);
             }
 
             return result;

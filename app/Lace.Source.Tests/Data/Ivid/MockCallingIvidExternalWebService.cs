@@ -9,7 +9,7 @@ namespace Lace.Source.Tests.Data.Ivid
     public class MockCallingIvidExternalWebService : ICallTheExternalWebService
     {
         private HpiStandardQueryResponse _ividResponse;
-        public void CallTheExternalWebService(ILaceRequest request, ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             _ividResponse =
                 MockIvidHpiStandardQueryResponseData.GetHpiStandardQueryResponseForLicenseNoXmc167Gp();

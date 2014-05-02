@@ -13,13 +13,19 @@ namespace Lace.Source.RgtVin.ServiceCalls
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private string _rgtVinResponse;
+        private readonly ILaceRequest _request;
 
-        public void CallTheExternalWebService(ILaceRequest request, ILaceResponse response)
+        public CallRgtVinExternalWebService(ILaceRequest request)
+        {
+            _request = request;
+        }
+
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             try
             {
                 var rgtVinWebService = new ConfigureRgtVinWebService();
-                var rgtVinRequest = new ConfigureRgtVinRequestMessage(request)
+                var rgtVinRequest = new ConfigureRgtVinRequestMessage(_request)
                     .RgtVinRequest;
 
 

@@ -15,8 +15,14 @@ namespace Lace.Source.Ivid.ServiceCalls
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private HpiStandardQueryResponse _ividResponse;
+        private readonly ILaceRequest _request;
 
-        public void CallTheExternalWebService(ILaceRequest request,ILaceResponse response)
+        public CallIvidExternalWebService(ILaceRequest request)
+        {
+            _request = request;
+        }
+
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             try
             {
@@ -32,7 +38,7 @@ namespace Lace.Source.Ivid.ServiceCalls
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividWebService.IvidRequestMessageProperty;
 
-                    var ividRequest = new ConfigureIvidRequestMessage(request)
+                    var ividRequest = new ConfigureIvidRequestMessage(_request)
                         .HpiQueryRequest;
 
                     LogServiceRequest(ividRequest);

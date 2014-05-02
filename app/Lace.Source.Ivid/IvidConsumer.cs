@@ -14,7 +14,7 @@ namespace Lace.Source.Ivid
         {
             _request = request;
             _handleServiceCall = new HandleIvidServiceCall();
-            _externalWebServiceCall = new CallIvidExternalWebService();
+            _externalWebServiceCall = new CallIvidExternalWebService(_request);
         }
         
         public void CallIvidService(ILaceResponse response)
@@ -23,7 +23,7 @@ namespace Lace.Source.Ivid
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(_request, response, _externalWebServiceCall));
+                    c.FetchDataFromService(response, _externalWebServiceCall));
         }
 
     }

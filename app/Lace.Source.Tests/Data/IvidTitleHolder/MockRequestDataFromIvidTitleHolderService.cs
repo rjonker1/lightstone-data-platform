@@ -2,9 +2,9 @@
 {
     public class MockRequestDataFromIvidTitleHolderService : IRequestDataFromService
     {
-        public void FetchDataFromService(Request.ILaceRequest request, Response.ILaceResponse response, ICallTheExternalWebService externalWebService)
+        public void FetchDataFromService(Response.ILaceResponse response, ICallTheExternalWebService externalWebService)
         {
-            externalWebService.CallTheExternalWebService(request, response);
+            externalWebService.CallTheExternalWebService(response);
         }
     }
 }

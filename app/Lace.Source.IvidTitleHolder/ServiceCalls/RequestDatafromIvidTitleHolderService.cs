@@ -5,10 +5,10 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 {
     public class RequestDatafromIvidTitleHolderService : IRequestDataFromService
     {
-        public void FetchDataFromService(ILaceRequest request, ILaceResponse response,
+        public void FetchDataFromService(ILaceResponse response,
             ICallTheExternalWebService externalWebService)
         {
-            externalWebService.CallTheExternalWebService(request, response);
+            externalWebService.CallTheExternalWebService(response);
         }
     }
 }

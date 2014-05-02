@@ -4,7 +4,7 @@ namespace Lace.Source.Audatex.Compare
     public class CompareRequestedAndResponseData
     {
         public static string MatchInformation(string requestedVin, string manufacturer, string claimVin,
-            string claimManufacturer, string requestedLicensePlateNo, string claimLisencePlateNo,
+            string claimManufacturer, string requestedLicensePlateNo, string claimLicensePlateNo,
             bool canApplyRepairInformation)
         {
             if (!canApplyRepairInformation)
@@ -14,7 +14,7 @@ namespace Lace.Source.Audatex.Compare
             requestedLicensePlateNo = string.IsNullOrEmpty(requestedLicensePlateNo)
                 ? string.Empty
                 : requestedLicensePlateNo;
-            claimLisencePlateNo = string.IsNullOrEmpty(claimLisencePlateNo) ? string.Empty : claimLisencePlateNo;
+            claimLicensePlateNo = string.IsNullOrEmpty(claimLicensePlateNo) ? string.Empty : claimLicensePlateNo;
 
             requestedVin = string.IsNullOrEmpty(requestedVin) ? string.Empty : requestedVin;
             manufacturer = string.IsNullOrEmpty(manufacturer) ? string.Empty : manufacturer;
@@ -32,7 +32,7 @@ namespace Lace.Source.Audatex.Compare
             var manufacturerMatch =
                 manufacturer.Equals(claimManufacturer, StringComparison.InvariantCultureIgnoreCase) ||
                 claimManufacturer.Equals(manufacturer, StringComparison.InvariantCultureIgnoreCase);
-            var licensePlateNoMatches = requestedLicensePlateNo.Equals(claimLisencePlateNo,
+            var licensePlateNoMatches = requestedLicensePlateNo.Equals(claimLicensePlateNo,
                 StringComparison.InvariantCultureIgnoreCase);
 
 

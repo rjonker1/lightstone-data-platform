@@ -2,8 +2,32 @@
 
 namespace Lace.Models.Audatex.Dto
 {
+   // [Serializable]
     public class HistoryCheckResponse
     {
+
+        public HistoryCheckResponse()
+        {
+            AccidentDate = DateTime.MinValue;
+            AssessmentNumber = string.Empty;
+            ClaimReferenceNumber = string.Empty;
+            CreationDate = DateTime.MinValue;
+            DataSource = string.Empty;
+            InsuredName = string.Empty;
+            Manufacturer = string.Empty;
+            Model = string.Empty;
+            Originator = string.Empty;
+            PolicyNumber = string.Empty;
+            Mileage = string.Empty;
+            Registration = string.Empty;
+            RepairCostExVAT = null;
+            RepairCostIncVAT = null;
+            VersionDate = DateTime.MinValue;
+            VIN = string.Empty;
+            WorkproviderReference = string.Empty;
+            MatchType = string.Empty;
+        }
+
         public DateTime? AccidentDate { get; set; }
 
         public string AssessmentNumber { get; set; }

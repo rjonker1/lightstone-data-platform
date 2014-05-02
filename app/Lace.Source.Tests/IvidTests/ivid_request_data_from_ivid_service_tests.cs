@@ -1,6 +1,4 @@
-﻿using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid.ServiceCalls;
 using Lace.Source.Tests.Data.Ivid;
@@ -26,7 +24,7 @@ namespace Lace.Source.Tests.IvidTests
         
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_ividRequest, _laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
         }
 
         [Observation]

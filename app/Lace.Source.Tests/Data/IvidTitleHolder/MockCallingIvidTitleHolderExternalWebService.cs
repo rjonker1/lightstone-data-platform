@@ -10,7 +10,7 @@ namespace Lace.Source.Tests.Data.IvidTitleHolder
     public class MockCallingIvidTitleHolderExternalWebService : ICallTheExternalWebService
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
-        public void CallTheExternalWebService(ILaceRequest request, ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             _ividTitleHolderResponse =
                 MockIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicnseNumber();

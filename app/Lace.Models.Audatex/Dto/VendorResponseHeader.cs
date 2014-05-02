@@ -1,5 +1,8 @@
-﻿namespace Lace.Models.Audatex.Dto
+﻿using System;
+
+namespace Lace.Models.Audatex.Dto
 {
+   // [Serializable]
     public class VendorResponseHeader
     {
         public string MsgTypeIdentifier { get; set; }

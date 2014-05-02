@@ -22,7 +22,7 @@ namespace Lace.Source.Tests.Data.Ivid
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(_request, response, _externalWebServiceCall));
+                    c.FetchDataFromService(response, _externalWebServiceCall));
         }
     }
 

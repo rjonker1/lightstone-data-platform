@@ -25,7 +25,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
 
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_ividTitleHolderRequest, _laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
         }
 
         [Observation]

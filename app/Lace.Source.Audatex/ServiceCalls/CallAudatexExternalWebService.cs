@@ -6,6 +6,7 @@ using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Audatex.ServiceConfig;
+using Lace.Source.Audatex.Transform;
 
 namespace Lace.Source.Audatex.ServiceCalls
 {
@@ -13,15 +14,21 @@ namespace Lace.Source.Audatex.ServiceCalls
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private GetDataResult _audatexResponse;
+        private readonly ILaceRequest _request;
 
-        public void CallTheExternalWebService(ILaceRequest request, ILaceResponse response)
+        public CallAudatexExternalWebService(ILaceRequest request)
+        {
+            _request = request;
+        }
+
+        public void CallTheExternalWebService(ILaceResponse response)
         {
             try
             {
                 Log.Info("Calling Audatex Web Service");
 
                 var audatexWebService = new ConfigureAudatexWebService();
-                var audatexRequest = new ConfigureAudatexRequestMessage(request)
+                var audatexRequest = new ConfigureAudatexRequestMessage(_request)
                     .AudatexRequest;
                 var credentials = new ConfigureAudatexCredentials().Credentials;
 
@@ -54,12 +61,27 @@ namespace Lace.Source.Audatex.ServiceCalls
 
         public void TransformWebResponse(ILaceResponse response)
         {
-            
+            var transformer = new TransformAudatexWebResponse(_audatexResponse, response, _request);
+
+            if (transformer.Continue)
+            {
+                LogServiceResponse();
+                transformer.Transform();
+            }
+
+            response.AudatexResponse = transformer.Result;
+            response.AudatexResponseHandled = new AudatexResponseHandled();
+            response.AudatexResponseHandled.HasBeenHandled();
         }
 
         private static void LogServiceRequest(AudatexRequest request)
         {
             Log.InfoFormat("Audatex Request sent to Audatex Web Service: {0}", Helpers.JsonFunctions.ObjectToJson(request));
+        }
+
+        private void LogServiceResponse()
+        {
+            Log.InfoFormat("Response Received from Audatex Web Service {0}", Helpers.JsonFunctions.ObjectToJson(_audatexResponse));
         }
     }
 }

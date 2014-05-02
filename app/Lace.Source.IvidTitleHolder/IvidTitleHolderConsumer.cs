@@ -15,7 +15,7 @@ namespace Lace.Source.IvidTitleHolder
         {
             _request = request;
             _handleServiceCall = new HandleIvidTitleHolderServiceCall();
-            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService();
+            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService(request);
         }
 
 
@@ -25,7 +25,7 @@ namespace Lace.Source.IvidTitleHolder
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(_request, response, _externalWebServiceCall)
+                    c.FetchDataFromService(response, _externalWebServiceCall)
                 );
         }
     }
