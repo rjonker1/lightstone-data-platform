@@ -50,7 +50,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin" };
+                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" };
             }
         }
 
@@ -119,7 +119,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return "AHT31UNK408007735";
+                return "SB1KV58E40F039277";
             }
         }
 

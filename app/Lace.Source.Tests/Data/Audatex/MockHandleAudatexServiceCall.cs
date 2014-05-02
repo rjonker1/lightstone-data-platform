@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Linq;
-using Lace.Models.Ivid;
+using Lace.Models.Audatex;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Enums;
 
-namespace Lace.Source.Tests.Data.Ivid
+namespace Lace.Source.Tests.Data.Audatex
 {
-    public class MockHandleIvidServiceCall : IHandleServiceCall
+    public class MockHandleAudatexServiceCall : IHandleServiceCall
     {
         public Services Service
         {
             get
             {
-                return Services.Ivid;
+                return Services.Audatex;
             }
         }
 
         private bool _canHandle;
+
         public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
             _canHandle = request.Sources.Contains(Service.ToString());
@@ -32,14 +33,15 @@ namespace Lace.Source.Tests.Data.Ivid
 
         public void Request(Action<IRequestDataFromService> action)
         {
-            action(new MockRequestDataFromIvidService());
+            action(new MockRequestDataFromAudatexService());
         }
+
 
         private static void NotHandledResponse(ILaceResponse response)
         {
-            response.IvidResponse = null;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasNotBeenHandled();
+            response.AudatexResponse = null;
+            response.AudatexResponseHandled = new AudatexResponseHandled();
+            response.AudatexResponseHandled.HasNotBeenHandled();
         }
     }
 }

@@ -61,7 +61,10 @@
     <Compile Include="AudatexTests\audatex_web_service_being_consumed_tests.cs" />
     <Compile Include="Data\Audatex\MockCallingAudatexExternalWebService.cs" />
     <Compile Include="Data\Audatex\MockAudatexWebResponseData.cs" />
+    <Compile Include="Data\Audatex\MockAudatexConsumer.cs" />
+    <Compile Include="Data\Audatex\MockHandleAudatexServiceCall.cs" />
     <Compile Include="Data\Audatex\MockIvidLicensePlateNumberRequestData.cs" />
+    <Compile Include="Data\Audatex\MockRequestDataFromAudatexService.cs" />
     <Compile Include="Data\LicensePlateNumberAudatexOnlyRequest.cs" />
     <Compile Include="Data\IvidTitleHolder\MockHandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="Data\IvidTitleHolder\MockIvidTitleHolderConsumer.cs" />

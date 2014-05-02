@@ -31,23 +31,20 @@ namespace Lace.Source.Tests
         {
 
             _initialize.LaceResponses.Count.ShouldEqual(1);
-
             _initialize.LaceResponses[0].Response.ShouldNotBeNull();
 
-
             _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
-
             _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
 
-
             _initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
-
             _initialize.LaceResponses[0].Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
 
-
             _initialize.LaceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
-
             _initialize.LaceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
+
+            _initialize.LaceResponses[0].Response.AudatexResponse.ShouldNotBeNull();
+            _initialize.LaceResponses[0].Response.AudatexResponseHandled.Handled.ShouldBeTrue();
+
         }
     }
 }
