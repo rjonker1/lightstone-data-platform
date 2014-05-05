@@ -7,10 +7,11 @@ namespace Api.NancyFx.Modules
     {
         public IndexModule()
         {
-            Get["/"] = parameters =>
+            Post["/"] = parameters =>
             {
                 this.RequiresAuthentication();
-                return Response.AsJson("");
+
+                return Response.AsJson("Authenticated!");
             };
         }
     }

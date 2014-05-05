@@ -5,6 +5,10 @@ namespace Shared.BuildingBlocks.Api.Security
 {
     public class ApiUser : IUserIdentity
     {
+        public ApiUser()
+        {
+        }
+
         public ApiUser(string userName)
         {
             UserName = userName;
@@ -12,6 +16,6 @@ namespace Shared.BuildingBlocks.Api.Security
         }
 
         public string UserName { get; private set; }
-        public IEnumerable<string> Claims { get; private set; }
+        public IEnumerable<string> Claims { get; set; }
     }
 }

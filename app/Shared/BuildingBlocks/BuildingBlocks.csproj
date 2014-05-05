@@ -44,6 +44,7 @@
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Configuration\AppSettingsReader.cs" />
     <Compile Include="Configuration\ConnectionStrings.cs" />
+    <Compile Include="Configuration\UmApiSettings.cs" />
     <Compile Include="Configuration\RabbmitMQSettings.cs" />
     <Compile Include="Configuration\ServiceAppSettings.cs" />
     <Compile Include="Extentions\IntegerExtentions.cs" />

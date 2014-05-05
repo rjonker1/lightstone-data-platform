@@ -6,19 +6,19 @@ namespace Api.NancyFx.Specs.AuthenticationSpecs
 {
     public class when_api_key_header_missing : Specification
     {
-        private Browser _browser = new Browser(new AuthenticationBootstrapper());
+        private readonly Browser _browser = new Browser(new Bootstrapper());
         private BrowserResponse _response;
 
         public override void Observe()
         {
-            _response = _browser.Get("/", with =>
+            _response = _browser.Post("/", with =>
             {
                 with.HttpRequest();
             });
         }
 
         [Observation]
-        public void should_debit_the_from_account_by_the_amount_transferred()
+        public void should_return_unauthorized()
         {
             _response.StatusCode.ShouldEqual(HttpStatusCode.Unauthorized);
         }
@@ -26,12 +26,12 @@ namespace Api.NancyFx.Specs.AuthenticationSpecs
 
     public class when_api_key_header_added : Specification
     {
-        private Browser _browser = new Browser(new AuthenticationBootstrapper());
+        private readonly Browser _browser = new Browser(new Bootstrapper());
         private BrowserResponse _response;
 
         public override void Observe()
         {
-            _response = _browser.Get("/requiresAuthentication", with =>
+            _response = _browser.Post("/", with =>
             {
                 with.HttpRequest();
                 with.Header("Authorization", "ApiKey 4E7106BA-16B6-44F2-AF4C-D1C411440F8E");
@@ -39,7 +39,7 @@ namespace Api.NancyFx.Specs.AuthenticationSpecs
         }
 
         [Observation]
-        public void should_debit_the_from_account_by_the_amount_transferred()
+        public void should_return_ok()
         {
             _response.StatusCode.ShouldEqual(HttpStatusCode.OK);
         }
