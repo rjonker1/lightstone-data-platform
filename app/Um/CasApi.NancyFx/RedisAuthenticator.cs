@@ -8,21 +8,6 @@ using StackExchange.Redis;
 
 namespace UmApi
 {
-    public interface IAuthenticateUser
-    {
-        IUserIdentity GetUserIdentity(string token);
-    }
-
-    public interface IRedisAuthenticator : IAuthenticateUser
-    {
-        
-    }
-
-    public interface IUmAuthenticator : IAuthenticateUser
-    {
-
-    }
-
     public class RedisAuthenticator : IRedisAuthenticator
     {
         private readonly ILog _log = LogManager.GetCurrentClassLogger();
@@ -37,24 +22,22 @@ namespace UmApi
 
         public IUserIdentity GetUserIdentity(string token)
         {
-            IUserIdentity user = null;
+            IUserIdentity user;
 
             try
             {
                 if (_redis == null)
                     return _umAuthenticator.GetUserIdentity(token); 
                 
-                //ToDo: Add claim
-                //ToDo: Improve mapping
                 var db = _redis.GetDatabase();
                 var hashEntries = db.HashGetAll(token);
-                foreach (var hashEntry in hashEntries)
-                    user = Mapper.Map<HashEntry, ApiUser>(hashEntry);
+                user = Mapper.Map<HashEntry[], ApiUser>(hashEntries);
 
                 if (!hashEntries.Any())
                 {
                     user = _umAuthenticator.GetUserIdentity(token);
-                    if (user != null) db.HashSet(token, new[] { new HashEntry("UserName", user.UserName) });
+                    if (user != null) 
+                        db.HashSet(token, new[] { new HashEntry("UserName", user.UserName), new HashEntry("Claims", user.Claims.Aggregate((current, next) => current + "|" + next)) });
                 }
             }
             catch (Exception exception)
@@ -64,14 +47,6 @@ namespace UmApi
             }
 
             return user;
-        }
-    }
-
-    public class UmAuthenticator : IUmAuthenticator
-    {
-        public IUserIdentity GetUserIdentity(string token)
-        {
-            return UserDatabase.GetUserFromApiKey(token);
         }
     }
 }

@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
+      <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
+      <Name>Shared.BuildingBlocks.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Api.NancyFx\Api.NancyFx.csproj">
       <Project>{b4f9c525-5c56-440e-b4c2-972a33d7c8cd}</Project>
       <Name>Api.NancyFx</Name>

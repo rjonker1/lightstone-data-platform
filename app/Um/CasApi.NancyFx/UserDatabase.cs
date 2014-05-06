@@ -7,27 +7,21 @@ namespace UmApi
 {
     public class UserDatabase
     {
-        static readonly List<Tuple<string, string>> ActiveApiKeys = new List<Tuple<string, string>>();
-        private static readonly List<Tuple<string, string>> Users = new List<Tuple<string, string>>();
+        private static readonly List<Tuple<string, string, string, IEnumerable<string>>> Users = new List<Tuple<string, string, string, IEnumerable<string>>>();
 
         static UserDatabase()
         {
-            ActiveApiKeys.Add(new Tuple<string, string>("admin", "4E7106BA-16B6-44F2-AF4C-D1C411440F8E"));
-            ActiveApiKeys.Add(new Tuple<string, string>("user", "821B362B-E499-4C96-AE4D-2D51C1685E68"));
-            Users.Add(new Tuple<string, string>("admin", "password"));
-            Users.Add(new Tuple<string, string>("user", "password"));
+            Users.Add(new Tuple<string, string, string, IEnumerable<string>>("admin", "password", "4E7106BA-16B6-44F2-AF4C-D1C411440F8E", new[] { "admin", "read", "write" }));
+            Users.Add(new Tuple<string, string, string, IEnumerable<string>>("user", "password", "821B362B-E499-4C96-AE4D-2D51C1685E68", new[] { "read" }));
         }
 
         public static ApiUser GetUserFromApiKey(string apiKey)
         {
-            var activeKey = ActiveApiKeys.FirstOrDefault(x => x.Item2 == apiKey);
+            var userRecord = Users.FirstOrDefault(u => u.Item3 == apiKey);
 
-            if (activeKey == null)
-                return null;
-
-            var userRecord = Users.First(u => u.Item1 == activeKey.Item1);
-
-            return new ApiUser (userRecord.Item1){ Claims = null };
+            return userRecord == null
+                       ? null
+                       : new ApiUser (userRecord.Item1) { Claims = userRecord.Item4 };
         }
     }
 }

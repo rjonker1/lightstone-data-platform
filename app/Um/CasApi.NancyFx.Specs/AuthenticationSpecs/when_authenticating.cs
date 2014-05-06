@@ -1,7 +1,6 @@
 ﻿using Nancy.Security;
 using Nancy.Testing;
 using Shared.BuildingBlocks.Api.Security;
-using UmApi;
 using UmApi.Modules;
 using Xunit.Extensions;
 
@@ -26,10 +25,7 @@ namespace CasApi.NancyFx.Specs.AuthenticationSpecs
         private BrowserResponse _response;
         public override void Observe()
         {
-            _response = _browser.Post("/authenticate", with =>
-            {
-                with.HttpRequest();
-            });
+            _response = _browser.Post("/authenticate", with => with.HttpRequest());
         }
 
         [Observation]

@@ -1,9 +1,6 @@
-﻿using BuildingBlocks.Configuration;
-using Nancy.Authentication.Stateless;
+﻿using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
-using Nancy.Security;
 using Nancy.TinyIoc;
-using RestSharp;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.NancyFx
@@ -12,6 +9,7 @@ namespace Api.NancyFx
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
+
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
@@ -19,8 +17,9 @@ namespace Api.NancyFx
             var configuration = new StatelessAuthenticationConfiguration(context =>
             {
                 var token = context.AuthorizationHeaderToken();
+                var authenticator = container.Resolve<IAuthenticateUser>();
 
-                return string.IsNullOrWhiteSpace(token) ? null : GetUser(token);
+                return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
             });
 
             StatelessAuthentication.Enable(pipelines, configuration);
@@ -34,15 +33,11 @@ namespace Api.NancyFx
             //};
         }
 
-        private static IUserIdentity GetUser(string token)
+        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            //ToDo: Retry authentication on failure
-            var appSettings = new AppSettings();
-            var client = new RestClient(appSettings.UmApi.BaseUrl);
-            var request = new RestRequest(appSettings.UmApi.AuthenticationResource, Method.POST);
-            request.AddHeader("Authorization", "ApiKey " + token);
-            // Json not serialized when Claims is initialized as empty collection for some reason
-            return client.Execute<ApiUser>(request).Data;
+            // Perform registation that should have an application lifetime
+
+            container.Register<IAuthenticateUser, UmApiAuthenticator>();
         }
     }
 }

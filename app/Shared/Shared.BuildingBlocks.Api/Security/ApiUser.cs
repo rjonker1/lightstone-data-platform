@@ -15,7 +15,7 @@ namespace Shared.BuildingBlocks.Api.Security
             Claims = new List<string>();
         }
 
-        public string UserName { get; private set; }
+        public string UserName { get; set; }
         public IEnumerable<string> Claims { get; set; }
     }
 }

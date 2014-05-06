@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using BuildingBlocks.Configuration;
 using Common.Logging;
@@ -23,11 +24,9 @@ namespace UmApi
         {
             // Perform registation that should have an application lifetime
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<HashEntry, ApiUser>()
-                    .ForMember(id => id.UserName, opt => opt.MapFrom(entry => (entry.Name + "").ToLower() == "username" ? entry.Value + "" : null));
-            });
+            Mapper.Initialize(cfg => cfg.CreateMap<HashEntry[], ApiUser>()
+                .ForMember(id => id.UserName, opt => opt.MapFrom(entries => entries.FirstOrDefault(x => (x.Name + "").ToLower() == "username").Value))
+                .ForMember(id => id.Claims, opt => opt.MapFrom(entries => (entries.FirstOrDefault(x => (x.Name + "").ToLower() == "claims").Value + "").Split('|'))));
 
             var appSettings = new AppSettings();
             try

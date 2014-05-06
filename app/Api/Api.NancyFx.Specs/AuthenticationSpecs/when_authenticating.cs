@@ -1,20 +1,35 @@
 ﻿using Nancy;
+using Nancy.Security;
 using Nancy.Testing;
+using Nancy.TinyIoc;
+using Shared.BuildingBlocks.Api.Security;
 using Xunit.Extensions;
 
 namespace Api.NancyFx.Specs.AuthenticationSpecs
 {
     public class when_api_key_header_missing : Specification
     {
-        private readonly Browser _browser = new Browser(new Bootstrapper());
+        class FakeAuthenticator : IAuthenticateUser
+        {
+            public IUserIdentity GetUserIdentity(string token)
+            {
+                return new ApiUser("testUser");
+            }
+        }
+        class NancyBootstrapper : Bootstrapper
+        {
+            protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+            {
+                container.Register<IAuthenticateUser>(new FakeAuthenticator());
+            }
+        }
+
+        private readonly Browser _browser = new Browser(new NancyBootstrapper());
         private BrowserResponse _response;
 
         public override void Observe()
         {
-            _response = _browser.Post("/", with =>
-            {
-                with.HttpRequest();
-            });
+            _response = _browser.Post("/", with => with.HttpRequest());
         }
 
         [Observation]
@@ -26,7 +41,22 @@ namespace Api.NancyFx.Specs.AuthenticationSpecs
 
     public class when_api_key_header_added : Specification
     {
-        private readonly Browser _browser = new Browser(new Bootstrapper());
+        class FakeAuthenticator : IAuthenticateUser
+        {
+            public IUserIdentity GetUserIdentity(string token)
+            {
+                return new ApiUser("testUser");
+            }
+        }
+        class NancyBootstrapper : Bootstrapper
+        {
+            protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+            {
+                container.Register<IAuthenticateUser>(new FakeAuthenticator());
+            }
+        }
+
+        private readonly Browser _browser = new Browser(new NancyBootstrapper());
         private BrowserResponse _response;
 
         public override void Observe()
@@ -42,6 +72,12 @@ namespace Api.NancyFx.Specs.AuthenticationSpecs
         public void should_return_ok()
         {
             _response.StatusCode.ShouldEqual(HttpStatusCode.OK);
+        }
+
+        [Observation]
+        public void should_return_json_authenticated_text()
+        {
+            _response.Body.AsString().ShouldContain("Authenticated!");
         }
     }
 }

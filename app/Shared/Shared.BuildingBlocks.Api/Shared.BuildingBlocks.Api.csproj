@@ -51,6 +51,7 @@
     <Compile Include="CannedResponses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ContextExtensions.cs" />
+    <Compile Include="Security\IAuthenticateUser.cs" />
     <Compile Include="Security\IPipelinesExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
