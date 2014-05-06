@@ -55,6 +55,10 @@
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Audatex\Lace.Source.Audatex.csproj">
+      <Project>{bedbf9ba-5710-4f01-a88d-e7d217ba5164}</Project>
+      <Name>Lace.Source.Audatex</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj">
       <Project>{11458e6f-fca6-4d3f-8aaa-10863873bb1c}</Project>
       <Name>Lace.Source.IvidTitleHolder</Name>

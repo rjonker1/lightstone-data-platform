@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Lace.Request.LicensePlateNumber.Models;
 using Lace.Response;
+using Lace.Source.Audatex;
 using Lace.Source.Ivid;
 using Lace.Source.IvidTitleHolder;
 using Lace.Source.RgtVin;
@@ -18,7 +19,8 @@ namespace Lace.Request.LicensePlateNumber.Chain
             {
                 {"Ivid", (req, resp) => new IvidConsumer(req).CallIvidService(resp)},
                 {"IvidTitleHolder", (req, resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
-                {"RgtVin", (req, resp) => new RgtVinConsumer(req).CallRgtVinService(resp)}
+                {"RgtVin", (req, resp) => new RgtVinConsumer(req).CallRgtVinService(resp)},
+                {"Audatex", (req, resp) => new AudatexConsumer(req).CallAudatexService(resp)}
             };
 
             _response = new LaceResponse();
