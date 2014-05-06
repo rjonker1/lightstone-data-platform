@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://www.autostats.co.za/Service/wsVinCheck.asmx?wsdl" docRef="http://www.autostats.co.za/Service/wsVinCheck.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.autostats.co.za/Service/wsVinCheck.asmx" xmlns:q1="http://www.rgt.co.za/systems/" binding="q1:wsVinCheckSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.autostats.co.za/Service/wsVinCheck.asmx" xmlns:q2="http://www.rgt.co.za/systems/" binding="q2:wsVinCheckSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

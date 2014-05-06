@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.audatex.co.uk/Enterprise" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.audatex.co.uk/Enterprise" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.audatex.co.uk/Enterprise">
+      <s:element name="GetDataEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Credentials" type="tns:CredentialsInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageTypeIdentifier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageEnvelope" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageAckId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CredentialsInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDataExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetDataExResult" type="tns:GetDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetDataResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageTypeIdentifier" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QueueDepth" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageEnvelope" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalInfo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Credentials" type="tns:CredentialsInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageTypeIdentifier" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MessageAckId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetDataResult" type="tns:GetDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PutData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Credentials" type="tns:CredentialsInfo" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageTypeIdenfitier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageEnvelope" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PutDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PutDataResult" type="tns:PutDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PutDataResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDataExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataEx" />
+  </wsdl:message>
+  <wsdl:message name="GetDataExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="PutDataSoapIn">
+    <wsdl:part name="parameters" element="tns:PutData" />
+  </wsdl:message>
+  <wsdl:message name="PutDataSoapOut">
+    <wsdl:part name="parameters" element="tns:PutDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BackOfficeWebServiceSoap">
+    <wsdl:operation name="GetDataEx">
+      <wsdl:input message="tns:GetDataExSoapIn" />
+      <wsdl:output message="tns:GetDataExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input message="tns:GetDataSoapIn" />
+      <wsdl:output message="tns:GetDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PutData">
+      <wsdl:input message="tns:PutDataSoapIn" />
+      <wsdl:output message="tns:PutDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BackOfficeWebServiceSoap" type="tns:BackOfficeWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDataEx">
+      <soap:operation soapAction="http://www.audatex.co.uk/Enterprise/GetDataEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://www.audatex.co.uk/Enterprise/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PutData">
+      <soap:operation soapAction="http://www.audatex.co.uk/Enterprise/PutData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BackOfficeWebServiceSoap12" type="tns:BackOfficeWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDataEx">
+      <soap12:operation soapAction="http://www.audatex.co.uk/Enterprise/GetDataEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <soap12:operation soapAction="http://www.audatex.co.uk/Enterprise/GetData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PutData">
+      <soap12:operation soapAction="http://www.audatex.co.uk/Enterprise/PutData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BackOfficeWebService">
+    <wsdl:port name="BackOfficeWebServiceSoap" binding="tns:BackOfficeWebServiceSoap">
+      <soap:address location="http://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BackOfficeWebServiceSoap12" binding="tns:BackOfficeWebServiceSoap12">
+      <soap12:address location="http://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
