@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Lace.Source.Helpers
+namespace Lace.Shared.Helpers
 {
     public static class XmlFunctions
     {

@@ -64,12 +64,12 @@ namespace Lace.Source.Ivid.ServiceCalls
 
         private static void LogServiceRequest(HpiStandardQueryRequest request)
         {
-            Log.InfoFormat("Ivid Request sent to Ivid Web Service: {0}", Helpers.JsonFunctions.ObjectToJson(request));
+            Log.InfoFormat("Ivid Request sent to Ivid Web Service: {0}", Shared.Helpers.JsonFunctions.ObjectToJson(request));
         }
 
         private void LogServiceResponse()
         {
-            Log.InfoFormat("Response Received from Ivid Web Service {0}", Helpers.JsonFunctions.ObjectToJson(_ividResponse));
+            Log.InfoFormat("Response Received from Ivid Web Service {0}", Shared.Helpers.JsonFunctions.ObjectToJson(_ividResponse));
         }
 
         private static void IvidResponseFailed(ILaceResponse response)

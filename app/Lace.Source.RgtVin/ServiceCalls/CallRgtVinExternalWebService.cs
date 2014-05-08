@@ -74,13 +74,13 @@ namespace Lace.Source.RgtVin.ServiceCalls
 
         private static void LogServiceRequest(RgtVinRequest request)
         {
-            Log.InfoFormat("RGT Request sent to RGT Vin Web Service: {0}", Helpers.JsonFunctions.ObjectToJson(request));
+            Log.InfoFormat("RGT Request sent to RGT Vin Web Service: {0}", Shared.Helpers.JsonFunctions.ObjectToJson(request));
         }
 
         private void LogServiceResponse()
         {
             Log.InfoFormat("Response Received from RGT Vin Web Service {0}",
-                Helpers.JsonFunctions.ObjectToJson(_rgtVinResponse));
+                Shared.Helpers.JsonFunctions.ObjectToJson(_rgtVinResponse));
         }
     }
 }

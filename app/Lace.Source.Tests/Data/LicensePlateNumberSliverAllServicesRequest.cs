@@ -14,22 +14,7 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public string CompanyId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public string ContractId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
+      
         public DateTime RequestDate
         {
             get
@@ -135,7 +120,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                throw new NotImplementedException();
+                return null;
             }
         }
 

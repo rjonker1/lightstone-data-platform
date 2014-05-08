@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Lace.Source.Helpers
+namespace Lace.Shared.Helpers
 {
     public static class ConvertFunctions
     {

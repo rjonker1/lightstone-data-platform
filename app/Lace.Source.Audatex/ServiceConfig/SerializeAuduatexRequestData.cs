@@ -8,7 +8,7 @@ namespace Lace.Source.Audatex.ServiceConfig
         {
             get
             {
-                return CleanXml(Helpers.XmlFunctions.ObjectToXml(_message) ?? string.Empty);
+                return CleanXml(Shared.Helpers.XmlFunctions.ObjectToXml(_message) ?? string.Empty);
             }
         }
 

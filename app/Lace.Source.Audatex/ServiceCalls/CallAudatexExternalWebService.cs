@@ -76,12 +76,12 @@ namespace Lace.Source.Audatex.ServiceCalls
 
         private static void LogServiceRequest(AudatexRequest request)
         {
-            Log.InfoFormat("Audatex Request sent to Audatex Web Service: {0}", Helpers.JsonFunctions.ObjectToJson(request));
+            Log.InfoFormat("Audatex Request sent to Audatex Web Service: {0}", Shared.Helpers.JsonFunctions.ObjectToJson(request));
         }
 
         private void LogServiceResponse()
         {
-            Log.InfoFormat("Response Received from Audatex Web Service {0}", Helpers.JsonFunctions.ObjectToJson(_audatexResponse));
+            Log.InfoFormat("Response Received from Audatex Web Service {0}", Shared.Helpers.JsonFunctions.ObjectToJson(_audatexResponse));
         }
     }
 }

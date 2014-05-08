@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Logging;
+using Lace.Response;
 using Lace.Response.ExternalServices;
 
 namespace Lace.Request.Entry
@@ -7,6 +9,7 @@ namespace Lace.Request.Entry
     public class EntryPoint : IEntryPoint
     {
         private readonly ILoadRequestSources _loadRequestSources;
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         public EntryPoint(ILoadRequestSources loadRequestSources)
         {
@@ -17,11 +20,29 @@ namespace Lace.Request.Entry
         {
             try
             {
-                return new Initialize(request,_loadRequestSources).LaceResponses;
+                return new Initialize(request,_loadRequestSources).LaceResponses ?? EmptyResponse;
             }
             catch (Exception)
             {
-                return new List<LaceExternalServiceResponse>();
+                Log.ErrorFormat("Error occured receiving request {0}", Shared.Helpers.JsonFunctions.ObjectToJson(request));
+                return EmptyResponse;
+            }
+        }
+
+        private static IList<LaceExternalServiceResponse> EmptyResponse
+        {
+            get
+            {
+                return new List<LaceExternalServiceResponse>()
+                {
+                    new LaceExternalServiceResponse()
+                    {
+                        Response = new LaceResponse()
+                        {
+                            
+                        }
+                    }
+                };
             }
         }
     }

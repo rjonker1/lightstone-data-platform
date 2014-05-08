@@ -5,7 +5,6 @@ namespace Lace.Operations
     {
        
         private readonly ILoadRequestSources _laceLoader;
-
         public LaceOperation(ILoadRequestSources laceLoader)
         {
             _laceLoader = laceLoader;

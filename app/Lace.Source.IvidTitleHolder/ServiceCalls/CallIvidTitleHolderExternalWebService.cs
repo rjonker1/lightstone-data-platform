@@ -70,7 +70,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         
         private void LogServiceResponse()
         {
-            Log.InfoFormat("Response Received from Ivid Title Holder Web Service {0}", Helpers.JsonFunctions.ObjectToJson(_ividTitleHolderResponse));
+            Log.InfoFormat("Response Received from Ivid Title Holder Web Service {0}", Shared.Helpers.JsonFunctions.ObjectToJson(_ividTitleHolderResponse));
         }
 
         public void TransformWebResponse(ILaceResponse response)

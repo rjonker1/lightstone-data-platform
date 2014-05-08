@@ -11,8 +11,9 @@ namespace Lace.Request
         string UserEmail { get; }
         string UserPhone { get; }
 
-        string CompanyId { get; }
-        string ContractId { get; }
+        //int CompanyId { get; set; }
+        //int ContractId { get; set; }
+        //string ProductName { get; set; }
         DateTime RequestDate { get; }
         
         string EngineNo { get; }

@@ -13,21 +13,11 @@ namespace Lace.Request.Tests.Data
             }
         }
 
-        public string CompanyId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public int CompanyId { get; set; }
 
-        public string ContractId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public int ContractId { get; set; }
+
+        public string ProductName { get; set; }
 
         public DateTime RequestDate
         {

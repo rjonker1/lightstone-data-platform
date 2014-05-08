@@ -3,6 +3,7 @@ using Lace.Models.Audatex;
 using Lace.Models.Ivid;
 using Lace.Models.IvidTitleHolder;
 using Lace.Models.Lightstone;
+using Lace.Models.Product;
 using Lace.Models.Rgt;
 using Lace.Models.RgtVin;
 
@@ -27,5 +28,7 @@ namespace Lace.Response
 
         public IResponseFromLightstone LightstoneResponse { get; set; }
         public IResponseHandled LighResponseHandled { get; set; }
+
+        public ILaceProduct Product { get; set; }
     }
 }
