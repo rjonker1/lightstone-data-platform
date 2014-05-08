@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Request;
 using Lace.Response.ExternalServices;
 
-namespace Lace.EntryPoint
+namespace Lace.Request.Entry
 {
-    public class Entry : IEntryPoint
+    public class EntryPoint : IEntryPoint
     {
         public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
         {

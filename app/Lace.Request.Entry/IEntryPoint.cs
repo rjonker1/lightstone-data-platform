@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Lace.Request;
 using Lace.Response.ExternalServices;
 
-namespace Lace.EntryPoint
+namespace Lace.Request.Entry
 {
     public interface IEntryPoint
     {

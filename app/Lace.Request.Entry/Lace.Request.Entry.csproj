@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69111398-4FC9-4B3A-A690-898CDC374CA7}</ProjectGuid>
+    <ProjectGuid>{2E7E7B3B-B78C-4A84-AA69-77C467C5E04D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.EntryPoint</RootNamespace>
-    <AssemblyName>Lace.EntryPoint</AssemblyName>
+    <RootNamespace>Lace.Request.Entry</RootNamespace>
+    <AssemblyName>Lace.Request.Entry</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entry.cs" />
+    <Compile Include="EntryPoint.cs" />
     <Compile Include="IEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

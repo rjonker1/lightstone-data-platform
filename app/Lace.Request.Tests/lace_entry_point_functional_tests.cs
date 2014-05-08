@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.EntryPoint;
+using Lace.Request.Entry;
 using Lace.Request.Tests.Data;
 using Lace.Response.ExternalServices;
 using Xunit.Extensions;
@@ -10,12 +10,12 @@ namespace Lace.Request.Tests
     {
         private readonly ILaceRequest _request;
         private IList<LaceExternalServiceResponse> _laceResponses;
-        private readonly Entry _entryPoint;
+        private readonly EntryPoint _entryPoint;
 
         public lace_entry_point_functional_tests()
         {
             _request = new LicensePlateNumberSliverAllServicesRequest();
-            _entryPoint = new Entry();
+            _entryPoint = new EntryPoint();
         }
 
         

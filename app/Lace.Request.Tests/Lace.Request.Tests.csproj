@@ -57,10 +57,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Lace.EntryPoint\Lace.EntryPoint.csproj">
-      <Project>{69111398-4fc9-4b3a-a690-898cdc374ca7}</Project>
-      <Name>Lace.EntryPoint</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
       <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
       <Name>Lace.Models.Audatex</Name>
@@ -88,6 +84,10 @@
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
       <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
       <Name>Lace.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request.Entry\Lace.Request.Entry.csproj">
+      <Project>{2e7e7b3b-b78c-4a84-aa69-77c467c5e04d}</Project>
+      <Name>Lace.Request.Entry</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>

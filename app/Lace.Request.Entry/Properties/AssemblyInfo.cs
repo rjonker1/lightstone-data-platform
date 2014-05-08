@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lace.EntryPoint")]
+[assembly: AssemblyTitle("Lace.Request.Entry")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lace.EntryPoint")]
+[assembly: AssemblyProduct("Lace.Request.Entry")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d07dc267-5a91-4527-aab3-9ad78680cb66")]
+[assembly: Guid("c1bc8d2d-8def-478c-94a3-010d3b9ca8ae")]
 
 // Version information for an assembly consists of the following four values:
 //
