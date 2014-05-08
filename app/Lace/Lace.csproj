@@ -42,9 +42,10 @@
     <Compile Include="EventHandlers\SetHandlersEventArgs.cs" />
     <Compile Include="EventHandlers\LoadEventArgs.cs" />
     <Compile Include="ILoadRequestSources.cs" />
-    <Compile Include="Loader\LaceLoader.cs" />
+    <Compile Include="Loader\LaceLicensePlateNumberLoader.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="IBootstrap.cs" />
+    <None Include="ILaceOperation.cs.old" />
     <Compile Include="Operations\LaceOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

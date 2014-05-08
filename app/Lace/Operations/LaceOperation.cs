@@ -1,5 +1,4 @@
 ﻿using Lace.EventHandlers;
-
 namespace Lace.Operations
 {
     public class LaceOperation
@@ -35,7 +34,7 @@ namespace Lace.Operations
 
         private void OnSettingHandlers(object sender, SetHandlersEventArgs e)
         {
-            _laceLoader.BuildLicensePlateNumberRequest(e.Handlers);
+            _laceLoader.BuildRequest(e.Handlers);
         }
 
         private void OnLoading(object sender, LoadEventArgs e)

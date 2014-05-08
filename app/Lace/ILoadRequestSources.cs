@@ -9,7 +9,7 @@ namespace Lace
     public interface ILoadRequestSources
     {
         List<LaceExternalServiceResponse> LaceResponses { get; }
-        void BuildLicensePlateNumberRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers);
+        void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers);
         void HandleRequest(ILaceRequest request, Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers);
     }
 }

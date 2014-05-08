@@ -8,11 +8,11 @@ using Lace.Response.ExternalServices;
 
 namespace Lace.Loader
 {
-    public class LaceLoader : ILoadRequestSources
+    public class LaceLicensePlateNumberLoader : ILoadRequestSources
     {
         public List<LaceExternalServiceResponse> LaceResponses { get; private set; }
 
-        public LaceLoader()
+        public LaceLicensePlateNumberLoader()
         {
             LaceResponses = new List<LaceExternalServiceResponse>();
         }
@@ -31,7 +31,7 @@ namespace Lace.Loader
             }
         }
 
-        public void BuildLicensePlateNumberRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+        public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
             handlers.Add(typeof (LicensePlateNumberRequest), r => LicensePlateNumberSourceChain.Build(r).Response);
         }

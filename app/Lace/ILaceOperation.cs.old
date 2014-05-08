@@ -1,0 +1,7 @@
+﻿namespace Lace
+{
+    public interface ILaceOperation
+    {
+        IBootstrap LaceBootstrap { get; set; } 
+    }
+}
