@@ -94,6 +94,7 @@
     <Compile Include="Data\RgtVin\MockRgtVinConsumer.cs" />
     <Compile Include="Data\RgtVin\MockRgtVinLicensePlateNumberRequestData.cs" />
     <Compile Include="Data\RgtVin\MockRgtVinResponseData.cs" />
+    <Compile Include="initialize_lace_handlers_for_audatex_request_functional_test.cs" />
     <Compile Include="initialize_lace_handlers_for_ivid_request_functional_test.cs" />
     <Compile Include="initialize_lace_handlers_for_ivid_title_holder_functional_test.cs" />
     <Compile Include="initialize_lace_handlers_for_rgt_vin_functional_test.cs" />

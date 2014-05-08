@@ -1,7 +1,6 @@
-﻿using Lace.Request;
-using System;
+﻿using System;
 
-namespace Lace.Source.Tests.Data
+namespace Lace.Request.Tests.Data
 {
     public class LicensePlateNumberSliverAllServicesRequest : ILaceRequest
     {
@@ -38,7 +37,8 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-    
+       
+
         public string[] Sources
         {
             get
@@ -70,25 +70,19 @@ namespace Lace.Source.Tests.Data
 
         public string RegisterNo
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         public string LicenceNo
         {
-            get
-            {
-                return "XMC167GP";
-            }
+            get { return "XMC167GP"; }
         }
 
         public string Product
         {
             get
             {
-                return "XMC167GP";
+                return string.Empty;
             }
         }
 
