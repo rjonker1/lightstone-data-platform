@@ -8,9 +8,10 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
         private readonly Guid _userId;
         private readonly IGetProductInformation _getProduct;
 
-        public MockGetDataFromRepository(Guid userId)
+        public MockGetDataFromRepository(Guid userId, IGetProductInformation getProductSource)
         {
             _userId = userId;
+            _getProduct = getProductSource;
             _getProduct = new MockGettingProductInformation();
         }
 

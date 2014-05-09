@@ -1,5 +1,4 @@
-﻿using System;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Response;
 using Lace.Source.Repository.Tests.ProductTests.Data;
 using Xunit.Extensions;
@@ -22,7 +21,7 @@ namespace Lace.Source.Repository.Tests.ProductTests
             _response = new LaceResponse();
             //_handleProductRepositoryCall = new MockHandleProductRepositoryCall();
             _request = new MockLaceRequest();
-            _productRepository = new MockGetDataFromRepository(_request.UserId);
+            _productRepository = new MockGetDataFromRepository(_request.UserId, new MockGettingProductInformation());
             _requestDataFromRepository = new MockRequestProductDataFromRepository();
         }
 
