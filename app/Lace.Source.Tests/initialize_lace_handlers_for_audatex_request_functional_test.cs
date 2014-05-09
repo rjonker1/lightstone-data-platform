@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using Lace.Loader;
 using Lace.Request;
+using Lace.Request.Load;
+using Lace.Request.Load.Loaders;
 using Lace.Response.ExternalServices;
 using Lace.Source.Tests.Data;
 using Xunit.Extensions;

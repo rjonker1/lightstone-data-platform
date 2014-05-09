@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Request;
+using Lace.Models.Request.LicensePlateNumber;
 using Lace.Request.LicensePlateNumber.Chain;
-using Lace.Request.LicensePlateNumber.Models;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 
-namespace Lace.Loader
+namespace Lace.Request.Load.Loaders
 {
     public class LaceLicensePlateNumberLoader : ILoadRequestSources
     {
@@ -16,9 +15,6 @@ namespace Lace.Loader
         {
             LaceResponses = new List<LaceExternalServiceResponse>();
         }
-
-
-
 
         public void HandleRequest(ILaceRequest request,
             Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)

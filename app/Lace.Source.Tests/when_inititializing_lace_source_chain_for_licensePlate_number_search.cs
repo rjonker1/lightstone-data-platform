@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.Request;
+using Lace.Request.Load;
 using Lace.Response;
 using Lace.Source.Tests.Data;
 using Lace.Source.Tests.Data.Initialization;
@@ -15,15 +16,17 @@ namespace Lace.Source.Tests
 
         private readonly ILaceRequest _request;
         private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
+        private readonly ILoadRequestSources _loadRequestSources;
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
             _request = new LicensePlateNumberSliverAllServicesRequest();
+            _loadRequestSources = new MockLaceLoader();
         }
 
         public override void Observe()
         {
-            _initialize = new MockLaceInitializer(_request);
+            _initialize = new MockLaceInitializer(_request, _loadRequestSources);
         }
 
         [Observation]
@@ -32,6 +35,9 @@ namespace Lace.Source.Tests
 
             _initialize.LaceResponses.Count.ShouldEqual(1);
             _initialize.LaceResponses[0].Response.ShouldNotBeNull();
+
+            _initialize.LaceResponses[0].Response.Product.ShouldNotBeNull();
+            _initialize.LaceResponses[0].Response.Product.ProductIsAvailable.ShouldBeTrue();
 
             _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();

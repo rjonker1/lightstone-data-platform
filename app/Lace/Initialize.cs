@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lace.EventHandlers;
 using Lace.Operations;
 using Lace.Request;
+using Lace.Request.Load;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 

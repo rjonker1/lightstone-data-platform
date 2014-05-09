@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Lace.Request;
 using Lace.Response;
+using Lace.Source.Repository.Product;
 using Lace.Source.Tests.Data.Audatex;
 using Lace.Source.Tests.Data.Ivid;
 using Lace.Source.Tests.Data.IvidTitleHolder;
@@ -17,6 +18,7 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
         {
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
             {
+                {"ProductRepository", (req, resp) => new ProductConsumer(req).GetProduct(resp)},
                 {"Ivid", (req, resp) => new MockIvidConsumer(req).CallIvidService(resp)},
                 {
                     "IvidTitleHolder",

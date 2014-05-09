@@ -136,6 +136,14 @@
       <Project>{00668419-21AD-4310-B511-C2A1C6D9DCDF}</Project>
       <Name>Lace.Models.Lightstone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
+      <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
+      <Name>Lace.Models.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj">
+      <Project>{74ac8cc6-6cb2-4f64-b59c-0bf7125181a9}</Project>
+      <Name>Lace.Models.Request.LicensePlateNumber</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
       <Name>Lace.Models.RgtVin</Name>
@@ -147,6 +155,10 @@
     <ProjectReference Include="..\Lace.Request.LicensePlateNumber\Lace.Request.LicensePlateNumber.csproj">
       <Project>{bc152cec-f6c7-41f0-9e97-eaf6c178fe6f}</Project>
       <Name>Lace.Request.LicensePlateNumber</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request.Load\Lace.Request.Load.csproj">
+      <Project>{e8ed7030-9672-41d8-a06f-b3af1464dba6}</Project>
+      <Name>Lace.Request.Load</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
@@ -171,6 +183,14 @@
     <ProjectReference Include="..\Lace.Source.Ivid\Lace.Source.Ivid.csproj">
       <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
       <Name>Lace.Source.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
+      <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
+      <Name>Lace.Source.Repository.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Repository.Tests\Lace.Source.Repository.Tests.csproj">
+      <Project>{dd39c8b6-65f0-407f-af12-c6b80b977d7b}</Project>
+      <Name>Lace.Source.Repository.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
       <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>

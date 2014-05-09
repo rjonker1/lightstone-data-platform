@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Models.Request.LicensePlateNumber;
 using Lace.Request;
-using Lace.Request.LicensePlateNumber.Models;
+using Lace.Request.Load;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 using Lace.Source.Tests.Data.Initialization.LicensePlateNumber;

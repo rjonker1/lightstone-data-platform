@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Request;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 
-namespace Lace
+namespace Lace.Request.Load
 {
     public interface ILoadRequestSources
     {

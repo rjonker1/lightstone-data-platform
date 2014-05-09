@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Request.LicensePlateNumber.Models;
+using Lace.Models.Request.LicensePlateNumber;
 using Lace.Response;
 using Lace.Source.Audatex;
 using Lace.Source.Ivid;
 using Lace.Source.IvidTitleHolder;
+using Lace.Source.Repository.Product;
 using Lace.Source.RgtVin;
 
 namespace Lace.Request.LicensePlateNumber.Chain
@@ -17,6 +18,7 @@ namespace Lace.Request.LicensePlateNumber.Chain
         {
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
             {
+                {"ProductRepository", (req, resp) => new ProductConsumer(req).GetProduct(resp)},
                 {"Ivid", (req, resp) => new IvidConsumer(req).CallIvidService(resp)},
                 {"IvidTitleHolder", (req, resp) => new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)},
                 {"RgtVin", (req, resp) => new RgtVinConsumer(req).CallRgtVinService(resp)},

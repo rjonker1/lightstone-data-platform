@@ -50,9 +50,15 @@
     <Compile Include="EntryPoint.cs" />
     <Compile Include="ICheckForDuplicateRequests.cs" />
     <Compile Include="IEntryPoint.cs" />
+    <Compile Include="IGetRequiredRequestedTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestTypes\GetRequestedTypeToLoad.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Request.Load\Lace.Request.Load.csproj">
+      <Project>{e8ed7030-9672-41d8-a06f-b3af1464dba6}</Project>
+      <Name>Lace.Request.Load</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>

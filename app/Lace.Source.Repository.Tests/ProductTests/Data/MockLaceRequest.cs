@@ -1,9 +1,9 @@
 ﻿using System;
 using Lace.Request;
 
-namespace Lace.Source.Tests.Data
+namespace Lace.Source.Repository.Tests.ProductTests.Data
 {
-    public class LicensePlateNumberRgtVinOnlyRequest : ILaceRequest
+    public class MockLaceRequest : ILaceRequest
     {
 
         public Guid UserId
@@ -14,7 +14,7 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-    
+
         public DateTime RequestDate
         {
             get
@@ -24,12 +24,11 @@ namespace Lace.Source.Tests.Data
         }
 
 
-
         public string[] Sources
         {
             get
             {
-                return new string[] { "RgtVin" };
+                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" };
             }
         }
 
@@ -56,7 +55,10 @@ namespace Lace.Source.Tests.Data
 
         public string RegisterNo
         {
-            get { return string.Empty; }
+            get
+            {
+                return string.Empty;
+            }
         }
 
         public string LicenceNo
@@ -69,13 +71,17 @@ namespace Lace.Source.Tests.Data
 
         public string Product
         {
-            get { return string.Empty; }
+            get
+            {
+                return "XMC167GP";
+            }
         }
 
         public string ReasonForApplication
         {
             get { return string.Empty; }
         }
+
 
         public string UserEmail
         {
@@ -112,7 +118,10 @@ namespace Lace.Source.Tests.Data
 
         public string UserLastName
         {
-            get { return null;}
+            get
+            {
+                return null;
+            }
         }
 
 

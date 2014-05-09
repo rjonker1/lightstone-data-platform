@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC152CEC-F6C7-41F0-9E97-EAF6C178FE6F}</ProjectGuid>
+    <ProjectGuid>{74AC8CC6-6CB2-4F64-B59C-0BF7125181A9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Request.LicensePlateNumber</RootNamespace>
-    <AssemblyName>Lace.Request.LicensePlateNumber</AssemblyName>
+    <RootNamespace>Lace.Models.Request.LicensePlateNumber</RootNamespace>
+    <AssemblyName>Lace.Models.Request.LicensePlateNumber</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,49 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chain\LicensePlateNumberSourceChain.cs" />
-    <None Include="Models\ILicensePlateNumberResponse.cs.old" />
-    <None Include="Models\LicensePlateNumberRequest.cs.old" />
-    <None Include="Models\LicensePlateNumberResponse.cs.old" />
+    <Compile Include="ILicensePlateNumberResponse.cs" />
+    <Compile Include="LicensePlateNumberRequest.cs" />
+    <Compile Include="LicensePlateNumberResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj">
-      <Project>{74ac8cc6-6cb2-4f64-b59c-0bf7125181a9}</Project>
-      <Name>Lace.Models.Request.LicensePlateNumber</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
-      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
-      <Name>Lace.Request</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.Audatex\Lace.Source.Audatex.csproj">
-      <Project>{bedbf9ba-5710-4f01-a88d-e7d217ba5164}</Project>
-      <Name>Lace.Source.Audatex</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj">
-      <Project>{11458e6f-fca6-4d3f-8aaa-10863873bb1c}</Project>
-      <Name>Lace.Source.IvidTitleHolder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.Ivid\Lace.Source.Ivid.csproj">
-      <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
-      <Name>Lace.Source.Ivid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
-      <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
-      <Name>Lace.Source.Repository.Product</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
-      <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>
-      <Name>Lace.Source.RgtVin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
-      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
-      <Name>Lace.Source</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
