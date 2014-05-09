@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.Models.Request.LicensePlateNumber;
-using Lace.Request.LicensePlateNumber.Chain;
+using Lace.Request.Types.LicensePlateNumber.Chain;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 

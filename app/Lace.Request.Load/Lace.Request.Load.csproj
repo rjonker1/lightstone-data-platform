@@ -48,9 +48,9 @@
       <Project>{74ac8cc6-6cb2-4f64-b59c-0bf7125181a9}</Project>
       <Name>Lace.Models.Request.LicensePlateNumber</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Request.LicensePlateNumber\Lace.Request.LicensePlateNumber.csproj">
-      <Project>{bc152cec-f6c7-41f0-9e97-eaf6c178fe6f}</Project>
-      <Name>Lace.Request.LicensePlateNumber</Name>
+    <ProjectReference Include="..\Lace.Request.Types.LicensePlateNumber\Lace.Request.Types.LicensePlateNumber.csproj">
+      <Project>{574121ea-c530-4448-a05b-eaae86ba79d3}</Project>
+      <Name>Lace.Request.Types.LicensePlateNumber</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>

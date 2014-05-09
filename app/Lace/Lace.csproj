@@ -49,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Request.LicensePlateNumber\Lace.Request.LicensePlateNumber.csproj">
-      <Project>{bc152cec-f6c7-41f0-9e97-eaf6c178fe6f}</Project>
-      <Name>Lace.Request.LicensePlateNumber</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Request.Load\Lace.Request.Load.csproj">
       <Project>{e8ed7030-9672-41d8-a06f-b3af1464dba6}</Project>
       <Name>Lace.Request.Load</Name>

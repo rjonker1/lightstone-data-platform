@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lace.Request.LicensePlateNumber")]
+[assembly: AssemblyTitle("Lace.Request.Types.LicensePlateNumber")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lace.Request.LicensePlateNumber")]
+[assembly: AssemblyProduct("Lace.Request.Types.LicensePlateNumber")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5645194d-587e-4a4b-840f-0e52b569f8ce")]
+[assembly: Guid("ee1c4f8d-dfa2-4046-abda-4e7086962930")]
 
 // Version information for an assembly consists of the following four values:
 //

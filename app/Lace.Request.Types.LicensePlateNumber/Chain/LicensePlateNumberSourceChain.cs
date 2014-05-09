@@ -8,7 +8,7 @@ using Lace.Source.IvidTitleHolder;
 using Lace.Source.Repository.Product;
 using Lace.Source.RgtVin;
 
-namespace Lace.Request.LicensePlateNumber.Chain
+namespace Lace.Request.Types.LicensePlateNumber.Chain
 {
     public class LicensePlateNumberSourceChain
     {
