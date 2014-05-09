@@ -7,19 +7,15 @@ namespace Lace.Source.Repository.Tests.ProductTests
 {
     public class product_get_from_repository_tests :Specification
     {
-
-        //private readonly IHandleProductRepositoryCall _handleProductRepositoryCall;
         private readonly ILaceRequest _request;
         private ILaceResponse _response;
         private readonly IGetProductDataFromRepository _productRepository;
         private readonly IRequestProductDataFromRepository _requestDataFromRepository;
        
 
-
         public product_get_from_repository_tests()
         {
             _response = new LaceResponse();
-            //_handleProductRepositoryCall = new MockHandleProductRepositoryCall();
             _request = new MockLaceRequest();
             _productRepository = new MockGetDataFromRepository(_request.UserId, new MockGettingProductInformation());
             _requestDataFromRepository = new MockRequestProductDataFromRepository();

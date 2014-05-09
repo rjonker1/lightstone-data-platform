@@ -47,7 +47,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\EntryPointData\MockEntryPoint.cs" />
     <Compile Include="Data\LicensePlateNumberSliverAllServicesRequest.cs" />
+    <Compile Include="Data\MockGetRequestedTypeToLoad.cs" />
+    <Compile Include="Data\MockLaceLicensePlateNumberLoader.cs" />
+    <Compile Include="Data\MockLicensePlateNumberResponse.cs" />
+    <Compile Include="Data\MockLicensePlateNumberSourceChain.cs" />
+    <Compile Include="EntryPointTests\lace_entry_point_get_response_tests.cs" />
     <Compile Include="lace_entry_point_functional_tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,6 +82,10 @@
     <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
       <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
       <Name>Lace.Models.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj">
+      <Project>{74ac8cc6-6cb2-4f64-b59c-0bf7125181a9}</Project>
+      <Name>Lace.Models.Request.LicensePlateNumber</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>

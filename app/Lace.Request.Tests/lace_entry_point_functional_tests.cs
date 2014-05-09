@@ -12,7 +12,7 @@ namespace Lace.Request.Tests
     {
         private readonly ILaceRequest _request;
         private IList<LaceExternalServiceResponse> _laceResponses;
-        private readonly EntryPoint _entryPoint;
+        private readonly IEntryPoint _entryPoint;
         private readonly ILoadRequestSources _loadRequestSources;
 
         public lace_entry_point_functional_tests()
