@@ -70,7 +70,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.Viewengines.Razor.0.22.2\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -116,6 +119,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lace.Request\Lace.Request.csproj">
+      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
+      <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj">
+      <Project>{8d2ad71f-e6d2-44e5-bd9e-11ff68ef3a6d}</Project>
+      <Name>Lace.Response.ExternalServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lace.Response\Lace.Response.csproj">
+      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
+      <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lace\Lace.csproj">
+      <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
+      <Name>Lace</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
       <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
       <Name>BuildingBlocks</Name>
