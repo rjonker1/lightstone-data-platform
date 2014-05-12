@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lace.Request;
+using Lace.Tests.Data;
 
 namespace Lace.Source.Tests.Data
 {
@@ -121,6 +123,18 @@ namespace Lace.Source.Tests.Data
             get
             {
                 return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
+            }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new List<IField>()
+                {
+                    new AccidentClaimField()
+
+                }.ToArray();
             }
         }
     }

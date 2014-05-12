@@ -33,7 +33,7 @@ namespace Lace.Source.Tests.Data.Initialization
 
         public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
-            handlers.Add(typeof(LicensePlateNumberRequest), r => MockLicensePlateNumberSourceChain.Build(r).Response);
+            handlers.Add(typeof(LicensePlateNumberRequest), r => new MockLicensePlateNumberSourceChain().Build(r).Response);
         }
     }
 }

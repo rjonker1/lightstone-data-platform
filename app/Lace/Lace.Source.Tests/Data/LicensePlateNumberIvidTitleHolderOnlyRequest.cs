@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lace.Request;
+using Lace.Tests.Data;
 
 namespace Lace.Source.Tests.Data
 {
@@ -111,13 +113,28 @@ namespace Lace.Source.Tests.Data
 
         public string UserLastName
         {
-            get { return null;}
+            get { return null; }
         }
 
 
         public string SecurityCode
         {
-            get { return null;}
+            get { return null; }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new List<IField>()
+                {
+                    new BankNameField(),
+                    new AccountNumberField(),
+                    new AccountOpenDateField(),
+                    new AccountClosedDateField()
+
+                }.ToArray();
+            }
         }
     }
 }

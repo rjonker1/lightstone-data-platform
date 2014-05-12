@@ -12,9 +12,14 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
 {
     public class MockLicensePlateNumberSourceChain
     {
-        private static ILaceResponse _response;
+        private readonly ILaceResponse _response;
 
-        public static MockLicensePlateNumberResponse Build(ILaceRequest request)
+        public MockLicensePlateNumberSourceChain()
+        {
+            _response = new LaceResponse();
+        }
+
+        public MockLicensePlateNumberResponse Build(ILaceRequest request)
         {
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
             {
@@ -28,7 +33,6 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
                 {"Audatex", (req, resp) => new MockAudatexConsumer(req).CallAudatexService(resp)}
             };
 
-            _response = new LaceResponse();
             foreach (var handler in handlers)
             {
                 handler.Value(request, _response);

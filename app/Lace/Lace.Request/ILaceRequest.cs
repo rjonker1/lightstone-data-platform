@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lace.Request
 {
-    public interface ILaceRequest
+    public interface ILaceRequest : ILaceFields
     {
         Guid UserId { get; }
         string UserName { get; }
@@ -11,9 +11,6 @@ namespace Lace.Request
         string UserEmail { get; }
         string UserPhone { get; }
 
-        //int CompanyId { get; set; }
-        //int ContractId { get; set; }
-        //string ProductName { get; set; }
         DateTime RequestDate { get; }
         
         string EngineNo { get; }
@@ -27,7 +24,5 @@ namespace Lace.Request
         string Vin { get; }
 
         string SecurityCode { get; }
-
-        string[] Sources { get; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Lace.Tests.Data;
 
 namespace Lace.Request.Tests.Data
 {
@@ -28,16 +30,6 @@ namespace Lace.Request.Tests.Data
         }
 
        
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" };
-            }
-        }
-
-
         public string UserName
         {
             get { return string.Empty; }
@@ -119,7 +111,7 @@ namespace Lace.Request.Tests.Data
         {
             get
             {
-                throw new NotImplementedException();
+                return null;
             }
         }
 
@@ -129,6 +121,36 @@ namespace Lace.Request.Tests.Data
             get
             {
                 return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
+            }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new List<IField>()
+                {
+                    //Ivid
+                    new RegistrationField(),
+                    new VinField(),
+                    new EngineField(),
+                    new MakeDescription(),
+
+                    //Ivid title holder
+                    new BankNameField(),
+                    new AccountNumberField(),
+                    new AccountOpenDateField(),
+                    new AccountClosedDateField(),
+
+                    //rgt vin
+                    new VehicleMakeField(),
+                    new ColourField(),
+                    new PriceField(),
+
+                    //audatex
+                    new AccidentClaimField()
+
+                }.ToArray();
             }
         }
     }

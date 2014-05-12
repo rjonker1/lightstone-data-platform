@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lace.Request;
 
 namespace Lace.Source.Repository.Tests.ProductTests.Data
@@ -130,6 +131,14 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
             get
             {
                 return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
+            }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+              return new IField[0];
             }
         }
     }

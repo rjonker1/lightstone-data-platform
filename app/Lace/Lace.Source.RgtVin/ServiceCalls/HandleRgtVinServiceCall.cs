@@ -20,7 +20,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
         private bool _canHandle;
         public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
-            _canHandle = request.Sources.Contains(Service.ToString());
+            _canHandle = request.Fields.FirstOrDefault(f => f.SourceId == (int)Service) != null;
 
             if (!_canHandle)
             {

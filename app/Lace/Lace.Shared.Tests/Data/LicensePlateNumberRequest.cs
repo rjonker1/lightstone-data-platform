@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lace.Request;
 
 namespace Lace.Shared.Tests.Data
@@ -116,6 +117,14 @@ namespace Lace.Shared.Tests.Data
         }
 
 
-        
+
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new IField[0];
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Lace.Request;
+﻿using System.Collections.Generic;
+using Lace.Request;
 using System;
+using Lace.Tests.Data;
 
 namespace Lace.Source.Tests.Data
 {
@@ -113,6 +115,21 @@ namespace Lace.Source.Tests.Data
         public string SecurityCode
         {
             get { return null; }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new List<IField>()
+                {
+                   new RegistrationField(),
+                   new VinField(),
+                   new EngineField(),
+                   new MakeDescription()
+
+                }.ToArray();
+            }
         }
     }
 }

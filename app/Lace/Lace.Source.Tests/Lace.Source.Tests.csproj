@@ -196,6 +196,10 @@
       <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
       <Name>Lace.Source</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Tests.Data\Lace.Tests.Data.csproj">
+      <Project>{734172ed-e742-4fa0-a5d3-b6bbb581807c}</Project>
+      <Name>Lace.Tests.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
       <Name>Lace</Name>

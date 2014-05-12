@@ -1,5 +1,7 @@
-﻿using Lace.Request;
+﻿using System.Collections.Generic;
+using Lace.Request;
 using System;
+using Lace.Tests.Data;
 
 namespace Lace.Source.Tests.Data
 {
@@ -130,6 +132,36 @@ namespace Lace.Source.Tests.Data
             get
             {
                 return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
+            }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new List<IField>()
+                {
+                    //Ivid
+                    new RegistrationField(),
+                    new VinField(),
+                    new EngineField(),
+                    new MakeDescription(),
+
+                    //Ivid title holder
+                    new BankNameField(),
+                    new AccountNumberField(),
+                    new AccountOpenDateField(),
+                    new AccountClosedDateField(),
+
+                    //rgt vin
+                    new VehicleMakeField(),
+                    new ColourField(),
+                    new PriceField(),
+
+                    //audatex
+                    new AccidentClaimField()
+
+                }.ToArray();
             }
         }
     }

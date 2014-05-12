@@ -31,7 +31,7 @@ namespace Lace.Request.Load.Loaders
 
         public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
-            handlers.Add(typeof (LicensePlateNumberRequest), r => LicensePlateNumberSourceChain.Build(r).Response);
+            handlers.Add(typeof (LicensePlateNumberRequest), r => new LicensePlateNumberSourceChain().Build(r).Response);
         }
     }
 }

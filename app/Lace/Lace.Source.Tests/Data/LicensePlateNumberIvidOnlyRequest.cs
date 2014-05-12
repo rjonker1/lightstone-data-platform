@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lace.Request;
+using Lace.Tests.Data;
 
 namespace Lace.Source.Tests.Data
 {
@@ -79,34 +81,49 @@ namespace Lace.Source.Tests.Data
 
         public string UserEmail
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public string UserPhone
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public string Vin
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
 
         public string UserFirstName
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public string UserLastName
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
 
         public string SecurityCode
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
+        }
+
+        public IField[] Fields
+        {
+            get
+            {
+                return new List<IField>()
+                {
+                   new RegistrationField(),
+                   new VinField(),
+                   new EngineField(),
+                   new MakeDescription()
+
+                }.ToArray();
+            }
         }
     }
 }
