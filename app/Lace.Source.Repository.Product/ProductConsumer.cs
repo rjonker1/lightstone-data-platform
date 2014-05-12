@@ -1,7 +1,7 @@
 ﻿using Lace.Request;
 using Lace.Response;
 using Lace.Source.Repository.Product.DataAccess;
-using Lace.Source.Repository.Product.Sql;
+using Lace.Source.Repository.Product.SqlServer;
 
 namespace Lace.Source.Repository.Product
 {
