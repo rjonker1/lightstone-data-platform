@@ -10,23 +10,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return Guid.NewGuid();
-            }
-        }
-
-        public string CompanyId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public string ContractId
-        {
-            get
-            {
-                return string.Empty;
+                return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
             }
         }
 
@@ -127,13 +111,13 @@ namespace Lace.Source.Tests.Data
 
         public string UserLastName
         {
-            get { throw new NotImplementedException(); }
+            get { return null;}
         }
 
 
         public string SecurityCode
         {
-            get { throw new NotImplementedException(); }
+            get { return null;}
         }
     }
 }

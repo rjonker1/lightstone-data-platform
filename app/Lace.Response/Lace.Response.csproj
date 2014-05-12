@@ -60,6 +60,10 @@
       <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
       <Name>Lace.Models.Lightstone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
+      <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
+      <Name>Lace.Models.Product</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
       <Name>Lace.Models.RgtVin</Name>

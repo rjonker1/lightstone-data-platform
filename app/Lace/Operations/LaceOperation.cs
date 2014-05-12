@@ -1,4 +1,5 @@
 ﻿using Lace.EventHandlers;
+using Lace.Request.Load;
 
 namespace Lace.Operations
 {
@@ -6,7 +7,6 @@ namespace Lace.Operations
     {
        
         private readonly ILoadRequestSources _laceLoader;
-
         public LaceOperation(ILoadRequestSources laceLoader)
         {
             _laceLoader = laceLoader;
@@ -35,7 +35,7 @@ namespace Lace.Operations
 
         private void OnSettingHandlers(object sender, SetHandlersEventArgs e)
         {
-            _laceLoader.BuildLicensePlateNumberRequest(e.Handlers);
+            _laceLoader.BuildRequest(e.Handlers);
         }
 
         private void OnLoading(object sender, LoadEventArgs e)

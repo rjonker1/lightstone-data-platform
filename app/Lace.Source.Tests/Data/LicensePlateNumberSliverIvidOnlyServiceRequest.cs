@@ -14,22 +14,6 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public string CompanyId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public string ContractId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
         public DateTime RequestDate
         {
             get
@@ -101,34 +85,34 @@ namespace Lace.Source.Tests.Data
 
         public string UserEmail
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public string UserPhone
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public string Vin
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
 
         public string UserFirstName
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public string UserLastName
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
 
         public string SecurityCode
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
     }
 }

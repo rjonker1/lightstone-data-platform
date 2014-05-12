@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Models.Request.LicensePlateNumber;
 using Lace.Request;
-using Lace.Request.LicensePlateNumber.Models;
+using Lace.Request.Load;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 using Lace.Source.Tests.Data.Initialization.LicensePlateNumber;
@@ -30,7 +31,7 @@ namespace Lace.Source.Tests.Data.Initialization
             }
         }
 
-        public void BuildLicensePlateNumberRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+        public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
         {
             handlers.Add(typeof(LicensePlateNumberRequest), r => MockLicensePlateNumberSourceChain.Build(r).Response);
         }

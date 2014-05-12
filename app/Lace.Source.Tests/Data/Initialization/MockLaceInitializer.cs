@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lace.EventHandlers;
 using Lace.Operations;
 using Lace.Request;
+using Lace.Request.Load;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 
@@ -14,6 +15,7 @@ namespace Lace.Source.Tests.Data.Initialization
         private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
 
         private readonly ILaceRequest _request;
+        private readonly ILoadRequestSources _loadRequestSources;
 
         public event EventHandler<SetHandlersEventArgs> SetHandlers;
         public event EventHandler<LoadEventArgs> Load;
@@ -21,9 +23,10 @@ namespace Lace.Source.Tests.Data.Initialization
         private LaceOperation Bootstrap;
 
 
-        public MockLaceInitializer(ILaceRequest request)
+        public MockLaceInitializer(ILaceRequest request, ILoadRequestSources loadRequestSources)
         {
             _request = request;
+            _loadRequestSources = loadRequestSources;
 
             Set();
 
@@ -34,7 +37,7 @@ namespace Lace.Source.Tests.Data.Initialization
 
         private void Set()
         {
-            Bootstrap = new LaceOperation(new MockLaceLoader())
+            Bootstrap = new LaceOperation(_loadRequestSources)
             {
                 LaceBootstrap = this
             };

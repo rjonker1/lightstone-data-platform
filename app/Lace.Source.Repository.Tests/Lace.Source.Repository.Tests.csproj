@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD39C8B6-65F0-407F-AF12-C6B80B977D7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Source.Repository.Tests</RootNamespace>
+    <AssemblyName>Lace.Source.Repository.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.bdd">
+      <HintPath>..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ProductTests\Data\MockGetDataFromRepository.cs" />
+    <Compile Include="ProductTests\Data\MockGettingProductInformation.cs" />
+    <Compile Include="ProductTests\Data\MockHandleProductRepositoryCall.cs" />
+    <Compile Include="ProductTests\Data\MockLaceRequest.cs" />
+    <Compile Include="ProductTests\Data\MockRequestProductDataFromRepository.cs" />
+    <Compile Include="ProductTests\product_get_from_repository_tests.cs" />
+    <Compile Include="ProductTests\product_respository_being_consumed_tests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
+      <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
+      <Name>Lace.Models.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
+      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
+      <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
+      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
+      <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
+      <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
+      <Name>Lace.Source.Repository.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Repository\Lace.Source.Repository.csproj">
+      <Project>{caa40bd4-dd05-42c9-9e53-84c95268d072}</Project>
+      <Name>Lace.Source.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
+      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
+      <Name>Lace.Source</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

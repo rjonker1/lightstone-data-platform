@@ -10,26 +10,11 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return Guid.NewGuid();
+                return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
             }
         }
 
-        public string CompanyId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public string ContractId
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
+      
         public DateTime RequestDate
         {
             get
@@ -38,14 +23,7 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public string LicensePlateNumber
-        {
-            get
-            {
-                return "XMC167GP";
-            }
-        }
-
+    
         public string[] Sources
         {
             get
@@ -77,12 +55,18 @@ namespace Lace.Source.Tests.Data
 
         public string RegisterNo
         {
-            get { return string.Empty; }
+            get
+            {
+                return string.Empty;
+            }
         }
 
         public string LicenceNo
         {
-            get { return string.Empty; }
+            get
+            {
+                return "XMC167GP";
+            }
         }
 
         public string Product
@@ -136,7 +120,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                throw new NotImplementedException();
+                return null;
             }
         }
 

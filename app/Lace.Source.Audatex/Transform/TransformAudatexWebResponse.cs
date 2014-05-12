@@ -19,7 +19,7 @@ namespace Lace.Source.Audatex.Transform
         {
             get
             {
-                var models = Helpers.XmlFunctions.XmlToObject<VendorResponse>(Message.MessageEnvelope);
+                var models = Shared.Helpers.XmlFunctions.XmlToObject<VendorResponse>(Message.MessageEnvelope);
                 return models == null ? new List<HistoryCheckResponse>() : models.Body.EntityList;
             }
         }

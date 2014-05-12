@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E7E7B3B-B78C-4A84-AA69-77C467C5E04D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Request.Entry</RootNamespace>
+    <AssemblyName>Lace.Request.Entry</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Checks\CheckTheReceivedRequest.cs" />
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="ICheckForDuplicateRequests.cs" />
+    <Compile Include="IEntryPoint.cs" />
+    <Compile Include="IGetRequiredRequestedTypes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestTypes\GetRequestedTypeToLoad.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.Request.Load\Lace.Request.Load.csproj">
+      <Project>{e8ed7030-9672-41d8-a06f-b3af1464dba6}</Project>
+      <Name>Lace.Request.Load</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
+      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
+      <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj">
+      <Project>{8d2ad71f-e6d2-44e5-bd9e-11ff68ef3a6d}</Project>
+      <Name>Lace.Response.ExternalServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
+      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
+      <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
+      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
+      <Name>Lace.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace\Lace.csproj">
+      <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
+      <Name>Lace %28Lace\Lace%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
