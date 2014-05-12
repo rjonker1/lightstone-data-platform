@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lace.Shared.Helpers
 {
-    public static class ConvertFunctions
+    public class ConvertFunctions
     {
         public static T ConvertObject<T>(Object input)
         {

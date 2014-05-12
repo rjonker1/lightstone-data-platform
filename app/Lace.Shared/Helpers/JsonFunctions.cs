@@ -1,9 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Lace.Shared.Helpers
 {
-    public static class JsonFunctions
+    public class JsonFunctions
     {
         public static string ObjectToJson<T>(T obj)
         {

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Lace.Shared.Helpers
 {
-    public static class XmlFunctions
+    public class XmlFunctions
     {
         public static string ObjectToXml<T>(T obj, Type[] expectedTypes = null)
         {
