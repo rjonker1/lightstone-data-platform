@@ -1,13 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using Lace.Request;
 
 namespace Lace.Shared.Tests.Data
 {
-    class LicensePlateNumberIvidOnlyRequest : ILaceRequest
+    public class LicensePlateNumberIvidOnlyRequest : ILaceRequest
     {
 
         public Guid UserId
+        {
+            get
+            {
+                return Guid.NewGuid();
+            }
+        }
+
+        public Guid Token
         {
             get
             {
@@ -126,5 +133,6 @@ namespace Lace.Shared.Tests.Data
                 return new IField[0];
             }
         }
+       
     }
 }

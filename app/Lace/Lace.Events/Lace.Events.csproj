@@ -52,6 +52,12 @@
     <Compile Include="LaceEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

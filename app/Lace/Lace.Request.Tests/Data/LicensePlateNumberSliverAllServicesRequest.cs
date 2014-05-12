@@ -15,6 +15,14 @@ namespace Lace.Request.Tests.Data
             }
         }
 
+        public Guid Token
+        {
+            get
+            {
+                return Guid.NewGuid();
+            }
+        }
+
         public int CompanyId { get; set; }
 
         public int ContractId { get; set; }

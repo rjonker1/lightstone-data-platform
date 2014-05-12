@@ -16,6 +16,13 @@ namespace Lace.Source.Tests.Data
             }
         }
 
+        public Guid Token
+        {
+            get
+            {
+                return Guid.NewGuid();
+            }
+        }
       
         public DateTime RequestDate
         {

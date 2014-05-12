@@ -4,6 +4,7 @@ namespace Lace.Request
     public interface ILaceRequest : ILaceFields
     {
         Guid UserId { get; }
+        Guid Token { get; }
         string UserName { get; }
         string UserFirstName { get; }
         string UserLastName { get; }

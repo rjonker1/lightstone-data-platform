@@ -15,6 +15,14 @@ namespace Lace.Source.Tests.Data
                 return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
             }
         }
+
+        public Guid Token
+        {
+            get
+            {
+                return Guid.NewGuid();
+            }
+        }
         
 
         public DateTime RequestDate
