@@ -52,23 +52,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api.Tests", "Workfl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lace", "Lace", "{B9BF0216-FE5E-4ADE-B094-A1FD2B1D3628}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace", "Lace\Lace.csproj", "{5B0ABCF8-5984-46E1-B1A5-6F3FD2BECAA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace", "Lace\Lace\Lace.csproj", "{5B0ABCF8-5984-46E1-B1A5-6F3FD2BECAA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source", "Lace.Source\Lace.Source.csproj", "{D235F566-9AA9-47FD-95F5-5B1ABEBDF035}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source", "Lace\Lace.Source\Lace.Source.csproj", "{D235F566-9AA9-47FD-95F5-5B1ABEBDF035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Ivid", "Lace.Source.Ivid\Lace.Source.Ivid.csproj", "{14126A3D-F54B-40F0-B630-E1F3BBA61448}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Ivid", "Lace\Lace.Source.Ivid\Lace.Source.Ivid.csproj", "{14126A3D-F54B-40F0-B630-E1F3BBA61448}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.IvidTitleHolder", "Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj", "{11458E6F-FCA6-4D3F-8AAA-10863873BB1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.IvidTitleHolder", "Lace\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj", "{11458E6F-FCA6-4D3F-8AAA-10863873BB1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.RgtVin", "Lace.Source.RgtVin\Lace.Source.RgtVin.csproj", "{81FC9EAA-0A3F-474F-A94E-0716952DF96C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.RgtVin", "Lace\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj", "{81FC9EAA-0A3F-474F-A94E-0716952DF96C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request", "Lace.Request\Lace.Request.csproj", "{80BD23D4-61D7-471A-B9A0-65A5AE8A3DFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request", "Lace\Lace.Request\Lace.Request.csproj", "{80BD23D4-61D7-471A-B9A0-65A5AE8A3DFF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{058C2D74-B352-493E-BA2D-616CEC3E98F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Tests", "Lace.Source.Tests\Lace.Source.Tests.csproj", "{B9B50B38-6EEC-4D8F-86E1-E9F35955E527}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Tests", "Lace\Lace.Source.Tests\Lace.Source.Tests.csproj", "{B9B50B38-6EEC-4D8F-86E1-E9F35955E527}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Tests", "Lace.Request.Tests\Lace.Request.Tests.csproj", "{61DCBBF9-D271-4EED-B767-F9877BB85F8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Tests", "Lace\Lace.Request.Tests\Lace.Request.Tests.csproj", "{61DCBBF9-D271-4EED-B767-F9877BB85F8F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{15888ECE-F59A-427B-B092-7ED5E4494AD7}"
 EndProject
@@ -76,49 +76,49 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{7A71
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Responses", "Responses", "{20B8F953-C0DF-4EB0-8DC7-7B733ACE0B22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Response", "Lace.Response\Lace.Response.csproj", "{957BD4B9-8F6B-49E5-A2A0-73CF1FF0C3F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Response", "Lace\Lace.Response\Lace.Response.csproj", "{957BD4B9-8F6B-49E5-A2A0-73CF1FF0C3F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{F0DD6C1C-8FB6-44E1-8653-5975137EC908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Ivid", "Lace.Models.Ivid\Lace.Models.Ivid.csproj", "{6931CDBD-3EA0-4957-80B1-237B14D6A3AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Ivid", "Lace\Lace.Models.Ivid\Lace.Models.Ivid.csproj", "{6931CDBD-3EA0-4957-80B1-237B14D6A3AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.IvidTitleHolder", "Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj", "{18D3AB89-EC20-4685-B0BD-57C87C5C3495}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.IvidTitleHolder", "Lace\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj", "{18D3AB89-EC20-4685-B0BD-57C87C5C3495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.RgtVin", "Lace.Models.RgtVin\Lace.Models.RgtVin.csproj", "{DD94160D-88E7-4590-8707-891024976316}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.RgtVin", "Lace\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj", "{DD94160D-88E7-4590-8707-891024976316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models", "Lace.Models\Lace.Models.csproj", "{C9BDE461-74E7-4615-A61B-993B372F0EB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models", "Lace\Lace.Models\Lace.Models.csproj", "{C9BDE461-74E7-4615-A61B-993B372F0EB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Response.ExternalServices", "Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj", "{8D2AD71F-E6D2-44E5-BD9E-11FF68EF3A6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Response.ExternalServices", "Lace\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj", "{8D2AD71F-E6D2-44E5-BD9E-11FF68EF3A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Events", "Lace.Events\Lace.Events.csproj", "{98057A7D-BAD4-4578-A408-955CA0A7523F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Events", "Lace\Lace.Events\Lace.Events.csproj", "{98057A7D-BAD4-4578-A408-955CA0A7523F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Audatex", "Lace.Source.Audatex\Lace.Source.Audatex.csproj", "{BEDBF9BA-5710-4F01-A88D-E7D217BA5164}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Audatex", "Lace\Lace.Source.Audatex\Lace.Source.Audatex.csproj", "{BEDBF9BA-5710-4F01-A88D-E7D217BA5164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Audatex", "Lace.Models.Audatex\Lace.Models.Audatex.csproj", "{731C14E0-8E69-4BEA-A189-C62C40BC77CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Audatex", "Lace\Lace.Models.Audatex\Lace.Models.Audatex.csproj", "{731C14E0-8E69-4BEA-A189-C62C40BC77CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Rgt", "Lace.Models.Rgt\Lace.Models.Rgt.csproj", "{99C72578-05A3-4F67-87F6-280118C4C791}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Rgt", "Lace\Lace.Models.Rgt\Lace.Models.Rgt.csproj", "{99C72578-05A3-4F67-87F6-280118C4C791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Lightstone", "Lace.Models.Lightstone\Lace.Models.Lightstone.csproj", "{00668419-21AD-4310-B511-C2A1C6D9DCDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Lightstone", "Lace\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj", "{00668419-21AD-4310-B511-C2A1C6D9DCDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Entry", "Lace.Request.Entry\Lace.Request.Entry.csproj", "{2E7E7B3B-B78C-4A84-AA69-77C467C5E04D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Entry", "Lace\Lace.Request.Entry\Lace.Request.Entry.csproj", "{2E7E7B3B-B78C-4A84-AA69-77C467C5E04D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared", "Lace.Shared\Lace.Shared.csproj", "{FA4117E4-9F86-4EF7-B232-771743CC7AEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared", "Lace\Lace.Shared\Lace.Shared.csproj", "{FA4117E4-9F86-4EF7-B232-771743CC7AEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Tests", "Lace.Shared.Tests\Lace.Shared.Tests.csproj", "{E4914C92-724A-44C4-871F-E1DB3DD02E45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Tests", "Lace\Lace.Shared.Tests\Lace.Shared.Tests.csproj", "{E4914C92-724A-44C4-871F-E1DB3DD02E45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Product", "Lace.Models.Product\Lace.Models.Product.csproj", "{3A2D132A-8166-43C0-84CB-83D0367D6AA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Product", "Lace\Lace.Models.Product\Lace.Models.Product.csproj", "{3A2D132A-8166-43C0-84CB-83D0367D6AA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Repository.Product", "Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj", "{CEA1E1FE-102D-4221-A9C1-6779FF318043}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Repository.Product", "Lace\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj", "{CEA1E1FE-102D-4221-A9C1-6779FF318043}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Repository", "Lace.Source.Repository\Lace.Source.Repository.csproj", "{CAA40BD4-DD05-42C9-9E53-84C95268D072}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Repository", "Lace\Lace.Source.Repository\Lace.Source.Repository.csproj", "{CAA40BD4-DD05-42C9-9E53-84C95268D072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Repository.Tests", "Lace.Source.Repository.Tests\Lace.Source.Repository.Tests.csproj", "{DD39C8B6-65F0-407F-AF12-C6B80B977D7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Source.Repository.Tests", "Lace\Lace.Source.Repository.Tests\Lace.Source.Repository.Tests.csproj", "{DD39C8B6-65F0-407F-AF12-C6B80B977D7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Load", "Lace.Request.Load\Lace.Request.Load.csproj", "{E8ED7030-9672-41D8-A06F-B3AF1464DBA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Load", "Lace\Lace.Request.Load\Lace.Request.Load.csproj", "{E8ED7030-9672-41D8-A06F-B3AF1464DBA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Request.LicensePlateNumber", "Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj", "{74AC8CC6-6CB2-4F64-B59C-0BF7125181A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Request.LicensePlateNumber", "Lace\Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj", "{74AC8CC6-6CB2-4F64-B59C-0BF7125181A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Types.LicensePlateNumber", "Lace.Request.Types.LicensePlateNumber\Lace.Request.Types.LicensePlateNumber.csproj", "{574121EA-C530-4448-A05B-EAAE86BA79D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Request.Types.LicensePlateNumber", "Lace\Lace.Request.Types.LicensePlateNumber\Lace.Request.Types.LicensePlateNumber.csproj", "{574121EA-C530-4448-A05B-EAAE86BA79D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
