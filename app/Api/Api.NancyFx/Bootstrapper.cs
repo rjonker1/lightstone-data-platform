@@ -1,6 +1,8 @@
-﻿using Nancy.Authentication.Stateless;
+﻿using AutoMapper;
+using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
+using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.NancyFx
@@ -9,7 +11,6 @@ namespace Api.NancyFx
 
     public class Bootstrapper : DefaultNancyBootstrapper
     {
-
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
@@ -24,6 +25,8 @@ namespace Api.NancyFx
 
             StatelessAuthentication.Enable(pipelines, configuration);
 
+            pipelines.EnableMonitoring();
+
             //Make every request SSL based
             //pipelines.BeforeRequest += ctx =>
             //{
@@ -36,6 +39,14 @@ namespace Api.NancyFx
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             // Perform registation that should have an application lifetime
+            base.ConfigureApplicationContainer(container);
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Request, IRequest>();
+                cfg.CreateMap<Response, IResponse>()
+                    .ForMember(d => d.Response, opt => opt.MapFrom<string>(s => JsonConvert.SerializeObject(s.Contents.Target)));
+            });
 
             container.Register<IAuthenticateUser, UmApiAuthenticator>();
         }
