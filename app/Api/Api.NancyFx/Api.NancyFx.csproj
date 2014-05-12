@@ -129,6 +129,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lace.Request.Entry\Lace.Request.Entry.csproj">
+      <Project>{2e7e7b3b-b78c-4a84-aa69-77c467c5e04d}</Project>
+      <Name>Lace.Request.Entry</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>

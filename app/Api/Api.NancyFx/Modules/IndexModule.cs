@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Lace;
+using Lace.Request.Entry;
 using Nancy;
 using Nancy.Security;
 
@@ -9,7 +10,7 @@ namespace Api.NancyFx.Modules
     {
         public IndexModule()
         {
-            Post["/"] = parameters =>
+            Post["/license"] = parameters =>
             {
                 this.RequiresAuthentication();
 
@@ -21,9 +22,10 @@ namespace Api.NancyFx.Modules
                 this.RequiresAuthentication();
 
                 var request = new LicensePlateNumberRequest(parameters.licenseNo, new[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" });
-                var init = new Initialize(request);
+                var entryPoint = new EntryPoint();
+                var responses = entryPoint.GetResponsesFromLace(request);
 
-                return Response.AsJson(init.LaceResponses.First().Response);
+                return Response.AsJson(responses);
             };
         }
     }
