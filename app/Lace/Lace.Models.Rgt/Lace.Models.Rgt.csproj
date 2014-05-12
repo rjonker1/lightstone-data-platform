@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Models.Rgt</RootNamespace>
-    <AssemblyName>Lace.Models.Rgt</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Models.Rgt</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

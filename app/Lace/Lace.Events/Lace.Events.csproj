@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Events</RootNamespace>
-    <AssemblyName>Lace.Events</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Events</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

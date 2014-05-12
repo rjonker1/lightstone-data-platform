@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Models.IvidTitleHolder</RootNamespace>
-    <AssemblyName>Lace.Models.IvidTitleHolder</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Models.IvidTitleHolder</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

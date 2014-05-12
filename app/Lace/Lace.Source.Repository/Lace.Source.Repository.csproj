@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Source.Repository</RootNamespace>
-    <AssemblyName>Lace.Source.Repository</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Source.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

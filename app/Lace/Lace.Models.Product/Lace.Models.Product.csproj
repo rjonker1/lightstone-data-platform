@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Models.Product</RootNamespace>
-    <AssemblyName>Lace.Models.Product</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Models.Product</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lace.Request.Types.LicensePlateNumber</RootNamespace>
-    <AssemblyName>Lace.Request.Types.LicensePlateNumber</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Request.Types.LicensePlateNumber</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
