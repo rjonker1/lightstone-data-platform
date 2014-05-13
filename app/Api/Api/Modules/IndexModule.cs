@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Lace.Request.Entry;
 using Nancy;
+using Nancy.ModelBinding;
 using Nancy.Security;
 
 namespace Api.Modules
@@ -13,19 +14,18 @@ namespace Api.Modules
             {
                 this.RequiresAuthentication();
 
-                return HttpStatusCode.OK;
-            };
-
-            Post["/license/{licenseNo}"] = parameters =>
-            {
-                this.RequiresAuthentication();
-
-                var request = new LicensePlateNumberRequest(parameters.licenseNo, new[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" });
+                var licRequest = this.Bind<Request>();
+                var request = new LicensePlateNumberRequest(licRequest.LicenseNo, new[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" });
                 var entryPoint = new EntryPoint();
                 var responses = entryPoint.GetResponsesFromLace(request);
 
                 return Response.AsJson(responses.First().Response);
             };
         }
+    }
+
+    public class Request
+    {
+        public string LicenseNo { get; set; }
     }
 }

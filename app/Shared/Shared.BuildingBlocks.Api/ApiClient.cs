@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using BuildingBlocks.Configuration;
+﻿using BuildingBlocks.Configuration;
 using RestSharp;
 
 namespace Shared.BuildingBlocks.Api
 {
     public interface IApiClient
     {
-        T Post<T>(string resource, string token, KeyValuePair<string, object>[] parameters = null) where T : new();
+        T Post<T>(string resource, string token, object body = null) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -21,28 +20,26 @@ namespace Shared.BuildingBlocks.Api
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
-        public T Post<T>(string resource, string token, KeyValuePair<string, object>[] parameters = null) where T : new()
+        public T Post<T>(string resource, string token, object body = null) where T : new()
         {
-            var request = RestRequest(resource, token, parameters);
+            var request = RestRequest(resource, token, body);
 
             return _client.Execute<T>(request).Data;
         }
 
-        public string Post(string resource, string token, KeyValuePair<string, object>[] parameters = null)
+        public string Post(string resource, string token, object body = null)
         {
-            var request = RestRequest(resource, token, parameters);
+            var request = RestRequest(resource, token, body);
 
             return _client.Execute(request).Content;
         }
 
-        private static RestRequest RestRequest(string resource, string token, IEnumerable<KeyValuePair<string, object>> parameters = null)
+        private static RestRequest RestRequest(string resource, string token, object body = null)
         {
             var request = new RestRequest(resource, Method.POST);
             request.AddHeader("Authorization", "ApiKey " + token);
-            if (parameters == null) return request;
-            foreach (var parameter in parameters)
-                request.AddUrlSegment(parameter.Key, parameter.Value + "");
-
+            if (body != null) 
+                request.AddParameter("application/x-www-form-urlencoded", body, ParameterType.RequestBody);
             return request;
         }
     }
