@@ -198,7 +198,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
-      <Name>Lace %28Lace\Lace%29</Name>
+      <Name>Lace</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

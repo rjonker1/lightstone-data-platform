@@ -22,14 +22,6 @@
         }
 
         /// <summary>
-        /// Finds an appSetting called umApi/config/authenticationResource
-        /// </summary>
-        public string AuthenticationResource
-        {
-            get { return _reader.GetString("umApi/config/authenticationResource", () => "UNKNOWN_AUTHENTICATION_RESOURCE"); }
-        }
-
-        /// <summary>
         /// Finds an appSetting called umApi/config/redisServers
         /// </summary>
         public string RedisServers
