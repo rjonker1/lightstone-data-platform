@@ -1,6 +1,10 @@
-﻿namespace Lace.Events
+﻿using EasyNetQ;
+using Lace.Events.Messages;
+
+namespace Lace.Events
 {
-    interface ILaceEvent
+    public interface ILaceEvent
     {
+        void PublishMessage(IBus bus, DefaultEventMessage message);
     }
 }
