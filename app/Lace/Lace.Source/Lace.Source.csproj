@@ -44,12 +44,14 @@
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Enums\Services.cs" />
+    <Compile Include="EventLogging\LogWebServiceSourceEvent.cs" />
     <Compile Include="ICallTheExternalWebService.cs" />
     <Compile Include="IConfiguration.cs" />
     <Compile Include="IHandleServiceCall.cs" />
+    <Compile Include="ILogEvent.cs" />
     <Compile Include="IRequestDataFromService.cs" />
     <Compile Include="ITransform.cs" />
-    <Compile Include="ITransformToLaceType.cs" />
+    <None Include="ITransformToLaceType.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

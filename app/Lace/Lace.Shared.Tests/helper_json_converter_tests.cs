@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Lace.Functions.Json;
 using Lace.Request;
 using Lace.Shared.Tests.Data;
 using Xunit.Extensions;
@@ -16,7 +17,7 @@ namespace Lace.Shared.Tests
 
         public override void Observe()
         {
-            _result = Helpers.JsonFunctions.ObjectToJson(_request);
+            _result = JsonFunctions.JsonFunction.ObjectToJson(_request);
         }
 
         [Observation]

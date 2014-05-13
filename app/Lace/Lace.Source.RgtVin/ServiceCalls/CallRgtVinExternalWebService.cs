@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Logging;
+using Lace.Functions.Json;
 using Lace.Models.RgtVin;
 using Lace.Models.RgtVin.Dto;
 using Lace.Request;
@@ -74,13 +75,13 @@ namespace Lace.Source.RgtVin.ServiceCalls
 
         private static void LogServiceRequest(RgtVinRequest request)
         {
-            Log.InfoFormat("RGT Request sent to RGT Vin Web Service: {0}", Shared.Helpers.JsonFunctions.ObjectToJson(request));
+            Log.InfoFormat("RGT Request sent to RGT Vin Web Service: {0}", JsonFunctions.JsonFunction.ObjectToJson(request));
         }
 
         private void LogServiceResponse()
         {
             Log.InfoFormat("Response Received from RGT Vin Web Service {0}",
-                Shared.Helpers.JsonFunctions.ObjectToJson(_rgtVinResponse));
+                JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse));
         }
     }
 }

@@ -106,6 +106,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Functions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
       <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
       <Name>Lace.Models.Audatex</Name>

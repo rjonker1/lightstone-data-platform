@@ -1,4 +1,4 @@
-﻿namespace Lace.Events.Sources
+﻿namespace Lace.Shared.Enums
 {
     public enum EventSource
     {

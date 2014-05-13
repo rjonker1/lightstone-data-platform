@@ -1,7 +1,7 @@
 ﻿using System;
 using EasyNetQ;
 using Lace.Events.Messages;
-using Lace.Events.Sources;
+using Lace.Shared.Enums;
 using Xunit.Extensions;
 
 namespace Lace.Events.Tests

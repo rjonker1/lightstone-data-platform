@@ -62,6 +62,10 @@
     <Compile Include="Transform\TransformRgtVinWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Functions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
       <Name>Lace.Models.RgtVin</Name>

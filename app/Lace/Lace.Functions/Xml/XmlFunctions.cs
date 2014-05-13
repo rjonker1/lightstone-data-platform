@@ -3,13 +3,25 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Lace.Shared.Helpers
+namespace Lace.Functions.Xml
 {
-    public class XmlFunctions
+    public class XmlFunctions : IXmlFunction
     {
-        public static string ObjectToXml<T>(T obj, Type[] expectedTypes = null)
+        private static readonly IXmlFunction Function = new XmlFunctions();
+
+        public static IXmlFunction XmlFunction
         {
-            var serializer = expectedTypes == null ? new XmlSerializer(typeof(T)) : new XmlSerializer(typeof(T), expectedTypes);
+            get
+            {
+                return Function;
+            }
+        }
+
+        public string ObjectToXml<T>(T obj, Type[] expectedTypes = null)
+        {
+            var serializer = expectedTypes == null
+                ? new XmlSerializer(typeof (T))
+                : new XmlSerializer(typeof (T), expectedTypes);
 
             using (var stringWriter = new StringWriter())
             {
@@ -26,7 +38,7 @@ namespace Lace.Shared.Helpers
         }
 
 
-        public static T XmlToObject<T>(string xml) where T : new()
+        public T XmlToObject<T>(string xml) where T : new()
         {
             try
             {

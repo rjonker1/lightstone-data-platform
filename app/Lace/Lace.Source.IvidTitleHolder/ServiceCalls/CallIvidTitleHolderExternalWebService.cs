@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using Lace.Functions.Json;
 using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
@@ -70,7 +71,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         
         private void LogServiceResponse()
         {
-            Log.InfoFormat("Response Received from Ivid Title Holder Web Service {0}", Shared.Helpers.JsonFunctions.ObjectToJson(_ividTitleHolderResponse));
+            Log.InfoFormat("Response Received from Ivid Title Holder Web Service {0}", JsonFunctions.JsonFunction.ObjectToJson(_ividTitleHolderResponse));
         }
 
         public void TransformWebResponse(ILaceResponse response)

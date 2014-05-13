@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
+using Lace.Functions.Json;
 using Lace.Request.Entry.Checks;
 using Lace.Request.Entry.RequestTypes;
 using Lace.Response;
@@ -33,7 +34,7 @@ namespace Lace.Request.Entry
             catch (Exception)
             {
                 Log.ErrorFormat("Error occurred receiving request {0}",
-                    Shared.Helpers.JsonFunctions.ObjectToJson(request));
+                    JsonFunctions.JsonFunction.ObjectToJson(request));
                 return EmptyResponse;
             }
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Messaging;
-using Lace.Events.Sources;
+using Lace.Shared.Enums;
 
 namespace Lace.Events.Messages
 {

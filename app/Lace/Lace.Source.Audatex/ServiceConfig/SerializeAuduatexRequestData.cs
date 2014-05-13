@@ -1,4 +1,5 @@
-﻿using Lace.Models.Audatex.Dto;
+﻿using Lace.Functions.Xml;
+using Lace.Models.Audatex.Dto;
 
 namespace Lace.Source.Audatex.ServiceConfig
 {
@@ -8,7 +9,7 @@ namespace Lace.Source.Audatex.ServiceConfig
         {
             get
             {
-                return CleanXml(Shared.Helpers.XmlFunctions.ObjectToXml(_message) ?? string.Empty);
+                return CleanXml(XmlFunctions.XmlFunction.ObjectToXml(_message) ?? string.Empty);
             }
         }
 

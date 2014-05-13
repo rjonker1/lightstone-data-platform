@@ -62,6 +62,10 @@
     <Compile Include="Transform\TransformIvidWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Functions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
       <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
       <Name>Lace.Models.Ivid</Name>

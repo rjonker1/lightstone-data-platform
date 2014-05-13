@@ -59,6 +59,10 @@
     <Compile Include="Transform\TransformIvidTitleHolderWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Functions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
       <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
       <Name>Lace.Models.IvidTitleHolder</Name>
