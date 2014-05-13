@@ -9,10 +9,10 @@ namespace Lace.Source.IvidTitleHolder.ServiceConfig
     public class ConfigureIvidTitleHolderWebService
     {
         private readonly string _userName =
-            System.Configuration.ConfigurationManager.AppSettings["IvidTitleHolderServiceUserName"];
+            Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidTitleHolderServiceUserName");
 
         private readonly string _userPassowrd =
-            System.Configuration.ConfigurationManager.AppSettings["IvidTitleHolderServiceUserPassword"];
+            Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidTitleHolderServiceUserPassword");
 
         public IvidTitleholderServiceClient IvidTitleHolderProxy { get; private set; }
         public HttpRequestMessageProperty IvidTitleHolderRequestMessageProperty { get; private set; }

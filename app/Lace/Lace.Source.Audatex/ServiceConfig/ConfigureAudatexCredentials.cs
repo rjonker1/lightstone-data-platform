@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using Lace.Source.Audatex.AudatexServiceReference;
+﻿using Lace.Source.Audatex.AudatexServiceReference;
 
 namespace Lace.Source.Audatex.ServiceConfig
 {
@@ -18,8 +17,8 @@ namespace Lace.Source.Audatex.ServiceConfig
             }
         }
 
-        private readonly string _companyCode = ConfigurationManager.AppSettings["AudatexCompanyCode"];
-        private readonly string _userId = ConfigurationManager.AppSettings["AudatexUserId"];
-        private readonly string _password = ConfigurationManager.AppSettings["AudatexPassword"];
+        private readonly string _companyCode = Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("AudatexCompanyCode");
+        private readonly string _userId = Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("AudatexUserId");
+        private readonly string _password = Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("AudatexPassword");
     }
 }

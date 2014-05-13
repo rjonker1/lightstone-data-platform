@@ -8,10 +8,11 @@ namespace Lace.Source.Ivid.ServiceConfig
 {
     public class ConfigureIvidWebService
     {
-        private readonly string _userName = System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserName"];
+        private readonly string _userName =
+            Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidServiceUserName");
 
         private readonly string _userPassowrd =
-            System.Configuration.ConfigurationManager.AppSettings["IvidServiceUserPassword"];
+            Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidServiceUserPassword");
 
         public HpiServiceClient IvidServiceProxy { get; private set; }
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
