@@ -5,13 +5,17 @@ namespace Shared.BuildingBlocks.Api.Security
 {
     public class ApiUser : IUserIdentity
     {
+        public ApiUser()
+        {
+        }
+
         public ApiUser(string userName)
         {
             UserName = userName;
             Claims = new List<string>();
         }
 
-        public string UserName { get; private set; }
-        public IEnumerable<string> Claims { get; private set; }
+        public string UserName { get; set; }
+        public IEnumerable<string> Claims { get; set; }
     }
 }

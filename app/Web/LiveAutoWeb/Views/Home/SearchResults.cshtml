@@ -1,0 +1,81 @@
+﻿@model dynamic
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#generic" data-toggle="tab">Generic</a></li>
+    <li><a href="#specifics" data-toggle="tab">Specifics</a></li>
+    <li><a href="#verification" data-toggle="tab">Verification</a></li>
+    <li><a href="#interests" data-toggle="tab">Interests</a></li>
+    <li><a href="#repair" data-toggle="tab">Repair</a></li>
+    <li><a href="#valuation" data-toggle="tab">Valuation</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="generic">
+        <table class="table">
+            <tr>
+                <td>Intro Year</td>
+                <td>@Model.ividTitleHolderResponse.yearOfLiabilityForLicensing</td>
+            </tr>
+            <tr>
+                <td>Model Type</td>
+                <td>@Model.ividResponse.carFullname</td>
+            </tr>
+            <tr>
+                <td>Engine Size (cc)</td>
+                <td>@Model.ividResponse.displacement</td>
+            </tr>
+            <tr>
+                <td>Body Shape</td>
+                <td>@Model.ividResponse.description</td>
+            </tr>
+        </table>
+    </div>
+    <div class="tab-pane" id="specifics">
+        <table class="table">
+            <tr>
+                <td>Colour</td>
+                <td>@Model.ividResponse.specificInformation.colour</td>
+            </tr>
+            <tr>
+                <td>REG #</td>
+                <td>@Model.ividResponse.specificInformation.registrationNumber</td>
+            </tr>
+            <tr>
+                <td>VIN #</td>
+                <td>@Model.ividResponse.specificInformation.vinNumber</td>
+            </tr>
+            <tr>
+                <td>Licence #</td>
+                <td>@Model.ividResponse.specificInformation.licenseNumber</td>
+            </tr>
+            <tr>
+                <td>Engine #</td>
+                <td>@Model.ividResponse.specificInformation.engineNumber</td>
+            </tr>
+            <tr>
+                <td>Warranty Start Date</td>
+                <td>@Model.ividTitleHolderResponse.yearOfLiabilityForLicensing</td>
+            </tr>
+            <tr>
+                <td>Financing bank</td>
+                <td>@Model.ividTitleHolderResponse.bankName</td>
+            </tr>
+        </table>
+    </div>
+    <div class="tab-pane" id="verification">
+        <table class="table">
+            <tr>
+                <td>Vehicle Life Status Description</td>
+                <td>@Model.ividResponse.lifeStatusDescription</td>
+            </tr>
+            <tr>
+                <td>SAPS Interest</td>
+                <td>@Model.ividResponse.sapMarkDescription</td>
+            </tr>
+        </table>
+    </div>
+    <div class="tab-pane" id="interests">...</div>
+    <div class="tab-pane" id="repair">...</div>
+    <div class="tab-pane" id="valuation">...</div>
+</div>
