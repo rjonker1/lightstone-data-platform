@@ -33,16 +33,6 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] { "Ivid" };
-            }
-        }
-
 
         public string UserName
         {

@@ -32,17 +32,7 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] {"Audatex"};
-            }
-        }
-
-
+        
         public string UserName
         {
             get { return string.Empty; }

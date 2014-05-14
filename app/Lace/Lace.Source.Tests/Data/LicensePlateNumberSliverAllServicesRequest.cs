@@ -31,16 +31,7 @@ namespace Lace.Source.Tests.Data
                 return DateTime.Now;
             }
         }
-
-    
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" };
-            }
-        }
-
+        
 
         public string UserName
         {

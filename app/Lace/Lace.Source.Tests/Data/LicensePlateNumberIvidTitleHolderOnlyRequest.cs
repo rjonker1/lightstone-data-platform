@@ -31,18 +31,7 @@ namespace Lace.Source.Tests.Data
                 return DateTime.Now;
             }
         }
-
-
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] {"IvidTitleHolder"};
-            }
-        }
-
-
+        
         public string UserName
         {
             get { return string.Empty; }

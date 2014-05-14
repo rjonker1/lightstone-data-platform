@@ -33,17 +33,6 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] { "RgtVin" };
-            }
-        }
-
-
         public string UserName
         {
             get { return string.Empty; }
