@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Lace.Request;
 using Lace.Request.Entry;
 using Nancy;
 using Nancy.ModelBinding;
