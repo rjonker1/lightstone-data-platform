@@ -63,7 +63,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lace.Request.Entry\Lace.Request.Entry.csproj">
+    <ProjectReference Include="..\..\Lace\Lace.Request.Entry\Lace.Request.Entry.csproj">
       <Project>{2e7e7b3b-b78c-4a84-aa69-77c467c5e04d}</Project>
       <Name>Lace.Request.Entry</Name>
     </ProjectReference>

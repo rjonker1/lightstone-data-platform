@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Lace.Request;
 using Lace.Request.Entry;
 using Nancy;
 using Nancy.ModelBinding;
@@ -15,7 +16,7 @@ namespace Api.Modules
                 this.RequiresAuthentication();
 
                 var licRequest = this.Bind<Request>();
-                var request = new LicensePlateNumberRequest(licRequest.LicenseNo, new[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" });
+                var request = new LicensePlateNumberRequest(licRequest.LicenseNo);
                 var entryPoint = new EntryPoint();
                 var responses = entryPoint.GetResponsesFromLace(request);
 
@@ -28,4 +29,6 @@ namespace Api.Modules
     {
         public string LicenseNo { get; set; }
     }
+
+
 }

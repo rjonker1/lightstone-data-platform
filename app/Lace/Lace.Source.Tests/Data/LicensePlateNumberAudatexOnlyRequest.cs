@@ -137,11 +137,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new List<IField>()
-                {
-                    new AccidentClaimField()
-
-                }.ToArray();
+                return new IField[]{ new AccidentClaimField() };
             }
         }
     }
