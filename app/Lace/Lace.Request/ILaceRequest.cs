@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Lace.Request
 {
     public interface ILaceRequest : ILaceFields

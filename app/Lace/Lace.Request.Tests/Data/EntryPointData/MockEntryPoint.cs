@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using Lace.Events;
+using Lace.Events.Messages;
 using Lace.Request.Entry;
 using Lace.Request.Entry.Checks;
 using Lace.Response.ExternalServices;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Request.Tests.Data.EntryPointData
 {
@@ -10,9 +13,11 @@ namespace Lace.Request.Tests.Data.EntryPointData
 
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly IGetRequiredRequestedTypes _getRequestedType;
+        private readonly ILaceEvent _laceEvent;
 
         public MockEntryPoint()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _getRequestedType = new MockGetRequestedTypeToLoad();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
@@ -23,7 +28,7 @@ namespace Lace.Request.Tests.Data.EntryPointData
             GetRequestedTypeToLoad(request);
 
             return !_checkForDuplicateRequests.IsRequestDuplicated(request)
-                ? new Initialize(request, _getRequestedType.RequestedTypeToLoad).LaceResponses
+                ? new Initialize(request, _getRequestedType.RequestedTypeToLoad, _laceEvent).LaceResponses
                 : null;
         }
 

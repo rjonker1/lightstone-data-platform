@@ -1,7 +1,10 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Events.Messages;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder;
 using Lace.Source.Tests.Data;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.IvidTitleHolderTests
@@ -10,10 +13,12 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
     {
 
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private ILaceResponse _response;
 
         public ivid_title_holder_service_being_consumed_tests()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
             _response = new LaceResponse();
         }
@@ -21,7 +26,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
         public override void Observe()
         {
             var consumer = new IvidTitleHolderConsumer(_request);
-            consumer.CallIvidTitleHolderService(_response);
+            consumer.CallIvidTitleHolderService(_response, _laceEvent);
         }
 
         [Observation]

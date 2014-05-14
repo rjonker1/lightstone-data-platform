@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Request;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Source.Repository.Tests.ProductTests.Data
 {
@@ -31,16 +32,7 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
                 return DateTime.Now;
             }
         }
-
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] { "Ivid", "IvidTitleHolder", "RgtVin", "Audatex" };
-            }
-        }
-
+        
 
         public string UserName
         {
@@ -149,5 +141,6 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
               return new IField[0];
             }
         }
+
     }
 }

@@ -1,7 +1,11 @@
-﻿using Lace.Request;
+﻿using System.Net.NetworkInformation;
+using Lace.Events;
+using Lace.Events.Messages;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.RgtVin.ServiceCalls;
 using Lace.Source.Tests.Data.RgtVin;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.RgtVinTests
@@ -11,10 +15,12 @@ namespace Lace.Source.Tests.RgtVinTests
         private readonly IRequestDataFromService _requestDataFromService;
         private readonly ILaceRequest _rgtVinRequest;
         private ILaceResponse _laceResponse;
+        private ILaceEvent _laceEvent;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public rgt_vin_request_data_from_rgt_vin_service_tests()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _requestDataFromService = new RequestDataFromRgtVinService();
             _rgtVinRequest = MockRgtVinLicensePlateNumberRequestData.GetLicensePlateNumberReqeustForRgtVinRequest();
             _laceResponse = new LaceResponse();
@@ -23,7 +29,7 @@ namespace Lace.Source.Tests.RgtVinTests
 
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall, _laceEvent);
         }
 
         [Observation]

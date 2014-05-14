@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Tests.Data;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Request.Tests.Data
 {

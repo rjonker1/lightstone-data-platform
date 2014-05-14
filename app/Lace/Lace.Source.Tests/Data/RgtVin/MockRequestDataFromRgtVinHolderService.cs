@@ -1,10 +1,12 @@
-﻿namespace Lace.Source.Tests.Data.RgtVin
+﻿using Lace.Events;
+
+namespace Lace.Source.Tests.Data.RgtVin
 {
     public class MockRequestDataFromRgtVinHolderService : IRequestDataFromService
     {
-        public void FetchDataFromService(Response.ILaceResponse response, ICallTheExternalWebService externalWebService)
+        public void FetchDataFromService(Response.ILaceResponse response, ICallTheExternalWebService externalWebService, ILaceEvent laceEvent)
         {
-            externalWebService.CallTheExternalWebService(response);
+            externalWebService.CallTheExternalWebService(response, laceEvent);
         }
     }
 }

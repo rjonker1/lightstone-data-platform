@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Publishers\PublishLaceEventMessages.cs" />
     <Compile Include="ILaceEvent.cs" />
-    <Compile Include="Messages\DefaultEventMessage.cs" />
+    <Compile Include="Messages\LaceEventMessage.cs" />
     <Compile Include="Messages\PublishEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

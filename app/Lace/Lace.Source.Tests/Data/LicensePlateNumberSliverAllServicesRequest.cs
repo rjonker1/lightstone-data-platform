@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Request;
 using System;
 using Lace.Tests.Data;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Source.Tests.Data
 {
@@ -137,7 +139,7 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new List<IField>()
+                return new IField[]
                 {
                     //Ivid
                     new RegistrationField(),
@@ -159,7 +161,7 @@ namespace Lace.Source.Tests.Data
                     //audatex
                     new AccidentClaimField()
 
-                }.ToArray();
+                };
             }
         }
     }

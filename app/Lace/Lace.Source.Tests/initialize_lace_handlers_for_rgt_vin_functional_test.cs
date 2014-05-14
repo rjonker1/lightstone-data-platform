@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using Lace.Events;
+using Lace.Events.Messages;
 using Lace.Request;
 using Lace.Request.Load;
 using Lace.Request.Load.Loaders;
 using Lace.Response.ExternalServices;
 using Lace.Source.Tests.Data;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests
@@ -11,6 +14,7 @@ namespace Lace.Source.Tests
     public class initialize_lace_handlers_for_rgt_vin_functional_test : Specification
     {
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private readonly Initialize _initialize;
         private IList<LaceExternalServiceResponse> _laceResponses;
         private ILoadRequestSources _loadRequestSources;
@@ -18,9 +22,10 @@ namespace Lace.Source.Tests
 
         public initialize_lace_handlers_for_rgt_vin_functional_test()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _request = new LicensePlateNumberRgtVinOnlyRequest();
             _loadRequestSources = new LaceLicensePlateNumberLoader();
-            _initialize = new Initialize(_request, _loadRequestSources);
+            _initialize = new Initialize(_request, _loadRequestSources, _laceEvent);
         }
 
         public override void Observe()

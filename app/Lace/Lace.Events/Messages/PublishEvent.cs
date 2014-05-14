@@ -1,23 +1,132 @@
-﻿using EasyNetQ;
+﻿using System;
+using Common.Logging;
+using System.Threading.Tasks;
+using EasyNetQ;
 using Lace.Events.Publishers;
+using Lace.Shared.Enums;
 
 namespace Lace.Events.Messages
 {
     public class PublishEvent : ILaceEvent
     {
-        private static readonly ILaceEvent LaceEvent = new PublishEvent();
+        private readonly IBus _bus;
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
-        public static ILaceEvent LacePublishEvent
+        public PublishEvent(IBus bus)
         {
-            get
+            _bus = bus;
+
+        }
+
+        public void PublishMessage(Guid aggerateId, string message, EventSource source)
+        {
+            var msg = new LaceEventMessage() {AggregateId = aggerateId, Message = message, Source = source};
+            PublishMessage(msg);
+        }
+
+        public void PublishStartServiceCallMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceEventMessage()
             {
-                return LaceEvent;
-            }
+                AggregateId = aggerateId,
+                Message = "Starting External Web Service Call",
+                Source = source
+            };
+            PublishMessage(msg);
         }
 
-        public void PublishMessage(IBus bus, DefaultEventMessage message)
+        public void PublishStartServiceConfigurationMessage(Guid aggerateId, EventSource source)
         {
-            new PublishLaceEventMessages(bus).PublishMessages.Publish(message);
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "Starting Configuration for Web Service Call",
+                Source = source
+            };
+            PublishMessage(msg);
         }
+
+        public void PublishEndServiceConfigurationMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "Starting Configuration for Web Service Call",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishEndServiceCallMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "End External Web Service Call",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishFailedServiceCallMessaage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "Failed External Web Service Call",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishNoResponseFromServiceMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "Response from Web Service is null or does not exist",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishServiceRequestMessage(Guid aggerateId, EventSource source, string request)
+        {
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = string.Format("Response Received from Web Service: {0}", request),
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishServiceResponseMessage(Guid aggerateId, EventSource source, string response)
+        {
+            var msg = new LaceEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = string.Format("Request Sent to Web Service: {0}", response),
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishMessage(LaceEventMessage message)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    new PublishLaceEventMessages(_bus).PublishMessages.Publish(message);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+                }
+            }
+                );
+        }
+
     }
 }

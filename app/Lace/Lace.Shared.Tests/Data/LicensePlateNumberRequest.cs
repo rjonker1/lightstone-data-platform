@@ -1,5 +1,7 @@
 ﻿using System;
+using EasyNetQ;
 using Lace.Request;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Shared.Tests.Data
 {
@@ -133,6 +135,5 @@ namespace Lace.Shared.Tests.Data
                 return new IField[0];
             }
         }
-       
     }
 }

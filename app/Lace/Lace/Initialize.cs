@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.EventHandlers;
+using Lace.Events;
 using Lace.Operations;
 using Lace.Request;
 using Lace.Request.Load;
@@ -11,17 +12,18 @@ namespace Lace
 {
     public class Initialize : IBootstrap
     {
-
         public IList<LaceExternalServiceResponse> LaceResponses { get; set; }
 
         private readonly ILaceRequest _request;
-        private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
+        private Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> _handlers;
         private LaceOperation Bootstrap;
         private readonly ILoadRequestSources _loadRequestSources;
+        private readonly ILaceEvent _laceEvent;
 
-        public Initialize(ILaceRequest request, ILoadRequestSources loadRequestSources)
+        public Initialize(ILaceRequest request, ILoadRequestSources loadRequestSources, ILaceEvent laceEvent)
         {
             _request = request;
+            _laceEvent = laceEvent;
             _loadRequestSources = loadRequestSources;
 
             Set();
@@ -43,12 +45,12 @@ namespace Lace
         {
             var args = new SetHandlersEventArgs();
             SetHandlers(this, args);
-            _handlers = args.Handlers ?? new Dictionary<Type, Func<ILaceRequest, ILaceResponse>>();
+            _handlers = args.Handlers ?? new Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>>();
         }
 
         private void LoadSources()
         {
-            var args = new LoadEventArgs(_request, _handlers);
+            var args = new LoadEventArgs(_request, _handlers,_laceEvent);
             Load(this, args);
             LaceResponses = args.LaceResponses;
         }

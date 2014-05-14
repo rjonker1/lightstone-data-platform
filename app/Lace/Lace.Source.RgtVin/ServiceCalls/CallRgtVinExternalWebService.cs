@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Logging;
+using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.RgtVin;
 using Lace.Models.RgtVin.Dto;
@@ -21,7 +22,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {

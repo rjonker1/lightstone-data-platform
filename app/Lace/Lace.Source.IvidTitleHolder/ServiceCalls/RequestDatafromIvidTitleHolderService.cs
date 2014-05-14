@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Request;
 using Lace.Response;
 
 namespace Lace.Source.IvidTitleHolder.ServiceCalls
@@ -6,9 +7,9 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
     public class RequestDatafromIvidTitleHolderService : IRequestDataFromService
     {
         public void FetchDataFromService(ILaceResponse response,
-            ICallTheExternalWebService externalWebService)
+            ICallTheExternalWebService externalWebService, ILaceEvent laceEvent)
         {
-            externalWebService.CallTheExternalWebService(response);
+            externalWebService.CallTheExternalWebService(response, laceEvent);
         }
     }
 }

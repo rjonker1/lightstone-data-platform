@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Events;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Repository.Product;
@@ -19,23 +20,23 @@ namespace Lace.Source.Tests.Data.Initialization.LicensePlateNumber
             _response = new LaceResponse();
         }
 
-        public MockLicensePlateNumberResponse Build(ILaceRequest request)
+        public MockLicensePlateNumberResponse Build(ILaceRequest request, ILaceEvent laceEvent)
         {
-            var handlers = new Dictionary<string, Action<ILaceRequest, ILaceResponse>>()
+            var handlers = new Dictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
             {
-                {"ProductRepository", (req, resp) => new ProductConsumer(req).GetProduct(resp)},
-                {"Ivid", (req, resp) => new MockIvidConsumer(req).CallIvidService(resp)},
+                {"ProductRepository", (req, evt, resp) => new ProductConsumer(req).GetProduct(resp,evt)},
+                {"Ivid", (req, evt, resp) => new MockIvidConsumer(req).CallIvidService(resp,evt)},
                 {
                     "IvidTitleHolder",
-                    (req, resp) => new MockIvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp)
+                    (req, evt, resp) => new MockIvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp,evt)
                 },
-                {"RgtVin", (req, resp) => new MockRgtVinConsumer(req).CallRgtVinService(resp)},
-                {"Audatex", (req, resp) => new MockAudatexConsumer(req).CallAudatexService(resp)}
+                {"RgtVin", (req, evt, resp) => new MockRgtVinConsumer(req).CallRgtVinService(resp,evt)},
+                {"Audatex", (req, evt, resp) => new MockAudatexConsumer(req).CallAudatexService(resp,evt)}
             };
 
             foreach (var handler in handlers)
             {
-                handler.Value(request, _response);
+                handler.Value(request, laceEvent, _response);
             }
 
 

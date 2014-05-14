@@ -1,4 +1,5 @@
-﻿using Lace.Models.IvidTitleHolder;
+﻿using Lace.Events;
+using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
@@ -10,7 +11,7 @@ namespace Lace.Source.Tests.Data.IvidTitleHolder
     public class MockCallingIvidTitleHolderExternalWebService : ICallTheExternalWebService
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             _ividTitleHolderResponse =
                 MockIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicnseNumber();

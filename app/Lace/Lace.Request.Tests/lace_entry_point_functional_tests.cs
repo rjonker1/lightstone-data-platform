@@ -4,6 +4,7 @@ using Lace.Request.Load;
 using Lace.Request.Load.Loaders;
 using Lace.Request.Tests.Data;
 using Lace.Response.ExternalServices;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Request.Tests
@@ -19,7 +20,7 @@ namespace Lace.Request.Tests
         {
             _loadRequestSources = new LaceLicensePlateNumberLoader();
             _request = new LicensePlateNumberSliverAllServicesRequest();
-            _entryPoint = new EntryPoint();
+            _entryPoint = new EntryPoint(new FakeBus());
         }
 
         

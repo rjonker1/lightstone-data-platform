@@ -4,7 +4,7 @@ using Lace.Shared.Enums;
 
 namespace Lace.Events.Messages
 {
-    public class DefaultEventMessage : IPublishableMessage
+    public class LaceEventMessage : IPublishableMessage
     {
         public Guid Id
         {

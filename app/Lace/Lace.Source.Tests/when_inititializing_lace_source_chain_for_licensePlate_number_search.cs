@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Events;
+using Lace.Events.Messages;
 using Lace.Request;
 using Lace.Request.Load;
 using Lace.Response;
 using Lace.Source.Tests.Data;
 using Lace.Source.Tests.Data.Initialization;
+using Lace.Tests.Data.Fakes;
 using Xunit;
 using Xunit.Extensions;
 
@@ -15,18 +18,20 @@ namespace Lace.Source.Tests
         private MockLaceInitializer _initialize;
 
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
         private readonly ILoadRequestSources _loadRequestSources;
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _request = new LicensePlateNumberSliverAllServicesRequest();
             _loadRequestSources = new MockLaceLoader();
         }
 
         public override void Observe()
         {
-            _initialize = new MockLaceInitializer(_request, _loadRequestSources);
+            _initialize = new MockLaceInitializer(_request, _loadRequestSources, _laceEvent);
         }
 
         [Observation]

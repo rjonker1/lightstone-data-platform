@@ -1,7 +1,11 @@
-﻿using Lace.Request;
+﻿using System.Net.NetworkInformation;
+using Lace.Events;
+using Lace.Events.Messages;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.ServiceCalls;
 using Lace.Source.Tests.Data.IvidTitleHolder;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.IvidTitleHolderTests
@@ -11,10 +15,12 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
         private readonly IRequestDataFromService _requestDataFromService;
         private readonly ILaceRequest _ividTitleHolderRequest;
         private ILaceResponse _laceResponse;
+        private ILaceEvent _laceEvent;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public ivid_title_holder_request_data_from_ivid_title_holder_service_tests()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _requestDataFromService = new RequestDatafromIvidTitleHolderService();
             _ividTitleHolderRequest =
                 MockIvidTitleHolderLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvidTitleHolder();
@@ -25,7 +31,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
 
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall, _laceEvent);
         }
 
         [Observation]

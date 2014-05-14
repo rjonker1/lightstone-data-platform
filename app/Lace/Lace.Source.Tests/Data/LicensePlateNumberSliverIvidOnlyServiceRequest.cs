@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Lace.Request;
+﻿using Lace.Request;
 using System;
 using Lace.Tests.Data;
 
 namespace Lace.Source.Tests.Data
 {
-    class LicensePlateNumberSliverIvidOnlyServiceRequest : ILaceRequest
+    public class LicensePlateNumberSliverIvidOnlyServiceRequest : ILaceRequest
     {
 
         public Guid UserId
@@ -40,7 +39,7 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-      
+
         public string UserName
         {
             get { return "rudi@customapp.co.za"; }
@@ -121,15 +120,16 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new List<IField>()
+                return new IField[]
                 {
-                   new RegistrationField(),
-                   new VinField(),
-                   new EngineField(),
-                   new MakeDescription()
+                    new RegistrationField(),
+                    new VinField(),
+                    new EngineField(),
+                    new MakeDescription()
 
-                }.ToArray();
+                };
             }
         }
+
     }
 }

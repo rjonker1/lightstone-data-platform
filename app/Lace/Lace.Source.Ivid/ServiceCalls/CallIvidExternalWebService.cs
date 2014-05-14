@@ -2,10 +2,12 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.Ivid;
 using Lace.Request;
 using Lace.Response;
+using Lace.Shared.Enums;
 using Lace.Source.Ivid.IvidServiceReference;
 using Lace.Source.Ivid.ServiceConfig;
 using Lace.Source.Ivid.Transform;
@@ -14,25 +16,27 @@ namespace Lace.Source.Ivid.ServiceCalls
 {
     public class CallIvidExternalWebService : ICallTheExternalWebService
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private HpiStandardQueryResponse _ividResponse;
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
+        private const EventSource Source = EventSource.IvidSource;
 
         public CallIvidExternalWebService(ILaceRequest request)
         {
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
-                Log.Info("Calling Ivid Web Service");
+                laceEvent.PublishStartServiceConfigurationMessage(_request.Token, Source);
 
                 var ividWebService = new ConfigureIvidWebService();
 
                 ividWebService.ConfigureIvidWebServiceCredentials();
                 ividWebService.ConfigureIvidWebServiceRequestMessageProperty();
+
 
                 using (var scope = new OperationContextScope(ividWebService.IvidServiceProxy.InnerChannel))
                 {
@@ -42,16 +46,26 @@ namespace Lace.Source.Ivid.ServiceCalls
                     var ividRequest = new ConfigureIvidRequestMessage(_request)
                         .HpiQueryRequest;
 
-                    LogServiceRequest(ividRequest);
+                    laceEvent.PublishEndServiceConfigurationMessage(_request.Token, Source);
+
+                    laceEvent.PublishServiceRequestMessage(_request.Token, Source,
+                        JsonFunctions.JsonFunction.ObjectToJson(ividRequest));
+
+                    laceEvent.PublishStartServiceCallMessage(_request.Token, EventSource.IvidSource);
 
                     _ividResponse = ividWebService
                         .IvidServiceProxy
                         .HpiStandardQuery(ividRequest);
 
+                    laceEvent.PublishEndServiceCallMessage(_request.Token, EventSource.IvidSource);
+
                     ividWebService.CloseWebService();
 
                     if (_ividResponse == null)
-                        Log.Error("Response from Ivid Web Service is null or does not exist.");
+                        laceEvent.PublishNoResponseFromServiceMessage(_request.Token, EventSource.IvidSource);
+
+                    laceEvent.PublishServiceResponseMessage(_request.Token, Source,
+                        JsonFunctions.JsonFunction.ObjectToJson(_ividResponse ?? new HpiStandardQueryResponse()));
 
                     TransformWebResponse(response);
                 }
@@ -59,18 +73,9 @@ namespace Lace.Source.Ivid.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
+                laceEvent.PublishFailedServiceCallMessaage(_request.Token, Source);
                 IvidResponseFailed(response);
             }
-        }
-
-        private static void LogServiceRequest(HpiStandardQueryRequest request)
-        {
-            Log.InfoFormat("Ivid Request sent to Ivid Web Service: {0}", JsonFunctions.JsonFunction.ObjectToJson(request));
-        }
-
-        private void LogServiceResponse()
-        {
-            Log.InfoFormat("Response Received from Ivid Web Service {0}", JsonFunctions.JsonFunction.ObjectToJson(_ividResponse));
         }
 
         private static void IvidResponseFailed(ILaceResponse response)
@@ -86,7 +91,6 @@ namespace Lace.Source.Ivid.ServiceCalls
 
             if (transformer.Continue)
             {
-                LogServiceResponse();
                 transformer.Transform();
             }
 

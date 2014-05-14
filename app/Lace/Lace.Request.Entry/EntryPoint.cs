@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
+using EasyNetQ;
+using Lace.Events;
+using Lace.Events.Messages;
 using Lace.Functions.Json;
 using Lace.Request.Entry.Checks;
 using Lace.Request.Entry.RequestTypes;
@@ -14,9 +17,11 @@ namespace Lace.Request.Entry
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly IGetRequiredRequestedTypes _getRequestedType;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILaceEvent _laceEvent;
 
-        public EntryPoint()
+        public EntryPoint(IBus bus)
         {
+            _laceEvent = new PublishEvent(bus);
             _getRequestedType = new GetRequestedTypeToLoad();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
@@ -28,7 +33,7 @@ namespace Lace.Request.Entry
                 GetRequestedTypeToLoad(request);
 
                 return !_checkForDuplicateRequests.IsRequestDuplicated(request)
-                    ? new Initialize(request, _getRequestedType.RequestedTypeToLoad).LaceResponses ?? EmptyResponse
+                    ? new Initialize(request, _getRequestedType.RequestedTypeToLoad,_laceEvent).LaceResponses ?? EmptyResponse
                     : EmptyResponse;
             }
             catch (Exception)

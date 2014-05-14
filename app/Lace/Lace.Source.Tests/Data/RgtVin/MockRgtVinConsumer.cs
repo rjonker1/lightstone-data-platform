@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Request;
 using Lace.Response;
 
 namespace Lace.Source.Tests.Data.RgtVin
@@ -16,13 +17,13 @@ namespace Lace.Source.Tests.Data.RgtVin
             _externalWebServiceCall = new MockCallingRgtVinExternalWebService();
         }
 
-        public void CallRgtVinService(ILaceResponse response)
+        public void CallRgtVinService(ILaceResponse response,ILaceEvent laceEvent)
         {
             if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall)
+                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent)
                 );
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Logging;
+using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.Audatex;
 using Lace.Models.Audatex.Dto;
@@ -22,7 +23,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {

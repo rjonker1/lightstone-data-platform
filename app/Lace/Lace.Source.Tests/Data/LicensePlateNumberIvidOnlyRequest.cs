@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Request;
 using Lace.Tests.Data;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Source.Tests.Data
 {
-    class LicensePlateNumberIvidOnlyRequest : ILaceRequest
+    public class LicensePlateNumberIvidOnlyRequest : ILaceRequest
     {
 
         public Guid UserId
@@ -32,7 +34,6 @@ namespace Lace.Source.Tests.Data
                 return DateTime.Now;
             }
         }
-
 
         public string UserName
         {
@@ -113,14 +114,14 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new List<IField>()
+                return new IField[]
                 {
-                   new RegistrationField(),
-                   new VinField(),
-                   new EngineField(),
-                   new MakeDescription()
+                    new RegistrationField(),
+                    new VinField(),
+                    new EngineField(),
+                    new MakeDescription()
 
-                }.ToArray();
+                };
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Lace.Models.Request.LicensePlateNumber;
+﻿using Lace.Events;
+using Lace.Models.Request.LicensePlateNumber;
 using Lace.Response;
 
 namespace Lace.Request.Types.LicensePlateNumber.Chain
@@ -12,13 +13,13 @@ namespace Lace.Request.Types.LicensePlateNumber.Chain
             _response = new LaceResponse();
         }
 
-        public LicensePlateNumberResponse Build(ILaceRequest request)
+        public LicensePlateNumberResponse Build(ILaceRequest request, ILaceEvent laceEvent)
         {
             var handlers = new Handlers.LicensePlateNumberHandlers().HandlersDictionary;
 
             foreach (var handler in handlers)
             {
-                handler.Value(request, _response);
+                handler.Value(request, laceEvent, _response);
             }
 
             return new LicensePlateNumberResponse() {Response = _response};

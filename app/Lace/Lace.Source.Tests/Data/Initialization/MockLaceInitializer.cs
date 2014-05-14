@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.EventHandlers;
+using Lace.Events;
 using Lace.Operations;
 using Lace.Request;
 using Lace.Request.Load;
@@ -12,9 +13,10 @@ namespace Lace.Source.Tests.Data.Initialization
     public class MockLaceInitializer : IBootstrap
     {
         public IList<LaceExternalServiceResponse> LaceResponses { get; set; }
-        private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
+        private Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> _handlers;
 
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private readonly ILoadRequestSources _loadRequestSources;
 
         public event EventHandler<SetHandlersEventArgs> SetHandlers;
@@ -23,9 +25,10 @@ namespace Lace.Source.Tests.Data.Initialization
         private LaceOperation Bootstrap;
 
 
-        public MockLaceInitializer(ILaceRequest request, ILoadRequestSources loadRequestSources)
+        public MockLaceInitializer(ILaceRequest request, ILoadRequestSources loadRequestSources, ILaceEvent laceEvent)
         {
             _request = request;
+            _laceEvent = laceEvent;
             _loadRequestSources = loadRequestSources;
 
             Set();
@@ -47,12 +50,12 @@ namespace Lace.Source.Tests.Data.Initialization
         {
             var args = new SetHandlersEventArgs();
             SetHandlers(this, args);
-            _handlers = args.Handlers ?? new Dictionary<Type, Func<ILaceRequest, ILaceResponse>>();
+            _handlers = args.Handlers ?? new Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>>();
         }
 
         private void LoadSources()
         {
-            var args = new LoadEventArgs(_request, _handlers);
+            var args = new LoadEventArgs(_request, _handlers, _laceEvent);
             Load(this, args);
             LaceResponses = args.LaceResponses;
         }

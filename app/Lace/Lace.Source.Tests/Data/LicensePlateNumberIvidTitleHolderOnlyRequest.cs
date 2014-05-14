@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Request;
 using Lace.Tests.Data;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Source.Tests.Data
 {
@@ -23,6 +25,7 @@ namespace Lace.Source.Tests.Data
                 return Guid.NewGuid();
             }
         }
+
 
         public DateTime RequestDate
         {
@@ -123,14 +126,14 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new List<IField>()
+                return new IField[]
                 {
                     new BankNameField(),
                     new AccountNumberField(),
                     new AccountOpenDateField(),
                     new AccountClosedDateField()
 
-                }.ToArray();
+                };
             }
         }
     }

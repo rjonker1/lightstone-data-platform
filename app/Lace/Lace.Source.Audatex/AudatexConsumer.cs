@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.ServiceCalls;
 
@@ -16,14 +17,14 @@ namespace Lace.Source.Audatex
             _handleServiceCall = new HandleAudatexServiceCall();
             _externalWebServiceCall = new CallAudatexExternalWebService(request);
         }
-        
-        public void CallAudatexService(ILaceResponse response)
+
+        public void CallAudatexService(ILaceResponse response, ILaceEvent laceEvent)
         {
             if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall));
+                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent));
         }
     }
 }

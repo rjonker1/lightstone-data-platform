@@ -39,6 +39,9 @@
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -120,6 +123,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
+      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
+      <Name>Lace.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
       <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
       <Name>Lace.Models.Audatex</Name>

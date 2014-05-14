@@ -1,7 +1,10 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Events.Messages;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid;
 using Lace.Source.Tests.Data;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.IvidTests
@@ -9,10 +12,12 @@ namespace Lace.Source.Tests.IvidTests
     public class ivid_web_service_being_consumed_tests : Specification
     {
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private readonly ILaceResponse _response;
 
         public ivid_web_service_being_consumed_tests()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _request = new LicensePlateNumberIvidOnlyRequest();
             _response = new LaceResponse();
         }
@@ -20,7 +25,7 @@ namespace Lace.Source.Tests.IvidTests
         public override void Observe()
         {
             var consumer = new IvidConsumer(_request);
-            consumer.CallIvidService(_response);
+            consumer.CallIvidService(_response, _laceEvent);
         }
 
         [Observation]

@@ -1,4 +1,5 @@
-﻿using Lace.Models.Ivid;
+﻿using Lace.Events;
+using Lace.Models.Ivid;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid.IvidServiceReference;
@@ -9,7 +10,7 @@ namespace Lace.Source.Tests.Data.Ivid
     public class MockCallingIvidExternalWebService : ICallTheExternalWebService
     {
         private HpiStandardQueryResponse _ividResponse;
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             _ividResponse =
                 MockIvidHpiStandardQueryResponseData.GetHpiStandardQueryResponseForLicenseNoXmc167Gp();

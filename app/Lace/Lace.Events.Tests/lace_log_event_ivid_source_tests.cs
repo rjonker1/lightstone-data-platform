@@ -2,6 +2,7 @@
 using EasyNetQ;
 using Lace.Events.Messages;
 using Lace.Shared.Enums;
+using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
 namespace Lace.Events.Tests
@@ -9,26 +10,30 @@ namespace Lace.Events.Tests
     public class lace_log_event_ivid_source_tests : Specification
     {
         private readonly IBus _bus;
-        private readonly DefaultEventMessage _message;
+        private readonly ILaceEvent _laceEvent;
+        private readonly LaceEventMessage _message;
         private Exception _exception;
 
         public lace_log_event_ivid_source_tests()
         {
-            _message = new DefaultEventMessage()
+            _message = new LaceEventMessage()
             {
                 AggregateId = Guid.NewGuid(),
                 Message = "Ivid Event Test Message",
                 Source = EventSource.IvidSource
             };
 
+
             _bus = new Mocks.MockSourceEventBus();
+            //_bus = new BusFactory().CreateBus("LaceEventBus");
+            _laceEvent = new PublishEvent(_bus);
         }
 
         public override void Observe()
         {
             try
             {
-                PublishEvent.LacePublishEvent.PublishMessage(_bus, _message);
+                _laceEvent.PublishMessage(_message);
             }
             catch (Exception e)
             {

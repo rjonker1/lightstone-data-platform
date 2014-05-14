@@ -1,4 +1,5 @@
-﻿using Lace.Response;
+﻿using Lace.Events;
+using Lace.Response;
 
 namespace Lace.Request.Tests.Data
 {
@@ -11,7 +12,7 @@ namespace Lace.Request.Tests.Data
             _response = new LaceResponse();
         }
 
-        public MockLicensePlateNumberResponse Build(ILaceRequest request)
+        public MockLicensePlateNumberResponse Build(ILaceRequest request, ILaceEvent laceEvent)
         {
             return new MockLicensePlateNumberResponse() {Response = _response};
         }

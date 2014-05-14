@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Events;
 using Lace.Models.Request.LicensePlateNumber;
 using Lace.Request.Types.LicensePlateNumber.Chain;
 using Lace.Response;
@@ -17,21 +18,21 @@ namespace Lace.Request.Load.Loaders
         }
 
         public void HandleRequest(ILaceRequest request,
-            Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+            Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> handlers, ILaceEvent laceEvent)
         {
             foreach (var handler in handlers)
             {
                 LaceResponses.Add(new LaceExternalServiceResponse()
                 {
-                    Response = handler.Value(request),
+                    Response = handler.Value(request, laceEvent),
                     Request = request
                 });
             }
         }
 
-        public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+        public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> handlers)
         {
-            handlers.Add(typeof (LicensePlateNumberRequest), r => new LicensePlateNumberSourceChain().Build(r).Response);
+            handlers.Add(typeof (LicensePlateNumberRequest), (r,e) => new LicensePlateNumberSourceChain().Build(r,e).Response);
         }
     }
 }

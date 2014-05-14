@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Request;
 using Lace.Response;
 
 namespace Lace.Source.Tests.Data.Ivid
@@ -16,13 +17,13 @@ namespace Lace.Source.Tests.Data.Ivid
             _externalWebServiceCall = new MockCallingIvidExternalWebService();
         }
 
-        public void CallIvidService(ILaceResponse response)
+        public void CallIvidService(ILaceResponse response, ILaceEvent laceEvent)
         {
             if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall));
+                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent));
         }
     }
 

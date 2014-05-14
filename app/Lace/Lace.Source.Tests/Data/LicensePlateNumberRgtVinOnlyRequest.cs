@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasyNetQ;
 using Lace.Request;
 using Lace.Tests.Data;
+using Lace.Tests.Data.Fakes;
 
 namespace Lace.Source.Tests.Data
 {
@@ -127,15 +129,16 @@ namespace Lace.Source.Tests.Data
         {
             get
             {
-                return new List<IField>()
+                return new IField[]
                 {
                     new VehicleMakeField(),
                     new ColourField(),
                     new PriceField()
 
-                }.ToArray();
+                };
             }
 
         }
+
     }
 }

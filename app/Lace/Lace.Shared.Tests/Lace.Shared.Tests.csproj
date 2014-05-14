@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,6 +77,10 @@
     <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
       <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
       <Name>Lace.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Tests.Data\Lace.Tests.Data.csproj">
+      <Project>{734172ed-e742-4fa0-a5d3-b6bbb581807c}</Project>
+      <Name>Lace.Tests.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

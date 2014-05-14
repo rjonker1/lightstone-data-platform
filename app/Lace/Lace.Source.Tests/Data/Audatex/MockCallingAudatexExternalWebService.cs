@@ -1,4 +1,5 @@
-﻿using Lace.Models.Audatex;
+﻿using Lace.Events;
+using Lace.Models.Audatex;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
@@ -16,7 +17,7 @@ namespace Lace.Source.Tests.Data.Audatex
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             //_audatexResponse = MockAudatexWebResponseData.GetAudatextWebServiceResponse();
             _audatexResponse = MockAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();

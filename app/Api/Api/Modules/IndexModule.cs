@@ -3,6 +3,7 @@ using Lace.Request.Entry;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Security;
+using Workflow.BuildingBlocks;
 
 namespace Api.Modules
 {
@@ -16,7 +17,7 @@ namespace Api.Modules
 
                 var licRequest = this.Bind<Request>();
                 var request = new LicensePlateNumberRequest(licRequest.LicenseNo);
-                var entryPoint = new EntryPoint();
+                var entryPoint = new EntryPoint(new BusFactory().CreateBus(""));
                 var responses = entryPoint.GetResponsesFromLace(request);
 
                 return Response.AsJson(responses.First().Response);

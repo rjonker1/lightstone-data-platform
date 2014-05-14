@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.RgtVin.ServiceCalls;
 
@@ -12,18 +13,19 @@ namespace Lace.Source.RgtVin
 
         public RgtVinConsumer(ILaceRequest request)
         {
+
             _request = request;
             _handleServiceCall = new HandleRgtVinServiceCall();
             _externalWebServiceCall = new CallRgtVinExternalWebService(request);
         }
 
-        public void CallRgtVinService(ILaceResponse response)
+        public void CallRgtVinService(ILaceResponse response, ILaceEvent laceEvent)
         {
             if (!_handleServiceCall.CanHandle(_request, response)) return;
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall)
+                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent)
                 );
         }
     }

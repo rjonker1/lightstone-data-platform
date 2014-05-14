@@ -1,7 +1,10 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Events.Messages;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid.ServiceCalls;
 using Lace.Source.Tests.Data.Ivid;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.IvidTests
@@ -11,10 +14,12 @@ namespace Lace.Source.Tests.IvidTests
         private readonly IRequestDataFromService _requestDataFromService;
         private readonly ILaceRequest _ividRequest;
         private ILaceResponse _laceResponse;
+        private readonly ILaceEvent _laceEvent;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public ivid_request_data_from_ivid_service_tests()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _requestDataFromService = new RequestDataFromIvidService();
             _ividRequest = MockIvidLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvid();
             _laceResponse = new LaceResponse();
@@ -24,7 +29,7 @@ namespace Lace.Source.Tests.IvidTests
         
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall, _laceEvent);
         }
 
         [Observation]

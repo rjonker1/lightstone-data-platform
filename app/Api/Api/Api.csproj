@@ -57,6 +57,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="EasyNetQ, Version=0.28.3.229, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -155,6 +159,10 @@
     <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
       <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
       <Name>Shared.BuildingBlocks.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
+      <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
+      <Name>Workflow.BuildingBlocks</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex;
 using Lace.Source.Tests.Data;
@@ -10,6 +11,7 @@ namespace Lace.Source.Tests.AudatexTests
     {
 
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private readonly ILaceResponse _response;
 
         public audatex_web_service_being_consumed_tests()
@@ -22,7 +24,7 @@ namespace Lace.Source.Tests.AudatexTests
         public override void Observe()
         {
             var consumer = new AudatexConsumer(_request);
-            consumer.CallAudatexService(_response);
+            consumer.CallAudatexService(_response, _laceEvent);
         }
 
         [Observation]

@@ -1,7 +1,10 @@
-﻿using Lace.Request;
+﻿using Lace.Events;
+using Lace.Events.Messages;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.ServiceCalls;
 using Lace.Source.Tests.Data.Audatex;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.AudatexTests
@@ -11,11 +14,13 @@ namespace Lace.Source.Tests.AudatexTests
         private readonly IRequestDataFromService _requestDataFromService;
         private readonly ILaceRequest _audatexRequest;
         private ILaceResponse _laceResponse;
+        private ILaceEvent _laceEvent;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
 
         public audatex_request_data_from_audatex_service_tests()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _requestDataFromService = new RequestDataFromAudatexService();
             _audatexRequest = MockAudatexLicensePlateNumberRequestData.GetLicensePlateNumberRequestForAudatex();
             _laceResponse = new LaceResponse();
@@ -24,7 +29,7 @@ namespace Lace.Source.Tests.AudatexTests
 
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall);
+            _requestDataFromService.FetchDataFromService(_laceResponse, _externalWebServiceCall, _laceEvent);
         }
 
         [Observation]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Events;
 using Lace.Models.Request.LicensePlateNumber;
 using Lace.Request;
 using Lace.Request.Load;
@@ -19,21 +20,21 @@ namespace Lace.Source.Tests.Data.Initialization
             LaceResponses = new List<LaceExternalServiceResponse>();
         }
 
-        public void HandleRequest(ILaceRequest request, Dictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+        public void HandleRequest(ILaceRequest request, Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> handlers, ILaceEvent laceEvent)
         {
             foreach (var handler in handlers)
             {
                 LaceResponses.Add(new LaceExternalServiceResponse()
                 {
-                    Response = handler.Value(request),
+                    Response = handler.Value(request, laceEvent),
                     Request = request
                 });
             }
         }
 
-        public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceResponse>> handlers)
+        public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> handlers)
         {
-            handlers.Add(typeof(LicensePlateNumberRequest), r => new MockLicensePlateNumberSourceChain().Build(r).Response);
+            handlers.Add(typeof(LicensePlateNumberRequest), (r,e) => new MockLicensePlateNumberSourceChain().Build(r,e).Response);
         }
     }
 }

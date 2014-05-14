@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.IvidTitleHolder;
 using Lace.Request;
@@ -23,7 +24,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {

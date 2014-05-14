@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using Lace.Events;
+using Lace.Events.Messages;
 using Lace.Request;
 using Lace.Request.Load;
 using Lace.Request.Load.Loaders;
 using Lace.Response.ExternalServices;
 using Lace.Source.Tests.Data;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests
@@ -12,15 +15,17 @@ namespace Lace.Source.Tests
     {
 
         private readonly ILaceRequest _request;
+        private readonly ILaceEvent _laceEvent;
         private readonly Initialize _initialize;
         private IList<LaceExternalServiceResponse> _laceResponses;
         private readonly ILoadRequestSources _loadRequestSources;
 
         public initialize_lace_handlers_for_audatex_request_functional_test()
         {
+            _laceEvent = new PublishEvent(new FakeBus());
             _loadRequestSources = new LaceLicensePlateNumberLoader();
             _request = new LicensePlateNumberAudatexOnlyRequest();
-            _initialize = new Initialize(_request, _loadRequestSources);
+            _initialize = new Initialize(_request, _loadRequestSources, _laceEvent);
         }
 
 

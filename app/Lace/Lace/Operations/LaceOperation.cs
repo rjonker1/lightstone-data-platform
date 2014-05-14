@@ -40,7 +40,7 @@ namespace Lace.Operations
 
         private void OnLoading(object sender, LoadEventArgs e)
         {
-            _laceLoader.HandleRequest(e.Request, e.Handlers);
+            _laceLoader.HandleRequest(e.Request, e.Handlers, e.LaceEvent);
             e.LaceResponses = _laceLoader.LaceResponses;
         }
     }

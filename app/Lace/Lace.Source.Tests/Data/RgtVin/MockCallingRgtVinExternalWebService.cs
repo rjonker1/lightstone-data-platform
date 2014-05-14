@@ -1,4 +1,5 @@
-﻿using Lace.Models.RgtVin;
+﻿using Lace.Events;
+using Lace.Models.RgtVin;
 using Lace.Response;
 using Lace.Source.RgtVin.Transform;
 
@@ -9,7 +10,7 @@ namespace Lace.Source.Tests.Data.RgtVin
 
         private string _rgtVinResponse;
 
-        public void CallTheExternalWebService(ILaceResponse response)
+        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {
             _rgtVinResponse = MockRgtVinResponseData.GetRgtVinWebResponseForLicensePlateNumber();
             TransformWebResponse(response);
