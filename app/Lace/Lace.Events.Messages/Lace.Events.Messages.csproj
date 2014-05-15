@@ -30,9 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LaceTransformResponseFailedMessageEvent.cs" />
+    <Compile Include="LaceSourceHandledNotEventMessage.cs" />
     <Compile Include="LaceEventMessage.cs" />
     <Compile Include="LaceExternalServiceConfigurationEventMessage.cs" />
     <Compile Include="LaceExternalServiceEventMessage.cs" />
@@ -40,6 +43,8 @@
     <Compile Include="LaceExternalServiceNoResponseEventMessage.cs" />
     <Compile Include="LaceExternalServiceRequestEventMessage.cs" />
     <Compile Include="LaceExternalServiceResponseEventMessage.cs" />
+    <Compile Include="LaceSourceHandledEventMessage.cs" />
+    <Compile Include="LaceTransformResponseMessageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

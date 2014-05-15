@@ -30,12 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publishers\PublishLaceEventMessages.cs.old" />
     <Compile Include="ILaceEvent.cs" />
     <Compile Include="ILaceEventMessage.cs" />
+    <Compile Include="ILaceExternalServiceEvent.cs" />
+    <Compile Include="ILaceSourceHandledEvent.cs" />
+    <Compile Include="ILaceTransformEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

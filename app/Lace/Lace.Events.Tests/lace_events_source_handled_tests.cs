@@ -1,9 +1,7 @@
 ﻿using System;
 using EasyNetQ;
-using Lace.Events.Messages;
 using Lace.Events.Messages.Publish;
 using Lace.Events.Tests.Consumers;
-using Lace.Functions.Json;
 using Lace.Shared.Enums;
 using Workflow;
 using Workflow.BuildingBlocks;
@@ -13,8 +11,9 @@ using Xunit.Extensions;
 
 namespace Lace.Events.Tests
 {
-    public class lace_log_event_ivid_source_tests : Specification
+    public class lace_events_source_handled_tests : Specification
     {
+
         private IBus _bus;
         private readonly BusFactory _factory;
         private readonly ConsumerRegistration _consumers;
@@ -25,15 +24,15 @@ namespace Lace.Events.Tests
 
         private readonly Guid _aggregateId;
 
-        public lace_log_event_ivid_source_tests()
+        public lace_events_source_handled_tests()
         {
-            
             _aggregateId = Guid.NewGuid();
 
             _factory = new BusFactory();
             _consumers = new ConsumerRegistration()
                  .AddConsumer<LaceEventMessageConsumer, ILaceEventMessage>(() => new LaceEventMessageConsumer());
         }
+        
 
         public override void Observe()
         {
@@ -57,28 +56,29 @@ namespace Lace.Events.Tests
         }
 
         [Observation]
-        public void lace_ivid_events_services_to_message_queue_test()
+        public void lace_ivid_events_sources_are_handled_test()
         {
             _exception.ShouldBeNull();
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishStartServiceConfigurationMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishSourceIsBeingHandledMessage(_aggregateId, EventSource.IvidSource);
 
-            _laceEvent.PublishEndServiceConfigurationMessage(_aggregateId, EventSource.IvidSource);
-
-            _laceEvent.PublishStartServiceCallMessage(_aggregateId, EventSource.IvidSource);
-
-            _laceEvent.PublishEndServiceCallMessage(_aggregateId, EventSource.IvidSource);
-
-            _laceEvent.PublishServiceRequestMessage(_aggregateId, EventSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(new Source.Tests.Data.LicensePlateNumberIvidOnlyRequest()));
-
-            _laceEvent.PublishServiceResponseMessage(_aggregateId, EventSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(Source.Tests.Data.Ivid.MockIvidLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvid()));
-
-            _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, EventSource.IvidSource);
-
-            _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishSourceIsNotBeingHandledMessage(_aggregateId, EventSource.IvidSource);
         }
 
+        [Observation]
+        public void lace_ivid_events_sources_responses_are_being_transformed_test()
+        {
+            _exception.ShouldBeNull();
+
+            _bus.ShouldNotBeNull();
+
+            _laceEvent.PublishTransformationFailedMessage(_aggregateId, EventSource.IvidSource);
+
+            _laceEvent.PublishTransformationStartMessage(_aggregateId, EventSource.IvidSource);
+
+            _laceEvent.PublishTransformationEndMessage(_aggregateId, EventSource.IvidSource);
+        }
     }
 }

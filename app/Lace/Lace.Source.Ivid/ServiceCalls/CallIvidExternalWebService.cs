@@ -51,18 +51,18 @@ namespace Lace.Source.Ivid.ServiceCalls
                     laceEvent.PublishServiceRequestMessage(_request.Token, Source,
                         JsonFunctions.JsonFunction.ObjectToJson(ividRequest));
 
-                    laceEvent.PublishStartServiceCallMessage(_request.Token, EventSource.IvidSource);
+                    laceEvent.PublishStartServiceCallMessage(_request.Token, Source);
 
                     _ividResponse = ividWebService
                         .IvidServiceProxy
                         .HpiStandardQuery(ividRequest);
 
-                    laceEvent.PublishEndServiceCallMessage(_request.Token, EventSource.IvidSource);
+                    laceEvent.PublishEndServiceCallMessage(_request.Token, Source);
 
                     ividWebService.CloseWebService();
 
                     if (_ividResponse == null)
-                        laceEvent.PublishNoResponseFromServiceMessage(_request.Token, EventSource.IvidSource);
+                        laceEvent.PublishNoResponseFromServiceMessage(_request.Token, Source);
 
                     laceEvent.PublishServiceResponseMessage(_request.Token, Source,
                         JsonFunctions.JsonFunction.ObjectToJson(_ividResponse ?? new HpiStandardQueryResponse()));

@@ -19,27 +19,27 @@ namespace Lace.Events.Messages.Publish
         public void PublishMessage(ILaceEventMessage message)
         {
 
-            try
-            {
-                _publishMessages.Publish(message);
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
-            }
-
-            //Task.Factory.StartNew(() =>
+            //try
             //{
-            //    try
-            //    {
-            //        _publishMessages.Publish(message);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
-            //    }
+            //    _publishMessages.Publish(message);
             //}
-            //    );
+            //catch (Exception ex)
+            //{
+            //    Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+            //}
+
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    _publishMessages.Publish(message);
+                }
+                catch (Exception ex)
+                {
+                    Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+                }
+            }
+                );
         }
 
         public void PublishMessage(Guid aggerateId, string message, EventSource source)
@@ -75,7 +75,7 @@ namespace Lace.Events.Messages.Publish
             var msg = new LaceExternalServiceConfigurationEventMessage()
             {
                 AggregateId = aggerateId,
-                Message = "Starting Configuration for Web Service Call",
+                Message = "Ending Configuration for Web Service Call",
                 Source = source
             };
             PublishMessage(msg);
@@ -136,7 +136,60 @@ namespace Lace.Events.Messages.Publish
             PublishMessage(msg);
         }
 
-       
 
+        public void PublishSourceIsBeingHandledMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceSourceHandledEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "Source is being handled",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceSourceNotHandledEventMessage()
+            {
+                AggregateId = aggerateId,
+                Message = "Source is being not handled",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishTransformationStartMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceTransformResponseMessageEvent()
+            {
+                AggregateId = aggerateId,
+                Message = "Start Transforming Response from Source",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishTransformationEndMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceTransformResponseMessageEvent()
+            {
+                AggregateId = aggerateId,
+                Message = "End Transforming Response from Source",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
+
+        public void PublishTransformationFailedMessage(Guid aggerateId, EventSource source)
+        {
+            var msg = new LaceTransformResponseMessageEvent()
+            {
+                AggregateId = aggerateId,
+                Message = "Transforming Response from Source Failed",
+                Source = source
+            };
+            PublishMessage(msg);
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Lace.Events;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex;
 using Lace.Source.Tests.Data;
+using Lace.Tests.Data.Fakes;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.AudatexTests
@@ -16,10 +18,12 @@ namespace Lace.Source.Tests.AudatexTests
 
         public audatex_web_service_being_consumed_tests()
         {
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateNumberAudatexOnlyRequest();
             _response = new LaceResponse();
         }
-
 
         public override void Observe()
         {

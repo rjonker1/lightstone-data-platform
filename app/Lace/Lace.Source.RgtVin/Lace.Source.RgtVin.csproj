@@ -79,6 +79,10 @@
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
+      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
+      <Name>Lace.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
       <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
       <Name>Lace.Source</Name>

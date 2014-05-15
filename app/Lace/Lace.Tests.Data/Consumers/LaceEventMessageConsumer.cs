@@ -1,7 +1,7 @@
 ﻿using EasyNetQ.AutoSubscribe;
-using Lace.Events.Messages;
+using Lace.Events;
 
-namespace Lace.Events.Tests.Consumers
+namespace Lace.Tests.Data.Consumers
 {
     public class LaceEventMessageConsumer : IConsume<ILaceEventMessage>
     {
@@ -10,7 +10,6 @@ namespace Lace.Events.Tests.Consumers
         public void Consume(ILaceEventMessage message)
         {
             WasInvoked = true;
-           
         }
     }
 }
