@@ -32,16 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -67,10 +58,6 @@
       <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
       <Name>Lace.Models.Product</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
-      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
-      <Name>Lace.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
@@ -79,21 +66,9 @@
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
-      <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
-      <Name>Lace.Source.Repository.Product</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Source.Repository\Lace.Source.Repository.csproj">
       <Project>{caa40bd4-dd05-42c9-9e53-84c95268d072}</Project>
       <Name>Lace.Source.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
-      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
-      <Name>Lace.Source</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Tests.Data\Lace.Tests.Data.csproj">
-      <Project>{734172ed-e742-4fa0-a5d3-b6bbb581807c}</Project>
-      <Name>Lace.Tests.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

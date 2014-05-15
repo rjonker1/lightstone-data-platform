@@ -33,9 +33,7 @@
     <Reference Include="Common.Logging">
       <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,10 +55,6 @@
     <ProjectReference Include="..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>

@@ -18,18 +18,28 @@ namespace Lace.Events.Messages.Publish
 
         public void PublishMessage(ILaceEventMessage message)
         {
-            Task.Factory.StartNew(() =>
+
+            try
             {
-                try
-                {
-                    _publishMessages.Publish(message);
-                }
-                catch (Exception ex)
-                {
-                    Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
-                }
+                _publishMessages.Publish(message);
             }
-                );
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+            }
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    try
+            //    {
+            //        _publishMessages.Publish(message);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+            //    }
+            //}
+            //    );
         }
 
         public void PublishMessage(Guid aggerateId, string message, EventSource source)

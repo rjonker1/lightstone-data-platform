@@ -35,13 +35,7 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -74,10 +68,6 @@
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
       <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
       <Name>Workflow.RabbitMQ</Name>
@@ -85,10 +75,6 @@
     <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
       <Name>Workflow %28Workflow\Workflow%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Events.Messages\Lace.Events.Messages.csproj">
-      <Project>{3063b2ba-22e9-469a-9814-c508d76f441c}</Project>
-      <Name>Lace.Events.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
@@ -106,10 +92,6 @@
       <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
       <Name>Lace.Models.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
-      <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
-      <Name>Lace.Models.Lightstone</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
       <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
       <Name>Lace.Models.Product</Name>
@@ -121,10 +103,6 @@
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
       <Name>Lace.Models.RgtVin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Rgt\Lace.Models.Rgt.csproj">
-      <Project>{99c72578-05a3-4f67-87f6-280118c4c791}</Project>
-      <Name>Lace.Models.Rgt</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
       <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>

@@ -34,15 +34,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Log4Net">
-      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Checks\CheckTheReceivedRequest.cs" />
@@ -89,10 +81,6 @@
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>

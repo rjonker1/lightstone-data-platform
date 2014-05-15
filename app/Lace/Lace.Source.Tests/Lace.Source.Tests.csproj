@@ -32,24 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Log4Net">
-      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
-    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -139,10 +127,6 @@
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
       <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Events.Messages\Lace.Events.Messages.csproj">
-      <Project>{3063b2ba-22e9-469a-9814-c508d76f441c}</Project>
-      <Name>Lace.Events.Messages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
@@ -210,10 +194,6 @@
     <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
       <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
       <Name>Lace.Source.Repository.Product</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.Repository.Tests\Lace.Source.Repository.Tests.csproj">
-      <Project>{dd39c8b6-65f0-407f-af12-c6b80b977d7b}</Project>
-      <Name>Lace.Source.Repository.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
       <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>

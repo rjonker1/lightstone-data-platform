@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using EasyNetQ;
 using Lace.Events;
 using Lace.Events.Messages;
 using Lace.Events.Messages.Publish;

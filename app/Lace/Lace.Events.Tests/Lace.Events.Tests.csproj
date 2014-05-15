@@ -36,13 +36,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -51,6 +44,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumers\LaceEventMessageConsumer.cs" />
     <Compile Include="lace_log_event_ivid_source_tests.cs" />
     <Compile Include="Mocks\MockSourceEventBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,10 +57,6 @@
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks.Tests\Workflow.BuildingBlocks.Tests.csproj">
-      <Project>{c238e6d6-8f57-476e-8c0c-01caf44877cf}</Project>
-      <Name>Workflow.BuildingBlocks.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>

@@ -1,7 +1,5 @@
 ﻿using System;
-using EasyNetQ;
 using Lace.Request;
-using Lace.Tests.Data.Fakes;
 
 namespace Lace.Source.Repository.Tests.ProductTests.Data
 {

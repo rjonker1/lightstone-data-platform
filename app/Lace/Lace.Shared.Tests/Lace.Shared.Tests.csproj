@@ -32,16 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -62,25 +54,9 @@
       <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
       <Name>Lace.Functions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
-      <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
-      <Name>Lace.Models.Ivid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
-      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
-      <Name>Lace.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Tests.Data\Lace.Tests.Data.csproj">
-      <Project>{734172ed-e742-4fa0-a5d3-b6bbb581807c}</Project>
-      <Name>Lace.Tests.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
