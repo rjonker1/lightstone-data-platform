@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
+    <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
       <Name>Lace.Events.Messages.Publish</Name>
     </ProjectReference>

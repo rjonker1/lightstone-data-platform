@@ -146,7 +146,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{DDAFC8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Events.Messages", "Lace\Lace.Events.Messages\Lace.Events.Messages.csproj", "{3063B2BA-22E9-469A-9814-C508D76F441C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Events.Messages.Publish", "Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj", "{E2281E99-B90F-4615-9F63-D46B024EB5AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Events.Messages.Publish", "Lace\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj", "{E2281E99-B90F-4615-9F63-D46B024EB5AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
