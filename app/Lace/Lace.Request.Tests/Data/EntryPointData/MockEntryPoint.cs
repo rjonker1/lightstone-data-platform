@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Lace.Events;
-using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Request.Entry;
 using Lace.Request.Entry.Checks;
 using Lace.Response.ExternalServices;
@@ -17,11 +17,13 @@ namespace Lace.Request.Tests.Data.EntryPointData
 
         public MockEntryPoint()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _getRequestedType = new MockGetRequestedTypeToLoad();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
-        
+
 
         public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
         {

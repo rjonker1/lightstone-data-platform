@@ -1,5 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Ivid;
@@ -17,7 +17,9 @@ namespace Lace.Source.Tests.IvidTests
 
         public ivid_web_service_being_consumed_tests()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateNumberIvidOnlyRequest();
             _response = new LaceResponse();
         }

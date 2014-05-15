@@ -30,24 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Log4Net">
-      <HintPath>..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Publishers\PublishLaceEventMessages.cs" />
+    <None Include="Publishers\PublishLaceEventMessages.cs.old" />
     <Compile Include="ILaceEvent.cs" />
-    <Compile Include="Messages\LaceEventMessage.cs" />
-    <Compile Include="Messages\PublishEvent.cs" />
+    <Compile Include="ILaceEventMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,14 +48,6 @@
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
-      <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
-      <Name>Workflow.RabbitMQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
-      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
       <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>

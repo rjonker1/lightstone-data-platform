@@ -123,6 +123,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
+      <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
+      <Name>Lace.Events.Messages.Publish</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
+      <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
+      <Name>Workflow.RabbitMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
+      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Events.Messages\Lace.Events.Messages.csproj">
+      <Project>{3063b2ba-22e9-469a-9814-c508d76f441c}</Project>
+      <Name>Lace.Events.Messages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
@@ -209,7 +229,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
-      <Name>Lace</Name>
+      <Name>Lace %28Lace\Lace%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1,10 +1,11 @@
 ﻿using Lace.Events;
-using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.RgtVin;
 using Lace.Source.Tests.Data;
 using Lace.Tests.Data.Fakes;
+using Workflow;
 using Xunit.Extensions;
 
 namespace Lace.Source.Tests.RgtVinTests
@@ -15,11 +16,14 @@ namespace Lace.Source.Tests.RgtVinTests
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
         private ILaceResponse _response;
+        
 
 
         public rgt_vin_service_being_consumed_tests()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateNumberRgtVinOnlyRequest();
             _response = new LaceResponse();
         }

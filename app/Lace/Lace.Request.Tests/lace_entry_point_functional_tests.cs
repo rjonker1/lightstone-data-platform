@@ -20,10 +20,14 @@ namespace Lace.Request.Tests
         {
             _loadRequestSources = new LaceLicensePlateNumberLoader();
             _request = new LicensePlateNumberSliverAllServicesRequest();
-            _entryPoint = new EntryPoint(new FakeBus());
+
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+
+            _entryPoint = new EntryPoint(publisher);
         }
 
-        
+
         public override void Observe()
         {
             _laceResponses = _entryPoint.GetResponsesFromLace(_request);

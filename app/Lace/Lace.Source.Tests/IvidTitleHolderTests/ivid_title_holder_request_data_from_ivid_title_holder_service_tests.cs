@@ -1,6 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 using Lace.Events;
-using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.ServiceCalls;
@@ -20,7 +20,9 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
 
         public ivid_title_holder_request_data_from_ivid_title_holder_service_tests()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _requestDataFromService = new RequestDatafromIvidTitleHolderService();
             _ividTitleHolderRequest =
                 MockIvidTitleHolderLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvidTitleHolder();

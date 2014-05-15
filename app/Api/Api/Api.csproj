@@ -160,9 +160,21 @@
       <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
       <Name>Shared.BuildingBlocks.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
       <Name>Workflow.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
+      <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
+      <Name>Workflow.RabbitMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
+      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,10 +1,9 @@
 ﻿using System;
-using DataPlatform.Shared.Public.Messaging;
 using Lace.Shared.Enums;
 
 namespace Lace.Events.Messages
 {
-    public class LaceEventMessage : IPublishableMessage
+    public class LaceEventMessage : ILaceEventMessage
     {
         public Guid Id
         {

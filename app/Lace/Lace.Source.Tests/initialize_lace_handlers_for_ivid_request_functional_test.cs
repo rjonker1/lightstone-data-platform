@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Lace.Events;
-using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Request.Load;
 using Lace.Request.Load.Loaders;
@@ -21,7 +21,9 @@ namespace Lace.Source.Tests
 
         public initialize_lace_handlers_for_ivid_request_functional_test()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateNumberIvidOnlyRequest();
             _loadRequestSources = new LaceLicensePlateNumberLoader();
             _initialize = new Initialize(_request, _loadRequestSources, _laceEvent);

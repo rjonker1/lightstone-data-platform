@@ -1,8 +1,8 @@
 ﻿using System;
 using EasyNetQ;
 using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Shared.Enums;
-using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
 namespace Lace.Events.Tests
@@ -23,10 +23,13 @@ namespace Lace.Events.Tests
                 Source = EventSource.IvidSource
             };
 
-
-            _bus = new Mocks.MockSourceEventBus();
-            //_bus = new BusFactory().CreateBus("LaceEventBus");
-            _laceEvent = new PublishEvent(_bus);
+            var bus = new Mocks.MockSourceEventBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
+           
+            //_bus = new Mocks.MockSourceEventBus();
+           // _bus = new BusFactory().CreateBus("LaceEventBus");
+            
         }
 
         public override void Observe()

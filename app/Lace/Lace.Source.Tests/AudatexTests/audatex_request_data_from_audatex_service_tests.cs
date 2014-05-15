@@ -1,5 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Events.Messages;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.ServiceCalls;
@@ -20,7 +20,9 @@ namespace Lace.Source.Tests.AudatexTests
 
         public audatex_request_data_from_audatex_service_tests()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _requestDataFromService = new RequestDataFromAudatexService();
             _audatexRequest = MockAudatexLicensePlateNumberRequestData.GetLicensePlateNumberRequestForAudatex();
             _laceResponse = new LaceResponse();

@@ -17,7 +17,7 @@ namespace Api.Modules
 
                 var licRequest = this.Bind<Request>();
                 var request = new LicensePlateNumberRequest(licRequest.LicenseNo);
-                var entryPoint = new EntryPoint(new BusFactory().CreateBus(""));
+                var entryPoint = new EntryPoint(new Workflow.RabbitMQ.Publisher(new BusFactory().CreateBus(""))); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
                 var responses = entryPoint.GetResponsesFromLace(request);
 
                 return Response.AsJson(responses.First().Response);

@@ -1,6 +1,5 @@
-﻿using System.Net.NetworkInformation;
-using Lace.Events;
-using Lace.Events.Messages;
+﻿using Lace.Events;
+using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.RgtVin.ServiceCalls;
@@ -20,7 +19,9 @@ namespace Lace.Source.Tests.RgtVinTests
 
         public rgt_vin_request_data_from_rgt_vin_service_tests()
         {
-            _laceEvent = new PublishEvent(new FakeBus());
+            var bus = new FakeBus();
+            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _laceEvent = new PublishLaceEventMessages(publisher);
             _requestDataFromService = new RequestDataFromRgtVinService();
             _rgtVinRequest = MockRgtVinLicensePlateNumberRequestData.GetLicensePlateNumberReqeustForRgtVinRequest();
             _laceResponse = new LaceResponse();

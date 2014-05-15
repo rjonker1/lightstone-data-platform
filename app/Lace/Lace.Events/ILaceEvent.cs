@@ -1,12 +1,11 @@
 ﻿using System;
-using Lace.Events.Messages;
 using Lace.Shared.Enums;
 
 namespace Lace.Events
 {
     public interface ILaceEvent
     {
-        void PublishMessage(LaceEventMessage message);
+        void PublishMessage(ILaceEventMessage message);
 
         void PublishMessage(Guid aggerateId, string message, EventSource source);
 
