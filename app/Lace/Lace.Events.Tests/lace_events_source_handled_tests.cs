@@ -1,7 +1,8 @@
 ﻿using System;
 using EasyNetQ;
+using Lace.Events.Consumer;
+using Lace.Events.Consumer.Sources;
 using Lace.Events.Messages.Publish;
-using Lace.Events.Tests.Consumers;
 using Lace.Shared.Enums;
 using Workflow;
 using Workflow.BuildingBlocks;
@@ -15,8 +16,6 @@ namespace Lace.Events.Tests
     {
 
         private IBus _bus;
-        private readonly BusFactory _factory;
-        private readonly ConsumerRegistration _consumers;
         private IPublishMessages _publishMessages;
 
         private ILaceEvent _laceEvent;
@@ -24,13 +23,17 @@ namespace Lace.Events.Tests
 
         private readonly Guid _aggregateId;
 
+        private readonly ILaceEventService sourceEventService;
+
         public lace_events_source_handled_tests()
         {
             _aggregateId = Guid.NewGuid();
 
-            _factory = new BusFactory();
-            _consumers = new ConsumerRegistration()
-                 .AddConsumer<LaceEventMessageConsumer, ILaceEventMessage>(() => new LaceEventMessageConsumer());
+            sourceEventService = new LaceEventService();
+
+            //_factory = new BusFactory();
+            //_consumers = new ConsumerRegistration()
+            //     .AddConsumer<LaceEventMessageConsumer, ILaceEventMessage>(() => new LaceEventMessageConsumer());
         }
         
 
@@ -38,13 +41,9 @@ namespace Lace.Events.Tests
         {
             try
             {
-
-                using (_bus = _factory.CreateConsumerBus("LaceEventBus", _consumers))
-                {
-                    
-                }
-
-                _bus = _factory.CreateBus("LaceEventBus");
+                sourceEventService.Start();
+               
+                _bus = new BusFactory().CreateBus("LaceEventBus");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 
@@ -54,6 +53,7 @@ namespace Lace.Events.Tests
                 _exception = e;
             }
         }
+
 
         [Observation]
         public void lace_ivid_events_sources_are_handled_test()
