@@ -5,6 +5,13 @@ namespace Lace.Events.Messages
 {
     public class LaceExternalServiceFailedEventMessage : ILaceEventMessage
     {
+        public LaceExternalServiceFailedEventMessage(Guid aggregateId, EventSource source, string message)
+        {
+            AggregateId = aggregateId;
+            Message = message;
+            Source = source;
+        }
+
         public Guid Id
         {
             get
@@ -13,9 +20,9 @@ namespace Lace.Events.Messages
             }
         }
 
-        public Guid AggregateId { get; set; }
-        public EventSource Source { get; set; }
-        public string Message { get; set; }
+        public Guid AggregateId { get; private set; }
+        public EventSource Source { get; private set; }
+        public string Message { get; private set; }
 
         public DateTime EventDate
         {

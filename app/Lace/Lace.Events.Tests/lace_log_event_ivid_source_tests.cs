@@ -1,13 +1,12 @@
 ﻿using System;
 using EasyNetQ;
-using Lace.Events.Messages;
+using Lace.Events.Consumer;
+using Lace.Events.Consumer.Sources;
 using Lace.Events.Messages.Publish;
-using Lace.Events.Tests.Consumers;
 using Lace.Functions.Json;
 using Lace.Shared.Enums;
 using Workflow;
 using Workflow.BuildingBlocks;
-using Workflow.BuildingBlocks.Consumers;
 using Workflow.RabbitMQ;
 using Xunit.Extensions;
 
@@ -16,23 +15,21 @@ namespace Lace.Events.Tests
     public class lace_log_event_ivid_source_tests : Specification
     {
         private IBus _bus;
-        private readonly BusFactory _factory;
-        private readonly ConsumerRegistration _consumers;
         private IPublishMessages _publishMessages;
 
         private ILaceEvent _laceEvent;
         private Exception _exception;
-
+        private readonly ILaceEventService _sourceEventService;
         private readonly Guid _aggregateId;
 
         public lace_log_event_ivid_source_tests()
         {
             
             _aggregateId = Guid.NewGuid();
-
-            _factory = new BusFactory();
-            _consumers = new ConsumerRegistration()
-                 .AddConsumer<LaceEventMessageConsumer, ILaceEventMessage>(() => new LaceEventMessageConsumer());
+            _sourceEventService = new LaceEventService();
+            //_factory = new BusFactory();
+            //_consumers = new ConsumerRegistration()
+            //     .AddConsumer<LaceEventMessageConsumer, ILaceEventMessage>(() => new LaceEventMessageConsumer());
         }
 
         public override void Observe()
@@ -40,12 +37,12 @@ namespace Lace.Events.Tests
             try
             {
 
-                using (_bus = _factory.CreateConsumerBus("LaceEventBus", _consumers))
-                {
+                //using (_bus = _factory.CreateConsumerBus("LaceEventBus", _consumers))
+                //{
                     
-                }
-
-                _bus = _factory.CreateBus("LaceEventBus");
+                //}
+                _sourceEventService.Start();
+                _bus = new BusFactory().CreateBus("LaceEventBus");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 

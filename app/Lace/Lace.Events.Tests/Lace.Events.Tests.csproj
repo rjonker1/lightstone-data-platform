@@ -45,13 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\LaceEventMessageConsumer.cs" />
+    <None Include="Consumers\LaceEventMessageConsumer.cs.old" />
     <Compile Include="lace_events_source_handled_tests.cs" />
     <Compile Include="lace_log_event_ivid_source_tests.cs" />
     <Compile Include="Mocks\MockSourceEventBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Events.Consumer\Lace.Events.Consumer.csproj">
+      <Project>{f46f9877-cc0a-4783-bc03-13f43cf0a0e4}</Project>
+      <Name>Lace.Events.Consumer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
       <Name>Lace.Events.Messages.Publish</Name>
@@ -98,7 +102,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

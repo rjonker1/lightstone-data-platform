@@ -8,9 +8,9 @@ namespace Lace.Events
     {
         Guid Id { get; }
 
-        Guid AggregateId { get; set; }
-        EventSource Source { get; set; }
-        string Message { get; set; }
+        Guid AggregateId { get; }
+        EventSource Source { get;  }
+        string Message { get;  }
         DateTime EventDate { get; }
     }
 }
