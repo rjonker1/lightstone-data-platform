@@ -66,6 +66,7 @@
     </None>
     <None Include="connections.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="install.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -52,9 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Events.Consumer\Lace.Events.Consumer.csproj">
-      <Project>{f46f9877-cc0a-4783-bc03-13f43cf0a0e4}</Project>
-      <Name>Lace.Events.Consumer</Name>
+    <ProjectReference Include="..\..\EventTracking\EventTracking\EventTracking.csproj">
+      <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
+      <Name>EventTracking %28EventTracking\EventTracking%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
@@ -91,10 +91,6 @@
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source.Tests\Lace.Source.Tests.csproj">
       <Project>{b9b50b38-6eec-4d8f-86e1-e9f35955e527}</Project>

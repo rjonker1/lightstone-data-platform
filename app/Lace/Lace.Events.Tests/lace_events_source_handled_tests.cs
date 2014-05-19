@@ -1,12 +1,9 @@
 ﻿using System;
 using EasyNetQ;
-using Lace.Events.Consumer;
-using Lace.Events.Consumer.Sources;
+using EventTracking.Sources;
 using Lace.Events.Messages.Publish;
-using Lace.Shared.Enums;
 using Workflow;
 using Workflow.BuildingBlocks;
-using Workflow.BuildingBlocks.Consumers;
 using Workflow.RabbitMQ;
 using Xunit.Extensions;
 
@@ -23,13 +20,13 @@ namespace Lace.Events.Tests
 
         private readonly Guid _aggregateId;
 
-        private readonly ILaceEventService sourceEventService;
+      //  private readonly ILaceEventService sourceEventService;
 
         public lace_events_source_handled_tests()
         {
             _aggregateId = Guid.NewGuid();
 
-            sourceEventService = new LaceEventService();
+           // sourceEventService = new LaceEventService();
 
             //_factory = new BusFactory();
             //_consumers = new ConsumerRegistration()
@@ -41,7 +38,7 @@ namespace Lace.Events.Tests
         {
             try
             {
-                sourceEventService.Start();
+               // sourceEventService.Start();
                
                 _bus = new BusFactory().CreateBus("LaceEventBus");
                 _publishMessages = new Publisher(_bus);
@@ -62,9 +59,9 @@ namespace Lace.Events.Tests
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishSourceIsBeingHandledMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishSourceIsBeingHandledMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishSourceIsNotBeingHandledMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishSourceIsNotBeingHandledMessage(_aggregateId, FromSource.IvidSource);
         }
 
         [Observation]
@@ -74,11 +71,11 @@ namespace Lace.Events.Tests
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishTransformationFailedMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishTransformationFailedMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishTransformationStartMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishTransformationStartMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishTransformationEndMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishTransformationEndMessage(_aggregateId, FromSource.IvidSource);
         }
     }
 }

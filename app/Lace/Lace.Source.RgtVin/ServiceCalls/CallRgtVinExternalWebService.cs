@@ -1,11 +1,11 @@
 ﻿using System;
 using Common.Logging;
+using EventTracking.Sources;
 using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.RgtVin;
 using Lace.Request;
 using Lace.Response;
-using Lace.Shared.Enums;
 using Lace.Source.RgtVin.ServiceConfig;
 using Lace.Source.RgtVin.Transform;
 
@@ -16,7 +16,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private string _rgtVinResponse;
         private readonly ILaceRequest _request;
-        private const EventSource Source = EventSource.RgtVinSource;
+        private const FromSource Source = FromSource.RgtVinSource;
 
         public CallRgtVinExternalWebService(ILaceRequest request)
         {

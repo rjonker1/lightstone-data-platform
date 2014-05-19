@@ -37,7 +37,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\LaceEventMessageConsumer.cs" />
+    <None Include="Consumers\LaceEventMessageConsumer.cs.old" />
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="FieldsFromAudatex.cs" />
     <Compile Include="FieldsFromIvid.cs" />

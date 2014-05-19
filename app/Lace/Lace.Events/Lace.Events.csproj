@@ -34,22 +34,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Publishers\PublishLaceEventMessages.cs.old" />
     <Compile Include="ILaceEvent.cs" />
-    <Compile Include="ILaceEventMessage.cs" />
     <Compile Include="ILaceExternalServiceEvent.cs" />
     <Compile Include="ILaceSourceHandledEvent.cs" />
     <Compile Include="ILaceTransformEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EventTracking\EventTracking\EventTracking.csproj">
+      <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
+      <Name>EventTracking %28EventTracking\EventTracking%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

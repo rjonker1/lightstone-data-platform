@@ -2,12 +2,12 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using EventTracking.Sources;
 using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
-using Lace.Shared.Enums;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
 using Lace.Source.IvidTitleHolder.Transform;
@@ -19,7 +19,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private TitleholderQueryResponse _ividTitleHolderResponse;
         private readonly ILaceRequest _request;
-        private const EventSource Source = EventSource.IvitTitleHolderSource;
+        private const FromSource Source = FromSource.IvitTitleHolderSource;
 
         public CallIvidTitleHolderExternalWebService(ILaceRequest request)
         {
