@@ -2,12 +2,12 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using EventTracking.Sources;
 using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.Ivid;
 using Lace.Request;
 using Lace.Response;
-using Lace.Shared.Enums;
 using Lace.Source.Ivid.IvidServiceReference;
 using Lace.Source.Ivid.ServiceConfig;
 using Lace.Source.Ivid.Transform;
@@ -19,7 +19,7 @@ namespace Lace.Source.Ivid.ServiceCalls
         private HpiStandardQueryResponse _ividResponse;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
-        private const EventSource Source = EventSource.IvidSource;
+        private const FromSource Source = FromSource.IvidSource;
 
         public CallIvidExternalWebService(ILaceRequest request)
         {

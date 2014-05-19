@@ -1,12 +1,12 @@
 ﻿using System;
-using Lace.Shared.Enums;
+using EventTracking.Sources;
 
 namespace Lace.Events
 {
     public interface ILaceSourceHandledEvent
     {
-        void PublishSourceIsBeingHandledMessage(Guid aggerateId, EventSource source);
+        void PublishSourceIsBeingHandledMessage(Guid aggerateId, FromSource source);
 
-        void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, EventSource source);
+        void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, FromSource source);
     }
 }

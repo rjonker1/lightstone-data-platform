@@ -54,6 +54,10 @@
     <Compile Include="Transform\TransformIvidTitleHolderWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EventTracking\EventTracking\EventTracking.csproj">
+      <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
+      <Name>EventTracking %28EventTracking\EventTracking%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
@@ -77,10 +81,6 @@
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
       <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>

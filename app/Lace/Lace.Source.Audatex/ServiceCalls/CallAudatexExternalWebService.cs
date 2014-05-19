@@ -1,12 +1,11 @@
 ﻿using System;
 using Common.Logging;
+using EventTracking.Sources;
 using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.Audatex;
-using Lace.Models.Audatex.Dto;
 using Lace.Request;
 using Lace.Response;
-using Lace.Shared.Enums;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Audatex.ServiceConfig;
 using Lace.Source.Audatex.Transform;
@@ -18,7 +17,7 @@ namespace Lace.Source.Audatex.ServiceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private GetDataResult _audatexResponse;
         private readonly ILaceRequest _request;
-        private const EventSource Source = EventSource.AudatexSource;
+        private const FromSource Source = FromSource.AudatexSource;
 
         public CallAudatexExternalWebService(ILaceRequest request)
         {

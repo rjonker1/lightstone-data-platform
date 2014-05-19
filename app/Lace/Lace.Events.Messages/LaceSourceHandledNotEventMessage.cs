@@ -1,11 +1,12 @@
 ﻿using System;
-using Lace.Shared.Enums;
+using EventTracking;
+using EventTracking.Sources;
 
 namespace Lace.Events.Messages
 {
-    public class LaceSourceNotHandledEventMessage : ILaceEventMessage
+    public class LaceSourceNotHandledEventMessage : ITrackExternalSourceEventMessage
     {
-        public LaceSourceNotHandledEventMessage(Guid aggregateId, EventSource source, string message)
+        public LaceSourceNotHandledEventMessage(Guid aggregateId, FromSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;
@@ -21,7 +22,7 @@ namespace Lace.Events.Messages
         }
 
         public Guid AggregateId { get; private set; }
-        public EventSource Source { get; private set; }
+        public FromSource Source { get; private set; }
         public string Message { get; private set; }
 
         public DateTime EventDate
