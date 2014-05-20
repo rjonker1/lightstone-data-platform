@@ -34,10 +34,10 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="xunit">
-      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+      <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
     <Reference Include="xunit.bdd">
-      <HintPath>..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
+      <HintPath>..\..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
       <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
       <Name>Lace.Models.Product</Name>
@@ -70,6 +71,9 @@
       <Project>{caa40bd4-dd05-42c9-9e53-84c95268d072}</Project>
       <Name>Lace.Source.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

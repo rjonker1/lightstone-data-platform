@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using DataPlatform.Shared.Public.Entities;
+using Lace.Request;
 using System;
 using Lace.Tests.Data;
 

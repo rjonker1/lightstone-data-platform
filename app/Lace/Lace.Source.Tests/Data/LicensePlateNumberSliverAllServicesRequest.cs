@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataPlatform.Shared.Public.Entities;
 using EasyNetQ;
 using Lace.Request;
 using System;
