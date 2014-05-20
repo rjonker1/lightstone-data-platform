@@ -1,13 +1,12 @@
 ﻿using System;
-using EventTracking;
 using EventTracking.Sources;
 
-namespace Lace.Events.Messages
+namespace EventTracking.Modules.Lace.Messages
 {
-    public class LaceExternalServiceConfigurationEventMessage : ITrackExternalSourceEventMessage
+    public class LaceExternalServiceResponseEventMessage : ITrackExternalSourceEventMessage
     {
 
-        public LaceExternalServiceConfigurationEventMessage(Guid aggregateId, FromSource source, string message)
+        public LaceExternalServiceResponseEventMessage(Guid aggregateId, FromSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;

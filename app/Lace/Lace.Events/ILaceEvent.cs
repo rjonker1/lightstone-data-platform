@@ -1,5 +1,5 @@
 ﻿using System;
-using EventTracking;
+using EventTracking.Modules.Lace;
 using EventTracking.Sources;
 
 namespace Lace.Events

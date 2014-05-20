@@ -1,6 +1,6 @@
 ﻿using EasyNetQ.AutoSubscribe;
 
-namespace EventTracking.Consumers
+namespace EventTracking.Modules.Lace.Consumers
 {
     public class ExternalSourceConsumer : IConsume<ITrackExternalSourceEventMessage>
     {

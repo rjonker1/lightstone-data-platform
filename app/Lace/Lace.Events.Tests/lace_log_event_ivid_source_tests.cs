@@ -4,6 +4,7 @@ using EventTracking.Sources;
 using Lace.Events.Messages.Publish;
 using Lace.Functions.Json;
 using Workflow;
+using Workflow.BuildingBlocks;
 using Workflow.RabbitMQ;
 using Xunit.Extensions;
 
@@ -39,7 +40,7 @@ namespace Lace.Events.Tests
                     
                 //}
                 //_sourceEventService.Start();
-                //_bus = new BusFactory().CreateBus("LaceEventBus");
+                _bus = new BusFactory().CreateBus("LaceEventBus");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 
@@ -72,6 +73,8 @@ namespace Lace.Events.Tests
             _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, FromSource.IvidSource);
 
             _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, FromSource.IvidSource);
+
+            _bus.Dispose();
         }
 
     }
