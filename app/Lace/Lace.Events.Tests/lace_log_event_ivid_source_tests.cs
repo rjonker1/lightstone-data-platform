@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using EasyNetQ;
 using EventTracking.Sources;
 using Lace.Events.Messages.Publish;
@@ -73,6 +74,9 @@ namespace Lace.Events.Tests
             _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, FromSource.IvidSource);
 
             _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, FromSource.IvidSource);
+
+
+            Thread.Sleep(5000);
 
             _bus.Dispose();
         }

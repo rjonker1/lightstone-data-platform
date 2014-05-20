@@ -3,9 +3,9 @@ using EventTracking.Sources;
 
 namespace EventTracking.Modules.Lace.Messages
 {
-    public class LaceTransformResponseMessageEvent : ITrackExternalSourceEventMessage
+    public class LaceTransformResponseEventMessage : ITrackExternalSourceEventMessage
     {
-        public LaceTransformResponseMessageEvent(Guid aggregateId, FromSource source, string message)
+        public LaceTransformResponseEventMessage(Guid aggregateId, FromSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;

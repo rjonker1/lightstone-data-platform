@@ -1,8 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using System.Threading.Tasks;
-using EventTracking.Messages.Lace;
-using EventTracking.Modules.Lace;
+using DataPlatform.Shared.Public.Messaging;
 using EventTracking.Modules.Lace.Messages;
 using EventTracking.Sources;
 using Workflow;
@@ -67,14 +66,15 @@ namespace Lace.Events.Messages.Publish
         public void PublishServiceRequestMessage(Guid aggerateId, FromSource source, string request)
         {
             var msg = new LaceExternalServiceRequestEventMessage(aggerateId, source,
-                string.Format("Response Received from Web Service: {0}", request));
+                string.Format("Request Sent to Web Service: {0}", request));
             PublishMessage(msg);
+
         }
 
         public void PublishServiceResponseMessage(Guid aggerateId, FromSource source, string response)
         {
-            var msg = new LaceEventMessage(aggerateId, source,
-                string.Format("Request Sent to Web Service: {0}", response));
+            var msg = new LaceExternalServiceResponseEventMessage(aggerateId, source,
+                string.Format("Response Received from Web Service: {0}", response));
             PublishMessage(msg);
         }
 
@@ -87,43 +87,33 @@ namespace Lace.Events.Messages.Publish
 
         public void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceSourceNotHandledEventMessage(aggerateId, source, "Source is being not handled");
+            var msg = new LaceSourceHandledEventMessage(aggerateId, source, "Source is NOT being handled");
             PublishMessage(msg);
         }
 
         public void PublishTransformationStartMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceTransformResponseMessageEvent(aggerateId, source,
+            var msg = new LaceTransformResponseEventMessage(aggerateId, source,
                 "Start Transforming Response from Source");
             PublishMessage(msg);
         }
 
         public void PublishTransformationEndMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceTransformResponseMessageEvent(aggerateId, source, "End Transforming Response from Source");
+            var msg = new LaceTransformResponseEventMessage(aggerateId, source, "End Transforming Response from Source");
             PublishMessage(msg);
         }
 
         public void PublishTransformationFailedMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceTransformResponseMessageEvent(aggerateId, source,
+            var msg = new LaceTransformResponseEventMessage(aggerateId, source,
                 "Transforming Response from Source Failed");
             PublishMessage(msg);
         }
+        
 
-
-        public void PublishMessage(ITrackExternalSourceEventMessage message)
+        public void PublishMessage<T>(T message) where T : class, IPublishableMessage
         {
-
-            //try
-            //{
-            //    _publishMessages.Publish(message);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
-            //}
-
             Task.Factory.StartNew(() =>
             {
                 try

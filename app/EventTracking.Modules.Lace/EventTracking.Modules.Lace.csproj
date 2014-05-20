@@ -33,10 +33,18 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumers\ExternalSourceConfigurationConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceConsumer.cs" />
+    <Compile Include="Consumers\ExternalSourceFailedConsumer.cs" />
+    <Compile Include="Consumers\ExternalSourceHandledConsumer.cs" />
+    <Compile Include="Consumers\ExternalSourceNoResponseReceivedConsumer.cs" />
+    <Compile Include="Consumers\ExternalSourceReceivedResponseConsumer.cs" />
+    <Compile Include="Consumers\ExternalSourceSentRequestsConsumer.cs" />
+    <Compile Include="Consumers\ExternalSourceTransformationConsumer.cs" />
     <Compile Include="ITrackExternalSourceEventMessage.cs" />
     <Compile Include="Messages\LaceEventMessage.cs" />
     <Compile Include="Messages\LaceExternalServiceConfigurationEventMessage.cs" />
@@ -46,7 +54,7 @@
     <Compile Include="Messages\LaceExternalServiceRequestEventMessage.cs" />
     <Compile Include="Messages\LaceExternalServiceResponseEventMessage.cs" />
     <Compile Include="Messages\LaceSourceHandledEventMessage.cs" />
-    <Compile Include="Messages\LaceSourceHandledNotEventMessage.cs" />
+    <None Include="Messages\LaceSourceHandledNotEventMessage.cs.old" />
     <Compile Include="Messages\LaceTransformResponseFailedMessageEvent.cs" />
     <Compile Include="Messages\LaceTransformResponseMessageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

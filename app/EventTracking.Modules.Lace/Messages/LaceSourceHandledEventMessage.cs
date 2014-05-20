@@ -1,8 +1,7 @@
 ﻿using System;
-using EventTracking.Modules.Lace;
 using EventTracking.Sources;
 
-namespace EventTracking.Messages.Lace
+namespace EventTracking.Modules.Lace.Messages
 {
     public class LaceSourceHandledEventMessage : ITrackExternalSourceEventMessage
     {

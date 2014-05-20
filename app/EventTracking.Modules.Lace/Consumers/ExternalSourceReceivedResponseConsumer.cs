@@ -3,12 +3,14 @@ using EventTracking.Modules.Lace.Messages;
 
 namespace EventTracking.Modules.Lace.Consumers
 {
-    public class ExternalSourceConsumer : IConsume<LaceExternalServiceEventMessage>
+    public class ExternalSourceReceivedResponseConsumer : IConsume<LaceExternalServiceResponseEventMessage>
     {
         public bool HasBeenConsumed { get; private set; }
-        public void Consume(LaceExternalServiceEventMessage message)
+
+        public void Consume(LaceExternalServiceResponseEventMessage message)
         {
             HasBeenConsumed = true;
         }
     }
+  
 }
