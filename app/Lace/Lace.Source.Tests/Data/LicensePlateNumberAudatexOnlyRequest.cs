@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Public.Entities;
 using EasyNetQ;
 using Lace.Request;
 using Lace.Tests.Data;

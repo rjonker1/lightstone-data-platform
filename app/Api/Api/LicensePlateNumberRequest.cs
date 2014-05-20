@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 
 namespace Api
