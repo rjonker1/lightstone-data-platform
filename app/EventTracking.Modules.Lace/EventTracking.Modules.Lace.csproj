@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3063B2BA-22E9-469A-9814-C508D76F441C}</ProjectGuid>
+    <ProjectGuid>{5964734E-7B1D-43D0-84BC-A3A3957C2335}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Events.Messages</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Events.Messages</AssemblyName>
+    <RootNamespace>EventTracking.Modules.Lace</RootNamespace>
+    <AssemblyName>EventTracking.Modules.Lace</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,35 +30,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LaceTransformResponseFailedMessageEvent.cs" />
-    <Compile Include="LaceSourceHandledNotEventMessage.cs" />
-    <Compile Include="LaceEventMessage.cs" />
-    <Compile Include="LaceExternalServiceConfigurationEventMessage.cs" />
-    <Compile Include="LaceExternalServiceEventMessage.cs" />
-    <Compile Include="LaceExternalServiceFailedEventMessage.cs" />
-    <Compile Include="LaceExternalServiceNoResponseEventMessage.cs" />
-    <Compile Include="LaceExternalServiceRequestEventMessage.cs" />
-    <Compile Include="LaceExternalServiceResponseEventMessage.cs" />
-    <Compile Include="LaceSourceHandledEventMessage.cs" />
-    <Compile Include="LaceTransformResponseMessageEvent.cs" />
+    <Compile Include="Consumers\ExternalSourceConsumer.cs" />
+    <Compile Include="ITrackExternalSourceEventMessage.cs" />
+    <Compile Include="Messages\LaceEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalServiceConfigurationEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalServiceEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalServiceFailedEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalServiceNoResponseEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalServiceRequestEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalServiceResponseEventMessage.cs" />
+    <Compile Include="Messages\LaceSourceHandledEventMessage.cs" />
+    <Compile Include="Messages\LaceSourceHandledNotEventMessage.cs" />
+    <Compile Include="Messages\LaceTransformResponseFailedMessageEvent.cs" />
+    <Compile Include="Messages\LaceTransformResponseMessageEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EventTracking\EventTracking\EventTracking.csproj">
+    <ProjectReference Include="..\EventTracking\EventTracking\EventTracking.csproj">
       <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
       <Name>EventTracking %28EventTracking\EventTracking%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+    <ProjectReference Include="..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
-      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
-      <Name>Lace.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

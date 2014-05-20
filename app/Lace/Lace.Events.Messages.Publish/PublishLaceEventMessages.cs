@@ -1,9 +1,11 @@
 ﻿using System;
 using Common.Logging;
 using System.Threading.Tasks;
-using EventTracking;
-using Workflow;
+using EventTracking.Messages.Lace;
+using EventTracking.Modules.Lace;
+using EventTracking.Modules.Lace.Messages;
 using EventTracking.Sources;
+using Workflow;
 
 namespace Lace.Events.Messages.Publish
 {

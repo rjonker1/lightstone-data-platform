@@ -1,5 +1,6 @@
 ﻿using EasyNetQ;
-using EventTracking.Consumers;
+using EventTracking.Modules.Lace;
+using EventTracking.Modules.Lace.Consumers;
 using Workflow.BuildingBlocks;
 using Workflow.BuildingBlocks.Consumers;
 
@@ -12,7 +13,8 @@ namespace EventTracking.Consumer
         public void Start()
         {
             var consumers = new ConsumerRegistration()
-                .AddConsumer<ExternalSourceConsumer, ITrackExternalSourceEventMessage>(() => new ExternalSourceConsumer());
+                .AddConsumer<ExternalSourceConsumer, ITrackExternalSourceEventMessage>(
+                    () => new ExternalSourceConsumer());
 
             _bus = new BusFactory().CreateConsumerBus("event-tracking/queue", consumers);
         }

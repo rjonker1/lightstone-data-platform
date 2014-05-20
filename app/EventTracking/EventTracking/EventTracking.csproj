@@ -30,23 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\ExternalSourceConsumer.cs" />
-    <Compile Include="Sources\FromSource.cs" />
-    <Compile Include="ITrackExternalSourceEventMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>Shared.Public</Name>
-    </ProjectReference>
+    <Compile Include="Sources\FromSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

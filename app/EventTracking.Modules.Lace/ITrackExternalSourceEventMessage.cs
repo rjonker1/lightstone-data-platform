@@ -2,7 +2,8 @@
 using DataPlatform.Shared.Public.Messaging;
 using EventTracking.Sources;
 
-namespace EventTracking
+
+namespace EventTracking.Modules.Lace
 {
     public interface ITrackExternalSourceEventMessage :  IPublishableMessage
     {

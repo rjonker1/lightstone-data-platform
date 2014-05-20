@@ -71,6 +71,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EventTracking.Modules.Lace\EventTracking.Modules.Lace.csproj">
+      <Project>{5964734e-7b1d-43d0-84bc-a3a3957c2335}</Project>
+      <Name>EventTracking.Modules.Lace</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
       <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
       <Name>BuildingBlocks</Name>
@@ -82,10 +86,6 @@
     <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
       <Name>Workflow.BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking\EventTracking.csproj">
-      <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
-      <Name>EventTracking %28EventTracking\EventTracking%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

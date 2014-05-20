@@ -40,13 +40,13 @@
     <Compile Include="PublishLaceEventMessages.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EventTracking.Modules.Lace\EventTracking.Modules.Lace.csproj">
+      <Project>{5964734e-7b1d-43d0-84bc-a3a3957c2335}</Project>
+      <Name>EventTracking.Modules.Lace</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\EventTracking\EventTracking\EventTracking.csproj">
       <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
       <Name>EventTracking %28EventTracking\EventTracking%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Events.Messages\Lace.Events.Messages.csproj">
-      <Project>{3063b2ba-22e9-469a-9814-c508d76f441c}</Project>
-      <Name>Lace.Events.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>

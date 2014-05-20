@@ -1,12 +1,11 @@
 ﻿using System;
-using EventTracking;
 using EventTracking.Sources;
 
-namespace Lace.Events.Messages
+namespace EventTracking.Modules.Lace.Messages
 {
-    public class LaceTransformResponseFailedMessageEvent : ITrackExternalSourceEventMessage
+    public class LaceEventMessage : ITrackExternalSourceEventMessage
     {
-        public LaceTransformResponseFailedMessageEvent(Guid aggregateId, FromSource source, string message)
+        public LaceEventMessage(Guid aggregateId, FromSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;
@@ -31,6 +30,6 @@ namespace Lace.Events.Messages
             {
                 return DateTime.UtcNow;
             }
-        }
+        } 
     }
 }
