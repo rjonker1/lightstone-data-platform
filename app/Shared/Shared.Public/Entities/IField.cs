@@ -1,4 +1,4 @@
-﻿namespace Lace.Request
+﻿namespace DataPlatform.Shared.Public.Entities
 {
     public interface IField
     {

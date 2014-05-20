@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Public.Entities;
 using Lace.Request.Entry;
 using Nancy;
 using Nancy.ModelBinding;
@@ -28,7 +30,49 @@ namespace Api.Modules
     public class Request
     {
         public string LicenseNo { get; set; }
+        public IPackage Package
+        {
+            get
+            {
+                return new Package
+                {
+                    Name = "License plate lookup package",
+                    DataSets =
+                        new[]
+                        {
+                            new DataSet
+                            {
+                                Name = "License plate lookup DataSet",
+                                DataFields = new[]
+                                {
+                                    new DataField{Name = "License plate number"},
+                                }
+                            }
+                        }
+                };
+            }
+        }
     }
 
+    public class Package : IPackage
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<IDataSet> DataSets { get; set; }
+        public IEnumerable<IWorkflow> Workflows { get; set; }
+    }
 
+    public class DataSet : IDataSet
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<IDataField> DataFields { get; set; }
+    }
+
+    public class DataField : IDataField
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IDataSource DataSource { get; set; }
+    }
 }

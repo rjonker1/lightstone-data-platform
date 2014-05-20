@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Public.Entities;
 using EasyNetQ;
 using Lace.Tests.Data;
 using Lace.Tests.Data.Fakes;
