@@ -76,6 +76,8 @@ namespace Lace.Events.Tests
             _laceEvent.PublishTransformationStartMessage(_aggregateId, FromSource.IvidSource);
 
             _laceEvent.PublishTransformationEndMessage(_aggregateId, FromSource.IvidSource);
+
+            _bus.Dispose();
         }
     }
 }
