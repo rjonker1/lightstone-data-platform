@@ -39,17 +39,21 @@
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Enums\Services.cs" />
-    <Compile Include="EventLogging\LogWebServiceSourceEvent.cs" />
+    <Compile Include="Common\CheckThePackageDataSource.cs" />
+    <Compile Include="Common\ICheckThePackageDataSource.cs" />
     <Compile Include="ICallTheExternalWebService.cs" />
     <Compile Include="IConfiguration.cs" />
     <Compile Include="IHandleServiceCall.cs" />
     <Compile Include="ILogEvent.cs" />
     <Compile Include="IRequestDataFromService.cs" />
     <Compile Include="ITransform.cs" />
-    <None Include="ITransformToLaceType.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>

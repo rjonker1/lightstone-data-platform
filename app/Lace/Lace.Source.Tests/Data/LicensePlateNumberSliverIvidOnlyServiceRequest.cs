@@ -1,7 +1,7 @@
 ﻿using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 using System;
-using Lace.Tests.Data;
+using Lace.Tests.Data.PakageData.Ivid;
 
 namespace Lace.Source.Tests.Data
 {
@@ -117,20 +117,12 @@ namespace Lace.Source.Tests.Data
             get { return null; }
         }
 
-        public IField[] Fields
+        public IPackage Package
         {
             get
             {
-                return new IField[]
-                {
-                    new RegistrationField(),
-                    new VinField(),
-                    new EngineField(),
-                    new MakeDescription()
-
-                };
+                return LicensePlateNumberIvidRequestPackage.LicesenNumberPackage();
             }
         }
-
     }
 }

@@ -1,62 +1,43 @@
 ﻿using DataPlatform.Shared.Public.Entities;
-using Lace.Request;
 
 namespace Lace.Tests.Data
 {
-    public class VehicleMakeField : IField
+    public class VehicleMakeFieldSource : IDataSource
     {
-        public int SourceId
+        public VehicleMakeFieldSource()
         {
-            get
-            {
-                return 3;
-            }
+            Id = 3;
+            Name = "Rgt VIN";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "VehicleMake";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class ColourField : IField
+    public class ColourFieldSource : IDataSource
     {
-        public int SourceId
+        public ColourFieldSource()
         {
-            get
-            {
-                return 3;
-            }
+            Id = 3;
+            Name = "Rgt VIN";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "Colour";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class PriceField : IField
+    public class PriceFieldSource : IDataSource
     {
-        public int SourceId
+        public PriceFieldSource()
         {
-            get
-            {
-                return 3;
-            }
+            Id = 3;
+            Name = "Rgt VIN";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "Price";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

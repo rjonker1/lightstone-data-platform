@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using DataPlatform.Shared.Public.Entities;
-using EasyNetQ;
+﻿using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 using System;
 using Lace.Tests.Data;
-using Lace.Tests.Data.Fakes;
+using Lace.Tests.Data.PakageData;
 
 namespace Lace.Source.Tests.Data
 {
@@ -136,33 +134,12 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public IField[] Fields
+
+        public IPackage Package
         {
             get
             {
-                return new IField[]
-                {
-                    //Ivid
-                    new RegistrationField(),
-                    new VinField(),
-                    new EngineField(),
-                    new MakeDescription(),
-
-                    //Ivid title holder
-                    new BankNameField(),
-                    new AccountNumberField(),
-                    new AccountOpenDateField(),
-                    new AccountClosedDateField(),
-
-                    //rgt vin
-                    new VehicleMakeField(),
-                    new ColourField(),
-                    new PriceField(),
-
-                    //audatex
-                    new AccidentClaimField()
-
-                };
+                return LicensePlateNumberAllRequestPackage.LicenseNumberPackage();
             }
         }
     }

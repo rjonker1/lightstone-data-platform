@@ -1,24 +1,20 @@
 ﻿using DataPlatform.Shared.Public.Entities;
-using Lace.Request;
 
 namespace Lace.Tests.Data
 {
-    public class AccidentClaimField : IField
+    public class AccidentClaimSource : IDataSource
     {
-        public int SourceId
+
+        public AccidentClaimSource()
         {
-            get
-            {
-                return 4;
-            }
+            Id = 4;
+            Name = "Audatex";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "AccidentClaims";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+
     }
 }

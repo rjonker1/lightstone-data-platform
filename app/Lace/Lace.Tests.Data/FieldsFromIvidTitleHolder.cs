@@ -1,82 +1,59 @@
 ﻿using DataPlatform.Shared.Public.Entities;
-using Lace.Request;
 
 namespace Lace.Tests.Data
 {
-    public class BankNameField : IField
+    public class BankNameFieldSource : IDataSource
     {
-        public int SourceId
+        public BankNameFieldSource()
         {
-            get
-            {
-                return 2;
-            }
+            Id = 2;
+            Name = "Ivid Title Holder";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "BankName";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+
     }
 
-    public class AccountNumberField : IField
+    public class AccountNumberFieldSource : IDataSource
     {
-        public int SourceId
+        public AccountNumberFieldSource()
         {
-            get
-            {
-                return 2;
-            }
+            Id = 2;
+            Name = "Ivid Title Holder";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "AccountNumber";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
 
-    public class AccountOpenDateField : IField
+    public class AccountOpenDateFieldSource : IDataSource
     {
-        public int SourceId
+        public AccountOpenDateFieldSource()
         {
-            get
-            {
-                return 2;
-            }
+            Id = 2;
+            Name = "Ivid Title Holder";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "AccountOpenDate";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class AccountClosedDateField : IField
+    public class AccountClosedDateFieldSource : IDataSource
     {
-        public int SourceId
+        public AccountClosedDateFieldSource()
         {
-            get
-            {
-                return 2;
-            }
+            Id = 2;
+            Name = "Ivid Title Holder";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "AccountClosedDate";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

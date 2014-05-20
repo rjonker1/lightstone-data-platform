@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Common.Logging;
 using Lace.Events;
-using Lace.Events.Messages;
 using Lace.Events.Messages.Publish;
 using Lace.Functions.Json;
 using Lace.Request.Entry.Checks;

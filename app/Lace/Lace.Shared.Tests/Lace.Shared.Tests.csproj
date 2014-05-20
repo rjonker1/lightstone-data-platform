@@ -59,6 +59,10 @@
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Tests.Data\Lace.Tests.Data.csproj">
+      <Project>{734172ed-e742-4fa0-a5d3-b6bbb581807c}</Project>
+      <Name>Lace.Tests.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

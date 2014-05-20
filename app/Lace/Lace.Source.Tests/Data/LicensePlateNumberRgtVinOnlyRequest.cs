@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using DataPlatform.Shared.Public.Entities;
-using EasyNetQ;
 using Lace.Request;
-using Lace.Tests.Data;
-using Lace.Tests.Data.Fakes;
+using Lace.Tests.Data.PakageData.RgtVin;
 
 namespace Lace.Source.Tests.Data
 {
@@ -27,7 +24,7 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-    
+
         public DateTime RequestDate
         {
             get
@@ -114,7 +111,7 @@ namespace Lace.Source.Tests.Data
 
         public string UserLastName
         {
-            get { return null;}
+            get { return null; }
         }
 
 
@@ -126,20 +123,12 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public IField[] Fields
+        public IPackage Package
         {
             get
             {
-                return new IField[]
-                {
-                    new VehicleMakeField(),
-                    new ColourField(),
-                    new PriceField()
-
-                };
+                return LicensePlateNumberRgtVinRequestPackage.LicesenNumberPackage();
             }
-
         }
-
     }
 }

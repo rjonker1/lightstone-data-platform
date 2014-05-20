@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using DataPlatform.Shared.Public.Entities;
-using EasyNetQ;
 using Lace.Request;
-using Lace.Tests.Data;
-using Lace.Tests.Data.Fakes;
+using Lace.Tests.Data.PakageData.IvidTitleHolder;
 
 namespace Lace.Source.Tests.Data
 {
@@ -123,18 +120,11 @@ namespace Lace.Source.Tests.Data
             get { return null; }
         }
 
-        public IField[] Fields
+        public IPackage Package
         {
             get
             {
-                return new IField[]
-                {
-                    new BankNameField(),
-                    new AccountNumberField(),
-                    new AccountOpenDateField(),
-                    new AccountClosedDateField()
-
-                };
+                return LicensePlateNumberIvidTitleHolderRequestPackage.LicesenNumberPackage();
             }
         }
     }

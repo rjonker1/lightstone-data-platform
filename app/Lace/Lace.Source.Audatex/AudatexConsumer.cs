@@ -1,4 +1,5 @@
-﻿using Lace.Events;
+﻿using DataPlatform.Shared.Public.Entities;
+using Lace.Events;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.ServiceCalls;

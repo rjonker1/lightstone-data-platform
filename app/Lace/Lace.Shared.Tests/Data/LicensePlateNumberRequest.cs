@@ -1,7 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
-
+using Lace.Tests.Data.PakageData;
 namespace Lace.Shared.Tests.Data
 {
     public class LicensePlateNumberIvidOnlyRequest : ILaceRequest
@@ -37,18 +37,7 @@ namespace Lace.Shared.Tests.Data
                 return DateTime.Now;
             }
         }
-
         
-
-        public string[] Sources
-        {
-            get
-            {
-                return new string[] { "Ivid" };
-            }
-        }
-
-
         public string UserName
         {
             get { return null; }
@@ -127,12 +116,18 @@ namespace Lace.Shared.Tests.Data
 
 
 
-        public IField[] Fields
+        //public IField[] Fields
+        //{
+        //    get
+        //    {
+        //        return new IField[0];
+        //    }
+        //}
+
+
+        public IPackage Package
         {
-            get
-            {
-                return new IField[0];
-            }
+            get { return LicensePlateNumberSourcePackage.LicesenNumberPackage(); }
         }
     }
 }

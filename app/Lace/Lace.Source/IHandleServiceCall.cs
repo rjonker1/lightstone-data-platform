@@ -9,6 +9,7 @@ namespace Lace.Source
     {
         Services Service { get; }
         bool CanHandle(ILaceRequest request, ILaceResponse response);
+        //bool CanHandle(IDataSet request, ILaceResponse response);
         void Request(Action<IRequestDataFromService> action);
     }
 }
