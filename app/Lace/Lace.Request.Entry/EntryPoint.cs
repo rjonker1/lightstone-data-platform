@@ -18,7 +18,6 @@ namespace Lace.Request.Entry
         private readonly IGetRequiredRequestedTypes _getRequestedType;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceEvent _laceEvent;
-        //private readonly IPublishMessages _publisher;
 
         public EntryPoint(IPublishMessages publisher)
         {
@@ -26,13 +25,6 @@ namespace Lace.Request.Entry
             _getRequestedType = new GetRequestedTypeToLoad();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
-
-        //public EntryPoint(IBus bus)
-        //{
-        //    _laceEvent = new PublishEvent(bus);
-        //    _getRequestedType = new GetRequestedTypeToLoad();
-        //    _checkForDuplicateRequests = new CheckTheReceivedRequest();
-        //}
 
         public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
         {
