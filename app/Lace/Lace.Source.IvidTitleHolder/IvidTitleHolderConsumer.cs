@@ -10,15 +10,13 @@ namespace Lace.Source.IvidTitleHolder
         private readonly IHandleServiceCall _handleServiceCall;
         private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
-
-
+        
         public IvidTitleHolderConsumer(ILaceRequest request)
         {
             _request = request;
             _handleServiceCall = new HandleIvidTitleHolderServiceCall();
-            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService(request);
+            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService(_request);
         }
-
 
         public void CallIvidTitleHolderService(ILaceResponse response, ILaceEvent laceEvent)
         {

@@ -1,9 +1,9 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Entities;
-using EasyNetQ;
 using Lace.Request;
 using Lace.Tests.Data;
-using Lace.Tests.Data.Fakes;
+using Lace.Tests.Data.PakageData.Audatex;
+
 
 namespace Lace.Source.Tests.Data
 {
@@ -125,11 +125,12 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        public IField[] Fields
+        
+        public IPackage Package
         {
             get
             {
-                return new IField[]{ new AccidentClaimField() };
+                return LicensePlateNumberAudatexRequestPackage.LicesenNumberPackage();
             }
         }
     }

@@ -2,6 +2,7 @@
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 using Lace.Tests.Data;
+using Lace.Tests.Data.PakageData.Ivid;
 
 namespace Lace.Source.Tests.Data
 {
@@ -108,18 +109,27 @@ namespace Lace.Source.Tests.Data
             get { return null; }
         }
 
-        public IField[] Fields
+        //public IField[] Fields
+        //{
+        //    get
+        //    {
+        //        return new IField[]
+        //        {
+        //            new RegistrationField(),
+        //            new VinField(),
+        //            new EngineField(),
+        //            new MakeDescription()
+
+        //        };
+        //    }
+        //}
+
+
+        public IPackage Package
         {
             get
             {
-                return new IField[]
-                {
-                    new RegistrationField(),
-                    new VinField(),
-                    new EngineField(),
-                    new MakeDescription()
-
-                };
+                return LicensePlateNumberIvidRequestPackage.LicesenNumberPackage();
             }
         }
     }

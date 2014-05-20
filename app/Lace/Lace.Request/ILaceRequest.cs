@@ -1,8 +1,9 @@
 ﻿using System;
+using DataPlatform.Shared.Public.Entities;
 
 namespace Lace.Request
 {
-    public interface ILaceRequest : ILaceFields
+    public interface ILaceRequest
     {
         Guid UserId { get; }
         Guid Token { get; }
@@ -26,5 +27,7 @@ namespace Lace.Request
         string Vin { get; }
 
         string SecurityCode { get; }
+
+        IPackage Package { get; }
     }
 }

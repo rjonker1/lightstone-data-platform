@@ -1,6 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
+using Lace.Tests.Data.PakageData;
 
 namespace Lace.Source.Repository.Tests.ProductTests.Data
 {
@@ -133,12 +134,17 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
             }
         }
 
-        public IField[] Fields
+        //public IField[] Fields
+        //{
+        //    get
+        //    {
+        //      return new IField[0];
+        //    }
+        //}
+
+        public IPackage Package
         {
-            get
-            {
-              return new IField[0];
-            }
+            get { return LicensePlateNumberSourcePackage.LicesenNumberPackage(); }
         }
 
     }

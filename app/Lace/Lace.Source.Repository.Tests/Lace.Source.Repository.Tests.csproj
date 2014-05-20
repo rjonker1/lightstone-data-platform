@@ -71,6 +71,10 @@
       <Project>{caa40bd4-dd05-42c9-9e53-84c95268d072}</Project>
       <Name>Lace.Source.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Tests.Data\Lace.Tests.Data.csproj">
+      <Project>{734172ed-e742-4fa0-a5d3-b6bbb581807c}</Project>
+      <Name>Lace.Tests.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

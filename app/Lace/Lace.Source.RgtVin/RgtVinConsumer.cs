@@ -13,7 +13,6 @@ namespace Lace.Source.RgtVin
 
         public RgtVinConsumer(ILaceRequest request)
         {
-
             _request = request;
             _handleServiceCall = new HandleRgtVinServiceCall();
             _externalWebServiceCall = new CallRgtVinExternalWebService(request);

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using Lace.Models.Audatex;
 using Lace.Request;
 using Lace.Response;
+using Lace.Source.Common;
 using Lace.Source.Enums;
 
 namespace Lace.Source.Tests.Data.Audatex
@@ -21,7 +21,10 @@ namespace Lace.Source.Tests.Data.Audatex
 
         public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
-            _canHandle = request.Fields.FirstOrDefault(f => f.SourceId == (int)Service) != null;
+            _canHandle =
+               CheckThePackageDataSource.PackageDataSourceChecks.CheckIfPackageDataSourceRequiresService(
+                   request.Package,
+                   (int)Service);
 
             if (!_canHandle)
             {

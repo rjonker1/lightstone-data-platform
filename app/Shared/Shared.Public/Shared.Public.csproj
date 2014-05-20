@@ -45,7 +45,6 @@
     <Compile Include="Entities\IDataSource.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\IExpire.cs" />
-    <Compile Include="Entities\IField.cs" />
     <Compile Include="Entities\IGroup.cs" />
     <Compile Include="Entities\IGroupPackage.cs" />
     <Compile Include="Entities\IGroupPermission.cs" />
