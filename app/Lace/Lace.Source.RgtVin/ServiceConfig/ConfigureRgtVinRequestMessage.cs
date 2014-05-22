@@ -11,8 +11,8 @@ namespace Lace.Source.RgtVin.ServiceConfig
         {
             RgtVinRequest = new RgtVinRequest()
             {
-                SecurityCode = request.SecurityCode,
-                Vin =  request.Vin
+                SecurityCode = request.Context.SecurityCode,
+                Vin =  request.Vehicle.Vin
             };
         }
     }

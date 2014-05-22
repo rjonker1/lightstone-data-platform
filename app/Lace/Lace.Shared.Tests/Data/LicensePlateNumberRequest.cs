@@ -2,33 +2,41 @@
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 using Lace.Tests.Data.PakageData;
+using Lace.Tests.Data.RequestData;
+
 namespace Lace.Shared.Tests.Data
 {
     public class LicensePlateNumberIvidOnlyRequest : ILaceRequest
     {
 
-        public Guid UserId
+        public IPackage Package
+        {
+            get { return LicensePlateNumberSourcePackage.LicenseNumberPackage(); }
+        }
+
+        public ILaceRequestUserInformation User
         {
             get
             {
-                return Guid.NewGuid();
+                return new RequestUserInformation();
             }
         }
 
-        public Guid Token
+        public ILaceRequestContext Context
         {
             get
             {
-                return Guid.NewGuid();
+                return new ContextInformation();
             }
         }
 
-        public int CompanyId { get; set; }
-
-        public int ContractId { get; set; }
-
-        public string ProductName { get; set; }
-
+        public ILaceRequestVehicleInformation Vehicle
+        {
+            get
+            {
+                return new RequestVehicleInformation();
+            }
+        }
 
         public DateTime RequestDate
         {
@@ -37,97 +45,14 @@ namespace Lace.Shared.Tests.Data
                 return DateTime.Now;
             }
         }
-        
-        public string UserName
-        {
-            get { return null; }
-        }
 
-        public string EngineNo
-        {
-            get { return null; }
-        }
-
-        public string VinOrChassis
-        {
-            get { return null; }
-        }
-
-        public string Make
-        {
-            get { return null; }
-        }
-
-        public string RegisterNo
-        {
-            get { return null; }
-        }
-
-        public string LicenceNo
+        public string SearchTerm
         {
             get
             {
                 return "XMC167GP";
             }
         }
-
-        public string Product
-        {
-            get { return null; }
-        }
-
-        public string ReasonForApplication
-        {
-            get { return null; }
-        }
-
-        public string UserEmail
-        {
-            get { return null; }
-        }
-
-        public string UserPhone
-        {
-            get { return null; }
-        }
-
-        public string Vin
-        {
-            get { return null; }
-        }
-
-
-        public string UserFirstName
-        {
-            get { return null; }
-        }
-
-        public string UserLastName
-        {
-            get { return null; }
-        }
-
-
-        public string SecurityCode
-        {
-            get { return null; }
-        }
-
-
-
-
-        //public IField[] Fields
-        //{
-        //    get
-        //    {
-        //        return new IField[0];
-        //    }
-        //}
-
-
-        public IPackage Package
-        {
-            get { return LicensePlateNumberSourcePackage.LicesenNumberPackage(); }
-        }
+      
     }
 }

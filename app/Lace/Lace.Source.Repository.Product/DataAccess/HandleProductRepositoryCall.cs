@@ -12,7 +12,7 @@ namespace Lace.Source.Repository.Product.DataAccess
         public bool CanHandle(ILaceRequest request, ILaceResponse response)
         {
             Guid check;
-            _canHandle = Guid.TryParse(request.UserId.ToString(), out check);
+            _canHandle = Guid.TryParse(request.User.UserId.ToString(), out check);
 
             if (!_canHandle)
             {

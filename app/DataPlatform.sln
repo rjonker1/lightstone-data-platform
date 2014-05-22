@@ -150,7 +150,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking", "EventTrack
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Consumer", "EventTracking\EventTracking.Consumer\EventTracking.Consumer.csproj", "{34141527-7D87-4857-A472-2CBDC746C98D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Modules.Lace", "EventTracking.Modules.Lace\EventTracking.Modules.Lace.csproj", "{5964734E-7B1D-43D0-84BC-A3A3957C2335}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Modules.Lace", "EventTracking\EventTracking.Modules.Lace\EventTracking.Modules.Lace.csproj", "{5964734E-7B1D-43D0-84BC-A3A3957C2335}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PackageBuilder", "PackageBuilder", "{8871034F-D21D-4CEE-AFE6-9BADA20294F4}"
 EndProject

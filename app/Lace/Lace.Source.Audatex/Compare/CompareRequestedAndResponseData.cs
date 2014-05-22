@@ -36,8 +36,7 @@ namespace Lace.Source.Audatex.Compare
                 StringComparison.InvariantCultureIgnoreCase);
 
 
-            // feeling a bit dirty. OK I lie very dirty. We'll rip this rubbish out soon, soon my darling, soon.
-
+           
             if (licensePlateNoMatches && !vinMatch && !manufacturerMatch)
                 return "!";
 

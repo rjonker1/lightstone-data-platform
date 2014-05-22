@@ -30,7 +30,7 @@ namespace Lace.Source.Ivid.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(_request.Token, Source);
+                laceEvent.PublishStartServiceConfigurationMessage(_request.User.AggregateId, Source);
 
                 var ividWebService = new ConfigureIvidWebService();
 
@@ -46,25 +46,25 @@ namespace Lace.Source.Ivid.ServiceCalls
                     var ividRequest = new ConfigureIvidRequestMessage(_request)
                         .HpiQueryRequest;
 
-                    laceEvent.PublishEndServiceConfigurationMessage(_request.Token, Source);
+                    laceEvent.PublishEndServiceConfigurationMessage(_request.User.AggregateId, Source);
 
-                    laceEvent.PublishServiceRequestMessage(_request.Token, Source,
+                    laceEvent.PublishServiceRequestMessage(_request.User.AggregateId, Source,
                         JsonFunctions.JsonFunction.ObjectToJson(ividRequest));
 
-                    laceEvent.PublishStartServiceCallMessage(_request.Token, Source);
+                    laceEvent.PublishStartServiceCallMessage(_request.User.AggregateId, Source);
 
                     _ividResponse = ividWebService
                         .IvidServiceProxy
                         .HpiStandardQuery(ividRequest);
 
-                    laceEvent.PublishEndServiceCallMessage(_request.Token, Source);
+                    laceEvent.PublishEndServiceCallMessage(_request.User.AggregateId, Source);
 
                     ividWebService.CloseWebService();
 
                     if (_ividResponse == null)
-                        laceEvent.PublishNoResponseFromServiceMessage(_request.Token, Source);
+                        laceEvent.PublishNoResponseFromServiceMessage(_request.User.AggregateId, Source);
 
-                    laceEvent.PublishServiceResponseMessage(_request.Token, Source,
+                    laceEvent.PublishServiceResponseMessage(_request.User.AggregateId, Source,
                         JsonFunctions.JsonFunction.ObjectToJson(_ividResponse ?? new HpiStandardQueryResponse()));
 
                     TransformWebResponse(response);
@@ -73,7 +73,7 @@ namespace Lace.Source.Ivid.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(_request.Token, Source);
+                laceEvent.PublishFailedServiceCallMessaage(_request.User.AggregateId, Source);
                 IvidResponseFailed(response);
             }
         }

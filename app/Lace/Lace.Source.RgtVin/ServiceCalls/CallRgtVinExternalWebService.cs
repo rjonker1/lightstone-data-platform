@@ -27,33 +27,33 @@ namespace Lace.Source.RgtVin.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(_request.Token, Source);
+                laceEvent.PublishStartServiceConfigurationMessage(_request.User.AggregateId, Source);
 
                 var rgtVinWebService = new ConfigureRgtVinWebService();
                 var rgtVinRequest = new ConfigureRgtVinRequestMessage(_request)
                     .RgtVinRequest;
 
-                laceEvent.PublishEndServiceConfigurationMessage(_request.Token, Source);
+                laceEvent.PublishEndServiceConfigurationMessage(_request.User.AggregateId, Source);
 
-                laceEvent.PublishServiceRequestMessage(_request.Token, Source,
+                laceEvent.PublishServiceRequestMessage(_request.User.AggregateId, Source,
                        JsonFunctions.JsonFunction.ObjectToJson(rgtVinRequest));
 
 
-                laceEvent.PublishStartServiceCallMessage(_request.Token, Source);
+                laceEvent.PublishStartServiceCallMessage(_request.User.AggregateId, Source);
 
                 _rgtVinResponse = rgtVinWebService
                     .RgtVinServiceProxy
                     .VinCheckAlt(rgtVinRequest.Vin, rgtVinRequest.SecurityCode);
 
-                laceEvent.PublishEndServiceCallMessage(_request.Token, Source);
+                laceEvent.PublishEndServiceCallMessage(_request.User.AggregateId, Source);
 
 
                 rgtVinWebService.CloseWebService();
 
                 if (string.IsNullOrEmpty(_rgtVinResponse))
-                    laceEvent.PublishNoResponseFromServiceMessage(_request.Token, Source);
+                    laceEvent.PublishNoResponseFromServiceMessage(_request.User.AggregateId, Source);
 
-                laceEvent.PublishServiceResponseMessage(_request.Token, Source,
+                laceEvent.PublishServiceResponseMessage(_request.User.AggregateId, Source,
                         JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse ?? string.Empty));
 
                 TransformWebResponse(response);
@@ -62,7 +62,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Vin Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(_request.Token, Source);
+                laceEvent.PublishFailedServiceCallMessaage(_request.User.AggregateId, Source);
                 RgtVinResponseFailed(response);
             }
         }

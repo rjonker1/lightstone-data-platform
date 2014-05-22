@@ -1,31 +1,46 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
-using Lace.Tests.Data;
 using Lace.Tests.Data.PakageData.Audatex;
+using Lace.Tests.Data.RequestData;
 
 
 namespace Lace.Source.Tests.Data
 {
     public class LicensePlateNumberAudatexOnlyRequest : ILaceRequest
     {
-
-        public Guid UserId
+        public IPackage Package
         {
             get
             {
-                return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
+                return LicensePlateNumberAudatexRequestPackage.LicesenNumberPackage();
             }
         }
 
-        public Guid Token
+        public ILaceRequestUserInformation User
         {
             get
             {
-                return Guid.NewGuid();
+                return new RequestUserInformation();
             }
         }
-        
+
+        public ILaceRequestContext Context
+        {
+            get
+            {
+                return new ContextInformation();
+            }
+        }
+
+        public ILaceRequestVehicleInformation Vehicle
+        {
+            get
+            {
+                return new RequestVehicleInformation();
+            }
+        }
+
         public DateTime RequestDate
         {
             get
@@ -34,103 +49,11 @@ namespace Lace.Source.Tests.Data
             }
         }
 
-        
-        public string UserName
-        {
-            get { return string.Empty; }
-        }
-
-        public string EngineNo
-        {
-            get { return string.Empty; }
-        }
-
-        public string VinOrChassis
-        {
-            get { return string.Empty; }
-        }
-
-        public string Make
-        {
-            get { return string.Empty; }
-        }
-
-        public string RegisterNo
-        {
-            get { return string.Empty; }
-        }
-
-        public string LicenceNo
+        public string SearchTerm
         {
             get
             {
                 return "XMC167GP";
-            }
-        }
-
-        public string Product
-        {
-            get { return string.Empty; }
-        }
-
-        public string ReasonForApplication
-        {
-            get { return string.Empty; }
-        }
-
-        public string UserEmail
-        {
-            get
-            {
-                return "pennyl@lightstone.co.za";
-            }
-        }
-
-        public string UserPhone
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public string Vin
-        {
-            get
-            {
-                return "SB1KV58E40F039277";
-            }
-        }
-
-
-        public string UserFirstName
-        {
-            get
-            {
-                return "Penny";
-            }
-        }
-
-        public string UserLastName
-        {
-            get { return null; }
-        }
-
-
-        public string SecurityCode
-        {
-            get
-            {
-                return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
-            }
-        }
-
-        
-        public IPackage Package
-        {
-            get
-            {
-                return LicensePlateNumberAudatexRequestPackage.LicesenNumberPackage();
             }
         }
     }

@@ -18,7 +18,7 @@ namespace Lace.Source.Repository.Product
             _handleProductRepositoryCall = new HandleProductRepositoryCall();
 
 
-            _productRepository = new GetDataFromRepository(request.UserId, GetProductInformation());
+            _productRepository = new GetDataFromRepository(request.User.UserId, GetProductInformation());
         }
 
         private static IGetProductInformation GetProductInformation()

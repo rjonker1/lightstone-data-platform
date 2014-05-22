@@ -18,7 +18,7 @@ namespace Lace.Source.Repository.Tests.ProductTests
             _response = new LaceResponse();
             _handleProductRepositoryCall = new MockHandleProductRepositoryCall();
             _request = new MockLaceRequest();
-            _productRepository = new MockGetDataFromRepository(_request.UserId, new MockGettingProductInformation());
+            _productRepository = new MockGetDataFromRepository(_request.User.UserId, new MockGettingProductInformation());
         }
         
         public override void Observe()

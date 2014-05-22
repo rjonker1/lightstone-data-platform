@@ -8,46 +8,11 @@ namespace Api
 {
     public class LicensePlateNumberRequest : ILaceRequest
     {
-        //public LicensePlateNumberRequest(string licenceNo, string[] sources)
-        //{
-        //    LicenceNo = licenceNo;
-        //    Sources = sources;
-        //    Vin = "WAUZZZ8K8DA074674";
-        //}
-
         public LicensePlateNumberRequest(string licenceNo)
         {
-            LicenceNo = licenceNo;
-            Vin = "WAUZZZ8K8DA074674";
+            Vehicle = new Vechicle(licenceNo, "WAUZZZ8K8DA074674");
         }
-
-        public Guid UserId { get; private set; }
-        public string UserName { get; private set; }
-        public string UserFirstName { get; private set; }
-        public string UserLastName { get; private set; }
-        public string UserEmail { get; private set; }
-        public string UserPhone { get; private set; }
-        public string CompanyId { get; private set; }
-        public string ContractId { get; private set; }
-        public DateTime RequestDate { get; private set; }
-        public string EngineNo { get; private set; }
-        public string VinOrChassis { get; private set; }
-        public string Make { get; private set; }
-        public string RegisterNo { get; private set; }
-        public string LicenceNo { get; private set; }
-        public string Product { get; private set; }
-        public string ReasonForApplication { get; private set; }
-        public string Vin { get; private set; }
-        public string SecurityCode { get; private set; }
-
-        public Guid Token
-        {
-            get
-            {
-                return Guid.NewGuid();
-            }
-        }
-
+      
         public IPackage Package
         {
             get
@@ -60,5 +25,69 @@ namespace Api
                 };
             }
         }
+
+        public ILaceRequestUserInformation User { get; private set; }
+
+        public ILaceRequestContext Context { get; private set; }
+
+        public ILaceRequestVehicleInformation Vehicle { get; private set; }
+
+        public DateTime RequestDate
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
+    }
+
+    public class User : ILaceRequestUserInformation
+    {
+
+        public Guid UserId { get; private set; }
+
+        public Guid AggregateId { get; private set; }
+
+        public string UserName { get; private set; }
+
+        public string UserFirstName { get; private set; }
+
+        public string UserLastName { get; private set; }
+
+        public string UserEmail { get; private set; }
+
+        public string UserPhone { get; private set; }
+    }
+
+    public class Context : ILaceRequestContext
+    {
+
+        public string Product { get; private set; }
+
+        public string ReasonForApplication { get; private set; }
+
+        public string SecurityCode { get; private set; }
+    }
+
+    public class Vechicle : ILaceRequestVehicleInformation
+    {
+
+        public Vechicle(string licenseNo, string vinNo)
+        {
+            LicenceNo = licenseNo;
+            Vin = vinNo;
+        }
+
+        public string EngineNo { get; private set; }
+
+        public string VinOrChassis { get; private set; }
+
+        public string Make { get; private set; }
+
+        public string RegisterNo { get; private set; }
+
+        public string LicenceNo { get; private set; }
+
+        public string Vin { get; private set; }
     }
 }

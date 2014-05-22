@@ -4,7 +4,7 @@ namespace Lace.Tests.Data.PakageData
 {
     public class LicensePlateNumberSourcePackage
     {
-        public static IPackage LicesenNumberPackage()
+        public static IPackage LicenseNumberPackage()
         {
             return new Package
             {

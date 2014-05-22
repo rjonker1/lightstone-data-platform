@@ -38,6 +38,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RequestData\ContextInformation.cs" />
+    <Compile Include="RequestData\IvidTitleHolderRequestVehicleInformation.cs" />
+    <Compile Include="RequestData\RequestUserInformation.cs" />
+    <Compile Include="RequestData\RequestVehicleInformation.cs" />
     <None Include="Consumers\LaceEventMessageConsumer.cs.old" />
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="FieldsFromAudatex.cs" />

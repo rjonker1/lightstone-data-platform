@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EventTracking.Modules.Lace\EventTracking.Modules.Lace.csproj">
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Modules.Lace\EventTracking.Modules.Lace.csproj">
       <Project>{5964734e-7b1d-43d0-84bc-a3a3957c2335}</Project>
       <Name>EventTracking.Modules.Lace</Name>
     </ProjectReference>

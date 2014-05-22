@@ -55,8 +55,8 @@ namespace Lace.Source.Audatex.Transform
             HistoryCheckResponses
                 .ForEach(f =>
                 {
-                    if (CompareRequestedAndResponseData.ShowClaim(_request.Vin, _manufacturer, f.VIN, f.Manufacturer,
-                        _warrantyYear, f.CreationDate, _request.LicenceNo, f.Registration))
+                    if (CompareRequestedAndResponseData.ShowClaim(_request.Vehicle.Vin, _manufacturer, f.VIN, f.Manufacturer,
+                        _warrantyYear, f.CreationDate, _request.Vehicle.LicenceNo, f.Registration))
                     {
                         var claim = new AccidentClaim()
                         {
@@ -76,8 +76,8 @@ namespace Lace.Source.Audatex.Transform
                             Vin = f.VIN,
                             QuoteValueIndicator =
                                 string.Format("{0} {1}", TransformRepairCosts.Transform(f.RepairCostExVAT),
-                                    CompareRequestedAndResponseData.MatchInformation(_request.Vin, _manufacturer, f.VIN,
-                                        f.Manufacturer, _request.LicenceNo, f.Registration, _canApplyRepairInfo)),
+                                    CompareRequestedAndResponseData.MatchInformation(_request.Vehicle.Vin, _manufacturer, f.VIN,
+                                        f.Manufacturer, _request.Vehicle.LicenceNo, f.Registration, _canApplyRepairInfo)),
                             CreationDateString = GetCreationDateString(f.CreationDate)
 
                         };

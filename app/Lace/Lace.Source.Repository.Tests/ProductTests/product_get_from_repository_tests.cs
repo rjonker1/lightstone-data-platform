@@ -17,7 +17,7 @@ namespace Lace.Source.Repository.Tests.ProductTests
         {
             _response = new LaceResponse();
             _request = new MockLaceRequest();
-            _productRepository = new MockGetDataFromRepository(_request.UserId, new MockGettingProductInformation());
+            _productRepository = new MockGetDataFromRepository(_request.User.UserId, new MockGettingProductInformation());
             _requestDataFromRepository = new MockRequestProductDataFromRepository();
         }
 
