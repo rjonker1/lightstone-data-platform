@@ -1,4 +1,5 @@
-﻿using Lace.Events;
+﻿using System;
+using Lace.Events;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Repository.Product.DataAccess;
@@ -16,8 +17,6 @@ namespace Lace.Source.Repository.Product
         {
             _request = request;
             _handleProductRepositoryCall = new HandleProductRepositoryCall();
-
-
             _productRepository = new GetDataFromRepository(request.User.UserId, GetProductInformation());
         }
 
@@ -28,7 +27,14 @@ namespace Lace.Source.Repository.Product
 
         public void GetProduct(ILaceResponse response, ILaceEvent laceEvent)
         {
-            if (!_handleProductRepositoryCall.CanHandle(_request, response)) return;
+            Guid check;
+            var validId = Guid.TryParse(_request.User.UserId.ToString(), out check);
+
+            if (!validId)
+            {
+                response.Product = null;
+                return;
+            }
 
             _handleProductRepositoryCall
                 .Get(g => g.FetchDataFromRepository(response, _productRepository));

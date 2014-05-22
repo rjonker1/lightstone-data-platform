@@ -1,30 +1,44 @@
-﻿using Lace.Events;
+﻿using Lace.Consumer;
+using Lace.Events;
+using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
+using Lace.Source.Enums;
 
 namespace Lace.Source.Tests.Data.RgtVin
 {
     public class MockRgtVinConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
-        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public MockRgtVinConsumer(ILaceRequest request)
         {
-            _request = request;
             _handleServiceCall = new MockHandleRgtVinServiceCall();
             _externalWebServiceCall = new MockCallingRgtVinExternalWebService();
         }
 
-        public void CallRgtVinService(ILaceResponse response,ILaceEvent laceEvent)
+        public void CallRgtVinService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            if (!_handleServiceCall.CanHandle(_request, response)) return;
+            var spec = new CanHandlePackageSpecification(Services.RgtVin);
+
+            if (!spec.IsSatisfied)
+            {
+                NotHandledResponse(response);
+                return;
+            }
 
             _handleServiceCall
                 .Request(c =>
                     c.FetchDataFromService(response, _externalWebServiceCall, laceEvent)
                 );
+        }
+
+        private static void NotHandledResponse(ILaceResponse response)
+        {
+            response.RgtVinResponse = null;
+            response.RgtVinResponseHandled = new IvidTitleHolderResponseHandled();
+            response.RgtVinResponseHandled.HasNotBeenHandled();
         }
     }
 }

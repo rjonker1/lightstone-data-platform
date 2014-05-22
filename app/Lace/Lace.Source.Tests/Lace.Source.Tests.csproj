@@ -111,6 +111,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lace.Consumer\Lace.Consumer.csproj">
+      <Project>{6f44066d-c6a2-41e2-847a-0561c9ee2cdb}</Project>
+      <Name>Lace.Consumer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
       <Name>Lace.Events.Messages.Publish</Name>

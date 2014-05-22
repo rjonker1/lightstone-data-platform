@@ -16,7 +16,7 @@ namespace Lace.Request.Types.LicensePlateNumber.Chain
 
         public LicensePlateNumberResponse Build(ILaceRequest request, ILaceEvent laceEvent)
         {
-            var handlers = new Handlers.LicensePlateNumberHandlers().HandlersDictionary;
+            var handlers = new Handlers.LicensePlateNumberHandlers().Handlers;
 
             foreach (var handler in handlers)
             {

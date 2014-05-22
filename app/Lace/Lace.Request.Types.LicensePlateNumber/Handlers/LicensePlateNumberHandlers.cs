@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Public.Entities;
 using Lace.Events;
 using Lace.Response;
 using Lace.Source.Audatex;
@@ -13,7 +12,7 @@ namespace Lace.Request.Types.LicensePlateNumber.Handlers
 {
     public struct LicensePlateNumberHandlers
     {
-        public IDictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>> HandlersDictionary
+        public IDictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>> Handlers
         {
             get
             {

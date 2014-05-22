@@ -26,11 +26,11 @@ namespace Lace.Source.Repository.Tests.ProductTests
             _handleProductRepositoryCall.Get(g => g.FetchDataFromRepository(_response, _productRepository));
         }
 
-        [Observation]
-        public void product_consumer_get_from_repository_must_be_able_to_handle_test()
-        {
-            _handleProductRepositoryCall.CanHandle(_request, _response).ShouldBeTrue();
-        }
+        //[Observation]
+        //public void product_consumer_get_from_repository_must_be_able_to_handle_test()
+        //{
+        //    _handleProductRepositoryCall.CanHandle(_request, _response).ShouldBeTrue();
+        //}
 
         [Observation]
         public void product_consumer_get_from_repository_product_must_not_be_null_test()
