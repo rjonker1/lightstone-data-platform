@@ -10,15 +10,11 @@ namespace Lace.Source.Audatex
 {
     public class AudatexConsumer
     {
-        private readonly IHandleServiceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public AudatexConsumer(ILaceRequest request)
         {
             _request = request;
-            _handleServiceCall = new HandleAudatexServiceCall();
-            _externalWebServiceCall = new CallAudatexExternalWebService(_request);
         }
 
         public void CallAudatexService(ILaceResponse response, ILaceEvent laceEvent)
@@ -31,9 +27,8 @@ namespace Lace.Source.Audatex
                 return;
             }
 
-            _handleServiceCall
-                .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent));
+            var consumer = new ConsumeService(new HandleAudatexServiceCall(), new CallAudatexExternalWebService(_request));
+            consumer.CallService(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

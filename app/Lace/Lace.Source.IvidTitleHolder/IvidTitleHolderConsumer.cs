@@ -10,15 +10,11 @@ namespace Lace.Source.IvidTitleHolder
 {
     public class IvidTitleHolderConsumer
     {
-        private readonly IHandleServiceCall _handleServiceCall;
-        private readonly ILaceRequest _request;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+     private readonly ILaceRequest _request;
 
         public IvidTitleHolderConsumer(ILaceRequest request)
         {
             _request = request;
-            _handleServiceCall = new HandleIvidTitleHolderServiceCall();
-            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService(_request);
         }
 
         public void CallIvidTitleHolderService(ILaceResponse response, ILaceEvent laceEvent)
@@ -31,9 +27,8 @@ namespace Lace.Source.IvidTitleHolder
                 return;
             }
 
-            _handleServiceCall
-                .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent));
+            var consumer = new ConsumeService(new HandleIvidTitleHolderServiceCall(), new CallIvidTitleHolderExternalWebService(_request));
+            consumer.CallService(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)
