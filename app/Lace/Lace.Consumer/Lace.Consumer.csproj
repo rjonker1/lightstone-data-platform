@@ -40,23 +40,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace\Lace.Events\Lace.Events.csproj">
+    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace\Lace.Request\Lace.Request.csproj">
+    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace\Lace.Response\Lace.Response.csproj">
+    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace\Lace.Source\Lace.Source.csproj">
+    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
       <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
       <Name>Lace.Source</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared.Public\Shared.Public.csproj">
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
     </ProjectReference>
