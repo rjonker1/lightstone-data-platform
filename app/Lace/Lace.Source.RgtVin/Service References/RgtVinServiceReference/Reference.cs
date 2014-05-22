@@ -23,19 +23,19 @@ namespace Lace.Source.RgtVin.RgtVinServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheck", ReplyAction="*")]
         System.Threading.Tasks.Task<string> VinCheckAsync(string sVIN, string sCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheckAlt", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheckSpecs", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string VinCheckAlt(string sVIN, string sCode);
+        System.Data.DataSet VinCheckSpecs(string sVIN, string sCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheckAlt", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> VinCheckAltAsync(string sVIN, string sCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheckSpecs", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> VinCheckSpecsAsync(string sVIN, string sCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheck_List", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheckSpecsFiltered", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet VinCheck_List(string sVIN, string sCode);
+        System.Data.DataSet VinCheckSpecsFiltered(string sVIN, string sSpecIds, string sCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheck_List", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> VinCheck_ListAsync(string sVIN, string sCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.rgt.co.za/systems/VinCheckSpecsFiltered", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> VinCheckSpecsFilteredAsync(string sVIN, string sSpecIds, string sCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -73,20 +73,20 @@ namespace Lace.Source.RgtVin.RgtVinServiceReference {
             return base.Channel.VinCheckAsync(sVIN, sCode);
         }
         
-        public string VinCheckAlt(string sVIN, string sCode) {
-            return base.Channel.VinCheckAlt(sVIN, sCode);
+        public System.Data.DataSet VinCheckSpecs(string sVIN, string sCode) {
+            return base.Channel.VinCheckSpecs(sVIN, sCode);
         }
         
-        public System.Threading.Tasks.Task<string> VinCheckAltAsync(string sVIN, string sCode) {
-            return base.Channel.VinCheckAltAsync(sVIN, sCode);
+        public System.Threading.Tasks.Task<System.Data.DataSet> VinCheckSpecsAsync(string sVIN, string sCode) {
+            return base.Channel.VinCheckSpecsAsync(sVIN, sCode);
         }
         
-        public System.Data.DataSet VinCheck_List(string sVIN, string sCode) {
-            return base.Channel.VinCheck_List(sVIN, sCode);
+        public System.Data.DataSet VinCheckSpecsFiltered(string sVIN, string sSpecIds, string sCode) {
+            return base.Channel.VinCheckSpecsFiltered(sVIN, sSpecIds, sCode);
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataSet> VinCheck_ListAsync(string sVIN, string sCode) {
-            return base.Channel.VinCheck_ListAsync(sVIN, sCode);
+        public System.Threading.Tasks.Task<System.Data.DataSet> VinCheckSpecsFilteredAsync(string sVIN, string sSpecIds, string sCode) {
+            return base.Channel.VinCheckSpecsFilteredAsync(sVIN, sSpecIds, sCode);
         }
     }
 }

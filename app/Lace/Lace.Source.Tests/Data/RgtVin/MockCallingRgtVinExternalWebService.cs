@@ -1,4 +1,5 @@
-﻿using Lace.Events;
+﻿using System.Data;
+using Lace.Events;
 using Lace.Models.RgtVin;
 using Lace.Response;
 using Lace.Source.RgtVin.Transform;
@@ -8,7 +9,7 @@ namespace Lace.Source.Tests.Data.RgtVin
     public class MockCallingRgtVinExternalWebService : ICallTheExternalWebService
     {
 
-        private string _rgtVinResponse;
+        private DataSet _rgtVinResponse;
 
         public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
         {

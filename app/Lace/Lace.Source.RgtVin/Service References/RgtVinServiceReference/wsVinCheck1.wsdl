@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.rgt.co.za/systems/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.rgt.co.za/systems/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.rgt.co.za/systems/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.rgt.co.za/systems/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.rgt.co.za/systems/">
       <s:element name="VinCheck">
@@ -17,7 +17,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="VinCheckAlt">
+      <s:element name="VinCheckSpecs">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="sVIN" type="s:string" />
@@ -25,25 +25,33 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="VinCheckAltResponse">
+      <s:element name="VinCheckSpecsResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="VinCheckAltResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VinCheckSpecsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="VinCheck_List">
+      <s:element name="VinCheckSpecsFiltered">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="sVIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sSpecIds" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="sCode" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="VinCheck_ListResponse">
+      <s:element name="VinCheckSpecsFilteredResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="VinCheck_ListResult">
+            <s:element minOccurs="0" maxOccurs="1" name="VinCheckSpecsFilteredResult">
               <s:complexType>
                 <s:sequence>
                   <s:element ref="s:schema" />
@@ -62,30 +70,30 @@
   <wsdl:message name="VinCheckSoapOut">
     <wsdl:part name="parameters" element="tns:VinCheckResponse" />
   </wsdl:message>
-  <wsdl:message name="VinCheckAltSoapIn">
-    <wsdl:part name="parameters" element="tns:VinCheckAlt" />
+  <wsdl:message name="VinCheckSpecsSoapIn">
+    <wsdl:part name="parameters" element="tns:VinCheckSpecs" />
   </wsdl:message>
-  <wsdl:message name="VinCheckAltSoapOut">
-    <wsdl:part name="parameters" element="tns:VinCheckAltResponse" />
+  <wsdl:message name="VinCheckSpecsSoapOut">
+    <wsdl:part name="parameters" element="tns:VinCheckSpecsResponse" />
   </wsdl:message>
-  <wsdl:message name="VinCheck_ListSoapIn">
-    <wsdl:part name="parameters" element="tns:VinCheck_List" />
+  <wsdl:message name="VinCheckSpecsFilteredSoapIn">
+    <wsdl:part name="parameters" element="tns:VinCheckSpecsFiltered" />
   </wsdl:message>
-  <wsdl:message name="VinCheck_ListSoapOut">
-    <wsdl:part name="parameters" element="tns:VinCheck_ListResponse" />
+  <wsdl:message name="VinCheckSpecsFilteredSoapOut">
+    <wsdl:part name="parameters" element="tns:VinCheckSpecsFilteredResponse" />
   </wsdl:message>
   <wsdl:portType name="wsVinCheckSoap">
     <wsdl:operation name="VinCheck">
       <wsdl:input message="tns:VinCheckSoapIn" />
       <wsdl:output message="tns:VinCheckSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="VinCheckAlt">
-      <wsdl:input message="tns:VinCheckAltSoapIn" />
-      <wsdl:output message="tns:VinCheckAltSoapOut" />
+    <wsdl:operation name="VinCheckSpecs">
+      <wsdl:input message="tns:VinCheckSpecsSoapIn" />
+      <wsdl:output message="tns:VinCheckSpecsSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="VinCheck_List">
-      <wsdl:input message="tns:VinCheck_ListSoapIn" />
-      <wsdl:output message="tns:VinCheck_ListSoapOut" />
+    <wsdl:operation name="VinCheckSpecsFiltered">
+      <wsdl:input message="tns:VinCheckSpecsFilteredSoapIn" />
+      <wsdl:output message="tns:VinCheckSpecsFilteredSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="wsVinCheckSoap" type="tns:wsVinCheckSoap">
@@ -99,8 +107,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VinCheckAlt">
-      <soap:operation soapAction="http://www.rgt.co.za/systems/VinCheckAlt" style="document" />
+    <wsdl:operation name="VinCheckSpecs">
+      <soap:operation soapAction="http://www.rgt.co.za/systems/VinCheckSpecs" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -108,8 +116,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VinCheck_List">
-      <soap:operation soapAction="http://www.rgt.co.za/systems/VinCheck_List" style="document" />
+    <wsdl:operation name="VinCheckSpecsFiltered">
+      <soap:operation soapAction="http://www.rgt.co.za/systems/VinCheckSpecsFiltered" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -129,8 +137,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VinCheckAlt">
-      <soap12:operation soapAction="http://www.rgt.co.za/systems/VinCheckAlt" style="document" />
+    <wsdl:operation name="VinCheckSpecs">
+      <soap12:operation soapAction="http://www.rgt.co.za/systems/VinCheckSpecs" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -138,8 +146,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="VinCheck_List">
-      <soap12:operation soapAction="http://www.rgt.co.za/systems/VinCheck_List" style="document" />
+    <wsdl:operation name="VinCheckSpecsFiltered">
+      <soap12:operation soapAction="http://www.rgt.co.za/systems/VinCheckSpecsFiltered" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -150,10 +158,10 @@
   </wsdl:binding>
   <wsdl:service name="wsVinCheck">
     <wsdl:port name="wsVinCheckSoap" binding="tns:wsVinCheckSoap">
-      <soap:address location="http://www.autostats.co.za/Service/wsVinCheck.asmx" />
+      <soap:address location="http://ws.test.lightstoneauto.co.za/LIVE/wsVinCheck.asmx" />
     </wsdl:port>
     <wsdl:port name="wsVinCheckSoap12" binding="tns:wsVinCheckSoap12">
-      <soap12:address location="http://www.autostats.co.za/Service/wsVinCheck.asmx" />
+      <soap12:address location="http://ws.test.lightstoneauto.co.za/LIVE/wsVinCheck.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

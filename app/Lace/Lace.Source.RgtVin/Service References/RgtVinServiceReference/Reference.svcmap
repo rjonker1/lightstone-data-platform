@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://www.autostats.co.za/Service/wsVinCheck.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://ws.test.lightstoneauto.co.za/LIVE/wsVinCheck.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="wsVinCheck.disco" MetadataType="Disco" ID="7bd657c6-8b43-49c2-b765-acfedb75eeef" SourceId="1" SourceUrl="http://www.autostats.co.za/Service/wsVinCheck.asmx?disco" />
-    <MetadataFile FileName="wsVinCheck.wsdl" MetadataType="Wsdl" ID="1e5bf611-fe7b-489a-97da-5ba1da59fdd2" SourceId="1" SourceUrl="http://www.autostats.co.za/Service/wsVinCheck.asmx?wsdl" />
+    <MetadataFile FileName="wsVinCheck1.disco" MetadataType="Disco" ID="b13f9b4a-6730-48a6-a787-260c67f450e5" SourceId="1" SourceUrl="http://ws.test.lightstoneauto.co.za/LIVE/wsVinCheck.asmx?disco" />
+    <MetadataFile FileName="wsVinCheck1.wsdl" MetadataType="Wsdl" ID="4b0e8f13-f396-4cd3-b663-e538b0e262d1" SourceId="1" SourceUrl="http://ws.test.lightstoneauto.co.za/LIVE/wsVinCheck.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

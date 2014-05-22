@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Common.Logging;
 using EventTracking.Sources;
 using Lace.Events;
@@ -14,7 +15,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
     public class CallRgtVinExternalWebService : ICallTheExternalWebService
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private string _rgtVinResponse;
+        private DataSet _rgtVinResponse;
         private readonly ILaceRequest _request;
         private const FromSource Source = FromSource.RgtVinSource;
 
@@ -43,18 +44,18 @@ namespace Lace.Source.RgtVin.ServiceCalls
 
                 _rgtVinResponse = rgtVinWebService
                     .RgtVinServiceProxy
-                    .VinCheckAlt(rgtVinRequest.Vin, rgtVinRequest.SecurityCode);
+                    .VinCheckSpecsFiltered(rgtVinRequest.Vin, string.Empty, rgtVinRequest.SecurityCode);
 
                 laceEvent.PublishEndServiceCallMessage(_request.User.AggregateId, Source);
 
 
                 rgtVinWebService.CloseWebService();
 
-                if (string.IsNullOrEmpty(_rgtVinResponse))
+                if (_rgtVinResponse == null)
                     laceEvent.PublishNoResponseFromServiceMessage(_request.User.AggregateId, Source);
 
                 laceEvent.PublishServiceResponseMessage(_request.User.AggregateId, Source,
-                        JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse ?? string.Empty));
+                        JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse ?? new DataSet()));
 
                 TransformWebResponse(response);
 

@@ -35,6 +35,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -96,20 +97,21 @@
       <Name>Lace.Source</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\RgtVinServiceReference\wsVinCheck1.disco" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Service References\RgtVinServiceReference\wsVinCheck.wsdl" />
+    <None Include="Service References\RgtVinServiceReference\wsVinCheck1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\RgtVinServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RgtVinServiceReference\wsVinCheck.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\RgtVinServiceReference\configuration91.svcinfo" />
