@@ -1,5 +1,4 @@
 ﻿using Lace.Events;
-using Lace.Request;
 using Lace.Response;
 using Lace.Source;
 
@@ -9,10 +8,8 @@ namespace Lace.Consumer
     {
         private readonly ICallTheExternalWebService _externalWebServiceCall;
         private readonly IHandleServiceCall _handleServiceCall;
-        //private readonly ILaceRequest _request;
 
-        public ConsumeService(ILaceRequest request,
-            IHandleServiceCall handleServiceCall,
+        public ConsumeService(IHandleServiceCall handleServiceCall,
             ICallTheExternalWebService externalWebServiceCall)
         {
             _handleServiceCall = handleServiceCall;
