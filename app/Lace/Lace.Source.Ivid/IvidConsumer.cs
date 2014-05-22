@@ -11,18 +11,19 @@ namespace Lace.Source.Ivid
     public class IvidConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
-       // private readonly ILaceRequest _request;
+        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public IvidConsumer(ILaceRequest request)
         {
+            _request = request;
             _handleServiceCall = new HandleIvidServiceCall();
-            _externalWebServiceCall = new CallIvidExternalWebService(request);
+            _externalWebServiceCall = new CallIvidExternalWebService(_request);
         }
 
         public void CallIvidService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.Ivid);
+            var spec = new CanHandlePackageSpecification(Services.Ivid,_request);
 
             if (!spec.IsSatisfied)
             {

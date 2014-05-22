@@ -10,17 +10,19 @@ namespace Lace.Source.Tests.Data.Audatex
     public class MockAudatexConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
+        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public MockAudatexConsumer(ILaceRequest request)
         {
+            _request = request;
             _handleServiceCall = new MockHandleAudatexServiceCall();
             _externalWebServiceCall = new MockCallingAudatexExternalWebService(request);
         }
 
         public void CallAudatexService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.Audatex);
+            var spec = new CanHandlePackageSpecification(Services.Audatex,_request);
 
             if (!spec.IsSatisfied)
             {

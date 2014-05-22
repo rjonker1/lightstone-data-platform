@@ -11,17 +11,19 @@ namespace Lace.Source.IvidTitleHolder
     public class IvidTitleHolderConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
+        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public IvidTitleHolderConsumer(ILaceRequest request)
         {
+            _request = request;
             _handleServiceCall = new HandleIvidTitleHolderServiceCall();
-            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService(request);
+            _externalWebServiceCall = new CallIvidTitleHolderExternalWebService(_request);
         }
 
         public void CallIvidTitleHolderService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder);
+            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder,_request);
 
             if (!spec.IsSatisfied)
             {

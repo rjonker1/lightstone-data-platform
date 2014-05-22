@@ -11,17 +11,19 @@ namespace Lace.Source.Audatex
     public class AudatexConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
+        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public AudatexConsumer(ILaceRequest request)
         {
-        _handleServiceCall = new HandleAudatexServiceCall();
-            _externalWebServiceCall = new CallAudatexExternalWebService(request);
+            _request = request;
+            _handleServiceCall = new HandleAudatexServiceCall();
+            _externalWebServiceCall = new CallAudatexExternalWebService(_request);
         }
 
         public void CallAudatexService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.Audatex);
+            var spec = new CanHandlePackageSpecification(Services.Audatex, _request);
 
             if (!spec.IsSatisfied)
             {

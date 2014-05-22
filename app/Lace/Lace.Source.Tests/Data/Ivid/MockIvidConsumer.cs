@@ -10,17 +10,19 @@ namespace Lace.Source.Tests.Data.Ivid
     public class MockIvidConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
+        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public MockIvidConsumer(ILaceRequest request)
         {
+            _request = request;
             _handleServiceCall = new MockHandleIvidServiceCall();
             _externalWebServiceCall = new MockCallingIvidExternalWebService();
         }
 
         public void CallIvidService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.Ivid);
+            var spec = new CanHandlePackageSpecification(Services.Ivid,_request);
 
             if (!spec.IsSatisfied)
             {

@@ -10,17 +10,19 @@ namespace Lace.Source.Tests.Data.RgtVin
     public class MockRgtVinConsumer
     {
         private readonly IHandleServiceCall _handleServiceCall;
+        private readonly ILaceRequest _request;
         private readonly ICallTheExternalWebService _externalWebServiceCall;
 
         public MockRgtVinConsumer(ILaceRequest request)
         {
+            _request = request;
             _handleServiceCall = new MockHandleRgtVinServiceCall();
             _externalWebServiceCall = new MockCallingRgtVinExternalWebService();
         }
 
         public void CallRgtVinService(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.RgtVin);
+            var spec = new CanHandlePackageSpecification(Services.RgtVin,_request);
 
             if (!spec.IsSatisfied)
             {
