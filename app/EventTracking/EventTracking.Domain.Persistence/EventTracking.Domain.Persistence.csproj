@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F44066D-C6A2-41E2-847A-0561C9EE2CDB}</ProjectGuid>
+    <ProjectGuid>{017EF56D-921C-4156-9807-B7AD72A7BEF9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Consumer</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Consumer</AssemblyName>
+    <RootNamespace>EventTracking.Domain.Persistence</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.EventTracking.Domain.Persistence</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,31 +33,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanHandlePackageSpecification.cs" />
-    <Compile Include="ConsumeService.cs" />
-    <Compile Include="IConsumeSource.cs" />
+    <Compile Include="IConstructAggregates.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
-      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
-      <Name>Lace.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
-      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
-      <Name>Lace.Request</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
-      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
-      <Name>Lace.Response</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
-      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
-      <Name>Lace.Source</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>Shared.Public</Name>
+    <ProjectReference Include="..\EventTracking.Domain\EventTracking.Domain.csproj">
+      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
+      <Name>EventTracking.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

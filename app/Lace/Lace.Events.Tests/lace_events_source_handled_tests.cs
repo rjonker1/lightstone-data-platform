@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable 169
+
+using System;
 using EasyNetQ;
 using EventTracking.Sources;
 using Lace.Events.Messages.Publish;
@@ -81,3 +83,5 @@ namespace Lace.Events.Tests
         }
     }
 }
+
+#pragma warning restore 169
