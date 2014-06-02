@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventStoreEndpointManager.cs" />
     <Compile Include="EventStoreRepository.cs" />
     <Compile Include="Exceptions\AggregateDeletedException.cs" />
     <Compile Include="Exceptions\AggregateNotFoundException.cs" />

@@ -33,9 +33,13 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregateEvents\ExternalSourceAggregateCreated.cs" />
+    <Compile Include="AggregateEvents\ExternalSourceFailedEvent.cs" />
+    <Compile Include="Aggregates\ExternalServiceFailedAggregate.cs" />
     <Compile Include="Consumers\ExternalSourceConfigurationConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceFailedConsumer.cs" />
@@ -54,9 +58,26 @@
     <Compile Include="Messages\LaceSourceHandledEventMessage.cs" />
     <Compile Include="Messages\LaceTransformResponseFailedMessageEvent.cs" />
     <Compile Include="Messages\LaceTransformResponseMessageEvent.cs" />
+    <Compile Include="Persistence\IPersistLaceAggregate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
+      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
+      <Name>EventTracking.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence.Storage\EventTracking.Domain.Persistence.Storage.csproj">
+      <Project>{c3d27d4c-607d-4e47-bbe4-55682f873323}</Project>
+      <Name>EventTracking.Domain.Persistence.Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
+      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
+      <Name>EventTracking.Domain.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain\EventTracking.Domain.csproj">
+      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
+      <Name>EventTracking.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
@@ -66,6 +87,7 @@
       <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
