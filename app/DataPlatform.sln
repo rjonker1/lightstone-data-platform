@@ -166,11 +166,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Domain.Core",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Domain.Persistence", "EventTracking\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj", "{017EF56D-921C-4156-9807-B7AD72A7BEF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Domain.Persistence.EventStore", "EventTracking\EventTracking.Domain.Persistence.EventStore\EventTracking.Domain.Persistence.EventStore.csproj", "{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{E469EBB7-109D-48A9-B579-B0E5047C8D69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Repository.Tests", "EventTracking.Repository.Tests\EventTracking.Repository.Tests.csproj", "{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Repository.Tests", "EventTracking\EventTracking.Repository.Tests\EventTracking.Repository.Tests.csproj", "{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Domain.Persistence.Storage", "EventTracking\EventTracking.Domain.Persistence.Storage\EventTracking.Domain.Persistence.Storage.csproj", "{C3D27D4C-607D-4E47-BBE4-55682F873323}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -606,14 +606,6 @@ Global
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.MonoDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.MonoDebug|Any CPU.Build.0 = Debug|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.MonoRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}.MonoDebug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -622,6 +614,14 @@ Global
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.MonoDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.MonoDebug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.MonoRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D27D4C-607D-4E47-BBE4-55682F873323}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -693,8 +693,8 @@ Global
 		{54923329-C66C-4A97-824C-5518B101A162} = {F2FAB3F2-5E11-40BF-A06B-B87AFB216F24}
 		{25F7327F-231A-4345-87A4-51E1BDF36C3E} = {F2FAB3F2-5E11-40BF-A06B-B87AFB216F24}
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9} = {F2FAB3F2-5E11-40BF-A06B-B87AFB216F24}
-		{E4DF8FD3-729F-4B5D-9A77-956A02AC09EB} = {F2FAB3F2-5E11-40BF-A06B-B87AFB216F24}
 		{E469EBB7-109D-48A9-B579-B0E5047C8D69} = {F2FAB3F2-5E11-40BF-A06B-B87AFB216F24}
+		{C3D27D4C-607D-4E47-BBE4-55682F873323} = {F2FAB3F2-5E11-40BF-A06B-B87AFB216F24}
 		{F82044A3-E321-49F4-91BD-878561FE54B7} = {8871034F-D21D-4CEE-AFE6-9BADA20294F4}
 		{6F44066D-C6A2-41E2-847A-0561C9EE2CDB} = {8013EEF1-01F6-454C-8968-C9FA0F706390}
 		{0889BE9A-9C5F-4B94-95BB-F3EBBA977021} = {E469EBB7-109D-48A9-B579-B0E5047C8D69}

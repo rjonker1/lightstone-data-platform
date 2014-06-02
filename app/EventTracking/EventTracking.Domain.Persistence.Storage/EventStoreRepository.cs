@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EventStore.ClientAPI;
-using EventTracking.Domain.Persistence.EventStore.Exceptions;
+using EventTracking.Domain.Persistence.Storage.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace EventTracking.Domain.Persistence.EventStore
+namespace EventTracking.Domain.Persistence.Storage
 {
     public class EventStoreRepository : IRepository, IDisposable
     {
@@ -80,6 +80,9 @@ namespace EventTracking.Domain.Persistence.EventStore
                 foreach (var evnt in currentSlice.Events)
                     aggregate.ApplyEvent(DeserializeEvent(evnt.OriginalEvent.Metadata, evnt.OriginalEvent.Data));
             } while (version >= currentSlice.NextEventNumber && !currentSlice.IsEndOfStream);
+
+            if(version < Int32.MaxValue)
+                throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
 
             //if (aggregate.Version != version && version < Int32.MaxValue)
             //    throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);

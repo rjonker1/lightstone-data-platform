@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventTracking.Domain.Persistence.EventStore.Exceptions
+namespace EventTracking.Domain.Persistence.Storage.Exceptions
 {
     public class AggregateDeletedException : Exception
     {
