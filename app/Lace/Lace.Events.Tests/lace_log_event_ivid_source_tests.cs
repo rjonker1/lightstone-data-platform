@@ -1,4 +1,7 @@
-﻿using System;
+﻿#pragma warning disable 169
+// ReSharper disable InconsistentNaming
+
+using System;
 using System.Threading;
 using EasyNetQ;
 using EventTracking.Sources;
@@ -83,3 +86,6 @@ namespace Lace.Events.Tests
 
     }
 }
+// ReSharper enable InconsistentNaming
+#pragma warning restore 169
+
