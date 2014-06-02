@@ -2,9 +2,9 @@
 
 namespace EventTracking.Repository.Tests.Data
 {
-    public class AggregateCreated
+    public class EventTrackingTestAggregateCreated
     {
-        public AggregateCreated(Guid aggregateId)
+        public EventTrackingTestAggregateCreated(Guid aggregateId)
         {
             AggregateId = aggregateId;
         }

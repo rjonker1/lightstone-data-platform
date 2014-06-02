@@ -56,7 +56,7 @@ namespace EventTracking.Domain.Core
             foreach (var apply in applyMethods)
             {
                 var applyMethod = apply.Method;
-                this._handlers.Add(apply.MessageType, m => applyMethod.Invoke(aggregate, new[] {m as object}));
+                _handlers.Add(apply.MessageType, m => applyMethod.Invoke(aggregate, new[] {m as object}));
             }
         }
 
@@ -68,7 +68,7 @@ namespace EventTracking.Domain.Core
             Action<object> handler;
             if (_handlers.TryGetValue(eventMessage.GetType(), out handler))
                 handler(eventMessage);
-            else if (this._throwOnApplyNotFound)
+            else if (_throwOnApplyNotFound)
                 _registered.ThrowHandlerNotFound(eventMessage);
         }
 

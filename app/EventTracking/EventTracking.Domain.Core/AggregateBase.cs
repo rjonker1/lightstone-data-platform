@@ -56,7 +56,7 @@ namespace EventTracking.Domain.Core
             Version++;
         }
 
-        public System.Collections.ICollection GetUncommittedEvents()
+        public ICollection GetUncommittedEvents()
         {
             return (ICollection) _uncommittedEvents;
         }

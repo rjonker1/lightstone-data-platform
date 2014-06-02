@@ -4,16 +4,16 @@ using EventTracking.Repository.Tests.Events;
 
 namespace EventTracking.Repository.Tests.Data
 {
-    public class Aggregate : AggregateBase
+    public class EventTrackingTestAggregate : AggregateBase
     {
-         public Aggregate(Guid aggregateId) : this()
+        public EventTrackingTestAggregate(Guid aggregateId) : this()
         {
-            RaiseEvent(new AggregateCreated(aggregateId));
+            RaiseEvent(new EventTrackingTestAggregateCreated(aggregateId));
         }
 
-         private Aggregate()
+        private EventTrackingTestAggregate()
         {
-            Register<AggregateCreated>(e => Id = e.AggregateId);
+            Register<EventTrackingTestAggregateCreated>(e => Id = e.AggregateId);
             Register<ExternalSourceEvent>(e => AppliedEventCount++);
         }
 
@@ -21,7 +21,7 @@ namespace EventTracking.Repository.Tests.Data
 
         public void ProduceEvents(int count)
         {
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
                 RaiseEvent(new ExternalSourceEvent("External Source 1-" + i, "External Source 2-" + i));
         }
     }

@@ -53,8 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Aggregate.cs" />
-    <Compile Include="Data\AggregateCreated.cs" />
+    <Compile Include="Data\EventTrackingTestAggregate.cs" />
+    <Compile Include="Data\EventTrackingTestAggregateCreated.cs" />
     <Compile Include="Events\ExternalSourceEvent.cs" />
     <Compile Include="event_tracking_persistence_event_store_repository_integration_tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

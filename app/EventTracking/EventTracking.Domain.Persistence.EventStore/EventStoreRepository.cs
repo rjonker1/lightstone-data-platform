@@ -58,12 +58,14 @@ namespace EventTracking.Domain.Persistence.EventStore
             var aggregate = ConstructAggregate<TAggregate>();
 
             var sliceStart = 0;
+
             StreamEventsSlice currentSlice;
+
             do
             {
                 var sliceCount = sliceStart + ReadPageSize <= version
                                     ? ReadPageSize
-                                    : version - sliceStart + 1;
+                                    : (version - sliceStart) + 1;
 
                 currentSlice = _eventStoreConnection.ReadStreamEventsForward(streamName, sliceStart, sliceCount, false);
 
@@ -79,8 +81,8 @@ namespace EventTracking.Domain.Persistence.EventStore
                     aggregate.ApplyEvent(DeserializeEvent(evnt.OriginalEvent.Metadata, evnt.OriginalEvent.Data));
             } while (version >= currentSlice.NextEventNumber && !currentSlice.IsEndOfStream);
 
-            if (aggregate.Version != version && version < Int32.MaxValue)
-                throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
+            //if (aggregate.Version != version && version < Int32.MaxValue)
+            //    throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
 
             return aggregate;
         }
