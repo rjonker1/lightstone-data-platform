@@ -2,8 +2,8 @@
 using Common.Logging;
 using System.Threading.Tasks;
 using DataPlatform.Shared.Public.Messaging;
-using EventTracking.Modules.Lace.Messages;
-using EventTracking.Sources;
+using Monitoring.Modules.Lace.Messages;
+using Monitoring.Sources;
 using Workflow;
 
 namespace Lace.Events.Messages.Publish

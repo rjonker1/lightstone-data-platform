@@ -1,0 +1,1 @@
+Monitoring.Consumer uninstall

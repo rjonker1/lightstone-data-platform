@@ -47,7 +47,7 @@ namespace EventTracking.Domain.Core
         protected void RaiseEvent(object @event)
         {
             ((IAggregate) this).ApplyEvent(@event);
-            this._uncommittedEvents.Add(@event);
+            _uncommittedEvents.Add(@event);
         }
 
         public void ApplyEvent(object @event)

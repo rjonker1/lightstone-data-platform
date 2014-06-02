@@ -1,10 +1,9 @@
-﻿#pragma warning disable 169
+﻿using Monitoring.Sources;
+#pragma warning disable 169
 // ReSharper disable InconsistentNaming
-
 using System;
 using System.Threading;
 using EasyNetQ;
-using EventTracking.Sources;
 using Lace.Events.Messages.Publish;
 using Lace.Functions.Json;
 using Workflow;

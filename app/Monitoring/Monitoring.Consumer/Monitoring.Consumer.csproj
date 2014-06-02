@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2281E99-B90F-4615-9F63-D46B024EB5AB}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{C74A12F5-C148-48A5-915D-243FA8CFA9EB}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Events.Messages.Publish</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Events.Messages.Publish</AssemblyName>
+    <RootNamespace>Monitoring.Consumer</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Monitoring.Consumer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,35 +32,61 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="Topshelf">
+      <HintPath>..\packages\Topshelf.3.1.3\lib\net40-full\Topshelf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MonitorService.cs" />
+    <Compile Include="IMonitorService.cs" />
+    <Compile Include="Program.cs">
+      <SubType>
+      </SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublishLaceEventMessages.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Monitoring\Monitoring.Modules.Lace\Monitoring.Modules.Lace.csproj">
-      <Project>{ca27fc70-a226-46c3-ac7d-1c105bd36b9a}</Project>
-      <Name>Monitoring.Modules.Lace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
-      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
-      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
-      <Name>Lace.Events</Name>
+    <None Include="App.config" />
+    <None Include="install.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="run.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="start.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="stop.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="uninstall.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
+      <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
+      <Name>BuildingBlocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
-      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow %28Workflow\Workflow%29</Name>
+    <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
+      <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
+      <Name>Workflow.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Modules.Lace\Monitoring.Modules.Lace.csproj">
+      <Project>{ca27fc70-a226-46c3-ac7d-1c105bd36b9a}</Project>
+      <Name>Monitoring.Modules.Lace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
+      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
+      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

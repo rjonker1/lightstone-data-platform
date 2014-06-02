@@ -54,9 +54,9 @@
     <Compile Include="Transform\TransformIvidWebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EventTracking\EventTracking\EventTracking.csproj">
-      <Project>{07171ac5-6497-40c0-a465-2b0a04784285}</Project>
-      <Name>EventTracking %28EventTracking\EventTracking%29</Name>
+    <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
+      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
+      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Consumer\Lace.Consumer.csproj">
       <Project>{6f44066d-c6a2-41e2-847a-0561c9ee2cdb}</Project>

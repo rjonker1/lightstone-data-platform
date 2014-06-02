@@ -81,9 +81,7 @@ namespace EventTracking.Domain.Persistence.Storage
                     aggregate.ApplyEvent(DeserializeEvent(evnt.OriginalEvent.Metadata, evnt.OriginalEvent.Data));
             } while (version >= currentSlice.NextEventNumber && !currentSlice.IsEndOfStream);
 
-            if(version < Int32.MaxValue)
-                throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
-
+          
             //if (aggregate.Version != version && version < Int32.MaxValue)
             //    throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
 
