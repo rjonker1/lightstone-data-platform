@@ -1,4 +1,5 @@
-﻿using Monitoring.Sources;
+﻿using System.Threading;
+using Monitoring.Sources;
 #pragma warning disable 169
 //ReSharper disable InconsistentNaming
 using System;
@@ -41,8 +42,8 @@ namespace Lace.Events.Tests
             try
             {
                // sourceEventService.Start();
-               
-                _bus = new BusFactory().CreateBus("LaceEventBus");
+
+                _bus = new BusFactory().CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 
@@ -78,6 +79,9 @@ namespace Lace.Events.Tests
             _laceEvent.PublishTransformationStartMessage(_aggregateId, FromSource.IvidSource);
 
             _laceEvent.PublishTransformationEndMessage(_aggregateId, FromSource.IvidSource);
+
+
+            Thread.Sleep(5000);
 
             _bus.Dispose();
         }

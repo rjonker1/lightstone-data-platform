@@ -37,9 +37,28 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateEvents\ExternalSourceAggregateCreated.cs" />
-    <Compile Include="AggregateEvents\ExternalSourceFailedEvent.cs" />
-    <Compile Include="Aggregates\ExternalServiceFailedAggregate.cs" />
+    <Compile Include="AggregatePersistence\PersistAggregate.cs" />
+    <Compile Include="AggregatePersistence\IPersistAggregate.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceBaseEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceHandledEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceFailedEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceConfigurationEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceResponseFailureEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceResponseSuccessEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceRequestSentEvent.cs" />
+    <Compile Include="AggregateEvents\AggregateExternalSourceResponseTransformationEvent.cs" />
+    <None Include="AggregateEvents\AggregateExternalSourceResponseEmptyEvent.cs.old" />
+    <Compile Include="Aggregates\AggregateExternalSourcesConfiguration.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourceInformation.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourcesHandled.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourceFailures.cs" />
+    <Compile Include="AggregateEvents\IAggregateEvent.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourcesResponseFailures.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourcesResponseSuccesses.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourcesRequestsSent.cs" />
+    <Compile Include="Aggregates\AggregateExternalSourcesResponseTransformations.cs" />
+    <None Include="Aggregates\AggregateExternalSourcesResponsesEmpty.cs.old" />
     <Compile Include="Consumers\ExternalSourceConfigurationConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceFailedConsumer.cs" />
@@ -49,16 +68,15 @@
     <Compile Include="Consumers\ExternalSourceSentRequestsConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceTransformationConsumer.cs" />
     <Compile Include="Messages\LaceEventMessage.cs" />
-    <Compile Include="Messages\LaceExternalServiceConfigurationEventMessage.cs" />
-    <Compile Include="Messages\LaceExternalServiceEventMessage.cs" />
-    <Compile Include="Messages\LaceExternalServiceFailedEventMessage.cs" />
-    <Compile Include="Messages\LaceExternalServiceNoResponseEventMessage.cs" />
-    <Compile Include="Messages\LaceExternalServiceRequestEventMessage.cs" />
-    <Compile Include="Messages\LaceExternalServiceResponseEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalSourceConfigurationEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalSourceEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalSourceFailedEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalSourceNoResponseEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalSourceRequestEventMessage.cs" />
+    <Compile Include="Messages\LaceExternalSourceResponseEventMessage.cs" />
     <Compile Include="Messages\LaceSourceHandledEventMessage.cs" />
     <Compile Include="Messages\LaceTransformResponseFailedMessageEvent.cs" />
     <Compile Include="Messages\LaceTransformResponseMessageEvent.cs" />
-    <Compile Include="Persistence\IPersistLaceAggregate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

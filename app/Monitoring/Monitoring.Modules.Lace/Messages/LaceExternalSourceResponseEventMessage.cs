@@ -3,10 +3,10 @@ using Monitoring.Sources;
 
 namespace Monitoring.Modules.Lace.Messages
 {
-    public class LaceExternalServiceConfigurationEventMessage : ITrackExternalSourceEventMessage
+    public class LaceExternalSourceResponseEventMessage : ITrackExternalSourceEventMessage
     {
 
-        public LaceExternalServiceConfigurationEventMessage(Guid aggregateId, FromSource source, string message)
+        public LaceExternalSourceResponseEventMessage(Guid aggregateId, FromSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;

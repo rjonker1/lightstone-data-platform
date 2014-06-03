@@ -26,46 +26,46 @@ namespace Lace.Events.Messages.Publish
 
         public void PublishStartServiceCallMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceExternalServiceEventMessage(aggerateId, source, "Starting External Web Service Call");
+            var msg = new LaceExternalSourceEventMessage(aggerateId, source, "Starting External Web Service Call");
             PublishMessage(msg);
         }
 
         public void PublishStartServiceConfigurationMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceExternalServiceConfigurationEventMessage(aggerateId, source,
+            var msg = new LaceExternalSourceConfigurationEventMessage(aggerateId, source,
                 "Starting Configuration for Web Service Call");
             PublishMessage(msg);
         }
 
         public void PublishEndServiceConfigurationMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceExternalServiceConfigurationEventMessage(aggerateId, source,
+            var msg = new LaceExternalSourceConfigurationEventMessage(aggerateId, source,
                 "Ending Configuration for Web Service Call");
             PublishMessage(msg);
         }
 
         public void PublishEndServiceCallMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceExternalServiceEventMessage(aggerateId, source, "End External Web Service Call");
+            var msg = new LaceExternalSourceEventMessage(aggerateId, source, "End External Web Service Call");
             PublishMessage(msg);
         }
 
         public void PublishFailedServiceCallMessaage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceExternalServiceFailedEventMessage(aggerateId, source, "Failed External Web Service Call");
+            var msg = new LaceExternalSourceFailedEventMessage(aggerateId, source, "Failed External Web Service Call");
             PublishMessage(msg);
         }
 
         public void PublishNoResponseFromServiceMessage(Guid aggerateId, FromSource source)
         {
-            var msg = new LaceExternalServiceNoResponseEventMessage(aggerateId, source,
+            var msg = new LaceExternalSourceNoResponseEventMessage(aggerateId, source,
                 "Response from Web Service is null or does not exist");
             PublishMessage(msg);
         }
 
         public void PublishServiceRequestMessage(Guid aggerateId, FromSource source, string request)
         {
-            var msg = new LaceExternalServiceRequestEventMessage(aggerateId, source,
+            var msg = new LaceExternalSourceRequestEventMessage(aggerateId, source,
                 string.Format("Request Sent to Web Service: {0}", request));
             PublishMessage(msg);
 
@@ -73,7 +73,7 @@ namespace Lace.Events.Messages.Publish
 
         public void PublishServiceResponseMessage(Guid aggerateId, FromSource source, string response)
         {
-            var msg = new LaceExternalServiceResponseEventMessage(aggerateId, source,
+            var msg = new LaceExternalSourceResponseEventMessage(aggerateId, source,
                 string.Format("Response Received from Web Service: {0}", response));
             PublishMessage(msg);
         }

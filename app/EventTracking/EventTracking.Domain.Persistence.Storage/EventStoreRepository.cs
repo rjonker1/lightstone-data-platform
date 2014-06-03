@@ -81,9 +81,9 @@ namespace EventTracking.Domain.Persistence.Storage
                     aggregate.ApplyEvent(DeserializeEvent(evnt.OriginalEvent.Metadata, evnt.OriginalEvent.Data));
             } while (version >= currentSlice.NextEventNumber && !currentSlice.IsEndOfStream);
 
-          
-            //if (aggregate.Version != version && version < Int32.MaxValue)
-            //    throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
+
+            if (aggregate.Version != version && version < Int32.MaxValue)
+                throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
 
             return aggregate;
         }
@@ -112,7 +112,10 @@ namespace EventTracking.Domain.Persistence.Storage
             var streamName = _aggregateIdToStreamName(aggregate.GetType(), aggregate.Id);
             var newEvents = aggregate.GetUncommittedEvents().Cast<object>().ToList();
             var originalVersion = aggregate.Version - newEvents.Count;
-            var expectedVersion = originalVersion == 0 ? ExpectedVersion.NoStream : originalVersion;
+            //var expectedVersion = originalVersion == 0 ? ExpectedVersion.NoStream : originalVersion;
+            //var expectedVersion = originalVersion == 0 ? ExpectedVersion.NoStream : originalVersion - 1;
+            var expectedVersion = originalVersion == 0 ? CheckForExistingStreamVersion(streamName) : originalVersion - 1;
+
             var eventsToSave = newEvents.Select(e => ToEventData(Guid.NewGuid(), e, commitHeaders)).ToList();
 
             if (eventsToSave.Count < WritePageSize)
@@ -135,6 +138,13 @@ namespace EventTracking.Domain.Persistence.Storage
             }
 
             aggregate.ClearUncommittedEvents();
+        }
+
+        private int CheckForExistingStreamVersion(string streamName)
+        {
+            var read = _eventStoreConnection.ReadStreamEventsBackward(streamName, StreamPosition.End, 1, false);
+
+            return read.Events.Count() > 0 ? read.LastEventNumber : ExpectedVersion.NoStream;
         }
 
         private static EventData ToEventData(Guid eventId, object evnt, IDictionary<string, object> headers)

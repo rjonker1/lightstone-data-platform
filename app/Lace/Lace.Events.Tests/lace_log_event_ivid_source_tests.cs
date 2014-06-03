@@ -43,7 +43,7 @@ namespace Lace.Events.Tests
                     
                 //}
                 //_sourceEventService.Start();
-                _bus = new BusFactory().CreateBus("LaceEventBus");
+                _bus = new BusFactory().CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 

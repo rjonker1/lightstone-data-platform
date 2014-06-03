@@ -3,9 +3,9 @@ using Monitoring.Sources;
 
 namespace Monitoring.Modules.Lace.Messages
 {
-    public class LaceExternalServiceNoResponseEventMessage : ITrackExternalSourceEventMessage
+    public class LaceExternalSourceFailedEventMessage : ITrackExternalSourceEventMessage
     {
-        public LaceExternalServiceNoResponseEventMessage(Guid aggregateId, FromSource source, string message)
+        public LaceExternalSourceFailedEventMessage(Guid aggregateId, FromSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;

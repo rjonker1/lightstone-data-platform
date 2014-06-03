@@ -13,21 +13,21 @@ namespace Monitoring.Consumer
         public void Start()
         {
             var consumers = new ConsumerRegistration()
-                .AddConsumer<ExternalSourceConsumer, LaceExternalServiceEventMessage>(
+                .AddConsumer<ExternalSourceConsumer, LaceExternalSourceEventMessage>(
                     () => new ExternalSourceConsumer())
-                .AddConsumer<ExternalSourceConfigurationConsumer, LaceExternalServiceConfigurationEventMessage>(
+                .AddConsumer<ExternalSourceConfigurationConsumer, LaceExternalSourceConfigurationEventMessage>(
                     () => new ExternalSourceConfigurationConsumer())
-                .AddConsumer<ExternalSourceFailedConsumer, LaceExternalServiceFailedEventMessage>(
+                .AddConsumer<ExternalSourceFailedConsumer, LaceExternalSourceFailedEventMessage>(
                     () => new ExternalSourceFailedConsumer())
                 .AddConsumer<ExternalSourceHandledConsumer, LaceSourceHandledEventMessage>(
                     () => new ExternalSourceHandledConsumer())
-                .AddConsumer<ExternalSourceNoResponseReceivedConsumer, LaceExternalServiceNoResponseEventMessage>(
+                .AddConsumer<ExternalSourceNoResponseReceivedConsumer, LaceExternalSourceNoResponseEventMessage>(
                     () => new ExternalSourceNoResponseReceivedConsumer())
                 .AddConsumer<ExternalSourceTransformationConsumer, LaceTransformResponseEventMessage>(
                     () => new ExternalSourceTransformationConsumer())
-                .AddConsumer<ExternalSourceReceivedResponseConsumer, LaceExternalServiceResponseEventMessage>(
+                .AddConsumer<ExternalSourceReceivedResponseConsumer, LaceExternalSourceResponseEventMessage>(
                     () => new ExternalSourceReceivedResponseConsumer())
-                .AddConsumer<ExternalSourceSentRequestsConsumer, LaceExternalServiceRequestEventMessage>(
+                .AddConsumer<ExternalSourceSentRequestsConsumer, LaceExternalSourceRequestEventMessage>(
                     () => new ExternalSourceSentRequestsConsumer());
 
             _bus = new BusFactory().CreateConsumerBus("monitor-event-tracking/queue", consumers);

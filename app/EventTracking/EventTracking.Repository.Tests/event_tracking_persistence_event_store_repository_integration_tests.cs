@@ -39,58 +39,58 @@ namespace EventTracking.Repository.Tests
             
         }
 
-        [Observation]
-        public void event_tracking_can_get_specific_version_from_first_page_by_id()
-        {
-            var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 100 /* excludes AggregateCreated */);
+        //[Observation]
+        //public void event_tracking_can_get_specific_version_from_first_page_by_id()
+        //{
+        //    var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 100 /* excludes AggregateCreated */);
 
-            var retrieved = _repo.GetById<EventTrackingTestAggregate>(savedId, 65);
-            //retrieved.AppliedEventCount.ShouldEqual(64);
-            retrieved.AppliedEventCount.ShouldEqual(65);
+        //    var retrieved = _repo.GetById<EventTrackingTestAggregate>(savedId, 65);
+        //    //retrieved.AppliedEventCount.ShouldEqual(64);
+        //    retrieved.AppliedEventCount.ShouldEqual(65);
+        //}
+
+        //[Observation]
+        //public void event_tracking_can_get_specific_version_from_subsequent_page_by_id()
+        //{
+        //    var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 500 /* excludes AggregateCreated */);
+
+        //    var retrieved = _repo.GetById<EventTrackingTestAggregate>(savedId, 126);
+        //    //retrieved.AppliedEventCount.ShouldEqual(125);
+        //    retrieved.AppliedEventCount.ShouldEqual(126);
+        //}
+
+        [Observation]
+        public void event_tracking_can_handle_large_number_of_events_in_one_transaction()
+        {
+            const int numberOfEvents = 50000;
+
+            var aggregateId = SaveTestAggregateWithoutCustomHeaders(_repo, numberOfEvents);
+
+            var saved = _repo.GetById<EventTrackingTestAggregate>(aggregateId);
+            numberOfEvents.ShouldEqual(saved.AppliedEventCount);
+        }
+
+
+        [Observation]
+        public void event_tracking_can_save_existing_aggregate()
+        {
+            var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 100 /* excludes TestAggregateCreated */);
+
+            var firstSaved = _repo.GetById<EventTrackingTestAggregate>(savedId);
+            firstSaved.ProduceEvents(50);
+            _repo.Save(firstSaved, Guid.NewGuid(), d => { });
+
+            var secondSaved = _repo.GetById<EventTrackingTestAggregate>(savedId);
+            secondSaved.AppliedEventCount.ShouldEqual(150);
         }
 
         [Observation]
-        public void event_tracking_can_get_specific_version_from_subsequent_page_by_id()
+        public void event_tracking_can_save_multiples_of_write_page_size()
         {
-            var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 500 /* excludes AggregateCreated */);
-
-            var retrieved = _repo.GetById<EventTrackingTestAggregate>(savedId, 126);
-            //retrieved.AppliedEventCount.ShouldEqual(125);
-            retrieved.AppliedEventCount.ShouldEqual(126);
+            var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 1500 /* excludes TestAggregateCreated */);
+            var saved = _repo.GetById<EventTrackingTestAggregate>(savedId);
+            saved.AppliedEventCount.ShouldEqual(1500);
         }
-
-        //[Observation]
-        //public void event_tracking_can_handle_large_number_of_events_in_one_transaction()
-        //{
-        //    const int numberOfEvents = 50000;
-
-        //    var aggregateId = SaveTestAggregateWithoutCustomHeaders(_repo, numberOfEvents);
-
-        //    var saved = _repo.GetById<EventTrackingTestAggregate>(aggregateId);
-        //    numberOfEvents.ShouldEqual(saved.AppliedEventCount);
-        //}
-
-
-        //[Observation]
-        //public void event_tracking_can_save_existing_aggregate()
-        //{
-        //    var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 100 /* excludes TestAggregateCreated */);
-
-        //    var firstSaved = _repo.GetById<EventTrackingTestAggregate>(savedId);
-        //    firstSaved.ProduceEvents(50);
-        //    _repo.Save(firstSaved, Guid.NewGuid(), d => { });
-
-        //    var secondSaved = _repo.GetById<EventTrackingTestAggregate>(savedId);
-        //    secondSaved.AppliedEventCount.ShouldEqual(150);
-        //}
-
-        //[Observation]
-        //public void event_tracking_can_save_multiples_of_write_page_size()
-        //{
-        //    var savedId = SaveTestAggregateWithoutCustomHeaders(_repo, 1500 /* excludes TestAggregateCreated */);
-        //    var saved = _repo.GetById<EventTrackingTestAggregate>(savedId);
-        //    saved.AppliedEventCount.ShouldEqual(1500);
-        //}
 
         [Observation]
         public void event_tracking_clears_events_from_aggregate_once_committed()
