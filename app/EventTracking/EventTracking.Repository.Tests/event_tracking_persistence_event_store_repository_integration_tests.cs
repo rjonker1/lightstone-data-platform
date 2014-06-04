@@ -62,7 +62,7 @@ namespace EventTracking.Repository.Tests
         [Observation]
         public void event_tracking_can_handle_large_number_of_events_in_one_transaction()
         {
-            const int numberOfEvents = 50000;
+            const int numberOfEvents = 1000;
 
             var aggregateId = SaveTestAggregateWithoutCustomHeaders(_repo, numberOfEvents);
 

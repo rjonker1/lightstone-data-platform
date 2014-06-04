@@ -7,15 +7,9 @@ namespace Monitoring.Consumer.Lace.Persistence
 {
     public class PersistEvent : IPersistEvent
     {
-        private static IRepository Repository
-        {
-            get
-            {
-                return new RepositoryFactory()
-                    .Instance()
-                    .Repository;
-            }
-        }
+        private static readonly IRepository Repository = new RepositoryFactory()
+            .Instance()
+            .Repository;
 
         public void Save(IAggregate aggregate)
         {
