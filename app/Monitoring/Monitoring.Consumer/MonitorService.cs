@@ -1,6 +1,7 @@
 ﻿using EasyNetQ;
-using Monitoring.Modules.Lace.Consumers;
-using Monitoring.Modules.Lace.Messages;
+using Monitoring.Consumer.Lace.Persistence;
+using Monitoring.Consumer.Lace.Consumers;
+using Monitoring.Consumer.Lace.Messages;
 using Workflow.BuildingBlocks;
 using Workflow.BuildingBlocks.Consumers;
 
@@ -12,6 +13,7 @@ namespace Monitoring.Consumer
 
         public void Start()
         {
+
             var consumers = new ConsumerRegistration()
                 .AddConsumer<ExternalSourceConsumer, LaceExternalSourceEventMessage>(
                     () => new ExternalSourceConsumer())
