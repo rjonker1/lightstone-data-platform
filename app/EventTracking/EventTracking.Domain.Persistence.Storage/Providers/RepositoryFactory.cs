@@ -26,7 +26,6 @@ namespace EventTracking.Domain.Persistence.Storage.Providers
             if (_connection == null) return;
 
             _connection.Close();
-            _connection.Dispose();
         }
     }
 }
