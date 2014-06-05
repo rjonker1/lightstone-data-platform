@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="RequestData\ContextInformation.cs" />
     <Compile Include="RequestData\IvidTitleHolderRequestVehicleInformation.cs" />
+    <Compile Include="RequestData\RequestAggregationInformation.cs" />
     <Compile Include="RequestData\RequestUserInformation.cs" />
     <Compile Include="RequestData\RequestVehicleInformation.cs" />
     <None Include="Consumers\LaceEventMessageConsumer.cs.old" />

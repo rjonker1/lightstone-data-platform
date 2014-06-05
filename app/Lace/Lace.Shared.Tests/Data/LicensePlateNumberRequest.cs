@@ -30,6 +30,14 @@ namespace Lace.Shared.Tests.Data
             }
         }
 
+        public IProvideRequestAggregation RequestAggregation
+        {
+            get
+            {
+                return new AggregationInformation();
+            }
+        }
+
         public ILaceRequestVehicleInformation Vehicle
         {
             get
@@ -53,6 +61,9 @@ namespace Lace.Shared.Tests.Data
                 return "XMC167GP";
             }
         }
+
+
+
       
     }
 }

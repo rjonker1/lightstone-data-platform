@@ -28,32 +28,32 @@ namespace Lace.Source.Audatex.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(_request.User.AggregateId, Source);
+                laceEvent.PublishStartServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 var audatexWebService = new ConfigureAudatexWebService();
                 var audatexRequest = new ConfigureAudatexRequestMessage(_request)
                     .AudatexRequest;
                 var credentials = new ConfigureAudatexCredentials().Credentials;
 
-                laceEvent.PublishEndServiceConfigurationMessage(_request.User.AggregateId, Source);
+                laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
-                laceEvent.PublishServiceRequestMessage(_request.User.AggregateId, Source,
+                laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
                        JsonFunctions.JsonFunction.ObjectToJson(audatexRequest));
 
-                laceEvent.PublishStartServiceCallMessage(_request.User.AggregateId, Source);
+                laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
                 _audatexResponse = audatexWebService
                     .AudatexServiceProxy
                     .GetDataEx(credentials, audatexRequest.MessageType, audatexRequest.Message, 0);
 
-                laceEvent.PublishEndServiceCallMessage(_request.User.AggregateId, Source);
+                laceEvent.PublishEndServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
                 audatexWebService.CloseWebService();
 
                 if (_audatexResponse == null)
-                    laceEvent.PublishNoResponseFromServiceMessage(_request.User.AggregateId, Source);
+                    laceEvent.PublishNoResponseFromServiceMessage(_request.RequestAggregation.AggregateId, Source);
 
-                laceEvent.PublishServiceResponseMessage(_request.User.AggregateId, Source,
+                laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
                         JsonFunctions.JsonFunction.ObjectToJson(_audatexResponse ?? new GetDataResult()));
 
                 TransformWebResponse(response);
@@ -61,7 +61,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Audatex Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(_request.User.AggregateId, Source);
+                laceEvent.PublishFailedServiceCallMessaage(_request.RequestAggregation.AggregateId, Source);
                 AudatexResponseFailed(response);
             }
         }

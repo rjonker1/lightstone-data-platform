@@ -32,6 +32,8 @@ namespace Api
 
         public ILaceRequestVehicleInformation Vehicle { get; private set; }
 
+        public IProvideRequestAggregation RequestAggregation { get; private set; }
+
         public DateTime RequestDate
         {
             get
@@ -39,6 +41,9 @@ namespace Api
                 return DateTime.Now;
             }
         }
+
+
+       
     }
 
     public class User : ILaceRequestUserInformation

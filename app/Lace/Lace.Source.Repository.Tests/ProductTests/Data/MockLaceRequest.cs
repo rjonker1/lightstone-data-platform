@@ -54,5 +54,14 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
                 return "XMC167GP";
             }
         }
+
+
+        public IProvideRequestAggregation RequestAggregation
+        {
+            get
+            {
+                return new AggregationInformation();
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ namespace Lace.Request
     public interface ILaceRequestUserInformation
     {
         Guid UserId { get; }
-        Guid AggregateId { get; }
 
         string UserName { get; }
         string UserFirstName { get; }

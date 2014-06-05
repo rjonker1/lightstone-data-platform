@@ -11,6 +11,8 @@ namespace Lace.Request
 
         ILaceRequestVehicleInformation Vehicle { get; }
 
+        IProvideRequestAggregation RequestAggregation { get; }
+
         DateTime RequestDate { get; }
 
        // string SearchTerm { get; }

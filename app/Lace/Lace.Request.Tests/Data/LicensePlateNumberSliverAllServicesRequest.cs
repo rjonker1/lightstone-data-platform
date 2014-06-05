@@ -39,6 +39,14 @@ namespace Lace.Request.Tests.Data
             }
         }
 
+        public IProvideRequestAggregation RequestAggregation
+        {
+            get
+            {
+                return new AggregationInformation();
+            }
+        }
+
         public DateTime RequestDate
         {
             get

@@ -32,6 +32,14 @@ namespace Lace.Source.Tests.Data
                 return new RequestVehicleInformation();
             }
         }
+        public IProvideRequestAggregation RequestAggregation
+        {
+            get
+            {
+                return new AggregationInformation();
+            }
+        }
+
 
         public DateTime RequestDate
         {
