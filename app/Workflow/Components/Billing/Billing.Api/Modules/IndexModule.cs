@@ -1,12 +1,12 @@
-﻿namespace Billing.Api
-{
-    using Nancy;
+﻿using Nancy;
 
+namespace Billing.Api.Modules
+{
     public class IndexModule : NancyModule
     {
         public IndexModule()
         {
-            Get["/"] = parameters => "Hello World";
+            Get["/"] = parameters => "Billing API";
         }
     }
 }

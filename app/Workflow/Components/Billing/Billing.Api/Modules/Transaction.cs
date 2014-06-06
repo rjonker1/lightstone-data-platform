@@ -7,7 +7,7 @@ using Shared.BuildingBlocks.Api;
 using Workflow;
 using Workflow.Billing.Messages;
 
-namespace Billing.Api
+namespace Billing.Api.Modules
 {
     public class Transaction : NancyModule
     {

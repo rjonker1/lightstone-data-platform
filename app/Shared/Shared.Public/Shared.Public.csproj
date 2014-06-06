@@ -62,6 +62,7 @@
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
+    <Compile Include="Identifiers\ServerIdentifier.cs" />
     <Compile Include="Identifiers\SystemIdentifier.cs" />
     <Compile Include="Identifiers\UserIdentifier.cs" />
     <Compile Include="Identifiers\VersionIdentifier.cs" />

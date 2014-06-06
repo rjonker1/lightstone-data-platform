@@ -82,9 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="IndexModule.cs" />
+    <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\Ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transaction.cs" />
+    <Compile Include="Modules\Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
