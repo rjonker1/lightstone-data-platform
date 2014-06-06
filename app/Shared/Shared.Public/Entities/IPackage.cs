@@ -2,7 +2,7 @@
 
 namespace DataPlatform.Shared.Public.Entities
 {
-    public interface IPackage : IEntity, INamedEntity
+    public interface IPackage : INamedEntity
     {
         IEnumerable<IDataSet> DataSets { get; set; }
         IEnumerable<IWorkflow> Workflows { get; set; }

@@ -2,7 +2,7 @@
 
 namespace DataPlatform.Shared.Public.Entities
 {
-    public interface IRole : IEntity, INamedEntity
+    public interface IRole : INamedEntity
     {
         IEnumerable<IRolePermission> RolePermissions { get; }
         IEnumerable<IAction> Actions { get; }

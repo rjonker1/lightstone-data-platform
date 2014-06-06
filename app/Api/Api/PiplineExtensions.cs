@@ -24,9 +24,9 @@ namespace Api
 
             pipelines.AfterRequest += context =>
             {
-                var response = Mapper.Map<Response, IResponse>(context.Response);
+                //var response = Mapper.Map<Response, IResponse>(context.Response);
 
-                log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
+                //log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
             };
 
             pipelines.OnError += (context, ex) =>

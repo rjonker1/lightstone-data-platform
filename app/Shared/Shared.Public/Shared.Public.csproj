@@ -34,17 +34,19 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CannedDatabase.cs" />
+    <Compile Include="NamedRepository.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Entities\IAction.cs" />
     <Compile Include="Entities\IContract.cs" />
     <Compile Include="Entities\IContractPackage.cs" />
     <Compile Include="Entities\ICustomer.cs" />
+    <Compile Include="Entities\ICustomerContract.cs" />
     <Compile Include="Entities\ICustomerUser.cs" />
     <Compile Include="Entities\IDataField.cs" />
     <Compile Include="Entities\IDataSet.cs" />
     <Compile Include="Entities\IDataSource.cs" />
     <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\IExpire.cs" />
+    <Compile Include="Entities\IExpirable.cs" />
     <Compile Include="Entities\IField.cs" />
     <Compile Include="Entities\IGroup.cs" />
     <Compile Include="Entities\IGroupPackage.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Entities\IUserRole.cs" />
     <Compile Include="Entities\IWorkflow.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />

@@ -2,7 +2,7 @@
 
 namespace DataPlatform.Shared.Public.Entities
 {
-    public interface IGroup : IEntity, INamedEntity
+    public interface IGroup : INamedEntity
     {
         IEnumerable<IGroupPermission> GroupPermissions { get; }
         IEnumerable<IAction> Actions { get; }

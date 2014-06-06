@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request.Entry;
@@ -9,7 +10,12 @@ using Workflow.BuildingBlocks;
 
 namespace Api.Modules
 {
-    public class IndexModule : NancyModule
+    public abstract class BaseNancyModule : NancyModule
+    {
+        
+    }
+
+    public class IndexModule : BaseNancyModule
     {
         public IndexModule()
         {
@@ -56,7 +62,7 @@ namespace Api.Modules
 
     public class Package : IPackage
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<IDataSet> DataSets { get; set; }
         public IEnumerable<IWorkflow> Workflows { get; set; }
@@ -64,14 +70,14 @@ namespace Api.Modules
 
     public class DataSet : IDataSet
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<IDataField> DataFields { get; set; }
     }
 
     public class DataField : IDataField
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public IDataSource DataSource { get; set; }
     }

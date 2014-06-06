@@ -8,5 +8,7 @@ namespace PackageBuilder.Api.Entities
             : base(name)
         {
         }
+
+        public ICriteria Criteria { get; set; }
     }
 }

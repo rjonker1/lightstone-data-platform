@@ -15,6 +15,9 @@ namespace DataPlatform.Shared.Public.Entities
         bool HasSingleRole { get; }
         bool HasSingleGroupAndRole { get; }
         bool HasMultipleGroups { get; }
-        bool HasHasMultipleRoles { get; }
+        bool HasMultipleRoles { get; }
+        bool HasMultipleGroupsAndRoles { get; }
+        IGroup DefaultGroup { get; }
+        IRole DefaultRole { get; }
     }
 }

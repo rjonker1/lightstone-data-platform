@@ -1,6 +1,8 @@
-﻿using Nancy;
+﻿using Api.Modules;
+using Nancy;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
+using Nancy.Routing;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -17,6 +19,7 @@ namespace Api
                 var token = context.AuthorizationHeaderToken();
                 var authenticator = container.Resolve<IAuthenticateUser>();
 
+                
                 return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
             });
 
@@ -42,6 +45,8 @@ namespace Api
             AutoMapperConfiguration.Init();
 
             container.Register<IAuthenticateUser, UmApiAuthenticator>();
+            container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
+            container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
         }
     }
 }
