@@ -22,8 +22,7 @@ namespace Billing.Api
                                        log.InfoFormat("Received post to create billing transaction");
 
                                        var transaction = this.Bind<CreateTransaction>();
-                                       var message = new BillTransactionMessage(transaction.UserId,
-                                           transaction.TransactionId);
+                                       var message = new BillTransactionMessage();
 
                                        try
                                        {
