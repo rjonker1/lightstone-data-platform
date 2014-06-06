@@ -4,6 +4,10 @@ namespace DataPlatform.Shared.Public.Identifiers
 {
     public class PackageIdentifier
     {
+        public PackageIdentifier()
+        {
+        }
+
         public PackageIdentifier(Guid id, VersionIdentifier version)
         {
             Id = id;

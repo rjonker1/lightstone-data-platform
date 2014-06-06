@@ -2,6 +2,7 @@
 using Billing.Api.Dtos;
 using Billing.Api.Tests.Fakes;
 using Billing.Api.Tests.Mothers.CreatTransactionDto;
+using DataPlatform.Shared.Public.Helpers;
 using Nancy;
 using Nancy.Testing;
 using Workflow.Billing.Messages;
@@ -13,9 +14,13 @@ namespace Billing.Api.Tests.Transaction
     {
         private BrowserResponse result;
         private readonly CreateTransaction transaction;
+        private readonly DateTime transactionDate;
 
         public when_creating_a_new_billing_transaction() : base(new TestMessagePublisher())
         {
+            transactionDate = new DateTime(2011, 01, 12, 12, 34, 21);
+            SystemTime.Now = () => transactionDate;
+
             transaction = new CreateTransactionMother().DefaultCreateTransaction();
         }
 
@@ -47,8 +52,10 @@ namespace Billing.Api.Tests.Transaction
         {
             var message = ThePublisher.PublishedMessage as BillTransactionMessage;
 
-//            message.TransactionId.ShouldEqual(transaction.TransactionId);
-//            message.UserId.ShouldEqual(transaction.UserId);
+            message.TransactionId.ShouldEqual(transaction.Context.TransactionId);
+            message.UserIdentifier.Id.ShouldEqual(transaction.Context.User.Id);
+
+            message.TransactionDate.ShouldEqual(transactionDate);
         }
     }
 }

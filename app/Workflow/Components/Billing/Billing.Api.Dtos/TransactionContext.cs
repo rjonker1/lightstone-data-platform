@@ -6,6 +6,10 @@ namespace Billing.Api.Dtos
 {
     public class TransactionContext
     {
+        public TransactionContext()
+        {
+        }
+
         public TransactionContext(Guid transactionId, UserIdentifier user, RequestIdentifier request)
         {
             TransactionId = transactionId;

@@ -2,6 +2,10 @@
 {
     public class SystemIdentifier
     {
+        public SystemIdentifier()
+        {
+        }
+
         public SystemIdentifier(string systemName)
         {
             SystemName = systemName;

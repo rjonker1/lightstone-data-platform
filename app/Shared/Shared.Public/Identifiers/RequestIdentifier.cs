@@ -4,6 +4,10 @@ namespace DataPlatform.Shared.Public.Identifiers
 {
     public class RequestIdentifier
     {
+        public RequestIdentifier()
+        {
+        }
+
         public RequestIdentifier(Guid id, SystemIdentifier system)
         {
             ID = id;

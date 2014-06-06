@@ -16,9 +16,9 @@ namespace Billing.Api.Modules
         public Transaction(IPublishMessages publisher)
             : base("/transaction")
         {
-            Get["/transaction"] = _ => string.Format("Transaction API.");
+            Get["/"] = _ => string.Format("Transaction API.");
 
-            Post["/transaction"] = o =>
+            Post["/"] = o =>
             {
                 log.InfoFormat("Received post to create billing transaction");
 
