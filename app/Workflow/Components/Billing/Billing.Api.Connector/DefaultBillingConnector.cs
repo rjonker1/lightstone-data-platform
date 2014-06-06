@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Security.Policy;
 using Billing.Api.Connector.Configuration;
 using Billing.Api.Dtos;
 using Common.Logging;

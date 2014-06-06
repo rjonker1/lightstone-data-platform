@@ -14,33 +14,36 @@ namespace Billing.Api.Modules
         private readonly ILog log = LogManager.GetCurrentClassLogger();
 
         public Transaction(IPublishMessages publisher)
+            : base("/transaction")
         {
             Get["/transaction"] = _ => string.Format("Transaction API.");
 
             Post["/transaction"] = o =>
-                                   {
-                                       log.InfoFormat("Received post to create billing transaction");
+            {
+                log.InfoFormat("Received post to create billing transaction");
 
-                                       var transaction = this.Bind<CreateTransaction>();
-                                       var message = new BillTransactionMessage();
+                var transaction = this.Bind<CreateTransaction>();
+                var message = new BillTransactionMessage(transaction.PackageIdentifier,
+                    transaction.Context.User,
+                    transaction.Context.Request,
+                    transaction.Context.TransactionDate,
+                    transaction.Context.TransactionId);
 
-                                       try
-                                       {
-                                           publisher.Publish(message);
-                                           log.DebugFormat("Message published to create billing transaction for transaction {0}", message.TransactionId);
-                                       }
-                                       catch (Exception e)
-                                       {
-                                           log.ErrorFormat("Failed to create a billing transaction");
-                                           log.ErrorFormat("The reason was: {0}", e.Message);
+                try
+                {
+                    publisher.Publish(message);
+                    log.DebugFormat("Message published to create billing transaction for transaction {0}", message.TransactionId);
+                }
+                catch (Exception e)
+                {
+                    log.ErrorFormat("Failed to create a billing transaction for transaction {0}", transaction.Context.TransactionId);
+                    log.ErrorFormat("The reason was: {0}", e.Message);
 
-                                           return CannedResponses.Failure;
-                                       }
+                    return CannedResponses.Failure;
+                }
 
-
-                                       return CannedResponses.OK;
-                                   };
+                return CannedResponses.OK;
+            };
         }
     }
-
 }
