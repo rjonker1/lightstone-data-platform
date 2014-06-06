@@ -36,14 +36,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregates\AggregateExternalSourceFailures.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourceInformation.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourcesConfiguration.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourcesHandled.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourcesRequestsSent.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourcesResponseFailures.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourcesResponseSuccesses.cs" />
-    <Compile Include="Aggregates\AggregateExternalSourcesResponseTransformations.cs" />
+    <Compile Include="Aggregates\ExternalSourceFailures.cs" />
+    <Compile Include="Aggregates\ExternalSourceInformation.cs" />
+    <Compile Include="Aggregates\ExternalSourcesConfiguration.cs" />
+    <Compile Include="Aggregates\ExternalSourcesHandled.cs" />
+    <Compile Include="Aggregates\ExternalSourcesRequestsSent.cs" />
+    <Compile Include="Aggregates\ExternalSourcesResponseFailures.cs" />
+    <Compile Include="Aggregates\ExternalSourcesResponseSuccesses.cs" />
+    <Compile Include="Aggregates\ExternalSourcesResponseTransformations.cs" />
     <Compile Include="Consumers\ExternalSourceConfigurationConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceFailedConsumer.cs" />
@@ -52,16 +52,6 @@
     <Compile Include="Consumers\ExternalSourceReceivedResponseConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceSentRequestsConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceTransformationConsumer.cs" />
-    <Compile Include="Events\ExternalSourceBaseEvent.cs" />
-    <Compile Include="Events\ExternalSourceConfigurationEvent.cs" />
-    <Compile Include="Events\ExternalSourceEvent.cs" />
-    <Compile Include="Events\ExternalSourceFailedEvent.cs" />
-    <Compile Include="Events\ExternalSourceHandledEvent.cs" />
-    <Compile Include="Events\ExternalSourceRequestSentEvent.cs" />
-    <Compile Include="Events\ExternalSourceResponseFailureEvent.cs" />
-    <Compile Include="Events\ExternalSourceResponseSuccessEvent.cs" />
-    <Compile Include="Events\ExternalSourceResponseTransformationEvent.cs" />
-    <Compile Include="Events\IEvent.cs" />
     <Compile Include="Messages\LaceEventMessage.cs" />
     <Compile Include="Messages\LaceExternalSourceConfigurationEventMessage.cs" />
     <Compile Include="Messages\LaceExternalSourceEventMessage.cs" />
@@ -96,6 +86,10 @@
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Events.Lace\Monitoring.Events.Lace.csproj">
+      <Project>{ded1a7bc-dab2-4f31-893c-59a819f1acb8}</Project>
+      <Name>Monitoring.Events.Lace</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
