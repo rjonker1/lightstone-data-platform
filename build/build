@@ -84,8 +84,8 @@ namespace :convention do
 	end
 
 	task :assembly_info do
-		@assembly_info = Dir.glob("../**/AssemblyInfo.cs")[0]
-		puts "Found an AssemblyInfo.cs file at '#{@assembly_info}'"
+		@assembly_info = Dir.glob("../**/AssemblyInfo.cs")
+		puts "Found #{@assembly_info.length} AssemblyInfo.cs file(s)"
 	end
 
 	task :spec_generation do
@@ -193,24 +193,28 @@ namespace :versioning do
 		if @assembly_info == nil
 			puts "Could not find an assemblyinfo.cs file"
 		else
-			puts "Updating #{@assembly_info} with the latest version"
-			File.open(@assembly_info, 'r') do |file|
-				file.readlines.each do | line |
-					if line.downcase.index("assemblycompany") != nil
-						@assembly_company_name = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
-					end
-					if line.downcase.index("assemblydescription") != nil
-						@assembly_description = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
+			puts "Updating AssemblyInfo.cs files with the latest version"
+
+			@assembly_info.each do | f |
+				File.open(f, 'r') do |file|
+					file.readlines.each do | line |
+						if line.downcase.index("assemblycompany") != nil
+							@assembly_company_name = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
+						end
+						if line.downcase.index("assemblydescription") != nil
+							@assembly_description = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
+						end
 					end
 				end
-			end
 
-			asm = AssemblyInfo.new
-			asm.version = get_version()
-			asm.output_file = @assembly_info
-			asm.company_name = @assembly_company_name
-			asm.description = @assembly_description
-			asm.execute
+				asm = AssemblyInfo.new
+				asm.version = get_version()
+				asm.output_file = f
+				asm.company_name = @assembly_company_name
+				asm.description = @assembly_description
+				asm.execute
+
+			end
 		end
 	end
 
@@ -221,7 +225,6 @@ Albacore.configure do |config|
 	config.msbuild.targets = [:clean, :build]
 	config.msbuild.properties = {
 									:configuration => :Release,
-									:documentationFile => "bin/iBroker.Api.XML",
 									:nowarn => 1591
 								}
 	config.msbuild.verbosity = "minimal"
@@ -422,9 +425,9 @@ end
 
 task :team_city => [
 	'environment:default',
-	'build:default',
-	'testing:unit',
-	'package:default'
+	'build:default'
+#	'testing:unit',
+#	'package:default'
 	] do
 end
 
@@ -439,9 +442,9 @@ task :acceptance_tests => ['testing:acceptance', 'testing:unit', 'testing:accept
 
 task :default => [
 	'environment:default',
-	'build:default',
-	'testing:unit',
-	'package:default'
+	'build:default'
+#	'testing:unit',
+#	'package:default'
 	] do
 end
 
