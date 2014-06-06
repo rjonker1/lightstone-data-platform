@@ -35,6 +35,7 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
@@ -45,12 +46,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="external_source_consumer_tests.cs" />
+    <Compile Include="external_source_events_read_tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
+      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
+      <Name>EventTracking.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence.Storage\EventTracking.Domain.Persistence.Storage.csproj">
+      <Project>{c3d27d4c-607d-4e47-bbe4-55682f873323}</Project>
+      <Name>EventTracking.Domain.Persistence.Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
+      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
+      <Name>EventTracking.Domain.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain\EventTracking.Domain.csproj">
+      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
+      <Name>EventTracking.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
@@ -58,6 +76,10 @@
     <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
       <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
       <Name>Monitoring.Consumer.Lace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Events.Lace\Monitoring.Events.Lace.csproj">
+      <Project>{ded1a7bc-dab2-4f31-893c-59a819f1acb8}</Project>
+      <Name>Monitoring.Events.Lace</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>

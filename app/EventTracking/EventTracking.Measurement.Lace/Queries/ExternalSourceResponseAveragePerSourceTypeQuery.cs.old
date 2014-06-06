@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using EventStore.ClientAPI;
+using EventTracking.Domain.Read.Core;
+using EventTracking.Measurement.Lace.Events;
+
+namespace EventTracking.Measurement.Lace.Queries
+{
+    public class ExternalSourceResponseAveragePerSourceTypeQuery
+    {
+        private readonly IEventStoreConnection _connection;
+
+        public ExternalSourceResponseAveragePerSourceTypeQuery(IEventStoreConnection connection)
+        {
+            if(connection == null) throw new ArgumentNullException("connection");
+
+            _connection = connection;
+        }
+
+        public IEnumerable<SourceResponseAveragePerSourceType> GetValues(string sourceName)
+        {
+            var projectionResultStream = ""; // + sourceName;
+
+            return _connection.ReadStreamEventsBackward<MeasurementResponseTime>(projectionResultStream)
+                .Select(s => new SourceResponseAveragePerSourceType(s.Difference, s.Source));
+
+            //return _connection.ReadStreamEventsBackward<SourceResponseAveragePerSourceType>(projectionResultStream)
+            //    .Select(e => new MeasurementReadAveragePerDay(e.Timeslot, e.Average))
+            //    .ToList();   
+            //.Select(s => new MeasurementResponseTime(
+            //{
+
+            //}).ToList();
+
+            return null;   
+        }
+    }
+}

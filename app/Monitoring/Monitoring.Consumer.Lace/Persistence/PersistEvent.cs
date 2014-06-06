@@ -8,7 +8,7 @@ namespace Monitoring.Consumer.Lace.Persistence
     {
         public void Save(IAggregate aggregate)
         {
-            using (var repository = new RepositoryFactory())
+            using (var repository = new EventStoreConnectionFactory())
             {
                 repository.Instance().Repository.Save(aggregate, Guid.NewGuid(), d => { });
             }

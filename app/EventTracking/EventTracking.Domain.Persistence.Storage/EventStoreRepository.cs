@@ -27,10 +27,17 @@ namespace EventTracking.Domain.Persistence.Storage
             SerializerSettings = new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.None};
         }
 
+        //public EventStoreRepository(IEventStoreConnection eventStoreConnection)
+        //    : this(
+        //        eventStoreConnection,
+        //        (t, g) => string.Format("{0}-{1}", char.ToLower(t.Name[0]) + t.Name.Substring(1), g.ToString("N")))
+        //{
+        //}
+
         public EventStoreRepository(IEventStoreConnection eventStoreConnection)
             : this(
                 eventStoreConnection,
-                (t, g) => string.Format("{0}-{1}", char.ToLower(t.Name[0]) + t.Name.Substring(1), g.ToString("N")))
+                (t, g) => string.Format("{0}", char.ToLower(t.Name[0]) + t.Name.Substring(1)))
         {
         }
 
@@ -89,6 +96,54 @@ namespace EventTracking.Domain.Persistence.Storage
         }
 
 
+
+        public TEvent[] GetStreams<TEvent>(string streamName, int pageSize) where TEvent : class
+        {
+            var result = new List<ResolvedEvent>();
+            var coursor = StreamPosition.Start;
+            StreamEventsSlice events = null;
+            pageSize = pageSize == 0 ? 500 : pageSize;
+            do
+            {
+                events = _eventStoreConnection.ReadStreamEventsForward(streamName, coursor, pageSize, false);
+                result.AddRange(events.Events);
+                coursor = events.NextEventNumber;
+
+            } while (!events.IsEndOfStream);
+
+            var aggreates = new List<TEvent>();
+
+            foreach (var resolvedEvent in result)
+            {
+                //var aggregate = ConstructAggregate<TEvent>();
+                //aggregate.ApplyEvent(DeserializeEvent(resolvedEvent.OriginalEvent.Metadata,
+                //    resolvedEvent.OriginalEvent.Data));
+
+                var eventDetails = (TEvent)DeserializeEvent(resolvedEvent.OriginalEvent.Metadata, resolvedEvent.OriginalEvent.Data);
+
+                aggreates.Add(eventDetails);
+            }
+
+            return aggreates.ToArray();
+        }
+
+        //public IEnumerable<ResolvedEvent> ReadAllEventsInStream(string streamName, IEventStoreConnection connection, int pageSize = 500)
+        //{
+        //    var result = new List<ResolvedEvent>();
+        //    var coursor = StreamPosition.Start;
+        //    StreamEventsSlice events = null;
+        //    do
+        //    {
+        //        events = connection.ReadStreamEventsForward(streamName, coursor, pageSize, false);
+        //        result.AddRange(events.Events);
+        //        coursor = events.NextEventNumber;
+
+        //    } while (events != null && !events.IsEndOfStream);
+
+        //    return result;
+        //}
+
+
         private static TAggregate ConstructAggregate<TAggregate>()
         {
             return (TAggregate)Activator.CreateInstance(typeof(TAggregate), true);
@@ -98,6 +153,11 @@ namespace EventTracking.Domain.Persistence.Storage
         {
             var eventClrTypeName = JObject.Parse(Encoding.UTF8.GetString(metadata)).Property(EventClrTypeHeader).Value;
             return JsonConvert.DeserializeObject(Encoding.UTF8.GetString(data), Type.GetType((string)eventClrTypeName));
+        }
+
+        private static object DeserializeEventData(byte[] data)
+        {
+            return JsonConvert.DeserializeObject(Encoding.UTF8.GetString(data));
         }
 
         public void Save(IAggregate aggregate, Guid commitId, Action<IDictionary<string, object>> updateHeaders)
@@ -177,5 +237,8 @@ namespace EventTracking.Domain.Persistence.Storage
 
             _eventStoreConnection.Close();
         }
+
+
+        
     }
 }
