@@ -1,0 +1,1 @@
+Tools\FluentMigrator\Migrate.exe /connectionString "workflow/billing/database" /provider sqlserver2012 /assembly Workflow.Billing.Database.dll /verbose true /task rollback /step 1
