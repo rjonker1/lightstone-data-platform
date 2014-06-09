@@ -1,9 +1,9 @@
 ﻿using FluentMigrator;
 
-namespace Workflow.Billing.Database
+namespace Workflow.Billing.Database.Migrations
 {
     [Migration(201406061645)]
-    public class _201406061645_Create_Transaction_Table : Migration
+    public class Create_Transaction_Table : Migration
     {
         public override void Up()
         {
