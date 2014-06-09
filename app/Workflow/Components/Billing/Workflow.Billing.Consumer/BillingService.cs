@@ -1,9 +1,7 @@
-﻿using Common.Logging;
+﻿using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Common.Logging;
 using EasyNetQ;
-using Workflow.Billing.Consumers;
-using Workflow.Billing.Messages;
-using Workflow.BuildingBlocks;
-using Workflow.BuildingBlocks.Consumers;
 
 namespace Workflow.Billing.Consumer
 {
@@ -16,10 +14,11 @@ namespace Workflow.Billing.Consumer
         {
             log.DebugFormat("Started billing service");
 
-            var consumers = new ConsumerRegistration()
-                .AddConsumer<BillTransactionConsumer, BillTransactionMessage>(() => new BillTransactionConsumer());
+            var container = new WindsorContainer().Install(FromAssembly.This());
+            bus = container.Resolve<IBus>();
 
-            bus = new BusFactory().CreateConsumerBus("workflow/billing/queue", consumers);
+
+
 
             log.DebugFormat("Billing service started");
         }
