@@ -1,4 +1,6 @@
-﻿using EventTracking.Domain.Read.Core;
+﻿using System.Net.NetworkInformation;
+using EventTracking.Domain.Read.Core;
+using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
 
 namespace EventTracking.Measurement.Lace.Measurements
@@ -15,14 +17,17 @@ namespace EventTracking.Measurement.Lace.Measurements
         //private readonly DeviceSimulator _deviceSimulator;
         private readonly IConsole _console;
 
+        private readonly SourceRequestDetailsProjection _sourceRequestsProjection;
+
         public RequestFromSourceMeasurements(IProjectionContext context, SourceRequestType projection,
-            EventReader reader, IConsole console, SourceRequestQuery query)
+            EventReader reader, IConsole console, SourceRequestQuery query, SourceRequestDetailsProjection sourceRequestsProjection)
         {
             _projectionContext = context;
             _projection = projection;
             _eventReader = reader;
             _console = console;
             _query = query;
+            _sourceRequestsProjection = sourceRequestsProjection;
         }
 
 
@@ -55,15 +60,14 @@ namespace EventTracking.Measurement.Lace.Measurements
             _projectionContext.EnableProjection("$by_category");
             _projectionContext.EnableProjection("$stream_by_category");
 
-           // _projection.Ensure(); //TODO: Implement check to ensure prediction exists; first create the projection?
+            _sourceRequestsProjection.Ensure(); //TODO: Implement check to ensure prediction exists; first create the projection?
         }
 
         private void ShowRequestDetails()
         {
             _console.Important("Get Request Details");
 
-            ShowRequestDetails("externalSourcesResponseSuccesses");
-           // ShowRequestDetails("category-Game");
+            ShowRequestDetails("RequestsSentToSources");
             //add other projections / streams
         }
 

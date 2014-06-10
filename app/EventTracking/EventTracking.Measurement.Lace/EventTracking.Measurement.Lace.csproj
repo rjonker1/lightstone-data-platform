@@ -46,6 +46,7 @@
     <Compile Include="Events\KnownEventsProvider.cs" />
     <Compile Include="Measurements\RequestFromSourceMeasurements.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Projections\ProjectionSources.cs" />
     <Compile Include="Projections\SourceRequestDetailsProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\SourceRequestQuery.cs" />
@@ -57,7 +58,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Projections\Sources\References\1Prelude.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projections\Sources\References\Projections.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projections\Sources\RequestsSentToSources.js" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring.Events.Lace\Monitoring.Events.Lace.csproj">
       <Project>{ded1a7bc-dab2-4f31-893c-59a819f1acb8}</Project>
@@ -66,10 +75,6 @@
     <ProjectReference Include="..\EventTracking.Domain.Read\EventTracking.Domain.Read.csproj">
       <Project>{0fa5d3ab-a64a-4425-8a0f-15500a799187}</Project>
       <Name>EventTracking.Domain.Read</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Projections\EventTracking.Projections.csproj">
-      <Project>{dc6716c0-f410-4909-a385-cf3e3c874845}</Project>
-      <Name>EventTracking.Projections</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

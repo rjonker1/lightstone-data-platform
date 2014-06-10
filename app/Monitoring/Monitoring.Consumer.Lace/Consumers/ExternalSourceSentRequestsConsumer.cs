@@ -22,7 +22,8 @@ namespace Monitoring.Consumer.Lace.Consumers
                 .Save(new ExternalSourcesRequestsSent(message.Id, message.AggregateId,
                     message.Source,
                     message.Message,
-                    message.EventDate));
+                    message.EventDate,
+                    message.Payload));
 
             HasBeenConsumed = true;
         }

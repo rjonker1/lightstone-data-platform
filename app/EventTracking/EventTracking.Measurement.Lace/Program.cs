@@ -3,6 +3,7 @@ using EventStore.ClientAPI;
 using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Measurements;
+using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
 
 namespace EventTracking.Measurement.Lace
@@ -24,7 +25,7 @@ namespace EventTracking.Measurement.Lace
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                console, new SourceRequestQuery(_connection));
+                console, new SourceRequestQuery(_connection), new SourceRequestDetailsProjection(projectionContext));
 
             measurements.Run();
 

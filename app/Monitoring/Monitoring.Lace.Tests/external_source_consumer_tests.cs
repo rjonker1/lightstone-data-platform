@@ -79,7 +79,7 @@ namespace Monitoring.Lace.Tests
         public void monitoring_lace_external_source_response_received_consumer_consumed_must_be_true_test()
         {
             var message = new LaceExternalSourceResponseEventMessage(Guid.NewGuid(), FromSource.IvidSource,
-                "Monitoring Unit Test for external source response received event");
+                "Monitoring Unit Test for external source response received event",string.Empty);
 
             var consumer = new ExternalSourceReceivedResponseConsumer();
             consumer.Consume(message);
@@ -90,7 +90,7 @@ namespace Monitoring.Lace.Tests
         public void monitoring_lace_external_source_request_sent_consumer_consumed_must_be_true_test()
         {
             var message = new LaceExternalSourceRequestEventMessage(Guid.NewGuid(), FromSource.IvidSource,
-                "Monitoring Unit Test for external source request sent event");
+                "Monitoring Unit Test for external source request sent event",string.Empty);
 
             var consumer = new ExternalSourceSentRequestsConsumer();
             consumer.Consume(message);

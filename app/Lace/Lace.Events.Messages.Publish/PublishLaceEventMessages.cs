@@ -65,8 +65,8 @@ namespace Lace.Events.Messages.Publish
 
         public void PublishServiceRequestMessage(Guid aggerateId, FromSource source, string request)
         {
-            var msg = new LaceExternalSourceRequestEventMessage(aggerateId, source,
-                string.Format("Request Sent to Web Service: {0}", request));
+            var msg = new LaceExternalSourceRequestEventMessage(aggerateId, source, "Request Sent to Web Service",
+                request);
             PublishMessage(msg);
 
         }
@@ -74,7 +74,7 @@ namespace Lace.Events.Messages.Publish
         public void PublishServiceResponseMessage(Guid aggerateId, FromSource source, string response)
         {
             var msg = new LaceExternalSourceResponseEventMessage(aggerateId, source,
-                string.Format("Response Received from Web Service: {0}", response));
+                "Response Received from Web Service", response);
             PublishMessage(msg);
         }
 
@@ -110,7 +110,7 @@ namespace Lace.Events.Messages.Publish
                 "Transforming Response from Source Failed");
             PublishMessage(msg);
         }
-        
+
 
         public void PublishMessage<T>(T message) where T : class, IPublishableMessage
         {
