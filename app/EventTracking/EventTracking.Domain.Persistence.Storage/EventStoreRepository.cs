@@ -27,19 +27,19 @@ namespace EventTracking.Domain.Persistence.Storage
             SerializerSettings = new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.None};
         }
 
-        //public EventStoreRepository(IEventStoreConnection eventStoreConnection)
-        //    : this(
-        //        eventStoreConnection,
-        //        (t, g) => string.Format("{0}-{1}", char.ToLower(t.Name[0]) + t.Name.Substring(1), g.ToString("N")))
-        //{
-        //}
-
         public EventStoreRepository(IEventStoreConnection eventStoreConnection)
             : this(
                 eventStoreConnection,
-                (t, g) => string.Format("{0}", char.ToLower(t.Name[0]) + t.Name.Substring(1)))
+                (t, g) => string.Format("{0}-{1}", char.ToLower(t.Name[0]) + t.Name.Substring(1), g.ToString("N")))
         {
         }
+
+        //public EventStoreRepository(IEventStoreConnection eventStoreConnection)
+        //    : this(
+        //        eventStoreConnection,
+        //        (t, g) => string.Format("{0}", char.ToLower(t.Name[0]) + t.Name.Substring(1)))
+        //{
+        //}
 
         public EventStoreRepository(IEventStoreConnection eventStoreConnection,
             Func<Type, Guid, string> aggregateIdToStreamName)

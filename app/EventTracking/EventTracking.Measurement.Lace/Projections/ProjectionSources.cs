@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace EventTracking.Projections.Sources
+namespace EventTracking.Measurement.Lace.Projections
 {
     public static class ProjectionSources
     {

@@ -1,5 +1,4 @@
 ﻿using EventTracking.Domain.Read.Core;
-using EventTracking.Projections.Sources;
 
 namespace EventTracking.Measurement.Lace.Projections
 {
@@ -14,8 +13,8 @@ namespace EventTracking.Measurement.Lace.Projections
 
         public void Ensure()
         {
-            var projectionSource = ProjectionSources.Read("CompiledRequestSourcesInformationPerRequest");
-            _projectionContext.EnsureProjection("CompiledRequestSourcesInformationPerRequest", projectionSource);
+            var projectionSource = ProjectionSources.Read("RequestsSentToSources");
+            _projectionContext.EnsureProjection("RequestsSentToSources", projectionSource);
         }
 
     }
