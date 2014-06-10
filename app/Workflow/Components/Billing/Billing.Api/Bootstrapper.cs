@@ -27,32 +27,28 @@ namespace Billing.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            pipelines.EnableStatelessAuthentication();
-            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
-            {
-                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
-                {
-                    log.ErrorFormat("Error occured on route {0}", ctx.ResolvedRoute.ToString());
-                    log.ErrorFormat("The error was {0}", e);
-                }
-
-                return null;
-            });
+//            pipelines.EnableStatelessAuthentication();
+//            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
+//            {
+////                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
+////                {
+////                    log.ErrorFormat("Error occured on route {0}", ctx.ResolvedRoute.ToString());
+////                    log.ErrorFormat("The error was {0}", e);
+////                }
+//
+//                return null;
+//            });
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             base.ConfigureApplicationContainer(container);
 
-            bus = new BusFactory().CreateBus("workflow/billing/queue");
-            publisher = new Publisher(null);
+            bus = BusFactory.CreateBus("workflow/billing/queue");
+            publisher = new Publisher(bus);
 
             container.Register<IPublishMessages>(publisher);
         }
 
-    }
-
-    public class LoggingPipelet
-    {
     }
 }

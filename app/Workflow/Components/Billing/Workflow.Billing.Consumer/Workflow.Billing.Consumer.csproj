@@ -66,6 +66,7 @@
     <Compile Include="IBillingService.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
+    <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -35,6 +35,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateTransaction.cs" />
+    <Compile Include="GetTransactionRequest.cs" />
+    <Compile Include="GetTransactionResponse.cs" />
     <Compile Include="PingRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionContext.cs" />

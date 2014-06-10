@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Modules\Foo.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

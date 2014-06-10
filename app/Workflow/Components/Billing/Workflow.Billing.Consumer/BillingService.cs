@@ -17,9 +17,6 @@ namespace Workflow.Billing.Consumer
             var container = new WindsorContainer().Install(FromAssembly.This());
             bus = container.Resolve<IBus>();
 
-
-
-
             log.DebugFormat("Billing service started");
         }
 

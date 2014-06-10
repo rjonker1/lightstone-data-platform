@@ -36,6 +36,37 @@ namespace Billing.Api.Connector
             return response;
         }
 
+        public BillingConnectorResponse CreateTransaction(CreateTransaction transaction)
+        {
+            log.InfoFormat("Creating a transaction via the billing API at {0} with segment {1}", configuration.Url,
+                urlBuilder.CreateTransactionSegment());
+
+            var postRequest = new RestRequest(urlBuilder.CreateTransactionSegment())
+            {
+                RequestFormat = DataFormat.Json,
+                
+            };
+            postRequest.AddHeader("Content-Type", "application/json");
+            postRequest.AddBody(transaction);
+
+            var response = PostApi(urlBuilder.CreateTransactionSegment(), postRequest);
+
+            log.InfoFormat("Creating a transaction via the billing API at {0} completed. The response was {1}", configuration.Url, response);
+
+            return response;
+        }
+
+        public GetTransactionResponse GetTransaction(GetTransactionRequest request)
+        {
+            log.InfoFormat("Getting a transaction from the billing API at {0} with segment {1}", configuration.Url, urlBuilder.GetTransactionSegment());
+
+            var response = PostApi(urlBuilder.GetTransactionSegment(), new RestRequest(urlBuilder.GetTransactionSegment()));
+
+            log.InfoFormat("Get of the transaction at {0} completed. The response was {1}", configuration.Url, response);
+
+            return null;
+        }
+
         private BillingConnectorResponse PostApi(string segment, IRestRequest request)
         {
             try

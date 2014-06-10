@@ -16,7 +16,7 @@ namespace Workflow.Billing.Consumer.Installers
             log.InfoFormat("Installing bus");
 
             container.Register(
-                Component.For<IBus>().UsingFactoryMethod(() => BusFactory.CreateBus("workflow/billing/queue", container)).LifestyleSingleton()
+                Component.For<IBus>().UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container)).LifestyleSingleton()
                 );
         }
     }

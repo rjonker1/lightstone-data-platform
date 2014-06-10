@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Castle.Windsor;
+using Common.Logging;
 using EasyNetQ.AutoSubscribe;
 
 namespace Workflow.BuildingBlocks.Dispatcher
@@ -7,6 +8,7 @@ namespace Workflow.BuildingBlocks.Dispatcher
     public class WindsorMessageDispatcher : IAutoSubscriberMessageDispatcher
     {
         private readonly IWindsorContainer container;
+        private readonly ILog log = LogManager.GetCurrentClassLogger();
 
         public WindsorMessageDispatcher(IWindsorContainer container)
         {
@@ -17,9 +19,12 @@ namespace Workflow.BuildingBlocks.Dispatcher
             where TMessage : class
             where TConsumer : IConsume<TMessage>
         {
+            log.InfoFormat("Received message of type {0}", message.GetType());
+
             var consumer = container.Resolve<TConsumer>();
             try
             {
+                log.InfoFormat("Consuming message of type {0}", message.GetType());
                 consumer.Consume(message);
             }
             finally
@@ -32,6 +37,7 @@ namespace Workflow.BuildingBlocks.Dispatcher
             where TMessage : class
             where TConsumer : IConsumeAsync<TMessage>
         {
+            log.InfoFormat("Received message of type {0} as async", message.GetType());
             var consumer = container.Resolve<TConsumer>();
             return consumer.Consume(message).ContinueWith(t => container.Release(consumer));
         }
