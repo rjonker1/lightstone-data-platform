@@ -28,9 +28,7 @@ namespace EventTracking.Domain.Read.Core
 
         private IEnumerable<Projection> GetCurrentProjections()
         {
-            //  var all = _projections.ListAll(EventStoreCredentials.Default);
-
-            var all = _projections.ListAll(new UserCredentials("admin", "123456"));
+            var all = _projections.ListAll(EventStoreCredentials.Default);
 
             var json = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(all);
             var projections = new List<Projection>();
@@ -51,8 +49,8 @@ namespace EventTracking.Domain.Read.Core
         {
             if (_currentProjections.Any(p => p.Name == name && p.Status != "Stopped")) return;
 
-            //_projections.Enable(name, EventStoreCredentials.Default);
-            _projections.Enable(name, new UserCredentials("admin", "123456")); ;
+            _projections.Enable(name, EventStoreCredentials.Default);
+            
         }
 
         public void EnsureProjection(string name, string source)
@@ -71,20 +69,19 @@ namespace EventTracking.Domain.Read.Core
         {
             _console.Important("Add projection: " + name);
 
-            //_projections.CreateContinuous(name, expectedQuery, EventStoreCredentials.Default);
-            _projections.CreateContinuous(name, expectedQuery, new UserCredentials("admin", "123456"));
+            _projections.CreateContinuous(name, expectedQuery, EventStoreCredentials.Default);
+            
         }
 
         private void UpdateProjection(string name, string expectedQuery)
         {
             _console.Important("Update existing projection: " + name);
 
-            //var currentQuery = _projections.GetQuery(name, EventStoreCredentials.Default);
-            var currentQuery = _projections.GetQuery(name, new UserCredentials("admin", "123456"));
+            var currentQuery = _projections.GetQuery(name, EventStoreCredentials.Default);
 
             if (expectedQuery != currentQuery)
             {
-                _projections.UpdateQuery(name, expectedQuery, new UserCredentials("admin", "123456"));
+                _projections.UpdateQuery(name, expectedQuery, EventStoreCredentials.Default);
             }
         }
 

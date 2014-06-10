@@ -24,7 +24,7 @@ namespace EventTracking.Domain.Read.Core
 
         private static int? GetLastEventNumber(this IEventStoreConnection connection, string streamName)
         {
-            var lastEvent = connection.ReadEvent(streamName, -1, false, new UserCredentials("admin", "123456"));
+            var lastEvent = connection.ReadEvent(streamName, -1, false, EventStoreCredentials.Default);
             if (lastEvent == null || lastEvent.Event == null) return null;
 
             return lastEvent.Event.Value.OriginalEventNumber;
@@ -54,7 +54,7 @@ namespace EventTracking.Domain.Read.Core
                 streamName,
                 lastEventNumber,
                 PageSize, false,
-                new UserCredentials("admin", "123456"));
+                EventStoreCredentials.Default);
         }
 
     }

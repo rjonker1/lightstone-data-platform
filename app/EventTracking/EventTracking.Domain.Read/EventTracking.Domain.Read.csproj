@@ -47,6 +47,7 @@
     <Compile Include="Core\Console.cs" />
     <Compile Include="Core\EventReader.cs" />
     <Compile Include="Core\EventStoreConnectionExtensions.cs" />
+    <Compile Include="Core\EventStoreCredentials.cs" />
     <Compile Include="Core\IConsole.cs" />
     <Compile Include="Core\IKnownEventsProvider.cs" />
     <Compile Include="Core\IpEndPointFactory.cs" />
