@@ -1,83 +1,60 @@
 ﻿using DataPlatform.Shared.Public.Entities;
-using Lace.Request;
 
 namespace Lace.Tests.Data
 {
-    public class RegistrationField : IField
+    public class RegistrationFieldSource : IDataSource
     {
-        public int SourceId
+        public RegistrationFieldSource()
         {
-            get
-            {
-                return 1;
-            }
+            Id = 1;
+            Name = "Ivid";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "Registration";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class VinField : IField
+    public class VinFieldSource : IDataSource
     {
 
-        public int SourceId
+        public VinFieldSource()
         {
-            get
-            {
-                return 1;
-            }
+            Id = 1;
+            Name = "Ivid";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "Vin";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 
-    public class EngineField : IField
+    public class EngineFieldSource : IDataSource
     {
-
-        public int SourceId
+        public EngineFieldSource()
         {
-            get
-            {
-                return 1;
-            }
+            Id = 1;
+            Name = "Ivid";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "Engine";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+     
     }
 
-    public class MakeDescription : IField
+    public class MakeDescriptionFiledSource : IDataSource
     {
-        public int SourceId
+
+        public MakeDescriptionFiledSource()
         {
-            get
-            {
-                return 1;
-            }
+            Id = 1;
+            Name = "Ivid";
         }
 
-        public string Name
-        {
-            get
-            {
-                return "MakeDescription";
-            }
-        }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
     }
 }

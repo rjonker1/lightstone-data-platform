@@ -1,14 +1,14 @@
 ﻿using System;
-using Lace.Shared.Enums;
+using Monitoring.Sources;
 
 namespace Lace.Events
 {
     public interface ILaceTransformEvent
     {
-        void PublishTransformationStartMessage(Guid aggerateId, EventSource source);
+        void PublishTransformationStartMessage(Guid aggerateId, FromSource source);
 
-        void PublishTransformationEndMessage(Guid aggerateId, EventSource source);
+        void PublishTransformationEndMessage(Guid aggerateId, FromSource source);
 
-        void PublishTransformationFailedMessage(Guid aggerateId, EventSource source);
+        void PublishTransformationFailedMessage(Guid aggerateId, FromSource source);
     }
 }

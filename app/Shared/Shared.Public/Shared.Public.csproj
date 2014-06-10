@@ -48,6 +48,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\IExpirable.cs" />
     <Compile Include="Entities\IField.cs" />
+    <Compile Include="Entities\IExpire.cs" />
     <Compile Include="Entities\IGroup.cs" />
     <Compile Include="Entities\IGroupPackage.cs" />
     <Compile Include="Entities\IGroupPermission.cs" />
@@ -63,6 +64,13 @@
     <Compile Include="Entities\IWorkflow.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Helpers\SystemTime.cs" />
+    <Compile Include="Identifiers\PackageIdentifier.cs" />
+    <Compile Include="Identifiers\RequestIdentifier.cs" />
+    <Compile Include="Identifiers\ServerIdentifier.cs" />
+    <Compile Include="Identifiers\SystemIdentifier.cs" />
+    <Compile Include="Identifiers\UserIdentifier.cs" />
+    <Compile Include="Identifiers\VersionIdentifier.cs" />
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />

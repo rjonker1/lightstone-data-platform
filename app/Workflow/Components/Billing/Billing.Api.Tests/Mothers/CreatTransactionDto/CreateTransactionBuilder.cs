@@ -1,34 +1,34 @@
-﻿using System;
-using Billing.Api.Dtos;
+﻿using Billing.Api.Dtos;
+using DataPlatform.Shared.Public.Identifiers;
 
 namespace Billing.Api.Tests.Mothers.CreatTransactionDto
 {
     public class CreateTransactionBuilder
     {
-        private Guid userId;
-        private Guid transactionId;
+        private TransactionContext context;
+        private PackageIdentifier package;
 
-        public CreateTransactionBuilder WithUserId(Guid userId)
+        public CreateTransactionBuilder WithPackageIdentifier(PackageIdentifier package)
         {
-            this.userId = userId;
+            this.package = package;
             return this;
         }
 
-        public CreateTransactionBuilder WithTransactionId(Guid transactionId)
+        public CreateTransactionBuilder WithTransactionContext(TransactionContext context)
         {
-            this.transactionId = transactionId;
+            this.context = context;
             return this;
         }
 
         public CreateTransaction Build()
         {
-            return new CreateTransaction(userId, transactionId);
+            return new CreateTransaction(package, context);
         }
 
         public CreateTransaction Build(IDefineCreateTransactionData data)
         {
-            return WithUserId(data.UserId)
-                .WithTransactionId(data.TransactionId)
+            return WithTransactionContext(data.Context)
+                .WithPackageIdentifier(data.Package)
                 .Build();
         }
     }

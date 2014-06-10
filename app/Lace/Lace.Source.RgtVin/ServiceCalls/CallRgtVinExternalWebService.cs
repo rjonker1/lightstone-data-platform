@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Data;
 using Common.Logging;
 using Lace.Events;
 using Lace.Functions.Json;
 using Lace.Models.RgtVin;
 using Lace.Request;
 using Lace.Response;
-using Lace.Shared.Enums;
 using Lace.Source.RgtVin.ServiceConfig;
 using Lace.Source.RgtVin.Transform;
+using Monitoring.Sources;
 
 namespace Lace.Source.RgtVin.ServiceCalls
 {
     public class CallRgtVinExternalWebService : ICallTheExternalWebService
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private string _rgtVinResponse;
+        private DataSet _rgtVinResponse;
         private readonly ILaceRequest _request;
-        private const EventSource Source = EventSource.RgtVinSource;
+        private const FromSource Source = FromSource.RgtVinSource;
 
         public CallRgtVinExternalWebService(ILaceRequest request)
         {
@@ -27,34 +28,34 @@ namespace Lace.Source.RgtVin.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(_request.Token, Source);
+                laceEvent.PublishStartServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 var rgtVinWebService = new ConfigureRgtVinWebService();
                 var rgtVinRequest = new ConfigureRgtVinRequestMessage(_request)
                     .RgtVinRequest;
 
-                laceEvent.PublishEndServiceConfigurationMessage(_request.Token, Source);
+                laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
-                laceEvent.PublishServiceRequestMessage(_request.Token, Source,
+                laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
                        JsonFunctions.JsonFunction.ObjectToJson(rgtVinRequest));
 
 
-                laceEvent.PublishStartServiceCallMessage(_request.Token, Source);
+                laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
                 _rgtVinResponse = rgtVinWebService
                     .RgtVinServiceProxy
-                    .VinCheckAlt(rgtVinRequest.Vin, rgtVinRequest.SecurityCode);
+                    .VinCheckSpecsFiltered(rgtVinRequest.Vin, string.Empty, rgtVinRequest.SecurityCode);
 
-                laceEvent.PublishEndServiceCallMessage(_request.Token, Source);
+                laceEvent.PublishEndServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
 
                 rgtVinWebService.CloseWebService();
 
-                if (string.IsNullOrEmpty(_rgtVinResponse))
-                    laceEvent.PublishNoResponseFromServiceMessage(_request.Token, Source);
+                if (_rgtVinResponse == null)
+                    laceEvent.PublishNoResponseFromServiceMessage(_request.RequestAggregation.AggregateId, Source);
 
-                laceEvent.PublishServiceResponseMessage(_request.Token, Source,
-                        JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse ?? string.Empty));
+                laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
+                        JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse ?? new DataSet()));
 
                 TransformWebResponse(response);
 
@@ -62,7 +63,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Vin Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(_request.Token, Source);
+                laceEvent.PublishFailedServiceCallMessaage(_request.RequestAggregation.AggregateId, Source);
                 RgtVinResponseFailed(response);
             }
         }

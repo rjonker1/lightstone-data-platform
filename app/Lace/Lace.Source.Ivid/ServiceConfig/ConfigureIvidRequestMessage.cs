@@ -12,15 +12,15 @@ namespace Lace.Source.Ivid.ServiceConfig
             {
                 return new HpiStandardQueryRequest()
                 {
-                    ApplicantName = _request.UserName ?? string.Empty,
-                    EngineNo = _request.EngineNo ?? string.Empty,
+                    ApplicantName = _request.User.UserName ?? string.Empty,
+                    EngineNo = _request.Vehicle.EngineNo ?? string.Empty,
                     HpiRequestReference = Guid.NewGuid().ToString().Split('-')[0],
-                    Label = _request.Product ?? string.Empty,
-                    LicenceNo = _request.LicenceNo ?? string.Empty,
-                    Make = _request.Make ?? string.Empty,
-                    ReasonForApplication = _request.ReasonForApplication ?? string.Empty,
-                    RegisterNo = _request.RegisterNo ?? string.Empty,
-                    VinOrChassis = _request.VinOrChassis ?? string.Empty
+                    Label = _request.Context.Product ?? string.Empty,
+                    LicenceNo = _request.Vehicle.LicenceNo ?? string.Empty,
+                    Make = _request.Vehicle.Make ?? string.Empty,
+                    ReasonForApplication = _request.Context.ReasonForApplication ?? string.Empty,
+                    RegisterNo = _request.Vehicle.RegisterNo ?? string.Empty,
+                    VinOrChassis = _request.Vehicle.VinOrChassis ?? string.Empty
                 };
             }
         }

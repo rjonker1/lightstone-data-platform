@@ -1,28 +1,43 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
+using Lace.Tests.Data.PakageData;
+using Lace.Tests.Data.RequestData;
 
 namespace Lace.Source.Repository.Tests.ProductTests.Data
 {
     public class MockLaceRequest : ILaceRequest
     {
 
-        public Guid UserId
+        public IPackage Package
+        {
+            get { return LicensePlateNumberSourcePackage.LicenseNumberPackage(); }
+        }
+
+
+        public ILaceRequestUserInformation User
         {
             get
             {
-                return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
+                return new RequestUserInformation();
             }
         }
 
-        public Guid Token
+        public ILaceRequestContext Context
         {
             get
             {
-                return Guid.NewGuid();
+             return new ContextInformation();
             }
         }
 
+        public ILaceRequestVehicleInformation Vehicle
+        {
+            get
+            {
+                return new RequestVehicleInformation();
+            }
+        }
 
         public DateTime RequestDate
         {
@@ -31,37 +46,8 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
                 return DateTime.Now;
             }
         }
-        
 
-        public string UserName
-        {
-            get { return string.Empty; }
-        }
-
-        public string EngineNo
-        {
-            get { return string.Empty; }
-        }
-
-        public string VinOrChassis
-        {
-            get { return string.Empty; }
-        }
-
-        public string Make
-        {
-            get { return string.Empty; }
-        }
-
-        public string RegisterNo
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
-        public string LicenceNo
+        public string SearchTerm
         {
             get
             {
@@ -69,77 +55,13 @@ namespace Lace.Source.Repository.Tests.ProductTests.Data
             }
         }
 
-        public string Product
+
+        public IProvideRequestAggregation RequestAggregation
         {
             get
             {
-                return "XMC167GP";
+                return new AggregationInformation();
             }
         }
-
-        public string ReasonForApplication
-        {
-            get { return string.Empty; }
-        }
-
-
-        public string UserEmail
-        {
-            get
-            {
-                return "pennyl@lightstone.co.za";
-            }
-        }
-
-        public string UserPhone
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public string Vin
-        {
-            get
-            {
-                return "SB1KV58E40F039277";
-            }
-        }
-
-
-        public string UserFirstName
-        {
-            get
-            {
-                return "Penny";
-            }
-        }
-
-        public string UserLastName
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-
-        public string SecurityCode
-        {
-            get
-            {
-                return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
-            }
-        }
-
-        public IField[] Fields
-        {
-            get
-            {
-              return new IField[0];
-            }
-        }
-
     }
 }

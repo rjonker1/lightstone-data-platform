@@ -21,12 +21,23 @@ namespace Billing.Api
 
         private IBus bus;
         private Publisher publisher;
+        private static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger<Bootstrapper>();
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
 
             pipelines.EnableStatelessAuthentication();
+            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
+            {
+                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    log.ErrorFormat("Error occured on route {0}", ctx.ResolvedRoute.ToString());
+                    log.ErrorFormat("The error was {0}", e);
+                }
+
+                return null;
+            });
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
@@ -39,5 +50,9 @@ namespace Billing.Api
             container.Register<IPublishMessages>(publisher);
         }
 
+    }
+
+    public class LoggingPipelet
+    {
     }
 }

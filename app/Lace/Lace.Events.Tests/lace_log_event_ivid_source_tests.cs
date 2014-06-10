@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Monitoring.Sources;
+#pragma warning disable 169
+// ReSharper disable InconsistentNaming
+using System;
+using System.Threading;
 using EasyNetQ;
-using Lace.Events.Consumer;
-using Lace.Events.Consumer.Sources;
 using Lace.Events.Messages.Publish;
 using Lace.Functions.Json;
-using Lace.Shared.Enums;
 using Workflow;
 using Workflow.BuildingBlocks;
 using Workflow.RabbitMQ;
@@ -19,14 +20,14 @@ namespace Lace.Events.Tests
 
         private ILaceEvent _laceEvent;
         private Exception _exception;
-        private readonly ILaceEventService _sourceEventService;
+        //private readonly ILaceEventService _sourceEventService;
         private readonly Guid _aggregateId;
 
         public lace_log_event_ivid_source_tests()
         {
             
             _aggregateId = Guid.NewGuid();
-            _sourceEventService = new LaceEventService();
+            //_sourceEventService = new LaceEventService();
             //_factory = new BusFactory();
             //_consumers = new ConsumerRegistration()
             //     .AddConsumer<LaceEventMessageConsumer, ILaceEventMessage>(() => new LaceEventMessageConsumer());
@@ -41,8 +42,8 @@ namespace Lace.Events.Tests
                 //{
                     
                 //}
-                _sourceEventService.Start();
-                _bus = new BusFactory().CreateBus("LaceEventBus");
+                //_sourceEventService.Start();
+                _bus = new BusFactory().CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 
@@ -60,22 +61,30 @@ namespace Lace.Events.Tests
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishStartServiceConfigurationMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishStartServiceConfigurationMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishEndServiceConfigurationMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishEndServiceConfigurationMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishStartServiceCallMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishStartServiceCallMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishEndServiceCallMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishEndServiceCallMessage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishServiceRequestMessage(_aggregateId, EventSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(new Source.Tests.Data.LicensePlateNumberIvidOnlyRequest()));
+            _laceEvent.PublishServiceRequestMessage(_aggregateId, FromSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(new Source.Tests.Data.LicensePlateNumberIvidOnlyRequest()));
 
-            _laceEvent.PublishServiceResponseMessage(_aggregateId, EventSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(Source.Tests.Data.Ivid.MockIvidLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvid()));
+            _laceEvent.PublishServiceResponseMessage(_aggregateId, FromSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(Source.Tests.Data.Ivid.MockIvidLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvid()));
 
-            _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, FromSource.IvidSource);
 
-            _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, EventSource.IvidSource);
+            _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, FromSource.IvidSource);
+
+
+            Thread.Sleep(5000);
+
+            _bus.Dispose();
         }
 
     }
 }
+// ReSharper enable InconsistentNaming
+#pragma warning restore 169
+

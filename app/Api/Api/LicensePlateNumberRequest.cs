@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Api.Modules;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 
@@ -6,13 +8,6 @@ namespace Api
 {
     public class LicensePlateNumberRequest : ILaceRequest
     {
-        //public LicensePlateNumberRequest(string licenceNo, string[] sources)
-        //{
-        //    LicenceNo = licenceNo;
-        //    Sources = sources;
-        //    Vin = "WAUZZZ8K8DA074674";
-        //}
-
         public LicensePlateNumberRequest()
         {
             Vin = "WAUZZZ8K8DA074674";
@@ -20,311 +15,89 @@ namespace Api
 
         public LicensePlateNumberRequest(string licenceNo)
         {
-            LicenceNo = licenceNo;
-            Vin = "WAUZZZ8K8DA074674";
+            Vehicle = new Vechicle(licenceNo, "WAUZZZ8K8DA074674");
         }
+      
+        public IPackage Package
+        {
+            get
+            {
+                return new Package()
+                {
+                    DataSets = new List<IDataSet>() {new DataSet()},
+                    Id = 0,
+                    Name = "License Plate Number Lookup"
+                };
+            }
+        }
+
+        public ILaceRequestUserInformation User { get; private set; }
+
+        public ILaceRequestContext Context { get; private set; }
+
+        public ILaceRequestVehicleInformation Vehicle { get; private set; }
+
+        public IProvideRequestAggregation RequestAggregation { get; private set; }
+
+        public DateTime RequestDate
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
+
+
+       
+    }
+
+    public class User : ILaceRequestUserInformation
+    {
 
         public Guid UserId { get; private set; }
+
+        public Guid AggregateId { get; private set; }
+
         public string UserName { get; private set; }
+
         public string UserFirstName { get; private set; }
+
         public string UserLastName { get; private set; }
+
         public string UserEmail { get; private set; }
+
         public string UserPhone { get; private set; }
-        public string CompanyId { get; private set; }
-        public string ContractId { get; private set; }
-        public DateTime RequestDate { get; private set; }
-        public string EngineNo { get; private set; }
-        public string VinOrChassis { get; private set; }
-        public string Make { get; private set; }
-        public string RegisterNo { get; private set; }
-        public string LicenceNo { get; private set; }
+    }
+
+    public class Context : ILaceRequestContext
+    {
+
         public string Product { get; private set; }
+
         public string ReasonForApplication { get; private set; }
-        public string Vin { get; private set; }
+
         public string SecurityCode { get; private set; }
-        //public string[] Sources { get; private set; }
-
-
-        public Guid Token
-        {
-            get
-            {
-                return Guid.NewGuid();
-            }
-        }
-
-        public IField[] Fields {
-            get
-            {
-
-                return new IField[]
-                {
-                     //Ivid
-                    new RegistrationField(),
-                    new VinField(),
-                    new EngineField(),
-                    new MakeDescription(),
-
-                    //Ivid title holder
-                    new BankNameField(),
-                    new AccountNumberField(),
-                    new AccountOpenDateField(),
-                    new AccountClosedDateField(),
-
-                    //rgt vin
-                    new VehicleMakeField(),
-                    new ColourField(),
-                    new PriceField(),
-
-                    //audatex
-                    new AccidentClaimField()
-                };
-              
-            }
-        }
-
     }
 
-    //************
-    //Ivid
-    //************
-    public class RegistrationField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "Registration";
-            }
-        }
-    }
-
-    public class VinField : IField
+    public class Vechicle : ILaceRequestVehicleInformation
     {
 
-        public int SourceId
+        public Vechicle(string licenseNo, string vinNo)
         {
-            get
-            {
-                return 1;
-            }
+            LicenceNo = licenseNo;
+            Vin = vinNo;
         }
 
-        public string Name
-        {
-            get
-            {
-                return "Vin";
-            }
-        }
+        public string EngineNo { get; private set; }
+
+        public string VinOrChassis { get; private set; }
+
+        public string Make { get; private set; }
+
+        public string RegisterNo { get; private set; }
+
+        public string LicenceNo { get; private set; }
+
+        public string Vin { get; private set; }
     }
-
-    public class EngineField : IField
-    {
-
-        public int SourceId
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "Engine";
-            }
-        }
-    }
-
-    public class MakeDescription : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "MakeDescription";
-            }
-        }
-    }
-
-    //************
-    //Audatex
-    //************
-    public class AccidentClaimField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 4;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "AccidentClaims";
-            }
-        }
-    }
-
-    //************
-    //Ivid title holder
-    //************
-    public class BankNameField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 2;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "BankName";
-            }
-        }
-    }
-
-    public class AccountNumberField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 2;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "AccountNumber";
-            }
-        }
-    }
-
-    public class AccountOpenDateField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 2;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "AccountOpenDate";
-            }
-        }
-    }
-
-    public class AccountClosedDateField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 2;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "AccountClosedDate";
-            }
-        }
-    }
-
-    //************
-    // RGT VIN
-    //************
-    public class VehicleMakeField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 3;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "VehicleMake";
-            }
-        }
-    }
-
-    public class ColourField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 3;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "Colour";
-            }
-        }
-    }
-
-    public class PriceField : IField
-    {
-        public int SourceId
-        {
-            get
-            {
-                return 3;
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return "Price";
-            }
-        }
-    }
-
 }

@@ -1,4 +1,5 @@
-﻿using Lace.Source.RgtVin.Transform;
+﻿using System.Data;
+using Lace.Source.RgtVin.Transform;
 using Lace.Source.Tests.Data.RgtVin;
 using Xunit.Extensions;
 
@@ -7,7 +8,7 @@ namespace Lace.Source.Tests.RgtVinTests
     public class rgt_vin_transform_response_tests : Specification
     {
 
-        private readonly string _rgtVinWebResponse;
+        private readonly DataSet _rgtVinWebResponse;
         private TransformRgtVinWebResponse _transfomer;
 
 

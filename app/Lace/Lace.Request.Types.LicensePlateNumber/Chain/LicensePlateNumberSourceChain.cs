@@ -1,4 +1,5 @@
-﻿using Lace.Events;
+﻿using DataPlatform.Shared.Public.Entities;
+using Lace.Events;
 using Lace.Models.Request.LicensePlateNumber;
 using Lace.Response;
 
@@ -15,7 +16,7 @@ namespace Lace.Request.Types.LicensePlateNumber.Chain
 
         public LicensePlateNumberResponse Build(ILaceRequest request, ILaceEvent laceEvent)
         {
-            var handlers = new Handlers.LicensePlateNumberHandlers().HandlersDictionary;
+            var handlers = new Handlers.LicensePlateNumberHandlers().Handlers;
 
             foreach (var handler in handlers)
             {

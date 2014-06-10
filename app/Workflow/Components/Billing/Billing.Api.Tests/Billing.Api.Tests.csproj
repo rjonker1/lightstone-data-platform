@@ -32,14 +32,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="CsQuery">
       <HintPath>..\..\..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\..\..\packages\Nancy.0.22.2\lib\net40\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Testing">
       <HintPath>..\..\..\..\packages\Nancy.Testing.0.22.2\lib\net40\Nancy.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsUnautorisedUser.cs" />
+    <Compile Include="Connectors\when_pinging_the_billing_api_and_the_url_is_not_found.cs" />
+    <Compile Include="Fakes\TestBillingConnectorConfiguration.cs" />
+    <Compile Include="Connectors\when_pinging_the_billing_api.cs" />
     <Compile Include="Fakes\FailingMessagePublisher.cs" />
     <Compile Include="Fakes\NullPublisher.cs" />
     <Compile Include="Fakes\TestMessagePublisher.cs" />
@@ -72,6 +88,7 @@
     <Compile Include="Transaction\when_creating_a_new_billing_transaction_as_an_unauthorised_user.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +103,10 @@
     <ProjectReference Include="..\..\..\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
       <Name>Workflow %28Workflow\Workflow%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Billing.Api.Connector\Billing.Api.Connector.csproj">
+      <Project>{2b2c90a8-ece9-47bd-af05-4f07133772a6}</Project>
+      <Name>Billing.Api.Connector</Name>
     </ProjectReference>
     <ProjectReference Include="..\Billing.Api.Dtos\Billing.Api.Dtos.csproj">
       <Project>{967db86a-e141-466d-b9c3-2abad9ff5487}</Project>

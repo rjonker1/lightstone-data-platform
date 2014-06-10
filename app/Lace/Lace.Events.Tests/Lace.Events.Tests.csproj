@@ -48,13 +48,15 @@
     <None Include="Consumers\LaceEventMessageConsumer.cs.old" />
     <Compile Include="lace_events_source_handled_tests.cs" />
     <Compile Include="lace_log_event_ivid_source_tests.cs" />
-    <Compile Include="Mocks\MockSourceEventBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Events.Consumer\Lace.Events.Consumer.csproj">
       <Project>{f46f9877-cc0a-4783-bc03-13f43cf0a0e4}</Project>
       <Name>Lace.Events.Consumer</Name>
+    <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
+      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
+      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
@@ -76,10 +78,6 @@
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
       <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Events.Messages\Lace.Events.Messages.csproj">
-      <Project>{3063b2ba-22e9-469a-9814-c508d76f441c}</Project>
-      <Name>Lace.Events.Messages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
@@ -91,10 +89,6 @@
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source.Tests\Lace.Source.Tests.csproj">
       <Project>{b9b50b38-6eec-4d8f-86e1-e9f35955e527}</Project>

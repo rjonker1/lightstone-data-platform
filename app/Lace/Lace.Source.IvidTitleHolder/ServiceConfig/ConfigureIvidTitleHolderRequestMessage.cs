@@ -20,12 +20,12 @@ namespace Lace.Source.IvidTitleHolder.ServiceConfig
             {
                 requesterDetails = new RequesterDetailsElement()
                 {
-                    requesterEmail = _request.UserEmail ?? string.Empty,
-                    requesterName = _request.UserFirstName ?? string.Empty,
-                    requesterPhone = _request.UserPhone ?? string.Empty
+                    requesterEmail = _request.User.UserEmail ?? string.Empty,
+                    requesterName = _request.User.UserFirstName ?? string.Empty,
+                    requesterPhone = _request.User.UserPhone ?? string.Empty
                 },
 
-                vin = _request.Vin ?? string.Empty
+                vin = _request.Vehicle.Vin ?? string.Empty
             };
         }
     }

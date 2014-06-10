@@ -40,17 +40,17 @@
     <Compile Include="PublishLaceEventMessages.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Events.Messages\Lace.Events.Messages.csproj">
-      <Project>{3063b2ba-22e9-469a-9814-c508d76f441c}</Project>
-      <Name>Lace.Events.Messages</Name>
+    <ProjectReference Include="..\..\Monitoring\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
+      <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
+      <Name>Monitoring.Consumer.Lace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
+      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
+      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared\Lace.Shared.csproj">
-      <Project>{fa4117e4-9f86-4ef7-b232-771743cc7aeb}</Project>
-      <Name>Lace.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>

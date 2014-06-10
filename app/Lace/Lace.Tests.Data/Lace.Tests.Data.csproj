@@ -34,15 +34,30 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\LaceEventMessageConsumer.cs" />
+    <Compile Include="RequestData\ContextInformation.cs" />
+    <Compile Include="RequestData\IvidTitleHolderRequestVehicleInformation.cs" />
+    <Compile Include="RequestData\RequestAggregationInformation.cs" />
+    <Compile Include="RequestData\RequestUserInformation.cs" />
+    <Compile Include="RequestData\RequestVehicleInformation.cs" />
+    <None Include="Consumers\LaceEventMessageConsumer.cs.old" />
     <Compile Include="Fakes\FakeBus.cs" />
     <Compile Include="FieldsFromAudatex.cs" />
     <Compile Include="FieldsFromIvid.cs" />
     <Compile Include="FieldsFromIvidTitleHolder.cs" />
     <Compile Include="FieldsFromRgtVin.cs" />
+    <Compile Include="PakageData\Audatex\LicensePlateNumberAudatexRequestPackage.cs" />
+    <Compile Include="PakageData\DataField.cs" />
+    <Compile Include="PakageData\DataSet.cs" />
+    <Compile Include="PakageData\IvidTitleHolder\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
+    <Compile Include="PakageData\Ivid\LicensePlateNumberIvidRequestPackage.cs" />
+    <Compile Include="PakageData\LicensePlateNumberAllRequestPackage.cs" />
+    <Compile Include="PakageData\LicensePlateNumberSourcePackage.cs" />
+    <Compile Include="PakageData\Package.cs" />
+    <Compile Include="PakageData\RgtVin\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
