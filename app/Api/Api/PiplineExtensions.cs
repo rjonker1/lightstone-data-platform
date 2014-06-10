@@ -41,16 +41,5 @@ namespace Api
 
             return pipelines;
         }
-
-        public static IPipelines EnableCors(this IPipelines pipelines)
-        {
-            pipelines.AfterRequest.AddItemToEndOfPipeline(x =>
-            {
-                x.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                x.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-            });
-
-            return pipelines;
-        }
     }
 }

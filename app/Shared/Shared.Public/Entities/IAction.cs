@@ -9,6 +9,6 @@ namespace DataPlatform.Shared.Public.Entities
 
     public interface ICriteria
     {
-        IEnumerable<IField> Fields { get; set; }
+        IEnumerable<IDataField> Fields { get; set; }
     }
 }

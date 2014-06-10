@@ -20,7 +20,7 @@ namespace PackageBuilder.Api.CannedData
             Add(new ContractPackage
             {
                 Contract = new ContractRepository().Entities.FirstOrDefault(x => x.Name.Contains("WesBank")),
-                Action = new ActionRepository().Entities.FirstOrDefault(x => x.Name.ToLower().Contains("verify")),
+                Action = new ActionRepository().Entities.FirstOrDefault(x => x.Name.ToLower().Contains("license")),
                 Package = new PackageDatabase().Entities.FirstOrDefault(x => x.Name.Contains("Vehicle Verification"))
             });
         }

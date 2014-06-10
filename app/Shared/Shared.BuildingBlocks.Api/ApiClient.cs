@@ -8,6 +8,16 @@ namespace Shared.BuildingBlocks.Api
         T Post<T>(string resource, string token, object body = null) where T : new();
     }
 
+    public interface IUmApiClient : IApiClient
+    {
+
+    }
+
+    public interface IPbApiClient : IApiClient
+    {
+
+    }
+
     public abstract class ApiClientBase : IApiClient
     {
         protected static readonly AppSettings AppSettings = new AppSettings();
@@ -20,14 +30,14 @@ namespace Shared.BuildingBlocks.Api
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
-        public T Post<T>(string resource, string token, object body = null) where T : new()
+        public T Post<T>(string token, string resource = "", object body = null) where T : new()
         {
             var request = RestRequest(resource, token, body);
 
             return _client.Execute<T>(request).Data;
         }
 
-        public string Post(string resource, string token, object body = null)
+        public string Post(string token, string resource = "", object body = null)
         {
             var request = RestRequest(resource, token, body);
 
@@ -49,8 +59,13 @@ namespace Shared.BuildingBlocks.Api
         public ApiClient() : base(AppSettings.Api.BaseUrl) { }
     }
 
-    public class UmApiClient : ApiClientBase
+    public class UmApiClient : ApiClientBase, IUmApiClient
     {
         public UmApiClient() : base(AppSettings.UmApi.BaseUrl) { }
+    }
+
+    public class PbApiClient : ApiClientBase, IPbApiClient
+    {
+        public PbApiClient() : base(AppSettings.PbApi.BaseUrl) { }
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace BuildingBlocks.Configuration
 {
-    public class ApiSettings
+    public class PbApiSettings
     {
         private readonly AppSettingsReader _reader;
 
-        internal ApiSettings(AppSettingsReader reader)
+        internal PbApiSettings(AppSettingsReader reader)
         {
             _reader = reader;
         }
@@ -14,7 +14,7 @@
         /// </summary>
         public string BaseUrl
         {
-            get { return _reader.GetString("api/config/baseUrl", () => "UNKNOWN_BASE_URL"); }
+            get { return _reader.GetString("pbApi/config/baseUrl", () => "UNKNOWN_BASE_URL"); }
         }
     }
 }

@@ -55,13 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiClient.cs" />
+    <Compile Include="SecureModule.cs" />
     <Compile Include="Security\ApiUser.cs" />
     <Compile Include="CannedResponses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ContextExtensions.cs" />
     <Compile Include="Security\IAuthenticateUser.cs" />
-    <Compile Include="Security\IPipelinesExtentions.cs" />
     <Compile Include="RestSharpDataContractJsonDeserializer.cs" />
+    <Compile Include="Security\PiplineExtensions.cs" />
     <Compile Include="Security\UmApiAuthenticator.cs" />
   </ItemGroup>
   <ItemGroup>

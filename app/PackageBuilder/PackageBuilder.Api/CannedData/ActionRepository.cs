@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Public;
 using DataPlatform.Shared.Public.Entities;
+using PackageBuilder.Api.Entities;
 using Action = PackageBuilder.Api.Entities.Action;
 
 namespace PackageBuilder.Api.CannedData
@@ -14,7 +15,7 @@ namespace PackageBuilder.Api.CannedData
         {
             Add(
                 new Action("Get EzScore"),
-                new Action("Verify")
+                new Action("License plate search") { Criteria  = new Criteria(){ Fields = new IDataField[]{new DataField("LicenseNo"){ Type = "string" }, }}}
                 );
         }
     }

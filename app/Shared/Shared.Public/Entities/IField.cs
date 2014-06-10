@@ -4,6 +4,5 @@
     {
         int SourceId { get; }
         string Name { get; }
-        //string Type { get; set; }
     }
 }

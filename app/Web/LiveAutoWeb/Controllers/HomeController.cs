@@ -7,7 +7,11 @@ namespace LiveAutoWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var client = new ApiClient();
+
+            var response = client.Post("4E7106BA-16B6-44F2-AF4C-D1C411440F8E");
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Search()
@@ -20,7 +24,7 @@ namespace LiveAutoWeb.Controllers
         {
             var client = new ApiClient();
 
-            var response = client.Post<dynamic>("license", "4E7106BA-16B6-44F2-AF4C-D1C411440F8E", "licenseNo=" + licenseNo);
+            var response = client.Post<dynamic>("4E7106BA-16B6-44F2-AF4C-D1C411440F8E", "license", "licenseNo=" + licenseNo);
 
             return PartialView("SearchResults", response);
         }

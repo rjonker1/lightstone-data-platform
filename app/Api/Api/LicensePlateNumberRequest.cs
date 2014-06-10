@@ -13,6 +13,11 @@ namespace Api
         //    Vin = "WAUZZZ8K8DA074674";
         //}
 
+        public LicensePlateNumberRequest()
+        {
+            Vin = "WAUZZZ8K8DA074674";
+        }
+
         public LicensePlateNumberRequest(string licenceNo)
         {
             LicenceNo = licenceNo;

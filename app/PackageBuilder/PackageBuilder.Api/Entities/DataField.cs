@@ -9,6 +9,7 @@ namespace PackageBuilder.Api.Entities
         {
         }
 
+        public string Type { get; set; }
         public IDataSource DataSource { get; set; }
     }
 }
