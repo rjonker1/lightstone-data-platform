@@ -23,7 +23,7 @@ namespace EventTracking.Domain.Read.Core
 
         public void StartReading()
         {
-            _connection.SubscribeToAll(true, Appeared, Dropped, new UserCredentials("admin", "123456"));
+            _connection.SubscribeToAll(true, Appeared, Dropped, EventStoreCredentials.Default);
         }
 
         private void Appeared(EventStoreSubscription subscription, ResolvedEvent data)

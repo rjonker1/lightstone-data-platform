@@ -1,5 +1,4 @@
-﻿using System.Net.NetworkInformation;
-using EventTracking.Domain.Read.Core;
+﻿using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
 
@@ -9,7 +8,7 @@ namespace EventTracking.Measurement.Lace.Measurements
     {
 
         private readonly IProjectionContext _projectionContext;
-        private readonly SourceRequestType _projection;
+        private readonly SourceRequestsExecutionTimes _projection;
         private readonly SourceRequestQuery _query;
 
         private readonly EventReader _eventReader;
@@ -17,10 +16,10 @@ namespace EventTracking.Measurement.Lace.Measurements
         //private readonly DeviceSimulator _deviceSimulator;
         private readonly IConsole _console;
 
-        private readonly SourceRequestDetailsProjection _sourceRequestsProjection;
+        private readonly SourceRequestExecutionTimesProjection _sourceRequestsProjection;
 
-        public RequestFromSourceMeasurements(IProjectionContext context, SourceRequestType projection,
-            EventReader reader, IConsole console, SourceRequestQuery query, SourceRequestDetailsProjection sourceRequestsProjection)
+        public RequestFromSourceMeasurements(IProjectionContext context, SourceRequestsExecutionTimes projection,
+            EventReader reader, IConsole console, SourceRequestQuery query, SourceRequestExecutionTimesProjection sourceRequestsProjection)
         {
             _projectionContext = context;
             _projection = projection;
@@ -60,14 +59,14 @@ namespace EventTracking.Measurement.Lace.Measurements
             _projectionContext.EnableProjection("$by_category");
             _projectionContext.EnableProjection("$stream_by_category");
 
-            _sourceRequestsProjection.Ensure(); //TODO: Implement check to ensure prediction exists; first create the projection?
+            _sourceRequestsProjection.Ensure();
         }
 
         private void ShowRequestDetails()
         {
             _console.Important("Get Request Details");
 
-            ShowRequestDetails("RequestsSentToSources");
+            ShowRequestDetails("externalSourceInformation");
             //add other projections / streams
         }
 
