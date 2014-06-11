@@ -1,4 +1,5 @@
-﻿using EventTracking.Domain.Read.Core;
+﻿using System;
+using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
 
@@ -51,7 +52,7 @@ namespace EventTracking.Measurement.Lace.Measurements
       
         private void Stop()
         {
-            //TODO: Need to stop the simulator
+            
         }
 
         private void EnsureProjections()
@@ -77,8 +78,19 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             foreach (var value in values)
             {
-                _console.Log("  - {0}", value);
+                _console.Log("  - {0}", value.ToString());
             }
+
+
+        }
+
+        private static string SetExecutionTime(DateTime? startTime, DateTime? endTime)
+        {
+            if (!startTime.HasValue || !endTime.HasValue) return string.Empty;
+
+            var time = (endTime.Value.TimeOfDay - startTime.Value.TimeOfDay).TotalSeconds;
+
+            return time.ToString("N");
         }
     }
 }
