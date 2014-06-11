@@ -19,13 +19,13 @@ namespace EventTracking.Measurement.Lace
             var projectionContext = new ProjectionContext(console);
             var sourceRequestType = new SourceRequestsExecutionTimes();
 
-            var _connection = DefaultConnection();
+            var connection = DefaultConnection();
 
-            var eventReader = new EventReader(_connection, console, new KnownEventsProvider());
+            var eventReader = new EventReader(connection, console, new KnownEventsProvider());
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                console, new SourceRequestQuery(_connection), new SourceRequestExecutionTimesProjection(projectionContext));
+                console, new SourceRequestQuery(connection), new SourceRequestExecutionTimesProjection(projectionContext));
 
             measurements.Run();
 

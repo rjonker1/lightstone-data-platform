@@ -4,37 +4,82 @@ namespace EventTracking.Measurement.Lace.Queries
 {
     public class SourceRequestsExecutionTimes
     {
-        public string Message  { get; private set; }
+        public string Message { get; private set; }
         public string Source { get; private set; }
         public Guid AggregateId { get; private set; }
-        public string ExecutionTime { get; private set; }
+        public DateTime EventDate { get; private set; }
+        public int Order { get; private set; }
+        public bool IsWebServiceCall { get; private set; }
 
-        public SourceRequestsExecutionTimes()
-        {
-        }
+       // private string _executionTimeInSeconds;
 
-        public SourceRequestsExecutionTimes(string message, string source, Guid aggregateId, DateTime startTime, DateTime endTime)
+
+        public DateTime? StartTime { get; private set; }
+        public DateTime? EndTime { get; private set; }
+
+
+        public SourceRequestsExecutionTimes(){}
+
+        public SourceRequestsExecutionTimes(string message, string source, Guid aggregateId, DateTime eventDate)
         {
             Message = message;
             Source = source;
+            EventDate = eventDate;
             AggregateId = aggregateId;
 
-            GetExecutionTimes(startTime, endTime);
+            SetStartTime();
+            SetEndTime();
         }
 
-        private void GetExecutionTimes(DateTime? startTime, DateTime? endTime)
+        private void SetEndTime()
         {
-            if (!startTime.HasValue || !endTime.HasValue) ExecutionTime = "00:00:00";
+            if (Message != "Starting External Web Service Call") return;
 
-            var time = (endTime.Value.TimeOfDay - startTime.Value.TimeOfDay).TotalSeconds;
+            SetTime(0);
 
-            ExecutionTime = time.ToString("N");
         }
 
-      
+        private void SetStartTime()
+        {
+            if (Message != "End External Web Service Call") return;
+
+            SetTime(1);
+        }
+
+        private void SetTime(int order)
+        {
+            EndTime = EventDate;
+            Order = order;
+            IsWebServiceCall = true;
+        }
+
+        //private static string SetExecutionTime(DateTime? startTime, DateTime? endTime)
+        //{
+        //    if (!startTime.HasValue || !endTime.HasValue) return string.Empty;
+
+        //    var time = (endTime.Value.TimeOfDay - startTime.Value.TimeOfDay).TotalSeconds;
+
+        //    return time.ToString("N");
+        //}
+
+
+
+        //public SourceRequestsExecutionTimes(string message, string source, Guid aggregateId, DateTime startTime, DateTime endTime)
+        //{
+        //    Message = message;
+        //    Source = source;
+        //    AggregateId = aggregateId;
+
+        //    GetExecutionTimes(startTime, endTime);
+        //}
+
+
         public override string ToString()
         {
-            return string.Format("Source:  {0}, Message: {1}, Aggregate Id {2}, Time Taken {3}", Source, Message, ExecutionTime);
+            return
+                string.Format(
+                    "Source:  {0}, Message: {1}, Aggregate Id {2}, Start Time {3}, End Time {4}", Source,
+                    Message, StartTime, EndTime);
         }
 
     }
