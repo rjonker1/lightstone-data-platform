@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ.AutoSubscribe;
 
@@ -29,6 +30,23 @@ namespace Workflow.BuildingBlocks.Consumers
             return this;
         }
 
+        public ConsumerRegistration AddConsumers<TMessage>(Dictionary<Assembly, List<Func<IConsume<TMessage>>>> creations)
+            where TMessage : class
+        {
+            var messageType = typeof (TMessage);
+            foreach (var creation in creations)
+            {
+                AddAssemblyCreation(creation.Key);
+
+                foreach (var factory in creation.Value)
+                {
+                    AddConsumerCreation(factory, messageType);
+                }
+            }
+
+            return this;
+        }
+
         private void AddAssemblyCreation(Type consumerType)
         {
             var fullName = consumerType.Assembly.FullName;
@@ -39,8 +57,28 @@ namespace Workflow.BuildingBlocks.Consumers
             }
         }
 
+        private void AddAssemblyCreation(Assembly consumerAssembly)
+        {
+            var fullName = consumerAssembly.FullName;
+
+            if (!assemblyRegistry.ContainsKey(fullName))
+            {
+                assemblyRegistry.Add(fullName, consumerAssembly);
+            }
+        }
+
         private void AddConsumerCreation<TConsumer, TMessage>(Func<TConsumer> creation, Type messageType) where TMessage : class
             where TConsumer : IConsume<TMessage>
+        {
+            if (!creationRegistry.ContainsKey(messageType))
+                creationRegistry.Add(messageType, new List<Func<object>>());
+
+            Func<object> wrappedCreation = () => creation();
+
+            creationRegistry[messageType].Add(wrappedCreation);
+        }
+
+        private void AddConsumerCreation<TMessage>(Func<IConsume<TMessage>> creation, Type messageType) where TMessage : class
         {
             if (!creationRegistry.ContainsKey(messageType))
                 creationRegistry.Add(messageType, new List<Func<object>>());
@@ -86,6 +124,34 @@ namespace Workflow.BuildingBlocks.Consumers
 
 
             }
+        }
+
+        public Assembly[] GetAssemblies(IWindsorContainer container)
+        {
+            var targetInterface = typeof(IConsume<>);
+            var consumers = container.Kernel.GetAssignableHandlers(typeof(object));
+            var assemblies = new List<Assembly>();
+
+            foreach (var consumer in consumers)
+            {
+                var interfaces = consumer.ComponentModel.Implementation.GetInterfaces().Where(i => i.IsGenericType);
+
+                foreach (var @interface in interfaces.Where(i => i.GetGenericArguments().Length == 1))
+                {
+                    var genericArgument = @interface.GetGenericArguments()[0];
+                    var closedType = targetInterface.MakeGenericType(genericArgument);
+
+                    if (closedType.IsAssignableFrom(consumer.ComponentModel.Implementation))
+                    {
+                        if (!assemblies.Any(a => a.FullName.Equals(consumer.ComponentModel.Implementation.Assembly.FullName)))
+                        {
+                            assemblies.Add(consumer.ComponentModel.Implementation.Assembly);
+                        }
+                    }
+                }
+            }
+
+            return assemblies.ToArray();
         }
 
         public Assembly[] GetAssemblies()

@@ -3,11 +3,12 @@ using Topshelf;
 
 namespace Workflow.Billing.Consumer
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var appSettings = new AppSettings();
+
 
             HostFactory.Run(x =>
             {

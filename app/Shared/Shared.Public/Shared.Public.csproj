@@ -59,6 +59,13 @@
     <Compile Include="Entities\IUserRole.cs" />
     <Compile Include="Entities\IWorkflow.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
+    <Compile Include="Helpers\SystemTime.cs" />
+    <Compile Include="Identifiers\PackageIdentifier.cs" />
+    <Compile Include="Identifiers\RequestIdentifier.cs" />
+    <Compile Include="Identifiers\ServerIdentifier.cs" />
+    <Compile Include="Identifiers\SystemIdentifier.cs" />
+    <Compile Include="Identifiers\UserIdentifier.cs" />
+    <Compile Include="Identifiers\VersionIdentifier.cs" />
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />

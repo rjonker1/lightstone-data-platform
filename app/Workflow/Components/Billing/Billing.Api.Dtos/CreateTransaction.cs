@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DataPlatform.Shared.Public.Identifiers;
 
 namespace Billing.Api.Dtos
 {
@@ -8,13 +8,13 @@ namespace Billing.Api.Dtos
         {
         }
 
-        public CreateTransaction(Guid userId, Guid transactionId)
+        public CreateTransaction(PackageIdentifier packageIdentifier, TransactionContext context)
         {
-            UserId = userId;
-            TransactionId = transactionId;
+            PackageIdentifier = packageIdentifier;
+            Context = context;
         }
 
-        public Guid UserId { get; private set; }
-        public Guid TransactionId { get; private set; }
+        public PackageIdentifier PackageIdentifier { get; set; }
+        public TransactionContext Context { get; set; }
     }
 }

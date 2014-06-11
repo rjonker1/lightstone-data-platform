@@ -59,6 +59,9 @@
     <Compile Include="Recovery\IRetryStrategy.cs" />
     <Compile Include="Recovery\RetryAgent.cs" />
     <Compile Include="Recovery\Strategies\RetryStrategy.cs" />
+    <Compile Include="Resolution\DefaultResolver.cs" />
+    <Compile Include="Resolution\IResolver.cs" />
+    <Compile Include="Resolution\ResolverType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
