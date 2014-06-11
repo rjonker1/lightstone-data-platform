@@ -39,13 +39,25 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consumers\BillTransactionConsumer.cs" />
+    <Compile Include="Consumers\SqlServerConnectionController.cs" />
+    <Compile Include="Domain\InvoiceTransaction.cs" />
+    <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\Dapper.cs" />
+    <Compile Include="Repository\RepositoryMapper.cs" />
+    <Compile Include="Repository\TransactionTypeMapper.cs" />
+    <Compile Include="Repository\TypeMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Shared\Shared.Public\Shared.Public.csproj">

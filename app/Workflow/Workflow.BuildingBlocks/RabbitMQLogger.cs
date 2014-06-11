@@ -20,12 +20,16 @@ namespace Workflow.BuildingBlocks
 
         public void ErrorWrite(string format, params object[] args)
         {
-            log.ErrorFormat(format, args);
+            if(args.Length == 0)
+                log.Error(format);
+
+            if(args.Length > 0)
+                log.ErrorFormat(format, args);
         }
 
         public void ErrorWrite(Exception exception)
         {
-            log.ErrorFormat("RabbitMQ failure:", exception);
+            log.ErrorFormat("RabbitMQ failure: {0}", exception);
         }
     }
 }

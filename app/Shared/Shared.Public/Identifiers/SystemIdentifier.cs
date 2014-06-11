@@ -6,24 +6,43 @@
         {
         }
 
-        public SystemIdentifier(string systemName)
+        public SystemIdentifier(string systemName) : this(systemName, ServerIdentifier.Create())
         {
-            SystemName = systemName;
         }
 
         public SystemIdentifier(string systemName, ServerIdentifier server)
         {
-            SystemName = systemName;
+            Name = systemName;
             Server = server;
         }
 
-        public string SystemName { get; private set; }
-        public ServerIdentifier Server { get; private set; }
+        public string Name { get; set; }
+        public ServerIdentifier Server { get; set; }
 
         public static SystemIdentifier CreateApi()
         {
             return new SystemIdentifier("API", ServerIdentifier.Create());
         }
 
+        protected bool Equals(SystemIdentifier other)
+        {
+            return string.Equals(Name, other.Name) && Equals(Server, other.Server);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SystemIdentifier) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Name != null ? Name.GetHashCode() : 0)*397) ^ (Server != null ? Server.GetHashCode() : 0);
+            }
+        }
     }
 }

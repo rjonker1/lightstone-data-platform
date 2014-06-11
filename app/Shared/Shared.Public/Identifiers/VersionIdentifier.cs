@@ -4,17 +4,43 @@ namespace DataPlatform.Shared.Public.Identifiers
 {
     public class VersionIdentifier
     {
-        public int Number { get; private set; }
-        public DateTime Date { get; private set; }
+        public long Number { get; set; }
+        public DateTime Date { get; set; }
 
         public VersionIdentifier()
         {
         }
 
-        public VersionIdentifier(int number, DateTime date)
+        public VersionIdentifier(long number)
+        {
+            Number = number;
+        }
+
+        public VersionIdentifier(long number, DateTime date)
         {
             Number = number;
             Date = date;
+        }
+
+        protected bool Equals(VersionIdentifier other)
+        {
+            return Number == other.Number && Date.Equals(other.Date);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((VersionIdentifier) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Number.GetHashCode()*397) ^ Date.GetHashCode();
+            }
         }
     }
 }

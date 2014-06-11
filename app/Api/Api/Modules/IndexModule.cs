@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request.Entry;
 using Nancy;
@@ -35,7 +34,7 @@ namespace Api.Modules
 
                 var vehicle = this.Bind<Vechicle>();
                 var request = new LicensePlateNumberRequest(package, null, null, vehicle, null);
-                var entryPoint = new EntryPoint(new Workflow.RabbitMQ.Publisher(new BusFactory().CreateBus(""))); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
+                var entryPoint = new EntryPoint(new Workflow.RabbitMQ.Publisher(new BusFactory().CreateBus("", new WindsorContainer()))); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
                 var responses = entryPoint.GetResponsesFromLace(request);
 
                 return Response.AsJson(responses.First().Response);

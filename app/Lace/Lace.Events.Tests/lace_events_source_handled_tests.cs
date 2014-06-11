@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using Castle.Windsor;
 using Monitoring.Sources;
 #pragma warning disable 169
 //ReSharper disable InconsistentNaming
@@ -43,7 +44,7 @@ namespace Lace.Events.Tests
             {
                // sourceEventService.Start();
 
-                _bus = new BusFactory().CreateBus("monitor-event-tracking/queue");
+                _bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 

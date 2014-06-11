@@ -1,4 +1,5 @@
-﻿using Billing.Api.Connector.Configuration;
+﻿using System.Runtime.Remoting.Messaging;
+using Billing.Api.Connector.Configuration;
 
 namespace Billing.Api.Connector
 {
@@ -14,6 +15,16 @@ namespace Billing.Api.Connector
         public string PingSegment()
         {
             return "ping";
+        }
+
+        public string CreateTransactionSegment()
+        {
+            return "/transaction";
+        }
+
+        public string GetTransactionSegment()
+        {
+            return "/transaction";
         }
     }
 }

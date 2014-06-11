@@ -10,6 +10,10 @@ namespace DataPlatform.Shared.Public.Identifiers
         public string MachineName { get; set; }
         public string LocalIP { get; set; }
 
+        public ServerIdentifier()
+        {
+        }
+
         private ServerIdentifier(string machineName, string localIP)
         {
             MachineName = machineName;
