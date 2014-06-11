@@ -1,25 +1,23 @@
-﻿using Lace.Request;
+﻿using System;
+using Lace.Request;
 using Lace.Source.Common;
-using Lace.Source.Enums;
 
 namespace Lace.Consumer
 {
     public class CanHandlePackageSpecification
     {
-        private readonly Services _service;
+        private readonly Guid _service;
         private readonly ILaceRequest _request;
 
         public bool IsSatisfied
         {
             get
             {
-                return CheckThePackageDataSource.PackageDataSourceChecks.CheckIfPackageDataSourceRequiresService(
-                    _request.Package,
-                    (int) _service);
+                return CheckThePackageDataSource.PackageDataSourceChecks.CheckIfPackageDataSourceRequiresService(_request.Package, _service);
             }
         }
 
-        public CanHandlePackageSpecification(Services service, ILaceRequest request)
+        public CanHandlePackageSpecification(Guid service, ILaceRequest request)
         {
             _service = service;
             _request = request;

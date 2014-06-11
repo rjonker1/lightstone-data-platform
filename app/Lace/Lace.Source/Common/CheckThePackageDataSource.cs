@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Public.Entities;
 
 
@@ -17,7 +18,7 @@ namespace Lace.Source.Common
             }
         }
 
-        public bool CheckIfPackageDataSourceRequiresService(IPackage package, int serviceId)
+        public bool CheckIfPackageDataSourceRequiresService(IPackage package, Guid serviceId)
         {
             if (package == null || package.DataSets == null) return false;
 

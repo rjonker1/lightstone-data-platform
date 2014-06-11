@@ -7,7 +7,7 @@ namespace DataPlatform.Shared.Public.Entities
         string Name { get; set; }
     }
 
-    public abstract class NamedEntity : INamedEntity
+    public class NamedEntity : INamedEntity
     {
         protected NamedEntity(string name)
         {

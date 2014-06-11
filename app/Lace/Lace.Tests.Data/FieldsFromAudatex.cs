@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using System;
+using DataPlatform.Shared.Public.Entities;
 
 namespace Lace.Tests.Data
 {
@@ -7,11 +8,11 @@ namespace Lace.Tests.Data
 
         public AccidentClaimSource()
         {
-            Id = 4;
+            Id = new Guid("18F5D1F8-0187-4EB2-A554-0F6E963F1E51");
             Name = "Audatex";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

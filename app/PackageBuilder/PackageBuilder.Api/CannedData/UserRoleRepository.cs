@@ -3,9 +3,9 @@ using DataPlatform.Shared.Public.Entities;
 
 namespace PackageBuilder.Api.CannedData
 {
-    public class UserRoleDatabase : Repository<IUserRole>
+    public class UserRoleRepository : Repository<IUserRole>
     {
-        public UserRoleDatabase()
+        public UserRoleRepository()
         {
         }
     }

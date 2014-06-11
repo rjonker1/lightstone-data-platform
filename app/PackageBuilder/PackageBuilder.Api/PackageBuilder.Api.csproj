@@ -76,7 +76,7 @@
     <Compile Include="CannedData\GroupPackageRepository.cs" />
     <Compile Include="CannedData\RolePackage.cs" />
     <Compile Include="CannedData\RolePackageRepository.cs" />
-    <Compile Include="CannedData\UserRoleDatabase.cs" />
+    <Compile Include="CannedData\UserRoleRepository.cs" />
     <Compile Include="Entities\Action.cs" />
     <Compile Include="CannedData\ActionRepository.cs" />
     <Compile Include="Bootstrapper.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\DataField.cs" />
     <Compile Include="Entities\DataSet.cs" />
-    <Compile Include="CannedData\DataSetDatabase.cs" />
+    <Compile Include="CannedData\DataSetRepository.cs" />
     <Compile Include="Entities\DataSource.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\GroupPermission.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="IndexModule.cs" />
     <Compile Include="Entities\Package.cs" />
-    <Compile Include="CannedData\PackageDatabase.cs" />
+    <Compile Include="CannedData\PackageRepository.cs" />
     <Compile Include="PackageLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Role.cs" />

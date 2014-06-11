@@ -5,6 +5,9 @@ namespace Shared.BuildingBlocks.Api
 {
     public interface IApiClient
     {
+        string Get(string token, string resource = "", object body = null);
+        string Post(string token, string resource = "", object body = null);
+        T Get<T>(string resource, string token, object body = null) where T : new();
         T Post<T>(string resource, string token, object body = null) where T : new();
     }
 
@@ -15,7 +18,10 @@ namespace Shared.BuildingBlocks.Api
 
     public interface IPbApiClient : IApiClient
     {
-
+        string Get(string token, string resource = "", object body = null);
+        string Post(string token, string resource = "", object body = null);
+        T Get<T>(string resource, string token, object body = null) where T : new();
+        T Post<T>(string resource, string token, object body = null) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -30,26 +36,49 @@ namespace Shared.BuildingBlocks.Api
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
-        public T Post<T>(string token, string resource = "", object body = null) where T : new()
+        private T Data<T>(string token, string resource, object body, Method method = Method.GET) where T : new()
         {
-            var request = RestRequest(resource, token, body);
+            var request = RestRequest(resource, token, body, method);
 
             return _client.Execute<T>(request).Data;
         }
 
-        public string Post(string token, string resource = "", object body = null)
+        public T Get<T>(string token, string resource = "", object body = null) where T : new()
         {
-            var request = RestRequest(resource, token, body);
+            return Data<T>(token, resource, body);
+        }
+
+        public T Post<T>(string token, string resource = "", object body = null) where T : new()
+        {
+            return Data<T>(token, resource, body, Method.POST);
+        }
+
+        private string Content(string token, string resource, object body, Method method = Method.GET)
+        {
+            var request = RestRequest(resource, token, body, method);
 
             return _client.Execute(request).Content;
         }
 
-        private static RestRequest RestRequest(string resource, string token, object body = null)
+        public string Get(string token, string resource = "", object body = null)
         {
-            var request = new RestRequest(resource, Method.POST);
+            return Content(token, resource, body);
+        }
+
+        public string Post(string token, string resource = "", object body = null)
+        {
+            return Content(token, resource, body, Method.POST);
+        }
+
+        private static RestRequest RestRequest(string resource, string token, object body = null, Method method = Method.GET)
+        {
+            var request = new RestRequest(resource, method);
             request.AddHeader("Authorization", "ApiKey " + token);
-            if (body != null) 
+            if (body != null && method == Method.POST)
                 request.AddParameter("application/x-www-form-urlencoded", body, ParameterType.RequestBody);
+            if (body != null && method == Method.GET)
+                request.AddObject(body);
+
             return request;
         }
     }

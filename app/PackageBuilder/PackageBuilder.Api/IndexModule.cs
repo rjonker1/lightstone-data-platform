@@ -6,14 +6,14 @@
     {
         public IndexModule()
         {
-            Post["/package/{action}"] = parameters =>
+            Get["/package/{action}"] = parameters =>
             {
                 var package = new PackageLookup().Get(Context.CurrentUser.UserName, parameters.action);
 
-                return Response.AsJson(new {package});
+                return Response.AsJson((object)package);
             };
 
-            Post["/getUserMetaData"] = parameters =>
+            Get["/getUserMetaData"] = parameters =>
             {
                 var actions = new PackageLookup().GetActions(Context.CurrentUser.UserName);
 
