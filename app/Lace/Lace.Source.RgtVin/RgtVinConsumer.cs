@@ -27,7 +27,7 @@ namespace Lace.Source.RgtVin
                 return;
             }
 
-            var consumer = new ConsumeService(new HandleRgtVinServiceCall(), new CallRgtVinExternalWebService(_request));
+            var consumer = new ConsumeService(new HandleRgtVinSourceCall(), new CallRgtVinExternalSource(_request));
             consumer.CallService(response, laceEvent);
         }
 

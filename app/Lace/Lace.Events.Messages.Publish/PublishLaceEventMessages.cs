@@ -3,7 +3,7 @@ using Common.Logging;
 using System.Threading.Tasks;
 using DataPlatform.Shared.Public.Messaging;
 using Monitoring.Consumer.Lace.Messages;
-using Monitoring.Sources;
+using Monitoring.Sources.Lace;
 using Workflow;
 
 namespace Lace.Events.Messages.Publish
@@ -18,96 +18,96 @@ namespace Lace.Events.Messages.Publish
             _publishMessages = publishMessages;
         }
 
-        public void PublishMessage(Guid aggerateId, string message, FromSource source)
+        public void PublishMessage(Guid aggerateId, string message, ExternalSource source)
         {
             var msg = new LaceEventMessage(aggerateId, source, message);
             PublishMessage(msg);
         }
 
-        public void PublishStartServiceCallMessage(Guid aggerateId, FromSource source)
+        public void PublishStartServiceCallMessage(Guid aggerateId, ExternalSource source)
         {
-            var msg = new LaceExternalSourceEventMessage(aggerateId, source, "Starting External Web Service Call");
+            var msg = new LaceExternalSourceEventMessage(aggerateId, source, PublishableLaceMessages.StartCallingExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishStartServiceConfigurationMessage(Guid aggerateId, FromSource source)
-        {
-            var msg = new LaceExternalSourceConfigurationEventMessage(aggerateId, source,
-                "Starting Configuration for Web Service Call");
-            PublishMessage(msg);
-        }
-
-        public void PublishEndServiceConfigurationMessage(Guid aggerateId, FromSource source)
+        public void PublishStartServiceConfigurationMessage(Guid aggerateId, ExternalSource source)
         {
             var msg = new LaceExternalSourceConfigurationEventMessage(aggerateId, source,
-                "Ending Configuration for Web Service Call");
+               PublishableLaceMessages.StartConfigurationForExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishEndServiceCallMessage(Guid aggerateId, FromSource source)
+        public void PublishEndServiceConfigurationMessage(Guid aggerateId, ExternalSource source)
         {
-            var msg = new LaceExternalSourceEventMessage(aggerateId, source, "End External Web Service Call");
+            var msg = new LaceExternalSourceConfigurationEventMessage(aggerateId, source,
+                PublishableLaceMessages.EndConfigurationForExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishFailedServiceCallMessaage(Guid aggerateId, FromSource source)
+        public void PublishEndServiceCallMessage(Guid aggerateId, ExternalSource source)
         {
-            var msg = new LaceExternalSourceFailedEventMessage(aggerateId, source, "Failed External Web Service Call");
+            var msg = new LaceExternalSourceEventMessage(aggerateId, source, PublishableLaceMessages.EndCallingExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishNoResponseFromServiceMessage(Guid aggerateId, FromSource source)
+        public void PublishFailedServiceCallMessaage(Guid aggerateId, ExternalSource source)
+        {
+            var msg = new LaceExternalSourceFailedEventMessage(aggerateId, source, PublishableLaceMessages.ExternalSourceCallFailed());
+            PublishMessage(msg);
+        }
+
+        public void PublishNoResponseFromServiceMessage(Guid aggerateId, ExternalSource source)
         {
             var msg = new LaceExternalSourceNoResponseEventMessage(aggerateId, source,
-                "Response from Web Service is null or does not exist");
+                PublishableLaceMessages.NoResponseReceivedFromExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishServiceRequestMessage(Guid aggerateId, FromSource source, string request)
+        public void PublishServiceRequestMessage(Guid aggerateId, ExternalSource source, string request)
         {
-            var msg = new LaceExternalSourceRequestEventMessage(aggerateId, source, "Request Sent to Web Service",
+            var msg = new LaceExternalSourceRequestEventMessage(aggerateId, source, PublishableLaceMessages.RequestSentToExternalSource(),
                 request);
             PublishMessage(msg);
 
         }
 
-        public void PublishServiceResponseMessage(Guid aggerateId, FromSource source, string response)
+        public void PublishServiceResponseMessage(Guid aggerateId, ExternalSource source, string response)
         {
             var msg = new LaceExternalSourceResponseEventMessage(aggerateId, source,
-                "Response Received from Web Service", response);
+                PublishableLaceMessages.ResponseReceivedFromExternalSource(), response);
             PublishMessage(msg);
         }
 
 
-        public void PublishSourceIsBeingHandledMessage(Guid aggerateId, FromSource source)
+        public void PublishSourceIsBeingHandledMessage(Guid aggerateId, ExternalSource source)
         {
-            var msg = new LaceSourceHandledEventMessage(aggerateId, source, "Source is being handled");
+            var msg = new LaceSourceHandledEventMessage(aggerateId, source, PublishableLaceMessages.ExternalSourceIsBeingHandled());
             PublishMessage(msg);
         }
 
-        public void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, FromSource source)
+        public void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, ExternalSource source)
         {
-            var msg = new LaceSourceHandledEventMessage(aggerateId, source, "Source is NOT being handled");
+            var msg = new LaceSourceHandledEventMessage(aggerateId, source, PublishableLaceMessages.ExternalSourceIsNotBeingHandled());
             PublishMessage(msg);
         }
 
-        public void PublishTransformationStartMessage(Guid aggerateId, FromSource source)
-        {
-            var msg = new LaceTransformResponseEventMessage(aggerateId, source,
-                "Start Transforming Response from Source");
-            PublishMessage(msg);
-        }
-
-        public void PublishTransformationEndMessage(Guid aggerateId, FromSource source)
-        {
-            var msg = new LaceTransformResponseEventMessage(aggerateId, source, "End Transforming Response from Source");
-            PublishMessage(msg);
-        }
-
-        public void PublishTransformationFailedMessage(Guid aggerateId, FromSource source)
+        public void PublishTransformationStartMessage(Guid aggerateId, ExternalSource source)
         {
             var msg = new LaceTransformResponseEventMessage(aggerateId, source,
-                "Transforming Response from Source Failed");
+                PublishableLaceMessages.TransformingResponseFromExternalSourceHasStarted());
+            PublishMessage(msg);
+        }
+
+        public void PublishTransformationEndMessage(Guid aggerateId, ExternalSource source)
+        {
+            var msg = new LaceTransformResponseEventMessage(aggerateId, source, PublishableLaceMessages.TransformingResponseFromExternalSourceHasFinished());
+            PublishMessage(msg);
+        }
+
+        public void PublishTransformationFailedMessage(Guid aggerateId, ExternalSource source)
+        {
+            var msg = new LaceTransformResponseEventMessage(aggerateId, source,
+                PublishableLaceMessages.TransformingResponseFromExternalSourceHasFailed());
             PublishMessage(msg);
         }
 

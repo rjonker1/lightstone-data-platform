@@ -12,18 +12,18 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
 {
     public class ivid_title_holder_request_data_from_ivid_title_holder_service_tests : Specification
     {
-        private readonly IRequestDataFromService _requestDataFromService;
+        private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _ividTitleHolderRequest;
         private ILaceResponse _laceResponse;
         private ILaceEvent _laceEvent;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public ivid_title_holder_request_data_from_ivid_title_holder_service_tests()
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _requestDataFromService = new RequestDatafromIvidTitleHolderService();
+            _requestDataFromService = new RequestDatafromIvidTitleHolderSource();
             _ividTitleHolderRequest =
                 MockIvidTitleHolderLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvidTitleHolder();
             _laceResponse = new LaceResponse();

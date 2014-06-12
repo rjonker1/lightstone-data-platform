@@ -28,7 +28,7 @@ namespace Lace.Source.Ivid
                 return;
             }
 
-            var consumer = new ConsumeService(new HandleIvidServiceCall(), new CallIvidExternalWebService(_request));
+            var consumer = new ConsumeService(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
             consumer.CallService(response, laceEvent);
         }
 

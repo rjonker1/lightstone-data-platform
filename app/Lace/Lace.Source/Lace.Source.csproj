@@ -41,11 +41,11 @@
     <Compile Include="Enums\Services.cs" />
     <Compile Include="Common\CheckThePackageDataSource.cs" />
     <Compile Include="Common\ICheckThePackageDataSource.cs" />
-    <Compile Include="ICallTheExternalWebService.cs" />
+    <Compile Include="ICallTheExternalSource.cs" />
     <Compile Include="IConfiguration.cs" />
-    <Compile Include="IHandleServiceCall.cs" />
+    <Compile Include="IHandleSourceCall.cs" />
     <Compile Include="ILogEvent.cs" />
-    <Compile Include="IRequestDataFromService.cs" />
+    <Compile Include="IRequestDataFromSource.cs" />
     <Compile Include="ITransform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

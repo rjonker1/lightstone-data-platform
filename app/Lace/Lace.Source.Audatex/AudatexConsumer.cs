@@ -27,7 +27,7 @@ namespace Lace.Source.Audatex
                 return;
             }
 
-            var consumer = new ConsumeService(new HandleAudatexServiceCall(), new CallAudatexExternalWebService(_request));
+            var consumer = new ConsumeService(new HandleAudatexSourceCall(), new CallAudatexSource(_request));
             consumer.CallService(response, laceEvent);
         }
 

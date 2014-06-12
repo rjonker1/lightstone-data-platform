@@ -46,12 +46,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ServiceCalls\CallIvidTitleHolderExternalWebService.cs" />
-    <Compile Include="ServiceCalls\HandleIvidTitleHolderServiceCall.cs" />
-    <Compile Include="ServiceCalls\RequestDatafromIvidTitleHolderService.cs" />
+    <Compile Include="ServiceCalls\CallIvidTitleHolderExternalSource.cs" />
+    <Compile Include="ServiceCalls\HandleIvidTitleHolderSourceCall.cs" />
+    <Compile Include="ServiceCalls\RequestDatafromIvidTitleHolderSource.cs" />
     <Compile Include="ServiceConfig\ConfigureIvidTitleHolderRequestMessage.cs" />
-    <Compile Include="ServiceConfig\ConfigureIvidTitleHolderWebService.cs" />
-    <Compile Include="Transform\TransformIvidTitleHolderWebResponse.cs" />
+    <Compile Include="ServiceConfig\ConfigureIvidTitleHolderSource.cs" />
+    <Compile Include="Transform\TransformIvidTitleHolderResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">

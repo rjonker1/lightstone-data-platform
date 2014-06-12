@@ -11,11 +11,11 @@ namespace Lace.Source.Tests.AudatexTests
 {
     public class audatex_request_data_from_audatex_service_tests : Specification
     {
-        private readonly IRequestDataFromService _requestDataFromService;
+        private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _audatexRequest;
         private ILaceResponse _laceResponse;
         private ILaceEvent _laceEvent;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
 
         public audatex_request_data_from_audatex_service_tests()
@@ -23,7 +23,7 @@ namespace Lace.Source.Tests.AudatexTests
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _requestDataFromService = new RequestDataFromAudatexService();
+            _requestDataFromService = new RequestDataFromAudatexSource();
             _audatexRequest = MockAudatexLicensePlateNumberRequestData.GetLicensePlateNumberRequestForAudatex();
             _laceResponse = new LaceResponse();
             _externalWebServiceCall = new MockCallingAudatexExternalWebService(_audatexRequest);

@@ -44,14 +44,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ServiceCalls\CallIvidExternalWebService.cs" />
-    <Compile Include="ServiceCalls\RequestDataFromIvidService.cs" />
-    <Compile Include="ServiceCalls\HandleIvidServiceCall.cs" />
+    <Compile Include="ServiceCalls\CallIvidExternalSource.cs" />
+    <Compile Include="ServiceCalls\RequestDataFromIvidSource.cs" />
+    <Compile Include="ServiceCalls\HandleIvidSourceCall.cs" />
     <Compile Include="IvidConsumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceConfig\ConfigureIvidRequestMessage.cs" />
-    <Compile Include="ServiceConfig\ConfigureIvidWebService.cs" />
-    <Compile Include="Transform\TransformIvidWebResponse.cs" />
+    <Compile Include="ServiceConfig\ConfigureIvidSource.cs" />
+    <Compile Include="Transform\TransformIvidResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">

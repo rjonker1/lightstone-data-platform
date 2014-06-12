@@ -4,12 +4,12 @@ namespace Monitoring.Events.Lace
 {
     public class ExternalSourceResponseFailureEvent : ExternalSourceBaseEvent
     {
-        public ExternalSourceResponseFailureEvent(Guid id, Guid aggregateId, string source, string message,
+        public ExternalSourceResponseFailureEvent(Guid id, Guid aggregateId, int source, string message,
             DateTime eventDate)
         {
             Id = id;
             AggregateId = aggregateId;
-            Source = source;
+            SourceId = source;
             Message = message;
             EventDate = eventDate;
         }

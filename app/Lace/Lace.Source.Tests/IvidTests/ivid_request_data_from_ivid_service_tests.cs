@@ -11,18 +11,18 @@ namespace Lace.Source.Tests.IvidTests
 {
     public class ivid_request_data_from_ivid_service_tests : Specification
     {
-        private readonly IRequestDataFromService _requestDataFromService;
+        private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _ividRequest;
         private ILaceResponse _laceResponse;
         private readonly ILaceEvent _laceEvent;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public ivid_request_data_from_ivid_service_tests()
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _requestDataFromService = new RequestDataFromIvidService();
+            _requestDataFromService = new RequestDataFromIvidSource();
             _ividRequest = MockIvidLicensePlateNumberRequestData.GetLicensePlateNumberRequestForIvid();
             _laceResponse = new LaceResponse();
             _externalWebServiceCall = new MockCallingIvidExternalWebService();

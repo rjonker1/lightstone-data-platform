@@ -11,18 +11,18 @@ namespace Lace.Source.Tests.RgtVinTests
 {
     public class rgt_vin_request_data_from_rgt_vin_service_tests : Specification
     {
-        private readonly IRequestDataFromService _requestDataFromService;
+        private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _rgtVinRequest;
         private ILaceResponse _laceResponse;
         private ILaceEvent _laceEvent;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public rgt_vin_request_data_from_rgt_vin_service_tests()
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _requestDataFromService = new RequestDataFromRgtVinService();
+            _requestDataFromService = new RequestDataFromRgtVinSource();
             _rgtVinRequest = MockRgtVinLicensePlateNumberRequestData.GetLicensePlateNumberReqeustForRgtVinRequest();
             _laceResponse = new LaceResponse();
             _externalWebServiceCall = new MockCallingRgtVinExternalWebService();

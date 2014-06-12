@@ -30,12 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITrackExternalSourceEventMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sources\FromSource.cs" />
+    <Compile Include="Sources\Lace\FromSource.cs" />
+    <Compile Include="Sources\Lace\PublishableMessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">

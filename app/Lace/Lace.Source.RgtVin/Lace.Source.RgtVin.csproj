@@ -48,12 +48,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ServiceCalls\CallRgtVinExternalWebService.cs" />
-    <Compile Include="ServiceCalls\HandleRgtVinServiceCall.cs" />
-    <Compile Include="ServiceCalls\RequestDataFromRgtVinService.cs" />
+    <Compile Include="ServiceCalls\CallRgtVinExternalSource.cs" />
+    <Compile Include="ServiceCalls\HandleRgtVinSourceCall.cs" />
+    <Compile Include="ServiceCalls\RequestDataFromRgtVinSource.cs" />
     <Compile Include="ServiceConfig\ConfigureRgtVinRequestMessage.cs" />
-    <Compile Include="ServiceConfig\ConfigureRgtVinWebService.cs" />
-    <Compile Include="Transform\TransformRgtVinWebResponse.cs" />
+    <Compile Include="ServiceConfig\ConfigureRgtVinWebSource.cs" />
+    <Compile Include="Transform\TransformRgtVinResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">

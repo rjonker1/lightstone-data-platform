@@ -27,7 +27,7 @@ namespace Lace.Source.IvidTitleHolder
                 return;
             }
 
-            var consumer = new ConsumeService(new HandleIvidTitleHolderServiceCall(), new CallIvidTitleHolderExternalWebService(_request));
+            var consumer = new ConsumeService(new HandleIvidTitleHolderSourceCall(), new CallIvidTitleHolderExternalSource(_request));
             consumer.CallService(response, laceEvent);
         }
 

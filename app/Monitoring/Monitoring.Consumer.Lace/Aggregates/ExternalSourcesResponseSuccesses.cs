@@ -1,18 +1,18 @@
 ﻿using System;
 using EventTracking.Domain.Core;
 using Monitoring.Events.Lace;
-using Monitoring.Sources;
+using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Aggregates
 {
     public class ExternalSourcesResponseSuccesses : AggregateBase
     {
 
-        public ExternalSourcesResponseSuccesses(Guid id, Guid aggregateId, FromSource source, string message,
+        public ExternalSourcesResponseSuccesses(Guid id, Guid aggregateId, ExternalSource source, string message,
             DateTime eventDate,string payload)
             : this()
         {
-            RaiseEvent(new ExternalSourceResponseSuccessEvent(id, aggregateId, source.ToString(), message,
+            RaiseEvent(new ExternalSourceResponseSuccessEvent(id, aggregateId, (int)source, message,
                 eventDate, payload));
         }
 

@@ -2,9 +2,9 @@
 
 namespace Lace.Source.Tests.Data.Audatex
 {
-    public class MockHandleAudatexServiceCall : IHandleServiceCall
+    public class MockHandleAudatexServiceCall : IHandleSourceCall
     {
-        public void Request(Action<IRequestDataFromService> action)
+        public void Request(Action<IRequestDataFromSource> action)
         {
             action(new MockRequestDataFromAudatexService());
         }

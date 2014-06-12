@@ -2,9 +2,9 @@
 
 namespace Lace.Source.Tests.Data.Ivid
 {
-    public class MockHandleIvidServiceCall : IHandleServiceCall
+    public class MockHandleIvidServiceCall : IHandleSourceCall
     {
-        public void Request(Action<IRequestDataFromService> action)
+        public void Request(Action<IRequestDataFromSource> action)
         {
             action(new MockRequestDataFromIvidService());
         }

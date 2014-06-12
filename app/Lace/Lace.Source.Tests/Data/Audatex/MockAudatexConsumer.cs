@@ -9,9 +9,9 @@ namespace Lace.Source.Tests.Data.Audatex
 {
     public class MockAudatexConsumer
     {
-        private readonly IHandleServiceCall _handleServiceCall;
+        private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public MockAudatexConsumer(ILaceRequest request)
         {

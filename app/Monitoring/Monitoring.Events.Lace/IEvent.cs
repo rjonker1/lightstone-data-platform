@@ -6,7 +6,7 @@ namespace Monitoring.Events.Lace
     {
         Guid Id { get; }
         Guid AggregateId { get; }
-        string Source { get; }
+        int SourceId { get; }
         string Message { get; }
         DateTime EventDate { get; }
     }

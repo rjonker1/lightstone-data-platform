@@ -6,11 +6,11 @@ namespace Lace.Consumer
 {
     public class ConsumeService : IConsumeService
     {
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
-        private readonly IHandleServiceCall _handleServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
+        private readonly IHandleSourceCall _handleServiceCall;
 
-        public ConsumeService(IHandleServiceCall handleServiceCall,
-            ICallTheExternalWebService externalWebServiceCall)
+        public ConsumeService(IHandleSourceCall handleServiceCall,
+            ICallTheExternalSource externalWebServiceCall)
         {
             _handleServiceCall = handleServiceCall;
             _externalWebServiceCall = externalWebServiceCall;
