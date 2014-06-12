@@ -35,8 +35,18 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,10 +74,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lace.Test.Helper\Lace.Test.Helper.csproj">
-      <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
-      <Name>Lace.Test.Helper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
       <Name>Monitoring %28Monitoring\Monitoring%29</Name>
@@ -151,6 +157,10 @@
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Test.Helper\Lace.Test.Helper.csproj">
+      <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
+      <Name>Lace.Test.Helper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>

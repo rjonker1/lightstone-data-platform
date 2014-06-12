@@ -190,7 +190,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Acceptance.Tests", "La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Unit.Tests", "Lace\Lace.Unit.Tests\Lace.Unit.Tests.csproj", "{5890ABA1-3E35-4B08-BA99-1EF0C2B5BA82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Test.Helper", "Lace.Test.Helper\Lace.Test.Helper.csproj", "{4644B15B-F4FD-4D93-A32E-313F4ACDB71B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Test.Helper", "Lace\Lace.Test.Helper\Lace.Test.Helper.csproj", "{4644B15B-F4FD-4D93-A32E-313F4ACDB71B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Acceptence.Tests", "Monitoring\Monitoring.Acceptence.Tests\Monitoring.Acceptence.Tests.csproj", "{4E514C14-509C-4134-BE7E-CF89B8B92AB4}"
 EndProject
