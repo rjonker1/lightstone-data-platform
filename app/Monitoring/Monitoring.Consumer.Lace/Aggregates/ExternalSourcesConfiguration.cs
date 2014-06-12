@@ -1,17 +1,17 @@
 ﻿using System;
 using EventTracking.Domain.Core;
 using Monitoring.Events.Lace;
-using Monitoring.Sources;
+using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Aggregates
 {
     public class ExternalSourcesConfiguration : AggregateBase
     {
-        public ExternalSourcesConfiguration(Guid id, Guid aggregateId, FromSource source, string message,
+        public ExternalSourcesConfiguration(Guid id, Guid aggregateId, ExternalSource source, string message,
             DateTime eventDate)
             : this()
         {
-            RaiseEvent(new ExternalSourceConfigurationEvent(id, aggregateId, source.ToString(), message,
+            RaiseEvent(new ExternalSourceConfigurationEvent(id, aggregateId, (int)source, message,
                 eventDate));
         }
 

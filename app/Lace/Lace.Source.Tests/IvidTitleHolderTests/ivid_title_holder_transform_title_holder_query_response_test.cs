@@ -8,7 +8,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
     public class ivid_title_holder_transform_title_holder_query_response_test : Specification
     {
         private readonly TitleholderQueryResponse _ividTitleHolderResponse;
-        private TransformIvidTitleHolderWebResponse _transformer;
+        private TransformIvidTitleHolderResponse _transformer;
 
         public ivid_title_holder_transform_title_holder_query_response_test()
         {
@@ -18,7 +18,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
 
         public override void Observe()
         {
-            _transformer = new TransformIvidTitleHolderWebResponse(_ividTitleHolderResponse);
+            _transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
             _transformer.Transform();
         }
 

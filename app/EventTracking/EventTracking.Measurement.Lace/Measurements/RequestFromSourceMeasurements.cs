@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
@@ -13,14 +16,14 @@ namespace EventTracking.Measurement.Lace.Measurements
         private readonly SourceRequestQuery _query;
 
         private readonly EventReader _eventReader;
-
-        //private readonly DeviceSimulator _deviceSimulator;
+      
         private readonly IConsole _console;
 
         private readonly SourceRequestExecutionTimesProjection _sourceRequestsProjection;
 
         public RequestFromSourceMeasurements(IProjectionContext context, SourceRequestsExecutionTimes projection,
-            EventReader reader, IConsole console, SourceRequestQuery query, SourceRequestExecutionTimesProjection sourceRequestsProjection)
+            EventReader reader, IConsole console, SourceRequestQuery query,
+            SourceRequestExecutionTimesProjection sourceRequestsProjection)
         {
             _projectionContext = context;
             _projection = projection;
@@ -39,7 +42,7 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             _eventReader.StartReading();
 
-            _console.ReadKey("Press ANY key to stop");
+            _console.ReadKey("\nPress ANY key to stop reading and show times\n");
 
             Stop();
 
@@ -49,10 +52,10 @@ namespace EventTracking.Measurement.Lace.Measurements
 
         }
 
-      
+
         private void Stop()
         {
-            
+
         }
 
         private void EnsureProjections()
@@ -76,20 +79,32 @@ namespace EventTracking.Measurement.Lace.Measurements
             var values = _query.GetValues(name);
             _console.Log("Request Details: {0}", name);
 
-            foreach (var value in values)
+
+            var grouped = values.GroupBy(g => g.AggregateId, times => times, (guid, elements) => new
             {
-                _console.Log("  - {0}", value.ToString());
+                AggregateId = guid,
+                times = elements
+            }).ToList();
+
+
+            foreach (var f in grouped)
+            {
+                foreach (var ft in f.times)
+                {
+                    _console.Log("  - {0}", ft.ToString());
+                }
+
+                var execTimes = SetExecutionTime(f.times.Single(w => w.StartTime.HasValue).StartTime.Value,
+                    f.times.Single(w => w.EndTime.HasValue).EndTime.Value);
+
+                _console.Log(execTimes == null ? "" : "  -- Execution Time {0}\n", execTimes);
             }
-
-
         }
 
-        private static string SetExecutionTime(DateTime? startTime, DateTime? endTime)
+
+        private static string SetExecutionTime(DateTime startTime, DateTime endTime)
         {
-            if (!startTime.HasValue || !endTime.HasValue) return string.Empty;
-
-            var time = (endTime.Value.TimeOfDay - startTime.Value.TimeOfDay).TotalSeconds;
-
+            var time = (endTime.TimeOfDay - startTime.TimeOfDay).TotalSeconds;
             return time.ToString("N");
         }
     }

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4644B15B-F4FD-4D93-A32E-313F4ACDB71B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Test.Helper</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Test.Helper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Fakes\RequestFakes\FakeEntryPoint.cs" />
+    <Compile Include="Mothers\Packages\Dto\DataField.cs" />
+    <Compile Include="Mothers\Packages\Dto\DataSet.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromAudatex.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromIvid.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromIvidTitleHolder.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromRgtVin.cs" />
+    <Compile Include="Mothers\Packages\Dto\LicensePlateNumberAllRequestPackage.cs" />
+    <Compile Include="Mothers\Packages\Dto\LicensePlateNumberSourcePackage.cs" />
+    <Compile Include="Mothers\Packages\Dto\Package.cs" />
+    <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestUserInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestVehicleInformation.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace\Lace.Functions\Lace.Functions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Functions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace\Lace.Request\Lace.Request.csproj">
+      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
+      <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mothers\Consumers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

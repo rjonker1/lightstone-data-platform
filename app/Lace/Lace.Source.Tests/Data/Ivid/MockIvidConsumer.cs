@@ -9,9 +9,9 @@ namespace Lace.Source.Tests.Data.Ivid
 {
     public class MockIvidConsumer
     {
-        private readonly IHandleServiceCall _handleServiceCall;
+        private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public MockIvidConsumer(ILaceRequest request)
         {

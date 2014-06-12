@@ -8,7 +8,7 @@ using Lace.Source.IvidTitleHolder.Transform;
 
 namespace Lace.Source.Tests.Data.IvidTitleHolder
 {
-    public class MockCallingIvidTitleHolderExternalWebService : ICallTheExternalWebService
+    public class MockCallingIvidTitleHolderExternalWebService : ICallTheExternalSource
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
         public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
@@ -20,7 +20,7 @@ namespace Lace.Source.Tests.Data.IvidTitleHolder
 
         public void TransformWebResponse(ILaceResponse response)
         {
-            var transformer = new TransformIvidTitleHolderWebResponse(_ividTitleHolderResponse);
+            var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 
             if (transformer.Continue)
             {

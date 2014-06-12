@@ -9,7 +9,7 @@ namespace Lace.Source.Tests.RgtVinTests
     {
 
         private readonly DataSet _rgtVinWebResponse;
-        private TransformRgtVinWebResponse _transfomer;
+        private TransformRgtVinResponse _transfomer;
 
 
         public rgt_vin_transform_response_tests()
@@ -20,7 +20,7 @@ namespace Lace.Source.Tests.RgtVinTests
 
         public override void Observe()
         {
-            _transfomer = new TransformRgtVinWebResponse(_rgtVinWebResponse);
+            _transfomer = new TransformRgtVinResponse(_rgtVinWebResponse);
             _transfomer.Transform();
         }
 
