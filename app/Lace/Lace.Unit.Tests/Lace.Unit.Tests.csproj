@@ -32,9 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ, Version=0.32.2.271, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -63,10 +73,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lace.Test.Helper\Lace.Test.Helper.csproj">
-      <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
-      <Name>Lace.Test.Helper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
@@ -150,6 +156,10 @@
     <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
       <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
       <Name>Lace.Source</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Test.Helper\Lace.Test.Helper.csproj">
+      <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
+      <Name>Lace.Test.Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
