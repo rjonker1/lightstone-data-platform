@@ -32,6 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyNetQ, Version=0.32.2.271, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
@@ -43,11 +55,70 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
+    <Compile Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs" />
+    <Compile Include="Sources\when_requesting_data_from_ivid_source.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lace.Test.Helper\Lace.Test.Helper.csproj">
+      <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
+      <Name>Lace.Test.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
+      <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
+      <Name>Workflow.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
+      <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
+      <Name>Workflow.RabbitMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
+      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
+      <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
+      <Name>Lace.Events.Messages.Publish</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
+      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
+      <Name>Lace.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
+      <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
+      <Name>Lace.Models.Audatex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
+      <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
+      <Name>Lace.Models.IvidTitleHolder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
+      <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
+      <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
+      <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
+      <Name>Lace.Models.Lightstone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
+      <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
+      <Name>Lace.Models.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Rgt\Lace.Models.Rgt.csproj">
+      <Project>{99c72578-05a3-4f67-87f6-280118c4c791}</Project>
+      <Name>Lace.Models.Rgt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request.Entry\Lace.Request.Entry.csproj">
       <Project>{2e7e7b3b-b78c-4a84-aa69-77c467c5e04d}</Project>
       <Name>Lace.Request.Entry</Name>
@@ -55,6 +126,30 @@
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj">
+      <Project>{8d2ad71f-e6d2-44e5-bd9e-11ff68ef3a6d}</Project>
+      <Name>Lace.Response.ExternalServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
+      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
+      <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj">
+      <Project>{11458e6f-fca6-4d3f-8aaa-10863873bb1c}</Project>
+      <Name>Lace.Source.IvidTitleHolder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Ivid\Lace.Source.Ivid.csproj">
+      <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
+      <Name>Lace.Source.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
+      <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>
+      <Name>Lace.Source.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
+      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
+      <Name>Lace.Source</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
