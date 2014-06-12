@@ -7,7 +7,7 @@ namespace Shared.BuildingBlocks.Api
     {
         public SecureModule()
         {
-            this.RequiresAuthentication();
+            //this.RequiresAuthentication();
         }
     }
 }
