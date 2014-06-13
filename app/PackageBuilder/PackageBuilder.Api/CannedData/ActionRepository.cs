@@ -16,7 +16,17 @@ namespace PackageBuilder.Api.CannedData
         {
             Add(
                 new Action("Get EzScore"),
-                new Action("License plate search") { Criteria = new Criteria { Fields = new IDataField[] { new DataField("LicenseNo") { Type = "string" } } } }
+                new Action("License plate search")
+                {
+                    Criteria = new Criteria
+                    {
+                        Fields = new IDataField[]
+                        {
+                            new DataField("LicenceNo") {Type = typeof (string).ToString()},
+                            new DataField("Vin") {Type = typeof (string).ToString()}
+                        }
+                    }
+                }
                 );
         }
     }

@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\DynamicTypeCreator.cs" />
     <Compile Include="NamedRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Entities\IAction.cs" />

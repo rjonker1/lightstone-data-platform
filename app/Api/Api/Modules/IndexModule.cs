@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Public.Entities;
@@ -140,18 +141,19 @@ namespace Api.Modules
             Get["/"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();
-                var metaData = pbApiClient.Get<dynamic>(token, "getUserMetaData");
+                var metaData = pbApiClient.Get<ApiMetaData>(token, "getUserMetaData");
 
-                return Response.AsJson((object)metaData);
+                return Response.AsJson(metaData);
             };
 
             Post["/action/{action}"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();
                 var packageResponse = pbApiClient.Get<Package>(token, "package/" + parameters.action);
+                //var packageResponse = pbApiClient.Get<ExpandoObject>(token, "package/" + parameters.action);
 
                 var package = Mapper.DynamicMap<IPackage>(packageResponse);
-
+                //var package = DynamicToStatic.ToStatic<IPackage>(packageResponse);
                 var vehicle = this.Bind<Vechicle>();
                 var request = new LicensePlateNumberRequest(package, new User(), new Context(), vehicle, new AggregationInformation());
                 //var entryPoint = new EntryPoint(new Workflow.RabbitMQ.Publisher(new BusFactory().CreateBus("workflow/api/queue", new WindsorContainer()))); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
@@ -162,16 +164,28 @@ namespace Api.Modules
 
                 return Response.AsJson(responses.First().Response);
             };
+        }
 
-            //Get["/license"] = parameters =>
-            //{
-            //    var vehicle = this.Bind<Vechicle>();
-            //    var request = new LicensePlateNumberRequest(null, null, null, vehicle, null);
-            //    var entryPoint = new EntryPoint(new Workflow.RabbitMQ.Publisher(new BusFactory().CreateBus(""))); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
-            //    var responses = entryPoint.GetResponsesFromLace(request);
+        public static class DynamicToStatic
+        {
+            public static T ToStatic<T>(object expando)
+            {
+                var entity = Mapper.DynamicMap<T>(expando);
 
-            //    return Response.AsJson(responses.First().Response);
-            //};
+                //ExpandoObject implements dictionary
+                var properties = expando as IDictionary<string, object>;
+
+                if (properties == null)
+                    return entity;
+
+                foreach (var entry in properties)
+                {
+                    var propertyInfo = entity.GetType().GetProperty(entry.Key);
+                    if (propertyInfo != null)
+                        propertyInfo.SetValue(entity, entry.Value, null);
+                }
+                return entity;
+            }
         }
     }
 
@@ -201,5 +215,23 @@ namespace Api.Modules
     {
         public string Name { get; set; }
         public Guid Id { get; set; }
+    }
+
+    public class Action 
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public Criteria Criteria { get; set; }
+    }
+
+    public class Criteria 
+    {
+        public IEnumerable<DataField> Fields { get; set; }
+    }
+
+    public class ApiMetaData
+    {
+        public string Path { get; set; }
+        public IEnumerable<Action> Actions { get; set; }
     }
 }

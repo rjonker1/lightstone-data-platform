@@ -74,9 +74,7 @@ namespace Shared.BuildingBlocks.Api
         {
             var request = new RestRequest(resource, method);
             request.AddHeader("Authorization", "ApiKey " + token);
-            if (body != null && method == Method.POST)
-                request.AddParameter("application/x-www-form-urlencoded", body, ParameterType.RequestBody);
-            if (body != null && method == Method.GET)
+            if (body != null)
                 request.AddObject(body);
 
             return request;

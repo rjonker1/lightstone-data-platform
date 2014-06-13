@@ -8,26 +8,45 @@
     <li><a href="#repair" data-toggle="tab">Repair</a></li>
     <li><a href="#valuation" data-toggle="tab">Valuation</a></li>
 </ul>
+@{
+    var ividResponse = Model.ividResponse;
+    var carFullname = ividResponse != null ? ividResponse.carFullname : "";
+    var displacement = ividResponse != null ? ividResponse.displacement : "";
+    var description = ividResponse != null ? ividResponse.description : "";
+    var lifeStatusDescription = ividResponse != null ? ividResponse.lifeStatusDescription : "";
+    var sapMarkDescription = ividResponse != null ? ividResponse.sapMarkDescription : "";
 
+    var specificInformation = ividResponse.specificInformation;
+    var colour = specificInformation != null ? specificInformation.colour : "";
+    var registrationNumber = specificInformation != null ? specificInformation.registrationNumber : "";
+    var vinNumber = specificInformation != null ? specificInformation.vinNumber : "";
+    var licenseNumber = specificInformation != null ? specificInformation.licenseNumber : "";
+    var engineNumber = specificInformation != null ? specificInformation.engineNumber : "";
+    
+    var ividTitleHolderResponse = Model.ividTitleHolderResponse;
+    var yearOfLiabilityForLicensing = ividTitleHolderResponse != null ? ividTitleHolderResponse.yearOfLiabilityForLicensing : "";
+    var bankName = ividTitleHolderResponse != null ? ividTitleHolderResponse.bankName : "";
+}
 <!-- Tab panes -->
 <div class="tab-content">
     <div class="tab-pane active" id="generic">
         <table class="table">
             <tr>
                 <td>Intro Year</td>
-                <td>@Model.ividTitleHolderResponse.yearOfLiabilityForLicensing</td>
+                <td>@yearOfLiabilityForLicensing</td>
             </tr>
             <tr>
                 <td>Model Type</td>
-                <td>@Model.ividResponse.carFullname</td>
+                <td>
+                    @carFullname</td>
             </tr>
             <tr>
                 <td>Engine Size (cc)</td>
-                <td>@Model.ividResponse.displacement</td>
+                <td>@displacement</td>
             </tr>
             <tr>
                 <td>Body Shape</td>
-                <td>@Model.ividResponse.description</td>
+                <td>@description</td>
             </tr>
         </table>
     </div>
@@ -35,31 +54,31 @@
         <table class="table">
             <tr>
                 <td>Colour</td>
-                <td>@Model.ividResponse.specificInformation.colour</td>
+                <td>@colour</td>
             </tr>
             <tr>
                 <td>REG #</td>
-                <td>@Model.ividResponse.specificInformation.registrationNumber</td>
+                <td>@registrationNumber</td>
             </tr>
             <tr>
                 <td>VIN #</td>
-                <td>@Model.ividResponse.specificInformation.vinNumber</td>
+                <td>@vinNumber</td>
             </tr>
             <tr>
                 <td>Licence #</td>
-                <td>@Model.ividResponse.specificInformation.licenseNumber</td>
+                <td>@licenseNumber</td>
             </tr>
             <tr>
                 <td>Engine #</td>
-                <td>@Model.ividResponse.specificInformation.engineNumber</td>
+                <td>@engineNumber</td>
             </tr>
             <tr>
                 <td>Warranty Start Date</td>
-                <td>@Model.ividTitleHolderResponse.yearOfLiabilityForLicensing</td>
+                <td>@yearOfLiabilityForLicensing</td>
             </tr>
             <tr>
                 <td>Financing bank</td>
-                <td>@Model.ividTitleHolderResponse.bankName</td>
+                <td>@bankName</td>
             </tr>
         </table>
     </div>
@@ -67,11 +86,11 @@
         <table class="table">
             <tr>
                 <td>Vehicle Life Status Description</td>
-                <td>@Model.ividResponse.lifeStatusDescription</td>
+                <td>@lifeStatusDescription</td>
             </tr>
             <tr>
                 <td>SAPS Interest</td>
-                <td>@Model.ividResponse.sapMarkDescription</td>
+                <td>@sapMarkDescription</td>
             </tr>
         </table>
     </div>

@@ -1,4 +1,6 @@
-﻿namespace PackageBuilder.Api
+﻿using DataPlatform.Shared.Public.Entities;
+
+namespace PackageBuilder.Api
 {
     using Nancy;
 
@@ -10,7 +12,7 @@
             {
                 var package = new PackageLookup().Get(Context.CurrentUser.UserName, parameters.action);
 
-                return Response.AsJson((object)package);
+                return Response.AsJson((IPackage)package);
             };
 
             Get["/getUserMetaData"] = parameters =>
