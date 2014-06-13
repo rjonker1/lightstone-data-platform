@@ -21,7 +21,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_conumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceExternalSourceEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source event" );
 
             var consumer = new ExternalSourceConsumer();
@@ -29,7 +29,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
             consumer.HasBeenConsumed.ShouldBeTrue();
 
 
-            message = new LaceExternalSourceEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            message = new LaceExternalSourceEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                "Monitoring Unit Test for external source event Next");
 
            // consumer = new ExternalSourceConsumer();
@@ -41,7 +41,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_configuration_consumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceConfigurationEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceExternalSourceConfigurationEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source configuration event");
 
             var consumer = new ExternalSourceConfigurationConsumer();
@@ -52,7 +52,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_failed_consumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceFailedEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceExternalSourceFailedEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source failed event");
 
             var consumer = new ExternalSourceFailedConsumer();
@@ -63,7 +63,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_handled_consumer_consumed_must_be_truee()
         {
-            var message = new LaceSourceHandledEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceSourceHandledEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source handled event");
 
             var consumer = new ExternalSourceHandledConsumer();
@@ -74,7 +74,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_no_response_received_consumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceNoResponseEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceExternalSourceNoResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source no response received event");
 
             var consumer = new ExternalSourceNoResponseReceivedConsumer();
@@ -85,7 +85,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_response_received_consumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceResponseEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceExternalSourceResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source response received event",string.Empty);
 
             var consumer = new ExternalSourceReceivedResponseConsumer();
@@ -96,7 +96,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_request_sent_consumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceRequestEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceExternalSourceRequestEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source request sent event",string.Empty);
 
             var consumer = new ExternalSourceSentRequestsConsumer();
@@ -107,7 +107,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_response_transformed_consumer_consumed_must_true()
         {
-            var message = new LaceTransformResponseEventMessage(Guid.NewGuid(), ExternalSource.IvidSource,
+            var message = new LaceTransformResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
                 "Monitoring Unit Test for external source request transformed event");
 
             var consumer = new ExternalSourceTransformationConsumer();

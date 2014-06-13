@@ -17,7 +17,7 @@ namespace EventTracking.Measurement.Lace
         {
             var console = new Domain.Read.Core.Console();
             var projectionContext = new ProjectionContext(console);
-            var sourceRequestType = new SourceRequestsExecutionTimes();
+            var sourceRequestType = new EventsPublishedForLaceRequests();
 
             var connection = DefaultConnection();
 
@@ -25,7 +25,7 @@ namespace EventTracking.Measurement.Lace
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                console, new SourceRequestQuery(connection), new SourceRequestExecutionTimesProjection(projectionContext));
+                console, new SourceRequestQuery(connection), new ExternalSourceEventInformationProjection(projectionContext));
 
             measurements.Run();
 

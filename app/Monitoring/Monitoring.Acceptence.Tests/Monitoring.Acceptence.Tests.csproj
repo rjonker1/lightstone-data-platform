@@ -7,8 +7,8 @@
     <ProjectGuid>{4E514C14-509C-4134-BE7E-CF89B8B92AB4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Monitoring.Acceptence.Tests</RootNamespace>
-    <AssemblyName>Monitoring.Acceptence.Tests</AssemblyName>
+    <RootNamespace>Monitoring.Acceptance.Tests</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Monitoring.Acceptance.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lace\Consumer\when_sending_lace_external_source_events_to_event_store.cs" />
+    <Compile Include="Fakes\FakeLaceSourceEvents.cs" />
+    <Compile Include="Lace\Consumer\when_sending_lace_external_source_call_events_to_event_store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

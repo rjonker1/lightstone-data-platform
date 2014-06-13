@@ -19,7 +19,7 @@ namespace Lace.Source.Ivid.ServiceCalls
         private HpiStandardQueryResponse _ividResponse;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
-        private const ExternalSource Source = ExternalSource.IvidSource;
+        private const LaceEventSource Source = LaceEventSource.Ivid;
 
         public CallIvidExternalSource(ILaceRequest request)
         {

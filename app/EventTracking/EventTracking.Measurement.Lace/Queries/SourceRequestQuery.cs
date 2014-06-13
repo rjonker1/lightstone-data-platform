@@ -18,18 +18,11 @@ namespace EventTracking.Measurement.Lace.Queries
             _connection = connection;
         }
 
-        public IEnumerable<SourceRequestsExecutionTimes> GetValues(string sourceName)
+        public IEnumerable<EventsPublishedForLaceRequests> GetValues(string sourceName)
         {
             var projectionResultStream = string.Format("{0}", sourceName);
 
-            var values = _connection.ReadStreamEventsBackward<DetailsForRequest>(projectionResultStream);
-
-            return values
-                .Select(s => new SourceRequestsExecutionTimes(s.Message, s.Source, s.AggregateId, s.EventDate))
-                .Where(w => w.IsExternalSourceCall)
-                .OrderBy(o => o.AggregateId)
-                .ThenBy(o => o.EventDate)
-                .ToList();
+            return _connection.ReadStreamEventsBackward<EventsPublishedForLaceRequests>(projectionResultStream);
         }
     }
 }

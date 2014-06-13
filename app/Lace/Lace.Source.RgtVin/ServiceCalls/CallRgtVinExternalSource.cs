@@ -17,7 +17,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private DataSet _rgtVinResponse;
         private readonly ILaceRequest _request;
-        private const ExternalSource Source = ExternalSource.RgtVinSource;
+        private const LaceEventSource Source = LaceEventSource.RgtVin;
 
         public CallRgtVinExternalSource(ILaceRequest request)
         {

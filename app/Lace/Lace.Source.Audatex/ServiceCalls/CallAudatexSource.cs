@@ -17,7 +17,7 @@ namespace Lace.Source.Audatex.ServiceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private GetDataResult _audatexResponse;
         private readonly ILaceRequest _request;
-        private const ExternalSource Source = ExternalSource.AudatexSource;
+        private const LaceEventSource Source = LaceEventSource.Audatex;
 
         public CallAudatexSource(ILaceRequest request)
         {

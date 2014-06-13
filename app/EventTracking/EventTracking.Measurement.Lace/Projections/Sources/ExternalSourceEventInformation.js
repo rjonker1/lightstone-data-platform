@@ -1,7 +1,7 @@
 ﻿// <reference path="References\1Prelude.js" />
 // <reference path="References\Projections.js" />
 
-var externalSourceExecutionTimesDetector = function externalSourceExecutionTimesConstructor($eventServices) {
+var externalSourceInformationDetector = function externalSourceInformationConstructor($eventServices) {
     
 
     var eventServices = !$eventServices ? { emit: emit } : $eventServices;
@@ -23,7 +23,7 @@ var externalSourceExecutionTimesDetector = function externalSourceExecutionTimes
         state.count += 1;
         aggregateId = event.body["AggregateId"];
         messageId = event.body["Id"];
-        source = event.body["Source"];
+        source = event.body["SourceId"];
         message = event.body["Message"];
         eventDate = event.body["EventDate"];
 
@@ -31,17 +31,17 @@ var externalSourceExecutionTimesDetector = function externalSourceExecutionTimes
     
     return {
         init: init,
-        processRequestsTimes: processEvent
+        processExternalSourceEvents: processEvent
     };
 };
 
 
 
-var detector = externalSourceExecutionTimesDetector();
+var detector = externalSourceInformationDetector();
 
 fromStream('externalSourceInformation')
     //.partitionBy(function(e) { return e.body["AggregateId"]; })
     .when({
         $init: detector.init,
-        ExternalSourceEvent: detector.processRequestsTimes
+        ExternalSourceEvent: detector.processExternalSourceEvents
     });

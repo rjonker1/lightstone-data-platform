@@ -59,21 +59,25 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishStartServiceConfigurationMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishLaceReceivedRequestMessage(_aggregateId, LaceEventSource.EntryPoint);
 
-            _laceEvent.PublishEndServiceConfigurationMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishStartServiceConfigurationMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishStartServiceCallMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishEndServiceConfigurationMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndServiceCallMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishStartServiceCallMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishServiceRequestMessage(_aggregateId, ExternalSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(new LicensePlateNumberIvidOnlyRequest()));
+            _laceEvent.PublishEndServiceCallMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishServiceResponseMessage(_aggregateId, ExternalSource.IvidSource, JsonFunctions.JsonFunction.ObjectToJson(new LicensePlateRequestBuilder().ForIvid()));
+            _laceEvent.PublishServiceRequestMessage(_aggregateId, LaceEventSource.Ivid, JsonFunctions.JsonFunction.ObjectToJson(new LicensePlateNumberIvidOnlyRequest()));
 
-            _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishServiceResponseMessage(_aggregateId, LaceEventSource.Ivid, JsonFunctions.JsonFunction.ObjectToJson(new LicensePlateRequestBuilder().ForIvid()));
 
-            _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, LaceEventSource.Ivid);
+
+            _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, LaceEventSource.Ivid);
+
+            _laceEvent.PublishLaceReceivedRequestMessage(_aggregateId, LaceEventSource.Initialization);
 
 
             Thread.Sleep(5000);

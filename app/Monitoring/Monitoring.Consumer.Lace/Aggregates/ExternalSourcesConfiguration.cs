@@ -7,7 +7,7 @@ namespace Monitoring.Consumer.Lace.Aggregates
 {
     public class ExternalSourcesConfiguration : AggregateBase
     {
-        public ExternalSourcesConfiguration(Guid id, Guid aggregateId, ExternalSource source, string message,
+        public ExternalSourcesConfiguration(Guid id, Guid aggregateId, LaceEventSource source, string message,
             DateTime eventDate)
             : this()
         {

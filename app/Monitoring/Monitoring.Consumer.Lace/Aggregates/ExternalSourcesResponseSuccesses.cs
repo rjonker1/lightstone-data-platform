@@ -8,7 +8,7 @@ namespace Monitoring.Consumer.Lace.Aggregates
     public class ExternalSourcesResponseSuccesses : AggregateBase
     {
 
-        public ExternalSourcesResponseSuccesses(Guid id, Guid aggregateId, ExternalSource source, string message,
+        public ExternalSourcesResponseSuccesses(Guid id, Guid aggregateId, LaceEventSource source, string message,
             DateTime eventDate,string payload)
             : this()
         {

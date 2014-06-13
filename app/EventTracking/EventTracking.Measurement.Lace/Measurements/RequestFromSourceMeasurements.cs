@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using EventTracking.Domain.Read.Core;
+using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
+using EventTracking.Measurement.Lace.Results;
 
 namespace EventTracking.Measurement.Lace.Measurements
 {
@@ -12,18 +15,18 @@ namespace EventTracking.Measurement.Lace.Measurements
     {
 
         private readonly IProjectionContext _projectionContext;
-        private readonly SourceRequestsExecutionTimes _projection;
+        private readonly EventsPublishedForLaceRequests _projection;
         private readonly SourceRequestQuery _query;
 
         private readonly EventReader _eventReader;
       
         private readonly IConsole _console;
 
-        private readonly SourceRequestExecutionTimesProjection _sourceRequestsProjection;
+        private readonly ExternalSourceEventInformationProjection _sourceRequestsProjection;
 
-        public RequestFromSourceMeasurements(IProjectionContext context, SourceRequestsExecutionTimes projection,
+        public RequestFromSourceMeasurements(IProjectionContext context, EventsPublishedForLaceRequests projection,
             EventReader reader, IConsole console, SourceRequestQuery query,
-            SourceRequestExecutionTimesProjection sourceRequestsProjection)
+            ExternalSourceEventInformationProjection sourceRequestsProjection)
         {
             _projectionContext = context;
             _projection = projection;
@@ -36,13 +39,14 @@ namespace EventTracking.Measurement.Lace.Measurements
 
         public void Run()
         {
+           
             ShowRequestDetails();
 
             EnsureProjections();
 
             _eventReader.StartReading();
 
-            _console.ReadKey("\nPress ANY key to stop reading and show times\n");
+            _console.ReadKey("\nPress ANY key to stop reading and show results\n");
 
             Stop();
 
@@ -79,6 +83,15 @@ namespace EventTracking.Measurement.Lace.Measurements
             var values = _query.GetValues(name);
             _console.Log("Request Details: {0}", name);
 
+            ShowRequestExecutionTimes(values);
+        }
+
+
+        private void ShowRequestExecutionTimes(
+            IEnumerable<IShowEventsPublishedForLaceRequests> projectionResults)
+        {
+
+            var values = BuildMeasurementResults.ForSourceExecutionTimes(projectionResults);
 
             var grouped = values.GroupBy(g => g.AggregateId, times => times, (guid, elements) => new
             {
@@ -86,21 +99,48 @@ namespace EventTracking.Measurement.Lace.Measurements
                 times = elements
             }).ToList();
 
-
             foreach (var f in grouped)
             {
-                foreach (var ft in f.times)
+                _console.Log("--------------------------------\n");
+                _console.Log("Aggregate - {0}", f.AggregateId);
+
+                var groupedTimes = f.times
+                    .GroupBy(g => g.Source, times => times, (key, elements) => new
+                    {
+                        Source = key,
+                        times = elements
+
+                    }).ToList();
+
+
+                foreach (var groupedTime in groupedTimes)
                 {
-                    _console.Log("  - {0}", ft.ToString());
+
+                    foreach (var ft in groupedTime.times)
+                    {
+                        _console.Log("  - {0}", ft.ToString());
+                    }
+
+                    if(!groupedTime.times.Any(w => w.IsExternalSourceCall)) continue;
+
+
+                    var startTime = groupedTime.times.FirstOrDefault(w => w.StartTime.HasValue) == null
+                        ? DateTime.MinValue
+                        : groupedTime.times.FirstOrDefault(w => w.StartTime.HasValue).StartTime.Value;
+
+                    var endTime = groupedTime.times.FirstOrDefault(w => w.EndTime.HasValue) == null
+                        ? DateTime.MinValue
+                        : groupedTime.times.FirstOrDefault(w => w.EndTime.HasValue).EndTime.Value;
+
+                    var execTimes = SetExecutionTime(startTime, endTime);
+
+                    _console.Log(execTimes == null ? "" : "  -- Execution Time {0}\n", execTimes);
                 }
 
-                var execTimes = SetExecutionTime(f.times.Single(w => w.StartTime.HasValue).StartTime.Value,
-                    f.times.Single(w => w.EndTime.HasValue).EndTime.Value);
+                _console.Log("--------------------------------\n");
 
-                _console.Log(execTimes == null ? "" : "  -- Execution Time {0}\n", execTimes);
             }
         }
-
 
         private static string SetExecutionTime(DateTime startTime, DateTime endTime)
         {

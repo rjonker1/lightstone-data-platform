@@ -7,7 +7,7 @@ namespace Monitoring.Consumer.Lace.Messages
     public class LaceExternalSourceConfigurationEventMessage : ITrackExternalSourceEventMessage
     {
 
-        public LaceExternalSourceConfigurationEventMessage(Guid aggregateId, ExternalSource source, string message)
+        public LaceExternalSourceConfigurationEventMessage(Guid aggregateId, LaceEventSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;
@@ -23,7 +23,7 @@ namespace Monitoring.Consumer.Lace.Messages
         }
 
         public Guid AggregateId { get; private set; }
-        public ExternalSource Source { get; private set; }
+        public LaceEventSource Source { get; private set; }
         public string Message { get; private set; }
 
         public DateTime EventDate

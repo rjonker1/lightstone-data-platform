@@ -55,9 +55,9 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishSourceIsBeingHandledMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishSourceIsBeingHandledMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishSourceIsNotBeingHandledMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishSourceIsNotBeingHandledMessage(_aggregateId, LaceEventSource.Ivid);
         }
 
         [Observation]
@@ -67,11 +67,11 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishTransformationFailedMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishTransformationFailedMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishTransformationStartMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishTransformationStartMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishTransformationEndMessage(_aggregateId, ExternalSource.IvidSource);
+            _laceEvent.PublishTransformationEndMessage(_aggregateId, LaceEventSource.Ivid);
 
 
             Thread.Sleep(5000);

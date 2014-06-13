@@ -37,6 +37,14 @@ namespace Monitoring.Sources.Lace
         public static Func<string> TransformingResponseFromExternalSourceHasFailed =
             () => "LACE Failed to Transform Response from External Source";
 
+        public static Func<string> LaceReceivedRequestStarted =
+            () => "LACE Request Received and Data Collection has started";
+
+        public static Func<string> LaceProcessedRequestAndResturnedResponse =
+            () => "LACE Processed Request and Response has been Returned";
+
+        public static Func<string> LaceCannotProcessRequestAndErrorHasBeenLogged = () =>
+            "LACE Could not Process Request and an Error has been Logged";
 
     }
 }

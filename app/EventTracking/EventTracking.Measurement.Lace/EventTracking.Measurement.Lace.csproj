@@ -41,15 +41,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\DetailsForRequest.cs" />
+    <Compile Include="Events\EventsPublishedForLaceRequests.cs" />
+    <Compile Include="Events\IShowEventsPublishedForLaceRequests.cs" />
     <Compile Include="Events\KnownEventsProvider.cs" />
     <Compile Include="Measurements\RequestFromSourceMeasurements.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projections\ProjectionSources.cs" />
-    <Compile Include="Projections\SourceRequestExecutionTimesProjection.cs" />
+    <Compile Include="Projections\ExternalSourceEventInformationProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\SourceRequestQuery.cs" />
-    <Compile Include="Queries\SourceRequestsExecutionTimes.cs" />
+    <Compile Include="Results\BuildMeasurementResults.cs" />
+    <Compile Include="Results\SourceRequestsExecutionTimes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -62,7 +64,6 @@
     <EmbeddedResource Include="Projections\Sources\References\Projections.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Projections\Sources\RequestsSentToSources.js.old" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring.Events.Lace\Monitoring.Events.Lace.csproj">
@@ -79,7 +80,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Projections\Sources\SourceRequestExecutionTimes.js">
+    <EmbeddedResource Include="Projections\Sources\ExternalSourceEventInformation.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

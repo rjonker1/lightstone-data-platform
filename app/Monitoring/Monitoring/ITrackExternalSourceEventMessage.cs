@@ -10,7 +10,7 @@ namespace Monitoring
         Guid Id { get; }
 
         Guid AggregateId { get; }
-        ExternalSource Source { get; }
+        LaceEventSource Source { get; }
         string Message { get; }
         DateTime EventDate { get; }
     }

@@ -20,7 +20,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private TitleholderQueryResponse _ividTitleHolderResponse;
         private readonly ILaceRequest _request;
-        private const ExternalSource Source = ExternalSource.IvitTitleHolderSource;
+        private const LaceEventSource Source = LaceEventSource.IvidTitleHolder;
 
         public CallIvidTitleHolderExternalSource(ILaceRequest request)
         {
