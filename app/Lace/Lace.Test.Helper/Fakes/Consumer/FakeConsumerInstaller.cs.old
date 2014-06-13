@@ -1,20 +1,20 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Common.Logging;
-using Monitoring.Consumer.Lace.Consumers;
+using Component = System.ComponentModel.Component;
 
-namespace Monitoring.Consumer.Installer
+namespace Lace.Test.Helper.Fakes.Consumer
 {
-    public class ConsumerInstaller : IWindsorInstaller
+    public class FakeConsumerInstaller: IWindsorInstaller
     {
-        private readonly ILog _log = LogManager.GetCurrentClassLogger();
-
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            _log.InfoFormat("Installing Monitoring Consumer");
-
             container.Register(
                 Component.For<ExternalSourceConsumer>().ImplementedBy<ExternalSourceConsumer>(),
                 Component.For<ExternalSourceConfigurationConsumer>()
@@ -31,5 +31,4 @@ namespace Monitoring.Consumer.Installer
                 );
 
         }
-    }
 }

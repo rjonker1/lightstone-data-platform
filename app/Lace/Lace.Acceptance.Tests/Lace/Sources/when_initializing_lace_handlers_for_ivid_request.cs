@@ -36,20 +36,20 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
 
         [Observation]
-        public void lace_functional_test_response_to_be_returned_should_be_one()
+        public void lace_response_to_be_returned_should_be_one()
         {
             _laceResponses.Count.ShouldEqual(1);
         }
 
 
         [Observation]
-        public void lace_functional_test_ivid_response_should_be_handled()
+        public void lace_ivid_response_should_be_handled()
         {
             _laceResponses[0].Response.IvidResponseHandled.Handled.ShouldEqual(true);
         }
 
         [Observation]
-        public void lace_functional_test_ivid_response_shuould_not_be_null()
+        public void lace_ivid_response_shuould_not_be_null()
         {
             _laceResponses[0].Response.IvidResponse.ShouldNotBeNull();
         }

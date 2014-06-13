@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lace\Consumer\when_external_source_gets_consumed.cs" />
-    <Compile Include="Lace\Events\when_external_source_event_gets_read.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +84,9 @@
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
       <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Lace\Events\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

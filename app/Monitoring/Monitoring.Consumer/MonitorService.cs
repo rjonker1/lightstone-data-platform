@@ -20,27 +20,6 @@ namespace Monitoring.Consumer
             _bus = new BusFactory().CreateBus("monitor-event-tracking/queue", container);
 
             _log.DebugFormat("Billing monitoring started");
-
-            //var consumers = new ConsumerRegistration()
-            //    .AddConsumer<ExternalSourceConsumer, LaceExternalSourceEventMessage>(
-            //        () => new ExternalSourceConsumer())
-            //    .AddConsumer<ExternalSourceConfigurationConsumer, LaceExternalSourceConfigurationEventMessage>(
-            //        () => new ExternalSourceConfigurationConsumer())
-            //    .AddConsumer<ExternalSourceFailedConsumer, LaceExternalSourceFailedEventMessage>(
-            //        () => new ExternalSourceFailedConsumer())
-            //    .AddConsumer<ExternalSourceHandledConsumer, LaceSourceHandledEventMessage>(
-            //        () => new ExternalSourceHandledConsumer())
-            //    .AddConsumer<ExternalSourceNoResponseReceivedConsumer, LaceExternalSourceNoResponseEventMessage>(
-            //        () => new ExternalSourceNoResponseReceivedConsumer())
-            //    .AddConsumer<ExternalSourceTransformationConsumer, LaceTransformResponseEventMessage>(
-            //        () => new ExternalSourceTransformationConsumer())
-            //    .AddConsumer<ExternalSourceReceivedResponseConsumer, LaceExternalSourceResponseEventMessage>(
-            //        () => new ExternalSourceReceivedResponseConsumer())
-            //    .AddConsumer<ExternalSourceSentRequestsConsumer, LaceExternalSourceRequestEventMessage>(
-            //        () => new ExternalSourceSentRequestsConsumer());
-
-           // _bus = new BusFactory().CreateConsumerBus("monitor-event-tracking/queue", consumers);
-           // _bus = new BusFactory().CreateBus()
         }
 
         public void Stop()

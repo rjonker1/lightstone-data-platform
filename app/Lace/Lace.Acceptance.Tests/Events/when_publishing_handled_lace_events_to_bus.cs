@@ -35,7 +35,8 @@ namespace Lace.Acceptance.Tests.Events
             try
             {
               
-                _bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
+                //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
+                _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
                 _laceEvent = new PublishLaceEventMessages(_publishMessages);
 
@@ -48,7 +49,7 @@ namespace Lace.Acceptance.Tests.Events
 
 
         [Observation]
-        public void when_lace_ivid_events_sources_handled_published()
+        public void lace_ivid_source_events_handled_must_be_published()
         {
             _exception.ShouldBeNull();
 
@@ -60,7 +61,7 @@ namespace Lace.Acceptance.Tests.Events
         }
 
         [Observation]
-        public void when_lace_ivid_events_sources_responses_transformend_published()
+        public void lace_ivid_source_events_response_being_transformend_must_be_published()
         {
             _exception.ShouldBeNull();
 
