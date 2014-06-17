@@ -1,10 +1,11 @@
 ﻿using DataPlatform.Shared.Public.Entities;
+using Shared.BuildingBlocks.Api;
 
 namespace PackageBuilder.Api
 {
     using Nancy;
 
-    public class IndexModule : NancyModule
+    public class IndexModule : SecureModule
     {
         public IndexModule()
         {

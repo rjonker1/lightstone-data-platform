@@ -78,7 +78,13 @@ namespace Api
 
         public string ReasonForApplication { get; private set; }
 
-        public string SecurityCode { get; private set; }
+        public string SecurityCode
+        {
+            get
+            {
+                return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
+            }
+        }
     }
 
     public class Vechicle : ILaceRequestVehicleInformation
