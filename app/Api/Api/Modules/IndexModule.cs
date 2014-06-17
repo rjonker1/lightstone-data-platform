@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Public.Entities;
@@ -11,6 +10,7 @@ using Nancy;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow.BuildingBlocks;
 
 namespace Api.Modules
 {
@@ -130,7 +130,7 @@ namespace Api.Modules
         {
             get
             {
-                return Guid.NewGuid();
+                return new Guid("1E660593-C11C-47B3-84DF-988F9FDFB0F1");
             }
         }
     }
@@ -156,10 +156,9 @@ namespace Api.Modules
                 //var package = DynamicToStatic.ToStatic<IPackage>(packageResponse);
                 var vehicle = this.Bind<Vechicle>();
                 var request = new LicensePlateNumberRequest(package, new User(), new Context(), vehicle, new AggregationInformation());
-                //var entryPoint = new EntryPoint(new Workflow.RabbitMQ.Publisher(new BusFactory().CreateBus("workflow/api/queue", new WindsorContainer()))); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
-                var bus = new FakeBus();
+                var bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 var publisher = new Workflow.RabbitMQ.Publisher(bus);
-                var entryPoint = new EntryPoint(publisher); //TODO: Need to build functionality to create a bus and pass in IPublishMessages
+                var entryPoint = new EntryPoint(publisher); 
                 var responses = entryPoint.GetResponsesFromLace(request);
 
                 return Response.AsJson(responses.First().Response);
