@@ -2,9 +2,9 @@
 
 namespace Lace.Source.Tests.Data.Ivid
 {
-    public class MockRequestDataFromIvidService : IRequestDataFromService
+    public class MockRequestDataFromIvidService : IRequestDataFromSource
     {
-        public void FetchDataFromService(Response.ILaceResponse response, ICallTheExternalWebService externalWebService, ILaceEvent laceEvent)
+        public void FetchDataFromService(Response.ILaceResponse response, ICallTheExternalSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalWebService(response,laceEvent);
         }

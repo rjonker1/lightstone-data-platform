@@ -1,14 +1,14 @@
 ﻿using System;
-using Monitoring.Sources;
+using Monitoring.Sources.Lace;
 
 namespace Lace.Events
 {
     public interface ILaceTransformEvent
     {
-        void PublishTransformationStartMessage(Guid aggerateId, FromSource source);
+        void PublishTransformationStartMessage(Guid aggerateId, LaceEventSource source);
 
-        void PublishTransformationEndMessage(Guid aggerateId, FromSource source);
+        void PublishTransformationEndMessage(Guid aggerateId, LaceEventSource source);
 
-        void PublishTransformationFailedMessage(Guid aggerateId, FromSource source);
+        void PublishTransformationFailedMessage(Guid aggerateId, LaceEventSource source);
     }
 }

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4644B15B-F4FD-4D93-A32E-313F4ACDB71B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Test.Helper</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Test.Helper</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=0.32.2.271, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\RequestedTypes\RequestedTypeBuilder.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
+    <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
+    <Compile Include="Fakes\Bus\FakeBus.cs" />
+    <None Include="Fakes\Consumer\FakeConsumerInstaller.cs.old" />
+    <Compile Include="Fakes\Lace\Consumer\FakeIvidConsumer.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderConsumer.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeRgtVinConsumer.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeAudatexConsumer.cs" />
+    <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
+    <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
+    <Compile Include="Fakes\Lace\FakeLaceLoader.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtVinServiceCall.cs" />
+    <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberResponse.cs" />
+    <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingAudatexExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
+    <Compile Include="Fakes\Loader\FakeLaceLicensePlateNumberLoader.cs" />
+    <Compile Include="Fakes\RequestFakes\FakeEntryPoint.cs" />
+    <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
+    <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
+    <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
+    <Compile Include="Mothers\Packages\Dto\DataField.cs" />
+    <Compile Include="Mothers\Packages\Dto\DataSet.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromAudatex.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromIvid.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromIvidTitleHolder.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromRgtVin.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
+    <Compile Include="Mothers\Packages\Dto\Package.cs" />
+    <Compile Include="Fakes\Loader\FakeRequestedTypesForLicensePlateNumber.cs" />
+    <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestUserInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestVehicleInformation.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberAudatexOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberIvidOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberRgtVinOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberSliverAllServicesRequest.cs" />
+    <Compile Include="Builders\Responses\SourceResponseBuilder.cs" />
+    <Compile Include="Mothers\Sources\RequestDataFromAudatexService.cs" />
+    <Compile Include="Mothers\Sources\RequestDataFromIvidService.cs" />
+    <Compile Include="Mothers\Sources\RequestDataFromIvidTitleHolderService.cs" />
+    <Compile Include="Mothers\Sources\RequestDataFromRgtVinHolderSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.Consumer\Lace.Consumer.csproj">
+      <Project>{6f44066d-c6a2-41e2-847a-0561c9ee2cdb}</Project>
+      <Name>Lace.Consumer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
+      <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
+      <Name>Lace.Events.Messages.Publish</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
+      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
+      <Name>Lace.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Functions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
+      <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
+      <Name>Lace.Models.Audatex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.IvidTitleHolder\Lace.Models.IvidTitleHolder.csproj">
+      <Project>{18d3ab89-ec20-4685-b0bd-57c87c5c3495}</Project>
+      <Name>Lace.Models.IvidTitleHolder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
+      <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
+      <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
+      <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
+      <Name>Lace.Models.Lightstone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
+      <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
+      <Name>Lace.Models.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj">
+      <Project>{74ac8cc6-6cb2-4f64-b59c-0bf7125181a9}</Project>
+      <Name>Lace.Models.Request.LicensePlateNumber</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
+      <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
+      <Name>Lace.Models.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Rgt\Lace.Models.Rgt.csproj">
+      <Project>{99c72578-05a3-4f67-87f6-280118c4c791}</Project>
+      <Name>Lace.Models.Rgt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request.Entry\Lace.Request.Entry.csproj">
+      <Project>{2e7e7b3b-b78c-4a84-aa69-77c467c5e04d}</Project>
+      <Name>Lace.Request.Entry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request.Load\Lace.Request.Load.csproj">
+      <Project>{e8ed7030-9672-41d8-a06f-b3af1464dba6}</Project>
+      <Name>Lace.Request.Load</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
+      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
+      <Name>Lace.Request</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj">
+      <Project>{8d2ad71f-e6d2-44e5-bd9e-11ff68ef3a6d}</Project>
+      <Name>Lace.Response.ExternalServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
+      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
+      <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Audatex\Lace.Source.Audatex.csproj">
+      <Project>{bedbf9ba-5710-4f01-a88d-e7d217ba5164}</Project>
+      <Name>Lace.Source.Audatex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj">
+      <Project>{11458e6f-fca6-4d3f-8aaa-10863873bb1c}</Project>
+      <Name>Lace.Source.IvidTitleHolder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Ivid\Lace.Source.Ivid.csproj">
+      <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
+      <Name>Lace.Source.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
+      <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
+      <Name>Lace.Source.Repository.Product</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
+      <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>
+      <Name>Lace.Source.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
+      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
+      <Name>Lace.Source</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace\Lace.csproj">
+      <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
+      <Name>Lace %28Lace\Lace%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
+      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
+      <Name>Shared.Public</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
+      <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
+      <Name>Workflow.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
+      <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>
+      <Name>Workflow.RabbitMQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
+      <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mothers\Consumers\" />
+    <Folder Include="Mothers\Responses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

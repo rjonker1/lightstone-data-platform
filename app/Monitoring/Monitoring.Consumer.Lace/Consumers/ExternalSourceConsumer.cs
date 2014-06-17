@@ -19,7 +19,7 @@ namespace Monitoring.Consumer.Lace.Consumers
         public void Consume(LaceExternalSourceEventMessage message)
         {
             _persistEvent
-                .Save(new AggregateExternalSourceInformation(message.Id, message.AggregateId, message.Source,
+                .Save(new ExternalSourceInformation(message.Id, message.AggregateId, message.Source,
                     message.Message,
                     message.EventDate));
 

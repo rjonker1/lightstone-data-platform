@@ -19,10 +19,11 @@ namespace Monitoring.Consumer.Lace.Consumers
         public void Consume(LaceExternalSourceRequestEventMessage message)
         {
             _persistEvent
-                .Save(new AggregateExternalSourcesRequestsSent(message.Id, message.AggregateId,
+                .Save(new ExternalSourcesRequestsSent(message.Id, message.AggregateId,
                     message.Source,
                     message.Message,
-                    message.EventDate));
+                    message.EventDate,
+                    message.Payload));
 
             HasBeenConsumed = true;
         }

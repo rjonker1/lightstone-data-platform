@@ -9,9 +9,9 @@ namespace Lace.Source.Tests.Data.IvidTitleHolder
 {
     public class MockIvidTitleHolderConsumer
     {
-        private readonly IHandleServiceCall _handleServiceCall;
+        private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public MockIvidTitleHolderConsumer(ILaceRequest request)
         {

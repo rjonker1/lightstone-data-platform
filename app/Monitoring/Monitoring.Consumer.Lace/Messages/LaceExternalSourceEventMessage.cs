@@ -1,11 +1,12 @@
 ﻿using System;
-using Monitoring.Sources;
+using DataPlatform.Shared.Public.Helpers;
+using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Messages
 {
     public class LaceExternalSourceEventMessage : ITrackExternalSourceEventMessage
     {
-        public LaceExternalSourceEventMessage(Guid aggregateId, FromSource source, string message)
+        public LaceExternalSourceEventMessage(Guid aggregateId, LaceEventSource source, string message)
         {
             AggregateId = aggregateId;
             Message = message;
@@ -21,14 +22,14 @@ namespace Monitoring.Consumer.Lace.Messages
         }
 
         public Guid AggregateId { get; private set; }
-        public FromSource Source { get; private set; }
+        public LaceEventSource Source { get; private set; }
         public string Message { get; private set; }
 
         public DateTime EventDate
         {
             get
             {
-                return DateTime.UtcNow;
+                return SystemTime.Now();
             }
         } 
     }

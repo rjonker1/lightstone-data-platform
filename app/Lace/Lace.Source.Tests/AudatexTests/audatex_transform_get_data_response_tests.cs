@@ -10,7 +10,7 @@ namespace Lace.Source.Tests.AudatexTests
     public class audatex_transform_get_data_response_tests : Specification
     {
         private readonly GetDataResult _audatexWebServiceResponse;
-        private TransformAudatexWebResponse _transformer;
+        private TransformAudatexResponse _transformer;
         private readonly ILaceResponse _response;
         private readonly ILaceRequest _request;
 
@@ -24,7 +24,7 @@ namespace Lace.Source.Tests.AudatexTests
 
         public override void Observe()
         {
-            _transformer = new TransformAudatexWebResponse(_audatexWebServiceResponse, _response, _request);
+            _transformer = new TransformAudatexResponse(_audatexWebServiceResponse, _response, _request);
             _transformer.Transform();
         }
 

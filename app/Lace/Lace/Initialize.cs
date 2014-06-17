@@ -7,6 +7,7 @@ using Lace.Request;
 using Lace.Request.Load;
 using Lace.Response;
 using Lace.Response.ExternalServices;
+using Monitoring.Sources.Lace;
 
 namespace Lace
 {
@@ -31,6 +32,8 @@ namespace Lace
             InitializeHandlers();
 
             LoadSources();
+
+            _laceEvent.PublishLaceProcessedRequestAndReturnedResponseMessage(request.RequestAggregation.AggregateId, LaceEventSource.Initialization);
         }
 
         private void Set()

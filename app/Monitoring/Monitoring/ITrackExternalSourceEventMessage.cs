@@ -1,6 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Public.Messaging;
-using Monitoring.Sources;
+using Monitoring.Sources.Lace;
 
 
 namespace Monitoring
@@ -10,7 +10,7 @@ namespace Monitoring
         Guid Id { get; }
 
         Guid AggregateId { get; }
-        FromSource Source { get; }
+        LaceEventSource Source { get; }
         string Message { get; }
         DateTime EventDate { get; }
     }

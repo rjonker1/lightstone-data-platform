@@ -9,9 +9,9 @@ namespace Lace.Source.Tests.Data.RgtVin
 {
     public class MockRgtVinConsumer
     {
-        private readonly IHandleServiceCall _handleServiceCall;
+        private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalWebService _externalWebServiceCall;
+        private readonly ICallTheExternalSource _externalWebServiceCall;
 
         public MockRgtVinConsumer(ILaceRequest request)
         {

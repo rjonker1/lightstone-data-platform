@@ -7,7 +7,7 @@ namespace Lace.Source.Tests.IvidTests
     public class ivid_transform_hpi_standard_query_response_test : Specification
     {
         private readonly HpiStandardQueryResponse _ividWebServiceResponse;
-        private TransformIvidWebResponse _transfomer;
+        private TransformIvidResponse _transfomer;
 
         public ivid_transform_hpi_standard_query_response_test()
         {
@@ -17,7 +17,7 @@ namespace Lace.Source.Tests.IvidTests
         
         public override void Observe()
         {
-            _transfomer = new TransformIvidWebResponse(_ividWebServiceResponse);
+            _transfomer = new TransformIvidResponse(_ividWebServiceResponse);
             _transfomer.Transform();
         }
 

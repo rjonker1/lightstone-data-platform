@@ -32,8 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -87,11 +98,6 @@
     <Compile Include="Data\RgtVin\MockRgtVinConsumer.cs" />
     <Compile Include="Data\RgtVin\MockRgtVinLicensePlateNumberRequestData.cs" />
     <Compile Include="Data\RgtVin\MockRgtVinResponseData.cs" />
-    <Compile Include="initialize_lace_handlers_for_audatex_request_functional_test.cs" />
-    <Compile Include="initialize_lace_handlers_for_ivid_request_functional_test.cs" />
-    <Compile Include="initialize_lace_handlers_for_ivid_title_holder_functional_test.cs" />
-    <Compile Include="initialize_lace_handlers_for_rgt_vin_functional_test.cs" />
-    <Compile Include="IvidTests\ivid_request_data_from_ivid_service_tests.cs" />
     <Compile Include="IvidTests\ivid_transform_hpi_standard_query_response_test.cs" />
     <Compile Include="IvidTests\ivid_web_service_being_consumed_tests.cs" />
     <Compile Include="IvidTitleHolderTests\ivid_title_holder_configure_request_message_tests.cs" />
@@ -101,11 +107,12 @@
     <Compile Include="RgtVinTests\rgt_vin_request_data_from_rgt_vin_service_tests.cs" />
     <Compile Include="RgtVinTests\rgt_vin_service_being_consumed_tests.cs" />
     <Compile Include="RgtVinTests\rgt_vin_transform_response_tests.cs" />
-    <Compile Include="when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Data\Audatex\Audatex.mock.data.xml" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

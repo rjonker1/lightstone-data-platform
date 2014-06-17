@@ -1,12 +1,15 @@
 ﻿using System;
-using Monitoring.Sources;
+using Monitoring.Sources.Lace;
 
 namespace Lace.Events
 {
     public interface ILaceEvent : ILaceExternalSourceEvent, ILaceSourceHandledEvent, ILaceTransformEvent
     {
-        //void PublishMessage(ITrackExternalSourceEventMessage message);
+       void PublishMessage(Guid aggerateId, string message, LaceEventSource source);
 
-        void PublishMessage(Guid aggerateId, string message, FromSource source);
+       void PublishLaceReceivedRequestMessage(Guid aggerateId, LaceEventSource source);
+       void PublishLaceProcessedRequestAndReturnedResponseMessage(Guid aggerateId, LaceEventSource source);
+       void PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(Guid aggerateId, LaceEventSource source);
+
     }
 }

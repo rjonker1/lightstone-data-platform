@@ -2,9 +2,9 @@
 
 namespace Lace.Source.Tests.Data.IvidTitleHolder
 {
-    public class MockHandleIvidTitleHolderServiceCall : IHandleServiceCall
+    public class MockHandleIvidTitleHolderServiceCall : IHandleSourceCall
     {
-        public void Request(Action<IRequestDataFromService> action)
+        public void Request(Action<IRequestDataFromSource> action)
         {
             action(new MockRequestDataFromIvidTitleHolderService());
         }

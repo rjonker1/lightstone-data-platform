@@ -6,7 +6,7 @@ using Lace.Source.RgtVin.Transform;
 
 namespace Lace.Source.Tests.Data.RgtVin
 {
-    public class MockCallingRgtVinExternalWebService : ICallTheExternalWebService
+    public class MockCallingRgtVinExternalWebService : ICallTheExternalSource
     {
 
         private DataSet _rgtVinResponse;
@@ -19,7 +19,7 @@ namespace Lace.Source.Tests.Data.RgtVin
 
         public void TransformWebResponse(ILaceResponse response)
         {
-            var transformer = new TransformRgtVinWebResponse(_rgtVinResponse);
+            var transformer = new TransformRgtVinResponse(_rgtVinResponse);
 
             if (transformer.Continue)
             {
