@@ -3,8 +3,10 @@ using DataPlatform.Shared.Public.Entities;
 
 namespace PackageBuilder.Api.CannedData
 {
-    public class UserPackageDatabase : CannedDatabase<IUserPackage>
+    public class UserRoleRepository : Repository<IUserRole>
     {
-        
+        public UserRoleRepository()
+        {
+        }
     }
 }

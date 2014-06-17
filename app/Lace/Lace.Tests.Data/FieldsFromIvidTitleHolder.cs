@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using System;
+using DataPlatform.Shared.Public.Entities;
 
 namespace Lace.Tests.Data
 {
@@ -6,11 +7,11 @@ namespace Lace.Tests.Data
     {
         public BankNameFieldSource()
         {
-            Id = 2;
+            Id = new Guid("26CC03EB-99FC-4508-86B8-775F1B61163B");
             Name = "Ivid Title Holder";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -21,11 +22,11 @@ namespace Lace.Tests.Data
     {
         public AccountNumberFieldSource()
         {
-            Id = 2;
+            Id = new Guid("26CC03EB-99FC-4508-86B8-775F1B61163B");
             Name = "Ivid Title Holder";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -35,11 +36,11 @@ namespace Lace.Tests.Data
     {
         public AccountOpenDateFieldSource()
         {
-            Id = 2;
+            Id = new Guid("26CC03EB-99FC-4508-86B8-775F1B61163B");
             Name = "Ivid Title Holder";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -48,11 +49,11 @@ namespace Lace.Tests.Data
     {
         public AccountClosedDateFieldSource()
         {
-            Id = 2;
+            Id = new Guid("26CC03EB-99FC-4508-86B8-775F1B61163B");
             Name = "Ivid Title Holder";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }

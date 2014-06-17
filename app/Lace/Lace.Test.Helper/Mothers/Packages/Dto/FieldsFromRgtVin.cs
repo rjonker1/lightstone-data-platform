@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using System;
+using DataPlatform.Shared.Public.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
@@ -6,11 +7,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
     {
         public VehicleMakeFieldSource()
         {
-            Id = 3;
+            Id = new Guid("C1C2CFB2-4091-4B27-9086-6AADA536AE8D");
             Name = "Rgt VIN";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -19,11 +20,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
     {
         public ColourFieldSource()
         {
-            Id = 3;
+            Id = new Guid("C1C2CFB2-4091-4B27-9086-6AADA536AE8D");
             Name = "Rgt VIN";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -32,11 +33,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
     {
         public PriceFieldSource()
         {
-            Id = 3;
+            Id = new Guid("C1C2CFB2-4091-4B27-9086-6AADA536AE8D");
             Name = "Rgt VIN";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }

@@ -65,9 +65,30 @@ namespace PackageBuilder.Api.Entities
             get { return HasGroups && Groups.Count() > 1 && !HasRoles; }
         }
 
-        public bool HasHasMultipleRoles
+        public bool HasMultipleRoles
         {
             get { return HasRoles && Roles.Count() > 1 && !HasGroups; }
+        }
+
+        public bool HasMultipleGroupsAndRoles
+        {
+            get { return HasMultipleGroups && HasMultipleRoles; }
+        }
+
+        public IGroup DefaultGroup
+        {
+            get
+            {
+                return HasSingleGroup ? Groups.First() : null;
+            }
+        }
+
+        public IRole DefaultRole
+        {
+            get
+            {
+                return HasSingleRole ? Roles.First() : null;
+            }
         }
     }
 }

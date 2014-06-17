@@ -14,7 +14,7 @@
     <RootNamespace>PackageBuilder.Api</RootNamespace>
     <AssemblyName>PackageBuilder.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -48,11 +48,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Hosting.Aspnet">
-      <HintPath>..\..\packages\Nancy.Hosting.Aspnet.0.22.2\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
+    <Reference Include="Nancy.Hosting.Aspnet, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Nancy.Hosting.Aspnet.0.23.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.ViewEngines.Razor">
-      <HintPath>..\..\packages\Nancy.Viewengines.Razor.0.22.2\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+    <Reference Include="Nancy.ViewEngines.Razor, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Nancy.Viewengines.Razor.0.23.0\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,10 +62,11 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Razor.Unofficial">
-      <HintPath>..\packages\System.Web.Razor.Unofficial.2.0.2\lib\net40\System.Web.Razor.Unofficial.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.1.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
@@ -73,22 +76,25 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CannedData\GroupPackageDatabase.cs" />
-    <Compile Include="CannedData\RolePackageDatabase.cs" />
-    <Compile Include="CannedData\UserGroupDatabase.cs" />
-    <Compile Include="CannedData\UserRoleDatabase.cs" />
+    <Compile Include="CannedData\GroupPackage.cs" />
+    <Compile Include="CannedData\GroupPackageRepository.cs" />
+    <Compile Include="CannedData\RolePackage.cs" />
+    <Compile Include="CannedData\RolePackageRepository.cs" />
+    <Compile Include="CannedData\UserRoleRepository.cs" />
     <Compile Include="Entities\Action.cs" />
-    <Compile Include="CannedData\ActionDatabase.cs" />
+    <Compile Include="CannedData\ActionRepository.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Entities\Contract.cs" />
-    <Compile Include="CannedData\ContractDatabase.cs" />
+    <Compile Include="CannedData\ContractRepository.cs" />
     <Compile Include="Entities\ContractPackage.cs" />
-    <Compile Include="CannedData\ContractPackageDatabase.cs" />
-    <Compile Include="CannedData\CustomerDatabase.cs" />
+    <Compile Include="CannedData\ContractPackageRepository.cs" />
+    <Compile Include="CannedData\CustomerRepository.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\CustomerContract.cs" />
+    <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\DataField.cs" />
     <Compile Include="Entities\DataSet.cs" />
-    <Compile Include="CannedData\DataSetDatabase.cs" />
+    <Compile Include="CannedData\DataSetRepository.cs" />
     <Compile Include="Entities\DataSource.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\GroupPermission.cs" />
@@ -96,16 +102,19 @@
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="IndexModule.cs" />
     <Compile Include="Entities\Package.cs" />
-    <Compile Include="CannedData\PackageDatabase.cs" />
+    <Compile Include="CannedData\PackageRepository.cs" />
+    <Compile Include="PackageLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserPackage.cs" />
-    <Compile Include="CannedData\UserPackageDatabase.cs" />
+    <Compile Include="CannedData\UserPackageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\index.cshtml" />
+    <Content Include="appSettings.config" />
+    <Content Include="readme.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -114,6 +123,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
+      <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
+      <Name>Shared.BuildingBlocks.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
       <Name>Shared.Public</Name>
@@ -135,7 +148,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:12116/</IISUrl>
+          <IISUrl>http://dev.lightstone.packagebuilder.api</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -148,8 +161,8 @@
   <PropertyGroup>
     <PostBuildEvent>
 if $(ConfigurationName) == Debug (
-xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.22.2\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
-xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.22.2\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
+xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.23.0\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
+xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.23.0\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
 )</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

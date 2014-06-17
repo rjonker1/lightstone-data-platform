@@ -24,9 +24,9 @@ namespace Api
 
             pipelines.AfterRequest += context =>
             {
-                var response = Mapper.Map<Response, IResponse>(context.Response);
+                //var response = Mapper.Map<Response, IResponse>(context.Response);
 
-                log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
+                //log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
             };
 
             pipelines.OnError += (context, ex) =>
@@ -38,17 +38,6 @@ namespace Api
 
                 return HttpStatusCode.InternalServerError;
             };
-
-            return pipelines;
-        }
-
-        public static IPipelines EnableCors(this IPipelines pipelines)
-        {
-            pipelines.AfterRequest.AddItemToEndOfPipeline(x =>
-            {
-                x.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                x.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-            });
 
             return pipelines;
         }

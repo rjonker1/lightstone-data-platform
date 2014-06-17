@@ -1,5 +1,4 @@
-﻿using System;
-using DataPlatform.Shared.Public.Entities;
+﻿using DataPlatform.Shared.Public.Entities;
 
 namespace PackageBuilder.Api.Entities
 {
@@ -11,6 +10,23 @@ namespace PackageBuilder.Api.Entities
         }
 
         public ICustomer Customer { get; set; }
-        public DateTime ValidUntil { get; set; }
+
+        protected bool Equals(Contract other)
+        {
+            return Equals(Customer, other.Customer);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Contract) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Customer != null ? Customer.GetHashCode() : 0);
+        }
     }
 }

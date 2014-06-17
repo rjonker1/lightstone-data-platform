@@ -4,10 +4,6 @@
     {
         private readonly AppSettingsReader _reader;
 
-        private ApiSettings()
-        {
-        }
-
         internal ApiSettings(AppSettingsReader reader)
         {
             _reader = reader;

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Api.Modules;
 using DataPlatform.Shared.Public.Entities;
 using Lace.Request;
 
@@ -8,23 +6,32 @@ namespace Api
 {
     public class LicensePlateNumberRequest : ILaceRequest
     {
+        public LicensePlateNumberRequest(IPackage package, ILaceRequestUserInformation user, ILaceRequestContext context, ILaceRequestVehicleInformation vehicle, IProvideRequestAggregation requestAggregation)
+        {
+            Package = package;
+            User = user;
+            Context = context;
+            Vehicle = vehicle;
+            RequestAggregation = requestAggregation;
+        }
+
         public LicensePlateNumberRequest(string licenceNo)
         {
             Vehicle = new Vechicle(licenceNo, "WAUZZZ8K8DA074674");
         }
-      
-        public IPackage Package
-        {
-            get
-            {
-                return new Package()
-                {
-                    DataSets = new List<IDataSet>() {new DataSet()},
-                    Id = 0,
-                    Name = "License Plate Number Lookup"
-                };
-            }
-        }
+
+        public IPackage Package { get; set; }
+        //{
+        //    get
+        //    {
+        //        return new Package()
+        //        {
+        //            DataSets = new List<IDataSet>() {new DataSet()},
+        //            Id = 0,
+        //            Name = "License Plate Number Lookup"
+        //        };
+        //    }
+        //}
 
         public ILaceRequestUserInformation User { get; private set; }
 
@@ -71,11 +78,20 @@ namespace Api
 
         public string ReasonForApplication { get; private set; }
 
-        public string SecurityCode { get; private set; }
+        public string SecurityCode
+        {
+            get
+            {
+                return "c99ef6d2-fdea-4a81-b15f-ff8251ac9050";
+            }
+        }
     }
 
     public class Vechicle : ILaceRequestVehicleInformation
     {
+        public Vechicle()
+        {
+        }
 
         public Vechicle(string licenseNo, string vinNo)
         {

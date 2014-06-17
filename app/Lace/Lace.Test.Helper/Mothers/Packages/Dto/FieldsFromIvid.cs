@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using System;
+using DataPlatform.Shared.Public.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
@@ -6,11 +7,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
     {
         public RegistrationFieldSource()
         {
-            Id = 1;
+            Id = new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A");
             Name = "Ivid";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -20,11 +21,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public VinFieldSource()
         {
-            Id = 1;
+            Id = new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A");
             Name = "Ivid";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
     }
@@ -33,11 +34,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
     {
         public EngineFieldSource()
         {
-            Id = 1;
+            Id = new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A");
             Name = "Ivid";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
      
@@ -48,11 +49,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public MakeDescriptionFiledSource()
         {
-            Id = 1;
+            Id = new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A");
             Name = "Ivid";
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

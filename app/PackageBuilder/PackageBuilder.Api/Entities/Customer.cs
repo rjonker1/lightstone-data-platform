@@ -6,7 +6,8 @@ namespace PackageBuilder.Api.Entities
 {
     public class Customer : NamedEntity, ICustomer
     {
-        private readonly IList<ICustomerUser> _customerUsers = new List<ICustomerUser>(); 
+        private readonly IList<ICustomerUser> _customerUsers = new List<ICustomerUser>();
+        private readonly IList<ICustomerContract> _customerContracts = new List<ICustomerContract>(); 
         public Customer(string name)
             : base(name)
         {
@@ -17,30 +18,36 @@ namespace PackageBuilder.Api.Entities
             get { return _customerUsers; }
         }
 
+        public IEnumerable<ICustomerContract> CustomerContracts
+        {
+            get { return _customerContracts; }
+        }
+
         public IEnumerable<IUser> Users
         {
             get { return _customerUsers.Select(x => x.User); }
+        }
+
+        public IEnumerable<IContract> Contracts
+        {
+            get { return _customerContracts.Select(x => x.Contract); }
         }
 
         public void Add(IUser user)
         {
             var customerUser = _customerUsers.FirstOrDefault(x => Equals(x.User, user));
             if (customerUser != null) return;
+            user.Customer = this;
             customerUser = new CustomerUser(this, user);
             _customerUsers.Add(customerUser);
         }
-    }
 
-    public class CustomerUser : ICustomerUser
-    {
-        public int Id { get; set; }
-        public ICustomer Customer { get; set; }
-        public IUser User { get; set; }
-
-        public CustomerUser(ICustomer customer, IUser user)
+        public void Add(IContract contract)
         {
-            Customer = customer;
-            User = user;
+            var customerCoontract = _customerContracts.FirstOrDefault(x => Equals(x.Contract, contract));
+            if (customerCoontract != null) return;
+            customerCoontract = new CustomerContract(this, contract);
+            _customerContracts.Add(customerCoontract);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Nancy;
-using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
+using Nancy.Routing;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -12,16 +12,18 @@ namespace Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            var configuration = new StatelessAuthenticationConfiguration(context =>
-            {
-                var token = context.AuthorizationHeaderToken();
-                var authenticator = container.Resolve<IAuthenticateUser>();
+            //var configuration = new StatelessAuthenticationConfiguration(context =>
+            //{
+            //    var token = context.AuthorizationHeaderToken();
+            //    var authenticator = container.Resolve<IAuthenticateUser>();
 
-                return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
-            });
+                
+            //    return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
+            //});
 
-            StatelessAuthentication.Enable(pipelines, configuration);
+            //StatelessAuthentication.Enable(pipelines, configuration);
 
+            pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.EnableMonitoring();
 
@@ -42,6 +44,8 @@ namespace Api
             AutoMapperConfiguration.Init();
 
             container.Register<IAuthenticateUser, UmApiAuthenticator>();
+            container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
+            container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
         }
     }
 }

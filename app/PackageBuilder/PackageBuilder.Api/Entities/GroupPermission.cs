@@ -5,7 +5,7 @@ namespace PackageBuilder.Api.Entities
 {
     public class GroupPermission : IGroupPermission
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime ValidUntil { get; set; }
         public IGroup Group { get; set; }
         public IAction Action { get; set; }

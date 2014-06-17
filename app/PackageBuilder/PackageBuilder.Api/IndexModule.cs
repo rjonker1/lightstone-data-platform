@@ -1,20 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DataPlatform.Shared.Public.Entities;
-using PackageBuilder.Api.CannedData;
-using PackageBuilder.Api.Entities;
+﻿using DataPlatform.Shared.Public.Entities;
+using Shared.BuildingBlocks.Api;
 
 namespace PackageBuilder.Api
 {
     using Nancy;
 
-    public class IndexModule : NancyModule
+    public class IndexModule : SecureModule
     {
         public IndexModule()
         {
-            Get["/Package{action}"] = parameters =>
+            Get["/package/{action}"] = parameters =>
             {
-                return View["index"];
+                var package = new PackageLookup().Get(Context.CurrentUser.UserName, parameters.action);
+
+                return Response.AsJson((IPackage)package);
+            };
+
+            Get["/getUserMetaData"] = parameters =>
+            {
+                var actions = new PackageLookup().GetActions(Context.CurrentUser.UserName);
+
+                return Response.AsJson(new { path = "/action/{action}", actions });
             };
         }
     }
