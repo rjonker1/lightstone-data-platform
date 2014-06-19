@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;

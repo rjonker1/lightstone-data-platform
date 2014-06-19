@@ -1,5 +1,4 @@
 ﻿using EventTracking.Domain.Core;
-using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Measurements;
 using EventTracking.Measurement.Lace.Projections;

@@ -4,7 +4,7 @@ using System.Linq;
 using EventStore.ClientAPI;
 using EventTracking.Domain.Core;
 
-namespace EventTracking.Domain.Read.Core
+namespace EventTracking.Measurement
 {
     public static class EventStoreConnectionExtensions
     {
@@ -13,8 +13,6 @@ namespace EventTracking.Domain.Read.Core
         public static IEnumerable<T> ReadStreamEventsBackward<T>(this IEventStoreConnection connection,
             string streamName)
         {
-            if (connection == null) throw new ArgumentNullException("connection");
-
             var lastEventNumber = connection.GetLastEventNumber(streamName);
 
             return lastEventNumber == null

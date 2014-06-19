@@ -1,5 +1,5 @@
 ﻿
-namespace EventTracking.Domain.Read.Core
+namespace EventTracking.Measurement
 {
     public interface IProjectionContext
     {
