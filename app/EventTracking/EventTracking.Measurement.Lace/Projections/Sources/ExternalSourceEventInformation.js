@@ -21,11 +21,11 @@ var externalSourceInformationDetector = function externalSourceInformationConstr
 
     var processEvent = function(state, event) {
         state.count += 1;
-        aggregateId = event.body["AggregateId"];
-        messageId = event.body["Id"];
-        source = event.body["SourceId"];
-        message = event.body["Message"];
-        eventDate = event.body["EventDate"];
+        aggregateId = event.body.AggregateId;
+        messageId = event.body.Id;
+        source = event.body.SourceId;
+        message = event.body.Message;
+        eventDate = event.body.EventDate;
 
     };
     
