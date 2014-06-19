@@ -71,10 +71,6 @@
       <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
       <Name>EventTracking.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence.Storage\EventTracking.Domain.Persistence.Storage.csproj">
-      <Project>{c3d27d4c-607d-4e47-bbe4-55682f873323}</Project>
-      <Name>EventTracking.Domain.Persistence.Storage</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
       <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
       <Name>EventTracking.Domain.Persistence</Name>

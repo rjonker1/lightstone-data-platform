@@ -4,7 +4,7 @@
 var externalSourceInformationDetector = function externalSourceInformationConstructor($eventServices) {
     
 
-    var eventServices = !$eventServices ? { emit: emit } : $eventServices;
+   // var eventServices = !$eventServices ? { emit: emit } : $eventServices;
     
 
     var aggregateId = "";
@@ -39,7 +39,7 @@ var externalSourceInformationDetector = function externalSourceInformationConstr
 
 var detector = externalSourceInformationDetector();
 
-fromStream('externalSourceInformation')
+fromCategory('laceExternalSource')
     //.partitionBy(function(e) { return e.body["AggregateId"]; })
     .when({
         $init: detector.init,

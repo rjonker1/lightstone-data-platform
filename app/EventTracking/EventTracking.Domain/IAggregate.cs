@@ -7,6 +7,7 @@ namespace EventTracking.Domain
     {
         Guid Id { get; }
         int Version { get; }
+        string Category { get; }
 
         void ApplyEvent(object @event);
         ICollection GetUncommittedEvents();

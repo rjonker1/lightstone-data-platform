@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EventStore.ClientAPI;
-using EventStore.ClientAPI.SystemData;
+using EventTracking.Domain.Core;
 
 namespace EventTracking.Domain.Read.Core
 {

@@ -8,6 +8,7 @@ namespace EventTracking.Domain.Core
     {
         public Guid Id { get; protected set; }
         public int Version { get; protected set; }
+        public string Category { get; protected set; }
         private IRouteEvents _registeredRoutes;
         private readonly ICollection<object> _uncommittedEvents = new LinkedList<object>();
 
@@ -40,6 +41,11 @@ namespace EventTracking.Domain.Core
         }
 
         protected void Register<T>(Action<T> route)
+        {
+            RegisteredRoutes.Register(route);
+        }
+
+        protected void Register(IAggregate route)
         {
             RegisteredRoutes.Register(route);
         }

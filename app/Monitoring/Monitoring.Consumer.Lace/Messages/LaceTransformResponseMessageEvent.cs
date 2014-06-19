@@ -4,7 +4,7 @@ using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Messages
 {
-    public class LaceTransformResponseEventMessage : ITrackExternalSourceEventMessage
+    public class LaceTransformResponseEventMessage : IMonitorExternalSourceEventMessage
     {
         public LaceTransformResponseEventMessage(Guid aggregateId, LaceEventSource source, string message)
         {
@@ -31,6 +31,11 @@ namespace Monitoring.Consumer.Lace.Messages
             {
                 return SystemTime.Now();
             }
+        }
+
+        public string Category
+        {
+            get { return "laceExternalSourceTransformation"; }
         }
     }
 }

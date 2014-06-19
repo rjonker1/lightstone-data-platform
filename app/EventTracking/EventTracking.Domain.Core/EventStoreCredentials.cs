@@ -1,6 +1,6 @@
 ﻿using EventStore.ClientAPI.SystemData;
 
-namespace EventTracking.Domain.Read.Core
+namespace EventTracking.Domain.Core
 {
     public class EventStoreCredentials
     {

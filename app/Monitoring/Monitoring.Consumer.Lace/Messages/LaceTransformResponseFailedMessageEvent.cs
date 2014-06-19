@@ -5,7 +5,7 @@ using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Messages
 {
-    public class LaceTransformResponseFailedMessageEvent : ITrackExternalSourceEventMessage
+    public class LaceTransformResponseFailedMessageEvent : IMonitorExternalSourceEventMessage
     {
         public LaceTransformResponseFailedMessageEvent(Guid aggregateId, LaceEventSource source, string message)
         {
@@ -32,6 +32,11 @@ namespace Monitoring.Consumer.Lace.Messages
             {
                 return SystemTime.Now();
             }
+        }
+
+        public string Category
+        {
+            get { return "laceExternalSourceResponseFailure"; }
         }
     }
 }

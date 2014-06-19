@@ -8,10 +8,11 @@ namespace Monitoring.Consumer.Lace.Aggregates
     public class ExternalSourceFailures : AggregateBase
     {
 
-        public ExternalSourceFailures(Guid id, Guid aggregateId, LaceEventSource source, string message, DateTime eventDate)
+        public ExternalSourceFailures(Guid id, Guid aggregateId, LaceEventSource source, string message, DateTime eventDate, string category)
             : this()
         {
-            RaiseEvent(new ExternalSourceFailedEvent(id, aggregateId, (int)source, message, eventDate));
+            Category = category;
+            RaiseEvent(new ExternalSourceFailedEvent(id, aggregateId, (int)source, message, eventDate, category));
         }
 
         private ExternalSourceFailures()
