@@ -9,5 +9,6 @@ namespace Monitoring.Events.Lace
         int SourceId { get; }
         string Message { get; }
         DateTime EventDate { get; }
+        string Category { get; }
     }
 }

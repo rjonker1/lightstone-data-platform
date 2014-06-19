@@ -34,7 +34,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITrackExternalSourceEventMessage.cs" />
+    <Compile Include="IMonitorExternalSourceEventMessage.cs" />
+    <Compile Include="IProvideEventCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\Lace\LaceEventSource.cs" />
     <Compile Include="Sources\Lace\PublishableMessages.cs" />

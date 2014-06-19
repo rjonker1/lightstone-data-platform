@@ -9,10 +9,11 @@ namespace Monitoring.Consumer.Lace.Aggregates
     {
 
         public ExternalSourcesHandled(Guid id, Guid aggregateId, LaceEventSource source, string message,
-            DateTime eventDate)
+            DateTime eventDate, string category)
             : this()
         {
-            RaiseEvent(new ExternalSourceHandledEvent(id, aggregateId, (int)source, message, eventDate));
+            Category = category;
+            RaiseEvent(new ExternalSourceHandledEvent(id, aggregateId, (int)source, message, eventDate,category));
         }
 
         private ExternalSourcesHandled()

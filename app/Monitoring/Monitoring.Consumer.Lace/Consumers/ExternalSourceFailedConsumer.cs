@@ -21,7 +21,7 @@ namespace Monitoring.Consumer.Lace.Consumers
             _persistEvent
                 .Save(new ExternalSourceFailures(message.Id, message.AggregateId, message.Source,
                     message.Message,
-                    message.EventDate));
+                    message.EventDate,message.Category));
 
             HasBeenConsumed = true;
         }

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace EventTracking.Domain.Read.Core
+namespace EventTracking.Domain.Core
 {
     public class IpEndPointFactory
     {

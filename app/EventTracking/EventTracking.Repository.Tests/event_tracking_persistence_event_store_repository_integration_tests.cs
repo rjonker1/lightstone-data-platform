@@ -4,7 +4,6 @@ using System.Text;
 using EventStore.ClientAPI;
 using EventTracking.Domain;
 using EventTracking.Domain.Persistence;
-using EventTracking.Domain.Persistence.Storage;
 using EventTracking.Repository.Tests.Data;
 using Newtonsoft.Json.Linq;
 using Xunit;

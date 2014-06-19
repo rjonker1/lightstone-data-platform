@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Events\EventsPublishedForLaceRequests.cs" />
     <Compile Include="Events\IShowEventsPublishedForLaceRequests.cs" />
-    <Compile Include="Events\KnownEventsProvider.cs" />
+    <None Include="Events\KnownEventsProvider.cs.old" />
     <Compile Include="Measurements\RequestFromSourceMeasurements.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projections\ProjectionSources.cs" />
@@ -74,9 +74,13 @@
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
       <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain.Read\EventTracking.Domain.Read.csproj">
-      <Project>{0fa5d3ab-a64a-4425-8a0f-15500a799187}</Project>
-      <Name>EventTracking.Domain.Read</Name>
+    <ProjectReference Include="..\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
+      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
+      <Name>EventTracking.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
+      <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
+      <Name>EventTracking.Measurement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

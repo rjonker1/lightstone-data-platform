@@ -23,7 +23,7 @@ namespace Monitoring.Consumer.Lace.Consumers
                     message.Source,
                     message.Message,
                     message.EventDate,
-                    message.Payload));
+                    message.Payload, message.Category));
 
             HasBeenConsumed = true;
         }

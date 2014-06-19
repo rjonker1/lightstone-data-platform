@@ -1,6 +1,6 @@
 ﻿using System;
 using EventTracking.Domain;
-using EventTracking.Domain.Persistence.Storage.Providers;
+using EventTracking.Domain.Persistence.EventStore;
 
 namespace Monitoring.Consumer.Lace.Persistence
 {
@@ -8,9 +8,9 @@ namespace Monitoring.Consumer.Lace.Persistence
     {
         public void Save(IAggregate aggregate)
         {
-            using (var repository = new EventStoreConnectionFactory())
+            using (var repository = new EventStoreProvider())
             {
-                repository.Instance().Repository.Save(aggregate, Guid.NewGuid(), d => { });
+                repository.Instance().Repository.Write(aggregate, Guid.NewGuid(), d => { });
             }
         }
     }

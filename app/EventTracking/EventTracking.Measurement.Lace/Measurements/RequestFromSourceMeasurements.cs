@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Projections;
@@ -19,19 +17,16 @@ namespace EventTracking.Measurement.Lace.Measurements
         private readonly SourceRequestQuery _query;
 
         private readonly EventReader _eventReader;
-      
-        private readonly IConsole _console;
 
         private readonly ExternalSourceEventInformationProjection _sourceRequestsProjection;
 
         public RequestFromSourceMeasurements(IProjectionContext context, EventsPublishedForLaceRequests projection,
-            EventReader reader, IConsole console, SourceRequestQuery query,
+            EventReader reader, SourceRequestQuery query,
             ExternalSourceEventInformationProjection sourceRequestsProjection)
         {
             _projectionContext = context;
             _projection = projection;
             _eventReader = reader;
-            _console = console;
             _query = query;
             _sourceRequestsProjection = sourceRequestsProjection;
         }
@@ -46,13 +41,15 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             _eventReader.StartReading();
 
-            _console.ReadKey("\nPress ANY key to stop reading and show results\n");
+            Console.WriteLine("\nPress ANY key to stop reading and show results\n");
+            Console.ReadKey();
 
             Stop();
 
             ShowRequestDetails();
 
-            _console.ReadKey("Press ANY key exit");
+            Console.WriteLine("Press ANY key exit");
+            Console.ReadKey();
 
         }
 
@@ -72,7 +69,7 @@ namespace EventTracking.Measurement.Lace.Measurements
 
         private void ShowRequestDetails()
         {
-            _console.Important("Get Request Details");
+            Console.WriteLine("Get Request Details");
 
             ShowRequestDetails("externalSourceInformation");
             //add other projections / streams
@@ -81,7 +78,7 @@ namespace EventTracking.Measurement.Lace.Measurements
         private void ShowRequestDetails(string name)
         {
             var values = _query.GetValues(name);
-            _console.Log("Request Details: {0}", name);
+            Console.WriteLine("Request Details: {0}", name);
 
             ShowRequestExecutionTimes(values);
         }
@@ -101,8 +98,8 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             foreach (var f in grouped)
             {
-                _console.Log("--------------------------------\n");
-                _console.Log("Aggregate - {0}", f.AggregateId);
+                Console.WriteLine("--------------------------------\n");
+                Console.WriteLine("Aggregate - {0}", f.AggregateId);
 
                 var groupedTimes = f.times
                     .GroupBy(g => g.Source, times => times, (key, elements) => new
@@ -118,7 +115,7 @@ namespace EventTracking.Measurement.Lace.Measurements
 
                     foreach (var ft in groupedTime.times)
                     {
-                        _console.Log("  - {0}", ft.ToString());
+                        Console.WriteLine("  - {0}", ft.ToString());
                     }
 
                     if(!groupedTime.times.Any(w => w.IsExternalSourceCall)) continue;
@@ -134,10 +131,10 @@ namespace EventTracking.Measurement.Lace.Measurements
 
                     var execTimes = SetExecutionTime(startTime, endTime);
 
-                    _console.Log(execTimes == null ? "" : "  -- Execution Time {0}\n", execTimes);
+                    Console.WriteLine(execTimes == null ? "" : "  -- Execution Time {0}\n", execTimes);
                 }
 
-                _console.Log("--------------------------------\n");
+                Console.WriteLine("--------------------------------\n");
 
             }
         }

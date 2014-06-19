@@ -9,11 +9,12 @@ namespace Monitoring.Consumer.Lace.Aggregates
     {
 
         public ExternalSourcesRequestsSent(Guid id, Guid aggregateId, LaceEventSource source, string message,
-            DateTime eventDate, string payload)
+            DateTime eventDate, string payload, string category)
             : this()
         {
+            Category = category;
             RaiseEvent(new ExternalSourceRequestSentEvent(id, aggregateId, (int)source, message,
-                eventDate, payload));
+                eventDate, payload,category));
         }
 
         private ExternalSourcesRequestsSent()

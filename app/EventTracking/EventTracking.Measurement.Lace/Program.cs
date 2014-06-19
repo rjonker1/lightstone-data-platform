@@ -1,5 +1,4 @@
-﻿using System.Net;
-using EventStore.ClientAPI;
+﻿using EventTracking.Domain.Core;
 using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Measurements;
@@ -10,38 +9,22 @@ namespace EventTracking.Measurement.Lace
 {
     class Program
     {
-
-        private static readonly IPEndPoint TcpEndPoint = new IPEndPoint(IPAddress.Loopback, 1113);
-
         static void Main(string[] args)
         {
-            var console = new Domain.Read.Core.Console();
-            var projectionContext = new ProjectionContext(console);
+            var projectionContext = new ProjectionContext();
             var sourceRequestType = new EventsPublishedForLaceRequests();
 
-            var connection = DefaultConnection();
+            var connection = ConnectionFactory.Default();
 
-            var eventReader = new EventReader(connection, console, new KnownEventsProvider());
+            var eventReader = new EventReader(connection);
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                console, new SourceRequestQuery(connection), new ExternalSourceEventInformationProjection(projectionContext));
+                new SourceRequestQuery(connection), new ExternalSourceEventInformationProjection(projectionContext));
 
             measurements.Run();
-
         }
 
 
-        private static IEventStoreConnection DefaultConnection()
-        {
-            var settings = ConnectionSettings.Create()
-                .KeepReconnecting()
-                .UseConsoleLogger();
-
-
-            var connection = EventStoreConnection.Create(settings, TcpEndPoint);
-            connection.Connect();
-            return connection;
-        }
     }
 }

@@ -9,11 +9,12 @@ namespace Monitoring.Consumer.Lace.Aggregates
     {
 
         public ExternalSourcesResponseTransformations(Guid id, Guid aggregateId, LaceEventSource source, string message,
-            DateTime eventDate)
+            DateTime eventDate, string category)
             : this()
         {
+            Category = category;
             RaiseEvent(new ExternalSourceResponseTransformationEvent(id, aggregateId, (int)source, message,
-                eventDate));
+                eventDate,category));
         }
 
         private ExternalSourcesResponseTransformations()

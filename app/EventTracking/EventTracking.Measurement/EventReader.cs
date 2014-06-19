@@ -1,24 +1,17 @@
 ﻿using System;
 using EventStore.ClientAPI;
-using EventStore.ClientAPI.SystemData;
+using EventTracking.Domain.Core;
 
 namespace EventTracking.Domain.Read.Core
 {
     public class EventReader
     {
         private readonly IEventStoreConnection _connection;
-        private readonly IConsole _console;
-        private readonly IKnownEventsProvider _knownEventsProvider;
 
-        public EventReader(IEventStoreConnection connection, IConsole console, IKnownEventsProvider knownEventsProvider)
+        public EventReader(IEventStoreConnection connection)
         {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (console == null) throw new ArgumentNullException("console");
-            if (knownEventsProvider == null) throw new ArgumentNullException("knownEventsProvider");
-
+            if (connection == null) throw new Exception("connection cannot be null");
             _connection = connection;
-            _console = console;
-            _knownEventsProvider = knownEventsProvider;
         }
 
         public void StartReading()
@@ -34,14 +27,7 @@ namespace EventTracking.Domain.Read.Core
             var linkedStream = data.Link != null ? data.Link.EventStreamId : null;
             if (IsSystemStream(linkedStream)) return;
 
-            var eventDefinition = _knownEventsProvider.Get(recordedEvent);
-
-            _console.Log(
-                eventDefinition.Color,
-                "{0}: {1} ({2})",
-                recordedEvent.EventType,
-                eventDefinition.Parse(),
-                FormatStream(linkedStream, recordedEvent));
+            Console.WriteLine("{0}: {1}",recordedEvent.EventType, FormatStream(linkedStream, recordedEvent));
         }
 
         private static string FormatStream(string linkedStream, RecordedEvent recordedEvent)
@@ -61,7 +47,7 @@ namespace EventTracking.Domain.Read.Core
             var message = string.Format("Subscription {0} dropped: {1} (Recovery currently not implemented){2}{3}",
                 subscription.StreamId, subscriptionDropReason, Environment.NewLine, exception);
 
-            _console.Error(message);
+            Console.WriteLine(message);
         }
     }
 }
