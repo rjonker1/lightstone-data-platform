@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using EventStore.ClientAPI;
-using EventTracking.Domain.Read.Core;
 using EventTracking.Measurement.Lace.Events;
 
 namespace EventTracking.Measurement.Lace.Queries

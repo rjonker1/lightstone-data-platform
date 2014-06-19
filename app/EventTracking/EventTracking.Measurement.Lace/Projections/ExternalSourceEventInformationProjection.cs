@@ -1,6 +1,4 @@
-﻿using EventTracking.Domain.Read.Core;
-
-namespace EventTracking.Measurement.Lace.Projections
+﻿namespace EventTracking.Measurement.Lace.Projections
 {
     public class ExternalSourceEventInformationProjection
     {

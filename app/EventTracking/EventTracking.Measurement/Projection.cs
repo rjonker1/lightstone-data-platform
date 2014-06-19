@@ -1,4 +1,4 @@
-﻿namespace EventTracking.Domain.Read.Core
+﻿namespace EventTracking.Measurement
 {
     public class Projection
     {

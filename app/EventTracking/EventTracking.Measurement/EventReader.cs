@@ -2,7 +2,7 @@
 using EventStore.ClientAPI;
 using EventTracking.Domain.Core;
 
-namespace EventTracking.Domain.Read.Core
+namespace EventTracking.Measurement
 {
     public class EventReader
     {

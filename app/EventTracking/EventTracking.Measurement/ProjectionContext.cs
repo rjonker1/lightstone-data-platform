@@ -6,7 +6,7 @@ using EventStore.ClientAPI.Common.Log;
 using EventStore.ClientAPI.Common.Utils;
 using EventTracking.Domain.Core;
 
-namespace EventTracking.Domain.Read.Core
+namespace EventTracking.Measurement
 {
     public class ProjectionContext : IProjectionContext
     {
