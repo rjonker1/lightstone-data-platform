@@ -1,6 +1,6 @@
 ﻿namespace Lace.Builder.RequestTypes
 {
-    public interface IRequestUsingLicensePlateNumber
+    public interface IRequestUsingLicensePlateNumber : IRequestType
     {
     }
 }

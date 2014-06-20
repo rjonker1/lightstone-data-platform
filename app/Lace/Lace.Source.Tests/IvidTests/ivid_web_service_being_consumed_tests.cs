@@ -27,7 +27,7 @@ namespace Lace.Source.Tests.IvidTests
         public override void Observe()
         {
             var consumer = new IvidConsumer(_request);
-            consumer.CallIvidService(_response, _laceEvent);
+            consumer.CallSource(_response, _laceEvent);
         }
 
         [Observation]

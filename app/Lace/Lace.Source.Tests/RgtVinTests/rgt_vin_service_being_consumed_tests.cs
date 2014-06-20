@@ -31,7 +31,7 @@ namespace Lace.Source.Tests.RgtVinTests
         public override void Observe()
         {
             var consumer = new RgtVinConsumer(_request);
-            consumer.CallRgtVinService(_response, _laceEvent);
+            consumer.CallSource(_response, _laceEvent);
         }
 
         [Observation]

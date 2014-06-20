@@ -17,14 +17,14 @@ namespace Lace.Request.Types.LicensePlateNumber.Handlers
             {
                 return new Dictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
                 {
-                    {"Ivid", (req, evt, resp) => new IvidConsumer(req).CallIvidService(resp, evt)},
+                    {"Ivid", (req, evt, resp) => new IvidConsumer(req).CallSource(resp, evt)},
                     {
                         "IvidTitleHolder",
                         (req, evt, resp) =>
-                            new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp, evt)
+                            new IvidTitleHolderConsumer(req).CallSource(resp, evt)
                     },
-                    {"RgtVin", (req, evt, resp) => new RgtVinConsumer(req).CallRgtVinService(resp, evt)},
-                    {"Audatex", (req, evt, resp) => new AudatexConsumer(req).CallAudatexService(resp, evt)}
+                    {"RgtVin", (req, evt, resp) => new RgtVinConsumer(req).CallSource(resp, evt)},
+                    {"Audatex", (req, evt, resp) => new AudatexConsumer(req).CallSource(resp, evt)}
                 };
             }
         }

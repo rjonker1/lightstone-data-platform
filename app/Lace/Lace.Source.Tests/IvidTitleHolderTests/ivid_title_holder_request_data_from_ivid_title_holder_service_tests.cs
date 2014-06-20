@@ -16,7 +16,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
         private readonly ILaceRequest _ividTitleHolderRequest;
         private ILaceResponse _laceResponse;
         private ILaceEvent _laceEvent;
-        private readonly ICallTheExternalSource _externalWebServiceCall;
+        private readonly ICallTheSource _externalWebServiceCall;
 
         public ivid_title_holder_request_data_from_ivid_title_holder_service_tests()
         {

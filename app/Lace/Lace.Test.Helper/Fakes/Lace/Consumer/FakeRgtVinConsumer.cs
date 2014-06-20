@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
     {
         private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalSource _externalWebServiceCall;
+        private readonly ICallTheSource _externalWebServiceCall;
 
         public FakeRgtVinConsumer(ILaceRequest request)
         {

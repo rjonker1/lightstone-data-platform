@@ -15,7 +15,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Source.IvidTitleHolder.ServiceCalls
 {
-    public class CallIvidTitleHolderExternalSource : ICallTheExternalSource
+    public class CallIvidTitleHolderExternalSource : ICallTheSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private TitleholderQueryResponse _ividTitleHolderResponse;

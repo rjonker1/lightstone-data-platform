@@ -8,7 +8,7 @@ using Lace.Source.IvidTitleHolder.ServiceCalls;
 
 namespace Lace.Source.IvidTitleHolder
 {
-    public class IvidTitleHolderConsumer
+    public class IvidTitleHolderConsumer : ISourceConsumer
     {
      private readonly ILaceRequest _request;
 
@@ -17,7 +17,7 @@ namespace Lace.Source.IvidTitleHolder
             _request = request;
         }
 
-        public void CallIvidTitleHolderService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder,_request);
 

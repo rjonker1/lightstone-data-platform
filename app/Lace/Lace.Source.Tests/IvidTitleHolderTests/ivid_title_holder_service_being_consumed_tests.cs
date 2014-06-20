@@ -28,7 +28,7 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
         public override void Observe()
         {
             var consumer = new IvidTitleHolderConsumer(_request);
-            consumer.CallIvidTitleHolderService(_response, _laceEvent);
+            consumer.CallSource(_response, _laceEvent);
         }
 
         [Observation]

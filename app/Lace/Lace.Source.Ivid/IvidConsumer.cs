@@ -8,28 +8,32 @@ using Lace.Source.Ivid.ServiceCalls;
 
 namespace Lace.Source.Ivid
 {
-    public class IvidConsumer
+    public class IvidConsumer : ExecuteSourceBase
     {
         private readonly ILaceRequest _request;
 
-        public IvidConsumer(ILaceRequest request)
+        public IvidConsumer(ILaceRequest request, IExecuteTheSource nextSource)
         {
             _request = request;
-         
+
+            Append(nextSource);
         }
 
-        public void CallIvidService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Ivid,_request);
 
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
-                return;
+            }
+            else
+            {
+                var consumer = new ConsumeService(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
+                consumer.CallService(response, laceEvent);
             }
 
-            var consumer = new ConsumeService(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
-            consumer.CallService(response, laceEvent);
+            if (Next != null) Next.CallSource(response, laceEvent);
         }
 
 
@@ -39,6 +43,5 @@ namespace Lace.Source.Ivid
             response.IvidResponseHandled = new IvidResponseHandled();
             response.IvidResponseHandled.HasNotBeenHandled();
         }
-
     }
 }

@@ -5,7 +5,7 @@ namespace Lace.Source.Tests.Data.Audatex
 {
     public class MockRequestDataFromAudatexService : IRequestDataFromSource
     {
-        public void FetchDataFromService(ILaceResponse response, ICallTheExternalSource externalWebService, ILaceEvent laceEvent)
+        public void FetchDataFromService(ILaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalWebService(response,laceEvent);
         }

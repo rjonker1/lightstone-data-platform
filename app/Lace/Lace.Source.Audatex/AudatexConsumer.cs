@@ -8,7 +8,7 @@ using Lace.Source.Enums;
 
 namespace Lace.Source.Audatex
 {
-    public class AudatexConsumer
+    public class AudatexConsumer : IExecuteTheSource
     {
         private readonly ILaceRequest _request;
 
@@ -17,7 +17,7 @@ namespace Lace.Source.Audatex
             _request = request;
         }
 
-        public void CallAudatexService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Audatex, _request);
 

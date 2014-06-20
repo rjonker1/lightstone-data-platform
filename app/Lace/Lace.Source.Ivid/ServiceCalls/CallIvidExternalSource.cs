@@ -14,7 +14,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Source.Ivid.ServiceCalls
 {
-    public class CallIvidExternalSource : ICallTheExternalSource
+    public class CallIvidExternalSource : ICallTheSource
     {
         private HpiStandardQueryResponse _ividResponse;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
