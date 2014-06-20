@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using DataPlatform.Shared.Public.Helpers;
+using DataPlatform.Shared.Dtos;
+using DataPlatform.Shared.Helpers;
 using LiveAutoWeb.Models;
 using LiveAutoWeb.ViewModels;
 using Shared.BuildingBlocks.Api;
@@ -40,28 +40,5 @@ namespace LiveAutoWeb.Controllers
 
             return PartialView("SearchResults", response);
         }
-    }
-
-    public class DataField
-    {
-        public string Type { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class Action
-    {
-        public string Name { get; set; }
-        public Criteria Criteria { get; set; }
-    }
-
-    public class Criteria
-    {
-        public IEnumerable<DataField> Fields { get; set; }
-    }
-
-    public class ApiMetaData
-    {
-        public string Path { get; set; }
-        public IEnumerable<Action> Actions { get; set; }
     }
 }

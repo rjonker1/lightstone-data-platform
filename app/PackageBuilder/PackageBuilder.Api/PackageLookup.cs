@@ -1,19 +1,43 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Public.Entities;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Api.CannedData;
 
 namespace PackageBuilder.Api
 {
-    public class PackageLookup
+    public interface IPackageLookupRepository
     {
-        private readonly ICustomerRepository _customerRepository = new CustomerRepository();
-        private readonly IActionRepository _actionRepository = new ActionRepository();
-        private readonly IUserPackageRepository _userPackageRepository = new UserPackageRepository();
-        private readonly IRolePackageRepository _rolePackageRepository = new RolePackageRepository();
-        private readonly IGroupPackageRepository _groupPackageRepository = new GroupPackageRepository();
-        private readonly IContractRepository _contractRepository = new ContractRepository();
-        private readonly IContractPackageRepository _contractPackageRepository = new ContractPackageRepository();
+        IPackage Get(string username, string requestedAction);
+        IEnumerable<IAction> GetActions(string username);
+    }
+
+    public class PackageLookup : IPackageLookupRepository
+    {
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IActionRepository _actionRepository;
+        private readonly IUserPackageRepository _userPackageRepository;
+        private readonly IRolePackageRepository _rolePackageRepository;
+        private readonly IGroupPackageRepository _groupPackageRepository;
+        private readonly IContractRepository _contractRepository;
+        private readonly IContractPackageRepository _contractPackageRepository;
+
+        public PackageLookup(ICustomerRepository customerRepository, 
+                             IActionRepository actionRepository, 
+                             IUserPackageRepository userPackageRepository,
+                             IRolePackageRepository rolePackageRepository,
+                             IGroupPackageRepository groupPackageRepository,
+                             IContractRepository contractRepository,
+                             IContractPackageRepository contractPackageRepository)
+        {
+            _customerRepository = customerRepository;
+            _actionRepository = actionRepository;
+            _userPackageRepository = userPackageRepository;
+            _rolePackageRepository = rolePackageRepository;
+            _groupPackageRepository = groupPackageRepository;
+            _contractRepository = contractRepository;
+            _contractPackageRepository = contractPackageRepository;
+        }
+
         public IPackage Get(string username, string requestedAction)
         {
             var user = _customerRepository.GetUser(username);

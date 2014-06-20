@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using System.Threading.Tasks;
-using DataPlatform.Shared.Public.Messaging;
+using DataPlatform.Shared.Messaging;
 using Monitoring.Consumer.Lace.Messages;
 using Monitoring.Sources.Lace;
 using Workflow;

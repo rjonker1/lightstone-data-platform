@@ -43,6 +43,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentMigrator, Version=1.1.2.1, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\FluentMigrator.1.1.2.1\lib\40\FluentMigrator.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -77,38 +81,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CannedData\GroupPackage.cs" />
-    <Compile Include="CannedData\GroupPackageRepository.cs" />
+    <Compile Include="CannedData\GroupPackageCannedRepository.cs" />
     <Compile Include="CannedData\RolePackage.cs" />
-    <Compile Include="CannedData\RolePackageRepository.cs" />
-    <Compile Include="CannedData\UserRoleRepository.cs" />
-    <Compile Include="Entities\Action.cs" />
-    <Compile Include="CannedData\ActionRepository.cs" />
+    <Compile Include="CannedData\RolePackageCannedRepository.cs" />
+    <Compile Include="CannedData\UserRoleCannedRepository.cs" />
+    <Compile Include="CannedData\ActionCannedRepository.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Entities\Contract.cs" />
-    <Compile Include="CannedData\ContractRepository.cs" />
-    <Compile Include="Entities\ContractPackage.cs" />
-    <Compile Include="CannedData\ContractPackageRepository.cs" />
-    <Compile Include="CannedData\CustomerRepository.cs" />
-    <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\CustomerContract.cs" />
-    <Compile Include="Entities\CustomerUser.cs" />
-    <Compile Include="Entities\DataField.cs" />
-    <Compile Include="Entities\DataSet.cs" />
-    <Compile Include="CannedData\DataSetRepository.cs" />
-    <Compile Include="Entities\DataSource.cs" />
-    <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\GroupPermission.cs" />
-    <Compile Include="Entities\UserGroup.cs" />
-    <Compile Include="Entities\UserRole.cs" />
-    <Compile Include="IndexModule.cs" />
-    <Compile Include="Entities\Package.cs" />
-    <Compile Include="CannedData\PackageRepository.cs" />
+    <Compile Include="CannedData\ContractCannedRepository.cs" />
+    <Compile Include="CannedData\ContractPackageCannedRepository.cs" />
+    <Compile Include="CannedData\CustomerCannedRepository.cs" />
+    <Compile Include="CannedData\DataSetCannedRepository.cs" />
+    <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="CannedData\PackageCannedRepository.cs" />
     <Compile Include="PackageLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserPackage.cs" />
-    <Compile Include="CannedData\UserPackageRepository.cs" />
+    <Compile Include="CannedData\UserPackageCannedRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -127,9 +114,17 @@
       <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
       <Name>Shared.BuildingBlocks.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>Shared.Public</Name>
+    <ProjectReference Include="..\..\Shared\Shared.Public.TestHelpers\Shared.Public.TestHelpers.csproj">
+      <Project>{6307b487-bf7e-4e41-a8d2-e1821c3a909d}</Project>
+      <Name>Shared.Public.TestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
+      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
+      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
+      <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

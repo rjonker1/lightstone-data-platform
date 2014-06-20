@@ -1,5 +1,5 @@
 ﻿using System;
-using DataPlatform.Shared.Public.Identifiers;
+using DataPlatform.Shared.Identifiers;
 using Shared.Public.TestHelpers.Systems;
 
 namespace Shared.Public.TestHelpers.Requests

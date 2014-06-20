@@ -1,4 +1,4 @@
-using DataPlatform.Shared.Public.Messaging;
+using DataPlatform.Shared.Messaging;
 using Workflow;
 
 namespace Billing.TestHelper.Fakes

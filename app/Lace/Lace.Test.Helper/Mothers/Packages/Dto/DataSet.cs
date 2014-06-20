@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Public.Entities;
+using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {

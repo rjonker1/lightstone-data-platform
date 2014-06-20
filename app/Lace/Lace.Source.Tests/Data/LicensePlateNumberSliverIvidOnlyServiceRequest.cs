@@ -1,4 +1,4 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using DataPlatform.Shared.Entities;
 using Lace.Request;
 using System;
 using Lace.Tests.Data.PakageData.Ivid;

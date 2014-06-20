@@ -1,7 +1,7 @@
 using System;
 using Billing.Api.Dtos;
-using DataPlatform.Shared.Public.Helpers;
-using DataPlatform.Shared.Public.Identifiers;
+using DataPlatform.Shared.Helpers;
+using DataPlatform.Shared.Identifiers;
 
 namespace Billing.TestHelper.Mothers.CreatTransactionDto
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using DataPlatform.Shared.Public.Messaging;
+using DataPlatform.Shared.Messaging;
 using Workflow.RabbitMQ.Tests.Fakes;
 using Xunit.Extensions;
 
