@@ -1,4 +1,4 @@
-﻿using DataPlatform.Shared.Public.Identifiers;
+﻿using DataPlatform.Shared.Identifiers;
 
 namespace Shared.Public.TestHelpers.Users
 {

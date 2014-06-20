@@ -1,5 +1,5 @@
 ﻿using System;
-using DataPlatform.Shared.Public.Entities;
+using DataPlatform.Shared.Entities;
 using Lace.Request;
 using Lace.Tests.Data.PakageData.RgtVin;
 using Lace.Tests.Data.RequestData;

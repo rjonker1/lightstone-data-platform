@@ -58,13 +58,13 @@
       <Project>{6307B487-BF7E-4E41-A8D2-E1821C3A909D}</Project>
       <Name>Shared.Public.TestHelpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{A9E8B20A-E8F8-4549-83FC-921E26C64282}</Project>
-      <Name>Shared.Public</Name>
+    <ProjectReference Include="..\..\..\..\Shared\Shared\Shared.csproj">
+      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Workflow\Workflow.csproj">
       <Project>{2338D97A-0483-4335-9609-83D8C245FD4A}</Project>
-      <Name>Workflow %28Workflow\Workflow%29</Name>
+      <Name>Workflow</Name>
     </ProjectReference>
     <ProjectReference Include="..\Billing.Api.Connector\Billing.Api.Connector.csproj">
       <Project>{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}</Project>

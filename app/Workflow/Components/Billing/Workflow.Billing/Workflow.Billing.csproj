@@ -60,9 +60,9 @@
     <Compile Include="Repository\TypeMapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>Shared.Public</Name>
+    <ProjectReference Include="..\..\..\..\Shared\Shared\Shared.csproj">
+      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{ea4e1ff1-8581-4680-aa28-126294163093}</Project>

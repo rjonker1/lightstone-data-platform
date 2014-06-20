@@ -1,6 +1,6 @@
 using System;
 using Common.Logging;
-using DataPlatform.Shared.Public.Messaging;
+using DataPlatform.Shared.Messaging;
 using EasyNetQ;
 
 namespace Workflow.RabbitMQ.Publishers
