@@ -5,7 +5,6 @@ using Lace.Response;
 using Lace.Source.Audatex;
 using Lace.Source.Ivid;
 using Lace.Source.IvidTitleHolder;
-using Lace.Source.Repository.Product;
 using Lace.Source.RgtVin;
 
 namespace Lace.Request.Types.LicensePlateNumber.Handlers
@@ -18,7 +17,6 @@ namespace Lace.Request.Types.LicensePlateNumber.Handlers
             {
                 return new Dictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
                 {
-                    {"ProductRepository", (req, evt, resp) => new ProductConsumer(req).GetProduct(resp, evt)},
                     {"Ivid", (req, evt, resp) => new IvidConsumer(req).CallIvidService(resp, evt)},
                     {
                         "IvidTitleHolder",

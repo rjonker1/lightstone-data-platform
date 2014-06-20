@@ -34,7 +34,7 @@ namespace Lace.Source.Tests.Data.Initialization
 
         public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> handlers)
         {
-            handlers.Add(typeof(LicensePlateNumberRequest), (r,e) => new MockLicensePlateNumberSourceChain().Build(r,e).Response);
+            handlers.Add(typeof(IRequestLicensePlateNumber), (r,e) => new MockLicensePlateNumberSourceChain().Build(r,e).Response);
         }
     }
 }

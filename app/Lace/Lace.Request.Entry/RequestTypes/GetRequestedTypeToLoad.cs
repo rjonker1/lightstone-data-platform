@@ -9,7 +9,7 @@ namespace Lace.Request.Entry.RequestTypes
 
         public void GetRequestedType(ILaceRequest request)
         {
-            RequestedTypeToLoad = new LaceLicensePlateNumberLoader();
+            RequestedTypeToLoad = new LicensePlateNumberSourceLoader();
         }
     }
 }

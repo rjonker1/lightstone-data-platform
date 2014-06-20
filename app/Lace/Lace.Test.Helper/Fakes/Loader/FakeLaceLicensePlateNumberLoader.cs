@@ -34,7 +34,7 @@ namespace Lace.Test.Helper.Fakes.Loader
 
         public void BuildRequest(IDictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> handlers)
         {
-            handlers.Add(typeof (LicensePlateNumberRequest), (r,e) => new FakeLicensePlateNumberSourceChain().Build(r,e).Response);
+            handlers.Add(typeof (IRequestLicensePlateNumber), (r,e) => new FakeLicensePlateNumberSourceChain().Build(r,e).Response);
         }
     }
 }

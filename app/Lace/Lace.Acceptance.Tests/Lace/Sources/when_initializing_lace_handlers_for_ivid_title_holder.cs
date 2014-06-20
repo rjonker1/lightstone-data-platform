@@ -25,7 +25,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _loadRequestSources = new LaceLicensePlateNumberLoader();
+            _loadRequestSources = new LicensePlateNumberSourceLoader();
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
             _initialize = new Initialize(_request, _loadRequestSources, _laceEvent);
         }
