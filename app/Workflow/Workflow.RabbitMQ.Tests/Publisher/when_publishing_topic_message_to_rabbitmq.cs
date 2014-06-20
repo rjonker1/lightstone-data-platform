@@ -1,4 +1,4 @@
-﻿using DataPlatform.Shared.Public.Messaging;
+﻿using DataPlatform.Shared.Messaging;
 using Workflow.RabbitMQ.Tests.Fakes;
 using Workflow.RabbitMQ.Tests.Mothers.Publisher;
 using Xunit.Extensions;

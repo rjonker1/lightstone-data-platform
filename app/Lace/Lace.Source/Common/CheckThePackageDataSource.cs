@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using DataPlatform.Shared.Public.Entities;
-
+using DataPlatform.Shared.Entities;
 
 namespace Lace.Source.Common
 {

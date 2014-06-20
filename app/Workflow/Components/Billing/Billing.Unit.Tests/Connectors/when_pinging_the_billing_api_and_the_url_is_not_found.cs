@@ -2,7 +2,7 @@
 using Billing.Api.Connector;
 using Billing.Api.Dtos;
 using Billing.TestHelper.Fakes;
-using DataPlatform.Shared.Public.Identifiers;
+using DataPlatform.Shared.Identifiers;
 using Moq;
 using RestSharp;
 using Xunit.Extensions;

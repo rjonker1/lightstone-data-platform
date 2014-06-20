@@ -1,4 +1,4 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
 
 namespace Lace.Test.Helper.Builders.Requests

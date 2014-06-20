@@ -1,6 +1,6 @@
 ﻿using System;
-using DataPlatform.Shared.Public.Identifiers;
-using DataPlatform.Shared.Public.Messaging;
+using DataPlatform.Shared.Identifiers;
+using DataPlatform.Shared.Messaging;
 
 namespace Workflow.Billing.Messages
 {

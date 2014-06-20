@@ -1,6 +1,5 @@
 ﻿using System;
-using DataPlatform.Shared.Public.Helpers;
-using Monitoring.Sources;
+using DataPlatform.Shared.Helpers;
 using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Messages

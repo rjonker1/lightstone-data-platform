@@ -3,7 +3,7 @@ using Billing.Api.Dtos;
 using Billing.TestHelper.Fakes;
 using Billing.TestHelper.Mothers.CreatTransactionDto;
 using CsQuery.ExtensionMethods;
-using DataPlatform.Shared.Public.Helpers;
+using DataPlatform.Shared.Helpers;
 using Nancy;
 using Nancy.Testing;
 using Workflow.Billing.Messages;

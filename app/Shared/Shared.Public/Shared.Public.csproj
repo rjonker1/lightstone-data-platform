@@ -34,50 +34,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\DynamicTypeCreator.cs" />
-    <Compile Include="NamedRepository.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="Entities\IAction.cs" />
-    <Compile Include="Entities\IContract.cs" />
-    <Compile Include="Entities\IContractPackage.cs" />
-    <Compile Include="Entities\ICustomer.cs" />
-    <Compile Include="Entities\ICustomerContract.cs" />
-    <Compile Include="Entities\ICustomerUser.cs" />
-    <Compile Include="Entities\IDataField.cs" />
-    <Compile Include="Entities\IDataSet.cs" />
-    <Compile Include="Entities\IDataSource.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\IExpirable.cs" />
-    <Compile Include="Entities\IGroup.cs" />
-    <Compile Include="Entities\IGroupPackage.cs" />
-    <Compile Include="Entities\IGroupPermission.cs" />
-    <Compile Include="Entities\IPackage.cs" />
-    <Compile Include="Entities\IPackageAccessControl.cs" />
-    <Compile Include="Entities\IRole.cs" />
-    <Compile Include="Entities\IRolePackage.cs" />
-    <Compile Include="Entities\IRolePermission.cs" />
-    <Compile Include="Entities\IUser.cs" />
-    <Compile Include="Entities\IUserGroup.cs" />
-    <Compile Include="Entities\IUserPackage.cs" />
-    <Compile Include="Entities\IUserRole.cs" />
-    <Compile Include="Entities\IWorkflow.cs" />
-    <Compile Include="Entities\NamedEntity.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="Helpers\SystemTime.cs" />
-    <Compile Include="Identifiers\PackageIdentifier.cs" />
-    <Compile Include="Identifiers\RequestIdentifier.cs" />
-    <Compile Include="Identifiers\ServerIdentifier.cs" />
-    <Compile Include="Identifiers\SystemIdentifier.cs" />
-    <Compile Include="Identifiers\UserIdentifier.cs" />
-    <Compile Include="Identifiers\VersionIdentifier.cs" />
-    <Compile Include="Messaging\IPublishableMessage.cs" />
-    <Compile Include="Messaging\ITopicPublishableMessage.cs" />
-    <Compile Include="Messaging\MessageTopic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

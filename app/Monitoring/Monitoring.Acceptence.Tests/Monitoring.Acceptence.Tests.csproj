@@ -56,6 +56,13 @@
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
       <Name>Monitoring %28Monitoring\Monitoring%29</Name>
+    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
+      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
+      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
+      <Name>Monitoring</Name>
     </ProjectReference>
     <Compile Include="Fakes\FakeLaceSourceEvents.cs" />
     <Compile Include="Lace\Consumer\when_sending_lace_external_source_call_events_to_event_store.cs" />
@@ -75,10 +82,6 @@
     <ProjectReference Include="..\..\EventTracking\EventTracking.Domain\EventTracking.Domain.csproj">
       <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
       <Name>EventTracking.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>Shared.Public</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
       <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>

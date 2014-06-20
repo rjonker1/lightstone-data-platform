@@ -1,6 +1,6 @@
 using System;
-using DataPlatform.Shared.Public.Helpers;
-using DataPlatform.Shared.Public.Identifiers;
+using DataPlatform.Shared.Helpers;
+using DataPlatform.Shared.Identifiers;
 
 namespace Shared.Public.TestHelpers.Packages
 {

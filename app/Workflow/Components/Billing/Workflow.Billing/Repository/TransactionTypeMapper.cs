@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using DataPlatform.Shared.Public.Identifiers;
+using DataPlatform.Shared.Identifiers;
 using Workflow.Billing.Domain;
 
 namespace Workflow.Billing.Repository

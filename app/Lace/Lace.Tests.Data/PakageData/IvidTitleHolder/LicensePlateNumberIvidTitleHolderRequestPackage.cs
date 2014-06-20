@@ -1,4 +1,4 @@
-﻿using DataPlatform.Shared.Public.Entities;
+﻿using DataPlatform.Shared.Entities;
 
 namespace Lace.Tests.Data.PakageData.IvidTitleHolder
 {
