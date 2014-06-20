@@ -204,10 +204,6 @@
       <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
       <Name>Lace.Source.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Source.Repository.Product\Lace.Source.Repository.Product.csproj">
-      <Project>{cea1e1fe-102d-4221-a9c1-6779ff318043}</Project>
-      <Name>Lace.Source.Repository.Product</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
       <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>
       <Name>Lace.Source.RgtVin</Name>

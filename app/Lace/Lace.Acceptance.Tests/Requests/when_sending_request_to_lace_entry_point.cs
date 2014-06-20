@@ -20,7 +20,7 @@ namespace Lace.Acceptance.Tests.Requests
 
         public when_sending_request_to_lace_entry_point()
         {
-            _loadRequestSources = new LaceLicensePlateNumberLoader();
+            _loadRequestSources = new LicensePlateNumberSourceLoader();
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
             var bus = new FakeBus();

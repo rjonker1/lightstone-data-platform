@@ -1,5 +1,4 @@
-﻿using DataPlatform.Shared.Public.Entities;
-using Lace.Events;
+﻿using Lace.Events;
 using Lace.Models.Request.LicensePlateNumber;
 using Lace.Response;
 

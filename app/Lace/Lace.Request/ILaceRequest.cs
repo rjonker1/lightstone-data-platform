@@ -18,5 +18,7 @@ namespace Lace.Request
        // string SearchTerm { get; }
 
         IPackage Package { get; }
+
+        IAction Action { get; }
     }
 }

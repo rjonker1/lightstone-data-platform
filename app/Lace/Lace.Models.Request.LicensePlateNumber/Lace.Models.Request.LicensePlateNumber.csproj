@@ -33,8 +33,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILicensePlateNumberResponse.cs" />
-    <Compile Include="LicensePlateNumberRequest.cs" />
+    <Compile Include="IRequestLicensePlateNumber.cs" />
     <Compile Include="LicensePlateNumberResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
