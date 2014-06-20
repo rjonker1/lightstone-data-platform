@@ -7,7 +7,7 @@ using Lace.Source.Audatex.Transform;
 
 namespace Lace.Source.Tests.Data.Audatex
 {
-    public class MockCallingAudatexExternalWebService : ICallTheExternalSource
+    public class MockCallingAudatexExternalWebService : ICallTheSource
     {
         private GetDataResult _audatexResponse;
         private readonly ILaceRequest _request;

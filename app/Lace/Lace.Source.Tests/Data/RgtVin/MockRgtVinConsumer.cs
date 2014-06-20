@@ -11,7 +11,7 @@ namespace Lace.Source.Tests.Data.RgtVin
     {
         private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheExternalSource _externalWebServiceCall;
+        private readonly ICallTheSource _externalWebServiceCall;
 
         public MockRgtVinConsumer(ILaceRequest request)
         {

@@ -12,7 +12,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Source.Audatex.ServiceCalls
 {
-    public class CallAudatexSource : ICallTheExternalSource
+    public class CallAudatexSource : ICallTheSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private GetDataResult _audatexResponse;

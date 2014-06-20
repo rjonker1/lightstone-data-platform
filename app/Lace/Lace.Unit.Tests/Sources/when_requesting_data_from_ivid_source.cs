@@ -17,7 +17,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly ILaceRequest _ividRequest;
         private ILaceResponse _laceResponse;
         private readonly ILaceEvent _laceEvent;
-        private readonly ICallTheExternalSource _externalWebServiceCall;
+        private readonly ICallTheSource _externalWebServiceCall;
 
         public ivid_request_data_from_ivid_service_tests()
         {

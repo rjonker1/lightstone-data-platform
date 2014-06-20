@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
+using System.Linq;
 using Lace.Builder.RequestTypes;
 using Lace.Events;
 using Lace.Request;
 using Lace.Response;
+using Lace.Source.Audatex;
+using Lace.Source.Ivid;
+using Lace.Source.IvidTitleHolder;
+using Lace.Source.RgtVin;
 
 namespace Lace.Builder.Specifications
 {
@@ -18,30 +22,41 @@ namespace Lace.Builder.Specifications
             _request = request;
         }
 
-        public IDictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> Specifications
+        public IEnumerable<KeyValuePair<Type, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> GetSpecificationForRequestType(IRequestType requestType)
         {
-            get { throw new NotImplementedException(); }
+
+            return Specification.Where(w => w.Key.Equals(requestType));
         }
 
-        private static IDictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> _specification
+        private static IEnumerable<KeyValuePair<Type, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> Specification
         {
             get
             {
-                return new Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>>()
+                return new Dictionary<Type, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
                 {
-                    {typeof(IRequestUsingLicensePlateNumber), (req, evt, resp) => new IvidConsumer(req).CallIvidService(resp, evt)},
                     {
-                        typeof(IRequestUsingLicensePlateNumber),
-                        (req, evt, resp) =>
-                            new IvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp, evt)
+                        typeof (IRequestUsingLicensePlateNumber),
+                        (request, @event, response) =>
+                            new IvidConsumer(request).CallSource(response, @event)
                     },
-                    {typeof(IRequestUsingLicensePlateNumber), (req, evt, resp) => new RgtVinConsumer(req).CallRgtVinService(resp, evt)},
-                    {typeof(IRequestUsingLicensePlateNumber), (req, evt, resp) => new AudatexConsumer(req).CallAudatexService(resp, evt)}
+                    {
+                        typeof (IRequestUsingLicensePlateNumber),
+                        (request, @event, response) =>
+                            new IvidTitleHolderConsumer(request).CallSource(response, @event)
+                    },
+                    {
+                        typeof (IRequestUsingLicensePlateNumber),
+                        (request, @event, response) => new RgtVinConsumer(request).CallSource(response, @event)
+                    },
+                    {
+                        typeof (IRequestUsingLicensePlateNumber),
+                        (request, @event, response) => new AudatexConsumer(request).CallSource(response, @event)
+                    }
                 };
             }
         }
 
-       
+
     }
 
     

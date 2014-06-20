@@ -12,7 +12,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Source.RgtVin.ServiceCalls
 {
-    public class CallRgtVinExternalSource : ICallTheExternalSource
+    public class CallRgtVinExternalSource : ICallTheSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private DataSet _rgtVinResponse;

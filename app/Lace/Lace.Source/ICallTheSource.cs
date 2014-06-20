@@ -3,7 +3,7 @@ using Lace.Response;
 
 namespace Lace.Source
 {
-    public interface ICallTheExternalSource
+    public interface ICallTheSource
     {
         //void CallTheExternalWebService(ILaceRequest request, ILaceResponse response);
         void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent);

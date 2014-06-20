@@ -15,7 +15,7 @@ namespace Lace.Source.Tests.RgtVinTests
         private readonly ILaceRequest _rgtVinRequest;
         private ILaceResponse _laceResponse;
         private ILaceEvent _laceEvent;
-        private readonly ICallTheExternalSource _externalWebServiceCall;
+        private readonly ICallTheSource _externalWebServiceCall;
 
         public rgt_vin_request_data_from_rgt_vin_service_tests()
         {

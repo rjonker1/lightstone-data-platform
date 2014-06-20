@@ -9,7 +9,7 @@ using Lace.Test.Helper.Builders.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingAudatexExternalWebService : ICallTheExternalSource
+    public class FakeCallingAudatexExternalWebService : ICallTheSource
     {
         private GetDataResult _audatexResponse;
         private readonly ILaceRequest _request;

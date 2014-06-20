@@ -7,7 +7,7 @@ using Lace.Test.Helper.Builders.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingRgtVinExternalWebService : ICallTheExternalSource
+    public class FakeCallingRgtVinExternalWebService : ICallTheSource
     {
 
         private System.Data.DataSet _rgtVinResponse;

@@ -6,7 +6,7 @@ namespace Lace.Source.Audatex.ServiceCalls
     public class RequestDataFromAudatexSource : IRequestDataFromSource
     {
         public void FetchDataFromService(ILaceResponse response,
-            ICallTheExternalSource externalWebService, ILaceEvent laceEvent)
+            ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalWebService(response, laceEvent);
         }

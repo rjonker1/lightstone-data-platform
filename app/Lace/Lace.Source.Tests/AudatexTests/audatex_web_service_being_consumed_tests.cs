@@ -28,7 +28,7 @@ namespace Lace.Source.Tests.AudatexTests
         public override void Observe()
         {
             var consumer = new AudatexConsumer(_request);
-            consumer.CallAudatexService(_response, _laceEvent);
+            consumer.CallSource(_response, _laceEvent);
         }
 
         [Observation]

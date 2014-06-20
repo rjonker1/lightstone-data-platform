@@ -8,7 +8,7 @@ using Lace.Test.Helper.Builders.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingIvidExternalWebService : ICallTheExternalSource
+    public class FakeCallingIvidExternalWebService : ICallTheSource
     {
         private HpiStandardQueryResponse _ividResponse;
         public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)

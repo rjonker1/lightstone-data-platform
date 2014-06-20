@@ -7,7 +7,7 @@ using Lace.Source.Ivid.Transform;
 
 namespace Lace.Source.Tests.Data.Ivid
 {
-    public class MockCallingIvidExternalWebService : ICallTheExternalSource
+    public class MockCallingIvidExternalWebService : ICallTheSource
     {
         private HpiStandardQueryResponse _ividResponse;
         public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)

@@ -10,7 +10,7 @@ using Lace.Test.Helper.Builders.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingIvidTitleHolderExternalWebService : ICallTheExternalSource
+    public class FakeCallingIvidTitleHolderExternalWebService : ICallTheSource
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
         public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)

@@ -8,7 +8,7 @@ using Lace.Source.RgtVin.ServiceCalls;
 
 namespace Lace.Source.RgtVin
 {
-    public class RgtVinConsumer
+    public class RgtVinConsumer : ISourceConsumer
     {
         private readonly ILaceRequest _request;
 
@@ -17,7 +17,7 @@ namespace Lace.Source.RgtVin
             _request = request;
         }
 
-        public void CallRgtVinService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.RgtVin, _request);
 
