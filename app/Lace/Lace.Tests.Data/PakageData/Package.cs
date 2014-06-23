@@ -8,6 +8,7 @@ namespace Lace.Tests.Data.PakageData
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public IAction Action { get; set; }
         public IEnumerable<IDataSet> DataSets { get; set; }
         public IEnumerable<IWorkflow> Workflows { get; set; }
     }

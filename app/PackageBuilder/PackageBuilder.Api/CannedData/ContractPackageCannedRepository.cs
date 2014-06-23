@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Repositories;
 using PackageBuilder.Domain;
@@ -18,12 +19,12 @@ namespace PackageBuilder.Api.CannedData
     {
         public ContractPackageCannedRepository()
         {
-            Add(new ContractPackage
-            {
-                Contract = new ContractCannedRepository().Entities.FirstOrDefault(x => x.Name.Contains("WesBank")),
-                Action = new ActionCannedRepository().Entities.FirstOrDefault(x => x.Name.ToLower().Contains("license")),
-                Package = new PackageCannedRepository().Entities.FirstOrDefault(x => x.Name.ToLower().Contains("license"))
-            });
+            Add(new ContractPackage(Guid.NewGuid(),
+                new PackageCannedRepository().Entities.FirstOrDefault(x => x.Name.ToLower().Contains("license")), 
+                new ContractCannedRepository().Entities.FirstOrDefault(x => x.Name.Contains("WesBank")),
+                new DateTime()
+                )
+            );
         }
 
         public IQueryable<IContractPackage> GetContractPackages(IContract contract)
@@ -33,12 +34,12 @@ namespace PackageBuilder.Api.CannedData
 
         public IQueryable<IContractPackage> GetContractPackages(IContract contract, IAction action)
         {
-            return GetContractPackages(contract).Where(x => Equals(x.Action, action));
+            return GetContractPackages(contract).Where(x => Equals(x.Package.Action, action));
         }
 
         public IQueryable<IAction> GetActions(IContract contract)
         {
-            var actions = GetContractPackages(contract).Select(x => x.Action);
+            var actions = GetContractPackages(contract).Select(x => x.Package.Action);
             return actions;
         }
 

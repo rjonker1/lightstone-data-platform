@@ -27,10 +27,8 @@ namespace Api.Modules
             {
                 var token = Context.AuthorizationHeaderToken();
                 var packageResponse = pbApiClient.Get<Package>(token, "package/" + parameters.action);
-                //var packageResponse = pbApiClient.Get<ExpandoObject>(token, "package/" + parameters.action);
 
                 var package = Mapper.DynamicMap<IPackage>(packageResponse);
-                //var package = DynamicToStatic.ToStatic<IPackage>(packageResponse);
                 var vehicle = this.Bind<Vechicle>();
                 var request = new LicensePlateNumberRequest(package, new User(), new Context(), vehicle, new AggregationInformation());
                 var bus = BusFactory.CreateBus("monitor-event-tracking/queue");

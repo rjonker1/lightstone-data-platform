@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\Action.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Entities\IWorkflow.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />
+    <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />

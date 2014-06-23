@@ -10,6 +10,7 @@ namespace PackageBuilder.Domain
         {
         }
 
+        public IAction Action { get; set; }
         public IEnumerable<IDataSet> DataSets { get; set; }
         public IEnumerable<IWorkflow> Workflows { get; set; }
     }

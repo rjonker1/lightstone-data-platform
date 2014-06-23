@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Entities;
@@ -19,9 +20,7 @@ namespace PackageBuilder.Api.CannedData
     {
         public GroupPackageCannedRepository()
         {
-            Add(
-                new GroupPackage()
-                );
+            Add(new GroupPackage(Guid.NewGuid(), null, null, null, new DateTime()));
         }
 
         public IQueryable<IGroupPackage> GetGroupPackages(IUser user)
@@ -31,7 +30,7 @@ namespace PackageBuilder.Api.CannedData
 
         public IQueryable<IGroupPackage> GetGroupPackages(IUser user, IAction action)
         {
-            return GetGroupPackages(user).Where(x => Equals(x.Action, action));
+            return GetGroupPackages(user).Where(x => Equals(x.Package.Action, action));
         }
 
         public IPackage GetGroupPackage(IUser user, IAction action)
@@ -48,7 +47,7 @@ namespace PackageBuilder.Api.CannedData
 
         public IQueryable<IAction> GetActions(IUser user)
         {
-            var actions = GetGroupPackages(user).Select(x => x.Action);
+            var actions = GetGroupPackages(user).Select(x => x.Package.Action);
             return actions;
         }
 

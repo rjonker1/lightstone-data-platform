@@ -21,5 +21,16 @@ namespace PackageBuilder.Domain
         {
             get { return _rolePermissions.Select(x => x.Action); }
         }
+
+        public void Add(IAction action)
+        {
+            if (action == null) return;
+
+            var groupPermission = _rolePermissions.FirstOrDefault(x => Equals(x.Action, action));
+            if (groupPermission != null) return;
+
+            groupPermission = new RolePermission(this, action);
+            _rolePermissions.Add(groupPermission);
+        }
     }
 }

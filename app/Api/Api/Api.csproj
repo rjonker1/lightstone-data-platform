@@ -130,7 +130,6 @@
     <Compile Include="DefaultRouteMetadata.cs" />
     <Compile Include="DefaultRouteMetadataProvider.cs" />
     <Compile Include="IApiMetaDataGenerator.cs" />
-    <Compile Include="DynamicToStatic.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="LicensePlateNumberRequest.cs" />
     <Compile Include="PiplineExtensions.cs" />

@@ -20,7 +20,7 @@ namespace PackageBuilder.Api.CannedData
 
         public IContract First()
         {
-            return Entities.First();
+            return Entities != null && Entities.Any() ? Entities.First() : null;
         }
     }
 }

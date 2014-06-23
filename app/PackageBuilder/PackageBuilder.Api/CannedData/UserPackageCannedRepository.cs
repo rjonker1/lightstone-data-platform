@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Repositories;
 using PackageBuilder.Domain;
@@ -17,9 +18,7 @@ namespace PackageBuilder.Api.CannedData
     {
         public UserPackageCannedRepository()
         {
-            Add(
-                new UserPackage()
-                );
+            Add(new UserPackage(new Guid(), null, null, null, new DateTime()));
         }
 
         public IQueryable<IUserPackage> GetUserPackages(IUser user)
@@ -29,13 +28,13 @@ namespace PackageBuilder.Api.CannedData
 
         public IQueryable<IAction> GetActions(IUser user)
         {
-            var actions = GetUserPackages(user).Select(x => x.Action);
+            var actions = GetUserPackages(user).Select(x => x.Package.Action);
             return actions;
         }
 
         public IPackage GetPackage(IUser user, IAction action)
         {
-            var userPackage = GetUserPackages(user).FirstOrDefault(x => Equals(x.Action, action));
+            var userPackage = GetUserPackages(user).FirstOrDefault(x => Equals(x.Package.Action, action));
             return userPackage != null ? userPackage.Package : null;
         }
     }
