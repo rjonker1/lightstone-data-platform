@@ -5,7 +5,14 @@ namespace PackageBuilder.Domain
 {
     public class UserRole : IUserRole
     {
-        public Guid Id { get; set; }
+        public UserRole(IUser user, IRole role)
+        {
+            Id = Guid.NewGuid();
+            User = user;
+            Role = role;
+        }
+
+        public Guid Id { get; private set; }
 
         public IUser User { get; set; }
 

@@ -6,5 +6,7 @@ namespace DataPlatform.Shared.Entities
     {
         IEnumerable<ICustomerUser> CustomerUsers { get; }
         IEnumerable<IUser> Users { get; }
+        void Add(IUser user);
+        void Add(IContract contract);
     }
 }

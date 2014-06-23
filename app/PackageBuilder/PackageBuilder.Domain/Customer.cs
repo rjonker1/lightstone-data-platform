@@ -35,8 +35,11 @@ namespace PackageBuilder.Domain
 
         public void Add(IUser user)
         {
+            if (user == null) return;
+
             var customerUser = _customerUsers.FirstOrDefault(x => Equals(x.User, user));
             if (customerUser != null) return;
+
             user.Customer = this;
             customerUser = new CustomerUser(this, user);
             _customerUsers.Add(customerUser);
@@ -44,10 +47,14 @@ namespace PackageBuilder.Domain
 
         public void Add(IContract contract)
         {
-            var customerCoontract = _customerContracts.FirstOrDefault(x => Equals(x.Contract, contract));
-            if (customerCoontract != null) return;
-            customerCoontract = new CustomerContract(this, contract);
-            _customerContracts.Add(customerCoontract);
+            if (contract == null) return;
+
+            var customerContract = _customerContracts.FirstOrDefault(x => Equals(x.Contract, contract));
+            if (customerContract != null) return;
+
+            contract.Customer = this;
+            customerContract = new CustomerContract(this, contract);
+            _customerContracts.Add(customerContract);
         }
     }
 }

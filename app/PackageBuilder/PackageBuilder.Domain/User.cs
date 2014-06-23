@@ -35,6 +35,28 @@ namespace PackageBuilder.Domain
             get { return _userGroups.Select(x => x.Group); }
         }
 
+        public void Add(IRole role)
+        {
+            if (role == null) return;
+
+            var userRole = _userRoles.FirstOrDefault(x => Equals(x.Role, role));
+            if (userRole != null) return;
+
+            userRole = new UserRole(this, role);
+            _userRoles.Add(userRole);
+        }
+
+        public void Add(IGroup group)
+        {
+            if (group == null) return;
+
+            var userGroup = _userGroups.FirstOrDefault(x => Equals(x.Group, group));
+            if (userGroup != null) return;
+
+            userGroup = new UserGroup(this, group);
+            _userGroups.Add(userGroup);
+        }
+
         public bool HasGroups
         {
             get { return Groups != null && Groups.Any(); }
@@ -47,12 +69,12 @@ namespace PackageBuilder.Domain
 
         public bool HasSingleGroup
         {
-            get { return HasGroups && Groups.Count() == 1 && !HasRoles; }
+            get { return HasGroups && Groups.Count() == 1; }
         }
 
         public bool HasSingleRole
         {
-            get { return HasRoles && Roles.Count() == 1 && !HasGroups; }
+            get { return HasRoles && Roles.Count() == 1; }
         }
 
         public bool HasSingleGroupAndRole
@@ -62,12 +84,12 @@ namespace PackageBuilder.Domain
 
         public bool HasMultipleGroups
         {
-            get { return HasGroups && Groups.Count() > 1 && !HasRoles; }
+            get { return HasGroups && Groups.Count() > 1; }
         }
 
         public bool HasMultipleRoles
         {
-            get { return HasRoles && Roles.Count() > 1 && !HasGroups; }
+            get { return HasRoles && Roles.Count() > 1; }
         }
 
         public bool HasMultipleGroupsAndRoles
