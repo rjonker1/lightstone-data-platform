@@ -1,6 +1,6 @@
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Acceptance.Tests.Mothers;
-using PackageBuilder.Api;
+using PackageBuilder.Domain.Contracts;
+using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Acceptance.Tests
