@@ -1,0 +1,17 @@
+﻿using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
+
+namespace PackageBuilder.Domain.Entities
+{
+    public class Package : NamedEntity, IPackage
+    {
+        public Package(string name)
+            : base(name)
+        {
+        }
+
+        public IAction Action { get; set; }
+        public IEnumerable<IDataSet> DataSets { get; set; }
+        public IEnumerable<IWorkflow> Workflows { get; set; }
+    }
+}

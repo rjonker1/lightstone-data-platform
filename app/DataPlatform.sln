@@ -204,6 +204,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Acceptance.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Domain", "PackageBuilder\PackageBuilder.Domain\PackageBuilder.Domain.csproj", "{C075E78C-8051-4CFC-A0F5-5C61BB108234}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.TestHelper", "PackageBuilder\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj", "{F29A3A51-343E-428F-A592-F7845E99B4AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -740,6 +742,14 @@ Global
 		{C075E78C-8051-4CFC-A0F5-5C61BB108234}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
 		{C075E78C-8051-4CFC-A0F5-5C61BB108234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C075E78C-8051-4CFC-A0F5-5C61BB108234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.MonoDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.MonoDebug|Any CPU.Build.0 = Debug|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.MonoRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29A3A51-343E-428F-A592-F7845E99B4AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -829,5 +839,6 @@ Global
 		{04F98441-86A8-47DE-A91D-38290D0FAFA0} = {584159AF-F293-4EA6-BCF7-74CFA2968D2C}
 		{08C6C489-5BDD-44A5-B8DC-499A77FC445E} = {A2452885-D500-45E4-8C3A-A11D20663AFF}
 		{4EDE5873-8AD3-47C9-8626-D1B03B180FCA} = {A2452885-D500-45E4-8C3A-A11D20663AFF}
+		{F29A3A51-343E-428F-A592-F7845E99B4AE} = {A2452885-D500-45E4-8C3A-A11D20663AFF}
 	EndGlobalSection
 EndGlobal

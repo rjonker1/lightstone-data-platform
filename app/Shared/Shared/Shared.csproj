@@ -44,7 +44,7 @@
     <Compile Include="Dtos\Package.cs" />
     <Compile Include="Entities\IAction.cs" />
     <Compile Include="Entities\IContract.cs" />
-    <Compile Include="Entities\IContractPackage.cs" />
+    <Compile Include="Entities\ICriteria.cs" />
     <Compile Include="Entities\ICustomer.cs" />
     <Compile Include="Entities\ICustomerContract.cs" />
     <Compile Include="Entities\ICustomerUser.cs" />
@@ -54,16 +54,12 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\IExpirable.cs" />
     <Compile Include="Entities\IGroup.cs" />
-    <Compile Include="Entities\IGroupPackage.cs" />
     <Compile Include="Entities\IGroupPermission.cs" />
     <Compile Include="Entities\IPackage.cs" />
-    <Compile Include="Entities\IPackageAccessControl.cs" />
     <Compile Include="Entities\IRole.cs" />
-    <Compile Include="Entities\IRolePackage.cs" />
     <Compile Include="Entities\IRolePermission.cs" />
     <Compile Include="Entities\IUser.cs" />
     <Compile Include="Entities\IUserGroup.cs" />
-    <Compile Include="Entities\IUserPackage.cs" />
     <Compile Include="Entities\IUserRole.cs" />
     <Compile Include="Entities\IWorkflow.cs" />
     <Compile Include="Entities\NamedEntity.cs" />

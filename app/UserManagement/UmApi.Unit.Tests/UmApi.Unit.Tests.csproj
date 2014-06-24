@@ -63,7 +63,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fakes\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
       <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>

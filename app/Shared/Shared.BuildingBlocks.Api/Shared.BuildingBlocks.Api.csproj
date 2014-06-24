@@ -64,6 +64,8 @@
     <Compile Include="Security\IAuthenticateUser.cs" />
     <Compile Include="RestSharpDataContractJsonDeserializer.cs" />
     <Compile Include="Security\PiplineExtensions.cs" />
+    <Compile Include="Security\TestAuthenticator.cs" />
+    <Compile Include="Security\TestNullAuthenticator.cs" />
     <Compile Include="Security\UmApiAuthenticator.cs" />
   </ItemGroup>
   <ItemGroup>

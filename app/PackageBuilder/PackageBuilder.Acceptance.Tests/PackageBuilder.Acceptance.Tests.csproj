@@ -47,39 +47,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\Entites\ActionBuilder.cs" />
-    <Compile Include="Builders\Entites\DataSetBuilder.cs" />
-    <Compile Include="Builders\Entites\GroupBuilder.cs" />
-    <Compile Include="Builders\Entites\PackageBuilder.cs" />
-    <Compile Include="Builders\Entites\RoleBuilder.cs" />
-    <Compile Include="Builders\Repositories\ActionRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\ContractPackageRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\ContractRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\CustomerRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\GroupPackageRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\RolePackageRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\UserPackageRepositoryBuilder.cs" />
-    <Compile Include="Fakes\TestActionRepository.cs" />
-    <Compile Include="Builders\Entites\ContractBuilder.cs" />
-    <Compile Include="Builders\Entites\ContractPackageBuilder.cs" />
-    <Compile Include="Builders\Entites\CustomerBuilder.cs" />
-    <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
-    <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
-    <Compile Include="Builders\Entites\RolePackageBuilder.cs" />
-    <Compile Include="Builders\Entites\UserBuilder.cs" />
-    <Compile Include="Builders\Entites\UserPackageBuilder.cs" />
-    <Compile Include="Fakes\TestContractPackageRepository.cs" />
-    <Compile Include="Fakes\TestContractRepository.cs" />
-    <Compile Include="Fakes\TestCustomerRepository.cs" />
-    <Compile Include="Fakes\TestGroupPackageRepository.cs" />
-    <Compile Include="Fakes\TestRolePackageRepository.cs" />
-    <Compile Include="Fakes\TestUserPackageRepository.cs" />
-    <Compile Include="Mothers\ActionMother.cs" />
-    <Compile Include="Mothers\ActionRepositoryMother.cs" />
-    <Compile Include="Mothers\DataFieldMother.cs" />
-    <Compile Include="Mothers\DataSetMother.cs" />
-    <Compile Include="Mothers\PackageLookupMother.cs" />
-    <Compile Include="Mothers\PackageMother.cs" />
     <Compile Include="when_user4_envokes_partial_action.cs" />
     <Compile Include="when_user5_belonging_to_group3.cs" />
     <Compile Include="when_user5_belonging_to_group3_and_role1.cs" />
@@ -103,13 +70,13 @@
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Api\PackageBuilder.Api.csproj">
-      <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
-      <Name>PackageBuilder.Api</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

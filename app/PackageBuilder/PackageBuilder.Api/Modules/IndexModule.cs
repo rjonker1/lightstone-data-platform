@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using Nancy;
+using PackageBuilder.Domain.Contracts;
 using Shared.BuildingBlocks.Api;
 
 namespace PackageBuilder.Api.Modules
