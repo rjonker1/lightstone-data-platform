@@ -1,4 +1,4 @@
-﻿using Api.Unit.Tests.Mothers;
+﻿using Api.Unit.Tests.Fakes;
 using Nancy;
 using Nancy.Testing;
 using Xunit.Extensions;
@@ -7,7 +7,7 @@ namespace Api.Unit.Tests
 {
     public class when_api_key_header_missing : Specification
     {
-        private readonly Browser _browser = new Browser(new TestBootstrapper());
+        private readonly Browser _browser = new Browser(new TestBootstrapper("admin"));
         private BrowserResponse _response;
 
         public override void Observe()

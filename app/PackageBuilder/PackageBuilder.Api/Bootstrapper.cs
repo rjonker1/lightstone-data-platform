@@ -1,5 +1,6 @@
 ﻿using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
+using PackageBuilder.TestHelper.Mothers;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api
@@ -33,6 +34,7 @@ namespace PackageBuilder.Api
             base.ConfigureApplicationContainer(container);
 
             container.Register<IAuthenticateUser, UmApiAuthenticator>();
+            container.Register(PackageLookupMother.GetCannedVersion()); // Canned test data (sliver implementation)
         }
     }
 }

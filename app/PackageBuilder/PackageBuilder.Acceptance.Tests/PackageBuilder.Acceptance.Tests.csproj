@@ -47,7 +47,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="when_uer_belonging_to_wesbank_customer_invokes_verify_action.cs" />
+    <Compile Include="when_user4_envokes_partial_action.cs" />
+    <Compile Include="when_user5_belonging_to_group3.cs" />
+    <Compile Include="when_user5_belonging_to_group3_and_role1.cs" />
+    <Compile Include="when_user_belonging_to_group1.cs" />
+    <Compile Include="when_user_belonging_to_group2_envokes_ezscore_action.cs" />
+    <Compile Include="when_user_belonging_to_group2_envokes_partial_verification_action.cs" />
+    <Compile Include="when_user_belonging_to_group3.cs" />
+    <Compile Include="when_user_belonging_to_wesbank_customer_invokes_verify_action.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,13 +70,13 @@
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Api\PackageBuilder.Api.csproj">
-      <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
-      <Name>PackageBuilder.Api</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

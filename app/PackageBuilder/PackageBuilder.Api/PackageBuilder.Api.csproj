@@ -80,22 +80,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CannedData\GroupPackage.cs" />
-    <Compile Include="CannedData\GroupPackageCannedRepository.cs" />
-    <Compile Include="CannedData\RolePackage.cs" />
-    <Compile Include="CannedData\RolePackageCannedRepository.cs" />
-    <Compile Include="CannedData\UserRoleCannedRepository.cs" />
-    <Compile Include="CannedData\ActionCannedRepository.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="CannedData\ContractCannedRepository.cs" />
-    <Compile Include="CannedData\ContractPackageCannedRepository.cs" />
-    <Compile Include="CannedData\CustomerCannedRepository.cs" />
-    <Compile Include="CannedData\DataSetCannedRepository.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="CannedData\PackageCannedRepository.cs" />
-    <Compile Include="PackageLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CannedData\UserPackageCannedRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -125,6 +112,10 @@
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

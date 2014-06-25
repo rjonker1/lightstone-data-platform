@@ -2,13 +2,15 @@
 
 namespace DataPlatform.Shared.Entities
 {
-    public interface IUser : IEntity, INamedEntity
+    public interface IUser : INamedEntity
     {
         ICustomer Customer { get; set; }
         IEnumerable<IUserGroup> UserGroups { get; }
         IEnumerable<IUserRole> UserRoles { get; }
         IEnumerable<IRole> Roles { get; }
         IEnumerable<IGroup> Groups { get; }
+        void Add(IRole role);
+        void Add(IGroup group);
         bool HasGroups { get; }
         bool HasRoles { get; }
         bool HasSingleGroup { get; }

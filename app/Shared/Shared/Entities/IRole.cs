@@ -6,5 +6,6 @@ namespace DataPlatform.Shared.Entities
     {
         IEnumerable<IRolePermission> RolePermissions { get; }
         IEnumerable<IAction> Actions { get; }
+        void Add(IAction action);
     }
 }

@@ -9,7 +9,12 @@ namespace Shared.Public.TestHelpers.Repositories
     {
         public T[] Entities;
 
-        protected void Add(params T[] entities)
+        public CannedRepository()
+        {
+            Entities = new T[]{};
+        }
+
+        public void Add(params T[] entities)
         {
             Entities = entities;
         }
