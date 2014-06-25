@@ -36,10 +36,10 @@
   <ItemGroup>
     <Compile Include="Factory\CreateSourceChain.cs" />
     <Compile Include="IBuildSourceChain.cs" />
-    <Compile Include="ISourceSpecification.cs" />
+    <None Include="ISourceSpecification.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestTypes\IRequestType.cs" />
-    <Compile Include="RequestTypes\IRequestUsingLicensePlateNumber.cs" />
+    <None Include="RequestTypes\IRequestType.cs.old" />
+    <None Include="RequestTypes\IRequestUsingLicensePlateNumber.cs.old" />
     <Compile Include="Specifications\SourceSpecification.cs" />
   </ItemGroup>
   <ItemGroup />

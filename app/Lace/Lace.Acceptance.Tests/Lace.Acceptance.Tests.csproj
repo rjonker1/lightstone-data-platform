@@ -163,10 +163,6 @@
       <Project>{2e7e7b3b-b78c-4a84-aa69-77c467c5e04d}</Project>
       <Name>Lace.Request.Entry</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Request.Load\Lace.Request.Load.csproj">
-      <Project>{e8ed7030-9672-41d8-a06f-b3af1464dba6}</Project>
-      <Name>Lace.Request.Load</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
