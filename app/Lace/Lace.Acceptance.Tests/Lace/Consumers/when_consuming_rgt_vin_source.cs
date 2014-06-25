@@ -34,25 +34,25 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
 
         [Observation]
-        public void ivid_consumer_must_be_handled()
+        public void rgt_vin_consumer_must_be_handled()
         {
-            _response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _response.RgtVinResponseHandled.Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void ivid_response_from_consumer_must_not_be_null()
+        public void rgt_vin_response_from_consumer_must_not_be_null()
         {
-            _response.IvidResponse.ShouldNotBeNull();
+            _response.RgtVinResponse.ShouldNotBeNull();
         }
 
         [Observation]
-        public void ivid_consumer_next_source_must_be_null()
+        public void rgt_vin_consumer_next_source_must_be_null()
         {
             _consumer.Next.ShouldBeNull();
         }
 
         [Observation]
-        public void ivid_consumer_fallback_source_must_be_null()
+        public void rgt_vin_consumer_fallback_source_must_be_null()
         {
             _consumer.FallBack.ShouldBeNull();
         }

@@ -16,7 +16,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private readonly Initialize _initialize;
+        private readonly IBootstrap _initialize;
         private IList<LaceExternalServiceResponse> _laceResponses;
         private readonly IBuildSourceChain _buildSourceChain;
 
@@ -38,6 +38,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public override void Observe()
         {
+            _initialize.Execute();
             _laceResponses = _initialize.LaceResponses;
         }
 
