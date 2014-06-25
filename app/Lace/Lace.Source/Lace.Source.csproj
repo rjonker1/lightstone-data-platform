@@ -48,6 +48,8 @@
     <Compile Include="ILogEvent.cs" />
     <Compile Include="IRequestDataFromSource.cs" />
     <Compile Include="IExecuteTheSource.cs" />
+    <Compile Include="SourceConsumer.cs" />
+    <None Include="ISourceConsumer.cs.old" />
     <Compile Include="ITransform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

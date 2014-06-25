@@ -8,11 +8,12 @@ using Lace.Source.Enums;
 
 namespace Lace.Source.Audatex
 {
-    public class AudatexConsumer : IExecuteTheSource
+    public class AudatexConsumer :ExecuteSourceBase, IExecuteTheSource
     {
         private readonly ILaceRequest _request;
 
-        public AudatexConsumer(ILaceRequest request)
+        public AudatexConsumer(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
         }

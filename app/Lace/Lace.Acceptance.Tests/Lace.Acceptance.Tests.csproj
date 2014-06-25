@@ -74,6 +74,10 @@
     <Compile Include="Events\when_publishing_handled_lace_events_to_bus.cs" />
     <Compile Include="Events\when_publlishing_lace_events_to_bus.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_rgt_vin_source.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_audatex_source.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source.cs" />
+    <Compile Include="Lace\Consumers\when_consuming_ivid_source.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_audatex_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder.cs" />
@@ -106,6 +110,10 @@
     <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
       <Name>Workflow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Builder\Lace.Builder.csproj">
+      <Project>{536a41d4-aa0e-4e4f-8aa1-09f86e4a8f95}</Project>
+      <Name>Lace.Builder</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
@@ -170,6 +178,26 @@
     <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
       <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
       <Name>Lace.Response</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Audatex\Lace.Source.Audatex.csproj">
+      <Project>{bedbf9ba-5710-4f01-a88d-e7d217ba5164}</Project>
+      <Name>Lace.Source.Audatex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.IvidTitleHolder\Lace.Source.IvidTitleHolder.csproj">
+      <Project>{11458e6f-fca6-4d3f-8aaa-10863873bb1c}</Project>
+      <Name>Lace.Source.IvidTitleHolder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Ivid\Lace.Source.Ivid.csproj">
+      <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
+      <Name>Lace.Source.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
+      <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>
+      <Name>Lace.Source.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
+      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
+      <Name>Lace.Source</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Test.Helper\Lace.Test.Helper.csproj">
       <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>

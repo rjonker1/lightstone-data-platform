@@ -8,18 +8,20 @@ using Lace.Source.IvidTitleHolder.ServiceCalls;
 
 namespace Lace.Source.IvidTitleHolder
 {
-    public class IvidTitleHolderConsumer : ISourceConsumer
+    public class IvidTitleHolderConsumer : ExecuteSourceBase, IExecuteTheSource
     {
-     private readonly ILaceRequest _request;
+        private readonly ILaceRequest _request;
 
-        public IvidTitleHolderConsumer(ILaceRequest request)
+        public IvidTitleHolderConsumer(ILaceRequest request, IExecuteTheSource nextSource,
+            IExecuteTheSource fallbackSource)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
         }
 
         public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder,_request);
+            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -27,7 +29,8 @@ namespace Lace.Source.IvidTitleHolder
                 return;
             }
 
-            var consumer = new ConsumeService(new HandleIvidTitleHolderSourceCall(), new CallIvidTitleHolderExternalSource(_request));
+            var consumer = new ConsumeService(new HandleIvidTitleHolderSourceCall(),
+                new CallIvidTitleHolderExternalSource(_request));
             consumer.CallService(response, laceEvent);
         }
 

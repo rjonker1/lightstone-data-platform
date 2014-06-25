@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Lace.Request;
 using Lace.Request.Entry;
-using Lace.Request.Load;
-using Lace.Request.Load.Loaders;
 using Lace.Response.ExternalServices;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
@@ -16,11 +14,9 @@ namespace Lace.Acceptance.Tests.Requests
         private readonly ILaceRequest _request;
         private IList<LaceExternalServiceResponse> _laceResponses;
         private readonly IEntryPoint _entryPoint;
-        private readonly ILoadRequestSources _loadRequestSources;
 
         public when_sending_request_to_lace_entry_point()
         {
-            _loadRequestSources = new LicensePlateNumberSourceLoader();
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
             var bus = new FakeBus();

@@ -59,7 +59,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\RequestedTypes\RequestedTypeBuilder.cs" />
+    <None Include="Builders\RequestedTypes\RequestedTypeBuilder.cs.old" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
@@ -67,24 +67,27 @@
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
     <Compile Include="Fakes\Bus\FakeBus.cs" />
     <None Include="Fakes\Consumer\FakeConsumerInstaller.cs.old" />
+    <Compile Include="Fakes\Lace\Builder\FackSourceChain.cs" />
+    <Compile Include="Fakes\Lace\Builder\FakeSourceSpecification.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidConsumer.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderConsumer.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeRgtVinConsumer.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeAudatexConsumer.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeSourceConsumer.cs" />
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
-    <Compile Include="Fakes\Lace\FakeLaceLoader.cs" />
+    <None Include="Fakes\Lace\FakeLaceLoader.cs.old" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtVinServiceCall.cs" />
     <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberResponse.cs" />
-    <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs" />
+    <None Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs.old" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingAudatexExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
-    <Compile Include="Fakes\Loader\FakeLaceLicensePlateNumberLoader.cs" />
+    <None Include="Fakes\Loader\FakeLaceLicensePlateNumberLoader.cs.old" />
     <Compile Include="Fakes\RequestFakes\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
@@ -99,7 +102,7 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Packages\Dto\Package.cs" />
-    <Compile Include="Fakes\Loader\FakeRequestedTypesForLicensePlateNumber.cs" />
+    <None Include="Fakes\Loader\FakeRequestedTypesForLicensePlateNumber.cs.old" />
     <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
@@ -121,6 +124,10 @@
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Builder\Lace.Builder.csproj">
+      <Project>{536a41d4-aa0e-4e4f-8aa1-09f86e4a8f95}</Project>
+      <Name>Lace.Builder</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Consumer\Lace.Consumer.csproj">
       <Project>{6f44066d-c6a2-41e2-847a-0561c9ee2cdb}</Project>

@@ -33,8 +33,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chain\LicensePlateNumberSourceChain.cs" />
-    <Compile Include="Handlers\LicensePlateNumberHandlers.cs" />
+    <None Include="Chain\LicensePlateNumberSourceChain.cs.old" />
+    <None Include="Handlers\LicensePlateNumberHandlers.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +73,10 @@
     <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
       <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>
       <Name>Lace.Source.RgtVin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
+      <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
+      <Name>Lace.Source</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

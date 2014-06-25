@@ -20,12 +20,12 @@ namespace Lace.Test.Helper.Fakes.Lace.LicensePlateNumber
         {
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
             {
-                {"Ivid", (req, evt, resp) => new FakeIvidConsumer(req).CallIvidService(resp, evt)},
+                {"Ivid", (req, evt, resp) => new FakeIvidConsumer(req).CallSource(resp, evt)},
                 {
                     "IvidTitleHolder",
                     (req, evt, resp) => new FakeIvidTitleHolderConsumer(req).CallIvidTitleHolderService(resp, evt)
                 },
-                {"RgtVin", (req, evt, resp) => new FakeRgtVinConsumer(req).CallRgtVinService(resp, evt)},
+                {"RgtVin", (req, evt, resp) => new FakeRgtVinConsumer(req).CallSource(resp, evt)},
                 {"Audatex", (req, evt, resp) => new FakeAudatexConsumer(req).CallAudatexService(resp, evt)}
             };
 

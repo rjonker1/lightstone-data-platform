@@ -1,5 +1,4 @@
-﻿using System;
-using Lace.Request;
+﻿using Lace.Request;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
 using Lace.Source.Tests.Data;
 using Xunit.Extensions;

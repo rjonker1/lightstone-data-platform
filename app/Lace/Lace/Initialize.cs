@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.EventHandlers;
+using Lace.Builder;
 using Lace.Events;
-using Lace.Operations;
 using Lace.Request;
-using Lace.Request.Load;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 using Monitoring.Sources.Lace;
@@ -13,54 +11,37 @@ namespace Lace
 {
     public class Initialize : IBootstrap
     {
-        public IList<LaceExternalServiceResponse> LaceResponses { get; set; }
+        public IList<LaceExternalServiceResponse> LaceResponses { get; private set; }
 
         private readonly ILaceRequest _request;
-        private Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>> _handlers;
-        private LaceOperation Bootstrap;
-        private readonly ILoadRequestSources _loadRequestSources;
+
+        private readonly ILaceResponse _response;
+
+        private readonly IBuildSourceChain _buildSourceChain;
+
         private readonly ILaceEvent _laceEvent;
 
-        public Initialize(ILaceRequest request, ILoadRequestSources loadRequestSources, ILaceEvent laceEvent)
+        public Initialize(ILaceResponse response, ILaceRequest request, ILaceEvent laceEvent,
+            IBuildSourceChain buildSourceChain)
         {
             _request = request;
             _laceEvent = laceEvent;
-            _loadRequestSources = loadRequestSources;
-
-            Set();
-
-            InitializeHandlers();
-
-            LoadSources();
-
-            _laceEvent.PublishLaceProcessedRequestAndReturnedResponseMessage(request.RequestAggregation.AggregateId, LaceEventSource.Initialization);
+            _response = response;
+            _buildSourceChain = buildSourceChain;
         }
 
-        private void Set()
+
+        public void Execute()
         {
-            Bootstrap = new LaceOperation(_loadRequestSources)
+            _buildSourceChain.SourceChain(_request, _laceEvent, _response);
+
+            LaceResponses = new List<LaceExternalServiceResponse>()
             {
-                LaceBootstrap = this
+                new LaceExternalServiceResponse() {Response = _response}
             };
+
+            _laceEvent.PublishLaceProcessedRequestAndReturnedResponseMessage(_request.RequestAggregation.AggregateId,
+                LaceEventSource.Initialization);
         }
-
-        private void InitializeHandlers()
-        {
-            var args = new SetHandlersEventArgs();
-            SetHandlers(this, args);
-            _handlers = args.Handlers ?? new Dictionary<Type, Func<ILaceRequest, ILaceEvent, ILaceResponse>>();
-        }
-
-        private void LoadSources()
-        {
-            var args = new LoadEventArgs(_request, _handlers,_laceEvent);
-            Load(this, args);
-            LaceResponses = args.LaceResponses;
-        }
-
-
-        public event EventHandler<LoadEventArgs> Load;
-        public event EventHandler<SetHandlersEventArgs> SetHandlers;
-       
     }
 }
