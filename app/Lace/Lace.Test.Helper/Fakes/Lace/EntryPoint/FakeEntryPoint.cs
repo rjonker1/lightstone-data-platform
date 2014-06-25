@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Lace.Builder;
-using Lace.Builder.Factory;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
 using Lace.Request;
@@ -13,6 +8,7 @@ using Lace.Request.Entry.Checks;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 using Lace.Test.Helper.Fakes.Bus;
+using Lace.Test.Helper.Fakes.Lace.Builder;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
@@ -21,13 +17,14 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly IBuildSourceChain _buildSourceChain;
         private readonly ILaceEvent _laceEvent;
+        private IBootstrap _bootstrap;
 
         public FakeEntryPoint()
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _buildSourceChain = new CreateSourceChain();
+            _buildSourceChain = new FakeSourceChain();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
@@ -35,9 +32,12 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
         {
             _buildSourceChain.Default(request.Package.Action);
 
-            return !_checkForDuplicateRequests.IsRequestDuplicated(request)
-                ? new Initialize(new LaceResponse(), request, _laceEvent, _buildSourceChain).LaceResponses
-                : null;
+            if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return null;
+
+            _bootstrap = new Initialize(new LaceResponse(), request, _laceEvent, _buildSourceChain);
+            _bootstrap.Execute();
+
+            return _bootstrap.LaceResponses;
         }
     }
 }

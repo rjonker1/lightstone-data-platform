@@ -26,12 +26,17 @@ namespace Lace.Source.IvidTitleHolder
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
-                return;
+            }
+            else
+            {
+                var consumer = new ConsumeService(new HandleIvidTitleHolderSourceCall(), new CallIvidTitleHolderExternalSource(_request));
+                consumer.CallService(response, laceEvent);
+
+                if (response.IvidTitleHolderResponse == null && FallBack != null)
+                    FallBack.CallSource(response, laceEvent);
             }
 
-            var consumer = new ConsumeService(new HandleIvidTitleHolderSourceCall(),
-                new CallIvidTitleHolderExternalSource(_request));
-            consumer.CallService(response, laceEvent);
+            if (Next != null) Next.CallSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

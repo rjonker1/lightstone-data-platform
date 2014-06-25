@@ -1,6 +1,0 @@
-﻿namespace Lace.Source
-{
-    public interface ISourceConsumer
-    {
-    }
-}

@@ -25,11 +25,18 @@ namespace Lace.Source.RgtVin
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
-                return;
+            }
+            else
+            {
+                var consumer = new ConsumeService(new HandleRgtVinSourceCall(), new CallRgtVinExternalSource(_request));
+                consumer.CallService(response, laceEvent);
+
+                if (response.RgtVinResponse == null && FallBack != null)
+                    FallBack.CallSource(response, laceEvent);
             }
 
-            var consumer = new ConsumeService(new HandleRgtVinSourceCall(), new CallRgtVinExternalSource(_request));
-            consumer.CallService(response, laceEvent);
+            if (Next != null) Next.CallSource(response, laceEvent);
+
         }
 
         private static void NotHandledResponse(ILaceResponse response)

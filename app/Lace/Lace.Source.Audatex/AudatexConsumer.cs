@@ -25,11 +25,17 @@ namespace Lace.Source.Audatex
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
-                return;
+            }
+            else
+            {
+                var consumer = new ConsumeService(new HandleAudatexSourceCall(), new CallAudatexSource(_request));
+                consumer.CallService(response, laceEvent);
+
+                if (response.AudatexResponse == null && FallBack != null)
+                    FallBack.CallSource(response, laceEvent);
             }
 
-            var consumer = new ConsumeService(new HandleAudatexSourceCall(), new CallAudatexSource(_request));
-            consumer.CallService(response, laceEvent);
+            if (Next != null) Next.CallSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

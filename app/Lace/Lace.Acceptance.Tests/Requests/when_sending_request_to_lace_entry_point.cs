@@ -39,11 +39,6 @@ namespace Lace.Acceptance.Tests.Requests
             _laceResponses.Count.ShouldEqual(1);
             _laceResponses[0].Response.ShouldNotBeNull();
 
-
-            _laceResponses[0].Response.Product.ShouldNotBeNull();
-            _laceResponses[0].Response.Product.ProductIsAvailable.ShouldBeTrue();
-
-
             _laceResponses[0].Response.IvidResponse.ShouldNotBeNull();
             _laceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
 

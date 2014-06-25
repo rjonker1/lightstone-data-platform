@@ -33,8 +33,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILaceProduct.cs" />
-    <Compile Include="LaceProduct.cs" />
+    <None Include="ILaceProduct.cs.old" />
+    <None Include="LaceProduct.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

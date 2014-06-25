@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using Lace.Builder.RequestTypes;
 using Lace.Events;
 using Lace.Request;
 using Lace.Response;
@@ -14,37 +10,19 @@ using Lace.Source.RgtVin;
 
 namespace Lace.Builder.Specifications
 {
-    public class SourceSpecification // : ISourceSpecification
+    public class SourceSpecification
     {
-        //private readonly ILaceRequest _request;
-
-        //public SourceSpecification(ILaceRequest request)
-        //{
-        //    _request = request;
-        //}
-
-        //public IEnumerable<KeyValuePair<Type, Action<ILaceRequest, ILaceEvent, ILaceResponse>>>
-        //    GetSpecificationForRequestType(IRequestType requestType)
-        //{
-        //    //TODO: Switch between different types
-        //    return LicenseNumberRequestSpecification();
-        //    //return Specification.Where(w => w.Key.Equals(requestType));
-        //}
-
-
+      
         public Func<Action<ILaceRequest, ILaceEvent, ILaceResponse>>
-            LicenseNumberRequestSpecification =
-                () =>
-                    (request, @event, response) =>
-                        new SourceConsumer(
-                            new AudatexConsumer(request,
-                                new RgtVinConsumer(request,
-                                    new IvidTitleHolderConsumer(request,
-                                        new IvidConsumer(request, null, null), null),
-                                    null), null), null).CallSource(response, @event);
-
-        // new SourceConsumer(new IvidConsumer(request,new IvidTitleHolderConsumer(request,new RgtVinConsumer(request,new AudatexConsumer(request,null), ), ), ), ).CallSource(response, @event)
-
+          LicenseNumberRequestSpecification =
+              () =>
+                  (request, @event, response) =>
+                      new SourceConsumer(
+                          new IvidConsumer(request,
+                              new IvidTitleHolderConsumer(request,
+                                  new RgtVinConsumer(request,
+                                      new AudatexConsumer(request, null, null), null),
+                                  null), null), null).CallSource(response, @event);
 
 
 

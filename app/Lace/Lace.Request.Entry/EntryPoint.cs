@@ -20,6 +20,7 @@ namespace Lace.Request.Entry
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceEvent _laceEvent;
         private readonly IBuildSourceChain _buildSourceChain;
+        private IBootstrap _bootstrap;
 
         public EntryPoint(IPublishMessages publisher)
         {
@@ -43,10 +44,13 @@ namespace Lace.Request.Entry
                     return EmptyResponse;
                 }
 
-                return !_checkForDuplicateRequests.IsRequestDuplicated(request)
-                    ? new Initialize(new LaceResponse(), request, _laceEvent, _buildSourceChain).LaceResponses ??
-                      EmptyResponse
-                    : EmptyResponse;
+                if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return EmptyResponse;
+
+                _bootstrap = new Initialize(new LaceResponse(), request, _laceEvent, _buildSourceChain);
+                _bootstrap.Execute();
+
+                return _bootstrap.LaceResponses ?? EmptyResponse;
+              
             }
             catch (Exception)
             {
