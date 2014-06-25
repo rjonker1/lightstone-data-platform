@@ -36,13 +36,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void audatex_consumer_must_be_handled()
         {
-            _response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _response.AudatexResponseHandled.Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void audatex_response_from_consumer_must_not_be_null()
         {
-            _response.IvidResponse.ShouldNotBeNull();
+            _response.AudatexResponse.ShouldNotBeNull();
         }
 
         [Observation]
