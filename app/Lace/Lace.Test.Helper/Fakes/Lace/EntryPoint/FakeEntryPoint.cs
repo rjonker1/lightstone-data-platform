@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lace.Builder;
+using Lace.Builder.Factory;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Request.Entry;
 using Lace.Request.Entry.Checks;
+using Lace.Response;
 using Lace.Response.ExternalServices;
-using Lace.Test.Helper.Builders.RequestedTypes;
 using Lace.Test.Helper.Fakes.Bus;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
-    public class FakeEntryPoint: IEntryPoint
+    public class FakeEntryPoint : IEntryPoint
     {
-
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
-        private readonly IGetRequiredRequestedTypes _getRequestedType;
+        private readonly IBuildSourceChain _buildSourceChain;
         private readonly ILaceEvent _laceEvent;
 
         public FakeEntryPoint()
@@ -26,23 +27,17 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _getRequestedType = new RequestedTypeBuilder().ForLicensePlateNumber();
+            _buildSourceChain = new CreateSourceChain();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-
         public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
         {
-            GetRequestedTypeToLoad(request);
+            _buildSourceChain.Default(request.Package.Action);
 
             return !_checkForDuplicateRequests.IsRequestDuplicated(request)
-                ? new Initialize(request, _getRequestedType.RequestedTypeToLoad, _laceEvent).LaceResponses
+                ? new Initialize(new LaceResponse(), request, _laceEvent, _buildSourceChain).LaceResponses
                 : null;
-        }
-
-        private void GetRequestedTypeToLoad(ILaceRequest request)
-        {
-            _getRequestedType.GetRequestedType(request);
         }
     }
 }

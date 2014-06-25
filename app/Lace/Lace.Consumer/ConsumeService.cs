@@ -8,6 +8,7 @@ namespace Lace.Consumer
     {
         private readonly ICallTheSource _externalWebServiceCall;
         private readonly IHandleSourceCall _handleServiceCall;
+        
 
         public ConsumeService(IHandleSourceCall handleServiceCall,
             ICallTheSource externalWebServiceCall)

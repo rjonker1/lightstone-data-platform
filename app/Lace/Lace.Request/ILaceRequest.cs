@@ -15,10 +15,7 @@ namespace Lace.Request
 
         DateTime RequestDate { get; }
 
-       // string SearchTerm { get; }
-
         IPackage Package { get; }
-
-        IAction Action { get; }
+      
     }
 }

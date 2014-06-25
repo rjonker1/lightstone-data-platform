@@ -10,32 +10,36 @@ using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeAudatexConsumer
+    public class FakeAudatexConsumer : ExecuteSourceBase, IExecuteTheSource
     {
-        private readonly IHandleSourceCall _handleServiceCall;
-        private readonly ILaceRequest _request;
-        private readonly ICallTheSource _externalWebServiceCall;
 
-        public FakeAudatexConsumer(ILaceRequest request)
+        private readonly ILaceRequest _request;
+
+        public FakeAudatexConsumer(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
-            _handleServiceCall = new FakeHandleAudatexServiceCall();
-            _externalWebServiceCall = new FakeCallingAudatexExternalWebService(request);
         }
 
-        public void CallAudatexService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.Audatex,_request);
+            var spec = new CanHandlePackageSpecification(Services.Audatex, _request);
 
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
-                return;
+            }
+            else
+            {
+                var consumer = new ConsumeService(new FakeHandleAudatexServiceCall(),
+                    new FakeCallingAudatexExternalWebService(_request));
+                consumer.CallService(response, laceEvent);
+
+                if (response.AudatexResponse == null && FallBack != null)
+                    FallBack.CallSource(response, laceEvent);
             }
 
-            _handleServiceCall
-                .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent));
+            if (Next != null) Next.CallSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

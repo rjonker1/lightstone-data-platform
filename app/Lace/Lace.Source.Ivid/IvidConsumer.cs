@@ -8,15 +8,14 @@ using Lace.Source.Ivid.ServiceCalls;
 
 namespace Lace.Source.Ivid
 {
-    public class IvidConsumer : ExecuteSourceBase
+    public class IvidConsumer : ExecuteSourceBase, IExecuteTheSource
     {
         private readonly ILaceRequest _request;
 
-        public IvidConsumer(ILaceRequest request, IExecuteTheSource nextSource)
+        public IvidConsumer(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
-
-            Append(nextSource);
         }
 
         public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
@@ -31,6 +30,9 @@ namespace Lace.Source.Ivid
             {
                 var consumer = new ConsumeService(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
                 consumer.CallService(response, laceEvent);
+
+                if(response.IvidResponse == null && FallBack != null)
+                    FallBack.CallSource(response, laceEvent);
             }
 
             if (Next != null) Next.CallSource(response, laceEvent);

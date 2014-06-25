@@ -35,11 +35,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventHandlers\SetHandlersEventArgs.cs" />
-    <Compile Include="EventHandlers\LoadEventArgs.cs" />
+    <None Include="EventHandlers\SetHandlersEventArgs.cs.old" />
+    <None Include="EventHandlers\LoadEventArgs.cs.old" />
     <Compile Include="Initialize.cs" />
     <Compile Include="IBootstrap.cs" />
-    <Compile Include="Operations\LaceOperation.cs" />
+    <None Include="Operations\LaceOperation.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +50,10 @@
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Builder\Lace.Builder.csproj">
+      <Project>{536a41d4-aa0e-4e4f-8aa1-09f86e4a8f95}</Project>
+      <Name>Lace.Builder</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>

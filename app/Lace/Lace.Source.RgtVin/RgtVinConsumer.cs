@@ -8,11 +8,12 @@ using Lace.Source.RgtVin.ServiceCalls;
 
 namespace Lace.Source.RgtVin
 {
-    public class RgtVinConsumer : ISourceConsumer
+    public class RgtVinConsumer : ExecuteSourceBase,  IExecuteTheSource
     {
         private readonly ILaceRequest _request;
 
-        public RgtVinConsumer(ILaceRequest request)
+        public RgtVinConsumer(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
         }

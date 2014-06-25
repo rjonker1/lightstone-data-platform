@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lace.Builder;
+using Lace.Builder.Factory;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
 using Lace.Request;
-using Lace.Request.Load;
 using Lace.Response;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
@@ -19,7 +20,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
         private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
-        private readonly ILoadRequestSources _loadRequestSources;
+
+        private readonly IBuildSourceChain _buildSourceChain;
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
@@ -27,12 +29,14 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _loadRequestSources = new FakeLaceLoader();
+
+            _buildSourceChain = new CreateSourceChain();
+            _buildSourceChain.Default(_request.Package.Action);
         }
 
         public override void Observe()
         {
-            _initialize = new FakeLaceInitializer(_request, _loadRequestSources, _laceEvent);
+            _initialize = new FakeLaceInitializer(new LaceResponse(), _request, _laceEvent, _buildSourceChain);
         }
 
         [Observation]

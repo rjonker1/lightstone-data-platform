@@ -10,33 +10,36 @@ using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeIvidTitleHolderConsumer
+    public class FakeIvidTitleHolderConsumer : ExecuteSourceBase, IExecuteTheSource
     {
-        private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheSource _externalWebServiceCall;
 
-        public FakeIvidTitleHolderConsumer(ILaceRequest request)
+        public FakeIvidTitleHolderConsumer(ILaceRequest request, IExecuteTheSource nextSource,
+            IExecuteTheSource fallbackSource)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
-            _handleServiceCall = new FakeHandleIvidTitleHolderServiceCall();
-            _externalWebServiceCall = new FakeCallingIvidTitleHolderExternalWebService();
         }
 
-        public void CallIvidTitleHolderService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder,_request);
+            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder, _request);
 
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
-                return;
+            }
+            else
+            {
+                var consumer = new ConsumeService(new FakeHandleIvidTitleHolderServiceCall(),
+                    new FakeCallingIvidTitleHolderExternalWebService());
+                consumer.CallService(response, laceEvent);
+
+                if (response.IvidTitleHolderResponse == null && FallBack != null)
+                    FallBack.CallSource(response, laceEvent);
             }
 
-            _handleServiceCall
-                .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent)
-                );
+            if (Next != null) Next.CallSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

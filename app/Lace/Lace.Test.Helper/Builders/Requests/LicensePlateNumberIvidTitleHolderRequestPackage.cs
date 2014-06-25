@@ -28,7 +28,7 @@ namespace Lace.Test.Helper.Builders.Requests
                                 }
                             }
                         }
-                    }
+                    },
             };
         }
     }
