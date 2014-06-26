@@ -59,10 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudatexTests\audatex_request_data_from_audatex_service_tests.cs" />
-    <Compile Include="AudatexTests\audatex_response_clean_remove_dupliates_test.cs.cs" />
-    <Compile Include="AudatexTests\audatex_transform_get_data_response_tests.cs" />
-    <None Include="AudatexTests\audatex_web_service_being_consumed_tests.cs.old" />
     <Compile Include="Data\Audatex\MockCallingAudatexExternalWebService.cs" />
     <Compile Include="Data\Audatex\MockAudatexWebResponseData.cs" />
     <Compile Include="Data\Audatex\MockAudatexConsumer.cs" />
@@ -98,12 +94,6 @@
     <Compile Include="Data\RgtVin\MockRgtVinConsumer.cs" />
     <Compile Include="Data\RgtVin\MockRgtVinLicensePlateNumberRequestData.cs" />
     <Compile Include="Data\RgtVin\MockRgtVinResponseData.cs" />
-    <Compile Include="IvidTests\ivid_transform_hpi_standard_query_response_test.cs" />
-    <None Include="IvidTests\ivid_web_service_being_consumed_tests.cs.old" />
-    <Compile Include="IvidTitleHolderTests\ivid_title_holder_configure_request_message_tests.cs" />
-    <Compile Include="IvidTitleHolderTests\ivid_title_holder_request_data_from_ivid_title_holder_service_tests.cs" />
-    <None Include="IvidTitleHolderTests\ivid_title_holder_service_being_consumed_tests.cs.old" />
-    <Compile Include="IvidTitleHolderTests\ivid_title_holder_transform_title_holder_query_response_test.cs" />
     <Compile Include="RgtVinTests\rgt_vin_request_data_from_rgt_vin_service_tests.cs" />
     <None Include="RgtVinTests\rgt_vin_service_being_consumed_tests.cs.old" />
     <Compile Include="RgtVinTests\rgt_vin_transform_response_tests.cs" />

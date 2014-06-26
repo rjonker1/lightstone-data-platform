@@ -1,4 +1,5 @@
 ﻿
+using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Ivid.IvidServiceReference;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
@@ -21,6 +22,11 @@ namespace Lace.Test.Helper.Builders.Responses
         public GetDataResult ForAudatexWithHuyandaiHistory()
         {
             return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
+        }
+
+        public ILaceResponse ForAudatexWithLaceResponse()
+        {
+            return FakeAudatexWebResponseData.GetLaceResponseToUserInAudatexRequest();
         }
 
         public TitleholderQueryResponse ForIvidTitleHolder()

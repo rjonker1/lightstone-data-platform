@@ -1,22 +1,21 @@
 ﻿using Lace.Request;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
-using Lace.Source.Tests.Data;
+using Lace.Test.Helper.Builders.Requests;
 using Xunit.Extensions;
 
-namespace Lace.Source.Tests.IvidTitleHolderTests
+namespace Lace.Unit.Tests.SourceRequests
 {
-    public class ivid_title_holder_configure_request_message_tests : Specification
+    class when_configuring_ivid_title_holder_request_message : Specification
     {
-
         private readonly ILaceRequest _request;
         private ConfigureIvidTitleHolderRequestMessage _configureRequestMessage;
 
 
-        public ivid_title_holder_configure_request_message_tests()
+        public when_configuring_ivid_title_holder_request_message()
         {
-            _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
-            
-        }
+            _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
+        } 
+
 
         public override void Observe()
         {
@@ -24,13 +23,13 @@ namespace Lace.Source.Tests.IvidTitleHolderTests
         }
 
         [Observation]
-        public void ivid_title_holder_request_message_mapped_vin_should_be_valid_test()
+        public void ivid_title_holder_request_message_mapped_vin_should_be_valid()
         {
             _configureRequestMessage.TitleholderQueryRequest.vin.ShouldEqual("AHT31UNK408007735");
         }
 
         [Observation]
-        public void ivid_title_holder_request_message_mapped_requestor_details_should_be_valid_test()
+        public void ivid_title_holder_request_message_mapped_requestor_details_should_be_valid()
         {
             _configureRequestMessage.TitleholderQueryRequest.requesterDetails.ShouldNotBeNull();
 

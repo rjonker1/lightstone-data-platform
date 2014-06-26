@@ -11,7 +11,7 @@ using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
 {
-    public class ivid_request_data_from_ivid_service_tests : Specification
+    public class when_requesting_data_from_ivid_source : Specification
     {
         private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _ividRequest;
@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly ILaceEvent _laceEvent;
         private readonly ICallTheSource _externalWebServiceCall;
 
-        public ivid_request_data_from_ivid_service_tests()
+        public when_requesting_data_from_ivid_source()
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);

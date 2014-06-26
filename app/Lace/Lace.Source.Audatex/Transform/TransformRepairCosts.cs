@@ -15,9 +15,21 @@ namespace Lace.Source.Audatex.Transform
             var bands = new List<CostBand>()
             {
                 new CostBand(null, 10000, false, false),
-                new CostBand(10000, 50000, true, false),
-                new CostBand(50000, 100000, true, false),
-                new CostBand(100000, null, true, false)
+                new CostBand(10000, 20000, true, false),
+                new CostBand(20000, 30000, true, false),
+                new CostBand(30000, 40000, true, false),
+                new CostBand(40000, 50000, true, false),
+                new CostBand(50000, 60000, true, false),
+                new CostBand(60000, 70000, true, false),
+                new CostBand(70000, 80000, true, false),
+                new CostBand(80000, 90000, true, false),
+                new CostBand(90000, 100000, true, false),
+                new CostBand(100000, 110000, true, false),
+                new CostBand(110000, 120000, true, false),
+                new CostBand(120000, 130000, true, false),
+                new CostBand(130000, 140000, true, false),
+                new CostBand(140000, 150000, true, false),
+                new CostBand(150000, null, true, false)
             };
 
             if (!repairCost.HasValue) return result;
