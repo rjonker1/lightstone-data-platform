@@ -1,6 +1,6 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
-using Lace.Models.IvidTitleHolder;
+using Lace.Models.Ivid;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source;
@@ -10,12 +10,12 @@ using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeIvidTitleHolderConsumer : ExecuteSourceBase, IExecuteTheSource
+    public class FakeIvidSourceExecution : ExecuteSourceBase, IExecuteTheSource
     {
+
         private readonly ILaceRequest _request;
 
-        public FakeIvidTitleHolderConsumer(ILaceRequest request, IExecuteTheSource nextSource,
-            IExecuteTheSource fallbackSource)
+        public FakeIvidSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -23,7 +23,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder, _request);
+            var spec = new CanHandlePackageSpecification(Services.Ivid, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -31,22 +31,24 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             }
             else
             {
-                var consumer = new ConsumeService(new FakeHandleIvidTitleHolderServiceCall(),
-                    new FakeCallingIvidTitleHolderExternalWebService());
-                consumer.CallService(response, laceEvent);
+                var consumer = new ConsumeSource(new FakeHandleIvidServiceCall(),
+                    new FakeCallingIvidExternalWebService());
+                consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.IvidTitleHolderResponse == null && FallBack != null)
+                if (response.IvidResponse == null && FallBack != null)
                     FallBack.CallSource(response, laceEvent);
             }
 
             if (Next != null) Next.CallSource(response, laceEvent);
+
         }
 
         private static void NotHandledResponse(ILaceResponse response)
         {
-            response.IvidTitleHolderResponse = null;
-            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
-            response.IvidTitleHolderResponseHandled.HasNotBeenHandled();
+            response.IvidResponse = null;
+            response.IvidResponseHandled = new IvidResponseHandled();
+            response.IvidResponseHandled.HasNotBeenHandled();
         }
+
     }
 }

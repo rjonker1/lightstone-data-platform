@@ -15,7 +15,7 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
     public class FakeEntryPoint : IEntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
-        private readonly IBuildSourceChain _buildSourceChain;
+        private IBuildSourceChain _buildSourceChain;
         private readonly ILaceEvent _laceEvent;
         private IBootstrap _bootstrap;
 
@@ -24,13 +24,14 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
-            _buildSourceChain = new FakeSourceChain();
+           
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
         public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
         {
-            _buildSourceChain.Default(request.Package.Action);
+            _buildSourceChain = new FakeSourceChain(request.Package.Action);
+            _buildSourceChain.Build();
 
             if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return null;
 

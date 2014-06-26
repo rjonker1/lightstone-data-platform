@@ -3,14 +3,13 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
 using Lace.Events;
-using Lace.Functions.Json;
+using Lace.Extensions;
 using Lace.Models.IvidTitleHolder;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
 using Lace.Source.IvidTitleHolder.Transform;
-using Monitoring.Sources;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Source.IvidTitleHolder.ServiceCalls
@@ -49,7 +48,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
                         .TitleholderQueryRequest;
 
                     laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
-                        JsonFunctions.JsonFunction.ObjectToJson(ividTitleHolderRequest));
+                        ividTitleHolderRequest.ObjectToJson());
 
                     laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
@@ -67,7 +66,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 
 
                     laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
-                      JsonFunctions.JsonFunction.ObjectToJson(_ividTitleHolderResponse ?? new TitleholderQueryResponse()));
+                        _ividTitleHolderResponse != null ? _ividTitleHolderResponse.ObjectToJson() : new TitleholderQueryResponse().ObjectToJson());
 
                     TransformWebResponse(response);
                 }

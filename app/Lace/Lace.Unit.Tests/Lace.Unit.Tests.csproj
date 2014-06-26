@@ -97,7 +97,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow</Name>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>

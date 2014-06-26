@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.TestHelper.Mothers;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -29,6 +30,7 @@ namespace Lace.Test.Helper.Builders.Requests
                             }
                         }
                     },
+                Action = ActionMother.LicensePlateSearchAction
             };
         }
     }

@@ -6,7 +6,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 {
     public class RequestDatafromIvidTitleHolderSource : IRequestDataFromSource
     {
-        public void FetchDataFromService(ILaceResponse response,
+        public void FetchDataFromSource(ILaceResponse response,
             ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalWebService(response, laceEvent);

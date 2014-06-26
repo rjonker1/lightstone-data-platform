@@ -57,7 +57,7 @@
     <Compile Include="ServiceCalls\CallIvidExternalSource.cs" />
     <Compile Include="ServiceCalls\RequestDataFromIvidSource.cs" />
     <Compile Include="ServiceCalls\HandleIvidSourceCall.cs" />
-    <Compile Include="IvidConsumer.cs" />
+    <Compile Include="IvidSourceExecution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceConfig\ConfigureIvidRequestMessage.cs" />
     <Compile Include="ServiceConfig\ConfigureIvidSource.cs" />
@@ -66,7 +66,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring</Name>
+      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
@@ -80,9 +80,9 @@
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+    <ProjectReference Include="..\Lace.Extensions\Lace.Extensions.csproj">
       <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
-      <Name>Lace.Functions</Name>
+      <Name>Lace.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
       <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>

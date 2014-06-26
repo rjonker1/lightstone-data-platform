@@ -32,7 +32,7 @@ namespace Lace.Source.Tests.Data.RgtVin
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent)
+                    c.FetchDataFromSource(response, _externalWebServiceCall, laceEvent)
                 );
         }
 

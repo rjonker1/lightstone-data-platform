@@ -14,7 +14,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
         private readonly ILaceResponse _response;
-        private RgtVinConsumer _consumer;
+        private RgtVinSourceExecution _consumer;
 
 
         public when_consuming_rgt_vin_source()
@@ -28,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new RgtVinConsumer(_request, null, null);
+            _consumer = new RgtVinSourceExecution(_request, null, null);
             _consumer.CallSource(_response, _laceEvent);
         }
 

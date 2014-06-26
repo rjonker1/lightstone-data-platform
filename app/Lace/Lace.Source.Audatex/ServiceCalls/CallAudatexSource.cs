@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using Lace.Events;
-using Lace.Functions.Json;
+using Lace.Extensions;
 using Lace.Models.Audatex;
 using Lace.Request;
 using Lace.Response;
@@ -38,7 +38,7 @@ namespace Lace.Source.Audatex.ServiceCalls
                 laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
-                       JsonFunctions.JsonFunction.ObjectToJson(audatexRequest));
+                      audatexRequest.ObjectToJson());
 
                 laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
@@ -54,7 +54,7 @@ namespace Lace.Source.Audatex.ServiceCalls
                     laceEvent.PublishNoResponseFromServiceMessage(_request.RequestAggregation.AggregateId, Source);
 
                 laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
-                        JsonFunctions.JsonFunction.ObjectToJson(_audatexResponse ?? new GetDataResult()));
+                    _audatexResponse != null ? _audatexResponse.ObjectToJson() : new GetDataResult().ObjectToJson());
 
                 TransformWebResponse(response);
             }

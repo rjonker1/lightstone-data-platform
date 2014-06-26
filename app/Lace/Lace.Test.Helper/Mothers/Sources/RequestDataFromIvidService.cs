@@ -5,7 +5,7 @@ namespace Lace.Test.Helper.Mothers.Sources
 {
     public class RequestDataFromIvidService : IRequestDataFromSource
     {
-        public void FetchDataFromService(Response.ILaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
+        public void FetchDataFromSource(Response.ILaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalWebService(response,laceEvent);
         }

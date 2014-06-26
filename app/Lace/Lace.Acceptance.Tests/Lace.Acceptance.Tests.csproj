@@ -93,7 +93,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring</Name>
+      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
@@ -109,7 +109,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow</Name>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Builder\Lace.Builder.csproj">
       <Project>{536a41d4-aa0e-4e4f-8aa1-09f86e4a8f95}</Project>
@@ -123,9 +123,9 @@
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
+    <ProjectReference Include="..\Lace.Extensions\Lace.Extensions.csproj">
       <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
-      <Name>Lace.Functions</Name>
+      <Name>Lace.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
       <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
@@ -201,7 +201,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
-      <Name>Lace</Name>
+      <Name>Lace %28Lace\Lace%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

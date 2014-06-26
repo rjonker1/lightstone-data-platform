@@ -32,7 +32,7 @@ namespace Lace.Source.Tests.Data.Ivid
 
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromService(response, _externalWebServiceCall, laceEvent));
+                    c.FetchDataFromSource(response, _externalWebServiceCall, laceEvent));
         }
 
         private static void NotHandledResponse(ILaceResponse response)

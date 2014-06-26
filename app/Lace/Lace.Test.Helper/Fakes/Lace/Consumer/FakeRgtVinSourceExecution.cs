@@ -12,13 +12,13 @@ using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeRgtVinConsumer : ExecuteSourceBase, IExecuteTheSource
+    public class FakeRgtVinSourceExecution : ExecuteSourceBase, IExecuteTheSource
     {
         private readonly IHandleSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
         private readonly ICallTheSource _externalWebServiceCall;
 
-        public FakeRgtVinConsumer(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -36,9 +36,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             }
             else
             {
-                var consumer = new ConsumeService(new FakeHandleRgtVinServiceCall(),
+                var consumer = new ConsumeSource(new FakeHandleRgtVinServiceCall(),
                     new FakeCallingRgtVinExternalWebService());
-                consumer.CallService(response, laceEvent);
+                consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.RgtResponse == null && FallBack != null)
                     FallBack.CallSource(response, laceEvent);

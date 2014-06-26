@@ -3,19 +3,16 @@ using Lace.Events;
 using Lace.Models.Audatex;
 using Lace.Request;
 using Lace.Response;
-using Lace.Source;
+using Lace.Source.Audatex.ServiceCalls;
 using Lace.Source.Enums;
-using Lace.Test.Helper.Fakes.Lace.Handlers;
-using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
-namespace Lace.Test.Helper.Fakes.Lace.Consumer
+namespace Lace.Source.Audatex
 {
-    public class FakeAudatexConsumer : ExecuteSourceBase, IExecuteTheSource
+    public class AudatexSourceExecution :ExecuteSourceBase, IExecuteTheSource
     {
-
         private readonly ILaceRequest _request;
 
-        public FakeAudatexConsumer(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public AudatexSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -31,9 +28,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             }
             else
             {
-                var consumer = new ConsumeService(new FakeHandleAudatexServiceCall(),
-                    new FakeCallingAudatexExternalWebService(_request));
-                consumer.CallService(response, laceEvent);
+                var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexSource(_request));
+                consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.AudatexResponse == null && FallBack != null)
                     FallBack.CallSource(response, laceEvent);

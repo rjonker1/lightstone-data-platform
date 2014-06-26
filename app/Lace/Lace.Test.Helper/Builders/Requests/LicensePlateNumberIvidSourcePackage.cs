@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.TestHelper.Mothers;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -25,26 +26,10 @@ namespace Lace.Test.Helper.Builders.Requests
                                 new DataField {Name = " MakeDescription", DataSource = new MakeDescriptionFiledSource()}
                             }
                         }
-                    }
+                    },
+                Action = ActionMother.LicensePlateSearchAction
             };
         }
-            //return new Package
-            //{
-            //    Name = "License plate lookup package",
-            //    DataSets =
-            //        new[]
-            //        {
-            //            new DataSet
-            //            {
-            //                Name = "License plate lookup DataSet",
-            //                DataFields = new[]
-            //                {
-            //                    new DataField {Name = "License plate number"},
-            //                }
-            //            }
-            //        }
-            //};
-        
     }
     
 }

@@ -1,15 +1,35 @@
 ﻿using System;
+using System.Linq;
+using DataPlatform.Shared.Entities;
 using Lace.Builder;
+using Lace.Events;
+using Lace.Request;
+using Lace.Response;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceChain : IBuildSourceChain
     {
-        public void Default(DataPlatform.Shared.Entities.IAction action)
+        private readonly IAction _action;
+
+        public FakeSourceChain(IAction action)
         {
-            SourceChain = new FakeSourceSpecification().LicenseNumberRequestSpecification();
+            _action = action;
         }
 
-        public Action<Request.ILaceRequest, Events.ILaceEvent, Response.ILaceResponse> SourceChain { get; private set; }
+        public void Build()
+        {
+            if (string.IsNullOrEmpty(_action.Name))
+            {
+                throw new Exception("Action for request is empty");
+            }
+
+
+            SourceChain =
+                new FakeSourceSpecification().Specifications.SingleOrDefault(
+                    w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
+        }
+
+        public Action<ILaceRequest, ILaceEvent, ILaceResponse> SourceChain { get; private set; }
     }
 }

@@ -3,8 +3,8 @@ using Lace.Response;
 
 namespace Lace.Consumer
 {
-    public interface IConsumeService
+    public interface IConsumeSource
     {
-        void CallService(ILaceResponse response, ILaceEvent laceEvent);
+        void ConsumeExternalSource(ILaceResponse response, ILaceEvent laceEvent);
     }
 }

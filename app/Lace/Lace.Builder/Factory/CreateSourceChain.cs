@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Common.Logging;
 using DataPlatform.Shared.Entities;
 using Lace.Builder.Specifications;
 using Lace.Events;
@@ -9,9 +11,25 @@ namespace Lace.Builder.Factory
 {
     public class CreateSourceChain : IBuildSourceChain
     {
-        public void Default(IAction action)
+        private readonly IAction _action;
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+
+        public CreateSourceChain(IAction action)
         {
-            SourceChain = new SourceSpecification().LicenseNumberRequestSpecification();
+            _action = action;
+        }
+
+        public void Build()
+        {
+            if (string.IsNullOrEmpty(_action.Name))
+            {
+                Log.Error("Action for request is empty. Source chain cannot be built");
+                throw new Exception("Action for request is empty");
+            }
+
+            SourceChain =
+                new SourceSpecification().Specifications.SingleOrDefault(
+                    w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
         public Action<ILaceRequest, ILaceEvent, ILaceResponse> SourceChain { get; private set; }
