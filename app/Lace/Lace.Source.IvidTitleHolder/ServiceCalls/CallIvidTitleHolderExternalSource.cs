@@ -26,7 +26,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -37,14 +37,16 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
                 ividTitleHolderWebService.ConfigureIvidTitleHolderServiceCredentials();
                 ividTitleHolderWebService.ConfigureIvidTitleHolderWebServiceRequestMessageProperty();
 
-                using (var scope = new OperationContextScope(ividTitleHolderWebService.IvidTitleHolderProxy.InnerChannel))
+                using (
+                    var scope = new OperationContextScope(ividTitleHolderWebService.IvidTitleHolderProxy.InnerChannel))
                 {
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
                     laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
-                    var ividTitleHolderRequest = new ConfigureIvidTitleHolderRequestMessage(_request)
+                    var ividTitleHolderRequest = new ConfigureIvidTitleHolderRequestMessage(_request, response)
+                        .Build()
                         .TitleholderQueryRequest;
 
                     laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
@@ -66,9 +68,11 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
 
 
                     laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
-                        _ividTitleHolderResponse != null ? _ividTitleHolderResponse.ObjectToJson() : new TitleholderQueryResponse().ObjectToJson());
+                        _ividTitleHolderResponse != null
+                            ? _ividTitleHolderResponse.ObjectToJson()
+                            : new TitleholderQueryResponse().ObjectToJson());
 
-                    TransformWebResponse(response);
+                    TransformResponse(response);
                 }
 
             }
@@ -87,7 +91,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
         
-        public void TransformWebResponse(ILaceResponse response)
+        public void TransformResponse(ILaceResponse response)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 

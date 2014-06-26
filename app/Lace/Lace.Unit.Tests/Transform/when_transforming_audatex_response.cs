@@ -77,11 +77,6 @@ namespace Lace.Unit.Tests.Transform
         {
             _transformer.Result.AccidentClaims[0].Vin.ShouldEqual("MALAC51HLAM496530");
         }
-
-        [Observation]
-        public void audatex_transformer_result_accident_claim_must_have_quote_value_indicator()
-        {
-            _transformer.Result.AccidentClaims[0].QuoteValueIndicator.ShouldEqual("R 10 000,00 to R 20 000,00 !");
-        }
+       
     }
 }

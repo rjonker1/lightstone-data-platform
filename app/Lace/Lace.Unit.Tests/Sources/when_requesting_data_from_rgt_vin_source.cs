@@ -5,6 +5,7 @@ using Lace.Response;
 using Lace.Source;
 using Lace.Source.Ivid.ServiceCalls;
 using Lace.Test.Helper.Builders.Requests;
+using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using Xunit.Extensions;
@@ -26,7 +27,7 @@ namespace Lace.Unit.Tests.Sources
             _laceEvent = new PublishLaceEventMessages(publisher);
             _requestDataFromService = new RequestDataFromIvidSource();
             _rgtVinRequest = new LicensePlateRequestBuilder().ForRgtVin();
-            _laceResponse = new LaceResponse();
+            _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
            
         }

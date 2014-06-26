@@ -26,7 +26,7 @@ namespace Lace.Source.Ivid.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -44,7 +44,8 @@ namespace Lace.Source.Ivid.ServiceCalls
                         ividWebService.IvidRequestMessageProperty;
 
                     var ividRequest = new ConfigureIvidRequestMessage(_request)
-                        .HpiQueryRequest;
+                    .Build()
+                    .HpiQueryRequest;
 
                     laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
@@ -67,7 +68,7 @@ namespace Lace.Source.Ivid.ServiceCalls
                     laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
                         _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson());
 
-                    TransformWebResponse(response);
+                    TransformResponse(response);
                 }
             }
             catch (Exception ex)
@@ -85,7 +86,7 @@ namespace Lace.Source.Ivid.ServiceCalls
             response.IvidResponseHandled.HasBeenHandled();
         }
 
-        public void TransformWebResponse(ILaceResponse response)
+        public void TransformResponse(ILaceResponse response)
         {
             var transformer = new TransformIvidResponse(_ividResponse);
 

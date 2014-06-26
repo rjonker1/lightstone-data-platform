@@ -9,7 +9,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         public void FetchDataFromSource(ILaceResponse response,
             ICallTheSource externalSource, ILaceEvent laceEvent)
         {
-            externalSource.CallTheExternalWebService(response, laceEvent);
+            externalSource.CallTheExternalSource(response, laceEvent);
         }
     }
 }

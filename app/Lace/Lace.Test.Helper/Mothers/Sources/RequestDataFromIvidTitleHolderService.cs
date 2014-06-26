@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Mothers.Sources
     {
         public void FetchDataFromSource(Response.ILaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
-            externalWebService.CallTheExternalWebService(response,laceEvent);
+            externalWebService.CallTheExternalSource(response,laceEvent);
         }
     }
 }

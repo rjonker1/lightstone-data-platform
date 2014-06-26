@@ -7,7 +7,7 @@ namespace Lace.Source.Ivid.ServiceCalls
     {
         public void FetchDataFromSource(ILaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
-           externalWebService.CallTheExternalWebService(response, laceEvent);
+           externalWebService.CallTheExternalSource(response, laceEvent);
         }
     }
 }

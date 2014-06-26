@@ -6,6 +6,7 @@ using Lace.Source;
 using Lace.Source.Ivid.ServiceCalls;
 using Lace.Source.IvidTitleHolder.ServiceCalls;
 using Lace.Test.Helper.Builders.Requests;
+using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using Xunit.Extensions;
@@ -28,7 +29,7 @@ namespace Lace.Unit.Tests.Sources
             _laceEvent = new PublishLaceEventMessages(publisher);
             _requestDataFromService = new RequestDatafromIvidTitleHolderSource();
             _ividTitleHolderRequest = new LicensePlateRequestBuilder().ForIvidTitleHolder();
-            _laceResponse = new LaceResponse();
+            _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingIvidTitleHolderExternalWebService();
 
         }

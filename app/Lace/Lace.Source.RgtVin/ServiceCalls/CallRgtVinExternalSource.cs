@@ -24,14 +24,15 @@ namespace Lace.Source.RgtVin.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
                 laceEvent.PublishStartServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 var rgtVinWebService = new ConfigureRgtVinWebSource();
-                var rgtVinRequest = new ConfigureRgtVinRequestMessage(_request)
+                var rgtVinRequest = new ConfigureRgtVinRequestMessage(_request, response)
+                    .Build()
                     .RgtVinRequest;
 
                 laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
@@ -57,7 +58,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
                 laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
                     _rgtVinResponse != null ? _rgtVinResponse.ObjectToJson() : new DataSet().ObjectToJson());
 
-                TransformWebResponse(response);
+                TransformResponse(response);
 
             }
             catch (Exception ex)
@@ -68,7 +69,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             }
         }
 
-        public void TransformWebResponse(ILaceResponse response)
+        public void TransformResponse(ILaceResponse response)
         {
             var transformer = new TransformRgtVinResponse(_rgtVinResponse);
 

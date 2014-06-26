@@ -1,0 +1,470 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lightstone.DataPlatform.Lace.Models.RgtVin.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest">
+            <summary>Shim type of Lace.Models.RgtVin.Dto.RgtVinRequest</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.#ctor(Lace.Models.RgtVin.Dto.RgtVinRequest)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.Constructor">
+            <summary>Sets the shim of RgtVinRequest.RgtVinRequest()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.SecurityCodeGet">
+            <summary>Sets the shim of RgtVinRequest.get_SecurityCode()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.SecurityCodeSetString">
+            <summary>Sets the shim of RgtVinRequest.set_SecurityCode(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.VinGet">
+            <summary>Sets the shim of RgtVinRequest.get_Vin()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.VinSetString">
+            <summary>Sets the shim of RgtVinRequest.set_Vin(String value)</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.AllInstances.SecurityCodeGet">
+            <summary>Sets the shim of RgtVinRequest.get_SecurityCode()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.AllInstances.SecurityCodeSetString">
+            <summary>Sets the shim of RgtVinRequest.set_SecurityCode(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.AllInstances.VinGet">
+            <summary>Sets the shim of RgtVinRequest.get_Vin()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinRequest.AllInstances.VinSetString">
+            <summary>Sets the shim of RgtVinRequest.set_Vin(String value)</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse">
+            <summary>Shim type of Lace.Models.RgtVin.Dto.RgtVinResponse</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.#ctor(Lace.Models.RgtVin.Dto.RgtVinResponse)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.Bind(Lace.Models.RgtVin.IResponseFromRgtVin)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.CarFullnameGet">
+            <summary>Sets the shim of RgtVinResponse.get_CarFullname()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.ColourGet">
+            <summary>Sets the shim of RgtVinResponse.get_Colour()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.ColourSetString">
+            <summary>Sets the shim of RgtVinResponse.set_Colour(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.Constructor">
+            <summary>Sets the shim of RgtVinResponse.RgtVinResponse()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.MonthGet">
+            <summary>Sets the shim of RgtVinResponse.get_Month()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.MonthSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_Month(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.PriceGet">
+            <summary>Sets the shim of RgtVinResponse.get_Price()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.PriceSetNullableOfDecimal">
+            <summary>Sets the shim of RgtVinResponse.set_Price(Nullable`1&lt;Decimal&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.QuarterGet">
+            <summary>Sets the shim of RgtVinResponse.get_Quarter()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.QuarterSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_Quarter(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.RgtCodeGet">
+            <summary>Sets the shim of RgtVinResponse.get_RgtCode()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.RgtCodeSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_RgtCode(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.ServiceProviderCallStateGet">
+            <summary>Sets the shim of RgtVinResponse.get_ServiceProviderCallState()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.ServiceProviderCallStateSetServiceCallState">
+            <summary>Sets the shim of RgtVinResponse.set_ServiceProviderCallState(ServiceCallState value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VehicleMakeGet">
+            <summary>Sets the shim of RgtVinResponse.get_VehicleMake()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VehicleMakeSetString">
+            <summary>Sets the shim of RgtVinResponse.set_VehicleMake(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VehicleModelGet">
+            <summary>Sets the shim of RgtVinResponse.get_VehicleModel()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VehicleModelSetString">
+            <summary>Sets the shim of RgtVinResponse.set_VehicleModel(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VehicleTypeGet">
+            <summary>Sets the shim of RgtVinResponse.get_VehicleType()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VehicleTypeSetString">
+            <summary>Sets the shim of RgtVinResponse.set_VehicleType(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VinGet">
+            <summary>Sets the shim of RgtVinResponse.get_Vin()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.VinSetString">
+            <summary>Sets the shim of RgtVinResponse.set_Vin(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.YearGet">
+            <summary>Sets the shim of RgtVinResponse.get_Year()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.YearSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_Year(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.CarFullnameGet">
+            <summary>Sets the shim of RgtVinResponse.get_CarFullname()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.ColourGet">
+            <summary>Sets the shim of RgtVinResponse.get_Colour()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.ColourSetString">
+            <summary>Sets the shim of RgtVinResponse.set_Colour(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.MonthGet">
+            <summary>Sets the shim of RgtVinResponse.get_Month()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.MonthSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_Month(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.PriceGet">
+            <summary>Sets the shim of RgtVinResponse.get_Price()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.PriceSetNullableOfDecimal">
+            <summary>Sets the shim of RgtVinResponse.set_Price(Nullable`1&lt;Decimal&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.QuarterGet">
+            <summary>Sets the shim of RgtVinResponse.get_Quarter()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.QuarterSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_Quarter(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.RgtCodeGet">
+            <summary>Sets the shim of RgtVinResponse.get_RgtCode()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.RgtCodeSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_RgtCode(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.ServiceProviderCallStateGet">
+            <summary>Sets the shim of RgtVinResponse.get_ServiceProviderCallState()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.ServiceProviderCallStateSetServiceCallState">
+            <summary>Sets the shim of RgtVinResponse.set_ServiceProviderCallState(ServiceCallState value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VehicleMakeGet">
+            <summary>Sets the shim of RgtVinResponse.get_VehicleMake()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VehicleMakeSetString">
+            <summary>Sets the shim of RgtVinResponse.set_VehicleMake(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VehicleModelGet">
+            <summary>Sets the shim of RgtVinResponse.get_VehicleModel()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VehicleModelSetString">
+            <summary>Sets the shim of RgtVinResponse.set_VehicleModel(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VehicleTypeGet">
+            <summary>Sets the shim of RgtVinResponse.get_VehicleType()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VehicleTypeSetString">
+            <summary>Sets the shim of RgtVinResponse.set_VehicleType(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VinGet">
+            <summary>Sets the shim of RgtVinResponse.get_Vin()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.VinSetString">
+            <summary>Sets the shim of RgtVinResponse.set_Vin(String value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.YearGet">
+            <summary>Sets the shim of RgtVinResponse.get_Year()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.ShimRgtVinResponse.AllInstances.YearSetNullableOfInt32">
+            <summary>Sets the shim of RgtVinResponse.set_Year(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinRequest">
+            <summary>Stub type of Lace.Models.RgtVin.Dto.RgtVinRequest</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinRequest.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinRequest.InitializeStub">
+            <summary>Initializes a new instance of type StubRgtVinRequest</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinRequest.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinRequest.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinRequest.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinResponse">
+            <summary>Stub type of Lace.Models.RgtVin.Dto.RgtVinResponse</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinResponse.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinResponse.InitializeStub">
+            <summary>Initializes a new instance of type StubRgtVinResponse</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinResponse.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinResponse.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Dto.Fakes.StubRgtVinResponse.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled">
+            <summary>Shim type of Lace.Models.RgtVin.RgtVinResponseHandled</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.#ctor(Lace.Models.RgtVin.RgtVinResponseHandled)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.Bind(Lace.Models.IResponseHandled)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.Constructor">
+            <summary>Sets the shim of RgtVinResponseHandled.RgtVinResponseHandled()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.HandledGet">
+            <summary>Sets the shim of RgtVinResponseHandled.get_Handled()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.HandledSetBoolean">
+            <summary>Sets the shim of RgtVinResponseHandled.set_Handled(Boolean value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.HasBeenHandled">
+            <summary>Sets the shim of RgtVinResponseHandled.HasBeenHandled()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.HasNotBeenHandled">
+            <summary>Sets the shim of RgtVinResponseHandled.HasNotBeenHandled()</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.AllInstances.HandledGet">
+            <summary>Sets the shim of RgtVinResponseHandled.get_Handled()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.AllInstances.HandledSetBoolean">
+            <summary>Sets the shim of RgtVinResponseHandled.set_Handled(Boolean value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.AllInstances.HasBeenHandled">
+            <summary>Sets the shim of RgtVinResponseHandled.HasBeenHandled()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.ShimRgtVinResponseHandled.AllInstances.HasNotBeenHandled">
+            <summary>Sets the shim of RgtVinResponseHandled.HasNotBeenHandled()</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin">
+            <summary>Stub type of Lace.Models.RgtVin.IResponseFromRgtVin</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.#ctor">
+            <summary>Initializes a new instance of type StubIResponseFromRgtVin</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToColour">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.Colour as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToMonth">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.Month as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToPrice">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.Price as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToQuarter">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.Quarter as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToRgtCode">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.RgtCode as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToServiceProviderCallState">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.ServiceProviderCallState as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToVehicleMake">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.VehicleMake as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToVehicleModel">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.VehicleModel as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToVehicleType">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.VehicleType as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToVin">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.Vin as a property with a backing field.</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.AttachBackingFieldToYear">
+            <summary>Attaches delegates to emulate StubIResponseFromRgtVin.Year as a property with a backing field.</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.CarFullnameGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_CarFullname()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ColourGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Colour()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ColourSetString">
+            <summary>Sets the stub of IResponseFromRgtVin.set_Colour(String value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.MonthGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Month()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.MonthSetNullableOfInt32">
+            <summary>Sets the stub of IResponseFromRgtVin.set_Month(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.PriceGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Price()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.PriceSetNullableOfDecimal">
+            <summary>Sets the stub of IResponseFromRgtVin.set_Price(Nullable`1&lt;Decimal&gt; value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.QuarterGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Quarter()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.QuarterSetNullableOfInt32">
+            <summary>Sets the stub of IResponseFromRgtVin.set_Quarter(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.RgtCodeGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_RgtCode()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.RgtCodeSetNullableOfInt32">
+            <summary>Sets the stub of IResponseFromRgtVin.set_RgtCode(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ServiceProviderCallStateGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_ServiceProviderCallState()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ServiceProviderCallStateSetServiceCallState">
+            <summary>Sets the stub of IResponseFromRgtVin.set_ServiceProviderCallState(ServiceCallState value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VehicleMakeGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_VehicleMake()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VehicleMakeSetString">
+            <summary>Sets the stub of IResponseFromRgtVin.set_VehicleMake(String value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VehicleModelGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_VehicleModel()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VehicleModelSetString">
+            <summary>Sets the stub of IResponseFromRgtVin.set_VehicleModel(String value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VehicleTypeGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_VehicleType()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VehicleTypeSetString">
+            <summary>Sets the stub of IResponseFromRgtVin.set_VehicleType(String value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VinGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Vin()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.VinSetString">
+            <summary>Sets the stub of IResponseFromRgtVin.set_Vin(String value)</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.YearGet">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Year()</summary>
+        </member>
+        <member name="F:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.YearSetNullableOfInt32">
+            <summary>Sets the stub of IResponseFromRgtVin.set_Year(Nullable`1&lt;Int32&gt; value)</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#CarFullname">
+            <summary>Sets the stub of IResponseFromRgtVin.get_CarFullname()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#Colour">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Colour()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#Month">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Month()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#Price">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Price()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#Quarter">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Quarter()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#RgtCode">
+            <summary>Sets the stub of IResponseFromRgtVin.get_RgtCode()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#ServiceProviderCallState">
+            <summary>Sets the stub of IResponseFromRgtVin.get_ServiceProviderCallState()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#VehicleMake">
+            <summary>Sets the stub of IResponseFromRgtVin.get_VehicleMake()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#VehicleModel">
+            <summary>Sets the stub of IResponseFromRgtVin.get_VehicleModel()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#VehicleType">
+            <summary>Sets the stub of IResponseFromRgtVin.get_VehicleType()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#Vin">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Vin()</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubIResponseFromRgtVin.ldplmrv::Lace#Models#RgtVin#IResponseFromRgtVin#Year">
+            <summary>Sets the stub of IResponseFromRgtVin.get_Year()</summary>
+        </member>
+        <member name="T:Lace.Models.RgtVin.Fakes.StubRgtVinResponseHandled">
+            <summary>Stub type of Lace.Models.RgtVin.RgtVinResponseHandled</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubRgtVinResponseHandled.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:Lace.Models.RgtVin.Fakes.StubRgtVinResponseHandled.InitializeStub">
+            <summary>Initializes a new instance of type StubRgtVinResponseHandled</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubRgtVinResponseHandled.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubRgtVinResponseHandled.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:Lace.Models.RgtVin.Fakes.StubRgtVinResponseHandled.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+    </members>
+</doc>

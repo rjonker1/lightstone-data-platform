@@ -3,6 +3,7 @@ using Common.Logging;
 using Lace.Events;
 using Lace.Extensions;
 using Lace.Models.Audatex;
+using Lace.Models.Ivid.Dto;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
@@ -24,21 +25,23 @@ namespace Lace.Source.Audatex.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
                 laceEvent.PublishStartServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 var audatexWebService = new ConfigureAudatexSource();
-                var audatexRequest = new ConfigureAudatexRequestMessage(_request)
+                var audatexRequest = new ConfigureAudatexRequestMessage(response)
+                    .Build()
                     .AudatexRequest;
+
                 var credentials = new ConfigureAudatexCredentials().Credentials;
 
                 laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
-                      audatexRequest.ObjectToJson());
+                    audatexRequest.ObjectToJson());
 
                 laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
 
@@ -56,11 +59,11 @@ namespace Lace.Source.Audatex.ServiceCalls
                 laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
                     _audatexResponse != null ? _audatexResponse.ObjectToJson() : new GetDataResult().ObjectToJson());
 
-                TransformWebResponse(response);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Audatex Web Service {0}", ex.Message);
+                Log.ErrorFormat("Error calling Audatex Source {0}", ex.Message);
                 laceEvent.PublishFailedServiceCallMessaage(_request.RequestAggregation.AggregateId, Source);
                 AudatexResponseFailed(response);
             }
@@ -73,7 +76,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             response.AudatexResponseHandled.HasBeenHandled();
         }
 
-        public void TransformWebResponse(ILaceResponse response)
+        public void TransformResponse(ILaceResponse response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

@@ -19,13 +19,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             _request = request;
         }
 
-        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
-            TransformWebResponse(response);
+            TransformResponse(response);
         }
 
-        public void TransformWebResponse(ILaceResponse response)
+        public void TransformResponse(ILaceResponse response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

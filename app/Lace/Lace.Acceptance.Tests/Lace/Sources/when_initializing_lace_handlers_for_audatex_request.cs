@@ -7,6 +7,7 @@ using Lace.Request;
 using Lace.Response;
 using Lace.Response.ExternalServices;
 using Lace.Test.Helper.Builders.Requests;
+using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;
 
@@ -33,7 +34,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _buildSourceChain.Build();
 
 
-            _initialize = new Initialize(new LaceResponse(), _request, _laceEvent, _buildSourceChain);
+            _initialize = new Initialize(new LaceResponseBuilder().WithIvidResponseHandled(), _request, _laceEvent, _buildSourceChain);
         }
 
 

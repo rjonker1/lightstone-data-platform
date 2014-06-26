@@ -63,6 +63,7 @@
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
+    <Compile Include="Builders\Responses\LaceResponseBuilder.cs" />
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
     <Compile Include="Fakes\Bus\FakeBus.cs" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceChain.cs" />
@@ -230,6 +231,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Fakes\Lace\Responses\" />
     <Folder Include="Mothers\Consumers\" />
     <Folder Include="Mothers\Responses\" />
   </ItemGroup>

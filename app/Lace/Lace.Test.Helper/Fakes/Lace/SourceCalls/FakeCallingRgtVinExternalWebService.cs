@@ -12,13 +12,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         private System.Data.DataSet _rgtVinResponse;
 
-        public void CallTheExternalWebService(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             _rgtVinResponse = new SourceResponseBuilder().ForRgtVin();
-            TransformWebResponse(response);
+            TransformResponse(response);
         }
 
-        public void TransformWebResponse(ILaceResponse response)
+        public void TransformResponse(ILaceResponse response)
         {
             var transformer = new TransformRgtVinResponse(_rgtVinResponse);
 

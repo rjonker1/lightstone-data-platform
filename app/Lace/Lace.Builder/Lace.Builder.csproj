@@ -49,7 +49,6 @@
     <Compile Include="Factory\CreateSourceChain.cs" />
     <Compile Include="IBuildSourceChain.cs" />
     <None Include="app.config" />
-    <None Include="ISourceSpecification.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="RequestTypes\IRequestType.cs.old" />

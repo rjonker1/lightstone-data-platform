@@ -1,54 +1,58 @@
 ﻿using Lace.Models.Audatex.Dto;
-using Lace.Request;
+using Lace.Response;
 
 namespace Lace.Source.Audatex.ServiceConfig
 {
     public class ConfigureAudatexRequestMessage
     {
-        private readonly ILaceRequest _request;
-        private const string MessageType = "MSGTYPE_HISTORYCHECK";
+        private readonly ILaceResponse _response;
+        private AudatexMessageData _audatexMessageData;
 
-        public ConfigureAudatexRequestMessage(ILaceRequest request)
-        {
-            _request = request;
-        }
-
-        public AudatexRequest AudatexRequest
+        private bool CanContinue
         {
             get
             {
-                return new AudatexRequest()
-                {
-                   Message = new SerializeAuduatexRequestData(AudatexMessageData).SerializedMessage,
-                   MessageType = MessageType
-                };
+                return _response.IvidResponse != null && _response.IvidResponseHandled.Handled;
             }
         }
+      
+        private const string MessageType = "MSGTYPE_HISTORYCHECK";
 
-        private AudatexMessageData AudatexMessageData
+        public ConfigureAudatexRequestMessage(ILaceResponse response)
         {
-            get
+            _response = response;
+        }
+
+        public ConfigureAudatexRequestMessage Build()
+        {
+            _audatexMessageData = new AudatexMessageData()
             {
-                return new AudatexMessageData()
-                {
-                    Header = new RequestHeader(),
-                    Body = new RequestBody()
+                Header = new RequestHeader(),
+                Body = !CanContinue
+                    ? new RequestBody()
+                    : new RequestBody()
                     {
                         HistoryCheckRequest = new HistoryCheckRequestBody()
                         {
-                            VIN = _request.Vehicle.Vin ?? string.Empty,
-                            Registration = _request.Vehicle.LicenceNo ?? string.Empty,
-                            EngineNumber = _request.Vehicle.EngineNo ?? string.Empty
+                            VIN = _response.IvidResponse.Vin,
+                            Registration = _response.IvidResponse.License,
+                            EngineNumber = _response.IvidResponse.Engine
                         }
                     }
-                };
-            }
+            };
+
+            AudatexRequest = new AudatexRequest()
+            {
+                Message = new SerializeAuduatexRequestData(_audatexMessageData).SerializedMessage,
+                MessageType = MessageType
+            };
+
+            return this;
         }
 
+        public AudatexRequest AudatexRequest { get; private set; }
+
        
-
-      
-
-
     }
+
 }

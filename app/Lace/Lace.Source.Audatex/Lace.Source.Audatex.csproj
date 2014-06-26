@@ -131,6 +131,10 @@
       <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
       <Name>Lace.Models.Audatex</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Ivid\Lace.Models.Ivid.csproj">
+      <Project>{6931cdbd-3ea0-4957-80b1-237b14d6a3aa}</Project>
+      <Name>Lace.Models.Ivid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
       <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
       <Name>Lace.Models.Lightstone</Name>

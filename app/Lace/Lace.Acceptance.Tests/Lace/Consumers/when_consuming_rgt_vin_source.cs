@@ -3,6 +3,7 @@ using Lace.Events.Messages.Publish;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.RgtVin;
+using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
@@ -23,7 +24,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
             _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateNumberRgtVinOnlyRequest();
-            _response = new LaceResponse();
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }
 
         public override void Observe()

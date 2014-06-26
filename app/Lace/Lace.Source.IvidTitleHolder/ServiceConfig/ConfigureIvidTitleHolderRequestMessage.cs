@@ -1,4 +1,5 @@
 ﻿using Lace.Request;
+using Lace.Response;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Source.IvidTitleHolder.ServiceConfig
@@ -6,15 +7,25 @@ namespace Lace.Source.IvidTitleHolder.ServiceConfig
     public class ConfigureIvidTitleHolderRequestMessage
     {
         private readonly ILaceRequest _request;
+        private readonly ILaceResponse _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
-        public ConfigureIvidTitleHolderRequestMessage(ILaceRequest request)
+      
+        public ConfigureIvidTitleHolderRequestMessage(ILaceRequest request, ILaceResponse response)
         {
             _request = request;
-            BuildIvidTitleHolderQueryRequest();
+            _response = response;
         }
 
-        private void BuildIvidTitleHolderQueryRequest()
+        private bool CanContinue
+        {
+            get
+            {
+                return _response.IvidResponseHandled.Handled && _response.IvidResponse != null;
+            }
+        }
+
+        public ConfigureIvidTitleHolderRequestMessage Build()
         {
             TitleholderQueryRequest = new TitleholderQueryRequest()
             {
@@ -25,8 +36,13 @@ namespace Lace.Source.IvidTitleHolder.ServiceConfig
                     requesterPhone = _request.User.UserPhone ?? string.Empty
                 },
 
-                vin = _request.Vehicle.Vin ?? string.Empty
+                vin = CanContinue
+                    ? _response.IvidResponse.Vin
+                    : string.Empty
             };
+
+            return this;
         }
+
     }
 }

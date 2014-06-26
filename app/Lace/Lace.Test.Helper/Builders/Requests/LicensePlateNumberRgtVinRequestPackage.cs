@@ -19,6 +19,7 @@ namespace Lace.Test.Helper.Builders.Requests
                             Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
+                                 new DataField {Name = "Vin", DataSource = new VinFieldSource()},
                                 new DataField {Name = "VehicleMake", DataSource = new PriceFieldSource()},
                                 new DataField {Name = "Colour", DataSource = new ColourFieldSource()},
                                 new DataField {Name = "Price", DataSource = new PriceFieldSource()}
