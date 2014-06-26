@@ -81,7 +81,7 @@ namespace Lace.Unit.Tests.Transform
         [Observation]
         public void audatex_transformer_result_accident_claim_must_have_quote_value_indicator()
         {
-            _transformer.Result.AccidentClaims[0].QuoteValueIndicator.ShouldEqual("R 10 000,00 to R 50 000,00 !");
+            _transformer.Result.AccidentClaims[0].QuoteValueIndicator.ShouldEqual("R 10 000,00 to R 20 000,00 !");
         }
     }
 }
