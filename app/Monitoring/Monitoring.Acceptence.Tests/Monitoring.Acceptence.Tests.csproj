@@ -56,6 +56,7 @@
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
       <Name>Monitoring %28Monitoring\Monitoring%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
