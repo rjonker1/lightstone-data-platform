@@ -16,7 +16,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private readonly Initialize _initialize;
+        private readonly IBootstrap _initialize;
         private IList<LaceExternalServiceResponse> _laceResponses;
         private readonly IBuildSourceChain _buildSourceChain;
 
@@ -28,8 +28,8 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateRequestBuilder().ForRgtVin();
 
-            _buildSourceChain = new CreateSourceChain();
-            _buildSourceChain.Default(_request.Package.Action);
+            _buildSourceChain = new CreateSourceChain(_request.Package.Action);
+            _buildSourceChain.Build();
 
 
             _initialize = new Initialize(new LaceResponse(),_request, _laceEvent, _buildSourceChain);
@@ -37,17 +37,18 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public override void Observe()
         {
+            _initialize.Execute();
             _laceResponses = _initialize.LaceResponses;
         }
 
         [Observation]
-        public void lace_functional_test_rgt_vin_response_should_be_handled_test()
+        public void lace_functional_test_rgt_vin_response_should_be_handled()
         {
             _laceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void lace_functional_test_rgt_vin_response_shuould_not_be_null_test()
+        public void lace_functional_test_rgt_vin_response_shuould_not_be_null()
         {
             _laceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
         }

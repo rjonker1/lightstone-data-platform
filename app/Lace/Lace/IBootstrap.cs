@@ -7,7 +7,5 @@ namespace Lace
     {
         IList<LaceExternalServiceResponse> LaceResponses { get; }
         void Execute();
-        //event EventHandler<SetHandlersEventArgs> SetHandlers;
-        //event EventHandler<LoadEventArgs> Load;
     }
 }

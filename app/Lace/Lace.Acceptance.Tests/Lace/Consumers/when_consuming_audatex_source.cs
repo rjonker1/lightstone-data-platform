@@ -14,7 +14,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
         private readonly ILaceResponse _response;
-        private AudatexConsumer _consumer;
+        private AudatexSourceExecution _consumer;
 
 
         public when_consuming_audatex_source()
@@ -28,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new AudatexConsumer(_request, null, null);
+            _consumer = new AudatexSourceExecution(_request, null, null);
             _consumer.CallSource(_response, _laceEvent);
         }
 

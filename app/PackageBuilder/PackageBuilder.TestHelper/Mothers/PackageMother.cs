@@ -8,7 +8,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return Builders.Entites.PackageBuilder.Get("License plate search", ActionMother.LicensePlateSeacrhAction,
+                return Builders.Entites.PackageBuilder.Get("License plate search", ActionMother.LicensePlateSearchAction,
                     DataSetMother.VehicleVerification,
                     DataSetMother.RepairHistory,
                     DataSetMother.ValuesHistory);

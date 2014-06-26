@@ -7,7 +7,7 @@ namespace PackageBuilder.TestHelper.Mothers
     {
         public static IActionRepository Get()
         {
-            return ActionRepositoryBuilder.Get(ActionMother.LicensePlateSeacrhAction, ActionMother.EzScoreAction, ActionMother.VerifyAction, ActionMother.LicenseScanAction, ActionMother.AllAction);
+            return ActionRepositoryBuilder.Get(ActionMother.LicensePlateSearchAction, ActionMother.EzScoreAction, ActionMother.VerifyAction, ActionMother.LicenseScanAction, ActionMother.AllAction);
         }
     }
 }

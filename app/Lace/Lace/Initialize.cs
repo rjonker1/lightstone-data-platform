@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Logging;
 using Lace.Builder;
 using Lace.Events;
 using Lace.Request;
@@ -12,6 +13,7 @@ namespace Lace
     public class Initialize : IBootstrap
     {
         public IList<LaceExternalServiceResponse> LaceResponses { get; private set; }
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly ILaceRequest _request;
 
@@ -33,6 +35,13 @@ namespace Lace
 
         public void Execute()
         {
+            if (_buildSourceChain.SourceChain == null)
+            {
+                Log.Error("Source chain for request is null and cannot be executed");
+                throw new Exception("Source Chain cannot be null");
+            }
+
+
             _buildSourceChain.SourceChain(_request, _laceEvent, _response);
 
             LaceResponses = new List<LaceExternalServiceResponse>()

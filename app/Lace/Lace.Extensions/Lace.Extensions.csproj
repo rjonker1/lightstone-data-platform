@@ -7,8 +7,8 @@
     <ProjectGuid>{E2F47E4A-F891-4FD6-A269-89C42595361D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Functions</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Functions</AssemblyName>
+    <RootNamespace>Lace.Extensions</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -35,15 +35,14 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Xml\IXmlFunction.cs" />
-    <Compile Include="Json\JsonFunctions.cs" />
-    <Compile Include="Json\IJsonFunction.cs" />
+    <Compile Include="JsonExtensions.cs" />
+    <Compile Include="XmlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Xml\XmlFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

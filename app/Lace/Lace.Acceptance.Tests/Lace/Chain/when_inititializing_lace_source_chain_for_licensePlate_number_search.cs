@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.Builder;
-using Lace.Builder.Factory;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
 using Lace.Request;
@@ -31,8 +30,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _laceEvent = new PublishLaceEventMessages(publisher);
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
-            _buildSourceChain = new FakeSourceChain();
-            _buildSourceChain.Default(_request.Package.Action);
+            _buildSourceChain = new FakeSourceChain(_request.Package.Action);
+            _buildSourceChain.Build();
         }
 
         public override void Observe()
@@ -47,9 +46,6 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
             _initialize.LaceResponses.Count.ShouldEqual(1);
             _initialize.LaceResponses[0].Response.ShouldNotBeNull();
-
-            //_initialize.LaceResponses[0].Response.Product.ShouldNotBeNull();
-            //_initialize.LaceResponses[0].Response.Product.ProductIsAvailable.ShouldBeTrue();
 
             _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();

@@ -37,7 +37,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IAction LicensePlateSeacrhAction
+        public static IAction LicensePlateSearchAction
         {
             get
             {

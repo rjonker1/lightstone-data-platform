@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading;
-using Castle.Windsor;
 using EasyNetQ;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Functions.Json;
+using Lace.Extensions;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests;
 using Monitoring.Sources.Lace;
@@ -69,9 +68,9 @@ namespace Lace.Acceptance.Tests.Events
 
             _laceEvent.PublishEndServiceCallMessage(_aggregateId, LaceEventSource.Ivid);
 
-            _laceEvent.PublishServiceRequestMessage(_aggregateId, LaceEventSource.Ivid, JsonFunctions.JsonFunction.ObjectToJson(new LicensePlateNumberIvidOnlyRequest()));
+            _laceEvent.PublishServiceRequestMessage(_aggregateId, LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
 
-            _laceEvent.PublishServiceResponseMessage(_aggregateId, LaceEventSource.Ivid, JsonFunctions.JsonFunction.ObjectToJson(new LicensePlateRequestBuilder().ForIvid()));
+            _laceEvent.PublishServiceResponseMessage(_aggregateId, LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
 
             _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, LaceEventSource.Ivid);
 

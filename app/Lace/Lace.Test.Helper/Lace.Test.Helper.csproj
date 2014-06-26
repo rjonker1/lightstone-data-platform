@@ -59,21 +59,18 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Builders\RequestedTypes\RequestedTypeBuilder.cs.old" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
     <Compile Include="Fakes\Bus\FakeBus.cs" />
-    <None Include="Fakes\Consumer\FakeConsumerInstaller.cs.old" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceChain.cs" />
     <Compile Include="Fakes\Lace\Builder\FakeSourceSpecification.cs" />
-    <Compile Include="Fakes\Lace\Consumer\FakeIvidConsumer.cs" />
-    <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderConsumer.cs" />
-    <Compile Include="Fakes\Lace\Consumer\FakeRgtVinConsumer.cs" />
-    <Compile Include="Fakes\Lace\Consumer\FakeAudatexConsumer.cs" />
-    <Compile Include="Fakes\Lace\Consumer\FakeSourceConsumer.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeIvidSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeRgtVinSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeAudatexSourceExecution.cs" />
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
     <None Include="Fakes\Lace\FakeLaceLoader.cs.old" />
@@ -87,8 +84,7 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
-    <None Include="Fakes\Loader\FakeLaceLicensePlateNumberLoader.cs.old" />
-    <Compile Include="Fakes\RequestFakes\FakeEntryPoint.cs" />
+    <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
@@ -102,7 +98,6 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Packages\Dto\Package.cs" />
-    <None Include="Fakes\Loader\FakeRequestedTypesForLicensePlateNumber.cs.old" />
     <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
@@ -121,6 +116,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PackageBuilder\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
@@ -140,10 +139,6 @@
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Functions\Lace.Functions.csproj">
-      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
-      <Name>Lace.Functions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Audatex\Lace.Models.Audatex.csproj">
       <Project>{731c14e0-8e69-4bea-a189-c62c40bc77ca}</Project>
@@ -219,7 +214,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Lace\Lace.csproj">
       <Project>{5b0abcf8-5984-46e1-b1a5-6f3fd2becaa1}</Project>
-      <Name>Lace</Name>
+      <Name>Lace %28Lace\Lace%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
@@ -231,7 +226,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow</Name>
+      <Name>Workflow %28Workflow\Workflow%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

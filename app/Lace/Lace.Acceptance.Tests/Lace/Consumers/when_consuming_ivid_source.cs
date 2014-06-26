@@ -14,7 +14,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
         private readonly ILaceResponse _response;
-        private IvidConsumer _consumer;
+        private IvidSourceExecution _consumer;
 
 
         public when_consuming_ivid_source()
@@ -28,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new IvidConsumer(_request, null, null);
+            _consumer = new IvidSourceExecution(_request, null, null);
             _consumer.CallSource(_response, _laceEvent);
         }
 

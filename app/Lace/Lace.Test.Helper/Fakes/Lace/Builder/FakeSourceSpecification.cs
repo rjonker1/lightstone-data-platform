@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lace.Events;
 using Lace.Request;
 using Lace.Response;
@@ -8,15 +9,28 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceSpecification
     {
-        public Func<Action<ILaceRequest, ILaceEvent, ILaceResponse>>
-          LicenseNumberRequestSpecification =
-              () =>
-                  (request, @event, response) =>
-                      new FakeSourceConsumer(
-                          new FakeAudatexConsumer(request,
-                              new FakeRgtVinConsumer(request,
-                                  new FakeIvidTitleHolderConsumer(request,
-                                      new FakeIvidConsumer(request, null, null), null),
-                                  null), null), null).CallSource(response, @event);
+        private readonly Func<Action<ILaceRequest, ILaceEvent, ILaceResponse>>
+            _licenseNumberRequestSpecification =
+                () =>
+                    (request, @event, response) =>
+                        new FakeIvidSourceExecution(request,
+                            new FakeIvidTitleHolderSourceExecution(request,
+                                new FakeRgtVinSourceExecution(request,
+                                    new FakeAudatexSourceExecution(request, null, null), null), 
+                                null), null).CallSource(response, @event);
+
+
+        public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> Specifications
+        {
+            get
+            {
+                return new Dictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
+                {
+                    {
+                        "License plate search", _licenseNumberRequestSpecification()
+                    }
+                };
+            }
+        }
     }
 }

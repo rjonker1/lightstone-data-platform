@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CanHandlePackageSpecification.cs" />
-    <Compile Include="ConsumeService.cs" />
+    <Compile Include="ConsumeSource.cs" />
     <Compile Include="IConsumeSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

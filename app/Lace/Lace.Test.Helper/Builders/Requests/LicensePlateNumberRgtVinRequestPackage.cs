@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.TestHelper.Mothers;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -23,7 +24,8 @@ namespace Lace.Test.Helper.Builders.Requests
                                 new DataField {Name = "Price", DataSource = new PriceFieldSource()}
                             }
                         }
-                    }
+                    },
+                Action = ActionMother.LicensePlateSearchAction
             };
         }
     }

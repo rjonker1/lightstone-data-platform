@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.Functions.Xml;
+using Lace.Extensions;
 using Lace.Models.Audatex.Dto;
 using Lace.Request;
 using Lace.Response;
@@ -20,7 +20,7 @@ namespace Lace.Source.Audatex.Transform
         {
             get
             {
-                var models = XmlFunctions.XmlFunction.XmlToObject<VendorResponse>(Message.MessageEnvelope);
+                var models = Message.MessageEnvelope.XmlToObject<VendorResponse>();
                 return models == null ? new List<HistoryCheckResponse>() : models.Body.EntityList;
             }
         }

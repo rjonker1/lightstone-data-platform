@@ -29,8 +29,8 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
             _request = new LicensePlateRequestBuilder().ForAudatex();
 
-            _buildSourceChain = new CreateSourceChain();
-            _buildSourceChain.Default(_request.Package.Action);
+            _buildSourceChain = new CreateSourceChain(_request.Package.Action);
+            _buildSourceChain.Build();
 
 
             _initialize = new Initialize(new LaceResponse(), _request, _laceEvent, _buildSourceChain);

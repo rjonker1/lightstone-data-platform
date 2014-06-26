@@ -2,7 +2,7 @@
 using System.Data;
 using Common.Logging;
 using Lace.Events;
-using Lace.Functions.Json;
+using Lace.Extensions;
 using Lace.Models.RgtVin;
 using Lace.Request;
 using Lace.Response;
@@ -37,7 +37,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
                 laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
 
                 laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
-                       JsonFunctions.JsonFunction.ObjectToJson(rgtVinRequest));
+                    rgtVinRequest.ObjectToJson());
 
 
                 laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
@@ -55,7 +55,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
                     laceEvent.PublishNoResponseFromServiceMessage(_request.RequestAggregation.AggregateId, Source);
 
                 laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
-                        JsonFunctions.JsonFunction.ObjectToJson(_rgtVinResponse ?? new DataSet()));
+                    _rgtVinResponse != null ? _rgtVinResponse.ObjectToJson() : new DataSet().ObjectToJson());
 
                 TransformWebResponse(response);
 
