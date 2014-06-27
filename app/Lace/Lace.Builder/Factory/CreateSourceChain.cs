@@ -27,6 +27,8 @@ namespace Lace.Builder.Factory
                 throw new Exception("Action for request is empty");
             }
 
+            Log.ErrorFormat("Building source chain for acton {0}", _action.Name);
+
             SourceChain =
                 new SourceSpecification().Specifications.SingleOrDefault(
                     w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
@@ -34,5 +36,4 @@ namespace Lace.Builder.Factory
 
         public Action<ILaceRequest, ILaceEvent, ILaceResponse> SourceChain { get; private set; }
     }
-
 }

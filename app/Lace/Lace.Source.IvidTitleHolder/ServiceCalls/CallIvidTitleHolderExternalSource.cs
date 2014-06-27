@@ -30,7 +30,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
+                laceEvent.PublishStartServiceConfigurationMessage(Source);
 
                 var ividTitleHolderWebService = new ConfigureIvidTitleHolderSource();
 
@@ -43,31 +43,31 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
-                    laceEvent.PublishEndServiceConfigurationMessage(_request.RequestAggregation.AggregateId, Source);
+                    laceEvent.PublishEndServiceConfigurationMessage(Source);
 
                     var ividTitleHolderRequest = new ConfigureIvidTitleHolderRequestMessage(_request, response)
                         .Build()
                         .TitleholderQueryRequest;
 
-                    laceEvent.PublishServiceRequestMessage(_request.RequestAggregation.AggregateId, Source,
+                    laceEvent.PublishServiceRequestMessage(Source,
                         ividTitleHolderRequest.ObjectToJson());
 
-                    laceEvent.PublishStartServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
+                    laceEvent.PublishStartServiceCallMessage(Source);
 
                     _ividTitleHolderResponse = ividTitleHolderWebService
                         .IvidTitleHolderProxy
                         .TitleholderQuery(ividTitleHolderRequest);
 
-                    laceEvent.PublishEndServiceCallMessage(_request.RequestAggregation.AggregateId, Source);
+                    laceEvent.PublishEndServiceCallMessage(Source);
 
                     ividTitleHolderWebService
                         .CloseWebService();
 
                     if (_ividTitleHolderResponse == null)
-                        laceEvent.PublishNoResponseFromServiceMessage(_request.RequestAggregation.AggregateId, Source);
+                        laceEvent.PublishNoResponseFromServiceMessage(Source);
 
 
-                    laceEvent.PublishServiceResponseMessage(_request.RequestAggregation.AggregateId, Source,
+                    laceEvent.PublishServiceResponseMessage(Source,
                         _ividTitleHolderResponse != null
                             ? _ividTitleHolderResponse.ObjectToJson()
                             : new TitleholderQueryResponse().ObjectToJson());
@@ -79,7 +79,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Title Holder Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(_request.RequestAggregation.AggregateId, Source);
+                laceEvent.PublishFailedServiceCallMessaage(Source);
                 IvidTitleHolderResponseFailed(response);
             }
         }

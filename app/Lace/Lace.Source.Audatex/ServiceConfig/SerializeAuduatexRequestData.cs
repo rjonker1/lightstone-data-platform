@@ -10,7 +10,6 @@ namespace Lace.Source.Audatex.ServiceConfig
         {
             get
             {
-                //return CleanXml(XmlFunctions.XmlFunction.ObjectToXml(_message) ?? string.Empty);
                 return CleanXml(_message != null ? _message.ObjectToXml<AudatexMessageData>() : string.Empty);
             }
         }
@@ -28,7 +27,7 @@ namespace Lace.Source.Audatex.ServiceConfig
             xmlMessage = xmlMessage.Replace(
                 " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
                 "");
-            return xmlMessage ;
+            return xmlMessage;
         }
     }
 }

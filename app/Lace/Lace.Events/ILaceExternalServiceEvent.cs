@@ -5,20 +5,20 @@ namespace Lace.Events
 {
     public interface ILaceExternalSourceEvent
     {
-        void PublishStartServiceConfigurationMessage(Guid aggerateId, LaceEventSource source);
+        void PublishStartServiceConfigurationMessage(LaceEventSource source);
 
-        void PublishEndServiceConfigurationMessage(Guid aggerateId, LaceEventSource source);
+        void PublishEndServiceConfigurationMessage(LaceEventSource source);
 
-        void PublishStartServiceCallMessage(Guid aggerateId, LaceEventSource source);
+        void PublishStartServiceCallMessage(LaceEventSource source);
 
-        void PublishEndServiceCallMessage(Guid aggerateId, LaceEventSource source);
+        void PublishEndServiceCallMessage(LaceEventSource source);
 
-        void PublishFailedServiceCallMessaage(Guid aggerateId, LaceEventSource source);
+        void PublishFailedServiceCallMessaage(LaceEventSource source);
 
-        void PublishNoResponseFromServiceMessage(Guid aggerateId, LaceEventSource source);
+        void PublishNoResponseFromServiceMessage(LaceEventSource source);
 
-        void PublishServiceRequestMessage(Guid aggerateId, LaceEventSource source, string request);
+        void PublishServiceRequestMessage(LaceEventSource source, string request);
 
-        void PublishServiceResponseMessage(Guid aggerateId, LaceEventSource source, string response);
+        void PublishServiceResponseMessage(LaceEventSource source, string response);
     }
 }

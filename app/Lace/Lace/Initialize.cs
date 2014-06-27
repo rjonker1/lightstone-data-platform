@@ -49,8 +49,7 @@ namespace Lace
                 new LaceExternalServiceResponse() {Response = _response}
             };
 
-            _laceEvent.PublishLaceProcessedRequestAndReturnedResponseMessage(_request.RequestAggregation.AggregateId,
-                LaceEventSource.Initialization);
+            _laceEvent.PublishLaceProcessedRequestAndReturnedResponseMessage(LaceEventSource.Initialization);
         }
     }
 }

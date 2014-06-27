@@ -18,13 +18,14 @@ namespace Lace.Request.Entry
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private readonly ILaceEvent _laceEvent;
+        private ILaceEvent _laceEvent;
+        private readonly IPublishMessages _publisher;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
 
         public EntryPoint(IPublishMessages publisher)
         {
-            _laceEvent = new PublishLaceEventMessages(publisher);
+            _publisher = publisher;
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
@@ -32,8 +33,9 @@ namespace Lace.Request.Entry
         {
             try
             {
-                _laceEvent.PublishLaceReceivedRequestMessage(request.RequestAggregation.AggregateId,
-                    LaceEventSource.EntryPoint);
+                _laceEvent = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
+
+                _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
 
                 _sourceChain = new CreateSourceChain(request.Package.Action);
@@ -55,8 +57,7 @@ namespace Lace.Request.Entry
             }
             catch (Exception)
             {
-                _laceEvent.PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(
-                    request.RequestAggregation.AggregateId, LaceEventSource.EntryPoint);
+                _laceEvent.PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(LaceEventSource.EntryPoint);
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;

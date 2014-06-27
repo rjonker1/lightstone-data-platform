@@ -5,8 +5,8 @@ namespace Lace.Events
 {
     public interface ILaceSourceHandledEvent
     {
-        void PublishSourceIsBeingHandledMessage(Guid aggerateId, LaceEventSource source);
+        void PublishSourceIsBeingHandledMessage(LaceEventSource source);
 
-        void PublishSourceIsNotBeingHandledMessage(Guid aggerateId, LaceEventSource source);
+        void PublishSourceIsNotBeingHandledMessage(LaceEventSource source);
     }
 }

@@ -26,9 +26,10 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            _laceEvent = new PublishLaceEventMessages(publisher);
+            
 
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
+            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
 
 
             _buildSourceChain = new CreateSourceChain(_request.Package.Action);

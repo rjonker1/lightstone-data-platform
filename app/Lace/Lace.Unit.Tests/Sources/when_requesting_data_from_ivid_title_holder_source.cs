@@ -26,11 +26,13 @@ namespace Lace.Unit.Tests.Sources
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
-            _laceEvent = new PublishLaceEventMessages(publisher);
+
             _requestDataFromService = new RequestDatafromIvidTitleHolderSource();
             _ividTitleHolderRequest = new LicensePlateRequestBuilder().ForIvidTitleHolder();
             _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingIvidTitleHolderExternalWebService();
+            _laceEvent = new PublishLaceEventMessages(publisher, _ividTitleHolderRequest.RequestAggregation.AggregateId);
+
 
         }
 

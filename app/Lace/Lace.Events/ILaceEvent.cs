@@ -5,11 +5,11 @@ namespace Lace.Events
 {
     public interface ILaceEvent : ILaceExternalSourceEvent, ILaceSourceHandledEvent, ILaceTransformEvent
     {
-       void PublishMessage(Guid aggerateId, string message, LaceEventSource source);
+       void PublishMessage(string message, LaceEventSource source);
 
-       void PublishLaceReceivedRequestMessage(Guid aggerateId, LaceEventSource source);
-       void PublishLaceProcessedRequestAndReturnedResponseMessage(Guid aggerateId, LaceEventSource source);
-       void PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(Guid aggerateId, LaceEventSource source);
+       void PublishLaceReceivedRequestMessage(LaceEventSource source);
+       void PublishLaceProcessedRequestAndReturnedResponseMessage(LaceEventSource source);
+       void PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(LaceEventSource source);
 
     }
 }

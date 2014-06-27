@@ -1,6 +1,6 @@
 ﻿namespace Lace.Source.Configuration
 {
-    public class AppSettings : IConfiguration
+    internal class AppSettings : IConfiguration
     {
         private static readonly IConfiguration AppSettingConfiguration = new AppSettings();
 
@@ -11,7 +11,6 @@
                 return AppSettingConfiguration;
             }
         }
-
 
         public string GetSetting(string key)
         {

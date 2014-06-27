@@ -22,9 +22,11 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            _laceEvent = new PublishLaceEventMessages(publisher);
+          
             _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
+
+            _laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);
         }
 
         public override void Observe()

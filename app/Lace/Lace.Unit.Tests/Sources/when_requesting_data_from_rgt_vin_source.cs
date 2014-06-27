@@ -24,12 +24,12 @@ namespace Lace.Unit.Tests.Sources
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            _laceEvent = new PublishLaceEventMessages(publisher);
+            
             _requestDataFromService = new RequestDataFromIvidSource();
             _rgtVinRequest = new LicensePlateRequestBuilder().ForRgtVin();
             _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
-           
+            _laceEvent = new PublishLaceEventMessages(publisher, _rgtVinRequest.RequestAggregation.AggregateId);
         }
         
         public override void Observe()

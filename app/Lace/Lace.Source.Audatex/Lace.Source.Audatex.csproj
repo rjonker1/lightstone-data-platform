@@ -60,7 +60,6 @@
     <Compile Include="ServiceCalls\CallAudatexSource.cs" />
     <Compile Include="ServiceCalls\HandleAudatexSourceCall.cs" />
     <Compile Include="ServiceCalls\RequestDataFromAudatexSource.cs" />
-    <Compile Include="ServiceConfig\ConfigureAudatexCredentials.cs" />
     <Compile Include="ServiceConfig\ConfigureAudatexRequestMessage.cs" />
     <Compile Include="ServiceConfig\ConfigureAudatexSource.cs" />
     <Compile Include="ServiceConfig\SerializeAuduatexRequestData.cs" />

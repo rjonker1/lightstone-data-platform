@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
+    <Compile Include="Configuration\Credentials.cs" />
     <Compile Include="Enums\Services.cs" />
     <Compile Include="Common\CheckThePackageDataSource.cs" />
     <Compile Include="Common\ICheckThePackageDataSource.cs" />

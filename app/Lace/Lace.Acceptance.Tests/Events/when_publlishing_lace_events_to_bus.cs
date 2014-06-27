@@ -42,7 +42,7 @@ namespace Lace.Acceptance.Tests.Events
                 //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
                 _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
-                _laceEvent = new PublishLaceEventMessages(_publishMessages);
+                _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
 
             }
             catch (Exception e)
@@ -58,25 +58,25 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishLaceReceivedRequestMessage(_aggregateId, LaceEventSource.EntryPoint);
+            _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
-            _laceEvent.PublishStartServiceConfigurationMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishStartServiceConfigurationMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndServiceConfigurationMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishEndServiceConfigurationMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishStartServiceCallMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishStartServiceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndServiceCallMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishEndServiceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishServiceRequestMessage(_aggregateId, LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
+            _laceEvent.PublishServiceRequestMessage(LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
 
-            _laceEvent.PublishServiceResponseMessage(_aggregateId, LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
+            _laceEvent.PublishServiceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
 
-            _laceEvent.PublishFailedServiceCallMessaage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishFailedServiceCallMessaage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishNoResponseFromServiceMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishNoResponseFromServiceMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishLaceReceivedRequestMessage(_aggregateId, LaceEventSource.Initialization);
+            _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.Initialization);
 
 
             Thread.Sleep(5000);

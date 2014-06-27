@@ -9,6 +9,7 @@ using Lace.Response;
 using Lace.Response.ExternalServices;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.Builder;
+using Workflow;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
@@ -16,20 +17,23 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private IBuildSourceChain _buildSourceChain;
-        private readonly ILaceEvent _laceEvent;
+        private ILaceEvent _laceEvent;
         private IBootstrap _bootstrap;
+
+        private readonly IPublishMessages _publisher;
 
         public FakeEntryPoint()
         {
+
             var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            _laceEvent = new PublishLaceEventMessages(publisher);
-           
+            _publisher = new Workflow.RabbitMQ.Publisher(bus);
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
         public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
         {
+            _laceEvent = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
+
             _buildSourceChain = new FakeSourceChain(request.Package.Action);
             _buildSourceChain.Build();
 

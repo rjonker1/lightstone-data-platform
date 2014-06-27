@@ -38,7 +38,7 @@ namespace Lace.Acceptance.Tests.Events
                 //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
                 _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
-                _laceEvent = new PublishLaceEventMessages(_publishMessages);
+                _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
 
             }
             catch (Exception e)
@@ -55,9 +55,9 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishSourceIsBeingHandledMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishSourceIsBeingHandledMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishSourceIsNotBeingHandledMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishSourceIsNotBeingHandledMessage(LaceEventSource.Ivid);
         }
 
         [Observation]
@@ -67,11 +67,11 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishTransformationFailedMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishTransformationFailedMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishTransformationStartMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishTransformationStartMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishTransformationEndMessage(_aggregateId, LaceEventSource.Ivid);
+            _laceEvent.PublishTransformationEndMessage(LaceEventSource.Ivid);
 
 
             Thread.Sleep(5000);

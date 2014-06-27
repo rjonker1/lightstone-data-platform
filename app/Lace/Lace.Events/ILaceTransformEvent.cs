@@ -5,10 +5,10 @@ namespace Lace.Events
 {
     public interface ILaceTransformEvent
     {
-        void PublishTransformationStartMessage(Guid aggerateId, LaceEventSource source);
+        void PublishTransformationStartMessage(LaceEventSource source);
 
-        void PublishTransformationEndMessage(Guid aggerateId, LaceEventSource source);
+        void PublishTransformationEndMessage(LaceEventSource source);
 
-        void PublishTransformationFailedMessage(Guid aggerateId, LaceEventSource source);
+        void PublishTransformationFailedMessage(LaceEventSource source);
     }
 }

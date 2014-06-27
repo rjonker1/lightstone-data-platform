@@ -26,11 +26,13 @@ namespace Lace.Unit.Tests.Sources
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            _laceEvent = new PublishLaceEventMessages(publisher);
+            
             _requestDataFromSource = new RequestDataFromAudatexSource();
             _audatexRequest = new LicensePlateRequestBuilder().ForAudatex();
             _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingAudatexExternalWebService(_audatexRequest);
+
+            _laceEvent = new PublishLaceEventMessages(publisher, _audatexRequest.RequestAggregation.AggregateId);
         }
 
         public override void Observe()

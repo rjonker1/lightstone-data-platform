@@ -2,18 +2,14 @@
 using System.Net;
 using System.ServiceModel.Channels;
 using System.Text;
+using Lace.Source.Configuration;
 using Lace.Source.Ivid.IvidServiceReference;
 
 namespace Lace.Source.Ivid.ServiceConfig
 {
     public class ConfigureIvidSource
     {
-        private readonly string _userName =
-            Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidServiceUserName");
-
-        private readonly string _userPassowrd =
-            Configuration.AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidServiceUserPassword");
-
+       
         public HpiServiceClient IvidServiceProxy { get; private set; }
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
 
@@ -24,8 +20,8 @@ namespace Lace.Source.Ivid.ServiceConfig
             if (IvidServiceProxy == null || IvidServiceProxy.ClientCredentials == null)
                 throw new Exception("Cannot configure IVID Web Service");
 
-            IvidServiceProxy.ClientCredentials.UserName.UserName = _userName;
-            IvidServiceProxy.ClientCredentials.UserName.Password = _userPassowrd;
+            IvidServiceProxy.ClientCredentials.UserName.UserName = Credentials.IvidServiceUsername();
+            IvidServiceProxy.ClientCredentials.UserName.Password = Credentials.IvidServiceUserPassword();
         }
 
         public void ConfigureIvidWebServiceRequestMessageProperty()
@@ -33,7 +29,7 @@ namespace Lace.Source.Ivid.ServiceConfig
             IvidRequestMessageProperty = new HttpRequestMessageProperty();
             IvidRequestMessageProperty
                 .Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}",
-                    Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", _userName, _userPassowrd))));
+                    Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", Credentials.IvidServiceUsername(), Credentials.IvidServiceUserPassword()))));
 
         }
 

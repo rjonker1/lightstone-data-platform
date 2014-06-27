@@ -4,15 +4,15 @@ namespace Lace.Source.Audatex.ServiceConfig
 {
     public class ConfigureAudatexSource
     {
-        public BackOfficeWebServiceSoapClient AudatexServiceProxy
+        public BackOfficeWebServiceSoapClient AudatexServiceProxy { get; private set; }
+
+        public ConfigureAudatexSource Create()
         {
-            get
-            {
-                return new BackOfficeWebServiceSoapClient();
-            }
+            AudatexServiceProxy = new BackOfficeWebServiceSoapClient();
+            return this;
         }
 
-        public void CloseWebService()
+        public void Close()
         {
             if (AudatexServiceProxy == null) return;
 
