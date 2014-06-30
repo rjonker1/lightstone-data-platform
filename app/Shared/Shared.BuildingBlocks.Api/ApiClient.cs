@@ -7,8 +7,8 @@ namespace Shared.BuildingBlocks.Api
     {
         string Get(string token, string resource = "", object body = null);
         string Post(string token, string resource = "", object body = null);
-        T Get<T>(string resource, string token, object body = null) where T : new();
-        T Post<T>(string resource, string token, object body = null) where T : new();
+        T Get<T>(string token, string resource = "", object body = null) where T : new();
+        T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
 
     public interface IUmApiClient : IApiClient
@@ -20,8 +20,8 @@ namespace Shared.BuildingBlocks.Api
     {
         string Get(string token, string resource = "", object body = null);
         string Post(string token, string resource = "", object body = null);
-        T Get<T>(string resource, string token, object body = null) where T : new();
-        T Post<T>(string resource, string token, object body = null) where T : new();
+        T Get<T>(string token, string resource = "", object body = null) where T : new();
+        T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient

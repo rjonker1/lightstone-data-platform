@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using System;
+using DataPlatform.Shared.Entities;
 
 namespace PackageBuilder.Domain.Entities
 {
@@ -8,5 +9,7 @@ namespace PackageBuilder.Domain.Entities
             : base(name)
         {
         }
+
+        public Guid Id { get; set; }
     }
 }

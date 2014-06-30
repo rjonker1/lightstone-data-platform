@@ -11,15 +11,16 @@ namespace DataPlatform.Shared.Entities
     {
         protected NamedEntity(string name)
         {
+            Id = Guid.NewGuid();
             Name = name;
         }
 
         public string Name { get; set; }
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         protected bool Equals(NamedEntity other)
         {
-            return string.Equals(Name, other.Name) && Id.Equals(other.Id);
+            return string.Equals(Name, other.Name);
         }
 
         public override bool Equals(object obj)
@@ -32,10 +33,7 @@ namespace DataPlatform.Shared.Entities
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return ((Name != null ? Name.GetHashCode() : 0)*397) ^ Id.GetHashCode();
-            }
+            return (Name != null ? Name.GetHashCode() : 0);
         }
     }
 }
