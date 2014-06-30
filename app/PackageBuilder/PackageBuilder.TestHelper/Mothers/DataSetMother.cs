@@ -25,7 +25,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataSetBuilder.Get("Vehicle verification", DataFieldMother.ColourField);
+                return DataSetBuilder.Get("Vehicle verification", DataFieldMother.ColourField, DataFieldMother.LicenseField, DataFieldMother.BankNameField, DataFieldMother.AccidentClaimsField);
             }
         }
 

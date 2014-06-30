@@ -45,6 +45,7 @@
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
     <Compile Include="Builders\Entites\DataSetBuilder.cs" />
+    <Compile Include="Builders\Entites\DataSourceBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
     <Compile Include="Builders\Entites\PackageBuilder.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Mothers\ActionRepositoryMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataSetMother.cs" />
+    <Compile Include="Mothers\DataSourceMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

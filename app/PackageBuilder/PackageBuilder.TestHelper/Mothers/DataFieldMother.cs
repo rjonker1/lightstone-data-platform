@@ -9,14 +9,36 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataFieldBuilder.Get("Colour");
+                var field = DataFieldBuilder.Get("Colour");
+                field.DataSource = DataSourceMother.RgtVinSource;
+                return field;
             }
         }
         public static IDataField LicenseField
         {
             get
             {
-                return DataFieldBuilder.Get("LicenceNo");
+                var field = DataFieldBuilder.Get("LicenceNo");
+                field.DataSource = DataSourceMother.IvidDataSource;
+                return field;
+            }
+        }
+        public static IDataField BankNameField
+        {
+            get
+            {
+                var field = DataFieldBuilder.Get("BankName");
+                field.DataSource = DataSourceMother.IvidTitleHolderDataSource;
+                return field;
+            }
+        }
+        public static IDataField AccidentClaimsField
+        {
+            get
+            {
+                var field = DataFieldBuilder.Get("AccidentClaims");
+                field.DataSource = DataSourceMother.AudatexSource;
+                return field;
             }
         }
     }
