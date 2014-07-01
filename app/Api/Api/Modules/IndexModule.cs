@@ -1,19 +1,22 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
+using Billing.Api.Connector;
+using Billing.Api.Dtos;
 using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Entities;
+using DataPlatform.Shared.Identifiers;
 using Lace.Request.Entry;
 using Nancy;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.Security;
-using Workflow.BuildingBlocks;
 
 namespace Api.Modules
 {
     public class IndexModule : SecureModule
     {
-        public IndexModule(IPbApiClient pbApiClient)
+        public IndexModule(IPbApiClient pbApiClient, IEntryPoint entryPoint, IConnectToBilling billingConnector)
         {
             Get["/"] = parameters =>
             {
@@ -31,10 +34,14 @@ namespace Api.Modules
                 var package = Mapper.DynamicMap<IPackage>(packageResponse);
                 var vehicle = this.Bind<Vechicle>();
                 var request = new LicensePlateNumberRequest(package, new User(), new Context(), vehicle, new AggregationInformation());
-                var bus = BusFactory.CreateBus("monitor-event-tracking/queue");
-                var publisher = new Workflow.RabbitMQ.Publisher(bus);
-                var entryPoint = new EntryPoint(publisher);
                 var responses = entryPoint.GetResponsesFromLace(request);
+
+                var packageIdentifier = new PackageIdentifier(packageResponse.Id, new VersionIdentifier(1));
+                var requestIdentifier = new RequestIdentifier(Guid.NewGuid(), SystemIdentifier.CreateApi());
+                var userIdentifier = new UserIdentifier(((IEntity)Context.CurrentUser).Id);
+                var transactionContext = new TransactionContext(Guid.NewGuid(), userIdentifier, requestIdentifier);
+                var createTransaction = new CreateTransaction(packageIdentifier, transactionContext);
+                billingConnector.CreateTransaction(createTransaction);
 
                 return Response.AsJson(responses.First().Response);
             };
