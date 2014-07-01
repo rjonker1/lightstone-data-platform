@@ -9,7 +9,10 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return ActionBuilder.Get("Get EzScore", DataFieldMother.ColourField);
+                return new ActionBuilder()
+                            .With("Get EzScore")
+                            .With(DataFieldMother.ColourField)
+                            .Build();
             }
         }
 
@@ -17,7 +20,10 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return ActionBuilder.Get("Partial", DataFieldMother.ColourField);
+                return new ActionBuilder()
+                            .With("Partial")
+                            .With(DataFieldMother.ColourField)
+                            .Build();
             }
         }
 
@@ -25,7 +31,10 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return ActionBuilder.Get("License Scan", DataFieldMother.ColourField);
+                return new ActionBuilder()
+                            .With("License Scan")
+                            .With(DataFieldMother.ColourField)
+                            .Build();
             }
         }
 
@@ -33,7 +42,10 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return ActionBuilder.Get("Full", DataFieldMother.ColourField);
+                return new ActionBuilder()
+                            .With("Full")
+                            .With(DataFieldMother.ColourField)
+                            .Build();
             }
         }
 
@@ -41,7 +53,10 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return ActionBuilder.Get("License plate search", DataFieldMother.LicenseField);
+                return new ActionBuilder()
+                            .With("License plate search")
+                            .With(DataFieldMother.LicenseField)
+                            .Build();
             }
         }
     }

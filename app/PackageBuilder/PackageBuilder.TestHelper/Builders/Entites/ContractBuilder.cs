@@ -1,14 +1,21 @@
 ﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class ContractBuilder
     {
-        public static IContract Get(string name)
+        private string _name = "";
+
+        public IContract Build()
         {
-            return new Contract(name);
+            return new Contract(_name);
+        }
+
+        public ContractBuilder With(string name)
+        {
+            _name = name;
+            return this;
         }
     }
 }

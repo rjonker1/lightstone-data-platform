@@ -1,14 +1,20 @@
 ﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class GroupBuilder
     {
-        public static IGroup Get(string name)
+        private string _name;
+        public IGroup Build()
         {
-            return new Group(name);
+            return new Group(_name);
+        }
+
+        public GroupBuilder With(string name)
+        {
+            _name = name;
+            return this;
         }
     }
 }
