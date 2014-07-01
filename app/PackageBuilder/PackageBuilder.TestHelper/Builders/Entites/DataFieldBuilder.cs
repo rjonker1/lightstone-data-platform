@@ -5,9 +5,23 @@ namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class DataFieldBuilder
     {
-        public static IDataField Get(string name)
+        private string _name;
+        private IDataSource _source;
+        public IDataField Build()
         {
-            return new DataField(name) { Type = typeof(string).ToString() };
+            return new DataField(_name) { DataSource = _source, Type = typeof(string).ToString() };
+        }
+
+        public DataFieldBuilder With(string name)
+        {
+            _name = name;
+            return this;
+        }
+
+        public DataFieldBuilder With(IDataSource source)
+        {
+            _source = source;
+            return this;
         }
     }
 }

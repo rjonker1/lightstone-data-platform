@@ -1,4 +1,5 @@
-﻿using PackageBuilder.Domain;
+﻿using DataPlatform.Shared.Entities;
+using PackageBuilder.Domain;
 using PackageBuilder.Domain.Contracts;
 using PackageBuilder.TestHelper.Builders.Entites;
 using PackageBuilder.TestHelper.Builders.Repositories;
@@ -14,24 +15,20 @@ namespace PackageBuilder.TestHelper.Mothers
         /// <returns></returns>
         public static IPackageLookupRepository GetCannedVersion()
         {
-            var user = UserBuilder.Get("admin");
-            var contract = ContractBuilder.Get("Wesbank contract");
-            var customer = CustomerBuilder.Get("Wesbank", user, contract);
+            var user = UserMother.AdminUser;
+            var contract = ContractMother.WesbankContract;
+            var customer = new CustomerBuilder().With("Wesbank").With(user).With(contract).Build();
 
-            var contractPackageLicensePlateSearch = ContractPackageBuilder.Get(PackageMother.LicensePlateSearchPackage, contract);
-            //var contractPackageFull = ContractPackageBuilder.Get(PackageMother.FullVerificationPackage, contract);
-            //var contractPackageVerfiy = ContractPackageBuilder.Get(PackageMother.PartialVerificationPackage, contract);
-            //var contractPackageLicenseScan = ContractPackageBuilder.Get(PackageMother.LicenseScanPackage, contract);
-            //var contractPackageEzScore = ContractPackageBuilder.Get(PackageMother.EzScorePackage, contract);
+            var contractPackageLicensePlateSearch = new ContractPackageBuilder().With(PackageMother.LicensePlateSearchPackage).With(contract).Build();
 
             return new PackageLookup(
-                CustomerRepositoryBuilder.Get(customer),
-                ActionRepositoryMother.Get(),
+                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
+                ActionRepositoryMother.AllActionsRepository,
                 new TestUserPackageRepository(),
                 new TestRolePackageRepository(),
                 new TestGroupPackageRepository(),
-                ContractRepositoryBuilder.Get(contract),
-                ContractPackageRepositoryBuilder.Get(contractPackageLicensePlateSearch)
+                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageLicensePlateSearch).Build()
                 );
         }
 
@@ -69,23 +66,24 @@ namespace PackageBuilder.TestHelper.Mothers
         /// <returns></returns>
         public static IPackageLookupRepository GetWesbankScenario()
         {
-            var user = UserBuilder.Get("TestUser");
-            var contract = ContractBuilder.Get("Wesbank contract");
-            var customer = CustomerBuilder.Get("Wesbank", user, contract);
+            var user = UserMother.TestUser;
+            var contract = ContractMother.WesbankContract;
+            var customer = new CustomerBuilder().With("Wesbank").With(user).With(contract).Build();
 
-            var contractPackageFull = ContractPackageBuilder.Get(PackageMother.FullVerificationPackage, contract);
-            var contractPackageVerfiy = ContractPackageBuilder.Get(PackageMother.PartialVerificationPackage, contract);
-            var contractPackageLicenseScan = ContractPackageBuilder.Get(PackageMother.LicenseScanPackage, contract);
-            var contractPackageEzScore = ContractPackageBuilder.Get(PackageMother.EzScorePackage, contract);
+            var contractPackageFull = new ContractPackageBuilder().With(PackageMother.FullVerificationPackage).With(contract).Build();
+            var contractPackageVerfiy = new ContractPackageBuilder().With(PackageMother.PartialVerificationPackage).With(contract).Build();
+            var contractPackageLicenseScan = new ContractPackageBuilder().With(PackageMother.LicenseScanPackage).With(contract).Build();
+            var contractPackageEzScore = new ContractPackageBuilder().With(PackageMother.EzScorePackage).With(contract).Build();
 
             return new PackageLookup(
-                CustomerRepositoryBuilder.Get(customer),
-                ActionRepositoryMother.Get(), 
-                new TestUserPackageRepository(), 
-                new TestRolePackageRepository(), 
-                new TestGroupPackageRepository(), 
-                ContractRepositoryBuilder.Get(contract),
-                ContractPackageRepositoryBuilder.Get(contractPackageFull, contractPackageVerfiy, contractPackageLicenseScan, contractPackageEzScore)
+                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
+                ActionRepositoryMother.AllActionsRepository,
+                new TestUserPackageRepository(),
+                new TestRolePackageRepository(),
+                new TestGroupPackageRepository(),
+                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageFull, 
+                contractPackageVerfiy, contractPackageLicenseScan, contractPackageEzScore).Build()
                 );
         }
 
@@ -148,50 +146,34 @@ namespace PackageBuilder.TestHelper.Mothers
         /// <returns></returns>
         public static IPackageLookupRepository GetAcmeScenario()
         {
-            var role1 = RoleBuilder.Get("role1");
-            var group1 = GroupBuilder.Get("group1");
-            var group2 = GroupBuilder.Get("group2");
-            var group3 = GroupBuilder.Get("group3");
+            var role1 = new RoleBuilder().With("role1").Build();
+            var group1 = new GroupBuilder().With("group1").Build();
+            var group2 = new GroupBuilder().With("group2").Build();
+            var group3 = new GroupBuilder().With("group3").Build();
 
-            var user1 = UserBuilder.Get("user1");
-            var user2 = UserBuilder.Get("user2");
-            var user3 = UserBuilder.Get("user3");
-            var user4 = UserBuilder.Get("user4");
-            var user5 = UserBuilder.Get("user5");
+            var user1 = new UserBuilder().With("user1").With(group1).Build();
+            var user2 = new UserBuilder().With("user2").With(group2).Build();
+            var user3 = new UserBuilder().With("user3").With(group3).Build();
+            var user4 = new UserBuilder().With("user4").With(role1).Build();
+            var user5 = new UserBuilder().With("user5").With(group3).With(role1).Build();
 
-            // Assign user1 to group1
-            user1.Add(group1);
-            // Assign user2 to group2
-            user2.Add(group2);
-            // Assign user3 to group3
-            user3.Add(group3);
-            // Assign user4 to role1
-            user4.Add(role1);
-            // Assign user5 to role1 & group 3
-            user5.Add(role1);
-            user5.Add(group3);
+            var contract = new ContractBuilder().With("Acme contract").Build();
+            var customer = new CustomerBuilder().With("Acme").With(user1, user2, user3, user4, user5).With(contract).Build();
 
-            var contract = ContractBuilder.Get("Acme contract");
-            var customer = CustomerBuilder.Get("Acme", user1, contract);
-            customer.Add(user2);
-            customer.Add(user3);
-            customer.Add(user4);
-            customer.Add(user5);
+            var groupPackage1 = new GroupPackageBuilder().With(customer).With(group1).With(PackageMother.LicenseScanPackage).Build();
+            var groupPackage2 = new GroupPackageBuilder().With(customer).With(group2).With(PackageMother.EzScorePackage).Build();
+            var groupPackage3 = new GroupPackageBuilder().With(customer).With(group2).With(PackageMother.PartialVerificationPackage).Build();
+            var groupPackage4 = new GroupPackageBuilder().With(customer).With(group3).With(PackageMother.FullVerificationPackage).Build();
 
-            var groupPackage1 = GroupPackageBuilder.Get(PackageMother.LicenseScanPackage, customer, group1);
-            var groupPackage2 = GroupPackageBuilder.Get(PackageMother.EzScorePackage, customer, group2);
-            var groupPackage3 = GroupPackageBuilder.Get(PackageMother.PartialVerificationPackage, customer, group2);
-            var groupPackage4 = GroupPackageBuilder.Get(PackageMother.FullVerificationPackage, customer, group3);
-
-            var rolePackage1 = RolePackageBuilder.Get(PackageMother.PartialVerificationPackage, customer, role1);
+            var rolePackage1 = new RolePackageBuilder().With(customer).With(PackageMother.PartialVerificationPackage).With(role1).Build();
 
             return new PackageLookup(
-                CustomerRepositoryBuilder.Get(customer),
-                ActionRepositoryMother.Get(),
+                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
+                ActionRepositoryMother.AllActionsRepository,
                 new TestUserPackageRepository(),
-                RolePackageRepositoryBuilder.Get(rolePackage1),
-                GroupPackageRepositoryBuilder.Get(groupPackage1, groupPackage2, groupPackage3, groupPackage4),
-                ContractRepositoryBuilder.Get(contract),
+                new TestRepositoryBuilder<TestRolePackageRepository, IRolePackage>().With(rolePackage1).Build(),
+                new TestRepositoryBuilder<TestGroupPackageRepository, IGroupPackage>().With(groupPackage1, groupPackage2, groupPackage3, groupPackage4).Build(),
+                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
                 new TestContractPackageRepository()
                 );
         }
