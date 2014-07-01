@@ -10,26 +10,24 @@ namespace Billing.Api.Connector.Configuration
     /// </summary>
     public class ApplicationConfigurationBillingConnectorConfiguration : IBillingConnectorConfiguration
     {
-        private const string apiKeyKey = "billing/apiKey";
-        private const string urlKey = "billing/url";
+        private const string ApiKeyKey = "billing/apiKey";
+        private const string UrlKey = "billing/url";
 
         public string Url
         {
-            get { return GetKey(urlKey); }
+            get { return GetKey(UrlKey); }
         }
 
         public string ApiKey
         {
-            get { return GetKey(apiKeyKey); }
+            get { return GetKey(ApiKeyKey); }
         }
 
         private string GetKey(string key)
         {
-            var keyValue = ConfigurationManager.AppSettings[urlKey];
+            var keyValue = ConfigurationManager.AppSettings[key];
             if (string.IsNullOrEmpty(keyValue))
-            {
                 throw new Exception(string.Format("Failed to get {0} from the application configuration", key));
-            }
 
             return keyValue;
         }
