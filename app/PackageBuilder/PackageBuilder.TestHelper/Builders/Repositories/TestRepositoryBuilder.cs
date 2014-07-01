@@ -15,7 +15,7 @@ namespace PackageBuilder.TestHelper.Builders.Repositories
             return repository;
         }
 
-        public TestRepositoryBuilder<TRepo, TEntity> WithEntities(params TEntity[] entities)
+        public TestRepositoryBuilder<TRepo, TEntity> With(params TEntity[] entities)
         {
             _entities = entities;
             return this;

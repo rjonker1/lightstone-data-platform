@@ -12,7 +12,7 @@ namespace PackageBuilder.TestHelper.Mothers
             get
             {
                 return new TestRepositoryBuilder<TestActionRepository, IAction>()
-                    .WithEntities(ActionMother.LicensePlateSearchAction,
+                    .With(ActionMother.LicensePlateSearchAction,
                                   ActionMother.EzScoreAction,
                                   ActionMother.VerifyAction,
                                   ActionMother.LicenseScanAction,

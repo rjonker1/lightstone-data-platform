@@ -22,13 +22,13 @@ namespace PackageBuilder.TestHelper.Mothers
             var contractPackageLicensePlateSearch = new ContractPackageBuilder().With(PackageMother.LicensePlateSearchPackage).With(contract).Build();
 
             return new PackageLookup(
-                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().WithEntities(customer).Build(),
+                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
                 ActionRepositoryMother.AllActionsRepository,
                 new TestUserPackageRepository(),
                 new TestRolePackageRepository(),
                 new TestGroupPackageRepository(),
-                new TestRepositoryBuilder<TestContractRepository, IContract>().WithEntities(contract).Build(),
-                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().WithEntities(contractPackageLicensePlateSearch).Build()
+                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageLicensePlateSearch).Build()
                 );
         }
 
@@ -76,13 +76,13 @@ namespace PackageBuilder.TestHelper.Mothers
             var contractPackageEzScore = new ContractPackageBuilder().With(PackageMother.EzScorePackage).With(contract).Build();
 
             return new PackageLookup(
-                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().WithEntities(customer).Build(),
+                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
                 ActionRepositoryMother.AllActionsRepository,
                 new TestUserPackageRepository(),
                 new TestRolePackageRepository(),
                 new TestGroupPackageRepository(),
-                new TestRepositoryBuilder<TestContractRepository, IContract>().WithEntities(contract).Build(),
-                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().WithEntities(contractPackageFull, 
+                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageFull, 
                 contractPackageVerfiy, contractPackageLicenseScan, contractPackageEzScore).Build()
                 );
         }
@@ -168,12 +168,12 @@ namespace PackageBuilder.TestHelper.Mothers
             var rolePackage1 = new RolePackageBuilder().With(customer).With(PackageMother.PartialVerificationPackage).With(role1).Build();
 
             return new PackageLookup(
-                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().WithEntities(customer).Build(),
+                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
                 ActionRepositoryMother.AllActionsRepository,
                 new TestUserPackageRepository(),
-                new TestRepositoryBuilder<TestRolePackageRepository, IRolePackage>().WithEntities(rolePackage1).Build(),
-                new TestRepositoryBuilder<TestGroupPackageRepository, IGroupPackage>().WithEntities(groupPackage1, groupPackage2, groupPackage3, groupPackage4).Build(),
-                new TestRepositoryBuilder<TestContractRepository, IContract>().WithEntities(contract).Build(),
+                new TestRepositoryBuilder<TestRolePackageRepository, IRolePackage>().With(rolePackage1).Build(),
+                new TestRepositoryBuilder<TestGroupPackageRepository, IGroupPackage>().With(groupPackage1, groupPackage2, groupPackage3, groupPackage4).Build(),
+                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
                 new TestContractPackageRepository()
                 );
         }
