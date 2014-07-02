@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Shared.Public.TestHelpers, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\Shared.Public.TestHelpers\bin\Debug\Shared.Public.TestHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -62,14 +70,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.Public.TestHelpers\Shared.Public.TestHelpers.csproj">
-      <Project>{6307b487-bf7e-4e41-a8d2-e1821c3a909d}</Project>
-      <Name>Shared.Public.TestHelpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
