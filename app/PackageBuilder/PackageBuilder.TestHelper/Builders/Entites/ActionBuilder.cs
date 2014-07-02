@@ -1,20 +1,30 @@
 ﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class ActionBuilder
     {
-        public static IAction Get(string name, params IDataField[] fields)
+        private string _name = "";
+        private readonly Criteria _criteria = new Criteria();
+        public IAction Build()
         {
-            return new Action(name)
+            return new Action(_name)
             {
-                Criteria = new Criteria
-                {
-                    Fields = fields
-                }
+                Criteria = _criteria
             };
+        }
+
+        public ActionBuilder With(string name)
+        {
+            _name = name;
+            return this;
+        }
+
+        public ActionBuilder With(params IDataField[] fields)
+        {
+            _criteria.Fields = fields;
+            return this;
         }
     }
 }

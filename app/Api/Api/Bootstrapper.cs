@@ -1,8 +1,14 @@
-﻿using Nancy;
+﻿using Billing.Api.Connector;
+using Billing.Api.Connector.Configuration;
+using Lace.Request.Entry;
+using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow;
+using Workflow.BuildingBlocks;
+using Workflow.RabbitMQ;
 
 namespace Api
 {
@@ -46,6 +52,21 @@ namespace Api
             container.Register<IAuthenticateUser, UmApiAuthenticator>();
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
+
+            var bus = BusFactory.CreateBus("monitor-event-tracking/queue");
+            var publisher = new Publisher(bus);
+
+            container.Register<IPublishMessages>(publisher);
+            container.Register<IEntryPoint>(new EntryPoint(publisher));
+
+            container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
+        }
+
+        protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
+        {
+            // Perform registrations that should have a request lifetime
+            base.ConfigureRequestContainer(container, context);
+
         }
     }
 }

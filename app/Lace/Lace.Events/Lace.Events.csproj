@@ -43,7 +43,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
+      <Name>Monitoring</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
       <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>

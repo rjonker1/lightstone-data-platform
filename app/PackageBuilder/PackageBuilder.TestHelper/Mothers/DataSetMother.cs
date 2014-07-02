@@ -9,7 +9,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataSetBuilder.Get("EzScore", DataFieldMother.ColourField);
+                return new DataSetBuilder().With("EzScore").With(DataFieldMother.ColourField).Build();
             }
         }
 
@@ -17,7 +17,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataSetBuilder.Get("Repair history", DataFieldMother.ColourField);
+                return new DataSetBuilder().With("Repair history").With(DataFieldMother.ColourField).Build();
             }
         }
 
@@ -25,7 +25,13 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataSetBuilder.Get("Vehicle verification", DataFieldMother.ColourField);
+                return new DataSetBuilder()
+                    .With("Vehicle verification")
+                    .With(DataFieldMother.ColourField,
+                          DataFieldMother.LicenseField, 
+                          DataFieldMother.BankNameField, 
+                          DataFieldMother.AccidentClaimsField)
+                    .Build();
             }
         }
 
@@ -33,7 +39,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataSetBuilder.Get("Driver’s license scan", DataFieldMother.ColourField);
+                return new DataSetBuilder().With("Driver’s license scan").With(DataFieldMother.ColourField).Build();
             }
         }
 
@@ -41,7 +47,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return DataSetBuilder.Get("Values", DataFieldMother.ColourField);
+                return new DataSetBuilder().With("Values").With(DataFieldMother.ColourField).Build();
             }
         }
     }

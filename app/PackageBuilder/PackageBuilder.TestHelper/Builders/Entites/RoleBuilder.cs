@@ -1,14 +1,20 @@
 ﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class RoleBuilder
     {
-        public static IRole Get(string name)
+        private string _name;
+        public IRole Build()
         {
-            return new Role(name);
+            return new Role(_name);
+        }
+
+        public RoleBuilder With(string name)
+        {
+            _name = name;
+            return this;
         }
     }
 }

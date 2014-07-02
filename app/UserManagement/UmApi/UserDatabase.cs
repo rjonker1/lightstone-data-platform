@@ -21,7 +21,7 @@ namespace UmApi
 
             return userRecord == null
                        ? null
-                       : new ApiUser (userRecord.Item1) { Claims = userRecord.Item4 };
+                       : new ApiUser (userRecord.Item1) { Id = new Guid(userRecord.Item3), Claims = userRecord.Item4 };
         }
     }
 }

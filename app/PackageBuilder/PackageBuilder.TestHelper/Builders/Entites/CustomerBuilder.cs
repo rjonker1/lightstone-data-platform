@@ -1,17 +1,43 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
+﻿using System.Linq;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class CustomerBuilder
     {
-        public static ICustomer Get(string customerName, IUser user, IContract contract)
+        private string _name;
+        private IUser[] _users = Enumerable.Empty<IUser>().ToArray();
+        private IContract[] _contracts = Enumerable.Empty<IContract>().ToArray();
+        public ICustomer Build()
         {
-            var customer = new Customer(customerName);
-            customer.Add(user);
-            customer.Add(contract);
+            var customer = new Customer(_name);
+
+            foreach (var user in _users)
+                customer.Add(user);
+
+            foreach (var contract in _contracts)
+                customer.Add(contract);
+
             return customer;
+        }
+
+        public CustomerBuilder With(string name)
+        {
+            _name = name;
+            return this;
+        }
+
+        public CustomerBuilder With(params IUser[] users)
+        {
+            _users = users;
+            return this;
+        }
+
+        public CustomerBuilder With(params IContract[] contracts)
+        {
+            _contracts = contracts;
+            return this;
         }
     }
 }

@@ -64,7 +64,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\Workflow\Workflow.csproj">
       <Project>{2338D97A-0483-4335-9609-83D8C245FD4A}</Project>
-      <Name>Workflow %28Workflow\Workflow%29</Name>
+      <Name>Workflow</Name>
     </ProjectReference>
     <ProjectReference Include="..\Billing.Api.Connector\Billing.Api.Connector.csproj">
       <Project>{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}</Project>

@@ -32,11 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\Entites\ActionBuilder.cs" />
@@ -45,6 +40,7 @@
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
     <Compile Include="Builders\Entites\DataSetBuilder.cs" />
+    <Compile Include="Builders\Entites\DataSourceBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
     <Compile Include="Builders\Entites\PackageBuilder.cs" />
@@ -52,13 +48,7 @@
     <Compile Include="Builders\Entites\RolePackageBuilder.cs" />
     <Compile Include="Builders\Entites\UserBuilder.cs" />
     <Compile Include="Builders\Entites\UserPackageBuilder.cs" />
-    <Compile Include="Builders\Repositories\ActionRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\ContractPackageRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\ContractRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\CustomerRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\GroupPackageRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\RolePackageRepositoryBuilder.cs" />
-    <Compile Include="Builders\Repositories\UserPackageRepositoryBuilder.cs" />
+    <Compile Include="Builders\Repositories\TestRepositoryBuilder.cs" />
     <Compile Include="Fakes\TestActionRepository.cs" />
     <Compile Include="Fakes\TestContractPackageRepository.cs" />
     <Compile Include="Fakes\TestContractRepository.cs" />
@@ -68,10 +58,13 @@
     <Compile Include="Fakes\TestUserPackageRepository.cs" />
     <Compile Include="Mothers\ActionMother.cs" />
     <Compile Include="Mothers\ActionRepositoryMother.cs" />
+    <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataSetMother.cs" />
+    <Compile Include="Mothers\DataSourceMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
+    <Compile Include="Mothers\UserMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,5 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
 using PackageBuilder.Domain.Contracts;
 using PackageBuilder.Domain.Entities;
 
@@ -8,9 +7,30 @@ namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class GroupPackageBuilder
     {
-        public static IGroupPackage Get(IPackage package, ICustomer customer, IGroup @group)
+        private IPackage _package;
+        private ICustomer _customer;
+        private IGroup _group;
+        public IGroupPackage Build()
         {
-            return new GroupPackage(Guid.NewGuid(), package, customer, @group, new DateTime(2014, 01, 01));
+            return new GroupPackage(Guid.NewGuid(), _package, _customer, _group, new DateTime(2014, 01, 01));
+        }
+
+        public GroupPackageBuilder With(IPackage package)
+        {
+            _package = package;
+            return this;
+        }
+
+        public GroupPackageBuilder With(ICustomer customer)
+        {
+            _customer = customer;
+            return this;
+        }
+
+        public GroupPackageBuilder With(IGroup @group)
+        {
+            _group = group;
+            return this;
         }
     }
 }

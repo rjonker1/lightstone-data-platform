@@ -80,7 +80,7 @@
       <Name>PackageBuilder.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
-      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
+      <Project>{C075E78C-8051-4CFC-A0F5-5C61BB108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">

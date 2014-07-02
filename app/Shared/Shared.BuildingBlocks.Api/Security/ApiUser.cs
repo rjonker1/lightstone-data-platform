@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
 using Nancy.Security;
 
 namespace Shared.BuildingBlocks.Api.Security
 {
-    public class ApiUser : IUserIdentity
+    public class ApiUser : IUserIdentity, IEntity
     {
         public ApiUser()
         {
@@ -15,6 +17,7 @@ namespace Shared.BuildingBlocks.Api.Security
             Claims = new List<string>();
         }
 
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         public IEnumerable<string> Claims { get; set; }
     }

@@ -185,6 +185,14 @@
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Components\Billing\Billing.Api.Connector\Billing.Api.Connector.csproj">
+      <Project>{2b2c90a8-ece9-47bd-af05-4f07133772a6}</Project>
+      <Name>Billing.Api.Connector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Workflow\Components\Billing\Billing.Api.Dtos\Billing.Api.Dtos.csproj">
+      <Project>{967db86a-e141-466d-b9c3-2abad9ff5487}</Project>
+      <Name>Billing.Api.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
       <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
       <Name>Workflow.BuildingBlocks</Name>
@@ -195,7 +203,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Workflow\Workflow\Workflow.csproj">
       <Project>{2338d97a-0483-4335-9609-83d8c245fd4a}</Project>
-      <Name>Workflow %28Workflow\Workflow%29</Name>
+      <Name>Workflow</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

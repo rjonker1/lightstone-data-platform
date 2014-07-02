@@ -8,10 +8,13 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return Builders.Entites.PackageBuilder.Get("License plate search", ActionMother.LicensePlateSearchAction,
-                    DataSetMother.VehicleVerification,
-                    DataSetMother.RepairHistory,
-                    DataSetMother.ValuesHistory);
+                return new Builders.Entites.PackageBuilder()
+                    .With("License plate search")
+                    .With(ActionMother.LicensePlateSearchAction)
+                    .With(DataSetMother.VehicleVerification,
+                          DataSetMother.RepairHistory,
+                          DataSetMother.ValuesHistory)
+                    .Build();
             }
         }
 
@@ -19,10 +22,13 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return Builders.Entites.PackageBuilder.Get("Full verification", ActionMother.AllAction, 
-                    DataSetMother.VehicleVerification, 
-                    DataSetMother.RepairHistory, 
-                    DataSetMother.ValuesHistory);
+                return new Builders.Entites.PackageBuilder()
+                    .With("Full verification")
+                    .With(ActionMother.AllAction)
+                    .With(DataSetMother.VehicleVerification,
+                          DataSetMother.RepairHistory,
+                          DataSetMother.ValuesHistory)
+                    .Build();
             }
         }
 
@@ -30,10 +36,13 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return Builders.Entites.PackageBuilder.Get("Partial verification", ActionMother.VerifyAction, 
-                    DataSetMother.VehicleVerification, 
-                    DataSetMother.LicenseScan, 
-                    DataSetMother.ValuesHistory);
+                return new Builders.Entites.PackageBuilder()
+                    .With("Partial verification")
+                    .With(ActionMother.VerifyAction)
+                    .With(DataSetMother.VehicleVerification, 
+                          DataSetMother.LicenseScan, 
+                          DataSetMother.ValuesHistory)
+                    .Build();
             }
         }
 
@@ -41,14 +50,22 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return Builders.Entites.PackageBuilder.Get("Driver’s license scan package", ActionMother.LicenseScanAction, DataSetMother.LicenseScan);
+                return new Builders.Entites.PackageBuilder()
+                    .With("Driver’s license scan package")
+                    .With(ActionMother.LicenseScanAction)
+                    .With(DataSetMother.LicenseScan)
+                    .Build();
             }
         }
         public static IPackage EzScorePackage
         {
             get
             {
-                return Builders.Entites.PackageBuilder.Get("EzScore", ActionMother.EzScoreAction, DataSetMother.EzScore);
+                return new Builders.Entites.PackageBuilder()
+                    .With("EzScore")
+                    .With(ActionMother.EzScoreAction)
+                    .With(DataSetMother.EzScore)
+                    .Build();
             }
         }
     }
