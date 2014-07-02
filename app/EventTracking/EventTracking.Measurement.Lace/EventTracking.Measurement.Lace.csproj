@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Events\EventsPublishedForLaceRequests.cs" />
     <Compile Include="Events\IShowEventsPublishedForLaceRequests.cs" />
-    <None Include="Events\KnownEventsProvider.cs.old" />
     <Compile Include="Measurements\RequestFromSourceMeasurements.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projections\ProjectionSources.cs" />

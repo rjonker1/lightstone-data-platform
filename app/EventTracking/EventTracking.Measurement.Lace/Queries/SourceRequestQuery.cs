@@ -20,6 +20,8 @@ namespace EventTracking.Measurement.Lace.Queries
         {
             var projectionResultStream = string.Format("{0}", sourceName);
 
+
+
             return _connection.ReadStreamEventsBackward<EventsPublishedForLaceRequests>(projectionResultStream);
         }
     }

@@ -11,20 +11,7 @@ namespace EventTracking.Domain.Persistence.EventStore
     {
         private readonly Func<string, Guid, string> _aggregateIdToStreamName;
         private readonly IEventStoreConnection _eventStoreConnection;
-       // private static readonly JsonSerializerSettings SerializerSettings;
-
-        //private const string CommitIdHeader = "CommitId";
-        //private const string EventClrTypeHeader = "EventClrTypeName";
-        //private const string AggregateClrTypeHeader = "AggregateClrTypeName";
-
-        //private const int WritePageSize = 500;
-        //private const int ReadPageSize = 500;
-
-        //static EventStoreRepository()
-        //{
-        //    //SerializerSettings = new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.None};
-        //}
-        
+   
         public EventStoreRepository(IEventStoreConnection eventStoreConnection)
             : this(
                 eventStoreConnection,
@@ -43,13 +30,6 @@ namespace EventTracking.Domain.Persistence.EventStore
 
         public void Write(IAggregate aggregate, Guid commitId, Action<IDictionary<string, object>> updateHeaders)
         {
-            //var commitHeaders = new Dictionary<string, object>
-            //{
-            //    {CommitIdHeader, commitId},
-            //    {AggregateClrTypeHeader, aggregate.GetType().AssemblyQualifiedName}
-            //};
-            //updateHeaders(commitHeaders);
-
             var streamName = _aggregateIdToStreamName(aggregate.Category, aggregate.Id);
             var newEvents = aggregate.GetUncommittedEvents().Cast<object>().ToList();
           

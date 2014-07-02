@@ -14,7 +14,7 @@ namespace EventTracking.Measurement
             string streamName)
         {
             var lastEventNumber = connection.GetLastEventNumber(streamName);
-
+            
             return lastEventNumber == null
                 ? new T[0]
                 : ReadResult<T>(connection, streamName, lastEventNumber.Value);
@@ -54,6 +54,5 @@ namespace EventTracking.Measurement
                 PageSize, false,
                 EventStoreCredentials.Default);
         }
-
     }
 }
