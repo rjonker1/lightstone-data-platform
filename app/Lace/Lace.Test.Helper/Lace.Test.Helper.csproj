@@ -48,6 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PackageBuilder.TestHelper">
+      <HintPath>..\..\PackageBuilder\PackageBuilder.TestHelper\bin\Debug\PackageBuilder.TestHelper.dll</HintPath>
+    </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -117,10 +120,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PackageBuilder\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
-      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
-      <Name>PackageBuilder.TestHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>

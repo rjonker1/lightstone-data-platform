@@ -58,6 +58,12 @@
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
+      <HintPath>..\..\Shared\BuildingBlocks\bin\Debug\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
@@ -70,6 +76,9 @@
     </Reference>
     <Reference Include="Nancy.ViewEngines.Razor">
       <HintPath>..\..\packages\Nancy.Viewengines.Razor.0.22.2\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Shared.BuildingBlocks.Api">
+      <HintPath>..\..\Shared\Shared.BuildingBlocks.Api\bin\Debug\Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="StackExchange.Redis, Version=1.0.281.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,20 +121,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
-      <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
-      <Name>BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
-      <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
-      <Name>Shared.BuildingBlocks.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

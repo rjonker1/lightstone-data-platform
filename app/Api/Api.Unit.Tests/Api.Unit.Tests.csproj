@@ -35,11 +35,17 @@
     <Reference Include="CsQuery">
       <HintPath>..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Testing">
       <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="Shared.BuildingBlocks.Api">
+      <HintPath>..\..\Shared\Shared.BuildingBlocks.Api\bin\Debug\Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,14 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
-      <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
-      <Name>Shared.BuildingBlocks.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Api\Api.csproj">
       <Project>{b4f9c525-5c56-440e-b4c2-972a33d7c8cd}</Project>
       <Name>Api</Name>
