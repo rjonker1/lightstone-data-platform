@@ -37,12 +37,12 @@ namespace EventTracking.Measurement
                 : "link: " + linkedStream;
         }
 
-        private bool IsSystemStream(string linkedStream)
+        private static bool IsSystemStream(string linkedStream)
         {
             return linkedStream != null && linkedStream.StartsWith("$");
         }
 
-        private void Dropped(EventStoreSubscription subscription, SubscriptionDropReason subscriptionDropReason, Exception exception)
+        private static void Dropped(EventStoreSubscription subscription, SubscriptionDropReason subscriptionDropReason, Exception exception)
         {
             var message = string.Format("Subscription {0} dropped: {1} (Recovery currently not implemented){2}{3}",
                 subscription.StreamId, subscriptionDropReason, Environment.NewLine, exception);
