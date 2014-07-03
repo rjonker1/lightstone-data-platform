@@ -67,12 +67,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PackageResolution\when_user4_envokes_partial_action.cs" />
+    <Compile Include="PackageResolution\when_user5_belonging_to_group3_invokes_full_action.cs" />
+    <Compile Include="PackageResolution\when_user5_belonging_to_group3_and_role1_invokes_partial_action.cs" />
+    <Compile Include="PackageResolution\when_user_belonging_to_group1_invokes_license_scan_action.cs" />
+    <Compile Include="PackageResolution\when_user_belonging_to_group2_invokes_ezscore_action.cs" />
+    <Compile Include="PackageResolution\when_user_belonging_to_group2_invokes_partial_verification_action.cs" />
+    <Compile Include="PackageResolution\when_user_belonging_to_group3_invokes_full_action.cs" />
+    <Compile Include="PackageResolution\when_user_belonging_to_wesbank_customer_invokes_verify_action.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fakes\TestBootstrapper.cs" />
-    <Compile Include="when_envoking_action_authorized.cs" />
-    <Compile Include="when_envoking_action_unauthorized.cs" />
-    <Compile Include="when_envoking_metadata_authorized.cs" />
-    <Compile Include="when_envoking_metadata_unauthorized.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

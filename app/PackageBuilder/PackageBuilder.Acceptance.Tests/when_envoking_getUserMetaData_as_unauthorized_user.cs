@@ -1,12 +1,12 @@
 ﻿using DataPlatform.Shared.Dtos;
 using Nancy;
 using Nancy.Testing;
-using PackageBuilder.Unit.Tests.Fakes;
+using PackageBuilder.Acceptance.Tests.Fakes;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Unit.Tests
+namespace PackageBuilder.Acceptance.Tests
 {
-    public class when_envoking_action_unauthorized : Specification
+    public class when_envoking_getUserMetaData_as_unauthorized_user : Specification
     {
         private readonly Browser _browser = new Browser(new TestBootstrapper("admin"));
         private BrowserResponse _response;
@@ -14,7 +14,7 @@ namespace PackageBuilder.Unit.Tests
 
         public override void Observe()
         {
-            _response = _browser.Get(System.Uri.EscapeDataString("/package/License plate search"), with =>
+            _response = _browser.Get("/getUserMetaData", with =>
             {
                 with.HttpRequest();
             });

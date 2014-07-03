@@ -3,26 +3,26 @@ using PackageBuilder.Domain.Contracts;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests
+namespace PackageBuilder.Unit.Tests.PackageResolution
 {
-    public class when_user_belonging_to_group2_envokes_ezscore_action : Specification
+    public class when_user_belonging_to_group2_invokes_partial_verification_action : Specification
     {
         private readonly IPackageLookupRepository _packageLookupRepository;
         private IPackage _package;
-        public when_user_belonging_to_group2_envokes_ezscore_action()
+        public when_user_belonging_to_group2_invokes_partial_verification_action()
         {
             _packageLookupRepository = PackageLookupMother.GetAcmeScenario();
         }
 
         public override void Observe()
         {
-            _package = _packageLookupRepository.Get("user2", "Get EzScore");
+            _package = _packageLookupRepository.Get("user2", "Partial");
         }
 
         [Observation]
-        public void then_should_return_license_scan_package()
+        public void package_is_returned()
         {
-            _package.Name.ShouldEqual("EzScore");
+            _package.Name.ShouldEqual("Partial verification");
         }
     }
 }

@@ -3,7 +3,7 @@ using PackageBuilder.Domain.Contracts;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests
+namespace PackageBuilder.Unit.Tests.PackageResolution
 {
     public class when_user_belonging_to_wesbank_customer_invokes_verify_action : Specification
     {
@@ -20,7 +20,7 @@ namespace PackageBuilder.Acceptance.Tests
         }
 
         [Observation]
-        public void then_should_return_verfify_package()
+        public void package_is_returned()
         {
             _package.Name.ShouldEqual("Partial verification");
         }

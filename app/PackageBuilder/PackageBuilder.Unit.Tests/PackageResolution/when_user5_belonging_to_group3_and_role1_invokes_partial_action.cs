@@ -3,24 +3,24 @@ using PackageBuilder.Domain.Contracts;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests
+namespace PackageBuilder.Unit.Tests.PackageResolution
 {
-    public class when_user4_envokes_partial_action : Specification
+    public class when_user5_belonging_to_group3_and_role1_invokes_partial_action : Specification
     {
         private readonly IPackageLookupRepository _packageLookupRepository;
         private IPackage _package;
-        public when_user4_envokes_partial_action()
+        public when_user5_belonging_to_group3_and_role1_invokes_partial_action()
         {
             _packageLookupRepository = PackageLookupMother.GetAcmeScenario();
         }
 
         public override void Observe()
         {
-            _package = _packageLookupRepository.Get("user4", "Partial");
+            _package = _packageLookupRepository.Get("user5", "Partial");
         }
 
         [Observation]
-        public void then_should_return_license_scan_package()
+        public void package_is_returned()
         {
             _package.Name.ShouldEqual("Partial verification");
         }
