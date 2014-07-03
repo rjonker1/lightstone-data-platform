@@ -38,7 +38,7 @@ namespace Lace.Request.Entry
                 _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
 
-                _sourceChain = new CreateSourceChain(request.Package.Action);
+                _sourceChain = new CreateSourceChain(request.Package);
                 _sourceChain.Build();
 
                 if (_sourceChain.SourceChain == null)

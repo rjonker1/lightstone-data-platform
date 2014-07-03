@@ -30,7 +30,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);
 
 
-            _buildSourceChain = new CreateSourceChain(_request.Package.Action);
+            _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();
 
 

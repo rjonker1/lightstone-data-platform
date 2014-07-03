@@ -15,7 +15,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         private readonly ILaceRequest _request;
 
-        public FakeAudatexSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public FakeAudatexSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
+            IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -35,11 +36,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                     new FakeCallingAudatexExternalWebService(_request));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.AudatexResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                if (response.AudatexResponse == null)
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

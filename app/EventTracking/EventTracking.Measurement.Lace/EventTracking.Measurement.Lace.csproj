@@ -48,7 +48,7 @@
     <Compile Include="Projections\ProjectionSources.cs" />
     <Compile Include="Projections\ExternalSourceEventInformationProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\SourceRequestQuery.cs" />
+    <Compile Include="Queries\ExternalSourceRequestQuery.cs" />
     <Compile Include="Results\BuildMeasurementResults.cs" />
     <Compile Include="Results\SourceRequestsExecutionTimes.cs" />
   </ItemGroup>
@@ -83,7 +83,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Projections\Sources\ExternalSourceEventInformation.js">
+    <EmbeddedResource Include="Projections\Sources\ExternalSourceEventRead.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

@@ -11,8 +11,8 @@
 
         public void Ensure()
         {
-            var projectionSource = ProjectionSources.Read("ExternalSourceEventInformation");
-            _projectionContext.EnsureProjection("ExternalSourceEventInformation", projectionSource);
+            var projectionSource = ProjectionSources.Read("ExternalSourceEventRead");
+            _projectionContext.EnsureProjection("ExternalSourceEventRead", projectionSource);
         }
 
     }

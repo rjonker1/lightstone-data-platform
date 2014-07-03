@@ -2,7 +2,7 @@
 
 namespace EventTracking.Measurement.Lace.Events
 {
-    public class EventsPublishedForLaceRequests : IShowEventsPublishedForLaceRequests
+    public class ExternalSourceEventRead : IShowEventsPublishedForLaceRequests
     {
         public Guid Id { get;  set; }
         public Guid AggregateId { get;  set; }

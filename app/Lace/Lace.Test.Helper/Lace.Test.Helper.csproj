@@ -77,7 +77,6 @@
     <Compile Include="Fakes\Lace\Consumer\FakeAudatexSourceExecution.cs" />
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
-    <None Include="Fakes\Lace\FakeLaceLoader.cs.old" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
