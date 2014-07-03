@@ -12,15 +12,15 @@ namespace EventTracking.Measurement.Lace.Measurements
     {
 
         private readonly IProjectionContext _projectionContext;
-        private readonly EventsPublishedForLaceRequests _projection;
-        private readonly SourceRequestQuery _query;
+        private readonly ExternalSourceEventRead _projection;
+        private readonly ExternalSourceRequestQuery _query;
 
         private readonly EventReader _eventReader;
 
         private readonly ExternalSourceEventInformationProjection _sourceRequestsProjection;
 
-        public RequestFromSourceMeasurements(IProjectionContext context, EventsPublishedForLaceRequests projection,
-            EventReader reader, SourceRequestQuery query,
+        public RequestFromSourceMeasurements(IProjectionContext context, ExternalSourceEventRead projection,
+            EventReader reader, ExternalSourceRequestQuery query,
             ExternalSourceEventInformationProjection sourceRequestsProjection)
         {
             _projectionContext = context;
@@ -34,16 +34,16 @@ namespace EventTracking.Measurement.Lace.Measurements
         public void Run()
         {
            
-            ShowRequestDetails();
+          //  ShowRequestDetails();
 
             EnsureProjections();
 
             _eventReader.StartReading();
 
-            Console.WriteLine("\nPress ANY key to stop reading and show results\n");
-            Console.ReadKey();
+            //Console.WriteLine("\nPress ANY key to stop reading and show results\n");
+            //Console.ReadKey();
 
-            Stop();
+            //Stop();
 
             ShowRequestDetails();
 
@@ -68,20 +68,32 @@ namespace EventTracking.Measurement.Lace.Measurements
 
         private void ShowRequestDetails()
         {
-            Console.WriteLine("Get Request Details");
+            _query.SubscriveToEvent(ShowEvent);
 
-            ShowRequestDetails("externalSourceInformation");
-            //add other projections / streams
+
+            var value = _query.GetValue();
+            Console.WriteLine("External Source  Details: {0}", value);
+
+            //Console.WriteLine("Get Request Details");
+
+            //ShowRequestDetails("externalSourceInformation");
+            ////add other projections / streams
         }
 
-        private void ShowRequestDetails(string name)
+        //private void ShowRequestDetails(string name)
+        //{
+        //    _query.SubscriveToEvent(ShowEvent);
+
+
+        //    var value = _query.GetValue();
+        //    Console.WriteLine("External Source  Details: {0}", value);
+
+        //}
+
+        private void ShowEvent(ExternalSourceEventRead read)
         {
-            var values = _query.GetValues(name);
-            Console.WriteLine("Request Details: {0}", name);
-
-            ShowRequestExecutionTimes(values);
+            Console.WriteLine("External Source Event: {0}", read);
         }
-
 
         private void ShowRequestExecutionTimes(
             IEnumerable<IShowEventsPublishedForLaceRequests> projectionResults)

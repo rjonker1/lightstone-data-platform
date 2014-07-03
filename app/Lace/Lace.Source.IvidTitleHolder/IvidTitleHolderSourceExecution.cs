@@ -29,14 +29,15 @@ namespace Lace.Source.IvidTitleHolder
             }
             else
             {
-                var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(), new CallIvidTitleHolderExternalSource(_request));
+                var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
+                    new CallIvidTitleHolderExternalSource(_request));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.IvidTitleHolderResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                if (response.IvidTitleHolderResponse == null)
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

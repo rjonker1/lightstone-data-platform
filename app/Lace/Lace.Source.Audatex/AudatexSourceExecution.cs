@@ -8,11 +8,12 @@ using Lace.Source.Enums;
 
 namespace Lace.Source.Audatex
 {
-    public class AudatexSourceExecution :ExecuteSourceBase, IExecuteTheSource
+    public class AudatexSourceExecution : ExecuteSourceBase, IExecuteTheSource
     {
         private readonly ILaceRequest _request;
 
-        public AudatexSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public AudatexSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
+            IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -31,11 +32,11 @@ namespace Lace.Source.Audatex
                 var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexSource(_request));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.AudatexResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                if (response.AudatexResponse == null)
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
         }
 
         private static void NotHandledResponse(ILaceResponse response)

@@ -11,7 +11,7 @@ namespace EventTracking.Measurement.Lace
         static void Main(string[] args)
         {
             var projectionContext = new ProjectionContext();
-            var sourceRequestType = new EventsPublishedForLaceRequests();
+            var sourceRequestType = new ExternalSourceEventRead();
 
             var connection = ConnectionFactory.Default();
 
@@ -19,7 +19,7 @@ namespace EventTracking.Measurement.Lace
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                new SourceRequestQuery(connection), new ExternalSourceEventInformationProjection(projectionContext));
+                new ExternalSourceRequestQuery(connection, projectionContext), new ExternalSourceEventInformationProjection(projectionContext));
 
             measurements.Run();
         }
