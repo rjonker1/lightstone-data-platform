@@ -60,9 +60,6 @@
     <Compile Include="Projections\ProjectionSources.cs" />
     <Compile Include="Projections\ExternalSourceEventDetectorProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\ExternalSourceExecutionDetectedQuery.cs" />
-    <Compile Include="Results\BuildMeasurementResults.cs" />
-    <Compile Include="Results\SourceRequestsExecutionTimes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

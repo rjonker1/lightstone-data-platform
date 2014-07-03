@@ -23,7 +23,7 @@ namespace Lace.Test.Helper.Builders.Requests
                                 new DataField {Name = "Registration", DataSource = new RegistrationFieldSource()},
                                 new DataField {Name = "Vin", DataSource = new VinFieldSource()},
                                 new DataField {Name = "Engine", DataSource = new EngineFieldSource()},
-                                new DataField {Name = " MakeDescription", DataSource = new MakeDescriptionFiledSource()}
+                                new DataField {Name = "MakeDescription", DataSource = new MakeDescriptionFiledSource()}
                             }
                         }
                     },

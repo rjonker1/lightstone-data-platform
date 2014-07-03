@@ -10,7 +10,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer IvidSourceCallStarting(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.Ivid,
-                PublishableLaceMessages.StartCallingExternalSource());
+                PublishableLaceMessages.StartCallingExternalSource(),1);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -23,7 +23,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer IvidSourceCallEnded(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.Ivid,
-                PublishableLaceMessages.EndCallingExternalSource());
+                PublishableLaceMessages.EndCallingExternalSource(),2);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -37,7 +37,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer IvidTitleHolderCallStarting(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.IvidTitleHolder,
-                PublishableLaceMessages.StartCallingExternalSource());
+                PublishableLaceMessages.StartCallingExternalSource(),1);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -50,7 +50,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer IvidTitleHolderSourceCallEnded(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.IvidTitleHolder,
-                PublishableLaceMessages.EndCallingExternalSource());
+                PublishableLaceMessages.EndCallingExternalSource(),2);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -64,7 +64,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer RgtVinSourceCallStarting(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.RgtVin,
-                PublishableLaceMessages.StartCallingExternalSource());
+                PublishableLaceMessages.StartCallingExternalSource(),1);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -77,7 +77,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer RgtVinSourceSourceCallEnded(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.RgtVin,
-                PublishableLaceMessages.EndCallingExternalSource());
+                PublishableLaceMessages.EndCallingExternalSource(),2);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -90,7 +90,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer AudatexSourceCallStarting(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.Audatex,
-                PublishableLaceMessages.StartCallingExternalSource());
+                PublishableLaceMessages.StartCallingExternalSource(),1);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -103,7 +103,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceExecutedConsumer AudatexSourceSourceCallEnded(Guid aggregateId, ExternalSourceExecutedConsumer consumer)
         {
             var message = new LaceExternalSourceExecutionEventMessage(aggregateId, LaceEventSource.Audatex,
-                PublishableLaceMessages.EndCallingExternalSource());
+                PublishableLaceMessages.EndCallingExternalSource(),2);
 
             if (consumer == null)
                 consumer = new ExternalSourceExecutedConsumer();
@@ -116,7 +116,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceConsumer ReturnResponseFromLace(Guid aggregateId, ExternalSourceConsumer consumer)
         {
             var message = new LaceExternalSourceEventMessage(aggregateId, LaceEventSource.Initialization,
-               PublishableLaceMessages.LaceProcessedRequestAndResturnedResponse());
+               PublishableLaceMessages.LaceProcessedRequestAndResturnedResponse(),0);
 
             if (consumer == null)
                 consumer = new ExternalSourceConsumer();
@@ -129,7 +129,7 @@ namespace EventTracking.Tests.Helper.Mother.Monitoring
         public static ExternalSourceConsumer ReciveRequestIntoLace(Guid aggregateId, ExternalSourceConsumer consumer)
         {
             var message = new LaceExternalSourceEventMessage(aggregateId, LaceEventSource.EntryPoint,
-               PublishableLaceMessages.LaceReceivedRequestStarted());
+               PublishableLaceMessages.LaceReceivedRequestStarted(),1);
 
             if (consumer == null)
                 consumer = new ExternalSourceConsumer();

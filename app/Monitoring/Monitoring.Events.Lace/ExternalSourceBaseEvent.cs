@@ -10,5 +10,6 @@ namespace Monitoring.Events.Lace
         public string Message { get; protected set; }
         public DateTime EventDate { get; protected set; }
         public string Category { get; protected set; }
+        public int Order { get; protected set; }
     }
 }

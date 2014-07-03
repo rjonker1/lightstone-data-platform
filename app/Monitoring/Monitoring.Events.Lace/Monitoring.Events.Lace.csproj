@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExternalSourceExecutedEvent.cs" />
     <Compile Include="ExternalSourceBaseEvent.cs" />
     <Compile Include="ExternalSourceConfigurationEvent.cs" />
     <Compile Include="ExternalSourceEvent.cs" />

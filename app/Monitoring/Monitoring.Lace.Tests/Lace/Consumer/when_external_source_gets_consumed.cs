@@ -21,16 +21,16 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         [Observation]
         public void monitoring_lace_external_source_conumer_consumed_must_be_true()
         {
-            var message = new LaceExternalSourceEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.StartCallingExternalSource() );
+            var message = new LaceExternalSourceExecutionEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
+                PublishableLaceMessages.StartCallingExternalSource(),1);
 
-            var consumer = new ExternalSourceConsumer();
+            var consumer = new ExternalSourceExecutedConsumer();
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
 
 
-            message = new LaceExternalSourceEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-               PublishableLaceMessages.EndCallingExternalSource());
+            message = new LaceExternalSourceExecutionEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
+               PublishableLaceMessages.EndCallingExternalSource(),2);
 
            // consumer = new ExternalSourceConsumer();
             consumer.Consume(message);
@@ -42,7 +42,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_configuration_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceConfigurationEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.StartConfigurationForExternalSource());
+                PublishableLaceMessages.StartConfigurationForExternalSource(),1);
 
             var consumer = new ExternalSourceConfigurationConsumer();
             consumer.Consume(message);
@@ -53,7 +53,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_failed_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceFailedEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-               PublishableLaceMessages.ExternalSourceCallFailed());
+               PublishableLaceMessages.ExternalSourceCallFailed(),0);
 
             var consumer = new ExternalSourceFailedConsumer();
             consumer.Consume(message);
@@ -64,7 +64,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_handled_consumer_consumed_must_be_truee()
         {
             var message = new LaceSourceHandledEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.ExternalSourceIsBeingHandled());
+                PublishableLaceMessages.ExternalSourceIsBeingHandled(),0);
 
             var consumer = new ExternalSourceHandledConsumer();
             consumer.Consume(message);
@@ -75,7 +75,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_no_response_received_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceNoResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.NoResponseReceivedFromExternalSource());
+                PublishableLaceMessages.NoResponseReceivedFromExternalSource(),0);
 
             var consumer = new ExternalSourceNoResponseReceivedConsumer();
             consumer.Consume(message);
@@ -86,7 +86,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_response_received_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.ResponseReceivedFromExternalSource(), string.Empty);
+                PublishableLaceMessages.ResponseReceivedFromExternalSource(), string.Empty,2);
 
             var consumer = new ExternalSourceReceivedResponseConsumer();
             consumer.Consume(message);
@@ -97,7 +97,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_request_sent_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceRequestEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-               PublishableLaceMessages.RequestSentToExternalSource(), string.Empty);
+               PublishableLaceMessages.RequestSentToExternalSource(), string.Empty,1);
 
             var consumer = new ExternalSourceSentRequestsConsumer();
             consumer.Consume(message);
@@ -108,7 +108,7 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_response_transformed_consumer_consumed_must_true()
         {
             var message = new LaceTransformResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.TransformingResponseFromExternalSourceHasStarted());
+                PublishableLaceMessages.TransformingResponseFromExternalSourceHasStarted(),1);
 
             var consumer = new ExternalSourceTransformationConsumer();
             consumer.Consume(message);

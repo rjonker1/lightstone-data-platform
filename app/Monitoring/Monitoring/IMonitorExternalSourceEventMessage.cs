@@ -5,7 +5,7 @@ using Monitoring.Sources.Lace;
 
 namespace Monitoring
 {
-    public interface IMonitorExternalSourceEventMessage :  IPublishableMessage
+    public interface IMonitorExternalSourceEventMessage : IPublishableMessage
     {
         Guid Id { get; }
 
@@ -14,5 +14,6 @@ namespace Monitoring
         string Message { get; }
         DateTime EventDate { get; }
         string Category { get; }
+        int Order { get; }
     }
 }
