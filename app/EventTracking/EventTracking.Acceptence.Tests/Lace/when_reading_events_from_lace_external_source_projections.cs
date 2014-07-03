@@ -15,26 +15,26 @@ namespace EventTracking.Acceptence.Tests
         private readonly EventReader _eventReader;
         private readonly IProjectionContext _projectionContext;
         private readonly IEventStoreConnection _connection;
-        private readonly ExternalSourceEventInformationProjection _sourceRequestsProjection;
-        private const string StreamCategoryName = "ExternalSourceEvent";
+        private readonly ExternalSourceEventDetectorProjection _sourceRequestsProjection;
+        private const string StreamCategoryName = "ExternalSourceEvents";
 
 
         public when_reading_events_from_lace_external_source_projections()
         {
             _projectionContext = new ProjectionContext();
-            _sourceRequestsProjection = new ExternalSourceEventInformationProjection(_projectionContext);
+            _sourceRequestsProjection = new ExternalSourceEventDetectorProjection(_projectionContext);
             _connection = ConnectionFactory.Default();
             _eventReader = new EventReader(_connection);
         }
 
         public override void Observe()
         {
-            _projectionContext.EnableProjection("$by_category");
-            _projectionContext.EnableProjection("$stream_by_category");
+            //_projectionContext.EnableProjection("$by_category");
+            //_projectionContext.EnableProjection("$stream_by_category");
 
-            _sourceRequestsProjection.Ensure();
+            //_sourceRequestsProjection.Ensure();
 
-            _eventReader.StartReading();
+            //_eventReader.StartReading();
         }
 
         [Observation]

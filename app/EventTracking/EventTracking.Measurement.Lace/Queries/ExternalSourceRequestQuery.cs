@@ -22,7 +22,7 @@ namespace EventTracking.Measurement.Lace.Queries
             return _projectionContext.GetState<ExternalSourceEventRead>("ExternalSourceEventRead");
         }
 
-        public void SubscriveToEvent(Action<ExternalSourceEventRead> readEvent)
+        public void SubscribeToEvent(Action<ExternalSourceEventRead> readEvent)
         {
             _connection.SubscribeToStream("$projections-ExternalSourceEventRead-result", false,
                 (s, @event) => EventReader(s, @event, readEvent), Dropped, EventStoreCredentials.Default);

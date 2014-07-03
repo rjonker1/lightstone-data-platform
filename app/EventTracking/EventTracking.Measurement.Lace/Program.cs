@@ -3,12 +3,13 @@ using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Measurements;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
+using Workflow.BuildingBlocks;
 
 namespace EventTracking.Measurement.Lace
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var projectionContext = new ProjectionContext();
             var sourceRequestType = new ExternalSourceEventRead();
@@ -19,11 +20,11 @@ namespace EventTracking.Measurement.Lace
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                new ExternalSourceRequestQuery(connection, projectionContext), new ExternalSourceEventInformationProjection(projectionContext));
+                new ExternalSourceRequestQuery(connection, projectionContext),
+                new ExternalSourceEventDetectorProjection(projectionContext),
+                new ExternalSourceEventPublisher(connection, BusFactory.CreateBus("")));
 
             measurements.Run();
         }
-
-
     }
 }
