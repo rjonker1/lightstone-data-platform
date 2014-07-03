@@ -20,7 +20,7 @@ namespace EventTracking.Measurement.Lace
 
 
             var measurements = new RequestFromSourceMeasurements(projectionContext, sourceRequestType, eventReader,
-                new ExternalSourceRequestQuery(connection, projectionContext),
+                new ExternalSourceExecutionDetectedQuery(connection, projectionContext),
                 new ExternalSourceEventDetectorProjection(projectionContext),
                 new ExternalSourceEventPublisher(connection, BusFactory.CreateBus("")));
 

@@ -5,13 +5,13 @@ using EventTracking.Measurement.Lace.Events;
 
 namespace EventTracking.Measurement.Lace.Queries
 {
-    public class ExternalSourceRequestQuery
+    public class ExternalSourceExecutionDetectedQuery
     {
 
         private readonly IEventStoreConnection _connection;
         private readonly IProjectionContext _projectionContext;
 
-        public ExternalSourceRequestQuery(IEventStoreConnection connection, IProjectionContext projectionContext)
+        public ExternalSourceExecutionDetectedQuery(IEventStoreConnection connection, IProjectionContext projectionContext)
         {
             _connection = connection;
             _projectionContext = projectionContext;
@@ -24,7 +24,7 @@ namespace EventTracking.Measurement.Lace.Queries
 
         public void SubscribeToEvent(Action<ExternalSourceEventRead> readEvent)
         {
-            _connection.SubscribeToStream("$projections-ExternalSourceEventRead-result", false,
+            _connection.SubscribeToStream("ExternalSourceEvents", false,
                 (s, @event) => EventReader(s, @event, readEvent), Dropped, EventStoreCredentials.Default);
         }
 

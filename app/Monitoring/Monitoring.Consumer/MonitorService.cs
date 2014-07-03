@@ -18,7 +18,7 @@ namespace Monitoring.Consumer
             var container = new WindsorContainer().Install(FromAssembly.This());
             _bus = new BusFactory().CreateBus("monitor-event-tracking/queue", container);
 
-            _log.DebugFormat("Billing monitoring started");
+            _log.DebugFormat("monitoring started");
         }
 
         public void Stop()

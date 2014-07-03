@@ -1,24 +1,23 @@
-﻿using System;
-using Monitoring.Sources.Lace;
+﻿using Monitoring.Sources.Lace;
 
 namespace Lace.Events
 {
     public interface ILaceExternalSourceEvent
     {
-        void PublishStartServiceConfigurationMessage(LaceEventSource source);
+        void PublishStartSourceConfigurationMessage(LaceEventSource source);
 
-        void PublishEndServiceConfigurationMessage(LaceEventSource source);
+        void PublishEndSourceConfigurationMessage(LaceEventSource source);
 
-        void PublishStartServiceCallMessage(LaceEventSource source);
+        void PublishStartSourceCallMessage(LaceEventSource source);
 
-        void PublishEndServiceCallMessage(LaceEventSource source);
+        void PublishEndSourceCallMessage(LaceEventSource source);
 
-        void PublishFailedServiceCallMessaage(LaceEventSource source);
+        void PublishFailedSourceCallMessaage(LaceEventSource source);
 
-        void PublishNoResponseFromServiceMessage(LaceEventSource source);
+        void PublishNoResponseFromSourceMessage(LaceEventSource source);
 
-        void PublishServiceRequestMessage(LaceEventSource source, string request);
+        void PublishSourceRequestMessage(LaceEventSource source, string request);
 
-        void PublishServiceResponseMessage(LaceEventSource source, string response);
+        void PublishSourceResponseMessage(LaceEventSource source, string response);
     }
 }
