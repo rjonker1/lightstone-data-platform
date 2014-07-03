@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using DataPlatform.Shared.Dtos;
 using Nancy.Testing;
-using PackageBuilder.Unit.Tests.Fakes;
+using PackageBuilder.Acceptance.Tests.Fakes;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Unit.Tests
+namespace PackageBuilder.Acceptance.Tests
 {
-    public class when_envoking_metadata_authorized : Specification
+    public class when_envoking_getUserMetaData_as_authorized_user : Specification
     {
         private readonly Browser _browser = new Browser(new TestBootstrapper("admin"));
         private BrowserResponse _response;

@@ -3,26 +3,26 @@ using PackageBuilder.Domain.Contracts;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Acceptance.Tests
+namespace PackageBuilder.Unit.Tests.PackageResolution
 {
-    public class when_user5_belonging_to_group3_and_role1 : Specification
+    public class when_user_belonging_to_group3_invokes_full_action : Specification
     {
         private readonly IPackageLookupRepository _packageLookupRepository;
         private IPackage _package;
-        public when_user5_belonging_to_group3_and_role1()
+        public when_user_belonging_to_group3_invokes_full_action()
         {
             _packageLookupRepository = PackageLookupMother.GetAcmeScenario();
         }
 
         public override void Observe()
         {
-            _package = _packageLookupRepository.Get("user5", "Partial");
+            _package = _packageLookupRepository.Get("user3", "Full");
         }
 
         [Observation]
-        public void then_should_return_license_scan_package()
+        public void package_is_returned()
         {
-            _package.Name.ShouldEqual("Partial verification");
+            _package.Name.ShouldEqual("Full verification");
         }
     }
 }
