@@ -41,6 +41,10 @@
     <Reference Include="Nancy.Testing">
       <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
     </Reference>
+    <Reference Include="Shared.BuildingBlocks.Api, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\Shared.BuildingBlocks.Api\bin\Debug\Shared.BuildingBlocks.Api.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -67,10 +71,6 @@
     <Folder Include="Fakes\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj">
-      <Project>{5d425d49-ae4e-4eb0-98ff-c263ea3b7976}</Project>
-      <Name>Shared.BuildingBlocks.Api</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UmApi\UmApi.csproj">
       <Project>{ae74ab7b-a81a-4479-8e82-ff539682a852}</Project>
       <Name>UmApi</Name>
