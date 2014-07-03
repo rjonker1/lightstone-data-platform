@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using EventTracking.Measurement.Lace.Events;
+using EasyNetQ;
+using EventStore.ClientAPI;
+using EventTracking.Measurement.Dto;
 using EventTracking.Measurement.Lace.Projections;
-using EventTracking.Measurement.Lace.Queries;
-using EventTracking.Measurement.Lace.Results;
+using EventTracking.Measurement.Repository;
 using EventTracking.Tests.Helper.Builder.Lace;
 
 namespace EventTracking.Measurement.Lace.Measurements
@@ -13,24 +13,21 @@ namespace EventTracking.Measurement.Lace.Measurements
     {
 
         private readonly IProjectionContext _projectionContext;
-        private readonly ExternalSourceEventRead _projection;
-        private readonly ExternalSourceExecutionDetectedQuery _query;
+     
         private readonly ExternalSourceEventPublisher _externalSourceEventPublisher;
 
         private readonly EventReader _eventReader;
 
         private readonly ExternalSourceEventDetectorProjection _sourceRequestsProjection;
 
-        public RequestFromSourceMeasurements(IProjectionContext context, ExternalSourceEventRead projection,
-            EventReader reader, ExternalSourceExecutionDetectedQuery query,
-            ExternalSourceEventDetectorProjection sourceRequestsProjection, ExternalSourceEventPublisher externalSourceEventPublisher)
+        private static readonly IRepository<ExternalSourceExecutionResultDto> Repository = new FakeSourceExecutionRepository();
+
+        public RequestFromSourceMeasurements(IEventStoreConnection connection, IProjectionContext context, IBus bus)
         {
             _projectionContext = context;
-            _projection = projection;
-            _eventReader = reader;
-            _query = query;
-            _sourceRequestsProjection = sourceRequestsProjection;
-            _externalSourceEventPublisher = externalSourceEventPublisher;
+            _eventReader = new EventReader(connection);
+            _sourceRequestsProjection = new ExternalSourceEventDetectorProjection(_projectionContext);
+            _externalSourceEventPublisher = new ExternalSourceEventPublisher(connection, bus, Repository);
         }
 
 
@@ -42,7 +39,7 @@ namespace EventTracking.Measurement.Lace.Measurements
             _eventReader.StartReading();
 
 #if DEBUG
-            new MonitoringEventsBuilder().ForExternalSourceEvents();
+           new MonitoringEventsBuilder().ForExternalSourceEvents();
 #endif
 
             Console.WriteLine("\nPress ANY key to stop reading and show results\n");
@@ -50,14 +47,13 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             Stop();
 
-            //  ShowRequestDetails();
+            ShowRequestDetails();
 
             Console.WriteLine("Press ANY key exit");
             Console.ReadKey();
 
         }
-
-
+        
         private void Stop()
         {
             _externalSourceEventPublisher.Stop();
@@ -73,90 +69,36 @@ namespace EventTracking.Measurement.Lace.Measurements
             _externalSourceEventPublisher.Start();
         }
 
-        //private void ShowRequestDetails()
-        //{
-        //    _query.SubscribeToEvent(ShowEvent);
 
-
-        //    var value = _query.GetValue();
-        //    Console.WriteLine("External Source  Details: {0}", value);
-
-        //    //Console.WriteLine("Get Request Details");
-
-        //    //ShowRequestDetails("externalSourceInformation");
-        //    ////add other projections / streams
-        //}
-
-        //private void ShowRequestDetails(string name)
-        //{
-        //    _query.SubscriveToEvent(ShowEvent);
-
-
-        //    var value = _query.GetValue();
-        //    Console.WriteLine("External Source  Details: {0}", value);
-
-        //}
-
-        private void ShowEvent(ExternalSourceEventRead read)
+        private void ShowRequestDetails()
         {
-            Console.WriteLine("External Source Event: {0}", read);
-        }
+            var results = Repository.GetAll();
 
-        private void ShowRequestExecutionTimes(
-            IEnumerable<IShowEventsPublishedForLaceRequests> projectionResults)
-        {
+            if (results == null || !results.Any()) return;
 
-            var values = BuildMeasurementResults.ForSourceExecutionTimes(projectionResults);
-
-            var grouped = values.GroupBy(g => g.AggregateId, times => times, (guid, elements) => new
+            var grouped = results.GroupBy(g => g.AggregateId, times => times, (guid, elements) => new
             {
                 AggregateId = guid,
                 times = elements
             }).ToList();
 
-            foreach (var f in grouped)
+            foreach (var source in grouped)
             {
-                Console.WriteLine("--------------------------------\n");
-                Console.WriteLine("Aggregate - {0}", f.AggregateId);
-
-                var groupedTimes = f.times
-                    .GroupBy(g => g.Source, times => times, (key, elements) => new
-                    {
-                        Source = key,
-                        times = elements
-
-                    }).ToList();
-
-
-                foreach (var groupedTime in groupedTimes)
+                foreach (var sourceTime in source.times.OrderBy(o => o.Order))
                 {
-
-                    foreach (var ft in groupedTime.times)
-                    {
-                        Console.WriteLine("  - {0}", ft.ToString());
-                    }
-
-                    if(!groupedTime.times.Any(w => w.IsExternalSourceCall)) continue;
-
-
-                    var startTime = groupedTime.times.FirstOrDefault(w => w.StartTime.HasValue) == null
-                        ? DateTime.MinValue
-                        : groupedTime.times.FirstOrDefault(w => w.StartTime.HasValue).StartTime.Value;
-
-                    var endTime = groupedTime.times.FirstOrDefault(w => w.EndTime.HasValue) == null
-                        ? DateTime.MinValue
-                        : groupedTime.times.FirstOrDefault(w => w.EndTime.HasValue).EndTime.Value;
-
-                    var execTimes = SetExecutionTime(startTime, endTime);
-
-                    Console.WriteLine(execTimes == null ? "" : "  -- Execution Time {0}\n", execTimes);
+                    Console.WriteLine("{0} {1} {2}", sourceTime.AggregateId, sourceTime.Source, sourceTime.TimeStamp);
                 }
 
-                Console.WriteLine("--------------------------------\n");
+                //Console.WriteLine("Execution Start Time: {0}", source.times.Single(s => s.ExecutionStartTime != null).ExecutionStartTime.Value);
+                //Console.WriteLine("Execution End Time: {0}", source.times.Single(s => s.ExecutionEndTime != null).ExecutionEndTime.Value);
+                //Console.WriteLine("Total Execution Time: {0}", SetExecutionTime(source.times.Single(s => s.ExecutionStartTime != null).ExecutionStartTime.Value, source.times.Single(s => s.ExecutionEndTime != null).ExecutionEndTime.Value));
 
+                //Console.WriteLine();
+                Console.WriteLine();
             }
         }
 
+        
         private static string SetExecutionTime(DateTime startTime, DateTime endTime)
         {
             var time = (endTime.TimeOfDay - startTime.TimeOfDay).TotalSeconds;

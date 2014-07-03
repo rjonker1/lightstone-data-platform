@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using EventTracking.Measurement.Dto;
+
+namespace EventTracking.Measurement.Repository
+{
+    public class FakeSourceExecutionRepository : IRepository<ExternalSourceExecutionResultDto>
+    {
+        private static List<KeyValuePair<Guid, ExternalSourceExecutionResultDto>> Database =
+            new List<KeyValuePair<Guid, ExternalSourceExecutionResultDto>>();
+
+        public ExternalSourceExecutionResultDto Get(Guid id)
+        {
+            return Database.Single(w => w.Key == id).Value;
+        }
+
+        public IQueryable<ExternalSourceExecutionResultDto> GetAll()
+        {
+            return Database
+                .Select(s => s.Value)
+                .AsQueryable();
+        }
+
+        public void Save(ExternalSourceExecutionResultDto item)
+        {
+            if (item == null) return;
+
+            Database.Add(new KeyValuePair<Guid, ExternalSourceExecutionResultDto>(item.AggregateId, item));
+        }
+    }
+}

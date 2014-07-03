@@ -6,16 +6,17 @@ var externalSourceEventDetector = function externalSourceEventConstructor($event
 
     var eventServices = !$eventServices ? { emit: emit } : $eventServices;
 
-    var createState = function(aggregateId, sourceId, message, timeStamp) {
+    var createState = function (aggregateId, sourceId, message, timeStamp, order) {
         return {
             AggregateId: aggregateId,
             SourceId: sourceId,
             Message: message,
             TimeStamp: timeStamp,
+            Order: order,
         };
     };
 
-    var emitEvent = function(state, aggregateId, sourceId, message, timeStamp) {
+    var emitEvent = function(state, aggregateId, sourceId, message, timeStamp, order) {
 
         //var streamName = 'ExternalSourceEvents'; // + event.streamId;
         //var newEvent = createEvent(event.body.EventDate, event.body.Message, state.Count);
@@ -24,13 +25,14 @@ var externalSourceEventDetector = function externalSourceEventConstructor($event
                 AggregateId: aggregateId,
                 SourceId: sourceId,
                 Message: message,
-                TimeStamp: timeStamp
+                TimeStamp: timeStamp,
+                Order: order,
             }
         );
     };
 
     var init = function() {
-        return createState("", 0, "", null);
+        return createState("", 0, "", null,0);
     };
 
     var processEvent = function(state, event) {
@@ -39,9 +41,10 @@ var externalSourceEventDetector = function externalSourceEventConstructor($event
         var message = event.body.Message;
         var sourceId = event.body.SourceId;
         var aggregateId = event.body.AggregateId;
+        var order = event.body.Order;
 
-        emitEvent(state, aggregateId, sourceId, message, timeStamp);
-        return createState(aggregateId, sourceId, message, timeStamp);
+        emitEvent(state, aggregateId, sourceId, message, timeStamp,order);
+        return createState(aggregateId, sourceId, message, timeStamp,order);
     };
 
     return {
@@ -56,5 +59,5 @@ fromCategory('laceExecutingExternalSource')
     .foreachStream()
     .when({
         $init: detector.init,
-        ExternalSourceEvent: detector.processEvents
+        ExternalSourceExecutedEvent: detector.processEvents
     });

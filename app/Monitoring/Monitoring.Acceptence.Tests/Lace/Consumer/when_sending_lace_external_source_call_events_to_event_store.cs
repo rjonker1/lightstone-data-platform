@@ -11,6 +11,7 @@ namespace Monitoring.Acceptance.Tests.Lace.Consumer
 
         private readonly Guid _aggregateId;
         private ExternalSourceConsumer _consumer;
+        private ExternalSourceExecutedConsumer _externalSourceExecutedConsumer;
 
         public when_sending_lace_external_source_call_events_to_event_store()
         {
@@ -29,45 +30,45 @@ namespace Monitoring.Acceptance.Tests.Lace.Consumer
             _consumer = FakeLaceExternalSourceEvents.ReceiveRequestInLace(_aggregateId, _consumer);
             _consumer.HasBeenConsumed.ShouldBeTrue();
 
-            _consumer = FakeLaceExternalSourceEvents.StartCallingIvid(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.StartCallingIvid(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
 
             Thread.Sleep(5000);
 
-            _consumer = FakeLaceExternalSourceEvents.EndCallingIvid(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.EndCallingIvid(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
 
             Thread.Sleep(1000);
 
-            _consumer = FakeLaceExternalSourceEvents.StartCallingIvidTileHolder(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.StartCallingIvidTileHolder(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
 
             Thread.Sleep(5000);
 
-            _consumer = FakeLaceExternalSourceEvents.EndCallingIvidTitleHolder(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
-
-            Thread.Sleep(1000);
-
-
-            _consumer = FakeLaceExternalSourceEvents.StartCallingRgtVin(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
-
-            Thread.Sleep(5000);
-
-            _consumer = FakeLaceExternalSourceEvents.EndCallingRgtVin   (_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.EndCallingIvidTitleHolder(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
 
             Thread.Sleep(1000);
 
 
-            _consumer = FakeLaceExternalSourceEvents.StartCallingAudatex(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.StartCallingRgtVin(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
 
             Thread.Sleep(5000);
 
-            _consumer = FakeLaceExternalSourceEvents.EndCallingAudatex(_aggregateId, _consumer);
-            _consumer.HasBeenConsumed.ShouldBeTrue();
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.EndCallingRgtVin(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
+
+            Thread.Sleep(1000);
+
+
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.StartCallingAudatex(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
+
+            Thread.Sleep(5000);
+
+            _externalSourceExecutedConsumer = FakeLaceExternalSourceEvents.EndCallingAudatex(_aggregateId, _externalSourceExecutedConsumer);
+            _externalSourceExecutedConsumer.HasBeenConsumed.ShouldBeTrue();
             
             Thread.Sleep(1000);
 

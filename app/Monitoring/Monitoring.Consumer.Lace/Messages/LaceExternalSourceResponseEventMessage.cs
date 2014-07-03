@@ -1,45 +1,19 @@
 ﻿using System;
-using DataPlatform.Shared.Helpers;
 using Monitoring.Sources.Lace;
 
 namespace Monitoring.Consumer.Lace.Messages
 {
-    public class LaceExternalSourceResponseEventMessage : IMonitorExternalSourceEventMessage
+    public class LaceExternalSourceResponseEventMessage : BaseEventMessage
     {
-
         public LaceExternalSourceResponseEventMessage(Guid aggregateId, LaceEventSource source, string message,
-            string payload)
+            string payload,
+            int order) :
+                base(aggregateId, source, message, order, "laceExternalSourceResponse")
         {
-            AggregateId = aggregateId;
-            Message = message;
-            Source = source;
+
             Payload = payload;
         }
 
-        public Guid Id
-        {
-            get
-            {
-                return Guid.NewGuid();
-            }
-        }
-
-        public Guid AggregateId { get; private set; }
-        public LaceEventSource Source { get; private set; }
-        public string Message { get; private set; }
         public string Payload { get; private set; }
-
-        public DateTime EventDate
-        {
-            get
-            {
-                return SystemTime.Now();
-            }
-        }
-
-        public string Category
-        {
-            get { return "laceExternalSourceResponse"; }
-        }
     }
 }

@@ -2,7 +2,9 @@
 using EasyNetQ;
 using EventStore.ClientAPI;
 using EventTracking.Domain.Core;
+using EventTracking.Measurement.Dto;
 using EventTracking.Measurement.Lace.Events;
+using EventTracking.Measurement.Repository;
 
 namespace EventTracking.Measurement.Lace.Projections
 {
@@ -16,10 +18,15 @@ namespace EventTracking.Measurement.Lace.Projections
 
         private bool _running;
 
-        public ExternalSourceEventPublisher(IEventStoreConnection eventStoreConnection, IBus bus)
+        private IRepository<ExternalSourceExecutionResultDto> _repository;
+
+        public ExternalSourceEventPublisher(IEventStoreConnection eventStoreConnection, IBus bus, IRepository<ExternalSourceExecutionResultDto> repository)
         {
             _eventStoreConnection = eventStoreConnection;
+
             _bus = bus;
+
+            _repository = repository;
         }
 
         public void Start()
@@ -60,6 +67,9 @@ namespace EventTracking.Measurement.Lace.Projections
             var sourceEvent = resolvedEvent.ParseJson<ExternalSourceEventRead>();
 
             Console.WriteLine(sourceEvent);
+
+            _repository.Save(new ExternalSourceExecutionResultDto(sourceEvent.AggregateId, sourceEvent.TimeStamp,
+                sourceEvent.SourceId, sourceEvent.Message, sourceEvent.Order));
 
             //Publish(sourceEvent);
 
