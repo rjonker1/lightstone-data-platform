@@ -5,6 +5,7 @@ using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Lace.Queries;
 using EventTracking.Measurement.Lace.Results;
+using EventTracking.Tests.Helper.Builder.Lace;
 
 namespace EventTracking.Measurement.Lace.Measurements
 {
@@ -14,38 +15,40 @@ namespace EventTracking.Measurement.Lace.Measurements
         private readonly IProjectionContext _projectionContext;
         private readonly ExternalSourceEventRead _projection;
         private readonly ExternalSourceRequestQuery _query;
+        private readonly ExternalSourceEventPublisher _externalSourceEventPublisher;
 
         private readonly EventReader _eventReader;
 
-        private readonly ExternalSourceEventInformationProjection _sourceRequestsProjection;
+        private readonly ExternalSourceEventDetectorProjection _sourceRequestsProjection;
 
         public RequestFromSourceMeasurements(IProjectionContext context, ExternalSourceEventRead projection,
             EventReader reader, ExternalSourceRequestQuery query,
-            ExternalSourceEventInformationProjection sourceRequestsProjection)
+            ExternalSourceEventDetectorProjection sourceRequestsProjection, ExternalSourceEventPublisher externalSourceEventPublisher)
         {
             _projectionContext = context;
             _projection = projection;
             _eventReader = reader;
             _query = query;
             _sourceRequestsProjection = sourceRequestsProjection;
+            _externalSourceEventPublisher = externalSourceEventPublisher;
         }
 
 
         public void Run()
         {
-           
-          //  ShowRequestDetails();
 
             EnsureProjections();
 
             _eventReader.StartReading();
 
-            //Console.WriteLine("\nPress ANY key to stop reading and show results\n");
-            //Console.ReadKey();
+            new MonitoringEventsBuilder().ForExternalSourceEvents();
 
-            //Stop();
+            Console.WriteLine("\nPress ANY key to stop reading and show results\n");
+            Console.ReadKey();
 
-            ShowRequestDetails();
+            Stop();
+
+            //  ShowRequestDetails();
 
             Console.WriteLine("Press ANY key exit");
             Console.ReadKey();
@@ -55,7 +58,7 @@ namespace EventTracking.Measurement.Lace.Measurements
 
         private void Stop()
         {
-
+            _externalSourceEventPublisher.Stop();
         }
 
         private void EnsureProjections()
@@ -64,21 +67,23 @@ namespace EventTracking.Measurement.Lace.Measurements
             _projectionContext.EnableProjection("$stream_by_category");
 
             _sourceRequestsProjection.Ensure();
+
+            _externalSourceEventPublisher.Start();
         }
 
-        private void ShowRequestDetails()
-        {
-            _query.SubscriveToEvent(ShowEvent);
+        //private void ShowRequestDetails()
+        //{
+        //    _query.SubscribeToEvent(ShowEvent);
 
 
-            var value = _query.GetValue();
-            Console.WriteLine("External Source  Details: {0}", value);
+        //    var value = _query.GetValue();
+        //    Console.WriteLine("External Source  Details: {0}", value);
 
-            //Console.WriteLine("Get Request Details");
+        //    //Console.WriteLine("Get Request Details");
 
-            //ShowRequestDetails("externalSourceInformation");
-            ////add other projections / streams
-        }
+        //    //ShowRequestDetails("externalSourceInformation");
+        //    ////add other projections / streams
+        //}
 
         //private void ShowRequestDetails(string name)
         //{

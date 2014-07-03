@@ -1,10 +1,10 @@
 ﻿namespace EventTracking.Measurement.Lace.Projections
 {
-    public class ExternalSourceEventInformationProjection
+    public class ExternalSourceEventDetectorProjection
     {
         private readonly IProjectionContext _projectionContext;
 
-        public ExternalSourceEventInformationProjection(IProjectionContext projectionContext)
+        public ExternalSourceEventDetectorProjection(IProjectionContext projectionContext)
         {
             _projectionContext = projectionContext;
         }

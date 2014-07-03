@@ -15,7 +15,7 @@ namespace EventTracking.Measurement.Lace.Results
             IEnumerable<IShowEventsPublishedForLaceRequests> projectionResults)
         {
             var slicedValues = projectionResults
-                .Select(s => new SourceRequestsExecutionTimes(s.Message, s.SourceId, s.AggregateId, s.EventDate))
+                .Select(s => new SourceRequestsExecutionTimes(s.Message, s.SourceId, s.AggregateId, s.TimeStamp))
                 .OrderBy(o => o.AggregateId)
                 .ThenBy(o => o.EventDate)
                 .ToList();
