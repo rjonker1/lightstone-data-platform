@@ -60,21 +60,21 @@ namespace Lace.Acceptance.Tests.Events
 
             _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
-            _laceEvent.PublishStartServiceConfigurationMessage(LaceEventSource.Ivid);
+            _laceEvent.PublishStartSourceConfigurationMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndServiceConfigurationMessage(LaceEventSource.Ivid);
+            _laceEvent.PublishEndSourceConfigurationMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishStartServiceCallMessage(LaceEventSource.Ivid);
+            _laceEvent.PublishStartSourceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndServiceCallMessage(LaceEventSource.Ivid);
+            _laceEvent.PublishEndSourceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishServiceRequestMessage(LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
+            _laceEvent.PublishSourceRequestMessage(LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
 
-            _laceEvent.PublishServiceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
+            _laceEvent.PublishSourceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
 
-            _laceEvent.PublishFailedServiceCallMessaage(LaceEventSource.Ivid);
+            _laceEvent.PublishFailedSourceCallMessaage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishNoResponseFromServiceMessage(LaceEventSource.Ivid);
+            _laceEvent.PublishNoResponseFromSourceMessage(LaceEventSource.Ivid);
 
             _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.Initialization);
 

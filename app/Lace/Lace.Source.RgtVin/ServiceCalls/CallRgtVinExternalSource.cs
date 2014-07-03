@@ -28,34 +28,34 @@ namespace Lace.Source.RgtVin.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(Source);
+                laceEvent.PublishStartSourceConfigurationMessage(Source);
 
                 var rgtVinWebService = new ConfigureRgtVinWebSource();
                 var rgtVinRequest = new ConfigureRgtVinRequestMessage(_request, response)
                     .Build()
                     .RgtVinRequest;
 
-                laceEvent.PublishEndServiceConfigurationMessage(Source);
+                laceEvent.PublishEndSourceConfigurationMessage(Source);
 
-                laceEvent.PublishServiceRequestMessage(Source,
+                laceEvent.PublishSourceRequestMessage(Source,
                     rgtVinRequest.ObjectToJson());
 
 
-                laceEvent.PublishStartServiceCallMessage(Source);
+                laceEvent.PublishStartSourceCallMessage(Source);
 
                 _rgtVinResponse = rgtVinWebService
                     .RgtVinServiceProxy
                     .VinCheckSpecsFiltered(rgtVinRequest.Vin, string.Empty, rgtVinRequest.SecurityCode);
 
-                laceEvent.PublishEndServiceCallMessage(Source);
+                laceEvent.PublishEndSourceCallMessage(Source);
 
 
                 rgtVinWebService.CloseWebService();
 
                 if (_rgtVinResponse == null)
-                    laceEvent.PublishNoResponseFromServiceMessage(Source);
+                    laceEvent.PublishNoResponseFromSourceMessage(Source);
 
-                laceEvent.PublishServiceResponseMessage(Source,
+                laceEvent.PublishSourceResponseMessage(Source,
                     _rgtVinResponse != null ? _rgtVinResponse.ObjectToJson() : new DataSet().ObjectToJson());
 
                 TransformResponse(response);
@@ -64,7 +64,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Vin Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessaage(Source);
                 RgtVinResponseFailed(response);
             }
         }

@@ -8,8 +8,8 @@ namespace EventTracking.Measurement.Lace.Projections
 {
     public class ExternalSourceEventPublisher
     {
-        private const string CheckpointStream = "$publisher-ExternalSourceEventPublisher-checkpoint";
-        private const string EventStream = "ExternalSourceEvents";
+        private const string CheckpointStream = "$publisher-ExternalSourceExecutionEventPublisher-checkpoint";
+        private const string EventStream = "ExternalSourceExecutionEvents";
 
         private readonly IEventStoreConnection _eventStoreConnection;
         private readonly IBus _bus;

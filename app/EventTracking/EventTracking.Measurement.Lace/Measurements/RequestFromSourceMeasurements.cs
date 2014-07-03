@@ -14,7 +14,7 @@ namespace EventTracking.Measurement.Lace.Measurements
 
         private readonly IProjectionContext _projectionContext;
         private readonly ExternalSourceEventRead _projection;
-        private readonly ExternalSourceRequestQuery _query;
+        private readonly ExternalSourceExecutionDetectedQuery _query;
         private readonly ExternalSourceEventPublisher _externalSourceEventPublisher;
 
         private readonly EventReader _eventReader;
@@ -22,7 +22,7 @@ namespace EventTracking.Measurement.Lace.Measurements
         private readonly ExternalSourceEventDetectorProjection _sourceRequestsProjection;
 
         public RequestFromSourceMeasurements(IProjectionContext context, ExternalSourceEventRead projection,
-            EventReader reader, ExternalSourceRequestQuery query,
+            EventReader reader, ExternalSourceExecutionDetectedQuery query,
             ExternalSourceEventDetectorProjection sourceRequestsProjection, ExternalSourceEventPublisher externalSourceEventPublisher)
         {
             _projectionContext = context;
@@ -41,7 +41,9 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             _eventReader.StartReading();
 
+#if DEBUG
             new MonitoringEventsBuilder().ForExternalSourceEvents();
+#endif
 
             Console.WriteLine("\nPress ANY key to stop reading and show results\n");
             Console.ReadKey();

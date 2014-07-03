@@ -49,49 +49,49 @@ namespace Lace.Events.Messages.Publish
         }
 
 
-        public void PublishStartServiceCallMessage(LaceEventSource source)
+        public void PublishStartSourceCallMessage(LaceEventSource source)
         {
-            var msg = new LaceExternalSourceEventMessage(_aggerateId, source,
+            var msg = new LaceExternalSourceExecutionEventMessage(_aggerateId, source,
                 PublishableLaceMessages.StartCallingExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishStartServiceConfigurationMessage(LaceEventSource source)
+        public void PublishStartSourceConfigurationMessage(LaceEventSource source)
         {
             var msg = new LaceExternalSourceConfigurationEventMessage(_aggerateId, source,
                 PublishableLaceMessages.StartConfigurationForExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishEndServiceConfigurationMessage(LaceEventSource source)
+        public void PublishEndSourceConfigurationMessage(LaceEventSource source)
         {
             var msg = new LaceExternalSourceConfigurationEventMessage(_aggerateId, source,
                 PublishableLaceMessages.EndConfigurationForExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishEndServiceCallMessage(LaceEventSource source)
+        public void PublishEndSourceCallMessage(LaceEventSource source)
         {
-            var msg = new LaceExternalSourceEventMessage(_aggerateId, source,
+            var msg = new LaceExternalSourceExecutionEventMessage(_aggerateId, source,
                 PublishableLaceMessages.EndCallingExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishFailedServiceCallMessaage(LaceEventSource source)
+        public void PublishFailedSourceCallMessaage(LaceEventSource source)
         {
             var msg = new LaceExternalSourceFailedEventMessage(_aggerateId, source,
                 PublishableLaceMessages.ExternalSourceCallFailed());
             PublishMessage(msg);
         }
 
-        public void PublishNoResponseFromServiceMessage(LaceEventSource source)
+        public void PublishNoResponseFromSourceMessage(LaceEventSource source)
         {
             var msg = new LaceExternalSourceNoResponseEventMessage(_aggerateId, source,
                 PublishableLaceMessages.NoResponseReceivedFromExternalSource());
             PublishMessage(msg);
         }
 
-        public void PublishServiceRequestMessage(LaceEventSource source, string request)
+        public void PublishSourceRequestMessage(LaceEventSource source, string request)
         {
             var msg = new LaceExternalSourceRequestEventMessage(_aggerateId, source,
                 PublishableLaceMessages.RequestSentToExternalSource(),
@@ -100,7 +100,7 @@ namespace Lace.Events.Messages.Publish
 
         }
 
-        public void PublishServiceResponseMessage(LaceEventSource source, string response)
+        public void PublishSourceResponseMessage(LaceEventSource source, string response)
         {
             var msg = new LaceExternalSourceResponseEventMessage(_aggerateId, source,
                 PublishableLaceMessages.ResponseReceivedFromExternalSource(), response);
@@ -144,20 +144,39 @@ namespace Lace.Events.Messages.Publish
         }
 
 
-        public void PublishMessage<T>(T message) where T : class, IPublishableMessage
+        private void PublishMessage<T>(T message) where T : class, IPublishableMessage
         {
-            Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    _publishMessages.Publish(message);
-                }
-                catch (Exception ex)
-                {
-                    Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
-                }
-            }
-                );
+            //Task.Factory.StartNew(() =>
+            //{
+                
+            //}
+            //    );
+
+            Task.Run(() => PublishMessageAsync(message));
         }
+
+        private void PublishMessageAsync<T>(T message) where T : class, IPublishableMessage
+        {
+            try
+            {
+                _publishMessages.Publish(message);
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+            }
+        }
+
+        //private void PublishMessageAsync()
+        //{
+        //    try
+        //    {
+        //        _publishMessages.Publish(message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.ErrorFormat("Error Publishing message to Lace Event Queue: {0}", ex.Message);
+        //    }
+        //}
     }
 }

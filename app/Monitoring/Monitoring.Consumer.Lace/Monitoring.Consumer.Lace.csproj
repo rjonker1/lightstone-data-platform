@@ -36,6 +36,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregates\ExternalSourceExecution.cs" />
     <Compile Include="Aggregates\ExternalSourceFailures.cs" />
     <Compile Include="Aggregates\ExternalSourceInformation.cs" />
     <Compile Include="Aggregates\ExternalSourcesConfiguration.cs" />
@@ -44,6 +45,7 @@
     <Compile Include="Aggregates\ExternalSourcesResponseFailures.cs" />
     <Compile Include="Aggregates\ExternalSourcesResponseSuccesses.cs" />
     <Compile Include="Aggregates\ExternalSourcesResponseTransformations.cs" />
+    <Compile Include="Consumers\ExternalSourceExecutedConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceConfigurationConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceFailedConsumer.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Consumers\ExternalSourceReceivedResponseConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceSentRequestsConsumer.cs" />
     <Compile Include="Consumers\ExternalSourceTransformationConsumer.cs" />
+    <Compile Include="Messages\LaceExternalSourceExecutionEventMessage.cs" />
     <Compile Include="Messages\LaceEventMessage.cs" />
     <Compile Include="Messages\LaceExternalSourceConfigurationEventMessage.cs" />
     <Compile Include="Messages\LaceExternalSourceEventMessage.cs" />

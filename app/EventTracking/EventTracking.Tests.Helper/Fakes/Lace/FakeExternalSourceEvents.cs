@@ -13,28 +13,28 @@ namespace EventTracking.Tests.Helper.Fakes.Lace
             (aggrId, consumer) => ExternalSourceEventConsumers.ReturnResponseFromLace(aggrId, consumer);
 
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> StartCallingIvid =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> StartCallingIvid =
             (aggrId, consumer) => ExternalSourceEventConsumers.IvidSourceCallStarting(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> EndCallingIvid =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> EndCallingIvid =
             (aggrId, consumer) => ExternalSourceEventConsumers.IvidSourceCallEnded(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> StartCallingIvidTileHolder =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> StartCallingIvidTileHolder =
             (aggrId, consumer) => ExternalSourceEventConsumers.IvidTitleHolderCallStarting(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> EndCallingIvidTitleHolder =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> EndCallingIvidTitleHolder =
             (aggrId, consumer) => ExternalSourceEventConsumers.IvidTitleHolderSourceCallEnded(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> StartCallingRgtVin =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> StartCallingRgtVin =
             (aggrId, consumer) => ExternalSourceEventConsumers.RgtVinSourceCallStarting(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> EndCallingRgtVin =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> EndCallingRgtVin =
             (aggrId, consumer) => ExternalSourceEventConsumers.RgtVinSourceSourceCallEnded(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> StartCallingAudatex =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> StartCallingAudatex =
             (aggrId, consumer) => ExternalSourceEventConsumers.AudatexSourceCallStarting(aggrId, consumer);
 
-        public static Func<Guid, ExternalSourceConsumer, ExternalSourceConsumer> EndCallingAudatex =
+        public static Func<Guid, ExternalSourceExecutedConsumer, ExternalSourceExecutedConsumer> EndCallingAudatex =
             (aggrId, consumer) => ExternalSourceEventConsumers.AudatexSourceSourceCallEnded(aggrId, consumer);
     }
 }

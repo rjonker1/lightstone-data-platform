@@ -17,6 +17,7 @@ namespace Monitoring.Consumer.Installer
 
             container.Register(
                 Component.For<ExternalSourceConsumer>().ImplementedBy<ExternalSourceConsumer>(),
+                Component.For<ExternalSourceExecutedConsumer>().ImplementedBy<ExternalSourceExecutedConsumer>(),
                 Component.For<ExternalSourceConfigurationConsumer>()
                     .ImplementedBy<ExternalSourceConfigurationConsumer>(),
                 Component.For<ExternalSourceFailedConsumer>().ImplementedBy<ExternalSourceFailedConsumer>(),
