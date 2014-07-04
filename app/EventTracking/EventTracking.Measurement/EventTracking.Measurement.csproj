@@ -51,7 +51,7 @@
     <Compile Include="ProjectionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\FakeSourceExecutionRepository.cs" />
+    <Compile Include="Streams\ExternalSourceEventStreams.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

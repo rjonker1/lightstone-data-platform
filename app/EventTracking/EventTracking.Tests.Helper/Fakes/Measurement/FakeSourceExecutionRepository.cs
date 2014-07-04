@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EventStore.ClientAPI.Exceptions;
 using EventTracking.Measurement.Dto;
 
 namespace EventTracking.Measurement.Repository

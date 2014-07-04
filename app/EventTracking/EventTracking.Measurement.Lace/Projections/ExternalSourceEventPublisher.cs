@@ -5,20 +5,21 @@ using EventTracking.Domain.Core;
 using EventTracking.Measurement.Dto;
 using EventTracking.Measurement.Lace.Events;
 using EventTracking.Measurement.Repository;
+using EventTracking.Measurement.Streams;
 
 namespace EventTracking.Measurement.Lace.Projections
 {
     public class ExternalSourceEventPublisher
     {
-        private const string CheckpointStream = "$publisher-ExternalSourceExecutionEventPublisher-checkpoint";
-        private const string EventStream = "ExternalSourceExecutionEvents";
+        private readonly string _checkpointStream = ExternalSourceEventStreams.PublisherExternalSourceExecutionEventPublisherCheckpoint();
+        private readonly string _eventStream = ExternalSourceEventStreams.ExternalSourceExecutionEvents();
 
         private readonly IEventStoreConnection _eventStoreConnection;
         private readonly IBus _bus;
 
         private bool _running;
 
-        private IRepository<ExternalSourceExecutionResultDto> _repository;
+        private readonly IRepository<ExternalSourceExecutionResultDto> _repository;
 
         public ExternalSourceEventPublisher(IEventStoreConnection eventStoreConnection, IBus bus, IRepository<ExternalSourceExecutionResultDto> repository)
         {
@@ -47,9 +48,9 @@ namespace EventTracking.Measurement.Lace.Projections
 
         private void Connect()
         {
-            var position = GetLastCheckpoint(CheckpointStream);
+            var position = GetLastCheckpoint(_checkpointStream);
 
-            _eventStoreConnection.SubscribeToStreamFrom(EventStream, position, true, ProcessEvent,
+            _eventStoreConnection.SubscribeToStreamFrom(_eventStream, position, true, ProcessEvent,
                 userCredentials: EventStoreCredentials.Default, subscriptionDropped: TryToReconnect);
         }
 
@@ -89,7 +90,7 @@ namespace EventTracking.Measurement.Lace.Projections
 
             SetCheckpointStreamMaxCount(eventNumber);
 
-            _eventStoreConnection.AppendToStream(CheckpointStream, ExpectedVersion.Any, EventStoreCredentials.Default,
+            _eventStoreConnection.AppendToStream(_checkpointStream, ExpectedVersion.Any, EventStoreCredentials.Default,
                 checkpoint);
         }
 
@@ -99,7 +100,7 @@ namespace EventTracking.Measurement.Lace.Projections
 
             var metadata = StreamMetadata.Build().SetMaxCount(1);
 
-            _eventStoreConnection.SetStreamMetadata(CheckpointStream, ExpectedVersion.Any, metadata,
+            _eventStoreConnection.SetStreamMetadata(_checkpointStream, ExpectedVersion.Any, metadata,
                 EventStoreCredentials.Default);
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using EasyNetQ;
 using EventStore.ClientAPI;
 using EventTracking.Measurement.Dto;
@@ -59,6 +58,9 @@ namespace EventTracking.Measurement.Lace.Measurements
 
             _eventReader.StartReading();
 
+#if DEBUG
+            new MonitoringEventsBuilder().ForExternalSourceEvents();
+#endif
 
             Console.WriteLine("\nPress ANY key to show results\n");
             Console.ReadKey();

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Builder\Lace\MonitoringEventsBuilder.cs" />
     <Compile Include="Fakes\Lace\FakeExternalSourceEvents.cs" />
+    <Compile Include="Fakes\Measurement\FakeSourceExecutionRepository.cs" />
     <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
+      <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
+      <Name>EventTracking.Measurement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

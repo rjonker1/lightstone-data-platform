@@ -59,7 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lace\when_reading_events_from_lace_external_source_projections.cs" />
+    <Compile Include="Lace\when_subscribing_to_an_stream_with_external_source_execution_events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
