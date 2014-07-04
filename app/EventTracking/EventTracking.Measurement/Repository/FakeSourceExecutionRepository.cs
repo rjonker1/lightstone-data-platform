@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EventStore.ClientAPI.Exceptions;
 using EventTracking.Measurement.Dto;
 
 namespace EventTracking.Measurement.Repository
@@ -25,6 +26,8 @@ namespace EventTracking.Measurement.Repository
         public void Save(ExternalSourceExecutionResultDto item)
         {
             if (item == null) return;
+
+            if(Database.Count(c => c.Value.AggregateId == item.AggregateId && c.Value.Source == item.Source && c.Value.Order == item.Order) != 0)return;
 
             Database.Add(new KeyValuePair<Guid, ExternalSourceExecutionResultDto>(item.AggregateId, item));
         }
