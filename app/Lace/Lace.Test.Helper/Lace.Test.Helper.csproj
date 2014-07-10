@@ -48,9 +48,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.TestHelper">
-      <HintPath>..\..\PackageBuilder\PackageBuilder.TestHelper\bin\Debug\PackageBuilder.TestHelper.dll</HintPath>
-    </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -119,6 +116,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PackageBuilder\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
@@ -154,14 +155,6 @@
     <ProjectReference Include="..\Lace.Models.Lightstone\Lace.Models.Lightstone.csproj">
       <Project>{00668419-21ad-4310-b511-c2a1c6d9dcdf}</Project>
       <Name>Lace.Models.Lightstone</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Product\Lace.Models.Product.csproj">
-      <Project>{3a2d132a-8166-43c0-84cb-83d0367d6aa4}</Project>
-      <Name>Lace.Models.Product</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Models.Request.LicensePlateNumber\Lace.Models.Request.LicensePlateNumber.csproj">
-      <Project>{74ac8cc6-6cb2-4f64-b59c-0bf7125181a9}</Project>
-      <Name>Lace.Models.Request.LicensePlateNumber</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.RgtVin\Lace.Models.RgtVin.csproj">
       <Project>{dd94160d-88e7-4590-8707-891024976316}</Project>
