@@ -1,5 +1,4 @@
-﻿using System;
-using Lace.Models.IvidTitleHolder.Dto;
+﻿using Lace.Models.IvidTitleHolder.Dto;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Source.IvidTitleHolder.Transform
@@ -19,37 +18,10 @@ namespace Lace.Source.IvidTitleHolder.Transform
 
         public void Transform()
         {
-            Result.PartialResponse = Message.partialResponse;
-            Result.HasErrors = Message.partialResponse;
-            Result.BankName = CheckPartialResults(Message.bankName);
-            Result.FlaggedOnAnpr = Message.flaggedOnAnpr;
-            Result.AccountNumber = CheckPartialResults(Message.accountNumber);
-            
-            Result.AccountOpenDate = FormatDate(Message.accountOpenDate);
-            Result.AccountClosedDate = FormatDate(Message.accountClosedDate);
+            Result.Build(Message.bankName, Message.flaggedOnAnpr, Message.accountNumber, Message.accountOpenDate,
+                Message.accountClosedDate, Message.yearOfLiabilityForLicensing);
 
-            Result.YearOfLiabilityForLicensing = Message.yearOfLiabilityForLicensing;
-
+            Result.SetRequestFinancialInterestInvite();
         }
-
-        private const string NotAvailableError = "Error - Not Available";
-
-        private static string FormatDate(DateTime? date)
-        {
-            if (!date.HasValue || date.Value == DateTime.MinValue) return NotAvailableError;
-
-            return date.Value.ToString("dd MMMM yyyy");
-        }
-
-        private string CheckPartialResults(string value)
-        {
-            if (Result.HasErrors && string.IsNullOrWhiteSpace(value))
-            {
-                value = NotAvailableError;
-            }
-            return value;
-        }
-
-      
     }
 }

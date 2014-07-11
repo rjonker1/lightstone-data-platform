@@ -6,7 +6,7 @@ namespace Lace.Test.Helper.Builders.Requests
     public class LicensePlateRequestBuilder
     {
         private ILaceRequest _request;
-        
+
         public ILaceRequest ForIvid()
         {
             _request = new LicensePlateNumberIvidOnlyRequest();
@@ -22,6 +22,12 @@ namespace Lace.Test.Helper.Builders.Requests
         public ILaceRequest ForIvidTitleHolder()
         {
             _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
+            return _request;
+        }
+
+        public ILaceRequest ForIvidTitleHolderWithAbsaFinancedInterest()
+        {
+            _request = new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest();
             return _request;
         }
 

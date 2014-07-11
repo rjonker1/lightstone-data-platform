@@ -98,6 +98,8 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Packages\Dto\Package.cs" />
+    <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
