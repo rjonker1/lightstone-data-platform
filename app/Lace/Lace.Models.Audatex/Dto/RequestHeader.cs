@@ -18,37 +18,5 @@
         public string Originator { get; set; }
 
         public string Reference { get; set; }
-
-        //public string MsgTypeIdentifier
-        //{
-        //    get
-        //    {
-        //        return "MSGTYPE_HISTORYCHECK";
-        //    }
-        //}
-
-        //public string AssessmentNumber
-        //{
-        //    get
-        //    {
-        //        return string.Empty;
-        //    }
-        //}
-
-        //public string Originator
-        //{
-        //    get
-        //    {
-        //        return string.Empty;
-        //    }
-        //}
-
-        //public string Reference
-        //{
-        //    get
-        //    {
-        //        return string.Empty;
-        //    }
-        //}
     }
 }

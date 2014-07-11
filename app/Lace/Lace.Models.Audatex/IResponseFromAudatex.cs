@@ -6,29 +6,24 @@ namespace Lace.Models.Audatex
 {
     public interface IResponseFromAudatex
     {
+        IList<AccidentClaim> AccidentClaims { get; }
 
-        string Error { get; set; }
+        void CleanAccidentClaims();
 
-        IList<AccidentClaim> AccidentClaims { get; set; }
-        bool HasAccidentClaims { get; set; }
+        void CheckForAccidentClaims(bool check);
 
-        string QuoteValueIndicatorNote
-        {
-            get;
-        }
+        void ResetAccidentClaimFlag();
 
+        void AddAccidentClaim(AccidentClaim claim);
 
-        string LowConfidenceLevelIndicatorNote
-        {
-            get;
-        }
+        bool HasAccidentClaims { get; }
 
+        string QuoteValueIndicatorNote { get; }
 
-        string RegistrationNumberOnlyIndicatorNote
-        {
-            get;
-        }
+        string LowConfidenceLevelIndicatorNote { get; }
 
-        ServiceCallState ServiceProviderCallState { get; set; }
+        string RegistrationNumberOnlyIndicatorNote { get; }
+
+       // ServiceCallState ServiceProviderCallState { get; }
     }
 }
