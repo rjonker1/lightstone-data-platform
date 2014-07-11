@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lace.Models.Audatex.Dto
+﻿namespace Lace.Models.Audatex.Dto
 {
    // [Serializable]
     public class VendorResponseHeader

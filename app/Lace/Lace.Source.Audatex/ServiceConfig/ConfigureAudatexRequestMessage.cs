@@ -32,12 +32,7 @@ namespace Lace.Source.Audatex.ServiceConfig
                     ? new RequestBody()
                     : new RequestBody()
                     {
-                        HistoryCheckRequest = new HistoryCheckRequestBody()
-                        {
-                            VIN = _response.IvidResponse.Vin,
-                            Registration = _response.IvidResponse.License,
-                            EngineNumber = _response.IvidResponse.Engine
-                        }
+                        HistoryCheckRequest = new HistoryCheckRequestBody(_response.IvidResponse.Vin, _response.IvidResponse.License, _response.IvidResponse.Engine)
                     }
             };
 
