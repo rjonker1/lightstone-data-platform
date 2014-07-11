@@ -45,5 +45,24 @@ namespace Lace.Test.Helper.Builders.Responses
 
             return response;
         }
+
+        public ILaceResponse WithIvidResponseAndFinancedInterestVin()
+        {
+            var response = new LaceResponse();
+
+            var ividResponse = new SourceResponseBuilder().ForIvidWithFinancedInterestVin();
+            var transformer = new TransformIvidResponse(ividResponse);
+
+            if (transformer.Continue)
+            {
+                transformer.Transform();
+            }
+
+            response.IvidResponse = transformer.Result;
+            response.IvidResponseHandled = new IvidResponseHandled();
+            response.IvidResponseHandled.HasBeenHandled();
+
+            return response;
+        }
     }
 }
