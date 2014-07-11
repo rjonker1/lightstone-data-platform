@@ -5,25 +5,25 @@ namespace Lace.Models.IvidTitleHolder
 {
     public interface IResponseFromIvidTitleHolder
     {
-        string BankName { get; set; }
-        string AccountNumber { get; set; }
-        DateTime? DateOpened { get; set; }
+        string BankName { get; }
+        string AccountNumber { get; }
+        DateTime? DateOpened { get; }
 
 
         string FinancialInterestsHeading { get; }
 
 
-        string AccountOpenDate { get; set; }
-         string AccountClosedDate { get; set; }
+        string AccountOpenDate { get;  }
+         string AccountClosedDate { get; }
          string AgreementType { get;  }
-         string YearOfLiabilityForLicensing { get; set; }
+         string YearOfLiabilityForLicensing { get; }
          string RequestFinancialInterestInvite { get; }
          bool FinancialInterestAvailable { get;  }
 
 
-         bool PartialResponse { get; set; }
-         bool HasErrors { get; set; }
-         ServiceCallState ServiceProviderCallState { get; set; }
+         bool PartialResponse { get; }
+         bool HasErrors { get; }
+        // ServiceCallState ServiceProviderCallState { get;  }
          string ExpiredMessage { get; }
     }
 }

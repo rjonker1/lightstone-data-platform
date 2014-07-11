@@ -34,7 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\IvidResponse.cs" />
-    <Compile Include="Dto\test.cs" />
     <Compile Include="IBuildIvidResponse.cs" />
     <Compile Include="IResponseFromIvid.cs" />
     <Compile Include="IvidResponseHandled.cs" />
