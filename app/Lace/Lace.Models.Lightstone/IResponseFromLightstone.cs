@@ -1,42 +1,20 @@
-﻿using Lace.Models.Enums;
-
-namespace Lace.Models.Lightstone
+﻿namespace Lace.Models.Lightstone
 {
     public interface IResponseFromLightstone
     {
-        int? CarId { get; set; }
+        int? CarId { get; }
 
-        int? Year { get; set; }
+        int? Year { get; }
 
-        string Vin { get; set; }
+        string Vin { get; }
 
-        string ImageUrl { get; set; }
+        string ImageUrl { get; }
 
-        string Quarter { get; set; }
+        string Quarter { get; }
 
-        string CarFullname { get; set; }
+        string CarFullname { get; }
 
-        string Model { get; set; }
+        string Model { get; }
 
-        // Valuation VehicleValuation
-        //{
-        //    get;
-        //    set;
-        //}
-
-
-        // List<CarModel> CarModels
-        //{
-        //    get;
-        //    set;
-        //}
-
-        // List<VIN12> VIN12
-        //{
-        //    get;
-        //    set;
-        //}
-
-        ServiceCallState ServiceProviderCallState { get; set; }
     }
 }

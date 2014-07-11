@@ -19,14 +19,10 @@ namespace Lace.Source.RgtVin.ServiceConfig
 
         public ConfigureRgtVinRequestMessage Build()
         {
-            RgtVinRequest = new RgtVinRequest()
-            {
-                SecurityCode = _request.Context.SecurityCode,
-                Vin =
-                    _response.IvidResponse != null && _response.IvidResponseHandled.Handled
-                        ? _response.IvidResponse.Vin
-                        : string.Empty
-            };
+            RgtVinRequest = new RgtVinRequest(_response.IvidResponse != null && _response.IvidResponseHandled.Handled
+                ? _response.IvidResponse.Vin
+                : string.Empty, _request.Context.SecurityCode);
+
 
             return this;
         }
