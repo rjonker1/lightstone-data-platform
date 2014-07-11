@@ -22,11 +22,11 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
-           
+
             _request = new LicensePlateNumberAudatexOnlyRequest();
 
-            _laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
+            _response = new LaceResponseBuilder().WithIvidResponseHandledAndVin12();
         }
 
         public override void Observe()
@@ -58,6 +58,12 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         public void audatex_consumer_fallback_source_must_be_null()
         {
             _consumer.FallBack.ShouldBeNull();
+        }
+
+        [Observation]
+        public void audatex_consumer_accident_claims_should_not_be_zero()
+        {
+            _response.AudatexResponse.AccidentClaims.Count.ShouldNotEqual(0);
         }
     }
 }

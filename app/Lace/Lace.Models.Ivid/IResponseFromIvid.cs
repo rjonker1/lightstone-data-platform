@@ -1,217 +1,98 @@
-﻿using Lace.Models.Enums;
-using Lace.Models.Ivid.Dto;
+﻿using Lace.Models.Ivid.Dto;
 
 namespace Lace.Models.Ivid
 {
     public interface IResponseFromIvid
     {
-        VehicleSpecificInformation SpecificInformation
-        {
-            get;
-            set;
-        }
+        void Build(string statusMessage, string reference, string license, string registration, string registrationDate, string vin, string engine,
+            string displacement, string tare, string carFullName);
 
-        string StatusMessage
-        {
-            get;
-            set;
-        }
+        void SetErrorFlag(bool check);
 
-        string Reference
-        {
-            get;
-            set;
-        }
+        void SetHasIssuesFlag(bool check);
 
-        string License
-        {
-            get;
-            set;
-        }
+        void SetMake(IvidCodePair pair);
 
+        void SetModel(IvidCodePair pair);
 
-        string Registration
-        {
-            get;
-            set;
-        }
+        void SetColor(IvidCodePair pair);
 
+        void SetDriven(IvidCodePair pair);
 
-        string RegistrationDate
-        {
-            get;
-            set;
-        }
+        void SetCategory(IvidCodePair pair);
 
+        void SetDescription(IvidCodePair pair);
 
-        string Vin
-        {
-            get;
-            set;
-        }
+        void SetEconomicSector(IvidCodePair pair);
 
+        void SetLifeStatus(IvidCodePair pair);
 
-        string Engine
-        {
-            get;
-            set;
-        }
+        void SetSapMark(IvidCodePair pair);
 
+        void BuildSpecificInformation();
 
-        string Displacement
-        {
-            get;
-            set;
-        }
+        VehicleSpecificInformation SpecificInformation { get; }
 
+        string StatusMessage { get; }
 
-        string Tare
-        {
-            get;
-            set;
-        }
+        string Reference { get; }
 
-        string MakeCode
-        {
-            get;
-            set;
-        }
+        string License { get; }
 
+        string Registration { get; }
 
-        string MakeDescription
-        {
-            get;
-            set;
-        }
+        string RegistrationDate { get; }
 
+        string Vin { get; }
 
-        string ModelCode
-        {
-            get;
-            set;
-        }
+        string Engine { get; }
 
+        string Displacement { get; }
 
-        string ModelDescription
-        {
-            get;
-            set;
-        }
+        string Tare { get; }
 
+        string MakeCode { get; }
 
-        string ColourCode
-        {
-            get;
-            set;
-        }
+        string MakeDescription { get; }
 
+        string ModelCode { get; }
 
-        string ColourDescription
-        {
-            get;
-            set;
-        }
+        string ModelDescription { get; }
 
+        string ColourCode { get; }
 
-        string DrivenCode
-        {
-            get;
-            set;
-        }
+        string ColourDescription { get; }
 
+        string DrivenCode { get; }
 
-        string DrivenDescription
-        {
-            get;
-            set;
-        }
+        string DrivenDescription { get; }
 
+        string CategoryCode { get; }
 
-        string CategoryCode
-        {
-            get;
-            set;
-        }
+        string CategoryDescription { get; }
 
+        string DescriptionCode { get; }
 
-        string CategoryDescription
-        {
-            get;
-            set;
-        }
+        string Description { get; }
 
+        string EconomicSectorCode { get; }
 
-        string DescriptionCode
-        {
-            get;
-            set;
-        }
+        string EconomicSectorDescription { get; }
 
+        string LifeStatusCode { get; }
 
-        string Description
-        {
-            get;
-            set;
-        }
+        string LifeStatusDescription { get; }
 
+        string SapMarkCode { get; }
 
-        string EconomicSectorCode
-        {
-            get;
-            set;
-        }
+        string SapMarkDescription { get; }
 
+        bool HasIssues { get; }
 
-        string EconomicSectorDescription
-        {
-            get;
-            set;
-        }
+        bool HasErrors { get; }
 
+        string CarFullname { get; }
 
-        string LifeStatusCode
-        {
-            get;
-            set;
-        }
-
-
-        string LifeStatusDescription
-        {
-            get;
-            set;
-        }
-
-        string SapMarkCode
-        {
-            get;
-            set;
-        }
-
-
-        string SapMarkDescription
-        {
-            get;
-            set;
-        }
-
-
-        bool HasIssues
-        {
-            get;
-            set;
-        }
-
-
-        bool HasErrors { get; set; }
-
-
-        string CarFullname
-        {
-            get;
-            set;
-        }
-
-        ServiceCallState ServiceProviderCallState { get; set; }
+      //  ServiceCallState ServiceProviderCallState { get; }
     }
 }

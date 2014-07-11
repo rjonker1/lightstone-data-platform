@@ -26,12 +26,12 @@ namespace Lace.Test.Helper.Builders.Responses
 
         }
 
-        public ILaceResponse WithIvidResponseHandledAndVin()
+        public ILaceResponse WithIvidResponseHandledAndVin12()
         {
 
             var response = new LaceResponse();
 
-            var ividResponse = new SourceResponseBuilder().ForIvid();
+            var ividResponse = new SourceResponseBuilder().ForIvidWithRepairVin();
             var transformer = new TransformIvidResponse(ividResponse);
 
             if (transformer.Continue)

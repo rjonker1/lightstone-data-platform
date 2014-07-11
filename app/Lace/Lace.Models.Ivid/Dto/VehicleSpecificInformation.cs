@@ -2,46 +2,31 @@
 {
     public class VehicleSpecificInformation
     {
-        public string Odometer
+        public VehicleSpecificInformation(string odometer, string color, string registrationNumber, string vinNumber,
+            string licenseNumber,
+            string engineNumber, string categoryDescription)
         {
-            get;
-            set;
+            Odometer = odometer;
+            Colour = color;
+            RegistrationNumber = registrationNumber;
+            VinNumber = vinNumber;
+            LicenseNumber = licenseNumber;
+            EngineNumber = engineNumber;
+            CategoryDescription = categoryDescription;
         }
 
-        public string Colour
-        {
-            get;
-            set;
-        }
+        public string Odometer { get; private set; }
 
-        public string RegistrationNumber
-        {
-            get;
-            set;
-        }
+        public string Colour { get; private set; }
 
-        public string VinNumber
-        {
-            get;
-            set;
-        }
+        public string RegistrationNumber { get; private set; }
 
-        public string LicenseNumber
-        {
-            get;
-            set;
-        }
+        public string VinNumber { get; private set; }
 
-        public string EngineNumber
-        {
-            get;
-            set;
-        }
+        public string LicenseNumber { get; private set; }
 
-        public string CategoryDescription
-        {
-            get;
-            set;
-        }
+        public string EngineNumber { get; private set; }
+
+        public string CategoryDescription { get; private set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Lace.Models.Ivid.Dto;
+﻿using Lace.Models.Ivid;
+using Lace.Models.Ivid.Dto;
 using Lace.Source.Ivid.IvidServiceReference;
 
 namespace Lace.Source.Ivid.Transform
@@ -6,7 +7,7 @@ namespace Lace.Source.Ivid.Transform
     public class TransformIvidResponse : ITransform
     {
         public HpiStandardQueryResponse Message { get; private set; }
-        public IvidResponse Result { get; private set; }
+        public IResponseFromIvid Result { get; private set; }
 
         public bool Continue { get; private set; }
 
@@ -19,96 +20,41 @@ namespace Lace.Source.Ivid.Transform
 
         public void Transform()
         {
-            Result.HasErrors = Message.partialResponse;
-            Result.StatusMessage = CheckPartialResults(Message.ividQueryResult.ToString());
-            Result.Reference = CheckPartialResults(Message.IvidReference);
-            Result.License = CheckPartialResults(Message.licenceNumber);
-            Result.Registration = CheckPartialResults(Message.registerNumber);
-            Result.RegistrationDate = CheckPartialResults(Message.registrationDate);
-            Result.Vin = CheckPartialResults(Message.vin);
-            Result.Engine = CheckPartialResults(Message.engineNumber);
-            Result.Displacement = CheckPartialResults(Message.engineDisplacement);
-            Result.Tare = CheckPartialResults(Message.tare);
-            Result.MakeCode = CreatePair(Message.make).Code;
-            Result.MakeDescription = CreatePair(Message.make).Description;
-            Result.ModelCode = CreatePair(Message.model).Code;
-            Result.ModelDescription = CreatePair(Message.model).Description;
-            Result.ColourCode = CreatePair(Message.colour).Code;
-            Result.ColourDescription = CreatePair(Message.colour).Description;
-            Result.DrivenCode = CreatePair(Message.driven).Code;
-            Result.DrivenDescription = CreatePair(Message.driven).Description;
-            Result.CategoryCode = CreatePair(Message.category).Code;
-            Result.CategoryDescription = CreatePair(Message.category).Description;
-            Result.DescriptionCode = CreatePair(Message.description).Code;
-            Result.Description = CreatePair(Message.description).Description;
-            Result.EconomicSectorCode = CreatePair(Message.economicSector).Code;
-            Result.EconomicSectorDescription = CreatePair(Message.economicSector).Description;
-            Result.LifeStatusCode = CreatePair(Message.lifeStatus).Code;
-            Result.LifeStatusDescription = CreatePair(Message.lifeStatus).Description;
-            Result.SapMarkCode = CreatePair(Message.sapMark).Code;
-            Result.SapMarkDescription = CreatePair(Message.sapMark).Description;
-            Result.HasIssues = (Message.ividQueryResult == IvidQueryResult.FURTHER_INVESTIGATION);
-            Result.CarFullname = string.Format("{0} {1}", Result.MakeDescription, Result.ModelDescription);
+            Result.SetErrorFlag(Message.partialResponse);
 
-            Result.SpecificInformation = new VehicleSpecificInformation()
-            {
-                Colour = Result.ColourDescription,
-                RegistrationNumber = Result.Registration,
-                VinNumber = Result.Vin,
-                LicenseNumber = Result.License,
-                EngineNumber = Result.Engine,
-                Odometer = "Odometer Not Available",
-                CategoryDescription = Result.CategoryDescription,
-            };
+            Result.Build(Message.ividQueryResult.ToString(), Message.IvidReference, Message.licenceNumber,
+                Message.registerNumber, Message.registrationDate, Message.vin, Message.engineNumber,
+                Message.engineDisplacement, Message.tare,
+                string.Format("{0} {1}", Result.MakeDescription, Result.ModelDescription));
 
-            if (string.IsNullOrEmpty(Result.CarFullname))
-            {
-                Result.CarFullname = null;
-            }
+            Result.SetMake(BuildIvidCodePair(Message.make));
+
+            Result.SetModel(BuildIvidCodePair(Message.model));
+
+            Result.SetColor(BuildIvidCodePair(Message.colour));
+
+            Result.SetDriven(BuildIvidCodePair(Message.driven));
+
+            Result.SetCategory(BuildIvidCodePair(Message.category));
+
+            Result.SetDescription(BuildIvidCodePair(Message.description));
+
+            Result.SetEconomicSector(BuildIvidCodePair(Message.economicSector));
+
+            Result.SetLifeStatus(BuildIvidCodePair(Message.lifeStatus));
+
+            Result.SetSapMark(BuildIvidCodePair(Message.sapMark));
+
+            Result.SetHasIssuesFlag((Message.ividQueryResult == IvidQueryResult.FURTHER_INVESTIGATION));
+
+            Result.BuildSpecificInformation();
         }
 
-        private const string NotAvailableError = "Error - Not Available";
-
-        private string CheckPartialResults(string value)
+        private static IvidCodePair BuildIvidCodePair(CodeDescription description)
         {
-            if (Result.HasErrors && string.IsNullOrWhiteSpace(value))
-            {
-                value = NotAvailableError;
-            }
-            return value;
-        }
-
-        private static IvidWebResponsePair CreatePair(CodeDescription ividCodeDescription)
-        {
-            var pair = new IvidWebResponsePair(ividCodeDescription);
-            pair.SetPairValues();
-            return pair;
+            return description == null
+                ? new IvidCodePair(string.Empty, string.Empty)
+                : new IvidCodePair(description.code, description.description);
         }
     }
-
-    internal class IvidWebResponsePair
-    {
-        public string Code { get; private set; }
-        public string Description { get; private set; }
-
-        private readonly CodeDescription _pair;
-
-        public IvidWebResponsePair(CodeDescription pair)
-        {
-            _pair = pair;
-            Code = string.Empty;
-            Description = string.Empty;
-        }
-
-        public void SetPairValues()
-        {
-            if (_pair == null) return;
-
-            Code = _pair.code;
-            Description = _pair.description;
-        }
-
-    }
-
-
 }
