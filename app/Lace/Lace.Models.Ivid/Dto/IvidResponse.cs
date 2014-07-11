@@ -1,217 +1,181 @@
-﻿using Lace.Models.Enums;
-
-namespace Lace.Models.Ivid.Dto
+﻿namespace Lace.Models.Ivid.Dto
 {
     public class IvidResponse : IResponseFromIvid
     {
-        public VehicleSpecificInformation SpecificInformation
+
+        private const string NotAvailableError = "Error - Not Available";
+
+        public void Build(string statusMessage, string reference, string license, string registration,
+            string registrationDate, string vin, string engine,
+            string displacement, string tare, string carFullName)
         {
-            get;
-            set;
-        }
-       
-        public string StatusMessage
-        {
-            get;
-            set;
+            StatusMessage = CheckPartial(statusMessage);
+            Reference = CheckPartial(reference);
+            License = CheckPartial(license);
+            Registration = CheckPartial(registration);
+            RegistrationDate = CheckPartial(registrationDate);
+            Vin = CheckPartial(vin);
+            Engine = CheckPartial(engine);
+            Displacement = CheckPartial(displacement);
+            Tare = CheckPartial(tare);
+            CarFullname = string.IsNullOrEmpty(carFullName) ? null : carFullName;
         }
 
-        public string Reference
+        public void SetErrorFlag(bool check)
         {
-            get;
-            set;
+            HasErrors |= check;
         }
 
-        public string License
+        public void SetHasIssuesFlag(bool check)
         {
-            get;
-            set;
+            HasIssues |= check;
         }
 
-       
-        public string Registration
+        public void SetMake(IvidCodePair pair)
         {
-            get;
-            set;
+            MakeCode = pair.Code;
+            MakeDescription = pair.Description;
         }
 
-      
-        public string RegistrationDate
+        public void SetModel(IvidCodePair pair)
         {
-            get;
-            set;
+            ModelCode = pair.Code;
+            ModelDescription = pair.Description;
         }
 
-      
-        public string Vin
+        public void SetColor(IvidCodePair pair)
         {
-            get;
-            set;
+            ColourCode = pair.Code;
+            ColourDescription = pair.Description;
         }
 
-      
-        public string Engine
+        public void SetDriven(IvidCodePair pair)
         {
-            get;
-            set;
+            DrivenCode = pair.Code;
+            DrivenDescription = pair.Description;
         }
 
-      
-        public string Displacement
+        public void SetCategory(IvidCodePair pair)
         {
-            get;
-            set;
+            CategoryCode = pair.Code;
+            CategoryDescription = pair.Description;
         }
 
-       
-        public string Tare
+        public void SetDescription(IvidCodePair pair)
         {
-            get;
-            set;
+            DescriptionCode = pair.Code;
+            Description = pair.Description;
         }
 
-        public string MakeCode
+        public void SetEconomicSector(IvidCodePair pair)
         {
-            get;
-            set;
+            EconomicSectorCode = pair.Code;
+            EconomicSectorDescription = pair.Description;
         }
 
-   
-        public string MakeDescription
+        public void SetLifeStatus(IvidCodePair pair)
         {
-            get;
-            set;
+            LifeStatusCode = pair.Code;
+            LifeStatusDescription = pair.Description;
         }
 
-        
-        public string ModelCode
+        public void SetSapMark(IvidCodePair pair)
         {
-            get;
-            set;
+            SapMarkCode = pair.Code;
+            SapMarkDescription = pair.Description;
         }
 
-      
-        public string ModelDescription
+        public void BuildSpecificInformation()
         {
-            get;
-            set;
+            SpecificInformation = new VehicleSpecificInformation("Odometer Not Available", ColourDescription,
+                Registration, Vin, License, Engine, CategoryDescription);
         }
 
-      
-        public string ColourCode
+        private string CheckPartial(string value)
         {
-            get;
-            set;
+            if (HasErrors && string.IsNullOrWhiteSpace(value))
+            {
+                value = NotAvailableError;
+            }
+            return value;
         }
 
-      
-        public string ColourDescription
-        {
-            get;
-            set;
-        }
 
-      
-        public string DrivenCode
-        {
-            get;
-            set;
-        }
+        public VehicleSpecificInformation SpecificInformation { get; private set; }
 
-      
-        public string DrivenDescription
-        {
-            get;
-            set;
-        }
+        public string StatusMessage { get; private set; }
 
-       
-        public string CategoryCode
-        {
-            get;
-            set;
-        }
+        public string Reference { get; private set; }
 
-       
-        public string CategoryDescription
-        {
-            get;
-            set;
-        }
+        public string License { get; private set; }
 
-       
-        public string DescriptionCode
-        {
-            get;
-            set;
-        }
+        public string Registration { get; private set; }
 
-       
-        public string Description
-        {
-            get;
-            set;
-        }
+        public string RegistrationDate { get; private set; }
 
-       
-        public string EconomicSectorCode
-        {
-            get;
-            set;
-        }
+        public string Vin { get; private set; }
 
-     
-        public string EconomicSectorDescription
-        {
-            get;
-            set;
-        }
+        public string Engine { get; private set; }
 
-       
-        public string LifeStatusCode
-        {
-            get;
-            set;
-        }
+        public string Displacement { get; private set; }
 
-       
-        public string LifeStatusDescription
-        {
-            get;
-            set;
-        }
+        public string Tare { get; private set; }
 
-        public string SapMarkCode
-        {
-            get;
-            set;
-        }
+        public string MakeCode { get; private set; }
 
-       
-        public string SapMarkDescription
-        {
-            get;
-            set;
-        }
+        public string MakeDescription { get; private set; }
 
-     
-        public bool HasIssues
-        {
-            get;
-            set;
-        }
+        public string ModelCode { get; private set; }
 
-       
-        public bool HasErrors { get; set; }
+        public string ModelDescription { get; private set; }
 
-       
-        public string CarFullname
+        public string ColourCode { get; private set; }
+
+        public string ColourDescription { get; private set; }
+
+        public string DrivenCode { get; private set; }
+
+        public string DrivenDescription { get; private set; }
+
+        public string CategoryCode { get; private set; }
+
+        public string CategoryDescription { get; private set; }
+
+        public string DescriptionCode { get; private set; }
+
+        public string Description { get; private set; }
+
+        public string EconomicSectorCode { get; private set; }
+
+        public string EconomicSectorDescription { get; private set; }
+
+        public string LifeStatusCode { get; private set; }
+
+        public string LifeStatusDescription { get; private set; }
+
+        public string SapMarkCode { get; private set; }
+
+        public string SapMarkDescription { get; private set; }
+
+        public bool HasIssues { get; private set; }
+
+        public bool HasErrors { get; private set; }
+
+        public string CarFullname { get; private set; }
+
+        // public ServiceCallState ServiceProviderCallState { get; private set; }
+
+    }
+
+    public class IvidCodePair
+    {
+        public string Code { get; private set; }
+        public string Description { get; private set; }
+
+        public IvidCodePair(string code, string description)
         {
-            get;
-            set;
+            Code = code;
+            Description = description;
         }
-        
-        public ServiceCallState ServiceProviderCallState { get; set; }
-        
     }
 }

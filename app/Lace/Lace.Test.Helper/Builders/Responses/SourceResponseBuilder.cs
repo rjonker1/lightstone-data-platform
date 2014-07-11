@@ -21,7 +21,7 @@ namespace Lace.Test.Helper.Builders.Responses
 
         public HpiStandardQueryResponse ForIvidWithRepairVin()
         {
-            return FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoSYB459GP();
+            return FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoSyb459Gp();
         }
 
         public GetDataResult ForAudatexWithHuyandaiHistory()
