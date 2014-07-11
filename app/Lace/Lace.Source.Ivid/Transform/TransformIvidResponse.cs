@@ -1,5 +1,4 @@
-﻿using Lace.Models.Ivid;
-using Lace.Models.Ivid.Dto;
+﻿using Lace.Models.Ivid.Dto;
 using Lace.Source.Ivid.IvidServiceReference;
 
 namespace Lace.Source.Ivid.Transform
@@ -7,7 +6,7 @@ namespace Lace.Source.Ivid.Transform
     public class TransformIvidResponse : ITransform
     {
         public HpiStandardQueryResponse Message { get; private set; }
-        public IResponseFromIvid Result { get; private set; }
+        public IvidResponse Result { get; private set; }
 
         public bool Continue { get; private set; }
 
@@ -24,8 +23,7 @@ namespace Lace.Source.Ivid.Transform
 
             Result.Build(Message.ividQueryResult.ToString(), Message.IvidReference, Message.licenceNumber,
                 Message.registerNumber, Message.registrationDate, Message.vin, Message.engineNumber,
-                Message.engineDisplacement, Message.tare,
-                string.Format("{0} {1}", Result.MakeDescription, Result.ModelDescription));
+                Message.engineDisplacement, Message.tare);
 
             Result.SetMake(BuildIvidCodePair(Message.make));
 
@@ -48,6 +46,8 @@ namespace Lace.Source.Ivid.Transform
             Result.SetHasIssuesFlag((Message.ividQueryResult == IvidQueryResult.FURTHER_INVESTIGATION));
 
             Result.BuildSpecificInformation();
+
+            Result.SetCarFullName();
         }
 
         private static IvidCodePair BuildIvidCodePair(CodeDescription description)

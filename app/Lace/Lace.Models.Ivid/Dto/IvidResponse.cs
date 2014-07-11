@@ -1,13 +1,13 @@
 ﻿namespace Lace.Models.Ivid.Dto
 {
-    public class IvidResponse : IResponseFromIvid
+    public class IvidResponse : IResponseFromIvid, IBuildIvidResponse
     {
 
         private const string NotAvailableError = "Error - Not Available";
 
         public void Build(string statusMessage, string reference, string license, string registration,
             string registrationDate, string vin, string engine,
-            string displacement, string tare, string carFullName)
+            string displacement, string tare)
         {
             StatusMessage = CheckPartial(statusMessage);
             Reference = CheckPartial(reference);
@@ -18,7 +18,6 @@
             Engine = CheckPartial(engine);
             Displacement = CheckPartial(displacement);
             Tare = CheckPartial(tare);
-            CarFullname = string.IsNullOrEmpty(carFullName) ? null : carFullName;
         }
 
         public void SetErrorFlag(bool check)
@@ -89,6 +88,12 @@
         {
             SpecificInformation = new VehicleSpecificInformation("Odometer Not Available", ColourDescription,
                 Registration, Vin, License, Engine, CategoryDescription);
+        }
+
+        public void SetCarFullName()
+        {
+            var carFullName = string.Format("{0} {1}", MakeDescription, ModelDescription);
+            CarFullname = string.IsNullOrEmpty(carFullName) ? null : carFullName;
         }
 
         private string CheckPartial(string value)

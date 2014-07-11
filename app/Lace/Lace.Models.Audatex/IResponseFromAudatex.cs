@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Lace.Models.Audatex.Dto;
-using Lace.Models.Enums;
 
 namespace Lace.Models.Audatex
 {
