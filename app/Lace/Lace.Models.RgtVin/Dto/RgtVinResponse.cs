@@ -1,37 +1,77 @@
-﻿using Lace.Models.Enums;
-
-namespace Lace.Models.RgtVin.Dto
+﻿namespace Lace.Models.RgtVin.Dto
 {
     public class RgtVinResponse : IResponseFromRgtVin
     {
-        public string Vin { get; set; }
-
-        public string VehicleMake { get; set; }
-
-        public string VehicleType { get; set; }
-
-        public string VehicleModel { get; set; }
-
-        public int? Year { get; set; }
-
-        public int? Month { get; set; }
-
-        public int? Quarter { get; set; }
-
-        public int? RgtCode { get; set; }
-
-        public decimal? Price { get; set; }
-
-        public string Colour { get; set; }
-
-        public string CarFullname
+        public RgtVinResponse()
         {
-            get
-            {
-                return string.Format("{0} {1}", VehicleMake, VehicleModel);
-            }
         }
 
-        public ServiceCallState ServiceProviderCallState { get; set; }
+        public RgtVinResponse(string color, int month, int price, int quarter, int rgtCode, string vehicleMake,
+            string vechicleModel, string vehicleType, string vin, int year)
+        {
+            Colour = color;
+            Month = month;
+            Price = price;
+            Quarter = quarter;
+            RgtCode = rgtCode;
+            VehicleMake = vehicleMake;
+            VehicleModel = vechicleModel;
+            VehicleType = vehicleType;
+            Vin = vin;
+            Year = year;
+        }
+
+        public void BuidWithValidation(string color, string month, string price, string quarter, string rgtCode,
+            string vehicleMake, string vechicleModel, string vehicleType, string vin, string year)
+        {
+            Colour = color;
+            Month = ValidateNumber(month);
+            Price = ValidateNumber(price);
+            Quarter = ValidateNumber(quarter);
+            RgtCode = ValidateNumber(rgtCode);
+            VehicleMake = vehicleMake;
+            VehicleModel = vechicleModel;
+            VehicleType = vehicleType;
+            Vin = vin;
+            Year = ValidateNumber(year);
+        }
+
+        public void SetCarName()
+        {
+            CarFullname = string.Format("{0} {1}", VehicleMake, VehicleModel);
+        }
+
+        public string Vin { get; private set; }
+
+        public string VehicleMake { get; private set; }
+
+        public string VehicleType { get; private set; }
+
+        public string VehicleModel { get; private set; }
+
+        public int? Year { get; private set; }
+
+        public int? Month { get; private set; }
+
+        public int? Quarter { get; private set; }
+
+        public int? RgtCode { get; private set; }
+
+        public decimal? Price { get; private set; }
+
+        public string Colour { get; private set; }
+
+        public string CarFullname { get; private set; }
+
+        private static int ValidateNumber(string number)
+        {
+            if (string.IsNullOrEmpty(number)) return 0;
+
+            int num;
+
+            int.TryParse(number, out num);
+
+            return num;
+        }
     }
 }

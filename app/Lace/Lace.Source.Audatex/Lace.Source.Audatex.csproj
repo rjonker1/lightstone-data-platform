@@ -63,7 +63,6 @@
     <Compile Include="ServiceConfig\ConfigureAudatexRequestMessage.cs" />
     <Compile Include="ServiceConfig\ConfigureAudatexSource.cs" />
     <Compile Include="ServiceConfig\SerializeAuduatexRequestData.cs" />
-    <Compile Include="Transform\AccidentClaimCleaner.cs" />
     <Compile Include="Transform\TransformAudatexResponse.cs" />
     <Compile Include="Transform\TransformRepairCosts.cs" />
   </ItemGroup>

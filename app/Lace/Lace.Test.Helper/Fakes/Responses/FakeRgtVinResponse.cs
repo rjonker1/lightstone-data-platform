@@ -1,6 +1,4 @@
-﻿
-using System.Data;
-using Lace.Models.Enums;
+﻿using System.Data;
 using Lace.Models.RgtVin.Dto;
 using DataSet = System.Data.DataSet;
 
@@ -10,20 +8,8 @@ namespace Lace.Test.Helper.Fakes.Responses
     {
         public static RgtVinResponse GetRgtVinResponseForLicensePlateNumber()
         {
-            return new RgtVinResponse()
-            {
-                Colour = "Super White II",
-                Month = 8,
-                Price = 100000,
-                Quarter = 4,
-                RgtCode = 107483,
-                ServiceProviderCallState = ServiceCallState.CallCompleted,
-                VehicleMake = "TOYOTA",
-                VehicleModel = "Auris 1.6 RT 5-dr",
-                VehicleType = "Auris",
-                Vin = "SB1KV58E40F039277",
-                Year = 2008
-            };
+            return new RgtVinResponse("Super White II", 8, 100000, 4, 107483, "TOYOTA", "Auris 1.6 RT 5-dr", "Auris",
+                "SB1KV58E40F039277", 2008);
         }
 
         public static DataSet GetRgtVinWebResponseForLicensePlateNumber()

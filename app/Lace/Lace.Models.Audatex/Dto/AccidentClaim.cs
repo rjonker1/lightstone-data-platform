@@ -4,46 +4,95 @@ namespace Lace.Models.Audatex.Dto
 {
     public class AccidentClaim
     {
-        public Guid Key { get; set; }
 
-        public DateTime? AccidentDate { get; set; }
+        public AccidentClaim(DateTime? accidentDate, string assessmentNumber, string claimReferenceNumber,
+            DateTime? creationDate,
+            string dataSource, string insuredName, string manufacturer, string mileage, string model, string orginator,
+            string policyNumber, string registration,
+            decimal? repairCostExVat, decimal? repairCostIncVat, DateTime? versionDate, string vin,
+            string workProviderReference, string matchType,
+            string quoteValueIndicator)
+        {
+          //  Key = key;
+            AccidentDate = accidentDate;
+            AssessmentNumber = assessmentNumber;
+            ClaimReferenceNumber = claimReferenceNumber;
+            CreationDate = creationDate;
+            DataSource = dataSource;
+            InsuredName = insuredName;
+            Manufacturer = manufacturer;
+            Mileage = mileage;
+            Originator = orginator;
+            Model = model;
+            PolicyNumber = policyNumber;
+            Registration = registration;
+            RepairCostExVat = repairCostExVat;
+            RepairCostIncVat = repairCostIncVat;
+            VersionDate = versionDate;
+            Vin = vin;
+            WorkproviderReference = workProviderReference;
+            MatchType = matchType;
+            QuoteValueIndicator = quoteValueIndicator;
+        }
 
-        public string AssessmentNumber { get; set; }
-       
-        public string ClaimReferenceNumber { get; set; }
-       
-        public DateTime? CreationDate { get; set; }
-       
-        public string CreationDateString { get; set; }
-       
-        public string DataSource { get; set; }
-       
-        public string InsuredName { get; set; }
+        public Guid Key { get; private set; }
 
-        public string Manufacturer { get; set; }
-       
-        public string Mileage { get; set; }
-       
-        public string Model { get; set; }
-       
-        public string Originator { get; set; }
-       
-        public string PolicyNumber { get; set; }
-       
-        public string Registration { get; set; }
-       
-        public decimal? RepairCostExVat { get; set; }
-       
-        public decimal? RepairCostIncVat { get; set; }
-       
-        public DateTime? VersionDate { get; set; }
-       
-        public string Vin { get; set; }
-       
-        public string WorkproviderReference { get; set; }
-       
-        public string MatchType { get; set; }
-       
-        public string QuoteValueIndicator { get; set; }
+        public DateTime? AccidentDate { get; private set; }
+
+        public string AssessmentNumber { get; private set; }
+
+        public string ClaimReferenceNumber { get; private set; }
+
+        public DateTime? CreationDate { get; private set; }
+
+        public string CreationDateString
+        {
+            get
+            {
+               return GetCreationDateString(CreationDate);
+            }
+        }
+
+        public string DataSource { get; private set; }
+
+        public string InsuredName { get; private set; }
+
+        public string Manufacturer { get; private set; }
+
+        public string Mileage { get; private set; }
+
+        public string Model { get; private set; }
+
+        public string Originator { get; private set; }
+
+        public string PolicyNumber { get; private set; }
+
+        public string Registration { get; private set; }
+
+        public decimal? RepairCostExVat { get; private set; }
+
+        public decimal? RepairCostIncVat { get; private set; }
+
+        public DateTime? VersionDate { get; private set; }
+
+        public string Vin { get; private set; }
+
+        public string WorkproviderReference { get; private set; }
+
+        public string MatchType { get; private set; }
+
+        public string QuoteValueIndicator { get; private set; }
+
+    
+        private static string GetCreationDateString(DateTime? creationDate)
+        {
+            var creationDateString = creationDate.HasValue &&
+                                     (creationDate.Value.ToShortDateString() != "0001-01-01" &&
+                                      creationDate.Value.ToShortDateString() != "0001/01/01")
+                ? creationDate.Value.ToShortDateString()
+                : "Date Not Available";
+
+            return creationDateString;
+        }
     }
 }

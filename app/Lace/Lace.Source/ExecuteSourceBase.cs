@@ -1,4 +1,7 @@
-﻿namespace Lace.Source
+﻿using Lace.Events;
+using Lace.Response;
+
+namespace Lace.Source
 {
     public class ExecuteSourceBase
     {
@@ -11,10 +14,18 @@
             FallBack = fallbackSource;
         }
 
-        //public void Append()
-        //{
-        //    Next = nextSource;
-        //    FallBack = fallbackSource;
-        //}
+        public void CallNextSource(ILaceResponse response, ILaceEvent laceEvent)
+        {
+            if (Next == null) return;
+
+            Next.CallSource(response, laceEvent);
+        }
+
+        public void CallFallbackSource(ILaceResponse response, ILaceEvent laceEvent)
+        {
+            if (FallBack == null) return;
+
+            FallBack.CallSource(response, laceEvent);
+        }
     }
 }

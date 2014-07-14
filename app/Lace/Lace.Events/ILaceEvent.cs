@@ -1,5 +1,4 @@
-﻿using System;
-using Monitoring.Sources.Lace;
+﻿using Monitoring.Sources.Lace;
 
 namespace Lace.Events
 {

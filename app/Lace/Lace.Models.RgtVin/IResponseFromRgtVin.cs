@@ -1,31 +1,27 @@
-﻿using Lace.Models.Enums;
-
-namespace Lace.Models.RgtVin
+﻿namespace Lace.Models.RgtVin
 {
     public interface IResponseFromRgtVin
     {
-        string Vin { get; set; }
+        string Vin { get; }
 
-        string VehicleMake { get; set; }
+        string VehicleMake { get; }
 
-        string VehicleType { get; set; }
+        string VehicleType { get; }
 
-        string VehicleModel { get; set; }
+        string VehicleModel { get; }
 
-        int? Year { get; set; }
+        int? Year { get; }
 
-        int? Month { get; set; }
+        int? Month { get; }
 
-        int? Quarter { get; set; }
+        int? Quarter { get; }
 
-        int? RgtCode { get; set; }
+        int? RgtCode { get; }
 
-        decimal? Price { get; set; }
+        decimal? Price { get; }
 
-        string Colour { get; set; }
+        string Colour { get; }
 
         string CarFullname { get; }
-
-        ServiceCallState ServiceProviderCallState { get; set; }
     }
 }

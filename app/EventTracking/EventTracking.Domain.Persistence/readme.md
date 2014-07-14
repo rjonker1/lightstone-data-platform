@@ -8,6 +8,7 @@ https://github.com/eventstore/eventstore/wiki/Getting-Started-HTTP
 	*	Enter ' EventStore.SingleNode.exe --db ./db --log ./logs ' on the command line
 		*	This will start EventStore an will put the database in the path ./db and the logs in ./logs.
 		*	Further command line options https://github.com/eventstore/eventstore/wiki/Command-Line-Arguments
+		*	To ensure custom projections run, you need to start the exe with --run-projections=ALL
 	*	EventStore is up and running on your machine http://127.0.0.1:2113/
 	*	The console will ask for a username an password
 	*	The default credentials are 

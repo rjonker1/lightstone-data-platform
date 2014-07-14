@@ -1,5 +1,5 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
+using Lace.Extensions;
 using Lace.Models.RgtVin.Dto;
 
 namespace Lace.Source.RgtVin.Transform
@@ -22,37 +22,18 @@ namespace Lace.Source.RgtVin.Transform
 
         public void Transform()
         {
-            Result.Colour = GetDataValue(_carDetailTable, 0, "COLOUR");
-            Result.Month = ValidateNumber(GetDataValue(_carDetailTable, 0, "MONTH"));
-            Result.Price = ValidateNumber(GetDataValue(_carDetailTable, 0, "PRICE"));
-            Result.Quarter = ValidateNumber(GetDataValue(_carDetailTable, 0, "QTR"));
-            Result.RgtCode = ValidateNumber(GetDataValue(_carDetailTable, 0, "RGTCODE"));
-            Result.VehicleMake = GetDataValue(_carDetailTable, 0, "MAKE");
-            Result.VehicleModel = GetDataValue(_carDetailTable, 0, "MODEL");
-            Result.VehicleType = GetDataValue(_carDetailTable, 0, "TYPE");
-            Result.Vin = GetDataValue(_carDetailTable, 0, "VIN");
-            Result.Year = ValidateNumber(GetDataValue(_carDetailTable, 0, "YEAR"));
-        }
-
-        private static int ValidateNumber(string number)
-        {
-            if (string.IsNullOrEmpty(number)) return 0;
-
-            int num;
-
-            int.TryParse(number, out num);
-
-            return num;
-        }
-
-        private static string GetDataValue(DataTable table, int row, string column)
-        {
-            string result = null;
-            if (row >= 0 && row < table.Rows.Count)
-            {
-                result = Convert.ToString(table.Rows[row][column]);
-            }
-            return result;
+            Result.BuidWithValidation(_carDetailTable.ValueFromTableRow(0, "COLOUR"),
+                _carDetailTable.ValueFromTableRow(0, "MONTH"),
+                _carDetailTable.ValueFromTableRow(0, "PRICE"),
+                _carDetailTable.ValueFromTableRow(0, "QTR"),
+                _carDetailTable.ValueFromTableRow(0, "RGTCODE"),
+                _carDetailTable.ValueFromTableRow(0, "MAKE"),
+                _carDetailTable.ValueFromTableRow(0, "MODEL"),
+                _carDetailTable.ValueFromTableRow(0, "TYPE"),
+                _carDetailTable.ValueFromTableRow(0, "VIN"),
+                _carDetailTable.ValueFromTableRow(0, "YEAR")
+                );
+            Result.SetCarName();
         }
     }
 }

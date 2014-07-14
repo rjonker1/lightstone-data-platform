@@ -53,7 +53,9 @@
     <None Include="connections.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Deploy\build.ps1" />
+    <None Include="Deploy\build.ps1">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Deploy\deploy.ps1" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

@@ -20,7 +20,7 @@ namespace Monitoring.Acceptance.Tests.Lace.Consumer
         public override void Observe()
         {
             _message = new LaceExternalSourceFailedEventMessage(_aggregateId, LaceEventSource.Ivid,
-                PublishableLaceMessages.ExternalSourceCallFailed());
+                PublishableLaceMessages.ExternalSourceCallFailed(),0);
 
             if (_consumer == null)
                 _consumer = new ExternalSourceFailedConsumer();

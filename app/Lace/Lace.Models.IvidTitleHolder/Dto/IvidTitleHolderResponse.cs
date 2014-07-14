@@ -1,52 +1,92 @@
 ﻿using System;
-using Lace.Models.Enums;
+using System.Linq;
 
 namespace Lace.Models.IvidTitleHolder.Dto
 {
-    public class IvidTitleHolderResponse : IResponseFromIvidTitleHolder
+    public class IvidTitleHolderResponse : IResponseFromIvidTitleHolder, IBuildIvidTitleHolderResponse
     {
-        public string BankName { get; set; }
-        public string AccountNumber { get; set; }
-        public DateTime? DateOpened { get; set; }
+        private const string NotAvailableError = "Error - Not Available";
 
-        public bool FlaggedOnAnpr { get; set; }
+        public void Build(string bankName, bool flaggedOnAnpr, string accountNumber, DateTime accountOpenDate, DateTime accountCloseDate, string yearOfLiablilityForLicensing)
+        {
+            BankName = CheckPartial(bankName);
+            FlaggedOnAnpr = flaggedOnAnpr;
+            AccountNumber = CheckPartial(accountNumber);
+            AccountOpenDate = FormatDate(accountOpenDate);
+            AccountClosedDate = FormatDate(accountCloseDate);
+            YearOfLiabilityForLicensing = CheckPartial(yearOfLiablilityForLicensing);
+        }
+
+
+        public void IsPartial(bool check)
+        {
+            PartialResponse |= check;
+        }
+
+        public void HasErrorsCheck(bool check)
+        {
+            HasErrors |= check;
+        }
+
+        private string CheckPartial(string value)
+        {
+            if (HasErrors && string.IsNullOrWhiteSpace(value))
+            {
+                value = NotAvailableError;
+            }
+            return value;
+        }
+
+        private static string FormatDate(DateTime? date)
+        {
+            if (!date.HasValue || date.Value == DateTime.MinValue) return NotAvailableError;
+
+            return date.Value.ToString("dd MMMM yyyy");
+        }
+
+        public void SetRequestFinancialInterestInvite()
+        {
+            var validation =
+                new FinancedInterestValidation(string.IsNullOrEmpty(BankName)
+                    ? string.Empty
+                    : BankName.ToLowerInvariant(),!string.IsNullOrEmpty(AccountNumber));
+
+            validation.Check();
+
+            FinancialInterestAvailable = validation.FinancedInterestIsAvailable;
+            RequestFinancialInterestInvite = validation.FinancialInterestInvite;
+
+        }
+
+
+        public string BankName { get; private set; }
+        public string AccountNumber { get; private set; }
+        public DateTime? DateOpened { get;  private set; }
+
+        public bool FlaggedOnAnpr { get; private set; }
 
         public string FinancialInterestsHeading
         {
             get { return "Financial Interests"; }
         }
 
-        public string AccountOpenDate { get; set; }
-        public string AccountClosedDate { get; set; }
+        public string AccountOpenDate { get; private set; }
+        public string AccountClosedDate { get; private set; }
 
         public string AgreementType
         {
             get { return "Regular Finance Contract"; }
         }
 
-        public string YearOfLiabilityForLicensing { get; set; }
+        public string YearOfLiabilityForLicensing { get; private set; }
 
-        public string RequestFinancialInterestInvite
-        {
-            get
-            {
+        public string RequestFinancialInterestInvite { get; private set; }
 
-                return GetFinancialInterestInvite();
-            }
-        }
-
-        public bool FinancialInterestAvailable
-        {
-            get
-            {
-                return GetFinancialInterestAvailable();
-            }
-        }
+        public bool FinancialInterestAvailable { get; private set; }
 
 
-        public bool PartialResponse { get; set; }
-        public bool HasErrors { get; set; }
-        public ServiceCallState ServiceProviderCallState { get; set; }
+        public bool PartialResponse { get; private set; }
+        public bool HasErrors { get; private set; }
 
         public string ExpiredMessage
         {
@@ -57,36 +97,7 @@ namespace Lace.Models.IvidTitleHolder.Dto
             }
         }
 
-        private string GetFinancialInterestInvite()
-        {
-            if (RequiredFieldsAreNotValid())
-                return "No financial interest exists for this vehicle";
 
-
-            return "wesbank".Equals(BankName, StringComparison.InvariantCultureIgnoreCase)
-                ? "To request financial interest please click on the 'Request' button"
-                : "Financed Interest is only available for WesBank customers at this point in time";
-        }
-
-        private bool GetFinancialInterestAvailable()
-        {
-            return RequiredFieldsAreNotValid()
-                ? false
-                : "wesbank".Equals(BankName, StringComparison.InvariantCultureIgnoreCase);
-        }
-
-        private bool RequiredFieldsAreNotValid()
-        {
-            return string.IsNullOrEmpty(AccountNumber) && !ValidateDateValue(AccountOpenDate) &&
-                   !ValidateDateValue(AccountClosedDate);
-        }
-
-        private static bool ValidateDateValue(string value)
-        {
-            if (string.IsNullOrEmpty(value)) return false;
-
-            DateTime validDate;
-            return (DateTime.TryParse(value, out validDate));
-        }
+       
     }
 }

@@ -8,11 +8,12 @@ using Lace.Source.RgtVin.ServiceCalls;
 
 namespace Lace.Source.RgtVin
 {
-    public class RgtVinSourceExecution : ExecuteSourceBase,  IExecuteTheSource
+    public class RgtVinSourceExecution : ExecuteSourceBase, IExecuteTheSource
     {
         private readonly ILaceRequest _request;
 
-        public RgtVinSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public RgtVinSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
+            IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -32,10 +33,10 @@ namespace Lace.Source.RgtVin
                 consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.RgtVinResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
 
         }
 

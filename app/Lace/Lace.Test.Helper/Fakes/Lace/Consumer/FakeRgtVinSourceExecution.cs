@@ -18,7 +18,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         private readonly ILaceRequest _request;
         private readonly ICallTheSource _externalWebServiceCall;
 
-        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
+            IExecuteTheSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -28,7 +29,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.RgtVin,_request);
+            var spec = new CanHandlePackageSpecification(Services.RgtVin, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -40,11 +41,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                     new FakeCallingRgtVinExternalWebService());
                 consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.RgtResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                if (response.RgtResponse == null)
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
 
             //_handleServiceCall
             //    .Request(c =>

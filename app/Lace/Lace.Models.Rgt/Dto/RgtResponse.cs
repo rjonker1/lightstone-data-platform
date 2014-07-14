@@ -1,52 +1,78 @@
-﻿using Lace.Models.Enums;
-
-namespace Lace.Models.Rgt.Dto
+﻿namespace Lace.Models.Rgt.Dto
 {
     public class RgtResponse : IResponseFromRgt
     {
 
-        public string Manufacturer { get; set; }
+        public RgtResponse(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy,
+            string acceleration, string torque, string emissions,
+            string engineSize, string bodyShape, string fuelType, string transmissionType, string carFullName,
+            string colour, string rainSensorWipers, string headsUpDisplay,
+            string vehicleType, string model, string make, string carType)
+        {
+            Manufacturer = manufacturer;
+            ModelYear = modelYear;
+            ModelType = modelType;
+            TopSpeed = topSpeed;
+            Kilowatts = kilowatts;
+            FuelEconomy = fuelEconomy;
+            Acceleration = acceleration;
+            Torque = torque;
+            Emissions = emissions;
+            EngineSize = engineSize;
+            BodyShape = bodyShape;
+            FuelType = fuelType;
+            TransmissionType = transmissionType;
+            CarFullname = carFullName;
+            Colour = colour;
+            RainSensorWindscreenWipers = rainSensorWipers;
+            HeadUpDisplay = headsUpDisplay;
+            VehicleType = vehicleType;
+            Model = model;
+            Make = make;
+            CarType = carType;
+        }
 
-        public int ModelYear { get; set; }
 
-        public string ModelType { get; set; }
+        public string Manufacturer { get; private set; }
 
-        public string TopSpeed { get; set; }
+        public int ModelYear { get; private set; }
 
-        public string Kilowatts { get; set; }
+        public string ModelType { get; private set; }
 
-        public string FuelEconomy { get; set; }
+        public string TopSpeed { get; private set; }
 
-        public string Acceleration { get; set; }
+        public string Kilowatts { get; private set; }
 
-        public string Torque { get; set; }
+        public string FuelEconomy { get; private set; }
 
-        public string Emissions { get; set; }
+        public string Acceleration { get; private set; }
 
-        public string EngineSize { get; set; }
+        public string Torque { get; private set; }
 
-        public string BodyShape { get; set; }
+        public string Emissions { get; private set; }
 
-        public string FuelType { get; set; }
+        public string EngineSize { get; private set; }
 
-        public string TransmissionType { get; set; }
+        public string BodyShape { get; private set; }
 
-        public string CarFullname { get; set; }
+        public string FuelType { get; private set; }
 
-        public string Colour { get; set; }
+        public string TransmissionType { get; private set; }
 
-        public string RainSensorWindscreenWipers { get; set; }
+        public string CarFullname { get; private set; }
 
-        public string HeadUpDisplay { get; set; }
+        public string Colour { get; private set; }
 
-        public string VehicleType { get; set; }
+        public string RainSensorWindscreenWipers { get; private set; }
 
-        public string Model { get; set; }
+        public string HeadUpDisplay { get; private set; }
 
-        public string Make { get; set; }
+        public string VehicleType { get; private set; }
 
-        public string CarType { get; set; }
+        public string Model { get; private set; }
 
-        public ServiceCallState ServiceProviderCallState { get; set; }
+        public string Make { get; private set; }
+
+        public string CarType { get; private set; }
     }
 }

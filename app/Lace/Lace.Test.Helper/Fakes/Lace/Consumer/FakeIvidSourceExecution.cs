@@ -35,11 +35,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                     new FakeCallingIvidExternalWebService());
                 consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.IvidResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                if (response.IvidResponse == null)
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
 
         }
 

@@ -20,7 +20,7 @@ namespace Lace.Source.Ivid
 
         public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
         {
-            var spec = new CanHandlePackageSpecification(Services.Ivid,_request);
+            var spec = new CanHandlePackageSpecification(Services.Ivid, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -31,11 +31,11 @@ namespace Lace.Source.Ivid
                 var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
-                if(response.IvidResponse == null && FallBack != null)
-                    FallBack.CallSource(response, laceEvent);
+                if (response.IvidResponse == null)
+                    CallFallbackSource(response, laceEvent);
             }
 
-            if (Next != null) Next.CallSource(response, laceEvent);
+            CallNextSource(response, laceEvent);
         }
 
 

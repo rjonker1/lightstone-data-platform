@@ -30,7 +30,7 @@ namespace Lace.Source.Ivid.ServiceCalls
         {
             try
             {
-                laceEvent.PublishStartServiceConfigurationMessage(Source);
+                laceEvent.PublishStartSourceConfigurationMessage(Source);
 
                 var ividWebService = new ConfigureIvidSource();
 
@@ -47,25 +47,25 @@ namespace Lace.Source.Ivid.ServiceCalls
                     .Build()
                     .HpiQueryRequest;
 
-                    laceEvent.PublishEndServiceConfigurationMessage(Source);
+                    laceEvent.PublishEndSourceConfigurationMessage(Source);
 
-                    laceEvent.PublishServiceRequestMessage(Source,
+                    laceEvent.PublishSourceRequestMessage(Source,
                         ividRequest.ObjectToJson());
 
-                    laceEvent.PublishStartServiceCallMessage(Source);
+                    laceEvent.PublishStartSourceCallMessage(Source);
 
                     _ividResponse = ividWebService
                         .IvidServiceProxy
                         .HpiStandardQuery(ividRequest);
 
-                    laceEvent.PublishEndServiceCallMessage(Source);
+                    laceEvent.PublishEndSourceCallMessage(Source);
 
                     ividWebService.CloseWebService();
 
                     if (_ividResponse == null)
-                        laceEvent.PublishNoResponseFromServiceMessage(Source);
+                        laceEvent.PublishNoResponseFromSourceMessage(Source);
 
-                    laceEvent.PublishServiceResponseMessage(Source,
+                    laceEvent.PublishSourceResponseMessage(Source,
                         _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson());
 
                     TransformResponse(response);
@@ -74,7 +74,7 @@ namespace Lace.Source.Ivid.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
-                laceEvent.PublishFailedServiceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessaage(Source);
                 IvidResponseFailed(response);
             }
         }

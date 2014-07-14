@@ -1,31 +1,27 @@
-﻿using Lace.Models.Enums;
-
-namespace Lace.Models.Rgt
+﻿namespace Lace.Models.Rgt
 {
     public interface IResponseFromRgt
     {
-        string Manufacturer { get; set; }
-        int ModelYear { get; set; }
-        string ModelType { get; set; }
-        string TopSpeed { get; set; }
-        string Kilowatts { get; set; }
-        string FuelEconomy { get; set; }
-        string Acceleration { get; set; }
-        string Torque { get; set; }
-        string Emissions { get; set; }
-        string EngineSize { get; set; }
-        string BodyShape { get; set; }
-        string FuelType { get; set; }
-        string TransmissionType { get; set; }
-        string CarFullname { get; set; }
-        string Colour { get; set; }
-        string RainSensorWindscreenWipers { get; set; }
-        string HeadUpDisplay { get; set; }
-        string VehicleType { get; set; }
-        string Model { get; set; }
-        string Make { get; set; }
-        string CarType { get; set; }
-
-        ServiceCallState ServiceProviderCallState { get; set; }
+        string Manufacturer { get; }
+        int ModelYear { get; }
+        string ModelType { get; }
+        string TopSpeed { get; }
+        string Kilowatts { get; }
+        string FuelEconomy { get; }
+        string Acceleration { get; }
+        string Torque { get; }
+        string Emissions { get; }
+        string EngineSize { get; }
+        string BodyShape { get; }
+        string FuelType { get; }
+        string TransmissionType { get; }
+        string CarFullname { get; }
+        string Colour { get; }
+        string RainSensorWindscreenWipers { get; }
+        string HeadUpDisplay { get; }
+        string VehicleType { get; }
+        string Model { get; }
+        string Make { get; }
+        string CarType { get; }
     }
 }
