@@ -9,9 +9,9 @@ namespace Monitoring.Consumer.Lace.Consumers
     {
         public bool HasBeenConsumed { get; private set; }
 
-        private readonly IPersistEvent _persistEvent;
+        private readonly IPersistAnEvent _persistEvent;
 
-        public ExternalSourceConfigurationConsumer(IPersistEvent persistEvent)
+        public ExternalSourceConfigurationConsumer(IPersistAnEvent persistEvent)
         {
             _persistEvent = persistEvent;
         }

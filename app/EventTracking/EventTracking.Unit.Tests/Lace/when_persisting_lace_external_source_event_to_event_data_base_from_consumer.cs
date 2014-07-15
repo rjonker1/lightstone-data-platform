@@ -15,7 +15,7 @@ namespace EventTracking.Unit.Tests.Lace
 {
     public class when_persisting_lace_external_source_event_to_event_data_base_from_consumer : Specification
     {
-        private readonly IPersistEvent _persistEvent;
+        private readonly IPersistAnEvent _persistEvent;
         private LaceExternalSourceExecutionEventMessage _message;
         private readonly Guid _aggregateId;
         private ExternalSourceExecutedConsumer _consumer;

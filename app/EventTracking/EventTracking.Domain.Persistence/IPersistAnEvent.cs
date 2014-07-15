@@ -1,6 +1,6 @@
 ﻿namespace EventTracking.Domain.Persistence
 {
-    public interface IPersistEvent
+    public interface IPersistAnEvent
     {
         void Save(IAggregate aggregate);
     }

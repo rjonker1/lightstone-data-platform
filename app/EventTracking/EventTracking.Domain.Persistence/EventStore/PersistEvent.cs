@@ -1,7 +1,7 @@
 ﻿using System;
 namespace EventTracking.Domain.Persistence.EventStore
 {
-    public class PersistEvent : IPersistEvent
+    public class PersistEvent : IPersistAnEvent
     {
         public void Save(IAggregate aggregate)
         {

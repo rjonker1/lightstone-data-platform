@@ -15,7 +15,7 @@ namespace Monitoring.Consumer.Installer
         {
             _log.InfoFormat("Installing Persistence consumer for events");
 
-            container.Register(Component.For<IPersistEvent>().ImplementedBy<PersistEvent>());
+            container.Register(Component.For<IPersistAnEvent>().ImplementedBy<PersistEvent>());
         }
     }
 }

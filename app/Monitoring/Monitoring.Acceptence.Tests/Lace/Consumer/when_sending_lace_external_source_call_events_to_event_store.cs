@@ -14,7 +14,7 @@ namespace Monitoring.Acceptance.Tests.Lace.Consumer
         private readonly Guid _aggregateId;
         private ExternalSourceConsumer _consumer;
         private ExternalSourceExecutedConsumer _externalSourceExecutedConsumer;
-        private readonly IPersistEvent _persistEvent;
+        private readonly IPersistAnEvent _persistEvent;
 
         public when_sending_lace_external_source_call_events_to_event_store()
         {

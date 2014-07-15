@@ -5,7 +5,7 @@ using EventTracking.Tests.Helper.Fakes.EventStore;
 
 namespace EventTracking.Tests.Helper.Fakes.Persistence
 {
-    public class FakePersistEvent : IPersistEvent
+    public class FakePersistEvent : IPersistAnEvent
     {
         public void Save(IAggregate aggregate)
         {
