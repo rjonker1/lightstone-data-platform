@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EventTracking.Domain.Core;
 using EventTracking.Domain.Persistence;
 using EventTracking.Tests.Helper.Builder.Lace;
 using EventTracking.Tests.Helper.Fakes.Persistence;
