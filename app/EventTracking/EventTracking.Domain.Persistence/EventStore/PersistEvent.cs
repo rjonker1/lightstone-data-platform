@@ -1,8 +1,5 @@
 ﻿using System;
-using EventTracking.Domain;
-using EventTracking.Domain.Persistence.EventStore;
-
-namespace Monitoring.Consumer.Lace.Persistence
+namespace EventTracking.Domain.Persistence.EventStore
 {
     public class PersistEvent : IPersistEvent
     {
@@ -10,7 +7,7 @@ namespace Monitoring.Consumer.Lace.Persistence
         {
             using (var repository = new EventStoreProvider())
             {
-                repository.Instance().Repository.Write(aggregate, Guid.NewGuid(), d => { });
+                repository.Repository.Write(aggregate, Guid.NewGuid(), d => { });
             }
         }
     }

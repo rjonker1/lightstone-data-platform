@@ -1,6 +1,4 @@
-﻿using EventTracking.Domain;
-
-namespace Monitoring.Consumer.Lace.Persistence
+﻿namespace EventTracking.Domain.Persistence
 {
     public interface IPersistEvent
     {

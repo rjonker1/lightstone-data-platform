@@ -1,5 +1,5 @@
 ﻿using EasyNetQ.AutoSubscribe;
-using Monitoring.Consumer.Lace.Persistence;
+using EventTracking.Domain.Persistence;
 using Monitoring.Consumer.Lace.Aggregates;
 using Monitoring.Consumer.Lace.Messages;
 
@@ -11,9 +11,9 @@ namespace Monitoring.Consumer.Lace.Consumers
 
         private readonly IPersistEvent _persistEvent;
 
-        public ExternalSourceSentRequestsConsumer()
+        public ExternalSourceSentRequestsConsumer(IPersistEvent persistEvent)
         {
-            _persistEvent = new PersistEvent();
+            _persistEvent = persistEvent;
         }
 
         public void Consume(LaceExternalSourceRequestEventMessage message)

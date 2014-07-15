@@ -69,6 +69,10 @@
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
+      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
+      <Name>EventTracking.Domain.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
       <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
       <Name>EventTracking.Measurement</Name>

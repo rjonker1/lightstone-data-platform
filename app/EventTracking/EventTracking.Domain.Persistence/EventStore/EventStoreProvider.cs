@@ -6,21 +6,37 @@ namespace EventTracking.Domain.Persistence.EventStore
 {
     public class EventStoreProvider : IDisposable
     {
-        private IEventStoreConnection _connection;
+        private readonly IEventStoreConnection _connection;
 
-        public EventStoreProvider Instance()
+        public EventStoreProvider()
         {
             _connection = ConnectionFactory.Default();
             Repository = new EventStoreRepository(_connection);
-
-            return this;
         }
 
-        public IRepository Repository;
+        //public EventStoreProvider Instance()
+        //{
+
+
+        //    return this;
+        //}
+
+        public readonly EventStoreRepository Repository;
 
         public void Dispose()
         {
-          // _connection.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+                return;
+
+            _connection.Close();
+            Repository.Dispose();
+
         }
     }
 }

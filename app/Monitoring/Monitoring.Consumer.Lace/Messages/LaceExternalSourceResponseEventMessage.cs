@@ -8,7 +8,7 @@ namespace Monitoring.Consumer.Lace.Messages
         public LaceExternalSourceResponseEventMessage(Guid aggregateId, LaceEventSource source, string message,
             string payload,
             int order) :
-                base(aggregateId, source, message, order, "laceExternalSourceResponse")
+                base(aggregateId, source, message, order, Categories.LaceExternalSourceResponse)
         {
 
             Payload = payload;

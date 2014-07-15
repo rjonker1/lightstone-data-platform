@@ -38,7 +38,7 @@ namespace EventTracking.Domain.Core
             if (aggregate == null)
                 throw new ArgumentNullException("aggregate");
 
-            this._registered = aggregate;
+            _registered = aggregate;
 
             // Get instance methods named Apply with one parameter returning void
             var applyMethods = aggregate.GetType()
