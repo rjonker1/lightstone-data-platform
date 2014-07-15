@@ -53,10 +53,10 @@
     <Compile Include="Builder\Lace\MonitoringEventsBuilder.cs" />
     <Compile Include="Fakes\Lace\FakeExternalSourceEvents.cs" />
     <Compile Include="Fakes\Measurement\FakeSourceExecutionRepository.cs" />
-    <Compile Include="Fakes\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
+    <Compile Include="Mother\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
     <Compile Include="Fakes\Persistence\FakePersistEvent.cs" />
-    <Compile Include="Mother\EventStore\FakeDatabase.cs" />
-    <Compile Include="Mother\EventStore\EventStorePersistRepository.cs" />
+    <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
+    <Compile Include="Fakes\EventStore\EventStorePersistRepository.cs" />
     <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

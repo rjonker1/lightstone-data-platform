@@ -1,7 +1,7 @@
 ﻿using System;
 using EventTracking.Domain;
 using EventTracking.Domain.Persistence;
-using EventTracking.Tests.Helper.Mother.EventStore;
+using EventTracking.Tests.Helper.Fakes.EventStore;
 
 namespace EventTracking.Tests.Helper.Fakes.Persistence
 {

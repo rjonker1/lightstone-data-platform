@@ -5,7 +5,7 @@ using EventTracking.Domain;
 using EventTracking.Domain.Core;
 using EventTracking.Domain.Persistence;
 
-namespace EventTracking.Tests.Helper.Mother.EventStore
+namespace EventTracking.Tests.Helper.Fakes.EventStore
 {
     public class EventStorePersistRepository : IRepository
     {

@@ -1,9 +1,8 @@
 ﻿using System;
-using Monitoring;
 using Monitoring.Consumer.Lace.Messages;
 using Monitoring.Sources.Lace;
 
-namespace EventTracking.Tests.Helper.Fakes.Messages.Lace
+namespace EventTracking.Tests.Helper.Mother.Messages.Lace
 {
     public class LaceEventMessages
     {
