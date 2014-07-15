@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EventStore.ClientAPI;
-using Newtonsoft.Json;
+using EventTracking.Domain.Core;
 
 namespace EventTracking.Domain.Persistence.EventStore
 {
@@ -34,34 +33,12 @@ namespace EventTracking.Domain.Persistence.EventStore
             var newEvents = aggregate.GetUncommittedEvents().Cast<object>().ToList();
           
 
-            var eventsToSave = newEvents.Select(e => ToEventData(e)).ToList();
+            var eventsToSave = newEvents.Select(e => e.AsJsonEvent()).ToList();
 
             _eventStoreConnection.AppendToStream(streamName, ExpectedVersion.Any, eventsToSave);
 
             aggregate.ClearUncommittedEvents();
         }
-
-        private static EventData ToEventData(object evnt)
-        {
-            var @event = JsonEvent(evnt);
-            return @event;
-        }
-
-        private static EventData AsJsonEvent(string value, string eventName)
-        {
-            var bytes = Encoding.UTF8.GetBytes(value);
-
-            return new EventData(Guid.NewGuid(), eventName, true, bytes, null);
-        }
-
-        private static EventData JsonEvent(object value)
-        {
-            var json = JsonConvert.SerializeObject(value);
-            var eventName = value.GetType().Name;
-
-            return AsJsonEvent(json, eventName);
-        }
-        
        
         public void Dispose()
         {

@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A74BC3FB-0962-4900-82F5-461F014A26F6}</ProjectGuid>
+    <ProjectGuid>{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EventTracking.Tests.Helper</RootNamespace>
-    <AssemblyName>EventTracking.Tests.Helper</AssemblyName>
+    <RootNamespace>EventTracking.Unit.Tests</RootNamespace>
+    <AssemblyName>EventTracking.Unit.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,7 +39,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
@@ -47,20 +48,26 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.bdd">
+      <HintPath>..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\Lace\EventMessagesBuilder.cs" />
-    <Compile Include="Builder\Lace\MonitoringEventsBuilder.cs" />
-    <Compile Include="Fakes\Lace\FakeExternalSourceEvents.cs" />
-    <Compile Include="Fakes\Measurement\FakeSourceExecutionRepository.cs" />
-    <Compile Include="Fakes\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
-    <Compile Include="Fakes\Persistence\FakePersistEvent.cs" />
-    <Compile Include="Mother\EventStore\FakeDatabase.cs" />
-    <Compile Include="Mother\EventStore\EventStorePersistRepository.cs" />
-    <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
+    <Compile Include="Lace\when_persisting_lace_external_source_event_to_event_data_base_from_consumer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Monitoring\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
       <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
@@ -90,14 +97,10 @@
       <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
       <Name>EventTracking.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
-      <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
-      <Name>EventTracking.Measurement</Name>
+    <ProjectReference Include="..\EventTracking.Tests.Helper\EventTracking.Tests.Helper.csproj">
+      <Project>{a74bc3fb-0962-4900-82f5-461f014a26f6}</Project>
+      <Name>EventTracking.Tests.Helper</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

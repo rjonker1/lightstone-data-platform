@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Tests.Helper"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Domain.Persistence", "EventTracking\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj", "{017EF56D-921C-4156-9807-B7AD72A7BEF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Unit.Tests", "EventTracking\EventTracking.Unit.Tests\EventTracking.Unit.Tests.csproj", "{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{017EF56D-921C-4156-9807-B7AD72A7BEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,5 +64,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BBB448DD-05CB-46AF-82C7-54079615A5F6} = {80744353-550D-402D-B085-7A2B01B851F2}
 		{A74BC3FB-0962-4900-82F5-461F014A26F6} = {80744353-550D-402D-B085-7A2B01B851F2}
+		{F1A6E3B5-F94E-40D3-B5F5-DA7E61B4ACC8} = {80744353-550D-402D-B085-7A2B01B851F2}
 	EndGlobalSection
 EndGlobal

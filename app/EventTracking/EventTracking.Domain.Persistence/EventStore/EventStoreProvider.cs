@@ -13,14 +13,7 @@ namespace EventTracking.Domain.Persistence.EventStore
             _connection = ConnectionFactory.Default();
             Repository = new EventStoreRepository(_connection);
         }
-
-        //public EventStoreProvider Instance()
-        //{
-
-
-        //    return this;
-        //}
-
+        
         public readonly EventStoreRepository Repository;
 
         public void Dispose()
