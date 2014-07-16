@@ -56,7 +56,7 @@
     <Compile Include="Mother\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
     <Compile Include="Fakes\Persistence\FakePersistEvent.cs" />
     <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
-    <Compile Include="Fakes\EventStore\EventStorePersistRepository.cs" />
+    <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
     <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EventTracking.Measurement.Lace</RootNamespace>
-    <AssemblyName>EventTracking.Measurement.Lace</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.EventTracking.Measurement.Lace</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -34,21 +34,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Log4Net">
+      <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=0.28.1.224, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.1.105\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="EventStore.ClientAPI">
       <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Topshelf">
+      <HintPath>..\..\packages\Topshelf.3.1.1\lib\net40-full\Topshelf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\ExternalSourceEvenPublisherCheckpoint.cs" />
@@ -63,7 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ConfigurationFiles\appSettings.config" />
+    <None Include="ConfigurationFiles\connections.config" />
+    <None Include="ConfigurationFiles\log4net.config" />
     <None Include="packages.config" />
+    <None Include="Radar.Projections.Service.RabbitMq.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Projections\Sources\References\1Prelude.js">
@@ -103,6 +116,56 @@
     <EmbeddedResource Include="Projections\Sources\ExternalSourceEventRead.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BookSleeve.dll" />
+    <Content Include="BookSleeve.xml" />
+    <Content Include="Common.Logging.dll" />
+    <Content Include="Common.Logging.Log4Net.dll" />
+    <Content Include="Common.Logging.xml" />
+    <Content Include="EasyNetQ.dll" />
+    <Content Include="FluentNHibernate.dll" />
+    <Content Include="FluentNHibernate.xml" />
+    <Content Include="Iesi.Collections.dll" />
+    <Content Include="Iesi.Collections.xml" />
+    <Content Include="log4net.dll" />
+    <Content Include="log4net.xml" />
+    <Content Include="mscorlib.dll" />
+    <Content Include="NEventStore.dll" />
+    <Content Include="NEventStore.pdb" />
+    <Content Include="NEventStore.xml" />
+    <Content Include="Newtonsoft.Json.dll" />
+    <Content Include="Newtonsoft.Json.xml" />
+    <Content Include="NHibernate.Caches.SysCache.dll" />
+    <Content Include="NHibernate.dll" />
+    <Content Include="NHibernate.xml" />
+    <Content Include="RabbitMQ.Client.dll" />
+    <Content Include="RabbitMQ.Client.xml" />
+    <Content Include="Radar.Api.XML" />
+    <Content Include="Radar.Application.dll" />
+    <Content Include="Radar.Application.pdb" />
+    <Content Include="Radar.Common.dll" />
+    <Content Include="Radar.Common.pdb" />
+    <Content Include="Radar.Configuration.dll" />
+    <Content Include="Radar.Configuration.pdb" />
+    <Content Include="Radar.Data.Configuration.dll" />
+    <Content Include="Radar.Data.Configuration.pdb" />
+    <Content Include="Radar.Data.dll" />
+    <Content Include="Radar.Data.pdb" />
+    <Content Include="Radar.Domain.dll" />
+    <Content Include="Radar.Domain.pdb" />
+    <Content Include="Radar.Infrastructure.dll" />
+    <Content Include="Radar.Infrastructure.pdb" />
+    <Content Include="Radar.Projections.dll" />
+    <Content Include="Radar.Projections.pdb" />
+    <Content Include="Radar.Projections.Service.RabbitMq.exe" />
+    <Content Include="Radar.Projections.Service.RabbitMq.pdb" />
+    <Content Include="Radar.ReadModel.dll" />
+    <Content Include="Radar.ReadModel.pdb" />
+    <Content Include="StructureMap.dll" />
+    <Content Include="StructureMap.pdb" />
+    <Content Include="StructureMap.xml" />
+    <Content Include="Topshelf.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

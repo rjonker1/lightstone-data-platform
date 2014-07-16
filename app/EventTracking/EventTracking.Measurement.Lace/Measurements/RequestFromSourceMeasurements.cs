@@ -6,6 +6,7 @@ using EventTracking.Measurement.Dto;
 using EventTracking.Measurement.Lace.Projections;
 using EventTracking.Measurement.Repository;
 using EventTracking.Tests.Helper.Builder.Lace;
+using EventTracking.Tests.Helper.Fakes.Measurement;
 
 namespace EventTracking.Measurement.Lace.Measurements
 {
@@ -59,7 +60,7 @@ namespace EventTracking.Measurement.Lace.Measurements
             _eventReader.StartReading();
 
 #if DEBUG
-            new MonitoringEventsBuilder().ForExternalSourceEvents();
+            new MonitoringEventsBuilder().PersistToEventStore().ForExternalSourceEvents();
 #endif
 
             Console.WriteLine("\nPress ANY key to show results\n");

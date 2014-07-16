@@ -9,7 +9,7 @@ namespace EventTracking.Tests.Helper.Fakes.Persistence
     {
         public void Save(IAggregate aggregate)
         {
-            var repostiory = new EventStorePersistRepository();
+            var repostiory = new FakeEventStoreRepository();
             repostiory.Write(aggregate, Guid.NewGuid(), d => { });
         }
     }

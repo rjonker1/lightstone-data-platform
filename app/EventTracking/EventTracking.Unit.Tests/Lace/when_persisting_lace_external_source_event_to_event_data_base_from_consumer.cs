@@ -24,10 +24,10 @@ namespace EventTracking.Unit.Tests.Lace
 
         public when_persisting_lace_external_source_event_to_event_data_base_from_consumer()
         {
+            FakeDatabase.Events.Clear();
+
             _persistEvent = new FakePersistEvent();
             _aggregateId = Guid.NewGuid();
-
-            FakeDatabase.Events.Clear();
         }
 
         public override void Observe()
@@ -46,7 +46,7 @@ namespace EventTracking.Unit.Tests.Lace
         }
 
         [Observation]
-        public void external_source_event_shouls_have_valid_stream_name()
+        public void external_source_event_should_have_valid_stream_name()
         {
             FakeDatabase.Events.Count(c => c.Key == _streamName).ShouldNotEqual(0);
         }

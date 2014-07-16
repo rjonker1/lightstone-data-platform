@@ -45,7 +45,7 @@
     <Compile Include="EventStore\EventStoreRepository.cs" />
     <Compile Include="EventStore\PersistEvent.cs" />
     <Compile Include="IPersistAnEvent.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="IWriteToEventTrackingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventStore\RepositoryExtensions.cs" />
     <None Include="packages.config" />

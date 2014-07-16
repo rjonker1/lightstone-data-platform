@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Radar.Projections.Service.RabbitMq</name>
+    </assembly>
+    <members>
+    </members>
+</doc>

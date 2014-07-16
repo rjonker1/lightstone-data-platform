@@ -6,7 +6,7 @@ using EventTracking.Domain.Core;
 
 namespace EventTracking.Domain.Persistence.EventStore
 {
-    public class EventStoreRepository : IRepository, IDisposable
+    public class EventStoreRepository : IWriteToEventTrackingRepository, IDisposable
     {
         private readonly Func<string, Guid, string> _aggregateIdToStreamName;
         private readonly IEventStoreConnection _eventStoreConnection;
