@@ -59,7 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lace\when_subscribing_to_an_stream_with_external_source_execution_events.cs" />
+    <Compile Include="Lace\when_writing_events_from_lace_external_sources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +70,10 @@
     <ProjectReference Include="..\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
       <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
       <Name>EventTracking.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
+      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
+      <Name>EventTracking.Domain.Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\EventTracking.Domain\EventTracking.Domain.csproj">
       <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>

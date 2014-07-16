@@ -53,8 +53,5 @@ namespace EventTracking.Domain.Persistence.EventStore
 
             _eventStoreConnection.Close();
         }
-
-
-        
     }
 }
