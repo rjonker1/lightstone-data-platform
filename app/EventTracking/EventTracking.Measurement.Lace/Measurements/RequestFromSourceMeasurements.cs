@@ -60,7 +60,7 @@ namespace EventTracking.Measurement.Lace.Measurements
             _eventReader.StartReading();
 
 #if DEBUG
-        //   new MonitoringEventsBuilder().PersistToEventStore().ForExternalSourceEvents();
+           new MonitoringEventsBuilder().PersistToEventStore().ForExternalSourceEvents();
 #endif
 
             Console.WriteLine("\nPress ANY key to show results\n");
