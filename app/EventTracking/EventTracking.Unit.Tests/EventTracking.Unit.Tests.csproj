@@ -43,16 +43,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="xunit, Version=1.9.2.1705, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
@@ -64,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lace\when_persisting_lace_external_source_event_to_event_data_base_from_consumer.cs" />
-    <Compile Include="Lace\when_persisting_lace_start_and_end_call_ivid_events.cs" />
+    <Compile Include="Lace\when_writing_lace_start_and_end_call_ivid_events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,17 +80,9 @@
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
-      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
-      <Name>EventTracking.Domain.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
       <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
       <Name>EventTracking.Domain.Persistence</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain\EventTracking.Domain.csproj">
-      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
-      <Name>EventTracking.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\EventTracking.Tests.Helper\EventTracking.Tests.Helper.csproj">
       <Project>{a74bc3fb-0962-4900-82f5-461f014a26f6}</Project>

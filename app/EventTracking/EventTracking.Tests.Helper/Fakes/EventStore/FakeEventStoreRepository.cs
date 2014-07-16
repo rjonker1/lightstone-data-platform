@@ -28,11 +28,15 @@ namespace EventTracking.Tests.Helper.Fakes.EventStore
             var streamName = _aggregateIdToStreamName(aggregate.Category, aggregate.Id);
             var newEvents = aggregate.GetUncommittedEvents().Cast<object>().ToList();
 
-            var eventsToSave = newEvents.Select(e => e.AsJsonEvent()).ToList();
+            var eventsToSave = newEvents
+                .Select(e => e.AsJsonEvent())
+                .ToList();
 
             foreach (var eventData in eventsToSave)
             {
-              FakeDatabase.Events.Add(streamName, eventData);
+                var data = new StreamData(streamName, eventData);
+
+                FakeDatabase.Events.Add(Guid.NewGuid(), data);
             }
 
             aggregate.ClearUncommittedEvents();

@@ -12,15 +12,14 @@ using Xunit.Extensions;
 
 namespace EventTracking.Unit.Tests.Lace
 {
-    public class when_persisting_lace_start_and_end_call_ivid_events : Specification
+    public class when_writing_lace_start_and_end_call_ivid_events : Specification
     {
-
         private readonly IPersistAnEvent _persistAnEvent;
-
-        private when_persisting_lace_start_and_end_call_ivid_events()
+        public when_writing_lace_start_and_end_call_ivid_events()
         {
             _persistAnEvent = new FakePersistEvent();
         }
+
 
         public override void Observe()
         {
@@ -29,33 +28,27 @@ namespace EventTracking.Unit.Tests.Lace
         }
 
         [Observation]
-        public void events_for_ivid_calling_events_should_be_persisted()
-        {
-            FakeDatabase.Events.Count.ShouldNotEqual(0);
-        }
-
-        [Observation]
-        public void events_for_ivid_source_calling_category_should_be_valid()
+        public void event_category_should_be_valid_for_external_source_event()
         {
             var eventData = FakeDatabase.Events.First().Value;
 
-            var jsonString = Encoding.UTF8.GetString(eventData.Data);
+            var jsonString = Encoding.UTF8.GetString(eventData.Event.Data);
             var jsonData = JsonConvert.DeserializeObject<Dictionary<String, Object>>(jsonString);
-
+            
             var category = jsonData.Keys.Where(c => c == "Category");
             category.FirstOrDefault().ShouldEqual(Categories.LaceExecutingExternalSource);
         }
 
-
         [Observation]
-        public void events_fr_ivid_source_event_data_category_key_should_be_valid()
+        public void event_category_for_calling_ivid_source_should_not_be_null()
         {
             var eventData = FakeDatabase.Events.First().Value;
 
-            var jsonString = Encoding.UTF8.GetString(eventData.Data);
+            var jsonString = Encoding.UTF8.GetString(eventData.Event.Data);
             var jsonData = JsonConvert.DeserializeObject<Dictionary<String, Object>>(jsonString);
 
             jsonData.Keys.Count(c => c == "Category").ShouldNotEqual(0);
         }
     }
+
 }

@@ -51,7 +51,7 @@ namespace EventTracking.Tests.Helper.Builder.Lace
             _externalSourceExecutedConsumer = FakeExternalSourceEvents.StartCallingIvid(_aggregateId,
                 _externalSourceExecutedConsumer, _persistAnEvent);
 
-            Thread.Sleep(5000);
+            Thread.Sleep(100);
 
             _externalSourceExecutedConsumer = FakeExternalSourceEvents.EndCallingIvid(_aggregateId,
                 _externalSourceExecutedConsumer, _persistAnEvent);

@@ -48,13 +48,13 @@ namespace EventTracking.Unit.Tests.Lace
         [Observation]
         public void external_source_event_should_have_valid_stream_name()
         {
-            FakeDatabase.Events.Count(c => c.Key == _streamName).ShouldNotEqual(0);
+            FakeDatabase.Events.Count(c => c.Value.StreamName == _streamName).ShouldNotEqual(0);
         }
 
         [Observation]
         public void external_source_event_data_should_not_be_null()
         {
-            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Key == _streamName).Value;
+            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Value.StreamName == _streamName).Value;
 
             eventData.ShouldNotBeNull();
         }
@@ -62,17 +62,17 @@ namespace EventTracking.Unit.Tests.Lace
         [Observation]
         public void external_source_event_data_should_not_be_json()
         {
-            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Key == _streamName).Value;
+            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Value.StreamName == _streamName).Value;
 
-            eventData.IsJson.ShouldBeTrue();
+            eventData.Event.IsJson.ShouldBeTrue();
         }
 
         [Observation]
         public void external_source_event_data_should_serialize_into_json_string()
         {
-            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Key == _streamName).Value;
+            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Value.StreamName == _streamName).Value;
 
-            var jsonString = Encoding.UTF8.GetString(eventData.Data);
+            var jsonString = Encoding.UTF8.GetString(eventData.Event.Data);
 
             jsonString.ShouldNotBeNull();
             jsonString.ShouldNotBeEmpty();
@@ -81,9 +81,9 @@ namespace EventTracking.Unit.Tests.Lace
         [Observation]
         public void external_source_event_data_should_deserialize_into_json_object()
         {
-            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Key == _streamName).Value;
+            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Value.StreamName == _streamName).Value;
 
-            var jsonString = Encoding.UTF8.GetString(eventData.Data);
+            var jsonString = Encoding.UTF8.GetString(eventData.Event.Data);
             var jsonData = JsonConvert.DeserializeObject<Dictionary<String, Object>>(jsonString);
 
             jsonData.ShouldNotBeNull();
@@ -93,9 +93,9 @@ namespace EventTracking.Unit.Tests.Lace
         [Observation]
         public void external_source_event_data_category_key_should_be_valid()
         {
-            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Key == _streamName).Value;
+            var eventData = FakeDatabase.Events.SingleOrDefault(c => c.Value.StreamName == _streamName).Value;
 
-            var jsonString = Encoding.UTF8.GetString(eventData.Data);
+            var jsonString = Encoding.UTF8.GetString(eventData.Event.Data);
             var jsonData = JsonConvert.DeserializeObject<Dictionary<String, Object>>(jsonString);
 
             jsonData.Keys.Count(c => c == "Category").ShouldNotEqual(0);
