@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using EventTracking.Domain.Persistence;
 using EventTracking.Domain.Persistence.EventStore;
 using EventTracking.Tests.Helper.Fakes.Lace;
+using EventTracking.Tests.Helper.Fakes.Persistence;
 using Monitoring.Consumer.Lace.Consumers;
 
 namespace EventTracking.Tests.Helper.Builder.Lace
@@ -31,9 +32,30 @@ namespace EventTracking.Tests.Helper.Builder.Lace
             return this;
         }
 
+        public MonitoringEventsBuilder PersistToFakeEventStore()
+        {
+            _persistAnEvent = new FakePersistEvent();
+            return this;
+        }
+
         public void ForExternalSourceEvents()
         {
             Task.Run(() => StartConsumingExternalSourceEventsAsync());
+        }
+
+        public void ForStartingAndEndingCallToIvid()
+        {
+            _aggregateId = Guid.NewGuid();
+
+            _consumer = FakeExternalSourceEvents.ReceiveRequestInLace(_aggregateId, _consumer, _persistAnEvent);
+            _externalSourceExecutedConsumer = FakeExternalSourceEvents.StartCallingIvid(_aggregateId,
+                _externalSourceExecutedConsumer, _persistAnEvent);
+
+            Thread.Sleep(5000);
+
+            _externalSourceExecutedConsumer = FakeExternalSourceEvents.EndCallingIvid(_aggregateId,
+                _externalSourceExecutedConsumer, _persistAnEvent);
+            Thread.Sleep(1000);
         }
 
         private void StartConsumingExternalSourceEventsAsync()
