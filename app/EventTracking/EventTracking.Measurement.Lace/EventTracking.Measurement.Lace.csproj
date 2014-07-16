@@ -76,7 +76,6 @@
     <None Include="ConfigurationFiles\connections.config" />
     <None Include="ConfigurationFiles\log4net.config" />
     <None Include="packages.config" />
-    <None Include="Radar.Projections.Service.RabbitMq.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Projections\Sources\References\1Prelude.js">
@@ -116,56 +115,6 @@
     <EmbeddedResource Include="Projections\Sources\ExternalSourceEventRead.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="BookSleeve.dll" />
-    <Content Include="BookSleeve.xml" />
-    <Content Include="Common.Logging.dll" />
-    <Content Include="Common.Logging.Log4Net.dll" />
-    <Content Include="Common.Logging.xml" />
-    <Content Include="EasyNetQ.dll" />
-    <Content Include="FluentNHibernate.dll" />
-    <Content Include="FluentNHibernate.xml" />
-    <Content Include="Iesi.Collections.dll" />
-    <Content Include="Iesi.Collections.xml" />
-    <Content Include="log4net.dll" />
-    <Content Include="log4net.xml" />
-    <Content Include="mscorlib.dll" />
-    <Content Include="NEventStore.dll" />
-    <Content Include="NEventStore.pdb" />
-    <Content Include="NEventStore.xml" />
-    <Content Include="Newtonsoft.Json.dll" />
-    <Content Include="Newtonsoft.Json.xml" />
-    <Content Include="NHibernate.Caches.SysCache.dll" />
-    <Content Include="NHibernate.dll" />
-    <Content Include="NHibernate.xml" />
-    <Content Include="RabbitMQ.Client.dll" />
-    <Content Include="RabbitMQ.Client.xml" />
-    <Content Include="Radar.Api.XML" />
-    <Content Include="Radar.Application.dll" />
-    <Content Include="Radar.Application.pdb" />
-    <Content Include="Radar.Common.dll" />
-    <Content Include="Radar.Common.pdb" />
-    <Content Include="Radar.Configuration.dll" />
-    <Content Include="Radar.Configuration.pdb" />
-    <Content Include="Radar.Data.Configuration.dll" />
-    <Content Include="Radar.Data.Configuration.pdb" />
-    <Content Include="Radar.Data.dll" />
-    <Content Include="Radar.Data.pdb" />
-    <Content Include="Radar.Domain.dll" />
-    <Content Include="Radar.Domain.pdb" />
-    <Content Include="Radar.Infrastructure.dll" />
-    <Content Include="Radar.Infrastructure.pdb" />
-    <Content Include="Radar.Projections.dll" />
-    <Content Include="Radar.Projections.pdb" />
-    <Content Include="Radar.Projections.Service.RabbitMq.exe" />
-    <Content Include="Radar.Projections.Service.RabbitMq.pdb" />
-    <Content Include="Radar.ReadModel.dll" />
-    <Content Include="Radar.ReadModel.pdb" />
-    <Content Include="StructureMap.dll" />
-    <Content Include="StructureMap.pdb" />
-    <Content Include="StructureMap.xml" />
-    <Content Include="Topshelf.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

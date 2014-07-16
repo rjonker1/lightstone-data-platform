@@ -42,7 +42,7 @@ namespace EventTracking.Measurement.Lace.Measurements
                 GetEvents();
 
                 Console.WriteLine("\n\nPress S to Stop or any key to refresh");
-                Console.ReadKey();
+                key = Console.ReadKey();
             }
 
 
@@ -60,7 +60,7 @@ namespace EventTracking.Measurement.Lace.Measurements
             _eventReader.StartReading();
 
 #if DEBUG
-            new MonitoringEventsBuilder().PersistToEventStore().ForExternalSourceEvents();
+        //   new MonitoringEventsBuilder().PersistToEventStore().ForExternalSourceEvents();
 #endif
 
             Console.WriteLine("\nPress ANY key to show results\n");
