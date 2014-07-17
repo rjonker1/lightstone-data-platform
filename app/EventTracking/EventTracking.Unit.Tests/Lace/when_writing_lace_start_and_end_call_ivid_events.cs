@@ -34,9 +34,10 @@ namespace EventTracking.Unit.Tests.Lace
 
             var jsonString = Encoding.UTF8.GetString(eventData.Event.Data);
             var jsonData = JsonConvert.DeserializeObject<Dictionary<String, Object>>(jsonString);
-            
-            var category = jsonData.Keys.Where(c => c == "Category");
-            category.FirstOrDefault().ShouldEqual(Categories.LaceExecutingExternalSource);
+
+            var category = jsonData.Values.Where(c => c.ToString() == Categories.LaceExecutingExternalSource);
+            category.ShouldNotBeNull();
+            category.Count().ShouldEqual(1);
         }
 
         [Observation]

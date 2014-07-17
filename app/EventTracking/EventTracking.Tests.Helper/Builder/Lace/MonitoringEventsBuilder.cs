@@ -47,7 +47,7 @@ namespace EventTracking.Tests.Helper.Builder.Lace
         {
             _aggregateId = Guid.NewGuid();
 
-            _consumer = FakeExternalSourceEvents.ReceiveRequestInLace(_aggregateId, _consumer, _persistAnEvent);
+          //  _consumer = FakeExternalSourceEvents.ReceiveRequestInLace(_aggregateId, _consumer, _persistAnEvent);
             _externalSourceExecutedConsumer = FakeExternalSourceEvents.StartCallingIvid(_aggregateId,
                 _externalSourceExecutedConsumer, _persistAnEvent);
 
