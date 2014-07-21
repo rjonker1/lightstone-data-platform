@@ -18,7 +18,6 @@ namespace Monitoring.Consumer.Lace.Aggregates
         {
             Register<ExternalSourceExecutedEvent>(e => Id = e.AggregateId);
         }
-
     }
 
 }

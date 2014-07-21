@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using EventTracking.Measurement.Dto;
+using EventTracking.Measurement.Repository;
 
-namespace EventTracking.Measurement.Repository
+namespace EventTracking.Tests.Helper.Fakes.Measurement
 {
     public class FakeSourceExecutionRepository : IRepository<ExternalSourceExecutionResultDto>
     {
@@ -26,7 +27,11 @@ namespace EventTracking.Measurement.Repository
         {
             if (item == null) return;
 
-            if(Database.Count(c => c.Value.AggregateId == item.AggregateId && c.Value.Source == item.Source && c.Value.Order == item.Order) != 0)return;
+            if (
+                Database.Count(
+                    c =>
+                        c.Value.AggregateId == item.AggregateId && c.Value.Source == item.Source &&
+                        c.Value.Order == item.Order) != 0) return;
 
             Database.Add(new KeyValuePair<Guid, ExternalSourceExecutionResultDto>(item.AggregateId, item));
         }

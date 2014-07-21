@@ -4,8 +4,6 @@ namespace EventTracking.Domain.Core
 {
     public class ConnectionFactory
     {
-
-
         public static IEventStoreConnection Default()
         {
             var settings = ConnectionSettings.Create()

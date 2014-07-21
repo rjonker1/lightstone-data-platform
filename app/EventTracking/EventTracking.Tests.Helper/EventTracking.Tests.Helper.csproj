@@ -35,6 +35,10 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="EventStore.ClientAPI, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -45,9 +49,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\Lace\EventMessagesBuilder.cs" />
     <Compile Include="Builder\Lace\MonitoringEventsBuilder.cs" />
     <Compile Include="Fakes\Lace\FakeExternalSourceEvents.cs" />
     <Compile Include="Fakes\Measurement\FakeSourceExecutionRepository.cs" />
+    <Compile Include="Mother\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
+    <Compile Include="Fakes\Persistence\FakePersistEvent.cs" />
+    <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
+    <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
     <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +77,18 @@
     <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
+      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
+      <Name>EventTracking.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
+      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
+      <Name>EventTracking.Domain.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventTracking.Domain\EventTracking.Domain.csproj">
+      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
+      <Name>EventTracking.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
       <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>

@@ -1,1 +1,1 @@
-EventTracking.Consumer install
+Monitoring.Consumer install

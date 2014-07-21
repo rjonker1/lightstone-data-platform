@@ -7,7 +7,7 @@ namespace Monitoring.Consumer.Lace.Messages
     {
         public LaceExternalSourceFailedEventMessage(Guid aggregateId, LaceEventSource source, string message, int order)
             :
-                base(aggregateId, source, message, order, "laceExternalSourceFailure")
+                base(aggregateId, source, message, order, Categories.LaceExternalSourceFailure)
         {
 
         }

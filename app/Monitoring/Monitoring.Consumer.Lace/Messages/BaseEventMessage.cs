@@ -14,15 +14,12 @@ namespace Monitoring.Consumer.Lace.Messages
             Source = source;
             Order = order;
             Category = category;
+
+            Id = Guid.NewGuid();
+            EventDate = SystemTime.Now();
         }
 
-        public Guid Id
-        {
-            get
-            {
-                return Guid.NewGuid();
-            }
-        }
+        public Guid Id { get; private set; }
 
         public Guid AggregateId { get; private set; }
         public LaceEventSource Source { get; private set; }
@@ -30,13 +27,7 @@ namespace Monitoring.Consumer.Lace.Messages
         public string Category { get; private set; }
         public int Order { get; private set; }
 
-        public DateTime EventDate
-        {
-            get
-            {
-                return SystemTime.Now();
-            }
-        }
+        public DateTime EventDate { get; private set; }
     }
 }
 

@@ -67,8 +67,6 @@
     <Compile Include="Messages\LaceSourceHandledEventMessage.cs" />
     <Compile Include="Messages\LaceTransformResponseFailedMessageEvent.cs" />
     <Compile Include="Messages\LaceTransformResponseMessageEvent.cs" />
-    <Compile Include="Persistence\IPersistEvent.cs" />
-    <Compile Include="Persistence\PersistEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

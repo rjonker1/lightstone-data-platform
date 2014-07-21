@@ -7,7 +7,7 @@ namespace Monitoring.Consumer.Lace.Messages
     {
         public LaceTransformResponseFailedMessageEvent(Guid aggregateId, LaceEventSource source, string message,
             int order) :
-                base(aggregateId, source, message, order, "laceExternalSourceResponseFailure")
+                base(aggregateId, source, message, order, Categories.LaceExternalSourceResponseFailure)
         {
 
         }

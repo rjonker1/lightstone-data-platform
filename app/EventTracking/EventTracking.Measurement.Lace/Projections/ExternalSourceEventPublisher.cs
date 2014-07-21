@@ -11,9 +11,6 @@ namespace EventTracking.Measurement.Lace.Projections
 {
     public class ExternalSourceEventPublisher
     {
-        private readonly string _checkpointStream = ExternalSourceEventStreams.PublisherExternalSourceExecutionEventPublisherCheckpoint();
-        private readonly string _eventStream = ExternalSourceEventStreams.ExternalSourceExecutionEvents();
-
         private readonly IEventStoreConnection _eventStoreConnection;
         private readonly IBus _bus;
 
@@ -48,9 +45,9 @@ namespace EventTracking.Measurement.Lace.Projections
 
         private void Connect()
         {
-            var position = GetLastCheckpoint(_checkpointStream);
+            var position = GetLastCheckpoint(ExternalSourceEventStreams.PublisherExternalSourceExecutionEventPublisherCheckpoint);
 
-            _eventStoreConnection.SubscribeToStreamFrom(_eventStream, position, true, ProcessEvent,
+            _eventStoreConnection.SubscribeToStreamFrom(ExternalSourceEventStreams.ExternalSourceExecutionEvents, position, true, ProcessEvent,
                 userCredentials: EventStoreCredentials.Default, subscriptionDropped: TryToReconnect);
         }
 
@@ -90,7 +87,7 @@ namespace EventTracking.Measurement.Lace.Projections
 
             SetCheckpointStreamMaxCount(eventNumber);
 
-            _eventStoreConnection.AppendToStream(_checkpointStream, ExpectedVersion.Any, EventStoreCredentials.Default,
+            _eventStoreConnection.AppendToStream(ExternalSourceEventStreams.PublisherExternalSourceExecutionEventPublisherCheckpoint, ExpectedVersion.Any, EventStoreCredentials.Default,
                 checkpoint);
         }
 
@@ -100,7 +97,7 @@ namespace EventTracking.Measurement.Lace.Projections
 
             var metadata = StreamMetadata.Build().SetMaxCount(1);
 
-            _eventStoreConnection.SetStreamMetadata(_checkpointStream, ExpectedVersion.Any, metadata,
+            _eventStoreConnection.SetStreamMetadata(ExternalSourceEventStreams.PublisherExternalSourceExecutionEventPublisherCheckpoint, ExpectedVersion.Any, metadata,
                 EventStoreCredentials.Default);
         }
 

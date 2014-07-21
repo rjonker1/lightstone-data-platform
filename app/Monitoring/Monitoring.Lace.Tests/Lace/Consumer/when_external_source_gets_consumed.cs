@@ -1,4 +1,5 @@
 ﻿using System;
+using EventTracking.Domain.Persistence.EventStore;
 using Monitoring.Consumer.Lace.Consumers;
 using Monitoring.Consumer.Lace.Messages;
 using Monitoring.Sources.Lace;
@@ -22,15 +23,15 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_conumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceExecutionEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.StartCallingExternalSource(),1);
+                PublishableLaceMessages.StartCallingExternalSource,1);
 
-            var consumer = new ExternalSourceExecutedConsumer();
+            var consumer = new ExternalSourceExecutedConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
 
 
             message = new LaceExternalSourceExecutionEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-               PublishableLaceMessages.EndCallingExternalSource(),2);
+               PublishableLaceMessages.EndCallingExternalSource,2);
 
            // consumer = new ExternalSourceConsumer();
             consumer.Consume(message);
@@ -42,9 +43,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_configuration_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceConfigurationEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.StartConfigurationForExternalSource(),1);
+                PublishableLaceMessages.StartConfigurationForExternalSource,1);
 
-            var consumer = new ExternalSourceConfigurationConsumer();
+            var consumer = new ExternalSourceConfigurationConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }
@@ -53,9 +54,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_failed_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceFailedEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-               PublishableLaceMessages.ExternalSourceCallFailed(),0);
+               PublishableLaceMessages.ExternalSourceCallFailed,0);
 
-            var consumer = new ExternalSourceFailedConsumer();
+            var consumer = new ExternalSourceFailedConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }
@@ -64,9 +65,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_handled_consumer_consumed_must_be_truee()
         {
             var message = new LaceSourceHandledEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.ExternalSourceIsBeingHandled(),0);
+                PublishableLaceMessages.ExternalSourceIsBeingHandled,0);
 
-            var consumer = new ExternalSourceHandledConsumer();
+            var consumer = new ExternalSourceHandledConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }
@@ -75,9 +76,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_no_response_received_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceNoResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.NoResponseReceivedFromExternalSource(),0);
+                PublishableLaceMessages.NoResponseReceivedFromExternalSource,0);
 
-            var consumer = new ExternalSourceNoResponseReceivedConsumer();
+            var consumer = new ExternalSourceNoResponseReceivedConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }
@@ -86,9 +87,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_response_received_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.ResponseReceivedFromExternalSource(), string.Empty,2);
+                PublishableLaceMessages.ResponseReceivedFromExternalSource, string.Empty,2);
 
-            var consumer = new ExternalSourceReceivedResponseConsumer();
+            var consumer = new ExternalSourceReceivedResponseConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }
@@ -97,9 +98,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_request_sent_consumer_consumed_must_be_true()
         {
             var message = new LaceExternalSourceRequestEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-               PublishableLaceMessages.RequestSentToExternalSource(), string.Empty,1);
+               PublishableLaceMessages.RequestSentToExternalSource, string.Empty,1);
 
-            var consumer = new ExternalSourceSentRequestsConsumer();
+            var consumer = new ExternalSourceSentRequestsConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }
@@ -108,9 +109,9 @@ namespace Monitoring.Unit.Tests.Lace.Consumer
         public void monitoring_lace_external_source_response_transformed_consumer_consumed_must_true()
         {
             var message = new LaceTransformResponseEventMessage(Guid.NewGuid(), LaceEventSource.Ivid,
-                PublishableLaceMessages.TransformingResponseFromExternalSourceHasStarted(),1);
+                PublishableLaceMessages.TransformingResponseFromExternalSourceHasStarted,1);
 
-            var consumer = new ExternalSourceTransformationConsumer();
+            var consumer = new ExternalSourceTransformationConsumer(new PersistEvent());
             consumer.Consume(message);
             consumer.HasBeenConsumed.ShouldBeTrue();
         }

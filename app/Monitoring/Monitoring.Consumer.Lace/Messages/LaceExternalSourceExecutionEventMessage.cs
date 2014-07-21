@@ -7,7 +7,7 @@ namespace Monitoring.Consumer.Lace.Messages
     {
         public LaceExternalSourceExecutionEventMessage(Guid aggregateId, LaceEventSource source, string message,
             int order) :
-                base(aggregateId, source, message, order, "laceExecutingExternalSource")
+                base(aggregateId, source, message, order, Categories.LaceExecutingExternalSource)
         {
 
         }
