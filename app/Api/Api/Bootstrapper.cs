@@ -53,10 +53,13 @@ namespace Api
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
-            var bus = BusFactory.CreateBus("monitor-event-tracking/queue");
-            var publisher = new Publisher(bus);
+            IPublishMessages publisher;
+            using (var bus = BusFactory.CreateBus("monitor-event-tracking/queue"))
+            {
+                publisher = new Publisher(bus);
+            }
 
-            container.Register<IPublishMessages>(publisher);
+            container.Register(publisher);
             container.Register<IEntryPoint>(new EntryPoint(publisher));
 
             container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));

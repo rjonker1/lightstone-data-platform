@@ -22,8 +22,8 @@ namespace Billing.Api.Tests.Consumers.Billing
         public when_receiving_a_bill_transaction_message_and_an_exiting_transaction_exists()
         {
             repository = new Mock<IRepository>();
-            repository.Setup(r => r.Get<Transaction>(It.IsAny<Guid>()))
-                .Returns(new InvoiceTransaction());
+            repository.Setup(r => r.Get<InvoiceTransaction>(It.IsAny<Guid>()))
+                .Returns(() => new InvoiceTransaction());
 
             consumer = new BillTransactionConsumer(repository.Object);
 
@@ -52,7 +52,6 @@ namespace Billing.Api.Tests.Consumers.Billing
         public void a_new_transaction_is_not_created()
         {
             repository.IsNeverCalled(r => r.Add(It.IsAny<InvoiceTransaction>()));
-
         }
     }
 }

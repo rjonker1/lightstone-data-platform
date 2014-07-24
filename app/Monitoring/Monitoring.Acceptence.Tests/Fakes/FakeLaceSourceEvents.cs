@@ -1,6 +1,5 @@
 ﻿using System;
 using EventTracking.Domain.Persistence;
-using EventTracking.Domain.Persistence.EventStore;
 using Monitoring.Consumer.Lace.Consumers;
 using Monitoring.Consumer.Lace.Messages;
 using Monitoring.Sources.Lace;

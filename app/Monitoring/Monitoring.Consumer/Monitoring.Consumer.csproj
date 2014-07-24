@@ -49,9 +49,21 @@
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\Workflow\Workflow.BuildingBlocks\bin\Release\DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
+      <HintPath>..\..\Workflow\Workflow.BuildingBlocks\bin\Release\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence">
+      <HintPath>..\..\EventTracking\EventTracking.Domain.Persistence\bin\Debug\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Public">
+      <HintPath>..\..\Shared\Shared.Public\bin\Debug\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -104,22 +116,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EventTracking\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
-      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
-      <Name>EventTracking.Domain.Persistence</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
-      <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
-      <Name>BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared.Public\Shared.Public.csproj">
-      <Project>{a9e8b20a-e8f8-4549-83fc-921e26c64282}</Project>
-      <Name>Shared.Public</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Workflow\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
-      <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
-      <Name>Workflow.BuildingBlocks</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
       <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
       <Name>Monitoring.Consumer.Lace</Name>
