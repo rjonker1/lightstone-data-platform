@@ -53,10 +53,6 @@
     <None Include="connections.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Deploy\build.ps1">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Deploy\deploy.ps1" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -70,7 +66,8 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>%25WinDir%25\SysNative\WindowsPowerShell\v1.0\PowerShell -File "$(ProjectDir)deploy\build.ps1" $(BuildingInsideVisualStudio) $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

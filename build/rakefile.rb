@@ -330,17 +330,21 @@ namespace :package do
 	task :default => [:specs, :pack, :zip] do
 	end
 
-	task :specs do
+	task :specs => ['convention:spec_generation'] do
 		@settings.Configs.each do |c|
-			output_file = "#{c.folder}.#{get_version()}.nuspec"
+
+			# Projects are in sub-folders
+			folder = c.folder.split("/").last
+
+			output_file = "#{folder}.#{get_version()}.nuspec"
 			nuspec_file = File.join(Dir.pwd, @config[:nuget][:specs_folder], output_file)
 
 			nuspec = Nuspec.new
-			nuspec.id = c.folder
+			nuspec.id = folder
 			nuspec.version = c.version
 			nuspec.authors = c.author
 			nuspec.description = c.description
-			nuspec.title = c.folder
+			nuspec.title = folder
 			nuspec.output_file = nuspec_file
 
 			c.includes.each do |i|
@@ -356,33 +360,6 @@ namespace :package do
 		end
 	end
 
-	task :zip do
-		puts "#{(@settings.Configs).length} apps to zip found"
-
-		@settings.Configs.each do |c|
-			folder = "../app/#{c.folder}"
-			spec_file = "#{c.folder}.#{get_version()}.nuspec"
-			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
-			base_path = File.join(folder, 'bin/release')
-
-			if !File.exists?(base_path)
-				base_path = folder
-			end
-			puts "Zipping '#{folder}' as '#{c.folder}.zip' to '#{@config[:artifact_folder]}'"
-
-			zip = ZipDirectory.new
-
-			if File.directory?(@config[:artifact_folder])
-				zip.directories_to_zip = folder
-				zip.output_file = "#{c.folder}.zip"
-				zip.output_path = @config[:artifact_folder]
-				zip.execute
-			end
-
-			zip = nil
-		end
-	end
-
 	task :pack do
 		puts "#{@settings.Configs.length} nuspec definitions to pack"
 
@@ -390,8 +367,9 @@ namespace :package do
 		package_folder = File.join(Dir.pwd, @config[:nuget][:package_folder])
 
 		@settings.Configs.each do |c|
-			folder = "../app/#{c.folder}"
-			spec_file = "#{c.folder}.#{get_version()}.nuspec"
+			folder = "../#{c.folder}"
+			file =  c.folder.split("/").last
+			spec_file = "#{file}.#{get_version()}.nuspec"
 			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
 			base_path = File.join(folder, 'bin/release')
 
@@ -407,8 +385,35 @@ namespace :package do
 			cmd.execute
 		end
 	end
-end
 
+	task :zip do
+		puts "#{(@settings.Configs).length} apps to zip found"
+
+		@settings.Configs.each do |c|
+			folder = "../#{c.folder}"
+			file =  c.folder.split("/").last
+			spec_file = "#{file}.#{get_version()}.nuspec"
+			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
+			base_path = File.join(folder, 'bin/release')
+
+			if !File.exists?(base_path)
+				base_path = folder
+			end
+			puts "Zipping '#{folder}' as '#{file}.zip' to '#{@config[:artifact_folder]}'"
+
+			zip = ZipDirectory.new
+
+			if File.directory?(@config[:artifact_folder])
+				zip.directories_to_zip = folder
+				zip.output_file = "#{file}.zip"
+				zip.output_path = @config[:artifact_folder]
+				zip.execute
+			end
+
+			zip = nil
+		end
+	end
+end
 
 namespace :environment do
 	task :default => ['specs', 'artifact_folder'] do
@@ -462,7 +467,7 @@ task :acceptance_tests => ['testing:acceptance'] do end
 task :default => [
 	'environment:default',
 	'build:default',
-	'testing:unit',
+	#'testing:unit',
 	'package:default'
 	] do
 end
