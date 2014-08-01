@@ -63,7 +63,7 @@
     </Reference>
     <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\BuildingBlocks.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Log4Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,8 +79,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.3.109\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
-      <HintPath>..\..\Workflow\Workflow.BuildingBlocks\bin\Release\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.BuildingBlocks, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\BuildingBlocks.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Request">
       <HintPath>..\..\Lace\Lace.Request\bin\Debug\Lightstone.DataPlatform.Lace.Request.dll</HintPath>
