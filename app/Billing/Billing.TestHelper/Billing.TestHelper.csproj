@@ -32,17 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="FluentMigrator, Version=1.2.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.dll</HintPath>
+    <Reference Include="FluentMigrator">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.dll</HintPath>
     </Reference>
-    <Reference Include="FluentMigrator.Runner, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.Runner.dll</HintPath>
+    <Reference Include="FluentMigrator.Runner">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.Runner.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -52,23 +50,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Public">
-      <HintPath>..\..\packages\Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
-      <HintPath>..\..\packages\Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Lightstone.DataPlatform.Workflow">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Shared.Public.TestHelpers.0.0.0.1\lib\net45\Moq.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
