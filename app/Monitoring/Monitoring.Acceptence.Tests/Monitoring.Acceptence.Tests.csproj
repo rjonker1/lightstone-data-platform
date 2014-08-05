@@ -33,13 +33,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore.ClientAPI">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\EventStore.ClientAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence">
-      <HintPath>..\..\EventTracking\EventTracking.Domain.Persistence\bin\Debug\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -56,13 +69,9 @@
   <ItemGroup>
     <Compile Include="Lace\Consumer\when_sending_external_source_failure_event_to_event_store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
-      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
+    <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
+      <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
+      <Name>Monitoring.Consumer.Lace</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
@@ -70,23 +79,13 @@
     </ProjectReference>
     <Compile Include="Fakes\FakeLaceSourceEvents.cs" />
     <Compile Include="Lace\Consumer\when_sending_lace_external_source_call_events_to_event_store.cs" />
+    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
+      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
+      <Name>Monitoring</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
-      <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
-      <Name>Monitoring.Consumer.Lace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monitoring.Events.Lace\Monitoring.Events.Lace.csproj">
-      <Project>{ded1a7bc-dab2-4f31-893c-59a819f1acb8}</Project>
-      <Name>Monitoring.Events.Lace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
-      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

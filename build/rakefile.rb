@@ -28,7 +28,8 @@ class Dependency
 end
 
 class SingleBuildConfig
-	def initialize(folder, author, deploy, description, version)
+	def initialize(name, folder, author, deploy, description, version)
+		self.name = name
 		self.folder = folder
 		self.author = author
 		self.deploy = deploy
@@ -38,10 +39,10 @@ class SingleBuildConfig
 		self.dependencies = []
 	end
 
-	attr_accessor :folder, :author, :deploy, :description, :includes, :dependencies, :version
+	attr_accessor :name, :folder, :author, :deploy, :description, :includes, :dependencies, :version
 
 	def to_s
-		"Folder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description}"
+		"Name: #{name},\nFolder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description}"
 	end
 
 end
@@ -97,7 +98,7 @@ namespace :convention do
 		doc, package_folders = REXML::Document.new(xml), []
 		doc.elements.each('build/nugets/nuget') do |p|
 
-			@current = SingleBuildConfig.new(p.get_elements("folder")[0].text,
+			@current = SingleBuildConfig.new(p.get_elements("name")[0].text,p.get_elements("folder")[0].text,
 				p.get_elements("author")[0].text,
 				p.attributes["deploy"] == nil ? false : p.attributes["deploy"] == "true" ? true : false,
 				p.get_elements("description")[0].text,
@@ -333,18 +334,15 @@ namespace :package do
 	task :specs => ['convention:spec_generation'] do
 		@settings.Configs.each do |c|
 
-			# Projects are in sub-folders
-			folder = c.folder.split("/").last
-
-			output_file = "#{folder}.#{get_version()}.nuspec"
+			output_file = "#{c.name}.#{get_version()}.nuspec"
 			nuspec_file = File.join(Dir.pwd, @config[:nuget][:specs_folder], output_file)
 
 			nuspec = Nuspec.new
-			nuspec.id = folder
+			nuspec.id = c.name
 			nuspec.version = c.version
 			nuspec.authors = c.author
 			nuspec.description = c.description
-			nuspec.title = folder
+			nuspec.title = c.name
 			nuspec.output_file = nuspec_file
 
 			c.includes.each do |i|
@@ -368,8 +366,7 @@ namespace :package do
 
 		@settings.Configs.each do |c|
 			folder = "../#{c.folder}"
-			file =  c.folder.split("/").last
-			spec_file = "#{file}.#{get_version()}.nuspec"
+			spec_file = "#{c.name}.#{get_version()}.nuspec"
 			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
 			base_path = File.join(folder, 'bin/release')
 
@@ -391,21 +388,20 @@ namespace :package do
 
 		@settings.Configs.each do |c|
 			folder = "../#{c.folder}"
-			file =  c.folder.split("/").last
-			spec_file = "#{file}.#{get_version()}.nuspec"
+			spec_file = "#{c.name}.#{get_version()}.nuspec"
 			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
 			base_path = File.join(folder, 'bin/release')
 
 			if !File.exists?(base_path)
 				base_path = folder
 			end
-			puts "Zipping '#{folder}' as '#{file}.zip' to '#{@config[:artifact_folder]}'"
+			puts "Zipping '#{folder}' as '#{c.name}.zip' to '#{@config[:artifact_folder]}'"
 
 			zip = ZipDirectory.new
 
 			if File.directory?(@config[:artifact_folder])
 				zip.directories_to_zip = folder
-				zip.output_file = "#{file}.zip"
+				zip.output_file = "#{c.name}.zip"
 				zip.output_path = @config[:artifact_folder]
 				zip.execute
 			end

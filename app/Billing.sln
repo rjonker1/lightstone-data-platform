@@ -5,25 +5,25 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{89F5585A-CB90-4899-8E1D-DC1CDDF45F4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Acceptance.Tests", "Workflow\Components\Billing\Billing.Acceptance.Tests\Billing.Acceptance.Tests.csproj", "{FF7C6F97-8AC9-4384-AB9B-B0734031DEF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Acceptance.Tests", "Billing\Billing.Acceptance.Tests\Billing.Acceptance.Tests.csproj", "{FF7C6F97-8AC9-4384-AB9B-B0734031DEF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.TestHelper", "Workflow\Components\Billing\Billing.TestHelper\Billing.TestHelper.csproj", "{920B81A8-7088-4E8B-8170-228906CD127E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.TestHelper", "Billing\Billing.TestHelper\Billing.TestHelper.csproj", "{920B81A8-7088-4E8B-8170-228906CD127E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Unit.Tests", "Workflow\Components\Billing\Billing.Unit.Tests\Billing.Unit.Tests.csproj", "{1AC6A459-024B-4465-B2FC-0C9B7494FF91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Unit.Tests", "Billing\Billing.Unit.Tests\Billing.Unit.Tests.csproj", "{1AC6A459-024B-4465-B2FC-0C9B7494FF91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api", "Workflow\Components\Billing\Billing.Api\Billing.Api.csproj", "{ED638DD5-E755-4B7A-940D-5C94AB425686}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api", "Billing\Billing.Api\Billing.Api.csproj", "{ED638DD5-E755-4B7A-940D-5C94AB425686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api.Dtos", "Workflow\Components\Billing\Billing.Api.Dtos\Billing.Api.Dtos.csproj", "{967DB86A-E141-466D-B9C3-2ABAD9FF5487}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api.Connector", "Billing\Billing.Api.Connector\Billing.Api.Connector.csproj", "{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api.Connector", "Workflow\Components\Billing\Billing.Api.Connector\Billing.Api.Connector.csproj", "{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Api.Dtos", "Billing\Billing.Api.Dtos\Billing.Api.Dtos.csproj", "{967DB86A-E141-466D-B9C3-2ABAD9FF5487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Consumer", "Workflow\Components\Billing\Workflow.Billing.Consumer\Workflow.Billing.Consumer.csproj", "{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing", "Billing\Workflow.Billing\Workflow.Billing.csproj", "{74859ECC-2E2E-4016-8689-2FB29CDBBB02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing", "Workflow\Components\Billing\Workflow.Billing\Workflow.Billing.csproj", "{74859ECC-2E2E-4016-8689-2FB29CDBBB02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Consumer", "Billing\Workflow.Billing.Consumer\Workflow.Billing.Consumer.csproj", "{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Database", "Workflow\Components\Billing\Workflow.Billing.Database\Workflow.Billing.Database.csproj", "{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Database", "Billing\Workflow.Billing.Database\Workflow.Billing.Database.csproj", "{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Messages", "Workflow\Components\Billing\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj", "{EA4E1FF1-8581-4680-AA28-126294163093}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Messages", "Billing\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj", "{EA4E1FF1-8581-4680-AA28-126294163093}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,22 +47,22 @@ Global
 		{ED638DD5-E755-4B7A-940D-5C94AB425686}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED638DD5-E755-4B7A-940D-5C94AB425686}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED638DD5-E755-4B7A-940D-5C94AB425686}.Release|Any CPU.Build.0 = Release|Any CPU
-		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2C90A8-ECE9-47BD-AF05-4F07133772A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967DB86A-E141-466D-B9C3-2ABAD9FF5487}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74859ECC-2E2E-4016-8689-2FB29CDBBB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74859ECC-2E2E-4016-8689-2FB29CDBBB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74859ECC-2E2E-4016-8689-2FB29CDBBB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74859ECC-2E2E-4016-8689-2FB29CDBBB02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Release|Any CPU.ActiveCfg = Release|Any CPU

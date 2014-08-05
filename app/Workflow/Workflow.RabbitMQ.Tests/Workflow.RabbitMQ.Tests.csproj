@@ -32,8 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.BuildingBlocks.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.1.105\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.BuildingBlocks.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Shared.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,13 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\BuildingBlocks\BuildingBlocks.csproj">
-      <Project>{ab92c673-a7c0-4c58-8de8-2c51f1781303}</Project>
-      <Name>BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
+    <ProjectReference Include="..\Workflow.BuildingBlocks\Workflow.BuildingBlocks.csproj">
+      <Project>{dfc7dfc8-1c33-4061-90af-51405d8e8793}</Project>
+      <Name>Workflow.BuildingBlocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.RabbitMQ\Workflow.RabbitMQ.csproj">
       <Project>{0eaad289-f938-4986-b42c-a5b5a6a601ac}</Project>

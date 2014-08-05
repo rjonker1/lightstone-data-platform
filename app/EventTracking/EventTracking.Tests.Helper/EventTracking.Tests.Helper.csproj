@@ -32,15 +32,45 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ, Version=0.28.3.229, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="EventStore.ClientAPI, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\EventStore.ClientAPI.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Monitoring, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Consumer.Lace, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Events.Lace, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.Events.Lace.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -62,34 +92,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Monitoring\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
-      <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
-      <Name>Monitoring.Consumer.Lace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Monitoring\Monitoring.Consumer\Monitoring.Consumer.csproj">
-      <Project>{c74a12f5-c148-48a5-915d-243fa8cfa9eb}</Project>
-      <Name>Monitoring.Consumer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Monitoring\Monitoring\Monitoring.csproj">
-      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring %28Monitoring\Monitoring%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
-      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
-      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
-      <Name>EventTracking.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
-      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
-      <Name>EventTracking.Domain.Persistence</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain\EventTracking.Domain.csproj">
-      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
-      <Name>EventTracking.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
       <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
       <Name>EventTracking.Measurement</Name>
