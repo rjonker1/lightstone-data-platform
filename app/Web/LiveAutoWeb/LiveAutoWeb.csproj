@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.BuildingBlocks, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>

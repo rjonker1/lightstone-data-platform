@@ -43,10 +43,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="FluentMigrator, Version=1.1.2.1, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\FluentMigrator.1.1.2.1\lib\40\FluentMigrator.dll</HintPath>
