@@ -44,11 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="FluentMigrator">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentMigrator.Runner">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.Runner.dll</HintPath>
+    <Reference Include="FluentMigrator, Version=1.2.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\FluentMigrator.1.2.0.0\lib\40\FluentMigrator.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
