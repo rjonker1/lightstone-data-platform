@@ -1,4 +1,4 @@
-<build>	
+<build>
 	<nugets>
 		<!-- EVENT TRACKING START -->
 		<nuget deploy="false">
@@ -116,7 +116,7 @@
 				<dependency id="Lightstone.DataPlatform.Lace.Extensions" />
 				<dependency id="Lightstone.DataPlatform.Lace.Request" />
 				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response.ExternalServices" />				
+				<dependency id="Lightstone.DataPlatform.Lace.Response.ExternalServices" />
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
 				<dependency id="Lightstone.DataPlatform.Shared" />
@@ -138,7 +138,7 @@
 				<dependency id="Lightstone.DataPlatform.Lace.Events" />
 				<dependency id="Lightstone.DataPlatform.Lace.Request" />
 				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response.ExternalServices" />				
+				<dependency id="Lightstone.DataPlatform.Lace.Response.ExternalServices" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
 				<dependency id="Lightstone.DataPlatform.Shared" />
 			</dependencies>
@@ -159,7 +159,7 @@
 				<dependency id="Lightstone.DataPlatform.Lace.Events" />
 				<dependency id="Lightstone.DataPlatform.Lace.Request" />
 				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source" />				
+				<dependency id="Lightstone.DataPlatform.Lace.Source" />
 				<dependency id="Lightstone.DataPlatform.Lace.Source.Audatex" />
 				<dependency id="Lightstone.DataPlatform.Lace.Source.Ivid" />
 				<dependency id="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder" />
@@ -180,7 +180,7 @@
 				<dependency id="Lightstone.DataPlatform.Lace.Events" />
 				<dependency id="Lightstone.DataPlatform.Lace.Request" />
 				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source" />				
+				<dependency id="Lightstone.DataPlatform.Lace.Source" />
 				<dependency id="Lightstone.DataPlatform.Shared" />
 			</dependencies>
 		</nuget>
@@ -259,7 +259,7 @@
         <include pattern="*.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        
+
       </dependencies>
     </nuget>
     <nuget deploy="false">
@@ -592,7 +592,7 @@
 				<include pattern="*.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				
+
 			</dependencies>
 		</nuget>
 		<nuget deploy="false">
@@ -601,12 +601,16 @@
 			<author>CustomApp</author>
 			<description>Shared test helpers</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="FluentMigrator" version="1.2.0.0" />
-				<dependency id="FluentMigrator.Runner" version="1.0.0" />
+				<dependency id="FluentMigrator" version="1.2.1.0" />
+				<dependency id="FluentMigrator.Runner" version="1.2.1.0" />
 				<dependency id="Moq" version="4.0.10827" />
 			</dependencies>
 		</nuget>
@@ -616,30 +620,36 @@
 			<author>CustomApp</author>
 			<description>Building blocks for APIs</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.dll" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.dll" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll" to="lib\net45"/>
+				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.Api.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Nancy" version="0.22.2" />
+				<dependency id="Nancy" version="0.23.0" />
 				<dependency id="Nancy.Authentication.Stateless" version="0.22.2" />
+				<dependency id="Newtonsoft.Json" version="6.0.3" />
+				<dependency id="RestSharp" version="104.4.0" />
 			</dependencies>
-		</nuget>		
+		</nuget>
 		<nuget deploy="false">
 			<name>Lightstone.Dataplatform.Shared.BuildingBlocks</name>
 			<folder>app/Shared/BuildingBlocks</folder>
 			<author>CustomApp</author>
 			<description>Building blocks</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.dll" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.0.0" />
+				<dependency id="Common.Logging" version="2.1.2" />
 			</dependencies>
 		</nuget>
 		<!-- SHARED END -->
 
-    
+
     <nuget deploy="false">
       <name>Lightstone.Dataplatform.PackageBuilder.TestHelper</name>
       <folder>app/PackageBuilder/PackageBuilder.TestHelper</folder>
