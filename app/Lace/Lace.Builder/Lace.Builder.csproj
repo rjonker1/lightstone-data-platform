@@ -40,18 +40,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Factory\CreateSourceChain.cs" />
     <Compile Include="IBuildSourceChain.cs" />
     <None Include="app.config" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="RequestTypes\IRequestType.cs.old" />
     <None Include="RequestTypes\IRequestUsingLicensePlateNumber.cs.old" />

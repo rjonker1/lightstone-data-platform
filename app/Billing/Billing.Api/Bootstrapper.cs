@@ -1,12 +1,7 @@
-﻿using System;
-using System.Linq;
-using EasyNetQ;
+﻿using EasyNetQ;
 using Nancy;
-using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
-using Shared.BuildingBlocks.Api;
-using Shared.BuildingBlocks.Api.Security;
 using Workflow;
 using Workflow.BuildingBlocks;
 using Workflow.RabbitMQ;

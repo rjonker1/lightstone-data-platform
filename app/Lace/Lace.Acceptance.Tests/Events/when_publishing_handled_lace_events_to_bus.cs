@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Castle.Windsor;
 using EasyNetQ;
 using Lace.Events;
 using Lace.Events.Messages.Publish;

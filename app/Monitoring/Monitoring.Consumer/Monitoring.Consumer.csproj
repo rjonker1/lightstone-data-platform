@@ -35,43 +35,41 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ, Version=0.28.3.229, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.0.0.0.1\lib\net45\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="EventStore.ClientAPI">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\EventStore.ClientAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.6\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.6\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.6\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.6\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -84,6 +82,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Installer\ConsumerInstaller.cs" />
     <Compile Include="Installer\PersistenceInstaller.cs" />
     <Compile Include="MonitorService.cs" />
@@ -92,7 +93,6 @@
       <SubType>
       </SubType>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

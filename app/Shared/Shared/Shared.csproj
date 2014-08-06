@@ -35,6 +35,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
     <Compile Include="Dtos\Criteria.cs" />
@@ -76,7 +79,6 @@
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

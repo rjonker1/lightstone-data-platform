@@ -40,13 +40,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.0.0.0.6\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,7 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="RgtVinSourceExecution.cs" />
     <Compile Include="Service References\RgtVinServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>

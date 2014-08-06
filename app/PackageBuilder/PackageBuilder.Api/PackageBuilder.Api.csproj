@@ -43,34 +43,27 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="FluentMigrator, Version=1.1.2.1, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\FluentMigrator.1.1.2.1\lib\40\FluentMigrator.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.BuildingBlocks, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.6\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Nancy.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Authentication.Stateless, Version=0.22.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Nancy.Authentication.Stateless.dll</HintPath>
+    <Reference Include="Nancy.Authentication.Stateless">
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Hosting.Aspnet, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -82,11 +75,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -108,9 +100,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

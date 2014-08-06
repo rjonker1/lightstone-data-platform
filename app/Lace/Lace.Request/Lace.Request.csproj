@@ -32,20 +32,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ILaceRequest.cs" />
     <Compile Include="ILaceRequestContext.cs" />
     <Compile Include="ILaceRequestUserInformation.cs" />
     <Compile Include="ILaceRequestVehicleInformation.cs" />
     <Compile Include="IProvideRequestAggregation.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

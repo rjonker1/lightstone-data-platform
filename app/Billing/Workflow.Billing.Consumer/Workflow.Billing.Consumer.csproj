@@ -34,49 +34,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Log4Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ, Version=0.28.5.245, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.BuildingBlocks, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.6\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -97,13 +75,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="BillingService.cs" />
     <Compile Include="IBillingService.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -146,6 +126,7 @@
       <Name>Workflow.Billing</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>

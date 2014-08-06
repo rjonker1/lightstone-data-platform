@@ -36,19 +36,19 @@
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="EventStore.ClientAPI">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\EventStore.ClientAPI.dll</HintPath>
+      <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.6\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.6\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.0.0.0.6\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,8 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Lace\Consumer\when_sending_external_source_failure_event_to_event_store.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
       <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
       <Name>Monitoring.Consumer.Lace</Name>

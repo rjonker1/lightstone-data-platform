@@ -1,617 +1,143 @@
 <build>
 	<nugets>
+    <!-- BILLING START -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Billing.Api.Dtos</name>
+      <folder>app/Billing/Billing.Api.Dtos</folder>
+      <author>CustomApp</author>
+      <description>Billing.Api.Dtos</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Billing.Api.Dtos.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Billing.Api.Dtos.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+      </dependencies>
+    </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Billing.Api.Connector</name>
+      <folder>app/Billing/Billing.Api.Connector</folder>
+      <author>CustomApp</author>
+      <description>Billing.Api.Connector</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Billing.Api.Dtos.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Billing.Api.Dtos.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Billing.Api.Connector.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Billing.Api.Connector.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="RestSharp" version="104.4.0.0" />
+      </dependencies>
+    </nuget>
+    <!-- BILLING END -->
+    
+    
 		<!-- EVENT TRACKING START -->
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.EventTracking.Domain</name>
-			<folder>app/EventTracking/EventTracking.Domain</folder>
-			<author>CustomApp</author>
-			<description>EventTracking.Domain</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.EventTracking.Domain.Core</name>
-			<folder>app/EventTracking/EventTracking.Domain.Core</folder>
-			<author>CustomApp</author>
-			<description>EventTracking.Domain.Core</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="EventStore.Client" version="2.0.2" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain" />
-				<dependency id="Newtonsoft.Json" version="6.0.0.0" />
-			</dependencies>
-		</nuget>
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.EventTracking.Domain.Persistence</name>
 			<folder>app/EventTracking/EventTracking.Domain.Persistence</folder>
 			<author>CustomApp</author>
 			<description>EventTracking.Domain.Persistence</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Core.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Persistence.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
         <dependency id="EventStore.Client" version="2.0.2" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Core" />
-				<dependency id="Newtonsoft.Json" version="6.0.0.0" />
 			</dependencies>
 		</nuget>
 		<!-- EVENT TRACKING END -->
 
-
-		<!-- MONITORING START -->
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Monitoring.Consumer.Lace</name>
-			<folder>app/Monitoring/Monitoring.Consumer.Lace</folder>
-			<author>CustomApp</author>
-			<description>Monitoring.Consumer.Lace</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Shared" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Core" />
-				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Persistence" />
-				<dependency id="Lightstone.DataPlatform.Monitoring" />
-				<dependency id="Lightstone.DataPlatform.Monitoring.Events.Lace" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Monitoring</name>
-			<folder>app/Monitoring/Monitoring</folder>
-			<author>CustomApp</author>
-			<description>Monitoring</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Monitoring.Events.Lace</name>
-			<folder>app/Monitoring/Monitoring</folder>
-			<author>CustomApp</author>
-			<description>Monitoring.Events.Lace</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-
-			</dependencies>
-		</nuget>
-		<!-- MONITORING END -->
-
-
-		<!-- LACE START -->
+    
+    <!-- LACE START -->
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Lace.Request.Entry</name>
 			<folder>app/Lace/Lace.Request.Entry</folder>
 			<author>CustomApp</author>
 			<description>Lace.Request.Entry</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Builder.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Builder.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Events.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Events.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Events.Messages.Publish.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Events.Messages.Publish.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Extensions.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Extensions.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Request.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Request.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Response.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Response.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Response.ExternalServices.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Response.ExternalServices.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Request.Entry.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Request.Entry.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.0.0" />
-				<dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-				<dependency id="Lightstone.DataPlatform.Lace" />
-				<dependency id="Lightstone.DataPlatform.Lace.Builder" />
-				<dependency id="Lightstone.DataPlatform.Lace.Events" />
-				<dependency id="Lightstone.DataPlatform.Lace.Events.Messages.Publish" />
-				<dependency id="Lightstone.DataPlatform.Lace.Extensions" />
-				<dependency id="Lightstone.DataPlatform.Lace.Request" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response.ExternalServices" />
+				<dependency id="Common.Logging" version="2.1.2.0" />
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
 			</dependencies>
 		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Common.Logging" version="2.0.0" />
-				<dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-				<dependency id="Lightstone.DataPlatform.Lace.Builder" />
-				<dependency id="Lightstone.DataPlatform.Lace.Events" />
-				<dependency id="Lightstone.DataPlatform.Lace.Request" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response.ExternalServices" />
-				<dependency id="Lightstone.DataPlatform.Monitoring" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Builder</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace.Builder</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Common.Logging" version="2.0.0" />
-				<dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-				<dependency id="Lightstone.DataPlatform.Lace.Consumer" />
-				<dependency id="Lightstone.DataPlatform.Lace.Events" />
-				<dependency id="Lightstone.DataPlatform.Lace.Request" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source.Audatex" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source.Ivid" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source.RgtVin" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Consumer</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace.Consumer</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Lace.Events" />
-				<dependency id="Lightstone.DataPlatform.Lace.Request" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Source" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Events</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace.Events</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Monitoring" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Request</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace.Request</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Response</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace.Response</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Lace.Models" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Audatex" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Ivid" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Lightstone" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Rgt" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.RgtVin" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Response.ExternalServices</name>
-			<folder>app/Lace/Lace</folder>
-			<author>CustomApp</author>
-			<description>Lace.ExternalServices</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Lace.Request" />
-				<dependency id="Lightstone.DataPlatform.Lace.Response" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Ivid" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Lightstone" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.Rgt" />
-				<dependency id="Lightstone.DataPlatform.Lace.Models.RgtVin" />
-			</dependencies>
-		</nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models</name>
-      <folder>app/Lace/Lace.Models</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models.Audatex</name>
-      <folder>app/Lace/Lace.Models.Audatex</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models.Audatex</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models.Ivid</name>
-      <folder>app/Lace/Lace.Models.Ivid</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models.Ivid</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models.IvidTitleHolder</name>
-      <folder>app/Lace/Lace.Models.IvidTitleHolder</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models.IvidTitleHolder</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models.Lightstone</name>
-      <folder>app/Lace/Lace.Models.Lightstone</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models.Lightstone</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models.Rgt</name>
-      <folder>app/Lace/Lace.Models.Rgt</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models.Rgt</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Models.RgtVin</name>
-      <folder>app/Lace/Lace.Models.RgtVin</folder>
-      <author>CustomApp</author>
-      <description>Lace.Models.RgtVin</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Source</name>
-      <folder>app/Lace/Lace.Source</folder>
-      <author>CustomApp</author>
-      <description>Lace.Source</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Lightstone.DataPlatform.Lace.Events" />
-        <dependency id="Lightstone.DataPlatform.Lace.Request" />
-        <dependency id="Lightstone.DataPlatform.Lace.Response" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Source.Audatex</name>
-      <folder>app/Lace/Lace.Source.Audatex</folder>
-      <author>CustomApp</author>
-      <description>Lace.Audatex</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Common.Logging" version="2.0.0" />
-        <dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-        <dependency id="Lightstone.DataPlatform.Lace.Consumer" />
-        <dependency id="Lightstone.DataPlatform.Lace.Events" />
-        <dependency id="Lightstone.DataPlatform.Lace.Extensions" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Audatex" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Ivid" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Lightstone" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Rgt" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.RgtVin" />
-        <dependency id="Lightstone.DataPlatform.Lace.Request" />
-        <dependency id="Lightstone.DataPlatform.Lace.Response" />
-        <dependency id="Lightstone.DataPlatform.Lace.Source" />
-        <dependency id="Lightstone.DataPlatform.Monitoring" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Source.Ivid</name>
-      <folder>app/Lace/Lace.Source.Ivid</folder>
-      <author>CustomApp</author>
-      <description>Lace.Ivid</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Common.Logging" version="2.0.0" />
-        <dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-        <dependency id="Lightstone.DataPlatform.Lace.Consumer" />
-        <dependency id="Lightstone.DataPlatform.Lace.Events" />
-        <dependency id="Lightstone.DataPlatform.Lace.Extensions" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Ivid" />
-        <dependency id="Lightstone.DataPlatform.Lace.Request" />
-        <dependency id="Lightstone.DataPlatform.Lace.Response" />
-        <dependency id="Lightstone.DataPlatform.Lace.Source" />
-        <dependency id="Lightstone.DataPlatform.Monitoring" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Source.IvidTitleHolder</name>
-      <folder>app/Lace/Lace.Source.IvidTitleHolder</folder>
-      <author>CustomApp</author>
-      <description>Lace.IvidTitleHolder</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Common.Logging" version="2.0.0" />
-        <dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-        <dependency id="Lightstone.DataPlatform.Lace.Consumer" />
-        <dependency id="Lightstone.DataPlatform.Lace.Events" />
-        <dependency id="Lightstone.DataPlatform.Lace.Extensions" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Ivid" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder" />
-        <dependency id="Lightstone.DataPlatform.Lace.Request" />
-        <dependency id="Lightstone.DataPlatform.Lace.Response" />
-        <dependency id="Lightstone.DataPlatform.Lace.Source" />
-        <dependency id="Lightstone.DataPlatform.Monitoring" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Source.RgtVin</name>
-      <folder>app/Lace/Lace.Source.RgtVin</folder>
-      <author>CustomApp</author>
-      <description>Lace.RgtVin</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Common.Logging" version="2.0.0" />
-        <dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-        <dependency id="Lightstone.DataPlatform.Lace.Consumer" />
-        <dependency id="Lightstone.DataPlatform.Lace.Events" />
-        <dependency id="Lightstone.DataPlatform.Lace.Extensions" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.Ivid" />
-        <dependency id="Lightstone.DataPlatform.Lace.Models.RgtVin" />
-        <dependency id="Lightstone.DataPlatform.Lace.Request" />
-        <dependency id="Lightstone.DataPlatform.Lace.Response" />
-        <dependency id="Lightstone.DataPlatform.Lace.Source" />
-        <dependency id="Lightstone.DataPlatform.Monitoring" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Extensions</name>
-      <folder>app/Lace/Lace.Extensions</folder>
-      <author>CustomApp</author>
-      <description>Lace.Extensions</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Newtonsoft.Json" version="6.0.0.0" />
-      </dependencies>
-    </nuget>
-    <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Events.Messages.Publish</name>
-      <folder>app/Lace/Lace.Events.Messages.Publish</folder>
-      <author>CustomApp</author>
-      <description>Lace.Extensions</description>
-      <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Common.Logging" version="2.0.0" />
-        <dependency id="Common.Logging.Log4Net" version="2.0.0.0" />
-        <dependency id="EventStore.Client" version="2.0.2" />
-        <dependency id="Lightstone.DataPlatform.Lace.Events" />
-        <dependency id="Lightstone.DataPlatform.EventTracking.Domain" />
-        <dependency id="Lightstone.DataPlatform.EventTracking.Domain.Core" />
-        <dependency id="Lightstone.DataPlatform.EventTracking.Domain.Persistence" />
-        <dependency id="Lightstone.DataPlatform.Monitoring" />
-        <dependency id="Lightstone.DataPlatform.Monitoring.Consumer.Lace" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-        <dependency id="Lightstone.DataPlatform.Workflow" />
-        <dependency id="Newtonsoft.Json" />
-      </dependencies>
-    </nuget>
 		<!-- LACE END -->
+          
 
-
-		<!-- BILLING START -->
+		<!-- MONITORING START -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Monitoring</name>
+      <folder>app/Monitoring/Monitoring</folder>
+      <author>CustomApp</author>
+      <description>Monitoring</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Monitoring.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+      </dependencies>
+    </nuget>
 		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Billing.Api.Dtos</name>
-			<folder>app/Billing/Billing.Api.Dtos</folder>
+			<name>Lightstone.DataPlatform.Monitoring.Consumer.Lace</name>
+			<folder>app/Monitoring/Monitoring.Consumer.Lace</folder>
 			<author>CustomApp</author>
-			<description>Billing.Api.Dtos</description>
+			<description>Monitoring.Consumer.Lace</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
+        <dependency id="EasyNetQ-Bundle" version="0.28.5.115" targetFramework="net45" />
+        <dependency id="EventStore.Client" version="2.0.2" targetFramework="net45" />
 				<dependency id="Lightstone.DataPlatform.Shared" />
+				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Persistence" />
 			</dependencies>
 		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Billing.Api.Connector</name>
-			<folder>app/Billing/Billing.Api.Connector</folder>
-			<author>CustomApp</author>
-			<description>Billing.Api.Connector</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Billing.Api.Dtos" />
-				<dependency id="Common.Logging" version="2.0.0" />
-				<dependency id="RestSharp" version="104.4.0.0" />
-			</dependencies>
-		</nuget>
-		<!-- BILLING END -->
+		<!-- MONITORING END -->		
 
-
-		<!-- WORKFLOW START -->
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Workflow.RabbitMQ</name>
-			<folder>app/Workflow/Workflow.RabbitMQ</folder>
-			<author>CustomApp</author>
-			<description>Workflow.RabbitMQ</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Common.Logging" version="2.0.0" />
-				<dependency id="EasyNetQ" version="0.28.3.229" />
-				<dependency id="Lightstone.Dataplatform.BuildingBlocks" />
-				<dependency id="Lightstone.Dataplatform.Shared" />
-				<dependency id="Lightstone.DataPlatform.Workflow" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Workflow.BuildingBlocks</name>
-			<folder>app/Workflow/Workflow.BuildingBlocks</folder>
-			<author>CustomApp</author>
-			<description>Workflow.BuildingBlocks</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Castle.Core" version="3.3.0" />
-				<dependency id="Castle.Windsor" version="3.3.0" />
-				<dependency id="Common.Logging" version="2.0.0" />
-				<dependency id="EasyNetQ" version="0.28.3.229" />
-				<dependency id="Lightstone.Dataplatform.BuildingBlocks" />
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.Dataplatform.Workflow</name>
-			<folder>app/Workflow/Workflow</folder>
-			<author>CustomApp</author>
-			<description>Workflow</description>
-			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="Lightstone.DataPlatform.Shared" />
-			</dependencies>
-		</nuget>
-		<!-- WORKFLOW END -->
-
-
-		<!-- SHARED START -->
+    
+    <!-- SHARED START -->
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Shared</name>
 			<folder>app/Shared/Shared</folder>
 			<author>CustomApp</author>
 			<description>Shared domain common code</description>
 			<includes>
-				<include pattern="*.dll" to="lib\net45"/>
-				<include pattern="*.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
 
-			</dependencies>
-		</nuget>
-		<nuget deploy="false">
-			<name>Lightstone.Dataplatform.Shared.Public.TestHelpers</name>
-			<folder>app/Shared/Shared.Public.TestHelpers</folder>
-			<author>CustomApp</author>
-			<description>Shared test helpers</description>
-			<includes>
-				<include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45"/>
-				<include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45"/>
-				<include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
-				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
-				<include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
-				<include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
-			</includes>
-			<dependencies>
-				<dependency id="FluentMigrator" version="1.2.1.0" />
-				<dependency id="FluentMigrator.Runner" version="1.2.1.0" />
-				<dependency id="Moq" version="4.0.10827" />
 			</dependencies>
 		</nuget>
 		<nuget deploy="false">
@@ -647,7 +173,78 @@
 				<dependency id="Common.Logging" version="2.1.2" />
 			</dependencies>
 		</nuget>
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.Shared.Public.TestHelpers</name>
+      <folder>app/Shared/Shared.Public.TestHelpers</folder>
+      <author>CustomApp</author>
+      <description>Shared test helpers</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="FluentMigrator" version="1.2.1.0" />
+        <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
+        <dependency id="Moq" version="4.0.10827" />
+      </dependencies>
+    </nuget>
 		<!-- SHARED END -->
+        
+
+		<!-- WORKFLOW START -->
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.Workflow</name>
+      <folder>app/Workflow/Workflow</folder>
+      <author>CustomApp</author>
+      <description>Workflow</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Workflow.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+      </dependencies>
+    </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Workflow.BuildingBlocks</name>
+      <folder>app/Workflow/Workflow.BuildingBlocks</folder>
+      <author>CustomApp</author>
+      <description>Workflow.BuildingBlocks</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Workflow.BuildingBlocks.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.BuildingBlocks.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Castle.Core" version="3.3.0" />
+        <dependency id="Castle.Windsor" version="3.3.0" />
+        <dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="EasyNetQ" version="0.28.3.229" />
+        <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
+      </dependencies>
+    </nuget>
+		<nuget deploy="false">
+			<name>Lightstone.DataPlatform.Workflow.RabbitMQ</name>
+			<folder>app/Workflow/Workflow.RabbitMQ</folder>
+			<author>CustomApp</author>
+			<description>Workflow.RabbitMQ</description>
+			<includes>
+        <include pattern="Lightstone.DataPlatform.Workflow.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.pdb" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Workflow.RabbitMQ.dll" to="lib\net45"/>
+				<include pattern="Lightstone.DataPlatform.Workflow.RabbitMQ.pdb" to="lib\net45"/>
+			</includes>
+			<dependencies>
+				<dependency id="Common.Logging" version="2.1.2.0" />
+				<dependency id="EasyNetQ" version="0.28.3.229" />
+				<dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
+				<dependency id="Lightstone.Dataplatform.Shared" />
+			</dependencies>
+		</nuget>
+		<!-- WORKFLOW END -->		
 
 
     <nuget deploy="false">
@@ -660,9 +257,8 @@
         <include pattern="*.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Nancy" version="0.23.0.0" />
-        <dependency id="Nancy.Testing" version="0.23.0.0" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Nancy" version="0.23.0" />
+        <dependency id="Nancy.Testing" version="0.23.0" />
         <dependency id="Lightstone.Dataplatform.Shared.Public.TestHelpers" />
       </dependencies>
     </nuget>

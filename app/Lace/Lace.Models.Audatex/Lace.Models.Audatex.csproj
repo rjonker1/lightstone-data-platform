@@ -34,6 +34,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AudatexResponseHandled.cs" />
     <Compile Include="Dto\AccidentClaim.cs" />
     <Compile Include="Dto\AudatexRequest.cs" />
@@ -47,7 +50,6 @@
     <Compile Include="Dto\VendorResponseBody.cs" />
     <Compile Include="Dto\VendorResponseHeader.cs" />
     <Compile Include="IResponseFromAudatex.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

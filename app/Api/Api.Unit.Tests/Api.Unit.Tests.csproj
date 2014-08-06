@@ -33,132 +33,64 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Log4Net">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Events.Messages.Publish.0.0.0.1\lib\net45\Common.Logging.Log4Net.dll</HintPath>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="CsQuery">
       <HintPath>..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\EasyNetQ.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.6\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
     </Reference>
-    <Reference Include="EventStore.ClientAPI">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\EventStore.ClientAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.DataPlatform.BuildingBlocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.6\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Builder">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Builder.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Consumer">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Consumer.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Builder.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Events">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Events.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Events.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Events.Messages.Publish">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Events.Messages.Publish.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Events.Messages.Publish.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Extensions">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Audatex">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.Audatex.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.IvidTitleHolder.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Lightstone">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.Lightstone.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Rgt">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.Rgt.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.RgtVin">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Models.RgtVin.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Request">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Request.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Request.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Request.Entry">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Request.Entry.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Request.Entry.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Response">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Response.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Response.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Response.ExternalServices">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Response.ExternalServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Source">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Source.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Source.Audatex">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Source.Audatex.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Source.Ivid">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Source.Ivid.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Source.RgtVin">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Lace.Source.RgtVin.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.6\lib\net45\Lightstone.DataPlatform.Lace.Response.ExternalServices.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Consumer.Lace">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Events.Lace">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Monitoring.Events.Lace.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.0.0.0.6\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.6\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Events.Messages.Publish.0.0.0.1\lib\net45\log4net.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.0.0.0.6\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Nancy.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Authentication.Stateless">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Nancy.Authentication.Stateless.dll</HintPath>
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Testing">
       <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
@@ -168,7 +100,7 @@
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.1\lib\net45\RestSharp.dll</HintPath>
+      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -185,8 +117,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Fakes\TestBootstrapper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="when_api_key_header_missing.cs" />
     <Compile Include="when_api_key_header_added.cs" />
   </ItemGroup>

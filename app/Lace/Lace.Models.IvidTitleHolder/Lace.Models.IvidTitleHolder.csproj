@@ -34,12 +34,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="FinancedInterestValidation.cs" />
     <Compile Include="Dto\IvidTitleHolderResponse.cs" />
     <Compile Include="IBuildIvidTitleHolderResponse.cs" />
     <Compile Include="IResponseFromIvidTitleHolder.cs" />
     <Compile Include="IvidTitleHolderResponseHandled.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
@@ -47,6 +49,7 @@
       <Name>Lace.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

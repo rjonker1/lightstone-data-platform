@@ -32,42 +32,53 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="CsQuery">
+      <HintPath>..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
+    </Reference>
     <Reference Include="FluentMigrator">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\FluentMigrator.dll</HintPath>
     </Reference>
     <Reference Include="FluentMigrator.Runner">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\FluentMigrator.Runner.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\FluentMigrator.Runner.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.6\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.6\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestHelper">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestHelper.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Public">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.0.0.0.1\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.0.0.0.6\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.0.0.0.1\lib\net45\Moq.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.1\lib\net45\RestSharp.dll</HintPath>
+    <Reference Include="Nancy">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Testing">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\Nancy.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="PackageBuilder.Domain">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.6\lib\net45\PackageBuilder.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,6 +89,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Fakes\FailingMessagePublisher.cs" />
     <Compile Include="Fakes\NullPublisher.cs" />
     <Compile Include="Fakes\TestBillingConnectorConfiguration.cs" />
@@ -90,7 +104,6 @@
     <Compile Include="Mothers\CreatTransactionDto\CreateTransactionMother.cs" />
     <Compile Include="Mothers\CreatTransactionDto\DefaultCreateTransactionData.cs" />
     <Compile Include="Mothers\CreatTransactionDto\IDefineCreateTransactionData.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
