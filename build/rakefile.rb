@@ -172,7 +172,7 @@ end
 def get_version
 
   if ENV['BUILD_NUMBER'].nil?
-	'0.0.0.8'
+	'0.0.0.9'
   else
 	"#{ENV['BUILD_NUMBER']}"
   end

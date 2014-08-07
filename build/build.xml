@@ -46,6 +46,7 @@
         <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Persistence.pdb" to="lib\net45"/>
+        <include pattern="Newtonsoft.Json.dll" version="6.0.0.0" to="lib\net45"/>
 			</includes>
 			<dependencies>
         <dependency id="EventStore.Client" version="2.0.2" />
