@@ -28,7 +28,7 @@ class Dependency
 end
 
 class SingleBuildConfig
-	def initialize(folder, author, deploy, description, version)
+	def initialize(folder, author, deploy, description, version, deployment_project)
 		self.folder = folder
 		self.author = author
 		self.deploy = deploy
@@ -36,9 +36,10 @@ class SingleBuildConfig
 		self.version = version
 		self.includes = []
 		self.dependencies = []
+		self.deployment_project = deployment_project
 	end
 
-	attr_accessor :folder, :author, :deploy, :description, :includes, :dependencies, :version
+	attr_accessor :folder, :author, :deploy, :description, :includes, :dependencies, :version, :deployment_project
 
 	def to_s
 		"Folder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description}"
@@ -101,7 +102,8 @@ namespace :convention do
 				p.get_elements("author")[0].text,
 				p.attributes["deploy"] == nil ? false : p.attributes["deploy"] == "true" ? true : false,
 				p.get_elements("description")[0].text,
-				get_version())
+				get_version(),
+				p.get_elements("deploymentProject") == nil ? "" : p.get_elements("deploymentProject")[0].text)
 
 			p.get_elements('includes/*').each do |e|
 				@current.includes << Include.new(e.attributes["pattern"], e.attributes["to"])
@@ -219,8 +221,8 @@ end
 # CONFIG #
 Albacore.configure do |config|
 	config.msbuild.targets = [:clean, :build]
-	config.msbuild.properties = { 
-									:configuration => :Release, 
+	config.msbuild.properties = {
+									:configuration => :Release,
 									:documentationFile => "bin/iBroker.Api.XML",
 									:nowarn => 1591
 								}
@@ -269,7 +271,7 @@ namespace :testing do
 			xunit.execute
 		end
 	end
-	
+
 	task :update_config do
 		@acceptance_tests.each do |assembly|
 			current_folder = Dir.pwd
@@ -303,7 +305,7 @@ namespace :deploy do
 				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
 				cmd = Exec.new
 				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
+				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
 				cmd.execute
 			end
 		end
@@ -429,7 +431,7 @@ namespace :environment do
 		end
 		Dir.glob(File.join(Dir.pwd, @config[:nuget][:specs_folder], "/*.*")).each { |f| File.delete f }
 
-		
+
 		puts "Removing and adding #{@config[:nuget][:package_folder]}"
 		if !File.directory?(@config[:nuget][:package_folder])
 			FileUtils.mkdir_p @config[:nuget][:package_folder]
