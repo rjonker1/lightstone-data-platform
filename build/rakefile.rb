@@ -70,9 +70,9 @@ end
 		:executable => '../tools/nuget/nuget.exe',
 	},
 	:octupus => {
-		:server => 'http://deploy.gaul:8883/api',
-		:apiKey => 'A3IRIEKVHRZNTTCYCTRAI8NET18'
-	}
+  		:server => 'http://dev.octopus/api',
+  		:apiKey => 'API-ONI3VWBDTIWUFPOJOJIOMOC7AZA'
+ 	}
 }
 
 # CONVENTIONS #
