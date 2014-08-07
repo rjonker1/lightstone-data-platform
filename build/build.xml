@@ -151,8 +151,8 @@
         <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.pdb" to="lib\net45"/>
-        <include pattern="EasyNetQ" to="lib\net45"/>
-        <include pattern="Newtonsoft.Json" to="lib\net45"/>
+        <include pattern="EasyNetQ.dll" to="lib\net45"/>
+        <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
 			</includes>
 			<dependencies>
 				<dependency id="Common.Logging" version="2.1.2.0" />
