@@ -55,8 +55,6 @@
     <Compile Include="IBuildSourceChain.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="RequestTypes\IRequestType.cs.old" />
-    <None Include="RequestTypes\IRequestUsingLicensePlateNumber.cs.old" />
     <Compile Include="Specifications\SourceSpecification.cs" />
   </ItemGroup>
   <ItemGroup />
