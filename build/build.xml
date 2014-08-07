@@ -13,7 +13,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.UserManagement.Api</name>
       <folder>app/UserManagement/UmApi</folder>
       <author>CustomApp</author>
@@ -25,7 +25,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="true">
+    <nuget deploy="false">
       <name>Lightstone.DataPlatform.PackageBuilder.Api</name>
       <folder>app/PackageBuilder/PackageBuilder.Api</folder>
       <author>CustomApp</author>
