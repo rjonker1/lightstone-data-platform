@@ -65,59 +65,77 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.9\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.55\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.0.0.0.9\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.55\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Builder">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Builder.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Builder, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Builder.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Events">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Events.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Events, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Events.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Events.Messages.Publish">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Events.Messages.Publish.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Events.Messages.Publish, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Events.Messages.Publish.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Extensions">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Extensions.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Extensions, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Request">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Request.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Request, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Request.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Request.Entry">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Request.Entry.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Request.Entry, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Request.Entry.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Response">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Response.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Response, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Response.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Response.ExternalServices">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.0.0.0.9\lib\net45\Lightstone.DataPlatform.Lace.Response.ExternalServices.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Response.ExternalServices, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Request.Entry.1.0.0.55\lib\net45\Lightstone.DataPlatform.Lace.Response.ExternalServices.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.0.0.0.9\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.55\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.9\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.9\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.0.0.0.9\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.55\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.0.0.0.9\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.55\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.0.0.0.9\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.55\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.0.0.0.9\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.55\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
