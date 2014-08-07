@@ -34,16 +34,16 @@ class SingleBuildConfig
 		self.author = author
 		self.deploy = deploy
 		self.description = description
+		self.deployment_project = deployment_project
 		self.version = version
 		self.includes = []
-		self.dependencies = []
-		self.deployment_project = deployment_project
+		self.dependencies = []		
 	end
 
 	attr_accessor :name, :folder, :author, :deploy, :description, :includes, :dependencies, :version, :deployment_project
 
 	def to_s
-		"Folder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description}"
+		"Name: #{name},\nFolder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description},\nDeploymentProject: #{deployment_project}"
 	end
 
 end
@@ -106,7 +106,7 @@ namespace :convention do
 				p.attributes["deploy"] == nil ? false : p.attributes["deploy"] == "true" ? true : false,
 				p.get_elements("description")[0].text,
 				get_version(),
-				p.get_elements("deploymentProject")[0])
+				p.get_elements("deploymentProject")[0] == nil ? "" : p.get_elements("deploymentProject")[0].text)
 
 			p.get_elements('includes/*').each do |e|
 				@current.includes << Include.new(e.attributes["pattern"], e.attributes["to"])
