@@ -2,10 +2,10 @@
 	<nugets>
     <!-- API -->
     <nuget deploy="false">
-      <name>Lighstone.DataPlatform.Api</name>
+      <name>Lightstone.DataPlatform.Api</name>
       <folder>app/Api/Api</folder>
       <author>CustomApp</author>
-      <description>Lighstone.DataPlatform.Api</description>
+      <description>Lightstone.DataPlatform.Api</description>
       <includes>        
         <include pattern="bin\*.dll" to="content\bin"/>
         <include pattern="bin\*.pdb" to="content\bin"/>
