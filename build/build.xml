@@ -1,5 +1,19 @@
 <build>
 	<nugets>
+    <!-- API -->
+    <nuget deploy="false">
+      <name>Lighstone.DataPlatform.Api</name>
+      <folder>app/Api/Api</folder>
+      <author>CustomApp</author>
+      <description>Lighstone.DataPlatform.Api</description>
+      <includes>        
+        <include pattern="bin\*.dll" to="content\bin"/>
+        <include pattern="bin\*.pdb" to="content\bin"/>
+        <include pattern="*.config" to="content"/>        
+      </includes>
+    </nuget>
+    <!-- API -->
+
     <!-- BILLING START -->
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api.Dtos</name>
