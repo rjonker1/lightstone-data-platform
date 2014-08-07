@@ -8,7 +8,7 @@ using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Lace.Consumer
 {
-    public class when_sending_lace_external_source_call_events_to_event_store : Specification
+    public class when_sending_lace_ivid_external_source_call_events_to_event_store : Specification
     {
 
         private readonly Guid _aggregateId;
@@ -16,7 +16,7 @@ namespace Monitoring.Acceptance.Tests.Lace.Consumer
         private ExternalSourceExecutedConsumer _externalSourceExecutedConsumer;
         private readonly IPersistAnEvent _persistEvent;
 
-        public when_sending_lace_external_source_call_events_to_event_store()
+        public when_sending_lace_ivid_external_source_call_events_to_event_store()
         {
             _aggregateId = Guid.NewGuid();
             _persistEvent = new PersistEvent(); //TODO: Add FakePersistEvent
