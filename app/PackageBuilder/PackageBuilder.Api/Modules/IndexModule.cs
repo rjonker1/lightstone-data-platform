@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using Common.Logging;
+using DataPlatform.Shared.Entities;
 using Nancy;
 using PackageBuilder.Domain.Contracts;
 using Shared.BuildingBlocks.Api;
@@ -7,6 +8,8 @@ namespace PackageBuilder.Api.Modules
 {
     public class IndexModule : SecureModule
     {
+        private readonly ILog _log = LogManager.GetCurrentClassLogger();
+
         public IndexModule(IPackageLookupRepository packageLookupRepository)
         {
             Get["/package/{action}"] = parameters =>
@@ -18,6 +21,8 @@ namespace PackageBuilder.Api.Modules
 
             Get["/getUserMetaData"] = parameters =>
             {
+                _log.InfoFormat("getUserMetaData");
+
                 var actions = packageLookupRepository.GetActions(Context.CurrentUser.UserName);
 
                 return Response.AsJson(new { path = "/action/{action}", actions });

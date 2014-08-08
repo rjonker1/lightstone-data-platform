@@ -38,29 +38,37 @@
     <Reference Include="EventStore.ClientAPI">
       <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.39\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.55\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.39\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.55\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.39\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.55\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.39\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.55\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Consumer.Lace">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.39\lib\net45\Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Consumer.Lace, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.55\lib\net45\Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring.Events.Lace">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.39\lib\net45\Lightstone.DataPlatform.Monitoring.Events.Lace.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Monitoring.Events.Lace, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.Consumer.Lace.1.0.0.55\lib\net45\Lightstone.DataPlatform.Monitoring.Events.Lace.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.39\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.39\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.55\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
