@@ -14,7 +14,7 @@ namespace LiveAutoWeb.Controllers
         private readonly ApiClient _apiClient = new ApiClient();
         public ActionResult Index()
         {
-            var response = _apiClient.Get<ApiMetaData>("4E7106BA-16B6-44F2-AF4C-D1C411440F8E");
+            var response = _apiClient.Get<ApiMetaData>("4E7106BA-16B6-44F2-AF4C-D1C411440F8E", "/");
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
