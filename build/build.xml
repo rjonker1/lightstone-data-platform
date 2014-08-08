@@ -1,6 +1,6 @@
 <build>
 	<nugets>
-    <!-- API -->
+    <!-- IIS SITES -->
     <nuget deploy="true">
       <name>Lightstone.DataPlatform.Api</name>
       <folder>app/Api/Api</folder>
@@ -49,7 +49,25 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <!-- API -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.LiveAutoWeb</name>
+      <folder>app/Web/LiveAutoWeb</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.LiveAutoWeb</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="bin\*.dll" to="content\bin"/>
+        <include pattern="bin\*.pdb" to="content\bin"/>
+        <include pattern="Content\*" to="content\Content"/>
+        <include pattern="fonts\*" to="content\fonts"/>
+        <include pattern="Scripts\*" to="content\Scripts"/>
+        <include pattern="Views\*" to="content\Views"/>
+        <include pattern="favicon.ico" to="content"/>
+        <include pattern="Global.asax" to="content"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
+    <!-- IIS SITES -->
 
     <!-- BILLING START -->
     <nuget deploy="false">
