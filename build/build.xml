@@ -226,7 +226,7 @@
 				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.pdb" to="lib\net45"/>
 				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll" to="lib\net45"/>
         <include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.Api.pdb" to="lib\net45"/>
-				<include pattern="Common.Logging" to="lib\net45"/>
+				<include pattern="Common.Logging.dll" to="lib\net45"/>
 			</includes>
 			<dependencies>
 				<dependency id="Nancy" version="0.23.0" />
