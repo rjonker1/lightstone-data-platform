@@ -60,8 +60,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Authentication.Stateless">
-      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
+    <Reference Include="Nancy.Authentication.Stateless, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.23.0\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Hosting.Aspnet, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
