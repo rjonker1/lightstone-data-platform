@@ -9,6 +9,7 @@ namespace PackageBuilder.Api.Modules
     public class IndexModule : SecureModule
     {
         private readonly ILog _log = LogManager.GetCurrentClassLogger();
+
         public IndexModule(IPackageLookupRepository packageLookupRepository)
         {
             Get["/package/{action}"] = parameters =>
