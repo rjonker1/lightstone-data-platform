@@ -16,21 +16,25 @@ namespace Monitoring.Consumer.Installer
             _log.InfoFormat("Installing Monitoring Consumer");
 
             container.Register(
-                Component.For<ExternalSourceConsumer>().ImplementedBy<ExternalSourceConsumer>(),
-                Component.For<ExternalSourceExecutedConsumer>().ImplementedBy<ExternalSourceExecutedConsumer>(),
+                Component.For<ExternalSourceConsumer>()
+                    .ImplementedBy<ExternalSourceConsumer>(),
+                Component.For<ExternalSourceExecutedConsumer>()
+                    .ImplementedBy<ExternalSourceExecutedConsumer>(),
                 Component.For<ExternalSourceConfigurationConsumer>()
                     .ImplementedBy<ExternalSourceConfigurationConsumer>(),
-                Component.For<ExternalSourceFailedConsumer>().ImplementedBy<ExternalSourceFailedConsumer>(),
-                Component.For<ExternalSourceHandledConsumer>().ImplementedBy<ExternalSourceHandledConsumer>(),
+                Component.For<ExternalSourceFailedConsumer>()
+                    .ImplementedBy<ExternalSourceFailedConsumer>(),
+                Component.For<ExternalSourceHandledConsumer>()
+                    .ImplementedBy<ExternalSourceHandledConsumer>(),
                 Component.For<ExternalSourceNoResponseReceivedConsumer>()
                     .ImplementedBy<ExternalSourceNoResponseReceivedConsumer>(),
                 Component.For<ExternalSourceTransformationConsumer>()
                     .ImplementedBy<ExternalSourceTransformationConsumer>(),
                 Component.For<ExternalSourceReceivedResponseConsumer>()
                     .ImplementedBy<ExternalSourceReceivedResponseConsumer>(),
-                Component.For<ExternalSourceSentRequestsConsumer>().ImplementedBy<ExternalSourceSentRequestsConsumer>()
+                Component.For<ExternalSourceSentRequestsConsumer>()
+                    .ImplementedBy<ExternalSourceSentRequestsConsumer>()
                 );
-
         }
     }
 }
