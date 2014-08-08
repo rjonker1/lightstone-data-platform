@@ -4,6 +4,7 @@ using EventTracking.Domain.Persistence;
 using EventTracking.Domain.Persistence.EventStore;
 using Monitoring.Acceptance.Tests.Fakes;
 using Monitoring.Consumer.Lace.Consumers;
+using Monitoring.Test.Helper.Fakes;
 using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Lace.Consumer
@@ -19,7 +20,7 @@ namespace Monitoring.Acceptance.Tests.Lace.Consumer
         public when_sending_lace_ivid_external_source_call_events_to_event_store()
         {
             _aggregateId = Guid.NewGuid();
-            _persistEvent = new PersistEvent(); //TODO: Add FakePersistEvent
+            _persistEvent = new PersistEvent(); // new PersistEvent(); //TODO: Add FakePersistEvent
         }
 
         public override void Observe()
