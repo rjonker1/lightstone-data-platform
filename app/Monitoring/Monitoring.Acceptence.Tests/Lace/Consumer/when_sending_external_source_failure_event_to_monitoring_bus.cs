@@ -7,13 +7,13 @@ using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Lace.Consumer
 {
-    public class when_sending_external_source_failure_event_to_event_store : Specification
+    public class when_sending_external_source_failure_event_to_monitoring_bus : Specification
     {
         private readonly Guid _aggregateId;
         private ExternalSourceFailedConsumer _consumer;
         private LaceExternalSourceFailedEventMessage _message;
 
-        public when_sending_external_source_failure_event_to_event_store()
+        public when_sending_external_source_failure_event_to_monitoring_bus()
         {
             _aggregateId = Guid.NewGuid();
         }
