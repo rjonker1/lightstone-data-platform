@@ -37,6 +37,18 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Billing.Api</name>
+      <folder>app/Billing/Billing.Api</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.Billing.Api</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="bin\*.dll" to="content\bin"/>
+        <include pattern="bin\*.pdb" to="content\bin"/>
+        <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget>
     <!-- API -->
 
     <!-- BILLING START -->
