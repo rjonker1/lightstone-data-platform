@@ -9,12 +9,15 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		TeamCity|Any CPU = TeamCity|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.TeamCity|Any CPU.ActiveCfg = TeamCity|Any CPU
+		{F83DA28B-F37E-4412-A3D6-7E17ADAEA318}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
