@@ -1,0 +1,22 @@
+﻿using System.Data;
+using System.Linq;
+using Lace.Source.Lightstone.Models;
+
+namespace Lace.Source.Lightstone.Repository
+{
+    public class CarInformationRepository : IReadOnlyAutoRepository<CarInformation>
+    {
+        private readonly IDbConnection _connection;
+
+        public CarInformationRepository(IDbConnection connection)
+        {
+            _connection = connection;
+        }
+
+        public CarInformation FindWithCarId(int carId)
+        {
+            var carInformation = _connection.Find<CarInformation>(f => f.CarId, carId);
+            return carInformation == null ? null : carInformation.FirstOrDefault();
+        }
+    }
+}

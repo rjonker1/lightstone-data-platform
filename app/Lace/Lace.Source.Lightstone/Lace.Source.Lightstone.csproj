@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D235F566-9AA9-47FD-95F5-5B1ABEBDF035}</ProjectGuid>
+    <ProjectGuid>{137BA088-D52C-4F6E-8A93-66C909ACEF89}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Source</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Source</AssemblyName>
+    <RootNamespace>Lace.Source.Lightstone</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Source.Lightstone</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,53 +32,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.58, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.58\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="DapperExtensions">
+      <HintPath>..\..\packages\DapperExtensions.1.4.3\lib\net40\DapperExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\AssemblyInfo.cs">
-      <Link>Properties\AssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Authentication\AuthenticationHeaders.cs" />
-    <Compile Include="Configuration\AppSettings.cs" />
-    <Compile Include="Configuration\Credentials.cs" />
-    <Compile Include="Enums\Services.cs" />
-    <Compile Include="Common\CheckThePackageDataSource.cs" />
-    <Compile Include="Common\ICheckThePackageDataSource.cs" />
-    <Compile Include="ExecuteSourceBase.cs" />
-    <Compile Include="ICallTheSource.cs" />
-    <Compile Include="IConfiguration.cs" />
-    <Compile Include="IHandleSourceCall.cs" />
-    <Compile Include="ILogEvent.cs" />
-    <Compile Include="IRequestDataFromSource.cs" />
-    <Compile Include="IExecuteTheSource.cs" />
-    <Compile Include="ITransform.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
-      <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
-      <Name>Lace.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
-      <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
-      <Name>Lace.Request</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
-      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
-      <Name>Lace.Response</Name>
-    </ProjectReference>
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarInformation.cs" />
+    <Compile Include="Models\CarType.cs" />
+    <Compile Include="Models\ILightstoneRequest.cs" />
+    <Compile Include="Models\Make.cs" />
+    <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Queries\StatisticsQueries.cs" />
+    <Compile Include="Repository\StatisticsRepository.cs" />
+    <None Include="Repository\IReadOnlyRepository.cs.old" />
+    <None Include="Repository\CarInformationRepository.cs.old" />
+    <Compile Include="Repository\Dapper.cs" />
+    <Compile Include="Repository\IReadOnlyRepository.cs" />
+    <None Include="Repository\RepositoryExtensions.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
