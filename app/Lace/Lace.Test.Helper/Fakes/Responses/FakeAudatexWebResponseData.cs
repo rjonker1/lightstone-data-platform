@@ -45,7 +45,7 @@ namespace Lace.Test.Helper.Fakes.Responses
                 RgtVinResponse =
                     new RgtVinResponse(string.Empty, 0, 0, 0, 0, "Hyundai", string.Empty, string.Empty, string.Empty, 0),
                 LightstoneResponse =
-                    new LightstoneResponse(0, 2011, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
+                    new LightstoneResponse(0, 2011, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, null, null, null)
             };
         }
     }

@@ -1,5 +1,4 @@
-﻿
-namespace Lace.Source.Lightstone.Models
+﻿namespace Lace.Source.Lightstone.Models
 {
     public class Statistics
     {
@@ -38,5 +37,7 @@ namespace Lace.Source.Lightstone.Models
         //public virtual Metric Metric { get; set; }
 
         //public virtual Band Band { get; set; }
+
+        
     }
 }

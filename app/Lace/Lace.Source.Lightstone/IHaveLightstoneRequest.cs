@@ -1,6 +1,6 @@
-﻿namespace Lace.Source.Lightstone.Models
+﻿namespace Lace.Source.Lightstone
 {
-    public interface ILightstoneRequest
+    public interface IHaveLightstoneRequest
     {
         int? CarId { get; }
         string Make { get; }

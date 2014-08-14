@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using Lace.Source.Lightstone.Models;
 
 namespace Lace.Source.Lightstone.Repository
@@ -6,6 +7,7 @@ namespace Lace.Source.Lightstone.Repository
     public interface IReadOnlyRepository<T>
     {
         T FindWithId(int id);
-        T FindWithRequest(ILightstoneRequest request);
+        T FindWithRequest(IHaveLightstoneRequest request);
+        IEnumerable<T> FindAllWithRequest(IHaveLightstoneRequest request);
     }
 }
