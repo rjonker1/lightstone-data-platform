@@ -66,14 +66,14 @@
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Statistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IHaveStatisticsRepository.cs" />
+    <Compile Include="Repository\IHaveTheStatisticsRepository.cs" />
     <Compile Include="Repository\Infrastructure\ConnectionFactory.cs" />
-    <Compile Include="Repository\Infrastructure\MemoryConnectionFactory.cs" />
+    <Compile Include="Repository\Infrastructure\CacheConnectionFactory.cs" />
     <Compile Include="Repository\Sql\LighstoneSqlQueries.cs" />
     <Compile Include="Repository\StatisticsRepository.cs" />
     <None Include="Repository\IReadOnlyRepository.cs.old" />
     <None Include="Repository\CarInformationRepository.cs.old" />
-    <Compile Include="Repository\Dapper.cs" />
+    <Compile Include="Repository\Infrastructure\Dapper.cs" />
     <Compile Include="Repository\IReadOnlyRepository.cs" />
     <None Include="Repository\RepositoryExtensions.cs.old" />
   </ItemGroup>

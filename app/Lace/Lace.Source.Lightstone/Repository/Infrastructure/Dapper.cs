@@ -19,7 +19,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace Workflow.Billing.Repository
+namespace Lace.Source.Lightstone.Repository.Infrastructure
 {
 
     /// <summary>

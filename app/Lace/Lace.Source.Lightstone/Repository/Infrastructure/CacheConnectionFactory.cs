@@ -3,7 +3,7 @@ using ServiceStack.Redis;
 
 namespace Lace.Source.Lightstone.Repository.Infrastructure
 {
-    public static class MemoryConnectionFactory
+    public static class CacheConnectionFactory
     {
         private static readonly PooledRedisClientManager PooledLocalClientManager =
             new PooledRedisClientManager("localhost");

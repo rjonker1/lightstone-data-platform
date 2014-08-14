@@ -74,7 +74,6 @@
     <Compile Include="Dto\Vin12.cs" />
     <Compile Include="IResponseFromLightstone.cs" />
     <Compile Include="Dto\LightstoneResponse.cs" />
-    <None Include="IResponseFromLightstone.cs.old" />
     <Compile Include="LightsoneResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>

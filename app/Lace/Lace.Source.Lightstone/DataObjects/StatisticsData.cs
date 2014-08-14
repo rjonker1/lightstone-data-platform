@@ -7,23 +7,24 @@ using Lace.Source.Lightstone.Repository.Infrastructure;
 
 namespace Lace.Source.Lightstone.DataObjects
 {
-    public class StatisticsData : IHaveStatisticsRepository, IGetStatistics
+    public class StatisticsData : IHaveTheStatisticsRepository, IGetStatistics
     {
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+
         public IReadOnlyRepository<Statistics> Repository { private get; set; }
         public IEnumerable<Statistics> Statistics { get; private set; }
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         public void GetStatistics(IHaveLightstoneRequest request)
         {
             try
             {
                 Repository = new StatisticsRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
-                    MemoryConnectionFactory.LocalClient());
+                    CacheConnectionFactory.LocalClient());
                 Statistics = Repository.FindAllWithRequest(request);
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Statistics data fbecause of {0}", ex.Message);
+                Log.ErrorFormat("Error getting Statistics data because of {0}", ex.Message);
             }
         }
     }

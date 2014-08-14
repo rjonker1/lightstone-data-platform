@@ -2,7 +2,7 @@
 
 namespace Lace.Source.Lightstone.Repository
 {
-    public interface IHaveStatisticsRepository
+    public interface IHaveTheStatisticsRepository
     {
         IReadOnlyRepository<Statistics> Repository { set; }
     }

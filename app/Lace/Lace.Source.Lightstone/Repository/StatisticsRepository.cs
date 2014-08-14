@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.Source.Lightstone.Models;
+using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.Repository.Sql;
 using ServiceStack.Redis;
-using Workflow.Billing.Repository;
 
 namespace Lace.Source.Lightstone.Repository
 {
