@@ -4,6 +4,9 @@ namespace Lace.Models.Lightstone.Dto
 {
     public class LightstoneResponse : IResponseFromLightstone
     {
+        public LightstoneResponse()
+        {
+        }
 
         public LightstoneResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
             string model, IRespondWithValuation vehicleValuation, IEnumerable<IRespondWithCarModel> carModels,

@@ -74,7 +74,7 @@
     <Compile Include="Dto\Vin12.cs" />
     <Compile Include="IResponseFromLightstone.cs" />
     <Compile Include="Dto\LightstoneResponse.cs" />
-    <Compile Include="LightsoneResponseHandled.cs" />
+    <Compile Include="LightstoneResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">

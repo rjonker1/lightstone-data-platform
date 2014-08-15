@@ -26,6 +26,6 @@ namespace Lace.Response
         public IResponseHandled RgtResponseHandled { get; set; }
 
         public IResponseFromLightstone LightstoneResponse { get; set; }
-        public IResponseHandled LighResponseHandled { get; set; }
+        public IResponseHandled LightstoneResponseHandled { get; set; }
     }
 }
