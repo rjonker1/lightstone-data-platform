@@ -9,9 +9,9 @@ using Lace.Source.Lightstone.Repository.Sql;
 using ServiceStack.Common.Extensions;
 using ServiceStack.Redis;
 
-namespace Lace.Source.Lightstone.Repository
+namespace Lace.Source.Lightstone.Repository.ForModel
 {
-    public class StatisticsRepository : IReadOnlyRepository<Statistics>
+    public class StatisticsRepository : IReadOnlyRepository<Statistic>
     {
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
@@ -23,32 +23,22 @@ namespace Lace.Source.Lightstone.Repository
             _connection = connection;
             _cacheClient = cacheClient;
         }
-
-        public Statistics FindWithId(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Statistics FindWithRequest(ILaceRequestCarInformation request)
-        {
-          throw new NotImplementedException();
-        }
-
-        public IEnumerable<Statistics> FindAllWithRequest(ILaceRequestCarInformation request)
+       
+        public IEnumerable<Statistic> FindAllWithRequest(ILaceRequestCarInformation request)
         {
             using (_connection)
             {
                 using (_cacheClient)
                 {
                     var key = string.Format(StatisticsKey, request.CarId, request.MakeId, request.Year);
-                    var cachedStatistics = _cacheClient.As<Statistics>();
+                    var cachedStatistics = _cacheClient.As<Statistic>();
                     var response = cachedStatistics.Lists[key];
 
                     if (response != null && response.Any())
                         return response;
 
-                    IEnumerable<Statistics> dbResponse =
-                        _connection.Query<Statistics>(SelectStatements.GetStatisticsQuery,
+                    IEnumerable<Statistic> dbResponse =
+                        _connection.Query<Statistic>(SelectStatements.GetStatistics,
                             new
                             {
                                 @CarId = request.CarId,
@@ -63,6 +53,11 @@ namespace Lace.Source.Lightstone.Repository
                     return dbResponse;
                 }
             }
+        }
+
+        public IEnumerable<Statistic> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

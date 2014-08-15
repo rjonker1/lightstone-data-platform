@@ -6,6 +6,7 @@ using Lace.Models.Lightstone.Dto;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Lightstone.DataObjects;
+using Lace.Source.Lightstone.Metrics;
 using Lace.Source.Lightstone.Transform;
 using Monitoring.Sources.Lace;
 
@@ -16,7 +17,7 @@ namespace Lace.Source.Lightstone.SourceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
         private const LaceEventSource Source = LaceEventSource.Lightstone;
-        private IHaveBaseLevelMetrics _responseFromLightstone;
+        private IHaveAllTheMetrics _lightstoneMetrics;
 
         public CallLightstoneExternalSource(ILaceRequest request)
         {
@@ -31,8 +32,8 @@ namespace Lace.Source.Lightstone.SourceCalls
                 var statsData = new StatisticsData();
                 statsData.GetStatistics(_request.CarInformation);
 
-                _responseFromLightstone = new BaseLevelMetrics();
-                _responseFromLightstone.BuildStatisticsData(statsData.Statistics);
+                //_responseFromLightstone = new BaseRetrievalMetric();
+                //_responseFromLightstone.BuildStatisticsData(statsData.Statistics);
 
                 TransformResponse(response);
             }
@@ -46,7 +47,7 @@ namespace Lace.Source.Lightstone.SourceCalls
 
         public void TransformResponse(ILaceResponse response)
         {
-            var transformer = new TransformLightstoneResponse(_responseFromLightstone);
+            var transformer = new TransformLightstoneResponse(_lightstoneMetrics);
 
             if (transformer.Continue)
             {

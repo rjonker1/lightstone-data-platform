@@ -1,6 +1,6 @@
 ﻿namespace Lace.Source.Lightstone.Models
 {
-    public class Statistics
+    public class Statistic
     {
         public int Statistics_ID { get; set; }
 

@@ -4,6 +4,6 @@ namespace Lace.Source.Lightstone.Repository
 {
     public interface IHaveTheStatisticsRepository
     {
-        IReadOnlyRepository<Statistics> Repository { set; }
+        IReadOnlyRepository<Statistic> Repository { set; }
     }
 }
