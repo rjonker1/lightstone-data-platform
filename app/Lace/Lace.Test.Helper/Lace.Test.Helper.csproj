@@ -110,6 +110,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
@@ -145,11 +146,14 @@
     <Compile Include="Mothers\Packages\Dto\FieldsFromAudatex.cs" />
     <Compile Include="Mothers\Packages\Dto\FieldsFromIvid.cs" />
     <Compile Include="Mothers\Packages\Dto\FieldsFromIvidTitleHolder.cs" />
+    <Compile Include="Mothers\Packages\Dto\FieldsFromLightstone.cs" />
     <Compile Include="Mothers\Packages\Dto\FieldsFromRgtVin.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Packages\Dto\Package.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestCarInformation.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />

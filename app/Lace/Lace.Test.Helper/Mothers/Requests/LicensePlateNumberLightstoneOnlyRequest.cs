@@ -6,14 +6,12 @@ using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest : ILaceRequest
+    public class LicensePlateNumberLightstoneOnlyRequest : ILaceRequest
     {
+
         public IPackage Package
         {
-            get
-            {
-                return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage();
-            }
+            get { return LicensePlateNumberLightstoneSourcePackage.LicenseNumberPackage(); }
         }
 
         public ILaceRequestUserInformation User
@@ -32,19 +30,19 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public ILaceRequestVehicleInformation Vehicle
-        {
-            get
-            {
-                return new IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation();
-            }
-        }
-
         public IProvideRequestAggregation RequestAggregation
         {
             get
             {
                 return new AggregationInformation();
+            }
+        }
+
+        public ILaceRequestVehicleInformation Vehicle
+        {
+            get
+            {
+                return new RequestVehicleInformation();
             }
         }
 
@@ -60,7 +58,7 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get
             {
-                return "YXK559GP";
+                return "XMC167GP";
             }
         }
 
@@ -71,5 +69,6 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return new RequestCarInformation();
             }
         }
+      
     }
 }

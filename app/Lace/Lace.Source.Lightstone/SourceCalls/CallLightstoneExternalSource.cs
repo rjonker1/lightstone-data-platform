@@ -28,7 +28,13 @@ namespace Lace.Source.Lightstone.SourceCalls
         {
             try
             {
+                var statsData = new StatisticsData();
+                statsData.GetStatistics(_request.CarInformation);
+
                 _responseFromLightstone = new BaseLevelMetrics();
+                _responseFromLightstone.BuildStatisticsData(statsData.Statistics);
+
+                TransformResponse(response);
             }
             catch (Exception ex)
             {

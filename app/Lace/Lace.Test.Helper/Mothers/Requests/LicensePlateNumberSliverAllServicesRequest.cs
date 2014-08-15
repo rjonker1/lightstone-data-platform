@@ -65,5 +65,13 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return  new AggregationInformation();
             }
         }
+
+        public ILaceRequestCarInformation CarInformation
+        {
+            get
+            {
+                return new RequestCarInformation();
+            }
+        }
     }
 }

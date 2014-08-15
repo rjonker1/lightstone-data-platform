@@ -5,9 +5,9 @@ namespace Lace.Source.Lightstone.Repository.Infrastructure
 {
     public static class CacheConnectionFactory
     {
-        private static readonly PooledRedisClientManager PooledLocalClientManager =
-            new PooledRedisClientManager("localhost");
+        private static readonly PooledRedisClientManager LocalClientManager =
+            new PooledRedisClientManager("127.0.0.1");
 
-        public static Func<IRedisClient> LocalClient = () => PooledLocalClientManager.GetClient();
+        public static Func<IRedisClient> LocalClient = () => LocalClientManager.GetClient();
     }
 }

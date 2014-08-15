@@ -64,5 +64,13 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return LicensePlateNumberRgtVinRequestPackage.LicenseNumberPackage();
             }
         }
+
+        public ILaceRequestCarInformation CarInformation
+        {
+            get
+            {
+                return new RequestCarInformation();
+            }
+        }
     }
 }

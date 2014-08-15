@@ -6,5 +6,6 @@ namespace Lace.Source.Lightstone
     public interface IHaveBaseLevelMetrics
     {
         IEnumerable<Statistics> StatisticsData { get; }
+        void BuildStatisticsData(IEnumerable<Statistics> statistics);
     }
 }

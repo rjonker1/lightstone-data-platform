@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Lace.Request;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.Repository.Sql;
+using ServiceStack.Common.Extensions;
 using ServiceStack.Redis;
 
 namespace Lace.Source.Lightstone.Repository
@@ -14,7 +16,7 @@ namespace Lace.Source.Lightstone.Repository
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string StatisticsKey = "urn:Statistics";
+        private const string StatisticsKey = "urn:Statistics:{0}:{1}:{2}";
 
         public StatisticsRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -27,56 +29,40 @@ namespace Lace.Source.Lightstone.Repository
             throw new NotImplementedException();
         }
 
-        public Statistics FindWithRequest(IHaveLightstoneRequest request)
+        public Statistics FindWithRequest(ILaceRequestCarInformation request)
         {
           throw new NotImplementedException();
         }
 
-        public IEnumerable<Statistics> FindAllWithRequest(IHaveLightstoneRequest request)
+        public IEnumerable<Statistics> FindAllWithRequest(ILaceRequestCarInformation request)
         {
             using (_connection)
             {
                 using (_cacheClient)
                 {
+                    var key = string.Format(StatisticsKey, request.CarId, request.MakeId, request.Year);
                     var cachedStatistics = _cacheClient.As<Statistics>();
-                    var response = cachedStatistics.Lists[StatisticsKey].GetAll();
+                    var response = cachedStatistics.Lists[key];
 
-                    if (response != null)
-                    {
-                        var stats = response.Where(w => w.Car_ID == request.CarId).ToList();
-                        if (stats.Any()) return stats;
-                    }
+                    if (response != null && response.Any())
+                        return response;
 
-                    var dbResponse =
-                        _connection.Query<Statistics>(LighstoneSqlQueries.GetStatisticsQuery(),
-                            new {@CarId = request.CarId}).ToList();
+                    IEnumerable<Statistics> dbResponse =
+                        _connection.Query<Statistics>(SelectStatements.GetStatisticsQuery,
+                            new
+                            {
+                                @CarId = request.CarId,
+                                @MakeId = request.MakeId,
+                                @YearId = request.Year
 
-                    if (dbResponse.Any())
-                    {
-                        // StoreStatistics(dbResponse.ToList());
-                        _cacheClient.Add(StatisticsKey, dbResponse, DateTime.UtcNow.AddHours(1));
-                    }
+                            }).ToList();
 
+                    dbResponse.ForEach(f => response.Add(f));
+                    // StoreStatistics(dbResponse.ToList());
+                    _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
                     return dbResponse;
-                    //var response =
-                    //    _cacheClient.GetAll<Statistics>(StatisticsKey).Where(w => w.Value.Car_ID == request.CarId);
                 }
             }
         }
-
-        //private void StoreStatistics(IEnumerable<Statistics> statistics)
-        //{
-        //    var stats = _cacheClient.As<Statistics>();
-        //    var res =  Inject(statistics);
-        //}
-
-        //public List<T> Inject<T>(IEnumerable<T> entities)
-        //    where T : IHaveStatisticsRepository
-        //{
-        //    var entitiesList = entities.ToList();
-        //    entitiesList.ForEach(x => x.Repository = this);
-        //    return entitiesList;
-        //}
-       
     }
 }

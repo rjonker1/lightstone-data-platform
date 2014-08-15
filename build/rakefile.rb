@@ -28,22 +28,20 @@ class Dependency
 end
 
 class SingleBuildConfig
-	def initialize(name, folder, author, deploy, description, version, deployment_project)
-		self.name = name
+	def initialize(folder, author, deploy, description, version)
 		self.folder = folder
 		self.author = author
 		self.deploy = deploy
 		self.description = description
-		self.deployment_project = deployment_project
 		self.version = version
 		self.includes = []
-		self.dependencies = []		
+		self.dependencies = []
 	end
 
-	attr_accessor :name, :folder, :author, :deploy, :description, :includes, :dependencies, :version, :deployment_project
+	attr_accessor :folder, :author, :deploy, :description, :includes, :dependencies, :version
 
 	def to_s
-		"Name: #{name},\nFolder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description},\nDeploymentProject: #{deployment_project}"
+		"Folder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description}"
 	end
 
 end
@@ -70,9 +68,9 @@ end
 		:executable => '../tools/nuget/nuget.exe',
 	},
 	:octupus => {
-  		:server => 'http://dev.octopus/api',
-  		:apiKey => 'API-ONI3VWBDTIWUFPOJOJIOMOC7AZA'
- 	}
+		:server => 'http://deploy.gaul:8883/api',
+		:apiKey => 'A3IRIEKVHRZNTTCYCTRAI8NET18'
+	}
 }
 
 # CONVENTIONS #
@@ -99,14 +97,11 @@ namespace :convention do
 		doc, package_folders = REXML::Document.new(xml), []
 		doc.elements.each('build/nugets/nuget') do |p|
 
-			@current = SingleBuildConfig.new(
-				p.get_elements("name")[0].text,
-				p.get_elements("folder")[0].text,
+			@current = SingleBuildConfig.new(p.get_elements("folder")[0].text,
 				p.get_elements("author")[0].text,
 				p.attributes["deploy"] == nil ? false : p.attributes["deploy"] == "true" ? true : false,
 				p.get_elements("description")[0].text,
-				get_version(),
-				p.get_elements("deploymentProject")[0] == nil ? "" : p.get_elements("deploymentProject")[0].text)
+				get_version())
 
 			p.get_elements('includes/*').each do |e|
 				@current.includes << Include.new(e.attributes["pattern"], e.attributes["to"])
@@ -224,8 +219,8 @@ end
 # CONFIG #
 Albacore.configure do |config|
 	config.msbuild.targets = [:clean, :build]
-	config.msbuild.properties = {
-									:configuration => :Release,
+	config.msbuild.properties = { 
+									:configuration => :Release, 
 									:documentationFile => "bin/iBroker.Api.XML",
 									:nowarn => 1591
 								}
@@ -274,7 +269,7 @@ namespace :testing do
 			xunit.execute
 		end
 	end
-
+	
 	task :update_config do
 		@acceptance_tests.each do |assembly|
 			current_folder = Dir.pwd
@@ -308,7 +303,7 @@ namespace :deploy do
 				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
 				cmd = Exec.new
 				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
+				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
 				cmd.execute
 			end
 		end
@@ -335,18 +330,17 @@ namespace :package do
 	task :default => [:specs, :pack, :zip] do
 	end
 
-	task :specs => ['convention:spec_generation'] do
+	task :specs do
 		@settings.Configs.each do |c|
-
-			output_file = "#{c.name}.#{get_version()}.nuspec"
+			output_file = "#{c.folder}.#{get_version()}.nuspec"
 			nuspec_file = File.join(Dir.pwd, @config[:nuget][:specs_folder], output_file)
 
 			nuspec = Nuspec.new
-			nuspec.id = c.name
+			nuspec.id = c.folder
 			nuspec.version = c.version
 			nuspec.authors = c.author
 			nuspec.description = c.description
-			nuspec.title = c.name
+			nuspec.title = c.folder
 			nuspec.output_file = nuspec_file
 
 			c.includes.each do |i|
@@ -362,6 +356,33 @@ namespace :package do
 		end
 	end
 
+	task :zip do
+		puts "#{(@settings.Configs).length} apps to zip found"
+
+		@settings.Configs.each do |c|
+			folder = "../app/#{c.folder}"
+			spec_file = "#{c.folder}.#{get_version()}.nuspec"
+			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
+			base_path = File.join(folder, 'bin/release')
+
+			if !File.exists?(base_path)
+				base_path = folder
+			end
+			puts "Zipping '#{folder}' as '#{c.folder}.zip' to '#{@config[:artifact_folder]}'"
+
+			zip = ZipDirectory.new
+
+			if File.directory?(@config[:artifact_folder])
+				zip.directories_to_zip = folder
+				zip.output_file = "#{c.folder}.zip"
+				zip.output_path = @config[:artifact_folder]
+				zip.execute
+			end
+
+			zip = nil
+		end
+	end
+
 	task :pack do
 		puts "#{@settings.Configs.length} nuspec definitions to pack"
 
@@ -369,8 +390,8 @@ namespace :package do
 		package_folder = File.join(Dir.pwd, @config[:nuget][:package_folder])
 
 		@settings.Configs.each do |c|
-			folder = "../#{c.folder}"
-			spec_file = "#{c.name}.#{get_version()}.nuspec"
+			folder = "../app/#{c.folder}"
+			spec_file = "#{c.folder}.#{get_version()}.nuspec"
 			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
 			base_path = File.join(folder, 'bin/release')
 
@@ -384,33 +405,6 @@ namespace :package do
 			cmd.command = @config[:nuget][:executable]
 			cmd.parameters = nuget_parameters
 			cmd.execute
-		end
-	end
-
-	task :zip do
-		puts "#{(@settings.Configs).length} apps to zip found"
-
-		@settings.Configs.each do |c|
-			folder = "../#{c.folder}"
-			spec_file = "#{c.name}.#{get_version()}.nuspec"
-			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
-			base_path = File.join(folder, 'bin/release')
-
-			if !File.exists?(base_path)
-				base_path = folder
-			end
-			puts "Zipping '#{folder}' as '#{c.name}.zip' to '#{@config[:artifact_folder]}'"
-
-			zip = ZipDirectory.new
-
-			if File.directory?(@config[:artifact_folder])
-				zip.directories_to_zip = folder
-				zip.output_file = "#{c.name}.zip"
-				zip.output_path = @config[:artifact_folder]
-				zip.execute
-			end
-
-			zip = nil
 		end
 	end
 end
@@ -435,7 +429,7 @@ namespace :environment do
 		end
 		Dir.glob(File.join(Dir.pwd, @config[:nuget][:specs_folder], "/*.*")).each { |f| File.delete f }
 
-
+		
 		puts "Removing and adding #{@config[:nuget][:package_folder]}"
 		if !File.directory?(@config[:nuget][:package_folder])
 			FileUtils.mkdir_p @config[:nuget][:package_folder]
@@ -468,7 +462,7 @@ task :acceptance_tests => ['testing:acceptance'] do end
 task :default => [
 	'environment:default',
 	'build:default',
-	#'testing:unit',
+	'testing:unit',
 	'package:default'
 	] do
 end

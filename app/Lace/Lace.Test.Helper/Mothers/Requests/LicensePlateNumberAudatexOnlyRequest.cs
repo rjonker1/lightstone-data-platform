@@ -61,7 +61,17 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get
             {
-                return "SYB459GP";
+               // return "SYB459GP";
+                return "XMC167GP";
+            }
+        }
+
+
+        public ILaceRequestCarInformation CarInformation
+        {
+            get
+            {
+                return new RequestCarInformation();
             }
         }
     }
