@@ -9,9 +9,9 @@ namespace Lace.Source.Lightstone.Transform
     {
         public bool Continue { get; private set; }
         public LightstoneResponse Result { get; private set; }
-        private readonly IHaveAllTheMetrics _response;
+        private readonly IRetrieveValuationFromMetrics _response;
 
-        public TransformLightstoneResponse(IHaveAllTheMetrics response)
+        public TransformLightstoneResponse(IRetrieveValuationFromMetrics response)
         {
             Continue = response != null;
             Result = Continue ? new LightstoneResponse() : null;

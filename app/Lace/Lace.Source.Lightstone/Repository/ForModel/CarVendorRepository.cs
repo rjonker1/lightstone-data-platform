@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Lace.Request;
+using Lace.Source.Lightstone.Metrics;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.Repository.Sql;
@@ -14,7 +16,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string CarVendorKey = "urn:CarVendor";
+        private const string CarVendorKey = "urn:Auto_Carstats:CarVendor";
 
         public CarVendorRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -22,7 +24,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<CarVendor> FindAllWithRequest(Request.ILaceRequestCarInformation request)
+        public IEnumerable<CarVendor> FindAllWithRequest(ILaceRequestCarInformation request)
         {
             throw new NotImplementedException();
         }
@@ -52,6 +54,27 @@ namespace Lace.Source.Lightstone.Repository.ForModel
                     return response;
                 }
             }
+        }
+
+
+        public IEnumerable<CarVendor> FindByMake(int makeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CarVendor> FindByCarIdAndYear(int? carId, int year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CarVendor> FindByVin(string vinNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CarVendor> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Lightstone
 {
-    public interface IRespondWithValuation
+    public interface IRespondWithValuation : IAddValuationItem
     {
         IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; }
         IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; }

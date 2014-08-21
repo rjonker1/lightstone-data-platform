@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.Request;
+using Lace.Source.Lightstone.Metrics;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.Repository.Sql;
@@ -16,42 +17,40 @@ namespace Lace.Source.Lightstone.Repository.ForModel
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string StatisticsKey = "urn:Statistics:{0}:{1}:{2}";
+        private const string StatisticsKey = "urn:Auto_Carstats:Statistics:{0}:{1}:{2}";
 
         public StatisticsRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
-       
+
         public IEnumerable<Statistic> FindAllWithRequest(ILaceRequestCarInformation request)
         {
             using (_connection)
+            using (_cacheClient)
             {
-                using (_cacheClient)
-                {
-                    var key = string.Format(StatisticsKey, request.CarId, request.MakeId, request.Year);
-                    var cachedStatistics = _cacheClient.As<Statistic>();
-                    var response = cachedStatistics.Lists[key];
+                var key = string.Format(StatisticsKey, request.CarId, request.MakeId, request.Year);
+                var cachedStatistics = _cacheClient.As<Statistic>();
+                var response = cachedStatistics.Lists[key];
 
-                    if (response != null && response.Any())
-                        return response;
+                if (response != null && response.Any())
+                    return response;
 
-                    IEnumerable<Statistic> dbResponse =
-                        _connection.Query<Statistic>(SelectStatements.GetStatistics,
-                            new
-                            {
-                                @CarId = request.CarId,
-                                @MakeId = request.MakeId,
-                                @YearId = request.Year
+                IEnumerable<Statistic> dbResponse =
+                    _connection.Query<Statistic>(SelectStatements.GetStatistics,
+                        new
+                        {
+                            @CarId = request.CarId,
+                            @MakeId = request.MakeId,
+                            @YearId = request.Year
 
-                            }).ToList();
+                        }).ToList();
 
-                    dbResponse.ForEach(f => response.Add(f));
-                    // StoreStatistics(dbResponse.ToList());
-                    _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
-                    return dbResponse;
-                }
+                dbResponse.ForEach(f => response.Add(f));
+                // StoreStatistics(dbResponse.ToList());
+                _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
+                return dbResponse;
             }
         }
 
@@ -59,5 +58,51 @@ namespace Lace.Source.Lightstone.Repository.ForModel
         {
             throw new NotImplementedException();
         }
+
+        private static readonly Func<MetricTypes[],string> ConcatenateMetrics = (metricTypes) =>
+        {
+            var metrics = String.Join(", ", metricTypes.Select(s => s.ToString()));
+            return metrics;
+        };
+
+
+        public IEnumerable<Statistic> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
+        {
+            using (_connection)
+            using (_cacheClient)
+            {
+                var key = string.Format(StatisticsKey, makeId, 0, 0);
+                var cachedMakeStats = _cacheClient.As<Statistic>();
+                var response = cachedMakeStats.Lists[key];
+
+                if (response != null && response.Any())
+                    return response;
+
+                var dbResponse =
+                    _connection.Query<Statistic>(SelectStatements.GetStatisticsByMake,
+                        new { @Metrics = ConcatenateMetrics(metricTypes), @MakeId = makeId }).ToList();
+                dbResponse.ForEach(f => response.Add(f));
+                _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
+                return response;
+            }
+        }
+
+
+        public IEnumerable<Statistic> FindByMake(int makeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Statistic> FindByCarIdAndYear(int? carId, int year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Statistic> FindByVin(string vinNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="Dto\EstimatedValueModel.cs" />
     <Compile Include="Dto\FrequencyModel.cs" />
     <Compile Include="Dto\ImageGaugeModel.cs" />
+    <Compile Include="IAddValuationItem.cs" />
     <Compile Include="IRespondWithAccidentDistributionModel.cs" />
     <Compile Include="IRespondWithAmortisationFactorModel.cs" />
     <Compile Include="IRespondWithAmortisedValueModel.cs" />

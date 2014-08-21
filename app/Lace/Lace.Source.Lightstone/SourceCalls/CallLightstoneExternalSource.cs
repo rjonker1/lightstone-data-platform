@@ -17,7 +17,7 @@ namespace Lace.Source.Lightstone.SourceCalls
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
         private const LaceEventSource Source = LaceEventSource.Lightstone;
-        private IHaveAllTheMetrics _lightstoneMetrics;
+        private IRetrieveValuationFromMetrics _lightstoneMetrics;
 
         public CallLightstoneExternalSource(ILaceRequest request)
         {

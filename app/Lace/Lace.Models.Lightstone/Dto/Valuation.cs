@@ -21,6 +21,12 @@ namespace Lace.Models.Lightstone.Dto
             EstimatedValue = new List<EstimatedValueModel>();
             LastFiveSales = new List<SaleModel>();
         }
+        
+
+        public void AddImageGauages(IEnumerable<IRespondWithImageGaugeModel> model)
+        {
+            ImageGauges = model;
+        }
 
         public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
 

@@ -10,64 +10,65 @@ using ServiceStack.Redis;
 
 namespace Lace.Source.Lightstone.Repository.ForModel
 {
-    public class BandsRepository : IReadOnlyRepository<Band>
+    public class MetricRepository : IReadOnlyRepository<Metric>
     {
+
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string BandsKey = "urn:Auto_Carstats:Bands";
+        private const string MetricKey = "urn:Auto_Carstats:Metric";
 
-        public BandsRepository(IDbConnection connection, IRedisClient cacheClient)
+        public MetricRepository(IDbConnection connection, IRedisClient cacheClient)
         {
             _connection = connection;
             _cacheClient = cacheClient;
         }
         
-        public IEnumerable<Band> FindAllWithRequest(ILaceRequestCarInformation request)
+        public IEnumerable<Metric> FindAllWithRequest(ILaceRequestCarInformation request)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Band> GetAll()
+        public IEnumerable<Metric> GetAll()
         {
             using (_connection)
             {
                 using (_cacheClient)
                 {
-                    var cacheBands = _cacheClient.As<Band>();
-                    var response = cacheBands.Lists[BandsKey];
+                    var cacheMetric = _cacheClient.As<Metric>();
+                    var response = cacheMetric.Lists[MetricKey];
 
                     if (response != null && response.Any())
                         return response;
 
                     var dbResponse = _connection
-                        .Query<Band>(SelectStatements.GetAllTheBands)
+                        .Query<Metric>(SelectStatements.GetAllTheMetricTypes)
                         .ToList();
 
                     dbResponse.ForEach(f => response.Add(f));
 
-                    _cacheClient.Add(BandsKey, response, DateTime.UtcNow.AddDays(1));
+                    _cacheClient.Add(MetricKey, response, DateTime.UtcNow.AddDays(1));
                     return dbResponse;
                 }
             }
         }
 
-        public IEnumerable<Band> FindByMake(int makeId)
+        public IEnumerable<Metric> FindByMake(int makeId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Band> FindByCarIdAndYear(int? carId, int year)
+        public IEnumerable<Metric> FindByMakeAndMetricTypes(int makeId, Metrics.MetricTypes[] metricTypes)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Band> FindByVin(string vinNumber)
+        public IEnumerable<Metric> FindByCarIdAndYear(int? carId, int year)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Band> FindByMakeAndMetricTypes(int makeId, Metrics.MetricTypes[] metricTypes)
+        public IEnumerable<Metric> FindByVin(string vinNumber)
         {
             throw new NotImplementedException();
         }

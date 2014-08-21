@@ -9,24 +9,23 @@ using Lace.Source.Lightstone.Repository.Infrastructure;
 
 namespace Lace.Source.Lightstone.DataObjects
 {
-    public class StatisticsData : IHaveTheStatisticsRepository, IGetStatistics
+    public class MetricData : IGetMetrics
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        public IEnumerable<Metric> Metrics { get; private set; }
+        public IReadOnlyRepository<Metric> Repository { private get; set; }
 
-        public IReadOnlyRepository<Statistic> Repository { private get; set; }
-        public IEnumerable<Statistic> Statistics { get; private set; }
-
-        public void GetStatistics(ILaceRequestCarInformation request)
+        public void GetMetrics(ILaceRequestCarInformation request)
         {
             try
             {
-                Repository = new StatisticsRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
+                Repository = new MetricRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
                     CacheConnectionFactory.LocalClient());
-                Statistics = Repository.FindAllWithRequest(request);
+                Metrics = Repository.GetAll();
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Statistics data because of {0}", ex.Message);
+                Log.ErrorFormat("Error getting Metric data because of {0}", ex.Message);
             }
         }
     }

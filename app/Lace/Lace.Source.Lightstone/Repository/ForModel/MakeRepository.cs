@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.Request;
+using Lace.Source.Lightstone.Metrics;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.Repository.Sql;
@@ -15,7 +16,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
 
-        private const string MakeKey = "urn:Make";
+        private const string MakeKey = "urn:Auto_Carstats:Make";
 
         public MakeRepository(IDbConnection connection, IRedisClient cacheClient)
         {
@@ -50,6 +51,27 @@ namespace Lace.Source.Lightstone.Repository.ForModel
 
                 }
             }
+        }
+
+
+        public IEnumerable<Make> FindByMake(int makeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Make> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Make> FindByCarIdAndYear(int? carId, int year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Make> FindByVin(string vinNumber)
+        {
+            throw new NotImplementedException();
         }
     }
 }
