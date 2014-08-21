@@ -37,6 +37,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
     <OutputPath>bin\TeamCity\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.60, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

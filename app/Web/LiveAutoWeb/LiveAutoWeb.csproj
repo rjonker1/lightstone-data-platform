@@ -233,6 +233,10 @@
       <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <None Include="appSettings.Test.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
     <None Include="appSettings.web.config">
       <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
@@ -303,6 +307,9 @@
     <SlowCheetahTargets Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='true' and Exists('$(SlowCheetah_NuGetImportPath)') ">$(SlowCheetah_NuGetImportPath)</SlowCheetahTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TeamCity|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
