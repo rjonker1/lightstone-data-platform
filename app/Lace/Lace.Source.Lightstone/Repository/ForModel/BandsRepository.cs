@@ -21,6 +21,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
         {
             _connection = connection;
             _cacheClient = cacheClient;
+            //change
         }
         
         public IEnumerable<Band> FindAllWithRequest(ILaceRequestCarInformation request)
