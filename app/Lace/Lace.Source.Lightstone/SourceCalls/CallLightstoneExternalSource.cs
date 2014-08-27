@@ -2,11 +2,12 @@
 using Common.Logging;
 using Lace.Events;
 using Lace.Models.Lightstone;
-using Lace.Models.Lightstone.Dto;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Lightstone.DataObjects;
 using Lace.Source.Lightstone.Metrics;
+using Lace.Source.Lightstone.Repository.ForModel;
+using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.Transform;
 using Monitoring.Sources.Lace;
 
@@ -29,7 +30,9 @@ namespace Lace.Source.Lightstone.SourceCalls
         {
             try
             {
-                var statsData = new StatisticsData();
+                var statsData =
+                    new StatisticsData(new StatisticsRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
+                        CacheConnectionFactory.LocalClient()));
                 statsData.GetStatistics(_request.CarInformation);
 
                 //_responseFromLightstone = new BaseRetrievalMetric();

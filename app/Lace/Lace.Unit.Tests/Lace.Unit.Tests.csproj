@@ -79,6 +79,8 @@
     </Compile>
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
     <Compile Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_bands.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_statistics.cs" />
     <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_ivid_title_holder_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_audatex_source.cs" />
@@ -156,6 +158,10 @@
     <ProjectReference Include="..\Lace.Source.Ivid\Lace.Source.Ivid.csproj">
       <Project>{14126a3d-f54b-40f0-b630-e1f3bba61448}</Project>
       <Name>Lace.Source.Ivid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Source.Lightstone\Lace.Source.Lightstone.csproj">
+      <Project>{137ba088-d52c-4f6e-8a93-66c909acef89}</Project>
+      <Name>Lace.Source.Lightstone</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source.RgtVin\Lace.Source.RgtVin.csproj">
       <Project>{81fc9eaa-0a3f-474f-a94e-0716952df96c}</Project>

@@ -4,25 +4,26 @@ using Common.Logging;
 using Lace.Request;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository;
-using Lace.Source.Lightstone.Repository.ForModel;
-using Lace.Source.Lightstone.Repository.Infrastructure;
 
 namespace Lace.Source.Lightstone.DataObjects
 {
-    public class StatisticsData : IHaveTheStatisticsRepository, IGetStatistics
+    public class StatisticsData : IGetStatistics
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly IReadOnlyRepository<Statistic> _repository;
 
-        public IReadOnlyRepository<Statistic> Repository { private get; set; }
         public IEnumerable<Statistic> Statistics { get; private set; }
+
+        public StatisticsData(IReadOnlyRepository<Statistic> repository)
+        {
+            _repository = repository;
+        }
 
         public void GetStatistics(ILaceRequestCarInformation request)
         {
             try
             {
-                Repository = new StatisticsRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
-                    CacheConnectionFactory.LocalClient());
-                Statistics = Repository.FindAllWithRequest(request);
+                Statistics = _repository.FindAllWithRequest(request);
             }
             catch (Exception ex)
             {

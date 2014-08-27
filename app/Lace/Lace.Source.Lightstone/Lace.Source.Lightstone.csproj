@@ -83,6 +83,7 @@
     <Compile Include="DataObjects\StatisticsData.cs" />
     <Compile Include="LightstoneSourceExecution.cs" />
     <Compile Include="Metrics\MetricTypes.cs" />
+    <Compile Include="Metrics\Specifics\AccidentDistributionMetric.cs" />
     <Compile Include="Metrics\Specifics\ImageGaugesMetric.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\Car.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Repository\ForModel\CarRepository.cs" />
     <Compile Include="Repository\ForModel\CarVendorRepository.cs" />
     <Compile Include="Repository\ForModel\MetricRepository.cs" />
-    <Compile Include="Repository\IHaveTheStatisticsRepository.cs" />
     <Compile Include="Repository\Infrastructure\ConnectionFactory.cs" />
     <Compile Include="Repository\Infrastructure\CacheConnectionFactory.cs" />
     <Compile Include="Repository\ForModel\MakeRepository.cs" />

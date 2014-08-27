@@ -31,7 +31,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
 
         public IEnumerable<Car> GetAll()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
 

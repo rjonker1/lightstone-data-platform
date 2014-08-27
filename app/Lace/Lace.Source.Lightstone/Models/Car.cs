@@ -2,6 +2,29 @@
 {
     public class Car
     {
+        public Car()
+        {
+
+        }
+
+        public Car(int carId, int carTypeId, string carFullName, string carModel, string bodyShape, string fuelType,
+            string market, string gearType, bool isDiscontinued, string imageUrl, string imageUrlSmall,
+            string imageSource)
+        {
+            Car_ID = carId;
+            CarType_ID = carTypeId;
+            CarFullName = carFullName;
+            CarModel = carModel;
+            BodyShape = bodyShape;
+            FuelType = fuelType;
+            Market = market;
+            GearType = gearType;
+            IsDiscontinued = isDiscontinued;
+            ImageUrl = imageUrl;
+            ImageUrlSmall = imageUrlSmall;
+            ImageSource = imageSource;
+        }
+
         public int Car_ID { get; set; }
         public int CarType_ID { get; set; }
         // public virtual CarType CarType { get; set; }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lace.Models.Lightstone.Dto;
-using Lace.Request;
 using Lace.Source.Lightstone.Models;
 
 namespace Lace.Source.Lightstone.Metrics.Specifics
@@ -12,8 +11,12 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         public IEnumerable<Statistic> Statistics { get; private set; }
 
         private readonly IEnumerable<Metric> _metricsData;
-        private readonly MetricTypes[] _metrics;
-        private readonly ILaceRequestCarInformation _request;
+
+        private static readonly MetricTypes[] Metrics =
+        {
+            MetricTypes.MaxSpeed, MetricTypes.Acceleration, MetricTypes.KiloWatts, MetricTypes.Torque,
+            MetricTypes.FuelEconomy, MetricTypes.Co2
+        };
 
         private IList<Statistic> _gauges;
 
@@ -22,24 +25,16 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         private const int HighBand = 50;
         private const int QuarterBand = 51;
 
-        public ImageGaugesMetric(IEnumerable<Statistic> statistics,
-            ILaceRequestCarInformation request, IEnumerable<Metric> metricData)
+        public ImageGaugesMetric(IEnumerable<Statistic> statistics, IEnumerable<Metric> metricData)
         {
             Statistics = statistics;
             _metricsData = metricData;
-            _metrics = new[]
-            {
-                MetricTypes.MaxSpeed, MetricTypes.Acceleration, MetricTypes.KiloWatts, MetricTypes.Torque,
-                MetricTypes.FuelEconomy, MetricTypes.Co2
-            };
-
-            _request = request;
             MetricResult = new List<ImageGaugeModel>();
         }
 
         public void Get()
         {
-            foreach (var metric in _metrics)
+            foreach (var metric in Metrics)
             {
                 _gauges.Clear();
                 _gauges = GetGauges((int) metric);

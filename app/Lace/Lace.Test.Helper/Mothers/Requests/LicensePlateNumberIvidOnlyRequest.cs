@@ -66,7 +66,7 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get
             {
-                return new RequestCarInformation();
+                return new RequestCarInformationForCarHavingId107483();
             }
         }
       

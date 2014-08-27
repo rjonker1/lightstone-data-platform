@@ -4,8 +4,6 @@ using Common.Logging;
 using Lace.Request;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository;
-using Lace.Source.Lightstone.Repository.ForModel;
-using Lace.Source.Lightstone.Repository.Infrastructure;
 
 namespace Lace.Source.Lightstone.DataObjects
 {
@@ -13,15 +11,18 @@ namespace Lace.Source.Lightstone.DataObjects
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         public IEnumerable<Metric> Metrics { get; private set; }
-        public IReadOnlyRepository<Metric> Repository { private get; set; }
+        private readonly IReadOnlyRepository<Metric> _repository;
+
+        public MetricData(IReadOnlyRepository<Metric> repository)
+        {
+            _repository = repository;
+        }
 
         public void GetMetrics(ILaceRequestCarInformation request)
         {
             try
             {
-                Repository = new MetricRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
-                    CacheConnectionFactory.LocalClient());
-                Metrics = Repository.GetAll();
+                Metrics = _repository.GetAll();
             }
             catch (Exception ex)
             {

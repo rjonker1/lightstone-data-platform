@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Lace.Request;
+using Lace.Source.Lightstone.Models;
 
 namespace Lace.Source.Lightstone.DataObjects
 {
-    interface IGetBands
+    public interface IGetBands
     {
+        IEnumerable<Band> Bands { get; }
+        void GetBands(ILaceRequestCarInformation request);
     }
 }

@@ -28,6 +28,11 @@ namespace Lace.Models.Lightstone.Dto
             ImageGauges = model;
         }
 
+        public void AddAccidentDistribution(IEnumerable<IRespondWithAccidentDistributionModel> model)
+        {
+            AccidentDistribution = model;
+        }
+
         public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
 
         public IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; private set; }
@@ -55,5 +60,8 @@ namespace Lace.Models.Lightstone.Dto
         public IEnumerable<IRespondWithAmortisedValueModel> AmortisedValues { get; private set; }
 
         public IEnumerable<IRespondWithImageGaugeModel> ImageGauges { get; private set; }
+
+
+      
     }
 }

@@ -48,7 +48,6 @@ namespace Lace.Source.Lightstone.Repository.ForModel
                         }).ToList();
 
                 dbResponse.ForEach(f => response.Add(f));
-                // StoreStatistics(dbResponse.ToList());
                 _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
                 return dbResponse;
             }
