@@ -36,7 +36,6 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         {
             foreach (var metric in Metrics)
             {
-                _gauges.Clear();
                 _gauges = GetGauges((int) metric);
                 var lowStat = GetLowStat();
                 var subjectStat = GetSubjectStat();

@@ -121,6 +121,7 @@
     <Compile Include="Builders\Sources\Lightstone\CarDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MakeDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MetricDataBuilder.cs" />
+    <Compile Include="Builders\Sources\Lightstone\MetricsBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\StatisticsDataBuilder.cs" />
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
     <Compile Include="Fakes\Bus\FakeBus.cs" />

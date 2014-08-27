@@ -23,10 +23,9 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
 
         public void Get()
         {
-            foreach (var metric in Metrics )
+            foreach (var metric in Metrics)
             {
-                _gauges.Clear();
-                GetGauges((int)metric);
+                GetGauges((int) metric);
                 AddToMetrics();
             }
         }

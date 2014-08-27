@@ -9,29 +9,29 @@ using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources.Lightstone
 {
-    public class when_getting_bands : Specification
+    public class when_getting_metrics : Specification
     {
-        private readonly IReadOnlyRepository<Band> _repository;
-        private readonly IGetBands _getBands;
+        private readonly IReadOnlyRepository<Metric> _repository;
+        private readonly IGetMetrics _getMetrics;
         private readonly ILaceRequestCarInformation _request;
 
-        public when_getting_bands()
+        public when_getting_metrics()
         {
-            _repository = new FakeBandsRepository();
-            _getBands = new BandData(_repository);
+            _repository = new FakeMetricRepository();
+            _getMetrics = new MetricData(_repository);
             _request = LaceRequestCarInformationRequest.ForCarId_107483();
         }
 
         public override void Observe()
         {
-            _getBands.GetBands(_request);
+            _getMetrics.GetMetrics(_request);
         }
 
         [Observation]
-        public void lightstone_bands_should_exist()
+        public void lightstone_metrics_must_exist()
         {
-            _getBands.Bands.ShouldNotBeNull();
-            _getBands.Bands.Count().ShouldNotEqual(0);
+            _getMetrics.Metrics.ShouldNotBeNull();
+            _getMetrics.Metrics.Count().ShouldNotEqual(0);
         }
     }
 }
