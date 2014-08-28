@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Lace.Models.Lightstone.Dto;
 using Lace.Request;
 using Lace.Source.Lightstone.Metrics;
@@ -23,10 +23,58 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             _metric = new AmortisedValueMetric(_request, stats, bands);
         }
 
-
         public override void Observe()
         {
             _metric.Get();
         }
+
+        [Observation]
+        public void lightstone_amortised_gauge_should_exist()
+        {
+            _metric.MetricResult.ShouldNotBeNull();
+            _metric.MetricResult.Count.ShouldNotEqual(0);
+        }
+
+        [Observation]
+        public void lightstone_amortised_gauge_year_0_should_be_valid()
+        {
+            var zeroGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "0");
+            zeroGauge.ShouldNotBeNull();
+            zeroGauge.Value.ShouldEqual(99500);
+        }
+
+        [Observation]
+        public void lightstone_amortised_gauge_year_1_should_be_valid()
+        {
+            var oneGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "1");
+            oneGauge.ShouldNotBeNull();
+            oneGauge.Value.ShouldEqual(87400);
+        }
+
+        [Observation]
+        public void lightstone_amortised_gauge_year_2_should_be_valid()
+        {
+            var twoGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "2");
+            twoGauge.ShouldNotBeNull();
+            twoGauge.Value.ShouldEqual(83100);
+        }
+
+        [Observation]
+        public void lightstone_amortised_gauge_year_3_should_be_valid()
+        {
+            var threeGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "3");
+            threeGauge.ShouldNotBeNull();
+            threeGauge.Value.ShouldEqual(78900);
+        }
+
+        [Observation]
+        public void lightstone_amortised_gauge_year_4_should_be_valid()
+        {
+            var fourGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "4");
+            fourGauge.ShouldNotBeNull();
+            fourGauge.Value.ShouldEqual(75000);
+        }
+
+
     }
 }

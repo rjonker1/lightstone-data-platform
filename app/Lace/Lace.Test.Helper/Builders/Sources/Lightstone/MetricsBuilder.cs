@@ -35,5 +35,15 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
             getMetrics.GetMetrics(RequestForCarId107483);
             return getMetrics.Metrics;
         }
+
+
+        public static IEnumerable<Municipality> GetMunicipalities()
+        {
+            var repository = new FakeMunicipalityRepository();
+            var getMuncipality = new MuncipalityData(repository);
+            getMuncipality.GetMunicipalities(RequestForCarId107483);
+            return getMuncipality.Municipalities;
+        }
+
     }
 }

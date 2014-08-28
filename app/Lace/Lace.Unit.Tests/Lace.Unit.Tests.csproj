@@ -81,6 +81,7 @@
     <Compile Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs" />
     <Compile Include="Sources\Lightstone\when_getting_accident_distribution_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_amortisation_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_area_factor_metric.cs" />
     <Compile Include="Sources\Lightstone\when_getting_bands.cs" />
     <Compile Include="Sources\Lightstone\when_getting_image_gauge_metric.cs" />
     <Compile Include="Sources\Lightstone\when_getting_statistics.cs" />

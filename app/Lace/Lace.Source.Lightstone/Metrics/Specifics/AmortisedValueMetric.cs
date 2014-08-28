@@ -46,10 +46,10 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
 
         private int GetMakeIdFromStatistics()
         {
-            if (!_request.CarId.HasValue || _request.Year.HasValue) return 0;
+            if (!_request.CarId.HasValue || !_request.Year.HasValue) return 0;
 
             var statisic =
-                Statistics.SingleOrDefault(w => w.Car_ID == _request.CarId && w.Year_ID == _request.Year);
+                Statistics.FirstOrDefault(w => w.Car_ID == _request.CarId && w.Year_ID == _request.Year);
 
             if (statisic == null) return 0;
 

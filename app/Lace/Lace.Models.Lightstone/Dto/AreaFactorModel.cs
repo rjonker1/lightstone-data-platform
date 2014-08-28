@@ -2,10 +2,9 @@
 {
     public class AreaFactorModel : IRespondWithAreaFactorModel
     {
-        public AreaFactorModel(string muncipality, int index, double value)
+        public AreaFactorModel(string muncipality, double value)
         {
             Municipality = muncipality;
-            Index = index;
             Value = value;
         }
 
