@@ -73,7 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\BandData.cs" />
+    <Compile Include="DataObjects\CarTypeData.cs" />
     <Compile Include="DataObjects\IGetBands.cs" />
+    <Compile Include="DataObjects\IGetCarType.cs" />
     <Compile Include="DataObjects\IGetMakes.cs" />
     <Compile Include="DataObjects\IGetMetrics.cs" />
     <Compile Include="DataObjects\IGetMuncipalities.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ForModel\BandsRepository.cs" />
     <Compile Include="Repository\ForModel\CarRepository.cs" />
+    <Compile Include="Repository\ForModel\CarTypeRepository.cs" />
     <Compile Include="Repository\ForModel\CarVendorRepository.cs" />
     <Compile Include="Repository\ForModel\MetricRepository.cs" />
     <Compile Include="Repository\ForModel\MunicipalityRepository.cs" />
