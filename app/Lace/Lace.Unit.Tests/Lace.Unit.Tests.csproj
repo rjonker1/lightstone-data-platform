@@ -82,8 +82,12 @@
     <Compile Include="Sources\Lightstone\when_getting_accident_distribution_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_amortisation_metric.cs" />
     <Compile Include="Sources\Lightstone\when_getting_area_factor_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_auction_factor_metric.cs" />
     <Compile Include="Sources\Lightstone\when_getting_bands.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_estimated_value_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_image_gauge_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_last_five_sales_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_repair_index_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_statistics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_metrics.cs" />
     <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />

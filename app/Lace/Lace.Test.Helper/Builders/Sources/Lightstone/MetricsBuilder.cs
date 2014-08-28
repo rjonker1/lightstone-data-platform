@@ -4,6 +4,9 @@ using Lace.Source.Lightstone.DataObjects;
 using Lace.Source.Lightstone.Models;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using BandData = Lace.Source.Lightstone.DataObjects.BandData;
+using MetricData = Lace.Source.Lightstone.DataObjects.MetricData;
+using StatisticsData = Lace.Source.Lightstone.DataObjects.StatisticsData;
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone
 {
@@ -43,6 +46,22 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
             var getMuncipality = new MuncipalityData(repository);
             getMuncipality.GetMunicipalities(RequestForCarId107483);
             return getMuncipality.Municipalities;
+        }
+
+        public static IEnumerable<Sale> GetSales()
+        {
+            var repository = new FakeSaleRepository();
+            var getSales = new SaleData(repository);
+            getSales.GetSales(RequestForCarId107483);
+            return getSales.Sales;
+        }
+
+        public static IEnumerable<Make> GetMakes()
+        {
+            var repository = new FakeMakeRepository();
+            var getMakes = new MakeData(repository);
+            getMakes.GetMakes(RequestForCarId107483);
+            return getMakes.Makes;
         }
 
     }

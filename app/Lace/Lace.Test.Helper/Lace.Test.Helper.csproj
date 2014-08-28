@@ -123,6 +123,7 @@
     <Compile Include="Builders\Sources\Lightstone\MetricDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MetricsBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MuncipalityDataBuilder.cs" />
+    <Compile Include="Builders\Sources\Lightstone\SaleDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\StatisticsDataBuilder.cs" />
     <Compile Include="Builders\Sources\RequestDataFromSourceBuilder.cs" />
     <Compile Include="Fakes\Bus\FakeBus.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Fakes\Lace\Lighstone\FakeMakeRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMetricRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMunicipalityRepository.cs" />
+    <Compile Include="Fakes\Lace\Lighstone\FakeSaleRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeStatisticsRepository.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingAudatexExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Mothers\Sources\Lightstone\MakeData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\MetricData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\MunicipalityData.cs" />
+    <Compile Include="Mothers\Sources\Lightstone\SaleData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\StatisticsData.cs" />
     <Compile Include="Mothers\Sources\RequestDataFromAudatexService.cs" />
     <Compile Include="Mothers\Sources\RequestDataFromIvidService.cs" />
