@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             _repository = new FakeStatisticsRepository();
             _getStatistics = new StatisticsData(_repository);
-            _request = LaceRequestCarInformationRequest.ForCarId_107483();
+            _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483();
         }
 
 

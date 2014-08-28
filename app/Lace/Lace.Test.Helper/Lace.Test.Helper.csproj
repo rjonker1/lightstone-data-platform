@@ -110,7 +110,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Builders\Requests\LaceRequestCarInformationRequest.cs" />
+    <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />

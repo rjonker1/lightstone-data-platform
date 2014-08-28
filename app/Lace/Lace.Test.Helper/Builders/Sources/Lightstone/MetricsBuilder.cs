@@ -10,7 +10,7 @@ namespace Lace.Test.Helper.Builders.Sources.Lightstone
     public class MetricsBuilder
     {
         private static readonly ILaceRequestCarInformation RequestForCarId107483 =
-            LaceRequestCarInformationRequest.ForCarId_107483();
+            LaceRequestCarInformationRequestBuilder.ForCarId_107483();
 
         public static IEnumerable<Statistic> GetStatistics()
         {

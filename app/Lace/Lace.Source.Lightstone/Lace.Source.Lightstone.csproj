@@ -84,6 +84,7 @@
     <Compile Include="LightstoneSourceExecution.cs" />
     <Compile Include="Metrics\MetricTypes.cs" />
     <Compile Include="Metrics\Specifics\AccidentDistributionMetric.cs" />
+    <Compile Include="Metrics\Specifics\AmortisedValueMetric.cs" />
     <Compile Include="Metrics\Specifics\ImageGaugesMetric.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\Car.cs" />

@@ -45,7 +45,7 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             }
         }
 
-        public string GetBandName(int bandId)
+        private string GetBandName(int bandId)
         {
             if (!_bands.Any()) return string.Empty;
 
