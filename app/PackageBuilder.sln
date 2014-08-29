@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Api", "Packa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Domain", "PackageBuilder\PackageBuilder.Domain\PackageBuilder.Domain.csproj", "{C075E78C-8051-4CFC-A0F5-5C61BB108234}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Web", "PackageBuilder\PackageBuilder.Web\PackageBuilder.Web.csproj", "{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Database", "PackageBuilder\PackageBuilder.Database\PackageBuilder.Database.csproj", "{E3212510-689E-4AAD-93F8-261AF917E5AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,22 @@ Global
 		{C075E78C-8051-4CFC-A0F5-5C61BB108234}.TeamCity|Any CPU.Build.0 = TeamCity|Any CPU
 		{C075E78C-8051-4CFC-A0F5-5C61BB108234}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{C075E78C-8051-4CFC-A0F5-5C61BB108234}.Test|Any CPU.Build.0 = Test|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}.Test|Any CPU.Build.0 = Release|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Contracts;
+using PackageBuilder.Domain.Contracts.Enitities;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 

@@ -1,5 +1,6 @@
 ﻿using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
+using PackageBuilder.Database.NHibernateConfigurations;
 using PackageBuilder.TestHelper.Mothers;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -19,6 +20,7 @@ namespace PackageBuilder.Api
             pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
 
+            NHibernateBootstrapper.Build();
             //Make every request SSL based
             //pipelines.BeforeRequest += ctx =>
             //{

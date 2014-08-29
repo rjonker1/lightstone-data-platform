@@ -1,6 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Contracts;
+using PackageBuilder.Domain.Contracts.Enitities;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
