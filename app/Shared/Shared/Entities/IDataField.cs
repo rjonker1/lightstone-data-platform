@@ -1,8 +1,10 @@
-﻿namespace DataPlatform.Shared.Entities
+﻿using System;
+
+namespace DataPlatform.Shared.Entities
 {
     public interface IDataField : INamedEntity
     {
-        string Type { get; }
-        IDataSource DataSource { get; }
+        Type Type { get; }
+        IDataProvider DataProvider { get; }
     }
 }
