@@ -10,6 +10,11 @@ namespace Lace.Test.Helper.Builders.Requests
             return new RequestCarInformationForCarHavingId107483();
         }
 
+        public static ILaceRequestCarInformation ForCarId_107483_ButNoVin()
+        {
+            return new RequestCarInformationForCarHavingId107483ButNoVin();
+        }
+
         public static ILaceRequestCarInformation ForCarId_110490()
         {
             return new RequestCarInformationForCarHavingId110490();

@@ -73,9 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\BandData.cs" />
+    <Compile Include="DataObjects\CarInfoData.cs" />
     <Compile Include="DataObjects\CarTypeData.cs" />
     <Compile Include="DataObjects\CarVendorData.cs" />
     <Compile Include="DataObjects\IGetBands.cs" />
+    <Compile Include="DataObjects\IGetCarInfo.cs" />
     <Compile Include="DataObjects\IGetCarVendor.cs" />
     <Compile Include="DataObjects\IGetCarType.cs" />
     <Compile Include="DataObjects\IGetMakes.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Metrics\Specifics\TotalSalesByGenderMetric.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarInfo.cs" />
     <Compile Include="Models\CarType.cs" />
     <None Include="Vehicle\IRetriveVehicleInformation.cs.old" />
     <None Include="Vehicle\VehicleRetrieval.cs.old" />
@@ -119,12 +122,14 @@
     <Compile Include="Repository\Factory\ISetupRepositoryForModels.cs" />
     <Compile Include="Repository\Factory\RepositoryFactory.cs" />
     <Compile Include="Repository\ForModel\BandsRepository.cs" />
+    <Compile Include="Repository\ForModel\CarInfoRepository.cs" />
     <Compile Include="Repository\ForModel\CarRepository.cs" />
     <Compile Include="Repository\ForModel\CarTypeRepository.cs" />
     <Compile Include="Repository\ForModel\CarVendorRepository.cs" />
     <Compile Include="Repository\ForModel\MetricRepository.cs" />
     <Compile Include="Repository\ForModel\MunicipalityRepository.cs" />
     <Compile Include="Repository\ForModel\SaleRepository.cs" />
+    <Compile Include="Repository\ForModel\Vin12CarInfoRepository.cs" />
     <Compile Include="Repository\Infrastructure\ConnectionFactory.cs" />
     <Compile Include="Repository\Infrastructure\CacheConnectionFactory.cs" />
     <Compile Include="Repository\ForModel\MakeRepository.cs" />
