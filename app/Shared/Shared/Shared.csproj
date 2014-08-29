@@ -53,7 +53,7 @@
     <Compile Include="Entities\ICustomerUser.cs" />
     <Compile Include="Entities\IDataField.cs" />
     <Compile Include="Entities\IDataSet.cs" />
-    <Compile Include="Entities\IDataSource.cs" />
+    <Compile Include="Entities\IDataProvider.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\IExpirable.cs" />
     <Compile Include="Entities\IGroup.cs" />
