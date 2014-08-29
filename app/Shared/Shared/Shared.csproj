@@ -58,6 +58,7 @@
     <Compile Include="Entities\IExpirable.cs" />
     <Compile Include="Entities\IGroup.cs" />
     <Compile Include="Entities\IGroupPermission.cs" />
+    <Compile Include="Entities\INamedEntity.cs" />
     <Compile Include="Entities\IPackage.cs" />
     <Compile Include="Entities\IRole.cs" />
     <Compile Include="Entities\IRolePermission.cs" />

@@ -2,7 +2,7 @@
 {
     public interface IGroupPermission : IEntity, IExpirable
     {
-        IGroup Group { get; set; }
-        IAction Action { get; set; }
+        IGroup Group { get; }
+        IAction Action { get; }
     }
 }

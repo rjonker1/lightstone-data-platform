@@ -2,7 +2,7 @@
 {
     public interface ICustomerUser : IEntity
     {
-        ICustomer Customer { get; set; }
-        IUser User { get; set; }
+        ICustomer Customer { get; }
+        IUser User { get; }
     }
 }

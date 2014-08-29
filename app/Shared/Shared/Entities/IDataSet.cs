@@ -4,6 +4,6 @@ namespace DataPlatform.Shared.Entities
 {
     public interface IDataSet : INamedEntity
     {
-        IEnumerable<IDataField> DataFields { get; set; }
+        IEnumerable<IDataField> DataFields { get; }
     }
 }
