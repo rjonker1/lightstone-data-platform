@@ -2,7 +2,7 @@
 {
     public interface IRolePermission : IEntity, IExpirable
     {
-        IRole Role { get; set; }
-        IAction Action { get; set; }
+        IRole Role { get; }
+        IAction Action { get; }
     }
 }

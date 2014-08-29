@@ -2,7 +2,7 @@
 {
     public interface IUserRole : IEntity
     {
-        IUser User { get; set; }
-        IRole Role { get; set; }
+        IUser User { get; }
+        IRole Role { get; }
     }
 }
