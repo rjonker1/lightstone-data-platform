@@ -1,0 +1,53 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lace.Models.Lightstone;
+using Lace.Models.Lightstone.Dto;
+using Lace.Request;
+using Lace.Source.Lightstone.DataObjects;
+using Lace.Source.Lightstone.Repository.Factory;
+
+namespace Lace.Source.Lightstone.Vehicle
+{
+    public class VehicleRetrieval : IRetriveVehicleInformation
+    {
+        public IEnumerable<IRespondWithCarModel> CarModels { get; private set; }
+        public bool IsSatisfied { get; private set; }
+
+        private IGetCarVendor _getCarVendor;
+        private readonly ISetupRepositoryForModels _repository;
+        private readonly ILaceRequestCarInformation _request;
+
+
+        public VehicleRetrieval(ILaceRequestCarInformation request, ISetupRepositoryForModels repository)
+        {
+            _repository = repository;
+            _request = request;
+        }
+
+        public IRetriveVehicleInformation SetupDataSources()
+        {
+            _getCarVendor = new CarVendorData(_repository.CarVendorRepository());
+            return this;
+        }
+
+        public IRetriveVehicleInformation GenerateData()
+        {
+            _getCarVendor.GetCarVendors(_request);
+            return this;
+        }
+
+
+        public IRetriveVehicleInformation BuildCarModels()
+        {
+            if (_getCarVendor.CarVendors == null || !_getCarVendor.CarVendors.Any()) return this;
+
+            CarModels = _getCarVendor.CarVendors
+                .Select(
+                    s =>
+                        new CarModel(s.CarModelId, s.CarId, s.CarMake, s.CarType, s.CarYearId, s.CarModelName,
+                            s.CarFullname, s.ImageUrl));
+
+            return this;
+        }
+    }
+}

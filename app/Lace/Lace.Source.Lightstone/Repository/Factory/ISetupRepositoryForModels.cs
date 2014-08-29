@@ -1,0 +1,17 @@
+﻿using Lace.Source.Lightstone.Models;
+
+namespace Lace.Source.Lightstone.Repository.Factory
+{
+    public interface ISetupRepositoryForModels
+    {
+        IReadOnlyRepository<Band> BandRepository();
+        IReadOnlyRepository<Car> CarRepository();
+        IReadOnlyRepository<CarType> CarTypeRepository();
+        IReadOnlyRepository<CarVendor> CarVendorRepository();
+        IReadOnlyRepository<Make> MakeRepository();
+        IReadOnlyRepository<Metric> MetricRepository();
+        IReadOnlyRepository<Municipality> MuncipalityRepository();
+        IReadOnlyRepository<Sale> SaleRepository();
+        IReadOnlyRepository<Statistic> StatisticRepository();
+    }
+}

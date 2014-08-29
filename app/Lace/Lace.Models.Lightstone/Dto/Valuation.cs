@@ -33,6 +33,46 @@ namespace Lace.Models.Lightstone.Dto
             AccidentDistribution = model;
         }
 
+        public void AddAmortisedValues(IEnumerable<IRespondWithAmortisedValueModel> model)
+        {
+            AmortisedValues = model;
+        }
+
+        public void AddAreaFactors(IEnumerable<IRespondWithAreaFactorModel> model)
+        {
+            AreaFactors = model;
+        }
+
+        public void AddAuctionFactors(IEnumerable<IRespondWithAuctionFactorModel> model)
+        {
+            AuctionFactors = model;
+        }
+
+        public void AddRepairIndex(IEnumerable<IRespondWithRepairIndexModel> model)
+        {
+            RepairIndex = model;
+        }
+
+        public void AddTotalSalesByAge(IEnumerable<IRespondWithTotalSalesByAgeModel> model)
+        {
+            TotalSalesByAge = model;
+        }
+
+        public void AddTotalSalesByGender(IEnumerable<IRespondWithTotalSalesByGenderModel> model)
+        {
+            TotalSalesByGender = model;
+        }
+
+        public void AddEstimatedValue(IEnumerable<IRespondWithEstimatedValueModel> model)
+        {
+            EstimatedValue = model;
+        }
+
+        public void AddLastFiveSales(IEnumerable<IRespondWithSaleModel> model)
+        {
+            LastFiveSales = model;
+        }
+
         public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
 
         public IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; private set; }
@@ -60,8 +100,5 @@ namespace Lace.Models.Lightstone.Dto
         public IEnumerable<IRespondWithAmortisedValueModel> AmortisedValues { get; private set; }
 
         public IEnumerable<IRespondWithImageGaugeModel> ImageGauges { get; private set; }
-
-
-      
     }
 }

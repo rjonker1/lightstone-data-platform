@@ -2,12 +2,11 @@
 using Common.Logging;
 using Lace.Events;
 using Lace.Models.Lightstone;
+using Lace.Models.Lightstone.Dto;
 using Lace.Request;
 using Lace.Response;
-using Lace.Source.Lightstone.DataObjects;
 using Lace.Source.Lightstone.Metrics;
-using Lace.Source.Lightstone.Repository.ForModel;
-using Lace.Source.Lightstone.Repository.Infrastructure;
+using Lace.Source.Lightstone.Repository.Factory;
 using Lace.Source.Lightstone.Transform;
 using Monitoring.Sources.Lace;
 
@@ -19,24 +18,25 @@ namespace Lace.Source.Lightstone.SourceCalls
         private readonly ILaceRequest _request;
         private const LaceEventSource Source = LaceEventSource.Lightstone;
         private IRetrieveValuationFromMetrics _lightstoneMetrics;
+        private readonly ISetupRepositoryForModels _lightstoneRepositories;
 
-        public CallLightstoneExternalSource(ILaceRequest request)
+        public CallLightstoneExternalSource(ILaceRequest request, ISetupRepositoryForModels lightstoneRepositories)
         {
             _request = request;
+            _lightstoneRepositories = lightstoneRepositories;
         }
-
 
         public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
-                var statsData =
-                    new StatisticsData(new StatisticsRepository(ConnectionFactory.ForAutoCarStatsDatabase(),
-                        CacheConnectionFactory.LocalClient()));
-                statsData.GetStatistics(_request.CarInformation);
+                _lightstoneMetrics = new BaseRetrievalMetric(_request.CarInformation, new Valuation(),
+                    _lightstoneRepositories);
 
-                //_responseFromLightstone = new BaseRetrievalMetric();
-                //_responseFromLightstone.BuildStatisticsData(statsData.Statistics);
+                _lightstoneMetrics
+                    .SetupDataSources()
+                    .GenerateData()
+                    .BuildValuation();
 
                 TransformResponse(response);
             }

@@ -1,5 +1,4 @@
-﻿using Lace.Models.Lightstone;
-using Lace.Models.Lightstone.Dto;
+﻿using Lace.Models.Lightstone.Dto;
 using Lace.Source.Lightstone.Metrics;
 
 
@@ -9,15 +8,15 @@ namespace Lace.Source.Lightstone.Transform
     {
         public bool Continue { get; private set; }
         public LightstoneResponse Result { get; private set; }
-        private readonly IRetrieveValuationFromMetrics _response;
+        private readonly IRetrieveValuationFromMetrics _metricResponse;
 
-        public TransformLightstoneResponse(IRetrieveValuationFromMetrics response)
+        public TransformLightstoneResponse(IRetrieveValuationFromMetrics metricResponse)
         {
-            Continue = response != null;
+            Continue = metricResponse != null && metricResponse.IsSatisfied;
             Result = Continue ? new LightstoneResponse() : null;
-            _response = response;
+            _metricResponse = metricResponse;
         }
-        
+
         public void Transform()
         {
             Result = new LightstoneResponse();

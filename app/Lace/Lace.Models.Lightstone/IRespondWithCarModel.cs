@@ -9,7 +9,6 @@
         int? CarYearId { get; }
         string CarModelName { get; }
         string CarFullname { get; }
-        byte[] RowVersion { get; }
         string ImageUrl { get; }
     }
 }

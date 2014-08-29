@@ -74,7 +74,9 @@
   <ItemGroup>
     <Compile Include="DataObjects\BandData.cs" />
     <Compile Include="DataObjects\CarTypeData.cs" />
+    <Compile Include="DataObjects\CarVendorData.cs" />
     <Compile Include="DataObjects\IGetBands.cs" />
+    <Compile Include="DataObjects\IGetCarVendor.cs" />
     <Compile Include="DataObjects\IGetCarType.cs" />
     <Compile Include="DataObjects\IGetMakes.cs" />
     <Compile Include="DataObjects\IGetMetrics.cs" />
@@ -104,8 +106,9 @@
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarType.cs" />
+    <None Include="Vehicle\IRetriveVehicleInformation.cs.old" />
+    <None Include="Vehicle\VehicleRetrieval.cs.old" />
     <None Include="app.config" />
-    <None Include="IHaveLightstoneRequest.cs.old" />
     <Compile Include="Models\CarVendor.cs" />
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Metric.cs" />
@@ -113,6 +116,8 @@
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Statistic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Factory\ISetupRepositoryForModels.cs" />
+    <Compile Include="Repository\Factory\RepositoryFactory.cs" />
     <Compile Include="Repository\ForModel\BandsRepository.cs" />
     <Compile Include="Repository\ForModel\CarRepository.cs" />
     <Compile Include="Repository\ForModel\CarTypeRepository.cs" />

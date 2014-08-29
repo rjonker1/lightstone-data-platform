@@ -4,6 +4,8 @@ using Lace.Models.Lightstone;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Enums;
+using Lace.Source.Lightstone.Repository.Factory;
+using Lace.Source.Lightstone.Repository.Infrastructure;
 using Lace.Source.Lightstone.SourceCalls;
 
 namespace Lace.Source.Lightstone
@@ -29,7 +31,10 @@ namespace Lace.Source.Lightstone
             else
             {
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
-                    new CallLightstoneExternalSource(_request));
+                    new CallLightstoneExternalSource(_request,
+                        new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
+                            CacheConnectionFactory.LocalClient())));
+
                 consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.LightstoneResponse == null)

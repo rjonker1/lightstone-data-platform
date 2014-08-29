@@ -6,6 +6,8 @@ namespace Lace.Source.Lightstone.Metrics
     {
         bool IsSatisfied { get; }
         IRespondWithValuation Valuation { get; }
-        void BuildValuation();
+        IRetrieveValuationFromMetrics SetupDataSources();
+        IRetrieveValuationFromMetrics BuildValuation();
+        IRetrieveValuationFromMetrics GenerateData();
     }
 }

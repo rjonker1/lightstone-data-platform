@@ -2,9 +2,8 @@
 {
     public class CarModel : IRespondWithCarModel
     {
-
         public CarModel(long carModelId, int carId, string carMake, string carType, int? carYearId, string carModelName,
-            string carFullName, byte[] rowVersion, string imageUrl)
+            string carFullName, string imageUrl)
         {
             CarModelId = carModelId;
             CarId = carId;
@@ -13,7 +12,6 @@
             CarYearId = carYearId;
             CarModelName = carModelName;
             CarFullname = carFullName;
-            RowVersion = rowVersion;
             ImageUrl = imageUrl;
         }
 
@@ -54,12 +52,6 @@
         }
 
         public string CarFullname
-        {
-            get;
-            private set;
-        }
-
-        public byte[] RowVersion
         {
             get;
             private set;

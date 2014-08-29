@@ -1,0 +1,14 @@
+﻿using System.Collections.Generic;
+using Lace.Models.Lightstone;
+
+namespace Lace.Source.Lightstone.Vehicle
+{
+    public interface IRetriveVehicleInformation
+    {
+        bool IsSatisfied { get; }
+        IEnumerable<IRespondWithCarModel> CarModels { get; }
+        IRetriveVehicleInformation SetupDataSources();
+        IRetriveVehicleInformation BuildCarModels();
+        IRetriveVehicleInformation GenerateData();
+    }
+}
