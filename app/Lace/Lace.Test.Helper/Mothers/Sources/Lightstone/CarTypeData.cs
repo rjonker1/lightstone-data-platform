@@ -9,6 +9,7 @@ namespace Lace.Test.Helper.Mothers.Sources.Lightstone
         {
             return new List<CarType>()
             {
+                new CarType(5,"ABARTH 500",2),
                 new CarType(12, "ALFA 145", 4),
                 new CarType(13, "ALFA 146", 4),
                 new CarType(14, "ALFA 147", 4),

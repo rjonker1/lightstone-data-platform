@@ -17,17 +17,20 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         {
             _sales = sales;
             _municipalities = municipalities;
+            MetricResult = new List<SaleModel>();
         }
 
         public void Get()
         {
-            MetricResult = _sales
+            var result = _sales
                 .OrderByDescending(o => o.SaleDateTime)
                 .Take(5)
                 .Select(
                     s =>
                         new SaleModel(s.SaleDateTime.ToShortDateString(), GetMuncipalityName(s.Municipality_ID),
                             s.SalePrice.ToString("C"))).ToList();
+
+            MetricResult.AddRange(result);
         }
 
         private string GetMuncipalityName(int? municipalityId)

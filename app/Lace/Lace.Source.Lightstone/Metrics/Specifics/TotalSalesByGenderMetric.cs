@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Lace.Models.Lightstone.Dto;
-using Lace.Models.Lightstone.Dto.Metric;
 using Lace.Request;
 using Lace.Source.Lightstone.Models;
 
 namespace Lace.Source.Lightstone.Metrics.Specifics
 {
-    public class TotalSalesByAgeMetric : IRetrieveATypeOfMetric<TotalSalesByAgeModel>
+    public class TotalSalesByGenderMetric : IRetrieveATypeOfMetric<TotalSalesByGenderModel>
     {
-        public List<TotalSalesByAgeModel> MetricResult { get; private set; }
+        public List<TotalSalesByGenderModel> MetricResult { get; private set; }
         public IEnumerable<Statistic> Statistics { get; private set; }
 
-        private static readonly MetricTypes[] Metrics = { MetricTypes.TotalSalesByAge };
+        private static readonly MetricTypes[] Metrics = { MetricTypes.TotalSalesByGender };
         private readonly IEnumerable<Band> _bands;
         private readonly IEnumerable<CarType> _carTypes;
         private readonly ILaceRequestCarInformation _request;
 
         private IList<Statistic> _gauges;
 
-        public TotalSalesByAgeMetric(ILaceRequestCarInformation request, IEnumerable<Statistic> statistics,
+        public TotalSalesByGenderMetric(ILaceRequestCarInformation request, IEnumerable<Statistic> statistics,
             IEnumerable<Band> bands,
             IEnumerable<CarType> carTypes)
         {
@@ -27,7 +26,7 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             _carTypes = carTypes;
             _bands = bands;
             _request = request;
-            MetricResult = new List<TotalSalesByAgeModel>();
+            MetricResult = new List<TotalSalesByGenderModel>();
         }
 
         public void Get()
@@ -41,21 +40,14 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
 
         private void AddToMetrics()
         {
-            var salesByAge = _gauges.Select(s => new
-            {
-                Band = GetBandName(s.Band_ID),
-                CarType = GetCarTypeName(s.CarType_ID),
-                Value = (s.FloatValue.HasValue ? s.FloatValue.Value : 0)
-            }).GroupBy(g => g.Band, g => g, (key, g) => new
-            {
-                Band = g.FirstOrDefault(),
-                Values = g.Select(c => new Pair<string, double>(c.CarType, c.Value)).ToList()
+            var result =
+                _gauges.Select(
+                    s =>
+                        new TotalSalesByGenderModel(GetCarTypeName(s.CarType_ID), GetBandName(s.Band_ID),
+                            s.FloatValue.HasValue ? s.FloatValue.Value : 0));
 
-            });
-
-            MetricResult.AddRange(salesByAge.Select(s => new TotalSalesByAgeModel(s.Values, s.Band.Band)));
+            MetricResult.AddRange(result);
         }
-
 
         private void GetGauges(int metricId)
         {

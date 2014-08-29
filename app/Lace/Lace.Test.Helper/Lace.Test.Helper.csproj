@@ -169,6 +169,8 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Packages\Dto\Package.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483.cs" />

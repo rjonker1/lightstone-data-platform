@@ -90,6 +90,8 @@
     <Compile Include="Sources\Lightstone\when_getting_repair_index_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_statistics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs" />
     <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_ivid_title_holder_source.cs" />
     <Compile Include="Sources\when_requesting_data_from_audatex_source.cs" />

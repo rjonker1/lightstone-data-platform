@@ -100,6 +100,7 @@
     <Compile Include="Metrics\Specifics\LastFiveSalesMetric.cs" />
     <Compile Include="Metrics\Specifics\RepairIndexMetric.cs" />
     <Compile Include="Metrics\Specifics\TotalSalesByAgeMetric.cs" />
+    <Compile Include="Metrics\Specifics\TotalSalesByGenderMetric.cs" />
     <Compile Include="Models\Band.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarType.cs" />
