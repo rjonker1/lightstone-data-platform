@@ -4,7 +4,7 @@ namespace DataPlatform.Shared.Entities
 {
     public interface IUser : INamedEntity
     {
-        ICustomer Customer { get; set; }
+        ICustomer Customer { get; }
         IEnumerable<IUserGroup> UserGroups { get; }
         IEnumerable<IUserRole> UserRoles { get; }
         IEnumerable<IRole> Roles { get; }

@@ -2,11 +2,6 @@
 
 namespace DataPlatform.Shared.Entities
 {
-    public interface INamedEntity : IEntity
-    {
-        string Name { get; set; }
-    }
-
     public class NamedEntity : INamedEntity
     {
         protected NamedEntity(string name)
@@ -15,7 +10,7 @@ namespace DataPlatform.Shared.Entities
             Name = name;
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public Guid Id { get; private set; }
 
         protected bool Equals(NamedEntity other)

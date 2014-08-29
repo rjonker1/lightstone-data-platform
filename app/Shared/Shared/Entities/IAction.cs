@@ -2,6 +2,6 @@
 {
     public interface IAction : INamedEntity
     {
-        ICriteria Criteria { get; set; }
+        ICriteria Criteria { get; }
     }
 }

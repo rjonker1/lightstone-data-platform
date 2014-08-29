@@ -4,6 +4,6 @@ namespace DataPlatform.Shared.Entities
 {
     public interface IExpirable
     {
-        DateTime ValidUntil { get; set; }
+        DateTime ValidUntil { get; }
     }
 }

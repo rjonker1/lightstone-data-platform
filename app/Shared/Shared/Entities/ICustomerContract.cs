@@ -2,7 +2,7 @@
 {
     public interface ICustomerContract : IEntity, IExpirable
     {
-        ICustomer Customer { get; set; }
-        IContract Contract { get; set; }
+        ICustomer Customer { get; }
+        IContract Contract { get; }
     }
 }

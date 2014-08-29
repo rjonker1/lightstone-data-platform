@@ -2,6 +2,6 @@
 {
     public interface IContract : INamedEntity
     {
-        ICustomer Customer { get; set; }
+        ICustomer Customer { get; }
     }
 }
