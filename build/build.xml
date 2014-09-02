@@ -188,8 +188,13 @@
 			</includes>
 			<dependencies>
 				<dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="Dapper" version="1.25" targetFramework="net45" />
+        <dependency id="DapperExtensions" version="1.4.3" targetFramework="net45" />
+        <dependency id="ServiceStack.Common" version="3.9.71" targetFramework="net45" />
+        <dependency id="ServiceStack.Redis" version="3.9.71" targetFramework="net45" />
+        <dependency id="ServiceStack.Text" version="3.9.71" targetFramework="net45" />
 				<dependency id="Lightstone.DataPlatform.Workflow" />
-				<dependency id="Lightstone.DataPlatform.Monitoring" />        
+				<dependency id="Lightstone.DataPlatform.Monitoring" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
