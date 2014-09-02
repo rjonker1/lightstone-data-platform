@@ -195,6 +195,7 @@
         <dependency id="ServiceStack.Text" version="3.9.71" targetFramework="net45" />
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
