@@ -72,6 +72,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="DataObjects\BandData.cs" />
     <Compile Include="DataObjects\CarInfoData.cs" />
     <Compile Include="DataObjects\CarTypeData.cs" />
@@ -109,8 +112,6 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarInfo.cs" />
     <Compile Include="Models\CarType.cs" />
-    <None Include="Vehicle\IRetriveVehicleInformation.cs.old" />
-    <None Include="Vehicle\VehicleRetrieval.cs.old" />
     <None Include="app.config" />
     <Compile Include="Models\CarVendor.cs" />
     <Compile Include="Models\Make.cs" />
@@ -118,7 +119,6 @@
     <Compile Include="Models\Municipality.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Statistic.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Factory\ISetupRepositoryForModels.cs" />
     <Compile Include="Repository\Factory\RepositoryFactory.cs" />
     <Compile Include="Repository\ForModel\BandsRepository.cs" />
@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CarInformation\" />
+    <Folder Include="Vehicle\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
