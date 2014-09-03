@@ -112,8 +112,6 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\CarInfo.cs" />
     <Compile Include="Models\CarType.cs" />
-    <None Include="Vehicle\IRetriveVehicleInformation.cs.old" />
-    <None Include="Vehicle\VehicleRetrieval.cs.old" />
     <None Include="app.config" />
     <Compile Include="Models\CarVendor.cs" />
     <Compile Include="Models\Make.cs" />
