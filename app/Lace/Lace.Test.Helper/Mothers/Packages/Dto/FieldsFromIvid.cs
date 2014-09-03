@@ -3,7 +3,7 @@ using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
-    public class RegistrationFieldSource : IDataSource
+    public class RegistrationFieldSource : IDataProvider
     {
         public RegistrationFieldSource()
         {
@@ -14,9 +14,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class VinFieldSource : IDataSource
+    public class VinFieldSource : IDataProvider
     {
 
         public VinFieldSource()
@@ -28,9 +30,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class EngineFieldSource : IDataSource
+    public class EngineFieldSource : IDataProvider
     {
         public EngineFieldSource()
         {
@@ -41,10 +45,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         public Guid Id { get; set; }
 
         public string Name { get; set; }
-     
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class MakeDescriptionFiledSource : IDataSource
+    public class MakeDescriptionFiledSource : IDataProvider
     {
 
         public MakeDescriptionFiledSource()
@@ -57,5 +62,7 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public string Name { get; set; }
 
+
+        public Type ResponseType { get; private set; }
     }
 }

@@ -3,7 +3,7 @@ using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
-    public class AccidentClaimSource : IDataSource
+    public class AccidentClaimSource : IDataProvider
     {
 
         public AccidentClaimSource()
@@ -16,6 +16,6 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public string Name { get; set; }
 
-
+        public Type ResponseType { get; private set; }
     }
 }

@@ -3,7 +3,7 @@ using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
-    public class VehicleMakeFieldSource : IDataSource
+    public class VehicleMakeFieldSource : IDataProvider
     {
         public VehicleMakeFieldSource()
         {
@@ -14,9 +14,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class ColourFieldSource : IDataSource
+    public class ColourFieldSource : IDataProvider
     {
         public ColourFieldSource()
         {
@@ -27,9 +29,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class PriceFieldSource : IDataSource
+    public class PriceFieldSource : IDataProvider
     {
         public PriceFieldSource()
         {
@@ -40,5 +44,7 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 }

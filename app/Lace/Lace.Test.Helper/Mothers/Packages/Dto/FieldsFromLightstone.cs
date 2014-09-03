@@ -3,7 +3,7 @@ using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
-    public class AmortisationFactorsSource : IDataSource
+    public class AmortisationFactorsSource : IDataProvider
     {
         public AmortisationFactorsSource()
         {
@@ -13,9 +13,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class AreaFactorsSource : IDataSource
+    public class AreaFactorsSource : IDataProvider
     {
         public AreaFactorsSource()
         {
@@ -25,9 +27,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class AccidentDistributionSource : IDataSource
+    public class AccidentDistributionSource : IDataProvider
     {
         public AccidentDistributionSource()
         {
@@ -37,9 +41,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class RepairIndexModelSource : IDataSource
+    public class RepairIndexModelSource : IDataProvider
     {
         public RepairIndexModelSource()
         {
@@ -49,9 +55,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class EstimatedValueSource : IDataSource
+    public class EstimatedValueSource : IDataProvider
     {
         public EstimatedValueSource()
         {
@@ -61,9 +69,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class LastFiveSalesSource : IDataSource
+    public class LastFiveSalesSource : IDataProvider
     {
         public LastFiveSalesSource()
         {
@@ -73,9 +83,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 
-    public class AmortisedValuesSource : IDataSource
+    public class AmortisedValuesSource : IDataProvider
     {
         public AmortisedValuesSource()
         {
@@ -85,5 +97,7 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        public Type ResponseType { get; private set; }
     }
 }
