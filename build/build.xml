@@ -190,6 +190,7 @@
 				<dependency id="Common.Logging" version="2.1.2.0" />        
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
