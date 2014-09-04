@@ -7,6 +7,7 @@ using Lace.Source.Audatex;
 using Lace.Source.Ivid;
 using Lace.Source.IvidTitleHolder;
 using Lace.Source.RgtVin;
+using Lace.Source.Lightstone;
 
 namespace Lace.Builder.Specifications
 {
@@ -22,6 +23,9 @@ namespace Lace.Builder.Specifications
                                 new RgtVinSourceExecution(request,
                                     new AudatexSourceExecution(request, null, null), null),
                                 null), null).CallSource(response, @event);
+
+        private readonly Func<Action<ILaceRequest, ILaceEvent, ILaceResponse>> _lightstoneRequestSpecification = ()
+            => (request, @event, response) => new LightstoneSourceExecution(request, null, null);
 
         public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> Specifications
         {
