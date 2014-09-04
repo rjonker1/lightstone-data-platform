@@ -127,7 +127,7 @@
 
 
     <!-- LACE START -->
-		<nuget deploy="false">
+	<!--	<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Lace.Request.Entry</name>
 			<folder>app/Lace/Lace.Request.Entry</folder>
 			<author>CustomApp</author>
@@ -190,7 +190,7 @@
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
 			</dependencies>
 		</nuget>
-		<!-- LACE END -->
+		 LACE END -->
 
 
 		<!-- MONITORING START -->
