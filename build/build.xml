@@ -175,8 +175,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Source.Ivid.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.pdb" to="lib\net45"/>
-      <!--  <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.pdb" to="lib\net45"/>-->   
+        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.pdb" to="lib\net45"/> 
         <include pattern="Lightstone.DataPlatform.Lace.Source.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.RgtVin.pdb" to="lib\net45"/>         
         <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.dll" to="lib\net45"/>
