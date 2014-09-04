@@ -1,6 +1,8 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Mothers;
+
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -8,24 +10,21 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
-                                new DataField {Name = "Vin", DataSource = new VinFieldSource()},
-                                new DataField {Name = "BankName", DataSource = new BankNameFieldSource()},
-                                new DataField {Name = "AccountNumber", DataSource = new AccountNumberFieldSource()},
-                                new DataField {Name = "AccountOpenDate", DataSource = new AccountOpenDateFieldSource()},
-                                new DataField
+                                new DataField("Vin") {DataSource = new VinFieldSource()},
+                                new DataField("BankName") {DataSource = new BankNameFieldSource()},
+                                new DataField("AccountNumber") {DataSource = new AccountNumberFieldSource()},
+                                new DataField("AccountOpenDate") {DataSource = new AccountOpenDateFieldSource()},
+                                new DataField("AccountClosedDate")
                                 {
-                                    Name = " AccountClosedDate",
                                     DataSource = new AccountClosedDateFieldSource()
                                 }
                             }

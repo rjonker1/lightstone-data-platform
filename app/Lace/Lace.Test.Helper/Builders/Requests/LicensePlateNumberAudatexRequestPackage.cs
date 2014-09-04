@@ -1,6 +1,8 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Mothers;
+
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -8,21 +10,19 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
-                                new DataField {Name = "Registration", DataSource = new RegistrationFieldSource()},
-                                new DataField {Name = "Vin", DataSource = new VinFieldSource()},
-                                new DataField {Name = "Engine", DataSource = new EngineFieldSource()},
-                                new DataField {Name = "AccidentClaim", DataSource = new AccidentClaimSource()}
+                                new TestDataField("Registration") {DataSource = new RegistrationFieldSource(), Type = typeof(string).ToString()},
+                                new TestDataField("Vin") {DataSource = new VinFieldSource(), Type = typeof(string).ToString()},
+                                new TestDataField("Engine") {DataSource = new EngineFieldSource(), Type = typeof(string).ToString()},
+                                new TestDataField("AccidentClaim") {DataSource = new AccidentClaimSource(), Type = typeof(string).ToString()}
                             }
                         }
                     },

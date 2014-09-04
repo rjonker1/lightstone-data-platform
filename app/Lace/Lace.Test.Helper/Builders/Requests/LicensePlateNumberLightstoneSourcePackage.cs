@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Mothers;
 
 namespace Lace.Test.Helper.Builders.Requests
@@ -8,32 +9,28 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
-                                new DataField
+                                new DataField("AmortisationFactors")
                                 {
-                                    Name = "AmortisationFactors",
                                     DataSource = new AmortisationFactorsSource()
                                 },
-                                new DataField {Name = "AreaFactors", DataSource = new AreaFactorsSource()},
-                                new DataField
+                                new DataField("AreaFactors") {DataSource = new AreaFactorsSource()},
+                                new DataField("AccidentDistribution")
                                 {
-                                    Name = "AccidentDistribution",
                                     DataSource = new AccidentDistributionSource()
                                 },
-                                new DataField {Name = "RepairIndexModel", DataSource = new RepairIndexModelSource()},
-                                new DataField {Name = "EstimatedValue", DataSource = new EstimatedValueSource()},
-                                new DataField {Name = "LastFiveSales", DataSource = new LastFiveSalesSource()},
-                                new DataField {Name = "AmortisedValues", DataSource = new AmortisedValuesSource()}
+                                new DataField("RepairIndexModel") {DataSource = new RepairIndexModelSource()},
+                                new DataField("EstimatedValue") {DataSource = new EstimatedValueSource()},
+                                new DataField("LastFiveSales") {DataSource = new LastFiveSalesSource()},
+                                new DataField("AmortisedValues") {DataSource = new AmortisedValuesSource()}
                             }
                         }
                     },

@@ -1,5 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using Lace.Test.Helper.Mothers.Packages.Dto;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Mothers;
 
 namespace Lace.Test.Helper.Builders.Requests
@@ -8,40 +9,36 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
                                 //ivid
-                                new DataField {Name = "Registration", DataSource = new RegistrationFieldSource()},
-                                new DataField {Name = "Vin", DataSource = new VinFieldSource()},
-                                new DataField {Name = "Engine", DataSource = new EngineFieldSource()},
-                                new DataField {Name = " MakeDescription", DataSource = new MakeDescriptionFiledSource()},
+                                new DataField("Registration") { DataSource = new RegistrationFieldSource()},
+                                new DataField("Vin") { DataSource = new VinFieldSource()},
+                                new DataField("Engine") { DataSource = new EngineFieldSource()},
+                                new DataField(" MakeDescription") { DataSource = new MakeDescriptionFiledSource()},
 
                                 //ivid title holder
-                                new DataField {Name = "BankName", DataSource = new BankNameFieldSource()},
-                                new DataField {Name = "AccountNumber", DataSource = new AccountNumberFieldSource()},
-                                new DataField {Name = "AccountOpenDate", DataSource = new AccountOpenDateFieldSource()},
-                                new DataField
-                                {
-                                    Name = " AccountClosedDate",
+                                new DataField("BankName") { DataSource = new BankNameFieldSource()},
+                                new DataField("AccountNumber") { DataSource = new AccountNumberFieldSource()},
+                                new DataField("AccountOpenDate") { DataSource = new AccountOpenDateFieldSource()},
+                                new DataField("AccountClosedDate") {
                                     DataSource = new AccountClosedDateFieldSource()
                                 },
 
                                 //rgt vin
-                                new DataField {Name = "VehicleMake", DataSource = new PriceFieldSource()},
-                                new DataField {Name = "Colour", DataSource = new ColourFieldSource()},
-                                new DataField {Name = "Price", DataSource = new PriceFieldSource()},
+                                new DataField("VehicleMake") { DataSource = new PriceFieldSource()},
+                                new DataField("Colour") { DataSource = new ColourFieldSource()},
+                                new DataField("Price") { DataSource = new PriceFieldSource()},
 
                                 //audatx
-                                new DataField {Name = "AccidentClaim", DataSource = new AccidentClaimSource()}
+                                new DataField("AccidentClaim") { DataSource = new AccidentClaimSource()}
                             }
                         }
                     },

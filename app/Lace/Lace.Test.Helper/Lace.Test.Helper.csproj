@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,72 +32,73 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="CsQuery">
-      <HintPath>..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
+    <Reference Include="CsQuery, Version=1.3.3.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CsQuery.1.3.3\lib\net40\CsQuery.dll</HintPath>
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="EasyNetQ.Management.Client">
+      <HintPath>..\..\packages\EasyNetQ.Management.Client.0.35.6.302\lib\net40\EasyNetQ.Management.Client.dll</HintPath>
+    </Reference>
     <Reference Include="FluentMigrator, Version=1.2.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\FluentMigrator.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\FluentMigrator.dll</HintPath>
     </Reference>
     <Reference Include="FluentMigrator.Runner, Version=1.2.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\FluentMigrator.Runner.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\FluentMigrator.Runner.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestHelper, Version=0.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestHelper, Version=1.0.0.88, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestHelper.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestHelper.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.60, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.Public, Version=1.0.0.60, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers, Version=1.0.0.60, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.89\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Lightstone.DataPlatform.Workflow">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.89\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.89\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\Moq.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\Nancy.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Nancy.dll</HintPath>
     </Reference>
     <Reference Include="Nancy.Testing, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\Nancy.Testing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\Nancy.Testing.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain, Version=0.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PackageBuilder.Domain, Version=1.0.0.88, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.0.0.0.8\lib\net45\PackageBuilder.Domain.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.88\lib\net45\PackageBuilder.Domain.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
@@ -162,7 +165,7 @@
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
     <Compile Include="Mothers\Packages\Dto\DataField.cs" />
-    <Compile Include="Mothers\Packages\Dto\DataSet.cs" />
+    <None Include="Mothers\Packages\Dto\DataSet.cs.old" />
     <Compile Include="Mothers\Packages\Dto\FieldsFromAudatex.cs" />
     <Compile Include="Mothers\Packages\Dto\FieldsFromIvid.cs" />
     <Compile Include="Mothers\Packages\Dto\FieldsFromIvidTitleHolder.cs" />
@@ -170,7 +173,7 @@
     <Compile Include="Mothers\Packages\Dto\FieldsFromRgtVin.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
-    <Compile Include="Mothers\Packages\Dto\Package.cs" />
+    <None Include="Mothers\Packages\Dto\Package.cs.old" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />

@@ -358,13 +358,21 @@
       <author>CustomApp</author>
       <description>PackageBuilder.TestHelper</description>
       <includes>
-        <include pattern="*.dll" to="lib\net45"/>
-        <include pattern="*.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45" />
+        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45" />
+        <include pattern="PackageBuilder.Domain.dll" to="lib\net45" />
+        <include pattern="PackageBuilder.Domain.pdb" to="lib\net45" />
       </includes>
       <dependencies>
         <dependency id="Nancy" version="0.23.0" />
         <dependency id="Nancy.Testing" version="0.23.0" />
-        <dependency id="Lightstone.Dataplatform.Shared.Public.TestHelpers" />
+        <dependency id="FluentMigrator" version="1.2.1.0" />
+        <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
+        <dependency id="Moq" version="4.0.10827" />
       </dependencies>
     </nuget>
 	</nugets>

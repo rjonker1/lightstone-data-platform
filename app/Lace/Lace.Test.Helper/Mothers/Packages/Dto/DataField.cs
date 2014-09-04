@@ -1,14 +1,17 @@
-﻿using System;
-using DataPlatform.Shared.Entities;
+﻿using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
-    public class DataField : IDataProvider
+    public class TestDataField : IDataField
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public Type ResponseType { get; set; }
+        public TestDataField(string name)
+        {
+            Name = name;
+        }
+        public IDataSource DataSource { get; set; }
+        public string Type { get; set; }
 
-    
+        public string Name { get; set; }
+        public System.Guid Id { get; private set; }
     }
 }

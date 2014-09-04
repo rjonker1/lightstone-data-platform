@@ -77,8 +77,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
-    <Compile Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs" />
+    <None Include="Requests\when_lace_entry_point_get_response.cs.old" />
+    <None Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs.old" />
     <Compile Include="Sources\Lightstone\when_getting_accident_distribution_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_amortisation_metric.cs" />
     <Compile Include="Sources\Lightstone\when_getting_area_factor_metric.cs" />
@@ -93,14 +93,14 @@
     <Compile Include="Sources\Lightstone\when_getting_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs" />
     <Compile Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs" />
-    <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />
-    <Compile Include="Sources\when_requesting_data_from_ivid_title_holder_source.cs" />
-    <Compile Include="Sources\when_requesting_data_from_audatex_source.cs" />
-    <Compile Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs" />
-    <Compile Include="Sources\when_requesting_data_from_ivid_source.cs" />
-    <Compile Include="Transform\when_transforming_rgt_vin_response.cs" />
-    <Compile Include="Transform\when_transforming_audatex_response.cs" />
-    <Compile Include="Transform\when_transforming_ivid_response.cs" />
+    <None Include="Sources\when_requesting_data_from_rgt_vin_source.cs.old" />
+    <None Include="Sources\when_requesting_data_from_ivid_title_holder_source.cs.old" />
+    <None Include="Sources\when_requesting_data_from_audatex_source.cs.old" />
+    <None Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs.old" />
+    <None Include="Sources\when_requesting_data_from_ivid_source.cs.old" />
+    <None Include="Transform\when_transforming_rgt_vin_response.cs.old" />
+    <None Include="Transform\when_transforming_audatex_response.cs.old" />
+    <None Include="Transform\when_transforming_ivid_response.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

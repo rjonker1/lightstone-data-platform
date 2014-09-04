@@ -1,9 +1,10 @@
 ﻿using System;
+using DataPlatform.Shared.Dtos;
 using DataPlatform.Shared.Entities;
 
 namespace Lace.Test.Helper.Mothers.Packages.Dto
 {
-    public class BankNameFieldSource : IDataProvider
+    public class BankNameFieldSource : IDataSource
     {
         public BankNameFieldSource()
         {
@@ -12,14 +13,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         }
 
         public Guid Id { get; set; }
-
         public string Name { get; set; }
-
-        public Type ResponseType { get; private set; }
-      
+        
     }
 
-    public class AccountNumberFieldSource : IDataProvider
+    public class AccountNumberFieldSource : IDataSource
     {
         public AccountNumberFieldSource()
         {
@@ -28,14 +26,11 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         }
 
         public Guid Id { get; set; }
-
         public string Name { get; set; }
-
-        public Type ResponseType { get; private set; }
     }
 
 
-    public class AccountOpenDateFieldSource : IDataProvider
+    public class AccountOpenDateFieldSource : IDataSource
     {
         public AccountOpenDateFieldSource()
         {
@@ -44,13 +39,10 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         }
 
         public Guid Id { get; set; }
-
         public string Name { get; set; }
-
-        public Type ResponseType { get; private set; }
     }
 
-    public class AccountClosedDateFieldSource : IDataProvider
+    public class AccountClosedDateFieldSource : IDataSource
     {
         public AccountClosedDateFieldSource()
         {
@@ -59,9 +51,6 @@ namespace Lace.Test.Helper.Mothers.Packages.Dto
         }
 
         public Guid Id { get; set; }
-
         public string Name { get; set; }
-
-        public Type ResponseType { get; private set; }
     }
 }
