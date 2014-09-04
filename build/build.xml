@@ -174,9 +174,7 @@
         <include pattern="Lightstone.DataPlatform.Lace.Source.Ivid.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.Ivid.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.pdb" to="lib\net45"/>       
         <include pattern="Lightstone.DataPlatform.Lace.Source.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.RgtVin.pdb" to="lib\net45"/>         
         <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.dll" to="lib\net45"/>
@@ -189,12 +187,7 @@
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2.0" />
-        <dependency id="Dapper" version="1.25" />
-        <dependency id="DapperExtensions" version="1.4.3" /> 
-        <dependency id="ServiceStack.Common" version="3.9.71" />
-        <dependency id="ServiceStack.Redis" version="3.9.71" />
-        <dependency id="ServiceStack.Text" version="3.9.71" />    
+				<dependency id="Common.Logging" version="2.1.2.0" />          
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
 			</dependencies>
