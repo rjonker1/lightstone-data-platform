@@ -66,6 +66,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Cars\IRetrieveCarDetailFromCarVendorInformation.cs" />
+    <Compile Include="Cars\IRetrieveCarInformation.cs" />
+    <Compile Include="Cars\RetrieveCarInformationDetail.cs" />
+    <Compile Include="Cars\RetrieveCarVendorDetail.cs" />
     <Compile Include="DataObjects\BandData.cs" />
     <Compile Include="DataObjects\CarInfoData.cs" />
     <Compile Include="DataObjects\CarTypeData.cs" />

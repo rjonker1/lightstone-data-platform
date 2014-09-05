@@ -26,6 +26,16 @@ namespace Lace.Source.Lightstone.Repository.Factory
             return new CarRepository(_connection, _redisClient);
         }
 
+        public IReadOnlyRepository<CarInfo> CarInfoRepository()
+        {
+            return new CarInfoRepository(_connection, _redisClient);
+        }
+
+        public IReadOnlyRepository<CarInfo> Vin12CarInfoRepository()
+        {
+            return new Vin12CarInfoRepository(_connection, _redisClient);
+        }
+
         public IReadOnlyRepository<CarType> CarTypeRepository()
         {
             return new CarTypeRepository(_connection, _redisClient);

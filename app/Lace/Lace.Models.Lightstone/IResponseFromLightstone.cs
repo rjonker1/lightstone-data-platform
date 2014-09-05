@@ -22,6 +22,6 @@ namespace Lace.Models.Lightstone
 
         IEnumerable<IRespondWithCarModel> CarModels { get; }
 
-        IEnumerable<IRespondWithVin12> Vin12 { get; }
+      //  IEnumerable<IRespondWithVin12> Vin12 { get; }
     }
 }
