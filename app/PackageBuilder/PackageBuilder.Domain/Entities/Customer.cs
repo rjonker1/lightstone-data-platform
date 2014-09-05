@@ -40,7 +40,7 @@ namespace PackageBuilder.Domain.Entities
             var customerUser = _customerUsers.FirstOrDefault(x => Equals(x.User, user));
             if (customerUser != null) return;
 
-            user.Customer = this;
+            //user.Customer = this;
             customerUser = new CustomerUser(this, user);
             _customerUsers.Add(customerUser);
         }
@@ -52,7 +52,7 @@ namespace PackageBuilder.Domain.Entities
             var customerContract = _customerContracts.FirstOrDefault(x => Equals(x.Contract, contract));
             if (customerContract != null) return;
 
-            contract.Customer = this;
+            //contract.Customer = this;
             customerContract = new CustomerContract(this, contract);
             _customerContracts.Add(customerContract);
         }

@@ -41,9 +41,15 @@
     <OutputPath>bin\Test\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.60, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.60\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,7 +64,10 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Handlers\DataProviderHandler.cs" />
+    <Compile Include="Commands\IHandleCommand.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
+    <Compile Include="Events\DataProviderCreated.cs" />
     <Compile Include="Events\Event.cs" />
     <Compile Include="Contracts\Cqrs\ICommandSender.cs" />
     <Compile Include="Contracts\Cqrs\IEventPublisher.cs" />
@@ -86,12 +95,12 @@
     <Compile Include="Entities\CustomerUser.cs" />
     <Compile Include="Entities\DataField.cs" />
     <Compile Include="Entities\DataSet.cs" />
-    <Compile Include="Entities\DataSource.cs" />
+    <Compile Include="Entities\DataProvider.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\GroupPackage.cs" />
     <Compile Include="Entities\GroupPermission.cs" />
     <Compile Include="Entities\Package.cs" />
-    <Compile Include="Events\PackageCreatedEvent.cs" />
+    <Compile Include="Events\PackageCreated.cs" />
     <Compile Include="Helpers\Extensions\PrivateReflectionDynamicObjectExtensions.cs" />
     <Compile Include="Helpers\PrivateReflectionDynamicObject.cs" />
     <Compile Include="PackageLookup.cs" />
@@ -102,6 +111,7 @@
     <Compile Include="Entities\UserGroup.cs" />
     <Compile Include="Entities\UserPackage.cs" />
     <Compile Include="Entities\UserRole.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

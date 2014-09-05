@@ -1,6 +1,6 @@
 ﻿namespace PackageBuilder.Domain.Events
 {
-    public class PackageCreatedEvent : Event
+    public class PackageCreated : Event
     {
          
     }

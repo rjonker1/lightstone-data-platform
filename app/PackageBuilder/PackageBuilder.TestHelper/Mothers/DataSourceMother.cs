@@ -6,7 +6,7 @@ namespace PackageBuilder.TestHelper.Mothers
 {
     public class DataSourceMother
     {
-        public static IDataSource IvidDataSource
+        public static IDataProvider IvidDataSource
         {
             get
             {
@@ -14,7 +14,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IDataSource IvidTitleHolderDataSource
+        public static IDataProvider IvidTitleHolderDataSource
         {
             get
             {
@@ -22,7 +22,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IDataSource RgtVinSource
+        public static IDataProvider RgtVinSource
         {
             get
             {
@@ -30,7 +30,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IDataSource AudatexSource
+        public static IDataProvider AudatexSource
         {
             get
             {
