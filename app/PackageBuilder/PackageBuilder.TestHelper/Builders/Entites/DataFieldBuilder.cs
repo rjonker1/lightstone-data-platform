@@ -6,10 +6,10 @@ namespace PackageBuilder.TestHelper.Builders.Entites
     public class DataFieldBuilder
     {
         private string _name;
-        private IDataSource _source;
+        private IDataProvider _dataProvider;
         public IDataField Build()
         {
-            return new DataField(_name) { DataSource = _source, Type = typeof(string).ToString() };
+            return new DataField(_name) { DataProvider = _dataProvider };
         }
 
         public DataFieldBuilder With(string name)
@@ -18,9 +18,9 @@ namespace PackageBuilder.TestHelper.Builders.Entites
             return this;
         }
 
-        public DataFieldBuilder With(IDataSource source)
+        public DataFieldBuilder With(IDataProvider dataProvider)
         {
-            _source = source;
+            _dataProvider = dataProvider;
             return this;
         }
     }

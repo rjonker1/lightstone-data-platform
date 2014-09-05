@@ -8,9 +8,9 @@ namespace PackageBuilder.TestHelper.Builders.Entites
     {
         private Guid _id;
         private string _name;
-        public IDataSource Build()
+        public IDataProvider Build()
         {
-            return new DataSource(_name){Id = _id};
+            return new DataProvider(_id, _name);
         }
 
         public DataSourceBuilder With(Guid id)

@@ -97,6 +97,7 @@
     <Compile Include="when_envoking_getUserMetaData_as_unauthorized_user.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

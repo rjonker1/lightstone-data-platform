@@ -1,6 +1,6 @@
 ﻿using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
-using PackageBuilder.Database.NHibernateConfigurations;
+using PackageBuilder.Data.NHibernate;
 using PackageBuilder.TestHelper.Mothers;
 using Shared.BuildingBlocks.Api.Security;
 

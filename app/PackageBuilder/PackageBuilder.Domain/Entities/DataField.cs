@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using System;
+using DataPlatform.Shared.Entities;
 
 namespace PackageBuilder.Domain.Entities
 {
@@ -9,7 +10,7 @@ namespace PackageBuilder.Domain.Entities
         {
         }
 
-        public string Type { get; set; }
-        public IDataSource DataSource { get; set; }
+        public Type Type { get; private set; }
+        public IDataProvider DataProvider { get; set; }
     }
 }

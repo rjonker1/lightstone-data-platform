@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Cfg;
 using NHibernate.Cfg;
 
-namespace PackageBuilder.Database.NHibernateConfigurations
+namespace PackageBuilder.Data.NHibernate
 {
     /// <summary>
     /// Responsible for configuring NHibernate

@@ -17,7 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Domain", "Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Web", "PackageBuilder\PackageBuilder.Web\PackageBuilder.Web.csproj", "{17BAB16B-6DA5-4EA8-899E-2662F5FA7845}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Database", "PackageBuilder\PackageBuilder.Database\PackageBuilder.Database.csproj", "{E3212510-689E-4AAD-93F8-261AF917E5AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Data", "PackageBuilder\PackageBuilder.Database\PackageBuilder.Data.csproj", "{E3212510-689E-4AAD-93F8-261AF917E5AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Common", "PackageBuilder\PackageBuilder.Common\PackageBuilder.Common.csproj", "{E1860260-CAA8-497B-A014-BDDFAB19665D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,14 @@ Global
 		{E3212510-689E-4AAD-93F8-261AF917E5AE}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{E3212510-689E-4AAD-93F8-261AF917E5AE}.Test|Any CPU.Build.0 = Release|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
