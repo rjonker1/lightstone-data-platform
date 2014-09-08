@@ -20,7 +20,6 @@ namespace Lace.Source.Lightstone.SourceCalls
         private readonly ILaceRequest _request;
         private const LaceEventSource Source = LaceEventSource.Lightstone;
         private IRetrieveValuationFromMetrics _lightstoneMetrics;
-        private IRetrieveCarDetailFromCarVendorInformation _lightstoneCarVendorInformation;
         private IRetrieveCarInformation _lightstoneCarInformation;
 
         private readonly ISetupRepositoryForModels _lightstoneRepositories;
@@ -42,14 +41,6 @@ namespace Lace.Source.Lightstone.SourceCalls
                     .GenerateData()
                     .BuildValuation();
 
-                _lightstoneCarVendorInformation = new RetrieveCarVendorDetail(_request.CarInformation, new List<CarModel>(),
-                    _lightstoneRepositories);
-                _lightstoneCarVendorInformation
-                    .SetupDataSources()
-                    .GenerateData()
-                    .BuildCarModels();
-
-
                 _lightstoneCarInformation = new RetrieveCarInformationDetail(_request.CarInformation, _lightstoneRepositories);
                 _lightstoneCarInformation
                     .SetupDataSources()
@@ -68,7 +59,8 @@ namespace Lace.Source.Lightstone.SourceCalls
 
         public void TransformResponse(ILaceResponse response)
         {
-            var transformer = new TransformLightstoneResponse(_lightstoneMetrics, _lightstoneCarVendorInformation, _lightstoneCarInformation);
+            var transformer = new TransformLightstoneResponse(_lightstoneMetrics, _lightstoneCarInformation,
+                _request.CarInformation.Vin);
 
             if (transformer.Continue)
             {

@@ -66,17 +66,17 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Cars\IRetrieveCarDetailFromCarVendorInformation.cs" />
+    <None Include="Cars\IRetrieveCarDetailFromCarVendorInformation.cs.old" />
     <Compile Include="Cars\IRetrieveCarInformation.cs" />
     <Compile Include="Cars\RetrieveCarInformationDetail.cs" />
-    <Compile Include="Cars\RetrieveCarVendorDetail.cs" />
+    <None Include="Cars\RetrieveCarVendorDetail.cs.old" />
     <Compile Include="DataObjects\BandData.cs" />
     <Compile Include="DataObjects\CarInfoData.cs" />
     <Compile Include="DataObjects\CarTypeData.cs" />
-    <Compile Include="DataObjects\CarVendorData.cs" />
+    <None Include="DataObjects\CarVendorData.cs.old" />
     <Compile Include="DataObjects\IGetBands.cs" />
     <Compile Include="DataObjects\IGetCarInfo.cs" />
-    <Compile Include="DataObjects\IGetCarVendor.cs" />
+    <None Include="DataObjects\IGetCarVendor.cs.old" />
     <Compile Include="DataObjects\IGetCarType.cs" />
     <Compile Include="DataObjects\IGetMakes.cs" />
     <Compile Include="DataObjects\IGetMetrics.cs" />

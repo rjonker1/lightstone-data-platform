@@ -150,17 +150,9 @@
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
-    <None Include="Mothers\Packages\Dto\DataField.cs.old" />
-    <None Include="Mothers\Packages\Dto\DataSet.cs.old" />
     <Compile Include="Mothers\Packages\ActionMother.cs" />
-    <None Include="Mothers\Packages\Dto\FieldsFromAudatex.cs.old" />
-    <None Include="Mothers\Packages\Dto\FieldsFromIvid.cs.old" />
-    <None Include="Mothers\Packages\Dto\FieldsFromIvidTitleHolder.cs.old" />
-    <None Include="Mothers\Packages\Dto\FieldsFromLightstone.cs.old" />
-    <None Include="Mothers\Packages\Dto\FieldsFromRgtVin.cs.old" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
-    <None Include="Mothers\Packages\Dto\Package.cs.old" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />

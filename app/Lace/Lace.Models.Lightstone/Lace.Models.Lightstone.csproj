@@ -42,7 +42,7 @@
     <Compile Include="Dto\AmortisedValueModel.cs" />
     <Compile Include="Dto\AreaFactorModel.cs" />
     <Compile Include="Dto\AuctionFactorModel.cs" />
-    <Compile Include="Dto\CarModel.cs" />
+    <None Include="Dto\CarModel.cs.old" />
     <Compile Include="Dto\ConfidenceModel.cs" />
     <Compile Include="Dto\EstimatedValueModel.cs" />
     <Compile Include="Dto\FrequencyModel.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="IRespondWithAmortisedValueModel.cs" />
     <Compile Include="IRespondWithAreaFactorModel.cs" />
     <Compile Include="IRespondWithAuctionFactorModel.cs" />
-    <Compile Include="IRespondWithCarModel.cs" />
+    <None Include="IRespondWithCarModel.cs.old" />
     <Compile Include="IRespondWithConfidenceModel.cs" />
     <Compile Include="IRespondWithEstimatedValueModel.cs" />
     <Compile Include="IRespondWithFrequencyModel.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="IRespondWithTotalSalesByAgeModel.cs" />
     <Compile Include="IRespondWithTotalSalesByGenderModel.cs" />
     <Compile Include="IRespondWithValuation.cs" />
-    <Compile Include="IRespondWithVin12.cs" />
+    <None Include="IRespondWithVin12.cs.old" />
     <Compile Include="Dto\Metric\Pair.cs" />
     <Compile Include="Dto\PriceModel.cs" />
     <Compile Include="Dto\RepairIndexModel.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="Dto\TotalSalesByAgeModel.cs" />
     <Compile Include="Dto\TotalSalesByGenderModel.cs" />
     <Compile Include="Dto\Valuation.cs" />
-    <Compile Include="Dto\Vin12.cs" />
+    <None Include="Dto\Vin12.cs.old" />
     <Compile Include="IResponseFromLightstone.cs" />
     <Compile Include="Dto\LightstoneResponse.cs" />
     <Compile Include="LightstoneResponseHandled.cs" />

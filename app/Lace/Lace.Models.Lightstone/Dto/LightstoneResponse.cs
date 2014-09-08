@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Lace.Models.Lightstone.Dto
+﻿namespace Lace.Models.Lightstone.Dto
 {
     public class LightstoneResponse : IResponseFromLightstone
     {
@@ -9,8 +7,7 @@ namespace Lace.Models.Lightstone.Dto
         }
 
         public LightstoneResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
-            string model, IRespondWithValuation vehicleValuation, IEnumerable<IRespondWithCarModel> carModels,
-            IEnumerable<IRespondWithVin12> vin12)
+            string model, IRespondWithValuation vehicleValuation)
         {
             CarId = carId;
             Year = year;
@@ -20,8 +17,8 @@ namespace Lace.Models.Lightstone.Dto
             CarFullname = carFullName;
             Model = model;
             VehicleValuation = vehicleValuation;
-            CarModels = carModels;
-            Vin12 = vin12;
+            //CarModels = carModels;
+            //Vin12 = vin12;
         }
 
         public int? CarId { get; private set; }
@@ -40,8 +37,8 @@ namespace Lace.Models.Lightstone.Dto
 
         public IRespondWithValuation VehicleValuation { get; private set; }
 
-        public IEnumerable<IRespondWithCarModel> CarModels { get; private set; }
+        //public IEnumerable<IRespondWithCarModel> CarModels { get; private set; }
 
-        public IEnumerable<IRespondWithVin12> Vin12 { get; private set; }
+        //public IEnumerable<IRespondWithVin12> Vin12 { get; private set; }
     }
 }

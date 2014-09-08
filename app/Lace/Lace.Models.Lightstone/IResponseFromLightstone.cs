@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Lace.Models.Lightstone
+﻿namespace Lace.Models.Lightstone
 {
     public interface IResponseFromLightstone
     {
@@ -20,7 +18,7 @@ namespace Lace.Models.Lightstone
 
         IRespondWithValuation VehicleValuation { get; }
 
-        IEnumerable<IRespondWithCarModel> CarModels { get; }
+     //   IEnumerable<IRespondWithCarModel> CarModels { get; }
 
       //  IEnumerable<IRespondWithVin12> Vin12 { get; }
     }
