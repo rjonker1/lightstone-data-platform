@@ -21,13 +21,15 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
            MetricResult = new List<AccidentDistributionModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<AccidentDistributionModel> Get()
         {
             foreach (var metric in Metrics)
             {
                 GetGauges((int) metric);
                 AddToMetrics();
             }
+
+            return this;
         }
 
         private void GetGauges(int metricId)

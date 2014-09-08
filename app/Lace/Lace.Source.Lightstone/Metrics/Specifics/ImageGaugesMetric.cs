@@ -32,7 +32,7 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             MetricResult = new List<ImageGaugeModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<ImageGaugeModel> Get()
         {
             foreach (var metric in Metrics)
             {
@@ -52,6 +52,8 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
                     quarterStat.FloatValue, GetGaugeName()));
 
             }
+
+            return this;
 
         }
 

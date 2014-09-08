@@ -93,6 +93,7 @@
     <Compile Include="Sources\when_requesting_data_from_audatex_source.cs" />
     <Compile Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs" />
     <Compile Include="Sources\when_requesting_data_from_ivid_source.cs" />
+    <Compile Include="Transform\when_transforming_lighstone_response.cs" />
     <Compile Include="Transform\when_transforming_rgt_vin_response.cs" />
     <Compile Include="Transform\when_transforming_audatex_response.cs" />
     <Compile Include="Transform\when_transforming_ivid_response.cs" />

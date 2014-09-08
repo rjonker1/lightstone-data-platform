@@ -28,11 +28,11 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             MetricResult = new List<EstimatedValueModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<EstimatedValueModel> Get()
         {
             _gauges = GetGauges();
 
-            if (!_gauges.Any()) return;
+            if (!_gauges.Any()) return this;
 
             var estimatedPrice = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.EstimatedPrice);
             var salePriceHigh = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.SalePriceHigh);
@@ -40,7 +40,7 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             var confidence = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.Confidence);
 
 
-            if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return;
+            if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return this;
 
             MetricResult.Add(new EstimatedValueModel(
                 estimatedPrice.MoneyValue.HasValue ? estimatedPrice.MoneyValue.Value.ToString("C") : "",
@@ -48,6 +48,8 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
                 salePriceHigh.MoneyValue.HasValue ? salePriceHigh.MoneyValue.Value.ToString("C") : "",
                 confidence.MoneyValue.HasValue ? confidence.MoneyValue.Value.ToString("C") : "",
                 GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00)));
+
+            return this;
         }
 
         private IList<Statistic> GetGauges()

@@ -25,13 +25,15 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             MetricResult = new List<AmortisedValueModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<AmortisedValueModel> Get()
         {
             foreach (var metric in Metrics)
             {
                 GetGauges((int) metric);
                 AddToMetrics();
             }
+
+            return this;
         }
 
         private void AddToMetrics()

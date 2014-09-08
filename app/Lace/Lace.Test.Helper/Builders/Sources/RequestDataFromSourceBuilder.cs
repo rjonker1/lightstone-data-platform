@@ -1,4 +1,5 @@
 ﻿using Lace.Source;
+using Lace.Source.Lightstone.SourceCalls;
 using Lace.Test.Helper.Mothers.Sources;
 
 namespace Lace.Test.Helper.Builders.Sources
@@ -31,5 +32,13 @@ namespace Lace.Test.Helper.Builders.Sources
             _requestDataFromSource = new RequestDataFromAudatexService();
             return _requestDataFromSource;
         }
+
+        public IRequestDataFromSource ForLightstone()
+        {
+            _requestDataFromSource = new RequestDataFromLightstoneSource();
+            return _requestDataFromSource;
+        }
+
+
     }
 }

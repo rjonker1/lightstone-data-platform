@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.Metrics
     {
         List<T> MetricResult { get; }
         IEnumerable<Statistic> Statistics { get; }
-        void Get();
+        IRetrieveATypeOfMetric<T> Get();
     }
 }

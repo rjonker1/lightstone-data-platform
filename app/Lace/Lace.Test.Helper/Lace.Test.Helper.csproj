@@ -109,6 +109,7 @@
     <Compile Include="Builders\Sources\Lightstone\BandsDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\CarDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\CarTypeDataBuilder.cs" />
+    <Compile Include="Builders\Sources\Lightstone\LighstoneVehicleInformationBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MakeDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MetricDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\MetricsBuilder.cs" />
@@ -132,12 +133,14 @@
     <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberResponse.cs" />
     <None Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs.old" />
     <Compile Include="Fakes\Lace\Lighstone\FakeBandsRepository.cs" />
+    <Compile Include="Fakes\Lace\Lighstone\FakeBaseRetrievalMetric.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeCarInfoRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeCarRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeCarTypeRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMakeRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMetricRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMunicipalityRepository.cs" />
+    <Compile Include="Fakes\Lace\Lighstone\FakeRetrieveCarInformationDetail.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeSaleRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeStatisticsRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeVin12CarInfoRepository.cs" />
@@ -146,6 +149,7 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
+    <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />

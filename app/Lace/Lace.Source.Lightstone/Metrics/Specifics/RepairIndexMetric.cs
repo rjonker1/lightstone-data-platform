@@ -26,13 +26,15 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         }
 
 
-        public void Get()
+        public IRetrieveATypeOfMetric<RepairIndexModel> Get()
         {
             foreach (var metric in Metrics)
             {
                 GetGauges((int) metric);
                 AddToMetrics();
             }
+
+            return this;
         }
 
         private void GetGauges(int metricId)

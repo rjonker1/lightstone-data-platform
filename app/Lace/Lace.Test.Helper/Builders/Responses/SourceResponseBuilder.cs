@@ -1,8 +1,12 @@
 ﻿
+using Lace.Models.Lightstone;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Ivid.IvidServiceReference;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
+using Lace.Source.Lightstone.Cars;
+using Lace.Source.Lightstone.Metrics;
 using Lace.Test.Helper.Fakes.Responses;
 
 namespace Lace.Test.Helper.Builders.Responses
@@ -42,6 +46,17 @@ namespace Lace.Test.Helper.Builders.Responses
         public TitleholderQueryResponse ForIvidTitleHolder()
         {
             return FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber();
+        }
+
+        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(ILaceRequestCarInformation request)
+        {
+
+            return FakeLighstoneRetrievalData.GetValuationFromMetrics(request);
+        }
+
+        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ILaceRequestCarInformation request)
+        {
+            return FakeLighstoneRetrievalData.GetCarInformation(request);
         }
     }
 }

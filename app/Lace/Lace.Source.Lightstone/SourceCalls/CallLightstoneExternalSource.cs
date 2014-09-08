@@ -35,17 +35,16 @@ namespace Lace.Source.Lightstone.SourceCalls
             try
             {
                 _lightstoneMetrics = new BaseRetrievalMetric(_request.CarInformation, new Valuation(),
-                    _lightstoneRepositories);
-                _lightstoneMetrics
+                    _lightstoneRepositories)
                     .SetupDataSources()
                     .GenerateData()
                     .BuildValuation();
 
-                _lightstoneCarInformation = new RetrieveCarInformationDetail(_request.CarInformation, _lightstoneRepositories);
-                _lightstoneCarInformation
-                    .SetupDataSources()
-                    .GenerateData()
-                    .BuildCarInformation();
+                _lightstoneCarInformation =
+                    new RetrieveCarInformationDetail(_request.CarInformation, _lightstoneRepositories)
+                        .SetupDataSources()
+                        .GenerateData()
+                        .BuildCarInformation();
 
                 TransformResponse(response);
             }

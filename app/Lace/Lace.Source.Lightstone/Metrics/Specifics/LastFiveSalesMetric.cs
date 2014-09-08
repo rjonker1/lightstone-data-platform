@@ -20,7 +20,7 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             MetricResult = new List<SaleModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<SaleModel> Get()
         {
             var result = _sales
                 .OrderByDescending(o => o.SaleDateTime)
@@ -31,6 +31,8 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
                             s.SalePrice.ToString("C"))).ToList();
 
             MetricResult.AddRange(result);
+
+            return this;
         }
 
         private string GetMuncipalityName(int? municipalityId)

@@ -29,13 +29,14 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             MetricResult = new List<TotalSalesByGenderModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<TotalSalesByGenderModel> Get()
         {
             foreach (var metric in Metrics)
             {
-                GetGauges((int)metric);
+                GetGauges((int) metric);
                 AddToMetrics();
             }
+            return this;
         }
 
         private void AddToMetrics()

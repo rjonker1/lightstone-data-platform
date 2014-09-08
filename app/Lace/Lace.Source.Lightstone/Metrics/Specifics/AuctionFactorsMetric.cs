@@ -25,13 +25,14 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             MetricResult = new List<AuctionFactorModel>();
         }
 
-        public void Get()
+        public IRetrieveATypeOfMetric<AuctionFactorModel> Get()
         {
             foreach (var metric in Metrics)
             {
                 GetGauges((int) metric);
                 AddToMetrics();
             }
+            return this;
         }
 
         private void AddToMetrics()
