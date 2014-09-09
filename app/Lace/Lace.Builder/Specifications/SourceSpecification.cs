@@ -13,19 +13,16 @@ namespace Lace.Builder.Specifications
 {
     public class SourceSpecification
     {
-
         private readonly Func<Action<ILaceRequest, ILaceEvent, ILaceResponse>>
             _defaultLicenseNumberRequestSpecification =
                 () =>
                     (request, @event, response) =>
                         new IvidSourceExecution(request,
+                            new LightstoneSourceExecution(request, 
                             new IvidTitleHolderSourceExecution(request,
                                 new RgtVinSourceExecution(request,
                                     new AudatexSourceExecution(request, null, null), null),
-                                null), null).CallSource(response, @event);
-
-        private readonly Func<Action<ILaceRequest, ILaceEvent, ILaceResponse>> _lightstoneRequestSpecification = ()
-            => (request, @event, response) => new LightstoneSourceExecution(request, null, null);
+                                null), null), null).CallSource(response, @event);
 
         public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> Specifications
         {

@@ -122,6 +122,7 @@
     <Compile Include="Fakes\Lace\Builder\FakeSourceSpecification.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeIvidTitleHolderSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeLightstoneSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeRgtVinSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeAudatexSourceExecution.cs" />
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidServiceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleIvidTitleHolderServiceCall.cs" />
+    <Compile Include="Fakes\Lace\Handlers\FakeHandleLighstoneSourceCall.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleRgtVinServiceCall.cs" />
     <Compile Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberResponse.cs" />
     <None Include="Fakes\Lace\LicensePlateNumber\FakeLicensePlateNumberSourceChain.cs.old" />
@@ -148,6 +150,7 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallLightstoneExternalSource.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />

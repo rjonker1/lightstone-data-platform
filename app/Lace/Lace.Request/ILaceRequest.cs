@@ -11,13 +11,11 @@ namespace Lace.Request
 
         ILaceRequestVehicleInformation Vehicle { get; }
 
-        ILaceRequestCarInformation CarInformation { get; }
-
         IProvideRequestAggregation RequestAggregation { get; }
 
         DateTime RequestDate { get; }
 
         IPackage Package { get; }
-      
+
     }
 }

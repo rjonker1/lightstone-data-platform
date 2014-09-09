@@ -11,5 +11,7 @@
         int? Year { get; }
         int MakeId { get; }
         bool IsVin12 { get; }
+
+        void SetCarModelYear(int? carId, string model, int? year);
     }
 }

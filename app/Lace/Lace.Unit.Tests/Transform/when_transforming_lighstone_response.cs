@@ -6,6 +6,7 @@ using Lace.Source.Lightstone.Metrics;
 using Lace.Source.Lightstone.Transform;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
+using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Transform
@@ -14,24 +15,23 @@ namespace Lace.Unit.Tests.Transform
     {
         private IResponseFromLightstone _response;
         private TransformLightstoneResponse _transform;
-        private readonly ILaceRequestCarInformation _request;
+        private readonly ILaceRequest _request;
+        private readonly ILaceRequestCarInformation _carInformationRequest;
         private readonly IRetrieveValuationFromMetrics _retrieveValuationFromMetrics;
         private readonly IRetrieveCarInformation _retrieveCarInformation;
-
-        private const string VinNumber = "SB1KV58E40F039277";
-
-
+        
         public when_transforming_lighstone_response()
         {
-            _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
-            _retrieveValuationFromMetrics = LighstoneVehicleInformationBuilder.ForValuationFromMetrics(_request);
+            _request = new LicensePlateNumberLightstoneOnlyRequest();
+            _carInformationRequest = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
+            _retrieveValuationFromMetrics =
+                LighstoneVehicleInformationBuilder.ForValuationFromMetrics(_carInformationRequest);
             _retrieveCarInformation = LighstoneVehicleInformationBuilder.ForCarInformation(_request);
         }
 
         public override void Observe()
         {
-            _transform = new TransformLightstoneResponse(_retrieveValuationFromMetrics, _retrieveCarInformation,
-                VinNumber);
+            _transform = new TransformLightstoneResponse(_retrieveValuationFromMetrics, _retrieveCarInformation);
             _transform.Transform();
             _response = _transform.Result;
         }
@@ -95,7 +95,7 @@ namespace Lace.Unit.Tests.Transform
         {
             _transform.Result.VehicleValuation.RepairIndex.Count().ShouldEqual(9);
         }
-        
+
         [Observation]
         public void lightstone_transformer_must_have_car_information()
         {

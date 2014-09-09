@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using System;
+using Lace.Request;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
@@ -75,6 +76,12 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
                 return false;
             }
 
+        }
+
+
+        public void SetCarModelYear(int? carId, string model, int? year)
+        {
+           throw new NotImplementedException();
         }
     }
 }

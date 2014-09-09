@@ -54,7 +54,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeLighstoneRetrievalData.GetValuationFromMetrics(request);
         }
 
-        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ILaceRequestCarInformation request)
+        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ILaceRequest request)
         {
             return FakeLighstoneRetrievalData.GetCarInformation(request);
         }

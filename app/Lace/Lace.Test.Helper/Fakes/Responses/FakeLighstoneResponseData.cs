@@ -10,16 +10,18 @@ namespace Lace.Test.Helper.Fakes.Responses
     {
         public static IRetrieveValuationFromMetrics GetValuationFromMetrics(ILaceRequestCarInformation request)
         {
-            return new FakeBaseRetrievalMetric(request, new Valuation()).SetupDataSources()
+            return new FakeBaseRetrievalMetric(request, new Valuation())
+                .SetupDataSources()
                 .GenerateData()
                 .BuildValuation();
         }
 
-        public static IRetrieveCarInformation GetCarInformation(ILaceRequestCarInformation request)
+        public static IRetrieveCarInformation GetCarInformation(ILaceRequest request)
         {
             return new FakeRetrieveCarInformationDetail(request).SetupDataSources()
                 .GenerateData()
-                .BuildCarInformation();
+                .BuildCarInformation()
+                .BuildCarInformationRequest();
         }
     }
 }

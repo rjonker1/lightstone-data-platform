@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Common.Logging;
 using Lace.Events;
 using Lace.Models.Lightstone;
@@ -34,17 +33,19 @@ namespace Lace.Source.Lightstone.SourceCalls
         {
             try
             {
-                _lightstoneMetrics = new BaseRetrievalMetric(_request.CarInformation, new Valuation(),
-                    _lightstoneRepositories)
-                    .SetupDataSources()
-                    .GenerateData()
-                    .BuildValuation();
-
                 _lightstoneCarInformation =
-                    new RetrieveCarInformationDetail(_request.CarInformation, _lightstoneRepositories)
+                    new RetrieveCarInformationDetail(_request, _lightstoneRepositories)
                         .SetupDataSources()
                         .GenerateData()
-                        .BuildCarInformation();
+                        .BuildCarInformation()
+                        .BuildCarInformationRequest();
+
+                _lightstoneMetrics =
+                    new BaseRetrievalMetric(_lightstoneCarInformation.CarInformationRequest, new Valuation(),
+                        _lightstoneRepositories)
+                        .SetupDataSources()
+                        .GenerateData()
+                        .BuildValuation();
 
                 TransformResponse(response);
             }
@@ -58,8 +59,7 @@ namespace Lace.Source.Lightstone.SourceCalls
 
         public void TransformResponse(ILaceResponse response)
         {
-            var transformer = new TransformLightstoneResponse(_lightstoneMetrics, _lightstoneCarInformation,
-                _request.CarInformation.Vin);
+            var transformer = new TransformLightstoneResponse(_lightstoneMetrics, _lightstoneCarInformation);
 
             if (transformer.Continue)
             {

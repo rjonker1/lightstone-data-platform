@@ -76,5 +76,11 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             }
 
         }
+
+
+        public void SetCarModelYear(int? carId, string model, int? year)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

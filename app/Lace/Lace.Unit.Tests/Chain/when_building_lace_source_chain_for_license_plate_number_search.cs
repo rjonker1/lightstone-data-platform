@@ -11,10 +11,11 @@ using Lace.Test.Helper.Fakes.Lace;
 using Lace.Test.Helper.Fakes.Lace.Builder;
 using Xunit.Extensions;
 
-namespace Lace.Acceptance.Tests.Lace.Chain
+namespace Lace.Unit.Tests.Chain
 {
-    public class when_inititializing_lace_source_chain_for_licensePlate_number_search : Specification
+    public class when_building_lace_source_chain_for_license_plate_number_search : Specification
     {
+
         private IBootstrap _initialize;
 
         private readonly ILaceRequest _request;
@@ -23,14 +24,14 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        public when_inititializing_lace_source_chain_for_licensePlate_number_search()
+        public when_building_lace_source_chain_for_license_plate_number_search()
         {
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            
+
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
-            _laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);
+            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
             _buildSourceChain = new FakeSourceChain(_request.Package.Action);
             _buildSourceChain.Build();
         }
@@ -41,9 +42,11 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.Execute();
         }
 
+
         [Observation]
-        public void lace_services_for_sliver_to_be_handled_loaded_correclty()
+        public void lace_source_in_chain_to_be_loaded_correclty()
         {
+
             _initialize.LaceResponses.Count.ShouldEqual(1);
             _initialize.LaceResponses[0].Response.ShouldNotBeNull();
 
@@ -63,5 +66,6 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.LaceResponses[0].Response.AudatexResponseHandled.Handled.ShouldBeTrue();
 
         }
+
     }
 }

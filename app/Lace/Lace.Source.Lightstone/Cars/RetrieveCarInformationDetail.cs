@@ -3,6 +3,7 @@ using Lace.Request;
 using Lace.Source.Lightstone.DataObjects;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository.Factory;
+using Lace.Source.Lightstone.RequestBuilder;
 
 namespace Lace.Source.Lightstone.Cars
 {
@@ -10,17 +11,18 @@ namespace Lace.Source.Lightstone.Cars
     {
         public bool IsSatisfied { get; private set; }
         public CarInfo CarInformation { get; private set; }
+        public ILaceRequestCarInformation CarInformationRequest { get; private set; }
 
         private IGetCarInfo _getCarInformation;
         private readonly ISetupRepositoryForModels _repositories;
-        private readonly ILaceRequestCarInformation _request;
+        private readonly ILaceRequest _request;
 
-        public RetrieveCarInformationDetail(ILaceRequestCarInformation request, ISetupRepositoryForModels repositories)
+        public RetrieveCarInformationDetail(ILaceRequest request, ISetupRepositoryForModels repositories)
         {
             _repositories = repositories;
             _request = request;
+            CarInformationRequest = new CarInformationRequest(_request.Vehicle.Vin);
         }
-
 
         public IRetrieveCarInformation SetupDataSources()
         {
@@ -39,9 +41,16 @@ namespace Lace.Source.Lightstone.Cars
 
         public IRetrieveCarInformation GenerateData()
         {
-            _getCarInformation.GetCarInfo(_request);
+            _getCarInformation.GetCarInfo(CarInformationRequest);
             return this;
         }
 
+        public IRetrieveCarInformation BuildCarInformationRequest()
+        {
+            if (CarInformation == null) return this;
+
+            CarInformationRequest.SetCarModelYear(CarInformation.CarId, CarInformation.CarModel, CarInformation.Year);
+            return this;
+        }
     }
 }

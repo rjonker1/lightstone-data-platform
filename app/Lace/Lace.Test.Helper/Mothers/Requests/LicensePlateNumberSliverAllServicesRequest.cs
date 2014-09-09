@@ -66,12 +66,12 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public ILaceRequestCarInformation CarInformation
-        {
-            get
-            {
-                return new RequestCarInformationForCarHavingId107483();
-            }
-        }
+        //public ILaceRequestCarInformation CarInformation
+        //{
+        //    get
+        //    {
+        //        return new RequestCarInformationForCarHavingId107483();
+        //    }
+        //}
     }
 }

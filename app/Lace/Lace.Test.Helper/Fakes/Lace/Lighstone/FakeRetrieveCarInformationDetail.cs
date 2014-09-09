@@ -3,6 +3,7 @@ using Lace.Request;
 using Lace.Source.Lightstone.Cars;
 using Lace.Source.Lightstone.DataObjects;
 using Lace.Source.Lightstone.Models;
+using Lace.Source.Lightstone.RequestBuilder;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
@@ -10,13 +11,15 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
     {
         public bool IsSatisfied { get; private set; }
         public CarInfo CarInformation { get; private set; }
+        public ILaceRequestCarInformation CarInformationRequest { get; private set; }
 
-        private ILaceRequestCarInformation _request;
+        private ILaceRequest _request;
         private IGetCarInfo _getCarInformation;
 
-        public FakeRetrieveCarInformationDetail(ILaceRequestCarInformation request)
+        public FakeRetrieveCarInformationDetail(ILaceRequest request)
         {
             _request = request;
+            CarInformationRequest = new CarInformationRequest(_request.Vehicle.Vin);
         }
 
         public IRetrieveCarInformation SetupDataSources()
@@ -36,7 +39,14 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IRetrieveCarInformation GenerateData()
         {
-            _getCarInformation.GetCarInfo(_request);
+            _getCarInformation.GetCarInfo(CarInformationRequest);
+            return this;
+        }
+
+
+        public IRetrieveCarInformation BuildCarInformationRequest()
+        {
+            CarInformationRequest.SetCarModelYear(CarInformation.CarId, CarInformation.CarModel, CarInformation.Year);
             return this;
         }
     }

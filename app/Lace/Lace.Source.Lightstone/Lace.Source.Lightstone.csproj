@@ -130,6 +130,7 @@
     <Compile Include="Repository\ForModel\MakeRepository.cs" />
     <Compile Include="Repository\Sql\SelectStatements.cs" />
     <Compile Include="Repository\ForModel\StatisticsRepository.cs" />
+    <Compile Include="RequestBuilder\CarInformationRequest.cs" />
     <Compile Include="SourceCalls\CallLightstoneExternalSource.cs" />
     <Compile Include="SourceCalls\HandleLightstoneSourceCall.cs" />
     <Compile Include="SourceCalls\RequestDataFromLightstoneSource.cs" />

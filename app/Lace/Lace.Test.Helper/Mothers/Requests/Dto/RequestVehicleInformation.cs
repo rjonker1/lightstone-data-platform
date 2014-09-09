@@ -46,7 +46,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 
         public string Vin
         {
-            get { return null; }
+            get { return "SB1KV58E40F039277"; }
         }
     }
 }
