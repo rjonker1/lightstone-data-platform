@@ -18,7 +18,8 @@ namespace Lace.Test.Helper.Fakes.Responses
 
         public static IRetrieveCarInformation GetCarInformation(ILaceRequest request)
         {
-            return new FakeRetrieveCarInformationDetail(request).SetupDataSources()
+            return new RetrieveCarInformationDetail(request, new FakeRepositoryFactory())
+                .SetupDataSources()
                 .GenerateData()
                 .BuildCarInformation()
                 .BuildCarInformationRequest();

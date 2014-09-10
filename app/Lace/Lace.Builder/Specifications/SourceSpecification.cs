@@ -18,11 +18,11 @@ namespace Lace.Builder.Specifications
                 () =>
                     (request, @event, response) =>
                         new IvidSourceExecution(request,
-                            new LightstoneSourceExecution(request, 
-                            new IvidTitleHolderSourceExecution(request,
-                                new RgtVinSourceExecution(request,
-                                    new AudatexSourceExecution(request, null, null), null),
-                                null), null), null).CallSource(response, @event);
+                            new LightstoneSourceExecution(request,
+                                new IvidTitleHolderSourceExecution(request,
+                                    new RgtVinSourceExecution(request,
+                                        new AudatexSourceExecution(request, null, null), null),
+                                    null), null), null).CallSource(response, @event);
 
         public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> Specifications
         {

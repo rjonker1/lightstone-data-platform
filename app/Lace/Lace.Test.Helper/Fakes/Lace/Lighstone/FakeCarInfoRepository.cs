@@ -24,7 +24,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CarInfo> FindByMakeAndMetricTypes(int makeId, Source.Lightstone.Metrics.MetricTypes[] metricTypes)
+        public IEnumerable<CarInfo> FindByMakeAndMetricTypes(int makeId,
+            Source.Lightstone.Metrics.MetricTypes[] metricTypes)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +37,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IEnumerable<CarInfo> FindByVin(string vinNumber)
         {
-            return new List<CarInfo>();
+            return
+                Mothers.Sources.Lightstone.CarInfoData.CarInformationWithVin()
+                    .Where(w => w.Key == vinNumber)
+                    .Select(
+                        s =>
+                            new CarInfo(s.Value.CarId, s.Value.Year, s.Value.ImageUrl, s.Value.Quarter,
+                                s.Value.CarFullname, s.Value.CarModel));
         }
     }
 }

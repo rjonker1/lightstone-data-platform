@@ -52,7 +52,7 @@ namespace Lace.Source.Lightstone.SourceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Lightstone Source {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessage(Source);
                 LightstoneResponseFailed(response);
             }
         }

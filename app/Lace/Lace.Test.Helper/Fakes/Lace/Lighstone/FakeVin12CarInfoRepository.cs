@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Lace.Source.Lightstone.Models;
 using Lace.Source.Lightstone.Repository;
 
@@ -34,7 +35,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IEnumerable<CarInfo> FindByVin(string vinNumber)
         {
-            throw new NotImplementedException();
+            return
+                Mothers.Sources.Lightstone.CarInfoData.CarInformationFromVinShort()
+                    .Where(w => w.Key == vinNumber)
+                    .Select(
+                        s =>
+                            new CarInfo(s.Value.CarId, s.Value.Year, s.Value.ImageUrl, s.Value.Quarter,
+                                s.Value.CarFullname, s.Value.CarModel));
         }
     }
 }

@@ -6,7 +6,7 @@ using Lace.Source;
 using Lace.Source.Lightstone.SourceCalls;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
-using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
@@ -27,7 +27,7 @@ namespace Lace.Unit.Tests.Sources
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponse();
-            _callTheSource = new FakeCallLightstoneExternalSource(_request);
+            _callTheSource = new CallLightstoneExternalSource(_request, new FakeRepositoryFactory());
             _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
         }
 

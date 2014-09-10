@@ -72,7 +72,7 @@ namespace Lace.Acceptance.Tests.Events
 
             _laceEvent.PublishSourceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
 
-            _laceEvent.PublishFailedSourceCallMessaage(LaceEventSource.Ivid);
+            _laceEvent.PublishFailedSourceCallMessage(LaceEventSource.Ivid);
 
             _laceEvent.PublishNoResponseFromSourceMessage(LaceEventSource.Ivid);
 

@@ -5,8 +5,9 @@ using Lace.Request;
 using Lace.Response;
 using Lace.Source;
 using Lace.Source.Enums;
+using Lace.Source.Lightstone.SourceCalls;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
-using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Lace.Test.Helper.Fakes.Lace.Lighstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
@@ -33,7 +34,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
-                    new FakeCallLightstoneExternalSource(_request));
+                    new CallLightstoneExternalSource(_request, new FakeRepositoryFactory()));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.LightstoneResponse == null)

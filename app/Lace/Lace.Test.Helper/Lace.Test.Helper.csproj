@@ -142,7 +142,7 @@
     <Compile Include="Fakes\Lace\Lighstone\FakeMakeRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMetricRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeMunicipalityRepository.cs" />
-    <Compile Include="Fakes\Lace\Lighstone\FakeRetrieveCarInformationDetail.cs" />
+    <Compile Include="Fakes\Lace\Lighstone\FakeRepositoryFactory.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeSaleRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeStatisticsRepository.cs" />
     <Compile Include="Fakes\Lace\Lighstone\FakeVin12CarInfoRepository.cs" />
@@ -150,7 +150,6 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
-    <Compile Include="Fakes\Lace\SourceCalls\FakeCallLightstoneExternalSource.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />

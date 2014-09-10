@@ -79,7 +79,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Title Holder Web Service {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessage(Source);
                 IvidTitleHolderResponseFailed(response);
             }
         }
