@@ -33,19 +33,8 @@ namespace Lace.Source.Lightstone.SourceCalls
         {
             try
             {
-                _lightstoneCarInformation =
-                    new RetrieveCarInformationDetail(_request, _lightstoneRepositories)
-                        .SetupDataSources()
-                        .GenerateData()
-                        .BuildCarInformation()
-                        .BuildCarInformationRequest();
-
-                _lightstoneMetrics =
-                    new BaseRetrievalMetric(_lightstoneCarInformation.CarInformationRequest, new Valuation(),
-                        _lightstoneRepositories)
-                        .SetupDataSources()
-                        .GenerateData()
-                        .BuildValuation();
+                GetCarInformation();
+                GetMetrics();
 
                 TransformResponse(response);
             }
@@ -76,6 +65,26 @@ namespace Lace.Source.Lightstone.SourceCalls
             response.LightstoneResponse = null;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();
             response.LightstoneResponseHandled.HasBeenHandled();
+        }
+
+        private void GetCarInformation()
+        {
+            _lightstoneCarInformation =
+                new RetrieveCarInformationDetail(_request, _lightstoneRepositories)
+                    .SetupDataSources()
+                    .GenerateData()
+                    .BuildCarInformation()
+                    .BuildCarInformationRequest();
+        }
+
+        private void GetMetrics()
+        {
+            _lightstoneMetrics =
+                new BaseRetrievalMetric(_lightstoneCarInformation.CarInformationRequest, new Valuation(),
+                    _lightstoneRepositories)
+                    .SetupDataSources()
+                    .GenerateData()
+                    .BuildValuation();
         }
 
     }
