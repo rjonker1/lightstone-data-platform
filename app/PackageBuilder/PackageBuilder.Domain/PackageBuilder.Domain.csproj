@@ -64,7 +64,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="Handlers\DataProviderHandler.cs" />
+    <Compile Include="Handlers\DataProviderCommandHandler.cs" />
     <Compile Include="Commands\IHandleCommand.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Events\DataProviderCreated.cs" />
