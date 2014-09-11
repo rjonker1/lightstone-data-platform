@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Repositories;
 
 namespace PackageBuilder.Domain.Handlers
 {
-    public class DataProviderHandler : BaseCommandHandler<CreateDataProviderCommand>
+    public class DataProviderCommandHandler : BaseCommandHandler<CreateDataProviderCommand>
     {
         private readonly IRepository<DataProvider> _repository;
 
