@@ -48,10 +48,10 @@ namespace Lace.Test.Helper.Mothers.Packages
     public class DataFieldBuilder
     {
         private string _name;
-        private IDataSource _source;
+        private IDataProvider _dataProvider;
         public IDataField Build()
         {
-            return new DataField(_name) { DataSource = _source, Type = typeof(string).ToString() };
+            return new DataField(_name) { DataProvider = _dataProvider };
         }
 
         public DataFieldBuilder With(string name)
@@ -60,9 +60,9 @@ namespace Lace.Test.Helper.Mothers.Packages
             return this;
         }
 
-        public DataFieldBuilder With(IDataSource source)
+        public DataFieldBuilder With(IDataProvider dataProvider)
         {
-            _source = source;
+            _dataProvider = dataProvider;
             return this;
         }
     }
@@ -103,9 +103,9 @@ namespace Lace.Test.Helper.Mothers.Packages
     {
         private Guid _id;
         private string _name;
-        public IDataSource Build()
+        public IDataProvider Build()
         {
-            return new DataSource(_name) { Id = _id };
+            return new DataProvider(_id, _name);
         }
 
         public DataSourceBuilder With(Guid id)
@@ -123,7 +123,7 @@ namespace Lace.Test.Helper.Mothers.Packages
 
     public class DataSourceMother
     {
-        public static IDataSource IvidDataSource
+        public static IDataProvider IvidDataSource
         {
             get
             {
@@ -131,7 +131,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             }
         }
 
-        public static IDataSource IvidTitleHolderDataSource
+        public static IDataProvider IvidTitleHolderDataSource
         {
             get
             {
@@ -139,7 +139,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             }
         }
 
-        public static IDataSource RgtVinSource
+        public static IDataProvider RgtVinSource
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             }
         }
 
-        public static IDataSource AudatexSource
+        public static IDataProvider AudatexSource
         {
             get
             {
@@ -155,7 +155,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             }
         }
 
-        public static IDataSource LightstoneDataSource
+        public static IDataProvider LightstoneDataSource
         {
             get
             {
