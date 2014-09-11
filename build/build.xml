@@ -290,8 +290,6 @@
         <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.dll" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.pdb" to="lib\net45" />
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45"/>
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45"/>
       </includes>
@@ -366,6 +364,8 @@
         <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.dll" to="lib\net45" />
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.pdb" to="lib\net45" />
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45" />
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45" />
         <include pattern="PackageBuilder.Domain.dll" to="lib\net45" />
