@@ -30,15 +30,52 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Dto\RgtVinResponse.cs" />
+    <Compile Include="Dto\AccidentDistributionModel.cs" />
+    <Compile Include="Dto\AmortisationFactorModel.cs" />
+    <Compile Include="Dto\AmortisedValueModel.cs" />
+    <Compile Include="Dto\AreaFactorModel.cs" />
+    <Compile Include="Dto\AuctionFactorModel.cs" />
+    <None Include="Dto\CarModel.cs.old" />
+    <Compile Include="Dto\ConfidenceModel.cs" />
+    <Compile Include="Dto\EstimatedValueModel.cs" />
+    <Compile Include="Dto\FrequencyModel.cs" />
+    <Compile Include="Dto\ImageGaugeModel.cs" />
+    <Compile Include="IAddValuationItem.cs" />
+    <Compile Include="IRespondWithAccidentDistributionModel.cs" />
+    <Compile Include="IRespondWithAmortisationFactorModel.cs" />
+    <Compile Include="IRespondWithAmortisedValueModel.cs" />
+    <Compile Include="IRespondWithAreaFactorModel.cs" />
+    <Compile Include="IRespondWithAuctionFactorModel.cs" />
+    <None Include="IRespondWithCarModel.cs.old" />
+    <Compile Include="IRespondWithConfidenceModel.cs" />
+    <Compile Include="IRespondWithEstimatedValueModel.cs" />
+    <Compile Include="IRespondWithFrequencyModel.cs" />
+    <Compile Include="IRespondWithImageGaugeModel.cs" />
+    <Compile Include="IRespondWithPriceModel.cs" />
+    <Compile Include="IRespondWithRepairIndexModel.cs" />
+    <Compile Include="IRespondWithSaleModel.cs" />
+    <Compile Include="IRespondWithTotalSalesByAgeModel.cs" />
+    <Compile Include="IRespondWithTotalSalesByGenderModel.cs" />
+    <Compile Include="IRespondWithValuation.cs" />
+    <None Include="IRespondWithVin12.cs.old" />
+    <Compile Include="Dto\Metric\Pair.cs" />
+    <Compile Include="Dto\PriceModel.cs" />
+    <Compile Include="Dto\RepairIndexModel.cs" />
+    <Compile Include="Dto\SaleModel.cs" />
+    <Compile Include="Dto\TotalSalesByAgeModel.cs" />
+    <Compile Include="Dto\TotalSalesByGenderModel.cs" />
+    <Compile Include="Dto\Valuation.cs" />
+    <None Include="Dto\Vin12.cs.old" />
     <Compile Include="IResponseFromLightstone.cs" />
-    <Compile Include="LightsoneResponseHandled.cs" />
+    <Compile Include="Dto\LightstoneResponse.cs" />
+    <Compile Include="LightstoneResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">

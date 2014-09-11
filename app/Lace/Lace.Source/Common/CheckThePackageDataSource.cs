@@ -23,7 +23,7 @@ namespace Lace.Source.Common
 
             foreach (var dataSet in package.DataSets)
             {
-                if (dataSet.DataFields.FirstOrDefault(w => w.DataSource.Id == serviceId) != null) return true;
+                if (dataSet.DataFields.FirstOrDefault(w => w.DataProvider.Id == serviceId) != null) return true;
             }
 
             return false;

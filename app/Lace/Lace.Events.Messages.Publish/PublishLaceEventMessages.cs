@@ -77,7 +77,7 @@ namespace Lace.Events.Messages.Publish
             PublishMessage(msg);
         }
 
-        public void PublishFailedSourceCallMessaage(LaceEventSource source)
+        public void PublishFailedSourceCallMessage(LaceEventSource source)
         {
             var msg = new LaceExternalSourceFailedEventMessage(_aggerateId, source,
                 PublishableLaceMessages.ExternalSourceCallFailed, 0);

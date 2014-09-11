@@ -1,6 +1,7 @@
 ﻿using DataPlatform.Shared.Entities;
-using Lace.Test.Helper.Mothers.Packages.Dto;
-using PackageBuilder.TestHelper.Mothers;
+using Lace.Test.Helper.Mothers.Packages;
+using PackageBuilder.Domain.Entities;
+
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -8,26 +9,21 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
-                                new DataField {Name = "Vin", DataSource = new VinFieldSource()},
-                                new DataField {Name = "BankName", DataSource = new BankNameFieldSource()},
-                                new DataField {Name = "AccountNumber", DataSource = new AccountNumberFieldSource()},
-                                new DataField {Name = "AccountOpenDate", DataSource = new AccountOpenDateFieldSource()},
-                                new DataField
-                                {
-                                    Name = " AccountClosedDate",
-                                    DataSource = new AccountClosedDateFieldSource()
-                                }
+
+                                new DataFieldBuilder().With("Vin").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
+                                new DataFieldBuilder().With("BankName").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
+                                new DataFieldBuilder().With("AccountNumber").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
+                                new DataFieldBuilder().With("AccountOpenDate").With(DataSourceMother.IvidTitleHolderDataSource).Build(),
+                                new DataFieldBuilder().With("AccountClosedDate").With(DataSourceMother.IvidTitleHolderDataSource).Build()
                             }
                         }
                     },

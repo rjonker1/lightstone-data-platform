@@ -12,7 +12,7 @@ namespace Lace.Events
 
         void PublishEndSourceCallMessage(LaceEventSource source);
 
-        void PublishFailedSourceCallMessaage(LaceEventSource source);
+        void PublishFailedSourceCallMessage(LaceEventSource source);
 
         void PublishNoResponseFromSourceMessage(LaceEventSource source);
 

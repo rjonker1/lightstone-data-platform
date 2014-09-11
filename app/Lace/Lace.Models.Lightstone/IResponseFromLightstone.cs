@@ -16,5 +16,10 @@
 
         string Model { get; }
 
+        IRespondWithValuation VehicleValuation { get; }
+
+     //   IEnumerable<IRespondWithCarModel> CarModels { get; }
+
+      //  IEnumerable<IRespondWithVin12> Vin12 { get; }
     }
 }

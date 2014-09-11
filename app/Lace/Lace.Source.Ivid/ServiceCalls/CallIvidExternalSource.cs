@@ -74,7 +74,7 @@ namespace Lace.Source.Ivid.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessage(Source);
                 IvidResponseFailed(response);
             }
         }

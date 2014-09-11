@@ -1,6 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
-using Lace.Test.Helper.Mothers.Packages.Dto;
-using PackageBuilder.TestHelper.Mothers;
+using Lace.Test.Helper.Mothers.Packages;
+using PackageBuilder.Domain.Entities;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -8,22 +8,26 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
-                                new DataField {Name = "Registration", DataSource = new RegistrationFieldSource()},
-                                new DataField {Name = "Vin", DataSource = new VinFieldSource()},
-                                new DataField {Name = "Engine", DataSource = new EngineFieldSource()},
-                                new DataField {Name = "MakeDescription", DataSource = new MakeDescriptionFiledSource()}
+
+                                new DataFieldBuilder().With("Registration")
+                                    .With(DataSourceMother.IvidDataSource)
+                                    .Build(),
+                                new DataFieldBuilder().With("Vin").With(DataSourceMother.IvidDataSource).Build(),
+                                new DataFieldBuilder().With("Engine").With(DataSourceMother.IvidDataSource).Build(),
+                                new DataFieldBuilder().With("MakeDescription")
+                                    .With(DataSourceMother.IvidDataSource)
+                                    .Build(),
+
+
                             }
                         }
                     },
@@ -31,5 +35,4 @@ namespace Lace.Test.Helper.Builders.Requests
             };
         }
     }
-    
 }

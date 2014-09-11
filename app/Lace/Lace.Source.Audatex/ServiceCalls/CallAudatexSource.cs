@@ -64,7 +64,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Audatex Source {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessage(Source);
                 AudatexResponseFailed(response);
             }
         }

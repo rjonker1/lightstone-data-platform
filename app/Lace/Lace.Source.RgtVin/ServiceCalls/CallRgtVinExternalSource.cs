@@ -64,7 +64,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Vin Web Service {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessaage(Source);
+                laceEvent.PublishFailedSourceCallMessage(Source);
                 RgtVinResponseFailed(response);
             }
         }

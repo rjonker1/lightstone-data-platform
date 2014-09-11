@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Net;
 using System.ServiceModel.Channels;
-using System.Text;
+using Lace.Source.Authentication;
 using Lace.Source.Configuration;
 using Lace.Source.Ivid.IvidServiceReference;
 
@@ -9,7 +8,6 @@ namespace Lace.Source.Ivid.ServiceConfig
 {
     public class ConfigureIvidSource
     {
-       
         public HpiServiceClient IvidServiceProxy { get; private set; }
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
 
@@ -26,11 +24,9 @@ namespace Lace.Source.Ivid.ServiceConfig
 
         public void ConfigureIvidWebServiceRequestMessageProperty()
         {
-            IvidRequestMessageProperty = new HttpRequestMessageProperty();
-            IvidRequestMessageProperty
-                .Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}",
-                    Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", Credentials.IvidServiceUsername(), Credentials.IvidServiceUserPassword()))));
-
+            IvidRequestMessageProperty =
+                AuthenticationHeaders.CreateBasicHttpRequestMessageProperty(Credentials.IvidServiceUsername(),
+                    Credentials.IvidServiceUserPassword());
         }
 
         public void CloseWebService()
@@ -39,7 +35,5 @@ namespace Lace.Source.Ivid.ServiceConfig
 
             IvidServiceProxy.Close();
         }
-
-
     }
 }

@@ -44,12 +44,14 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         [Observation]
         public void lace_services_for_sliver_to_be_handled_loaded_correclty()
         {
-
             _initialize.LaceResponses.Count.ShouldEqual(1);
             _initialize.LaceResponses[0].Response.ShouldNotBeNull();
 
             _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
+
+            _initialize.LaceResponses[0].Response.LightstoneResponse.ShouldNotBeNull();
+            _initialize.LaceResponses[0].Response.LightstoneResponseHandled.Handled.ShouldBeTrue();
 
             _initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();

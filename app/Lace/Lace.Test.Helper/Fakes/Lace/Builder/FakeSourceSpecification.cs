@@ -14,10 +14,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                 () =>
                     (request, @event, response) =>
                         new FakeIvidSourceExecution(request,
-                            new FakeIvidTitleHolderSourceExecution(request,
-                                new FakeRgtVinSourceExecution(request,
-                                    new FakeAudatexSourceExecution(request, null, null), null), 
-                                null), null).CallSource(response, @event);
+                            new FakeLightstoneSourceExecution(request,
+                                new FakeIvidTitleHolderSourceExecution(request,
+                                    new FakeRgtVinSourceExecution(request,
+                                        new FakeAudatexSourceExecution(request, null, null), null),
+                                    null), null), null).CallSource(response, @event);
 
 
         public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>> Specifications

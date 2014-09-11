@@ -16,6 +16,6 @@ namespace Lace.Request
         DateTime RequestDate { get; }
 
         IPackage Package { get; }
-      
+
     }
 }

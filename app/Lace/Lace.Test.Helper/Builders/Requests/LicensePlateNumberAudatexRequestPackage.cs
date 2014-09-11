@@ -1,6 +1,7 @@
 ﻿using DataPlatform.Shared.Entities;
-using Lace.Test.Helper.Mothers.Packages.Dto;
-using PackageBuilder.TestHelper.Mothers;
+using Lace.Test.Helper.Mothers.Packages;
+using PackageBuilder.Domain.Entities;
+
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -8,21 +9,24 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return new Package
+            return new Package("License plate lookup package")
             {
-                Name = "License plate lookup package",
                 DataSets =
                     new[]
                     {
-                        new DataSet
+                        new DataSet("License plate lookup DataSet")
                         {
-                            Name = "License plate lookup DataSet",
                             DataFields = new[]
                             {
-                                new DataField {Name = "Registration", DataSource = new RegistrationFieldSource()},
-                                new DataField {Name = "Vin", DataSource = new VinFieldSource()},
-                                new DataField {Name = "Engine", DataSource = new EngineFieldSource()},
-                                new DataField {Name = "AccidentClaim", DataSource = new AccidentClaimSource()}
+                                new DataFieldBuilder().With("Registration").With(DataSourceMother.AudatexSource).Build(),
+                                new DataFieldBuilder().With("Vin").With(DataSourceMother.AudatexSource).Build(),
+                                new DataFieldBuilder().With("Engine").With(DataSourceMother.AudatexSource).Build(),
+                                new DataFieldBuilder().With("AccidentClaim").With(DataSourceMother.AudatexSource).Build()
+
+                                //new DataField("Registration") {DataSource = new RegistrationFieldSource(), Type = typeof(string).ToString()},
+                                //new DataField("Vin") {DataSource = new VinFieldSource(), Type = typeof(string).ToString()},
+                                //new DataField("Engine") {DataSource = new EngineFieldSource(), Type = typeof(string).ToString()},
+                                //new DataField("AccidentClaim") {DataSource = new AccidentClaimSource(), Type = typeof(string).ToString()}
                             }
                         }
                     },
