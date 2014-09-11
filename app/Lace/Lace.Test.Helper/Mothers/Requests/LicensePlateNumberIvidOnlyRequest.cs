@@ -11,7 +11,10 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IPackage Package
         {
-            get { return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage(); }
+            get
+            {
+                return LicensePlateNumberIvidSourcePackage.LicenseNumberPackage();
+            }
         }
 
         public ILaceRequestUserInformation User

@@ -127,7 +127,9 @@ namespace Lace.Test.Helper.Mothers.Packages
         {
             get
             {
-                return new DataSourceBuilder().With("Ivid").With(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A")).Build();
+                //return new DataSourceBuilder().With("Ivid").With(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A")).Build();
+
+                return new DataProvider(new Guid("442FA7F8-DEE8-4A85-AC9A-B5DDC7D1209A"), "Ivid");
             }
         }
 
