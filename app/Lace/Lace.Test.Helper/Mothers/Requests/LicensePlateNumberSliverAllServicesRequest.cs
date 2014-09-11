@@ -3,7 +3,6 @@ using Lace.Request;
 using System;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using PackageBuilder.Domain.Entities;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
@@ -12,11 +11,10 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IPackage Package
         {
-            //get
-            //{
-            //    return LicensePlateNumberAllRequestPackage.LicenseNumberPackage();
-            //}
-            get { return new Package(""); }
+            get
+            {
+                return LicensePlateNumberAllRequestPackage.LicenseNumberPackage();
+            }
         }
 
         public ILaceRequestUserInformation User
