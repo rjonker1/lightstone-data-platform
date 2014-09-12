@@ -32,7 +32,7 @@ namespace Lace.Acceptance.Tests.Requests
 
 
         [Observation]
-        public void lace_requests_for_sliver_to_be_loaded_correclty_for_all_sources()
+        public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
 
 

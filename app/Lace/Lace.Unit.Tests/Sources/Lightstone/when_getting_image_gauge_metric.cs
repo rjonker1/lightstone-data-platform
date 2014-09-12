@@ -63,7 +63,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             kwGauge.ShouldNotBeNull();
 
             kwGauge.MaxValue.ShouldEqual(155.0);
-            kwGauge.MinValue.ShouldEqual(0.0);
+            kwGauge.MinValue.ShouldEqual(54.0);
             kwGauge.Quarter.ShouldEqual(4.0);
             kwGauge.Value.ShouldEqual(91.0);
         }
@@ -86,7 +86,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
             var c02Gauge = _metric.MetricResult.FirstOrDefault(w => w.GaugeName == "CO2");
             c02Gauge.ShouldNotBeNull();
 
-            c02Gauge.MaxValue.ShouldEqual(124.0);
+            c02Gauge.MaxValue.ShouldEqual(117.0);
             c02Gauge.MinValue.ShouldEqual(194.0);
             c02Gauge.Quarter.ShouldEqual(2.0);
             c02Gauge.Value.ShouldEqual(166.0);

@@ -42,19 +42,19 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         [Observation]
         public void lightstone_estimated_value_metric_estimated_high_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().EstimatedHigh.ShouldEqual("R 109 000,00");
+            _metric.MetricResult.FirstOrDefault().EstimatedHigh.ShouldEqual("R 98 700,00");
         }
 
         [Observation]
         public void lightstone_estimated_value_metric_estimated_low_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().EstimatedLow.ShouldEqual("R 90 900,00");
+            _metric.MetricResult.FirstOrDefault().EstimatedLow.ShouldEqual("R 80 600,00");
         }
 
         [Observation]
         public void lightstone_estimated_value_metric_estimated_value_should_be_valid()
         {
-            _metric.MetricResult.FirstOrDefault().EstimatedValue.ShouldEqual("R 99 500,00");
+            _metric.MetricResult.FirstOrDefault().EstimatedValue.ShouldEqual("R 89 200,00");
         }
     }
 }

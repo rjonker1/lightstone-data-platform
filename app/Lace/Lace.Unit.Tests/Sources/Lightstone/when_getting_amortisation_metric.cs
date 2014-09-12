@@ -40,7 +40,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var zeroGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "0");
             zeroGauge.ShouldNotBeNull();
-            zeroGauge.Value.ShouldEqual(99500);
+            zeroGauge.Value.ShouldEqual(89200);
         }
 
         [Observation]
@@ -48,7 +48,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var oneGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "1");
             oneGauge.ShouldNotBeNull();
-            oneGauge.Value.ShouldEqual(87400);
+            oneGauge.Value.ShouldEqual(83400);
         }
 
         [Observation]
@@ -56,7 +56,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var twoGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "2");
             twoGauge.ShouldNotBeNull();
-            twoGauge.Value.ShouldEqual(83100);
+            twoGauge.Value.ShouldEqual(77100);
         }
 
         [Observation]
@@ -64,17 +64,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             var threeGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "3");
             threeGauge.ShouldNotBeNull();
-            threeGauge.Value.ShouldEqual(78900);
+            threeGauge.Value.ShouldEqual(71700);
         }
-
-        [Observation]
-        public void lightstone_amortised_gauge_year_4_should_be_valid()
-        {
-            var fourGauge = _metric.MetricResult.SingleOrDefault(w => w.Year == "4");
-            fourGauge.ShouldNotBeNull();
-            fourGauge.Value.ShouldEqual(75000);
-        }
-
-
     }
 }

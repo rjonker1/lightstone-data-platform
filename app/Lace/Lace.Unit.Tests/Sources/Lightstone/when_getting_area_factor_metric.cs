@@ -32,7 +32,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         [Observation]
         public void lightstone_area_factor_metric_result_should_have_valid_number_of_models()
         {
-            _metric.MetricResult.Count.ShouldEqual(113);
+            _metric.MetricResult.Count.ShouldEqual(104);
         }
     }
 }
