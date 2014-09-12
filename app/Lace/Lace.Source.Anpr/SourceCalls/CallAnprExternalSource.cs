@@ -10,7 +10,7 @@ namespace Lace.Source.Anpr.SourceCalls
     public class CallAnprExternalSource : ICallTheSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-       // private const LaceEventSource Source = LaceEventSource.Anpr;
+        private const LaceEventSource Source = LaceEventSource.Anpr;
 
         private readonly ILaceRequest _request;
 
