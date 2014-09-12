@@ -9,7 +9,8 @@
         Rgt,
         Lightstone,
         EntryPoint,
-        Initialization
+        Initialization,
+        Anpr
     }
 
 }
