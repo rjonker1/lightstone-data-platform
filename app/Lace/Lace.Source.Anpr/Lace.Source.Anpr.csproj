@@ -51,6 +51,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AnprSourceExecution.cs" />
+    <Compile Include="DataObjects\CertificateDefinition.cs" />
     <Compile Include="IImpersonateACertificateUser.cs" />
     <Compile Include="Certificates\Impersonation.cs" />
     <Compile Include="SourceCalls\CallAnprExternalSource.cs" />

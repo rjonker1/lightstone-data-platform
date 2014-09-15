@@ -31,7 +31,6 @@ namespace Lace.Response
 
 
         public IResponseFromAnpr AnprResponse { get; set; }
-
         public IResponseHandled AnprResponseHandled { get; set; }
 
     }
