@@ -44,6 +44,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ILaceRequest.cs" />
+    <Compile Include="ILaceRequestAnprInformation.cs" />
     <Compile Include="ILaceRequestCarInformation.cs" />
     <Compile Include="ILaceRequestContext.cs" />
     <Compile Include="ILaceRequestUserInformation.cs" />

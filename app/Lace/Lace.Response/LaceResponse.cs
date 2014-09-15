@@ -1,4 +1,5 @@
 ﻿using Lace.Models;
+using Lace.Models.Anpr;
 using Lace.Models.Audatex;
 using Lace.Models.Ivid;
 using Lace.Models.IvidTitleHolder;
@@ -27,5 +28,11 @@ namespace Lace.Response
 
         public IResponseFromLightstone LightstoneResponse { get; set; }
         public IResponseHandled LightstoneResponseHandled { get; set; }
+
+
+        public IResponseFromAnpr AnprResponse { get; set; }
+
+        public IResponseHandled AnprResponseHandled { get; set; }
+
     }
 }

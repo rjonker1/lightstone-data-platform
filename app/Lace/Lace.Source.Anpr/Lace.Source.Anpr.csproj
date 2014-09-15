@@ -51,12 +51,22 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AnprSourceExecution.cs" />
+    <Compile Include="IImpersonateACertificateUser.cs" />
+    <Compile Include="Certificates\Impersonation.cs" />
     <Compile Include="SourceCalls\CallAnprExternalSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models.Anpr\Lace.Models.Anpr.csproj">
+      <Project>{bc309861-d4c4-4137-8d95-54d2233f9cec}</Project>
+      <Name>Lace.Models.Anpr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
@@ -74,6 +84,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
