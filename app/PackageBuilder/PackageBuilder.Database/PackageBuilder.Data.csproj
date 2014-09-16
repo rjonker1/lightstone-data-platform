@@ -69,10 +69,17 @@
   <ItemGroup>
     <Compile Include="NHibernate\NHibernateBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
+      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
+      <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

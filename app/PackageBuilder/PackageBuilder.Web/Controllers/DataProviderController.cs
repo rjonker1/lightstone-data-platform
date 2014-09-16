@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using Lace.Models.Ivid.Dto;
+using PackageBuilder.Common.Helpers.Extensions;
 using PackageBuilder.Domain.Commands;
 
 namespace PackageBuilder.Web.Controllers
@@ -15,8 +18,12 @@ namespace PackageBuilder.Web.Controllers
 
         public ActionResult Index()
         {
-            _commandHandler.Handle(new CreateDataProviderCommand(Guid.NewGuid(), "test"));
-            return View();
+            //_commandHandler.Handle(new CreateDataProviderCommand(Guid.NewGuid(), "test"));
+
+            var props = typeof (IvidResponse).GetPublicProperties().Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));
+
+
+            return View(props);
         }
 
         public ActionResult Import()
@@ -24,5 +31,17 @@ namespace PackageBuilder.Web.Controllers
 
             return View();
         }
+    }
+
+    public class DataProviderFieldItemDto
+    {
+        public DataProviderFieldItemDto(string name, string type)
+        {
+            Name = name;
+            Type = type;
+        }
+
+        public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

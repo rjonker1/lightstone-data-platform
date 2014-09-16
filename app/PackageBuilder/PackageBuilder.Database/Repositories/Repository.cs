@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using PackageBuilder.Domain.Contracts.Cqrs;
+using PackageBuilder.Domain.Contracts.Repositories;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Events;
 
-namespace PackageBuilder.Domain.Repositories
+namespace PackageBuilder.Data.Repositories
 {
-    public interface IRepository<T> where T : AggregateRoot, new()
-    {
-        void Save(AggregateRoot aggregate, int expectedVersion);
-        T GetById(Guid id);
-    }
-
     public class Repository<T> : IRepository<T> where T : AggregateRoot, new() //shortcut you can do as you see fit with new()
     {
         private readonly IEventStore _storage;
@@ -34,12 +29,6 @@ namespace PackageBuilder.Domain.Repositories
             obj.LoadsFromHistory(e);
             return obj;
         }
-    }
-
-    public interface IEventStore
-    {
-        void SaveEvents(Guid aggregateId, IEnumerable<Event> events, int expectedVersion);
-        List<Event> GetEventsForAggregate(Guid aggregateId);
     }
 
     public class EventStore : IEventStore

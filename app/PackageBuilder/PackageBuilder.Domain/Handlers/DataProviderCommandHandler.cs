@@ -1,6 +1,6 @@
 using PackageBuilder.Domain.Commands;
+using PackageBuilder.Domain.Contracts.Repositories;
 using PackageBuilder.Domain.Entities;
-using PackageBuilder.Domain.Repositories;
 
 namespace PackageBuilder.Domain.Handlers
 {

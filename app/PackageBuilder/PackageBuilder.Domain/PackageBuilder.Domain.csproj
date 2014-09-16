@@ -47,11 +47,24 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore.Persistence.RavenDB">
+      <HintPath>..\..\packages\NEventStore.Persistence.RavenDB.5.0.0.86\lib\net40\NEventStore.Persistence.RavenDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,6 +77,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Contracts\Cqrs\IEventStore.cs" />
+    <Compile Include="Contracts\Repositories\IRepository.cs" />
     <Compile Include="Handlers\DataProviderCommandHandler.cs" />
     <Compile Include="Commands\IHandleCommand.cs" />
     <Compile Include="Entities\AggregateRoot.cs" />
@@ -103,6 +118,7 @@
     <Compile Include="Events\PackageCreated.cs" />
     <Compile Include="Helpers\Extensions\PrivateReflectionDynamicObjectExtensions.cs" />
     <Compile Include="Helpers\PrivateReflectionDynamicObject.cs" />
+    <Compile Include="Helpers\Windsor\Installers\EventStoreInstaller.cs" />
     <Compile Include="PackageLookup.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\RolePackage.cs" />
@@ -111,7 +127,8 @@
     <Compile Include="Entities\UserGroup.cs" />
     <Compile Include="Entities\UserPackage.cs" />
     <Compile Include="Entities\UserRole.cs" />
-    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Helpers\Windsor\Installers\CommandInstaller.cs" />
+    <Compile Include="Helpers\Windsor\Installers\WindsorInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

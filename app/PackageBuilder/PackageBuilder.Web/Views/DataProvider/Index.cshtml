@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PackageBuilder.Web.Controllers.DataProviderFieldItemDto>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Data Poviders</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Label</th>
+            <th>Definition</th>
+            <th>Industries</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
