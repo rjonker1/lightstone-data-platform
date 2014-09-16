@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{1AD80898-7DFA-44CF-9142-4EE727687EBE}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Data", "PackageBuilder\PackageBuilder.Database\PackageBuilder.Data.csproj", "{E3212510-689E-4AAD-93F8-261AF917E5AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Common", "PackageBuilder\PackageBuilder.Common\PackageBuilder.Common.csproj", "{E1860260-CAA8-497B-A014-BDDFAB19665D}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MockSQLDataProvider", "MockSQLDataProvider\MockSQLDataProvider.sqlproj", "{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,18 @@ Global
 		{E1860260-CAA8-497B-A014-BDDFAB19665D}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{E1860260-CAA8-497B-A014-BDDFAB19665D}.Test|Any CPU.Build.0 = Release|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.TeamCity|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.TeamCity|Any CPU.Build.0 = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.TeamCity|Any CPU.Deploy.0 = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Test|Any CPU.Deploy.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

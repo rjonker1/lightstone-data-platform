@@ -177,7 +177,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MetadataProviders\ConventionMetadataProvider.cs" />
+    <Compile Include="Helpers\Windsor\Installers\CommandInstaller.cs" />
     <Compile Include="Helpers\Windsor\Installers\ControllersInstaller.cs" />
+    <Compile Include="Helpers\Windsor\Installers\EventStoreInstaller.cs" />
+    <Compile Include="Helpers\Windsor\Installers\WindsorInstaller.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

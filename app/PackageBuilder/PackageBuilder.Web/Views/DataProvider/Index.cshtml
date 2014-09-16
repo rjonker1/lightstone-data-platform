@@ -20,9 +20,9 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Type</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>@Html.TextBoxFor(x => item.Label)</td>
+                <td>@Html.TextBoxFor(x => item.Definition)</td>
+                <td>@Html.TextBoxFor(x => item.Industries)</td>
             </tr>
         }
     </tbody>

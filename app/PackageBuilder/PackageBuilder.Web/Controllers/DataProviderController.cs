@@ -43,5 +43,9 @@ namespace PackageBuilder.Web.Controllers
 
         public string Name { get; set; }
         public string Type { get; set; }
+        public string Label { get; set; }
+        public string Definition { get; set; }
+        public string Industries { get; set; }
+
     }
 }

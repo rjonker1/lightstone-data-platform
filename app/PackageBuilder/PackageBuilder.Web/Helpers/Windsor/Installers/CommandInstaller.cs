@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using PackageBuilder.Domain.Commands;
 
-namespace PackageBuilder.Domain.Helpers.Windsor.Installers
+namespace PackageBuilder.Web.Helpers.Windsor.Installers
 {
     public class CommandInstaller : IWindsorInstaller
     {

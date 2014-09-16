@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace PackageBuilder.Domain.Helpers.Windsor.Installers
+namespace PackageBuilder.Web.Helpers.Windsor.Installers
 {
     public class WindsorInstaller : IWindsorInstaller
     {

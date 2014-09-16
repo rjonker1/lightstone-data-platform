@@ -3,9 +3,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using PackageBuilder.Domain.Helpers.Windsor.Installers;
 using PackageBuilder.Web.Helpers.MetadataProviders;
 using PackageBuilder.Web.Helpers.Windsor.Factories;
+using PackageBuilder.Web.Helpers.Windsor.Installers;
 
 namespace PackageBuilder.Web
 {
