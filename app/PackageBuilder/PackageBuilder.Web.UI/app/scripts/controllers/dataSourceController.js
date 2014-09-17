@@ -10,7 +10,13 @@
 angular.module('packageBuilderwebuiApp')
   .controller('dsCtrl', function ($scope, $http) {
     
-    $scope.dataProvs = [];
+    $scope.dataProvs = [{
+                          "name": "Loading Data...",
+                          "fields": [
+                          {
+                              "name": "Loading Data...",
+                          }]
+                        }];
 
     $http({
         method: 'GET',
@@ -20,11 +26,13 @@ angular.module('packageBuilderwebuiApp')
 
         }).error(function(data, status, headers, config) {
           
-            $scope.dataProvs = [
-            {
-              "name": "ErrorReturnData",
-            }
-            ];
+            $scope.dataProvs = [{
+                          "name": "Error Loading Data...",
+                          "fields": [
+                          {
+                              "name": "Error Loading Data...",
+                          }]
+                        }];
         });
 
   } );

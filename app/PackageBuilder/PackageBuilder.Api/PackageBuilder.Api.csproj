@@ -166,6 +166,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MockSQLDataProvider\MockSQLDataProvider.sqlproj">
+      <Project>{1a94d3c6-2785-48a2-adee-3620fbefb2b4}</Project>
+      <Name>MockSQLDataProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Database\PackageBuilder.Data.csproj">
       <Project>{e3212510-689e-4aad-93f8-261af917e5ae}</Project>
       <Name>PackageBuilder.Data</Name>

@@ -54,8 +54,7 @@ namespace PackageBuilder.Api.Modules
 
             Name = name;
             Fields = typeof(IvidResponse).GetProperties()
-                        .Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));
-
+                        .Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));       
         }
 
         public string Name { get; set; }
@@ -69,6 +68,7 @@ namespace PackageBuilder.Api.Modules
         {
             Name = name;
             Type = type;
+            Price = 100;
         }
 
         public string Name { get; set; }
@@ -76,6 +76,7 @@ namespace PackageBuilder.Api.Modules
         public string Label { get; set; }
         public string Definition { get; set; }
         public string Industries { get; set; }
+        public double Price { get; set; }
         public bool IsSelected { get; set; }
 
     }
