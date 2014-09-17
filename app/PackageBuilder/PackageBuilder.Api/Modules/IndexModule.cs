@@ -3,11 +3,9 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Entities;
 using Nancy;
-using PackageBuilder.Domain.Contracts;
-using PackageBuilder.Domain.Contracts.Enitities;
 using Shared.BuildingBlocks.Api;
 using Lace.Models.Ivid.Dto;
-using PackageBuilder.Domain.Commands;
+using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.Api.Modules
 {
