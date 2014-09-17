@@ -1,7 +1,7 @@
 ﻿using Lace.Events;
 using Lace.Events.Messages.Publish;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Ivid.ServiceCalls;
 using Lace.Test.Helper.Builders.Requests;

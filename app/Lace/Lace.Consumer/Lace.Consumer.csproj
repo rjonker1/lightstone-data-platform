@@ -51,6 +51,10 @@
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>

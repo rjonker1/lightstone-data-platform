@@ -1,6 +1,8 @@
-﻿namespace Lace.Models.Lightstone.Dto.Metric
+﻿using Lace.Models.Responses.Sources.Metric;
+
+namespace Lace.Models.Lightstone.Dto.Metric
 {
-    public class Pair<T1,T2>
+    public class Pair<T1, T2> : IPair<T1, T2>
     {
         public Pair()
         {
@@ -17,13 +19,13 @@
         public T1 Item1
         {
             get;
-            set;
+            private set;
         }
 
         public T2 Item2
         {
             get;
-            set;
+            private set;
         }
     }
 }

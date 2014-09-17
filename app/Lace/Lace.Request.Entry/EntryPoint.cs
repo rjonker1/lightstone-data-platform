@@ -29,7 +29,7 @@ namespace Lace.Request.Entry
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
+        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
         {
             try
             {
@@ -64,13 +64,13 @@ namespace Lace.Request.Entry
             }
         }
 
-        private static IList<LaceExternalServiceResponse> EmptyResponse
+        private static IList<LaceExternalSourceResponse> EmptyResponse
         {
             get
             {
-                return new List<LaceExternalServiceResponse>()
+                return new List<LaceExternalSourceResponse>()
                 {
-                    new LaceExternalServiceResponse()
+                    new LaceExternalSourceResponse()
                     {
                         Response = new LaceResponse()
                         {

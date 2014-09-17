@@ -1,4 +1,6 @@
-﻿namespace Lace.Models.Lightstone.Dto
+﻿using Lace.Models.Responses.Sources.Specifics;
+
+namespace Lace.Models.Lightstone.Dto
 {
     public class FrequencyModel : IRespondWithFrequencyModel
     {

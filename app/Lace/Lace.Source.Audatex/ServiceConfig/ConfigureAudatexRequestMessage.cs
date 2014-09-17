@@ -1,5 +1,5 @@
 ﻿using Lace.Models.Audatex.Dto;
-using Lace.Response;
+using Lace.Models.Responses;
 
 namespace Lace.Source.Audatex.ServiceConfig
 {

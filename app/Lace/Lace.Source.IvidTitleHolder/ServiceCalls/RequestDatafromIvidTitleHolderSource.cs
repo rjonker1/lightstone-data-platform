@@ -1,6 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Request;
-using Lace.Response;
+using Lace.Models.Responses;
 
 namespace Lace.Source.IvidTitleHolder.ServiceCalls
 {

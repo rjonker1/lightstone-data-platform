@@ -76,6 +76,10 @@
       <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
       <Name>Lace.Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">
+      <Project>{c9bde461-74e7-4615-a61b-993b372f0eb3}</Project>
+      <Name>Lace.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>

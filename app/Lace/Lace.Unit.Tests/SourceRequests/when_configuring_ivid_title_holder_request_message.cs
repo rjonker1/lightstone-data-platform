@@ -1,7 +1,5 @@
-﻿using Lace.Models.Ivid;
+﻿using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
-using Lace.Source.Ivid.Transform;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;

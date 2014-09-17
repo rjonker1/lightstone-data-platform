@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Lace.Models.Audatex.Dto;
 
-namespace Lace.Models.Audatex
+namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromAudatex
+    public interface IResponseFromAudatex : IPointToLaceSource
     {
-        IList<AccidentClaim> AccidentClaims { get; }
+        IList<IAccidentClaim> AccidentClaims { get; }
 
         void CleanAccidentClaims();
 
@@ -13,7 +12,7 @@ namespace Lace.Models.Audatex
 
         void ResetAccidentClaimFlag();
 
-        void AddAccidentClaim(AccidentClaim claim);
+        void AddAccidentClaim(IAccidentClaim claim);
 
         bool HasAccidentClaims { get; }
 
@@ -22,7 +21,5 @@ namespace Lace.Models.Audatex
         string LowConfidenceLevelIndicatorNote { get; }
 
         string RegistrationNumberOnlyIndicatorNote { get; }
-
-       // ServiceCallState ServiceProviderCallState { get; }
     }
 }

@@ -4,8 +4,8 @@ using Common.Logging;
 using DataPlatform.Shared.Entities;
 using Lace.Builder.Specifications;
 using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 
 namespace Lace.Builder.Factory
 {

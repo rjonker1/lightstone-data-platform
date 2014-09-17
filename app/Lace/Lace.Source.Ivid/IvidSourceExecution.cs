@@ -1,8 +1,8 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
 using Lace.Models.Ivid;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.Enums;
 using Lace.Source.Ivid.ServiceCalls;
 

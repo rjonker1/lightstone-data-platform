@@ -1,8 +1,8 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Models.RgtVin;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.Enums;
 using Lace.Source.RgtVin.ServiceCalls;
 

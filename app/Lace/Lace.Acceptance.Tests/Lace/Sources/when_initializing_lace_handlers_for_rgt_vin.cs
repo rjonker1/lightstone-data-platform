@@ -18,7 +18,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
         private readonly IBootstrap _initialize;
-        private IList<LaceExternalServiceResponse> _laceResponses;
+        private IList<LaceExternalSourceResponse> _laceResponses;
         private readonly IBuildSourceChain _buildSourceChain;
 
 

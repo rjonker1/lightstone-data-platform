@@ -1,11 +1,6 @@
 ﻿using Lace.Models;
-using Lace.Models.Anpr;
-using Lace.Models.Audatex;
-using Lace.Models.Ivid;
-using Lace.Models.IvidTitleHolder;
-using Lace.Models.Lightstone;
-using Lace.Models.Rgt;
-using Lace.Models.RgtVin;
+using Lace.Models.Responses;
+using Lace.Models.Responses.Sources;
 
 namespace Lace.Response
 {
@@ -28,7 +23,6 @@ namespace Lace.Response
 
         public IResponseFromLightstone LightstoneResponse { get; set; }
         public IResponseHandled LightstoneResponseHandled { get; set; }
-
 
         public IResponseFromAnpr AnprResponse { get; set; }
         public IResponseHandled AnprResponseHandled { get; set; }

@@ -1,13 +1,6 @@
-﻿using Lace.Models;
-using Lace.Models.Anpr;
-using Lace.Models.Audatex;
-using Lace.Models.Ivid;
-using Lace.Models.IvidTitleHolder;
-using Lace.Models.Lightstone;
-using Lace.Models.Rgt;
-using Lace.Models.RgtVin;
+﻿using Lace.Models.Responses.Sources;
 
-namespace Lace.Response
+namespace Lace.Models.Responses
 {
     public interface ILaceResponse
     {

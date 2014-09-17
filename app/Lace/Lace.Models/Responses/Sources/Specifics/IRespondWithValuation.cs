@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lace.Models.Lightstone
+namespace Lace.Models.Responses.Sources.Specifics
 {
     public interface IRespondWithValuation : IAddValuationItem
     {

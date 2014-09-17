@@ -5,6 +5,7 @@ using Common.Logging;
 using Lace.Events;
 using Lace.Extensions;
 using Lace.Models.IvidTitleHolder;
+using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;

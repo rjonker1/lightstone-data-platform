@@ -1,7 +1,7 @@
 ﻿using System;
 using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 
 namespace Lace.Builder
 {

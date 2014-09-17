@@ -3,6 +3,7 @@ using System.Linq;
 using DataPlatform.Shared.Entities;
 using Lace.Builder;
 using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Response;
 

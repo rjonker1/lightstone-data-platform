@@ -1,4 +1,5 @@
-﻿using Lace.Request;
+﻿using Lace.Models.Responses;
+using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Audatex.Transform;

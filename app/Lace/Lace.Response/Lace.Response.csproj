@@ -36,7 +36,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ILaceResponse.cs" />
     <Compile Include="LaceResponse.cs" />
   </ItemGroup>
   <ItemGroup>

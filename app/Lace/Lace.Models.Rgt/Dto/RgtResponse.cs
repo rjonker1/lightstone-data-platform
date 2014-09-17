@@ -1,4 +1,6 @@
-﻿namespace Lace.Models.Rgt.Dto
+﻿using Lace.Models.Responses.Sources;
+
+namespace Lace.Models.Rgt.Dto
 {
     public class RgtResponse : IResponseFromRgt
     {

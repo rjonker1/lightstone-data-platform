@@ -12,7 +12,7 @@ namespace Lace.Acceptance.Tests.Requests
     public class when_sending_request_to_lace_entry_point : Specification
     {
         private readonly ILaceRequest _request;
-        private IList<LaceExternalServiceResponse> _laceResponses;
+        private IList<LaceExternalSourceResponse> _laceResponses;
         private readonly IEntryPoint _entryPoint;
 
         public when_sending_request_to_lace_entry_point()

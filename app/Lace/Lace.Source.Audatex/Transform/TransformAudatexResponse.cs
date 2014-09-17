@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Lace.Extensions;
 using Lace.Models.Audatex.Dto;
+using Lace.Models.Responses;
+using Lace.Models.Responses.Sources;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
@@ -34,7 +37,7 @@ namespace Lace.Source.Audatex.Transform
         public TransformAudatexResponse(GetDataResult audatexResponse, ILaceResponse response, ILaceRequest request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
-            Result = Continue ? new AudatexResponse(new List<AccidentClaim>()) : null;
+            Result = Continue ? new AudatexResponse(new List<IAccidentClaim>()) : null;
             Message = audatexResponse;
 
             _response = response;

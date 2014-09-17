@@ -1,4 +1,4 @@
-﻿using Lace.Response;
+﻿using Lace.Models.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.LicensePlateNumber
 {

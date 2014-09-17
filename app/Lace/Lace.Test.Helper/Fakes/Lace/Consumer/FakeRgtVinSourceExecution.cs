@@ -1,10 +1,8 @@
-﻿
-
-using Lace.Consumer;
+﻿using Lace.Consumer;
 using Lace.Events;
 using Lace.Models.IvidTitleHolder;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Enums;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
@@ -47,10 +45,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
             CallNextSource(response, laceEvent);
 
-            //_handleServiceCall
-            //    .Request(c =>
-            //        c.FetchDataFromService(response, _externalWebServiceCall, laceEvent)
-            //    );
         }
 
         private static void NotHandledResponse(ILaceResponse response)

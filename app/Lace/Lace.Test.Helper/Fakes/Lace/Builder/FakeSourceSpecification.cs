@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Test.Helper.Fakes.Lace.Consumer;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder

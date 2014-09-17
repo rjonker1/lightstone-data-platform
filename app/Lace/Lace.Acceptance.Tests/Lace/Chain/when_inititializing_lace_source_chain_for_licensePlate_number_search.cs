@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lace.Builder;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
+using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Response;
 using Lace.Test.Helper.Builders.Requests;

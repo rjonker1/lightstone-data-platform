@@ -1,8 +1,8 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
 using Lace.Models.IvidTitleHolder;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Enums;
 using Lace.Test.Helper.Fakes.Lace.Handlers;

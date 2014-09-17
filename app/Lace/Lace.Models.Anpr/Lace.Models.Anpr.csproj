@@ -37,7 +37,6 @@
     <Compile Include="AnprResponseHandled.cs" />
     <Compile Include="DataObject\AnprResponse.cs" />
     <Compile Include="ICheckIfAnprResponseWasSuccessful.cs" />
-    <Compile Include="IResponseFromAnpr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

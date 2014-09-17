@@ -1,6 +1,8 @@
-﻿namespace Lace.Models.Lightstone
+﻿using Lace.Models.Responses.Sources.Specifics;
+
+namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromLightstone
+    public interface IResponseFromLightstone : IPointToLaceSource
     {
         int? CarId { get; }
 
@@ -17,9 +19,5 @@
         string Model { get; }
 
         IRespondWithValuation VehicleValuation { get; }
-
-     //   IEnumerable<IRespondWithCarModel> CarModels { get; }
-
-      //  IEnumerable<IRespondWithVin12> Vin12 { get; }
     }
 }

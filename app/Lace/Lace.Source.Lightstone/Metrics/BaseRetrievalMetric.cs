@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.Models.Lightstone;
+using Lace.Models.Responses.Sources.Specifics;
 using Lace.Request;
 using Lace.Source.Lightstone.DataObjects;
 using Lace.Source.Lightstone.Metrics.Specifics;

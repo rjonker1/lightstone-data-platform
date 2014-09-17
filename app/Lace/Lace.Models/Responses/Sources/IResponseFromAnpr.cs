@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Lace.Models.Anpr
+namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromAnpr
+    public interface IResponseFromAnpr : IPointToLaceSource
     {
         string ProcessedImage { get; }
         string EnhancedImage { get; }

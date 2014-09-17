@@ -1,8 +1,7 @@
 ﻿using System;
-
-namespace Lace.Models.IvidTitleHolder
+namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromIvidTitleHolder
+    public interface IResponseFromIvidTitleHolder : IPointToLaceSource
     {
         string BankName { get; }
         string AccountNumber { get; }
@@ -19,7 +18,6 @@ namespace Lace.Models.IvidTitleHolder
 
         bool PartialResponse { get; }
         bool HasErrors { get; }
-        // ServiceCallState ServiceProviderCallState { get;  }
         string ExpiredMessage { get; }
     }
 }

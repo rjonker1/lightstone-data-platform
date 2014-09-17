@@ -1,5 +1,5 @@
-﻿using Lace.Request;
-using Lace.Response;
+﻿using Lace.Models.Responses;
+using Lace.Request;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Source.IvidTitleHolder.ServiceConfig

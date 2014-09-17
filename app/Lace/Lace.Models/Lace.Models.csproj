@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -37,9 +38,40 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Enums\ServiceCallState.cs" />
-    <Compile Include="IResponseHandled.cs" />
+    <Compile Include="Responses\Sources\IAccidentClaim.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithValuation.cs" />
+    <Compile Include="Responses\Sources\IResponseFromAnpr.cs" />
+    <Compile Include="Responses\Sources\IResponseFromAudatex.cs" />
+    <Compile Include="Responses\Sources\IResponseFromIvid.cs" />
+    <Compile Include="Responses\Sources\IResponseFromIvidTitleHolder.cs" />
+    <Compile Include="Responses\IPointToLaceSource.cs" />
+    <Compile Include="Responses\ILaceResponse.cs" />
+    <Compile Include="Responses\Sources\IResponseFromLightstone.cs" />
+    <Compile Include="Responses\Sources\IResponseFromRgt.cs" />
+    <Compile Include="Responses\Sources\IResponseFromRgtVin.cs" />
+    <Compile Include="Responses\IResponseHandled.cs" />
+    <Compile Include="Responses\Sources\IVehicleSpecificInformation.cs" />
+    <Compile Include="Responses\Sources\Metric\IPair.cs" />
+    <Compile Include="Responses\Sources\Specifics\IAddValuationItem.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithAccidentDistributionModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithAmortisationFactorModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithAmortisedValueModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithAreaFactorModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithAuctionFactorModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithConfidenceModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithEstimatedValueModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithFrequencyModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithImageGaugeModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithPriceModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithRepairIndexModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithSaleModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithTotalSalesByAgeModel.cs" />
+    <Compile Include="Responses\Sources\Specifics\IRespondWithTotalSalesByGenderModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Responses\Sources\Specifics\IRespondWithCarModel.cs.old" />
+    <None Include="Responses\Sources\Specifics\IRespondWithVin12.cs.old" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

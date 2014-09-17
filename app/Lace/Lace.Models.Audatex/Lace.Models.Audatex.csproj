@@ -49,7 +49,6 @@
     <Compile Include="Dto\VendorResponse.cs" />
     <Compile Include="Dto\VendorResponseBody.cs" />
     <Compile Include="Dto\VendorResponseHeader.cs" />
-    <Compile Include="IResponseFromAudatex.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

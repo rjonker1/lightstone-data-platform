@@ -30,7 +30,7 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
+        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
         {
             _laceEvent = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
 

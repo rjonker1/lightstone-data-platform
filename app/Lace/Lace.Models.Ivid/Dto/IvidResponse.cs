@@ -1,4 +1,6 @@
-﻿namespace Lace.Models.Ivid.Dto
+﻿using Lace.Models.Responses.Sources;
+
+namespace Lace.Models.Ivid.Dto
 {
     public class IvidResponse : IResponseFromIvid, IBuildIvidResponse
     {
@@ -106,7 +108,7 @@
         }
 
 
-        public VehicleSpecificInformation SpecificInformation { get; private set; }
+        public IVehicleSpecificInformation SpecificInformation { get; private set; }
 
         public string StatusMessage { get; private set; }
 
@@ -167,8 +169,6 @@
         public bool HasErrors { get; private set; }
 
         public string CarFullname { get; private set; }
-
-        // public ServiceCallState ServiceProviderCallState { get; private set; }
 
     }
 

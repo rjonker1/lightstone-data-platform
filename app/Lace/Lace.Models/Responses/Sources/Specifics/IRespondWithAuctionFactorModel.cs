@@ -1,4 +1,4 @@
-﻿namespace Lace.Models.Lightstone
+﻿namespace Lace.Models.Responses.Sources.Specifics
 {
     public interface IRespondWithAuctionFactorModel
     {

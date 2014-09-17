@@ -1,4 +1,5 @@
 ﻿using System;
+using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.Anpr.DataObject
 {

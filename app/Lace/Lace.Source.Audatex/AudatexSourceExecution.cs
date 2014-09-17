@@ -1,8 +1,8 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
 using Lace.Models.Audatex;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.Audatex.ServiceCalls;
 using Lace.Source.Enums;
 

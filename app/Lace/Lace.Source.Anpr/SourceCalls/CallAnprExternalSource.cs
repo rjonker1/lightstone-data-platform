@@ -1,8 +1,8 @@
 ﻿using System;
 using Common.Logging;
 using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Source.Anpr.SourceCalls
@@ -18,7 +18,6 @@ namespace Lace.Source.Anpr.SourceCalls
         {
             _request = request;
         }
-
 
         public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
         {

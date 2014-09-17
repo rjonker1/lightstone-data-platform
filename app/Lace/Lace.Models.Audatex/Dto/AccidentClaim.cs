@@ -1,8 +1,9 @@
 ﻿using System;
+using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.Audatex.Dto
 {
-    public class AccidentClaim
+    public class AccidentClaim : IAccidentClaim
     {
 
         public AccidentClaim(DateTime? accidentDate, string assessmentNumber, string claimReferenceNumber,

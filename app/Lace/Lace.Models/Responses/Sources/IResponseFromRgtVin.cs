@@ -1,6 +1,6 @@
-﻿namespace Lace.Models.RgtVin
+﻿namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromRgtVin
+    public interface IResponseFromRgtVin : IPointToLaceSource
     {
         string Vin { get; }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Request.Entry;
-using Lace.Response;
 using Lace.Response.ExternalServices;
 using Lace.Test.Helper.Fakes.Lace.EntryPoint;
 using Lace.Test.Helper.Mothers.Requests;
@@ -14,7 +14,7 @@ namespace Lace.Unit.Tests.Requests
         private readonly IEntryPoint _entryPoint;
         private readonly ILaceResponse _response;
         private readonly ILaceRequest _request;
-        private IList<LaceExternalServiceResponse> _laceResponse;
+        private IList<LaceExternalSourceResponse> _laceResponse;
 
         public when_lace_entry_point_get_response()
         {

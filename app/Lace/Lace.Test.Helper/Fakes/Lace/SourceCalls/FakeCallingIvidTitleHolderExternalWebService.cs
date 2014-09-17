@@ -1,7 +1,6 @@
 ﻿using Lace.Events;
 using Lace.Models.IvidTitleHolder;
-using Lace.Request;
-using Lace.Response;
+using Lace.Models.Responses;
 using Lace.Source;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Source.IvidTitleHolder.Transform;

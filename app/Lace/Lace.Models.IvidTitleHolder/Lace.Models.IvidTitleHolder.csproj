@@ -40,7 +40,6 @@
     <Compile Include="FinancedInterestValidation.cs" />
     <Compile Include="Dto\IvidTitleHolderResponse.cs" />
     <Compile Include="IBuildIvidTitleHolderResponse.cs" />
-    <Compile Include="IResponseFromIvidTitleHolder.cs" />
     <Compile Include="IvidTitleHolderResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>

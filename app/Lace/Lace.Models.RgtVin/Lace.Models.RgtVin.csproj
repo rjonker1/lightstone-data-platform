@@ -39,7 +39,6 @@
     </Compile>
     <Compile Include="Dto\RgtVinRequest.cs" />
     <Compile Include="Dto\RgtVinResponse.cs" />
-    <Compile Include="IResponseFromRgtVin.cs" />
     <Compile Include="RgtVinResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Lace.Models.Responses.Sources.Specifics;
 
 namespace Lace.Models.Lightstone.Dto
 {

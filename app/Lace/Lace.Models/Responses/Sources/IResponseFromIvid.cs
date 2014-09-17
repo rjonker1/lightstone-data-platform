@@ -1,10 +1,8 @@
-﻿using Lace.Models.Ivid.Dto;
-
-namespace Lace.Models.Ivid
+﻿namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromIvid
+    public interface IResponseFromIvid : IPointToLaceSource
     {
-        VehicleSpecificInformation SpecificInformation { get; }
+        IVehicleSpecificInformation SpecificInformation { get; }
 
         string StatusMessage { get; }
 

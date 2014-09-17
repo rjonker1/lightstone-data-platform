@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Lace.Models.Lightstone.Dto.Metric;
+﻿using Lace.Models.Responses.Sources.Metric;
+using Lace.Models.Responses.Sources.Specifics;
 
 namespace Lace.Models.Lightstone.Dto
 {
@@ -7,10 +7,10 @@ namespace Lace.Models.Lightstone.Dto
     {
         public TotalSalesByAgeModel()
         {
-            Values = new List<Pair<string, double>>();
+            Values = new IPair<string, double>[] {};
         }
 
-        public TotalSalesByAgeModel(List<Pair<string, double>> values, string band)
+        public TotalSalesByAgeModel(IPair<string, double>[] values, string band)
         {
             Values = values;
             Band = band;
@@ -22,7 +22,7 @@ namespace Lace.Models.Lightstone.Dto
             private set;
         }
 
-        public List<Pair<string, double>> Values
+        public IPair<string, double>[] Values
         {
             get;
             private set;

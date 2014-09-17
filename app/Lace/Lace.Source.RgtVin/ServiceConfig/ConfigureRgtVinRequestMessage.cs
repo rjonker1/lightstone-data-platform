@@ -1,6 +1,6 @@
-﻿using Lace.Models.RgtVin.Dto;
+﻿using Lace.Models.Responses;
+using Lace.Models.RgtVin.Dto;
 using Lace.Request;
-using Lace.Response;
 
 namespace Lace.Source.RgtVin.ServiceConfig
 {

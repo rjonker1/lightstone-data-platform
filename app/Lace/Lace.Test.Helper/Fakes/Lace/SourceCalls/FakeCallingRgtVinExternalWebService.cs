@@ -1,6 +1,6 @@
 ﻿using Lace.Events;
+using Lace.Models.Responses;
 using Lace.Models.RgtVin;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.RgtVin.Transform;
 using Lace.Test.Helper.Builders.Responses;

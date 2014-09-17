@@ -1,4 +1,4 @@
-﻿using Lace.Models.Lightstone;
+﻿using Lace.Models.Responses.Sources.Specifics;
 
 namespace Lace.Source.Lightstone.Metrics
 {

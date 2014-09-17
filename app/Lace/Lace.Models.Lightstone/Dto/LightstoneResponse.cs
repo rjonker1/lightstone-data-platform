@@ -1,4 +1,7 @@
-﻿namespace Lace.Models.Lightstone.Dto
+﻿using Lace.Models.Responses.Sources;
+using Lace.Models.Responses.Sources.Specifics;
+
+namespace Lace.Models.Lightstone.Dto
 {
     public class LightstoneResponse : IResponseFromLightstone
     {
@@ -17,8 +20,6 @@
             CarFullname = carFullName;
             Model = model;
             VehicleValuation = vehicleValuation;
-            //CarModels = carModels;
-            //Vin12 = vin12;
         }
 
         public int? CarId { get; private set; }
@@ -36,9 +37,5 @@
         public string Model { get; private set; }
 
         public IRespondWithValuation VehicleValuation { get; private set; }
-
-        //public IEnumerable<IRespondWithCarModel> CarModels { get; private set; }
-
-        //public IEnumerable<IRespondWithVin12> Vin12 { get; private set; }
     }
 }

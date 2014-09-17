@@ -1,5 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Response;
+using Lace.Models.Responses;
 
 namespace Lace.Source.Audatex.ServiceCalls
 {

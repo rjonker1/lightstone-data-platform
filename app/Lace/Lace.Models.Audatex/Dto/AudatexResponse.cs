@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.Audatex.Dto
 {
     public class AudatexResponse : IResponseFromAudatex
     {
 
-        public AudatexResponse(IList<AccidentClaim> accidentClaims)
+        public AudatexResponse(IList<IAccidentClaim> accidentClaims)
         {
             AccidentClaims = accidentClaims;
         }
 
-        public IList<AccidentClaim> AccidentClaims { get; private set; }
+        public IList<IAccidentClaim> AccidentClaims { get; private set; }
 
         public bool HasAccidentClaims { get; private set; }
 
@@ -39,9 +40,8 @@ namespace Lace.Models.Audatex.Dto
             }
         }
 
-      //  public ServiceCallState ServiceProviderCallState { get; private set; }
 
-        public void AddAccidentClaim(AccidentClaim claim)
+        public void AddAccidentClaim(IAccidentClaim claim)
         {
             if (AccidentClaims.Any(ac => ac.Equals(claim))) return;
 
@@ -95,7 +95,7 @@ namespace Lace.Models.Audatex.Dto
             }
         }
 
-        private List<AccidentClaim> GroupByQuoteEstimateExVat()
+        private List<IAccidentClaim> GroupByQuoteEstimateExVat()
         {
             if (AccidentClaims == null) return null;
 
@@ -120,7 +120,7 @@ namespace Lace.Models.Audatex.Dto
         }
 
 
-        private List<AccidentClaim> GroupByAssesmentNumber()
+        private List<IAccidentClaim> GroupByAssesmentNumber()
         {
 
             if (AccidentClaims == null) return null;

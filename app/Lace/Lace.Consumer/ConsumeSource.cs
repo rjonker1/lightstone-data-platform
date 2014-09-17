@@ -1,5 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Response;
+using Lace.Models.Responses;
 using Lace.Source;
 
 namespace Lace.Consumer

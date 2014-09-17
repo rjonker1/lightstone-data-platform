@@ -1,7 +1,7 @@
 ﻿using Lace.Events;
 using Lace.Models.Audatex;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Audatex.Transform;

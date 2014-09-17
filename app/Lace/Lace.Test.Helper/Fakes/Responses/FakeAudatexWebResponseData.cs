@@ -1,4 +1,5 @@
 ﻿using Lace.Models.Lightstone.Dto;
+using Lace.Models.Responses;
 using Lace.Models.RgtVin.Dto;
 using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;

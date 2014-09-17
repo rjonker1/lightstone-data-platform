@@ -2,6 +2,7 @@
 using System.Linq;
 using Lace.Models.Lightstone.Dto;
 using Lace.Models.Lightstone.Dto.Metric;
+using Lace.Models.Responses.Sources.Metric;
 using Lace.Request;
 using Lace.Source.Lightstone.Models;
 
@@ -50,7 +51,7 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
             }).GroupBy(g => g.Band, g => g, (key, g) => new
             {
                 Band = g.FirstOrDefault(),
-                Values = g.Select(c => new Pair<string, double>(c.CarType, c.Value)).ToList()
+                Values = g.Select(c => new Pair<string, double>(c.CarType, c.Value)).ToArray()
 
             });
 

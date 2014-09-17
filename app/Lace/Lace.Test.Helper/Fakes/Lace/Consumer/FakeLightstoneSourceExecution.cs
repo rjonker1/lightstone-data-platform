@@ -1,6 +1,7 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
 using Lace.Models.Lightstone;
+using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source;

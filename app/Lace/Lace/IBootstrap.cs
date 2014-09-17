@@ -5,7 +5,7 @@ namespace Lace
 {
     public interface IBootstrap
     {
-        IList<LaceExternalServiceResponse> LaceResponses { get; }
+        IList<LaceExternalSourceResponse> LaceResponses { get; }
         void Execute();
     }
 }

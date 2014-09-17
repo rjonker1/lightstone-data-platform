@@ -1,5 +1,6 @@
 ﻿using Lace.Events;
 using Lace.Events.Messages.Publish;
+using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source;

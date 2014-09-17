@@ -1,8 +1,8 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
 using Lace.Models.Lightstone;
+using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.Enums;
 using Lace.Source.Lightstone.Repository.Factory;
 using Lace.Source.Lightstone.Repository.Infrastructure;

@@ -37,7 +37,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Dto\RgtResponse.cs" />
-    <Compile Include="IResponseFromRgt.cs" />
     <Compile Include="RgtResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
-﻿namespace Lace.Models.Ivid.Dto
+﻿using Lace.Models.Responses.Sources;
+
+namespace Lace.Models.Ivid.Dto
 {
-    public class VehicleSpecificInformation
+    public class VehicleSpecificInformation : IVehicleSpecificInformation
     {
         public VehicleSpecificInformation(string odometer, string color, string registrationNumber, string vinNumber,
             string licenseNumber,

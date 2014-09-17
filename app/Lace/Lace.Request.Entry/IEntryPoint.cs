@@ -5,6 +5,6 @@ namespace Lace.Request.Entry
 {
     public interface IEntryPoint
     {
-        IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request);
+        IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request);
     }
 }

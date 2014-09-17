@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Lace.Models.Lightstone;
+using Lace.Models.Responses.Sources;
 using Lace.Request;
 using Lace.Source.Lightstone.Cars;
 using Lace.Source.Lightstone.Metrics;
