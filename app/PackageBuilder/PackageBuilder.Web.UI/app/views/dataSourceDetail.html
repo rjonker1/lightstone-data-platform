@@ -1,0 +1,28 @@
+<div class="container">
+    
+{{dataProvs.fields}}
+<h2>Data Poviders</h2>
+<table class="table" >
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Label</th>
+            <th>Definition</th>
+            <th>Industries</th>
+        </tr>
+    </thead>
+    <tbody  class="form-group" ng-repeat="dField in dataProvs.fields">
+       
+            <tr>
+                <td>{{dField.name}}</td>
+                <td>{{dField.type}}</td>
+                <td><input ng-model="dField.label" type="text"></td>
+                <td><input ng-model="dField.definition" type="text"></td>
+                <td><input ng-model="dField.industries" type="text"></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
