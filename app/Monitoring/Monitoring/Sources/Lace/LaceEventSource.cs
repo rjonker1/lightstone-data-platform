@@ -10,7 +10,7 @@
         Lightstone,
         EntryPoint,
         Initialization,
-        Anpr
+        Anpr,
+        Jis
     }
-
 }
