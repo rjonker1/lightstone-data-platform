@@ -24,7 +24,7 @@ namespace PackageBuilder.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
 
             //NHibernateBootstrapper.Build();
