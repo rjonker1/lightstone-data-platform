@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Audatex
 {
-    public class AudatexResponseHandled : IResponseHandled
+    public class AudatexResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

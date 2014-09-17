@@ -1,4 +1,4 @@
-﻿using Lace.Models.Responses;
+﻿using Lace.Models;
 using Lace.Models.RgtVin.Dto;
 using Lace.Request;
 
@@ -8,10 +8,10 @@ namespace Lace.Source.RgtVin.ServiceConfig
     {
         public RgtVinRequest RgtVinRequest { get; private set; }
         private readonly ILaceRequest _request;
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
 
 
-        public ConfigureRgtVinRequestMessage(ILaceRequest request, ILaceResponse response)
+        public ConfigureRgtVinRequestMessage(ILaceRequest request, IProvideLaceResponse response)
         {
             _request = request;
             _response = response;

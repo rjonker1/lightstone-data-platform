@@ -4,28 +4,28 @@ using Lace.Models.Responses.Sources;
 
 namespace Lace.Response
 {
-    public class LaceResponse : ILaceResponse
+    public class LaceResponse : IProvideLaceResponse
     {
-        public IResponseFromIvid IvidResponse { get; set; }
-        public IResponseHandled IvidResponseHandled { get; set; }
+        public IProvideDataFromIvid IvidResponse { get; set; }
+        public IResponseProviderHandled IvidResponseHandled { get; set; }
 
-        public IResponseFromIvidTitleHolder IvidTitleHolderResponse { get; set; }
-        public IResponseHandled IvidTitleHolderResponseHandled { get; set; }
+        public IProvideDataFromIvidTitleHolder IvidTitleHolderResponse { get; set; }
+        public IResponseProviderHandled IvidTitleHolderResponseHandled { get; set; }
 
-        public IResponseFromRgtVin RgtVinResponse { get; set; }
-        public IResponseHandled RgtVinResponseHandled { get; set; }
+        public IProvideDataFromRgtVin RgtVinResponse { get; set; }
+        public IResponseProviderHandled RgtVinResponseHandled { get; set; }
 
-        public IResponseFromAudatex AudatexResponse { get; set; }
-        public IResponseHandled AudatexResponseHandled { get; set; }
+        public IProvideDataFromAudatex AudatexResponse { get; set; }
+        public IResponseProviderHandled AudatexResponseHandled { get; set; }
 
-        public IResponseFromRgt RgtResponse { get; set; }
-        public IResponseHandled RgtResponseHandled { get; set; }
+        public IProvideDataFromRgt RgtResponse { get; set; }
+        public IResponseProviderHandled RgtResponseHandled { get; set; }
 
-        public IResponseFromLightstone LightstoneResponse { get; set; }
-        public IResponseHandled LightstoneResponseHandled { get; set; }
+        public IProvideDataFromLightstone LightstoneResponse { get; set; }
+        public IResponseProviderHandled LightstoneResponseHandled { get; set; }
 
-        public IResponseFromAnpr AnprResponse { get; set; }
-        public IResponseHandled AnprResponseHandled { get; set; }
+        public IProvideDataFromAnpr AnprResponse { get; set; }
+        public IResponseProviderHandled AnprResponseHandled { get; set; }
 
     }
 }

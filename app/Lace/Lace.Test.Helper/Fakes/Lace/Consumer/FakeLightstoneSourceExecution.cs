@@ -1,9 +1,8 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
+using Lace.Models;
 using Lace.Models.Lightstone;
-using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Enums;
 using Lace.Source.Lightstone.SourceCalls;
@@ -24,7 +23,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         }
 
 
-        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Lightstone, _request);
 
@@ -45,7 +44,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             CallNextSource(response, laceEvent);
         }
 
-        private static void NotHandledResponse(ILaceResponse response)
+        private static void NotHandledResponse(IProvideLaceResponse response)
         {
             response.LightstoneResponse = null;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();

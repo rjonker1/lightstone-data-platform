@@ -1,9 +1,7 @@
-﻿using System;
-using Lace.Events;
+﻿using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Audatex.ServiceCalls;
 using Lace.Test.Helper.Builders.Requests;
@@ -18,7 +16,7 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromSource _requestDataFromSource;
         private readonly ILaceRequest _audatexRequest;
-        private readonly ILaceResponse _laceResponse;
+        private readonly IProvideLaceResponse _laceResponse;
         private readonly ILaceEvent _laceEvent;
         private readonly ICallTheSource _externalWebServiceCall;
 

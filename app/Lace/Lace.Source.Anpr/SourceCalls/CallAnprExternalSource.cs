@@ -1,7 +1,7 @@
 ﻿using System;
 using Common.Logging;
 using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 using Monitoring.Sources.Lace;
 
@@ -19,12 +19,12 @@ namespace Lace.Source.Anpr.SourceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             throw new NotImplementedException();
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             throw new NotImplementedException();
         }

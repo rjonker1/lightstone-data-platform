@@ -1,5 +1,4 @@
 ﻿using Monitoring.Sources.Lace;
-
 namespace Lace.Events
 {
     public interface ILaceExternalSourceEvent

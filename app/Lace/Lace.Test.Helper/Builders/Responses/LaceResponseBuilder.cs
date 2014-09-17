@@ -1,5 +1,5 @@
-﻿using Lace.Models.Ivid;
-using Lace.Models.Responses;
+﻿using Lace.Models;
+using Lace.Models.Ivid;
 using Lace.Response;
 using Lace.Source.Ivid.Transform;
 
@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Builders.Responses
 {
     public class LaceResponseBuilder
     {
-        public ILaceResponse WithIvidResponseHandled()
+        public IProvideLaceResponse WithIvidResponseHandled()
         {
             var response = new LaceResponse();
 
@@ -27,7 +27,7 @@ namespace Lace.Test.Helper.Builders.Responses
 
         }
 
-        public ILaceResponse WithIvidResponseHandledAndVin12()
+        public IProvideLaceResponse WithIvidResponseHandledAndVin12()
         {
 
             var response = new LaceResponse();
@@ -47,7 +47,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return response;
         }
 
-        public ILaceResponse WithIvidResponseAndFinancedInterestVin()
+        public IProvideLaceResponse WithIvidResponseAndFinancedInterestVin()
         {
             var response = new LaceResponse();
 

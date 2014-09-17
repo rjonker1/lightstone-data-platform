@@ -4,15 +4,15 @@ using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.Audatex.Dto
 {
-    public class AudatexResponse : IResponseFromAudatex
+    public class AudatexResponse : IProvideDataFromAudatex
     {
 
-        public AudatexResponse(IList<IAccidentClaim> accidentClaims)
+        public AudatexResponse(IList<IProvideAccidentClaim> accidentClaims)
         {
             AccidentClaims = accidentClaims;
         }
 
-        public IList<IAccidentClaim> AccidentClaims { get; private set; }
+        public IList<IProvideAccidentClaim> AccidentClaims { get; private set; }
 
         public bool HasAccidentClaims { get; private set; }
 
@@ -41,7 +41,7 @@ namespace Lace.Models.Audatex.Dto
         }
 
 
-        public void AddAccidentClaim(IAccidentClaim claim)
+        public void AddAccidentClaim(IProvideAccidentClaim claim)
         {
             if (AccidentClaims.Any(ac => ac.Equals(claim))) return;
 
@@ -95,7 +95,7 @@ namespace Lace.Models.Audatex.Dto
             }
         }
 
-        private List<IAccidentClaim> GroupByQuoteEstimateExVat()
+        private List<IProvideAccidentClaim> GroupByQuoteEstimateExVat()
         {
             if (AccidentClaims == null) return null;
 
@@ -120,7 +120,7 @@ namespace Lace.Models.Audatex.Dto
         }
 
 
-        private List<IAccidentClaim> GroupByAssesmentNumber()
+        private List<IProvideAccidentClaim> GroupByAssesmentNumber()
         {
 
             if (AccidentClaims == null) return null;

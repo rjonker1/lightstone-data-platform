@@ -1,6 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Models.Responses;
-
+using Lace.Models;
 namespace Lace.Source
 {
     public class ExecuteSourceBase
@@ -14,14 +13,14 @@ namespace Lace.Source
             FallBack = fallbackSource;
         }
 
-        public void CallNextSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallNextSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             if (Next == null) return;
 
             Next.CallSource(response, laceEvent);
         }
 
-        public void CallFallbackSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallFallbackSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             if (FallBack == null) return;
 

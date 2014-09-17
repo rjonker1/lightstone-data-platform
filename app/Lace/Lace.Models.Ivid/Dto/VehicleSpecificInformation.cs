@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Ivid.Dto
 {
-    public class VehicleSpecificInformation : IVehicleSpecificInformation
+    public class VehicleSpecificInformation : IProvideVehicleSpecificInformation
     {
         public VehicleSpecificInformation(string odometer, string color, string registrationNumber, string vinNumber,
             string licenseNumber,

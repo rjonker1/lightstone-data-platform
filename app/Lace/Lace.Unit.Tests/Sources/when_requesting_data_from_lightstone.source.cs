@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source;
@@ -17,7 +17,7 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromSource _requestDataFromSource;
         private readonly ILaceRequest _request;
-        private ILaceResponse _response;
+        private IProvideLaceResponse _response;
         private readonly ILaceEvent _laceEvent;
         private readonly ICallTheSource _callTheSource;
 

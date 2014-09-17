@@ -1,10 +1,8 @@
 ﻿using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source;
-using Lace.Source.Ivid.ServiceCalls;
 using Lace.Source.IvidTitleHolder.ServiceCalls;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
@@ -18,7 +16,7 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _ividTitleHolderRequest;
-        private ILaceResponse _laceResponse;
+        private IProvideLaceResponse _laceResponse;
         private readonly ILaceEvent _laceEvent;
         private readonly ICallTheSource _externalWebServiceCall;
 

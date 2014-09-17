@@ -1,10 +1,9 @@
 ﻿using Lace.Events;
-using Lace.Models.Responses;
-
+using Lace.Models;
 namespace Lace.Source
 {
     public interface IExecuteTheSource
     {
-        void CallSource(ILaceResponse response, ILaceEvent laceEvent);
+        void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent);
     }
 }

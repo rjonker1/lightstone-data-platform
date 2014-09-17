@@ -1,7 +1,6 @@
 ﻿using Lace.Events;
+using Lace.Models;
 using Lace.Models.Ivid;
-using Lace.Models.Responses;
-using Lace.Response;
 using Lace.Source;
 using Lace.Source.Ivid.IvidServiceReference;
 using Lace.Source.Ivid.Transform;
@@ -12,13 +11,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingIvidExternalWebService : ICallTheSource
     {
         private HpiStandardQueryResponse _ividResponse;
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             _ividResponse = new SourceResponseBuilder().ForIvid();
             TransformResponse(response);
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformIvidResponse(_ividResponse);
 

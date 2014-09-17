@@ -1,9 +1,9 @@
 ﻿using System;
 using Common.Logging;
 using Lace.Events;
+using Lace.Models;
 using Lace.Models.Lightstone;
 using Lace.Models.Lightstone.Dto;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source.Lightstone.Cars;
 using Lace.Source.Lightstone.Metrics;
@@ -29,7 +29,7 @@ namespace Lace.Source.Lightstone.SourceCalls
             _lightstoneRepositories = lightstoneRepositories;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Lace.Source.Lightstone.SourceCalls
             }
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformLightstoneResponse(_lightstoneMetrics, _lightstoneCarInformation);
 
@@ -60,7 +60,7 @@ namespace Lace.Source.Lightstone.SourceCalls
             response.LightstoneResponseHandled.HasBeenHandled();
         }
 
-        private static void LightstoneResponseFailed(ILaceResponse response)
+        private static void LightstoneResponseFailed(IProvideLaceResponse response)
         {
             response.LightstoneResponse = null;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();

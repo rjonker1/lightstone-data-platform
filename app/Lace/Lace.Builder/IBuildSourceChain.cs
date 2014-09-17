@@ -1,6 +1,6 @@
 ﻿using System;
 using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 
 namespace Lace.Builder
@@ -8,6 +8,6 @@ namespace Lace.Builder
     public interface IBuildSourceChain
     {
         void Build();
-        Action<ILaceRequest, ILaceEvent, ILaceResponse> SourceChain { get; }
+        Action<ILaceRequest, ILaceEvent, IProvideLaceResponse> SourceChain { get; }
     }
 }

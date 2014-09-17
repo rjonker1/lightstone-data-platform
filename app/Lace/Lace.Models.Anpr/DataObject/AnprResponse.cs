@@ -3,7 +3,7 @@ using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.Anpr.DataObject
 {
-    public class AnprResponse : IResponseFromAnpr, ICheckIfAnprResponseWasSuccessful
+    public class AnprResponse : IProvideDataFromAnpr, ICheckIfAnprResponseWasSuccessful
     {
 
         public AnprResponse(string processedImage, string enhancedImage, string enhancedImageThumbnail,

@@ -3,9 +3,8 @@ using System.Linq;
 using DataPlatform.Shared.Entities;
 using Lace.Builder;
 using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
-using Lace.Response;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
@@ -31,6 +30,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                     w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, ILaceEvent, ILaceResponse> SourceChain { get; private set; }
+        public Action<ILaceRequest, ILaceEvent, IProvideLaceResponse> SourceChain { get; private set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Rgt.Dto
 {
-    public class RgtResponse : IResponseFromRgt
+    public class RgtResponse : IProvideDataFromRgt
     {
 
         public RgtResponse(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy,

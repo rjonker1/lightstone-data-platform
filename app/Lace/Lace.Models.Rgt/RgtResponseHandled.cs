@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Rgt
 {
-    public class RgtResponseHandled : IResponseHandled
+    public class RgtResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

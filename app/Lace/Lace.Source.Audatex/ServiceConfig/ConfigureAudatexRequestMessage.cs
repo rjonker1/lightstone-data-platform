@@ -1,11 +1,11 @@
-﻿using Lace.Models.Audatex.Dto;
-using Lace.Models.Responses;
+﻿using Lace.Models;
+using Lace.Models.Audatex.Dto;
 
 namespace Lace.Source.Audatex.ServiceConfig
 {
     public class ConfigureAudatexRequestMessage
     {
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
         private AudatexMessageData _audatexMessageData;
 
         private bool CanContinue
@@ -18,7 +18,7 @@ namespace Lace.Source.Audatex.ServiceConfig
       
         private const string MessageType = "MSGTYPE_HISTORYCHECK";
 
-        public ConfigureAudatexRequestMessage(ILaceResponse response)
+        public ConfigureAudatexRequestMessage(IProvideLaceResponse response)
         {
             _response = response;
         }

@@ -4,8 +4,8 @@ using System.ServiceModel.Channels;
 using Common.Logging;
 using Lace.Events;
 using Lace.Extensions;
+using Lace.Models;
 using Lace.Models.Ivid;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source.Ivid.IvidServiceReference;
 using Lace.Source.Ivid.ServiceConfig;
@@ -26,7 +26,7 @@ namespace Lace.Source.Ivid.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -79,14 +79,14 @@ namespace Lace.Source.Ivid.ServiceCalls
             }
         }
 
-        private static void IvidResponseFailed(ILaceResponse response)
+        private static void IvidResponseFailed(IProvideLaceResponse response)
         {
             response.IvidResponse = null;
             response.IvidResponseHandled = new IvidResponseHandled();
             response.IvidResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformIvidResponse(_ividResponse);
 

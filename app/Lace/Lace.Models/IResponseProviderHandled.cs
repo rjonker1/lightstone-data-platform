@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models
 {
-    public interface IResponseHandled
+    public interface IResponseProviderHandled
     {
         bool Handled { get; }
         void HasNotBeenHandled();

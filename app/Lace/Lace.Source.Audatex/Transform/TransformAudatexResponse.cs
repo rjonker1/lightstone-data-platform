@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lace.Extensions;
+using Lace.Models;
 using Lace.Models.Audatex.Dto;
 using Lace.Models.Responses;
 using Lace.Models.Responses.Sources;
@@ -27,17 +28,17 @@ namespace Lace.Source.Audatex.Transform
             }
         }
 
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
         private readonly ILaceRequest _request;
 
         private readonly string _manufacturer;
         private readonly int _warrantyYear;
         private readonly bool _canApplyRepairInfo;
 
-        public TransformAudatexResponse(GetDataResult audatexResponse, ILaceResponse response, ILaceRequest request)
+        public TransformAudatexResponse(GetDataResult audatexResponse, IProvideLaceResponse response, ILaceRequest request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
-            Result = Continue ? new AudatexResponse(new List<IAccidentClaim>()) : null;
+            Result = Continue ? new AudatexResponse(new List<IProvideAccidentClaim>()) : null;
             Message = audatexResponse;
 
             _response = response;

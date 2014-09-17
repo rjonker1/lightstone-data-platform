@@ -1,7 +1,7 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
+using Lace.Models;
 using Lace.Models.Ivid;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source.Enums;
 using Lace.Source.Ivid.ServiceCalls;
@@ -18,7 +18,7 @@ namespace Lace.Source.Ivid
             _request = request;
         }
 
-        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Ivid, _request);
 
@@ -39,7 +39,7 @@ namespace Lace.Source.Ivid
         }
 
 
-        private static void NotHandledResponse(ILaceResponse response)
+        private static void NotHandledResponse(IProvideLaceResponse response)
         {
             response.IvidResponse = null;
             response.IvidResponseHandled = new IvidResponseHandled();

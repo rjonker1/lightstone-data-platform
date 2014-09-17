@@ -1,11 +1,11 @@
 ﻿using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 
 namespace Lace.Source
 {
     public interface ICallTheSource
     {
-        void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent);
-        void TransformResponse(ILaceResponse response);
+        void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent);
+        void TransformResponse(IProvideLaceResponse response);
     }
 }

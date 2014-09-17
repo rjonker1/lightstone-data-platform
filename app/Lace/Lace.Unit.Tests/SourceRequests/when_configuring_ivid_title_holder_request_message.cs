@@ -1,4 +1,4 @@
-﻿using Lace.Models.Responses;
+﻿using Lace.Models;
 using Lace.Request;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
 using Lace.Test.Helper.Builders.Requests;
@@ -10,7 +10,7 @@ namespace Lace.Unit.Tests.SourceRequests
     internal class when_configuring_ivid_title_holder_request_message : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
         private ConfigureIvidTitleHolderRequestMessage _configureRequestMessage;
 
 

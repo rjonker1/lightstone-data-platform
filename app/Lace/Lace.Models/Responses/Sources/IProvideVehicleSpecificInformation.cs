@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Responses.Sources
 {
-    public interface IVehicleSpecificInformation : IPointToLaceSource
+    public interface IProvideVehicleSpecificInformation : IPointToLaceProvider
     {
         string Odometer { get; }
         string Colour { get; }

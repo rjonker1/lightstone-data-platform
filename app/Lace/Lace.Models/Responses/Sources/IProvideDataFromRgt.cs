@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromRgt : IPointToLaceSource
+    public interface IProvideDataFromRgt : IPointToLaceProvider
     {
         string Manufacturer { get; }
         int ModelYear { get; }

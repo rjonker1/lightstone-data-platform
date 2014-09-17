@@ -3,7 +3,7 @@ using System.Data;
 using Common.Logging;
 using Lace.Events;
 using Lace.Extensions;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Models.RgtVin;
 using Lace.Request;
 using Lace.Source.RgtVin.ServiceConfig;
@@ -24,7 +24,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             }
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformRgtVinResponse(_rgtVinResponse);
 
@@ -83,7 +83,7 @@ namespace Lace.Source.RgtVin.ServiceCalls
             response.RgtVinResponseHandled.HasBeenHandled();
         }
 
-        private static void RgtVinResponseFailed(ILaceResponse response)
+        private static void RgtVinResponseFailed(IProvideLaceResponse response)
         {
             response.RgtVinResponse = null;
             response.RgtVinResponseHandled = new RgtVinResponseHandled();

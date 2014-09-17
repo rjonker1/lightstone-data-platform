@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromIvidTitleHolder : IPointToLaceSource
+    public interface IProvideDataFromIvidTitleHolder : IPointToLaceProvider
     {
         string BankName { get; }
         string AccountNumber { get; }

@@ -4,7 +4,7 @@ using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.IvidTitleHolder.Dto
 {
-    public class IvidTitleHolderResponse : IResponseFromIvidTitleHolder, IBuildIvidTitleHolderResponse
+    public class IvidTitleHolderResponse : IProvideDataFromIvidTitleHolder, IBuildIvidTitleHolderResponse
     {
         private const string NotAvailableError = "Error - Not Available";
 

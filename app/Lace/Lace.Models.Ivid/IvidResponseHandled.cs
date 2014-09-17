@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Ivid
 {
-    public class IvidResponseHandled : IResponseHandled
+    public class IvidResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

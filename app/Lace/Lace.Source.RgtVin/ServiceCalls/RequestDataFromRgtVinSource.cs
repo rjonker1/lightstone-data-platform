@@ -1,11 +1,11 @@
 ﻿using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 
 namespace Lace.Source.RgtVin.ServiceCalls
 {
     public class RequestDataFromRgtVinSource : IRequestDataFromSource
     {
-        public void FetchDataFromSource(ILaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
+        public void FetchDataFromSource(IProvideLaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
         {
            externalWebService.CallTheExternalSource(response, laceEvent);
         }

@@ -1,4 +1,5 @@
 ﻿
+using Lace.Models;
 using Lace.Models.Lightstone;
 using Lace.Models.Responses;
 using Lace.Request;
@@ -39,7 +40,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
         }
 
-        public ILaceResponse ForAudatexWithLaceResponse()
+        public IProvideLaceResponse ForAudatexWithLaceResponse()
         {
             return FakeAudatexWebResponseData.GetLaceResponseToUserInAudatexRequest();
         }

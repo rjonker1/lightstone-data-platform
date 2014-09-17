@@ -4,10 +4,9 @@ using System.ServiceModel.Channels;
 using Common.Logging;
 using Lace.Events;
 using Lace.Extensions;
+using Lace.Models;
 using Lace.Models.IvidTitleHolder;
-using Lace.Models.Responses;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Source.IvidTitleHolder.ServiceConfig;
 using Lace.Source.IvidTitleHolder.Transform;
@@ -27,7 +26,7 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -85,14 +84,14 @@ namespace Lace.Source.IvidTitleHolder.ServiceCalls
             }
         }
 
-        private static void IvidTitleHolderResponseFailed(ILaceResponse response)
+        private static void IvidTitleHolderResponseFailed(IProvideLaceResponse response)
         {
             response.IvidTitleHolderResponse = null;
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
         
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 

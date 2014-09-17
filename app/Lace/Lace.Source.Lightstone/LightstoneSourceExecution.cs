@@ -1,7 +1,7 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
+using Lace.Models;
 using Lace.Models.Lightstone;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source.Enums;
 using Lace.Source.Lightstone.Repository.Factory;
@@ -20,7 +20,7 @@ namespace Lace.Source.Lightstone
             _request = request;
         }
 
-        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Lightstone, _request);
 
@@ -42,7 +42,7 @@ namespace Lace.Source.Lightstone
             }
         }
 
-        private static void NotHandledResponse(ILaceResponse response)
+        private static void NotHandledResponse(IProvideLaceResponse response)
         {
             response.LightstoneResponse = null;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();

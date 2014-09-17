@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.RgtVin
 {
-    public class RgtVinResponseHandled : IResponseHandled
+    public class RgtVinResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

@@ -1,6 +1,6 @@
 ﻿using Lace.Events;
+using Lace.Models;
 using Lace.Models.IvidTitleHolder;
-using Lace.Models.Responses;
 using Lace.Source;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Source.IvidTitleHolder.Transform;
@@ -12,13 +12,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingIvidTitleHolderExternalWebService : ICallTheSource
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             _ividTitleHolderResponse = new SourceResponseBuilder().ForIvidTitleHolder();
             TransformResponse(response);
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 

@@ -1,6 +1,6 @@
 ﻿using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source;
@@ -16,7 +16,7 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromSource _requestDataFromService;
         private readonly ILaceRequest _ividRequest;
-        private ILaceResponse _laceResponse;
+        private IProvideLaceResponse _laceResponse;
         private readonly ILaceEvent _laceEvent;
         private readonly ICallTheSource _externalWebServiceCall;
 

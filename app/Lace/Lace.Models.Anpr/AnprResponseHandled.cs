@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Anpr
 {
-    public class AnprResponseHandled : IResponseHandled
+    public class AnprResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

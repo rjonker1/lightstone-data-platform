@@ -1,8 +1,8 @@
 ﻿namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromIvid : IPointToLaceSource
+    public interface IProvideDataFromIvid : IPointToLaceProvider
     {
-        IVehicleSpecificInformation SpecificInformation { get; }
+        IProvideVehicleSpecificInformation SpecificInformation { get; }
 
         string StatusMessage { get; }
 

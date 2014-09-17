@@ -8,7 +8,7 @@ namespace Lace.Source.Lightstone.Transform
     public class TransformLightstoneResponse : ITransform
     {
         public bool Continue { get; private set; }
-        public IResponseFromLightstone Result { get; private set; }
+        public IProvideDataFromLightstone Result { get; private set; }
         private readonly IRetrieveValuationFromMetrics _metricResponse;
         private readonly IRetrieveCarInformation _carInformation;
 

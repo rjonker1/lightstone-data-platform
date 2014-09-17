@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Ivid.Dto
 {
-    public class IvidResponse : IResponseFromIvid, IBuildIvidResponse
+    public class IvidResponse : IProvideDataFromIvid, IBuildIvidResponse
     {
 
         private const string NotAvailableError = "Error - Not Available";
@@ -108,7 +108,7 @@ namespace Lace.Models.Ivid.Dto
         }
 
 
-        public IVehicleSpecificInformation SpecificInformation { get; private set; }
+        public IProvideVehicleSpecificInformation SpecificInformation { get; private set; }
 
         public string StatusMessage { get; private set; }
 

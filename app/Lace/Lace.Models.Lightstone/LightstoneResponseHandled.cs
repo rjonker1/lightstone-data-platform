@@ -1,6 +1,6 @@
 ﻿namespace Lace.Models.Lightstone
 {
-    public class LightstoneResponseHandled : IResponseHandled
+    public class LightstoneResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

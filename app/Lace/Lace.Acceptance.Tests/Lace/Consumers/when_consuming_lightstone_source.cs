@@ -1,6 +1,6 @@
 ﻿using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 using Lace.Response;
 using Lace.Source.Lightstone;
@@ -14,7 +14,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
         private LightstoneSourceExecution _consumer;
 
         public when_consuming_lightstone_source()

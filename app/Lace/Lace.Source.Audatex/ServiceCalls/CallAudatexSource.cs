@@ -2,8 +2,8 @@
 using Common.Logging;
 using Lace.Events;
 using Lace.Extensions;
+using Lace.Models;
 using Lace.Models.Audatex;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Audatex.ServiceConfig;
@@ -24,7 +24,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             }
         }
 
-        private static void AudatexResponseFailed(ILaceResponse response)
+        private static void AudatexResponseFailed(IProvideLaceResponse response)
         {
             response.AudatexResponse = null;
             response.AudatexResponseHandled = new AudatexResponseHandled();
@@ -86,7 +86,7 @@ namespace Lace.Source.Audatex.ServiceCalls
             };
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

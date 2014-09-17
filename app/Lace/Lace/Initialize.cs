@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Common.Logging;
 using Lace.Builder;
 using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 using Lace.Response.ExternalServices;
 using Monitoring.Sources.Lace;
@@ -17,13 +17,13 @@ namespace Lace
 
         private readonly ILaceRequest _request;
 
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         private readonly ILaceEvent _laceEvent;
 
-        public Initialize(ILaceResponse response, ILaceRequest request, ILaceEvent laceEvent,
+        public Initialize(IProvideLaceResponse response, ILaceRequest request, ILaceEvent laceEvent,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;

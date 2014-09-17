@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromLightstone : IPointToLaceSource
+    public interface IProvideDataFromLightstone : IPointToLaceProvider
     {
         int? CarId { get; }
 

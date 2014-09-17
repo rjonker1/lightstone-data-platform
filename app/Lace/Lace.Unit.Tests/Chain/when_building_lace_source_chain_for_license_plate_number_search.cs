@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Lace.Builder;
 using Lace.Events;
 using Lace.Events.Messages.Publish;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 using Lace.Response;
 using Lace.Test.Helper.Builders.Requests;
@@ -21,7 +21,7 @@ namespace Lace.Unit.Tests.Chain
 
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private Dictionary<Type, Func<ILaceRequest, ILaceResponse>> _handlers;
+        private Dictionary<Type, Func<ILaceRequest, IProvideLaceResponse>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
 

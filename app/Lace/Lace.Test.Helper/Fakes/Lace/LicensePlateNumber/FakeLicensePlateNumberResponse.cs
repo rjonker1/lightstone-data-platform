@@ -1,9 +1,9 @@
-﻿using Lace.Models.Responses;
+﻿using Lace.Models;
 
 namespace Lace.Test.Helper.Fakes.Lace.LicensePlateNumber
 {
     public class FakeLicensePlateNumberResponse
     {
-        public ILaceResponse Response { get; set; } 
+        public IProvideLaceResponse Response { get; set; } 
     }
 }

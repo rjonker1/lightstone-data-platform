@@ -1,10 +1,10 @@
 ﻿using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 
 namespace Lace.Source
 {
     public interface IRequestDataFromSource
     {
-        void FetchDataFromSource(ILaceResponse response, ICallTheSource externalSource, ILaceEvent laceEvent);
+        void FetchDataFromSource(IProvideLaceResponse response, ICallTheSource externalSource, ILaceEvent laceEvent);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Responses.Sources
 {
-    public interface IAccidentClaim
+    public interface IProvideAccidentClaim
     {
         Guid Key { get; }
         DateTime? AccidentDate { get; }

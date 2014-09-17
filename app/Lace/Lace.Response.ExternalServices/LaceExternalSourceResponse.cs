@@ -1,9 +1,8 @@
-﻿using Lace.Models.Responses;
-
+﻿using Lace.Models;
 namespace Lace.Response.ExternalServices
 {
     public class LaceExternalSourceResponse
     {
-        public ILaceResponse Response { get; set; }
+        public IProvideLaceResponse Response { get; set; }
     }
 }

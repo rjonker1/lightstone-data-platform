@@ -1,6 +1,5 @@
-﻿using Lace.Models.Responses;
+﻿using Lace.Models;
 using Lace.Request;
-using Lace.Response;
 using Lace.Source.Audatex.AudatexServiceReference;
 using Lace.Source.Audatex.Transform;
 using Lace.Test.Helper.Builders.Requests;
@@ -13,7 +12,7 @@ namespace Lace.Unit.Tests.Transform
     {
         private readonly GetDataResult _audatexWebServiceResponse;
         private TransformAudatexResponse _transformer;
-        private readonly ILaceResponse _response;
+        private readonly IProvideLaceResponse _response;
         private readonly ILaceRequest _request;
 
 

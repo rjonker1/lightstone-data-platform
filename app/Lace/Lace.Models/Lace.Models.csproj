@@ -38,19 +38,19 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Enums\ServiceCallState.cs" />
-    <Compile Include="Responses\Sources\IAccidentClaim.cs" />
+    <Compile Include="Responses\Sources\IProvideAccidentClaim.cs" />
     <Compile Include="Responses\Sources\Specifics\IRespondWithValuation.cs" />
-    <Compile Include="Responses\Sources\IResponseFromAnpr.cs" />
-    <Compile Include="Responses\Sources\IResponseFromAudatex.cs" />
-    <Compile Include="Responses\Sources\IResponseFromIvid.cs" />
-    <Compile Include="Responses\Sources\IResponseFromIvidTitleHolder.cs" />
-    <Compile Include="Responses\IPointToLaceSource.cs" />
-    <Compile Include="Responses\ILaceResponse.cs" />
-    <Compile Include="Responses\Sources\IResponseFromLightstone.cs" />
-    <Compile Include="Responses\Sources\IResponseFromRgt.cs" />
-    <Compile Include="Responses\Sources\IResponseFromRgtVin.cs" />
-    <Compile Include="Responses\IResponseHandled.cs" />
-    <Compile Include="Responses\Sources\IVehicleSpecificInformation.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromAnpr.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromAudatex.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromIvid.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromIvidTitleHolder.cs" />
+    <Compile Include="IPointToLaceProvider.cs" />
+    <Compile Include="IProvideLaceResponse.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromLightstone.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromRgt.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromRgtVin.cs" />
+    <Compile Include="IResponseProviderHandled.cs" />
+    <Compile Include="Responses\Sources\IProvideVehicleSpecificInformation.cs" />
     <Compile Include="Responses\Sources\Metric\IPair.cs" />
     <Compile Include="Responses\Sources\Specifics\IAddValuationItem.cs" />
     <Compile Include="Responses\Sources\Specifics\IRespondWithAccidentDistributionModel.cs" />

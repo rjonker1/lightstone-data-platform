@@ -3,7 +3,7 @@ using Lace.Models.Responses.Sources.Specifics;
 
 namespace Lace.Models.Lightstone.Dto
 {
-    public class LightstoneResponse : IResponseFromLightstone
+    public class LightstoneResponse : IProvideDataFromLightstone
     {
         public LightstoneResponse()
         {

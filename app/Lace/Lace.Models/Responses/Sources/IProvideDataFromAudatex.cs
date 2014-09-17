@@ -2,9 +2,9 @@
 
 namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromAudatex : IPointToLaceSource
+    public interface IProvideDataFromAudatex : IPointToLaceProvider
     {
-        IList<IAccidentClaim> AccidentClaims { get; }
+        IList<IProvideAccidentClaim> AccidentClaims { get; }
 
         void CleanAccidentClaims();
 
@@ -12,7 +12,7 @@ namespace Lace.Models.Responses.Sources
 
         void ResetAccidentClaimFlag();
 
-        void AddAccidentClaim(IAccidentClaim claim);
+        void AddAccidentClaim(IProvideAccidentClaim claim);
 
         bool HasAccidentClaims { get; }
 

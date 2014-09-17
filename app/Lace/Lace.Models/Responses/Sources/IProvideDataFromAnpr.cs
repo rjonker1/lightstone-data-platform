@@ -2,7 +2,7 @@
 
 namespace Lace.Models.Responses.Sources
 {
-    public interface IResponseFromAnpr : IPointToLaceSource
+    public interface IProvideDataFromAnpr : IPointToLaceProvider
     {
         string ProcessedImage { get; }
         string EnhancedImage { get; }

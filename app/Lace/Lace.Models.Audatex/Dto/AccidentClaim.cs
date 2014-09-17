@@ -3,7 +3,7 @@ using Lace.Models.Responses.Sources;
 
 namespace Lace.Models.Audatex.Dto
 {
-    public class AccidentClaim : IAccidentClaim
+    public class AccidentClaim : IProvideAccidentClaim
     {
 
         public AccidentClaim(DateTime? accidentDate, string assessmentNumber, string claimReferenceNumber,

@@ -1,5 +1,5 @@
 ﻿using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Source;
 
 namespace Lace.Consumer
@@ -17,7 +17,7 @@ namespace Lace.Consumer
             _externalWebSourceCall = externalSourceCall;
         }
 
-        public void ConsumeExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void ConsumeExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             _handleServiceCall
                 .Request(c =>

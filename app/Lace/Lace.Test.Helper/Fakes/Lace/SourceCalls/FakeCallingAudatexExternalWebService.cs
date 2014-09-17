@@ -1,6 +1,6 @@
 ﻿using Lace.Events;
+using Lace.Models;
 using Lace.Models.Audatex;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source;
 using Lace.Source.Audatex.AudatexServiceReference;
@@ -19,13 +19,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
             TransformResponse(response);
         }
 
-        public void TransformResponse(ILaceResponse response)
+        public void TransformResponse(IProvideLaceResponse response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

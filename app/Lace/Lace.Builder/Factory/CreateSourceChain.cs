@@ -4,7 +4,7 @@ using Common.Logging;
 using DataPlatform.Shared.Entities;
 using Lace.Builder.Specifications;
 using Lace.Events;
-using Lace.Models.Responses;
+using Lace.Models;
 using Lace.Request;
 
 namespace Lace.Builder.Factory
@@ -34,6 +34,6 @@ namespace Lace.Builder.Factory
                     w => w.Key.Equals(_package.Action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, ILaceEvent, ILaceResponse> SourceChain { get; private set; }
+        public Action<ILaceRequest, ILaceEvent, IProvideLaceResponse> SourceChain { get; private set; }
     }
 }

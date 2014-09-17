@@ -1,7 +1,7 @@
 ﻿using Lace.Consumer;
 using Lace.Events;
+using Lace.Models;
 using Lace.Models.Audatex;
-using Lace.Models.Responses;
 using Lace.Request;
 using Lace.Source.Audatex.ServiceCalls;
 using Lace.Source.Enums;
@@ -19,7 +19,7 @@ namespace Lace.Source.Audatex
             _request = request;
         }
 
-        public void CallSource(ILaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Audatex, _request);
 
@@ -39,7 +39,7 @@ namespace Lace.Source.Audatex
             CallNextSource(response, laceEvent);
         }
 
-        private static void NotHandledResponse(ILaceResponse response)
+        private static void NotHandledResponse(IProvideLaceResponse response)
         {
             response.AudatexResponse = null;
             response.AudatexResponseHandled = new AudatexResponseHandled();

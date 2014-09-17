@@ -1,4 +1,5 @@
-﻿using Lace.Models.Lightstone.Dto;
+﻿using Lace.Models;
+using Lace.Models.Lightstone.Dto;
 using Lace.Models.Responses;
 using Lace.Models.RgtVin.Dto;
 using Lace.Response;
@@ -39,7 +40,7 @@ namespace Lace.Test.Helper.Fakes.Responses
             };
         }
 
-        public static ILaceResponse GetLaceResponseToUserInAudatexRequest()
+        public static IProvideLaceResponse GetLaceResponseToUserInAudatexRequest()
         {
             return new LaceResponse()
             {
