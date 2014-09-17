@@ -448,7 +448,7 @@ end
 task :team_city => [
 	'environment:default',
 	'build:default',
-	'testing:unit',
+	#'testing:unit',
 	'package:default'
 	] do
 end
