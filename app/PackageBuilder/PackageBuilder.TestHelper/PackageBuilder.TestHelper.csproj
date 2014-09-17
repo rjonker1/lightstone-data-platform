@@ -65,6 +65,9 @@
     <Reference Include="Nancy.Testing">
       <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
     </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -78,7 +81,7 @@
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
     <Compile Include="Builders\Entites\DataSetBuilder.cs" />
-    <Compile Include="Builders\Entites\DataSourceBuilder.cs" />
+    <Compile Include="Builders\Entites\DataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
     <Compile Include="Builders\Entites\PackageBuilder.cs" />
