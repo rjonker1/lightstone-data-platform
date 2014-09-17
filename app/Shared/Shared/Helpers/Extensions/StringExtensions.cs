@@ -66,5 +66,10 @@ namespace DataPlatform.Shared.Helpers.Extensions
             var info = CultureInfo.CurrentCulture.TextInfo;
             return info.ToTitleCase(text);
         }
+
+        public static string FormatWith(this string format, params object[] args)
+        {
+            return string.Format(CultureInfo.InvariantCulture, format ?? string.Empty, args);
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Nancy.TinyIoc;
+﻿using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using PackageBuilder.Api;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Mothers;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -13,12 +15,12 @@ namespace PackageBuilder.Unit.Tests.Fakes
             _username = username;
         }
 
-        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+        protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
             base.ConfigureApplicationContainer(container);
 
-            container.Register<IAuthenticateUser>(new TestAuthenticator(_username));
-            container.Register(PackageLookupMother.GetCannedVersion());
+            container.Register(Component.For<IAuthenticateUser>().Instance(new TestAuthenticator(_username)));
+            container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion()));
         }
     }
 }

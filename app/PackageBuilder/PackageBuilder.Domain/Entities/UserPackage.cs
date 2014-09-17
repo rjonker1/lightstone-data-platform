@@ -1,7 +1,5 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Contracts;
-using PackageBuilder.Domain.Contracts.Enitities;
 
 namespace PackageBuilder.Domain.Entities
 {

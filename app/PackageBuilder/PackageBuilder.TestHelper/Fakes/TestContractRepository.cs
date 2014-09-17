@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Contracts;
-using PackageBuilder.Domain.Contracts.Enitities;
+using PackageBuilder.Domain.Entities;
 using Shared.Public.TestHelpers.Repositories;
 
 namespace PackageBuilder.TestHelper.Fakes
