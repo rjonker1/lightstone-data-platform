@@ -163,8 +163,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Models.Lightstone.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Models.Lightstone.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Rgt.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Rgt.pdb" to="lib\net45"/>
+       <!-- <include pattern="Lightstone.DataPlatform.Lace.Models.Rgt.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Models.Rgt.pdb" to="lib\net45"/> -->
         <include pattern="Lightstone.DataPlatform.Lace.Models.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Models.RgtVin.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Source.dll" to="lib\net45"/>
