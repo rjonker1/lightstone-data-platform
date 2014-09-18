@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lace.Models.Lightstone.Dto;
-using Lace.Models.Lightstone.Dto.Metric;
+using Lace.Models.Lightstone.DataObject;
+using Lace.Models.Lightstone.DataObject.Metric;
 using Lace.Models.Responses.Sources.Metric;
 using Lace.Request;
 using Lace.Source.Lightstone.Models;

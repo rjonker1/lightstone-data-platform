@@ -1,4 +1,4 @@
-﻿using Lace.Models.Ivid.Dto;
+﻿using Lace.Models.Ivid.DataObject;
 using Lace.Source.Ivid.IvidServiceReference;
 
 namespace Lace.Source.Ivid.Transform

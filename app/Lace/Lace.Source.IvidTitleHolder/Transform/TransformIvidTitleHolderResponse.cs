@@ -1,4 +1,4 @@
-﻿using Lace.Models.IvidTitleHolder.Dto;
+﻿using Lace.Models.IvidTitleHolder.DataObject;
 using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Source.IvidTitleHolder.Transform

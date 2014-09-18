@@ -36,7 +36,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Dto\RgtResponse.cs" />
+    <Compile Include="DataObject\RgtResponse.cs" />
     <Compile Include="RgtResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>

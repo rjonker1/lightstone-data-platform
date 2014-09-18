@@ -3,7 +3,7 @@ using Common.Logging;
 using Lace.Events;
 using Lace.Models;
 using Lace.Models.Lightstone;
-using Lace.Models.Lightstone.Dto;
+using Lace.Models.Lightstone.DataObject;
 using Lace.Request;
 using Lace.Source.Lightstone.Cars;
 using Lace.Source.Lightstone.Metrics;

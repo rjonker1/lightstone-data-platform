@@ -38,7 +38,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="FinancedInterestValidation.cs" />
-    <Compile Include="Dto\IvidTitleHolderResponse.cs" />
+    <Compile Include="DataObject\IvidTitleHolderResponse.cs" />
     <Compile Include="IBuildIvidTitleHolderResponse.cs" />
     <Compile Include="IvidTitleHolderResponseHandled.cs" />
   </ItemGroup>

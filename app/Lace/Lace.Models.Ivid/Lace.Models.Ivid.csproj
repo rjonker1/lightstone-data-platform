@@ -36,10 +36,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Dto\IvidResponse.cs" />
+    <Compile Include="DataObject\IvidResponse.cs" />
     <Compile Include="IBuildIvidResponse.cs" />
     <Compile Include="IvidResponseHandled.cs" />
-    <Compile Include="Dto\VehicleSpecificInformation.cs" />
+    <Compile Include="DataObject\VehicleSpecificInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Models\Lace.Models.csproj">

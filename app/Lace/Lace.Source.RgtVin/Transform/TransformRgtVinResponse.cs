@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using Lace.Extensions;
-using Lace.Models.RgtVin.Dto;
+using Lace.Models.RgtVin.DataObject;
 
 namespace Lace.Source.RgtVin.Transform
 {

@@ -1,5 +1,5 @@
 ﻿using Lace.Models;
-using Lace.Models.RgtVin.Dto;
+using Lace.Models.RgtVin.DataObject;
 using Lace.Request;
 
 namespace Lace.Source.RgtVin.ServiceConfig

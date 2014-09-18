@@ -37,25 +37,25 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Dto\AccidentDistributionModel.cs" />
-    <Compile Include="Dto\AmortisationFactorModel.cs" />
-    <Compile Include="Dto\AmortisedValueModel.cs" />
-    <Compile Include="Dto\AreaFactorModel.cs" />
-    <Compile Include="Dto\AuctionFactorModel.cs" />
-    <None Include="Dto\CarModel.cs.old" />
-    <Compile Include="Dto\ConfidenceModel.cs" />
-    <Compile Include="Dto\EstimatedValueModel.cs" />
-    <Compile Include="Dto\FrequencyModel.cs" />
-    <Compile Include="Dto\ImageGaugeModel.cs" />
-    <Compile Include="Dto\Metric\Pair.cs" />
-    <Compile Include="Dto\PriceModel.cs" />
-    <Compile Include="Dto\RepairIndexModel.cs" />
-    <Compile Include="Dto\SaleModel.cs" />
-    <Compile Include="Dto\TotalSalesByAgeModel.cs" />
-    <Compile Include="Dto\TotalSalesByGenderModel.cs" />
-    <Compile Include="Dto\Valuation.cs" />
-    <None Include="Dto\Vin12.cs.old" />
-    <Compile Include="Dto\LightstoneResponse.cs" />
+    <Compile Include="DataObject\AccidentDistributionModel.cs" />
+    <Compile Include="DataObject\AmortisationFactorModel.cs" />
+    <Compile Include="DataObject\AmortisedValueModel.cs" />
+    <Compile Include="DataObject\AreaFactorModel.cs" />
+    <Compile Include="DataObject\AuctionFactorModel.cs" />
+    <None Include="DataObject\CarModel.cs.old" />
+    <Compile Include="DataObject\ConfidenceModel.cs" />
+    <Compile Include="DataObject\EstimatedValueModel.cs" />
+    <Compile Include="DataObject\FrequencyModel.cs" />
+    <Compile Include="DataObject\ImageGaugeModel.cs" />
+    <Compile Include="DataObject\Metric\Pair.cs" />
+    <Compile Include="DataObject\PriceModel.cs" />
+    <Compile Include="DataObject\RepairIndexModel.cs" />
+    <Compile Include="DataObject\SaleModel.cs" />
+    <Compile Include="DataObject\TotalSalesByAgeModel.cs" />
+    <Compile Include="DataObject\TotalSalesByGenderModel.cs" />
+    <Compile Include="DataObject\Valuation.cs" />
+    <None Include="DataObject\Vin12.cs.old" />
+    <Compile Include="DataObject\LightstoneResponse.cs" />
     <Compile Include="LightstoneResponseHandled.cs" />
   </ItemGroup>
   <ItemGroup>

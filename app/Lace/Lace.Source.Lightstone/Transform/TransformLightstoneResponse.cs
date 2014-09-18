@@ -1,4 +1,4 @@
-﻿using Lace.Models.Lightstone.Dto;
+﻿using Lace.Models.Lightstone.DataObject;
 using Lace.Models.Responses.Sources;
 using Lace.Source.Lightstone.Cars;
 using Lace.Source.Lightstone.Metrics;

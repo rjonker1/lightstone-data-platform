@@ -1,4 +1,4 @@
-﻿using Lace.Models.Ivid.Dto;
+﻿using Lace.Models.Ivid.DataObject;
 
 namespace Lace.Models.Ivid
 {

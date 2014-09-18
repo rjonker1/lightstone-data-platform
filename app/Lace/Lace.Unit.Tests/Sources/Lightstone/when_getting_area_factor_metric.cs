@@ -1,4 +1,4 @@
-﻿using Lace.Models.Lightstone.Dto;
+﻿using Lace.Models.Lightstone.DataObject;
 using Lace.Source.Lightstone.Metrics;
 using Lace.Source.Lightstone.Metrics.Specifics;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
