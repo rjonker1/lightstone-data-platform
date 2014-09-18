@@ -3,17 +3,17 @@ using System.Linq;
 using System.Web.Mvc;
 using Lace.Models.Ivid.Dto;
 using PackageBuilder.Common.Helpers.Extensions;
-using PackageBuilder.Domain.Helpers.Cqrs.CommandHandling;
+using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Web.Controllers
 {
     public class DataProviderController : Controller
     {
-        private readonly IHandleCommand _commandHandler;
+        private readonly IHandleMessages _handler;
 
-        public DataProviderController(IHandleCommand commandHandler)
+        public DataProviderController(IHandleMessages handler)
         {
-            _commandHandler = commandHandler;
+            _handler = handler;
         }
 
         public ActionResult Index()

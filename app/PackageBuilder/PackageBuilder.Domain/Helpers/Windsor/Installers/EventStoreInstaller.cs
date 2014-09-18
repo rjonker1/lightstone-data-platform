@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using CommonDomain;
+using CommonDomain.Core;
+using CommonDomain.Persistence;
 using MemBus;
 using MemBus.Configurators;
 using NEventStore;
 using NEventStore.Dispatcher;
-using PackageBuilder.Domain.Helpers.Cqrs.Events;
+using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Domain.Helpers.Windsor.Installers
 {
@@ -15,6 +18,9 @@ namespace PackageBuilder.Domain.Helpers.Windsor.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>().Construct()));
+            container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>());
+
             var eventStore = Wireup.Init()
                 .UsingRavenPersistence("packageBuilder/database")
                 .InitializeStorageEngine()
@@ -26,16 +32,28 @@ namespace PackageBuilder.Domain.Helpers.Windsor.Installers
                 })
                 .HookIntoPipelineUsing(new[] {new AuthorizationPipelineHook()})
                 .UsingSynchronousDispatchScheduler()
-                .DispatchTo(new InMemoryDispatcher())
+                .DispatchTo(container.Resolve<IDispatchCommits>())
                 .Build();
 
+            
             container.Register(Component.For<IStoreEvents>().Instance(eventStore));
+            container.Register(Component.For<IConstructAggregates>().ImplementedBy<AggregateFactory>());
+            container.Register(Component.For<IDetectConflicts>().ImplementedBy<ConflictDetector>());
+            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(NEventStoreRepository<>)));
         }
     }
 
     public class InMemoryDispatcher : IDispatchCommits
     {
-        readonly IBus _bus = BusSetup.StartWith<Conservative>().Construct(); 
+        private readonly IBus _bus;
+        private readonly IHandleMessages _handler;
+
+        public InMemoryDispatcher(IBus bus, IHandleMessages handler)
+        {
+            _bus = bus;
+            _handler = handler;
+        }
+
         public void Dispose()
         {
             _bus.Dispose();
@@ -43,8 +61,9 @@ namespace PackageBuilder.Domain.Helpers.Windsor.Installers
 
         public void Dispatch(ICommit commit)
         {
-            foreach (var @event in commit.Events.Where(x => x.Body is IDomainEvent))
-                _bus.Publish(@event.Body);
+            //foreach (var @event in commit.Events.Where(x => x.Body is IDomainEvent))
+            //    _handler.Handle(@event.Body);
+                //_bus.Publish(@event.Body);
         }
     }
 

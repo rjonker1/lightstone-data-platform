@@ -1,12 +1,12 @@
 using System;
 using PackageBuilder.Domain.Helpers.Cqrs.Events;
 
-namespace PackageBuilder.Domain.DataProviders.Events
+namespace PackageBuilder.Domain.DataFields.Events
 {
-    public class DataProviderRenamedEvent : Event
+    public class DataFieldRenamed : DomainEvent
     {
         public readonly string NewName;
-        public DataProviderRenamedEvent(Guid id, string name)
+        public DataFieldRenamed(Guid id, string name)
         {
             Id = id;
             NewName = name;

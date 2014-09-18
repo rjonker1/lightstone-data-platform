@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using PackageBuilder.Domain.Helpers.Cqrs.CommandHandling;
+using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Domain.Helpers.Windsor.Installers
 {
@@ -9,8 +9,8 @@ namespace PackageBuilder.Domain.Helpers.Windsor.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IHandleCommand>().ImplementedBy<CommandHandler>());
-            container.Register(Classes.FromAssemblyContaining<IHandleCommand>().BasedOn(typeof(IHandleCommand<>)).WithServiceAllInterfaces());
+            container.Register(Component.For<IHandleMessages>().ImplementedBy<MessagesHandlerResolver>());
+            container.Register(Classes.FromAssemblyContaining<IHandleMessages>().BasedOn(typeof(IHandleMessages<>)).WithServiceAllInterfaces());
         }
     }
 }

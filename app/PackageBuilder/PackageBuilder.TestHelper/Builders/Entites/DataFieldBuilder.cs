@@ -1,5 +1,6 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Entities;
+﻿using System;
+using DataPlatform.Shared.Entities;
+using PackageBuilder.Domain.DataFields;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
@@ -9,7 +10,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private IDataProvider _dataProvider;
         public IDataField Build()
         {
-            return new DataField(_name) { DataProvider = _dataProvider };
+            return new DataField(Guid.NewGuid(), _name, null, Guid.NewGuid()) { DataProvider = _dataProvider };
         }
 
         public DataFieldBuilder With(string name)
