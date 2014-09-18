@@ -8,6 +8,7 @@ using CommonDomain.Persistence.EventStore;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using PackageBuilder.Data.NHibernate;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.Helpers.Windsor.Installers;
 using PackageBuilder.TestHelper.Mothers;
@@ -48,7 +49,7 @@ namespace PackageBuilder.Api
             container.Register(Component.For<IConstructAggregates>().ImplementedBy<AggregateFactory>());
             container.Register(Component.For<IDetectConflicts>().ImplementedBy<ConflictDetector>());
             container.Register(Component.For<IRepository>().ImplementedBy<EventStoreRepository>());
-            //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
+            container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
             container.Install(FromAssembly.Containing<CommandInstaller>());
         }
     }

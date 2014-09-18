@@ -8,9 +8,9 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsCtrl', function ($scope, $http) {
+  .controller('pkgCtrl', function ($scope, $http) {
     
-    $scope.dataProvs = [{
+    $scope.dataProvsPkg = [{
                           'name': 'Loading Data...',
                           'fields': [
                           {
@@ -20,15 +20,15 @@ angular.module('packageBuilderwebuiApp')
 
     $http({
         method: 'GET',
-        url: 'http://dev.lightstone.packagebuilder.api/getDataProviders'
+        url: '/DataProviders.json'
         }).success(function(data, status, headers, config) {
-            $scope.dataProvs = data;
+            $scope.dataProvsPkg = data;
 
         }).error(function(data, status, headers, config) {
           
-            $scope.dataProvs = [{
+            $scope.dataProvsPkg = [{
                           'name': 'Error Loading Data...',
-                          'fields': [
+                          "fields": [
                           {
                               'name': 'Error Loading Data...',
                           }]

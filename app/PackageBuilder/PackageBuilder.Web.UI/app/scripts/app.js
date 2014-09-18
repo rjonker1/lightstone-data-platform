@@ -31,6 +31,10 @@ angular
         templateUrl: 'views/dataSources.html',
         controller: 'dsCtrl'
       })
+      .when('/package-detail', {
+        templateUrl: 'views/packageDetail.html',
+        controller: 'pkgCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
