@@ -1,6 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.DataFields;
+using PackageBuilder.Domain.DataFields.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {

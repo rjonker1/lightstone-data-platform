@@ -4,7 +4,7 @@ using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.DataProviders.Events;
 
-namespace PackageBuilder.Domain.DataProviders
+namespace PackageBuilder.Domain.DataProviders.WriteModels
 {
     public class DataProvider : AggregateBase, IDataProvider
     {

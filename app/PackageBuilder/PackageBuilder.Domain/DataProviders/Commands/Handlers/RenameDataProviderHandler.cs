@@ -1,10 +1,11 @@
 using System;
 using CommonDomain.Persistence;
+using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 {
-    public class RenameDataProviderHandler : MessageHandler<RenameDataProvider>
+    public class RenameDataProviderHandler : AbstractMessageHandler<RenameDataProvider>
     {
         private readonly IRepository _repository;
 

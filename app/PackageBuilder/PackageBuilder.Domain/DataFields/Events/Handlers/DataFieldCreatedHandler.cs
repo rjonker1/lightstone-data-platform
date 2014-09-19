@@ -1,10 +1,11 @@
 using System;
+using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Domain.DataFields.Events.Handlers
 {
-    public class DataFieldCreatedHandler : MessageHandler<DataFieldCreated>
+    public class DataFieldCreatedHandler : AbstractMessageHandler<DataFieldCreated>
     {
         private readonly IRepository<DataField> _repository;
 

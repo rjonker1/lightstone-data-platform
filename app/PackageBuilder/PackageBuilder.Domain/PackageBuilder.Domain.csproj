@@ -79,6 +79,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataFields\Commands\CreateDataField.cs" />
     <Compile Include="DataFields\Commands\RenameDataField.cs" />
     <Compile Include="DataFields\Events\DataFieldCreated.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="DataFields\Commands\Handlers\RenameDataFieldHandler.cs" />
     <Compile Include="DataFields\Events\Handlers\DataFieldCreatedHandler.cs" />
     <Compile Include="DataProviders\Commands\Handlers\RenameDataProviderHandler.cs" />
+    <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
     <Compile Include="Helpers\Cqrs\Commands\DomainCommand.cs" />
     <Compile Include="Helpers\Cqrs\Commands\IDomainCommand.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
@@ -118,17 +120,19 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\CustomerContract.cs" />
     <Compile Include="Entities\CustomerUser.cs" />
-    <Compile Include="DataFields\DataField.cs" />
+    <Compile Include="DataFields\WriteModels\DataField.cs" />
     <Compile Include="Entities\DataSet.cs" />
-    <Compile Include="DataProviders\DataProvider.cs" />
+    <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\GroupPackage.cs" />
     <Compile Include="Entities\GroupPermission.cs" />
     <Compile Include="Entities\Package.cs" />
-    <Compile Include="Helpers\MessageHandling\MessageHandler.cs" />
+    <Compile Include="Helpers\MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="Helpers\Cqrs\NEventStore\AggregateFactory.cs" />
+    <Compile Include="Helpers\RavenDb\Indexes\IndexDataProviersByName.cs" />
     <Compile Include="Helpers\Windsor\Installers\CommandInstaller.cs" />
     <Compile Include="Helpers\Windsor\Installers\EventStoreInstaller.cs" />
+    <Compile Include="Helpers\Windsor\Installers\RavenDbInstaller.cs" />
     <Compile Include="PackageLookup.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\RolePackage.cs" />
@@ -142,6 +146,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DataFields\ReadModels\" />
     <Folder Include="Helpers\Extensions\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

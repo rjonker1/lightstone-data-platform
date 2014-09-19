@@ -1,11 +1,11 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
+using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using PackageBuilder.Domain.Entities;
-using PackageBuilder.Domain.Helpers.Windsor.Installers;
 using PackageBuilder.TestHelper.Mothers;
+using Raven.Client;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api
@@ -22,14 +22,24 @@ namespace PackageBuilder.Api
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
 
+            var documentStore = container.Resolve<IDocumentStore>();
             //NHibernateBootstrapper.Build();
+            
+            IDocumentSession session = null;
+            pipelines.BeforeRequest += ctx =>
+            {
+                session = documentStore.OpenSession();
+                return null;
             //Make every request SSL based
-            //pipelines.BeforeRequest += ctx =>
-            //{
             //    return (!ctx.Request.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)) ?
             //        (Response)HttpStatusCode.Unauthorized :
             //        null;
-            //};
+            };
+            pipelines.AfterRequest += ctx =>
+            {
+                session.SaveChanges();
+                session.Dispose();
+            };
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -37,9 +47,25 @@ namespace PackageBuilder.Api
             // Perform registation that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
+            Domain.Bootstrapper.Startup(container);
+
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
-            container.Install(FromAssembly.Containing<CommandInstaller>());
+            //container.Install(FromAssembly.Containing<CommandInstaller>());
+        }
+
+        protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
+        {
+            base.RequestStartup(container, pipelines, context);
+
+            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
+            {
+                var documentSession = container.Resolve<IDocumentSession>();
+                if (ctx.Response.StatusCode != HttpStatusCode.InternalServerError)
+                    documentSession.SaveChanges();
+
+                documentSession.Dispose();
+            });
         }
     }
 }

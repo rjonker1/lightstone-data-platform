@@ -2,12 +2,13 @@ using System;
 using System.Linq;
 using PackageBuilder.Common.Helpers.Extensions;
 using PackageBuilder.Domain.DataFields.Commands;
+using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 {
-    public class CreateDataProviderHandler : MessageHandler<CreateDataProvider>
+    public class CreateDataProviderHandler : AbstractMessageHandler<CreateDataProvider>
     {
         private readonly IRepository<DataProvider> _repository;
         private readonly IHandleMessages _handler;

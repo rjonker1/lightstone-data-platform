@@ -3,7 +3,7 @@ using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.DataFields.Events;
 
-namespace PackageBuilder.Domain.DataFields
+namespace PackageBuilder.Domain.DataFields.WriteModels
 {
     public class DataField : AggregateBase, IDataField
     {

@@ -5,7 +5,7 @@ namespace PackageBuilder.Domain.Helpers.MessageHandling
         void Handle(T command);
     }
 
-    public abstract class MessageHandler<T> : IHandleMessages<T>
+    public abstract class AbstractMessageHandler<T> : IHandleMessages<T>
     {
         public abstract void Handle(T command);
 
