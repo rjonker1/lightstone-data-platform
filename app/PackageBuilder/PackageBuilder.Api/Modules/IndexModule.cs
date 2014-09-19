@@ -13,36 +13,36 @@ namespace PackageBuilder.Api.Modules
     {
         private readonly ILog _log = LogManager.GetCurrentClassLogger();
 
-        public IndexModule(IPackageLookupRepository packageLookupRepository)
-        {
-            Get["/package/{action}"] = parameters =>
-            {
-                var package = packageLookupRepository.Get(Context.CurrentUser.UserName, parameters.action);
+        //public IndexModule(IPackageLookupRepository packageLookupRepository)
+        //{
+        //    Get["/package/{action}"] = parameters =>
+        //    {
+        //        var package = packageLookupRepository.Get(Context.CurrentUser.UserName, parameters.action);
 
-                return Response.AsJson((IPackage) package);
-            };
+        //        return Response.AsJson((IPackage) package);
+        //    };
 
-            Get["/getUserMetaData"] = parameters =>
-            {
-                _log.InfoFormat("getUserMetaData");
+        //    Get["/getUserMetaData"] = parameters =>
+        //    {
+        //        _log.InfoFormat("getUserMetaData");
 
-                var actions = packageLookupRepository.GetActions(Context.CurrentUser.UserName);
+        //        var actions = packageLookupRepository.GetActions(Context.CurrentUser.UserName);
 
-                return Response.AsJson(new {path = "/action/{action}", actions});
-            };
+        //        return Response.AsJson(new {path = "/action/{action}", actions});
+        //    };
 
-            Get["/getDataProviders"] = parameters =>
-            {
+        //    Get["/getDataProviders"] = parameters =>
+        //    {
 
-                var props = new DataProviderDto("Ivid");
-                //typeof(IvidResponse).GetProperties()
-                //        .Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));
-                //.GetPublicProperties().Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));
+        //        var props = new DataProviderDto("Ivid");
+        //        //typeof(IvidResponse).GetProperties()
+        //        //        .Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));
+        //        //.GetPublicProperties().Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));
 
-                return Response.AsJson(props);
+        //        return Response.AsJson(props);
 
-            };
-        }
+        //    };
+        //}
     }
 
     public class DataProviderDto

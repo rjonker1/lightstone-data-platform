@@ -1,9 +1,8 @@
 ﻿using System;
-using CommonDomain.Persistence;
 using Lace.Models.Ivid.Dto;
 using Nancy;
-using PackageBuilder.Domain.DataProviders;
 using PackageBuilder.Domain.DataProviders.Commands;
+using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.Helpers.MessageHandling;
 
@@ -29,9 +28,8 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/{id}"] = parameters =>
             {
-
-                repository.GetById<DataProvider>(parameters.id);
-                return Response.AsJson(new { msg = "Success" });
+                var dataProviders = repository.GetById(parameters.id, 1);
+                return Response.AsJson(new { Response = dataProviders });
             };
         }
     }

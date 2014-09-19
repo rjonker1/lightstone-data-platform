@@ -16,9 +16,9 @@ namespace PackageBuilder.Domain.DataFields.Commands.Handlers
 
         public override void Handle(CreateDataField domainCommand)
         {
-            var entity = new DataField(domainCommand.Id, domainCommand.Name, domainCommand.Type, domainCommand.DataProviderId);
+            //var entity = new DataField(domainCommand.Id, domainCommand.Name, domainCommand.Type, domainCommand.DataProviderId);
 
-            _repository.Save(entity, Guid.NewGuid());
+            //_repository.Save(entity, Guid.NewGuid());
         }
     }
 }

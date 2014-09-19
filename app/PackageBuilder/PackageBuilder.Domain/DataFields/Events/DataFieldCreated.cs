@@ -1,4 +1,5 @@
 ﻿using System;
+using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.Helpers.Cqrs.Events;
 
 namespace PackageBuilder.Domain.DataFields.Events
@@ -7,13 +8,14 @@ namespace PackageBuilder.Domain.DataFields.Events
     {
 		public readonly string Name;
         public readonly Type Type;
+        public readonly DataProvider DataProvider;
         public readonly Guid DataProviderId;
-        public DataFieldCreated(Guid id, string name, Type type, Guid dataProviderId)
+        public DataFieldCreated(Guid id, string name, Type type, DataProvider dataProvider)
         {
 			Id = id;
 			Name = name;
             Type = type;
-            DataProviderId = dataProviderId;
+            DataProvider = dataProvider;
         }
     }
 }

@@ -45,8 +45,7 @@ namespace PackageBuilder.Api
             Domain.Bootstrapper.Startup(container);
 
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
-            container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
-            //container.Install(FromAssembly.Containing<CommandInstaller>());
+            //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
             
         }
 
