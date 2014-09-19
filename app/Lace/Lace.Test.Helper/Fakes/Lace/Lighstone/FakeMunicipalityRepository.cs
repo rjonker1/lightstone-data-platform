@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeMunicipalityRepository : IReadOnlyRepository<Municipality>
     {
-        public IEnumerable<Municipality> FindAllWithRequest(global::Lace.Request.ILaceRequestCarInformation request)
+        public IEnumerable<Municipality> FindAllWithRequest(global::Lace.Request.IProvideCarInformationForRequest request)
         {
             throw new NotImplementedException();
         }

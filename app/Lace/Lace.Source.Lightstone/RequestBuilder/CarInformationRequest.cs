@@ -2,7 +2,7 @@
 
 namespace Lace.Source.Lightstone.RequestBuilder
 {
-    public class CarInformationRequest : ILaceRequestCarInformation
+    public class CarInformationRequest : IProvideCarInformationForRequest
     {
         public CarInformationRequest()
         {

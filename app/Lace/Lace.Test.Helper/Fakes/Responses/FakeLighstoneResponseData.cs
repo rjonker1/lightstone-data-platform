@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Fakes.Responses
 {
     public class FakeLighstoneRetrievalData
     {
-        public static IRetrieveValuationFromMetrics GetValuationFromMetrics(ILaceRequestCarInformation request)
+        public static IRetrieveValuationFromMetrics GetValuationFromMetrics(IProvideCarInformationForRequest request)
         {
             return new FakeBaseRetrievalMetric(request, new Valuation())
                 .SetupDataSources()

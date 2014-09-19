@@ -1,12 +1,12 @@
 ﻿namespace Lace.Source.Anpr.Definitions
 {
-    public class ProximityDefinition : IDefineTheProximity
+    public class CertificateProximity : IDefineTheProximity
     {
-        public ProximityDefinition()
+        public CertificateProximity()
         {
         }
 
-        public ProximityDefinition(double latitude, double longitude, double radius)
+        public CertificateProximity(double latitude, double longitude, double radius)
         {
             Latitude = latitude;
             Longitude = longitude;

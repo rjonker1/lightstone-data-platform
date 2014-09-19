@@ -2,7 +2,7 @@
 
 namespace Lace.Source.Lightstone.Repository.Factory
 {
-    public interface ISetupRepositoryForModels
+    public interface ISetupRepository
     {
         IReadOnlyRepository<Band> BandRepository();
         IReadOnlyRepository<Car> CarRepository();

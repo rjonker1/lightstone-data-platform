@@ -18,7 +18,7 @@ namespace Lace.Source.Lightstone.DataObjects
             _repository = repository;
         }
 
-        public void GetCarTypes(ILaceRequestCarInformation request)
+        public void GetCarTypes(IProvideCarInformationForRequest request)
         {
             try
             {

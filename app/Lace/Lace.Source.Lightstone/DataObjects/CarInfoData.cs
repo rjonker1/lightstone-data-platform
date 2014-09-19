@@ -21,7 +21,7 @@ namespace Lace.Source.Lightstone.DataObjects
             _vin12Repository = vin12Repository;
         }
 
-        public void GetCarInfo(ILaceRequestCarInformation request)
+        public void GetCarInfo(IProvideCarInformationForRequest request)
         {
             try
             {

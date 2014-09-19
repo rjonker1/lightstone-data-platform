@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public ILaceRequestUserInformation User
+        public IProvideUserInformationForRequest User
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public ILaceRequestContext Context
+        public IProvideContextForRequest Context
         {
             get
             {
@@ -32,7 +32,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public ILaceRequestVehicleInformation Vehicle
+        public IProvideVehicleInformationForRequest Vehicle
         {
             get
             {
@@ -46,6 +46,11 @@ namespace Lace.Test.Helper.Mothers.Requests
             {
                 return new AggregationInformation();
             }
+        }
+
+        public IProvideCoOrdinateInformationForRequest CoOrdinates
+        {
+            get { return new CoOrdinateInformation(); }
         }
 
         public DateTime RequestDate

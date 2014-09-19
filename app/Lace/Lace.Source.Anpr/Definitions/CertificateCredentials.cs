@@ -1,14 +1,14 @@
 ﻿namespace Lace.Source.Anpr.Definitions
 {
-    public class CredentialsDefinition : IDefineTheCredentials
+    public class CertificateCredentials: IDefineTheCredentials
     {
 
-        public CredentialsDefinition()
+        public CertificateCredentials()
         {
             
         }
 
-        public CredentialsDefinition(string domain, string userName, string password)
+        public CertificateCredentials(string domain, string userName, string password)
         {
             Domain = domain;
             Username = userName;

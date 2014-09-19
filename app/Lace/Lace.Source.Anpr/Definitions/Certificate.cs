@@ -1,15 +1,13 @@
-﻿using System.Xml.Serialization;
-
-namespace Lace.Source.Anpr.Definitions
+﻿namespace Lace.Source.Anpr.Definitions
 {
-    public class CertificateDefinition : IDefineTheCertificate
+    public class Certificate : IDefineTheCertificate
     {
-        public CertificateDefinition()
+        public Certificate()
         {
 
         }
 
-        public CertificateDefinition(string name, string displayName, bool isActive, bool isDefault, string description,
+        public Certificate(string name, string displayName, bool isActive, bool isDefault, string description,
             IDefineTheProximity proximity, IDefineTheCredentials credentials, string endpoint)
         {
             Name = name;
@@ -21,8 +19,7 @@ namespace Lace.Source.Anpr.Definitions
             Credentials = credentials;
             Endpoint = endpoint;
         }
-
-        [XmlIgnore]
+      
         public bool HasCredentials
         {
             get
@@ -30,8 +27,7 @@ namespace Lace.Source.Anpr.Definitions
                 return Credentials != null;
             }
         }
-
-        [XmlIgnore]
+      
         public bool HasProximity
         {
             get

@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.DataObjects
     public interface IGetMakes
     {
         IEnumerable<Make> Makes { get; }
-        void GetMakes(ILaceRequestCarInformation request);
+        void GetMakes(IProvideCarInformationForRequest request);
     }
 }

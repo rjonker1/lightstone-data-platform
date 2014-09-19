@@ -25,7 +25,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Statistic> FindAllWithRequest(ILaceRequestCarInformation request)
+        public IEnumerable<Statistic> FindAllWithRequest(IProvideCarInformationForRequest request)
         {
             using (_connection)
             using (_cacheClient)

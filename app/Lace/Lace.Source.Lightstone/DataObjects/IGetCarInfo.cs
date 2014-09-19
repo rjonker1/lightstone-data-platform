@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.DataObjects
     public interface IGetCarInfo
     {
         IEnumerable<CarInfo> Cars { get; }
-        void GetCarInfo(ILaceRequestCarInformation request);
+        void GetCarInfo(IProvideCarInformationForRequest request);
     }
 }

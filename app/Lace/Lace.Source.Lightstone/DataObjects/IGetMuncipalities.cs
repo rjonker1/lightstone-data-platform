@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.DataObjects
     public interface IGetMuncipalities
     {
         IEnumerable<Municipality> Municipalities { get; }
-        void GetMunicipalities(ILaceRequestCarInformation request);
+        void GetMunicipalities(IProvideCarInformationForRequest request);
     }
 }

@@ -13,7 +13,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
     {
         private readonly IReadOnlyRepository<Band> _repository;
         private readonly IGetBands _getBands;
-        private readonly ILaceRequestCarInformation _request;
+        private readonly IProvideCarInformationForRequest _request;
 
         public when_getting_bands()
         {

@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.DataObjects
     public interface IGetBands
     {
         IEnumerable<Band> Bands { get; }
-        void GetBands(ILaceRequestCarInformation request);
+        void GetBands(IProvideCarInformationForRequest request);
     }
 }

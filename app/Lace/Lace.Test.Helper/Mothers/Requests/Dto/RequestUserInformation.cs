@@ -3,7 +3,7 @@ using Lace.Request;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestUserInformation : ILaceRequestUserInformation
+    public class RequestUserInformation : IProvideUserInformationForRequest
     {
         public Guid UserId
         {

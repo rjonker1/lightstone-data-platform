@@ -3,7 +3,7 @@ using Lace.Request;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestCarInformationForCarHavingId107483 : ILaceRequestCarInformation
+    public class RequestCarInformationForCarHavingId107483 : IProvideCarInformationForRequest
     {
         public int? CarId
         {

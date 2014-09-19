@@ -49,6 +49,9 @@
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
@@ -64,18 +67,22 @@
     </Compile>
     <Compile Include="AnprSourceExecution.cs" />
     <Compile Include="Factory\CertificateFactory.cs" />
-    <Compile Include="Definitions\CertificateDefinition.cs" />
-    <Compile Include="Definitions\CredentialsDefinition.cs" />
+    <Compile Include="Definitions\Certificate.cs" />
+    <Compile Include="Definitions\CertificateCredentials.cs" />
+    <Compile Include="Factory\IProvideCertificate.cs" />
     <Compile Include="IConfigureTheCertificate.cs" />
     <Compile Include="IDefineTheCertificate.cs" />
     <Compile Include="IDefineTheCredentials.cs" />
     <Compile Include="IDefineTheProximity.cs" />
-    <Compile Include="Definitions\ProximityDefinition.cs" />
+    <Compile Include="Definitions\CertificateProximity.cs" />
     <Compile Include="IImpersonateACertificateUser.cs" />
     <Compile Include="Factory\Impersonation.cs" />
     <Compile Include="Models\BaseStation.cs" />
     <Compile Include="Repository\BaseStationRepository.cs" />
     <Compile Include="Repository\CertificateDefinitionRepository.cs" />
+    <Compile Include="Repository\Factory\ISetupRepository.cs" />
+    <Compile Include="Repository\Factory\RepositoryFactory.cs" />
+    <Compile Include="Repository\Infrastructure\CacheConnectionFactory.cs" />
     <Compile Include="Repository\Infrastructure\ConnectionFactory.cs" />
     <Compile Include="Repository\Infrastructure\Dapper.cs" />
     <Compile Include="Repository\IReadOnlyRepository.cs" />
@@ -85,6 +92,10 @@
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Extensions\Lace.Extensions.csproj">
+      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
+      <Name>Lace.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Anpr\Lace.Models.Anpr.csproj">
       <Project>{bc309861-d4c4-4137-8d95-54d2233f9cec}</Project>

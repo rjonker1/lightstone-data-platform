@@ -7,7 +7,7 @@ namespace Lace.Source.Lightstone.Cars
     {
         bool IsSatisfied { get; }
         CarInfo CarInformation { get; }
-        ILaceRequestCarInformation CarInformationRequest { get; }
+        IProvideCarInformationForRequest CarInformationRequest { get; }
         IRetrieveCarInformation SetupDataSources();
         IRetrieveCarInformation BuildCarInformation();
         IRetrieveCarInformation GenerateData();

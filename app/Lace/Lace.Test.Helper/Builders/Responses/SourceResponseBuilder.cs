@@ -50,7 +50,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber();
         }
 
-        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(ILaceRequestCarInformation request)
+        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(IProvideCarInformationForRequest request)
         {
 
             return FakeLighstoneRetrievalData.GetValuationFromMetrics(request);

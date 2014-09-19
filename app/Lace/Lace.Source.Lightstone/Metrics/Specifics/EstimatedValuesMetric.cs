@@ -19,9 +19,9 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         //};
 
         private IList<Statistic> _gauges;
-        private readonly ILaceRequestCarInformation _request;
+        private readonly IProvideCarInformationForRequest _request;
 
-        public EstimatedValuesMetric(ILaceRequestCarInformation request, IEnumerable<Statistic> statistics)
+        public EstimatedValuesMetric(IProvideCarInformationForRequest request, IEnumerable<Statistic> statistics)
         {
             Statistics = statistics;
             _request = request;

@@ -16,7 +16,7 @@ namespace Lace.Unit.Tests.Transform
         private IProvideDataFromLightstone _response;
         private TransformLightstoneResponse _transform;
         private readonly ILaceRequest _request;
-        private readonly ILaceRequestCarInformation _carInformationRequest;
+        private readonly IProvideCarInformationForRequest _carInformationRequest;
         private readonly IRetrieveValuationFromMetrics _retrieveValuationFromMetrics;
         private readonly IRetrieveCarInformation _retrieveCarInformation;
         

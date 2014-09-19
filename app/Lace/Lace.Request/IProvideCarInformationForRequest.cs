@@ -1,6 +1,6 @@
 ﻿namespace Lace.Request
 {
-    public interface ILaceRequestCarInformation
+    public interface IProvideCarInformationForRequest
     {
         int? CarId { get; }
         string Make { get; }

@@ -2,7 +2,7 @@
 
 namespace Lace.Request
 {
-    public interface ILaceRequestUserInformation
+    public interface IProvideUserInformationForRequest
     {
         Guid UserId { get; }
 

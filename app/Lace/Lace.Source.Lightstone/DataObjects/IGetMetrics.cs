@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.DataObjects
     public interface IGetMetrics
     {
         IEnumerable<Metric> Metrics { get; }
-        void GetMetrics(ILaceRequestCarInformation request);
+        void GetMetrics(IProvideCarInformationForRequest request);
     }
 }

@@ -14,7 +14,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         private readonly IReadOnlyRepository<CarInfo> _repository;
         private readonly IReadOnlyRepository<CarInfo> _vin12Repository;
         private readonly IGetCarInfo _getCarInformation;
-        private readonly ILaceRequestCarInformation _request;
+        private readonly IProvideCarInformationForRequest _request;
 
         public when_getting_car_information()
         {

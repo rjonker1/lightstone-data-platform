@@ -17,14 +17,14 @@ namespace Lace.Source.Lightstone.Metrics
         private IGetCarType _getCarType;
         private IGetSales _getSales;
 
-        private readonly ILaceRequestCarInformation _request;
-        private readonly ISetupRepositoryForModels _repositories;
+        private readonly IProvideCarInformationForRequest _request;
+        private readonly ISetupRepository _repositories;
 
         public bool IsSatisfied { get; private set; }
         public IRespondWithValuation Valuation { get; private set; }
 
-        public BaseRetrievalMetric(ILaceRequestCarInformation request, IRespondWithValuation valuation,
-            ISetupRepositoryForModels repositories)
+        public BaseRetrievalMetric(IProvideCarInformationForRequest request, IRespondWithValuation valuation,
+            ISetupRepository repositories)
         {
             _request = request;
             _repositories = repositories;

@@ -5,13 +5,15 @@ namespace Lace.Request
 {
     public interface ILaceRequest
     {
-        ILaceRequestUserInformation User { get; }
+        IProvideUserInformationForRequest User { get; }
 
-        ILaceRequestContext Context { get; }
+        IProvideContextForRequest Context { get; }
 
-        ILaceRequestVehicleInformation Vehicle { get; }
+        IProvideVehicleInformationForRequest Vehicle { get; }
 
         IProvideRequestAggregation RequestAggregation { get; }
+
+        IProvideCoOrdinateInformationForRequest CoOrdinates { get; }
 
         DateTime RequestDate { get; }
 

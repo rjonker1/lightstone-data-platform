@@ -2,6 +2,7 @@
 {
     public interface IReadOnlyRepository<T>
     {
-        T FindFirstWith(double latitude, double longitude);
+        T Find(double latitude, double longitude);
+        T[] GetAll();
     }
 }

@@ -5,7 +5,7 @@ using Lace.Source.Lightstone.Repository.Factory;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeRepositoryFactory : ISetupRepositoryForModels
+    public class FakeRepositoryFactory : ISetupRepository
     {
         public IReadOnlyRepository<Band> BandRepository()
         {

@@ -1,6 +1,6 @@
 ﻿namespace Lace.Request
 {
-    public interface ILaceRequestContext
+    public interface IProvideContextForRequest
     {
         string Product { get; }
         string ReasonForApplication { get; }

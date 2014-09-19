@@ -21,9 +21,9 @@ namespace Lace.Source.Lightstone.SourceCalls
         private IRetrieveValuationFromMetrics _lightstoneMetrics;
         private IRetrieveCarInformation _lightstoneCarInformation;
 
-        private readonly ISetupRepositoryForModels _lightstoneRepositories;
+        private readonly ISetupRepository _lightstoneRepositories;
 
-        public CallLightstoneExternalSource(ILaceRequest request, ISetupRepositoryForModels lightstoneRepositories)
+        public CallLightstoneExternalSource(ILaceRequest request, ISetupRepository lightstoneRepositories)
         {
             _request = request;
             _lightstoneRepositories = lightstoneRepositories;

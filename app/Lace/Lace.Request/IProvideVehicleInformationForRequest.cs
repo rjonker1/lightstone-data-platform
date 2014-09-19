@@ -1,6 +1,6 @@
 ﻿namespace Lace.Request
 {
-    public interface ILaceRequestVehicleInformation
+    public interface IProvideVehicleInformationForRequest
     {
         string EngineNo { get; }
         string VinOrChassis { get; }

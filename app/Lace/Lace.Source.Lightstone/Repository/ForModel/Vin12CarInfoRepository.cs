@@ -23,7 +23,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
         }
 
 
-        public IEnumerable<CarInfo> FindAllWithRequest(Request.ILaceRequestCarInformation request)
+        public IEnumerable<CarInfo> FindAllWithRequest(Request.IProvideCarInformationForRequest request)
         {
             throw new NotImplementedException();
         }

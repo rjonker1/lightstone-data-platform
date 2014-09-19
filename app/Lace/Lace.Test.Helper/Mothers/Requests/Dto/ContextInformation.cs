@@ -2,7 +2,7 @@
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class ContextInformation : ILaceRequestContext
+    public class ContextInformation : IProvideContextForRequest
     {
         public string Product
         {

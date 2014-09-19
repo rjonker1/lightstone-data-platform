@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeBandsRepository : IReadOnlyRepository<Band>
     {
-        public IEnumerable<Band> FindAllWithRequest(global::Lace.Request.ILaceRequestCarInformation request)
+        public IEnumerable<Band> FindAllWithRequest(global::Lace.Request.IProvideCarInformationForRequest request)
         {
             throw new NotImplementedException();
         }

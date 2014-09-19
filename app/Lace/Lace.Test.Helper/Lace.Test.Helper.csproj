@@ -169,6 +169,7 @@
     <Compile Include="Mothers\Packages\ActionMother.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
+    <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />

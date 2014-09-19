@@ -7,6 +7,6 @@ namespace Lace.Source.Lightstone.DataObjects
     public interface IGetStatistics
     {
         IEnumerable<Statistic> Statistics { get; }
-        void GetStatistics(ILaceRequestCarInformation request);
+        void GetStatistics(IProvideCarInformationForRequest request);
     }
 }

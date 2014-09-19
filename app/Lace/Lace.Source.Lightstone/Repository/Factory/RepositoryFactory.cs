@@ -5,7 +5,7 @@ using ServiceStack.Redis;
 
 namespace Lace.Source.Lightstone.Repository.Factory
 {
-    public class RepositoryFactory : ISetupRepositoryForModels
+    public class RepositoryFactory : ISetupRepository
     {
         private readonly IDbConnection _connection;
         private readonly IRedisClient _redisClient;

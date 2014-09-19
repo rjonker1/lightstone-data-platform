@@ -114,7 +114,7 @@
     <Compile Include="Models\Municipality.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Statistic.cs" />
-    <Compile Include="Repository\Factory\ISetupRepositoryForModels.cs" />
+    <Compile Include="Repository\Factory\ISetupRepository.cs" />
     <Compile Include="Repository\Factory\RepositoryFactory.cs" />
     <Compile Include="Repository\ForModel\BandsRepository.cs" />
     <Compile Include="Repository\ForModel\CarInfoRepository.cs" />

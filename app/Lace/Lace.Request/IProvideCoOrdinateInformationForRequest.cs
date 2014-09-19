@@ -1,6 +1,6 @@
 ﻿namespace Lace.Request
 {
-    public interface ILaceRequestAnprInformation
+    public interface IProvideCoOrdinateInformationForRequest
     {
         double Latitude { get; }
         double Longitude { get; }

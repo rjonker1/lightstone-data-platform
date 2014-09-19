@@ -10,7 +10,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeCarRepository : IReadOnlyRepository<Car>
     {
-        public IEnumerable<Car> FindAllWithRequest(ILaceRequestCarInformation request)
+        public IEnumerable<Car> FindAllWithRequest(IProvideCarInformationForRequest request)
         {
             throw new System.NotImplementedException();
         }

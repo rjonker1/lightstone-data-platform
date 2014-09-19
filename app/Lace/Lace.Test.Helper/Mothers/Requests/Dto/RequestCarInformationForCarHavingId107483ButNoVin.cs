@@ -2,7 +2,7 @@
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestCarInformationForCarHavingId107483ButNoVin : ILaceRequestCarInformation
+    public class RequestCarInformationForCarHavingId107483ButNoVin : IProvideCarInformationForRequest
     {
         public int? CarId
         {

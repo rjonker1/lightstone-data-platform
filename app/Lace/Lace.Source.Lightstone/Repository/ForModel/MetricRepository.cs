@@ -24,7 +24,7 @@ namespace Lace.Source.Lightstone.Repository.ForModel
             _cacheClient = cacheClient;
         }
         
-        public IEnumerable<Metric> FindAllWithRequest(ILaceRequestCarInformation request)
+        public IEnumerable<Metric> FindAllWithRequest(IProvideCarInformationForRequest request)
         {
             throw new NotImplementedException();
         }

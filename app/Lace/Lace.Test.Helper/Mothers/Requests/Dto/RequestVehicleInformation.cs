@@ -2,7 +2,7 @@
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestVehicleInformation : ILaceRequestVehicleInformation
+    public class RequestVehicleInformation : IProvideVehicleInformationForRequest
     {
         public string EngineNo
         {

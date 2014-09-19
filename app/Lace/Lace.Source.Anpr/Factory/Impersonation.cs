@@ -4,7 +4,7 @@ using System.Security.Principal;
 using Common.Logging;
 
 
-namespace Lace.Source.Anpr.CertificateFactory
+namespace Lace.Source.Anpr.Factory
 {
     public class Impersonation : IImpersonateACertificateUser
     {

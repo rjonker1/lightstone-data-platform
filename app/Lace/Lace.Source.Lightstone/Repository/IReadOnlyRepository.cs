@@ -6,7 +6,7 @@ namespace Lace.Source.Lightstone.Repository
 {
     public interface IReadOnlyRepository<T>
     {
-        IEnumerable<T> FindAllWithRequest(ILaceRequestCarInformation request);
+        IEnumerable<T> FindAllWithRequest(IProvideCarInformationForRequest request);
         IEnumerable<T> GetAll();
         IEnumerable<T> FindByMake(int makeId);
         IEnumerable<T> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes);

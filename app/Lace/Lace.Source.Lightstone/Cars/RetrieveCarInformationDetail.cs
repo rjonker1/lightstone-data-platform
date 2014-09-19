@@ -11,13 +11,13 @@ namespace Lace.Source.Lightstone.Cars
     {
         public bool IsSatisfied { get; private set; }
         public CarInfo CarInformation { get; private set; }
-        public ILaceRequestCarInformation CarInformationRequest { get; private set; }
+        public IProvideCarInformationForRequest CarInformationRequest { get; private set; }
 
         private IGetCarInfo _getCarInformation;
-        private readonly ISetupRepositoryForModels _repositories;
+        private readonly ISetupRepository _repositories;
         private readonly ILaceRequest _request;
 
-        public RetrieveCarInformationDetail(ILaceRequest request, ISetupRepositoryForModels repositories)
+        public RetrieveCarInformationDetail(ILaceRequest request, ISetupRepository repositories)
         {
             _repositories = repositories;
             _request = request;

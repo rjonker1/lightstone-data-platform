@@ -16,11 +16,11 @@ namespace Lace.Source.Lightstone.Metrics.Specifics
         private static readonly MetricTypes[] Metrics = { MetricTypes.TotalSalesByAge };
         private readonly IEnumerable<Band> _bands;
         private readonly IEnumerable<CarType> _carTypes;
-        private readonly ILaceRequestCarInformation _request;
+        private readonly IProvideCarInformationForRequest _request;
 
         private IList<Statistic> _gauges;
 
-        public TotalSalesByAgeMetric(ILaceRequestCarInformation request, IEnumerable<Statistic> statistics,
+        public TotalSalesByAgeMetric(IProvideCarInformationForRequest request, IEnumerable<Statistic> statistics,
             IEnumerable<Band> bands,
             IEnumerable<CarType> carTypes)
         {
