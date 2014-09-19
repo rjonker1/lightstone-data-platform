@@ -17,6 +17,8 @@
                       <div class="col-md-3">Price: R{{provider.price}}</div>                  
                   </div>
                 </div>
+
+                ng-model="dataPros.prods.prod[provider.id]"
               </li>
             </ol>
     </script> -->
@@ -32,7 +34,7 @@
      <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle"  ng-model="provider.fields" data-nodrag type="category" ng-class="{hidden: collapsed}">
      <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="provider in provider.fields" >
                   
-        <input class="col-md-1" ng-model="provider.isSelected" type="checkbox">
+        <input class="col-md-1" ng-model="dataPros.prods.prod[provider.id]" value="{{provider.id}}" type="checkbox">
         <div class="col-md-7">{{provider.name}}</div>
         <div class="col-md-3">Price: R{{provider.price}}</div>                  
     
@@ -47,6 +49,8 @@
 
     <div class="row">
       <div class="col-lg-6" ui-tree="options">
+        Aggregate per field: R {{ sum }}
+        {{test}}
         <h3>Data Providers</h3>
 
         <div ui-tree id="tree-root" ng-model="dataProvsPkg">
@@ -58,16 +62,19 @@
         </div>
 
 
-      </div>
-    </div>
 
-      <!--<div class="col-lg-6">
+      </div>
+
+       <div class="col-lg-6">
         <h3>Data binding</h3>
         <div class="info">
           {{ info }}
         </div>
         <pre class="code">{{ dataProvsPkg | json }}</pre>
-      </div>-->
+      </div>
+    </div>
+
+     
     
 
 
