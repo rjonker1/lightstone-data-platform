@@ -1,8 +1,13 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Nancy;
+using CommonDomain.Persistence;
+using DataPlatform.Shared.Repositories;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
+using PackageBuilder.Api.Modules;
+using PackageBuilder.Domain.DataFields;
+using PackageBuilder.Domain.DataProviders;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Mothers;
 using Raven.Client;
@@ -22,24 +27,14 @@ namespace PackageBuilder.Api
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
 
-            var documentStore = container.Resolve<IDocumentStore>();
             //NHibernateBootstrapper.Build();
-            
-            IDocumentSession session = null;
-            pipelines.BeforeRequest += ctx =>
-            {
-                session = documentStore.OpenSession();
-                return null;
             //Make every request SSL based
+			//pipelines.BeforeRequest += ctx =>
+            //{
             //    return (!ctx.Request.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)) ?
             //        (Response)HttpStatusCode.Unauthorized :
             //        null;
-            };
-            pipelines.AfterRequest += ctx =>
-            {
-                session.SaveChanges();
-                session.Dispose();
-            };
+            //};
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -52,6 +47,7 @@ namespace PackageBuilder.Api
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
             //container.Install(FromAssembly.Containing<CommandInstaller>());
+            
         }
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
