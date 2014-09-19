@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name packageBuilderwebuiApp.controller:MainCtrl
+ * @name packageBuilderwebuiApp.controller:pkgCtrl
  * @description
- * # MainCtrl
+ * # pkgCtrl
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
@@ -35,4 +35,23 @@ angular.module('packageBuilderwebuiApp')
                         }];
         });
 
+    $scope.toggle = function(scope) {
+      scope.toggle();
+    };
+
+    $scope.moveLastToTheBegginig = function () {
+      var a = $scope.data.pop();
+      $scope.data.splice(0,0, a);
+    };
+
+    $scope.collapseAll = function() {
+      $scope.$broadcast('collapseAll');
+    };
+
+    $scope.expandAll = function() {
+      $scope.$broadcast('expandAll');
+    };
+
+
   } );
+

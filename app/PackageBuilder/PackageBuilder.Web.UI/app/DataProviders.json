@@ -1,857 +1,876 @@
 {
-  "Providers": [{
-  "name": "Ivid",
-  "fields": [
-    
-  ]
-},{
-"name": "DataProvider1",
-  "fields": [
-    {
-      "name": "SpecificInformation",
-      "type": "VehicleSpecificInformation",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "StatusMessage",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Reference",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "License",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Registration",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "RegistrationDate",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Vin",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Engine",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Displacement",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Tare",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "MakeCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "MakeDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ModelCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ModelDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ColourCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ColourDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DrivenCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DrivenDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CategoryCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CategoryDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DescriptionCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Description",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "EconomicSectorCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "EconomicSectorDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "LifeStatusCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "LifeStatusDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "SapMarkCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "SapMarkDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "HasIssues",
-      "type": "Boolean",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "HasErrors",
-      "type": "Boolean",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CarFullname",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    }
-  ]
-},{
-"name": "DataProvider2",
-  "fields": [
-    {
-      "name": "SpecificInformation",
-      "type": "VehicleSpecificInformation",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "StatusMessage",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Reference",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "License",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Registration",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "RegistrationDate",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Vin",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Engine",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Displacement",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Tare",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "MakeCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "MakeDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ModelCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ModelDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ColourCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ColourDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DrivenCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DrivenDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CategoryCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CategoryDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DescriptionCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Description",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "EconomicSectorCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "EconomicSectorDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "LifeStatusCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "LifeStatusDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "SapMarkCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "SapMarkDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "HasIssues",
-      "type": "Boolean",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "HasErrors",
-      "type": "Boolean",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CarFullname",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    }
-  ]
-},{
-"name": "DataProvider3",
-  "fields": [
-    {
-      "name": "SpecificInformation",
-      "type": "VehicleSpecificInformation",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "StatusMessage",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Reference",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "License",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Registration",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "RegistrationDate",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Vin",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Engine",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Displacement",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Tare",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "MakeCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "MakeDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ModelCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ModelDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ColourCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "ColourDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DrivenCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DrivenDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CategoryCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CategoryDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "DescriptionCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "Description",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "EconomicSectorCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "EconomicSectorDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "LifeStatusCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "LifeStatusDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "SapMarkCode",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "SapMarkDescription",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "HasIssues",
-      "type": "Boolean",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "HasErrors",
-      "type": "Boolean",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
-    },
-    {
-      "name": "CarFullname",
-      "type": "String",
-      "label": null,
-      "definition": null,
-      "industries": null,
-      "price": 100,
-      "isSelected": false
+  "Providers": [
+    {
+      "name": "Ivid",
+      "fields": []
+    },
+    {
+      "name": "DataProvider1",
+      "fields": [
+        {
+          "name": "SpecificInformation",
+          "type": "VehicleSpecificInformation",
+          "label": null,
+          "definition": null,
+          "industries": [
+            {
+            "name": "Dealer"
+            },
+            {
+              "name": "Consumer"
+            },
+            {
+              "name": "Banking"
+            },
+            {
+              "name": "Insurance"
+            },
+            {
+              "name": "Other"
+            }
+          ],
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "StatusMessage",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Reference",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "License",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Registration",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "RegistrationDate",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Vin",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Engine",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Displacement",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Tare",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "MakeCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "MakeDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ModelCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ModelDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ColourCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ColourDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DrivenCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DrivenDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CategoryCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CategoryDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DescriptionCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "EconomicSectorCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "EconomicSectorDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "LifeStatusCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "LifeStatusDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "SapMarkCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "SapMarkDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "HasIssues",
+          "type": "Boolean",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "HasErrors",
+          "type": "Boolean",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CarFullname",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        }
+      ]
+    },
+    {
+      "name": "DataProvider2",
+      "fields": [
+        {
+          "name": "SpecificInformation",
+          "type": "VehicleSpecificInformation",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "StatusMessage",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Reference",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "License",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Registration",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "RegistrationDate",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Vin",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Engine",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Displacement",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Tare",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "MakeCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "MakeDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ModelCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ModelDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ColourCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ColourDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DrivenCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DrivenDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CategoryCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CategoryDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DescriptionCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "EconomicSectorCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "EconomicSectorDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "LifeStatusCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "LifeStatusDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "SapMarkCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "SapMarkDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "HasIssues",
+          "type": "Boolean",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "HasErrors",
+          "type": "Boolean",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CarFullname",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        }
+      ]
+    },
+    {
+      "name": "DataProvider3",
+      "fields": [
+        {
+          "name": "SpecificInformation",
+          "type": "VehicleSpecificInformation",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "StatusMessage",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Reference",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "License",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Registration",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "RegistrationDate",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Vin",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Engine",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Displacement",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Tare",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "MakeCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "MakeDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ModelCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ModelDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ColourCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "ColourDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DrivenCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DrivenDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CategoryCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CategoryDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "DescriptionCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "Description",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "EconomicSectorCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "EconomicSectorDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "LifeStatusCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "LifeStatusDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "SapMarkCode",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "SapMarkDescription",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "HasIssues",
+          "type": "Boolean",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "HasErrors",
+          "type": "Boolean",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        },
+        {
+          "name": "CarFullname",
+          "type": "String",
+          "label": null,
+          "definition": null,
+          "industries": null,
+          "price": 100,
+          "isSelected": false
+        }
+      ]
     }
   ]
 }
-]}

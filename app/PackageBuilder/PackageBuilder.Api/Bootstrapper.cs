@@ -1,8 +1,13 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using CommonDomain.Persistence;
+using DataPlatform.Shared.Repositories;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
+using PackageBuilder.Api.Modules;
+using PackageBuilder.Domain.DataFields;
+using PackageBuilder.Domain.DataProviders;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Helpers.Windsor.Installers;
 using PackageBuilder.TestHelper.Mothers;
@@ -40,6 +45,7 @@ namespace PackageBuilder.Api
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
             container.Install(FromAssembly.Containing<CommandInstaller>());
+            
         }
     }
 }

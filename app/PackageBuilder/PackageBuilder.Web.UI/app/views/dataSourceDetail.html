@@ -1,5 +1,7 @@
 <div class="container">
 <h2>Data Poviders</h2>
+
+{{dataProvs}}
 <table class="table" >
     <thead>
         <tr>
@@ -17,7 +19,11 @@
                 <td>{{dField.type}}</td>
                 <td><input ng-model="dField.label" type="text"></td>
                 <td><input ng-model="dField.definition" type="text"></td>
-                <td><input ng-model="dField.industries" type="text"></td>
+                <td>
+                    <select ng-model="dField.industries" ng-options="ind in dField.industries">
+                        
+                    </select>
+                </td>
             </tr>
         }
     </tbody>
