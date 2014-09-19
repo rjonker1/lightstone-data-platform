@@ -1,90 +1,73 @@
 
-<!--<pre class="code">{{ dataProvs | json }}</pre>-->
-
-
- <!--<div class="row">
-      <div class="col-md-12">
-          <div class="row" id="boundary">
-            <div class="col-lg-6">
-              <h4>Draggable Tree</h4>
-
-             
-            
-                <div ng-model="dataProvsPkg"ui-tree-handle ng-class="{ 'select': $treeScope.multiSelect, 'copy': $treeScope.copy }">
-                  
-                  <div ng-repeat="provs in dataProvsPkg">
-                    <div ng-repeat="prov in provs">
-
-                      <a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)">
-                          <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }"></span>
-                      </a>
-                      {{prov.name}}
-                    </div>
-                  </div>
-
-                  <a class="pull-right btn btn-danger btn-xs" nodrag ng-click="remove(this)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </a>
-                  <a class="pull-right btn btn-primary btn-xs" nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </a>
-                </div>
-                <ol ui-tree-nodes ng-model="dataProvs.fields" ng-class="{ 'hidden': collapsed }">
-                  <li ng-repeat="dField in dataProvs.fields" ui-tree-node ng-class="{ 'selected': selected, 'original': original }" ng-include="'items_renderer.html'"></li>
-                </ol>
-         
-              <ui-tree callbacks="callbacks" drag-enabled="parameters.dragEnabled" empty-placeholder-enabled="parameters.emptyPlaceholderEnabled" max-depth="parameters.maxDepth" drag-delay="parameters.dragDelay" drag-distance="parameters.dragDistance" lock-x="parameters.lockX" lock-y="parameters.lockY" bound-to="parameters.boundTo" spacing="parameters.spacing" coverage="parameters.coverage" cancel-key="parameters.cancelKey" copy-key="parameters.copyKey" select-key="parameters.selectKey" expand-on-hover="(parameters.enableExpandOnHover) ? parameters.expandOnHover : parameters.enableExpandOnHover">
-                <ol ui-tree-nodes ng-model="dataProvs.fields">
-                  <li ng-repeat="dField in dataProvs.fields" ui-tree-node ng-class="{ 'selected': selected, 'original': original }" ng-include="'items_renderer.html'"></li>
-                </ol>
-              </ui-tree>
-            </div>
-
-            <div class="col-lg-6">
-              <h4>Full tree</h4>
-              <pre class="code">{{ list | json }}</pre>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>-->
-
-<div class="row">
-      <div class="col-lg-6" ui-tree="options">
-        <h3>Groups &amp; Categories</h3>
-        <ol ui-tree-nodes ng-model="dataProvsPkg" type="group">
-          <li ui-tree-node ng-repeat="provs in dataProvsPkg">
-          <div ng-repeat="prov in provs">
-            <div class="group-title angular-ui-tree-handle" ng-show="!group.editing">
-              <div>
-                <a class="btn btn-success btn-xs" nodrag ng-click="toggle(this)">
-                          <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed }"></span>
-                </a>
-                {{prov.name}}</div>
-            </div>
-            <ol ui-tree-nodes ng-model="prov.fields"  type="category">
-              <li ng-repeat="dField in prov.fields"  ui-tree-node>
+   <!-- <script type="text/ng-template" id="tree_nodes.html">
+    <div ui-tree-handle class="group-title angular-ui-tree-handle" ng-mouseover="showButtons=true" ng-mouseleave="showButtons=false">
+    <a style="cursor:pointer;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+    </a>
+    {{provider.name}}
+    <a ng-show="showButtons" class="pull-right" style="cursor:pointer;" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+    <a ng-show="showButtons" class="pull-right" style="cursor:pointer;margin-right: 8px;" data-nodrag ng-click="newSubItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <ol ui-tree-nodes ng-model="provider.fields"  type="category" ng-class="{hidden: collapsed}">
+              <li ng-repeat="provider in provider.fields"  ui-tree-node>
                 <div class="category-title angular-ui-tree-handle">
                   <div class="row" >               
-                     	<input class="col-md-1"ng-model="dField.isSelected" type="checkbox">
-                     	<div class="col-md-7">{{dField.name}}</div>
-                     	<div class="col-md-3">Price: R{{dField.price}}</div>                	
+                      <input class="col-md-1" ng-model="provider.isSelected" type="checkbox">
+                      <div class="col-md-7">{{provider.name}}</div>
+                      <div class="col-md-3">Price: R{{provider.price}}</div>                  
                   </div>
                 </div>
               </li>
             </ol>
-          </div>
-          </li>
-        </ol>
-      </div>
+    </script> -->
 
-      <div class="col-lg-6">
+     <script type="text/ng-template" id="proivder_nodes_renderer.html">
+
+     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
+     <a style="cursor:pointer;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+     </a>
+     {{provider.name}}
+     </div>
+     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle"  ng-model="provider.fields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+     <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="provider in provider.fields" >
+                  
+        <input class="col-md-1" ng-model="provider.isSelected" type="checkbox">
+        <div class="col-md-7">{{provider.name}}</div>
+        <div class="col-md-3">Price: R{{provider.price}}</div>                  
+    
+     </li>
+     </ol>
+      
+    </script>
+
+       
+
+
+
+    <div class="row">
+      <div class="col-lg-6" ui-tree="options">
+        <h3>Data Providers</h3>
+
+        <div ui-tree id="tree-root" ng-model="dataProvsPkg">
+          <div ng-repeat="providers in dataProvsPkg" >
+            <ol ui-tree-nodes="" ng-model="providers" >
+              <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'" ></li>
+            </ol>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+      <!--<div class="col-lg-6">
         <h3>Data binding</h3>
         <div class="info">
           {{ info }}
         </div>
         <pre class="code">{{ dataProvsPkg | json }}</pre>
-      </div>
-    </div>
+      </div>-->
+    
+
+

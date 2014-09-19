@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -25,11 +26,11 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">Packages</a></li>
-          <li><a ng-href="#/package-detail">Package Detail</a></li>
-          <li><a ng-href="#/data-sources">Data Sources</a></li>
-          <li><a ng-href="#/data-source-detail">Data Source Detail</a></li>
+          <li ng-class="{ active:tab === 1 }"><a ng-href="#" ng-click="tab = 1">Home</a></li>
+          <li ng-class="{ active:tab === 2 }"><a ng-href="#/about" ng-click="tab = 2">Packages</a></li>
+          <li ng-class="{ active:tab === 3 }"><a ng-href="#/package-detail" ng-click="tab = 3">Package Detail</a></li>
+          <li ng-class="{ active:tab === 4 }"><a ng-href="#/data-sources" ng-click="tab = 4">Data Sources</a></li>
+          <li ng-class="{ active:tab === 5 }"><a ng-href="#/data-source-detail"ng-click="tab = 5">Data Source Detail</a></li>
         </ul>
         <h3 class="text-muted">PackageBuilder</h3>
       </div>
@@ -37,7 +38,9 @@
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>LightstoneAuto</p>
+<!-- <span class="glyphicon glyphicon-heart"></span>  -->
+
       </div>
     </div>
 
@@ -71,6 +74,7 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
