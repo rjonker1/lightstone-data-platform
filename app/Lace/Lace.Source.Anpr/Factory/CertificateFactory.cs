@@ -2,7 +2,6 @@
 using System.Linq;
 using Common.Logging;
 using Lace.Request;
-using Lace.Source.Anpr.Definitions;
 using Lace.Source.Anpr.Repository.Factory;
 
 namespace Lace.Source.Anpr.Factory
@@ -15,7 +14,7 @@ namespace Lace.Source.Anpr.Factory
 
         private IImpersonateACertificateUser _impersonator;
 
-        public Certificate Certificate { get; private set; }
+        public IDefineTheCertificate Certificate { get; private set; }
 
         private bool CertifcateFound
         {
@@ -60,7 +59,7 @@ namespace Lace.Source.Anpr.Factory
 
         private void FindCertificate()
         {
-            Log.InfoFormat("Getting Certificate for Co Ordinates Lat {0} Long {1}", _request.CoOrdinates.Latitude,
+            Log.InfoFormat("Getting Certificate for Co-Ordinates Lat {0} Long {1}", _request.CoOrdinates.Latitude,
                _request.CoOrdinates.Longitude);
 
 
@@ -69,7 +68,7 @@ namespace Lace.Source.Anpr.Factory
 
             if (definition == null) return;
 
-            Log.InfoFormat("Found Certificate definition for Co Ordinates Lat {0} Long {1}",
+            Log.InfoFormat("Found Certificate definition for Co-Ordinates Lat {0} Long {1}",
                 _request.CoOrdinates.Latitude,
                 _request.CoOrdinates.Longitude);
 
@@ -81,7 +80,7 @@ namespace Lace.Source.Anpr.Factory
 
             if (CertifcateFound)
             {
-                Log.InfoFormat("Found Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {2}",
+                Log.InfoFormat("Found Certificate for Co-Ordinates Lat {0} Long {1}. Certificate Name is {2}",
                     _request.CoOrdinates.Latitude,
                     _request.CoOrdinates.Longitude, definition.Name);
 

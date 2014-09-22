@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="AnprSourceExecution.cs" />
     <Compile Include="Configuration\BuildAnprRequest.cs" />
+    <Compile Include="Configuration\IBuildTheRequestForAnpr.cs" />
     <Compile Include="Factory\CertificateFactory.cs" />
     <Compile Include="Definitions\Certificate.cs" />
     <Compile Include="Definitions\CertificateCredentials.cs" />
@@ -147,9 +148,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataObjects\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
