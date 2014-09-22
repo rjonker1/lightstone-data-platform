@@ -1,4 +1,5 @@
 ﻿using Lace.Request;
+using Lace.Source.Anpr.AnprWebService;
 
 namespace Lace.Source.Anpr.Configuration
 {
@@ -6,19 +7,21 @@ namespace Lace.Source.Anpr.Configuration
     {
         private readonly ILaceRequest _request;
 
-       // public AnprSubComplexType AnprRequest { get; private set; }
+        public AnprSubComplexType AnprRequest { get; set; }
 
         public BuildAnprRequest(ILaceRequest request)
         {
             _request = request;
         }
 
-        public void Build()
+        public BuildAnprRequest Build()
         {
-            //AnprRequest = new AnprSubComplexType()
-            //{
-            //    ImagetoAnpr = _request.CoOrdinates.Image
-            //};
+            AnprRequest = new AnprSubComplexType()
+            {
+                ImagetoAnpr = _request.CoOrdinates.Image
+            };
+
+            return this;
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ServiceModel;
 using Common.Logging;
 using Lace.Events;
 using Lace.Models;
 using Lace.Models.Anpr;
 using Lace.Request;
-using Lace.Source.Anpr.AnprServiceReference;
+using Lace.Source.Anpr.AnprWebService;
+using Lace.Source.Anpr.Configuration;
 using Lace.Source.Anpr.Factory;
 using Lace.Source.Anpr.Repository.Factory;
 using Lace.Source.Anpr.Transform;
@@ -21,8 +23,7 @@ namespace Lace.Source.Anpr.SourceCalls
         private readonly ISetupRepository _repository;
         private IProvideCertificate _certificate;
         private AnprResComplexType _anprResponse;
-
-
+        
         public CallAnprExternalSource(ILaceRequest request,ISetupRepository repository)
         {
             _request = request;
@@ -37,8 +38,13 @@ namespace Lace.Source.Anpr.SourceCalls
 
                 if (!_certificate.IsSuccessfull || _certificate.Certificate == null)
                     AnprResponseFailed(response);
+                
+                var proxy = new AnprServiceSoapClient(_certificate.Certificate.Endpoint);
+                if(proxy.State == CommunicationState.Closed)
+                    proxy.Open();
 
-                //TODO: Need to implement service
+                var builder = new BuildAnprRequest(_request).Build();
+                _anprResponse = proxy.AnprProcessRecognition(builder.AnprRequest);
 
                 TransformResponse(response);
 

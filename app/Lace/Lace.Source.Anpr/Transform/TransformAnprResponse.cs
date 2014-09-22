@@ -1,7 +1,7 @@
 ﻿using System;
 using Lace.Models.Anpr.DataObject;
 using Lace.Models.Responses.Sources;
-using Lace.Source.Anpr.AnprServiceReference;
+using Lace.Source.Anpr.AnprWebService;
 
 namespace Lace.Source.Anpr.Transform
 {
