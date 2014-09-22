@@ -2,11 +2,6 @@
 {
     public class Certificate : IDefineTheCertificate
     {
-        public Certificate()
-        {
-
-        }
-
         public Certificate(string name, string displayName, bool isActive, bool isDefault, string description,
             IDefineTheProximity proximity, IDefineTheCredentials credentials, string endpoint)
         {
@@ -19,7 +14,7 @@
             Credentials = credentials;
             Endpoint = endpoint;
         }
-      
+
         public bool HasCredentials
         {
             get
@@ -27,7 +22,7 @@
                 return Credentials != null;
             }
         }
-      
+
         public bool HasProximity
         {
             get

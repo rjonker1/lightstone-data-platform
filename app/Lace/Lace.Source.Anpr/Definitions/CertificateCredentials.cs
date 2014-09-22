@@ -2,12 +2,6 @@
 {
     public class CertificateCredentials: IDefineTheCredentials
     {
-
-        public CertificateCredentials()
-        {
-            
-        }
-
         public CertificateCredentials(string domain, string userName, string password)
         {
             Domain = domain;

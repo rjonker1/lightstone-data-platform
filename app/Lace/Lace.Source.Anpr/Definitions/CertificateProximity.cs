@@ -2,10 +2,6 @@
 {
     public class CertificateProximity : IDefineTheProximity
     {
-        public CertificateProximity()
-        {
-        }
-
         public CertificateProximity(double latitude, double longitude, double radius)
         {
             Latitude = latitude;
