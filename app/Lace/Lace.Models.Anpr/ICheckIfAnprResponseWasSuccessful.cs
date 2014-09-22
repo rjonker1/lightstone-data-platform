@@ -1,8 +1,10 @@
-﻿namespace Lace.Models.Anpr
+﻿using Lace.Models.Responses.Sources;
+
+namespace Lace.Models.Anpr
 {
     public interface ICheckIfAnprResponseWasSuccessful
     {
-        void WasASuccess();
-        void WasAFailure(string errorMessage);
+        IProvideDataFromAnpr WasASuccess();
+        IProvideDataFromAnpr WasAFailure(string errorMessage);
     }
 }

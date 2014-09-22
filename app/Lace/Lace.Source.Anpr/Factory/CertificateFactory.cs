@@ -42,10 +42,10 @@ namespace Lace.Source.Anpr.Factory
             ImpersonateUserOnCertificate();
         }
 
-        public void UndoCertificateImpersonation()
-        {
-            _impersonator.UndoImpersonation();
-        }
+        //public void UndoCertificateImpersonation()
+        //{
+        //    _impersonator.UndoImpersonation();
+        //}
 
         private void ImpersonateUserOnCertificate()
         {
@@ -54,6 +54,8 @@ namespace Lace.Source.Anpr.Factory
             IsSuccessfull = _impersonator.ImpersonateAUser(Certificate.Credentials.Username,
                 Certificate.Credentials.Domain,
                 Certificate.Credentials.Password);
+
+            _impersonator.UndoImpersonation();
         }
 
         private void FindCertificate()
@@ -79,14 +81,14 @@ namespace Lace.Source.Anpr.Factory
 
             if (CertifcateFound)
             {
-                Log.InfoFormat("Found Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {3}",
+                Log.InfoFormat("Found Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {2}",
                     _request.CoOrdinates.Latitude,
                     _request.CoOrdinates.Longitude, definition.Name);
 
                 return;
             }
 
-            Log.InfoFormat("Could Not find Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {3}",
+            Log.InfoFormat("Could Not find Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {2}",
                 _request.CoOrdinates.Latitude,
                 _request.CoOrdinates.Longitude, definition.Name);
         }

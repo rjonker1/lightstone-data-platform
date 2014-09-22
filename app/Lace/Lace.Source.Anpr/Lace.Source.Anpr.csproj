@@ -59,6 +59,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +70,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AnprSourceExecution.cs" />
+    <Compile Include="Configuration\BuildAnprRequest.cs" />
     <Compile Include="Factory\CertificateFactory.cs" />
     <Compile Include="Definitions\Certificate.cs" />
     <Compile Include="Definitions\CertificateCredentials.cs" />
@@ -87,8 +92,20 @@
     <Compile Include="Repository\Infrastructure\Dapper.cs" />
     <Compile Include="Repository\IReadOnlyRepository.cs" />
     <Compile Include="SourceCalls\CallAnprExternalSource.cs" />
+    <Compile Include="SourceCalls\HandleAnprSourceCall.cs" />
+    <Compile Include="SourceCalls\RequestDataFromAnprSource.cs" />
+    <Compile Include="Transform\TransformAnprResponse.cs" />
+    <Compile Include="Web References\AnprServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Consumer\Lace.Consumer.csproj">
+      <Project>{6f44066d-c6a2-41e2-847a-0561c9ee2cdb}</Project>
+      <Name>Lace.Consumer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
@@ -119,10 +136,40 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Web References\AnprServiceReference\AnprResComplexType.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AnprServiceReference\AnprService.wsdl" />
+    <None Include="Web References\AnprServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataObjects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://adslskyhi.dyndns.org:88/AnprService.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AnprServiceReference\</RelPath>
+      <UpdateFromURL>http://adslskyhi.dyndns.org:88/AnprService.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

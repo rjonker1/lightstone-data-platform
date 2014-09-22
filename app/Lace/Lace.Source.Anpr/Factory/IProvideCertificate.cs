@@ -7,6 +7,6 @@ namespace Lace.Source.Anpr.Factory
         Certificate Certificate { get; }
         bool IsSuccessfull { get; }
         void GenerateCertificate();
-        void UndoCertificateImpersonation();
+        //void UndoCertificateImpersonation();
     }
 }

@@ -5,6 +5,9 @@ namespace Lace.Models.Anpr.DataObject
 {
     public class AnprResponse : IProvideDataFromAnpr, ICheckIfAnprResponseWasSuccessful
     {
+        public AnprResponse()
+        {
+        }
 
         public AnprResponse(string processedImage, string enhancedImage, string enhancedImageThumbnail,
             string licensePlateNumber, Guid transactionToken)
@@ -31,15 +34,17 @@ namespace Lace.Models.Anpr.DataObject
 
         public Guid TransactionToken { get; private set; }
 
-        public void WasASuccess()
+        public IProvideDataFromAnpr WasASuccess()
         {
             Successful = true;
+            return this;
         }
 
-        public void WasAFailure(string errorMessage)
+        public IProvideDataFromAnpr WasAFailure(string errorMessage)
         {
             Successful = false;
             ErrorMessage = errorMessage;
+            return this;
         }
     }
 }
