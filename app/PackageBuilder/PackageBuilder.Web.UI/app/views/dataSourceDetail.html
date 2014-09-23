@@ -1,8 +1,13 @@
 <div class="container">
+    <button type="button" ng-click="createProvider(dataProvider)">Post Data Test</button>
 <h2>Data Poviders</h2>
 
-{{dataProvs}}
-<table class="table" >
+<br />
+<p>{{message}}</p>
+
+{{test}}
+
+<table class="table">
     <thead>
         <tr>
             <th>Field</th>
@@ -12,7 +17,7 @@
             <th>Industries</th>
         </tr>
     </thead>
-    <tbody  class="form-group" ng-repeat="dField in dataProvs.fields">
+    <tbody  class="form-group" ng-repeat="dField in dataProvider.dataFields">
        
             <tr>
                 <td>{{dField.name}}</td>
@@ -25,7 +30,7 @@
                     </select>
                 </td>
             </tr>
-        }
+
     </tbody>
 </table>
 

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Models.Ivid.Dto;
 using Nancy;
+using Nancy.ModelBinding;
+using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
@@ -14,9 +18,11 @@ namespace PackageBuilder.Api.Modules
         {
             Get["/DataProvider/Add"] = parameters =>
             {
-                handler.Handle(new CreateDataProvider(Guid.NewGuid(), "Test3", typeof(IvidResponse)));
+                Guid ProviderId = Guid.NewGuid();
 
-                return Response.AsJson(new { msg = "Success" });
+                handler.Handle(new CreateDataProvider(ProviderId , "Test3", typeof(IvidResponse)));
+
+                return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
 
             Get["/DataProvider/Edit/{id}"] = parameters =>
@@ -31,6 +37,44 @@ namespace PackageBuilder.Api.Modules
                 var dataProviders = repository.GetById(parameters.id, 1);
                 return Response.AsJson(new { Response = dataProviders });
             };
+
+
+            Post["/Dataprovider/AddTest"] = parameters =>
+            {
+                Guid ProviderId = Guid.NewGuid();
+                DataProviderDto dto = this.Bind<DataProviderDto>();
+
+                handler.Handle(new CreateDataProviderRevision(ProviderId, "Ivid", typeof(DataProviderDto), dto.DataFields));
+
+
+                return Response.AsJson(new { msg = "Success, " + ProviderId + " created" }); ;
+            };
+
         }
+
+
+    }
+    
+
+    //Mock-up for DataProvider Model-Bind
+    public class DataProviderDto
+    {
+       
+        public string Name { get; set; }
+        public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
+
+    }
+
+    public class DataProviderFieldItemDto
+    {
+      
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Label { get; set; }
+        public string Definition { get; set; }
+        public string Industries { get; set; }
+        public double Price { get; set; }
+        public bool IsSelected { get; set; }
+
     }
 }

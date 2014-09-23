@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CommonDomain.Core;
@@ -13,6 +14,9 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
     {
         public string Name { get; private set; }
         public IEnumerable<IDataField> DataFields { get; private set; }
+        public IEnumerable DataFieldsRevision { get; private set; }
+
+         
         public Type ResponseType { get; private set; }
 
         private DataProvider(Guid id)
@@ -20,9 +24,21 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
             Id = id;
         }
 
+        public DataProvider() { }
+
         public DataProvider(Guid id, string name, Type responseType) : this(id)
         {
             RaiseEvent(new DataProviderCreated(id, name, responseType, PopulateDataFields(responseType)));
+        }
+
+        //public DataProviderRevision(Guid id, string name, Type responseType, IEnumerable<DataProviderRevisionCreated.DataProviderFieldItems> dataFields) : this(id)
+        //{
+        //    RaiseEvent(new DataProviderRevisionCreated(id, name, responseType, dataFields));
+        //}
+
+        public void CreateDataProviderRevision(Guid id, string name, Type responseType, IEnumerable dataFields)
+        {
+            RaiseEvent(new DataProviderRevisionCreated(id, name, responseType, dataFields));
         }
 
         public void ChangeName(string newName)
@@ -48,6 +64,15 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
         {
             Id = @event.Id;
             Name = @event.NewName;
+        }
+
+        private void Apply(DataProviderRevisionCreated @event)
+        {
+
+            Id = @event.Id;
+            Name = @event.Name;
+            DataFieldsRevision = @event.DataFields;
+
         }
     }
 }
