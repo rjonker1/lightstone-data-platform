@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using Lace.Certificate.Definitions;
 using Lace.Extensions;
-using Lace.Source.Anpr.Definitions;
 
-namespace Lace.Source.Anpr.Repository
+namespace Lace.Certificate.Repository
 {
-    public class CertificateRepository : IReadOnlyRepository<Certificate>
+    public class CertificateRepository : IReadOnlyRepository<CoOrdinateCertificate>
     {
 
         private readonly string _fileName;
@@ -18,24 +18,24 @@ namespace Lace.Source.Anpr.Repository
             _fileName = fileName;
         }
 
-        public Certificate Find(double latitude, double longitude)
+        public CoOrdinateCertificate Find(double latitude, double longitude)
         {
             throw new NotImplementedException();
         }
 
-        public Certificate[] GetAll()
+        public CoOrdinateCertificate[] GetAll()
         {
             var xml = File.ReadAllText(_fileName);
             var certDefinitions = xml.XmlToObject<List<CertificateDefinition>>();
 
             if (certDefinitions == null || !certDefinitions.Any())
-                return new Certificate[] {};
+                return new CoOrdinateCertificate[] { };
 
             return certDefinitions
                 .Where(w => w.IsActive)
                 .Select(
                     s =>
-                        new Certificate(s.Name, s.DisplayName, s.IsActive, s.IsDefault, s.Description,
+                        new CoOrdinateCertificate(s.Name, s.DisplayName, s.IsActive, s.IsDefault, s.Description,
                             new CertificateProximity(s.Proximity.Latitude, s.Proximity.Longitude, s.Proximity.Radius),
                             new CertificateCredentials(s.Credentials.Domain, s.Credentials.Username,
                                 s.Credentials.Password), s.Endpoint)).ToArray();

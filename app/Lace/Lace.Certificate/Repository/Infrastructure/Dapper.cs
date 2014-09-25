@@ -19,7 +19,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace Lace.Source.Anpr.Repository.Infrastructure
+namespace Lace.Certificate.Repository.Infrastructure
 {
 
     /// <summary>

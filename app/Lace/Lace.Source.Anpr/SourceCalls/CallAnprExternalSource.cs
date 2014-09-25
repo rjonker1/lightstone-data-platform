@@ -1,14 +1,16 @@
 ﻿using System;
 using System.ServiceModel;
 using Common.Logging;
+using Lace.Certificate;
+using Lace.Certificate.Factory;
+using Lace.Certificate.Models;
+using Lace.Certificate.Repository.Factory;
 using Lace.Events;
 using Lace.Models;
 using Lace.Models.Anpr;
 using Lace.Request;
 using Lace.Source.Anpr.AnprWebService;
 using Lace.Source.Anpr.Configuration;
-using Lace.Source.Anpr.Factory;
-using Lace.Source.Anpr.Repository.Factory;
 using Lace.Source.Anpr.Transform;
 using Monitoring.Sources.Lace;
 
@@ -23,8 +25,8 @@ namespace Lace.Source.Anpr.SourceCalls
         private readonly ISetupRepository _repository;
         private IProvideCertificate _certificate;
         private AnprResComplexType _anprResponse;
-        
-        public CallAnprExternalSource(ILaceRequest request,ISetupRepository repository)
+
+        public CallAnprExternalSource(ILaceRequest request, ISetupRepository repository)
         {
             _request = request;
             _repository = repository;
@@ -34,17 +36,23 @@ namespace Lace.Source.Anpr.SourceCalls
         {
             try
             {
-                _certificate = new CertificateFactory(_request, _repository);
+                _certificate =
+                    new CoOrdinateCertificateFactory(
+                        new CoOrdinateCertificateRequest(_request.CoOrdinates.Latitude, _request.CoOrdinates.Longitude),
+                        _repository);
 
-                if (!_certificate.IsSuccessfull || _certificate.Certificate == null)
+                if (!_certificate.IsSuccessfull || _certificate.Certificate == null ||
+                    string.IsNullOrEmpty(_certificate.Certificate.Endpoint))
                     AnprResponseFailed(response);
-                
+
                 var proxy = new AnprServiceSoapClient(_certificate.Certificate.Endpoint);
-                if(proxy.State == CommunicationState.Closed)
+                if (proxy.State == CommunicationState.Closed)
                     proxy.Open();
 
                 var builder = new BuildAnprRequest(_request).Build();
                 _anprResponse = proxy.AnprProcessRecognition(builder.AnprRequest);
+
+                proxy.Close();
 
                 TransformResponse(response);
 

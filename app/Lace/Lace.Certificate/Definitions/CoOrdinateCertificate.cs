@@ -1,8 +1,8 @@
-﻿namespace Lace.Source.Anpr.Definitions
+﻿namespace Lace.Certificate.Definitions
 {
-    public class Certificate : IDefineTheCertificate
+    public class CoOrdinateCertificate : IDefineTheCertificate
     {
-        public Certificate(string name, string displayName, bool isActive, bool isDefault, string description,
+        public CoOrdinateCertificate(string name, string displayName, bool isActive, bool isDefault, string description,
             IDefineTheProximity proximity, IDefineTheCredentials credentials, string endpoint)
         {
             Name = name;

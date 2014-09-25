@@ -3,10 +3,9 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using Common.Logging;
 
-
-namespace Lace.Source.Anpr.Factory
+namespace Lace.Certificate.Impersonation
 {
-    public class Impersonation : IImpersonateACertificateUser
+    public class Impersonator : IImpersonateACertificateUser
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 

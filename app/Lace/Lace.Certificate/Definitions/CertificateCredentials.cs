@@ -1,4 +1,4 @@
-﻿namespace Lace.Source.Anpr.Definitions
+﻿namespace Lace.Certificate.Definitions
 {
     public class CertificateCredentials: IDefineTheCredentials
     {

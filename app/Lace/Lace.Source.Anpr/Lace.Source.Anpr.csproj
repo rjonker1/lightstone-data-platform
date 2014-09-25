@@ -39,31 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.135\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Common.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
@@ -72,26 +55,6 @@
     <Compile Include="AnprSourceExecution.cs" />
     <Compile Include="Configuration\BuildAnprRequest.cs" />
     <Compile Include="Configuration\IBuildTheRequestForAnpr.cs" />
-    <Compile Include="Factory\CertificateFactory.cs" />
-    <Compile Include="Definitions\Certificate.cs" />
-    <Compile Include="Definitions\CertificateCredentials.cs" />
-    <Compile Include="Factory\IProvideCertificate.cs" />
-    <Compile Include="IConfigureTheCertificate.cs" />
-    <Compile Include="IDefineTheCertificate.cs" />
-    <Compile Include="IDefineTheCredentials.cs" />
-    <Compile Include="IDefineTheProximity.cs" />
-    <Compile Include="Definitions\CertificateProximity.cs" />
-    <Compile Include="IImpersonateACertificateUser.cs" />
-    <Compile Include="Factory\Impersonation.cs" />
-    <Compile Include="Models\BaseStation.cs" />
-    <Compile Include="Repository\BaseStationRepository.cs" />
-    <Compile Include="Repository\CertificateDefinitionRepository.cs" />
-    <Compile Include="Repository\Factory\ISetupRepository.cs" />
-    <Compile Include="Repository\Factory\RepositoryFactory.cs" />
-    <Compile Include="Repository\Infrastructure\CacheConnectionFactory.cs" />
-    <Compile Include="Repository\Infrastructure\ConnectionFactory.cs" />
-    <Compile Include="Repository\Infrastructure\Dapper.cs" />
-    <Compile Include="Repository\IReadOnlyRepository.cs" />
     <Compile Include="SourceCalls\CallAnprExternalSource.cs" />
     <Compile Include="SourceCalls\HandleAnprSourceCall.cs" />
     <Compile Include="SourceCalls\RequestDataFromAnprSource.cs" />
@@ -103,6 +66,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Certificate\Lace.Certificate.csproj">
+      <Project>{353d5f9e-efc6-4c78-a7fa-fdc56e10fa0d}</Project>
+      <Name>Lace.Certificate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Consumer\Lace.Consumer.csproj">
       <Project>{6f44066d-c6a2-41e2-847a-0561c9ee2cdb}</Project>
       <Name>Lace.Consumer</Name>
@@ -110,10 +77,6 @@
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Extensions\Lace.Extensions.csproj">
-      <Project>{e2f47e4a-f891-4fd6-a269-89c42595361d}</Project>
-      <Name>Lace.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Models.Anpr\Lace.Models.Anpr.csproj">
       <Project>{bc309861-d4c4-4137-8d95-54d2233f9cec}</Project>
@@ -126,10 +89,6 @@
     <ProjectReference Include="..\Lace.Request\Lace.Request.csproj">
       <Project>{80bd23d4-61d7-471a-b9a0-65a5ae8a3dff}</Project>
       <Name>Lace.Request</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Response\Lace.Response.csproj">
-      <Project>{957bd4b9-8f6b-49e5-a2a0-73cf1ff0c3f0}</Project>
-      <Name>Lace.Response</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Source\Lace.Source.csproj">
       <Project>{d235f566-9aa9-47fd-95f5-5b1abebdf035}</Project>
@@ -171,6 +130,7 @@
       </CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

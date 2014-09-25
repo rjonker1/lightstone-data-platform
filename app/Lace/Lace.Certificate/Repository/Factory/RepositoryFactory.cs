@@ -1,9 +1,9 @@
 ﻿using System.Data;
-using Lace.Source.Anpr.Definitions;
-using Lace.Source.Anpr.Models;
+using Lace.Certificate.Definitions;
+using Lace.Certificate.Models;
 using ServiceStack.Redis;
 
-namespace Lace.Source.Anpr.Repository.Factory
+namespace Lace.Certificate.Repository.Factory
 {
     public class RepositoryFactory : ISetupRepository
     {
@@ -27,7 +27,7 @@ namespace Lace.Source.Anpr.Repository.Factory
             return new BaseStationRepository(_connection, _redisClient);
         }
 
-        public IReadOnlyRepository<Certificate> CertifcateRepository()
+        public IReadOnlyRepository<CoOrdinateCertificate> CertifcateRepository()
         {
             return new CertificateRepository(_certficateConfiguration);
         }

@@ -1,4 +1,4 @@
-﻿namespace Lace.Source.Anpr.Repository
+﻿namespace Lace.Certificate.Repository
 {
     public interface IReadOnlyRepository<T>
     {

@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Lace.Source.Anpr.Repository.Infrastructure
+namespace Lace.Certificate.Repository.Infrastructure
 {
     public class ConnectionFactory
     {

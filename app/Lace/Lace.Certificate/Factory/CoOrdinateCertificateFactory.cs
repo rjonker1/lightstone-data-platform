@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
-using Lace.Request;
-using Lace.Source.Anpr.Repository.Factory;
+using Lace.Certificate.Impersonation;
+using Lace.Certificate.Repository.Factory;
 
-namespace Lace.Source.Anpr.Factory
+namespace Lace.Certificate.Factory
 {
-    public class CertificateFactory : IProvideCertificate
+    public class CoOrdinateCertificateFactory : IProvideCertificate
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private readonly ILaceRequest _request;
+        private readonly IRequestCoOrdinateCertificate _request;
         private readonly ISetupRepository _repositories;
 
         private IImpersonateACertificateUser _impersonator;
@@ -26,7 +26,7 @@ namespace Lace.Source.Anpr.Factory
 
         public bool IsSuccessfull { get; private set; }
 
-        public CertificateFactory(ILaceRequest request, ISetupRepository repositories)
+        public CoOrdinateCertificateFactory(IRequestCoOrdinateCertificate request, ISetupRepository repositories)
         {
             _request = request;
             _repositories = repositories;
@@ -48,7 +48,7 @@ namespace Lace.Source.Anpr.Factory
 
         private void ImpersonateUserOnCertificate()
         {
-            _impersonator = new Impersonation();
+            _impersonator = new Impersonator();
 
             IsSuccessfull = _impersonator.ImpersonateAUser(Certificate.Credentials.Username,
                 Certificate.Credentials.Domain,
@@ -59,18 +59,18 @@ namespace Lace.Source.Anpr.Factory
 
         private void FindCertificate()
         {
-            Log.InfoFormat("Getting Certificate for Co-Ordinates Lat {0} Long {1}", _request.CoOrdinates.Latitude,
-               _request.CoOrdinates.Longitude);
+            Log.InfoFormat("Getting Certificate for Co-Ordinates Lat {0} Long {1}", _request.Latitude,
+                _request.Longitude);
 
 
             var definition = _repositories.BaseStationRepository()
-                .Find(_request.CoOrdinates.Latitude, _request.CoOrdinates.Longitude);
+                .Find(_request.Latitude, _request.Longitude);
 
             if (definition == null) return;
 
             Log.InfoFormat("Found Certificate definition for Co-Ordinates Lat {0} Long {1}",
-                _request.CoOrdinates.Latitude,
-                _request.CoOrdinates.Longitude);
+                _request.Latitude,
+                _request.Longitude);
 
 
             Certificate =
@@ -81,15 +81,15 @@ namespace Lace.Source.Anpr.Factory
             if (CertifcateFound)
             {
                 Log.InfoFormat("Found Certificate for Co-Ordinates Lat {0} Long {1}. Certificate Name is {2}",
-                    _request.CoOrdinates.Latitude,
-                    _request.CoOrdinates.Longitude, definition.Name);
+                    _request.Latitude,
+                    _request.Longitude, definition.Name);
 
                 return;
             }
 
             Log.InfoFormat("Could Not find Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {2}",
-                _request.CoOrdinates.Latitude,
-                _request.CoOrdinates.Longitude, definition.Name);
+                _request.Latitude,
+                _request.Longitude, definition.Name);
         }
     }
 }

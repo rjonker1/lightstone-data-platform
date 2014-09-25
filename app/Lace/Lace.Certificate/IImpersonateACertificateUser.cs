@@ -1,6 +1,4 @@
-﻿using System.Security.Principal;
-
-namespace Lace.Source.Anpr
+﻿namespace Lace.Certificate
 {
     public interface IImpersonateACertificateUser
     {

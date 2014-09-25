@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
-using Lace.Source.Anpr.Models;
-using Lace.Source.Anpr.Repository.Infrastructure;
+using Lace.Certificate.Models;
+using Lace.Certificate.Repository.Infrastructure;
 using ServiceStack.Redis;
 
-namespace Lace.Source.Anpr.Repository
+namespace Lace.Certificate.Repository
 {
     public class BaseStationRepository : IReadOnlyRepository<BaseStation>
     {

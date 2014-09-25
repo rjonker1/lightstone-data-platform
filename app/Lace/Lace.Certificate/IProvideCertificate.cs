@@ -1,4 +1,4 @@
-﻿namespace Lace.Source.Anpr.Factory
+﻿namespace Lace.Certificate
 {
     public interface IProvideCertificate
     {

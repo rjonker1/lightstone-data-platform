@@ -1,7 +1,7 @@
 ﻿using System;
 using ServiceStack.Redis;
 
-namespace Lace.Source.Anpr.Repository.Infrastructure
+namespace Lace.Certificate.Repository.Infrastructure
 {
     public static class CacheConnectionFactory
     {

@@ -1,4 +1,4 @@
-﻿namespace Lace.Source.Anpr
+﻿namespace Lace.Certificate
 {
     public interface IConfigureTheCertificate
     {

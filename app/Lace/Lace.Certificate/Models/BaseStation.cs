@@ -1,4 +1,4 @@
-﻿namespace Lace.Source.Anpr.Models
+﻿namespace Lace.Certificate.Models
 {
     public class BaseStation
     {

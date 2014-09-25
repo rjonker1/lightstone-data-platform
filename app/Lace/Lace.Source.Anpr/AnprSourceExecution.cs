@@ -1,9 +1,9 @@
-﻿using Lace.Consumer;
+﻿using Lace.Certificate.Repository.Factory;
+using Lace.Certificate.Repository.Infrastructure;
+using Lace.Consumer;
 using Lace.Models;
 using Lace.Models.Anpr;
 using Lace.Request;
-using Lace.Source.Anpr.Repository.Factory;
-using Lace.Source.Anpr.Repository.Infrastructure;
 using Lace.Source.Anpr.SourceCalls;
 using Lace.Source.Enums;
 
