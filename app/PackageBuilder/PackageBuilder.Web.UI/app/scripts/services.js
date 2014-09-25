@@ -4,13 +4,14 @@ var providerServices = angular.module('providerServices', ['ngResource']);
 
 providerServices.factory('GetAPI', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider/Get/33c7af16-8b21-4701-a7b1-533234b29f75', {}, {
+		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/Get/9144c076-2e85-4954-8e01-cee3108621b9', {}, {
 			query: {method:'GET', isObject:true}
 		});
 	}]);
 
-providerServices.factory('PostAPI', ['$resource',
+providerServices.factory('PostAPI', ['$resource', 
 	function($resource) {
+
 		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/AddTest', {}, {
 			
 		});

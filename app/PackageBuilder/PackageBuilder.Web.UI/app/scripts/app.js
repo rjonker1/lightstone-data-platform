@@ -19,6 +19,7 @@ angular
     'providerServices'
   ])
   .config(function ($routeProvider) {
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/home.html',
@@ -38,6 +39,13 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+
+  .config(['$sceDelegateProvider', function($sceDelegateProvider) {
+
+      $sceDelegateProvider.resourceUrlWhitelist(['self', 
+        'http://localhost:12257/DataProvider/AddTest',
+        'http://dev.lightstone.packagebuilder.api/DataProvider/AddTest']);
+  }]);
 
 

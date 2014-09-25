@@ -15,39 +15,19 @@ angular.module('packageBuilderwebuiApp')
 
 
 
-    $scope.createProvider = function(providerData) {
+   $scope.createProvider = function(providerData) {
 
+      $scope.message = "Saving data..."
+      PostAPI.save({}, providerData);
+      $scope.message = "Data was successfully saved"
 
-      $scope.dataProvider = {'name': 'test'};
-
-      PostAPI.save({}, $scope.dataProvider);
-
-        /*$http.post("http://localhost:12257/DataProvider/AddTest", providerData, {
-              headers: { 'Content-Type': 'application/json'},
-
-        }).success(function(data) {
-
-              $scope.test = data;
-        });*/
-
-
-        /*$http({
-
-          method: "POST",
-          url: "http://localhost:12257/DataProvider/AddTest",
-          data: providerData
-        }).success(function(data){
-
-              $scope.test = data;
-
-        });*/
-    }
+      }
 
     $scope.loadDProvider = function() {
       
       $scope.test = GetAPI.query();
 
-      /*GetAPI.get(function(data){
+      GetAPI.get(function(data){
 
            var resp = data.response;
            alert(resp);
@@ -56,7 +36,7 @@ angular.module('packageBuilderwebuiApp')
            for( var res in resp)
            {
 
-              /*alert(''+res);
+              /*alert(''+res);*/
               if (resp.hasOwnProperty(res)) {
                                                 
                   $scope.dataProvider = resp;
@@ -69,30 +49,10 @@ angular.module('packageBuilderwebuiApp')
       }, function(err){
 
           alert('There was an issue contacting the API')
-      });*/
+      });
 
-      /*$http({
-        method: 'GET',
-        url: 'http://localhost:12257/DataProvider/Get/1b9c9ed5-c317-46af-9a7c-f51499c21d26'
-        }).success(function(data, status, headers, config) {
-            
-          for( var res in data)
-          {
-              if (data.hasOwnProperty(res)) {
-                                                
-                  $scope.test = data[res];
-                  $scope.dataProvider = data[res];
-                  $scope.message = "Data Loaded."
-              }
-          }
-
-
-        }).error(function(data, status, headers, config) {
-          
-            $scope.message = "Error loading data from API";
-        });
-      }*/
     }
+  
     
 
   }]);
