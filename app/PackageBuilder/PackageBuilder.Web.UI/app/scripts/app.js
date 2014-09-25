@@ -12,11 +12,11 @@ angular
   .module('packageBuilderwebuiApp', [
     'ngAnimate',
     'ngCookies',
-    'ngResource',
     'ngRoute',
     'ngSanitize',    
     'ngTouch',
-    'ui.tree'
+    'ui.tree',
+    'providerServices'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -39,3 +39,5 @@ angular
         redirectTo: '/'
       });
   });
+
+
