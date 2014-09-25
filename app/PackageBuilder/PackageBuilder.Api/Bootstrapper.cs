@@ -27,7 +27,6 @@ namespace PackageBuilder.Api
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
 
-      
             //NHibernateBootstrapper.Build();
             //Make every request SSL based
 			//pipelines.BeforeRequest += ctx =>

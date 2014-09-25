@@ -8,72 +8,13 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsCtrl', ['$scope', '$http', 'GetAPI', 'PostAPI', function ($scope, $http, GetAPI, PostAPI) {
+  .controller('dsCtrl', function ($scope, $http) {
     
     $scope.message = "Loading data from API";
-    //$scope.test = GetAPI.query();
 
-
-
-    $scope.createProvider = function(providerData) {
-
-
-      $scope.dataProvider = {'name': 'test'};
-
-      PostAPI.save({}, $scope.dataProvider);
-
-        /*$http.post("http://localhost:12257/DataProvider/AddTest", providerData, {
-              headers: { 'Content-Type': 'application/json'},
-
-        }).success(function(data) {
-
-              $scope.test = data;
-        });*/
-
-
-        /*$http({
-
-          method: "POST",
-          url: "http://localhost:12257/DataProvider/AddTest",
-          data: providerData
-        }).success(function(data){
-
-              $scope.test = data;
-
-        });*/
-    }
-
-    $scope.loadDProvider = function() {
-      
-      $scope.test = GetAPI.query();
-
-      /*GetAPI.get(function(data){
-
-           var resp = data.response;
-           alert(resp);
-           
-
-           for( var res in resp)
-           {
-
-              /*alert(''+res);
-              if (resp.hasOwnProperty(res)) {
-                                                
-                  $scope.dataProvider = resp;
-                  $scope.message = "Data Loaded."
-
-
-              }
-          }
-
-      }, function(err){
-
-          alert('There was an issue contacting the API')
-      });*/
-
-      /*$http({
+    $http({
         method: 'GET',
-        url: 'http://localhost:12257/DataProvider/Get/1b9c9ed5-c317-46af-9a7c-f51499c21d26'
+        url: 'http://localhost:12257/DataProvider/Get/9c1652c3-1f00-44df-99fb-5ef5d91a47ec'
         }).success(function(data, status, headers, config) {
             
           for( var res in data)
@@ -91,8 +32,18 @@ angular.module('packageBuilderwebuiApp')
           
             $scope.message = "Error loading data from API";
         });
-      }*/
-    }
-    
 
-  }]);
+    $scope.createProvider = function(providerData) {
+        $http({
+
+          method: "post",
+          url: "http://dev.lightstone.packagebuilder.api/DataProvider/AddTest",
+          data: providerData
+        }).success(function(data){
+
+              $scope.test = data;
+
+        });
+    }
+
+  } );

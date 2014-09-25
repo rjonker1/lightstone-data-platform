@@ -14,9 +14,6 @@ namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
-
-        
-
         public DataProviderModule(IHandleMessages handler, IRepository<DataProvider> repository)
         {
             Get["/DataProvider/Add"] = parameters =>
@@ -44,39 +41,15 @@ namespace PackageBuilder.Api.Modules
 
             Post["/Dataprovider/AddTest"] = parameters =>
             {
-
                 Guid ProviderId = Guid.NewGuid();
                 DataProviderDto dto = this.Bind<DataProviderDto>();
 
-                handler.Handle(new CreateDataProviderRevision(ProviderId, dto.Name, typeof(DataProviderDto), dto.DataFields));
+                handler.Handle(new CreateDataProviderRevision(ProviderId, "Ivid", typeof(DataProviderDto), dto.DataFields));
 
 
                 return Response.AsJson(new { msg = "Success, " + ProviderId + " created" }); ;
             };
 
-            //Options["/DataProvider/AddTest"] = _ =>
-            //{
-
-            //    Guid ProviderId = Guid.NewGuid();
-            //    DataProviderDto dto = this.Bind<DataProviderDto>();
-
-            //    handler.Handle(new CreateDataProviderRevision(ProviderId, dto.Name, typeof(DataProviderDto), dto.DataFields));
-
-
-            //    return Response.AsJson(new { msg = "Success, " + ProviderId + " created" }); ;
-                    
-               
-            //};
-
-        }
-
-        private dynamic OptionsRequest()
-        {
-
-            return this.Response.AsJson(Request)
-                .WithHeader("Access-Control-Allow-Origin", "*");
-                //.WithHeader("Access-Control-Allow-Methods", "POST")
-                //.WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
         }
 
 
@@ -86,7 +59,7 @@ namespace PackageBuilder.Api.Modules
     //Mock-up for DataProvider Model-Bind
     public class DataProviderDto
     {
-
+       
         public string Name { get; set; }
         public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
 
