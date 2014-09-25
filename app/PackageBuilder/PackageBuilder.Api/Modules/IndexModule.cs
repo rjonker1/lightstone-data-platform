@@ -45,37 +45,37 @@ namespace PackageBuilder.Api.Modules
         //}
     }
 
-    //public class DataProviderDto
-    //{
-    //    public DataProviderDto(string name)
-    //    {
+    public class DataProviderDto
+    {
+        public DataProviderDto(string name)
+        {
 
-    //        Name = name;
-    //        Fields = typeof(IvidResponse).GetProperties()
-    //                    .Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));       
-    //    }
+            Name = name;
+            Fields = typeof(IvidResponse).GetProperties()
+                        .Select(x => new DataProviderFieldItemDto(x.Name, x.PropertyType.Name));       
+        }
 
-    //    public string Name { get; set; }
-    //    public IEnumerable<DataProviderFieldItemDto> Fields { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<DataProviderFieldItemDto> Fields { get; set; }
 
-    //}
+    }
 
-    //public class DataProviderFieldItemDto
-    //{
-    //    public DataProviderFieldItemDto(string name, string type)
-    //    {
-    //        Name = name;
-    //        Type = type;
-    //        Price = 100;
-    //    }
+    public class DataProviderFieldItemDto
+    {
+        public DataProviderFieldItemDto(string name, string type)
+        {
+            Name = name;
+            Type = type;
+            Price = 100;
+        }
 
-    //    public string Name { get; set; }
-    //    public string Type { get; set; }
-    //    public string Label { get; set; }
-    //    public string Definition { get; set; }
-    //    public string Industries { get; set; }
-    //    public double Price { get; set; }
-    //    public bool IsSelected { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Label { get; set; }
+        public string Definition { get; set; }
+        public string Industries { get; set; }
+        public double Price { get; set; }
+        public bool IsSelected { get; set; }
 
-    //}
+    }
 }

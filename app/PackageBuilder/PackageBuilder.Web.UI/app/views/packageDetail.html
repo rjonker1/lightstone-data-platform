@@ -1,4 +1,28 @@
 
+   <!-- <script type="text/ng-template" id="tree_nodes.html">
+    <div ui-tree-handle class="group-title angular-ui-tree-handle" ng-mouseover="showButtons=true" ng-mouseleave="showButtons=false">
+    <a style="cursor:pointer;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+    </a>
+    {{provider.name}}
+    <a ng-show="showButtons" class="pull-right" style="cursor:pointer;" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+    <a ng-show="showButtons" class="pull-right" style="cursor:pointer;margin-right: 8px;" data-nodrag ng-click="newSubItem(this)"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <ol ui-tree-nodes ng-model="provider.fields"  type="category" ng-class="{hidden: collapsed}">
+              <li ng-repeat="provider in provider.fields"  ui-tree-node>
+                <div class="category-title angular-ui-tree-handle">
+                  <div class="row" >               
+                      <input class="col-md-1" ng-model="provider.isSelected" type="checkbox">
+                      <div class="col-md-7">{{provider.name}}</div>
+                      <div class="col-md-3">Price: R{{provider.price}}</div>                  
+                  </div>
+                </div>
+
+                ng-model="dataPros.prods.prod[provider.id]"
+              </li>
+            </ol>
+    </script> -->
+
      <script type="text/ng-template" id="proivder_nodes_renderer.html">
 
      <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
@@ -8,22 +32,25 @@
      {{provider.name}}
      </div>
      <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle"  ng-model="provider.fields" data-nodrag type="category" ng-class="{hidden: collapsed}">
-     <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.fields" >
+     <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="provider in provider.fields" >
                   
-        <input class="col-md-1" ng-model="dataPros.prods.prod[dataField.name]" ng-change="updateAPIModel(dataProvsPkg, dataField.name)" value="{{dataField.id}}" type="checkbox">
-        <div class="col-md-7">{{dataField.name}}</div>
-        <div class="col-md-3">Price: R{{dataField.price}}</div>                  
+        <input class="col-md-1" ng-model="dataPros.prods.prod[provider.id]" value="{{provider.id}}" type="checkbox">
+        <div class="col-md-7">{{provider.name}}</div>
+        <div class="col-md-3">Price: R{{provider.price}}</div>                  
     
      </li>
      </ol>
       
     </script>
 
+       
+
+
 
     <div class="row">
       <div class="col-lg-6" ui-tree="options">
         Aggregate per field: R {{ sum }}
-      
+        {{test}}
         <h3>Data Providers</h3>
 
          <button type="button" ng-click="createProvider(dataProvsPkg)">Post Data Test</button>

@@ -1,7 +1,6 @@
 using System;
 using CommonDomain.Persistence;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.Helpers.MessageHandling;
 
 namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
@@ -10,7 +9,7 @@ namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
     {
         private readonly IRepository _repository;
 
-        public RenameDataProviderHandler(IRepository<DataProvider> repository)
+        public RenameDataProviderHandler(IRepository repository)
         {
             _repository = repository;
         }

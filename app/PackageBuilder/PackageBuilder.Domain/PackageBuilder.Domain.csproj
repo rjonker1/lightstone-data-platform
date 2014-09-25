@@ -82,17 +82,12 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataFields\Commands\CreateDataField.cs" />
     <Compile Include="DataFields\Commands\RenameDataField.cs" />
-    <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
     <Compile Include="DataFields\Events\DataFieldCreated.cs" />
     <Compile Include="DataFields\Events\DataFieldRenamed.cs" />
     <Compile Include="DataFields\Commands\Handlers\CreateDataFieldHandler.cs" />
     <Compile Include="DataFields\Commands\Handlers\RenameDataFieldHandler.cs" />
-    <Compile Include="DataFields\Events\Handlers\DataFieldRevisionCreatedHandler.cs" />
     <Compile Include="DataFields\Events\Handlers\DataFieldCreatedHandler.cs" />
-    <Compile Include="DataProviders\Commands\CreateDataProviderRevision.cs" />
-    <Compile Include="DataProviders\Commands\Handlers\CreateDataProviderRevisionHandler.cs" />
     <Compile Include="DataProviders\Commands\Handlers\RenameDataProviderHandler.cs" />
-    <Compile Include="DataProviders\Events\DataProviderRevisionCreated.cs" />
     <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
     <Compile Include="Helpers\Cqrs\Commands\DomainCommand.cs" />
     <Compile Include="Helpers\Cqrs\Commands\IDomainCommand.cs" />
