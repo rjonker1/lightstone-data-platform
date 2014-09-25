@@ -1,4 +1,6 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using System.Collections.Generic;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Nancy;
 using CommonDomain.Persistence;
@@ -62,5 +64,19 @@ namespace PackageBuilder.Api
                 documentSession.Dispose();
             });
         }
+
+        //static void AllowAccessToConsumingSite(IPipelines pipelines)
+        //{
+            
+        //    pipelines.AfterRequest.AddItemToEndOfPipeline(x =>
+        //    {
+                
+        //        x.Response.Headers.Add("Access=Control-Allow-Origin", "*");
+        //        x.Response.Headers.Add("Access-Control-Allow-Methods", "POST,DELETE,PUT,OPTIONS");
+
+        //    });
+        //}
+
+        
     }
 }

@@ -39,15 +39,53 @@ angular.module('packageBuilderwebuiApp')
         $scope.dataPros.prods = {};
         $scope.dataPros.prods.prod = {};
         $scope.sum = 0;
-        
-        $scope.$watch('dataPros', function (newValue, oldValue) {
-            var findProdById = function (products, id) {
-                for(var prods in products){ /*{}*/
+
+        $scope.updateAPIModel = function(providers, fieldName) {
+
+                  for (var providers in $scope.dataProvsPkg){
+
+                    var provs = $scope.dataProvsPkg[providers];
+
+                    for (var i = 0; i < provs.length; i++) {
+
+                      for(var p in provs){
+
+                      if (provs.hasOwnProperty(p)) {
+
+                        var provFields = provs[p].fields;;
+                        for (var x = 0; x < provFields.length; x++) {
 
 
-                    if (products.hasOwnProperty(prods)) {
+                          if(provFields[x].name == fieldName) {
+
+                            $scope.test = fieldName;
+
+                            if(provFields[x].isSelected == false) {
+
+                                    provFields[x].isSelected = true
+                              } else {
+
+                                    provFields[x].isSelected = false;
+                              }
                           
-                        var attr = products[prods];
+                          }
+                        }
+
+                      }
+                      }
+                    }
+
+
+              }
+            }
+       
+        $scope.findProvFieldByName = function (providers, fieldName) {
+                for(var prov in providers){    /*{}*/
+
+
+                    if (providers.hasOwnProperty(prov)) {
+                          
+                        var attr = providers[prov];
                         
                         for (var i = 0; i < attr.length; i++) {        /*[]*/
                                                                         
@@ -57,8 +95,8 @@ angular.module('packageBuilderwebuiApp')
                                 for (var x = 0; x < dps.length; x++) {
                                     
 
-                                     if (dps[x].id == id) {
-                                                                     
+                                     if (dps[x].name == fieldName) {
+                                    
                                           return dps[x];
                                       } 
 
@@ -68,8 +106,18 @@ angular.module('packageBuilderwebuiApp')
                         }
                      }
                                   
-                }         
-            };
+              }
+        }
+
+
+        
+        
+        $scope.$watch('dataPros', function (newValue, oldValue) {
+
+            var testFunc =  function() {
+
+                    $scope.test = "Works"
+                }
 
             var orders = newValue;
                
@@ -81,13 +129,15 @@ angular.module('packageBuilderwebuiApp')
                var id = prop;
                if ( usedProducts[id] ){
                    
-                   var product = findProdById(dataProvList, id);
+                   var product = $scope.findProvFieldByName(dataProvList, id);
+                   $scope.test = product;
                    if ( product !== null ){
                        sum += parseInt(product.price, 10);
                    }
                }
             }
             $scope.sum = sum;
+
         }, true);
 
     $scope.toggle = function(scope) {
