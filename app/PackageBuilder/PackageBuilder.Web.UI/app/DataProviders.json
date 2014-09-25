@@ -2,11 +2,11 @@
   "Providers": [
     {
       "name": "Ivid",
-      "fields": []
+      "dataFields": []
     },
     {
       "name": "DataProvider1",
-      "fields": [
+      "dataFields": [
         {
           "id": "1000-0000-000000",
           "name": "SpecificInformation",
@@ -71,7 +71,7 @@
     },
     {
       "name": "DataProvider1",
-      "fields": [
+      "dataFields": [
         {
           "id": "A000-0000-000000",
           "name": "SpecificInformation",
