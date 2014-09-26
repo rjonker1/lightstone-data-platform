@@ -1,9 +1,9 @@
 ﻿using Lace.Events;
 using Lace.Models;
 
-namespace Lace.Source.Ivid.ServiceCalls
+namespace Lace.Source.Jis.SourceCalls
 {
-    public class RequestDataFromIvidSource : IRequestDataFromSource
+    public class RequestDataFromJisSource : IRequestDataFromSource
     {
         public void FetchDataFromSource(IProvideLaceResponse response, ICallTheSource externalSource,
             ILaceEvent laceEvent)

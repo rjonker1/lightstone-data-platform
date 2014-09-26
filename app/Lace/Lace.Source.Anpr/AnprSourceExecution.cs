@@ -1,4 +1,5 @@
-﻿using Lace.Certificate.Repository.Factory;
+﻿using System.Configuration;
+using Lace.Certificate.Repository.Factory;
 using Lace.Certificate.Repository.Infrastructure;
 using Lace.Consumer;
 using Lace.Models;
@@ -32,7 +33,7 @@ namespace Lace.Source.Anpr
                 var consumer = new ConsumeSource(new HandleAnprSourceCall(),
                     new CallAnprExternalSource(_request,
                         new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
-                            CacheConnectionFactory.LocalClient())));
+                            CacheConnectionFactory.LocalClient(), ConfigurationManager.AppSettings["lace/source/database/anpr/certificates/configuration"])));
 
                 consumer.ConsumeExternalSource(response, laceEvent);
 

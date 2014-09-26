@@ -11,11 +11,18 @@ namespace Lace.Certificate.Repository.Factory
         private readonly IRedisClient _redisClient;
         private readonly string _certficateConfiguration;
 
-        public RepositoryFactory(IDbConnection connection, IRedisClient redisClient)
+        public RepositoryFactory(IDbConnection connection, IRedisClient redisClient,string certficateConfiguration)
         {
             _connection = connection;
             _redisClient = redisClient;
+            _certficateConfiguration = certficateConfiguration;
         }
+
+        //public RepositoryFactory(IDbConnection connection, IRedisClient redisClient)
+        //{
+        //    _connection = connection;
+        //    _redisClient = redisClient;
+        //}
 
         public RepositoryFactory(string certficateConfiguration)
         {
