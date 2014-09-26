@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lace.Models.Enums
+﻿namespace Lace.Models.Enums
 {
     public enum ServiceCallState
     {

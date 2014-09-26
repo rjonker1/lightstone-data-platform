@@ -15,9 +15,10 @@ namespace Lace.Request
 
         IProvideCoOrdinateInformationForRequest CoOrdinates { get; }
 
+        IProvideJisInformation Jis { get; }
+
         DateTime RequestDate { get; }
 
         IPackage Package { get; }
-
     }
 }

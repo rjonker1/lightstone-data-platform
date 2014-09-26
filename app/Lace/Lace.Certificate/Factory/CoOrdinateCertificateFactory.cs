@@ -10,7 +10,7 @@ namespace Lace.Certificate.Factory
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly IRequestCoOrdinateCertificate _request;
-        private readonly ISetupRepository _repositories;
+        private readonly ISetupCertificateRepository _repositories;
 
         private IImpersonateACertificateUser _impersonator;
 
@@ -26,7 +26,7 @@ namespace Lace.Certificate.Factory
 
         public bool IsSuccessfull { get; private set; }
 
-        public CoOrdinateCertificateFactory(IRequestCoOrdinateCertificate request, ISetupRepository repositories)
+        public CoOrdinateCertificateFactory(IRequestCoOrdinateCertificate request, ISetupCertificateRepository repositories)
         {
             _request = request;
             _repositories = repositories;

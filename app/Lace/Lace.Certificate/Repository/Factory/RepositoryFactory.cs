@@ -5,7 +5,7 @@ using ServiceStack.Redis;
 
 namespace Lace.Certificate.Repository.Factory
 {
-    public class RepositoryFactory : ISetupRepository
+    public class RepositoryFactory : ISetupCertificateRepository
     {
         private readonly IDbConnection _connection;
         private readonly IRedisClient _redisClient;

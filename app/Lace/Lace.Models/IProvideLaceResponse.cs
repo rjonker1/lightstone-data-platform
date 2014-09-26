@@ -1,4 +1,5 @@
 ﻿using Lace.Models.Responses.Sources;
+
 namespace Lace.Models
 {
     public interface IProvideLaceResponse
@@ -23,6 +24,9 @@ namespace Lace.Models
 
         IProvideDataFromAnpr AnprResponse { get; set; }
         IResponseProviderHandled AnprResponseHandled { get; set; }
+
+        IProvideDataFromJis JisResponse { get; set; }
+        IResponseProviderHandled JisResponseHandled { get; set; }
 
     }
 }

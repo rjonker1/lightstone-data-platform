@@ -22,11 +22,11 @@ namespace Lace.Source.Anpr.SourceCalls
         private const LaceEventSource Source = LaceEventSource.Anpr;
 
         private readonly ILaceRequest _request;
-        private readonly ISetupRepository _repository;
+        private readonly ISetupCertificateRepository _repository;
         private IProvideCertificate _certificate;
         private AnprResComplexType _anprResponse;
 
-        public CallAnprExternalSource(ILaceRequest request, ISetupRepository repository)
+        public CallAnprExternalSource(ILaceRequest request, ISetupCertificateRepository repository)
         {
             _request = request;
             _repository = repository;

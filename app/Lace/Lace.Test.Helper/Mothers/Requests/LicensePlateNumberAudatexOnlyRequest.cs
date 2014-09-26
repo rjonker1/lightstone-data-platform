@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text;
 using DataPlatform.Shared.Entities;
 using Lace.Request;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
+using Newtonsoft.Json.Serialization;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
@@ -70,8 +72,11 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return "XMC167GP";
             }
         }
+        
 
-
-
+        public IProvideJisInformation Jis
+        {
+            get { return new RequestJisInformation();  }
+        }
     }
 }

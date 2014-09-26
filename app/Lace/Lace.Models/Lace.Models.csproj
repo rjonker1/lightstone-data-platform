@@ -38,7 +38,9 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Enums\ServiceCallState.cs" />
+    <Compile Include="Responses\Sources\IProvideHitStatusDataStoreNamesMapping.cs" />
     <Compile Include="Responses\Sources\IProvideAccidentClaim.cs" />
+    <Compile Include="Responses\Sources\IProvideDataFromJis.cs" />
     <Compile Include="Responses\Sources\Specifics\IRespondWithValuation.cs" />
     <Compile Include="Responses\Sources\IProvideDataFromAnpr.cs" />
     <Compile Include="Responses\Sources\IProvideDataFromAudatex.cs" />

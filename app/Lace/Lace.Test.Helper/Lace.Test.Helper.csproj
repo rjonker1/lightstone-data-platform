@@ -173,6 +173,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberLightstoneOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483.cs" />

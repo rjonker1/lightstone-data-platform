@@ -51,6 +51,12 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return new CoOrdinateInformation(); }
         }
 
+        public IProvideJisInformation Jis
+        {
+            get { return new RequestJisInformation(); }
+        }
+
+
         public DateTime RequestDate
         {
             get

@@ -72,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseStationRepository.cs" />
     <Compile Include="Repository\CertificateDefinitionRepository.cs" />
-    <Compile Include="Repository\Factory\ISetupRepository.cs" />
+    <Compile Include="Repository\Factory\ISetupCertificateRepository.cs" />
     <Compile Include="Repository\Factory\RepositoryFactory.cs" />
     <Compile Include="Repository\Infrastructure\CacheConnectionFactory.cs" />
     <Compile Include="Repository\Infrastructure\ConnectionFactory.cs" />
