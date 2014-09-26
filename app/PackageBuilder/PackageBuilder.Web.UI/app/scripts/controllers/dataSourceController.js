@@ -10,18 +10,22 @@
 angular.module('packageBuilderwebuiApp')
   .controller('dsCtrl', ['$scope', '$http', 'GetAPI', 'PostAPI', function ($scope, $http, GetAPI, PostAPI) {
     
-    $scope.message = "Loading data from API";
-    //$scope.test = GetAPI.query();
+    $scope.dataProvider = {};
 
-
-
-   $scope.createProvider = function(providerData) {
+    $scope.createProvider = function(providerData) {
 
       $scope.message = "Saving data..."
-      PostAPI.save({}, providerData);
-      $scope.message = "Data was successfully saved"
 
-      }
+      PostAPI.save({}, providerData, function() {
+
+          $scope.message = "Data Provider was successfully saved"
+
+      }, function(err){
+
+          $scope.message = "Error saving Data Provider"
+      });
+
+    }
 
     $scope.loadDProvider = function() {
       
@@ -30,9 +34,7 @@ angular.module('packageBuilderwebuiApp')
       GetAPI.get(function(data){
 
            var resp = data.response;
-           alert(resp);
-           
-
+          
            for( var res in resp)
            {
 
@@ -41,8 +43,6 @@ angular.module('packageBuilderwebuiApp')
                                                 
                   $scope.dataProvider = resp;
                   $scope.message = "Data Loaded."
-
-
               }
           }
 
@@ -51,8 +51,6 @@ angular.module('packageBuilderwebuiApp')
           alert('There was an issue contacting the API')
       });
 
-    }
-  
-    
+    }   
 
   }]);

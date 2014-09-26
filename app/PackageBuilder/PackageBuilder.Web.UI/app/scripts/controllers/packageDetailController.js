@@ -42,19 +42,21 @@ angular.module('packageBuilderwebuiApp')
 
         $scope.updateAPIModel = function(providers, fieldName) {
 
-                  for (var providers in $scope.dataProvsPkg){
 
-                    var provs = $scope.dataProvsPkg[providers];
+            for (var providers in $scope.dataProvsPkg){
 
-                    for (var i = 0; i < provs.length; i++) {
+                  var provs = $scope.dataProvsPkg[providers];
 
-                      for(var p in provs){
+                  for (var i = 0; i < provs.length; i++) {
+
+                    for(var p in provs){
+
+                      $scope.test = provs[p];
 
                       if (provs.hasOwnProperty(p)) {
 
-                        var provFields = provs[p].fields;;
+                        var provFields = provs[p].dataFields;;    //Fields container for DataProvider
                         for (var x = 0; x < provFields.length; x++) {
-
 
                           if(provFields[x].name == fieldName) {
 
@@ -72,8 +74,8 @@ angular.module('packageBuilderwebuiApp')
                         }
 
                       }
-                      }
                     }
+                  }
 
 
               }
@@ -82,16 +84,14 @@ angular.module('packageBuilderwebuiApp')
         $scope.findProvFieldByName = function (providers, fieldName) {
                 for(var prov in providers){    /*{}*/
 
-
                     if (providers.hasOwnProperty(prov)) {
                           
                         var attr = providers[prov];
                         
                         for (var i = 0; i < attr.length; i++) {        /*[]*/
-                                                                        
-                                /*for (var props in attr[i].fields) {*/                                             
-                                var dps = attr[i].fields;   
-                                /*$scope.test = dps[1].id;        */
+                                                                                                                   
+                                var dps = attr[i].dataFields;   //Fields container for DataProvider
+                               
                                 for (var x = 0; x < dps.length; x++) {
                                     
 
@@ -99,7 +99,6 @@ angular.module('packageBuilderwebuiApp')
                                     
                                           return dps[x];
                                       } 
-
                                       /*return null;*/    
                                 }
 
@@ -114,10 +113,6 @@ angular.module('packageBuilderwebuiApp')
         
         $scope.$watch('dataPros', function (newValue, oldValue) {
 
-            var testFunc =  function() {
-
-                    $scope.test = "Works"
-                }
 
             var orders = newValue;
                
