@@ -3,15 +3,18 @@
     <button type="button" ng-click="createProvider(dataProvider)">Save</button>
     <button type="button" ng-click="loadDProvider()">Load</button>
 
+        <p>{{message}}</p>
+
     <br />
     <br />
+
 
 <div id="info">
 
     <div id="1" style="float: left;" >
         <div>
-            <label>Name:</label><input type="textbox" />
-            <label>Version:</label><input type="textbox" />
+            <label>Name:</label><input type="textbox" style="" value=" {{dataProvider.name}} " readonly/>
+            <label>Version:</label><input type="textbox" style="display: readonly;" value=" {{dataProvider.version}} " readonly/>
         </div>
         <div>
             <div>
@@ -65,8 +68,6 @@
 
 </div> <!--End Info-->
 
-<br />
-<p>{{message}}</p>
 
 <table class="table" style="padding-top: 20px;">
     <thead>
@@ -86,7 +87,7 @@
                 <td><input ng-model="dField.label" type="text"></td>
                 <td><input ng-model="dField.definition" type="text"></td>
                 <td>
-                    <select ng-model="dField.industries" ng-options="ind in dField.industries">
+                    <select ng-model="dField.industries" > <!-- ng-options="ind in dField.industries" -->
                         
                     </select>
                 </td>

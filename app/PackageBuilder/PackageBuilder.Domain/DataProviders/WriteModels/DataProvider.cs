@@ -13,8 +13,8 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
     public class DataProvider : AggregateBase, IDataProvider
     {
         public string Name { get; private set; }
-        public IEnumerable<IDataField> DataFields { get; private set; }
-        public IEnumerable DataFieldsRevision { get; private set; }
+        public IEnumerable DataFields { get; private set; }
+        //public IEnumerable DataFieldsRevision { get; private set; }
 
          
         public Type ResponseType { get; private set; }
@@ -71,7 +71,7 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
 
             Id = @event.Id;
             Name = @event.Name;
-            DataFieldsRevision = @event.DataFields;
+            DataFields = @event.DataFields;
 
         }
     }

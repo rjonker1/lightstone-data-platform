@@ -7,7 +7,7 @@
      </a>
      {{provider.name}}
      </div>
-     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle"  ng-model="provider.fields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle"  ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
      <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields" >
                   
         <input class="col-md-1" ng-model="dataPros.prods.prod[dataField.name]" ng-change="updateAPIModel(dataProvsPkg, dataField.name)" value="{{dataField.id}}" type="checkbox">
@@ -21,12 +21,12 @@
 
 
     <div class="row">
-      <div class="col-lg-6" ui-tree="options">
+      <div class="col-lg-6">
         Aggregate Total: R {{ sum }}
       
         <h3>Data Providers</h3>
 
-        <div ui-tree id="tree-root" ng-model="dataProvsPkg">
+        <div ui-tree id="asdt" ng-model="dataProvsPkg">
           <div ng-repeat="providers in dataProvsPkg" >
             <ol ui-tree-nodes="" ng-model="providers" >
               <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'" ></li>
@@ -46,8 +46,3 @@
         <pre class="code">{{ dataProvsPkg | json }}</pre>
       </div>
     </div>
-
-     
-    
-
-

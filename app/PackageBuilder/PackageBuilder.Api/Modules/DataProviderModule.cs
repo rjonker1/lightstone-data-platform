@@ -42,7 +42,7 @@ namespace PackageBuilder.Api.Modules
             };
 
 
-            Post["/Dataprovider/AddTest"] = parameters =>
+            Post["/Dataprovider/Add"] = parameters =>
             {
 
                 Guid ProviderId = Guid.NewGuid();

@@ -16,13 +16,15 @@ angular.module('packageBuilderwebuiApp')
 
       $scope.message = "Saving data..."
 
-      PostAPI.save({}, providerData, function() {
+      PostAPI.save({}, providerData, function(data) {
 
-          $scope.message = "Data Provider was successfully saved"
+        //var resp = data.msg;
+         
+        $scope.message = "Data Provider was successfully saved";//+resp;
 
       }, function(err){
 
-          $scope.message = "Error saving Data Provider"
+        $scope.message = "Error saving Data Provider";
       });
 
     }
@@ -84,7 +86,7 @@ angular.module('packageBuilderwebuiApp')
       startingDay: 1
     };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd/MM/yyyy', 'shortDate'];
+    $scope.format = $scope.formats[2];
 
   }]);
