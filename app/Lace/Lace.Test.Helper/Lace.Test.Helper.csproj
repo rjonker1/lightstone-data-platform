@@ -295,6 +295,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Fakes\Jis\" />
     <Folder Include="Fakes\Lace\Responses\" />
     <Folder Include="Mothers\Consumers\" />
     <Folder Include="Mothers\Responses\" />

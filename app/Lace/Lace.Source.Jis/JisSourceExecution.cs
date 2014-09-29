@@ -35,7 +35,8 @@ namespace Lace.Source.Jis
                     new CallJisExternalSource(_request,
                         new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
                             CacheConnectionFactory.LocalClient(),
-                            ConfigurationManager.AppSettings["lace/source/database/jis/certificates/configuration"])));
+                            ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
+                                ].ConnectionString)));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.IvidResponse == null)
