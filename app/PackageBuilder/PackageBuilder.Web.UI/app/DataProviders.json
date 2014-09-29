@@ -2,10 +2,6 @@
   "Providers": [
     {
       "name": "Ivid",
-      "dataFields": []
-    },
-    {
-      "name": "DataProvider1",
       "dataFields": [
         {
           "id": "1000-0000-000000",
@@ -133,6 +129,10 @@
           "isSelected": false
         }
       ]
+    },
+    {
+      "name": "DataProvider2",
+      "dataFields": []
     }
   ]
 }

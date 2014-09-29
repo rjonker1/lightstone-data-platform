@@ -16,6 +16,7 @@ angular
     'ngSanitize',    
     'ngTouch',
     'ui.tree',
+    'ui.bootstrap',
     'providerServices'
     
   ])
@@ -23,7 +24,7 @@ angular
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html',
+        templateUrl: 'views/home.html'
       })
       .when('/data-source-detail', {
         templateUrl: 'views/dataSourceDetail.html',

@@ -1,12 +1,74 @@
 <div class="container">
-    <button type="button" ng-click="createProvider(dataProvider)">Post Data Test</button>
-    <button type="button" ng-click="loadDProvider()">Load</button>
 <h2>Data Poviders</h2>
+    <button type="button" ng-click="createProvider(dataProvider)">Save</button>
+    <button type="button" ng-click="loadDProvider()">Load</button>
+
+    <br />
+    <br />
+
+<div id="info">
+
+    <div id="1" style="float: left;" >
+        <div>
+            <label>Name:</label><input type="textbox" />
+            <label>Version:</label><input type="textbox" />
+        </div>
+        <div>
+            <div>
+                <label>Description</label>
+            </div>
+            <div>
+                <textarea rows="6" cols="50" ></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="2" style="float: right;">
+        <div>
+            <label>State:</label>
+            <select name="carlist" form="carform">
+                <option value="under_contruction">Under Contruction</option>
+                <option value="published">Published</option>
+                <option value="expired">Expired</option>
+            </select>
+        </div>
+
+        <div>
+            <label>COS:</label><input type="textbox" />
+        </div>
+
+        <br />
+
+        <div >
+        
+            <label>Date: </label>
+            <div class="input-group">
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                <span style="width: 20%;" class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>           
+
+        </div>
+
+        <br />
+
+        <div>
+            <label>Owner:</label>
+            <select name="carlist" form="carform">
+                <option value="xyz">User 1</option>
+                <option value="xyz">User 2</option>
+                <option value="xyz">User 3</option>
+            </select>
+        </div>
+    </div>
+
+</div> <!--End Info-->
 
 <br />
 <p>{{message}}</p>
 
-<table class="table">
+<table class="table" style="padding-top: 20px;">
     <thead>
         <tr>
             <th>Field</th>
