@@ -4,11 +4,8 @@ using System.Linq;
 using Lace.Models.Ivid.Dto;
 using Nancy;
 using Nancy.ModelBinding;
-<<<<<<< HEAD
 using NHibernate.Id;
-=======
 using NHibernate;
->>>>>>> origin/MVP
 using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.WriteModels;
