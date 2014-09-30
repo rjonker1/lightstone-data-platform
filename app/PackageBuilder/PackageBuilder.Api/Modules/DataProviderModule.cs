@@ -4,6 +4,7 @@ using System.Linq;
 using Lace.Models.Ivid.Dto;
 using Nancy;
 using Nancy.ModelBinding;
+using NHibernate.Id;
 using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.WriteModels;
@@ -23,7 +24,7 @@ namespace PackageBuilder.Api.Modules
             {
                 Guid ProviderId = Guid.NewGuid();
 
-                handler.Handle(new CreateDataProvider(ProviderId , "Test3", typeof(IvidResponse)));
+                handler.Handle(new CreateDataProvider(ProviderId , 1, "Ivid", typeof(IvidResponse)));
 
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
@@ -47,8 +48,9 @@ namespace PackageBuilder.Api.Modules
 
                 Guid ProviderId = Guid.NewGuid();
                 DataProviderDto dto = this.Bind<DataProviderDto>();
+                dto.incVersion();
 
-                handler.Handle(new CreateDataProviderRevision(ProviderId, dto.Name, typeof(DataProviderDto), dto.DataFields));
+                handler.Handle(new CreateDataProviderRevision(ProviderId, dto.Version, dto.Name, typeof(DataProviderDto), dto.DataFields));
 
 
                 return Response.AsJson(new { msg = "Success, " + ProviderId + " created" }); ;
@@ -64,6 +66,14 @@ namespace PackageBuilder.Api.Modules
     {
 
         public string Name { get; set; }
+
+        public int Version { get; set; }
+
+        public int incVersion()
+        {
+            return Version++;
+        }
+
         public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
 
     }

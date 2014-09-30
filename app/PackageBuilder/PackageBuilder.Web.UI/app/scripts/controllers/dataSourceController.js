@@ -57,6 +57,7 @@ angular.module('packageBuilderwebuiApp')
 
     $scope.today = function() {
       $scope.dt = new Date();
+      $scope.dataProvider.date = $scope.dt;
     };
     $scope.today();
 

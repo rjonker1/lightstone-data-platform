@@ -5,6 +5,8 @@
 
         <p>{{message}}</p>
 
+        {{dataProvider}}
+
     <br />
     <br />
 
@@ -13,8 +15,8 @@
 
     <div id="1" style="float: left;" >
         <div>
-            <label>Name:</label><input type="textbox" style="" value=" {{dataProvider.name}} " readonly/>
-            <label>Version:</label><input type="textbox" style="display: readonly;" value=" {{dataProvider.version}} " readonly/>
+            <label>Name:</label><input type="textbox" style="" ng-model="dataProvider.name" readonly/>
+            <label>Version:</label><input type="textbox" style="display: readonly;" ng-model="dataProvider.version" readonly/>
         </div>
         <div>
             <div>
@@ -37,7 +39,7 @@
         </div>
 
         <div>
-            <label>COS:</label><input type="textbox" />
+            <label>COS:</label><input type="textbox" ng-model="dataProvider.cos"/>
         </div>
 
         <br />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
@@ -13,6 +14,10 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
     public class DataProvider : AggregateBase, IDataProvider
     {
         public string Name { get; private set; }
+        public string State { get; private set; }
+        public double Cos { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Owner { get; private set; }
         public IEnumerable DataFields { get; private set; }
         //public IEnumerable DataFieldsRevision { get; private set; }
 
@@ -26,9 +31,9 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
 
         public DataProvider() { }
 
-        public DataProvider(Guid id, string name, Type responseType) : this(id)
+        public DataProvider(Guid id, int version, string name, Type responseType) : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, name, responseType, PopulateDataFields(responseType)));
+            RaiseEvent(new DataProviderCreated(id, version, name, responseType, PopulateDataFields(responseType)));
         }
 
         //public DataProviderRevision(Guid id, string name, Type responseType, IEnumerable<DataProviderRevisionCreated.DataProviderFieldItems> dataFields) : this(id)
@@ -36,11 +41,11 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
         //    RaiseEvent(new DataProviderRevisionCreated(id, name, responseType, dataFields));
         //}
 
-        public void CreateDataProviderRevision(Guid id, string name, Type responseType, IEnumerable dataFields)
+        public void CreateDataProviderRevision(Guid id, int version, string name, Type responseType, IEnumerable dataFields)
         {
-            RaiseEvent(new DataProviderRevisionCreated(id, name, responseType, dataFields));
+            RaiseEvent(new DataProviderRevisionCreated(id, version, name, responseType, dataFields));
         }
-
+        
         public void ChangeName(string newName)
         {
             if (string.IsNullOrEmpty(newName)) throw new ArgumentException("newName");
@@ -57,6 +62,10 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
         {
             Id = @event.Id;
             Name = @event.Name;
+            State = @event.State;
+            Cos = @event.Cos;
+            Date = @event.Date;
+            Owner = @event.Owner;
             DataFields = PopulateDataFields(@event.ResponseType);
         }
 
