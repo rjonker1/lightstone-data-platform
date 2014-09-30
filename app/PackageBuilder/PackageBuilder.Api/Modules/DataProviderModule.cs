@@ -4,12 +4,18 @@ using System.Linq;
 using Lace.Models.Ivid.Dto;
 using Nancy;
 using Nancy.ModelBinding;
+<<<<<<< HEAD
 using NHibernate.Id;
+=======
+using NHibernate;
+>>>>>>> origin/MVP
 using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Domain.Helpers.RavenDb.Indexes;
+using Raven.Client;
 
 namespace PackageBuilder.Api.Modules
 {
@@ -18,8 +24,15 @@ namespace PackageBuilder.Api.Modules
 
         
 
-        public DataProviderModule(IHandleMessages handler, IRepository<DataProvider> repository)
+        public DataProviderModule(IHandleMessages handler, IRepository<DataProvider> repository, IDocumentSession session)
         {
+            Get["/DataProvider"] = parameters =>
+            {
+                var dataProviders = session.Query<IndexDataProviersByName>();
+
+                return Response.AsJson(new { dataProviders });
+            };
+
             Get["/DataProvider/Add"] = parameters =>
             {
                 Guid ProviderId = Guid.NewGuid();

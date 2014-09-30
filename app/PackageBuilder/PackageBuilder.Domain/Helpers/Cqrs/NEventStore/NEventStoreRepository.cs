@@ -9,6 +9,7 @@ namespace PackageBuilder.Domain.Helpers.Cqrs.NEventStore
 {
     public interface IRepository<T> : IRepository
     {
+        T GetById(Guid id);
         T GetById(Guid id, int version);
         void Save(IAggregate aggregate, Guid commitId);
     }
@@ -19,9 +20,14 @@ namespace PackageBuilder.Domain.Helpers.Cqrs.NEventStore
         {
         }
 
+        public T GetById(Guid id)
+        {
+            return GetById<T>(typeof(T).Name, id);
+        }
+
         public T GetById(Guid id, int version)
         {
-            return GetById<T>(typeof(T).Name, id, 1);
+            return GetById<T>(typeof(T).Name, id, version);
         }
 
         public void Save(IAggregate aggregate, Guid commitId)
