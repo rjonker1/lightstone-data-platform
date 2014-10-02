@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RavenDB\Indexes\IndexDataProvidersByName.cs" />
-    <Compile Include="RavenDB\Indexes\ReadIndexTest.cs" />
+    <Compile Include="RavenDB\Indexes\IndexAllDataProviders.cs" />
     <Compile Include="RavenDB\Indexes\TestingIndex.cs" />
     <Compile Include="RavenDB\IndexInstaller.cs" />
   </ItemGroup>

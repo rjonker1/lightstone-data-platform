@@ -19,18 +19,18 @@ namespace PackageBuilder.Api.Modules
     public class DataProviderModule : NancyModule
     {
 
-        
-
         public DataProviderModule(IHandleMessages handler, IRepository<DataProvider> repository, IDocumentSession session)
         {
+            
             Get["/DataProvider"] = parameters =>
             {
 
-                var res = session.Query<ReadDataProvider, ReadIndexTest>()
+                var res = session.Query<ReadDataProvider, IndexAllDataProviders>()
                     .ToList();
                                         
                 return Response.AsJson(new { Response = res });   
             };
+
 
             Get["/DataProvider/Add"] = parameters =>
             {
@@ -41,6 +41,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
 
+
             Get["/DataProvider/Edit/{id}"] = parameters =>
             {
 
@@ -48,6 +49,7 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new { msg = "Success" });
             };
+
 
             Get["/DataProvider/Get/{id}"] = parameters =>
             {
@@ -60,13 +62,9 @@ namespace PackageBuilder.Api.Modules
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
 
-                //Guid ProviderId = Guid.NewGuid();
                 DataProviderDto dto = this.Bind<DataProviderDto>();
                 dto.incVersion();
-
-                //TODO: Add Date for revised DataProvider
                 handler.Handle(new CreateDataProviderRevision(parameters.id, dto.Version, dto.Name, typeof(DataProviderDto), dto.DataFields));
-
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
             };

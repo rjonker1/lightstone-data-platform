@@ -7,7 +7,7 @@ using Raven.Client.Indexes;
 
 namespace PackageBuilder.Infrastructure.RavenDB.Indexes
 {
-    public class ReadIndexTest : AbstractIndexCreationTask<ReadDataProvider>
+    public class IndexAllDataProviders : AbstractIndexCreationTask<ReadDataProvider>
     {
 
         public class ReduceResult
@@ -15,7 +15,7 @@ namespace PackageBuilder.Infrastructure.RavenDB.Indexes
             public int Count { get; set; }
         }
 
-        public ReadIndexTest()
+        public IndexAllDataProviders()
         {
 
             Map = dataProvidersMeta => from dataProvider in dataProvidersMeta

@@ -11,7 +11,7 @@ namespace PackageBuilder.Infrastructure.RavenDB
         {
             IndexCreation.CreateIndexes(typeof(IndexDataProvidersByName).Assembly, container.Resolve<IDocumentStore>());
             IndexCreation.CreateIndexes(typeof(TestingIndex).Assembly, container.Resolve<IDocumentStore>());
-            IndexCreation.CreateIndexes(typeof(ReadIndexTest).Assembly, container.Resolve<IDocumentStore>());
+            IndexCreation.CreateIndexes(typeof(IndexAllDataProviders).Assembly, container.Resolve<IDocumentStore>());
         }
     }
 }

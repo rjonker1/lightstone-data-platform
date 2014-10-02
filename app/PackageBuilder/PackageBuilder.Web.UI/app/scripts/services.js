@@ -9,6 +9,13 @@ providerServices.factory('GetAPI', ['$resource',
 		});
 	}]);
 
+providerServices.factory('GetDataProviders', ['$resource',
+	function($resource) {
+		return $resource('http://localhost:12257/DataProvider', {}, {
+			query: { method: 'GET', isObject:true }
+		});
+	}]);
+
 providerServices.factory('PostAPI', ['$resource', 
 	function($resource) {
 

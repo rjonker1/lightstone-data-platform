@@ -28,7 +28,7 @@ angular
       })
       .when('/data-source-detail', {
         templateUrl: 'views/dataSourceDetail.html',
-        controller: 'dsCtrl'
+        controller: 'dsDetailCtrl'
       })
       .when('/data-sources', {
         templateUrl: 'views/dataSources.html',
