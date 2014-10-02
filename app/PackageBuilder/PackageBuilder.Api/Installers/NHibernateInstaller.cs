@@ -1,5 +1,4 @@
-﻿
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using FluentNHibernate.Automapping;
@@ -7,7 +6,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Data;
 using NHibernate.Cfg;
 
-namespace PackageBuilder.Core.Helpers.Windsor.Installers
+namespace PackageBuilder.Api.Installers
 {
     /// <summary>
     /// Responsible for configuring NHibernate

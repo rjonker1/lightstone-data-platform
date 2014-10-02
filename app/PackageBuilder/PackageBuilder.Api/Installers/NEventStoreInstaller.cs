@@ -12,13 +12,12 @@ using NEventStore.Dispatcher;
 using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Core.Helpers.MessageHandling;
 
-namespace PackageBuilder.Core.Helpers.Windsor.Installers
+namespace PackageBuilder.Api.Installers
 {
-    public class EventStoreInstaller : IWindsorInstaller
+    public class NEventStoreInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-
             container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>().Construct()));
             container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>());
 
