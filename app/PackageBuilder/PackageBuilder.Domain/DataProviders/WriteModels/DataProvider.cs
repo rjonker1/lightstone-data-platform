@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Common.Helpers.Extensions;
@@ -57,6 +58,7 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
             var fields = type.GetPublicProperties().Select(x => new Tuple<string, Type>(x.Name, x.PropertyType));
             return fields.Select(field => new DataField(field.Item1, field.Item2));
         }
+
 
         private void Apply(DataProviderCreated @event)
         {

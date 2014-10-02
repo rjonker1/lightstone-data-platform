@@ -16,7 +16,7 @@ angular.module('packageBuilderwebuiApp')
 
       $scope.message = "Saving data..."
 
-      PostAPI.save({}, providerData, function(data) {
+      PostAPI.save({ id:$scope.dataProvider.id }, providerData, function(data) {
 
         //var resp = data.msg;
          
@@ -55,11 +55,18 @@ angular.module('packageBuilderwebuiApp')
 
     }
 
+
     $scope.today = function() {
-      $scope.dt = new Date();
-      $scope.dataProvider.date = $scope.dt;
+
+     // if($scope.dataProvider.date == null) {
+        $scope.dataProvider.date = new Date();
+      //} else {
+
+      //  $scope.dataProvider.date;
+     // }
+
+      
     };
-    $scope.today();
 
     $scope.clear = function () {
       $scope.dt = null;
@@ -79,6 +86,8 @@ angular.module('packageBuilderwebuiApp')
       $event.preventDefault();
       $event.stopPropagation();
 
+      $scope.today(); //Set dt to maintain local time model, avoid UTC!
+
       $scope.opened = true;
     };
 
@@ -87,7 +96,21 @@ angular.module('packageBuilderwebuiApp')
       startingDay: 1
     };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd/MM/yyyy', 'shortDate'];
+    $scope.users = [
+
+          {name:'user1'},
+          {name:'user2'},
+          {name:'user3'}
+    ];
+
+    $scope.states = [
+
+          {name:'Under Construction'},
+          {name:'Published'},
+          {name:'Expired'}
+    ];
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd-MM-yyyy', 'shortDate', 'yyyy-MM-ddTHH:mm:ss'];
     $scope.format = $scope.formats[2];
 
   }]);

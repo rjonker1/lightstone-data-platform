@@ -4,7 +4,7 @@ var providerServices = angular.module('providerServices', ['ngResource']);
 
 providerServices.factory('GetAPI', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider/Get/8f1ae13e-5122-4128-99a1-8a25769945d8', {}, {
+		return $resource('http://localhost:12257/DataProvider/Get/b5cbb97a-d086-4c5b-bd37-7e5e24085b7d', {}, {
 			query: {method:'GET', isObject:true}
 		});
 	}]);
@@ -12,7 +12,7 @@ providerServices.factory('GetAPI', ['$resource',
 providerServices.factory('PostAPI', ['$resource', 
 	function($resource) {
 
-		return $resource('http://localhost:12257/DataProvider/Add', {}, {
+		return $resource('http://localhost:12257/DataProvider/Edit/:id', {}, {
 			
 		});
 	}]);

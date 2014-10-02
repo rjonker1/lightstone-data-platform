@@ -134,7 +134,8 @@
     <Compile Include="Entities\Package.cs" />
     <Compile Include="Helpers\MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="Helpers\Cqrs\NEventStore\AggregateFactory.cs" />
-    <Compile Include="Helpers\RavenDb\Indexes\IndexDataProviersByName.cs" />
+    <Compile Include="Helpers\RavenDb\Indexes\IndexDataProvidersByName.cs" />
+    <Compile Include="Helpers\RavenDb\Indexes\TestingIndex.cs" />
     <Compile Include="Helpers\Windsor\Installers\CommandInstaller.cs" />
     <Compile Include="Helpers\Windsor\Installers\EventStoreInstaller.cs" />
     <Compile Include="Helpers\Windsor\Installers\RavenDbInstaller.cs" />

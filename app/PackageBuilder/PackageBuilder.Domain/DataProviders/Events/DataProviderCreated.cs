@@ -22,7 +22,9 @@ namespace PackageBuilder.Domain.DataProviders.Events
             ResponseType = responseType;
             State = null;
             Cos = 0.00;
-            Date = new DateTime();
+
+            //DateTime dt = DateTime.Now;
+            Date = DateTime.Now;//dt.ToString("dd/MM/yyyy");
             Owner = null;
             DataFields = dataFields;
         }

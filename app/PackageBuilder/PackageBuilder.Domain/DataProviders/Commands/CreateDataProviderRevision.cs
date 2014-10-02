@@ -10,6 +10,7 @@ namespace PackageBuilder.Domain.DataProviders.Commands
     {
         public Guid Id { get; private set; }
         public int Version { get; private set; }
+        public DateTime Date { get; private set; }
         public readonly string Name;
         public readonly Type DataProviderType;
         public readonly IEnumerable DataFields;
