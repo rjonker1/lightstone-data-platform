@@ -1,21 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PackageBuilder.Domain.DataProviders.ReadModels;
 using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Domain.Models;
+using Raven.Client;
+using Raven.Client.Document;
 
 namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 {
-    class UpdateReadModelHandler : AbstractMessageHandler<DataProviderReadModel>
+    public class UpdateReadModelHandler : AbstractMessageHandler<UpdateReadModel>
     {
 
-
-
-        public override void Handle(DataProviderReadModel command)
+        public override void Handle(UpdateReadModel command)
         {
-            throw new NotImplementedException();
+
+            var read = new ReadDataProvider()
+            {
+                Id = command.Id,
+                Name = command.Name,
+                Version = command.Version
+            };
+
+            var documentStore = new DocumentStore { ConnectionStringName = "packageBuilder/database" };
+            documentStore.Initialize();
+
+            using (IDocumentSession session = documentStore.OpenSession())
+            {
+                session.Store(read);
+                session.SaveChanges();
+            }
+
         }
     }
 }

@@ -43,6 +43,7 @@ namespace PackageBuilder.Api.Modules
                 Guid ProviderId = Guid.NewGuid();
 
                 handler.Handle(new CreateDataProvider(ProviderId , 2, "Ivid", typeof(IvidResponse)));
+                //handler.Handle(new UpdateReadModel(ProviderId,"Ivid", 1));
 
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };

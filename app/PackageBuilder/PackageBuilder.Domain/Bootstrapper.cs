@@ -14,7 +14,7 @@ namespace PackageBuilder.Domain
     {
         public static void Startup(IWindsorContainer windsorContainer)
         {
-            windsorContainer.Install(FromAssembly.This());
+            //windsorContainer.Install(FromAssembly.This());
 
 
             //DocumentStore documentStore = new DocumentStore { Url = "http://localhost:8080" };

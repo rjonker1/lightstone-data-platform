@@ -17,7 +17,7 @@ namespace PackageBuilder.Core
 
         public static void Startup(IWindsorContainer windsorContainer)
         {
-           // windsorContainer.Install(FromAssembly.This());
+            //windsorContainer.Install(FromAssembly.This());
             windsorContainer.Install(
                     new CommandInstaller(), 
                     new EventStoreInstaller(), 
