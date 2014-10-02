@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Castle.Windsor.Installer;
 using Nancy;
-using CommonDomain.Persistence;
-using DataPlatform.Shared.Repositories;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
-using PackageBuilder.Api.Modules;
-using PackageBuilder.Domain.DataFields;
-using PackageBuilder.Domain.DataProviders;
-using PackageBuilder.Domain.Entities;
-using PackageBuilder.TestHelper.Mothers;
+using PackageBuilder.Api.Helpers.RavenDB;
 using Raven.Client;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -29,7 +22,8 @@ namespace PackageBuilder.Api
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
 
-      
+            IndexInstaller.Install(container);
+
             //NHibernateBootstrapper.Build();
             //Make every request SSL based
 			//pipelines.BeforeRequest += ctx =>
@@ -45,8 +39,7 @@ namespace PackageBuilder.Api
             // Perform registation that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            Domain.Bootstrapper.Startup(container);
-            Core.Bootstrapper.Startup(container);
+            container.Install(FromAssembly.InThisApplication());
 
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
