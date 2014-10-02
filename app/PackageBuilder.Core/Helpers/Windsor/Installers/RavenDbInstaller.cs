@@ -4,7 +4,7 @@ using Castle.Windsor;
 using Raven.Client;
 using Raven.Client.Document;
 
-namespace PackageBuilder.Domain.Helpers.Windsor.Installers
+namespace PackageBuilder.Core.Helpers.Windsor.Installers
 {
     public class RavenDbInstaller : IWindsorInstaller
     {

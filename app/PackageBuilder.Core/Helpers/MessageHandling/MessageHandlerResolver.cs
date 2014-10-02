@@ -1,6 +1,6 @@
-using Castle.Windsor;
+﻿using Castle.Windsor;
 
-namespace PackageBuilder.Domain.Helpers.MessageHandling
+namespace PackageBuilder.Core.Helpers.MessageHandling
 {
     public interface IHandleMessages
     {

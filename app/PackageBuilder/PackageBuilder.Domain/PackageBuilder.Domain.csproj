@@ -47,6 +47,13 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -59,6 +66,9 @@
     </Reference>
     <Reference Include="NEventStore.Persistence.RavenDB">
       <HintPath>..\..\packages\NEventStore.Persistence.RavenDB.5.0.0.86\lib\net40\NEventStore.Persistence.RavenDB.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions">
       <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>
@@ -101,7 +111,6 @@
     <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
     <Compile Include="DataProviders\Commands\Handlers\CreateDataProviderHandler.cs" />
     <Compile Include="Helpers\Cqrs\NEventStore\NEventStoreRepository.cs" />
-    <Compile Include="Helpers\MessageHandling\MessagesHandlerResolver.cs" />
     <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
     <Compile Include="Helpers\Cqrs\Events\DomainEvent.cs" />
     <Compile Include="Helpers\Cqrs\Events\IDomainEvent.cs" />
@@ -132,13 +141,9 @@
     <Compile Include="Entities\GroupPackage.cs" />
     <Compile Include="Entities\GroupPermission.cs" />
     <Compile Include="Entities\Package.cs" />
-    <Compile Include="Helpers\MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="Helpers\Cqrs\NEventStore\AggregateFactory.cs" />
-    <Compile Include="Helpers\RavenDb\Indexes\IndexDataProvidersByName.cs" />
-    <Compile Include="Helpers\RavenDb\Indexes\TestingIndex.cs" />
-    <Compile Include="Helpers\Windsor\Installers\CommandInstaller.cs" />
-    <Compile Include="Helpers\Windsor\Installers\EventStoreInstaller.cs" />
-    <Compile Include="Helpers\Windsor\Installers\RavenDbInstaller.cs" />
+    <Compile Include="Helpers\MessageHandling\AbstractMessageHandler.cs" />
+    <Compile Include="Helpers\MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="PackageLookup.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\RolePackage.cs" />

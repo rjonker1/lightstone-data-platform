@@ -7,15 +7,16 @@ using Nancy.ModelBinding;
 using NEventStore.Persistence.RavenDB;
 using NHibernate.Id;
 using NHibernate;
+using PackageBuilder.Core.Helpers.MessageHandling;
+using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.Helpers.RavenDb.Indexes;
 using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.ReadModels;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
-using PackageBuilder.Domain.Helpers.MessageHandling;
-using PackageBuilder.Domain.Helpers.RavenDb.Indexes;
 using Raven.Client;
 using Raven.Client.Linq;
+using IHandleMessages = PackageBuilder.Core.Helpers.MessageHandling.IHandleMessages;
 
 namespace PackageBuilder.Api.Modules
 {

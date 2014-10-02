@@ -9,15 +9,16 @@ using MemBus;
 using MemBus.Configurators;
 using NEventStore;
 using NEventStore.Dispatcher;
-using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
-using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.Helpers.MessageHandling;
 
-namespace PackageBuilder.Domain.Helpers.Windsor.Installers
+namespace PackageBuilder.Core.Helpers.Windsor.Installers
 {
     public class EventStoreInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+
             container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>().Construct()));
             container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>());
 

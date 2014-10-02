@@ -1,4 +1,4 @@
-﻿<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2-x-factories">
+﻿<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
   <session-factory>
     <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
     <property name="connection.connection_string_name">Data</property>

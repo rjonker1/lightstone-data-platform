@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Common", "Pa
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MockSQLDataProvider", "MockSQLDataProvider\MockSQLDataProvider.sqlproj", "{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Core", "PackageBuilder.Core\PackageBuilder.Core.csproj", "{A3368386-392B-476D-8B6C-910E73A9C21C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,14 @@ Global
 		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Test|Any CPU.Build.0 = Debug|Any CPU
 		{1A94D3C6-2785-48A2-ADEE-3620FBEFB2B4}.Test|Any CPU.Deploy.0 = Debug|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{A3368386-392B-476D-8B6C-910E73A9C21C}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

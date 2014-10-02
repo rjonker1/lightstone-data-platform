@@ -3,7 +3,6 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using PackageBuilder.Domain.DataProviders.ReadModels;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using PackageBuilder.Domain.Helpers.RavenDb.Indexes;
 using Raven.Abstractions.Indexing;
 using Raven.Client;
 using Raven.Client.Document;
@@ -27,9 +26,6 @@ namespace PackageBuilder.Domain
             //    {
             //        Map = dataProviders => dataProviders.Select(x => new { x.Id, x.Name, x.Version })
             //    });
-
-            IndexCreation.CreateIndexes(typeof(IndexDataProvidersByName).Assembly, windsorContainer.Resolve<IDocumentStore>());
-            IndexCreation.CreateIndexes(typeof(TestingIndex).Assembly, windsorContainer.Resolve<IDocumentStore>());
 
         }
     }

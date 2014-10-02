@@ -1,12 +1,10 @@
 using System.Linq;
-using DataPlatform.Shared.Entities;
 using NEventStore.Persistence.RavenDB;
 using PackageBuilder.Domain.DataProviders.ReadModels;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
-namespace PackageBuilder.Domain.Helpers.RavenDb.Indexes
+namespace PackageBuilder.Core.Helpers.RavenDb.Indexes
 {
     public class TestingIndex : AbstractIndexCreationTask<RavenCommit, DataProviderReadModel>
     {
