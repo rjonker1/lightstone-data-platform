@@ -7,9 +7,7 @@ namespace PackageBuilder.Core
     {
 
         public static void Startup(IWindsorContainer windsorContainer)
-        {
-            
-
+        {    
             
         }
 

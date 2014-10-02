@@ -3,7 +3,7 @@ using PackageBuilder.Domain.DataProviders.ReadModels;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
-namespace PackageBuilder.Core.Helpers.RavenDb.Indexes
+namespace PackageBuilder.Infrastructure.RavenDB.Indexes
 {
     public class IndexDataProvidersByName : AbstractIndexCreationTask<DataProviderReadModel> 
     {

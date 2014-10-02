@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Lace.Models.Ivid.Dto;
 using PackageBuilder.Common.Helpers.Extensions;
-using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Core.Helpers.MessageHandling;
 
 namespace PackageBuilder.Web.Controllers
 {

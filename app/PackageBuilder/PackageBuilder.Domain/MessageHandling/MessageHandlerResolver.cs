@@ -1,6 +1,6 @@
 ﻿using Castle.Windsor;
 
-namespace PackageBuilder.Core.Helpers.MessageHandling
+namespace PackageBuilder.Domain.MessageHandling
 {
     public interface IHandleMessages
     {

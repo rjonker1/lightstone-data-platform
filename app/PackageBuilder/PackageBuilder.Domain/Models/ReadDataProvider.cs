@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PackageBuilder.Domain.Models
 {
-    class ReadDataProvider
+    public class ReadDataProvider
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

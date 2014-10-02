@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Helpers.Cqrs.Commands;
+using PackageBuilder.Core.Helpers.Cqrs.Commands;
 
 namespace PackageBuilder.Domain.DataProviders.Commands
 {

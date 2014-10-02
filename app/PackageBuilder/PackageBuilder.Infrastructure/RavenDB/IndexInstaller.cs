@@ -1,9 +1,9 @@
 ﻿using Castle.Windsor;
-using PackageBuilder.Core.Helpers.RavenDb.Indexes;
+using PackageBuilder.Infrastructure.RavenDB.Indexes;
 using Raven.Client;
 using Raven.Client.Indexes;
 
-namespace PackageBuilder.Api.Helpers.RavenDB
+namespace PackageBuilder.Infrastructure.RavenDB
 {
     public class IndexInstaller
     {
@@ -11,6 +11,7 @@ namespace PackageBuilder.Api.Helpers.RavenDB
         {
             IndexCreation.CreateIndexes(typeof(IndexDataProvidersByName).Assembly, container.Resolve<IDocumentStore>());
             IndexCreation.CreateIndexes(typeof(TestingIndex).Assembly, container.Resolve<IDocumentStore>());
+            IndexCreation.CreateIndexes(typeof(ReadIndexTest).Assembly, container.Resolve<IDocumentStore>());
         }
     }
 }

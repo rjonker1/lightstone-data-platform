@@ -1,5 +1,5 @@
 using System;
-using PackageBuilder.Domain.Helpers.Cqrs.Events;
+using PackageBuilder.Core.Helpers.Cqrs.Events;
 
 namespace PackageBuilder.Domain.DataFields.Events
 {

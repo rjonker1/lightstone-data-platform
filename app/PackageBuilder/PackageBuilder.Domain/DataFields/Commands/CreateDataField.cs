@@ -1,5 +1,5 @@
 using System;
-using PackageBuilder.Domain.Helpers.Cqrs.Commands;
+using PackageBuilder.Core.Helpers.Cqrs.Commands;
 
 namespace PackageBuilder.Domain.DataFields.Commands
 {

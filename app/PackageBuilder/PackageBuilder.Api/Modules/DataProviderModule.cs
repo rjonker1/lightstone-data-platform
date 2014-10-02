@@ -5,18 +5,14 @@ using Lace.Models.Ivid.Dto;
 using Nancy;
 using Nancy.ModelBinding;
 using NEventStore.Persistence.RavenDB;
-using NHibernate.Id;
-using NHibernate;
-using PackageBuilder.Core.Helpers.MessageHandling;
 using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
-using PackageBuilder.Core.Helpers.RavenDb.Indexes;
-using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.DataProviders.Commands;
-using PackageBuilder.Domain.DataProviders.ReadModels;
 using PackageBuilder.Domain.DataProviders.WriteModels;
+using PackageBuilder.Domain.Models;
+using PackageBuilder.Infrastructure.RavenDB.Indexes;
 using Raven.Client;
 using Raven.Client.Linq;
-using IHandleMessages = PackageBuilder.Core.Helpers.MessageHandling.IHandleMessages;
+using IHandleMessages = PackageBuilder.Domain.MessageHandling.IHandleMessages;
 
 namespace PackageBuilder.Api.Modules
 {
@@ -30,12 +26,10 @@ namespace PackageBuilder.Api.Modules
             Get["/DataProvider"] = parameters =>
             {
 
-
-                var res = session.Query<RavenCommit, TestingIndex>();
+                var res = session.Query<ReadDataProvider, ReadIndexTest>()
+                    .ToList();
                                         
-
-                //return Response.AsJson(new { res });
-                return null;
+                return Response.AsJson(new { Response = res });   
             };
 
             Get["/DataProvider/Add"] = parameters =>
@@ -43,13 +37,13 @@ namespace PackageBuilder.Api.Modules
                 Guid ProviderId = Guid.NewGuid();
 
                 handler.Handle(new CreateDataProvider(ProviderId , 2, "Ivid", typeof(IvidResponse)));
-                //handler.Handle(new UpdateReadModel(ProviderId,"Ivid", 1));
 
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
 
             Get["/DataProvider/Edit/{id}"] = parameters =>
             {
+
                 handler.Handle(new RenameDataProvider(new Guid(parameters.id), "Test1"));
 
                 return Response.AsJson(new { msg = "Success" });
@@ -57,6 +51,7 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/{id}"] = parameters =>
             {
+
                 var dataProviders = repository.GetById(parameters.id);
                 return Response.AsJson(new { Response = dataProviders });
             };

@@ -139,18 +139,8 @@
     <Compile Include="Entities\GroupPackage.cs" />
     <Compile Include="Entities\GroupPermission.cs" />
     <Compile Include="Entities\Package.cs" />
-    <Compile Include="Helpers\Cqrs\Commands\DomainCommand.cs" />
-    <Compile Include="Helpers\Cqrs\Commands\IDomainCommand.cs" />
-    <Compile Include="Helpers\Cqrs\Events\DomainEvent.cs" />
-    <Compile Include="Helpers\Cqrs\Events\IDomainEvent.cs" />
-    <Compile Include="Helpers\Cqrs\NEventStore\AggregateFactory.cs" />
-    <Compile Include="Helpers\Cqrs\NEventStore\NEventStoreRepository.cs" />
-    <Compile Include="Helpers\MessageHandling\AbstractMessageHandler.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\MessageHandling\MessageHandlerResolver.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
+    <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="Models\ReadDataProvider.cs" />
     <Compile Include="PackageLookup.cs" />
     <Compile Include="Entities\Role.cs" />
@@ -166,13 +156,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataFields\ReadModels\" />
-    <Folder Include="Helpers\Extensions\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Common\PackageBuilder.Common.csproj">
       <Project>{e1860260-caa8-497b-a014-bddfab19665d}</Project>
       <Name>PackageBuilder.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Core.csproj">
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
+      <Name>PackageBuilder.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

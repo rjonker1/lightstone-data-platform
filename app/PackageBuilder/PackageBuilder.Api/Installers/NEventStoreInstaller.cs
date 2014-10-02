@@ -10,7 +10,7 @@ using MemBus.Configurators;
 using NEventStore;
 using NEventStore.Dispatcher;
 using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
-using PackageBuilder.Core.Helpers.MessageHandling;
+using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Api.Installers
 {

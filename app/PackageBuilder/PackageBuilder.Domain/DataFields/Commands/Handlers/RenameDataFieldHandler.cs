@@ -1,7 +1,7 @@
 using System;
 using CommonDomain.Persistence;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Domain.DataFields.Commands.Handlers
 {

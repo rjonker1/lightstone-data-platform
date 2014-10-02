@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Helpers.Cqrs.Events;
+using PackageBuilder.Core.Helpers.Cqrs.Events;
+using PackageBuilder.Domain.DataProviders.Commands;
+using PackageBuilder.Domain.DataProviders.Commands.Handlers;
+using IHandleMessages = PackageBuilder.Domain.MessageHandling.IHandleMessages;
 
 namespace PackageBuilder.Domain.DataProviders.Events
 {
     public class DataProviderCreated : DomainEvent
     {
+
 		public readonly string Name;
         public readonly Type ResponseType;
         public readonly string State;
@@ -27,6 +31,19 @@ namespace PackageBuilder.Domain.DataProviders.Events
             Date = DateTime.Now;//dt.ToString("dd/MM/yyyy");
             Owner = null;
             DataFields = dataFields;
+
+           
+            UpdateModel(id, name, version);
         }
+
+        private void UpdateModel(Guid id, string name, int version)
+        {
+            
+           IHandleMessages handler = new UpdateReadModelHandler();           
+           handler.Handle(new UpdateReadModel(id, name, version));
+
+        }
+
+        
     }
 }

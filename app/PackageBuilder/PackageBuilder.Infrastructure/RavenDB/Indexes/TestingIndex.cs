@@ -4,7 +4,7 @@ using PackageBuilder.Domain.DataProviders.ReadModels;
 using PackageBuilder.Domain.DataProviders.WriteModels;
 using Raven.Client.Indexes;
 
-namespace PackageBuilder.Core.Helpers.RavenDb.Indexes
+namespace PackageBuilder.Infrastructure.RavenDB.Indexes
 {
     public class TestingIndex : AbstractIndexCreationTask<RavenCommit, DataProviderReadModel>
     {

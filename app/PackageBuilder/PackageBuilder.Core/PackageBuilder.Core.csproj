@@ -85,18 +85,12 @@
     <Compile Include="Helpers\Cqrs\Events\IDomainEvent.cs" />
     <Compile Include="Helpers\Cqrs\NEventStore\AggregateFactory.cs" />
     <Compile Include="Helpers\Cqrs\NEventStore\NEventStoreRepository.cs" />
-    <Compile Include="Helpers\MessageHandling\AbstractMessageHandler.cs" />
-    <Compile Include="Helpers\MessageHandling\MessageHandlerResolver.cs" />
-    <Compile Include="Helpers\RavenDb\Indexes\IndexDataProvidersByName.cs" />
-    <Compile Include="Helpers\RavenDb\Indexes\TestingIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\Windsor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

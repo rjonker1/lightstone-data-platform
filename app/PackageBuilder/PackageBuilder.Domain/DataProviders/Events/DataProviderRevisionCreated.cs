@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Helpers.Cqrs.Events;
+using PackageBuilder.Core.Helpers.Cqrs.Events;
 
 namespace PackageBuilder.Domain.DataProviders.Events
 {

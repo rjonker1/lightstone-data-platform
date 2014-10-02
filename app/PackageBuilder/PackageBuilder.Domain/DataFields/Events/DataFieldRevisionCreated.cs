@@ -1,6 +1,6 @@
 ﻿using System;
+using PackageBuilder.Core.Helpers.Cqrs.Events;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using PackageBuilder.Domain.Helpers.Cqrs.Events;
 
 namespace PackageBuilder.Domain.DataFields.Events
 {

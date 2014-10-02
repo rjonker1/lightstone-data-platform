@@ -161,7 +161,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Helpers\RavenDB\IndexInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
     <Compile Include="Installers\NEventStoreInstaller.cs" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
@@ -211,7 +210,7 @@
       <Project>{1a94d3c6-2785-48a2-adee-3620fbefb2b4}</Project>
       <Name>MockSQLDataProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PackageBuilder.Core\PackageBuilder.Core.csproj">
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Core.csproj">
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Core</Name>
     </ProjectReference>
@@ -223,12 +222,18 @@
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj">
+      <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
+      <Name>PackageBuilder.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
       <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
       <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

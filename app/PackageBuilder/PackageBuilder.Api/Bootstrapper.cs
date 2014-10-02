@@ -4,7 +4,7 @@ using Castle.Windsor.Installer;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
-using PackageBuilder.Api.Helpers.RavenDB;
+using PackageBuilder.Infrastructure.RavenDB;
 using Raven.Client;
 using Shared.BuildingBlocks.Api.Security;
 

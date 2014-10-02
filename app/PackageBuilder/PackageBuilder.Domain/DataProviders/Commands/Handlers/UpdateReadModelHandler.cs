@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Domain.MessageHandling;
 using PackageBuilder.Domain.Models;
 using Raven.Client;
 using Raven.Client.Document;

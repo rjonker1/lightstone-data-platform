@@ -1,7 +1,7 @@
 using System;
+using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
 using PackageBuilder.Domain.DataProviders.WriteModels;
-using PackageBuilder.Domain.Helpers.Cqrs.NEventStore;
-using PackageBuilder.Domain.Helpers.MessageHandling;
+using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 {
