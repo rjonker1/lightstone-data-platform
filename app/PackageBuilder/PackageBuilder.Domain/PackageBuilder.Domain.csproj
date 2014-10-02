@@ -169,6 +169,12 @@
     <Folder Include="Helpers\Extensions\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Common\PackageBuilder.Common.csproj">
+      <Project>{e1860260-caa8-497b-a014-bddfab19665d}</Project>
+      <Name>PackageBuilder.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

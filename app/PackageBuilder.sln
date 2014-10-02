@@ -25,6 +25,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MockSQLDataProvider", "Mock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Core", "PackageBuilder.Core\PackageBuilder.Core.csproj", "{A3368386-392B-476D-8B6C-910E73A9C21C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Infrastructure", "PackageBuilder\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj", "{622131D3-B807-49A9-A41E-5309D3E14A37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,14 @@ Global
 		{A3368386-392B-476D-8B6C-910E73A9C21C}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{A3368386-392B-476D-8B6C-910E73A9C21C}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{A3368386-392B-476D-8B6C-910E73A9C21C}.Test|Any CPU.Build.0 = Release|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{622131D3-B807-49A9-A41E-5309D3E14A37}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
