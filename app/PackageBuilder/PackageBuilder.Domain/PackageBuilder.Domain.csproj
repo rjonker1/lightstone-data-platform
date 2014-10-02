@@ -102,6 +102,7 @@
     <Compile Include="DataProviders\Commands\CreateDataProviderRevision.cs" />
     <Compile Include="DataProviders\Commands\Handlers\CreateDataProviderRevisionHandler.cs" />
     <Compile Include="DataProviders\Commands\Handlers\RenameDataProviderHandler.cs" />
+    <Compile Include="DataProviders\Commands\Handlers\UpdateReadModelHandler.cs" />
     <Compile Include="DataProviders\Events\DataProviderRevisionCreated.cs" />
     <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
     <Compile Include="Helpers\Cqrs\Commands\DomainCommand.cs" />
