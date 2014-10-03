@@ -24,4 +24,5 @@ namespace Lace.Source.Anpr.Configuration
             return this;
         }
     }
+
 }
