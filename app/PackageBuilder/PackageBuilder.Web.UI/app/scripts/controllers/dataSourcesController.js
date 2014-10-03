@@ -8,33 +8,28 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsCtrl', ['$scope', '$http', 'GetDataProviders', function ($scope, $http, GetDataProviders) {
+  .controller('dsCtrl', ['$scope', function ($scope) {
     
   
-    //$scope.loadDProviders = function() {
-      
-      $scope.test = GetDataProviders.query();
-
-      GetDataProviders.get(function(data){
-
-           var resp = data.response;
-          
-           for( var res in resp)
-           {
-
-              /*alert(''+res);*/
-              if (resp.hasOwnProperty(res)) {
-                                                
-                  $scope.dataProvider = resp;
-                  $scope.message = "Data Loaded."
-              }
-          }
-
-      }, function(err){
-
-          alert('There was an issue contacting the API')
-      });
-
-    //}
+    $scope.myData = [
+    {
+        "firstName": "Cox",
+        "lastName": "Carney",
+        "company": "Enormo",
+        "employed": true
+    },
+    {
+        "firstName": "Lorraine",
+        "lastName": "Wise",
+        "company": "Comveyer",
+        "employed": false
+    },
+    {
+        "firstName": "Nancy",
+        "lastName": "Waters",
+        "company": "Fuelton",
+        "employed": false
+    }
+];
 
   }]);
