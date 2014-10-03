@@ -30,12 +30,13 @@ namespace Lace.Source.Anpr
             }
             else
             {
-                var consumer = new ConsumeSource(new HandleAnprSourceCall(),
-                    new CallAnprExternalSource(_request,
-                        new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
-                            CacheConnectionFactory.LocalClient(), ConfigurationManager.ConnectionStrings["lace/source/database/anpr/certificates/configuration"].ConnectionString)));
+                //TODO: System.Data issue on the build server causes an error
+                //var consumer = new ConsumeSource(new HandleAnprSourceCall(),
+                //    new CallAnprExternalSource(_request,
+                //        new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
+                //            CacheConnectionFactory.LocalClient(), ConfigurationManager.ConnectionStrings["lace/source/database/anpr/certificates/configuration"].ConnectionString)));
 
-                consumer.ConsumeExternalSource(response, laceEvent);
+                //consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.AnprResponse == null)
                     CallFallbackSource(response, laceEvent);
