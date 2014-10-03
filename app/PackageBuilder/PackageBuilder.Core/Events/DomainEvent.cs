@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PackageBuilder.Core.Helpers.Cqrs.Events
+namespace PackageBuilder.Core.Events
 {
     public class DomainEvent : IDomainEvent
     {

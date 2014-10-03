@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PackageBuilder.Core.Helpers.Cqrs.Events;
+using PackageBuilder.Core.Events;
 
 namespace PackageBuilder.Domain.DataProviders.Events
 {

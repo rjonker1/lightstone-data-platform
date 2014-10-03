@@ -1,5 +1,5 @@
 using System;
-using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.DataFields.WriteModels;
 using PackageBuilder.Domain.MessageHandling;
 
@@ -7,9 +7,9 @@ namespace PackageBuilder.Domain.DataFields.Events.Handlers
 {
     public class DataFieldCreatedHandler : AbstractMessageHandler<DataFieldCreated>
     {
-        private readonly IRepository<DataField> _repository;
+        private readonly INEventStoreRepository<DataField> _repository;
 
-        public DataFieldCreatedHandler(IRepository<DataField> repository)
+        public DataFieldCreatedHandler(INEventStoreRepository<DataField> repository)
         {
             _repository = repository;
         }

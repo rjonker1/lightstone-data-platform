@@ -4,22 +4,20 @@ using System.Linq;
 using Lace.Models.Ivid.Dto;
 using Nancy;
 using Nancy.ModelBinding;
-using NEventStore.Persistence.RavenDB;
-using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.WriteModels;
+using PackageBuilder.Domain.MessageHandling;
 using PackageBuilder.Domain.Models;
 using PackageBuilder.Infrastructure.RavenDB.Indexes;
 using Raven.Client;
-using Raven.Client.Linq;
-using IHandleMessages = PackageBuilder.Domain.MessageHandling.IHandleMessages;
 
 namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
 
-        public DataProviderModule(IHandleMessages handler, IRepository<DataProvider> repository, IDocumentSession session)
+        public DataProviderModule(IHandleMessages handler, INEventStoreRepository<DataProvider> repository, IDocumentSession session)
         {
             
             Get["/DataProvider"] = parameters =>

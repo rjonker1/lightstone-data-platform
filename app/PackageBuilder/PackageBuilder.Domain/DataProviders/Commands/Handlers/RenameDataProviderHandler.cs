@@ -1,6 +1,6 @@
 using System;
 using CommonDomain.Persistence;
-using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.MessageHandling;
 
@@ -8,9 +8,9 @@ namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 {
     public class RenameDataProviderHandler : AbstractMessageHandler<RenameDataProvider>
     {
-        private readonly IRepository _repository;
+        private readonly INEventStoreRepository<DataProvider> _repository;
 
-        public RenameDataProviderHandler(IRepository<DataProvider> repository)
+        public RenameDataProviderHandler(INEventStoreRepository<DataProvider> repository)
         {
             _repository = repository;
         }

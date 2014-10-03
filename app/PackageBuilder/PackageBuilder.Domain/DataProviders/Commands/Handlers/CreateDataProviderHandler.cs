@@ -1,5 +1,5 @@
 using System;
-using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.DataProviders.WriteModels;
 using PackageBuilder.Domain.MessageHandling;
 
@@ -7,9 +7,9 @@ namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 {
     public class CreateDataProviderHandler : AbstractMessageHandler<CreateDataProvider>
     {
-        private readonly IRepository<DataProvider> _repository;
+        private readonly INEventStoreRepository<DataProvider> _repository;
 
-        public CreateDataProviderHandler(IRepository<DataProvider> repository)
+        public CreateDataProviderHandler(INEventStoreRepository<DataProvider> repository)
         {
             _repository = repository;
         }

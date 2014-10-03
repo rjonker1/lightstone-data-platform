@@ -253,6 +253,10 @@
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
+      <Project>{C075E78C-8051-4CFC-A0F5-5C61BB108234}</Project>
+      <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

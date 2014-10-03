@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Lace.Models.Ivid.Dto;
 using PackageBuilder.Common.Helpers.Extensions;
-using PackageBuilder.Core.Helpers.MessageHandling;
+using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Web.Controllers
 {

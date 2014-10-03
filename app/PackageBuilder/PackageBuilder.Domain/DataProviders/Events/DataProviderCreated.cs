@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Core.Helpers.Cqrs.Events;
+using PackageBuilder.Core.Events;
 using PackageBuilder.Domain.DataProviders.Commands;
 using PackageBuilder.Domain.DataProviders.Commands.Handlers;
 using IHandleMessages = PackageBuilder.Domain.MessageHandling.IHandleMessages;
