@@ -1,5 +1,5 @@
 ﻿using System;
-using PackageBuilder.Core.Helpers.Cqrs.Commands;
+using PackageBuilder.Core.Commands;
 
 namespace PackageBuilder.Domain.DataProviders.Commands
 {

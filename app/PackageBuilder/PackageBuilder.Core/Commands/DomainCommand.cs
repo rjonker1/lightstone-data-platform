@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PackageBuilder.Core.Helpers.Cqrs.Commands
+namespace PackageBuilder.Core.Commands
 {
     public class DomainCommand : IDomainCommand
     {

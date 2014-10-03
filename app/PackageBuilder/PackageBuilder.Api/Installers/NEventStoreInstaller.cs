@@ -9,7 +9,7 @@ using MemBus;
 using MemBus.Configurators;
 using NEventStore;
 using NEventStore.Dispatcher;
-using PackageBuilder.Core.Helpers.Cqrs.NEventStore;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Api.Installers
@@ -39,7 +39,7 @@ namespace PackageBuilder.Api.Installers
             container.Register(Component.For<IStoreEvents>().Instance(eventStore));
             container.Register(Component.For<IConstructAggregates>().ImplementedBy<AggregateFactory>());
             container.Register(Component.For<IDetectConflicts>().ImplementedBy<ConflictDetector>());
-            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(NEventStoreRepository<>)));
+            container.Register(Component.For(typeof(INEventStoreRepository<>)).ImplementedBy(typeof(NEventStoreRepository<>)));
         }
     }
 

@@ -38,7 +38,7 @@
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
@@ -54,7 +54,7 @@
       <HintPath>..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
-      <HintPath>..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
+      <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore.Persistence.RavenDB">
       <HintPath>..\packages\NEventStore.Persistence.RavenDB.5.0.0.86\lib\net40\NEventStore.Persistence.RavenDB.dll</HintPath>
@@ -78,13 +78,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Helpers\Cqrs\Commands\DomainCommand.cs" />
-    <Compile Include="Helpers\Cqrs\Commands\IDomainCommand.cs" />
-    <Compile Include="Helpers\Cqrs\Events\DomainEvent.cs" />
-    <Compile Include="Helpers\Cqrs\Events\IDomainEvent.cs" />
-    <Compile Include="Helpers\Cqrs\NEventStore\AggregateFactory.cs" />
-    <Compile Include="Helpers\Cqrs\NEventStore\NEventStoreRepository.cs" />
+    <Compile Include="Commands\DomainCommand.cs" />
+    <Compile Include="Commands\IDomainCommand.cs" />
+    <Compile Include="Events\DomainEvent.cs" />
+    <Compile Include="Events\IDomainEvent.cs" />
+    <Compile Include="NEventStore\AggregateFactory.cs" />
+    <Compile Include="NEventStore\NEventStoreRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
