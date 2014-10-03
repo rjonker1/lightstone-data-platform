@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -9,16 +11,35 @@ using MemBus;
 using MemBus.Configurators;
 using NEventStore;
 using NEventStore.Dispatcher;
+using PackageBuilder.Core.Events;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Api.Installers
 {
+    public class MessageAdapter : IocAdapter
+    {
+        private readonly IWindsorContainer _container;
+
+        public MessageAdapter(IWindsorContainer container)
+        {
+            _container = container;
+        }
+
+        public IEnumerable<object> GetAllInstances(Type desiredType)
+        {
+            yield return _container.Resolve(desiredType);
+        }
+    }
+
     public class NEventStoreInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>().Construct()));
+            container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>()
+                                                                      .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
+                                                                      .SetHandlerInterface(typeof(IHandleMessages<>)))
+                                                                      .Construct()));
             container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>());
 
             var eventStore = Wireup.Init()
@@ -46,12 +67,10 @@ namespace PackageBuilder.Api.Installers
     public class InMemoryDispatcher : IDispatchCommits
     {
         private readonly IBus _bus;
-        private readonly IHandleMessages _handler;
 
-        public InMemoryDispatcher(IBus bus, IHandleMessages handler)
+        public InMemoryDispatcher(IBus bus)
         {
             _bus = bus;
-            _handler = handler;
         }
 
         public void Dispose()
@@ -61,9 +80,8 @@ namespace PackageBuilder.Api.Installers
 
         public void Dispatch(ICommit commit)
         {
-            //foreach (var @event in commit.Events.Where(x => x.Body is IDomainEvent))
-            //    _handler.Handle(@event.Body);
-                //_bus.Publish(@event.Body);
+            foreach (var @event in commit.Events.Where(x => x.Body is IDomainEvent))
+                _bus.Publish(@event.Body);
         }
     }
 

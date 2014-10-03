@@ -7,11 +7,10 @@ namespace PackageBuilder.TestHelper.Builders.Entites
     public class DataProviderBuilder
     {
         private Guid _id;
-        private int _version;
         private string _name;
         public IDataProvider Build()
         {
-            return new DataProvider(_id, _version, _name, null);
+            return new DataProvider(_id, _name, null);
         }
 
         public DataProviderBuilder With(Guid id)

@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.DataProviders.Commands.Handlers
 
         public override void Handle(CreateDataProvider domainCommand)
         {
-            var entity = new DataProvider(domainCommand.Id, domainCommand.Version, domainCommand.Name, domainCommand.DataProviderType);
+            var entity = new DataProvider(domainCommand.Id, domainCommand.Name, domainCommand.DataProviderType);
 
             _repository.Save(entity, Guid.NewGuid());
         }

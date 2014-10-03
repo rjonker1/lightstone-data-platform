@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Runtime.InteropServices;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Common.Helpers.Extensions;
@@ -20,8 +18,6 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
         public DateTime Date { get; private set; }
         public string Owner { get; private set; }
         public IEnumerable DataFields { get; private set; }
-        //public IEnumerable DataFieldsRevision { get; private set; }
-
          
         public Type ResponseType { get; private set; }
 
@@ -32,15 +28,10 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
 
         public DataProvider() { }
 
-        public DataProvider(Guid id, int version, string name, Type responseType) : this(id)
+        public DataProvider(Guid id, string name, Type responseType) : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, version, name, responseType, PopulateDataFields(responseType)));
+            RaiseEvent(new DataProviderCreated(id, name, responseType, PopulateDataFields(responseType)));
         }
-
-        //public DataProviderRevision(Guid id, string name, Type responseType, IEnumerable<DataProviderRevisionCreated.DataProviderFieldItems> dataFields) : this(id)
-        //{
-        //    RaiseEvent(new DataProviderRevisionCreated(id, name, responseType, dataFields));
-        //}
 
         public void CreateDataProviderRevision(Guid id, int version, string name, Type responseType, IEnumerable dataFields)
         {
@@ -58,7 +49,6 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
             var fields = type.GetPublicProperties().Select(x => new Tuple<string, Type>(x.Name, x.PropertyType));
             return fields.Select(field => new DataField(field.Item1, field.Item2));
         }
-
 
         private void Apply(DataProviderCreated @event)
         {
@@ -79,11 +69,9 @@ namespace PackageBuilder.Domain.DataProviders.WriteModels
 
         private void Apply(DataProviderRevisionCreated @event)
         {
-
             Id = @event.Id;
             Name = @event.Name;
             DataFields = @event.DataFields;
-
         }
     }
 }
