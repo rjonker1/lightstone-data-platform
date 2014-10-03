@@ -17,6 +17,7 @@ angular
     'ngTouch',
     'ui.tree',
     'ui.bootstrap',
+    'ngGrid',
     'providerServices'
     
   ])
