@@ -13,7 +13,7 @@
 
 <div class="container">
 
-	{{selectedDatasource}}
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
 		<div id="grid1" ng-grid="gridOptions" class="gridStyle"></div>
 		
