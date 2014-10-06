@@ -6,19 +6,19 @@ using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Domain.CommandHandlers
 {
-    public class CreateDataProviderRevisionHandler : AbstractMessageHandler<CreateDataProviderRevision>
+    public class UpdateDataProviderHandler : AbstractMessageHandler<UpdateDataProvider>
     {
         private readonly INEventStoreRepository<DataProvider> _repository;
 
-        public CreateDataProviderRevisionHandler(INEventStoreRepository<DataProvider> repository)
+        public UpdateDataProviderHandler(INEventStoreRepository<DataProvider> repository)
         {
             _repository = repository;
         }
 
-        public override void Handle(CreateDataProviderRevision command)
+        public override void Handle(UpdateDataProvider command)
         {
             var entity = _repository.GetById(command.Id);
-            entity.CreateDataProviderRevision(command.Id, command.Version, command.Name, command.DataProviderType, command.DataFields);
+            entity.CreateDataProviderRevision(command.Id, command.Name, command.Owner, command.Created, command.Edited, command.Version, command.DataProviderType, command.DataFields);
             _repository.Save(entity, Guid.NewGuid());
         }
     }

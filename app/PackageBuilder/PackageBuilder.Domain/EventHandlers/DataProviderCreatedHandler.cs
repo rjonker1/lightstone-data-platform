@@ -20,6 +20,7 @@ namespace PackageBuilder.Domain.EventHandlers
             {
                 Id = command.Id,
                 Name = command.Name,
+                Created = command.Created,
                 Version = 1
             };
 

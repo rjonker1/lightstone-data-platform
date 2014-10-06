@@ -10,9 +10,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
 		public readonly string Name;
         public readonly Type ResponseType;
         public readonly string State;
-        public readonly double Cos;
-        public readonly DateTime Date;
+        public readonly double CostOfSale;
+        public readonly DateTime Created;
+        public readonly DateTime Edited;
         public readonly string Owner;
+        public readonly string SourceURL;
         public readonly IEnumerable<IDataField> DataFields;
         public DataProviderCreated(Guid id, string name, Type responseType, IEnumerable<IDataField> dataFields)
         {
@@ -20,9 +22,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
 			Name = name;
             ResponseType = responseType;
             State = null;
-            Cos = 0.00;
+            CostOfSale = 0.00;
 
-            Date = DateTime.Now;
+            Created = DateTime.Today;
             Owner = null;
             DataFields = dataFields;
         }
