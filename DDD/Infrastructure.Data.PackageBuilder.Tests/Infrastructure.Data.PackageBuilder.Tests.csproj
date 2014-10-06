@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CCBA654D-4550-4696-9A3E-9EE3B3D730C0}</ProjectGuid>
+    <ProjectGuid>{ED390637-ABAA-408F-813A-2B4BB3DECE97}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LightstoneApp.Domain.PackageBuilderModule.Tests</RootNamespace>
-    <AssemblyName>LightstoneApp.Domain.PackageBuilderModule.Tests</AssemblyName>
+    <RootNamespace>LightstoneApp.Infrastructure.Data.PackageBuilder.Tests</RootNamespace>
+    <AssemblyName>LightstoneApp.Infrastructure.Data.PackageBuilder.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -16,7 +16,6 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Infrastructure.Data.PackageBuilder.Fakes">
+      <HintPath>FakesAssemblies\Infrastructure.Data.PackageBuilder.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,6 +56,43 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
+      <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
+      <Name>Domain.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
+      <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
+      <Name>Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.PackageBuilderModule.Entities\Domain.PackageBuilderModule.Entities.csproj">
+      <Project>{380457ED-05F1-4901-B52C-518CCDF24F51}</Project>
+      <Name>Domain.PackageBuilderModule.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.PackageBuilderModule\Domain.PackageBuilderModule.csproj">
+      <Project>{D43E9CD1-CAD1-42B1-8F0F-285932A65837}</Project>
+      <Name>Domain.PackageBuilderModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.IoC\Infrastructure.CrossCutting.IoC.csproj">
+      <Project>{59814C32-5A3B-4AEE-94FA-502EA57CDF70}</Project>
+      <Name>Infrastructure.CrossCutting.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting\Infrastructure.CrossCutting.csproj">
+      <Project>{74F0E6EA-1810-4088-B4C5-3941A739D640}</Project>
+      <Name>Infrastructure.CrossCutting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
+      <Project>{98150D03-B191-476D-B192-B5B755E26E8E}</Project>
+      <Name>Infrastructure.Data.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.PackageBuilder\Infrastructure.Data.PackageBuilder.csproj">
+      <Project>{86248168-e31d-4a14-856a-6fcf44b83a5e}</Project>
+      <Name>Infrastructure.Data.PackageBuilder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Fakes Include="Fakes\Infrastructure.Data.PackageBuilder.fakes" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

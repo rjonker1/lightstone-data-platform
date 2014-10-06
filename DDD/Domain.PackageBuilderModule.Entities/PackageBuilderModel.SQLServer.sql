@@ -1,140 +1,127 @@
-﻿CREATE SCHEMA PackageBuilderModel
+﻿CREATE SCHEMA PackageBuilder
 GO
 
 GO
 
 
-CREATE TABLE PackageBuilderModel.Package
+CREATE TABLE PackageBuilder.Package
 (
-	packageId int IDENTITY (1, 1) NOT NULL,
-	name nvarchar(128),
-	version nvarchar(20),
-	costOfSale decimal(19,4),
-	created datetime,
-	description nvarchar(512),
-	edited datetime,
-	industry nvarchar(32) CHECK (industry IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')),
-	owner nvarchar(512),
-	packageBuilderId int IDENTITY (1, 1),
-	published bit,
-	revisionDate datetime,
-	state nvarchar(max) CHECK (state IN (N'Under construction', N'Published', N'Expired')),
-	CONSTRAINT Package_PK PRIMARY KEY(packageId)
+	PackageId int IDENTITY (1, 1) NOT NULL,
+	CostOfSale decimal(19,4),
+	Created datetime,
+	Description nvarchar(512),
+	Edited datetime,
+	Name nvarchar(256),
+	PackageIndustry nvarchar(32) CHECK (PackageIndustry IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')),
+	PackageOwner nvarchar(512),
+	PackageState nvarchar(32) CHECK (PackageState IN (N'Under construction', N'Published', N'Expired')),
+	Published bit,
+	RevisionDate datetime,
+	Version nvarchar(20),
+	CONSTRAINT Package_PK PRIMARY KEY(PackageId)
 )
 GO
 
 
-CREATE VIEW PackageBuilderModel.Package_UC (name, version)
-WITH SCHEMABINDING
-AS
-	SELECT name, version
-	FROM 
-		PackageBuilderModel.Package
-	WHERE name IS NOT NULL AND version IS NOT NULL
-GO
-
-
-CREATE UNIQUE CLUSTERED INDEX Package_UCIndex ON PackageBuilderModel.Package_UC(name, version)
-GO
-
-
-CREATE TABLE PackageBuilderModel.Owner
+CREATE TABLE PackageBuilder.Owner
 (
-	"value" nvarchar(512) NOT NULL,
-	CONSTRAINT Owner_PK PRIMARY KEY("value")
+	"Value" nvarchar(512) NOT NULL,
+	CONSTRAINT Owner_PK PRIMARY KEY("Value")
 )
 GO
 
 
-CREATE TABLE PackageBuilderModel.Industry
+CREATE TABLE PackageBuilder.State
 (
-	"value" nvarchar(32) CHECK ("value" IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')) NOT NULL,
-	CONSTRAINT Industry_PK PRIMARY KEY("value")
+	"Value" nvarchar(32) CHECK ("Value" IN (N'Under construction', N'Published', N'Expired')) NOT NULL,
+	CONSTRAINT State_PK PRIMARY KEY("Value")
 )
 GO
 
 
-CREATE TABLE PackageBuilderModel.DataSource
+CREATE TABLE PackageBuilder.Industry
 (
-	dataSourceId int IDENTITY (1, 1) NOT NULL,
-	name nvarchar(128),
-	version nvarchar(20),
-	costOfSale decimal(19,4),
-	created datetime,
-	description nvarchar(512),
-	edited datetime,
-	owner nvarchar(512),
-	packageId int,
-	revisionDate datetime,
-	sourceURL nvarchar(512),
-	state nvarchar(max) CHECK (state IN (N'Under construction', N'Published', N'Expired')),
-	CONSTRAINT DataSource_PK PRIMARY KEY(dataSourceId)
+	"Value" nvarchar(32) CHECK ("Value" IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')) NOT NULL,
+	CONSTRAINT Industry_PK PRIMARY KEY("Value")
 )
 GO
 
 
-CREATE VIEW PackageBuilderModel.DataSource_UC (name, version)
-WITH SCHEMABINDING
-AS
-	SELECT name, version
-	FROM 
-		PackageBuilderModel.DataSource
-	WHERE name IS NOT NULL AND version IS NOT NULL
-GO
-
-
-CREATE UNIQUE CLUSTERED INDEX DataSource_UCIndex ON PackageBuilderModel.DataSource_UC(name, version)
-GO
-
-
-CREATE TABLE PackageBuilderModel.DateField
+CREATE TABLE PackageBuilder.DataSource
 (
-	dateFieldId int IDENTITY (1, 1) NOT NULL,
-	dataSourceId int,
-	definition nvarchar(255),
-	industry nvarchar(32) CHECK (industry IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')),
-	label nvarchar(32),
-	selected bit,
-	CONSTRAINT DateField_PK PRIMARY KEY(dateFieldId)
+	DataSourceId int IDENTITY (1, 1) NOT NULL,
+	CostOfSale decimal(19,4),
+	Created datetime,
+	DataSourceOwner nvarchar(512),
+	DataSourceState nvarchar(32) CHECK (DataSourceState IN (N'Under construction', N'Published', N'Expired')),
+	Description nvarchar(512),
+	Edited datetime,
+	Name nvarchar(256),
+	PackageId int,
+	RevisionDate datetime,
+	SourceURL nvarchar(512),
+	Version nvarchar(20),
+	CONSTRAINT DataSource_PK PRIMARY KEY(DataSourceId)
 )
 GO
 
 
-CREATE TABLE PackageBuilderModel.FileAttachment
+CREATE TABLE PackageBuilder.DateField
 (
-	fileAttachmentId int IDENTITY (1, 1) NOT NULL,
-	dataSourceId int,
-	fileName nvarchar(128),
-	CONSTRAINT FileAttachment_PK PRIMARY KEY(fileAttachmentId)
+	DateFieldId int IDENTITY (1, 1) NOT NULL,
+	DataSourceId int,
+	Definition nvarchar(255),
+	Industry nvarchar(32) CHECK (Industry IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')),
+	Label nvarchar(32),
+	Selected bit,
+	CONSTRAINT DateField_PK PRIMARY KEY(DateFieldId)
 )
 GO
 
 
-ALTER TABLE PackageBuilderModel.Package ADD CONSTRAINT Package_FK1 FOREIGN KEY (owner) REFERENCES PackageBuilderModel.Owner ("value") ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE PackageBuilder.FileAttachment
+(
+	FileAttachmentId int IDENTITY (1, 1) NOT NULL,
+	DataSourceId int,
+	FileName nvarchar(256),
+	CONSTRAINT FileAttachment_PK PRIMARY KEY(FileAttachmentId)
+)
 GO
 
 
-ALTER TABLE PackageBuilderModel.Package ADD CONSTRAINT Package_FK2 FOREIGN KEY (industry) REFERENCES PackageBuilderModel.Industry ("value") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK1 FOREIGN KEY (PackageOwner) REFERENCES PackageBuilder.Owner ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE PackageBuilderModel.DataSource ADD CONSTRAINT DataSource_FK1 FOREIGN KEY (packageId) REFERENCES PackageBuilderModel.Package (packageId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK2 FOREIGN KEY (PackageState) REFERENCES PackageBuilder.State ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE PackageBuilderModel.DataSource ADD CONSTRAINT DataSource_FK2 FOREIGN KEY (owner) REFERENCES PackageBuilderModel.Owner ("value") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK3 FOREIGN KEY (PackageIndustry) REFERENCES PackageBuilder.Industry ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE PackageBuilderModel.DateField ADD CONSTRAINT DateField_FK1 FOREIGN KEY (dataSourceId) REFERENCES PackageBuilderModel.DataSource (dataSourceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.DataSource ADD CONSTRAINT DataSource_FK1 FOREIGN KEY (PackageId) REFERENCES PackageBuilder.Package (PackageId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE PackageBuilderModel.DateField ADD CONSTRAINT DateField_FK2 FOREIGN KEY (industry) REFERENCES PackageBuilderModel.Industry ("value") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.DataSource ADD CONSTRAINT DataSource_FK2 FOREIGN KEY (DataSourceOwner) REFERENCES PackageBuilder.Owner ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE PackageBuilderModel.FileAttachment ADD CONSTRAINT FileAttachment_FK FOREIGN KEY (dataSourceId) REFERENCES PackageBuilderModel.DataSource (dataSourceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.DataSource ADD CONSTRAINT DataSource_FK3 FOREIGN KEY (DataSourceState) REFERENCES PackageBuilder.State ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+
+
+ALTER TABLE PackageBuilder.DateField ADD CONSTRAINT DateField_FK1 FOREIGN KEY (DataSourceId) REFERENCES PackageBuilder.DataSource (DataSourceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+
+
+ALTER TABLE PackageBuilder.DateField ADD CONSTRAINT DateField_FK2 FOREIGN KEY (Industry) REFERENCES PackageBuilder.Industry ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
+GO
+
+
+ALTER TABLE PackageBuilder.FileAttachment ADD CONSTRAINT FileAttachment_FK FOREIGN KEY (DataSourceId) REFERENCES PackageBuilder.DataSource (DataSourceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 

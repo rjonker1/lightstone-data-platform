@@ -6,7 +6,6 @@
 				<orm:Role ref="_9D0A71CC-40E1-4B13-BDF2-A2FBB9345D84" />
 				<orm:Role ref="_16D49963-C772-40F9-8C7E-9CCD8A57DFBC" />
 				<orm:Role ref="_FC8D8023-008C-4D83-8B90-8FCC625E418F" />
-				<orm:Role ref="_F020DD54-9103-4C0D-80D0-94658FC91A8F" />
 				<orm:Role ref="_5DCB4779-2552-49BB-A7C2-D70421E12717" />
 				<orm:Role ref="_571E5ED6-D828-40A4-A320-511EB6E1653F" />
 				<orm:Role ref="_E9684B2A-D9EF-43FF-A80F-08759DB300FC" />
@@ -32,7 +31,7 @@
 				<orm:Role ref="_EFB787B8-D9C5-4E32-8185-4FDED36974DB" />
 				<orm:Role ref="_3972C575-0254-408D-9579-98F33494BC72" />
 			</orm:PlayedRoles>
-			<orm:ConceptualDataType id="_9B108EC8-86AA-440E-BF34-5DFF9D7B6C27" ref="_131D46B1-1E21-4588-82BD-5B978E64C73D" Scale="0" Length="128" />
+			<orm:ConceptualDataType id="_9B108EC8-86AA-440E-BF34-5DFF9D7B6C27" ref="_131D46B1-1E21-4588-82BD-5B978E64C73D" Scale="0" Length="256" />
 		</orm:ValueType>
 		<orm:ValueType id="_188157FB-0349-4618-9415-ED4C659F9EAD" Name="Description">
 			<orm:PlayedRoles>
@@ -40,19 +39,6 @@
 				<orm:Role ref="_C11D410F-7895-4A87-82AA-BF84F69DBAE1" />
 			</orm:PlayedRoles>
 			<orm:ConceptualDataType id="_7A7B922B-57B3-484D-BC70-A2F08E05EE41" ref="_131D46B1-1E21-4588-82BD-5B978E64C73D" Scale="0" Length="512" />
-		</orm:ValueType>
-		<orm:EntityType id="_07120083-5DB0-49C3-867A-24F2E5A065A9" Name="PackageBuilder" _ReferenceMode="Id">
-			<orm:PlayedRoles>
-				<orm:Role ref="_3EDCEE1C-603C-40C0-B6E2-2F61FB1376B6" />
-				<orm:Role ref="_B84CEA68-929E-4C15-9CC6-BAA8279EB65A" />
-			</orm:PlayedRoles>
-			<orm:PreferredIdentifier ref="_79EA16A2-2B23-487A-AE68-D5A55104B4CE" />
-		</orm:EntityType>
-		<orm:ValueType id="_6F7EF7D0-6550-401D-8648-152C3433A32C" Name="PackageBuilder_Id">
-			<orm:PlayedRoles>
-				<orm:Role ref="_FF910164-C1E8-4D22-89F1-A69F4B240CFB" />
-			</orm:PlayedRoles>
-			<orm:ConceptualDataType id="_D0083A40-BE7D-44B0-923B-916475F96930" ref="_BFF77FF8-20CF-45D7-8BAB-E607207B012D" Scale="0" Length="0" />
 		</orm:ValueType>
 		<orm:ValueType id="_61B6B218-DC1E-4EB7-BAD8-523972741DE1" Name="Owner" IsIndependent="true" IsPersonal="true">
 			<orm:Notes>
@@ -108,7 +94,7 @@
 			</orm:PlayedRoles>
 			<orm:ConceptualDataType id="_CE6EAA67-C14A-4933-B97C-19B736A40D7A" ref="_CA612763-5E88-4E66-A6B2-86397566C149" Scale="0" Length="0" />
 		</orm:ValueType>
-		<orm:ValueType id="_27DAC889-4758-489A-A4D7-F6B553AA95EC" Name="State">
+		<orm:ValueType id="_27DAC889-4758-489A-A4D7-F6B553AA95EC" Name="State" IsIndependent="true">
 			<orm:Notes>
 				<orm:Note id="_64F7F526-DCFD-4548-A8FC-18779C8CE6B7">
 					<orm:Text>Options:  Under construction/Published/Expired.</orm:Text>
@@ -118,7 +104,7 @@
 				<orm:Role ref="_CC78A8A8-1539-40FE-9003-6708231A4733" />
 				<orm:Role ref="_F3CE1A06-571D-4650-B534-AAD8CC9A7662" />
 			</orm:PlayedRoles>
-			<orm:ConceptualDataType id="_DCAE549B-22E5-4843-B639-25498F1AD479" ref="_131D46B1-1E21-4588-82BD-5B978E64C73D" Scale="0" Length="0" />
+			<orm:ConceptualDataType id="_DCAE549B-22E5-4843-B639-25498F1AD479" ref="_131D46B1-1E21-4588-82BD-5B978E64C73D" Scale="0" Length="32" />
 			<orm:ValueRestriction>
 				<orm:ValueConstraint id="_6C694A15-ECFF-449D-AC08-A20767AED569" Name="ValueTypeValueConstraint1">
 					<orm:ValueRanges>
@@ -367,86 +353,12 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:MandatoryConstraint ref="_3DD53B39-59E9-4C34-9C7F-7AD1FD99375F" />
 			</orm:InternalConstraints>
 		</orm:Fact>
-		<orm:Fact id="_D46E59ED-0DE2-4730-90F0-E17D73D767DD" _Name="PackageBuilderHasPackageBuilder_Id">
-			<orm:FactRoles>
-				<orm:Role id="_3EDCEE1C-603C-40C0-B6E2-2F61FB1376B6" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
-					<orm:RolePlayer ref="_07120083-5DB0-49C3-867A-24F2E5A065A9" />
-				</orm:Role>
-				<orm:Role id="_FF910164-C1E8-4D22-89F1-A69F4B240CFB" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
-					<orm:RolePlayer ref="_6F7EF7D0-6550-401D-8648-152C3433A32C" />
-				</orm:Role>
-			</orm:FactRoles>
-			<orm:ReadingOrders>
-				<orm:ReadingOrder id="_DB809B4F-5E7E-4B0B-81DE-476B6CCC2D0D">
-					<orm:Readings>
-						<orm:Reading id="_0D562A94-7FC9-4FD7-960A-64199BF35546">
-							<orm:Data>{0} has {1}</orm:Data>
-							<orm:ExpandedData>
-								<orm:RoleText RoleIndex="0" FollowingText=" has " />
-							</orm:ExpandedData>
-						</orm:Reading>
-					</orm:Readings>
-					<orm:RoleSequence>
-						<orm:Role ref="_3EDCEE1C-603C-40C0-B6E2-2F61FB1376B6" />
-						<orm:Role ref="_FF910164-C1E8-4D22-89F1-A69F4B240CFB" />
-					</orm:RoleSequence>
-				</orm:ReadingOrder>
-				<orm:ReadingOrder id="_6043995F-E679-4851-9C38-0B7255213DD4">
-					<orm:Readings>
-						<orm:Reading id="_C235CF26-9B43-44BE-9BAC-DC635E0F1957">
-							<orm:Data>{0} is of {1}</orm:Data>
-							<orm:ExpandedData>
-								<orm:RoleText RoleIndex="0" FollowingText=" is of " />
-							</orm:ExpandedData>
-						</orm:Reading>
-					</orm:Readings>
-					<orm:RoleSequence>
-						<orm:Role ref="_FF910164-C1E8-4D22-89F1-A69F4B240CFB" />
-						<orm:Role ref="_3EDCEE1C-603C-40C0-B6E2-2F61FB1376B6" />
-					</orm:RoleSequence>
-				</orm:ReadingOrder>
-			</orm:ReadingOrders>
-			<orm:InternalConstraints>
-				<orm:UniquenessConstraint ref="_79EA16A2-2B23-487A-AE68-D5A55104B4CE" />
-				<orm:UniquenessConstraint ref="_B61D9E83-4599-477F-AC39-A9F5F1AC85E1" />
-				<orm:MandatoryConstraint ref="_DD2F7E8D-2B6E-409D-B486-19FE0A2636C8" />
-			</orm:InternalConstraints>
-		</orm:Fact>
-		<orm:Fact id="_7AFAB9EA-73E9-48AF-9948-F9D6C82B9864" _Name="PackageBuilderHasPackage">
-			<orm:FactRoles>
-				<orm:Role id="_B84CEA68-929E-4C15-9CC6-BAA8279EB65A" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
-					<orm:RolePlayer ref="_07120083-5DB0-49C3-867A-24F2E5A065A9" />
-				</orm:Role>
-				<orm:Role id="_F020DD54-9103-4C0D-80D0-94658FC91A8F" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
-					<orm:RolePlayer ref="_18A322D6-2AC5-4548-8D92-361EF8A01DDE" />
-				</orm:Role>
-			</orm:FactRoles>
-			<orm:ReadingOrders>
-				<orm:ReadingOrder id="_4D616E1A-639B-4886-9613-D0287D8F6522">
-					<orm:Readings>
-						<orm:Reading id="_F1117C78-185E-4A2B-9437-C1F4F309A6A2">
-							<orm:Data>{0} has {1}</orm:Data>
-							<orm:ExpandedData>
-								<orm:RoleText RoleIndex="0" FollowingText=" has " />
-							</orm:ExpandedData>
-						</orm:Reading>
-					</orm:Readings>
-					<orm:RoleSequence>
-						<orm:Role ref="_B84CEA68-929E-4C15-9CC6-BAA8279EB65A" />
-						<orm:Role ref="_F020DD54-9103-4C0D-80D0-94658FC91A8F" />
-					</orm:RoleSequence>
-				</orm:ReadingOrder>
-			</orm:ReadingOrders>
-			<orm:InternalConstraints>
-				<orm:UniquenessConstraint ref="_E9C84506-827C-4583-9B08-8C8A4CA7056F" />
-			</orm:InternalConstraints>
-		</orm:Fact>
 		<orm:Fact id="_2C21EC11-375F-49E4-B78E-7E37C4F78E6B" _Name="PackageHasOwner">
 			<orm:FactRoles>
 				<orm:Role id="_5DCB4779-2552-49BB-A7C2-D70421E12717" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 					<orm:RolePlayer ref="_18A322D6-2AC5-4548-8D92-361EF8A01DDE" />
 				</orm:Role>
-				<orm:Role id="_E5A60C6A-4C14-4A28-8E51-0C223653CA00" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
+				<orm:Role id="_E5A60C6A-4C14-4A28-8E51-0C223653CA00" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="PackageOwner">
 					<orm:RolePlayer ref="_61B6B218-DC1E-4EB7-BAD8-523972741DE1" />
 				</orm:Role>
 			</orm:FactRoles>
@@ -591,7 +503,7 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:Role id="_179D743B-2B4A-45F6-A973-C1037E3752F4" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 					<orm:RolePlayer ref="_18A322D6-2AC5-4548-8D92-361EF8A01DDE" />
 				</orm:Role>
-				<orm:Role id="_CC78A8A8-1539-40FE-9003-6708231A4733" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
+				<orm:Role id="_CC78A8A8-1539-40FE-9003-6708231A4733" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="PackageState">
 					<orm:RolePlayer ref="_27DAC889-4758-489A-A4D7-F6B553AA95EC" />
 				</orm:Role>
 			</orm:FactRoles>
@@ -620,7 +532,7 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:Role id="_C83B91B7-C5AE-4540-A3BA-0A3CEBD0EBB1" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 					<orm:RolePlayer ref="_18A322D6-2AC5-4548-8D92-361EF8A01DDE" />
 				</orm:Role>
-				<orm:Role id="_23530866-8EDE-4258-8E06-122081E26E5D" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
+				<orm:Role id="_23530866-8EDE-4258-8E06-122081E26E5D" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="PackageIndustry">
 					<orm:RolePlayer ref="_1678F474-43CC-4D81-AE8D-5D57FBC3AE0D" />
 				</orm:Role>
 			</orm:FactRoles>
@@ -840,7 +752,7 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:Role id="_074CB806-2B22-47B8-AC44-34C3EEBBA4DB" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 					<orm:RolePlayer ref="_00EEDF51-594E-4E45-8E73-823E5D2FD4DD" />
 				</orm:Role>
-				<orm:Role id="_72E2A255-9BCA-44E7-B482-457B5380F6ED" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
+				<orm:Role id="_72E2A255-9BCA-44E7-B482-457B5380F6ED" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="DataSourceOwner">
 					<orm:RolePlayer ref="_61B6B218-DC1E-4EB7-BAD8-523972741DE1" />
 				</orm:Role>
 			</orm:FactRoles>
@@ -1335,18 +1247,33 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:MandatoryConstraint ref="_8FE2DD6F-8C51-4974-821A-B48E331F7E63" />
 			</orm:InternalConstraints>
 		</orm:Fact>
-		<orm:Fact id="_89F97759-5F08-4030-8A72-227174885A4D" _Name="DataSourceState">
+		<orm:Fact id="_89F97759-5F08-4030-8A72-227174885A4D" _Name="DataSourceHasState">
 			<orm:FactRoles>
-				<orm:Role id="_BD1A25A3-3903-4155-9E63-57A879E16624" _IsMandatory="false" _Multiplicity="OneToMany" Name="">
+				<orm:Role id="_BD1A25A3-3903-4155-9E63-57A879E16624" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 					<orm:RolePlayer ref="_00EEDF51-594E-4E45-8E73-823E5D2FD4DD" />
 				</orm:Role>
-				<orm:Role id="_F3CE1A06-571D-4650-B534-AAD8CC9A7662" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
+				<orm:Role id="_F3CE1A06-571D-4650-B534-AAD8CC9A7662" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="DataSourceState">
 					<orm:RolePlayer ref="_27DAC889-4758-489A-A4D7-F6B553AA95EC" />
 				</orm:Role>
 			</orm:FactRoles>
+			<orm:ReadingOrders>
+				<orm:ReadingOrder id="_FD9FB0E8-8C4D-4B7D-AA78-EF1B623A4047">
+					<orm:Readings>
+						<orm:Reading id="_2C6E420E-0A1B-4BD7-8E23-D4C8E57DE24B">
+							<orm:Data>{0} has {1}</orm:Data>
+							<orm:ExpandedData>
+								<orm:RoleText RoleIndex="0" FollowingText=" has " />
+							</orm:ExpandedData>
+						</orm:Reading>
+					</orm:Readings>
+					<orm:RoleSequence>
+						<orm:Role ref="_BD1A25A3-3903-4155-9E63-57A879E16624" />
+						<orm:Role ref="_F3CE1A06-571D-4650-B534-AAD8CC9A7662" />
+					</orm:RoleSequence>
+				</orm:ReadingOrder>
+			</orm:ReadingOrders>
 			<orm:InternalConstraints>
 				<orm:UniquenessConstraint ref="_E337F737-F3F9-4760-9BE7-B8DE12E15C8C" />
-				<orm:MandatoryConstraint ref="_4F0AC94E-2C62-481A-94A8-2B1814CF43E0" />
 			</orm:InternalConstraints>
 		</orm:Fact>
 	</orm:Facts>
@@ -1377,7 +1304,6 @@ COS=Sum of cost of all data sources</orm:Text>
 			<orm:RoleSequence>
 				<orm:Role id="_8957CB87-541E-4702-9C42-ABA1189DACCC" ref="_16D49963-C772-40F9-8C7E-9CCD8A57DFBC" />
 				<orm:Role id="_BDFF7FAC-92EC-46CD-BDD6-3BA33BD87831" ref="_FC8D8023-008C-4D83-8B90-8FCC625E418F" />
-				<orm:Role id="_9754CB42-A8DC-44C4-84AE-B2F91D45146A" ref="_F020DD54-9103-4C0D-80D0-94658FC91A8F" />
 				<orm:Role id="_88AE9413-DE59-4717-9F72-A8D908B9F248" ref="_5DCB4779-2552-49BB-A7C2-D70421E12717" />
 				<orm:Role id="_AA389CEB-39BB-4FA8-8141-6B7E363C1F85" ref="_571E5ED6-D828-40A4-A320-511EB6E1653F" />
 				<orm:Role id="_358BEDB0-47EB-4CBE-A3FE-EA5D141C3894" ref="_E9684B2A-D9EF-43FF-A80F-08759DB300FC" />
@@ -1411,39 +1337,6 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:Role id="_5A410B23-06AE-4F87-ABFA-0001F173C204" ref="_721D773A-0691-45AA-89A1-2B66107BAD6E" />
 			</orm:RoleSequence>
 		</orm:MandatoryConstraint>
-		<orm:UniquenessConstraint id="_79EA16A2-2B23-487A-AE68-D5A55104B4CE" Name="InternalUniquenessConstraint5" IsInternal="true">
-			<orm:RoleSequence>
-				<orm:Role id="_A39B3DA6-06D0-4F40-8D5A-A93231B948DF" ref="_FF910164-C1E8-4D22-89F1-A69F4B240CFB" />
-			</orm:RoleSequence>
-			<orm:PreferredIdentifierFor ref="_07120083-5DB0-49C3-867A-24F2E5A065A9" />
-		</orm:UniquenessConstraint>
-		<orm:UniquenessConstraint id="_B61D9E83-4599-477F-AC39-A9F5F1AC85E1" Name="InternalUniquenessConstraint6" IsInternal="true">
-			<orm:RoleSequence>
-				<orm:Role id="_70D988CA-4973-4FCA-B1C6-3D8BB8D55450" ref="_3EDCEE1C-603C-40C0-B6E2-2F61FB1376B6" />
-			</orm:RoleSequence>
-		</orm:UniquenessConstraint>
-		<orm:MandatoryConstraint id="_DD2F7E8D-2B6E-409D-B486-19FE0A2636C8" Name="SimpleMandatoryConstraint4" IsSimple="true">
-			<orm:RoleSequence>
-				<orm:Role id="_F345FBE0-1F6A-492A-B652-586ACF3C811F" ref="_3EDCEE1C-603C-40C0-B6E2-2F61FB1376B6" />
-			</orm:RoleSequence>
-		</orm:MandatoryConstraint>
-		<orm:MandatoryConstraint id="_BEA78E36-97A2-4639-BE80-6C43F0C675A8" Name="ImpliedMandatoryConstraint3" IsImplied="true">
-			<orm:RoleSequence>
-				<orm:Role id="_F1C23E12-B540-4DFA-B5AA-4DEEC7B8651B" ref="_FF910164-C1E8-4D22-89F1-A69F4B240CFB" />
-			</orm:RoleSequence>
-			<orm:ImpliedByObjectType ref="_6F7EF7D0-6550-401D-8648-152C3433A32C" />
-		</orm:MandatoryConstraint>
-		<orm:MandatoryConstraint id="_CF7BBFDF-DC4D-4DB5-8213-53C6EB3D7CD7" Name="ImpliedMandatoryConstraint4" IsImplied="true">
-			<orm:RoleSequence>
-				<orm:Role id="_A20C35B1-5358-4AAB-B2E5-494C6A8B6F37" ref="_B84CEA68-929E-4C15-9CC6-BAA8279EB65A" />
-			</orm:RoleSequence>
-			<orm:ImpliedByObjectType ref="_07120083-5DB0-49C3-867A-24F2E5A065A9" />
-		</orm:MandatoryConstraint>
-		<orm:UniquenessConstraint id="_E9C84506-827C-4583-9B08-8C8A4CA7056F" Name="InternalUniquenessConstraint7" IsInternal="true">
-			<orm:RoleSequence>
-				<orm:Role id="_2BE4B289-BF12-4C11-AA41-26E03DEB2365" ref="_F020DD54-9103-4C0D-80D0-94658FC91A8F" />
-			</orm:RoleSequence>
-		</orm:UniquenessConstraint>
 		<orm:UniquenessConstraint id="_A1CD9BD9-9F95-4EBF-978E-9BA1FF9F90B2" Name="InternalUniquenessConstraint8" IsInternal="true">
 			<orm:RoleSequence>
 				<orm:Role id="_677511B4-1865-4D79-B341-6173C5F34D65" ref="_5DCB4779-2552-49BB-A7C2-D70421E12717" />
@@ -1476,49 +1369,6 @@ COS=Sum of cost of all data sources</orm:Text>
 		<orm:UniquenessConstraint id="_C67DBAB4-0D02-436B-91CA-AA7B9333A7A6" Name="InternalUniquenessConstraint11" IsInternal="true">
 			<orm:RoleSequence>
 				<orm:Role id="_C1F949D9-CB3A-481F-94F8-02507B88BD84" ref="_B1D725CE-C798-4C1D-AC03-9B704C4D4819" />
-			</orm:RoleSequence>
-		</orm:UniquenessConstraint>
-		<orm:UniquenessConstraint id="_10C72EB0-A1AA-45EB-898E-57B978406980" Name="ExternalUniquenessConstraint1">
-			<orm:RoleSequence>
-				<orm:Role id="_F51E6EBB-5E29-4C17-ADE9-03EE621EBCAE" ref="_A44D0D54-CC67-4B72-8327-04EE2EDC34E8" />
-				<orm:Role id="_C79D71B3-A8CB-4DC7-99CB-73FA9DBF4D49" ref="_E1CCC022-6F08-4B62-A3BE-7FE89FEA625F" />
-				<orm:JoinRule>
-					<orm:JoinPath id="_3494020E-E965-49E7-9936-9388CD4F5B92" IsAutomatic="true">
-						<orm:PathComponents>
-							<orm:RolePath id="_4A6426D0-89D3-466C-AD4E-14F3AB9CF365" SplitCombinationOperator="And">
-								<orm:RootObjectType id="_4466355A-F71B-42C0-9A1C-CAB0E75DC861" ref="_18A322D6-2AC5-4548-8D92-361EF8A01DDE" />
-								<orm:SubPaths>
-									<orm:SubPath id="_CC6F7EA8-AE40-42D4-B299-04057DBC9F0A">
-										<orm:PathedRoles>
-											<orm:PathedRole id="_67D4A233-3D8B-4E55-9D7D-7CEB642B48B7" ref="_16D49963-C772-40F9-8C7E-9CCD8A57DFBC" Purpose="PostInnerJoin" />
-											<orm:PathedRole id="_8046BB45-9FB5-4339-933E-7678243A0383" ref="_A44D0D54-CC67-4B72-8327-04EE2EDC34E8" Purpose="SameFactType" />
-										</orm:PathedRoles>
-									</orm:SubPath>
-									<orm:SubPath id="_81E6C769-5226-4728-877F-27B2E9C12C42">
-										<orm:PathedRoles>
-											<orm:PathedRole id="_7D5D5BCF-4930-4058-ADEA-29FCD3DDF484" ref="_B1D725CE-C798-4C1D-AC03-9B704C4D4819" Purpose="PostInnerJoin" />
-											<orm:PathedRole id="_1947AFA4-968C-4902-815E-25DC7C049D00" ref="_E1CCC022-6F08-4B62-A3BE-7FE89FEA625F" Purpose="SameFactType" />
-										</orm:PathedRoles>
-									</orm:SubPath>
-								</orm:SubPaths>
-							</orm:RolePath>
-						</orm:PathComponents>
-						<orm:JoinPathProjections>
-							<orm:JoinPathProjection id="_F43DF77D-25D3-4BC7-BDE4-A0FB7BAA6352" ref="_4A6426D0-89D3-466C-AD4E-14F3AB9CF365">
-								<orm:ConstraintRoleProjection id="_C383F25F-37E9-4D77-8570-E507E54CD4A2" ref="_F51E6EBB-5E29-4C17-ADE9-03EE621EBCAE">
-									<orm:ProjectedFrom>
-										<orm:PathedRole ref="_8046BB45-9FB5-4339-933E-7678243A0383" />
-									</orm:ProjectedFrom>
-								</orm:ConstraintRoleProjection>
-								<orm:ConstraintRoleProjection id="_54B0708D-DBD4-4962-A05A-166969C9FCB8" ref="_C79D71B3-A8CB-4DC7-99CB-73FA9DBF4D49">
-									<orm:ProjectedFrom>
-										<orm:PathedRole ref="_1947AFA4-968C-4902-815E-25DC7C049D00" />
-									</orm:ProjectedFrom>
-								</orm:ConstraintRoleProjection>
-							</orm:JoinPathProjection>
-						</orm:JoinPathProjections>
-					</orm:JoinPath>
-				</orm:JoinRule>
 			</orm:RoleSequence>
 		</orm:UniquenessConstraint>
 		<orm:MandatoryConstraint id="_D92881B9-7A22-479B-99AE-D36CEFF35696" Name="ImpliedMandatoryConstraint9" IsImplied="true">
@@ -1651,49 +1501,6 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:Role id="_B1717148-1CEC-4BBF-9F81-B27618D0A633" ref="_31EF45EC-9B18-4AD8-ACC7-5E63943FA7F9" />
 			</orm:RoleSequence>
 		</orm:MandatoryConstraint>
-		<orm:UniquenessConstraint id="_C96EE45D-85B0-4B05-96D3-4A096DBCF54D" Name="ExternalUniquenessConstraint2">
-			<orm:RoleSequence>
-				<orm:Role id="_030D5160-6AB8-46D8-8A84-E9E22A2EC489" ref="_EFB787B8-D9C5-4E32-8185-4FDED36974DB" />
-				<orm:Role id="_44702788-9819-40EC-B4E8-74DEA7750CDA" ref="_31EF45EC-9B18-4AD8-ACC7-5E63943FA7F9" />
-				<orm:JoinRule>
-					<orm:JoinPath id="_144BBF8E-AFA3-48A0-8240-84ED7F370A50" IsAutomatic="true">
-						<orm:PathComponents>
-							<orm:RolePath id="_B7429C87-2E17-4A49-B54A-D1563258C1EB" SplitCombinationOperator="And">
-								<orm:RootObjectType id="_8D33697C-9F5F-4F96-9686-7D884C4DFB2C" ref="_00EEDF51-594E-4E45-8E73-823E5D2FD4DD" />
-								<orm:SubPaths>
-									<orm:SubPath id="_3F437FC5-22A1-4ADC-83D0-7BCF9396BD02">
-										<orm:PathedRoles>
-											<orm:PathedRole id="_31A998D6-A5B8-4D19-B92D-4E95134BB7D6" ref="_B771BF90-17E1-4530-90B1-33EFB25C9238" Purpose="PostInnerJoin" />
-											<orm:PathedRole id="_BFBBBE1D-8181-4C56-826C-EA0C5096E030" ref="_EFB787B8-D9C5-4E32-8185-4FDED36974DB" Purpose="SameFactType" />
-										</orm:PathedRoles>
-									</orm:SubPath>
-									<orm:SubPath id="_C346688B-D60E-40D8-BB5A-B21E8F408DE3">
-										<orm:PathedRoles>
-											<orm:PathedRole id="_5F9E6B56-D0E0-419C-8E14-62B59FA67376" ref="_F7DB7F66-70E7-4036-849A-B2FAFF562FEF" Purpose="PostInnerJoin" />
-											<orm:PathedRole id="_5CB5B263-3592-4702-AA04-0EA8B18B2981" ref="_31EF45EC-9B18-4AD8-ACC7-5E63943FA7F9" Purpose="SameFactType" />
-										</orm:PathedRoles>
-									</orm:SubPath>
-								</orm:SubPaths>
-							</orm:RolePath>
-						</orm:PathComponents>
-						<orm:JoinPathProjections>
-							<orm:JoinPathProjection id="_27ECAF72-298D-4A47-896B-E431FC7F8D12" ref="_B7429C87-2E17-4A49-B54A-D1563258C1EB">
-								<orm:ConstraintRoleProjection id="_9DAE67E9-A3F1-4F94-BE00-C36F88845892" ref="_030D5160-6AB8-46D8-8A84-E9E22A2EC489">
-									<orm:ProjectedFrom>
-										<orm:PathedRole ref="_BFBBBE1D-8181-4C56-826C-EA0C5096E030" />
-									</orm:ProjectedFrom>
-								</orm:ConstraintRoleProjection>
-								<orm:ConstraintRoleProjection id="_AB556790-EC3C-4B05-A2BE-8FC3183EAA99" ref="_44702788-9819-40EC-B4E8-74DEA7750CDA">
-									<orm:ProjectedFrom>
-										<orm:PathedRole ref="_5CB5B263-3592-4702-AA04-0EA8B18B2981" />
-									</orm:ProjectedFrom>
-								</orm:ConstraintRoleProjection>
-							</orm:JoinPathProjection>
-						</orm:JoinPathProjections>
-					</orm:JoinPath>
-				</orm:JoinRule>
-			</orm:RoleSequence>
-		</orm:UniquenessConstraint>
 		<orm:MandatoryConstraint id="_510F2622-A481-4B0C-B20A-48F7DF51B061" Name="ImpliedMandatoryConstraint8" IsImplied="true">
 			<orm:RoleSequence>
 				<orm:Role id="_F021F37B-52FB-4671-A18E-A1B9B0E30398" ref="_04260562-FAC0-42AE-9CB9-8BE28310213B" />
@@ -1837,11 +1644,6 @@ COS=Sum of cost of all data sources</orm:Text>
 				<orm:Role id="_3851397D-32D1-4D67-A760-0969B5C272B1" ref="_BD1A25A3-3903-4155-9E63-57A879E16624" />
 			</orm:RoleSequence>
 		</orm:UniquenessConstraint>
-		<orm:MandatoryConstraint id="_4F0AC94E-2C62-481A-94A8-2B1814CF43E0" Name="SimpleMandatoryConstraint13" IsSimple="true">
-			<orm:RoleSequence>
-				<orm:Role id="_F76F79FB-8344-4233-9F1F-C3F14F7B853A" ref="_F3CE1A06-571D-4650-B534-AAD8CC9A7662" />
-			</orm:RoleSequence>
-		</orm:MandatoryConstraint>
 	</orm:Constraints>
 	<orm:DataTypes>
 		<orm:TrueOrFalseLogicalDataType id="_true_or_false_logical_Data_Type" />
@@ -1851,11 +1653,6 @@ COS=Sum of cost of all data sources</orm:Text>
 		<orm:DateAndTimeTemporalDataType id="_C1481624-516A-4521-9088-C4DA66D8888F" />
 		<orm:YesOrNoLogicalDataType id="_CA612763-5E88-4E66-A6B2-86397566C149" />
 	</orm:DataTypes>
-	<orm:ModelErrors>
-		<orm:FactTypeRequiresReadingError id="_89077CB6-3775-4CC6-83C2-00CB93ED11A4" Name="At least one reading is required for fact type 'DataSourceState' in model 'PackageBuilderModel'.">
-			<orm:Fact ref="_89F97759-5F08-4030-8A72-227174885A4D" />
-		</orm:FactTypeRequiresReadingError>
-	</orm:ModelErrors>
 	<orm:ReferenceModeKinds>
 		<orm:ReferenceModeKind id="_2572ABCE-B191-4904-BF4B-DB5700B05BB2" FormatString="{1}" ReferenceModeType="General" />
 		<orm:ReferenceModeKind id="_986A570A-23E9-4DDC-8C46-8F09C04C9C50" FormatString="{0}_{1}" ReferenceModeType="Popular" />

@@ -125,6 +125,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Web.Mvc.Client
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.Web.Mvc.Client.Tests", "Presentation.Web.Mvc.Client.Tests\Presentation.Web.Mvc.Client.Tests.csproj", "{C30FB4B3-1E47-4439-B8F6-B5DC9DB978B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.PackageBuilder", "Infrastructure.Data.PackageBuilder\Infrastructure.Data.PackageBuilder.csproj", "{86248168-E31D-4A14-856A-6FCF44B83A5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.PackageBuilder.Tests", "Infrastructure.Data.PackageBuilder.Tests\Infrastructure.Data.PackageBuilder.Tests.csproj", "{ED390637-ABAA-408F-813A-2B4BB3DECE97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -469,6 +473,26 @@ Global
 		{C30FB4B3-1E47-4439-B8F6-B5DC9DB978B1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C30FB4B3-1E47-4439-B8F6-B5DC9DB978B1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C30FB4B3-1E47-4439-B8F6-B5DC9DB978B1}.Release|x86.ActiveCfg = Release|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{86248168-E31D-4A14-856A-6FCF44B83A5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -524,6 +548,8 @@ Global
 		{9068D12E-A5D0-4139-AEF1-2101EB61AE9C} = {8E2A40C0-0D9F-4C01-9C7A-B25136B4B656}
 		{E95F145C-1C0D-4811-93F1-DD5CE2978252} = {C9CE792C-02F3-436F-92C9-1DD729A6389F}
 		{C30FB4B3-1E47-4439-B8F6-B5DC9DB978B1} = {C9CE792C-02F3-436F-92C9-1DD729A6389F}
+		{86248168-E31D-4A14-856A-6FCF44B83A5E} = {9085B1A9-E248-4B99-971B-25B36CAC9265}
+		{ED390637-ABAA-408F-813A-2B4BB3DECE97} = {9085B1A9-E248-4B99-971B-25B36CAC9265}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = LightstoneApp2.vsmdi
