@@ -65,7 +65,7 @@ angular.module('packageBuilderwebuiApp')
     $scope.today = function() {
 
      // if($scope.dataProvider.date == null) {
-        $scope.dataProvider.date = new Date();
+        $scope.dataProvider.edited = new Date();
       //} else {
 
       //  $scope.dataProvider.date;
@@ -117,6 +117,6 @@ angular.module('packageBuilderwebuiApp')
     ];
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd-MM-yyyy', 'shortDate', 'yyyy-MM-ddTHH:mm:ss'];
-    $scope.format = $scope.formats[2];
+    $scope.format = $scope.formats[4];
 
   }]);
