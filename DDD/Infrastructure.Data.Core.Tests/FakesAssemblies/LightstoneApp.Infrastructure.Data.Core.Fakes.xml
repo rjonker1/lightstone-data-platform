@@ -1,0 +1,620 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LightstoneApp.Infrastructure.Data.Core.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Extensions.IQueryableExtensions</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.AnalyzeExpressionPathOf2ExpressionOfFuncOfM0M1``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String})">
+            <summary>Sets the shim of IQueryableExtensions.AnalyzeExpressionPath(Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; expression)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.IncludeOf1IQueryableOfM0ExpressionOfFuncOfM0Object``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Linq.IQueryable{``0}})">
+            <summary>Sets the shim of IQueryableExtensions.Include(IQueryable`1&lt;!!0&gt; queryable, Expression`1&lt;Func`2&lt;!!0,Object&gt;&gt; path)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.IncludeOf1IQueryableOfM0String``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.IQueryable{``0},System.String,System.Linq.IQueryable{``0}})">
+            <summary>Sets the shim of IQueryableExtensions.Include(IQueryable`1&lt;!!0&gt; queryable, String path)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.PaginateOf2IQueryableOfM0ExpressionOfFuncOfM0M1Int32Int32Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Int32,System.Int32,System.Boolean,System.Linq.IQueryable{``0}})">
+            <summary>Sets the shim of IQueryableExtensions.Paginate(IQueryable`1&lt;!!0&gt; queryable, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderBy, Int32 pageIndex, Int32 pageCount, Boolean ascending)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Extensions.ListExtensions</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions.ToMemorySetOf1ListOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Collections.Generic.List{``0},LightstoneApp.Infrastructure.Data.Core.MemorySet{``0}})">
+            <summary>Sets the shim of ListExtensions.ToMemorySet(List`1&lt;!!0&gt; list)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Extensions.ObjectStateManagerExtensions</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpAsHtmlObjectStateManager">
+            <summary>Sets the shim of ObjectStateManagerExtensions.DumpAsHtml(ObjectStateManager manager)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpAsHtmlObjectStateManagerEntityKey">
+            <summary>Sets the shim of ObjectStateManagerExtensions.DumpAsHtml(ObjectStateManager manager, EntityKey entityKey)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManager">
+            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManagerEntityKey">
+            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager, EntityKey entityKey)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManagerIEnumerableOfObjectStateEntry">
+            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager, IEnumerable`1&lt;ObjectStateEntry&gt; objectStateEntries)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManagerIEnumerableOfObjectStateEntryEntityKeyBoolean">
+            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager, IEnumerable`1&lt;ObjectStateEntry&gt; objectStateEntries, EntityKey entityKey, Boolean asHtml)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.ObjectStateEntryToStringObjectStateEntry">
+            <summary>Sets the shim of ObjectStateManagerExtensions.ObjectStateEntryToString(ObjectStateEntry entry)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.ObjectToStringObject">
+            <summary>Sets the shim of ObjectStateManagerExtensions.ObjectToString(Object obj)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.ExtendedRepository`1</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.#ctor(LightstoneApp.Infrastructure.Data.Core.ExtendedRepository{`0})">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.Bind(LightstoneApp.Domain.Core.IExtendedRepository{`0})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.Bind(LightstoneApp.Domain.Core.IRepository{`0})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.GetAllOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetAll()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.GetBySpecOf1ISpecificationOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Domain.Core.Specification.ISpecification{``0},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetBySpec(ISpecification`1&lt;!!0&gt; specification)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfM0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.GetFilteredElementsOf2ExpressionOfFuncOfM0BooleanExpressionOfFuncOfM0M1Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.GetPagedElementsOf2Int32Int32ExpressionOfFuncOfM0M1Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.ConstructorIQueryableUnitOfWorkITraceManager">
+            <summary>Sets the shim of ExtendedRepository`1.ExtendedRepository`1(IQueryableUnitOfWork unitOfWork, ITraceManager traceManager)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.ModifyICollectionOfT0">
+            <summary>Sets the shim of ExtendedRepository`1.Modify(ICollection`1&lt;!0&gt; items)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances.GetAllOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.ExtendedRepository{`0},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetAll()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances.GetBySpecOf1ISpecificationOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.ExtendedRepository{`0},LightstoneApp.Domain.Core.Specification.ISpecification{``0},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetBySpec(ISpecification`1&lt;!!0&gt; specification)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances.GetFilteredElementsOf1ExpressionOfFuncOfM0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.ExtendedRepository{`0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances.GetFilteredElementsOf2ExpressionOfFuncOfM0BooleanExpressionOfFuncOfM0M1Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.ExtendedRepository{`0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances.GetPagedElementsOf2Int32Int32ExpressionOfFuncOfM0M1Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.ExtendedRepository{`0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets the shim of ExtendedRepository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1.AllInstances.ModifyICollectionOfT0">
+            <summary>Sets the shim of ExtendedRepository`1.Modify(ICollection`1&lt;!0&gt; items)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.MemorySet`1</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.#ctor(LightstoneApp.Infrastructure.Data.Core.MemorySet{`0})">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.Bind(System.Linq.IQueryable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.Bind(System.Linq.IQueryable{`0})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.Bind(System.Data.Objects.IObjectSet{`0})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.Bind(System.Collections.IEnumerable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.Bind(System.Collections.Generic.IEnumerable{`0})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AddObjectT0">
+            <summary>Sets the shim of MemorySet`1.AddObject(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AttachT0">
+            <summary>Sets the shim of MemorySet`1.Attach(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.ConstructorListOfT0">
+            <summary>Sets the shim of MemorySet`1.MemorySet`1(List`1&lt;!0&gt; innerList)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.DeleteObjectT0">
+            <summary>Sets the shim of MemorySet`1.DeleteObject(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.DetachT0">
+            <summary>Sets the shim of MemorySet`1.Detach(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.ElementTypeGet">
+            <summary>Sets the shim of MemorySet`1.get_ElementType()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.ExpressionGet">
+            <summary>Sets the shim of MemorySet`1.get_Expression()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.GetEnumerator">
+            <summary>Sets the shim of MemorySet`1.GetEnumerator()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.IncludeString">
+            <summary>Sets the shim of MemorySet`1.Include(String path)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.ProviderGet">
+            <summary>Sets the shim of MemorySet`1.get_Provider()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.SystemCollectionsIEnumerableGetEnumerator">
+            <summary>Sets the shim of MemorySet`1.System.Collections.IEnumerable.GetEnumerator()</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.AddObjectT0">
+            <summary>Sets the shim of MemorySet`1.AddObject(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.AttachT0">
+            <summary>Sets the shim of MemorySet`1.Attach(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.DeleteObjectT0">
+            <summary>Sets the shim of MemorySet`1.DeleteObject(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.DetachT0">
+            <summary>Sets the shim of MemorySet`1.Detach(!0 entity)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.ElementTypeGet">
+            <summary>Sets the shim of MemorySet`1.get_ElementType()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.ExpressionGet">
+            <summary>Sets the shim of MemorySet`1.get_Expression()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.GetEnumerator">
+            <summary>Sets the shim of MemorySet`1.GetEnumerator()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.IncludeString">
+            <summary>Sets the shim of MemorySet`1.Include(String path)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.ProviderGet">
+            <summary>Sets the shim of MemorySet`1.get_Provider()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimMemorySet`1.AllInstances.SystemCollectionsIEnumerableGetEnumerator">
+            <summary>Sets the shim of MemorySet`1.System.Collections.IEnumerable.GetEnumerator()</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Repository`1</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.#ctor(LightstoneApp.Infrastructure.Data.Core.Repository{`0})">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.Bind(LightstoneApp.Domain.Core.IRepository{`0})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanInt32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0ISpecificationOfT0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},LightstoneApp.Domain.Core.Specification.ISpecification{`0},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, ISpecification`1&lt;!0&gt; specification, Boolean ascending)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AddT0">
+            <summary>Sets the shim of Repository`1.Add(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.ConstructorIQueryableUnitOfWorkITraceManager">
+            <summary>Sets the shim of Repository`1.Repository`1(IQueryableUnitOfWork unitOfWork, ITraceManager traceManager)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.CreateSet">
+            <summary>Sets the shim of Repository`1.CreateSet()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetAll">
+            <summary>Sets the shim of Repository`1.GetAll()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetBySpecISpecificationOfT0">
+            <summary>Sets the shim of Repository`1.GetBySpec(ISpecification`1&lt;!0&gt; specification)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.GetFilteredElementsExpressionOfFuncOfT0Boolean">
+            <summary>Sets the shim of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.ModifyT0">
+            <summary>Sets the shim of Repository`1.Modify(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.RegisterItemT0">
+            <summary>Sets the shim of Repository`1.RegisterItem(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.RemoveT0">
+            <summary>Sets the shim of Repository`1.Remove(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.UnitOfWorkGet">
+            <summary>Sets the shim of Repository`1.get_UnitOfWork()</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.Repository{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanInt32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.Repository{`0},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.Repository{`0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0ISpecificationOfT0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.Repository{`0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},LightstoneApp.Domain.Core.Specification.ISpecification{`0},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets the shim of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, ISpecification`1&lt;!0&gt; specification, Boolean ascending)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.AddT0">
+            <summary>Sets the shim of Repository`1.Add(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.CreateSet">
+            <summary>Sets the shim of Repository`1.CreateSet()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetAll">
+            <summary>Sets the shim of Repository`1.GetAll()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetBySpecISpecificationOfT0">
+            <summary>Sets the shim of Repository`1.GetBySpec(ISpecification`1&lt;!0&gt; specification)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.GetFilteredElementsExpressionOfFuncOfT0Boolean">
+            <summary>Sets the shim of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.ModifyT0">
+            <summary>Sets the shim of Repository`1.Modify(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.RegisterItemT0">
+            <summary>Sets the shim of Repository`1.RegisterItem(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.RemoveT0">
+            <summary>Sets the shim of Repository`1.Remove(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimRepository`1.AllInstances.UnitOfWorkGet">
+            <summary>Sets the shim of Repository`1.get_UnitOfWork()</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1">
+            <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.ExtendedRepository`1</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.#ctor(LightstoneApp.Infrastructure.Data.Core.IQueryableUnitOfWork,LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.Add(`0)">
+            <summary>Sets the stub of Repository`1.Add(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.AddT0">
+            <summary>Sets the stub of Repository`1.Add(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetAll">
+            <summary>Sets the stub of Repository`1.GetAll()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetAll``1">
+            <summary>Sets the stub of ExtendedRepository`1.GetAll()</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetAll01">
+            <summary>Sets the stub of Repository`1.GetAll()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetAllOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets stubs of GetAll()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetBySpec``1(LightstoneApp.Domain.Core.Specification.ISpecification{``0})">
+            <summary>Sets the stub of ExtendedRepository`1.GetBySpec(ISpecification`1&lt;!!0&gt; specification)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetBySpec(LightstoneApp.Domain.Core.Specification.ISpecification{`0})">
+            <summary>Sets the stub of Repository`1.GetBySpec(ISpecification`1&lt;!0&gt; specification)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetBySpecISpecificationOfT0">
+            <summary>Sets the stub of Repository`1.GetBySpec(ISpecification`1&lt;!0&gt; specification)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetBySpecOf1ISpecificationOfM0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Domain.Core.Specification.ISpecification{``0},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets stubs of GetBySpec(ISpecification`1&lt;!!0&gt; specification)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElements(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElements``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElements``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElements``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>Sets the stub of ExtendedRepository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElements``2(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean)">
+            <summary>Sets the stub of ExtendedRepository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElementsExpressionOfFuncOfT0Boolean">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfM0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets stubs of GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanInt32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetFilteredElementsOf2ExpressionOfFuncOfM0BooleanExpressionOfFuncOfM0M1Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets stubs of GetFilteredElements(Expression`1&lt;Func`2&lt;!!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetPagedElements``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetPagedElements``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},LightstoneApp.Domain.Core.Specification.ISpecification{`0},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, ISpecification`1&lt;!0&gt; specification, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetPagedElements``2(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean)">
+            <summary>Sets the stub of ExtendedRepository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0ISpecificationOfT0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},LightstoneApp.Domain.Core.Specification.ISpecification{`0},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, ISpecification`1&lt;!0&gt; specification, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.GetPagedElementsOf2Int32Int32ExpressionOfFuncOfM0M1Boolean``2(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets stubs of GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!!0,!!1&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.InitializeStub">
+            <summary>Initializes a new instance of type StubExtendedRepository</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.Modify(`0)">
+            <summary>Sets the stub of Repository`1.Modify(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.Modify(System.Collections.Generic.ICollection{`0})">
+            <summary>Sets the stub of ExtendedRepository`1.Modify(ICollection`1&lt;!0&gt; items)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.ModifyICollectionOfT0">
+            <summary>Sets the stub of ExtendedRepository`1.Modify(ICollection`1&lt;!0&gt; items)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.ModifyT0">
+            <summary>Sets the stub of Repository`1.Modify(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.RegisterItem(`0)">
+            <summary>Sets the stub of Repository`1.RegisterItem(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.RegisterItemT0">
+            <summary>Sets the stub of Repository`1.RegisterItem(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.Remove(`0)">
+            <summary>Sets the stub of Repository`1.Remove(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.RemoveT0">
+            <summary>Sets the stub of Repository`1.Remove(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.StubExtendedRepository`1.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork">
+            <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.IQueryableUnitOfWork</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.#ctor">
+            <summary>Initializes a new instance of type StubIQueryableUnitOfWork</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.Commit">
+            <summary>Sets the stub of IUnitOfWork.Commit()</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.CommitAndRefreshChanges">
+            <summary>Sets the stub of IUnitOfWork.CommitAndRefreshChanges()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.CreateSetOf1``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Data.Objects.IObjectSet{``0}})">
+            <summary>Sets stubs of CreateSet()</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.Dispose">
+            <summary>Sets the stub of IDisposable.Dispose()</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ExecuteCommandStringObjectArray">
+            <summary>Sets the stub of ISQL.ExecuteCommand(String sqlCommand, Object[] parameters)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ExecuteQueryOf1StringObjectArray``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.String,System.Object[],System.Collections.Generic.IEnumerable{``0}})">
+            <summary>Sets stubs of ExecuteQuery(String sqlQuery, Object[] parameters)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ladc::LightstoneApp#Domain#Core#ISQL#ExecuteCommand(System.String,System.Object[])">
+            <summary>Sets the stub of ISQL.ExecuteCommand(String sqlCommand, Object[] parameters)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ladc::LightstoneApp#Domain#Core#ISQL#ExecuteQuery``1(System.String,System.Object[])">
+            <summary>Sets the stub of ISQL.ExecuteQuery(String sqlQuery, Object[] parameters)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ladc::LightstoneApp#Domain#Core#IUnitOfWork#Commit">
+            <summary>Sets the stub of IUnitOfWork.Commit()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ladc::LightstoneApp#Domain#Core#IUnitOfWork#CommitAndRefreshChanges">
+            <summary>Sets the stub of IUnitOfWork.CommitAndRefreshChanges()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ladc::LightstoneApp#Domain#Core#IUnitOfWork#RegisterChanges``1(``0)">
+            <summary>Sets the stub of IUnitOfWork.RegisterChanges(!!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.ladc::LightstoneApp#Domain#Core#IUnitOfWork#RollbackChanges">
+            <summary>Sets the stub of IUnitOfWork.RollbackChanges()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.laidc::LightstoneApp#Infrastructure#Data#Core#IQueryableUnitOfWork#CreateSet``1">
+            <summary>Sets the stub of IQueryableUnitOfWork.CreateSet()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.RegisterChangesOf1M0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{``0})">
+            <summary>Sets stubs of RegisterChanges(!!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.RollbackChanges">
+            <summary>Sets the stub of IUnitOfWork.RollbackChanges()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubIQueryableUnitOfWork.global::System#IDisposable#Dispose">
+            <summary>Sets the stub of IDisposable.Dispose()</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1">
+            <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Repository`1</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.#ctor(LightstoneApp.Infrastructure.Data.Core.IQueryableUnitOfWork,LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.Add(`0)">
+            <summary>Sets the stub of Repository`1.Add(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.AddT0">
+            <summary>Sets the stub of Repository`1.Add(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetAll">
+            <summary>Sets the stub of Repository`1.GetAll()</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetAll01">
+            <summary>Sets the stub of Repository`1.GetAll()</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetBySpec(LightstoneApp.Domain.Core.Specification.ISpecification{`0})">
+            <summary>Sets the stub of Repository`1.GetBySpec(ISpecification`1&lt;!0&gt; specification)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetBySpecISpecificationOfT0">
+            <summary>Sets the stub of Repository`1.GetBySpec(ISpecification`1&lt;!0&gt; specification)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetFilteredElements(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetFilteredElements``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetFilteredElements``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetFilteredElementsExpressionOfFuncOfT0Boolean">
+            <summary>Sets the stub of Repository`1.GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetFilteredElementsOf1ExpressionOfFuncOfT0BooleanInt32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetFilteredElements(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetPagedElements``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetPagedElements``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},LightstoneApp.Domain.Core.Specification.ISpecification{`0},System.Boolean)">
+            <summary>Sets the stub of Repository`1.GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, ISpecification`1&lt;!0&gt; specification, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.GetPagedElementsOf1Int32Int32ExpressionOfFuncOfT0M0ISpecificationOfT0Boolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},LightstoneApp.Domain.Core.Specification.ISpecification{`0},System.Boolean,System.Collections.Generic.IEnumerable{`0}})">
+            <summary>Sets stubs of GetPagedElements(Int32 pageIndex, Int32 pageCount, Expression`1&lt;Func`2&lt;!0,!!0&gt;&gt; orderByExpression, ISpecification`1&lt;!0&gt; specification, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.InitializeStub">
+            <summary>Initializes a new instance of type StubRepository</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.Modify(`0)">
+            <summary>Sets the stub of Repository`1.Modify(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.ModifyT0">
+            <summary>Sets the stub of Repository`1.Modify(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.RegisterItem(`0)">
+            <summary>Sets the stub of Repository`1.RegisterItem(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.RegisterItemT0">
+            <summary>Sets the stub of Repository`1.RegisterItem(!0 item)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.Remove(`0)">
+            <summary>Sets the stub of Repository`1.Remove(!0 item)</summary>
+        </member>
+        <member name="F:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.RemoveT0">
+            <summary>Sets the stub of Repository`1.Remove(!0 item)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Fakes.StubRepository`1.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+    </members>
+</doc>
