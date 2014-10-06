@@ -8,32 +8,16 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsDetailCtrl', ['$scope', '$http', 'GetAPI', 'PostAPI', function ($scope, $http, GetAPI, PostAPI) {
+  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$scope', 'GetAPI', 'PostAPI', function ($rootScope, $routeParams, $route, $scope, GetAPI, PostAPI) {
     
+    
+    console.log($routeParams.id);
+    console.log($routeParams.type);
+    
+
     $scope.dataProvider = {};
 
-    $scope.createProvider = function(providerData) {
-
-      $scope.message = "Saving data..."
-
-      PostAPI.save({ id:$scope.dataProvider.id }, providerData, function(data) {
-
-        //var resp = data.msg;
-         
-        $scope.message = "Data Provider was successfully saved";//+resp;
-
-      }, function(err){
-
-        $scope.message = "Error saving Data Provider";
-      });
-
-    }
-
-    $scope.loadDProvider = function() {
-      
-      $scope.test = GetAPI.query();
-
-      GetAPI.get(function(data){
+    GetAPI.get({ id: $routeParams.id }, function(data){
 
            var resp = data.response;
           
@@ -52,8 +36,30 @@ angular.module('packageBuilderwebuiApp')
 
           alert('There was an issue contacting the API')
       });
+    
+
+    $scope.createProvider = function(providerData) {
+
+      $scope.message = "Saving data..."
+
+      PostAPI.save({ id:$scope.dataProvider.id }, providerData, function(data) {
+
+        //var resp = data.msg;
+         
+        $scope.message = "Data Provider was successfully saved";//+resp;
+
+      }, function(err){
+
+        $scope.message = "Error saving Data Provider";
+      });
 
     }
+
+    /*$scope.loadDProvider = function() {
+      
+      $scope.test = GetAPI.query();
+
+    }*/
 
 
     $scope.today = function() {
