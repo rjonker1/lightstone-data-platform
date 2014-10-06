@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LightstoneApp.Presentation.Windows.WPF.ServiceAgents</RootNamespace>
     <AssemblyName>LightstoneApp.Presentation.Windows.WPF.ServiceAgents</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
