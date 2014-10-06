@@ -40,11 +40,48 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="PackageBuilderModel.CoRef._ORMCustomToolReport.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.CoRef.orm</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PackageBuilderModel.orm">
       <Generator>ORMCustomTool</Generator>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup Condition="Exists('PackageBuilderModel.orm')">
+    <None Include="PackageBuilderModel.CoRef.orm">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>CoRefORM</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.DCIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>ConceptualDBtoDCL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.DDIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>DCILtoDDIL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.OIAL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>ORMtoOIAL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.SQLServer.sql">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>DDILtoSQLServer</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.xsd">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>OIALtoXSD</ORMGenerator>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
