@@ -56,7 +56,7 @@ namespace PackageBuilder.Api.Modules
 
                 DataProviderDto dto = this.Bind<DataProviderDto>();
                 dto.incVersion();
-                bus.Publish(new CreateDataProviderRevision(parameters.id, dto.Version, dto.Name, typeof(DataProviderDto), dto.DataFields));
+                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto), dto.DataFields));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
             };
@@ -69,6 +69,9 @@ namespace PackageBuilder.Api.Modules
     {
 
         public string Name { get; set; }
+        public string Owner { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Edited { get; set; }
 
         public int Version { get; set; }
 

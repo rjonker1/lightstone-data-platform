@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.144, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
@@ -60,12 +61,12 @@
     <Compile Include="DataFields\Events\DataFieldRenamed.cs" />
     <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
-    <Compile Include="DataProviders\Commands\CreateDataProviderRevision.cs" />
+    <Compile Include="DataProviders\Commands\UpdateDataProvider.cs" />
     <Compile Include="DataProviders\Commands\RenameDataProvider.cs" />
     <Compile Include="DataProviders\Commands\UpdateReadModel.cs" />
     <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
     <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
-    <Compile Include="DataProviders\Events\DataProviderRevisionCreated.cs" />
+    <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
     <Compile Include="DataProviders\Events\ReadModelUpdated.cs" />
     <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />

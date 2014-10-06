@@ -14,9 +14,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     {
         public string Name { get; private set; }
         public string State { get; private set; }
-        public double Cos { get; private set; }
-        public DateTime Date { get; private set; }
+        public double CostOfSale { get; private set; }
+        public DateTime Created { get; private set; }
+        public DateTime Edited { get; private set; }
         public string Owner { get; private set; }
+        public string SourceURL { get; private set; }
         public IEnumerable DataFields { get; private set; }
          
         public Type ResponseType { get; private set; }
@@ -33,9 +35,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             RaiseEvent(new DataProviderCreated(id, name, responseType, PopulateDataFields(responseType)));
         }
 
-        public void CreateDataProviderRevision(Guid id, int version, string name, Type responseType, IEnumerable dataFields)
+        public void CreateDataProviderRevision(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable dataFields)
         {
-            RaiseEvent(new DataProviderRevisionCreated(id, version, name, responseType, dataFields));
+            RaiseEvent(new DataProviderUpdated(id, name, owner, created, edited, version, responseType, dataFields));
         }
         
         public void ChangeName(string newName)
@@ -55,8 +57,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             State = @event.State;
-            Cos = @event.Cos;
-            Date = @event.Date;
+            CostOfSale = @event.CostOfSale;
+            Created = @event.Created;
             Owner = @event.Owner;
             DataFields = PopulateDataFields(@event.ResponseType);
         }
@@ -67,7 +69,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Name = @event.NewName;
         }
 
-        private void Apply(DataProviderRevisionCreated @event)
+        private void Apply(DataProviderUpdated @event)
         {
             Id = @event.Id;
             Name = @event.Name;
