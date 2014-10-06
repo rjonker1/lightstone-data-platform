@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA721B03-EFC7-45CE-A70E-BB9EF72C075B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Domain.Core</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Contracts\DataProviders\Specifics\IRespondWithCarModel.cs.old" />
+    <None Include="Contracts\DataProviders\Specifics\IRespondWithVin12.cs.old" />
+    <Compile Include="Contracts\DataProviders\IProvideAccidentClaim.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromAnpr.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromAudatex.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromIvid.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromIvidTitleHolder.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromJis.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstone.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromRgt.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromRgtVin.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideHitStatusDataStoreNamesMapping.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideVehicleSpecificInformation.cs" />
+    <Compile Include="Contracts\DataProviders\Metric\IPair.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IAddValuationItem.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAccidentDistributionModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAmortisationFactorModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAmortisedValueModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAreaFactorModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithAuctionFactorModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithConfidenceModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithEstimatedValueModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithFrequencyModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithImageGaugeModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithPriceModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithRepairIndexModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithSaleModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithTotalSalesByAgeModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithTotalSalesByGenderModel.cs" />
+    <Compile Include="Contracts\DataProviders\Specifics\IRespondWithValuation.cs" />
+    <Compile Include="Contracts\IBuildIvidResponse.cs" />
+    <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
+    <Compile Include="Contracts\IProvideLaceResponse.cs" />
+    <Compile Include="Contracts\IResponseProviderHandled.cs" />
+    <Compile Include="Contracts\Requests\ILaceRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideContextForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideCoOrdinateInformationForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideJisInformation.cs" />
+    <Compile Include="Contracts\Requests\IProvideRequestAggregation.cs" />
+    <Compile Include="Contracts\Requests\IProvideUserInformationForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideVehicleInformationForRequest.cs" />
+    <Compile Include="Dto\AudatexResponse.cs" />
+    <Compile Include="Dto\AudatexResponseHandled.cs" />
+    <Compile Include="Dto\FinancedInterestValidation.cs" />
+    <Compile Include="Contracts\IBuildIvidTitleHolderResponse.cs" />
+    <Compile Include="Dto\IvidResponse.cs" />
+    <Compile Include="Dto\IvidResponseHandled.cs" />
+    <Compile Include="Dto\IvidTitleHolderResponse.cs" />
+    <Compile Include="Dto\IvidTitleHolderResponseHandled.cs" />
+    <Compile Include="Dto\LightstoneResponse.cs" />
+    <Compile Include="Dto\LightstoneResponseHandled.cs" />
+    <Compile Include="Dto\VehicleSpecificInformation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

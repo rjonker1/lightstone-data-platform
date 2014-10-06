@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lace.Domain.DataProviders.Lightstone</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Monitoring">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.144\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cars\IRetrieveCarInformation.cs" />
+    <Compile Include="Cars\RetrieveCarInformationDetail.cs" />
+    <Compile Include="Core\IReadOnlyRepository.cs" />
+    <Compile Include="Core\Models\Band.cs" />
+    <Compile Include="Core\Models\Car.cs" />
+    <Compile Include="Core\Models\CarInfo.cs" />
+    <Compile Include="Core\Models\CarType.cs" />
+    <Compile Include="Core\Models\CarVendor.cs" />
+    <Compile Include="Core\Models\Make.cs" />
+    <Compile Include="Core\Models\Metric.cs" />
+    <Compile Include="Core\Models\Municipality.cs" />
+    <Compile Include="Core\Models\Sale.cs" />
+    <Compile Include="Core\Models\Statistic.cs" />
+    <Compile Include="Infrastructure\CallLightstoneExternalSource.cs" />
+    <Compile Include="Infrastructure\Dto\AccidentDistributionModel.cs" />
+    <Compile Include="Infrastructure\Dto\AmortisationFactorModel.cs" />
+    <Compile Include="Infrastructure\Dto\AmortisedValueModel.cs" />
+    <Compile Include="Infrastructure\Dto\AreaFactorModel.cs" />
+    <Compile Include="Infrastructure\Dto\AuctionFactorModel.cs" />
+    <Compile Include="Infrastructure\Dto\CarInformationRequest.cs" />
+    <Compile Include="Infrastructure\Dto\ConfidenceModel.cs" />
+    <Compile Include="Infrastructure\Dto\EstimatedValueModel.cs" />
+    <Compile Include="Infrastructure\Dto\FrequencyModel.cs" />
+    <Compile Include="Infrastructure\Dto\ImageGaugeModel.cs" />
+    <Compile Include="Infrastructure\Dto\PriceModel.cs" />
+    <Compile Include="Infrastructure\Dto\RepairIndexModel.cs" />
+    <Compile Include="Infrastructure\Dto\SaleModel.cs" />
+    <Compile Include="Infrastructure\Dto\TotalSalesByAgeModel.cs" />
+    <Compile Include="Infrastructure\Dto\TotalSalesByGenderModel.cs" />
+    <Compile Include="Infrastructure\Dto\Valuation.cs" />
+    <Compile Include="Infrastructure\Dto\Metric\Pair.cs" />
+    <Compile Include="Infrastructure\Factory\ISetupRepository.cs" />
+    <Compile Include="Infrastructure\Factory\RepositoryFactory.cs" />
+    <Compile Include="Infrastructure\HandleLightstoneSourceCall.cs" />
+    <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
+    <Compile Include="Infrastructure\Providers\CacheConnectionFactory.cs" />
+    <Compile Include="Infrastructure\Providers\ConnectionFactory.cs" />
+    <Compile Include="Infrastructure\Providers\Dapper.cs" />
+    <Compile Include="Infrastructure\RequestDataFromLightstoneSource.cs" />
+    <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
+    <Compile Include="Repositories\BandsRepository.cs" />
+    <Compile Include="Repositories\CarInfoRepository.cs" />
+    <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\CarTypeRepository.cs" />
+    <Compile Include="Repositories\CarVendorRepository.cs" />
+    <Compile Include="Repositories\MakeRepository.cs" />
+    <Compile Include="Repositories\MetricRepository.cs" />
+    <Compile Include="Repositories\MunicipalityRepository.cs" />
+    <Compile Include="Repositories\SaleRepository.cs" />
+    <Compile Include="Repositories\StatisticsRepository.cs" />
+    <Compile Include="Repositories\Vin12CarInfoRepository.cs" />
+    <Compile Include="Services\BaseRetrievalMetric.cs" />
+    <Compile Include="Services\IRetrieveATypeOfMetric.cs" />
+    <Compile Include="Services\IRetrieveValuationFromMetrics.cs" />
+    <Compile Include="Services\MetricTypes.cs" />
+    <Compile Include="Services\Specifics\AccidentDistributionMetric.cs" />
+    <Compile Include="Services\Specifics\AmortisedValueMetric.cs" />
+    <Compile Include="Services\Specifics\AreaFactorsMetric.cs" />
+    <Compile Include="Services\Specifics\AuctionFactorsMetric.cs" />
+    <Compile Include="Services\Specifics\EstimatedValuesMetric.cs" />
+    <Compile Include="Services\Specifics\ImageGaugesMetric.cs" />
+    <Compile Include="Services\Specifics\LastFiveSalesMetric.cs" />
+    <Compile Include="Services\Specifics\RepairIndexMetric.cs" />
+    <Compile Include="Services\Specifics\TotalSalesByAgeMetric.cs" />
+    <Compile Include="Services\Specifics\TotalSalesByGenderMetric.cs" />
+    <Compile Include="LightstoneSourceExecution.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWork\BandData.cs" />
+    <Compile Include="UnitOfWork\CarInfoData.cs" />
+    <Compile Include="UnitOfWork\CarTypeData.cs" />
+    <Compile Include="Core\Contracts\IGetBands.cs" />
+    <Compile Include="Core\Contracts\IGetCarInfo.cs" />
+    <Compile Include="Core\Contracts\IGetCarType.cs" />
+    <Compile Include="Core\Contracts\IGetMakes.cs" />
+    <Compile Include="Core\Contracts\IGetMetrics.cs" />
+    <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
+    <Compile Include="Core\Contracts\IGetSales.cs" />
+    <Compile Include="Core\Contracts\IGetStatistics.cs" />
+    <Compile Include="UnitOfWork\MakeData.cs" />
+    <Compile Include="UnitOfWork\MetricData.cs" />
+    <Compile Include="UnitOfWork\MuncipalityData.cs" />
+    <Compile Include="UnitOfWork\SaleData.cs" />
+    <Compile Include="UnitOfWork\StatisticsData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
+      <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
+      <Name>Lace.DistributedServices.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
+      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
+      <Name>Lace.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+      <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
+      <Name>Lace.Domain.DataProviders.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Infrastructure\Dto\CarModel.cs.old" />
+    <None Include="Infrastructure\Dto\Vin12.cs.old" />
+    <None Include="packages.config" />
+    <None Include="UnitOfWork\CarVendorData.cs.old" />
+    <None Include="Core\Contracts\IGetCarVendor.cs.old" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

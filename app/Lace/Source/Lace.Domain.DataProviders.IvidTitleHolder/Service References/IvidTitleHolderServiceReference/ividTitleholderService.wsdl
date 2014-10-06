@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sch="http://www.ubiquitech.co.za/schemas/ivid-titleholder/" xmlns:tns="http://www.ubiquitech.co.za/schemas/ivid-titleholder/" targetNamespace="http://www.ubiquitech.co.za/schemas/ivid-titleholder/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <schema xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ubiquitech.co.za/schemas/ivid-titleholder/" jaxb:version="2.0" xmlns="http://www.w3.org/2001/XMLSchema">
+      <annotation>
+        <documentation>
+            This web service is used to attempt to determine which Banks/CerTrack instances have records of a particular
+            vehicle on file.
+        </documentation>
+      </annotation>
+      <complexType name="RequesterDetailsElement">
+        <attribute name="requesterName" use="required">
+          <simpleType>
+            <restriction base="string">
+              <maxLength value="30" />
+            </restriction>
+          </simpleType>
+        </attribute>
+        <attribute name="requesterPhone" use="required">
+          <simpleType>
+            <restriction base="string">
+              <maxLength value="15" />
+            </restriction>
+          </simpleType>
+        </attribute>
+        <attribute name="requesterEmail" use="required">
+          <simpleType>
+            <restriction base="string">
+              <maxLength value="40" />
+            </restriction>
+          </simpleType>
+        </attribute>
+      </complexType>
+      <complexType name="RegistrationInformationCriteriaElement">
+        <choice>
+          <element name="VIN" type="string" />
+          <element name="AccountNumber" type="string" />
+        </choice>
+      </complexType>
+      <complexType name="DealerIdentificationElement">
+        <attribute name="dealerCode" type="string" use="required" />
+        <attribute name="bankCode" type="string" use="required" />
+      </complexType>
+      <complexType name="RegistrationInformationElement">
+        <attribute name="bankCode" type="string" use="required" />
+        <attribute name="vin" type="string" use="required" />
+        <attribute name="engineNumber" type="string" use="required" />
+        <attribute name="natisRegisterNumber" type="string" use="required" />
+        <attribute name="ownerIdNumber" type="string" use="required" />
+        <attribute name="ownerName" type="string" use="required" />
+        <attribute name="make" type="string" use="required" />
+        <attribute name="model" type="string" use="required" />
+        <attribute name="description" type="string" use="required" />
+        <attribute name="yearOfLiabilityForLicensing" type="string" use="optional" />
+        <attribute name="documentIssueDate" type="date" use="optional" />
+        <attribute name="accountNumber" type="string" use="optional" />
+        <attribute name="titleholderIdNumber" type="string" use="optional" />
+        <attribute name="titleholderName" type="string" use="optional" />
+      </complexType>
+      <complexType name="RegistrationInformationErrorElement">
+        <attribute name="errorCode" type="string" />
+        <attribute name="errorDescription" type="string" />
+      </complexType>
+      <element name="TitleholderQueryRequest">
+        <complexType>
+          <sequence>
+            <element name="vin" type="string" />
+            <element name="requesterDetails" type="tns:RequesterDetailsElement" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="TitleholderQueryResponse">
+        <complexType>
+          <sequence>
+            <element minOccurs="0" name="bankName" type="string" />
+            <element name="flaggedOnAnpr" type="boolean" />
+            <element name="partialResponse" type="boolean" />
+            <element minOccurs="0" name="accountNumber" type="string" />
+            <element minOccurs="0" name="accountOpenDate" type="date" />
+            <element minOccurs="0" name="accountClosedDate" type="date" />
+            <element minOccurs="0" name="yearOfLiabilityForLicensing" type="string" />
+            <element minOccurs="0" name="make" type="string" />
+            <element minOccurs="0" name="model" type="string" />
+            <element minOccurs="0" name="vin" type="string" />
+            <element minOccurs="0" name="engineNumber" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="RegistrationInformationQueryRequest">
+        <complexType>
+          <sequence>
+            <element name="RequesterDetails" type="tns:RequesterDetailsElement" />
+            <element name="Criteria" type="tns:RegistrationInformationCriteriaElement" />
+            <element maxOccurs="unbounded" name="Dealer" type="tns:DealerIdentificationElement" />
+          </sequence>
+          <attribute name="UniqueReference" type="string" use="required" />
+        </complexType>
+      </element>
+      <element name="RegistrationInformationQueryResponse">
+        <complexType>
+          <choice>
+            <element name="Success" type="tns:RegistrationInformationElement" />
+            <element name="Error" type="tns:RegistrationInformationErrorElement" />
+          </choice>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="RegistrationInformationQueryRequest">
+    <wsdl:part name="RegistrationInformationQueryRequest" element="tns:RegistrationInformationQueryRequest" />
+  </wsdl:message>
+  <wsdl:message name="TitleholderQueryResponse">
+    <wsdl:part name="TitleholderQueryResponse" element="tns:TitleholderQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistrationInformationQueryResponse">
+    <wsdl:part name="RegistrationInformationQueryResponse" element="tns:RegistrationInformationQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="TitleholderQueryRequest">
+    <wsdl:part name="TitleholderQueryRequest" element="tns:TitleholderQueryRequest" />
+  </wsdl:message>
+  <wsdl:portType name="IvidTitleholderService">
+    <wsdl:operation name="RegistrationInformationQuery">
+      <wsdl:input name="RegistrationInformationQueryRequest" message="tns:RegistrationInformationQueryRequest" />
+      <wsdl:output name="RegistrationInformationQueryResponse" message="tns:RegistrationInformationQueryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="TitleholderQuery">
+      <wsdl:input name="TitleholderQueryRequest" message="tns:TitleholderQueryRequest" />
+      <wsdl:output name="TitleholderQueryResponse" message="tns:TitleholderQueryResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IvidTitleholderServiceSoap11" type="tns:IvidTitleholderService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrationInformationQuery">
+      <soap:operation soapAction="" />
+      <wsdl:input name="RegistrationInformationQueryRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegistrationInformationQueryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TitleholderQuery">
+      <soap:operation soapAction="" />
+      <wsdl:input name="TitleholderQueryRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TitleholderQueryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IvidTitleholderServiceService">
+    <wsdl:port name="IvidTitleholderServiceSoap11" binding="tns:IvidTitleholderServiceSoap11">
+      <soap:address location="https://secure1.ubiquitech.co.za:443/ivid/ws/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
