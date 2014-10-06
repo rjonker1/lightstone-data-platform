@@ -1,7 +1,7 @@
 using System.Linq;
 using NEventStore.Persistence.RavenDB;
-using PackageBuilder.Domain.DataProviders.ReadModels;
-using PackageBuilder.Domain.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using Raven.Client.Indexes;
 
 namespace PackageBuilder.Infrastructure.RavenDB.Indexes

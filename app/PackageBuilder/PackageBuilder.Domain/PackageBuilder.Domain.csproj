@@ -89,83 +89,27 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Bootstrapper.cs" />
-    <Compile Include="DataFields\Commands\CreateDataField.cs" />
-    <Compile Include="DataFields\Commands\RenameDataField.cs" />
-    <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
-    <Compile Include="DataFields\Events\DataFieldCreated.cs" />
-    <Compile Include="DataFields\Events\DataFieldRenamed.cs" />
-    <Compile Include="DataFields\Commands\Handlers\CreateDataFieldHandler.cs" />
-    <Compile Include="DataFields\Commands\Handlers\RenameDataFieldHandler.cs" />
-    <Compile Include="DataFields\Events\Handlers\DataFieldRevisionCreatedHandler.cs" />
-    <Compile Include="DataFields\Events\Handlers\DataFieldCreatedHandler.cs" />
-    <Compile Include="DataProviders\Commands\CreateDataProviderRevision.cs" />
-    <Compile Include="DataProviders\Commands\Handlers\CreateDataProviderRevisionHandler.cs" />
-    <Compile Include="DataProviders\Commands\Handlers\RenameDataProviderHandler.cs" />
-    <Compile Include="DataProviders\Commands\Handlers\DataProviderCreatedHandler.cs" />
-    <Compile Include="DataProviders\Commands\UpdateReadModel.cs" />
-    <Compile Include="DataProviders\Events\DataProviderRevisionCreated.cs" />
-    <Compile Include="DataProviders\Events\ReadModelUpdated.cs" />
-    <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
-    <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
-    <Compile Include="DataProviders\Commands\RenameDataProvider.cs" />
-    <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
-    <Compile Include="DataProviders\Commands\Handlers\CreateDataProviderHandler.cs" />
-    <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
-    <Compile Include="Entities\Action.cs" />
-    <Compile Include="Entities\Contract.cs" />
-    <Compile Include="Entities\ContractPackage.cs" />
-    <Compile Include="Entities\IActionRepository.cs" />
-    <Compile Include="Entities\IContractPackage.cs" />
-    <Compile Include="Entities\IContractPackageRepository.cs" />
-    <Compile Include="Entities\IContractRepository.cs" />
-    <Compile Include="Entities\ICustomerRepository.cs" />
-    <Compile Include="Entities\IGroupPackage.cs" />
-    <Compile Include="Entities\IGroupPackageRepository.cs" />
-    <Compile Include="Entities\IPackageAccessControl.cs" />
-    <Compile Include="Entities\IPackageLookupRepository.cs" />
-    <Compile Include="Entities\IRolePackage.cs" />
-    <Compile Include="Entities\IRolePackageRepository.cs" />
-    <Compile Include="Entities\IUserPackage.cs" />
-    <Compile Include="Entities\IUserPackageRepository.cs" />
-    <Compile Include="Entities\Criteria.cs" />
-    <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\CustomerContract.cs" />
-    <Compile Include="Entities\CustomerUser.cs" />
-    <Compile Include="DataFields\WriteModels\DataField.cs" />
-    <Compile Include="Entities\DataSet.cs" />
-    <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
-    <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\GroupPackage.cs" />
-    <Compile Include="Entities\GroupPermission.cs" />
-    <Compile Include="Entities\Package.cs" />
+    <Compile Include="CommandHandlers\CreateDataProviderHandler.cs" />
+    <Compile Include="CommandHandlers\CreateDataProviderRevisionHandler.cs" />
+    <Compile Include="EventHandlers\DataProviderCreatedHandler.cs" />
+    <Compile Include="CommandHandlers\RenameDataProviderHandler.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="Models\ReadDataProvider.cs" />
     <Compile Include="PackageLookup.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\RolePackage.cs" />
-    <Compile Include="Entities\RolePermission.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserGroup.cs" />
-    <Compile Include="Entities\UserPackage.cs" />
-    <Compile Include="Entities\UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DataFields\ReadModels\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Common\PackageBuilder.Common.csproj">
-      <Project>{e1860260-caa8-497b-a014-bddfab19665d}</Project>
-      <Name>PackageBuilder.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Core.csproj">
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
-      <Name>PackageBuilder.Core</Name>
+      <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
+      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
+      <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

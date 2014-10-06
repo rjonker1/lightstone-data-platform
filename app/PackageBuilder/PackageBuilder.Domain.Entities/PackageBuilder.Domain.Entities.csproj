@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{622131D3-B807-49A9-A41E-5309D3E14A37}</ProjectGuid>
+    <ProjectGuid>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PackageBuilder.Infrastructure</RootNamespace>
-    <AssemblyName>PackageBuilder.Infrastructure</AssemblyName>
+    <RootNamespace>PackageBuilder.Domain.Entities</RootNamespace>
+    <AssemblyName>PackageBuilder.Domain.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -32,29 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
     </Reference>
-    <Reference Include="NEventStore.Persistence.RavenDB">
-      <HintPath>..\..\packages\NEventStore.Persistence.RavenDB.5.0.0.86\lib\net40\NEventStore.Persistence.RavenDB.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Client.Lightweight.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -63,24 +47,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Action.cs" />
+    <Compile Include="Contract.cs" />
+    <Compile Include="ContractPackage.cs" />
+    <Compile Include="Criteria.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="CustomerContract.cs" />
+    <Compile Include="CustomerUser.cs" />
+    <Compile Include="DataFields\Commands\CreateDataField.cs" />
+    <Compile Include="DataFields\Commands\RenameDataField.cs" />
+    <Compile Include="DataFields\Events\DataFieldCreated.cs" />
+    <Compile Include="DataFields\Events\DataFieldRenamed.cs" />
+    <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
+    <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
+    <Compile Include="DataProviders\Commands\CreateDataProviderRevision.cs" />
+    <Compile Include="DataProviders\Commands\RenameDataProvider.cs" />
+    <Compile Include="DataProviders\Commands\UpdateReadModel.cs" />
+    <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
+    <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
+    <Compile Include="DataProviders\Events\DataProviderRevisionCreated.cs" />
+    <Compile Include="DataProviders\Events\ReadModelUpdated.cs" />
+    <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
+    <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
+    <Compile Include="DataSet.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="GroupPackage.cs" />
+    <Compile Include="GroupPermission.cs" />
+    <Compile Include="IActionRepository.cs" />
+    <Compile Include="IContractPackage.cs" />
+    <Compile Include="IContractPackageRepository.cs" />
+    <Compile Include="IContractRepository.cs" />
+    <Compile Include="ICustomerRepository.cs" />
+    <Compile Include="IGroupPackage.cs" />
+    <Compile Include="IGroupPackageRepository.cs" />
+    <Compile Include="IPackageAccessControl.cs" />
+    <Compile Include="IPackageLookupRepository.cs" />
+    <Compile Include="IRolePackage.cs" />
+    <Compile Include="IRolePackageRepository.cs" />
+    <Compile Include="IUserPackage.cs" />
+    <Compile Include="IUserPackageRepository.cs" />
+    <Compile Include="Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RavenDB\Indexes\IndexDataProvidersByName.cs" />
-    <Compile Include="RavenDB\Indexes\IndexAllDataProviders.cs" />
-    <Compile Include="RavenDB\Indexes\TestingIndex.cs" />
-    <Compile Include="RavenDB\IndexInstaller.cs" />
+    <Compile Include="DataFields\WriteModels\DataField.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="RolePackage.cs" />
+    <Compile Include="RolePermission.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserGroup.cs" />
+    <Compile Include="UserPackage.cs" />
+    <Compile Include="UserRole.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
+      <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
-      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
-      <Name>PackageBuilder.Domain.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
-      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
-      <Name>PackageBuilder.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
