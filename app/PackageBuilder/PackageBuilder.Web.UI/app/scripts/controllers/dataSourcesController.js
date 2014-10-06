@@ -8,7 +8,7 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsCtrl', ['$scope', 'GetDataProviders', function ($scope, GetDataProviders) {
+  .controller('dsCtrl', ['$scope', '$location', 'GetDataProviders', function ($scope, $location, GetDataProviders) {
     
 
     GetDataProviders.query(function(data){
@@ -54,7 +54,7 @@ angular.module('packageBuilderwebuiApp')
 
     $scope.notify = function(row) {
 
-        alert('You clicked on Item ID: '+ row.entity.id);
+        $location.path('/data-source-detail/'+row.entity.id);
     }
 
     $scope.selectedDatasource = [];
@@ -68,6 +68,10 @@ angular.module('packageBuilderwebuiApp')
         showGroupPanel: true,
         columnDefs: [
             {field: 'name', displayName: 'Name'},
+            {field: 'description', displayName: 'Description'},
+            {field: 'owner', displayName: 'Owner'},
+            {field: 'created', displayName: 'Created'},
+            {field: 'edited', displayName: 'Edited'},
             {field: 'version', displayName: 'Version'},
             {displayName: '', cellTemplate: '<input type="button" name="edit" ng-click="notify(row)" value="Edit" />'}
         ]
