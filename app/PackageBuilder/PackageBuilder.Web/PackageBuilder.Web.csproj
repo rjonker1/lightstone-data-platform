@@ -245,13 +245,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Common\PackageBuilder.Common.csproj">
-      <Project>{e1860260-caa8-497b-a014-bddfab19665d}</Project>
-      <Name>PackageBuilder.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Core.csproj">
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
-      <Name>PackageBuilder.Core</Name>
+      <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{C075E78C-8051-4CFC-A0F5-5C61BB108234}</Project>

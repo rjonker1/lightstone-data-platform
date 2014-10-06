@@ -1,0 +1,26 @@
+using System;
+using CommonDomain.Persistence;
+using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Domain.Entities.DataProviders.Commands;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.MessageHandling;
+
+namespace PackageBuilder.Domain.CommandHandlers
+{
+    public class RenameDataProviderHandler : AbstractMessageHandler<RenameDataProvider>
+    {
+        private readonly INEventStoreRepository<DataProvider> _repository;
+
+        public RenameDataProviderHandler(INEventStoreRepository<DataProvider> repository)
+        {
+            _repository = repository;
+        }
+
+        public override void Handle(RenameDataProvider command)
+        {
+            var entity = _repository.GetById<DataProvider>(command.Id);
+            entity.ChangeName(command.NewName);
+            _repository.Save(typeof(DataProvider).Name, entity, Guid.NewGuid());
+        }
+    }
+}

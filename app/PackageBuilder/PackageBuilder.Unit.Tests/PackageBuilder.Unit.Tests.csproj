@@ -122,6 +122,10 @@
       <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
       <Name>PackageBuilder.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
+      <Project>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</Project>
+      <Name>PackageBuilder.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{C075E78C-8051-4CFC-A0F5-5C61BB108234}</Project>
       <Name>PackageBuilder.Domain</Name>

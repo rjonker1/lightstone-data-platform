@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using PackageBuilder.Domain.DataProviders.ReadModels;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
