@@ -1,5 +1,20 @@
+
+<style type="text/css">
+	
+	.container {
+		padding-left: 0px;
+	}
+
+	.gridStyle {
+    	 
+    	height: 300px
+	}
+</style>
+
 <div class="container">
 
-		<div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+	{{selectedDatasource}}
+
+		<div id="grid1" ng-grid="gridOptions" class="gridStyle"></div>
 		
 </div>

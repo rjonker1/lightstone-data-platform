@@ -11,7 +11,7 @@ providerServices.factory('GetAPI', ['$resource',
 
 providerServices.factory('GetDataProviders', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider', {}, {
+		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider', {}, {
 			query: { method: 'GET', isObject:true }
 		});
 	}]);
