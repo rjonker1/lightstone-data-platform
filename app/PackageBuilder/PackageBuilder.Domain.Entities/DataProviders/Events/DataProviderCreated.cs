@@ -24,7 +24,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
             State = null;
             CostOfSale = 0.00;
 
-            Created = DateTime.Today;
+            Created = DateTime.Now;
             Owner = null;
             DataFields = dataFields;
         }

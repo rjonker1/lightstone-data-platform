@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using PackageBuilder.Domain.MessageHandling;
 using PackageBuilder.Domain.Models;
@@ -22,14 +18,17 @@ namespace PackageBuilder.Domain.EventHandlers
 
         public override void Handle(DataProviderUpdated command)
         {
-            var read = new ReadDataProvider
+            var update = new ReadDataProvider
             {
-                Id = new Guid(),
+                Id = command.Id,
+                DataProviderId = command.DataProvierId,
                 Name = command.Name,
-                Version = command.Version
+                Version = command.Version,
+                Created = command.Created,
+                Edited = command.Edited
             };
 
-            _session.Store(read);
+            _session.Store(update);
             _session.SaveChanges();
         }
 

@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.CommandHandlers
         public override void Handle(UpdateDataProvider command)
         {
             var entity = _repository.GetById(command.Id);
-            entity.CreateDataProviderRevision(command.Id, command.Name, command.Owner, command.Created, command.Edited, command.Version, command.DataProviderType, command.DataFields);
+            entity.CreateDataProviderRevision(command.Id, command.DataProviderId, command.Name, command.Owner, command.Created, command.Edited, command.Version, command.DataProviderType, command.DataFields);
             _repository.Save(entity, Guid.NewGuid());
         }
     }
