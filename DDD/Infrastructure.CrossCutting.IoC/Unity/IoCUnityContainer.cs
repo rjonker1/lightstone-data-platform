@@ -11,11 +11,11 @@ using LightstoneApp.Domain.MainModule.Orders;
 using LightstoneApp.Domain.MainModule.Products;
 using LightstoneApp.Infrastructure.CrossCutting.IoC.Resources;
 using LightstoneApp.Infrastructure.CrossCutting.IoC.Unity.LifetimeManagers;
-using LightstoneApp.Infrastructure.CrossCutting.Logging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
 using LightstoneApp.Infrastructure.Data.MainModule.Repositories;
 using LightstoneApp.Infrastructure.Data.MainModule.UnitOfWork;
 using Microsoft.Practices.Unity;
+using ITraceManager = LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.IoC.Unity
 {
@@ -89,7 +89,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.IoC.Unity
             container.RegisterType<IBankTransferDomainService, BankTransferDomainService>(new TransientLifetimeManager());
 
 
-            //Register crosscuting mappings
+            //Register crosscutting mappings
             container.RegisterType<ITraceManager, TraceManager>(new TransientLifetimeManager());
         }
 

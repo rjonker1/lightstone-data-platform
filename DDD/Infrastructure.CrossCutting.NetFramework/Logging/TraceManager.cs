@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Security;
 using System.Security.Permissions;
-using LightstoneApp.Infrastructure.CrossCutting.Logging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Resources;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
@@ -12,7 +11,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
     ///     Trace helper for application's logging
     /// </summary>
     public sealed class TraceManager
-        : ITraceManager
+        : ITraceManager, CrossCutting.Logging.ITraceManager
     {
         #region Members
 
@@ -62,10 +61,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         #region Public Methods
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         /// <param name="operationName">
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </param>
         [SuppressMessage("Microsoft.Security",
             "CA2135:SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsFxCopRule"),
@@ -80,7 +79,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         [SuppressMessage("Microsoft.Security",
             "CA2135:SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsFxCopRule"),
@@ -98,7 +97,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         public void TraceStart()
         {
@@ -106,7 +105,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         public void TraceStop()
         {
@@ -114,10 +113,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         /// <param name="message">
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </param>
         public void TraceInfo(string message)
         {
@@ -128,10 +127,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         /// <param name="message">
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </param>
         public void TraceWarning(string message)
         {
@@ -142,10 +141,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         /// <param name="message">
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </param>
         public void TraceError(string message)
         {
@@ -156,10 +155,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging
         }
 
         /// <summary>
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </summary>
         /// <param name="message">
-        ///     <see cref="LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager" />
+        ///     <see cref="ITraceManager" />
         /// </param>
         public void TraceCritical(string message)
         {

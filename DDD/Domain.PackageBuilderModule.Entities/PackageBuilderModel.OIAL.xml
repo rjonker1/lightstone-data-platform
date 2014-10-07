@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<oil:model name="PackageBuilderModel" sourceRef="_2BA90104-C22B-4AA7-9EBA-1FB1F19DA2A3" xmlns:oil="http://schemas.orm.net/OIAL" xmlns:ormdt="http://schemas.orm.net/ORMDataTypes">
+	<oil:informationTypeFormats>
+		<!--These may change in the future once they are integrated into the core ORM model file.-->
+		<ormdt:identity name="Package_Id" />
+		<ormdt:string name="Name" maxLength="256" />
+		<ormdt:string name="Description" maxLength="512" />
+		<ormdt:string name="Owner" maxLength="512" />
+		<!--WARNING: ORM2 does not yet support temporal data types, but you tried to transform a model that used an ORM1 temporal data type. This data type has been converted to an arbitrary-precision integer that measures the number of ticks (100 nanosecond increments) since 0000-01-01T00:00:00.-->
+		<ormdt:decimalNumber name="Created" fractionDigits="0" />
+		<!--WARNING: ORM2 does not yet support temporal data types, but you tried to transform a model that used an ORM1 temporal data type. This data type has been converted to an arbitrary-precision integer that measures the number of ticks (100 nanosecond increments) since 0000-01-01T00:00:00.-->
+		<ormdt:decimalNumber name="Edited" fractionDigits="0" />
+		<ormdt:string name="Version" maxLength="20" />
+		<ormdt:boolean name="Published" />
+		<ormdt:string name="State" maxLength="32">
+			<ormdt:enumeration value="Under construction" />
+			<ormdt:enumeration value="Published" />
+			<ormdt:enumeration value="Expired" />
+		</ormdt:string>
+		<ormdt:string name="Industry" maxLength="32">
+			<ormdt:enumeration value="Banking" />
+			<ormdt:enumeration value="Consumer" />
+			<ormdt:enumeration value="Dealer" />
+			<ormdt:enumeration value="Government" />
+			<ormdt:enumeration value="Insurance" />
+			<ormdt:enumeration value="Other" />
+		</ormdt:string>
+		<!--WARNING: ORM2 does not yet support temporal data types, but you tried to transform a model that used an ORM1 temporal data type. This data type has been converted to an arbitrary-precision integer that measures the number of ticks (100 nanosecond increments) since 0000-01-01T00:00:00.-->
+		<ormdt:decimalNumber name="RevisionDate" fractionDigits="0" />
+		<ormdt:identity name="DataSource_Id" />
+		<ormdt:decimalNumber name="CostOfSale" />
+		<ormdt:identity name="DateField_Id" />
+		<ormdt:string name="Label" maxLength="32" />
+		<ormdt:string name="Definition" maxLength="255" />
+		<ormdt:boolean name="Selected" />
+		<ormdt:identity name="FileAttachment_Id" />
+		<ormdt:string name="SourceURL" maxLength="512" />
+	</oil:informationTypeFormats>
+	<oil:conceptType name="Owner" sourceRef="_61B6B218-DC1E-4EB7-BAD8-523972741DE1">
+		<oil:informationType name="OwnerValue" mandatory="alethic" sourceRef="_61B6B218-DC1E-4EB7-BAD8-523972741DE1" formatRef="Owner">
+			<oil:singleRoleUniquenessConstraint name="OwnerValue_Unique" modality="alethic" sourceRef="_61B6B218-DC1E-4EB7-BAD8-523972741DE1" isPreferred="true" />
+		</oil:informationType>
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint2".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint11".-->
+	</oil:conceptType>
+	<oil:conceptType name="State" sourceRef="_27DAC889-4758-489A-A4D7-F6B553AA95EC">
+		<oil:informationType name="StateValue" mandatory="alethic" sourceRef="_27DAC889-4758-489A-A4D7-F6B553AA95EC" formatRef="State">
+			<oil:singleRoleUniquenessConstraint name="StateValue_Unique" modality="alethic" sourceRef="_27DAC889-4758-489A-A4D7-F6B553AA95EC" isPreferred="true" />
+		</oil:informationType>
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint2".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint11".-->
+	</oil:conceptType>
+	<oil:conceptType name="Industry" sourceRef="_1678F474-43CC-4D81-AE8D-5D57FBC3AE0D">
+		<oil:informationType name="IndustryValue" mandatory="alethic" sourceRef="_1678F474-43CC-4D81-AE8D-5D57FBC3AE0D" formatRef="Industry">
+			<oil:singleRoleUniquenessConstraint name="IndustryValue_Unique" modality="alethic" sourceRef="_1678F474-43CC-4D81-AE8D-5D57FBC3AE0D" isPreferred="true" />
+		</oil:informationType>
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint2".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint8".-->
+	</oil:conceptType>
+	<oil:conceptType name="Package" sourceRef="_18A322D6-2AC5-4548-8D92-361EF8A01DDE">
+		<oil:informationType name="Package_Id" formatRef="Package_Id" mandatory="alethic" sourceRef="_6522814C-F5D1-4B71-A6FF-1CA725E7BD8F" sourceRoleRef="_9D0A71CC-40E1-4B13-BDF2-A2FBB9345D84">
+			<oil:singleRoleUniquenessConstraint name="InternalUniquenessConstraint1" sourceRef="_08B0017E-30C4-456B-8EBD-7F7DBD5DCAA5" modality="alethic" isPreferred="true" />
+		</oil:informationType>
+		<oil:informationType name="Name" formatRef="Name" mandatory="false" sourceRef="_B7467C2E-C408-468A-B670-63F6C381F94D" sourceRoleRef="_16D49963-C772-40F9-8C7E-9CCD8A57DFBC" />
+		<oil:informationType name="Description" formatRef="Description" mandatory="false" sourceRef="_DE89543C-A8D3-4A27-AAB6-389013DA0C0E" sourceRoleRef="_FC8D8023-008C-4D83-8B90-8FCC625E418F" />
+		<oil:conceptTypeRef name="PackageOwner" target="Owner" oppositeName="Package" mandatory="false" sourceRoleRef="_5DCB4779-2552-49BB-A7C2-D70421E12717" />
+		<oil:informationType name="Created" formatRef="Created" mandatory="false" sourceRef="_21C1CFD9-F521-4608-940C-760C869F979D" sourceRoleRef="_571E5ED6-D828-40A4-A320-511EB6E1653F" />
+		<oil:informationType name="Edited" formatRef="Edited" mandatory="false" sourceRef="_DF95E79D-79E1-47AE-80E7-657F632B846C" sourceRoleRef="_E9684B2A-D9EF-43FF-A80F-08759DB300FC" />
+		<oil:informationType name="Version" formatRef="Version" mandatory="false" sourceRef="_35338AB4-15B4-47B2-BA97-8FB404339D50" sourceRoleRef="_B1D725CE-C798-4C1D-AC03-9B704C4D4819" />
+		<oil:informationType name="Published" formatRef="Published" mandatory="false" sourceRef="_B9561B0D-557C-44E6-A4E6-0E0174451250" sourceRoleRef="_ACFA3F52-3F00-4DA8-B22D-73E3A1F2A29A" />
+		<oil:conceptTypeRef name="PackageState" target="State" oppositeName="Package" mandatory="false" sourceRoleRef="_179D743B-2B4A-45F6-A973-C1037E3752F4" />
+		<oil:conceptTypeRef name="PackageIndustry" target="Industry" oppositeName="Package" mandatory="false" sourceRoleRef="_C83B91B7-C5AE-4540-A3BA-0A3CEBD0EBB1" />
+		<oil:informationType name="RevisionDate" formatRef="RevisionDate" mandatory="false" sourceRef="_B1B64D27-61A7-46D0-8135-3449ED722E6C" sourceRoleRef="_D8ADCBB3-0D43-4406-953B-2135180B93CF" />
+		<oil:informationType name="CostOfSale" formatRef="CostOfSale" mandatory="false" sourceRef="_393CB7A8-D4D8-4354-9B1A-09F5705BDDFC" sourceRoleRef="_E4B4CB45-479E-4696-A11F-E9217F3653AA" />
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint6".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint7".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint5".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint11".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint12".-->
+	</oil:conceptType>
+	<oil:conceptType name="DataSource" sourceRef="_00EEDF51-594E-4E45-8E73-823E5D2FD4DD">
+		<oil:informationType name="DataSource_Id" formatRef="DataSource_Id" mandatory="alethic" sourceRef="_E23A2BBE-A7FD-4AD7-8097-7A5DC9123543" sourceRoleRef="_D1095A8F-02D4-4DCE-ABA5-371BAC72D019">
+			<oil:singleRoleUniquenessConstraint name="InternalUniquenessConstraint16" sourceRef="_9AD26F85-D097-48CE-B25C-99C2DE6B098D" modality="alethic" isPreferred="true" />
+		</oil:informationType>
+		<oil:conceptTypeRef name="Package" target="Package" oppositeName="DataSource" mandatory="false" sourceRoleRef="_3E52BB40-1391-43EC-85C9-6F6583E6801B" />
+		<oil:informationType name="Name" formatRef="Name" mandatory="false" sourceRef="_CF0F1C48-9E21-4010-8472-607F5D3A4FA3" sourceRoleRef="_B771BF90-17E1-4530-90B1-33EFB25C9238" />
+		<oil:informationType name="Description" formatRef="Description" mandatory="false" sourceRef="_2077105F-A898-4F63-BA6D-B1D0A9629168" sourceRoleRef="_8D9C44A2-82A6-404D-ADF1-9C7E4C7FCD4F" />
+		<oil:conceptTypeRef name="DataSourceOwner" target="Owner" oppositeName="DataSource" mandatory="false" sourceRoleRef="_074CB806-2B22-47B8-AC44-34C3EEBBA4DB" />
+		<oil:informationType name="Created" formatRef="Created" mandatory="false" sourceRef="_9E0F7AF3-05FF-4B8D-8E39-0140A6728045" sourceRoleRef="_307ADC32-77DB-40B6-80B9-C999B23DB01C" />
+		<oil:informationType name="Edited" formatRef="Edited" mandatory="false" sourceRef="_C2000083-F1E0-4F36-9769-E997318C3488" sourceRoleRef="_F6239418-DC19-4925-8B05-7542F14C3736" />
+		<oil:informationType name="Version" formatRef="Version" mandatory="false" sourceRef="_27EAEA5F-602A-40CD-A0F1-E253E6E12808" sourceRoleRef="_F7DB7F66-70E7-4036-849A-B2FAFF562FEF" />
+		<oil:informationType name="CostOfSale" formatRef="CostOfSale" mandatory="false" sourceRef="_654C6C85-FEDF-4CAC-824F-689EE6F85D81" sourceRoleRef="_7893B0E9-E8BC-4BBD-A5C3-4884C493E966" />
+		<oil:informationType name="RevisionDate" formatRef="RevisionDate" mandatory="false" sourceRef="_7F6563EC-8C02-436B-9138-B59B7EC30E91" sourceRoleRef="_366BD8FA-79F9-491C-979E-A77CE95CF0E8" />
+		<oil:informationType name="SourceURL" formatRef="SourceURL" mandatory="false" sourceRef="_9FCD6A81-471D-4794-8A68-AD3653CE41C6" sourceRoleRef="_D52612A8-594D-49A9-97C5-6B114C2BD119" />
+		<oil:conceptTypeRef name="DataSourceState" target="State" oppositeName="DataSource" mandatory="false" sourceRoleRef="_BD1A25A3-3903-4155-9E63-57A879E16624" />
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint2".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint6".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint7".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint5".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint12".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint8".-->
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint16".-->
+	</oil:conceptType>
+	<oil:conceptType name="DateField" sourceRef="_6DFF898F-A874-4509-9111-AF564EBE517E">
+		<oil:conceptTypeRef name="DataSource" target="DataSource" oppositeName="DateField" mandatory="false" sourceRoleRef="_04260562-FAC0-42AE-9CB9-8BE28310213B" />
+		<oil:informationType name="DateField_Id" formatRef="DateField_Id" mandatory="alethic" sourceRef="_3E6B678B-3C53-42D5-90E7-7FBBD2EEE266" sourceRoleRef="_55CFCBB6-A1F7-479B-95D7-F844691FACC2">
+			<oil:singleRoleUniquenessConstraint name="InternalUniquenessConstraint29" sourceRef="_22D98B63-7F58-45B9-9861-B74564D40792" modality="alethic" isPreferred="true" />
+		</oil:informationType>
+		<oil:conceptTypeRef name="Industry" target="Industry" oppositeName="DateField" mandatory="false" sourceRoleRef="_FE85959A-05F4-4287-9FA4-297C85F2F7C9" />
+		<oil:informationType name="Label" formatRef="Label" mandatory="false" sourceRef="_F770CCAD-C36D-4654-825F-3FAF2E48CA1B" sourceRoleRef="_34BB1855-668B-4B49-9551-D6AAFEEB5E06" />
+		<oil:informationType name="Definition" formatRef="Definition" mandatory="false" sourceRef="_65A5E128-A092-4C50-BDBE-421E0EEF96F0" sourceRoleRef="_4DDFC094-AED0-4651-B5D0-626BE00D769F" />
+		<oil:informationType name="Selected" formatRef="Selected" mandatory="false" sourceRef="_5399977F-1E7F-42B6-AB1C-039C3A431F12" sourceRoleRef="_E719F1B6-B5AB-4508-AE94-D392F8C595CA" />
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint11".-->
+	</oil:conceptType>
+	<oil:conceptType name="FileAttachment" sourceRef="_B8C669B2-6467-4C01-BDD4-E36D72B94D34">
+		<oil:conceptTypeRef name="DataSource" target="DataSource" oppositeName="FileAttachment" mandatory="false" sourceRoleRef="_2FDAD0D8-AB45-45CC-AC6D-2E25CDAC04E0" />
+		<oil:informationType name="FileAttachment_Id" formatRef="FileAttachment_Id" mandatory="alethic" sourceRef="_92D8F14C-284F-4F2E-9E58-0D3BB58C796B" sourceRoleRef="_7DA0A7B7-C742-49FE-B1C3-5D20EF052207">
+			<oil:singleRoleUniquenessConstraint name="InternalUniquenessConstraint36" sourceRef="_027D40DD-E513-4211-ACE9-E1BA8552F7B3" modality="alethic" isPreferred="true" />
+		</oil:informationType>
+		<oil:informationType name="FileName" formatRef="Name" mandatory="false" sourceRef="_F9460DBA-4A61-4DF9-AB38-DC08DE570A58" sourceRoleRef="_712F515D-14DD-45A1-8BA2-86769226C27A" />
+		<!--WARNING: There once was an external constraint here. There isn't any more. It was of type "MandatoryConstraint", and named "ImpliedMandatoryConstraint11".-->
+	</oil:conceptType>
+</oil:model>

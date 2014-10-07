@@ -7,10 +7,13 @@
     <ProjectGuid>{380457ED-05F1-4901-B52C-518CCDF24F51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.PackageBuilderModule.Entities</RootNamespace>
-    <AssemblyName>Domain.PackageBuilderModule.Entities</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>LightstoneApp.Domain.PackageBuilderModule.Entities</RootNamespace>
+    <AssemblyName>LightstoneApp.Domain.PackageBuilderModule.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,7 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,10 +45,102 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DataSource.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DateField.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileAttachment.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Industry.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Owner.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Package.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PackageBuilderModel.CoRef._ORMCustomToolReport.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.CoRef.orm</DependentUpon>
+    </Compile>
+    <Compile Include="PackageModuleContext.Types.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State.cs">
+      <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="PackageModuleContext.Types.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PackageModuleContext.Types.cs</LastGenOutput>
+    </None>
+    <None Include="PackageBuilderModel.orm">
+      <Generator>ORMCustomTool</Generator>
+      <CustomToolNamespace>Domain.PackageBuilderModule.Entities</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup Condition="Exists('PackageBuilderModel.orm')">
+    <None Include="PackageBuilderModel.CoRef.orm">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>CoRefORM</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.DCIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>ConceptualDBtoDCL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.DDIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>DCILtoDDIL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.OIAL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>ORMtoOIAL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.SQLServer.sql">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>DDILtoSQLServer</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.xsd">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>OIALtoXSD</ORMGenerator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
+      <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
+      <Name>Domain.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
+      <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
+      <Name>Domain.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

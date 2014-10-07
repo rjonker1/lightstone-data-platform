@@ -7,10 +7,11 @@
     <ProjectGuid>{D43E9CD1-CAD1-42B1-8F0F-285932A65837}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.PackageBuilderModule</RootNamespace>
-    <AssemblyName>Domain.PackageBuilderModule</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>LightstoneApp.Domain.PackageBuilderModule</RootNamespace>
+    <AssemblyName>LightstoneApp.Domain.PackageBuilderModule</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,9 @@
       <Project>{380457ed-05f1-4901-b52c-518ccdf24f51}</Project>
       <Name>Domain.PackageBuilderModule.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Package\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
