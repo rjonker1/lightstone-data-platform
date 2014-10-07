@@ -10,7 +10,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
     ///   Base class for entities
     /// </summary>
     [DataContract(IsReference = true)]
-    public abstract class Entity : INotifyPropertyChanged
+    public abstract class Entity : Aggregate, INotifyPropertyChanged
     {
         #region Fields
 
@@ -45,11 +45,12 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         /// <summary>
         /// Generate identity for this entity
         /// </summary>
-        public void GenerateNewIdentity()
+        public  void GenerateNewIdentity()
         {
             if (IsTransient())
                 Id = IdentityGenerator.NewSequentialGuid();
         }
+
 
         /// <summary>
         /// Change current identity for a new non transient identity

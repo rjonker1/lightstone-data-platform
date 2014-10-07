@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Commands\CreateNewPackageCommand.cs" />
+    <Compile Include="Events\PackageCreated.cs" />
+    <Compile Include="Handlers\CreateNewPackageCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +59,10 @@
     <ProjectReference Include="..\Domain.PackageBuilderModule.Entities\Domain.PackageBuilderModule.Entities.csproj">
       <Project>{380457ed-05f1-4901-b52c-518ccdf24f51}</Project>
       <Name>Domain.PackageBuilderModule.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.NetFramework\Infrastructure.CrossCutting.NetFramework.csproj">
+      <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
+      <Name>Infrastructure.CrossCutting.NetFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

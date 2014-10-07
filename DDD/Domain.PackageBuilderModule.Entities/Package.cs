@@ -14,7 +14,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.Serialization;
-
+using LightstoneApp.Domain.PackageBuilderModule.Events;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 #pragma warning disable 1591 // this is for supress no xml comments in public members warnings 
 
 using LightstoneApp.Domain.Core.Entities;
@@ -30,7 +31,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
     #if !SILVERLIGHT
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage()]
     #endif
-    public partial class Package: IObjectWithChangeTracker, INotifyPropertyChanged
+    public partial class Package: Entity,  IObjectWithChangeTracker, INotifyPropertyChanged
     {
         #region Primitive Properties
     
@@ -602,5 +603,35 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
         #endregion
 
+
+        Package SetupCompleted()
+        {
+           
+            this.RaiseEvent(new PackageCreated(this.Id.ToString(), this.Name, this.Version));
+
+            return this;
+        }
+
+        public class Factory
+        {
+            public Package CreatePackage(string name, string version)
+            {
+                var package = new Package()
+                {
+                    //Id = "people/" + Guid.NewGuid().ToString(),
+                    Id = IdentityGenerator.NewSequentialGuid(),
+                    Name =  name,
+                    Version = version
+                };
+
+                package.SetupCompleted();
+
+                return package;
+            }
+        }
+    }
+
+    internal class Events
+    {
     }
 }

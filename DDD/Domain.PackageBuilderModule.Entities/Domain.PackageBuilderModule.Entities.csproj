@@ -51,6 +51,7 @@
     <Compile Include="DateField.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
+    <Compile Include="Events\PackageCreated.cs" />
     <Compile Include="FileAttachment.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
@@ -131,6 +132,10 @@
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
       <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
       <Name>Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.NetFramework\Infrastructure.CrossCutting.NetFramework.csproj">
+      <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
+      <Name>Infrastructure.CrossCutting.NetFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
