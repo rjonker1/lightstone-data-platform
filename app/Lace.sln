@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{36AD2E0E-7B5A-4629-9408-4691B5BD0C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Acceptance.Tests", "Lace\Lace.Acceptance.Tests\Lace.Acceptance.Tests.csproj", "{A5964AD4-ED97-440D-9E96-C6A51916B612}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Acceptance.Tests", "Lace\Tests\Lace.Acceptance.Tests\Lace.Acceptance.Tests.csproj", "{A5964AD4-ED97-440D-9E96-C6A51916B612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Unit.Tests", "Lace\Lace.Unit.Tests\Lace.Unit.Tests.csproj", "{5890ABA1-3E35-4B08-BA99-1EF0C2B5BA82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Unit.Tests", "Lace\Tests\Lace.Unit.Tests\Lace.Unit.Tests.csproj", "{5890ABA1-3E35-4B08-BA99-1EF0C2B5BA82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Test.Helper", "Lace\Lace.Test.Helper\Lace.Test.Helper.csproj", "{4644B15B-F4FD-4D93-A32E-313F4ACDB71B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Test.Helper", "Lace\Tests\Lace.Test.Helper\Lace.Test.Helper.csproj", "{4644B15B-F4FD-4D93-A32E-313F4ACDB71B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Domain", "1.Domain", "{2CE8A9CE-27F7-4035-9E56-4074EC4F6256}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2CE8A9CE-27F7-4035-9E56-4074EC4F6256}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Shared Infrastructure", "2.Shared Infrastructure", "{C6E762ED-2030-40CF-A694-8F6C44800226}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Infrastructure", "Shared Infrastructure", "{C6E762ED-2030-40CF-A694-8F6C44800226}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Distributed Service", "3.Distributed Service", "{4D3724DA-EBF7-4722-91DE-22898570BF2D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Distributed Service", "Distributed Service", "{4D3724DA-EBF7-4722-91DE-22898570BF2D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{87DF0D42-4BA9-42DD-8A56-91238364B357}"
 EndProject
