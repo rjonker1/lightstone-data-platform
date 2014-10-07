@@ -8,16 +8,17 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$scope', 'GetAPI', 'PostAPI', function ($rootScope, $routeParams, $route, $scope, GetAPI, PostAPI) {
-    
-    
-    console.log($routeParams.id);
-    console.log($routeParams.type);
+  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$location', '$scope', 'GetAPI', 'PostAPI', function ($rootScope, $routeParams, $location, $route, $scope, GetAPI, PostAPI) {
     
 
     $scope.dataProvider = {};
 
-    GetAPI.get({ id: $routeParams.id }, function(data){
+    $scope.alerts = [
+
+            { msg: 'Loading Data...' }
+    ];
+
+    GetAPI.get({ id: $routeParams.id, version: $routeParams.version }, function(data){
 
            var resp = data.response;
           
@@ -27,14 +28,23 @@ angular.module('packageBuilderwebuiApp')
               /*alert(''+res);*/
               if (resp.hasOwnProperty(res)) {
                                                 
-                  $scope.dataProvider = resp;
-                  $scope.message = "Data Loaded."
+                  $scope.dataProvider = resp;            
               }
-          }
+            }
+
+            $scope.alerts = [
+
+              { type: 'success', msg: 'Data loaded successfully !' }
+            ];
+
+            $scope.today();
 
       }, function(err){
 
-          alert('There was an issue contacting the API')
+          $scope.alerts = [
+
+            { type: 'danger', msg: 'Failed to communicate with webserver !' }
+          ];
       });
     
 
@@ -46,7 +56,11 @@ angular.module('packageBuilderwebuiApp')
 
         //var resp = data.msg;
          
-        $scope.message = "Data Provider was successfully saved";//+resp;
+        $scope.alerts = [
+
+              { type: 'success', msg: 'DataProvider: '+$scope.dataProvider.name+' saved successfully !' }
+            ];
+        $location.path('/data-sources');
 
       }, function(err){
 
@@ -55,23 +69,11 @@ angular.module('packageBuilderwebuiApp')
 
     }
 
-    /*$scope.loadDProvider = function() {
-      
-      $scope.test = GetAPI.query();
-
-    }*/
 
 
     $scope.today = function() {
 
-     // if($scope.dataProvider.date == null) {
-        $scope.dataProvider.date = new Date();
-      //} else {
-
-      //  $scope.dataProvider.date;
-     // }
-
-      
+        $scope.dataProvider.edited = new Date();    
     };
 
     $scope.clear = function () {
@@ -117,6 +119,11 @@ angular.module('packageBuilderwebuiApp')
     ];
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd-MM-yyyy', 'shortDate', 'yyyy-MM-ddTHH:mm:ss'];
-    $scope.format = $scope.formats[2];
+    $scope.format = $scope.formats[4];
+
+    $scope.updateAPIModel = function(data){
+
+        alert(data);
+    }
 
   }]);

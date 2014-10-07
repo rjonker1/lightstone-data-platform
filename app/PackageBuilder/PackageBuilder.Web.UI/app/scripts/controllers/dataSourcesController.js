@@ -9,6 +9,12 @@
  */
 angular.module('packageBuilderwebuiApp')
   .controller('dsCtrl', ['$scope', '$location', 'GetDataProviders', function ($scope, $location, GetDataProviders) {
+
+
+    $scope.alerts = [
+
+            { msg: 'Loading Data...' }
+    ];
     
 
     GetDataProviders.query(function(data){
@@ -18,49 +24,36 @@ angular.module('packageBuilderwebuiApp')
            for( var res in resp)
            {
 
-              /*alert(''+res);*/
               if (resp.hasOwnProperty(res)) {
-                                                
-                  $scope.test = resp;
-                  $scope.myData = resp;
+                                                              
+                  $scope.dSourcesData = resp;
                   $scope.message = "Data Loaded."
               }
           }
 
+          $scope.alerts = [
+
+            { type: 'success', msg: 'Data loaded successfully !' }
+          ];
+
     }, function(err){
 
-        alert("Error");
+        $scope.alerts = [
+
+            { type: 'danger', msg: 'Failed to communicate with webserver !' }
+        ];
+
     }); 
-  
-    /*$scope.myData = [
-                     {id: 'test-123', name: 'Kyle Hayhurst', age: 25, interest: 'Javascript'},
-                     {id: 'test-123', name: 'Jimmy Hampton', age: 25, interest: 'HTML'},
-                     {id: 'test-123', name: 'Tim Sweet', age: 27, interest: 'HTML'},
-                     {id: 'test-123', name: 'Jonathon Ricaurte', age: 29, interest: 'CSS'},
-                     {id: 'test-123', name: 'Brian Hann', age: 28, interest: 'PHP'},
-                     {id: 'test-123', name: 'Jimmy Hampton', age: 25, interest: 'HTML'},
-                     {id: 'test-123', name: 'Tim Sweet', age: 27, interest: 'HTML'},
-                     {id: 'test-123', name: 'Jonathon Ricaurte', age: 29, interest: 'CSS'},
-                     {id: 'test-123', name: 'Brian Hann', age: 28, interest: 'PHP'},
-                     {id: 'test-123', name: 'Jimmy Hampton', age: 25, interest: 'HTML'},
-                     {id: 'test-123', name: 'Tim Sweet', age: 27, interest: 'HTML'},
-                     {id: 'test-123', name: 'Jonathon Ricaurte', age: 29, interest: 'CSS'},
-                     {id: 'test-123', name: 'Brian Hann', age: 28, interest: 'PHP'},
-                     {id: 'test-123', name: 'Jimmy Hampton', age: 25, interest: 'HTML'},
-                     {id: 'test-123', name: 'Tim Sweet', age: 27, interest: 'HTML'},
-                     {id: 'test-123', name: 'Jonathon Ricaurte', age: 29, interest: 'CSS'},
-                     {id: 'test-123', name: 'Brian Hann', age: 28, interest: 'PHP'} 
-    ];*/
 
     $scope.notify = function(row) {
 
-        $location.path('/data-source-detail/'+row.entity.id);
+        $location.path('/data-source-detail/'+row.entity.dataProviderId+'/'+row.entity.version);
     }
 
     $scope.selectedDatasource = [];
 
     $scope.gridOptions = { 
-        data: 'myData',
+        data: 'dSourcesData',
         selectedItems: $scope.selectedDatasource,
         multiSelect: false,
         enablePaging: true,
