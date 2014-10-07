@@ -16,7 +16,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
-    public class CallIvidTitleHolderExternalSource : ICallTheSource
+    public class CallIvidTitleHolderExternalSource : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private TitleholderQueryResponse _ividTitleHolderResponse;
@@ -28,7 +28,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             _request = request;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             try
             {
@@ -86,14 +86,14 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             }
         }
 
-        private static void IvidTitleHolderResponseFailed(IProvideLaceResponse response)
+        private static void IvidTitleHolderResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
             response.IvidTitleHolderResponse = null;
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
         
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 

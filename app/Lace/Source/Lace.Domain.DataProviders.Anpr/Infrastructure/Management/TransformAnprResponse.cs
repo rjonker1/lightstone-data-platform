@@ -6,7 +6,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure.Management
 {
-    public class TransformAnprResponse : ITransform
+    public class TransformAnprResponse : ITransformResponseFromDataProvider
     {
         public bool Continue { get; private set; }
         public IProvideDataFromAnpr Result { get; private set; }

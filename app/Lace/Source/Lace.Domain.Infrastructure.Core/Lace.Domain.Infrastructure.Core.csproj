@@ -33,13 +33,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Contracts\IBootstrap.cs" />
     <Compile Include="Contracts\IBuildSourceChain.cs" />
     <Compile Include="Contracts\ICheckForDuplicateRequests.cs" />
     <Compile Include="Contracts\IEntryPoint.cs" />
     <Compile Include="Dto\LaceExternalSourceResponse.cs" />
     <Compile Include="Dto\LaceResponse.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">

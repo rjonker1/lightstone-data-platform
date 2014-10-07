@@ -5,23 +5,23 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public class ExecuteSourceBase
     {
-        public IExecuteTheSource Next { get; private set; }
-        public IExecuteTheSource FallBack { get; private set; }
+        public IExecuteTheDataProviderSource Next { get; private set; }
+        public IExecuteTheDataProviderSource FallBack { get; private set; }
 
-        public ExecuteSourceBase(IExecuteTheSource nextSource, IExecuteTheSource fallbackSource)
+        public ExecuteSourceBase(IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource)
         {
             Next = nextSource;
             FallBack = fallbackSource;
         }
 
-        public void CallNextSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallNextSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             if (Next == null) return;
 
             Next.CallSource(response, laceEvent);
         }
 
-        public void CallFallbackSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallFallbackSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             if (FallBack == null) return;
 

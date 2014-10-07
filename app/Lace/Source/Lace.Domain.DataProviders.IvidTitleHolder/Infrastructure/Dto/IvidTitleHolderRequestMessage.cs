@@ -7,11 +7,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
     public class IvidTitleHolderRequestMessage
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
       
-        public IvidTitleHolderRequestMessage(ILaceRequest request, IProvideLaceResponse response)
+        public IvidTitleHolderRequestMessage(ILaceRequest request, IProvideResponseFromLaceDataProviders response)
         {
             _request = request;
             _response = response;

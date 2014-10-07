@@ -3,18 +3,18 @@ using Common.Logging;
 using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Models;
+using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
-using Lace.Extensions;
+using Lace.Shared.Extensions;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 {
-    public class CallAudatexSource : ICallTheSource
+    public class CallAudatexSource : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private GetDataResult _audatexResponse;
@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             _request = request;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             }
         }
 
-        private static void AudatexResponseFailed(IProvideLaceResponse response)
+        private static void AudatexResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
             response.AudatexResponse = null;
             response.AudatexResponseHandled = new AudatexResponseHandled();
@@ -88,7 +88,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             };
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

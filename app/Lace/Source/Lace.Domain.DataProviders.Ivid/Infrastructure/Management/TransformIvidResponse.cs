@@ -4,7 +4,7 @@ using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
 {
-    public class TransformIvidResponse : ITransform
+    public class TransformIvidResponse : ITransformResponseFromDataProvider
     {
         public HpiStandardQueryResponse Message { get; private set; }
         public IvidResponse Result { get; private set; }

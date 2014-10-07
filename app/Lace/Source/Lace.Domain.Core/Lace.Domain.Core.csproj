@@ -40,6 +40,9 @@
   <ItemGroup>
     <None Include="Contracts\DataProviders\Specifics\IRespondWithCarModel.cs.old" />
     <None Include="Contracts\DataProviders\Specifics\IRespondWithVin12.cs.old" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Contracts\DataProviders\IProvideAccidentClaim.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromAnpr.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromAudatex.cs" />
@@ -71,7 +74,7 @@
     <Compile Include="Contracts\IBuildIvidResponse.cs" />
     <Compile Include="Contracts\ICheckIfAnprResponseWasSuccessful.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
-    <Compile Include="Contracts\IProvideLaceResponse.cs" />
+    <Compile Include="Contracts\IProvideResponseFromLaceDataProviders.cs" />
     <Compile Include="Contracts\IResponseProviderHandled.cs" />
     <Compile Include="Contracts\Requests\ILaceRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
@@ -95,8 +98,11 @@
     <Compile Include="Dto\JisResponseHandled.cs" />
     <Compile Include="Dto\LightstoneResponse.cs" />
     <Compile Include="Dto\LightstoneResponseHandled.cs" />
+    <Compile Include="Dto\RgtResponse.cs" />
+    <Compile Include="Dto\RgtResponseHandled.cs" />
+    <Compile Include="Dto\RgtVinResponse.cs" />
+    <Compile Include="Dto\RgtVinResponseHandled.cs" />
     <Compile Include="Dto\VehicleSpecificInformation.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

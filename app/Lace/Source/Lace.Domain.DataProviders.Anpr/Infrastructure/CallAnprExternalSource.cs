@@ -16,7 +16,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 {
-    public class CallAnprExternalSource : ICallTheSource
+    public class CallAnprExternalSource : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private const LaceEventSource Source = LaceEventSource.Anpr;
@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.RequestAggregation.AggregateId);
             if (transformer.Continue)
@@ -78,7 +78,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             response.AnprResponseHandled.HasBeenHandled();
         }
 
-        private static void AnprResponseFailed(IProvideLaceResponse response)
+        private static void AnprResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
             response.AnprResponse = null;
             response.AnprResponseHandled = new AnprResponseHandled();

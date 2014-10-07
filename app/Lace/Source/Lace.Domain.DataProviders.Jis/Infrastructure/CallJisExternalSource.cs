@@ -16,7 +16,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
 {
-    public class CallJisExternalSource : ICallTheSource
+    public class CallJisExternalSource : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private const LaceEventSource Source = LaceEventSource.Jis;
@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 
@@ -92,7 +92,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             response.JisResponseHandled.HasBeenHandled();
         }
 
-        private static void JisResponseFailed(IProvideLaceResponse response)
+        private static void JisResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
             response.JisResponse = null;
             response.JisResponseHandled = new JisResponseHandled();

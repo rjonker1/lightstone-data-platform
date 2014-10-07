@@ -15,7 +15,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
-    public class CallLightstoneExternalSource : ICallTheSource
+    public class CallLightstoneExternalSource : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _lightstoneRepositories = lightstoneRepositories;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformLightstoneResponse(_lightstoneMetrics, _lightstoneCarInformation);
 
@@ -62,7 +62,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             response.LightstoneResponseHandled.HasBeenHandled();
         }
 
-        private static void LightstoneResponseFailed(IProvideLaceResponse response)
+        private static void LightstoneResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
             response.LightstoneResponse = null;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();

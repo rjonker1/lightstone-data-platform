@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Common.Logging;
 using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -16,13 +17,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private readonly ILaceRequest _request;
 
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         private readonly ILaceEvent _laceEvent;
 
-        public Initialize(IProvideLaceResponse response, ILaceRequest request, ILaceEvent laceEvent,
+        public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ILaceEvent laceEvent,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;

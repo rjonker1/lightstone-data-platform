@@ -34,13 +34,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsData(_repositories.StatisticRepository());
-            _getMetrics = new MetricData(_repositories.MetricRepository());
-            _getBands = new BandData(_repositories.BandRepository());
-            _getMuncipalities = new MuncipalityData(_repositories.MuncipalityRepository());
-            _getMakes = new MakeData(_repositories.MakeRepository());
-            _getCarType = new CarTypeData(_repositories.CarTypeRepository());
-            _getSales = new SaleData(_repositories.SaleRepository());
+            _getStatistics = new StatisticsUnitOfWork(_repositories.StatisticRepository());
+            _getMetrics = new MetricUnitOfWork(_repositories.MetricRepository());
+            _getBands = new BandUnitOfWork(_repositories.BandRepository());
+            _getMuncipalities = new MuncipalityUnitOfWork(_repositories.MuncipalityRepository());
+            _getMakes = new MakeUnitOfWork(_repositories.MakeRepository());
+            _getCarType = new CarTypeUnitOfWork(_repositories.CarTypeRepository());
+            _getSales = new SaleUnitOfWork(_repositories.SaleRepository());
 
             return this;
         }

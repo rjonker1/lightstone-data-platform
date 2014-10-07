@@ -5,7 +5,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 {
     public class ConfigureAudatexRequestMessage
     {
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
         private AudatexMessageData _audatexMessageData;
 
         private bool CanContinue
@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
       
         private const string MessageType = "MSGTYPE_HISTORYCHECK";
 
-        public ConfigureAudatexRequestMessage(IProvideLaceResponse response)
+        public ConfigureAudatexRequestMessage(IProvideResponseFromLaceDataProviders response)
         {
             _response = response;
         }

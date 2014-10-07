@@ -1,8 +1,8 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using Lace.Domain.Core.Contracts;
 namespace Lace.Domain.Infrastructure.Core.Dto
 {
     public class LaceExternalSourceResponse
     {
-        public IProvideLaceResponse Response { get; set; }
+        public IProvideResponseFromLaceDataProviders Response { get; set; }
     }
 }

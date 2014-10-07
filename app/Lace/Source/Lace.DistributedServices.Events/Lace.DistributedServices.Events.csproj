@@ -72,12 +72,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Contracts\ILaceEvent.cs" />
     <Compile Include="Contracts\ILaceExternalServiceEvent.cs" />
     <Compile Include="Contracts\ILaceSourceHandledEvent.cs" />
     <Compile Include="Contracts\ILaceTransformEvent.cs" />
     <Compile Include="PublishMessageHandlers\PublishingLaceEventMessagesHandler.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

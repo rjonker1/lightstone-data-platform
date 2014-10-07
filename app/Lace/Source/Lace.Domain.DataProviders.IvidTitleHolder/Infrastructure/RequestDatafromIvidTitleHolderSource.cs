@@ -4,10 +4,10 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
-    public class RequestDatafromIvidTitleHolderSource : IRequestDataFromSource
+    public class RequestDatafromIvidTitleHolderSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideLaceResponse response,
-            ICallTheSource externalSource, ILaceEvent laceEvent)
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response,
+            ICallTheDataProviderSource externalSource, ILaceEvent laceEvent)
         {
             externalSource.CallTheExternalSource(response, laceEvent);
         }

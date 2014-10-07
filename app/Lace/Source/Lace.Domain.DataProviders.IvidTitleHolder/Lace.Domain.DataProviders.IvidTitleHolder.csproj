@@ -48,14 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Infrastructure\CallIvidTitleHolderExternalSource.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureIvidTitleHolderSource.cs" />
     <Compile Include="Infrastructure\Dto\IvidTitleHolderRequestMessage.cs" />
     <Compile Include="Infrastructure\HandleIvidTitleHolderSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidTitleHolderResponse.cs" />
     <Compile Include="Infrastructure\RequestDatafromIvidTitleHolderSource.cs" />
-    <Compile Include="IvidTitleHolderSourceExecution.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IvidTitleHolderDataProvider.cs" />
     <Compile Include="Service References\IvidTitleHolderServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -4,9 +4,9 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
-    public class RequestDataFromIvidSource : IRequestDataFromSource
+    public class RequestDataFromIvidSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideLaceResponse response, ICallTheSource externalSource,
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
             ILaceEvent laceEvent)
         {
             externalSource.CallTheExternalSource(response, laceEvent);

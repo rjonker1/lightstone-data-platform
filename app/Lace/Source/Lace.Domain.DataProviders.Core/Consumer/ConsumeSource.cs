@@ -4,20 +4,20 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Core.Consumer
 {
-    public class ConsumeSource : IConsumeSource
+    public class ConsumeSource : IConsumeDataProviderSource
     {
-        private readonly ICallTheSource _externalWebSourceCall;
-        private readonly IHandleSourceCall _handleServiceCall;
+        private readonly ICallTheDataProviderSource _externalWebSourceCall;
+        private readonly IHandleDataProviderSourceCall _handleServiceCall;
         
 
-        public ConsumeSource(IHandleSourceCall handleServiceCall,
-            ICallTheSource externalSourceCall)
+        public ConsumeSource(IHandleDataProviderSourceCall handleServiceCall,
+            ICallTheDataProviderSource externalSourceCall)
         {
             _handleServiceCall = handleServiceCall;
             _externalWebSourceCall = externalSourceCall;
         }
 
-        public void ConsumeExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             _handleServiceCall
                 .Request(c =>

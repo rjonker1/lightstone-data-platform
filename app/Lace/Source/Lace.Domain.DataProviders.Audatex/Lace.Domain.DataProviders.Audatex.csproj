@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudatexSourceExecution.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AudatexDataProvider.cs" />
     <Compile Include="Infrastructure\CallAudatexSource.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureAudatexRequestMessage.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureAudatexSource.cs" />
@@ -68,7 +71,6 @@
     <Compile Include="Infrastructure\Management\TransformAudatexResponse.cs" />
     <Compile Include="Infrastructure\Management\TransformRepairCosts.cs" />
     <Compile Include="Infrastructure\RequestDataFromAudatexSource.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\AudatexServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

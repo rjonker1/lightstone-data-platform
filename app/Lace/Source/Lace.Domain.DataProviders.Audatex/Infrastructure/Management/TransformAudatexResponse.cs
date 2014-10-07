@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Models;
+using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Audatex.Management;
@@ -13,7 +13,7 @@ using Lace.Source.Audatex.Transform;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 {
-    public class TransformAudatexResponse : ITransform
+    public class TransformAudatexResponse : ITransformResponseFromDataProvider
     {
         public GetDataResult Message { get; private set; }
         public AudatexResponse Result { get; private set; }
@@ -28,14 +28,14 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
             }
         }
 
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
         private readonly ILaceRequest _request;
 
         private readonly string _manufacturer;
         private readonly int _warrantyYear;
         private readonly bool _canApplyRepairInfo;
 
-        public TransformAudatexResponse(GetDataResult audatexResponse, IProvideLaceResponse response, ILaceRequest request)
+        public TransformAudatexResponse(GetDataResult audatexResponse, IProvideResponseFromLaceDataProviders response, ILaceRequest request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
             Result = Continue ? new AudatexResponse(new List<IProvideAccidentClaim>()) : null;

@@ -4,7 +4,7 @@ using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management
 {
-    public class TransformIvidTitleHolderResponse : ITransform
+    public class TransformIvidTitleHolderResponse : ITransformResponseFromDataProvider
     {
         public TitleholderQueryResponse Message { get; private set; }
         public IvidTitleHolderResponse Result { get; private set; }

@@ -4,10 +4,10 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 {
-    public class RequestDataFromAudatexSource : IRequestDataFromSource
+    public class RequestDataFromAudatexSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideLaceResponse response,
-            ICallTheSource externalWebService, ILaceEvent laceEvent)
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response,
+            ICallTheDataProviderSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalSource(response, laceEvent);
         }

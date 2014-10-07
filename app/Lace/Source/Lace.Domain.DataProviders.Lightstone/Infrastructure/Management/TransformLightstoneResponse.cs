@@ -6,7 +6,7 @@ using Lace.Domain.DataProviders.Lightstone.Services;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
 {
-    public class TransformLightstoneResponse : ITransform
+    public class TransformLightstoneResponse : ITransformResponseFromDataProvider
     {
         public bool Continue { get; private set; }
         public IProvideDataFromLightstone Result { get; private set; }

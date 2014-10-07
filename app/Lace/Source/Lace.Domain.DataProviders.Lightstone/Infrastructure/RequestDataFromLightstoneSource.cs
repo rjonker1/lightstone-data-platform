@@ -4,9 +4,9 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
-    public class RequestDataFromLightstoneSource : IRequestDataFromSource
+    public class RequestDataFromLightstoneSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideLaceResponse response, ICallTheSource externalSource, ILaceEvent laceEvent)
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource, ILaceEvent laceEvent)
         {
             externalSource.CallTheExternalSource(response, laceEvent);
         }

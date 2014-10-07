@@ -50,14 +50,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnprSourceExecution.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AnprDataProvider.cs" />
     <Compile Include="Infrastructure\CallAnprExternalSource.cs" />
     <Compile Include="Infrastructure\Dto\BuildAnprRequest.cs" />
     <Compile Include="Core\Contracts\IBuildTheRequestForAnpr.cs" />
     <Compile Include="Infrastructure\HandleAnprSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformAnprResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromAnprSource.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\AnprServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

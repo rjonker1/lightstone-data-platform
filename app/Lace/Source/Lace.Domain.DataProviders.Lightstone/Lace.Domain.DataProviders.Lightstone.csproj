@@ -61,6 +61,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Cars\IRetrieveCarInformation.cs" />
     <Compile Include="Cars\RetrieveCarInformationDetail.cs" />
     <Compile Include="Core\IReadOnlyRepository.cs" />
@@ -126,11 +129,10 @@
     <Compile Include="Services\Specifics\RepairIndexMetric.cs" />
     <Compile Include="Services\Specifics\TotalSalesByAgeMetric.cs" />
     <Compile Include="Services\Specifics\TotalSalesByGenderMetric.cs" />
-    <Compile Include="LightstoneSourceExecution.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\BandData.cs" />
-    <Compile Include="UnitOfWork\CarInfoData.cs" />
-    <Compile Include="UnitOfWork\CarTypeData.cs" />
+    <Compile Include="LightstoneDataProvider.cs" />
+    <Compile Include="UnitOfWork\BandUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\CarInfoUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\CarTypeUnitOfWork.cs" />
     <Compile Include="Core\Contracts\IGetBands.cs" />
     <Compile Include="Core\Contracts\IGetCarInfo.cs" />
     <Compile Include="Core\Contracts\IGetCarType.cs" />
@@ -139,11 +141,11 @@
     <Compile Include="Core\Contracts\IGetMuncipalities.cs" />
     <Compile Include="Core\Contracts\IGetSales.cs" />
     <Compile Include="Core\Contracts\IGetStatistics.cs" />
-    <Compile Include="UnitOfWork\MakeData.cs" />
-    <Compile Include="UnitOfWork\MetricData.cs" />
-    <Compile Include="UnitOfWork\MuncipalityData.cs" />
-    <Compile Include="UnitOfWork\SaleData.cs" />
-    <Compile Include="UnitOfWork\StatisticsData.cs" />
+    <Compile Include="UnitOfWork\MakeUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\MetricUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\MuncipalityUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\SaleUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\StatisticsUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">

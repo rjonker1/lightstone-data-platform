@@ -27,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Cars
 
         public IRetrieveCarInformation SetupDataSources()
         {
-            _getCarInformation = new CarInfoData(_repositories.CarInfoRepository(),
+            _getCarInformation = new CarInfoUnitOfWork(_repositories.CarInfoRepository(),
                 _repositories.Vin12CarInfoRepository());
             return this;
         }

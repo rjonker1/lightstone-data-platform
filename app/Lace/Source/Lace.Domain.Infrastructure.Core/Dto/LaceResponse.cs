@@ -4,7 +4,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Infrastructure.Core.Dto
 {
-    public class LaceResponse : IProvideLaceResponse
+    public class LaceResponse : IProvideResponseFromLaceDataProviders
     {
         public IProvideDataFromIvid IvidResponse { get; set; }
         public IResponseProviderHandled IvidResponseHandled { get; set; }

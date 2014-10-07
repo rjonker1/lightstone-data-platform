@@ -3,6 +3,7 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Entities;
 using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Specification;
@@ -34,6 +35,6 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
                     w => w.Key.Equals(_package.Action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, ILaceEvent, IProvideLaceResponse> SourceChain { get; private set; }
+        public Action<ILaceRequest, ILaceEvent, IProvideResponseFromLaceDataProviders> SourceChain { get; private set; }
     }
 }

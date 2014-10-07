@@ -3,9 +3,9 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
-    public class HandleIvidSourceCall : IHandleSourceCall
+    public class HandleIvidSourceCall : IHandleDataProviderSourceCall
     {
-        public void Request(Action<IRequestDataFromSource> action)
+        public void Request(Action<IRequestDataFromDataProviderSource> action)
         {
             action(new RequestDataFromIvidSource());
         }

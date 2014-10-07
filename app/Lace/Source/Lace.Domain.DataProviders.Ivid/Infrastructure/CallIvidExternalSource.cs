@@ -16,7 +16,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
-    public class CallIvidExternalSource : ICallTheSource
+    public class CallIvidExternalSource : ICallTheDataProviderSource
     {
         private HpiStandardQueryResponse _ividResponse;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
@@ -28,7 +28,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             _request = request;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             try
             {
@@ -81,14 +81,14 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             }
         }
 
-        private static void IvidResponseFailed(IProvideLaceResponse response)
+        private static void IvidResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
             response.IvidResponse = null;
             response.IvidResponseHandled = new IvidResponseHandled();
             response.IvidResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformIvidResponse(_ividResponse);
 

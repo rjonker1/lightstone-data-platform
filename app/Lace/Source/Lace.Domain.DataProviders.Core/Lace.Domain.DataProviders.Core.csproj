@@ -48,19 +48,21 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Consumer\CanHandlePackageSpecification.cs" />
     <Compile Include="Consumer\ConsumeSource.cs" />
     <Compile Include="Contracts\ExecuteSourceBase.cs" />
-    <Compile Include="Contracts\ICallTheSource.cs" />
+    <Compile Include="Contracts\ICallTheDataProviderSource.cs" />
     <Compile Include="Contracts\ICheckThePackageDataSource.cs" />
     <Compile Include="Contracts\IConfiguration.cs" />
-    <Compile Include="Contracts\IConsumeSource.cs" />
-    <Compile Include="Contracts\IExecuteTheSource.cs" />
-    <Compile Include="Contracts\IHandleSourceCall.cs" />
+    <Compile Include="Contracts\IConsumeDataProviderSource.cs" />
+    <Compile Include="Contracts\IExecuteTheDataProviderSource.cs" />
+    <Compile Include="Contracts\IHandleDataProviderSourceCall.cs" />
     <Compile Include="Contracts\ILogEvent.cs" />
-    <Compile Include="Contracts\IRequestDataFromSource.cs" />
-    <Compile Include="Contracts\ITransform.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Contracts\IRequestDataFromDataProviderSource.cs" />
+    <Compile Include="Contracts\ITransformResponseFromDataProvider.cs" />
     <Compile Include="Services.cs" />
     <Compile Include="Shared\AppSettings.cs" />
     <Compile Include="Shared\AuthenticationHeaders.cs" />

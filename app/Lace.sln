@@ -81,13 +81,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Certificate", "Lace\La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Models.Jis", "Lace\Lace.Models.Jis\Lace.Models.Jis.csproj", "{23C64DB8-B29F-433A-B75E-62AA5F8518DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Application", "1.Application", "{15BCC33F-AB78-48EF-99C1-E84AE7295CCB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Domain", "1.Domain", "{2CE8A9CE-27F7-4035-9E56-4074EC4F6256}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{2CE8A9CE-27F7-4035-9E56-4074EC4F6256}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Shared Infrastructure", "2.Shared Infrastructure", "{C6E762ED-2030-40CF-A694-8F6C44800226}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Shared Infrastructure", "3.Shared Infrastructure", "{C6E762ED-2030-40CF-A694-8F6C44800226}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Distributed Service", "4.Distributed Service", "{4D3724DA-EBF7-4722-91DE-22898570BF2D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Distributed Service", "3.Distributed Service", "{4D3724DA-EBF7-4722-91DE-22898570BF2D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{87DF0D42-4BA9-42DD-8A56-91238364B357}"
 EndProject
@@ -100,8 +98,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Extensions", "Lace\Source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj", "{129BBFFE-0D3E-4CC5-95B4-5C466669421D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Infrastructure.Core", "Lace\Source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj", "{AE8A5548-01CC-481F-935F-66BF89B08081}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.DistributedServices.Core", "Lace\Source\Lace.DistributedServices.Core\Lace.DistributedServices.Core.csproj", "{21869C13-FBAD-45DF-9382-1E5A0B67277B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.DistributedServices.Events", "Lace\Source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj", "{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}"
 EndProject
@@ -122,6 +118,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.CertificateProvider", "Lace\Source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj", "{CAEFEC16-62DF-43EC-8B5B-824374CC96E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Jis", "Lace\Source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj", "{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.RgtVin", "Lace\Source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj", "{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -269,10 +267,6 @@ Global
 		{AE8A5548-01CC-481F-935F-66BF89B08081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE8A5548-01CC-481F-935F-66BF89B08081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE8A5548-01CC-481F-935F-66BF89B08081}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21869C13-FBAD-45DF-9382-1E5A0B67277B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21869C13-FBAD-45DF-9382-1E5A0B67277B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21869C13-FBAD-45DF-9382-1E5A0B67277B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21869C13-FBAD-45DF-9382-1E5A0B67277B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -309,6 +303,10 @@ Global
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -348,7 +346,6 @@ Global
 		{61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3} = {2CE8A9CE-27F7-4035-9E56-4074EC4F6256}
 		{129BBFFE-0D3E-4CC5-95B4-5C466669421D} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{CAEFEC16-62DF-43EC-8B5B-824374CC96E3} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{21869C13-FBAD-45DF-9382-1E5A0B67277B} = {4D3724DA-EBF7-4722-91DE-22898570BF2D}
 		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98} = {4D3724DA-EBF7-4722-91DE-22898570BF2D}
 		{CA721B03-EFC7-45CE-A70E-BB9EF72C075B} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
 		{7F252FE1-1AB1-42FB-AEBD-EAC952E71664} = {837B64CA-81D7-498F-B88F-386D186E9F35}
@@ -360,5 +357,6 @@ Global
 		{B1B1BB75-20B9-4EB5-8CFC-75E3BF8D96D1} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{B3C39DE4-4B23-4604-8732-06ED64A790B4} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
+		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 	EndGlobalSection
 EndGlobal

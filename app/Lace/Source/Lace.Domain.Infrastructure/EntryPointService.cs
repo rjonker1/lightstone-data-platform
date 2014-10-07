@@ -7,7 +7,7 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
-using Lace.Extensions;
+using Lace.Shared.Extensions;
 using Monitoring.Sources.Lace;
 using Workflow;
 

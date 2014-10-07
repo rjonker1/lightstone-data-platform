@@ -5,7 +5,7 @@ using Lace.Domain.DataProviders.Jis.JisServiceReference;
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure.Management
 {
-    public class TransformJisResponse : ITransform
+    public class TransformJisResponse : ITransformResponseFromDataProvider
     {
         public bool Continue { get; private set; }
         public IProvideDataFromJis Result { get; private set; }
