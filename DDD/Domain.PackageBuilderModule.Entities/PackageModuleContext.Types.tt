@@ -10,7 +10,7 @@ CodeRegion region = new CodeRegion(this, 1);
 MetadataTools ef = new MetadataTools(this);
 
 
-string inputFile = @"..\Infrastructure.Data.PackageBuilder\Model\PackageBuilderDataModel.edmx";
+string inputFile = @"..\Infrastructure.Data.PackageBuilder\Model\PackageBuilderModuleDataModel.edmx";
 MetadataWorkspace metadataWorkspace = null;
 bool allMetadataLoaded =loader.TryLoadAllMetadata(inputFile, out metadataWorkspace);
 EdmItemCollection ItemCollection = (EdmItemCollection)metadataWorkspace.GetItemCollection(DataSpace.CSpace);

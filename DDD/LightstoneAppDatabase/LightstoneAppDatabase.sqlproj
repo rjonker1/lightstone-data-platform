@@ -172,8 +172,6 @@
     <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Functions\" />
     <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Schemes\" />
     <Folder Include="Security\" />
-    <Folder Include="PackageBuilder\" />
-    <Folder Include="PackageBuilder\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
@@ -274,13 +272,6 @@
     </Build>
     <Build Include="Security\PackageBuilder.sql" />
     <Build Include="Security\PackageBuilderModel.sql" />
-    <Build Include="PackageBuilder\Tables\Package.sql" />
-    <Build Include="PackageBuilder\Tables\Owner.sql" />
-    <Build Include="PackageBuilder\Tables\State.sql" />
-    <Build Include="PackageBuilder\Tables\Industry.sql" />
-    <Build Include="PackageBuilder\Tables\DataSource.sql" />
-    <Build Include="PackageBuilder\Tables\DateField.sql" />
-    <Build Include="PackageBuilder\Tables\FileAttachment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data Generation Plans\IntegrationDataGenPlan.dgen">

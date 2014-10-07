@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED390637-ABAA-408F-813A-2B4BB3DECE97}</ProjectGuid>
+    <ProjectGuid>{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LightstoneApp.Infrastructure.Data.PackageBuilder.Tests</RootNamespace>

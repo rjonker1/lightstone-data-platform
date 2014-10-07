@@ -10,7 +10,7 @@ CodeRegion region = new CodeRegion(this);
 
 EntityFrameworkTemplateFileManager  fileManager = EntityFrameworkTemplateFileManager .Create(this);
 
-string inputFile = @"..\Model\PackageBuilderDataModel.edmx";
+string inputFile = @"..\Model\PackageBuilderDataModuleModel.edmx";
 EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
 string namespaceName = code.VsNamespaceSuggestion();
 
