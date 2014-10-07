@@ -13,7 +13,7 @@ angular.module('packageBuilderwebuiApp')
 
     $scope.alerts = [
 
-            { msg: 'Loading Data !' }
+            { msg: 'Loading Data...' }
     ];
     
 
@@ -24,11 +24,9 @@ angular.module('packageBuilderwebuiApp')
            for( var res in resp)
            {
 
-              /*alert(''+res);*/
               if (resp.hasOwnProperty(res)) {
-                                                
-                  $scope.test = resp;
-                  $scope.myData = resp;
+                                                              
+                  $scope.dSourcesData = resp;
                   $scope.message = "Data Loaded."
               }
           }
@@ -49,13 +47,13 @@ angular.module('packageBuilderwebuiApp')
 
     $scope.notify = function(row) {
 
-        $location.path('/data-source-detail/'+row.entity.id);
+        $location.path('/data-source-detail/'+row.entity.dataProviderId+'/'+row.entity.version);
     }
 
     $scope.selectedDatasource = [];
 
     $scope.gridOptions = { 
-        data: 'myData',
+        data: 'dSourcesData',
         selectedItems: $scope.selectedDatasource,
         multiSelect: false,
         enablePaging: true,

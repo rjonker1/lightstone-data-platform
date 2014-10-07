@@ -4,7 +4,7 @@ var providerServices = angular.module('providerServices', ['ngResource']);
 
 providerServices.factory('GetAPI', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider/Get/:id', {}, {
+		return $resource('http://localhost:12257/DataProvider/Get/:id/:version', {}, {
 			query: {method:'GET', isObject:true}
 		});
 	}]);
