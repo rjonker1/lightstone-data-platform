@@ -1,7 +1,7 @@
 ﻿using System;
-using Lace.Source.Lightstone.Models;
-using Lace.Source.Lightstone.Repository;
-using Lace.Source.Lightstone.Repository.Factory;
+using Lace.Domain.DataProviders.Lightstone.Core;
+using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {

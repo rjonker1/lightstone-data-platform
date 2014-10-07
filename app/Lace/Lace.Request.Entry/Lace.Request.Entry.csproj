@@ -60,10 +60,6 @@
     <Compile Include="IEntryPoint.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Builder\Lace.Builder.csproj">
-      <Project>{536a41d4-aa0e-4e4f-8aa1-09f86e4a8f95}</Project>
-      <Name>Lace.Builder</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Events.Messages.Publish\Lace.Events.Messages.Publish.csproj">
       <Project>{e2281e99-b90f-4615-9f63-d46b024eb5ab}</Project>
       <Name>Lace.Events.Messages.Publish</Name>

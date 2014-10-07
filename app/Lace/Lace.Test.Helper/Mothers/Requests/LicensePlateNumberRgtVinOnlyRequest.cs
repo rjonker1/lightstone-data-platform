@@ -1,6 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
-using Lace.Request;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
@@ -75,13 +75,5 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
            
         }
-
-        //public ILaceRequestCarInformation CarInformation
-        //{
-        //    get
-        //    {
-        //        return new RequestCarInformationForCarHavingId107483();
-        //    }
-        //}
     }
 }

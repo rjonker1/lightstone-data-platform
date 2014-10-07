@@ -1,28 +1,28 @@
-﻿using Lace.Consumer;
-using Lace.Events;
-using Lace.Models;
-using Lace.Models.Audatex;
-using Lace.Request;
-using Lace.Source;
-using Lace.Source.Enums;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Core;
+using Lace.Domain.DataProviders.Core.Consumer;
+using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeAudatexSourceExecution : ExecuteSourceBase, IExecuteTheSource
+    public class FakeAudatexSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
 
         private readonly ILaceRequest _request;
 
-        public FakeAudatexSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
-            IExecuteTheSource fallbackSource)
+        public FakeAudatexSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
         }
 
-        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Audatex, _request);
 
@@ -43,7 +43,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             CallNextSource(response, laceEvent);
         }
 
-        private static void NotHandledResponse(IProvideLaceResponse response)
+        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
             response.AudatexResponse = null;
             response.AudatexResponseHandled = new AudatexResponseHandled();

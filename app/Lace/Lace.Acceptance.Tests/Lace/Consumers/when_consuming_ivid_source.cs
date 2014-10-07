@@ -1,10 +1,9 @@
-﻿using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Models;
-using Lace.Models.Responses;
-using Lace.Request;
-using Lace.Response;
-using Lace.Source.Ivid;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Ivid;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
@@ -15,8 +14,8 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private readonly IProvideLaceResponse _response;
-        private IvidSourceExecution _consumer;
+        private readonly IProvideResponseFromLaceDataProviders _response;
+        private IvidDataProvider _consumer;
 
 
         public when_consuming_ivid_source()
@@ -33,7 +32,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new IvidSourceExecution(_request, null, null);
+            _consumer = new IvidDataProvider(_request, null, null);
             _consumer.CallSource(_response, _laceEvent);
         }
 

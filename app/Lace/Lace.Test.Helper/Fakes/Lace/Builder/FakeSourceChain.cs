@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using DataPlatform.Shared.Entities;
-using Lace.Builder;
-using Lace.Events;
-using Lace.Models;
-using Lace.Request;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Infrastructure.Core.Contracts;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
@@ -30,6 +30,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                     w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, ILaceEvent, IProvideLaceResponse> SourceChain { get; private set; }
+        public Action<ILaceRequest, ILaceEvent, IProvideResponseFromLaceDataProviders> SourceChain { get; private set; }
     }
 }

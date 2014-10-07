@@ -1,6 +1,4 @@
-﻿using Lace.Source.Ivid.IvidServiceReference;
-using Lace.Source.Ivid.Transform;
-using Lace.Source.RgtVin.Transform;
+﻿using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
 

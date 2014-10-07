@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lace.Request;
-using Lace.Source.Lightstone.Metrics;
-using Lace.Source.Lightstone.Models;
-using Lace.Source.Lightstone.Repository;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Core;
+using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone

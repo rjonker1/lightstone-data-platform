@@ -1,15 +1,15 @@
-﻿using Lace.Events;
-using Lace.Models;
-using Lace.Models.Audatex;
-using Lace.Request;
-using Lace.Source;
-using Lace.Source.Audatex.AudatexServiceReference;
-using Lace.Source.Audatex.Transform;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
+using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
+using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Builders.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingAudatexExternalWebService : ICallTheSource
+    public class FakeCallingAudatexExternalWebService : ICallTheDataProviderSource
     {
         private GetDataResult _audatexResponse;
         private readonly ILaceRequest _request;
@@ -19,13 +19,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
             TransformResponse(response);
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

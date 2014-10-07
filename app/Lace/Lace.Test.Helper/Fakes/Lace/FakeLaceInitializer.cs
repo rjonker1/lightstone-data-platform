@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Lace.Builder;
-using Lace.Events;
-using Lace.Models;
-using Lace.Request;
-using Lace.Response.ExternalServices;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
 
 namespace Lace.Test.Helper.Fakes.Lace
 {
@@ -13,13 +13,13 @@ namespace Lace.Test.Helper.Fakes.Lace
 
         private readonly ILaceRequest _request;
 
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         private readonly ILaceEvent _laceEvent;
 
-        public FakeLaceInitializer(IProvideLaceResponse response, ILaceRequest request, ILaceEvent laceEvent,
+        public FakeLaceInitializer(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ILaceEvent laceEvent,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;

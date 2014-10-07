@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using EasyNetQ;
-using Lace.Events;
-using Lace.Events.Messages.Publish;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
 using Monitoring.Sources.Lace;
 using Workflow;
 using Workflow.BuildingBlocks;

@@ -1,13 +1,13 @@
-﻿using Lace.Models;
-using Lace.Models.Ivid;
-using Lace.Response;
-using Lace.Source.Ivid.Transform;
+﻿using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
+using Lace.Domain.Infrastructure.Core.Dto;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
     public class LaceResponseBuilder
     {
-        public IProvideLaceResponse WithIvidResponseHandled()
+        public IProvideResponseFromLaceDataProviders WithIvidResponseHandled()
         {
             var response = new LaceResponse();
 
@@ -27,7 +27,7 @@ namespace Lace.Test.Helper.Builders.Responses
 
         }
 
-        public IProvideLaceResponse WithIvidResponseHandledAndVin12()
+        public IProvideResponseFromLaceDataProviders WithIvidResponseHandledAndVin12()
         {
 
             var response = new LaceResponse();
@@ -47,7 +47,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return response;
         }
 
-        public IProvideLaceResponse WithIvidResponseAndFinancedInterestVin()
+        public IProvideResponseFromLaceDataProviders WithIvidResponseAndFinancedInterestVin()
         {
             var response = new LaceResponse();
 

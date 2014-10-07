@@ -1,8 +1,9 @@
 ﻿using System.Linq;
-using Lace.Request;
-using Lace.Source.Lightstone.DataObjects;
-using Lace.Source.Lightstone.Models;
-using Lace.Source.Lightstone.Repository;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Core;
+using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
+using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
@@ -20,7 +21,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
         {
             _repository = new FakeCarInfoRepository();
             _vin12Repository = new FakeVin12CarInfoRepository();
-            _getCarInformation = new CarInfoData(_repository, _vin12Repository);
+            _getCarInformation = new CarInfoUnitOfWork(_repository, _vin12Repository);
             _request = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
 
         }

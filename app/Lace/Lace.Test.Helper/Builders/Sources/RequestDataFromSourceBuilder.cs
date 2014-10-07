@@ -1,39 +1,39 @@
-﻿using Lace.Source;
-using Lace.Source.Lightstone.SourceCalls;
+﻿using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Test.Helper.Mothers.Sources;
 
 namespace Lace.Test.Helper.Builders.Sources
 {
     public class RequestDataFromSourceBuilder
     {
-        private IRequestDataFromSource _requestDataFromSource;
+        private IRequestDataFromDataProviderSource _requestDataFromSource;
 
-        public IRequestDataFromSource ForRgtVin()
+        public IRequestDataFromDataProviderSource ForRgtVin()
         {
             _requestDataFromSource = new RequestDataFromRgtVinHolderSource();
             return _requestDataFromSource;
         }
 
 
-        public IRequestDataFromSource ForIvid()
+        public IRequestDataFromDataProviderSource ForIvid()
         {
             _requestDataFromSource = new RequestDataFromIvidService();
             return _requestDataFromSource;
         }
 
-        public IRequestDataFromSource ForIvidTitleHolder()
+        public IRequestDataFromDataProviderSource ForIvidTitleHolder()
         {
             _requestDataFromSource = new RequestDataFromIvidTitleHolderService();
             return _requestDataFromSource;
         }
 
-        public IRequestDataFromSource ForAudatex()
+        public IRequestDataFromDataProviderSource ForAudatex()
         {
             _requestDataFromSource = new RequestDataFromAudatexService();
             return _requestDataFromSource;
         }
 
-        public IRequestDataFromSource ForLightstone()
+        public IRequestDataFromDataProviderSource ForLightstone()
         {
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             return _requestDataFromSource;

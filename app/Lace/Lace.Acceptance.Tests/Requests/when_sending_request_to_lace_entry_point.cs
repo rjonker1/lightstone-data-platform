@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Request;
-using Lace.Request.Entry;
-using Lace.Response.ExternalServices;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;
@@ -22,7 +23,7 @@ namespace Lace.Acceptance.Tests.Requests
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
-            _entryPoint = new EntryPoint(publisher);
+            _entryPoint = new EntryPointService(publisher);
         }
 
         public override void Observe()

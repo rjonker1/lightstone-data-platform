@@ -1,5 +1,5 @@
-﻿using Lace.Source.Ivid.IvidServiceReference;
-using Lace.Source.Ivid.Transform;
+﻿using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
+using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
 

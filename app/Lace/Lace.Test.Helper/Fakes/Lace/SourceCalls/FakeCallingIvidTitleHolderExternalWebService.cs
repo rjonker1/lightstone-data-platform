@@ -1,24 +1,24 @@
-﻿using Lace.Events;
-using Lace.Models;
-using Lace.Models.IvidTitleHolder;
-using Lace.Source;
-using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
-using Lace.Source.IvidTitleHolder.Transform;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
+using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Test.Helper.Builders.Responses;
 
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingIvidTitleHolderExternalWebService : ICallTheSource
+    public class FakeCallingIvidTitleHolderExternalWebService : ICallTheDataProviderSource
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             _ividTitleHolderResponse = new SourceResponseBuilder().ForIvidTitleHolder();
             TransformResponse(response);
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 

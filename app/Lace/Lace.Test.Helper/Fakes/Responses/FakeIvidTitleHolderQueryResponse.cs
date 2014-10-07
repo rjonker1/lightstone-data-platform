@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
+using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Test.Helper.Fakes.Responses
 {

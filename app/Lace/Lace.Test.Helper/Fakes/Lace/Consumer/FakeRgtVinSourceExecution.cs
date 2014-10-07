@@ -1,23 +1,23 @@
-﻿using Lace.Consumer;
-using Lace.Events;
-using Lace.Models;
-using Lace.Models.IvidTitleHolder;
-using Lace.Request;
-using Lace.Source;
-using Lace.Source.Enums;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Core;
+using Lace.Domain.DataProviders.Core.Consumer;
+using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeRgtVinSourceExecution : ExecuteSourceBase, IExecuteTheSource
+    public class FakeRgtVinSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly IHandleSourceCall _handleServiceCall;
+        private readonly IHandleDataProviderSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
-        private readonly ICallTheSource _externalWebServiceCall;
+        private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
-        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
-            IExecuteTheSource fallbackSource)
+        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
@@ -25,7 +25,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
         }
 
-        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.RgtVin, _request);
 
@@ -47,7 +47,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         }
 
-        private static void NotHandledResponse(IProvideLaceResponse response)
+        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
             response.RgtVinResponse = null;
             response.RgtVinResponseHandled = new IvidTitleHolderResponseHandled();

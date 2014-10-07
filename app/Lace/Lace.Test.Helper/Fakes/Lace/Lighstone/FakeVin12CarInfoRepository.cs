@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.Source.Lightstone.Models;
-using Lace.Source.Lightstone.Repository;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Core;
+using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Services;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeVin12CarInfoRepository : IReadOnlyRepository<CarInfo>
     {
-        public IEnumerable<CarInfo> FindAllWithRequest(global::Lace.Request.IProvideCarInformationForRequest request)
+        public IEnumerable<CarInfo> FindAllWithRequest(IProvideCarInformationForRequest request)
         {
             throw new NotImplementedException();
         }
@@ -23,7 +25,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CarInfo> FindByMakeAndMetricTypes(int makeId, Source.Lightstone.Metrics.MetricTypes[] metricTypes)
+        public IEnumerable<CarInfo> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
         {
             throw new NotImplementedException();
         }

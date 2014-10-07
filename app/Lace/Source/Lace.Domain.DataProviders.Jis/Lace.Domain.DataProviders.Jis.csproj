@@ -89,10 +89,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lace.Response.ExternalServices\Lace.Response.ExternalServices.csproj">
-      <Project>{8d2ad71f-e6d2-44e5-bd9e-11ff68ef3a6d}</Project>
-      <Name>Lace.Response.ExternalServices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
       <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
       <Name>Lace.DistributedServices.Events</Name>

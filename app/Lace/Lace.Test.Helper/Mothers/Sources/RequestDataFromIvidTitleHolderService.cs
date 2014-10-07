@@ -1,12 +1,12 @@
-﻿using Lace.Events;
-using Lace.Models;
-using Lace.Source;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Sources
 {
-    public class RequestDataFromIvidTitleHolderService : IRequestDataFromSource
+    public class RequestDataFromIvidTitleHolderService : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideLaceResponse response, ICallTheSource externalWebService, ILaceEvent laceEvent)
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalWebService, ILaceEvent laceEvent)
         {
             externalWebService.CallTheExternalSource(response,laceEvent);
         }

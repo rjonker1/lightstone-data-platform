@@ -1,12 +1,12 @@
 ﻿using System;
-using Lace.Source;
+using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Builders.Sources;
 
 namespace Lace.Test.Helper.Fakes.Lace.Handlers
 {
-    public class FakeHandleLighstoneSourceCall : IHandleSourceCall
+    public class FakeHandleLighstoneSourceCall : IHandleDataProviderSourceCall
     {
-        public void Request(Action<IRequestDataFromSource> action)
+        public void Request(Action<IRequestDataFromDataProviderSource> action)
         {
             action(new RequestDataFromSourceBuilder().ForLightstone());
         }

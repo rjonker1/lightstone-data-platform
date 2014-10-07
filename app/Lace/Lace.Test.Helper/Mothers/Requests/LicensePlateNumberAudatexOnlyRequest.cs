@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Text;
 using DataPlatform.Shared.Entities;
-using Lace.Request;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using Newtonsoft.Json.Serialization;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {

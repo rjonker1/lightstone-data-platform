@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Lace.Models.Responses.Sources;
-using Lace.Request;
-using Lace.Source.Lightstone.Cars;
-using Lace.Source.Lightstone.Metrics;
-using Lace.Source.Lightstone.Transform;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Cars;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
+using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Test.Helper.Mothers.Requests;

@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Models;
-using Lace.Request;
-using Lace.Response;
-using Lace.Source;
-using Lace.Source.Lightstone.SourceCalls;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
@@ -15,11 +15,11 @@ namespace Lace.Unit.Tests.Sources
 {
     public class when_requesting_data_from_lightstone_source : Specification
     {
-        private readonly IRequestDataFromSource _requestDataFromSource;
+        private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _request;
-        private IProvideLaceResponse _response;
+        private IProvideResponseFromLaceDataProviders _response;
         private readonly ILaceEvent _laceEvent;
-        private readonly ICallTheSource _callTheSource;
+        private readonly ICallTheDataProviderSource _callTheSource;
 
         public when_requesting_data_from_lightstone_source()
         {

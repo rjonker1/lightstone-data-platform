@@ -1,4 +1,4 @@
-﻿using Lace.Request;
+﻿using Lace.Domain.Core.Contracts.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
 namespace Lace.Test.Helper.Builders.Requests

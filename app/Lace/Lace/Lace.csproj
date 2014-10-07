@@ -58,10 +58,6 @@
     <Compile Include="IBootstrap.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.Builder\Lace.Builder.csproj">
-      <Project>{536a41d4-aa0e-4e4f-8aa1-09f86e4a8f95}</Project>
-      <Name>Lace.Builder</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Events\Lace.Events.csproj">
       <Project>{98057a7d-bad4-4578-a408-955ca0a7523f}</Project>
       <Name>Lace.Events</Name>

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Lace.Models;
-using Lace.Request;
-using Lace.Request.Entry;
-using Lace.Response.ExternalServices;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Fakes.Lace.EntryPoint;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
@@ -12,7 +12,7 @@ namespace Lace.Unit.Tests.Requests
     public class when_lace_entry_point_get_response : Specification
     {
         private readonly IEntryPoint _entryPoint;
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
         private readonly ILaceRequest _request;
         private IList<LaceExternalSourceResponse> _laceResponse;
 

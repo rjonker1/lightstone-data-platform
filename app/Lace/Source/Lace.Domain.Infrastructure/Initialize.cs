@@ -10,7 +10,7 @@ using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
-    internal class Initialize : IBootstrap
+    public class Initialize : IBootstrap
     {
         public IList<LaceExternalSourceResponse> LaceResponses { get; private set; }
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Lace.Models.Responses.Sources.Specifics;
-using Lace.Request;
-using Lace.Source.Lightstone.DataObjects;
-using Lace.Source.Lightstone.Metrics;
-using Lace.Source.Lightstone.Metrics.Specifics;
+using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
+using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
+using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
@@ -31,13 +32,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 
         public IRetrieveValuationFromMetrics SetupDataSources()
         {
-            _getStatistics = new StatisticsData(new FakeStatisticsRepository());
-            _getMetrics = new MetricData(new FakeMetricRepository());
-            _getBands = new BandData(new FakeBandsRepository());
-            _getMuncipalities = new MuncipalityData(new FakeMunicipalityRepository());
-            _getMakes = new MakeData(new FakeMakeRepository());
-            _getCarType = new CarTypeData(new FakeCarTypeRepository());
-            _getSales = new SaleData(new FakeSaleRepository());
+            _getStatistics = new StatisticsUnitOfWork(new FakeStatisticsRepository());
+            _getMetrics = new MetricUnitOfWork(new FakeMetricRepository());
+            _getBands = new BandUnitOfWork(new FakeBandsRepository());
+            _getMuncipalities = new MuncipalityUnitOfWork(new FakeMunicipalityRepository());
+            _getMakes = new MakeUnitOfWork(new FakeMakeRepository());
+            _getCarType = new CarTypeUnitOfWork(new FakeCarTypeRepository());
+            _getSales = new SaleUnitOfWork(new FakeSaleRepository());
 
             return this;
         }

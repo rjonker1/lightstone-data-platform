@@ -1,29 +1,29 @@
-﻿using Lace.Consumer;
-using Lace.Events;
-using Lace.Models;
-using Lace.Models.Lightstone;
-using Lace.Request;
-using Lace.Source;
-using Lace.Source.Enums;
-using Lace.Source.Lightstone.SourceCalls;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Core;
+using Lace.Domain.DataProviders.Core.Consumer;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeLightstoneSourceExecution : ExecuteSourceBase, IExecuteTheSource
+    public class FakeLightstoneSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
 
-        public FakeLightstoneSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
-            IExecuteTheSource fallbackSource)
+        public FakeLightstoneSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
         }
 
 
-        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.Lightstone, _request);
 
@@ -44,7 +44,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             CallNextSource(response, laceEvent);
         }
 
-        private static void NotHandledResponse(IProvideLaceResponse response)
+        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
             response.LightstoneResponse = null;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();

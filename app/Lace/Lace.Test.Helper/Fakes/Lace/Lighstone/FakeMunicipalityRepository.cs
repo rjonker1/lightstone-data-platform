@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Source.Lightstone.Models;
-using Lace.Source.Lightstone.Repository;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Core;
+using Lace.Domain.DataProviders.Lightstone.Core.Models;
+using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.Test.Helper.Builders.Sources.Lightstone;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeMunicipalityRepository : IReadOnlyRepository<Municipality>
     {
-        public IEnumerable<Municipality> FindAllWithRequest(global::Lace.Request.IProvideCarInformationForRequest request)
+        public IEnumerable<Municipality> FindAllWithRequest(IProvideCarInformationForRequest request)
         {
             throw new NotImplementedException();
         }
 
         public IEnumerable<Municipality> GetAll()
         {
-            return Builders.Sources.Lightstone.MuncipalityDataBuilder.ForAllMunicipalities();
+            return MuncipalityDataBuilder.ForAllMunicipalities();
         }
 
         public IEnumerable<Municipality> FindByMake(int makeId)
@@ -23,7 +26,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         }
 
         public IEnumerable<Municipality> FindByMakeAndMetricTypes(int makeId,
-            Source.Lightstone.Metrics.MetricTypes[] metricTypes)
+            MetricTypes[] metricTypes)
         {
             throw new NotImplementedException();
         }

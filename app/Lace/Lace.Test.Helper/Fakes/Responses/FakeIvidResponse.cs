@@ -1,5 +1,4 @@
-﻿using Lace.Source.Ivid.IvidServiceReference;
-
+﻿using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 namespace Lace.Test.Helper.Fakes.Responses
 {
     public static class FakeIvidResponse

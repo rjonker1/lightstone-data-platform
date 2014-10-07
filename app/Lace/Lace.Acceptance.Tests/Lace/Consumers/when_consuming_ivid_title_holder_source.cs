@@ -1,8 +1,8 @@
-﻿using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Models;
-using Lace.Request;
-using Lace.Source.IvidTitleHolder;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
@@ -14,8 +14,8 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private readonly IProvideLaceResponse _response;
-        private IvidTitleHolderSourceExecution _consumer;
+        private readonly IProvideResponseFromLaceDataProviders _response;
+        private IvidTitleHolderDataProvider _consumer;
 
 
         public when_consuming_ivid_title_holder_source()
@@ -31,7 +31,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new IvidTitleHolderSourceExecution(_request, null, null);
+            _consumer = new IvidTitleHolderDataProvider(_request, null, null);
             _consumer.CallSource(_response, _laceEvent);
         }
 

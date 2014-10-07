@@ -1,9 +1,9 @@
-﻿using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Models;
-using Lace.Request;
-using Lace.Response;
-using Lace.Source.Lightstone;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
@@ -14,8 +14,8 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private readonly IProvideLaceResponse _response;
-        private LightstoneSourceExecution _consumer;
+        private readonly IProvideResponseFromLaceDataProviders _response;
+        private LightstoneDataProvider _consumer;
 
         public when_consuming_lightstone_source()
         {
@@ -29,7 +29,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public override void Observe()
         {
-            _consumer = new LightstoneSourceExecution(_request, null, null);
+            _consumer = new LightstoneDataProvider(_request, null, null);
             _consumer.CallSource(_response, _laceEvent);
         }
 

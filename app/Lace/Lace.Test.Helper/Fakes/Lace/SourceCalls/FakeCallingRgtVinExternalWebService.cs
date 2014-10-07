@@ -1,24 +1,24 @@
-﻿using Lace.Events;
-using Lace.Models;
-using Lace.Models.RgtVin;
-using Lace.Source;
-using Lace.Source.RgtVin.Transform;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Test.Helper.Builders.Responses;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
-    public class FakeCallingRgtVinExternalWebService : ICallTheSource
+    public class FakeCallingRgtVinExternalWebService : ICallTheDataProviderSource
     {
 
         private System.Data.DataSet _rgtVinResponse;
 
-        public void CallTheExternalSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             _rgtVinResponse = new SourceResponseBuilder().ForRgtVin();
             TransformResponse(response);
         }
 
-        public void TransformResponse(IProvideLaceResponse response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
             var transformer = new TransformRgtVinResponse(_rgtVinResponse);
 

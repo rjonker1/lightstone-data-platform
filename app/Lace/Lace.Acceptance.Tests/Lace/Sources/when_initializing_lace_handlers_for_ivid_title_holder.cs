@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Lace.Builder;
-using Lace.Builder.Factory;
-using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Request;
-using Lace.Response;
-using Lace.Response.ExternalServices;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Domain.Infrastructure.EntryPoint;
+using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;
 

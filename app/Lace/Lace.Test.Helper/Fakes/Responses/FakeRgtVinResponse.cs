@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using Lace.Models.RgtVin.DataObject;
+using Lace.Domain.Core.Dto;
 using DataSet = System.Data.DataSet;
 
 namespace Lace.Test.Helper.Fakes.Responses

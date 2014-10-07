@@ -1,7 +1,7 @@
-﻿using Lace.Models;
-using Lace.Request;
-using Lace.Source.Audatex.AudatexServiceReference;
-using Lace.Source.Audatex.Transform;
+﻿using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
+using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
@@ -12,7 +12,7 @@ namespace Lace.Unit.Tests.Transform
     {
         private readonly GetDataResult _audatexWebServiceResponse;
         private TransformAudatexResponse _transformer;
-        private readonly IProvideLaceResponse _response;
+        private readonly IProvideResponseFromLaceDataProviders _response;
         private readonly ILaceRequest _request;
 
 

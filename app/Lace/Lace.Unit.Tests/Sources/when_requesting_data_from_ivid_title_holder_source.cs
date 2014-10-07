@@ -1,9 +1,9 @@
-﻿using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Models;
-using Lace.Request;
-using Lace.Source;
-using Lace.Source.IvidTitleHolder.ServiceCalls;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
@@ -14,11 +14,11 @@ namespace Lace.Unit.Tests.Sources
 {
     public class when_requesting_data_from_ivid_title_holder_source : Specification
     {
-        private readonly IRequestDataFromSource _requestDataFromService;
+        private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ILaceRequest _ividTitleHolderRequest;
-        private IProvideLaceResponse _laceResponse;
+        private IProvideResponseFromLaceDataProviders _laceResponse;
         private readonly ILaceEvent _laceEvent;
-        private readonly ICallTheSource _externalWebServiceCall;
+        private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_ivid_title_holder_source()
         {

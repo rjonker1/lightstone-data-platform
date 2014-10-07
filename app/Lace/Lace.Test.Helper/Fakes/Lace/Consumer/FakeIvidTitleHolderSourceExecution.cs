@@ -1,27 +1,27 @@
-﻿using Lace.Consumer;
-using Lace.Events;
-using Lace.Models;
-using Lace.Models.IvidTitleHolder;
-using Lace.Request;
-using Lace.Source;
-using Lace.Source.Enums;
+﻿using Lace.DistributedServices.Events.Contracts;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Core;
+using Lace.Domain.DataProviders.Core.Consumer;
+using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeIvidTitleHolderSourceExecution : ExecuteSourceBase, IExecuteTheSource
+    public class FakeIvidTitleHolderSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
 
-        public FakeIvidTitleHolderSourceExecution(ILaceRequest request, IExecuteTheSource nextSource,
-            IExecuteTheSource fallbackSource)
+        public FakeIvidTitleHolderSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
         }
 
-        public void CallSource(IProvideLaceResponse response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
         {
             var spec = new CanHandlePackageSpecification(Services.IvidTitleHolder, _request);
 
@@ -42,7 +42,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             CallNextSource(response, laceEvent);
         }
 
-        private static void NotHandledResponse(IProvideLaceResponse response)
+        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
             response.IvidTitleHolderResponse = null;
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();

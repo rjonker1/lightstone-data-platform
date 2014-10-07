@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using EasyNetQ;
-using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Extensions;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests;
 using Monitoring.Sources.Lace;
@@ -11,11 +11,6 @@ using Workflow;
 using Workflow.BuildingBlocks;
 using Workflow.RabbitMQ;
 using Xunit.Extensions;
-
-
-// ReSharper disable InconsistentNaming
-
-
 
 namespace Lace.Acceptance.Tests.Events
 {
@@ -86,5 +81,4 @@ namespace Lace.Acceptance.Tests.Events
 
     }
 }
-// ReSharper enable InconsistentNaming
 

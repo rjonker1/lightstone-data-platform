@@ -1,9 +1,7 @@
-﻿using Lace.Models;
-using Lace.Models.Lightstone.DataObject;
-using Lace.Models.Responses;
-using Lace.Models.RgtVin.DataObject;
-using Lace.Response;
-using Lace.Source.Audatex.AudatexServiceReference;
+﻿using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Dto;
+using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
+using Lace.Domain.Infrastructure.Core.Dto;
 
 namespace Lace.Test.Helper.Fakes.Responses
 {
@@ -40,7 +38,7 @@ namespace Lace.Test.Helper.Fakes.Responses
             };
         }
 
-        public static IProvideLaceResponse GetLaceResponseToUserInAudatexRequest()
+        public static IProvideResponseFromLaceDataProviders GetLaceResponseToUserInAudatexRequest()
         {
             return new LaceResponse()
             {

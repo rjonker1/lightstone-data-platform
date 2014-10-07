@@ -1,6 +1,6 @@
-﻿using Lace.Models.Lightstone.DataObject;
-using Lace.Source.Lightstone.Metrics;
-using Lace.Source.Lightstone.Metrics.Specifics;
+﻿using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Test.Helper.Mothers.Sources.Lightstone;

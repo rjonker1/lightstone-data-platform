@@ -1,6 +1,6 @@
-﻿using Lace.Request;
-using Lace.Source.Lightstone.Cars;
-using Lace.Source.Lightstone.Metrics;
+﻿using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Lightstone.Cars;
+using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Responses;
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone

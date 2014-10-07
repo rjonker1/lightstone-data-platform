@@ -1,14 +1,11 @@
 ﻿
-using Lace.Models;
-using Lace.Models.Lightstone;
-using Lace.Models.Responses;
-using Lace.Request;
-using Lace.Response;
-using Lace.Source.Audatex.AudatexServiceReference;
-using Lace.Source.Ivid.IvidServiceReference;
-using Lace.Source.IvidTitleHolder.IvidTitleHolderServiceReference;
-using Lace.Source.Lightstone.Cars;
-using Lace.Source.Lightstone.Metrics;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
+using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
+using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
+using Lace.Domain.DataProviders.Lightstone.Cars;
+using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Responses;
 
 namespace Lace.Test.Helper.Builders.Responses
@@ -40,7 +37,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
         }
 
-        public IProvideLaceResponse ForAudatexWithLaceResponse()
+        public IProvideResponseFromLaceDataProviders ForAudatexWithLaceResponse()
         {
             return FakeAudatexWebResponseData.GetLaceResponseToUserInAudatexRequest();
         }

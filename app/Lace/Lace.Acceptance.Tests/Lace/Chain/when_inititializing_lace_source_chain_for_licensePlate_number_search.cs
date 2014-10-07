@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Builder;
-using Lace.Events;
-using Lace.Events.Messages.Publish;
-using Lace.Models;
-using Lace.Request;
-using Lace.Response;
+using Lace.DistributedServices.Events.Contracts;
+using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace;
@@ -20,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         private readonly ILaceRequest _request;
         private readonly ILaceEvent _laceEvent;
-        private Dictionary<Type, Func<ILaceRequest, IProvideLaceResponse>> _handlers;
+        private Dictionary<Type, Func<ILaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
 

@@ -1,6 +1,6 @@
-﻿using Lace.Models;
-using Lace.Request;
-using Lace.Source.IvidTitleHolder.ServiceConfig;
+﻿using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
@@ -10,8 +10,8 @@ namespace Lace.Unit.Tests.SourceRequests
     internal class when_configuring_ivid_title_holder_request_message : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideLaceResponse _response;
-        private ConfigureIvidTitleHolderRequestMessage _configureRequestMessage;
+        private readonly IProvideResponseFromLaceDataProviders _response;
+        private IvidTitleHolderRequestMessage _configureRequestMessage;
 
 
         public when_configuring_ivid_title_holder_request_message()
@@ -22,7 +22,7 @@ namespace Lace.Unit.Tests.SourceRequests
 
         public override void Observe()
         {
-            _configureRequestMessage = new ConfigureIvidTitleHolderRequestMessage(_request, _response);
+            _configureRequestMessage = new IvidTitleHolderRequestMessage(_request, _response);
         }
 
         [Observation]
