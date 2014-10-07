@@ -129,4 +129,13 @@
   <data name="exception_InvalidTraceMessage" xml:space="preserve">
     <value>Trace message is null or empty string</value>
   </data>
+  <data name="exception_NotMapFoundForTypeAdapter" xml:space="preserve">
+    <value>Not mapped found for type {0} to type {1}</value>
+  </data>
+  <data name="exception_RegisterTypeMapConfigurationElementInvalidTypeValue" xml:space="preserve">
+    <value>The type is not a fully qualified assembly name</value>
+  </data>
+  <data name="exception_RegisterTypesMapConfigurationInvalidType" xml:space="preserve">
+    <value>Invalid type, expected is RegisterTypesMapConfigurationElement</value>
+  </data>
 </root>
