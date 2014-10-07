@@ -69,6 +69,7 @@
     <Compile Include="Contracts\DataProviders\Specifics\IRespondWithTotalSalesByGenderModel.cs" />
     <Compile Include="Contracts\DataProviders\Specifics\IRespondWithValuation.cs" />
     <Compile Include="Contracts\IBuildIvidResponse.cs" />
+    <Compile Include="Contracts\ICheckIfAnprResponseWasSuccessful.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\IProvideLaceResponse.cs" />
     <Compile Include="Contracts\IResponseProviderHandled.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="Contracts\Requests\IProvideRequestAggregation.cs" />
     <Compile Include="Contracts\Requests\IProvideUserInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideVehicleInformationForRequest.cs" />
+    <Compile Include="Dto\AnprResponse.cs" />
+    <Compile Include="Dto\AnprResponseHandled.cs" />
     <Compile Include="Dto\AudatexResponse.cs" />
     <Compile Include="Dto\AudatexResponseHandled.cs" />
     <Compile Include="Dto\FinancedInterestValidation.cs" />
@@ -88,6 +91,8 @@
     <Compile Include="Dto\IvidResponseHandled.cs" />
     <Compile Include="Dto\IvidTitleHolderResponse.cs" />
     <Compile Include="Dto\IvidTitleHolderResponseHandled.cs" />
+    <Compile Include="Dto\JisResponse.cs" />
+    <Compile Include="Dto\JisResponseHandled.cs" />
     <Compile Include="Dto\LightstoneResponse.cs" />
     <Compile Include="Dto\LightstoneResponseHandled.cs" />
     <Compile Include="Dto\VehicleSpecificInformation.cs" />

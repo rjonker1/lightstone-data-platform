@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Jis.Client.WebSeviceInterface" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://www.ubiquitech.co.za/schemas/lcms" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="Jis.Client.WebSeviceInterface" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Jis.Client.WebSeviceInterface">
+      <s:import namespace="http://www.ubiquitech.co.za/schemas/lcms" />
+      <s:element name="Connect">
+        <s:complexType />
+      </s:element>
+      <s:element name="ConnectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConnectResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserManagementOperation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="operation" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserManagementOperationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserManagementOperationResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserManagementResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Validated" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidationResult" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PasswordChanged" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SessionManagementProcess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="operation" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SessionManagementProcessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SessionManagementProcessResult" type="tns:SessionManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SessionManagementResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DataStoreQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:DataStoreRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DataStoreRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRegNoToQuery" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataStoresToQuery" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleSightingRequest" type="tns:VehicleSightingRequest" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonSightingRequest" type="tns:PersonSightingRequest" />
+          <s:element minOccurs="0" maxOccurs="1" name="RetrieveSightingRequest" type="tns:RetrieveSightingRequest" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnatisRequest" type="tns:EnatisRequestParameters" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreRequests" type="tns:ArrayOfCustomStoreRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VehicleSightingRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SightingRequestBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="FullImageIsThumb" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="ClientHasImages" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SightingRequestBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SiteName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteLocation" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullImage" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="CroppedImage" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="SightingDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PersonSightingRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SightingRequestBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Surname" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdNumber" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsDriver" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsOwner" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="SightingId" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RetrieveSightingRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SightingId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateRangeStart" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateRangeEnd" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LongitudeStart" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="LongitudeEnd" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="LatitudeStart" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="LatitudeEnd" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="RetrieveVehicleImage" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="RetrieveVehiclePlateImage" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GetNumberOfEntries" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="GetLastSighting" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="GreaterThanSightingId" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRegistrationList" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRegistration" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleSightingId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClientId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientsSessions" type="tns:ArrayOfClientSessionMapping" />
+          <s:element minOccurs="0" maxOccurs="1" name="HitTypeList" type="tns:ArrayOfHitTypeStatusMappings" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateRangePreset" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RetrieveVehicleSightings" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="RetrievePersonSightings" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfClientSessionMapping">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClientSessionMapping" nillable="true" type="tns:ClientSessionMapping" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClientSessionMapping">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ClientId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionIds" type="tns:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHitTypeStatusMappings">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HitTypeStatusMappings" nillable="true" type="tns:HitTypeStatusMappings" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HitTypeStatusMappings">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DataStoreId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HitStatuses" type="tns:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EnatisRequestParameters">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EnatisVehiclePersonQuery" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnatisMinVehiclePersonQuery" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnatisDriverQuery" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVRegN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VinOrChassis" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrevLicN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocTypeCd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LrnCertN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EngineN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomStoreRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomStoreRequest" nillable="true" type="tns:CustomStoreRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomStoreRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreList" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QueryValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LookupFieldName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HitIfFound" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DataStoreQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DataStoreQueryResult" type="tns:DataStoreResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DataStoreResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreResults" type="tns:ArrayOfCustomStoreResultNative" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnicodeResults" type="tns:UnicodeResultNative" />
+          <s:element minOccurs="0" maxOccurs="1" name="CirculationResults" type="tns:CirculationResultNative" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnatisResults" type="tns:EnatisResultNative" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleSightingResults" type="tns:VehicleSightingResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonSightingResults" type="tns:PersonSightingResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="SightingResults" type="tns:SightingResults" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomStoreResultNative">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomStoreResultNative" nillable="true" type="tns:CustomStoreResultNative" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomStoreResultNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CustomStoreResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CustomStoreEntries" type="tns:ArrayOfCustomStoreEntryNative" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomStoreResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CustomStoreId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HitIfFound" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:DataStoreResultErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultXml" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Limited" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Empty" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="StoredInDb" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DataStoreResultErrorType">
+        <s:restriction base="s:string">
+          <s:enumeration value="GenericError" />
+          <s:enumeration value="ConnectionError" />
+          <s:enumeration value="ValidationError" />
+          <s:enumeration value="DataStoreToBusy" />
+          <s:enumeration value="AccessDenied" />
+          <s:enumeration value="DataStoreOffline" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfCustomStoreEntryNative">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomStoreEntryNative" nillable="true" type="tns:CustomStoreEntryNative" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomStoreEntryNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CustomStoreEntry">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DataFieldsNative" type="tns:ArrayOfCustomStoreDataField" />
+              <s:element minOccurs="0" maxOccurs="1" name="DataFieldsXml" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomStoreEntry">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Inserted" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Replaced" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomStoreDataField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomStoreDataField" nillable="true" type="tns:CustomStoreDataField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomStoreDataField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UnicodeResultNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UnicodeResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UnicodeResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Empty" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Limited" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnicodeErrorCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:DataStoreResultErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRegistration" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleEngineNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleChassisNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CaseNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PoliceStation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleDateStolen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleMake" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CirculationResultNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CirculationResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CirculationResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SightingId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vehicles" type="tns:ArrayOfCirculationVehicle" />
+          <s:element minOccurs="1" maxOccurs="1" name="Empty" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Limited" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CirculationErrorCode" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:DataStoreResultErrorType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCirculationVehicle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CirculationVehicle" nillable="true" type="tns:CirculationVehicle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CirculationVehicle">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleCirculationStatus" type="tns:VehicleCirculationStatusCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRegistrationNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleVinNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleEngineNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleCirculationDateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleReasonSoughtDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SapsCasNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CasSequenceNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CasMonthNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CasYearNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CasComponentNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CasInternalNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleTypeCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleMakeCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleModelCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleColourCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleYearModel" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleCirculationNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="VehicleCirculationStatusCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="VehiclePossiblySought" />
+          <s:enumeration value="VehicleSought" />
+          <s:enumeration value="VehicleNotSought" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="EnatisResultNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ENatisResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RequestType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="HitTypes" type="tns:ArrayOfInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ENatisResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Hot" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:DataStoreResultErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="X1001Response" type="s1:X1001VehicleType" />
+          <s:element minOccurs="0" maxOccurs="1" name="X1002Response" type="s1:PersonType" />
+          <s:element minOccurs="0" maxOccurs="1" name="X1007Response" type="s1:OwnerAndVehicleType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NatisErrorCodes" type="s1:NatisErrorCodesType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VehicleSightingResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SightingResultBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ActionTaken" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NoActionReason" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="RegistrationNr" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="VehicleImage" type="s:base64Binary" />
+              <s:element minOccurs="0" maxOccurs="1" name="VehiclePlateImage" type="s:base64Binary" />
+              <s:element minOccurs="0" maxOccurs="1" name="HitAndStatusSourceList" type="tns:ArrayOfHitStatusDataStoreNamesMapping" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SightingResultBase">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SightingId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PersonSightingResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SightingResultBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfHitStatusDataStoreNamesMapping">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HitStatusDataStoreNamesMapping" nillable="true" type="tns:HitStatusDataStoreNamesMapping" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HitStatusDataStoreNamesMapping">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="HitStatus" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataStores" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SightingResults">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sightings" type="tns:ArrayOfSightingResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSightingResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SightingResult" nillable="true" type="tns:SightingResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SightingResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SightingDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Processed" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClientID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleSightingResults" type="tns:ArrayOfVehicleSightingResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonSightingResults" type="tns:ArrayOfPersonSightingResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfVehicleSightingResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VehicleSightingResult" nillable="true" type="tns:VehicleSightingResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPersonSightingResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PersonSightingResult" nillable="true" type="tns:PersonSightingResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateSighting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="sessionId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="sightingUpdateRequest" type="tns:SightingUpdateRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SightingUpdateRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRegistrationNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SightingId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleSightingId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SiteName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreIdHitStatusUpdate" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreEntryIdHitStatusUpdate" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomStoreEntryHitStatusUpdate" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnatisHitUpdatedStatsus" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnicodeHitUpdatedStatus" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CirculationHitUpdatedStatus" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionTaken" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnatisInformation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FullImage" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="CroppedImage" type="s:base64Binary" />
+          <s:element minOccurs="1" maxOccurs="1" name="FullImageIsThumbProperty" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateSightingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateSightingResult" type="tns:SightingUpdateResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SightingUpdateResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleSightingResult" type="tns:VehicleSightingResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ResolveEnumForString">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="enumType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="enumValue" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResolveEnumForStringResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ResolveEnumForStringResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomStoreManagement">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customStoreRequest" type="tns:CustomStoreDataNative" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CustomStoreDataNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CustomStoreData">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Operation" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Stores" type="tns:ArrayOfCustomStoreInformationNative" />
+              <s:element minOccurs="1" maxOccurs="1" name="GetStoresWithWriteAccess" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="GetStoresWithReadAccess" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="GetStoresWithLimitedReadAccess" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="GetStoresWithNoResultReadAccess" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Error" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomStoreData">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:JicDataObjectOfCustomStoreData">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" default="" name="Filter" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" default="" name="QueryValue" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" default="Id" name="QueryField" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" default="100" name="QueryPageSize" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" default="1" name="QueryPageNumber" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" default="Id" name="QuerySortField" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" default="asc" name="QueryFieldType" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="JicDataObjectOfCustomStoreData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MaxObjectXmlSize" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomStoreInformationNative">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomStoreInformationNative" nillable="true" type="tns:CustomStoreInformationNative" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomStoreInformationNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CustomStoreInformation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Fields" type="tns:ArrayOfCustomStoreFieldInformationNative" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustomStoreEntries" type="tns:ArrayOfCustomStoreEntryNative" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomStoreInformation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DefaultLookupFieldId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReadRoleRequired" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LimitedReadRoleRequired" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoResultReadRoleRequired" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WriteRoleRequired" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RemoveOnPositiveSighting" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AutomaticQuery" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DefaultHitIfFound" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="RemoveAllFilteredCustomStoreEntries" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FieldIdToOperateOn" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfStoreEntries" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CanCache" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="CacheRefreshInterval" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomStoreFieldInformationNative">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomStoreFieldInformationNative" nillable="true" type="tns:CustomStoreFieldInformationNative" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomStoreFieldInformationNative">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CustomStoreFieldInformation" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomStoreFieldInformation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Format" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Indexed" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllowNulls" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Default" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShowInReport" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FieldSize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsDefault" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Limited" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DelimitedData" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Delimiter" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NoWhiteSpaceAllowed" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CustomStoreManagementResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustomStoreManagementResult" type="tns:CustomStoreDataNative" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendHeartbeat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webServiceAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendHeartbeatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendHeartbeatResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ubiquitech.co.za/schemas/lcms">
+      <s:complexType name="X1001VehicleType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleDet" type="s1:X1001VehicleDetType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Owner" type="s1:X1001PersonType" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerProxy" type="s1:X1001PersonType" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerRep" type="s1:X1001PersonType" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrevOwner" type="s1:X1001PrevOwnerType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001VehicleDetType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MVRegN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VinOrChassis" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EngineN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SAPMark" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVLicChgD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVLicLiaD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVLicExpiryD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegAuthOfLic" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegAuthOfRegtN" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModelName" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVCat" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Driven" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVDesc" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Make" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MainColour" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="GVM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EngineDisp" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tare" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FuelType" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NetPower" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVRegtD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVRegtTypeQual" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWStat" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVState" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVLifeStat" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NModelN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWTstD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SAPClrStat" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVUsage" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrevLicN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehType" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehUsage" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RWTstStatD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVRegtType" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exemption" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoadUseInd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVRegtTypeQualChgD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SAPClrD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrePrevLicN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClrReason" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVCertN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MVEconSector" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SAPMarkD" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CodeDescType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Desc" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001PersonType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PerDet" type="s1:X1001PerDetType" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelDet" type="s1:X1001RelDetType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001PerDetType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PerId" type="s1:X1001PerIdType" />
+          <s:element minOccurs="0" maxOccurs="1" name="PerIdN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NatOfPer" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NatPopGrp" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="BirthDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Age" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostAddr" type="s1:X1001PostAddrType" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAddr" type="s1:X1001StreetAddrType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCEEAddr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChgOfAddrD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DriRestr" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exemption" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperCatg" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="TradeName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001PerIdType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocType" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Initials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusOrSurname" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001PostAddrType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Addr1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCd" type="s1:CodeDescType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001StreetAddrType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Addr1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Addr4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCd" type="s1:CodeDescType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001RelDetType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RelStartD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrStat" type="s1:CodeDescType" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatNat" type="s1:CodeDescType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="X1001PrevOwnerType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerShipD" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PersonType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PersonDetails" type="s1:PersonDetailsType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Learner" type="s1:LearnerType" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenceCard" type="s1:LicenceCardType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Licence" type="s1:LicenceType" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrDP" type="s1:PrDPType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PersonDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PersonId" type="s1:PersonIdType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NatisPersonId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalAddress" type="s1:PostalAddressType" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAddress" type="s1:StreetAddressType" />
+          <s:element minOccurs="0" maxOccurs="1" name="TradeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Age" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BirthDate" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChangeOfAddressDate" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="DCEEAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DrivingLicenceRestriction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DrivingLicenceEndorsement" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalAuthority" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NatureOfPerson" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PopulationGroup" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PersonIdType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdDocNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Initials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessOrSurname" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PostalAddressType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostcodeDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StreetAddressType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Postcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostcodeDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LearnerType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CertificateNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenceCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidFromDate" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpeciallyAdaptedVehicles" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LicenceCardType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CardExpiryDate" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateOfFirstIssue" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="DrivingLicenceCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DrivingLicenceNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LicenceType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DateOfFirstIssue" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="DrivingLicenceCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidFromDate" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidToDate" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="PlaceOfIssue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleRestrictionCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PrDPType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DateAuthorised" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="DangerousGoodsCategory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GoodsCategory" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PassengerCategory" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpiryDate" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidFromDate" type="s:date" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OwnerAndVehicleType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Owner" type="s1:OwnerType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vehicle" type="s1:VehicleType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OwnerType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DrivingLicenceNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Surname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Initials" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IDNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IDType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VehicleType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EngineNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VinOrChassis" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegisterNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenceNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LicenceExpiryDate" type="s:date" />
+          <s:element minOccurs="0" maxOccurs="1" name="Make" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Category" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoadworthyStatus" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NatisErrorCodesType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrField" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrDesc" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConnectSoapIn">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="ConnectSoapOut">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserManagementOperationSoapIn">
+    <wsdl:part name="parameters" element="tns:UserManagementOperation" />
+  </wsdl:message>
+  <wsdl:message name="UserManagementOperationSoapOut">
+    <wsdl:part name="parameters" element="tns:UserManagementOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SessionManagementProcessSoapIn">
+    <wsdl:part name="parameters" element="tns:SessionManagementProcess" />
+  </wsdl:message>
+  <wsdl:message name="SessionManagementProcessSoapOut">
+    <wsdl:part name="parameters" element="tns:SessionManagementProcessResponse" />
+  </wsdl:message>
+  <wsdl:message name="DataStoreQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:DataStoreQuery" />
+  </wsdl:message>
+  <wsdl:message name="DataStoreQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:DataStoreQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSightingSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateSighting" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSightingSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateSightingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResolveEnumForStringSoapIn">
+    <wsdl:part name="parameters" element="tns:ResolveEnumForString" />
+  </wsdl:message>
+  <wsdl:message name="ResolveEnumForStringSoapOut">
+    <wsdl:part name="parameters" element="tns:ResolveEnumForStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustomStoreManagementSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomStoreManagement" />
+  </wsdl:message>
+  <wsdl:message name="CustomStoreManagementSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomStoreManagementResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendHeartbeatSoapIn">
+    <wsdl:part name="parameters" element="tns:SendHeartbeat" />
+  </wsdl:message>
+  <wsdl:message name="SendHeartbeatSoapOut">
+    <wsdl:part name="parameters" element="tns:SendHeartbeatResponse" />
+  </wsdl:message>
+  <wsdl:portType name="JisWsInterfaceSoap">
+    <wsdl:operation name="Connect">
+      <wsdl:input message="tns:ConnectSoapIn" />
+      <wsdl:output message="tns:ConnectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserManagementOperation">
+      <wsdl:input message="tns:UserManagementOperationSoapIn" />
+      <wsdl:output message="tns:UserManagementOperationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SessionManagementProcess">
+      <wsdl:input message="tns:SessionManagementProcessSoapIn" />
+      <wsdl:output message="tns:SessionManagementProcessSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DataStoreQuery">
+      <wsdl:input message="tns:DataStoreQuerySoapIn" />
+      <wsdl:output message="tns:DataStoreQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSighting">
+      <wsdl:input message="tns:UpdateSightingSoapIn" />
+      <wsdl:output message="tns:UpdateSightingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveEnumForString">
+      <wsdl:input message="tns:ResolveEnumForStringSoapIn" />
+      <wsdl:output message="tns:ResolveEnumForStringSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomStoreManagement">
+      <wsdl:input message="tns:CustomStoreManagementSoapIn" />
+      <wsdl:output message="tns:CustomStoreManagementSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendHeartbeat">
+      <wsdl:input message="tns:SendHeartbeatSoapIn" />
+      <wsdl:output message="tns:SendHeartbeatSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="JisWsInterfaceSoap" type="tns:JisWsInterfaceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Connect">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/Connect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserManagementOperation">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/UserManagementOperation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SessionManagementProcess">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/SessionManagementProcess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataStoreQuery">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/DataStoreQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSighting">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/UpdateSighting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveEnumForString">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/ResolveEnumForString" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomStoreManagement">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/CustomStoreManagement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendHeartbeat">
+      <soap:operation soapAction="Jis.Client.WebSeviceInterface/SendHeartbeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="JisWsInterfaceSoap12" type="tns:JisWsInterfaceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Connect">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/Connect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserManagementOperation">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/UserManagementOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SessionManagementProcess">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/SessionManagementProcess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataStoreQuery">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/DataStoreQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSighting">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/UpdateSighting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveEnumForString">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/ResolveEnumForString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomStoreManagement">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/CustomStoreManagement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendHeartbeat">
+      <soap12:operation soapAction="Jis.Client.WebSeviceInterface/SendHeartbeat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="JisWsInterface">
+    <wsdl:port name="JisWsInterfaceSoap" binding="tns:JisWsInterfaceSoap">
+      <soap:address location="https://jis.co.za/jiswsinterface/jiswsinterface.asmx" />
+    </wsdl:port>
+    <wsdl:port name="JisWsInterfaceSoap12" binding="tns:JisWsInterfaceSoap12">
+      <soap12:address location="https://jis.co.za/jiswsinterface/jiswsinterface.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
