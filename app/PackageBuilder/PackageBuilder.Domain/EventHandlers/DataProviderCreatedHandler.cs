@@ -19,6 +19,7 @@ namespace PackageBuilder.Domain.EventHandlers
             var read = new ReadDataProvider
             {
                 Id = command.Id,
+                DataProviderId = command.Id,
                 Name = command.Name,
                 Created = command.Created,
                 Version = 1

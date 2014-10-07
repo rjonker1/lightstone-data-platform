@@ -13,10 +13,10 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public readonly DateTime Edited;
         public readonly Type ResponseType;
         public readonly IEnumerable DataFields;
-        public DataProviderUpdated(Guid id, Guid dataProviderId, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable dataFields)
+        public DataProviderUpdated(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable dataFields)
         {
 			Id = id;
-            DataProvierId = dataProviderId;
+            DataProvierId = id;
             Version = version;
             Name = name;
             Owner = owner;

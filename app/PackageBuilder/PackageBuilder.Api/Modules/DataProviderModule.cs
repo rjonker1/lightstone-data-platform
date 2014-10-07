@@ -36,7 +36,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
 
-            Get["/DataProvider/Edit/{id}"] = parameters =>
+            Get["/DataProvider/Edit/{id}/{version}"] = parameters =>
             {
 
                 bus.Publish(new RenameDataProvider(new Guid(parameters.id), "Test1"));
@@ -44,10 +44,10 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success" });
             };
 
-            Get["/DataProvider/Get/{id}"] = parameters =>
+            Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
 
-                var dataProviders = repository.GetById(parameters.id);
+                var dataProviders = repository.GetById(parameters.id, parameters.version);
                 return Response.AsJson(new { Response = dataProviders });
             };
 
@@ -57,9 +57,7 @@ namespace PackageBuilder.Api.Modules
                 DataProviderDto dto = this.Bind<DataProviderDto>();
                 dto.incVersion();
 
-                Guid dataRecordId = Guid.NewGuid();
-
-                bus.Publish(new UpdateDataProvider(dataRecordId, parameters.id, dto.Name, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto), dto.DataFields));
+                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto), dto.DataFields));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
             };
@@ -73,6 +71,7 @@ namespace PackageBuilder.Api.Modules
 
         public string Name { get; set; }
         public string Owner { get; set; }
+        public string Description { get; set; }
         public DateTime Created { get; set; }
         public DateTime Edited { get; set; }
 

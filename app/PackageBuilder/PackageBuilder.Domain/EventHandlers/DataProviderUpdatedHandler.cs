@@ -1,4 +1,5 @@
 ﻿
+using System;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using PackageBuilder.Domain.MessageHandling;
 using PackageBuilder.Domain.Models;
@@ -18,9 +19,12 @@ namespace PackageBuilder.Domain.EventHandlers
 
         public override void Handle(DataProviderUpdated command)
         {
+
+            Guid id = new Guid();
+
             var update = new ReadDataProvider
             {
-                Id = command.Id,
+                Id = id,
                 DataProviderId = command.DataProvierId,
                 Name = command.Name,
                 Version = command.Version,
