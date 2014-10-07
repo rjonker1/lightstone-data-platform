@@ -180,18 +180,6 @@
     <Folder Include="UML Design\4 - Domain Layer" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application.MainModule\Application.MainModule.csproj">
-      <Name>Application.MainModule</Name>
-      <Project>{28741256-5ffd-452d-8515-133e179b1e04}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\DistributedServices.Core\DistributedServices.Core.csproj">
-      <Name>DistributedServices.Core</Name>
-      <Project>{19eea883-f3ca-4781-8ec0-e108c74273e6}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\DistributedServices.MainModule\DistributedServices.MainModule.csproj">
-      <Name>DistributedServices.MainModule</Name>
-      <Project>{01dc12e9-f233-4f09-ae68-aad20bd3f500}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
       <Name>Domain.Core.Entities</Name>
       <Project>{5a3a2291-4220-4bdc-94c0-f48ab18ed0bd}</Project>
@@ -200,21 +188,9 @@
       <Name>Domain.Core</Name>
       <Project>{d7e981bb-19e7-4d85-a24b-d4295baf87cd}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule.Entities\Domain.MainModule.Entities.csproj">
-      <Name>Domain.MainModule.Entities</Name>
-      <Project>{6f82f34c-72f8-4c1f-9b41-2ee88c54ab01}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule\Domain.MainModule.csproj">
-      <Name>Domain.MainModule</Name>
-      <Project>{d42b62e5-91ee-40f3-b68d-fe2d0afc0aee}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
       <Name>Infrastructure.Data.Core</Name>
       <Project>{98150d03-b191-476d-b192-b5b755e26e8e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Data.MainModule\Infrastructure.Data.MainModule.csproj">
-      <Name>Infrastructure.Data.MainModule</Name>
-      <Project>{f0ca02b9-6921-427d-85cb-a164c4939e82}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

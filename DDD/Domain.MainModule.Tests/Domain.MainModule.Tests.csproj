@@ -82,10 +82,6 @@
       <Project>{98150D03-B191-476D-B192-B5B755E26E8E}</Project>
       <Name>Infrastructure.Data.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Data.MainModule\Infrastructure.Data.MainModule.csproj">
-      <Project>{F0CA02B9-6921-427D-85CB-A164C4939E82}</Project>
-      <Name>Infrastructure.Data.MainModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Infrastructure.Data.MainModule.Tests\App.config">

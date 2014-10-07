@@ -75,14 +75,6 @@
       <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
       <Name>Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule.Entities\Domain.MainModule.Entities.csproj">
-      <Project>{6F82F34C-72F8-4C1F-9B41-2EE88C54AB01}</Project>
-      <Name>Domain.MainModule.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule\Domain.MainModule.csproj">
-      <Project>{D42B62E5-91EE-40F3-B68D-FE2D0AFC0AEE}</Project>
-      <Name>Domain.MainModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
