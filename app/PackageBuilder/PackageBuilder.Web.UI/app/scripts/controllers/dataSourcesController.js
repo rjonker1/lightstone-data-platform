@@ -57,6 +57,7 @@ angular.module('packageBuilderwebuiApp')
         selectedItems: $scope.selectedDatasource,
         multiSelect: false,
         enablePaging: true,
+        enableFiltering: true,
         showFilter: true,
         showGroupPanel: true,
         columnDefs: [
