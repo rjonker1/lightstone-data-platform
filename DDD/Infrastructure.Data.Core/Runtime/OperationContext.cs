@@ -5,41 +5,37 @@ using Topics.Radical.Validation;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Runtime
 {
-	public class OperationContext : IOperationContext
-	{
-		readonly Dictionary<String, Object> data = new Dictionary<string, object>();
+    public class OperationContext : IOperationContext
+    {
+        private readonly Dictionary<String, Object> data = new Dictionary<string, object>();
 
-		public void Dispose()
-		{
-			this.CorrelationId = null;
-			this.data.Clear();
-		}
+        public void Dispose()
+        {
+            CorrelationId = null;
+            data.Clear();
+        }
 
-		public IOperationContext ForOperation( string correlationId )
-		{
-			//Ensure.That( correlationId ).Named( () => correlationId ).IsNotNullNorEmpty();
-			Ensure.That( this.CorrelationId ).Is( null );
+        public IOperationContext ForOperation(string correlationId)
+        {
+            //Ensure.That( correlationId ).Named( () => correlationId ).IsNotNullNorEmpty();
+            Ensure.That(CorrelationId).Is(null);
 
-			this.CorrelationId = correlationId;
+            CorrelationId = correlationId;
 
-			return this;
-		}
+            return this;
+        }
 
 
-		public string CorrelationId
-		{
-			get;
-			private set;
-		}
+        public string CorrelationId { get; private set; }
 
-		public void Add( string key, object value )
-		{
-			this.data.Add( key, value );
-		}
+        public void Add(string key, object value)
+        {
+            data.Add(key, value);
+        }
 
-		public T Get<T>( string key )
-		{
-			return ( T )this.data[ key ];
-		}
-	}
+        public T Get<T>(string key)
+        {
+            return (T) data[key];
+        }
+    }
 }

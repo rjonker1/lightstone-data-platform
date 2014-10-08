@@ -48,4 +48,4 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 
         #endregion
     }
- }
+}

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using LightstoneApp.Infrastructure.CrossCutting.IoC.Resources;
-using LightstoneApp.Infrastructure.CrossCutting.IoC.Unity.LifetimeManagers;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
 using Microsoft.Practices.Unity;
 using ITraceManager = LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager;

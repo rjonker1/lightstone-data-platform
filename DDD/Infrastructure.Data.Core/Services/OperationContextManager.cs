@@ -5,20 +5,20 @@ using Topics.Radical.Validation;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Services
 {
-	class OperationContextManager : IOperationContextManager
-	{
-		readonly IServiceProvider container;
+    internal class OperationContextManager : IOperationContextManager
+    {
+        private readonly IServiceProvider container;
 
-		public OperationContextManager( IServiceProvider container )
-		{
-			Ensure.That( container ).Named( () => container ).IsNotNull();
+        public OperationContextManager(IServiceProvider container)
+        {
+            Ensure.That(container).Named(() => container).IsNotNull();
 
-			this.container = container;
-		}
+            this.container = container;
+        }
 
-		public IOperationContext GetCurrent()
-		{
-			return this.container.GetService<IOperationContext>();
-		}
-	}
+        public IOperationContext GetCurrent()
+        {
+            return container.GetService<IOperationContext>();
+        }
+    }
 }

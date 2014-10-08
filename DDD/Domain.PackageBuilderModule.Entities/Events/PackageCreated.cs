@@ -6,7 +6,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events
     public class PackageCreated : DomainEvent
     {
         //[JsonConstructor]
-        public PackageCreated() { }
+        public PackageCreated()
+        {
+        }
 
         public PackageCreated(String aggregateId, string name, int version)
             : base(aggregateId)

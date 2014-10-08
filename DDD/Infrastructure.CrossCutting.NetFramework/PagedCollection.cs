@@ -42,7 +42,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         #region Public Methods
 
         /// <summary>
-        /// Paginate collection
+        ///     Paginate collection
         /// </summary>
         /// <typeparam name="TEntity">Type of model</typeparam>
         /// <param name="pagedCollection">From page collection</param>
@@ -63,13 +63,14 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         }
 
         /// <summary>
-        /// Paginate collection
+        ///     Paginate collection
         /// </summary>
         /// <typeparam name="T">Type of paged collection</typeparam>
         /// <typeparam name="TEntity">Type of model</typeparam>
         /// <param name="pagedCollection">From page collection</param>
         /// <param name="model">To model</param>
-        public void Paginate<T>(PagedCollection<TEntity> pagedCollection, ref T model) where T : PagedCollection<TEntity>, new()
+        public void Paginate<T>(PagedCollection<TEntity> pagedCollection, ref T model)
+            where T : PagedCollection<TEntity>, new()
         {
             if (pagedCollection == null)
                 throw new ArgumentNullException("pagedCollection");
@@ -77,7 +78,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
             if (model == null)
                 throw new ArgumentNullException("model");
 
-            model = new T { PageIndex = pagedCollection.PageIndex, PageSize = pagedCollection.PageSize, Items = pagedCollection.Items, TotalItems = pagedCollection.TotalItems };
+            model = new T
+            {
+                PageIndex = pagedCollection.PageIndex,
+                PageSize = pagedCollection.PageSize,
+                Items = pagedCollection.Items,
+                TotalItems = pagedCollection.TotalItems
+            };
         }
 
         #endregion

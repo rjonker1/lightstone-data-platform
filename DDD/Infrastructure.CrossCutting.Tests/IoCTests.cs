@@ -6,7 +6,6 @@ namespace LightstoneApp.Infrastructure.CrossCutting.Tests
     [TestClass]
     public class IoCTests
     {
-        [TestMethod]
         public void ShortLivedManager_IsTransient_Test()
         {
             //Arrange

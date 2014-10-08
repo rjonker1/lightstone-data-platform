@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
+﻿namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
     // Summary:
     //     Marker interface to indicate that a class is a message suitable for transmission

@@ -19,9 +19,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         public ExpressionSerializationTypeResolver()
         {
-            var asmname = new AssemblyName { Name = "AnonymousTypes" };
+            var asmname = new AssemblyName {Name = "AnonymousTypes"};
             //AssemblyBuilder assemblyBuilder = System.Threading.Thread.GetDomain().DefineDynamicAssembly(asmname, AssemblyBuilderAccess.RunAndSave);
-            var assemblyBuilder = Thread.GetDomain().DefineDynamicAssembly(asmname, AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = Thread.GetDomain()
+                .DefineDynamicAssembly(asmname, AssemblyBuilderAccess.Run);
             _moduleBuilder = assemblyBuilder.DefineDynamicModule("AnonymousTypes");
         }
 
@@ -46,7 +47,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
                 throw new ArgumentNullException("typeName");
 
             // First - try all replacers
-            var type = ResolveTypeFromString(typeName);
+            Type type = ResolveTypeFromString(typeName);
             //type = typeReplacers.Select(f => f(typeName)).FirstOrDefault();
             if (type != null)
                 return type;
@@ -56,7 +57,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
                 return GetType(typeName.Substring(0, typeName.Length - 2)).MakeArrayType();
 
             // First - try all loaded types
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 //type = assembly.GetType(typeName, false, true);
                 type = assembly.GetType(typeName);
@@ -75,20 +76,20 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         public MethodInfo GetMethod(Type declaringType, string name, Type[] parameterTypes, Type[] genArgTypes)
         {
-            var methods = from mi in declaringType.GetMethods()
-                          where mi.Name == name
-                          select mi;
-            foreach (var method in methods)
+            IEnumerable<MethodInfo> methods = from mi in declaringType.GetMethods()
+                where mi.Name == name
+                select mi;
+            foreach (MethodInfo method in methods)
             {
                 // Would be nice to remvoe the try/catch
                 try
                 {
-                    var realMethod = method;
+                    MethodInfo realMethod = method;
                     if (method.IsGenericMethod)
                     {
                         realMethod = method.MakeGenericMethod(genArgTypes);
                     }
-                    var methodParameterTypes = realMethod.GetParameters().Select(p => p.ParameterType);
+                    IEnumerable<Type> methodParameterTypes = realMethod.GetParameters().Select(p => p.ParameterType);
                     if (MatchPiecewise(parameterTypes, methodParameterTypes))
                     {
                         return realMethod;
@@ -103,8 +104,8 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private static bool MatchPiecewise<T>(IEnumerable<T> first, IEnumerable<T> second)
         {
-            var firstArray = first.ToArray();
-            var secondArray = second.ToArray();
+            T[] firstArray = first.ToArray();
+            T[] secondArray = second.ToArray();
             if (firstArray.Length != secondArray.Length)
                 return false;
             return !firstArray.Where((t, i) => !t.Equals(secondArray[i])).Any();
@@ -119,30 +120,34 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
                 return _anonymousTypes[id];
 
             //vsadov: VB anon type. not necessary, just looks better
-            var anonPrefix = name.StartsWith("<>") ? "<>f__AnonymousType" : "VB$AnonymousType_";
-            var anonTypeBuilder = _moduleBuilder.DefineType(anonPrefix + _anonymousTypeIndex++, TypeAttributes.Public | TypeAttributes.Class);
+            string anonPrefix = name.StartsWith("<>") ? "<>f__AnonymousType" : "VB$AnonymousType_";
+            TypeBuilder anonTypeBuilder = _moduleBuilder.DefineType(anonPrefix + _anonymousTypeIndex++,
+                TypeAttributes.Public | TypeAttributes.Class);
 
             var fieldBuilders = new FieldBuilder[properties.Length];
             var propertyBuilders = new PropertyBuilder[properties.Length];
 
-            for (var i = 0; i < properties.Length; i++)
+            for (int i = 0; i < properties.Length; i++)
             {
-                fieldBuilders[i] = anonTypeBuilder.DefineField("_generatedfield_" + properties[i].Name, properties[i].Type, FieldAttributes.Private);
-                propertyBuilders[i] = anonTypeBuilder.DefineProperty(properties[i].Name, PropertyAttributes.None, properties[i].Type, new Type[0]);
-                var propertyGetterBuilder = anonTypeBuilder.DefineMethod("get_" + properties[i].Name, MethodAttributes.Public, properties[i].Type, new Type[0]);
-                var getterIlGenerator = propertyGetterBuilder.GetILGenerator();
+                fieldBuilders[i] = anonTypeBuilder.DefineField("_generatedfield_" + properties[i].Name,
+                    properties[i].Type, FieldAttributes.Private);
+                propertyBuilders[i] = anonTypeBuilder.DefineProperty(properties[i].Name, PropertyAttributes.None,
+                    properties[i].Type, new Type[0]);
+                MethodBuilder propertyGetterBuilder = anonTypeBuilder.DefineMethod("get_" + properties[i].Name,
+                    MethodAttributes.Public, properties[i].Type, new Type[0]);
+                ILGenerator getterIlGenerator = propertyGetterBuilder.GetILGenerator();
                 getterIlGenerator.Emit(OpCodes.Ldarg_0);
                 getterIlGenerator.Emit(OpCodes.Ldfld, fieldBuilders[i]);
                 getterIlGenerator.Emit(OpCodes.Ret);
                 propertyBuilders[i].SetGetMethod(propertyGetterBuilder);
             }
 
-            var constructorBuilder = anonTypeBuilder.DefineConstructor(
-                    MethodAttributes.HideBySig | MethodAttributes.Public | MethodAttributes.Public,
-                    CallingConventions.Standard, ctrParams.Select(prop => prop.Type).ToArray());
+            ConstructorBuilder constructorBuilder = anonTypeBuilder.DefineConstructor(
+                MethodAttributes.HideBySig | MethodAttributes.Public | MethodAttributes.Public,
+                CallingConventions.Standard, ctrParams.Select(prop => prop.Type).ToArray());
 
-            var constructorIlGenerator = constructorBuilder.GetILGenerator();
-            for (var i = 0; i < ctrParams.Length; i++)
+            ILGenerator constructorIlGenerator = constructorBuilder.GetILGenerator();
+            for (int i = 0; i < ctrParams.Length; i++)
             {
                 constructorIlGenerator.Emit(OpCodes.Ldarg_0);
                 constructorIlGenerator.Emit(OpCodes.Ldarg, i + 1);
@@ -151,7 +156,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             }
 
             constructorIlGenerator.Emit(OpCodes.Ret);
-            var anonType = anonTypeBuilder.CreateType();
+            Type anonType = anonTypeBuilder.CreateType();
             _anonymousTypes.Add(id, anonType);
 
             return anonType;

@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.LaceModule.Tests
 {
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
         public void TestMethod1()
         {
         }

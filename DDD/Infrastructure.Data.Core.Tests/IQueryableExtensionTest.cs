@@ -11,7 +11,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
     [TestClass]
     public class IQueryableExtensionTest
     {
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void IncludeWithPath_Invoke_NullPathThrowArgumentNullException()
         {
@@ -26,8 +25,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Act
             ((IQueryable<Entity>) objectSet).Include((string) null);
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void IncludeWithMemberExpression_Invoke_NullPathThrowArgumentNullException()
         {
@@ -42,8 +39,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Act
             objectSet.Include((Expression<Func<Entity, object>>) null);
         }
-
-        [TestMethod]
         public void IncludeWithPath_Invoke()
         {
             //Arrange
@@ -61,8 +56,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             var actual = new PrivateObject(objectSet).GetField("_IncludePaths") as List<string>;
             Assert.IsTrue(actual.Where(s => s == includePath).Count() == 1);
         }
-
-        [TestMethod]
         public void IncludeWithMemberExpression_Invoke()
         {
             //Arrange
