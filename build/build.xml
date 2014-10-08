@@ -161,12 +161,12 @@
         <include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.pdb" to="lib\net45"/>
         <include pattern="EasyNetQ.dll" to="lib\net45"/>
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
+        <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
+        <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
+        <include pattern="ServiceStack.Text.dll" to="lib\net45" />
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2.0" />
-        <dependency id="ServiceStack.Common" version="3.9.44" />
-        <dependency id="ServiceStack.Redis" version="3.9.71" />
-        <dependency id="ServiceStack.Text" version="3.9.71" />
+				<dependency id="Common.Logging" version="2.1.2.0" />        
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
 			</dependencies>

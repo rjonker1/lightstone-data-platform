@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5964AD4-ED97-440D-9E96-C6A51916B612}</ProjectGuid>
+    <ProjectGuid>{5890ABA1-3E35-4B08-BA99-1EF0C2B5BA82}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Acceptance.Tests</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Acceptance.Tests</AssemblyName>
+    <RootNamespace>Lace.Unit.Tests</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Unit.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -32,21 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Log4Net">
-      <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.32.2.271\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.135\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,42 +50,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Redis.3.9.71\lib\net35\ServiceStack.Redis.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit">
       <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
@@ -105,33 +73,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\AssemblyInfo.cs">
+    <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Events\when_publishing_handled_lace_events_to_bus.cs" />
-    <Compile Include="Events\when_publlishing_lace_events_to_bus.cs" />
-    <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source_with_financed_interest.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_lightstone_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_rgt_vin_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_audatex_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_source.cs" />
-    <Compile Include="Lace\Consumers\when_consuming_ivid_source.cs" />
-    <Compile Include="Lace\Sources\Lightstone\when_getting_statistics_data_to_build_vendor_valuation.cs" />
-    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest.cs" />
-    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_audatex_request.cs" />
-    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_request.cs" />
-    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder.cs" />
-    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
+    <Compile Include="Chain\when_building_lace_source_chain_for_license_plate_number_search.cs" />
     <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
-    <Compile Include="Requests\when_sending_request_to_lace_entry_point.cs" />
+    <Compile Include="SourceRequests\when_configuring_ivid_title_holder_request_message.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_accident_distribution_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_amortisation_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_area_factor_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_auction_factor_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_bands.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_car_information.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_estimated_value_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_image_gauge_metric.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_last_five_sales_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_repair_index_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_statistics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_total_sales_by_age_metrics.cs" />
+    <Compile Include="Sources\Lightstone\when_getting_total_sales_by_gender_metric.cs" />
+    <Compile Include="Sources\when_requesting_data_from_lightstone.source.cs" />
+    <Compile Include="Sources\when_requesting_data_from_rgt_vin_source.cs" />
+    <Compile Include="Sources\when_requesting_data_from_ivid_title_holder_source.cs" />
+    <Compile Include="Sources\when_requesting_data_from_audatex_source.cs" />
+    <Compile Include="Sources\when_transforming_ivid_hpi_standard_query_response.cs" />
+    <Compile Include="Sources\when_requesting_data_from_ivid_source.cs" />
+    <Compile Include="Transform\when_transforming_lighstone_response.cs" />
+    <Compile Include="Transform\when_transforming_rgt_vin_response.cs" />
+    <Compile Include="Transform\when_transforming_audatex_response.cs" />
+    <Compile Include="Transform\when_transforming_ivid_response.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Fakes Include="Fakes\Workflow.BuildingBlocks.fakes" />
-    <None Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -139,51 +113,59 @@
       <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
       <Name>Lace.Test.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
+    <ProjectReference Include="..\source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
       <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
       <Name>Lace.DistributedServices.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Core\Lace.Domain.Core.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj">
+      <Project>{b3c39de4-4b23-4604-8732-06ed64a790b4}</Project>
+      <Name>Lace.Domain.DataProviders.Anpr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
       <Project>{c591b1f8-1490-4cad-8842-ddd642d004b5}</Project>
       <Name>Lace.Domain.DataProviders.Audatex</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
       <Name>Lace.Domain.DataProviders.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
       <Project>{cf5345ca-1b8a-41b5-b85c-a9031d3ea174}</Project>
       <Name>Lace.Domain.DataProviders.IvidTitleHolder</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
       <Name>Lace.Domain.DataProviders.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
+      <Project>{d2f75a1a-20e2-4b05-8f04-ef932d6f6b38}</Project>
+      <Name>Lace.Domain.DataProviders.Jis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>
       <Name>Lace.Domain.DataProviders.RgtVin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>
       <Name>Lace.Domain.Infrastructure.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Infrastructure.EntryPoint\Lace.Domain.Infrastructure.EntryPoint.csproj">
+    <ProjectReference Include="..\Source\Lace.Domain.Infrastructure.EntryPoint\Lace.Domain.Infrastructure.EntryPoint.csproj">
       <Project>{7f252fe1-1ab1-42fb-aebd-eac952e71664}</Project>
       <Name>Lace.Domain.Infrastructure.EntryPoint</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj">
+    <ProjectReference Include="..\source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj">
       <Project>{caefec16-62df-43ec-8b5b-824374cc96e3}</Project>
       <Name>Lace.Shared.CertificateProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+    <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>

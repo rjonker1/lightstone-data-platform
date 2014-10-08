@@ -106,7 +106,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\AssemblyInfo.cs">
+    <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
@@ -215,59 +215,59 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
+    <ProjectReference Include="..\source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
       <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
       <Name>Lace.DistributedServices.Events</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Core\Lace.Domain.Core.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj">
       <Project>{b3c39de4-4b23-4604-8732-06ed64a790b4}</Project>
       <Name>Lace.Domain.DataProviders.Anpr</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Audatex\Lace.Domain.DataProviders.Audatex.csproj">
       <Project>{c591b1f8-1490-4cad-8842-ddd642d004b5}</Project>
       <Name>Lace.Domain.DataProviders.Audatex</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
       <Name>Lace.Domain.DataProviders.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.IvidTitleHolder\Lace.Domain.DataProviders.IvidTitleHolder.csproj">
       <Project>{cf5345ca-1b8a-41b5-b85c-a9031d3ea174}</Project>
       <Name>Lace.Domain.DataProviders.IvidTitleHolder</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Ivid\Lace.Domain.DataProviders.Ivid.csproj">
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
       <Name>Lace.Domain.DataProviders.Ivid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj">
       <Project>{d2f75a1a-20e2-4b05-8f04-ef932d6f6b38}</Project>
       <Name>Lace.Domain.DataProviders.Jis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>
       <Name>Lace.Domain.DataProviders.RgtVin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
+    <ProjectReference Include="..\source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>
       <Name>Lace.Domain.Infrastructure.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Infrastructure.EntryPoint\Lace.Domain.Infrastructure.EntryPoint.csproj">
+    <ProjectReference Include="..\Source\Lace.Domain.Infrastructure.EntryPoint\Lace.Domain.Infrastructure.EntryPoint.csproj">
       <Project>{7f252fe1-1ab1-42fb-aebd-eac952e71664}</Project>
       <Name>Lace.Domain.Infrastructure.EntryPoint</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj">
+    <ProjectReference Include="..\source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj">
       <Project>{caefec16-62df-43ec-8b5b-824374cc96e3}</Project>
       <Name>Lace.Shared.CertificateProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+    <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>
