@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.Api.Helpers.AutoMaps
 {
@@ -13,9 +11,6 @@ namespace PackageBuilder.Api.Helpers.AutoMaps
         {
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
                 .ConvertUsing(x => new DataField(x.Name, null));
-            Mapper.CreateMap<DataProviderDto, DataProvider>()
-                .ConvertUsing(x => new DataProvider(x.Id, x.Name, x.DataFields.Select(Mapper.Map<DataProviderFieldItemDto, IDataField>)));
-                //.ConvertUsing<ITypeConverter<DataProviderDto, DataProvider>>();
         }
     }
 }
