@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.MessageHandling;
 
-namespace PackageBuilder.Domain.CommandHandlers
+namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {
     public class UpdateDataProviderHandler : AbstractMessageHandler<UpdateDataProvider>
     {
