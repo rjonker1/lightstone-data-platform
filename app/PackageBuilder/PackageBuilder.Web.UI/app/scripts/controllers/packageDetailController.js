@@ -8,19 +8,51 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('packageDetailCtrl', function ($scope, $http) {
+  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviders', function ($scope, $http, GetDataProviders) {
 
-    $http({
+    //MOCK
+    /*$http({
         method: 'GET',
         url: '/DataProviders.json'
         }).success(function(data, status, headers, config) {
             
-            $scope.dataProvsPkg = data;
+            $scope.dataProvsPkgMock = data;
 
         }).error(function(data, status, headers, config) {
           
          
-        });
+        });*/
+
+    $scope.dataProvsPkg = {};
+    $scope.dataProvsPkg.Providers = [];
+
+    GetDataProviders.query(function(data){
+
+       var resp = data.response;
+          
+           for( var res in resp)
+           {
+
+              if (resp.hasOwnProperty(res)) {
+                                                              
+                  $scope.dataProvsPkg.Providers = resp;
+                  $scope.message = "Data Loaded."
+              }
+          }
+
+          $scope.alerts = [
+
+            { type: 'success', msg: 'Data loaded successfully !' }
+          ];
+
+    }, function(err){
+
+        $scope.alerts = [
+
+            { type: 'danger', msg: 'Failed to communicate with webserver !' }
+        ];
+
+    }); 
 
         $scope.dataPros = {};
         $scope.dataPros.prods = {};
@@ -139,5 +171,5 @@ angular.module('packageBuilderwebuiApp')
     };
 
 
-  } );
+  }]);
 

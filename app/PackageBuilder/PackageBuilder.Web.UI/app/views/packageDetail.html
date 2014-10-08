@@ -1,5 +1,5 @@
 
-     <script type="text/ng-template" id="proivder_nodes_renderer.html">
+    <script type="text/ng-template" id="proivder_nodes_renderer.html">
 
      <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
      <a style="cursor:pointer;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
@@ -19,11 +19,15 @@
       
     </script>
 
+    {{dataProvsPkgMock}}
+
+    {{dataProvsPkg}}
+
     <h3>Package Detail</h3>
 
     <div id="info" class="row">
 
-          <div id="1" style="float: left;" >
+          <div id="1" class="col-lg-4" >
             <div>
               <label>Name:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
               <label>Version:</label><input type="textbox" class="form-control" ng-model="dataProvider.version" readonly/>
@@ -38,7 +42,9 @@
             </div>
           </div>
 
-          <div id="2" style="float: right;">
+          <div class="col-lg-4" />
+
+          <div id="2" class="col-lg-4">
             <div>
               <label>State:</label>
               <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
@@ -78,7 +84,8 @@
             </div>
           </div>
 
-        </div> <!--End Info-->
+
+           <!-- DataProvider -->
 
     <div class="row">
       <div class="col-lg-6">
@@ -109,19 +116,29 @@
       </div>-->
 
       <div class="col-lg-6">
-        <div style="width: 33%; float: left;">
-           <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
-           <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="dataProvider.version"/>
+        <div style="float: right;">
+
+          <div >
+            <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
+            <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="dataProvider.version"/>
+          </div>
+
+          <br />
+          <br />
+    
+          <div >
+            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="button" class="btn btn-primary">Save Draft</button>
+            <button type="button" class="btn btn-success">Publish</button>
+          </div>
+
         </div>
-      </div>
 
-      <div style="float: right;">
-           <button type="button" class="btn btn-danger">Cancel</button>
-           <button type="button" class="btn btn-primary">Save Draft</button>
-           <button type="button" class="btn btn-success">Publish</button>
       </div>
+    </div>  <!-- End DataProvider -->
 
-    </div>
+        </div> <!--End Info-->
+
 
     <br />
     <br />
