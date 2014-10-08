@@ -157,7 +157,7 @@
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>
       <Name>Lace.Domain.Infrastructure.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Lace.Domain.Infrastructure\Lace.Domain.Infrastructure.EntryPoint.csproj">
+    <ProjectReference Include="..\..\Source\Lace.Domain.Infrastructure.EntryPoint\Lace.Domain.Infrastructure.EntryPoint.csproj">
       <Project>{7f252fe1-1ab1-42fb-aebd-eac952e71664}</Project>
       <Name>Lace.Domain.Infrastructure.EntryPoint</Name>
     </ProjectReference>

@@ -128,57 +128,33 @@
 
     <!-- LACE START -->
 		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.Lace.Request.Entry</name>
-			<folder>app/Lace/Lace.Request.Entry</folder>
+			<name>Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint</name>
+			<folder>app/Lace/source/Lace.Domain.Infrastructure.EntryPoint</folder>
 			<author>CustomApp</author>
-			<description>Lace.Request.Entry</description>
+			<description>Lace.Domain.Infrastructure.EntryPoint</description>
 			<includes>
-        <include pattern="Lightstone.DataPlatform.Lace.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Builder.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Builder.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Consumer.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Consumer.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Events.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Events.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Events.Messages.Publish.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Events.Messages.Publish.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Extensions.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Extensions.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Request.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Request.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Response.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Response.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Response.ExternalServices.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Response.ExternalServices.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Request.Entry.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Request.Entry.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Audatex.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Audatex.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Ivid.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Ivid.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.IvidTitleHolder.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Lightstone.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Lightstone.pdb" to="lib\net45"/>
-       <!-- <include pattern="Lightstone.DataPlatform.Lace.Models.Rgt.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.Rgt.pdb" to="lib\net45"/> -->
-        <include pattern="Lightstone.DataPlatform.Lace.Models.RgtVin.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Models.RgtVin.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Audatex.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Audatex.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Ivid.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Ivid.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.IvidTitleHolder.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.Lightstone.pdb" to="lib\net45"/> 
-        <include pattern="Lightstone.DataPlatform.Lace.Source.RgtVin.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Source.RgtVin.pdb" to="lib\net45"/>         
+        <include pattern="Lightstone.DataPlatform.Lace.DistributedServices.Events.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.DistributedServices.Events.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll" to="lib\net45"/>
@@ -187,7 +163,10 @@
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2.0" />          
+				<dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="ServiceStack.Common" version="3.9.44" />
+        <dependency id="ServiceStack.Redis" version="3.9.71" />
+        <dependency id="ServiceStack.Text" version="3.9.71" />
 				<dependency id="Lightstone.DataPlatform.Workflow" />
 				<dependency id="Lightstone.DataPlatform.Monitoring" />
 			</dependencies>
