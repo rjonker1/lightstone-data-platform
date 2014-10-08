@@ -5,7 +5,7 @@ using Topics.Radical.Bootstrapper;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Services
 {
-    class CommitDispatchScheduler : AbstractDispatchScheduler<Commits.Commit, CommitDispatchConsumer>, ICommitDispatchScheduler, IRequireToStart
+	class CommitDispatchScheduler : AbstractDispatchScheduler<Commits.Commit, CommitDispatchConsumer>, ICommitDispatchScheduler, IRequireToStart
 	{
 		readonly IOperationContextManager contextManager;
 		readonly IBus bus;

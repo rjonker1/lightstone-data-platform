@@ -11,8 +11,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Events
         public PackageCreated(String aggregateId, string name, string version)
             : base(aggregateId)
         {
-            this.Name = name;
-            this.Version = version;
+            Name = name;
+            Version = version;
         }
 
         public string Name { get; private set; }

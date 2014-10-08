@@ -5,74 +5,76 @@ using Newtonsoft.Json;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
-	public abstract class Aggregate : IAggregate, IEquatable<IAggregate>
-	{
-		private String _id;
+    public abstract class Aggregate : IAggregate, IEquatable<IAggregate>
+    {
+        private String _id;
 
-		public String Id
-		{
-			get { return _id; }
-			private set 
-			{
-				if ( this._id != value )
-				{
-					this._id = value;
-					this.OnIdUpdated();
-				}
-			}
-		}
+        public String Id
+        {
+            get { return _id; }
+            private set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnIdUpdated();
+                }
+            }
+        }
 
-		private void OnIdUpdated()
-		{
-			if ( this.IsChanged ) 
-			{
-				foreach ( var @event in this.uncommittedEvents ) 
-				{
-					( ( DomainEvent )@event ).AggregateId = this.Id;
-				}
-			}
-		}
+        private void OnIdUpdated()
+        {
+            if (IsChanged)
+            {
+                foreach (IDomainEvent @event in _uncommittedEvents)
+                {
+                    ((DomainEvent) @event).AggregateId = Id;
+                }
+            }
+        }
 
-		public int Version { get; private set; }
+        public int Version { get; private set; }
 
-		[JsonIgnore]
-		public Boolean IsChanged { get { return this.uncommittedEvents.Any(); } }
+        [JsonIgnore]
+        public Boolean IsChanged
+        {
+            get { return _uncommittedEvents.Any(); }
+        }
 
-		[JsonIgnore]
-		List<IDomainEvent> uncommittedEvents = new List<IDomainEvent>();
+        [JsonIgnore] private readonly List<IDomainEvent> _uncommittedEvents = new List<IDomainEvent>();
 
-		IEnumerable<IDomainEvent> IAggregate.GetUncommittedEvents()
-		{
-			return this.uncommittedEvents.ToArray();
-		}
+        IEnumerable<IDomainEvent> IAggregate.GetUncommittedEvents()
+        {
+            return _uncommittedEvents.ToArray();
+        }
 
-		void IAggregate.ClearUncommittedEvents()
-		{
-			this.uncommittedEvents.Clear();
-		}
+        void IAggregate.ClearUncommittedEvents()
+        {
+            _uncommittedEvents.Clear();
+        }
 
-		protected void RaiseEvent( DomainEvent @event )
-		{
-            var newVersion = this.Version + 1;
+        protected void RaiseEvent(DomainEvent @event)
+        {
+            int newVersion = Version + 1;
             @event.AggregateVersion = newVersion;
 
-			this.uncommittedEvents.Add( @event );
-			this.Version = newVersion;
-		}
+            _uncommittedEvents.Add(@event);
+            Version = newVersion;
+        }
 
-		public override Int32 GetHashCode()
-		{
-			return this.Id.GetHashCode();
-		}
+        public override Int32 GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
 
-		public override Boolean Equals( object obj )
-		{
-			return this.Equals( obj as IAggregate );
-		}
+        public override Boolean Equals(object obj)
+        {
+            return Equals(obj as IAggregate);
+        }
 
-		public virtual Boolean Equals( IAggregate other )
-		{
-			return other != null && other.Id == this.Id;
-		}
-	}
+        public virtual Boolean Equals(IAggregate other)
+        {
+            return other != null && other.Id == Id;
+        }
+    }
 }

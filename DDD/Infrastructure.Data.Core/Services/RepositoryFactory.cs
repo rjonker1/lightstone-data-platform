@@ -11,7 +11,7 @@ using Topics.Radical.Validation;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Services
 {
-    class RepositoryFactory : IRepositoryFactory
+	class RepositoryFactory : IRepositoryFactory
 	{
 		class Repository : IRepository
 		{

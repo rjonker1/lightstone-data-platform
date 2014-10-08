@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <dcl:schema name="PackageBuilder" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
+	<dcl:domain name="Version">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Version_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
 	<dcl:domain name="State">
 		<dcl:predefinedDataType name="CHARACTER VARYING" length="32" />
 		<dcl:checkConstraint name="ValueTypeValueConstraint1">
@@ -60,7 +69,7 @@
 			<dcl:predefinedDataType name="TIMESTAMP" />
 		</dcl:column>
 		<dcl:column name="Version" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="20" />
+			<dcl:domainRef name="Version" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Package_PK" isPrimary="true">
 			<dcl:columnRef name="PackageId" />
@@ -134,7 +143,7 @@
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
 		</dcl:column>
 		<dcl:column name="Version" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="20" />
+			<dcl:domainRef name="Version" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="DataSource_PK" isPrimary="true">
 			<dcl:columnRef name="DataSourceId" />
@@ -181,6 +190,9 @@
 	<dcl:table name="FileAttachment">
 		<dcl:column name="FileAttachmentId" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="&quot;Blob&quot;" requestedName="Blob" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="BINARY VARYING" />
 		</dcl:column>
 		<dcl:column name="DataSourceId" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />

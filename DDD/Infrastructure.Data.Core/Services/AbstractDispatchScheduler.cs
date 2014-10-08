@@ -10,14 +10,14 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
 		where TConsumer : AbstractDispatchConsumer<TCommit>
 		where TCommit : Commit
 	{
-		readonly IDocumentStore documentStore;
+		readonly IDocumentStore _documentStore;
 		TConsumer consumer = null;
 
 		public AbstractDispatchScheduler( IDocumentStore documentStore )
 		{
 			Ensure.That( documentStore ).Named( () => documentStore ).IsNotNull();
 
-			this.documentStore = documentStore;
+			this._documentStore = documentStore;
 		}
 
 		protected virtual void TryResume()
