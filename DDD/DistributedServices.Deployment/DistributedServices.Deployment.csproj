@@ -93,10 +93,6 @@
       <Project>{19EEA883-F3CA-4781-8EC0-E108C74273E6}</Project>
       <Name>DistributedServices.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DistributedServices.MainModule\DistributedServices.MainModule.csproj">
-      <Project>{01DC12E9-F233-4F09-AE68-AAD20BD3F500}</Project>
-      <Name>DistributedServices.MainModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
       <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
       <Name>Domain.Core.Entities</Name>
@@ -104,14 +100,6 @@
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
       <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
       <Name>Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule.Entities\Domain.MainModule.Entities.csproj">
-      <Project>{6F82F34C-72F8-4C1F-9B41-2EE88C54AB01}</Project>
-      <Name>Domain.MainModule.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule\Domain.MainModule.csproj">
-      <Project>{D42B62E5-91EE-40F3-B68D-FE2D0AFC0AEE}</Project>
-      <Name>Domain.MainModule</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

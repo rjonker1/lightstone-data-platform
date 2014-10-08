@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SequenceDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="d0dbce93-7195-4a0b-a916-92ae17e6725c" name="Command Structure Secuence UMLSequenceDiagram1" linkedPackageId="60a96527-abb7-4a09-8153-ab246f75e5d6" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="71edba6d-c6b0-4148-8ac6-78876f3aaaf0">
-      <profileInstance Id="8a519343-dfd9-4c03-9f35-096cfff8092b" name="CSharpProfile">
-        <elementDefinition Id="c007b612-c5fc-4da8-af87-ac9970bd79e8" />
-      </profileInstance>
-      <elementDefinition Id="e13e73dd-1ec4-489d-a067-79878104e9e9" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
       <interaction Id="f873e487-a4e2-4b1f-8d0d-d7d75e0e32da" name="Command Structure Secuence UMLSequenceDiagram1" collapseFragmentsFlag="false" isActiveClass="false" isAbstract="false" isLeaf="false" isReentrant="false">
@@ -48,7 +40,7 @@
           <messageOccurrenceSpecification Id="8abbc88a-66be-46c0-9a3b-0cee6d5d93fa" name="MessageOccurrenceSpecification5">
             <elementDefinition Id="5b6968d5-00b9-4320-b134-7a3e1c5273f0" />
             <covered>
-              <lifelineMoniker Id="4c8db536-453d-468e-a654-671e58a2def8" LastKnownName="cliente : Client" />
+              <lifelineMoniker Id="4c8db536-453d-468e-a654-671e58a2def8" LastKnownName="client : Client" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="ab6b83c8-a90c-49d8-9453-781110a8dbde" name="ExecutionOccurrenceSpecification4">
@@ -91,7 +83,7 @@
           <messageOccurrenceSpecification Id="3adc84dd-54c2-4768-8bed-439d34963756" name="MessageOccurrenceSpecification7">
             <elementDefinition Id="e79748a2-dac7-4dbf-ac42-ca34a53af65a" />
             <covered>
-              <lifelineMoniker Id="4c8db536-453d-468e-a654-671e58a2def8" LastKnownName="cliente : Client" />
+              <lifelineMoniker Id="4c8db536-453d-468e-a654-671e58a2def8" LastKnownName="client : Client" />
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="7f646e41-4f3c-4353-993d-4539a2421cc1" name="MessageOccurrenceSpecification8">
@@ -221,7 +213,7 @@
               <executionOccurrenceSpecificationMoniker Id="90ccf267-5fc9-4985-b02b-2b390e04465d" LastKnownName="ExecutionOccurrenceSpecification10" />
             </topLevelOccurrences>
           </lifeline>
-          <lifeline Id="4c8db536-453d-468e-a654-671e58a2def8" name="cliente : Client" isActor="false" lifelineDisplayName="cliente : Client">
+          <lifeline Id="4c8db536-453d-468e-a654-671e58a2def8" name="client : Client" isActor="false" lifelineDisplayName="client : Client">
             <elementDefinition Id="452b00ac-d11c-4ee6-a2b6-828693448ca4" />
             <represents>
               <propertyMoniker Id="4c81c1ea-d38f-4b78-8efa-134406ec4e64" />
@@ -388,6 +380,12 @@
           <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
         </profileInstance>
         <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="71edba6d-c6b0-4148-8ac6-78876f3aaaf0">
+        <profileInstance Id="8a519343-dfd9-4c03-9f35-096cfff8092b" name="CSharpProfile">
+          <elementDefinition Id="c007b612-c5fc-4da8-af87-ac9970bd79e8" />
+        </profileInstance>
+        <elementDefinition Id="e13e73dd-1ec4-489d-a067-79878104e9e9" />
       </packageHasProfileInstances>
     </profileInstances>
   </package>

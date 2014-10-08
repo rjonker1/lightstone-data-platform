@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Lace.Models.Ivid.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Models;
@@ -57,7 +57,7 @@ namespace PackageBuilder.Api.Modules
                 DataProviderDto dto = this.Bind<DataProviderDto>();
                 dto.incVersion();
 
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto), dto.DataFields));
+                //bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto), dto.DataFields));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
             };
@@ -66,36 +66,4 @@ namespace PackageBuilder.Api.Modules
     
 
     //Mock-up for DataProvider Model-Bind
-    public class DataProviderDto
-    {
-
-        public string Name { get; set; }
-        public string Owner { get; set; }
-        public string Description { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Edited { get; set; }
-
-        public int Version { get; set; }
-
-        public int incVersion()
-        {
-            return Version++;
-        }
-
-        public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
-
-    }
-
-    public class DataProviderFieldItemDto
-    {
-      
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Label { get; set; }
-        public string Definition { get; set; }
-        public string Industries { get; set; }
-        public double Price { get; set; }
-        public bool IsSelected { get; set; }
-
-    }
 }

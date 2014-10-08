@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using LightstoneApp.Domain.Core.Specification;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Domain.Core
 {
+
+  
+
     /// <summary>
     ///     Base interface for implement a "Repository Pattern", for
     ///     more information about this pattern see http://martinfowler.com/eaaCatalog/repository.html

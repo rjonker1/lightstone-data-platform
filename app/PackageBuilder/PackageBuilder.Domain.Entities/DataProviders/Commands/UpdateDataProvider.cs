@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Core.Commands;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Commands
@@ -13,9 +14,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly string Name;
         public readonly string Owner;
         public readonly Type DataProviderType;
-        public readonly IEnumerable DataFields;
+        public readonly IEnumerable<IDataField> DataFields;
 
-        public UpdateDataProvider(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type dataProviderType, IEnumerable dataFields)
+        public UpdateDataProvider(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type dataProviderType, IEnumerable<IDataField> dataFields)
         {
             Id = id;
             Name = name;

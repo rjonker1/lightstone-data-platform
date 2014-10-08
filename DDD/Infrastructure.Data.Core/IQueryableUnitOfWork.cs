@@ -1,14 +1,14 @@
-﻿using System.Data.Objects;
+﻿using System.Data.Entity.Core.Objects;
 using LightstoneApp.Domain.Core;
 using LightstoneApp.Domain.Core.Entities;
 
 namespace LightstoneApp.Infrastructure.Data.Core
 {
     /// <summary>
-    ///     This is the minimun contract for all unit of work, one unit of work per module, that extend
+    ///     This is the minimum contract for all unit of work, one unit of work per module, that extend
     ///     base IUnitOfWork contract with specific features of ADO .NET EF and STE.
     ///     Creation of this and base contract add isolation feature from specific contract for
-    ///     testing purposed and delete innecesary dependencies
+    ///     testing purposed and delete necessary dependencies
     /// </summary>
     public interface IQueryableUnitOfWork : IUnitOfWork
     {

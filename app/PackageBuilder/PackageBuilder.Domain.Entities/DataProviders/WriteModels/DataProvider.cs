@@ -19,8 +19,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public DateTime Edited { get; private set; }
         public string Owner { get; private set; }
         public string SourceURL { get; private set; }
-        public IEnumerable DataFields { get; private set; }
-         
+        public IEnumerable<IDataField> DataFields { get; private set; }
         public Type ResponseType { get; private set; }
 
         private DataProvider(Guid id)
@@ -30,12 +29,21 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
 
         public DataProvider() { }
 
-        public DataProvider(Guid id, string name, Type responseType) : this(id)
+        public DataProvider(Guid id, string name, IEnumerable<IDataField> dataFields) 
+            : this(id)
+        {
+            Id = id;
+            Name = name;
+            DataFields = dataFields;
+        }
+
+        public DataProvider(Guid id, string name, Type responseType) 
+            : this(id)
         {
             RaiseEvent(new DataProviderCreated(id, name, responseType, PopulateDataFields(responseType)));
         }
 
-        public void CreateDataProviderRevision(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable dataFields)
+        public void CreateDataProviderRevision(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable<IDataField> dataFields)
         {
             RaiseEvent(new DataProviderUpdated(id, name, owner, created, edited, version, responseType, dataFields));
         }

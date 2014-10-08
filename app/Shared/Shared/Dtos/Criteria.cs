@@ -4,6 +4,6 @@ namespace DataPlatform.Shared.Dtos
 {
     public class Criteria 
     {
-        public IEnumerable<DataField> Fields { get; set; }
+        public IEnumerable<DataFieldDto> Fields { get; set; }
     }
 }

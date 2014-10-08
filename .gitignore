@@ -81,3 +81,4 @@ UpgradeLog*.XML
 
 app/iBroker.Api/iBroker.Api.rar
 app/iBroker.Web/iBroker.Web.rar
+*.rb

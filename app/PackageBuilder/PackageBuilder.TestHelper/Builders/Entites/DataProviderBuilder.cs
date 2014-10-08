@@ -1,5 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
@@ -10,7 +11,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private string _name;
         public IDataProvider Build()
         {
-            return new DataProvider(_id, _name, null);
+            return new DataProvider(_id, _name, new []{new DataField(), });
         }
 
         public DataProviderBuilder With(Guid id)

@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
@@ -11,7 +13,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private IDataSet[] _dataSets = Enumerable.Empty<IDataSet>().ToArray();
         public IPackage Build()
         {
-            return new Package(_name) { Action = _action, DataSets = _dataSets };
+            return new Package(Guid.NewGuid(), "test", null);
         }
 
         public PackageBuilder With(string name)

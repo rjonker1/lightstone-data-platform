@@ -89,10 +89,11 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="CommandHandlers\CreateDataProviderHandler.cs" />
-    <Compile Include="CommandHandlers\UpdateDataProviderHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\CreateDataProviderHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\UpdateDataProviderHandler.cs" />
+    <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
     <Compile Include="EventHandlers\DataProviderCreatedHandler.cs" />
-    <Compile Include="CommandHandlers\RenameDataProviderHandler.cs" />
+    <Compile Include="CommandHandlers\DataProviders\RenameDataProviderHandler.cs" />
     <Compile Include="EventHandlers\DataProviderUpdatedHandler.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />

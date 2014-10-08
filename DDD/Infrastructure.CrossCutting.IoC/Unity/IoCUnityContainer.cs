@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using LightstoneApp.Application.MainModule.BankingManagement;
-using LightstoneApp.Application.MainModule.CustomersManagement;
-using LightstoneApp.Application.MainModule.SalesManagement;
-using LightstoneApp.Domain.MainModule.BankAccounts;
-using LightstoneApp.Domain.MainModule.Countries;
-using LightstoneApp.Domain.MainModule.Customers;
-using LightstoneApp.Domain.MainModule.Orders;
-using LightstoneApp.Domain.MainModule.Products;
 using LightstoneApp.Infrastructure.CrossCutting.IoC.Resources;
 using LightstoneApp.Infrastructure.CrossCutting.IoC.Unity.LifetimeManagers;
-using LightstoneApp.Infrastructure.CrossCutting.Logging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
-using LightstoneApp.Infrastructure.Data.MainModule.Repositories;
-using LightstoneApp.Infrastructure.Data.MainModule.UnitOfWork;
 using Microsoft.Practices.Unity;
+using ITraceManager = LightstoneApp.Infrastructure.CrossCutting.Logging.ITraceManager;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.IoC.Unity
 {
@@ -73,23 +63,23 @@ namespace LightstoneApp.Infrastructure.CrossCutting.IoC.Unity
             //if any type has been written wrong.
 
             //Register Repositories mappings
-            container.RegisterType<IProductRepository, ProductRepository>(new TransientLifetimeManager());
-            container.RegisterType<IOrderRepository, OrderRepository>(new TransientLifetimeManager());
-            container.RegisterType<IBankAccountRepository, BankAccountRepository>(new TransientLifetimeManager());
-            container.RegisterType<ICustomerRepository, CustomerRepository>(new TransientLifetimeManager());
-            container.RegisterType<ICountryRepository, CountryRepository>(new TransientLifetimeManager());
+            //container.RegisterType<IProductRepository, ProductRepository>(new TransientLifetimeManager());
+            //container.RegisterType<IOrderRepository, OrderRepository>(new TransientLifetimeManager());
+            //container.RegisterType<IBankAccountRepository, BankAccountRepository>(new TransientLifetimeManager());
+            //container.RegisterType<ICustomerRepository, CustomerRepository>(new TransientLifetimeManager());
+            //container.RegisterType<ICountryRepository, CountryRepository>(new TransientLifetimeManager());
 
-            //Register application services mappings
+            ////Register application services mappings
 
-            container.RegisterType<ISalesManagementService, SalesManagementService>(new TransientLifetimeManager());
-            container.RegisterType<ICustomerManagementService, CustomerManagementService>(new TransientLifetimeManager());
-            container.RegisterType<IBankingManagementService, BankingManagementService>(new TransientLifetimeManager());
+            //container.RegisterType<ISalesManagementService, SalesManagementService>(new TransientLifetimeManager());
+            //container.RegisterType<ICustomerManagementService, CustomerManagementService>(new TransientLifetimeManager());
+            //container.RegisterType<IBankingManagementService, BankingManagementService>(new TransientLifetimeManager());
 
-            //Register domain services mappings
-            container.RegisterType<IBankTransferDomainService, BankTransferDomainService>(new TransientLifetimeManager());
+            ////Register domain services mappings
+            //container.RegisterType<IBankTransferDomainService, BankTransferDomainService>(new TransientLifetimeManager());
 
 
-            //Register crosscuting mappings
+            //Register crosscutting mappings
             container.RegisterType<ITraceManager, TraceManager>(new TransientLifetimeManager());
         }
 
@@ -99,8 +89,8 @@ namespace LightstoneApp.Infrastructure.CrossCutting.IoC.Unity
         /// <param name="container">Container to configure</param>
         private void ConfigureRealContainer(IUnityContainer container)
         {
-            container.RegisterType<IMainModuleUnitOfWork, MainModuleUnitOfWork>(
-                new PerExecutionContextLifetimeManager(), new InjectionConstructor());
+            //container.RegisterType<IMainModuleUnitOfWork, MainModuleUnitOfWork>(
+            //    new PerExecutionContextLifetimeManager(), new InjectionConstructor());
         }
 
         /// <summary>

@@ -80,10 +80,6 @@
       <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
       <Name>Domain.Core.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule.Entities\Domain.MainModule.Entities.csproj">
-      <Project>{6F82F34C-72F8-4C1F-9B41-2EE88C54AB01}</Project>
-      <Name>Domain.MainModule.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Proxies.MainModule\" />
