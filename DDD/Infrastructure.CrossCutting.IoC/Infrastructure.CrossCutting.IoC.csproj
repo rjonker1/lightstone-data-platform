@@ -45,9 +45,6 @@
     <DocumentationFile>bin\Release\LightstoneApp.Infrastructure.CrossCutting.IoC.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LightstoneApp.Infrastructure.Data.MainModule.Fakes">
-      <HintPath>FakesAssemblies\LightstoneApp.Infrastructure.Data.MainModule.Fakes.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\Unity.2.0\lib\20\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -97,10 +94,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application.MainModule\Application.MainModule.csproj">
-      <Project>{28741256-5FFD-452D-8515-133E179B1E04}</Project>
-      <Name>Application.MainModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
       <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
       <Name>Domain.Core.Entities</Name>
@@ -108,10 +101,6 @@
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
       <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
       <Name>Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule\Domain.MainModule.csproj">
-      <Project>{D42B62E5-91EE-40F3-B68D-FE2D0AFC0AEE}</Project>
-      <Name>Domain.MainModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure.CrossCutting.NetFramework\Infrastructure.CrossCutting.NetFramework.csproj">
       <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
@@ -124,10 +113,6 @@
     <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
       <Project>{98150D03-B191-476D-B192-B5B755E26E8E}</Project>
       <Name>Infrastructure.Data.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Data.MainModule\Infrastructure.Data.MainModule.csproj">
-      <Project>{F0CA02B9-6921-427D-85CB-A164C4939E82}</Project>
-      <Name>Infrastructure.Data.MainModule</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

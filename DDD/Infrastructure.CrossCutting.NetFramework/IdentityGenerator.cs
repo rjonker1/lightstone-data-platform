@@ -2,7 +2,7 @@
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
-    internal static class IdentityGenerator
+    public static class IdentityGenerator
     {
         /// <summary>
         ///   This algorithm generates sequential GUIDs across system boundaries, ideal for databases

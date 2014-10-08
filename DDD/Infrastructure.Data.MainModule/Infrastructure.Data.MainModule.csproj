@@ -57,11 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="UnitOfWork\IMainModuleUnitOfWork.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IMainModuleUnitOfWork.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\MainModuleDataModel.Views.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,14 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="UnitOfWork\MainModuleUnitOfWork.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainModuleUnitOfWork.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UnitOfWork\MainModuleUnitOfWork.Context.Extensions.cs">
-      <DependentUpon>MainModuleUnitOfWork.Context.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model\MainModuleDataModel.edmx">
@@ -101,14 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="UnitOfWork\IMainModuleUnitOfWork.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IMainModuleUnitOfWork.cs</LastGenOutput>
-    </None>
-    <None Include="UnitOfWork\MainModuleUnitOfWork.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MainModuleUnitOfWork.Context.cs</LastGenOutput>
-    </None>
     <None Include="Model\MainModuleDataModel.Views.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MainModuleDataModel.Views.cs</LastGenOutput>
@@ -143,7 +122,9 @@
       <Name>Infrastructure.Data.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UnitOfWork\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>

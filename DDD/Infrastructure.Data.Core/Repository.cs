@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,7 +14,7 @@ using LightstoneApp.Infrastructure.Data.Core.Resources;
 namespace LightstoneApp.Infrastructure.Data.Core
 {
     /// <summary>
-    ///     Default base class for repostories. This generic repository
+    ///     Default base class for repositories. This generic repository
     ///     is a default implementation of <see cref=" LightstoneApp.Domain.Core.IRepository{TEntity}" />
     ///     and your specific repositories can inherit from this base class so automatically will get default implementation.
     ///     IMPORTANT: Using this Base Repository class IS NOT mandatory. It is just a useful base class:
@@ -23,7 +23,7 @@ namespace LightstoneApp.Infrastructure.Data.Core
     ///     For instance, you could want just read-only data methods for your Repository, etc.
     ///     in that case, just simply do not use this base class on your Repository.
     /// </summary>
-    /// <typeparam name="TEntity">Type of elements in repostory</typeparam>
+    /// <typeparam name="TEntity">Type of elements in repository</typeparam>
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IObjectWithChangeTracker
     {
@@ -87,7 +87,7 @@ namespace LightstoneApp.Infrastructure.Data.Core
 
             //add object to IObjectSet for this type
 
-            //really for STE you have two options, addobject and
+            //really for STE you have two options, add object and
             //call to ApplyChanges in this objetSet. After 
             //review discussion feedback in our codeplex project
             //ApplyChanges is the best option because solve problems in 

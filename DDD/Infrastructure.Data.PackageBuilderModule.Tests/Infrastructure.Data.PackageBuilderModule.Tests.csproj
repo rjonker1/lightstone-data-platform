@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Infrastructure.Data.PackageBuilder.Fakes">
-      <HintPath>FakesAssemblies\Infrastructure.Data.PackageBuilder.Fakes.dll</HintPath>
+    <Reference Include="LightstoneApp..Infrastructure.Data.PackageBuilderModule.Fakes">
+      <HintPath>FakesAssemblies\LightstoneApp..Infrastructure.Data.PackageBuilderModule.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -86,13 +86,13 @@
       <Project>{98150D03-B191-476D-B192-B5B755E26E8E}</Project>
       <Name>Infrastructure.Data.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Data.PackageBuilder\Infrastructure.Data.PackageBuilder.csproj">
-      <Project>{86248168-e31d-4a14-856a-6fcf44b83a5e}</Project>
-      <Name>Infrastructure.Data.PackageBuilder</Name>
+    <ProjectReference Include="..\Infrastructure.Data.PackageBuilderModule\Infrastructure.Data.PackageBuilderModule.csproj">
+      <Project>{5b9c1553-f5b0-4ad7-9f01-afc60056ea6c}</Project>
+      <Name>Infrastructure.Data.PackageBuilderModule</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\Infrastructure.Data.PackageBuilder.fakes" />
+    <Fakes Include="Fakes\LightstoneApp..Infrastructure.Data.PackageBuilderModule.fakes" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -14,7 +14,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.Serialization;
-
+using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 #pragma warning disable 1591 // this is for supress no xml comments in public members warnings 
 
 using LightstoneApp.Domain.Core.Entities;
@@ -30,7 +31,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
     #if !SILVERLIGHT
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage()]
     #endif
-    public partial class Package: IObjectWithChangeTracker, INotifyPropertyChanged
+    public partial class Package: Entity,  IObjectWithChangeTracker, INotifyPropertyChanged
     {
         #region Primitive Properties
     
@@ -235,7 +236,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
         private Nullable<System.DateTime> _revisionDate;
     
         [DataMember]
-        public string Version
+        public int Version
         {
             get { return _version; }
             set
@@ -248,7 +249,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
         }
-        private string _version;
+        private int _version;
 
         #endregion
 
@@ -602,5 +603,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
         #endregion
 
+
     }
+
 }

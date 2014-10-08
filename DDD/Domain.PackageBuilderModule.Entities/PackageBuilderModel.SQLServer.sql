@@ -17,7 +17,7 @@ CREATE TABLE PackageBuilder.Package
 	PackageState nvarchar(32) CHECK (PackageState IN (N'Under construction', N'Published', N'Expired')),
 	Published bit,
 	RevisionDate datetime,
-	Version nvarchar(20),
+	Version int CHECK (Version >= 0),
 	CONSTRAINT Package_PK PRIMARY KEY(PackageId)
 )
 GO
@@ -60,7 +60,7 @@ CREATE TABLE PackageBuilder.DataSource
 	PackageId int,
 	RevisionDate datetime,
 	SourceURL nvarchar(512),
-	Version nvarchar(20),
+	Version int CHECK (Version >= 0),
 	CONSTRAINT DataSource_PK PRIMARY KEY(DataSourceId)
 )
 GO
@@ -82,6 +82,7 @@ GO
 CREATE TABLE PackageBuilder.FileAttachment
 (
 	FileAttachmentId int IDENTITY (1, 1) NOT NULL,
+	"Blob" varbinary(max),
 	DataSourceId int,
 	FileName nvarchar(256),
 	CONSTRAINT FileAttachment_PK PRIMARY KEY(FileAttachmentId)

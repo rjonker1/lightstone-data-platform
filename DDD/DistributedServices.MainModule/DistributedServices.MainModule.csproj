@@ -85,14 +85,6 @@
       <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
       <Name>Domain.Core.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule.Entities\Domain.MainModule.Entities.csproj">
-      <Project>{6F82F34C-72F8-4C1F-9B41-2EE88C54AB01}</Project>
-      <Name>Domain.MainModule.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.MainModule\Domain.MainModule.csproj">
-      <Project>{D42B62E5-91EE-40F3-B68D-FE2D0AFC0AEE}</Project>
-      <Name>Domain.MainModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure.CrossCutting.IoC\Infrastructure.CrossCutting.IoC.csproj">
       <Project>{59814C32-5A3B-4AEE-94FA-502EA57CDF70}</Project>
       <Name>Infrastructure.CrossCutting.IoC</Name>

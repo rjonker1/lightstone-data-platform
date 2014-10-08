@@ -153,6 +153,18 @@
   <data name="exception_TraceManagerCannotBeNull" xml:space="preserve">
     <value>Trace manager cannot be null</value>
   </data>
+  <data name="info_CannotAddNullEntity" xml:space="preserve">
+    <value>Cannot add null entity into {0} repository</value>
+  </data>
+  <data name="info_CannotModifyNullEntity" xml:space="preserve">
+    <value>Cannot modify null item into {0} repository</value>
+  </data>
+  <data name="info_CannotRemoveNullEntity" xml:space="preserve">
+    <value>Cannot remove null entity into {0} repository</value>
+  </data>
+  <data name="info_CannotTrackNullEntity" xml:space="preserve">
+    <value>Cannot track null item into {0} repository</value>
+  </data>
   <data name="trace_AddedItemRepository" xml:space="preserve">
     <value>Added object of type {0} in repository</value>
   </data>

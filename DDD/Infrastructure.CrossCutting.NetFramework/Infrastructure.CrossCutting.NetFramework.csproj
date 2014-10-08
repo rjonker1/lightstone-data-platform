@@ -49,6 +49,10 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -66,13 +70,19 @@
     <Compile Include="Adapter\ITypeAdapter.cs" />
     <Compile Include="Adapter\ITypeAdapterFactory.cs" />
     <Compile Include="Adapter\TypeAdapterFactory.cs" />
+    <Compile Include="Aggregate.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="CustomQuery.cs" />
+    <Compile Include="DomainEvent.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionBuilder.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionSerializationTypeResolver.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionSerializer.cs" />
+    <Compile Include="IAggregate.cs" />
     <Compile Include="IdentityGenerator.cs" />
+    <Compile Include="IDomainEvent.cs" />
+    <Compile Include="IMessage.cs" />
+    <Compile Include="IOperationContextManager.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ITraceManager.cs" />
@@ -88,6 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Serialization\SampleXContainerConverter.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="TypeCheck.cs" />
     <Compile Include="Validator\DataAnnotationsEntityValidator.cs" />
