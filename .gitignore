@@ -37,9 +37,6 @@ x64/
 [Bb]uild/nuget/**
 [Bb]uild/artifacts/**
 
-# Fakes
-*.Fakes.*
-
 # Visual Studio profiler
 *.psess
 *.vsp
@@ -69,7 +66,6 @@ ClientBin
 *.dbmdl
 logs/**
 app/packages/**
-DDD/packages/**
 
 Generated_Code #added for RIA/Silverlight projects
 
@@ -82,3 +78,7 @@ UpgradeLog*.XML
 #umbraco
 [Aa]pp_Data/
 
+
+app/iBroker.Api/iBroker.Api.rar
+app/iBroker.Web/iBroker.Web.rar
+*.rb

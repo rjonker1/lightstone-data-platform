@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Core.Events;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Events
@@ -12,8 +13,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public readonly DateTime Created;
         public readonly DateTime Edited;
         public readonly Type ResponseType;
-        public readonly IEnumerable DataFields;
-        public DataProviderUpdated(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable dataFields)
+        public readonly IEnumerable<IDataField> DataFields;
+        public DataProviderUpdated(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable<IDataField> dataFields)
         {
 			Id = id;
             DataProvierId = id;
