@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
     <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css" />
+    <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -32,7 +33,7 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li ng-class="{ active:tab === 1 }"><a ng-href="" ng-click="tab = 1">Home</a></li>
-          <li ng-class="{ active:tab === 2 }"><a ng-href="#/about" ng-click="tab = 2">Packages</a></li>
+          <li ng-class="{ active:tab === 2 }"><a ng-href="#/packages" ng-click="tab = 2">Packages</a></li>
           <li ng-class="{ active:tab === 3 }"><a ng-href="#/package-detail" ng-click="tab = 3">Package Detail</a></li>
           <li ng-class="{ active:tab === 4 }"><a ng-href="#/data-sources" ng-click="tab = 4">Data Sources</a></li>
           <li ng-class="{ active:tab === 5 }"><a ng-href="#/data-source-detail"ng-click="tab = 5">Data Source Detail</a></li>
@@ -83,6 +84,7 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
     <script src="bower_components/ng-grid/build/ng-grid.js"></script>
+    <script src="bower_components/ng-table/ng-table.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -92,7 +94,7 @@
         <script src="scripts/controllers/dataSourcesController.js"></script>
         <script src="scripts/controllers/dataSourceDetailController.js"></script>
         <script src="scripts/controllers/packageDetailController.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/packagesController.js"></script>
         <!-- endbuild -->
 </body>
 </html>

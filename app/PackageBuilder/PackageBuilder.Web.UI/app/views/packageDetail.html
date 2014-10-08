@@ -19,12 +19,74 @@
       
     </script>
 
+    <h3>Package Detail</h3>
+
+    <div id="info" class="row">
+
+          <div id="1" style="float: left;" >
+            <div>
+              <label>Name:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
+              <label>Version:</label><input type="textbox" class="form-control" ng-model="dataProvider.version" readonly/>
+            </div>
+            <div>
+              <div>
+                <label>Description</label>
+              </div>
+              <div>
+                <textarea class="form-control" style="resize: none;" rows="6" cols="50" ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div id="2" style="float: right;">
+            <div>
+              <label>State:</label>
+              <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+              {{dataProvider.state.name}}
+            </div>
+
+            <br />
+
+            <div>
+              <label>Industry:</label>
+              <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+              {{dataProvider.state.name}}
+            </div>
+
+            <br />
+
+            <div >
+
+              <label>Revision Date: </label>
+              <div class="input-group">
+
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvider.edited" is-open="opened" 
+                datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> 
+
+                <span style="width: 20%;" class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>           
+
+            </div>
+
+            <br />
+
+            <div>
+              <label>Owner:</label>
+              <select class="form-control" ng-model="dataProvider.owner" ng-options="user.name for user in users"></select>
+            </div>
+          </div>
+
+        </div> <!--End Info-->
 
     <div class="row">
       <div class="col-lg-6">
         Aggregate Total: R {{ sum }}
       
         <h3>Data Providers</h3>
+
+        
 
         <div ui-tree id="asdt" ng-model="dataProvsPkg">
           <div ng-repeat="providers in dataProvsPkg" >
@@ -38,11 +100,28 @@
 
       </div>
 
-       <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <h3>Data binding</h3>
         <div class="info">
           {{ info }}
         </div>
         <pre class="code">{{ dataProvsPkg | json }}</pre>
+      </div>-->
+
+      <div class="col-lg-6">
+        <div style="width: 33%; float: left;">
+           <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
+           <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="dataProvider.version"/>
+        </div>
       </div>
+
+      <div style="float: right;">
+           <button type="button" class="btn btn-danger">Cancel</button>
+           <button type="button" class="btn btn-primary">Save Draft</button>
+           <button type="button" class="btn btn-success">Publish</button>
+      </div>
+
     </div>
+
+    <br />
+    <br />

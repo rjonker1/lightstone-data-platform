@@ -8,7 +8,7 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('pkgCtrl', function ($scope, $http) {
+  .controller('packageDetailCtrl', function ($scope, $http) {
 
     $http({
         method: 'GET',
