@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('packageBuilderwebuiApp')
-  .controller('packagesCtrl', ['$scope', '$filter', 'GetDataProviders', 'ngTableParams', function ($scope, $filter, GetDataProviders, ngTableParams) {
+  .controller('packagesCtrl', ['$scope', '$filter', 'GetPackages', 'ngTableParams', function ($scope, $filter, GetPackages, ngTableParams) {
 
  
-  	GetDataProviders.query(function(data){
+  	GetPackages.query(function(data){
 
        var resp = data.response;
           
