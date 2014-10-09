@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Dtos;
@@ -13,8 +14,10 @@ namespace PackageBuilder.Api.Helpers.AutoMaps
         {
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
                 .ConvertUsing(x => new DataField(x.Name, null));
+            Mapper.CreateMap<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>()
+                .ConvertUsing(x => x.Select(Mapper.Map<DataProviderFieldItemDto, IDataField>));
             Mapper.CreateMap<DataProviderDto, DataProvider>()
-                .ConvertUsing(x => new DataProvider(x.Id, x.Name, x.DataFields.Select(Mapper.Map<DataProviderFieldItemDto, IDataField>)));
+                .ConvertUsing(x => new DataProvider(x.Id, x.Name, Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(x.DataFields)));
                 //.ConvertUsing<ITypeConverter<DataProviderDto, DataProvider>>();
         }
     }

@@ -8,7 +8,7 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviders', function ($scope, $http, GetDataProviders) {
+  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviderSources', function ($scope, $http, GetDataProviderSources) {
 
     //MOCK
     /*$http({
@@ -23,10 +23,11 @@ angular.module('packageBuilderwebuiApp')
          
         });*/
 
-    $scope.dataProvsPkg = {};
-    $scope.dataProvsPkg.Providers = [];
+    $scope.dataProvsPkg = {}; 
+    $scope.dataProvsPkg.Package = {};
+    $scope.dataProvsPkg.Package.Providers = [];
 
-    GetDataProviders.query(function(data){
+    GetDataProviderSources.query(function(data){
 
        var resp = data.response;
           
@@ -35,7 +36,7 @@ angular.module('packageBuilderwebuiApp')
 
               if (resp.hasOwnProperty(res)) {
                                                               
-                  $scope.dataProvsPkg.Providers = resp;
+                  $scope.dataProvsPkg.Package.Providers = resp;
                   $scope.message = "Data Loaded."
               }
           }
@@ -62,15 +63,16 @@ angular.module('packageBuilderwebuiApp')
         $scope.updateAPIModel = function(providers, fieldName) {
 
 
-            for (var providers in $scope.dataProvsPkg){
+            for (var providers in $scope.dataProvsPkg.Package){
 
-                  var provs = $scope.dataProvsPkg[providers];
+                  var provs = $scope.dataProvsPkg.Package[providers];
+                  $scope.test = provs;
 
                   for (var i = 0; i < provs.length; i++) {
 
                     for(var p in provs){
 
-                      $scope.test = provs[p];
+                      //$scope.test = provs[p];
 
                       if (provs.hasOwnProperty(p)) {
 

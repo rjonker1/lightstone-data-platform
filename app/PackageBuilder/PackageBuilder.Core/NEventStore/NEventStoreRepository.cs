@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
+using MemBus.Support;
 using NEventStore;
+using Raven.Abstractions;
 
 namespace PackageBuilder.Core.NEventStore
 {
@@ -28,7 +31,7 @@ namespace PackageBuilder.Core.NEventStore
 
         public T GetById(Guid id, int version)
         {
-            return GetById<T>(typeof(T).Name, id, version);
+            return GetById<T>(typeof (T).Name, id, version);
         }
 
         public void Save(IAggregate aggregate, Guid commitId)
