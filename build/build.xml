@@ -127,6 +127,17 @@
 
 
     <!-- LACE START -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lace.Domain.Core</name>
+      <folder>app/Lace/source/Lace.Domain.Core</folder>
+      <author>CustomApp</author>
+      <description>Lace.Domain.Core</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
+      </includes>
+    </nuget>
+
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint</name>
 			<folder>app/Lace/source/Lace.Domain.Infrastructure.EntryPoint</folder>
