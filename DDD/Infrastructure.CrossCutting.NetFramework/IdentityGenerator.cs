@@ -5,13 +5,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
     public static class IdentityGenerator
     {
         /// <summary>
-        ///   This algorithm generates sequential GUIDs across system boundaries, ideal for databases
+        ///     This algorithm generates sequential GUIDs across system boundaries, ideal for databases
         /// </summary>
         /// <returns> </returns>
         public static Guid NewSequentialGuid()
         {
-            var uid = Guid.NewGuid().ToByteArray();
-            var binDate = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
+            byte[] uid = Guid.NewGuid().ToByteArray();
+            byte[] binDate = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
 
             var secuentialGuid = new byte[uid.Length];
 

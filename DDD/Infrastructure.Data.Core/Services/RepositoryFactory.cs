@@ -11,146 +11,148 @@ using Topics.Radical.Validation;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Services
 {
-	class RepositoryFactory : IRepositoryFactory
-	{
-		class Repository : IRepository
-		{
-			public void Dispose()
-			{
-				this.session.Dispose();
+    internal class RepositoryFactory : IRepositoryFactory
+    {
+        private readonly ICommitDispatchScheduler commitDispatcher;
+        private readonly Commit.Factory commitFactory;
+        private readonly IOperationContextManager contextManager;
+        private readonly IDocumentStore store;
 
-				this.aggregateTracking.Clear();
-			}
+        public RepositoryFactory(IOperationContextManager contextManager, IDocumentStore store,
+            ICommitDispatchScheduler commitDispatcher, Commit.Factory commitFactory)
+        {
+            Ensure.That(contextManager).Named(() => contextManager).IsNotNull();
+            Ensure.That(store).Named(() => store).IsNotNull();
+            Ensure.That(commitDispatcher).Named(() => commitDispatcher).IsNotNull();
+            Ensure.That(commitFactory).Named(() => commitFactory).IsNotNull();
 
-			readonly IOperationContextManager contextManager;
-			readonly ICommitDispatchScheduler commitDispatchScheduler;
-			readonly IDocumentSession session;
-			readonly HashSet<IAggregate> aggregateTracking = new HashSet<IAggregate>();
-			readonly Guid txId;
-			readonly Commit.Factory commitFactory;
+            this.contextManager = contextManager;
+            this.store = store;
+            this.commitDispatcher = commitDispatcher;
+            this.commitFactory = commitFactory;
+        }
 
-			public Repository( IOperationContextManager contextManager, IDocumentSession session, ICommitDispatchScheduler commitDispatchScheduler, Commit.Factory commitFactory )
-			{
-				Ensure.That( contextManager ).Named( () => contextManager ).IsNotNull();
-				Ensure.That( session ).Named( () => session ).IsNotNull();
-				Ensure.That( commitDispatchScheduler ).Named( () => commitDispatchScheduler ).IsNotNull();
-				Ensure.That( commitFactory ).Named( () => commitFactory ).IsNotNull();
+        public IRepository OpenSession()
+        {
+            return new Repository(
+                contextManager,
+                store.OpenSession(),
+                commitDispatcher,
+                commitFactory);
+        }
 
-				this.txId = Guid.NewGuid();
+        private class Repository : IRepository
+        {
+            private readonly HashSet<IAggregate> aggregateTracking = new HashSet<IAggregate>();
+            private readonly ICommitDispatchScheduler commitDispatchScheduler;
+            private readonly Commit.Factory commitFactory;
+            private readonly IOperationContextManager contextManager;
+            private readonly IDocumentSession session;
+            private readonly Guid txId;
 
-				this.contextManager = contextManager;
-				this.session = session;
-				this.session.Advanced.UseOptimisticConcurrency = true;
-				this.commitDispatchScheduler = commitDispatchScheduler;
-				this.commitFactory = commitFactory;
-			}
+            public Repository(IOperationContextManager contextManager, IDocumentSession session,
+                ICommitDispatchScheduler commitDispatchScheduler, Commit.Factory commitFactory)
+            {
+                Ensure.That(contextManager).Named(() => contextManager).IsNotNull();
+                Ensure.That(session).Named(() => session).IsNotNull();
+                Ensure.That(commitDispatchScheduler).Named(() => commitDispatchScheduler).IsNotNull();
+                Ensure.That(commitFactory).Named(() => commitFactory).IsNotNull();
 
-			public void Save<TAggregate>( TAggregate aggregate ) where TAggregate : IAggregate
-			{
-				this.session.Store( aggregate );
+                txId = Guid.NewGuid();
 
-				this.TrackIfRequired( aggregate );
-			}
+                this.contextManager = contextManager;
+                this.session = session;
+                this.session.Advanced.UseOptimisticConcurrency = true;
+                this.commitDispatchScheduler = commitDispatchScheduler;
+                this.commitFactory = commitFactory;
+            }
 
-			public void CommitChanges()
-			{
-				try
-				{
-					var operationContext = this.contextManager.GetCurrent();
-					var correlationId = operationContext.CorrelationId;
+            public void Dispose()
+            {
+                session.Dispose();
 
-					var userAccount = Thread.CurrentPrincipal.Identity.Name;
+                aggregateTracking.Clear();
+            }
 
-					var commits = this.aggregateTracking
-						.Where( a => a.IsChanged )
-						.Select( aggregate => new
-						{
-							Aggregate = aggregate,
-							Commit = this.commitFactory.CreateFor( this.txId, correlationId, aggregate, userAccount )
-						} )
-						.ToArray()
-						.ForEach( temp =>
-						{
-							var aggregate = temp.Aggregate;
-							var commit = temp.Commit;
+            public void Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate
+            {
+                session.Store(aggregate);
 
-							if ( this.commitDispatchScheduler.IsSynchronous )
-							{
-								commit.MarkAsDispatched();
-							}
+                TrackIfRequired(aggregate);
+            }
 
-							this.session.Store( commit );
-						} )
-						.Select( temp => temp.Commit )
-						.ToArray();
+            public void CommitChanges()
+            {
+                try
+                {
+                    IOperationContext operationContext = contextManager.GetCurrent();
+                    string correlationId = operationContext.CorrelationId;
 
-					this.session.SaveChanges();
+                    string userAccount = Thread.CurrentPrincipal.Identity.Name;
 
-					this.aggregateTracking.ForEach( a => a.ClearUncommittedEvents() );
-					this.aggregateTracking.Clear();
+                    Commit[] commits = aggregateTracking
+                        .Where(a => a.IsChanged)
+                        .Select(aggregate => new
+                        {
+                            Aggregate = aggregate,
+                            Commit = commitFactory.CreateFor(txId, correlationId, aggregate, userAccount)
+                        })
+                        .ToArray()
+                        .ForEach(temp =>
+                        {
+                            IAggregate aggregate = temp.Aggregate;
+                            Commit commit = temp.Commit;
 
-					this.commitDispatchScheduler.ScheduleDispatch( commits );
-				}
-				catch ( ConcurrencyException cex )
-				{
-					//TODO: log
-					throw;
-				}
-			}
+                            if (commitDispatchScheduler.IsSynchronous)
+                            {
+                                commit.MarkAsDispatched();
+                            }
 
-			void TrackIfRequired( IAggregate aggregate )
-			{
-				if ( !this.aggregateTracking.Contains( aggregate ) )
-				{
-					this.aggregateTracking.Add( aggregate );
-				}
-			}
+                            session.Store(commit);
+                        })
+                        .Select(temp => temp.Commit)
+                        .ToArray();
 
-			public TAggregate GetById<TAggregate>( string aggregateId ) where TAggregate : IAggregate
-			{
-				var aggregate = this.session.Load<TAggregate>( aggregateId );
-				this.TrackIfRequired( aggregate );
+                    session.SaveChanges();
 
-				return aggregate;
-			}
+                    aggregateTracking.ForEach(a => a.ClearUncommittedEvents());
+                    aggregateTracking.Clear();
 
-			public TAggregate[] GetById<TAggregate>( params string[] aggregateIds ) where TAggregate : IAggregate
-			{
-				var aggregates = this.session.Load<TAggregate>( aggregateIds );
-				foreach ( var a in aggregates )
-				{
-					this.TrackIfRequired( a );
-				}
+                    commitDispatchScheduler.ScheduleDispatch(commits);
+                }
+                catch (ConcurrencyException cex)
+                {
+                    //TODO: log
+                    throw;
+                }
+            }
 
-				return aggregates;
-			}
-		}
+            public TAggregate GetById<TAggregate>(string aggregateId) where TAggregate : IAggregate
+            {
+                var aggregate = session.Load<TAggregate>(aggregateId);
+                TrackIfRequired(aggregate);
 
-		readonly IOperationContextManager contextManager;
-		readonly ICommitDispatchScheduler commitDispatcher;
-		readonly IDocumentStore store;
-		readonly Commit.Factory commitFactory;
+                return aggregate;
+            }
 
-		public RepositoryFactory( IOperationContextManager contextManager, IDocumentStore store, ICommitDispatchScheduler commitDispatcher, Commit.Factory commitFactory )
-		{
-			Ensure.That( contextManager ).Named( () => contextManager ).IsNotNull();
-			Ensure.That( store ).Named( () => store ).IsNotNull();
-			Ensure.That( commitDispatcher ).Named( () => commitDispatcher ).IsNotNull();
-			Ensure.That( commitFactory ).Named( () => commitFactory ).IsNotNull();
+            public TAggregate[] GetById<TAggregate>(params string[] aggregateIds) where TAggregate : IAggregate
+            {
+                TAggregate[] aggregates = session.Load<TAggregate>(aggregateIds);
+                foreach (TAggregate a in aggregates)
+                {
+                    TrackIfRequired(a);
+                }
 
-			this.contextManager = contextManager;
-			this.store = store;
-			this.commitDispatcher = commitDispatcher;
-			this.commitFactory = commitFactory;
-		}
+                return aggregates;
+            }
 
-		public IRepository OpenSession()
-		{
-			return new Repository(
-				this.contextManager,
-				this.store.OpenSession(),
-				this.commitDispatcher,
-				this.commitFactory );
-		}
-	}
+            private void TrackIfRequired(IAggregate aggregate)
+            {
+                if (!aggregateTracking.Contains(aggregate))
+                {
+                    aggregateTracking.Add(aggregate);
+                }
+            }
+        }
+    }
 }

@@ -1,17 +1,13 @@
-﻿using System.ComponentModel;
-using LightstoneApp.Domain.Core.Entities;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
+﻿using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 {
     public partial class Package
     {
-
-        Package SetupCompleted()
+        private Package SetupCompleted()
         {
-
-            RaiseEvent(new PackageCreated(this.Id.ToString(), this.Name, this.Version));
+            RaiseEvent(new PackageCreated(Id.ToString(), Name, Version));
 
             return this;
         }
@@ -20,7 +16,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
         {
             public Package CreatePackage(string name, int version)
             {
-                var package = new Package()
+                var package = new Package
                 {
                     //Id = "people/" + Guid.NewGuid().ToString(),
                     Id = IdentityGenerator.NewSequentialGuid(),

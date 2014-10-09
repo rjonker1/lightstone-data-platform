@@ -7,6 +7,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
     public abstract class Aggregate : IAggregate, IEquatable<IAggregate>
     {
+        [JsonIgnore] private readonly List<IDomainEvent> _uncommittedEvents = new List<IDomainEvent>();
         private String _id;
 
         public String Id
@@ -22,17 +23,6 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
             }
         }
 
-        private void OnIdUpdated()
-        {
-            if (IsChanged)
-            {
-                foreach (IDomainEvent @event in _uncommittedEvents)
-                {
-                    ((DomainEvent) @event).AggregateId = Id;
-                }
-            }
-        }
-
         public int Version { get; private set; }
 
         [JsonIgnore]
@@ -40,8 +30,6 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         {
             get { return _uncommittedEvents.Any(); }
         }
-
-        [JsonIgnore] private readonly List<IDomainEvent> _uncommittedEvents = new List<IDomainEvent>();
 
         IEnumerable<IDomainEvent> IAggregate.GetUncommittedEvents()
         {
@@ -51,6 +39,22 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         void IAggregate.ClearUncommittedEvents()
         {
             _uncommittedEvents.Clear();
+        }
+
+        public virtual Boolean Equals(IAggregate other)
+        {
+            return other != null && other.Id == Id;
+        }
+
+        private void OnIdUpdated()
+        {
+            if (IsChanged)
+            {
+                foreach (IDomainEvent @event in _uncommittedEvents)
+                {
+                    ((DomainEvent) @event).AggregateId = Id;
+                }
+            }
         }
 
         protected void RaiseEvent(DomainEvent @event)
@@ -70,11 +74,6 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         public override Boolean Equals(object obj)
         {
             return Equals(obj as IAggregate);
-        }
-
-        public virtual Boolean Equals(IAggregate other)
-        {
-            return other != null && other.Id == Id;
         }
     }
 }

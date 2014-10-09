@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LightstoneApp.Infrastructure.Data.Core.Resources {
-    using System;
-    
-    
+namespace LightstoneApp.Infrastructure.Data.Core.Resources
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

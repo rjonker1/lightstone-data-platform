@@ -1,5 +1,4 @@
-﻿
-namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
+﻿namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
 {
     public class TypeAdapterFactory
     {
@@ -12,7 +11,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
         #region Public Static Methods
 
         /// <summary>
-        /// Set the current type adapter factory
+        ///     Set the current type adapter factory
         /// </summary>
         /// <param name="adapterFactory">The adapter factory to set</param>
         public static void SetCurrent(ITypeAdapterFactory adapterFactory)
@@ -21,7 +20,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
         }
 
         /// <summary>
-        /// Create a new type adapter from current factory
+        ///     Create a new type adapter from current factory
         /// </summary>
         /// <returns>Created type adapter</returns>
         public static ITypeAdapter CreateAdapter()

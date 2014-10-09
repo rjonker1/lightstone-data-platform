@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
     /// <summary>
-    ///   Base class for entities
+    ///     Base class for entities
     /// </summary>
     [DataContract(IsReference = true)]
     public abstract class Entity : Aggregate, INotifyPropertyChanged
@@ -21,7 +21,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         #region Properties
 
         /// <summary>
-        /// Get the persisten object identifier
+        ///     Get the persisten object identifier
         /// </summary>
         [DataMember]
         public virtual Guid Id { get; protected set; }
@@ -34,7 +34,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         #region Public Methods
 
         /// <summary>
-        /// Check if this entity is transient, ie, without identity at this moment
+        ///     Check if this entity is transient, ie, without identity at this moment
         /// </summary>
         /// <returns> True if entity is transient, else false </returns>
         public bool IsTransient()
@@ -43,9 +43,9 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         }
 
         /// <summary>
-        /// Generate identity for this entity
+        ///     Generate identity for this entity
         /// </summary>
-        public  void GenerateNewIdentity()
+        public void GenerateNewIdentity()
         {
             if (IsTransient())
                 Id = IdentityGenerator.NewSequentialGuid();
@@ -53,7 +53,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 
 
         /// <summary>
-        /// Change current identity for a new non transient identity
+        ///     Change current identity for a new non transient identity
         /// </summary>
         /// <param name="identity"> the new identity </param>
         public void ChangeCurrentIdentity(Guid identity)
@@ -63,18 +63,18 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         }
 
         /// <summary>
-        /// Clone Entity
+        ///     Clone Entity
         /// </summary>
         public T Clone<T>()
         {
             T copia;
-            var serializer = new DataContractSerializer(typeof(T));
+            var serializer = new DataContractSerializer(typeof (T));
 
             using (var ms = new MemoryStream())
             {
                 serializer.WriteObject(ms, this);
                 ms.Position = 0;
-                copia = (T)serializer.ReadObject(ms);
+                copia = (T) serializer.ReadObject(ms);
             }
 
             return copia;
@@ -96,8 +96,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 
             if (item.IsTransient() || IsTransient())
                 return false;
-            else
-                return item.Id == Id;
+            return item.Id == Id;
         }
 
         public override int GetHashCode()
@@ -106,19 +105,17 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
             {
                 if (!_requestedHashCode.HasValue)
                     _requestedHashCode = Id.GetHashCode() ^ 31;
- 
+
                 return _requestedHashCode.Value;
             }
-            else
-                return base.GetHashCode();
+            return base.GetHashCode();
         }
 
         public static bool operator ==(Entity left, Entity right)
         {
             if (Equals(left, null))
                 return (Equals(right, null)) ? true : false;
-            else
-                return left.Equals(right);
+            return left.Equals(right);
         }
 
         public static bool operator !=(Entity left, Entity right)
@@ -150,7 +147,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         Detached,
         Modified,
         Unchanged
-    } 
+    }
 
     #endregion
 }

@@ -1,17 +1,16 @@
-﻿
-namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
+﻿namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
 {
     /// <summary>
-    ///   Base contract for map dto to aggregate or aggregate to dto.
-    ///   <remarks>
-    ///     This is a  contract for work with "auto" mappers ( automapper,emitmapper,valueinjecter...)
-    ///     or adhoc mappers
-    ///   </remarks>
+    ///     Base contract for map dto to aggregate or aggregate to dto.
+    ///     <remarks>
+    ///         This is a  contract for work with "auto" mappers ( automapper,emitmapper,valueinjecter...)
+    ///         or adhoc mappers
+    ///     </remarks>
     /// </summary>
     public interface ITypeAdapter
     {
         /// <summary>
-        ///  Adapt a source object to an instance of type TTarget
+        ///     Adapt a source object to an instance of type TTarget
         /// </summary>
         /// <typeparam name="TSource"> Type of source item </typeparam>
         /// <typeparam name="TTarget"> Type of target item </typeparam>
@@ -20,7 +19,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
         TTarget Adapt<TSource, TTarget>(TSource source) where TTarget : class, new() where TSource : class;
 
         /// <summary>
-        /// Adapt a source object to an instnace of type TTarget
+        ///     Adapt a source object to an instnace of type TTarget
         /// </summary>
         /// <typeparam name="TTarget">Type of target item</typeparam>
         /// <param name="source">Instance to adapt</param>

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.MicroKernel.SubSystems.Conversion;
 using Castle.Windsor;
 using PackageBuilder.Api.Helpers.AutoMaps;
 

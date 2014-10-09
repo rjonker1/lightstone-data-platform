@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 namespace LightstoneApp.Domain.Core.Seedwork
 {
     /// <summary>
-    /// The UnitOfWork contract for EF implementation
+    ///     The UnitOfWork contract for EF implementation
     /// </summary>
     public interface IUnitOfWork : IDisposable
     {
         DbSet<TEntity> GetDbSet<TEntity>() where TEntity : class;
 
-        IQueryable<TEntity> GetQueryable<TEntity>(List<string> includes = null, Expression<Func<TEntity, bool>> filter = null, int pageGo = 0, int pageSize = 0, List<string> orderBy = null, bool orderAscendent = false) where TEntity : class;
+        IQueryable<TEntity> GetQueryable<TEntity>(List<string> includes = null,
+            Expression<Func<TEntity, bool>> filter = null, int pageGo = 0, int pageSize = 0, List<string> orderBy = null,
+            bool orderAscendent = false) where TEntity : class;
 
         void SetEntryState<TEntity>(TEntity item, EntityState state) where TEntity : class;
 

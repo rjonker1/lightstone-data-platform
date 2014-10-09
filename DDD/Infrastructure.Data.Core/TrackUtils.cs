@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Infrastructure.Data.Core
