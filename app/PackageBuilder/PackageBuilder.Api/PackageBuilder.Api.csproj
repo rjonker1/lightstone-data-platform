@@ -171,6 +171,7 @@
     <Compile Include="Helpers\AutoMaps\DataFieldMap.cs" />
     <Compile Include="Helpers\AutoMaps\DataProviderMap.cs" />
     <Compile Include="Helpers\AutoMaps\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMaps\PackageMap.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
     <Compile Include="Installers\NEventStoreInstaller.cs" />

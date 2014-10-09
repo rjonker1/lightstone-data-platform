@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Entities;
+using FluentNHibernate.Testing.Values;
 using MemBus;
 using Nancy;
+using Nancy.ModelBinding;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
@@ -17,7 +20,7 @@ namespace PackageBuilder.Api.Modules
     {
         public PackageModule(IBus bus, IDocumentSession session)
         {
-            Get["/Package"] = parameters =>
+            Get["/Packages"] = parameters =>
             {
                 var res = session.Query<ReadPackage, IndexAllPackages>().ToList();
 
@@ -29,7 +32,7 @@ namespace PackageBuilder.Api.Modules
                 var dto = new PackageDto
                 {
                     Name = "VVi",
-                    DataProviderDtos = new List<DataProviderDto>
+                    DataProviders = new List<DataProviderDto>
                     {
                         new DataProviderDto
                         {
@@ -40,16 +43,23 @@ namespace PackageBuilder.Api.Modules
                     }
                 };
 
-                var dp = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviderDtos.First());
+                var dp = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviders.First());
 
                 bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, new []{dp}));
 
                 return Response.AsJson(new { msg = "Success" });
             };
 
-            Post[""] = parameters =>
+            Post["/Package/Add"] = parameters =>
             {
-                return null;
+
+                PackageDto dto = this.Bind<PackageDto>();
+
+                var dProviders = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviders.First());
+
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, new[]{dProviders} ));
+
+                return Response.AsJson(new { msg = "Success" });
             };
 
         }
@@ -58,6 +68,12 @@ namespace PackageBuilder.Api.Modules
     public class PackageDto
     {
         public string Name { get; set; }
-        public IEnumerable<DataProviderDto> DataProviderDtos { get; set; }
+        public string State { get; set; }
+        public string Industry { get; set; }
+        public DateTime RevisionDate { get; set; }
+        public string Owner { get; set; }
+        public int CostOfSale { get; set; }
+        public int RecommendedSalePrice { get; set; }
+        public IEnumerable<DataProviderDto> DataProviders { get; set; }
     }
 }

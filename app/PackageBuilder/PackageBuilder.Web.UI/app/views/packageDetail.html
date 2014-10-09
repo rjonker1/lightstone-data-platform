@@ -21,6 +21,9 @@
 
     <h3>Package Detail</h3>
 
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+
     <div id="info" class="row">
 
           <div id="1" class="col-lg-4" >
@@ -123,7 +126,7 @@
           <div >
             <button type="button" class="btn btn-danger">Cancel</button>
             <button type="button" class="btn btn-primary">Save Draft</button>
-            <button type="button" class="btn btn-success">Publish</button>
+            <button type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)" >Publish</button>
           </div>
 
         </div>

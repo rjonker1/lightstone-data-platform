@@ -2,9 +2,9 @@
 
 var providerServices = angular.module('providerServices', ['ngResource']);
 
-providerServices.factory('GetAPI', ['$resource',
+providerServices.factory('GetDataProvider', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider/Get/:id/:version', {}, {
+		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/Get/:id/:version', {}, {
 			query: {method:'GET', isObject:true}
 		});
 	}]);
@@ -23,10 +23,25 @@ providerServices.factory('GetDataProviderSources', ['$resource',
 		});
 	}]);
 
-providerServices.factory('PostAPI', ['$resource', 
+providerServices.factory('GetPackages', ['$resource',
+	function($resource) {
+		return $resource('http://dev.lightstone.packagebuilder.api/Packages', {}, {
+			query: { method: 'GET', isObject:true }
+		});
+	}]);
+
+providerServices.factory('PostDataProvider', ['$resource', 
 	function($resource) {
 
-		return $resource('http://localhost:12257/DataProvider/Edit/:id', {}, {
+		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/Edit/:id', {}, {
+			
+		});
+	}]);
+
+providerServices.factory('PostPackage', ['$resource', 
+	function($resource) {
+
+		return $resource('http://dev.lightstone.packagebuilder.api/Package/Add', {}, {
 			
 		});
 	}]);

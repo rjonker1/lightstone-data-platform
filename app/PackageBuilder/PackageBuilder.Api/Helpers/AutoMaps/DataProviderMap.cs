@@ -13,6 +13,9 @@ namespace PackageBuilder.Api.Helpers.AutoMaps
             Mapper.CreateMap<DataProviderDto, DataProvider>()
                 .ConvertUsing(x => new DataProvider(x.Id, x.Name, Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(x.DataFields)));
             //.ConvertUsing<ITypeConverter<DataProviderDto, DataProvider>>();
+
+            //Mapper.CreateMap<IEnumerable<DataProviderDto>, IEnumerable<DataProvider>>()
+            //   .ConvertUsing(x => x.Select(Mapper.Map<DataProviderDto, DataProvider>));
         }
     }
 }

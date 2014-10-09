@@ -8,7 +8,7 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$location', '$scope', 'GetAPI', 'PostAPI', function ($rootScope, $routeParams, $location, $route, $scope, GetAPI, PostDataProvider) {
+  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$location', '$scope', 'GetDataProvider', 'PostDataProvider', function ($rootScope, $routeParams, $location, $route, $scope, GetDataProvider, PostDataProvider) {
     
 
     $scope.dataProvider = {};
@@ -18,7 +18,7 @@ angular.module('packageBuilderwebuiApp')
             { msg: 'Loading Data...' }
     ];
 
-    GetAPI.get({ id: $routeParams.id, version: $routeParams.version }, function(data){
+    GetDataProvider.get({ id: $routeParams.id, version: $routeParams.version }, function(data){
 
            var resp = data.response;
           
@@ -60,7 +60,6 @@ angular.module('packageBuilderwebuiApp')
 
               { type: 'success', msg: 'DataProvider: '+$scope.dataProvider.name+' saved successfully !' }
             ];
-        $location.path('/data-sources');
 
       }, function(err){
 

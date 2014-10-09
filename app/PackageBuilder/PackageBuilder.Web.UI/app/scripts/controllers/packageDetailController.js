@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('packageBuilderwebuiApp')
-  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviderSources', function ($scope, $http, GetDataProviderSources) {
+  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviderSources', 'PostPackage', function ($scope, $http, GetDataProviderSources, PostPackage) {
 
     //MOCK
     /*$http({
@@ -18,7 +18,7 @@ angular.module('packageBuilderwebuiApp')
 
         $scope.dataProvsPkg = {}; 
         $scope.dataProvsPkg.Package = {};
-        $scope.dataProvsPkg.Package.Providers = [];
+        $scope.dataProvsPkg.Package.DataProviders = [];
 
         GetDataProviderSources.query(function(data){
 
@@ -29,7 +29,7 @@ angular.module('packageBuilderwebuiApp')
 
                   if (resp.hasOwnProperty(res)) {
                                                                   
-                      $scope.dataProvsPkg.Package.Providers = resp;
+                      $scope.dataProvsPkg.Package.DataProviders = resp;
                       $scope.message = "Data Loaded."
                   }
               }
@@ -47,6 +47,30 @@ angular.module('packageBuilderwebuiApp')
             ];
 
         }); 
+
+
+        $scope.createPackage = function(packageData) {
+
+          $scope.message = "Saving data..."
+
+          PostPackage.save({}, packageData, function(data) {
+
+          //var resp = data.msg;
+
+          $scope.alerts = [
+
+            { type: 'success', msg: 'Package: '+$scope.dataProvsPkg.Package.name+' saved successfully !' }
+          ];
+
+          $location.path('/data-sources');
+
+          }, function(err){
+
+          $scope.message = "Error saving Data Provider";
+          });
+
+        }
+
 
         $scope.dataPros = {};
         $scope.dataPros.prods = {};
