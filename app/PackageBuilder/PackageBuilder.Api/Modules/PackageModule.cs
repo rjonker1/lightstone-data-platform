@@ -46,6 +46,12 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new { msg = "Success" });
             };
+
+            Post[""] = parameters =>
+            {
+                return null;
+            };
+
         }
     }
 

@@ -32,25 +32,31 @@ angular.module('packageBuilderwebuiApp')
 
     }); 
     
-  	var data = [{name: "Moroni", age: 50},
-                {name: "Tiancum", age: 43},
-                {name: "Jacob", age: 27},
-                {name: "Nephi", age: 29},
-                {name: "Enos", age: 34},
-                {name: "Tiancum", age: 43},
-                {name: "Jacob", age: 27},
-                {name: "Nephi", age: 29},
-                {name: "Enos", age: 34},
-                {name: "Tiancum", age: 43},
-                {name: "Jacob", age: 27},
-                {name: "Nephi", age: 29},
-                {name: "Enos", age: 34},
-                {name: "Tiancum", age: 43},
-                {name: "Jacob", age: 27},
-                {name: "Nephi", age: 29},
-                {name: "Enos", age: 34}];
 
-    $scope.tableParams = new ngTableParams({
+$scope.selectedDatasource = [];
+
+    $scope.gridOptions = { 
+        data: 'dSourcesData',
+        selectedItems: $scope.selectedDatasource,
+        multiSelect: false,
+        enablePaging: true,
+        enableFiltering: true,
+        showFilter: true,
+        showGroupPanel: true,
+        columnDefs: [
+            {field: 'name', displayName: 'Name'},
+            {field: 'description', displayName: 'Description'},
+            {field: 'owner', displayName: 'Owner'},
+            {field: 'created', displayName: 'Created'},
+            {field: 'edited', displayName: 'Edited'},
+            {field: 'version', displayName: 'Version'},
+            {displayName: '', cellTemplate: '<input type="button" name="edit" ng-click="notify(row)" value="Edit" />'}
+        ]
+    };
+
+
+
+    /*$scope.tableParams = new ngTableParams({
         page: 1,            // show first page
         count: 10,          // count per page
         filter: {
@@ -69,6 +75,6 @@ angular.module('packageBuilderwebuiApp')
             params.total(orderedData.length); // set total for recalc pagination
             $defer.resolve($scope.users);
         }
-    });
+    });*/
 
   }]);

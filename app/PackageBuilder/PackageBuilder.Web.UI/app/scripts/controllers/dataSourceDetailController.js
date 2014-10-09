@@ -8,7 +8,7 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$location', '$scope', 'GetAPI', 'PostAPI', function ($rootScope, $routeParams, $location, $route, $scope, GetAPI, PostAPI) {
+  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$location', '$scope', 'GetAPI', 'PostAPI', function ($rootScope, $routeParams, $location, $route, $scope, GetAPI, PostDataProvider) {
     
 
     $scope.dataProvider = {};
@@ -52,7 +52,7 @@ angular.module('packageBuilderwebuiApp')
 
       $scope.message = "Saving data..."
 
-      PostAPI.save({ id:$scope.dataProvider.id }, providerData, function(data) {
+      PostDataProvider.save({ id:$scope.dataProvider.id }, providerData, function(data) {
 
         //var resp = data.msg;
          
