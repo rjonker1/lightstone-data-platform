@@ -133,6 +133,10 @@
 			<author>CustomApp</author>
 			<description>Lace.Domain.Infrastructure.EntryPoint</description>
 			<includes>
+        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.pdb" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll" to="lib\net45" />
+        <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.pdb" to="lib\net45" />
         <include pattern="Lightstone.DataPlatform.Lace.DistributedServices.Events.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.DistributedServices.Events.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
