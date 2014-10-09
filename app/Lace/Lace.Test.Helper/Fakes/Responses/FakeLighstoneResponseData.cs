@@ -1,5 +1,6 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Cars;
+﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Infrastructure;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
@@ -18,7 +19,7 @@ namespace Lace.Test.Helper.Fakes.Responses
 
         public static IRetrieveCarInformation GetCarInformation(ILaceRequest request)
         {
-            return new RetrieveCarInformationDetail(request, new FakeRepositoryFactory())
+            return new RetrieveCarInformationDetail(request, new FakeCarRepositioryFactory())
                 .SetupDataSources()
                 .GenerateData()
                 .BuildCarInformation()

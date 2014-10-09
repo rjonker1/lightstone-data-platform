@@ -1,5 +1,6 @@
 ﻿using System.Data;
-using Lace.Domain.DataProviders.Lightstone.Core;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Repositories;
 using ServiceStack.Redis;
@@ -17,57 +18,47 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory
             _redisClient = redisClient;
         }
 
-        public IReadOnlyRepository<Band> BandRepository()
+        public Core.IReadOnlyRepository<Band> BandRepository()
         {
             return new BandsRepository(_connection,_redisClient);
         }
 
-        public IReadOnlyRepository<Car> CarRepository()
+        public Core.IReadOnlyRepository<Car> CarRepository()
         {
             return new CarRepository(_connection, _redisClient);
         }
 
-        public IReadOnlyRepository<CarInfo> CarInfoRepository()
-        {
-            return new CarInfoRepository(_connection, _redisClient);
-        }
-
-        public IReadOnlyRepository<CarInfo> Vin12CarInfoRepository()
-        {
-            return new Vin12CarInfoRepository(_connection, _redisClient);
-        }
-
-        public IReadOnlyRepository<CarType> CarTypeRepository()
+        public Core.IReadOnlyRepository<CarType> CarTypeRepository()
         {
             return new CarTypeRepository(_connection, _redisClient);
         }
 
-        public IReadOnlyRepository<CarVendor> CarVendorRepository()
+        public Core.IReadOnlyRepository<CarVendor> CarVendorRepository()
         {
             return new CarVendorRepository(_connection,_redisClient);
         }
 
-        public IReadOnlyRepository<Make> MakeRepository()
+        public Core.IReadOnlyRepository<Make> MakeRepository()
         {
             return new MakeRepository(_connection,_redisClient);
         }
 
-        public IReadOnlyRepository<Metric> MetricRepository()
+        public Core.IReadOnlyRepository<Metric> MetricRepository()
         {
             return new MetricRepository(_connection,_redisClient);
         }
 
-        public IReadOnlyRepository<Municipality> MuncipalityRepository()
+        public Core.IReadOnlyRepository<Municipality> MuncipalityRepository()
         {
             return new MunicipalityRepository(_connection,_redisClient);
         }
 
-        public IReadOnlyRepository<Sale> SaleRepository()
+        public Core.IReadOnlyRepository<Sale> SaleRepository()
         {
             return new SaleRepository(_connection,_redisClient);
         }
 
-        public IReadOnlyRepository<Statistic> StatisticRepository()
+        public Core.IReadOnlyRepository<Statistic> StatisticRepository()
         {
             return new StatisticsRepository(_connection, _redisClient);
         }

@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
 
-namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
+namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
 {
     public class CarInfoUnitOfWork : IGetCarInfo
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         public IEnumerable<CarInfo> Cars { get; private set; }
-        private readonly IReadOnlyRepository<CarInfo> _repository;
-        private readonly IReadOnlyRepository<CarInfo> _vin12Repository;
+        private readonly IReadOnlyCarRepository<CarInfo> _repository;
+        private readonly IReadOnlyCarRepository<CarInfo> _vin12Repository;
 
-        public CarInfoUnitOfWork(IReadOnlyRepository<CarInfo> repository, IReadOnlyRepository<CarInfo> vin12Repository)
+        public CarInfoUnitOfWork(IReadOnlyCarRepository<CarInfo> repository, IReadOnlyCarRepository<CarInfo> vin12Repository)
         {
             _repository = repository;
             _vin12Repository = vin12Repository;
@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Car Info data because of {0}", ex.Message);
+                Log.ErrorFormat("Error getting Car Information because of {0}", ex.Message);
             }
         }
 

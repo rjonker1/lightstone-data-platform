@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.DistributedServices.Events.Contracts;
 using Lace.DistributedServices.Events.PublishMessageHandlers;
 using Lace.Domain.Core.Contracts;
@@ -29,7 +30,7 @@ namespace Lace.Unit.Tests.Sources
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponse();
-            _callTheSource = new CallLightstoneExternalSource(_request, new FakeRepositoryFactory());
+            _callTheSource = new CallLightstoneExternalSource(_request, new FakeRepositoryFactory(), new FakeCarRepositioryFactory());
             _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
         }
 

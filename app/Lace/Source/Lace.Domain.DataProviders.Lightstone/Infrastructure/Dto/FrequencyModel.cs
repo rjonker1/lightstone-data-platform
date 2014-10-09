@@ -1,6 +1,6 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
-namespace Lace.Models.Lightstone.DataObject
+namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto
 {
     public class FrequencyModel : IRespondWithFrequencyModel
     {

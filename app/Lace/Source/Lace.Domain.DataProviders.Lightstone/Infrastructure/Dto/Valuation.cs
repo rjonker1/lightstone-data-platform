@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using Lace.Models.Lightstone.DataObject;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto
 {

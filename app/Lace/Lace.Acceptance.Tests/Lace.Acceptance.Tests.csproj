@@ -139,6 +139,14 @@
       <Project>{4644b15b-f4fd-4d93-a32e-313f4acdb71b}</Project>
       <Name>Lace.Test.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj">
+      <Project>{a4ade647-0238-4c9f-b320-dbf8d5227c1b}</Project>
+      <Name>Lace.CrossCutting.DataProvider.Car</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
+      <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
+      <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
       <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
       <Name>Lace.DistributedServices.Events</Name>

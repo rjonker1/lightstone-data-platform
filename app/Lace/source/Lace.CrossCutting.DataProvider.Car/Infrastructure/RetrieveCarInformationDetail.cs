@@ -1,12 +1,11 @@
 ﻿using System.Linq;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto;
+using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
 
-namespace Lace.Domain.DataProviders.Lightstone.Cars
+namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {
     public class RetrieveCarInformationDetail : IRetrieveCarInformation
     {
@@ -15,10 +14,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Cars
         public IProvideCarInformationForRequest CarInformationRequest { get; private set; }
 
         private IGetCarInfo _getCarInformation;
-        private readonly ISetupRepository _repositories;
+        private readonly ISetupCarRepository _repositories;
         private readonly ILaceRequest _request;
 
-        public RetrieveCarInformationDetail(ILaceRequest request, ISetupRepository repositories)
+        public RetrieveCarInformationDetail(ILaceRequest request, ISetupCarRepository repositories)
         {
             _repositories = repositories;
             _request = request;

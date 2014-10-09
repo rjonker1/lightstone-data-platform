@@ -11,5 +11,6 @@ namespace Lace.Domain.DataProviders.Core
         public static Guid Lightstone = new Guid("ADBF94E3-695E-4168-9D3F-4E71339B7C4A");
         public static Guid Anpr = new Guid("342be91e-0e1c-487e-848f-f6eac8d22888");
         public static Guid Jis = new Guid("d4cc2a5c-d1bc-4cd4-90eb-20a7765c0eee");
+        public static Guid Rgt = new Guid("2A3392EE-EB53-4F98-B9A8-2F601A18D3D2");
     }
 }

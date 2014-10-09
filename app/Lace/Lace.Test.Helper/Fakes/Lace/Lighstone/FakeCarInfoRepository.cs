@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Services;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
-    public class FakeCarInfoRepository : IReadOnlyRepository<CarInfo>
+    public class FakeCarInfoRepository : IReadOnlyCarRepository<CarInfo>
     {
         public IEnumerable<CarInfo> FindAllWithRequest(IProvideCarInformationForRequest request)
         {

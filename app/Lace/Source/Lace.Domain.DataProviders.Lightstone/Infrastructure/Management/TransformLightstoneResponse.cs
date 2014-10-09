@@ -1,7 +1,7 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Cars;
 using Lace.Domain.DataProviders.Lightstone.Services;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management

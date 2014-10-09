@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
 
-namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
+namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
 {
     public interface IGetCarInfo
     {

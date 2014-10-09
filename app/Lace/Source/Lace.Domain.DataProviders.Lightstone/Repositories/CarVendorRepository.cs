@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Providers;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using ServiceStack.Redis;
