@@ -19,9 +19,7 @@
       
     </script>
 
-    {{dataProvsPkgMock}}
-
-    {{dataProvsPkg}}
+    {{test}}
 
     <h3>Package Detail</h3>
 
@@ -29,15 +27,15 @@
 
           <div id="1" class="col-lg-4" >
             <div>
-              <label>Name:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
-              <label>Version:</label><input type="textbox" class="form-control" ng-model="dataProvider.version" readonly/>
+              <label>Name:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name"/>
+              <label>Version:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.version" readonly/>
             </div>
             <div>
               <div>
                 <label>Description</label>
               </div>
               <div>
-                <textarea class="form-control" style="resize: none;" rows="6" cols="50" ></textarea>
+                <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package.description" ></textarea>
               </div>
             </div>
           </div>
@@ -47,7 +45,7 @@
           <div id="2" class="col-lg-4">
             <div>
               <label>State:</label>
-              <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+              <select class="form-control" ng-model="dataProvsPkg.Package.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
               {{dataProvider.state.name}}
             </div>
 
@@ -55,7 +53,7 @@
 
             <div>
               <label>Industry:</label>
-              <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+              <select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
               {{dataProvider.state.name}}
             </div>
 
@@ -66,7 +64,7 @@
               <label>Revision Date: </label>
               <div class="input-group">
 
-                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvider.edited" is-open="opened" 
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvsPkg.Package.edited" is-open="opened" 
                 datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> 
 
                 <span style="width: 20%;" class="input-group-btn">
@@ -80,7 +78,7 @@
 
             <div>
               <label>Owner:</label>
-              <select class="form-control" ng-model="dataProvider.owner" ng-options="user.name for user in users"></select>
+              <select class="form-control" ng-model="dataProvsPkg.Package.owner" ng-options="user.name for user in users"></select>
             </div>
           </div>
 
@@ -93,10 +91,8 @@
       
         <h3>Data Providers</h3>
 
-        
-
         <div ui-tree id="asdt" ng-model="dataProvsPkg">
-          <div ng-repeat="providers in dataProvsPkg" >
+          <div ng-repeat="providers in dataProvsPkg.Package" >
             <ol ui-tree-nodes="" ng-model="providers" >
               <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'" ></li>
             </ol>
@@ -119,8 +115,8 @@
         <div style="float: right;">
 
           <div >
-            <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
-            <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="dataProvider.version"/>
+            <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.costOfSale"/>
+            <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.recommendedSalePirce"/>
           </div>
 
           <br />
