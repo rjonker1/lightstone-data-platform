@@ -18,6 +18,7 @@ angular
     'ui.tree',
     'ui.bootstrap',
     'ngGrid',
+    'ngTable',
     'providerServices'
     
   ])
@@ -37,7 +38,11 @@ angular
       })
       .when('/package-detail', {
         templateUrl: 'views/packageDetail.html',
-        controller: 'pkgCtrl'
+        controller: 'packageDetailCtrl'
+      })
+      .when('/packages', {
+        templateUrl: 'views/packages.html',
+        controller: 'packagesCtrl'
       })
       .otherwise({
         redirectTo: '/'
