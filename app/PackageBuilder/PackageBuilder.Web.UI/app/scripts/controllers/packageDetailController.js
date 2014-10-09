@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name packageBuilderwebuiApp.controller:pkgCtrl
- * @description
- * # pkgCtrl
- * Controller of the packageBuilderwebuiApp
- */
 angular.module('packageBuilderwebuiApp')
   .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviderSources', function ($scope, $http, GetDataProviderSources) {
 
@@ -16,44 +9,44 @@ angular.module('packageBuilderwebuiApp')
         url: '/DataProviders.json'
         }).success(function(data, status, headers, config) {
             
-            $scope.dataProvsPkgMock = data;
+           $scope.dataProvsPkg = data;
 
         }).error(function(data, status, headers, config) {
           
          
         });*/
 
-    $scope.dataProvsPkg = {}; 
-    $scope.dataProvsPkg.Package = {};
-    $scope.dataProvsPkg.Package.Providers = [];
+        $scope.dataProvsPkg = {}; 
+        $scope.dataProvsPkg.Package = {};
+        $scope.dataProvsPkg.Package.Providers = [];
 
-    GetDataProviderSources.query(function(data){
+        GetDataProviderSources.query(function(data){
 
-       var resp = data.response;
-          
-           for( var res in resp)
-           {
+           var resp = data.response;
+              
+               for( var res in resp)
+               {
 
-              if (resp.hasOwnProperty(res)) {
-                                                              
-                  $scope.dataProvsPkg.Package.Providers = resp;
-                  $scope.message = "Data Loaded."
+                  if (resp.hasOwnProperty(res)) {
+                                                                  
+                      $scope.dataProvsPkg.Package.Providers = resp;
+                      $scope.message = "Data Loaded."
+                  }
               }
-          }
 
-          $scope.alerts = [
+              $scope.alerts = [
 
-            { type: 'success', msg: 'Data loaded successfully !' }
-          ];
+                { type: 'success', msg: 'Data loaded successfully !' }
+              ];
 
-    }, function(err){
+        }, function(err){
 
-        $scope.alerts = [
+            $scope.alerts = [
 
-            { type: 'danger', msg: 'Failed to communicate with webserver !' }
-        ];
+                { type: 'danger', msg: 'Failed to communicate with webserver !' }
+            ];
 
-    }); 
+        }); 
 
         $scope.dataPros = {};
         $scope.dataPros.prods = {};
@@ -63,44 +56,44 @@ angular.module('packageBuilderwebuiApp')
         $scope.updateAPIModel = function(providers, fieldName) {
 
 
-            for (var providers in $scope.dataProvsPkg.Package){
+          for (var providers in $scope.dataProvsPkg.Package){
 
-                  var provs = $scope.dataProvsPkg.Package[providers];
-                  $scope.test = provs;
+            var provider = $scope.dataProvsPkg.Package[providers];
 
-                  for (var i = 0; i < provs.length; i++) {
+            for(var i = 0; i < provider.length; i++) {
 
-                    for(var p in provs){
+              for(var p in provider) {
 
-                      //$scope.test = provs[p];
+                if(provider.hasOwnProperty(p)) {
 
-                      if (provs.hasOwnProperty(p)) {
+                        var provFields = provider[p].dataFields; //Fields container for DataProvider
 
-                        var provFields = provs[p].dataFields;;    //Fields container for DataProvider
-                        for (var x = 0; x < provFields.length; x++) {
+                        $scope.test = provFields;
 
-                          if(provFields[x].name == fieldName) {
+                        for(var field in provFields) {
 
-                            $scope.test = fieldName;
 
-                            if(provFields[x].isSelected == false) {
+                          if(provFields[field].name == fieldName) {
 
-                                    provFields[x].isSelected = true
-                              } else {
+                            if(provFields[field].isSelected == false) {
 
-                                    provFields[x].isSelected = false;
-                              }
-                          
+                              provFields[field].isSelected = true
+                            } else {
+
+                              provFields[field].isSelected = false;
+                            }
                           }
-                        }
 
+                        }
                       }
-                    }
+
+                    } //End for-loop provider
+
                   }
 
-
+                }
               }
-            }
+
        
         $scope.findProvFieldByName = function (providers, fieldName) {
                 for(var prov in providers){    /*{}*/
@@ -128,7 +121,6 @@ angular.module('packageBuilderwebuiApp')
                                   
               }
         }
-
 
         
         
