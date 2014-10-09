@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PackageBuilder.Domain.Models
+namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 {
     public class ReadDataProvider
     {

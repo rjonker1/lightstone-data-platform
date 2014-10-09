@@ -12,19 +12,21 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         #region Properties
 
         [DataMember]
-        public string SerializedExpression { get; set; } 
+        public string SerializedExpression { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public CustomQuery() { }
+        public CustomQuery()
+        {
+        }
 
         public CustomQuery(Expression<Func<TEntity, bool>> expresion)
         {
-            var predicate = (Expression<Func<TEntity, bool>>)ExpressionBuilder.ReplaceFilterValues(expresion);
+            var predicate = (Expression<Func<TEntity, bool>>) ExpressionBuilder.ReplaceFilterValues(expresion);
             SerializedExpression = new ExpressionSerializer().Serialize(predicate).ToString();
-        } 
+        }
 
         #endregion
 
@@ -36,29 +38,31 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
                 throw new ArgumentException("SerializedExpression");
 
             // It's need because AutoMapper doesn't know map dto to domain entities...
-            var domainExpression = SerializedExpression.Replace("Application.BoundedContext.Dtos", "Domain.BoundedContext.Entities");
-            
-            var aux = XElement.Parse(domainExpression);
+            string domainExpression = SerializedExpression.Replace("Application.BoundedContext.Dtos",
+                "Domain.BoundedContext.Entities");
+
+            XElement aux = XElement.Parse(domainExpression);
             return new ExpressionSerializer().Deserialize<Func<TEntity, bool>>(aux);
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="applicationBoundedContextDtos">"Application.BoundedContext.Dtos"</param>
         /// <param name="domainBoundedContextEntities">"Domain.BoundedContext.Entities"</param>
         /// <returns></returns>
-        public Expression<Func<TEntity, bool>> ToDomainExpression(string applicationBoundedContextDtos, string domainBoundedContextEntities)
+        public Expression<Func<TEntity, bool>> ToDomainExpression(string applicationBoundedContextDtos,
+            string domainBoundedContextEntities)
         {
             if (SerializedExpression == null)
                 throw new ArgumentException("SerializedExpression");
 
             // It's need because AutoMapper doesn't know map dto to domain entities...
-            var domainExpression = SerializedExpression.Replace(applicationBoundedContextDtos, domainBoundedContextEntities);
+            string domainExpression = SerializedExpression.Replace(applicationBoundedContextDtos,
+                domainBoundedContextEntities);
 
-            var aux = XElement.Parse(domainExpression);
+            XElement aux = XElement.Parse(domainExpression);
             return new ExpressionSerializer().Deserialize<Func<TEntity, bool>>(aux);
-        } 
+        }
 
         #endregion
     }

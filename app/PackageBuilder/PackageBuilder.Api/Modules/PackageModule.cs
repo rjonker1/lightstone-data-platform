@@ -7,13 +7,23 @@ using Nancy;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
+using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.Infrastructure.RavenDB.Indexes;
+using Raven.Client;
 
 namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
-        public PackageModule(IBus bus)
+        public PackageModule(IBus bus, IDocumentSession session)
         {
+            Get["/Package"] = parameters =>
+            {
+                var res = session.Query<ReadPackage, IndexAllPackages>().ToList();
+
+                return Response.AsJson(new {Response = res});
+            };
+
             Get["/Package/Add"] = parameters =>
             {
                 var dto = new PackageDto

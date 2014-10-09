@@ -6,9 +6,7 @@ using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Domain.Core.Seedwork
 {
-
-
- public interface IRepository<TEntity> : IDisposable where TEntity : Entity
+    public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
         IUnitOfWork UnitOfWork { get; }
 
@@ -32,9 +30,11 @@ namespace LightstoneApp.Domain.Core.Seedwork
 
         Task<List<TEntity>> AllMatchingAsync(Expression<Func<TEntity, bool>> filter, List<string> includes);
 
-        PagedCollection<TEntity> AllMatchingPaged(Expression<Func<TEntity, bool>> filter, List<string> includes, int pageIndex, int pageSize, List<string> sortFields, bool ascending);
+        PagedCollection<TEntity> AllMatchingPaged(Expression<Func<TEntity, bool>> filter, List<string> includes,
+            int pageIndex, int pageSize, List<string> sortFields, bool ascending);
 
-        Task<PagedCollection<TEntity>> AllMatchingPagedAsync(Expression<Func<TEntity, bool>> filter, List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent);
+        Task<PagedCollection<TEntity>> AllMatchingPagedAsync(Expression<Func<TEntity, bool>> filter,
+            List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent);
 
         int AllMatchingCount(Expression<Func<TEntity, bool>> filter, List<string> includes);
 

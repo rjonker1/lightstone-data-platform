@@ -2,20 +2,15 @@
 
 namespace LightstoneApp.Infrastructure.Data.Core.Runtime
 {
-	abstract class AbstractDispatchConsumer<T> where T: class
-	{
-		protected AbstractDispatchConsumer()
-		{
-			
-		}
+    internal abstract class AbstractDispatchConsumer<T> where T : class
+    {
+        protected abstract void Dispatch(T item);
 
-		protected abstract void Dispatch( T item );
+        public virtual void ScheduleDispatch(T item)
+        {
+            Ensure.That(item).Named(() => item).IsNotNull();
 
-		public virtual void ScheduleDispatch( T item )
-		{
-			Ensure.That( item ).Named( () => item ).IsNotNull();
-
-			this.Dispatch( item );
-		}
-	}
+            Dispatch(item);
+        }
+    }
 }

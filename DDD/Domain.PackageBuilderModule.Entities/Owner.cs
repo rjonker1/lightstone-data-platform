@@ -8,14 +8,11 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.Serialization;
-
-#pragma warning disable 1591 // this is for supress no xml comments in public members warnings 
+using LightstoneApp.Domain.Core;
+#pragma warning disable 1591 // this is for suppress no xml comments in public members warnings 
 
 using LightstoneApp.Domain.Core.Entities;
 
@@ -28,28 +25,37 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
     #if !SILVERLIGHT
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage()]
     #endif
-    public partial class Owner: IObjectWithChangeTracker, INotifyPropertyChanged
+    public partial class Owner : ValueObject<Owner>, IObjectWithChangeTracker, INotifyPropertyChanged
     {
+        public Owner(string value)
+        {
+            if (ChangeTracker.ChangeTrackingEnabled && ChangeTracker.State != ObjectState.Added)
+            {
+                throw new InvalidOperationException("The property 'Value' is part of the object's key and cannot be changed. Changes to key properties can only be made when the object is not being tracked or is in the Added state.");
+            }
+            _value = value;
+            OnPropertyChanged("Value");
+        }
         #region Primitive Properties
     
         [DataMember]
         public string Value
         {
             get { return _value; }
-            set
-            {
-                if (_value != value)
-                {
-                    if (ChangeTracker.ChangeTrackingEnabled && ChangeTracker.State != ObjectState.Added)
-                    {
-                        throw new InvalidOperationException("The property 'Value' is part of the object's key and cannot be changed. Changes to key properties can only be made when the object is not being tracked or is in the Added state.");
-                    }
-                    _value = value;
-                    OnPropertyChanged("Value");
-                }
-            }
+            //private set
+            //{
+            //    //if (_value != value)
+            //    //{
+            //    //    if (ChangeTracker.ChangeTrackingEnabled && ChangeTracker.State != ObjectState.Added)
+            //    //    {
+            //    //        throw new InvalidOperationException("The property 'Value' is part of the object's key and cannot be changed. Changes to key properties can only be made when the object is not being tracked or is in the Added state.");
+            //    //    }
+            //    //    _value = value;
+            //    //    OnPropertyChanged("Value");
+            //    //}
+            //}
         }
-        private string _value;
+        private readonly string _value;
 
         #endregion
 

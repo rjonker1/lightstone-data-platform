@@ -92,12 +92,13 @@
     <Compile Include="CommandHandlers\DataProviders\CreateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\UpdateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
-    <Compile Include="EventHandlers\DataProviderCreatedHandler.cs" />
+    <Compile Include="EventHandlers\DataProviders\DataProviderCreatedHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\RenameDataProviderHandler.cs" />
-    <Compile Include="EventHandlers\DataProviderUpdatedHandler.cs" />
+    <Compile Include="EventHandlers\DataProviders\DataProviderUpdatedHandler.cs" />
+    <Compile Include="EventHandlers\Packages\PackageCreatedHandler.cs" />
+    <Compile Include="EventHandlers\Packages\PackageUpdatedHandler.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
-    <Compile Include="Models\ReadDataProvider.cs" />
     <Compile Include="PackageLookup.cs" />
   </ItemGroup>
   <ItemGroup>

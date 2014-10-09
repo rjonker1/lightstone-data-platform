@@ -9,7 +9,7 @@ namespace PackageBuilder.Infrastructure.RavenDB
     {
         public static void Install(IWindsorContainer container)
         {
-            IndexCreation.CreateIndexes(typeof(IndexDataProvidersByName).Assembly, container.Resolve<IDocumentStore>());
+            IndexCreation.CreateIndexes(typeof(IndexAllPackages).Assembly, container.Resolve<IDocumentStore>());
             IndexCreation.CreateIndexes(typeof(IndexAllDataProviders).Assembly, container.Resolve<IDocumentStore>());
         }
     }

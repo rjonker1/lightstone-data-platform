@@ -6,6 +6,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Commands
 {
     public class CreateNewPackageCommand : ICommand
     {
+        public string Name { get; private set; }
+        public int Version { get; private set; }
 
         public bool CanExecute(object parameter)
         {
@@ -38,13 +40,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Commands
             {
                 // 
             }
-
         }
 
         public event EventHandler CanExecuteChanged;
-
-       
-        public string Name { get; private set; }
-        public int Version { get; private set; }
     }
 }

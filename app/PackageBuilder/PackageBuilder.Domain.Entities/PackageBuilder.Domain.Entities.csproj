@@ -68,7 +68,7 @@
     <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
     <Compile Include="DataProviders\Events\ReadModelUpdated.cs" />
-    <Compile Include="DataProviders\ReadModels\DataProviderReadModel.cs" />
+    <Compile Include="DataProviders\ReadModels\ReadDataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="DataSet.cs" />
     <Compile Include="Group.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="IUserPackage.cs" />
     <Compile Include="IUserPackageRepository.cs" />
     <Compile Include="Packages\Events\PackageCreated.cs" />
+    <Compile Include="Packages\ReadModels\ReadPackage.cs" />
     <Compile Include="Packages\WriteModels\Package.cs" />
     <Compile Include="Packages\Commands\CreatePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,9 +110,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Packages\ReadModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

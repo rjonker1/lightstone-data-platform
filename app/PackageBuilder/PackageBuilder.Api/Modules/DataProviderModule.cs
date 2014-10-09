@@ -8,29 +8,23 @@ using Lace.Models.Ivid.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
-using NHibernate.Linq;
-using NHibernate.Mapping;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Models;
 using PackageBuilder.Infrastructure.RavenDB.Indexes;
-using Raven.Abstractions.Extensions;
 using Raven.Client;
 
 namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
-
         public DataProviderModule(IBus bus, INEventStoreRepository<DataProvider> repository, IDocumentSession session)
         {
             Get["/DataProvider"] = parameters =>
             {
-
-                var res = session.Query<ReadDataProvider, IndexAllDataProviders>()
-                    .ToList();
+                var res = session.Query<ReadDataProvider, IndexAllDataProviders>().ToList();
                                         
                 return Response.AsJson(new { Response = res });   
             };
@@ -98,7 +92,6 @@ namespace PackageBuilder.Api.Modules
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
-
                 DataProviderDto dto = this.Bind<DataProviderDto>();
                 dto.incVersion();
 

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
-using MemBus.Support;
 using NEventStore;
-using Raven.Abstractions;
 
 namespace PackageBuilder.Core.NEventStore
 {

@@ -1,9 +1,9 @@
 ﻿using PackageBuilder.Domain.Entities.DataProviders.Events;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.Domain.MessageHandling;
-using PackageBuilder.Domain.Models;
 using Raven.Client;
 
-namespace PackageBuilder.Domain.EventHandlers
+namespace PackageBuilder.Domain.EventHandlers.DataProviders
 {
     public class DataProviderCreatedHandler : AbstractMessageHandler<DataProviderCreated>
     {

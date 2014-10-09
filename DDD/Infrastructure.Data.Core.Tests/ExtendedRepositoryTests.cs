@@ -37,21 +37,15 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
 
             Assert.AreEqual(expected, actual);
         }
-
-        [TestMethod]
         public void UoW_Creation_Test()
         {
             unitOfWorkTestHelper<Entity>();
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void UoW_Creation_NullunitOfWorkThrowArgumentNullException_Test()
         {
             var repository = new ExtendedRepository<Entity>(null, null);
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void ApplyChanges_NullEntityThrowNewArgumentNullException_Test()
         {
@@ -65,8 +59,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Assert
             target.Modify((Entity) null);
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void ApplyChanges_NullEntityCollectionThrowNewArgumentNullException_Test()
         {
@@ -80,8 +72,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Assert
             target.Modify(null);
         }
-
-        [TestMethod]
         public void ApplyChanges_Test()
         {
             //Arrange
@@ -95,8 +85,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Assert
             target.Modify(item);
         }
-
-        [TestMethod]
         public void ApplyChanges_Collection_Test()
         {
             //Arrange
@@ -114,7 +102,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
         public void GetPagedElements_InvalidPageIndexThrowArgumentException_Test()
         {
@@ -131,7 +118,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
         public void GetPagedElements_InvalidPageCountThrowArgumentException_Test()
         {
@@ -148,7 +134,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetPagedElements_InvalidOrderExpressionThrowArgumentNullException_Test()
         {
@@ -166,7 +151,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
         public void GetPagedElementsSubType_InvalidPageIndexThrowArgumentException_Test()
         {
@@ -183,7 +167,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
         public void GetPagedElementsSubType_InvalidPageCountThrowArgumentException_Test()
         {
@@ -200,7 +183,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetPagedElementsSubType_InvalidOrderExpressionArgumentException_Test()
         {
@@ -217,7 +199,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         public void GetPagedElements_DescendingOrder_Test()
         {
             //Arrange
@@ -239,7 +220,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         public void GetPagedElementsSubType_DescendingOrder_Test()
         {
             //Arrange
@@ -262,7 +242,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         public void GetPagedElementsSubType_AscendingOrder_Test()
         {
             //Arrange
@@ -285,7 +264,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetPagedElements
         /// </summary>
-        [TestMethod]
         public void GetPagedElements_AscendingOrder_Test()
         {
             //Arrange
@@ -307,7 +285,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_FilterNullThrowArgumentNullException_Test()
         {
@@ -324,7 +301,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_SpecificKOrder_AscendingOrderAndFilterNullThrowArgumentNullException_Test()
         {
@@ -341,7 +317,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_SpecificKOrder_DescendingOrderAndFilterNullThrowArgumentNullException_Test()
         {
@@ -358,7 +333,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_SpecificKFilterAndSOrder_ORderNullThrowArgumentNullException_Test()
         {
@@ -375,7 +349,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_SpecificKFilterAndSOrder_FilterNullThrowArgumentNullException_Test()
         {
@@ -392,7 +365,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFilteredElements_SpecificKFilterAndSOrder_AscendingOrder_Test()
         {
             //Arrange
@@ -408,7 +380,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFilteredElements_SpecificKFilterAndSOrder_DescendingOrder_Test()
         {
             //Arrange
@@ -424,7 +395,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFilteredElements_SpecificKOrder_DescendingOrder_Test()
         {
             //Arrange
@@ -440,7 +410,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFilteredElements_SpecificKOrder_Test()
         {
             //Arrange
@@ -455,7 +424,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_SpecificKOrder_NullFilterThrowArgumentNullException_Test()
         {
@@ -472,7 +440,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredElements_SpecificKOrderFullSignature_NullFilterThrowArgumentNullException_Test()
         {
@@ -489,7 +456,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFilteredElements_SpecificKOrder_AscendingOrder_Test()
         {
             //Arrange
@@ -505,7 +471,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFilteredElementsTest()
         {
             //Arrange
@@ -526,7 +491,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredAndOrderedElements_InvalidOrderByExpressionThrowArgumentNullException_Test()
         {
@@ -547,7 +511,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetFilteredAndOrderedAndPagedElements_InvalidOrderByExpressionThrowArgumentNullException_Test()
         {
@@ -571,7 +534,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
         public void GetFilteredAndOrderedAndPagedElements_InvalidPageIndexThrowArgumentException_Test()
         {
@@ -591,7 +553,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentException))]
         public void GetFilteredAndOrderedAndPagedElements_InvalidPageCountThrowArgumentException_Test()
         {
@@ -611,7 +572,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFiltered_WithDescendingOrderedAndPagedElements_Test()
         {
             //Arrange
@@ -634,7 +594,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetFilteredElements
         /// </summary>
-        [TestMethod]
         public void GetFiltered_WithAscendingOrderedAndPagedElements_Test()
         {
             //Arrange
@@ -657,7 +616,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetAll
         /// </summary>
-        [TestMethod]
         public void GetAllTest()
         {
             //Arrange
@@ -677,7 +635,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for GetAll
         /// </summary>
-        [TestMethod]
         public void GetAll_ForSubtypes_Test()
         {
             //Arrange
@@ -697,7 +654,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for Add
         /// </summary>
-        [TestMethod]
         public void AddTest()
         {
             //Arrange
@@ -725,7 +681,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for Add
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void Add_NullItemThrowArgumentNullException_Test()
         {
@@ -743,7 +698,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for Delte
         /// </summary>
-        [TestMethod]
         public void DeleteTest()
         {
             //Arrange
@@ -768,7 +722,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
         /// <summary>
         ///     A test for Delete
         /// </summary>
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void Delete_NullItem_Test()
         {
@@ -782,8 +735,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Act
             target.Remove(entity);
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void Attach_NullItem_Test()
         {
@@ -797,8 +748,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Act
             target.RegisterItem(entity);
         }
-
-        [TestMethod]
         public void Attach_Test()
         {
             //Arrange
@@ -814,8 +763,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Assert
             Assert.IsTrue(target.GetFilteredElements(t => t.Id == 5).Count() == 1);
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetBySpec_NullSpecThrowArgumentNullException_Test()
         {
@@ -829,8 +776,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Act
             target.GetBySpec((ISpecification<Entity>) null);
         }
-
-        [TestMethod]
         public void GetBySpec_Test()
         {
             //Arrange
@@ -846,8 +791,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Assert
             Assert.IsTrue(result.Count() == 1);
         }
-
-        [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
         public void GetBySpecWithSubType_NullSpecThrowArgumentNullException_Test()
         {
@@ -860,8 +803,6 @@ namespace LightstoneApp.Infrastructure.Data.Core.Tests
             //Act
             IEnumerable<Entity> result = target.GetBySpec((ISpecification<SubEntity>) null);
         }
-
-        [TestMethod]
         public void GetBySpecWithSubType_Test()
         {
             //Arrange

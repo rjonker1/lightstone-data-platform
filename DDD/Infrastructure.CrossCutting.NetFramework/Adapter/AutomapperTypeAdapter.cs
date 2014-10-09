@@ -3,19 +3,27 @@
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
 {
     /// <summary>
-    /// Automapper type adapter implementation
+    ///     Automapper type adapter implementation
     /// </summary>
     public class AutomapperTypeAdapter : ITypeAdapter
     {
         #region ITypeAdapter Members
 
         /// <summary>
-        /// <see cref="ITypeAdapter" />
+        ///     <see cref="ITypeAdapter" />
         /// </summary>
-        /// <typeparam name="TSource"><see cref="ITypeAdapter" /></typeparam>
-        /// <typeparam name="TTarget"><see cref="ITypeAdapter" /></typeparam>
-        /// <param name="source"><see cref="ITypeAdapter" /></param>
-        /// <returns> <see cref="ITypeAdapter" /> </returns>
+        /// <typeparam name="TSource">
+        ///     <see cref="ITypeAdapter" />
+        /// </typeparam>
+        /// <typeparam name="TTarget">
+        ///     <see cref="ITypeAdapter" />
+        /// </typeparam>
+        /// <param name="source">
+        ///     <see cref="ITypeAdapter" />
+        /// </param>
+        /// <returns>
+        ///     <see cref="ITypeAdapter" />
+        /// </returns>
         public TTarget Adapt<TSource, TTarget>(TSource source)
             where TSource : class
             where TTarget : class, new()
@@ -24,11 +32,17 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Adapter
         }
 
         /// <summary>
-        /// <see cref="ITypeAdapter" />
+        ///     <see cref="ITypeAdapter" />
         /// </summary>
-        /// <typeparam name="TTarget"><see cref="ITypeAdapter" /></typeparam>
-        /// <param name="source"> <see cref="ITypeAdapter" /> </param>
-        /// <returns> <see cref="ITypeAdapter" /> </returns>
+        /// <typeparam name="TTarget">
+        ///     <see cref="ITypeAdapter" />
+        /// </typeparam>
+        /// <param name="source">
+        ///     <see cref="ITypeAdapter" />
+        /// </param>
+        /// <returns>
+        ///     <see cref="ITypeAdapter" />
+        /// </returns>
         public TTarget Adapt<TTarget>(object source) where TTarget : class
         {
             return Mapper.Map<TTarget>(source);
