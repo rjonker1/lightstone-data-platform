@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.DistributedServices.Events.Contracts;
 using Lace.DistributedServices.Events.PublishMessageHandlers;
 using Lace.Domain.Core.Contracts;
