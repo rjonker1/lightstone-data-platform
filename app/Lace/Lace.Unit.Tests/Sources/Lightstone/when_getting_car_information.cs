@@ -1,9 +1,10 @@
 ﻿using System.Linq;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
+using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.UnitOfWork;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
@@ -12,8 +13,8 @@ namespace Lace.Unit.Tests.Sources.Lightstone
 {
     public class when_getting_car_information : Specification
     {
-        private readonly IReadOnlyRepository<CarInfo> _repository;
-        private readonly IReadOnlyRepository<CarInfo> _vin12Repository;
+        private readonly IReadOnlyCarRepository<CarInfo> _repository;
+        private readonly IReadOnlyCarRepository<CarInfo> _vin12Repository;
         private readonly IGetCarInfo _getCarInformation;
         private readonly IProvideCarInformationForRequest _request;
 

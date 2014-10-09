@@ -1,4 +1,6 @@
-﻿using Lace.DistributedServices.Events.Contracts;
+﻿using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
+using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -33,6 +35,8 @@ namespace Lace.Domain.DataProviders.Lightstone
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
                     new CallLightstoneExternalSource(_request,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
+                            CacheConnectionFactory.LocalClient()),
+                        new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
 
                 consumer.ConsumeExternalSource(response, laceEvent);

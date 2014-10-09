@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Providers;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
-using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements;
+using Lace.CrossCutting.Infrastructure.Orm;
 using ServiceStack.Redis;
 
-namespace Lace.Domain.DataProviders.Lightstone.Repositories
+namespace Lace.CrossCutting.DataProvider.Car.Repositories
 {
-    public class CarInfoRepository : IReadOnlyRepository<CarInfo>
+    public class CarInfoRepository : IReadOnlyCarRepository<CarInfo>
     {
         private readonly IDbConnection _connection;
         private readonly IRedisClient _cacheClient;
@@ -23,26 +20,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         {
             _connection = connection;
             _cacheClient = cacheClient;
-        }
-
-        public IEnumerable<CarInfo> FindAllWithRequest(IProvideCarInformationForRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CarInfo> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CarInfo> FindByMake(int makeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CarInfo> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<CarInfo> FindByCarIdAndYear(int? carId, int year)
@@ -83,7 +60,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                         return response;
 
                     var dbResponse =
-                        _connection.Query<CarInfo>(SelectStatements.GetCarInformationByVin, new { @Vin = vinNumber }).ToList();
+                        _connection.Query<CarInfo>(SelectStatements.GetCarInformationByVin, new {@Vin = vinNumber})
+                            .ToList();
 
                     dbResponse.ForEach(f => response.Add(f));
                     _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));

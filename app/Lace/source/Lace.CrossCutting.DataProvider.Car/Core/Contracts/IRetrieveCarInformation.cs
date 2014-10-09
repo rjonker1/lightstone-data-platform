@@ -1,7 +1,7 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Core.Models;
+﻿using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.Domain.Core.Contracts.Requests;
 
-namespace Lace.Domain.DataProviders.Lightstone.Cars
+namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
 {
     public interface IRetrieveCarInformation
     {

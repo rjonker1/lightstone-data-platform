@@ -4,6 +4,9 @@ namespace Lace.Domain.Core.Dto
 {
     public class RgtResponse : IProvideDataFromRgt
     {
+        public RgtResponse()
+        {
+        }
 
         public RgtResponse(string manufacturer, int modelYear, string modelType, string topSpeed, string kilowatts, string fuelEconomy,
             string acceleration, string torque, string emissions,

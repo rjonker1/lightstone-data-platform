@@ -9,8 +9,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory
         IReadOnlyRepository<Car> CarRepository();
         IReadOnlyRepository<CarType> CarTypeRepository();
         IReadOnlyRepository<CarVendor> CarVendorRepository();
-        IReadOnlyRepository<CarInfo> CarInfoRepository();
-        IReadOnlyRepository<CarInfo> Vin12CarInfoRepository();
         IReadOnlyRepository<Make> MakeRepository();
         IReadOnlyRepository<Metric> MetricRepository();
         IReadOnlyRepository<Municipality> MuncipalityRepository();

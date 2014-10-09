@@ -1,4 +1,4 @@
-﻿namespace Lace.Domain.DataProviders.Lightstone.Core.Models
+﻿namespace Lace.CrossCutting.DataProvider.Car.Core.Models
 {
     public class CarInfo
     {

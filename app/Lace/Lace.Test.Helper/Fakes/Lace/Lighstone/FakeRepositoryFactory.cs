@@ -1,10 +1,27 @@
 ﻿using System;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
+
+    public class FakeCarRepositioryFactory : ISetupCarRepository
+    {
+        public IReadOnlyCarRepository<CarInfo> CarInfoRepository()
+        {
+            return new FakeCarInfoRepository();
+        }
+
+        public IReadOnlyCarRepository<CarInfo> Vin12CarInfoRepository()
+        {
+            return new FakeVin12CarInfoRepository();
+        }
+    }
+
     public class FakeRepositoryFactory : ISetupRepository
     {
         public IReadOnlyRepository<Band> BandRepository()
@@ -25,16 +42,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IReadOnlyRepository<CarVendor> CarVendorRepository()
         {
             throw new NotImplementedException();
-        }
-
-        public IReadOnlyRepository<CarInfo> CarInfoRepository()
-        {
-            return new FakeCarInfoRepository();
-        }
-
-        public IReadOnlyRepository<CarInfo> Vin12CarInfoRepository()
-        {
-            return new FakeVin12CarInfoRepository();
         }
 
         public IReadOnlyRepository<Make> MakeRepository()

@@ -34,7 +34,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
-                    new CallLightstoneExternalSource(_request, new FakeRepositoryFactory()));
+                    new CallLightstoneExternalSource(_request, new FakeRepositoryFactory(),new FakeCarRepositioryFactory()));
                 consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.LightstoneResponse == null)
