@@ -1,7 +1,7 @@
 ﻿namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator
 {
     /// <summary>
-    ///   Entity Validator Factory
+    ///     Entity Validator Factory
     /// </summary>
     public static class EntityValidatorFactory
     {
@@ -14,7 +14,7 @@
         #region Public Methods
 
         /// <summary>
-        ///   Set the  log factory to use
+        ///     Set the  log factory to use
         /// </summary>
         /// <param name="factory"> Log factory to use </param>
         public static void SetCurrent(IEntityValidatorFactory factory)
@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        ///   Createt a new <paramref name="Company.Client.Project.CrossCutting.Logging.ILog" />
+        ///     Createt a new <paramref name="Company.Client.Project.CrossCutting.Logging.ILog" />
         /// </summary>
         /// <returns> Created ILog </returns>
         public static IEntityValidator CreateValidator()

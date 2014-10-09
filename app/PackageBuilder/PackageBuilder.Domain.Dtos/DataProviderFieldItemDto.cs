@@ -1,4 +1,6 @@
-﻿namespace PackageBuilder.Domain.Dtos
+﻿using System;
+
+namespace PackageBuilder.Domain.Dtos
 {
     public class DataProviderFieldItemDto
     {

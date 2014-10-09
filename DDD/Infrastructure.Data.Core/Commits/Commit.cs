@@ -2,53 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+using Raven.Imports.Newtonsoft.Json;
 using Topics.Radical.Linq;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Commits
 {
     public class Commit
     {
-        public class Factory
-        {
-            public Commit CreateFor(Guid transactionIdentifier, string correlationId, IAggregate aggregate, String userAccount)
-            {
-                var commit = new Commit(transactionIdentifier, correlationId, aggregate.Id, aggregate.GetUncommittedEvents(), userAccount);
+        private String _id;
 
-                return commit;
-            }
-        }
-
-        [Raven.Imports.Newtonsoft.Json.JsonConstructor]
+        [JsonConstructor]
         private Commit()
         {
-
         }
 
-        private Commit(Guid transactionIdentifier, String correlationId, String aggregateId, IEnumerable<IDomainEvent> uncommittedEvents, String userAccount)
+        private Commit(Guid transactionIdentifier, String correlationId, String aggregateId,
+            IEnumerable<IDomainEvent> uncommittedEvents, String userAccount)
         {
-            this.CreatedOn = DateTimeOffset.Now;
-            this.TransactionIdentifier = transactionIdentifier.ToString();
-            this.CorrelationId = correlationId;
-            this.AggregateIdentifier = aggregateId;
-            this.Events = uncommittedEvents;
-            this.UserAccount = userAccount;
+            CreatedOn = DateTimeOffset.Now;
+            TransactionIdentifier = transactionIdentifier.ToString();
+            CorrelationId = correlationId;
+            AggregateIdentifier = aggregateId;
+            Events = uncommittedEvents;
+            UserAccount = userAccount;
         }
-
-        private String _id;
 
         public String Id
         {
-            get { return this._id; }
+            get { return _id; }
             private set
             {
-                if (this.Id != value)
+                if (Id != value)
                 {
-                    this._id = value;
-                    if (this.Events != null && this.Events.Any(e => e.Id == null))
+                    _id = value;
+                    if (Events != null && Events.Any(e => e.Id == null))
                     {
-                        this.Events.ForEach(1, (idx, evt) =>
+                        Events.ForEach(1, (idx, evt) =>
                         {
-                            ((DomainEvent)evt).Id = this.Id + "/events/" + idx;
+                            ((DomainEvent) evt).Id = Id + "/events/" + idx;
 
                             return ++idx;
                         });
@@ -56,6 +47,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Commits
                 }
             }
         }
+
         public DateTimeOffset CreatedOn { get; private set; }
         public String TransactionIdentifier { get; private set; }
         public String CorrelationId { get; private set; }
@@ -64,11 +56,23 @@ namespace LightstoneApp.Infrastructure.Data.Core.Commits
 
         public Boolean IsDispatched { get; private set; }
 
+        public String UserAccount { get; private set; }
+
         public void MarkAsDispatched()
         {
-            this.IsDispatched = true;
+            IsDispatched = true;
         }
 
-        public String UserAccount { get; private set; }
+        public class Factory
+        {
+            public Commit CreateFor(Guid transactionIdentifier, string correlationId, IAggregate aggregate,
+                String userAccount)
+            {
+                var commit = new Commit(transactionIdentifier, correlationId, aggregate.Id,
+                    aggregate.GetUncommittedEvents(), userAccount);
+
+                return commit;
+            }
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace PackageBuilder.Core.NEventStore
 
         public T GetById(Guid id, int version)
         {
-            return GetById<T>(typeof(T).Name, id, version);
+            return GetById<T>(typeof (T).Name, id, version);
         }
 
         public void Save(IAggregate aggregate, Guid commitId)

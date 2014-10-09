@@ -3,12 +3,12 @@
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator
 {
     /// <summary>
-    ///   The entity validator base contract
+    ///     The entity validator base contract
     /// </summary>
     public interface IEntityValidator
     {
         /// <summary>
-        ///   Perform validation and return if the entity state is valid
+        ///     Perform validation and return if the entity state is valid
         /// </summary>
         /// <typeparam name="TEntity"> The type of entity to validate </typeparam>
         /// <param name="item"> The instance to validate </param>
@@ -16,7 +16,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator
         bool IsValid<TEntity>(TEntity item) where TEntity : class;
 
         /// <summary>
-        ///   Return the collection of errors if entity state is not valid
+        ///     Return the collection of errors if entity state is not valid
         /// </summary>
         /// <typeparam name="TEntity"> The type of entity </typeparam>
         /// <param name="item"> The instance with validation errors </param>

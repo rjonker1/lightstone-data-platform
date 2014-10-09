@@ -6,47 +6,47 @@ using System.Linq;
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator
 {
     /// <summary>
-    ///   Validator based on Data Annotations. 
-    ///   This validator use IValidatableObject interface and
-    ///   ValidationAttribute ( hierarchy of this) for
-    ///   perform validation
+    ///     Validator based on Data Annotations.
+    ///     This validator use IValidatableObject interface and
+    ///     ValidationAttribute ( hierarchy of this) for
+    ///     perform validation
     /// </summary>
     public class DataAnnotationsEntityValidator : IEntityValidator
     {
         #region Private Methods
 
         /// <summary>
-        ///   Get erros if object implement IValidatableObject
+        ///     Get erros if object implement IValidatableObject
         /// </summary>
         /// <typeparam name="TEntity"> The type of entity </typeparam>
         /// <param name="item"> The item to validate </param>
         /// <param name="errors"> A collection of current errors </param>
         private void SetValidatableObjectErrors<TEntity>(TEntity item, List<string> errors) where TEntity : class
         {
-            if (typeof(IValidatableObject).IsAssignableFrom(typeof(TEntity)))
+            if (typeof (IValidatableObject).IsAssignableFrom(typeof (TEntity)))
             {
                 var validationContext = new ValidationContext(item, null, null);
 
-                var validationResults = ((IValidatableObject)item).Validate(validationContext);
+                IEnumerable<ValidationResult> validationResults = ((IValidatableObject) item).Validate(validationContext);
 
                 errors.AddRange(validationResults.Select(vr => vr.ErrorMessage));
             }
         }
 
         /// <summary>
-        ///   Get errors on ValidationAttribute
+        ///     Get errors on ValidationAttribute
         /// </summary>
         /// <typeparam name="TEntity"> The type of entity </typeparam>
         /// <param name="item"> The entity to validate </param>
         /// <param name="errors"> A collection of current errors </param>
         private void SetValidationAttributeErrors<TEntity>(TEntity item, List<string> errors) where TEntity : class
         {
-            var result = from property in TypeDescriptor.GetProperties(item).Cast<PropertyDescriptor>()
-                         from attribute in property.Attributes.OfType<ValidationAttribute>()
-                         where !attribute.IsValid(property.GetValue(item))
-                         select attribute.FormatErrorMessage(string.Empty);
+            IEnumerable<string> result = from property in TypeDescriptor.GetProperties(item).Cast<PropertyDescriptor>()
+                from attribute in property.Attributes.OfType<ValidationAttribute>()
+                where !attribute.IsValid(property.GetValue(item))
+                select attribute.FormatErrorMessage(string.Empty);
 
-            if (result.Any<string>())
+            if (result.Any())
                 errors.AddRange(result);
         }
 
@@ -55,12 +55,18 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator
         #region IEntityValidator Members
 
         /// <summary>
-        ///   <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        ///     <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
         /// </summary>
-        /// <typeparam name="TEntity"> <see
-        ///    cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" /> </typeparam>
-        /// <param name="item"> <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" /> </param>
-        /// <returns> <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" /> </returns>
+        /// <typeparam name="TEntity">
+        ///     <see
+        ///         cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        /// </typeparam>
+        /// <param name="item">
+        ///     <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        /// </param>
+        /// <returns>
+        ///     <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        /// </returns>
         public bool IsValid<TEntity>(TEntity item) where TEntity : class
         {
             if (item == null)
@@ -75,12 +81,18 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator
         }
 
         /// <summary>
-        ///   <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        ///     <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
         /// </summary>
-        /// <typeparam name="TEntity"> <see
-        ///    cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" /> </typeparam>
-        /// <param name="item"> <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" /> </param>
-        /// <returns> <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" /> </returns>
+        /// <typeparam name="TEntity">
+        ///     <see
+        ///         cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        /// </typeparam>
+        /// <param name="item">
+        ///     <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        /// </param>
+        /// <returns>
+        ///     <see cref="Company.Client.Project.CrossCutting.Validator.IEntityValidator" />
+        /// </returns>
         public IEnumerable<string> GetInvalidMessages<TEntity>(TEntity item) where TEntity : class
         {
             if (item == null)

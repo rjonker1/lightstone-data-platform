@@ -2,17 +2,17 @@
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
-	public interface IOperationContextManager
-	{
-		IOperationContext GetCurrent();
-	}
+    public interface IOperationContextManager
+    {
+        IOperationContext GetCurrent();
+    }
 
-	public interface IOperationContext : IDisposable
-	{
-		IOperationContext ForOperation( String correlationId );
-		String CorrelationId { get; }
+    public interface IOperationContext : IDisposable
+    {
+        String CorrelationId { get; }
+        IOperationContext ForOperation(String correlationId);
 
-		void Add( string key, Object value );
-		T Get<T>( string key );
-	}
+        void Add(string key, Object value);
+        T Get<T>(string key);
+    }
 }

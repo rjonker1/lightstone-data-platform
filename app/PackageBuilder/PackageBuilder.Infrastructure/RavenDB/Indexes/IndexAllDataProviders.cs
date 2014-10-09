@@ -1,5 +1,5 @@
 using System.Linq;
-using PackageBuilder.Domain.Models;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using Raven.Client.Indexes;
 
 namespace PackageBuilder.Infrastructure.RavenDB.Indexes

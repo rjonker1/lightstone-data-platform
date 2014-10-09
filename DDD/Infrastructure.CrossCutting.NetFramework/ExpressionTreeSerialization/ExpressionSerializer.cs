@@ -13,11 +13,16 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 {
     public class ExpressionSerializer
     {
-        private static readonly Type[] AttributeTypes = new[] { typeof(string), typeof(int), typeof(bool), typeof(ExpressionType) };
-        private readonly Dictionary<string, ParameterExpression> _parameters = new Dictionary<string, ParameterExpression>();
-        private readonly ExpressionSerializationTypeResolver _resolver;
+        private static readonly Type[] AttributeTypes =
+        {
+            typeof (string), typeof (int), typeof (bool),
+            typeof (ExpressionType)
+        };
 
-        public List<CustomExpressionXmlConverter> Converters { get; private set; }
+        private readonly Dictionary<string, ParameterExpression> _parameters =
+            new Dictionary<string, ParameterExpression>();
+
+        private readonly ExpressionSerializationTypeResolver _resolver;
 
         public ExpressionSerializer(ExpressionSerializationTypeResolver resolver)
         {
@@ -42,13 +47,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         {
             if (e == null)
                 return null;
-            var replace = ApplyCustomConverters(e);
+            XElement replace = ApplyCustomConverters(e);
             if (replace != null)
                 return replace;
-            var properties = e.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] properties = e.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var propList = new List<PropValue>();
-            var isConstant = false;
-            foreach (var prop in properties)
+            bool isConstant = false;
+            foreach (PropertyInfo prop in properties)
             {
                 try
                 {
@@ -74,30 +79,34 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
                         var memberExpression = val as MemberExpression;
                         if (memberExpression.Expression.NodeType == ExpressionType.Constant)
                         {
-                            val = Expression.Constant(Expression.Lambda(memberExpression).Compile().DynamicInvoke(null), memberExpression.Type);
+                            val = Expression.Constant(
+                                Expression.Lambda(memberExpression).Compile().DynamicInvoke(null), memberExpression.Type);
                         }
                     }
-                    propList.Add(new PropValue { Property = prop, Value = val });
+                    propList.Add(new PropValue {Property = prop, Value = val});
                     //return new XElement(GetNameOfExpression(e), GenerateXmlFromProperty(prop.PropertyType, prop.Name, prop.GetValue(e, null)));
                 }
                 catch
                 {
-                    propList.Add(new PropValue { Property = prop, Value = e.Type }); //original
+                    propList.Add(new PropValue {Property = prop, Value = e.Type}); //original
                 }
             }
 
             //Comprobamos que no sea constante null, y si lo es le cambiamos el tipo y el valor;       
             if (isConstant && propList.Any(p => p.Property.Name == "Value"))
             {
-                var propValue = propList.Single(p => p.Property.Name == "Value");
+                PropValue propValue = propList.Single(p => p.Property.Name == "Value");
                 if (propValue.Value == null)
                 {
-                    var propValueType = propList.Single(p => p.Property.Name == "Type");
-                    propValueType.Value = typeof(DBNull);
+                    PropValue propValueType = propList.Single(p => p.Property.Name == "Type");
+                    propValueType.Value = typeof (DBNull);
                 }
             }
 
-            var aux = new XElement(GetNameOfExpression(e), propList.Select(prop => GenerateXmlFromProperty(prop.Property.PropertyType, prop.Property.Name, prop.Value)).ToArray());
+            var aux = new XElement(GetNameOfExpression(e),
+                propList.Select(
+                    prop => GenerateXmlFromProperty(prop.Property.PropertyType, prop.Property.Name, prop.Value))
+                    .ToArray());
             return aux;
         }
 
@@ -118,19 +127,19 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         {
             if (AttributeTypes.Contains(propType))
                 return GenerateXmlFromPrimitive(propName, value);
-            if (propType == typeof(object))
+            if (propType == typeof (object))
                 return GenerateXmlFromObject(propName, value);
-            if (typeof(Expression).IsAssignableFrom(propType))
+            if (typeof (Expression).IsAssignableFrom(propType))
                 return GenerateXmlFromExpression(propName, value as Expression);
-            if (value is MethodInfo || propType == typeof(MethodInfo))
+            if (value is MethodInfo || propType == typeof (MethodInfo))
                 return GenerateXmlFromMethodInfo(propName, value as MethodInfo);
-            if (value is PropertyInfo || propType == typeof(PropertyInfo))
+            if (value is PropertyInfo || propType == typeof (PropertyInfo))
                 return GenerateXmlFromPropertyInfo(propName, value as PropertyInfo);
-            if (value is FieldInfo || propType == typeof(FieldInfo))
+            if (value is FieldInfo || propType == typeof (FieldInfo))
                 return GenerateXmlFromFieldInfo(propName, value as FieldInfo);
-            if (value is ConstructorInfo || propType == typeof(ConstructorInfo))
+            if (value is ConstructorInfo || propType == typeof (ConstructorInfo))
                 return GenerateXmlFromConstructorInfo(propName, value as ConstructorInfo);
-            if (propType == typeof(Type))
+            if (propType == typeof (Type))
                 return GenerateXmlFromType(propName, value as Type);
             if (IsIEnumerableOf<Expression>(propType))
                 return GenerateXmlFromExpressionList(propName, AsIEnumerableOf<Expression>(value));
@@ -151,25 +160,25 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             else
             {
                 if (value is Type)
-                    result = GenerateXmlFromTypeCore((Type)value);
+                    result = GenerateXmlFromTypeCore((Type) value);
                 if (result == null)
                     result = value.ToString();
             }
 
             return new XElement(propName,
-                                result);
+                result);
         }
 
         private bool IsIEnumerableOf<T>(Type propType)
         {
             if (!propType.IsGenericType)
                 return false;
-            var typeArgs = propType.GetGenericArguments();
+            Type[] typeArgs = propType.GetGenericArguments();
             if (typeArgs.Length != 1)
                 return false;
-            if (!typeof(T).IsAssignableFrom(typeArgs[0]))
+            if (!typeof (T).IsAssignableFrom(typeArgs[0]))
                 return false;
-            if (!typeof(IEnumerable<>).MakeGenericType(typeArgs).IsAssignableFrom(propType))
+            if (!typeof (IEnumerable<>).MakeGenericType(typeArgs).IsAssignableFrom(propType))
                 return false;
             return true;
         }
@@ -184,39 +193,39 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         private object GenerateXmlFromElementInitList(string propName, IEnumerable<ElementInit> initializers)
         {
             if (initializers == null)
-                initializers = new ElementInit[] { };
+                initializers = new ElementInit[] {};
             return new XElement(propName,
-                                from elementInit in initializers
-                                select GenerateXmlFromElementInitializer(elementInit));
+                from elementInit in initializers
+                select GenerateXmlFromElementInitializer(elementInit));
         }
 
         private object GenerateXmlFromElementInitializer(ElementInit elementInit)
         {
             return new XElement("ElementInit",
-                                GenerateXmlFromMethodInfo("AddMethod", elementInit.AddMethod),
-                                GenerateXmlFromExpressionList("Arguments", elementInit.Arguments));
+                GenerateXmlFromMethodInfo("AddMethod", elementInit.AddMethod),
+                GenerateXmlFromExpressionList("Arguments", elementInit.Arguments));
         }
 
         private object GenerateXmlFromExpressionList(string propName, IEnumerable<Expression> expressions)
         {
             return new XElement(propName, from expression in expressions
-                                          select GenerateXmlFromExpressionCore(expression));
+                select GenerateXmlFromExpressionCore(expression));
         }
 
         private object GenerateXmlFromMemberInfoList(string propName, IEnumerable<MemberInfo> members)
         {
             if (members == null)
-                members = new MemberInfo[] { };
+                members = new MemberInfo[] {};
             return new XElement(propName, from member in members
-                                          select GenerateXmlFromProperty(member.GetType(), "Info", member));
+                select GenerateXmlFromProperty(member.GetType(), "Info", member));
         }
 
         private object GenerateXmlFromBindingList(string propName, IEnumerable<MemberBinding> bindings)
         {
             if (bindings == null)
-                bindings = new MemberBinding[] { };
+                bindings = new MemberBinding[] {};
             return new XElement(propName, from binding in bindings
-                                          select GenerateXmlFromBinding(binding));
+                select GenerateXmlFromBinding(binding));
         }
 
         private object GenerateXmlFromBinding(MemberBinding binding)
@@ -237,23 +246,24 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         private object GenerateXmlFromMemberBinding(MemberMemberBinding memberMemberBinding)
         {
             return new XElement("MemberMemberBinding",
-                                GenerateXmlFromProperty(memberMemberBinding.Member.GetType(), "Member", memberMemberBinding.Member),
-                                GenerateXmlFromBindingList("Bindings", memberMemberBinding.Bindings));
+                GenerateXmlFromProperty(memberMemberBinding.Member.GetType(), "Member", memberMemberBinding.Member),
+                GenerateXmlFromBindingList("Bindings", memberMemberBinding.Bindings));
         }
 
 
         private object GenerateXmlFromListBinding(MemberListBinding memberListBinding)
         {
             return new XElement("MemberListBinding",
-                                GenerateXmlFromProperty(memberListBinding.Member.GetType(), "Member", memberListBinding.Member),
-                                GenerateXmlFromProperty(memberListBinding.Initializers.GetType(), "Initializers", memberListBinding.Initializers));
+                GenerateXmlFromProperty(memberListBinding.Member.GetType(), "Member", memberListBinding.Member),
+                GenerateXmlFromProperty(memberListBinding.Initializers.GetType(), "Initializers",
+                    memberListBinding.Initializers));
         }
 
         private object GenerateXmlFromAssignment(MemberAssignment memberAssignment)
         {
             return new XElement("MemberAssignment",
-                                GenerateXmlFromProperty(memberAssignment.Member.GetType(), "Member", memberAssignment.Member),
-                                GenerateXmlFromProperty(memberAssignment.Expression.GetType(), "Expression", memberAssignment.Expression));
+                GenerateXmlFromProperty(memberAssignment.Member.GetType(), "Member", memberAssignment.Member),
+                GenerateXmlFromProperty(memberAssignment.Expression.GetType(), "Expression", memberAssignment.Expression));
         }
 
         private XElement GenerateXmlFromExpression(string propName, Expression e)
@@ -273,14 +283,14 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             {
                 if (type.FullName != null)
                     return new XElement("AnonymousType", new XAttribute("Name", type.FullName),
-                                        from property in type.GetProperties()
-                                        select new XElement("Property", new XAttribute("Name", property.Name),
-                                                            GenerateXmlFromTypeCore(property.PropertyType)),
-                                        new XElement("Constructor",
-                                                     from parameter in type.GetConstructors().First().GetParameters()
-                                                     select new XElement("Parameter", new XAttribute("Name", parameter.Name),
-                                                                         GenerateXmlFromTypeCore(parameter.ParameterType))
-                                            ));
+                        from property in type.GetProperties()
+                        select new XElement("Property", new XAttribute("Name", property.Name),
+                            GenerateXmlFromTypeCore(property.PropertyType)),
+                        new XElement("Constructor",
+                            from parameter in type.GetConstructors().First().GetParameters()
+                            select new XElement("Parameter", new XAttribute("Name", parameter.Name),
+                                GenerateXmlFromTypeCore(parameter.ParameterType))
+                            ));
             }
 
             else
@@ -289,11 +299,11 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
                 //like arrays no need to save them.
                 if (type.IsGenericType)
                 {
-                    var fullName = type.GetGenericTypeDefinition().FullName;
+                    string fullName = type.GetGenericTypeDefinition().FullName;
                     if (fullName != null)
                         return new XElement("Type", new XAttribute("Name", fullName),
-                                            from genArgType in type.GetGenericArguments()
-                                            select GenerateXmlFromTypeCore(genArgType));
+                            from genArgType in type.GetGenericArguments()
+                            select GenerateXmlFromTypeCore(genArgType));
                 }
                 else
                 {
@@ -313,13 +323,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             if (methodInfo == null)
                 return new XElement(propName);
             return new XElement(propName,
-                                new XAttribute("MemberType", methodInfo.MemberType),
-                                new XAttribute("MethodName", methodInfo.Name),
-                                GenerateXmlFromType("DeclaringType", methodInfo.DeclaringType),
-                                new XElement("Parameters", from param in methodInfo.GetParameters()
-                                                           select GenerateXmlFromType("Type", param.ParameterType)),
-                                new XElement("GenericArgTypes", from argType in methodInfo.GetGenericArguments()
-                                                                select GenerateXmlFromType("Type", argType)));
+                new XAttribute("MemberType", methodInfo.MemberType),
+                new XAttribute("MethodName", methodInfo.Name),
+                GenerateXmlFromType("DeclaringType", methodInfo.DeclaringType),
+                new XElement("Parameters", from param in methodInfo.GetParameters()
+                    select GenerateXmlFromType("Type", param.ParameterType)),
+                new XElement("GenericArgTypes", from argType in methodInfo.GetGenericArguments()
+                    select GenerateXmlFromType("Type", argType)));
         }
 
         private object GenerateXmlFromPropertyInfo(string propName, PropertyInfo propertyInfo)
@@ -329,23 +339,20 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
                 return new XElement(propName);
             }
 
-            var indexParameters = propertyInfo.GetIndexParameters();
+            ParameterInfo[] indexParameters = propertyInfo.GetIndexParameters();
             if (indexParameters.Length > 0)
             {
                 return new XElement(propName,
-                                    new XAttribute("MemberType", propertyInfo.MemberType),
-                                    new XAttribute("PropertyName", propertyInfo.Name),
-                                    GenerateXmlFromType("DeclaringType", propertyInfo.DeclaringType),
-                                    new XElement("IndexParameters", from param in indexParameters
-                                                                    select GenerateXmlFromType("Type", param.ParameterType)));
+                    new XAttribute("MemberType", propertyInfo.MemberType),
+                    new XAttribute("PropertyName", propertyInfo.Name),
+                    GenerateXmlFromType("DeclaringType", propertyInfo.DeclaringType),
+                    new XElement("IndexParameters", from param in indexParameters
+                        select GenerateXmlFromType("Type", param.ParameterType)));
             }
-            else
-            {
-                return new XElement(propName,
-                                    new XAttribute("MemberType", propertyInfo.MemberType),
-                                    new XAttribute("PropertyName", propertyInfo.Name),
-                                    GenerateXmlFromType("DeclaringType", propertyInfo.DeclaringType));
-            }
+            return new XElement(propName,
+                new XAttribute("MemberType", propertyInfo.MemberType),
+                new XAttribute("PropertyName", propertyInfo.Name),
+                GenerateXmlFromType("DeclaringType", propertyInfo.DeclaringType));
         }
 
         private object GenerateXmlFromFieldInfo(string propName, FieldInfo fieldInfo)
@@ -353,9 +360,9 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             if (fieldInfo == null)
                 return new XElement(propName);
             return new XElement(propName,
-                                new XAttribute("MemberType", fieldInfo.MemberType),
-                                new XAttribute("FieldName", fieldInfo.Name),
-                                GenerateXmlFromType("DeclaringType", fieldInfo.DeclaringType));
+                new XAttribute("MemberType", fieldInfo.MemberType),
+                new XAttribute("FieldName", fieldInfo.Name),
+                GenerateXmlFromType("DeclaringType", fieldInfo.DeclaringType));
         }
 
         private object GenerateXmlFromConstructorInfo(string propName, ConstructorInfo constructorInfo)
@@ -363,11 +370,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             if (constructorInfo == null)
                 return new XElement(propName);
             return new XElement(propName,
-                                new XAttribute("MemberType", constructorInfo.MemberType),
-                                new XAttribute("MethodName", constructorInfo.Name),
-                                GenerateXmlFromType("DeclaringType", constructorInfo.DeclaringType),
-                                new XElement("Parameters", from param in constructorInfo.GetParameters()
-                                                           select new XElement("Parameter", new XAttribute("Name", param.Name), GenerateXmlFromType("Type", param.ParameterType))));
+                new XAttribute("MemberType", constructorInfo.MemberType),
+                new XAttribute("MethodName", constructorInfo.Name),
+                GenerateXmlFromType("DeclaringType", constructorInfo.DeclaringType),
+                new XElement("Parameters", from param in constructorInfo.GetParameters()
+                    select
+                        new XElement("Parameter", new XAttribute("Name", param.Name),
+                            GenerateXmlFromType("Type", param.ParameterType))));
         }
 
         #endregion
@@ -382,7 +391,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         public Expression<TDelegate> Deserialize<TDelegate>(XElement xml)
         {
-            var e = Deserialize(xml);
+            Expression e = Deserialize(xml);
             if (e is Expression<TDelegate>)
                 return e as Expression<TDelegate>;
             throw new Exception("xml must represent an Expression<TDelegate>");
@@ -398,7 +407,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseExpressionFromXmlNonNull(XElement xml)
         {
-            var expression = ApplyCustomDeserializers(xml);
+            Expression expression = ApplyCustomDeserializers(xml);
 
             if (expression != null)
                 return expression;
@@ -453,9 +462,9 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ApplyCustomDeserializers(XElement xml)
         {
-            foreach (var converter in Converters)
+            foreach (CustomExpressionXmlConverter converter in Converters)
             {
-                var result = converter.Deserialize(xml);
+                Expression result = converter.Deserialize(xml);
                 if (result != null)
                     return result;
             }
@@ -464,25 +473,25 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseInvocationExpressionFromXml(XElement xml)
         {
-            var expression = ParseExpressionFromXml(xml.Element("Expression"));
-            var arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments");
+            Expression expression = ParseExpressionFromXml(xml.Element("Expression"));
+            IEnumerable<Expression> arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments");
             return Expression.Invoke(expression, arguments);
         }
 
         private Expression ParseTypeBinaryExpressionFromXml(XElement xml)
         {
-            var expression = ParseExpressionFromXml(xml.Element("Expression"));
-            var typeOperand = ParseTypeFromXml(xml.Element("TypeOperand"));
+            Expression expression = ParseExpressionFromXml(xml.Element("Expression"));
+            Type typeOperand = ParseTypeFromXml(xml.Element("TypeOperand"));
             return Expression.TypeIs(expression, typeOperand);
         }
 
         private Expression ParseNewArrayExpressionFromXml(XElement xml)
         {
-            var type = ParseTypeFromXml(xml.Element("Type"));
+            Type type = ParseTypeFromXml(xml.Element("Type"));
             if (!type.IsArray)
                 throw new Exception("Expected array type");
-            var elemType = type.GetElementType();
-            var expressions = ParseExpressionListFromXml<Expression>(xml, "Expressions");
+            Type elemType = type.GetElementType();
+            IEnumerable<Expression> expressions = ParseExpressionListFromXml<Expression>(xml, "Expressions");
             switch (xml.Attribute("NodeType").Value)
             {
                 case "NewArrayInit":
@@ -496,9 +505,9 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseConditionalExpressionFromXml(XElement xml)
         {
-            var test = ParseExpressionFromXml(xml.Element("Test"));
-            var ifTrue = ParseExpressionFromXml(xml.Element("IfTrue"));
-            var ifFalse = ParseExpressionFromXml(xml.Element("IfFalse"));
+            Expression test = ParseExpressionFromXml(xml.Element("Test"));
+            Expression ifTrue = ParseExpressionFromXml(xml.Element("IfTrue"));
+            Expression ifFalse = ParseExpressionFromXml(xml.Element("IfFalse"));
             return Expression.Condition(test, ifTrue, ifFalse);
         }
 
@@ -506,7 +515,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         {
             var newExpression =
                 ParseNewExpressionFromXml(xml.Element("NewExpression").Element("NewExpression")) as NewExpression;
-            var bindings = ParseBindingListFromXml(xml, "Bindings").ToArray();
+            MemberBinding[] bindings = ParseBindingListFromXml(xml, "Bindings").ToArray();
             return Expression.MemberInit(newExpression, bindings);
         }
 
@@ -515,15 +524,15 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         {
             var newExpression = ParseExpressionFromXml(xml.Element("NewExpression")) as NewExpression;
             if (newExpression == null) throw new Exception("Excepted a NewExpression");
-            var initializers = ParseElementInitListFromXml(xml, "Initializers").ToArray();
+            ElementInit[] initializers = ParseElementInitListFromXml(xml, "Initializers").ToArray();
             return Expression.ListInit(newExpression, initializers);
         }
 
         private Expression ParseNewExpressionFromXml(XElement xml)
         {
-            var constructor = ParseConstructorInfoFromXml(xml.Element("Constructor"));
-            var arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments").ToArray();
-            var members = ParseMemberInfoListFromXml<MemberInfo>(xml, "Members").ToArray();
+            ConstructorInfo constructor = ParseConstructorInfoFromXml(xml.Element("Constructor"));
+            Expression[] arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments").ToArray();
+            MemberInfo[] members = ParseMemberInfoListFromXml<MemberInfo>(xml, "Members").ToArray();
             if (members.Length == 0)
                 return Expression.New(constructor, arguments);
             return Expression.New(constructor, arguments, members);
@@ -531,14 +540,14 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseMemberExpressionFromXml(XElement xml)
         {
-            var expression = ParseExpressionFromXml(xml.Element("Expression"));
-            var member = ParseMemberInfoFromXml(xml.Element("Member"));
+            Expression expression = ParseExpressionFromXml(xml.Element("Expression"));
+            MemberInfo member = ParseMemberInfoFromXml(xml.Element("Member"));
             return Expression.MakeMemberAccess(expression, member);
         }
 
         private MemberInfo ParseMemberInfoFromXml(XElement xml)
         {
-            var memberType = (MemberTypes)ParseConstantFromAttribute<MemberTypes>(xml, "MemberType");
+            var memberType = (MemberTypes) ParseConstantFromAttribute<MemberTypes>(xml, "MemberType");
             switch (memberType)
             {
                 case MemberTypes.Field:
@@ -560,102 +569,99 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private MemberInfo ParseFieldInfoFromXml(XElement xml)
         {
-            var fieldName = (string)ParseConstantFromAttribute<string>(xml, "FieldName");
-            var declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
+            var fieldName = (string) ParseConstantFromAttribute<string>(xml, "FieldName");
+            Type declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
             return declaringType.GetField(fieldName);
         }
 
         private MemberInfo ParsePropertyInfoFromXml(XElement xml)
         {
-            var propertyName = (string)ParseConstantFromAttribute<string>(xml, "PropertyName");
-            var declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
-            var indexParametersElement = xml.Element("IndexParameters");
+            var propertyName = (string) ParseConstantFromAttribute<string>(xml, "PropertyName");
+            Type declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
+            XElement indexParametersElement = xml.Element("IndexParameters");
 
             if (indexParametersElement != null)
             {
-                var ps = from paramXml in indexParametersElement.Elements()
-                         select ParseTypeFromXml(paramXml);
+                IEnumerable<Type> ps = from paramXml in indexParametersElement.Elements()
+                    select ParseTypeFromXml(paramXml);
                 //return declaringType.GetProperty(propertyName, ps.ToArray());
                 return declaringType.GetProperty(propertyName, ps.ToArray().First());
             }
-            else
-            {
-                return declaringType.GetProperty(propertyName);
-            }
+            return declaringType.GetProperty(propertyName);
         }
 
         private Expression ParseUnaryExpressionFromXml(XElement xml)
         {
-            var operand = ParseExpressionFromXml(xml.Element("Operand"));
-            var method = ParseMethodInfoFromXml(xml.Element("Method"));
-            var isLifted = (bool)ParseConstantFromAttribute<bool>(xml, "IsLifted");
-            var isLiftedToNull = (bool)ParseConstantFromAttribute<bool>(xml, "IsLiftedToNull");
-            var expressionType = (ExpressionType)ParseConstantFromAttribute<ExpressionType>(xml, "NodeType");
-            var type = ParseTypeFromXml(xml.Element("Type"));
+            Expression operand = ParseExpressionFromXml(xml.Element("Operand"));
+            MethodInfo method = ParseMethodInfoFromXml(xml.Element("Method"));
+            var isLifted = (bool) ParseConstantFromAttribute<bool>(xml, "IsLifted");
+            var isLiftedToNull = (bool) ParseConstantFromAttribute<bool>(xml, "IsLiftedToNull");
+            var expressionType = (ExpressionType) ParseConstantFromAttribute<ExpressionType>(xml, "NodeType");
+            Type type = ParseTypeFromXml(xml.Element("Type"));
             return Expression.MakeUnary(expressionType, operand, type, method);
         }
 
         private Expression ParseMethodCallExpressionFromXml(XElement xml)
         {
-            var instance = ParseExpressionFromXml(xml.Element("Object"));
-            var method = ParseMethodInfoFromXml(xml.Element("Method"));
-            var arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments").ToArray();
+            Expression instance = ParseExpressionFromXml(xml.Element("Object"));
+            MethodInfo method = ParseMethodInfoFromXml(xml.Element("Method"));
+            Expression[] arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments").ToArray();
             return Expression.Call(instance, method, arguments);
         }
 
         private Expression ParseLambdaExpressionFromXml(XElement xml)
         {
-            var body = ParseExpressionFromXml(xml.Element("Body"));
-            var parameters = ParseExpressionListFromXml<ParameterExpression>(xml,
-                                                                             "Parameters");
-            var type = ParseTypeFromXml(xml.Element("Type"));
+            Expression body = ParseExpressionFromXml(xml.Element("Body"));
+            IEnumerable<ParameterExpression> parameters = ParseExpressionListFromXml<ParameterExpression>(xml,
+                "Parameters");
+            Type type = ParseTypeFromXml(xml.Element("Type"));
             return Expression.Lambda(type, body, parameters);
         }
 
         private IEnumerable<T> ParseExpressionListFromXml<T>(XElement xml, string elemName) where T : Expression
         {
             return from tXml in xml.Element(elemName).Elements()
-                   select (T)ParseExpressionFromXmlNonNull(tXml);
+                select (T) ParseExpressionFromXmlNonNull(tXml);
         }
 
         private IEnumerable<T> ParseMemberInfoListFromXml<T>(XElement xml, string elemName) where T : MemberInfo
         {
             return from tXml in xml.Element(elemName).Elements()
-                   select (T)ParseMemberInfoFromXml(tXml);
+                select (T) ParseMemberInfoFromXml(tXml);
         }
 
         private IEnumerable<ElementInit> ParseElementInitListFromXml(XElement xml, string elemName)
         {
             return from tXml in xml.Element(elemName).Elements()
-                   select ParseElementInitFromXml(tXml);
+                select ParseElementInitFromXml(tXml);
         }
 
         private ElementInit ParseElementInitFromXml(XElement xml)
         {
-            var addMethod = ParseMethodInfoFromXml(xml.Element("AddMethod"));
-            var arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments");
+            MethodInfo addMethod = ParseMethodInfoFromXml(xml.Element("AddMethod"));
+            IEnumerable<Expression> arguments = ParseExpressionListFromXml<Expression>(xml, "Arguments");
             return Expression.ElementInit(addMethod, arguments);
         }
 
         private IEnumerable<MemberBinding> ParseBindingListFromXml(XElement xml, string elemName)
         {
             return from tXml in xml.Element(elemName).Elements()
-                   select ParseBindingFromXml(tXml);
+                select ParseBindingFromXml(tXml);
         }
 
         private MemberBinding ParseBindingFromXml(XElement tXml)
         {
-            var member = ParseMemberInfoFromXml(tXml.Element("Member"));
+            MemberInfo member = ParseMemberInfoFromXml(tXml.Element("Member"));
             switch (tXml.Name.LocalName)
             {
                 case "MemberAssignment":
-                    var expression = ParseExpressionFromXml(tXml.Element("Expression"));
+                    Expression expression = ParseExpressionFromXml(tXml.Element("Expression"));
                     return Expression.Bind(member, expression);
                 case "MemberMemberBinding":
-                    var bindings = ParseBindingListFromXml(tXml, "Bindings");
+                    IEnumerable<MemberBinding> bindings = ParseBindingListFromXml(tXml, "Bindings");
                     return Expression.MemberBind(member, bindings);
                 case "MemberListBinding":
-                    var initializers = ParseElementInitListFromXml(tXml, "Initializers");
+                    IEnumerable<ElementInit> initializers = ParseElementInitListFromXml(tXml, "Initializers");
                     return Expression.ListBind(member, initializers);
             }
             throw new NotImplementedException();
@@ -664,10 +670,10 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseParameterExpressionFromXml(XElement xml)
         {
-            var type = ParseTypeFromXml(xml.Element("Type"));
-            var name = (string)ParseConstantFromAttribute<string>(xml, "Name");
+            Type type = ParseTypeFromXml(xml.Element("Type"));
+            var name = (string) ParseConstantFromAttribute<string>(xml, "Name");
             //vs: hack
-            var id = name + type.FullName;
+            string id = name + type.FullName;
             if (!_parameters.ContainsKey(id))
                 _parameters.Add(id, Expression.Parameter(type, name));
             return _parameters[id];
@@ -675,13 +681,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseConstatExpressionFromXml(XElement xml)
         {
-            var type = ParseTypeFromXml(xml.Element("Type"));
-            if (type == typeof(DBNull))
+            Type type = ParseTypeFromXml(xml.Element("Type"));
+            if (type == typeof (DBNull))
             {
-                var aux = Expression.Constant(null, typeof(String));
+                ConstantExpression aux = Expression.Constant(null, typeof (String));
                 //return Expression.Constant(null, typeof(System.String));
 
-                return Expression.Constant(null, typeof(DBNull));
+                return Expression.Constant(null, typeof (DBNull));
             }
             return Expression.Constant(ParseConstantFromElement(xml, "Value", type), type);
         }
@@ -710,22 +716,22 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
             if (!xml.HasElements)
                 return _resolver.GetType(xml.Attribute("Name").Value);
 
-            var genericArgumentTypes = from genArgXml in xml.Elements()
-                                       select ParseTypeFromXmlCore(genArgXml);
+            IEnumerable<Type> genericArgumentTypes = from genArgXml in xml.Elements()
+                select ParseTypeFromXmlCore(genArgXml);
             return _resolver.GetType(xml.Attribute("Name").Value, genericArgumentTypes);
         }
 
         private Type ParseAnonymousTypeFromXmlCore(XElement xElement)
         {
-            var name = xElement.Attribute("Name").Value;
-            var properties =
+            string name = xElement.Attribute("Name").Value;
+            IEnumerable<ExpressionSerializationTypeResolver.NameTypePair> properties =
                 from propXml in xElement.Elements("Property")
                 select new ExpressionSerializationTypeResolver.NameTypePair
                 {
                     Name = propXml.Attribute("Name").Value,
                     Type = ParseTypeFromXml(propXml)
                 };
-            var ctr_params =
+            IEnumerable<ExpressionSerializationTypeResolver.NameTypePair> ctr_params =
                 from propXml in xElement.Elements("Constructor").Elements("Parameter")
                 select new ExpressionSerializationTypeResolver.NameTypePair
                 {
@@ -738,14 +744,14 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
 
         private Expression ParseBinaryExpresssionFromXml(XElement xml)
         {
-            var expressionType = (ExpressionType)ParseConstantFromAttribute<ExpressionType>(xml, "NodeType");
+            var expressionType = (ExpressionType) ParseConstantFromAttribute<ExpressionType>(xml, "NodeType");
             ;
-            var left = ParseExpressionFromXml(xml.Element("Left"));
-            var right = ParseExpressionFromXml(xml.Element("Right"));
-            var isLifted = (bool)ParseConstantFromAttribute<bool>(xml, "IsLifted");
-            var isLiftedToNull = (bool)ParseConstantFromAttribute<bool>(xml, "IsLiftedToNull");
-            var type = ParseTypeFromXml(xml.Element("Type"));
-            var method = ParseMethodInfoFromXml(xml.Element("Method"));
+            Expression left = ParseExpressionFromXml(xml.Element("Left"));
+            Expression right = ParseExpressionFromXml(xml.Element("Right"));
+            var isLifted = (bool) ParseConstantFromAttribute<bool>(xml, "IsLifted");
+            var isLiftedToNull = (bool) ParseConstantFromAttribute<bool>(xml, "IsLiftedToNull");
+            Type type = ParseTypeFromXml(xml.Element("Type"));
+            MethodInfo method = ParseMethodInfoFromXml(xml.Element("Method"));
             var conversion = ParseExpressionFromXml(xml.Element("Conversion")) as LambdaExpression;
             if (expressionType == ExpressionType.Coalesce)
                 return Expression.Coalesce(left, right, conversion);
@@ -756,12 +762,12 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         {
             if (xml.IsEmpty)
                 return null;
-            var name = (string)ParseConstantFromAttribute<string>(xml, "MethodName");
-            var declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
-            var ps = from paramXml in xml.Element("Parameters").Elements()
-                     select ParseTypeFromXml(paramXml);
-            var genArgs = from argXml in xml.Element("GenericArgTypes").Elements()
-                          select ParseTypeFromXml(argXml);
+            var name = (string) ParseConstantFromAttribute<string>(xml, "MethodName");
+            Type declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
+            IEnumerable<Type> ps = from paramXml in xml.Element("Parameters").Elements()
+                select ParseTypeFromXml(paramXml);
+            IEnumerable<Type> genArgs = from argXml in xml.Element("GenericArgTypes").Elements()
+                select ParseTypeFromXml(argXml);
             return _resolver.GetMethod(declaringType, name, ps.ToArray(), genArgs.ToArray());
         }
 
@@ -769,62 +775,64 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.ExpressionTreeS
         {
             if (xml.IsEmpty)
                 return null;
-            var declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
-            var ps = from paramXml in xml.Element("Parameters").Elements()
-                     select ParseParameterFromXml(paramXml);
-            var ci = declaringType.GetConstructor(ps.ToArray());
+            Type declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
+            IEnumerable<Type> ps = from paramXml in xml.Element("Parameters").Elements()
+                select ParseParameterFromXml(paramXml);
+            ConstructorInfo ci = declaringType.GetConstructor(ps.ToArray());
             return ci;
         }
 
         private Type ParseParameterFromXml(XElement xml)
         {
-            var name = (string)ParseConstantFromAttribute<string>(xml, "Name");
-            var type = ParseTypeFromXml(xml.Element("Type"));
+            var name = (string) ParseConstantFromAttribute<string>(xml, "Name");
+            Type type = ParseTypeFromXml(xml.Element("Type"));
             return type;
         }
 
         private object ParseConstantFromAttribute<T>(XElement xml, string attrName)
         {
-            var objectStringValue = xml.Attribute(attrName).Value;
-            if (typeof(Type).IsAssignableFrom(typeof(T)))
+            string objectStringValue = xml.Attribute(attrName).Value;
+            if (typeof (Type).IsAssignableFrom(typeof (T)))
                 throw new Exception("We should never be encoding Types in attributes now.");
-            if (typeof(Enum).IsAssignableFrom(typeof(T)))
-                return Enum.Parse(typeof(T), objectStringValue, true);
-            return Convert.ChangeType(objectStringValue, typeof(T), CultureInfo.CurrentCulture);
+            if (typeof (Enum).IsAssignableFrom(typeof (T)))
+                return Enum.Parse(typeof (T), objectStringValue, true);
+            return Convert.ChangeType(objectStringValue, typeof (T), CultureInfo.CurrentCulture);
         }
 
         private object ParseConstantFromAttribute(XElement xml, string attrName, Type type)
         {
-            var objectStringValue = xml.Attribute(attrName).Value;
-            if (typeof(Type).IsAssignableFrom(type))
+            string objectStringValue = xml.Attribute(attrName).Value;
+            if (typeof (Type).IsAssignableFrom(type))
                 throw new Exception("We should never be encoding Types in attributes now.");
-            if (typeof(Enum).IsAssignableFrom(type))
+            if (typeof (Enum).IsAssignableFrom(type))
                 return Enum.Parse(type, objectStringValue, true);
             return Convert.ChangeType(objectStringValue, type, CultureInfo.CurrentCulture);
         }
 
         private object ParseConstantFromElement(XElement xml, string elemName, Type type)
         {
-            var objectStringValue = xml.Element(elemName).Value;
-            if (typeof(Type).IsAssignableFrom(type))
+            string objectStringValue = xml.Element(elemName).Value;
+            if (typeof (Type).IsAssignableFrom(type))
                 return ParseTypeFromXml(xml.Element("Value"));
-            if (typeof(Enum).IsAssignableFrom(type))
+            if (typeof (Enum).IsAssignableFrom(type))
                 return Enum.Parse(type, objectStringValue, true);
             return Convert.ChangeType(objectStringValue, type, CultureInfo.CurrentCulture);
         }
 
         #endregion
 
-        class PropValue
-        {
-            public PropertyInfo Property { get; set; }
-            public object Value { get; set; }
-        }
+        public List<CustomExpressionXmlConverter> Converters { get; private set; }
 
         public abstract class CustomExpressionXmlConverter
         {
             public abstract Expression Deserialize(XElement expressionXml);
             public abstract XElement Serialize(Expression expression);
+        }
+
+        private class PropValue
+        {
+            public PropertyInfo Property { get; set; }
+            public object Value { get; set; }
         }
     }
 }

@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5 Shared Infrastructure",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1D09D5AE-CFB9-4B47-BA66-DA6527B35C42}"
 	ProjectSection(SolutionItems) = preProject
+		LightstoneApp.guidancestate = LightstoneApp.guidancestate
+		LightstoneApp.slnbldr = LightstoneApp.slnbldr
 		LightstoneApp.vsmdi = LightstoneApp.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
@@ -404,6 +406,9 @@ Global
 		{CD452AFC-1628-444C-9C18-BB20C5E97AB2} = {9085B1A9-E248-4B99-971B-25B36CAC9265}
 		{5B9C1553-F5B0-4AD7-9F01-AFC60056EA6C} = {B522D6C5-CDAB-4388-B6A6-98D5CA9F24C4}
 		{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255} = {B522D6C5-CDAB-4388-B6A6-98D5CA9F24C4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		GuidanceWorkflows = 23795EC3-3DEA-4F04-9044-4056CF91A2ED:ServiceMatrix Guidance:2.2.0
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = LightstoneApp2.vsmdi
