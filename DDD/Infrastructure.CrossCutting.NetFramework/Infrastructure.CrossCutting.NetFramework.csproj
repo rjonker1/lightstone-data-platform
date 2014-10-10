@@ -112,9 +112,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Serialization\ITextSerializer.cs" />
+    <Compile Include="Serialization\JsonTextSerializer.cs" />
     <Compile Include="Serialization\SampleXContainerConverter.cs" />
+    <Compile Include="Serialization\TextSerializerExtensions.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="TypeCheck.cs" />
+    <Compile Include="Utils\GuidUtil.cs" />
     <Compile Include="Validator\DataAnnotationsEntityValidator.cs" />
     <Compile Include="Validator\DataAnnotationsEntityValidatorFactory.cs" />
     <Compile Include="Validator\EntityValidatorFactory.cs" />
