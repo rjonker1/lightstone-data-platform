@@ -55,7 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\Abstract.cs" />
+    <Compile Include="Abstract\Owner.cs" />
+    <Compile Include="Abstract\DataSource.cs" />
+    <Compile Include="Abstract\DateField.cs" />
+    <Compile Include="Abstract\FileAttachment.cs" />
+    <Compile Include="Abstract\Industry.cs" />
+    <Compile Include="Abstract\Package.cs" />
+    <Compile Include="Abstract\State.cs" />
     <Compile Include="DataSource.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
@@ -67,7 +73,7 @@
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="IHasPackageBuilderContext.cs" />
-    <Compile Include="Implementation.cs" />
+    <Compile Include="PackageBuilderContext.cs" />
     <Compile Include="Industry.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
@@ -77,10 +83,6 @@
     </Compile>
     <Compile Include="Package.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PackageBuilderModel._ORMCustomToolReport.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
     </Compile>
     <Compile Include="PackageModuleContext.Types.cs">
       <AutoGen>True</AutoGen>
@@ -104,7 +106,6 @@
     <None Include="PackageBuilderModel.orm">
       <Generator>ORMCustomTool</Generator>
       <CustomToolNamespace>LightstoneApp.Domain.PackageBuilderModule.Entities</CustomToolNamespace>
-      <LastGenOutput>PackageBuilderModel._ORMCustomToolReport.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -124,68 +125,6 @@
       <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
       <Name>Infrastructure.CrossCutting.NetFramework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ORM\ConstraintValidationReport.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasCostOfSale.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasCreated.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasDataSource_Id.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasDateField.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasDescription.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasEdited.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasFileAttachment.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasName.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasOwner.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasRevisionDate.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasSourceURL.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasState.html" />
-    <Content Include="ORM\FactTypes\DataSourceHasVersion.html" />
-    <Content Include="ORM\FactTypes\DateFieldHasDateField_Id.html" />
-    <Content Include="ORM\FactTypes\DateFieldHasDefinition.html" />
-    <Content Include="ORM\FactTypes\DateFieldHasIndustry.html" />
-    <Content Include="ORM\FactTypes\DateFieldHasLabel.html" />
-    <Content Include="ORM\FactTypes\DateFieldIsSelected.html" />
-    <Content Include="ORM\FactTypes\FileAttachmentHasBlob.html" />
-    <Content Include="ORM\FactTypes\FileAttachmentHasFileAttachment_Id.html" />
-    <Content Include="ORM\FactTypes\FileAttachmentHasName.html" />
-    <Content Include="ORM\FactTypes\PackageHasCostOfSale.html" />
-    <Content Include="ORM\FactTypes\PackageHasCreated.html" />
-    <Content Include="ORM\FactTypes\PackageHasDataSource.html" />
-    <Content Include="ORM\FactTypes\PackageHasDescription.html" />
-    <Content Include="ORM\FactTypes\PackageHasEdited.html" />
-    <Content Include="ORM\FactTypes\PackageHasIndustry.html" />
-    <Content Include="ORM\FactTypes\PackageHasName.html" />
-    <Content Include="ORM\FactTypes\PackageHasOwner.html" />
-    <Content Include="ORM\FactTypes\PackageHasPackage_Id.html" />
-    <Content Include="ORM\FactTypes\PackageHasRevisionDate.html" />
-    <Content Include="ORM\FactTypes\PackageHasState.html" />
-    <Content Include="ORM\FactTypes\PackageHasVersion.html" />
-    <Content Include="ORM\FactTypes\PackageIsPublished.html" />
-    <Content Include="ORM\ObjectTypeList.html" />
-    <Content Include="ORM\ObjectTypes\Blob.html" />
-    <Content Include="ORM\ObjectTypes\CostOfSale.html" />
-    <Content Include="ORM\ObjectTypes\Created.html" />
-    <Content Include="ORM\ObjectTypes\DataSource.html" />
-    <Content Include="ORM\ObjectTypes\DataSource_Id.html" />
-    <Content Include="ORM\ObjectTypes\DateField.html" />
-    <Content Include="ORM\ObjectTypes\DateField_Id.html" />
-    <Content Include="ORM\ObjectTypes\Definition.html" />
-    <Content Include="ORM\ObjectTypes\Description.html" />
-    <Content Include="ORM\ObjectTypes\Edited.html" />
-    <Content Include="ORM\ObjectTypes\FileAttachment.html" />
-    <Content Include="ORM\ObjectTypes\FileAttachment_Id.html" />
-    <Content Include="ORM\ObjectTypes\Industry.html" />
-    <Content Include="ORM\ObjectTypes\Label.html" />
-    <Content Include="ORM\ObjectTypes\Name.html" />
-    <Content Include="ORM\ObjectTypes\Owner.html" />
-    <Content Include="ORM\ObjectTypes\Package.html" />
-    <Content Include="ORM\ObjectTypes\Package_Id.html" />
-    <Content Include="ORM\ObjectTypes\Published.html" />
-    <Content Include="ORM\ObjectTypes\RevisionDate.html" />
-    <Content Include="ORM\ObjectTypes\Selected.html" />
-    <Content Include="ORM\ObjectTypes\SourceURL.html" />
-    <Content Include="ORM\ObjectTypes\State.html" />
-    <Content Include="ORM\ObjectTypes\Version.html" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup Condition="Exists('PackageBuilderModel.orm')">

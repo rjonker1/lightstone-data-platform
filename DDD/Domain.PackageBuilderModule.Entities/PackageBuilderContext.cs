@@ -20,70 +20,70 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                         new Dictionary<RuntimeTypeHandle, object>(9, RuntimeTypeHandleEqualityComparer.Instance);
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Owner, Package>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Owner, Package>(
+                    typeof (ConstraintEnforcementCollection<Abstract.PackageBuilder.Owner, Abstract.Package>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.PackageBuilder.Owner, Abstract.Package>(
                         OnOwnerPackageViaPackageOwnerCollectionAdding, OnOwnerPackageViaPackageOwnerCollectionAdded,
                         null, OnOwnerPackageViaPackageOwnerCollectionRemoved));
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Owner, DataSource>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Owner, DataSource>(
+                    typeof (ConstraintEnforcementCollection<Abstract.PackageBuilder.Owner, Abstract.DataSource>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.PackageBuilder.Owner, Abstract.DataSource>(
                         OnOwnerDataSourceViaDataSourceOwnerCollectionAdding,
                         OnOwnerDataSourceViaDataSourceOwnerCollectionAdded, null,
                         OnOwnerDataSourceViaDataSourceOwnerCollectionRemoved));
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<State, Package>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<State, Package>(
+                    typeof (ConstraintEnforcementCollection<Abstract.State, Abstract.Package>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.State, Abstract.Package>(
                         OnStatePackageViaPackageStateCollectionAdding, OnStatePackageViaPackageStateCollectionAdded,
                         null, OnStatePackageViaPackageStateCollectionRemoved));
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<State, DataSource>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<State, DataSource>(
+                    typeof (ConstraintEnforcementCollection<Abstract.State, Abstract.DataSource>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.State, Abstract.DataSource>(
                         OnStateDataSourceViaDataSourceStateCollectionAdding,
                         OnStateDataSourceViaDataSourceStateCollectionAdded, null,
                         OnStateDataSourceViaDataSourceStateCollectionRemoved));
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Industry, Package>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Industry, Package>(
+                    typeof (ConstraintEnforcementCollection<Abstract.Industry, Abstract.Package>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.Industry, Abstract.Package>(
                         OnIndustryPackageViaPackageIndustryCollectionAdding,
                         OnIndustryPackageViaPackageIndustryCollectionAdded, null,
                         OnIndustryPackageViaPackageIndustryCollectionRemoved));
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Industry, DateField>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Industry, DateField>(
+                    typeof (ConstraintEnforcementCollection<Abstract.Industry, Abstract.DateField>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.Industry, Abstract.DateField>(
                         OnIndustryDateFieldViaIndustryCollectionAdding, OnIndustryDateFieldViaIndustryCollectionAdded,
                         null, OnIndustryDateFieldViaIndustryCollectionRemoved));
 
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Package, DataSource>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Package, DataSource>(
+                    typeof (ConstraintEnforcementCollection<Abstract.Package, Abstract.DataSource>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.Package, Abstract.DataSource>(
                         OnPackageDataSourceViaPackageCollectionAdding, OnPackageDataSourceViaPackageCollectionAdded,
                         null, OnPackageDataSourceViaPackageCollectionRemoved));
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<DataSource, DateField>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<DataSource, DateField>(
+                    typeof (ConstraintEnforcementCollection<Abstract.DataSource, Abstract.DateField>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.DataSource, Abstract.DateField>(
                         OnDataSourceDateFieldViaDataSourceCollectionAdding,
                         OnDataSourceDateFieldViaDataSourceCollectionAdded, null,
                         OnDataSourceDateFieldViaDataSourceCollectionRemoved));
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<DataSource, FileAttachment>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<DataSource, FileAttachment>(
+                    typeof (ConstraintEnforcementCollection<Abstract.DataSource, Abstract.FileAttachment>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<Abstract.DataSource, Abstract.FileAttachment>(
                         OnDataSourceFileAttachmentViaDataSourceCollectionAdding,
                         OnDataSourceFileAttachmentViaDataSourceCollectionAdded, null,
                         OnDataSourceFileAttachmentViaDataSourceCollectionRemoved));
-                _OwnerReadOnlyCollection = new ReadOnlyCollection<Owner>(_OwnerList = new List<Owner>());
-                _StateReadOnlyCollection = new ReadOnlyCollection<State>(_StateList = new List<State>());
-                _IndustryReadOnlyCollection = new ReadOnlyCollection<Industry>(_IndustryList = new List<Industry>());
-                _PackageReadOnlyCollection = new ReadOnlyCollection<Package>(_PackageList = new List<Package>());
+                _OwnerReadOnlyCollection = new ReadOnlyCollection<Abstract.PackageBuilder.Owner>(_OwnerList = new List<Abstract.PackageBuilder.Owner>());
+                _StateReadOnlyCollection = new ReadOnlyCollection<Abstract.State>(_StateList = new List<Abstract.State>());
+                _IndustryReadOnlyCollection = new ReadOnlyCollection<Abstract.Industry>(_IndustryList = new List<Abstract.Industry>());
+                _PackageReadOnlyCollection = new ReadOnlyCollection<Abstract.Package>(_PackageList = new List<Abstract.Package>());
                 _DataSourceReadOnlyCollection =
-                    new ReadOnlyCollection<DataSource>(_DataSourceList = new List<DataSource>());
-                _DateFieldReadOnlyCollection = new ReadOnlyCollection<DateField>(_DateFieldList = new List<DateField>());
+                    new ReadOnlyCollection<Abstract.DataSource>(_DataSourceList = new List<Abstract.DataSource>());
+                _DateFieldReadOnlyCollection = new ReadOnlyCollection<Abstract.DateField>(_DateFieldList = new List<Abstract.DateField>());
                 _FileAttachmentReadOnlyCollection =
-                    new ReadOnlyCollection<FileAttachment>(_FileAttachmentList = new List<FileAttachment>());
+                    new ReadOnlyCollection<Abstract.FileAttachment>(_FileAttachmentList = new List<Abstract.FileAttachment>());
             }
 
             #region Exception Helpers
@@ -109,39 +109,39 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region Lookup and External Constraint Enforcement
 
-            private readonly Dictionary<string, Owner> _OwnerOwnerValueDictionary = new Dictionary<string, Owner>();
+            private readonly Dictionary<string, Abstract.PackageBuilder.Owner> _OwnerOwnerValueDictionary = new Dictionary<string, Abstract.PackageBuilder.Owner>();
 
-            public Owner GetOwnerByOwnerValue(string OwnerValue)
+            public Abstract.PackageBuilder.Owner GetOwnerByOwnerValue(string OwnerValue)
             {
                 return _OwnerOwnerValueDictionary[OwnerValue];
             }
 
-            public bool TryGetOwnerByOwnerValue(string OwnerValue, out Owner Owner)
+            public bool TryGetOwnerByOwnerValue(string OwnerValue, out Abstract.PackageBuilder.Owner Owner)
             {
                 return _OwnerOwnerValueDictionary.TryGetValue(OwnerValue, out Owner);
             }
 
-            private readonly Dictionary<string, State> _StateStateValueDictionary = new Dictionary<string, State>();
+            private readonly Dictionary<string, Abstract.State> _StateStateValueDictionary = new Dictionary<string, Abstract.State>();
 
-            public State GetStateByStateValue(string StateValue)
+            public Abstract.State GetStateByStateValue(string StateValue)
             {
                 return _StateStateValueDictionary[StateValue];
             }
 
-            public bool TryGetStateByStateValue(string StateValue, out State State)
+            public bool TryGetStateByStateValue(string StateValue, out Abstract.State State)
             {
                 return _StateStateValueDictionary.TryGetValue(StateValue, out State);
             }
 
-            private readonly Dictionary<string, Industry> _IndustryIndustryValueDictionary =
-                new Dictionary<string, Industry>();
+            private readonly Dictionary<string, Abstract.Industry> _IndustryIndustryValueDictionary =
+                new Dictionary<string, Abstract.Industry>();
 
-            public Industry GetIndustryByIndustryValue(string IndustryValue)
+            public Abstract.Industry GetIndustryByIndustryValue(string IndustryValue)
             {
                 return _IndustryIndustryValueDictionary[IndustryValue];
             }
 
-            public bool TryGetIndustryByIndustryValue(string IndustryValue, out Industry Industry)
+            public bool TryGetIndustryByIndustryValue(string IndustryValue, out Abstract.Industry Industry)
             {
                 return _IndustryIndustryValueDictionary.TryGetValue(IndustryValue, out Industry);
             }
@@ -321,7 +321,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region Owner
 
-            public Owner CreateOwner(string OwnerValue)
+            public Abstract.PackageBuilder.Owner CreateOwner(string OwnerValue)
             {
                 if ((object) OwnerValue == null)
                 {
@@ -334,9 +334,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return new OwnerCore(this, OwnerValue);
             }
 
-            private bool OnOwnerOwnerValueChanging(Owner instance, string newValue)
+            private bool OnOwnerOwnerValueChanging(Abstract.PackageBuilder.Owner instance, string newValue)
             {
-                Owner currentInstance;
+                Abstract.PackageBuilder.Owner currentInstance;
                 if (_OwnerOwnerValueDictionary.TryGetValue(newValue, out currentInstance))
                 {
                     if (currentInstance != instance)
@@ -347,7 +347,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnOwnerOwnerValueChanged(Owner instance, string oldValue)
+            private void OnOwnerOwnerValueChanged(Abstract.PackageBuilder.Owner instance, string oldValue)
             {
                 _OwnerOwnerValueDictionary.Add(instance.OwnerValue, instance);
                 if ((object) oldValue != null)
@@ -356,7 +356,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnOwnerPackageViaPackageOwnerCollectionAdding(Owner instance, Package item)
+            private bool OnOwnerPackageViaPackageOwnerCollectionAdding(Abstract.PackageBuilder.Owner instance, Abstract.Package item)
             {
                 if (this != item.Context)
                 {
@@ -365,12 +365,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnOwnerPackageViaPackageOwnerCollectionAdded(Owner instance, Package item)
+            private void OnOwnerPackageViaPackageOwnerCollectionAdded(Abstract.PackageBuilder.Owner instance, Abstract.Package item)
             {
                 item.PackageOwner = instance;
             }
 
-            private void OnOwnerPackageViaPackageOwnerCollectionRemoved(Owner instance, Package item)
+            private void OnOwnerPackageViaPackageOwnerCollectionRemoved(Abstract.PackageBuilder.Owner instance, Abstract.Package item)
             {
                 if (item.PackageOwner == instance)
                 {
@@ -378,7 +378,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnOwnerDataSourceViaDataSourceOwnerCollectionAdding(Owner instance, DataSource item)
+            private bool OnOwnerDataSourceViaDataSourceOwnerCollectionAdding(Abstract.PackageBuilder.Owner instance, Abstract.DataSource item)
             {
                 if (this != item.Context)
                 {
@@ -387,12 +387,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnOwnerDataSourceViaDataSourceOwnerCollectionAdded(Owner instance, DataSource item)
+            private void OnOwnerDataSourceViaDataSourceOwnerCollectionAdded(Abstract.PackageBuilder.Owner instance, Abstract.DataSource item)
             {
                 item.DataSourceOwner = instance;
             }
 
-            private void OnOwnerDataSourceViaDataSourceOwnerCollectionRemoved(Owner instance, DataSource item)
+            private void OnOwnerDataSourceViaDataSourceOwnerCollectionRemoved(Abstract.PackageBuilder.Owner instance, Abstract.DataSource item)
             {
                 if (item.DataSourceOwner == instance)
                 {
@@ -400,10 +400,10 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private readonly List<Owner> _OwnerList;
-            private readonly ReadOnlyCollection<Owner> _OwnerReadOnlyCollection;
+            private readonly List<Abstract.PackageBuilder.Owner> _OwnerList;
+            private readonly ReadOnlyCollection<Abstract.PackageBuilder.Owner> _OwnerReadOnlyCollection;
 
-            public IEnumerable<Owner> OwnerCollection
+            public IEnumerable<Abstract.PackageBuilder.Owner> OwnerCollection
             {
                 get { return _OwnerReadOnlyCollection; }
             }
@@ -411,14 +411,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region OwnerCore
 
             
-            private sealed class OwnerCore : Owner
+            private sealed class OwnerCore : Abstract.PackageBuilder.Owner
             {
                 public OwnerCore(PackageBuilderContext context, string OwnerValue)
                 {
                     _Context = context;
-                    _PackageViaPackageOwnerCollection = new ConstraintEnforcementCollection<Owner, Package>(this);
+                    _PackageViaPackageOwnerCollection = new ConstraintEnforcementCollection<Abstract.PackageBuilder.Owner, Abstract.Package>(this);
                     _DataSourceViaDataSourceOwnerCollection =
-                        new ConstraintEnforcementCollection<Owner, DataSource>(this);
+                        new ConstraintEnforcementCollection<Abstract.PackageBuilder.Owner, Abstract.DataSource>(this);
                     _OwnerValue = OwnerValue;
                     context.OnOwnerOwnerValueChanged(this, null);
                     context._OwnerList.Add(this);
@@ -455,16 +455,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private readonly IEnumerable<Package> _PackageViaPackageOwnerCollection;
+                private readonly IEnumerable<Abstract.Package> _PackageViaPackageOwnerCollection;
 
-                public override IEnumerable<Package> PackageViaPackageOwnerCollection
+                public override IEnumerable<Abstract.Package> PackageViaPackageOwnerCollection
                 {
                     get { return _PackageViaPackageOwnerCollection; }
                 }
 
-                private readonly IEnumerable<DataSource> _DataSourceViaDataSourceOwnerCollection;
+                private readonly IEnumerable<Abstract.DataSource> _DataSourceViaDataSourceOwnerCollection;
 
-                public override IEnumerable<DataSource> DataSourceViaDataSourceOwnerCollection
+                public override IEnumerable<Abstract.DataSource> DataSourceViaDataSourceOwnerCollection
                 {
                     get { return _DataSourceViaDataSourceOwnerCollection; }
                 }
@@ -476,7 +476,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region State
 
-            public State CreateState(string StateValue)
+            public Abstract.State CreateState(string StateValue)
             {
                 if ((object) StateValue == null)
                 {
@@ -489,9 +489,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return new StateCore(this, StateValue);
             }
 
-            private bool OnStateStateValueChanging(State instance, string newValue)
+            private bool OnStateStateValueChanging(Abstract.State instance, string newValue)
             {
-                State currentInstance;
+                Abstract.State currentInstance;
                 if (_StateStateValueDictionary.TryGetValue(newValue, out currentInstance))
                 {
                     if (currentInstance != instance)
@@ -502,7 +502,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnStateStateValueChanged(State instance, string oldValue)
+            private void OnStateStateValueChanged(Abstract.State instance, string oldValue)
             {
                 _StateStateValueDictionary.Add(instance.StateValue, instance);
                 if ((object) oldValue != null)
@@ -511,7 +511,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnStatePackageViaPackageStateCollectionAdding(State instance, Package item)
+            private bool OnStatePackageViaPackageStateCollectionAdding(Abstract.State instance, Abstract.Package item)
             {
                 if (this != item.Context)
                 {
@@ -520,12 +520,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnStatePackageViaPackageStateCollectionAdded(State instance, Package item)
+            private void OnStatePackageViaPackageStateCollectionAdded(Abstract.State instance, Abstract.Package item)
             {
                 item.PackageState = instance;
             }
 
-            private void OnStatePackageViaPackageStateCollectionRemoved(State instance, Package item)
+            private void OnStatePackageViaPackageStateCollectionRemoved(Abstract.State instance, Abstract.Package item)
             {
                 if (item.PackageState == instance)
                 {
@@ -533,7 +533,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnStateDataSourceViaDataSourceStateCollectionAdding(State instance, DataSource item)
+            private bool OnStateDataSourceViaDataSourceStateCollectionAdding(Abstract.State instance, Abstract.DataSource item)
             {
                 if (this != item.Context)
                 {
@@ -542,12 +542,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnStateDataSourceViaDataSourceStateCollectionAdded(State instance, DataSource item)
+            private void OnStateDataSourceViaDataSourceStateCollectionAdded(Abstract.State instance, Abstract.DataSource item)
             {
                 item.DataSourceState = instance;
             }
 
-            private void OnStateDataSourceViaDataSourceStateCollectionRemoved(State instance, DataSource item)
+            private void OnStateDataSourceViaDataSourceStateCollectionRemoved(Abstract.State instance, Abstract.DataSource item)
             {
                 if (item.DataSourceState == instance)
                 {
@@ -555,10 +555,10 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private readonly List<State> _StateList;
-            private readonly ReadOnlyCollection<State> _StateReadOnlyCollection;
+            private readonly List<Abstract.State> _StateList;
+            private readonly ReadOnlyCollection<Abstract.State> _StateReadOnlyCollection;
 
-            public IEnumerable<State> StateCollection
+            public IEnumerable<Abstract.State> StateCollection
             {
                 get { return _StateReadOnlyCollection; }
             }
@@ -566,14 +566,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region StateCore
 
             
-            private sealed class StateCore : State
+            private sealed class StateCore : Abstract.State
             {
                 public StateCore(PackageBuilderContext context, string StateValue)
                 {
                     _Context = context;
-                    _PackageViaPackageStateCollection = new ConstraintEnforcementCollection<State, Package>(this);
+                    _PackageViaPackageStateCollection = new ConstraintEnforcementCollection<Abstract.State, Abstract.Package>(this);
                     _DataSourceViaDataSourceStateCollection =
-                        new ConstraintEnforcementCollection<State, DataSource>(this);
+                        new ConstraintEnforcementCollection<Abstract.State, Abstract.DataSource>(this);
                     _StateValue = StateValue;
                     context.OnStateStateValueChanged(this, null);
                     context._StateList.Add(this);
@@ -610,16 +610,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private readonly IEnumerable<Package> _PackageViaPackageStateCollection;
+                private readonly IEnumerable<Abstract.Package> _PackageViaPackageStateCollection;
 
-                public override IEnumerable<Package> PackageViaPackageStateCollection
+                public override IEnumerable<Abstract.Package> PackageViaPackageStateCollection
                 {
                     get { return _PackageViaPackageStateCollection; }
                 }
 
-                private readonly IEnumerable<DataSource> _DataSourceViaDataSourceStateCollection;
+                private readonly IEnumerable<Abstract.DataSource> _DataSourceViaDataSourceStateCollection;
 
-                public override IEnumerable<DataSource> DataSourceViaDataSourceStateCollection
+                public override IEnumerable<Abstract.DataSource> DataSourceViaDataSourceStateCollection
                 {
                     get { return _DataSourceViaDataSourceStateCollection; }
                 }
@@ -631,7 +631,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region Industry
 
-            public Industry CreateIndustry(string IndustryValue)
+            public Abstract.Industry CreateIndustry(string IndustryValue)
             {
                 if ((object) IndustryValue == null)
                 {
@@ -644,9 +644,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return new IndustryCore(this, IndustryValue);
             }
 
-            private bool OnIndustryIndustryValueChanging(Industry instance, string newValue)
+            private bool OnIndustryIndustryValueChanging(Abstract.Industry instance, string newValue)
             {
-                Industry currentInstance;
+                Abstract.Industry currentInstance;
                 if (_IndustryIndustryValueDictionary.TryGetValue(newValue, out currentInstance))
                 {
                     if (currentInstance != instance)
@@ -657,7 +657,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnIndustryIndustryValueChanged(Industry instance, string oldValue)
+            private void OnIndustryIndustryValueChanged(Abstract.Industry instance, string oldValue)
             {
                 _IndustryIndustryValueDictionary.Add(instance.IndustryValue, instance);
                 if ((object) oldValue != null)
@@ -666,7 +666,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnIndustryPackageViaPackageIndustryCollectionAdding(Industry instance, Package item)
+            private bool OnIndustryPackageViaPackageIndustryCollectionAdding(Abstract.Industry instance, Abstract.Package item)
             {
                 if (this != item.Context)
                 {
@@ -675,12 +675,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnIndustryPackageViaPackageIndustryCollectionAdded(Industry instance, Package item)
+            private void OnIndustryPackageViaPackageIndustryCollectionAdded(Abstract.Industry instance, Abstract.Package item)
             {
                 item.PackageIndustry = instance;
             }
 
-            private void OnIndustryPackageViaPackageIndustryCollectionRemoved(Industry instance, Package item)
+            private void OnIndustryPackageViaPackageIndustryCollectionRemoved(Abstract.Industry instance, Abstract.Package item)
             {
                 if (item.PackageIndustry == instance)
                 {
@@ -688,7 +688,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnIndustryDateFieldViaIndustryCollectionAdding(Industry instance, DateField item)
+            private bool OnIndustryDateFieldViaIndustryCollectionAdding(Abstract.Industry instance, Abstract.DateField item)
             {
                 if (this != item.Context)
                 {
@@ -697,12 +697,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnIndustryDateFieldViaIndustryCollectionAdded(Industry instance, DateField item)
+            private void OnIndustryDateFieldViaIndustryCollectionAdded(Abstract.Industry instance, Abstract.DateField item)
             {
                 item.Industry = instance;
             }
 
-            private void OnIndustryDateFieldViaIndustryCollectionRemoved(Industry instance, DateField item)
+            private void OnIndustryDateFieldViaIndustryCollectionRemoved(Abstract.Industry instance, Abstract.DateField item)
             {
                 if (item.Industry == instance)
                 {
@@ -710,10 +710,10 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private readonly List<Industry> _IndustryList;
-            private readonly ReadOnlyCollection<Industry> _IndustryReadOnlyCollection;
+            private readonly List<Abstract.Industry> _IndustryList;
+            private readonly ReadOnlyCollection<Abstract.Industry> _IndustryReadOnlyCollection;
 
-            public IEnumerable<Industry> IndustryCollection
+            public IEnumerable<Abstract.Industry> IndustryCollection
             {
                 get { return _IndustryReadOnlyCollection; }
             }
@@ -721,13 +721,13 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region IndustryCore
 
             
-            private sealed class IndustryCore : Industry
+            private sealed class IndustryCore : Abstract.Industry
             {
                 public IndustryCore(PackageBuilderContext context, string IndustryValue)
                 {
                     _Context = context;
-                    _PackageViaPackageIndustryCollection = new ConstraintEnforcementCollection<Industry, Package>(this);
-                    _DateFieldViaIndustryCollection = new ConstraintEnforcementCollection<Industry, DateField>(this);
+                    _PackageViaPackageIndustryCollection = new ConstraintEnforcementCollection<Abstract.Industry, Abstract.Package>(this);
+                    _DateFieldViaIndustryCollection = new ConstraintEnforcementCollection<Abstract.Industry, Abstract.DateField>(this);
                     _IndustryValue = IndustryValue;
                     context.OnIndustryIndustryValueChanged(this, null);
                     context._IndustryList.Add(this);
@@ -765,16 +765,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private readonly IEnumerable<Package> _PackageViaPackageIndustryCollection;
+                private readonly IEnumerable<Abstract.Package> _PackageViaPackageIndustryCollection;
 
-                public override IEnumerable<Package> PackageViaPackageIndustryCollection
+                public override IEnumerable<Abstract.Package> PackageViaPackageIndustryCollection
                 {
                     get { return _PackageViaPackageIndustryCollection; }
                 }
 
-                private readonly IEnumerable<DateField> _DateFieldViaIndustryCollection;
+                private readonly IEnumerable<Abstract.DateField> _DateFieldViaIndustryCollection;
 
-                public override IEnumerable<DateField> DateFieldViaIndustryCollection
+                public override IEnumerable<Abstract.DateField> DateFieldViaIndustryCollection
                 {
                     get { return _DateFieldViaIndustryCollection; }
                 }
@@ -786,52 +786,52 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region Package
 
-            public Package CreatePackage()
+            public Abstract.Package CreatePackage()
             {
                 return new PackageCore(this);
             }
 
-            private bool OnPackageNameChanging(Package instance, string newValue)
+            private bool OnPackageNameChanging(Abstract.Package instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnPackageDescriptionChanging(Package instance, string newValue)
+            private bool OnPackageDescriptionChanging(Abstract.Package instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnPackageCreatedChanging(Package instance, int? newValue)
+            private bool OnPackageCreatedChanging(Abstract.Package instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnPackageEditedChanging(Package instance, int? newValue)
+            private bool OnPackageEditedChanging(Abstract.Package instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnPackageVersionChanging(Package instance, int? newValue)
+            private bool OnPackageVersionChanging(Abstract.Package instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnPackagePublishedChanging(Package instance, bool? newValue)
+            private bool OnPackagePublishedChanging(Abstract.Package instance, bool? newValue)
             {
                 return true;
             }
 
-            private bool OnPackageRevisionDateChanging(Package instance, int? newValue)
+            private bool OnPackageRevisionDateChanging(Abstract.Package instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnPackageCostOfSaleChanging(Package instance, decimal? newValue)
+            private bool OnPackageCostOfSaleChanging(Abstract.Package instance, decimal? newValue)
             {
                 return true;
             }
 
-            private bool OnPackagePackageOwnerChanging(Package instance, Owner newValue)
+            private bool OnPackagePackageOwnerChanging(Abstract.Package instance, Abstract.PackageBuilder.Owner newValue)
             {
                 if (newValue != null)
                 {
@@ -843,19 +843,19 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnPackagePackageOwnerChanged(Package instance, Owner oldValue)
+            private void OnPackagePackageOwnerChanged(Abstract.Package instance, Abstract.PackageBuilder.Owner oldValue)
             {
                 if (instance.PackageOwner != null)
                 {
-                    ((ICollection<Package>) instance.PackageOwner.PackageViaPackageOwnerCollection).Add(instance);
+                    ((ICollection<Abstract.Package>) instance.PackageOwner.PackageViaPackageOwnerCollection).Add(instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<Package>) oldValue.PackageViaPackageOwnerCollection).Remove(instance);
+                    ((ICollection<Abstract.Package>) oldValue.PackageViaPackageOwnerCollection).Remove(instance);
                 }
             }
 
-            private bool OnPackagePackageStateChanging(Package instance, State newValue)
+            private bool OnPackagePackageStateChanging(Abstract.Package instance, Abstract.State newValue)
             {
                 if (newValue != null)
                 {
@@ -867,19 +867,19 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnPackagePackageStateChanged(Package instance, State oldValue)
+            private void OnPackagePackageStateChanged(Abstract.Package instance, Abstract.State oldValue)
             {
                 if (instance.PackageState != null)
                 {
-                    ((ICollection<Package>) instance.PackageState.PackageViaPackageStateCollection).Add(instance);
+                    ((ICollection<Abstract.Package>) instance.PackageState.PackageViaPackageStateCollection).Add(instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<Package>) oldValue.PackageViaPackageStateCollection).Remove(instance);
+                    ((ICollection<Abstract.Package>) oldValue.PackageViaPackageStateCollection).Remove(instance);
                 }
             }
 
-            private bool OnPackagePackageIndustryChanging(Package instance, Industry newValue)
+            private bool OnPackagePackageIndustryChanging(Abstract.Package instance, Abstract.Industry newValue)
             {
                 if (newValue != null)
                 {
@@ -891,19 +891,19 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnPackagePackageIndustryChanged(Package instance, Industry oldValue)
+            private void OnPackagePackageIndustryChanged(Abstract.Package instance, Abstract.Industry oldValue)
             {
                 if (instance.PackageIndustry != null)
                 {
-                    ((ICollection<Package>) instance.PackageIndustry.PackageViaPackageIndustryCollection).Add(instance);
+                    ((ICollection<Abstract.Package>) instance.PackageIndustry.PackageViaPackageIndustryCollection).Add(instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<Package>) oldValue.PackageViaPackageIndustryCollection).Remove(instance);
+                    ((ICollection<Abstract.Package>) oldValue.PackageViaPackageIndustryCollection).Remove(instance);
                 }
             }
 
-            private bool OnPackageDataSourceViaPackageCollectionAdding(Package instance, DataSource item)
+            private bool OnPackageDataSourceViaPackageCollectionAdding(Abstract.Package instance, Abstract.DataSource item)
             {
                 if (this != item.Context)
                 {
@@ -912,12 +912,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnPackageDataSourceViaPackageCollectionAdded(Package instance, DataSource item)
+            private void OnPackageDataSourceViaPackageCollectionAdded(Abstract.Package instance, Abstract.DataSource item)
             {
                 item.Package = instance;
             }
 
-            private void OnPackageDataSourceViaPackageCollectionRemoved(Package instance, DataSource item)
+            private void OnPackageDataSourceViaPackageCollectionRemoved(Abstract.Package instance, Abstract.DataSource item)
             {
                 if (item.Package == instance)
                 {
@@ -925,10 +925,10 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private readonly List<Package> _PackageList;
-            private readonly ReadOnlyCollection<Package> _PackageReadOnlyCollection;
+            private readonly List<Abstract.Package> _PackageList;
+            private readonly ReadOnlyCollection<Abstract.Package> _PackageReadOnlyCollection;
 
-            public IEnumerable<Package> PackageCollection
+            public IEnumerable<Abstract.Package> PackageCollection
             {
                 get { return _PackageReadOnlyCollection; }
             }
@@ -936,12 +936,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region PackageCore
 
             
-            private sealed class PackageCore : Package
+            private sealed class PackageCore : Abstract.Package
             {
                 public PackageCore(PackageBuilderContext context)
                 {
                     _Context = context;
-                    _DataSourceViaPackageCollection = new ConstraintEnforcementCollection<Package, DataSource>(this);
+                    _DataSourceViaPackageCollection = new ConstraintEnforcementCollection<Abstract.Package, Abstract.DataSource>(this);
                     context._PackageList.Add(this);
                 }
 
@@ -990,14 +990,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _Created;
+                private DateTime? _Created;
 
-                public override int? Created
+                public override DateTime? Created
                 {
                     get { return _Created; }
                     set
                     {
-                        int? oldValue = _Created;
+                        DateTime? oldValue = _Created;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1010,14 +1010,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _Edited;
+                private DateTime? _Edited;
 
-                public override int? Edited
+                public override DateTime? Edited
                 {
                     get { return _Edited; }
                     set
                     {
-                        int? oldValue = _Edited;
+                        DateTime? oldValue = _Edited;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1030,16 +1030,15 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _Version;
+                private string _Version;
 
-                public override int? Version
+                public override string Version
                 {
                     get { return _Version; }
                     set
                     {
-                        int? oldValue = _Version;
-                        if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
-                            oldValue.HasValue != value.HasValue)
+                        string oldValue = _Version;
+                        if (oldValue != value)
                         {
                             if (_Context.OnPackageVersionChanging(this, value) && base.OnVersionChanging(value))
                             {
@@ -1070,14 +1069,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _RevisionDate;
+                private DateTime? _RevisionDate;
 
-                public override int? RevisionDate
+                public override DateTime? RevisionDate
                 {
                     get { return _RevisionDate; }
                     set
                     {
-                        int? oldValue = _RevisionDate;
+                        DateTime? oldValue = _RevisionDate;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1111,14 +1110,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private Owner _PackageOwner;
+                private Abstract.PackageBuilder.Owner _PackageOwner;
 
-                public override Owner PackageOwner
+                public override Abstract.PackageBuilder.Owner PackageOwner
                 {
                     get { return _PackageOwner; }
                     set
                     {
-                        Owner oldValue = _PackageOwner;
+                        Abstract.PackageBuilder.Owner oldValue = _PackageOwner;
                         if (oldValue != value)
                         {
                             if (_Context.OnPackagePackageOwnerChanging(this, value) &&
@@ -1132,14 +1131,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private State _PackageState;
+                private Abstract.State _PackageState;
 
-                public override State PackageState
+                public override Abstract.State PackageState
                 {
                     get { return _PackageState; }
                     set
                     {
-                        State oldValue = _PackageState;
+                        Abstract.State oldValue = _PackageState;
                         if (oldValue != value)
                         {
                             if (_Context.OnPackagePackageStateChanging(this, value) &&
@@ -1153,14 +1152,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private Industry _PackageIndustry;
+                private Abstract.Industry _PackageIndustry;
 
-                public override Industry PackageIndustry
+                public override Abstract.Industry PackageIndustry
                 {
                     get { return _PackageIndustry; }
                     set
                     {
-                        Industry oldValue = _PackageIndustry;
+                        Abstract.Industry oldValue = _PackageIndustry;
                         if (oldValue != value)
                         {
                             if (_Context.OnPackagePackageIndustryChanging(this, value) &&
@@ -1174,9 +1173,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private readonly IEnumerable<DataSource> _DataSourceViaPackageCollection;
+                private readonly IEnumerable<Abstract.DataSource> _DataSourceViaPackageCollection;
 
-                public override IEnumerable<DataSource> DataSourceViaPackageCollection
+                public override IEnumerable<Abstract.DataSource> DataSourceViaPackageCollection
                 {
                     get { return _DataSourceViaPackageCollection; }
                 }
@@ -1188,52 +1187,52 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region DataSource
 
-            public DataSource CreateDataSource()
+            public Abstract.DataSource CreateDataSource()
             {
                 return new DataSourceCore(this);
             }
 
-            private bool OnDataSourceNameChanging(DataSource instance, string newValue)
+            private bool OnDataSourceNameChanging(Abstract.DataSource instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceDescriptionChanging(DataSource instance, string newValue)
+            private bool OnDataSourceDescriptionChanging(Abstract.DataSource instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceCreatedChanging(DataSource instance, int? newValue)
+            private bool OnDataSourceCreatedChanging(Abstract.DataSource instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceEditedChanging(DataSource instance, int? newValue)
+            private bool OnDataSourceEditedChanging(Abstract.DataSource instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceVersionChanging(DataSource instance, int? newValue)
+            private bool OnDataSourceVersionChanging(Abstract.DataSource instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceCostOfSaleChanging(DataSource instance, decimal? newValue)
+            private bool OnDataSourceCostOfSaleChanging(Abstract.DataSource instance, decimal? newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceRevisionDateChanging(DataSource instance, int? newValue)
+            private bool OnDataSourceRevisionDateChanging(Abstract.DataSource instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourceSourceURLChanging(DataSource instance, string newValue)
+            private bool OnDataSourceSourceURLChanging(Abstract.DataSource instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnDataSourcePackageChanging(DataSource instance, Package newValue)
+            private bool OnDataSourcePackageChanging(Abstract.DataSource instance, Abstract.Package newValue)
             {
                 if (newValue != null)
                 {
@@ -1245,19 +1244,19 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDataSourcePackageChanged(DataSource instance, Package oldValue)
+            private void OnDataSourcePackageChanged(Abstract.DataSource instance, Abstract.Package oldValue)
             {
                 if (instance.Package != null)
                 {
-                    ((ICollection<DataSource>) instance.Package.DataSourceViaPackageCollection).Add(instance);
+                    ((ICollection<Abstract.DataSource>) instance.Package.DataSourceViaPackageCollection).Add(instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<DataSource>) oldValue.DataSourceViaPackageCollection).Remove(instance);
+                    ((ICollection<Abstract.DataSource>) oldValue.DataSourceViaPackageCollection).Remove(instance);
                 }
             }
 
-            private bool OnDataSourceDataSourceOwnerChanging(DataSource instance, Owner newValue)
+            private bool OnDataSourceDataSourceOwnerChanging(Abstract.DataSource instance, Abstract.PackageBuilder.Owner newValue)
             {
                 if (newValue != null)
                 {
@@ -1269,20 +1268,20 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDataSourceDataSourceOwnerChanged(DataSource instance, Owner oldValue)
+            private void OnDataSourceDataSourceOwnerChanged(Abstract.DataSource instance, Abstract.PackageBuilder.Owner oldValue)
             {
                 if (instance.DataSourceOwner != null)
                 {
-                    ((ICollection<DataSource>) instance.DataSourceOwner.DataSourceViaDataSourceOwnerCollection).Add(
+                    ((ICollection<Abstract.DataSource>) instance.DataSourceOwner.DataSourceViaDataSourceOwnerCollection).Add(
                         instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<DataSource>) oldValue.DataSourceViaDataSourceOwnerCollection).Remove(instance);
+                    ((ICollection<Abstract.DataSource>) oldValue.DataSourceViaDataSourceOwnerCollection).Remove(instance);
                 }
             }
 
-            private bool OnDataSourceDataSourceStateChanging(DataSource instance, State newValue)
+            private bool OnDataSourceDataSourceStateChanging(Abstract.DataSource instance, Abstract.State newValue)
             {
                 if (newValue != null)
                 {
@@ -1294,20 +1293,20 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDataSourceDataSourceStateChanged(DataSource instance, State oldValue)
+            private void OnDataSourceDataSourceStateChanged(Abstract.DataSource instance, Abstract.State oldValue)
             {
                 if (instance.DataSourceState != null)
                 {
-                    ((ICollection<DataSource>) instance.DataSourceState.DataSourceViaDataSourceStateCollection).Add(
+                    ((ICollection<Abstract.DataSource>) instance.DataSourceState.DataSourceViaDataSourceStateCollection).Add(
                         instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<DataSource>) oldValue.DataSourceViaDataSourceStateCollection).Remove(instance);
+                    ((ICollection<Abstract.DataSource>) oldValue.DataSourceViaDataSourceStateCollection).Remove(instance);
                 }
             }
 
-            private bool OnDataSourceDateFieldViaDataSourceCollectionAdding(DataSource instance, DateField item)
+            private bool OnDataSourceDateFieldViaDataSourceCollectionAdding(Abstract.DataSource instance, Abstract.DateField item)
             {
                 if (this != item.Context)
                 {
@@ -1316,12 +1315,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDataSourceDateFieldViaDataSourceCollectionAdded(DataSource instance, DateField item)
+            private void OnDataSourceDateFieldViaDataSourceCollectionAdded(Abstract.DataSource instance, Abstract.DateField item)
             {
                 item.DataSource = instance;
             }
 
-            private void OnDataSourceDateFieldViaDataSourceCollectionRemoved(DataSource instance, DateField item)
+            private void OnDataSourceDateFieldViaDataSourceCollectionRemoved(Abstract.DataSource instance, Abstract.DateField item)
             {
                 if (item.DataSource == instance)
                 {
@@ -1329,8 +1328,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private bool OnDataSourceFileAttachmentViaDataSourceCollectionAdding(DataSource instance,
-                FileAttachment item)
+            private bool OnDataSourceFileAttachmentViaDataSourceCollectionAdding(Abstract.DataSource instance,
+                Abstract.FileAttachment item)
             {
                 if (this != item.Context)
                 {
@@ -1339,13 +1338,13 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDataSourceFileAttachmentViaDataSourceCollectionAdded(DataSource instance, FileAttachment item)
+            private void OnDataSourceFileAttachmentViaDataSourceCollectionAdded(Abstract.DataSource instance, Abstract.FileAttachment item)
             {
                 item.DataSource = instance;
             }
 
-            private void OnDataSourceFileAttachmentViaDataSourceCollectionRemoved(DataSource instance,
-                FileAttachment item)
+            private void OnDataSourceFileAttachmentViaDataSourceCollectionRemoved(Abstract.DataSource instance,
+                Abstract.FileAttachment item)
             {
                 if (item.DataSource == instance)
                 {
@@ -1353,10 +1352,10 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 }
             }
 
-            private readonly List<DataSource> _DataSourceList;
-            private readonly ReadOnlyCollection<DataSource> _DataSourceReadOnlyCollection;
+            private readonly List<Abstract.DataSource> _DataSourceList;
+            private readonly ReadOnlyCollection<Abstract.DataSource> _DataSourceReadOnlyCollection;
 
-            public IEnumerable<DataSource> DataSourceCollection
+            public IEnumerable<Abstract.DataSource> DataSourceCollection
             {
                 get { return _DataSourceReadOnlyCollection; }
             }
@@ -1364,14 +1363,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region DataSourceCore
 
             
-            private sealed class DataSourceCore : DataSource
+            private sealed class DataSourceCore : Abstract.DataSource
             {
                 public DataSourceCore(PackageBuilderContext context)
                 {
                     _Context = context;
-                    _DateFieldViaDataSourceCollection = new ConstraintEnforcementCollection<DataSource, DateField>(this);
+                    _DateFieldViaDataSourceCollection = new ConstraintEnforcementCollection<Abstract.DataSource, Abstract.DateField>(this);
                     _FileAttachmentViaDataSourceCollection =
-                        new ConstraintEnforcementCollection<DataSource, FileAttachment>(this);
+                        new ConstraintEnforcementCollection<Abstract.DataSource, Abstract.FileAttachment>(this);
                     context._DataSourceList.Add(this);
                 }
 
@@ -1421,14 +1420,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _Created;
+                private DateTime? _Created;
 
-                public override int? Created
+                public override DateTime? Created
                 {
                     get { return _Created; }
                     set
                     {
-                        int? oldValue = _Created;
+                        DateTime? oldValue = _Created;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1441,14 +1440,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _Edited;
+                private DateTime? _Edited;
 
-                public override int? Edited
+                public override DateTime? Edited
                 {
                     get { return _Edited; }
                     set
                     {
-                        int? oldValue = _Edited;
+                        DateTime? oldValue = _Edited;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1461,16 +1460,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _Version;
+                private string _Version;
 
-                public override int? Version
+                public override string Version
                 {
                     get { return _Version; }
                     set
                     {
-                        int? oldValue = _Version;
-                        if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
-                            oldValue.HasValue != value.HasValue)
+                        string oldValue = _Version;
+                        if (oldValue != value||
+                            oldValue != value)
                         {
                             if (_Context.OnDataSourceVersionChanging(this, value) && base.OnVersionChanging(value))
                             {
@@ -1501,14 +1500,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private int? _RevisionDate;
+                private DateTime? _RevisionDate;
 
-                public override int? RevisionDate
+
+
+                public override DateTime? RevisionDate
                 {
                     get { return _RevisionDate; }
                     set
                     {
-                        int? oldValue = _RevisionDate;
+                        DateTime? oldValue = _RevisionDate;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1541,14 +1542,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private Package _Package;
+                private Abstract.Package _Package;
 
-                public override Package Package
+                public override Abstract.Package Package
                 {
                     get { return _Package; }
                     set
                     {
-                        Package oldValue = _Package;
+                        Abstract.Package oldValue = _Package;
                         if (oldValue != value)
                         {
                             if (_Context.OnDataSourcePackageChanging(this, value) && base.OnPackageChanging(value))
@@ -1561,14 +1562,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private Owner _DataSourceOwner;
+                private Abstract.PackageBuilder.Owner _DataSourceOwner;
 
-                public override Owner DataSourceOwner
+                public override Abstract.PackageBuilder.Owner DataSourceOwner
                 {
                     get { return _DataSourceOwner; }
                     set
                     {
-                        Owner oldValue = _DataSourceOwner;
+                        Abstract.PackageBuilder.Owner oldValue = _DataSourceOwner;
                         if (oldValue != value)
                         {
                             if (_Context.OnDataSourceDataSourceOwnerChanging(this, value) &&
@@ -1582,14 +1583,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private State _DataSourceState;
+                private Abstract.State _DataSourceState;
 
-                public override State DataSourceState
+                public override Abstract.State DataSourceState
                 {
                     get { return _DataSourceState; }
                     set
                     {
-                        State oldValue = _DataSourceState;
+                        Abstract.State oldValue = _DataSourceState;
                         if (oldValue != value)
                         {
                             if (_Context.OnDataSourceDataSourceStateChanging(this, value) &&
@@ -1603,16 +1604,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private readonly IEnumerable<DateField> _DateFieldViaDataSourceCollection;
+                private readonly IEnumerable<Abstract.DateField> _DateFieldViaDataSourceCollection;
 
-                public override IEnumerable<DateField> DateFieldViaDataSourceCollection
+                public override IEnumerable<Abstract.DateField> DateFieldViaDataSourceCollection
                 {
                     get { return _DateFieldViaDataSourceCollection; }
                 }
 
-                private readonly IEnumerable<FileAttachment> _FileAttachmentViaDataSourceCollection;
+                private readonly IEnumerable<Abstract.FileAttachment> _FileAttachmentViaDataSourceCollection;
 
-                public override IEnumerable<FileAttachment> FileAttachmentViaDataSourceCollection
+                public override IEnumerable<Abstract.FileAttachment> FileAttachmentViaDataSourceCollection
                 {
                     get { return _FileAttachmentViaDataSourceCollection; }
                 }
@@ -1624,27 +1625,27 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region DateField
 
-            public DateField CreateDateField()
+            public Abstract.DateField CreateDateField()
             {
                 return new DateFieldCore(this);
             }
 
-            private bool OnDateFieldLabelChanging(DateField instance, string newValue)
+            private bool OnDateFieldLabelChanging(Abstract.DateField instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnDateFieldDefinitionChanging(DateField instance, string newValue)
+            private bool OnDateFieldDefinitionChanging(Abstract.DateField instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnDateFieldSelectedChanging(DateField instance, bool? newValue)
+            private bool OnDateFieldSelectedChanging(Abstract.DateField instance, bool? newValue)
             {
                 return true;
             }
 
-            private bool OnDateFieldDataSourceChanging(DateField instance, DataSource newValue)
+            private bool OnDateFieldDataSourceChanging(Abstract.DateField instance, Abstract.DataSource newValue)
             {
                 if (newValue != null)
                 {
@@ -1656,19 +1657,19 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDateFieldDataSourceChanged(DateField instance, DataSource oldValue)
+            private void OnDateFieldDataSourceChanged(Abstract.DateField instance, Abstract.DataSource oldValue)
             {
                 if (instance.DataSource != null)
                 {
-                    ((ICollection<DateField>) instance.DataSource.DateFieldViaDataSourceCollection).Add(instance);
+                    ((ICollection<Abstract.DateField>) instance.DataSource.DateFieldViaDataSourceCollection).Add(instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<DateField>) oldValue.DateFieldViaDataSourceCollection).Remove(instance);
+                    ((ICollection<Abstract.DateField>) oldValue.DateFieldViaDataSourceCollection).Remove(instance);
                 }
             }
 
-            private bool OnDateFieldIndustryChanging(DateField instance, Industry newValue)
+            private bool OnDateFieldIndustryChanging(Abstract.DateField instance, Abstract.Industry newValue)
             {
                 if (newValue != null)
                 {
@@ -1680,22 +1681,22 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnDateFieldIndustryChanged(DateField instance, Industry oldValue)
+            private void OnDateFieldIndustryChanged(Abstract.DateField instance, Abstract.Industry oldValue)
             {
                 if (instance.Industry != null)
                 {
-                    ((ICollection<DateField>) instance.Industry.DateFieldViaIndustryCollection).Add(instance);
+                    ((ICollection<Abstract.DateField>) instance.Industry.DateFieldViaIndustryCollection).Add(instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<DateField>) oldValue.DateFieldViaIndustryCollection).Remove(instance);
+                    ((ICollection<Abstract.DateField>) oldValue.DateFieldViaIndustryCollection).Remove(instance);
                 }
             }
 
-            private readonly List<DateField> _DateFieldList;
-            private readonly ReadOnlyCollection<DateField> _DateFieldReadOnlyCollection;
+            private readonly List<Abstract.DateField> _DateFieldList;
+            private readonly ReadOnlyCollection<Abstract.DateField> _DateFieldReadOnlyCollection;
 
-            public IEnumerable<DateField> DateFieldCollection
+            public IEnumerable<Abstract.DateField> DateFieldCollection
             {
                 get { return _DateFieldReadOnlyCollection; }
             }
@@ -1703,7 +1704,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region DateFieldCore
 
             
-            private sealed class DateFieldCore : DateField
+            private sealed class DateFieldCore : Abstract.DateField
             {
                 public DateFieldCore(PackageBuilderContext context)
                 {
@@ -1776,14 +1777,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private DataSource _DataSource;
+                private Abstract.DataSource _DataSource;
 
-                public override DataSource DataSource
+                public override Abstract.DataSource DataSource
                 {
                     get { return _DataSource; }
                     set
                     {
-                        DataSource oldValue = _DataSource;
+                        Abstract.DataSource oldValue = _DataSource;
                         if (oldValue != value)
                         {
                             if (_Context.OnDateFieldDataSourceChanging(this, value) && base.OnDataSourceChanging(value))
@@ -1796,14 +1797,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private Industry _Industry;
+                private Abstract.Industry _Industry;
 
-                public override Industry Industry
+                public override Abstract.Industry Industry
                 {
                     get { return _Industry; }
                     set
                     {
-                        Industry oldValue = _Industry;
+                        Abstract.Industry oldValue = _Industry;
                         if (oldValue != value)
                         {
                             if (_Context.OnDateFieldIndustryChanging(this, value) && base.OnIndustryChanging(value))
@@ -1823,22 +1824,22 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
             #region FileAttachment
 
-            public FileAttachment CreateFileAttachment()
+            public Abstract.FileAttachment CreateFileAttachment()
             {
                 return new FileAttachmentCore(this);
             }
 
-            private bool OnFileAttachmentFileNameChanging(FileAttachment instance, string newValue)
+            private bool OnFileAttachmentFileNameChanging(Abstract.FileAttachment instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnFileAttachmentBlobChanging(FileAttachment instance, byte[] newValue)
+            private bool OnFileAttachmentBlobChanging(Abstract.FileAttachment instance, byte[] newValue)
             {
                 return true;
             }
 
-            private bool OnFileAttachmentDataSourceChanging(FileAttachment instance, DataSource newValue)
+            private bool OnFileAttachmentDataSourceChanging(Abstract.FileAttachment instance, Abstract.DataSource newValue)
             {
                 if (newValue != null)
                 {
@@ -1850,23 +1851,23 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 return true;
             }
 
-            private void OnFileAttachmentDataSourceChanged(FileAttachment instance, DataSource oldValue)
+            private void OnFileAttachmentDataSourceChanged(Abstract.FileAttachment instance, Abstract.DataSource oldValue)
             {
                 if (instance.DataSource != null)
                 {
-                    ((ICollection<FileAttachment>) instance.DataSource.FileAttachmentViaDataSourceCollection).Add(
+                    ((ICollection<Abstract.FileAttachment>) instance.DataSource.FileAttachmentViaDataSourceCollection).Add(
                         instance);
                 }
                 if (oldValue != null)
                 {
-                    ((ICollection<FileAttachment>) oldValue.FileAttachmentViaDataSourceCollection).Remove(instance);
+                    ((ICollection<Abstract.FileAttachment>) oldValue.FileAttachmentViaDataSourceCollection).Remove(instance);
                 }
             }
 
-            private readonly List<FileAttachment> _FileAttachmentList;
-            private readonly ReadOnlyCollection<FileAttachment> _FileAttachmentReadOnlyCollection;
+            private readonly List<Abstract.FileAttachment> _FileAttachmentList;
+            private readonly ReadOnlyCollection<Abstract.FileAttachment> _FileAttachmentReadOnlyCollection;
 
-            public IEnumerable<FileAttachment> FileAttachmentCollection
+            public IEnumerable<Abstract.FileAttachment> FileAttachmentCollection
             {
                 get { return _FileAttachmentReadOnlyCollection; }
             }
@@ -1874,7 +1875,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             #region FileAttachmentCore
 
             
-            private sealed class FileAttachmentCore : FileAttachment
+            private sealed class FileAttachmentCore : Abstract.FileAttachment
             {
                 public FileAttachmentCore(PackageBuilderContext context)
                 {
@@ -1927,14 +1928,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                     }
                 }
 
-                private DataSource _DataSource;
+                private Abstract.DataSource _DataSource;
 
-                public override DataSource DataSource
+                public override Abstract.DataSource DataSource
                 {
                     get { return _DataSource; }
                     set
                     {
-                        DataSource oldValue = _DataSource;
+                        Abstract.DataSource oldValue = _DataSource;
                         if (oldValue != value)
                         {
                             if (_Context.OnFileAttachmentDataSourceChanging(this, value) &&

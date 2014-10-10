@@ -5,17 +5,6 @@
 	<dms:setSchemaStatement>
 		<ddt:characterStringLiteral value="PACKAGEBUILDER" />
 	</dms:setSchemaStatement>
-	<ddl:domainDefinition name="Version" schema="PackageBuilder">
-		<ddt:exactNumeric type="INTEGER" />
-		<ddl:domainConstraintDefinition name="Version_Unsigned_Chk">
-			<ddl:checkConstraintDefinition>
-				<dep:comparisonPredicate operator="greaterThanOrEquals">
-					<dep:valueKeyword />
-					<ddt:exactNumericLiteral value="0" />
-				</dep:comparisonPredicate>
-			</ddl:checkConstraintDefinition>
-		</ddl:domainConstraintDefinition>
-	</ddl:domainDefinition>
 	<ddl:domainDefinition name="State" schema="PackageBuilder">
 		<ddt:characterString type="CHARACTER VARYING" length="32" />
 		<ddl:domainConstraintDefinition name="ValueTypeValueConstraint1">
@@ -91,7 +80,7 @@
 			<ddt:time type="TIMESTAMP" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Version">
-			<ddt:domain name="Version" schema="PackageBuilder" />
+			<ddt:characterString type="CHARACTER VARYING" length="16" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Package_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
@@ -184,7 +173,7 @@
 			<ddt:characterString type="CHARACTER VARYING" length="512" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Version">
-			<ddt:domain name="Version" schema="PackageBuilder" />
+			<ddt:characterString type="CHARACTER VARYING" length="16" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="DataSource_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">

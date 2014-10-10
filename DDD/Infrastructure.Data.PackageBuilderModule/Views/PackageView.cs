@@ -4,6 +4,6 @@
     {
         public string Id { get; internal set; }
         public string Name { get; internal set; }
-        public int Version { get; internal set; }
+        public string Version { get; internal set; }
     }
 }

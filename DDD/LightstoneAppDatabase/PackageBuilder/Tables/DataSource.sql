@@ -11,7 +11,7 @@
 	PackageId int,
 	RevisionDate datetime,
 	SourceURL nvarchar(512),
-	Version int CHECK (Version >= 0),
+	Version VARCHAR(16),
 	CONSTRAINT DataSource_PK PRIMARY KEY(DataSourceId)
 )
 GO

@@ -11,7 +11,7 @@
 	PackageState nvarchar(32) CHECK (PackageState IN (N'Under construction', N'Published', N'Expired')),
 	Published bit,
 	RevisionDate datetime,
-	Version int CHECK (Version >= 0),
+	Version VARCHAR(16),
 	CONSTRAINT Package_PK PRIMARY KEY(PackageId)
 )
 GO

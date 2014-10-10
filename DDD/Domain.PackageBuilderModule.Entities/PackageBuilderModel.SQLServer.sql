@@ -17,7 +17,7 @@ CREATE TABLE PackageBuilder.Package
 	PackageState nvarchar(32) CHECK (PackageState IN (N'Under construction', N'Published', N'Expired')),
 	Published bit,
 	RevisionDate datetime,
-	Version int CHECK (Version >= 0),
+	Version nvarchar(16),
 	CONSTRAINT Package_PK PRIMARY KEY(PackageId)
 )
 GO
@@ -60,7 +60,7 @@ CREATE TABLE PackageBuilder.DataSource
 	PackageId int,
 	RevisionDate datetime,
 	SourceURL nvarchar(512),
-	Version int CHECK (Version >= 0),
+	Version nvarchar(16),
 	CONSTRAINT DataSource_PK PRIMARY KEY(DataSourceId)
 )
 GO
