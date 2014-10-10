@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        ///     Createt a new <paramref name="Company.Client.Project.CrossCutting.Logging.ILog" />
+        ///     Create a new <paramref name="ILogger" />
         /// </summary>
         /// <returns> Created ILog </returns>
         public static ILogger CreateLog()

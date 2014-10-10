@@ -13,8 +13,8 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.EventSourcing
     /// </remarks>
     public abstract class EventSourced : IEventSourced
     {
-        private readonly Dictionary<Type, Action<IVersionedEvent>> handlers = new Dictionary<Type, Action<IVersionedEvent>>();
-        private readonly List<IVersionedEvent> pendingEvents = new List<IVersionedEvent>();
+        private readonly Dictionary<Type, Action<IVersionedEvent>> _handlers = new Dictionary<Type, Action<IVersionedEvent>>();
+        private readonly List<IVersionedEvent> _pendingEvents = new List<IVersionedEvent>();
 
         private readonly Guid id;
         private int version = -1;
@@ -43,7 +43,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.EventSourcing
         /// </summary>
         public IEnumerable<IVersionedEvent> Events
         {
-            get { return this.pendingEvents; }
+            get { return this._pendingEvents; }
         }
 
         /// <summary>
@@ -52,14 +52,14 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.EventSourcing
         protected void Handles<TEvent>(Action<TEvent> handler)
             where TEvent : IEvent
         {
-            this.handlers.Add(typeof(TEvent), @event => handler((TEvent)@event));
+            this._handlers.Add(typeof(TEvent), @event => handler((TEvent)@event));
         }
 
         protected void LoadFrom(IEnumerable<IVersionedEvent> pastEvents)
         {
             foreach (var e in pastEvents)
             {
-                this.handlers[e.GetType()].Invoke(e);
+                this._handlers[e.GetType()].Invoke(e);
                 this.version = e.Version;
             }
         }
@@ -68,9 +68,9 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.EventSourcing
         {
             e.SourceId = this.Id;
             e.Version = this.version + 1;
-            this.handlers[e.GetType()].Invoke(e);
+            this._handlers[e.GetType()].Invoke(e);
             this.version = e.Version;
-            this.pendingEvents.Add(e);
+            this._pendingEvents.Add(e);
         }
     }
 }
