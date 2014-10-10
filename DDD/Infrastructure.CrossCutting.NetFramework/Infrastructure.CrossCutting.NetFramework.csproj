@@ -102,6 +102,7 @@
     <Compile Include="ExpressionTreeSerialization\ExpressionBuilder.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionSerializationTypeResolver.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionSerializer.cs" />
+    <Compile Include="GlobalSupport.cs" />
     <Compile Include="IAggregate.cs" />
     <Compile Include="IApplicationEvent.cs" />
     <Compile Include="IBus.cs" />

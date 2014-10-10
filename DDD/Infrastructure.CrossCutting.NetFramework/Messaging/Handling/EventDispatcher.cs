@@ -8,12 +8,12 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging.Handl
 {
     public class EventDispatcher
     {
-        private readonly Dictionary<Type, List<Tuple<Type, Action<Envelope>>>> _handlersByEventType;
+        private readonly Dictionary<Type, List<System.Tuple<Type, Action<Envelope>>>> _handlersByEventType;
         private readonly Dictionary<Type, Action<IEvent, string, string, string>> _dispatchersByEventType;
 
         public EventDispatcher()
         {
-            this._handlersByEventType = new Dictionary<Type, List<Tuple<Type, Action<Envelope>>>>();
+            this._handlersByEventType = new Dictionary<Type, List<System.Tuple<Type, Action<Envelope>>>>();
             this._dispatchersByEventType = new Dictionary<Type, Action<IEvent, string, string, string>>();
         }
 
@@ -34,13 +34,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging.Handl
             {
                 var envelopeType = typeof(Envelope<>).MakeGenericType(invocationTuple.Item1);
 
-                List<Tuple<Type, Action<Envelope>>> invocations;
+                List<System.Tuple<Type, Action<Envelope>>> invocations;
                 if (!this._handlersByEventType.TryGetValue(invocationTuple.Item1, out invocations))
                 {
-                    invocations = new List<Tuple<Type, Action<Envelope>>>();
+                    invocations = new List<System.Tuple<Type, Action<Envelope>>>();
                     this._handlersByEventType[invocationTuple.Item1] = invocations;
                 }
-                invocations.Add(new Tuple<Type, Action<Envelope>>(handlerType, invocationTuple.Item2));
+                invocations.Add(new System.Tuple<Type, Action<Envelope>>(handlerType, invocationTuple.Item2));
 
                 if (!this._dispatchersByEventType.ContainsKey(invocationTuple.Item1))
                 {
@@ -83,7 +83,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging.Handl
             envelope.MessageId = messageId;
             envelope.CorrelationId = correlationId;
 
-            List<Tuple<Type, Action<Envelope>>> handlers;
+            List<System.Tuple<Type, Action<Envelope>>> handlers;
             if (this._handlersByEventType.TryGetValue(typeof(T), out handlers))
             {
                 foreach (var handler in handlers)
@@ -94,7 +94,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging.Handl
             }
         }
 
-        private IEnumerable<Tuple<Type, Action<Envelope>>> BuildHandlerInvocations(IEventHandler handler)
+        private IEnumerable<System.Tuple<Type, Action<Envelope>>> BuildHandlerInvocations(IEventHandler handler)
         {
             var interfaces = handler.GetType().GetInterfaces();
 
@@ -102,13 +102,13 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging.Handl
                 interfaces
                     .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEventHandler<>))
                     .Select(i => new { HandlerInterface = i, EventType = i.GetGenericArguments()[0] })
-                    .Select(e => new Tuple<Type, Action<Envelope>>(e.EventType, this.BuildHandlerInvocation(handler, e.HandlerInterface, e.EventType)));
+                    .Select(e => new System.Tuple<Type, Action<Envelope>>(e.EventType, this.BuildHandlerInvocation(handler, e.HandlerInterface, e.EventType)));
 
             var envelopedEventHandlerInvocations =
                 interfaces
                     .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnvelopedEventHandler<>))
                     .Select(i => new { HandlerInterface = i, EventType = i.GetGenericArguments()[0] })
-                    .Select(e => new Tuple<Type, Action<Envelope>>(e.EventType, this.BuildEnvelopeHandlerInvocation(handler, e.HandlerInterface, e.EventType)));
+                    .Select(e => new System.Tuple<Type, Action<Envelope>>(e.EventType, this.BuildEnvelopeHandlerInvocation(handler, e.HandlerInterface, e.EventType)));
 
             return eventHandlerInvocations.Union(envelopedEventHandlerInvocations);
         }
