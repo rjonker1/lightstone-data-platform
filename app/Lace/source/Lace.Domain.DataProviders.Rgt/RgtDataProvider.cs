@@ -8,7 +8,6 @@ using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure;
-using Lace.Domain.DataProviders.Rgt.Infrastructure.Providers;
 using Lace.Domain.DataProviders.Rgt.Repositories.Factory;
 
 namespace Lace.Domain.DataProviders.Rgt

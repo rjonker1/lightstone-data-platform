@@ -1,4 +1,6 @@
-﻿using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
+﻿using System.Collections.Generic;
+using Lace.Domain.DataProviders.RgtVin.Core.Models;
+using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
 
@@ -6,18 +8,18 @@ namespace Lace.Unit.Tests.Transform
 {
     public class when_transforming_rgt_vin_response : Specification
     {
-        private readonly System.Data.DataSet _rgtVinWebResponse;
+        private readonly IEnumerable<Vin> _rgtVinResponse;
         private TransformRgtVinResponse _transfomer;
 
         public when_transforming_rgt_vin_response()
         {
-            _rgtVinWebResponse = new SourceResponseBuilder().ForRgtVin();
+            _rgtVinResponse = new SourceResponseBuilder().ForRgtVin();
         }
 
 
         public override void Observe()
         {
-            _transfomer = new TransformRgtVinResponse(_rgtVinWebResponse);
+            _transfomer = new TransformRgtVinResponse(_rgtVinResponse);
             _transfomer.Transform();
         }
 
@@ -44,13 +46,6 @@ namespace Lace.Unit.Tests.Transform
         public void rgt_vin_transformer_result_vin_should_be_valid()
         {
             _transfomer.Result.Vin.ShouldEqual("SB1KV58E40F039277");
-        }
-
-
-        [Observation]
-        public void rgt_vin_transformer_result_quarter_should_be_valid()
-        {
-            _transfomer.Result.Quarter.ShouldEqual(3);
         }
 
 

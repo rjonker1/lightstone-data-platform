@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Anpr", "Lace\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj", "{B3C39DE4-4B23-4604-8732-06ED64A790B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.CertificateProvider", "Lace\source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj", "{CAEFEC16-62DF-43EC-8B5B-824374CC96E3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Jis", "Lace\source\Lace.Domain.DataProviders.Jis\Lace.Domain.DataProviders.Jis.csproj", "{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.RgtVin", "Lace\source\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj", "{AE3F8127-622B-4E02-A21F-6EE7BEA123E2}"
@@ -54,6 +52,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.Infrastructure.Orm", "Lace\source\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj", "{7B07823D-3F48-470B-9A43-739D9EB9DC22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Car", "Lace\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj", "{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Certificate", "Lace\source\Lace.CrossCutting.DataProvider.Certificate\Lace.CrossCutting.DataProvider.Certificate.csproj", "{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,10 +117,6 @@ Global
 		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3C39DE4-4B23-4604-8732-06ED64A790B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CAEFEC16-62DF-43EC-8B5B-824374CC96E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAEFEC16-62DF-43EC-8B5B-824374CC96E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAEFEC16-62DF-43EC-8B5B-824374CC96E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CAEFEC16-62DF-43EC-8B5B-824374CC96E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -141,6 +137,10 @@ Global
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,9 +153,9 @@ Global
 		{837B64CA-81D7-498F-B88F-386D186E9F35} = {2CE8A9CE-27F7-4035-9E56-4074EC4F6256}
 		{61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3} = {2CE8A9CE-27F7-4035-9E56-4074EC4F6256}
 		{129BBFFE-0D3E-4CC5-95B4-5C466669421D} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{CAEFEC16-62DF-43EC-8B5B-824374CC96E3} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{7B07823D-3F48-470B-9A43-739D9EB9DC22} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B} = {C6E762ED-2030-40CF-A694-8F6C44800226}
+		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98} = {4D3724DA-EBF7-4722-91DE-22898570BF2D}
 		{CA721B03-EFC7-45CE-A70E-BB9EF72C075B} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
 		{7F252FE1-1AB1-42FB-AEBD-EAC952E71664} = {837B64CA-81D7-498F-B88F-386D186E9F35}

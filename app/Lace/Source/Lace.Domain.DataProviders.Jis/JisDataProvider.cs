@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
@@ -7,8 +9,6 @@ using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure;
-using Lace.Shared.CertificateProvider.Infrastructure.Factory;
-using Lace.Shared.CertificateProvider.Infrastructure.Providers;
 
 namespace Lace.Domain.DataProviders.Jis
 {

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
@@ -6,15 +7,16 @@ using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Test.Helper.Fakes.Responses;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
     public class SourceResponseBuilder
     {
-        public System.Data.DataSet ForRgtVin()
+        public IEnumerable<Vin> ForRgtVin()
         {
-            return FakeRgtVinResponse.GetRgtVinWebResponseForLicensePlateNumber();
+            return FakeRgtVinResponse.GetRgtVinResponseForLicensePlateNumber();
         }
 
         public HpiStandardQueryResponse ForIvid()

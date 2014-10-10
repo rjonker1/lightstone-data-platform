@@ -12,6 +12,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
+using Lace.Domain.DataProviders.Rgt.UnitOfWork;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure
@@ -24,8 +25,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
         private readonly ISetupRepository _repository;
         private readonly ISetupCarRepository _carRepository;
-
-        private readonly IGetCarSpecifications _specifications;
+       
         private IRetrieveCarInformation _carInformation;
         private IEnumerable<CarSpecification> _carSpecifications;
 
@@ -41,8 +41,9 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             try
             {
                 GetCarInformation();
+
                 _carSpecifications =
-                    _repository.CarSpecificationRepository().FindWithRequest(_carInformation.CarInformationRequest);
+                    new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository()).CarSpecifications;
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
@@ -50,8 +51,9 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     RgtResponseFailed(response);
                 }
 
-                if(!_carSpecifications.Any())
-                    Log.ErrorFormat("Could not get car information for Car id {0} Vin {1}", _carInformation.CarInformationRequest.CarId,_carInformation.CarInformationRequest.Vin);
+                if (!_carSpecifications.Any())
+                    Log.ErrorFormat("Could not get car information for Car id {0} Vin {1}",
+                        _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin);
 
                 TransformResponse(response);
             }

@@ -70,7 +70,6 @@
     <Compile Include="Core\Models\CarSpecification.cs" />
     <Compile Include="Infrastructure\HandleRgtDataProviderCall.cs" />
     <Compile Include="Infrastructure\Management\TransformRgtResponse.cs" />
-    <Compile Include="Infrastructure\Providers\CacheConnectionFactory.cs" />
     <Compile Include="Infrastructure\RequestDataFromRgtSource.cs" />
     <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
     <Compile Include="Repositories\CarSpecificationRepository.cs" />
@@ -101,9 +100,7 @@
       <Name>Lace.Domain.DataProviders.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Dto\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
