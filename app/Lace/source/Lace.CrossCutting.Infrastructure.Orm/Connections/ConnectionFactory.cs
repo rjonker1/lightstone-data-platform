@@ -12,5 +12,10 @@ namespace Lace.CrossCutting.Infrastructure.Orm.Connections
                 new SqlConnection(
                     ConfigurationManager.ConnectionStrings["lace/source/database/auto-car-stats"].ToString());
 
+
+        public static Func<IDbConnection> ForLsCorporateAutoDatabase =
+            () =>
+                new SqlConnection(
+                    ConfigurationManager.ConnectionStrings["lace/source/database/ls-corporate-auto"].ToString());
     }
 }

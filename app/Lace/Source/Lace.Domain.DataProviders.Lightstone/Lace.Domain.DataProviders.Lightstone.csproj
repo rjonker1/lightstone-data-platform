@@ -96,9 +96,6 @@
     <Compile Include="Infrastructure\Factory\RepositoryFactory.cs" />
     <Compile Include="Infrastructure\HandleLightstoneSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneResponse.cs" />
-    <Compile Include="Infrastructure\Providers\CacheConnectionFactory.cs" />
-    <None Include="Infrastructure\Providers\ConnectionFactory.cs.old" />
-    <None Include="Infrastructure\Providers\Dapper.cs.old" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneSource.cs" />
     <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
     <Compile Include="Repositories\BandsRepository.cs" />

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
 using Common.Logging;
+using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
+using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
@@ -9,9 +12,6 @@ using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.CertificateProvider.Core.Contracts;
-using Lace.Shared.CertificateProvider.Infrastructure.Dto;
-using Lace.Shared.CertificateProvider.Infrastructure.Factory;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure

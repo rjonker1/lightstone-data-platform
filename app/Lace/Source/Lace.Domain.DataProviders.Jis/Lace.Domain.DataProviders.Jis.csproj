@@ -89,6 +89,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.CrossCutting.DataProvider.Certificate\Lace.CrossCutting.DataProvider.Certificate.csproj">
+      <Project>{2c5986e6-3ed6-4bd7-9c54-eb82ae6e3285}</Project>
+      <Name>Lace.CrossCutting.DataProvider.Certificate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.CrossCutting.Infrastructure.Orm\Lace.CrossCutting.Infrastructure.Orm.csproj">
+      <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
+      <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
       <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
       <Name>Lace.DistributedServices.Events</Name>
@@ -100,10 +108,6 @@
     <ProjectReference Include="..\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
       <Name>Lace.Domain.DataProviders.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj">
-      <Project>{caefec16-62df-43ec-8b5b-824374cc96e3}</Project>
-      <Name>Lace.Shared.CertificateProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -8,7 +8,6 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Providers;
 
 namespace Lace.Domain.DataProviders.Lightstone
 {

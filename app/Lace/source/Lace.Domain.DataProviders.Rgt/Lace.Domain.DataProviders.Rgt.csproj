@@ -104,6 +104,7 @@
   <ItemGroup>
     <Folder Include="Infrastructure\Dto\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

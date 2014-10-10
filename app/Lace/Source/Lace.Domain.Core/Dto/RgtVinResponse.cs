@@ -23,21 +23,6 @@ namespace Lace.Domain.Core.Dto
             Year = year;
         }
 
-        public void BuidWithValidation(string color, string month, string price, string quarter, string rgtCode,
-            string vehicleMake, string vechicleModel, string vehicleType, string vin, string year)
-        {
-            Colour = color;
-            Month = ValidateNumber(month);
-            Price = ValidateNumber(price);
-            Quarter = ValidateNumber(quarter);
-            RgtCode = ValidateNumber(rgtCode);
-            VehicleMake = vehicleMake;
-            VehicleModel = vechicleModel;
-            VehicleType = vehicleType;
-            Vin = vin;
-            Year = ValidateNumber(year);
-        }
-
         public void SetCarName()
         {
             CarFullname = string.Format("{0} {1}", VehicleMake, VehicleModel);
@@ -64,16 +49,6 @@ namespace Lace.Domain.Core.Dto
         public string Colour { get; private set; }
 
         public string CarFullname { get; private set; }
-
-        private static int ValidateNumber(string number)
-        {
-            if (string.IsNullOrEmpty(number)) return 0;
-
-            int num;
-
-            int.TryParse(number, out num);
-
-            return num;
-        }
+     
     }
 }

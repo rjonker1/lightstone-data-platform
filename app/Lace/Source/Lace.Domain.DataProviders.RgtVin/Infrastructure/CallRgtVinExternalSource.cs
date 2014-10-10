@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Common.Logging;
 using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.RgtVin.Infrastructure.Configuration;
+using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
+using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
+using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
 using Lace.Shared.Extensions;
 using Monitoring.Sources.Lace;
 
@@ -17,13 +21,18 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
     public class CallRgtVinExternalSource : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private DataSet _rgtVinResponse;
+        
         private readonly ILaceRequest _request;
         private const LaceEventSource Source = LaceEventSource.RgtVin;
 
-        public CallRgtVinExternalSource(ILaceRequest request)
+        private readonly ISetupRepository _repository;
+        private IEnumerable<Vin> _vins;
+
+
+        public CallRgtVinExternalSource(ILaceRequest request, ISetupRepository repository)
         {
             _request = request;
+            _repository = repository;
         }
 
         public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
@@ -32,33 +41,26 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             {
                 laceEvent.PublishStartSourceConfigurationMessage(Source);
 
-                var rgtVinWebService = new ConfigureRgtVinWebSource();
-                var rgtVinRequest = new RgtVinRequestMessage(_request, response)
+                var vin = new RgtVinRequestMessage(response)
                     .Build()
-                    .RgtVinRequest;
+                    .Vin;
 
                 laceEvent.PublishEndSourceConfigurationMessage(Source);
 
                 laceEvent.PublishSourceRequestMessage(Source,
-                    rgtVinRequest.ObjectToJson());
-
+                    vin.ObjectToJson());
 
                 laceEvent.PublishStartSourceCallMessage(Source);
 
-                _rgtVinResponse = rgtVinWebService
-                    .RgtVinServiceProxy
-                    .VinCheckSpecsFiltered(rgtVinRequest.Vin, string.Empty, rgtVinRequest.SecurityCode);
+                _vins = new VehicleVinUnitOfWork(_repository.VinRepository()).Vins;
 
                 laceEvent.PublishEndSourceCallMessage(Source);
 
-
-                rgtVinWebService.CloseWebService();
-
-                if (_rgtVinResponse == null)
+                if (_vins == null || !_vins.Any())
                     laceEvent.PublishNoResponseFromSourceMessage(Source);
 
                 laceEvent.PublishSourceResponseMessage(Source,
-                    _rgtVinResponse != null ? _rgtVinResponse.ObjectToJson() : new DataSet().ObjectToJson());
+                    _vins != null && _vins.Any() ? _vins.ObjectToJson() : new List<Vin>().ObjectToJson());
 
                 TransformResponse(response);
 
@@ -73,7 +75,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         public void TransformResponse(IProvideResponseFromLaceDataProviders response)
         {
-            var transformer = new TransformRgtVinResponse(_rgtVinResponse);
+            var transformer = new TransformRgtVinResponse(_vins);
 
             if (transformer.Continue)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using ServiceStack.Redis;
 
-namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Providers
+namespace Lace.CrossCutting.Infrastructure.Orm.Connections
 {
     public static class CacheConnectionFactory
     {

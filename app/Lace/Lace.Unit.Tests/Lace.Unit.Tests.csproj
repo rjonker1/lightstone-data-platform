@@ -169,10 +169,6 @@
       <Project>{7f252fe1-1ab1-42fb-aebd-eac952e71664}</Project>
       <Name>Lace.Domain.Infrastructure.EntryPoint</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Shared.CertificateProvider\Lace.Shared.CertificateProvider.csproj">
-      <Project>{caefec16-62df-43ec-8b5b-824374cc96e3}</Project>
-      <Name>Lace.Shared.CertificateProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>
