@@ -1,4 +1,5 @@
-﻿using LightstoneApp.Infrastructure.CrossCutting.IoC.Unity;
+﻿using System.ComponentModel;
+using LightstoneApp.Infrastructure.CrossCutting.IoC.Unity;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.IoC
 {
@@ -23,17 +24,17 @@ namespace LightstoneApp.Infrastructure.CrossCutting.IoC
 
         #region Members
 
-        private readonly IContainer _CurrentContainer;
+        private readonly IContainer _currentContainer;
 
         /// <summary>
         ///     Get current configured IContainer
         ///     <remarks>
-        ///         At this moment only IoCUnityContainer existss
+        ///         At this moment only IoCUnityContainer exists
         ///     </remarks>
         /// </summary>
         public IContainer CurrentContainer
         {
-            get { return _CurrentContainer; }
+            get { return _currentContainer; }
         }
 
         #endregion
@@ -49,7 +50,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.IoC
 
         private IoCFactory()
         {
-            _CurrentContainer = new IoCUnityContainer();
+            _currentContainer = new IoCUnityContainer();
         }
 
         #endregion

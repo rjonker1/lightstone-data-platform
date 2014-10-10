@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -54,28 +55,54 @@ namespace LightstoneApp.Domain.Core
 
         public override int GetHashCode()
         {
-            int hashCode = 31;
-            bool changeMultiplier = false;
-            const int index = 1;
+            //int hashCode = 31;
+            //bool changeMultiplier = false;
+            //const int index = 1;
 
-            //compare all public properties
-            PropertyInfo[] publicProperties = GetType().GetProperties();
+            ////compare all public properties
+            //PropertyInfo[] publicProperties = GetType().GetProperties();
 
-            if (publicProperties.Any())
+            //if (publicProperties.Any())
+            //{
+            //    foreach (object value in publicProperties.Select(item => item.GetValue(this, null)))
+            //    {
+            //        if (value != null)
+            //        {
+            //            hashCode = hashCode*((changeMultiplier) ? 59 : 114) + value.GetHashCode();
+            //            changeMultiplier = !changeMultiplier;
+            //        }
+            //        else
+            //            hashCode = hashCode ^ (index*13); //only for support {"a",null,null,"a"} <> {null,"a","a",null}
+            //    }
+            //}
+
+            //return hashCode;
+
+            var fields = GetFields();
+
+            const int startValue = 17;
+            const int multiplier = 59;
+
+            return fields.Select(field => 
+                field.GetValue(this)).Where(value => 
+                value != null).Aggregate(startValue, (current, value) => 
+                current*multiplier + value.GetHashCode());
+        }
+
+        private IEnumerable<FieldInfo> GetFields()
+        {
+            Type t = GetType();
+
+            var fields = new List<FieldInfo>();
+
+            while (t != typeof(object))
             {
-                foreach (object value in publicProperties.Select(item => item.GetValue(this, null)))
-                {
-                    if (value != null)
-                    {
-                        hashCode = hashCode*((changeMultiplier) ? 59 : 114) + value.GetHashCode();
-                        changeMultiplier = !changeMultiplier;
-                    }
-                    else
-                        hashCode = hashCode ^ (index*13); //only for support {"a",null,null,"a"} <> {null,"a","a",null}
-                }
+                fields.AddRange(t.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public));
+
+                t = t.BaseType;
             }
 
-            return hashCode;
+            return fields;
         }
 
         public static bool operator ==(ValueObject<TValueObject> left, ValueObject<TValueObject> right)

@@ -7,29 +7,10 @@
     {
     }
 
-    public interface IBus
-    {
-        void Publish(IDomainEvent @event);
-    }
-
     // Summary:
     //     Defines a message handler.
     //
     // Type parameters:
     //   T:
     //     The type of message to be handled.
-    public interface IHandleMessages<T>
-    {
-        // Summary:
-        //     Handles a message.
-        //
-        // Parameters:
-        //   message:
-        //     The message to handle.
-        //
-        // Remarks:
-        //     This method will be called when a message arrives on the bus and should contain
-        //     the custom logic to execute when the message is received.
-        void Handle(T message);
-    }
 }

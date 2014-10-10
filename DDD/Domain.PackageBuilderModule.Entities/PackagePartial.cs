@@ -1,4 +1,4 @@
-﻿using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
+﻿using LightstoneApp.Domain.PackageBuilderModule.Entities.Events.Events;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities
@@ -7,7 +7,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
     {
         private Package SetupCompleted()
         {
-            RaiseEvent(new PackageCreated(Id.ToString(), Name, Version));
+            var packageCreatedEvent = new PackageCreatedEvent(this);
+
+            RaiseEvent(packageCreatedEvent);
 
             return this;
         }
@@ -26,6 +28,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
                 package = package.SetupCompleted();
 
+                return package;
+            }
+
+            public Package CreatePackage(Package newPackage)
+            {
+                var package = newPackage.SetupCompleted();
                 return package;
             }
         }

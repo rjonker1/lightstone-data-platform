@@ -172,6 +172,204 @@
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Commits.Fakes.ShimCommit.ShimFactory.AllInstances.CreateForGuidStringIAggregateString">
             <summary>Sets the shim of Factory.CreateFor(Guid transactionIdentifier, String correlationId, IAggregate aggregate, String userAccount)</summary>
         </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Events.Message</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.#ctor(LightstoneApp.Infrastructure.Data.Core.Events.Message)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.BodyGet">
+            <summary>Sets the shim of Message.get_Body()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.BodySetByteArray">
+            <summary>Sets the shim of Message.set_Body(Byte[] value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.BodyStreamGet">
+            <summary>Sets the shim of Message.get_BodyStream()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.Constructor">
+            <summary>Sets the shim of Message.Message()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ConversationGroupIdGet">
+            <summary>Sets the shim of Message.get_ConversationGroupId()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ConversationGroupIdSetGuid">
+            <summary>Sets the shim of Message.set_ConversationGroupId(Guid value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ConversationHandleGet">
+            <summary>Sets the shim of Message.get_ConversationHandle()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ConversationHandleSetGuid">
+            <summary>Sets the shim of Message.set_ConversationHandle(Guid value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.LoadSqlDataReader">
+            <summary>Sets the shim of Message.Load(SqlDataReader reader)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.MessageSequenceNumberGet">
+            <summary>Sets the shim of Message.get_MessageSequenceNumber()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.MessageSequenceNumberSetInt64">
+            <summary>Sets the shim of Message.set_MessageSequenceNumber(Int64 value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.MessageTypeNameGet">
+            <summary>Sets the shim of Message.get_MessageTypeName()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.MessageTypeNameSetString">
+            <summary>Sets the shim of Message.set_MessageTypeName(String value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ServiceContractNameGet">
+            <summary>Sets the shim of Message.get_ServiceContractName()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ServiceContractNameSetString">
+            <summary>Sets the shim of Message.set_ServiceContractName(String value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ServiceNameGet">
+            <summary>Sets the shim of Message.get_ServiceName()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.ServiceNameSetString">
+            <summary>Sets the shim of Message.set_ServiceName(String value)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.BodyGet">
+            <summary>Sets the shim of Message.get_Body()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.BodySetByteArray">
+            <summary>Sets the shim of Message.set_Body(Byte[] value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.BodyStreamGet">
+            <summary>Sets the shim of Message.get_BodyStream()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ConversationGroupIdGet">
+            <summary>Sets the shim of Message.get_ConversationGroupId()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ConversationGroupIdSetGuid">
+            <summary>Sets the shim of Message.set_ConversationGroupId(Guid value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ConversationHandleGet">
+            <summary>Sets the shim of Message.get_ConversationHandle()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ConversationHandleSetGuid">
+            <summary>Sets the shim of Message.set_ConversationHandle(Guid value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.MessageSequenceNumberGet">
+            <summary>Sets the shim of Message.get_MessageSequenceNumber()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.MessageSequenceNumberSetInt64">
+            <summary>Sets the shim of Message.set_MessageSequenceNumber(Int64 value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.MessageTypeNameGet">
+            <summary>Sets the shim of Message.get_MessageTypeName()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.MessageTypeNameSetString">
+            <summary>Sets the shim of Message.set_MessageTypeName(String value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ServiceContractNameGet">
+            <summary>Sets the shim of Message.get_ServiceContractName()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ServiceContractNameSetString">
+            <summary>Sets the shim of Message.set_ServiceContractName(String value)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ServiceNameGet">
+            <summary>Sets the shim of Message.get_ServiceName()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimMessage.AllInstances.ServiceNameSetString">
+            <summary>Sets the shim of Message.set_ServiceName(String value)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Events.ServiceBrokerWrapper</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BeginConversationIDbTransactionStringStringString">
+            <summary>Sets the shim of ServiceBrokerWrapper.BeginConversation(IDbTransaction transaction, String initiatorServiceName, String targetServiceName, String messageContractName)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BeginConversationIDbTransactionStringStringStringBoolean">
+            <summary>Sets the shim of ServiceBrokerWrapper.BeginConversation(IDbTransaction transaction, String initiatorServiceName, String targetServiceName, String messageContractName, Boolean encryption)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BeginConversationIDbTransactionStringStringStringInt32">
+            <summary>Sets the shim of ServiceBrokerWrapper.BeginConversation(IDbTransaction transaction, String initiatorServiceName, String targetServiceName, String messageContractName, Int32 lifetime)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BeginConversationIDbTransactionStringStringStringInt32Boolean">
+            <summary>Sets the shim of ServiceBrokerWrapper.BeginConversation(IDbTransaction transaction, String initiatorServiceName, String targetServiceName, String messageContractName, Int32 lifetime, Boolean encryption)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.BeginConversationInternalIDbTransactionStringStringStringNullableOfInt32NullableOfBoolean">
+            <summary>Sets the shim of ServiceBrokerWrapper.BeginConversationInternal(IDbTransaction transaction, String initiatorServiceName, String targetServiceName, String messageContractName, Nullable`1&lt;Int32&gt; lifetime, Nullable`1&lt;Boolean&gt; encryption)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.EndConversationIDbTransactionGuid">
+            <summary>Sets the shim of ServiceBrokerWrapper.EndConversation(IDbTransaction transaction, Guid conversationHandle)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.EndConversationIDbTransactionGuidBoolean">
+            <summary>Sets the shim of ServiceBrokerWrapper.EndConversation(IDbTransaction transaction, Guid conversationHandle, Boolean withCleanup)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.EndConversationIDbTransactionGuidInt32String">
+            <summary>Sets the shim of ServiceBrokerWrapper.EndConversation(IDbTransaction transaction, Guid conversationHandle, Int32 errorCode, String errorDescription)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.EndConversationInternalIDbTransactionGuidBooleanNullableOfInt32StringBoolean">
+            <summary>Sets the shim of ServiceBrokerWrapper.EndConversationInternal(IDbTransaction transaction, Guid conversationHandle, Boolean withError, Nullable`1&lt;Int32&gt; errorCode, String errorDescription, Boolean withCleanup)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.EnsureSqlTransactionIDbTransaction">
+            <summary>Sets the shim of ServiceBrokerWrapper.EnsureSqlTransaction(IDbTransaction transaction)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.GetBytesString">
+            <summary>Sets the shim of ServiceBrokerWrapper.GetBytes(String str)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.GetStringByteArray">
+            <summary>Sets the shim of ServiceBrokerWrapper.GetString(Byte[] bytes)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.QueryMessageCountInternalSqlTransactionStringString">
+            <summary>Sets the shim of ServiceBrokerWrapper.QueryMessageCountInternal(SqlTransaction transaction, String queueName, String messageType)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.QueryMessageCountSqlTransactionStringString">
+            <summary>Sets the shim of ServiceBrokerWrapper.QueryMessageCount(SqlTransaction transaction, String queueName, String messageType)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.ReceiveIDbTransactionString">
+            <summary>Sets the shim of ServiceBrokerWrapper.Receive(IDbTransaction transaction, String queueName)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.ReceiveIDbTransactionStringGuid">
+            <summary>Sets the shim of ServiceBrokerWrapper.Receive(IDbTransaction transaction, String queueName, Guid conversationHandle)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.ReceiveInternalIDbTransactionStringNullableOfGuidBooleanNullableOfInt32">
+            <summary>Sets the shim of ServiceBrokerWrapper.ReceiveInternal(IDbTransaction transaction, String queueName, Nullable`1&lt;Guid&gt; conversationHandle, Boolean wait, Nullable`1&lt;Int32&gt; waitTimeout)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.SendIDbTransactionGuidString">
+            <summary>Sets the shim of ServiceBrokerWrapper.Send(IDbTransaction transaction, Guid conversationHandle, String messageType)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.SendIDbTransactionGuidStringByteArray">
+            <summary>Sets the shim of ServiceBrokerWrapper.Send(IDbTransaction transaction, Guid conversationHandle, String messageType, Byte[] body)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.SendInternalIDbTransactionGuidStringByteArray">
+            <summary>Sets the shim of ServiceBrokerWrapper.SendInternal(IDbTransaction transaction, Guid conversationHandle, String messageType, Byte[] body)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.WaitAndReceiveIDbTransactionStringGuidInt32">
+            <summary>Sets the shim of ServiceBrokerWrapper.WaitAndReceive(IDbTransaction transaction, String queueName, Guid conversationHandle, Int32 waitTimeout)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Events.Fakes.ShimServiceBrokerWrapper.WaitAndReceiveIDbTransactionStringInt32">
+            <summary>Sets the shim of ServiceBrokerWrapper.WaitAndReceive(IDbTransaction transaction, String queueName, Int32 waitTimeout)</summary>
+        </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimIQueryableExtensions">
             <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Extensions.IQueryableExtensions</summary>
         </member>
@@ -2218,6 +2416,39 @@
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubRepository`1.InstanceObserver">
             <summary>Gets or sets the instance observer.</summary>
         </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Services.ServiceBrokerMessagePublisher</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.#ctor(LightstoneApp.Infrastructure.Data.Core.Services.ServiceBrokerMessagePublisher)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.Bind(LightstoneApp.Infrastructure.CrossCutting.NetFramework.IMessagePublisher)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.Constructor">
+            <summary>Sets the shim of ServiceBrokerMessagePublisher.ServiceBrokerMessagePublisher()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.PublishIApplicationEvent">
+            <summary>Sets the shim of ServiceBrokerMessagePublisher.Publish(IApplicationEvent applicationEvent)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher.AllInstances.PublishIApplicationEvent">
+            <summary>Sets the shim of ServiceBrokerMessagePublisher.Publish(IApplicationEvent applicationEvent)</summary>
+        </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubICommitDispatchScheduler">
             <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Services.ICommitDispatchScheduler</summary>
         </member>
@@ -2289,6 +2520,24 @@
         </member>
         <member name="F:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubIRepositoryFactory.OpenSession">
             <summary>Sets the stub of IRepositoryFactory.OpenSession()</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubServiceBrokerMessagePublisher">
+            <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Services.ServiceBrokerMessagePublisher</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubServiceBrokerMessagePublisher.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubServiceBrokerMessagePublisher.InitializeStub">
+            <summary>Initializes a new instance of type StubServiceBrokerMessagePublisher</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubServiceBrokerMessagePublisher.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubServiceBrokerMessagePublisher.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.StubServiceBrokerMessagePublisher.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
         </member>
     </members>
 </doc>
