@@ -55,24 +55,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\Abstract.cs" />
     <Compile Include="DataSource.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="DateField.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
-    <Compile Include="Events\Events\PackageCreatedEvent.cs" />
+    <Compile Include="Events\PackageCreatedEvent.cs" />
     <Compile Include="FileAttachment.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
+    <Compile Include="IHasPackageBuilderContext.cs" />
+    <Compile Include="Implementation.cs" />
     <Compile Include="Industry.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
+    <Compile Include="IPackageBuilderContext.cs" />
     <Compile Include="Owner.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="Package.cs">
       <DependentUpon>PackageModuleContext.Types.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PackageBuilderModel._ORMCustomToolReport.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
     </Compile>
     <Compile Include="PackageModuleContext.Types.cs">
       <AutoGen>True</AutoGen>
@@ -95,7 +103,7 @@
     </None>
     <None Include="PackageBuilderModel.orm">
       <Generator>ORMCustomTool</Generator>
-      <CustomToolNamespace>LightstoneApp.Domain.PackageBuilderModule</CustomToolNamespace>
+      <CustomToolNamespace>LightstoneApp.Domain.PackageBuilderModule.Entities</CustomToolNamespace>
       <LastGenOutput>PackageBuilderModel._ORMCustomToolReport.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />

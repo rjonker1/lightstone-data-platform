@@ -1,7 +1,7 @@
 ﻿using System;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events.Events
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events
 {
     public class PackageCreatedEvent : DomainEvent
     {

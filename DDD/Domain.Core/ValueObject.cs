@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -9,6 +10,8 @@ namespace LightstoneApp.Domain.Core
     /// The base class for DDD ValueObject 
     /// </summary>
     /// <typeparam name="TValueObject"></typeparam>
+    [Serializable]
+    [ImmutableObject(true)]
     public abstract class ValueObject<TValueObject> : IEquatable<TValueObject> where TValueObject : ValueObject<TValueObject>
     {
         #region IEquatable and Override Equals operators
@@ -105,11 +108,23 @@ namespace LightstoneApp.Domain.Core
             return fields;
         }
 
-        public static bool operator ==(ValueObject<TValueObject> left, ValueObject<TValueObject> right)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator == (ValueObject<TValueObject> left, ValueObject<TValueObject> right)
         {
             return Equals(left, null) ? (Equals(right, null)) : left.Equals(right);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static bool operator !=(ValueObject<TValueObject> left, ValueObject<TValueObject> right)
         {
             return !(left == right);

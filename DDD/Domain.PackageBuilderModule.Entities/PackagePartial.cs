@@ -1,4 +1,4 @@
-﻿using LightstoneApp.Domain.PackageBuilderModule.Entities.Events.Events;
+﻿using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities

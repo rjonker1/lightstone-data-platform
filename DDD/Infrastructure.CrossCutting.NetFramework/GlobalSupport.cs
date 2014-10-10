@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 
 #region Global Support Classes
 
@@ -1220,7 +1219,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 
     namespace ComponentModel
     {
-        [HostProtection(SecurityAction.LinkDemand, SharedState = true)]
+        //[HostProtection(SecurityAction.LinkDemand, SharedState = true)]
         public static class EventHandlerUtility
         {
             public static bool InvokeCancelableEventHandler<TEventArgs>(EventHandler<TEventArgs> cancelableEventHandler,
@@ -1296,7 +1295,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         }
 
         [Serializable]
-        [HostProtection(SecurityAction.LinkDemand, SharedState = true)]
+        //[HostProtection(SecurityAction.LinkDemand, SharedState = true)]
         [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
         public class PropertyChangingEventArgs<TClass, TProperty> : CancelEventArgs,
             IPropertyChangeEventArgs<TClass, TProperty>
@@ -1345,7 +1344,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         }
 
         [Serializable]
-        [HostProtection(SecurityAction.LinkDemand, SharedState = true)]
+        //[HostProtection(SecurityAction.LinkDemand, SharedState = true)]
         [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
         public class PropertyChangedEventArgs<TClass, TProperty> : PropertyChangedEventArgs,
             IPropertyChangeEventArgs<TClass, TProperty>
