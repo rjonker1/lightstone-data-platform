@@ -44,6 +44,7 @@ namespace PackageBuilder.Api.Modules
 
                     dSource.Id = provider.DataProviderId;
                     dSource.Name = provider.Name;
+                    dSource.Description = provider.Description;
                     dSource.Owner = provider.Owner;
                     dSource.Created = provider.Created;
                     dSource.Edited = provider.Edited;
@@ -70,7 +71,7 @@ namespace PackageBuilder.Api.Modules
             {
                 Guid ProviderId = Guid.NewGuid();
 
-                bus.Publish(new CreateDataProvider(ProviderId, "Ivid", typeof(IvidResponse)));
+                bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse)));
 
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
@@ -97,7 +98,7 @@ namespace PackageBuilder.Api.Modules
 
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
 
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto),   dFields ));
+                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto),   dFields ));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
             };

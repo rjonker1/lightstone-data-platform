@@ -26,6 +26,7 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
                 Id = id,
                 DataProviderId = command.DataProvierId,
                 Name = command.Name,
+                Description = command.Description,
                 Version = command.Version,
                 Created = command.Created,
                 Edited = command.Edited

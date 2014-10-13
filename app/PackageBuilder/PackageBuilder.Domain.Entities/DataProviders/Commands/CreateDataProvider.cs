@@ -7,12 +7,14 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
     {
         public Guid Id { get; private set; }
         public readonly string Name;
+        public readonly string Description;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(Guid id, string name, Type dataProviderType)
+        public CreateDataProvider(Guid id, string name, string description, Type dataProviderType)
         {
             Id = id;
             Name = name;
+            Description = description;
             DataProviderType = dataProviderType;
         }
     }

@@ -35,15 +35,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, string name, Type responseType) 
+        public DataProvider(Guid id, string name, string description, Type responseType) 
             : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, name, responseType, PopulateDataFields(responseType)));
+            RaiseEvent(new DataProviderCreated(id, name, description, responseType, PopulateDataFields(responseType)));
         }
 
-        public void CreateDataProviderRevision(Guid id, string name, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, string name, string description, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable<IDataField> dataFields)
         {
-            RaiseEvent(new DataProviderUpdated(id, name, owner, created, edited, version, responseType, dataFields));
+            RaiseEvent(new DataProviderUpdated(id, name, description, owner, created, edited, version, responseType, dataFields));
         }
         
         public void ChangeName(string newName)

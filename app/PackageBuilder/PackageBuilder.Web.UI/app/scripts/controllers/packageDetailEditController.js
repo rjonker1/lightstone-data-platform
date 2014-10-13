@@ -96,6 +96,8 @@ angular.module('packageBuilderwebuiApp')
 
                         for(var field in provFields) {
 
+                          //temp
+                          //provFields[field].type = true
 
                           if(provFields[field].name == fieldName) {
 

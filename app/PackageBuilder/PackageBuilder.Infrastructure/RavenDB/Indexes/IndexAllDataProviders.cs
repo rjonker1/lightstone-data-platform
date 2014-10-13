@@ -21,6 +21,7 @@ namespace PackageBuilder.Infrastructure.RavenDB.Indexes
 
                     Id = dataProvider.Id,
                     Name = dataProvider.Name,
+                    Description = dataProvider.Description,
                     Version = dataProvider.Version
 
                 };

@@ -24,7 +24,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Type = type;
         }
 
-        public DataField(string name, string label, string definition, string industries, double price, bool isSelected, Type type)
+        public DataField(string name, string label, string definition, string industries, double price, bool isSelected)//, Type type)
         {
             Name = name;
             Label = label;
@@ -32,7 +32,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Industries = industries;
             Price = price;
             IsSelected = isSelected;
-            Type = type;
+            //Type = type;
         }
     }
 }

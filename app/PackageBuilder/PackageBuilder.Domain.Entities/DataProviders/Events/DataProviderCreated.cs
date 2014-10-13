@@ -8,6 +8,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
     public class DataProviderCreated : DomainEvent
     {
 		public readonly string Name;
+		public readonly string Description;
         public readonly Type ResponseType;
         public readonly string State;
         public readonly double CostOfSale;
@@ -16,10 +17,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public readonly string Owner;
         public readonly string SourceURL;
         public readonly IEnumerable<IDataField> DataFields;
-        public DataProviderCreated(Guid id, string name, Type responseType, IEnumerable<IDataField> dataFields)
+        public DataProviderCreated(Guid id, string name, string description, Type responseType, IEnumerable<IDataField> dataFields)
         {
 			Id = id;
 			Name = name;
+            Description = description;
             ResponseType = responseType;
             State = null;
             CostOfSale = 0.00;

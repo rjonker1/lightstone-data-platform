@@ -2,8 +2,6 @@
 
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
-{{dataProvider}}
-
 <h2>Data Source Detail</h2>
     <button type="button" ng-click="createProvider(dataProvider)">Save</button>
 
@@ -21,7 +19,7 @@
                 <label>Description</label>
             </div>
             <div>
-                <textarea class="form-control" style="resize: none;" rows="6" cols="50" ></textarea>
+                <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvider.description"></textarea>
             </div>
         </div>
     </div>
