@@ -16,7 +16,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
         public class Factory
         {
-            public Package CreatePackage(string name, int version)
+            public Package CreatePackage(string name, string version)
             {
                 var package = new Package
                 {
