@@ -173,10 +173,12 @@
     <Compile Include="Helpers\AutoMaps\ICreateAutoMap.cs" />
     <Compile Include="Helpers\AutoMaps\PackageMap.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
+    <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
     <Compile Include="Installers\NEventStoreInstaller.cs" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RavenDbInstaller.cs" />
+    <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\PackageModule.cs" />

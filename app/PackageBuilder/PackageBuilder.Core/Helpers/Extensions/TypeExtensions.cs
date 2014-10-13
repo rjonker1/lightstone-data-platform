@@ -188,7 +188,7 @@ namespace PackageBuilder.Core.Helpers.Extensions
             return (Type)null;
         }
 
-        public static IEnumerable<Type> FindDerivedTypesFromAssembly(this Assembly assembly, Type baseType, bool classOnly)
+        public static IEnumerable<Type> FindDerivedTypesFromAssembly(this Assembly assembly, Type baseType, bool classOnly, bool includeAbstractClasses)
         {
             if (assembly == null)
                 throw new ArgumentNullException("assembly", "Assembly must be defined");
@@ -205,6 +205,9 @@ namespace PackageBuilder.Core.Helpers.Extensions
                 // if classOnly, it must be a class
                 // useful when you want to create instance
                 if (classOnly && !type.IsClass)
+                    continue;
+
+                if (!includeAbstractClasses && type.IsAbstract)
                     continue;
 
                 if (baseType.IsInterface)

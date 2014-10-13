@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9159E838-9B9F-4C0D-AC52-5253329CF8E2}</ProjectGuid>
+    <ProjectGuid>{A18EB72E-1814-45F4-A536-DE2350F39162}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PackageBuilder.Api.Tests</RootNamespace>
-    <AssemblyName>PackageBuilder.Api.Tests</AssemblyName>
+    <RootNamespace>PackageBuilder.Domain.Tests</RootNamespace>
+    <AssemblyName>PackageBuilder.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -44,16 +44,16 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
+      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\PackageBuilder.Domain\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="MemBus, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1408.0717\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="NEventStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -71,17 +71,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMappers\when_creating_maps.cs" />
-    <Compile Include="Installers\when_installing_a_bus.cs" />
-    <Compile Include="Installers\when_installing_command_handlers.cs" />
-    <Compile Include="Installers\when_installing_nventstore_dependency.cs" />
+    <Compile Include="CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
+    <Compile Include="CommandHandlers\Packages\when_creating_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Api\PackageBuilder.Api.csproj">
-      <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
-      <Name>PackageBuilder.Api</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
@@ -94,15 +91,10 @@
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="..\PackageBuilder.Api\ConnectionStrings.config">
-      <Link>ConnectionStrings.config</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

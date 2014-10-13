@@ -17,9 +17,5 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Type = type;
             Value = null;
         }
-
-        public IDataProvider DataProvider { get; set; }
-
-        public Guid Id { get; set; }
     }
 }
