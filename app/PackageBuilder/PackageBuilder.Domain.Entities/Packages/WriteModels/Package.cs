@@ -9,11 +9,11 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
     public class Package : AggregateBase, IPackage
     {
         public string Name { get; private set; }
-        public IAction Action { get; set; }
+        public IAction Action { get; private set; }
         public IEnumerable<IDataProvider> DataProviders { get; private set; }
-        public IEnumerable<IWorkflow> Workflows { get; set; }
+        public IEnumerable<IWorkflow> Workflows { get; private set; }
 
-        public Package(Guid Id)
+        private Package(Guid id)
         {
         }
 

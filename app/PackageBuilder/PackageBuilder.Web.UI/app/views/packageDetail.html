@@ -19,6 +19,8 @@
       
     </script>
 
+    {{dataProvsPkg}}
+
     <h3>Package Detail</h3>
 
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>

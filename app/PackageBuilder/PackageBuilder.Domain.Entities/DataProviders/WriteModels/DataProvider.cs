@@ -27,8 +27,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Id = id;
         }
 
-        public DataProvider() { }
-
         public DataProvider(Guid id, string name, IEnumerable<IDataField> dataFields) 
             : this(id)
         {

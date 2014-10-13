@@ -10,6 +10,6 @@ namespace PackageBuilder.Domain.Dtos
         public string Definition { get; set; }
         public string Industries { get; set; }
         public double Price { get; set; }
-        public bool IsSelected { get; set; }
+        public bool? IsSelected { get; set; }
     }
 }

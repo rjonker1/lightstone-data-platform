@@ -56,12 +56,11 @@ angular.module('packageBuilderwebuiApp')
         data: 'dSourcesData',
         selectedItems: $scope.selectedDatasource,
         multiSelect: false,
-        enablePaging: true,
         enableFiltering: true,
         showFilter: true,
         showGroupPanel: true,
         columnDefs: [
-            {field: 'name', displayName: 'Name'},
+            {field: 'name', displayName: 'Name', filter: { term: ''} },
             {field: 'description', displayName: 'Description'},
             {field: 'owner', displayName: 'Owner'},
             {field: 'created', displayName: 'Created'},

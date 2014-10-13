@@ -40,6 +40,10 @@ angular
         templateUrl: 'views/packageDetail.html',
         controller: 'packageDetailCtrl'
       })
+      .when('/package-detail/:id/:version', {
+        templateUrl: 'views/packageDetail.html',
+        controller: 'packageDetailEditCtrl'
+      })
       .when('/packages', {
         templateUrl: 'views/packages.html',
         controller: 'packagesCtrl'

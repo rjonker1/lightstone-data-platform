@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('packageBuilderwebuiApp')
-  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviderSources', 'PostPackage', function ($scope, $http, GetDataProviderSources, PostPackage) {
+  .controller('packageDetailEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$route','GetPackageDetails', 'PostPackage', function ($scope, $rootScope, $routeParams, $route, GetPackageDetails, PostPackage) {
 
     //MOCK
     /*$http({
@@ -17,10 +17,9 @@ angular.module('packageBuilderwebuiApp')
         });*/
 
         $scope.dataProvsPkg = {}; 
-        $scope.dataProvsPkg.Package = {};
-        $scope.dataProvsPkg.Package.DataProviders = [];
+        
 
-        GetDataProviderSources.query(function(data){
+        GetPackageDetails.query({ id: $routeParams.id, version: $routeParams.version }, function(data){
 
            var resp = data.response;
               
@@ -29,7 +28,7 @@ angular.module('packageBuilderwebuiApp')
 
                   if (resp.hasOwnProperty(res)) {
                                                                   
-                      $scope.dataProvsPkg.Package.DataProviders = resp;
+                      $scope.dataProvsPkg.Package = resp;
                       $scope.message = "Data Loaded."
                   }
               }
@@ -79,10 +78,11 @@ angular.module('packageBuilderwebuiApp')
 
         $scope.updateAPIModel = function(providers, fieldName) {
 
+          $scope.test = fieldName;
 
-          for (var providers in $scope.dataProvsPkg.Package){
+          for (var providers in $scope.dataProvsPkg){
 
-            var provider = $scope.dataProvsPkg.Package[providers];
+            var provider = $scope.dataProvsPkg[providers];
 
             for(var i = 0; i < provider.length; i++) {
 
@@ -99,7 +99,7 @@ angular.module('packageBuilderwebuiApp')
 
                           if(provFields[field].name == fieldName) {
 
-                            if(provFields[field].isSelected == false || provFields[field].isSelected == null) {
+                            if(provFields[field].isSelected == false) {
 
                               provFields[field].isSelected = true
                             } else {
