@@ -99,7 +99,7 @@ angular.module('packageBuilderwebuiApp')
 
                           if(provFields[field].name == fieldName) {
 
-                            if(provFields[field].isSelected == false || provFields[field].isSelected == null) {
+                            if(provFields[field].isSelected == false) {
 
                               provFields[field].isSelected = true
                             } else {

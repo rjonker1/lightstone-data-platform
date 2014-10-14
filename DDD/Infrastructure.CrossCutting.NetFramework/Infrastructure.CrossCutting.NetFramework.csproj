@@ -49,9 +49,21 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="LightstoneApp.Domain.Core">
+      <HintPath>..\Domain.Core\bin\Debug\LightstoneApp.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LightstoneApp.Infrastructure.CrossCutting.IoC">
+      <HintPath>..\Presentation.Web.Mvc.Client\Bin\LightstoneApp.Infrastructure.CrossCutting.IoC.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -71,18 +83,38 @@
     <Compile Include="Adapter\ITypeAdapterFactory.cs" />
     <Compile Include="Adapter\TypeAdapterFactory.cs" />
     <Compile Include="Aggregate.cs" />
+    <Compile Include="BlobStorage\IBlobStorage.cs" />
+    <Compile Include="ConcurrencyException.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="CustomQuery.cs" />
+    <Compile Include="Database\IAggregateRoot.cs" />
+    <Compile Include="Database\IDataContext.cs" />
     <Compile Include="DomainEvent.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="EntityNotFoundException.cs" />
+    <Compile Include="EventSourcing\EventSourced.cs" />
+    <Compile Include="EventSourcing\IEventSourced.cs" />
+    <Compile Include="EventSourcing\IEventSourcedRepository.cs" />
+    <Compile Include="EventSourcing\IMementoOriginator.cs" />
+    <Compile Include="EventSourcing\IVersionedEvent.cs" />
+    <Compile Include="EventSourcing\VersionedEvent.cs" />
+    <Compile Include="ExpressionCombiner.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionBuilder.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionSerializationTypeResolver.cs" />
     <Compile Include="ExpressionTreeSerialization\ExpressionSerializer.cs" />
+    <Compile Include="GlobalSupport.cs" />
     <Compile Include="IAggregate.cs" />
+    <Compile Include="IApplicationEvent.cs" />
+    <Compile Include="IBus.cs" />
     <Compile Include="IdentityGenerator.cs" />
     <Compile Include="IDomainEvent.cs" />
+    <Compile Include="IHandle.cs" />
+    <Compile Include="IHandleMessages.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IMessagePublisher.cs" />
+    <Compile Include="IMetadataProvider.cs" />
     <Compile Include="IOperationContextManager.cs" />
+    <Compile Include="IProcessor.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ITraceManager.cs" />
@@ -90,17 +122,43 @@
     <Compile Include="Logging\TraceManager.cs" />
     <Compile Include="Logging\TraceSourceLog.cs" />
     <Compile Include="Logging\TraceSourceLogFactory.cs" />
+    <Compile Include="MessageLog\EventLogExtensions.cs" />
+    <Compile Include="MessageLog\IEventLogReader.cs" />
+    <Compile Include="MessageLog\QueryCriteria.cs" />
+    <Compile Include="Messaging\CommandBusExtensions.cs" />
+    <Compile Include="Messaging\Envelope.cs" />
+    <Compile Include="Messaging\EventBusExtensions.cs" />
+    <Compile Include="Messaging\Handling\EventDispatcher.cs" />
+    <Compile Include="Messaging\Handling\ICommandHandler.cs" />
+    <Compile Include="Messaging\Handling\ICommandHandlerRegistry.cs" />
+    <Compile Include="Messaging\Handling\IEventHandler.cs" />
+    <Compile Include="Messaging\Handling\IEventHandlerRegistry.cs" />
+    <Compile Include="Messaging\ICommand.cs" />
+    <Compile Include="Messaging\ICommandBus.cs" />
+    <Compile Include="Messaging\IEvent.cs" />
+    <Compile Include="Messaging\IEventBus.cs" />
+    <Compile Include="Messaging\IEventPublisher.cs" />
+    <Compile Include="Messaging\IMessageSessionProvider.cs" />
     <Compile Include="PagedCollection.cs" />
     <Compile Include="PermissionRequiredAttribute.cs" />
+    <Compile Include="Processes\IProcessManager.cs" />
+    <Compile Include="Processes\IProcessManagerDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Serialization\ITextSerializer.cs" />
+    <Compile Include="Serialization\JsonTextSerializer.cs" />
     <Compile Include="Serialization\SampleXContainerConverter.cs" />
+    <Compile Include="Serialization\TextSerializerExtensions.cs" />
     <Compile Include="Session.cs" />
+    <Compile Include="StandardMetadata.cs" />
+    <Compile Include="StandardMetadataProvider.cs" />
+    <Compile Include="Tasks\TimerTaskFactory.cs" />
     <Compile Include="TypeCheck.cs" />
+    <Compile Include="Utils\GuidUtil.cs" />
     <Compile Include="Validator\DataAnnotationsEntityValidator.cs" />
     <Compile Include="Validator\DataAnnotationsEntityValidatorFactory.cs" />
     <Compile Include="Validator\EntityValidatorFactory.cs" />

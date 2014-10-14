@@ -15,6 +15,8 @@ namespace LightstoneApp.Infrastructure.Data.Core.Security.Events
         {
             FullName = fullName;
             Username = username;
+
+            
         }
 
         public string Username { get; private set; }

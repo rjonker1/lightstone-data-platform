@@ -8,7 +8,7 @@
  * Controller of the packageBuilderwebuiApp
  */
 angular.module('packageBuilderwebuiApp')
-  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$scope', 'GetDataProvider', 'PostDataProvider', function ($rootScope, $routeParams, $route, $scope, GetDataProvider, PostDataProvider) {
+  .controller('dsDetailCtrl', ['$rootScope', '$routeParams', '$route', '$location', '$scope', 'GetDataProvider', 'PostDataProvider', function ($rootScope, $routeParams, $location, $route, $scope, GetDataProvider, PostDataProvider) {
     
 
     $scope.dataProvider = {};

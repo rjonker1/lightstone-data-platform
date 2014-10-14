@@ -102,7 +102,7 @@
     <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataSetMother.cs" />
-    <Compile Include="Mothers\DataSourceMother.cs" />
+    <Compile Include="Mothers\DataProviderMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
     <Compile Include="Mothers\UserMother.cs" />

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('packageBuilderwebuiApp')
-  .controller('packagesCtrl', ['$scope', '$location', '$filter', 'GetPackages', 'ngTableParams', function ($scope, $location, $filter, GetPackages, ngTableParams) {
+  .controller('packagesCtrl', ['$scope', '$filter', 'GetPackages', 'ngTableParams', function ($scope, $filter, GetPackages, ngTableParams) {
 
  
   	GetPackages.query(function(data){
@@ -31,12 +31,6 @@ angular.module('packageBuilderwebuiApp')
         ];
 
     }); 
-
-
-$scope.navigate = function(row) {
-
-        $location.path('/package-detail/'+row.entity.dataProviderId+'/'+row.entity.version);
-    }
     
 
 $scope.selectedDatasource = [];
@@ -56,7 +50,7 @@ $scope.selectedDatasource = [];
             {field: 'created', displayName: 'Created'},
             {field: 'edited', displayName: 'Edited'},
             {field: 'version', displayName: 'Version'},
-            {displayName: '', cellTemplate: '<input type="button" name="edit" ng-click="navigate(row)" value="Edit" />'}
+            {displayName: '', cellTemplate: '<input type="button" name="edit" ng-click="notify(row)" value="Edit" />'}
         ]
     };
 

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Guard.cs" />
     <Compile Include="IExtendedRepository.cs" />
     <Compile Include="Seedwork\IRepository.cs" />
     <Compile Include="Seedwork\IUnitOfWork.cs" />

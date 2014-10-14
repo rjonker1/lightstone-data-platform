@@ -273,7 +273,6 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Security\PackageBuilder.sql" />
-    <Build Include="Security\PackageBuilderModel.sql" />
     <Build Include="PackageBuilder\Tables\Package.sql" />
     <Build Include="PackageBuilder\Tables\Owner.sql" />
     <Build Include="PackageBuilder\Tables\State.sql" />
@@ -281,6 +280,9 @@
     <Build Include="PackageBuilder\Tables\DataSource.sql" />
     <Build Include="PackageBuilder\Tables\DateField.sql" />
     <Build Include="PackageBuilder\Tables\FileAttachment.sql" />
+    <Build Include="Security\NT AUTHORITY_NETWORK SERVICE.sql" />
+    <Build Include="Scripts\Pre-Deployment\AddNetworkServiceUser.sql" />
+    <Build Include="Scripts\Pre-Deployment\CreateDatabaseObjects.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data Generation Plans\IntegrationDataGenPlan.dgen">

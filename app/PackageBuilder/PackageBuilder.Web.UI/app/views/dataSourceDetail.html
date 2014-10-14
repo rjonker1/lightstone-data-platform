@@ -2,6 +2,8 @@
 
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
+{{dataProvider}}
+
 <h2>Data Source Detail</h2>
     <button type="button" ng-click="createProvider(dataProvider)">Save</button>
 

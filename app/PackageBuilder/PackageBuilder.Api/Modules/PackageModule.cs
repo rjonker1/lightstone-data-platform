@@ -7,12 +7,10 @@ using FluentNHibernate.Testing.Values;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
-using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.Infrastructure.RavenDB.Indexes;
 using Raven.Client;
 
@@ -20,20 +18,13 @@ namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
-        public PackageModule(IBus bus, INEventStoreRepository<Package> repository, IDocumentSession session)
+        public PackageModule(IBus bus, IDocumentSession session)
         {
             Get["/Packages"] = parameters =>
             {
                 var res = session.Query<ReadPackage, IndexAllPackages>().ToList();
 
                 return Response.AsJson(new {Response = res});
-            };
-
-            Get["/Package/Get/{id}/{version}"] = parameters =>
-            {
-
-                var dataProviders = repository.GetById(parameters.id, parameters.version);
-                return Response.AsJson(new { Response = dataProviders });
             };
 
             Get["/Package/Add"] = parameters =>
@@ -52,9 +43,9 @@ namespace PackageBuilder.Api.Modules
                     }
                 };
 
-                var dp = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
+                var dp = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviders.First());
 
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dp));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, new []{dp}));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -64,9 +55,9 @@ namespace PackageBuilder.Api.Modules
 
                 PackageDto dto = this.Bind<PackageDto>();
 
-                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
+                var dProviders = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviders.First());
 
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dProviders ));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, new[]{dProviders} ));
 
                 return Response.AsJson(new { msg = "Success" });
             };

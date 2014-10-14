@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
 using LightstoneApp.Infrastructure.Data.Core.Commits;
 using Raven.Abstractions.Exceptions;
 using Raven.Client;
@@ -17,9 +18,10 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
         private readonly Commit.Factory commitFactory;
         private readonly IOperationContextManager contextManager;
         private readonly IDocumentStore store;
+        private readonly ILoggerFactory loggerFactory;
 
         public RepositoryFactory(IOperationContextManager contextManager, IDocumentStore store,
-            ICommitDispatchScheduler commitDispatcher, Commit.Factory commitFactory)
+            ICommitDispatchScheduler commitDispatcher, Commit.Factory commitFactory, ILoggerFactory loggerFactory)
         {
             Ensure.That(contextManager).Named(() => contextManager).IsNotNull();
             Ensure.That(store).Named(() => store).IsNotNull();
@@ -30,6 +32,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
             this.store = store;
             this.commitDispatcher = commitDispatcher;
             this.commitFactory = commitFactory;
+            this.loggerFactory = loggerFactory;
         }
 
         public IRepository OpenSession()
@@ -38,7 +41,8 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
                 contextManager,
                 store.OpenSession(),
                 commitDispatcher,
-                commitFactory);
+                commitFactory,
+                loggerFactory);
         }
 
         private class Repository : IRepository
@@ -49,9 +53,9 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
             private readonly IOperationContextManager contextManager;
             private readonly IDocumentSession session;
             private readonly Guid txId;
+            private readonly ILogger Ilogger ;
 
-            public Repository(IOperationContextManager contextManager, IDocumentSession session,
-                ICommitDispatchScheduler commitDispatchScheduler, Commit.Factory commitFactory)
+            public Repository(IOperationContextManager contextManager, IDocumentSession session, ICommitDispatchScheduler commitDispatchScheduler, Commit.Factory commitFactory, ILoggerFactory loggerFactory)
             {
                 Ensure.That(contextManager).Named(() => contextManager).IsNotNull();
                 Ensure.That(session).Named(() => session).IsNotNull();
@@ -65,6 +69,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
                 this.session.Advanced.UseOptimisticConcurrency = true;
                 this.commitDispatchScheduler = commitDispatchScheduler;
                 this.commitFactory = commitFactory;
+                this.Ilogger = loggerFactory.Create();
             }
 
             public void Dispose()
@@ -120,9 +125,10 @@ namespace LightstoneApp.Infrastructure.Data.Core.Services
 
                     commitDispatchScheduler.ScheduleDispatch(commits);
                 }
-                catch (ConcurrencyException cex)
+                catch (LightstoneApp.Infrastructure.CrossCutting.NetFramework.ConcurrencyException cex)
                 {
-                    //TODO: log
+                    // log
+                    Ilogger.Error("ConcurrencyException", cex,null);
                     throw;
                 }
             }

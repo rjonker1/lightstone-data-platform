@@ -1,47 +1,49 @@
 ﻿using System;
-using System.Windows.Input;
+using LightstoneApp.Domain.Core;
 using LightstoneApp.Domain.PackageBuilderModule.Entities;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Commands
 {
-    public class CreateNewPackageCommand : ICommand
+    public class CreateNewPackageCommand : ValueObject<CreateNewPackageCommand>, ICommand, IDomainEvent, IMessageSessionProvider
     {
-        public string Name { get; private set; }
-        public int Version { get; private set; }
+        private readonly Guid _iCommandId;
 
-        public bool CanExecute(object parameter)
+        public CreateNewPackageCommand()
         {
-            var package = parameter as Package;
+            _iCommandId = GuidUtil.NewSequentialId();
 
-            if (package != null)
-            {
-                // TODO: validate the command
-
-                if (string.IsNullOrEmpty(package.Name))
-                    return false;
-
-
-                if (package.DataSources == null)
-                    return false;
-
-                Name = package.Name;
-                Version = package.Version;
-
-                return true;
-            }
-
-            return false;
+            Id = _iCommandId.ToString();
         }
 
-        public void Execute(object parameter)
+        public CreateNewPackageCommand(Package package) : this()
         {
-            var package = parameter as Package;
-            if (package != null)
-            {
-                // 
-            }
+            NewPackage = package.Clone<Package>();
         }
 
-        public event EventHandler CanExecuteChanged;
+        public Package NewPackage { get; private set; }
+
+
+        public string Id { get; private set; }
+
+        public string AggregateId { get; private set; }
+        public int AggregateVersion { get; private set; }
+        public DateTimeOffset OccurredAt { get; private set; }
+        string IMessageSessionProvider.SessionId
+        {
+            get { return this.SessionId; }
+        }
+
+        protected string SessionId
+        {
+            get { return "CreateNewPackage_" + NewPackage.PackageId; }
+        }
+
+        Guid ICommand.Id
+        {
+            get { return _iCommandId; }
+        }
     }
 }

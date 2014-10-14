@@ -23,6 +23,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Name = name;
             Type = type;
         }
+<<<<<<< HEAD
 
         public DataField(string name, string label, string definition, string industries, double price, bool isSelected)//, Type type)
         {
@@ -34,5 +35,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             IsSelected = isSelected;
             //Type = type;
         }
+=======
+>>>>>>> origin/MVP
     }
 }

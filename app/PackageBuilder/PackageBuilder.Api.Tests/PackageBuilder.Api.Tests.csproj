@@ -44,6 +44,18 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PackageBuilder.Domain\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="MemBus, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMappers\when_creating_maps.cs" />
+    <Compile Include="Installers\when_installing_a_bus.cs" />
+    <Compile Include="Installers\when_installing_command_handlers.cs" />
+    <Compile Include="Installers\when_installing_nventstore_dependency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +82,25 @@
       <Project>{f82044a3-e321-49f4-91bd-878561fe54b7}</Project>
       <Name>PackageBuilder.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
+      <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
+      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
+      <Name>PackageBuilder.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
+      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
+      <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="..\PackageBuilder.Api\ConnectionStrings.config">
+      <Link>ConnectionStrings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

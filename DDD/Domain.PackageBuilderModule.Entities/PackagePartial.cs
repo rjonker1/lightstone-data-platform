@@ -7,14 +7,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
     {
         private Package SetupCompleted()
         {
-            RaiseEvent(new PackageCreated(Id.ToString(), Name, Version));
+            var packageCreatedEvent = new PackageCreatedEvent(this);
+
+            RaiseEvent(packageCreatedEvent);
 
             return this;
         }
 
         public class Factory
         {
-            public Package CreatePackage(string name, int version)
+            public Package CreatePackage(string name, string version)
             {
                 var package = new Package
                 {
@@ -26,6 +28,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 
                 package = package.SetupCompleted();
 
+                return package;
+            }
+
+            public Package CreatePackage(Package newPackage)
+            {
+                var package = newPackage.SetupCompleted();
                 return package;
             }
         }

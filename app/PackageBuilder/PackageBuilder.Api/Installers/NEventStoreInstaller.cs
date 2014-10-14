@@ -36,10 +36,6 @@ namespace PackageBuilder.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IBus>().Instance(BusSetup.StartWith<Conservative>()
-                                                                      .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
-                                                                      .SetHandlerInterface(typeof(IHandleMessages<>)))
-                                                                      .Construct()));
             container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>());
 
             var eventStore = Wireup.Init()
