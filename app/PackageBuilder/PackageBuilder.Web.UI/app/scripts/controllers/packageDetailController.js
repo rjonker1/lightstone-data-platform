@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('packageBuilderwebuiApp')
-  .controller('packageDetailCtrl', [ '$scope', '$http','GetDataProviderSources', 'PostPackage', function ($scope, $http, GetDataProviderSources, PostPackage) {
+  .controller('packageDetailCtrl', [ '$scope', '$parse', '$http','GetDataProviderSources', 'PostPackage', function ($scope, $parse, $http, GetDataProviderSources, PostPackage) {
 
     //MOCK
-    /*$http({
+    $http({
         method: 'GET',
         url: '/DataProviders.json'
         }).success(function(data, status, headers, config) {
@@ -14,9 +14,9 @@ angular.module('packageBuilderwebuiApp')
         }).error(function(data, status, headers, config) {
           
          
-        });*/
+        });
 
-        $scope.dataProvsPkg = {}; 
+        /*$scope.dataProvsPkg = {}; 
         $scope.dataProvsPkg.Package = {};
         $scope.dataProvsPkg.Package.DataProviders = [];
 
@@ -46,12 +46,12 @@ angular.module('packageBuilderwebuiApp')
                 { type: 'danger', msg: 'Failed to communicate with webserver !' }
             ];
 
-        }); 
+        }); */
 
 
         $scope.createPackage = function(packageData) {
 
-          $scope.message = "Saving data..."
+          $scope.message = 'Saving data...';
 
           PostPackage.save({}, packageData, function(data) {
 
@@ -72,104 +72,161 @@ angular.module('packageBuilderwebuiApp')
         }
 
 
-        $scope.dataPros = {};
-        $scope.dataPros.prods = {};
-        $scope.dataPros.prods.prod = {};
+        $scope.dataProvs = {};
+        $scope.dataProvs.provs = {};
+        $scope.dataProvs.provs.prov = {};
         $scope.sum = 0;
 
-        $scope.updateAPIModel = function(providers, fieldName) {
+
+    $scope.updatePackageAPIModel = function(providers, fieldName) {
 
 
-          for (var providers in $scope.dataProvsPkg.Package){
+      for (var provs in $scope.dataProvsPkg.Package){
 
-            var provider = $scope.dataProvsPkg.Package[providers];
+        var provider = $scope.dataProvsPkg.Package[provs];
 
-            for(var i = 0; i < provider.length; i++) {
+        for(var i = 0; i < provider.length; i++) {
 
-              for(var p in provider) {
-
-                if(provider.hasOwnProperty(p)) {
-
-                        var provFields = provider[p].dataFields; //Fields container for DataProvider
-
-                        $scope.test = provFields;
-
-                        for(var field in provFields) {
+          for(var p in provider) {
 
 
-                          if(provFields[field].name == fieldName) {
+            if(provider.hasOwnProperty(p)) {
 
-                            if(provFields[field].isSelected == false) {
+              var provFields = provider[p].dataFields; //Fields container for DataProvider
 
-                              provFields[field].isSelected = true
-                            } else {
 
-                              provFields[field].isSelected = false;
-                            }
-                          }
+              for(var field in provFields) {
 
-                        }
-                      }
 
-                    } //End for-loop provider
+                if(provFields[field].name == fieldName) {
 
+                  if(provFields[field].isSelected == false) {
+
+                    provFields[field].isSelected = true
+                  } else {
+
+                    provFields[field].isSelected = false;
                   }
-
                 }
+
               }
+            }
 
-       
-        $scope.findProvFieldByName = function (providers, fieldName) {
-                for(var prov in providers){    /*{}*/
+          } //End for-loop provider
 
-                    if (providers.hasOwnProperty(prov)) {
-                          
-                        var attr = providers[prov];
-                        
-                        for (var i = 0; i < attr.length; i++) {        /*[]*/
-                                                                                                                   
-                                var dps = attr[i].dataFields;   //Fields container for DataProvider
-                               
-                                for (var x = 0; x < dps.length; x++) {
-                                    
-
-                                     if (dps[x].name == fieldName) {
-                                    
-                                          return dps[x];
-                                      } 
-                                      /*return null;*/    
-                                }
-
-                        }
-                     }
-                                  
-              }
         }
 
+      }
+    }
+
+
+    $scope.updateDataProvs = function(fieldName) {
+
         
-        
-        $scope.$watch('dataPros', function (newValue, oldValue) {
+        for (var providers in $scope.dataProvsPkg.Package){
+
+        var provider = $scope.dataProvsPkg.Package[providers];
+
+        for(var i = 0; i < provider.length; i++) {
+
+          for(var p in provider) {
+
+            if(provider.hasOwnProperty(p)) {
+
+              var provFields = provider[p].dataFields; //Fields container for DataProvider
+
+              for(var field in provFields) {
+
+                 
+                if(provFields[field].isSelected == true && provFields[field].name == fieldName) {
+
+                   // When we parse an AngularJS expression, we get back a function that
+                  // will evaluate the given expression in the context of a given $scope.
+                  var dp = $parse('{'+field+':false}');
+                  var selectedFields = $scope.dataProvs.provs.prov;
+
+                  $scope.updatePackageAPIModel($scope.dataProvsPkg, fieldName);
 
 
-            var orders = newValue;
-               
-            var usedProducts = newValue.prods.prod;
-            var sum = 0;
-            for ( var prop in usedProducts ){
+                  angular.forEach(selectedFields, function(value, key) {
 
-               var dataProvList = $scope.dataProvsPkg;
-               var id = prop;
-               if ( usedProducts[id] ){
-                   
-                   var product = $scope.findProvFieldByName(dataProvList, id);
-                   if ( product !== null ){
-                       sum += parseInt(product.price, 10);
-                   }
-               }
+                    (key == fieldName) ? value = false : value = true;
+
+                    $scope.dataProvs.provs.prov[""+key] = value;
+                    
+                  });
+
+                }
+
+              }
+                    
             }
-            $scope.sum = sum;
 
-        }, true);
+          } //End for-loop provider
+
+        }
+
+      }
+    }
+
+
+       
+    $scope.findProvFieldByName = function (providers, fieldName) {
+
+
+      for (var provs in $scope.dataProvsPkg.Package){
+
+        var provider = $scope.dataProvsPkg.Package[provs];
+
+        for(var i = 0; i < provider.length; i++) {
+
+          for(var p in provider) {
+
+            if(provider.hasOwnProperty(p)) {
+
+                    var provFields = provider[p].dataFields; //Fields container for DataProvider
+
+                    //$scope.test = provFields;
+
+                    for(var field in provFields) {
+
+                        if(provFields[field].name == fieldName)
+                        return provFields[field];
+
+                    }
+                  }
+
+                } //End for-loop provider
+
+              }
+
+            }
+
+    }
+
+
+        
+    $scope.$watch('dataProvs', function (newValue, oldValue) {
+
+
+        var provider = newValue.provs.prov;
+        var sum = 0;
+        for ( var prov in provider ){
+
+           var dataProvList = $scope.dataProvsPkg;
+           
+           if ( provider[prov] ){
+               
+               var provPrice = $scope.findProvFieldByName(dataProvList, prov);
+               if ( provPrice !== null ){
+
+                   sum += parseFloat(provPrice.price, 10,2);
+               }
+           }
+        }
+        $scope.sum = sum;
+
+    }, true);
 
     $scope.toggle = function(scope) {
       scope.toggle();
@@ -188,6 +245,4 @@ angular.module('packageBuilderwebuiApp')
       $scope.$broadcast('expandAll');
     };
 
-
   }]);
-

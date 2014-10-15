@@ -12,7 +12,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         public double Price { get; set; }
         public bool? IsSelected { get; set; }
         public Type Type { get; private set; }
-        
+
         //todo: make private
         public DataField()
         {
@@ -23,9 +23,9 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Name = name;
             Type = type;
         }
-<<<<<<< HEAD
 
-        public DataField(string name, string label, string definition, string industries, double price, bool isSelected)//, Type type)
+        public DataField(string name, string label, string definition, string industries, double price, bool isSelected)
+            //, Type type)
         {
             Name = name;
             Label = label;
@@ -35,7 +35,6 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             IsSelected = isSelected;
             //Type = type;
         }
-=======
->>>>>>> origin/MVP
+
     }
 }
