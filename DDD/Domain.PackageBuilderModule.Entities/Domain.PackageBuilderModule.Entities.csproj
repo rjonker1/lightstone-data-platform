@@ -58,6 +58,10 @@
     <Compile Include="DTO\Class1.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
     <Compile Include="PackageBuilderContext.cs" />
+    <Compile Include="PackageBuilderModel._ORMCustomToolReport.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+    </Compile>
     <Compile Include="PackagePartial.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -72,6 +76,7 @@
     <None Include="PackageBuilderModel.orm">
       <Generator>ORMCustomTool</Generator>
       <CustomToolNamespace>LightstoneApp.Domain.PackageBuilderModule.Context</CustomToolNamespace>
+      <LastGenOutput>PackageBuilderModel._ORMCustomToolReport.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

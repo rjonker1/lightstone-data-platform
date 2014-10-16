@@ -17,7 +17,7 @@
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
 		</dcl:column>
 		<dcl:column name="Name" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
 		</dcl:column>
 		<dcl:column name="StateId" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
@@ -87,7 +87,10 @@
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="Name" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
+		</dcl:column>
+		<dcl:column name="Owner" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
 		</dcl:column>
 		<dcl:column name="SourceURL" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
@@ -110,9 +113,6 @@
 		<dcl:column name="Edited" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="DATE" />
 		</dcl:column>
-		<dcl:column name="Owner" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
-		</dcl:column>
 		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="DATE" />
 		</dcl:column>
@@ -131,18 +131,30 @@
 		<dcl:column name="DataFieldId" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
+		<dcl:column name="CostOfSale" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
+		</dcl:column>
 		<dcl:column name="DataProviderId" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="IndustryId" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:column name="Definition" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
+		</dcl:column>
+		<dcl:column name="Selected" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
 		</dcl:column>
 		<dcl:column name="Label" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="32" />
 		</dcl:column>
+		<dcl:column name="TypeDefinition" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="DataField_UC" isPrimary="false">
+			<dcl:columnRef name="Name" />
+		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DataField_PK" isPrimary="true">
 			<dcl:columnRef name="DataFieldId" />
 		</dcl:uniquenessConstraint>
@@ -153,18 +165,18 @@
 			<dcl:columnRef sourceName="IndustryId" targetName="IndustryId" />
 		</dcl:referenceConstraint>
 	</dcl:table>
-	<dcl:table name="PackageHasDataProviderWithDataField">
-		<dcl:column name="&quot;_Id&quot;" requestedName="_Id" isNullable="false" isIdentity="true">
+	<dcl:table name="PackageDataField">
+		<dcl:column name="PackageDataFieldId" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="DataFieldId" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:column name="DataProviderId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
 		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="Priority" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Priority" />
 		</dcl:column>
 		<dcl:column name="Selected" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="BOOLEAN" />
@@ -172,24 +184,13 @@
 		<dcl:column name="UnifiedName" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
 		</dcl:column>
-		<dcl:column name="Priority" isNullable="true" isIdentity="false">
-			<dcl:domainRef name="Priority" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="PackageHasDataProviderWithDataField_UC" isPrimary="false">
-			<dcl:columnRef name="PackageId" />
-			<dcl:columnRef name="DataProviderId" />
-			<dcl:columnRef name="DataFieldId" />
+		<dcl:uniquenessConstraint name="PackageDataField_PK" isPrimary="true">
+			<dcl:columnRef name="PackageDataFieldId" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="PackageHasDataProviderWithDataField_PK" isPrimary="true">
-			<dcl:columnRef name="&quot;_Id&quot;" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="PackageHasDataProviderWithDataField_FK1" targetTable="Package">
+		<dcl:referenceConstraint name="PackageDataField_FK1" targetTable="Package">
 			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
 		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="PackageHasDataProviderWithDataField_FK2" targetTable="DataProvider">
-			<dcl:columnRef sourceName="DataProviderId" targetName="DataProviderId" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="PackageHasDataProviderWithDataField_FK3" targetTable="DataField">
+		<dcl:referenceConstraint name="PackageDataField_FK2" targetTable="DataField">
 			<dcl:columnRef sourceName="DataFieldId" targetName="DataFieldId" />
 		</dcl:referenceConstraint>
 	</dcl:table>
