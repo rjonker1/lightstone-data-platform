@@ -1,11 +1,10 @@
 using System.Linq;
-using DataPlatform.Shared;
 using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Repositories;
 
 namespace Shared.Public.TestHelpers.Repositories
 {
-    public class NamedCannedRepository<T> : CannedRepository<T>, INamedEntityRepository<T> where T : INamedEntity
+    public class NamedCannedRepository<T> : CannedRepository<T>, INamedEntityRepository<T> where T : INamedEntity, IEntity
     {
         public T FindByName(string name)
         {

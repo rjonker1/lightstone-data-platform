@@ -1,0 +1,95 @@
+<div class="container">
+
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+{{dataProvider}}
+
+<h2>Data Source Detail</h2>
+    <button type="button" ng-click="createProvider(dataProvider)">Save</button>
+
+    <br />
+
+<div id="info">
+
+    <div id="1" style="float: left;" >
+        <div>
+            <label>Name:</label><input type="textbox" class="form-control" ng-model="dataProvider.name"/>
+            <label>Version:</label><input type="textbox" class="form-control" ng-model="dataProvider.version" readonly/>
+        </div>
+        <div>
+            <div>
+                <label>Description</label>
+            </div>
+            <div>
+                <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvider.description"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="2" style="float: right;">
+        <div>
+            <label>State:</label>
+            <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+            {{dataProvider.state.name}}
+        </div>
+
+        <div>
+            <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvider.cos"/>
+        </div>
+
+        <br />
+
+        <div >
+        
+            <label>Date: </label>
+            <div class="input-group">
+
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvider.edited" is-open="opened" 
+                    datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" /> 
+
+                <span style="width: 20%;" class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>           
+
+        </div>
+
+        <br />
+
+        <div>
+            <label>Owner:</label>
+            <select class="form-control" ng-model="dataProvider.owner" ng-options="user.name for user in users"></select>
+        </div>
+    </div>
+
+</div> <!--End Info-->
+
+
+<table class="table" style="padding-top: 20px;">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Label</th>
+            <th>Definition</th>
+            <th>Industries</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="dField in dataProvider.dataFields">
+       
+            <tr>
+                <td>{{dField.name}}</td>
+                <td>{{dField.type}}</td>
+                <td><input class="form-control" ng-model="dField.label" type="text"></td>
+                <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+                <td>
+                    <select class="form-control" ng-model="dField.industries" > <!-- ng-options="ind in dField.industries" -->
+                        
+                    </select>
+                </td>
+            </tr>
+
+    </tbody>
+</table>
+
+</div>

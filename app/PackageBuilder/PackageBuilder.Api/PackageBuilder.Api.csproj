@@ -14,7 +14,7 @@
     <RootNamespace>PackageBuilder.Api</RootNamespace>
     <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -43,34 +43,57 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
+      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Bin\Lightstone.Dataplatform.PackageBuilder.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.64, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.64\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.64, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.64\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.64, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.64\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <HintPath>..\..\Shared\Shared.BuildingBlocks.Api\bin\Debug\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MemBus, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -81,6 +104,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.23.0\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Bootstrappers.Windsor">
+      <HintPath>..\..\packages\Nancy.Bootstrappers.Windsor.0.23.0\lib\net40\Nancy.Bootstrappers.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy.Hosting.Aspnet, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.Hosting.Aspnet.0.23.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
@@ -89,6 +115,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.Viewengines.Razor.0.23.0\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="NEventStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore.Persistence.RavenDB, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NEventStore.Persistence.RavenDB.5.0.0.86\lib\net40\NEventStore.Persistence.RavenDB.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -96,11 +130,19 @@
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -116,7 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\nancy-logo.png" />
-    <Content Include="nhibernate.cfg.xml" />
+    <Content Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -124,37 +168,53 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="DataProviderConverter.cs" />
+    <Compile Include="Helpers\AutoMappers\DataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMappers\DataProviderMap.cs" />
+    <Compile Include="Helpers\AutoMappers\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
+    <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Installers\AutoMapperInstaller.cs" />
+    <Compile Include="Installers\BusInstaller.cs" />
+    <Compile Include="Installers\CommandInstaller.cs" />
+    <Compile Include="Installers\NEventStoreInstaller.cs" />
+    <Compile Include="Installers\NHibernateInstaller.cs" />
+    <Compile Include="Installers\RavenDbInstaller.cs" />
+    <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\IndustryModule.cs" />
+    <Compile Include="Modules\PackageModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\index.cshtml" />
-    <Content Include="appSettings.config">
+    <Content Include="AppSettings.config">
       <TransformOnBuild>true</TransformOnBuild>
     </Content>
     <Content Include="readme.md" />
     <Content Include="log4net.config" />
-    <None Include="appSettings.Debug.config">
-      <DependentUpon>appSettings.config</DependentUpon>
+    <None Include="AppSettings.Debug.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSettings.Dev.config">
-      <DependentUpon>appSettings.config</DependentUpon>
+    <None Include="AppSettings.Dev.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSettings.Release.config">
-      <DependentUpon>appSettings.config</DependentUpon>
+    <None Include="AppSettings.Release.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
-    <None Include="appSettings.TeamCity.config">
-      <DependentUpon>appSettings.config</DependentUpon>
+    <None Include="AppSettings.TeamCity.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
-    <None Include="appSettings.Test.config">
-      <DependentUpon>appSettings.config</DependentUpon>
+    <None Include="AppSettings.Test.config">
+      <DependentUpon>AppSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
     </None>
+    <Content Include="connectionStrings.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,13 +223,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Database\PackageBuilder.Data.csproj">
-      <Project>{e3212510-689e-4aad-93f8-261af917e5ae}</Project>
-      <Name>PackageBuilder.Data</Name>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
+      <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
+      <Project>{3ed18243-3a71-4e3f-adfb-fc6777af5225}</Project>
+      <Name>PackageBuilder.Domain.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
+      <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
+      <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj">
+      <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
+      <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
       <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
@@ -199,9 +271,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>12257</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://dev.lightstone.packagebuilder.api</IISUrl>
+          <IISUrl>http://localhost:12257/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -226,6 +298,7 @@ xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.23.0\lib\Net40\
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" Label="SlowCheetah" />
+  <Import Project="..\..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

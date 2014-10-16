@@ -4,7 +4,8 @@ using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using PackageBuilder.Web.Helpers.MetadataProviders;
-using PackageBuilder.Web.Plumbing.Windsor.Installers;
+using PackageBuilder.Web.Helpers.Windsor.Factories;
+using PackageBuilder.Web.Helpers.Windsor.Installers;
 
 namespace PackageBuilder.Web
 {
@@ -30,7 +31,7 @@ namespace PackageBuilder.Web
 
         private static void BootstrapContainer()
         {
-            _container = new WindsorContainer().Install(FromAssembly.This());
+            _container = new WindsorContainer().Install(FromAssembly.Containing<WindsorInstaller>());
             var controllerFactory = new WindsorControllerFactory(_container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
         }

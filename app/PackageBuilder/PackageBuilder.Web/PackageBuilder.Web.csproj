@@ -47,6 +47,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
+      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -166,7 +169,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Plumbing\Windsor\Installers\ControllersInstaller.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DataProviderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -175,13 +177,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MetadataProviders\ConventionMetadataProvider.cs" />
+    <Compile Include="Helpers\Windsor\Installers\ControllersInstaller.cs" />
+    <Compile Include="Helpers\Windsor\Installers\WindsorInstaller.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Plumbing\Windsor\Installers\CommandInstaller.cs" />
-    <Compile Include="Plumbing\Windsor\Installers\WindsorControllerFactory.cs" />
-    <Compile Include="Plumbing\Windsor\Installers\WindsorInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Helpers\Windsor\Factories\WindsorControllerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -230,6 +232,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
+    <Content Include="Views\DataProvider\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -242,12 +245,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Common\PackageBuilder.Common.csproj">
-      <Project>{e1860260-caa8-497b-a014-bddfab19665d}</Project>
-      <Name>PackageBuilder.Common</Name>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
+      <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
-      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
+      <Project>{C075E78C-8051-4CFC-A0F5-5C61BB108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,15 +1,16 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Entities;
+﻿using System;
+using DataPlatform.Shared.Entities;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class DataFieldBuilder
     {
         private string _name;
-        private IDataProvider _dataProvider;
+        private Type _type;
         public IDataField Build()
         {
-            return new DataField(_name) { DataProvider = _dataProvider };
+            return new DataField(_name, null);
         }
 
         public DataFieldBuilder With(string name)
@@ -18,9 +19,9 @@ namespace PackageBuilder.TestHelper.Builders.Entites
             return this;
         }
 
-        public DataFieldBuilder With(IDataProvider dataProvider)
+        public DataFieldBuilder With(Type type)
         {
-            _dataProvider = dataProvider;
+            _type = type;
             return this;
         }
     }

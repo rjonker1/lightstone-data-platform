@@ -41,7 +41,7 @@
     <Compile Include="Dtos\Action.cs" />
     <Compile Include="Dtos\ApiMetaData.cs" />
     <Compile Include="Dtos\Criteria.cs" />
-    <Compile Include="Dtos\DataField.cs" />
+    <Compile Include="Dtos\DataFieldDto.cs" />
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />

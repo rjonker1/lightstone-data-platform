@@ -54,6 +54,7 @@ namespace Shared.BuildingBlocks.Api.Security
             pipelines.AfterRequest.AddItemToEndOfPipeline(x =>
             {
                 x.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                x.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
                 x.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             });
 

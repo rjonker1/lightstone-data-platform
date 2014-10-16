@@ -1,7 +1,6 @@
 ﻿using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain;
-using PackageBuilder.Domain.Contracts;
-using PackageBuilder.Domain.Contracts.Enitities;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Builders.Entites;
 using PackageBuilder.TestHelper.Builders.Repositories;
 using PackageBuilder.TestHelper.Fakes;
