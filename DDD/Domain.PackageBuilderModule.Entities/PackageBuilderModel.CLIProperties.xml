@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<prop:AllProperties xmlns:prop="urn:schemas-orm-net:PLiX:CLI:Properties" xmlns:plx="http://schemas.neumont.edu/CodeGeneration/PLiX">
+	<prop:Properties conceptTypeName="Owner">
+		<prop:Property name="OwnerValue" mandatory="alethic" isUnique="true" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="PackageViaPackageOwnerCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="PackageOwner">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="Package" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="DataSourceViaDataSourceOwnerCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSourceOwner">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="DataSource" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="State">
+		<prop:Property name="StateValue" mandatory="alethic" isUnique="true" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="PackageViaPackageStateCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="PackageState">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="Package" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="DataSourceViaDataSourceStateCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSourceState">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="DataSource" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="Industry">
+		<prop:Property name="IndustryValue" mandatory="alethic" isUnique="true" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="DateFieldViaIndustryCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="Industry">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="DateField" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="PackageHasIndustryViaPackageIndustryCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="PackageIndustry">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageHasIndustry" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="Package">
+		<prop:Property name="Description" mandatory="alethic" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="Created" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="Edited" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="PackageVersion" mandatory="alethic" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="Published" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".boolean" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="RevisionDate" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="CostOfSale" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".decimal" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="Price" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".decimal" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:IdentityField name="Package_Id" />
+		<prop:Property name="PackageName" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Package">
+			<prop:DataType dataTypeName="Name" />
+		</prop:Property>
+		<prop:Property name="PackageOwner" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Package">
+			<prop:DataType dataTypeName="Owner" />
+		</prop:Property>
+		<prop:Property name="PackageState" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Package">
+			<prop:DataType dataTypeName="State" />
+		</prop:Property>
+		<prop:Property name="PackageHasIndustryViaPackageCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="Package">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageHasIndustry" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="PackageDataSourceViaPackageCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="Package">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageDataSource" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="PackageDataSourceDateFieldViaPackageCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="Package">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageDataSourceDateField" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="Name">
+		<prop:Property name="NameValue" mandatory="alethic" isUnique="true" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="Company" mandatory="false" isUnique="true" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Name">
+			<prop:DataType dataTypeName="Company" />
+		</prop:Property>
+		<prop:Property name="Category" mandatory="false" isUnique="true" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Name">
+			<prop:DataType dataTypeName="Category" />
+		</prop:Property>
+		<prop:Property name="PackageViaPackageNameCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="PackageName">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="Package" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="DataSourceViaDataSouceNameCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSouceName">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="DataSource" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="FileAttachmentViaFileNameCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="FileName">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="FileAttachment" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="Company">
+		<prop:Property name="Name" mandatory="alethic" isUnique="true" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Company">
+			<prop:DataType dataTypeName="Name" />
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="Category">
+		<prop:Property name="SupperCategry" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="SubCategory">
+			<prop:DataType dataTypeName="Category" />
+		</prop:Property>
+		<prop:Property name="Name" mandatory="alethic" isUnique="true" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="Category">
+			<prop:DataType dataTypeName="Name" />
+		</prop:Property>
+		<prop:Property name="SubCategory" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="SupperCategry">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="Category" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="DateFieldViaCategoryCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="Category">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="DateField" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="DataSource">
+		<prop:Property name="Description" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="Created" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="Edited" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="DataSouceVersion" mandatory="alethic" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="CostOfSale" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".decimal" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="RevisionDate" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="SourceURL" mandatory="alethic" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:IdentityField name="DataSource_Id" />
+		<prop:IdentityField name="DataProvider_DataProvider_Id" />
+		<prop:Property name="DataSouceName" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="Name" />
+		</prop:Property>
+		<prop:Property name="DataSourceOwner" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="Owner" />
+		</prop:Property>
+		<prop:Property name="DataSourceState" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="State" />
+		</prop:Property>
+		<prop:Property name="DateFieldViaDataSourceCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="DateField" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="FileAttachmentViaDataSourceCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="FileAttachment" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="PackageDataSourceViaDataSourceCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageDataSource" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="PackageDataSourceDateFieldViaDataSourceCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DataSource">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageDataSourceDateField" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="DateField">
+		<prop:IdentityField name="DateField_Id" />
+		<prop:Property name="Label" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="Definition" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:Property name="Selected" mandatory="alethic" isUnique="false" canBeNull="false" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".boolean" />
+		</prop:Property>
+		<prop:Property name="DataSource" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="DateField">
+			<prop:DataType dataTypeName="DataSource" />
+		</prop:Property>
+		<prop:Property name="Industry" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="DateField">
+			<prop:DataType dataTypeName="Industry" />
+		</prop:Property>
+		<prop:Property name="Category" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="DateField">
+			<prop:DataType dataTypeName="Category" />
+		</prop:Property>
+		<prop:Property name="PackageDataSourceDateFieldViaDateFieldCollection" mandatory="false" isUnique="true" isCollection="true" isCustomType="true" canBeNull="true" oppositeName="DateField">
+			<prop:DataType dataTypeName="IEnumerable">
+				<plx:passTypeParam dataTypeName="PackageDataSourceDateField" />
+			</prop:DataType>
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="FileAttachment">
+		<prop:IdentityField name="FileAttachment_Id" />
+		<prop:Property name="Blob" mandatory="alethic" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".u1" dataTypeIsSimpleArray="true" />
+		</prop:Property>
+		<prop:Property name="DataSource" mandatory="false" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="FileAttachment">
+			<prop:DataType dataTypeName="DataSource" />
+		</prop:Property>
+		<prop:Property name="FileName" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="FileAttachment">
+			<prop:DataType dataTypeName="Name" />
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="PackageHasIndustry">
+		<prop:IdentityField name="PackageHasIndustry_Id" />
+		<prop:Property name="Package" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageHasIndustry">
+			<prop:DataType dataTypeName="Package" />
+		</prop:Property>
+		<prop:Property name="PackageIndustry" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageHasIndustry">
+			<prop:DataType dataTypeName="Industry" />
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="PackageDataSource">
+		<prop:Property name="Priority" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:IdentityField name="PackageDataSource_Id" />
+		<prop:Property name="Package" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageDataSource">
+			<prop:DataType dataTypeName="Package" />
+		</prop:Property>
+		<prop:Property name="DataSource" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageDataSource">
+			<prop:DataType dataTypeName="DataSource" />
+		</prop:Property>
+	</prop:Properties>
+	<prop:Properties conceptTypeName="PackageDataSourceDateField">
+		<prop:Property name="Priority" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName="Nullable">
+				<plx:passTypeParam dataTypeName=".i4" />
+			</prop:DataType>
+		</prop:Property>
+		<prop:Property name="UnifiedName" mandatory="false" isUnique="false" canBeNull="true" isCollection="false" isCustomType="false">
+			<prop:DataType dataTypeName=".string" />
+		</prop:Property>
+		<prop:IdentityField name="PackageDataSourceDateField_Id" />
+		<prop:Property name="Package" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageDataSourceDateField">
+			<prop:DataType dataTypeName="Package" />
+		</prop:Property>
+		<prop:Property name="DataSource" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageDataSourceDateField">
+			<prop:DataType dataTypeName="DataSource" />
+		</prop:Property>
+		<prop:Property name="DateField" mandatory="alethic" isUnique="false" isCollection="false" isCustomType="true" canBeNull="true" oppositeName="PackageDataSourceDateField">
+			<prop:DataType dataTypeName="DateField" />
+		</prop:Property>
+	</prop:Properties>
+</prop:AllProperties>
