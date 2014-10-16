@@ -142,6 +142,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -168,19 +169,20 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataProviderConverter.cs" />
-    <Compile Include="Helpers\AutoMaps\DataFieldMap.cs" />
-    <Compile Include="Helpers\AutoMaps\DataProviderMap.cs" />
-    <Compile Include="Helpers\AutoMaps\ICreateAutoMap.cs" />
-    <Compile Include="Helpers\AutoMaps\PackageMap.cs" />
+    <Compile Include="Helpers\AutoMappers\DataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMappers\DataProviderMap.cs" />
+    <Compile Include="Helpers\AutoMappers\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
+    <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
     <Compile Include="Installers\NEventStoreInstaller.cs" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RavenDbInstaller.cs" />
-    <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\IndustryModule.cs" />
     <Compile Include="Modules\PackageModule.cs" />
   </ItemGroup>
   <ItemGroup>

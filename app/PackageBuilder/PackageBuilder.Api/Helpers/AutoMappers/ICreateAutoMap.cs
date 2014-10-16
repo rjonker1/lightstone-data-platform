@@ -1,4 +1,4 @@
-﻿namespace PackageBuilder.Api.Helpers.AutoMaps
+﻿namespace PackageBuilder.Api.Helpers.AutoMappers
 {
     public interface ICreateAutoMapperMaps
     {

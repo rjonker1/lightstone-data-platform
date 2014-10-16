@@ -1,5 +1,4 @@
 using System;
-using CommonDomain.Persistence;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
@@ -18,9 +17,9 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 
         public override void Handle(RenameDataProvider command)
         {
-            var entity = _repository.GetById<DataProvider>(command.Id);
+            var entity = _repository.GetById(command.Id);
             entity.ChangeName(command.NewName);
-            _repository.Save(typeof(DataProvider).Name, entity, Guid.NewGuid());
+            _repository.Save(entity, Guid.NewGuid());
         }
     }
 }

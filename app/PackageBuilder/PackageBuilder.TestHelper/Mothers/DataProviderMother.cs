@@ -1,12 +1,13 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper.Builders.Entites;
 
 namespace PackageBuilder.TestHelper.Mothers
 {
     public class DataProviderMother
     {
-        public static IDataProvider IvidDataSource
+        public static DataProvider Ivid
         {
             get
             {
@@ -18,7 +19,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IDataProvider IvidTitleHolderDataSource
+        public static DataProvider IvidTitleHolder
         {
             get
             {
@@ -30,7 +31,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IDataProvider RgtVinSource
+        public static IDataProvider RgtVin
         {
             get
             {
@@ -42,7 +43,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IDataProvider AudatexSource
+        public static IDataProvider Audatex
         {
             get
             {

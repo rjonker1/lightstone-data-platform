@@ -84,6 +84,7 @@
     <Compile Include="Builders\Entites\DataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
+    <Compile Include="Builders\Entites\IndustryBuilder.cs" />
     <Compile Include="Builders\Entites\PackageBuilder.cs" />
     <Compile Include="Builders\Entites\RoleBuilder.cs" />
     <Compile Include="Builders\Entites\RolePackageBuilder.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataSetMother.cs" />
     <Compile Include="Mothers\DataProviderMother.cs" />
+    <Compile Include="Mothers\IndustryMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
     <Compile Include="Mothers\UserMother.cs" />

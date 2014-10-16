@@ -6,7 +6,7 @@ using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
-namespace PackageBuilder.Api.Helpers.AutoMaps
+namespace PackageBuilder.Api.Helpers.AutoMappers
 {
     public class DataFieldMap : ICreateAutoMapperMaps
     {

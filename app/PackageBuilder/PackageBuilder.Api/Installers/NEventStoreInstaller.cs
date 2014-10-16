@@ -8,12 +8,10 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using MemBus;
-using MemBus.Configurators;
 using NEventStore;
 using NEventStore.Dispatcher;
 using PackageBuilder.Core.Events;
 using PackageBuilder.Core.NEventStore;
-using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Api.Installers
 {

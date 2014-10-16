@@ -81,6 +81,9 @@
     <Compile Include="ICustomerRepository.cs" />
     <Compile Include="IGroupPackage.cs" />
     <Compile Include="IGroupPackageRepository.cs" />
+    <Compile Include="Industries\Commands\CreateIndustry.cs" />
+    <Compile Include="Industries\Commands\RenameIndustry.cs" />
+    <Compile Include="Industries\WriteModels\Industry.cs" />
     <Compile Include="IPackageAccessControl.cs" />
     <Compile Include="IPackageLookupRepository.cs" />
     <Compile Include="IRolePackage.cs" />

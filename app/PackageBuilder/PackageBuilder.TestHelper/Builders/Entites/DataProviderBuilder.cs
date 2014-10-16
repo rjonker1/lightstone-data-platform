@@ -10,7 +10,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private Guid _id;
         private string _name;
         private IEnumerable<IDataField> _dataFields;
-        public IDataProvider Build()
+        public DataProvider Build()
         {
             return new DataProvider(_id, _name, new List<IDataField>());
         }

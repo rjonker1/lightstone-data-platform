@@ -1,11 +1,12 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System.Transactions;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
+using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Infrastructure.RavenDB;
-using Raven.Client;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api
@@ -19,19 +20,7 @@ namespace PackageBuilder.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
-            pipelines.EnableCors(); // cross origin resource sharing
-
             IndexInstaller.Install(container);
-
-            //NHibernateBootstrapper.Build();
-            //Make every request SSL based
-			//pipelines.BeforeRequest += ctx =>
-            //{
-            //    return (!ctx.Request.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)) ?
-            //        (Response)HttpStatusCode.Unauthorized :
-            //        null;
-            //};
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -43,35 +32,21 @@ namespace PackageBuilder.Api
 
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
-            
         }
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
             base.RequestStartup(container, pipelines, context);
-
-            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
-            {
-                var documentSession = container.Resolve<IDocumentSession>();
-                if (ctx.Response.StatusCode != HttpStatusCode.InternalServerError)
-                    documentSession.SaveChanges();
-
-                documentSession.Dispose();
-            });
+            //Make every request SSL based
+            //pipelines.BeforeRequest += ctx =>
+            //{
+            //    return (!ctx.Request.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)) ?
+            //        (Response)HttpStatusCode.Unauthorized :
+            //        null;
+            //};
+            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+            pipelines.EnableCors(); // cross origin resource sharing
+            pipelines.AddTransactionScope(container, new TransactionScope());
         }
-
-        //static void AllowAccessToConsumingSite(IPipelines pipelines)
-        //{
-            
-        //    pipelines.AfterRequest.AddItemToEndOfPipeline(x =>
-        //    {
-                
-        //        x.Response.Headers.Add("Access=Control-Allow-Origin", "*");
-        //        x.Response.Headers.Add("Access-Control-Allow-Methods", "POST,DELETE,PUT,OPTIONS");
-
-        //    });
-        //}
-
-        
     }
 }

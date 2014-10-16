@@ -5,7 +5,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
     public class CreateDataProvider : IDomainCommand
     {
-        public Guid Id { get; private set; }
+        public Guid Id;
         public readonly string Name;
         public readonly string Description;
         public readonly Type DataProviderType;

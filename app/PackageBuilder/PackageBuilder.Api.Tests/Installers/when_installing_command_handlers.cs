@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
 using Castle.Core;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.EventHandlers.Packages;
@@ -11,7 +13,15 @@ namespace PackageBuilder.Api.Tests.Installers
 {
     public class when_installing_command_handlers : Specification
     {
-        IWindsorContainer _container = new WindsorContainer();
+        class WindsorInstaller : IWindsorInstaller
+        {
+            public void Install(IWindsorContainer container, IConfigurationStore store)
+            {
+                container.Register(Component.For<IWindsorContainer>().Instance(container));
+            }
+        }
+
+        readonly IWindsorContainer _container = new WindsorContainer();
 
         /// <summary>
         /// Override the LifestyleType of LifestylePerWebRequest to avoid exception below:
@@ -37,7 +47,7 @@ namespace PackageBuilder.Api.Tests.Installers
         public override void Observe()
         {
             _container.Kernel.ComponentModelCreated += Kernel_ComponentModelCreated;
-            _container.Install(new WindsorInstaller(), new BusInstaller() ,new CommandInstaller(), new RavenDbInstaller(), new NEventStoreInstaller());
+            _container.Install(new WindsorInstaller(), new BusInstaller(),new CommandInstaller(), new RavenDbInstaller(), new NEventStoreInstaller());
         }
 
         [Observation]

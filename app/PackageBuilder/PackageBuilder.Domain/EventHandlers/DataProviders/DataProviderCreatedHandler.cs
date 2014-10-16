@@ -27,7 +27,6 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
             };
 
             _session.Store(read);
-            _session.SaveChanges();
         }
     }
 }

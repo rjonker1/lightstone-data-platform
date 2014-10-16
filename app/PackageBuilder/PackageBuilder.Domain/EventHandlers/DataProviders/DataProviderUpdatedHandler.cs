@@ -8,7 +8,6 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
 {
     public class DataProviderUpdatedHandler : AbstractMessageHandler<DataProviderUpdated>
     {
-
         private readonly IDocumentSession _session;
 
         public DataProviderUpdatedHandler(IDocumentSession session)
@@ -18,12 +17,9 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
 
         public override void Handle(DataProviderUpdated command)
         {
-
-            Guid id = new Guid();
-
             var update = new ReadDataProvider
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 DataProviderId = command.DataProvierId,
                 Name = command.Name,
                 Description = command.Description,
@@ -33,8 +29,6 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
             };
 
             _session.Store(update);
-            _session.SaveChanges();
         }
-
     }
 }
