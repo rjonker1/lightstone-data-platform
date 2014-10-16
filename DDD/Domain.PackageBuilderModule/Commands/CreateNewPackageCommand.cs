@@ -20,7 +20,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Commands
 
         public CreateNewPackageCommand(Package package) : this()
         {
-            NewPackage = package.Clone<Package>();
+           // NewPackage = package.Clone<Package>();
         }
 
         public Package NewPackage { get; private set; }
@@ -38,7 +38,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Commands
 
         protected string SessionId
         {
-            get { return "CreateNewPackage_" + NewPackage.PackageId; }
+            get { return "CreateNewPackage_" + NewPackage.Id; }
         }
 
         Guid ICommand.Id

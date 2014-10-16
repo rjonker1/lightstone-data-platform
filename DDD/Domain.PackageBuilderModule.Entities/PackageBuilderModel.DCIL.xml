@@ -1,30 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <dcl:schema name="PackageBuilder" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
-	<dcl:domain name="State">
-		<dcl:predefinedDataType name="CHARACTER VARYING" length="32" />
-		<dcl:checkConstraint name="ValueTypeValueConstraint1">
-			<dep:inPredicate type="IN">
-				<dep:valueKeyword />
-				<ddt:characterStringLiteral value="Under construction" />
-				<ddt:characterStringLiteral value="Published" />
-				<ddt:characterStringLiteral value="Expired" />
-			</dep:inPredicate>
-		</dcl:checkConstraint>
-	</dcl:domain>
-	<dcl:domain name="Industry">
-		<dcl:predefinedDataType name="CHARACTER VARYING" length="32" />
-		<dcl:checkConstraint name="ValueTypeValueConstraint2">
-			<dep:inPredicate type="IN">
-				<dep:valueKeyword />
-				<ddt:characterStringLiteral value="Banking" />
-				<ddt:characterStringLiteral value="Consumer" />
-				<ddt:characterStringLiteral value="Dealer" />
-				<ddt:characterStringLiteral value="Government" />
-				<ddt:characterStringLiteral value="Insurance" />
-				<ddt:characterStringLiteral value="Other" />
-			</dep:inPredicate>
-		</dcl:checkConstraint>
-	</dcl:domain>
 	<dcl:domain name="Priority">
 		<dcl:predefinedDataType name="SMALLINT" />
 		<dcl:checkConstraint name="Priority_Unsigned_Chk">
@@ -41,317 +16,203 @@
 		<dcl:column name="Description" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
 		</dcl:column>
-		<dcl:column name="PackageName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
 		</dcl:column>
-		<dcl:column name="PackageVersion" isNullable="false" isIdentity="false">
+		<dcl:column name="StateId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="16" />
 		</dcl:column>
 		<dcl:column name="CostOfSale" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
 		</dcl:column>
 		<dcl:column name="Created" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+			<dcl:predefinedDataType name="DATE" />
 		</dcl:column>
 		<dcl:column name="Edited" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+			<dcl:predefinedDataType name="DATE" />
 		</dcl:column>
-		<dcl:column name="PackageOwner" isNullable="true" isIdentity="false">
+		<dcl:column name="IndustryId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="Owner" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
-		</dcl:column>
-		<dcl:column name="PackageState" isNullable="true" isIdentity="false">
-			<dcl:domainRef name="State" />
-		</dcl:column>
-		<dcl:column name="Price" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
 		</dcl:column>
 		<dcl:column name="Published" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="BOOLEAN" />
 		</dcl:column>
+		<dcl:column name="RecomendedRetailPrice" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
+		</dcl:column>
 		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+			<dcl:predefinedDataType name="DATE" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Package_UC" isPrimary="false">
-			<dcl:columnRef name="PackageName" />
-			<dcl:columnRef name="PackageVersion" />
+			<dcl:columnRef name="Name" />
+			<dcl:columnRef name="Version" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Package_PK" isPrimary="true">
 			<dcl:columnRef name="PackageId" />
 		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="Package_FK1" targetTable="Owner">
-			<dcl:columnRef sourceName="PackageOwner" targetName="&quot;Value&quot;" />
+		<dcl:referenceConstraint name="Package_FK1" targetTable="State">
+			<dcl:columnRef sourceName="StateId" targetName="StateId" />
 		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="Package_FK2" targetTable="State">
-			<dcl:columnRef sourceName="PackageState" targetName="&quot;Value&quot;" />
+		<dcl:referenceConstraint name="Package_FK2" targetTable="Industry">
+			<dcl:columnRef sourceName="IndustryId" targetName="IndustryId" />
 		</dcl:referenceConstraint>
-	</dcl:table>
-	<dcl:table name="Owner">
-		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="Owner_PK" isPrimary="true">
-			<dcl:columnRef name="&quot;Value&quot;" />
-		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="State">
-		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
-			<dcl:domainRef name="State" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="State_PK" isPrimary="true">
-			<dcl:columnRef name="&quot;Value&quot;" />
-		</dcl:uniquenessConstraint>
-	</dcl:table>
-	<dcl:table name="Industry">
-		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
-			<dcl:domainRef name="Industry" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="Industry_PK" isPrimary="true">
-			<dcl:columnRef name="&quot;Value&quot;" />
-		</dcl:uniquenessConstraint>
-	</dcl:table>
-	<dcl:table name="DataSource">
-		<dcl:column name="DataSourceId" isNullable="false" isIdentity="true">
+		<dcl:column name="StateId" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:column name="DataProviderId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="DataSouceName" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
-		</dcl:column>
-		<dcl:column name="DataSouceVersion" isNullable="false" isIdentity="false">
+		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="16" />
 		</dcl:column>
-		<dcl:column name="DataSourceState" isNullable="false" isIdentity="false">
-			<dcl:domainRef name="State" />
-		</dcl:column>
-		<dcl:column name="SourceURL" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
-		</dcl:column>
-		<dcl:column name="CostOfSale" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
-		</dcl:column>
-		<dcl:column name="Created" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
-		</dcl:column>
-		<dcl:column name="DataSourceOwner" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
-		</dcl:column>
-		<dcl:column name="Description" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
-		</dcl:column>
-		<dcl:column name="Edited" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
-		</dcl:column>
-		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="DataSource_UC" isPrimary="false">
-			<dcl:columnRef name="DataSouceName" />
-			<dcl:columnRef name="DataSouceVersion" />
+		<dcl:checkConstraint name="State_Value_RoleValueConstraint1">
+			<dep:inPredicate type="IN">
+				<dep:columnReference name="&quot;Value&quot;" />
+				<ddt:characterStringLiteral value="Under construction" />
+				<ddt:characterStringLiteral value="Published" />
+				<ddt:characterStringLiteral value="Expired" />
+			</dep:inPredicate>
+		</dcl:checkConstraint>
+		<dcl:uniquenessConstraint name="State_PK" isPrimary="true">
+			<dcl:columnRef name="StateId" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="DataSource_PK" isPrimary="true">
-			<dcl:columnRef name="DataSourceId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="DataSource_FK1" targetTable="Owner">
-			<dcl:columnRef sourceName="DataSourceOwner" targetName="&quot;Value&quot;" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="DataSource_FK2" targetTable="State">
-			<dcl:columnRef sourceName="DataSourceState" targetName="&quot;Value&quot;" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="DataSource_FK3" targetTable="DataProvider">
-			<dcl:columnRef sourceName="DataProviderId" targetName="DataProviderId" />
-		</dcl:referenceConstraint>
-	</dcl:table>
-	<dcl:table name="DateField">
-		<dcl:column name="DateFieldId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="DataSourceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="Selected" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="BOOLEAN" />
-		</dcl:column>
-		<dcl:column name="Category" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
-		</dcl:column>
-		<dcl:column name="Definition" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
-		</dcl:column>
-		<dcl:column name="Industry" isNullable="true" isIdentity="false">
-			<dcl:domainRef name="Industry" />
-		</dcl:column>
-		<dcl:column name="Label" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="32" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="DateField_PK" isPrimary="true">
-			<dcl:columnRef name="DateFieldId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="DateField_FK1" targetTable="DataSource">
-			<dcl:columnRef sourceName="DataSourceId" targetName="DataSourceId" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="DateField_FK2" targetTable="Industry">
-			<dcl:columnRef sourceName="Industry" targetName="&quot;Value&quot;" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="DateField_FK3" targetTable="Category">
-			<dcl:columnRef sourceName="Category" targetName="CategoryName" />
-		</dcl:referenceConstraint>
-	</dcl:table>
-	<dcl:table name="FileAttachment">
-		<dcl:column name="FileAttachmentId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="&quot;Blob&quot;" requestedName="Blob" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="BINARY VARYING" />
-		</dcl:column>
-		<dcl:column name="FileName" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
-		</dcl:column>
-		<dcl:column name="DataSourceId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="FileAttachment_PK" isPrimary="true">
-			<dcl:columnRef name="FileAttachmentId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="FileAttachment_FK" targetTable="DataSource">
-			<dcl:columnRef sourceName="DataSourceId" targetName="DataSourceId" />
-		</dcl:referenceConstraint>
-	</dcl:table>
-	<dcl:table name="PackageIndustry">
-		<dcl:column name="PackageHasIndustryId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="PackageIndustry" isNullable="false" isIdentity="false">
-			<dcl:domainRef name="Industry" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="PackageIndustry_UC" isPrimary="false">
-			<dcl:columnRef name="PackageId" />
-			<dcl:columnRef name="PackageIndustry" />
-		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="PackageIndustry_PK" isPrimary="true">
-			<dcl:columnRef name="PackageHasIndustryId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="PackageIndustry_FK1" targetTable="Package">
-			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="PackageIndustry_FK2" targetTable="Industry">
-			<dcl:columnRef sourceName="PackageIndustry" targetName="&quot;Value&quot;" />
-		</dcl:referenceConstraint>
-	</dcl:table>
-	<dcl:table name="PackageDataSource">
-		<dcl:column name="PackageDataSourceId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="DataSourceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="Priority" isNullable="true" isIdentity="false">
-			<dcl:domainRef name="Priority" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="PackageDataSource_UC" isPrimary="false">
-			<dcl:columnRef name="DataSourceId" />
-			<dcl:columnRef name="PackageId" />
-		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="PackageDataSource_PK" isPrimary="true">
-			<dcl:columnRef name="PackageDataSourceId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="PackageDataSource_FK1" targetTable="Package">
-			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="PackageDataSource_FK2" targetTable="DataSource">
-			<dcl:columnRef sourceName="DataSourceId" targetName="DataSourceId" />
-		</dcl:referenceConstraint>
-	</dcl:table>
-	<dcl:table name="PackageDataSourceDateField">
-		<dcl:column name="PackageDataSourceDateFieldId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="DataSourceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="DateFieldId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="Priority" isNullable="true" isIdentity="false">
-			<dcl:domainRef name="Priority" />
-		</dcl:column>
-		<dcl:column name="UnifiedName" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" />
-		</dcl:column>
-		<dcl:uniquenessConstraint name="PackageDataSourceDateField_UC" isPrimary="false">
-			<dcl:columnRef name="PackageId" />
-			<dcl:columnRef name="DataSourceId" />
-			<dcl:columnRef name="DateFieldId" />
-		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="PackageDataSourceDateField_PK" isPrimary="true">
-			<dcl:columnRef name="PackageDataSourceDateFieldId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="PackageDataSourceDateField_FK1" targetTable="Package">
-			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="PackageDataSourceDateField_FK2" targetTable="DataSource">
-			<dcl:columnRef sourceName="DataSourceId" targetName="DataSourceId" />
-		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="PackageDataSourceDateField_FK3" targetTable="DateField">
-			<dcl:columnRef sourceName="DateFieldId" targetName="DateFieldId" />
-		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="DataProvider">
 		<dcl:column name="DataProviderId" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:column name="CompanyId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="DataProviderName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
 		</dcl:column>
+		<dcl:column name="SourceURL" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
+		</dcl:column>
+		<dcl:column name="StateId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="16" />
+		</dcl:column>
+		<dcl:column name="CostOfSale" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
+		</dcl:column>
+		<dcl:column name="Created" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DATE" />
+		</dcl:column>
+		<dcl:column name="Description" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
+		</dcl:column>
+		<dcl:column name="Edited" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DATE" />
+		</dcl:column>
+		<dcl:column name="Owner" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
+		</dcl:column>
+		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DATE" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="DataProvider_UC" isPrimary="false">
+			<dcl:columnRef name="Name" />
+			<dcl:columnRef name="Version" />
+		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DataProvider_PK" isPrimary="true">
 			<dcl:columnRef name="DataProviderId" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="DataProvider_UC" isPrimary="false">
-			<dcl:columnRef name="CompanyId" />
-		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="DataProvider_FK" targetTable="Company">
-			<dcl:columnRef sourceName="CompanyId" targetName="CompanyId" />
+		<dcl:referenceConstraint name="DataProvider_FK" targetTable="State">
+			<dcl:columnRef sourceName="StateId" targetName="StateId" />
 		</dcl:referenceConstraint>
 	</dcl:table>
-	<dcl:table name="Company">
-		<dcl:column name="CompanyId" isNullable="false" isIdentity="true">
+	<dcl:table name="DataField">
+		<dcl:column name="DataFieldId" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:column name="CompanyName" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
+		<dcl:column name="DataProviderId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:uniquenessConstraint name="Company_PK" isPrimary="true">
-			<dcl:columnRef name="CompanyId" />
-		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="Company_UC" isPrimary="false">
-			<dcl:columnRef name="CompanyName" />
-		</dcl:uniquenessConstraint>
-	</dcl:table>
-	<dcl:table name="Category">
-		<dcl:column name="CategoryName" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
+		<dcl:column name="IndustryId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
-		<dcl:column name="SupperCategry" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="256" />
+		<dcl:column name="Definition" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:uniquenessConstraint name="Category_PK" isPrimary="true">
-			<dcl:columnRef name="CategoryName" />
+		<dcl:column name="Label" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="32" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="DataField_PK" isPrimary="true">
+			<dcl:columnRef name="DataFieldId" />
 		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="Category_FK" targetTable="Category">
-			<dcl:columnRef sourceName="SupperCategry" targetName="CategoryName" />
+		<dcl:referenceConstraint name="DataField_FK1" targetTable="DataProvider">
+			<dcl:columnRef sourceName="DataProviderId" targetName="DataProviderId" />
 		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="DataField_FK2" targetTable="Industry">
+			<dcl:columnRef sourceName="IndustryId" targetName="IndustryId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PackageHasDataProviderWithDataField">
+		<dcl:column name="&quot;_Id&quot;" requestedName="_Id" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="DataFieldId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="DataProviderId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="Selected" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
+		</dcl:column>
+		<dcl:column name="UnifiedName" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
+		</dcl:column>
+		<dcl:column name="Priority" isNullable="true" isIdentity="false">
+			<dcl:domainRef name="Priority" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PackageHasDataProviderWithDataField_UC" isPrimary="false">
+			<dcl:columnRef name="PackageId" />
+			<dcl:columnRef name="DataProviderId" />
+			<dcl:columnRef name="DataFieldId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PackageHasDataProviderWithDataField_PK" isPrimary="true">
+			<dcl:columnRef name="&quot;_Id&quot;" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PackageHasDataProviderWithDataField_FK1" targetTable="Package">
+			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PackageHasDataProviderWithDataField_FK2" targetTable="DataProvider">
+			<dcl:columnRef sourceName="DataProviderId" targetName="DataProviderId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PackageHasDataProviderWithDataField_FK3" targetTable="DataField">
+			<dcl:columnRef sourceName="DataFieldId" targetName="DataFieldId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Industry">
+		<dcl:column name="IndustryId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="16" />
+		</dcl:column>
+		<dcl:checkConstraint name="Industry_Value_RoleValueConstraint2">
+			<dep:inPredicate type="IN">
+				<dep:columnReference name="&quot;Value&quot;" />
+				<ddt:characterStringLiteral value="Banking" />
+				<ddt:characterStringLiteral value="Consumer" />
+				<ddt:characterStringLiteral value="Dealer" />
+				<ddt:characterStringLiteral value="Government" />
+				<ddt:characterStringLiteral value="Insurance" />
+				<ddt:characterStringLiteral value="Other" />
+			</dep:inPredicate>
+		</dcl:checkConstraint>
+		<dcl:uniquenessConstraint name="Industry_PK" isPrimary="true">
+			<dcl:columnRef name="IndustryId" />
+		</dcl:uniquenessConstraint>
 	</dcl:table>
 </dcl:schema>

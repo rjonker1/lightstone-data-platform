@@ -5,35 +5,6 @@
 	<dms:setSchemaStatement>
 		<ddt:characterStringLiteral value="PACKAGEBUILDER" />
 	</dms:setSchemaStatement>
-	<ddl:domainDefinition name="State" schema="PackageBuilder">
-		<ddt:characterString type="CHARACTER VARYING" length="32" />
-		<ddl:domainConstraintDefinition name="ValueTypeValueConstraint1">
-			<ddl:checkConstraintDefinition>
-				<dep:inPredicate type="IN">
-					<dep:valueKeyword />
-					<ddt:characterStringLiteral value="Under construction" />
-					<ddt:characterStringLiteral value="Published" />
-					<ddt:characterStringLiteral value="Expired" />
-				</dep:inPredicate>
-			</ddl:checkConstraintDefinition>
-		</ddl:domainConstraintDefinition>
-	</ddl:domainDefinition>
-	<ddl:domainDefinition name="Industry" schema="PackageBuilder">
-		<ddt:characterString type="CHARACTER VARYING" length="32" />
-		<ddl:domainConstraintDefinition name="ValueTypeValueConstraint2">
-			<ddl:checkConstraintDefinition>
-				<dep:inPredicate type="IN">
-					<dep:valueKeyword />
-					<ddt:characterStringLiteral value="Banking" />
-					<ddt:characterStringLiteral value="Consumer" />
-					<ddt:characterStringLiteral value="Dealer" />
-					<ddt:characterStringLiteral value="Government" />
-					<ddt:characterStringLiteral value="Insurance" />
-					<ddt:characterStringLiteral value="Other" />
-				</dep:inPredicate>
-			</ddl:checkConstraintDefinition>
-		</ddl:domainConstraintDefinition>
-	</ddl:domainDefinition>
 	<ddl:domainDefinition name="Priority" schema="PackageBuilder">
 		<ddt:exactNumeric type="SMALLINT" />
 		<ddl:domainConstraintDefinition name="Priority_Unsigned_Chk">
@@ -66,13 +37,19 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="256" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageVersion">
+		<ddl:columnDefinition name="StateId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Version">
 			<ddt:characterString type="CHARACTER VARYING" length="16" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
@@ -82,30 +59,30 @@
 			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Created">
-			<ddt:time type="TIMESTAMP" />
+			<ddt:date type="DATE" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Edited">
-			<ddt:time type="TIMESTAMP" />
+			<ddt:date type="DATE" />
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageOwner">
+		<ddl:columnDefinition name="IndustryId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Owner">
 			<ddt:characterString type="CHARACTER VARYING" length="512" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageState">
-			<ddt:domain name="State" schema="PackageBuilder" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Price">
-			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Published">
 			<ddt:boolean type="BOOLEAN" />
 		</ddl:columnDefinition>
+		<ddl:columnDefinition name="RecomendedRetailPrice">
+			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
+		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RevisionDate">
-			<ddt:time type="TIMESTAMP" />
+			<ddt:date type="DATE" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Package_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="PackageName" />
-				<dep:simpleColumnReference name="PackageVersion" />
+				<dep:simpleColumnReference name="Name" />
+				<dep:simpleColumnReference name="Version" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Package_PK">
@@ -114,332 +91,41 @@
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
-	<ddl:tableDefinition name="Owner" schema="PackageBuilder">
-		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
+	<ddl:tableDefinition name="State" schema="PackageBuilder">
+		<ddl:columnDefinition name="StateId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="Owner_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="&quot;Value&quot;" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="State" schema="PackageBuilder">
 		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:domain name="State" schema="PackageBuilder" />
+			<ddt:characterString type="CHARACTER VARYING" length="16" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="State_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="&quot;Value&quot;" />
+				<dep:simpleColumnReference name="StateId" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="Industry" schema="PackageBuilder">
-		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:domain name="Industry" schema="PackageBuilder" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="Industry_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="&quot;Value&quot;" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="DataSource" schema="PackageBuilder">
-		<ddl:columnDefinition name="DataSourceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataProviderId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSouceName">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSouceVersion">
-			<ddt:characterString type="CHARACTER VARYING" length="16" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSourceState">
-			<ddt:domain name="State" schema="PackageBuilder" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="SourceURL">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="CostOfSale">
-			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Created">
-			<ddt:time type="TIMESTAMP" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSourceOwner">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Description">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Edited">
-			<ddt:time type="TIMESTAMP" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="RevisionDate">
-			<ddt:time type="TIMESTAMP" />
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="DataSource_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="DataSouceName" />
-				<dep:simpleColumnReference name="DataSouceVersion" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="DataSource_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DataSourceId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="DateField" schema="PackageBuilder">
-		<ddl:columnDefinition name="DateFieldId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSourceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Selected">
-			<ddt:boolean type="BOOLEAN" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Category">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Definition">
-			<ddt:characterString type="CHARACTER VARYING" length="255" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Industry">
-			<ddt:domain name="Industry" schema="PackageBuilder" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Label">
-			<ddt:characterString type="CHARACTER VARYING" length="32" />
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="DateField_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DateFieldId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="FileAttachment" schema="PackageBuilder">
-		<ddl:columnDefinition name="FileAttachmentId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="&quot;Blob&quot;">
-			<ddt:binaryString type="BINARY VARYING" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="FileName">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSourceId">
-			<ddt:exactNumeric type="INTEGER" />
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="FileAttachment_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FileAttachmentId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="PackageIndustry" schema="PackageBuilder">
-		<ddl:columnDefinition name="PackageHasIndustryId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageIndustry">
-			<ddt:domain name="Industry" schema="PackageBuilder" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="PackageIndustry_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="PackageId" />
-				<dep:simpleColumnReference name="PackageIndustry" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="PackageIndustry_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PackageHasIndustryId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="PackageDataSource" schema="PackageBuilder">
-		<ddl:columnDefinition name="PackageDataSourceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSourceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Priority">
-			<ddt:domain name="Priority" schema="PackageBuilder" />
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="PackageDataSource_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="DataSourceId" />
-				<dep:simpleColumnReference name="PackageId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="PackageDataSource_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PackageDataSourceId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-	</ddl:tableDefinition>
-	<ddl:tableDefinition name="PackageDataSourceDateField" schema="PackageBuilder">
-		<ddl:columnDefinition name="PackageDataSourceDateFieldId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataSourceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DateFieldId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Priority">
-			<ddt:domain name="Priority" schema="PackageBuilder" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="UnifiedName">
-			<ddt:characterString type="CHARACTER VARYING" />
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="PackageDataSourceDateField_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="PackageId" />
-				<dep:simpleColumnReference name="DataSourceId" />
-				<dep:simpleColumnReference name="DateFieldId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="PackageDataSourceDateField_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PackageDataSourceDateFieldId" />
-			</ddl:uniqueConstraintDefinition>
+		<ddl:tableConstraintDefinition name="State_Value_RoleValueConstraint1">
+			<ddl:checkConstraintDefinition>
+				<dep:inPredicate type="IN">
+					<dep:columnReference name="&quot;Value&quot;" />
+					<ddt:characterStringLiteral value="Under construction" />
+					<ddt:characterStringLiteral value="Published" />
+					<ddt:characterStringLiteral value="Expired" />
+				</dep:inPredicate>
+			</ddl:checkConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="DataProvider" schema="PackageBuilder">
@@ -457,31 +143,62 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="CompanyId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:columnConstraintDefinition>
-				<ddl:notNullKeyword />
-			</ddl:columnConstraintDefinition>
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataProviderName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="256" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
+		<ddl:columnDefinition name="SourceURL">
+			<ddt:characterString type="CHARACTER VARYING" length="512" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="StateId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Version">
+			<ddt:characterString type="CHARACTER VARYING" length="16" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="CostOfSale">
+			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Created">
+			<ddt:date type="DATE" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Description">
+			<ddt:characterString type="CHARACTER VARYING" length="512" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Edited">
+			<ddt:date type="DATE" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Owner">
+			<ddt:characterString type="CHARACTER VARYING" length="512" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="RevisionDate">
+			<ddt:date type="DATE" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="DataProvider_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="Name" />
+				<dep:simpleColumnReference name="Version" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DataProvider_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
 				<dep:simpleColumnReference name="DataProviderId" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="DataProvider_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="CompanyId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
-	<ddl:tableDefinition name="Company" schema="PackageBuilder">
-		<ddl:columnDefinition name="CompanyId">
+	<ddl:tableDefinition name="DataField" schema="PackageBuilder">
+		<ddl:columnDefinition name="DataFieldId">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -495,45 +212,137 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="CompanyName">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
+		<ddl:columnDefinition name="DataProviderId">
+			<ddt:exactNumeric type="INTEGER" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="Company_PK">
+		<ddl:columnDefinition name="IndustryId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Definition">
+			<ddt:characterString type="CHARACTER VARYING" length="255" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Label">
+			<ddt:characterString type="CHARACTER VARYING" length="32" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="DataField_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="CompanyId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="Company_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="CompanyName" />
+				<dep:simpleColumnReference name="DataFieldId" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
-	<ddl:tableDefinition name="Category" schema="PackageBuilder">
-		<ddl:columnDefinition name="CategoryName">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
+	<ddl:tableDefinition name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
+		<ddl:columnDefinition name="&quot;_Id&quot;">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="SupperCategry">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
+		<ddl:columnDefinition name="DataFieldId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="Category_PK">
-			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="CategoryName" />
+		<ddl:columnDefinition name="DataProviderId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="PackageId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Selected">
+			<ddt:boolean type="BOOLEAN" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="UnifiedName">
+			<ddt:characterString type="CHARACTER VARYING" length="128" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Priority">
+			<ddt:domain name="Priority" schema="PackageBuilder" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PackageHasDataProviderWithDataField_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="PackageId" />
+				<dep:simpleColumnReference name="DataProviderId" />
+				<dep:simpleColumnReference name="DataFieldId" />
 			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PackageHasDataProviderWithDataField_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="&quot;_Id&quot;" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Industry" schema="PackageBuilder">
+		<ddl:columnDefinition name="IndustryId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="&quot;Value&quot;">
+			<ddt:characterString type="CHARACTER VARYING" length="16" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Industry_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="IndustryId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Industry_Value_RoleValueConstraint2">
+			<ddl:checkConstraintDefinition>
+				<dep:inPredicate type="IN">
+					<dep:columnReference name="&quot;Value&quot;" />
+					<ddt:characterStringLiteral value="Banking" />
+					<ddt:characterStringLiteral value="Consumer" />
+					<ddt:characterStringLiteral value="Dealer" />
+					<ddt:characterStringLiteral value="Government" />
+					<ddt:characterStringLiteral value="Insurance" />
+					<ddt:characterStringLiteral value="Other" />
+				</dep:inPredicate>
+			</ddl:checkConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:alterTableStatement name="Package" schema="PackageBuilder">
 		<ddl:addTableConstraintDefinition name="Package_FK1">
 			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="PackageOwner" />
-				<ddl:referencesSpecification name="Owner" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="&quot;Value&quot;" />
+				<dep:simpleColumnReference name="StateId" />
+				<ddl:referencesSpecification name="State" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
+					<dep:simpleColumnReference name="StateId" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -541,35 +350,25 @@
 	<ddl:alterTableStatement name="Package" schema="PackageBuilder">
 		<ddl:addTableConstraintDefinition name="Package_FK2">
 			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="PackageState" />
-				<ddl:referencesSpecification name="State" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="&quot;Value&quot;" />
+				<dep:simpleColumnReference name="IndustryId" />
+				<ddl:referencesSpecification name="Industry" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
+					<dep:simpleColumnReference name="IndustryId" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DataSource" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DataSource_FK1">
+	<ddl:alterTableStatement name="DataProvider" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="DataProvider_FK">
 			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataSourceOwner" />
-				<ddl:referencesSpecification name="Owner" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="&quot;Value&quot;" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DataSource" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DataSource_FK2">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataSourceState" />
+				<dep:simpleColumnReference name="StateId" />
 				<ddl:referencesSpecification name="State" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="&quot;Value&quot;" />
+					<dep:simpleColumnReference name="StateId" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DataSource" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DataSource_FK3">
+	<ddl:alterTableStatement name="DataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="DataField_FK1">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="DataProviderId" />
 				<ddl:referencesSpecification name="DataProvider" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
@@ -578,48 +377,18 @@
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DateField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DateField_FK1">
+	<ddl:alterTableStatement name="DataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="DataField_FK2">
 			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataSourceId" />
-				<ddl:referencesSpecification name="DataSource" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataSourceId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DateField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DateField_FK2">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="Industry" />
+				<dep:simpleColumnReference name="IndustryId" />
 				<ddl:referencesSpecification name="Industry" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="&quot;Value&quot;" />
+					<dep:simpleColumnReference name="IndustryId" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DateField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DateField_FK3">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="Category" />
-				<ddl:referencesSpecification name="Category" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="CategoryName" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="FileAttachment" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="FileAttachment_FK">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataSourceId" />
-				<ddl:referencesSpecification name="DataSource" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataSourceId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageIndustry" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageIndustry_FK1">
+	<ddl:alterTableStatement name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="PackageHasDataProviderWithDataField_FK1">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PackageId" />
 				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
@@ -628,82 +397,22 @@
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageIndustry" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageIndustry_FK2">
+	<ddl:alterTableStatement name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="PackageHasDataProviderWithDataField_FK2">
 			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="PackageIndustry" />
-				<ddl:referencesSpecification name="Industry" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="&quot;Value&quot;" />
+				<dep:simpleColumnReference name="DataProviderId" />
+				<ddl:referencesSpecification name="DataProvider" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
+					<dep:simpleColumnReference name="DataProviderId" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageDataSource" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageDataSource_FK1">
+	<ddl:alterTableStatement name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="PackageHasDataProviderWithDataField_FK3">
 			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="PackageId" />
-				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="PackageId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageDataSource" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageDataSource_FK2">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataSourceId" />
-				<ddl:referencesSpecification name="DataSource" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataSourceId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageDataSourceDateField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageDataSourceDateField_FK1">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="PackageId" />
-				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="PackageId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageDataSourceDateField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageDataSourceDateField_FK2">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataSourceId" />
-				<ddl:referencesSpecification name="DataSource" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataSourceId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageDataSourceDateField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageDataSourceDateField_FK3">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DateFieldId" />
-				<ddl:referencesSpecification name="DateField" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DateFieldId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="DataProvider" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="DataProvider_FK">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="CompanyId" />
-				<ddl:referencesSpecification name="Company" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="CompanyId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="Category" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="Category_FK">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="SupperCategry" />
-				<ddl:referencesSpecification name="Category" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="CategoryName" />
+				<dep:simpleColumnReference name="DataFieldId" />
+				<ddl:referencesSpecification name="DataField" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
+					<dep:simpleColumnReference name="DataFieldId" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
