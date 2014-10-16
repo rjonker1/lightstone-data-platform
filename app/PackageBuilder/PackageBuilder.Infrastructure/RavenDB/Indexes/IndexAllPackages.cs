@@ -2,10 +2,11 @@
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
+using FluentNHibernate.Data;
 
 namespace PackageBuilder.Infrastructure.RavenDB.Indexes
 {
-    public class IndexAllPackages : AbstractIndexCreationTask<ReadPackage> 
+    public class IndexAllPackages : AbstractIndexCreationTask<Package> 
     {
         public IndexAllPackages()
         {
