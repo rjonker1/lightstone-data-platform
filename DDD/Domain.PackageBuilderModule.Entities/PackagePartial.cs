@@ -3,7 +3,7 @@ using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities
 {
-    public partial class Package
+    public partial class Package : Aggregate
     {
         private Package SetupCompleted()
         {
@@ -21,9 +21,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
                 var package = new Package
                 {
                     //Id = "people/" + Guid.NewGuid().ToString(),
-                    Id = IdentityGenerator.NewSequentialGuid(),
-                    Name = name,
-                    Version = version
+                    //Id = IdentityGenerator.NewSequentialGuid(),
+                    //Name = name,
+                    //Version =  version
                 };
 
                 package = package.SetupCompleted();

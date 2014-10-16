@@ -13,29 +13,30 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Module.Indexes
             AddMap<Package>(docs => from doc in docs
                 select new
                 {
-                    Id = doc.PackageId,
+                    Id = doc.Id,
                     Content = new object[]
                     {
-                        doc.Name,
+                        doc.Id,
                         doc.Version
                     },
-                    DisplayName = doc.Name + " " + doc.Version,
-                    ClrType = MetadataFor(doc).Value<String>("Raven-Clr-Type"),
-                    Collection = MetadataFor(doc).Value<String>("Raven-Entity-Name"),
+                    DisplayName = doc.Id + " " + doc.Version,
+                    ClrType = MetadataFor(doc).Value<String>("Doc-Clr-Type"),
+                    Collection = MetadataFor(doc).Value<String>("Doc-Entity-Name"),
                 });
 
-            AddMap<DataSource>(docs => from doc in docs
-                select new
-                {
-                    Id = doc.DataSourceId,
-                    Content = new object[]
-                    {
-                        doc.Name
-                    },
-                    DisplayName = doc.Name,
-                    ClrType = MetadataFor(doc).Value<String>("Raven-Clr-Type"),
-                    Collection = MetadataFor(doc).Value<String>("Raven-Entity-Name"),
-                });
+            //AddMap<DataSource>(docs => from doc in docs
+            //    select new
+            //    {
+            //        Id = doc.Id,
+            //        Content = new object[]
+            //        {
+            //            doc.Version,
+            //            doc.Version
+            //        },
+            //        DisplayName = doc.Id + " " + doc.Version,
+            //        ClrType = MetadataFor(doc).Value<String>("Doc-Clr-Type"),
+            //        Collection = MetadataFor(doc).Value<String>("Doc-Entity-Name"),
+            //    });
 
             Store(r => r.Id, FieldStorage.Yes);
             Store(r => r.DisplayName, FieldStorage.Yes);
