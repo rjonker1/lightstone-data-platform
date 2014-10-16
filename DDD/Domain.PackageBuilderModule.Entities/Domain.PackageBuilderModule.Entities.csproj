@@ -128,6 +128,22 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup Condition="Exists('PackageBuilderModel.orm')">
+    <None Include="PackageBuilderModel.Abstract.PLiX.xml">
+      <AutoGen>True</AutoGen>
+      <Generator>NUPlixLoader</Generator>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>CLIPropertiesToPLiXAbstract</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.CLIProperties.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>OIALtoCLIProperties</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.CoRef.orm">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>CoRefORM</ORMGenerator>
+    </None>
     <None Include="PackageBuilderModel.DCIL.xml">
       <AutoGen>True</AutoGen>
       <DependentUpon>PackageBuilderModel.orm</DependentUpon>
@@ -137,6 +153,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PackageBuilderModel.orm</DependentUpon>
       <ORMGenerator>DCILtoDDIL</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.Implementation.PLiX.xml">
+      <AutoGen>True</AutoGen>
+      <Generator>NUPlixLoader</Generator>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>CLIPropertiesToPLiXInMemory</ORMGenerator>
+    </None>
+    <None Include="PackageBuilderModel.OIAL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <ORMGenerator>ORMtoOIAL</ORMGenerator>
     </None>
     <None Include="PackageBuilderModel.SQLServer.sql">
       <AutoGen>True</AutoGen>

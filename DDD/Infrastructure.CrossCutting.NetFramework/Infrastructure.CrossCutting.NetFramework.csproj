@@ -140,7 +140,6 @@
     <Compile Include="Messaging\IEventPublisher.cs" />
     <Compile Include="Messaging\IMessageSessionProvider.cs" />
     <Compile Include="PagedCollection.cs" />
-    <Compile Include="PermissionRequiredAttribute.cs" />
     <Compile Include="Processes\IProcessManager.cs" />
     <Compile Include="Processes\IProcessManagerDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

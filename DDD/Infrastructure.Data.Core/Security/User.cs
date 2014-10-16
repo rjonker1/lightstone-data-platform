@@ -4,7 +4,7 @@ using LightstoneApp.Infrastructure.Data.Core.Security.Events;
 
 namespace LightstoneApp.Infrastructure.Data.Core.Security
 {
-    public class User : Aggregate
+    public class User 
     {
         private User()
         {
@@ -15,7 +15,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Security
 
         private User SetupCompleted()
         {
-            RaiseEvent(new UserCreated(Id, Username, FullName));
+            // TODO Raise event
 
             return this;
         }

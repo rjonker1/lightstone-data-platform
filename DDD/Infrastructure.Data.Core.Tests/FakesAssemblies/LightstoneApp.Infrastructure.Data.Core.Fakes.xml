@@ -2089,12 +2089,6 @@
         <member name="M:LightstoneApp.Infrastructure.Data.Core.Security.Fakes.ShimUser.BehaveAsNotImplemented">
             <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
         </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Security.Fakes.ShimUser.Bind(LightstoneApp.Infrastructure.CrossCutting.NetFramework.IAggregate)">
-            <summary>Binds the members of the interface to the shim.</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Security.Fakes.ShimUser.Bind(System.IEquatable{LightstoneApp.Infrastructure.CrossCutting.NetFramework.IAggregate})">
-            <summary>Binds the members of the interface to the shim.</summary>
-        </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Security.Fakes.ShimUser.Behavior">
             <summary>Assigns the behavior for all methods of the shimmed type</summary>
         </member>
