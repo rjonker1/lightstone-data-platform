@@ -4,7 +4,7 @@
     var app = angular.module('app');
 
     // Collect the routes
-    app.constant('routes', getRoutes());
+    app.constant('routes', getRoutes()); //constant as they will not change
     
     // Configure the routes and route resolvers
     app.config(['$routeProvider', 'routes', routeConfigurator]);
@@ -37,6 +37,16 @@
                     settings: {
                         nav: 2,
                         content: '<i class="fa fa-lock"></i> Admin'
+                    }
+                }
+            }, {
+                url: '/data-sources',
+                config: {
+                    title: 'data-sources',
+                    templateUrl: 'app/datasources/dataSources.html',
+                    settings: {
+                        nav: 3,
+                        content: '<i class="fa fa-calendar"></i> Datasources'
                     }
                 }
             }
