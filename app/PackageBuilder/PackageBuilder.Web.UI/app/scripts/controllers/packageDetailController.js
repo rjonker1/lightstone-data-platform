@@ -4,7 +4,7 @@ angular.module('packageBuilderwebuiApp')
   .controller('packageDetailCtrl', [ '$scope', '$parse', '$http','GetDataProviderSources', 'PostPackage', function ($scope, $parse, $http, GetDataProviderSources, PostPackage) {
 
     //MOCK
-    $http({
+    /*$http({
         method: 'GET',
         url: '/DataProviders.json'
         }).success(function(data, status, headers, config) {
@@ -14,9 +14,9 @@ angular.module('packageBuilderwebuiApp')
         }).error(function(data, status, headers, config) {
           
          
-        });
+        });*/
 
-        /*$scope.dataProvsPkg = {}; 
+        $scope.dataProvsPkg = {}; 
         $scope.dataProvsPkg.Package = {};
         $scope.dataProvsPkg.Package.DataProviders = [];
 
@@ -46,7 +46,7 @@ angular.module('packageBuilderwebuiApp')
                 { type: 'danger', msg: 'Failed to communicate with webserver !' }
             ];
 
-        }); */
+        });
 
 
         $scope.createPackage = function(packageData) {

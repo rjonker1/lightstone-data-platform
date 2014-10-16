@@ -27,37 +27,14 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new {Response = res});
             };
 
-            Get["/Package/Add"] = parameters =>
-            {
-                var dto = new PackageDto
-                {
-                    Name = "VVi",
-                    DataProviders = new List<DataProviderDto>
-                    {
-                        new DataProviderDto
-                        {
-                            Id = Guid.NewGuid(),
-                            Name = "Ivid",
-                            DataFields = new List<DataProviderFieldItemDto> {new DataProviderFieldItemDto {Name = "Colour"}}
-                        }
-                    }
-                };
-
-                var dp = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviders.First());
-
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, new []{dp}));
-
-                return Response.AsJson(new { msg = "Success" });
-            };
-
             Post["/Package/Add"] = parameters =>
             {
 
                 PackageDto dto = this.Bind<PackageDto>();
 
-                var dProviders = Mapper.Map<DataProviderDto, DataProvider>(dto.DataProviders.First());
+                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, new[]{dProviders} ));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dProviders ));
 
                 return Response.AsJson(new { msg = "Success" });
             };
