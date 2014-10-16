@@ -29,7 +29,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { Response = res });   
             };
 
-            Get["/DataProvider/DataSources"] = parameters =>
+            Get["/DataProvider/Get/All"] = parameters =>
             {
 
                 ArrayList DataSources = new ArrayList();
@@ -44,11 +44,13 @@ namespace PackageBuilder.Api.Modules
 
                     dSource.Id = provider.DataProviderId;
                     dSource.Name = provider.Name;
+                    dSource.CostOfSale = provider.CostOfSale;
                     dSource.Description = provider.Description;
                     dSource.Owner = provider.Owner;
                     dSource.Created = provider.Created;
                     dSource.Edited = provider.Edited;
                     dSource.Version = provider.Version;
+                    
 
                     try
                     {
@@ -96,6 +98,7 @@ namespace PackageBuilder.Api.Modules
                 DataProviderDto dto = this.Bind<DataProviderDto>();
                 dto.incVersion();
 
+                //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
 
                 bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto),   dFields ));

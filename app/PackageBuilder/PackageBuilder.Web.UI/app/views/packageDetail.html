@@ -10,14 +10,16 @@
      <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle"  ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
      <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields" >
                   
-        <input class="col-md-1" ng-model="dataPros.prods.prod[dataField.name]" ng-change="updateAPIModel(dataProvsPkg, dataField.name)" value="{{dataField.id}}" type="checkbox">
-        <div class="col-md-7">{{dataField.name}}</div>
-        <div class="col-md-3">Price: R{{dataField.price}}</div>                  
+        <input class="col-md-1" ng-model="dataProvs.provs.prov[dataField.name]" ng-change="updatePackageAPIModel(dataProvsPkg, dataField.name)" value="{{dataField.id}}" type="checkbox">
+        <div class="col-md-6">{{dataField.name}}</div>
+        <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 10% !important;" type="textbox" ng-model="dataField.price" ng-change="updateDataProvs(dataField.name)"/>           
     
      </li>
      </ol>
       
     </script>
+
+    {{dataProvsPkg}}
 
     <h3>Package Detail</h3>
 
@@ -88,7 +90,6 @@
 
     <div class="row">
       <div class="col-lg-6">
-        Aggregate Total: R {{ sum }}
       
         <h3>Data Providers</h3>
 
@@ -116,8 +117,8 @@
         <div style="float: right;">
 
           <div >
-            <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.costOfSale"/>
-            <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.recommendedSalePirce"/>
+            <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.costOfSale" readonly/>
+            <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="sum">
           </div>
 
           <br />

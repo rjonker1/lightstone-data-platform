@@ -7,6 +7,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
         public Guid Id { get; set; }
         public Guid DataProviderId { get; set; }
         public string Name { get; set; }
+        public double CostOfSale { get; private set; }
         public string Description { get; set; }
         public string Owner { get; set; }
         public DateTime Created { get; set; }
