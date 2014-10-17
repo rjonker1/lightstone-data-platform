@@ -47,7 +47,7 @@
         return service;
 
         function activateController(promises, controllerId) {
-            return $q.all(promises).then(function (eventArgs) {
+            return $q.all(promises).then(function (eventArgs) { //$q.all will wait for all to be executed and then continue
                 var data = { controllerId: controllerId };
                 $broadcast(commonConfig.config.controllerActivateSuccessEvent, data);
             });
