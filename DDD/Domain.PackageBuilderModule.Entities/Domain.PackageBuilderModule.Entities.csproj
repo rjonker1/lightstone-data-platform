@@ -55,9 +55,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\Class1.cs" />
+    <Compile Include="Context\PackageBuilderContext.cs" />
+    <Compile Include="DTO\Package.cs" />
+    <Compile Include="DTO\DataField.cs" />
+    <Compile Include="DTO\DataProvider.cs" />
+    <Compile Include="DTO\IHasPackageBuilderContext.cs" />
+    <Compile Include="DTO\Industry.cs" />
+    <Compile Include="DTO\IPackageBuilderContext.cs" />
+    <Compile Include="DTO\PackageDataField.cs" />
+    <Compile Include="DTO\State.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
-    <Compile Include="PackageBuilderContext.cs" />
     <Compile Include="PackagePartial.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -38,7 +38,7 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Name">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
+			<ddt:characterString type="CHARACTER VARYING" length="128" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -144,7 +144,13 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Name">
-			<ddt:characterString type="CHARACTER VARYING" length="256" />
+			<ddt:characterString type="CHARACTER VARYING" length="128" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Owner">
+			<ddt:characterString type="CHARACTER VARYING" length="512" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -179,9 +185,6 @@
 		<ddl:columnDefinition name="Edited">
 			<ddt:date type="DATE" />
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Owner">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
-		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RevisionDate">
 			<ddt:date type="DATE" />
 		</ddl:columnDefinition>
@@ -212,6 +215,12 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
+		<ddl:columnDefinition name="CostOfSale">
+			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
 		<ddl:columnDefinition name="DataProviderId">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:columnConstraintDefinition>
@@ -224,20 +233,37 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Definition">
-			<ddt:characterString type="CHARACTER VARYING" length="255" />
+		<ddl:columnDefinition name="Name">
+			<ddt:characterString type="CHARACTER VARYING" length="128" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Selected">
+			<ddt:boolean type="BOOLEAN" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Label">
 			<ddt:characterString type="CHARACTER VARYING" length="32" />
 		</ddl:columnDefinition>
+		<ddl:columnDefinition name="TypeDefinition">
+			<ddt:characterString type="CHARACTER VARYING" length="255" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="DataField_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="Name" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DataField_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
 				<dep:simpleColumnReference name="DataFieldId" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
-	<ddl:tableDefinition name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
-		<ddl:columnDefinition name="&quot;_Id&quot;">
+	<ddl:tableDefinition name="PackageDataField" schema="PackageBuilder">
+		<ddl:columnDefinition name="PackageDataFieldId">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -257,14 +283,14 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="DataProviderId">
+		<ddl:columnDefinition name="PackageId">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
+		<ddl:columnDefinition name="Priority">
+			<ddt:domain name="Priority" schema="PackageBuilder" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -281,19 +307,9 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Priority">
-			<ddt:domain name="Priority" schema="PackageBuilder" />
-		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="PackageHasDataProviderWithDataField_UC">
-			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="PackageId" />
-				<dep:simpleColumnReference name="DataProviderId" />
-				<dep:simpleColumnReference name="DataFieldId" />
-			</ddl:uniqueConstraintDefinition>
-		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="PackageHasDataProviderWithDataField_PK">
+		<ddl:tableConstraintDefinition name="PackageDataField_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="&quot;_Id&quot;" />
+				<dep:simpleColumnReference name="PackageDataFieldId" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
@@ -387,8 +403,8 @@
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageHasDataProviderWithDataField_FK1">
+	<ddl:alterTableStatement name="PackageDataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="PackageDataField_FK1">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PackageId" />
 				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
@@ -397,18 +413,8 @@
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
 	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageHasDataProviderWithDataField_FK2">
-			<ddl:referentialConstraintDefinition>
-				<dep:simpleColumnReference name="DataProviderId" />
-				<ddl:referencesSpecification name="DataProvider" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataProviderId" />
-				</ddl:referencesSpecification>
-			</ddl:referentialConstraintDefinition>
-		</ddl:addTableConstraintDefinition>
-	</ddl:alterTableStatement>
-	<ddl:alterTableStatement name="PackageHasDataProviderWithDataField" schema="PackageBuilder">
-		<ddl:addTableConstraintDefinition name="PackageHasDataProviderWithDataField_FK3">
+	<ddl:alterTableStatement name="PackageDataField" schema="PackageBuilder">
+		<ddl:addTableConstraintDefinition name="PackageDataField_FK2">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="DataFieldId" />
 				<ddl:referencesSpecification name="DataField" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
