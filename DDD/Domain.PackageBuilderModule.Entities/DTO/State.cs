@@ -1,17 +1,17 @@
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 {
     [DataObject]
-    [GeneratedCode("OIALtoPLiX", "1.0")]
+    [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
     public abstract class State : INotifyPropertyChanged, IHasPackageBuilderContext
     {
@@ -30,8 +30,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -44,8 +44,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -173,12 +173,15 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         public abstract PackageBuilderContext Context { get; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string Value { get; set; }
 
         [DataObjectField(false, false, true)]
-        public abstract IEnumerable<PackageBuilder.Package> PackageViaStateCollection { get; }
+        [DataMember]
+        public abstract IEnumerable<Package> PackageViaStateCollection { get; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract IEnumerable<DataProvider> DataProviderViaStateCollection { get; }
 
         #endregion // State Abstract Properties
@@ -196,5 +199,25 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         }
 
         #endregion // State ToString Methods
+
+        #region Constants
+
+        private const string UnderConstruction = "Under construction";
+        private const string Published = "Published";
+        private const string Expired = "Expired";
+        
+        #endregion
+
+        /// <summary>
+        /// CONSTRAINT State_Value_RoleValueConstraint1 CHECK ("Value" IN (N'Under construction', N'Published', N'Expired'))
+        /// </summary>
+        public static readonly string ConstraintValues = new {UnderConstruction, Published, Expired}.ToString();
+
+
+
     }
+
+    
+   
+    
 }

@@ -1,39 +1,38 @@
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 {
-    [GeneratedCode("OIALtoPLiX", "1.0")]
     public interface IPackageBuilderContext
     {
-        IEnumerable<PackageBuilder.Package> PackageCollection { get; }
-        IEnumerable<State> StateCollection { get; }
-        IEnumerable<DataProvider> DataProviderCollection { get; }
-        IEnumerable<DataField> DataFieldCollection { get; }
-        IEnumerable<PackageDataField> PackageDataFieldCollection { get; }
-        IEnumerable<Industry> IndustryCollection { get; }
-        PackageBuilder.Package GetPackageByExternalUniquenessConstraint2(string Name, string Version);
+        Package GetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version);
 
-        bool TryGetPackageByExternalUniquenessConstraint2(string Name, string Version,
-            out PackageBuilder.Package Package);
+        bool TryGetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version,
+            out Package Package);
 
-        DataProvider GetDataProviderByExternalUniquenessConstraint1(string Name, string Version);
+        DataProvider GetDataProviderByDataProviderNameAndVersionUniquenessConstraint(string Name, string Version);
 
-        bool TryGetDataProviderByExternalUniquenessConstraint1(string Name, string Version,
+        bool TryGetDataProviderByDataProviderNameAndVersionUniquenessConstraint(string Name, string Version,
             out DataProvider DataProvider);
 
         DataField GetDataFieldByName(string Name);
         bool TryGetDataFieldByName(string Name, out DataField DataField);
-        PackageBuilder.Package CreatePackage(string Name, string Description, string Version, State State);
-        State CreateState(string Value);
+        Package CreatePackage(string name, string description, string version, State state);
+        IEnumerable<Package> PackageCollection { get; }
+        State CreateState(string value);
+        IEnumerable<State> StateCollection { get; }
         DataProvider CreateDataProvider(string Name, string Owner, string Version, string SourceURL, State State);
+        IEnumerable<DataProvider> DataProviderCollection { get; }
 
         DataField CreateDataField(bool Selected, decimal CostOfSale, string Name, DataProvider DataProvider,
             Industry Industry);
 
-        PackageDataField CreatePackageDataField(int Priority, string UnifiedName, bool Selected,
-            PackageBuilder.Package Package, DataField DataField);
+        IEnumerable<DataField> DataFieldCollection { get; }
 
+        PackageDataField CreatePackageDataField(int Priority, string UnifiedName, bool Selected, Package Package,
+            DataField DataField);
+
+        IEnumerable<PackageDataField> PackageDataFieldCollection { get; }
         Industry CreateIndustry(string Value);
+        IEnumerable<Industry> IndustryCollection { get; }
     }
 }

@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO;
+using System.Runtime.InteropServices;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 {
@@ -12,67 +13,61 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
         #region PackageBuilderContext
 
+        
+        [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
         public sealed class PackageBuilderContext : IPackageBuilderContext
         {
             public PackageBuilderContext()
             {
-                var constraintEnforcementCollectionCallbacksByTypeDictionary =
+                Dictionary<RuntimeTypeHandle, object> constraintEnforcementCollectionCallbacksByTypeDictionary =
                     _ContraintEnforcementCollectionCallbacksByTypeDictionary =
                         new Dictionary<RuntimeTypeHandle, object>(7, RuntimeTypeHandleEqualityComparer.Instance);
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
                     typeof (ConstraintEnforcementCollection<DTO.PackageBuilder.Package, PackageDataField>).TypeHandle,
                     new ConstraintEnforcementCollectionCallbacks<DTO.PackageBuilder.Package, PackageDataField>(
                         OnPackagePackageDataFieldViaPackageCollectionAdding,
                         OnPackagePackageDataFieldViaPackageCollectionAdded, null,
                         OnPackagePackageDataFieldViaPackageCollectionRemoved));
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<State, DTO.PackageBuilder.Package>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<State, DTO.PackageBuilder.Package>(
+                    typeof (ConstraintEnforcementCollection<DTO.PackageBuilder.State, DTO.PackageBuilder.Package>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<DTO.PackageBuilder.State, DTO.PackageBuilder.Package>(
                         OnStatePackageViaStateCollectionAdding, OnStatePackageViaStateCollectionAdded, null,
                         OnStatePackageViaStateCollectionRemoved));
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<State, DataProvider>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<State, DataProvider>(
+                    typeof (ConstraintEnforcementCollection<DTO.PackageBuilder.State, DataProvider>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<DTO.PackageBuilder.State, DataProvider>(
                         OnStateDataProviderViaStateCollectionAdding, OnStateDataProviderViaStateCollectionAdded, null,
                         OnStateDataProviderViaStateCollectionRemoved));
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
                     typeof (ConstraintEnforcementCollection<DataProvider, DataField>).TypeHandle,
                     new ConstraintEnforcementCollectionCallbacks<DataProvider, DataField>(
                         OnDataProviderDataFieldViaDataProviderCollectionAdding,
                         OnDataProviderDataFieldViaDataProviderCollectionAdded, null,
                         OnDataProviderDataFieldViaDataProviderCollectionRemoved));
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
                     typeof (ConstraintEnforcementCollection<DataField, PackageDataField>).TypeHandle,
                     new ConstraintEnforcementCollectionCallbacks<DataField, PackageDataField>(
                         OnDataFieldPackageDataFieldViaDataFieldCollectionAdding,
                         OnDataFieldPackageDataFieldViaDataFieldCollectionAdded, null,
                         OnDataFieldPackageDataFieldViaDataFieldCollectionRemoved));
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Industry, DTO.PackageBuilder.Package>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Industry, DTO.PackageBuilder.Package>(
+                    typeof (ConstraintEnforcementCollection<DTO.PackageBuilder.Industry, DTO.PackageBuilder.Package>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<DTO.PackageBuilder.Industry, DTO.PackageBuilder.Package>(
                         OnIndustryPackageViaIndustryCollectionAdding, OnIndustryPackageViaIndustryCollectionAdded, null,
                         OnIndustryPackageViaIndustryCollectionRemoved));
-
                 constraintEnforcementCollectionCallbacksByTypeDictionary.Add(
-                    typeof (ConstraintEnforcementCollection<Industry, DataField>).TypeHandle,
-                    new ConstraintEnforcementCollectionCallbacks<Industry, DataField>(
+                    typeof (ConstraintEnforcementCollection<DTO.PackageBuilder.Industry, DataField>).TypeHandle,
+                    new ConstraintEnforcementCollectionCallbacks<DTO.PackageBuilder.Industry, DataField>(
                         OnIndustryDataFieldViaIndustryCollectionAdding, OnIndustryDataFieldViaIndustryCollectionAdded,
                         null, OnIndustryDataFieldViaIndustryCollectionRemoved));
-
                 _PackageReadOnlyCollection = new ReadOnlyCollection<DTO.PackageBuilder.Package>(_PackageList = new List<DTO.PackageBuilder.Package>());
-                _StateReadOnlyCollection = new ReadOnlyCollection<State>(_StateList = new List<State>());
+                _StateReadOnlyCollection = new ReadOnlyCollection<DTO.PackageBuilder.State>(_StateList = new List<DTO.PackageBuilder.State>());
                 _DataProviderReadOnlyCollection =
                     new ReadOnlyCollection<DataProvider>(_DataProviderList = new List<DataProvider>());
                 _DataFieldReadOnlyCollection = new ReadOnlyCollection<DataField>(_DataFieldList = new List<DataField>());
                 _PackageDataFieldReadOnlyCollection =
                     new ReadOnlyCollection<PackageDataField>(_PackageDataFieldList = new List<PackageDataField>());
-                _IndustryReadOnlyCollection = new ReadOnlyCollection<Industry>(_IndustryList = new List<Industry>());
+                _IndustryReadOnlyCollection = new ReadOnlyCollection<DTO.PackageBuilder.Industry>(_IndustryList = new List<DTO.PackageBuilder.Industry>());
             }
 
             #region Exception Helpers
@@ -98,26 +93,33 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region Lookup and External Constraint Enforcement
 
-            private readonly Dictionary<Tuple<string, string>, DTO.PackageBuilder.Package> _ExternalUniquenessConstraint2Dictionary =
-                new Dictionary<Tuple<string, string>, DTO.PackageBuilder.Package>();
+            private readonly Dictionary<Tuple<string, string>, DTO.PackageBuilder.Package>
+                _PackageNameAndVersionExternalUniquenessConstraintDictionary =
+                    new Dictionary<Tuple<string, string>, DTO.PackageBuilder.Package>();
 
-            public DTO.PackageBuilder.Package GetPackageByExternalUniquenessConstraint2(string Name, string Version)
+            public DTO.PackageBuilder.Package GetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version)
             {
-                return _ExternalUniquenessConstraint2Dictionary[new Tuple<string, string>(Name, Version)];
+                return
+                    _PackageNameAndVersionExternalUniquenessConstraintDictionary[
+                        new Tuple<string, string>(Name, Version)];
             }
 
-            public bool TryGetPackageByExternalUniquenessConstraint2(string Name, string Version, out DTO.PackageBuilder.Package Package)
+            public bool TryGetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version,
+                out DTO.PackageBuilder.Package Package)
             {
-                return _ExternalUniquenessConstraint2Dictionary.TryGetValue(new Tuple<string, string>(Name, Version),
-                    out Package);
+                return
+                    _PackageNameAndVersionExternalUniquenessConstraintDictionary.TryGetValue(
+                        new Tuple<string, string>(Name, Version), out Package);
             }
 
-            private bool OnExternalUniquenessConstraint2Changing(DTO.PackageBuilder.Package instance, Tuple<string, string> newValue)
+            private bool OnPackageNameAndVersionExternalUniquenessConstraintChanging(DTO.PackageBuilder.Package instance,
+                Tuple<string, string> newValue)
             {
                 if (newValue != null)
                 {
                     DTO.PackageBuilder.Package currentInstance;
-                    if (_ExternalUniquenessConstraint2Dictionary.TryGetValue(newValue, out currentInstance))
+                    if (_PackageNameAndVersionExternalUniquenessConstraintDictionary.TryGetValue(newValue,
+                        out currentInstance))
                     {
                         return currentInstance == instance;
                     }
@@ -125,40 +127,46 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnExternalUniquenessConstraint2Changed(DTO.PackageBuilder.Package instance, Tuple<string, string> oldValue,
-                Tuple<string, string> newValue)
+            private void OnPackageNameAndVersionExternalUniquenessConstraintChanged(DTO.PackageBuilder.Package instance,
+                Tuple<string, string> oldValue, Tuple<string, string> newValue)
             {
                 if (oldValue != null)
                 {
-                    _ExternalUniquenessConstraint2Dictionary.Remove(oldValue);
+                    _PackageNameAndVersionExternalUniquenessConstraintDictionary.Remove(oldValue);
                 }
                 if (newValue != null)
                 {
-                    _ExternalUniquenessConstraint2Dictionary.Add(newValue, instance);
+                    _PackageNameAndVersionExternalUniquenessConstraintDictionary.Add(newValue, instance);
                 }
             }
 
-            private readonly Dictionary<Tuple<string, string>, DataProvider> _ExternalUniquenessConstraint1Dictionary =
-                new Dictionary<Tuple<string, string>, DataProvider>();
+            private readonly Dictionary<Tuple<string, string>, DataProvider>
+                _DataProviderNameAndVersionUniquenessConstraintDictionary =
+                    new Dictionary<Tuple<string, string>, DataProvider>();
 
-            public DataProvider GetDataProviderByExternalUniquenessConstraint1(string Name, string Version)
+            public DataProvider GetDataProviderByDataProviderNameAndVersionUniquenessConstraint(string Name,
+                string Version)
             {
-                return _ExternalUniquenessConstraint1Dictionary[new Tuple<string, string>(Name, Version)];
+                return
+                    _DataProviderNameAndVersionUniquenessConstraintDictionary[new Tuple<string, string>(Name, Version)];
             }
 
-            public bool TryGetDataProviderByExternalUniquenessConstraint1(string Name, string Version,
+            public bool TryGetDataProviderByDataProviderNameAndVersionUniquenessConstraint(string Name, string Version,
                 out DataProvider DataProvider)
             {
-                return _ExternalUniquenessConstraint1Dictionary.TryGetValue(new Tuple<string, string>(Name, Version),
-                    out DataProvider);
+                return
+                    _DataProviderNameAndVersionUniquenessConstraintDictionary.TryGetValue(
+                        new Tuple<string, string>(Name, Version), out DataProvider);
             }
 
-            private bool OnExternalUniquenessConstraint1Changing(DataProvider instance, Tuple<string, string> newValue)
+            private bool OnDataProviderNameAndVersionUniquenessConstraintChanging(DataProvider instance,
+                Tuple<string, string> newValue)
             {
                 if (newValue != null)
                 {
                     DataProvider currentInstance;
-                    if (_ExternalUniquenessConstraint1Dictionary.TryGetValue(newValue, out currentInstance))
+                    if (_DataProviderNameAndVersionUniquenessConstraintDictionary.TryGetValue(newValue,
+                        out currentInstance))
                     {
                         return currentInstance == instance;
                     }
@@ -166,16 +174,16 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnExternalUniquenessConstraint1Changed(DataProvider instance, Tuple<string, string> oldValue,
-                Tuple<string, string> newValue)
+            private void OnDataProviderNameAndVersionUniquenessConstraintChanged(DataProvider instance,
+                Tuple<string, string> oldValue, Tuple<string, string> newValue)
             {
                 if (oldValue != null)
                 {
-                    _ExternalUniquenessConstraint1Dictionary.Remove(oldValue);
+                    _DataProviderNameAndVersionUniquenessConstraintDictionary.Remove(oldValue);
                 }
                 if (newValue != null)
                 {
-                    _ExternalUniquenessConstraint1Dictionary.Add(newValue, instance);
+                    _DataProviderNameAndVersionUniquenessConstraintDictionary.Add(newValue, instance);
                 }
             }
 
@@ -204,6 +212,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 TClass instance, TProperty item)
                 where TClass : class, IHasPackageBuilderContext;
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class ConstraintEnforcementCollectionCallbacks<TClass, TProperty>
                 where TClass : class, IHasPackageBuilderContext
             {
@@ -235,6 +244,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                             typeof (ConstraintEnforcementCollection<TClass, TProperty>).TypeHandle];
             }
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class RuntimeTypeHandleEqualityComparer : IEqualityComparer<RuntimeTypeHandle>
             {
                 public static readonly RuntimeTypeHandleEqualityComparer Instance =
@@ -258,6 +268,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
             private readonly Dictionary<RuntimeTypeHandle, object>
                 _ContraintEnforcementCollectionCallbacksByTypeDictionary;
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class ConstraintEnforcementCollection<TClass, TProperty> : ICollection<TProperty>
                 where TClass : class, IHasPackageBuilderContext
             {
@@ -364,41 +375,44 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region Package
 
-            public DTO.PackageBuilder.Package CreatePackage(string Name, string Description, string Version, State State)
+            public DTO.PackageBuilder.Package CreatePackage(string name, string description, string version, DTO.PackageBuilder.State state)
             {
-                if ((object) Name == null)
+                if ((object) name == null)
                 {
-                    throw new ArgumentNullException("Name");
+                    throw new ArgumentNullException("name");
                 }
-                if ((object) Description == null)
+                if ((object) description == null)
                 {
-                    throw new ArgumentNullException("Description");
+                    throw new ArgumentNullException("description");
                 }
-                if ((object) Version == null)
+                if ((object) version == null)
                 {
-                    throw new ArgumentNullException("Version");
+                    throw new ArgumentNullException("version");
                 }
-                if (State == null)
+                if (state == null)
                 {
-                    throw new ArgumentNullException("State");
+                    throw new ArgumentNullException("state");
                 }
-                if (!OnPackageNameChanging(null, Name))
+
+
+
+                if (!OnPackageNameChanging(null, name))
                 {
                     throw GetConstraintEnforcementFailedException("Name");
                 }
-                if (!OnPackageDescriptionChanging(null, Description))
+                if (!OnPackageDescriptionChanging(null, description))
                 {
                     throw GetConstraintEnforcementFailedException("Description");
                 }
-                if (!OnPackageVersionChanging(null, Version))
+                if (!OnPackageVersionChanging(null, version))
                 {
                     throw GetConstraintEnforcementFailedException("Version");
                 }
-                if (!OnPackageStateChanging(null, State))
+                if (!OnPackageStateChanging(null, state))
                 {
                     throw GetConstraintEnforcementFailedException("State");
                 }
-                return new PackageCore(this, Name, Description, Version, State);
+                return new PackageCore(this, name, description, version, state);
             }
 
             private bool OnPackageNameChanging(DTO.PackageBuilder.Package instance, string newValue)
@@ -406,7 +420,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 if (instance != null)
                 {
                     if (
-                        !OnExternalUniquenessConstraint2Changing(instance,
+                        !OnPackageNameAndVersionExternalUniquenessConstraintChanging(instance,
                             new Tuple<string, string>(newValue, instance.Version)))
                     {
                         return false;
@@ -417,16 +431,18 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             private void OnPackageNameChanged(DTO.PackageBuilder.Package instance, string oldValue)
             {
-                Tuple<string, string> ExternalUniquenessConstraint2OldValueTuple;
+                Tuple<string, string> packageNameAndVersionExternalUniquenessConstraintOldValueTuple;
                 if ((object) oldValue != null)
                 {
-                    ExternalUniquenessConstraint2OldValueTuple = new Tuple<string, string>(oldValue, instance.Version);
+                    packageNameAndVersionExternalUniquenessConstraintOldValueTuple = new Tuple<string, string>(
+                        oldValue, instance.Version);
                 }
                 else
                 {
-                    ExternalUniquenessConstraint2OldValueTuple = null;
+                    packageNameAndVersionExternalUniquenessConstraintOldValueTuple = null;
                 }
-                OnExternalUniquenessConstraint2Changed(instance, ExternalUniquenessConstraint2OldValueTuple,
+                OnPackageNameAndVersionExternalUniquenessConstraintChanged(instance,
+                    packageNameAndVersionExternalUniquenessConstraintOldValueTuple,
                     new Tuple<string, string>(instance.Name, instance.Version));
             }
 
@@ -440,12 +456,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private bool OnPackageCreatedChanging(DTO.PackageBuilder.Package instance, int? newValue)
+            private bool OnPackageCreatedChanging(DTO.PackageBuilder.Package instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnPackageEditedChanging(DTO.PackageBuilder.Package instance, int? newValue)
+            private bool OnPackageEditedChanging(DTO.PackageBuilder.Package instance, DateTime? newValue)
             {
                 return true;
             }
@@ -455,7 +471,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 if (instance != null)
                 {
                     if (
-                        !OnExternalUniquenessConstraint2Changing(instance,
+                        !OnPackageNameAndVersionExternalUniquenessConstraintChanging(instance,
                             new Tuple<string, string>(instance.Name, newValue)))
                     {
                         return false;
@@ -466,16 +482,18 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             private void OnPackageVersionChanged(DTO.PackageBuilder.Package instance, string oldValue)
             {
-                Tuple<string, string> ExternalUniquenessConstraint2OldValueTuple;
+                Tuple<string, string> packageNameAndVersionExternalUniquenessConstraintOldValueTuple;
                 if ((object) oldValue != null)
                 {
-                    ExternalUniquenessConstraint2OldValueTuple = new Tuple<string, string>(instance.Name, oldValue);
+                    packageNameAndVersionExternalUniquenessConstraintOldValueTuple =
+                        new Tuple<string, string>(instance.Name, oldValue);
                 }
                 else
                 {
-                    ExternalUniquenessConstraint2OldValueTuple = null;
+                    packageNameAndVersionExternalUniquenessConstraintOldValueTuple = null;
                 }
-                OnExternalUniquenessConstraint2Changed(instance, ExternalUniquenessConstraint2OldValueTuple,
+                OnPackageNameAndVersionExternalUniquenessConstraintChanged(instance,
+                    packageNameAndVersionExternalUniquenessConstraintOldValueTuple,
                     new Tuple<string, string>(instance.Name, instance.Version));
             }
 
@@ -484,7 +502,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private bool OnPackageRevisionDateChanging(DTO.PackageBuilder.Package instance, int? newValue)
+            private bool OnPackageRevisionDateChanging(DTO.PackageBuilder.Package instance, DateTime? newValue)
             {
                 return true;
             }
@@ -499,7 +517,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private bool OnPackageStateChanging(DTO.PackageBuilder.Package instance, State newValue)
+            private bool OnPackageStateChanging(DTO.PackageBuilder.Package instance, DTO.PackageBuilder.State newValue)
             {
                 if (this != newValue.Context)
                 {
@@ -508,7 +526,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnPackageStateChanged(DTO.PackageBuilder.Package instance, State oldValue)
+            private void OnPackageStateChanged(DTO.PackageBuilder.Package instance, DTO.PackageBuilder.State oldValue)
             {
                 ((ICollection<DTO.PackageBuilder.Package>) instance.State.PackageViaStateCollection).Add(instance);
                 if (oldValue != null)
@@ -517,7 +535,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 }
             }
 
-            private bool OnPackageIndustryChanging(DTO.PackageBuilder.Package instance, Industry newValue)
+            private bool OnPackageIndustryChanging(DTO.PackageBuilder.Package instance, DTO.PackageBuilder.Industry newValue)
             {
                 if (newValue != null)
                 {
@@ -529,7 +547,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnPackageIndustryChanged(DTO.PackageBuilder.Package instance, Industry oldValue)
+            private void OnPackageIndustryChanged(DTO.PackageBuilder.Package instance, DTO.PackageBuilder.Industry oldValue)
             {
                 if (instance.Industry != null)
                 {
@@ -573,10 +591,11 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region PackageCore
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class PackageCore : DTO.PackageBuilder.Package
             {
                 public PackageCore(PackageBuilderContext context, string Name, string Description, string Version,
-                    State State)
+                    DTO.PackageBuilder.State State)
                 {
                     _Context = context;
                     _PackageDataFieldViaPackageCollection =
@@ -664,14 +683,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private int? _Created;
+                private DateTime? _Created;
 
-                public override int? Created
+                public override DateTime? Created
                 {
                     get { return _Created; }
                     set
                     {
-                        int? oldValue = _Created;
+                        DateTime? oldValue = _Created;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -684,14 +703,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private int? _Edited;
+                private DateTime? _Edited;
 
-                public override int? Edited
+                public override DateTime? Edited
                 {
                     get { return _Edited; }
                     set
                     {
-                        int? oldValue = _Edited;
+                        DateTime? oldValue = _Edited;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -748,14 +767,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private int? _RevisionDate;
+                private DateTime? _RevisionDate;
 
-                public override int? RevisionDate
+                public override DateTime? RevisionDate
                 {
                     get { return _RevisionDate; }
                     set
                     {
-                        int? oldValue = _RevisionDate;
+                        DateTime? oldValue = _RevisionDate;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -810,9 +829,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private State _State;
+                private DTO.PackageBuilder.State _State;
 
-                public override State State
+                public override DTO.PackageBuilder.State State
                 {
                     get { return _State; }
                     set
@@ -821,7 +840,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                         {
                             throw new ArgumentNullException("value");
                         }
-                        State oldValue = _State;
+                        DTO.PackageBuilder.State oldValue = _State;
                         if (oldValue != value)
                         {
                             if (_Context.OnPackageStateChanging(this, value) && base.OnStateChanging(value))
@@ -834,14 +853,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private Industry _Industry;
+                private DTO.PackageBuilder.Industry _Industry;
 
-                public override Industry Industry
+                public override DTO.PackageBuilder.Industry Industry
                 {
                     get { return _Industry; }
                     set
                     {
-                        Industry oldValue = _Industry;
+                        DTO.PackageBuilder.Industry oldValue = _Industry;
                         if (oldValue != value)
                         {
                             if (_Context.OnPackageIndustryChanging(this, value) && base.OnIndustryChanging(value))
@@ -868,25 +887,34 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region State
 
-            public State CreateState(string Value)
+            public DTO.PackageBuilder.State CreateState(string value)
             {
-                if ((object) Value == null)
+                if ((object) value == null)
                 {
-                    throw new ArgumentNullException("Value");
+                    throw new ArgumentNullException("value");
                 }
-                if (!OnStateValueChanging(null, Value))
+
+                // check constraint values
+
+                if (!DTO.PackageBuilder.State.ConstraintValues.Contains(value))
+                {
+                    throw new ArgumentNullException("value");
+                }
+
+
+                if (!OnStateValueChanging(null, value))
                 {
                     throw GetConstraintEnforcementFailedException("Value");
                 }
-                return new StateCore(this, Value);
+                return new StateCore(this, value);
             }
 
-            private bool OnStateValueChanging(State instance, string newValue)
+            private bool OnStateValueChanging(DTO.PackageBuilder.State instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnStatePackageViaStateCollectionAdding(State instance, DTO.PackageBuilder.Package item)
+            private bool OnStatePackageViaStateCollectionAdding(DTO.PackageBuilder.State instance, DTO.PackageBuilder.Package item)
             {
                 if (this != item.Context)
                 {
@@ -895,12 +923,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnStatePackageViaStateCollectionAdded(State instance, DTO.PackageBuilder.Package item)
+            private void OnStatePackageViaStateCollectionAdded(DTO.PackageBuilder.State instance, DTO.PackageBuilder.Package item)
             {
                 item.State = instance;
             }
 
-            private void OnStatePackageViaStateCollectionRemoved(State instance, DTO.PackageBuilder.Package item)
+            private void OnStatePackageViaStateCollectionRemoved(DTO.PackageBuilder.State instance, DTO.PackageBuilder.Package item)
             {
                 if (item.State == instance)
                 {
@@ -908,7 +936,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 }
             }
 
-            private bool OnStateDataProviderViaStateCollectionAdding(State instance, DataProvider item)
+            private bool OnStateDataProviderViaStateCollectionAdding(DTO.PackageBuilder.State instance, DataProvider item)
             {
                 if (this != item.Context)
                 {
@@ -917,12 +945,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnStateDataProviderViaStateCollectionAdded(State instance, DataProvider item)
+            private void OnStateDataProviderViaStateCollectionAdded(DTO.PackageBuilder.State instance, DataProvider item)
             {
                 item.State = instance;
             }
 
-            private void OnStateDataProviderViaStateCollectionRemoved(State instance, DataProvider item)
+            private void OnStateDataProviderViaStateCollectionRemoved(DTO.PackageBuilder.State instance, DataProvider item)
             {
                 if (item.State == instance)
                 {
@@ -930,23 +958,24 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 }
             }
 
-            private readonly List<State> _StateList;
-            private readonly ReadOnlyCollection<State> _StateReadOnlyCollection;
+            private readonly List<DTO.PackageBuilder.State> _StateList;
+            private readonly ReadOnlyCollection<DTO.PackageBuilder.State> _StateReadOnlyCollection;
 
-            public IEnumerable<State> StateCollection
+            public IEnumerable<DTO.PackageBuilder.State> StateCollection
             {
                 get { return _StateReadOnlyCollection; }
             }
 
             #region StateCore
 
-            private sealed class StateCore : State
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
+            private sealed class StateCore : DTO.PackageBuilder.State
             {
                 public StateCore(PackageBuilderContext context, string Value)
                 {
                     _Context = context;
-                    _PackageViaStateCollection = new ConstraintEnforcementCollection<State, DTO.PackageBuilder.Package>(this);
-                    _DataProviderViaStateCollection = new ConstraintEnforcementCollection<State, DataProvider>(this);
+                    _PackageViaStateCollection = new ConstraintEnforcementCollection<DTO.PackageBuilder.State, DTO.PackageBuilder.Package>(this);
+                    _DataProviderViaStateCollection = new ConstraintEnforcementCollection<DTO.PackageBuilder.State, DataProvider>(this);
                     _Value = Value;
                     context._StateList.Add(this);
                 }
@@ -1003,7 +1032,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
             #region DataProvider
 
             public DataProvider CreateDataProvider(string Name, string Owner, string Version, string SourceURL,
-                State State)
+                DTO.PackageBuilder.State State)
             {
                 if ((object) Name == null)
                 {
@@ -1053,7 +1082,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 if (instance != null)
                 {
                     if (
-                        !OnExternalUniquenessConstraint1Changing(instance,
+                        !OnDataProviderNameAndVersionUniquenessConstraintChanging(instance,
                             new Tuple<string, string>(newValue, instance.Version)))
                     {
                         return false;
@@ -1064,16 +1093,18 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             private void OnDataProviderNameChanged(DataProvider instance, string oldValue)
             {
-                Tuple<string, string> ExternalUniquenessConstraint1OldValueTuple;
+                Tuple<string, string> DataProviderNameAndVersionUniquenessConstraintOldValueTuple;
                 if ((object) oldValue != null)
                 {
-                    ExternalUniquenessConstraint1OldValueTuple = new Tuple<string, string>(oldValue, instance.Version);
+                    DataProviderNameAndVersionUniquenessConstraintOldValueTuple = new Tuple<string, string>(oldValue,
+                        instance.Version);
                 }
                 else
                 {
-                    ExternalUniquenessConstraint1OldValueTuple = null;
+                    DataProviderNameAndVersionUniquenessConstraintOldValueTuple = null;
                 }
-                OnExternalUniquenessConstraint1Changed(instance, ExternalUniquenessConstraint1OldValueTuple,
+                OnDataProviderNameAndVersionUniquenessConstraintChanged(instance,
+                    DataProviderNameAndVersionUniquenessConstraintOldValueTuple,
                     new Tuple<string, string>(instance.Name, instance.Version));
             }
 
@@ -1087,12 +1118,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private bool OnDataProviderCreatedChanging(DataProvider instance, int? newValue)
+            private bool OnDataProviderCreatedChanging(DataProvider instance, DateTime? newValue)
             {
                 return true;
             }
 
-            private bool OnDataProviderEditedChanging(DataProvider instance, int? newValue)
+            private bool OnDataProviderEditedChanging(DataProvider instance, DateTime? newValue)
             {
                 return true;
             }
@@ -1102,7 +1133,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 if (instance != null)
                 {
                     if (
-                        !OnExternalUniquenessConstraint1Changing(instance,
+                        !OnDataProviderNameAndVersionUniquenessConstraintChanging(instance,
                             new Tuple<string, string>(instance.Name, newValue)))
                     {
                         return false;
@@ -1113,16 +1144,18 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             private void OnDataProviderVersionChanged(DataProvider instance, string oldValue)
             {
-                Tuple<string, string> ExternalUniquenessConstraint1OldValueTuple;
+                Tuple<string, string> DataProviderNameAndVersionUniquenessConstraintOldValueTuple;
                 if ((object) oldValue != null)
                 {
-                    ExternalUniquenessConstraint1OldValueTuple = new Tuple<string, string>(instance.Name, oldValue);
+                    DataProviderNameAndVersionUniquenessConstraintOldValueTuple =
+                        new Tuple<string, string>(instance.Name, oldValue);
                 }
                 else
                 {
-                    ExternalUniquenessConstraint1OldValueTuple = null;
+                    DataProviderNameAndVersionUniquenessConstraintOldValueTuple = null;
                 }
-                OnExternalUniquenessConstraint1Changed(instance, ExternalUniquenessConstraint1OldValueTuple,
+                OnDataProviderNameAndVersionUniquenessConstraintChanged(instance,
+                    DataProviderNameAndVersionUniquenessConstraintOldValueTuple,
                     new Tuple<string, string>(instance.Name, instance.Version));
             }
 
@@ -1131,7 +1164,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private bool OnDataProviderRevisionDateChanging(DataProvider instance, int? newValue)
+            private bool OnDataProviderRevisionDateChanging(DataProvider instance, DateTime? newValue)
             {
                 return true;
             }
@@ -1141,7 +1174,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private bool OnDataProviderStateChanging(DataProvider instance, State newValue)
+            private bool OnDataProviderStateChanging(DataProvider instance, DTO.PackageBuilder.State newValue)
             {
                 if (this != newValue.Context)
                 {
@@ -1150,7 +1183,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnDataProviderStateChanged(DataProvider instance, State oldValue)
+            private void OnDataProviderStateChanged(DataProvider instance, DTO.PackageBuilder.State oldValue)
             {
                 ((ICollection<DataProvider>) instance.State.DataProviderViaStateCollection).Add(instance);
                 if (oldValue != null)
@@ -1191,10 +1224,11 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region DataProviderCore
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class DataProviderCore : DataProvider
             {
                 public DataProviderCore(PackageBuilderContext context, string Name, string Owner, string Version,
-                    string SourceURL, State State)
+                    string SourceURL, DTO.PackageBuilder.State State)
                 {
                     _Context = context;
                     _DataFieldViaDataProviderCollection =
@@ -1284,14 +1318,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private int? _Created;
+                private DateTime? _Created;
 
-                public override int? Created
+                public override DateTime? Created
                 {
                     get { return _Created; }
                     set
                     {
-                        int? oldValue = _Created;
+                        DateTime? oldValue = _Created;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1304,14 +1338,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private int? _Edited;
+                private DateTime? _Edited;
 
-                public override int? Edited
+                public override DateTime? Edited
                 {
                     get { return _Edited; }
                     set
                     {
-                        int? oldValue = _Edited;
+                        DateTime? oldValue = _Edited;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1369,14 +1403,14 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private int? _RevisionDate;
+                private DateTime? _RevisionDate;
 
-                public override int? RevisionDate
+                public override DateTime? RevisionDate
                 {
                     get { return _RevisionDate; }
                     set
                     {
-                        int? oldValue = _RevisionDate;
+                        DateTime? oldValue = _RevisionDate;
                         if (oldValue.GetValueOrDefault() != value.GetValueOrDefault() ||
                             oldValue.HasValue != value.HasValue)
                         {
@@ -1413,9 +1447,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private State _State;
+                private DTO.PackageBuilder.State _State;
 
-                public override State State
+                public override DTO.PackageBuilder.State State
                 {
                     get { return _State; }
                     set
@@ -1424,7 +1458,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                         {
                             throw new ArgumentNullException("value");
                         }
-                        State oldValue = _State;
+                        DTO.PackageBuilder.State oldValue = _State;
                         if (oldValue != value)
                         {
                             if (_Context.OnDataProviderStateChanging(this, value) && base.OnStateChanging(value))
@@ -1452,7 +1486,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
             #region DataField
 
             public DataField CreateDataField(bool Selected, decimal CostOfSale, string Name, DataProvider DataProvider,
-                Industry Industry)
+                DTO.PackageBuilder.Industry Industry)
             {
                 if ((object) Name == null)
                 {
@@ -1549,7 +1583,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 }
             }
 
-            private bool OnDataFieldIndustryChanging(DataField instance, Industry newValue)
+            private bool OnDataFieldIndustryChanging(DataField instance, DTO.PackageBuilder.Industry newValue)
             {
                 if (this != newValue.Context)
                 {
@@ -1558,7 +1592,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnDataFieldIndustryChanged(DataField instance, Industry oldValue)
+            private void OnDataFieldIndustryChanged(DataField instance, DTO.PackageBuilder.Industry oldValue)
             {
                 ((ICollection<DataField>) instance.Industry.DataFieldViaIndustryCollection).Add(instance);
                 if (oldValue != null)
@@ -1602,10 +1636,11 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region DataFieldCore
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class DataFieldCore : DataField
             {
                 public DataFieldCore(PackageBuilderContext context, bool Selected, decimal CostOfSale, string Name,
-                    DataProvider DataProvider, Industry Industry)
+                    DataProvider DataProvider, DTO.PackageBuilder.Industry Industry)
                 {
                     _Context = context;
                     _PackageDataFieldViaDataFieldCollection =
@@ -1754,9 +1789,9 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                     }
                 }
 
-                private Industry _Industry;
+                private DTO.PackageBuilder.Industry _Industry;
 
-                public override Industry Industry
+                public override DTO.PackageBuilder.Industry Industry
                 {
                     get { return _Industry; }
                     set
@@ -1765,7 +1800,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                         {
                             throw new ArgumentNullException("value");
                         }
-                        Industry oldValue = _Industry;
+                        DTO.PackageBuilder.Industry oldValue = _Industry;
                         if (oldValue != value)
                         {
                             if (_Context.OnDataFieldIndustryChanging(this, value) && base.OnIndustryChanging(value))
@@ -1891,18 +1926,19 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region PackageDataFieldCore
 
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
             private sealed class PackageDataFieldCore : PackageDataField
             {
-                public PackageDataFieldCore(PackageBuilderContext context, int Priority, string UnifiedName,
-                    bool Selected, DTO.PackageBuilder.Package Package, DataField DataField)
+                public PackageDataFieldCore(PackageBuilderContext context, int priority, string unifiedName,
+                    bool selected, DTO.PackageBuilder.Package package, DataField dataField)
                 {
                     _Context = context;
-                    _Priority = Priority;
-                    _UnifiedName = UnifiedName;
-                    _Selected = Selected;
-                    _Package = Package;
+                    _Priority = priority;
+                    _UnifiedName = unifiedName;
+                    _Selected = selected;
+                    _Package = package;
                     context.OnPackageDataFieldPackageChanged(this, null);
-                    _DataField = DataField;
+                    _DataField = dataField;
                     context.OnPackageDataFieldDataFieldChanged(this, null);
                     context._PackageDataFieldList.Add(this);
                 }
@@ -2034,7 +2070,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
             #region Industry
 
-            public Industry CreateIndustry(string Value)
+            public DTO.PackageBuilder.Industry CreateIndustry(string Value)
             {
                 if ((object) Value == null)
                 {
@@ -2047,12 +2083,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return new IndustryCore(this, Value);
             }
 
-            private bool OnIndustryValueChanging(Industry instance, string newValue)
+            private bool OnIndustryValueChanging(DTO.PackageBuilder.Industry instance, string newValue)
             {
                 return true;
             }
 
-            private bool OnIndustryPackageViaIndustryCollectionAdding(Industry instance, DTO.PackageBuilder.Package item)
+            private bool OnIndustryPackageViaIndustryCollectionAdding(DTO.PackageBuilder.Industry instance, DTO.PackageBuilder.Package item)
             {
                 if (this != item.Context)
                 {
@@ -2061,12 +2097,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnIndustryPackageViaIndustryCollectionAdded(Industry instance, DTO.PackageBuilder.Package item)
+            private void OnIndustryPackageViaIndustryCollectionAdded(DTO.PackageBuilder.Industry instance, DTO.PackageBuilder.Package item)
             {
                 item.Industry = instance;
             }
 
-            private void OnIndustryPackageViaIndustryCollectionRemoved(Industry instance, DTO.PackageBuilder.Package item)
+            private void OnIndustryPackageViaIndustryCollectionRemoved(DTO.PackageBuilder.Industry instance, DTO.PackageBuilder.Package item)
             {
                 if (item.Industry == instance)
                 {
@@ -2074,7 +2110,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 }
             }
 
-            private bool OnIndustryDataFieldViaIndustryCollectionAdding(Industry instance, DataField item)
+            private bool OnIndustryDataFieldViaIndustryCollectionAdding(DTO.PackageBuilder.Industry instance, DataField item)
             {
                 if (this != item.Context)
                 {
@@ -2083,12 +2119,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 return true;
             }
 
-            private void OnIndustryDataFieldViaIndustryCollectionAdded(Industry instance, DataField item)
+            private void OnIndustryDataFieldViaIndustryCollectionAdded(DTO.PackageBuilder.Industry instance, DataField item)
             {
                 item.Industry = instance;
             }
 
-            private void OnIndustryDataFieldViaIndustryCollectionRemoved(Industry instance, DataField item)
+            private void OnIndustryDataFieldViaIndustryCollectionRemoved(DTO.PackageBuilder.Industry instance, DataField item)
             {
                 if (item.Industry == instance)
                 {
@@ -2096,23 +2132,24 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 }
             }
 
-            private readonly List<Industry> _IndustryList;
-            private readonly ReadOnlyCollection<Industry> _IndustryReadOnlyCollection;
+            private readonly List<DTO.PackageBuilder.Industry> _IndustryList;
+            private readonly ReadOnlyCollection<DTO.PackageBuilder.Industry> _IndustryReadOnlyCollection;
 
-            public IEnumerable<Industry> IndustryCollection
+            public IEnumerable<DTO.PackageBuilder.Industry> IndustryCollection
             {
                 get { return _IndustryReadOnlyCollection; }
             }
 
             #region IndustryCore
 
-            private sealed class IndustryCore : Industry
+            [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
+            private sealed class IndustryCore : DTO.PackageBuilder.Industry
             {
                 public IndustryCore(PackageBuilderContext context, string Value)
                 {
                     _Context = context;
-                    _PackageViaIndustryCollection = new ConstraintEnforcementCollection<Industry, DTO.PackageBuilder.Package>(this);
-                    _DataFieldViaIndustryCollection = new ConstraintEnforcementCollection<Industry, DataField>(this);
+                    _PackageViaIndustryCollection = new ConstraintEnforcementCollection<DTO.PackageBuilder.Industry, DTO.PackageBuilder.Package>(this);
+                    _DataFieldViaIndustryCollection = new ConstraintEnforcementCollection<DTO.PackageBuilder.Industry, DataField>(this);
                     _Value = Value;
                     context._IndustryList.Add(this);
                 }

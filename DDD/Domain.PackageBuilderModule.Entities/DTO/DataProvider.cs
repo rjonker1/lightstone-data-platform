@@ -1,17 +1,17 @@
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 {
     [DataObject]
-    [GeneratedCode("OIALtoPLiX", "1.0")]
+    [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
     public abstract class DataProvider : INotifyPropertyChanged, IHasPackageBuilderContext
     {
@@ -30,8 +30,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -44,8 +44,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -308,7 +308,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        public event EventHandler<PropertyChangingEventArgs<DataProvider, int?>> CreatedChanging
+        public event EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>> CreatedChanging
         {
             add
             {
@@ -327,21 +327,22 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        protected bool OnCreatedChanging(int? newValue)
+        protected bool OnCreatedChanging(DateTime? newValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangingEventArgs<DataProvider, int?>> eventHandler;
+            EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, int?>>) events[6]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>>) events[6]) !=
                 null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
-                    new PropertyChangingEventArgs<DataProvider, int?>(this, "Created", Created, newValue));
+                    new PropertyChangingEventArgs<DataProvider, DateTime?>(this, "Created", Created, newValue));
             }
             return true;
         }
 
-        public event EventHandler<PropertyChangedEventArgs<DataProvider, int?>> CreatedChanged
+        public event EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>> CreatedChanged
         {
             add
             {
@@ -360,15 +361,17 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        protected void OnCreatedChanged(int? oldValue)
+        protected void OnCreatedChanged(DateTime? oldValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangedEventArgs<DataProvider, int?>> eventHandler;
+            EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, int?>>) events[7]) != null)
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>>) events[7]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
-                    new PropertyChangedEventArgs<DataProvider, int?>(this, "Created", oldValue, Created),
+                    new PropertyChangedEventArgs<DataProvider, DateTime?>(this, "Created", oldValue, Created),
                     _propertyChangedEventHandler);
             }
             else
@@ -377,7 +380,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        public event EventHandler<PropertyChangingEventArgs<DataProvider, int?>> EditedChanging
+        public event EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>> EditedChanging
         {
             add
             {
@@ -396,21 +399,22 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        protected bool OnEditedChanging(int? newValue)
+        protected bool OnEditedChanging(DateTime? newValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangingEventArgs<DataProvider, int?>> eventHandler;
+            EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, int?>>) events[8]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>>) events[8]) !=
                 null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
-                    new PropertyChangingEventArgs<DataProvider, int?>(this, "Edited", Edited, newValue));
+                    new PropertyChangingEventArgs<DataProvider, DateTime?>(this, "Edited", Edited, newValue));
             }
             return true;
         }
 
-        public event EventHandler<PropertyChangedEventArgs<DataProvider, int?>> EditedChanged
+        public event EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>> EditedChanged
         {
             add
             {
@@ -429,15 +433,17 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        protected void OnEditedChanged(int? oldValue)
+        protected void OnEditedChanged(DateTime? oldValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangedEventArgs<DataProvider, int?>> eventHandler;
+            EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, int?>>) events[9]) != null)
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>>) events[9]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
-                    new PropertyChangedEventArgs<DataProvider, int?>(this, "Edited", oldValue, Edited),
+                    new PropertyChangedEventArgs<DataProvider, DateTime?>(this, "Edited", oldValue, Edited),
                     _propertyChangedEventHandler);
             }
             else
@@ -540,7 +546,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<DataProvider, decimal?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, decimal?>>) events[12]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, decimal?>>) events[12]) !=
                 null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
@@ -573,7 +580,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataProvider, decimal?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, decimal?>>) events[13]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, decimal?>>) events[13]) !=
                 null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
@@ -586,7 +594,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        public event EventHandler<PropertyChangingEventArgs<DataProvider, int?>> RevisionDateChanging
+        public event EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>> RevisionDateChanging
         {
             add
             {
@@ -605,21 +613,23 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        protected bool OnRevisionDateChanging(int? newValue)
+        protected bool OnRevisionDateChanging(DateTime? newValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangingEventArgs<DataProvider, int?>> eventHandler;
+            EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, int?>>) events[14]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangingEventArgs<DataProvider, DateTime?>>) events[14]) !=
                 null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
-                    new PropertyChangingEventArgs<DataProvider, int?>(this, "RevisionDate", RevisionDate, newValue));
+                    new PropertyChangingEventArgs<DataProvider, DateTime?>(this, "RevisionDate", RevisionDate,
+                        newValue));
             }
             return true;
         }
 
-        public event EventHandler<PropertyChangedEventArgs<DataProvider, int?>> RevisionDateChanged
+        public event EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>> RevisionDateChanged
         {
             add
             {
@@ -638,17 +648,18 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             }
         }
 
-        protected void OnRevisionDateChanged(int? oldValue)
+        protected void OnRevisionDateChanged(DateTime? oldValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangedEventArgs<DataProvider, int?>> eventHandler;
+            EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, int?>>) events[15]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangedEventArgs<DataProvider, DateTime?>>) events[15]) !=
                 null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
-                    new PropertyChangedEventArgs<DataProvider, int?>(this, "RevisionDate", oldValue, RevisionDate),
-                    _propertyChangedEventHandler);
+                    new PropertyChangedEventArgs<DataProvider, DateTime?>(this, "RevisionDate", oldValue,
+                        RevisionDate), _propertyChangedEventHandler);
             }
             else
             {
@@ -803,36 +814,47 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         public abstract PackageBuilderContext Context { get; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string Name { get; set; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract string Description { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string Owner { get; set; }
 
         [DataObjectField(false, false, true)]
-        public abstract int? Created { get; set; }
+        [DataMember]
+        public abstract DateTime? Created { get; set; }
 
         [DataObjectField(false, false, true)]
-        public abstract int? Edited { get; set; }
+        [DataMember]
+        public abstract DateTime? Edited { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string Version { get; set; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract decimal? CostOfSale { get; set; }
 
         [DataObjectField(false, false, true)]
-        public abstract int? RevisionDate { get; set; }
+        [DataMember]
+        public abstract DateTime? RevisionDate { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string SourceURL { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract State State { get; set; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract IEnumerable<DataField> DataFieldViaDataProviderCollection { get; }
 
         #endregion // DataProvider Abstract Properties
@@ -848,8 +870,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         {
             return string.Format(provider,
                 @"DataProvider{0}{{{0}{1}Name = ""{2}"",{0}{1}Description = ""{3}"",{0}{1}Owner = ""{4}"",{0}{1}Created = ""{5}"",{0}{1}Edited = ""{6}"",{0}{1}Version = ""{7}"",{0}{1}CostOfSale = ""{8}"",{0}{1}RevisionDate = ""{9}"",{0}{1}SourceURL = ""{10}"",{0}{1}State = {11}{0}}}",
-                Environment.NewLine, @"	", Name, Description, Owner, Created, Edited, Version, CostOfSale, RevisionDate,
-                SourceURL, "TODO: Recursively call ToString for customTypes...");
+                Environment.NewLine, @"	", Name, Description, Owner, Created, Edited, Version, CostOfSale,
+                RevisionDate, SourceURL, "TODO: Recursively call ToString for customTypes...");
         }
 
         #endregion // DataProvider ToString Methods

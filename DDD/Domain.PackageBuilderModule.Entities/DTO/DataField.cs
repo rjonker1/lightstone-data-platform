@@ -1,17 +1,17 @@
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 {
     [DataObject]
-    [GeneratedCode("OIALtoPLiX", "1.0")]
+    [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
     public abstract class DataField : INotifyPropertyChanged, IHasPackageBuilderContext
     {
@@ -30,8 +30,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -44,8 +44,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -122,7 +122,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<DataField, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, string>>) events[0]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, string>>) events[0]) !=
+                null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
                     new PropertyChangingEventArgs<DataField, string>(this, "Label", Label, newValue));
@@ -154,7 +155,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataField, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, string>>) events[1]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, string>>) events[1]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
                     new PropertyChangedEventArgs<DataField, string>(this, "Label", oldValue, Label),
@@ -190,10 +192,12 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<DataField, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, string>>) events[2]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, string>>) events[2]) !=
+                null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
-                    new PropertyChangingEventArgs<DataField, string>(this, "TypeDefinition", TypeDefinition, newValue));
+                    new PropertyChangingEventArgs<DataField, string>(this, "TypeDefinition", TypeDefinition,
+                        newValue));
             }
             return true;
         }
@@ -222,7 +226,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataField, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, string>>) events[3]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, string>>) events[3]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
                     new PropertyChangedEventArgs<DataField, string>(this, "TypeDefinition", oldValue, TypeDefinition),
@@ -258,7 +263,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<DataField, bool>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, bool>>) events[4]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, bool>>) events[4]) !=
+                null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
                     new PropertyChangingEventArgs<DataField, bool>(this, "Selected", Selected, newValue));
@@ -290,7 +296,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataField, bool>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, bool>>) events[5]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, bool>>) events[5]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
                     new PropertyChangedEventArgs<DataField, bool>(this, "Selected", oldValue, Selected),
@@ -359,7 +366,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataField, decimal>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, decimal>>) events[7]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, decimal>>) events[7]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
                     new PropertyChangedEventArgs<DataField, decimal>(this, "CostOfSale", oldValue, CostOfSale),
@@ -395,7 +403,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<DataField, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, string>>) events[8]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, string>>) events[8]) !=
+                null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
                     new PropertyChangingEventArgs<DataField, string>(this, "Name", Name, newValue));
@@ -427,7 +436,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataField, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, string>>) events[9]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, string>>) events[9]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
                     new PropertyChangedEventArgs<DataField, string>(this, "Name", oldValue, Name),
@@ -463,11 +473,13 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<DataField, DataProvider>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, DataProvider>>) events[10]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangingEventArgs<DataField, DataProvider>>) events[10]) !=
                 null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
-                    new PropertyChangingEventArgs<DataField, DataProvider>(this, "DataProvider", DataProvider, newValue));
+                    new PropertyChangingEventArgs<DataField, DataProvider>(this, "DataProvider", DataProvider,
+                        newValue));
             }
             return true;
         }
@@ -496,12 +508,13 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<DataField, DataProvider>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, DataProvider>>) events[11]) !=
+                (object)
+                    (eventHandler = (EventHandler<PropertyChangedEventArgs<DataField, DataProvider>>) events[11]) !=
                 null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
-                    new PropertyChangedEventArgs<DataField, DataProvider>(this, "DataProvider", oldValue, DataProvider),
-                    _propertyChangedEventHandler);
+                    new PropertyChangedEventArgs<DataField, DataProvider>(this, "DataProvider", oldValue,
+                        DataProvider), _propertyChangedEventHandler);
             }
             else
             {
@@ -586,27 +599,35 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         public abstract PackageBuilderContext Context { get; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract string Label { get; set; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract string TypeDefinition { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract bool Selected { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract decimal CostOfSale { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string Name { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract DataProvider DataProvider { get; set; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract Industry Industry { get; set; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract IEnumerable<PackageDataField> PackageDataFieldViaDataFieldCollection { get; }
 
         #endregion // DataField Abstract Properties

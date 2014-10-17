@@ -1,17 +1,17 @@
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 {
     [DataObject]
-    [GeneratedCode("OIALtoPLiX", "1.0")]
+    [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
     public abstract class Industry : INotifyPropertyChanged, IHasPackageBuilderContext
     {
@@ -30,8 +30,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Combine(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -44,8 +44,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
                     while (
                         Interlocked.CompareExchange(ref _propertyChangedEventHandler,
                             (PropertyChangedEventHandler)
-                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value), currentHandler) !=
-                        (object) currentHandler)
+                                Delegate.Remove(currentHandler = _propertyChangedEventHandler, value),
+                            currentHandler) != (object) currentHandler)
                     {
                     }
                 }
@@ -122,7 +122,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangingEventArgs<Industry, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<Industry, string>>) events[0]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangingEventArgs<Industry, string>>) events[0]) !=
+                null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
                     new PropertyChangingEventArgs<Industry, string>(this, "Value", Value, newValue));
@@ -154,7 +155,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
             Delegate[] events;
             EventHandler<PropertyChangedEventArgs<Industry, string>> eventHandler;
             if ((events = _events) != null &&
-                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<Industry, string>>) events[1]) != null)
+                (object) (eventHandler = (EventHandler<PropertyChangedEventArgs<Industry, string>>) events[1]) !=
+                null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
                     new PropertyChangedEventArgs<Industry, string>(this, "Value", oldValue, Value),
@@ -173,12 +175,15 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         public abstract PackageBuilderContext Context { get; }
 
         [DataObjectField(false, false, false)]
+        [DataMember]
         public abstract string Value { get; set; }
 
         [DataObjectField(false, false, true)]
-        public abstract IEnumerable<PackageBuilder.Package> PackageViaIndustryCollection { get; }
+        [DataMember]
+        public abstract IEnumerable<Package> PackageViaIndustryCollection { get; }
 
         [DataObjectField(false, false, true)]
+        [DataMember]
         public abstract IEnumerable<DataField> DataFieldViaIndustryCollection { get; }
 
         #endregion // Industry Abstract Properties
@@ -192,7 +197,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 
         public virtual string ToString(IFormatProvider provider)
         {
-            return string.Format(provider, @"Industry{0}{{{0}{1}Value = ""{2}""{0}}}", Environment.NewLine, @"	", Value);
+            return string.Format(provider, @"Industry{0}{{{0}{1}Value = ""{2}""{0}}}", Environment.NewLine, @"	",
+                Value);
         }
 
         #endregion // Industry ToString Methods

@@ -77,9 +77,9 @@
 			<ddt:exactNumeric type="DECIMAL" precision="19" scale="4" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RevisionDate">
-			<ddt:date type="DATE" />
+			<ddt:time type="TIMESTAMP" />
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="Package_UC">
+		<ddl:tableConstraintDefinition name="PackageNameAndVersionExternalUniquenessConstraint_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
 				<dep:simpleColumnReference name="Name" />
 				<dep:simpleColumnReference name="Version" />
@@ -186,9 +186,9 @@
 			<ddt:date type="DATE" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RevisionDate">
-			<ddt:date type="DATE" />
+			<ddt:time type="TIMESTAMP" />
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="DataProvider_UC">
+		<ddl:tableConstraintDefinition name="DataProviderUniquenessConstraintOnNameAndVersion_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
 				<dep:simpleColumnReference name="Name" />
 				<dep:simpleColumnReference name="Version" />

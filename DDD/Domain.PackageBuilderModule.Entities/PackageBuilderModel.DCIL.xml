@@ -47,9 +47,9 @@
 			<dcl:predefinedDataType name="DECIMAL" precision="19" scale="4" />
 		</dcl:column>
 		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="DATE" />
+			<dcl:predefinedDataType name="TIMESTAMP" />
 		</dcl:column>
-		<dcl:uniquenessConstraint name="Package_UC" isPrimary="false">
+		<dcl:uniquenessConstraint name="PackageNameAndVersionExternalUniquenessConstraint_UC" isPrimary="false">
 			<dcl:columnRef name="Name" />
 			<dcl:columnRef name="Version" />
 		</dcl:uniquenessConstraint>
@@ -114,9 +114,9 @@
 			<dcl:predefinedDataType name="DATE" />
 		</dcl:column>
 		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="DATE" />
+			<dcl:predefinedDataType name="TIMESTAMP" />
 		</dcl:column>
-		<dcl:uniquenessConstraint name="DataProvider_UC" isPrimary="false">
+		<dcl:uniquenessConstraint name="DataProviderUniquenessConstraintOnNameAndVersion_UC" isPrimary="false">
 			<dcl:columnRef name="Name" />
 			<dcl:columnRef name="Version" />
 		</dcl:uniquenessConstraint>

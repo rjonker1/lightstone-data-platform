@@ -19,7 +19,7 @@ CREATE TABLE PackageBuilder.Package
 	Published bit,
 	RecomendedRetailPrice decimal(19,4),
 	RevisionDate datetime,
-	CONSTRAINT Package_UC UNIQUE(Name, Version),
+	CONSTRAINT PackageNameAndVersionExternalUniquenessConstraint_UC UNIQUE(Name, Version),
 	CONSTRAINT Package_PK PRIMARY KEY(PackageId)
 )
 GO
@@ -48,7 +48,7 @@ CREATE TABLE PackageBuilder.DataProvider
 	Description nvarchar(512),
 	Edited datetime,
 	RevisionDate datetime,
-	CONSTRAINT DataProvider_UC UNIQUE(Name, Version),
+	CONSTRAINT DataProviderUniquenessConstraintOnNameAndVersion_UC UNIQUE(Name, Version),
 	CONSTRAINT DataProvider_PK PRIMARY KEY(DataProviderId)
 )
 GO
