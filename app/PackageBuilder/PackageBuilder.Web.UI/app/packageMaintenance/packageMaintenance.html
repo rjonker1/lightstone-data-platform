@@ -1,0 +1,136 @@
+﻿<script type="text/ng-template" id="proivder_nodes_renderer.html">
+
+    <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
+        <a style="cursor:pointer;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+        </a>
+        {{provider.name}}
+    </div>
+    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields">
+
+            <input class="col-md-1" ng-model="dataProvs.provs.prov[dataField.name]" ng-change="updatePackageAPIModel(dataProvsPkg, dataField.name)" value="{{dataField.id}}" type="checkbox">
+            <div class="col-md-6">{{dataField.name}}</div>
+            <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 10% !important;" type="textbox" ng-model="dataField.price" ng-change="updateDataProvs(dataField.name)" />
+
+        </li>
+    </ol>
+
+</script>
+
+
+
+<section class="mainbar" data-ng-controller="packageMaintenance">
+
+
+    <div id="info" class="row">
+
+        <div id="1" class="col-lg-4">
+            <div>
+                <label>Name:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name" />
+                <label>Version:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.version" readonly />
+            </div>
+            <div>
+                <div>
+                    <label>Description</label>
+                </div>
+                <div>
+                    <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package.description"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4" />
+
+        <div id="2" class="col-lg-4">
+            <div>
+                <label>State:</label>
+                <select class="form-control" ng-model="dataProvsPkg.Package.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+                {{dataProvider.state.name}}
+            </div>
+
+            <br />
+
+            <div>
+                <label>Industry:</label>
+                <select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+                {{dataProvider.state.name}}
+            </div>
+
+            <br />
+
+            <div>
+
+                <label>Revision Date: </label>
+                <div class="input-group">
+
+                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvsPkg.Package.edited" is-open="opened"
+                           datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+
+                    <span style="width: 20%;" class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+
+            </div>
+
+            <br />
+
+            <div>
+                <label>Owner:</label>
+                <select class="form-control" ng-model="dataProvsPkg.Package.owner" ng-options="user.name for user in users"></select>
+            </div>
+        </div>
+
+
+        <!-- DataProvider -->
+
+        <div class="row">
+            <div class="col-lg-6">
+
+                <h3>Data Providers</h3>
+
+                <div ui-tree id="asdt" ng-model="dataProvsPkg">
+                    <div ng-repeat="providers in dataProvsPkg.Package">
+                        <ol ui-tree-nodes="" ng-model="providers">
+                            <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                        </ol>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <!-- <div class="col-lg-6">
+                     <h3>Data binding</h3>
+                     <div class="info">
+                         {{ info }}
+                     </div>
+                     <pre class="code">{{ dataProvsPkg | json }}</pre>
+                 </div>-->
+
+            <div class="col-lg-6">
+                <div style="float: right;">
+
+                    <div>
+                        <label>COS:</label><input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.costOfSale" readonly />
+                        <label>Recommended Sale Price:</label><input type="textbox" class="form-control" ng-model="sum">
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div>
+                        <button type="button" class="btn btn-danger">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save Draft</button>
+                        <button type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Publish</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>  <!-- End DataProvider -->
+
+    </div> <!--End Info-->
+</section>

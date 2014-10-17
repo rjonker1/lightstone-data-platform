@@ -2,17 +2,40 @@
     'use strict';
 
     var serviceId = 'datacontext';
-    angular.module('app').factory(serviceId, ['common', datacontext]);
+    angular.module('app').factory(serviceId, ['common', 'GetDataProviders', datacontext]);
 
-    function datacontext(common) {
+    function datacontext(common, GetDataProviders) {
+
+        //Used to convert promises.
         var $q = common.$q;
 
         var service = {
             getPeople: getPeople,
-            getMessageCount: getMessageCount
+            getMessageCount: getMessageCount,
+            getDataProviders: getDataProviders
         };
 
         return service;
+
+        function getDataProviders() {
+
+            GetDataProviders.query(function(data) {
+
+                var resp = data.response;
+
+                for (var res in resp) {
+
+                    if (resp.hasOwnProperty(res)) {
+
+                        return $q.when(resp);
+                    }
+                }
+
+            });
+
+            return $q.when("Error loading data.");
+        }
+
 
         function getMessageCount() { return $q.when(72); }
 

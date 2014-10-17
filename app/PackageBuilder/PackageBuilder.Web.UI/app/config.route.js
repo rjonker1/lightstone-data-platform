@@ -40,13 +40,23 @@
                     }
                 }
             }, {
-                url: '/data-sources',
+                url: '/package-maintenance',
                 config: {
-                    title: 'data-sources',
-                    templateUrl: 'app/datasources/dataSources.html',
+                    title: 'package-maintenance',
+                    templateUrl: 'app/packageMaintenance/packageMaintenance.html',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-calendar"></i> Datasources'
+                        content: '<i class="fa fa-gear"></i> Package Maintenance'
+                    }
+                }
+            }, {
+                url: '/data-providers',
+                config: {
+                    title: 'data-providers',
+                    templateUrl: 'app/dataProviders/dataProviders.html',
+                    settings: {
+                        nav: 4,
+                        content: '<i class="fa fa-calendar"></i> Data Providers'
                     }
                 }
             }
