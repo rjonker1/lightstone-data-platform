@@ -1,7 +1,7 @@
 ﻿using System;
 using LightstoneApp.Domain.Core;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;

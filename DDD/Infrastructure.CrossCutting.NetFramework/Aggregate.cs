@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
-    public abstract class Aggregate : IAggregate, IEquatable<IAggregate>
+    public abstract class Aggregate : IAggregate, IEquatable<IAggregate>, ICloneable
     {
         [JsonIgnore] private readonly List<IDomainEvent> _uncommittedEvents = new List<IDomainEvent>();
         private String _id;
@@ -69,6 +69,18 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         public override Int32 GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public virtual object Clone()
+        {
+            var o = MemberwiseClone() as Aggregate;
+
+            if (o != null)
+            {
+                o._uncommittedEvents.Clear();
+                return o;
+            }
+            return null;
         }
 
         public override Boolean Equals(object obj)

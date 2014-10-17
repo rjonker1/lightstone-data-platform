@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -58,29 +59,6 @@ namespace LightstoneApp.Domain.Core
 
         public override int GetHashCode()
         {
-            //int hashCode = 31;
-            //bool changeMultiplier = false;
-            //const int index = 1;
-
-            ////compare all public properties
-            //PropertyInfo[] publicProperties = GetType().GetProperties();
-
-            //if (publicProperties.Any())
-            //{
-            //    foreach (object value in publicProperties.Select(item => item.GetValue(this, null)))
-            //    {
-            //        if (value != null)
-            //        {
-            //            hashCode = hashCode*((changeMultiplier) ? 59 : 114) + value.GetHashCode();
-            //            changeMultiplier = !changeMultiplier;
-            //        }
-            //        else
-            //            hashCode = hashCode ^ (index*13); //only for support {"a",null,null,"a"} <> {null,"a","a",null}
-            //    }
-            //}
-
-            //return hashCode;
-
             var fields = GetFields();
 
             const int startValue = 17;
@@ -94,7 +72,7 @@ namespace LightstoneApp.Domain.Core
 
         private IEnumerable<FieldInfo> GetFields()
         {
-            Type t = GetType();
+            var t = GetType();
 
             var fields = new List<FieldInfo>();
 

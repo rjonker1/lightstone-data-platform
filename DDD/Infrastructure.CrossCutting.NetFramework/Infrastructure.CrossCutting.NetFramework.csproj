@@ -163,6 +163,7 @@
     <Compile Include="Validator\EntityValidatorFactory.cs" />
     <Compile Include="Validator\IEntityValidator.cs" />
     <Compile Include="Validator\IEntityValidatorFactory.cs" />
+    <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Messages.resx">

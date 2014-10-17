@@ -5,15 +5,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading;
+using LightstoneApp.Domain.Core;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 {
     [DataObject]
     [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
-    public abstract class State : INotifyPropertyChanged, IHasPackageBuilderContext
+    public abstract class State : ValueObject<State>, INotifyPropertyChanged, IHasPackageBuilderContext
     {
         #region State INotifyPropertyChanged Implementation
 
@@ -178,7 +179,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 
         [DataObjectField(false, false, true)]
         [DataMember]
-        public abstract IEnumerable<Package> PackageViaStateCollection { get; }
+        public abstract IEnumerable<PackageBuilder.Package> PackageViaStateCollection { get; }
 
         [DataObjectField(false, false, true)]
         [DataMember]
@@ -211,7 +212,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
         /// <summary>
         /// CONSTRAINT State_Value_RoleValueConstraint1 CHECK ("Value" IN (N'Under construction', N'Published', N'Expired'))
         /// </summary>
-        public static readonly string ConstraintValues = new {UnderConstruction, Published, Expired}.ToString();
+        public static readonly string[] ConstraintValues = new [] {UnderConstruction, Published, Expired};
 
 
 

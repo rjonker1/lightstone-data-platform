@@ -1,5 +1,5 @@
 ﻿using LightstoneApp.Domain.PackageBuilderModule.Commands;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO;
 using LightstoneApp.Domain.PackageBuilderModule.Interfaces;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using Package = LightstoneApp.Domain.PackageBuilderModule.Entities.Package;

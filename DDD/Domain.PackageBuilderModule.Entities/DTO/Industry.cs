@@ -8,7 +8,7 @@ using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 {
     [DataObject]
     [DataContract]
@@ -180,7 +180,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 
         [DataObjectField(false, false, true)]
         [DataMember]
-        public abstract IEnumerable<Package> PackageViaIndustryCollection { get; }
+        public abstract IEnumerable<PackageBuilder.Package> PackageViaIndustryCollection { get; }
 
         [DataObjectField(false, false, true)]
         [DataMember]

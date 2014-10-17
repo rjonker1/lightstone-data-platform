@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 {
     public interface IPackageBuilderContext
     {
-        Package GetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version);
+        PackageBuilder.Package GetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version);
 
         bool TryGetPackageByPackageNameAndVersionExternalUniquenessConstraint(string Name, string Version,
-            out Package Package);
+            out PackageBuilder.Package Package);
 
         DataProvider GetDataProviderByDataProviderNameAndVersionUniquenessConstraint(string Name, string Version);
 
@@ -16,8 +16,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 
         DataField GetDataFieldByName(string Name);
         bool TryGetDataFieldByName(string Name, out DataField DataField);
-        Package CreatePackage(string name, string description, string version, State state);
-        IEnumerable<Package> PackageCollection { get; }
+        PackageBuilder.Package CreatePackage(string name, string description, string version, State state);
+        IEnumerable<PackageBuilder.Package> PackageCollection { get; }
         State CreateState(string value);
         IEnumerable<State> StateCollection { get; }
         DataProvider CreateDataProvider(string Name, string Owner, string Version, string SourceURL, State State);
@@ -28,7 +28,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 
         IEnumerable<DataField> DataFieldCollection { get; }
 
-        PackageDataField CreatePackageDataField(int Priority, string UnifiedName, bool Selected, Package Package,
+        PackageDataField CreatePackageDataField(int Priority, string UnifiedName, bool Selected, PackageBuilder.Package Package,
             DataField DataField);
 
         IEnumerable<PackageDataField> PackageDataFieldCollection { get; }

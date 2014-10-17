@@ -68,6 +68,7 @@
     <Compile Include="DTO\IPackageBuilderContext.cs" />
     <Compile Include="DTO\PackageDataField.cs" />
     <Compile Include="DTO\State.cs" />
+    <Compile Include="Events\PackageClonedEvent.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
     <Compile Include="PackageBuilderModel.CoRef._ORMCustomToolReport.cs">
       <AutoGen>True</AutoGen>

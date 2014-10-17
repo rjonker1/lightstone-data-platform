@@ -18,7 +18,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events
         {
             var context = new PackageBuilderContext();
 
-            var state = context.CreateState(DTO.PackageBuilder.State.ConstraintValues.First().ToString(CultureInfo.InvariantCulture));
+            var state = context.CreateState(DTO.State.ConstraintValues.First().ToString(CultureInfo.InvariantCulture));
 
             var packageCreated = context.CreatePackage(package.Name, "", Version, context.CreateState(state.ToString()));
 

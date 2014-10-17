@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Resources
-{
-
-
+namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -57,6 +57,15 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework.Resources
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version must be greater than or equal to zero.
+        /// </summary>
+        internal static string ArgumentOutOfRange_Version {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_Version", resourceCulture);
             }
         }
         

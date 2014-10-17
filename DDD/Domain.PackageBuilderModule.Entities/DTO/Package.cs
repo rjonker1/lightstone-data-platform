@@ -8,6 +8,7 @@ using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
+using Version = LightstoneApp.Infrastructure.CrossCutting.NetFramework.Version;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 {

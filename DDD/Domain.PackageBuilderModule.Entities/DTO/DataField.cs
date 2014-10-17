@@ -5,15 +5,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading;
+using LightstoneApp.Domain.Core;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 {
     [DataObject]
     [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
-    public abstract class DataField : INotifyPropertyChanged, IHasPackageBuilderContext
+    public abstract class DataField : ValueObject<DataField>, INotifyPropertyChanged, IHasPackageBuilderContext
     {
         #region DataField INotifyPropertyChanged Implementation
 

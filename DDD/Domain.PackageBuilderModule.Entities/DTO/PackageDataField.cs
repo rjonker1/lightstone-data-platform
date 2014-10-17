@@ -4,15 +4,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading;
+using LightstoneApp.Domain.Core;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
 {
     [DataObject]
     [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
-    public abstract class PackageDataField : INotifyPropertyChanged, IHasPackageBuilderContext
+    public abstract class PackageDataField : ValueObject<PackageDataField>, INotifyPropertyChanged, IHasPackageBuilderContext
     {
         #region PackageDataField INotifyPropertyChanged Implementation
 
@@ -311,7 +312,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
             }
         }
 
-        public event EventHandler<PropertyChangingEventArgs<PackageDataField, Package>> PackageChanging
+        public event EventHandler<PropertyChangingEventArgs<PackageDataField, PackageBuilder.Package>> PackageChanging
         {
             add
             {
@@ -330,22 +331,22 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
             }
         }
 
-        protected bool OnPackageChanging(Package newValue)
+        protected bool OnPackageChanging(PackageBuilder.Package newValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangingEventArgs<PackageDataField, Package>> eventHandler;
+            EventHandler<PropertyChangingEventArgs<PackageDataField, PackageBuilder.Package>> eventHandler;
             if ((events = _events) != null &&
                 (object)
-                    (eventHandler = (EventHandler<PropertyChangingEventArgs<PackageDataField, Package>>) events[6]) !=
+                    (eventHandler = (EventHandler<PropertyChangingEventArgs<PackageDataField, PackageBuilder.Package>>) events[6]) !=
                 null)
             {
                 return EventHandlerUtility.InvokeCancelableEventHandler(eventHandler, this,
-                    new PropertyChangingEventArgs<PackageDataField, Package>(this, "Package", Package, newValue));
+                    new PropertyChangingEventArgs<PackageDataField, PackageBuilder.Package>(this, "Package", Package, newValue));
             }
             return true;
         }
 
-        public event EventHandler<PropertyChangedEventArgs<PackageDataField, Package>> PackageChanged
+        public event EventHandler<PropertyChangedEventArgs<PackageDataField, PackageBuilder.Package>> PackageChanged
         {
             add
             {
@@ -364,17 +365,17 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
             }
         }
 
-        protected void OnPackageChanged(Package oldValue)
+        protected void OnPackageChanged(PackageBuilder.Package oldValue)
         {
             Delegate[] events;
-            EventHandler<PropertyChangedEventArgs<PackageDataField, Package>> eventHandler;
+            EventHandler<PropertyChangedEventArgs<PackageDataField, PackageBuilder.Package>> eventHandler;
             if ((events = _events) != null &&
                 (object)
-                    (eventHandler = (EventHandler<PropertyChangedEventArgs<PackageDataField, Package>>) events[7]) !=
+                    (eventHandler = (EventHandler<PropertyChangedEventArgs<PackageDataField, PackageBuilder.Package>>) events[7]) !=
                 null)
             {
                 EventHandlerUtility.InvokeEventHandlerAsync(eventHandler, this,
-                    new PropertyChangedEventArgs<PackageDataField, Package>(this, "Package", oldValue, Package),
+                    new PropertyChangedEventArgs<PackageDataField, PackageBuilder.Package>(this, "Package", oldValue, Package),
                     _propertyChangedEventHandler);
             }
             else
@@ -476,7 +477,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO.PackageBuilder
 
         [DataObjectField(false, false, false)]
         [DataMember]
-        public abstract Package Package { get; set; }
+        public abstract PackageBuilder.Package Package { get; set; }
 
         [DataObjectField(false, false, false)]
         [DataMember]
