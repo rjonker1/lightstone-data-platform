@@ -181,7 +181,7 @@
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="app\.buildignore" />
     <Content Include="app\.htaccess" />
-    <Content Include="app\DataProviders.json" />
+    <Content Include="DataProviders.json" />
     <Content Include="Scripts\angular-resource.min.js.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
