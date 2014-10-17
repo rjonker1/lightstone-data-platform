@@ -23,7 +23,7 @@
         version: '2.1.0'
     };
 
-    app.value('config', config);
+    app.value('config', config); //Global placeholder for config settings
     
     app.config(['$logProvider', function ($logProvider) {
         // turn debugging off/on (no info or warn)
