@@ -1,0 +1,27 @@
+<div class="table-responsive">
+<style type="text/css">
+	
+	.container {
+		padding-left: 0px;
+	}
+
+	.gridStyle {
+    	 
+    	height: 300px
+	}
+
+	.ngHeaderScroller {
+
+		position: absolute;
+		background: #687074;
+		color: white;
+	}
+</style>
+
+<div class="container">
+
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+		<div id="pkgGrid" ng-grid="gridOptions" class="gridStyle"></div>
+		
+</div>
