@@ -1,26 +1,26 @@
 ﻿using System;
 using MemBus;
 using Nancy;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using Raven.Client;
 
 namespace PackageBuilder.Api.Modules
 {
     public class IndustryModule : NancyModule
     {
-        public IndustryModule(IBus bus, IDocumentSession session)
+        public IndustryModule(IBus bus, IRepository<Industry> repository)
         {
             Get["/Industry"] = parameters =>
             {
-                return Response.AsJson(session.Query<Industry>());
+                return Response.AsJson(repository);
             };
 
             Get["/Industry/Add"] = parameters =>
             {
                 var command = new CreateIndustry(Guid.NewGuid(), "Test industry");
-
-                bus.Publish(command);
+                repository.Save(new Industry(Guid.NewGuid(), "Test"));
+                //bus.Publish(command);
 
                 return Response.AsJson("Success!");
             };

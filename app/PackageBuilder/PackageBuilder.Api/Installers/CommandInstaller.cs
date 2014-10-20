@@ -10,7 +10,7 @@ namespace PackageBuilder.Api.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IHandleMessages>().ImplementedBy<MessagesHandlerResolver>());
-            container.Register(Classes.FromAssemblyContaining<IHandleMessages>().BasedOn(typeof(IHandleMessages<>)).WithServiceAllInterfaces());
+            container.Register(Classes.FromAssemblyContaining<IHandleMessages>().BasedOn(typeof(IHandleMessages<>)).WithServiceAllInterfaces().LifestyleTransient());
         }
     }
 }

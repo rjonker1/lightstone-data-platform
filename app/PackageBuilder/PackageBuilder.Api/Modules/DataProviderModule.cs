@@ -9,37 +9,29 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Infrastructure.RavenDB.Indexes;
-using Raven.Client;
 
 namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
-        public DataProviderModule(IBus bus, INEventStoreRepository<DataProvider> repository, IDocumentSession session)
+        public DataProviderModule(IBus bus, 
+            IRepository<Domain.Entities.DataProviders.ReadModels.DataProvider> readRepo, 
+            INEventStoreRepository<Domain.Entities.DataProviders.WriteModels.DataProvider> writeRepo)
         {
             Get["/DataProvider"] = parameters =>
             {
-                var res = session.Query<ReadDataProvider, IndexAllDataProviders>().ToList();
-                                        
-                return Response.AsJson(new { Response = res });   
+                return Response.AsJson(readRepo);
             };
 
             Get["/DataProvider/Get/All"] = parameters =>
             {
+                var dataSources = new ArrayList();
 
-                ArrayList DataSources = new ArrayList();
-
-                var dataProviders = session.Query<ReadDataProvider, IndexAllDataProviders>()
-                    .ToList();
-
-                foreach (var provider in dataProviders)
+                foreach (var provider in readRepo)
                 {
-
                     DataProviderDto dSource = new DataProviderDto();
 
                     dSource.Id = provider.DataProviderId;
@@ -50,23 +42,21 @@ namespace PackageBuilder.Api.Modules
                     dSource.Created = provider.Created;
                     dSource.Edited = provider.Edited;
                     dSource.Version = provider.Version;
-                    
 
                     try
                     {
-                        dSource.DataFields = repository.GetById(provider.DataProviderId, provider.Version).DataFields
+                        dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version).DataFields
                                               .Select(field => new DataProviderFieldItemDto { Name = field.Name, Type = field.Type + "" });
                     }
                     catch (Exception)
                     {
-
                         dSource.DataFields = null;
-                    }               
+                    }
 
-                    DataSources.Add(dSource);
+                    dataSources.Add(dSource);
                 }
 
-                return Response.AsJson(new { Response = DataSources });
+                return Response.AsJson(new { Response = dataSources });
             };
 
             Get["/DataProvider/Add"] = parameters =>
@@ -74,13 +64,13 @@ namespace PackageBuilder.Api.Modules
                 Guid ProviderId = Guid.NewGuid();
 
                 bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse)));
-
+                //bus.Publish(new DataProviderCreated(Guid.NewGuid(), ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse), null));
+                //readRepo.Save(new DataProvider(Guid.NewGuid(), ProviderId, "Ivid", 0d, "Description", null));
                 return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
             };
 
             Get["/DataProvider/Edit/{id}/{version}"] = parameters =>
             {
-
                 bus.Publish(new RenameDataProvider(new Guid(parameters.id), "Test1"));
 
                 return Response.AsJson(new { msg = "Success" });
@@ -88,8 +78,7 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
-
-                var dataProviders = repository.GetById(parameters.id, parameters.version);
+                var dataProviders = writeRepo.GetById(parameters.id, parameters.version);
                 return Response.AsJson(new { Response = dataProviders });
             };
 
@@ -107,6 +96,4 @@ namespace PackageBuilder.Api.Modules
             };
         }
     }
-   
-    //Mock-up for DataProvider Model-Bind
 }

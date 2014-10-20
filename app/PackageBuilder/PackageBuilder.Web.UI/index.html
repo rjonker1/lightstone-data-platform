@@ -30,6 +30,9 @@
     <link href="content/customtheme.css" rel="stylesheet">
     <link href="content/styles.css" rel="stylesheet" />
     <link href="Content/ng-grid.min.css" rel="stylesheet" />
+    <link href="Content/gridStyle.css" rel="stylesheet" />
+    <link href="Content/angular-ui-tree.min.css" rel="stylesheet"/>
+    <link href="Content/tree.css" rel="stylesheet"/>
     
     <link href="content/breeze.directives.css" rel="stylesheet" />
 
@@ -54,6 +57,7 @@
     <!-- Vendor Scripts -->
     <script src="scripts/jquery-2.1.1.js"></script>
     <script src="scripts/angular.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
     <script src="scripts/angular-animate.js"></script>
     <script src="scripts/angular-route.js"></script>
     <script src="scripts/angular-sanitize.js"></script>
@@ -63,6 +67,7 @@
     <script src="scripts/ui-bootstrap-tpls-0.10.0.js"></script>
     <script src="scripts/spin.js"></script>
     <script src="Scripts/ng-grid.min.js"></script>
+    <script src="Scripts/angular-ui-tree.js"></script>
     
     <script src="scripts/breeze.debug.js"></script>
     <script src="scripts/breeze.angular.js"></script>
@@ -88,11 +93,14 @@
     <!-- app -->
     <script src="app/admin/admin.js"></script>
     <script src="app/dashboard/dashboard.js"></script>
-    <script src="app/datasources/dataSources.js"></script>
+    <script src="app/packages/packages.js"></script>
+    <script src="app/packageMaintenance/packageMaintenance.js"></script>
+    <script src="app/dataProviders/dataProviders.js"></script>
     <script src="app/layout/shell.js"></script>
     <script src="app/layout/sidebar.js"></script>
 
     <!-- app Services -->
+    <script src="app/services/apiProviders.js"></script>
     <script src="app/services/datacontext.js"></script>
     <script src="app/services/directives.js"></script>
     

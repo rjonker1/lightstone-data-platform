@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
         public override void Observe()
         {
             var command = new CreateIndustry(Guid.NewGuid(), "Test Industry");
-            _handler = new CreateIndustryHandler(_session.Object);
+            //_handler = new CreateIndustryHandler(_session.Object);
             _handler.Handle(command);
         }
 

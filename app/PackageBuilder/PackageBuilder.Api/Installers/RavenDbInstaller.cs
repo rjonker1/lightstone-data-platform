@@ -10,8 +10,8 @@ namespace PackageBuilder.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IDocumentStore>().Instance(new DocumentStore { ConnectionStringName = "packageBuilder/database" }.Initialize()));
-            container.Register(Component.For<IDocumentSession>().Instance(container.Resolve<IDocumentStore>().OpenSession()).LifestylePerWebRequest());
+            //container.Register(Component.For<IDocumentStore>().Instance(new DocumentStore { ConnectionStringName = "packageBuilder/database" }.Initialize()));
+            //container.Register(Component.For<IDocumentSession>().Instance(container.Resolve<IDocumentStore>().OpenSession()).LifestylePerWebRequest());
         }
     }
 }

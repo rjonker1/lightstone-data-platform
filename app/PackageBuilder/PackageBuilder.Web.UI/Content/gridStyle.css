@@ -1,0 +1,20 @@
+﻿.gridStyle {
+    height: 300px;
+}
+
+.ngHeaderScroller {
+    position: absolute;
+    background: #687074;
+    color: white;
+}
+
+.grid-btn {
+
+    width: 55px !important;
+    height: 30px !important;
+}
+
+.user .btn {
+
+    font-size: 14px !important;
+}

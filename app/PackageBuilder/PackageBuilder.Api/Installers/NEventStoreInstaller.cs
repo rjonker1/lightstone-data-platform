@@ -10,6 +10,7 @@ using CommonDomain.Persistence;
 using MemBus;
 using NEventStore;
 using NEventStore.Dispatcher;
+using NEventStore.Persistence.Sql.SqlDialects;
 using PackageBuilder.Core.Events;
 using PackageBuilder.Core.NEventStore;
 
@@ -34,10 +35,13 @@ namespace PackageBuilder.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>());
+            container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>().LifestyleTransient());
 
             var eventStore = Wireup.Init()
-                .UsingRavenPersistence("packageBuilder/database")
+                //.UsingRavenPersistence("packageBuilder/database")
+                .UsingSqlPersistence("packageBuilder")
+                .WithDialect(new MsSqlDialect())
+                //.EnlistInAmbientTransaction() // two-phase commit
                 .InitializeStorageEngine()
                 .UsingJsonSerialization()
                 .Compress()
@@ -52,9 +56,9 @@ namespace PackageBuilder.Api.Installers
 
             
             container.Register(Component.For<IStoreEvents>().Instance(eventStore));
-            container.Register(Component.For<IConstructAggregates>().ImplementedBy<AggregateFactory>());
-            container.Register(Component.For<IDetectConflicts>().ImplementedBy<ConflictDetector>());
-            container.Register(Component.For(typeof(INEventStoreRepository<>)).ImplementedBy(typeof(NEventStoreRepository<>)));
+            container.Register(Component.For<IConstructAggregates>().ImplementedBy<AggregateFactory>().LifestyleTransient());
+            container.Register(Component.For<IDetectConflicts>().ImplementedBy<ConflictDetector>().LifestyleTransient());
+            container.Register(Component.For(typeof(INEventStoreRepository<>)).ImplementedBy(typeof(NEventStoreRepository<>)).LifestyleTransient());
         }
     }
 
