@@ -1,22 +1,22 @@
 ﻿CREATE TABLE PackageBuilder.Package
 (
-	PackageId int IDENTITY (1, 1) NOT NULL,
+	PackageId uniqueidentifier NOT NULL,
+	Description nvarchar(512) NOT NULL,
+	Name nvarchar(128) NOT NULL,
+	StateId uniqueidentifier NOT NULL,
+	Version nvarchar(16) NOT NULL,
 	CostOfSale decimal(19,4),
 	Created datetime,
-	Description nvarchar(512),
 	Edited datetime,
-	Name nvarchar(256),
-	PackageIndustry nvarchar(32) CHECK (PackageIndustry IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other')),
-	PackageOwner nvarchar(512),
-	PackageState nvarchar(32) CHECK (PackageState IN (N'Under construction', N'Published', N'Expired')),
+	IndustryId uniqueidentifier,
+	Owner nvarchar(512),
 	Published bit,
+	RecomendedRetailPrice decimal(19,4),
 	RevisionDate datetime,
-	Version VARCHAR(16),
+	CONSTRAINT PackageNameAndVersionExternalUniquenessConstraint_UC UNIQUE(Name, Version),
 	CONSTRAINT Package_PK PRIMARY KEY(PackageId)
 )
 GO
-ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK1 FOREIGN KEY (PackageOwner) REFERENCES PackageBuilder.Owner ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK1 FOREIGN KEY (StateId) REFERENCES PackageBuilder.State (StateId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
-ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK2 FOREIGN KEY (PackageState) REFERENCES PackageBuilder.State ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
-GO
-ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK3 FOREIGN KEY (PackageIndustry) REFERENCES PackageBuilder.Industry ("Value") ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.Package ADD CONSTRAINT Package_FK2 FOREIGN KEY (IndustryId) REFERENCES PackageBuilder.Industry (IndustryId) ON DELETE NO ACTION ON UPDATE NO ACTION
