@@ -11,9 +11,9 @@ namespace PackageBuilder.TestHelper.Mothers
                 return new Builders.Entites.PackageBuilder()
                     .With("License plate search")
                     .With(ActionMother.LicensePlateSearchAction)
-                    .With(DataSetMother.VehicleVerification,
-                          DataSetMother.RepairHistory,
-                          DataSetMother.ValuesHistory)
+                    //.With(DataSetMother.VehicleVerification,
+                    //      DataSetMother.RepairHistory,
+                    //      DataSetMother.ValuesHistory)
                     .Build();
             }
         }
@@ -25,9 +25,9 @@ namespace PackageBuilder.TestHelper.Mothers
                 return new Builders.Entites.PackageBuilder()
                     .With("Full verification")
                     .With(ActionMother.AllAction)
-                    .With(DataSetMother.VehicleVerification,
-                          DataSetMother.RepairHistory,
-                          DataSetMother.ValuesHistory)
+                    //.With(DataSetMother.VehicleVerification,
+                    //      DataSetMother.RepairHistory,
+                    //      DataSetMother.ValuesHistory)
                     .Build();
             }
         }
@@ -39,9 +39,9 @@ namespace PackageBuilder.TestHelper.Mothers
                 return new Builders.Entites.PackageBuilder()
                     .With("Partial verification")
                     .With(ActionMother.VerifyAction)
-                    .With(DataSetMother.VehicleVerification, 
-                          DataSetMother.LicenseScan, 
-                          DataSetMother.ValuesHistory)
+                    //.With(DataSetMother.VehicleVerification, 
+                    //      DataSetMother.LicenseScan, 
+                    //      DataSetMother.ValuesHistory)
                     .Build();
             }
         }
@@ -53,7 +53,7 @@ namespace PackageBuilder.TestHelper.Mothers
                 return new Builders.Entites.PackageBuilder()
                     .With("Driver’s license scan package")
                     .With(ActionMother.LicenseScanAction)
-                    .With(DataSetMother.LicenseScan)
+                    //.With(DataSetMother.LicenseScan)
                     .Build();
             }
         }
@@ -64,7 +64,7 @@ namespace PackageBuilder.TestHelper.Mothers
                 return new Builders.Entites.PackageBuilder()
                     .With("EzScore")
                     .With(ActionMother.EzScoreAction)
-                    .With(DataSetMother.EzScore)
+                    //.With(DataSetMother.EzScore)
                     .Build();
             }
         }

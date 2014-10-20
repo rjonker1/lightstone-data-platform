@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Nancy;
@@ -46,7 +45,7 @@ namespace PackageBuilder.Api
             //};
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
-            pipelines.AddTransactionScope(container, new TransactionScope());
+            pipelines.AddTransactionScope(container);
         }
     }
 }

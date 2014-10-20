@@ -5,16 +5,14 @@ namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class IndustryBuilder
     {
-        private Guid? _id;
         private string _name;
         public Industry Build()
         {
-            return new Industry(_id ?? Guid.NewGuid(), _name);
+            return new Industry(Guid.NewGuid(), _name);
         }
 
         public IndustryBuilder With(Guid id)
         {
-            _id = id;
             return this;
         }
 

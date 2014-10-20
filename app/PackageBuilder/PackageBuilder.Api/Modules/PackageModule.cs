@@ -1,35 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using FluentNHibernate.Testing.Values;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
-using PackageBuilder.Infrastructure.RavenDB.Indexes;
-using Raven.Client;
 
 namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
-        public PackageModule(IBus bus, IDocumentSession session)
+        public PackageModule(IBus bus, IRepository<Package> repository)
         {
             Get["/Packages"] = parameters =>
             {
-                var res = session.Query<ReadPackage, IndexAllPackages>().ToList();
+                //var res = session.Query<ReadPackage, IndexAllPackages>().ToList();
 
-                return Response.AsJson(new {Response = res});
+                //return Response.AsJson(new {Response = res});
+
+                return Response.AsJson(repository);
+            };
+
+            Get["/Package/Add"] = parameters =>
+            {
+                bus.Publish(new CreatePackage(Guid.NewGuid(), "Test", null));
+
+                return Response.AsJson(new { msg = "Success" });
             };
 
             Post["/Package/Add"] = parameters =>
             {
-
                 PackageDto dto = this.Bind<PackageDto>();
 
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
@@ -38,7 +42,6 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new { msg = "Success" });
             };
-
         }
     }
 

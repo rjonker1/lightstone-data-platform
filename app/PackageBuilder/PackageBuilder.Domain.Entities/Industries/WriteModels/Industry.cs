@@ -1,15 +1,16 @@
 ﻿using System;
+using PackageBuilder.Core.Entities;
 
 namespace PackageBuilder.Domain.Entities.Industries.WriteModels
 {
-    public class Industry
+    public class Industry : Entity
     {
-        public Guid Id { get; private set; }
-        public string Name { get; set; }
+        protected Industry() { }
 
-        public Industry(Guid id, string name)
+        public virtual string Name { get; set; }
+
+        public Industry(Guid id, string name) : base(id)
         {
-            Id = id;
             Name = name;
         }
     }

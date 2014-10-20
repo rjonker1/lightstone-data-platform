@@ -17,18 +17,7 @@ namespace PackageBuilder.Domain.EventHandlers.DataProviders
 
         public override void Handle(DataProviderUpdated command)
         {
-            var update = new ReadDataProvider
-            {
-                Id = Guid.NewGuid(),
-                DataProviderId = command.DataProvierId,
-                Name = command.Name,
-                Description = command.Description,
-                Version = command.Version,
-                Created = command.Created,
-                Edited = command.Edited
-            };
-
-            _session.Store(update);
+            _session.Store(new DataProvider(Guid.NewGuid(), command.DataProvierId, command.Name, 0d, command.Description, command.Owner));
         }
     }
 }

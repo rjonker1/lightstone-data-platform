@@ -38,7 +38,8 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.144, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
@@ -76,7 +77,7 @@
     <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
     <Compile Include="DataProviders\Events\ReadModelUpdated.cs" />
-    <Compile Include="DataProviders\ReadModels\ReadDataProvider.cs" />
+    <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="DataSet.cs" />
     <Compile Include="Group.cs" />
