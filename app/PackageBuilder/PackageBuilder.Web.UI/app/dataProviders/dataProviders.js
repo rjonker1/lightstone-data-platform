@@ -14,6 +14,7 @@
         $scope.title = 'Data Providers';
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
+        var logSuccess = getLogFn(controllerId, 'success');
         var logError = getLogFn(controllerId, 'error');
 
         $scope.test = '';
@@ -46,7 +47,7 @@
 
         $scope.notify = function (row) {
 
-            $location.path('/data-source-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
+            $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
         }
 
         $scope.selectedDatasource = [];
@@ -83,7 +84,7 @@
             
             return datacontext.getAllDataProviders().then(function (data) {
 
-                (data.indexOf('Error') > -1) ? logError(data) : $scope.dProvidersData = data;
+                (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers loaded successfully!') : '');
         
             });
         }

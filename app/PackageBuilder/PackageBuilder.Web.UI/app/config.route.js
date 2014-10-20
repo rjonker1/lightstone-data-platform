@@ -29,23 +29,13 @@
                         content: '<i class="fa fa-dashboard"></i> Dashboard'
                     }
                 }
-            }, {
-                url: '/admin',
-                config: {
-                    title: 'admin',
-                    templateUrl: 'app/admin/admin.html',
-                    settings: {
-                        nav: 2,
-                        content: '<i class="fa fa-lock"></i> Admin'
-                    }
-                }
-            }, {
+            },{
                 url: '/packages',
                 config: {
                     title: 'packages',
                     templateUrl: 'app/packages/packages.html',
                     settings: {
-                        nav: 3,
+                        nav: 2,
                         content: '<i class="fa fa-institution"></i> Packages'
                     }
                 }
@@ -56,7 +46,7 @@
                     title: 'package-maintenance',
                     templateUrl: 'app/packageMaintenance/packageMaintenance.html',
                     settings: {
-                        nav: 4,
+                        nav: 3,
                         content: '<i class="fa fa-gear"></i> Package Maintenance'
                     }
                 }
@@ -67,9 +57,15 @@
                     title: 'data-providers',
                     templateUrl: 'app/dataProviders/dataProviders.html',
                     settings: {
-                        nav: 5,
+                        nav: 4,
                         content: '<i class="fa fa-calendar"></i> Data Providers'
                     }
+                }
+            }, {
+                url: '/data-provider-detail/:id/:version',
+                config: {
+                    title: 'data-provider-detail',
+                    templateUrl: 'app/dataProviders/dataProviderDetail.html',
                 }
             }
         ];

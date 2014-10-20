@@ -45,7 +45,7 @@
                 } 
             });
 
-            return $q.when("Error loading Data Provider.");
+            return $q.when("Error loading Data Provider data.");
         }
 
         //GET
@@ -126,7 +126,7 @@
         }
 
         //POST
-        function editDataProvider(_id, packageData) {
+        function editDataProvider(_id, providerData) {
             
             PostDataProvider.save({ id: _id }, providerData, function (data) {
 
