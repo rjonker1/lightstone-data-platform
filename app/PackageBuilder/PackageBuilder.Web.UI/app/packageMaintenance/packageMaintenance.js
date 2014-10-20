@@ -16,8 +16,7 @@
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
 
-        var now = moment().format('MMMM Do YYYY, h:mm:ss a');
-        alert(now);
+        $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
         //MOCK
         $http({

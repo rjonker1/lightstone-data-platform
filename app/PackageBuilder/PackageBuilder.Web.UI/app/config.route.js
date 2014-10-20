@@ -40,22 +40,34 @@
                     }
                 }
             }, {
+                url: '/packages',
+                config: {
+                    title: 'packages',
+                    templateUrl: 'app/packages/packages.html',
+                    settings: {
+                        nav: 3,
+                        content: '<i class="fa fa-institution"></i> Packages'
+                    }
+                }
+
+            }, {
                 url: '/package-maintenance',
                 config: {
                     title: 'package-maintenance',
                     templateUrl: 'app/packageMaintenance/packageMaintenance.html',
                     settings: {
-                        nav: 3,
+                        nav: 4,
                         content: '<i class="fa fa-gear"></i> Package Maintenance'
                     }
                 }
+
             }, {
                 url: '/data-providers',
                 config: {
                     title: 'data-providers',
                     templateUrl: 'app/dataProviders/dataProviders.html',
                     settings: {
-                        nav: 4,
+                        nav: 5,
                         content: '<i class="fa fa-calendar"></i> Data Providers'
                     }
                 }

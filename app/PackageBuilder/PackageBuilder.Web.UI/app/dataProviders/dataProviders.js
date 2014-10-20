@@ -7,9 +7,9 @@
         .module('app')
         .controller(controllerId, dataSources);
 
-    dataSources.$inject = ['$scope', 'common', 'datacontext'];
+    dataSources.$inject = ['$scope', '$location', 'common', 'datacontext'];
 
-    function dataSources($scope, common, datacontext) {
+    function dataSources($scope, $location, common, datacontext) {
 
         $scope.title = 'Data Providers';
         var getLogFn = common.logger.getLogFn;
@@ -17,6 +17,7 @@
         var logError = getLogFn(controllerId, 'error');
 
         $scope.test = '';
+        $scope.dProvidersData = '';
 
         $scope.myData = [
          {
@@ -40,13 +41,18 @@
              "company": "Fuelton",
              "employed": false
          }
-            ];
+        ];
 
+
+        $scope.notify = function (row) {
+
+            $location.path('/data-source-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
+        }
 
         $scope.selectedDatasource = [];
 
         $scope.gridOptions = {
-            data: 'myData',
+            data: 'dProvidersData',
             selectedItems: $scope.selectedDatasource,
             multiSelect: false,
             enableFiltering: true,
@@ -59,7 +65,7 @@
                 { field: 'created', displayName: 'Created' },
                 { field: 'edited', displayName: 'Edited' },
                 { field: 'version', displayName: 'Version' },
-                { displayName: '', cellTemplate: '<input type="button" name="edit" ng-click="notify(row)" value="Edit" />' }
+                { displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
             ]
         };
 
@@ -69,15 +75,15 @@
 
         function activate() {
             
-            common.activateController([getDataProviders()], controllerId)
+            common.activateController([getAllDataProviders()], controllerId)
                 .then(function () { log('Activated Data Providers View'); });
         }
 
-        function getDataProviders() {
+        function getAllDataProviders() {
             
-            return datacontext.getDataProviders().then(function (data) {
+            return datacontext.getAllDataProviders().then(function (data) {
 
-                (data.indexOf('Error') > -1) ? (logError(data) ? $scope.test = null : $scope.test = data) : log('Data loaded successfully!');
+                (data.indexOf('Error') > -1) ? logError(data) : $scope.dProvidersData = data;
         
             });
         }
