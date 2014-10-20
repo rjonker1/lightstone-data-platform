@@ -1,31 +1,41 @@
 ﻿(function () {
     'use strict';
 
+    var controllerId = "dataProviders";
+
     angular
         .module('app')
-        .controller('dataSources', dataSources);
+        .controller(controllerId, dataSources);
 
-    dataSources.$inject = ['$scope'];
+    dataSources.$inject = ['$scope', 'common', 'datacontext'];
 
-    function dataSources($scope) {
+    function dataSources($scope, common, datacontext) {
 
-        $scope.title = 'dataSources';
+        $scope.title = 'Data Providers';
+        var getLogFn = common.logger.getLogFn;
+        var log = getLogFn(controllerId);
+        var logError = getLogFn(controllerId, 'error');
 
-            $scope.myData = [
+        $scope.test = '';
+
+        $scope.myData = [
          {
-             "firstName": "Cox",
+             "Id": "1",
+             "Name": "Cox",
              "lastName": "Carney",
              "company": "Enormo",
              "employed": true
          },
          {
-             "firstName": "Lorraine",
+             "Id": "2",
+             "Name": "Lorraine",
              "lastName": "Wise",
              "company": "Comveyer",
              "employed": false
          },
          {
-             "firstName": "Nancy",
+             "Id": "3",
+             "Name": "Nancy",
              "lastName": "Waters",
              "company": "Fuelton",
              "employed": false
@@ -43,7 +53,7 @@
             showFilter: true,
             showGroupPanel: true,
             columnDefs: [
-                { field: 'name', displayName: 'Name', filter: { term: '' } },
+                { field: 'Name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'created', displayName: 'Created' },
@@ -57,6 +67,19 @@
 
         activate();
 
-        function activate() { }
+        function activate() {
+            
+            common.activateController([getDataProviders()], controllerId)
+                .then(function () { log('Activated Data Providers View'); });
+        }
+
+        function getDataProviders() {
+            
+            return datacontext.getDataProviders().then(function (data) {
+
+                (data.indexOf('Error') > -1) ? (logError(data) ? $scope.test = null : $scope.test = data) : log('Data loaded successfully!');
+        
+            });
+        }
     }
 })();

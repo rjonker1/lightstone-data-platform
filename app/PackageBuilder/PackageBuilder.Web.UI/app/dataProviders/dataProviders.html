@@ -1,0 +1,34 @@
+<style type="text/css">
+
+    .gridStyle {
+        height: 300px;
+    }
+
+    .ngHeaderScroller {
+        position: absolute;
+        background: #687074;
+        color: white;
+    }
+
+</style>
+
+
+<section class="mainbar" data-ng-controller="dataProviders">
+    
+    {{test}}
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div data-cc-widget-header title="{{title}}"></div>
+                    <div class="widget-content user">
+                        <div id="dsGrid" ng-grid="gridOptions" class="gridStyle"></div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
