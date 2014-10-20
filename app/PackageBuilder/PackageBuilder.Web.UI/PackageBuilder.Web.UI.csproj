@@ -154,6 +154,7 @@
     <Content Include="Content\styles.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\tree.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\toastr.scss" />
@@ -181,7 +182,7 @@
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="app\.buildignore" />
     <Content Include="app\.htaccess" />
-    <Content Include="DataProviders.json" />
+    <Content Include="app\packageMaintenance\DataProviders.json" />
     <Content Include="Scripts\angular-resource.min.js.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
