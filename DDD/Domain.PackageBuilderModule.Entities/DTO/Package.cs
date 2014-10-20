@@ -20,7 +20,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
         [DataObject]
         [DataContract]
         [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
-        public abstract class Package : Aggregate, INotifyPropertyChanged, IHasPackageBuilderContext
+        public abstract class Package : Entity, INotifyPropertyChanged, IHasPackageBuilderContext
         {
             #region Package INotifyPropertyChanged Implementation
 

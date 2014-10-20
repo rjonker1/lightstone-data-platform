@@ -1,6 +1,6 @@
 ﻿CREATE TABLE PackageBuilder.DataProvider
 (
-	DataProviderId uniqueidentifier NOT NULL,
+	Id uniqueidentifier NOT NULL,
 	Name nvarchar(128) NOT NULL,
 	Owner nvarchar(512) NOT NULL,
 	SourceURL nvarchar(512) NOT NULL,
@@ -11,8 +11,8 @@
 	Description nvarchar(512),
 	Edited datetime,
 	RevisionDate datetime,
-	CONSTRAINT DataProviderUniquenessConstraintOnNameAndVersion_UC UNIQUE(Name, Version),
-	CONSTRAINT DataProvider_PK PRIMARY KEY(DataProviderId)
+	CONSTRAINT DataProviderNameAndVersionUniquenessConstraint_UC UNIQUE(Name, Version),
+	CONSTRAINT DataProvider_PK PRIMARY KEY(Id)
 )
 GO
-ALTER TABLE PackageBuilder.DataProvider ADD CONSTRAINT DataProvider_FK FOREIGN KEY (StateId) REFERENCES PackageBuilder.State (StateId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE PackageBuilder.DataProvider ADD CONSTRAINT DataProvider_FK FOREIGN KEY (StateId) REFERENCES PackageBuilder.State (Id) ON DELETE NO ACTION ON UPDATE NO ACTION

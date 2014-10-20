@@ -13,7 +13,7 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Module.Transformers
             TransformResults = results => from result in results
                 select new PackageView
                 {
-                    Id = result.Id.ToString(CultureInfo.InvariantCulture),
+                    Id = result.Id.ToString(),
                     //Name = result.,
                     Version = result.Version.ToString(CultureInfo.InvariantCulture),
                 };

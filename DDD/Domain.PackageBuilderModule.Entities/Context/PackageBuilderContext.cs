@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -20,9 +21,17 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
 
 
         [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
-        public sealed class PackageBuilderContext : IPackageBuilderContext
+        public sealed class PackageBuilderContext :DbContext, IPackageBuilderContext
         {
+            public DbSet<DataField> DataFields { get; set; }
+            public DbSet<DataProvider> DataProviders { get; set; }
+            public DbSet<Industry> Industries { get; set; }
+            public DbSet<Package> Packages { get; set; }
+            public DbSet<PackageDataField> PackageDataFields { get; set; }
+            public DbSet<State> States { get; set; }
+
             public PackageBuilderContext()
+                : base("name=LightstoneAppDatabaseEntities")
             {
                 Dictionary<RuntimeTypeHandle, object> constraintEnforcementCollectionCallbacksByTypeDictionary =
                     _ContraintEnforcementCollectionCallbacksByTypeDictionary =
@@ -75,6 +84,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Context
                 _IndustryReadOnlyCollection = new ReadOnlyCollection<DTO.Industry>(_IndustryList = new List<DTO.Industry>());
             }
 
+           
             #region Exception Helpers
 
             private static ArgumentException GetDifferentContextsException()

@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LightstoneAppDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DataField">
+          <Key>
+            <PropertyRef Name="DataFieldId" />
+          </Key>
+          <Property Name="DataFieldId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CostOfSale" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DataProviderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IndustryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Selected" Type="bit" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="32" />
+          <Property Name="TypeDefinition" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DataProvider">
+          <Key>
+            <PropertyRef Name="DataProviderId" />
+          </Key>
+          <Property Name="DataProviderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="SourceURL" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="StateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="CostOfSale" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="Edited" Type="datetime" />
+          <Property Name="RevisionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="IndustryId" />
+          </Key>
+          <Property Name="IndustryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="PackageId" />
+          </Key>
+          <Property Name="PackageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="CostOfSale" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Edited" Type="datetime" />
+          <Property Name="IndustryId" Type="uniqueidentifier" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="512" />
+          <Property Name="Published" Type="bit" />
+          <Property Name="RecomendedRetailPrice" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="RevisionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PackageDataField">
+          <Key>
+            <PropertyRef Name="PackageDataFieldId" />
+          </Key>
+          <Property Name="PackageDataFieldId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DataFieldId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PackageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Priority" Type="smallint" Nullable="false" />
+          <Property Name="Selected" Type="bit" Nullable="false" />
+          <Property Name="UnifiedName" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <Association Name="DataField_FK1">
+          <End Role="DataProvider" Type="Self.DataProvider" Multiplicity="1" />
+          <End Role="DataField" Type="Self.DataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DataProvider">
+              <PropertyRef Name="DataProviderId" />
+            </Principal>
+            <Dependent Role="DataField">
+              <PropertyRef Name="DataProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DataField_FK2">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="1" />
+          <End Role="DataField" Type="Self.DataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="IndustryId" />
+            </Principal>
+            <Dependent Role="DataField">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DataProvider_FK">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="DataProvider" Type="Self.DataProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="DataProvider">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Package_FK1">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Package_FK2">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="IndustryId" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PackageDataField_FK1">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="PackageDataField" Type="Self.PackageDataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="PackageId" />
+            </Principal>
+            <Dependent Role="PackageDataField">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PackageDataField_FK2">
+          <End Role="DataField" Type="Self.DataField" Multiplicity="1" />
+          <End Role="PackageDataField" Type="Self.PackageDataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DataField">
+              <PropertyRef Name="DataFieldId" />
+            </Principal>
+            <Dependent Role="PackageDataField">
+              <PropertyRef Name="DataFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LightstoneAppDatabaseModelStoreContainer">
+          <EntitySet Name="DataField" EntityType="Self.DataField" Schema="PackageBuilder" store:Type="Tables" />
+          <EntitySet Name="DataProvider" EntityType="Self.DataProvider" Schema="PackageBuilder" store:Type="Tables" />
+          <EntitySet Name="Industry" EntityType="Self.Industry" Schema="PackageBuilder" store:Type="Tables" />
+          <EntitySet Name="Package" EntityType="Self.Package" Schema="PackageBuilder" store:Type="Tables" />
+          <EntitySet Name="PackageDataField" EntityType="Self.PackageDataField" Schema="PackageBuilder" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="PackageBuilder" store:Type="Tables" />
+          <AssociationSet Name="DataField_FK1" Association="Self.DataField_FK1">
+            <End Role="DataProvider" EntitySet="DataProvider" />
+            <End Role="DataField" EntitySet="DataField" />
+          </AssociationSet>
+          <AssociationSet Name="DataField_FK2" Association="Self.DataField_FK2">
+            <End Role="Industry" EntitySet="Industry" />
+            <End Role="DataField" EntitySet="DataField" />
+          </AssociationSet>
+          <AssociationSet Name="DataProvider_FK" Association="Self.DataProvider_FK">
+            <End Role="State" EntitySet="State" />
+            <End Role="DataProvider" EntitySet="DataProvider" />
+          </AssociationSet>
+          <AssociationSet Name="Package_FK1" Association="Self.Package_FK1">
+            <End Role="State" EntitySet="State" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="Package_FK2" Association="Self.Package_FK2">
+            <End Role="Industry" EntitySet="Industry" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="PackageDataField_FK1" Association="Self.PackageDataField_FK1">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="PackageDataField" EntitySet="PackageDataField" />
+          </AssociationSet>
+          <AssociationSet Name="PackageDataField_FK2" Association="Self.PackageDataField_FK2">
+            <End Role="DataField" EntitySet="DataField" />
+            <End Role="PackageDataField" EntitySet="PackageDataField" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LightstoneAppDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DataField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CostOfSale" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DataProviderId" Type="Guid" Nullable="false" />
+          <Property Name="IndustryId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Selected" Type="Boolean" Nullable="false" />
+          <Property Name="Label" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="TypeDefinition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DataProvider" Relationship="Self.DataField_FK1" FromRole="DataField" ToRole="DataProvider" />
+          <NavigationProperty Name="Industry" Relationship="Self.DataField_FK2" FromRole="DataField" ToRole="Industry" />
+          <NavigationProperty Name="PackageDataFields" Relationship="Self.PackageDataField_FK2" FromRole="DataField" ToRole="PackageDataField" />
+        </EntityType>
+        <EntityType Name="DataProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Owner" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SourceURL" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Guid" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CostOfSale" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Edited" Type="DateTime" Precision="3" />
+          <Property Name="RevisionDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DataFields" Relationship="Self.DataField_FK1" FromRole="DataProvider" ToRole="DataField" />
+          <NavigationProperty Name="State" Relationship="Self.DataProvider_FK" FromRole="DataProvider" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DataFields" Relationship="Self.DataField_FK2" FromRole="Industry" ToRole="DataField" />
+          <NavigationProperty Name="Packages" Relationship="Self.Package_FK2" FromRole="Industry" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateId" Type="Guid" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CostOfSale" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Edited" Type="DateTime" Precision="3" />
+          <Property Name="IndustryId" Type="Guid" />
+          <Property Name="Owner" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="Boolean" />
+          <Property Name="RecomendedRetailPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RevisionDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Industry" Relationship="Self.Package_FK2" FromRole="Package" ToRole="Industry" />
+          <NavigationProperty Name="State" Relationship="Self.Package_FK1" FromRole="Package" ToRole="State" />
+          <NavigationProperty Name="PackageDataFields" Relationship="Self.PackageDataField_FK1" FromRole="Package" ToRole="PackageDataField" />
+        </EntityType>
+        <EntityType Name="PackageDataField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DataFieldId" Type="Guid" Nullable="false" />
+          <Property Name="PackageId" Type="Guid" Nullable="false" />
+          <Property Name="Priority" Type="Int16" Nullable="false" />
+          <Property Name="Selected" Type="Boolean" Nullable="false" />
+          <Property Name="UnifiedName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DataField" Relationship="Self.PackageDataField_FK2" FromRole="PackageDataField" ToRole="DataField" />
+          <NavigationProperty Name="Package" Relationship="Self.PackageDataField_FK1" FromRole="PackageDataField" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DataProviders" Relationship="Self.DataProvider_FK" FromRole="State" ToRole="DataProvider" />
+          <NavigationProperty Name="Packages" Relationship="Self.Package_FK1" FromRole="State" ToRole="Package" />
+        </EntityType>
+        <Association Name="DataField_FK1">
+          <End Role="DataProvider" Type="Self.DataProvider" Multiplicity="1" />
+          <End Role="DataField" Type="Self.DataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DataProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DataField">
+              <PropertyRef Name="DataProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DataField_FK2">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="1" />
+          <End Role="DataField" Type="Self.DataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DataField">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PackageDataField_FK2">
+          <End Role="DataField" Type="Self.DataField" Multiplicity="1" />
+          <End Role="PackageDataField" Type="Self.PackageDataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DataField">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PackageDataField">
+              <PropertyRef Name="DataFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DataProvider_FK">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="DataProvider" Type="Self.DataProvider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DataProvider">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Package_FK2">
+          <End Role="Industry" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Package_FK1">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PackageDataField_FK1">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="PackageDataField" Type="Self.PackageDataField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PackageDataField">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LightstoneAppDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DataFields" EntityType="Self.DataField" />
+          <EntitySet Name="DataProviders" EntityType="Self.DataProvider" />
+          <EntitySet Name="Industries" EntityType="Self.Industry" />
+          <EntitySet Name="Packages" EntityType="Self.Package" />
+          <EntitySet Name="PackageDataFields" EntityType="Self.PackageDataField" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <AssociationSet Name="DataField_FK1" Association="Self.DataField_FK1">
+            <End Role="DataProvider" EntitySet="DataProviders" />
+            <End Role="DataField" EntitySet="DataFields" />
+          </AssociationSet>
+          <AssociationSet Name="DataField_FK2" Association="Self.DataField_FK2">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="DataField" EntitySet="DataFields" />
+          </AssociationSet>
+          <AssociationSet Name="PackageDataField_FK2" Association="Self.PackageDataField_FK2">
+            <End Role="DataField" EntitySet="DataFields" />
+            <End Role="PackageDataField" EntitySet="PackageDataFields" />
+          </AssociationSet>
+          <AssociationSet Name="DataProvider_FK" Association="Self.DataProvider_FK">
+            <End Role="State" EntitySet="States" />
+            <End Role="DataProvider" EntitySet="DataProviders" />
+          </AssociationSet>
+          <AssociationSet Name="Package_FK2" Association="Self.Package_FK2">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="Package_FK1" Association="Self.Package_FK1">
+            <End Role="State" EntitySet="States" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="PackageDataField_FK1" Association="Self.PackageDataField_FK1">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="PackageDataField" EntitySet="PackageDataFields" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LightstoneAppDatabaseModelStoreContainer" CdmEntityContainer="LightstoneAppDatabaseEntities">
+          <EntitySetMapping Name="DataFields">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.DataField">
+              <MappingFragment StoreEntitySet="DataField">
+                <ScalarProperty Name="Id" ColumnName="DataFieldId" />
+                <ScalarProperty Name="CostOfSale" ColumnName="CostOfSale" />
+                <ScalarProperty Name="DataProviderId" ColumnName="DataProviderId" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="TypeDefinition" ColumnName="TypeDefinition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataProviders">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.DataProvider">
+              <MappingFragment StoreEntitySet="DataProvider">
+                <ScalarProperty Name="Id" ColumnName="DataProviderId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="SourceURL" ColumnName="SourceURL" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CostOfSale" ColumnName="CostOfSale" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Edited" ColumnName="Edited" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Industries">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.Industry">
+              <MappingFragment StoreEntitySet="Industry">
+                <ScalarProperty Name="Id" ColumnName="IndustryId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="Id" ColumnName="PackageId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CostOfSale" ColumnName="CostOfSale" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Edited" ColumnName="Edited" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="RecomendedRetailPrice" ColumnName="RecomendedRetailPrice" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageDataFields">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.PackageDataField">
+              <MappingFragment StoreEntitySet="PackageDataField">
+                <ScalarProperty Name="Id" ColumnName="PackageDataFieldId" />
+                <ScalarProperty Name="DataFieldId" ColumnName="DataFieldId" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+                <ScalarProperty Name="UnifiedName" ColumnName="UnifiedName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Id" ColumnName="StateId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

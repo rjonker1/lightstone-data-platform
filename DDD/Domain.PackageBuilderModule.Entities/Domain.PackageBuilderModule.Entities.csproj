@@ -70,9 +70,17 @@
     <Compile Include="DTO\State.cs" />
     <Compile Include="Events\PackageClonedEvent.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
+    <Compile Include="PackageBuilderModel.Abstract.PLiX.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.Abstract.PLiX.xml</DependentUpon>
+    </Compile>
     <Compile Include="PackageBuilderModel.CoRef._ORMCustomToolReport.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>PackageBuilderModel.CoRef.orm</DependentUpon>
+    </Compile>
+    <Compile Include="PackageBuilderModel.Implementation.PLiX.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PackageBuilderModel.Implementation.PLiX.xml</DependentUpon>
     </Compile>
     <Compile Include="PackageBuilderModel._ORMCustomToolReport.cs">
       <AutoGen>True</AutoGen>
@@ -85,6 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Model\Model1.edmx" />
+    <None Include="Model\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
     <None Include="PackageModuleContext.Types.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PackageModuleContext.Types.cs</LastGenOutput>
@@ -120,6 +132,7 @@
       <Generator>NUPlixLoader</Generator>
       <DependentUpon>PackageBuilderModel.orm</DependentUpon>
       <ORMGenerator>CLIPropertiesToPLiXAbstract</ORMGenerator>
+      <LastGenOutput>PackageBuilderModel.Abstract.PLiX.cs</LastGenOutput>
     </None>
     <None Include="PackageBuilderModel.CLIProperties.xml">
       <AutoGen>True</AutoGen>
@@ -146,6 +159,7 @@
       <Generator>NUPlixLoader</Generator>
       <DependentUpon>PackageBuilderModel.orm</DependentUpon>
       <ORMGenerator>CLIPropertiesToPLiXInMemory</ORMGenerator>
+      <LastGenOutput>PackageBuilderModel.Implementation.PLiX.cs</LastGenOutput>
     </None>
     <None Include="PackageBuilderModel.OIAL.xml">
       <AutoGen>True</AutoGen>

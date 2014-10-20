@@ -10,7 +10,7 @@
 		</dcl:checkConstraint>
 	</dcl:domain>
 	<dcl:table name="Package">
-		<dcl:column name="PackageId" isNullable="false" isIdentity="true">
+		<dcl:column name="Id" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="Description" isNullable="false" isIdentity="false">
@@ -54,17 +54,17 @@
 			<dcl:columnRef name="Version" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Package_PK" isPrimary="true">
-			<dcl:columnRef name="PackageId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="Package_FK1" targetTable="State">
-			<dcl:columnRef sourceName="StateId" targetName="StateId" />
+			<dcl:columnRef sourceName="StateId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="Package_FK2" targetTable="Industry">
-			<dcl:columnRef sourceName="IndustryId" targetName="IndustryId" />
+			<dcl:columnRef sourceName="IndustryId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="State">
-		<dcl:column name="StateId" isNullable="false" isIdentity="true">
+		<dcl:column name="Id" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
@@ -79,11 +79,11 @@
 			</dep:inPredicate>
 		</dcl:checkConstraint>
 		<dcl:uniquenessConstraint name="State_PK" isPrimary="true">
-			<dcl:columnRef name="StateId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="DataProvider">
-		<dcl:column name="DataProviderId" isNullable="false" isIdentity="true">
+		<dcl:column name="Id" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="Name" isNullable="false" isIdentity="false">
@@ -116,19 +116,19 @@
 		<dcl:column name="RevisionDate" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="TIMESTAMP" />
 		</dcl:column>
-		<dcl:uniquenessConstraint name="DataProviderUniquenessConstraintOnNameAndVersion_UC" isPrimary="false">
+		<dcl:uniquenessConstraint name="DataProviderNameAndVersionUniquenessConstraint_UC" isPrimary="false">
 			<dcl:columnRef name="Name" />
 			<dcl:columnRef name="Version" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DataProvider_PK" isPrimary="true">
-			<dcl:columnRef name="DataProviderId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="DataProvider_FK" targetTable="State">
-			<dcl:columnRef sourceName="StateId" targetName="StateId" />
+			<dcl:columnRef sourceName="StateId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="DataField">
-		<dcl:column name="DataFieldId" isNullable="false" isIdentity="true">
+		<dcl:column name="Id" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="CostOfSale" isNullable="false" isIdentity="false">
@@ -156,17 +156,17 @@
 			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DataField_PK" isPrimary="true">
-			<dcl:columnRef name="DataFieldId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="DataField_FK1" targetTable="DataProvider">
-			<dcl:columnRef sourceName="DataProviderId" targetName="DataProviderId" />
+			<dcl:columnRef sourceName="DataProviderId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="DataField_FK2" targetTable="Industry">
-			<dcl:columnRef sourceName="IndustryId" targetName="IndustryId" />
+			<dcl:columnRef sourceName="IndustryId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="PackageDataField">
-		<dcl:column name="PackageDataFieldId" isNullable="false" isIdentity="true">
+		<dcl:column name="Id" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="DataFieldId" isNullable="false" isIdentity="false">
@@ -185,17 +185,17 @@
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="PackageDataField_PK" isPrimary="true">
-			<dcl:columnRef name="PackageDataFieldId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="PackageDataField_FK1" targetTable="Package">
-			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
+			<dcl:columnRef sourceName="PackageId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="PackageDataField_FK2" targetTable="DataField">
-			<dcl:columnRef sourceName="DataFieldId" targetName="DataFieldId" />
+			<dcl:columnRef sourceName="DataFieldId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Industry">
-		<dcl:column name="IndustryId" isNullable="false" isIdentity="true">
+		<dcl:column name="Id" isNullable="false" isIdentity="true">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
@@ -213,7 +213,7 @@
 			</dep:inPredicate>
 		</dcl:checkConstraint>
 		<dcl:uniquenessConstraint name="Industry_PK" isPrimary="true">
-			<dcl:columnRef name="IndustryId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 </dcl:schema>
