@@ -6,16 +6,16 @@ GO
 
 CREATE TABLE PackageBuilder.Package
 (
-	Id uniqueidentifier NOT NULL,
+	Id int IDENTITY (1, 1) NOT NULL,
 	Description nvarchar(512) NOT NULL,
 	Name nvarchar(128) NOT NULL,
-	StateId uniqueidentifier NOT NULL,
+	Owner nvarchar(512) NOT NULL,
+	StateId int NOT NULL,
 	Version nvarchar(16) NOT NULL,
 	CostOfSale decimal(19,4),
 	Created datetime,
 	Edited datetime,
-	IndustryId uniqueidentifier,
-	Owner nvarchar(512),
+	IndustryId int,
 	Published bit,
 	RecomendedRetailPrice decimal(19,4),
 	RevisionDate datetime,
@@ -27,8 +27,8 @@ GO
 
 CREATE TABLE PackageBuilder.State
 (
-	Id uniqueidentifier NOT NULL,
-	"Value" nvarchar(16) NOT NULL,
+	Id int IDENTITY (1, 1) NOT NULL,
+	"Value" nvarchar(24) NOT NULL,
 	CONSTRAINT State_PK PRIMARY KEY(Id),
 	CONSTRAINT State_Value_RoleValueConstraint1 CHECK ("Value" IN (N'Under construction', N'Published', N'Expired'))
 )
@@ -37,11 +37,12 @@ GO
 
 CREATE TABLE PackageBuilder.DataProvider
 (
-	Id uniqueidentifier NOT NULL,
+	Id int IDENTITY (1, 1) NOT NULL,
 	Name nvarchar(128) NOT NULL,
+	OverrideFieldLevelCostOfSale bit NOT NULL,
 	Owner nvarchar(512) NOT NULL,
 	SourceURL nvarchar(512) NOT NULL,
-	StateId uniqueidentifier NOT NULL,
+	StateId int NOT NULL,
 	Version nvarchar(16) NOT NULL,
 	CostOfSale decimal(19,4),
 	Created datetime,
@@ -56,10 +57,10 @@ GO
 
 CREATE TABLE PackageBuilder.DataField
 (
-	Id uniqueidentifier NOT NULL,
+	Id int IDENTITY (1, 1) NOT NULL,
 	CostOfSale decimal(19,4) NOT NULL,
-	DataProviderId uniqueidentifier NOT NULL,
-	IndustryId uniqueidentifier NOT NULL,
+	DataProviderId int NOT NULL,
+	IndustryId int NOT NULL,
 	Name nvarchar(128) NOT NULL,
 	Selected bit NOT NULL,
 	Label nvarchar(32),
@@ -72,9 +73,9 @@ GO
 
 CREATE TABLE PackageBuilder.PackageDataField
 (
-	Id uniqueidentifier NOT NULL,
-	DataFieldId uniqueidentifier NOT NULL,
-	PackageId uniqueidentifier NOT NULL,
+	Id int IDENTITY (1, 1) NOT NULL,
+	DataFieldId int NOT NULL,
+	PackageId int NOT NULL,
 	Priority smallint CHECK (Priority >= 0) NOT NULL,
 	Selected bit NOT NULL,
 	UnifiedName nvarchar(128) NOT NULL,
@@ -85,8 +86,8 @@ GO
 
 CREATE TABLE PackageBuilder.Industry
 (
-	Id uniqueidentifier NOT NULL,
-	"Value" nvarchar(16) NOT NULL,
+	Id int IDENTITY (1, 1) NOT NULL,
+	"Value" nvarchar(24) NOT NULL,
 	CONSTRAINT Industry_PK PRIMARY KEY(Id),
 	CONSTRAINT Industry_Value_RoleValueConstraint2 CHECK ("Value" IN (N'Banking', N'Consumer', N'Dealer', N'Government', N'Insurance', N'Other'))
 )

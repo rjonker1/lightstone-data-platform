@@ -43,6 +43,12 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Owner">
+			<ddt:characterString type="CHARACTER VARYING" length="512" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
 		<ddl:columnDefinition name="StateId">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:columnConstraintDefinition>
@@ -66,9 +72,6 @@
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="IndustryId">
 			<ddt:exactNumeric type="INTEGER" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Owner">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Published">
 			<ddt:boolean type="BOOLEAN" />
@@ -107,7 +110,7 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:characterString type="CHARACTER VARYING" length="16" />
+			<ddt:characterString type="CHARACTER VARYING" length="24" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -145,6 +148,12 @@
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="128" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="OverrideFieldLevelCostOfSale">
+			<ddt:boolean type="BOOLEAN" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -329,7 +338,7 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:characterString type="CHARACTER VARYING" length="16" />
+			<ddt:characterString type="CHARACTER VARYING" length="24" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>

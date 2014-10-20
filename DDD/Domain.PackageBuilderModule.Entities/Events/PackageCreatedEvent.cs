@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
+using DTO.PackageBuilder;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events
 {
@@ -12,20 +12,35 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events
         public PackageCreatedEvent()
         {
             Id = IdentityGenerator.NewSequentialGuid();
+
+            
         }
         public PackageCreatedEvent(Package package)
             : this()
         {
-            var context = new PackageBuilderContext();
+            var context = new Model.Context();
 
-            var state = context.CreateState(DTO.State.ConstraintValues.First().ToString(CultureInfo.InvariantCulture));
+            context.ChangeTracker.DetectChanges();
+            
+            //var state = context.CreateState("Under Construction");
+            
+            var p = context.Packages.Create();
 
-            var packageCreated = context.CreatePackage(package.Name, "", Version, context.CreateState(state.ToString()));
+            p.State = package.State;
+            p.Name = package.Name;
+            p.Owner = package.Owner;
+            p.Description = package.Description;
+            p.ChangeCurrentIdentity(GuidUtil.NewSequentialId());
+            p.State.Id = new Guid("80adc8fe-a229-4b00-a491-818dd0273b16"); // "Under construction"
+            p.EntityState = TrackState.Added;
 
-            PackageCreated = packageCreated;
+            context.Packages.Add(package);
+
+            context.SaveChanges();
+            
+            PackageCreated = p;
         }
-
-
+        
         public new Guid Id { get; private set; }
 
         public string Name { get; private set; }

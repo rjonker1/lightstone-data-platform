@@ -2,6 +2,7 @@
 (
 	Id uniqueidentifier NOT NULL,
 	Name nvarchar(128) NOT NULL,
+	OverrideFieldLevelCostOfSale bit NOT NULL,
 	Owner nvarchar(512) NOT NULL,
 	SourceURL nvarchar(512) NOT NULL,
 	StateId uniqueidentifier NOT NULL,

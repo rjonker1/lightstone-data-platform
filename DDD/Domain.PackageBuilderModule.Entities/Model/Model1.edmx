@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LightstoneAppDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PackageBuilderDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DataField">
           <Key>
-            <PropertyRef Name="DataFieldId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="DataFieldId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CostOfSale" Type="decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="DataProviderId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IndustryId" Type="uniqueidentifier" Nullable="false" />
@@ -20,10 +20,11 @@
         </EntityType>
         <EntityType Name="DataProvider">
           <Key>
-            <PropertyRef Name="DataProviderId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="DataProviderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OverrideFieldLevelCostOfSale" Type="bit" Nullable="false" />
           <Property Name="Owner" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="SourceURL" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="StateId" Type="uniqueidentifier" Nullable="false" />
@@ -36,34 +37,34 @@
         </EntityType>
         <EntityType Name="Industry">
           <Key>
-            <PropertyRef Name="IndustryId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IndustryId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Value" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <EntityType Name="Package">
           <Key>
-            <PropertyRef Name="PackageId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="PackageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="StateId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Version" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="CostOfSale" Type="decimal" Precision="19" Scale="4" />
           <Property Name="Created" Type="datetime" />
           <Property Name="Edited" Type="datetime" />
           <Property Name="IndustryId" Type="uniqueidentifier" />
-          <Property Name="Owner" Type="nvarchar" MaxLength="512" />
           <Property Name="Published" Type="bit" />
           <Property Name="RecomendedRetailPrice" Type="decimal" Precision="19" Scale="4" />
           <Property Name="RevisionDate" Type="datetime" />
         </EntityType>
         <EntityType Name="PackageDataField">
           <Key>
-            <PropertyRef Name="PackageDataFieldId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="PackageDataFieldId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DataFieldId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PackageId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Priority" Type="smallint" Nullable="false" />
@@ -72,9 +73,9 @@
         </EntityType>
         <EntityType Name="State">
           <Key>
-            <PropertyRef Name="StateId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="StateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Value" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <Association Name="DataField_FK1">
@@ -82,7 +83,7 @@
           <End Role="DataField" Type="Self.DataField" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DataProvider">
-              <PropertyRef Name="DataProviderId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="DataField">
               <PropertyRef Name="DataProviderId" />
@@ -94,7 +95,7 @@
           <End Role="DataField" Type="Self.DataField" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Industry">
-              <PropertyRef Name="IndustryId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="DataField">
               <PropertyRef Name="IndustryId" />
@@ -106,7 +107,7 @@
           <End Role="DataProvider" Type="Self.DataProvider" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
-              <PropertyRef Name="StateId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="DataProvider">
               <PropertyRef Name="StateId" />
@@ -118,7 +119,7 @@
           <End Role="Package" Type="Self.Package" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="State">
-              <PropertyRef Name="StateId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Package">
               <PropertyRef Name="StateId" />
@@ -130,7 +131,7 @@
           <End Role="Package" Type="Self.Package" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Industry">
-              <PropertyRef Name="IndustryId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Package">
               <PropertyRef Name="IndustryId" />
@@ -142,7 +143,7 @@
           <End Role="PackageDataField" Type="Self.PackageDataField" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Package">
-              <PropertyRef Name="PackageId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PackageDataField">
               <PropertyRef Name="PackageId" />
@@ -154,14 +155,14 @@
           <End Role="PackageDataField" Type="Self.PackageDataField" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DataField">
-              <PropertyRef Name="DataFieldId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PackageDataField">
               <PropertyRef Name="DataFieldId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LightstoneAppDatabaseModelStoreContainer">
+        <EntityContainer Name="PackageBuilderDatabaseModelStoreContainer">
           <EntitySet Name="DataField" EntityType="Self.DataField" Schema="PackageBuilder" store:Type="Tables" />
           <EntitySet Name="DataProvider" EntityType="Self.DataProvider" Schema="PackageBuilder" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="PackageBuilder" store:Type="Tables" />
@@ -201,7 +202,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="LightstoneAppDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PackageBuilderDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="DataField">
           <Key>
             <PropertyRef Name="Id" />
@@ -224,6 +225,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OverrideFieldLevelCostOfSale" Type="Boolean" Nullable="false" />
           <Property Name="Owner" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SourceURL" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StateId" Type="Guid" Nullable="false" />
@@ -252,13 +254,13 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Owner" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StateId" Type="Guid" Nullable="false" />
           <Property Name="Version" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CostOfSale" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Created" Type="DateTime" Precision="3" />
           <Property Name="Edited" Type="DateTime" Precision="3" />
           <Property Name="IndustryId" Type="Guid" />
-          <Property Name="Owner" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Published" Type="Boolean" />
           <Property Name="RecomendedRetailPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="RevisionDate" Type="DateTime" Precision="3" />
@@ -372,7 +374,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LightstoneAppDatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DataFields" EntityType="Self.DataField" />
           <EntitySet Name="DataProviders" EntityType="Self.DataProvider" />
           <EntitySet Name="Industries" EntityType="Self.Industry" />
@@ -413,11 +415,11 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LightstoneAppDatabaseModelStoreContainer" CdmEntityContainer="LightstoneAppDatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="PackageBuilderDatabaseModelStoreContainer" CdmEntityContainer="Context">
           <EntitySetMapping Name="DataFields">
-            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.DataField">
+            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.DataField">
               <MappingFragment StoreEntitySet="DataField">
-                <ScalarProperty Name="Id" ColumnName="DataFieldId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CostOfSale" ColumnName="CostOfSale" />
                 <ScalarProperty Name="DataProviderId" ColumnName="DataProviderId" />
                 <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
@@ -429,10 +431,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DataProviders">
-            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.DataProvider">
+            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.DataProvider">
               <MappingFragment StoreEntitySet="DataProvider">
-                <ScalarProperty Name="Id" ColumnName="DataProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OverrideFieldLevelCostOfSale" ColumnName="OverrideFieldLevelCostOfSale" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="SourceURL" ColumnName="SourceURL" />
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
@@ -446,26 +449,26 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Industries">
-            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.Industry">
+            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.Industry">
               <MappingFragment StoreEntitySet="Industry">
-                <ScalarProperty Name="Id" ColumnName="IndustryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.Package">
+            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.Package">
               <MappingFragment StoreEntitySet="Package">
-                <ScalarProperty Name="Id" ColumnName="PackageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="StateId" ColumnName="StateId" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="CostOfSale" ColumnName="CostOfSale" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Edited" ColumnName="Edited" />
                 <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="Published" ColumnName="Published" />
                 <ScalarProperty Name="RecomendedRetailPrice" ColumnName="RecomendedRetailPrice" />
                 <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
@@ -473,9 +476,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PackageDataFields">
-            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.PackageDataField">
+            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.PackageDataField">
               <MappingFragment StoreEntitySet="PackageDataField">
-                <ScalarProperty Name="Id" ColumnName="PackageDataFieldId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DataFieldId" ColumnName="DataFieldId" />
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
@@ -485,9 +488,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.State">
+            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.State">
               <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="Id" ColumnName="StateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -510,6 +513,7 @@
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="PackageBuilder" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

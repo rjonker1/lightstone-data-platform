@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Linq;
 using LightstoneApp.Domain.Core;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
@@ -24,19 +23,8 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Commands
         {
            // NewPackage = package.Clone<Package>();
 
-            var context = package.Context;
 
-            DataProvider dataProvider;
-
-
-
-            var dataProviderFound = package.Version != null && !(string.IsNullOrEmpty(package.Name) &&
-                context.TryGetDataProviderByDataProviderNameAndVersionUniquenessConstraint(package.Name, package.Version, out dataProvider));
-
-            if (dataProviderFound)
-            {
-
-            }
+        
         }
 
         public Package NewPackage { get; private set; }

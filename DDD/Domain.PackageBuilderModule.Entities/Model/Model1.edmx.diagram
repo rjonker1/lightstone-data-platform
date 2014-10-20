@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="78d2a32e0229430988c1c4f936fe4e5f" Name="Diagram1" ZoomLevel="109">
-        <EntityTypeShape EntityType="LightstoneAppDatabaseModel.DataField" Width="1.875" PointX="8.125" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LightstoneAppDatabaseModel.DataProvider" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LightstoneAppDatabaseModel.Industry" Width="1.5" PointX="5.625" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LightstoneAppDatabaseModel.Package" Width="2" PointX="2.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LightstoneAppDatabaseModel.PackageDataField" Width="1.875" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LightstoneAppDatabaseModel.State" Width="1.5" PointX="1.5" PointY="2" IsExpanded="true" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.DataField_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.DataField_FK2" ManuallyRouted="false" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.PackageDataField_FK2" ManuallyRouted="false" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.DataProvider_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.Package_FK2" ManuallyRouted="false" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.Package_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="LightstoneAppDatabaseModel.PackageDataField_FK1" ManuallyRouted="false" />
+      <Diagram DiagramId="c9f238fce39e4deba2ad743c6cb48a46" Name="Diagram1">
+        <EntityTypeShape EntityType="PackageBuilderDatabaseModel.DataField" Width="1.875" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageBuilderDatabaseModel.DataProvider" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageBuilderDatabaseModel.Industry" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageBuilderDatabaseModel.Package" Width="2.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageBuilderDatabaseModel.PackageDataField" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PackageBuilderDatabaseModel.State" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.DataField_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.DataField_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.PackageDataField_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.DataProvider_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.Package_FK2" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.Package_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="PackageBuilderDatabaseModel.PackageDataField_FK1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

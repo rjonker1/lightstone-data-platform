@@ -19,6 +19,9 @@
 		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
 		</dcl:column>
+		<dcl:column name="Owner" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
+		</dcl:column>
 		<dcl:column name="StateId" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
@@ -36,9 +39,6 @@
 		</dcl:column>
 		<dcl:column name="IndustryId" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="INTEGER" />
-		</dcl:column>
-		<dcl:column name="Owner" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
 		</dcl:column>
 		<dcl:column name="Published" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="BOOLEAN" />
@@ -68,7 +68,7 @@
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="16" />
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="24" />
 		</dcl:column>
 		<dcl:checkConstraint name="State_Value_RoleValueConstraint1">
 			<dep:inPredicate type="IN">
@@ -88,6 +88,9 @@
 		</dcl:column>
 		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="128" />
+		</dcl:column>
+		<dcl:column name="OverrideFieldLevelCostOfSale" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
 		</dcl:column>
 		<dcl:column name="Owner" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="512" />
@@ -199,7 +202,7 @@
 			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="&quot;Value&quot;" requestedName="Value" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="CHARACTER VARYING" length="16" />
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="24" />
 		</dcl:column>
 		<dcl:checkConstraint name="Industry_Value_RoleValueConstraint2">
 			<dep:inPredicate type="IN">

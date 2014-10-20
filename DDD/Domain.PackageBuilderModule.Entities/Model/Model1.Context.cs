@@ -9,7 +9,7 @@
 
 using DTO.PackageBuilder;
 
-namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Module.Model
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
 {
     using System;
     using System.Data.Entity;

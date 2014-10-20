@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Threading;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.ComponentModel;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
@@ -13,7 +14,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.DTO
     [DataObject]
     [DataContract]
     [StructLayout(LayoutKind.Auto, CharSet = CharSet.Auto)]
-    public abstract class Industry : INotifyPropertyChanged, IHasPackageBuilderContext
+    public abstract class Industry : Entity, INotifyPropertyChanged, IHasPackageBuilderContext
     {
         #region Industry INotifyPropertyChanged Implementation
 

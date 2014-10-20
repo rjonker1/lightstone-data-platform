@@ -24,7 +24,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
         ///     Get the persisten object identifier
         /// </summary>
         [DataMember]
-        public virtual Guid Id { get; protected set; }
+        public virtual Guid Id { get; set; }
 
         [DataMember]
         public TrackState? EntityState { get; set; }

@@ -548,18 +548,19 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
                 case 1:
                     return string.Concat(_major);
                 case 2:
-                    return (string) (object) _major + (object) "." + (string) (object) _minor;
+                    return string.Format("{0}.{1}}", _major, _minor);
+                   // return (string) (object) _major + (object) "." + (string) (object) _minor;
                 default:
                     if (_publish == -1)
                         throw new ArgumentException("ArgumentOutOfRange_Bounds_Lower_Upper");
                     if (fieldCount == 3)
-                        return (string) (object) _major + (object) "." + (string) (object) _minor + "." +
-                               (string) (object) _publish;
+                        return string.Format("{0}.{1}.{2}}", _major, _minor, _publish);
+                        //return (string) (object) _major + (object) "." + (string) (object) _minor + "." +
+                        //       (string) (object) _publish;
                     if (_revision == -1)
                         throw new ArgumentException("ArgumentOutOfRange_Bounds_Lower_Upper");
                     if (fieldCount == 4)
-                        return (string) (object) Major + (object) "." + (string) (object) _minor + "." +
-                               (string) (object) _publish + "." + (string) (object) _revision;
+                        return string.Format("{0}.{1}.{2}.{3}", _major, _minor, _publish , _revision);
                     throw new ArgumentException("ArgumentOutOfRange_Bounds_Lower_Upper");
             }
         }
