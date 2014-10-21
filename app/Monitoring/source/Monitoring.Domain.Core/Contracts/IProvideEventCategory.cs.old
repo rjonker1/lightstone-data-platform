@@ -1,0 +1,7 @@
+﻿namespace Monitoring.Domain.Core.Contracts
+{
+    public interface IProvideEventCategory
+    {
+        string Category { get; }
+    }
+}

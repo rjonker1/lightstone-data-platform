@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
-using EventStore.ClientAPI;
+using Monitoring.Domain.Core.Dto;
 using Newtonsoft.Json;
 
-namespace EventTracking.Domain.Core
+namespace Monitoring.Domain.Core
 {
     public static class JsonExtensions
     {
@@ -32,8 +32,16 @@ namespace EventTracking.Domain.Core
         public static EventData AsJsonEvent(this string value, string eventName)
         {
             var bytes = Encoding.UTF8.GetBytes(value);
-
             return new EventData(Guid.NewGuid(), eventName, true, bytes, null);
+
+            //return new EventData()
+            //{
+            //    Data = bytes,
+            //    EventId = Guid.NewGuid(),
+            //    IsJson = true,
+            //    Metadata = null,
+            //    Type = eventName
+            //};
         }
 
         public static EventData AsJsonEvent(this object value)
