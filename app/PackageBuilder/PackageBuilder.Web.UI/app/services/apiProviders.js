@@ -4,8 +4,8 @@ var ApiProviderServices = angular.module('apiProviderServices', ['ngResource']);
 
 ApiProviderServices.factory('GetDataProvider', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider/Get/:id/:version', {}, {
-			query: {method:'GET', isObject:true}
+		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/Get/:id/:version', {}, {
+			query: { method:'GET', isObject:true}
 		});
 	}]);
 

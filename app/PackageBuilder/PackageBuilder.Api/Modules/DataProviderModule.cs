@@ -12,19 +12,17 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
-        public DataProviderModule(IBus bus, 
-            IRepository<Domain.Entities.DataProviders.ReadModels.DataProvider> readRepo, 
+        public DataProviderModule(IBus bus,
+            IRepository<Domain.Entities.DataProviders.ReadModels.DataProvider> readRepo,
             INEventStoreRepository<Domain.Entities.DataProviders.WriteModels.DataProvider> writeRepo)
         {
-            Get["/DataProvider"] = parameters =>
-            {
-                return Response.AsJson(readRepo);
-            };
+            Get["/DataProvider"] = parameters => { return Response.AsJson(readRepo); };
 
             Get["/DataProvider/Get/All"] = parameters =>
             {
@@ -46,7 +44,7 @@ namespace PackageBuilder.Api.Modules
                     try
                     {
                         dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version).DataFields
-                                              .Select(field => new DataProviderFieldItemDto { Name = field.Name, Type = field.Type + "" });
+                            .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
                     }
                     catch (Exception)
                     {
@@ -56,29 +54,46 @@ namespace PackageBuilder.Api.Modules
                     dataSources.Add(dSource);
                 }
 
-                return Response.AsJson(new { Response = dataSources });
+                return Response.AsJson(new {Response = dataSources});
             };
 
             Get["/DataProvider/Add"] = parameters =>
             {
                 Guid ProviderId = Guid.NewGuid();
-                bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse)));
+                bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof (IvidResponse)));
                 //bus.Publish(new DataProviderCreated(Guid.NewGuid(), ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse), null));
                 //readRepo.Save(new DataProvider(Guid.NewGuid(), ProviderId, "Ivid", 0d, "Description", null));
-                return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
+                return Response.AsJson(new {msg = "Success, " + ProviderId + " created"});
             };
 
             Get["/DataProvider/Edit/{id}/{version}"] = parameters =>
             {
                 bus.Publish(new RenameDataProvider(new Guid(parameters.id), "Test1"));
 
-                return Response.AsJson(new { msg = "Success" });
+                return Response.AsJson(new {msg = "Success"});
             };
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
-                var dataProviders = writeRepo.GetById(parameters.id, parameters.version);
-                return Response.AsJson(new { Response = dataProviders });
+                var dataSources = new ArrayList();
+
+
+                DataProvider dataProvider = new DataProvider();
+
+
+                try
+                {
+                    dataProvider = writeRepo.GetById(parameters.id, parameters.version);
+                }
+                catch (Exception)
+                {
+                    dataProvider = null;
+                }
+
+                dataSources.Add(dataProvider);
+
+
+                return Response.AsJson(new {Response = dataSources});
             };
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
@@ -89,9 +104,11 @@ namespace PackageBuilder.Api.Modules
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
 
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto),   dFields ));
+                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.Owner, dto.Created,
+                    dto.Edited, dto.Version, typeof (DataProviderDto), dFields));
 
-                return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
+                return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
+                ;
             };
         }
     }

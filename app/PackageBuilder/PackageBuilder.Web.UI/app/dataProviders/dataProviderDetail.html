@@ -1,4 +1,13 @@
 ﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
+ 
+    <!--<div ng-model="dataPromise.response">
+        <div ng-repeat="data in dataPromise.response">
+            <li>{{data}}</li>
+        </div>
+        
+    </div>-->
+
+
     <section class="matter">
         <div class="container">
             <div class="row">
@@ -10,7 +19,9 @@
 
                         <br />
 
-                        <div id="info">
+                        <div id="info" ng-repeat="dataProvider in dataPromise.response">
+                            
+                            {{dataProvider}}
 
                             <div id="1" class="col-md-3">
                                 <div>

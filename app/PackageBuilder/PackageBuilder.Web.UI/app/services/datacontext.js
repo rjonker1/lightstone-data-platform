@@ -27,29 +27,25 @@
 
         return service;
 
-        //GET
+        //GET *
         function getDataProvider(_id, _version) {
             
             var providerEditData =
-                GetDataProvider.get({ id: _id, version: _version }, function (data) {
+                GetDataProvider.query({ id: _id, version: _version }, function success(data) {
 
                     var resp = data.response;
+                    return resp;
 
-                    for (var res in resp) {
+                }, function error(err) {
 
-                        /*alert(''+res);*/
-                        if (resp.hasOwnProperty(res)) {
-
-                            //$scope.dataProvider = resp;
-                            return $q.when(resp);
-                        }
-                    } 
+                    return "Error loading Data Provider.";
                 });
+ 
 
-            return $q.when("Error loading Data Provider.");
+            return $q.when(providerEditData);
         }
 
-        //GET
+        //GET *
         function getAllDataProviders() {
 
             var providerData =
@@ -114,8 +110,10 @@
         }
 
         //POST
-        function editDataProvider(_id, packageData) {
-            
+        function editDataProvider(_id, providerData) {
+
+            alert(_id);
+
             PostDataProvider.save({ id: _id }, providerData, function (data) {
 
                 return $q.when('Data Provider Edited!');

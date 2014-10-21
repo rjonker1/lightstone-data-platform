@@ -7,9 +7,9 @@
         .module('app')
         .controller(controllerId, dataProviderDetail);
 
-    dataProviderDetail.$inject = ['$scope', 'common', 'datacontext']; 
+    dataProviderDetail.$inject = ['$scope', '$routeParams', 'common', 'datacontext']; 
 
-    function dataProviderDetail($scope, common, datacontext) {
+    function dataProviderDetail($scope, $routeParams, common, datacontext) {
 
         $scope.title = 'Data Provider Detail';
         var getLogFn = common.logger.getLogFn;
@@ -39,20 +39,7 @@
             //Functionality to post to API
             //
 
-
-            //PostDataProvider.save({ id: $scope.dataProvider.id }, providerData, function (data) {
-
-            //    //var resp = data.msg;
-
-            //    $scope.alerts = [
-
-            //          { type: 'success', msg: 'DataProvider: ' + $scope.dataProvider.name + ' saved successfully !' }
-            //    ];
-
-            //}, function (err) {
-
-            //    $scope.message = "Error saving Data Provider";
-            //});
+            datacontext.editDataProvider($routeParams.id, $scope.dataProvider);
 
         }
 
@@ -60,16 +47,26 @@
 
         function activate() {
 
-            common.activateController([getDataProvider()], controllerId)
-                .then(function () { log('Activated Data Providers View'); });
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version)], controllerId)
+                .then(function () { log('Activated Data Providers Edit View');         
+            });
         }
 
-        function getDataProvider() {
+        function getDataProvider(id, version) {
 
-            return datacontext.getDataProvider().then(function (data) {
+            return datacontext.getDataProvider(id, version).then(function (data) {
 
-                (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Provider data loaded successfully!') : '');
 
+                //log(data);
+                console.log(data);
+
+                $scope.dataPromise = data;
+               
+                //angular.toJSON(data);
+                //console.log($scope.test);
+             
+
+                 //(data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
             });
         }
     }

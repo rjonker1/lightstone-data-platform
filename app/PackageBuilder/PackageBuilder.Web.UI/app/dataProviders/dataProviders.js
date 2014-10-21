@@ -47,7 +47,7 @@
 
         $scope.notify = function (row) {
 
-            $location.path('/data-source-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
+            $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
         }
 
         $scope.selectedDatasource = [];
@@ -83,6 +83,8 @@
         function getAllDataProviders() {
             
             return datacontext.getAllDataProviders().then(function (data) {
+
+                $scope.test = data;
 
                 (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
         
