@@ -30,53 +30,41 @@
         //GET
         function getDataProvider(_id, _version) {
             
-            GetDataProvider.get({ id: _id, version: _version }, function (data) {
+            var providerEditData =
+                GetDataProvider.get({ id: _id, version: _version }, function (data) {
 
-                var resp = data.response;
+                    var resp = data.response;
 
-                for (var res in resp) {
+                    for (var res in resp) {
 
-                    /*alert(''+res);*/
-                    if (resp.hasOwnProperty(res)) {
+                        /*alert(''+res);*/
+                        if (resp.hasOwnProperty(res)) {
 
-                        //$scope.dataProvider = resp;
-                        return $q.when(resp);
-                    }
-                } 
-            });
+                            //$scope.dataProvider = resp;
+                            return $q.when(resp);
+                        }
+                    } 
+                });
 
-            return $q.when("Error loading Data Provider data.");
+            return $q.when("Error loading Data Provider.");
         }
 
         //GET
         function getAllDataProviders() {
 
-            GetDataProviders.query(function(data) {
+            var providerData =
+                GetDataProviders.query({}, function success(data) {
 
-                var resp = data.response;
+                    var resp = data.response;
+                    return resp;
 
-                for (var res in resp) {
+                }, function error() {
 
-                    if (resp.hasOwnProperty(res)) {
+                    return "Error loading Data Provider.";
 
-                        return $q.when(resp);
-                    }
-                }
+                });
 
-            });
-
-            //When call fails, return mock data as error
-            var myData = [
-                {
-                    "Id": "123",
-                    "Name": "Ivid",
-                    "Description": "MOCK",
-                    "Version": "1"
-                }
-            ];
-
-            //return $q.when("Error loading Data Providers.");
-            return $q.when(myData);
+            return $q.when(providerData);
         }
 
         //GET
@@ -126,7 +114,7 @@
         }
 
         //POST
-        function editDataProvider(_id, providerData) {
+        function editDataProvider(_id, packageData) {
             
             PostDataProvider.save({ id: _id }, providerData, function (data) {
 
