@@ -71,12 +71,8 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
-      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Lightstone.Dataplatform.PackageBuilder.Data.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
