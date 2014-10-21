@@ -1,29 +1,30 @@
 ﻿using System;
-using FluentNHibernate.Data;
-
+using PackageBuilder.Core.Entities;
 
 namespace PackageBuilder.Domain.Entities.Packages.ReadModels
 {
     public class Package : Entity
     {
-        public Package(Guid id, Guid dataProviderId, string name, string description, string owner)
+        protected Package() { }
+
+        public Package(Guid id, Guid dataProviderId, string name, string description, string owner, DateTime created)
         {
             Id = id;
             DataProviderId = dataProviderId;
             Name = name;
             Description = description;
             Owner = owner;
-            Created = DateTime.UtcNow;
+            Created = created;
             Version = 1;
         }
 
-        public Guid Id { get; private set; }
-        public Guid DataProviderId { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string Owner { get; private set; }
-        public DateTime Created { get; private set; }
-        public DateTime Edited { get; private set; }
-        public int Version { get; private set; }
+        public virtual Guid Id { get; protected set; }
+        public virtual Guid DataProviderId { get; protected set; }
+        public virtual string Name { get; protected set; }
+        public virtual string Description { get; protected set; }
+        public virtual string Owner { get; protected set; }
+        public virtual DateTime Created { get; protected set; }
+        public virtual DateTime Edited { get; protected set; }
+        public virtual int Version { get; protected set; }
     }
 }

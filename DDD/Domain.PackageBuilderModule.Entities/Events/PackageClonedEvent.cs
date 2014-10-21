@@ -3,7 +3,7 @@
     public class PackageClonedEvent : PackageCreatedEvent
     {
 
-        public PackageClonedEvent(Package package)
+        public PackageClonedEvent(Model.Package package)
             : base(package)
         {
             

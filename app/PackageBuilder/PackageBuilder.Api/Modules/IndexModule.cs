@@ -4,7 +4,6 @@ using Common.Logging;
 using DataPlatform.Shared.Entities;
 using Nancy;
 using Shared.BuildingBlocks.Api;
-using Lace.Models.Ivid.Dto;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.Api.Modules

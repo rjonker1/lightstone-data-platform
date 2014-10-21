@@ -71,12 +71,8 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
-      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Lightstone.Dataplatform.PackageBuilder.Data.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -131,6 +127,9 @@
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache">
+      <HintPath>..\..\packages\NHibernate.Caches.SysCache.3.2.0.4000\lib\Net35\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions">
       <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>

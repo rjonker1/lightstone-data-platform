@@ -12,14 +12,14 @@ ApiProviderServices.factory('GetDataProvider', ['$resource',
 ApiProviderServices.factory('GetDataProviders', ['$resource',
 	function($resource) {
 	    return $resource('http://dev.lightstone.packagebuilder.api/DataProvider', {}, {
-			query: { method: 'GET', isObject:true }
+			query: { method: 'GET', isArray:true }
 		});
 	}]);
 
 ApiProviderServices.factory('GetDataProviderSources', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/DataProvider/Get/All', {}, {
-			query: { method: 'GET', isObject:true }
+		return $resource('http://dev.lightstone.packagebuilder.api/DataProvider/Get/All', {}, {
+		    query: { method: 'GET', isObject:true }
 		});
 	}]);
 

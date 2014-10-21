@@ -1,33 +1,31 @@
-﻿using LightstoneApp.Domain.PackageBuilderModule.Commands;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO;
-using LightstoneApp.Domain.PackageBuilderModule.Interfaces;
+﻿
+using LightstoneApp.Domain.PackageBuilderModule.Commands;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
-using Package = LightstoneApp.Domain.PackageBuilderModule.Entities.Package;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Handlers
 {
     internal class CreateNewPackageCommandHandler : IHandleMessages<CreateNewPackageCommand>
     {
-        private IRepositoryFactory RepositoryFactory { get; set; }
+        
         private Package.Factory PackageFactory { get; set; }
 
-        public CreateNewPackageCommandHandler(IPackageBuilderContext context, IRepositoryFactory repositoryFactory)
+        public CreateNewPackageCommandHandler()
         {
-            RepositoryFactory = repositoryFactory;
-            PackageFactory = new Package.Factory(context);
+            PackageFactory = new Package.Factory();
         }
 
         public void Handle(CreateNewPackageCommand message)
         {
-            using (var repository = RepositoryFactory.OpenSession())
+            using (var repository = new LightstoneAppDatabaseEntities())
             {
                 if (PackageFactory != null)
                 {
                     var package = PackageFactory.CreatePackage(message.NewPackage);
 
-                    repository.Save(package);
+                    repository.Packages.Add(package);
                 }
-                repository.CommitChanges();
+                repository.SaveChanges();
             }
         }
     }

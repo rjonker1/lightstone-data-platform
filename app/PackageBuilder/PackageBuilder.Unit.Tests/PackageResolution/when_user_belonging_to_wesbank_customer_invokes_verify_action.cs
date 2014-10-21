@@ -11,7 +11,7 @@ namespace PackageBuilder.Unit.Tests.PackageResolution
         private IPackage _package;
         public when_user_belonging_to_wesbank_customer_invokes_verify_action()
         {
-            _packageLookupRepository = PackageLookupMother.GetWesbankScenario();
+            //_packageLookupRepository = PackageLookupMother.GetWesbankScenario();
         }
 
         public override void Observe()

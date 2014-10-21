@@ -47,8 +47,8 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
-      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />

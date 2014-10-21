@@ -59,24 +59,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\PackageBuilderContext.cs" />
-    <Compile Include="DTO\Package.cs" />
-    <Compile Include="DTO\DataField.cs" />
-    <Compile Include="DTO\DataProvider.cs" />
-    <Compile Include="DTO\IHasPackageBuilderContext.cs" />
-    <Compile Include="DTO\Industry.cs" />
-    <Compile Include="DTO\IPackageBuilderContext.cs" />
-    <Compile Include="DTO\PackageDataField.cs" />
-    <Compile Include="DTO\State.cs" />
     <Compile Include="Events\PackageClonedEvent.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
-    <Compile Include="PackageBuilderModel.CoRef._ORMCustomToolReport.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PackageBuilderModel.CoRef.orm</DependentUpon>
+    <Compile Include="Model\DataField.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackageBuilderModel._ORMCustomToolReport.cs">
+    <Compile Include="Model\DataProvider.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Industry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Package.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PackageDataField.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\State.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="PackagePartial.cs">
       <SubType>Code</SubType>
@@ -85,6 +101,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Model\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="Model\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </None>
     <None Include="PackageModuleContext.Types.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PackageModuleContext.Types.cs</LastGenOutput>
@@ -92,7 +125,6 @@
     <None Include="PackageBuilderModel.orm">
       <Generator>ORMCustomTool</Generator>
       <CustomToolNamespace>LightstoneApp.Domain.PackageBuilderModule.Context</CustomToolNamespace>
-      <LastGenOutput>PackageBuilderModel._ORMCustomToolReport.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -113,24 +145,10 @@
       <Name>Infrastructure.CrossCutting.NetFramework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Context\" />
+  </ItemGroup>
   <ItemGroup Condition="Exists('PackageBuilderModel.orm')">
-    <None Include="PackageBuilderModel.Abstract.PLiX.xml">
-      <AutoGen>True</AutoGen>
-      <Generator>NUPlixLoader</Generator>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
-      <ORMGenerator>CLIPropertiesToPLiXAbstract</ORMGenerator>
-    </None>
-    <None Include="PackageBuilderModel.CLIProperties.xml">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
-      <ORMGenerator>OIALtoCLIProperties</ORMGenerator>
-    </None>
-    <None Include="PackageBuilderModel.CoRef.orm">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
-      <ORMGenerator>CoRefORM</ORMGenerator>
-    </None>
     <None Include="PackageBuilderModel.DCIL.xml">
       <AutoGen>True</AutoGen>
       <DependentUpon>PackageBuilderModel.orm</DependentUpon>
@@ -140,17 +158,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PackageBuilderModel.orm</DependentUpon>
       <ORMGenerator>DCILtoDDIL</ORMGenerator>
-    </None>
-    <None Include="PackageBuilderModel.Implementation.PLiX.xml">
-      <AutoGen>True</AutoGen>
-      <Generator>NUPlixLoader</Generator>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
-      <ORMGenerator>CLIPropertiesToPLiXInMemory</ORMGenerator>
-    </None>
-    <None Include="PackageBuilderModel.OIAL.xml">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PackageBuilderModel.orm</DependentUpon>
-      <ORMGenerator>ORMtoOIAL</ORMGenerator>
     </None>
     <None Include="PackageBuilderModel.SQLServer.sql">
       <AutoGen>True</AutoGen>

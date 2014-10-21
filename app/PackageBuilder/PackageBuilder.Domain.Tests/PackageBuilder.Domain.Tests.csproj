@@ -50,8 +50,8 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
-      <HintPath>..\..\Lace\Lace.Models.Ivid\bin\Debug\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\PackageBuilder.Domain\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -94,7 +94,6 @@
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_creating_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
-    <Compile Include="CommandHandlers\Packages\when_creating_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +117,9 @@
       <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
       <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CommandHandlers\Packages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

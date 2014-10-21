@@ -17,7 +17,7 @@
 		</ddl:domainConstraintDefinition>
 	</ddl:domainDefinition>
 	<ddl:tableDefinition name="Package" schema="PackageBuilder">
-		<ddl:columnDefinition name="PackageId">
+		<ddl:columnDefinition name="Id">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -39,6 +39,12 @@
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="128" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="Owner">
+			<ddt:characterString type="CHARACTER VARYING" length="512" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -67,9 +73,6 @@
 		<ddl:columnDefinition name="IndustryId">
 			<ddt:exactNumeric type="INTEGER" />
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="Owner">
-			<ddt:characterString type="CHARACTER VARYING" length="512" />
-		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Published">
 			<ddt:boolean type="BOOLEAN" />
 		</ddl:columnDefinition>
@@ -87,12 +90,12 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Package_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PackageId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="State" schema="PackageBuilder">
-		<ddl:columnDefinition name="StateId">
+		<ddl:columnDefinition name="Id">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -107,14 +110,14 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:characterString type="CHARACTER VARYING" length="16" />
+			<ddt:characterString type="CHARACTER VARYING" length="24" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="State_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="StateId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="State_Value_RoleValueConstraint1">
@@ -129,7 +132,7 @@
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="DataProvider" schema="PackageBuilder">
-		<ddl:columnDefinition name="DataProviderId">
+		<ddl:columnDefinition name="Id">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -145,6 +148,12 @@
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="128" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="OverrideFieldLevelCostOfSale">
+			<ddt:boolean type="BOOLEAN" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -188,7 +197,7 @@
 		<ddl:columnDefinition name="RevisionDate">
 			<ddt:time type="TIMESTAMP" />
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="DataProviderUniquenessConstraintOnNameAndVersion_UC">
+		<ddl:tableConstraintDefinition name="DataProviderNameAndVersionUniquenessConstraint_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
 				<dep:simpleColumnReference name="Name" />
 				<dep:simpleColumnReference name="Version" />
@@ -196,12 +205,12 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DataProvider_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DataProviderId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="DataField" schema="PackageBuilder">
-		<ddl:columnDefinition name="DataFieldId">
+		<ddl:columnDefinition name="Id">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -258,12 +267,12 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DataField_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DataFieldId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="PackageDataField" schema="PackageBuilder">
-		<ddl:columnDefinition name="PackageDataFieldId">
+		<ddl:columnDefinition name="Id">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -309,12 +318,12 @@
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="PackageDataField_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PackageDataFieldId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Industry" schema="PackageBuilder">
-		<ddl:columnDefinition name="IndustryId">
+		<ddl:columnDefinition name="Id">
 			<ddt:exactNumeric type="INTEGER" />
 			<ddl:identityColumnSpecification type="ALWAYS">
 				<ddl:sequenceGeneratorStartWithOption>
@@ -329,14 +338,14 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="&quot;Value&quot;">
-			<ddt:characterString type="CHARACTER VARYING" length="16" />
+			<ddt:characterString type="CHARACTER VARYING" length="24" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Industry_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="IndustryId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Industry_Value_RoleValueConstraint2">
@@ -358,7 +367,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="StateId" />
 				<ddl:referencesSpecification name="State" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="StateId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -368,7 +377,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="IndustryId" />
 				<ddl:referencesSpecification name="Industry" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="IndustryId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -378,7 +387,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="StateId" />
 				<ddl:referencesSpecification name="State" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="StateId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -388,7 +397,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="DataProviderId" />
 				<ddl:referencesSpecification name="DataProvider" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataProviderId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -398,7 +407,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="IndustryId" />
 				<ddl:referencesSpecification name="Industry" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="IndustryId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -408,7 +417,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PackageId" />
 				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="PackageId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -418,7 +427,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="DataFieldId" />
 				<ddl:referencesSpecification name="DataField" onDelete="RESTRICT" onUpdate="RESTRICT" schema="PackageBuilder">
-					<dep:simpleColumnReference name="DataFieldId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>

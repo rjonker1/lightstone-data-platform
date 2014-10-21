@@ -17,7 +17,7 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
 
         public override void Handle(PackageUpdated command)
         {
-            _session.Store(new Package(Guid.NewGuid(), command.Id, command.Name, null, command.Owner));
+            _session.Store(new Package(Guid.NewGuid(), command.Id, command.Name, null, command.Owner, command.Created));
         }
     }
 }

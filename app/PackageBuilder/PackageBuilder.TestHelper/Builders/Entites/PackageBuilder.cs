@@ -1,7 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
-using PackageBuilder.TestHelper.Mothers;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
@@ -9,9 +8,9 @@ namespace PackageBuilder.TestHelper.Builders.Entites
     {
         private string _name;
         private IAction _action;
-        public IPackage Build()
+        public Package Build()
         {
-            return new Package(Guid.NewGuid(), "test", new []{ DataProviderMother.Ivid });
+            return new Package(Guid.NewGuid(), "test", "test", "", null);
         }
 
         public PackageBuilder With(string name)

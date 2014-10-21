@@ -18,16 +18,12 @@ namespace PackageBuilder.Api.Modules
         {
             Get["/Packages"] = parameters =>
             {
-                //var res = session.Query<ReadPackage, IndexAllPackages>().ToList();
-
-                //return Response.AsJson(new {Response = res});
-
                 return Response.AsJson(repository);
             };
 
             Get["/Package/Add"] = parameters =>
             {
-                bus.Publish(new CreatePackage(Guid.NewGuid(), "Test", null));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), "Test", "Test Desc", null));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -38,7 +34,7 @@ namespace PackageBuilder.Api.Modules
 
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dProviders ));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, "", dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };

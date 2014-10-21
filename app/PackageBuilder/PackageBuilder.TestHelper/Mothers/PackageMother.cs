@@ -1,10 +1,10 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace PackageBuilder.TestHelper.Mothers
 {
     public class PackageMother
     {
-        public static IPackage LicensePlateSearchPackage
+        public static Package LicensePlateSearchPackage
         {
             get
             {
@@ -18,7 +18,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IPackage FullVerificationPackage
+        public static Package FullVerificationPackage
         {
             get
             {
@@ -32,7 +32,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IPackage PartialVerificationPackage
+        public static Package PartialVerificationPackage
         {
             get
             {
@@ -46,7 +46,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static IPackage LicenseScanPackage
+        public static Package LicenseScanPackage
         {
             get
             {
@@ -57,7 +57,7 @@ namespace PackageBuilder.TestHelper.Mothers
                     .Build();
             }
         }
-        public static IPackage EzScorePackage
+        public static Package EzScorePackage
         {
             get
             {

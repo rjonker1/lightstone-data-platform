@@ -1,74 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.Context.PackageBuilder;
-using LightstoneApp.Domain.PackageBuilderModule.Entities.DTO;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
-using Version = LightstoneApp.Infrastructure.CrossCutting.NetFramework.Version;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities
+
+
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
 {
-    public class Package : DTO.PackageBuilder.Package
+    public partial class Package
     {
-        private readonly IPackageBuilderContext _context;
-        private readonly IEnumerable<PackageDataField> _packageDataFieldViaPackageCollection;
 
-        public Package(IPackageBuilderContext context)
-        {
-            _context = context;
-
-            _packageDataFieldViaPackageCollection = new List<PackageDataField>();
-        }
+        public const string StateUnderConsructionKey = "80adc8fe-a229-4b00-a491-818dd0273b16";
+        public const string IndustryOtherKey = "a5f908f8-f645-4c94-93f5-fedbc9781f8c";
 
         private Package SetupCompleted()
         {
-            //DataProvider dataProvider;
-
-            //var dataProviderFound = Version != null && !(string.IsNullOrEmpty(Name) &&
-            //    _context.TryGetDataProviderByDataProviderNameAndVersionUniquenessConstraint(Name, Version, out dataProvider));
-
-            //if (dataProviderFound)
-            //{
-
-            //}
-
             var packageCreatedEvent = new PackageCreatedEvent(this);
 
-            RaiseEvent(packageCreatedEvent);
+            //TODO: RaiseEvent
+            //RaiseEvent(packageCreatedEvent);
 
             return this;
         }
 
         public class Factory
         {
-            private readonly IPackageBuilderContext _context;
-
-            public Factory(IPackageBuilderContext context)
+            public Package CreatePackage(string name, string owner, string description, string version)
             {
-                _context = context;
-            }
+                Infrastructure.CrossCutting.NetFramework.Version checkVersion;
 
-
-            public Package CreatePackage(string name, string version)
-            {
-                Version checkVersion;
-
-                var v = Infrastructure.CrossCutting.NetFramework.Version.TryParse(version, out checkVersion);
+                Infrastructure.CrossCutting.NetFramework.Version.TryParse(version, out checkVersion);
 
                 if (checkVersion != null)
                 {
-                    var package = new Package(_context)
+                    var package = new Package
                     {
-                        //Id = "people/" + Guid.NewGuid().ToString(),
-                        //Id = IdentityGenerator.NewSequentialGuid(),
+                        Id = GuidUtil.NewSequentialId(),
                         Name = name,
-                        Version = checkVersion.ToString() 
+                        Owner = owner,
+                        Version = checkVersion.ToString(),
+                        Description = description,
+                        Published = false,
+                        StateId = new Guid(StateUnderConsructionKey),
+                        IndustryId = new Guid(IndustryOtherKey),
+                        Created = DateTime.Now
                     };
 
-                    package = package.SetupCompleted();
+                    try
+                    {
+                        package = package.SetupCompleted();
 
-                    //package.Id = GuidUtil.NewSequentialId();
+                        return package;
+                    }
+                    catch(Exception exception)
+                    {
 
-                    return package;
+                        throw new Exception("Error creating Package :", exception);
+                    }
                 }
                 return null;
             }
@@ -80,56 +67,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             }
         }
 
-        public override PackageBuilderContext Context
-        {
-            get { return _context as PackageBuilderContext; }
-        }
-
-        public override sealed string Name { get; set; }
-        public override string Description { get; set; }
-        public override string Owner { get; set; }
-        public override DateTime? Created { get; set; }
-        public override DateTime? Edited { get; set; }
-        public override sealed string Version { get; set; }
 
 
-        public override object Clone()
-        {
-            var version = new Version(Version);
-
-            var revisionNr = version.Revision + 1;
-
-            var newVersion = new Version(version.Major, version.Minor, version.Publish, revisionNr).ToString();
-
-            var clone = MemberwiseClone() as Package;
-
-            if (clone != null)
-            {
-                var package = base.Clone() as Package;
-
-                if (package != null)
-                {
-                    package.Version = newVersion;
-
-                    var pce = new PackageClonedEvent(package);
-
-                    return pce.PackageCreated;
-                }
-            }
-
-            return null;
-        }
-
-        public override bool? Published { get; set; }
-        public override DateTime? RevisionDate { get; set; }
-        public override decimal? CostOfSale { get; set; }
-        public override decimal? RecomendedRetailPrice { get; set; }
-        public override DTO.State State { get; set; }
-        public override DTO.Industry Industry { get; set; }
-
-        public override IEnumerable<PackageDataField> PackageDataFieldViaPackageCollection
-        {
-            get { return _packageDataFieldViaPackageCollection; }
-        }
     }
 }

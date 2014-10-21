@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Models.Ivid.Dto;
+using Lace.Domain.Core.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -62,7 +62,6 @@ namespace PackageBuilder.Api.Modules
             Get["/DataProvider/Add"] = parameters =>
             {
                 Guid ProviderId = Guid.NewGuid();
-
                 bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse)));
                 //bus.Publish(new DataProviderCreated(Guid.NewGuid(), ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse), null));
                 //readRepo.Save(new DataProvider(Guid.NewGuid(), ProviderId, "Ivid", 0d, "Description", null));
