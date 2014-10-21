@@ -78,7 +78,6 @@
     <Compile Include="Specification\ParametersRebinder.cs" />
     <Compile Include="Specification\Specification.cs" />
     <Compile Include="Specification\TrueSpecification.cs" />
-    <Compile Include="ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
