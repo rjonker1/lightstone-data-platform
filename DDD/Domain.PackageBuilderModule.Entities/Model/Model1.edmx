@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PackageBuilderDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LightstoneAppDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DataField">
           <Key>
             <PropertyRef Name="Id" />
@@ -76,7 +76,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Value" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="24" Nullable="false" />
         </EntityType>
         <Association Name="DataField_FK1">
           <End Role="DataProvider" Type="Self.DataProvider" Multiplicity="1" />
@@ -162,7 +162,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PackageBuilderDatabaseModelStoreContainer">
+        <EntityContainer Name="LightstoneAppDatabaseModelStoreContainer">
           <EntitySet Name="DataField" EntityType="Self.DataField" Schema="PackageBuilder" store:Type="Tables" />
           <EntitySet Name="DataProvider" EntityType="Self.DataProvider" Schema="PackageBuilder" store:Type="Tables" />
           <EntitySet Name="Industry" EntityType="Self.Industry" Schema="PackageBuilder" store:Type="Tables" />
@@ -202,7 +202,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PackageBuilderDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LightstoneAppDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="DataField">
           <Key>
             <PropertyRef Name="Id" />
@@ -286,7 +286,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="24" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="DataProviders" Relationship="Self.DataProvider_FK" FromRole="State" ToRole="DataProvider" />
           <NavigationProperty Name="Packages" Relationship="Self.Package_FK1" FromRole="State" ToRole="Package" />
         </EntityType>
@@ -374,7 +374,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LightstoneAppDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DataFields" EntityType="Self.DataField" />
           <EntitySet Name="DataProviders" EntityType="Self.DataProvider" />
           <EntitySet Name="Industries" EntityType="Self.Industry" />
@@ -415,9 +415,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PackageBuilderDatabaseModelStoreContainer" CdmEntityContainer="Context">
+        <EntityContainerMapping StorageEntityContainer="LightstoneAppDatabaseModelStoreContainer" CdmEntityContainer="LightstoneAppDatabaseEntities">
           <EntitySetMapping Name="DataFields">
-            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.DataField">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.DataField">
               <MappingFragment StoreEntitySet="DataField">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CostOfSale" ColumnName="CostOfSale" />
@@ -431,7 +431,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DataProviders">
-            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.DataProvider">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.DataProvider">
               <MappingFragment StoreEntitySet="DataProvider">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -449,7 +449,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Industries">
-            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.Industry">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.Industry">
               <MappingFragment StoreEntitySet="Industry">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -457,7 +457,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.Package">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.Package">
               <MappingFragment StoreEntitySet="Package">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -476,7 +476,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PackageDataFields">
-            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.PackageDataField">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.PackageDataField">
               <MappingFragment StoreEntitySet="PackageDataField">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DataFieldId" ColumnName="DataFieldId" />
@@ -488,7 +488,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="PackageBuilderDatabaseModel.State">
+            <EntityTypeMapping TypeName="LightstoneAppDatabaseModel.State">
               <MappingFragment StoreEntitySet="State">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -513,7 +513,6 @@
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-        <DesignerProperty Name="DefaultDatabaseSchema" Value="PackageBuilder" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

@@ -1,7 +1,7 @@
-﻿using LightstoneApp.Domain.PackageBuilderModule.Commands;
+﻿
+using LightstoneApp.Domain.PackageBuilderModule.Commands;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
-using Package = LightstoneApp.Domain.PackageBuilderModule.Entities.Package;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Handlers
 {
@@ -17,7 +17,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Handlers
 
         public void Handle(CreateNewPackageCommand message)
         {
-            using (var repository = new Context())
+            using (var repository = new LightstoneAppDatabaseEntities())
             {
                 if (PackageFactory != null)
                 {

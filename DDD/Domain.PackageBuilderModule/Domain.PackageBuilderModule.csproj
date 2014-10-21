@@ -53,10 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CreateNewPackageCommand.cs" />
-    <Compile Include="Handlers\CreateNewPackageCommandHandler.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IRepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +75,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Handlers\" />
     <Folder Include="Package\" />
   </ItemGroup>
   <ItemGroup>

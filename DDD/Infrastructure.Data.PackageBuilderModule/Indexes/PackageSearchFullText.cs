@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using LightstoneApp.Domain.PackageBuilderModule.Entities;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 

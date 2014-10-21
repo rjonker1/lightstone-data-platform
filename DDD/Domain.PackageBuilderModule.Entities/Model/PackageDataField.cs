@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
 {
     using System;
     using System.Collections.Generic;

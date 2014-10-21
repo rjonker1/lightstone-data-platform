@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using LightstoneApp.Domain.Core;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Messaging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
-using Package = LightstoneApp.Domain.PackageBuilderModule.Entities.Package;
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Commands
 {
@@ -21,7 +20,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Commands
 
         public CreateNewPackageCommand(Package package) : this()
         {
-           // NewPackage = package.Clone<Package>();
+           NewPackage = package.Clone<Package>();
 
 
         

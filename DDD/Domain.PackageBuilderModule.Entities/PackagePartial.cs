@@ -1,16 +1,23 @@
-﻿using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
-using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+﻿using System;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.Events;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 
 
-namespace LightstoneApp.Domain.PackageBuilderModule.Entities
+
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
 {
-    public class Package : DTO.PackageBuilder.Package
+    public partial class Package
     {
+
+        public const string StateUnderConsructionKey = "80adc8fe-a229-4b00-a491-818dd0273b16";
+        public const string IndustryOtherKey = "a5f908f8-f645-4c94-93f5-fedbc9781f8c";
+
         private Package SetupCompleted()
         {
             var packageCreatedEvent = new PackageCreatedEvent(this);
 
-            RaiseEvent(packageCreatedEvent);
+            //TODO: RaiseEvent
+            //RaiseEvent(packageCreatedEvent);
 
             return this;
         }
@@ -19,27 +26,36 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
         {
             public Package CreatePackage(string name, string owner, string description, string version)
             {
-                Version checkVersion;
+                Infrastructure.CrossCutting.NetFramework.Version checkVersion;
 
                 Infrastructure.CrossCutting.NetFramework.Version.TryParse(version, out checkVersion);
 
                 if (checkVersion != null)
                 {
+                    var package = new Package
+                    {
+                        Id = GuidUtil.NewSequentialId(),
+                        Name = name,
+                        Owner = owner,
+                        Version = checkVersion.ToString(),
+                        Description = description,
+                        Published = false,
+                        StateId = new Guid(StateUnderConsructionKey),
+                        IndustryId = new Guid(IndustryOtherKey),
+                        Created = DateTime.Now
+                    };
 
-                    var package = new Package();
-                   
-                        //Id = "people/" + Guid.NewGuid().ToString(),
-                   // Id = IdentityGenerator.NewSequentialGuid();
-                    package.Name = name;
-                    package.Owner = owner;
-                    package.Version = checkVersion.ToString();
-                    package.Description = description;
+                    try
+                    {
+                        package = package.SetupCompleted();
 
-                    package = package.SetupCompleted();
+                        return package;
+                    }
+                    catch(Exception exception)
+                    {
 
-                    //package.Id = GuidUtil.NewSequentialId();
-
-                    return package;
+                        throw new Exception("Error creating Package :", exception);
+                    }
                 }
                 return null;
             }
@@ -51,36 +67,7 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities
             }
         }
 
-       
 
 
-        public override object Clone()
-        {
-            var version = new Version(Version);
-
-            var revisionNr = version.Revision + 1;
-
-            var newVersion = new Version(version.Major, version.Minor, version.Publish, revisionNr).ToString();
-
-            var clone = MemberwiseClone() as Package;
-
-            if (clone != null)
-            {
-                var package = base.Clone() as Package;
-
-                if (package != null)
-                {
-                    package.Version = newVersion;
-
-                    var pce = new PackageClonedEvent(package);
-
-                    return pce.PackageCreated;
-                }
-            }
-
-            return null;
-        }
-
-       
     }
 }

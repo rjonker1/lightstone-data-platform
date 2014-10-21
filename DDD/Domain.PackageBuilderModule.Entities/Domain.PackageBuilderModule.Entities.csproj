@@ -117,7 +117,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
-      <CustomToolNamespace>DTO.PackageBuilder</CustomToolNamespace>
     </None>
     <None Include="PackageModuleContext.Types.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

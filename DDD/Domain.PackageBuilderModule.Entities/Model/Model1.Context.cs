@@ -7,18 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using DTO.PackageBuilder;
-
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Context : DbContext
+    public partial class LightstoneAppDatabaseEntities : DbContext
     {
-        public Context()
-            : base("name=Context")
+        public LightstoneAppDatabaseEntities()
+            : base("name=LightstoneAppDatabaseEntities")
         {
         }
     

@@ -7,21 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
-
-namespace DTO.PackageBuilder
+namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Package : Entity
+    public partial class Package
     {
         public Package()
         {
             this.PackageDataFields = new HashSet<PackageDataField>();
         }
     
-       // public System.Guid Id { get; set; }
+        public System.Guid Id { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public string Owner { get; set; }

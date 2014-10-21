@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
-using LightstoneApp.Domain.PackageBuilderModule.Entities;
+using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
 using LightstoneApp.Infrastructure.Data.PackageBuilder.Module.Views;
 using Raven.Client.Indexes;
 
