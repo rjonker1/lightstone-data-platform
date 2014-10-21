@@ -62,7 +62,6 @@ namespace PackageBuilder.Api.Modules
             Get["/DataProvider/Add"] = parameters =>
             {
                 Guid ProviderId = Guid.NewGuid();
-
                 bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse)));
                 //bus.Publish(new DataProviderCreated(Guid.NewGuid(), ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse), null));
                 //readRepo.Save(new DataProvider(Guid.NewGuid(), ProviderId, "Ivid", 0d, "Description", null));

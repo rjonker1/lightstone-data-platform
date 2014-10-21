@@ -51,32 +51,19 @@
         //GET
         function getAllDataProviders() {
 
-            GetDataProviders.query(function(data) {
+            var providerData =
+                GetDataProviders.query({}, function success(data) {
 
-                var resp = data.response;
+                    var resp = data.response;
+                    return resp;
 
-                for (var res in resp) {
+                }, function error() {
 
-                    if (resp.hasOwnProperty(res)) {
+                    return "Error loading Data Provider.";
 
-                        return $q.when(resp);
-                    }
-                }
+                });
 
-            });
-
-            //When call fails, return mock data as error
-            var myData = [
-                {
-                    "Id": "123",
-                    "Name": "Ivid",
-                    "Description": "MOCK",
-                    "Version": "1"
-                }
-            ];
-
-            //return $q.when("Error loading Data Providers.");
-            return $q.when(myData);
+            return $q.when(providerData);
         }
 
         //GET
