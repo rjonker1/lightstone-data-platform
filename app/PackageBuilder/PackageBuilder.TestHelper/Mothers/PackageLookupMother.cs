@@ -13,24 +13,24 @@ namespace PackageBuilder.TestHelper.Mothers
         /// Canned data
         /// </summary>
         /// <returns></returns>
-        public static IPackageLookupRepository GetCannedVersion()
-        {
-            var user = UserMother.AdminUser;
-            var contract = ContractMother.WesbankContract;
-            var customer = new CustomerBuilder().With("Wesbank").With(user).With(contract).Build();
+        //public static IPackageLookupRepository GetCannedVersion()
+        //{
+        //    var user = UserMother.AdminUser;
+        //    var contract = ContractMother.WesbankContract;
+        //    var customer = new CustomerBuilder().With("Wesbank").With(user).With(contract).Build();
 
-            var contractPackageLicensePlateSearch = new ContractPackageBuilder().With(PackageMother.LicensePlateSearchPackage).With(contract).Build();
+        //    var contractPackageLicensePlateSearch = new ContractPackageBuilder().With(PackageMother.LicensePlateSearchPackage).With(contract).Build();
 
-            return new PackageLookup(
-                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
-                ActionRepositoryMother.AllActionsRepository,
-                new TestUserPackageRepository(),
-                new TestRolePackageRepository(),
-                new TestGroupPackageRepository(),
-                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
-                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageLicensePlateSearch).Build()
-                );
-        }
+        //    return new PackageLookup(
+        //        new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
+        //        ActionRepositoryMother.AllActionsRepository,
+        //        new TestUserPackageRepository(),
+        //        new TestRolePackageRepository(),
+        //        new TestGroupPackageRepository(),
+        //        new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+        //        new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageLicensePlateSearch).Build()
+        //        );
+        //}
 
         /// <summary>
         /// 	Customer: Create a customer called “Wesbank” and allocate the customer to a contract.
@@ -64,28 +64,28 @@ namespace PackageBuilder.TestHelper.Mothers
         ///     the fields allocated to each dataset will be retrieved from the external source responses. The retrieved fields will then be returned to the caller of the API.
         /// </summary>
         /// <returns></returns>
-        public static IPackageLookupRepository GetWesbankScenario()
-        {
-            var user = UserMother.TestUser;
-            var contract = ContractMother.WesbankContract;
-            var customer = new CustomerBuilder().With("Wesbank").With(user).With(contract).Build();
+        //public static IPackageLookupRepository GetWesbankScenario()
+        //{
+        //    var user = UserMother.TestUser;
+        //    var contract = ContractMother.WesbankContract;
+        //    var customer = new CustomerBuilder().With("Wesbank").With(user).With(contract).Build();
 
-            var contractPackageFull = new ContractPackageBuilder().With(PackageMother.FullVerificationPackage).With(contract).Build();
-            var contractPackageVerfiy = new ContractPackageBuilder().With(PackageMother.PartialVerificationPackage).With(contract).Build();
-            var contractPackageLicenseScan = new ContractPackageBuilder().With(PackageMother.LicenseScanPackage).With(contract).Build();
-            var contractPackageEzScore = new ContractPackageBuilder().With(PackageMother.EzScorePackage).With(contract).Build();
+        //    var contractPackageFull = new ContractPackageBuilder().With(PackageMother.FullVerificationPackage).With(contract).Build();
+        //    var contractPackageVerfiy = new ContractPackageBuilder().With(PackageMother.PartialVerificationPackage).With(contract).Build();
+        //    var contractPackageLicenseScan = new ContractPackageBuilder().With(PackageMother.LicenseScanPackage).With(contract).Build();
+        //    var contractPackageEzScore = new ContractPackageBuilder().With(PackageMother.EzScorePackage).With(contract).Build();
 
-            return new PackageLookup(
-                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
-                ActionRepositoryMother.AllActionsRepository,
-                new TestUserPackageRepository(),
-                new TestRolePackageRepository(),
-                new TestGroupPackageRepository(),
-                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
-                new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageFull, 
-                contractPackageVerfiy, contractPackageLicenseScan, contractPackageEzScore).Build()
-                );
-        }
+        //    return new PackageLookup(
+        //        new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
+        //        ActionRepositoryMother.AllActionsRepository,
+        //        new TestUserPackageRepository(),
+        //        new TestRolePackageRepository(),
+        //        new TestGroupPackageRepository(),
+        //        new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+        //        new TestRepositoryBuilder<TestContractPackageRepository, IContractPackage>().With(contractPackageFull, 
+        //        contractPackageVerfiy, contractPackageLicenseScan, contractPackageEzScore).Build()
+        //        );
+        //}
 
         /// <summary>
         ///     If we were to look a more complex scenario (and keeping in mind the configuration already done for Wesbank) it will become clear how the existing configuration can be reused and customised to cater for more complex scenarios
@@ -144,38 +144,38 @@ namespace PackageBuilder.TestHelper.Mothers
         ///             • If user in role R1 and group G3 performs action A3, package P1 is invoked.
         /// </summary>
         /// <returns></returns>
-        public static IPackageLookupRepository GetAcmeScenario()
-        {
-            var role1 = new RoleBuilder().With("role1").Build();
-            var group1 = new GroupBuilder().With("group1").Build();
-            var group2 = new GroupBuilder().With("group2").Build();
-            var group3 = new GroupBuilder().With("group3").Build();
+    //    public static IPackageLookupRepository GetAcmeScenario()
+    //    {
+    //        var role1 = new RoleBuilder().With("role1").Build();
+    //        var group1 = new GroupBuilder().With("group1").Build();
+    //        var group2 = new GroupBuilder().With("group2").Build();
+    //        var group3 = new GroupBuilder().With("group3").Build();
 
-            var user1 = new UserBuilder().With("user1").With(group1).Build();
-            var user2 = new UserBuilder().With("user2").With(group2).Build();
-            var user3 = new UserBuilder().With("user3").With(group3).Build();
-            var user4 = new UserBuilder().With("user4").With(role1).Build();
-            var user5 = new UserBuilder().With("user5").With(group3).With(role1).Build();
+    //        var user1 = new UserBuilder().With("user1").With(group1).Build();
+    //        var user2 = new UserBuilder().With("user2").With(group2).Build();
+    //        var user3 = new UserBuilder().With("user3").With(group3).Build();
+    //        var user4 = new UserBuilder().With("user4").With(role1).Build();
+    //        var user5 = new UserBuilder().With("user5").With(group3).With(role1).Build();
 
-            var contract = new ContractBuilder().With("Acme contract").Build();
-            var customer = new CustomerBuilder().With("Acme").With(user1, user2, user3, user4, user5).With(contract).Build();
+    //        var contract = new ContractBuilder().With("Acme contract").Build();
+    //        var customer = new CustomerBuilder().With("Acme").With(user1, user2, user3, user4, user5).With(contract).Build();
 
-            var groupPackage1 = new GroupPackageBuilder().With(customer).With(group1).With(PackageMother.LicenseScanPackage).Build();
-            var groupPackage2 = new GroupPackageBuilder().With(customer).With(group2).With(PackageMother.EzScorePackage).Build();
-            var groupPackage3 = new GroupPackageBuilder().With(customer).With(group2).With(PackageMother.PartialVerificationPackage).Build();
-            var groupPackage4 = new GroupPackageBuilder().With(customer).With(group3).With(PackageMother.FullVerificationPackage).Build();
+    //        var groupPackage1 = new GroupPackageBuilder().With(customer).With(group1).With(PackageMother.LicenseScanPackage).Build();
+    //        var groupPackage2 = new GroupPackageBuilder().With(customer).With(group2).With(PackageMother.EzScorePackage).Build();
+    //        var groupPackage3 = new GroupPackageBuilder().With(customer).With(group2).With(PackageMother.PartialVerificationPackage).Build();
+    //        var groupPackage4 = new GroupPackageBuilder().With(customer).With(group3).With(PackageMother.FullVerificationPackage).Build();
 
-            var rolePackage1 = new RolePackageBuilder().With(customer).With(PackageMother.PartialVerificationPackage).With(role1).Build();
+    //        var rolePackage1 = new RolePackageBuilder().With(customer).With(PackageMother.PartialVerificationPackage).With(role1).Build();
 
-            return new PackageLookup(
-                new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
-                ActionRepositoryMother.AllActionsRepository,
-                new TestUserPackageRepository(),
-                new TestRepositoryBuilder<TestRolePackageRepository, IRolePackage>().With(rolePackage1).Build(),
-                new TestRepositoryBuilder<TestGroupPackageRepository, IGroupPackage>().With(groupPackage1, groupPackage2, groupPackage3, groupPackage4).Build(),
-                new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
-                new TestContractPackageRepository()
-                );
-        }
+    //        return new PackageLookup(
+    //            new TestRepositoryBuilder<TestCustomerRepository, ICustomer>().With(customer).Build(),
+    //            ActionRepositoryMother.AllActionsRepository,
+    //            new TestUserPackageRepository(),
+    //            new TestRepositoryBuilder<TestRolePackageRepository, IRolePackage>().With(rolePackage1).Build(),
+    //            new TestRepositoryBuilder<TestGroupPackageRepository, IGroupPackage>().With(groupPackage1, groupPackage2, groupPackage3, groupPackage4).Build(),
+    //            new TestRepositoryBuilder<TestContractRepository, IContract>().With(contract).Build(),
+    //            new TestContractPackageRepository()
+    //            );
+    //    }
     }
 }

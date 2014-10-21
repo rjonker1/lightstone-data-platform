@@ -17,7 +17,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
 
         public override void Handle(CreatePackage domainCommand)
         {
-            var entity = new Package(domainCommand.Id, domainCommand.Name, domainCommand.Description, domainCommand.Owner );
+            var entity = new Package(domainCommand.Id, domainCommand.Name, domainCommand.Description, domainCommand.Owner, domainCommand.DataProviders);
 
             _repository.Save(entity, Guid.NewGuid());
         }

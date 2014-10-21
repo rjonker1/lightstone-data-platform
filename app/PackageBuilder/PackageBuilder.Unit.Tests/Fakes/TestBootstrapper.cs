@@ -20,7 +20,7 @@ namespace PackageBuilder.Unit.Tests.Fakes
             base.ConfigureApplicationContainer(container);
 
             container.Register(Component.For<IAuthenticateUser>().Instance(new TestAuthenticator(_username)));
-            container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion()));
+            //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion()));
         }
     }
 }

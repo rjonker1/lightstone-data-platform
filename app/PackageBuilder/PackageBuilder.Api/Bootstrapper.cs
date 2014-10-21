@@ -5,6 +5,7 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using PackageBuilder.Api.Helpers.Extensions;
+using PackageBuilder.Api.Installers;
 using PackageBuilder.Infrastructure.RavenDB;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -27,7 +28,15 @@ namespace PackageBuilder.Api
             // Perform registation that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            container.Install(FromAssembly.InThisApplication());
+            //container.Install(FromAssembly.InThisApplication());
+            container.Install(
+                new RepositoryInstaller(),
+                new NHibernateInstaller(),
+                new CommandInstaller(),
+                new BusInstaller(),
+                new NEventStoreInstaller(),
+                new AutoMapperInstaller()
+                );
 
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)

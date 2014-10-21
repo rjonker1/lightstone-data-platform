@@ -11,7 +11,7 @@ namespace PackageBuilder.Unit.Tests.PackageResolution
         private IPackage _package;
         public when_user_belonging_to_group2_invokes_partial_verification_action()
         {
-            _packageLookupRepository = PackageLookupMother.GetAcmeScenario();
+            //_packageLookupRepository = PackageLookupMother.GetAcmeScenario();
         }
 
         public override void Observe()
