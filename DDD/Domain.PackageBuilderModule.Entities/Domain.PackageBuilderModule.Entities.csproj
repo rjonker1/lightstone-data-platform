@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Events\PackageClonedEvent.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
+    <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\DataField.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -117,7 +118,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
-      <CustomToolNamespace>DTO.PackageBuilder</CustomToolNamespace>
     </None>
     <None Include="PackageModuleContext.Types.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

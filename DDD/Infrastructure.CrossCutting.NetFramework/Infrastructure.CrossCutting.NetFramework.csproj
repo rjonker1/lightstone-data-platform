@@ -49,12 +49,6 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="LightstoneApp.Domain.Core">
-      <HintPath>..\Domain.Core\bin\Debug\LightstoneApp.Domain.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="LightstoneApp.Infrastructure.CrossCutting.IoC">
-      <HintPath>..\Presentation.Web.Mvc.Client\Bin\LightstoneApp.Infrastructure.CrossCutting.IoC.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -69,7 +63,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -163,6 +159,7 @@
     <Compile Include="Validator\EntityValidatorFactory.cs" />
     <Compile Include="Validator\IEntityValidator.cs" />
     <Compile Include="Validator\IEntityValidatorFactory.cs" />
+    <Compile Include="ValueObject.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Runtime;
-using LightstoneApp.Domain.Core;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {

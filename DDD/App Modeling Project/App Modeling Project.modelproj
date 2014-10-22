@@ -184,14 +184,6 @@
       <Name>Domain.Core.Entities</Name>
       <Project>{5a3a2291-4220-4bdc-94c0-f48ab18ed0bd}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
-      <Name>Domain.Core</Name>
-      <Project>{d7e981bb-19e7-4d85-a24b-d4295baf87cd}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
-      <Name>Infrastructure.Data.Core</Name>
-      <Project>{98150d03-b191-476d-b192-b5b755e26e8e}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Validate Include="Layer Design\LightstoneApp V1 Base.layerdiagram">

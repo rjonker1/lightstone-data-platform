@@ -15,6 +15,7 @@
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
+        var logSuccess = getLogFn(controllerId, 'success');
 
         $scope.test = '';
         $scope.dProvidersData = '';
@@ -59,7 +60,7 @@
             showFilter: true,
             showGroupPanel: true,
             columnDefs: [
-                { field: 'Name', displayName: 'Name', filter: { term: '' } },
+                { field: 'name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'created', displayName: 'Created' },
@@ -83,7 +84,7 @@
             
             return datacontext.getAllDataProviders().then(function (data) {
 
-                (data.indexOf('Error') > -1) ? logError(data) : $scope.dProvidersData = data;
+                (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
         
             });
         }
