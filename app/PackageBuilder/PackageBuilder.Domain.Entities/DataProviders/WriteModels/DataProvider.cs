@@ -12,14 +12,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     public class DataProvider : AggregateBase, IDataProvider
     {
         public string Name { get; private set; }
-        public string State { get; private set; }
+        public string Description { get; private set; }
         public double CostOfSale { get; private set; }
+        public string SourceURL { get; private set; }
+        public Type ResponseType { get; private set; }
+        public string State { get; private set; }
+        public string Owner { get; private set; }
         public DateTime Created { get; private set; }
         public DateTime Edited { get; private set; }
-        public string Owner { get; private set; }
-        public string SourceURL { get; private set; }
         public IEnumerable<IDataField> DataFields { get; private set; }
-        public Type ResponseType { get; private set; }
 
         private DataProvider(Guid id)
         {
@@ -38,21 +39,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, string name, string description, Type responseType) 
+        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate) 
             : this(id)
         {
-            RaiseEvent(new DataProviderCreated(Guid.NewGuid(), id, name, description, responseType, PopulateDataFields(responseType)));
+            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, state, owner, createdDate, editedDate, PopulateDataFields(responseType)));
         }
 
-        public void CreateDataProviderRevision(Guid id, string name, string description, string owner, DateTime created, DateTime edited, int version, Type responseType, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
-            RaiseEvent(new DataProviderUpdated(id, name, description, owner, created, edited, version, responseType, dataFields));
-        }
-        
-        public void ChangeName(string newName)
-        {
-            if (string.IsNullOrEmpty(newName)) throw new ArgumentException("newName");
-                RaiseEvent(new DataProviderRenamed(Id, newName));
+            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, state, owner, createdDate, editedDate, dataFields));
         }
 
         private IEnumerable<IDataField> PopulateDataFields(Type type)
@@ -65,23 +60,29 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         {
             Id = @event.Id;
             Name = @event.Name;
+            Description = @event.Description;
+            CostOfSale = @event.CostPrice;
+            SourceURL = @event.SourceURL;
+            ResponseType = @event.ResponseType;
             State = @event.State;
-            CostOfSale = @event.CostOfSale;
-            Created = @event.Created;
             Owner = @event.Owner;
+            Created = @event.CreatedDate;
+            Edited = @event.EditedDate;
             DataFields = PopulateDataFields(@event.ResponseType);
-        }
-
-        private void Apply(DataProviderRenamed @event)
-        {
-            Id = @event.Id;
-            Name = @event.NewName;
         }
 
         private void Apply(DataProviderUpdated @event)
         {
             Id = @event.Id;
             Name = @event.Name;
+            Description = @event.Description;
+            CostOfSale = @event.CostPrice;
+            SourceURL = @event.SourceURL;
+            ResponseType = @event.ResponseType;
+            State = @event.State;
+            Owner = @event.Owner;
+            Created = @event.CreatedDate;
+            Edited = @event.EditedDate;
             DataFields = @event.DataFields;
         }
     }

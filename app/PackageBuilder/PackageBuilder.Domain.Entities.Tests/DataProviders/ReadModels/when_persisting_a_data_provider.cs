@@ -1,11 +1,11 @@
 ﻿using System;
 using FluentNHibernate.Testing;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests.Packages.ReadModels
+namespace PackageBuilder.Domain.Entities.Tests.DataProviders.ReadModels
 {
-    public class when_persisting_a_package : when_persisting_entities
+    public class when_persisting_a_data_provider : when_persisting_entities
     {
         public override void Observe()
         {
@@ -13,10 +13,11 @@ namespace PackageBuilder.Domain.Entities.Tests.Packages.ReadModels
         }
 
         [Observation]
-        public void should_persist_package()
+        public void should_persist_data_provider()
         {
-            new PersistenceSpecification<Package>(Session)
-                .CheckProperty(c => c.PackageId, Guid.NewGuid())
+            new PersistenceSpecification<DataProvider>(Session)
+                .CheckProperty(c => c.Id, Guid.NewGuid())
+                .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "VVi")
                 .CheckProperty(c => c.Description, "Description")
                 .CheckProperty(c => c.Version, 1)

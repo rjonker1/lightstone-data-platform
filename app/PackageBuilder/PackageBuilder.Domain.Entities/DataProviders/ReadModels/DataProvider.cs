@@ -5,27 +5,27 @@ namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 {
     public class DataProvider : Entity
     {
+        public virtual Guid DataProviderId { get; protected set; }
+        public virtual string Name { get; protected set; }
+        public virtual string Description { get; protected set; }
+        public virtual double CostPrice { get; protected set; }
+        public virtual int Version { get; protected set; }
+        public virtual string Owner { get; protected set; }
+        public virtual DateTime CreatedDate { get; protected set; }
+        public virtual DateTime EditedDate { get; protected set; }
+
         protected DataProvider() { }
 
-        public DataProvider(Guid id, Guid dataProviderId, string name, double costOfSale, string description, string owner) : base(id)
+        public DataProvider(Guid dataProviderId, string name, string description, double costPrice, int version, string owner, DateTime createdDate, DateTime editedDate) : base(Guid.NewGuid())
         {
             DataProviderId = dataProviderId;
             Name = name;
-            CostOfSale = costOfSale;
             Description = description;
+            CostPrice = costPrice;
+            Version = version;
             Owner = owner;
-            Created = DateTime.UtcNow;
-            Edited = Created;
-            Version = 1;
+            CreatedDate = createdDate;
+            EditedDate = editedDate;
         }
-
-        public virtual Guid DataProviderId { get; protected set; }
-        public virtual string Name { get; protected set; }
-        public virtual double CostOfSale { get; protected set; }
-        public virtual string Description { get; protected set; }
-        public virtual string Owner { get; protected set; }
-        public virtual DateTime Created { get; protected set; }
-        public virtual DateTime Edited { get; protected set; }
-        public virtual int Version { get; protected set; }
     }
 }

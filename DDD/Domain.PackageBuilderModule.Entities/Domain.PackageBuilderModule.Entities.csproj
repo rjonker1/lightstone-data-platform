@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Events\PackageClonedEvent.cs" />
     <Compile Include="Events\PackageCreatedEvent.cs" />
+    <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\DataField.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

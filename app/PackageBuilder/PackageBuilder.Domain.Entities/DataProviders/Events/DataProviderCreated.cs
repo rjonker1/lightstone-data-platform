@@ -7,28 +7,28 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
 {
     public class DataProviderCreated : DomainEvent
     {
-        public readonly Guid DataProviderId;
 		public readonly string Name;
 		public readonly string Description;
+        public readonly double CostPrice;
+        public readonly string SourceURL;
         public readonly Type ResponseType;
         public readonly string State;
-        public readonly double CostOfSale;
-        public readonly DateTime Created;
-        public readonly DateTime Edited;
         public readonly string Owner;
-        public readonly string SourceURL;
+        public readonly DateTime CreatedDate;
+        public readonly DateTime EditedDate;
         public readonly IEnumerable<IDataField> DataFields;
-        public DataProviderCreated(Guid id, Guid dataProviderId, string name, string description, Type responseType, IEnumerable<IDataField> dataFields)
+        public DataProviderCreated(Guid id, string name, string description, double costPrice, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
 			Id = id;
-            DataProviderId = dataProviderId;
 			Name = name;
             Description = description;
+            CostPrice = costPrice;
+            SourceURL = sourceUrl;
             ResponseType = responseType;
-            State = null;
-            CostOfSale = 0.00;
-            Created = DateTime.Now;
-            Owner = null;
+            State = state;
+            Owner = owner;
+            CreatedDate = createdDate;
+            EditedDate = editedDate;
             DataFields = dataFields;
         }
     }

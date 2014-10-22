@@ -23,7 +23,8 @@ namespace PackageBuilder.Api.Modules
 
             Get["/Package/Add"] = parameters =>
             {
-                bus.Publish(new CreatePackage(Guid.NewGuid(), "Test", "Test Desc", null));
+                var dateTime = DateTime.Now;
+                bus.Publish(new CreatePackage(Guid.NewGuid(), "Name", "Description", 10d, 20d, "Draft", "Owner", dateTime, dateTime, null));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -34,7 +35,8 @@ namespace PackageBuilder.Api.Modules
 
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, "", dProviders));
+                var createdDate = DateTime.Now;
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, "Description", dto.CostOfSale, 20d, dto.State, dto.Owner, createdDate, createdDate, dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };

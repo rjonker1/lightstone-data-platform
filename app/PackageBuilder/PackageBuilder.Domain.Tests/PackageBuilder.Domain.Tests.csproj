@@ -90,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
-    <Compile Include="CommandHandlers\DataProviders\when_renaming_a_data_provider.cs" />
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_creating_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />

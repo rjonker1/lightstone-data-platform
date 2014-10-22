@@ -74,9 +74,7 @@
     <Compile Include="DataProviders\Commands\RenameDataProvider.cs" />
     <Compile Include="DataProviders\Commands\UpdateReadModel.cs" />
     <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
-    <Compile Include="DataProviders\Events\DataProviderRenamed.cs" />
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
-    <Compile Include="DataProviders\Events\ReadModelUpdated.cs" />
     <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="DataSet.cs" />
