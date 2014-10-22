@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         private readonly Mock<INEventStoreRepository<DataProvider>> _eventStoreRepository = new Mock<INEventStoreRepository<DataProvider>>();
         public override void Observe()
         {
-            var command = new CreateDataProvider(Guid.NewGuid(), "IVID", null, typeof(IvidResponse));
+            var command = new CreateDataProvider(Guid.NewGuid(), "Name", "Description", 10d, "http://test.com", typeof(IvidResponse), "Draft", "User", DateTime.Now);
             _handler = new CreateDataProviderHandler(_eventStoreRepository.Object);
             _handler.Handle(command);
         }

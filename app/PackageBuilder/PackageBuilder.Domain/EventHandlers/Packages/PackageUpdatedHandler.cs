@@ -1,23 +1,22 @@
-﻿using System;
+﻿using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using PackageBuilder.Domain.MessageHandling;
-using Raven.Client;
 
 namespace PackageBuilder.Domain.EventHandlers.Packages
 {
     public class PackageUpdatedHandler : AbstractMessageHandler<PackageUpdated>
     {
-        private readonly IDocumentSession _session;
+        private readonly IRepository<Package> _repository;
 
-        public PackageUpdatedHandler(IDocumentSession session)
+        public PackageUpdatedHandler(IRepository<Package> repository)
         {
-            _session = session;
+            _repository = repository;
         }
 
         public override void Handle(PackageUpdated command)
         {
-            _session.Store(new Package(Guid.NewGuid(), command.Id, command.Name, null, command.Owner, command.Created));
+            _repository.Save(new Package(command.Id, command.Name, command.Description, command.Version, command.Owner, command.CreatedDate, command.EditedDate));
         }
     }
 }

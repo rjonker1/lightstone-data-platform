@@ -1,23 +1,22 @@
-﻿using System;
+﻿using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.Domain.MessageHandling;
-using Raven.Client;
 
 namespace PackageBuilder.Domain.EventHandlers.DataProviders
 {
     public class DataProviderUpdatedHandler : AbstractMessageHandler<DataProviderUpdated>
     {
-        private readonly IDocumentSession _session;
+        private readonly IRepository<DataProvider> _repository;
 
-        public DataProviderUpdatedHandler(IDocumentSession session)
+        public DataProviderUpdatedHandler(IRepository<DataProvider> repository)
         {
-            _session = session;
+            _repository = repository;
         }
 
         public override void Handle(DataProviderUpdated command)
         {
-            _session.Store(new DataProvider(Guid.NewGuid(), command.DataProvierId, command.Name, 0d, command.Description, command.Owner));
+            _repository.Save(new DataProvider(command.Id, command.Name, command.Description, command.CostPrice, command.Version, command.Owner, command.CreatedDate, command.EditedDate));
         }
     }
 }

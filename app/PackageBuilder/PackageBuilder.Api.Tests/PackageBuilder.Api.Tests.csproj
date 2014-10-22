@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMappers\when_creating_maps.cs" />
+    <Compile Include="Installers\when_installing_auto_mapper.cs" />
     <Compile Include="Installers\when_installing_a_bus.cs" />
     <Compile Include="Installers\when_installing_command_handlers.cs" />
     <Compile Include="Installers\when_installing_nventstore_dependency.cs" />

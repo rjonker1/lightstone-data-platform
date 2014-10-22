@@ -5,26 +5,25 @@ namespace PackageBuilder.Domain.Entities.Packages.ReadModels
 {
     public class Package : Entity
     {
-        protected Package() { }
-
-        public Package(Guid id, Guid dataProviderId, string name, string description, string owner, DateTime created)
-        {
-            Id = id;
-            DataProviderId = dataProviderId;
-            Name = name;
-            Description = description;
-            Owner = owner;
-            Created = created;
-            Version = 1;
-        }
-
-        public virtual Guid Id { get; protected set; }
-        public virtual Guid DataProviderId { get; protected set; }
+        public virtual Guid PackageId { get; protected set; }
         public virtual string Name { get; protected set; }
         public virtual string Description { get; protected set; }
-        public virtual string Owner { get; protected set; }
-        public virtual DateTime Created { get; protected set; }
-        public virtual DateTime Edited { get; protected set; }
         public virtual int Version { get; protected set; }
+        public virtual string Owner { get; protected set; }
+        public virtual DateTime CreatedDate { get; protected set; }
+        public virtual DateTime? EditedDate { get; protected set; }
+
+        protected Package() { }
+
+        public Package(Guid id, string name, string description, int version, string owner, DateTime createdDateDate, DateTime editedDateDate) : base(Guid.NewGuid())
+        {
+            PackageId = id;
+            Name = name;
+            Description = description;
+            Version = version;
+            Owner = owner;
+            CreatedDate = createdDateDate;
+            EditedDate = editedDateDate;
+        }
     }
 }

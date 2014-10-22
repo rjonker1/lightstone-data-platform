@@ -36,11 +36,11 @@ namespace PackageBuilder.Api.Modules
 
                     dSource.Id = provider.DataProviderId;
                     dSource.Name = provider.Name;
-                    dSource.CostOfSale = provider.CostOfSale;
+                    dSource.CostOfSale = provider.CostPrice;
                     dSource.Description = provider.Description;
                     dSource.Owner = provider.Owner;
-                    dSource.Created = provider.Created;
-                    dSource.Edited = provider.Edited;
+                    dSource.Created = provider.CreatedDate;
+                    dSource.Edited = provider.EditedDate;
                     dSource.Version = provider.Version;
 
                     try
@@ -61,12 +61,10 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Add"] = parameters =>
             {
-                Guid ProviderId = Guid.NewGuid();
+                var providerId = Guid.NewGuid();
+                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "hhtp://test", typeof(IvidResponse), "draft", "Al", DateTime.Now));
 
-                bus.Publish(new CreateDataProvider(ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse)));
-                //bus.Publish(new DataProviderCreated(Guid.NewGuid(), ProviderId, "Ivid", "Ivid Datasource", typeof(IvidResponse), null));
-                //readRepo.Save(new DataProvider(Guid.NewGuid(), ProviderId, "Ivid", 0d, "Description", null));
-                return Response.AsJson(new { msg = "Success, "+ProviderId+" created" });
+                return Response.AsJson(new { msg = "Success, "+providerId+" created" });
             };
 
             Get["/DataProvider/Edit/{id}/{version}"] = parameters =>
@@ -84,13 +82,10 @@ namespace PackageBuilder.Api.Modules
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
-                DataProviderDto dto = this.Bind<DataProviderDto>();
-                dto.incVersion();
-
+                var dto = this.Bind<DataProviderDto>();
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
-
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.Owner, dto.Created, dto.Edited, dto.Version, typeof(DataProviderDto),   dFields ));
+                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.CostOfSale, "http://test.com", typeof(DataProviderDto), "Draft", dto.Owner, dto.Created, dFields));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " created" }); ;
             };
