@@ -1,4 +1,5 @@
 ﻿using System;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
@@ -6,17 +7,18 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
     {
         protected DomainEvent()
         {
+            Id = GuidUtil.NewSequentialId().ToString();
         }
 
         protected DomainEvent(String aggregateId)
         {
             //Ensure.That( aggregateId ).Named( () => aggregateId ).IsNotNullNorEmpty();
 
-            OccurredAt = DateTimeOffset.Now;
+            OccurredAt = DateTime.Now;
             AggregateId = aggregateId;
         }
 
-        public string Id { get; set; }
+        public string Id { get;  set; }
 
         public string AggregateId { get; set; }
 
