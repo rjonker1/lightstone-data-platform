@@ -1,60 +1,75 @@
 ﻿using System;
-using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
+using System.Transactions;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
+using LightstoneApp.Infrastructure.Data.Core.Commits;
+
 
 namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Events
 {
-
     public class PackageCreatedEvent : DomainEvent
     {
         private readonly ILogger _logger;
+        private readonly Commit.Factory _commitFactory;
 
         //[JsonConstructor]
-        public PackageCreatedEvent()
+        private PackageCreatedEvent() : base(GuidUtil.NewSequentialId().ToString())
         {
-            Id = IdentityGenerator.NewSequentialGuid();
 
+            _commitFactory = new Commit.Factory();
             _logger = LoggerFactory.CreateLog();
-
-
         }
         public PackageCreatedEvent(Model.Package package)
             : this()
         {
-            var context = new Model.LightstoneAppDatabaseEntities();
 
-            context.ChangeTracker.DetectChanges();
-
-           
-            context.Packages.Add(package);
-
-            try
+            using (
+                var transaction = new TransactionScope(TransactionScopeOption.Required,
+                    new TransactionOptions {IsolationLevel = IsolationLevel.RepeatableRead}))
             {
-                context.SaveChanges();
+                Id = package.Id;
+                var context = new Model.LightstoneAppDatabaseEntities();
+                
+                context.Configuration.ValidateOnSaveEnabled = false;
 
-                PackageCreated = package;
+                package.EntityState = TrackState.Added;
 
-                Name = package.Name;
-                Version = package.Version;
-            }
-            catch (DbUpdateException dbeException)
-            {
-                if (_logger != null) _logger.Error(dbeException.InnerException.InnerException.Message);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                if (_logger != null) _logger.Error("Error saving package", _logger);
-                throw;
-            }
-            finally
-            {
-                context.Dispose();
-            }
+                context.Packages.Add(package);
 
+                try
+                {
+                    context.SaveChanges();
 
+                    PackageCreated = package;
+
+                    PackageCreated.EntityState = TrackState.Unchanged;
+
+                    Name = package.Name;
+                    Version = package.Version;
+
+                    transaction.Complete();
+
+                    
+                }
+
+                catch (Exception ex)
+                {
+                    Transaction.Current.Rollback();
+                    Commit = null;
+
+                    Debug.WriteLine(ex);
+                    throw;
+                }
+                finally
+                {
+                    context.Dispose();
+                }
+            }
         }
+
+        public Commit Commit { get; private set; }
 
         public new Guid Id { get; private set; }
 

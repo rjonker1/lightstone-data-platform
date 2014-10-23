@@ -5,10 +5,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Security.Events
 {
     public class UserCreated : DomainEvent
     {
-        //[JsonConstructor]
-        public UserCreated()
-        {
-        }
+       
 
         public UserCreated(String aggregateId, string fullName, string username)
             : base(aggregateId)

@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -144,6 +145,10 @@
     <ProjectReference Include="..\Infrastructure.CrossCutting.NetFramework\Infrastructure.CrossCutting.NetFramework.csproj">
       <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
       <Name>Infrastructure.CrossCutting.NetFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
+      <Project>{98150D03-B191-476D-B192-B5B755E26E8E}</Project>
+      <Name>Infrastructure.Data.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
