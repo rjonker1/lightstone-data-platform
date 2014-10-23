@@ -118,8 +118,9 @@
     <Content Include="app\layout\sidebar.js" />
     <Content Include="app\layout\topnav.html" />
     <Content Include="app\layout\widgetheader.html" />
-    <Content Include="app\packageMaintenance\packageMaintenance.html" />
-    <Content Include="app\packageMaintenance\packageMaintenance.js" />
+    <Content Include="app\packageMaintenance\packageMaintenanceEdit.html" />
+    <Content Include="app\packageMaintenance\packageMaintenanceCreate.html" />
+    <Content Include="app\packageMaintenance\packageMaintenanceCreate.js" />
     <Content Include="app\packages\packages.html" />
     <Content Include="app\packages\packages.js" />
     <Content Include="app\robots.txt" />
