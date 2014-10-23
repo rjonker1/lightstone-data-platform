@@ -19,46 +19,20 @@
 
         $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-        /*GetDataProviderSources.query(function(data){
+        $scope.dataProvsPkg = {};
+        //Prevent $modelValue undefined error
+        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
 
-            var resp = data.response;
-              
-            for( var res in resp)
-            {
-
-                if (resp.hasOwnProperty(res)) {
-                                                                  
-                    $scope.dataProvsPkg.Package.DataProviders = resp;
-                    $scope.message = "Data Loaded."
-                }
-            }
-
-            $scope.alerts = [
-
-              { type: 'success', msg: 'Data loaded successfully !' }
-            ];
-
-        }, function(err){
-
-            $scope.alerts = [
-
-                { type: 'danger', msg: 'Failed to communicate with webserver !' }
-            ];
-
-        });*/
-
-        //Replaces above API call
         datacontext.getDataProviderSources().then(function(response) {
 
             console.log(response);
 
             if (response.status === 200) {
 
-                $scope.dataProvsPkg = {};
-                $scope.dataProvsPkg.Package = {};
-                $scope.dataProvsPkg.Package.DataProviders = [];
+                
 
                 $scope.dataProvsPkg.Package.DataProviders = response.data;
+              
 
                 logSuccess('Data Providers loaded!');
 
