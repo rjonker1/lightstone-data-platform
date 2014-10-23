@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using Lace.Domain.Core.Dto;
+using Lace.Models.Ivid.Dto;
 using PackageBuilder.Core.Helpers.Extensions;
 using PackageBuilder.Domain.MessageHandling;
 
