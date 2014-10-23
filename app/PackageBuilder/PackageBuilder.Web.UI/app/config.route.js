@@ -67,6 +67,16 @@
                     title: 'data-provider-detail',
                     templateUrl: 'app/dataProviders/dataProviderDetail.html',
                 }
+            }, {
+                url: '/industries',
+                config: {
+                    title: 'industries',
+                    templateUrl: 'app/industries/industries.html',
+                    settings: {
+                        nav: 6,
+                        content: '<i class="fa fa-calendar"></i> Industries'
+                    }
+                }
             }
         ];
     }

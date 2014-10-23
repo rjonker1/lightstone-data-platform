@@ -53,6 +53,9 @@
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
       <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
+      <HintPath>..\PackageBuilder.Web\Bin\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\PackageBuilder.Domain\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>

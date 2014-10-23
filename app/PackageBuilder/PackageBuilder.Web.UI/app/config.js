@@ -20,7 +20,8 @@
         docTitle: 'LightstoneAuto: ',
         events: events,
         remoteServiceName: remoteServiceName,
-        version: '2.1.0'
+        version: '2.1.0',
+        baseUri: "http://localhost:62500"
     };
 
     app.value('config', config); //Global placeholder for config settings

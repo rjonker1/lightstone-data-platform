@@ -12,6 +12,8 @@
         'common',           // common functions, logger, spinner
         'common.bootstrap', // bootstrap dialog wrapper functions
         'apiProviderServices',
+        
+        'industryResources',
 
         // 3rd Party Modules
         'breeze.angular',    // configures breeze for an angular app
