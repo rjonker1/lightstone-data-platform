@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
@@ -77,63 +78,69 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
             };
 
             var recordDate = DateTime.Parse("21 Oct 2014");
-
-            var createdPackages = new List<Package>();
-
-            foreach (var tuple in idNameDescTup)
-            {
-                var packageFactory = new Package.Factory();
-
-                var packageToCreate = new Package
-                {
-                    EntityState = TrackState.Added,
-                    Id = tuple.Item1,
-                    Name = tuple.Item2,
-                    Description = tuple.Item3,
-                    Version = "0.0.0.1",
-                    Owner = "Lightstone Auto",
-                    Published = false,
-                    StateId = new Guid(StateUnderConsructionKey),
-                    IndustryId = tuple.Item4,
-                    Created = DateTime.Parse("21 Oct 2014"),
-                    CostOfSale = 0,
-                    Edited = recordDate,
-                    RecomendedRetailPrice = 0,
-                    RevisionDate = recordDate
-                };
-
-                // cleanup 
-
-                var db = new LightstoneAppDatabaseEntities();
-
-                var packageToDelegte =
-                    db.Packages.SingleOrDefault(
-                        x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name);
-
-                if (packageToDelegte != null)
-                {
-                    db.Packages.Remove(packageToDelegte);
-                    db.SaveChanges();
-                }
-
-                // execute
-                var createdPackage = packageFactory.CreatePackage(packageToCreate);
-
-               if (createdPackage != null)
-                    createdPackages.Add(createdPackage);
-
-
-            }
-
-            
             var commitFactory = new Commit.Factory();
+            var commits = new List<Commit>();
             var transactionIdentifier = GuidUtil.NewSequentialId();
             var correlationId = "Seed_Packages/" + transactionIdentifier;
-            var commit = commitFactory.CreateFor(transactionIdentifier, correlationId, createdPackages[0], "Wayne");
 
+            using (var db = new LightstoneAppDatabaseEntities())
+            {
+                foreach (var tuple in idNameDescTup)
+                {
+                    var packageFactory = new Package.Factory();
+
+                    var packageToCreate = new Package
+                    {
+                        EntityState = TrackState.Added,
+                        Id = tuple.Item1,
+                        Name = tuple.Item2,
+                        Description = tuple.Item3,
+                        Version = "0.0.0.1",
+                        Owner = "Lightstone Auto",
+                        Published = false,
+                        StateId = new Guid(StateUnderConsructionKey),
+                        IndustryId = tuple.Item4,
+                        Created = DateTime.Parse("21 Oct 2014"),
+                        CostOfSale = 0,
+                        Edited = recordDate,
+                        RecomendedRetailPrice = 0,
+                        RevisionDate = recordDate
+                    };
+
+                    // cleanup 
+
+
+                    var packageToDelegte =
+                        db.Packages.SingleOrDefault(
+                            x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name);
+
+                    if (packageToDelegte != null)
+                    {
+                        db.Packages.Remove(packageToDelegte);
+                        db.SaveChanges();
+                    }
+
+                    // execute
+                    var createdPackage = packageFactory.CreatePackage(packageToCreate);
+
+                    if (createdPackage != null)
+                    {
+                        commits.Add(commitFactory.CreateFor(transactionIdentifier, correlationId, createdPackage,
+                            createdPackage.Owner));
+                    }
+
+                }
+            }
+
+            foreach (var commit in commits)
+            {
+                // TODO: persist the commit and the event
+
+                
+            }
 
             //Assert;
-            var packageCount = createdPackages.Count;
+            var packageCount = commits.Count;
             Assert.IsTrue(packageCount == idNameDescTup.Count);
         }
     }

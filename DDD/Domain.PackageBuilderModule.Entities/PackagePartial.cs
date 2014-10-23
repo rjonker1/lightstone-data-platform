@@ -16,7 +16,6 @@ namespace LightstoneApp.Domain.PackageBuilderModule.Entities.Model
         private Package SetupCompleted()
         {
             ChangeCurrentIdentity(Id);
-
           
             var packageCreatedEvent = new PackageCreatedEvent(this);
 

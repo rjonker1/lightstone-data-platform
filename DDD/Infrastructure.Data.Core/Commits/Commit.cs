@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 using Raven.Imports.Newtonsoft.Json;
 using Topics.Radical.Linq;
 
@@ -25,6 +26,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Commits
             AggregateIdentifier = aggregateId;
             Events = uncommittedEvents;
             UserAccount = userAccount;
+            Id = GuidUtil.NewSequentialId().ToString();
         }
 
         public String Id
@@ -68,7 +70,18 @@ namespace LightstoneApp.Infrastructure.Data.Core.Commits
             public Commit CreateFor(Guid transactionIdentifier, string correlationId, IAggregate aggregate,
                 String userAccount)
             {
-                var commit = new Commit(transactionIdentifier, correlationId, aggregate.Id,
+                var entity = (Entity)(aggregate);
+                var aggregateId = GuidUtil.NewSequentialId();
+
+                if (entity != null)
+                {
+                    if (!entity.IsTransient())
+                    {
+                        aggregateId = entity.Id;
+                    }
+                }
+
+                var commit = new Commit(transactionIdentifier, correlationId, aggregateId.ToString(),
                     aggregate.GetUncommittedEvents(), userAccount);
 
                 return commit;

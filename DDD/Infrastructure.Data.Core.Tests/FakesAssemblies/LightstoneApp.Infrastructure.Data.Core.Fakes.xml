@@ -2020,9 +2020,6 @@
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Security.Events.Fakes.ShimUserCreated.Behavior">
             <summary>Assigns the behavior for all methods of the shimmed type</summary>
         </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Security.Events.Fakes.ShimUserCreated.Constructor">
-            <summary>Sets the shim of UserCreated.UserCreated()</summary>
-        </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Security.Events.Fakes.ShimUserCreated.ConstructorStringStringString">
             <summary>Sets the shim of UserCreated.UserCreated(String aggregateId, String fullName, String username)</summary>
         </member>
@@ -2055,9 +2052,6 @@
         </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Security.Events.Fakes.StubUserCreated">
             <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Security.Events.UserCreated</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Security.Events.Fakes.StubUserCreated.#ctor">
-            <summary>Initializes a new instance</summary>
         </member>
         <member name="M:LightstoneApp.Infrastructure.Data.Core.Security.Events.Fakes.StubUserCreated.#ctor(System.String,System.String,System.String)">
             <summary>Initializes a new instance</summary>
