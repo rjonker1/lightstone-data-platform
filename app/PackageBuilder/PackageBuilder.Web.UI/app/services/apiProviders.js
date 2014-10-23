@@ -25,8 +25,8 @@ ApiProviderServices.factory('GetDataProviderSources', ['$resource',
 
 ApiProviderServices.factory('GetPackages', ['$resource',
 	function($resource) {
-		return $resource('http://localhost:12257/Packages', {}, {
-			query: { method: 'GET', isObject:true }
+		return $resource('http://dev.lightstone.packagebuilder.api/Packages', {}, {
+			query: { method: 'GET', isArray:true }
 		});
 	}]);
 

@@ -44,7 +44,7 @@
                 url: '/package-maintenance',
                 config: {
                     title: 'package-maintenance',
-                    templateUrl: 'app/packageMaintenance/packageMaintenance.html',
+                    templateUrl: 'app/packageMaintenance/packageMaintenanceCreate.html',
                     settings: {
                         nav: 3,
                         content: '<i class="fa fa-gear"></i> Package Maintenance'

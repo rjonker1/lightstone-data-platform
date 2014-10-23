@@ -59,7 +59,7 @@
             showFilter: true,
             showGroupPanel: true,
             columnDefs: [
-                { field: 'Name', displayName: 'Name', filter: { term: '' } },
+                { field: 'name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'created', displayName: 'Created' },
@@ -81,9 +81,11 @@
 
         function getAllPackages() {
 
-            return datacontext.getAllPackages().then(function (data) {
+            return datacontext.getAllPackages().then(function (result) {
 
-                (data.indexOf('Error') > -1) ? logError(data) : $scope.dPackagesData = data;
+                $scope.dPackagesData = result;
+
+                //(data.indexOf('Error') > -1) ? logError(data) : $scope.dPackagesData = data;
 
             });
         }

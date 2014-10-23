@@ -1,11 +1,13 @@
 ﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
+    
+    {{dataPromise}}
  
     <!--<div ng-model="dataPromise.response">
-        <div ng-repeat="data in dataPromise.response">
-            <li>{{data}}</li>
-        </div>
+            <div ng-repeat="data in dataPromise.response">
+                <li>{{data}}</li>
+            </div>
         
-    </div>-->
+        </div>-->
 
 
     <section class="matter">
@@ -19,7 +21,7 @@
 
                         <br />
 
-                        <div id="info" ng-repeat="dataProvider in dataPromise.response">
+                        <div id="info" ng-model="dataProvider">
                             
                             {{dataProvider}}
 

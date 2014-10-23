@@ -2,14 +2,15 @@
     'use strict';
 
     var serviceId = 'datacontext';
-    angular.module('app').factory(serviceId, ['common', 'GetDataProvider', 'GetDataProviders',
+    angular.module('app').factory(serviceId, ['$http', 'common', 'GetDataProvider', 'GetDataProviders',
                             'GetDataProviderSources', 'GetPackages', 'PostDataProvider', datacontext]);
 
-    function datacontext(common, GetDataProvider, GetDataProviders, GetDataProviderSources,
+    function datacontext($http, common, GetDataProvider, GetDataProviders, GetDataProviderSources,
                     GetPackages, PostDataProvider) {
 
         //Used to convert promises.
         var $q = common.$q;
+        var data = {};
 
         var service = {
 
@@ -25,112 +26,134 @@
           
         };
 
+        
+
         return service;
 
         //GET *
         function getDataProvider(_id, _version) {
-            
-            var providerEditData =
-                GetDataProvider.query({ id: _id, version: _version }, function success(data) {
 
-                    var resp = data.response;
-                    return resp;
+            var deferred = $q.defer();
 
-                }, function error(err) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/'+_id+'/'+_version+'').then(function (result) {
 
-                    return "Error loading Data Provider.";
-                });
- 
+                data = result.data;
+                deferred.resolve(data);
 
-            return $q.when(providerEditData);
+            }, function (error) {
+
+                deferred.reject(error);
+
+            });
+
+            return $q.when(deferred.promise);
         }
 
         //GET *
         function getAllDataProviders() {
 
-            var providerData =
-                GetDataProviders.query({}, function success(data) {
+            var deferred = $q.defer();
 
-                    var resp = data.response;
-                    return resp;
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider').then(function (result) {
 
-                }, function error() {
+                data = result.data;
+                deferred.resolve(data);
 
-                    return "Error loading Data Provider.";
+            }, function (error) {
 
-                });
+                deferred.reject(error);
 
-            return $q.when(providerData);
+            });
+
+            return $q.when(deferred.promise);
         }
 
         //GET
         function getDataProviderSources() {
 
-            GetDataProviderSources.query(function(data) {
+            var deferred = $q.defer();
 
-                var resp = data.response;
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/All').then(function (result) {
 
-                for (var res in resp) {
+                data = result.data;
+                deferred.resolve(result);
 
-                    if (resp.hasOwnProperty(res)) {
+            }, function (error) {
 
-                        //$scope.dataProvsPkg.Package.DataProviders = resp;
-                        return $q.when(resp);
-                    }
-                }
-
+                deferred.reject(error);
 
             });
 
-            return $q.when("Error loading Data Provider Sources.")
+            return $q.when(deferred.promise);
         }
 
         //GET
         function getAllPackages() {
 
-            GetPackages.query(function(data) {
+            var deferred = $q.defer();
+            
+            $http.get('http://dev.lightstone.packagebuilder.api/Packages').then(function (result) {
 
-                var resp = data.response;
+                data = result.data;
+                deferred.resolve(data);
 
-                for (var res in resp) {
+            }, function (error) {
 
-                    if (resp.hasOwnProperty(res)) {
+                deferred.reject(error);
 
-                        return $q.when = resp;
-                    }
-                }
+            });
 
-                $scope.alerts = [
-                    { type: 'success', msg: 'Data loaded successfully !' }
-                ];
+            //GetPackages.query().$promise.then(function (result) {
 
-            });        
+            //    data = result;
+            //    console.log(data);
+            //    //deferred.resolve(data);
 
-            return $q.when("Error loading Packages.");
+            //}, function (error) {
+
+            //    deferred.reject(error);
+
+            //});
+
+            //console.log('asdasd');
+            //console.log(deferred.promise);
+            return $q.when(deferred.promise);
+
         }
 
         //POST
         function editDataProvider(_id, providerData) {
 
-            alert(_id);
+            var deferred = $q.defer();
 
-            PostDataProvider.save({ id: _id }, providerData, function (data) {
+            $http.post('http://localhost:12257/DataProvider/Edit/' + _id + '', providerData).then(function(result) {
 
-                return $q.when('Data Provider Edited!');
+                deferred.resolve(result);
+
+            }, function(error) {
+
+                deferred.resolve(error);
             });
 
-            return $q.when("Error editing Data Provider.");
+            return $q.when(deferred.promise);
         }
 
         //POST
         function createPackage(packageData) {
 
-            PostPackage.save({}, packageData, function (data) {
+            var deferred = $q.defer();
 
-                return $q.when('Package Created!');
+            $http.post('http://localhost:12257/Package/Add', packageData).then(function (result) {
+
+                deferred.resolve(result);
+
+            }, function (error) {
+
+                deferred.resolve(error);
             });
 
-            return $q.when("Error editing Package.");
+            return $q.when(deferred.promise);
+
         }
 
         function getMessageCount() { return $q.when(72); }

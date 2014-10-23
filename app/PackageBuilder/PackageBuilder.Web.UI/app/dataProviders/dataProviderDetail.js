@@ -17,6 +17,8 @@
         var logSuccess = getLogFn(controllerId, 'success');
         var logError = getLogFn(controllerId, 'error');
 
+        //$scope.dataProvider = { "name": "qwe", "description": "qweqweqweqweqweqweqwe" }
+
         $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
         $scope.users = [
@@ -26,6 +28,7 @@
          { name: 'user3' }
         ];
 
+      
         $scope.states = [
 
               { name: 'Under Construction' },
@@ -39,7 +42,13 @@
             //Functionality to post to API
             //
 
-            datacontext.editDataProvider($routeParams.id, $scope.dataProvider);
+            return datacontext.editDataProvider($routeParams.id, $scope.dataProvider).then(function(response) {
+
+                console.log(response);
+                 (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
+                
+
+            });
 
         }
 
@@ -48,7 +57,8 @@
         function activate() {
 
             common.activateController([getDataProvider($routeParams.id, $routeParams.version)], controllerId)
-                .then(function () { log('Activated Data Providers Edit View');         
+                .then(function () {
+                    log('Activated Data Providers Edit View');              
             });
         }
 
@@ -58,9 +68,11 @@
 
 
                 //log(data);
-                console.log(data);
 
-                $scope.dataPromise = data;
+                //var result = data.response;
+                //console.log(data.response);
+
+                $scope.dataProvider = data;
                
                 //angular.toJSON(data);
                 //console.log($scope.test);
