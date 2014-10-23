@@ -1,6 +1,7 @@
 ﻿using System;
 using MemBus;
 using Nancy;
+using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
@@ -16,20 +17,26 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(repository);
             };
 
-            Get["/Industry/Add"] = parameters =>
+            Post["/Industry/Add"] = parameters =>
             {
-                var command = new CreateIndustry(Guid.NewGuid(), "Test industry");
-                repository.Save(new Industry(Guid.NewGuid(), "Test"));
-                //bus.Publish(command);
+                var model = Request.Body<dynamic>();
+                if (model.name.Value == null)
+                    return Response.AsJson(new { response = "Failure!" });
 
-                return Response.AsJson("Success!");
+                bus.Publish(new CreateIndustry(Guid.NewGuid(), model.name.Value));
+
+                return Response.AsJson(new { response = "Success!" });
             };
 
-            Get["/Industry/Edit/{id}"] = parameters =>
+            Post["/Industry/Edit"] = parameters =>
             {
-                bus.Publish(new RenameIndustry(new Guid(parameters.id), "Test1"));
+                var model = Request.Body<dynamic>();
+                if (model.id.Value == null && model.name.Value == null)
+                    return Response.AsJson(new { response = "Failure!" });
+                    
+                bus.Publish(new RenameIndustry(new Guid(model.id.Value), model.name.Value));
 
-                return Response.AsJson("Success!");
+                return Response.AsJson(new { response = "Success!" });
             };
         }
     }

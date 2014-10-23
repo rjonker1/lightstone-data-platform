@@ -74,6 +74,9 @@
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
       <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
+      <HintPath>..\PackageBuilder.Web\Bin\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\Shared\Shared\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
@@ -174,6 +177,8 @@
     <Compile Include="Helpers\AutoMappers\DataProviderMap.cs" />
     <Compile Include="Helpers\AutoMappers\ICreateAutoMap.cs" />
     <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
+    <Compile Include="Helpers\ExceptionHandling\HttpResponseExceptionHandler.cs" />
+    <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
@@ -182,6 +187,7 @@
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RavenDbInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
+    <Compile Include="ModelBinders\DynamicModelBinder.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\IndustryModule.cs" />

@@ -49,7 +49,6 @@
                         content: '<i class="fa fa-institution"></i> Packages'
                     }
                 }
-
             }, {
                 url: '/package-maintenance',
                 config: {
@@ -60,7 +59,6 @@
                         content: '<i class="fa fa-gear"></i> Package Maintenance'
                     }
                 }
-
             }, {
                 url: '/data-providers',
                 config: {
@@ -69,6 +67,16 @@
                     settings: {
                         nav: 5,
                         content: '<i class="fa fa-calendar"></i> Data Providers'
+                    }
+                }
+            }, {
+                url: '/industries',
+                config: {
+                    title: 'industries',
+                    templateUrl: 'app/industries/industries.html',
+                    settings: {
+                        nav: 6,
+                        content: '<i class="fa fa-calendar"></i> Industries'
                     }
                 }
             }
