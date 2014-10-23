@@ -10,7 +10,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private IAction _action;
         public Package Build()
         {
-            return new Package(Guid.NewGuid(), "test", "test", "", null);
+            return new Package(Guid.NewGuid(), "Name", "Description", 10d, 20d, "State", "Owner", DateTime.Now, DateTime.Now, null);
         }
 
         public PackageBuilder With(string name)

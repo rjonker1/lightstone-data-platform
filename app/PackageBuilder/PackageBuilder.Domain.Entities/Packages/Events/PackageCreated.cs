@@ -8,21 +8,26 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
     public class PackageCreated : DomainEvent
     {
         public readonly string Name;
+        public readonly string Description;
+        public readonly double CostPrice;
+        public readonly double SalePrice;
         public readonly string State;
-        public readonly double CostOfSale;
-        public readonly DateTime Created;
-        public readonly DateTime Edited;
-        public readonly string Owner;
+        public readonly string Owner;        
+        public readonly DateTime CreatedDate;
+        public readonly DateTime EditedDate;
         public readonly IEnumerable<IDataProvider> DataProviders;
 
-        public PackageCreated(Guid id, string name, IEnumerable<IDataProvider> dataProviders)
+        public PackageCreated(Guid id,string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             Id = id;
             Name = name;
-            State = null;
-            CostOfSale = 0.00;
-            Created = DateTime.Now;
-            Owner = null;
+            Description = description;
+            CostPrice = costPrice;
+            SalePrice = salePrice;
+            State = state;
+            Owner = owner;
+            CreatedDate = createdDate;
+            EditedDate = editedDate;
             DataProviders = dataProviders;
         }
     }

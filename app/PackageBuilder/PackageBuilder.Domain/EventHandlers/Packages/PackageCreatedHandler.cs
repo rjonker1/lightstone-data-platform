@@ -1,5 +1,4 @@
-﻿using System;
-using PackageBuilder.Core.Repositories;
+﻿using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using PackageBuilder.Domain.MessageHandling;
@@ -17,7 +16,7 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
 
         public override void Handle(PackageCreated command)
         {
-            _repository.Save(new Package(Guid.NewGuid(), command.Id, command.Name, null, command.Owner, command.Created));
+            _repository.Save(new Package(command.Id, command.Name, command.Description, command.Version, command.Owner, command.CreatedDate, command.EditedDate));
         }
     }
 }

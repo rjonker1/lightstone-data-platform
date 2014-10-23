@@ -95,7 +95,6 @@
     <Compile Include="CommandHandlers\Industries\CreateIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
     <Compile Include="EventHandlers\DataProviders\DataProviderCreatedHandler.cs" />
-    <Compile Include="CommandHandlers\DataProviders\RenameDataProviderHandler.cs" />
     <Compile Include="EventHandlers\DataProviders\DataProviderUpdatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageCreatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageUpdatedHandler.cs" />
