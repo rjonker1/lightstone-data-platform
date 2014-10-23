@@ -53,7 +53,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Entities\DataField.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DataProvider.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Entities.Model.cg.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Industry.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Package.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PackageDataField.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Package.cs" />
+    <Compile Include="Entities\State.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Context.Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Events\PackageClonedEvent.cs" />
+    <Compile Include="Events\PackageCreatedEvent.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="IRepository\IDataFieldRepository.cg.cs">
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IDataProviderRepository.cg.cs">
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IIndustryRepository.cg.cs">
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IPackageDataFieldRepository.cg.cs">
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IPackageRepository.cg.cs">
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IRepository.Model.cg.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IStateRepository.cg.cs">
+      <DependentUpon>IRepository.Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +128,10 @@
       <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
       <Name>Infrastructure.CrossCutting.NetFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
+      <Project>{98150d03-b191-476d-b192-b5b755e26e8e}</Project>
+      <Name>Infrastructure.Data.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
@@ -81,7 +140,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Entities\Entities.Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Entities.Model.cg.cs</LastGenOutput>
+    </None>
+    <None Include="EntityModel\Context.Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Context.Model.cs</LastGenOutput>
+    </None>
+    <None Include="IRepository\IRepository.Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRepository.Model.cg.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

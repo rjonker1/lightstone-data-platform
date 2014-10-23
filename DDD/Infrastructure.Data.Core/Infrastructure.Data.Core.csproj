@@ -103,7 +103,9 @@
     <Compile Include="Runtime\OperationContext.cs" />
     <Compile Include="Security\Events\UserCreated.cs" />
     <Compile Include="Security\User.cs" />
+    <Compile Include="Seedwork\QueryableUtils.cs" />
     <Compile Include="Seedwork\Repository.cs" />
+    <Compile Include="Seedwork\TrackUtils.cs" />
     <Compile Include="Services\AbstractDispatchScheduler.cs" />
     <Compile Include="Services\CommitDispatchScheduler.cs" />
     <Compile Include="Services\ICommitDispatchScheduler.cs" />

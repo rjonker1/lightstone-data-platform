@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66E7D20E-06D3-4F56-9CFF-60C9ECF8ACCF}</ProjectGuid>
+    <ProjectGuid>{781EE6F7-E573-4977-AEC8-92D340929F75}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LightstoneApp.Application.PackageBuilderModule</RootNamespace>
@@ -39,26 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
-      <Project>{5A3A2291-4220-4BDC-94C0-F48AB18ED0BD}</Project>
-      <Name>Domain.Core.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
-      <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
-      <Name>Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.PackageBuilderModule.Entities\Domain.PackageBuilderModule.Entities.csproj">
-      <Project>{380457ed-05f1-4901-b52c-518ccdf24f51}</Project>
-      <Name>Domain.PackageBuilderModule.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain.PackageBuilderModule\Domain.PackageBuilderModule.csproj">
-      <Project>{d43e9cd1-cad1-42b1-8f0f-285932a65837}</Project>
-      <Name>Domain.PackageBuilderModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

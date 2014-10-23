@@ -106,6 +106,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.Package
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.PackageBuilderModule.Tests", "Infrastructure.Data.PackageBuilderModule.Tests\Infrastructure.Data.PackageBuilderModule.Tests.csproj", "{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.PackageBuilderModule", "Application.PackageBuilderModule\Application.PackageBuilderModule.csproj", "{781EE6F7-E573-4977-AEC8-92D340929F75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -360,6 +362,16 @@ Global
 		{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255}.Release|x86.ActiveCfg = Release|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{781EE6F7-E573-4977-AEC8-92D340929F75}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -406,6 +418,7 @@ Global
 		{CD452AFC-1628-444C-9C18-BB20C5E97AB2} = {9085B1A9-E248-4B99-971B-25B36CAC9265}
 		{5B9C1553-F5B0-4AD7-9F01-AFC60056EA6C} = {B522D6C5-CDAB-4388-B6A6-98D5CA9F24C4}
 		{B3DF6F6A-AEC3-471E-80E9-262FC9CC7255} = {B522D6C5-CDAB-4388-B6A6-98D5CA9F24C4}
+		{781EE6F7-E573-4977-AEC8-92D340929F75} = {C2999C0D-8B2A-4D5F-AE02-5D8539211620}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		GuidanceWorkflows = 23795EC3-3DEA-4F04-9044-4056CF91A2ED:ServiceMatrix Guidance:2.2.0

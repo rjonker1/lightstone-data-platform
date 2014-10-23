@@ -2152,6 +2152,51 @@
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Security.Fakes.ShimUser.ShimFactory.AllInstances.CreatePersonStringString">
             <summary>Sets the shim of Factory.CreatePerson(String firstName, String lastName)</summary>
         </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Seedwork.QueryableUtils</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.#ctor(LightstoneApp.Infrastructure.Data.Core.Seedwork.QueryableUtils)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.CallOrderByOf1IQueryableOfM0StringBoolean``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.Linq.IQueryable{``0},System.String,System.Boolean,System.Linq.IQueryable{``0}})">
+            <summary>Sets the shim of QueryableUtils.CallOrderBy(IQueryable`1&lt;!!0&gt; source, String propertyName, Boolean ascending)</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.GenerateSelectorOf1StringTypeOut``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.OutFunc{System.String,System.Type,System.Linq.Expressions.LambdaExpression})">
+            <summary>Sets the shim of QueryableUtils.GenerateSelector(String propertyName, Type&amp; resultType)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.Constructor">
+            <summary>Sets the shim of QueryableUtils.QueryableUtils()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.StaticConstructor">
+            <summary>Sets the shim of QueryableUtils.QueryableUtils()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils._cctorb__0MethodInfo">
+            <summary>Sets the shim of QueryableUtils.&lt;.cctor&gt;b__0(MethodInfo method)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils._cctorb__1MethodInfo">
+            <summary>Sets the shim of QueryableUtils.&lt;.cctor&gt;b__1(MethodInfo method)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils._cctorb__2MethodInfo">
+            <summary>Sets the shim of QueryableUtils.&lt;.cctor&gt;b__2(MethodInfo method)</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils._cctorb__3MethodInfo">
+            <summary>Sets the shim of QueryableUtils.&lt;.cctor&gt;b__3(MethodInfo method)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimQueryableUtils.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1">
             <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Seedwork.Repository`1</summary>
         </member>
@@ -2302,6 +2347,51 @@
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.UnitOfWorkGet">
             <summary>Sets the shim of Repository`1.get_UnitOfWork()</summary>
         </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils">
+            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Seedwork.TrackUtils</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.#ctor(LightstoneApp.Infrastructure.Data.Core.Seedwork.TrackUtils)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.Constructor">
+            <summary>Sets the shim of TrackUtils.TrackUtils()</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.GetEntityStateNullableOfTrackState">
+            <summary>Sets the shim of TrackUtils.GetEntityState(Nullable`1&lt;TrackState&gt; entityState)</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimTrackUtils.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubQueryableUtils">
+            <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Seedwork.QueryableUtils</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubQueryableUtils.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubQueryableUtils.InitializeStub">
+            <summary>Initializes a new instance of type StubQueryableUtils</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubQueryableUtils.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubQueryableUtils.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubQueryableUtils.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubRepository`1">
             <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Seedwork.Repository`1</summary>
         </member>
@@ -2402,6 +2492,24 @@
             <summary>Gets or sets the instance behavior.</summary>
         </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubRepository`1.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubTrackUtils">
+            <summary>Stub type of LightstoneApp.Infrastructure.Data.Core.Seedwork.TrackUtils</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubTrackUtils.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubTrackUtils.InitializeStub">
+            <summary>Initializes a new instance of type StubTrackUtils</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubTrackUtils.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubTrackUtils.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.StubTrackUtils.InstanceObserver">
             <summary>Gets or sets the instance observer.</summary>
         </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Services.Fakes.ShimServiceBrokerMessagePublisher">

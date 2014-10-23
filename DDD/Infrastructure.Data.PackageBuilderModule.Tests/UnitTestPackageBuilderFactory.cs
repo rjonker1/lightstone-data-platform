@@ -1,11 +1,16 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using LightstoneApp.Domain.PackageBuilderModule.Entities;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
+using LightstoneApp.Domain.PackageBuilderModule.EntityModel;
+using LightstoneApp.Domain.PackageBuilderModule.Events;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
+using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Utils;
 using LightstoneApp.Infrastructure.Data.Core.Commits;
+using LightstoneApp.Infrastructure.Data.PackageBuilder.Module.Repository;
+using LightstoneApp.Infrastructure.Data.PackageBuilder.Module.UnitOfWork;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
@@ -13,6 +18,14 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
     [TestClass]
     public class UnitTestPackageBuilderFactory
     {
+        //private PackageRepository _repository;
+
+        [TestInitialize]
+        public void SetupTest()
+        {
+            LoggerFactory.SetCurrent(new TraceSourceLogFactory());
+        }
+
         private const string StateUnderConsructionKey = "80adc8fe-a229-4b00-a491-818dd0273b16";
 
         [TestMethod]
@@ -109,10 +122,14 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
 
                     // cleanup 
 
+                    var repoC = new PackageRepository(new ModelUnitOfWork());
 
                     var packageToDelegte =
                         db.Packages.SingleOrDefault(
                             x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name);
+
+                    //repoC.AllMatching(x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name)();
+
 
                     if (packageToDelegte != null)
                     {
@@ -132,14 +149,57 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
                 }
             }
 
+            var list = new List<object>();
+
+
             foreach (var commit in commits)
             {
-                // TODO: persist the commit and the event
+                // persist the commit and the event
 
-                
+                if (!commit.IsDispatched)
+                {
+                    var repository = new PackageRepository(new ModelUnitOfWork());
+                    
+                    // get the package from the commit event
+
+                    foreach (var pce in commit.Events.Where(x => x.GetType() == typeof (PackageCreatedEvent)))
+                    {
+                        var evnt = pce as PackageCreatedEvent;
+
+                        if (evnt != null)
+                        {
+                            
+                            var packageToSave = evnt.PackageCreated;
+
+                            repository.Add(packageToSave);
+
+                            list.Add(packageToSave.Id);
+                        }
+                    }
+
+                    repository.UnitOfWork.Commit();
+
+                    // TODO: dispatch the commit to the event store.
+                    //commit.MarkAsDispatched();
+                }
             }
 
             //Assert;
+
+            // Act
+
+            var repo = new PackageRepository(new ModelUnitOfWork());
+            var count = repo.AllMatchingCount(x => x.Owner == "Lightstone Auto");
+            var pk = new List<object>(1) {list[0]};
+            var p = repo.Get(pk);
+
+            // Assert
+
+            Assert.IsTrue(p.Name == idNameDescTup[0].Item2);
+            Assert.IsNotNull(count);
+            Assert.IsTrue(count != -1);
+            Assert.IsTrue(count == idNameDescTup.Count);
+
             var packageCount = commits.Count;
             Assert.IsTrue(packageCount == idNameDescTup.Count);
         }

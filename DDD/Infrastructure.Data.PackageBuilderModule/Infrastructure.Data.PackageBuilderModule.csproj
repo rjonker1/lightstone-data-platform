@@ -58,7 +58,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\DataField.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DataProvider.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Entities.Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Industry.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Package.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PackageDataField.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\State.cg.cs">
+      <DependentUpon>Entities.Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\DataFieldRepository.cg.cs">
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\DataProviderRepository.cg.cs">
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\IndustryRepository.cg.cs">
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\PackageDataFieldRepository.cg.cs">
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\PackageRepository.cg.cs">
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Reporitory.Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Repositories.DELETE.cs" />
+    <Compile Include="Repository\StateRepository.cg.cs">
+      <DependentUpon>Reporitory.Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitOfWork\IPackageBuilderUnitOfWork.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IPackageBuilderUnitOfWork.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitOfWork\ModelUnitOfWork.cs" />
     <Compile Include="Views\PackageView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +148,20 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Entities\Entities.Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Entities.Model.cs</LastGenOutput>
+    </None>
     <None Include="Model\Model1.Context.tt" />
     <None Include="packages.config" />
-    <None Include="UnitOfWork\IPackageBuilderUnitOfWork.tt" />
+    <None Include="Repository\Reporitory.Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Reporitory.Model1.cs</LastGenOutput>
+    </None>
+    <None Include="UnitOfWork\IPackageBuilderUnitOfWork.tt">
+      <Generator>--TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IPackageBuilderUnitOfWork.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

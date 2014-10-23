@@ -66,6 +66,29 @@
   <ItemGroup>
     <Compile Include="UnitTestPackageBuilderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Data.UnitTest.cg.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\DataFieldUnitTest.cg.cs">
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\DataProviderUnitTest.cg.cs">
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\IndustryUnitTest.cg.cs">
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\PackageDataFieldUnitTest.cg.cs">
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\PackageUnitTest.cg.cs">
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\StateUnitTest.cg.cs">
+      <DependentUpon>Data.UnitTest.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
@@ -111,6 +134,13 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="UnitTests\Data.UnitTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Data.UnitTest.cg.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
