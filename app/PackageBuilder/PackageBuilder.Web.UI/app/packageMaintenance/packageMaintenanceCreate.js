@@ -1,87 +1,71 @@
 ﻿(function () {
     'use strict';
 
-    var controllerId = 'packageMaintenance';
+    var controllerId = 'packageMaintenanceCreate';
 
     angular
         .module('app')
-        .controller(controllerId, packageMaintenance);
+        .controller(controllerId, packageMaintenanceCreate);
 
-    packageMaintenance.$inject = ['$scope', '$parse', '$http', 'common', 'datacontext'];
+    packageMaintenanceCreate.$inject = ['$scope', '$parse', '$http', 'common', 'datacontext'];
 
-    function packageMaintenance($scope, $parse, $http, common, datacontext) {
+    function packageMaintenanceCreate($scope, $parse, $http, common, datacontext) {
 
         $scope.title = 'Package Maintenance';
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
+        var logSuccess = getLogFn(controllerId, 'success');
 
         $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-        //MOCK
-        $http({
-            method: 'GET',
-            url: '/app/packageMaintenance/DataProviders.json'
-            }).success(function(data, status, headers, config) {
+        $scope.dataProvsPkg = {};
+        //Prevent $modelValue undefined error
+        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
+
+        datacontext.getDataProviderSources().then(function(response) {
+
+            console.log(response);
+
+            if (response.status === 200) {
+
                 
-               $scope.dataProvsPkg = data;
-    
-            }).error(function(data, status, headers, config) {
+
+                $scope.dataProvsPkg.Package.DataProviders = response.data;
               
-             
-            });
 
-        /*$scope.dataProvsPkg = {}; 
-        $scope.dataProvsPkg.Package = {};
-        $scope.dataProvsPkg.Package.DataProviders = [];
+                logSuccess('Data Providers loaded!');
 
-        GetDataProviderSources.query(function(data){
-
-            var resp = data.response;
-              
-            for( var res in resp)
-            {
-
-                if (resp.hasOwnProperty(res)) {
-                                                                  
-                    $scope.dataProvsPkg.Package.DataProviders = resp;
-                    $scope.message = "Data Loaded."
-                }
             }
 
-            $scope.alerts = [
+            if (response.status === 404) {
 
-              { type: 'success', msg: 'Data loaded successfully !' }
-            ];
+                //Load MOCK data
+                $http({
+                    method: 'GET',
+                    url: '/app/packageMaintenance/DataProviders.json'
+                }).success(function (data, status, headers, config) {
 
-        }, function(err){
+                    $scope.dataProvsPkg = data;
 
-            $scope.alerts = [
+                }).error(function (data, status, headers, config) {
 
-                { type: 'danger', msg: 'Failed to communicate with webserver !' }
-            ];
 
-        });*/
+                });
+                
+                logError('Error 404. Please check your connection settings');
+            }
+
+        });
 
 
         $scope.createPackage = function(packageData) {
 
-            $scope.message = 'Saving data...';
+            return datacontext.createPackage(packageData).then(function (response) {
 
-            PostPackage.save({}, packageData, function(data) {
+                console.log(response);
+                (response.status === 200) ? logSuccess('Package Created!') : logError('Error 404. Please check your connection settings');
 
-                //var resp = data.msg;
-
-                $scope.alerts = [
-
-                  { type: 'success', msg: 'Package: '+$scope.dataProvsPkg.Package.name+' saved successfully !' }
-                ];
-
-                $location.path('/data-sources');
-
-            }, function(err){
-
-                $scope.message = "Error saving Data Provider";
             });
 
         }

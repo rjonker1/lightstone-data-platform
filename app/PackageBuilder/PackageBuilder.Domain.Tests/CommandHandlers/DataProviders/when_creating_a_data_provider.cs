@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Dto;
+using Lace.Models.Ivid.Dto;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;

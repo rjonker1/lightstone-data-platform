@@ -1,0 +1,186 @@
+﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
+
+    {{dataPromise}}
+
+    <!--<div ng-model="dataPromise.response">
+            <div ng-repeat="data in dataPromise.response">
+                <li>{{data}}</li>
+            </div>
+
+        </div>-->
+
+
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
+                    <div class="widget-content user">
+
+
+                        <div class="row" id="info" ng-model="dataProvider">
+
+                            <button type="button" class="btn btn-success" ng-click="createProvider(dataProvider)">Publish</button>
+
+                            <br />
+
+                            {{dataProvider}}
+
+                            <div id="1" class="col-md-3">
+                                <div>
+                                    <label>Name:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProvider.name" />
+                                    </div>
+                                    <label>Version:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProvider.version" readonly />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label>Description</label>
+                                    </div>
+                                    <div>
+                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvider.description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="2" class="col-md-3">
+                                <div>
+                                    <label>State:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProvider.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>COS:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProvider.costOfSale" />
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div>
+
+                                    <label>Date: </label>
+                                    <div>
+
+                                        <input type="textbox" class="form-control" value="{{now}}" />
+
+                                    </div>
+
+                                </div>
+
+                                <br />
+
+                                <div>
+                                    <label>Owner:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProvider.owner" ng-options="user.name for user in users"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> <!--End Info-->
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="widget wblue">
+                                    <div data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
+                                    <div class="widget-content text-center text-info">
+
+                                        <table class="table" style="padding-top: 20px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Field</th>
+                                                    <th>Type</th>
+                                                    <th>Label</th>
+                                                    <th>Definition</th>
+                                                    <th>Industries</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="dField in dataProvider.dataFields">
+
+                                                <tr>
+                                                    <td>{{dField.name}}</td>
+                                                    <td>{{dField.type}}</td>
+                                                    <td><input class="form-control" ng-model="dField.label" type="text"></td>
+                                                    <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+                                                    <td>
+                                                        <select class="form-control" ng-model="dField.industries">
+                                                            <!-- ng-options="ind in dField.industries" -->
+
+                                                        </select>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!--<div class="widget-foot">
+                                        <div class="clearfix"></div>
+                                    </div>-->
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget worange">
+                    <div data-cc-widget-header title="{{title}} : Response" allow-collapse="true"></div>
+                    <div class="widget-content user">
+
+                        <div id="1" class="col-md-3">
+                            <div>
+                                <label>Source URL:</label>
+                                <div>
+                                    <input type="textbox" class="form-control" ng-model="dataProvider.name" />
+                                </div>
+                                <label>Username:</label>
+                                <div>
+                                    <input type="textbox" class="form-control" />
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <label>Password:</label>
+                                </div>
+                                <div>
+                                    <input type="textbox" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+

@@ -1,14 +1,18 @@
 ﻿using System;
 using PackageBuilder.Core.Entities;
+using PackageBuilder.Core.NHibernate.Attributes;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 {
     public class DataProvider : Entity
     {
+        [DomainSignature]
         public virtual Guid DataProviderId { get; protected set; }
+        [DomainSignature]
         public virtual string Name { get; protected set; }
         public virtual string Description { get; protected set; }
         public virtual double CostPrice { get; protected set; }
+        [DomainSignature]
         public virtual int Version { get; protected set; }
         public virtual string Owner { get; protected set; }
         public virtual DateTime CreatedDate { get; protected set; }
