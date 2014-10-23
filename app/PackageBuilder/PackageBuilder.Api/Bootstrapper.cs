@@ -1,9 +1,9 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
+using PackageBuilder.Api.Helpers.ExceptionHandling;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Infrastructure.RavenDB;
@@ -53,6 +53,8 @@ namespace PackageBuilder.Api
             //        null;
             //};
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+
+            pipelines.OnError += (ctx, err) => HttpResponseExceptionHandler.HandleExceptions(err, ctx);
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
         }

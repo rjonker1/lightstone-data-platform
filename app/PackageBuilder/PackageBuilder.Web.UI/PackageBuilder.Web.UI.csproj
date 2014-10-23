@@ -112,6 +112,9 @@
     <Content Include="app\favicon.ico" />
     <Content Include="app\images\yeoman.png" />
     <Content Include="app\index_old.html" />
+    <Content Include="app\industries\headerTemplate.html" />
+    <Content Include="app\industries\industries.html" />
+    <Content Include="app\industries\industries.js" />
     <Content Include="app\layout\shell.html" />
     <Content Include="app\layout\shell.js" />
     <Content Include="app\layout\sidebar.html" />
@@ -122,6 +125,8 @@
     <Content Include="app\packageMaintenance\packageMaintenance.js" />
     <Content Include="app\packages\packages.html" />
     <Content Include="app\packages\packages.js" />
+    <Content Include="app\repositories\industryRepository.js" />
+    <Content Include="app\resources\industryResources.js" />
     <Content Include="app\robots.txt" />
     <Content Include="app\scripts_old\app.js" />
     <Content Include="app\scripts_old\controllers\dataSourceDetailController.js" />
