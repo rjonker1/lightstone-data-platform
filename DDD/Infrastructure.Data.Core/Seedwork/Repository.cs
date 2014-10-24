@@ -13,7 +13,7 @@ using LightstoneApp.Infrastructure.Data.Core.Resources;
 namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
 {
     /// <summary>
-    ///     Repository base class
+    /// Repository base class
     /// </summary>
     /// <typeparam name="TEntity">The type of underlying entity in this repository</typeparam>
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
@@ -27,7 +27,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         #region Constructor
 
         /// <summary>
-        ///     Create a new instance of repository
+        /// Create a new instance of repository
         /// </summary>
         /// <param name="unitOfWork">Associated Unit Of Work</param>
         public Repository(IUnitOfWork unitOfWork)
@@ -43,7 +43,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         #region IRepository
 
         /// <summary>
-        ///     Get the unit of work in this repository
+        /// Get the unit of work in this repository
         /// </summary>
         public IUnitOfWork UnitOfWork
         {
@@ -51,7 +51,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         }
 
         /// <summary>
-        ///     Create
+        /// Create
         /// </summary>
         /// <param name="item">Item</param>
         public virtual void Add(TEntity item)
@@ -66,18 +66,17 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLog()
-                        .Error(string.Format(CultureInfo.InvariantCulture, "Add Data Layer ERROR"), ex);
+                    LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "Add Data Layer ERROR"), ex);
                 }
             }
             else
-                LoggerFactory.CreateLog().Info(Messages.info_CannotAddNullEntity, typeof (TEntity).ToString());
+                LoggerFactory.CreateLog().Info(Messages.info_CannotAddNullEntity, typeof(TEntity).ToString());
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - Add End"));
         }
 
         /// <summary>
-        ///     Update
+        /// Update
         /// </summary>
         /// <param name="item">Item</param>
         public virtual void Modify(TEntity item)
@@ -92,18 +91,17 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLog()
-                        .Error(string.Format(CultureInfo.InvariantCulture, "Modify Data Layer ERROR"), ex);
+                    LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "Modify Data Layer ERROR"), ex);
                 }
             }
             else
-                LoggerFactory.CreateLog().Info(Messages.info_CannotRemoveNullEntity, typeof (TEntity).ToString());
+                LoggerFactory.CreateLog().Info(Messages.info_CannotRemoveNullEntity, typeof(TEntity).ToString());
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - Modify End"));
         }
 
         /// <summary>
-        ///     Delete
+        /// Delete
         /// </summary>
         /// <param name="item">Item</param>
         public virtual void Remove(TEntity item)
@@ -119,18 +117,17 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
                 }
                 catch (Exception ex)
                 {
-                    LoggerFactory.CreateLog()
-                        .Error(string.Format(CultureInfo.InvariantCulture, "Remove Data Layer ERROR"), ex);
+                    LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "Remove Data Layer ERROR"), ex);
                 }
             }
             else
-                LoggerFactory.CreateLog().Info(Messages.info_CannotRemoveNullEntity, typeof (TEntity).ToString());
+                LoggerFactory.CreateLog().Info(Messages.info_CannotRemoveNullEntity, typeof(TEntity).ToString());
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - Remove End"));
         }
 
         /// <summary>
-        ///     Merge
+        /// Merge
         /// </summary>
         /// <param name="persisted">Persisted item</param>
         /// <param name="current">Current item</param>
@@ -144,15 +141,14 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "Merge Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "Merge Data Layer ERROR"), ex);
             }
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - Merge End"));
         }
 
         /// <summary>
-        ///     Select
+        /// Select
         /// </summary>
         /// <param name="keyValues">Entity key values</param>
         /// <returns>Entity</returns>
@@ -177,7 +173,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         }
 
         /// <summary>
-        ///     Select async
+        /// Select async
         /// </summary>
         /// <param name="keyValues">Entity key values</param>
         /// <returns>TEntity (task)</returns>
@@ -193,8 +189,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "GetAsync Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "GetAsync Data Layer ERROR"), ex);
             }
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - GetAsync End"));
@@ -203,9 +198,9 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         }
 
         /// <summary>
-        ///     Select all
+        /// Select all
         /// </summary>
-        /// <param name="includes">Inners</param>
+        /// <param name="includes">Inners</param> 
         /// <returns>List of results</returns>
         public virtual List<TEntity> GetAll(List<string> includes = null)
         {
@@ -219,8 +214,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "GetAll Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "GetAll Data Layer ERROR"), ex);
             }
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - GetAll End"));
@@ -229,14 +223,13 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         }
 
         /// <summary>
-        ///     Select all async
+        /// Select all async
         /// </summary>
         /// <param name="includes">Inners</param>
         /// <returns>List of results (task)</returns>
         public virtual async Task<List<TEntity>> GetAllAsync(List<string> includes = null)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - GetAllAsync Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - GetAllAsync Begin"));
 
             List<TEntity> items = null;
 
@@ -246,8 +239,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "GetAllAsync Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "GetAllAsync Data Layer ERROR"), ex);
             }
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - GetAllAsync End"));
@@ -256,15 +248,14 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         }
 
         /// <summary>
-        ///     Find items
+        /// Find items
         /// </summary>
         /// <param name="filter">Expression filter</param>
         /// <param name="includes">Inners</param>
         /// <returns>List of results</returns>
         public virtual List<TEntity> AllMatching(Expression<Func<TEntity, bool>> filter, List<string> includes = null)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatching Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatching Begin"));
 
             List<TEntity> items = null;
 
@@ -274,8 +265,7 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "AllMatching Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "AllMatching Data Layer ERROR"), ex);
             }
 
             LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatching End"));
@@ -284,16 +274,14 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         }
 
         /// <summary>
-        ///     Find items async
+        /// Find items async
         /// </summary>
         /// <param name="filter">Expression filter</param>
         /// <param name="includes">Inners</param>
         /// <returns>List of results (task)</returns>
-        public virtual async Task<List<TEntity>> AllMatchingAsync(Expression<Func<TEntity, bool>> filter,
-            List<string> includes = null)
+        public virtual async Task<List<TEntity>> AllMatchingAsync(Expression<Func<TEntity, bool>> filter, List<string> includes = null)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingAsync Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingAsync Begin"));
 
             List<TEntity> items = null;
 
@@ -303,18 +291,16 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingAsync Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingAsync Data Layer ERROR"), ex);
             }
 
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingAsync End"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingAsync End"));
 
             return items;
         }
 
         /// <summary>
-        ///     Find paged items
+        /// Find paged items
         /// </summary>
         /// <param name="filter">Expression filter</param>
         /// <param name="includes">Inners</param>
@@ -323,14 +309,12 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         /// <param name="orderBy">Fields order</param>
         /// <param name="orderAscendent">Order ascendent</param>
         /// <returns>Paged results</returns>
-        public virtual PagedCollection<TEntity> AllMatchingPaged(Expression<Func<TEntity, bool>> filter,
-            List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent)
+        public virtual PagedCollection<TEntity> AllMatchingPaged(Expression<Func<TEntity, bool>> filter, List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPaged Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPaged Begin"));
 
             List<TEntity> items = null;
-            int totalItems = 0;
+            var totalItems = 0;
 
             try
             {
@@ -339,24 +323,16 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingPaged Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingPaged Data Layer ERROR"), ex);
             }
 
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPaged End"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPaged End"));
 
-            return new PagedCollection<TEntity>
-            {
-                PageIndex = pageGo,
-                PageSize = pageSize,
-                Items = items,
-                TotalItems = totalItems
-            };
+            return new PagedCollection<TEntity> { PageIndex = pageGo, PageSize = pageSize, Items = items, TotalItems = totalItems };
         }
 
         /// <summary>
-        ///     Find paged items async
+        /// Find paged items async
         /// </summary>
         /// <param name="filter">Expression filter</param>
         /// <param name="includes">Inners</param>
@@ -365,53 +341,40 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
         /// <param name="orderBy">Fields order</param>
         /// <param name="orderAscendent">Order ascendent</param>
         /// <returns>Paged results (task)</returns>
-        public virtual async Task<PagedCollection<TEntity>> AllMatchingPagedAsync(
-            Expression<Func<TEntity, bool>> filter, List<string> includes, int pageGo, int pageSize,
-            List<string> orderBy, bool orderAscendent)
+        public virtual async Task<PagedCollection<TEntity>> AllMatchingPagedAsync(Expression<Func<TEntity, bool>> filter, List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPagedAsync Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPagedAsync Begin"));
 
             List<TEntity> items = null;
-            int totalItems = 0;
+            var totalItems = 0;
 
             try
             {
-                Task<List<TEntity>> itemsTask =
-                    _unitOfWork.GetQueryable(includes, filter, pageGo, pageSize, orderBy, orderAscendent).ToListAsync();
+                var itemsTask = _unitOfWork.GetQueryable(includes, filter, pageGo, pageSize, orderBy, orderAscendent).ToListAsync();
                 totalItems = _unitOfWork.GetQueryable(includes, filter).Count();
                 items = await itemsTask;
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingPagedAsync Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingPagedAsync Data Layer ERROR"), ex);
             }
 
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPagedAsync End"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingPagedAsync End"));
 
-            return new PagedCollection<TEntity>
-            {
-                PageIndex = pageGo,
-                PageSize = pageSize,
-                Items = items,
-                TotalItems = totalItems
-            };
+            return new PagedCollection<TEntity> { PageIndex = pageGo, PageSize = pageSize, Items = items, TotalItems = totalItems };
         }
 
         /// <summary>
-        ///     Total count by filter
+        /// Total count by filter
         /// </summary>
         /// <param name="filter">Expression filter</param>
         /// <param name="includes">Inners</param>
         /// <returns>Total count</returns>
         public virtual int AllMatchingCount(Expression<Func<TEntity, bool>> filter = null, List<string> includes = null)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCount Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCount Begin"));
 
-            int totalItems = 0;
+            var totalItems = 0;
 
             try
             {
@@ -419,29 +382,25 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingCount Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingCount Data Layer ERROR"), ex);
             }
 
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCount End"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCount End"));
 
             return totalItems;
         }
 
         /// <summary>
-        ///     Total count by filter async
+        /// Total count by filter async
         /// </summary>
         /// <param name="filter">Expression filter</param>
         /// <param name="includes">Inners</param>
         /// <returns>Total count (task)</returns>
-        public virtual async Task<int> AllMatchingCountAsync(Expression<Func<TEntity, bool>> filter = null,
-            List<string> includes = null)
+        public virtual async Task<int> AllMatchingCountAsync(Expression<Func<TEntity, bool>> filter = null, List<string> includes = null)
         {
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCountAsync Begin"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCountAsync Begin"));
 
-            int totalItems = 0;
+            var totalItems = 0;
 
             try
             {
@@ -449,38 +408,16 @@ namespace LightstoneApp.Infrastructure.Data.Core.Seedwork
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLog()
-                    .Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingCountAsync Data Layer ERROR"), ex);
+                LoggerFactory.CreateLog().Error(string.Format(CultureInfo.InvariantCulture, "AllMatchingCountAsync Data Layer ERROR"), ex);
             }
 
-            LoggerFactory.CreateLog()
-                .Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCountAsync End"));
+            LoggerFactory.CreateLog().Debug(string.Format(CultureInfo.InvariantCulture, "Data Layer - AllMatchingCountAsync End"));
 
             return totalItems;
         }
 
-        public void Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CommitChanges()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TAggregate GetById<TAggregate>(string aggregateId) where TAggregate : IAggregate
-        {
-            throw new NotImplementedException();
-        }
-
-        public TAggregate[] GetById<TAggregate>(params string[] aggregateIds) where TAggregate : IAggregate
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
-        ///     Cleanup resources
+        /// Cleanup resources
         /// </summary>
         public void Dispose()
         {

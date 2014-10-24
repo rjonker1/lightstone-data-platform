@@ -30,21 +30,12 @@ namespace LightstoneApp.Domain.Core.Seedwork
 
         Task<List<TEntity>> AllMatchingAsync(Expression<Func<TEntity, bool>> filter, List<string> includes);
 
-        PagedCollection<TEntity> AllMatchingPaged(Expression<Func<TEntity, bool>> filter, List<string> includes,
-            int pageIndex, int pageSize, List<string> sortFields, bool ascending);
+        PagedCollection<TEntity> AllMatchingPaged(Expression<Func<TEntity, bool>> filter, List<string> includes, int pageIndex, int pageSize, List<string> sortFields, bool ascending);
 
-        Task<PagedCollection<TEntity>> AllMatchingPagedAsync(Expression<Func<TEntity, bool>> filter,
-            List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent);
+        Task<PagedCollection<TEntity>> AllMatchingPagedAsync(Expression<Func<TEntity, bool>> filter, List<string> includes, int pageGo, int pageSize, List<string> orderBy, bool orderAscendent);
 
         int AllMatchingCount(Expression<Func<TEntity, bool>> filter, List<string> includes);
 
         Task<int> AllMatchingCountAsync(Expression<Func<TEntity, bool>> filter, List<string> includes);
-
-        void Save<TAggregate>(TAggregate aggregate) where TAggregate : IAggregate;
-        void CommitChanges();
-
-        TAggregate GetById<TAggregate>(String aggregateId) where TAggregate : IAggregate;
-
-        TAggregate[] GetById<TAggregate>(params string[] aggregateIds) where TAggregate : IAggregate;
     }
 }

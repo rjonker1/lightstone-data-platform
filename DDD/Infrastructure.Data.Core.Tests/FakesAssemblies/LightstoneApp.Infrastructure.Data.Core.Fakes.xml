@@ -2218,15 +2218,6 @@
         <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.Bind(System.IDisposable)">
             <summary>Binds the members of the interface to the shim.</summary>
         </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.GetByIdOf1String``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.String,``0})">
-            <summary>Sets the shim of Repository`1.GetById(String aggregateId)</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.GetByIdOf1StringArray``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{System.String[],``0[]})">
-            <summary>Sets the shim of Repository`1.GetById(String[] aggregateIds)</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.SaveOf1M0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{``0})">
-            <summary>Sets the shim of Repository`1.Save(!!0 aggregate)</summary>
-        </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AddT0">
             <summary>Sets the shim of Repository`1.Add(!0 item)</summary>
         </member>
@@ -2250,9 +2241,6 @@
         </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.Behavior">
             <summary>Assigns the behavior for all methods of the shimmed type</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.CommitChanges">
-            <summary>Sets the shim of Repository`1.CommitChanges()</summary>
         </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.ConstructorIUnitOfWork">
             <summary>Sets the shim of Repository`1.Repository`1(IUnitOfWork unitOfWork)</summary>
@@ -2287,15 +2275,6 @@
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances">
             <summary>Define shims for all instances members</summary>
         </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.GetByIdOf1String``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.Seedwork.Repository{`0},System.String,``0})">
-            <summary>Sets the shim of Repository`1.GetById(String aggregateId)</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.GetByIdOf1StringArray``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{LightstoneApp.Infrastructure.Data.Core.Seedwork.Repository{`0},System.String[],``0[]})">
-            <summary>Sets the shim of Repository`1.GetById(String[] aggregateIds)</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.SaveOf1M0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{LightstoneApp.Infrastructure.Data.Core.Seedwork.Repository{`0},``0})">
-            <summary>Sets the shim of Repository`1.Save(!!0 aggregate)</summary>
-        </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.AddT0">
             <summary>Sets the shim of Repository`1.Add(!0 item)</summary>
         </member>
@@ -2316,9 +2295,6 @@
         </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.AllMatchingPagedExpressionOfFuncOfT0BooleanListOfStringInt32Int32ListOfStringBoolean">
             <summary>Sets the shim of Repository`1.AllMatchingPaged(Expression`1&lt;Func`2&lt;!0,Boolean&gt;&gt; filter, List`1&lt;String&gt; includes, Int32 pageGo, Int32 pageSize, List`1&lt;String&gt; orderBy, Boolean orderAscendent)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.CommitChanges">
-            <summary>Sets the shim of Repository`1.CommitChanges()</summary>
         </member>
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Seedwork.Fakes.ShimRepository`1.AllInstances.Dispose">
             <summary>Sets the shim of Repository`1.Dispose()</summary>

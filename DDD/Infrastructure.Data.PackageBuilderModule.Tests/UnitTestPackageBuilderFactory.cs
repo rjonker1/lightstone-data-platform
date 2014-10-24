@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using LightstoneApp.Domain.PackageBuilderModule.Entities;
 using LightstoneApp.Domain.PackageBuilderModule.Entities.Model;
-using LightstoneApp.Domain.PackageBuilderModule.EntityModel;
 using LightstoneApp.Domain.PackageBuilderModule.Events;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
@@ -96,7 +95,7 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
             var transactionIdentifier = GuidUtil.NewSequentialId();
             var correlationId = "Seed_Packages/" + transactionIdentifier;
 
-            using (var db = new LightstoneAppDatabaseEntities())
+            using (var repoC = new PackageRepository(new ModelUnitOfWork()))
             {
                 foreach (var tuple in idNameDescTup)
                 {
@@ -121,21 +120,13 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
                     };
 
                     // cleanup 
+                 
+                    var matchingPackages = repoC.AllMatching(x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name);
+                    var  matchingPackage = matchingPackages.SingleOrDefault();
+                    Assert.IsNotNull(matchingPackage);
 
-                    var repoC = new PackageRepository(new ModelUnitOfWork());
-
-                    var packageToDelegte =
-                        db.Packages.SingleOrDefault(
-                            x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name);
-
-                    //repoC.AllMatching(x => x.Version == packageToCreate.Version && x.Name == packageToCreate.Name)();
-
-
-                    if (packageToDelegte != null)
-                    {
-                        db.Packages.Remove(packageToDelegte);
-                        db.SaveChanges();
-                    }
+                    repoC.Remove(matchingPackage);
+                    repoC.UnitOfWork.Commit();
 
                     // execute
                     var createdPackage = packageFactory.CreatePackage(packageToCreate);
@@ -190,8 +181,7 @@ namespace LightstoneApp.Infrastructure.Data.PackageBuilder.Tests
 
             var repo = new PackageRepository(new ModelUnitOfWork());
             var count = repo.AllMatchingCount(x => x.Owner == "Lightstone Auto");
-            var pk = new List<object>(1) {list[0]};
-            var p = repo.Get(pk);
+            var p = repo.Get(keyValues: new List<object>(1) { idNameDescTup[0].Item1 });
 
             // Assert
 
