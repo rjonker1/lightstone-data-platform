@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="error_unmanagederror" xml:space="preserve">
+    <value>Unmanaged error in aplication, the exception information is</value>
+  </data>
   <data name="message_DefaultErrorMessage" xml:space="preserve">
     <value>Oooppps this operation can't be processed at this moment. Please try it later. If problem persist contact with your System Administrator</value>
   </data>

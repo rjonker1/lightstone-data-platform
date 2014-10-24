@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel">
@@ -55,9 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EndpointBehaviors\SilverlightFaultBehavior.cs" />
+    <Compile Include="EndpointBehaviors\SilverlightFaultMessageInspector.cs" />
+    <Compile Include="ErrorHandlers\ApplicationErrorHandler.cs" />
+    <Compile Include="ErrorHandlers\ApplicationErrorHandlerAttribute.cs" />
+    <Compile Include="ErrorHandlers\ApplicationServiceError.cs" />
     <Compile Include="ErrorHandlers\DefaultErrorHandler.cs" />
     <Compile Include="ErrorHandlers\ErrorHandlerServiceBehaviorAttribute.cs" />
     <Compile Include="ErrorHandlers\ServiceError.cs" />
+    <Compile Include="IWcfService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
