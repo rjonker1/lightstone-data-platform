@@ -5,14 +5,13 @@ using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Logging;
 using LightstoneApp.Infrastructure.CrossCutting.NetFramework.Validator;
 using LightstoneApp.Infrastructure.Data.PackageBuilder.Module.Repository;
 using LightstoneApp.Infrastructure.Data.PackageBuilder.Module.UnitOfWork;
-using LightstoneApp.Services.PackageBuilderModule.WcfSerices;
+using LightstoneApp.Services.PackageBuilderModule.WcfServices;
 using Microsoft.Practices.Unity;
 
 namespace LightstoneApp.Services.PackageBuilderModule.UnityContainer
 {
     using System;
-    using System.Collections.Generic;
-    
+
     /// <summary>
     /// DI container accessor
     /// </summary>
