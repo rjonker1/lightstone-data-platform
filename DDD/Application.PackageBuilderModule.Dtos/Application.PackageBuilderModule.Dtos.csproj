@@ -42,29 +42,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DataFieldDto.cs">
+    <Compile Include="DataFieldDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataProviderDto.cs">
+    <Compile Include="DataProviderDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Dto.Model.cs">
+    <Compile Include="Dto.Model.cg.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Dtos.DELETE.cs" />
-    <Compile Include="IndustryDto.cs">
+    <Compile Include="IndustryDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackageDataFieldDto.cs">
+    <Compile Include="PackageDataFieldDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackageDto.cs">
+    <Compile Include="PackageDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateDto.cs">
+    <Compile Include="StateDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -81,7 +81,7 @@
   <ItemGroup>
     <None Include="Dto.Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Dto.Model.cs</LastGenOutput>
+      <LastGenOutput>Dto.Model.cg.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
