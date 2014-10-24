@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
 {
+    [DataContract(IsReference = true)]
     public abstract class Aggregate : IAggregate, IEquatable<IAggregate>, ICloneable
     {
-        [JsonIgnore] private readonly List<IDomainEvent> _uncommittedEvents = new List<IDomainEvent>();
+        [JsonIgnore]
+        private readonly List<IDomainEvent> _uncommittedEvents = new List<IDomainEvent>();
         private String _id;
 
         public String Id
@@ -52,7 +55,7 @@ namespace LightstoneApp.Infrastructure.CrossCutting.NetFramework
             {
                 foreach (IDomainEvent @event in _uncommittedEvents)
                 {
-                    ((DomainEvent) @event).AggregateId = Id;
+                    ((DomainEvent)@event).AggregateId = Id;
                 }
             }
         }
