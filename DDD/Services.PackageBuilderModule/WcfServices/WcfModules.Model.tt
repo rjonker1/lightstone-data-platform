@@ -26,7 +26,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     BeginNamespace(code);
 #>
 
-<%@ ServiceHost Language="C#" Debug="<#=isDebug#>" Service="LightstoneApp.Services.PackageBuilderModule.WcfSerices.<#=entity.Name#>WcfService" CodeBehind="~/WcfServices/<#=entity.Name#>WcfService.svc.cg.cs" %>
+<%@ ServiceHost Language="C#" Debug="<#=isDebug#>" Service="LightstoneApp.Services.PackageBuilderModule.WcfServices.<#=entity.Name#>WcfService" CodeBehind="~/WcfServices/<#=entity.Name#>WcfService.svc.cg.cs" %>
 <#
     EndNamespace(code);
 }

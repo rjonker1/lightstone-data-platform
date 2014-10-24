@@ -1,2 +1,2 @@
 
-<%@ ServiceHost Language="C#" Debug="false" Service="LightstoneApp.Services.PackageBuilderModule.WcfSerices.PackageWcfService" CodeBehind="~/WcfServices/PackageWcfService.svc.cg.cs" %>
+<%@ ServiceHost Language="C#" Debug="false" Service="LightstoneApp.Services.PackageBuilderModule.WcfServices.PackageWcfService" CodeBehind="~/WcfServices/PackageWcfService.svc.cg.cs" %>
