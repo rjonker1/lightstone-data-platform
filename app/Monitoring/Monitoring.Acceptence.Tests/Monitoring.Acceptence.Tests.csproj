@@ -32,24 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
-    </Reference>
-    <Reference Include="EventStore.ClientAPI">
-      <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Core, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.EventTracking.Domain.Persistence, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -58,8 +40,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.0\lib\net30\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Transports.RabbitMQ, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NServiceBus.RabbitMQ.2.0.1\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.3.5.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RabbitMQ.Client.3.3.5\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,28 +64,32 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Lace\Consumer\when_sending_external_source_events_to_monitoring_bus.cs" />
-    <Compile Include="Lace\Consumer\when_sending_external_source_failure_event_to_monitoring_bus.cs" />
-    <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
-      <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
-      <Name>Monitoring.Consumer.Lace</Name>
-    </ProjectReference>
+    <Compile Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs" />
+    <None Include="Lace\Consumer\when_sending_external_source_events_to_monitoring_bus.cs.old" />
+    <None Include="Lace\Consumer\when_sending_external_source_failure_event_to_monitoring_bus.cs.old" />
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
     </ProjectReference>
+    <None Include="Fakes\FakeLaceSourceEvents.cs.old" />
+    <None Include="Lace\Consumer\when_sending_lace_ivid_external_source_call_events_to_monitoring_bus.cs.old" />
     <ProjectReference Include="..\Monitoring\Monitoring.csproj">
       <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
       <Name>Monitoring</Name>
     </ProjectReference>
-    <Compile Include="Fakes\FakeLaceSourceEvents.cs" />
-    <Compile Include="Lace\Consumer\when_sending_lace_ivid_external_source_call_events_to_monitoring_bus.cs" />
-    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
-      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring</Name>
+    <ProjectReference Include="..\source\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
+      <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
+      <Name>Monitoring.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj">
+      <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
+      <Name>Monitoring.Domain.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

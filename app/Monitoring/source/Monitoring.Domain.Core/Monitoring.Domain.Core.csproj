@@ -43,12 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\DefinedMessages.cs" />
-    <Compile Include="Contracts\IDataProviderEvent.cs" />
-    <Compile Include="Dto\EventData.cs" />
-    <None Include="Contracts\IMonitorExternalSourceEventMessage.cs.old" />
-    <None Include="Contracts\IProvideEventCategory.cs.old" />
+    <None Include="Dto\EventData.cs.old" />
+    <None Include="SerializationExtensions.cs.old" />
     <Compile Include="Consumers\DataProvider.cs" />
-    <Compile Include="Dto\RecordedEvent.cs" />
+    <None Include="Dto\RecordedEvent.cs.old" />
     <Compile Include="JsonExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

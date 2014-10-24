@@ -4,13 +4,13 @@ namespace Monitoring.Domain.Messages.Commands
 {
     public interface MessageConsumedCommand
     {
-        Guid AggregateId { get; }
-        Guid EventId { get; }
-        bool HasBeenConsumed { get; }
+        Guid AggregateId { get; set; }
+        Guid EventId { get; set; }
+        bool HasBeenConsumed { get; set; }
 
-        void Set(Guid aggregateId, Guid eventId);
+        //void Set(Guid aggregateId, Guid eventId);
 
-        void IsConsumed();
-        void IsNotConsumed();
+        //void IsConsumed();
+        //void IsNotConsumed();
     }
 }

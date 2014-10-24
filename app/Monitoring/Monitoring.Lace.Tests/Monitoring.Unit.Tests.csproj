@@ -58,6 +58,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Testing">
+      <HintPath>..\..\packages\NServiceBus.Testing.5.0.1\lib\net45\NServiceBus.Testing.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="xunit">
@@ -71,7 +77,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Lace\Consumer\when_external_source_gets_consumed_by_monitoring_bus.cs" />
+    <Compile Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs" />
+    <None Include="Lace\Consumer\when_external_source_gets_consumed_by_monitoring_bus.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -80,17 +87,9 @@
     <Folder Include="Lace\Events\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Monitoring.Consumer.Lace\Monitoring.Consumer.Lace.csproj">
-      <Project>{cf5f99b7-5d89-4a20-a0b3-3a44b4b96f7d}</Project>
-      <Name>Monitoring.Consumer.Lace</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monitoring\Monitoring.csproj">
-      <Project>{af36b47d-93f4-4d06-8c57-a7f6e369c2fc}</Project>
-      <Name>Monitoring</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

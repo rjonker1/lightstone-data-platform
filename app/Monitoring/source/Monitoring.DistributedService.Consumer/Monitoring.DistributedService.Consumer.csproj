@@ -74,7 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -86,10 +88,6 @@
     <ProjectReference Include="..\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj">
       <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
       <Name>Monitoring.Domain.Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monitoring.Domain.Subscriber\Monitoring.Domain.Subscriber.csproj">
-      <Project>{8c6f4e54-5aed-4c6b-8ec8-c916c8758807}</Project>
-      <Name>Monitoring.Domain.Subscriber</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

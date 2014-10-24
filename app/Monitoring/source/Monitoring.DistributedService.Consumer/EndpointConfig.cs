@@ -10,17 +10,24 @@ namespace Monitoring.DistributedService.Consumer
     {
         public void Customize(BusConfiguration configuration)
         {
-            configuration.EnableFeature<Sagas>();
-            configuration.UseTransport<RabbitMQTransport>();
             configuration.DisableFeature<TimeoutManager>();
-            configuration.UsePersistence<NHibernatePersistence>().For(Storage.Sagas, Storage.Subscriptions);
+            configuration.UseTransport<RabbitMQTransport>();
+          
             configuration.Conventions()
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Monitoring.Domain.Messages.Commands"))
                 .DefiningEventsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Monitoring.Domain.Messages.Events"))
                 .DefiningMessagesAs(
-                    m => m.Namespace != null && m.Namespace.StartsWith("Monitoring.Domain.Messages.Messages"));
+                    m =>
+                        m.Namespace != null &&
+                        m.Namespace.StartsWith("Monitoring.Domain.Messages.Messages"));
+
+            
+            //configuration.EndpointName("Monitoring.DistributedService.Consumer");
+            configuration.EnableFeature<Sagas>();
+            configuration.UsePersistence<NHibernatePersistence>().For(Storage.Sagas, Storage.Subscriptions);
+            
         }
     }
 }

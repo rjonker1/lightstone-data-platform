@@ -2,38 +2,38 @@
 {
     public class DefinedMessages
     {
-        public const string StartCallingExternalSource = "LACE Starting External Source Call";
+        public const string StartCallingDataProvider = "LACE Starting Data Provider Call";
 
-        public const string EndCallingExternalSource = "LACE Ending External Source Call";
+        public const string EndCallingDataProvider = "LACE Ending Data Provider Call";
 
-        public const string StartConfigurationForExternalSource =
-            "LACE Starting Configuration for External Source Call";
+        public const string StartConfigurationForDataProvider =
+            "LACE Starting Configuration for Data Provider Call";
 
-        public const string EndConfigurationForExternalSource =
-            "LACE Ending Configuration for External Source Call";
+        public const string EndConfigurationForDataProvider =
+            "LACE Ending Configuration for Data Provider Call";
 
-        public const string ExternalSourceCallFailed = "LACE External Source Call Failed";
+        public const string DataProviderCallFailed = "LACE Data Provider Call Failed";
 
-        public const string NoResponseReceivedFromExternalSource =
-            "LACE Response from External Source is null or does not exist";
+        public const string NoResponseReceivedFromDataProvider =
+            "LACE Response from Data Provider is null or does not exist";
 
-        public const string RequestSentToExternalSource = "LACE Sent Request Sent to External Source";
+        public const string RequestSentToDataProvider = "LACE Sent Request Sent to Data Provider";
 
-        public const string ResponseReceivedFromExternalSource =
-            "LACE Received Response from External Source";
+        public const string ResponseReceivedFromDataProvider =
+            "LACE Received Response from Data Provider";
 
-        public const string ExternalSourceIsBeingHandled = "LACE External Source is Being Handled";
+        public const string DataProviderIsBeingHandled = "LACE Data Provider is Being Handled";
 
-        public const string ExternalSourceIsNotBeingHandled = "LACE External Source is Not Being Handled";
+        public const string DataProviderIsNotBeingHandled = "LACE Data Provider is Not Being Handled";
 
-        public const string TransformingResponseFromExternalSourceHasStarted =
-            "LACE Started Transforming Response from External Source";
+        public const string TransformingResponseFromDataProviderHasStarted =
+            "LACE Started Transforming Response from Data Provider";
 
-        public const string TransformingResponseFromExternalSourceHasFinished =
-            "LACE Finished Transforming Response from External Source";
+        public const string TransformingResponseFromDataProviderHasFinished =
+            "LACE Finished Transforming Response from Data Provider";
 
-        public const string TransformingResponseFromExternalSourceHasFailed =
-            "LACE Failed to Transform Response from External Source";
+        public const string TransformingResponseFromDataProviderHasFailed =
+            "LACE Failed to Transform Response from Data Provider";
 
         public const string LaceReceivedRequestStarted =
             "LACE Request Received and Data Collection has started";

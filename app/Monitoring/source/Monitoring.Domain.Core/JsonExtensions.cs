@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using Monitoring.Domain.Core.Dto;
 using Newtonsoft.Json;
 
 namespace Monitoring.Domain.Core
@@ -13,14 +11,14 @@ namespace Monitoring.Domain.Core
         //    return JsonConvert.DeserializeObject<T>(value);
         //}
 
-        public static T ParseJson<T>(this RecordedEvent data)
-        {
-            if (data == null) throw new ArgumentNullException("data");
+        //public static T ParseJson<T>(this RecordedEvent data)
+        //{
+        //    if (data == null) throw new ArgumentNullException("data");
 
-            var value = Encoding.UTF8.GetString(data.Data);
+        //    var value = Encoding.UTF8.GetString(data.Data);
 
-            return JsonConvert.DeserializeObject<T>(value);
-        }
+        //    return JsonConvert.DeserializeObject<T>(value);
+        //}
 
         public static string AsJsonString(this object value)
         {
@@ -29,29 +27,20 @@ namespace Monitoring.Domain.Core
             return JsonConvert.SerializeObject(value, Formatting.Indented);
         }
 
-        public static EventData AsJsonEvent(this string value, string eventName)
-        {
-            var bytes = Encoding.UTF8.GetBytes(value);
-            return new EventData(Guid.NewGuid(), eventName, true, bytes, null);
+        //public static EventData AsJsonEvent(this string value, string eventName)
+        //{
+        //    var bytes = Encoding.UTF8.GetBytes(value);
+        //    return new EventData(Guid.NewGuid(), eventName, true, bytes, null);
+        //}
 
-            //return new EventData()
-            //{
-            //    Data = bytes,
-            //    EventId = Guid.NewGuid(),
-            //    IsJson = true,
-            //    Metadata = null,
-            //    Type = eventName
-            //};
-        }
+        //public static EventData AsJsonEvent(this object value)
+        //{
+        //    if (value == null) throw new ArgumentNullException("value");
 
-        public static EventData AsJsonEvent(this object value)
-        {
-            if (value == null) throw new ArgumentNullException("value");
+        //    var json = JsonConvert.SerializeObject(value);
+        //    var eventName = value.GetType().Name;
 
-            var json = JsonConvert.SerializeObject(value);
-            var eventName = value.GetType().Name;
-
-            return json.AsJsonEvent(eventName);
-        }
+        //    return json.AsJsonEvent(eventName);
+        //}
     }
 }
