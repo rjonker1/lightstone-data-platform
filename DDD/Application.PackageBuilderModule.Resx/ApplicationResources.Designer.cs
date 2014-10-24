@@ -241,6 +241,15 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Without Repository.
+        /// </summary>
+        public static string exception_WithoutRepository {
+            get {
+                return ResourceManager.GetString("exception_WithoutRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         internal static string IndustryId {
