@@ -118,6 +118,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2.2 PackageBuilderModule"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.PackageBuilderModule", "Services.PackageBuilderModule\Services.PackageBuilderModule.csproj", "{E81C3FDD-0061-48F9-9CEF-08BE950DF8A4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1.0 Serivce Agents", "1.1.0 Serivce Agents", "{B7D175CD-0B98-40E4-9B82-9CB3B9989908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.ServiceAgents.Proxies", "Presentation.ServiceAgents.Proxies\Presentation.ServiceAgents.Proxies.csproj", "{AFDEE212-06D9-410B-A17F-126E20A17F7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -422,6 +426,16 @@ Global
 		{E81C3FDD-0061-48F9-9CEF-08BE950DF8A4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E81C3FDD-0061-48F9-9CEF-08BE950DF8A4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E81C3FDD-0061-48F9-9CEF-08BE950DF8A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -474,6 +488,8 @@ Global
 		{722E78E8-F120-4FA5-AAE7-C5C43976388E} = {C2999C0D-8B2A-4D5F-AE02-5D8539211620}
 		{91D9E96D-A4DA-4DF0-918B-5DB068FD30ED} = {F6DD38F0-CBD1-491C-9706-369C37B18A1F}
 		{E81C3FDD-0061-48F9-9CEF-08BE950DF8A4} = {91D9E96D-A4DA-4DF0-918B-5DB068FD30ED}
+		{B7D175CD-0B98-40E4-9B82-9CB3B9989908} = {6BF135E9-BEB3-4AF5-BC66-340564F96944}
+		{AFDEE212-06D9-410B-A17F-126E20A17F7A} = {B7D175CD-0B98-40E4-9B82-9CB3B9989908}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		GuidanceWorkflows = 23795EC3-3DEA-4F04-9044-4056CF91A2ED:ServiceMatrix Guidance:2.2.0

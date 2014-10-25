@@ -1,0 +1,122 @@
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.DataFieldFindViewModel
+
+@{ 
+	ViewBag.Title = "Find DataField"; 
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Ajax.BeginForm(new AjaxOptions { LoadingElementDuration = 400, LoadingElementId = "busyinfo", UpdateTargetId = "results", OnBegin = "onPetitionBegin", OnComplete = "onPetitionComplete" }))
+{
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>DataField</legend>
+
+		<div id="search">
+			<div class="newline">
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.Id):
+				</div>
+				<div class="field">
+					@Html.EditorFor(model => model.DataField.Id)
+					@Html.ValidationMessageFor(model => model.DataField.Id)
+				</div>
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.CostOfSale):
+				</div>
+				<div class="field">
+					@Html.EditorFor(model => model.DataField.CostOfSale)
+					@Html.ValidationMessageFor(model => model.DataField.CostOfSale)
+				</div>
+			</div>
+			<div class="newline">
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.DataProviderId):
+				</div>
+				<div class="field">
+					@Html.DropDownListFor(model => model.DataField.DataProviderId, Model.DataProviders)
+					@Html.ValidationMessageFor(model => model.DataField.DataProviderId)
+				</div>
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.IndustryId):
+				</div>
+				<div class="field">
+					@Html.DropDownListFor(model => model.DataField.IndustryId, Model.Industrys)
+					@Html.ValidationMessageFor(model => model.DataField.IndustryId)
+				</div>
+			</div>
+			<div class="newline">
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.Name):
+				</div>
+				<div class="field">
+					@Html.EditorFor(model => model.DataField.Name)
+					@Html.ValidationMessageFor(model => model.DataField.Name)
+				</div>
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.Selected):
+				</div>
+				<div class="field">
+					@Html.EditorFor(model => model.DataField.Selected)
+					@Html.ValidationMessageFor(model => model.DataField.Selected)
+				</div>
+			</div>
+			<div class="newline">
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.Label):
+				</div>
+				<div class="field">
+					@Html.EditorFor(model => model.DataField.Label)
+					@Html.ValidationMessageFor(model => model.DataField.Label)
+				</div>
+				<div class="label">
+					@Html.LabelFor(model => model.DataField.TypeDefinition):
+				</div>
+				<div class="field">
+					@Html.EditorFor(model => model.DataField.TypeDefinition)
+					@Html.ValidationMessageFor(model => model.DataField.TypeDefinition)
+				</div>
+			</div>
+			<div class="buttons">
+				<p>
+					<input type="reset" name="reset" value="@PresentationResources.Reset" />
+					<input type="submit" name="find" value="@PresentationResources.Find" />
+				</p>
+			</div>
+		</div>
+		<div id="viewform">[@PresentationResources.ViewForm]</div>
+		<div id="busyinfo">
+			<img src="~/Content/themes/base/images/busyinfo.gif" alt="@PresentationResources.Loading" />
+		</div>
+		@{ Html.RenderPartial("_DataFieldFindPartialView"); }
+	</fieldset>
+}
+
+<div>
+	@Html.ActionLink(PresentationResources.GoBack, "Index", "Home")
+</div>
+
+@section Scripts 
+{
+    <script>
+        $(document).on("click", "#viewform", function () {
+            $("#bcenter").show("slow");
+			$("#search").show("slow");
+            $("#viewform").hide("slow");
+        });
+
+        function onPetitionBegin() {
+            $("#results").hide("slow");
+            $("#bcenter").hide("slow");
+			$("#search").hide("slow");
+            $("#viewform").show("slow");
+        }
+
+        function onPetitionComplete() {
+            $("#results").show("slow");
+        }
+    </script>
+}

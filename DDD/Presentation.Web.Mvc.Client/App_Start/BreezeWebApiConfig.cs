@@ -1,11 +1,11 @@
 using System.Web.Http;
-using LightstoneApp.Presentation.Web.Mvc.Client.App_Start;
+using LightstoneApp.Presentation.Web.Mvc.Client;
 using WebActivator;
 
 [assembly: PreApplicationStartMethod(
     typeof (BreezeWebApiConfig), "RegisterBreezePreStart")]
 
-namespace LightstoneApp.Presentation.Web.Mvc.Client.App_Start
+namespace LightstoneApp.Presentation.Web.Mvc.Client
 {
     /// <summary>
     ///     Inserts the Breeze Web API controller route at the front of all Web API routes

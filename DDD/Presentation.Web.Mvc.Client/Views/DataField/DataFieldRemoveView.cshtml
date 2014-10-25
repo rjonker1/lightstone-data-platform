@@ -1,0 +1,81 @@
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.DataFieldCrudViewModel
+
+@{ 
+	ViewBag.Title = "Remove DataField"; 
+	}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>@Html.Label(PresentationResources.DeleteSure)</h3>
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>DataField</legend>
+
+			@Html.HiddenFor(model => model.DataField.Id)
+
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.CostOfSale):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.CostOfSale)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.DataProviderId):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.DataProviderId)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.IndustryId):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.IndustryId)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.Name):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.Name)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.Selected):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.Selected)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.Label):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.Label)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataField.TypeDefinition):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataField.TypeDefinition)
+			</div>
+		</div>
+		<div class="buttons">
+			<p>
+				<input type="submit" name="remove" value="@PresentationResources.Remove" />
+			</p>
+		</div>		
+	</fieldset>
+}
+
+<div>
+	@Html.ActionLink(PresentationResources.GoBack, "Find")
+</div>

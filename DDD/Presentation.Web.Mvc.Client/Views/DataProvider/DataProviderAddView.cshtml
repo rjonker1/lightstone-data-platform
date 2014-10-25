@@ -1,0 +1,118 @@
+
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.DataProviderCrudViewModel
+
+@{ 
+	ViewBag.Title = "Add DataProvider"; 
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>DataProvider</legend>
+
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.Name):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.Name)
+				@Html.ValidationMessageFor(model => model.DataProvider.Name)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.OverrideFieldLevelCostOfSale):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.OverrideFieldLevelCostOfSale)
+				@Html.ValidationMessageFor(model => model.DataProvider.OverrideFieldLevelCostOfSale)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.Owner):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.Owner)
+				@Html.ValidationMessageFor(model => model.DataProvider.Owner)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.SourceURL):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.SourceURL)
+				@Html.ValidationMessageFor(model => model.DataProvider.SourceURL)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.StateId):
+			</div>
+			<div class="field">
+				@Html.DropDownListFor(model => model.DataProvider.StateId, Model.States)
+				@Html.ValidationMessageFor(model => model.DataProvider.StateId)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.Version):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.Version)
+				@Html.ValidationMessageFor(model => model.DataProvider.Version)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.CostOfSale):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.CostOfSale)
+				@Html.ValidationMessageFor(model => model.DataProvider.CostOfSale)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.Created):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.Created)
+				@Html.ValidationMessageFor(model => model.DataProvider.Created)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.Description):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.Description)
+				@Html.ValidationMessageFor(model => model.DataProvider.Description)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.Edited):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.Edited)
+				@Html.ValidationMessageFor(model => model.DataProvider.Edited)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataProvider.RevisionDate):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataProvider.RevisionDate)
+				@Html.ValidationMessageFor(model => model.DataProvider.RevisionDate)
+			</div>
+		</div>
+		<div class="buttons">
+			<p>
+				<input type="submit" name="add" value="@PresentationResources.Add" />
+			</p>
+		</div>
+	</fieldset>
+}
+
+<div>
+    @Html.ActionLink(PresentationResources.GoBack, "Index", "Home")
+</div>

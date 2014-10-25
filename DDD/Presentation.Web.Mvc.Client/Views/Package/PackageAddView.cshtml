@@ -1,0 +1,125 @@
+
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.PackageCrudViewModel
+
+@{ 
+	ViewBag.Title = "Add Package"; 
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>Package</legend>
+
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Description):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Description)
+				@Html.ValidationMessageFor(model => model.Package.Description)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Name):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Name)
+				@Html.ValidationMessageFor(model => model.Package.Name)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Owner):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Owner)
+				@Html.ValidationMessageFor(model => model.Package.Owner)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.Package.StateId):
+			</div>
+			<div class="field">
+				@Html.DropDownListFor(model => model.Package.StateId, Model.States)
+				@Html.ValidationMessageFor(model => model.Package.StateId)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Version):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Version)
+				@Html.ValidationMessageFor(model => model.Package.Version)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.Package.CostOfSale):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.CostOfSale)
+				@Html.ValidationMessageFor(model => model.Package.CostOfSale)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Created):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Created)
+				@Html.ValidationMessageFor(model => model.Package.Created)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Edited):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Edited)
+				@Html.ValidationMessageFor(model => model.Package.Edited)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.Package.IndustryId):
+			</div>
+			<div class="field">
+				@Html.DropDownListFor(model => model.Package.IndustryId, Model.Industrys)
+				@Html.ValidationMessageFor(model => model.Package.IndustryId)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.Package.Published):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.Published)
+				@Html.ValidationMessageFor(model => model.Package.Published)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.Package.RecomendedRetailPrice):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.RecomendedRetailPrice)
+				@Html.ValidationMessageFor(model => model.Package.RecomendedRetailPrice)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.Package.RevisionDate):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.Package.RevisionDate)
+				@Html.ValidationMessageFor(model => model.Package.RevisionDate)
+			</div>
+		</div>
+		<div class="buttons">
+			<p>
+				<input type="submit" name="add" value="@PresentationResources.Add" />
+			</p>
+		</div>
+	</fieldset>
+}
+
+<div>
+    @Html.ActionLink(PresentationResources.GoBack, "Index", "Home")
+</div>

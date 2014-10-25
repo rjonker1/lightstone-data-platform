@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DataFieldDto.cg.cs">
       <DependentUpon>Dto.Model.tt</DependentUpon>
     </Compile>
@@ -80,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Dto.Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
+      <Generator>--TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Dto.Model.cg.cs</LastGenOutput>
     </None>
   </ItemGroup>

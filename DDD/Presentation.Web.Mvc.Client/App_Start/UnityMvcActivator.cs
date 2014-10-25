@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Web.Mvc;
+using LightstoneApp.Presentation.Web.Mvc.Client.UnityContainer;
 using Microsoft.Practices.Unity.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LightstoneApp.Presentation.Web.Mvc.Client.App_Start.UnityWebActivator), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(LightstoneApp.Presentation.Web.Mvc.Client.App_Start.UnityWebActivator), "Shutdown")]
 
 namespace LightstoneApp.Presentation.Web.Mvc.Client.App_Start
 {
@@ -22,13 +22,6 @@ namespace LightstoneApp.Presentation.Web.Mvc.Client.App_Start
 
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
             // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
-        }
-
-        /// <summary>Disposes the Unity container when the application is shut down.</summary>
-        public static void Shutdown()
-        {
-            var container = UnityConfig.GetConfiguredContainer();
-            container.Dispose();
         }
     }
 }

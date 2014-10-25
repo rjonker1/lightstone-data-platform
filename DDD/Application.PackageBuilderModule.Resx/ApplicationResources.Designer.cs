@@ -36,7 +36,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LightstoneApp.Application.PackageBuilderModule.Resx.ApplicationResources", typeof(ApplicationResources).Assembly);
@@ -51,7 +51,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to CostOfSale.
         /// </summary>
-        internal static string DataFieldCostOfSale {
+        public static string DataFieldCostOfSale {
             get {
                 return ResourceManager.GetString("DataFieldCostOfSale", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to DataProviderId.
         /// </summary>
-        internal static string DataFieldDataProviderId {
+        public static string DataFieldDataProviderId {
             get {
                 return ResourceManager.GetString("DataFieldDataProviderId", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
-        internal static string DataFieldId {
+        public static string DataFieldId {
             get {
                 return ResourceManager.GetString("DataFieldId", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to IndustryId.
         /// </summary>
-        internal static string DataFieldIndustryId {
+        public static string DataFieldIndustryId {
             get {
                 return ResourceManager.GetString("DataFieldIndustryId", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Label.
         /// </summary>
-        internal static string DataFieldLabel {
+        public static string DataFieldLabel {
             get {
                 return ResourceManager.GetString("DataFieldLabel", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string DataFieldName {
+        public static string DataFieldName {
             get {
                 return ResourceManager.GetString("DataFieldName", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Selected.
         /// </summary>
-        internal static string DataFieldSelected {
+        public static string DataFieldSelected {
             get {
                 return ResourceManager.GetString("DataFieldSelected", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to TypeDefinition.
         /// </summary>
-        internal static string DataFieldTypeDefinition {
+        public static string DataFieldTypeDefinition {
             get {
                 return ResourceManager.GetString("DataFieldTypeDefinition", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to CostOfSale.
         /// </summary>
-        internal static string DataProviderCostOfSale {
+        public static string DataProviderCostOfSale {
             get {
                 return ResourceManager.GetString("DataProviderCostOfSale", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Created.
         /// </summary>
-        internal static string DataProviderCreated {
+        public static string DataProviderCreated {
             get {
                 return ResourceManager.GetString("DataProviderCreated", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        internal static string DataProviderDescription {
+        public static string DataProviderDescription {
             get {
                 return ResourceManager.GetString("DataProviderDescription", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Edited.
         /// </summary>
-        internal static string DataProviderEdited {
+        public static string DataProviderEdited {
             get {
                 return ResourceManager.GetString("DataProviderEdited", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
-        internal static string DataProviderId {
+        public static string DataProviderId {
             get {
                 return ResourceManager.GetString("DataProviderId", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string DataProviderName {
+        public static string DataProviderName {
             get {
                 return ResourceManager.GetString("DataProviderName", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to OverrideFieldLevelCostOfSale.
         /// </summary>
-        internal static string DataProviderOverrideFieldLevelCostOfSale {
+        public static string DataProviderOverrideFieldLevelCostOfSale {
             get {
                 return ResourceManager.GetString("DataProviderOverrideFieldLevelCostOfSale", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Owner.
         /// </summary>
-        internal static string DataProviderOwner {
+        public static string DataProviderOwner {
             get {
                 return ResourceManager.GetString("DataProviderOwner", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to RevisionDate.
         /// </summary>
-        internal static string DataProviderRevisionDate {
+        public static string DataProviderRevisionDate {
             get {
                 return ResourceManager.GetString("DataProviderRevisionDate", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to SourceURL.
         /// </summary>
-        internal static string DataProviderSourceURL {
+        public static string DataProviderSourceURL {
             get {
                 return ResourceManager.GetString("DataProviderSourceURL", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to StateId.
         /// </summary>
-        internal static string DataProviderStateId {
+        public static string DataProviderStateId {
             get {
                 return ResourceManager.GetString("DataProviderStateId", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Version.
         /// </summary>
-        internal static string DataProviderVersion {
+        public static string DataProviderVersion {
             get {
                 return ResourceManager.GetString("DataProviderVersion", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
-        internal static string IndustryId {
+        public static string IndustryId {
             get {
                 return ResourceManager.GetString("IndustryId", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
-        internal static string IndustryValue {
+        public static string IndustryValue {
             get {
                 return ResourceManager.GetString("IndustryValue", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to CostOfSale.
         /// </summary>
-        internal static string PackageCostOfSale {
+        public static string PackageCostOfSale {
             get {
                 return ResourceManager.GetString("PackageCostOfSale", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Created.
         /// </summary>
-        internal static string PackageCreated {
+        public static string PackageCreated {
             get {
                 return ResourceManager.GetString("PackageCreated", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to DataFieldId.
         /// </summary>
-        internal static string PackageDataFieldDataFieldId {
+        public static string PackageDataFieldDataFieldId {
             get {
                 return ResourceManager.GetString("PackageDataFieldDataFieldId", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
-        internal static string PackageDataFieldId {
+        public static string PackageDataFieldId {
             get {
                 return ResourceManager.GetString("PackageDataFieldId", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to PackageId.
         /// </summary>
-        internal static string PackageDataFieldPackageId {
+        public static string PackageDataFieldPackageId {
             get {
                 return ResourceManager.GetString("PackageDataFieldPackageId", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Priority.
         /// </summary>
-        internal static string PackageDataFieldPriority {
+        public static string PackageDataFieldPriority {
             get {
                 return ResourceManager.GetString("PackageDataFieldPriority", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Selected.
         /// </summary>
-        internal static string PackageDataFieldSelected {
+        public static string PackageDataFieldSelected {
             get {
                 return ResourceManager.GetString("PackageDataFieldSelected", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to UnifiedName.
         /// </summary>
-        internal static string PackageDataFieldUnifiedName {
+        public static string PackageDataFieldUnifiedName {
             get {
                 return ResourceManager.GetString("PackageDataFieldUnifiedName", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        internal static string PackageDescription {
+        public static string PackageDescription {
             get {
                 return ResourceManager.GetString("PackageDescription", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Edited.
         /// </summary>
-        internal static string PackageEdited {
+        public static string PackageEdited {
             get {
                 return ResourceManager.GetString("PackageEdited", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
-        internal static string PackageId {
+        public static string PackageId {
             get {
                 return ResourceManager.GetString("PackageId", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to IndustryId.
         /// </summary>
-        internal static string PackageIndustryId {
+        public static string PackageIndustryId {
             get {
                 return ResourceManager.GetString("PackageIndustryId", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string PackageName {
+        public static string PackageName {
             get {
                 return ResourceManager.GetString("PackageName", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Owner.
         /// </summary>
-        internal static string PackageOwner {
+        public static string PackageOwner {
             get {
                 return ResourceManager.GetString("PackageOwner", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Published.
         /// </summary>
-        internal static string PackagePublished {
+        public static string PackagePublished {
             get {
                 return ResourceManager.GetString("PackagePublished", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to RecomendedRetailPrice.
         /// </summary>
-        internal static string PackageRecomendedRetailPrice {
+        public static string PackageRecomendedRetailPrice {
             get {
                 return ResourceManager.GetString("PackageRecomendedRetailPrice", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to RevisionDate.
         /// </summary>
-        internal static string PackageRevisionDate {
+        public static string PackageRevisionDate {
             get {
                 return ResourceManager.GetString("PackageRevisionDate", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to StateId.
         /// </summary>
-        internal static string PackageStateId {
+        public static string PackageStateId {
             get {
                 return ResourceManager.GetString("PackageStateId", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Version.
         /// </summary>
-        internal static string PackageVersion {
+        public static string PackageVersion {
             get {
                 return ResourceManager.GetString("PackageVersion", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
-        internal static string StateId {
+        public static string StateId {
             get {
                 return ResourceManager.GetString("StateId", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
-        internal static string StateValue {
+        public static string StateValue {
             get {
                 return ResourceManager.GetString("StateValue", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Length exceeded [{1}].
         /// </summary>
-        internal static string validation_FieldMaxLenght {
+        public static string validation_FieldMaxLenght {
             get {
                 return ResourceManager.GetString("validation_FieldMaxLenght", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Wrong range [{1} - {2}].
         /// </summary>
-        internal static string validation_FieldRange {
+        public static string validation_FieldRange {
             get {
                 return ResourceManager.GetString("validation_FieldRange", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace LightstoneApp.Application.PackageBuilderModule.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Required.
         /// </summary>
-        internal static string validation_FieldRequired {
+        public static string validation_FieldRequired {
             get {
                 return ResourceManager.GetString("validation_FieldRequired", resourceCulture);
             }

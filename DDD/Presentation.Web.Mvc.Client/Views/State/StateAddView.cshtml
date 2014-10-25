@@ -1,0 +1,38 @@
+
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.StateCrudViewModel
+
+@{ 
+	ViewBag.Title = "Add State"; 
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>State</legend>
+
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.State.Value):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.State.Value)
+				@Html.ValidationMessageFor(model => model.State.Value)
+			</div>
+		</div>
+		<div class="buttons">
+			<p>
+				<input type="submit" name="add" value="@PresentationResources.Add" />
+			</p>
+		</div>
+	</fieldset>
+}
+
+<div>
+    @Html.ActionLink(PresentationResources.GoBack, "Index", "Home")
+</div>

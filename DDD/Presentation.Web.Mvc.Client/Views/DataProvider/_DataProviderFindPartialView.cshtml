@@ -1,0 +1,51 @@
+@using LightstoneApp.Application.PackageBuilderModule.Resx
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.DataProviderFindViewModel
+
+		<div id="results">
+		@if (Model != null && Model.Items != null && Model.Items.Any())
+		{
+            var grid = new WebGrid(rowsPerPage: Model.PageSize, ajaxUpdateContainerId: "results");
+            grid.Bind(Model.Items, rowCount: Model.TotalItems, autoSortAndPage: false);
+            grid.PageIndex = Model.PageIndex - 1;
+       
+            @grid.GetHtml(
+                tableStyle: "webgrid", 
+                headerStyle: "webgrid-header", 
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All,
+                numericLinksCount: 12,
+                columns: grid.Columns(
+                    grid.Column("Name", ApplicationResources.DataProviderName),
+                    grid.Column("OverrideFieldLevelCostOfSale", ApplicationResources.DataProviderOverrideFieldLevelCostOfSale),
+                    grid.Column("Owner", ApplicationResources.DataProviderOwner),
+                    grid.Column("SourceURL", ApplicationResources.DataProviderSourceURL),
+                    grid.Column("StateId", ApplicationResources.DataProviderStateId),
+                    grid.Column("Version", ApplicationResources.DataProviderVersion),
+                    grid.Column("CostOfSale", ApplicationResources.DataProviderCostOfSale),
+                    grid.Column("Created", ApplicationResources.DataProviderCreated),
+                    grid.Column("Description", ApplicationResources.DataProviderDescription),
+                    grid.Column("Edited", ApplicationResources.DataProviderEdited),
+                    grid.Column("RevisionDate", ApplicationResources.DataProviderRevisionDate),
+                    grid.Column(
+                        header: PresentationResources.Actions, 
+                        style: "text-align-center",
+                        format: item => new HtmlString(
+                            string.Concat(
+                                Html.ActionLink(PresentationResources.Modify, "Modify", new { id = item.Id }).ToString(),
+                                " | ",
+                                Html.ActionLink(PresentationResources.Remove, "Remove", new { id = item.Id }).ToString()
+								)
+                            )
+                        )
+                    )
+                )
+		}
+		else if (Model != null && Model.Items != null)
+        {
+			@Html.Label(PresentationResources.NoResults);
+        }
+		</div>

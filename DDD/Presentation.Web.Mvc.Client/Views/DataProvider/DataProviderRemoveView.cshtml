@@ -1,0 +1,109 @@
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.DataProviderCrudViewModel
+
+@{ 
+	ViewBag.Title = "Remove DataProvider"; 
+	}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>@Html.Label(PresentationResources.DeleteSure)</h3>
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>DataProvider</legend>
+
+			@Html.HiddenFor(model => model.DataProvider.Id)
+
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.Name):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.Name)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.OverrideFieldLevelCostOfSale):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.OverrideFieldLevelCostOfSale)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.Owner):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.Owner)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.SourceURL):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.SourceURL)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.StateId):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.StateId)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.Version):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.Version)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.CostOfSale):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.CostOfSale)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.Created):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.Created)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.Description):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.Description)
+			</div>
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.Edited):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.Edited)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.DisplayNameFor(model => model.DataProvider.RevisionDate):
+			</div>
+			<div class="field">
+				@Html.DisplayFor(model => model.DataProvider.RevisionDate)
+			</div>
+		</div>
+		<div class="buttons">
+			<p>
+				<input type="submit" name="remove" value="@PresentationResources.Remove" />
+			</p>
+		</div>		
+	</fieldset>
+}
+
+<div>
+	@Html.ActionLink(PresentationResources.GoBack, "Find")
+</div>

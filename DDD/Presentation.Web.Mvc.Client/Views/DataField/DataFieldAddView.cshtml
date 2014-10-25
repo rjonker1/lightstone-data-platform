@@ -1,0 +1,86 @@
+
+@using LightstoneApp.Presentation.Web.Mvc.Client.Resources
+
+@model LightstoneApp.Presentation.Web.Mvc.Client.ViewModels.DataFieldCrudViewModel
+
+@{ 
+	ViewBag.Title = "Add DataField"; 
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+	<fieldset>
+		<legend>DataField</legend>
+
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.CostOfSale):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataField.CostOfSale)
+				@Html.ValidationMessageFor(model => model.DataField.CostOfSale)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.DataProviderId):
+			</div>
+			<div class="field">
+				@Html.DropDownListFor(model => model.DataField.DataProviderId, Model.DataProviders)
+				@Html.ValidationMessageFor(model => model.DataField.DataProviderId)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.IndustryId):
+			</div>
+			<div class="field">
+				@Html.DropDownListFor(model => model.DataField.IndustryId, Model.Industrys)
+				@Html.ValidationMessageFor(model => model.DataField.IndustryId)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.Name):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataField.Name)
+				@Html.ValidationMessageFor(model => model.DataField.Name)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.Selected):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataField.Selected)
+				@Html.ValidationMessageFor(model => model.DataField.Selected)
+			</div>
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.Label):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataField.Label)
+				@Html.ValidationMessageFor(model => model.DataField.Label)
+			</div>
+		</div>
+		<div class="newline">
+			<div class="label">
+				@Html.LabelFor(model => model.DataField.TypeDefinition):
+			</div>
+			<div class="field">
+				@Html.EditorFor(model => model.DataField.TypeDefinition)
+				@Html.ValidationMessageFor(model => model.DataField.TypeDefinition)
+			</div>
+		</div>
+		<div class="buttons">
+			<p>
+				<input type="submit" name="add" value="@PresentationResources.Add" />
+			</p>
+		</div>
+	</fieldset>
+}
+
+<div>
+    @Html.ActionLink(PresentationResources.GoBack, "Index", "Home")
+</div>

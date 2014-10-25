@@ -1,0 +1,5 @@
+//===================================================================================
+// © GABRIELGI - linkedin.com/in/gabrielgonzaleziglesias
+//===================================================================================
+
+Our models are the DTOs and can be extended in view models.

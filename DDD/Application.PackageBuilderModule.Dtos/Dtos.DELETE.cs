@@ -1,6 +1,6 @@
 ﻿namespace LightstoneApp.Application.PackageBuilderModule.Dtos
 {
-    class ModelDtos
+    internal class ModelDtos
     {
     }
 }
