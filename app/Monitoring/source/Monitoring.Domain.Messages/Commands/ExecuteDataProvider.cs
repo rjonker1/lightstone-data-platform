@@ -5,10 +5,10 @@ namespace Monitoring.Domain.Messages.Commands
     [Serializable]
     public class ExecuteDataProvider
     {
-        public readonly Guid Id;
-        public readonly int DataProviderId;
-        public readonly string Message;
-        public readonly DateTime Date;
+        public Guid Id { get; private set; }
+        public int DataProviderId { get; private set; }
+        public string Message { get; private set; }
+        public DateTime Date { get; private set; }
 
         //public Guid Id { get; set; }
         //public int DataProviderId { get; set; }
