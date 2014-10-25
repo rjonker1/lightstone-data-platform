@@ -10,11 +10,6 @@ namespace Monitoring.Domain.Messages.Commands
         public string Message { get; private set; }
         public DateTime Date { get; private set; }
 
-        //public Guid Id { get; set; }
-        //public int DataProviderId { get; set; }
-        //public string Message { get; set; }
-        //public DateTime Date { get; set; }
-
         public ExecuteDataProvider()
         {
             

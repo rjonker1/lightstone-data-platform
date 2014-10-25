@@ -33,16 +33,10 @@ namespace Monitoring.DistributedService.Host{
             
 
             var builder = new ContainerBuilder();
-            //builder.RegisterType<IStartableBus>().AsSelf();
             builder.RegisterModule(new DomainModule());
             var container = builder.Build();
 
-            //container.Resolve<IStartableBus>();
-
             configuration.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(container));
-
-           // Bus.Create(configuration);
-            //configuration.UseContainer<WindsorContainerDefintion>();
 
         }
     }
