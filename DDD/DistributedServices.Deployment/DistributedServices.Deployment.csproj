@@ -32,6 +32,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +54,14 @@
     <DocumentationFile>bin\DistributedServices.Deployment.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -70,11 +80,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="crossdomain.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MainModule.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -89,6 +102,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application.PackageBuilderModule.Dtos\Application.PackageBuilderModule.Dtos.csproj">
+      <Project>{C709A94C-486B-4AE0-BF34-D08D7BED3C0B}</Project>
+      <Name>Application.PackageBuilderModule.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.PackageBuilderModule.Resx\Application.PackageBuilderModule.Resx.csproj">
+      <Project>{55E9D9C4-24A2-44CF-91BC-22C3548A41D1}</Project>
+      <Name>Application.PackageBuilderModule.Resx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.PackageBuilderModule\Application.PackageBuilderModule.csproj">
+      <Project>{781ee6f7-e573-4977-aec8-92d340929f75}</Project>
+      <Name>Application.PackageBuilderModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DistributedServices.Core\DistributedServices.Core.csproj">
       <Project>{19EEA883-F3CA-4781-8EC0-E108C74273E6}</Project>
       <Name>DistributedServices.Core</Name>
@@ -101,6 +126,37 @@
       <Project>{D7E981BB-19E7-4D85-A24B-D4295BAF87CD}</Project>
       <Name>Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain.PackageBuilderModule.Entities\Domain.PackageBuilderModule.Entities.csproj">
+      <Project>{380457ed-05f1-4901-b52c-518ccdf24f51}</Project>
+      <Name>Domain.PackageBuilderModule.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.PackageBuilderModule\Domain.PackageBuilderModule.csproj">
+      <Project>{d43e9cd1-cad1-42b1-8f0f-285932a65837}</Project>
+      <Name>Domain.PackageBuilderModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting.NetFramework\Infrastructure.CrossCutting.NetFramework.csproj">
+      <Project>{95A077DF-1201-40A2-A869-8E1FFE401E26}</Project>
+      <Name>Infrastructure.CrossCutting.NetFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.CrossCutting\Infrastructure.CrossCutting.csproj">
+      <Project>{74f0e6ea-1810-4088-b4c5-3941a739d640}</Project>
+      <Name>Infrastructure.CrossCutting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.Core\Infrastructure.Data.Core.csproj">
+      <Project>{98150d03-b191-476d-b192-b5b755e26e8e}</Project>
+      <Name>Infrastructure.Data.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Data.PackageBuilderModule\Infrastructure.Data.PackageBuilderModule.csproj">
+      <Project>{5b9c1553-f5b0-4ad7-9f01-afc60056ea6c}</Project>
+      <Name>Infrastructure.Data.PackageBuilderModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services.PackageBuilderModule\Services.PackageBuilderModule.csproj">
+      <Project>{e81c3fdd-0061-48f9-9cef-08be950df8a4}</Project>
+      <Name>Services.PackageBuilderModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -118,6 +174,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

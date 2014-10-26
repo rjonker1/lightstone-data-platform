@@ -35,6 +35,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
     <Reference Include="Protractor">
       <HintPath>..\packages\Protractor.0.3.0\lib\net40\Protractor.dll</HintPath>
@@ -57,11 +65,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PackageControllerTests.cs" />
     <Compile Include="SeleniumTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application.PackageBuilderModule.Dtos\Application.PackageBuilderModule.Dtos.csproj">
+      <Project>{C709A94C-486B-4AE0-BF34-D08D7BED3C0B}</Project>
+      <Name>Application.PackageBuilderModule.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.PackageBuilderModule.Resx\Application.PackageBuilderModule.Resx.csproj">
+      <Project>{55E9D9C4-24A2-44CF-91BC-22C3548A41D1}</Project>
+      <Name>Application.PackageBuilderModule.Resx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.PackageBuilderModule\Application.PackageBuilderModule.csproj">
+      <Project>{781EE6F7-E573-4977-AEC8-92D340929F75}</Project>
+      <Name>Application.PackageBuilderModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain.Core.Entities\Domain.Core.Entities.csproj">
       <Project>{5a3a2291-4220-4bdc-94c0-f48ab18ed0bd}</Project>
       <Name>Domain.Core.Entities</Name>
@@ -69,6 +90,14 @@
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
       <Project>{d7e981bb-19e7-4d85-a24b-d4295baf87cd}</Project>
       <Name>Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.PackageBuilderModule.Entities\Domain.PackageBuilderModule.Entities.csproj">
+      <Project>{380457ED-05F1-4901-B52C-518CCDF24F51}</Project>
+      <Name>Domain.PackageBuilderModule.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain.PackageBuilderModule\Domain.PackageBuilderModule.csproj">
+      <Project>{D43E9CD1-CAD1-42B1-8F0F-285932A65837}</Project>
+      <Name>Domain.PackageBuilderModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure.CrossCutting.IoC\Infrastructure.CrossCutting.IoC.csproj">
       <Project>{59814c32-5a3b-4aee-94fa-502ea57cdf70}</Project>
@@ -99,6 +128,9 @@
     <Content Include="chromedriver_win32\chromedriver.exe" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Presentation.Web.Mvc.Client\Web.config">
+      <Link>Web.config</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
