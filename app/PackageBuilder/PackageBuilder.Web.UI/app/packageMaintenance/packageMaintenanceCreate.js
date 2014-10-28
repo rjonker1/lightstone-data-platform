@@ -23,41 +23,6 @@
         //Prevent $modelValue undefined error
         $scope.dataProvsPkg.Package = { 'mock': 'mock' };
 
-        datacontext.getDataProviderSources().then(function(response) {
-
-            console.log(response);
-
-            if (response.status === 200) {
-
-                
-
-                $scope.dataProvsPkg.Package.DataProviders = response.data;
-              
-
-                logSuccess('Data Providers loaded!');
-
-            }
-
-            if (response.status === 404) {
-
-                //Load MOCK data
-                $http({
-                    method: 'GET',
-                    url: '/app/packageMaintenance/DataProviders.json'
-                }).success(function (data, status, headers, config) {
-
-                    $scope.dataProvsPkg = data;
-
-                }).error(function (data, status, headers, config) {
-
-
-                });
-                
-                logError('Error 404. Please check your connection settings');
-            }
-
-        });
-
 
         $scope.createPackage = function(packageData) {
 
@@ -70,38 +35,42 @@
 
         }
 
-
         $scope.dataProvs = {};
         $scope.dataProvs.provs = {};
         $scope.dataProvs.provs.prov = {};
         $scope.sum = 0;
 
+        //Price aggregate
+        $scope.updatePackageAPIModel = function(providers, providerName, fieldName) {
 
-        $scope.updatePackageAPIModel = function(providers, fieldName) {
 
+            for (var provs in providers) { //$scope.dataProvsPkg.Package
 
-            for (var provs in $scope.dataProvsPkg.Package){
+                var provider = providers[provs];
 
-                var provider = $scope.dataProvsPkg.Package[provs];
+                for (var i = 0; i < provider.length; i++) {
 
-                for(var i = 0; i < provider.length; i++) {
+                 
+                   
 
                     for(var p in provider) {
 
 
-                        if(provider.hasOwnProperty(p)) {
+                        if (provider.hasOwnProperty(p) && provider[p].name == providerName) {
 
                             var provFields = provider[p].dataFields; //Fields container for DataProvider
 
+                            console.log(p);
 
-                            for(var field in provFields) {
 
+                            for (var field in provFields) {
 
-                                if(provFields[field].name == fieldName) {
+                               
+                                if (provFields[field].name == fieldName) {
 
                                     if(provFields[field].isSelected == false) {
 
-                                        provFields[field].isSelected = true
+                                        provFields[field].isSelected = true;
                                     } else {
 
                                         provFields[field].isSelected = false;
@@ -109,19 +78,22 @@
                                 }
 
                             }
+
+                            break;
                         }
 
                     } //End for-loop provider
+
+                      
 
                 }
 
             }
         }
 
+        //Price aggregate update
+        $scope.updateDataProvs = function (providerName, fieldName) {
 
-        $scope.updateDataProvs = function(fieldName) {
-
-        
             for (var providers in $scope.dataProvsPkg.Package){
 
                 var provider = $scope.dataProvsPkg.Package[providers];
@@ -130,7 +102,9 @@
 
                     for(var p in provider) {
 
-                        if(provider.hasOwnProperty(p)) {
+                        if (provider.hasOwnProperty(p) && provider[p].name == providerName) {
+
+                            console.log(provider[p].name);
 
                             var provFields = provider[p].dataFields; //Fields container for DataProvider
 
@@ -141,7 +115,7 @@
 
                                     // When we parse an AngularJS expression, we get back a function that
                                     // will evaluate the given expression in the context of a given $scope.
-                                    var dp = $parse('{'+field+':false}');
+                                    //var dp = $parse('{'+field+':false}');
                                     var selectedFields = $scope.dataProvs.provs.prov;
 
                                     $scope.updatePackageAPIModel($scope.dataProvsPkg, fieldName);
@@ -256,11 +230,40 @@
 
         function getDataProviders() {
 
-            //return datacontext.getDataProviders().then(function (data) {
+            return datacontext.getDataProviderSources().then(function (response) {
 
-                //(data.indexOf('Error') > -1) ? (logError(data) ? $scope.test = null : $scope.test = data) : log('Data loaded successfully!');
+                console.log(response);
 
-           // });
+                if (response.status === 200) {
+
+
+
+                    $scope.dataProvsPkg.Package.DataProviders = response.data;
+
+
+                    logSuccess('Data Providers loaded!');
+
+                }
+
+                if (response.status === 404) {
+
+                    //Load MOCK data
+                    $http({
+                        method: 'GET',
+                        url: '/app/packageMaintenance/DataProviders.json'
+                    }).success(function (data, status, headers, config) {
+
+                        $scope.dataProvsPkg = data;
+
+                    }).error(function (data, status, headers, config) {
+
+
+                    });
+
+                    logError('Error 404. Please check your connection settings');
+                }
+
+            });
         }
     }
 })();
