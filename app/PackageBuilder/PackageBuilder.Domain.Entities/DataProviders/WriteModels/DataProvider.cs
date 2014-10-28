@@ -53,7 +53,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         private IEnumerable<IDataField> PopulateDataFields(Type type)
         {
             var fields = type.GetPublicProperties().Select(x => new Tuple<string, Type>(x.Name, x.PropertyType));
-            return fields.Select(field => new DataField(field.Item1, field.Item2));
+            return fields.Select(field => new DataField(field.Item1, field.Item2)).ToList();
         }
 
         private void Apply(DataProviderCreated @event)
