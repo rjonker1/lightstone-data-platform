@@ -1,7 +1,5 @@
 ﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
 
-    {{dataPromise}}
-
     <!--<div ng-model="dataPromise.response">
             <div ng-repeat="data in dataPromise.response">
                 <li>{{data}}</li>
@@ -20,11 +18,13 @@
 
                         <div class="row" id="info" ng-model="dataProvider">
 
-                            <button type="button" class="btn btn-success" ng-click="createProvider(dataProvider)">Publish</button>
-
                             <br />
-
-                            {{dataProvider}}
+                            
+                            <div style="float: right;">
+                                <button type="button" class="btn btn-danger">Cancel</button>
+                                <button type="button" class="btn btn-primary">Save Draft</button>
+                                <button type="button" class="btn btn-success" ng-click="createProvider(dataProvider)">Publish</button>
+                            </div>
 
                             <div id="1" class="col-md-3">
                                 <div>

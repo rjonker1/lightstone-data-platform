@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Models.Ivid.Dto;
+using Lace.Domain.Core.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -43,10 +44,11 @@ namespace PackageBuilder.Api.Modules
 
                     try
                     {
+                     
                         dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version).DataFields
-                            .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
+                           .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         dSource.DataFields = null;
                     }
