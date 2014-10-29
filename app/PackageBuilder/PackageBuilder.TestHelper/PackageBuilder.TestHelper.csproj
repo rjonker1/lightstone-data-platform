@@ -56,7 +56,7 @@
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\Shared\Shared\bin\Release\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Public">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
@@ -92,6 +92,7 @@
     <Compile Include="Builders\Entites\ContractPackageBuilder.cs" />
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
+    <Compile Include="Builders\Entites\DataSetBuilder.cs" />
     <Compile Include="Builders\Entites\DataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Mothers\ActionRepositoryMother.cs" />
     <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
+    <Compile Include="Mothers\DataSetMother.cs" />
     <Compile Include="Mothers\DataProviderMother.cs" />
     <Compile Include="Mothers\IndustryMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />

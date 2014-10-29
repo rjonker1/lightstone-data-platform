@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using PackageBuilder.Domain.Entities;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites

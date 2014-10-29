@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.Api.Helpers.AutoMappers

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.Domain

@@ -1,5 +1,5 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper.Builders.Entites;
 

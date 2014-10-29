@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageBuilder.Domain.Entities</RootNamespace>
-    <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Domain.Entities</AssemblyName>
+    <AssemblyName>PackageBuilder.Domain.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Common.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -44,30 +41,11 @@
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\Shared\Shared\bin\Release\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.135\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy.Authentication.Stateless">
-      <HintPath>..\..\packages\Nancy.Authentication.Stateless.0.22.2\lib\net40\Nancy.Authentication.Stateless.dll</HintPath>
-    </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -98,42 +76,26 @@
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
     <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
+    <Compile Include="DataSet.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupPackage.cs" />
     <Compile Include="GroupPermission.cs" />
-    <Compile Include="IAction.cs" />
     <Compile Include="IActionRepository.cs" />
-    <Compile Include="IContract.cs" />
     <Compile Include="IContractPackage.cs" />
     <Compile Include="IContractPackageRepository.cs" />
     <Compile Include="IContractRepository.cs" />
-    <Compile Include="ICriteria.cs" />
-    <Compile Include="ICustomer.cs" />
-    <Compile Include="ICustomerContract.cs" />
     <Compile Include="ICustomerRepository.cs" />
-    <Compile Include="ICustomerUser.cs" />
-    <Compile Include="IDataField.cs" />
-    <Compile Include="IDataProvider.cs" />
-    <Compile Include="IGroup.cs" />
     <Compile Include="IGroupPackage.cs" />
     <Compile Include="IGroupPackageRepository.cs" />
-    <Compile Include="IGroupPermission.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
     <Compile Include="Industries\WriteModels\Industry.cs" />
-    <Compile Include="IPackage.cs" />
     <Compile Include="IPackageAccessControl.cs" />
     <Compile Include="IPackageLookupRepository.cs" />
-    <Compile Include="IRole.cs" />
     <Compile Include="IRolePackage.cs" />
     <Compile Include="IRolePackageRepository.cs" />
-    <Compile Include="IRolePermission.cs" />
-    <Compile Include="IUser.cs" />
-    <Compile Include="IUserGroup.cs" />
     <Compile Include="IUserPackage.cs" />
     <Compile Include="IUserPackageRepository.cs" />
-    <Compile Include="IUserRole.cs" />
-    <Compile Include="IWorkflow.cs" />
     <Compile Include="Packages\Events\PackageCreated.cs" />
     <Compile Include="Packages\Events\PackageUpdated.cs" />
     <Compile Include="Packages\ReadModels\Package.cs" />

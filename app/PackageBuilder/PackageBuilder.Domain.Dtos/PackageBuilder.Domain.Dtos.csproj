@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageBuilder.Domain.Dtos</RootNamespace>
-    <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Domain.Dtos</AssemblyName>
+    <AssemblyName>PackageBuilder.Domain.Dtos</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

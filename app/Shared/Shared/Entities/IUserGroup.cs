@@ -1,6 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
-
-namespace PackageBuilder.Domain.Entities
+﻿namespace DataPlatform.Shared.Entities
 {
     public interface IUserGroup : IEntity
     {

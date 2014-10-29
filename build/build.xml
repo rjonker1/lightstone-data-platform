@@ -373,28 +373,5 @@
         <dependency id="Moq" version="4.0.10827" />
       </dependencies>
     </nuget>
-
-    <nuget deploy="false">
-      <name>Lightstone.Dataplatform.PackageBuilder.Domain.Entities</name>
-      <folder>app/PackageBuilder/PackageBuilder.Domain.Entities</folder>
-      <author>CustomApp</author>
-      <description>PackageBuilder.Domain.Entities</description>
-      <includes>
-        <include pattern="Lightstone.DataPlatform.*.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.*.pdb" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="FluentNHibernate" version="1.4.0.0" />
-        <dependency id="Iesi.Collections" version="3.2.0.4000" />
-        <dependency id="Lightstone.DataPlatform.Shared" version="1.0.0.151" />
-        <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks.Api" version="1.0.0.135" />
-        <dependency id="Nancy" version="0.23.0" />
-        <dependency id="Nancy.Authentication.Stateless" version="0.22.2" />
-        <dependency id="NEventStore" version="5.0.1.2" />
-        <dependency id="Newtonsoft.Json" version="6.0.3" />
-        <dependency id="NHibernate" version="3.3.1.4000" />
-        <dependency id="RestSharp" version="104.4.0" />
-      </dependencies>
-    </nuget>
 	</nugets>
 </build>
