@@ -415,45 +415,6 @@
         <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimListExtensions.Behavior">
             <summary>Assigns the behavior for all methods of the shimmed type</summary>
         </member>
-        <member name="T:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions">
-            <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.Extensions.ObjectStateManagerExtensions</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.#ctor">
-            <summary>Initializes a new shim instance</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.BehaveAsCurrent">
-            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
-        </member>
-        <member name="M:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.BehaveAsNotImplemented">
-            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.Behavior">
-            <summary>Assigns the behavior for all methods of the shimmed type</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpAsHtmlObjectStateManager">
-            <summary>Sets the shim of ObjectStateManagerExtensions.DumpAsHtml(ObjectStateManager manager)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpAsHtmlObjectStateManagerEntityKey">
-            <summary>Sets the shim of ObjectStateManagerExtensions.DumpAsHtml(ObjectStateManager manager, EntityKey entityKey)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManager">
-            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManagerEntityKey">
-            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager, EntityKey entityKey)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManagerIEnumerableOfObjectStateEntry">
-            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager, IEnumerable`1&lt;ObjectStateEntry&gt; objectStateEntries)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.DumpObjectStateManagerIEnumerableOfObjectStateEntryEntityKeyBoolean">
-            <summary>Sets the shim of ObjectStateManagerExtensions.Dump(ObjectStateManager manager, IEnumerable`1&lt;ObjectStateEntry&gt; objectStateEntries, EntityKey entityKey, Boolean asHtml)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.ObjectStateEntryToStringObjectStateEntry">
-            <summary>Sets the shim of ObjectStateManagerExtensions.ObjectStateEntryToString(ObjectStateEntry entry)</summary>
-        </member>
-        <member name="P:LightstoneApp.Infrastructure.Data.Core.Extensions.Fakes.ShimObjectStateManagerExtensions.ObjectToStringObject">
-            <summary>Sets the shim of ObjectStateManagerExtensions.ObjectToString(Object obj)</summary>
-        </member>
         <member name="T:LightstoneApp.Infrastructure.Data.Core.Fakes.ShimExtendedRepository`1">
             <summary>Shim type of LightstoneApp.Infrastructure.Data.Core.ExtendedRepository`1</summary>
         </member>
