@@ -20,31 +20,6 @@
         $scope.test = '';
         $scope.dProvidersData = '';
 
-        $scope.myData = [
-         {
-             "Id": "1",
-             "Name": "Cox",
-             "lastName": "Carney",
-             "company": "Enormo",
-             "employed": true
-         },
-         {
-             "Id": "2",
-             "Name": "Lorraine",
-             "lastName": "Wise",
-             "company": "Comveyer",
-             "employed": false
-         },
-         {
-             "Id": "3",
-             "Name": "Nancy",
-             "lastName": "Waters",
-             "company": "Fuelton",
-             "employed": false
-         }
-        ];
-
-
         $scope.notify = function (row) {
 
             $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
@@ -63,8 +38,8 @@
                 { field: 'name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
-                { field: 'created', displayName: 'Created' },
-                { field: 'edited', displayName: 'Edited' },
+                { field: 'createdDate', displayName: 'Created Date' },
+                { field: 'editedDate', displayName: 'Edited Date' },
                 { field: 'version', displayName: 'Version' },
                 { displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
             ]

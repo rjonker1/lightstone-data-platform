@@ -42,7 +42,7 @@
             //Functionality to post to API
             //
 
-            return datacontext.editDataProvider($routeParams.id, $scope.dataProvider).then(function(response) {
+            return datacontext.editDataProvider($routeParams.id, providerData).then(function (response) {
 
                 console.log(response);
                  (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
@@ -70,7 +70,7 @@
                 //log(data);
 
                 //var result = data.response;
-                //console.log(data.response);
+                //console.log(data);
 
                 $scope.dataProvider = data;
                
