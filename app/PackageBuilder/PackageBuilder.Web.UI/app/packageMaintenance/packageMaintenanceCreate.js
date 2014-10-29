@@ -35,189 +35,37 @@
 
         }
 
-        $scope.dataProvs = {};
-        $scope.dataProvs.provs = {};
-        $scope.dataProvs.provs.prov = {};
-        $scope.sum = 0;
+        $scope.total = function () {
 
-        //Price aggregate
-        $scope.updatePackageAPIModel = function(providers, providerName, fieldName) {
+            var items = $scope.dataProvsPkg.Package.DataProviders;
+            alert(items);
+            var value_total = 0;
 
+            if (items != undefined) {
 
-            for (var provs in providers) { //$scope.dataProvsPkg.Package
+                for (var i = 0; i < items.length; i++) { // loop over it
 
-                var provider = providers[provs];
+                    var listItem = items[i]; // an object  
 
-                for (var i = 0; i < provider.length; i++) {
+                    for (var x = 0; x < (listItem.dataFields).length; x++) {
 
-                 
-                   
+                        if (listItem.dataFields[x].isSelected === true) {
 
-                    for(var p in provider) {
-
-
-                        if (provider.hasOwnProperty(p) && provider[p].name == providerName) {
-
-                            var provFields = provider[p].dataFields; //Fields container for DataProvider
-
-                            console.log(p);
-
-
-                            for (var field in provFields) {
-
-                               
-                                if (provFields[field].name == fieldName) {
-
-                                    if(provFields[field].isSelected == false) {
-
-                                        provFields[field].isSelected = true;
-                                    } else {
-
-                                        provFields[field].isSelected = false;
-                                    }
-                                }
-
-                            }
-
-                            break;
+                            //alert(listItem.name);
+                            value_total += listItem.dataFields[x].price;
                         }
-
-                    } //End for-loop provider
-
-                      
-
-                }
-
-            }
-        }
-
-        //Price aggregate update
-        $scope.updateDataProvs = function (providerName, fieldName) {
-
-            for (var providers in $scope.dataProvsPkg.Package){
-
-                var provider = $scope.dataProvsPkg.Package[providers];
-
-                for(var i = 0; i < provider.length; i++) {
-
-                    for(var p in provider) {
-
-                        if (provider.hasOwnProperty(p) && provider[p].name == providerName) {
-
-                            console.log(provider[p].name);
-
-                            var provFields = provider[p].dataFields; //Fields container for DataProvider
-
-                            for(var field in provFields) {
-
-                 
-                                if(provFields[field].isSelected == true && provFields[field].name == fieldName) {
-
-                                    // When we parse an AngularJS expression, we get back a function that
-                                    // will evaluate the given expression in the context of a given $scope.
-                                    //var dp = $parse('{'+field+':false}');
-                                    var selectedFields = $scope.dataProvs.provs.prov;
-
-                                    $scope.updatePackageAPIModel($scope.dataProvsPkg, fieldName);
-
-
-                                    angular.forEach(selectedFields, function(value, key) {
-
-                                        (key == fieldName) ? value = false : value = true;
-
-                                        $scope.dataProvs.provs.prov[""+key] = value;
-                    
-                                    });
-
-                                }
-
-                            }
-                    
-                        }
-
-                    } //End for-loop provider
-
-                }
-
-            }
-        }
-
-
-       
-        $scope.findProvFieldByName = function (providers, fieldName) {
-
-
-            for (var provs in $scope.dataProvsPkg.Package){
-
-                var provider = $scope.dataProvsPkg.Package[provs];
-
-                for(var i = 0; i < provider.length; i++) {
-
-                    for(var p in provider) {
-
-                        if(provider.hasOwnProperty(p)) {
-
-                            var provFields = provider[p].dataFields; //Fields container for DataProvider
-
-                            //$scope.test = provFields;
-
-                            for(var field in provFields) {
-
-                                if(provFields[field].name == fieldName)
-                                    return provFields[field];
-
-                            }
-                        }
-
-                    } //End for-loop provider
-
-                }
-
-            }
-
-            return null;
-        }
-
-
-        
-        $scope.$watch('dataProvs', function (newValue, oldValue) {
-
-
-            var provider = newValue.provs.prov;
-            var sum = 0;
-            for ( var prov in provider ){
-
-                var dataProvList = $scope.dataProvsPkg;
-           
-                if ( provider[prov] ){
-               
-                    var provPrice = $scope.findProvFieldByName(dataProvList, prov);
-                    if ( provPrice !== null ){
-
-                        sum += parseFloat(provPrice.price, 10,2);
                     }
+
                 }
             }
-            $scope.sum = sum;
 
-        }, true);
-
-        $scope.toggle = function(scope) {
-            scope.toggle();
+            return value_total;
         };
 
-        $scope.moveLastToTheBegginig = function () {
-            var a = $scope.data.pop();
-            $scope.data.splice(0,0, a);
-        };
 
-        $scope.collapseAll = function() {
-            $scope.$broadcast('collapseAll');
-        };
-
-        $scope.expandAll = function() {
-            $scope.$broadcast('expandAll');
-        }
+        //$scope.toggle = function(scope) {
+        //    scope.toggle();
+        //};
 
 
         activate();

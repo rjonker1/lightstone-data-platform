@@ -9,14 +9,15 @@
     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
         <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields">
 
-            <input class="col-md-1" ng-model="dataProvs.provs.prov[dataField.name]" ng-change="updatePackageAPIModel(dataProvsPkg, provider.name, dataField.name)" value="{{dataField.id}}" type="checkbox">
+            <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
             <div class="col-md-6">{{dataField.name}}</div>
-            <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 10% !important;" type="textbox" ng-model="dataField.price" ng-change="updateDataProvs(provider.name, dataField.name)" />
+            <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
 
         </li>
     </ol>
 
 </script>
+
 
 
 <section class="mainbar" data-ng-controller="packageMaintenanceCreate">
@@ -110,7 +111,7 @@
                                     </div>
                                     <label>Recommended Sale Price:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="sum">
+                                        <input type="textbox" class="form-control" value="{{total()}}" />
                                     </div>
                                 </div>
 
