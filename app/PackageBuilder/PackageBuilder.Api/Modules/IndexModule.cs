@@ -1,5 +1,9 @@
-﻿using Common.Logging;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common.Logging;
 using Nancy;
+using Shared.BuildingBlocks.Api;
+using PackageBuilder.Domain.Entities;
 
 namespace PackageBuilder.Api.Modules
 {
