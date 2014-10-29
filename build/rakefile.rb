@@ -403,7 +403,7 @@ namespace :convention do
 	end
 
 	task :solutions do
-		Dir.glob('../app/*.sln').each do |solution_file|
+		Dir.glob('../**/*.sln').each do |solution_file|
 			if solution_file.index("libs") == nil
 				@solutions << solution_file
 			else
