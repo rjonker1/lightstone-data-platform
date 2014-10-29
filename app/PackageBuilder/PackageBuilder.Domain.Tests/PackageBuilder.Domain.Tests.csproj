@@ -96,6 +96,8 @@
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_creating_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
+    <Compile Include="CommandHandlers\States\when_renaming_an_state.cs" />
+    <Compile Include="CommandHandlers\States\when_renaming_a_state_that_does_not_exist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

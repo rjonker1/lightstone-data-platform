@@ -14,6 +14,7 @@
         'apiProviderServices',
         
         'industryResources',
+        'stateResources',
 
         // 3rd Party Modules
         //'breeze.angular',    // configures breeze for an angular app

@@ -101,6 +101,7 @@
     <Compile Include="Builders\Entites\PackageBuilder.cs" />
     <Compile Include="Builders\Entites\RoleBuilder.cs" />
     <Compile Include="Builders\Entites\RolePackageBuilder.cs" />
+    <Compile Include="Builders\Entites\StateBuilder.cs" />
     <Compile Include="Builders\Entites\UserBuilder.cs" />
     <Compile Include="Builders\Entites\UserPackageBuilder.cs" />
     <Compile Include="Builders\Repositories\TestRepositoryBuilder.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Mothers\IndustryMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
+    <Compile Include="Mothers\StateMother.cs" />
     <Compile Include="Mothers\UserMother.cs" />
   </ItemGroup>
   <ItemGroup>

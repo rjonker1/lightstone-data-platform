@@ -112,6 +112,11 @@
     <Content Include="app\favicon.ico" />
     <Content Include="app\images\yeoman.png" />
     <Content Include="app\index_old.html" />
+    <Content Include="app\repositories\stateRepository.js" />
+    <Content Include="app\resources\stateResources.js" />
+    <Content Include="app\states\headerTemplate.html" />
+    <Content Include="app\states\states.html" />
+    <Content Include="app\states\states.js" />
     <Content Include="app\industries\headerTemplate.html" />
     <Content Include="app\industries\industries.html" />
     <Content Include="app\industries\industries.js" />

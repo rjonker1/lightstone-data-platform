@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="DataProviders\ReadModels\when_persisting_a_data_provider.cs" />
     <Compile Include="Industries\WriteModels\when_persisting_a_industry.cs" />
+    <Compile Include="States\WriteModels\when_persisting_a_state.cs" />
     <Compile Include="when_persisting_entities.cs" />
     <Compile Include="Packages\ReadModels\when_persisting_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

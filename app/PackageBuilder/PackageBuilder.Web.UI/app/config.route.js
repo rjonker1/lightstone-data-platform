@@ -29,7 +29,7 @@
                         content: '<i class="fa fa-dashboard"></i> Dashboard'
                     }
                 }
-            },{
+            }, {
                 url: '/packages',
                 config: {
                     title: 'packages',
@@ -39,7 +39,6 @@
                         content: '<i class="fa fa-institution"></i> Packages'
                     }
                 }
-
             }, {
                 url: '/package-maintenance',
                 config: {
@@ -50,7 +49,6 @@
                         content: '<i class="fa fa-gear"></i> Package Maintenance'
                     }
                 }
-
             }, {
                 url: '/data-providers',
                 config: {
@@ -74,7 +72,17 @@
                     templateUrl: 'app/industries/industries.html',
                     settings: {
                         nav: 6,
-                        content: '<i class="fa fa-calendar"></i> Industries'
+                        content: '<i class="fa fa-bank"></i> Industries'
+                    }
+                }
+            }, {
+                url: '/states',
+                config: {
+                    title: 'states',
+                    templateUrl: 'app/states/states.html',
+                    settings: {
+                        nav: 6,
+                        content: '<i class="fa fa-edit"></i> States'
                     }
                 }
             }

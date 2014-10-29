@@ -191,6 +191,7 @@
     <Compile Include="ModelBinders\DynamicModelBinder.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\StateModule.cs" />
     <Compile Include="Modules\IndustryModule.cs" />
     <Compile Include="Modules\PackageModule.cs" />
   </ItemGroup>

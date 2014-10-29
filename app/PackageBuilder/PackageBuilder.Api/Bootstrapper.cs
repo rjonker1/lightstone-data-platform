@@ -20,7 +20,7 @@ namespace PackageBuilder.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            IndexInstaller.Install(container);
+            //IndexInstaller.Install(container);
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

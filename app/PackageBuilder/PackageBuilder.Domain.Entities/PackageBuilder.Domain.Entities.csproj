@@ -121,6 +121,9 @@
     <Compile Include="Role.cs" />
     <Compile Include="RolePackage.cs" />
     <Compile Include="RolePermission.cs" />
+    <Compile Include="States\Commands\CreateState.cs" />
+    <Compile Include="States\Commands\RenameState.cs" />
+    <Compile Include="States\WriteModels\State.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserGroup.cs" />
     <Compile Include="UserPackage.cs" />
