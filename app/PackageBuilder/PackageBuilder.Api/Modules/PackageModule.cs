@@ -5,6 +5,7 @@ using DataPlatform.Shared.Entities;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
+using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Packages.Commands;
@@ -14,11 +15,12 @@ namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
-        public PackageModule(IBus bus, IRepository<Package> repository)
+        public PackageModule(IBus bus, IRepository<Package> readRepo,
+                                        INEventStoreRepository<PackageBuilder.Domain.Entities.Packages.WriteModels.Package> writeRepo)
         {
             Get["/Packages"] = parameters =>
             {
-                return Response.AsJson(repository);
+                return Response.AsJson(readRepo);
             };
 
             Get["/Package/Add"] = parameters =>
@@ -27,6 +29,12 @@ namespace PackageBuilder.Api.Modules
                 bus.Publish(new CreatePackage(Guid.NewGuid(), "Name", "Description", 10d, 20d, "Draft", "Owner", dateTime, dateTime, null));
 
                 return Response.AsJson(new { msg = "Success" });
+            };
+
+            Get["/Package/Get/{id}/{version}"] = parameters =>
+            {
+                var dataProviders = writeRepo.GetById(parameters.id, parameters.version);
+                return Response.AsJson(new { Response = dataProviders });
             };
 
             Post["/Package/Add"] = parameters =>

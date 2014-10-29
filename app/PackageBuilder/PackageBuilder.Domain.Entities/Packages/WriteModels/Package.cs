@@ -18,9 +18,15 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         public DateTime EditedDate { get; private set; }
         public IEnumerable<IDataProvider> DataProviders { get; private set; }
 
+        private Package(Guid id)
+        {
+            Id = id;
+        }
+
         protected Package() { }
 
         public Package(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+            : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state,  owner, createdDate, editedDate, dataProviders));
         }
