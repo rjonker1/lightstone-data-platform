@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
+using Lace.Models.Ivid.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;

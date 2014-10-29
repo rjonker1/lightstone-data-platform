@@ -2,7 +2,7 @@
 
 namespace DataPlatform.Shared.Entities
 {
-    public interface ICustomer : INamedEntity
+    public interface ICustomer : INamedEntity, IEntity
     {
         IEnumerable<ICustomerUser> CustomerUsers { get; }
         IEnumerable<IUser> Users { get; }
