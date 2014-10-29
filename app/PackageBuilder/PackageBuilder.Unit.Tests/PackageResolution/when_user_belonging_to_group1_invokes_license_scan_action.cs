@@ -1,6 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Entities;
-using PackageBuilder.TestHelper.Mothers;
+﻿using PackageBuilder.Domain.Entities;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.PackageResolution

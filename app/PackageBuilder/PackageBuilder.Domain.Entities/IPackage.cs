@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
 
-namespace DataPlatform.Shared.Entities
+namespace PackageBuilder.Domain.Entities
 {
     public interface IPackage : INamedEntity
     {

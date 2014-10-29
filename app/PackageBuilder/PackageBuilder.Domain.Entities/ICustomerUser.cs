@@ -1,4 +1,7 @@
-﻿namespace DataPlatform.Shared.Entities
+﻿
+using DataPlatform.Shared.Entities;
+
+namespace PackageBuilder.Domain.Entities
 {
     public interface ICustomerUser : IEntity
     {

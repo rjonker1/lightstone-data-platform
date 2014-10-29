@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
 
-namespace DataPlatform.Shared.Entities
+namespace PackageBuilder.Domain.Entities
 {
-    public interface ICustomer : INamedEntity
+    public interface ICustomer : INamedEntity, IEntity
     {
         IEnumerable<ICustomerUser> CustomerUsers { get; }
         IEnumerable<IUser> Users { get; }

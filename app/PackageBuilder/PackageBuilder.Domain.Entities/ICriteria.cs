@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataPlatform.Shared.Entities
+namespace PackageBuilder.Domain.Entities
 {
     public interface ICriteria
     {

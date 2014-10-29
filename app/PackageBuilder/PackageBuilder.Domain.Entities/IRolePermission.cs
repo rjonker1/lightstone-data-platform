@@ -1,4 +1,6 @@
-﻿namespace DataPlatform.Shared.Entities
+﻿using DataPlatform.Shared.Entities;
+
+namespace PackageBuilder.Domain.Entities
 {
     public interface IRolePermission : IEntity, IExpirable
     {
