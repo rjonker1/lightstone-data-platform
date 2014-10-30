@@ -11,6 +11,7 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
@@ -75,9 +76,9 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
-                var dataSources = new ArrayList();
+                var dpList = new ArrayList();
 
-                DataProvider dataProvider = new DataProvider();
+                DataProvider dataProvider;
 
                 try
                 {
@@ -88,9 +89,9 @@ namespace PackageBuilder.Api.Modules
                     dataProvider = null;
                 }
 
-                dataSources.Add(dataProvider);
+                dpList.Add(dataProvider);
 
-                return Response.AsJson(new {Response = dataSources});
+                return Response.AsJson(new { Response = dpList });
             };
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>

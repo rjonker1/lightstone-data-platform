@@ -45,8 +45,7 @@
 
         $scope.notify = function (row) {
 
-            //$location.path('/data-source-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
-            $location.path('/');
+            $location.path('/package-maintenance-edit/' + row.entity.packageId + '/' + row.entity.version);
         }
 
         $scope.selectedDatasource = [];
