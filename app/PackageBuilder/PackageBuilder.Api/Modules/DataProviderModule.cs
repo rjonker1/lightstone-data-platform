@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Domain.Core.Dto;
+using Lace.Models.Ivid.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -39,12 +39,12 @@ namespace PackageBuilder.Api.Modules
                     dSource.Owner = provider.Owner;
                     dSource.Created = provider.CreatedDate;
                     dSource.Edited = provider.EditedDate;
-                    dSource.Version = provider.Version;
+                    dSource.Version = provider.Version.Value;
 
                     try
                     {
                      
-                        dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version).DataFields
+                        dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version.Value).DataFields
                            .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
                     }
                     catch (Exception ex)
@@ -64,13 +64,6 @@ namespace PackageBuilder.Api.Modules
                 bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), "draft", "Al", DateTime.Now));
 
                 return Response.AsJson(new { msg = "Success, "+providerId+" created" });
-            };
-
-            Get["/DataProvider/Edit/{id}/{version}"] = parameters =>
-            {
-                bus.Publish(new RenameDataProvider(new Guid(parameters.id), "Test1"));
-
-                return Response.AsJson(new {msg = "Success"});
             };
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
