@@ -124,6 +124,7 @@
     <Content Include="app\packageMaintenance\packageMaintenanceEdit.html" />
     <Content Include="app\packageMaintenance\packageMaintenanceCreate.html" />
     <Content Include="app\packageMaintenance\packageMaintenanceCreate.js" />
+    <Content Include="app\packageMaintenance\packageMaintenanceEdit.js" />
     <Content Include="app\packages\packages.html" />
     <Content Include="app\packages\packages.js" />
     <Content Include="app\repositories\industryRepository.js" />

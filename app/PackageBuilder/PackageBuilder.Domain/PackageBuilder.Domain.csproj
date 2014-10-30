@@ -110,6 +110,10 @@
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
+      <Project>{3ed18243-3a71-4e3f-adfb-fc6777af5225}</Project>
+      <Name>PackageBuilder.Domain.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>

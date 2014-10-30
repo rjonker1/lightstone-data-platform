@@ -9,9 +9,9 @@
     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
         <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields">
 
-            <input class="col-md-1" ng-model="dataProvs.provs.prov[dataField.name]" ng-change="updatePackageAPIModel(dataProvsPkg, dataField.name)" value="{{dataField.id}}" type="checkbox">
+            <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
             <div class="col-md-6">{{dataField.name}}</div>
-            <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 10% !important;" type="textbox" ng-model="dataField.price" ng-change="updateDataProvs(dataField.name)" />
+            <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
 
         </li>
     </ol>
@@ -19,7 +19,9 @@
 </script>
 
 
-<section class="mainbar" data-ng-controller="packageMaintenance">
+<section class="mainbar" data-ng-controller="packageMaintenanceEdit">
+    
+    {{dataProvsPkg.Package[0].dataProviders}}
 
     <section class="matter">
         <div class="container">
@@ -34,12 +36,12 @@
                                 <div>
                                     <label>Name:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name" />
+                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package[0].name" />
                                     </div>
 
                                     <label>Version:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.version" readonly />
+                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package[0].version" readonly />
                                     </div>
                                 </div>
                                 <div>
@@ -47,7 +49,7 @@
                                         <label>Description</label>
                                     </div>
                                     <div>
-                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package.description"></textarea>
+                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package[0].description"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -78,19 +80,9 @@
                                     <label>Revision Date: </label>
                                     <div>
 
-                                        <input type="textbox" class="form-control" value="{{now}}"/>
+                                        <input type="textbox" class="form-control" value="{{now}}" />
 
                                     </div>
-
-                                    <!--<div class="input-group">
-
-                                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvsPkg.Package.edited" is-open="opened"
-                                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-
-                                        <span style="width: 20%;" class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </div>-->
 
                                 </div>
 
@@ -110,7 +102,7 @@
                                     </div>
                                     <label>Recommended Sale Price:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="sum">
+                                        <input type="textbox" class="form-control" value="{{total()}}" />
                                     </div>
                                 </div>
 
@@ -127,9 +119,11 @@
 
                                     <div ui-tree id="asdt" ng-model="dataProvsPkg">
                                         <div ng-repeat="providers in dataProvsPkg.Package">
-                                            <ol ui-tree-nodes="" ng-model="providers">
-                                                <li ng-repeat="provider in providers" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
-                                            </ol>
+                                            <div ng-repeat="provs in providers">
+                                                <ol ui-tree-nodes="" ng-model="provs">
+                                                    <li ng-repeat="provider in provs" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                                                </ol>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -146,12 +140,12 @@
                                 </div>
 
                                 <!-- <div class="col-lg-6">
-                                    <h3>Data binding</h3>
-                                    <div class="info">
-                                        {{ info }}
-                                    </div>
-                                    <pre class="code">{{ dataProvsPkg | json }}</pre>
-                                </div>-->
+                                         <h3>Data binding</h3>
+                                         <div class="info">
+                                             {{ info }}
+                                         </div>
+                                         <pre class="code">{{ dataProvsPkg | json }}</pre>
+                                     </div>-->
 
                                 <div class="col-lg-6">
                                     <div style="float: right;">

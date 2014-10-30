@@ -1,17 +1,26 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Entities;
 
 namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
 {
+    [DataContract]
     public class DataField : IDataField
     {
-        public string Name { get; private set; }
-        public string Label { get; set; }
-        public string Definition { get; set; }
-        public string Industries { get; set; }
-        public double Price { get; set; }
-        public bool? IsSelected { get; set; }
-        public Type Type { get; private set; }
+        [DataMember]
+        public string Name { get; internal set; }
+        [DataMember]
+        public string Label { get; internal set; }
+        [DataMember]
+        public string Definition { get; internal set; }
+        [DataMember]
+        public string Industries { get; internal set; }
+        [DataMember]
+        public double Price { get; internal set; }
+        [DataMember]
+        public bool? IsSelected { get; internal set; }
+        [DataMember]
+        public Type Type { get; internal set; }
         
         //todo: make private
         public DataField()
