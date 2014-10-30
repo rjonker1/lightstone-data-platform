@@ -19,8 +19,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
         {
             var entity = _repository.GetById(command.Id);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
-                command.SourceURL, command.ResponseType, command.State, command.Owner, command.CreatedDate,
+                command.SourceURL, command.ResponseType, command.State, entity.Version, command.Owner,
+                command.CreatedDate,
                 command.EditedDate, command.DataFields);
+
             _repository.Save(entity, Guid.NewGuid());
         }
     }

@@ -13,7 +13,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
         public virtual string Description { get; protected set; }
         public virtual double CostPrice { get; protected set; }
         [DomainSignature]
-        public virtual int Version { get; protected set; }
+        public virtual int? Version { get; protected set; }
         public virtual string Owner { get; protected set; }
         public virtual DateTime CreatedDate { get; protected set; }
         public virtual DateTime EditedDate { get; protected set; }
