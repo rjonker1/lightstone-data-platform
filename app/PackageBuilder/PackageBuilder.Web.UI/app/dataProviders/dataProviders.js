@@ -19,14 +19,18 @@
 
         $scope.test = '';
         $scope.dProvidersData = '';
+        $scope.latestVersion = 0;
 
-        $scope.notify = function (row) {
+        $scope.notify = function(row) {
 
             $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
-        }
+        };
+
+        $scope.canEdit = function() {
+
+        };
 
         $scope.selectedDatasource = [];
-
         $scope.gridOptions = {
             data: 'dProvidersData',
             selectedItems: $scope.selectedDatasource,
@@ -41,7 +45,7 @@
                 { field: 'createdDate', displayName: 'Created Date' },
                 { field: 'editedDate', displayName: 'Edited Date' },
                 { field: 'version', displayName: 'Version' },
-                { displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
+                { displayName: '', cellTemplate: '<div ng-if="latestVersion.Get(row.entity.dataProviderId) == row.entity.version"><input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" /></div>' }
             ]
         };
 
@@ -58,6 +62,26 @@
         function getAllDataProviders() {
             
             return datacontext.getAllDataProviders().then(function (data) {
+
+                var distictProviders = Enumerable.From(data)
+                    .Distinct(function(x) {
+                        return x.dataProviderId;
+                    })
+                    .Select(function(x) {
+                        return x.dataProviderId;
+                    });
+
+                $scope.latestVersion = Enumerable.From(distictProviders)
+                    .ToDictionary(function(x) {
+                        return x;
+                    }, function(id) {
+                        return Enumerable.From(data).Where(function(x) {
+                            return x.dataProviderId == id;
+                        }).Max(function(x) {
+                            return x.version;
+                        });
+                    });
+                    
 
                 $scope.test = data;
 
