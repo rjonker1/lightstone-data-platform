@@ -81,14 +81,16 @@
                 hideIndustryAddInput();
                 return;
             }
-                
+
             return industryRepository.addIndustry(name).then(
-                   function(successCallback) {
-                        hideIndustryAddInput();
-                        getIndustries();
-                        logSuccess(successCallback.response);
+                function(successCallback) {
+                    hideIndustryAddInput();
+                    getIndustries();
+                    logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                        logError(errorCallback);
+                    logError(errorCallback);
+                    console.log(errorCallback);
+
                 });
         };
 

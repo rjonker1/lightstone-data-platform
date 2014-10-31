@@ -67,6 +67,8 @@
     <Compile Include="Entities\IUserRole.cs" />
     <Compile Include="Entities\IWorkflow.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
+    <Compile Include="ExceptionHandling\Guard.cs" />
+    <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\SystemTime.cs" />

@@ -3,10 +3,9 @@ using Castle.Windsor;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
-using PackageBuilder.Api.Helpers.ExceptionHandling;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
-using PackageBuilder.Infrastructure.RavenDB;
+using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api
@@ -44,7 +43,6 @@ namespace PackageBuilder.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            base.RequestStartup(container, pipelines, context);
             //Make every request SSL based
             //pipelines.BeforeRequest += ctx =>
             //{
@@ -54,9 +52,15 @@ namespace PackageBuilder.Api
             //};
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
 
-            pipelines.OnError += (ctx, err) => HttpResponseExceptionHandler.HandleExceptions(err, ctx);
+            pipelines.OnError.AddItemToEndOfPipeline((z, a) =>
+            {
+                //log.Error("Unhandled error on request: " + context.Request.Url + " : " + a.Message, a);
+                return ErrorResponse.FromException(a);
+            });
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
+
+            base.RequestStartup(container, pipelines, context);
         }
     }
 }
