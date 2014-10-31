@@ -189,7 +189,7 @@
 		<!-- LACE END -->
 
 
-		<!-- MONITORING START -->
+		<!-- MONITORING START 
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Monitoring</name>
       <folder>app/Monitoring/Monitoring</folder>
@@ -222,7 +222,7 @@
 				<dependency id="Lightstone.DataPlatform.Shared" />
 				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Persistence" />
 			</dependencies>
-		</nuget>
+		</nuget>-->
 		<!-- MONITORING END -->
 
 
