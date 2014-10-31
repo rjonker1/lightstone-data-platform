@@ -18,11 +18,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         public DateTime EditedDate { get; private set; }
         public IEnumerable<IDataProvider> DataProviders { get; private set; }
 
+        //Used by NEventstore
         private Package(Guid id)
         {
             Id = id;
         }
 
+        //Used for serialization
         protected Package() { }
 
         public Package(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)

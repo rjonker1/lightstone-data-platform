@@ -50,6 +50,13 @@
                     }
                 }
             }, {
+                url: '/package-maintenance-edit/:id/:version',
+                config: {
+                    title: 'package-maintenance-edit',
+                    templateUrl: 'app/packageMaintenance/packageMaintenanceEdit.html'
+                }
+
+            }, {
                 url: '/data-providers',
                 config: {
                     title: 'data-providers',
