@@ -39,7 +39,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DataProvider\DataProviderEventsUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -47,6 +46,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
+      <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
+      <Name>Monitoring.Domain.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj">
       <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
       <Name>Monitoring.Domain.Messages</Name>

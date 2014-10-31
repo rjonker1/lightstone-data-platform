@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\DefinedMessages.cs" />
@@ -47,6 +48,9 @@
     <None Include="SerializationExtensions.cs.old" />
     <Compile Include="Consumers\DataProvider.cs" />
     <None Include="Dto\RecordedEvent.cs.old" />
+    <Compile Include="Contracts\IHandleTransactions.cs" />
+    <Compile Include="Contracts\IQueryStorage.cs" />
+    <Compile Include="Contracts\IUpdateStorage.cs" />
     <Compile Include="JsonExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

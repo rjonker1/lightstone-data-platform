@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.DomainModel", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.DistributedService.Host", "Monitoring\source\Monitoring.DistributedService.Host\Monitoring.DistributedService.Host.csproj", "{C4C33A7B-A21F-461A-9DC6-FDD9E885F30D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.DistributedService.DenormalizerHost", "Monitoring\source\Monitoring.DistributedService.DenormalizerHost\Monitoring.DistributedService.DenormalizerHost.csproj", "{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{C4C33A7B-A21F-461A-9DC6-FDD9E885F30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4C33A7B-A21F-461A-9DC6-FDD9E885F30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4C33A7B-A21F-461A-9DC6-FDD9E885F30D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{9241BD29-8BB4-4EE8-9CEB-F0B665823BA2} = {AFD1E4CD-924A-471F-9D24-F22B5C008C3C}
 		{52830124-637A-4358-A8D2-7338C9A2965A} = {658F9A03-C791-473F-8A65-BC11DC1191E0}
 		{C4C33A7B-A21F-461A-9DC6-FDD9E885F30D} = {658F9A03-C791-473F-8A65-BC11DC1191E0}
+		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862} = {658F9A03-C791-473F-8A65-BC11DC1191E0}
 		{365E35DA-EE0A-4AC8-8EB3-341F274988F7} = {2CA82FB4-9AF9-46DA-B800-434D22E0CF27}
 		{DD57EBDE-5CD4-4DDA-B2F4-3B500CDF7713} = {2CA82FB4-9AF9-46DA-B800-434D22E0CF27}
 		{C0CD057E-A98A-4A9C-A8F3-A92A2E3077DB} = {2CA82FB4-9AF9-46DA-B800-434D22E0CF27}
