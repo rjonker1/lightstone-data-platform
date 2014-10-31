@@ -96,7 +96,6 @@ namespace PackageBuilder.Api.Modules
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
-                //var dto = this.Bind<dto>();
                 var dto = this.Bind<DataProviderDto>();
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
@@ -109,8 +108,4 @@ namespace PackageBuilder.Api.Modules
         }
     }
 
-    public class dto
-    {
-        public string Name { get; set; }
-    }
 }
