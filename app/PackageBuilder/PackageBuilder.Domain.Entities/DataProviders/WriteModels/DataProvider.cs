@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Core.Helpers.Extensions;
@@ -9,18 +10,29 @@ using PackageBuilder.Domain.Entities.DataProviders.Events;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
 {
+    [DataContract]
     public class DataProvider : AggregateBase, IDataProvider
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public double CostOfSale { get; private set; }
-        public string SourceURL { get; private set; }
-        public Type ResponseType { get; private set; }
-        public string State { get; private set; }
-        public string Owner { get; private set; }
-        public DateTime Created { get; private set; }
-        public DateTime Edited { get; private set; }
-        public IEnumerable<IDataField> DataFields { get; private set; }
+        [DataMember]
+        public string Name { get; internal set; }
+        [DataMember]
+        public string Description { get; internal set; }
+        [DataMember]
+        public double CostOfSale { get; internal set; }
+        [DataMember]
+        public string SourceURL { get; internal set; }
+        [DataMember]
+        public Type ResponseType { get; internal set; }
+        [DataMember]
+        public string State { get; internal set; }
+        [DataMember]
+        public string Owner { get; internal set; }
+        [DataMember]
+        public DateTime Created { get; internal set; }
+        [DataMember]
+        public DateTime Edited { get; internal set; }
+        [DataMember]
+        public IEnumerable<IDataField> DataFields { get; internal set; }
 
         private DataProvider(Guid id)
         {
@@ -48,6 +60,13 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public void CreateDataProviderRevision(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
             RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, state, version, owner, createdDate, editedDate, dataFields));
+        }
+
+        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl,
+            Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate,
+            IEnumerable<IDataField> dataFields)
+        {
+            
         }
 
         private IEnumerable<IDataField> PopulateDataFields(Type type)
