@@ -37,8 +37,9 @@
 
         $scope.total = function () {
 
+            var cos = angular.element(document.getElementById('cosPackage'));
             var items = $scope.dataProvsPkg.Package.DataProviders;
-            alert(items);
+            
             var value_total = 0;
 
             if (items != undefined) {
@@ -57,6 +58,12 @@
                     }
 
                 }
+            }
+
+             
+            if (value_total > cos[0].value) {
+
+                console.log('TRUE');
             }
 
             return value_total;
@@ -80,17 +87,10 @@
 
             return datacontext.getDataProviderSources().then(function (response) {
 
-                console.log(response);
-
                 if (response.status === 200) {
 
-
-
                     $scope.dataProvsPkg.Package.DataProviders = response.data;
-
-
                     logSuccess('Data Providers loaded!');
-
                 }
 
                 if (response.status === 404) {

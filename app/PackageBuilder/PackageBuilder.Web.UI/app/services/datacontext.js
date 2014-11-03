@@ -36,7 +36,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://localhost:12257/Package/Get/' + _id + '/' + _version + '').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/Package/Get/' + _id + '/' + _version + '').then(function (result) {
 
                 deferred.resolve(result);
 
@@ -54,7 +54,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://localhost:12257/DataProvider/Get/' + _id + '/' + _version + '').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/' + _id + '/' + _version + '').then(function (result) {
 
                 deferred.resolve(result);
 
@@ -72,7 +72,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://localhost:12257/DataProvider').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(data);
@@ -91,7 +91,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://localhost:12257/DataProvider/Get/All').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/All').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(result);
@@ -110,7 +110,7 @@
 
             var deferred = $q.defer();
             
-            $http.get('http://localhost:12257/Packages').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/Packages').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(data);
@@ -121,22 +121,7 @@
 
             });
 
-            //GetPackages.query().$promise.then(function (result) {
-
-            //    data = result;
-            //    console.log(data);
-            //    //deferred.resolve(data);
-
-            //}, function (error) {
-
-            //    deferred.reject(error);
-
-            //});
-
-            //console.log('asdasd');
-            //console.log(deferred.promise);
             return $q.when(deferred.promise);
-
         }
 
         //POST
@@ -144,7 +129,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://localhost:12257/DataProvider/Edit/' + _id + '', providerData).then(function (result) {
+            $http.post('http://dev.lightstone.packagebuilder.api/DataProvider/Edit/' + _id + '', providerData).then(function (result) {
 
                 deferred.resolve(result);
 
@@ -159,10 +144,10 @@
         //POST
         function createPackage(packageData) {
 
-            +36+ 
+            
             var deferred = $q.defer();
 
-            $http.post('http://localhost:12257/Package/Add', packageData).then(function (result) {
+            $http.post('http://dev.lightstone.packagebuilder.api/Package/Add', packageData).then(function (result) {
 
                 deferred.resolve(result);
 
