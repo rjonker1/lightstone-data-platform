@@ -2,7 +2,6 @@
 
 namespace PackageBuilder.Core.Entities
 {
-    [Serializable]
     public abstract class Entity
     {
         protected Entity() { }

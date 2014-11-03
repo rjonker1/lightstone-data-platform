@@ -4,8 +4,8 @@
     var controllerId = 'dataProviderDetail';
 
     angular
-        .module('app')
-        .controller(controllerId, dataProviderDetail);
+        .module( 'app' )
+        .controller( controllerId, dataProviderDetail );
 
     dataProviderDetail.$inject = ['$scope', '$routeParams', 'common', 'datacontext']; 
 
@@ -36,21 +36,21 @@
               { name: 'Expired' }
         ];
 
-        $scope.createProvider = function (providerData) {
+        $scope.createProvider = function(providerData) {
 
             //
             //Functionality to post to API
             //
 
-            return datacontext.editDataProvider($routeParams.id, providerData).then(function (response) {
+            return datacontext.editDataProvider($routeParams.id, providerData).then(function(response) {
 
                 console.log(response);
-                 (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
-                
+                (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
+
 
             });
 
-        }
+        };
 
         activate();
 
@@ -74,3 +74,4 @@
         }
     }
 })();
+

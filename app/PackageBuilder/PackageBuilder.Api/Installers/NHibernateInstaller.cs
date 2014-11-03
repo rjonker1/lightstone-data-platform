@@ -30,7 +30,6 @@ namespace PackageBuilder.Api.Installers
                             .Conventions.Add
                             (
                                 ConventionBuilder.Id.Always(x => x.GeneratedBy.Assigned()),
-                                PrimaryKey.Name.Is(o => "Id"),
                                 ForeignKey.EndsWith("Id"),
                                 new DomainSignatureConvention()
                             ));
