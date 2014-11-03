@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Linq;
+using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.MessageHandling;
@@ -8,22 +12,29 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {
     public class UpdateDataProviderHandler : AbstractMessageHandler<UpdateDataProvider>
     {
-        private readonly INEventStoreRepository<DataProvider> _repository;
+        private readonly INEventStoreRepository<DataProvider> _writeRepo;
+        private readonly IRepository<Entities.DataProviders.ReadModels.DataProvider> _readRepo;
 
-        public UpdateDataProviderHandler(INEventStoreRepository<DataProvider> repository)
+
+        public UpdateDataProviderHandler(INEventStoreRepository<DataProvider> writeRepo, IRepository<Entities.DataProviders.ReadModels.DataProvider> readRepo)
         {
-            _repository = repository;
+            _writeRepo = writeRepo;
+            _readRepo = readRepo;
         }
 
         public override void Handle(UpdateDataProvider command)
         {
-            var entity = _repository.GetById(command.Id);
+            var existing = _readRepo.FirstOrDefault(x => x.Id != command.Id && x.Name.ToLower() == command.Name.ToLower());
+            if (existing != null)
+                throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
+
+            var entity = _writeRepo.GetById(command.Id);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
                 command.SourceURL, command.ResponseType, command.State, entity.Version, command.Owner,
                 command.CreatedDate,
                 command.EditedDate, command.DataFields);
 
-            _repository.Save(entity, Guid.NewGuid());
+            _writeRepo.Save(entity, Guid.NewGuid());
         }
     }
 }
