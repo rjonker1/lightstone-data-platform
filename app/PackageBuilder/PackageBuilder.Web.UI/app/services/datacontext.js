@@ -14,6 +14,7 @@
 
         var service = {
 
+            getPackage: getPackage,
             getDataProvider: getDataProvider,
             getAllDataProviders: getAllDataProviders,
             getDataProviderSources: getDataProviderSources,
@@ -31,11 +32,29 @@
         return service;
 
         //GET *
-        function getDataProvider(_id, _version) {
+        function getPackage(_id, _version) {
 
             var deferred = $q.defer();
 
             $http.get('http://localhost:12257/Package/Get/' + _id + '/' + _version + '').then(function (result) {
+
+                deferred.resolve(result);
+
+            }, function (error) {
+
+                deferred.reject(error);
+
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //GET *
+        function getDataProvider(_id, _version) {
+
+            var deferred = $q.defer();
+
+            $http.get('http://localhost:12257/DataProvider/Get/' + _id + '/' + _version + '').then(function (result) {
 
                 deferred.resolve(result);
 

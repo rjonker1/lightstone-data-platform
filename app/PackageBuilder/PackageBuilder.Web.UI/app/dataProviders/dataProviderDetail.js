@@ -64,21 +64,12 @@
 
         function getDataProvider(id, version) {
 
-            return datacontext.getDataProvider(id, version).then(function (data) {
+            return datacontext.getDataProvider(id, version).then(function (response) {
 
+                console.log(response.data);
+                $scope.dataProvider = response.data;
 
-                //log(data);
-
-                //var result = data.response;
-                //console.log(data);
-
-                $scope.dataProvider = data;
-               
-                //angular.toJSON(data);
-                //console.log($scope.test);
-             
-
-                 //(data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
+                //(data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
             });
         }
     }
