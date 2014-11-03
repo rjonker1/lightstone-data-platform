@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Models.Ivid.Dto;
+using Lace.Domain.Core.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
@@ -89,7 +88,6 @@ namespace PackageBuilder.Api.Modules
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
-                //var dto = this.Bind<dto>();
                 var dto = this.Bind<DataProviderDto>();
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
@@ -102,8 +100,4 @@ namespace PackageBuilder.Api.Modules
         }
     }
 
-    public class dto
-    {
-        public string Name { get; set; }
-    }
 }

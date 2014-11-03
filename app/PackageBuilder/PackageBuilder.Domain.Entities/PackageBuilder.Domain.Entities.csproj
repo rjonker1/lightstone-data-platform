@@ -110,6 +110,7 @@
     <Compile Include="IRolePackageRepository.cs" />
     <Compile Include="IUserPackage.cs" />
     <Compile Include="IUserPackageRepository.cs" />
+    <Compile Include="Packages\Commands\UpdatePackage.cs" />
     <Compile Include="Packages\Events\PackageCreated.cs" />
     <Compile Include="Packages\Events\PackageUpdated.cs" />
     <Compile Include="Packages\ReadModels\Package.cs" />
