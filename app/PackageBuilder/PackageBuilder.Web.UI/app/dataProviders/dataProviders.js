@@ -83,8 +83,6 @@
                     });
                     
 
-                $scope.test = data;
-
                 (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
         
             });

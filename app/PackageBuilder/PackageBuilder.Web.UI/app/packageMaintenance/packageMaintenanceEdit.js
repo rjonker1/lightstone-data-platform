@@ -77,7 +77,7 @@
 
         function getDataProvider(id, version) {
 
-            return datacontext.getDataProvider(id, version).then(function (response) {
+            return datacontext.getPackage(id, version).then(function (response) {
 
                 console.log(response);
 

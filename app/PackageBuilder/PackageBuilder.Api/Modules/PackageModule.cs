@@ -52,7 +52,7 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new { Response = pkgList });
 
-                //var package = writeRepo.GetById(parameters.id, parameters.version);
+                //var package = writeRepo.GetById(parameters.id, parameters.versyion);
                 //return Response.AsJson(new { Response = package });
             };
 
