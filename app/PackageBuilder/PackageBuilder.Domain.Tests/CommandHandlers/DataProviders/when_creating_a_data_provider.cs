@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Dto;
+using Lace.Models.Ivid.Dto;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         public override void Observe()
         {
             var command = new CreateDataProvider(Guid.NewGuid(), "Name", "Description", 10d, "http://test.com", typeof(IvidResponse), "Draft", "User", DateTime.Now);
-            _handler = new CreateDataProviderHandler(_eventStoreRepository.Object);
+            _handler = new CreateDataProviderHandler(_eventStoreRepository.Object, null);
             _handler.Handle(command);
         }
 
