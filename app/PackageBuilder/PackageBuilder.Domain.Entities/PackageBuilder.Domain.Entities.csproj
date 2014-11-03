@@ -91,6 +91,7 @@
     <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="DataSet.cs" />
+    <Compile Include="Enums\StateName.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupPackage.cs" />
     <Compile Include="GroupPermission.cs" />

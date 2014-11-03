@@ -38,9 +38,9 @@
             return $q.when(deferred.promise);
         }
 
-        function updateState(id, name) {
+        function updateState(id, name, alias) {
             var deferred = $q.defer();
-            postEditStateResource.save({}, { id: id, name: name },
+            postEditStateResource.save({}, { id: id, name: name, alias: alias },
                    function (successCallback) {
                         deferred.resolve(successCallback);
                 }, function (errorCallback) {

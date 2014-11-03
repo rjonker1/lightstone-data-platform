@@ -6,7 +6,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 {
     public class DataProvider : Entity
     {
-        [DomainSignature]
         public virtual Guid DataProviderId { get; protected set; }
         [DomainSignature]
         public virtual string Name { get; protected set; }

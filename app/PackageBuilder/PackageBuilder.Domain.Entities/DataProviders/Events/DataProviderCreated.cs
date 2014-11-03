@@ -12,12 +12,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
         public readonly double CostPrice;
         public readonly string SourceURL;
         public readonly Type ResponseType;
-        public readonly string State;
         public readonly string Owner;
         public readonly DateTime CreatedDate;
         public readonly DateTime EditedDate;
         public readonly IEnumerable<IDataField> DataFields;
-        public DataProviderCreated(Guid id, string name, string description, double costPrice, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
+        public DataProviderCreated(Guid id, string name, string description, double costPrice, string sourceUrl, Type responseType, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
 			Id = id;
 			Name = name;
@@ -25,7 +24,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Events
             CostPrice = costPrice;
             SourceURL = sourceUrl;
             ResponseType = responseType;
-            State = state;
             Owner = owner;
             CreatedDate = createdDate;
             EditedDate = editedDate;

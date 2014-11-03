@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities.Packages.Events;
+using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.Packages.WriteModels
 {
@@ -19,7 +20,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public double SalePrice { get; private set; }
         [DataMember]
-        public string State { get; private set; }
+        public State State { get; private set; }
         [DataMember]
         public string Owner { get; private set; }
         [DataMember]
@@ -38,13 +39,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         //Used for serialization
         protected Package() { }
 
-        public Package(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state,  owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, state, owner, createdDate, editedDate, dataProviders));
         }

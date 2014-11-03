@@ -20,7 +20,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
 
         public override void Handle(RenameState command)
         {
-            var existing = _repository.FirstOrDefault(x => x.Id != command.Id && x.Name.ToLower() == command.Name.ToLower());
+            var existing = _repository.FirstOrDefault(x => x.Id != command.Id && x.Name == command.Name);
             if (existing != null)
                 throw new LightstoneAutoException("A state with the name {0} already exists".FormatWith(command.Name));
 
@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             if (state == null)
                 throw new ArgumentNullException(string.Format("Could not load state with id {0}", command.Id));
 
-            state.Name = command.Name;
+            state.Alias = command.Alias;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
 
             var entity = new DataProvider(command.Id, command.Name,
-                command.Description, command.CostOfSale, command.SourceURL, command.ResponseType, command.State,
+                command.Description, command.CostOfSale, command.SourceURL, command.ResponseType,
                 command.Owner, command.CreatedDate, command.EditedDate);
 
             _writeRepo.Save(entity, Guid.NewGuid());

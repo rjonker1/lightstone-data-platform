@@ -17,7 +17,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.States
         private Exception _exception;
         public override void Observe()
         {
-            var renameCommand = new RenameState(Guid.NewGuid(), StateMother.Published.Name);
+            var renameCommand = new RenameState(Guid.NewGuid(), StateMother.Published.Name, StateMother.Published.Alias);
             _renameHandler = new RenameStateHandler(_repo.Object);
             _exception = Assert.Throws<ArgumentNullException>(() => _renameHandler.Handle(renameCommand));
         }

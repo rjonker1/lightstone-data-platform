@@ -54,7 +54,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://localhost:12257/DataProvider/Get/' + _id + '/' + _version + '').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/' + _id + '/' + _version + '').then(function (result) {
 
                 deferred.resolve(result);
 

@@ -24,8 +24,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         [DataMember]
         public Type ResponseType { get; internal set; }
         [DataMember]
-        public string State { get; internal set; }
-        [DataMember]
         public string Owner { get; internal set; }
         [DataMember]
         public DateTime Created { get; internal set; }
@@ -51,15 +49,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate) 
+        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate, DateTime editedDate) 
             : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, state, owner, createdDate, editedDate, PopulateDataFields(responseType)));
+            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, owner, createdDate, editedDate, PopulateDataFields(responseType)));
         }
 
-        public void CreateDataProviderRevision(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
-            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, state, version, owner, createdDate, editedDate, dataFields));
+            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, version, owner, createdDate, editedDate, dataFields));
         }
 
         public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl,
@@ -83,7 +81,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             CostOfSale = @event.CostPrice;
             SourceURL = @event.SourceURL;
             ResponseType = @event.ResponseType;
-            State = @event.State;
             Owner = @event.Owner;
             Created = @event.CreatedDate;
             Edited = @event.EditedDate;
@@ -98,7 +95,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             CostOfSale = @event.CostPrice;
             SourceURL = @event.SourceURL;
             ResponseType = @event.ResponseType;
-            State = @event.State;
             Owner = @event.Owner;
             Created = @event.CreatedDate;
             Edited = @event.EditedDate;

@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.States
             _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(StateMother.Draft);
             _renameHandler = new RenameStateHandler(_repo.Object);
 
-            var renameCommand = new RenameState(Guid.NewGuid(), StateMother.Published.Name);
+            var renameCommand = new RenameState(Guid.NewGuid(), StateMother.Published.Name, StateMother.Published.Alias);
             _renameHandler.Handle(renameCommand);
         }
 

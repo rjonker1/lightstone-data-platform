@@ -1,4 +1,5 @@
-﻿using PackageBuilder.Domain.Entities.States.WriteModels;
+﻿using PackageBuilder.Domain.Entities.Enums;
+using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.TestHelper.Builders.Entites;
 
 namespace PackageBuilder.TestHelper.Mothers
@@ -9,7 +10,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return new StateBuilder().With("Draft").Build();
+                return new StateBuilder().With(StateName.Draft).With(StateName.Draft.ToString()).Build();
             }
         }
 
@@ -17,7 +18,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return new StateBuilder().With("Published").Build();
+                return new StateBuilder().With(StateName.Published).With(StateName.Published.ToString()).Build();
             }
         }
 
@@ -25,7 +26,7 @@ namespace PackageBuilder.TestHelper.Mothers
         {
             get
             {
-                return new StateBuilder().With("Expired").Build();
+                return new StateBuilder().With(StateName.Expired).With(StateName.Expired.ToString()).Build();
             }
         }
     }

@@ -24,7 +24,8 @@
         
         $scope.selectedDatasource = [];
         $scope.colDefs = [
-                { headerCellTemplate: 'app/states/headerTemplate.html', field: 'name', displayName: 'Name', filter: { term: '' } }
+                { headerCellTemplate: 'app/states/headerTemplate.html', field: 'name', displayName: 'Name', filter: { term: '' }, enableCellEdit: false },
+                { field: 'alias', displayName: 'Alias' }
         ];
         $scope.gridOptions = {
             data: 'data',
@@ -40,7 +41,7 @@
 
         $scope.$on('ngGridEventEndCellEdit', function(evt) {
             var entity = evt.targetScope.row.entity;
-            updateState(entity.id, entity.name);
+            updateState(entity.id, entity.name, entity.alias);
         });
         
         $scope.showStateAddInput = function () {
@@ -92,8 +93,8 @@
                 });
         };
 
-        function updateState(id, name) {
-            return stateRepository.updateState(id, name).then(
+        function updateState(id, name, alias) {
+            return stateRepository.updateState(id, name, alias).then(
                    function (successCallback) {
                         getStates();
                         logSuccess(successCallback.response);

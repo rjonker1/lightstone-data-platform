@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
 using MemBus;
@@ -11,13 +12,14 @@ using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
         public PackageModule(IBus bus, IRepository<PackageBuilder.Domain.Entities.Packages.ReadModels.Package> readRepo,
-                                        INEventStoreRepository<PackageBuilder.Domain.Entities.Packages.WriteModels.Package> writeRepo)
+                                        INEventStoreRepository<PackageBuilder.Domain.Entities.Packages.WriteModels.Package> writeRepo, IRepository<State> stateRepo)
         {
             Get["/Packages"] = parameters =>
             {
@@ -27,7 +29,7 @@ namespace PackageBuilder.Api.Modules
             Get["/Package/Add"] = parameters =>
             {
                 var dateTime = DateTime.Now;
-                bus.Publish(new CreatePackage(Guid.NewGuid(), "Name", "Description", 10d, 20d, "Draft", "Owner", dateTime, dateTime, null));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), "Name", "Description", 10d, 20d, stateRepo.FirstOrDefault(), "Owner", dateTime, dateTime, null));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -64,7 +66,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
                 var createdDate = DateTime.Now;
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.State, dto.Owner, createdDate, createdDate, dProviders));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Owner, createdDate, createdDate, dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -77,7 +79,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
                 var createdDate = DateTime.Now;
-                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.State, dto.Owner, createdDate, createdDate, dProviders));
+                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Owner, createdDate, createdDate, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };

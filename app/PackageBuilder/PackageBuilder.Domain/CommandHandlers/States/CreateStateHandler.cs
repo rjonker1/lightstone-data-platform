@@ -19,10 +19,11 @@ namespace PackageBuilder.Domain.CommandHandlers.States
 
         public override void Handle(CreateState command)
         {
-            if (_repository.FirstOrDefault(x => x.Name.ToLower() == command.Name.ToLower()) != null)
+            if (_repository.FirstOrDefault(x => x.Name == command.Name) != null)
                 throw new LightstoneAutoException("An state with the name {0} already exists".FormatWith(command.Name));
 
-            var entity = new State(command.Id, command.Name);
+            var entity = new State(command.Id, command.Name, command.Alias);
+
             _repository.Save(entity);
         }
     }
