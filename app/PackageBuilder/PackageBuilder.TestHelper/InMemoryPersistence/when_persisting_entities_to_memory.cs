@@ -1,12 +1,13 @@
-﻿using Castle.Windsor;
+﻿using System.IO;
+using Castle.Windsor;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using PackageBuilder.Api.Installers;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Domain.Entities.Tests
+namespace PackageBuilder.TestHelper.InMemoryPersistence
 {
-    public class when_persisting_entities : Specification
+    public class when_persisting_entities_to_memory : Specification
     {
         public IWindsorContainer Container = new WindsorContainer();
         protected ISession Session;
@@ -14,8 +15,9 @@ namespace PackageBuilder.Domain.Entities.Tests
         public override void Observe()
         {
             Container.Install(new NHibernateInstaller());
-            new SchemaExport(Container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
             Session = Container.Resolve<ISessionFactory>().OpenSession();
+
+            new SchemaExport(Container.Resolve<NHibernate.Cfg.Configuration>()).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));
         }
     }
 }

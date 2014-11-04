@@ -1,4 +1,4 @@
-﻿namespace PackageBuilder.Domain.MessageHandling
+﻿namespace PackageBuilder.Core.MessageHandling
 {
     public interface IHandleMessages<T> : IHandleMessages
     {

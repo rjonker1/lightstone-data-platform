@@ -61,19 +61,10 @@
       <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
-      <HintPath>..\..\packages\NEventStore.5.0.1.2\lib\net40\NEventStore.dll</HintPath>
-    </Reference>
-    <Reference Include="NEventStore.Persistence.RavenDB">
-      <HintPath>..\..\packages\NEventStore.Persistence.RavenDB.5.0.0.86\lib\net40\NEventStore.Persistence.RavenDB.dll</HintPath>
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2879\lib\net45\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -100,8 +91,6 @@
     <Compile Include="EventHandlers\DataProviders\DataProviderUpdatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageCreatedHandler.cs" />
     <Compile Include="EventHandlers\Packages\PackageUpdatedHandler.cs" />
-    <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
-    <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="PackageLookup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +109,10 @@
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj">
+      <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
+      <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,6 @@ using Castle.Windsor;
 using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
-using Raven.Client;
 
 namespace PackageBuilder.Api.Helpers.Extensions
 {
@@ -11,19 +10,19 @@ namespace PackageBuilder.Api.Helpers.Extensions
     {
         public static void AddTransactionScope(this IPipelines pipelines, IWindsorContainer container, TransactionScope scope)
         {
-            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
-            {
-                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
-                {
-                    scope.Dispose();
-                    return;
-                }
+            //pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
+            //{
+            //    if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
+            //    {
+            //        scope.Dispose();
+            //        return;
+            //    }
 
-                var session = container.Resolve<IDocumentSession>();
-                session.SaveChanges();
-                scope.Complete();
-                scope.Dispose();
-            });
+            //    var session = container.Resolve<IDocumentSession>();
+            //    session.SaveChanges();
+            //    scope.Complete();
+            //    scope.Dispose();
+            //});
         }
 
         public static void AddTransactionScope(this IPipelines pipelines, IWindsorContainer container)

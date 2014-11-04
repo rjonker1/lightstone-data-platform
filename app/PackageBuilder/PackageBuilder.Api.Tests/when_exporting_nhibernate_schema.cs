@@ -5,7 +5,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests
 {
-    public class when_creating_nhibernate_schema : Specification
+    public class when_exporting_nhibernate_schema : Specification
     {
         public override void Observe()
         {
@@ -16,7 +16,7 @@ namespace PackageBuilder.Api.Tests
         }
 
         [Observation]
-        public void should_create()
+        public void should_export_schema()
         {
 
         }

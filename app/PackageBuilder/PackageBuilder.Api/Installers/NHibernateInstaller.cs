@@ -9,6 +9,7 @@ using NHibernate.Cfg;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using PackageBuilder.Infrastructure.NHibernate;
+using PackageBuilder.Infrastructure.NHibernate.Conventions;
 
 namespace PackageBuilder.Api.Installers
 {

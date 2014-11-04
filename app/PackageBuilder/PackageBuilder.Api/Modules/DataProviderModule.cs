@@ -13,14 +13,16 @@ using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
         public DataProviderModule(IBus bus,
-            IRepository<Domain.Entities.DataProviders.ReadModels.DataProvider> readRepo,
-            INEventStoreRepository<Domain.Entities.DataProviders.WriteModels.DataProvider> writeRepo)
+            IDataProviderRepository readRepo,
+            INEventStoreRepository<Domain.Entities.DataProviders.WriteModels.DataProvider> writeRepo, IRepository<State> stateRepo)
         {
             Get["/DataProvider"] = parameters => { return Response.AsJson(readRepo); };
 
@@ -61,7 +63,7 @@ namespace PackageBuilder.Api.Modules
             Get["/DataProvider/Add"] = parameters =>
             {
                 var providerId = Guid.NewGuid();
-                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), "draft", "Al", DateTime.Now));
+                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now));
 
                 return Response.AsJson(new { msg = "Success, "+providerId+" created" });
             };
@@ -92,10 +94,9 @@ namespace PackageBuilder.Api.Modules
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
                 bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    "http://test.com", typeof (DataProviderDto), "Draft", dto.Owner, dto.Created, dFields));
+                    "http://test.com", typeof (DataProviderDto), stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.Created, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
-                
             };
         }
     }

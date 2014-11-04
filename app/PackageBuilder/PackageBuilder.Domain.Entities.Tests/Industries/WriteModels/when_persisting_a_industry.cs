@@ -1,11 +1,13 @@
 ﻿using System;
 using FluentNHibernate.Testing;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.TestHelper;
+using PackageBuilder.TestHelper.DbPersistence;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.Industries.WriteModels
 {
-    public class when_persisting_a_industry : when_persisting_entities
+    public class when_persisting_a_industry : when_persisting_entities_to_db
     {
         public override void Observe()
         {

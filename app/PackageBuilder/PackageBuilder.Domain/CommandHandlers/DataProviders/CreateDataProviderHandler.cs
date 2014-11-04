@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {

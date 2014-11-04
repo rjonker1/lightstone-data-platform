@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Domain.CommandHandlers.Industries
 {

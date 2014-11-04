@@ -5,8 +5,8 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
+using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.EventHandlers.Packages;
-using PackageBuilder.Domain.MessageHandling;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.Installers

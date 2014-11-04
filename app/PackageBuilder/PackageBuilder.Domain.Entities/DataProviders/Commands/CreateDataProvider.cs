@@ -1,5 +1,6 @@
 using System;
 using PackageBuilder.Core.Commands;
+using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
@@ -10,13 +11,13 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly double CostOfSale;
         public readonly string SourceURL;
         public readonly Type ResponseType;
-        public readonly string State;
+        public readonly State State;
         public readonly string Owner;
         public readonly DateTime CreatedDate;
         public readonly DateTime EditedDate;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string state, string owner, DateTime createdDate)
+        public CreateDataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, State state, string owner, DateTime createdDate)
         {
 			Id = id;
 			Name = name;

@@ -2,7 +2,7 @@
 using FluentNHibernate.Conventions.Instances;
 using PackageBuilder.Core.NHibernate.Attributes;
 
-namespace PackageBuilder.Infrastructure.NHibernate
+namespace PackageBuilder.Infrastructure.NHibernate.Conventions
 {
     public class DomainSignatureConvention : AttributePropertyConvention<DomainSignatureAttribute>
     {

@@ -1,11 +1,13 @@
 ﻿using System;
 using FluentNHibernate.Testing;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.TestHelper;
+using PackageBuilder.TestHelper.DbPersistence;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.Packages.ReadModels
 {
-    public class when_persisting_a_package : when_persisting_entities
+    public class when_persisting_a_package : when_persisting_entities_to_db
     {
         public override void Observe()
         {

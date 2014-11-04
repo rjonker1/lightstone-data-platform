@@ -10,7 +10,7 @@ using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
 {
-    public class when_creating_a_data_provider : Specification
+    public class when_updating_a_data_provider : Specification
     {
         private CreateDataProviderHandler _handler;
         private readonly Mock<INEventStoreRepository<DataProvider>> _eventStoreRepository = new Mock<INEventStoreRepository<DataProvider>>();

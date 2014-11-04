@@ -1,7 +1,7 @@
-﻿using PackageBuilder.Core.Repositories;
+﻿using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
-using PackageBuilder.Domain.MessageHandling;
 
 namespace PackageBuilder.Domain.EventHandlers.DataProviders
 {

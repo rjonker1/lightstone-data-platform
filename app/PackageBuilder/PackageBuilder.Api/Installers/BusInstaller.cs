@@ -3,7 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using MemBus;
 using MemBus.Configurators;
-using PackageBuilder.Domain.MessageHandling;
+using PackageBuilder.Core.MessageHandling;
 
 namespace PackageBuilder.Api.Installers
 {
