@@ -20,7 +20,6 @@
 
 
 <section class="mainbar" data-ng-controller="packageMaintenanceCreate">
-    
 
     <section class="matter">
         <div class="container">
@@ -79,19 +78,10 @@
                                     <label>Revision Date: </label>
                                     <div>
 
-                                        <input type="textbox" class="form-control" value="{{now}}"/>
+                                        <input type="textbox" class="form-control" value="{{now}}" />
 
                                     </div>
 
-                                    <!--<div class="input-group">
-
-                                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dataProvsPkg.Package.edited" is-open="opened"
-                                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-
-                                            <span style="width: 20%;" class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                            </span>
-                                        </div>-->
 
                                 </div>
 
@@ -107,12 +97,18 @@
                                 <div>
                                     <label>COS:</label>
                                     <div>
-                                        <input id="cosPackage" type="textbox" class="form-control"  value="12" readonly />
+                                        <input id="cosPackage" type="textbox" class="form-control" value="{{total()}}" readonly />
                                     </div>
                                     <label>Recommended Sale Price:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" value="{{total()}}" />
+                                        <input id="rsp" type="textbox" class="form-control" ng-model="dataProvsPkg.Package.RecommendedSalePrice" ng-style="rspStyle" ng-change="{{total()}}" />
+                                        <span ng-show="warning" syle="width: 80%;">
+                                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                            <span class="help-block">WARNING: </span>
+                                            <span class="help-block">Recommended Sale price exceeds Cost of sale!</span>
+                                        </span>
                                     </div>
+
                                 </div>
 
 

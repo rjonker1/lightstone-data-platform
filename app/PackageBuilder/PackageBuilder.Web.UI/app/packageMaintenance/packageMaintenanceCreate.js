@@ -38,6 +38,8 @@
         $scope.total = function () {
 
             var cos = angular.element(document.getElementById('cosPackage'));
+            var rsp = angular.element(document.getElementById('rsp'));
+
             var items = $scope.dataProvsPkg.Package.DataProviders;
             
             var value_total = 0;
@@ -61,9 +63,14 @@
             }
 
              
-            if (value_total > cos[0].value) {
+            if (value_total < rsp[0].value) {
 
-                console.log('TRUE');
+                $scope.warning = true;
+                $scope.rspStyle = { 'color': 'red' };
+            } else {
+
+                $scope.warning = false;
+                $scope.rspStyle = { 'color': 'none' };
             }
 
             return value_total;

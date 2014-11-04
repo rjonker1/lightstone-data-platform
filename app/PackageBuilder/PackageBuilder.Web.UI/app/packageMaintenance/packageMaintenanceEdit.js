@@ -21,7 +21,7 @@
 
         $scope.dataProvsPkg = {};
         //Prevent $modelValue undefined error
-        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
+        $scope.dataProvsPkg.Package = { 'mock' : 'mock' }
 
 
         //$scope.createPackage = function (packageData) {
@@ -37,10 +37,20 @@
 
         $scope.total = function () {
 
-            var items = $scope.dataProvsPkg.Package[0].dataProviders;
-            var value_total = 0;
+            var rsp = angular.element(document.getElementById('rsp'));
+            var valueTotal = 0;
+            var items = null;
 
-            if (items != undefined) {
+            try {
+                
+                items = $scope.dataProvsPkg.Package[0].dataProviders;
+
+            } catch (e) {
+
+                console.log(e.message);
+            } 
+
+            if ( items != null ) {
 
                 for (var i = 0; i < items.length; i++) { // loop over it
 
@@ -51,21 +61,26 @@
                         if (listItem.dataFields[x].isSelected === true) {
 
                             //alert(listItem.name);
-                            value_total += listItem.dataFields[x].price;
+                            valueTotal += listItem.dataFields[x].price;
                         }
                     }
 
                 }
             }
 
-            return value_total;
+
+            if (valueTotal < rsp[0].value) {
+
+                $scope.warning = true;
+                $scope.rspStyle = { 'color': 'red' };
+            } else {
+
+                $scope.warning = false;
+                $scope.rspStyle = { 'color': 'none' };
+            }
+
+            return valueTotal;
         };
-
-
-        //$scope.toggle = function(scope) {
-        //    scope.toggle();
-        //};
-
 
         activate();
 
@@ -112,5 +127,6 @@
 
             });
         }
+
     }
 })();
