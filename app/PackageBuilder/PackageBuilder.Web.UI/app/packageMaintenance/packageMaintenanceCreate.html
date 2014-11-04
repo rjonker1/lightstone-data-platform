@@ -20,6 +20,8 @@
 
 
 <section class="mainbar" data-ng-controller="packageMaintenanceCreate">
+    
+    {{dataProvsPkg}}
 
     <section class="matter">
         <div class="container">
@@ -75,11 +77,9 @@
 
                                 <div>
 
-                                    <label>Revision Date: </label>
-                                    <div>
-
-                                        <input type="textbox" class="form-control" value="{{now}}" />
-
+                                    <label>Created Date: </label>
+                                    <div id="datetime">
+                                        <!--<input type="textbox" class="form-control" value="{{now}}" />-->
                                     </div>
 
 

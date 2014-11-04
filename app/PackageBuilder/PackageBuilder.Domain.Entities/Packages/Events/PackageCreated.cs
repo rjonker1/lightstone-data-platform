@@ -14,10 +14,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly string State;
         public readonly string Owner;        
         public readonly DateTime CreatedDate;
-        public readonly DateTime EditedDate;
+        public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProvider> DataProviders;
 
-        public PackageCreated(Guid id,string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public PackageCreated(Guid id,string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             Id = id;
             Name = name;

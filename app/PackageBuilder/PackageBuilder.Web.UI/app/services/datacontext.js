@@ -20,6 +20,7 @@
             getDataProviderSources: getDataProviderSources,
             getAllPackages: getAllPackages,
             editDataProvider: editDataProvider,
+            editPackage: editPackage,
             createPackage: createPackage,
 
             getPeople: getPeople,
@@ -134,6 +135,23 @@
                 deferred.resolve(result);
 
             }, function(error) {
+
+                deferred.resolve(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //POST
+        function editPackage(_id, packageData) {
+
+            var deferred = $q.defer();
+
+            $http.post('http://dev.lightstone.packagebuilder.api/Package/Edit/' + _id + '', packageData).then(function (result) {
+
+                deferred.resolve(result);
+
+            }, function (error) {
 
                 deferred.resolve(error);
             });

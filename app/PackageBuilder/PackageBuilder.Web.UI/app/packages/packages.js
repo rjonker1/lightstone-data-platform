@@ -61,8 +61,8 @@
                 { field: 'name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
-                { field: 'created', displayName: 'Created' },
-                { field: 'edited', displayName: 'Edited' },
+                { field: 'createdDate', displayName: 'Created' },
+                { field: 'editedDate', displayName: 'Edited' },
                 { field: 'version', displayName: 'Version' },
                 //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
                 { displayName: '', cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version"><input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" /></div>' }

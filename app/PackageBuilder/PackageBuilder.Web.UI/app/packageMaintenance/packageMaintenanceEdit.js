@@ -24,16 +24,17 @@
         $scope.dataProvsPkg.Package = { 'mock' : 'mock' }
 
 
-        //$scope.createPackage = function (packageData) {
+        $scope.editPackage = function (packageData) {
 
-        //    return datacontext.createPackage(packageData).then(function (response) {
+            return datacontext.editPackage($routeParams.id, packageData).then(function (response) {
 
-        //        console.log(response);
-        //        (response.status === 200) ? logSuccess('Package Created!') : logError('Error 404. Please check your connection settings');
+                console.log(response);
+                (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
 
-        //    });
 
-        //}
+            });
+
+        }
 
         $scope.total = function () {
 
@@ -48,7 +49,7 @@
                 cos = $scope.dataProvsPkg.Package[0].costOfSale;
             } catch (e) {
 
-                console.log(e.message);
+                //console.log(e.message);
             } 
 
             if ( items != null ) {

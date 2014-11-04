@@ -35,33 +35,38 @@
 
         }
 
+        $scope.dateTimeLive = function date_time() {
+            var now = moment().format('MMMM Do YYYY, h:mm:ss a');
+            document.getElementById('datetime').innerHTML = now;
+            setTimeout(function () { date_time(); }, 1000);
+        }
+
+        $scope.dateTimeLive();
+
         $scope.total = function () {
 
             var rspCreate = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
             var items = null;
-            //var cos = null;
 
             try {
 
                 items = $scope.dataProvsPkg.Package.DataProviders;
-                //cos = $scope.dataProvsPkg.Package.CostOfSale;
             } catch (e) {
 
-                console.log(e.message);
+                //console.log(e.message);
             }
 
             if (items != null) {
 
-                for (var i = 0; i < items.length; i++) { // loop over it
+                for (var i = 0; i < items.length; i++) {
 
-                    var listItem = items[i]; // an object  
+                    var listItem = items[i]; 
 
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
 
                         if (listItem.dataFields[x].isSelected === true) {
 
-                            //alert(listItem.name);
                             valueTotal += listItem.dataFields[x].price;
                         }
                     }

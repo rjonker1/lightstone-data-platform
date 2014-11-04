@@ -25,7 +25,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public DateTime CreatedDate { get; private set; }
         [DataMember]
-        public DateTime EditedDate { get; private set; }
+        public DateTime? EditedDate { get; private set; }
         [DataMember]
         public IEnumerable<IDataProvider> DataProviders { get; private set; }
 
@@ -38,13 +38,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         //Used for serialization
         protected Package() { }
 
-        public Package(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state,  owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, state, owner, createdDate, editedDate, dataProviders));
         }
