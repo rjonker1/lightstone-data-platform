@@ -16,7 +16,7 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderExecuted message)
         {
-            
+            var @event = new DataProviderEve
         }
 
         public void Handle(DataProviderFailed message)

@@ -1,6 +1,5 @@
 ﻿using System;
 using CommonDomain.Core;
-using Monitoring.Domain.Messages;
 using Monitoring.Domain.Messages.Events;
 
 namespace Monitoring.DomainModel.DataProviders

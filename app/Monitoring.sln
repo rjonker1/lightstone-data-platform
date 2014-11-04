@@ -43,6 +43,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.DistributedServi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.DistributedService.DenormalizerHost", "Monitoring\source\Monitoring.DistributedService.DenormalizerHost\Monitoring.DistributedService.DenormalizerHost.csproj", "{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2B0A6484-25C3-4E6F-B99E-71D5CA9DECF3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

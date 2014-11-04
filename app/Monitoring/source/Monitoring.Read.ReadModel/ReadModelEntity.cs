@@ -3,8 +3,8 @@ namespace Monitoring.Read.ReadModel
 {
     public abstract class ReadModelEntity
     {
-        public string Id { get; private set; }
-        public Guid AggregateId { get; set; }
+        public virtual string Id { get; private set; }
+        public virtual Guid AggregateId { get; private set; }
 
         protected ReadModelEntity()
         {
@@ -12,7 +12,7 @@ namespace Monitoring.Read.ReadModel
 
         protected ReadModelEntity(Guid id)
         {
-            Id = MakeId(this.GetType(), id);
+            Id = MakeId(GetType(), id);
             AggregateId = id;
         }
 
