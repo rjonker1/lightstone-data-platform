@@ -37,14 +37,21 @@
 
         $scope.total = function () {
 
-            var cos = angular.element(document.getElementById('cosPackage'));
-            var rsp = angular.element(document.getElementById('rsp'));
+            var rspCreate = angular.element(document.getElementById('rsp'));
+            var valueTotal = 0;
+            var items = null;
+            //var cos = null;
 
-            var items = $scope.dataProvsPkg.Package.DataProviders;
-            
-            var value_total = 0;
+            try {
 
-            if (items != undefined) {
+                items = $scope.dataProvsPkg.Package.DataProviders;
+                //cos = $scope.dataProvsPkg.Package.CostOfSale;
+            } catch (e) {
+
+                console.log(e.message);
+            }
+
+            if (items != null) {
 
                 for (var i = 0; i < items.length; i++) { // loop over it
 
@@ -55,25 +62,30 @@
                         if (listItem.dataFields[x].isSelected === true) {
 
                             //alert(listItem.name);
-                            value_total += listItem.dataFields[x].price;
+                            valueTotal += listItem.dataFields[x].price;
                         }
                     }
 
                 }
             }
 
-             
-            if (value_total < rsp[0].value) {
+            //if (cos != null) {
+
+            $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
+
+            //}
+
+            if (valueTotal < rspCreate[0].value) {
 
                 $scope.warning = true;
-                $scope.rspStyle = { 'color': 'red' };
+                $scope.rspCreateStyle = { 'color': 'red' };
             } else {
 
                 $scope.warning = false;
-                $scope.rspStyle = { 'color': 'none' };
+                $scope.rspCreateStyle = { 'color': 'none' };
             }
 
-            return value_total;
+            return valueTotal;
         };
 
 

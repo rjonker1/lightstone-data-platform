@@ -97,11 +97,12 @@
                                 <div>
                                     <label>COS:</label>
                                     <div>
-                                        <input id="cosPackage" type="textbox" class="form-control" value="{{total()}}" readonly />
+                                        <input type="textbox" class="form-control" value="{{total()}}" readonly />
+                                        <input id="cosPackage" type="number" class="form-control" style="display: none !important;" ng-model="dataProvsPkg.Package.CostOfSale" readonly/>
                                     </div>
                                     <label>Recommended Sale Price:</label>
                                     <div>
-                                        <input id="rsp" type="textbox" class="form-control" ng-model="dataProvsPkg.Package.RecommendedSalePrice" ng-style="rspStyle" ng-change="{{total()}}" />
+                                        <input id="rsp" type="textbox" class="form-control" ng-model="dataProvsPkg.Package.RecommendedSalePrice" ng-style="rspCreateStyle" ng-change="{{total()}}" />
                                         <span ng-show="warning" syle="width: 80%;">
                                             <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
                                             <span class="help-block">WARNING: </span>

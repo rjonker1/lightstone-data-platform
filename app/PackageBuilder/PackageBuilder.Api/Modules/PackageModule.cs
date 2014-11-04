@@ -94,8 +94,8 @@ namespace PackageBuilder.Api.Modules
         public string Industry { get; set; }
         public DateTime RevisionDate { get; set; }
         public string Owner { get; set; }
-        public int CostOfSale { get; set; }
-        public int RecommendedSalePrice { get; set; }
+        public double CostOfSale { get; set; }
+        public double RecommendedSalePrice { get; set; }
         public IEnumerable<DataProviderDto> DataProviders { get; set; }
     }
 }

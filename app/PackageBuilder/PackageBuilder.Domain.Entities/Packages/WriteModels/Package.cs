@@ -15,9 +15,9 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public string Description { get; private set; }
         [DataMember]
-        public double CostPrice { get; private set; }
+        public double CostOfSale { get; set; }
         [DataMember]
-        public double SalePrice { get; private set; }
+        public double RecommendedSalePrice { get; set; }
         [DataMember]
         public string State { get; private set; }
         [DataMember]
@@ -54,8 +54,8 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             Description = @event.Description;
-            CostPrice = @event.CostPrice;
-            SalePrice = @event.CostPrice;
+            CostOfSale = @event.CostPrice;
+            RecommendedSalePrice = @event.SalePrice;
             State = @event.State;
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
@@ -68,8 +68,8 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             Description = @event.Description;
-            CostPrice = @event.CostPrice;
-            SalePrice = @event.CostPrice;
+            CostOfSale = @event.CostPrice;
+            RecommendedSalePrice = @event.CostPrice;
             State = @event.State;
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;

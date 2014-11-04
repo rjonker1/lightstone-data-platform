@@ -37,14 +37,15 @@
 
         $scope.total = function () {
 
-            var rsp = angular.element(document.getElementById('rsp'));
+            var rspEdit = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
             var items = null;
+            var cos = null;
 
             try {
                 
                 items = $scope.dataProvsPkg.Package[0].dataProviders;
-
+                cos = $scope.dataProvsPkg.Package[0].costOfSale;
             } catch (e) {
 
                 console.log(e.message);
@@ -68,15 +69,19 @@
                 }
             }
 
+            if (cos != null) {
 
-            if (valueTotal < rsp[0].value) {
+                $scope.dataProvsPkg.Package[0].costOfSale = valueTotal;
+            }
+
+            if (valueTotal < rspEdit[0].value) {
 
                 $scope.warning = true;
-                $scope.rspStyle = { 'color': 'red' };
+                $scope.rspEditStyle = { 'color': 'red' };
             } else {
 
                 $scope.warning = false;
-                $scope.rspStyle = { 'color': 'none' };
+                $scope.rspEditStyle = { 'color': 'none' };
             }
 
             return valueTotal;
