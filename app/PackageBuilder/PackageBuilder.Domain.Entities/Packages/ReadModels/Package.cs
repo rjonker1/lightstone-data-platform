@@ -17,7 +17,7 @@ namespace PackageBuilder.Domain.Entities.Packages.ReadModels
 
         protected Package() { }
 
-        public Package(Guid id, string name, string description, State state, int version, string owner, DateTime createdDateDate, DateTime editedDateDate) : base(Guid.NewGuid())
+        public Package(Guid id, string name, string description, State state, int version, string owner, DateTime createdDateDate, DateTime? editedDateDate) : base(Guid.NewGuid())
         {
             PackageId = id;
             Name = name;

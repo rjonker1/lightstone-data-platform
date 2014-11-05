@@ -39,13 +39,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         //Used for serialization
         protected Package() { }
 
-        public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state,  owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, state, owner, createdDate, editedDate, dataProviders));
         }

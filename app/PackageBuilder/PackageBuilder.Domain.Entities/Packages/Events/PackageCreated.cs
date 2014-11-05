@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProvider> DataProviders;
 
-        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)
+        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             Id = id;
             Name = name;

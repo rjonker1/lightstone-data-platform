@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Domain.Core.Dto;
+using Lace.Models.Ivid.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -22,7 +22,7 @@ namespace PackageBuilder.Api.Modules
     {
         public DataProviderModule(IBus bus,
             IDataProviderRepository readRepo,
-            INEventStoreRepository<Domain.Entities.DataProviders.WriteModels.DataProvider> writeRepo, IRepository<State> stateRepo)
+            INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
             Get["/DataProvider"] = parameters => { return Response.AsJson(readRepo); };
 
