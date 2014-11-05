@@ -17,30 +17,24 @@
         var logSuccess = getLogFn(controllerId, 'success');
         var logError = getLogFn(controllerId, 'error');
 
-        //$scope.dataProvider = { "name": "qwe", "description": "qweqweqweqweqweqweqwe" }
-
-        $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
-
         $scope.users = [
 
-         { name: 'user1' },
-         { name: 'user2' },
-         { name: 'user3' }
+        { name: 'Al' },
+        { name: 'user2' },
+        { name: 'user3' }
         ];
 
-      
         $scope.states = [
 
+              { name: 'Draft' },
               { name: 'Under Construction' },
               { name: 'Published' },
               { name: 'Expired' }
         ];
 
-        $scope.createProvider = function(providerData) {
+        $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
-            //
-            //Functionality to post to API
-            //
+        $scope.createProvider = function (providerData) {
 
             return datacontext.editDataProvider($routeParams.id, providerData).then(function(response) {
 
@@ -49,7 +43,6 @@
 
 
             });
-
         };
 
         activate();

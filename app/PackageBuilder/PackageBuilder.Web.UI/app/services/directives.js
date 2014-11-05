@@ -199,4 +199,29 @@
             attrs.$set('class', 'widget-head');
         }
     });
+
+    app.directive("currentDateTime", function () {
+        return function (scope, element, attrs) {
+            var dtFormat;
+
+            scope.$watch(attrs.currentDateTime, function (value) {
+                dtFormat = value;
+                updateTime();
+            });
+
+            function updateTime() {
+                var dt = moment().format(dtFormat);
+                element.text(dt);
+            }
+
+            function updateLater() {
+                setTimeout(function () {
+                    updateTime(); // update DOM
+                    updateLater(); // schedule another update
+                }, 1000);
+            }
+
+            updateLater();
+        }
+    });
 })();
