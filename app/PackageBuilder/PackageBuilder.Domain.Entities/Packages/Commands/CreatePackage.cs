@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
         public readonly State State;
         public readonly string Owner;
         public readonly DateTime CreatedDate;
-        public readonly DateTime EditedDate;
+        public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProvider> DataProviders;
 
         public CreatePackage(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataProvider> dataProviders)

@@ -61,10 +61,11 @@
                 { field: 'name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
-                { field: 'created', displayName: 'Created' },
-                { field: 'edited', displayName: 'Edited' },
+                { field: 'createdDate', displayName: 'Created' },
+                { field: 'editedDate', displayName: 'Edited' },
                 { field: 'version', displayName: 'Version' },
-                { displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
+                //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
+                { displayName: '', cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version"><input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" /></div>' }
 
             ]
         };
@@ -81,6 +82,25 @@
         function getAllPackages() {
 
             return datacontext.getAllPackages().then(function (result) {
+
+                var distinctProviders = Enumerable.From(result)
+                    .Distinct(function (x) {
+                        return x.packageId;
+                    })
+                    .Select(function (x) {
+                        return x.packageId;
+                    });
+
+                $scope.latestVersion = Enumerable.From(distinctProviders)
+                    .ToDictionary(function (x) {
+                        return x;
+                    }, function (id) {
+                        return Enumerable.From(result).Where(function (x) {
+                            return x.packageId == id;
+                        }).Max(function (x) {
+                            return x.version;
+                        });
+                    });
 
                 $scope.dPackagesData = result;
 

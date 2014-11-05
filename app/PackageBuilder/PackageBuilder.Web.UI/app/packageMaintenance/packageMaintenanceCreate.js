@@ -35,31 +35,62 @@
 
         }
 
+        $scope.dateTimeLive = function date_time() {
+            var now = moment().format('MMMM Do YYYY, h:mm:ss a');
+            document.getElementById('datetime').innerHTML = now;
+            setTimeout(function () { date_time(); }, 1000);
+        }
+
+        $scope.dateTimeLive();
+
         $scope.total = function () {
 
-            var items = $scope.dataProvsPkg.Package.DataProviders;
-            alert(items);
-            var value_total = 0;
+            var rspCreate = angular.element(document.getElementById('rsp'));
+            var valueTotal = 0;
+            var items = null;
 
-            if (items != undefined) {
+            try {
 
-                for (var i = 0; i < items.length; i++) { // loop over it
+                items = $scope.dataProvsPkg.Package.DataProviders;
+            } catch (e) {
 
-                    var listItem = items[i]; // an object  
+                //console.log(e.message);
+            }
+
+            if (items != null) {
+
+                for (var i = 0; i < items.length; i++) {
+
+                    var listItem = items[i]; 
 
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
 
                         if (listItem.dataFields[x].isSelected === true) {
 
-                            //alert(listItem.name);
-                            value_total += listItem.dataFields[x].price;
+                            valueTotal += listItem.dataFields[x].price;
                         }
                     }
 
                 }
             }
 
-            return value_total;
+            //if (cos != null) {
+
+            $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
+
+            //}
+
+            if (valueTotal < rspCreate[0].value) {
+
+                $scope.warning = true;
+                $scope.rspCreateStyle = { 'color': 'red' };
+            } else {
+
+                $scope.warning = false;
+                $scope.rspCreateStyle = { 'color': 'none' };
+            }
+
+            return valueTotal;
         };
 
 
@@ -80,17 +111,10 @@
 
             return datacontext.getDataProviderSources().then(function (response) {
 
-                console.log(response);
-
                 if (response.status === 200) {
 
-
-
                     $scope.dataProvsPkg.Package.DataProviders = response.data;
-
-
                     logSuccess('Data Providers loaded!');
-
                 }
 
                 if (response.status === 404) {

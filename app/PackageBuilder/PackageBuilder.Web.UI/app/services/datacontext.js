@@ -20,6 +20,7 @@
             getDataProviderSources: getDataProviderSources,
             getAllPackages: getAllPackages,
             editDataProvider: editDataProvider,
+            editPackage: editPackage,
             createPackage: createPackage,
 
             getPeople: getPeople,
@@ -121,22 +122,7 @@
 
             });
 
-            //GetPackages.query().$promise.then(function (result) {
-
-            //    data = result;
-            //    console.log(data);
-            //    //deferred.resolve(data);
-
-            //}, function (error) {
-
-            //    deferred.reject(error);
-
-            //});
-
-            //console.log('asdasd');
-            //console.log(deferred.promise);
             return $q.when(deferred.promise);
-
         }
 
         //POST
@@ -157,8 +143,26 @@
         }
 
         //POST
+        function editPackage(_id, packageData) {
+
+            var deferred = $q.defer();
+
+            $http.post('http://dev.lightstone.packagebuilder.api/Package/Edit/' + _id + '', packageData).then(function (result) {
+
+                deferred.resolve(result);
+
+            }, function (error) {
+
+                deferred.resolve(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //POST
         function createPackage(packageData) {
 
+            
             var deferred = $q.defer();
 
             $http.post('http://dev.lightstone.packagebuilder.api/Package/Add', packageData).then(function (result) {

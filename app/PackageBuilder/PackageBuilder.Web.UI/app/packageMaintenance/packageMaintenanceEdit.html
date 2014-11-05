@@ -20,6 +20,8 @@
 
 
 <section class="mainbar" data-ng-controller="packageMaintenanceEdit">
+    
+    {{dataProvsPkg.Package[0]}}
 
     <section class="matter">
         <div class="container">
@@ -96,12 +98,18 @@
                                 <div>
                                     <label>COS:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.costOfSale" readonly />
+                                        <input id="cosPackage" type="number" class="form-control" value="{{total()}}" readonly />
                                     </div>
                                     <label>Recommended Sale Price:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" value="{{total()}}" />
+                                        <input id="rsp" type="number" class="form-control" ng-model="dataProvsPkg.Package[0].recommendedSalePrice" ng-style="rspEditStyle" ng-change="{{total()}}" />
+                                        <span ng-show="warning" syle="width: 80%;">
+                                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                            <span class="help-block">WARNING: </span>
+                                            <span class="help-block">Recommended Sale price exceeds Cost of sale!</span>
+                                        </span>
                                     </div>
+
                                 </div>
 
 
@@ -130,7 +138,7 @@
                                     <div style="float: right;">
                                         <button type="button" class="btn btn-danger">Cancel</button>
                                         <button type="button" class="btn btn-primary">Save Draft</button>
-                                        <button type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Publish</button>
+                                        <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Publish</button>
                                     </div>
 
 

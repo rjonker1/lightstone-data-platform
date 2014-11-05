@@ -21,26 +21,38 @@
 
         $scope.dataProvsPkg = {};
         //Prevent $modelValue undefined error
-        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
+        $scope.dataProvsPkg.Package = { 'mock' : 'mock' }
 
 
-        //$scope.createPackage = function (packageData) {
+        $scope.editPackage = function (packageData) {
 
-        //    return datacontext.createPackage(packageData).then(function (response) {
+            return datacontext.editPackage($routeParams.id, packageData).then(function (response) {
 
-        //        console.log(response);
-        //        (response.status === 200) ? logSuccess('Package Created!') : logError('Error 404. Please check your connection settings');
+                console.log(response);
+                (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
 
-        //    });
 
-        //}
+            });
+
+        }
 
         $scope.total = function () {
 
-            var items = $scope.dataProvsPkg.Package[0].dataProviders;
-            var value_total = 0;
+            var rspEdit = angular.element(document.getElementById('rsp'));
+            var valueTotal = 0;
+            var items = null;
+            var cos = null;
 
-            if (items != undefined) {
+            try {
+                
+                items = $scope.dataProvsPkg.Package[0].dataProviders;
+                cos = $scope.dataProvsPkg.Package[0].costOfSale;
+            } catch (e) {
+
+                //console.log(e.message);
+            } 
+
+            if ( items != null ) {
 
                 for (var i = 0; i < items.length; i++) { // loop over it
 
@@ -51,21 +63,30 @@
                         if (listItem.dataFields[x].isSelected === true) {
 
                             //alert(listItem.name);
-                            value_total += listItem.dataFields[x].price;
+                            valueTotal += listItem.dataFields[x].price;
                         }
                     }
 
                 }
             }
 
-            return value_total;
+            if (cos != null) {
+
+                $scope.dataProvsPkg.Package[0].costOfSale = valueTotal;
+            }
+
+            if (valueTotal < rspEdit[0].value) {
+
+                $scope.warning = true;
+                $scope.rspEditStyle = { 'color': 'red' };
+            } else {
+
+                $scope.warning = false;
+                $scope.rspEditStyle = { 'color': 'none' };
+            }
+
+            return valueTotal;
         };
-
-
-        //$scope.toggle = function(scope) {
-        //    scope.toggle();
-        //};
-
 
         activate();
 
@@ -112,5 +133,6 @@
 
             });
         }
+
     }
 })();
