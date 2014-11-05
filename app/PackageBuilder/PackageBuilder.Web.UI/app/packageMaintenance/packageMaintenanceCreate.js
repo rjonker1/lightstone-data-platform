@@ -4,20 +4,35 @@
     var controllerId = 'packageMaintenanceCreate';
 
     angular
-        .module('app')
+        .module( 'app' )
         .controller(controllerId, packageMaintenanceCreate);
 
     packageMaintenanceCreate.$inject = ['$scope', '$parse', '$http', 'common', 'datacontext'];
 
     function packageMaintenanceCreate($scope, $parse, $http, common, datacontext) {
 
-        $scope.title = 'Package Maintenance';
+        $scope.title = 'Package Maintenance - Create';
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
         var logSuccess = getLogFn(controllerId, 'success');
 
-        $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
+        $scope.users = [
+
+        { name: 'Al' },
+        { name: 'user2' },
+        { name: 'user3' }
+        ];
+
+        $scope.states = [
+
+              { name: 'Draft' },
+              { name: 'Under Construction' },
+              { name: 'Published' },
+              { name: 'Expired' }
+        ];
+
+        $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.dataProvsPkg = {};
         //Prevent $modelValue undefined error
@@ -35,13 +50,13 @@
 
         }
 
-        $scope.dateTimeLive = function date_time() {
-            var now = moment().format('MMMM Do YYYY, h:mm:ss a');
-            document.getElementById('datetime').innerHTML = now;
-            setTimeout(function () { date_time(); }, 1000);
-        }
+        //$scope.dateTimeLive = function date_time() {
+        //    var now = moment().format('MMMM Do YYYY, h:mm:ss a');
+        //    document.getElementById('datetime').innerHTML = now;
+        //    setTimeout(function () { date_time(); }, 1000);
+        //}
 
-        $scope.dateTimeLive();
+        //$scope.dateTimeLive();
 
         $scope.total = function () {
 
