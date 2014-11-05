@@ -24,12 +24,13 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
 
         public override void Handle(CreatePackage command)
         {
+            //todo: refactor into PackageRepo
             var existing = _readRepo.FirstOrDefault(x => x.Name.ToLower() == command.Name.ToLower() && x.State.Name == StateName.Published);
             if (existing != null)
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
 
             var entity = new Package(command.Id, command.Name, command.Description, command.CostPrice, command.SalePrice,
-                command.State, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviders);
+                command.State, 0.1M, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviders);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

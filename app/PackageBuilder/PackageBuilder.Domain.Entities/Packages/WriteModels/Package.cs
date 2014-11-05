@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
+using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
@@ -22,6 +23,8 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public State State { get; private set; }
         [DataMember]
+        public decimal DisplayVersion { get; private set; }
+        [DataMember]
         public string Owner { get; private set; }
         [DataMember]
         public DateTime CreatedDate { get; private set; }
@@ -39,15 +42,23 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         //Used for serialization
         protected Package() { }
 
-        public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
-            RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state,  owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state, displayVersion,  owner, createdDate, editedDate, dataProviders));
         }
 
         public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
-            RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, state, owner, createdDate, editedDate, dataProviders));
+            if (state.Name == StateName.Published) 
+                DisplayVersion = Math.Ceiling(DisplayVersion);
+            else
+            {
+                DisplayVersion += 0.1m;
+                Name = name;
+            }
+
+            RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
         private void Apply(PackageCreated @event)
@@ -58,6 +69,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
             State = @event.State;
+            DisplayVersion = @event.DisplayVersion;
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
@@ -72,6 +84,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.CostPrice;
             State = @event.State;
+            DisplayVersion = @event.DisplayVersion;
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;

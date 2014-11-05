@@ -16,12 +16,14 @@ namespace PackageBuilder.TestHelper.DbPersistence
         public IWindsorContainer Container = new WindsorContainer();
         protected ISession Session;
 
-        public override void Observe()
+        public when_persisting_entities_to_db()
         {
             Container.Install(new NHibernateInstaller());
+        }
 
+        public override void Observe()
+        {
             var configuration = Container.Resolve<Configuration>();
-
             configuration.SetProperty("cache.provider_class", "NHibernate.Cache.NoCacheProvider, NHibernate.Cache");
             configuration.SetProperty("cache.use_second_level_cache", "false");
             configuration.SetProperty("cache.use_query_cache", "false");

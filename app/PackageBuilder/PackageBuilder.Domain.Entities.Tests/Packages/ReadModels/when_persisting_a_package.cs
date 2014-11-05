@@ -21,6 +21,7 @@ namespace PackageBuilder.Domain.Entities.Tests.Packages.ReadModels
                 .CheckProperty(c => c.Name, "VVi")
                 .CheckProperty(c => c.Description, "Description")
                 .CheckProperty(c => c.Version, 1)
+                .CheckProperty(c => c.DisplayVersion, 0.1m)
                 .CheckProperty(c => c.Owner, "Owner")
                 .CheckProperty(c => c.CreatedDate, new DateTime(2014, 01, 01))
                 .CheckProperty(c => c.EditedDate, new DateTime(2014, 01, 01))

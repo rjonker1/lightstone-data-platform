@@ -31,11 +31,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             if (command.Version != latestVersion)
                 throw new LightstoneAutoException("This is an older version, please update the latest version of data provider {0}".FormatWith(command.Name));
 
-            var entity = _writeRepo.GetById(command.Id);
+            var entity = _writeRepo.GetById(command.Id, command.Version);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
                 command.SourceURL, command.ResponseType, entity.Version, command.Owner,
-                command.CreatedDate,
-                command.EditedDate, command.DataFields);
+                command.CreatedDate, command.EditedDate, command.DataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

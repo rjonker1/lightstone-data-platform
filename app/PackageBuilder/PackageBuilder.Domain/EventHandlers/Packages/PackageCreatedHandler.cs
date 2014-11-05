@@ -20,11 +20,12 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
 
         public override void Handle(PackageCreated command)
         {
+            //todo: refactor into PackageRepo
             var existing = _repository.FirstOrDefault(x => x.Name.ToLower() == command.Name.ToLower() && x.State.Name == StateName.Published);
             if (existing != null)
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
 
-            _repository.Save(new Package(command.Id, command.Name, command.Description, command.State, command.Version, command.Owner, command.CreatedDate, command.EditedDate));
+            _repository.Save(new Package(command.Id, command.Name, command.Description, command.State, command.Version, command.DisplayVersion, command.Owner, command.CreatedDate, command.EditedDate));
         }
     }
 }

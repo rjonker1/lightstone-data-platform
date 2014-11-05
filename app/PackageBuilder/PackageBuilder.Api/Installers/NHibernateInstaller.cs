@@ -8,8 +8,8 @@ using NHibernate;
 using NHibernate.Cfg;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
-using PackageBuilder.Infrastructure.NHibernate;
 using PackageBuilder.Infrastructure.NHibernate.Conventions;
+using PackageBuilder.Infrastructure.NHibernate.MappingOverrides;
 
 namespace PackageBuilder.Api.Installers
 {
@@ -33,8 +33,8 @@ namespace PackageBuilder.Api.Installers
                                 ConventionBuilder.Id.Always(x => x.GeneratedBy.Assigned()),
                                 ForeignKey.EndsWith("Id"),
                                 new DomainSignatureConvention()
-                            ));
-                    //.UseOverridesFromAssemblyOf<>()
+                            )
+                            .UseOverridesFromAssemblyOf<PackageOverride>());
                     //.Conventions.Add<>());
                     //cfg.FluentMappings.AddFromAssemblyOf<Entity>();
                 }).BuildConfiguration()));

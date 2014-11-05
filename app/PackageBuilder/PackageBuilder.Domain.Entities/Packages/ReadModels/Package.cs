@@ -11,19 +11,22 @@ namespace PackageBuilder.Domain.Entities.Packages.ReadModels
         public virtual string Description { get; protected set; }
         public virtual State State { get; protected set; }
         public virtual int Version { get; protected set; }
+        public virtual decimal DisplayVersion { get; protected set; }
         public virtual string Owner { get; protected set; }
         public virtual DateTime CreatedDate { get; protected set; }
         public virtual DateTime? EditedDate { get; protected set; }
 
         protected Package() { }
 
-        public Package(Guid id, string name, string description, State state, int version, string owner, DateTime createdDateDate, DateTime? editedDateDate) : base(Guid.NewGuid())
+        public Package(Guid id, string name, string description, State state, int version, decimal displayVersion, string owner, DateTime createdDateDate, DateTime? editedDateDate)
+            : base(Guid.NewGuid())
         {
             PackageId = id;
             Name = name;
             Description = description;
             State = state;
             Version = version;
+            DisplayVersion = displayVersion;
             Owner = owner;
             CreatedDate = createdDateDate;
             EditedDate = editedDateDate;

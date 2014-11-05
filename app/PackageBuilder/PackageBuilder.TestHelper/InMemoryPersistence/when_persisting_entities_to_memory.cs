@@ -1,6 +1,4 @@
-﻿using System.IO;
-using NHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
+﻿using NHibernate.Cfg;
 using PackageBuilder.TestHelper.DbPersistence;
 
 namespace PackageBuilder.TestHelper.InMemoryPersistence
@@ -9,16 +7,14 @@ namespace PackageBuilder.TestHelper.InMemoryPersistence
     {
         public override void Observe()
         {
-            base.Observe();
-
             var configuration = Container.Resolve<Configuration>();
             configuration.SetProperty("connection.provider", "NHibernate.Connection.DriverConnectionProvider");
             configuration.SetProperty("connection.driver_class", "NHibernate.Driver.SQLite20Driver");
             configuration.SetProperty("dialect", "NHibernate.Dialect.SQLiteDialect");
             configuration.SetProperty("connection.connection_string", "Data Source=:memory:;Version=3;New=True;");
-            //configuration.SetProperty("connection.release_mode", "on_close");
+            configuration.SetProperty("connection.release_mode", "on_close");
 
-            new SchemaExport(Container.Resolve<Configuration>()).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));
+            base.Observe();
         }
     }
 }
