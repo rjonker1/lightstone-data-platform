@@ -1,23 +1,24 @@
 ﻿using System.IO;
-using Castle.Windsor;
-using NHibernate;
+using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using PackageBuilder.Api.Installers;
-using Xunit.Extensions;
+using PackageBuilder.TestHelper.DbPersistence;
 
 namespace PackageBuilder.TestHelper.InMemoryPersistence
 {
-    public class when_persisting_entities_to_memory : Specification
+    public class when_persisting_entities_to_memory : when_persisting_entities_to_db
     {
-        public IWindsorContainer Container = new WindsorContainer();
-        protected ISession Session;
-
         public override void Observe()
         {
-            Container.Install(new NHibernateInstaller());
-            Session = Container.Resolve<ISessionFactory>().OpenSession();
+            base.Observe();
 
-            new SchemaExport(Container.Resolve<NHibernate.Cfg.Configuration>()).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));
+            var configuration = Container.Resolve<Configuration>();
+            configuration.SetProperty("connection.provider", "NHibernate.Connection.DriverConnectionProvider");
+            configuration.SetProperty("connection.driver_class", "NHibernate.Driver.SQLite20Driver");
+            configuration.SetProperty("dialect", "NHibernate.Dialect.SQLiteDialect");
+            configuration.SetProperty("connection.connection_string", "Data Source=:memory:;Version=3;New=True;");
+            //configuration.SetProperty("connection.release_mode", "on_close");
+
+            new SchemaExport(Container.Resolve<Configuration>()).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));
         }
     }
 }

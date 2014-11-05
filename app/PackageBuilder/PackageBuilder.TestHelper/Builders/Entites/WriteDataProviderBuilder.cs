@@ -5,7 +5,7 @@ using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
-    public class DataProviderBuilder
+    public class WriteDataProviderBuilder
     {
         private Guid _id;
         private string _name;
@@ -15,19 +15,19 @@ namespace PackageBuilder.TestHelper.Builders.Entites
             return new DataProvider(_id, _name, new List<IDataField>());
         }
 
-        public DataProviderBuilder With(Guid id)
+        public WriteDataProviderBuilder With(Guid id)
         {
             _id = id;
             return this;
         }
 
-        public DataProviderBuilder With(string name)
+        public WriteDataProviderBuilder With(string name)
         {
             _name = name;
             return this;
         }
 
-        public DataProviderBuilder With(IEnumerable<IDataField> dataFields)
+        public WriteDataProviderBuilder With(IEnumerable<IDataField> dataFields)
         {
             _dataFields = dataFields;
             return this;

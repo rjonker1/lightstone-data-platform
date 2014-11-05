@@ -23,7 +23,6 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 
         public override void Handle(UpdateDataProvider command)
         {
-            //var existing = _readRepo.FirstOrDefault(x => x.Id != command.Id && x.Name.ToLower() == command.Name.ToLower());
             var existing = _readRepo.Exists(command.Id, command.Name);
             if (existing)
                 throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));

@@ -127,7 +127,8 @@
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
     <Compile Include="Builders\Entites\DataSetBuilder.cs" />
-    <Compile Include="Builders\Entites\DataProviderBuilder.cs" />
+    <Compile Include="Builders\Entites\ReadDataProviderBuilder.cs" />
+    <Compile Include="Builders\Entites\WriteDataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
     <Compile Include="Builders\Entites\IndustryBuilder.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Builders\Entites\UserBuilder.cs" />
     <Compile Include="Builders\Entites\UserPackageBuilder.cs" />
     <Compile Include="Builders\Repositories\TestRepositoryBuilder.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Fakes\TestActionRepository.cs" />
     <Compile Include="Fakes\TestContractPackageRepository.cs" />
     <Compile Include="Fakes\TestContractRepository.cs" />
@@ -150,7 +152,8 @@
     <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataSetMother.cs" />
-    <Compile Include="Mothers\DataProviderMother.cs" />
+    <Compile Include="Mothers\ReadDataProviderMother.cs" />
+    <Compile Include="Mothers\WriteDataProviderMother.cs" />
     <Compile Include="Mothers\IndustryMother.cs" />
     <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
@@ -160,6 +163,10 @@
     <Compile Include="InMemoryPersistence\when_persisting_entities_to_memory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\PackageBuilder.Api.Tests\connectionStrings.config">
+      <Link>connectionStrings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -185,16 +192,6 @@
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="InMemoryPersistence\hibernate.cfg.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DbPersistence\hibernate.cfg.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
