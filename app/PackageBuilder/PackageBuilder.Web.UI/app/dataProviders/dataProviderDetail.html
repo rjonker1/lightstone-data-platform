@@ -1,8 +1,8 @@
 ﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
 
-   <!--<div ng-model="dataProvider">
-            <div ng-repeat="data in dataProvider">
-                <li>{{data.dataFields}}</li>
+    <!--<div ng-model="dataProvider">
+            <div ng-repeat="data in dataProvider.response">
+                <li>{{data}}</li>
             </div>
 
         </div>-->
@@ -50,7 +50,9 @@
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProv.state" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
+                                        <select class="form-control" ng-model="dataProv.state" ng-selected="dataProv.state">
+                                            <option ng-repeat="state in states">{{state.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -64,22 +66,25 @@
                                 <br />
 
                                 <div>
-
-                                    <label>Date: </label>
-                                    <div>
-
-                                        <input type="textbox" class="form-control" value="{{now}}" />
-
-                                    </div>
-
+                                    <label>Created Date:</label>
+                                    <div>{{dataProv.created}}</div>
                                 </div>
+                                
+                                <br />
 
+                                <div>
+                                    <label>Edited Date: </label>
+                                    <div current-date-time="format"></div>
+                                </div>
+                                
                                 <br />
 
                                 <div>
                                     <label>Owner:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProv.owner" ng-options="user.name for user in users"></select>
+                                        <select class="form-control" ng-model="dataProv.owner" ng-selected="dataProv.owner">
+                                            <option ng-repeat="user in users">{{user.name}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +97,7 @@
                             <div class="col-md-8">
                                 <div class="widget wblue">
                                     <div data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
-                                    <div class="widget-content text-center text-info">
+                                    <div class="widget-content text-left text-info">
 
                                         <table class="table" style="padding-top: 20px;">
                                             <thead>

@@ -17,7 +17,22 @@
         var logError = getLogFn(controllerId, 'error');
         var logSuccess = getLogFn(controllerId, 'success');
 
-        $scope.now = moment().format('MMMM Do YYYY, h:mm:ss a');
+        $scope.users = [
+
+        { name: 'Al' },
+        { name: 'user2' },
+        { name: 'user3' }
+        ];
+
+        $scope.states = [
+
+              { name: 'Draft' },
+              { name: 'Under Construction' },
+              { name: 'Published' },
+              { name: 'Expired' }
+        ];
+
+        $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.dataProvsPkg = {};
         //Prevent $modelValue undefined error
