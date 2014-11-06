@@ -32,6 +32,25 @@ namespace PackageBuilder.Api.Modules
 
                 foreach (var provider in readRepo)
                 {
+
+                    //var dpList = new ArrayList();
+
+                    //DataProvider dataProvider;
+
+                    //try
+                    //{
+                    //    dataProvider = writeRepo.GetById(provider.DataProviderId, provider.Version.Value);
+                    //}
+                    //catch (Exception)
+                    //{
+                    //    dataProvider = null;
+                    //}
+
+                    //dpList.Add(dataProvider);
+                        
+                //}
+                //return null;
+
                     DataProviderDto dSource = new DataProviderDto();
 
                     dSource.Id = provider.DataProviderId;
@@ -45,9 +64,9 @@ namespace PackageBuilder.Api.Modules
 
                     try
                     {
-                     
+
                         dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version.Value).DataFields
-                           .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
+                           .Select(field => new DataProviderFieldItemDto { Name = field.Name, Type = field.Type + "", Industry = field.Industry });
                     }
                     catch (Exception ex)
                     {
@@ -58,7 +77,7 @@ namespace PackageBuilder.Api.Modules
                 }
 
                 return Response.AsJson(dataSources);
-            };
+                };
 
             Get["/DataProvider/Add"] = parameters =>
             {

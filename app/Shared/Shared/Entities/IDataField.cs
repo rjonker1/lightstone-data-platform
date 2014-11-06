@@ -5,5 +5,6 @@ namespace DataPlatform.Shared.Entities
     public interface IDataField : INamedEntity
     {
         Type Type { get; }
+        string Industry { get; }
     }
 }

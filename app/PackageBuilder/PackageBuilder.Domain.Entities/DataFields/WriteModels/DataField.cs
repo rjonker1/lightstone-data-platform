@@ -27,10 +27,11 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         {
         }
 
-        public DataField(string name, Type type)
+        public DataField(string name, Type type, string industry)
         {
             Name = name;
             Type = type;
+            Industry = industry;
         }
 
         public DataField(string name, string label, string definition, string industry, double price, bool isSelected)//, Type type)

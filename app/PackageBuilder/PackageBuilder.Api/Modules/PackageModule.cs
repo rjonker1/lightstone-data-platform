@@ -62,11 +62,14 @@ namespace PackageBuilder.Api.Modules
             {
                 PackageDto dto = this.Bind<PackageDto>();
 
+                var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
+
                 //DataProviderMap
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
                 var createdDate = DateTime.Now;
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Owner, createdDate, null, dProviders));
+                //bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Owner, createdDate, null, dProviders));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateResolve.FirstOrDefault(), dto.Owner, createdDate, null, dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -75,11 +78,13 @@ namespace PackageBuilder.Api.Modules
             {
                 PackageDto dto = this.Bind<PackageDto>();
 
+                var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
+
                 //DataProviderMap
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
                 var editedDate = DateTime.Now;
-                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, editedDate, dProviders));
+                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateResolve.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, editedDate, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
@@ -92,7 +97,7 @@ namespace PackageBuilder.Api.Modules
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        //public string State { get; set; }
+        public string State { get; set; }
         public int Version { get; set; }
         public string Industry { get; set; }
         public DateTime CreatedDate { get; set; }

@@ -21,6 +21,8 @@
 
 <section class="mainbar" data-ng-controller="packageMaintenanceEdit">
     
+    {{dataProvsPkg}}
+    
     <section class="matter">
         <div class="container">
             <div class="row">
@@ -58,8 +60,9 @@
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].state" ng-selected="dataProvsPkg.Package[0].state">
-                                            <option ng-repeat="state in states">{{state.name}}</option>
+                                        {{dataProvsPkg.Package[0].state.alias}}
+                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].state" ng-selected="dataProvsPkg.Package[0].state.alias">
+                                            <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
                                         </select>
                                     </div>
                                 </div>

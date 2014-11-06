@@ -20,7 +20,7 @@
 
 
 <section class="mainbar" data-ng-controller="packageMaintenanceCreate">
-    
+    {{dataProvsPkg}}
     <section class="matter">
         <div class="container">
             <div class="row">
@@ -65,7 +65,7 @@
                                 <br />
 
                                 <div>
-                                    <label>Industry:</label>
+                                    <label>Filter Data Providers by Industry:</label>
                                     <div>
                                         <select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
                                     </div>

@@ -24,14 +24,6 @@
         { name: 'user3' }
         ];
 
-        $scope.states = [
-
-              { name: 'Draft' },
-              { name: 'Under Construction' },
-              { name: 'Published' },
-              { name: 'Expired' }
-        ];
-
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.dataProvsPkg = {};
@@ -107,7 +99,7 @@
 
         function activate() {
 
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version)], controllerId)
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates()], controllerId)
                .then(function () { log('Activated Package Maintenance View'); });
         }
 
@@ -146,6 +138,14 @@
                     logError('Error 404. Please check your connection settings');
                 }
 
+            });
+        }
+
+        function getStates() {
+
+            return datacontext.getStates().then(function (response) {
+
+                $scope.states = response;
             });
         }
 
