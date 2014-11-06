@@ -27,7 +27,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
             builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
         }
 
-        private Configuration BuildNihbernateConfiguration()
+        private static Configuration BuildNihbernateConfiguration()
         {
             var configuration = new Configuration();
             configuration.SessionFactoryName("Monitoring.Read.ReadModel");
@@ -44,7 +44,8 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
 
             //TODO: Add mappings assembly
             //configuration.AddAssembly(typeof ());
-        }
 
+            return configuration;
+        }
     }
 }

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Monitoring.DistributedService.DenormalizerHost</RootNamespace>
-    <AssemblyName>Monitoring.DistributedService.DenormalizerHost</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Monitoring.DistributedService.DenormalizerHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
@@ -35,8 +35,21 @@
     <Reference Include="Autofac">
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    <Reference Include="CommonDomain">
+      <HintPath>..\..\..\packages\CommonDomain.1.6.0.3\lib\net40\CommonDomain.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore">
+      <HintPath>..\..\..\packages\EventStore.3.2.0.28\lib\net40\EventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore.Serialization.Json">
+      <HintPath>..\..\..\packages\EventStore.Serialization.Json.3.2.0.28\lib\net40\EventStore.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\..\packages\NEventStore.4.0.0.15\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
@@ -44,7 +57,8 @@
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Host">
+    <Reference Include="NServiceBus.Host, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NServiceBus.Host.5.0.0\lib\net45\NServiceBus.Host.exe</HintPath>
     </Reference>
     <Reference Include="NServiceBus.NHibernate">
@@ -53,20 +67,16 @@
     <Reference Include="NServiceBus.ObjectBuilder.Autofac">
       <HintPath>..\..\..\packages\NServiceBus.Autofac.5.0.0\lib\net45\NServiceBus.ObjectBuilder.Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Transports.RabbitMQ">
+    <Reference Include="NServiceBus.Transports.RabbitMQ, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NServiceBus.RabbitMQ.2.0.1\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.5\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointConfig.cs" />
@@ -78,6 +88,22 @@
     <ProjectReference Include="..\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
       <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
       <Name>Monitoring.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj">
+      <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
+      <Name>Monitoring.Domain.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.DomainModel\Monitoring.DomainModel.csproj">
+      <Project>{ee9d1aec-1e3e-420e-acf0-3058feee6e7f}</Project>
+      <Name>Monitoring.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj">
+      <Project>{365e35da-ee0a-4ac8-8eb3-341f274988f7}</Project>
+      <Name>Monitoring.Read.Denormalizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
+      <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
+      <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

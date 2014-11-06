@@ -42,7 +42,7 @@ namespace Monitoring.DistributedService.Host.IoC
            return Wireup.Init()
                .LogToConsoleWindow()
                //.UsingRavenPersistence("EventStore")
-                .UsingSqlPersistence("EventStore")
+                .UsingSqlPersistence("Monitoring.EventStore")
                 .WithDialect(new MsSqlDialect())
                 .InitializeStorageEngine()
                 .UsingBinarySerialization()

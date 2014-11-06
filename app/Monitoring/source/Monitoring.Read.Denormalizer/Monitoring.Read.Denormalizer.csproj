@@ -54,6 +54,10 @@
       <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
       <Name>Monitoring.Domain.Messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
+      <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
+      <Name>Monitoring.Read.ReadModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
