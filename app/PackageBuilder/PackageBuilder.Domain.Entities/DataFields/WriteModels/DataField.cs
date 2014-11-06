@@ -14,7 +14,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         [DataMember]
         public string Definition { get; internal set; }
         [DataMember]
-        public string Industries { get; internal set; }
+        public string Industry { get; internal set; }
         [DataMember]
         public double Price { get; internal set; }
         [DataMember]
@@ -33,12 +33,12 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Type = type;
         }
 
-        public DataField(string name, string label, string definition, string industries, double price, bool isSelected)//, Type type)
+        public DataField(string name, string label, string definition, string industry, double price, bool isSelected)//, Type type)
         {
             Name = name;
             Label = label;
             Definition = definition;
-            Industries = industries;
+            Industry = industry;
             Price = price;
             IsSelected = isSelected;
             //Type = type;

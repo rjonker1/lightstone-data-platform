@@ -14,10 +14,10 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly State State;
         public readonly string Owner;
         public readonly DateTime CreatedDate;
-        public readonly DateTime EditedDate;
+        public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, State state, string owner, DateTime createdDate)
+        public CreateDataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, State state, string owner, DateTime createdDate, DateTime? editedDate)
         {
 			Id = id;
 			Name = name;
@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
             State = state;
             Owner = owner;
             CreatedDate = createdDate;
-            EditedDate = createdDate;
+            EditedDate = editedDate;
         }
     }
 }

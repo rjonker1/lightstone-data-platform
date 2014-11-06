@@ -24,17 +24,9 @@
         { name: 'user3' }
         ];
 
-        $scope.states = [
-
-              { name: 'Draft' },
-              { name: 'Under Construction' },
-              { name: 'Published' },
-              { name: 'Expired' }
-        ];
-
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
-        $scope.createProvider = function (providerData) {
+        $scope.editProvider = function (providerData) {
 
             return datacontext.editDataProvider($routeParams.id, providerData).then(function(response) {
 
@@ -49,7 +41,7 @@
 
         function activate() {
 
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version)], controllerId)
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId)
                 .then(function () {
                     log('Activated Data Providers Edit View');              
             });
@@ -61,8 +53,22 @@
 
                 console.log(response.data);
                 $scope.dataProvider = response.data;
+            });
+        }
 
-                //(data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
+        function getStates() {
+            
+            return datacontext.getStates().then(function (response) {
+
+                $scope.states = response;
+            });
+        }
+
+        function getIndustries() {
+
+            return datacontext.getIndustries().then(function (response) {
+
+                $scope.industries = response;
             });
         }
     }

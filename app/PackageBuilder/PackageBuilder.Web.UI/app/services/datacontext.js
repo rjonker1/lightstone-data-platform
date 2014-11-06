@@ -23,6 +23,9 @@
             editPackage: editPackage,
             createPackage: createPackage,
 
+            getStates: getStates,
+            getIndustries: getIndustries,
+
             getPeople: getPeople,
             getMessageCount: getMessageCount
           
@@ -176,6 +179,45 @@
 
             return $q.when(deferred.promise);
 
+        }
+
+
+        //GET
+        function getStates() {
+
+            var deferred = $q.defer();
+
+            $http.get('http://dev.lightstone.packagebuilder.api/State').then(function (result) {
+
+                data = result.data;
+                deferred.resolve(data);
+
+            }, function (error) {
+
+                deferred.reject(error);
+
+            });
+
+            return $q.when(deferred.promise);
+        }
+
+        //GET
+        function getIndustries() {
+
+            var deferred = $q.defer();
+
+            $http.get('http://dev.lightstone.packagebuilder.api/Industry').then(function (result) {
+
+                data = result.data;
+                deferred.resolve(data);
+
+            }, function (error) {
+
+                deferred.reject(error);
+
+            });
+
+            return $q.when(deferred.promise);
         }
 
         function getMessageCount() { return $q.when(72); }
