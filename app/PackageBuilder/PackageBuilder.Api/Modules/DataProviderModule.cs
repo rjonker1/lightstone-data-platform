@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Models.Ivid.Dto;
+using Lace.Domain.Core.Dto;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -39,8 +39,8 @@ namespace PackageBuilder.Api.Modules
                     dSource.CostOfSale = provider.CostPrice;
                     dSource.Description = provider.Description;
                     dSource.Owner = provider.Owner;
-                    dSource.Created = provider.CreatedDate;
-                    dSource.Edited = provider.EditedDate;
+                    dSource.CreatedDate = provider.CreatedDate;
+                    dSource.EditedDate = provider.EditedDate;
                     dSource.Version = provider.Version.Value;
 
                     try
@@ -63,7 +63,7 @@ namespace PackageBuilder.Api.Modules
             Get["/DataProvider/Add"] = parameters =>
             {
                 var providerId = Guid.NewGuid();
-                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now));
+                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now, null));
 
                 return Response.AsJson(new { msg = "Success, "+providerId+" created" });
             };
@@ -91,10 +91,12 @@ namespace PackageBuilder.Api.Modules
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
                 var dto = this.Bind<DataProviderDto>();
+
+                var editedDate = DateTime.Now;
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
                 bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    "http://test.com", typeof (DataProviderDto), stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.Created, dFields));
+                    "http://test.com", typeof (DataProviderDto), stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, editedDate, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
             };

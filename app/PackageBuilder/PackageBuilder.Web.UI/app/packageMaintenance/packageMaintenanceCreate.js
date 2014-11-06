@@ -118,7 +118,7 @@
 
         function activate() {
             
-            common.activateController([getDataProviders()], controllerId)
+            common.activateController([getDataProviders(), getStates()], controllerId)
                .then(function () { log('Activated Package Maintenance View'); });
         }
 
@@ -150,6 +150,14 @@
                     logError('Error 404. Please check your connection settings');
                 }
 
+            });
+        }
+
+        function getStates() {
+
+            return datacontext.getStates().then(function (response) {
+
+                $scope.states = response;
             });
         }
     }

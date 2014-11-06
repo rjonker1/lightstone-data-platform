@@ -26,9 +26,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         [DataMember]
         public string Owner { get; internal set; }
         [DataMember]
-        public DateTime Created { get; internal set; }
+        public DateTime CreatedDate { get; internal set; }
         [DataMember]
-        public DateTime Edited { get; internal set; }
+        public DateTime? EditedDate { get; internal set; }
         [DataMember]
         public IEnumerable<IDataField> DataFields { get; internal set; }
 
@@ -49,7 +49,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate, DateTime editedDate) 
+        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate, DateTime? editedDate) 
             : this(id)
         {
             RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, owner, createdDate, editedDate, PopulateDataFields(responseType)));
@@ -82,8 +82,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             SourceURL = @event.SourceURL;
             ResponseType = @event.ResponseType;
             Owner = @event.Owner;
-            Created = @event.CreatedDate;
-            Edited = @event.EditedDate;
+            CreatedDate = @event.CreatedDate;
+            EditedDate = @event.EditedDate;
             DataFields = PopulateDataFields(@event.ResponseType);
         }
 
@@ -96,8 +96,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             SourceURL = @event.SourceURL;
             ResponseType = @event.ResponseType;
             Owner = @event.Owner;
-            Created = @event.CreatedDate;
-            Edited = @event.EditedDate;
+            CreatedDate = @event.CreatedDate;
+            EditedDate = @event.EditedDate;
             DataFields = @event.DataFields;
         }
     }

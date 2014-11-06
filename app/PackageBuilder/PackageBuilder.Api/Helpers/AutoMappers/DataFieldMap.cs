@@ -14,7 +14,7 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
         {
             Mapper.CreateMap<IDataField, DataField>();
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
-                .ConvertUsing(s => new DataField(s.Name, s.Label, s.Definition, s.Industries, Convert.ToDouble(s.Price), Convert.ToBoolean(s.IsSelected)));//, Type.GetType(s.Type)));
+                .ConvertUsing(s => new DataField(s.Name, s.Label, s.Definition, s.Industry, Convert.ToDouble(s.Price), Convert.ToBoolean(s.IsSelected)));//, Type.GetType(s.Type)));
             Mapper.CreateMap<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>()
                 .ConvertUsing(x => x.Select(Mapper.Map<DataProviderFieldItemDto, IDataField>).ToList());
                 //.ConvertUsing(x => x.Where(y => y.IsSelected != null && y.IsSelected.Value).Select(Mapper.Map<DataProviderFieldItemDto, IDataField>));

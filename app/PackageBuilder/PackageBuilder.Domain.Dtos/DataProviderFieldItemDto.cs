@@ -8,7 +8,7 @@ namespace PackageBuilder.Domain.Dtos
         public string Type { get; set; }
         public string Label { get; set; }
         public string Definition { get; set; }
-        public string Industries { get; set; }
+        public string Industry { get; set; }
         public double Price { get; set; }
         public bool? IsSelected { get; set; }
     }
