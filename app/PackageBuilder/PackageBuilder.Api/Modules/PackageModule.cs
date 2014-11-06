@@ -79,7 +79,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
 
                 var editedDate = DateTime.Now;
-                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Owner, dto.CreatedDate, editedDate, dProviders));
+                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, editedDate, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
@@ -92,7 +92,8 @@ namespace PackageBuilder.Api.Modules
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string State { get; set; }
+        //public string State { get; set; }
+        public int Version { get; set; }
         public string Industry { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime EditedDate { get; set; }
