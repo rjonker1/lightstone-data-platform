@@ -6,6 +6,8 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
+//using EventStore;
+//using EventStore.Dispatcher;
 using Monitoring.Domain.Core;
 using Monitoring.Domain.Messages;
 using Monitoring.Write.Service;
@@ -13,6 +15,7 @@ using NEventStore;
 using NEventStore.Dispatcher;
 using NEventStore.Persistence.SqlPersistence.SqlDialects;
 using NServiceBus;
+using NServiceBus.Features;
 using NServiceBus.Transports;
 using NServiceBus.Unicast;
 using Module = Autofac.Module;
@@ -39,9 +42,9 @@ namespace Monitoring.DistributedService.Host.IoC
 
         private static IStoreEvents BuildEventStore(ILifetimeScope container)
         {
-           return Wireup.Init()
-               .LogToConsoleWindow()
-               //.UsingRavenPersistence("EventStore")
+            return Wireup.Init()
+                .LogToConsoleWindow()
+                //.UsingRavenPersistence("EventStore")
                 .UsingSqlPersistence("Monitoring.EventStore")
                 .WithDialect(new MsSqlDialect())
                 .InitializeStorageEngine()
@@ -54,8 +57,36 @@ namespace Monitoring.DistributedService.Host.IoC
 
         private static void DispatchCommit(ILifetimeScope container, Commit commit)
         {
+          
             using (var scope = container.BeginLifetimeScope())
             {
+                //var configuration = new BusConfiguration();
+                
+                //configuration.EnableFeature<JsonSerialization>();
+                //configuration.EnableFeature<XmlSerialization>();
+                //configuration.UseTransport<RabbitMQTransport>();
+                //configuration.UsePersistence<NHibernatePersistence>();
+                //configuration.DisableFeature<TimeoutManager>();
+                //configuration.EndpointName("Monitoring.DistributedService.DenormalizerHost.APPSURE-PC5");
+
+                //IBus bus = Bus.Create(configuration);
+
+                //for (var i = 0; i < commit.Events.Count; i++)
+                //{
+                //    var eventMessage = commit.Events[i];
+                //    var busMessage = new TransportMessage() //eventMessage.Body as TransportMessage;
+                //    {
+                //        Body = Encoding.UTF8.GetBytes(eventMessage.Body.AsJsonString())
+                //    };
+                //    AppendHeaders(busMessage, commit.Headers);
+                //    AppendHeaders(busMessage, eventMessage.Headers);
+                //    AppendVersion(commit, i);
+
+                //    bus.Publish(busMessage);
+                //}
+
+                // configuration.EndpointName("");
+
                 var publisher = scope.Resolve<IPublishMessages>();
 
                 for (var i = 0; i < commit.Events.Count; i++)

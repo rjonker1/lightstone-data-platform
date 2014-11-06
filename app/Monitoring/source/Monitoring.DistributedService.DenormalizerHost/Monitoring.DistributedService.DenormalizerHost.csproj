@@ -44,6 +44,9 @@
     <Reference Include="EventStore.Serialization.Json">
       <HintPath>..\..\..\packages\EventStore.Serialization.Json.3.2.0.28\lib\net40\EventStore.Serialization.Json.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\..\packages\NEventStore.4.0.0.15\lib\net40\NEventStore.dll</HintPath>
     </Reference>
@@ -101,13 +104,19 @@
       <Project>{365e35da-ee0a-4ac8-8eb3-341f274988f7}</Project>
       <Name>Monitoring.Read.Denormalizer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Read.Persistence\Monitoring.Read.Persistence.csproj">
+      <Project>{c0cd057e-a98a-4a9c-a8f3-a92a2e3077db}</Project>
+      <Name>Monitoring.Read.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
       <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
       <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

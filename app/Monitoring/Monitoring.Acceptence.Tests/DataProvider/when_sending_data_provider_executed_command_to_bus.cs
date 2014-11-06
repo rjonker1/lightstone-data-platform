@@ -11,7 +11,7 @@ namespace Monitoring.Acceptence.Tests.DataProvider
 {
     public class when_sending_data_provider_executed_command_to_bus : Specification
     {
-        private readonly ISendOnlyBus _bus;
+        private readonly IBus _bus;
         private readonly ExecuteDataProvider _command;
 
         public when_sending_data_provider_executed_command_to_bus()

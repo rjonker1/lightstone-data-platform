@@ -5,7 +5,7 @@ using NServiceBus;
 
 namespace Monitoring.Read.Denormalizer.DataProvider
 {
-    public class DataProviderEventsUpdater : IHandleMessages<DataProviderExecuted>, IHandleMessages<DataProviderFailed>
+    public class DataProviderEventsUpdater : IHandleMessages<DataProviderExecuted> //, IHandleMessages<DataProviderFailed>
     {
         private readonly IUpdateStorage _storage;
 
@@ -16,7 +16,7 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderExecuted message)
         {
-            var @event = new DataProviderEvent(message.Id)
+            var @event = new DataProviderEventModel(message.Id)
             {
                 Payload = message.Message,
                 Source = message.DataProviderId,
@@ -26,9 +26,9 @@ namespace Monitoring.Read.Denormalizer.DataProvider
             _storage.Add(@event);
         }
 
-        public void Handle(DataProviderFailed message)
-        {
+        //public void Handle(DataProviderFailed message)
+        //{
             
-        }
+        //}
     }
 }
