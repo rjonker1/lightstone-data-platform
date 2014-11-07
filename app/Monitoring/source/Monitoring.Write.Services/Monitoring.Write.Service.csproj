@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateFactory.cs" />
-    <Compile Include="DataProviders\DataProviderExecutedCommandHandler.cs" />
+    <Compile Include="DataProviders\DataProviderExecutedHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

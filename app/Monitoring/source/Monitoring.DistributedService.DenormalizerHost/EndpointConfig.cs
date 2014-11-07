@@ -5,7 +5,7 @@ using NServiceBus.Features;
 
 namespace Monitoring.DistributedService.DenormalizerHost
 {
-    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server, AsA_Client
+    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
         public void Customize(BusConfiguration configuration)
         {

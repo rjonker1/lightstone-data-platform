@@ -6,20 +6,21 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
-//using EventStore;
-//using EventStore.Dispatcher;
 using Monitoring.Domain.Core;
 using Monitoring.Domain.Messages;
 using Monitoring.Write.Service;
 using NEventStore;
-using NEventStore.Dispatcher;
 using NEventStore.Persistence.SqlPersistence.SqlDialects;
 using NServiceBus;
-using NServiceBus.Features;
 using NServiceBus.Transports;
 using NServiceBus.Unicast;
 using Module = Autofac.Module;
 
+/*
+ * Important to Bind the Denormalizer queue to the Host. This is done using Rabbit MQ Adminisration 
+ * Host Exchange -> Bind the Denormalizing Host to the Host
+ *  
+ */
 namespace Monitoring.DistributedService.Host.IoC
 {
     public class DomainModule : Module
@@ -50,8 +51,8 @@ namespace Monitoring.DistributedService.Host.IoC
                 .InitializeStorageEngine()
                 .UsingBinarySerialization()
                 .Compress()
-                .UsingAsynchronousDispatchScheduler()
-                .DispatchTo(new DelegateMessageDispatcher(c => DispatchCommit(container, c)))
+                //.UsingAsynchronousDispatchScheduler()
+                //.DispatchTo(new DelegateMessageDispatcher(c => DispatchCommit(container, c)))
                 .Build();
         }
 
@@ -60,33 +61,6 @@ namespace Monitoring.DistributedService.Host.IoC
           
             using (var scope = container.BeginLifetimeScope())
             {
-                //var configuration = new BusConfiguration();
-                
-                //configuration.EnableFeature<JsonSerialization>();
-                //configuration.EnableFeature<XmlSerialization>();
-                //configuration.UseTransport<RabbitMQTransport>();
-                //configuration.UsePersistence<NHibernatePersistence>();
-                //configuration.DisableFeature<TimeoutManager>();
-                //configuration.EndpointName("Monitoring.DistributedService.DenormalizerHost.APPSURE-PC5");
-
-                //IBus bus = Bus.Create(configuration);
-
-                //for (var i = 0; i < commit.Events.Count; i++)
-                //{
-                //    var eventMessage = commit.Events[i];
-                //    var busMessage = new TransportMessage() //eventMessage.Body as TransportMessage;
-                //    {
-                //        Body = Encoding.UTF8.GetBytes(eventMessage.Body.AsJsonString())
-                //    };
-                //    AppendHeaders(busMessage, commit.Headers);
-                //    AppendHeaders(busMessage, eventMessage.Headers);
-                //    AppendVersion(commit, i);
-
-                //    bus.Publish(busMessage);
-                //}
-
-                // configuration.EndpointName("");
-
                 var publisher = scope.Resolve<IPublishMessages>();
 
                 for (var i = 0; i < commit.Events.Count; i++)

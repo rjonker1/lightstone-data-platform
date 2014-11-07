@@ -1,11 +1,11 @@
 ﻿using Monitoring.Domain.Core.Contracts;
-using Monitoring.Domain.Messages.Events;
+using Monitoring.Domain.Messages.Commands;
 using Monitoring.Read.ReadModel.Models.DataProviders;
 using NServiceBus;
 
 namespace Monitoring.Read.Denormalizer.DataProvider
 {
-    public class DataProviderEventsUpdater : IHandleMessages<DataProviderExecuted> //, IHandleMessages<DataProviderFailed>
+    public class DataProviderEventsUpdater : IHandleMessages<ExecuteDataProvider> //, IHandleMessages<DataProviderFailed>
     {
         private readonly IUpdateStorage _storage;
 
@@ -14,12 +14,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
             _storage = storage;
         }
 
-        public void Handle(DataProviderExecuted message)
+        public void Handle(ExecuteDataProvider message)
         {
-            var @event = new DataProviderEventModel(message.Id)
+            var @event = new EventForDataProviderModel(message.Id)
             {
                 Payload = message.Message,
-                Source = message.DataProviderId,
+                DataProviderId = message.DataProviderId,
                 TimeStamp = message.Date
             };
 
