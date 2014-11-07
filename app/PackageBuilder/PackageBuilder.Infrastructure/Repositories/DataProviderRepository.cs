@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using NHibernate;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
@@ -12,9 +13,9 @@ namespace PackageBuilder.Infrastructure.Repositories
         {
         }
 
-        public bool Exists(Guid id, string name)
+        public bool Exists(Guid id, DataProviderName name)
         {
-            return this.FirstOrDefault(x => x.Id != id && x.Name.ToLower() == name) != null;
+            return this.FirstOrDefault(x => x.Id != id && x.Name == name) != null;
         }
     }
 }

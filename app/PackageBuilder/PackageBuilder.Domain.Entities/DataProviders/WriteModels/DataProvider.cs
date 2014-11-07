@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Entities;
-using PackageBuilder.Core.Helpers.Extensions;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
@@ -14,7 +12,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     public class DataProvider : AggregateBase, IDataProvider
     {
         [DataMember]
-        public string Name { get; internal set; }
+        public DataProviderName Name { get; internal set; } //todo use enum
         [DataMember]
         public string Description { get; internal set; }
         [DataMember]
@@ -41,7 +39,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         {
         }
 
-        public DataProvider(Guid id, string name, IEnumerable<IDataField> dataFields) 
+        public DataProvider(Guid id, DataProviderName name, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
             Id = id;
@@ -49,28 +47,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate, DateTime editedDate) 
+        public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, owner, createdDate, editedDate, PopulateDataFields(responseType)));
+            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, owner, createdDate, editedDate, dataFields));
         }
 
-        public void CreateDataProviderRevision(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
             RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, version, owner, createdDate, editedDate, dataFields));
-        }
-
-        public DataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl,
-            Type responseType, string state, string owner, DateTime createdDate, DateTime editedDate,
-            IEnumerable<IDataField> dataFields)
-        {
-            
-        }
-
-        private IEnumerable<IDataField> PopulateDataFields(Type type)
-        {
-            var fields = type.GetPublicProperties().Select(x => new Tuple<string, Type>(x.Name, x.PropertyType));
-            return fields.Select(field => new DataField(field.Item1, field.Item2)).ToList();
         }
 
         private void Apply(DataProviderCreated @event)
@@ -84,7 +69,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Owner = @event.Owner;
             Created = @event.CreatedDate;
             Edited = @event.EditedDate;
-            DataFields = PopulateDataFields(@event.ResponseType);
+            DataFields = @event.DataFields;
         }
 
         private void Apply(DataProviderUpdated @event)

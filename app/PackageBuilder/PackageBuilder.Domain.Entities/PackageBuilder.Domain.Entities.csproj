@@ -41,6 +41,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Release\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\Shared\Shared\bin\Release\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
@@ -85,6 +88,7 @@
     <Compile Include="DataFields\Events\DataFieldRenamed.cs" />
     <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
+    <Compile Include="DataProviders\Commands\CreateLightstoneDataProvider.cs" />
     <Compile Include="DataProviders\Commands\UpdateDataProvider.cs" />
     <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />

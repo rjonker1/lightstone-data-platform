@@ -60,13 +60,13 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProvider/Add"] = parameters =>
-            {
-                var providerId = Guid.NewGuid();
-                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now));
+            //Get["/DataProvider/Add"] = parameters =>
+            //{
+            //    var providerId = Guid.NewGuid();
+            //    bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now));
 
-                return Response.AsJson(new { msg = "Success, "+providerId+" created" });
-            };
+            //    return Response.AsJson(new { msg = "Success, "+providerId+" created" });
+            //};
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {

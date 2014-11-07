@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 
 namespace PackageBuilder.Domain.Dtos
 {
     public class DataProviderDto
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public DataProviderName Name { get; set; }
         public double CostOfSale { get; set; }
         public string Owner { get; set; }
         public string Description { get; set; }

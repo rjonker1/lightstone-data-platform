@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Models.Ivid.Dto;
 using Moq;
 using PackageBuilder.Core.NEventStore;
@@ -16,7 +17,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         private readonly Mock<INEventStoreRepository<DataProvider>> _eventStoreRepository = new Mock<INEventStoreRepository<DataProvider>>();
         public override void Observe()
         {
-            var command = new CreateDataProvider(Guid.NewGuid(), "Name", "Description", 10d, "http://test.com", typeof(IvidResponse), StateMother.Published, "User", DateTime.Now);
+            var command = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, "http://test.com", typeof(IvidResponse), StateMother.Published, "User", DateTime.Now, null);
             _handler = new CreateDataProviderHandler(_eventStoreRepository.Object, null);
             _handler.Handle(command);
         }
