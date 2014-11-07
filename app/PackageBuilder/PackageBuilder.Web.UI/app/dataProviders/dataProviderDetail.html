@@ -20,8 +20,8 @@
                             <br />
                             
                             <div style="float: right;">
-                                <button type="button" class="btn btn-danger">Cancel</button>
-                                <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save DataProvider</button>
+                                <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                                <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save Data Provider</button>
                             </div>
 
                             <div id="1" class="col-md-3">
@@ -116,9 +116,9 @@
                                                     <td><input class="form-control" ng-model="dField.label" type="text"></td>
                                                     <td><input class="form-control" ng-model="dField.definition" type="text"></td>
                                                     <td>
-                                                        <select class="form-control" ng-model="dField.industry">
-                                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                                        </select>
+                                                        <select class="form-control" ng-model="dField.industry" ng-options="industry.name as industry.name for industry in industries" />
+                                                        <!--<option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                                        </select>-->
                                                     </td>
                                                 </tr>
 

@@ -7,9 +7,9 @@
         .module( 'app' )
         .controller( controllerId, dataProviderDetail );
 
-    dataProviderDetail.$inject = ['$scope', '$routeParams', 'common', 'datacontext']; 
+    dataProviderDetail.$inject = ['$scope','$location', '$routeParams', 'common', 'datacontext']; 
 
-    function dataProviderDetail($scope, $routeParams, common, datacontext) {
+    function dataProviderDetail($scope, $location, $routeParams, common, datacontext) {
 
         $scope.title = 'Data Provider Detail';
         var getLogFn = common.logger.getLogFn;
@@ -35,6 +35,11 @@
 
 
             });
+        };
+
+        $scope.cancel = function () {
+
+            $location.path('/data-providers');
         };
 
         activate();

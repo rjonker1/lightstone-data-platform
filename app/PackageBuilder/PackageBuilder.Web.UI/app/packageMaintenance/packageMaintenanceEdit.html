@@ -7,7 +7,7 @@
         {{provider.name}}
     </div>
     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
-        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields">
+        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields | filter:filterIndustry">
 
             <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
             <div class="col-md-6">{{dataField.name}}</div>
@@ -20,9 +20,7 @@
 
 
 <section class="mainbar" data-ng-controller="packageMaintenanceEdit">
-    
-    {{dataProvsPkg}}
-    
+
     <section class="matter">
         <div class="container">
             <div class="row">
@@ -60,8 +58,7 @@
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        {{dataProvsPkg.Package[0].state.alias}}
-                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].state" ng-selected="dataProvsPkg.Package[0].state.alias">
+                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].state">
                                             <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
                                         </select>
                                     </div>
@@ -70,10 +67,9 @@
                                 <br />
 
                                 <div>
-                                    <label>Industry:</label>
-                                    <div>
-                                        <select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-change="updateAPIModel()" ng-options="state.name for state in states"></select>
-                                    </div>
+                                    <label>Filter Data Providers fields by Industry:</label>
+                                    <select class="form-control" ng-model="filteredConstraint"
+                                            ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>
                                 </div>
 
                                 <br />
@@ -137,9 +133,8 @@
                                     <br />
 
                                     <div style="float: right;">
-                                        <button type="button" class="btn btn-danger">Cancel</button>
-                                        <button type="button" class="btn btn-primary">Save Draft</button>
-                                        <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Publish</button>
+                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                                        <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Save Package</button>
                                     </div>
 
 

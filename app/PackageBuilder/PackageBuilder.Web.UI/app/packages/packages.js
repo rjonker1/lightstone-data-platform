@@ -63,7 +63,7 @@
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'createdDate', displayName: 'Created' },
                 { field: 'editedDate', displayName: 'Edited' },
-                { field: 'version', displayName: 'Version' },
+                { field: 'displayVersion', displayName: 'Version' },
                 //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
                 { displayName: '', cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version"><input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" /></div>' }
 

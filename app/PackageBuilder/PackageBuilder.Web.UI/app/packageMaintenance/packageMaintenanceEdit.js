@@ -7,11 +7,12 @@
         .module('app')
         .controller(controllerId, packageMaintenanceCreate);
 
-    packageMaintenanceCreate.$inject = ['$scope', '$routeParams', '$parse', '$http', 'common', 'datacontext'];
+    packageMaintenanceCreate.$inject = ['$scope', '$location', '$routeParams', '$parse', '$http', 'common', 'datacontext'];
 
-    function packageMaintenanceCreate($scope, $routeParams, $parse, $http, common, datacontext) {
+    function packageMaintenanceCreate($scope, $location, $routeParams, $parse, $http, common, datacontext) {
 
         $scope.title = 'Package Maintenance - Edit';
+        var filterVal = 'All';
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
@@ -37,10 +38,26 @@
 
                 console.log(response);
                 (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
-
-
             });
+        }
 
+        $scope.cancel = function () {
+
+            $location.path('/packages');
+        };
+
+        $scope.filterIndustry = function (fields) {
+
+            if (filterVal != 'All') {
+                return fields.industry === filterVal;
+            }
+
+            return fields;
+        };
+
+        $scope.filterData = function (filter) {
+
+            filterVal = filter.name;
         }
 
         $scope.total = function () {
@@ -56,20 +73,18 @@
                 cos = $scope.dataProvsPkg.Package[0].costOfSale;
             } catch (e) {
 
-                //console.log(e.message);
             } 
 
             if ( items != null ) {
 
-                for (var i = 0; i < items.length; i++) { // loop over it
+                for (var i = 0; i < items.length; i++) { 
 
-                    var listItem = items[i]; // an object  
+                    var listItem = items[i];
 
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
 
                         if (listItem.dataFields[x].isSelected === true) {
 
-                            //alert(listItem.name);
                             valueTotal += listItem.dataFields[x].price;
                         }
                     }
@@ -95,11 +110,12 @@
             return valueTotal;
         };
 
+
         activate();
 
         function activate() {
 
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates()], controllerId)
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId)
                .then(function () { log('Activated Package Maintenance View'); });
         }
 
@@ -114,7 +130,8 @@
                     console.log(response.data.response);
 
                     $scope.dataProvsPkg.Package = response.data.response;
-
+                    //Manipulate current state of Pakage at load to reflect alias of enum from API
+                    $scope.dataProvsPkg.Package[0].state = $scope.dataProvsPkg.Package[0].state.alias;
 
                     logSuccess('Data Providers loaded!');
 
@@ -132,7 +149,6 @@
 
                     }).error(function (data, status, headers, config) {
 
-
                     });
 
                     logError('Error 404. Please check your connection settings');
@@ -146,6 +162,15 @@
             return datacontext.getStates().then(function (response) {
 
                 $scope.states = response;
+            });
+        }
+
+        function getIndustries() {
+
+            return datacontext.getIndustries().then(function (response) {
+
+                $scope.industries = response;
+                $scope.filteredConstraint = $scope.industries[0];
             });
         }
 

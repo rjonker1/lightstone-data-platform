@@ -7,9 +7,9 @@
         .module( 'app' )
         .controller(controllerId, packageMaintenanceCreate);
 
-    packageMaintenanceCreate.$inject = ['$scope', '$timeout', '$parse', '$http', 'common', 'datacontext'];
+    packageMaintenanceCreate.$inject = ['$scope', '$location', '$timeout', '$parse', '$http', 'common', 'datacontext'];
 
-    function packageMaintenanceCreate($scope, $timeout, $parse, $http, common, datacontext) {
+    function packageMaintenanceCreate($scope, $location, $timeout, $parse, $http, common, datacontext) {
 
         $scope.title = 'Package Maintenance - Create';
         var filterVal = 'All';
@@ -42,6 +42,11 @@
             });
 
         }
+
+        $scope.cancel = function () {
+
+            $location.path('/packages');
+        };
 
         $scope.filteredConstraint = '';
 
@@ -105,7 +110,7 @@
             return valueTotal;
         };
 
-
+        activate();
       
         function activate() {
             
@@ -157,10 +162,9 @@
             return datacontext.getIndustries().then(function (response) {
 
                 $scope.industries = response;
+                $scope.filteredConstraint = $scope.industries[0];
             });
         }
-
-        activate();
 
     }
 })();
