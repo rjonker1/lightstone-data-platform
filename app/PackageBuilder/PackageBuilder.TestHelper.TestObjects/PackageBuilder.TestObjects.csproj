@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\DataProviderResponses\IvidResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AccidentDistributionBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AmortisationFactorBuilder.cs" />
@@ -61,6 +62,8 @@
     <Compile Include="Builders\DataProviderResponses\Valuations\TotalSalesByAgeModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\TotalSalesByGenderModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\VehicleValuationBuilder.cs" />
+    <Compile Include="Mothers\DataProviderResponses\IvidResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\VehicleSpecificInformationMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AccidentDistributionModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisationFactorMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisedValueModelMother.cs" />

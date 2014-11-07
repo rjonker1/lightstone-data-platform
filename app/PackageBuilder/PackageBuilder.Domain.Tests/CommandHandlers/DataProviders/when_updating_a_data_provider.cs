@@ -6,7 +6,7 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.TestHelper.Mothers;
+using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
@@ -17,7 +17,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         private readonly Mock<INEventStoreRepository<DataProvider>> _eventStoreRepository = new Mock<INEventStoreRepository<DataProvider>>();
         public override void Observe()
         {
-            var command = new CreateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, "http://test.com", typeof(IvidResponse), StateMother.Published, "User", DateTime.Now, null);
+            var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, "http://test.com", typeof(IvidResponse), "User", DateTime.Now);
             _handler = new CreateDataProviderHandler(_eventStoreRepository.Object, null);
             _handler.Handle(command);
         }

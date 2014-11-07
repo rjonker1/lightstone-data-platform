@@ -17,4 +17,15 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
                 .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
         }
     }
+
+    public class IvidResponseMap : ICreateAutoMapperMaps
+    {
+        public void CreateMaps()
+        {
+            Mapper.CreateMap<IProvideVehicleSpecificInformation, IDataField>()
+                .ConvertUsing(s => new DataField(s.GetType().Name, s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IProvideDataFromIvid, IEnumerable<IDataField>>()
+                .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
+        }
+    }
 }
