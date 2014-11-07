@@ -7,11 +7,12 @@
         .module( 'app' )
         .controller(controllerId, packageMaintenanceCreate);
 
-    packageMaintenanceCreate.$inject = ['$scope', '$parse', '$http', 'common', 'datacontext'];
+    packageMaintenanceCreate.$inject = ['$scope', '$timeout', '$parse', '$http', 'common', 'datacontext'];
 
-    function packageMaintenanceCreate($scope, $parse, $http, common, datacontext) {
+    function packageMaintenanceCreate($scope, $timeout, $parse, $http, common, datacontext) {
 
         $scope.title = 'Package Maintenance - Create';
+        var filterVal = 'All';
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
@@ -22,14 +23,6 @@
         { name: 'Al' },
         { name: 'user2' },
         { name: 'user3' }
-        ];
-
-        $scope.states = [
-
-              { name: 'Draft' },
-              { name: 'Under Construction' },
-              { name: 'Published' },
-              { name: 'Expired' }
         ];
 
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
@@ -50,13 +43,21 @@
 
         }
 
-        //$scope.dateTimeLive = function date_time() {
-        //    var now = moment().format('MMMM Do YYYY, h:mm:ss a');
-        //    document.getElementById('datetime').innerHTML = now;
-        //    setTimeout(function () { date_time(); }, 1000);
-        //}
+        $scope.filteredConstraint = '';
 
-        //$scope.dateTimeLive();
+        $scope.filterIndustry = function (fields) {
+
+            if (filterVal != 'All') {
+                return fields.industry === filterVal;
+            }
+
+            return fields;
+        };
+
+       $scope.filterData = function(filter) {
+
+           filterVal = filter.name;
+       }
 
         $scope.total = function () {
 
@@ -87,13 +88,9 @@
                     }
 
                 }
-            }
-
-            //if (cos != null) {
+            } 
 
             $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
-
-            //}
 
             if (valueTotal < rspCreate[0].value) {
 
@@ -109,16 +106,10 @@
         };
 
 
-        //$scope.toggle = function(scope) {
-        //    scope.toggle();
-        //};
-
-
-        activate();
-
+      
         function activate() {
             
-            common.activateController([getDataProviders(), getStates()], controllerId)
+            common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId)
                .then(function () { log('Activated Package Maintenance View'); });
         }
 
@@ -160,5 +151,16 @@
                 $scope.states = response;
             });
         }
+
+        function getIndustries() {
+
+            return datacontext.getIndustries().then(function (response) {
+
+                $scope.industries = response;
+            });
+        }
+
+        activate();
+
     }
 })();
