@@ -1,8 +1,5 @@
 ﻿using System;
-using Monitoring.Domain.Core;
 using Monitoring.Domain.Messages.Commands;
-using Monitoring.Domain.Messages.Events;
-using Monitoring.Test.Helper.Builder.DataProviderEvents;
 using Monitoring.Test.Helper.Mothers;
 using NServiceBus;
 using Xunit.Extensions;
@@ -19,11 +16,7 @@ namespace Monitoring.Acceptence.Tests.DataProvider
             _bus = BusFactory.NServiceRabbitMqBus();
 
             _command = new ExecuteDataProvider(Guid.NewGuid(), (int) Domain.Core.Consumers.DataProvider.Audatex,
-                Domain.Core.Constants.DefinedMessages.StartCallingDataProvider, DateTime.UtcNow);
-
-
-            //_command = new DataProviderExecutedCommand(Guid.NewGuid(), Guid.NewGuid(),
-            //    EventMessageBuilder.DataProviderExecutedEvent());
+                Domain.Core.Constants.DefinedMessages.StartCallingDataProvider, "", DateTime.UtcNow);
         }
 
         public override void Observe()
