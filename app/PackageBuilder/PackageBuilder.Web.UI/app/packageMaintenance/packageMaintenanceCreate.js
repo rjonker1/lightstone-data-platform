@@ -97,7 +97,7 @@
 
             $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
 
-            if (valueTotal < rspCreate[0].value) {
+            if (valueTotal > rspCreate[0].value) {
 
                 $scope.warning = true;
                 $scope.rspCreateStyle = { 'color': 'red' };
@@ -125,6 +125,7 @@
                 if (response.status === 200) {
 
                     $scope.dataProvsPkg.Package.DataProviders = response.data;
+                    $scope.dataProvsPkg.Package.state = 'Draft';
                     logSuccess('Data Providers loaded!');
                 }
 

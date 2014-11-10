@@ -46,7 +46,7 @@
 
         function activate() {
 
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId)
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getIndustries()], controllerId)
                 .then(function () {
                     log('Activated Data Providers Edit View');              
             });
@@ -58,14 +58,6 @@
 
                 console.log(response.data);
                 $scope.dataProvider = response.data;
-            });
-        }
-
-        function getStates() {
-            
-            return datacontext.getStates().then(function (response) {
-
-                $scope.states = response;
             });
         }
 

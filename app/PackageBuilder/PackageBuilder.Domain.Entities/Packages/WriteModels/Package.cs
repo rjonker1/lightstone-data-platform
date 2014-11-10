@@ -82,7 +82,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Name = @event.Name;
             Description = @event.Description;
             CostOfSale = @event.CostPrice;
-            RecommendedSalePrice = @event.CostPrice;
+            RecommendedSalePrice = @event.SalePrice;
             State = @event.State;
             DisplayVersion = @event.DisplayVersion;
             Owner = @event.Owner;

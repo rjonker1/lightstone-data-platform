@@ -97,7 +97,7 @@
                 $scope.dataProvsPkg.Package[0].costOfSale = valueTotal;
             }
 
-            if (valueTotal < rspEdit[0].value) {
+            if (valueTotal > rspEdit[0].value) {
 
                 $scope.warning = true;
                 $scope.rspEditStyle = { 'color': 'red' };
@@ -126,8 +126,6 @@
                 console.log(response);
 
                 if (response.status === 200) {
-
-                    console.log(response.data.response);
 
                     $scope.dataProvsPkg.Package = response.data.response;
                     //Manipulate current state of Pakage at load to reflect alias of enum from API

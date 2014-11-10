@@ -67,14 +67,6 @@
                                 <br />
 
                                 <div>
-                                    <label>Filter Data Providers fields by Industry:</label>
-                                    <select class="form-control" ng-model="filteredConstraint"
-                                            ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>
-                                </div>
-
-                                <br />
-
-                                <div>
 
                                     <label>Revision Date: </label>
                                     <div current-date-time="format"></div>
@@ -84,13 +76,24 @@
                                 <br />
 
                                 <div>
+                                    <label>Package Industry:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].industry" ng-selected="dataProvsPkg.Package.industry">
+                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <!--<div>
                                     <label>Owner:</label>
                                     <div>
                                         <select class="form-control" ng-model="dataProvsPkg.Package[0].owner" ng-selected="dataProvsPkg.Package[0].owner">
                                             <option ng-repeat="user in users">{{user.name}}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div>
                                     <label>COS:</label>
@@ -103,7 +106,7 @@
                                         <span ng-show="warning" syle="width: 80%;">
                                             <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
                                             <span class="help-block">WARNING: </span>
-                                            <span class="help-block">Recommended Sale price exceeds Cost of sale!</span>
+                                            <span class="help-block">Cost of sale exceeds Recommended Sale price!</span>
                                         </span>
                                     </div>
 
@@ -116,9 +119,18 @@
                             <!-- DataProvider -->
 
                             <div class="row">
-                                <div class="col-md-4">
 
-                                    <h3>Data Providers</h3>
+                                <div class="col-md-4" style="padding-bottom: 20px;">
+                                    <div style="float: left;"><h3>Data Providers</h3></div>
+                                    <div style="float: right; text-align: right;">
+                                        <label>Filter Data Providers fields by Industry:</label>
+                                        <select class="form-control" ng-model="filteredConstraint"
+                                                ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
 
                                     <div ui-tree id="asdt" ng-model="dataProvsPkg">
                                         <div ng-repeat="providers in dataProvsPkg.Package">
