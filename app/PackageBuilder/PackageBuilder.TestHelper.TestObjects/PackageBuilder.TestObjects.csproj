@@ -46,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\DataProviderResponses\IvidResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\LightstoneResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\RgtResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\RgtVinResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AccidentDistributionBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AmortisationFactorBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\AmortisedValueModelBuilder.cs" />
@@ -61,8 +64,12 @@
     <Compile Include="Builders\DataProviderResponses\Valuations\SaleModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\TotalSalesByAgeModelBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\Valuations\TotalSalesByGenderModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\VehicleSpecificInformationBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\VehicleValuationBuilder.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\RgtResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\RgtVinResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\VehicleSpecificInformationMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AccidentDistributionModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisationFactorMother.cs" />

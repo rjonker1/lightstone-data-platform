@@ -16,10 +16,10 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
                 .ConvertUsing(s =>
                 {
                     var properties = s.GetType().GetPublicProperties();
-                    var list = properties
-                        .Where(property => (property.PropertyType.IsClass || property.PropertyType.IsInterface) && !TypeExtensions.IsSimple(property.PropertyType) && property.PropertyType != typeof (IPair<string, double>[]))
-                        .Select(property => Mapper.Map(property.GetValue(s), property.PropertyType, typeof (IDataField)) as IDataField).ToList();
-                    list.AddRange(properties.Select(field => new DataField(field.Name, field.PropertyType)));
+                    var complexProperties = properties
+                        .Where(property => (property.PropertyType.IsClass || property.PropertyType.IsInterface) && !TypeExtensions.IsSimple(property.PropertyType) && property.PropertyType != typeof (IPair<string, double>[])).ToList();
+                    var list = complexProperties.Select(property => Mapper.Map(property.GetValue(s), property.PropertyType, typeof (IDataField)) as IDataField).ToList();
+                    list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType)));
                     return list;
                 });
         }

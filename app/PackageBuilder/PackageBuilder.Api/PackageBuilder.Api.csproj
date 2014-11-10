@@ -167,8 +167,12 @@
     <Compile Include="Helpers\AutoMappers\DataFieldMap.cs" />
     <Compile Include="Helpers\AutoMappers\DataProviderMap.cs" />
     <Compile Include="Helpers\AutoMappers\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMappers\IvidResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\IvidTitleHolderResponseMap.cs" />
     <Compile Include="Helpers\AutoMappers\LightstoneResponseMap.cs" />
     <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
+    <Compile Include="Helpers\AutoMappers\RgtResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\RgtVinResponseMap.cs" />
     <Compile Include="Helpers\AutoMappers\VehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />

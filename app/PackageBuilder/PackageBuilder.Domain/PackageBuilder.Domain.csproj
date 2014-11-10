@@ -88,6 +88,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommandHandlers\DataProviders\ImportDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\CreateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\UpdateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\Industries\RenameIndustryHandler.cs" />

@@ -1,8 +1,5 @@
-﻿using System;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts.DataProviders;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
@@ -10,7 +7,6 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -26,8 +22,7 @@ namespace PackageBuilder.Api
             base.ApplicationStartup(container, pipelines);
 
             var handler = container.Resolve<IHandleMessages>();
-            handler.Handle(new CreateDataProvider(IvidResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, DataProviderName.Ivid.ToString(), 0d, "http://test", typeof(IProvideDataFromIvid), "Owner", DateTime.Now));
-            handler.Handle(new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d, "http://test", typeof(IProvideDataFromLightstone), "Owner", DateTime.Now));
+            handler.Handle(new ImportDataProvider());
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

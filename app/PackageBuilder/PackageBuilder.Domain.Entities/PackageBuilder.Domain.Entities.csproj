@@ -89,6 +89,7 @@
     <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
     <Compile Include="DataProviders\Commands\CreateLightstoneDataProvider.cs" />
+    <Compile Include="DataProviders\Commands\ImportDataProvider.cs" />
     <Compile Include="DataProviders\Commands\UpdateDataProvider.cs" />
     <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
