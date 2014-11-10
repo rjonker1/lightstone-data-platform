@@ -146,12 +146,12 @@
         </div>
     </section>
     
-    <section class="matter">
+    <section class="matter" data-ng-model="dataProvider.response">
         <div class="container">
             <div class="row">
                 <div class="widget worange">
                     <div data-cc-widget-header title="{{title}} : Response" allow-collapse="true"></div>
-                    <div class="widget-content user">
+                    <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
                         <div class="row">
                             <div id="1" class="col-md-3">
                                 <div>
@@ -170,7 +170,7 @@
                                 </div>
                                 <label>Source URL:</label>
                                 <div>
-                                    <input type="textbox" class="form-control" />
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL"/>
                                 </div>
                             </div>
                         </div>
