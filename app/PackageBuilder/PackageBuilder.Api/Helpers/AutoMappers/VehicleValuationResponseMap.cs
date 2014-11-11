@@ -71,7 +71,7 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
 
         private static IEnumerable<IDataField> ToDataFields<T>(IEnumerable<T> s)
         {
-            return s.SelectMany(x => Mapper.Map<object, IEnumerable<IDataField>>(x));
+            return s.SelectMany(x => Mapper.Map<object, IEnumerable<IDataField>>(x)).ToList();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Models.Ivid.Dto;
+using DataPlatform.Shared.Enums;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -32,26 +32,16 @@ namespace PackageBuilder.Api.Modules
 
                 foreach (var provider in readRepo)
                 {
-                    DataProviderDto dSource = new DataProviderDto();
 
-                    dSource.Id = provider.DataProviderId;
-                    dSource.Name = provider.Name;
-                    dSource.CostOfSale = provider.CostPrice;
-                    dSource.Description = provider.Description;
-                    dSource.Owner = provider.Owner;
-                    dSource.Created = provider.CreatedDate;
-                    dSource.Edited = provider.EditedDate;
-                    dSource.Version = provider.Version.Value;
+                    DataProviderDto dSource = null;
 
                     try
                     {
-                     
-                        dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version.Value).DataFields
-                           .Select(field => new DataProviderFieldItemDto {Name = field.Name, Type = field.Type + ""});
+                        dSource = Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(provider.DataProviderId, provider.Version.Value));
                     }
                     catch (Exception ex)
                     {
-                        dSource.DataFields = null;
+                        //dSource.DataFields = null;
                     }
 
                     dataSources.Add(dSource);
@@ -60,23 +50,16 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            //Get["/DataProvider/Add"] = parameters =>
-            //{
-            //    var providerId = Guid.NewGuid();
-            //    bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now));
-
-            //    return Response.AsJson(new { msg = "Success, "+providerId+" created" });
-            //};
-
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
                 var dpList = new ArrayList();
 
-                DataProvider dataProvider;
+                DataProviderDto dataProvider;
 
                 try
                 {
-                    dataProvider = writeRepo.GetById(parameters.id, parameters.version);
+                    var dp = writeRepo.GetById(parameters.id, parameters.version);
+                    dataProvider = Mapper.Map<IDataProvider, DataProviderDto>(dp);
                 }
                 catch (Exception)
                 {
@@ -93,8 +76,8 @@ namespace PackageBuilder.Api.Modules
                 var dto = this.Bind<DataProviderDto>();
                 //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    "http://test.com", typeof (DataProviderDto), stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.Created, dFields));
+                bus.Publish(new UpdateDataProvider(parameters.id, (DataProviderName)Enum.Parse(typeof(DataProviderName), dto.Name, true), dto.Description, dto.CostOfSale,
+                    "http://test.com", typeof (DataProviderDto), dto.FieldLevelCostPriceOverride, stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.Created, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
             };

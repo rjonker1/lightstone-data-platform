@@ -33,8 +33,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 
             var entity = _writeRepo.GetById(command.Id, command.Version);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
-                command.SourceURL, command.ResponseType, entity.Version, command.Owner,
-                command.CreatedDate, command.EditedDate, command.DataFields);
+                command.SourceURL, command.ResponseType, command.FieldLevelCostPriceOverride, entity.Version,
+                command.Owner, command.CreatedDate, command.EditedDate, command.DataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

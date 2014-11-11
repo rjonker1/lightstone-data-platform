@@ -19,7 +19,7 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
                     var complexProperties = properties
                         .Where(property => (property.PropertyType.IsClass || property.PropertyType.IsInterface) && !TypeExtensions.IsSimple(property.PropertyType) && property.PropertyType != typeof (IPair<string, double>[])).ToList();
                     var list = complexProperties.Select(property => Mapper.Map(property.GetValue(s), property.PropertyType, typeof (IDataField)) as IDataField).ToList();
-                    list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType)));
+                    list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType)).ToList());
                     return list;
                 });
         }

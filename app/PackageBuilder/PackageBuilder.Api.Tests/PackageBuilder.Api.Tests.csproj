@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -93,6 +94,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMappers\Dtos\when_mapping_data_provider_dto.cs" />
     <Compile Include="AutoMappers\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_accident_distribution_collection_response.cs" />
     <Compile Include="AutoMappers\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_amortised_value_collection_response.cs" />
     <Compile Include="AutoMappers\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_area_factor_collection_response.cs" />
@@ -144,6 +146,10 @@
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
+      <Project>{3ED18243-3A71-4E3F-ADFB-FC6777AF5225}</Project>
+      <Name>PackageBuilder.Domain.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
@@ -155,6 +161,10 @@
     <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
       <Project>{E399E536-36B5-4281-AB56-E4D2CC90DBE5}</Project>
       <Name>PackageBuilder.TestObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
+      <Project>{F29A3A51-343E-428F-A592-F7845E99B4AE}</Project>
+      <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

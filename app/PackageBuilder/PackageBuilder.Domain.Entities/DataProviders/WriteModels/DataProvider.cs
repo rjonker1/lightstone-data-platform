@@ -12,7 +12,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     public class DataProvider : AggregateBase, IDataProvider
     {
         [DataMember]
-        public DataProviderName Name { get; internal set; } //todo use enum
+        public DataProviderName Name { get; internal set; } 
         [DataMember]
         public string Description { get; internal set; }
         [DataMember]
@@ -21,6 +21,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public string SourceURL { get; internal set; }
         [DataMember]
         public Type ResponseType { get; internal set; }
+        [DataMember]
+        public bool FieldLevelCostPriceOverride { get; internal set; }
         [DataMember]
         public string Owner { get; internal set; }
         [DataMember]
@@ -53,9 +55,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, owner, createdDate, editedDate, dataFields));
         }
 
-        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime editedDate, IEnumerable<IDataField> dataFields)
         {
-            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, version, owner, createdDate, editedDate, dataFields));
+            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, dataFields));
         }
 
         private void Apply(DataProviderCreated @event)
@@ -80,6 +82,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             CostOfSale = @event.CostPrice;
             SourceURL = @event.SourceURL;
             ResponseType = @event.ResponseType;
+            FieldLevelCostPriceOverride = @event.FieldLevelCostPriceOverride;
             Owner = @event.Owner;
             Created = @event.CreatedDate;
             Edited = @event.EditedDate;
