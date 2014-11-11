@@ -63,9 +63,21 @@
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'createdDate', displayName: 'Created' },
                 { field: 'editedDate', displayName: 'Edited' },
+                { field: 'state.alias', displayName: 'State' },
                 { field: 'displayVersion', displayName: 'Version', filter: { term: '' } },
                 //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
-                { displayName: '', cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version"><input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" /></div>' }
+                {
+                    displayName: '',
+                    width: 280,
+                    cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version">' +
+                        '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' +
+                        '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
+                        '<input type="button" class="btn btn-warning grid-btn" name="expire" ng-click="" value="Expire" />' +
+                        '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
+                        '' +
+                        '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
+                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="" value="View" /></div>'
+                }
 
             ]
         };

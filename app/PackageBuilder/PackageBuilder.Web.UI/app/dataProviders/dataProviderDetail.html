@@ -107,10 +107,10 @@
                                                     <td>{{dField.type}}</td>
                                                     <td><input class="form-control" ng-model="dField.label" type="text"></td>
                                                     <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+
                                                     <td>
-                                                        <select class="form-control" ng-model="dField.industry" ng-options="industry.name as industry.name for industry in industries" />
-                                                        <!--<option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                                        </select>-->
+                                                        <select class="form-control" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry" 
+                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name"/>
                                                     </td>
                                                 </tr>
 

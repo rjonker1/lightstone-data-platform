@@ -45,7 +45,17 @@
                 { field: 'createdDate', displayName: 'Created Date' },
                 { field: 'editedDate', displayName: 'Edited Date' },
                 { field: 'version', displayName: 'Version' },
-                { displayName: '', cellTemplate: '<div ng-if="latestVersion.Get(row.entity.dataProviderId) == row.entity.version"><input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" /></div>' }
+                {
+                    displayName: '',
+                    width: 280,
+                    cellTemplate: '<div ng-if="latestVersion.Get(row.entity.dataProviderId) == row.entity.version">' +
+                        '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' +
+                        '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
+                        '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
+                        '' +
+                        '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
+                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="" value="View" /></div>'
+                }
             ]
         };
 
