@@ -24,6 +24,15 @@
         { name: 'user3' }
         ];
 
+        //Defaulted postion for toggle-switch
+        $scope.switch = 'off';
+
+        $scope.toggle = function(state) {
+
+            (state == 'on') ? $scope.switch = 'off' : $scope.switch = 'on';
+        }
+
+
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.editProvider = function (providerData) {

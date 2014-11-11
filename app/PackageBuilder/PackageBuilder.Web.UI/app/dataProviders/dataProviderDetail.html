@@ -1,5 +1,4 @@
 ﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
-
     <!--<div ng-model="dataProvider">
             <div ng-repeat="data in dataProvider.response">
                 <li>{{data}}</li>
@@ -79,7 +78,24 @@
                                     </div>
                                 </div>
                             </div>
+                        
+                            <div id="3" class="col-md-4">
+                                <div>
+                                    <label>Override Data Provider Cost: {{switchAlternate}}</label>
+                                        <div>
+                                            <div class="toggle-bg toggle-alternate {{switch}}">
 
+                                                <label class="{{switch}}">{{switchAlternate}}</label>
+                                                <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle('on')">
+                                                <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle('off')">
+                                                <span class=" switch {{switch}}"></span>
+
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                        
                         </div> <!--End Info-->
 
                         <br />

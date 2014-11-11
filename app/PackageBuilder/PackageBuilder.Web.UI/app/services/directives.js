@@ -201,6 +201,35 @@
     });
 
     app.directive("currentDateTime", function () {
+
+        //Usage current-date-time="format"
+        return function (scope, element, attrs) {
+            var dtFormat;
+
+            scope.$watch(attrs.currentDateTime, function (value) {
+                dtFormat = value;
+                updateTime();
+            });
+
+            function updateTime() {
+                var dt = moment().format(dtFormat);
+                element.text(dt);
+            }
+
+            function updateLater() {
+                setTimeout(function () {
+                    updateTime(); // update DOM
+                    updateLater(); // schedule another update
+                }, 1000);
+            }
+
+            updateLater();
+        }
+    });
+
+    app.directive("toggleControl", function () {
+
+        //Usage current-date-time="format"
         return function (scope, element, attrs) {
             var dtFormat;
 
