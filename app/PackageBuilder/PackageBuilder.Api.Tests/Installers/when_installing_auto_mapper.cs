@@ -1,5 +1,7 @@
-﻿using Castle.Windsor;
-using MemBus;
+﻿using System.Linq;
+using System.Reflection;
+using Castle.Windsor;
+using PackageBuilder.Api.Helpers.AutoMappers;
 using PackageBuilder.Api.Installers;
 using Xunit.Extensions;
 
@@ -15,9 +17,12 @@ namespace PackageBuilder.Api.Tests.Installers
         }
 
         [Observation]
-        public void should_resolve_IBus()
+        public void should_resolve_ICreateAutoMapperMaps()
         {
-            _container.Resolve<IBus>().ShouldNotBeNull();
+            var registeredMappers = Core.Helpers.Extensions.TypeExtensions.FindDerivedTypesFromAssembly(Assembly.GetAssembly(typeof(ICreateAutoMapperMaps)), typeof(ICreateAutoMapperMaps), true, false).OrderBy(x => x.Name).ToList();
+            var resolvedMappers = _container.ResolveAll<ICreateAutoMapperMaps>().Select(x => x.GetType()).ToList();
+
+            registeredMappers.ShouldEqual(resolvedMappers);
         }
     }
 }

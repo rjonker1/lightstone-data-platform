@@ -25,6 +25,8 @@ namespace PackageBuilder.Api.Tests.AutoMappers
         [Observation]
         public void should_map_all_ivid_title_holder_data_fields()
         {
+            _dataFields.Count().ShouldEqual(14);
+
             _dataFields.FirstOrDefault(x => x.Name == "BankName").Name.ShouldEqual("BankName");
             _dataFields.FirstOrDefault(x => x.Name == "BankName").Type.ShouldEqual(typeof(string));
 
