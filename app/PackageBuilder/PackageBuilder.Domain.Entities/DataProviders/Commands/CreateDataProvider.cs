@@ -1,4 +1,6 @@
 using System;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.Requests;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
@@ -6,7 +8,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
     public class CreateDataProvider : DomainCommand
     {
-        public readonly string Name;
+        public IPointToLaceProvider DataProvider { get; set; }
+        public readonly DataProviderName Name;
         public readonly string Description;
         public readonly double CostOfSale;
         public readonly string SourceURL;
@@ -17,18 +20,17 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(Guid id, string name, string description, double costOfSale, string sourceUrl, Type responseType, State state, string owner, DateTime createdDate, DateTime? editedDate)
+        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate)
         {
+            DataProvider = dataProvider;
 			Id = id;
 			Name = name;
             Description = description;
             CostOfSale = costOfSale;
             SourceURL = sourceUrl;
             ResponseType = responseType;
-            State = state;
             Owner = owner;
             CreatedDate = createdDate;
-            EditedDate = editedDate;
         }
     }
 }

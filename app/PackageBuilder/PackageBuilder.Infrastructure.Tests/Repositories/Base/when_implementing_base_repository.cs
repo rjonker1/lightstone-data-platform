@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.Infrastructure.Repositories;
@@ -20,7 +21,7 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.Base
             _repository = new DataProviderRepository(Session);
             var dataProvider = ReadDataProviderMother.Ivid;
             _repository.Save(dataProvider);
-            _repository.Save(ReadDataProviderMother.Audatex);
+            _repository.Save(ReadDataProviderMother.Rgt);
 
             Session.Flush();
 
@@ -36,7 +37,7 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.Base
         [Observation]
         public void should_get()
         {
-            _repository.Get(_id).Name.ShouldEqual("Ivid");
+            _repository.Get(_id).Name.ShouldEqual(DataProviderName.Ivid);
         }
     }
 }

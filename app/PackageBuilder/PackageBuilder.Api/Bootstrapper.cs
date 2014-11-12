@@ -5,6 +5,8 @@ using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
+using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -19,7 +21,8 @@ namespace PackageBuilder.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            //IndexInstaller.Install(container);
+            var handler = container.Resolve<IHandleMessages>();
+            handler.Handle(new ImportDataProvider());
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

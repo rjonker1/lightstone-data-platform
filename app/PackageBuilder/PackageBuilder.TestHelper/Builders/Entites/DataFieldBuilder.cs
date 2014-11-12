@@ -10,7 +10,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private Type _type;
         public IDataField Build()
         {
-            return new DataField(_name, null, null);
+            return new DataField(_name, null, "");
         }
 
         public DataFieldBuilder With(string name)

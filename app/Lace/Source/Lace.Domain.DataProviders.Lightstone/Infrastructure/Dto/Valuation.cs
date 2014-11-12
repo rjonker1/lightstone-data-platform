@@ -22,7 +22,26 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto
             EstimatedValue = new List<EstimatedValueModel>();
             LastFiveSales = new List<SaleModel>();
         }
-        
+
+        public void AddAmortisationFactors(IEnumerable<IRespondWithAmortisationFactorModel> model)
+        {
+            AmortisationFactors = model;
+        }
+
+        public void AddPrices(IEnumerable<IRespondWithPriceModel> model)
+        {
+            Prices = model;
+        }
+
+        public void AddFrequency(IEnumerable<IRespondWithFrequencyModel> model)
+        {
+            Frequency = model;
+        }
+
+        public void AddConfidence(IEnumerable<IRespondWithConfidenceModel> model)
+        {
+            Confidence = model;
+        }
 
         public void AddImageGauages(IEnumerable<IRespondWithImageGaugeModel> model)
         {

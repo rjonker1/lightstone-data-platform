@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.DbPersistence;
 using PackageBuilder.TestHelper.Mothers;
@@ -13,7 +14,7 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.DataProviders
         {
             base.Observe();
 
-            SaveAndFlush(ReadDataProviderMother.Ivid, ReadDataProviderMother.Audatex);
+            SaveAndFlush(ReadDataProviderMother.Ivid, ReadDataProviderMother.Rgt);
 
             _repository = new DataProviderRepository(Session);
         }
@@ -21,7 +22,7 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.DataProviders
         [Observation]
         public void should_return_true_if_industry_exists()
         {
-            _repository.Exists(Guid.NewGuid(), "Ivid").ShouldBeTrue();
+            _repository.Exists(Guid.NewGuid(), DataProviderName.Ivid).ShouldBeTrue();
         }
     }
 }

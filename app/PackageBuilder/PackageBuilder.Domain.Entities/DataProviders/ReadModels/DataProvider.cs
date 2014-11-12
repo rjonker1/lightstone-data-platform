@@ -1,6 +1,8 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Core.NHibernate.Attributes;
+using PackageBuilder.Domain.Entities.Enums;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 {
@@ -8,7 +10,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
     {
         public virtual Guid DataProviderId { get; protected set; }
         [DomainSignature]
-        public virtual string Name { get; protected set; }
+        public virtual DataProviderName Name { get; protected set; }
         public virtual string Description { get; protected set; }
         public virtual double CostPrice { get; protected set; }
         [DomainSignature]
@@ -19,7 +21,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 
         protected DataProvider() { }
 
-        public DataProvider(Guid dataProviderId, string name, string description, double costPrice, int version, string owner, DateTime createdDate, DateTime? editedDate) : base(Guid.NewGuid())
+        public DataProvider(Guid dataProviderId, DataProviderName name, string description, double costPrice, int version, string owner, DateTime createdDate, DateTime? editedDate)
+            : base(Guid.NewGuid())
         {
             DataProviderId = dataProviderId;
             Name = name;

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Entities;
-using Lace.Domain.Core.Dto;
+using DataPlatform.Shared.Enums;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -28,80 +27,26 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/All"] = parameters =>
             {
-                var dataSources = new ArrayList();
-
-                foreach (var provider in readRepo)
-                {
-
-                    DataProviderDto dSource = new DataProviderDto();
-
-                    dSource.Id = provider.DataProviderId;
-                    dSource.Name = provider.Name;
-                    dSource.CostOfSale = provider.CostPrice;
-                    dSource.Description = provider.Description;
-                    dSource.Owner = provider.Owner;
-                    dSource.CreatedDate = provider.CreatedDate;
-                    dSource.EditedDate = provider.EditedDate;
-                    dSource.Version = provider.Version.Value;
-
-                    try
-                    {
-
-                        dSource.DataFields = writeRepo.GetById(provider.DataProviderId, provider.Version.Value).DataFields
-                           .Select(field => new DataProviderFieldItemDto { Name = field.Name, Type = field.Type + "", Industry = field.Industry });
-                    }
-                    catch (Exception ex)
-                    {
-                        dSource.DataFields = null;
-                    }
-
-                    dataSources.Add(dSource);
-                }
+                var ids = readRepo.Select(x => x.DataProviderId).Distinct().ToList();
+                var dataSources = ids.Select(x => Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(x))).ToList();
 
                 return Response.AsJson(dataSources);
-                };
-
-            Get["/DataProvider/Add"] = parameters =>
-            {
-                var providerId = Guid.NewGuid();
-                bus.Publish(new CreateDataProvider(providerId, "Ivid", "Ivid Datasource", 10d, "http://test", typeof(IvidResponse), stateRepo.FirstOrDefault(), "Al", DateTime.Now, null));
-
-                return Response.AsJson(new { msg = "Success, "+providerId+" created" });
             };
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
-                var dpList = new ArrayList();
-
-                DataProvider dataProvider;
-
-                try
-                {
-                    dataProvider = writeRepo.GetById(parameters.id, parameters.version);
-                }
-                catch (Exception)
-                {
-                    dataProvider = null;
-                }
-
-                dpList.Add(dataProvider);
-
-                return Response.AsJson(new { Response = dpList });
+                return Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
             };
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
                 var dto = this.Bind<DataProviderDto>();
-
-                var editedDate = DateTime.Now;
-                //DataFieldMap
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
-                bus.Publish(new UpdateDataProvider(parameters.id, dto.Name, dto.Description, dto.CostOfSale,
-                    "http://test.com", typeof (DataProviderDto), stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, editedDate, dFields));
+                bus.Publish(new UpdateDataProvider(parameters.id, (DataProviderName)Enum.Parse(typeof(DataProviderName), dto.Name, true), dto.Description, dto.CostOfSale,
+                    "http://test.com", typeof(DataProviderDto), dto.FieldLevelCostPriceOverride, stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
             };
         }
     }
-
 }

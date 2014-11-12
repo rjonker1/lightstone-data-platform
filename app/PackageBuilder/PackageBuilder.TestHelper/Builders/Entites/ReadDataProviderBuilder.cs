@@ -1,11 +1,12 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
     public class ReadDataProviderBuilder
     {
         private Guid _id;
-        private string _name;
+        private DataProviderName _name;
         private string _description;
         private double _costPrice;
         private int _version;
@@ -23,10 +24,10 @@ namespace PackageBuilder.TestHelper.Builders.Entites
             return this;
         }
 
-        public ReadDataProviderBuilder With(string name)
+        public ReadDataProviderBuilder With(DataProviderName name)
         {
             _name = name;
-            _description = name;
+            _description = name.ToString();
             return this;
         }
         public ReadDataProviderBuilder With(double costPrice)

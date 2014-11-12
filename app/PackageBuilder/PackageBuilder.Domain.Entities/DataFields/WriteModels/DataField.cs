@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Entities;
 
@@ -21,6 +22,8 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         public bool? IsSelected { get; internal set; }
         [DataMember]
         public Type Type { get; internal set; }
+        [DataMember]
+        public IEnumerable<IDataField> DataFields { get; private set; }
         
         //todo: make private
         public DataField()
@@ -31,7 +34,14 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         {
             Name = name;
             Type = type;
-            Industry = industry;
+			Industry = industry;
+        }
+
+        public DataField(string name, Type type, IEnumerable<IDataField> dataFields)
+        {
+            Name = name;
+            Type = type;
+            DataFields = dataFields;
         }
 
         public DataField(string name, string label, string definition, string industry, double price, bool isSelected)//, Type type)
