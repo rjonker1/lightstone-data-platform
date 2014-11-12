@@ -5,7 +5,9 @@
             </div>
 
         </div>-->
-
+    
+    {{dataProvider.response}}
+    
     <section class="matter" data-ng-model="dataProvider.response">
         <div class="container">
             <div class="row">
@@ -15,13 +17,6 @@
 
 
                         <div class="row" id="info">
-
-                            <br />
-
-                            <div style="float: right;">
-                                <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                                <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save Data Provider</button>
-                            </div>
 
                             <div id="1" class="col-md-3">
                                 <div>
@@ -46,16 +41,16 @@
 
                             <div id="2" class="col-md-3">
 
-                                <div ng-show="switch == 'off'">
+                                <div ng-if="switch == 'false'">
                                     <label>COS Per Request:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProv.costOfSale" />
+                                        <input type="number" class="form-control" ng-model="dataProv.costOfSale" />
                                     </div>
                                 </div>
-                                <div ng-show="switch == 'on'">
+                                <div ng-if="switch == 'true'">
                                     <label>COS Per Field(Total):</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProv.costOfSale" readonly/>
+                                        <input type="number" class="form-control" value="{{total()}}" readonly />
                                     </div>
                                 </div>
 
@@ -92,11 +87,22 @@
                                         <div class="toggle-bg toggle-alternate {{switch}}">
 
                                             <label class="{{switch}}">{{switchAlternate}}</label>
-                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle('on')">
-                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle('off')">
+                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle('true')">
+                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle('false')">
                                             <span class=" switch {{switch}}"></span>
 
                                         </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="4" class="col-md-4">
+                                <div>
+
+                                    <div style="float: right;">
+                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                                        <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save Data Provider</button>
                                     </div>
 
                                 </div>
@@ -120,7 +126,7 @@
                                                     <th>Label</th>
                                                     <th>Definition</th>
                                                     <th>Industry</th>
-                                                    <th ng-show="switch == 'on'">Price</th>
+                                                    <th ng-show="switch == 'true'">Price</th>
                                                 </tr>
                                             </thead>
                                             <tbody ng-repeat="dField in dataProv.dataFields">
@@ -135,9 +141,9 @@
                                                         <select class="form-control" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
                                                                 ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
                                                     </td>
-                                                    
-                                                    <td ng-show="switch == 'on'">
-                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dataField.price" />
+
+                                                    <td ng-show="switch == 'true'">
+                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
                                                     </td>
                                                 </tr>
 
