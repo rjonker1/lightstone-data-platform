@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
@@ -27,14 +26,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             if (existing)
                 throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
 
-            var latestVersion = _readRepo.Max(x => x.Version);
-            if (command.Version != latestVersion)
-                throw new LightstoneAutoException("This is an older version, please update the latest version of data provider {0}".FormatWith(command.Name));
-
-            var entity = _writeRepo.GetById(command.Id, command.Version);
+            var entity = _writeRepo.GetById(command.Id);
             entity.CreateDataProviderRevision(command.Id, command.Name, command.Description, command.CostOfSale,
-                command.SourceURL, command.ResponseType, entity.Version, command.Owner,
-                command.CreatedDate, command.EditedDate, command.DataFields);
+                command.SourceURL, command.ResponseType, command.FieldLevelCostPriceOverride, entity.Version,
+                command.Owner, command.CreatedDate, command.EditedDate, command.DataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

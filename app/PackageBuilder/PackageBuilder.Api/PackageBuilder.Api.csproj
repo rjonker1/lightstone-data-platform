@@ -72,7 +72,7 @@
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Release\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
       <HintPath>..\PackageBuilder.Web\Bin\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
@@ -163,11 +163,17 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="DataProviderConverter.cs" />
+    <Compile Include="Helpers\AutoMappers\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMappers\DataFieldMap.cs" />
     <Compile Include="Helpers\AutoMappers\DataProviderMap.cs" />
     <Compile Include="Helpers\AutoMappers\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMappers\IvidResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\IvidTitleHolderResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\LightstoneResponseMap.cs" />
     <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
+    <Compile Include="Helpers\AutoMappers\RgtResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\RgtVinResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\VehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
@@ -241,6 +247,10 @@
     <ProjectReference Include="..\PackageBuilder.Infrastructure\PackageBuilder.Infrastructure.csproj">
       <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
       <Name>PackageBuilder.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
+      <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
+      <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

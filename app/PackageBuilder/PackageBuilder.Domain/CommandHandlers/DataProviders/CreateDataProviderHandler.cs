@@ -1,6 +1,7 @@
 using System;
-using DataPlatform.Shared.ExceptionHandling;
-using DataPlatform.Shared.Helpers.Extensions;
+using System.Collections.Generic;
+using AutoMapper;
+using DataPlatform.Shared.Entities;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
@@ -24,11 +25,13 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
         {
             var existing = _readRepo.Exists(command.Id, command.Name);
             if (existing)
-                throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
+                return;
+
+            var dataFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
 
             var entity = new DataProvider(command.Id, command.Name,
                 command.Description, command.CostOfSale, command.SourceURL, command.ResponseType,
-                command.Owner, command.CreatedDate, command.EditedDate);
+                command.Owner, command.CreatedDate, dataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

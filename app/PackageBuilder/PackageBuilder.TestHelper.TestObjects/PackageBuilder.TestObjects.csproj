@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E399E536-36B5-4281-AB56-E4D2CC90DBE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PackageBuilder.TestHelper.Builders</RootNamespace>
+    <AssemblyName>PackageBuilder.TestHelper.Builders</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Release\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone">
+      <HintPath>..\..\Lace\Source\Lace.Domain.DataProviders.Lightstone\bin\Release\Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.144, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Shared\Shared\bin\Release\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\DataProviderResponses\IvidResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\LightstoneResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\RgtResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\RgtVinResponseBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\AccidentDistributionBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\AmortisationFactorBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\AmortisedValueModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\AreaFactorBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\AuctionFactorModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\ConfidenceModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\EstimatedValueModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\FrequencyModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\ImageGaugeModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\PriceModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\RepairIndexModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\SaleModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\TotalSalesByAgeModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\Valuations\TotalSalesByGenderModelBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\VehicleSpecificInformationBuilder.cs" />
+    <Compile Include="Builders\DataProviderResponses\VehicleValuationBuilder.cs" />
+    <Compile Include="Mothers\DataProviderResponses\IvidResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\RgtResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\RgtVinResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\VehicleSpecificInformationMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\AccidentDistributionModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisationFactorMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\AmortisedValueModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\AreaFactorModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\AuctionFactorModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\ConfidenceModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\EstimatedValueModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\FrequencyModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\ImageGaugeModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\LightstoneResponseMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\PriceModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\RepairIndexModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\SaleModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\TotalSalesByAgeModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\TotalSalesByGenderModelMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\Valuations\VehicleValuationMother.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

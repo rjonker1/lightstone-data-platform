@@ -47,7 +47,7 @@ namespace PackageBuilder.Api.Tests.Installers
         public override void Observe()
         {
             _container.Kernel.ComponentModelCreated += Kernel_ComponentModelCreated;
-            _container.Install(new WindsorInstaller(), new BusInstaller(),new CommandInstaller(), new RavenDbInstaller(), new NEventStoreInstaller());
+            _container.Install(new WindsorInstaller(), new BusInstaller(),new CommandInstaller(), new RavenDbInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new NHibernateInstaller());
         }
 
         [Observation]
