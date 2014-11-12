@@ -26,6 +26,7 @@
 
         //Defaulted postion for toggle-switch
         $scope.switch = 'off';
+        $scope.switchAlternate = 'Per Request';
 
         $scope.toggle = function(state) {
 
