@@ -25,16 +25,50 @@
         ];
 
         //Defaulted postion for toggle-switch
-        $scope.switch = 'off';
+        $scope.switch = 'false';
         $scope.switchAlternate = 'Per Request';
 
         $scope.toggle = function(state) {
 
-            (state == 'on') ? $scope.switch = 'off' : $scope.switch = 'on';
+            (state == 'true') ? $scope.switch = 'false' : $scope.switch = 'true';
+            $scope.dataProvider.response[0].fieldLevelCostPriceOverride = $scope.switch;
+            $scope.dataProvider.response[0].costOfSale = 0;
         }
 
 
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
+
+        $scope.total = function () {
+
+            var valueTotal = 0;
+            var items = null;
+
+            try {
+
+                items = $scope.dataProvider.response;
+            } catch (e) {
+
+                //console.log(e.message);
+            }
+
+            if (items != null) {
+
+                for (var i = 0; i < items.length; i++) {
+
+                    var listItem = items[i];
+
+                    for (var x = 0; x < (listItem.dataFields).length; x++) {
+
+                        valueTotal += listItem.dataFields[x].price;
+                    }
+
+                }
+            }
+
+            $scope.dataProvider.response[0].costOfSale = valueTotal;
+            return valueTotal;
+        };
+
 
         $scope.editProvider = function (providerData) {
 
@@ -66,7 +100,6 @@
 
             return datacontext.getDataProvider(id, version).then(function (response) {
 
-                console.log(response.data);
                 $scope.dataProvider = response.data;
             });
         }

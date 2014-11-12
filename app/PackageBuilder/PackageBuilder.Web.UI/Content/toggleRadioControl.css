@@ -24,8 +24,8 @@
         border-color: #d9d9d9;
     }
 
-    .toggle-bg.on {
-        background: #00dc61;
+    .toggle-bg.true {
+        background: #43c83c;
         border-color: #00c356;
     }
 
@@ -110,13 +110,13 @@
         top: 0.2em;
     }
 
-.toggle-bg label.on {
+.toggle-bg label.true {
     left: 0.75em;
     color: white;
-    text-shadow: 0 0.1em 0 #00dc61;
+    text-shadow: 0 0.1em 0 #43c83c;
 }
 
-.toggle-bg label.off {
+.toggle-bg label.false {
     right: 0.55em;
     color: #aaa;
 }
