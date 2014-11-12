@@ -17,7 +17,7 @@
                         <div class="row" id="info">
 
                             <br />
-                            
+
                             <div style="float: right;">
                                 <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
                                 <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save Data Provider</button>
@@ -46,10 +46,16 @@
 
                             <div id="2" class="col-md-3">
 
-                                <div>
-                                    <label>COS:</label>
+                                <div ng-show="switch == 'off'">
+                                    <label>COS Per Request:</label>
                                     <div>
                                         <input type="textbox" class="form-control" ng-model="dataProv.costOfSale" />
+                                    </div>
+                                </div>
+                                <div ng-show="switch == 'on'">
+                                    <label>COS Per Field(Total):</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProv.costOfSale" readonly/>
                                     </div>
                                 </div>
 
@@ -59,14 +65,14 @@
                                     <label>Created Date:</label>
                                     <div>{{dataProv.createdDate}}</div>
                                 </div>
-                                
+
                                 <br />
 
                                 <div>
                                     <label>Edited Date: </label>
                                     <div current-date-time="format"></div>
                                 </div>
-                                
+
                                 <br />
 
                                 <div>
@@ -78,24 +84,24 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div id="3" class="col-md-4">
                                 <div>
                                     <label>Override Data Provider Cost: {{switchAlternate}}</label>
-                                        <div>
-                                            <div class="toggle-bg toggle-alternate {{switch}}">
+                                    <div>
+                                        <div class="toggle-bg toggle-alternate {{switch}}">
 
-                                                <label class="{{switch}}">{{switchAlternate}}</label>
-                                                <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle('on')">
-                                                <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle('off')">
-                                                <span class=" switch {{switch}}"></span>
+                                            <label class="{{switch}}">{{switchAlternate}}</label>
+                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle('on')">
+                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle('off')">
+                                            <span class=" switch {{switch}}"></span>
 
-                                            </div>
                                         </div>
-                                    
+                                    </div>
+
                                 </div>
                             </div>
-                        
+
                         </div> <!--End Info-->
 
                         <br />
@@ -114,6 +120,7 @@
                                                     <th>Label</th>
                                                     <th>Definition</th>
                                                     <th>Industry</th>
+                                                    <th ng-show="switch == 'on'">Price</th>
                                                 </tr>
                                             </thead>
                                             <tbody ng-repeat="dField in dataProv.dataFields">
@@ -125,8 +132,12 @@
                                                     <td><input class="form-control" ng-model="dField.definition" type="text"></td>
 
                                                     <td>
-                                                        <select class="form-control" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry" 
-                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name"/>
+                                                        <select class="form-control" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
+                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+                                                    </td>
+                                                    
+                                                    <td ng-show="switch == 'on'">
+                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dataField.price" />
                                                     </td>
                                                 </tr>
 
