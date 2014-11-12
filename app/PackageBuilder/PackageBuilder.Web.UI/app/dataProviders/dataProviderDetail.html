@@ -111,7 +111,7 @@
                         <br />
 
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <div class="widget wblue">
                                     <div data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
                                     <div class="widget-content text-left text-info">
@@ -123,7 +123,15 @@
                                                     <th>Type</th>
                                                     <th>Label</th>
                                                     <th>Definition</th>
-                                                    <th>Industry</th>
+                                                    <th style="width: 18%;">
+                                                        <div style="float: left;">
+                                                            <label>Industry</label>
+                                                        </div>
+                                                        <div style="float: right;">
+                                                            <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
+                                                                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+                                                        </div>
+                                                    </th>
                                                     <th ng-show="switch == 'true'">Price</th>
                                                 </tr>
                                             </thead>
