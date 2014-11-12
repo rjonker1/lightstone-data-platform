@@ -5,9 +5,7 @@
             </div>
 
         </div>-->
-    
-    {{dataProvider.response}}
-    
+
     <section class="matter" data-ng-model="dataProvider.response">
         <div class="container">
             <div class="row">
@@ -113,7 +111,7 @@
                         <br />
 
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="widget wblue">
                                     <div data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
                                     <div class="widget-content text-left text-info">
@@ -138,7 +136,7 @@
                                                     <td><input class="form-control" ng-model="dField.definition" type="text"></td>
 
                                                     <td>
-                                                        <select class="form-control" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
+                                                        <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
                                                                 ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
                                                     </td>
 
@@ -170,7 +168,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="matter" data-ng-model="dataProvider.response">
         <div class="container">
             <div class="row">
@@ -195,7 +193,7 @@
                                 </div>
                                 <label>Source URL:</label>
                                 <div>
-                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL"/>
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" />
                                 </div>
                             </div>
                         </div>
