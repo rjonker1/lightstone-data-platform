@@ -17,6 +17,8 @@
         var logSuccess = getLogFn(controllerId, 'success');
         var logError = getLogFn(controllerId, 'error');
 
+        $scope.format = 'MMMM Do YYYY, h:mm:ss a';
+
         $scope.users = [
 
         { name: 'Al' },
@@ -35,8 +37,34 @@
             $scope.dataProvider.response[0].costOfSale = 0;
         }
 
+        $scope.selectedGroupIndustry = {};
 
-        $scope.format = 'MMMM Do YYYY, h:mm:ss a';
+        $scope.updateFieldIndustry = function (groupIndustry) {
+
+            var provider = null;
+
+            try {
+
+                provider = $scope.dataProvider.response;
+            } catch (e) {
+
+                //console.log(e.message);
+            }
+
+            if (provider != null) {
+
+                for (var i = 0; i < provider.length; i++) {
+
+                    var providerItem = provider[i];
+
+                    for (var x = 0; x < (providerItem.dataFields).length; x++) {
+
+                        providerItem.dataFields[x].industry = groupIndustry;
+                    }
+
+                }
+            }
+        }
 
         $scope.total = function () {
 
