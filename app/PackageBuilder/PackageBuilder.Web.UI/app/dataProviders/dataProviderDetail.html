@@ -128,8 +128,9 @@
                                                             <label>Industry</label>
                                                         </div>
                                                         <div style="float: right;">
-                                                            <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
-                                                                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+                                                            <select class="form-control" style="width: 100% !important;" ng-model="selectedGroupIndustry"
+                                                                    ng-options="industry.name as industry.name for industry in industries"
+                                                                    ng-change="updateFieldIndustry(selectedGroupIndustry)" />
                                                         </div>
                                                     </th>
                                                     <th ng-show="switch == 'true'">Price</th>
