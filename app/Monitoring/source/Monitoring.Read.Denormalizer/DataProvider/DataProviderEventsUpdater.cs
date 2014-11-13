@@ -3,7 +3,7 @@ using Monitoring.Domain.Messages.Commands;
 using Monitoring.Read.ReadModel.Models.DataProviders;
 using NServiceBus;
 
-namespace Monitoring.Read.Denormalizer.DataProvider
+namespace Monitoring.Read.Normalizer.DataProvider
 {
     public class DataProviderEventsUpdater : IHandleMessages<ExecuteDataProvider> //, IHandleMessages<DataProviderFailed>
     {

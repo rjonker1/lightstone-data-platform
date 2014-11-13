@@ -59,33 +59,13 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Lace\when_writing_events_from_lace_external_sources.cs" />
+    <None Include="Lace\when_writing_events_from_lace_external_sources.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EventTracking.Domain.Core\EventTracking.Domain.Core.csproj">
-      <Project>{25f7327f-231a-4345-87a4-51e1bdf36c3e}</Project>
-      <Name>EventTracking.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain.Persistence\EventTracking.Domain.Persistence.csproj">
-      <Project>{017ef56d-921c-4156-9807-b7ad72a7bef9}</Project>
-      <Name>EventTracking.Domain.Persistence</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Domain\EventTracking.Domain.csproj">
-      <Project>{54923329-c66c-4a97-824c-5518b101a162}</Project>
-      <Name>EventTracking.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Measurement.Lace\EventTracking.Measurement.Lace.csproj">
-      <Project>{ac292fe4-3eb1-4ede-8fd0-0cd5d7ba5739}</Project>
-      <Name>EventTracking.Measurement.Lace</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
-      <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
-      <Name>EventTracking.Measurement</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EventTracking.Tests.Helper\EventTracking.Tests.Helper.csproj">
       <Project>{a74bc3fb-0962-4900-82f5-461f014a26f6}</Project>
       <Name>EventTracking.Tests.Helper</Name>

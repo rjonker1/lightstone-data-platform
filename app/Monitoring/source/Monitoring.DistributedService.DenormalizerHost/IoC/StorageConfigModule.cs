@@ -4,7 +4,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Monitoring.DistributedService.DenormalizerHost.Storage;
 using Monitoring.Domain.Core.Contracts;
-using Monitoring.Read.Denormalizer.DataProvider;
+using Monitoring.Read.Normalizer.DataProvider;
 using Monitoring.Read.Persistence.Mappings.DataProviderMaps;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;

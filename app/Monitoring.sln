@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadSide", "ReadSide", "{2C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WriteSide", "WriteSide", "{99ACBE10-32BF-4C11-8751-178A111BD5C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Read.Denormalizer", "Monitoring\source\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj", "{365E35DA-EE0A-4AC8-8EB3-341F274988F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Read.Normalizer", "Monitoring\source\Monitoring.Read.Denormalizer\Monitoring.Read.Normalizer.csproj", "{365E35DA-EE0A-4AC8-8EB3-341F274988F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Read.ReadModel", "Monitoring\source\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj", "{DD57EBDE-5CD4-4DDA-B2F4-3B500CDF7713}"
 EndProject
