@@ -1,5 +1,5 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
+using IPackage = PackageBuilder.Domain.Entities.Packages.WriteModels.IPackage;
 
 namespace PackageBuilder.Domain.Entities
 {

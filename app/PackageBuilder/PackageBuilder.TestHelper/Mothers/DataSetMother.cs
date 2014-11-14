@@ -1,5 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.TestHelper.Builders.Entites;
+﻿using PackageBuilder.TestHelper.Builders.Entites;
 
 namespace PackageBuilder.TestHelper.Mothers
 {

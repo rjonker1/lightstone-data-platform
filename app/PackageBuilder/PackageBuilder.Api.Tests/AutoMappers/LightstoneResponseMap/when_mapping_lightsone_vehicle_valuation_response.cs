@@ -2,9 +2,9 @@
 using System.Linq;
 using AutoMapper;
 using Castle.Windsor;
-using DataPlatform.Shared.Entities;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using PackageBuilder.Api.Installers;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 

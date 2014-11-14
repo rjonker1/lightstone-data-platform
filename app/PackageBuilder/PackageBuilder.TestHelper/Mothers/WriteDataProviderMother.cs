@@ -1,5 +1,4 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper.Builders.Entites;

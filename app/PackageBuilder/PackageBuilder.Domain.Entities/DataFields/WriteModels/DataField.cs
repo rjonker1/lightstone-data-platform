@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Entities;
 
 namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
 {

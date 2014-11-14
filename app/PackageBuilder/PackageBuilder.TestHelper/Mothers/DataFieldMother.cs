@@ -1,4 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.TestHelper.Builders.Entites;
 
 namespace PackageBuilder.TestHelper.Mothers

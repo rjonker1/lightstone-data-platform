@@ -1,5 +1,4 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
 
 namespace PackageBuilder.Domain.Entities
 {

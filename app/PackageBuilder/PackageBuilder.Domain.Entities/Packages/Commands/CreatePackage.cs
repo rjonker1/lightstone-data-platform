@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
+using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider;
 
 namespace PackageBuilder.Domain.Entities.Packages.Commands
 {

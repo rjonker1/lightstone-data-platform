@@ -45,28 +45,6 @@
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
-    <Compile Include="Entities\IAction.cs" />
-    <Compile Include="Entities\IContract.cs" />
-    <Compile Include="Entities\ICriteria.cs" />
-    <Compile Include="Entities\ICustomer.cs" />
-    <Compile Include="Entities\ICustomerContract.cs" />
-    <Compile Include="Entities\ICustomerUser.cs" />
-    <Compile Include="Entities\IDataField.cs" />
-    <Compile Include="Entities\IDataSet.cs" />
-    <Compile Include="Entities\IDataProvider.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\IExpirable.cs" />
-    <Compile Include="Entities\IGroup.cs" />
-    <Compile Include="Entities\IGroupPermission.cs" />
-    <Compile Include="Entities\INamedEntity.cs" />
-    <Compile Include="Entities\IPackage.cs" />
-    <Compile Include="Entities\IRole.cs" />
-    <Compile Include="Entities\IRolePermission.cs" />
-    <Compile Include="Entities\IUser.cs" />
-    <Compile Include="Entities\IUserGroup.cs" />
-    <Compile Include="Entities\IUserRole.cs" />
-    <Compile Include="Entities\IWorkflow.cs" />
-    <Compile Include="Entities\NamedEntity.cs" />
     <Compile Include="Enums\DataProviderName.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
@@ -80,12 +58,14 @@
     <Compile Include="Identifiers\SystemIdentifier.cs" />
     <Compile Include="Identifiers\UserIdentifier.cs" />
     <Compile Include="Identifiers\VersionIdentifier.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

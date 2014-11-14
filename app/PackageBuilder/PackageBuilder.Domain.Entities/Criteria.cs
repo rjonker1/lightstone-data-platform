@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Entities;
+using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
 
 namespace PackageBuilder.Domain.Entities
 {

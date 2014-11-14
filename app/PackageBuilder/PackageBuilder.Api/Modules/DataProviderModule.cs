@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
 using MemBus;
 using Nancy;
@@ -10,6 +9,7 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
@@ -35,6 +35,7 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
+                var test = Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id));
                 return Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
             };
 

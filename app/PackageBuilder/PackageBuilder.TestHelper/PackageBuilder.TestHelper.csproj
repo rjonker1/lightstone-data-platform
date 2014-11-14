@@ -42,51 +42,16 @@
     <OutputPath>bin\Test\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentMigrator">
-      <HintPath>..\..\packages\FluentMigrator.1.2.1.0\lib\40\FluentMigrator.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentMigrator.Runner">
-      <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <HintPath>..\..\Shared\Shared\bin\Release\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy.Testing">
-      <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -97,22 +62,8 @@
       <HintPath>..\..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\packages\System.Data.SQLite.x86.1.0.94.1\lib\net45\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6">
-      <HintPath>..\..\packages\System.Data.SQLite.x86.1.0.94.1\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>..\..\packages\System.Data.SQLite.x86.1.0.94.1\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
-    </Reference>
     <Reference Include="xunit.bdd">
       <HintPath>..\..\packages\xUnit.BDD.1.9.2.0\lib\net45\xunit.bdd.dll</HintPath>
     </Reference>
@@ -126,7 +77,6 @@
     <Compile Include="Builders\Entites\ContractPackageBuilder.cs" />
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
-    <Compile Include="Builders\Entites\DataSetBuilder.cs" />
     <Compile Include="Builders\Entites\ReadDataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\WriteDataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
@@ -138,24 +88,13 @@
     <Compile Include="Builders\Entites\StateBuilder.cs" />
     <Compile Include="Builders\Entites\UserBuilder.cs" />
     <Compile Include="Builders\Entites\UserPackageBuilder.cs" />
-    <Compile Include="Builders\Repositories\TestRepositoryBuilder.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="Fakes\TestActionRepository.cs" />
-    <Compile Include="Fakes\TestContractPackageRepository.cs" />
-    <Compile Include="Fakes\TestContractRepository.cs" />
-    <Compile Include="Fakes\TestCustomerRepository.cs" />
-    <Compile Include="Fakes\TestGroupPackageRepository.cs" />
-    <Compile Include="Fakes\TestRolePackageRepository.cs" />
-    <Compile Include="Fakes\TestUserPackageRepository.cs" />
     <Compile Include="Mothers\ActionMother.cs" />
-    <Compile Include="Mothers\ActionRepositoryMother.cs" />
     <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
-    <Compile Include="Mothers\DataSetMother.cs" />
     <Compile Include="Mothers\ReadDataProviderMother.cs" />
     <Compile Include="Mothers\WriteDataProviderMother.cs" />
     <Compile Include="Mothers\IndustryMother.cs" />
-    <Compile Include="Mothers\PackageLookupMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />
     <Compile Include="Mothers\StateMother.cs" />
     <Compile Include="Mothers\UserMother.cs" />
@@ -173,6 +112,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Builders\Repositories\" />
+    <Folder Include="Fakes\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -187,14 +128,6 @@
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
-      <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
-      <Name>PackageBuilder.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
-      <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
-      <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

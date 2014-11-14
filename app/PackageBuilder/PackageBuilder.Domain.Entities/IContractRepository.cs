@@ -1,5 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
-using DataPlatform.Shared.Repositories;
+﻿using PackageBuilder.Core.Repositories;
 
 namespace PackageBuilder.Domain.Entities
 {

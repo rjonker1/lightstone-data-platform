@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
 using Nancy.Security;
 
 namespace Shared.BuildingBlocks.Api.Security
 {
-    public class ApiUser : IUserIdentity, IEntity
+    public class ApiUser : IUserIdentity
     {
         public ApiUser()
         {
