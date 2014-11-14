@@ -34,7 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DataProviders\EventForDataProviderModel.cs" />
+    <Compile Include="Models\DataProviders\DataProviderMonitoringModel.cs" />
     <Compile Include="ReadModelEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

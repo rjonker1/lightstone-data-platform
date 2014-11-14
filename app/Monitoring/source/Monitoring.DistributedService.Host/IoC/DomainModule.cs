@@ -74,7 +74,7 @@ namespace Monitoring.DistributedService.Host.IoC
                     AppendHeaders(busMessage, eventMessage.Headers);
                     AppendVersion(commit, i);
 
-                    publisher.Publish(busMessage, new PublishOptions(typeof(IDataProviderEvent)));
+                    publisher.Publish(busMessage, new PublishOptions(typeof(IDataProviderMonitoringEvent)));
                 }
             }
         }

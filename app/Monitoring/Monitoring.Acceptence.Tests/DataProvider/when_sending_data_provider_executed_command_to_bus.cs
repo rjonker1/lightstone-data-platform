@@ -9,14 +9,14 @@ namespace Monitoring.Acceptence.Tests.DataProvider
     public class when_sending_data_provider_executed_command_to_bus : Specification
     {
         private readonly IBus _bus;
-        private readonly ExecuteDataProvider _command;
+        private readonly ExecuteDataProviderCommand _command;
 
         public when_sending_data_provider_executed_command_to_bus()
         {
             _bus = BusFactory.NServiceRabbitMqBus();
 
-            _command = new ExecuteDataProvider(Guid.NewGuid(), (int) Domain.Core.Consumers.DataProvider.Audatex,
-                Domain.Core.Constants.DefinedMessages.StartCallingDataProvider, "", DateTime.UtcNow);
+            _command = new ExecuteDataProviderCommand(Guid.NewGuid(), (int) Domain.Core.Consumers.DataProvider.Audatex,
+                Domain.Core.Constants.DataProviderMonitoringMessages.StartCallingDataProvider, "", DateTime.UtcNow);
         }
 
         public override void Observe()

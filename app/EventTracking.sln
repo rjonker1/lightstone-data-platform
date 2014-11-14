@@ -27,13 +27,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Write.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Host", "EventTracking\source\EventTracking.Host\EventTracking.Host.csproj", "{133A449E-9D67-4440-BCC1-3344F2E439FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Read.Normalizer", "EventTracking\source\EventTracking.Read.Denormalizer\EventTracking.Read.Normalizer.csproj", "{431EE6F8-21F6-46E3-8A86-611F0A90B114}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Read.Denormalizer", "EventTracking\source\EventTracking.Read.Denormalizer\EventTracking.Read.Denormalizer.csproj", "{431EE6F8-21F6-46E3-8A86-611F0A90B114}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Read.ReadModel", "EventTracking\source\EventTracking.Read.ReadModel\EventTracking.Read.ReadModel.csproj", "{D517F69C-DCA4-4C8D-9FBD-DF40A3627DFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Read.Persistence", "EventTracking\source\EventTracking.Read.Persistence\EventTracking.Read.Persistence.csproj", "{91F77208-9EEA-4226-9AD8-6D5592BD3602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Host.Normalizer", "EventTracking\source\EventTracking.Host.Normalizer\EventTracking.Host.Normalizer.csproj", "{A0718ED6-9A56-40EE-BDFF-1642AFC6A94E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTracking.Host.Denormalizer", "EventTracking\source\EventTracking.Host.Denormalizer\EventTracking.Host.Denormalizer.csproj", "{A0718ED6-9A56-40EE-BDFF-1642AFC6A94E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

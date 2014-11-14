@@ -100,9 +100,9 @@
       <Project>{ee9d1aec-1e3e-420e-acf0-3058feee6e7f}</Project>
       <Name>Monitoring.DomainModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Monitoring.Read.Denormalizer\Monitoring.Read.Normalizer.csproj">
+    <ProjectReference Include="..\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj">
       <Project>{365e35da-ee0a-4ac8-8eb3-341f274988f7}</Project>
-      <Name>Monitoring.Read.Normalizer</Name>
+      <Name>Monitoring.Read.Denormalizer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring.Read.Persistence\Monitoring.Read.Persistence.csproj">
       <Project>{c0cd057e-a98a-4a9c-a8f3-a92a2e3077db}</Project>

@@ -13,23 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{AFD1E4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Distributed Services", "Distributed Services", "{658F9A03-C791-473F-8A65-BC11DC1191E0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Infrastructure", "Shared Infrastructure", "{72459D49-BF24-4BFA-96F3-ADF564FEB8EE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Domain.Core", "Monitoring\source\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj", "{C33860B0-149B-440F-906A-AC4F20CA1A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.DistributedService.Consumer", "Monitoring\source\Monitoring.DistributedService.Consumer\Monitoring.DistributedService.Consumer.csproj", "{52830124-637A-4358-A8D2-7338C9A2965A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Domain.Messages", "Monitoring\source\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj", "{9241BD29-8BB4-4EE8-9CEB-F0B665823BA2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{946E8DA7-0EC1-4505-8EA0-E41F3B0F5F9F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{5D22271A-5A91-49C1-9C1A-C28F5CD9AC29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadSide", "ReadSide", "{2CA82FB4-9AF9-46DA-B800-434D22E0CF27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WriteSide", "WriteSide", "{99ACBE10-32BF-4C11-8751-178A111BD5C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Read.Normalizer", "Monitoring\source\Monitoring.Read.Denormalizer\Monitoring.Read.Normalizer.csproj", "{365E35DA-EE0A-4AC8-8EB3-341F274988F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Read.Denormalizer", "Monitoring\source\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj", "{365E35DA-EE0A-4AC8-8EB3-341F274988F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Read.ReadModel", "Monitoring\source\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj", "{DD57EBDE-5CD4-4DDA-B2F4-3B500CDF7713}"
 EndProject
@@ -70,10 +62,6 @@ Global
 		{C33860B0-149B-440F-906A-AC4F20CA1A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C33860B0-149B-440F-906A-AC4F20CA1A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C33860B0-149B-440F-906A-AC4F20CA1A7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52830124-637A-4358-A8D2-7338C9A2965A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52830124-637A-4358-A8D2-7338C9A2965A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52830124-637A-4358-A8D2-7338C9A2965A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52830124-637A-4358-A8D2-7338C9A2965A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9241BD29-8BB4-4EE8-9CEB-F0B665823BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9241BD29-8BB4-4EE8-9CEB-F0B665823BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9241BD29-8BB4-4EE8-9CEB-F0B665823BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -116,7 +104,6 @@ Global
 		{0D9A56A3-E511-4AFB-B418-42651D5D15E8} = {0D7458B6-947E-433E-BA7C-378D42B0DB75}
 		{C33860B0-149B-440F-906A-AC4F20CA1A7F} = {AFD1E4CD-924A-471F-9D24-F22B5C008C3C}
 		{9241BD29-8BB4-4EE8-9CEB-F0B665823BA2} = {AFD1E4CD-924A-471F-9D24-F22B5C008C3C}
-		{52830124-637A-4358-A8D2-7338C9A2965A} = {658F9A03-C791-473F-8A65-BC11DC1191E0}
 		{C4C33A7B-A21F-461A-9DC6-FDD9E885F30D} = {658F9A03-C791-473F-8A65-BC11DC1191E0}
 		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862} = {658F9A03-C791-473F-8A65-BC11DC1191E0}
 		{365E35DA-EE0A-4AC8-8EB3-341F274988F7} = {2CA82FB4-9AF9-46DA-B800-434D22E0CF27}

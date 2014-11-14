@@ -4,7 +4,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Monitoring.DistributedService.DenormalizerHost.Storage;
 using Monitoring.Domain.Core.Contracts;
-using Monitoring.Read.Normalizer.DataProvider;
+using Monitoring.Read.Denormalizer.DataProvider;
 using Monitoring.Read.Persistence.Mappings.DataProviderMaps;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
@@ -26,7 +26,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .OnActivated(c => c.Instance.BeginTransaction());
 
             builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
-            builder.RegisterType<DataProviderEventsUpdater>();
+            builder.RegisterType<DataProviderMonitoringHandler>();
         }
 
         private static ISessionFactory BuildNhibernateConfiguration()
@@ -36,7 +36,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(
                         ConfigurationManager.ConnectionStrings["Monitoring.ReadModel"].ConnectionString))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderEventMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringMap>())
                 .ExposeConfiguration(BuildMonitoringReadSchema).BuildSessionFactory();
         }
 
