@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using DataPlatform.Shared.Entities;
-using DataPlatform.Shared.Repositories;
+using PackageBuilder.Core.Repositories;
+using IPackage = PackageBuilder.Domain.Entities.Packages.WriteModels.IPackage;
 
 namespace PackageBuilder.Domain.Entities
 {

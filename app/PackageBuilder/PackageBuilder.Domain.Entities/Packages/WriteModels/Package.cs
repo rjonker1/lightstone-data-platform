@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
-using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.States.WriteModels;
+using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider;
 
 namespace PackageBuilder.Domain.Entities.Packages.WriteModels
 {

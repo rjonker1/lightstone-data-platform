@@ -1,11 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain;
-using PackageBuilder.Domain.Entities;
-using PackageBuilder.TestHelper.Builders.Entites;
-using PackageBuilder.TestHelper.Builders.Repositories;
-using PackageBuilder.TestHelper.Fakes;
-
-namespace PackageBuilder.TestHelper.Mothers
+﻿namespace PackageBuilder.TestHelper.Mothers
 {
     public class PackageLookupMother
     {

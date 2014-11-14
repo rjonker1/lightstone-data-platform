@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
+using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
@@ -23,8 +23,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly Type DataProviderType;
         public readonly IEnumerable<IDataField> DataFields;
 
-        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
-            
+        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)       
         {
             Id = id;
             Name = name;

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using AutoMapper;
-using DataPlatform.Shared.Entities;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Infrastructure.Repositories;

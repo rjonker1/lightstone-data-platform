@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
+using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
 {

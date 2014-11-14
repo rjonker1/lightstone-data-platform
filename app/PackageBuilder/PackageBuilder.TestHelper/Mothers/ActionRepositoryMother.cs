@@ -1,5 +1,4 @@
-﻿using DataPlatform.Shared.Entities;
-using PackageBuilder.Domain.Entities;
+﻿using PackageBuilder.Domain.Entities;
 using PackageBuilder.TestHelper.Builders.Repositories;
 using PackageBuilder.TestHelper.Fakes;
 

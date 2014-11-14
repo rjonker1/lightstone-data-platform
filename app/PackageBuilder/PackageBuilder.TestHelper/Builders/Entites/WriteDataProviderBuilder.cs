@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites

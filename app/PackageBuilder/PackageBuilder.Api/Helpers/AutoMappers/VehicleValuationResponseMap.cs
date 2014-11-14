@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Entities;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 

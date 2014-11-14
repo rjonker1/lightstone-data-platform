@@ -2,9 +2,9 @@
 using System.Linq;
 using AutoMapper;
 using Castle.Windsor;
-using DataPlatform.Shared.Entities;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 

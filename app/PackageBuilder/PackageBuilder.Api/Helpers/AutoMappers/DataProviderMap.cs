@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.Api.Helpers.AutoMappers

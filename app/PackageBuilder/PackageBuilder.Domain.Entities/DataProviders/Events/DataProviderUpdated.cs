@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Entities;
 using DataPlatform.Shared.Enums;
+using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.Events
 {

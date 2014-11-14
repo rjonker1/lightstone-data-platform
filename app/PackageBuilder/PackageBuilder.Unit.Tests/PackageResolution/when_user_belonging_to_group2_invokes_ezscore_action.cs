@@ -1,6 +1,5 @@
 using DataPlatform.Shared.Entities;
 using PackageBuilder.Domain.Entities;
-using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Unit.Tests.PackageResolution

@@ -26,13 +26,13 @@
         { name: 'user3' }
         ];
 
-        //Defaulted postion for toggle-switch
-        $scope.switch = 'false';
-        $scope.switchAlternate = 'Per Request';
+        // Defaulted postion for toggle-switch
+        //$scope.switch = 'true';
+        //$scope.switchAlternate = 'Per Field';
 
         $scope.toggle = function(state) {
 
-            (state == 'true') ? $scope.switch = 'false' : $scope.switch = 'true';
+            (state == true) ? $scope.switch = false : $scope.switch = true;
             $scope.dataProvider.response[0].fieldLevelCostPriceOverride = $scope.switch;
             $scope.dataProvider.response[0].costOfSale = 0;
         }
@@ -129,6 +129,9 @@
             return datacontext.getDataProvider(id, version).then(function (response) {
 
                 $scope.dataProvider = response.data;
+                $scope.switch = $scope.dataProvider.response[0].fieldLevelCostPriceOverride;
+                //$scope.switch = true;
+                $scope.switchAlternate = 'Per Field';
             });
         }
 

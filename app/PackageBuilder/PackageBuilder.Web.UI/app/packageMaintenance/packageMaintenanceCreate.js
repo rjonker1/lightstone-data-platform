@@ -28,7 +28,7 @@
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.dataProvsPkg = {};
-        //Prevent $modelValue undefined error
+        // Prevent $modelValue undefined error
         $scope.dataProvsPkg.Package = { 'mock': 'mock' };
 
 

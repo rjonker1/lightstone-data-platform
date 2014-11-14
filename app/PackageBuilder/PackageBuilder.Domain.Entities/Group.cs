@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Entities;
 
 namespace PackageBuilder.Domain.Entities
 {
