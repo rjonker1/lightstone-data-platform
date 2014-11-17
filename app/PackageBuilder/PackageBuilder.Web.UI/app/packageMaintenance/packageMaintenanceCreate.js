@@ -82,14 +82,35 @@
 
                 for (var i = 0; i < items.length; i++) {
 
-                    var listItem = items[i]; 
+                    var listItem = items[i];
 
-                    for (var x = 0; x < (listItem.dataFields).length; x++) {
+                    switch (listItem.fieldLevelCostPriceOverride) {
+                        case true:
 
-                        if (listItem.dataFields[x].isSelected === true) {
+                            for (var x = 0; x < (listItem.dataFields).length; x++) {
 
-                            valueTotal += listItem.dataFields[x].price;
-                        }
+                                if (listItem.dataFields[x].isSelected === true) {
+
+                                    valueTotal += listItem.dataFields[x].price;
+                                }
+                            }
+
+                            break;
+                        case false:
+
+                            for (var x = 0; x < (listItem.dataFields).length; x++) {
+
+                                if (listItem.dataFields[x].isSelected === true) {
+
+                                    valueTotal += listItem.costOfSale;
+                                    return valueTotal;
+                                }
+                            }
+                            
+                            break;
+                        
+                        default:
+                            break;
                     }
 
                 }

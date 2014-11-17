@@ -12,6 +12,12 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     public class DataProvider : AggregateBase, IDataProvider
     {
         [DataMember]
+        public Guid Id
+        {
+            get { return base.Id; }
+            internal set { base.Id = value; }
+        }
+        [DataMember]
         public DataProviderName Name { get; internal set; } 
         [DataMember]
         public string Description { get; internal set; }

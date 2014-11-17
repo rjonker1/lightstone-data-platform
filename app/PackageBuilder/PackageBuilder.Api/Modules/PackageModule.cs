@@ -27,7 +27,7 @@ namespace PackageBuilder.Api.Modules
 
             Get["/Package/Get/{id}/{version}"] = parameters =>
             {
-                return Response.AsJson(new { Response = new []{ writeRepo.GetById(parameters.id) } });
+                return Response.AsJson(new { Response = new []{ Mapper.Map<IPackage, PackageDto>( writeRepo.GetById(parameters.id)) } });
             };
 
             Post["/Package/Add"] = parameters =>
