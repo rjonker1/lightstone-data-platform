@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
@@ -7,6 +8,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
 {
     public interface IDataProvider 
     {
+        Guid Id { get; }
         DataProviderName Name { get; }
         string Description { get; }
         double CostOfSale { get; }

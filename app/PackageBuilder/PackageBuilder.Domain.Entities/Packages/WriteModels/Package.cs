@@ -10,7 +10,7 @@ using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.I
 namespace PackageBuilder.Domain.Entities.Packages.WriteModels
 {
     [DataContract]
-    public class Package : AggregateBase
+    public class Package : AggregateBase, IPackage
     {
         [DataMember]
         public string Name { get; private set; }
@@ -33,14 +33,23 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public IEnumerable<IDataProvider> DataProviders { get; private set; }
 
+        //Used for serialization
+        protected Package() { }
+
         //Used by NEventstore
         private Package(Guid id)
         {
             Id = id;
         }
 
-        //Used for serialization
-        protected Package() { }
+        public Package(Guid id, string name, State state ,IEnumerable<IDataProvider> dataProviders) 
+            : this(id)
+        {
+            Id = id;
+            Name = name;
+            State = state;
+            DataProviders = dataProviders;
+        }
 
         public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
