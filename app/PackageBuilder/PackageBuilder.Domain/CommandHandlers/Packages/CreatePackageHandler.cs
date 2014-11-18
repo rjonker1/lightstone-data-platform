@@ -29,7 +29,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
             if (existing != null)
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
 
-            var entity = new Package(command.Id, command.Name, command.Description, command.CostPrice, command.SalePrice,
+            var entity = new Package(command.Id, command.Name, command.Description, command.Industry, command.CostPrice, command.SalePrice,
                 command.State, 0.1M, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviders);
 
             _writeRepo.Save(entity, Guid.NewGuid());

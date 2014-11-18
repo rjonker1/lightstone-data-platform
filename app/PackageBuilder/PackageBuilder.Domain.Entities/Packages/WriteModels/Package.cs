@@ -54,13 +54,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             DataProviders = dataProviders;
         }
 
-        public Package(Guid id, string name, string description, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, string description, string industry, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
-            RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, state, displayVersion,  owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageCreated(id, name, description, industry, costPrice, salePrice, state, displayVersion,  owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, string industry, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             if (state.Name == StateName.Published) 
                 DisplayVersion = Math.Ceiling(DisplayVersion);
@@ -70,7 +70,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
                 Name = name;
             }
 
-            RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageUpdated(id, name, description, industry, costPrice, salePrice, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
         private void Apply(PackageCreated @event)
@@ -78,6 +78,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             Description = @event.Description;
+            Industry = @event.Industry;
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
             State = @event.State;
@@ -93,6 +94,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             Description = @event.Description;
+            Industry = @event.Industry;
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
             State = @event.State;
