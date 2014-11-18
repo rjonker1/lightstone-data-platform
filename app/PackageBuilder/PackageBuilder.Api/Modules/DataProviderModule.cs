@@ -23,7 +23,8 @@ namespace PackageBuilder.Api.Modules
             IDataProviderRepository readRepo,
             INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
-            Get["/DataProvider"] = parameters => { return Response.AsJson(readRepo); };
+            Get["/DataProvider"] = parameters =>
+                Response.AsJson(readRepo);
 
             Get["/DataProvider/Get/All"] = parameters =>
             {

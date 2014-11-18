@@ -23,6 +23,8 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public State State { get; private set; }
         [DataMember]
+        public string Industry { get; private set; }
+        [DataMember]
         public decimal DisplayVersion { get; private set; }
         [DataMember]
         public string Owner { get; private set; }
@@ -30,6 +32,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         public DateTime CreatedDate { get; private set; }
         [DataMember]
         public DateTime? EditedDate { get; private set; }
+
         [DataMember]
         public IEnumerable<IDataProvider> DataProviders { get; private set; }
 

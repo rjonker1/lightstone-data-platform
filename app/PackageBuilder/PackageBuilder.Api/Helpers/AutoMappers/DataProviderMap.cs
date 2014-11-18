@@ -20,13 +20,11 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
                     opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.DataFields)));
 
             Mapper.CreateMap<DataProviderDto, IDataProvider>()
-                .ConvertUsing(x => new DataProvider(x.Id, (DataProviderName)Enum.Parse(typeof(DataProviderName), x.Name, true), Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(x.DataFields)));
+                .ConvertUsing(x => new DataProvider(x.Id, (DataProviderName)Enum.Parse(typeof(DataProviderName), x.Name, true), 
+                                x.FieldLevelCostPriceOverride, Mapper.Map<IEnumerable<DataProviderFieldItemDto>, 
+                                IEnumerable<IDataField>>(x.DataFields)));
             Mapper.CreateMap<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>()
                 .ConvertUsing(x => x.Select(Mapper.Map<DataProviderDto, IDataProvider>).ToList());
-            //.ConvertUsing<ITypeConverter<DataProviderDto, DataProvider>>();
-
-            //Mapper.CreateMap<IEnumerable<DataProviderDto>, IEnumerable<DataProvider>>()
-            //   .ConvertUsing(x => x.Select(Mapper.Map<DataProviderDto, DataProvider>));
         }
     }
 }

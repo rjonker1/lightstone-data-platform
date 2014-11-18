@@ -10,6 +10,11 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
     {
         Guid Id { get; }
         State State { get; }
+        DateTime CreatedDate { get; }
+        int Version { get; }
+        decimal DisplayVersion { get; }
+        string Industry { get; }
+        string Description { get; }
         //IAction Action { get; }
         IEnumerable<IDataProvider> DataProviders { get; }
         //IEnumerable<IWorkflow> Workflows { get; }

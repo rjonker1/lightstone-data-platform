@@ -148,6 +148,7 @@
     <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
     <Compile Include="Helpers\AutoMappers\RgtResponseMap.cs" />
     <Compile Include="Helpers\AutoMappers\RgtVinResponseMap.cs" />
+    <Compile Include="Helpers\AutoMappers\StateMap.cs" />
     <Compile Include="Helpers\AutoMappers\VehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />

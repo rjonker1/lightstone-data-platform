@@ -10,6 +10,7 @@ namespace PackageBuilder.Domain.Dtos
         public string Description { get; set; }
         public string State { get; set; }
         public int Version { get; set; }
+        public decimal DisplayVersion { get; set; }
         public string Industry { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime EditedDate { get; set; }
