@@ -35,23 +35,19 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ExecuteDataProvider.cs" />
-    <Compile Include="Commands\MessageConsumedCommand.cs" />
-    <Compile Include="Events\DataProviderExecuted.cs" />
+    <Compile Include="Commands\ExecuteDataProviderCommand.cs" />
+    <Compile Include="Events\DataProviderExecutedEvent.cs" />
     <Compile Include="Events\DataProviderFailed.cs" />
     <Compile Include="Events\DataProviderHandled.cs" />
     <Compile Include="Events\DataProviderRequestSent.cs" />
     <Compile Include="Events\DataProviderResponseFailure.cs" />
     <Compile Include="Events\DataProviderResponseSucceeded.cs" />
     <Compile Include="Events\DataProviderResponseTransformed.cs" />
-    <Compile Include="IDataProviderEvent.cs" />
+    <Compile Include="IDataProviderMonitoringEvent.cs" />
     <Compile Include="Messages\CommandHasBeenConsumed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

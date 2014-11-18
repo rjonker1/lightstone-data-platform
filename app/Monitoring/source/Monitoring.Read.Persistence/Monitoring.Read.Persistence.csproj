@@ -41,7 +41,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\DataProviderMaps\DataProviderEventMaps.cs" />
+    <Compile Include="Mappings\DataProviderMaps\DataProviderMonitoringMaps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,10 +7,10 @@ namespace Monitoring.Test.Helper.Builder.DataProviderEvents
 {
     public class EventMessageBuilder
     {
-        public static DataProviderExecuted DataProviderExecutedEvent()
+        public static DataProviderExecutingStartingEvent DataProviderExecutedEvent()
         {
-            return new DataProviderExecuted(Guid.NewGuid(), (int) DataProvider.Audatex,
-                DefinedMessages.StartCallingDataProvider, DateTime.UtcNow);
+            return new DataProviderExecutingStartingEvent(Guid.NewGuid(), (int) DataProvider.Audatex,
+                DataProviderMonitoringMessages.StartCallingDataProvider, DateTime.UtcNow);
         }
     }
 

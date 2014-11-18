@@ -9,13 +9,13 @@ namespace Monitoring.DomainModel.DataProviders
         private DataProviderExecution(Guid id)
         {
             Id = id;
-            Register<DataProviderExecuted>(e => Id = id);
+            Register<DataProviderExecutingStartingEvent>(e => Id = id);
         }
 
         public DataProviderExecution(Guid id, int dataProvider, string message, DateTime date)
             : this(id)
         {
-            RaiseEvent(new DataProviderExecuted(id, dataProvider, message, date));
+            RaiseEvent(new DataProviderExecutingStartingEvent(id, dataProvider, message, date));
         }
     }
 }

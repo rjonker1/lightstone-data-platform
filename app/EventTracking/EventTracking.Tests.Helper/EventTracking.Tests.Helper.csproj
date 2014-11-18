@@ -83,7 +83,7 @@
     <Compile Include="Builder\Lace\EventMessagesBuilder.cs" />
     <Compile Include="Builder\Lace\MonitoringEventsBuilder.cs" />
     <Compile Include="Fakes\Lace\FakeExternalSourceEvents.cs" />
-    <Compile Include="Fakes\Measurement\FakeSourceExecutionRepository.cs" />
+    <None Include="Fakes\Measurement\FakeSourceExecutionRepository.cs.old" />
     <Compile Include="Mother\Messages\Lace\LaceExternalSourceExecutionEventMessage.cs" />
     <Compile Include="Fakes\Persistence\FakePersistEvent.cs" />
     <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
@@ -91,12 +91,6 @@
     <Compile Include="Mother\Monitoring\ExternalSourceEventConsumers.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\EventTracking.Measurement\EventTracking.Measurement.csproj">
-      <Project>{d6e3cbee-1f1d-4fb2-9efb-eb307bebbeb6}</Project>
-      <Name>EventTracking.Measurement</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
