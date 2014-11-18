@@ -1,10 +1,28 @@
 ﻿<script type="text/ng-template" id="proivder_nodes_renderer.html">
 
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
-        <a style="cursor:pointer;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
-            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
-        </a>
-        {{provider.name}}
+        <div class="row">
+
+            <div class="col-md-4">
+                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                </a>
+                <div style="float: left; margin-left: 15px;">
+                    {{provider.name}}
+                </div>
+            </div>
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
+                Cost Of Sale: R {{provider.costOfSale}}
+            </div>
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
+                *Per request
+            </div>
+
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == true" />
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == true">
+                *Per field requested
+            </div>
+        </div>
     </div>
     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
         <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields | filter:filterIndustry">
