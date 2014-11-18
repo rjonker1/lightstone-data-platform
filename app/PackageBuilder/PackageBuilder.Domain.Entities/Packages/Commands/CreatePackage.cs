@@ -10,6 +10,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
     {
         public readonly string Name;
         public readonly string Description;
+        public readonly string Industry;
         public readonly double CostPrice;
         public readonly double SalePrice;
         public readonly State State;
@@ -18,11 +19,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
         public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProvider> DataProviders;
 
-        public CreatePackage(Guid id, string name, string description, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public CreatePackage(Guid id, string name, string description, string industry, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             Id = id;
             Name = name;
             Description = description;
+            Industry = industry;
             CostPrice = costPrice;
             SalePrice = salePrice;
             State = state;
