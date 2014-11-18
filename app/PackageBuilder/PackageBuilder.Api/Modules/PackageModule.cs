@@ -21,14 +21,10 @@ namespace PackageBuilder.Api.Modules
                                         INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo)
         {
             Get["/Packages"] = parameters =>
-            {
-                return Response.AsJson(readRepo);
-            };
+                 Response.AsJson(readRepo);
 
             Get["/Package/Get/{id}/{version}"] = parameters =>
-            {
-                return Response.AsJson(new { Response = new []{ Mapper.Map<IPackage, PackageDto>( writeRepo.GetById(parameters.id)) } });
-            };
+                 Response.AsJson(new { Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) } });
 
             Post["/Package/Add"] = parameters =>
             {

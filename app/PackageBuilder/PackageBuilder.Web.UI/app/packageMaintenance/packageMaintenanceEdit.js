@@ -147,7 +147,6 @@
 
                     $scope.dataProvsPkg.Package = response.data.response;
                     //Manipulate current state of Pakage at load to reflect alias of enum from API
-                    $scope.dataProvsPkg.Package[0].state = $scope.dataProvsPkg.Package[0].state.alias;
 
                     logSuccess('Data Providers loaded!');
 
