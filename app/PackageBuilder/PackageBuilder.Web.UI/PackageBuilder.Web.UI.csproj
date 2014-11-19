@@ -66,6 +66,8 @@
     <Content Include="app\favicon.ico" />
     <Content Include="app\images\yeoman.png" />
     <Content Include="app\index_old.html" />
+    <Content Include="app\packages\packageView.js" />
+    <Content Include="app\packages\packageView.html" />
     <Content Include="app\repositories\stateRepository.js" />
     <Content Include="app\resources\stateResources.js" />
     <Content Include="app\states\headerTemplate.html" />

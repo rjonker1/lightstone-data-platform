@@ -57,6 +57,13 @@
                 }
 
             }, {
+                url: '/package-maintenance-view/:id/:version',
+                config: {
+                    title: 'package-maintenance-view',
+                    templateUrl: 'app/packages/packageView.html'
+                }
+
+            }, {
                 url: '/data-providers',
                 config: {
                     title: 'data-providers',

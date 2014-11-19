@@ -1,0 +1,205 @@
+﻿<script type="text/ng-template" id="proivder_nodes_renderer.html">
+
+    <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
+        <div class="row">
+
+            <div class="col-md-4">
+                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                </a>
+                <div style="float: left; margin-left: 15px;">
+                    {{provider.name}}
+                </div>
+            </div>
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
+                Cost Of Sale: R {{provider.costOfSale}}
+            </div>
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
+                *Per request
+            </div>
+
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == true" />
+            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == true">
+                *Per field requested
+            </div>
+        </div>
+    </div>
+    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields | filter:filterIndustry">
+
+            <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox" disabled="disabled">
+            <div class="col-md-6">{{dataField.name}}</div>
+            <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" readonly/>
+            </div>
+
+        </li>
+    </ol>
+
+</script>
+
+
+<section class="mainbar" data-ng-controller="packageView">
+    <!--{{dataProvsPkg.Package[0]}}-->
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div data-cc-widget-header title="{{title}}"></div>
+                    <div class="widget-content user">
+
+                        <div id="info" class="row">
+
+                            <div id="1" class="col-md-3">
+                                <div>
+                                    <label>Name:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package[0].name" readonly />
+                                    </div>
+
+                                    <label>Version:</label>
+                                    <div>
+                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package[0].displayVersion" readonly />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label>Description</label>
+                                    </div>
+                                    <div>
+                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package[0].description" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="col-lg-4" />-->
+
+                            <div id="2" class="col-md-3">
+                                <div>
+                                    <label>State:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].state" readonly>
+                                            <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div>
+
+                                    <label>Revision Date: </label>
+                                    <div current-date-time="format"></div>
+
+                                </div>
+
+                                <br />
+
+                                <div>
+                                    <label>Package Industry:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].industry" ng-selected="dataProvsPkg.Package.industry" readonly>
+                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <!--<div>
+                                    <label>Owner:</label>
+                                    <div>
+                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].owner" ng-selected="dataProvsPkg.Package[0].owner">
+                                            <option ng-repeat="user in users">{{user.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>-->
+
+                                <div>
+                                    <label>COS:</label>
+                                    <div>
+                                        <input id="cosPackage" type="number" class="form-control" value="{{total()}}" readonly />
+                                    </div>
+                                    <label>Recommended Sale Price:</label>
+                                    <div>
+                                        <input id="rsp" type="number" class="form-control" ng-model="dataProvsPkg.Package[0].recommendedSalePrice" ng-style="rspEditStyle" ng-change="{{total()}}" readonly/>
+                                        <span ng-show="warning" syle="width: 80%;">
+                                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                            <span class="help-block">WARNING: </span>
+                                            <span class="help-block">Cost of sale exceeds Recommended Sale price!</span>
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- DataProvider -->
+
+                            <div class="row">
+
+                                <div class="col-md-4" style="padding-bottom: 20px;">
+                                    <div style="float: left;"><h3>Data Providers</h3></div>
+                                    <div style="float: right; text-align: right;">
+                                        <label>Filter Data Providers fields by Industry:</label>
+                                        <select class="form-control" ng-model="filteredConstraint"
+                                                ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <div ui-tree id="asdt" ng-model="dataProvsPkg">
+                                        <div ng-repeat="providers in dataProvsPkg.Package">
+                                            <div ng-repeat="provs in providers">
+                                                <ol ui-tree-nodes="" ng-model="provs">
+                                                    <li ng-repeat="provider in provs" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+
+                                    <div style="float: right;">
+                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                                        <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Save Package</button>
+                                    </div>
+
+
+
+                                </div>
+
+                                <!-- <div class="col-lg-6">
+                                         <h3>Data binding</h3>
+                                         <div class="info">
+                                             {{ info }}
+                                         </div>
+                                         <pre class="code">{{ dataProvsPkg | json }}</pre>
+                                     </div>-->
+
+                                <div class="col-lg-6">
+                                    <div style="float: right;">
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>  <!-- End DataProvider -->
+
+                        </div> <!--End Info-->
+
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
