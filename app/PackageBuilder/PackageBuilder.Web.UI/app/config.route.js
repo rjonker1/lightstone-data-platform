@@ -73,6 +73,12 @@
                     templateUrl: 'app/dataProviders/dataProviderDetail.html',
                 }
             }, {
+                url: '/data-provider-view/:id/:version',
+                config: {
+                    title: 'data-provider-view',
+                    templateUrl: 'app/dataProviders/dataProviderView.html',
+                }
+            }, {
                 url: '/industries',
                 config: {
                     title: 'industries',

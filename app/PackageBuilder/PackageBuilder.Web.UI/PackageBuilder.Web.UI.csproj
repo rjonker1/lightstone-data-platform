@@ -62,6 +62,7 @@
     <Content Include="app\dataProviders\dataProviderDetail.js" />
     <Content Include="app\dataProviders\dataProviders.html" />
     <Content Include="app\dataProviders\dataProviders.js" />
+    <Content Include="app\dataProviders\dataProviderView.html" />
     <Content Include="app\favicon.ico" />
     <Content Include="app\images\yeoman.png" />
     <Content Include="app\index_old.html" />
