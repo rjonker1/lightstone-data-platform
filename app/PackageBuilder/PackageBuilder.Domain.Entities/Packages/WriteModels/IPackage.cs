@@ -15,6 +15,9 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         decimal DisplayVersion { get; }
         string Industry { get; }
         string Description { get; }
+        string Owner { get; }
+        double CostOfSale { get; }
+        double RecommendedSalePrice { get; }
         //IAction Action { get; }
         IEnumerable<IDataProvider> DataProviders { get; }
         //IEnumerable<IWorkflow> Workflows { get; }

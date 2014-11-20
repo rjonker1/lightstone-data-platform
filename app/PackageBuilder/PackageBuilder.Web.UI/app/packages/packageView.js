@@ -1,17 +1,17 @@
 ﻿(function () {
     'use strict';
 
-    var controllerId = 'packageMaintenanceCreate';
+    var controllerId = 'packageView';
 
     angular
-        .module( 'app' )
-        .controller(controllerId, packageMaintenanceCreate);
+        .module('app')
+        .controller(controllerId, packageView);
 
-    packageMaintenanceCreate.$inject = ['$scope', '$location', '$timeout', '$parse', '$http', 'common', 'datacontext'];
+    packageView.$inject = ['$scope', '$location', '$routeParams', '$parse', '$http', 'common', 'datacontext'];
 
-    function packageMaintenanceCreate($scope, $location, $timeout, $parse, $http, common, datacontext) {
+    function packageView($scope, $location, $routeParams, $parse, $http, common, datacontext) {
 
-        $scope.title = 'Package Maintenance - Create';
+        $scope.title = 'Package Maintenance - View';
         var filterVal = 'All';
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -28,27 +28,23 @@
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.dataProvsPkg = {};
-        // Prevent $modelValue undefined error
-        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
+        //Prevent $modelValue undefined error
+        $scope.dataProvsPkg.Package = { 'mock' : 'mock' }
 
 
-        $scope.createPackage = function(packageData) {
+        $scope.editPackage = function (packageData) {
 
-            return datacontext.createPackage(packageData).then(function (response) {
+            return datacontext.editPackage($routeParams.id, packageData).then(function (response) {
 
                 console.log(response);
-                (response.status === 200) ? logSuccess('Package Created!') : logError('Error 404. Please check your connection settings');
-
+                (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
             });
-
         }
 
         $scope.cancel = function () {
 
             $location.path('/packages');
         };
-
-        $scope.filteredConstraint = '';
 
         $scope.filterIndustry = function (fields) {
 
@@ -59,28 +55,29 @@
             return fields;
         };
 
-       $scope.filterData = function(filter) {
+        $scope.filterData = function (filter) {
 
-           filterVal = filter.name;
-       }
+            filterVal = filter.name;
+        }
 
         $scope.total = function () {
 
-            var rspCreate = angular.element(document.getElementById('rsp'));
+            var rspEdit = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
             var items = null;
+            var cos = null;
 
             try {
-
-                items = $scope.dataProvsPkg.Package.DataProviders;
+                
+                items = $scope.dataProvsPkg.Package[0].dataProviders;
+                cos = $scope.dataProvsPkg.Package[0].costOfSale;
             } catch (e) {
 
-                //console.log(e.message);
-            }
+            } 
 
-            if (items != null) {
+            if ( items != null ) {
 
-                for (var i = 0; i < items.length; i++) {
+                for (var i = 0; i < items.length; i++) { 
 
                     var listItem = items[i];
 
@@ -106,48 +103,53 @@
                                     break;
                                 }
                             }
-                            
-                            break;
-                        
-                        default:
+
                             break;
                     }
 
                 }
-            } 
+            }
 
-            $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
+            if (cos != null) {
 
-            if (valueTotal > rspCreate[0].value) {
+                $scope.dataProvsPkg.Package[0].costOfSale = valueTotal;
+            }
+
+            if (valueTotal > rspEdit[0].value) {
 
                 $scope.warning = true;
-                $scope.rspCreateStyle = { 'color': 'red' };
+                $scope.rspEditStyle = { 'color': 'red' };
             } else {
 
                 $scope.warning = false;
-                $scope.rspCreateStyle = { 'color': 'none' };
+                $scope.rspEditStyle = { 'color': 'none' };
             }
 
             return valueTotal;
         };
 
+
         activate();
-      
+
         function activate() {
-            
-            common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId)
+
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId)
                .then(function () { log('Activated Package Maintenance View'); });
         }
 
-        function getDataProviders() {
+        function getDataProvider(id, version) {
 
-            return datacontext.getDataProviderSources().then(function (response) {
+            return datacontext.getPackage(id, version).then(function (response) {
+
+                console.log(response);
 
                 if (response.status === 200) {
 
-                    $scope.dataProvsPkg.Package.DataProviders = response.data;
-                    $scope.dataProvsPkg.Package.state = 'Draft';
+                    $scope.dataProvsPkg.Package = response.data.response;
+                    //Manipulate current state of Pakage at load to reflect alias of enum from API
+
                     logSuccess('Data Providers loaded!');
+
                 }
 
                 if (response.status === 404) {
@@ -161,7 +163,6 @@
                         $scope.dataProvsPkg = data;
 
                     }).error(function (data, status, headers, config) {
-
 
                     });
 

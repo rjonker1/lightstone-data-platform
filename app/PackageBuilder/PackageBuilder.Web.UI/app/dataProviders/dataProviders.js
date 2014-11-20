@@ -22,9 +22,12 @@
         $scope.latestVersion = 0;
 
         $scope.notify = function(row) {
-
             $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
         };
+
+        $scope.viewDataProvider = function(row) {
+            $location.path('/data-provider-view/' + row.entity.dataProviderId + '/' + row.entity.version);
+        }
 
         $scope.canEdit = function() {
 
@@ -54,7 +57,7 @@
                         '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
                         '' +
                         '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
-                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="" value="View" /></div>'
+                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewDataProvider(row)" value="View" /></div>'
                 }
             ]
         };

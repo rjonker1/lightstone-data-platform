@@ -53,5 +53,17 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             IsSelected = isSelected;
             //Type = type;
         }
+
+        public DataField(string name, string label, string definition, string industry, double price, bool isSelected, IEnumerable<IDataField> dataFields)//, Type type)
+        {
+            Name = name;
+            Label = label;
+            Definition = definition;
+            Industry = industry;
+            Price = price;
+            IsSelected = isSelected;
+            DataFields = dataFields;
+            //Type = type;
+        }
     }
 }

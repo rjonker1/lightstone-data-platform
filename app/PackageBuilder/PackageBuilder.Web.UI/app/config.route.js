@@ -57,6 +57,13 @@
                 }
 
             }, {
+                url: '/package-maintenance-view/:id/:version',
+                config: {
+                    title: 'package-maintenance-view',
+                    templateUrl: 'app/packages/packageView.html'
+                }
+
+            }, {
                 url: '/data-providers',
                 config: {
                     title: 'data-providers',
@@ -71,6 +78,12 @@
                 config: {
                     title: 'data-provider-detail',
                     templateUrl: 'app/dataProviders/dataProviderDetail.html',
+                }
+            }, {
+                url: '/data-provider-view/:id/:version',
+                config: {
+                    title: 'data-provider-view',
+                    templateUrl: 'app/dataProviders/dataProviderView.html',
                 }
             }, {
                 url: '/industries',

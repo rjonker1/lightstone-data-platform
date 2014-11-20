@@ -100,7 +100,7 @@
                                 if (listItem.dataFields[x].isSelected === true) {
 
                                     valueTotal += listItem.costOfSale;
-                                    return valueTotal;
+                                    break;
                                 }
                             }
 

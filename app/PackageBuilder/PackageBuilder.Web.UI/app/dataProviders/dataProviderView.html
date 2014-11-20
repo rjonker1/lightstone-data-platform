@@ -5,8 +5,6 @@
             </div>
 
         </div>-->
-    
-    {{dataProvider.response}}
     <section class="matter" data-ng-model="dataProvider.response">
         <div class="container">
             <div class="row">
@@ -21,7 +19,7 @@
                                 <div>
                                     <label>Name:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProv.name" />
+                                        <input type="textbox" class="form-control" ng-model="dataProv.name" readonly/>
                                     </div>
                                     <label>Version:</label>
                                     <div>
@@ -33,7 +31,7 @@
                                         <label>Description</label>
                                     </div>
                                     <div>
-                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProv.description"></textarea>
+                                        <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProv.description" readonly></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +41,7 @@
                                 <div ng-if="switch == false">
                                     <label>COS Per Request:</label>
                                     <div>
-                                        <input type="number" class="form-control" ng-model="dataProv.costOfSale" />
+                                        <input type="number" class="form-control" ng-model="dataProv.costOfSale" readonly/>
                                     </div>
                                 </div>
                                 <div ng-if="switch == true">
@@ -72,7 +70,7 @@
                                 <div>
                                     <label>Owner:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProv.owner" ng-selected="dataProv.owner">
+                                        <select class="form-control" ng-model="dataProv.owner" ng-selected="dataProv.owner" readonly>
                                             <option ng-repeat="user in users">{{user.name}}</option>
                                         </select>
                                     </div>
@@ -86,9 +84,9 @@
                                         <div class="toggle-bg toggle-alternate {{switch}}">
 
                                             <label class="{{switch}}">{{switchAlternate}}</label>
-                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle( true )">
-                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle( false )">
-                                            <span class=" switch {{switch}}"></span>
+                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" >
+                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" >
+                                            <span class=" switch {{switch}} "></span>
 
                                         </div>
                                     </div>
@@ -100,8 +98,7 @@
                                 <div>
 
                                     <div style="float: right;">
-                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                                        <button type="button" class="btn btn-success" ng-click="editProvider(dataProv)">Save Data Provider</button>
+                                        <button type="button" class="btn btn-info" ng-click="cancel()">Return to Data Providers</button>
                                     </div>
 
                                 </div>
@@ -131,7 +128,7 @@
                                                         <div style="float: right;">
                                                             <select class="form-control" style="width: 100% !important;" ng-model="selectedGroupIndustry"
                                                                     ng-options="industry.name as industry.name for industry in industries"
-                                                                    ng-change="updateFieldIndustry(selectedGroupIndustry)" />
+                                                                    ng-change="updateFieldIndustry(selectedGroupIndustry)" readonly/>
                                                         </div>
                                                     </th>
                                                     <th ng-show="switch == true">Price</th>
@@ -142,16 +139,16 @@
                                                 <tr>
                                                     <td>{{dField.name}}</td>
                                                     <td>{{dField.type}}</td>
-                                                    <td><input class="form-control" ng-model="dField.label" type="text"></td>
-                                                    <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+                                                    <td><input class="form-control" ng-model="dField.label" type="text" readonly></td>
+                                                    <td><input class="form-control" ng-model="dField.definition" type="text" readonly></td>
 
                                                     <td>
                                                         <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
-                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" readonly/>
                                                     </td>
 
                                                     <td ng-show="switch == true">
-                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
+                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly/>
                                                     </td>
                                                 </tr>
 
@@ -190,7 +187,7 @@
                                 <div>
                                     <label>Username:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" />
+                                        <input type="textbox" class="form-control" readonly/>
                                     </div>
                                 </div>
                                 <div>
@@ -198,12 +195,12 @@
                                         <label>Password:</label>
                                     </div>
                                     <div>
-                                        <input type="textbox" class="form-control" />
+                                        <input type="textbox" class="form-control" readonly/>
                                     </div>
                                 </div>
                                 <label>Source URL:</label>
                                 <div>
-                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" />
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" readonly/>
                                 </div>
                             </div>
                         </div>

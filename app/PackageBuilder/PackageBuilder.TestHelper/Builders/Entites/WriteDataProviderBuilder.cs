@@ -10,11 +10,12 @@ namespace PackageBuilder.TestHelper.Builders.Entites
     {
         private Guid _id;
         private DataProviderName _name;
+        private double _costOfSale;
         private bool _fieldLevelCostPriceOverride;
         private IEnumerable<IDataField> _dataFields;
         public DataProvider Build()
         {
-            return new DataProvider(_id, _name, _fieldLevelCostPriceOverride, new List<IDataField>());
+            return new DataProvider(_id, _name, _costOfSale, _fieldLevelCostPriceOverride, new List<IDataField>());
         }
 
         public WriteDataProviderBuilder With(Guid id)

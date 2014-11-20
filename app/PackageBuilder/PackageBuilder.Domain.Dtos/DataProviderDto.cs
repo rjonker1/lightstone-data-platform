@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PackageBuilder.Domain.Dtos
 {
     public class DataProviderDto
     {
+        public DataProviderDto()
+        {
+            DataFields = Enumerable.Empty<DataProviderFieldItemDto>();
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

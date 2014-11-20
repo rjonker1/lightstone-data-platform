@@ -47,12 +47,13 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         {
         }
 
-        public DataProvider(Guid id, DataProviderName name, bool fieldLevelCostPriceOverride, IEnumerable<IDataField> dataFields) 
+        public DataProvider(Guid id, DataProviderName name, double costOfSale, bool fieldLevelCostPriceOverride, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
             Id = id;
             Name = name;
             FieldLevelCostPriceOverride = fieldLevelCostPriceOverride;
+            CostOfSale = costOfSale;
             DataFields = dataFields;
         }
 

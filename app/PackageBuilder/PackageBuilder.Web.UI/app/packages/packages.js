@@ -48,6 +48,11 @@
             $location.path('/package-maintenance-edit/' + row.entity.packageId + '/' + row.entity.version);
         }
 
+        $scope.viewPackage = function (row) {
+
+            $location.path('/package-maintenance-view/' + row.entity.packageId + '/' + row.entity.version);
+        }
+
         $scope.selectedDatasource = [];
 
         $scope.gridOptions = {
@@ -76,7 +81,7 @@
                         '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
                         '' +
                         '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
-                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="" value="View" /></div>'
+                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewPackage(row)" value="View" /></div>'
                 }
 
             ]
