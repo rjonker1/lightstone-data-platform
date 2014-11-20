@@ -65,10 +65,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj">
-      <Project>{9280e0d2-61b6-4f73-ac7c-0d1f3038af98}</Project>
-      <Name>Lace.DistributedServices.Events</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>

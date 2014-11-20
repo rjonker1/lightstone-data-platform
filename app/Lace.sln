@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{36AD2E0E-7B5A-4629-9408-4691B5BD0C68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Acceptance.Tests", "Lace\Lace.Acceptance.Tests\Lace.Acceptance.Tests.csproj", "{A5964AD4-ED97-440D-9E96-C6A51916B612}"
@@ -27,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Extensions", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Infrastructure.Core", "Lace\source\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj", "{AE8A5548-01CC-481F-935F-66BF89B08081}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.DistributedServices.Events", "Lace\source\Lace.DistributedServices.Events\Lace.DistributedServices.Events.csproj", "{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataProviders", "DataProviders", "{61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Core", "Lace\source\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj", "{F9080E76-2491-4361-A915-E87262D900BF}"
@@ -54,6 +54,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Car", "Lace\source\Lace.CrossCutting.DataProvider.Car\Lace.CrossCutting.DataProvider.Car.csproj", "{A4ADE647-0238-4C9F-B320-DBF8D5227C1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Certificate", "Lace\source\Lace.CrossCutting.DataProvider.Certificate\Lace.CrossCutting.DataProvider.Certificate.csproj", "{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Monitoring.Messages", "Lace\source\Lace.DistributedServices.Events\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj", "{C275D974-7E8E-440D-B244-B9DB85E839B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +91,6 @@ Global
 		{AE8A5548-01CC-481F-935F-66BF89B08081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE8A5548-01CC-481F-935F-66BF89B08081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE8A5548-01CC-481F-935F-66BF89B08081}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9080E76-2491-4361-A915-E87262D900BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9080E76-2491-4361-A915-E87262D900BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9080E76-2491-4361-A915-E87262D900BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -141,6 +139,10 @@ Global
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,10 +157,8 @@ Global
 		{129BBFFE-0D3E-4CC5-95B4-5C466669421D} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{7B07823D-3F48-470B-9A43-739D9EB9DC22} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{7B07823D-3F48-470B-9A43-739D9EB9DC22} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{9280E0D2-61B6-4F73-AC7C-0D1F3038AF98} = {4D3724DA-EBF7-4722-91DE-22898570BF2D}
+		{C275D974-7E8E-440D-B244-B9DB85E839B1} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{CA721B03-EFC7-45CE-A70E-BB9EF72C075B} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
 		{7F252FE1-1AB1-42FB-AEBD-EAC952E71664} = {837B64CA-81D7-498F-B88F-386D186E9F35}
 		{AE8A5548-01CC-481F-935F-66BF89B08081} = {837B64CA-81D7-498F-B88F-386D186E9F35}
