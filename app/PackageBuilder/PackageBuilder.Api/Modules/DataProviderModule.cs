@@ -34,8 +34,11 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProvider/Get/{id}/{version}"] = parameters => 
-                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
+            Get["/DataProvider/Get/{id}/{version}"] = parameters =>
+            {
+                var test = Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id));
+                return Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
+            };
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {
