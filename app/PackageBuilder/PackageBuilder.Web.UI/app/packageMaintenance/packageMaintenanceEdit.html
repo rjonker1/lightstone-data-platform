@@ -1,4 +1,41 @@
-﻿<script type="text/ng-template" id="proivder_nodes_renderer.html">
+﻿<script type="text/ng-template" id="fields_renderer.html">
+
+    <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
+    <div class="col-md-6">{{dataField.name}}</div>
+    <div ng-show="provider.fieldLevelCostPriceOverride == true">
+        <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+    </div>
+
+    <li ng-include="'subFields_renderer.html'"></li>
+
+</script>
+
+<script type="text/ng-template" id="subFields_renderer.html">
+
+    <ol data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: collapsed}" style="padding-top: 35px; list-style-type: none;">
+        <li style="cursor:default" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields">
+
+            <input class="col-md-1" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
+            <div class="col-md-6">{{subDF.name}}</div>
+            <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
+            </div>
+
+            <ol ng-if="subDF.dataFields.length > 0" data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: collapsed}" style="padding-top: 35px; list-style-type: none;">
+                <li style="cursor:default" class="row category-title angular-ui-tree angular-ui-tree-handle"
+                    ng-repeat="dataField in subDF.dataFields" ng-include="'fields_renderer.html'"></li>
+            </ol>
+
+        </li>
+    </ol>
+
+
+
+</script>
+
+
+
+<script type="text/ng-template" id="proivder_nodes_renderer.html">
 
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
@@ -24,15 +61,9 @@
             </div>
         </div>
     </div>
-    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree-handle" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
-        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields | filter:filterIndustry">
-
-            <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-            <div class="col-md-6">{{dataField.name}}</div>
-            <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-2">Price:</label>
-                <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
-            </div>
+    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
+        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields | filter:filterIndustry"
+            ng-include="'fields_renderer.html'">
 
         </li>
     </ol>

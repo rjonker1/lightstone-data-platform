@@ -93,6 +93,16 @@
 
                                     valueTotal += listItem.dataFields[x].price;
                                 }
+
+                                for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
+
+                                    if (listItem.dataFields[x].dataFields[j].isSelected === true) {
+
+                                        valueTotal += listItem.costOfSale;
+                                        break;
+                                    }
+                                }
+
                             }
 
                             break;
@@ -104,6 +114,15 @@
 
                                     valueTotal += listItem.costOfSale;
                                     break;
+                                }
+
+                                for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
+
+                                    if (listItem.dataFields[x].dataFields[j].isSelected === true) {
+
+                                        valueTotal += listItem.costOfSale;
+                                        break;
+                                    }
                                 }
                             }
                             
