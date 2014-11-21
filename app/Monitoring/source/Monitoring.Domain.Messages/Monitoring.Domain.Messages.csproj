@@ -42,17 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Commands\ExecuteDataProviderCommand.cs.nu" />
-    <None Include="Events\DataProviderExecutingEndingEvent.cs.nu" />
-    <None Include="Events\DataProviderExecutingStartingEvent.cs.nu" />
-    <None Include="Events\DataProviderFailedEvent.cs.nu" />
-    <None Include="Events\DataProviderHandledEvent.cs.nu" />
-    <None Include="Events\DataProviderRequestSentEvent.cs.nu" />
-    <None Include="Events\DataProviderResponseFailureEvent.cs.nu" />
-    <None Include="Events\DataProviderResponseSucceededEvent.cs.nu" />
-    <None Include="Events\DataProviderResponseTransformedEvent.cs.nu" />
     <Compile Include="IDataProviderMonitoringEvent.cs" />
-    <None Include="Messages\CommandHasBeenConsumed.cs.nu" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Events\" />
+    <Folder Include="Messages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
