@@ -55,10 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <HintPath>..\..\Shared\Shared\bin\Release\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Public">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.123\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
     </Reference>
@@ -112,7 +108,6 @@
     <Compile Include="Fakes\TestRolePackageRepository.cs" />
     <Compile Include="Fakes\TestUserPackageRepository.cs" />
     <Compile Include="Mothers\ActionMother.cs" />
-    <Compile Include="Mothers\ActionRepositoryMother.cs" />
     <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataSetMother.cs" />
@@ -131,6 +126,10 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared\Shared.csproj">
+      <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
       <Name>PackageBuilder.Domain.Core</Name>

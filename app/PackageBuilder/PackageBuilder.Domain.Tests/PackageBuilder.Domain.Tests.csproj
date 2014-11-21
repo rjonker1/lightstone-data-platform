@@ -53,9 +53,6 @@
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
       <HintPath>..\..\Lace\Source\Lace.Domain.Core\bin\Debug\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Models.Ivid">
-      <HintPath>..\PackageBuilder.Web\Bin\Lightstone.DataPlatform.Lace.Models.Ivid.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\PackageBuilder.Domain\bin\Debug\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
@@ -93,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\DataProviders\when_creating_a_data_provider.cs" />
-    <Compile Include="CommandHandlers\Industries\when_renaming_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_creating_an_industry.cs" />
     <Compile Include="CommandHandlers\Industries\when_renaming_an_industry_that_does_not_exist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,10 +110,6 @@
     <ProjectReference Include="..\PackageBuilder.Domain\PackageBuilder.Domain.csproj">
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
-      <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
-      <Name>PackageBuilder.TestHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
