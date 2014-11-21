@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
+
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Test.Helper.Fakes.Lace
 {
@@ -17,20 +18,20 @@ namespace Lace.Test.Helper.Fakes.Lace
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
 
-        public FakeLaceInitializer(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ILaceEvent laceEvent,
+        public FakeLaceInitializer(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ISendMonitoringMessages monitoring,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;
-            _laceEvent = laceEvent;
+            _monitoring = monitoring;
             _response = response;
             _buildSourceChain = buildSourceChain;
         }
 
         public void Execute()
         {
-            _buildSourceChain.SourceChain(_request, _laceEvent, _response);
+            _buildSourceChain.SourceChain(_request, _monitoring, _response);
 
             LaceResponses = new List<LaceExternalSourceResponse>()
             {

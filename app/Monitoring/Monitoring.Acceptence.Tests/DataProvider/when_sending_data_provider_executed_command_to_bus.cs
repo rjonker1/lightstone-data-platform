@@ -1,5 +1,6 @@
 ﻿using System;
-using Monitoring.Domain.Messages.Commands;
+using Lace.Shared.Monitoring.Messages.Commands;
+using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Test.Helper.Mothers;
 using NServiceBus;
 using Xunit.Extensions;
@@ -9,14 +10,17 @@ namespace Monitoring.Acceptence.Tests.DataProvider
     public class when_sending_data_provider_executed_command_to_bus : Specification
     {
         private readonly IBus _bus;
-        private readonly ExecuteDataProviderCommand _command;
+        private readonly ExecutingDataProviderCommand _command;
+
+
 
         public when_sending_data_provider_executed_command_to_bus()
         {
             _bus = BusFactory.NServiceRabbitMqBus();
 
-            _command = new ExecuteDataProviderCommand(Guid.NewGuid(), (int) Domain.Core.Consumers.DataProvider.Audatex,
-                Domain.Core.Constants.DataProviderMonitoringMessages.StartCallingDataProvider, "", DateTime.UtcNow);
+            _command = new ExecutingDataProviderCommand(Guid.NewGuid(),
+                Lace.Shared.Monitoring.Messages.Core.DataProvider.Audatex,
+                "Start Calling unit test", "request{}", "metadata", DateTime.UtcNow, Category.Performance, true);
         }
 
         public override void Observe()

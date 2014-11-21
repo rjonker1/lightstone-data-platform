@@ -1,11 +1,11 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Ivid
 {
@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.Ivid
             _request = request;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var spec = new CanHandlePackageSpecification(Services.Ivid, _request);
 
@@ -30,13 +30,13 @@ namespace Lace.Domain.DataProviders.Ivid
             else
             {
                 var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
-                consumer.ConsumeExternalSource(response, laceEvent);
+                consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.IvidResponse == null)
-                    CallFallbackSource(response, laceEvent);
+                    CallFallbackSource(response, monitoring);
             }
 
-            CallNextSource(response, laceEvent);
+            CallNextSource(response, monitoring);
         }
 
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Common.Logging;
-using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -13,7 +11,7 @@ using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
-using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
@@ -35,32 +33,32 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             try
             {
-                laceEvent.PublishStartSourceConfigurationMessage(Source);
+                //monitoring.PublishStartSourceConfigurationMessage(Source);
 
                 var vin = new RgtVinRequestMessage(response)
                     .Build()
                     .Vin;
 
-                laceEvent.PublishEndSourceConfigurationMessage(Source);
+                //monitoring.PublishEndSourceConfigurationMessage(Source);
 
-                laceEvent.PublishSourceRequestMessage(Source,
-                    vin.ObjectToJson());
+                //monitoring.PublishSourceRequestMessage(Source,
+                //    vin.ObjectToJson());
 
-                laceEvent.PublishStartSourceCallMessage(Source);
+                //monitoring.PublishStartSourceCallMessage(Source);
 
                 _vins = new VehicleVinUnitOfWork(_repository.VinRepository()).Vins;
 
-                laceEvent.PublishEndSourceCallMessage(Source);
+                //monitoring.PublishEndSourceCallMessage(Source);
 
                 if (_vins == null || !_vins.Any())
-                    laceEvent.PublishNoResponseFromSourceMessage(Source);
+                    //monitoring.PublishNoResponseFromSourceMessage(Source);
 
-                laceEvent.PublishSourceResponseMessage(Source,
-                    _vins != null && _vins.Any() ? _vins.ObjectToJson() : new List<Vin>().ObjectToJson());
+                //monitoring.PublishSourceResponseMessage(Source,
+                //    _vins != null && _vins.Any() ? _vins.ObjectToJson() : new List<Vin>().ObjectToJson());
 
                 TransformResponse(response);
 
@@ -68,7 +66,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessage(Source);
+                //monitoring.PublishFailedSourceCallMessage(Source);
                 RgtVinResponseFailed(response);
             }
         }

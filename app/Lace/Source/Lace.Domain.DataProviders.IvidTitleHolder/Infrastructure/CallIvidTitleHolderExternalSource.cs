@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
-using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -12,6 +11,7 @@ using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
@@ -28,11 +28,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             _request = request;
         }
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             try
             {
-                laceEvent.PublishStartSourceConfigurationMessage(Source);
+               // monitoring.PublishStartSourceConfigurationMessage(Source);
 
                 var ividTitleHolderWebService = new ConfigureIvidTitleHolderSource();
 
@@ -45,34 +45,34 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
-                    laceEvent.PublishEndSourceConfigurationMessage(Source);
+                 //   monitoring.PublishEndSourceConfigurationMessage(Source);
 
                     var ividTitleHolderRequest = new IvidTitleHolderRequestMessage(_request, response)
                         .Build()
                         .TitleholderQueryRequest;
 
-                    laceEvent.PublishSourceRequestMessage(Source,
-                        ividTitleHolderRequest.ObjectToJson());
+                    //monitoring.PublishSourceRequestMessage(Source,
+                    //    ividTitleHolderRequest.ObjectToJson());
 
-                    laceEvent.PublishStartSourceCallMessage(Source);
+                  //  monitoring.PublishStartSourceCallMessage(Source);
 
                     _ividTitleHolderResponse = ividTitleHolderWebService
                         .IvidTitleHolderProxy
                         .TitleholderQuery(ividTitleHolderRequest);
 
-                    laceEvent.PublishEndSourceCallMessage(Source);
+                 //   monitoring.PublishEndSourceCallMessage(Source);
 
                     ividTitleHolderWebService
                         .CloseWebService();
 
                     if (_ividTitleHolderResponse == null)
-                        laceEvent.PublishNoResponseFromSourceMessage(Source);
+                 //       monitoring.PublishNoResponseFromSourceMessage(Source);
 
 
-                    laceEvent.PublishSourceResponseMessage(Source,
-                        _ividTitleHolderResponse != null
-                            ? _ividTitleHolderResponse.ObjectToJson()
-                            : new TitleholderQueryResponse().ObjectToJson());
+                    //monitoring.PublishSourceResponseMessage(Source,
+                    //    _ividTitleHolderResponse != null
+                    //        ? _ividTitleHolderResponse.ObjectToJson()
+                    //        : new TitleholderQueryResponse().ObjectToJson());
 
                     TransformResponse(response);
                 }
@@ -81,7 +81,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Title Holder Web Service {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessage(Source);
+              //  monitoring.PublishFailedSourceCallMessage(Source);
                 IvidTitleHolderResponseFailed(response);
             }
         }

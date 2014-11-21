@@ -1,11 +1,12 @@
 ﻿using System.Linq;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+
+
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
@@ -18,7 +19,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _request;
         private IProvideResponseFromLaceDataProviders _response;
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _laceEvent;
         private readonly ICallTheDataProviderSource _callTheSource;
 
         public when_requesting_data_from_lightstone_source()
@@ -30,7 +31,7 @@ namespace Lace.Unit.Tests.Sources
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponse();
             _callTheSource = new CallLightstoneExternalSource(_request, new FakeRepositoryFactory(), new FakeCarRepositioryFactory());
-            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
+           // _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
         }
 
         public override void Observe()

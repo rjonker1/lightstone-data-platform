@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
 using EasyNetQ;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+
+
 using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests;
 using Monitoring.Sources.Lace;
@@ -19,7 +20,7 @@ namespace Lace.Acceptance.Tests.Events
         private IBus _bus;
         private IPublishMessages _publishMessages;
 
-        private ILaceEvent _laceEvent;
+        private ISendMonitoringMessages _laceEvent;
         private Exception _exception;
         private readonly Guid _aggregateId;
 
@@ -37,7 +38,7 @@ namespace Lace.Acceptance.Tests.Events
                 //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
                 _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
-                _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
+               // _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
 
             }
             catch (Exception e)
@@ -53,25 +54,25 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
+            //_laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
-            _laceEvent.PublishStartSourceConfigurationMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishStartSourceConfigurationMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndSourceConfigurationMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishEndSourceConfigurationMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishStartSourceCallMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishStartSourceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishEndSourceCallMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishEndSourceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishSourceRequestMessage(LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
+            //_laceEvent.PublishSourceRequestMessage(LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
 
-            _laceEvent.PublishSourceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
+            //_laceEvent.PublishSourceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
 
-            _laceEvent.PublishFailedSourceCallMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishFailedSourceCallMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishNoResponseFromSourceMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishNoResponseFromSourceMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.Initialization);
+            //_laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.Initialization);
 
 
             Thread.Sleep(5000);

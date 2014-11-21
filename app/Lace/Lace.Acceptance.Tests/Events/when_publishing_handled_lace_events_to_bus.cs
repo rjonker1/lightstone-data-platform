@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading;
 using EasyNetQ;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 using Workflow;
 using Workflow.BuildingBlocks;
@@ -18,7 +17,7 @@ namespace Lace.Acceptance.Tests.Events
         private IBus _bus;
         private IPublishMessages _publishMessages;
 
-        private ILaceEvent _laceEvent;
+        private ISendMonitoringMessages _laceEvent;
         private Exception _exception;
 
         private readonly Guid _aggregateId;
@@ -37,7 +36,7 @@ namespace Lace.Acceptance.Tests.Events
                 //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
                 _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 _publishMessages = new Publisher(_bus);
-                _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
+               // _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
 
             }
             catch (Exception e)
@@ -54,9 +53,9 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishSourceIsBeingHandledMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishSourceIsBeingHandledMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishSourceIsNotBeingHandledMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishSourceIsNotBeingHandledMessage(LaceEventSource.Ivid);
         }
 
         [Observation]
@@ -66,11 +65,11 @@ namespace Lace.Acceptance.Tests.Events
 
             _bus.ShouldNotBeNull();
 
-            _laceEvent.PublishTransformationFailedMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishTransformationFailedMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishTransformationStartMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishTransformationStartMessage(LaceEventSource.Ivid);
 
-            _laceEvent.PublishTransformationEndMessage(LaceEventSource.Ivid);
+            //_laceEvent.PublishTransformationEndMessage(LaceEventSource.Ivid);
 
 
             Thread.Sleep(5000);

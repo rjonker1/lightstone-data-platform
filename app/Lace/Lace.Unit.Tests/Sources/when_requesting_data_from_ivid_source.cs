@@ -1,10 +1,9 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
-using Lace.Domain.Core.Contracts;
+﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
@@ -17,7 +16,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ILaceRequest _ividRequest;
         private IProvideResponseFromLaceDataProviders _laceResponse;
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_ivid_source()
@@ -29,12 +28,12 @@ namespace Lace.Unit.Tests.Sources
             _ividRequest = new LicensePlateRequestBuilder().ForIvid();
             _laceResponse = new LaceResponse();
             _externalWebServiceCall = new FakeCallingIvidExternalWebService();
-            _laceEvent = new PublishLaceEventMessages(publisher, _ividRequest.RequestAggregation.AggregateId);
+           // _monitoring = new PublishLaceEventMessages(publisher, _ividRequest.RequestAggregation.AggregateId);
         }
         
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _laceEvent);
+            _requestDataFromService.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _monitoring);
         }
 
         [Observation]

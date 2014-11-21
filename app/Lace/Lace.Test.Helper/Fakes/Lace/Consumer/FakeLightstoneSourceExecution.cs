@@ -1,4 +1,4 @@
-﻿using Lace.DistributedServices.Events.Contracts;
+﻿
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -6,6 +6,7 @@ using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 
@@ -23,7 +24,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         }
 
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var spec = new CanHandlePackageSpecification(Services.Lightstone, _request);
 
@@ -35,13 +36,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
                     new CallLightstoneExternalSource(_request, new FakeRepositoryFactory(),new FakeCarRepositioryFactory()));
-                consumer.ConsumeExternalSource(response, laceEvent);
+                consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.LightstoneResponse == null)
-                    CallFallbackSource(response, laceEvent);
+                    CallFallbackSource(response, monitoring);
             }
 
-            CallNextSource(response, laceEvent);
+            CallNextSource(response, monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

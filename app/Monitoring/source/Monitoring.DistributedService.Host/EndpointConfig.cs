@@ -15,18 +15,16 @@ namespace Monitoring.DistributedService.Host
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
             configuration.DisableFeature<TimeoutManager>();
-           // configuration.EndpointName("Monitoring.DistributedService.Host.APPSURE-PC5");
-           // configuration.EndpointName("");
          
             configuration.Conventions()
                 .DefiningCommandsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Monitoring.Domain.Messages.Commands"))
+                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Monitoring.Domain.Messages.Events"))
-                .DefiningMessagesAs(
-                    m =>
-                        m.Namespace != null &&
-                        m.Namespace.StartsWith("Monitoring.Domain.Messages.Messages"));
+                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
+            //.DefiningMessagesAs(
+            //    m =>
+            //        m.Namespace != null &&
+            //        m.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Messages"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DomainModule());

@@ -1,9 +1,10 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+﻿
+
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
@@ -17,7 +18,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ILaceRequest _rgtVinRequest;
         private IProvideResponseFromLaceDataProviders _laceResponse;
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _laceEvent;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_rgt_vin_source()
@@ -29,7 +30,7 @@ namespace Lace.Unit.Tests.Sources
             _rgtVinRequest = new LicensePlateRequestBuilder().ForRgtVin();
             _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
-            _laceEvent = new PublishLaceEventMessages(publisher, _rgtVinRequest.RequestAggregation.AggregateId);
+            //_laceEvent = new PublishLaceEventMessages(publisher, _rgtVinRequest.RequestAggregation.AggregateId);
         }
         
         public override void Observe()

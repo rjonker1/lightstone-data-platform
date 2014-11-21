@@ -2,7 +2,6 @@
 using Common.Logging;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
-using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -11,6 +10,8 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
+using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 
 
@@ -34,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _carRepository = carRepository;
         }
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             try
             {
@@ -46,7 +47,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Lightstone Source {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessage(Source);
+               // monitoring.PublishFailedSourceCallMessage(Source);
                 LightstoneResponseFailed(response);
             }
         }

@@ -1,12 +1,12 @@
 ﻿using System;
 using CommonDomain.Persistence;
-using Monitoring.Domain.Messages.Commands;
+using Lace.Shared.Monitoring.Messages.Commands;
 using Monitoring.DomainModel.DataProviders;
 using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class DataProviderExecutedHandler : IHandleMessages<ExecuteDataProviderCommand>
+    public class DataProviderExecutedHandler : IHandleMessages<ExecutingDataProviderCommand>
     {
         private readonly IRepository _repository;
 
@@ -18,9 +18,10 @@ namespace Monitoring.Write.Service.DataProviders
             _repository = repository;
         }
 
-        public void Handle(ExecuteDataProviderCommand message)
+        public void Handle(ExecutingDataProviderCommand message)
         {
-            var @event = new DataProviderExecution(message.Id, message.DataProviderId, message.Message, message.Date);
+            var @event = new DataProviderStartCall(message.Id, message.DataProvider, message.Category, message.Message,
+                message.Payload, message.MetaData, message.Date, message.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
     }

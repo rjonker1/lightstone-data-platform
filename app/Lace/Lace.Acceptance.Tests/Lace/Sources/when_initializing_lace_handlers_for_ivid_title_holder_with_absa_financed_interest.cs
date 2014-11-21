@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
+
+
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;
@@ -16,7 +17,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
 
         private readonly ILaceRequest _request;
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _laceEvent;
         private readonly IBootstrap _initialize;
         private IList<LaceExternalSourceResponse> _laceResponses;
         private readonly IBuildSourceChain _buildSourceChain;
@@ -28,7 +29,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             
 
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolderWithAbsaFinancedInterest();
-            _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
+           // _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
 
 
             _buildSourceChain = new CreateSourceChain(_request.Package);

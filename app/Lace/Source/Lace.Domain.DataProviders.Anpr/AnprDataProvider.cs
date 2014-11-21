@@ -1,10 +1,10 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Anpr
 {
@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Anpr
             _request = request;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var spec = new CanHandlePackageSpecification(Services.Anpr, _request);
 
@@ -37,7 +37,7 @@ namespace Lace.Domain.DataProviders.Anpr
                 //consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.AnprResponse == null)
-                    CallFallbackSource(response, laceEvent);
+                    CallFallbackSource(response, monitoring);
             }
         }
 

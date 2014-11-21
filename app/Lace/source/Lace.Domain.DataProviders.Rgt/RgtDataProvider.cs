@@ -1,6 +1,5 @@
 ﻿using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -9,6 +8,8 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Domain.DataProviders.Rgt.Repositories.Factory;
+using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Rgt
 {
@@ -22,7 +23,7 @@ namespace Lace.Domain.DataProviders.Rgt
             _request = request;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var spec = new CanHandlePackageSpecification(Services.Rgt, _request);
 
@@ -39,13 +40,13 @@ namespace Lace.Domain.DataProviders.Rgt
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
 
-                consumer.ConsumeExternalSource(response, laceEvent);
+                consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.RgtResponse == null && FallBack != null)
-                    CallFallbackSource(response, laceEvent);
+                    CallFallbackSource(response, monitoring);
             }
 
-            CallNextSource(response, laceEvent);
+            CallNextSource(response, monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

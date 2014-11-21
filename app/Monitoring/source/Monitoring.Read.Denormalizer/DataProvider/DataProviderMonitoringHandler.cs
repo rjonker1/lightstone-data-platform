@@ -1,11 +1,11 @@
-﻿using Monitoring.Domain.Core.Contracts;
-using Monitoring.Domain.Messages.Commands;
+﻿using Lace.Shared.Monitoring.Messages.Commands;
+using Monitoring.Domain.Core.Contracts;
 using Monitoring.Read.ReadModel.Models.DataProviders;
 using NServiceBus;
 
 namespace Monitoring.Read.Denormalizer.DataProvider
 {
-    public class DataProviderMonitoringHandler : IHandleMessages<ExecuteDataProviderCommand> //, IHandleMessages<DataProviderFailed>
+    public class DataProviderMonitoringHandler : IHandleMessages<ExecutingDataProviderCommand> //, IHandleMessages<DataProviderFailed>
     {
         private readonly IUpdateStorage _storage;
 
@@ -14,21 +14,24 @@ namespace Monitoring.Read.Denormalizer.DataProvider
             _storage = storage;
         }
 
-        public void Handle(ExecuteDataProviderCommand message)
+        public void Handle(ExecutingDataProviderCommand message)
         {
             var @event = new DataProviderMonitoringModel(message.Id)
             {
                 Payload = message.Message,
-                DataProviderId = message.DataProviderId,
+                DataProviderId = (int)message.DataProvider,
+                DataProvider = message.DataProvider.ToString(),
+                Category = message.Category.ToString(),
+                CategoryId = (int)message.Category,
+                Date = message.Date,
+                RequestAggregateId = message.Id,
+                IsJson = message.IsJson,
+                Metadata = message.MetaData,
                 TimeStamp = message.Date
             };
 
             _storage.Add(@event);
         }
 
-        //public void Handle(DataProviderFailed message)
-        //{
-            
-        //}
     }
 }

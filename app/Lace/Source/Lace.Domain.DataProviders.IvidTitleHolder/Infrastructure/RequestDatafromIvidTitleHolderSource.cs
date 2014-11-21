@@ -1,15 +1,15 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
     public class RequestDatafromIvidTitleHolderSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response,
-            ICallTheDataProviderSource externalSource, ILaceEvent laceEvent)
+            ICallTheDataProviderSource externalSource, ISendMonitoringMessages monitoring)
         {
-            externalSource.CallTheExternalSource(response, laceEvent);
+            externalSource.CallTheExternalSource(response, monitoring);
         }
     }
 }

@@ -43,8 +43,8 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\DataProviderMonitoringMessages.cs" />
-    <Compile Include="Consumers\DataProvider.cs" />
+    <None Include="Constants\DataProviderMonitoringMessages.cs.nu" />
+    <None Include="Consumers\DataProvider.cs.nu" />
     <Compile Include="Contracts\IHandleTransactions.cs" />
     <Compile Include="Contracts\IQueryStorage.cs" />
     <Compile Include="Contracts\IUpdateStorage.cs" />

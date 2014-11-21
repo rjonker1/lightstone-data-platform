@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
@@ -21,13 +21,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
 
-        public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ILaceEvent laceEvent,
+        public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ISendMonitoringMessages monitoring,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;
-            _laceEvent = laceEvent;
+            _monitoring = monitoring;
             _response = response;
             _buildSourceChain = buildSourceChain;
         }
@@ -42,14 +42,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
 
 
-            _buildSourceChain.SourceChain(_request, _laceEvent, _response);
+            _buildSourceChain.SourceChain(_request, _monitoring, _response);
 
             LaceResponses = new List<LaceExternalSourceResponse>()
             {
                 new LaceExternalSourceResponse() {Response = _response}
             };
 
-            _laceEvent.PublishLaceProcessedRequestAndReturnedResponseMessage(LaceEventSource.Initialization);
+            //_monitoring.PublishLaceProcessedRequestAndReturnedResponseMessage(LaceEventSource.Initialization);
         }
     }
 }

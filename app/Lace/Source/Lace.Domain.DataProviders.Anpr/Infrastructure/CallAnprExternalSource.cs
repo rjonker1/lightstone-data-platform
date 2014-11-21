@@ -4,7 +4,6 @@ using Common.Logging;
 using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
-using Lace.DistributedServices.Events.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
@@ -12,6 +11,8 @@ using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure
@@ -32,7 +33,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             try
             {
@@ -60,7 +61,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Anpr Web Service {0}", ex.Message);
-                laceEvent.PublishFailedSourceCallMessage(Source);
+               // monitoring.PublishFailedSourceCallMessage(Source);
                 AnprResponseFailed(response);
             }
         }

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
+      <HintPath>..\..\..\Lace\source\Lace.Shared.Messages\bin\Debug\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -39,17 +42,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ExecuteDataProviderCommand.cs" />
-    <Compile Include="Events\DataProviderExecutingEndingEvent.cs" />
-    <Compile Include="Events\DataProviderExecutingStartingEvent.cs" />
-    <Compile Include="Events\DataProviderFailedEvent.cs" />
-    <Compile Include="Events\DataProviderHandledEvent.cs" />
-    <Compile Include="Events\DataProviderRequestSentEvent.cs" />
-    <Compile Include="Events\DataProviderResponseFailureEvent.cs" />
-    <Compile Include="Events\DataProviderResponseSucceededEvent.cs" />
-    <Compile Include="Events\DataProviderResponseTransformedEvent.cs" />
+    <None Include="Commands\ExecuteDataProviderCommand.cs.nu" />
+    <None Include="Events\DataProviderExecutingEndingEvent.cs.nu" />
+    <None Include="Events\DataProviderExecutingStartingEvent.cs.nu" />
+    <None Include="Events\DataProviderFailedEvent.cs.nu" />
+    <None Include="Events\DataProviderHandledEvent.cs.nu" />
+    <None Include="Events\DataProviderRequestSentEvent.cs.nu" />
+    <None Include="Events\DataProviderResponseFailureEvent.cs.nu" />
+    <None Include="Events\DataProviderResponseSucceededEvent.cs.nu" />
+    <None Include="Events\DataProviderResponseTransformedEvent.cs.nu" />
     <Compile Include="IDataProviderMonitoringEvent.cs" />
-    <Compile Include="Messages\CommandHasBeenConsumed.cs" />
+    <None Include="Messages\CommandHasBeenConsumed.cs.nu" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

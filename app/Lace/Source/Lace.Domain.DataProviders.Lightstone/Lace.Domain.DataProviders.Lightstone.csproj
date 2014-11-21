@@ -154,6 +154,10 @@
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
       <Name>Lace.Domain.DataProviders.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj">
+      <Project>{c275d974-7e8e-440d-b244-b9db85e839b1}</Project>
+      <Name>Lace.Shared.Monitoring.Messages</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Infrastructure\Dto\CarModel.cs.old" />

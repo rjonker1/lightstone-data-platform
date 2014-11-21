@@ -1,6 +1,6 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.Domain.Core.Contracts;
+﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Core.Consumer
 {
@@ -17,11 +17,11 @@ namespace Lace.Domain.DataProviders.Core.Consumer
             _externalWebSourceCall = externalSourceCall;
         }
 
-        public void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromSource(response, _externalWebSourceCall, laceEvent));
+                    c.FetchDataFromSource(response, _externalWebSourceCall, monitoring));
         }
     }
 }

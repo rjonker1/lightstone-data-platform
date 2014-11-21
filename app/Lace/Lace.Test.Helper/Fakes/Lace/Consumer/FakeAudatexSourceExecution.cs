@@ -1,10 +1,11 @@
-﻿using Lace.DistributedServices.Events.Contracts;
+﻿
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
@@ -22,7 +23,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             _request = request;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ILaceEvent laceEvent)
+        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var spec = new CanHandlePackageSpecification(Services.Audatex, _request);
 
@@ -34,13 +35,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleAudatexServiceCall(),
                     new FakeCallingAudatexExternalWebService(_request));
-                consumer.ConsumeExternalSource(response, laceEvent);
+                consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.AudatexResponse == null)
-                    CallFallbackSource(response, laceEvent);
+                    CallFallbackSource(response, monitoring);
             }
 
-            CallNextSource(response, laceEvent);
+            CallNextSource(response, monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

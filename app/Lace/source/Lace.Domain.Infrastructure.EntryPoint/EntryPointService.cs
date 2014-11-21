@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Sources.Lace;
 using Workflow;
 
@@ -17,7 +16,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private ILaceEvent _laceEvent;
+        private ISendMonitoringMessages _monitoring;
         private readonly IPublishMessages _publisher;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
@@ -32,9 +31,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             try
             {
-                _laceEvent = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
+                //_monitoring = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
 
-                _laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
+                //_monitoring.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
 
                 _sourceChain = new CreateSourceChain(request.Package);
@@ -48,7 +47,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
                 if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return EmptyResponse;
 
-                _bootstrap = new Initialize(new LaceResponse(), request, _laceEvent, _sourceChain);
+                _bootstrap = new Initialize(new LaceResponse(), request, _monitoring, _sourceChain);
                 _bootstrap.Execute();
 
                 return _bootstrap.LaceResponses ?? EmptyResponse;
@@ -56,7 +55,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
             catch (Exception)
             {
-                _laceEvent.PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(LaceEventSource.EntryPoint);
+                //_monitoring.PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(LaceEventSource.EntryPoint);
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;

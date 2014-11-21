@@ -12,9 +12,13 @@ namespace Monitoring.Read.Persistence.Mappings.DataProviderMaps
             Map(x => x.AggregateId);
             Map(x => x.Payload);
             Map(x => x.DataProviderId);
-            Map(x => x.EventId);
+            Map(x => x.DataProvider);
+            Map(x => x.Category);
+            Map(x => x.CategoryId);
+            Map(x => x.RequestAggregateId);
             Map(x => x.IsJson);
-            Map(x => x.MetaData);
+            Map(x => x.Metadata);
+            Map(x => x.Date);
             Map(x => x.Originator);
             Map(x => x.OrignalMessageId);
             Map(x => x.TimeStamp);

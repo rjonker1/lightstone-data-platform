@@ -1,9 +1,8 @@
-﻿using Lace.DistributedServices.Events.Contracts;
-using Lace.DistributedServices.Events.PublishMessageHandlers;
-using Lace.Domain.Core.Contracts;
+﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Bus;
@@ -17,7 +16,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _audatexRequest;
         private readonly IProvideResponseFromLaceDataProviders _laceResponse;
-        private readonly ILaceEvent _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
 
@@ -31,12 +30,12 @@ namespace Lace.Unit.Tests.Sources
             _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingAudatexExternalWebService(_audatexRequest);
 
-            _laceEvent = new PublishLaceEventMessages(publisher, _audatexRequest.RequestAggregation.AggregateId);
+            //_monitoring = new PublishLaceEventMessages(publisher, _audatexRequest.RequestAggregation.AggregateId);
         }
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _laceEvent);
+            _requestDataFromSource.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _monitoring);
         }
 
         [Observation]

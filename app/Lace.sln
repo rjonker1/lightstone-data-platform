@@ -55,7 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Certificate", "Lace\source\Lace.CrossCutting.DataProvider.Certificate\Lace.CrossCutting.DataProvider.Certificate.csproj", "{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Monitoring.Messages", "Lace\source\Lace.DistributedServices.Events\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj", "{C275D974-7E8E-440D-B244-B9DB85E839B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Monitoring.Messages", "Lace\source\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj", "{C275D974-7E8E-440D-B244-B9DB85E839B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
