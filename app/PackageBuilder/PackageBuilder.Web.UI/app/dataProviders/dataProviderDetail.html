@@ -1,4 +1,68 @@
-﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
+﻿<script type="text/ng-template" id="fields_renderer.html">
+
+    <td>**{{dataField.name}}</td>
+    <td>{{dataField.type}}</td>
+    <td><input class="form-control" ng-model="dataField.label" type="text"></td>
+    <td><input class="form-control" ng-model="dataField.definition" type="text"></td>
+
+    <td>
+        <select class="form-control" style="width: 100% !important;" ng-init="dataField.industry = dataField.industry || 'All'" ng-model="dataField.industry"
+                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+    </td>
+
+    <td ng-show="switch == true">
+        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dataField.price" />
+    </td>
+
+
+</script>
+
+<script type="text/ng-template" id="subFields_renderer.html">
+
+    
+        <td>*{{subDF.name}}</td>
+        <td>{{subDF.type}}</td>
+        <td><input class="form-control" ng-model="subDF.label" type="text"></td>
+        <td><input class="form-control" ng-model="subDF.definition" type="text"></td>
+
+        <td>
+            <select class="form-control" style="width: 100% !important;" ng-init="subDF.industry = subDF.industry || 'All'" ng-model="subDF.industry"
+                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+        </td>
+
+        <td ng-show="switch == true">
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" />
+        </td>
+
+    <!--<tr ng-if="subDF.dataFields.length > 0" ng-repeat="dataField in subDF.dataFields" ng-include="'fields_renderer.html'"></tr>-->
+
+</script>
+
+<script type="text/ng-template" id="dField_renderer.html">
+
+    <tr>
+        <td>{{dField.name}}</td>
+        <td>{{dField.type}}</td>
+        <td><input class="form-control" ng-model="dField.label" type="text"></td>
+        <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+
+        <td>
+            <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
+                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+        </td>
+
+        <td ng-show="switch == true">
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
+        </td>
+    </tr>
+    <tr></tr>
+    <tr ng-if="dField.dataFields.length > 0" ng-repeat="subDF in dField.dataFields" ng-include="'subFields_renderer.html'"></tr>
+
+
+</script>
+
+
+<section class="mainbar" data-ng-controller="dataProviderDetail">
     <!--<div ng-model="dataProvider">
             <div ng-repeat="data in dataProvider.response">
                 <li>{{data}}</li>
@@ -137,31 +201,15 @@
                                                     <th ng-show="switch == true">Price</th>
                                                 </tr>
                                             </thead>
-                                            <tbody ng-repeat="dField in dataProv.dataFields">
-
-                                                <tr>
-                                                    <td>{{dField.name}}</td>
-                                                    <td>{{dField.type}}</td>
-                                                    <td><input class="form-control" ng-model="dField.label" type="text"></td>
-                                                    <td><input class="form-control" ng-model="dField.definition" type="text"></td>
-
-                                                    <td>
-                                                        <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
-                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
-                                                    </td>
-
-                                                    <td ng-show="switch == true">
-                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
-                                                    </td>
-                                                </tr>
+                                            <tbody ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'">
 
                                             </tbody>
                                         </table>
 
                                     </div>
                                     <!--<div class="widget-foot">
-                                        <div class="clearfix"></div>
-                                    </div>-->
+                                            <div class="clearfix"></div>
+                                        </div>-->
                                 </div>
 
                             </div>
@@ -218,5 +266,3 @@
     </section>
 
 </section>
-
-
