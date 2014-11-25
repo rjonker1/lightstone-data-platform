@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Nancy;
 using Nancy.Bootstrapper;
@@ -7,6 +8,7 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
+using PackageBuilder.Domain.Entities.Industries.Commands;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -22,6 +24,11 @@ namespace PackageBuilder.Api
             base.ApplicationStartup(container, pipelines);
 
             var handler = container.Resolve<IHandleMessages>();
+
+            //Defaulted Industry for Datafield wireups
+            handler.Handle(new CreateIndustry(new Guid(), "All"));
+
+            //Import DataProviders
             handler.Handle(new ImportDataProvider());
         }
 
