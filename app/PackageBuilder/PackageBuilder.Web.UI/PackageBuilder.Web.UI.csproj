@@ -58,6 +58,7 @@
     <Content Include="app\config.route.js" />
     <Content Include="app\dashboard\dashboard.html" />
     <Content Include="app\dashboard\dashboard.js" />
+    <Content Include="app\dataProviders\dataProviderView.js" />
     <Content Include="app\dataProviders\dataProviderDetail.html" />
     <Content Include="app\dataProviders\dataProviderDetail.js" />
     <Content Include="app\dataProviders\dataProviders.html" />
@@ -109,6 +110,7 @@
     <Content Include="app\views_old\home.html" />
     <Content Include="app\views_old\packageDetail.html" />
     <Content Include="app\views_old\packages.html" />
+    <Content Include="Content\angular-multi-select\angular-multi-select.css" />
     <Content Include="Content\angular-ui-tree.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -144,6 +146,7 @@
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-multi-select.js" />
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
 {
@@ -14,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         [DataMember]
         public string Definition { get; internal set; }
         [DataMember]
-        public string Industry { get; internal set; }
+        public IEnumerable<Industry> Industries { get; internal set; }
         [DataMember]
         public double Price { get; internal set; }
         [DataMember]
@@ -29,11 +30,11 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         {
         }
 
-        public DataField(string name, Type type, string industry)
+        public DataField(string name, Type type, IEnumerable<Industry> industries)
         {
             Name = name;
             Type = type;
-			Industry = industry;
+			Industries = industries;
         }
 
         public DataField(string name, Type type, IEnumerable<IDataField> dataFields)
@@ -43,23 +44,23 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             DataFields = dataFields;
         }
 
-        public DataField(string name, string label, string definition, string industry, double price, bool isSelected)//, Type type)
+        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double price, bool isSelected)//, Type type)
         {
             Name = name;
             Label = label;
             Definition = definition;
-            Industry = industry;
+            Industries = industries;
             Price = price;
             IsSelected = isSelected;
             //Type = type;
         }
 
-        public DataField(string name, string label, string definition, string industry, double price, bool isSelected, IEnumerable<IDataField> dataFields)//, Type type)
+        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double price, bool isSelected, IEnumerable<IDataField> dataFields)//, Type type)
         {
             Name = name;
             Label = label;
             Definition = definition;
-            Industry = industry;
+            Industries = industries;
             Price = price;
             IsSelected = isSelected;
             DataFields = dataFields;

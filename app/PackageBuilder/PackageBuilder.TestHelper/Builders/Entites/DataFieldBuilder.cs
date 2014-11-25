@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
@@ -9,7 +11,7 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private Type _type;
         public IDataField Build()
         {
-            return new DataField(_name, null, "");
+            return new DataField(_name, null, Enumerable.Empty<Industry>());
         }
 
         public DataFieldBuilder With(string name)

@@ -20,7 +20,8 @@
         //'breeze.angular',    // configures breeze for an angular app
         //'breeze.directives', // contains the breeze validation directive (zValidate)
         'ui.bootstrap',       // ui-bootstrap (ex: carousel, pagination, dialog)
-        'ui.tree'
+        'ui.tree',
+        'multi-select'
     ]);
 
     // Handle routing errors and success events.

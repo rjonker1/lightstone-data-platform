@@ -4,10 +4,10 @@
     var controllerId = 'dataProviderDetail';
 
     angular
-        .module( 'app' )
-        .controller( controllerId, dataProviderDetail );
+        .module('app')
+        .controller(controllerId, dataProviderDetail);
 
-    dataProviderDetail.$inject = ['$scope','$location', '$routeParams', 'common', 'datacontext']; 
+    dataProviderDetail.$inject = ['$scope', '$location', '$routeParams', 'common', 'datacontext'];
 
     function dataProviderDetail($scope, $location, $routeParams, common, datacontext) {
 
@@ -30,7 +30,7 @@
         //$scope.switch = 'true';
         //$scope.switchAlternate = 'Per Field';
 
-        $scope.toggle = function(state) {
+        $scope.toggle = function (state) {
 
             (state == true) ? $scope.switch = false : $scope.switch = true;
             $scope.dataProvider.response[0].fieldLevelCostPriceOverride = $scope.switch;
@@ -60,6 +60,15 @@
                     for (var x = 0; x < (providerItem.dataFields).length; x++) {
 
                         providerItem.dataFields[x].industry = groupIndustry;
+
+                        if ((providerItem.dataFields[x].dataFields).length > 0) {
+
+                            for (var j = 0; j < (providerItem.dataFields[x].dataFields).length; j++) {
+
+
+                                providerItem.dataFields[x].dataFields[j].industry = groupIndustry;
+                            }
+                        }
                     }
 
                 }
@@ -100,58 +109,75 @@
                         }
                     }
 
+                }
             }
+
+            $scope.dataProvider.response[0].costOfSale = valueTotal;
+            return valueTotal;
+        };
+
+        $scope.childIndustryChanged = function(industries) {
+            console.log(industries);
+        };
+
+        $scope.modernWebBrowsers = [
+ 	        {name: "All", ticked: true },
+            {name: "Finance", ticked: false},
+            {name: "Insurance", ticked: false},
+            {name: "Logistics", ticked: false}
+        ];
+
+        angular.forEach($scope.modernWebBrowsers, function (value, key) {
+            if (value.ticked === true) {
+                console.log(value);
+            }
+        });
+
+
+        $scope.editProvider = function (providerData) {
+
+            return datacontext.editDataProvider($routeParams.id, providerData).then(function (response) {
+
+                console.log(response);
+                (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
+
+
+            });
+        };
+
+        $scope.cancel = function () {
+
+            $location.path('/data-providers');
+        };
+
+        activate();
+
+        function activate() {
+
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getIndustries()], controllerId)
+                .then(function () {
+                    log('Activated Data Providers Edit View');
+                });
         }
 
-        $scope.dataProvider.response[0].costOfSale = valueTotal;
-        return valueTotal;
-    };
+        function getDataProvider(id, version) {
 
+            return datacontext.getDataProvider(id, version).then(function (response) {
 
-    $scope.editProvider = function (providerData) {
+                $scope.dataProvider = response.data;
+                $scope.switch = $scope.dataProvider.response[0].fieldLevelCostPriceOverride;
 
-        return datacontext.editDataProvider($routeParams.id, providerData).then(function(response) {
-
-            console.log(response);
-            (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
-
-
-        });
-    };
-
-    $scope.cancel = function () {
-
-        $location.path('/data-providers');
-    };
-
-    activate();
-
-    function activate() {
-
-        common.activateController([getDataProvider($routeParams.id, $routeParams.version), getIndustries()], controllerId)
-            .then(function () {
-                log('Activated Data Providers Edit View');              
+                ($scope.switch == true) ? $scope.switchAlternate = 'Per Field' : $scope.switchAlternate = 'Per Request';
             });
+        }
+
+        function getIndustries() {
+
+            return datacontext.getIndustries().then(function (response) {
+
+                $scope.industries = response;
+            });
+        }
     }
-
-    function getDataProvider(id, version) {
-
-        return datacontext.getDataProvider(id, version).then(function (response) {
-
-            $scope.dataProvider = response.data;
-            $scope.switch = $scope.dataProvider.response[0].fieldLevelCostPriceOverride;
-            //$scope.switch = true;
-            $scope.switchAlternate = 'Per Field';
-        });
-    }
-
-    function getIndustries() {
-
-        return datacontext.getIndustries().then(function (response) {
-
-            $scope.industries = response;
-        });
-    }
-}
 })();
 

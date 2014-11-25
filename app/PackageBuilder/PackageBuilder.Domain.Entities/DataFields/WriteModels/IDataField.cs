@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
 {
@@ -7,7 +8,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
     {
         string Label { get; }
         string Definition { get; }
-        string Industry { get; }
+        IEnumerable<Industry> Industries { get; }
         double Price { get; }
         bool? IsSelected { get; }
         Type Type { get; }

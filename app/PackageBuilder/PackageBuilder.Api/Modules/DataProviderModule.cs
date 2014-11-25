@@ -36,7 +36,8 @@ namespace PackageBuilder.Api.Modules
 
             Get["/DataProvider/Get/{id}/{version}"] = parameters =>
             {
-                var test = Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id));
+                //var test = Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id));
+                var tt = Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
                 return Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
             };
 

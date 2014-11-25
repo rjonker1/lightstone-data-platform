@@ -1,4 +1,4 @@
-﻿<section class="mainbar" data-ng-controller="dataProviderDetail">
+﻿<section class="mainbar" data-ng-controller="dataProviderView">
     <!--<div ng-model="dataProvider">
             <div ng-repeat="data in dataProvider.response">
                 <li>{{data}}</li>
@@ -19,7 +19,7 @@
                                 <div>
                                     <label>Name:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProv.name" readonly/>
+                                        <input type="textbox" class="form-control" ng-model="dataProv.name" readonly />
                                     </div>
                                     <label>Version:</label>
                                     <div>
@@ -41,7 +41,7 @@
                                 <div ng-if="switch == false">
                                     <label>COS Per Request:</label>
                                     <div>
-                                        <input type="number" class="form-control" ng-model="dataProv.costOfSale" readonly/>
+                                        <input type="number" class="form-control" ng-model="dataProv.costOfSale" readonly />
                                     </div>
                                 </div>
                                 <div ng-if="switch == true">
@@ -84,8 +84,8 @@
                                         <div class="toggle-bg toggle-alternate {{switch}}">
 
                                             <label class="{{switch}}">{{switchAlternate}}</label>
-                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" >
-                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" >
+                                            <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate">
+                                            <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate">
                                             <span class=" switch {{switch}} "></span>
 
                                         </div>
@@ -111,7 +111,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="widget wblue">
-                                    <div data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
+                                    <div data-cc-widget-header title="{{title}} : Response - Data Fields" allow-collapse="true"></div>
                                     <div class="widget-content text-left text-info">
 
                                         <table class="table" style="padding-top: 20px;">
@@ -128,7 +128,7 @@
                                                         <div style="float: right;">
                                                             <select class="form-control" style="width: 100% !important;" ng-model="selectedGroupIndustry"
                                                                     ng-options="industry.name as industry.name for industry in industries"
-                                                                    ng-change="updateFieldIndustry(selectedGroupIndustry)" readonly/>
+                                                                    ng-change="updateFieldIndustry(selectedGroupIndustry)" readonly />
                                                         </div>
                                                     </th>
                                                     <th ng-show="switch == true">Price</th>
@@ -144,11 +144,11 @@
 
                                                     <td>
                                                         <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
-                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" readonly/>
+                                                                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" readonly />
                                                     </td>
 
                                                     <td ng-show="switch == true">
-                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly/>
+                                                        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly />
                                                     </td>
                                                 </tr>
 
@@ -180,14 +180,14 @@
         <div class="container">
             <div class="row">
                 <div class="widget worange">
-                    <div data-cc-widget-header title="{{title}} : Response" allow-collapse="true"></div>
+                    <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
                         <div class="row">
                             <div id="1" class="col-md-3">
                                 <div>
                                     <label>Username:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" readonly/>
+                                        <input type="textbox" class="form-control" readonly />
                                     </div>
                                 </div>
                                 <div>
@@ -195,12 +195,12 @@
                                         <label>Password:</label>
                                     </div>
                                     <div>
-                                        <input type="textbox" class="form-control" readonly/>
+                                        <input type="textbox" class="form-control" readonly />
                                     </div>
                                 </div>
                                 <label>Source URL:</label>
                                 <div>
-                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" readonly/>
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" readonly />
                                 </div>
                             </div>
                         </div>
