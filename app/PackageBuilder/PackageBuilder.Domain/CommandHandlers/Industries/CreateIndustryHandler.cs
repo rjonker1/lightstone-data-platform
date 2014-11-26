@@ -20,9 +20,10 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
         public override void Handle(CreateIndustry command)
         {
             if (_repository.FirstOrDefault(x => x.Name.ToLower() == command.Name.ToLower()) != null)
-                throw new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
+                return;
+                //throw new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
 
-            var industry = new Industry(command.Id, command.Name);
+            var industry = new Industry(command.Id, command.Name, true);
             _repository.Save(industry);
         }
     }

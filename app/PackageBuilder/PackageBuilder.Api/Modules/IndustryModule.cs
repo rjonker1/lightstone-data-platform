@@ -23,7 +23,7 @@ namespace PackageBuilder.Api.Modules
                 if (model.name.Value == null)
                     return Response.AsJson(new { response = "Failure!" });
 
-                bus.Publish(new CreateIndustry(Guid.NewGuid(), model.name.Value));
+                bus.Publish(new CreateIndustry(Guid.NewGuid(), model.name.Value, false));
 
                 return Response.AsJson(new { response = "Success!" });
             };
@@ -34,7 +34,7 @@ namespace PackageBuilder.Api.Modules
                 if (model.id.Value == null && model.name.Value == null)
                     return Response.AsJson(new { response = "Failure!" });
                     
-                bus.Publish(new RenameIndustry(new Guid(model.id.Value), model.name.Value));
+                bus.Publish(new RenameIndustry(new Guid(model.id.Value), model.name.Value, false));
 
                 return Response.AsJson(new { response = "Success!" });
             };

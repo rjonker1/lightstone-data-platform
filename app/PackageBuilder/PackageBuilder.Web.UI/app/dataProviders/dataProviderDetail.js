@@ -116,9 +116,13 @@
             return valueTotal;
         };
 
-        $scope.childIndustryChanged = function(industries) {
-            console.log(industries);
-        };
+        $scope.$watch('selectedChildren', function() {
+            console.log('1234');
+        }, true);
+
+        //$scope.childIndustryChanged = function(industries) {
+        //    $scope.childIndustries += industries;
+        //};
 
         $scope.modernWebBrowsers = [
  	        {name: "All", ticked: true },

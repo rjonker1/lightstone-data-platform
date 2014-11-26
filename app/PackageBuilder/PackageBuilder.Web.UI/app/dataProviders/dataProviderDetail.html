@@ -1,4 +1,6 @@
-﻿<script type="text/ng-template" id="fields_renderer.html">
+﻿<!-- SUBCHILD -->
+
+<script type="text/ng-template" id="fields_renderer.html">
 
     <td>**{{dataField.name}}</td>
     <td>{{dataField.type}}</td>
@@ -6,8 +8,16 @@
     <td><input class="form-control" ng-model="dataField.definition" type="text"></td>
 
     <td>
-        <select class="form-control" style="width: 100% !important;" ng-init="dataField.industry = dataField.industry || 'All'" ng-model="dataField.industry"
-                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
+        <!--<select class="form-control" style="width: 100% !important;" ng-init="dataField.industry = dataField.industry || 'All'" ng-model="dataField.industry"
+                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />-->
+        <div multi-select
+             input-model="dataField.industries"
+             button-label="name"
+             item-label="name maker"
+             max-labels="1"
+             tick-property="isSelected">
+
+        </div>
     </td>
 
     <td ng-show="switch == true">
@@ -16,6 +26,8 @@
 
 
 </script>
+
+<!-- CHILD -->
 
 <script type="text/ng-template" id="subFields_renderer.html">
 
@@ -36,9 +48,14 @@
                  button-label="name"
                  item-label="name maker"
                  max-labels="1"
-                 tick-property="ticked">
+                 tick-property="isSelected"
+                 output-model="selectedChildren"
+                 on-item-click="childIndustryChanged(selectedChildren)">
 
             </div>
+            
+            <!--output-model="dField.selectedChildren"-->
+
         </td>
 
         <td ng-show="switch == true">
@@ -48,6 +65,8 @@
     <!--<tr ng-if="subDF.dataFields.length > 0" ng-repeat="dataField in subDF.dataFields" ng-include="'fields_renderer.html'"></tr>-->
 
 </script>
+
+<!-- PARENT -->
 
 <script type="text/ng-template" id="dField_renderer.html">
 
@@ -59,8 +78,17 @@
         <td><input class="form-control" ng-model="dField.definition" type="text"></td>
 
         <td>
-            <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
-                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" multiple/>
+            <!--<select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
+                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" multiple/>-->
+            
+            <div multi-select
+                 input-model="dField.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected">
+
+            </div>
         </td>
 
         <td ng-show="switch == true">
@@ -69,6 +97,7 @@
     </tr>
     <tr></tr>
     <tr ng-if="dField.dataFields.length > 0" ng-repeat="subDF in dField.dataFields" ng-include="'subFields_renderer.html'"></tr>
+
 
 
 </script>
@@ -82,14 +111,16 @@
 
         </div>-->
     
-    {{dataProvider.response}}
+    <!--{{dataProvider.response}}-->
+    
     <section class="matter" data-ng-model="dataProvider.response">
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
                     <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
-
+                        
+                        {{dataProv.dataFields[0].selectedChildren}}
 
                         <div class="row" id="info">
 

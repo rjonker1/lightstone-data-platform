@@ -12,10 +12,13 @@ namespace PackageBuilder.Domain.Entities.Industries.WriteModels
 
         [DomainSignature, DataMember]
         public virtual string Name { get; set; }
+        [DataMember]
+        public virtual bool isSelected { get; set; }
 
-        public Industry(Guid id, string name) : base(id)
+        public Industry(Guid id, string name, bool selected) : base(id)
         {
             Name = name;
+            isSelected = selected;
         }
     }
 }
