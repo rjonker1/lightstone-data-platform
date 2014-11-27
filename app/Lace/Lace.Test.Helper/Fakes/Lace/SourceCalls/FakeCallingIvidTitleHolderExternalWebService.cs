@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingIvidTitleHolderExternalWebService : ICallTheDataProviderSource
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _ividTitleHolderResponse = new SourceResponseBuilder().ForIvidTitleHolder();
             TransformResponse(response);

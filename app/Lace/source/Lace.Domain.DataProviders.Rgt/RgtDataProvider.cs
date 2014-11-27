@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.Rgt
             else
             {
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
-                    new CallRgtExternalSource(_request,
+                    new CallRgtDataProvider(_request,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),

@@ -35,12 +35,6 @@
     <Reference Include="Common.Logging">
       <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.144\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -51,7 +45,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Infrastructure\CallIvidTitleHolderExternalSource.cs" />
+    <Compile Include="Infrastructure\CallIvidTitleHolderDataProvider.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureIvidTitleHolderSource.cs" />
     <Compile Include="Infrastructure\Dto\IvidTitleHolderRequestMessage.cs" />
     <Compile Include="Infrastructure\HandleIvidTitleHolderSourceCall.cs" />

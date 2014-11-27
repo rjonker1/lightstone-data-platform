@@ -6,7 +6,6 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Monitoring.Sources.Lace;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
@@ -41,15 +40,12 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 throw new Exception("Source Chain cannot be null");
             }
 
-
             _buildSourceChain.SourceChain(_request, _monitoring, _response);
 
             LaceResponses = new List<LaceExternalSourceResponse>()
             {
                 new LaceExternalSourceResponse() {Response = _response}
             };
-
-            //_monitoring.PublishLaceProcessedRequestAndReturnedResponseMessage(LaceEventSource.Initialization);
         }
     }
 }

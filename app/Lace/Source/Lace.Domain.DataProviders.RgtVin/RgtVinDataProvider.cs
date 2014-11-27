@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
-                    new CallRgtVinExternalSource(_request,
+                    new CallRgtVinDataProvider(_request,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
                 consumer.ConsumeExternalSource(response, monitoring);

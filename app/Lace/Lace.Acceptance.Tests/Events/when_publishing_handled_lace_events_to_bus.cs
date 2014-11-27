@@ -2,12 +2,10 @@
 using System.Threading;
 using EasyNetQ;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Monitoring.Sources.Lace;
 using Workflow;
 using Workflow.BuildingBlocks;
 using Workflow.RabbitMQ;
 using Xunit.Extensions;
-//ReSharper disable InconsistentNaming
 
 namespace Lace.Acceptance.Tests.Events
 {
@@ -78,4 +76,3 @@ namespace Lace.Acceptance.Tests.Events
         }
     }
 }
-// ReSharper enable InconsistentNaming

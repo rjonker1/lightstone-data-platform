@@ -7,8 +7,7 @@ using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Monitoring.Sources.Lace;
-using Workflow;
+using NServiceBus;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
@@ -17,13 +16,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private ISendMonitoringMessages _monitoring;
-        private readonly IPublishMessages _publisher;
+        private readonly IBus _bus;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
 
-        public EntryPointService(IPublishMessages publisher)
+        public EntryPointService(IBus bus)
         {
-            _publisher = publisher;
+            _bus = bus;
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
@@ -31,11 +30,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             try
             {
-                //_monitoring = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
-
-                //_monitoring.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
-
-
+                _monitoring = new MonitoringMessageSender(_bus, request.RequestAggregation.AggregateId);
                 _sourceChain = new CreateSourceChain(request.Package);
                 _sourceChain.Build();
 

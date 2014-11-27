@@ -35,12 +35,6 @@
     <Reference Include="Common.Logging">
       <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.144\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Common">
       <HintPath>..\..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
@@ -68,7 +62,7 @@
     <Compile Include="Core\Contracts\IReadOnlyRepository.cs" />
     <Compile Include="Core\Contracts\ISetupRepository.cs" />
     <Compile Include="Core\Models\Vin.cs" />
-    <Compile Include="Infrastructure\CallRgtVinExternalSource.cs" />
+    <Compile Include="Infrastructure\CallRgtVinDataProvider.cs" />
     <Compile Include="Infrastructure\Dto\RgtVinRequestMessage.cs" />
     <Compile Include="UnitOfWork\VehicleVinUnitOfWork.cs" />
     <Compile Include="Infrastructure\HandleRgtVinDataProviderCall.cs" />

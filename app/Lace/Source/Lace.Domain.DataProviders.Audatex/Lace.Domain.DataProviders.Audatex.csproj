@@ -35,12 +35,6 @@
     <Reference Include="Common.Logging">
       <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.144\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -52,7 +46,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AudatexDataProvider.cs" />
-    <Compile Include="Infrastructure\CallAudatexSource.cs" />
+    <Compile Include="Infrastructure\CallAudatexDataProvider.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureAudatexRequestMessage.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureAudatexSource.cs" />
     <Compile Include="Infrastructure\Configuration\SerializeAuduatexRequestData.cs" />
@@ -115,7 +109,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\Monitoring\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>

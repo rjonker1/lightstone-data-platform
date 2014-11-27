@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             else
             {
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
-                    new CallIvidTitleHolderExternalSource(_request));
+                    new CallIvidTitleHolderDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.IvidTitleHolderResponse == null)

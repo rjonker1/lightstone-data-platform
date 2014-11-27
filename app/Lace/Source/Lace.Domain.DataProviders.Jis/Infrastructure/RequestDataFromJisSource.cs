@@ -9,7 +9,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
             ISendMonitoringMessages monitoring)
         {
-            externalSource.CallTheExternalSource(response, monitoring);
+            externalSource.CallTheDataProvider(response, monitoring);
         }
     }
 }

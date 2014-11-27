@@ -23,7 +23,7 @@ namespace Lace.Acceptance.Tests.Requests
             var bus = new FakeBus();
             var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
-            _entryPoint = new EntryPointService(publisher);
+           // _entryPoint = new EntryPointService(publisher);
         }
 
         public override void Observe()
@@ -35,7 +35,6 @@ namespace Lace.Acceptance.Tests.Requests
         [Observation]
         public void lace_request_to_be_loaded_and_responses_to_be_returned_for_all_sources()
         {
-
 
             _laceResponses.Count.ShouldEqual(1);
             _laceResponses[0].Response.ShouldNotBeNull();

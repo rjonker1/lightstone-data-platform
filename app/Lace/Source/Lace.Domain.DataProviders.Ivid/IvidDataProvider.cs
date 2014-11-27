@@ -29,7 +29,7 @@ namespace Lace.Domain.DataProviders.Ivid
             }
             else
             {
-                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidExternalSource(_request));
+                var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.IvidResponse == null)

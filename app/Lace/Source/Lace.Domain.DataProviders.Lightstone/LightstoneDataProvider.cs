@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
-                    new CallLightstoneExternalSource(_request,
+                    new CallLightstoneDataProvider(_request,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient()),
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),

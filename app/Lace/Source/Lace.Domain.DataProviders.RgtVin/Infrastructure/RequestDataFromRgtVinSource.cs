@@ -8,7 +8,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalWebService, ISendMonitoringMessages monitoring)
         {
-            externalWebService.CallTheExternalSource(response, monitoring);
+            externalWebService.CallTheDataProvider(response, monitoring);
         }
     }
 }

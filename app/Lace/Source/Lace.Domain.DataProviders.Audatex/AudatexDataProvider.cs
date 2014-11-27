@@ -30,7 +30,7 @@ namespace Lace.Domain.DataProviders.Audatex
             }
             else
             {
-                var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexSource(_request));
+                var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
 
                 if (response.AudatexResponse == null)

@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Jis
             else
             {
                 var consumer = new ConsumeSource(new HandleJisSourceCall(),
-                    new CallJisExternalSource(_request,
+                    new CallJisDataProvider(_request,
                         new RepositoryFactory(ConnectionFactory.ForLsCorporateAutoDatabase(),
                             CacheConnectionFactory.LocalClient(),
                             ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"

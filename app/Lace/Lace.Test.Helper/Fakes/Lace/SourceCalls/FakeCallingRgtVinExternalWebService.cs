@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 
         private IEnumerable<Vin> _vin;
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _vin = new SourceResponseBuilder().ForRgtVin();
             TransformResponse(response);

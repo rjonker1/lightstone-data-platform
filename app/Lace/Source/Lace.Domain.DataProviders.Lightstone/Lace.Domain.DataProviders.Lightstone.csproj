@@ -35,12 +35,6 @@
     <Reference Include="Common.Logging">
       <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Monitoring">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Monitoring.1.0.0.144\lib\net45\Lightstone.DataPlatform.Monitoring.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.144\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ServiceStack.Common">
       <HintPath>..\..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -74,7 +68,7 @@
     <Compile Include="Core\Models\Municipality.cs" />
     <Compile Include="Core\Models\Sale.cs" />
     <Compile Include="Core\Models\Statistic.cs" />
-    <Compile Include="Infrastructure\CallLightstoneExternalSource.cs" />
+    <Compile Include="Infrastructure\CallLightstoneDataProvider.cs" />
     <Compile Include="Infrastructure\Dto\AccidentDistributionModel.cs" />
     <Compile Include="Infrastructure\Dto\AmortisationFactorModel.cs" />
     <Compile Include="Infrastructure\Dto\AmortisedValueModel.cs" />
@@ -153,6 +147,10 @@
     <ProjectReference Include="..\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
       <Name>Lace.Domain.DataProviders.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj">
       <Project>{c275d974-7e8e-440d-b244-b9db85e839b1}</Project>

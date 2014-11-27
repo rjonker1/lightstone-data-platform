@@ -20,7 +20,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             _request = request;
         }
 
-        public void CallTheExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
             TransformResponse(response);
