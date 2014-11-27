@@ -30,7 +30,7 @@ namespace PackageBuilder.Api.Modules
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
 
-            //Hackeroonie - Required due to complex model structures (Nancy default restriction length (102400))
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
 
