@@ -3,24 +3,27 @@
     <tr>
         <td><b style="color: green;">{{dField.name}}</b></td>
         <td><!--{{dField.type}}--></td>
-        <td><input class="form-control" ng-model="dField.label" type="text"></td>
-        <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+        <td>
+            <input class="form-control" ng-model="dField.label" type="text" >
+        </td>
+        <td>
+            <input class="form-control" ng-model="dField.definition" type="text" >
+        </td>
 
         <td>
 
             <div multi-select
-                 input-model="dField.industries"
+                 input-model="dField.selectedChildren"
                  button-label="name"
                  item-label="name maker"
                  max-labels="1"
-                 tick-property="isSelected"
-                 output-model="selectedChildren">
+                 tick-property="isSelected">
             </div>
-
+        {{selectedChildren}}    
         </td>
         
         <td ng-show="switch == true">
-            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
+            <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
         </td>
 
     </tr>
@@ -40,11 +43,11 @@
                  item-label="name maker"
                  max-labels="1"
                  tick-property="isSelected"
-                 output-model="selectedChildren"
+                 output-model="dField.selectedChildren"
                  on-item-click="childIndustryChanged(selectedChildren)">
             </div>
 
-
+            {{selectedChildren}}
         </td>
 
         <td ng-show="switch == true">
@@ -88,7 +91,7 @@
 
         </div>-->
     <!--{{dataProvider.response}}-->
-
+    
     <section class="matter" data-ng-model="dataProvider.response">
 
         <div class="container">
