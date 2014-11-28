@@ -5,35 +5,35 @@ using Lace.Shared.Monitoring.Messages.Events;
 
 namespace Monitoring.DomainModel.DataProviders
 {
-    public class DataProviderStartCall : AggregateBase
+    public class DataProviderAggregate : AggregateBase
     {
-        private DataProviderStartCall(Guid id)
+        private DataProviderAggregate(Guid id)
         {
             Id = id;
-            Register<DataProviderCallStarted>(e => Id = id);
+            Register<DataProviderEvent>(e => Id = id);
         }
 
-        public DataProviderStartCall(Guid id, DataProvider dataProvider, Category category, string message,
+        public DataProviderAggregate(Guid id, DataProvider dataProvider, Category category, string message,
             string payload, string metadata, DateTime date, bool isJson)
             : this(id)
         {
-            RaiseEvent(new DataProviderCallStarted(id, dataProvider, category, message, payload, metadata, date, isJson));
+            RaiseEvent(new DataProviderEvent(id, dataProvider, category, message, payload, metadata, date, isJson));
         }
     }
 
-    public class DataProviderEndCall : AggregateBase
+    public class DataProviderFaultAggregate : AggregateBase
     {
-        private DataProviderEndCall(Guid id)
+        private DataProviderFaultAggregate(Guid id)
         {
             Id = id;
-            Register<DataProviderCallEnded>(e => Id = id);
+            Register<FaultInDataProviderEvent>(e => Id = id);
         }
 
-        public DataProviderEndCall(Guid id, DataProvider dataProvider, Category category, string message, string payload,
-            string metadata, DateTime date, bool isJson)
+        public DataProviderFaultAggregate(Guid id, DataProvider dataProvider, Category category, string message,
+            string payload, string metadata, DateTime date, bool isJson)
             : this(id)
         {
-            RaiseEvent(new DataProviderCallEnded(id, dataProvider, category, message, payload, metadata, date, isJson));
+            RaiseEvent(new FaultInDataProviderEvent(id, dataProvider, category, message, payload, metadata, date, isJson));
         }
     }
 }

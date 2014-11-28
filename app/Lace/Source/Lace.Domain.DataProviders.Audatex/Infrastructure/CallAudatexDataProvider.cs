@@ -52,16 +52,18 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     .Close();
 
                 if (_response == null)
-                    //      monitoring.PublishNoResponseFromSourceMessage(Source);
+                    monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
+                        "No response received from Audatex Data Provider");
 
-                    //   monitoring.PublishSourceResponseMessage(Source,
-                    //       _audatexResponse != null ? _audatexResponse.ObjectToJson() : new GetDataResult().ObjectToJson());
+                //   monitoring.PublishSourceResponseMessage(Source,
+                //       _audatexResponse != null ? _audatexResponse.ObjectToJson() : new GetDataResult().ObjectToJson());
 
-                    TransformResponse(response);
+                TransformResponse(response);
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Audatex Source {0}", ex.Message);
+                Log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
+                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling Audatex Data Provider");
                 AudatexResponseFailed(response);
             }
         }

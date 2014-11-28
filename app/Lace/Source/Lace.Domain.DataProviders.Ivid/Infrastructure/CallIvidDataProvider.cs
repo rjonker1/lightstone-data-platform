@@ -60,17 +60,19 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                     monitoring.EndCallingDataProvider(Provider, _response.ObjectToJson(), _stopWatch);
 
                     if (_response == null)
-                        //          monitoring.PublishNoResponseFromSourceMessage(Source);
+                        monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
+                            "No response received from Ivid Data Provider");
 
-                        //      monitoring.PublishSourceResponseMessage(Source,
-                        //          _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson());
+                    //      monitoring.PublishSourceResponseMessage(Source,
+                    //          _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson());
 
-                        TransformResponse(response);
+                    TransformResponse(response);
                 }
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Ivid Web Service {0}", ex.Message);
+                Log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
+                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling Ivid Data Provider");
                 IvidResponseFailed(response);
             }
         }

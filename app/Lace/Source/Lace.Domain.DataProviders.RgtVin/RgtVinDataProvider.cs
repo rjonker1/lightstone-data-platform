@@ -7,6 +7,8 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure;
 using Lace.Domain.DataProviders.RgtVin.Repositories.Factory;
+using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.RgtVin
@@ -32,11 +34,16 @@ namespace Lace.Domain.DataProviders.RgtVin
             }
             else
             {
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Rgt);
+                monitoring.StartDataProvider(DataProvider.RgtVin, _request.ObjectToJson(), stopWatch);
+
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_request,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
                 consumer.ConsumeExternalSource(response, monitoring);
+
+                monitoring.EndDataProvider(DataProvider.RgtVin, _request.ObjectToJson(), stopWatch);
 
                 if (response.RgtVinResponse == null && FallBack != null)
                     CallFallbackSource(response, monitoring);

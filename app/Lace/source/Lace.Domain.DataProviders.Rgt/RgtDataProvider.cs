@@ -8,6 +8,7 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Domain.DataProviders.Rgt.Repositories.Factory;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 
@@ -33,6 +34,9 @@ namespace Lace.Domain.DataProviders.Rgt
             }
             else
             {
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Rgt);
+                monitoring.StartDataProvider(DataProvider.Rgt, _request.ObjectToJson(), stopWatch);
+
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_request,
                         new RepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
@@ -41,6 +45,8 @@ namespace Lace.Domain.DataProviders.Rgt
                             CacheConnectionFactory.LocalClient())));
 
                 consumer.ConsumeExternalSource(response, monitoring);
+
+                monitoring.EndDataProvider(DataProvider.Rgt, _request.ObjectToJson(), stopWatch);
 
                 if (response.RgtResponse == null && FallBack != null)
                     CallFallbackSource(response, monitoring);

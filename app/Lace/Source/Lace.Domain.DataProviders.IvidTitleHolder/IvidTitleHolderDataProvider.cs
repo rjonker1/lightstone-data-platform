@@ -5,6 +5,8 @@ using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
+using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder
@@ -30,9 +32,14 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             }
             else
             {
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.IvidTitleHolder);
+                monitoring.StartDataProvider(DataProvider.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
+
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
+
+                monitoring.EndDataProvider(DataProvider.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
 
                 if (response.IvidTitleHolderResponse == null)
                     CallFallbackSource(response, monitoring);

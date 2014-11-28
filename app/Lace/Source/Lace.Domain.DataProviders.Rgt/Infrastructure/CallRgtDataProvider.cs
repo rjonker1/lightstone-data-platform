@@ -53,19 +53,27 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
                     Log.ErrorFormat("Could not generate Car information request");
+                    monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
+                        "No car specifications received from RGT Data Provider");
                     RgtResponseFailed(response);
                 }
 
                 if (!_carSpecifications.Any())
+                {
                     Log.ErrorFormat("Could not get car information for Car id {0} Vin {1}",
                         _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin);
+
+                    monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
+                        string.Format("Could not get car information for Car id {0} Vin {1}",
+                            _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin));
+                }
 
                 TransformResponse(response);
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Data Provider {0}", ex.Message);
-               // laceEvent.PublishFailedSourceCallMessage(Source);
+                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling RGT Data Provider");
                 RgtResponseFailed(response);
             }
         }

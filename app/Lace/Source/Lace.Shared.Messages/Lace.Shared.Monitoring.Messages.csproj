@@ -52,6 +52,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DataProviderFaultCommands.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\DataProvider.cs" />
     <Compile Include="Core\IMonitorDataProviderMessages.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="Publisher\DataProviderMessagePublisher.cs" />
     <Compile Include="Publisher\CommandMessageFactory.cs" />
     <Compile Include="RabbitMQ\BusFactory.cs" />
-    <Compile Include="Commands\ExecutingDataProviderCommands.cs" />
+    <Compile Include="Commands\DataProviderCommands.cs" />
     <Compile Include="Events\DataProviderCallSources.cs" />
     <Compile Include="Shared\MonitoringMessageSender.cs" />
   </ItemGroup>

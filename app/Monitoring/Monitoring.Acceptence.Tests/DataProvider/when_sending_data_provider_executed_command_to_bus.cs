@@ -10,7 +10,7 @@ namespace Monitoring.Acceptence.Tests.DataProvider
     public class when_sending_data_provider_executed_command_to_bus : Specification
     {
         private readonly IBus _bus;
-        private readonly ExecutingDataProviderCommand _command;
+        private readonly DataProviderCommand _command;
 
 
 
@@ -18,7 +18,7 @@ namespace Monitoring.Acceptence.Tests.DataProvider
         {
             _bus = BusFactory.NServiceRabbitMqBus();
 
-            _command = new ExecutingDataProviderCommand(Guid.NewGuid(),
+            _command = new DataProviderCommand(Guid.NewGuid(),
                 Lace.Shared.Monitoring.Messages.Core.DataProvider.Audatex,
                 "Start Calling unit test", "request{}", "metadata", DateTime.UtcNow, Category.Performance, true);
         }

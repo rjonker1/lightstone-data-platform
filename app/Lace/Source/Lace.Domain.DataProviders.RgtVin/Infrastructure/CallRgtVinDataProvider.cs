@@ -53,7 +53,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                 monitoring.EndCallingDataProvider(Provider, _vins.ObjectToJson(), _stopWatch);
 
                 if (_vins == null || !_vins.Any())
-                    //monitoring.PublishNoResponseFromSourceMessage(Source);
+                    monitoring.DataProviderFault(Provider, _vins.ObjectToJson(), "No VINs were received");
 
                 //monitoring.PublishSourceResponseMessage(Source,
                 //    _vins != null && _vins.Any() ? _vins.ObjectToJson() : new List<Vin>().ObjectToJson());
@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
-                //monitoring.PublishFailedSourceCallMessage(Source);
+                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling RGT Vin Data Provider");
                 RgtVinResponseFailed(response);
             }
         }

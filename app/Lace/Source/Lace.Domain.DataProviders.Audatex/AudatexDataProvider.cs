@@ -5,6 +5,8 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Audatex
@@ -30,8 +32,13 @@ namespace Lace.Domain.DataProviders.Audatex
             }
             else
             {
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Audatex);
+                monitoring.StartDataProvider(DataProvider.Audatex, _request.ObjectToJson(), stopWatch);
+
                 var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
+
+                monitoring.EndDataProvider(DataProvider.Audatex, _request.ObjectToJson(), stopWatch);
 
                 if (response.AudatexResponse == null)
                     CallFallbackSource(response, monitoring);

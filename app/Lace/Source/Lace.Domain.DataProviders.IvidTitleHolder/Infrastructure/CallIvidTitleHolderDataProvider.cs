@@ -62,7 +62,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     monitoring.EndCallingDataProvider(Provider, _response.ObjectToJson(), _stopWatch);
 
                     if (_response == null)
-                 //       monitoring.PublishNoResponseFromSourceMessage(Source);
+                        monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
+                       "No response received from Ivid Title Holder Data Provider");
 
 
                     //monitoring.PublishSourceResponseMessage(Source,
@@ -75,7 +76,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Ivid Title Holder Web Service {0}", ex.Message);
+                Log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
+                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling Ivid Title Holder Data Provider");
                 IvidTitleHolderResponseFailed(response);
             }
         }
