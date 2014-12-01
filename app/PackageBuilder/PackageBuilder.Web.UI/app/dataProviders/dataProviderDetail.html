@@ -13,13 +13,21 @@
         <td>
 
             <div multi-select
-                 input-model="dField.selectedChildren"
+                 input-model="industries"
                  button-label="name"
                  item-label="name maker"
                  max-labels="1"
                  tick-property="isSelected">
             </div>
-        {{selectedChildren}}    
+
+            <!--<div multi-select
+                 input-model="dField.selectedChildren"
+                 button-label="name"
+                 item-label="name maker"
+                 max-labels="1"
+                 tick-property="isSelected">
+            </div>-->
+
         </td>
         
         <td ng-show="switch == true">
@@ -44,10 +52,9 @@
                  max-labels="1"
                  tick-property="isSelected"
                  output-model="dField.selectedChildren"
-                 on-item-click="childIndustryChanged(selectedChildren)">
+                 on-item-click="childIndustryChanged( data )">
             </div>
 
-            {{selectedChildren}}
         </td>
 
         <td ng-show="switch == true">
@@ -68,7 +75,8 @@
                  button-label="name"
                  item-label="name maker"
                  max-labels="1"
-                 tick-property="isSelected">
+                 tick-property="isSelected"
+                 on-item-click="childIndustryChanged( data )">
 
             </div>
         </td>
@@ -100,7 +108,7 @@
                     <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
 
-                        {{dataProv.dataFields[0].selectedChildren}}
+                        <!--{{dataProv.dataFields[0].selectedChildren}}-->
 
                         <div class="row" id="info">
 
