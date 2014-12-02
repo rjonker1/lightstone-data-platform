@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using Common.Logging;
 using Lace.Domain.Core.Contracts;
@@ -36,7 +37,8 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+            ISendMonitoringMessages monitoring)
         {
             try
             {
@@ -44,21 +46,21 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     .Build()
                     .Vin;
 
+                monitoring.DataProviderConfiguration(Provider, vin.ObjectToJson(), string.Empty);
+
                 monitoring.StartCallingDataProvider(Provider, vin.ObjectToJson(), _stopWatch);
 
                 var uow = new VehicleVinUnitOfWork(_repository.VinRepository());
                 uow.GetVin(vin);
                 _vins = uow.Vins;
 
-                monitoring.EndCallingDataProvider(Provider, _vins.ObjectToJson(), _stopWatch);
+                monitoring.EndCallingDataProvider(Provider,
+                    _vins != null ? _vins.ObjectToJson() : new List<Vin>().ObjectToJson(), _stopWatch);
 
                 if (_vins == null || !_vins.Any())
                     monitoring.DataProviderFault(Provider, _vins.ObjectToJson(), "No VINs were received");
 
-                //monitoring.PublishSourceResponseMessage(Source,
-                //    _vins != null && _vins.Any() ? _vins.ObjectToJson() : new List<Vin>().ObjectToJson());
-
-                TransformResponse(response);
+                TransformResponse(response, monitoring);
 
             }
             catch (Exception ex)
@@ -69,7 +71,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformRgtVinResponse(_vins);
 
@@ -77,6 +79,9 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             {
                 transformer.Transform();
             }
+
+            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
 
             response.RgtVinResponse = transformer.Result;
             response.RgtVinResponseHandled = new RgtVinResponseHandled();

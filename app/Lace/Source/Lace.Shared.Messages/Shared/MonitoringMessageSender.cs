@@ -53,11 +53,32 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                 Category.Performance, stopWatch.ToString(), true);
             SendToBus(command);
         }
-       
-        public void DataProviderFault(DataProvider dataProvider, string payload, string errorDetail)
+
+        public void DataProviderFault(DataProvider dataProvider, string payload, string metadata)
         {
             var command = CommandMessageFactory.FaultInDataProvider(RequestId, dataProvider, payload, Category.Fault,
-                errorDetail, true);
+                metadata, true);
+            SendToBus(command);
+        }
+
+        public void DataProviderSecurity(DataProvider dataProvider, string payload, string metadata)
+        {
+            var command = CommandMessageFactory.SecurityFlagRaisedInDataProvider(RequestId, dataProvider, payload,
+                Category.Security, metadata, true);
+            SendToBus(command);
+        }
+
+        public void DataProviderConfiguration(DataProvider dataProvider, string payload, string metadata)
+        {
+            var command = CommandMessageFactory.ConfigurationInDataProvider(RequestId, dataProvider, payload,
+                Category.Configuration, metadata, true);
+            SendToBus(command);
+        }
+
+        public void DataProviderTransformation(DataProvider dataProvider, string payload, string metadata)
+        {
+            var command = CommandMessageFactory.TransformationInDataProvider(RequestId, dataProvider, payload,
+                Category.Configuration, metadata, true);
             SendToBus(command);
         }
 
@@ -77,6 +98,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                 _log.ErrorFormat("Error sending message to Data Provider Message Bus: {0}", ex.Message);
             }
         }
+
+
         
     }
 
@@ -94,7 +117,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
         void EndDataProvider(DataProvider dataProvider, string payload, DataProviderStopWatch stopWatch);
 
-        void DataProviderFault(DataProvider dataProvider, string payload, string errorDetail);
+        void DataProviderFault(DataProvider dataProvider, string payload, string metadata);
+        void DataProviderSecurity(DataProvider dataProvider, string payload, string metadata);
+        void DataProviderConfiguration(DataProvider dataProvider, string payload, string metadata);
+        void DataProviderTransformation(DataProvider dataProvider, string payload, string metadata);
     }
 
     public class StopWatchFactory

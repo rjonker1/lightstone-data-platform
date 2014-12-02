@@ -51,5 +51,26 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 category, isJson);
         }
 
+        internal static DataProviderSecurityCommand SecurityFlagRaisedInDataProvider(Guid id, DataProvider dataProvider,
+            string payload, Category category, string metadata, bool isJson)
+        {
+            return new DataProviderSecurityCommand(id, dataProvider,string.Format("Security flag raised in Data Provider {0}", dataProvider.ToString()),payload,metadata,DateTime.UtcNow,category,isJson);
+        }
+
+        internal static DataProviderConfigurationCommand ConfigurationInDataProvider(Guid id, DataProvider dataProvider,
+            string payload, Category category, string metadata, bool isJson)
+        {
+            return new DataProviderConfigurationCommand(id, dataProvider,
+                string.Format("Configuration in Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                DateTime.UtcNow, category, isJson);
+        }
+
+        internal static DataProviderTransformationCommand TransformationInDataProvider(Guid id, DataProvider dataProvider,
+            string payload, Category category, string metadata, bool isJson)
+        {
+            return new DataProviderTransformationCommand(id, dataProvider,
+                string.Format("Transformation in Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                DateTime.UtcNow, category, isJson);
+        }
     }
 }

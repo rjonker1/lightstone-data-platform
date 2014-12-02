@@ -52,7 +52,10 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DataProviderConfigurationCommand.cs" />
     <Compile Include="Commands\DataProviderFaultCommands.cs" />
+    <Compile Include="Commands\DataProviderSecurityCommand.cs" />
+    <Compile Include="Commands\DataProviderTransformationCommand.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\DataProvider.cs" />
     <Compile Include="Core\IMonitorDataProviderMessages.cs" />

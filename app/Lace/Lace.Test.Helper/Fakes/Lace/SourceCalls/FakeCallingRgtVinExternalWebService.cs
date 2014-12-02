@@ -19,10 +19,10 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _vin = new SourceResponseBuilder().ForRgtVin();
-            TransformResponse(response);
+            TransformResponse(response,monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformRgtVinResponse(_vin);
 

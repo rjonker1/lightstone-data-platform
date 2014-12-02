@@ -36,4 +36,53 @@ namespace Monitoring.DomainModel.DataProviders
             RaiseEvent(new FaultInDataProviderEvent(id, dataProvider, category, message, payload, metadata, date, isJson));
         }
     }
+
+    public class DataProviderConfigurationAggregate : AggregateBase
+    {
+        private DataProviderConfigurationAggregate(Guid id)
+        {
+            Id = id;
+            Register<ConfigurationInDataProviderEvent>(e => Id = id);
+        }
+
+        public DataProviderConfigurationAggregate(Guid id, DataProvider dataProvider, Category category, string message,
+            string payload, string metadata, DateTime date, bool isJson)
+            : this(id)
+        {
+            RaiseEvent(new ConfigurationInDataProviderEvent(id, dataProvider, category, message, payload, metadata, date, isJson));
+        }
+    }
+
+    public class DataProviderSecurityAggregate : AggregateBase
+    {
+        private DataProviderSecurityAggregate(Guid id)
+        {
+            Id = id;
+            Register<SecurityInDataProviderEvent>(e => Id = id);
+        }
+
+        public DataProviderSecurityAggregate(Guid id, DataProvider dataProvider, Category category, string message,
+            string payload, string metadata, DateTime date, bool isJson)
+            : this(id)
+        {
+            RaiseEvent(new SecurityInDataProviderEvent(id, dataProvider, category, message, payload, metadata, date, isJson));
+        }
+    }
+
+    public class DataProviderTransformationAggregate : AggregateBase
+    {
+        private DataProviderTransformationAggregate(Guid id)
+        {
+            Id = id;
+            Register<TransformationInDataProviderEvent>(e => Id = id);
+        }
+
+        public DataProviderTransformationAggregate(Guid id, DataProvider dataProvider, Category category, string message,
+            string payload, string metadata, DateTime date, bool isJson)
+            : this(id)
+        {
+            RaiseEvent(new TransformationInDataProviderEvent(id, dataProvider, category, message, payload, metadata, date,
+                isJson));
+        }
+    }
 }

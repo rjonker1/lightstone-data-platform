@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Common.Logging;
 using Lace.Shared.Monitoring.Messages.Core;
 using NServiceBus;

@@ -49,6 +49,8 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                         .Build()
                         .HpiQueryRequest;
 
+                    monitoring.DataProviderConfiguration(Provider, request.ObjectToJson(), string.Empty);
+
                     monitoring.StartCallingDataProvider(Provider, request.ObjectToJson(), _stopWatch);
 
                     _response = ividWebService
@@ -57,16 +59,15 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 
                     ividWebService.CloseWebService();
 
-                    monitoring.EndCallingDataProvider(Provider, _response.ObjectToJson(), _stopWatch);
+                    monitoring.EndCallingDataProvider(Provider,
+                        _response != null ? _response.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson(),
+                        _stopWatch);
 
                     if (_response == null)
                         monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
                             "No response received from Ivid Data Provider");
 
-                    //      monitoring.PublishSourceResponseMessage(Source,
-                    //          _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson());
-
-                    TransformResponse(response);
+                    TransformResponse(response, monitoring);
                 }
             }
             catch (Exception ex)
@@ -84,7 +85,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             response.IvidResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformIvidResponse(_response);
 
@@ -92,6 +93,9 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             {
                 transformer.Transform();
             }
+
+            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
 
             response.IvidResponse = transformer.Result;
             response.IvidResponseHandled = new IvidResponseHandled();

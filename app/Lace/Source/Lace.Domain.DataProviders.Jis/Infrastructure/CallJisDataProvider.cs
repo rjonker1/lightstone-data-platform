@@ -67,7 +67,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
                 proxy.Close();
 
-                TransformResponse(response);
+                TransformResponse(response, monitoring);
 
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 

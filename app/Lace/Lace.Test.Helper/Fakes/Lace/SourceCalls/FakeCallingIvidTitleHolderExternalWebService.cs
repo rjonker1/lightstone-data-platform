@@ -16,10 +16,10 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _ividTitleHolderResponse = new SourceResponseBuilder().ForIvidTitleHolder();
-            TransformResponse(response);
+            TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 

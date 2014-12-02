@@ -54,7 +54,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 
                 proxy.Close();
 
-                TransformResponse(response);
+                TransformResponse(response, monitoring);
 
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.RequestAggregation.AggregateId);
             if (transformer.Continue)

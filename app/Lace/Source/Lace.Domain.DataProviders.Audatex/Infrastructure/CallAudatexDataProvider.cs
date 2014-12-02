@@ -40,13 +40,16 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     .Build()
                     .AudatexRequest;
 
+                monitoring.DataProviderConfiguration(Provider, audatexWebService.ObjectToJson(), request.ObjectToJson());
+
                 monitoring.StartCallingDataProvider(Provider, request.ObjectToJson(), _stopWatch);
 
                 _response = audatexWebService
                     .AudatexServiceProxy
                     .GetDataEx(GetCredentials(), request.MessageType, request.Message, 0);
 
-                monitoring.EndCallingDataProvider(Provider, _response.ObjectToJson(), _stopWatch);
+                monitoring.EndCallingDataProvider(Provider,
+                    _response != null ? _response.ObjectToJson() : new GetDataResult().ObjectToJson(), _stopWatch);
 
                 audatexWebService
                     .Close();
@@ -55,10 +58,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
                         "No response received from Audatex Data Provider");
 
-                //   monitoring.PublishSourceResponseMessage(Source,
-                //       _audatexResponse != null ? _audatexResponse.ObjectToJson() : new GetDataResult().ObjectToJson());
-
-                TransformResponse(response);
+                TransformResponse(response, monitoring);
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             };
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformAudatexResponse(_response, response, _request);
 
@@ -93,6 +93,9 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             {
                 transformer.Transform();
             }
+
+            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
 
             response.AudatexResponse = transformer.Result;
             response.AudatexResponseHandled = new AudatexResponseHandled();

@@ -68,7 +68,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                             _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin));
                 }
 
-                TransformResponse(response);
+                TransformResponse(response, monitoring);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformRgtResponse(_carSpecifications);
 
@@ -86,6 +86,9 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             {
                 transformer.Transform();
             }
+
+            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
 
             response.RgtResponse = transformer.Result;
             response.RgtResponseHandled = new RgtResponseHandled();

@@ -50,6 +50,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                         .TitleholderQueryRequest;
 
 
+                    monitoring.DataProviderConfiguration(Provider,request.ObjectToJson(),string.Empty);
+
                     monitoring.StartCallingDataProvider(Provider, request.ObjectToJson(), _stopWatch);
 
                     _response = ividTitleHolderWebService
@@ -59,19 +61,13 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     ividTitleHolderWebService
                         .CloseWebService();
 
-                    monitoring.EndCallingDataProvider(Provider, _response.ObjectToJson(), _stopWatch);
+                    monitoring.EndCallingDataProvider(Provider, _response != null ? _response.ObjectToJson() : new TitleholderQueryResponse().ObjectToJson(), _stopWatch);
 
                     if (_response == null)
                         monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
                        "No response received from Ivid Title Holder Data Provider");
 
-
-                    //monitoring.PublishSourceResponseMessage(Source,
-                    //    _ividTitleHolderResponse != null
-                    //        ? _ividTitleHolderResponse.ObjectToJson()
-                    //        : new TitleholderQueryResponse().ObjectToJson());
-
-                    TransformResponse(response);
+                    TransformResponse(response, monitoring);
                 }
             }
             catch (Exception ex)
@@ -89,7 +85,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
         
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformIvidTitleHolderResponse(_response);
 
@@ -97,6 +93,10 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             {
                 transformer.Transform();
             }
+
+
+            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
 
             response.IvidTitleHolderResponse = transformer.Result;
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();

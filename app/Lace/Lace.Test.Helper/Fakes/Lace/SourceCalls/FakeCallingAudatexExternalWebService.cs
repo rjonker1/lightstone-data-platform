@@ -5,6 +5,7 @@ using Lace.Domain.Core.Dto;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Responses;
 
@@ -23,10 +24,10 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
-            TransformResponse(response);
+            TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

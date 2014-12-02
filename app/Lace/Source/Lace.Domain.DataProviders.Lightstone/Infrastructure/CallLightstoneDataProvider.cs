@@ -36,7 +36,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+            ISendMonitoringMessages monitoring)
         {
             try
             {
@@ -45,9 +46,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 GetCarInformation();
                 GetMetrics();
 
-                monitoring.EndCallingDataProvider(Provider, response.ObjectToJson(), _stopWatch);
+                monitoring.EndCallingDataProvider(Provider, response != null ? response.ObjectToJson() : string.Empty,
+                    _stopWatch);
 
-                TransformResponse(response);
+                TransformResponse(response, monitoring);
             }
             catch (Exception ex)
             {
@@ -58,7 +60,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response,ISendMonitoringMessages monitoring)
         {
             var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
 
@@ -66,6 +68,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             {
                 transformer.Transform();
             }
+
+            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
 
             response.LightstoneResponse = transformer.Result;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();
