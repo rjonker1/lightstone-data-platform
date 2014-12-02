@@ -12,7 +12,7 @@
     function packageMaintenanceCreate($scope, $location, $timeout, $parse, $http, common, datacontext) {
 
         $scope.title = 'Package Maintenance - Create';
-        var filterVal = 'All';
+        var filterVal = {};
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
@@ -50,19 +50,70 @@
 
         $scope.filteredConstraint = '';
 
-        $scope.filterIndustry = function (fields) {
+        //$scope.filterIndustry = function (fields) {
 
-            if (filterVal != 'All') {
-                return fields.industry === filterVal;
+        //    if (filterVal != 'All') {
+        //        return fields.industry === filterVal;
+        //    }
+
+        //    return fields;
+        //};
+
+       //$scope.filterData = function(filter) {
+
+       //    filterVal = filter.name;
+       // }
+
+        $scope.filterIndustry = function (field) {
+
+            var fieldIndustries = field.industries;
+
+            //console.log(field);
+            //console.log(filterVal);
+
+
+            for (var i = 0; i < fieldIndustries.length; i++) {
+
+                for (var j = 0; j < filterVal.length; j++) {
+
+                    if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
+
+                        console.log(field.name);
+                        return field;
+                    }
+
+                    //if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
+
+                    //    console.log(field.name);
+                    //    return field;
+                    //}
+                }
+
             }
+            
 
-            return fields;
+            //if (filterVal != 'All') {
+            //    return fields.industry === filterVal;
+            //}
+            return null;
         };
 
-       $scope.filterData = function(filter) {
+        $scope.filterData = function (filterIndustries) {
 
-           filterVal = filter.name;
-       }
+            //var industries = $scope.industries;
+
+            filterVal = filterIndustries;
+
+            //for (var i = 0; i < (industries).length ; i++) {
+
+            //    if (industries[i].name === filter.name) {
+
+            //        filterVal = filter;
+            //    }
+
+            //}
+
+        }
 
         $scope.total = function () {
 

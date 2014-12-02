@@ -107,13 +107,11 @@
 
                             for (var j = 0; j < (subFields).length; j++) {
 
-                                console.log(subFields[j]);
                                 valueTotal += subFields[j].price;
 
                                 var subChildFields = subFields[j].dataFields;
                                 for (var k = 0; k < subChildFields.length; k++) {
 
-                                    console.log(subChildFields[k]);
                                     valueTotal += subChildFields[k].price;
                                 }
                             }
@@ -127,7 +125,10 @@
             return valueTotal;
         };
 
-        $scope.childIndustryChanged = function (childIndustry) {
+        $scope.childIndustryChanged = function (childIndustry, parent) {
+
+            console.log(parent);
+            console.log(childIndustry);
 
             var industries = $scope.industries;
 
@@ -139,11 +140,11 @@
                         var getChildrenSelected = $scope.checkChildren(childIndustry.name);
                         if (getChildrenSelected.length <= 0) {
                            
-                            industries[i].isSelected = false;
+                            parent.industries[i].isSelected = false;
                             continue;
                         }
 
-                        industries[i].isSelected = true;
+                        parent.industries[i].isSelected = true;
                     }
 
                 }
