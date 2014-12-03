@@ -35,9 +35,6 @@
     <Reference Include="CommonDomain">
       <HintPath>..\..\..\packages\CommonDomain.1.6.0.3\lib\net40\CommonDomain.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\..\Lace\source\Lace.Shared.Messages\bin\Debug\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
-    </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\..\packages\NEventStore.4.0.0.15\lib\net40\NEventStore.dll</HintPath>
     </Reference>
@@ -45,7 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProviders\DataProviderExecution.cs" />
+    <None Include="DataProviders\DataProviderExecution.cs.undo" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

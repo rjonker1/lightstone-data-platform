@@ -38,9 +38,6 @@
     <Reference Include="EventStore">
       <HintPath>..\..\..\packages\EventStore.3.2.0.28\lib\net40\EventStore.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\..\Lace\source\Lace.Shared.Messages\bin\Debug\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
-    </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\..\packages\NEventStore.4.0.0.15\lib\net40\NEventStore.dll</HintPath>
     </Reference>
@@ -57,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateFactory.cs" />
-    <Compile Include="DataProviders\DataProviderHandler.cs" />
+    <None Include="DataProviders\DataProviderHandler.cs.undo" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

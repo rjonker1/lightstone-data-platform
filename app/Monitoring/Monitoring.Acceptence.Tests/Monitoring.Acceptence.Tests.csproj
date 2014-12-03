@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\Lace\source\Lace.Shared.Messages\bin\Debug\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.89, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.89\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -67,7 +64,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <None Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs.old" />
+    <None Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs.undo" />
     <None Include="Lace\Consumer\when_sending_external_source_events_to_monitoring_bus.cs.old" />
     <None Include="Lace\Consumer\when_sending_external_source_failure_event_to_monitoring_bus.cs.old" />
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
