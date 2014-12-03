@@ -104,7 +104,7 @@
     <!-- BILLING END -->
 
 
-		<!-- EVENT TRACKING START -->
+		<!-- EVENT TRACKING START 
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.EventTracking.Domain.Persistence</name>
 			<folder>app/EventTracking/EventTracking.Domain.Persistence</folder>
@@ -122,7 +122,7 @@
 			<dependencies>
         <dependency id="EventStore.Client" version="2.0.2" />
 			</dependencies>
-		</nuget>
+		</nuget>-->
 		<!-- EVENT TRACKING END -->
 
 
