@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageBuilder.Web.UI</RootNamespace>
-    <AssemblyName>PackageBuilder.Web.UI</AssemblyName>
+    <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Web.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
