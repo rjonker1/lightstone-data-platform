@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
+using Nancy.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
@@ -15,7 +15,10 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
         public void CreateMaps()
         {
             Mapper.CreateMap<IDataField, DataProviderFieldItemDto>()
-                .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries != null ? ServiceLocator.Current.GetInstance<IRepository<Industry>>().ToList().Union(x.Industries).ToList() : ServiceLocator.Current.GetInstance<IRepository<Industry>>().ToList()));
+                .ForMember(dest => dest.Industries, opt => opt.MapFrom(x => x.Industries != null ?
+
+                    x.Industries.ToList().Concat(ServiceLocator.Current.GetInstance<IRepository<Industry>>().ToList()).DistinctBy(c => c.Id) :
+                    ServiceLocator.Current.GetInstance<IRepository<Industry>>().ToList()));
 
             Mapper.CreateMap<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>()
                 .ConvertUsing(s =>
@@ -26,8 +29,7 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
                 });
 
             Mapper.CreateMap<DataProviderFieldItemDto, IDataField>()
-                .ConvertUsing<ITypeConverter<DataProviderFieldItemDto, IDataField>>();//.ConvertUsing(s => new DataField(s.Name, s.Label, s.Definition, s.Industry, Convert.ToDouble(s.Price), 
-            //Convert.ToBoolean(s.IsSelected), Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(s.DataFields)));//, Type.GetType(s.Type)));
+                .ConvertUsing<ITypeConverter<DataProviderFieldItemDto, IDataField>>();
             Mapper.CreateMap<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>()
                 .ConvertUsing(s =>
                 {
@@ -36,9 +38,6 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
                     return dataProviderFieldItemDtos;
                 });
 
-            //.ConvertUsing(x => x.Select(Mapper.Map<DataProviderFieldItemDto, IDataField>).ToList());
-            //.ConvertUsing(x => x.Where(y => y.IsSelected != null && y.IsSelected.Value).Select(Mapper.Map<DataProviderFieldItemDto, IDataField>));
-            //.ConvertUsing(x => x.Where(y => y.IsSelected != null && y.IsSelected.Value).Select(Mapper.Map<DataProviderFieldItemDto, IDataField>));
         }
     }
 
@@ -68,7 +67,11 @@ namespace PackageBuilder.Api.Helpers.AutoMappers
 
         protected override IDataField ConvertCore(DataProviderFieldItemDto source)
         {
-            return new DataField(source.Name, source.Label, source.Definition, _industryRepo.ToList(),
+            //return new DataField(source.Name, source.Label, source.Definition, _industryRepo.ToList(),
+            //    System.Convert.ToDouble(source.Price), System.Convert.ToBoolean(source.IsSelected),
+            //    Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(source.DataFields));
+            
+            return new DataField(source.Name, source.Label, source.Definition, source.Industries,
                 System.Convert.ToDouble(source.Price), System.Convert.ToBoolean(source.IsSelected),
                 Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(source.DataFields));
         }

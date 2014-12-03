@@ -124,9 +124,20 @@
                                 <div>
                                     <label>Package Industry:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-selected="dataProvsPkg.Package.industry">
-                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                        </select>
+                                        <!--<select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-selected="dataProvsPkg.Package.industry">
+                                                <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                            </select>-->
+                                        
+                                        <div multi-select
+                                             input-model="industries"
+                                             button-label="name"
+                                             item-label="name maker"
+                                             max-labels="1"
+                                             tick-property="isSelected"
+                                             output-model="selectedFields"
+                                             on-item-click="filterData( selectedFields )">
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -170,9 +181,9 @@
                                 <div class="col-md-4" style="padding-bottom: 20px;">
                                     <div style="float: left;"><h3>Data Providers</h3></div>
                                     <div style="float: right; text-align: right;">
-                                        <label>Filter Data Providers fields by Industry:</label>
+                                        <!--<label>Filter Data Providers fields by Industry:</label>
                                         <select class="form-control" ng-model="filteredConstraint"
-                                                ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>
+                                                ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>-->
                                     </div>
 
                                 </div>
