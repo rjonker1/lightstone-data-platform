@@ -28,6 +28,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
 
             builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
             //TODO: UNDO ADD REF TO NUGET LACE SHARED
+            //TODO: REMEMBER TO ADD NUGETS!!!!
            // builder.RegisterType<DataProviderMonitoringHandler>();
         }
 
