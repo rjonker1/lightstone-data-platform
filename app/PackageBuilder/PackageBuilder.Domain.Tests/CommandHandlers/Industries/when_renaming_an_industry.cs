@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
             _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(IndustryMother.BankIndustry);
             _renameHandler = new RenameIndustryHandler(_repo.Object);
 
-            var renameCommand = new RenameIndustry(Guid.NewGuid(), "Test Industry 2");
+            var renameCommand = new RenameIndustry(Guid.NewGuid(), "Test Industry 2", false);
             _renameHandler.Handle(renameCommand);
         }
 

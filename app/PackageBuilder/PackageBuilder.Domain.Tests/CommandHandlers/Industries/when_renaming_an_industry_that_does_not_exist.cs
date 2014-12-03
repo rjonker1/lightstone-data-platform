@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
         private Exception _exception;
         public override void Observe()
         {
-            var renameCommand = new RenameIndustry(Guid.NewGuid(), "Test Industry 2");
+            var renameCommand = new RenameIndustry(Guid.NewGuid(), "Test Industry 2", false);
             _renameHandler = new RenameIndustryHandler(_repo.Object);
             _exception = Assert.Throws<ArgumentNullException>(() => _renameHandler.Handle(renameCommand));
         }
