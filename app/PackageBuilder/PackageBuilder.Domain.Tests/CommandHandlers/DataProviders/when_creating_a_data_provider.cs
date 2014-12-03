@@ -1,13 +1,12 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Dto;
+using Lace.Models.Ivid.Dto;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
-using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
