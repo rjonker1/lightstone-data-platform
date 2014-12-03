@@ -25,7 +25,7 @@
         <include pattern="*.config" to="content"/>
       </includes>
     </nuget>
-    <nuget deploy="false">
+  <!--  <nuget deploy="false">
       <name>Lightstone.DataPlatform.PackageBuilder.Api</name>
       <folder>app/PackageBuilder/PackageBuilder.Api</folder>
       <author>CustomApp</author>
@@ -36,7 +36,7 @@
         <include pattern="bin\*.pdb" to="content\bin"/>
         <include pattern="*.config" to="content"/>
       </includes>
-    </nuget>
+    </nuget> -->
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Billing.Api</name>
       <folder>app/Billing/Billing.Api</folder>
@@ -348,7 +348,7 @@
 		<!-- WORKFLOW END -->
 
 
-    <nuget deploy="false">
+   <!-- <nuget deploy="false">
       <name>Lightstone.Dataplatform.PackageBuilder.TestHelper</name>
       <folder>app/PackageBuilder/PackageBuilder.TestHelper</folder>
       <author>CustomApp</author>
@@ -361,9 +361,7 @@
         <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.dll" to="lib\net45" />
         <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.pdb" to="lib\net45" />
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45" />
-      <!--  <include pattern="PackageBuilder.Domain.dll" to="lib\net45" />
-        <include pattern="PackageBuilder.Domain.pdb" to="lib\net45" /> -->
+        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45" />    
       </includes>
       <dependencies>
         <dependency id="Nancy" version="0.23.0" />
@@ -372,6 +370,6 @@
         <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
         <dependency id="Moq" version="4.0.10827" />
       </dependencies>
-    </nuget>
+    </nuget> -->
 	</nugets>
 </build>
