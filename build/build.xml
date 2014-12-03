@@ -179,11 +179,11 @@
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
         <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
         <include pattern="ServiceStack.Text.dll" to="lib\net45" />
+        <include pattern="NServiceBus.Core.dll" to="lib\net45" />
 			</includes>
 			<dependencies>
 				<dependency id="Common.Logging" version="2.1.2.0" />        
 				<dependency id="Lightstone.DataPlatform.Workflow" />
-				<dependency id="Lightstone.DataPlatform.Monitoring" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
