@@ -205,7 +205,7 @@ end
 
 # PACKAGE #
 namespace :package do
-	task :default => [:specs, :pack, :zip] do
+	task :default => [:specs, :pack] do
 	end
 
 	task :specs => ['convention:spec_generation'] do
@@ -257,33 +257,6 @@ namespace :package do
 			cmd.command = @config[:nuget][:executable]
 			cmd.parameters = nuget_parameters
 			cmd.execute
-		end
-	end
-
-	task :zip do
-		puts "#{(@settings.Configs).length} apps to zip found"
-
-		@settings.Configs.each do |c|
-			folder = "../#{c.folder}"
-			spec_file = "#{c.name}.#{get_version()}.nuspec"
-			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
-			base_path = File.join(folder, 'bin/release')
-
-			if !File.exists?(base_path)
-				base_path = folder
-			end
-			puts "Zipping '#{folder}' as '#{c.name}.zip' to '#{@config[:artifact_folder]}'"
-
-			zip = ZipDirectory.new
-
-			if File.directory?(@config[:artifact_folder])
-				zip.directories_to_zip = folder
-				zip.output_file = "#{c.name}.zip"
-				zip.output_path = @config[:artifact_folder]
-				zip.execute
-			end
-
-			zip = nil
 		end
 	end
 end

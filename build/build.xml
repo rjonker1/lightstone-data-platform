@@ -210,7 +210,7 @@
 				<include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>        
-        <dependency id="EventStore.Client" version="2.0.2" targetFramework="net45" />
+        <dependency id="EventStore.Client" version="2.0.2" />
 				<dependency id="Lightstone.DataPlatform.Shared" />
 				<dependency id="Lightstone.DataPlatform.EventTracking.Domain.Persistence" />
 			</dependencies>
@@ -274,8 +274,6 @@
       <includes>
         <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45"/>
         <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45"/>
       </includes>
@@ -340,28 +338,22 @@
 		<!-- WORKFLOW END -->
 
 
-   <!-- <nuget deploy="false">
-      <name>Lightstone.Dataplatform.PackageBuilder.TestHelper</name>
-      <folder>app/PackageBuilder/PackageBuilder.TestHelper</folder>
+   <nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.Domain.Entities</name>
+      <folder>app/PackageBuilder/PackageBuilder.Domain.Entities</folder>
       <author>CustomApp</author>
-      <description>PackageBuilder.TestHelper</description>
+      <description>PackageBuilder.Domain.Entities</description>
       <includes>
-        <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Shared.Public.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Shared.Public.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.dll" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.PackageBuilder.Domain.pdb" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.dll" to="lib\net45" />
-        <include pattern="Lightstone.Dataplatform.Shared.Public.TestHelpers.pdb" to="lib\net45" />    
+        <include pattern="Castle.Windsor.dll" to="lib\net45"/>
+        <include pattern="NHibernate.dll" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.*.dll" to="lib\net45" />
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.*.pdb" to="lib\net45" />    
       </includes>
       <dependencies>
-        <dependency id="Nancy" version="0.23.0" />
-        <dependency id="Nancy.Testing" version="0.23.0" />
-        <dependency id="FluentMigrator" version="1.2.1.0" />
-        <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
-        <dependency id="Moq" version="4.0.10827" />
+         <dependency id="Lightstone.DataPlatform.Lace.Domain.Core" />
+         <dependency id="Lightstone.DataPlatform.Shared" />
+         <dependency id="NEventStore" version="5.1.0" />
       </dependencies>
-    </nuget> -->
+    </nuget> 
 	</nugets>
 </build>

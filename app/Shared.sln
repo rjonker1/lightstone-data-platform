@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "Shared\BuildingBlocks\BuildingBlocks.csproj", "{AB92C673-A7C0-4C58-8DE8-2C51F1781303}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{49DF15E2-0A73-46D1-BF98-BE472678A28D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Public", "Shared\Shared.Public\Shared.Public.csproj", "{A9E8B20A-E8F8-4549-83FC-921E26C64282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.BuildingBlocks.Api", "Shared\Shared.BuildingBlocks.Api\Shared.BuildingBlocks.Api.csproj", "{5D425D49-AE4E-4EB0-98FF-C263EA3B7976}"
 EndProject
@@ -37,14 +35,6 @@ Global
 		{49DF15E2-0A73-46D1-BF98-BE472678A28D}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
 		{49DF15E2-0A73-46D1-BF98-BE472678A28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49DF15E2-0A73-46D1-BF98-BE472678A28D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.MonoDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.MonoDebug|Any CPU.Build.0 = Debug|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.MonoRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9E8B20A-E8F8-4549-83FC-921E26C64282}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D425D49-AE4E-4EB0-98FF-C263EA3B7976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D425D49-AE4E-4EB0-98FF-C263EA3B7976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D425D49-AE4E-4EB0-98FF-C263EA3B7976}.MonoDebug|Any CPU.ActiveCfg = Debug|Any CPU

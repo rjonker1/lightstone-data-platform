@@ -78,10 +78,6 @@
     <Compile Include="Users\UserIdentifierMother.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared.Public\Shared.Public.csproj">
-      <Project>{A9E8B20A-E8F8-4549-83FC-921E26C64282}</Project>
-      <Name>Shared.Public</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{49df15e2-0a73-46d1-bf98-be472678a28d}</Project>
       <Name>Shared</Name>
