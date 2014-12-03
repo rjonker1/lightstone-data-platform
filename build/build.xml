@@ -170,10 +170,6 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.Events.Lace.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Monitoring.Consumer.Lace.pdb" to="lib\net45"/>
         <include pattern="EasyNetQ.dll" to="lib\net45"/>
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
