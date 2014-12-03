@@ -1,8 +1,7 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using FluentNHibernate.Testing;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
-using PackageBuilder.TestHelper;
-using PackageBuilder.TestHelper.DbPersistence;
 using PackageBuilder.TestHelper.InMemoryPersistence;
 using Xunit.Extensions;
 
@@ -21,7 +20,7 @@ namespace PackageBuilder.Domain.Entities.Tests.DataProviders.ReadModels
             new PersistenceSpecification<DataProvider>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
-                .CheckProperty(c => c.Name, "VVi")
+                .CheckProperty(c => c.Name, DataProviderName.Ivid)
                 .CheckProperty(c => c.Description, "Description")
                 .CheckProperty(c => c.Version, 1)
                 .CheckProperty(c => c.Owner, "Owner")

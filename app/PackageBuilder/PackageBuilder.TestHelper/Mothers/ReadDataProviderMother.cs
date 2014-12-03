@@ -1,12 +1,13 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.TestHelper.Builders.Entites;
 
 namespace PackageBuilder.TestHelper.Mothers
 {
     public class ReadDataProviderMother
     {
-        public static Domain.Entities.DataProviders.ReadModels.DataProvider Ivid
+        public static DataProvider Ivid
         {
             get
             {
@@ -20,7 +21,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static Domain.Entities.DataProviders.ReadModels.DataProvider IvidTitleHolder
+        public static DataProvider IvidTitleHolder
         {
             get
             {
@@ -34,7 +35,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static Domain.Entities.DataProviders.ReadModels.DataProvider RgtVin
+        public static DataProvider RgtVin
         {
             get
             {
@@ -48,7 +49,7 @@ namespace PackageBuilder.TestHelper.Mothers
             }
         }
 
-        public static Domain.Entities.DataProviders.ReadModels.DataProvider Rgt
+        public static DataProvider Rgt
         {
             get
             {

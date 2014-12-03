@@ -94,6 +94,7 @@
     <Compile Include="Builders\Entites\CustomerBuilder.cs" />
     <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
     <Compile Include="Builders\Entites\ReadDataProviderBuilder.cs" />
+    <Compile Include="Builders\Entites\ReadPackageBuilder.cs" />
     <Compile Include="Builders\Entites\WriteDataProviderBuilder.cs" />
     <Compile Include="Builders\Entites\GroupBuilder.cs" />
     <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Mothers\ContractMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\ReadDataProviderMother.cs" />
+    <Compile Include="Mothers\ReadPackageMother.cs" />
     <Compile Include="Mothers\WriteDataProviderMother.cs" />
     <Compile Include="Mothers\IndustryMother.cs" />
     <Compile Include="Mothers\PackageMother.cs" />

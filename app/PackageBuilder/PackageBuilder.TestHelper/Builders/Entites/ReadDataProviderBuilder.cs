@@ -1,5 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 
 namespace PackageBuilder.TestHelper.Builders.Entites
 {
@@ -13,9 +14,9 @@ namespace PackageBuilder.TestHelper.Builders.Entites
         private string _owner;
         private DateTime _createdDate;
         private DateTime _editedDate;
-        public Domain.Entities.DataProviders.ReadModels.DataProvider Build()
+        public DataProvider Build()
         {
-            return new Domain.Entities.DataProviders.ReadModels.DataProvider(_id, _name, _description, _costPrice, _version, _owner, _createdDate, _editedDate);
+            return new DataProvider(_id, _name, _description, _costPrice, _version, _owner, _createdDate, _editedDate);
         }
 
         public ReadDataProviderBuilder With(Guid id)

@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
-using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.Packages
 {
     public class CreatePackageHandler : AbstractMessageHandler<CreatePackage>
     {
         private readonly INEventStoreRepository<Package> _writeRepo;
-        private readonly IRepository<Entities.Packages.ReadModels.Package> _readRepo;
+        private readonly IPackageRepository _readRepo;
 
-        public CreatePackageHandler(INEventStoreRepository<Package> writeRepo, IRepository<Entities.Packages.ReadModels.Package> readRepo)
+        public CreatePackageHandler(INEventStoreRepository<Package> writeRepo, IPackageRepository readRepo)
         {
             _writeRepo = writeRepo;
             _readRepo = readRepo;
@@ -24,9 +22,8 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
 
         public override void Handle(CreatePackage command)
         {
-            //todo: refactor into PackageRepo
-            var existing = _readRepo.FirstOrDefault(x => x.Name.ToLower() == command.Name.ToLower() && x.State.Name == StateName.Published);
-            if (existing != null)
+            var exists = _readRepo.Exists(command.Id, command.Name);
+            if (exists)
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
 
             var entity = new Package(command.Id, command.Name, command.Description, command.Industry, command.CostPrice, command.SalePrice,

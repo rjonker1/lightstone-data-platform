@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PackageBuilder.Domain.Entities
+﻿namespace PackageBuilder.Domain.Entities
 {
     public interface INamedEntity
     {

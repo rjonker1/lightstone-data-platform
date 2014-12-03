@@ -4,13 +4,13 @@ using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.Infrastructure.Repositories;
-using PackageBuilder.TestHelper.DbPersistence;
+using PackageBuilder.TestHelper.InMemoryPersistence;
 using PackageBuilder.TestHelper.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Infrastructure.Tests.Repositories.Base
 {
-    public class when_implementing_base_repository : when_persisting_entities_to_db
+    public class when_implementing_base_repository : when_persisting_entities_to_memory
     {
         private IRepository<DataProvider> _repository;
         private Guid _id;

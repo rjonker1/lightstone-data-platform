@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,6 +56,8 @@
     <Compile Include="RavenDB\IndexInstaller.cs" />
     <Compile Include="Repositories\DataProviderRepository.cs" />
     <Compile Include="Repositories\IDataProviderRepository.cs" />
+    <Compile Include="Repositories\IPackageRepository.cs" />
+    <Compile Include="Repositories\PackageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
