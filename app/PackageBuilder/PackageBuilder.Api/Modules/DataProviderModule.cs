@@ -5,6 +5,7 @@ using AutoMapper;
 using DataPlatform.Shared.Enums;
 using MemBus;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -19,10 +20,20 @@ namespace PackageBuilder.Api.Modules
 {
     public class DataProviderModule : NancyModule
     {
+        private static int _defaultJsonMaxLength;
+
         public DataProviderModule(IBus bus,
             IDataProviderRepository readRepo,
             INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
+
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
+
             Get["/DataProvider"] = parameters =>
                 Response.AsJson(readRepo);
 
@@ -30,16 +41,11 @@ namespace PackageBuilder.Api.Modules
             {
                 var ids = readRepo.Select(x => x.DataProviderId).Distinct().ToList();
                 var dataSources = ids.Select(x => Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(x))).ToList();
-
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProvider/Get/{id}/{version}"] = parameters =>
-            {
-                //var test = Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id));
-                var tt = Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
-                return Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
-            };
+            Get["/DataProvider/Get/{id}/{version}"] = parameters => 
+                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
 
             Post["/Dataprovider/Edit/{id}"] = parameters =>
             {

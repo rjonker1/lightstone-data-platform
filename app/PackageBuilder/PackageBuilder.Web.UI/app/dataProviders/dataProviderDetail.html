@@ -1,74 +1,92 @@
-﻿<script type="text/ng-template" id="fields_renderer.html">
+﻿<script type="text/ng-template" id="dField_renderer.html">
 
-    <td>**{{dataField.name}}</td>
-    <td>{{dataField.type}}</td>
-    <td><input class="form-control" ng-model="dataField.label" type="text"></td>
-    <td><input class="form-control" ng-model="dataField.definition" type="text"></td>
+    <tr>
+        <td><b style="color: green;">{{dField.name}}</b></td>
+        <td><!--{{dField.type}}--></td>
+        <td>
+            <input class="form-control" ng-model="dField.label" type="text" >
+        </td>
+        <td>
+            <input class="form-control" ng-model="dField.definition" type="text" >
+        </td>
 
-    <td>
-        <select class="form-control" style="width: 100% !important;" ng-init="dataField.industry = dataField.industry || 'All'" ng-model="dataField.industry"
-                ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" />
-    </td>
+        <td>
 
-    <td ng-show="switch == true">
-        <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dataField.price" />
-    </td>
+            <div multi-select
+                 input-model="dField.industries"
+                 button-label="name"
+                 item-label="name maker"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+            </div>
 
+            <!--<div multi-select
+                 input-model="dField.selectedChildren"
+                 button-label="name"
+                 item-label="name maker"
+                 max-labels="1"
+                 tick-property="isSelected">
+            </div>-->
 
-</script>
+        </td>
+        
+        <td ng-show="switch == true">
+            <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
+        </td>
 
-<script type="text/ng-template" id="subFields_renderer.html">
+    </tr>
 
-    
-        <td>*{{subDF.name}}</td>
-        <!--<td>{{subDF.type}}</td>-->
-        <td>System.Type</td>
+    <tr ng-repeat-start="subDF in dField.dataFields">
+        <td><b>{{subDF.name}}</b></td>
+        <td></td>
+
         <td><input class="form-control" ng-model="subDF.label" type="text"></td>
         <td><input class="form-control" ng-model="subDF.definition" type="text"></td>
 
         <td>
-            <!--<select class="form-control" style="width: 100% !important;" ng-init="subDF.industry = subDF.industry || 'All'" ng-model="subDF.industry"
-                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" 
-                    ng-change="childIndustryChanged(subDF.industry)" multiple/>-->
-            
+
             <div multi-select
                  input-model="subDF.industries"
                  button-label="name"
                  item-label="name maker"
                  max-labels="1"
-                 tick-property="ticked">
-
+                 tick-property="isSelected"
+                 output-model="dField.selectedChildren"
+                 on-item-click="childIndustryChanged(data, dField)">
             </div>
+
         </td>
 
         <td ng-show="switch == true">
             <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" />
         </td>
 
-    <!--<tr ng-if="subDF.dataFields.length > 0" ng-repeat="dataField in subDF.dataFields" ng-include="'fields_renderer.html'"></tr>-->
-
-</script>
-
-<script type="text/ng-template" id="dField_renderer.html">
-
-    <tr>
-        <td>{{dField.name}}</td>
-        <!--<td>{{dField.type}}</td>-->
+    </tr>
+    <tr ng-repeat-end ng-repeat-start="subChildDF in subDF.dataFields">
+        <td>{{subChildDF.name}}</td>
         <td>System.Type</td>
-        <td><input class="form-control" ng-model="dField.label" type="text"></td>
-        <td><input class="form-control" ng-model="dField.definition" type="text"></td>
+        <td><input class="form-control" ng-model="subChildDF.label" type="text"></td>
+        <td><input class="form-control" ng-model="subChildDF.definition" type="text"></td>
 
         <td>
-            <select class="form-control" style="width: 100% !important;" ng-init="dField.industry = dField.industry || 'All'" ng-model="dField.industry"
-                    ng-options="industry.name as industry.name for industry in industries" ng-selected="industry.name" multiple/>
+
+            <div multi-select
+                 input-model="subChildDF.industries"
+                 button-label="name"
+                 item-label="name maker"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 on-item-click="childIndustryChanged(data, subDF)">
+
+            </div>
         </td>
 
         <td ng-show="switch == true">
-            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subChildDF.price" />
         </td>
     </tr>
-    <tr></tr>
-    <tr ng-if="dField.dataFields.length > 0" ng-repeat="subDF in dField.dataFields" ng-include="'subFields_renderer.html'"></tr>
+    <tr ng-repeat-end></tr>
 
 
 </script>
@@ -81,15 +99,17 @@
             </div>
 
         </div>-->
+    <!--{{dataProvider.response}}-->
     
-    {{dataProvider.response}}
     <section class="matter" data-ng-model="dataProvider.response">
+
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
                     <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
 
+                        <!--{{dataProv.dataFields[0].selectedChildren}}-->
 
                         <div class="row" id="info">
 
@@ -164,7 +184,7 @@
                                             <label class="{{switch}}">{{switchAlternate}}</label>
                                             <input type="radio" name="toggle" value="Per Request" ng-model="switchAlternate" ng-click="toggle( true )">
                                             <input type="radio" name="toggle" value="Per Field" ng-model="switchAlternate" ng-click="toggle( false )">
-                                            <span class=" switch {{switch}}"></span>
+                                            <span class=" switch {{switch}} "></span>
 
                                         </div>
                                     </div>
@@ -213,8 +233,10 @@
                                                     <th ng-show="switch == true">Price</th>
                                                 </tr>
                                             </thead>
+                                            
                                             <tbody ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'">
-
+                                                
+                                                <!-- <tr ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'"></tr>-->
                                             </tbody>
                                         </table>
 
@@ -250,20 +272,13 @@
                                 <div>
                                     <label>Username:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" />
+                                        <input type="textbox" class="form-control" ng-model="dataProv.username" readonly/>
                                     </div>
                                 </div>
-                                <div>
-                                    <div>
-                                        <label>Password:</label>
-                                    </div>
-                                    <div>
-                                        <input type="textbox" class="form-control" />
-                                    </div>
-                                </div>
+                               
                                 <label>Source URL:</label>
                                 <div>
-                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" />
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" readonly/>
                                 </div>
                             </div>
                         </div>

@@ -17,6 +17,8 @@
         var logSuccess = getLogFn(controllerId, 'success');
         var logError = getLogFn(controllerId, 'error');
 
+        $scope.test = {};
+
         $scope.format = 'MMMM Do YYYY, h:mm:ss a';
 
         $scope.users = [
@@ -101,10 +103,17 @@
 
                         if ((listItem.dataFields[x].dataFields).length > 0) {
 
-                            for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
+                            var subFields = listItem.dataFields[x].dataFields;
 
+                            for (var j = 0; j < (subFields).length; j++) {
 
-                                valueTotal += listItem.dataFields[x].dataFields[j].price;
+                                valueTotal += subFields[j].price;
+
+                                var subChildFields = subFields[j].dataFields;
+                                for (var k = 0; k < subChildFields.length; k++) {
+
+                                    valueTotal += subChildFields[k].price;
+                                }
                             }
                         }
                     }
@@ -116,29 +125,103 @@
             return valueTotal;
         };
 
-        $scope.childIndustryChanged = function(industries) {
-            console.log(industries);
+        $scope.childIndustryChanged = function (childIndustry, parent) {
+
+            console.log(parent);
+            console.log(childIndustry);
+
+            var industries = $scope.industries;
+
+                for (var i = 0; i < industries.length; i++) {
+
+                    if (industries[i].id == childIndustry.id) {
+
+                        //Returns an Array of the fields that currently occupy said Industry.
+                        var getChildrenSelected = $scope.checkChildren(childIndustry.name);
+                        if (getChildrenSelected.length <= 0) {
+                           
+                            parent.industries[i].isSelected = false;
+                            continue;
+                        }
+
+                        parent.industries[i].isSelected = true;
+                    }
+
+                }
+      
         };
 
-        $scope.modernWebBrowsers = [
- 	        {name: "All", ticked: true },
-            {name: "Finance", ticked: false},
-            {name: "Insurance", ticked: false},
-            {name: "Logistics", ticked: false}
-        ];
+        $scope.checkChildren = function(childIndusName) {
 
-        angular.forEach($scope.modernWebBrowsers, function (value, key) {
-            if (value.ticked === true) {
-                console.log(value);
+            var childArray = [];
+            var items = null;
+
+            try {
+
+                items = $scope.dataProvider.response;
+            } catch (e) {
+
+                //console.log(e.message);
             }
-        });
 
+            if (items != null) {
+
+                for (var i = 0; i < items.length; i++) {
+
+                    var listItem = items[i];
+
+                    for (var x = 0; x < (listItem.dataFields).length; x++) {
+
+
+
+                        if ((listItem.dataFields[x].dataFields).length > 0) {
+
+                            var subFields = listItem.dataFields[x].dataFields;
+
+                            for (var j = 0; j < (subFields).length; j++) {
+
+                                var industries = subFields[j].industries;
+
+                                //Child Industries
+                                for (var k = 0; k < (industries).length ; k++) {
+
+                                    if ((industries[k].name == childIndusName) && (industries[k].isSelected == true)) {
+
+                                        childArray.push(subFields[j].name);
+                                    } else {
+
+                                        var subChildFields = subFields[j].dataFields;
+                                        for (var l = 0; l < (subChildFields).length; l++) {
+
+                                            //Sub-child Industries
+                                            var subIndustries = subChildFields[l].industries;
+                                            for (var kk = 0; kk < (industries).length; kk++) {
+
+                                                if ((subIndustries[kk].name == childIndusName) && (subIndustries[kk].isSelected == true)) {
+
+                                                    childArray.push(subChildFields[l].name);
+                                                }
+                                            }
+
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return childArray;
+        }
 
         $scope.editProvider = function (providerData) {
 
             return datacontext.editDataProvider($routeParams.id, providerData).then(function (response) {
 
-                console.log(response);
+                //console.log(response);
                 (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
 
 

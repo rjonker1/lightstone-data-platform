@@ -42,7 +42,7 @@
             showFilter: true,
             showGroupPanel: true,
             columnDefs: [
-                { field: 'name', displayName: 'Name', filter: { term: '' } },
+                { field: 'name', displayName: 'Name' },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'createdDate', displayName: 'Created Date' },
@@ -59,7 +59,11 @@
                         '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
                         '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewDataProvider(row)" value="View" /></div>'
                 }
-            ]
+            ],
+            sortInfo: {
+                fields: ['editedDate'],
+                directions: ['asc']
+            }
         };
 
 
