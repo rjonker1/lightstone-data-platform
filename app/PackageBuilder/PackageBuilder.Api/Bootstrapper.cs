@@ -8,7 +8,9 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
+using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Industries.Commands;
+using PackageBuilder.Domain.Entities.States.Commands;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -25,10 +27,10 @@ namespace PackageBuilder.Api
 
             var handler = container.Resolve<IHandleMessages>();
 
-            //Defaulted Industry for Datafield wireups
+            // Import Industries, States and DataProviders
             handler.Handle(new CreateIndustry(new Guid(), "All", true));
-
-            //Import DataProviders
+            foreach (var state in (StateName[]) Enum.GetValues(typeof (StateName)))
+                handler.Handle(new CreateState(Guid.NewGuid(), state));
             handler.Handle(new ImportDataProvider());
         }
 

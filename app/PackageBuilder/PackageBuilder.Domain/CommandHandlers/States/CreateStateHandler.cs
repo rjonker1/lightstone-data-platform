@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using DataPlatform.Shared.ExceptionHandling;
-using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.States.Commands;
@@ -20,7 +18,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
         public override void Handle(CreateState command)
         {
             if (_repository.FirstOrDefault(x => x.Name == command.Name) != null)
-                throw new LightstoneAutoException("An state with the name {0} already exists".FormatWith(command.Name));
+                return;
 
             var entity = new State(command.Id, command.Name, command.Alias);
 
