@@ -22,9 +22,11 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public double RecommendedSalePrice { get; set; }
         [DataMember]
-        public State State { get; private set; }
+        public string Notes { get; set; }
         [DataMember]
         public IEnumerable<Industry> Industries { get; internal set; }
+        [DataMember]
+        public State State { get; private set; }
         [DataMember]
         public decimal DisplayVersion { get; private set; }
         [DataMember]
@@ -58,10 +60,10 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         public Package(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
             : this(id)
         {
-            RaiseEvent(new PackageCreated(id, name, description, industries, costPrice, salePrice, state, displayVersion, owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, industries, state, displayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             if (state.Name == StateName.Published) 
                 DisplayVersion = Math.Ceiling(DisplayVersion);
@@ -71,7 +73,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
                 Name = name;
             }
 
-            RaiseEvent(new PackageUpdated(id, name, description, industries, costPrice, salePrice, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
+            RaiseEvent(new PackageUpdated(id, name, description, costPrice, salePrice, notes, industries, state, Version + 1, DisplayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
         private void Apply(PackageCreated @event)
@@ -79,9 +81,10 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             Description = @event.Description;
-            Industries = @event.Industries;
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
+            Notes = @event.Notes;
+            Industries = @event.Industries;
             State = @event.State;
             DisplayVersion = @event.DisplayVersion;
             Owner = @event.Owner;
@@ -95,9 +98,10 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = @event.Id;
             Name = @event.Name;
             Description = @event.Description;
-            Industries = @event.Industries;
             CostOfSale = @event.CostPrice;
             RecommendedSalePrice = @event.SalePrice;
+            Notes = @event.Notes;
+            Industries = @event.Industries;
             State = @event.State;
             DisplayVersion = @event.DisplayVersion;
             Owner = @event.Owner;

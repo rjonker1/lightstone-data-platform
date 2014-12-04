@@ -32,7 +32,7 @@ namespace PackageBuilder.Api.Modules
 
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.Industries, dto.CostOfSale, dto.RecommendedSalePrice, stateResolve.FirstOrDefault(), dto.Owner, DateTime.Now, null, dProviders));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, stateResolve.FirstOrDefault(), dto.Owner, DateTime.Now, null, dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -43,7 +43,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
 
-                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.Industries, dto.CostOfSale, dto.RecommendedSalePrice, stateResolve.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dProviders));
+                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, stateResolve.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
