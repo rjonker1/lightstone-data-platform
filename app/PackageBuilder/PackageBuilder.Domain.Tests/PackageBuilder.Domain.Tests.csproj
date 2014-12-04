@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PackageBuilder.Domain.Tests</RootNamespace>
-    <AssemblyName>PackageBuilder.Domain.Tests</AssemblyName>
+    <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
