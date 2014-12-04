@@ -1,9 +1,10 @@
 ﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Fakes.Responses
 {

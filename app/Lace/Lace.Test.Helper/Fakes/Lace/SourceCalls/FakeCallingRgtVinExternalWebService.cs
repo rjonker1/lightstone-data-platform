@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Dto;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;

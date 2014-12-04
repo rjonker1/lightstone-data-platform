@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-
-
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;

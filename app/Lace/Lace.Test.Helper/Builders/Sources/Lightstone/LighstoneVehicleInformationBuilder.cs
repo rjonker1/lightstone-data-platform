@@ -2,6 +2,7 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Fakes.Responses;
+using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Builders.Sources.Lightstone
 {

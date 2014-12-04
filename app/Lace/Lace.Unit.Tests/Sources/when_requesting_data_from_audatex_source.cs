@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Shared;

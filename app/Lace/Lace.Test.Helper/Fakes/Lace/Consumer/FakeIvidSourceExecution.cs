@@ -1,8 +1,7 @@
-﻿
+﻿using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
-using Lace.Domain.DataProviders.Core;
+using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Shared;
@@ -24,7 +23,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
-            var spec = new CanHandlePackageSpecification(Services.Ivid, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Ivid, _request);
 
             if (!spec.IsSatisfied)
             {

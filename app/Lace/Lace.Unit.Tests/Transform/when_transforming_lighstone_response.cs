@@ -8,6 +8,7 @@ using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
+using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Unit.Tests.Transform
 {

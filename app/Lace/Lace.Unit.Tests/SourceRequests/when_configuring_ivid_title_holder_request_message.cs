@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;

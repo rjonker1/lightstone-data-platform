@@ -1,4 +1,4 @@
-﻿using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+﻿using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;
 using Lace.Test.Helper.Builders.Requests;

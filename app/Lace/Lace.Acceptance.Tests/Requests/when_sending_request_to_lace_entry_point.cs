@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;

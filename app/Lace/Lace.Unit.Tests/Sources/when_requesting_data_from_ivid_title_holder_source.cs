@@ -1,7 +1,6 @@
 ﻿
-
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Shared;

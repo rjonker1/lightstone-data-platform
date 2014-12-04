@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using DataPlatform.Shared.Entities;
-
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Shared;
+using PackageBuilder.Domain.Entities;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {

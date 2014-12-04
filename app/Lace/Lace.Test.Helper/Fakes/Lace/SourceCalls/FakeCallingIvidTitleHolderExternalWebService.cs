@@ -1,6 +1,5 @@
-﻿
-using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Dto;
+﻿using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;

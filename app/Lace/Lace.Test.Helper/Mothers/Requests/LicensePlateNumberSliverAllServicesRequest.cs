@@ -1,8 +1,9 @@
-﻿using DataPlatform.Shared.Entities;
+﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
-using System;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {

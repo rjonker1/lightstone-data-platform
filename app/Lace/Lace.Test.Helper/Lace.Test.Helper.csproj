@@ -35,6 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.318\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
@@ -55,32 +58,35 @@
     <Reference Include="FluentMigrator.Runner">
       <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.135\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.318\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.318\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.151\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.318\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.318\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.318\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.135\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.Public">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestHelper.1.0.0.151\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.135\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.318\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.318\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ, Version=1.0.0.135, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.135\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.RabbitMQ">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.RabbitMQ.1.0.0.318\lib\net45\Lightstone.DataPlatform.Workflow.RabbitMQ.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -91,8 +97,14 @@
     <Reference Include="Nancy.Testing">
       <HintPath>..\..\packages\Nancy.Testing.0.23.0\lib\net40\Nancy.Testing.dll</HintPath>
     </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.318\lib\net45\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.3.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -165,7 +177,7 @@
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
-    <Compile Include="Mothers\Packages\ActionMother.cs" />
+    <None Include="Mothers\Packages\ActionMother.cs.old" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
@@ -229,10 +241,6 @@
     <ProjectReference Include="..\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
       <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
       <Name>Lace.Domain.Core.Requests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
-      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
-      <Name>Lace.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj">
       <Project>{b3c39de4-4b23-4604-8732-06ed64a790b4}</Project>
