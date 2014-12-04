@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
         private readonly Mock<IRepository<Industry>> _repo = new Mock<IRepository<Industry>>();
         public override void Observe()
         {
-            var command = new CreateIndustry(Guid.NewGuid(), "Test Industry");
+            var command = new CreateIndustry(Guid.NewGuid(), "Test Industry", false);
             _handler = new CreateIndustryHandler(_repo.Object);
             //_repo.Setup(x => x.FirstOrDefault()).Returns((Industry) null);
             _handler.Handle(command);

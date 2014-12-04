@@ -14,7 +14,7 @@
     <RootNamespace>PackageBuilder.Api</RootNamespace>
     <AssemblyName>Lightstone.Dataplatform.PackageBuilder.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -129,6 +129,7 @@
       <HintPath>..\..\packages\NHibernate.Caches.SysCache.4.0.0.4000\lib\net40\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
   </ItemGroup>
@@ -257,7 +258,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12257</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:12257/</IISUrl>
+          <IISUrl>http://dev.lightstone.packagebuilder.api</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
