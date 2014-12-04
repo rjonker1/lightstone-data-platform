@@ -138,6 +138,55 @@
       </includes>
     </nuget>
 
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lace.Domain.Core.Entities</name>
+      <folder>app/Lace/source/Lace.Domain.Core.Entities</folder>
+      <author>CustomApp</author>
+      <description>Lace.Domain.Core.Entities</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.pdb" to="lib\net45"/>
+      </includes>
+    </nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lace.Domain.Core.Requests</name>
+      <folder>app/Lace/source/Lace.Domain.Core.Requests</folder>
+      <author>CustomApp</author>
+      <description>Lace.Domain.Core.Requests</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities" />
+      </dependencies>
+    </nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages</name>
+      <folder>app/Lace/source/Lace.Shared.Messages</folder>
+      <author>CustomApp</author>
+      <description>Lace.Shared.Monitoring.Messages</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.pdb" to="lib\net45"/>
+        <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Common.Logging" version="2.1.2" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="NServiceBus" version="5.0.1" />
+        <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
+        <dependency id="RabbitMQ.Client" version="3.3.5" />       
+      </dependencies>
+    </nuget>
+
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint</name>
 			<folder>app/Lace/source/Lace.Domain.Infrastructure.EntryPoint</folder>
@@ -150,6 +199,10 @@
         <inclued pattern="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.pdb" to="lib\net45" />s
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll" to="lib\net45"/>
@@ -160,6 +213,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
@@ -168,15 +223,20 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.pdb" to="lib\net45"/>
+        <include pattern="Castle.Windsor.dll" to="lib\net45" />
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
         <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Text.dll" to="lib\net45" />
-        <include pattern="NServiceBus.Core.dll" to="lib\net45" />
+        <include pattern="ServiceStack.Text.dll" to="lib\net45" />       
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2.0" />        
-				<dependency id="Lightstone.DataPlatform.Workflow" />
+				<dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="NServiceBus" version="5.0.1" />
+        <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
+				<dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
