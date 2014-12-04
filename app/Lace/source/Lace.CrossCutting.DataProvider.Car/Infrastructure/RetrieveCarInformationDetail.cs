@@ -4,6 +4,7 @@ using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {

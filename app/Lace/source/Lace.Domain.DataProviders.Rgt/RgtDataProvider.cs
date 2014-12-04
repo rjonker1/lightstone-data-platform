@@ -1,9 +1,9 @@
-﻿using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
+﻿using DataPlatform.Shared.Enums;
+using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
-using Lace.Domain.DataProviders.Core;
+using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Infrastructure;
@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Rgt
 
         public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
-            var spec = new CanHandlePackageSpecification(Services.Rgt, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Rgt, _request);
 
             if (!spec.IsSatisfied)
             {

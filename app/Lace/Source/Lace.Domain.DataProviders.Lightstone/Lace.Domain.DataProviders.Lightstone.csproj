@@ -35,6 +35,9 @@
     <Reference Include="Common.Logging">
       <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.314\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ServiceStack.Common">
       <HintPath>..\..\..\packages\ServiceStack.Common.3.9.44\lib\net35\ServiceStack.Common.dll</HintPath>
@@ -69,22 +72,6 @@
     <Compile Include="Core\Models\Sale.cs" />
     <Compile Include="Core\Models\Statistic.cs" />
     <Compile Include="Infrastructure\CallLightstoneDataProvider.cs" />
-    <Compile Include="Infrastructure\Dto\AccidentDistributionModel.cs" />
-    <Compile Include="Infrastructure\Dto\AmortisationFactorModel.cs" />
-    <Compile Include="Infrastructure\Dto\AmortisedValueModel.cs" />
-    <Compile Include="Infrastructure\Dto\AreaFactorModel.cs" />
-    <Compile Include="Infrastructure\Dto\AuctionFactorModel.cs" />
-    <None Include="Infrastructure\Dto\CarInformationRequest.cs.old" />
-    <Compile Include="Infrastructure\Dto\ConfidenceModel.cs" />
-    <Compile Include="Infrastructure\Dto\EstimatedValueModel.cs" />
-    <Compile Include="Infrastructure\Dto\FrequencyModel.cs" />
-    <Compile Include="Infrastructure\Dto\ImageGaugeModel.cs" />
-    <Compile Include="Infrastructure\Dto\PriceModel.cs" />
-    <Compile Include="Infrastructure\Dto\RepairIndexModel.cs" />
-    <Compile Include="Infrastructure\Dto\SaleModel.cs" />
-    <Compile Include="Infrastructure\Dto\TotalSalesByAgeModel.cs" />
-    <Compile Include="Infrastructure\Dto\TotalSalesByGenderModel.cs" />
-    <Compile Include="Infrastructure\Dto\Valuation.cs" />
     <Compile Include="Infrastructure\Dto\Metric\Pair.cs" />
     <Compile Include="Infrastructure\Factory\ISetupRepository.cs" />
     <Compile Include="Infrastructure\Factory\RepositoryFactory.cs" />
@@ -140,6 +127,14 @@
       <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
       <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
+      <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
+      <Name>Lace.Domain.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
@@ -158,10 +153,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Infrastructure\Dto\CarModel.cs.old" />
-    <None Include="Infrastructure\Dto\Vin12.cs.old" />
     <None Include="packages.config" />
-    <None Include="UnitOfWork\CarVendorData.cs.old" />
     <None Include="Core\Contracts\IGetCarVendor.cs.old" />
   </ItemGroup>
   <ItemGroup />

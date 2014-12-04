@@ -1,10 +1,10 @@
 ﻿using System.Configuration;
+using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
-using Lace.Domain.DataProviders.Core;
+using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure;
@@ -24,7 +24,7 @@ namespace Lace.Domain.DataProviders.Jis
 
         public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
-            var spec = new CanHandlePackageSpecification(Services.Jis, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Jis, _request);
 
             if (!spec.IsSatisfied)
             {

@@ -1,4 +1,4 @@
-﻿using Lace.Domain.Core.Dto;
+﻿using Lace.Domain.Core.Models;
 
 namespace Lace.Domain.Core.Contracts
 {

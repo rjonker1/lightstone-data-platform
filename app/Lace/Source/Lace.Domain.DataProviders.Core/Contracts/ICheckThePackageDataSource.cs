@@ -1,10 +1,10 @@
-﻿using System;
-using DataPlatform.Shared.Entities;
+﻿using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface ICheckThePackageDataSource
     {
-        bool CheckIfPackageDataSourceRequiresService(IPackage package, Guid serviceId);
+        bool CheckIfPackageDataSourceRequiresService(IPackage package, DataProviderName dataProvider);
     }
 }
