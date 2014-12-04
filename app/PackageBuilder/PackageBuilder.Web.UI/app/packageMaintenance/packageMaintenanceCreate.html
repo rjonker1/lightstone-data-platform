@@ -3,10 +3,12 @@
     <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
     <div class="col-md-6">{{dataField.name}}</div>
     <div ng-show="provider.fieldLevelCostPriceOverride == true">
-        <label class="col-md-2">Price:</label>   
+        <label class="col-md-2">Cost:</label>   
 
         <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" 
-               value="{{totalChildren(dataField.dataFields)}}" />
+               value="{{totalChildren(dataField, dataField.dataFields)}}" />
+        
+        <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price"/>
     </div>
     
     <li ng-include="'subFields_renderer.html'"></li>
@@ -21,7 +23,11 @@
             <input class="col-md-1" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
             <div class="col-md-6">{{subDF.name}}</div>
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
+                <label class="col-md-2">Cost:</label>
+                <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
+                       value="{{totalChildren(subDF, subDF.dataFields)}}" />
+
+                <input ng-if="subDF.dataFields.length <= 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
             </div>
 
             <ol ng-if="subDF.dataFields.length > 0" data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: collapsed}" style="padding-top: 35px; list-style-type: none;">

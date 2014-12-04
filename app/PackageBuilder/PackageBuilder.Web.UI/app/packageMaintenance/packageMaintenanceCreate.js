@@ -97,21 +97,43 @@
 
                     switch (listItem.fieldLevelCostPriceOverride) {
                         case true:
-
+                            //Tier 1
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
 
                                 if (listItem.dataFields[x].isSelected === true) {
 
-                                    valueTotal += listItem.dataFields[x].price;
-                                }
+                                    var parent = listItem.dataFields[x];
+                                    var children = listItem.dataFields[x].dataFields;
 
+                                    if (children.length > 0) {
+
+                                        for (var m = 0; m < children.length; m++) {
+
+                                            children[m].isSelected = false;
+                                        }
+                                    }
+
+                                    valueTotal += parent.price;
+                                }
+                                //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
 
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
-                                        valueTotal += listItem.dataFields[x].dataFields[j].price;
-                                    }
+                                        var child = listItem.dataFields[x].dataFields[j];
+                                        var subChildren = listItem.dataFields[x].dataFields[j].dataFields;
 
+                                        if (subChildren.length > 0) {
+
+                                            for (var l = 0; l < subChildren.length; l++) {
+
+                                                subChildren[l].isSelected = false;
+                                            }
+                                        }
+
+                                        valueTotal += child.price;
+                                    }
+                                    //Tier 3
                                     for (var k = 0; k < (listItem.dataFields[x].dataFields[j].dataFields).length; k++) {
 
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k].isSelected === true) {
@@ -167,7 +189,7 @@
             return valueTotal;
         };
 
-        $scope.totalChildren = function (children) {
+        $scope.totalChildren = function (parent, children) {
 
             var totalChildrenVal = 0;
 
@@ -175,6 +197,8 @@
 
                 totalChildrenVal += children[i].price;
             }
+
+            parent.price = totalChildrenVal;
 
             return totalChildrenVal;
         }
@@ -185,7 +209,13 @@
         function activate() {
             
             common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId)
-               .then(function () { log('Activated Package Maintenance View'); });
+               .then(function () {
+
+                    log('Activated Package Maintenance View');
+                    var bootFilter = [{name: "All", isSelected: true}];
+
+                    $scope.filterData(bootFilter);
+            });
         }
 
         function getDataProviders() {
