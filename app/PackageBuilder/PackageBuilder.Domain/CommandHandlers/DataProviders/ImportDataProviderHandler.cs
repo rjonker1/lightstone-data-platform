@@ -18,11 +18,11 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 
         public override void Handle(ImportDataProvider command)
         {
-            _handler.Handle(new CreateDataProvider(IvidResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, DataProviderName.Ivid.ToString(), 0d, "http://test", typeof(IProvideDataFromIvid), "Owner", DateTime.Now));
-            _handler.Handle(new CreateDataProvider(IvidTitleHolderResponseMother.Response, Guid.NewGuid(), DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d, "http://test", typeof(IProvideDataFromIvidTitleHolder), "Owner", DateTime.Now));
-            _handler.Handle(new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d, "http://test", typeof(IProvideDataFromLightstone), "Owner", DateTime.Now));
-            _handler.Handle(new CreateDataProvider(RgtResponseMother.Response, Guid.NewGuid(), DataProviderName.Rgt, DataProviderName.Rgt.ToString(), 0d, "http://test", typeof(IProvideDataFromRgt), "Owner", DateTime.Now));
-            _handler.Handle(new CreateDataProvider(RgtVinResponseMother.Response, Guid.NewGuid(), DataProviderName.RgtVin, DataProviderName.RgtVin.ToString(), 0d, "http://test", typeof(IProvideDataFromRgtVin), "Owner", DateTime.Now));
+            _handler.Handle(new CreateDataProvider(IvidResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, DataProviderName.Ivid.ToString(), 0d, typeof(IProvideDataFromIvid), "Owner", DateTime.Now));
+            _handler.Handle(new CreateDataProvider(IvidTitleHolderResponseMother.Response, Guid.NewGuid(), DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d, typeof(IProvideDataFromIvidTitleHolder), "Owner", DateTime.Now));
+            _handler.Handle(new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d, typeof(IProvideDataFromLightstone), "Owner", DateTime.Now));
+            _handler.Handle(new CreateDataProvider(RgtResponseMother.Response, Guid.NewGuid(), DataProviderName.Rgt, DataProviderName.Rgt.ToString(), 0d, typeof(IProvideDataFromRgt), "Owner", DateTime.Now));
+            _handler.Handle(new CreateDataProvider(RgtVinResponseMother.Response, Guid.NewGuid(), DataProviderName.RgtVin, DataProviderName.RgtVin.ToString(), 0d, typeof(IProvideDataFromRgtVin), "Owner", DateTime.Now));
         }
     }
 }

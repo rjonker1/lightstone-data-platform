@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
@@ -12,7 +11,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         DataProviderName Name { get; }
         string Description { get; }
         double CostOfSale { get; }
-        string SourceURL { get; }
+        SourceConfiguration SourceConfiguration { get; }
         Type ResponseType { get; }
         bool FieldLevelCostPriceOverride { get; }
         int Version { get; }

@@ -12,7 +12,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DataProviderName Name;
         public readonly string Description;
         public readonly double CostOfSale;
-        public readonly string SourceURL;
         public readonly Type ResponseType;
         public bool FieldLevelCostPriceOverride;
         public readonly State State;
@@ -23,13 +22,12 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly Type DataProviderType;
         public readonly IEnumerable<IDataField> DataFields;
 
-        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)       
+        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)       
         {
             Id = id;
             Name = name;
             Description = description;
             CostOfSale = costOfSale;
-            SourceURL = sourceUrl;
             ResponseType = responseType;
             FieldLevelCostPriceOverride = fieldLevelCostPriceOverride;
             State = state;

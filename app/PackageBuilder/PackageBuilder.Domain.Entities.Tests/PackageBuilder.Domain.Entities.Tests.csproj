@@ -68,12 +68,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataProviders\ReadModels\when_persisting_a_data_provider.cs" />
+    <Compile Include="DataProviders\when_reading_ivid_data_provider_source_configuration.cs" />
+    <Compile Include="DataProviders\when_reading_ivid_title_holder_data_provider_source_configuration.cs" />
+    <Compile Include="DataProviders\when_reading_lightstone_source_configuration.cs" />
+    <Compile Include="DataProviders\when_reading_rgt_source_configuration.cs" />
+    <Compile Include="DataProviders\when_reading_rgt_vin_source_configuration.cs" />
     <Compile Include="Industries\WriteModels\when_persisting_a_industry.cs" />
     <Compile Include="States\WriteModels\when_persisting_a_state.cs" />
     <Compile Include="Packages\ReadModels\when_persisting_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\PackageBuilder.Api\appSettings.config">
+      <Link>appSettings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\PackageBuilder.Api\connectionStrings.config">
+      <Link>connectionStrings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

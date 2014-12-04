@@ -23,8 +23,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public string Description { get; internal set; }
         [DataMember]
         public double CostOfSale { get; internal set; }
-        [DataMember]
-        public string SourceURL { get; internal set; }
+
+        public SourceConfiguration SourceConfiguration
+        {
+            get
+            {
+                return new SourceConfiguration(Name);
+            }
+        }
+
         [DataMember]
         public Type ResponseType { get; internal set; }
         [DataMember]
@@ -57,15 +64,15 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             DataFields = dataFields;
         }
 
-        public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> dataFields) 
+        public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
-            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, sourceUrl, responseType, owner, createdDate, dataFields));
+            RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, dataFields));
         }
 
-        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
+        public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
         {
-            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, sourceUrl, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, dataFields));
+            RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, dataFields));
         }
 
         private void Apply(DataProviderCreated @event)
@@ -74,7 +81,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Name = @event.Name;
             Description = @event.Description;
             CostOfSale = @event.CostPrice;
-            SourceURL = @event.SourceURL;
             ResponseType = @event.ResponseType;
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
@@ -87,7 +93,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Name = @event.Name;
             Description = @event.Description;
             CostOfSale = @event.CostPrice;
-            SourceURL = @event.SourceURL;
+            //SourceConfiguration = new SourceConfiguration(@event.Name);
             ResponseType = @event.ResponseType;
             FieldLevelCostPriceOverride = @event.FieldLevelCostPriceOverride;
             Owner = @event.Owner;

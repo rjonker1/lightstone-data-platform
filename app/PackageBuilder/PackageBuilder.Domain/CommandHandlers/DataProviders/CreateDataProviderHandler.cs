@@ -30,7 +30,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var dataFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
 
             var entity = new DataProvider(command.Id, command.Name,
-                command.Description, command.CostOfSale, command.SourceURL, command.ResponseType,
+                command.Description, command.CostOfSale, command.ResponseType,
                 command.Owner, command.CreatedDate, dataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());

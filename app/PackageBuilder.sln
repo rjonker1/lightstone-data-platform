@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.TestObjects", "PackageBuilder\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj", "{E399E536-36B5-4281-AB56-E4D2CC90DBE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Domain.Core.Tests", "PackageBuilder\PackageBuilder.Domain.Core.Tests\PackageBuilder.Domain.Core.Tests.csproj", "{28A62149-CE96-49DB-8B15-3EE06474216F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -220,6 +222,16 @@ Global
 		{E399E536-36B5-4281-AB56-E4D2CC90DBE5}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{E399E536-36B5-4281-AB56-E4D2CC90DBE5}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{E399E536-36B5-4281-AB56-E4D2CC90DBE5}.Test|Any CPU.Build.0 = Release|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{28A62149-CE96-49DB-8B15-3EE06474216F}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,5 +251,6 @@ Global
 		{C9E1C926-194D-4A77-8996-74A382EF84B5} = {73833E03-2987-442D-97A5-D07042F5ADC8}
 		{92913FFD-F6E3-46AE-9DC6-05D03310F191} = {DF3E7FF0-2F50-44F3-8C27-DCF335E3F343}
 		{0ADF60E7-7B08-48EF-A112-1F20C696232D} = {7C37EE9F-C8FA-4395-B515-68D062335FE4}
+		{28A62149-CE96-49DB-8B15-3EE06474216F} = {DF3E7FF0-2F50-44F3-8C27-DCF335E3F343}
 	EndGlobalSection
 EndGlobal

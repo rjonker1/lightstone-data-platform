@@ -22,6 +22,8 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         [DataMember]
         public double RecommendedSalePrice { get; set; }
         [DataMember]
+        public IAction Action { get; private set; }
+        [DataMember]
         public string Notes { get; set; }
         [DataMember]
         public IEnumerable<Industry> Industries { get; internal set; }

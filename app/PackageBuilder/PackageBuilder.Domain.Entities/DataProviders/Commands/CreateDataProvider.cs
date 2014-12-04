@@ -12,7 +12,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DataProviderName Name;
         public readonly string Description;
         public readonly double CostOfSale;
-        public readonly string SourceURL;
         public readonly Type ResponseType;
         public readonly State State;
         public readonly string Owner;
@@ -20,14 +19,13 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, double costOfSale, string sourceUrl, Type responseType, string owner, DateTime createdDate)
+        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate)
         {
             DataProvider = dataProvider;
 			Id = id;
 			Name = name;
             Description = description;
             CostOfSale = costOfSale;
-            SourceURL = sourceUrl;
             ResponseType = responseType;
             Owner = owner;
             CreatedDate = createdDate;

@@ -134,6 +134,7 @@
       <HintPath>..\..\packages\NHibernate.Caches.SysCache.4.0.0.4000\lib\net40\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
   </ItemGroup>
@@ -181,33 +182,41 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\index.cshtml" />
-    <Content Include="AppSettings.config">
+    <None Include="appSettings.config">
       <TransformOnBuild>true</TransformOnBuild>
-    </Content>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="readme.md" />
     <Content Include="log4net.config" />
     <None Include="AppSettings.Debug.config">
-      <DependentUpon>AppSettings.config</DependentUpon>
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.Dev.config">
-      <DependentUpon>AppSettings.config</DependentUpon>
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.Release.config">
-      <DependentUpon>AppSettings.config</DependentUpon>
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <None Include="AppSettings.TeamCity.config">
-      <DependentUpon>AppSettings.config</DependentUpon>
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppSettings.Test.config">
-      <DependentUpon>AppSettings.config</DependentUpon>
+      <DependentUpon>appSettings.config</DependentUpon>
       <IsTransformFile>True</IsTransformFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="connectionStrings.config" />
+    <None Include="connectionStrings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

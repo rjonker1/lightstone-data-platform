@@ -18,7 +18,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         string Owner { get; }
         double CostOfSale { get; }
         double RecommendedSalePrice { get; }
-        //IAction Action { get; }
+        IAction Action { get; }
         IEnumerable<IDataProvider> DataProviders { get; }
         //IEnumerable<IWorkflow> Workflows { get; }
     }

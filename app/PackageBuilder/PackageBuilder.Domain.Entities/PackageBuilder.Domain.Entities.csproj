@@ -71,6 +71,7 @@
     <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\IDataProvider.cs" />
+    <Compile Include="DataProviders\WriteModels\SourceConfiguration.cs" />
     <Compile Include="Enums\StateName.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupPackage.cs" />

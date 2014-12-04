@@ -51,8 +51,10 @@ namespace PackageBuilder.Api.Modules
             {
                 var dto = this.Bind<DataProviderDto>();
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
-                bus.Publish(new UpdateDataProvider(parameters.id, (DataProviderName)Enum.Parse(typeof(DataProviderName), dto.Name, true), dto.Description, dto.CostOfSale,
-                    "http://test.com", typeof(DataProviderDto), dto.FieldLevelCostPriceOverride, stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dFields));
+                bus.Publish(new UpdateDataProvider(parameters.id,
+                    (DataProviderName) Enum.Parse(typeof (DataProviderName), dto.Name, true), dto.Description,
+                    dto.CostOfSale, typeof (DataProviderDto), dto.FieldLevelCostPriceOverride,
+                    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
             };
