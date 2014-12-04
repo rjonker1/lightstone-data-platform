@@ -5,8 +5,8 @@ using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
+using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Management;
@@ -60,7 +60,6 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Anpr Web Service {0}", ex.Message);
-               // monitoring.PublishFailedSourceCallMessage(Source);
                 AnprResponseFailed(response);
             }
         }

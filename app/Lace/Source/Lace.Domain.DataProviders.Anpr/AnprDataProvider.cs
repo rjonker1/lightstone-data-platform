@@ -1,7 +1,7 @@
-﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Dto;
-using Lace.Domain.DataProviders.Core;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Shared;
@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.Anpr
 
         public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
-            var spec = new CanHandlePackageSpecification(Services.Anpr, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Anpr, _request);
 
             if (!spec.IsSatisfied)
             {

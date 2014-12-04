@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;

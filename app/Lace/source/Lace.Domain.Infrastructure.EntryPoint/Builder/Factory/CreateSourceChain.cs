@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Common.Logging;
-using DataPlatform.Shared.Entities;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Specification;
 using Lace.Shared.Monitoring.Messages.Shared;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
 {
@@ -24,11 +24,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
         {
             if (string.IsNullOrEmpty(_package.Action.Name))
             {
-                Log.Error("Action for request is empty. Source chain cannot be built");
+                Log.Error("Package Name for request is empty. Source chain cannot be built");
                 throw new Exception("Action for request is empty");
             }
 
-            Log.ErrorFormat("Building source chain for acton {0}", _package.Action.Name);
+            Log.ErrorFormat("Building source chain for action {0}", _package.Action.Name);
 
             SourceChain =
                 new DataProviderSpecification().Specifications.SingleOrDefault(

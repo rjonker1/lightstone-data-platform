@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto

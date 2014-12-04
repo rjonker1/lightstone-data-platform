@@ -1,6 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Dto;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Core.Contracts;
 

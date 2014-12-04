@@ -1,6 +1,6 @@
 ﻿using System;
-using DataPlatform.Shared.Entities;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 
@@ -74,14 +74,6 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return "XMC167GP";
             }
         }
-
-        //public ILaceRequestCarInformation CarInformation
-        //{
-        //    get
-        //    {
-        //        return new RequestCarInformationForCarHavingId107483();
-        //    }
-        //}
       
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 
@@ -48,9 +49,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 return _bootstrap.LaceResponses ?? EmptyResponse;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //_monitoring.PublishLaceRequestWasNotProcessedAndErrorHasBeenLoggedMessage(LaceEventSource.EntryPoint);
+                _monitoring.DataProviderFault(DataProvider.EntryPoint, string.Format("Error {0}", ex.Message),
+                    request.ObjectToJson());
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;

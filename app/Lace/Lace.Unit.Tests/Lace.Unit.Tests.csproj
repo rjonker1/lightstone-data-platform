@@ -120,6 +120,14 @@
       <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
       <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
+      <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
+      <Name>Lace.Domain.Core.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
