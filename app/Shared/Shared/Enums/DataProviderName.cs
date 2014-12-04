@@ -7,5 +7,8 @@
         Rgt,
         RgtVin,
         Lightstone,
+        Audatex,
+        Jis,
+        Anpr
     }
 }
