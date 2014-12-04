@@ -50,27 +50,9 @@
 
         $scope.filteredConstraint = '';
 
-        //$scope.filterIndustry = function (fields) {
-
-        //    if (filterVal != 'All') {
-        //        return fields.industry === filterVal;
-        //    }
-
-        //    return fields;
-        //};
-
-       //$scope.filterData = function(filter) {
-
-       //    filterVal = filter.name;
-       // }
-
         $scope.filterIndustry = function (field) {
 
             var fieldIndustries = field.industries;
-
-            //console.log(field);
-            //console.log(filterVal);
-
 
             for (var i = 0; i < fieldIndustries.length; i++) {
 
@@ -78,41 +60,19 @@
 
                     if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
 
-                        console.log(field.name);
                         return field;
                     }
 
-                    //if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
-
-                    //    console.log(field.name);
-                    //    return field;
-                    //}
                 }
 
             }
             
-
-            //if (filterVal != 'All') {
-            //    return fields.industry === filterVal;
-            //}
             return null;
         };
 
         $scope.filterData = function (filterIndustries) {
 
-            //var industries = $scope.industries;
-
             filterVal = filterIndustries;
-
-            //for (var i = 0; i < (industries).length ; i++) {
-
-            //    if (industries[i].name === filter.name) {
-
-            //        filterVal = filter;
-            //    }
-
-            //}
-
         }
 
         $scope.total = function () {
@@ -206,6 +166,19 @@
 
             return valueTotal;
         };
+
+        $scope.totalChildren = function (children) {
+
+            var totalChildrenVal = 0;
+
+            for (var i = 0; i < children.length; i++) {
+
+                totalChildrenVal += children[i].price;
+            }
+
+            return totalChildrenVal;
+        }
+
 
         activate();
       
