@@ -50,7 +50,6 @@
     <Compile Include="Infrastructure\Configuration\ConfigureAudatexRequestMessage.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureAudatexSource.cs" />
     <Compile Include="Infrastructure\Configuration\SerializeAuduatexRequestData.cs" />
-    <Compile Include="Infrastructure\Dto\AccidentClaim.cs" />
     <Compile Include="Infrastructure\Dto\AudatexMessageData.cs" />
     <Compile Include="Infrastructure\Dto\AudatexRequest.cs" />
     <Compile Include="Infrastructure\Dto\HistoryCheckRequestBody.cs" />

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using DataPlatform.Shared.Entities;
+﻿using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.DataProviders.Core.Contracts;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Domain.DataProviders.Core.Shared
 {
@@ -18,16 +18,16 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        public bool CheckIfPackageDataSourceRequiresService(IPackage package, Guid serviceId)
+        public bool CheckIfPackageDataSourceRequiresService(IPackage package, DataProviderName dataProvider)
         {
-            if (package == null || package.DataSets == null) return false;
+            if (package == null || package.DataProviders == null || !package.DataProviders.Any()) return false;
 
-            foreach (var dataSet in package.DataSets)
-            {
-                if (dataSet.DataFields.FirstOrDefault(w => w.DataProvider.Id == serviceId) != null) return true;
-            }
+            return package.DataProviders.FirstOrDefault(w => w.Name == dataProvider) != null;
 
-            return false;
+            //foreach (var dataSet in package.DataSets)
+            //{
+            //    if (dataSet.DataFields.FirstOrDefault(w => w.DataProvider.Id == serviceId) != null) return true;
+            //}
         }
     }
 }

@@ -1,25 +1,25 @@
-﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
+﻿using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 
 namespace Lace.Domain.DataProviders.Core.Consumer
 {
     public class CanHandlePackageSpecification
     {
-        private readonly Guid _service;
+        private readonly DataProviderName _dataProvider;
         private readonly ILaceRequest _request;
 
         public bool IsSatisfied
         {
             get
             {
-                return CheckThePackageDataSource.PackageDataSourceChecks.CheckIfPackageDataSourceRequiresService(_request.Package, _service);
+                return CheckThePackageDataSource.PackageDataSourceChecks.CheckIfPackageDataSourceRequiresService(_request.Package, _dataProvider);
             }
         }
 
-        public CanHandlePackageSpecification(Guid service, ILaceRequest request)
+        public CanHandlePackageSpecification(DataProviderName dataProvider, ILaceRequest request)
         {
-            _service = service;
+            _dataProvider = dataProvider;
             _request = request;
         }
     }

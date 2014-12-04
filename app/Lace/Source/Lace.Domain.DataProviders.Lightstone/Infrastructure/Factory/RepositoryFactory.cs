@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Repositories;
 using ServiceStack.Redis;
