@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Core.Events;
+using PackageBuilder.Domain.Entities.Industries.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider;
 
@@ -10,7 +11,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
     {
         public readonly string Name;
         public readonly string Description;
-        public readonly string Industry;
+        public readonly IEnumerable<Industry> Industries;
         public readonly double CostPrice;
         public readonly double SalePrice;
         public readonly State State;
@@ -20,12 +21,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly DateTime? EditedDate;
         public readonly IEnumerable<IDataProvider> DataProviders;
 
-        public PackageCreated(Guid id, string name, string description, string industry, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public PackageCreated(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
         {
             Id = id;
             Name = name;
             Description = description;
-            Industry = industry;
+            Industries = industries;
             CostPrice = costPrice;
             SalePrice = salePrice;
             State = state;

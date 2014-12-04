@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.Domain.Dtos
 {
@@ -11,7 +12,7 @@ namespace PackageBuilder.Domain.Dtos
         public string State { get; set; }
         public int Version { get; set; }
         public decimal DisplayVersion { get; set; }
-        public string Industry { get; set; }
+        public IEnumerable<Industry> Industries { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime EditedDate { get; set; }
         public string Owner { get; set; }

@@ -27,7 +27,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
 
             var entity = _writeRepo.GetById(command.Id);
-            entity.CreatePackageRevision(command.Id, command.Name, command.Description, command.Industry, command.CostPrice,
+            entity.CreatePackageRevision(command.Id, command.Name, command.Description, command.Industries, command.CostPrice,
                 command.SalePrice, command.State, command.Owner,
                 command.CreatedDate, command.EditedDate, command.DataProviders);
 

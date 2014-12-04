@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Entities.Enums;
+using PackageBuilder.Domain.Entities.Industries.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.Packages.WriteModels
@@ -13,7 +13,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         DateTime CreatedDate { get; }
         int Version { get; }
         decimal DisplayVersion { get; }
-        string Industry { get; }
+        IEnumerable<Industry> Industries { get; }
         string Description { get; }
         string Owner { get; }
         double CostOfSale { get; }

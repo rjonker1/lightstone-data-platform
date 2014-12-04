@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
         private readonly Mock<IRepository<Industry>> _repo = new Mock<IRepository<Industry>>();
         public override void Observe()
         {
-            _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(IndustryMother.BankIndustry);
+            _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(IndustryMother.Finance);
             _renameHandler = new RenameIndustryHandler(_repo.Object);
 
             var renameCommand = new RenameIndustry(Guid.NewGuid(), "Test Industry 2", false);

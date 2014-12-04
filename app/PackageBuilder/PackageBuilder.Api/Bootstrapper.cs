@@ -26,7 +26,7 @@ namespace PackageBuilder.Api
             var handler = container.Resolve<IHandleMessages>();
 
             //Defaulted Industry for Datafield wireups
-            handler.Handle(new CreateIndustry(new Guid(), "All", false));
+            handler.Handle(new CreateIndustry(new Guid(), "All", true));
 
             //Import DataProviders
             handler.Handle(new ImportDataProvider());
