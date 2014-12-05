@@ -23,8 +23,8 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_rgt_vin()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
          
             _request = new LicensePlateRequestBuilder().ForRgtVin();
             //_laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);

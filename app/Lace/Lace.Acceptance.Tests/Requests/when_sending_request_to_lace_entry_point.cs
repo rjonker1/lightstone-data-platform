@@ -19,8 +19,8 @@ namespace Lace.Acceptance.Tests.Requests
         {
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
            // _entryPoint = new EntryPointService(publisher);
         }

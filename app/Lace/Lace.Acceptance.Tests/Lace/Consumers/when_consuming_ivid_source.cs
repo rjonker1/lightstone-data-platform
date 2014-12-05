@@ -19,8 +19,8 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_ivid_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
             _request = new LicensePlateNumberIvidOnlyRequest();
 

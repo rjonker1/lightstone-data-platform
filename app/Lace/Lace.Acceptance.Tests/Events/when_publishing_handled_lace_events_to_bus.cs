@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Threading;
-using EasyNetQ;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Workflow;
-using Workflow.BuildingBlocks;
-using Workflow.RabbitMQ;
+using NServiceBus;
+using NServiceBus.Transports;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Events
@@ -32,8 +30,8 @@ namespace Lace.Acceptance.Tests.Events
             {
               
                 //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
-                _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
-                _publishMessages = new Publisher(_bus);
+                //_bus = BusFactory.CreateBus("monitor-event-tracking/queue");
+               // _publishMessages = new Publisher(_bus);
                // _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
 
             }

@@ -22,8 +22,8 @@ namespace Lace.Unit.Tests.Sources
 
         public when_requesting_data_from_ivid_title_holder_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
 
             _requestDataFromService = new RequestDatafromIvidTitleHolderSource();

@@ -21,8 +21,8 @@ namespace Lace.Unit.Tests.Sources
 
         public when_requesting_data_from_rgt_vin_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
             
             _requestDataFromService = new RequestDataFromIvidSource();
             _rgtVinRequest = new LicensePlateRequestBuilder().ForRgtVin();

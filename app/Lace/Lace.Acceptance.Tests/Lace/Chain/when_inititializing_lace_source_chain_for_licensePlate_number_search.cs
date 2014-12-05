@@ -25,8 +25,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
             
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
