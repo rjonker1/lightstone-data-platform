@@ -72,7 +72,6 @@
     <Compile Include="Core\Models\Sale.cs" />
     <Compile Include="Core\Models\Statistic.cs" />
     <Compile Include="Infrastructure\CallLightstoneDataProvider.cs" />
-    <Compile Include="Infrastructure\Dto\Metric\Pair.cs" />
     <Compile Include="Infrastructure\Factory\ISetupRepository.cs" />
     <Compile Include="Infrastructure\Factory\RepositoryFactory.cs" />
     <Compile Include="Infrastructure\HandleLightstoneSourceCall.cs" />

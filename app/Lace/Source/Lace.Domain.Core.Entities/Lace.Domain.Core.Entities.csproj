@@ -61,6 +61,7 @@
     <Compile Include="JisResponseHandled.cs" />
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="LightstoneResponseHandled.cs" />
+    <Compile Include="Pair.cs" />
     <Compile Include="PriceModel.cs" />
     <Compile Include="RepairIndexModel.cs" />
     <Compile Include="RgtResponse.cs" />

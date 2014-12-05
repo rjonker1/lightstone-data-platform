@@ -3,7 +3,6 @@ using System.Linq;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto.Metric;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 {
