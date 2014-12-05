@@ -32,13 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.319\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.319\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.319\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
@@ -64,7 +73,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <None Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs.undo" />
+    <Compile Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs" />
     <None Include="Lace\Consumer\when_sending_external_source_events_to_monitoring_bus.cs.old" />
     <None Include="Lace\Consumer\when_sending_external_source_failure_event_to_monitoring_bus.cs.old" />
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
