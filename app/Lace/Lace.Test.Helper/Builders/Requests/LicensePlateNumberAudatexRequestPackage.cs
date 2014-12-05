@@ -1,4 +1,5 @@
-﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
+﻿using System;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -6,7 +7,11 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-          
+            //var action = new  PackageBuilder.Domain.Entities.Action("License plate search");
+            //var package = new Package(Guid.NewGuid())
+
+            //package.Action = action;
+
             return null;
             //return new Package("License plate lookup package")
             //{
