@@ -51,7 +51,8 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         }
 
         //TODO: Remove - Constructor used for testing in LACE
-        public Package(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders) 
+            : this(id)
         {
             Id = id;
             Name = name;
