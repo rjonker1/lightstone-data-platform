@@ -3,7 +3,7 @@ using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
+using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {

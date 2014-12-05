@@ -58,6 +58,10 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.319, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.319\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
@@ -88,34 +92,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Builders\Entites\ActionBuilder.cs" />
-    <Compile Include="Builders\Entites\ContractBuilder.cs" />
-    <Compile Include="Builders\Entites\ContractPackageBuilder.cs" />
-    <Compile Include="Builders\Entites\CustomerBuilder.cs" />
-    <Compile Include="Builders\Entites\DataFieldBuilder.cs" />
-    <Compile Include="Builders\Entites\ReadDataProviderBuilder.cs" />
-    <Compile Include="Builders\Entites\ReadPackageBuilder.cs" />
-    <Compile Include="Builders\Entites\WriteDataProviderBuilder.cs" />
-    <Compile Include="Builders\Entites\GroupBuilder.cs" />
-    <Compile Include="Builders\Entites\GroupPackageBuilder.cs" />
-    <Compile Include="Builders\Entites\IndustryBuilder.cs" />
-    <Compile Include="Builders\Entites\PackageBuilder.cs" />
-    <Compile Include="Builders\Entites\RoleBuilder.cs" />
-    <Compile Include="Builders\Entites\RolePackageBuilder.cs" />
-    <Compile Include="Builders\Entites\StateBuilder.cs" />
-    <Compile Include="Builders\Entites\UserBuilder.cs" />
-    <Compile Include="Builders\Entites\UserPackageBuilder.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="Mothers\ActionMother.cs" />
-    <Compile Include="Mothers\ContractMother.cs" />
-    <Compile Include="Mothers\DataFieldMother.cs" />
-    <Compile Include="Mothers\ReadDataProviderMother.cs" />
-    <Compile Include="Mothers\ReadPackageMother.cs" />
-    <Compile Include="Mothers\WriteDataProviderMother.cs" />
-    <Compile Include="Mothers\IndustryMother.cs" />
-    <Compile Include="Mothers\PackageMother.cs" />
-    <Compile Include="Mothers\StateMother.cs" />
-    <Compile Include="Mothers\UserMother.cs" />
     <Compile Include="DbPersistence\when_persisting_entities_to_db.cs" />
     <Compile Include="InMemoryPersistence\when_persisting_entities_to_memory.cs" />
   </ItemGroup>
@@ -132,6 +109,7 @@
   <ItemGroup>
     <Folder Include="Builders\Repositories\" />
     <Folder Include="Fakes\" />
+    <Folder Include="Mothers\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class StateBuilder
     {

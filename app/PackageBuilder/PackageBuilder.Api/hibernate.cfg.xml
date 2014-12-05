@@ -10,6 +10,5 @@
     <property name="cache.use_query_cache">true</property>
     <property name="current_session_context_class">web</property>
     <property name="show_sql">true</property>
-    <mapping assembly="PackageBuilder.Domain.Entities" />
   </session-factory>
 </hibernate-configuration>

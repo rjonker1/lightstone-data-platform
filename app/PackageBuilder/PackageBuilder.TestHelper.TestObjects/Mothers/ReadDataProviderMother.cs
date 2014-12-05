@@ -1,9 +1,9 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
-using PackageBuilder.TestHelper.Builders.Entites;
+using PackageBuilder.TestObjects.Builders;
 
-namespace PackageBuilder.TestHelper.Mothers
+namespace PackageBuilder.TestObjects.Mothers
 {
     public class ReadDataProviderMother
     {

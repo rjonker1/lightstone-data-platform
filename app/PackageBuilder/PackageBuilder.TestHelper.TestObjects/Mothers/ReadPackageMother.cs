@@ -1,9 +1,9 @@
 ﻿using System;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
-using PackageBuilder.TestHelper.Builders.Entites;
+using PackageBuilder.TestObjects.Builders;
 
-namespace PackageBuilder.TestHelper.Mothers
+namespace PackageBuilder.TestObjects.Mothers
 {
     public class ReadPackageMother
     {

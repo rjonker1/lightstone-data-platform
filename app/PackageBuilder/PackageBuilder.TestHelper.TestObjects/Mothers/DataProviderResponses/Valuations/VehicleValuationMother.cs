@@ -1,8 +1,8 @@
 ﻿using DataPlatform.Shared.Helpers.Builders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using PackageBuilder.TestHelper.Builders.Builders.DataProviderResponses;
+using PackageBuilder.TestObjects.Builders.DataProviderResponses;
 
-namespace PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses.Valuations
+namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
 {
     public class VehicleValuationMother
     {

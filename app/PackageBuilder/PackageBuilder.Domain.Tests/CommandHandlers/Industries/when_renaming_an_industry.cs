@@ -4,7 +4,7 @@ using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers.Industries;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using PackageBuilder.TestHelper.Mothers;
+using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries

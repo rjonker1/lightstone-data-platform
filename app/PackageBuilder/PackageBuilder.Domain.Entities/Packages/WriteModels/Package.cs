@@ -14,35 +14,34 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
     public class Package : AggregateBase, IPackage
     {
         [DataMember]
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
         [DataMember]
-        public string Description { get; private set; }
+        public string Description { get; internal set; }
         [DataMember]
-        public double CostOfSale { get; set; }
+        public double CostOfSale { get; internal set; }
         [DataMember]
-        public double RecommendedSalePrice { get; set; }
+        public double RecommendedSalePrice { get; internal set; }
         [DataMember]
-        public IAction Action { get; private set; }
+        public IAction Action { get; internal set; }
         [DataMember]
-        public string Notes { get; set; }
+        public string Notes { get; internal set; }
         [DataMember]
         public IEnumerable<Industry> Industries { get; internal set; }
         [DataMember]
-        public State State { get; private set; }
+        public State State { get; internal set; }
         [DataMember]
-        public decimal DisplayVersion { get; private set; }
+        public decimal DisplayVersion { get; internal set; }
         [DataMember]
-        public string Owner { get; private set; }
+        public string Owner { get; internal set; }
         [DataMember]
-        public DateTime CreatedDate { get; private set; }
+        public DateTime CreatedDate { get; internal set; }
         [DataMember]
-        public DateTime? EditedDate { get; private set; }
-
+        public DateTime? EditedDate { get; internal set; }
         [DataMember]
-        public IEnumerable<IDataProvider> DataProviders { get; private set; }
+        public IEnumerable<IDataProvider> DataProviders { get; internal set; }
 
         //Used for serialization
-        protected Package() { }
+        internal Package() { }
 
         //Used by NEventstore
         private Package(Guid id)
@@ -50,7 +49,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Id = id;
         }
 
-        public Package(Guid id, string name, State state ,IEnumerable<IDataProvider> dataProviders) 
+        public Package(Guid id, string name, State state, IEnumerable<IDataProvider> dataProviders) 
             : this(id)
         {
             Id = id;

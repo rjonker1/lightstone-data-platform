@@ -2,7 +2,7 @@
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class ReadDataProviderBuilder
     {

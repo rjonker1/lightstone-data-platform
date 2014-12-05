@@ -1,7 +1,7 @@
 ﻿using PackageBuilder.Domain.Entities;
-using PackageBuilder.TestHelper.Builders.Entites;
+using PackageBuilder.TestObjects.Builders;
 
-namespace PackageBuilder.TestHelper.Mothers
+namespace PackageBuilder.TestObjects.Mothers
 {
     public class ContractMother
     {

@@ -1,6 +1,6 @@
 ﻿using PackageBuilder.Domain.Entities;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class RoleBuilder
     {

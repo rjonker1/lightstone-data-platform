@@ -1,7 +1,7 @@
 ﻿using System;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class IndustryBuilder
     {

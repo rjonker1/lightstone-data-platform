@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.TestHelper.Mothers;
+using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.AutoMappers.Dtos

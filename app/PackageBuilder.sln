@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.TestObjects"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.Domain.Core.Tests", "PackageBuilder\PackageBuilder.Domain.Core.Tests\PackageBuilder.Domain.Core.Tests.csproj", "{28A62149-CE96-49DB-8B15-3EE06474216F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageBuilder.TestObjects.Tests", "PackageBuilder\PackageBuilder.TestObjects.Tests\PackageBuilder.TestObjects.Tests.csproj", "{57107728-21D3-4F89-A717-62337678C762}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -232,6 +234,16 @@ Global
 		{28A62149-CE96-49DB-8B15-3EE06474216F}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{28A62149-CE96-49DB-8B15-3EE06474216F}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{28A62149-CE96-49DB-8B15-3EE06474216F}.Test|Any CPU.Build.0 = Release|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Dev|Any CPU.Build.0 = Debug|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{57107728-21D3-4F89-A717-62337678C762}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

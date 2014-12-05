@@ -1,7 +1,7 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders;
-using PackageBuilder.TestHelper.Builders.Builders.DataProviderResponses;
+using PackageBuilder.TestObjects.Builders.DataProviderResponses;
 
-namespace PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses
+namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses
 {
     public class VehicleSpecificInformationMother
     {

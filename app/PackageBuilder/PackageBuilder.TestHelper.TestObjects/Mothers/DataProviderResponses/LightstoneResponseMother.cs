@@ -1,8 +1,8 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders;
-using PackageBuilder.TestHelper.Builders.Builders.DataProviderResponses;
-using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses.Valuations;
+using PackageBuilder.TestObjects.Builders.DataProviderResponses;
+using PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations;
 
-namespace PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses
+namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses
 {
     public class LightstoneResponseMother
     {

@@ -5,7 +5,7 @@ using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.InMemoryPersistence;
-using PackageBuilder.TestHelper.Mothers;
+using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Infrastructure.Tests.Repositories.Base

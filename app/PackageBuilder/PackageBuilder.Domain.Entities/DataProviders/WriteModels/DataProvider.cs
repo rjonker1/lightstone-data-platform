@@ -93,7 +93,6 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Name = @event.Name;
             Description = @event.Description;
             CostOfSale = @event.CostPrice;
-            //SourceConfiguration = new SourceConfiguration(@event.Name);
             ResponseType = @event.ResponseType;
             FieldLevelCostPriceOverride = @event.FieldLevelCostPriceOverride;
             Owner = @event.Owner;

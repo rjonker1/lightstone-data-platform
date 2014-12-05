@@ -2,7 +2,7 @@
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
 
-namespace PackageBuilder.TestHelper.Builders.Builders.DataProviderResponses
+namespace PackageBuilder.TestObjects.Builders.DataProviderResponses
 {
     public class VehicleValuationBuilder
     {

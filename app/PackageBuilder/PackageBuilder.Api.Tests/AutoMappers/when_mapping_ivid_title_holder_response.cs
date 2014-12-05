@@ -6,7 +6,7 @@ using Castle.Windsor;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
+using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.AutoMappers

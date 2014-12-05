@@ -2,7 +2,7 @@
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class ContractPackageBuilder
     {

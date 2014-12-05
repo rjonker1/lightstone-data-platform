@@ -1,7 +1,7 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using PackageBuilder.TestHelper.Builders.Builders.DataProviderResponses.Valuations;
+using PackageBuilder.TestObjects.Builders.DataProviderResponses.Valuations;
 
-namespace PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses.Valuations
+namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations
 {
     public class AmortisedValueModelMother
     {

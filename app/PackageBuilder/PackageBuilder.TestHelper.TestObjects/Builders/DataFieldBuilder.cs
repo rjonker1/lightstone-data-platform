@@ -3,7 +3,7 @@ using System.Linq;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class DataFieldBuilder
     {

@@ -6,7 +6,7 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.TestHelper.Builders.Mothers.DataProviderResponses;
+using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders

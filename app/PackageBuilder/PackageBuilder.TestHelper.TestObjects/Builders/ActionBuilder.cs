@@ -1,7 +1,7 @@
 ﻿using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
-namespace PackageBuilder.TestHelper.Builders.Entites
+namespace PackageBuilder.TestObjects.Builders
 {
     public class ActionBuilder
     {
