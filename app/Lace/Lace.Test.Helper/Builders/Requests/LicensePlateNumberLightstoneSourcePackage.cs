@@ -1,4 +1,9 @@
-﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
+﻿using System;
+using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -6,29 +11,12 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return null;
-            //return new Package("License plate lookup package")
-            //{
-            //    DataSets =
-            //        new[]
-            //        {
-            //            new DataSet("License plate lookup DataSet")
-            //            {
-            //                DataFields = new[]
-            //                {
+            var dataProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.Lightstone, 0.00, false, new List<IDataField>() {});
 
-            //                    new DataFieldBuilder().With("AmortisationFactors").With(DataSourceMother.LightstoneDataSource).Build(),
-            //                    new DataFieldBuilder().With("AreaFactors").With(DataSourceMother.LightstoneDataSource).Build(),
-            //                    new DataFieldBuilder().With("AccidentDistribution").With(DataSourceMother.LightstoneDataSource).Build(),
-            //                    new DataFieldBuilder().With("RepairIndexModel").With(DataSourceMother.LightstoneDataSource).Build(),
-            //                    new DataFieldBuilder().With("EstimatedValue").With(DataSourceMother.LightstoneDataSource).Build(),
-            //                    new DataFieldBuilder().With("LastFiveSales").With(DataSourceMother.LightstoneDataSource).Build(),
-            //                    new DataFieldBuilder().With("AmortisedValues").With(DataSourceMother.LightstoneDataSource).Build()
-            //                }
-            //            }
-            //        },
-            //    Action = ActionMother.LicensePlateSearchAction
-            //};
+            return new Package(Guid.NewGuid(), "License plate search",
+                new PackageBuilder.Domain.Entities.Action("License plate search"),
+                new List<IDataProvider>() {dataProvider});
         }
     }
 }

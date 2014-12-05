@@ -1,4 +1,9 @@
-﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
+﻿using System;
+using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -6,54 +11,36 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-           // return PackageBuilder.TestHelper.Mothers.PackageMother.LicensePlateSearchPackage;
-            return null;
 
-            //return new Package("License plate lookup package")
-            //{
-            //    DataSets =
-            //        new[]
-            //        {
-            //            new DataSet("License plate lookup DataSet")
-            //            {
-            //                DataFields = new[]
-            //                {
+            var audatexProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.Audatex, 0.00, false, new List<IDataField>() {});
 
-            //                    new DataFieldBuilder().With("Registration")
-            //                        .With(DataSourceMother.IvidDataSource)
-            //                        .Build(),
-            //                    new DataFieldBuilder().With("Vin").With(DataSourceMother.IvidDataSource).Build(),
-            //                    new DataFieldBuilder().With("Engine").With(DataSourceMother.IvidDataSource).Build(),
-            //                    new DataFieldBuilder().With("MakeDescription")
-            //                        .With(DataSourceMother.IvidDataSource)
-            //                        .Build(),
+            var lightstoneProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.Lightstone, 0.00, false, new List<IDataField>() {});
 
-            //                    new DataFieldBuilder().With("BankName")
-            //                        .With(DataSourceMother.IvidTitleHolderDataSource)
-            //                        .Build(),
-            //                    new DataFieldBuilder().With("AccountNumber")
-            //                        .With(DataSourceMother.IvidTitleHolderDataSource)
-            //                        .Build(),
-            //                    new DataFieldBuilder().With("AccountOpenDate")
-            //                        .With(DataSourceMother.IvidTitleHolderDataSource)
-            //                        .Build(),
-            //                    new DataFieldBuilder().With("AccountClosedDate")
-            //                        .With(DataSourceMother.IvidTitleHolderDataSource)
-            //                        .Build(),
+            var ividProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.Ivid, 0.00, false, new List<IDataField>() {});
 
-            //                    new DataFieldBuilder().With("VehicleMake").With(DataSourceMother.RgtVinSource).Build(),
-            //                    new DataFieldBuilder().With("Colour").With(DataSourceMother.RgtVinSource).Build(),
-            //                    new DataFieldBuilder().With("Price").With(DataSourceMother.RgtVinSource).Build(),
+            var ividTitleHolderProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.IvidTitleHolder, 0.00, false, new List<IDataField>() {});
 
-            //                    new DataFieldBuilder().With("AccidentClaim")
-            //                        .With(DataSourceMother.AudatexSource)
-            //                        .Build()
+            var rgtProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.Rgt, 0.00, false, new List<IDataField>() {});
 
-            //                }
-            //            }
-            //        },
-            //    Action = ActionMother.LicensePlateSearchAction
-            //};
+            var rgtVinProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.RgtVin, 0.00, false, new List<IDataField>() {});
+
+            return new Package(Guid.NewGuid(), "License plate search",
+                new PackageBuilder.Domain.Entities.Action("License plate search"),
+                new List<IDataProvider>()
+                {
+                    audatexProvider,
+                    lightstoneProvider,
+                    ividProvider,
+                    ividTitleHolderProvider,
+                    rgtProvider,
+                    rgtVinProvider
+                });
         }
     }
 }

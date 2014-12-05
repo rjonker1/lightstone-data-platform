@@ -1,4 +1,9 @@
-﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
+﻿using System;
+using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -6,31 +11,12 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            return null;
-            //return new Package("License plate lookup package")
-            //{
-            //    DataSets =
-            //        new[]
-            //        {
-            //            new DataSet("License plate lookup DataSet")
-            //            {
-            //                DataFields = new[]
-            //                {
+            var dataProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.RgtVin, 0.00, false, new List<IDataField>() { });
 
-            //                    new DataFieldBuilder().With("Vin").With(DataSourceMother.RgtVinSource).Build(),
-            //                    new DataFieldBuilder().With("VehicleMake").With(DataSourceMother.RgtVinSource).Build(),
-            //                    new DataFieldBuilder().With("Colour").With(DataSourceMother.RgtVinSource).Build(),
-            //                    new DataFieldBuilder().With("Price").With(DataSourceMother.RgtVinSource).Build(),
-
-            //                    //new DataField("Vin") {DataSource = new VinFieldSource()},
-            //                    //new DataField("VehicleMake") {DataSource = new PriceFieldSource()},
-            //                    //new DataField("Colour") {DataSource = new ColourFieldSource()},
-            //                    //new DataField("Price") {DataSource = new PriceFieldSource()}
-            //                }
-            //            }
-            //        },
-            //    Action = ActionMother.LicensePlateSearchAction
-            //};
+            return new Package(Guid.NewGuid(), "License plate search",
+                new PackageBuilder.Domain.Entities.Action("License plate search"),
+                new List<IDataProvider>() { dataProvider });
         }
     }
 }
