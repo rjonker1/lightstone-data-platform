@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="when_calling_write_package_builder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="when_calling_write_package_mother.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
