@@ -1,4 +1,96 @@
-﻿<section class="mainbar" data-ng-controller="dataProviderView">
+﻿<script type="text/ng-template" id="dField_renderer.html">
+
+    <tr>
+        <td><b style="color: green;">{{dField.name}}</b></td>
+        <td><!--{{dField.type}}--></td>
+        <td>
+            <input class="form-control" ng-model="dField.label" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="dField.definition" type="text" readonly/>
+        </td>
+
+        <td>
+
+            <div multi-select
+                 input-model="dField.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+            </div>
+
+        </td>
+        
+        <td ng-show="switch == true">
+            <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" readonly/>
+        </td>
+
+    </tr>
+
+    <tr ng-repeat-start="subDF in dField.dataFields">
+        <td><b>{{subDF.name}}</b></td>
+        <td></td>
+
+        <td>
+            <input class="form-control" ng-model="subDF.label" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="subDF.definition" type="text" readonly/>
+        </td>
+
+        <td>
+
+            <div multi-select
+                 input-model="subDF.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+            </div>
+
+        </td>
+
+        <td ng-show="switch == true">
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" readonly/>
+        </td>
+
+    </tr>
+    <tr ng-repeat-end ng-repeat-start="subChildDF in subDF.dataFields">
+        <td>{{subChildDF.name}}</td>
+        <td>System.Type</td>
+        <td>
+            <input class="form-control" ng-model="subChildDF.label" type="text" readonly/>
+        </td>
+        <td>
+            <input class="form-control" ng-model="subChildDF.definition" type="text" readonly/>
+        </td>
+
+        <td>
+
+            <div multi-select
+                 input-model="subChildDF.industries"
+                 button-label="name"
+                 item-label="name"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="true">
+
+            </div>
+        </td>
+
+        <td ng-show="switch == true">
+            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subChildDF.price" readonly/>
+        </td>
+    </tr>
+    <tr ng-repeat-end></tr>
+
+
+</script>
+
+<section class="mainbar" data-ng-controller="dataProviderView">
     <!--<div ng-model="dataProvider">
             <div ng-repeat="data in dataProvider.response">
                 <li>{{data}}</li>
@@ -134,7 +226,13 @@
                                                     <th ng-show="switch == true">Price</th>
                                                 </tr>
                                             </thead>
-                                            <tbody ng-repeat="dField in dataProv.dataFields">
+
+                                            <tbody ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'">
+                                                
+                                                <!-- <tr ng-repeat="dField in dataProv.dataFields" ng-include="'dField_renderer.html'"></tr>-->
+                                            </tbody>
+
+                                            <!--<tbody ng-repeat="dField in dataProv.dataFields">
 
                                                 <tr>
                                                     <td>{{dField.name}}</td>
@@ -152,7 +250,7 @@
                                                     </td>
                                                 </tr>
 
-                                            </tbody>
+                                            </tbody>-->
                                         </table>
 
                                     </div>
