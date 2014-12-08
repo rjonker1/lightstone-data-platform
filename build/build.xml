@@ -415,5 +415,26 @@
          <dependency id="NEventStore" version="5.1.0" />
       </dependencies>
     </nuget> 
+<nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.TestObjects</name>
+      <folder>app/PackageBuilder/PackageBuilder.TestHelper.TestObjects</folder>
+      <author>CustomApp</author>
+      <description>PackageBuilder.TestHelper.TestObjects</description>
+      <includes>
+        <include pattern="Castle.Windsor.dll" to="lib\net45"/>
+        <include pattern="NHibernate.dll" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.*.dll" to="lib\net45" />
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.*.pdb" to="lib\net45" />    
+      </includes>
+      <dependencies>
+          <dependency id="Common.Logging" version="2.1.2" />
+          <dependency id="Lightstone.DataPlatform.Lace.Domain.Core" />
+          <dependency id="Lightstone.DataPlatform.Lace.Domain.Core.Entities" />
+          <dependency id="Lightstone.DataPlatform.Lace.Domain.Core.Requests" />
+          <dependency id="Lightstone.DataPlatform.Shared" />
+          <dependency id="NEventStore" version="5.1.0" />
+      </dependencies>
+    </nuget> 
+
 	</nugets>
 </build>
