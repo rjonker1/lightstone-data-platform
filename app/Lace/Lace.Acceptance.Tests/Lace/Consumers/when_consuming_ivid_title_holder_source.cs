@@ -3,7 +3,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Responses;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
 
@@ -19,8 +18,8 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_ivid_title_holder_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
           
             _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();

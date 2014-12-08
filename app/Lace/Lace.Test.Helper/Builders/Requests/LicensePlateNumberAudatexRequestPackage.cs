@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Test.Helper.Builders.Requests
@@ -7,35 +11,12 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            //var action = new  PackageBuilder.Domain.Entities.Action("License plate search");
-            //var package = new Package(Guid.NewGuid())
+            var dataProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
+                Guid.NewGuid(), DataProviderName.Audatex, 0.00, false, new List<IDataField>() {});
 
-            //package.Action = action;
-
-            return null;
-            //return new Package("License plate lookup package")
-            //{
-            //    DataSets =
-            //        new[]
-            //        {
-            //            new DataSet("License plate lookup DataSet")
-            //            {
-            //                DataFields = new[]
-            //                {
-            //                    new DataFieldBuilder().With("Registration").With(DataSourceMother.AudatexSource).Build(),
-            //                    new DataFieldBuilder().With("Vin").With(DataSourceMother.AudatexSource).Build(),
-            //                    new DataFieldBuilder().With("Engine").With(DataSourceMother.AudatexSource).Build(),
-            //                    new DataFieldBuilder().With("AccidentClaim").With(DataSourceMother.AudatexSource).Build()
-
-            //                    //new DataField("Registration") {DataSource = new RegistrationFieldSource(), Type = typeof(string).ToString()},
-            //                    //new DataField("Vin") {DataSource = new VinFieldSource(), Type = typeof(string).ToString()},
-            //                    //new DataField("Engine") {DataSource = new EngineFieldSource(), Type = typeof(string).ToString()},
-            //                    //new DataField("AccidentClaim") {DataSource = new AccidentClaimSource(), Type = typeof(string).ToString()}
-            //                }
-            //            }
-            //        },
-            //    Action = ActionMother.LicensePlateSearchAction
-            //};
+            return new Package(Guid.NewGuid(), "License plate search",
+                new PackageBuilder.Domain.Entities.Action("License plate search"),
+                new List<IDataProvider>() {dataProvider});
         }
     }
 }

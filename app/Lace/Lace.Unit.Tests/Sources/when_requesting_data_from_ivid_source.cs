@@ -5,7 +5,6 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using Xunit.Extensions;
 
@@ -21,8 +20,8 @@ namespace Lace.Unit.Tests.Sources
 
         public when_requesting_data_from_ivid_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
            
             _requestDataFromService = new RequestDataFromIvidSource();
             _ividRequest = new LicensePlateRequestBuilder().ForIvid();

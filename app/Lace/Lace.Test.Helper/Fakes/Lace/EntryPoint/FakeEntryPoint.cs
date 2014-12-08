@@ -5,9 +5,7 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.Builder;
-using Workflow;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
@@ -18,13 +16,13 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
         private ISendMonitoringMessages _monitoring;
         private IBootstrap _bootstrap;
 
-        private readonly IPublishMessages _publisher;
+       // private readonly IPublishMessages _publisher;
 
         public FakeEntryPoint()
         {
 
-            var bus = new FakeBus();
-            _publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //_publisher = new Workflow.RabbitMQ.Publisher(bus);
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 

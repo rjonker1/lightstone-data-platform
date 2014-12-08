@@ -3,7 +3,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
 
@@ -18,8 +17,8 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_lightstone_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
             _request = new LicensePlateNumberLightstoneOnlyRequest();
            // _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
