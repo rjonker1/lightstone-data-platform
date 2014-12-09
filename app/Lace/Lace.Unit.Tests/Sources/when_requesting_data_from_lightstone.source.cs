@@ -6,7 +6,6 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
 
@@ -22,8 +21,8 @@ namespace Lace.Unit.Tests.Sources
 
         public when_requesting_data_from_lightstone_source()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();

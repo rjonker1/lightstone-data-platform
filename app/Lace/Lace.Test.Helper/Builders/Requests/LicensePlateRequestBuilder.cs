@@ -45,7 +45,7 @@ namespace Lace.Test.Helper.Builders.Requests
 
         public ILaceRequest ForAllSources()
         {
-            _request = new LicensePlateNumberSliverAllServicesRequest();
+            _request = new LicensePlateNumberAllDataProvidersRequest();
             return _request;
         }
 

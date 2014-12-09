@@ -6,7 +6,6 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
 using Lace.Test.Helper.Fakes.Lace;
 using Lace.Test.Helper.Fakes.Lace.Builder;
 using Xunit.Extensions;
@@ -25,8 +24,8 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
             
             _request = new LicensePlateRequestBuilder().ForAllSources();
 

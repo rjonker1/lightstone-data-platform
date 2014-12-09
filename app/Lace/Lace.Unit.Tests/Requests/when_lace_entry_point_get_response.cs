@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Requests
         public when_lace_entry_point_get_response()
         {
             _entryPoint = new FakeEntryPoint();
-            _request = new LicensePlateNumberSliverAllServicesRequest();
+            _request = new LicensePlateNumberAllDataProvidersRequest();
         }
 
         public override void Observe()

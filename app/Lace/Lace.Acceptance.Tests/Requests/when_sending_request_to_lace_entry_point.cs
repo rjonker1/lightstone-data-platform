@@ -4,7 +4,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Bus;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Requests
@@ -19,8 +18,8 @@ namespace Lace.Acceptance.Tests.Requests
         {
             _request = new LicensePlateRequestBuilder().ForAllSources();
 
-            var bus = new FakeBus();
-            var publisher = new Workflow.RabbitMQ.Publisher(bus);
+            //var bus = new FakeBus();
+            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
 
            // _entryPoint = new EntryPointService(publisher);
         }
