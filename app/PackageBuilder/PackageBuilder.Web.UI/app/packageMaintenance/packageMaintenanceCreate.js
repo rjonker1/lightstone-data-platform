@@ -11,6 +11,11 @@
 
     function packageMaintenanceCreate($scope, $location, $timeout, $parse, $http, common, datacontext) {
 
+        $scope.tt = function(item) {
+
+            console.log(item);
+        }
+
         $scope.title = 'Package Maintenance - Create';
         var filterVal = {};
         var getLogFn = common.logger.getLogFn;
@@ -48,7 +53,6 @@
             $location.path('/packages');
         };
 
-        $scope.filteredConstraint = '';
 
         $scope.filterIndustry = function (field) {
 
@@ -110,6 +114,16 @@
                                         for (var m = 0; m < children.length; m++) {
 
                                             children[m].isSelected = false;
+
+                                            //subChildren override
+                                            if (children[m].dataFields.length > 0) {
+                                                
+                                                for (var n = 0; n < children[m].dataFields.length; n++) {
+
+                                                    children[m].dataFields[n].isSelected = false;
+                                                }
+                                            }
+                                            
                                         }
                                     }
 
@@ -211,10 +225,7 @@
             common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId)
                .then(function () {
 
-                    log('Activated Package Maintenance View');
-                    var bootFilter = [{name: "All", isSelected: true}];
-
-                    $scope.filterData(bootFilter);
+                   log('Activated Package Maintenance View');
             });
         }
 
@@ -263,7 +274,17 @@
             return datacontext.getIndustries().then(function (response) {
 
                 $scope.industries = response;
-                $scope.filteredConstraint = $scope.industries[0];
+                //$scope.filteredConstraint = $scope.industries[0];
+
+                var bootFilters = [];
+
+                for (var i = 0; i < $scope.industries.length; i++) {
+
+                    $scope.industries[i].isSelected = true;
+                    bootFilters.push($scope.industries[i]);
+                }
+
+                $scope.filterData(bootFilters);
             });
         }
 
