@@ -30,3 +30,11 @@
     background-color: #1171a3 !important;
     color: #FFF !important;
 }
+
+.toggled-child-selected {
+    background-color: #999999 !important;
+}
+
+.toggled-child-rest {
+    background-color: #808080 !important;
+}
