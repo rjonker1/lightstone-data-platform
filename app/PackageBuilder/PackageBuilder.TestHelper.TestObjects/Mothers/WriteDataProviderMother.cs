@@ -58,5 +58,18 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static IDataProvider Audatex
+        {
+            get
+            {
+                return new WriteDataProviderBuilder()
+                    .With(DataProviderName.Audatex)
+                    .With("Audatex")
+                    .With(10d)
+                    .With(typeof(IProvideDataFromAudatex))
+                    .Build();
+            }
+        }
     }
 }

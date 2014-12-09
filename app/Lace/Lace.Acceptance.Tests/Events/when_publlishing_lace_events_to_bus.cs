@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Threading;
-using EasyNetQ;
-
-
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Shared;
-using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Mothers.Requests;
-using Monitoring.Sources.Lace;
-using Workflow;
-using Workflow.BuildingBlocks;
-using Workflow.RabbitMQ;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Events
 {
     public class lace_log_event_ivid_source_tests : Specification
     {
-        private IBus _bus;
-        private IPublishMessages _publishMessages;
-
         private ISendMonitoringMessages _laceEvent;
         private Exception _exception;
         private readonly Guid _aggregateId;
@@ -35,10 +22,11 @@ namespace Lace.Acceptance.Tests.Events
             try
             {
 
-                //_bus = new BusFactory().CreateBus("monitor-event-tracking/queue", new WindsorContainer());
-                _bus = BusFactory.CreateBus("monitor-event-tracking/queue");
-                _publishMessages = new Publisher(_bus);
+                
+                //_bus = BusFactory.CreateBus("monitor-event-tracking/queue");
+                //_publishMessages = new Publisher(_bus);
                // _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
+                throw new Exception("Bus not implemented");
 
             }
             catch (Exception e)
@@ -52,7 +40,7 @@ namespace Lace.Acceptance.Tests.Events
         {
             _exception.ShouldBeNull();
 
-            _bus.ShouldNotBeNull();
+            //_bus.ShouldNotBeNull();
 
             //_laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
 
@@ -77,7 +65,7 @@ namespace Lace.Acceptance.Tests.Events
 
             Thread.Sleep(5000);
 
-            _bus.Dispose();
+            //_bus.Dispose();
         }
 
     }
