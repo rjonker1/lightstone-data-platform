@@ -16,12 +16,8 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
         private ISendMonitoringMessages _monitoring;
         private IBootstrap _bootstrap;
 
-       // private readonly IPublishMessages _publisher;
-
         public FakeEntryPoint()
         {
-
-            //var bus = new FakeBus();
             //_publisher = new Workflow.RabbitMQ.Publisher(bus);
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }

@@ -22,7 +22,6 @@ namespace Lace.Acceptance.Tests.Events
             try
             {
 
-                
                 //_bus = BusFactory.CreateBus("monitor-event-tracking/queue");
                 //_publishMessages = new Publisher(_bus);
                // _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
