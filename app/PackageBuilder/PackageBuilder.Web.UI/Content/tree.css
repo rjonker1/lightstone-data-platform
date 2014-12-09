@@ -32,9 +32,9 @@
 }
 
 .toggled-child-selected {
-    background-color: #999999 !important;
+    background-color: #666 !important;
 }
 
 .toggled-child-rest {
-    background-color: #808080 !important;
+    background-color: #666 !important;
 }
