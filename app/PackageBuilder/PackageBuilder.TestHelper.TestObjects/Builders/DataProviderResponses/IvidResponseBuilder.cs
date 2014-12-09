@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Dto;
+using Lace.Domain.Core.Entities;
 
 namespace PackageBuilder.TestObjects.Builders.DataProviderResponses
 {

@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto.Metric;
+using Lace.Domain.Core.Entities;
 using PackageBuilder.TestObjects.Builders.DataProviderResponses.Valuations;
 
 namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses.Valuations

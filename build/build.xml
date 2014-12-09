@@ -326,7 +326,7 @@
 				<dependency id="Common.Logging" version="2.1.2" />
 			</dependencies>
 		</nuget>
-    <nuget deploy="false">
+    <!--<nuget deploy="false">
       <name>Lightstone.Dataplatform.Shared.Public.TestHelpers</name>
       <folder>app/Shared/Shared.Public.TestHelpers</folder>
       <author>CustomApp</author>
@@ -342,7 +342,7 @@
         <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
         <dependency id="Moq" version="4.0.10827" />
       </dependencies>
-    </nuget>
+    </nuget>-->
 		<!-- SHARED END -->
 
 
@@ -412,6 +412,27 @@
       <dependencies>
          <dependency id="Lightstone.DataPlatform.Lace.Domain.Core" />
          <dependency id="Lightstone.DataPlatform.Shared" />
+         <dependency id="NEventStore" version="5.1.0" />
+      </dependencies>
+    </nuget> 
+
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.TestObjects</name>
+      <folder>app/PackageBuilder/PackageBuilder.TestObjects</folder>
+      <author>CustomApp</author>
+      <description>PackageBuilder.TestObjects</description>
+      <includes>
+        <include pattern="Castle.Windsor.dll" to="lib\net45"/>
+        <include pattern="NHibernate.dll" to="lib\net45"/>
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.*.dll" to="lib\net45" />
+        <include pattern="Lightstone.Dataplatform.PackageBuilder.*.pdb" to="lib\net45" />    
+      </includes>
+      <dependencies>
+         <dependency id="Common.Logging" version="2.1.2" />
+         <dependency id="Lightstone.DataPlatform.Lace.Domain.Core" />
+         <dependency id="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint" />
+         <dependency id="Lightstone.DataPlatform.Shared" />
+         <dependency id="Lightstone.Dataplatform.Workflow" />
          <dependency id="NEventStore" version="5.1.0" />
       </dependencies>
     </nuget> 
