@@ -1,7 +1,9 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
 using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
@@ -11,26 +13,22 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     public class when_consuming_audatex_source : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendMonitoringMessages _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private AudatexDataProvider _consumer;
 
 
         public when_consuming_audatex_source()
         {
-            //var bus = new FakeBus();
-            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-
+            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _request = new LicensePlateNumberAudatexOnlyRequest();
-
-           // _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
             _response = new LaceResponseBuilder().WithIvidResponseHandledAndVin12();
         }
 
         public override void Observe()
         {
             _consumer = new AudatexDataProvider(_request, null, null);
-            _consumer.CallSource(_response, _laceEvent);
+            _consumer.CallSource(_response, _monitoring);
         }
 
 
