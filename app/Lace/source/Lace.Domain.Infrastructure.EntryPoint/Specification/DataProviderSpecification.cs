@@ -6,6 +6,7 @@ using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
+using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Shared.Monitoring.Messages.Shared;
 
@@ -21,14 +22,21 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                             new LightstoneDataProvider(request,
                                 new IvidTitleHolderDataProvider(request,
                                     new RgtVinDataProvider(request,
-                                        new AudatexDataProvider(request, null, null), null),
-                                    null), null), null).CallSource(response, @event);
+                                        new RgtDataProvider(request,
+                                            new AudatexDataProvider(request, null, null), null),
+                                        null), null), null), null).CallSource(response, @event);
 
-        public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>> Specifications
+        public
+            IEnumerable
+                <
+                    KeyValuePair
+                        <string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>>
+            Specifications
         {
             get
             {
-                return new Dictionary<string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>()
+                return new Dictionary
+                    <string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>()
                 {
                     {
                         "License plate search", _defaultLicenseNumberRequestSpecification()

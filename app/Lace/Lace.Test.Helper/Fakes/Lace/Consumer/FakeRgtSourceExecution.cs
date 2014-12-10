@@ -10,24 +10,22 @@ using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
-    public class FakeRgtVinSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class FakeRgtSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly IHandleDataProviderSourceCall _handleServiceCall;
+       
         private readonly ILaceRequest _request;
-        private readonly ICallTheDataProviderSource _externalWebServiceCall;
+       
 
-        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public FakeRgtSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource)
             : base(nextSource, fallbackSource)
         {
             _request = request;
-            _handleServiceCall = new FakeHandleRgtVinServiceCall();
-            _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
         }
 
         public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Rgt, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -35,11 +33,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             }
             else
             {
-                var consumer = new ConsumeSource(new FakeHandleRgtServiceCall(),
-                    new FakeCallingRgtVinExternalWebService());
+                var consumer = new ConsumeSource(new FakeHandleRgtVinServiceCall(),
+                    new FakeCallingRgtDataProvider());
                 consumer.ConsumeExternalSource(response, monitoring);
 
-                if (response.RgtVinResponse == null)
+                if (response.RgtResponse == null)
                     CallFallbackSource(response, monitoring);
             }
 
@@ -49,9 +47,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
-            response.RgtVinResponse = null;
-            response.RgtVinResponseHandled = new RgtVinResponseHandled();
-            response.RgtVinResponseHandled.HasNotBeenHandled();
+            response.RgtResponse = null;
+            response.RgtResponseHandled = new RgtResponseHandled();
+            response.RgtResponseHandled.HasNotBeenHandled();
         }
     }
 }
