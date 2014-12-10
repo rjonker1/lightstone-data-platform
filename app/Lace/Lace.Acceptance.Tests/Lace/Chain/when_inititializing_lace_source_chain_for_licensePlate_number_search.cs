@@ -39,7 +39,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         }
 
         [Observation]
-        public void lace_services_for_sliver_to_be_handled_loaded_correclty()
+        public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
         {
             _initialize.LaceResponses.Count.ShouldEqual(1);
             _initialize.LaceResponses[0].Response.ShouldNotBeNull();
