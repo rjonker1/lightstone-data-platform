@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Castle.Windsor;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.DataProviders.Lightstone.Infrastructure.Dto;
+using Lace.Domain.Core.Entities;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
