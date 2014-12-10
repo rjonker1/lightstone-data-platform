@@ -110,6 +110,7 @@
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidTitleHolderRequestPackage.cs" />
+    <Compile Include="Builders\Requests\LicensePlateNumberRgtRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
     <Compile Include="Builders\Responses\LaceResponseBuilder.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Fakes\Responses\FakeIvidResponse.cs" />
     <Compile Include="Fakes\Responses\FakeAudatexWebResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
-    <None Include="Mothers\Packages\ActionMother.cs.old" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
@@ -183,6 +183,7 @@
     <Compile Include="Mothers\Requests\LicensePlateNumberAudatexOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderOnlyRequest.cs" />
+    <Compile Include="Mothers\Requests\LicensePlateNumberRgtOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberRgtVinOnlyRequest.cs" />
     <Compile Include="Builders\Responses\SourceResponseBuilder.cs" />
     <Compile Include="Mothers\Sources\Lightstone\BandData.cs" />
@@ -205,6 +206,7 @@
     <Folder Include="Fakes\Jis\" />
     <Folder Include="Fakes\Lace\Responses\" />
     <Folder Include="Mothers\Consumers\" />
+    <Folder Include="Mothers\Packages\" />
     <Folder Include="Mothers\Responses\" />
     <Folder Include="Mothers\Sources\Lightstone\Repositories\" />
   </ItemGroup>

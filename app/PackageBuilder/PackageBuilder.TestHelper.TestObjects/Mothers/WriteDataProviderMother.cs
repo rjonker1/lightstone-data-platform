@@ -71,5 +71,18 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataProvider Lightstone
+        {
+            get
+            {
+                return new WriteDataProviderBuilder()
+                    .With(DataProviderName.Lightstone)
+                    .With("Lightstone")
+                    .With(10d)
+                    .With(typeof(IProvideDataFromLightstone))
+                    .Build();
+            }
+        }
     }
 }

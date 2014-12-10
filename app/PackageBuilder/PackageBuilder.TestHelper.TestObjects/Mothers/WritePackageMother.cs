@@ -18,7 +18,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.Now)
-                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex)
+                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
         }
@@ -34,7 +34,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.Now)
-                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex)
+                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
         }
@@ -50,7 +50,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.Now)
-                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex)
+                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
         }
@@ -66,7 +66,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.Now)
-                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex)
+                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
         }
@@ -81,7 +81,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.Now)
-                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex)
+                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
         }

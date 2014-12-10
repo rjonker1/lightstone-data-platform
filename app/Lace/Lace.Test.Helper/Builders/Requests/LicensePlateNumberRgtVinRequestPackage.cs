@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.TestObjects.Builders;
+using PackageBuilder.TestObjects.Mothers;
 
 namespace Lace.Test.Helper.Builders.Requests
 {
@@ -11,12 +10,37 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IPackage LicenseNumberPackage()
         {
-            var dataProvider = new PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider(
-                Guid.NewGuid(), DataProviderName.RgtVin, 0.00, false, new List<IDataField>() { });
+            return LicensePlateSearchPackage;
+        }
 
-            return new Package(Guid.NewGuid(), "License plate search",
-                new PackageBuilder.Domain.Entities.Action("License plate search"),
-                new List<IDataProvider>() { dataProvider });
+        //private static DataProvider RgtVin
+        //{
+        //    get
+        //    {
+        //        return new WriteDataProviderBuilder()
+        //            .With(DataProviderName.RgtVin)
+        //            .With("RgtVin")
+        //            .With(10d)
+        //            .With(typeof(IProvideDataFromRgtVin))
+        //            .Build();
+        //    }
+        //}
+
+        private static Package LicensePlateSearchPackage
+        {
+            get
+            {
+                return new WritePackageBuilder()
+                    .With("License plate search")
+                    .With(10d, 20d)
+                    .With(ActionMother.LicensePlateSearchAction)
+                    .With(IndustryMother.Finance, IndustryMother.Automotive)
+                    .With(StateMother.Published)
+                    .With(0.1m)
+                    .With(DateTime.Now)
+                    .With(WriteDataProviderMother.RgtVin)
+                    .Build();
+            }
         }
     }
 }
