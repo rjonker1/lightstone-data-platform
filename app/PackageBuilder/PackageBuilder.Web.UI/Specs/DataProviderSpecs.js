@@ -7,8 +7,11 @@
 
 describe("DataProviders", function () {
 
-    beforeEach(module("common"));
-    beforeEach(module("app"));
+    //beforeEach(module("common"));
+    
+    //NB Need to find work around for this test! datacontext casuing issues when attempting to instantiate a basic $scope test
+    //Possible solution: Look at Mocking services of jasmine to replicate the async calls for api data.
+    //Site reference updated to bookmarks.
 
     describe("DataProviderDetail", function () {
 
@@ -17,35 +20,44 @@ describe("DataProviders", function () {
 
         var datacontextMock;
 
-        beforeEach(angular.mock.inject(function ($injector) {
+        //beforeEach(function ($inject) { //angular.mock.inject
 
-            datacontextMock = jasmine.createSpyObj('datacontext', ['getDataProvider', 'getIndustries']);
+        //    //datacontextMock = jasmine.createSpyObj('datacontext', ['getDataProvider', 'getIndustries']);
 
-            //module('app');
+        //    //module('app');
 
-            inject(function ($rootScope, $controller, $location, $routeParams, $q) {
+        //    $inject( function( $rootScope, $controller ) {
 
-                scope = $rootScope.$new();
-                _location = $location;
-                _routeParams = $routeParams;
-                _common = $injector.get('common');
-                //_datacontext = $injector.get('datacontext');
+        //        scope = $rootScope.$new();
+        //        //_location = $location;
+        //        //_routeParams = $routeParams;
+        //        //_common = $injector.get('common');
+        //        //_datacontext = $injector.get('datacontext');
 
 
-                datacontextMock.getDataProvider.andReturn($q.when('test'));
-                datacontextMock.getIndustries.andReturn($q.when('test2'));
+        //        //datacontextMock.getDataProvider.andReturn($q.when('test'));
+        //        //datacontextMock.getIndustries.andReturn($q.when('test2'));
 
-                controller = $controller('dataProviderDetail', {
-                    $scope: scope,
-                    $location: _location,
-                    $routeParams: _routeParams,
-                    common: _common,
-                    //datacontext: datacontext
-                    datacontext: datacontextMock
-                });
+        //        controller = $controller('dataProviderDetail', {
+        //            $scope: scope,
+        //            //$location: _location,
+        //            //$routeParams: _routeParams,
+        //            //common: _common,
+        //            //datacontext: datacontext
+        //            //datacontext: datacontextMock
+        //        });
 
-            });
+        //    });
 
+        //});
+        beforeEach(module("app"));
+
+        beforeEach(inject(function ($rootScope, $controller) {
+            scope = $rootScope.$new();
+
+           
+
+            controller = $controller('dataProviderDetail', { $scope: scope });
         }));
 
         //Spec 1
