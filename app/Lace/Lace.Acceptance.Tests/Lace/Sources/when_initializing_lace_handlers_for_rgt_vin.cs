@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Domain.Infrastructure.EntryPoint;
-using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.RgtVin;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
@@ -16,38 +14,33 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_rgt_vin : Specification
     {
         private readonly ILaceRequest _request;
+        private readonly IProvideResponseFromLaceDataProviders _response;
         private readonly ISendMonitoringMessages _monitoring;
-        private readonly IBootstrap _initialize;
-        private IList<LaceExternalSourceResponse> _laceResponses;
-        private readonly IBuildSourceChain _buildSourceChain;
-
+        private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_rgt_vin()
         {
             _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForRgtVin();
-            _buildSourceChain = new CreateSourceChain(_request.Package);
-            _buildSourceChain.Build();
-            _initialize = new Initialize(new LaceResponseBuilder().WithIvidResponseHandled(), _request, _monitoring,
-                _buildSourceChain);
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _dataProvider = new RgtVinDataProvider(_request, null, null);
         }
 
         public override void Observe()
         {
-            _initialize.Execute();
-            _laceResponses = _initialize.LaceResponses;
+            _dataProvider.CallSource(_response, _monitoring);
         }
 
         [Observation]
         public void lace_functional_test_rgt_vin_response_should_be_handled()
         {
-            _laceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
+            _response.RgtVinResponseHandled.Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_functional_test_rgt_vin_response_shuould_not_be_null()
         {
-            _laceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
+            _response.RgtVinResponse.ShouldNotBeNull();
         }
     }
 }

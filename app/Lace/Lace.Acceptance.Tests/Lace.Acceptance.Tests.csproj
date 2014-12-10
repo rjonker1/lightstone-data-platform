@@ -124,12 +124,14 @@
     <Compile Include="Lace\Consumers\when_consuming_ivid_title_holder_data_provider.cs" />
     <Compile Include="Lace\Consumers\when_consuming_ivid_data_provider.cs" />
     <Compile Include="Lace\Sources\Lightstone\when_getting_statistics_data_to_build_vendor_valuation.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_data_providers_in_vvi_products.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_audatex_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_lightstone.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
-    <Compile Include="Requests\when_lace_entry_point_get_response.cs" />
     <Compile Include="Requests\when_sending_request_to_lace_entry_point.cs" />
   </ItemGroup>
   <ItemGroup>

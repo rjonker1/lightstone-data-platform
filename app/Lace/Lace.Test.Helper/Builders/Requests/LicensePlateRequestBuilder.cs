@@ -37,6 +37,12 @@ namespace Lace.Test.Helper.Builders.Requests
             return _request;
         }
 
+        public ILaceRequest ForRgt()
+        {
+            _request = new LicensePlateNumberRgtOnlyRequest();
+            return _request;
+        }
+
         public ILaceRequest ForLightstone()
         {
             _request = new LicensePlateNumberLightstoneOnlyRequest();

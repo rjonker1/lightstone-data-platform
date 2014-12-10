@@ -13,7 +13,6 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 {
     public class when_initializing_lace_handlers_for_ivid_title_holder : Specification
     {
-
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private readonly ISendMonitoringMessages _monitoring;
@@ -21,7 +20,6 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_ivid_title_holder()
         {
-
             _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
