@@ -1,32 +1,45 @@
 ﻿using System;
-using System.Threading;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
+using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Test.Helper.Builders.Buses;
+using Lace.Test.Helper.Builders.DataProviders;
+using Lace.Test.Helper.Builders.Responses;
+using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Events
 {
     public class lace_log_event_ivid_source_tests : Specification
     {
-        private ISendMonitoringMessages _laceEvent;
+        private ISendMonitoringMessages _monitoring;
+        private readonly ILaceRequest _request;
+        private readonly HpiStandardQueryResponse _ividResponse;
+        private readonly HpiStandardQueryRequest _ividRequest;
+        private readonly DataProviderStopWatch _stopWatch;
+        private readonly DataProviderStopWatch _dataProviderStopWatch;
         private Exception _exception;
         private readonly Guid _aggregateId;
 
         public lace_log_event_ivid_source_tests()
         {
-            
+            _ividResponse = new SourceResponseBuilder().ForIvid();
+            _ividRequest = DataProviderResponseBuilder.IvidHpiStandardQueryRequest(_request);
+            _request = new LicensePlateNumberIvidOnlyRequest();
+
             _aggregateId = Guid.NewGuid();
+
+            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Ivid);
+            _dataProviderStopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Ivid);
         }
 
         public override void Observe()
         {
             try
             {
-
-                //_bus = BusFactory.CreateBus("monitor-event-tracking/queue");
-                //_publishMessages = new Publisher(_bus);
-               // _laceEvent = new PublishLaceEventMessages(_publishMessages,_aggregateId);
-                throw new Exception("Bus not implemented");
-
+                _monitoring = BusBuilder.ForMonitoringMessages(_aggregateId);
             }
             catch (Exception e)
             {
@@ -35,38 +48,38 @@ namespace Lace.Acceptance.Tests.Events
         }
 
         [Observation]
-        public void lace_ivid_events_services_must_be_published_to_message_queue()
+        public void lace_ivid_monitoring_data_provider_must_be_sent_to_message_queue()
         {
             _exception.ShouldBeNull();
 
-            //_bus.ShouldNotBeNull();
+            _monitoring.ShouldNotBeNull();
 
-            //_laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.EntryPoint);
+            _monitoring.StartDataProvider(DataProvider.Ivid, _request.ObjectToJson(), _dataProviderStopWatch);
 
-            //_laceEvent.PublishStartSourceConfigurationMessage(LaceEventSource.Ivid);
+            _monitoring.DataProviderConfiguration(DataProvider.Ivid, _ividRequest.ObjectToJson(), string.Empty);
 
-            //_laceEvent.PublishEndSourceConfigurationMessage(LaceEventSource.Ivid);
+            var proxy = DataProviderConfigurationBuilder.ForIvidWebServiceProxy();
+            _monitoring.DataProviderSecurity(DataProvider.Ivid, proxy.ObjectToJson(),
+                "Ivid Data Provider Credentials");
 
-            //_laceEvent.PublishStartSourceCallMessage(LaceEventSource.Ivid);
+            _monitoring.StartCallingDataProvider(DataProvider.Ivid, _ividRequest.ObjectToJson(), _stopWatch);
 
-            //_laceEvent.PublishEndSourceCallMessage(LaceEventSource.Ivid);
-
-            //_laceEvent.PublishSourceRequestMessage(LaceEventSource.Ivid, new LicensePlateNumberIvidOnlyRequest().ObjectToJson());
-
-            //_laceEvent.PublishSourceResponseMessage(LaceEventSource.Ivid, new LicensePlateRequestBuilder().ForIvid().ObjectToJson());
-
-            //_laceEvent.PublishFailedSourceCallMessage(LaceEventSource.Ivid);
-
-            //_laceEvent.PublishNoResponseFromSourceMessage(LaceEventSource.Ivid);
-
-            //_laceEvent.PublishLaceReceivedRequestMessage(LaceEventSource.Initialization);
+            _monitoring.DataProviderFault(DataProvider.Ivid, _request.ObjectToJson(),
+                "No response received from Ivid Data Provider");
 
 
-            Thread.Sleep(5000);
+            _monitoring.EndCallingDataProvider(DataProvider.Ivid,
+                _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson(),
+                _stopWatch);
 
-            //_bus.Dispose();
+
+            var transformer = DataProviderTransformationBuilder.ForIvid(_ividResponse);
+            _monitoring.DataProviderTransformation(DataProvider.Ivid, transformer.Result.ObjectToJson(),
+                transformer.ObjectToJson());
+
+            _monitoring.EndDataProvider(DataProvider.Ivid, _request.ObjectToJson(), _dataProviderStopWatch);
+          
         }
-
     }
 }
 
