@@ -1,69 +1,37 @@
-﻿///<reference path="~/Scripts/jasmine/jasmine.js"/>
-///<reference path="~/Scripts/angular.js"/>
-///<reference path="~/Scripts/angular-mocks.js"/>
+﻿
+//Test suite
+describe('Tests functionality defined in the object obj', function () {
 
-///<reference path="~/App/app.js"/>
-///<reference path="~/App/dataProviders/dataProviderDetail.js"/>
+    //Setup
+    beforeEach(function () {
+        obj.setNumber(10);
+    });
 
-describe("DataProviders", function () {
+    //Spec - 1
+    it('Checks if the number is defined and value is not 5', function () {
+        expect(obj.number).not.toBe(null);
+        expect(obj.number).toBe(10);
+    });
 
-    //beforeEach(module("common"));
-    
-    //NB Need to find work around for this test! datacontext casuing issues when attempting to instantiate a basic $scope test
-    //Possible solution: Look at Mocking services of jasmine to replicate the async calls for api data.
-    //Site reference updated to bookmarks.
+    //Spec - 2
+    it('Should return square of the number upon calling getSquare', function () {
+        expect(obj.getSquare()).toBe(100);
+    });
 
-    describe("DataProviderDetail", function () {
-
-        var scope,
-            controller;
-
-        var datacontextMock;
-
-        //beforeEach(function ($inject) { //angular.mock.inject
-
-        //    //datacontextMock = jasmine.createSpyObj('datacontext', ['getDataProvider', 'getIndustries']);
-
-        //    //module('app');
-
-        //    $inject( function( $rootScope, $controller ) {
-
-        //        scope = $rootScope.$new();
-        //        //_location = $location;
-        //        //_routeParams = $routeParams;
-        //        //_common = $injector.get('common');
-        //        //_datacontext = $injector.get('datacontext');
-
-
-        //        //datacontextMock.getDataProvider.andReturn($q.when('test'));
-        //        //datacontextMock.getIndustries.andReturn($q.when('test2'));
-
-        //        controller = $controller('dataProviderDetail', {
-        //            $scope: scope,
-        //            //$location: _location,
-        //            //$routeParams: _routeParams,
-        //            //common: _common,
-        //            //datacontext: datacontext
-        //            //datacontext: datacontextMock
-        //        });
-
-        //    });
-
-        //});
-        beforeEach(module("app"));
-
-        beforeEach(inject(function ($rootScope, $controller) {
-            scope = $rootScope.$new();
-
-           
-
-            controller = $controller('dataProviderDetail', { $scope: scope });
-        }));
-
-        //Spec 1
-        it('should resolve title', function () {
-            expect(scope.title).toBe('Data Provider Detail');
-        });
-
+    //Teardown
+    afterEach(function () {
+        obj.setNumber(null);
     });
 });
+
+//Following object is created just to make the sample tests pass
+//Delete the following statements once you start writing your tests
+var obj = {
+    number: null,
+    setNumber: function (num) {
+        this.number = num;
+    },
+    getSquare: function () {
+        return this.number * this.number;
+    }
+};
