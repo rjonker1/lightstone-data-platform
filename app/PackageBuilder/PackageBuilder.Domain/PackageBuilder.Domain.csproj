@@ -97,7 +97,7 @@
       <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
       <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
       <Project>{E399E536-36B5-4281-AB56-E4D2CC90DBE5}</Project>
       <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
