@@ -422,8 +422,6 @@
       <author>CustomApp</author>
       <description>PackageBuilder.TestObjects</description>
       <includes>
-        <include pattern="Castle.Windsor.dll" to="lib\net45"/>
-        <include pattern="NHibernate.dll" to="lib\net45"/>
         <include pattern="Lightstone.Dataplatform.PackageBuilder.*.dll" to="lib\net45" />
         <include pattern="Lightstone.Dataplatform.PackageBuilder.*.pdb" to="lib\net45" />    
       </includes>
