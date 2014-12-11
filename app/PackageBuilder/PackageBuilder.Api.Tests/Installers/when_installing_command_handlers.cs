@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Reflection;
-using Castle.Core;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.EventHandlers.Packages;
+using PackageBuilder.TestHelper;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.Installers
@@ -23,31 +23,11 @@ namespace PackageBuilder.Api.Tests.Installers
 
         readonly IWindsorContainer _container = new WindsorContainer();
 
-        /// <summary>
-        /// Override the LifestyleType of LifestylePerWebRequest to avoid exception below:
-        /// 
-        /// Castle.MicroKernel.ComponentResolutionException
-        /// Looks like you forgot to register the http module Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule
-        /// To fix this add
-        /// <add name="PerRequestLifestyle" type="Castle.MicroKernel.Lifestyle.PerWebRequestLifestyleModule, Castle.Windsor" />
-        /// to the <httpModules> section on your web.config.
-        /// If you plan running on IIS in Integrated Pipeline mode, you also need to add the module to the <modules> section under <system.webServer>.
-        /// Alternatively make sure you have Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35 assembly in your GAC (it is installed by ASP.NET MVC3 or WebMatrix) and Windsor will be able to register the module automatically without having to add anything to the config file.
-        /// </summary>
-        /// <param name="model"></param>
-        void Kernel_ComponentModelCreated(ComponentModel model)
-        {
-            if (model.LifestyleType == LifestyleType.Undefined)
-                model.LifestyleType = LifestyleType.Transient;
-
-            if (model.LifestyleType == LifestyleType.PerWebRequest)
-                model.LifestyleType = LifestyleType.Transient;
-        }
-
         public override void Observe()
         {
-            _container.Kernel.ComponentModelCreated += Kernel_ComponentModelCreated;
+            _container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
             _container.Install(new WindsorInstaller(), new BusInstaller(),new CommandInstaller(), new RavenDbInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new NHibernateInstaller());
+            OverrideHelper.OverrideNhibernateCfg(_container);
         }
 
         [Observation]

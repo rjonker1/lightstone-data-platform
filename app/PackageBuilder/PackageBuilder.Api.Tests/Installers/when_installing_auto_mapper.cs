@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 using Castle.Windsor;
-using PackageBuilder.Api.Helpers.AutoMappers;
+using PackageBuilder.Api.Helpers.AutoMapper.Maps;
 using PackageBuilder.Api.Installers;
 using Xunit.Extensions;
 

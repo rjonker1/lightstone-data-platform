@@ -87,6 +87,7 @@
     <Compile Include="ICustomerContract.cs" />
     <Compile Include="ICustomerUser.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IExpirable.cs" />
     <Compile Include="IGroup.cs" />
     <Compile Include="IGroupPackage.cs" />
