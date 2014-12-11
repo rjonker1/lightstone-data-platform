@@ -135,6 +135,7 @@
       <DependentUpon>toggleRadioControl.css</DependentUpon>
     </Content>
     <Content Include="Content\tree.css" />
+    <Content Include="Content\ui-grid3.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Content\toastr.scss" />
@@ -173,6 +174,8 @@
     <Content Include="Content\toggleRadioControl.css.map">
       <DependentUpon>toggleRadioControl.css</DependentUpon>
     </Content>
+    <Content Include="Content\ui-grid.ttf" />
+    <Content Include="Content\ui-grid.woff" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -201,6 +204,7 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
+    <Content Include="Scripts\ui-grid3.js" />
     <Content Include="Specs\DataProviderDetailSpecs.js" />
     <Content Include="Specs\DataProviderSpecs.js" />
     <Content Include="Specs\LSAPackageBuilderSpecRunner.html" />
