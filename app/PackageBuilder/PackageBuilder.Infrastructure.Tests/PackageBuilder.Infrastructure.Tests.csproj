@@ -100,13 +100,13 @@
       <Project>{622131D3-B807-49A9-A41E-5309D3E14A37}</Project>
       <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
-      <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
-      <Name>PackageBuilder.TestObjects</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
       <Project>{f29a3a51-343e-428f-a592-f7845e99b4ae}</Project>
       <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
+      <Project>{E399E536-36B5-4281-AB56-E4D2CC90DBE5}</Project>
+      <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,7 +23,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
                 return;
                 //throw new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
 
-            var industry = new Industry(command.Id, command.Name, false);
+            var industry = new Industry(command.Id, command.Name, command.isSelected);
             _repository.Save(industry);
         }
     }

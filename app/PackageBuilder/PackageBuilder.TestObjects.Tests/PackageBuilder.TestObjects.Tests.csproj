@@ -67,7 +67,7 @@
       <Project>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
       <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
       <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
