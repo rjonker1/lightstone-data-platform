@@ -137,13 +137,13 @@
       <Project>{c075e78c-8051-4cfc-a0f5-5c61bb108234}</Project>
       <Name>PackageBuilder.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.TestHelper.TestObjects\PackageBuilder.TestObjects.csproj">
-      <Project>{E399E536-36B5-4281-AB56-E4D2CC90DBE5}</Project>
-      <Name>PackageBuilder.TestObjects</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.TestHelper\PackageBuilder.TestHelper.csproj">
       <Project>{F29A3A51-343E-428F-A592-F7845E99B4AE}</Project>
       <Name>PackageBuilder.TestHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
+      <Project>{E399E536-36B5-4281-AB56-E4D2CC90DBE5}</Project>
+      <Name>PackageBuilder.TestObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
