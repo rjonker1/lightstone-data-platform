@@ -33,15 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.331\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.329\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
@@ -53,12 +44,6 @@
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.329\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.329\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.329\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.325\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -149,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
-      <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
+      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">

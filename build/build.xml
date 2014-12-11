@@ -428,11 +428,8 @@
         <include pattern="Lightstone.Dataplatform.PackageBuilder.*.pdb" to="lib\net45" />    
       </includes>
       <dependencies>
-         <dependency id="Common.Logging" version="2.1.2" />
-         <dependency id="Lightstone.DataPlatform.Lace.Domain.Core" />
-         <dependency id="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint" />
+         <dependency id="Lightstone.DataPlatform.Lace.Domain.Core.Entities" />
          <dependency id="Lightstone.DataPlatform.Shared" />
-         <dependency id="Lightstone.Dataplatform.Workflow" />
          <dependency id="NEventStore" version="5.1.0" />
       </dependencies>
     </nuget> 
