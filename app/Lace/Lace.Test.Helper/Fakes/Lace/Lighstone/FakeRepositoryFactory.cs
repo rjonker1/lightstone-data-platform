@@ -20,6 +20,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         {
             return new FakeVin12CarInfoRepository();
         }
+
+        public void Dispose()
+        {
+
+        }
     }
 
     public class FakeRepositoryFactory : ISetupRepository
@@ -67,6 +72,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         public IReadOnlyRepository<Statistic> StatisticRepository()
         {
             return new FakeStatisticsRepository();
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

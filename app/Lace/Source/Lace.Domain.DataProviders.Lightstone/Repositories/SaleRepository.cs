@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         {
             if (carId == null) return new List<Sale>();
 
-            using (_connection)
+            //using (_connection)
             using (_cacheClient)
             {
                 var key = string.Format(SaleKey, carId, year);

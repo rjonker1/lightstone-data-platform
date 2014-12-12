@@ -25,5 +25,10 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories.Factory
         {
             return new Vin12CarInfoRepository(_connection, _redisClient);
         }
+
+        public void Dispose()
+        {
+            if (_connection != null) _connection.Dispose();
+        }
     }
 }

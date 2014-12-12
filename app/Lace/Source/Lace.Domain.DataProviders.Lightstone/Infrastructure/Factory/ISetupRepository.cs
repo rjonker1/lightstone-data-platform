@@ -14,5 +14,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory
         IReadOnlyRepository<Municipality> MuncipalityRepository();
         IReadOnlyRepository<Sale> SaleRepository();
         IReadOnlyRepository<Statistic> StatisticRepository();
+        void Dispose();
     }
 }

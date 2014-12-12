@@ -32,25 +32,23 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
         public IEnumerable<Make> GetAll()
         {
-            using (_connection)
+            //using (_connection)
+            using (_cacheClient)
             {
-                using (_cacheClient)
-                {
-                    var makes = _cacheClient.As<Make>();
-                    var response = makes.Lists[MakeKey];
+                var makes = _cacheClient.As<Make>();
+                var response = makes.Lists[MakeKey];
 
-                    if (response != null && response.Any())
-                        return response;
+                if (response != null && response.Any())
+                    return response;
 
-                    var dbResponse = _connection
-                        .Query<Make>(SelectStatements.GetAllTheMakes)
-                        .ToList();
+                var dbResponse = _connection
+                    .Query<Make>(SelectStatements.GetAllTheMakes)
+                    .ToList();
 
-                    dbResponse.ForEach(f => response.Add(f));
-                    _cacheClient.Add(MakeKey, response);
-                    return dbResponse;
+                dbResponse.ForEach(f => response.Add(f));
+                _cacheClient.Add(MakeKey, response);
+                return dbResponse;
 
-                }
             }
         }
 

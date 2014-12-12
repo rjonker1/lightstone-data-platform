@@ -33,27 +33,25 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         public IEnumerable<CarVendor> GetAll()
         {
             using (_connection)
+            using (_cacheClient)
             {
-                using (_cacheClient)
-                {
-                    var carVendors = _cacheClient.As<CarVendor>();
-                    var response = carVendors.Lists[CarVendorKey];
+                var carVendors = _cacheClient.As<CarVendor>();
+                var response = carVendors.Lists[CarVendorKey];
 
-                    if (response != null && response.Any())
-                        return response;
-
-                    var dbResponse = _connection
-                        .Query(SelectStatements.GetAllCarVendors)
-                        .ToList();
-
-                    dbResponse.ForEach(
-                        f =>
-                            response.Add(new CarVendor(f.CarModelId, f.Car_ID, f.MakeName, f.CarTypeName, f.SaleYear_ID,
-                                f.CarModel, f.CarFullName, f.ImageUrlSmall)));
-
-                    _cacheClient.Add(CarVendorKey, response, DateTime.UtcNow.AddDays(1));
+                if (response != null && response.Any())
                     return response;
-                }
+
+                var dbResponse = _connection
+                    .Query(SelectStatements.GetAllCarVendors)
+                    .ToList();
+
+                dbResponse.ForEach(
+                    f =>
+                        response.Add(new CarVendor(f.CarModelId, f.Car_ID, f.MakeName, f.CarTypeName, f.SaleYear_ID,
+                            f.CarModel, f.CarFullName, f.ImageUrlSmall)));
+
+                _cacheClient.Add(CarVendorKey, response, DateTime.UtcNow.AddDays(1));
+                return response;
             }
         }
 
