@@ -5,6 +5,7 @@ using AutoMapper;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
+using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
@@ -21,7 +22,7 @@ namespace PackageBuilder.Api.Modules
                                         INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo)
         {
             Get["/Packages"] = parameters =>
-                 Response.AsJson(readRepo);
+                 Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
             Get["/Package/Get/{id}/{version}"] = parameters =>
                  Response.AsJson(new { Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) } });
@@ -46,6 +47,13 @@ namespace PackageBuilder.Api.Modules
                 bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, stateResolve.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
+            };
+
+            Post["/Package/Delete/{id}"] = parameters =>
+            {
+                bus.Publish(new DeletePackage(new Guid(parameters.id)));
+
+                return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
             };
         }
     }

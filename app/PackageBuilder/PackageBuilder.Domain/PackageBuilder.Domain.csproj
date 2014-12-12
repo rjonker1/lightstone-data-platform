@@ -72,6 +72,7 @@
     <Compile Include="CommandHandlers\Industries\RenameIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Industries\CreateIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
+    <Compile Include="CommandHandlers\Packages\DeletePackageHandler.cs" />
     <Compile Include="CommandHandlers\Packages\UpdatePackageHandler.cs" />
     <Compile Include="CommandHandlers\States\CreateStateHandler.cs" />
     <Compile Include="CommandHandlers\States\RenameStateHandler.cs" />

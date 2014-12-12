@@ -15,6 +15,7 @@
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
+        var logSuccess = getLogFn(controllerId, 'success');
 
         $scope.test = '';
         $scope.dPackagesData = '';
@@ -43,15 +44,15 @@
             }
         ];
 
-        $scope.notify = function (row) {
+        $scope.notify = function(row) {
 
             $location.path('/package-maintenance-edit/' + row.entity.packageId + '/' + row.entity.version);
-        }
+        };
 
-        $scope.viewPackage = function (row) {
+        $scope.viewPackage = function(row) {
 
             $location.path('/package-maintenance-view/' + row.entity.packageId + '/' + row.entity.version);
-        }
+        };
 
         $scope.selectedDatasource = [];
 
@@ -78,7 +79,7 @@
                         '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' +
                         '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
                         '<input type="button" class="btn btn-warning grid-btn" name="expire" ng-click="" value="Expire" />' +
-                        '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
+                        '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="deletePackage(row.entity.packageId)" value="Remove" /></div>' +
                         '' +
                         '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
                         '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewPackage(row)" value="View" /></div>'
@@ -95,6 +96,13 @@
             common.activateController([getAllPackages()], controllerId)
                 .then(function() { log('Activated Data Providers View'); });
         }
+
+        $scope.deletePackage = function(id) {
+            return datacontext.deletePackage(id).then(function(response) {
+                console.log(response);
+                (response.status === 200) ? logSuccess('Package deleted!') : logError('Error 404. Please check your connection settings');
+            });
+        };
 
         function getAllPackages() {
 

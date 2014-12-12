@@ -22,6 +22,7 @@
             editDataProvider: editDataProvider,
             editPackage: editPackage,
             createPackage: createPackage,
+            deletePackage: deletePackage,
 
             getStates: getStates,
             getIndustries: getIndustries,
@@ -179,6 +180,23 @@
 
             return $q.when(deferred.promise);
 
+        }
+        
+        //POST
+        function deletePackage(_id) {
+
+            var deferred = $q.defer();
+
+            $http.post('http://dev.lightstone.packagebuilder.api/Package/Delete/' + _id + '').then(function (result) {
+
+                deferred.resolve(result);
+
+            }, function (error) {
+
+                deferred.resolve(error);
+            });
+
+            return $q.when(deferred.promise);
         }
 
 

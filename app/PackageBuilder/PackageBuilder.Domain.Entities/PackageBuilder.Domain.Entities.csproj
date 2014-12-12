@@ -105,6 +105,7 @@
     <Compile Include="IUserRole.cs" />
     <Compile Include="IWorkflow.cs" />
     <Compile Include="NamedEntity.cs" />
+    <Compile Include="Packages\Commands\DeletePackage.cs" />
     <Compile Include="Packages\Commands\UpdatePackage.cs" />
     <Compile Include="Packages\Events\PackageCreated.cs" />
     <Compile Include="Packages\Events\PackageUpdated.cs" />
