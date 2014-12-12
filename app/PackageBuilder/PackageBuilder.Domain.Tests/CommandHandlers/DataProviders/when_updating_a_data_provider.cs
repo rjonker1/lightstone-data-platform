@@ -1,6 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Dto;
+using Lace.Domain.Core.Entities;
 using Moq;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.CommandHandlers.DataProviders;

@@ -33,9 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.331, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.308\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -84,6 +87,7 @@
     <Compile Include="ICustomerContract.cs" />
     <Compile Include="ICustomerUser.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IExpirable.cs" />
     <Compile Include="IGroup.cs" />
     <Compile Include="IGroupPackage.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="IUserRole.cs" />
     <Compile Include="IWorkflow.cs" />
     <Compile Include="NamedEntity.cs" />
+    <Compile Include="Packages\Commands\DeletePackage.cs" />
     <Compile Include="Packages\Commands\UpdatePackage.cs" />
     <Compile Include="Packages\Events\PackageCreated.cs" />
     <Compile Include="Packages\Events\PackageUpdated.cs" />

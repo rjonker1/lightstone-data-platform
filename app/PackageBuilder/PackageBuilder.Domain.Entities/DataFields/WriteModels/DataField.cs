@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using PackageBuilder.Core.Attributes;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
@@ -9,6 +10,9 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
     public class DataField : IDataField
     {
         [DataMember]
+        public Guid DataProviderId { get; internal set; }
+        public string Namespace { get; set; }
+        [DataMember]
         public string Name { get; internal set; }
         [DataMember]
         public string Label { get; internal set; }
@@ -16,7 +20,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         public string Definition { get; internal set; }
         [DataMember]
         public IEnumerable<Industry> Industries { get; internal set; }
-        [DataMember]
+        [DataMember, MapCurrentValue]
         public double Price { get; internal set; }
         [DataMember]
         public bool? IsSelected { get; internal set; }
@@ -65,6 +69,16 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             IsSelected = isSelected;
             DataFields = dataFields;
             //Type = type;
+        }
+
+        public void SetDataProviderId(Guid id)
+        {
+            DataProviderId = id;
+        }
+
+        public void SetPrice(double costPrice)
+        {
+            Price = costPrice;
         }
     }
 }

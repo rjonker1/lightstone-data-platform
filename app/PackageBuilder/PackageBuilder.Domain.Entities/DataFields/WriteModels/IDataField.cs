@@ -6,6 +6,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
 {
     public interface IDataField : INamedEntity
     {
+        string Namespace { get; set; }
         string Label { get; }
         string Definition { get; }
         IEnumerable<Industry> Industries { get; }
@@ -13,5 +14,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         bool? IsSelected { get; }
         Type Type { get; }
         IEnumerable<IDataField> DataFields { get; }
+        //void SetDataProviderId(Guid id);
+        void SetPrice(double costPrice);
     }
 }

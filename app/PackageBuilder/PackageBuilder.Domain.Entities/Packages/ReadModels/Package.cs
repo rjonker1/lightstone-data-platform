@@ -6,15 +6,17 @@ namespace PackageBuilder.Domain.Entities.Packages.ReadModels
 {
     public class Package : Entity
     {
-        public virtual Guid PackageId { get; protected set; }
-        public virtual string Name { get; protected set; }
-        public virtual string Description { get; protected set; }
-        public virtual State State { get; protected set; }
-        public virtual int Version { get; protected set; }
-        public virtual decimal DisplayVersion { get; protected set; }
-        public virtual string Owner { get; protected set; }
-        public virtual DateTime CreatedDate { get; protected set; }
-        public virtual DateTime? EditedDate { get; protected set; }
+        public virtual Guid PackageId { get; protected internal set; }
+        public virtual string Name { get; protected internal set; }
+        public virtual string Description { get; protected internal set; }
+        public virtual State State { get; protected internal set; }
+        public virtual int Version { get; protected internal set; }
+        public virtual decimal DisplayVersion { get; protected internal set; }
+        public virtual string Owner { get; protected internal set; }
+        public virtual DateTime CreatedDate { get; protected internal set; }
+        public virtual DateTime? EditedDate { get; protected internal set; }
+        public virtual bool IsDeleted { get; protected internal set; }
+        public virtual DateTime? DeletedDate { get; protected internal set; }
 
         protected Package() { }
 
@@ -30,6 +32,12 @@ namespace PackageBuilder.Domain.Entities.Packages.ReadModels
             Owner = owner;
             CreatedDate = createdDateDate;
             EditedDate = editedDateDate;
+        }
+
+        public virtual void DeletePackage()
+        {
+            IsDeleted = true;
+            DeletedDate = DateTime.Now;
         }
     }
 }
