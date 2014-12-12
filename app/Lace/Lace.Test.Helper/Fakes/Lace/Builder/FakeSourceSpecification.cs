@@ -17,15 +17,22 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                             new FakeLightstoneSourceExecution(request,
                                 new FakeIvidTitleHolderSourceExecution(request,
                                     new FakeRgtVinSourceExecution(request,
-                                        new FakeAudatexSourceExecution(request, null, null), null),
-                                    null), null), null).CallSource(response, @event);
+                                        new FakeRgtSourceExecution(request,
+                                            new FakeAudatexSourceExecution(request, null, null), null),
+                                        null), null), null), null).CallSource(response, @event);
 
 
-        public IEnumerable<KeyValuePair<string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>> Specifications
+        public
+            IEnumerable
+                <
+                    KeyValuePair
+                        <string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>>
+            Specifications
         {
             get
             {
-                return new Dictionary<string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>()
+                return new Dictionary
+                    <string, Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders>>()
                 {
                     {
                         "License plate search", _licenseNumberRequestSpecification()

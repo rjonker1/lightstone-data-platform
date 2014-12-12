@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
@@ -16,24 +18,23 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _request;
         private IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendMonitoringMessages _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
         private readonly ICallTheDataProviderSource _callTheSource;
 
         public when_requesting_data_from_lightstone_source()
         {
-            //var bus = new FakeBus();
-            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-
+            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponse();
-            _callTheSource = new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(), new FakeCarRepositioryFactory());
-           // _laceEvent = new PublishLaceEventMessages(publisher, _request.RequestAggregation.AggregateId);
+            _callTheSource = new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),
+                new FakeCarRepositioryFactory());
+
         }
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_response, _callTheSource, _laceEvent);
+            _requestDataFromSource.FetchDataFromSource(_response, _callTheSource, _monitoring);
         }
 
         [Observation]

@@ -32,26 +32,25 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
         public IEnumerable<Band> GetAll()
         {
-            using (_connection)
+            //using (_connection)
+            using (_cacheClient)
             {
-                using (_cacheClient)
-                {
-                    var cacheBands = _cacheClient.As<Band>();
-                    var response = cacheBands.Lists[BandsKey];
+                var cacheBands = _cacheClient.As<Band>();
+                var response = cacheBands.Lists[BandsKey];
 
-                    if (response != null && response.Any())
-                        return response;
+                if (response != null && response.Any())
+                    return response;
 
-                    var dbResponse = _connection
-                        .Query<Band>(SelectStatements.GetAllTheBands)
-                        .ToList();
+                var dbResponse = _connection
+                    .Query<Band>(SelectStatements.GetAllTheBands)
+                    .ToList();
 
-                    dbResponse.ForEach(f => response.Add(f));
+                dbResponse.ForEach(f => response.Add(f));
 
-                    _cacheClient.Add(BandsKey, response, DateTime.UtcNow.AddDays(1));
-                    return dbResponse;
-                }
+                _cacheClient.Add(BandsKey, response, DateTime.UtcNow.AddDays(1));
+                return dbResponse;
             }
+
         }
 
         public IEnumerable<Band> FindByMake(int makeId)

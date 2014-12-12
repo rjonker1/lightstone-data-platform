@@ -1,10 +1,12 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Builder;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
@@ -16,20 +18,14 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
         private ISendMonitoringMessages _monitoring;
         private IBootstrap _bootstrap;
 
-       // private readonly IPublishMessages _publisher;
-
         public FakeEntryPoint()
         {
-
-            //var bus = new FakeBus();
-            //_publisher = new Workflow.RabbitMQ.Publisher(bus);
+            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
         public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
         {
-            //_monitoring = new PublishLaceEventMessages(_publisher, request.RequestAggregation.AggregateId);
-
             _buildSourceChain = new FakeSourceChain(request.Package.Action);
             _buildSourceChain.Build();
 

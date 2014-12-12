@@ -8,14 +8,15 @@ namespace Lace.Shared.Extensions
         {
             try
             {
-                return JsonConvert.SerializeObject(value);
+                return JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
             }
             catch
             {
-
                 return string.Empty;
             }
-
         }
     }
 }

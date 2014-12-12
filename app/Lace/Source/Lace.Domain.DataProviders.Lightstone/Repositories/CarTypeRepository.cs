@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
         public IEnumerable<CarType> FindByMake(int makeId)
         {
-            using (_connection)
+            //using (_connection)
             using (_cacheClient)
             {
                 var key = string.Format(CarTypeKey, makeId);

@@ -28,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
         public IEnumerable<Statistic> FindAllWithRequest(IProvideCarInformationForRequest request)
         {
-            using (_connection)
+            //using (_connection)
             using (_cacheClient)
             {
                 var key = string.Format(StatisticsKey, request.CarId, request.MakeId, request.Year);
@@ -68,7 +68,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
         public IEnumerable<Statistic> FindByMakeAndMetricTypes(int makeId, MetricTypes[] metricTypes)
         {
-            using (_connection)
+            //using (_connection)
             using (_cacheClient)
             {
                 var key = string.Format(StatisticsKey, makeId, 0, 0);

@@ -24,50 +24,47 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
 
         public IEnumerable<CarInfo> FindByCarIdAndYear(int? carId, int year)
         {
-            using (_connection)
+            //using (_connection)
+            using (_cacheClient)
             {
-                using (_cacheClient)
-                {
-                    var key = string.Format(CarKey, carId, year);
-                    var cachedCar = _cacheClient.As<CarInfo>();
-                    var response = cachedCar.Lists[key];
+                var key = string.Format(CarKey, carId, year);
+                var cachedCar = _cacheClient.As<CarInfo>();
+                var response = cachedCar.Lists[key];
 
-                    if (response != null && response.Any())
-                        return response;
+                if (response != null && response.Any())
+                    return response;
 
-                    var dbResponse =
-                        _connection.Query<CarInfo>(SelectStatements.GetCarInformationById, new {@CarId = carId})
-                            .ToList();
+                var dbResponse =
+                    _connection.Query<CarInfo>(SelectStatements.GetCarInformationById, new {@CarId = carId})
+                        .ToList();
 
-                    dbResponse.ForEach(f => response.Add(f));
-                    _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
-                    return dbResponse;
-                }
+                dbResponse.ForEach(f => response.Add(f));
+                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                return dbResponse;
             }
         }
 
         public IEnumerable<CarInfo> FindByVin(string vinNumber)
         {
-            using (_connection)
+            //using (_connection)
+            using (_cacheClient)
             {
-                using (_cacheClient)
-                {
-                    var key = string.Format(CarKey, vinNumber, 0);
-                    var cachedCar = _cacheClient.As<CarInfo>();
-                    var response = cachedCar.Lists[key];
+                var key = string.Format(CarKey, vinNumber, 0);
+                var cachedCar = _cacheClient.As<CarInfo>();
+                var response = cachedCar.Lists[key];
 
-                    if (response != null && response.Any())
-                        return response;
+                if (response != null && response.Any())
+                    return response;
 
-                    var dbResponse =
-                        _connection.Query<CarInfo>(SelectStatements.GetCarInformationByVin, new {@Vin = vinNumber})
-                            .ToList();
+                var dbResponse =
+                    _connection.Query<CarInfo>(SelectStatements.GetCarInformationByVin, new {@Vin = vinNumber})
+                        .ToList();
 
-                    dbResponse.ForEach(f => response.Add(f));
-                    _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
-                    return dbResponse;
-                }
+                dbResponse.ForEach(f => response.Add(f));
+                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                return dbResponse;
             }
+
         }
     }
 }

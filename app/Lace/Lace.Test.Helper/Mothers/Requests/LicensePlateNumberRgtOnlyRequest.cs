@@ -3,20 +3,12 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-
-    public class LicensePlateNumberAllDataProvidersRequest : Domain.Core.Requests.Contracts.ILaceRequest
+    public class LicensePlateNumberRgtOnlyRequest : ILaceRequest
     {
-
-        public IPackage Package
-        {
-            get
-            {
-                return LicensePlateNumberAllRequestPackage.LicenseNumberPackage();
-            }
-        }
 
         public IProvideUserInformationForRequest User
         {
@@ -34,19 +26,19 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public IProvideRequestAggregation RequestAggregation
-        {
-            get
-            {
-                return new AggregationInformation();
-            }
-        }
-
         public IProvideVehicleInformationForRequest Vehicle
         {
             get
             {
                 return new RequestVehicleInformation();
+            }
+        }
+
+        public IProvideRequestAggregation RequestAggregation
+        {
+            get
+            {
+                return new AggregationInformation();
             }
         }
 
@@ -75,6 +67,14 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return "XMC167GP";
             }
         }
-      
+
+        public IPackage Package
+        {
+            get
+            {
+                return LicensePlateNumberRgtRequestPackage.LicenseNumberPackage();
+            }
+           
+        }
     }
 }

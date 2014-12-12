@@ -60,5 +60,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory
         {
             return new StatisticsRepository(_connection, _redisClient);
         }
+
+        public void Dispose()
+        {
+            if (_connection != null) _connection.Dispose();
+        }
     }
 }

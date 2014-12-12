@@ -45,8 +45,11 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 monitoring.StartCallingDataProvider(Provider, _request.ObjectToJson(), _stopWatch);
 
                 GetCarInformation();
-                _carSpecifications =
-                    new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository()).CarSpecifications;
+                var carUow =
+                    new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository());
+                carUow.GetCarSpecifications(
+                        _carInformation.CarInformationRequest);
+                _carSpecifications = carUow.CarSpecifications;
 
                 monitoring.EndCallingDataProvider(Provider, _carSpecifications.ObjectToJson(), _stopWatch);
 

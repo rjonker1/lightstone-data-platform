@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
         public IEnumerable<Municipality> GetAll()
         {
-            using (_connection)
+            //using (_connection)
             using (_cacheClient)
             {
                 var cacheMuncipalities = _cacheClient.As<Municipality>();

@@ -1,5 +1,6 @@
 ﻿using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
+using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Test.Helper.Mothers.Sources;
 
 namespace Lace.Test.Helper.Builders.Sources
@@ -11,6 +12,12 @@ namespace Lace.Test.Helper.Builders.Sources
         public IRequestDataFromDataProviderSource ForRgtVin()
         {
             _requestDataFromSource = new RequestDataFromRgtVinHolderSource();
+            return _requestDataFromSource;
+        }
+
+        public IRequestDataFromDataProviderSource ForRgt()
+        {
+            _requestDataFromSource = new RequestDataFromRgtSource();
             return _requestDataFromSource;
         }
 

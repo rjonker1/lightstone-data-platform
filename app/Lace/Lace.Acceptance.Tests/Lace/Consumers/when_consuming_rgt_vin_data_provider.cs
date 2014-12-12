@@ -1,36 +1,34 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Consumers
 {
-    public class when_consuming_rgt_vin_source : Specification
+    public class when_consuming_rgt_vin_data_provider : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendMonitoringMessages _laceEvent;
+        private readonly ISendMonitoringMessages _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private RgtVinDataProvider _consumer;
 
 
-        public when_consuming_rgt_vin_source()
+        public when_consuming_rgt_vin_data_provider()
         {
-            //var bus = new FakeBus();
-            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-           
+            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _request = new LicensePlateNumberRgtVinOnlyRequest();
-           // _laceEvent = new PublishLaceEventMessages(publisher,_request.RequestAggregation.AggregateId);
-
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }
 
         public override void Observe()
         {
             _consumer = new RgtVinDataProvider(_request, null, null);
-            _consumer.CallSource(_response, _laceEvent);
+            _consumer.CallSource(_response, _monitoring);
         }
 
 

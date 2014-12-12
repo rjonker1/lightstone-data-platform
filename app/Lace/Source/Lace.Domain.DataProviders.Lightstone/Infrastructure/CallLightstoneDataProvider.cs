@@ -45,6 +45,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
                 GetCarInformation();
                 GetMetrics();
+                Dispose();
 
                 monitoring.EndCallingDataProvider(Provider, response != null ? response.ObjectToJson() : string.Empty,
                     _stopWatch);
@@ -58,6 +59,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     "Error calling Lightstone Data Provider");
                 LightstoneResponseFailed(response);
             }
+        }
+
+        private void Dispose()
+        {
+            _carRepository.Dispose();
+            _repositories.Dispose();
         }
 
         public void TransformResponse(IProvideResponseFromLaceDataProviders response,ISendMonitoringMessages monitoring)
