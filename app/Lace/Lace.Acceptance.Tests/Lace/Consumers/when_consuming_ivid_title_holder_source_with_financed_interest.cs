@@ -58,7 +58,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void ivid_title_holder_consumer_with_financed_interest_should_be_available()
         {
-            _response.IvidTitleHolderResponse.FinancialInterestAvailable.ShouldBeTrue();
+           _response.IvidTitleHolderResponse.FinancialInterestAvailable.ShouldBeTrue();
         }
     }
 }
