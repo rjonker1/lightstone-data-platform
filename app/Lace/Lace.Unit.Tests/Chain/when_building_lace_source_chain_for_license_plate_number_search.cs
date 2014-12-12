@@ -58,8 +58,8 @@ namespace Lace.Unit.Tests.Chain
             _initialize.LaceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.RgtResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.RgtResponseHandled.Handled.ShouldBeTrue();
+            //_initialize.LaceResponses[0].Response.RgtResponse.ShouldNotBeNull();
+            //_initialize.LaceResponses[0].Response.RgtResponseHandled.Handled.ShouldBeTrue();
 
             _initialize.LaceResponses[0].Response.LightstoneResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.LightstoneResponseHandled.Handled.ShouldBeTrue();

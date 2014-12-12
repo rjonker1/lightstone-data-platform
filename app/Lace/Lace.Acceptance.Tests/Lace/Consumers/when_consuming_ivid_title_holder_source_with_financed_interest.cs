@@ -16,8 +16,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         private readonly ISendMonitoringMessages _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private IvidTitleHolderDataProvider _consumer;
-
-
+        
         public when_consuming_ivid_title_holder_source_with_financed_interest()
         {
             _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());

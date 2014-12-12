@@ -47,17 +47,14 @@ namespace Lace.Acceptance.Tests.Lace.Chain
             _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.LightstoneResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.LightstoneResponseHandled.Handled.ShouldBeTrue();
-
             _initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
 
             _initialize.LaceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.RgtResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.RgtResponseHandled.Handled.ShouldBeTrue();
+            //_initialize.LaceResponses[0].Response.RgtResponse.ShouldNotBeNull();
+            //_initialize.LaceResponses[0].Response.RgtResponseHandled.Handled.ShouldBeTrue();
 
             _initialize.LaceResponses[0].Response.LightstoneResponse.ShouldNotBeNull();
             _initialize.LaceResponses[0].Response.LightstoneResponseHandled.Handled.ShouldBeTrue();
