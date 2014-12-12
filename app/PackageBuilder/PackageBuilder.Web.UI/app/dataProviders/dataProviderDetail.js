@@ -13,9 +13,9 @@
 
         $scope.title = 'Data Provider Detail';
         var getLogFn = common.logger.getLogFn;
-        //var log = getLogFn(controllerId);
-        //var logSuccess = getLogFn(controllerId, 'success');
-        //var logError = getLogFn(controllerId, 'error');
+        var log = getLogFn(controllerId);
+        var logSuccess = getLogFn(controllerId, 'success');
+        var logError = getLogFn(controllerId, 'error');
 
         $scope.test = {};
 
@@ -238,29 +238,28 @@
         function activate() {
 
             common.activateController([getDataProvider($routeParams.id, $routeParams.version), getIndustries()], controllerId)
-                .then(function (result) {
-                    //log('Activated Data Providers Edit View');
-                    $scope.status = result;
+                .then(function () {
+                    log('Activated Data Providers Edit View');
                 });
         }
 
         function getDataProvider(id, version) {
 
-            //return datacontext.getDataProvider(id, version).then(function (response) {
+            return datacontext.getDataProvider(id, version).then(function (response) {
 
-            //    $scope.dataProvider = response.data;
-            //    $scope.switch = $scope.dataProvider.response[0].fieldLevelCostPriceOverride;
+                $scope.dataProvider = response.data;
+                $scope.switch = $scope.dataProvider.response[0].fieldLevelCostPriceOverride;
 
-            //    ($scope.switch == true) ? $scope.switchAlternate = 'Per Field' : $scope.switchAlternate = 'Per Request';
-            //});
+                ($scope.switch == true) ? $scope.switchAlternate = 'Per Field' : $scope.switchAlternate = 'Per Request';
+            });
         }
 
         function getIndustries() {
 
-            //return datacontext.getIndustries().then(function (response) {
+            return datacontext.getIndustries().then(function (response) {
 
-            //    $scope.industries = response;
-            //});
+                $scope.industries = response;
+            });
         }
     }
 })();

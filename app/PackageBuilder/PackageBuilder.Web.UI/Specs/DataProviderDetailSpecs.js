@@ -19,7 +19,7 @@
 
 ///<reference path="~/App/dataProviders/dataProviderDetail.js"/>
 
-describe("DataProviders", function () {
+describe("dataProviderDetail: Controller", function () {
 
     var scope, datacontext, $location, common;
 
@@ -27,48 +27,50 @@ describe("DataProviders", function () {
     //Will need to provide $q to simulate $http promises - $q is not a provider!
     //Used a mock due to the fact that spy's are not meant to be used for complex scenarios
 
-
-
     beforeEach(function () {
-        var mockRestService = {};
-        var mockRestServiceCommon = {};
+        var datacontextServiceMock = {};
+        var commonServiceMock = {};
 
         //Ensure that the module for the controller is loaded!!
         //beforeEach(module('app'));
 
         //Module for the Service
         module('app', function ($provide) {
-            $provide.value('datacontext', mockRestService);
+            $provide.value('datacontext', datacontextServiceMock);
         });
 
         module('common', function ($provide) {
-            $provide.value('common', mockRestServiceCommon);
+            $provide.value('common', commonServiceMock);
         });
 
         inject(function ($q) {
-            mockRestService.data = [
-              {
-                  id: 0,
-                  name: 'Angular'
-              },
-              {
-                  id: 1,
-                  name: 'Ember'
-              },
-              {
-                  id: 2,
-                  name: 'Backbone'
-              },
-              {
-                  id: 3,
-                  name: 'React'
-              }
-            ];
 
-            mockRestServiceCommon.data = [{ success: true }];
+            //Mock data
+            commonServiceMock.data = [{ success: true }];
 
-            //Mock service methid name needs to match that of the defined service methods
-            mockRestService.getDataProvider = function (id, version) {
+            datacontextServiceMock.data = {
+                data: {
+                    response: [
+                        {
+                            id: 123,
+                            name: 'test',
+                            fieldLevelCostPriceOverride: true
+                        }
+                    ]
+                }
+            };
+
+            datacontextServiceMock.industriesData = {
+                industries:
+                    [{ name: 'Industry1' }]
+            };
+
+
+            //Mock Services
+            //Mock service method name needs to match that of the defined service methods
+
+            //common
+            commonServiceMock.activateController = function (params, controllerId) {
                 var defer = $q.defer();
 
                 defer.resolve(this.data);
@@ -76,17 +78,32 @@ describe("DataProviders", function () {
                 return defer.promise;
             };
 
+            commonServiceMock.logger = function () {
 
-            mockRestServiceCommon.activateController = function (params, controllerId) {
+            };
+
+            commonServiceMock.logger.getLogFn = function (controllerId) {
+                return function logFn(parameters) {
+
+                }
+            };
+
+            //datacontext
+            datacontextServiceMock.getDataProvider = function (id, version) {
                 var defer = $q.defer();
 
                 defer.resolve(this.data);
 
+                //Inject the promise into the expected .then(response), to define response
                 return defer.promise;
             };
 
-            mockRestServiceCommon.logger = function () {
+            datacontextServiceMock.getIndustries = function () {
+                var defer = $q.defer();
 
+                defer.resolve(this.industriesData);
+
+                return defer.promise;
             };
 
         });
@@ -111,16 +128,20 @@ describe("DataProviders", function () {
         $controller('dataProviderDetail',
                       { $scope: scope, $location: $location, common: common, datacontext: datacontext });
 
-        scope.$digest(); // $digest to resolce all promises setup on the mock service
+        scope.$digest(); // $digest to resolve all promises setup on the mock service
     }));
 
     //Specs
-    it('should set activateController to true', function () {
-        expect(scope.status).toEqual([
-          {
-              success: true,
-          }
-        ]);
+    it('should get a specific DataProvider', function () {
+        expect(scope.dataProvider).toBeDefined();
+    });
+
+    it('should set the $scope.switch to true|false', function () {
+        expect(scope.switch).toBeTruthy();
+    });
+
+    xit('should get an object list of industries', function () {
+        expect(scope.industries.length).toBeGreaterThan(0);
     });
 
 });
