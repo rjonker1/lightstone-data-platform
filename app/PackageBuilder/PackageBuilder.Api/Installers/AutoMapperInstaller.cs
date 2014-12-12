@@ -2,7 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using PackageBuilder.Api.Helpers.AutoMappers;
+using PackageBuilder.Api.Helpers.AutoMapper.Maps;
 
 namespace PackageBuilder.Api.Installers
 {

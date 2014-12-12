@@ -2,11 +2,16 @@
     'use strict';
 
     var serviceId = 'datacontext';
-    angular.module('app').factory(serviceId, ['$http', 'common', 'GetDataProvider', 'GetDataProviders',
-                            'GetDataProviderSources', 'GetPackages', 'PostDataProvider', datacontext]);
+    //angular.module('app').factory(serviceId, ['$http', 'common', 'GetDataProvider', 'GetDataProviders',
+    //                        'GetDataProviderSources', 'GetPackages', 'PostDataProvider', datacontext]);
 
-    function datacontext($http, common, GetDataProvider, GetDataProviders, GetDataProviderSources,
-                    GetPackages, PostDataProvider) {
+    angular.module('app').factory(serviceId, ['$http', 'common', datacontext]);
+
+    function datacontext($http, common) {
+        
+        
+        //function datacontext($http, common, GetDataProvider, GetDataProviders, GetDataProviderSources,
+        //            GetPackages, PostDataProvider) {
 
         //Used to convert promises.
         var $q = common.$q;

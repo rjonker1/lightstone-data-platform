@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
+using PackageBuilder.Core.Attributes;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
 
@@ -21,7 +22,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public DataProviderName Name { get; internal set; } 
         [DataMember]
         public string Description { get; internal set; }
-        [DataMember]
+        [DataMember, MapCurrentValue]
         public double CostOfSale { get; internal set; }
 
         public SourceConfiguration SourceConfiguration
@@ -34,7 +35,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
 
         [DataMember]
         public Type ResponseType { get; internal set; }
-        [DataMember]
+        [DataMember, MapCurrentValue]
         public bool FieldLevelCostPriceOverride { get; internal set; }
         [DataMember]
         public string Owner { get; internal set; }
@@ -67,13 +68,22 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
+            //SetDataProviderId(id, dataFields);
             RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, dataFields));
         }
 
         public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
         {
+            //SetDataProviderId(id, dataFields);
             RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, dataFields));
         }
+
+        //private void SetDataProviderId(Guid id, IEnumerable<IDataField> dataFields)
+        //{
+        //    if (dataFields == null) return;
+        //    foreach (var dataField in dataFields.Traverse(x => x.DataFields))
+        //        dataField.SetDataProviderId(id);
+        //}
 
         private void Apply(DataProviderCreated @event)
         {

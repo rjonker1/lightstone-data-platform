@@ -1,0 +1,69 @@
+﻿///<reference path="~/Scripts/jasmine/jasmine.js"/>
+///<reference path="~/Scripts/angular.js"/>
+///<reference path="~/Scripts/angular-mocks.js"/>
+
+///<reference path="~/App/app.js"/>
+///<reference path="~/App/dataProviders/dataProviderDetail.js"/>
+
+describe("DataProviders", function () {
+
+    //beforeEach(module("common"));
+    
+    //NB Need to find work around for this test! datacontext casuing issues when attempting to instantiate a basic $scope test
+    //Possible solution: Look at Mocking services of jasmine to replicate the async calls for api data.
+    //Site reference updated to bookmarks.
+
+    describe("DataProviderDetail", function () {
+
+        var scope,
+            controller;
+
+        var datacontextMock;
+
+        //beforeEach(function ($inject) { //angular.mock.inject
+
+        //    //datacontextMock = jasmine.createSpyObj('datacontext', ['getDataProvider', 'getIndustries']);
+
+        //    //module('app');
+
+        //    $inject( function( $rootScope, $controller ) {
+
+        //        scope = $rootScope.$new();
+        //        //_location = $location;
+        //        //_routeParams = $routeParams;
+        //        //_common = $injector.get('common');
+        //        //_datacontext = $injector.get('datacontext');
+
+
+        //        //datacontextMock.getDataProvider.andReturn($q.when('test'));
+        //        //datacontextMock.getIndustries.andReturn($q.when('test2'));
+
+        //        controller = $controller('dataProviderDetail', {
+        //            $scope: scope,
+        //            //$location: _location,
+        //            //$routeParams: _routeParams,
+        //            //common: _common,
+        //            //datacontext: datacontext
+        //            //datacontext: datacontextMock
+        //        });
+
+        //    });
+
+        //});
+        beforeEach(module("app"));
+
+        beforeEach(inject(function ($rootScope, $controller) {
+            scope = $rootScope.$new();
+
+           
+
+            controller = $controller('dataProviderDetail', { $scope: scope });
+        }));
+
+        //Spec 1
+        it('should resolve title', function () {
+            expect(scope.title).toBe('Data Provider Detail');
+        });
+
+    });
+});

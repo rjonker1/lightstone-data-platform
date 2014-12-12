@@ -151,18 +151,24 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Helpers\AutoMappers\ComplexObjectMap.cs" />
-    <Compile Include="Helpers\AutoMappers\DataFieldMap.cs" />
-    <Compile Include="Helpers\AutoMappers\DataProviderMap.cs" />
-    <Compile Include="Helpers\AutoMappers\ICreateAutoMap.cs" />
-    <Compile Include="Helpers\AutoMappers\IvidResponseMap.cs" />
-    <Compile Include="Helpers\AutoMappers\IvidTitleHolderResponseMap.cs" />
-    <Compile Include="Helpers\AutoMappers\LightstoneResponseMap.cs" />
-    <Compile Include="Helpers\AutoMappers\PackageMap.cs" />
-    <Compile Include="Helpers\AutoMappers\RgtResponseMap.cs" />
-    <Compile Include="Helpers\AutoMappers\RgtVinResponseMap.cs" />
-    <Compile Include="Helpers\AutoMappers\StateMap.cs" />
-    <Compile Include="Helpers\AutoMappers\VehicleValuationResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\DataFieldDtoToDataFieldConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\ValueResolvers\DataFieldPriceResolver.cs" />
+    <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
+    <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviderMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\IndustryResolver.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\IvidResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\IvidTitleHolderResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\LightstoneResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PackageMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\RgtResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\RgtVinResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\StateMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\VehicleValuationResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderToDtoConverter.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />

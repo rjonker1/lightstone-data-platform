@@ -91,6 +91,7 @@
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="DbPersistence\when_persisting_entities_to_db.cs" />
     <Compile Include="InMemoryPersistence\when_persisting_entities_to_memory.cs" />
+    <Compile Include="OverrideHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\PackageBuilder.Api.Tests\connectionStrings.config">
