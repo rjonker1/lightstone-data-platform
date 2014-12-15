@@ -145,7 +145,7 @@ describe('Controller: dataProviderDetail', function () {
 
     describe('Routing:',function() {
 
-        it('should redirect back to a Data Providers overview page', function () {
+        it('should redirect back to the Data Providers overview page', function () {
             spyOn($location, 'path');
 
             // We simulate we clicked a library on the page
