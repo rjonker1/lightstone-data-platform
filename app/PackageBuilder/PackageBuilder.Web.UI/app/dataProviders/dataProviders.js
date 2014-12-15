@@ -7,13 +7,13 @@
         .module('app')
         .controller(controllerId, dataSources);
 
-    dataSources.$inject = ['$scope', '$location', 'common', 'datacontext']; //'uiGridConstants',
+    dataSources.$inject = ['$scope', '$location', 'uiGridConstants', 'common', 'datacontext'];
 
-    function dataSources($scope, $location, common, datacontext) { // uiGridConstants,
+    function dataSources($scope, $location, uiGridConstants, common, datacontext) {
 
         $scope.title = 'Data Providers';
 
-        //$scope.$scope = $scope; //ui-grid
+        $scope.$scope = $scope; //ui-grid
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
@@ -24,10 +24,12 @@
         $scope.latestVersion = 0;
 
         $scope.notify = function (row) {
+            console.log(row);
             $location.path('/data-provider-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
         };
 
         $scope.viewDataProvider = function (row) {
+            console.log(row);
             $location.path('/data-provider-view/' + row.entity.dataProviderId + '/' + row.entity.version);
         }
 
@@ -105,7 +107,6 @@
                             return x.version;
                         });
                     });
-
 
                 (data.indexOf('Error') > -1) ? logError(data) : (($scope.dProvidersData = data) ? logSuccess('Data Providers retrieved.') : '');
 

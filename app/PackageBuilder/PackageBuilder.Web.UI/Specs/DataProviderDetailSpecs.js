@@ -19,7 +19,7 @@
 
 ///<reference path="~/App/dataProviders/dataProviderDetail.js"/>
 
-describe("dataProviderDetail: Controller", function () {
+describe('Controller: dataProviderDetail', function () {
 
     var scope, datacontext, $location, common;
 
@@ -60,12 +60,6 @@ describe("dataProviderDetail: Controller", function () {
                 }
             };
 
-            datacontextServiceMock.industriesData = {
-                industries:
-                    [{ name: 'Industry1' }]
-            };
-
-
             //Mock Services
             //Mock service method name needs to match that of the defined service methods
 
@@ -100,8 +94,9 @@ describe("dataProviderDetail: Controller", function () {
 
             datacontextServiceMock.getIndustries = function () {
                 var defer = $q.defer();
+                var industries = [{id: 001, name: 'Industry1'}];
 
-                defer.resolve(this.industriesData);
+                defer.resolve(industries);
 
                 return defer.promise;
             };
@@ -132,16 +127,33 @@ describe("dataProviderDetail: Controller", function () {
     }));
 
     //Specs
+    it('should set the title to: "Data Provider Detail"', function() {
+        expect(scope.title).toEqual('Data Provider Detail');
+    });
+
     it('should get a specific DataProvider', function () {
         expect(scope.dataProvider).toBeDefined();
+    });
+
+    it('should get an object list of industries', function () {
+        expect(scope.industries.length).toBeGreaterThan(0);
     });
 
     it('should set the $scope.switch to true|false', function () {
         expect(scope.switch).toBeTruthy();
     });
 
-    xit('should get an object list of industries', function () {
-        expect(scope.industries.length).toBeGreaterThan(0);
+    describe('Routing:',function() {
+
+        it('should redirect back to a Data Providers overview page', function () {
+            spyOn($location, 'path');
+
+            // We simulate we clicked a library on the page
+            scope.cancel();
+
+            expect($location.path).toHaveBeenCalledWith('/data-providers');
+        });
+
     });
 
 });
