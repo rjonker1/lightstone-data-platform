@@ -208,7 +208,8 @@
     <Content Include="Specs\DataProviderDetailSpecs.js" />
     <Content Include="Specs\DataProviderSpecs.js" />
     <Content Include="Specs\LSAPackageBuilderSpecRunner.html" />
-    <Content Include="Specs\PackageMaintenanceCreateSpec.js" />
+    <Content Include="Specs\PackageMaintenanceCreateSpecs.js" />
+    <Content Include="Specs\PackageMaintenanceEditSpecs.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
