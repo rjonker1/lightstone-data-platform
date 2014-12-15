@@ -119,7 +119,7 @@ describe('Controller: dataProviders', function () {
     });
 
     it('should initialize the GridView with populated Data Providers', function () {
-        expect(scope.gridOptions).toBeDefined();
+        expect(scope.gridOptions).not.toBeNull();
     });
 
 
