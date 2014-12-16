@@ -1,5 +1,4 @@
-﻿using Lace.Domain.Core.Entities;
-using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
