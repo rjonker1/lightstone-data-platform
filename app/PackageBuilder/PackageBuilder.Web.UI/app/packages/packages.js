@@ -22,30 +22,6 @@
         $scope.test = '';
         $scope.dPackagesData = '';
 
-        $scope.myData = [
-            {
-                "Id": "1",
-                "Name": "Cox",
-                "lastName": "Carney",
-                "company": "Enormo",
-                "employed": true
-            },
-            {
-                "Id": "2",
-                "Name": "Lorraine",
-                "lastName": "Wise",
-                "company": "Comveyer",
-                "employed": false
-            },
-            {
-                "Id": "3",
-                "Name": "Nancy",
-                "lastName": "Waters",
-                "company": "Fuelton",
-                "employed": false
-            }
-        ];
-
         $scope.notify = function (row) {
 
             $location.path('/package-maintenance-edit/' + row.entity.packageId + '/' + row.entity.version);
@@ -159,9 +135,9 @@
                         });
                     });
 
-                $scope.dPackagesData = result;
+                //$scope.dPackagesData = result;
 
-                //(data.indexOf('Error') > -1) ? logError(data) : $scope.dPackagesData = data;
+                (result.indexOf('Error') > -1) ? logError(result) : $scope.dPackagesData = result;
 
             });
         }

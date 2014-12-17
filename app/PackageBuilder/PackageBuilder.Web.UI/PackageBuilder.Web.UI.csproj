@@ -206,10 +206,11 @@
     <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
     <Content Include="Scripts\ui-grid3.js" />
     <Content Include="Specs\DataProviderDetailSpecs.js" />
-    <Content Include="Specs\DataProviderSpecs.js" />
+    <Content Include="Specs\DataProvidersSpecs.js" />
     <Content Include="Specs\LSAPackageBuilderSpecRunner.html" />
     <Content Include="Specs\PackageMaintenanceCreateSpecs.js" />
     <Content Include="Specs\PackageMaintenanceEditSpecs.js" />
+    <Content Include="Specs\PackagesSpecs.js" />
     <Content Include="Specs\PackageViewSpecs.js" />
     <Content Include="Web.config" />
   </ItemGroup>
