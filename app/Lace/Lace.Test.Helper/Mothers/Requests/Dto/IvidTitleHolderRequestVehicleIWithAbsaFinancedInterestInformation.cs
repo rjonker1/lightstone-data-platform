@@ -40,13 +40,13 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         {
             get
             {
-                return "YXK559GP";
+                return "NRB891W";
             }
         }
 
         public string Vin
         {
-            get { return "WVWZZZ1KZAW208183"; }
+            get { return "KMHSH81XSBU704415"; }
         }
     }
 }

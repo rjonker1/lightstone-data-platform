@@ -22,7 +22,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolderWithAbsaFinancedInterest();
-            _response = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
             _dataProvider = new IvidTitleHolderDataProvider(_request, null, null);
         }
 

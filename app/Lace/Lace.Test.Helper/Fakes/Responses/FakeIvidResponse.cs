@@ -104,5 +104,39 @@ namespace Lace.Test.Helper.Fakes.Responses
                 vin = "WVWZZZ1KZAW208183"
             };
         }
+
+        public static HpiStandardQueryResponse GetHpiStandardQueryResponseForLicenseNoNrb891W()
+        {
+            return new HpiStandardQueryResponse()
+            {
+                GVM = "1750",
+                IvidReference = "IVD - 01468460493",
+                category = new CodeDescription() { code = "B", description = "Light passenger mv(less than 12 persons)" },
+                description = new CodeDescription() { code = "18", description = "Hatch back" },
+                colour = new CodeDescription() { code = "3", description = "Silver" },
+                driven = new CodeDescription() { code = "1", description = "Self-propelled" },
+                economicSector = new CodeDescription() { code = "1", description = "Private" },
+                engineDisplacement = "1598",
+                engineNumber = "1404283",
+                issuesTypes = null,
+                ividQueryResult = IvidQueryResult.NO_ISSUES,
+                licenceNumber = "NRB891W",
+                lifeStatus = new CodeDescription() { code = "2", description = "Used" },
+                make = new CodeDescription() { code = "T05", description = "VOLKSWAGEN" },
+                model = new CodeDescription() { code = "D166", description = "GOLF" },
+                partialResponse = false,
+                partialResponseSpecified = false,
+                registerNumber = "CNC407L",
+                registrationDate = "2/18/2014",
+                sapMark = new CodeDescription() { code = "99", description = "None" },
+                tare = "1276",
+                titleHolderIdNumber = null,
+                titleHolderIdType = IdType.UNKNOWN,
+                titleHolderIdTypeSpecified = false,
+                vehicleStatusCode = VehicleState.LICENSED,
+                vehicleStatusCodeSpecified = true,
+                vin = "KMHSH81XSBU704415"
+            };
+        }
     }
 }
