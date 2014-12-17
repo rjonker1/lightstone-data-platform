@@ -168,7 +168,7 @@ describe('Controller: packageMaintenanceEdit', function() {
         scope.editPackage(packageData);
 
         // Propagate promise resolution to 'then' functions using $apply().
-        scope.$apply(); //Need to rundigest cycle for resolved promises to call their callbacks
+        scope.$apply(); //Need to run digest cycle for resolved promises to call their callbacks
 
         expect(console.log).toHaveBeenCalledWith({ status: 200 });
     });

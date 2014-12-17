@@ -46,7 +46,7 @@ describe('Controller: packageView', function () {
         inject(function ($q) {
 
             //Mock data
-            datacontextServiceMock.data = [];
+            datacontextServiceMock.data = { Package: { fields: [{ name: 'fd123', value: 'test' }] } };
 
 
             //Mock Services
@@ -81,16 +81,16 @@ describe('Controller: packageView', function () {
                 return defer.promise;
             };
 
-            datacontextServiceMock.editPackage = function (packageData) {
-                var defer = $q.defer();
+            //datacontextServiceMock.editPackage = function (packageData) {
+            //    var defer = $q.defer();
 
-                this.data.push(packageData);
+            //    this.data.push(packageData);
 
-                var response = { status: 200 };
-                defer.resolve(response);
+            //    var response = { status: 200 };
+            //    defer.resolve(response);
 
-                return defer.promise;
-            };
+            //    return defer.promise;
+            //};
 
             datacontextServiceMock.getStates = function (id, version) {
                 var defer = $q.defer();
@@ -159,19 +159,27 @@ describe('Controller: packageView', function () {
         expect(scope.industries.length).toEqual(3);
     });
 
-    it('should edit an existing Package', function () {
+    it('should retrieve the specified Package to view details', function () {
 
-        spyOn(console, 'log');
+        datacontext.getPackage(1, 1);
+        scope.$apply();
 
-        var packageData = { Package: { fields: [{ name: 'fd123', value: 'test' }] } };
-
-        scope.editPackage(packageData);
-
-        // Propagate promise resolution to 'then' functions using $apply().
-        scope.$apply(); //Need to rundigest cycle for resolved promises to call their callbacks
-
-        expect(console.log).toHaveBeenCalledWith({ status: 200 });
+        expect(scope.dataProvsPkg.Package).toEqual({ mock: 'mock' });
     });
+
+    //it('should edit an existing Package', function () {
+
+    //    spyOn(console, 'log');
+
+    //    var packageData = { Package: { fields: [{ name: 'fd123', value: 'test' }] } };
+
+    //    scope.editPackage(packageData);
+
+    //    // Propagate promise resolution to 'then' functions using $apply().
+    //    scope.$apply(); //Need to rundigest cycle for resolved promises to call their callbacks
+
+    //    expect(console.log).toHaveBeenCalledWith({ status: 200 });
+    //});
 
     describe('Filter: industries', function () {
 
