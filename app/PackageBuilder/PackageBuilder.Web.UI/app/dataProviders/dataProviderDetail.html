@@ -12,7 +12,18 @@
 
         <td>
 
-            <div multi-select
+            <div ng-show="(dField.dataFields).length <= 0"
+                 multi-select
+                 input-model="dField.industries"
+                 button-label="name"
+                 item-label="name maker"
+                 max-labels="1"
+                 tick-property="isSelected"
+                 is-disabled="false">
+            </div>
+            
+            <div ng-show="(dField.dataFields).length > 0"
+                 multi-select
                  input-model="dField.industries"
                  button-label="name"
                  item-label="name maker"
@@ -20,14 +31,6 @@
                  tick-property="isSelected"
                  is-disabled="true">
             </div>
-
-            <!--<div multi-select
-                 input-model="dField.selectedChildren"
-                 button-label="name"
-                 item-label="name maker"
-                 max-labels="1"
-                 tick-property="isSelected">
-            </div>-->
 
         </td>
         
@@ -220,7 +223,8 @@
                                                     <th>Type</th>
                                                     <th>Label</th>
                                                     <th>Definition</th>
-                                                    <th style="width: 18%;">
+                                                    <th>Industry</th>
+                                                    <!--<th style="width: 18%;">
                                                         <div style="float: left;">
                                                             <label>Industry</label>
                                                         </div>
@@ -229,7 +233,7 @@
                                                                     ng-options="industry.name as industry.name for industry in industries"
                                                                     ng-change="updateFieldIndustry(selectedGroupIndustry)" />
                                                         </div>
-                                                    </th>
+                                                    </th>-->
                                                     <th ng-show="switch == true">Price</th>
                                                 </tr>
                                             </thead>
