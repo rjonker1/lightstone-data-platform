@@ -210,6 +210,7 @@
     <Content Include="Specs\LSAPackageBuilderSpecRunner.html" />
     <Content Include="Specs\PackageMaintenanceCreateSpecs.js" />
     <Content Include="Specs\PackageMaintenanceEditSpecs.js" />
+    <Content Include="Specs\PackageViewSpecs.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
