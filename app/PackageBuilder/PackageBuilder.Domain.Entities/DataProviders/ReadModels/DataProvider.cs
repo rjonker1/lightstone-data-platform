@@ -2,7 +2,6 @@
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Core.NHibernate.Attributes;
-using PackageBuilder.Domain.Entities.Enums;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.ReadModels
 {

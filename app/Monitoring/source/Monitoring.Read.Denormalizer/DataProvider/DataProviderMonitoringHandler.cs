@@ -6,10 +6,11 @@ using NServiceBus;
 
 namespace Monitoring.Read.Denormalizer.DataProvider
 {
-    public class DataProviderMonitoringHandler : IHandleMessages<DataProviderCommand>,
-        IHandleMessages<DataProviderFaultCommand>, IHandleMessages<DataProviderConfigurationCommand>,
-        IHandleMessages<DataProviderSecurityCommand>,
-        IHandleMessages<DataProviderTransformationCommand>
+    public class DataProviderMonitoringHandler : IHandleMessages<DataProviderExecutingCommand>,
+        IHandleMessages<DataProviderHasBeenConfiguredCommand>,
+        IHandleMessages<DataProviderHasEndedCommand>, IHandleMessages<DataProviderHasExecutedCommand>,
+        IHandleMessages<DataProviderHasFaultCommand>, IHandleMessages<DataProviderHasSecurityCommand>,
+        IHandleMessages<DataProviderResponseTransformedCommand>, IHandleMessages<DataProviderWasCalledCommand>
     {
         private readonly IUpdateStorage _storage;
 
@@ -18,101 +19,162 @@ namespace Monitoring.Read.Denormalizer.DataProvider
             _storage = storage;
         }
 
-        public void Handle(DataProviderCommand message)
+        public void Handle(DataProviderExecutingCommand message)
         {
-            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
+            var @event = new DataProviderMonitoringPerformanceModel(message.Command.Id)
             {
-                Payload = message.Payload,
-                Message =  message.Message,
-                DataProviderId = (int) message.DataProvider,
-                DataProvider = message.DataProvider.ToString(),
-                Category = message.Category.ToString(),
-                CategoryId = (int) message.Category,
-                Date = message.Date,
-                RequestAggregateId = message.Id,
-                IsJson = message.IsJson,
-                Metadata = message.MetaData,
-                TimeStamp = message.Date
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
             };
 
             _storage.Add(@event);
         }
 
-        public void Handle(DataProviderFaultCommand message)
+        public void Handle(DataProviderHasExecutedCommand message)
         {
-            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
+            var @event = new DataProviderMonitoringPerformanceModel(message.Command.Id)
             {
-                Payload = message.Payload,
-                Message = message.Message,
-                DataProviderId = (int) message.DataProvider,
-                DataProvider = message.DataProvider.ToString(),
-                Category = message.Category.ToString(),
-                CategoryId = (int) message.Category,
-                Date = message.Date,
-                RequestAggregateId = message.Id,
-                IsJson = message.IsJson,
-                Metadata = message.MetaData,
-                TimeStamp = message.Date
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
             };
 
             _storage.Add(@event);
         }
 
-        public void Handle(DataProviderConfigurationCommand message)
+        public void Handle(DataProviderWasCalledCommand message)
         {
-            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
+            var @event = new DataProviderMonitoringPerformanceModel(message.Command.Id)
             {
-                Payload = message.Payload,
-                Message = message.Message,
-                DataProviderId = (int) message.DataProvider,
-                DataProvider = message.DataProvider.ToString(),
-                Category = message.Category.ToString(),
-                CategoryId = (int) message.Category,
-                Date = message.Date,
-                RequestAggregateId = message.Id,
-                IsJson = message.IsJson,
-                Metadata = message.MetaData,
-                TimeStamp = message.Date
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
             };
 
             _storage.Add(@event);
         }
 
-        public void Handle(DataProviderSecurityCommand message)
+        public void Handle(DataProviderHasEndedCommand message)
         {
-            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
+            var @event = new DataProviderMonitoringPerformanceModel(message.Command.Id)
             {
-                Payload = message.Payload,
-                Message = message.Message,
-                DataProviderId = (int) message.DataProvider,
-                DataProvider = message.DataProvider.ToString(),
-                Category = message.Category.ToString(),
-                CategoryId = (int) message.Category,
-                Date = message.Date,
-                RequestAggregateId = message.Id,
-                IsJson = message.IsJson,
-                Metadata = message.MetaData,
-                TimeStamp = message.Date
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
             };
 
             _storage.Add(@event);
         }
 
-        public void Handle(DataProviderTransformationCommand message)
+        public void Handle(DataProviderHasBeenConfiguredCommand message)
         {
-            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
+            var @event = new DataProviderMonitoringConfigurationModel(message.Command.Id)
             {
-                Payload = message.Payload,
-                Message = message.Message,
-                DataProviderId = (int) message.DataProvider,
-                DataProvider = message.DataProvider.ToString(),
-                Category = message.Category.ToString(),
-                CategoryId = (int) message.Category,
-                Date = message.Date,
-                RequestAggregateId = message.Id,
-                IsJson = message.IsJson,
-                Metadata = message.MetaData,
-                TimeStamp = message.Date
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
+            };
+
+            _storage.Add(@event);
+        }
+
+
+        public void Handle(DataProviderHasFaultCommand message)
+        {
+            var @event = new DataProviderMonitoringFaultModel(message.Command.Id)
+            {
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
+            };
+
+            _storage.Add(@event);
+        }
+
+        public void Handle(DataProviderHasSecurityCommand message)
+        {
+            var @event = new DataProviderMonitoringSecurityModel(message.Command.Id)
+            {
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
+            };
+
+            _storage.Add(@event);
+        }
+
+        public void Handle(DataProviderResponseTransformedCommand message)
+        {
+            var @event = new DataProviderMonitoringTransformationModel(message.Command.Id)
+            {
+                Payload = message.Command.Payload,
+                Message = message.Command.Message,
+                DataProviderId = (int) message.Command.DataProvider,
+                DataProvider = message.Command.DataProvider.ToString(),
+                Category = message.Command.Category.ToString(),
+                CategoryId = (int) message.Command.Category,
+                Date = message.Command.Date,
+                RequestAggregateId = message.Command.Id,
+                IsJson = message.Command.IsJson,
+                Metadata = message.Command.MetaData,
+                TimeStamp = message.Command.Date
             };
 
             _storage.Add(@event);

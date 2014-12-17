@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NHibernate;
-using PackageBuilder.Domain.Entities;
+using PackageBuilder.Core.Entities;
 
 namespace PackageBuilder.Core.Repositories
 {

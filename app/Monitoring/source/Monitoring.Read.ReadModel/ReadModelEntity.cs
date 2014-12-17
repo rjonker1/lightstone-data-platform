@@ -12,7 +12,7 @@ namespace Monitoring.Read.ReadModel
 
         protected ReadModelEntity(Guid id)
         {
-            Id = MakeId(GetType(), id);
+            Id = MakeId(GetType(), Guid.NewGuid());
             AggregateId = id;
         }
 

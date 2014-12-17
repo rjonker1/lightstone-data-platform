@@ -6,7 +6,6 @@ using CommonDomain.Core;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider;

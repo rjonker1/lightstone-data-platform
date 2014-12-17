@@ -10,5 +10,10 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         {
             Command = command;
         }
+
+        public DataProviderHasEndedCommand()
+        {
+            
+        }
     }
 }
