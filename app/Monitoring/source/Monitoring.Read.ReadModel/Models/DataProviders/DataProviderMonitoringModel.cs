@@ -16,6 +16,7 @@ namespace Monitoring.Read.ReadModel.Models.DataProviders
         public virtual string OrignalMessageId { get; set; }
         public virtual Guid RequestAggregateId { get; set; }
         public virtual string Payload { get; set; }
+        public virtual string Message { get; set; }
         public virtual int DataProviderId { get; set; }
         public virtual string DataProvider { get; set; }
         public virtual string Category { get; set; }
