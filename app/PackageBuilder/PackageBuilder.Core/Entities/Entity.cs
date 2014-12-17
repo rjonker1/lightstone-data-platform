@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace PackageBuilder.Core.Entities
 {
     [DataContract]
-    public abstract class Entity
+    public abstract class Entity : IEntity
     {
         [DataMember]
         public virtual Guid Id { get; protected set; }

@@ -57,7 +57,9 @@
     <Compile Include="Repositories\DataProviderRepository.cs" />
     <Compile Include="Repositories\IDataProviderRepository.cs" />
     <Compile Include="Repositories\IPackageRepository.cs" />
+    <Compile Include="Repositories\IStateRepository.cs" />
     <Compile Include="Repositories\PackageRepository.cs" />
+    <Compile Include="Repositories\StateRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

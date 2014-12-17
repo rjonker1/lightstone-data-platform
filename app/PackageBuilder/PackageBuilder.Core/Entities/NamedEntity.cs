@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace PackageBuilder.Domain.Entities
+namespace PackageBuilder.Core.Entities
 {
-    public class NamedEntity : INamedEntity
+    public class NamedEntity : INamedEntity, IEntity
     {
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+
         protected NamedEntity(string name)
         {
             Id = Guid.NewGuid();
             Name = name;
         }
-
-        public string Name { get; private set; }
-        public Guid Id { get; private set; }
 
         protected bool Equals(NamedEntity other)
         {

@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.States.Commands;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.States
 {
     public class RenameStateHandler : AbstractMessageHandler<RenameState>
     {
-        private readonly IRepository<State> _repository;
+        private readonly IStateRepository _repository;
 
-        public RenameStateHandler(IRepository<State> repository)
+        public RenameStateHandler(IStateRepository repository)
         {
             _repository = repository;
         }
 
         public override void Handle(RenameState command)
         {
-            var existing = _repository.FirstOrDefault(x => x.Id != command.Id && x.Name == command.Name);
-            if (existing != null)
+            if (_repository.Exists(command.Id, command.Name))
                 throw new LightstoneAutoException("A state with the name {0} already exists".FormatWith(command.Name));
 
             var state = _repository.Get(command.Id);

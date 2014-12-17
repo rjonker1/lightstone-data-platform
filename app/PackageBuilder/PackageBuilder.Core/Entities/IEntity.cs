@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PackageBuilder.Domain.Entities
+namespace PackageBuilder.Core.Entities
 {
     public interface IEntity
     {

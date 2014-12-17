@@ -79,12 +79,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\PackageBuilder.Api.Tests\connectionStrings.config">
+      <Link>connectionStrings.config</Link>
+    </None>
     <None Include="..\PackageBuilder.Api\appSettings.config">
       <Link>appSettings.config</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\PackageBuilder.Api\connectionStrings.config">
-      <Link>connectionStrings.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="App.config" />

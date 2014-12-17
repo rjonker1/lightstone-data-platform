@@ -22,8 +22,8 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         private readonly Mock<INEventStoreRepository<DataProvider>> _writeRepository = new Mock<INEventStoreRepository<DataProvider>>();
         public override void Observe()
         {
-            var container = new WindsorContainer();
-            container.Install(new AutoMapperInstaller(), new NHibernateInstaller(), new RepositoryInstaller());
+            base.Observe();
+
             var command = new CreateDataProvider(LightstoneResponseMother.Response, Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, typeof(IvidResponse), "User", DateTime.Now);
             _handler = new CreateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
             _handler.Handle(command);

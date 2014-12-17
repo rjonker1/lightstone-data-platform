@@ -1,5 +1,6 @@
-﻿using System;
-using PackageBuilder.Domain.Entities;
+﻿
+using System;
+using PackageBuilder.Core.Entities;
 
 namespace PackageBuilder.Core.Repositories
 {

@@ -6,14 +6,14 @@ using PackageBuilder.Core.NHibernate.Attributes;
 namespace PackageBuilder.Domain.Entities.Industries.WriteModels
 {
     [DataContract]
-    public class Industry : Entity
+    public class Industry : Entity, INamedEntity
     {
-        protected Industry() { }
-
         [DomainSignature, DataMember]
         public virtual string Name { get; set; }
         [DataMember]
         public virtual bool IsSelected { get; set; }
+
+        protected Industry() { }
 
         public Industry(Guid id, string name, bool selected) : base(id)
         {

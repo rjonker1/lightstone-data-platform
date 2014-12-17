@@ -1,9 +1,8 @@
 ﻿using System;
 using Moq;
-using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers.States;
 using PackageBuilder.Domain.Entities.States.Commands;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
@@ -12,10 +11,10 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.States
     public class when_renaming_an_existing_state : Specification
     {
         private RenameStateHandler _renameHandler;
-        private readonly Mock<IRepository<State>> _repo = new Mock<IRepository<State>>();
+        private readonly Mock<IStateRepository> _repo = new Mock<IStateRepository>();
         public override void Observe()
         {
-            _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(StateMother.Draft);
+            _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(StateMother.Published);
             _renameHandler = new RenameStateHandler(_repo.Object);
 
             var renameCommand = new RenameState(Guid.NewGuid(), StateMother.Published.Name, StateMother.Published.Alias);

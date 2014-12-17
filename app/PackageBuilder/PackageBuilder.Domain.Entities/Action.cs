@@ -1,4 +1,6 @@
 ﻿
+using PackageBuilder.Core.Entities;
+
 namespace PackageBuilder.Domain.Entities
 {
     public class Action : NamedEntity, IAction
