@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Text;
 using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Test.Helper.Mothers;
 using NServiceBus;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Framing.Impl.v0_8;
+using RabbitMQ.Client.MessagePatterns;
 using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.DataProvider
@@ -25,6 +30,20 @@ namespace Monitoring.Acceptance.Tests.DataProvider
 
         public override void Observe()
         {
+            var connectionFactory = new ConnectionFactory()
+            {
+                HostName = "localhost"
+            };
+
+            using (var connection =
+                connectionFactory.CreateConnection())
+            {
+                using (var model = connection.CreateModel())
+                {
+                    model.QueuePurge("");
+                }
+            }
+
             _bus.Send(_command);
         }
 
@@ -32,6 +51,30 @@ namespace Monitoring.Acceptance.Tests.DataProvider
         public void then_event_must_be_published_to_bus()
         {
             true.ShouldEqual(true);
+        }
+
+        private static void ReadFromQueue()
+        {
+            var connectionFactory = new ConnectionFactory()
+            {
+                HostName = "localhost"
+            };
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                using (var model = connection.CreateModel())
+                {
+                    var subscription = new Subscription(model, "MyQueue", false);
+                    while (true)
+                    {
+                        var basicDeliveryEventArgs =
+                            subscription.Next();
+                        var messageContent =
+                            Encoding.UTF8.GetString(basicDeliveryEventArgs.Body);
+                        Console.WriteLine(messageContent);
+                        subscription.Ack(basicDeliveryEventArgs);
+                    }
+                }
+            }
         }
     }
 }
