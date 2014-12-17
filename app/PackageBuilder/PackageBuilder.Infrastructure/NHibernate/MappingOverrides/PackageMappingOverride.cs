@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Entities.Packages.ReadModels;
 
 namespace PackageBuilder.Infrastructure.NHibernate.MappingOverrides
 {
-    public class PackageOverride : IAutoMappingOverride<Package>
+    public class PackageMappingOverride : IAutoMappingOverride<Package>
     {
         public void Override(AutoMapping<Package> mapping)
         {

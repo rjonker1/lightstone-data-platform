@@ -5,7 +5,6 @@ using AutoMapper;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
-using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
@@ -31,7 +30,8 @@ namespace PackageBuilder.Api.Modules
             {
                 var dto = this.Bind<PackageDto>();
 
-                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
+                //var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
+                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
                 bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, stateResolve.FirstOrDefault(), dto.Owner, DateTime.Now, null, dProviders));
 
@@ -41,7 +41,8 @@ namespace PackageBuilder.Api.Modules
             Post["/Package/Edit/{id}"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
-                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
+                //var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
+                var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
 
                 bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, stateResolve.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dProviders));

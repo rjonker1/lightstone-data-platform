@@ -64,7 +64,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\MapCurrentValueAttribute.cs" />
+    <Compile Include="Attributes\MapToCurrentValueAttribute.cs" />
     <Compile Include="Commands\DomainCommand.cs" />
     <Compile Include="Commands\IDomainCommand.cs" />
     <Compile Include="Entities\Entity.cs" />

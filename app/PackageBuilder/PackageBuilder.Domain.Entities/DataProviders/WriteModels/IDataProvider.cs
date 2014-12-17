@@ -19,5 +19,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         DateTime CreatedDate { get; }
         DateTime? EditedDate { get; }
         IEnumerable<IDataField> DataFields { get; }
+
+        void OverrideCostValuesFromPackage(double costOfSale);
     }
 }

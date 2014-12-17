@@ -7,12 +7,34 @@ namespace PackageBuilder.Domain.Entities
 {
     public static class IEnumerableExtensions
     {
-        public static IEnumerable<IDataField> Traverse(this IEnumerable<IDataField> dataFields) 
+        public static IEnumerable<IDataField> Traverse(this IEnumerable<IDataField> dataFields)
         {
-            return dataFields.SelectMany(x => x.Traverse(y => y.DataFields, x.Name));
+            return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFields, x.Name)) : Enumerable.Empty<IDataField>();
         }
 
         public static IEnumerable<T> Traverse<T>(this T root, Func<T, IEnumerable<T>> childrenSelector, string name) where T : class, IDataField
+        {
+            root.Namespace = name;
+            yield return root;
+
+            var childNodes = childrenSelector(root);
+            if (childNodes == null)
+                yield break;
+
+            var children = childNodes.SelectMany(n => n.Traverse(childrenSelector, root.Namespace));
+            foreach (var childNode in children)
+            {
+                childNode.Namespace += "." + childNode.Name;
+                yield return childNode;
+            }
+        }
+
+        public static IEnumerable<DataFieldOverride> Traverse(this IEnumerable<DataFieldOverride> dataFields)
+        {
+            return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFieldOverrides, x.Name)) : Enumerable.Empty<DataFieldOverride>();
+        }
+
+        public static IEnumerable<DataFieldOverride> Traverse(this DataFieldOverride root, Func<DataFieldOverride, IEnumerable<DataFieldOverride>> childrenSelector, string name) 
         {
             root.Namespace = name;
             yield return root;

@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
                 throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
 
             var entity = new Package(command.Id, command.Name, command.Description, command.Industries, command.CostPrice, command.SalePrice,
-                command.State, 0.1M, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviders);
+                command.State, 0.1M, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);
 
             _writeRepo.Save(entity, Guid.NewGuid());
         }

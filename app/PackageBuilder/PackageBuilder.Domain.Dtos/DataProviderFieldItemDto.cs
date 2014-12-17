@@ -16,6 +16,7 @@ namespace PackageBuilder.Domain.Dtos
         public string Label { get; set; }
         public string Definition { get; set; }
         public IEnumerable<Industry> Industries { get; set; }
+        // todo: change to CostOfSale
         public double Price { get; set; }
         public bool? IsSelected { get; set; }
         public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }

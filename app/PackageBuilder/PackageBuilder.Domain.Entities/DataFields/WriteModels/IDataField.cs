@@ -10,7 +10,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         string Label { get; }
         string Definition { get; }
         IEnumerable<Industry> Industries { get; }
-        double Price { get; }
+        double CostOfSale { get; }
         bool? IsSelected { get; }
         Type Type { get; }
         IEnumerable<IDataField> DataFields { get; }

@@ -22,9 +22,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public DataProviderName Name { get; internal set; } 
         [DataMember]
         public string Description { get; internal set; }
-        [DataMember, MapCurrentValue]
+        [DataMember, MapToCurrentValue]
         public double CostOfSale { get; internal set; }
-
         public SourceConfiguration SourceConfiguration
         {
             get
@@ -32,10 +31,9 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
                 return new SourceConfiguration(Name);
             }
         }
-
         [DataMember]
         public Type ResponseType { get; internal set; }
-        [DataMember, MapCurrentValue]
+        [DataMember, MapToCurrentValue]
         public bool FieldLevelCostPriceOverride { get; internal set; }
         [DataMember]
         public string Owner { get; internal set; }
@@ -84,6 +82,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         //    foreach (var dataField in dataFields.Traverse(x => x.DataFields))
         //        dataField.SetDataProviderId(id);
         //}
+
+        public void OverrideCostValuesFromPackage(double costOfSale)
+        {
+            CostOfSale = costOfSale;
+        }
 
         private void Apply(DataProviderCreated @event)
         {

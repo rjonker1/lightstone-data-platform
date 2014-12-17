@@ -20,8 +20,8 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         public string Definition { get; internal set; }
         [DataMember]
         public IEnumerable<Industry> Industries { get; internal set; }
-        [DataMember, MapCurrentValue]
-        public double Price { get; internal set; }
+        [DataMember, MapToCurrentValue]
+        public double CostOfSale { get; internal set; }
         [DataMember]
         public bool? IsSelected { get; internal set; }
         [DataMember]
@@ -48,24 +48,24 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             DataFields = dataFields;
         }
 
-        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double price, bool isSelected)//, Type type)
+        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double costOfSale, bool isSelected)//, Type type)
         {
             Name = name;
             Label = label;
             Definition = definition;
             Industries = industries;
-            Price = price;
+            CostOfSale = costOfSale;
             IsSelected = isSelected;
             //Type = type;
         }
 
-        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double price, bool isSelected, IEnumerable<IDataField> dataFields)//, Type type)
+        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double costOfSale, bool isSelected, IEnumerable<IDataField> dataFields)//, Type type)
         {
             Name = name;
             Label = label;
             Definition = definition;
             Industries = industries;
-            Price = price;
+            CostOfSale = costOfSale;
             IsSelected = isSelected;
             DataFields = dataFields;
             //Type = type;
@@ -78,7 +78,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
 
         public void SetPrice(double costPrice)
         {
-            Price = costPrice;
+            CostOfSale = costPrice;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace PackageBuilder.Api.Installers
                                 ForeignKey.EndsWith("Id"),
                                 new DomainSignatureConvention()
                             )
-                            .UseOverridesFromAssemblyOf<PackageOverride>());
+                            .UseOverridesFromAssemblyOf<PackageMappingOverride>());
                     //.Conventions.Add<>());
                     //cfg.FluentMappings.AddFromAssemblyOf<Entity>();
                 }).BuildConfiguration()));

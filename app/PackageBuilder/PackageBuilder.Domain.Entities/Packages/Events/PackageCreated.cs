@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Core.Events;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
-using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider;
 
 namespace PackageBuilder.Domain.Entities.Packages.Events
 {
@@ -20,9 +21,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly string Owner;        
         public readonly DateTime CreatedDate;
         public readonly DateTime? EditedDate;
-        public readonly IEnumerable<IDataProvider> DataProviders;
+        public readonly IEnumerable<DataProviderOverride> DataProviderValueOverrides;
 
-        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviderValueOverrides)
         {
             Id = id;
             Name = name;
@@ -35,7 +36,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
             Owner = owner;
             CreatedDate = createdDate;
             EditedDate = editedDate;
-            DataProviders = dataProviders;
+            DataProviderValueOverrides = dataProviderValueOverrides;
         }
     }
 }

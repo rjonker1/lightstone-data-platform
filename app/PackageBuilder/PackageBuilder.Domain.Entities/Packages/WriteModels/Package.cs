@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using AutoMapper;
 using CommonDomain.Core;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.Events;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using IDataProvider = PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider;
@@ -68,13 +71,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             DataProviders = dataProviders;
         }
 
-        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviders)
             : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, industries, state, displayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProvider> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviders)
         {
             if (state.Name == StateName.Published) 
                 DisplayVersion = Math.Ceiling(DisplayVersion);
@@ -101,7 +104,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
-            DataProviders = @event.DataProviders;
+            DataProviders = Mapper.Map<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
         }
 
         private void Apply(PackageUpdated @event)
@@ -118,7 +121,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
-            DataProviders = @event.DataProviders;
+            DataProviders = Mapper.Map<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
         }
     }
 }
