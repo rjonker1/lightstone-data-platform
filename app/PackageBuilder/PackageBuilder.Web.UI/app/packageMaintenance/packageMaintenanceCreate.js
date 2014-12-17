@@ -50,6 +50,7 @@
 
         $scope.cancel = function () {
 
+            console.error('Test');
             $location.path('/packages');
         };
 

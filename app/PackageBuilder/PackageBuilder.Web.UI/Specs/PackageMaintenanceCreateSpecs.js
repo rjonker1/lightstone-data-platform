@@ -17,9 +17,9 @@
 ///<reference path="~/App/resources/industryResources.js"/>
 ///<reference path="~/App/resources/stateResources.js"/>
 
-///<reference path="~/App/dataProviders/dataProviderDetail.js"/>
+///<reference path="~/App/packageMaintenance/packageMaintenanceCreate.js"/>
 
-describe('Controller: dataProviderDetail', function () {
+describe('Controller: packageMaintenanceCreate', function () {
 
     var scope, datacontext, $location, common;
 
@@ -46,19 +46,8 @@ describe('Controller: dataProviderDetail', function () {
         inject(function ($q) {
 
             //Mock data
-            commonServiceMock.data = [{ success: true }];
+            datacontextServiceMock.data = [];
 
-            datacontextServiceMock.data = {
-                data: {
-                    response: [
-                        {
-                            id: 123,
-                            name: 'test',
-                            fieldLevelCostPriceOverride: true
-                        }
-                    ]
-                }
-            };
 
             //Mock Services
             //Mock service method name needs to match that of the defined service methods
@@ -83,18 +72,45 @@ describe('Controller: dataProviderDetail', function () {
             };
 
             //datacontext
-            datacontextServiceMock.getDataProvider = function (id, version) {
+            datacontextServiceMock.getDataProviderSources = function (id, version) {
                 var defer = $q.defer();
 
                 defer.resolve(this.data);
 
-                //Inject the promise into the expected .then(response), to define response
+                //Inject the promise into the expected " .then(response) ", to define response
                 return defer.promise;
             };
 
-            datacontextServiceMock.getIndustries = function () {
+            datacontextServiceMock.createPackage = function (packageData) {
                 var defer = $q.defer();
-                var industries = [{id: 001, name: 'Industry1'}];
+
+                this.data.push(packageData);
+
+                var response = { status: 200 };
+                defer.resolve(response);
+
+                return defer.promise;
+            };
+
+            datacontextServiceMock.getStates = function (id, version) {
+                var defer = $q.defer();
+                var states = [
+                    { name: 'Draft' },
+                    { name: 'Published' }
+                ];
+
+                defer.resolve(states);
+
+                return defer.promise;
+            };
+
+            datacontextServiceMock.getIndustries = function (id, version) {
+                var defer = $q.defer();
+                var industries = [
+                    { name: 'All' },
+                    { name: 'Corporate' },
+                    { name: 'Finance' }
+                ];
 
                 defer.resolve(industries);
 
@@ -120,38 +136,69 @@ describe('Controller: dataProviderDetail', function () {
         common = _common_;
         datacontext = _datacontext_;
 
-        $controller('dataProviderDetail',
+        $controller('packageMaintenanceCreate',
                       { $scope: scope, $location: $location, common: common, datacontext: datacontext });
 
         scope.$digest(); // $digest to resolve all promises setup on the mock service
     }));
 
     //Specs
-    it('should set the title to: "Data Provider Detail"', function() {
-        expect(scope.title).toEqual('Data Provider Detail');
+    it('should set the title to: "Package Maintenance - Create"', function () {
+        expect(scope.title).toEqual('Package Maintenance - Create');
     });
 
-    it('should get a specific DataProvider', function () {
-        expect(scope.dataProvider).toBeDefined();
+    it('should initialize a date format: MMMM Do YYYY, h:mm:ss a', function () {
+        expect(scope.format).toEqual('MMMM Do YYYY, h:mm:ss a');
+    });
+
+    it('should get an object list of states', function () {
+        expect(scope.states.length).toEqual(2);
     });
 
     it('should get an object list of industries', function () {
-        expect(scope.industries.length).toBeGreaterThan(0);
+        expect(scope.industries.length).toEqual(3);
     });
 
-    it('should set the $scope.switch to true|false', function () {
-        expect(scope.switch).toBeTruthy();
+    it('should create a new Package', function () {
+
+        spyOn(console, 'log');
+
+        var packageData = { Package: { fields: [{ name: 'fd123', value: 'test' }] } };
+
+        scope.createPackage(packageData);
+
+        // Propagate promise resolution to 'then' functions using $apply().
+        scope.$apply(); //Need to rundigest cycle for resolved promises to call their callbacks
+
+        expect(console.log).toHaveBeenCalledWith({status: 200});
     });
 
-    describe('Routing:',function() {
+    describe('Filter: industries', function () {
 
-        it('should redirect back to the Data Providers overview page', function () {
+        it('should filter available Data Provider fields by industry', function() {
+
+            var field = {
+                name: 'field1',
+                industries: [{ name: 'All', isSelected: true }]
+            };
+
+            var filtered = scope.filterIndustry(field);
+
+            expect(filtered).not.toEqual(null);
+
+        });
+        
+    });
+
+    describe('Routing:', function () {
+
+        it('should redirect back to the Packages overview page', function () {
             spyOn($location, 'path');
 
             // We simulate we clicked a library on the page
             scope.cancel();
 
-            expect($location.path).toHaveBeenCalledWith('/data-providers');
+            expect($location.path).toHaveBeenCalledWith('/packages');
         });
 
     });
