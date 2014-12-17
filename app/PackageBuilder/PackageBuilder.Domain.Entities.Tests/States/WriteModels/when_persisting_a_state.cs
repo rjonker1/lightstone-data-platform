@@ -2,7 +2,7 @@
 using FluentNHibernate.Testing;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.States.WriteModels;
-using PackageBuilder.TestHelper.InMemoryPersistence;
+using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.States.WriteModels

@@ -9,7 +9,7 @@ using PackageBuilder.Core.Entities;
 using PackageBuilder.TestHelper.Extensions;
 using Xunit.Extensions;
 
-namespace PackageBuilder.TestHelper.DbPersistence
+namespace PackageBuilder.TestHelper.BaseTests
 {
     public class when_persisting_entities_to_db : Specification
     {

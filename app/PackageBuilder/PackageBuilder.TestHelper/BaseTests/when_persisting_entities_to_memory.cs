@@ -1,7 +1,6 @@
 ﻿using NHibernate.Cfg;
-using PackageBuilder.TestHelper.DbPersistence;
 
-namespace PackageBuilder.TestHelper.InMemoryPersistence
+namespace PackageBuilder.TestHelper.BaseTests
 {
     public class when_persisting_entities_to_memory : when_persisting_entities_to_db
     {

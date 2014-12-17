@@ -4,12 +4,13 @@ using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.AutoMappers.DataProviderResponses.IvidResponseMap
 {
-    public class when_mapping_ivid_response : when_mapping_responses
+    public class when_mapping_ivid_response : when_not_persisting_entities
     {
         private IEnumerable<IDataField> _dataFields;
         public override void Observe()

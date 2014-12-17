@@ -3,12 +3,13 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.AutoMappers.DataProviderResponses.LightstoneResponseMap.VehicleValuationResponseMap.Collections
 {
-    public class when_mapping_lightstone_accident_distribution_collection_response : when_mapping_responses
+    public class when_mapping_lightstone_accident_distribution_collection_response : when_not_persisting_entities
     {
         private IDataField _dataField;
 

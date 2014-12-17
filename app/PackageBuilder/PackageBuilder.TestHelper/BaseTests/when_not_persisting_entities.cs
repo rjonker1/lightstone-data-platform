@@ -1,11 +1,10 @@
 ﻿using Castle.Windsor;
 using PackageBuilder.Api.Installers;
-using PackageBuilder.TestHelper;
 using Xunit.Extensions;
 
-namespace PackageBuilder.Api.Tests.AutoMappers.DataProviderResponses
+namespace PackageBuilder.TestHelper.BaseTests
 {
-    public class when_mapping_responses : Specification
+    public class when_not_persisting_entities : Specification
     {
         public override void Observe()
         {

@@ -88,9 +88,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BaseTests\when_not_persisting_entities.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="DbPersistence\when_persisting_entities_to_db.cs" />
-    <Compile Include="InMemoryPersistence\when_persisting_entities_to_memory.cs" />
+    <Compile Include="BaseTests\when_persisting_entities_to_db.cs" />
+    <Compile Include="BaseTests\when_persisting_entities_to_memory.cs" />
     <Compile Include="OverrideHelper.cs" />
   </ItemGroup>
   <ItemGroup>

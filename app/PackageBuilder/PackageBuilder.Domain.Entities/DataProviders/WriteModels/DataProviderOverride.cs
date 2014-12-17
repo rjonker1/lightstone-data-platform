@@ -10,9 +10,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     public class DataProviderOverride
     {
         public Guid Id;
-        public int Version;
         public double CostOfSale;
-        public bool FieldLevelCostPriceOverride;
-        public IEnumerable<DataFieldOverride> DataFieldValueOverrides;
+        public IEnumerable<DataFieldOverride> DataFieldOverrides;
     }
 }
