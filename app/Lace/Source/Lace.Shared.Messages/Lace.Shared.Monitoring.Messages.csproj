@@ -56,10 +56,14 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Commands\DataProviderConfigurationCommand.cs" />
+    <Compile Include="Commands\DataProviderConfigurationCommands.cs" />
+    <Compile Include="Commands\DataProviderHasExecutedCommand.cs" />
     <Compile Include="Commands\DataProviderFaultCommands.cs" />
-    <Compile Include="Commands\DataProviderSecurityCommand.cs" />
+    <Compile Include="Commands\DataProviderExecutingCommand.cs" />
+    <Compile Include="Commands\DataProviderSecurityCommands.cs" />
     <Compile Include="Commands\DataProviderTransformationCommand.cs" />
+    <Compile Include="Commands\DataProviderCommandDto.cs" />
+    <Compile Include="Commands\DataProviderWasCalledCommands.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\DataProvider.cs" />
     <Compile Include="Core\IMonitorDataProviderMessages.cs" />
@@ -67,7 +71,7 @@
     <Compile Include="Publisher\DataProviderMessagePublisher.cs" />
     <Compile Include="Publisher\CommandMessageFactory.cs" />
     <Compile Include="RabbitMQ\BusFactory.cs" />
-    <Compile Include="Commands\DataProviderCommands.cs" />
+    <Compile Include="Commands\DataProviderHasEndedCommand.cs" />
     <Compile Include="Events\DataProviderCallSources.cs" />
     <Compile Include="Shared\MonitoringMessageSender.cs" />
   </ItemGroup>
