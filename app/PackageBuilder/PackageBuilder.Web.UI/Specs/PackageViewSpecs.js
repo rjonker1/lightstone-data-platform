@@ -75,22 +75,14 @@ describe('Controller: packageView', function () {
             datacontextServiceMock.getPackage = function (id, version) {
                 var defer = $q.defer();
 
-                defer.resolve(this.data);
+                var response = { status: 200, data: {
+                    response : { Package: 'Test'}
+                    
+                } };
+                defer.resolve(response);
 
-                //Inject the promise into the expected " .then(response) ", to define response
                 return defer.promise;
             };
-
-            //datacontextServiceMock.editPackage = function (packageData) {
-            //    var defer = $q.defer();
-
-            //    this.data.push(packageData);
-
-            //    var response = { status: 200 };
-            //    defer.resolve(response);
-
-            //    return defer.promise;
-            //};
 
             datacontextServiceMock.getStates = function (id, version) {
                 var defer = $q.defer();
@@ -159,27 +151,12 @@ describe('Controller: packageView', function () {
         expect(scope.industries.length).toEqual(3);
     });
 
-    it('should retrieve the specified Package to view details', function () {
+    it('should retrieve the specified Package details', function () {
 
         datacontext.getPackage(1, 1);
-        scope.$apply();
 
-        expect(scope.dataProvsPkg.Package).toEqual({ mock: 'mock' });
+        expect(scope.dataProvsPkg.Package).toEqual({ Package: 'Test' });
     });
-
-    //it('should edit an existing Package', function () {
-
-    //    spyOn(console, 'log');
-
-    //    var packageData = { Package: { fields: [{ name: 'fd123', value: 'test' }] } };
-
-    //    scope.editPackage(packageData);
-
-    //    // Propagate promise resolution to 'then' functions using $apply().
-    //    scope.$apply(); //Need to rundigest cycle for resolved promises to call their callbacks
-
-    //    expect(console.log).toHaveBeenCalledWith({ status: 200 });
-    //});
 
     describe('Filter: industries', function () {
 

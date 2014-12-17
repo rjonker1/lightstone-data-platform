@@ -31,16 +31,6 @@
         //Prevent $modelValue undefined error
         $scope.dataProvsPkg.Package = { 'mock' : 'mock' }
 
-
-        //$scope.editPackage = function (packageData) {
-
-        //    return datacontext.editPackage($routeParams.id, packageData).then(function (response) {
-
-        //        console.log(response);
-        //        (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
-        //    });
-        //}
-
         $scope.cancel = function () {
 
             $location.path('/packages');
