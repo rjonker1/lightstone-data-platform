@@ -123,7 +123,8 @@
                         </a>
                         <div>
                             <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
-                            <div class="col-md-6">**{{subDF.name}}</div>
+                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">**{{subDF.name}}</div>
+                            <div ng-if="subDF.label.length > 0" class="col-md-6">**{{subDF.label}}</div>
                         </div>
                     </div>
                     <div class="col-md-2"></div>

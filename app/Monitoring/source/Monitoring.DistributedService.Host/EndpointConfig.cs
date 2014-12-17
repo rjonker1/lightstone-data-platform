@@ -14,8 +14,7 @@ namespace Monitoring.DistributedService.Host
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
-            configuration.DisableFeature<TimeoutManager>();
-         
+
             configuration.Conventions()
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))

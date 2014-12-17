@@ -36,7 +36,11 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(
                         ConfigurationManager.ConnectionStrings["Monitoring.ReadModel"].ConnectionString))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringPerformanceMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringFaultMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringSecurityMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringConfigurationMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringTransformationMap>())
                 .ExposeConfiguration(BuildMonitoringReadSchema).BuildSessionFactory();
         }
 

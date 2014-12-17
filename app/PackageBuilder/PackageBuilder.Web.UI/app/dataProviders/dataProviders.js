@@ -54,7 +54,7 @@
                 field: 'editedDate',
                 displayName: 'Edited Date',
                 sort: {
-                    direction: uiGridConstants.ASC,
+                    direction: uiGridConstants.DESC,
                     priority: 0
                 }
             },
