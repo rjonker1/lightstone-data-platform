@@ -4,8 +4,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Monitoring.DistributedService.DenormalizerHost.Storage;
 using Monitoring.Domain.Core.Contracts;
-//TODO: UNDO
-//using Monitoring.Read.Denormalizer.DataProvider;
+using Monitoring.Read.Denormalizer.DataProvider;
 using Monitoring.Read.Persistence.Mappings.DataProviderMaps;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
@@ -27,9 +26,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .OnActivated(c => c.Instance.BeginTransaction());
 
             builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
-            //TODO: UNDO ADD REF TO NUGET LACE SHARED
-            //TODO: REMEMBER TO ADD NUGETS!!!!
-           // builder.RegisterType<DataProviderMonitoringHandler>();
+            builder.RegisterType<DataProviderMonitoringHandler>();
         }
 
         private static ISessionFactory BuildNhibernateConfiguration()

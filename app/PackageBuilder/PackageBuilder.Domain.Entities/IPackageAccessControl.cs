@@ -1,4 +1,5 @@
-﻿using IPackage = PackageBuilder.Domain.Entities.Packages.WriteModels.IPackage;
+﻿using PackageBuilder.Core.Entities;
+using IPackage = PackageBuilder.Domain.Entities.Packages.WriteModels.IPackage;
 
 namespace PackageBuilder.Domain.Entities
 {

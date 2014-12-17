@@ -65,11 +65,6 @@
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerContract.cs" />
     <Compile Include="CustomerUser.cs" />
-    <Compile Include="DataFields\Commands\CreateDataField.cs" />
-    <Compile Include="DataFields\Commands\RenameDataField.cs" />
-    <Compile Include="DataFields\Events\DataFieldCreated.cs" />
-    <Compile Include="DataFields\Events\DataFieldRenamed.cs" />
-    <Compile Include="DataFields\Events\DataFieldRevisionCreated.cs" />
     <Compile Include="DataFields\WriteModels\IDataField.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
     <Compile Include="DataProviders\Commands\CreateLightstoneDataProvider.cs" />
@@ -92,13 +87,11 @@
     <Compile Include="ICustomer.cs" />
     <Compile Include="ICustomerContract.cs" />
     <Compile Include="ICustomerUser.cs" />
-    <Compile Include="IEntity.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IExpirable.cs" />
     <Compile Include="IGroup.cs" />
     <Compile Include="IGroupPackage.cs" />
     <Compile Include="IGroupPermission.cs" />
-    <Compile Include="INamedEntity.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
     <Compile Include="Industries\WriteModels\Industry.cs" />
@@ -111,7 +104,6 @@
     <Compile Include="IUserPackage.cs" />
     <Compile Include="IUserRole.cs" />
     <Compile Include="IWorkflow.cs" />
-    <Compile Include="NamedEntity.cs" />
     <Compile Include="DataProviders\WriteModels\DataProviderOverride.cs" />
     <Compile Include="DataFields\WriteModels\DataFieldOverride.cs" />
     <Compile Include="Packages\Commands\DeletePackage.cs" />

@@ -12,7 +12,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Industries
     public class when_renaming_an_existing_industry : Specification
     {
         private RenameIndustryHandler _renameHandler;
-        private readonly Mock<IRepository<Industry>> _repo = new Mock<IRepository<Industry>>();
+        private readonly Mock<INamedEntityRepository<Industry>> _repo = new Mock<INamedEntityRepository<Industry>>();
         public override void Observe()
         {
             _repo.Setup(x => x.Get(It.IsAny<Guid>())).Returns(IndustryMother.Finance);

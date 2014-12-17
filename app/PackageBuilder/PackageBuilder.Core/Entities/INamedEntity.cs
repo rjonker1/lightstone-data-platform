@@ -1,4 +1,4 @@
-﻿namespace PackageBuilder.Domain.Entities
+﻿namespace PackageBuilder.Core.Entities
 {
     public interface INamedEntity
     {

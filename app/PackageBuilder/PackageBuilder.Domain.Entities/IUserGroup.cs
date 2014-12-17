@@ -1,4 +1,6 @@
-﻿namespace PackageBuilder.Domain.Entities
+﻿using PackageBuilder.Core.Entities;
+
+namespace PackageBuilder.Domain.Entities
 {
     public interface IUserGroup : IEntity
     {

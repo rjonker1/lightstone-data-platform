@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;

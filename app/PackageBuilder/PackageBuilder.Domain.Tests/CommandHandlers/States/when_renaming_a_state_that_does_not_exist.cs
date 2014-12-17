@@ -1,9 +1,8 @@
 ﻿using System;
 using Moq;
-using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers.States;
 using PackageBuilder.Domain.Entities.States.Commands;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit;
 using Xunit.Extensions;
@@ -13,7 +12,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.States
     public class when_renaming_a_state_that_does_not_exist : Specification
     {
         private RenameStateHandler _renameHandler;
-        private readonly Mock<IRepository<State>> _repo = new Mock<IRepository<State>>();
+        private readonly Mock<IStateRepository> _repo = new Mock<IStateRepository>();
         private Exception _exception;
         public override void Observe()
         {

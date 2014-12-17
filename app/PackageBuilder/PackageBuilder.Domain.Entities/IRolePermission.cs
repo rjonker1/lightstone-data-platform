@@ -1,4 +1,6 @@
 ﻿
+using PackageBuilder.Core.Entities;
+
 namespace PackageBuilder.Domain.Entities
 {
     public interface IRolePermission : IEntity, IExpirable

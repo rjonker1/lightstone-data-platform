@@ -16,7 +16,7 @@ namespace PackageBuilder.Infrastructure.Repositories
 
         public bool Exists(Guid id, string name)
         {
-            return this.FirstOrDefault(x => x.PackageId != id && x.Name.Trim().ToLower() == name.Trim().ToLower() && x.State.Name == StateName.Published) != null;
+            return this.Any(x => x.PackageId != id && x.Name.Trim().ToLower() == name.Trim().ToLower() && x.State.Name == StateName.Published);
         }
     }
 }

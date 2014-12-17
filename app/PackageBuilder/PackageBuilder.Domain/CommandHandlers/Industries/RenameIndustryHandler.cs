@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
@@ -11,17 +10,16 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
 {
     public class RenameIndustryHandler : AbstractMessageHandler<RenameIndustry>
     {
-        private readonly IRepository<Industry> _repository;
+        private readonly INamedEntityRepository<Industry> _repository;
 
-        public RenameIndustryHandler(IRepository<Industry> repository)
+        public RenameIndustryHandler(INamedEntityRepository<Industry> repository)
         {
             _repository = repository;
         }
 
         public override void Handle(RenameIndustry command)
         {
-            var existing = _repository.FirstOrDefault(x => x.Id != command.Id && x.Name.ToLower() == command.Name.ToLower());
-            if (existing != null)
+            if (_repository.Exists(command.Id, command.Name))
                 throw new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
 
             var industry = _repository.Get(command.Id);

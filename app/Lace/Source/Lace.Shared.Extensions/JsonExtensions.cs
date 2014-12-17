@@ -8,7 +8,7 @@ namespace Lace.Shared.Extensions
         {
             try
             {
-                return JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings()
+                return JsonConvert.SerializeObject(value, Formatting.None, new JsonSerializerSettings()
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
