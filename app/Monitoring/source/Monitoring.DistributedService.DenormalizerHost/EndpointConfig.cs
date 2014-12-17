@@ -13,7 +13,7 @@ namespace Monitoring.DistributedService.DenormalizerHost
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
-            configuration.DisableFeature<TimeoutManager>();
+            //configuration.DisableFeature<TimeoutManager>();
 
             configuration.Conventions()
                  .DefiningCommandsAs(

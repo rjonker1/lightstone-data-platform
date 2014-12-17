@@ -5,7 +5,7 @@ using Monitoring.Test.Helper.Mothers;
 using NServiceBus;
 using Xunit.Extensions;
 
-namespace Monitoring.Acceptence.Tests.DataProvider
+namespace Monitoring.Acceptance.Tests.DataProvider
 {
     public class when_sending_data_provider_executed_command_to_bus : Specification
     {

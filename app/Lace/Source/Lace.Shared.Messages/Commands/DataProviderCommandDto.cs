@@ -3,7 +3,8 @@ using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
-    public class DataProviderConfigurationCommand
+    [Serializable]
+    public class DataProviderCommandDto
     {
         public Guid Id { get; private set; }
         public DataProvider DataProvider { get; private set; }
@@ -14,12 +15,12 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public string MetaData { get; private set; }
         public bool IsJson { get; private set; }
 
-        public DataProviderConfigurationCommand()
+        public DataProviderCommandDto()
         {
 
         }
 
-        public DataProviderConfigurationCommand(Guid id, DataProvider dataProvider, string message, string payload,
+        public DataProviderCommandDto(Guid id, DataProvider dataProvider, string message, string payload,
             string metadata,
             DateTime date, Category category, bool isJson)
         {

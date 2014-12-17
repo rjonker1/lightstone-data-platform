@@ -75,10 +75,10 @@
   <ItemGroup>
     <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_price_collection_response.cs" />
     <Compile Include="AutoMappers\Dtos\when_mapping_data_provider_dto.cs" />
-    <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_accident_distribution_collection_response.cs" />
-    <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_amortised_value_collection_response.cs" />
+    <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_accident_dist_collection_response.cs" />
+    <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_amortised_value_coll_response.cs" />
     <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_area_factor_collection_response.cs" />
-    <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_auction_factor_collection_response.cs" />
+    <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_auction_factor_coll_response.cs" />
     <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_confidence_collection_response.cs" />
     <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_estimated_value_collection_response.cs" />
     <Compile Include="AutoMappers\DataProviderResponses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_lightstone_frequency_collection_response.cs" />
