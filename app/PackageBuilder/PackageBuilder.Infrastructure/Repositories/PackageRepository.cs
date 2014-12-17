@@ -18,5 +18,15 @@ namespace PackageBuilder.Infrastructure.Repositories
         {
             return this.Any(x => x.PackageId != id && x.Name.Trim().ToLower() == name.Trim().ToLower() && x.State.Name == StateName.Published);
         }
+
+        public bool HasPublishedVersions(Guid id)
+        {
+            return this.Any(x => x.PackageId == id && x.State.Name == StateName.Published);
+        }
+
+        public IQueryable<Package> GetAllVersions(Guid id)
+        {
+            return this.Where(x => x.PackageId == id);
+        }
     }
 }

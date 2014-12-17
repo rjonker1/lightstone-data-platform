@@ -27,7 +27,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         [DataMember]
         public Type Type { get; internal set; }
         [DataMember]
-        public IEnumerable<IDataField> DataFields { get; private set; }
+        public IEnumerable<IDataField> DataFields { get; internal set; }
         
         //todo: make private
         public DataField()
@@ -69,11 +69,6 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             IsSelected = isSelected;
             DataFields = dataFields;
             //Type = type;
-        }
-
-        public void SetDataProviderId(Guid id)
-        {
-            DataProviderId = id;
         }
 
         public void SetPrice(double costPrice)

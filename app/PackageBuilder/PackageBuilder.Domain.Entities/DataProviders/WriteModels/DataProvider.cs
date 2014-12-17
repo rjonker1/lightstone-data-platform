@@ -66,22 +66,13 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate, IEnumerable<IDataField> dataFields) 
             : this(id)
         {
-            //SetDataProviderId(id, dataFields);
             RaiseEvent(new DataProviderCreated(id, name, description, costOfSale, responseType, owner, createdDate, dataFields));
         }
 
         public void CreateDataProviderRevision(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
         {
-            //SetDataProviderId(id, dataFields);
             RaiseEvent(new DataProviderUpdated(id, name, description, costOfSale, responseType, fieldLevelCostPriceOverride, version, owner, createdDate, editedDate, dataFields));
         }
-
-        //private void SetDataProviderId(Guid id, IEnumerable<IDataField> dataFields)
-        //{
-        //    if (dataFields == null) return;
-        //    foreach (var dataField in dataFields.Traverse(x => x.DataFields))
-        //        dataField.SetDataProviderId(id);
-        //}
 
         public void OverrideCostValuesFromPackage(double costOfSale)
         {

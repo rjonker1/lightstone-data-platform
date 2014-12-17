@@ -7,13 +7,13 @@ namespace PackageBuilder.Domain.Entities.Industries.Commands
     {
         public Guid Id;
         public readonly string Name;
-        public bool isSelected;
+        public bool IsSelected;
 
         public CreateIndustry(Guid id, string name, bool selected)
         {
             Id = id;
             Name = name;
-            isSelected = selected;
+            IsSelected = selected;
         }
     }
 }
