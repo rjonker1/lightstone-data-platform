@@ -6,11 +6,11 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     [Serializable]
     public class DataProviderResponseTransformedCommand
     {
-        public DataProviderCommandDto DataProviderCommand { get; private set; }
+        public DataProviderCommandDto Command { get; private set; }
 
         public DataProviderResponseTransformedCommand(DataProviderCommandDto command)
         {
-            DataProviderCommand = command;
+            Command = command;
         }
 
         //public Guid Id { get; private set; }
