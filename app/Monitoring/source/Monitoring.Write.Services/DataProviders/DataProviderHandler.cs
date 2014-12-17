@@ -23,30 +23,30 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderExecutingCommand message)
         {
-            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            var @event = new DataProviderExecutingAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasExecutedCommand message)
         {
-            //var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
+            var @event = new DataProviderHasExecutedAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
+            _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderWasCalledCommand message)
         {
-            //var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
+            var @event = new DataProviderIsBeingCalledAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
+            _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasEndedCommand message)
         {
-            //var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
+            var @event = new DataProviderHasBeenCalledAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
+            _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasFaultCommand message)
