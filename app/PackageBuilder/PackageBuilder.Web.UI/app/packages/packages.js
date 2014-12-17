@@ -7,11 +7,14 @@
         .module('app')
         .controller(controllerId, packages);
 
-    packages.$inject = ['$scope', '$location', 'common', 'datacontext'];
+    packages.$inject = ['$scope', '$location', 'uiGridConstants', 'common', 'datacontext'];
 
-    function packages($scope, $location, common, datacontext) {
+    function packages($scope, $location, uiGridConstants, common, datacontext) {
 
         $scope.title = 'Packages';
+
+        $scope.$scope = $scope; //ui-grid
+
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
         var logError = getLogFn(controllerId, 'error');
@@ -55,35 +58,72 @@
 
         $scope.selectedDatasource = [];
 
+        //$scope.gridOptions = {
+        //    data: 'dPackagesData',
+        //    selectedItems: $scope.selectedDatasource,
+        //    multiSelect: false,
+        //    enableFiltering: true,
+        //    showFilter: true,
+        //    showGroupPanel: true,
+        //    columnDefs: [
+        //        { field: 'name', displayName: 'Name', filter: { term: '' } },
+        //        { field: 'description', displayName: 'Description' },
+        //        { field: 'owner', displayName: 'Owner' },
+        //        { field: 'createdDate', displayName: 'Created' },
+        //        { field: 'editedDate', displayName: 'Edited' },
+        //        { field: 'state.alias', displayName: 'State' },
+        //        { field: 'displayVersion', displayName: 'Version', filter: { term: '' } },
+        //        //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
+        //        {
+        //            displayName: '',
+        //            width: 280,
+        //            cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version">' +
+        //                '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' +
+        //                '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
+        //                '<input type="button" class="btn btn-warning grid-btn" name="expire" ng-click="" value="Expire" />' +
+        //                '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
+        //                '' +
+        //                '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
+        //                '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewPackage(row)" value="View" /></div>'
+        //        }
+
+        //    ]
+        //};
+
         $scope.gridOptions = {
             data: 'dPackagesData',
             selectedItems: $scope.selectedDatasource,
             multiSelect: false,
-            enableFiltering: true,
+            enableFiltering: false,
             showFilter: true,
             showGroupPanel: true,
             columnDefs: [
-                { field: 'name', displayName: 'Name', filter: { term: '' } },
+            { field: 'name', displayName: 'Name', filter: { term: '' } },
                 { field: 'description', displayName: 'Description' },
                 { field: 'owner', displayName: 'Owner' },
                 { field: 'createdDate', displayName: 'Created' },
-                { field: 'editedDate', displayName: 'Edited' },
+                {
+                    field: 'editedDate',
+                    displayName: 'Edited Date',
+                    sort: {
+                        direction: uiGridConstants.ASC,
+                        priority: 0
+                    }
+                },
                 { field: 'state.alias', displayName: 'State' },
                 { field: 'displayVersion', displayName: 'Version', filter: { term: '' } },
-                //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
-                {
-                    displayName: '',
-                    width: 280,
-                    cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version">' +
-                        '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' +
-                        '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
-                        '<input type="button" class="btn btn-warning grid-btn" name="expire" ng-click="" value="Expire" />' +
-                        '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
-                        '' +
-                        '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
-                        '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewPackage(row)" value="View" /></div>'
-                }
-
+         {
+             name: ' ',
+             displayName: ' ',
+             width: 280,
+             cellTemplate: '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) == row.entity.version">' +
+                 '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
+                 '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
+                 '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
+                 '' +
+                 '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) != row.entity.version">' +
+                 '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" /></div>'
+         }
             ]
         };
 
@@ -93,7 +133,7 @@
         function activate() {
 
             common.activateController([getAllPackages()], controllerId)
-                .then(function() { log('Activated Data Providers View'); });
+                .then(function () { log('Activated Data Providers View'); });
         }
 
         function getAllPackages() {

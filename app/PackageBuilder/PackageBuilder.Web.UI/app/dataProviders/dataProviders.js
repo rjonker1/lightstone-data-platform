@@ -61,15 +61,15 @@
            { field: 'version', displayName: 'Version' },
 
      {
-         name: 'asd',
-         displayName: 'asd',
+         name: ' ',
+         displayName: ' ',
          width: 280,
          cellTemplate: '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) == row.entity.version">' +
              '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
              '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
              '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
              '' +
-             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) != row.entity.version">' +
+             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) != row.entity.version">' +
              '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" /></div>'
      }
             ]
