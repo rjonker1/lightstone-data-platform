@@ -4,11 +4,11 @@ using Lace.Shared.Monitoring.Messages.Core;
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class DataProviderResponseTransformedCommand
+    public class DataProviderHasSecurityCommand
     {
         public DataProviderCommandDto Command { get; private set; }
 
-        public DataProviderResponseTransformedCommand(DataProviderCommandDto command)
+        public DataProviderHasSecurityCommand(DataProviderCommandDto command)
         {
             Command = command;
         }
@@ -22,12 +22,12 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         //public string MetaData { get; private set; }
         //public bool IsJson { get; private set; }
 
-        //public DataProviderTransformationCommand()
+        //public DataProviderSecurityConfigurationCommand()
         //{
 
         //}
 
-        //public DataProviderTransformationCommand(Guid id, DataProvider dataProvider, string message, string payload,
+        //public DataProviderSecurityConfigurationCommand(Guid id, DataProvider dataProvider, string message, string payload,
         //    string metadata,
         //    DateTime date, Category category, bool isJson)
         //{
