@@ -125,6 +125,30 @@
             return valueTotal;
         };
 
+        $scope.totalParChar = function (dataItem) {
+
+            var valueTotal = 0;
+            var items = dataItem;
+            var subItems = items.dataFields;
+
+            for (var i = 0; i < subItems.length; i++) {
+
+                valueTotal += subItems[i].price;
+
+                var subChildItems = subItems[i].dataFields;
+
+                for (var j = 0; j < subChildItems.length; j++) {
+
+                    valueTotal += subChildItems[j].price;
+                }
+
+            }
+
+
+            return valueTotal;
+        };
+
+
         $scope.childIndustryChanged = function (childIndustry, parent) {
 
             console.log(parent);
@@ -132,26 +156,26 @@
 
             var industries = $scope.industries;
 
-                for (var i = 0; i < industries.length; i++) {
+            for (var i = 0; i < industries.length; i++) {
 
-                    if (industries[i].id == childIndustry.id) {
+                if (industries[i].id == childIndustry.id) {
 
-                        //Returns an Array of the fields that currently occupy said Industry.
-                        var getChildrenSelected = $scope.checkChildren(childIndustry.name);
-                        if (getChildrenSelected.length <= 0) {
-                           
-                            parent.industries[i].isSelected = false;
-                            continue;
-                        }
+                    //Returns an Array of the fields that currently occupy said Industry.
+                    var getChildrenSelected = $scope.checkChildren(childIndustry.name);
+                    if (getChildrenSelected.length <= 0) {
 
-                        parent.industries[i].isSelected = true;
+                        parent.industries[i].isSelected = false;
+                        continue;
                     }
 
+                    parent.industries[i].isSelected = true;
                 }
-      
+
+            }
+
         };
 
-        $scope.checkChildren = function(childIndusName) {
+        $scope.checkChildren = function (childIndusName) {
 
             var childArray = [];
             var items = null;

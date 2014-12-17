@@ -36,6 +36,7 @@
         
         <td ng-show="switch == true">
             <input ng-show="(dField.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="dField.price" />
+            <label ng-show="(dField.dataFields).length > 0" class="form-control" style="width: 40% !important;">{{totalParChar(dField)}}</label>
         </td>
 
     </tr>
@@ -62,7 +63,8 @@
         </td>
 
         <td ng-show="switch == true">
-            <input class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" />
+            <input ng-show="(subDF.dataFields).length <= 0" class="form-control" style="width: 40% !important;" type="number" min="0" ng-model="subDF.price" />
+            <label ng-show="(subDF.dataFields).length > 0" class="form-control" style="width: 40% !important;">{{totalParChar(subDF)}}</label>
         </td>
 
     </tr>
@@ -101,7 +103,7 @@
                 <li>{{data}}</li>
             </div>
 
-        </div>-->
+        </div>
     <!--{{dataProvider.response}}-->
     
     <section class="matter" data-ng-model="dataProvider.response">
@@ -148,8 +150,8 @@
                                 <div ng-if="switch == true">
                                     <label>COS Per Field(Total):</label>
                                     <div>
-                                        <input type="number" class="form-control" value="{{total()}}" readonly />
-                                    </div>
+                                        <input type="text" class="form-control" value="R {{total()}}" readonly />
+                                 </div>
                                 </div>
 
                                 <br />
@@ -234,7 +236,7 @@
                                                                     ng-change="updateFieldIndustry(selectedGroupIndustry)" />
                                                         </div>
                                                     </th>-->
-                                                    <th ng-show="switch == true">Price</th>
+                                                    <th ng-show="switch == true">Price (Total: R {{total()}})</th>
                                                 </tr>
                                             </thead>
                                             
