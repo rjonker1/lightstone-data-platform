@@ -6,9 +6,9 @@ using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class DataProviderHandler : IHandleMessages<DataProviderCommand>, IHandleMessages<DataProviderFaultCommand>,
-        IHandleMessages<DataProviderConfigurationCommand>, IHandleMessages<DataProviderSecurityCommand>,
-        IHandleMessages<DataProviderTransformationCommand>
+    public class DataProviderHandler : IHandleMessages<DataProviderExecutingCommand>, IHandleMessages<DataProviderHasBeenConfiguredCommand>,
+        IHandleMessages<DataProviderHasEndedCommand>, IHandleMessages<DataProviderHasExecutedCommand>,
+        IHandleMessages<DataProviderHasFaultCommand>, IHandleMessages<DataProviderHasSecurityCommand>, IHandleMessages<DataProviderResponseTransformedCommand>, IHandleMessages<DataProviderWasCalledCommand>
     {
         private readonly IRepository _repository;
 
@@ -21,43 +21,68 @@ namespace Monitoring.Write.Service.DataProviders
             _repository = repository;
         }
 
-        public void Handle(DataProviderCommand message)
+        public void Handle(DataProviderExecutingCommand message)
         {
-            var @event = new DataProviderAggregate(message.Id, message.DataProvider, message.Category, message.Message,
-                message.Payload, message.MetaData, message.Date, message.IsJson);
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
-        public void Handle(DataProviderFaultCommand message)
+        public void Handle(DataProviderHasExecutedCommand message)
         {
-            var @event = new DataProviderFaultAggregate(message.Id, message.DataProvider, message.Category,
-                message.Message,
-                message.Payload, message.MetaData, message.Date, message.IsJson);
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
-        public void Handle(DataProviderConfigurationCommand message)
+        public void Handle(DataProviderWasCalledCommand message)
         {
-            var @event = new DataProviderConfigurationAggregate(message.Id, message.DataProvider, message.Category,
-                message.Message,
-                message.Payload, message.MetaData, message.Date, message.IsJson);
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
-        public void Handle(DataProviderSecurityCommand message)
+        public void Handle(DataProviderHasEndedCommand message)
         {
-            var @event = new DataProviderSecurityAggregate(message.Id, message.DataProvider, message.Category,
-                message.Message,
-                message.Payload, message.MetaData, message.Date, message.IsJson);
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
-        public void Handle(DataProviderTransformationCommand message)
+        public void Handle(DataProviderHasFaultCommand message)
         {
-            var @event = new DataProviderTransformationAggregate(message.Id, message.DataProvider, message.Category,
-                message.Message,
-                message.Payload, message.MetaData, message.Date, message.IsJson);
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
             _repository.Save(@event, Guid.NewGuid(), null);
         }
+
+        public void Handle(DataProviderHasBeenConfiguredCommand message)
+        {
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
+            _repository.Save(@event, Guid.NewGuid(), null);
+        }
+
+        public void Handle(DataProviderHasSecurityCommand message)
+        {
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider,
+                message.Command.Category,
+                message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
+            _repository.Save(@event, Guid.NewGuid(), null);
+        }
+
+        public void Handle(DataProviderResponseTransformedCommand message)
+        {
+            var @event = new DataProviderAggregate(message.Command.Id, message.Command.DataProvider,
+                message.Command.Category,
+                message.Command.Message,
+                message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
+            _repository.Save(@event, Guid.NewGuid(), null);
+        }
+
+
     }
 }
