@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentNHibernate.Testing;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
-using PackageBuilder.TestHelper.InMemoryPersistence;
+using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Domain.Entities.Tests.Packages.ReadModels

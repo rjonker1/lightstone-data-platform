@@ -1,6 +1,6 @@
 ﻿using System;
 using PackageBuilder.Infrastructure.Repositories;
-using PackageBuilder.TestHelper.InMemoryPersistence;
+using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 

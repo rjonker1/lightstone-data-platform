@@ -55,7 +55,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
             Mapper.CreateMap<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>()
                 .ConvertUsing(s => s.Select(Mapper.Map<DataProviderDto, DataProviderOverride>));
             Mapper.CreateMap<DataProviderDto, DataProviderOverride>()
-                .ForMember(d => d.DataFieldValueOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.DataFields)));
+                .ForMember(d => d.DataFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.DataFields)));
 
 
             Mapper.CreateMap<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>()
@@ -68,7 +68,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
                     dataProvider.OverrideCostValuesFromPackage(s.CostOfSale);
 
                     var currentDataFields = dataProvider.DataFields.Traverse().ToList();
-                    foreach (var dataFieldValueOverride in s.DataFieldValueOverrides.Traverse())
+                    foreach (var dataFieldValueOverride in s.DataFieldOverrides.Traverse())
                     {
                         var dataField = currentDataFields.FirstOrDefault(fld => fld.Namespace.Trim().ToLower() == dataFieldValueOverride.Namespace.Trim().ToLower());
                         if (dataField != null)

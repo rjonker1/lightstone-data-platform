@@ -8,15 +8,15 @@ namespace PackageBuilder.TestObjects.Builders
 {
     public class WriteDataProviderBuilder
     {
-        public DataProviderName _name;
-        public string _description;
-        public double _costOfSale;
-        public Type _responseType;
-        public bool _fieldLevelCostPriceOverride;
-        public string _owner;
-        public DateTime _createdDate;
-        public DateTime? _editedDate;
-        public IEnumerable<IDataField> _dataFields { get; internal set; }
+        private DataProviderName _name;
+        private string _description;
+        private double _costOfSale;
+        private Type _responseType;
+        private bool _fieldLevelCostPriceOverride;
+        private string _owner;
+        private DateTime _createdDate;
+        private DateTime? _editedDate;
+        private IEnumerable<IDataField> _dataFields;
         public DataProvider Build()
         {
             return new DataProvider
