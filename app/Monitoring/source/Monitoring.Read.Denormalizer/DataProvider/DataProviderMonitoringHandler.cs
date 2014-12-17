@@ -1,4 +1,5 @@
-﻿using Lace.Shared.Monitoring.Messages.Commands;
+﻿using System;
+using Lace.Shared.Monitoring.Messages.Commands;
 using Monitoring.Domain.Core.Contracts;
 using Monitoring.Read.ReadModel.Models.DataProviders;
 using NServiceBus;
@@ -19,9 +20,10 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderCommand message)
         {
-            var @event = new DataProviderMonitoringModel(message.Id)
+            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
             {
-                Payload = message.Message,
+                Payload = message.Payload,
+                Message =  message.Message,
                 DataProviderId = (int) message.DataProvider,
                 DataProvider = message.DataProvider.ToString(),
                 Category = message.Category.ToString(),
@@ -38,9 +40,10 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderFaultCommand message)
         {
-            var @event = new DataProviderMonitoringModel(message.Id)
+            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
             {
-                Payload = message.Message,
+                Payload = message.Payload,
+                Message = message.Message,
                 DataProviderId = (int) message.DataProvider,
                 DataProvider = message.DataProvider.ToString(),
                 Category = message.Category.ToString(),
@@ -57,9 +60,10 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderConfigurationCommand message)
         {
-            var @event = new DataProviderMonitoringModel(message.Id)
+            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
             {
-                Payload = message.Message,
+                Payload = message.Payload,
+                Message = message.Message,
                 DataProviderId = (int) message.DataProvider,
                 DataProvider = message.DataProvider.ToString(),
                 Category = message.Category.ToString(),
@@ -76,9 +80,10 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderSecurityCommand message)
         {
-            var @event = new DataProviderMonitoringModel(message.Id)
+            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
             {
-                Payload = message.Message,
+                Payload = message.Payload,
+                Message = message.Message,
                 DataProviderId = (int) message.DataProvider,
                 DataProvider = message.DataProvider.ToString(),
                 Category = message.Category.ToString(),
@@ -95,9 +100,10 @@ namespace Monitoring.Read.Denormalizer.DataProvider
 
         public void Handle(DataProviderTransformationCommand message)
         {
-            var @event = new DataProviderMonitoringModel(message.Id)
+            var @event = new DataProviderMonitoringModel(Guid.NewGuid())
             {
-                Payload = message.Message,
+                Payload = message.Payload,
+                Message = message.Message,
                 DataProviderId = (int) message.DataProvider,
                 DataProvider = message.DataProvider.ToString(),
                 Category = message.Category.ToString(),
