@@ -5,7 +5,6 @@ using NServiceBus.Features;
 
 namespace Monitoring.DistributedService.Host
 {
-   
     public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
         public void Customize(BusConfiguration configuration)
@@ -14,6 +13,7 @@ namespace Monitoring.DistributedService.Host
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
+            configuration.EndpointName("");
 
             configuration.Conventions()
                 .DefiningCommandsAs(

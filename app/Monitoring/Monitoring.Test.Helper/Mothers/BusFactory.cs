@@ -10,10 +10,6 @@ namespace Monitoring.Test.Helper.Mothers
         public static IBus NServiceRabbitMqBus()
         {
             var configuration = new BusConfiguration();
-
-
-           
-
             configuration.UseTransport<RabbitMQTransport>();
             configuration.DisableFeature<TimeoutManager>();
             configuration.UsePersistence<NHibernatePersistence>();
