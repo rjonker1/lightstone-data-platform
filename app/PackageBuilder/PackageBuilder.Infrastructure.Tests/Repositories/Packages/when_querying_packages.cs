@@ -8,6 +8,7 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.Packages
 {
     public class when_querying_packages : when_persisting_entities_to_memory
     {
+        private Guid _id;
         private PackageRepository _repository;
         public override void Observe()
         {
@@ -15,7 +16,9 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.Packages
 
             var state = StateMother.Published;
             SaveAndFlush(state);
-            Session.Save(new ReadPackageMother(state).VVi);
+            _id = Guid.NewGuid();
+            Session.Save(new ReadPackageMother(_id, state).VVi);
+            Session.Save(new ReadPackageMother(_id, state).VVi);
             Session.Save(new ReadPackageMother(state).VLi);
             Session.Flush();
 
@@ -26,6 +29,18 @@ namespace PackageBuilder.Infrastructure.Tests.Repositories.Packages
         public void should_return_true_if_exists()
         {
             _repository.Exists(Guid.NewGuid(), "VVi").ShouldBeTrue();
+        }
+
+        [Observation]
+        public void should_return_true_if_has_published_versions()
+        {
+            _repository.HasPublishedVersions(_id).ShouldBeTrue();
+        }
+
+        [Observation]
+        public void should_return_all_versions()
+        {
+            _repository.GetAllVersions(_id).ShouldNotBeEmpty();
         }
     }
 }

@@ -7,7 +7,14 @@ namespace PackageBuilder.TestObjects.Mothers
 {
     public class ReadPackageMother
     {
+        private readonly Guid _id;
         private readonly State _state;
+
+        public ReadPackageMother(Guid? id, State state)
+        {
+            _id = id ?? Guid.NewGuid();
+            _state = state;
+        }
 
         public ReadPackageMother(State state)
         {
@@ -19,7 +26,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new ReadPackageBuilder()
-                    .With(Guid.NewGuid())
+                    .With(_id)
                     .With("VVi")
                     .With(DateTime.Now)
                     .With(_state)
@@ -34,7 +41,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new ReadPackageBuilder()
-                    .With(Guid.NewGuid())
+                    .With(_id)
                     .With("VLi")
                     .With(DateTime.Now)
                     .With(_state)
@@ -49,7 +56,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new ReadPackageBuilder()
-                    .With(Guid.NewGuid())
+                    .With(_id)
                     .With("VPi")
                     .With(DateTime.Now)
                     .With(_state)

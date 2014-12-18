@@ -11,7 +11,7 @@ namespace PackageBuilder.Core.Repositories
 
         public bool Exists(Guid id, string name)
         {
-            return this.FirstOrDefault(x => x.Id != id && x.Name == name) != null;
+            return this.Any(x => x.Id != id && x.Name == name);
         }
     }
 }
