@@ -29,8 +29,6 @@ namespace PackageBuilder.Api.Modules
             Post["/Package/Add"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
-
-                //var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
                 bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, stateResolve.FirstOrDefault(), dto.Owner, DateTime.Now, null, dProviders));
@@ -41,7 +39,6 @@ namespace PackageBuilder.Api.Modules
             Post["/Package/Edit/{id}"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
-                //var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(dto.DataProviders);
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == dto.State).Select(y => new State(y.Id, y.Name, y.Alias));
 

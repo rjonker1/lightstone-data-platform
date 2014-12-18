@@ -87,7 +87,10 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldBuilder()
-                    .With("SpecificInformation")
+                    .With("SpecificInformation", "Label", "Definition")
+                    .With(10d)
+                    .With(true)
+                    .With(IndustryMother.Automotive, IndustryMother.Finance)
                     .With(typeof(string))
                     .With(Colour, EngineNumber, LicenseNumber, Odometer, RegistrationNumber, VinNumber)
                     .Build();

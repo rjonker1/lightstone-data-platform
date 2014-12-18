@@ -11,7 +11,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
         public void CreateMaps()
         {
             Mapper.CreateMap<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>()
-                .ConvertUsing(s => s.Select(Mapper.Map<DataProviderFieldItemDto, DataFieldOverride>));
+                .ConvertUsing(s => s != null ? s.Select(Mapper.Map<DataProviderFieldItemDto, DataFieldOverride>) : null);
             Mapper.CreateMap<DataProviderFieldItemDto, DataFieldOverride>()
                 .ForMember(d => d.CostOfSale, opt => opt.MapFrom(x => x.Price))
                 .ForMember(d => d.DataFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.DataFields)));

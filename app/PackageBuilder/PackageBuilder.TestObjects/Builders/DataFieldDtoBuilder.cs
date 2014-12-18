@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+﻿using System.Collections.Generic;
+using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.TestObjects.Builders
 {
-    public class DataFieldBuilder
+    public class DataFieldDtoBuilder
     {
         private string _name;
         private string _label;
@@ -13,22 +12,25 @@ namespace PackageBuilder.TestObjects.Builders
         private IEnumerable<Industry> _industries;
         private double _costOfSale;
         private bool _isSelected;
-        private Type _type;
-        private IEnumerable<IDataField> _dataFields;
+        private string _type;
+        private IEnumerable<DataProviderFieldItemDto> _dataFields;
 
-        public IDataField Build()
+        public DataProviderFieldItemDto Build()
         {
-            return new DataField(_name, _type, _dataFields)
+            return new DataProviderFieldItemDto
             {
+                Name = _name,
+                Type = _type,
                 Label = _label,
                 Definition = _definition,
                 Industries = _industries,
-                CostOfSale = _costOfSale,
+                Price = _costOfSale,
                 IsSelected = _isSelected,
+                DataFields = _dataFields,
             };
         }
 
-        public DataFieldBuilder With(string name, string label = "", string definition = "")
+        public DataFieldDtoBuilder With(string name, string label = "", string definition = "")
         {
             _name = name;
             _label = label;
@@ -36,31 +38,31 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataFieldBuilder With(params Industry[] industries)
+        public DataFieldDtoBuilder With(params Industry[] industries)
         {
             _industries = industries;
             return this;
         }
 
-        public DataFieldBuilder With(double costOfSale)
+        public DataFieldDtoBuilder With(double costOfSale)
         {
             _costOfSale = costOfSale;
             return this;
         }
 
-        public DataFieldBuilder With(bool isSelected)
+        public DataFieldDtoBuilder With(bool isSelected)
         {
             _isSelected = isSelected;
             return this;
         }
 
-        public DataFieldBuilder With(Type type)
+        public DataFieldDtoBuilder With(string type)
         {
             _type = type;
             return this;
         }
 
-        public DataFieldBuilder With(params IDataField[] dataFields)
+        public DataFieldDtoBuilder With(params DataProviderFieldItemDto[] dataFields)
         {
             _dataFields = dataFields;
             return this;

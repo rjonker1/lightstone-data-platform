@@ -37,5 +37,83 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataFieldOverride SpecificInformation
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("SpecificInformation", "SpecificInformation", "SpecificInformation")
+                    .With(10d)
+                    .With(Colour, EngineNumber,LicenseNumber, Odometer, RegistrationNumber, VinNumber)
+                    .Build();
+            }
+        }
+
+        public static DataFieldOverride Colour
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("Colour", "Colour", "Colour")
+                    .With(10d)
+                    .Build();
+            }
+        }
+
+        public static DataFieldOverride EngineNumber
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("EngineNumber", "EngineNumber", "EngineNumber")
+                    .With(10d)
+                    .Build();
+            }
+        }
+
+        public static DataFieldOverride LicenseNumber
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("LicenseNumber", "LicenseNumber", "LicenseNumber")
+                    .With(10d)
+                    .Build();
+            }
+        }
+
+        public static DataFieldOverride Odometer
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("Odometer", "Odometer", "Odometer")
+                    .With(10d)
+                    .Build();
+            }
+        }
+
+        public static DataFieldOverride RegistrationNumber
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("RegistrationNumber", "RegistrationNumber", "RegistrationNumber")
+                    .With(10d)
+                    .Build();
+            }
+        }
+
+        public static DataFieldOverride VinNumber
+        {
+            get
+            {
+                return new DataFieldOverrideBuilder()
+                    .With("VinNumber", "VinNumber", "VinNumber")
+                    .With(10d)
+                    .Build();
+            }
+        }
     }
 }
