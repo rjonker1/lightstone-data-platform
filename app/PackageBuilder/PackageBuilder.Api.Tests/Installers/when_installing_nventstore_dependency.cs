@@ -7,6 +7,7 @@ using NEventStore.Dispatcher;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Infrastructure.NEventStore;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.Installers

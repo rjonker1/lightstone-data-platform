@@ -15,7 +15,10 @@ namespace PackageBuilder.Domain.Dtos
         public string Name { get; set; }
         public string Description { get; set; }
         public double CostOfSale { get; set; }
-        public string SourceURL { get; set; }
+        public bool SourceConfigurationIsApiConfiguration { get; set; }
+        public string SourceConfigurationUrl { get; set; }
+        public string SourceConfigurationUsername { get; set; }
+        public string SourceConfigurationConnectionString { get; set; }
         public bool FieldLevelCostPriceOverride { get; set; }
         public string Owner { get; set; }
         public DateTime CreatedDate { get; set; }

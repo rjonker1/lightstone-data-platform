@@ -4,6 +4,7 @@ using Castle.Windsor;
 using MemBus;
 using MemBus.Configurators;
 using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Infrastructure.NEventStore;
 
 namespace PackageBuilder.Api.Installers
 {

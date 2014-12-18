@@ -20,5 +20,13 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new IndustryBuilder().With("Finance").Build();
             }
         }
+
+        public static Industry All
+        {
+            get
+            {
+                return new IndustryBuilder().With("All").Build();
+            }
+        }
     }
 }
