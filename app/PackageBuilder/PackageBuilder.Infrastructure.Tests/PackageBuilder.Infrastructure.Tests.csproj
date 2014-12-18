@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Base\when_implementing_base_repository.cs" />
     <Compile Include="Repositories\DataProviders\when_querying_data_providers.cs" />
+    <Compile Include="Repositories\States\when_querying_state.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

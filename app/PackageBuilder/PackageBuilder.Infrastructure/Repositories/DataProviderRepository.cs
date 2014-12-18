@@ -15,7 +15,7 @@ namespace PackageBuilder.Infrastructure.Repositories
 
         public bool Exists(Guid id, DataProviderName name)
         {
-            return this.FirstOrDefault(x => x.DataProviderId != id && x.Name == name) != null;
+            return this.Any(x => x.DataProviderId != id && x.Name == name);
         }
     }
 }
