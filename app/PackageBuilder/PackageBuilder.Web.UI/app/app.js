@@ -8,6 +8,7 @@
         'ngSanitize',       // sanitizes html bindings (ex: sidebar.js)
         //'ngGrid',
         'ui.grid',
+        'ui.grid.edit',
 
         // Custom modules 
         'common',           // common functions, logger, spinner
