@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestObjects.Builders;
@@ -14,8 +15,12 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.Ivid)
                     .With("Ivid")
+                    .With(DateTime.Now)
+                    .With((DateTime?)DateTime.Now.AddDays(1))
+                    .With(true)
                     .With(10d)
                     .With(typeof(IProvideDataFromIvid))
+                    .With(DataFieldMother.CarFullname, DataFieldMother.CategoryCode, DataFieldMother.CategoryDescription, DataFieldMother.ColourCode, DataFieldMother.CategoryDescription, DataFieldMother.SpecificInformation)
                     .Build();
             }
         }

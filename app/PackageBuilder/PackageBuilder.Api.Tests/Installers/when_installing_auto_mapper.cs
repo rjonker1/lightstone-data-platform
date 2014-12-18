@@ -20,7 +20,7 @@ namespace PackageBuilder.Api.Tests.Installers
         public void should_resolve_ICreateAutoMapperMaps()
         {
             var registeredMappers = Core.Helpers.Extensions.TypeExtensions.FindDerivedTypesFromAssembly(Assembly.GetAssembly(typeof(ICreateAutoMapperMaps)), typeof(ICreateAutoMapperMaps), true, false).OrderBy(x => x.Name).ToList();
-            var resolvedMappers = _container.ResolveAll<ICreateAutoMapperMaps>().Select(x => x.GetType()).ToList();
+            var resolvedMappers = _container.ResolveAll<ICreateAutoMapperMaps>().Select(x => x.GetType()).OrderBy(x => x.Name).ToList();
 
             registeredMappers.ShouldEqual(resolvedMappers);
         }

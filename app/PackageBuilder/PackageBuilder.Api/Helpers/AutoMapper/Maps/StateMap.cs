@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
 {
-    class StateMap : ICreateAutoMapperMaps
+    public class StateMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()
         {

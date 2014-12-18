@@ -11,7 +11,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new ActionBuilder()
                             .With("Get EzScore")
-                            .With(DataFieldMother.ColourField)
+                            .With(DataFieldMother.ColourCode)
                             .Build();
             }
         }
@@ -22,7 +22,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new ActionBuilder()
                             .With("Partial")
-                            .With(DataFieldMother.ColourField)
+                            .With(DataFieldMother.ColourCode)
                             .Build();
             }
         }
@@ -33,7 +33,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new ActionBuilder()
                             .With("License Scan")
-                            .With(DataFieldMother.ColourField)
+                            .With(DataFieldMother.ColourCode)
                             .Build();
             }
         }
@@ -44,7 +44,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new ActionBuilder()
                             .With("Full")
-                            .With(DataFieldMother.ColourField)
+                            .With(DataFieldMother.ColourCode)
                             .Build();
             }
         }

@@ -152,14 +152,19 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderOverrideMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\ComplexObjectToDataFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataFieldDtoToDataFieldConverter.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldOverrideMap.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataFieldPriceResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviderMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\IndustryResolver.cs" />
+    <Compile Include="Helpers\AutoMapper\ValueResolvers\IndustryResolver.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\IvidResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\IvidTitleHolderResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\LightstoneResponseMap.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.TestObjects.Builders
 {
@@ -9,9 +8,11 @@ namespace PackageBuilder.TestObjects.Builders
     {
         private string _name;
         private Type _type;
+        private IEnumerable<IDataField> _dataFields;
+
         public IDataField Build()
         {
-            return new DataField(_name, null, Enumerable.Empty<Industry>());
+            return new DataField(_name, null, _dataFields);
         }
 
         public DataFieldBuilder With(string name)
@@ -23,6 +24,12 @@ namespace PackageBuilder.TestObjects.Builders
         public DataFieldBuilder With(Type type)
         {
             _type = type;
+            return this;
+        }
+
+        public DataFieldBuilder With(params IDataField[] dataFields)
+        {
+            _dataFields = dataFields;
             return this;
         }
     }
