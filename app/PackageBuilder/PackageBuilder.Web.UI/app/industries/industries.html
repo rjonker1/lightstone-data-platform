@@ -8,9 +8,10 @@
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
-                    <div data-cc-widget-header title="{{title}}"></div>
+                    <div id="title" data-cc-widget-header title="{{title}}"></div>
                     <div class="widget-content user">
-                        <input id="industry_add" style="color: black; height: 20px;" type="text" />
+                        <input id="industry_add" style="color: black; height: 20px;" type="text" ng-model="yourName" />
+                        <h1>Hello {{yourName}}!</h1>
                         <input type="button" style="width: 100px !important;" class="btn btn-success grid-btn" name="edit" ng-click="addIndustry()" value="Add Industry" />
                         <div id="dsGrid" ui-grid="gridOptions" ui-grid-edit class="gridStyle" external-scopes="$scope"></div>
                     </div>
