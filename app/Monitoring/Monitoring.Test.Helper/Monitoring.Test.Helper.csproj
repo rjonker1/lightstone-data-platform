@@ -88,8 +88,6 @@
     <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
     <Compile Include="Fakes\FakePersistEvent.cs" />
     <Compile Include="Mothers\BusFactory.cs" />
-    <None Include="Mothers\QueueFactory.cs.old" />
-    <None Include="Mothers\QueueProcessor.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
