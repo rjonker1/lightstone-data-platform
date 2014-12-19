@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".tests", ".tests", "{0D7458B6-947E-433E-BA7C-378D42B0DB75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Acceptence.Tests", "Monitoring\Monitoring.Acceptence.Tests\Monitoring.Acceptence.Tests.csproj", "{4E514C14-509C-4134-BE7E-CF89B8B92AB4}"
@@ -39,6 +41,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2B0A64
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{E2049648-BDB1-43AA-9E3F-9FF8FD469294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.RabbitMq", "Monitoring\source\Monitoring.RabbitMq\Monitoring.RabbitMq.csproj", "{0B061A1F-2722-44FA-9AAC-EA51A5EDF194}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.CrossCutting", "Monitoring\source\Monitoring.CrossCutting\Monitoring.CrossCutting.csproj", "{9C0BB793-AA9C-450C-B853-2AF74DFC6035}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +102,14 @@ Global
 		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFBB6FE5-B9FF-4E9D-B0EE-26B9BAF68862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B061A1F-2722-44FA-9AAC-EA51A5EDF194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B061A1F-2722-44FA-9AAC-EA51A5EDF194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B061A1F-2722-44FA-9AAC-EA51A5EDF194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B061A1F-2722-44FA-9AAC-EA51A5EDF194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0BB793-AA9C-450C-B853-2AF74DFC6035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0BB793-AA9C-450C-B853-2AF74DFC6035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0BB793-AA9C-450C-B853-2AF74DFC6035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0BB793-AA9C-450C-B853-2AF74DFC6035}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,5 +127,7 @@ Global
 		{C0CD057E-A98A-4A9C-A8F3-A92A2E3077DB} = {2CA82FB4-9AF9-46DA-B800-434D22E0CF27}
 		{E5EF9629-C3AF-48EC-8277-E3DCD18B2906} = {99ACBE10-32BF-4C11-8751-178A111BD5C7}
 		{EE9D1AEC-1E3E-420E-ACF0-3058FEEE6E7F} = {99ACBE10-32BF-4C11-8751-178A111BD5C7}
+		{0B061A1F-2722-44FA-9AAC-EA51A5EDF194} = {E2049648-BDB1-43AA-9E3F-9FF8FD469294}
+		{9C0BB793-AA9C-450C-B853-2AF74DFC6035} = {E2049648-BDB1-43AA-9E3F-9FF8FD469294}
 	EndGlobalSection
 EndGlobal

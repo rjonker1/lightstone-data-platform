@@ -13,7 +13,7 @@ namespace Monitoring.DistributedService.Host
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
-            configuration.EndpointName("");
+            configuration.EndpointName("DataPlatform.Monitoring.Host");
 
             configuration.Conventions()
                 .DefiningCommandsAs(

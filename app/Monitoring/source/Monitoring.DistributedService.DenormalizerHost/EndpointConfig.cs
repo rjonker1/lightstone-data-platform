@@ -13,7 +13,7 @@ namespace Monitoring.DistributedService.DenormalizerHost
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
-            configuration.EndpointName("");
+            configuration.EndpointName("DataPlatform.Monitoring.DenormalizerHost");
 
             configuration.Conventions()
                  .DefiningCommandsAs(
