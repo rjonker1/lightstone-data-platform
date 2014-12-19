@@ -5,7 +5,6 @@ using NServiceBus.Features;
 
 namespace Monitoring.DistributedService.Host
 {
-   
     public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
         public void Customize(BusConfiguration configuration)
@@ -14,16 +13,13 @@ namespace Monitoring.DistributedService.Host
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
+            configuration.EndpointName("DataPlatform.Monitoring.Host");
 
             configuration.Conventions()
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
-            //.DefiningMessagesAs(
-            //    m =>
-            //        m.Namespace != null &&
-            //        m.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Messages"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DomainModule());
