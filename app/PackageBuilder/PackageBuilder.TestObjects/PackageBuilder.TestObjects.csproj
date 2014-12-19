@@ -62,6 +62,7 @@
     <Compile Include="Builders\DataFieldBuilder.cs" />
     <Compile Include="Builders\DataFieldDtoBuilder.cs" />
     <Compile Include="Builders\DataFieldOverrideBuilder.cs" />
+    <Compile Include="Builders\DataProviderDtoBuilder.cs" />
     <Compile Include="Builders\DataProviderOverrideBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidResponseBuilder.cs" />
     <Compile Include="Builders\DataProviderResponses\IvidTitleHolderResponseBuilder.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Mothers\DataFieldDtoMother.cs" />
     <Compile Include="Mothers\DataFieldMother.cs" />
     <Compile Include="Mothers\DataFieldOverrideMother.cs" />
+    <Compile Include="Mothers\DataProviderDtoMother.cs" />
     <Compile Include="Mothers\DataProviderOverrideMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidResponseMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\IvidTitleHolderResponseMother.cs" />

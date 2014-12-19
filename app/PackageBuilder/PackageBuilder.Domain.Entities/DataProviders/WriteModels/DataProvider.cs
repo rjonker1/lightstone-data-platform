@@ -53,13 +53,17 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         {
         }
 
-        public DataProvider(Guid id, DataProviderName name, double costOfSale, bool fieldLevelCostPriceOverride, IEnumerable<IDataField> dataFields) 
+        public DataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)
             : this(id)
         {
-            Id = id;
             Name = name;
-            FieldLevelCostPriceOverride = fieldLevelCostPriceOverride;
+            Description = description;
             CostOfSale = costOfSale;
+            ResponseType = responseType;
+            FieldLevelCostPriceOverride = fieldLevelCostPriceOverride;
+            Owner = owner;
+            CreatedDate = createdDate;
+            EditedDate = editedDate;
             DataFields = dataFields;
         }
 

@@ -11,11 +11,11 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
     public class ComplexObjectToDataFieldConverter : TypeConverter<object, IEnumerable<IDataField>>
     {
-        private readonly IRepository<Industry> _industryRepo;
+        private readonly IRepository<Industry> _industryRepository;
 
-        public ComplexObjectToDataFieldConverter(IRepository<Industry> industryRepo)
+        public ComplexObjectToDataFieldConverter(IRepository<Industry> industryRepository)
         {
-            _industryRepo = industryRepo;
+            _industryRepository = industryRepository;
         }
 
         protected override IEnumerable<IDataField> ConvertCore(object source)
@@ -24,7 +24,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             var complexProperties = properties
                 .Where(property => (property.PropertyType.IsClass || property.PropertyType.IsInterface) && !TypeExtensions.IsSimple(property.PropertyType) && property.PropertyType != typeof (IPair<string, double>[])).ToList();
             var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof(IDataField)) as IDataField).ToList();
-            list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType, _industryRepo.ToList())).ToList());
+            list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType, _industryRepository.ToList())).ToList());
             return list;
         }
     }

@@ -12,8 +12,8 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataProviderOverrideBuilder()
                     .With(Guid.NewGuid())
-                    .With(10d)
-                    .With(DataFieldOverrideMother.Vin, DataFieldOverrideMother.License, DataFieldOverrideMother.Registration)
+                    .With(20d)
+                    .With(DataFieldOverrideMother.Vin, DataFieldOverrideMother.License, DataFieldOverrideMother.Registration, DataFieldOverrideMother.SpecificInformation)
                     .Build();
             }
         }

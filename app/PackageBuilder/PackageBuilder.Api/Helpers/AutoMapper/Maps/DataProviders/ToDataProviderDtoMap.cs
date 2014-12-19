@@ -15,9 +15,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders
             Mapper.CreateMap<IEnumerable<IDataProvider>, IEnumerable<DataProviderDto>>()
                 .ConvertUsing(s => s.Select(Mapper.Map<IDataProvider, DataProviderDto>));
             Mapper.CreateMap<IDataProvider, DataProviderDto>()
-                .ForMember(d => d.CostOfSale, opt => opt.ResolveUsing(new DataProviderCostPriceResolver()))
-                .ForMember(d => d.FieldLevelCostPriceOverride,
-                    opt => opt.ResolveUsing(new DataProviderCostPriceOverrideResolver()))
+                //.ForMember(d => d.CostOfSale, opt => opt.ResolveUsing(new DataProviderCostPriceResolver()))
+                //.ForMember(d => d.FieldLevelCostPriceOverride, opt => opt.ResolveUsing(new DataProviderCostPriceOverrideResolver()))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(x.DataFields)));
             //.BeforeMap((src, dest) =>
             //{

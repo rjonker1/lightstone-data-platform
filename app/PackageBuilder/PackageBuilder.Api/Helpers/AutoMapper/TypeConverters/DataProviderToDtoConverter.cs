@@ -1,23 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Infrastructure.Repositories;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class DataProviderToDtoConverter : ITypeConverter<IEnumerable<IDataProvider>, IEnumerable<DataProviderDto>>
+    public class DataFieldDtosToDataFieldsConverter : TypeConverter<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>
     {
-        private IDataProviderRepository _repository;
-
-        public DataProviderToDtoConverter(IDataProviderRepository repository)
+        protected override IEnumerable<IDataField> ConvertCore(IEnumerable<DataProviderFieldItemDto> source)
         {
-            _repository = repository;
-        }
-
-        public IEnumerable<DataProviderDto> Convert(ResolutionContext context)
-        {
-            throw new System.NotImplementedException();
+            return source == null ? Enumerable.Empty<IDataField>() : source.Select(Mapper.Map<DataProviderFieldItemDto, IDataField>).ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
@@ -30,7 +31,7 @@ namespace PackageBuilder.TestObjects.Builders
             };
         }
 
-        public DataFieldDtoBuilder With(string name, string label = "", string definition = "")
+        public DataFieldDtoBuilder With(string name, string label, string definition = "")
         {
             _name = name;
             _label = label;

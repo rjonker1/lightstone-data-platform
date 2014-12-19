@@ -11,7 +11,6 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldDtoBuilder()
                     .With("CarFullname", "Label", "Definition")
-                    .With("CarFullname")
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
@@ -25,7 +24,6 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldDtoBuilder()
                     .With("CategoryCode", "Label", "Definition")
-                    .With("CategoryCode")
                     .With(true)
                     .With(typeof(string).ToString())
                     .With(10d)
@@ -38,7 +36,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("Colour")
+                    .With("Colour", "Label", "Definition")
                     .With(typeof(string).ToString())
                     .Build();
             }
@@ -48,7 +46,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("EngineNumber")
+                    .With("EngineNumber", "Label", "Definition")
                     .With(typeof(string).ToString())
                     .Build();
             }
@@ -58,7 +56,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("LicenseNumber")
+                    .With("LicenseNumber", "Label", "Definition")
                     .With(typeof(string).ToString())
                     .Build();
             }
@@ -68,7 +66,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("Odometer")
+                    .With("Odometer", "Label", "Definition")
                     .With(typeof(string).ToString())
                     .Build();
             }
@@ -78,7 +76,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("RegistrationNumber")
+                    .With("RegistrationNumber", "Label", "Definition")
                     .With(typeof(string).ToString())
                     .Build();
             }
@@ -88,7 +86,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new DataFieldDtoBuilder()
-                    .With("VinNumber")
+                    .With("VinNumber", "Label", "Definition")
                     .With(typeof(string).ToString())
                     .Build();
             }

@@ -11,7 +11,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("Vin", "Vin", "Vin")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -22,7 +22,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("License", "License", "License")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -33,7 +33,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("Registration", "Registration", "Registration")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -44,7 +44,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("SpecificInformation", "SpecificInformation", "SpecificInformation")
-                    .With(10d)
+                    .With(25d)
                     .With(Colour, EngineNumber,LicenseNumber, Odometer, RegistrationNumber, VinNumber)
                     .Build();
             }
@@ -56,7 +56,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("Colour", "Colour", "Colour")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -67,7 +67,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("EngineNumber", "EngineNumber", "EngineNumber")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -78,7 +78,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("LicenseNumber", "LicenseNumber", "LicenseNumber")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -89,7 +89,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("Odometer", "Odometer", "Odometer")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -100,7 +100,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("RegistrationNumber", "RegistrationNumber", "RegistrationNumber")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }
@@ -111,7 +111,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new DataFieldOverrideBuilder()
                     .With("VinNumber", "VinNumber", "VinNumber")
-                    .With(10d)
+                    .With(25d)
                     .Build();
             }
         }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
-using Nancy.Extensions;
+using PackageBuilder.Api.Helpers.AutoMapper.ValueResolvers;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
@@ -15,18 +14,10 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
         public void CreateMaps()
         {
             Mapper.CreateMap<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>()
-                .ConvertUsing(s =>
-                {
-                    if (s == null) return Enumerable.Empty<DataProviderFieldItemDto>();
-                    var dataProviderFieldItemDtos = s.Select(Mapper.Map<IDataField, DataProviderFieldItemDto>).ToList();
-                    return dataProviderFieldItemDtos;
-                });
+                .ConvertUsing<ITypeConverter<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>>();
             Mapper.CreateMap<IDataField, DataProviderFieldItemDto>()
                 .ForMember(d => d.Price, opt => opt.MapFrom(x => x.CostOfSale))
-                .ForMember(dest => dest.Industries, opt => opt.MapFrom(x =>
-                    x.Industries != null
-                        ? x.Industries.ToList().Concat(ServiceLocator.Current.GetInstance<IRepository<Industry>>().ToList()).DistinctBy(c => c.Id)
-                        : ServiceLocator.Current.GetInstance<IRepository<Industry>>().ToList()));
+                .ForMember(d => d.Industries, opt => opt.ResolveUsing(new IndustryResolver(ServiceLocator.Current.GetInstance<IRepository<Industry>>())));
         }
     }
 }
