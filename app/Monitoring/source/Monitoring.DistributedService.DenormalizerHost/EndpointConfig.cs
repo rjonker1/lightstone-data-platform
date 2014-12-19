@@ -13,6 +13,7 @@ namespace Monitoring.DistributedService.DenormalizerHost
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
+            
             configuration.EndpointName("DataPlatform.Monitoring.DenormalizerHost");
 
             configuration.Conventions()
@@ -20,10 +21,6 @@ namespace Monitoring.DistributedService.DenormalizerHost
                      c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                  .DefiningEventsAs(
                      c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
-            //    .DefiningMessagesAs(
-            //        m =>
-            //            m.Namespace != null &&
-            //            m.Namespace.StartsWith("Monitoring.Domain.Messages.Messages"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new StorageConfigModule());

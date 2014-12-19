@@ -13,6 +13,7 @@ namespace Monitoring.Test.Helper.Mothers
             configuration.UseTransport<RabbitMQTransport>();
             configuration.DisableFeature<TimeoutManager>();
             configuration.UsePersistence<NHibernatePersistence>();
+            configuration.EndpointName("DataPlatform.Monitoring.Host");
             configuration.Conventions()
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"));

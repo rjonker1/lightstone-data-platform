@@ -20,10 +20,6 @@ namespace Monitoring.DistributedService.Host
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
-            //.DefiningMessagesAs(
-            //    m =>
-            //        m.Namespace != null &&
-            //        m.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Messages"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DomainModule());

@@ -5,8 +5,6 @@ using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Test.Helper.Mothers;
 using NServiceBus;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Client.Framing.Impl.v0_8;
 using RabbitMQ.Client.MessagePatterns;
 using Xunit.Extensions;
 
