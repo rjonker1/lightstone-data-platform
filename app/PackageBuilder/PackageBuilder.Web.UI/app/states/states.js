@@ -22,40 +22,29 @@
             //$location.path('/data-source-detail/' + row.entity.dataProviderId + '/' + row.entity.version);
         };
         
-        $scope.selectedDatasource = [];
         $scope.colDefs = [
-                { headerCellTemplate: 'app/states/headerTemplate.html', field: 'name', displayName: 'Name', filter: { term: '' }, enableCellEdit: false },
+                { name: 'name', enableCellEdit: false },
                 { field: 'alias', displayName: 'Alias' }
         ];
         $scope.gridOptions = {
             data: 'data',
-            selectedItems: $scope.selectedDatasource,
             multiSelect: false,
-            enableFiltering: true,
-            showFilter: true,
-            showGroupPanel: true,
-            enableCellEditOnFocus: true,
-            enableCellSelection: true,
             columnDefs: $scope.colDefs
         };
 
-        $scope.$on('ngGridEventEndCellEdit', function(evt) {
-            var entity = evt.targetScope.row.entity;
-            updateState(entity.id, entity.name, entity.alias);
-        });
-        
-        $scope.showStateAddInput = function () {
-            var $state = $('#state_add');
-            $state.attr('ng-show', true);
-            $state.removeClass('ng-hide');
-            $state.addClass('ng-show');
+        $scope.gridOptions.onRegisterApi = function (gridApi) {
+            //set gridApi on scope
+            $scope.gridApi = gridApi;
+            gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+                updateState(rowEntity.id, rowEntity.name, rowEntity.alias);
+                console.log('edited row id:' + rowEntity.id + ' Column:' + colDef.name + ' newValue:' + newValue + ' oldValue:' + oldValue);
+                $scope.$apply();
+            });
         };
 
-        function hideStateAddInput() {
-            var $state = $('#state_add');
-            $state.attr('ng-show', false);
-            $state.removeClass('ng-show');
-            $state.addClass('ng-hide');
+        function clearNewIndustry() {
+            var $industry = $('#state_add');
+            $industry.val('');
         }
 
         activate();
@@ -75,17 +64,17 @@
                 });
         }
 
-        $scope.addState = function(row, $event) {
+        $scope.addState = function() {
             var $state = $('#state_add');
             var name = $state.val();
             if (name.length === 0) {
-                hideStateAddInput();
+                clearNewIndustry();
                 return;
             }
                 
             return stateRepository.addState(name).then(
                    function(successCallback) {
-                        hideStateAddInput();
+                        clearNewIndustry();
                         getStates();
                         logSuccess(successCallback.response);
                 }, function(errorCallback) {
