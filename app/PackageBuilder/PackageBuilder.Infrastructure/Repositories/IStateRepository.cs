@@ -8,5 +8,6 @@ namespace PackageBuilder.Infrastructure.Repositories
     public interface IStateRepository : IRepository<State>
     {
         bool Exists(Guid id, StateName name);
+        State GetByName(StateName name);
     }
 }

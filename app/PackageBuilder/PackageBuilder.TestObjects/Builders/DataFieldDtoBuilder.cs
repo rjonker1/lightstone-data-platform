@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 

@@ -88,6 +88,7 @@
     <Compile Include="Builders\GroupBuilder.cs" />
     <Compile Include="Builders\GroupPackageBuilder.cs" />
     <Compile Include="Builders\IndustryBuilder.cs" />
+    <Compile Include="Builders\PackageDtoBuilder.cs" />
     <Compile Include="Builders\WritePackageBuilder.cs" />
     <Compile Include="Builders\ReadDataProviderBuilder.cs" />
     <Compile Include="Builders\ReadPackageBuilder.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Mothers\DataProviderResponses\Valuations\TotalSalesByGenderModelMother.cs" />
     <Compile Include="Mothers\DataProviderResponses\Valuations\VehicleValuationMother.cs" />
     <Compile Include="Mothers\IndustryMother.cs" />
+    <Compile Include="Mothers\PackageDtoMother.cs" />
     <Compile Include="Mothers\ReadDataProviderMother.cs" />
     <Compile Include="Mothers\ReadPackageMother.cs" />
     <Compile Include="Mothers\StateMother.cs" />

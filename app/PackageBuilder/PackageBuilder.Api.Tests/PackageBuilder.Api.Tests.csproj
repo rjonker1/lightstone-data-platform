@@ -104,6 +104,7 @@
     <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_data_provider_collection.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_an_override_to_a_single_data_provider.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider.cs" />
+    <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_override.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\when_mapping_to_a_single_data_provider_dto.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_accident_dist_collection_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Collections\when_mapping_amortised_value_coll_response.cs" />
@@ -131,6 +132,8 @@
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_sale_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_total_sales_by_age_response.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap\VehicleValuationResponseMap\Items\when_mapping_lightstone_total_sales_by_gender_response.cs" />
+    <Compile Include="AutoMapper\Maps\Packages\when_mapping_to_package_dto.cs" />
+    <Compile Include="AutoMapper\Maps\Packages\when_mapping_to_package.cs" />
     <Compile Include="AutoMapper\Maps\when_mapping_a_complex_object_to_a_data_field.cs" />
     <Compile Include="AutoMapper\when_creating_maps.cs" />
     <Compile Include="AutoMapper\Maps\DataProviders\Responses\IvidResponseMap\when_mapping_ivid_response.cs" />
@@ -192,8 +195,12 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="AutoMapper\Maps\Packages\" />
+    <None Include="..\PackageBuilder.Api\hibernate.cfg.xml">
+      <Link>hibernate.cfg.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

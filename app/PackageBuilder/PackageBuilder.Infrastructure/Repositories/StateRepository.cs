@@ -18,5 +18,11 @@ namespace PackageBuilder.Infrastructure.Repositories
         {
             return this.Any(x => x.Id != id && x.Name == name);
         }
+
+        public State GetByName(StateName name)
+        {
+            var states = this.Where(x => x.Name == name);
+            return states.Count() > 1 ? null : states.FirstOrDefault();
+        }
     }
 }

@@ -165,6 +165,7 @@
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderOverrideToDataProviderConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\StringToStateConverter.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\IndustryResolver.cs" />

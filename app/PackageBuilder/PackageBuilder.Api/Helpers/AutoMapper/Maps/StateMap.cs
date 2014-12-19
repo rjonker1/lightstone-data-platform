@@ -8,7 +8,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<StateName, State>();
+            Mapper.CreateMap<string, State>()
+                .ConvertUsing<ITypeConverter<string, State>>();
             Mapper.CreateMap<State, StateName>();
         }
     }
