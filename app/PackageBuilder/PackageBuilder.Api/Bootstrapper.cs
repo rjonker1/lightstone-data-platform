@@ -46,8 +46,8 @@ namespace PackageBuilder.Api
                 new CommandInstaller(),
                 new BusInstaller(),
                 new NEventStoreInstaller(),
-                new AutoMapperInstaller(),
-                new ServiceLocatorInstaller()
+                new ServiceLocatorInstaller(),
+                new AutoMapperInstaller()
                 );
 
             container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
