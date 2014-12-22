@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.PhantomJS;
 
 namespace PackageBuilder.Web.UI.Tests.Industries
 {
-    class when_loading_industries
+    class when_loading_industries_page
     {
-        Common common = new Common();
+        private Common.Common common = new Common.Common();
         private IWebDriver driver;
 
         [SetUp]

@@ -176,6 +176,7 @@
     </Content>
     <Content Include="Content\ui-grid.ttf" />
     <Content Include="Content\ui-grid.woff" />
+    <Content Include="phones\phones.json" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\bootstrap.js" />
