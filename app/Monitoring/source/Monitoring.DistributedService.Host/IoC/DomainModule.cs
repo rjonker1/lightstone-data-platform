@@ -8,6 +8,8 @@ using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
 using Monitoring.Domain.Core;
 using Monitoring.Domain.Messages;
+using Monitoring.Queuing.Contracts;
+using Monitoring.Queuing.RabbitMq;
 using Monitoring.Write.Service;
 using NEventStore;
 using NEventStore.Persistence.SqlPersistence.SqlDialects;
@@ -16,11 +18,6 @@ using NServiceBus.Transports;
 using NServiceBus.Unicast;
 using Module = Autofac.Module;
 
-/*
- * Important to Bind the Denormalizer queue to the Host. This is done using Rabbit MQ Adminisration 
- * Host Exchange -> Bind the Denormalizing Host to the Host
- *  
- */
 namespace Monitoring.DistributedService.Host.IoC
 {
     public class DomainModule : Module
@@ -39,6 +36,7 @@ namespace Monitoring.DistributedService.Host.IoC
             builder.RegisterType<ConflictDetector>().As<IDetectConflicts>();
             builder.RegisterType<EventStoreRepository>().As<IRepository>();
             builder.RegisterType<AggregateFactory>().As<IConstructAggregates>();
+            builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
         }
 
         private static IStoreEvents BuildEventStore(ILifetimeScope container)

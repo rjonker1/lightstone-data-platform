@@ -16,12 +16,9 @@ namespace Monitoring.Test.Helper.Mothers
             configuration.EndpointName("DataPlatform.Monitoring.Host");
             configuration.Conventions()
                 .DefiningCommandsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"));
-            //.DefiningEventsAs(
-            //    c => c.Namespace != null && c.Namespace.StartsWith("Monitoring.Domain.Messages.Events"))
-            //.DefiningMessagesAs(
-            //    m => m.Namespace != null && m.Namespace.StartsWith("Monitoring.Domain.Messages.Messages"));
-            //configuration.EnableFeature<Sagas>();
+                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
+                .DefiningEventsAs(
+                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
             var bus = Bus.Create(configuration);
             return bus;
         }

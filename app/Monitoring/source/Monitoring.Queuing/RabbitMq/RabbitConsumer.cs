@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using Monitoring.CrossCutting;
+using Monitoring.Queuing.Configuration;
+using Monitoring.Queuing.Contracts;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 
-namespace Monitoring.RabbitMq
+namespace Monitoring.Queuing.RabbitMq
 {
-    public class Consumer : IConsumeMessagesFromQueue
+    public class RabbitConsumer : IConsumeQueue
     {
         public IModel Model { get; set; }
         public IConnection Connection { get; private set; }
@@ -19,7 +20,7 @@ namespace Monitoring.RabbitMq
 
         private readonly string _hostName, _userName, _password; // _exchangeName, _routingKeyName;
 
-        public Consumer(string hostName, string username, string password, bool useCredentials = false)
+        public RabbitConsumer(string hostName, string username, string password, bool useCredentials = false)
         {
             _hostName = hostName;
             _userName = username;
@@ -27,9 +28,9 @@ namespace Monitoring.RabbitMq
             _useCredentials = useCredentials;
         }
 
-        public void ReadFromQueue(Action<string, Consumer, ulong> onDequeue,
-            Action<Exception, Consumer, ulong> onError, string exchangeName, string queueName,
-            string routingKeyName)
+        public void ReadFromQueue(Action<string, RabbitConsumer, ulong> onDequeue,
+            Action<Exception, RabbitConsumer, ulong> onError, string exchangeName, string queueName,
+            string routingKeyName, string exchangeType)
         {
             BindToQueue(exchangeName, queueName, routingKeyName);
 
@@ -43,39 +44,39 @@ namespace Monitoring.RabbitMq
 
             consumer.Shutdown += (o, e) =>
             {
-                ConnectToRabbitMq(exchangeName, routingKeyName,queueName);
-                ReadFromQueue(onDequeue, onError, exchangeName, queueName, routingKeyName);
+                ConnectToRabbitMq(exchangeName, routingKeyName,queueName,exchangeType);
+                ReadFromQueue(onDequeue, onError, exchangeName, queueName, routingKeyName,exchangeType);
             };
 
             Model.BasicConsume(queueName, false, consumer);
 
         }
 
-        public void AddBindingToAQueue(DataProviderQueue bindingToQueue, string queueName, string exchangeName,
-            string routingKeyName)
+        public void AddBindingToAQueue(MonitoringQueue bindingToQueue, string queueName, string exchangeName,
+            string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(bindingToQueue.Exchange, bindingToQueue.RoutingKey, bindingToQueue.Name);
-            BindToQueue(bindingToQueue.Exchange, bindingToQueue.Name, bindingToQueue.RoutingKey);
-            Model.QueueBind(queueName, bindingToQueue.Exchange, bindingToQueue.RoutingKey);
+            ConnectToRabbitMq(bindingToQueue.ExchangeName, bindingToQueue.RoutingKey, bindingToQueue.QueueName, exchangeType);
+            BindToQueue(bindingToQueue.ExchangeName, bindingToQueue.QueueName, bindingToQueue.RoutingKey);
+            Model.QueueBind(queueName, bindingToQueue.ExchangeName, bindingToQueue.RoutingKey);
         }
 
-        public void PurgeQueue(string queueName, string exchangeName, string routingKeyName)
+        public void PurgeQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(exchangeName, routingKeyName,queueName);
+            ConnectToRabbitMq(exchangeName, routingKeyName,queueName,exchangeType);
             BindToQueue(exchangeName, queueName, routingKeyName);
             Model.QueuePurge(queueName);
         }
 
-        public void DeleteQueue(string queueName, string exchangeName, string routingKeyName)
+        public void DeleteQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(exchangeName, routingKeyName,queueName);
+            ConnectToRabbitMq(exchangeName, routingKeyName, queueName, exchangeType);
             Model.QueueDelete(queueName);
             Model.ExchangeDelete(exchangeName);
         }
 
-        public void AddQueue(string queueName, string exchangeName, string routingKeyName)
+        public void AddQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(exchangeName, routingKeyName, queueName);
+            ConnectToRabbitMq(exchangeName, routingKeyName, queueName,exchangeType);
             BindToQueue(exchangeName, queueName, routingKeyName);
         }
 
@@ -91,7 +92,7 @@ namespace Monitoring.RabbitMq
            Model.QueueBind(queueName, exchangeName, routingKeyName);
         }
 
-        private bool ConnectToRabbitMq(string exchangeName, string routingKeyName, string queueName)
+        private bool ConnectToRabbitMq(string exchangeName, string routingKeyName, string queueName, string exchangeType)
         {
             var attempts = 0;
             while (attempts < 3)
@@ -115,7 +116,7 @@ namespace Monitoring.RabbitMq
                         };
 
                     Connection = connectionFactory.CreateConnection();
-                    CreateModel(exchangeName, routingKeyName, queueName);
+                    CreateModel(exchangeName, routingKeyName, queueName, exchangeType);
                     return true;
                 }
                 catch (System.IO.EndOfStreamException ex)
@@ -136,7 +137,7 @@ namespace Monitoring.RabbitMq
             return false;
         }
 
-        private void CreateModel(string exchangeName, string routingKeyName, string queueName)
+        private void CreateModel(string exchangeName, string routingKeyName, string queueName, string exchangeType)
         {
             Model = Connection.CreateModel();
             Connection.AutoClose = true;
@@ -145,7 +146,7 @@ namespace Monitoring.RabbitMq
             const bool durable = true, exchangeAutoDelete = false, queueAutoDelete = false, exclusive = false;
 
             if (!string.IsNullOrWhiteSpace(exchangeName))
-                Model.ExchangeDeclare(exchangeName, ExchangeType.Fanout, durable, exchangeAutoDelete, null);
+                Model.ExchangeDeclare(exchangeName, exchangeType, durable, exchangeAutoDelete, null);
 
             IDictionary<string, object> queueArgs = new Dictionary<string, object>
             {
