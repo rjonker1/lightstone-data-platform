@@ -1,10 +1,20 @@
-﻿using NHibernate.Exceptions;
+﻿using System;
+using Lace.Shared.Monitoring.Messages.Shared;
+using NHibernate.Exceptions;
 using NServiceBus;
 using NServiceBus.Features;
-using NServiceBus.Persistence;
 
 namespace Monitoring.Test.Helper.Mothers
 {
+    public class BusBuilder
+    {
+        public static ISendMonitoringMessages ForMonitoringMessages(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new MonitoringMessageSender(bus, aggregateId);
+        }
+    }
+
     public class BusFactory
     {
         public static IBus NServiceRabbitMqBus()
