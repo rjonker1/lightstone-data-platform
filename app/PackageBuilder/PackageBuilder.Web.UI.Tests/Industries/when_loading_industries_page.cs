@@ -7,7 +7,7 @@ namespace PackageBuilder.Web.UI.Tests.Industries
 {
     class when_loading_industries_page
     {
-        Common common = new Common();
+        private Common.Common common = new Common.Common();
         private IWebDriver driver;
 
         [SetUp]

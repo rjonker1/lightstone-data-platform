@@ -2,13 +2,15 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.PhantomJS;
+using PackageBuilder.Web.UI.Tests.Common;
+using Protractor;
 
 namespace PackageBuilder.Web.UI.Tests.States
 {
-    class when_loading_states_page
+    internal class when_loading_states_page
     {
 
-        Common common = new Common();
+        private Common.Common common = new Common.Common();
         private IWebDriver driver;
 
         [SetUp]
@@ -42,5 +44,42 @@ namespace PackageBuilder.Web.UI.Tests.States
             Assert.GreaterOrEqual(3, industriesPage.GetIndustriesCount());
         }
 
+//        [Test]
+//        public void should_have_three_or_more_states2()
+//        {
+
+//            NgMockE2EModule mockModule = new NgMockE2EModule(@"
+//$httpBackend.whenGET('../../phones/phones.json').respond(
+//[
+//    {
+//        age: 12, 
+//        carrier: 'AT&amp;T', 
+//        id: 'motorola-bravo-with-motoblur', 
+//        imageUrl: 'img/phones/motorola-bravo-with-motoblur.0.jpg', 
+//        name: 'MOTOROLA BRAVO\u2122 with MOTOBLUR\u2122', 
+//        snippet: 'An experience to cheer about.'
+//    }, 
+//    {
+//        age: 13, 
+//        carrier: 'T-Mobile', 
+//        id: 'motorola-defy-with-motoblur', 
+//        imageUrl: 'img/phones/motorola-defy-with-motoblur.0.jpg', 
+//        name: 'Motorola DEFY\u2122 with MOTOBLUR\u2122', 
+//        snippet: 'Are you ready for everything life throws your way?'
+//    }, 
+//]
+//);
+//");
+
+//            //IWebDriver ngDriver = new NgWebDriver(driver, mockModule);
+//            //ngDriver.Navigate().GoToUrl("http://localhost:62500/#/states");
+
+//            //Assert.AreEqual(2, ngDriver.FindElements(NgBy.Repeater("phone in phones")).Count);
+
+//            IWebDriver ngDriver = new NgWebDriver(driver, mockModule);
+//            ngDriver.Navigate().GoToUrl("http://localhost:62500/#/states");
+//            Assert.AreEqual(2, ngDriver.FindElements(NgBy.Repeater("phone in phones")).Count);
+
+//        }
     }
 }
