@@ -6,7 +6,7 @@ namespace Monitoring.Acceptance.Tests.Queues
     {
         public override void Observe()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

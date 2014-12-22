@@ -35,9 +35,6 @@
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.384\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
@@ -66,8 +63,11 @@
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.384\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.384\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.390\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.390\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
@@ -89,7 +89,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.390\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
@@ -124,7 +124,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Builder\DataProviderEvents\EventMessageBuilder.cs" />
-    <Compile Include="Builder\DataProviderRequests\DataProviderLicensePlateNumberRequest.cs" />
+    <Compile Include="Builder\DataProviderInformation.cs" />
+    <None Include="Builder\DataProviderRequests\DataProviderLicensePlateNumberRequest.cs.old" />
     <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
     <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
     <Compile Include="Fakes\FakePersistEvent.cs" />

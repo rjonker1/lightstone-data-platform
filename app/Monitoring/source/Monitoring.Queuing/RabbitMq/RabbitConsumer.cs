@@ -20,6 +20,11 @@ namespace Monitoring.Queuing.RabbitMq
 
         private readonly string _hostName, _userName, _password; // _exchangeName, _routingKeyName;
 
+        public RabbitConsumer()
+        {
+            
+        }
+
         public RabbitConsumer(string hostName, string username, string password, bool useCredentials = false)
         {
             _hostName = hostName;

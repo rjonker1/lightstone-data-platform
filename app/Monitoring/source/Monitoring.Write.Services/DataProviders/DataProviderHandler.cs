@@ -37,10 +37,6 @@ namespace Monitoring.Write.Service.DataProviders
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
-
-            //var @event = new DataProviderHasExecutedAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderWasCalledCommand message)
@@ -51,10 +47,6 @@ namespace Monitoring.Write.Service.DataProviders
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
-          
-            //var @event = new DataProviderIsBeingCalledAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasEndedCommand message)
@@ -65,9 +57,6 @@ namespace Monitoring.Write.Service.DataProviders
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
-            //var @event = new DataProviderHasBeenCalledAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasFaultCommand message)
@@ -78,10 +67,6 @@ namespace Monitoring.Write.Service.DataProviders
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
-            //var @event = new DataProviderFaultAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category,
-            //    message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasBeenConfiguredCommand message)
@@ -92,10 +77,6 @@ namespace Monitoring.Write.Service.DataProviders
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
-            //var @event = new DataProviderConfigurationAggregate(message.Command.Id, message.Command.DataProvider, message.Command.Category,
-            //    message.Command.Message,
-            //    message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
-            //_repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(DataProviderHasSecurityCommand message)

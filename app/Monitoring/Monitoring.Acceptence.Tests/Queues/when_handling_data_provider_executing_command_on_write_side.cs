@@ -1,20 +1,11 @@
 ﻿using System;
-using Autofac;
-using CommonDomain.Persistence;
-using CommonDomain.Persistence.EventStore;
-using Lace.Domain.Core.Requests.Contracts;
-using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Publisher;
-using Lace.Shared.Monitoring.Messages.RabbitMQ;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
-using Monitoring.Test.Helper.Builder.DataProviderRequests;
+using Monitoring.Test.Helper.Builder;
 using Monitoring.Test.Helper.Messages;
 using Monitoring.Test.Helper.Mothers;
-using Monitoring.Write.Service.DataProviders;
 using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Queues
@@ -24,7 +15,7 @@ namespace Monitoring.Acceptance.Tests.Queues
         private ISendMonitoringMessages _monitoring;
         private readonly RabbitMqMessageQueueing _messageQueue;
         private readonly IHaveQueueActions _setup;
-        private readonly ILaceRequest _request;
+        private readonly string _request;
 
         private DataProviderStopWatch _stopWatch;
         private DataProviderStopWatch _dataProviderStopWatch;
@@ -39,7 +30,7 @@ namespace Monitoring.Acceptance.Tests.Queues
             _setup.AddAllQueues();
 
 
-            _request = new DataProviderLicensePlateNumberRequest();
+            _request = DataProviderRequestBuilder.ForIvid();
 
             _aggregateId = Guid.NewGuid();
         }
@@ -51,37 +42,36 @@ namespace Monitoring.Acceptance.Tests.Queues
         }
 
         [Observation]
-        public void then_start_executing_ivid_data_provider_request_should_be_handled()
+        public void then_monitoring_from_ivid_data_provider_should_be_handled()
         {
             _monitoring.ShouldNotBeNull();
 
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Ivid);
             _dataProviderStopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Ivid);
 
-            _monitoring.StartDataProvider(DataProvider.Ivid, _request.ObjectToJson(), _dataProviderStopWatch);
+            _monitoring.StartDataProvider(DataProvider.Ivid, _request, _dataProviderStopWatch);
 
-            _monitoring.DataProviderConfiguration(DataProvider.Ivid, _request.ObjectToJson(), string.Empty);
+            _monitoring.DataProviderConfiguration(DataProvider.Ivid, _request, string.Empty);
 
-            var proxy = DataProviderConfigurationBuilder.ForIvidWebServiceProxy();
-            _monitoring.DataProviderSecurity(DataProvider.Ivid, proxy.ObjectToJson(),
+            var configJson = DataProviderConfigurationBuiler.ForIvid();
+            _monitoring.DataProviderSecurity(DataProvider.Ivid, configJson,
                 "Ivid Data Provider Credentials");
 
-            _monitoring.StartCallingDataProvider(DataProvider.Ivid, _request.ObjectToJson(), _stopWatch);
+            _monitoring.StartCallingDataProvider(DataProvider.Ivid, _request, _stopWatch);
 
-            _monitoring.DataProviderFault(DataProvider.Ivid, _request.ObjectToJson(),
+            _monitoring.DataProviderFault(DataProvider.Ivid, _request,
                 "No response received from Ivid Data Provider");
 
 
-            _monitoring.EndCallingDataProvider(DataProvider.Ivid,
-                _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson(),
+            _monitoring.EndCallingDataProvider(DataProvider.Ivid, DataProviderResponseBuilder.FromIvid(),
                 _stopWatch);
 
 
-            var transformer = DataProviderTransformationBuilder.ForIvid(_ividResponse);
-            _monitoring.DataProviderTransformation(DataProvider.Ivid, transformer.Result.ObjectToJson(),
-                transformer.ObjectToJson());
+            //var transformer = DataProviderTransformationBuilder.ForIvid(_ividResponse);
+            _monitoring.DataProviderTransformation(DataProvider.Ivid, DataProviderTransformationBuilder.ForIvid(),
+                DataProviderResponseBuilder.FromIvid());
 
-            _monitoring.EndDataProvider(DataProvider.Ivid, _request.ObjectToJson(), _dataProviderStopWatch);
+            _monitoring.EndDataProvider(DataProvider.Ivid, _request, _dataProviderStopWatch);
         }
     }
 }

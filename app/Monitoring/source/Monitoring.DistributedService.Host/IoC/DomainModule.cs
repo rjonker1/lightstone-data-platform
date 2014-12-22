@@ -36,6 +36,7 @@ namespace Monitoring.DistributedService.Host.IoC
             builder.RegisterType<ConflictDetector>().As<IDetectConflicts>();
             builder.RegisterType<EventStoreRepository>().As<IRepository>();
             builder.RegisterType<AggregateFactory>().As<IConstructAggregates>();
+            builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
         }
 

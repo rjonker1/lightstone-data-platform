@@ -35,17 +35,12 @@
     <Reference Include="Autofac">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.384\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.384\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.384\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.389, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,29 +50,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.389\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.362, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.362\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="NEventStore">
-      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.389\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.384\lib\net45\NHibernate.dll</HintPath>
+      <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.NHibernate, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NServiceBus.NHibernate.6.0.0\lib\net45\NServiceBus.NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.ObjectBuilder.Autofac">
       <HintPath>..\..\packages\NServiceBus.Autofac.5.0.0\lib\net45\NServiceBus.ObjectBuilder.Autofac.dll</HintPath>
@@ -103,7 +93,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataProvider\when_sending_data_provider_executed_command_to_bus.cs" />
     <Compile Include="Queues\when_handling_data_provider_executing_command_on_read_side.cs" />
     <Compile Include="Queues\when_handling_data_provider_executing_command_on_write_side.cs" />
     <None Include="Lace\Consumer\when_sending_external_source_events_to_monitoring_bus.cs.old" />
@@ -140,7 +129,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DataProvider\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

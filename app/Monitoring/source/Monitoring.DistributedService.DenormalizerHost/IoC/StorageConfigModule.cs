@@ -29,6 +29,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
 
             builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
             builder.RegisterType<DataProviderMonitoringHandler>();
+            builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
         }
 
