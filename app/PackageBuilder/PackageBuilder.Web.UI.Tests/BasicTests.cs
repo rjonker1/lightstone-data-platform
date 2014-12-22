@@ -24,7 +24,7 @@ namespace PackageBuilder.Web.UI.Tests
             //driver = new PhantomJSDriver(@"C:\Source\Repos\lightstone-data-platform\app\PackageBuilder.Web.UI.Tests\tools\phantomjs");
 
             //Using NuGet Package 'WebDriver.ChromeDriver.win32'
-            driver = new ChromeDriver(@"C:\Source\Repos\lightstone-data-platform\app\PackageBuilder.Web.UI.Tests\tools\chrome");
+            driver = new ChromeDriver(@"C:\Source\Repos\lightstone-data-platform\app\PackageBuilder\PackageBuilder.Web.UI.Tests\tools\chrome");
 
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(300));
         }
