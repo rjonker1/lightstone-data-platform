@@ -54,7 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicTests.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Industries\IndustriesPageObjects.cs" />
+    <Compile Include="Industries\when_loading_industries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
