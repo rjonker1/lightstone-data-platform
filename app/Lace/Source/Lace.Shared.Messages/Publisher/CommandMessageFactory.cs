@@ -4,9 +4,9 @@ using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Publisher
 {
-    internal static class CommandMessageFactory
+    public static class CommandMessageFactory
     {
-        internal static DataProviderWasCalledCommand StartCallingDataProviderSource(Guid id, DataProvider dataProvider,
+        public static DataProviderWasCalledCommand StartCallingDataProviderSource(Guid id, DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             return new DataProviderWasCalledCommand(new DataProviderCommandDto(id, dataProvider,
@@ -15,7 +15,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 category, isJson));
         }
 
-        internal static DataProviderHasEndedCommand StopCallingDataProviderSource(Guid id, DataProvider dataProvider,
+        public static DataProviderHasEndedCommand StopCallingDataProviderSource(Guid id, DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             return new DataProviderHasEndedCommand(new DataProviderCommandDto(id, dataProvider,
@@ -24,7 +24,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 category, isJson));
         }
 
-        internal static DataProviderExecutingCommand StartDataProvider(Guid id, DataProvider dataProvider,
+        public static DataProviderExecutingCommand StartDataProvider(Guid id, DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             return new DataProviderExecutingCommand(new DataProviderCommandDto(id, dataProvider,
@@ -33,7 +33,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 category, isJson));
         }
 
-        internal static DataProviderHasExecutedCommand StopDataProvider(Guid id, DataProvider dataProvider,
+        public static DataProviderHasExecutedCommand StopDataProvider(Guid id, DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             return new DataProviderHasExecutedCommand(new DataProviderCommandDto(id, dataProvider,
@@ -42,7 +42,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 category, isJson));
         }
 
-        internal static DataProviderHasFaultCommand FaultInDataProvider(Guid id, DataProvider dataProvider,
+        public static DataProviderHasFaultCommand FaultInDataProvider(Guid id, DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             return new DataProviderHasFaultCommand(new DataProviderCommandDto(id, dataProvider,
@@ -51,7 +51,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 category, isJson));
         }
 
-        internal static DataProviderHasSecurityCommand SecurityFlagRaisedInDataProvider(Guid id,
+        public static DataProviderHasSecurityCommand SecurityFlagRaisedInDataProvider(Guid id,
             DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -61,7 +61,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                     metadata, DateTime.UtcNow, category, isJson));
         }
 
-        internal static DataProviderHasBeenConfiguredCommand ConfigurationInDataProvider(Guid id,
+        public static DataProviderHasBeenConfiguredCommand ConfigurationInDataProvider(Guid id,
             DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -71,7 +71,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                     DateTime.UtcNow, category, isJson));
         }
 
-        internal static DataProviderResponseTransformedCommand TransformationInDataProvider(Guid id,
+        public static DataProviderResponseTransformedCommand TransformationInDataProvider(Guid id,
             DataProvider dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
