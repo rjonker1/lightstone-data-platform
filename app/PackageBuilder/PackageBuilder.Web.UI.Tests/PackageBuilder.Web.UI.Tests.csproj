@@ -69,8 +69,6 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup />
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Industries\IndustriesPageObjects.cs" />
