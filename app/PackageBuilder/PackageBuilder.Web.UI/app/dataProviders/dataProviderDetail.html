@@ -111,7 +111,7 @@
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
-                    <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
+                    <div id="title" data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
 
                         <!--{{dataProv.dataFields[0].selectedChildren}}-->
@@ -215,7 +215,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="widget wblue">
-                                    <div data-cc-widget-header title="{{title}} : Response - Data Fields" allow-collapse="true"></div>
+                                    <div id="field_table_title" data-cc-widget-header title="{{title}} : Request - Data Fields" allow-collapse="true"></div>
                                     <div class="widget-content text-left text-info">
 
                                         <table class="table" style="padding-top: 20px;">
@@ -271,7 +271,7 @@
         <div class="container">
             <div class="row">
                 <div class="widget worange">
-                    <div data-cc-widget-header title="{{title}} : Request" allow-collapse="true"></div>
+                    <div id="connection_details" data-cc-widget-header title="{{title}} : Response" allow-collapse="true"></div>
                     <div class="widget-content user" data-ng-repeat="dataProv in dataProvider.response">
                         <div class="row">
                             <div id="1" class="col-md-3">
