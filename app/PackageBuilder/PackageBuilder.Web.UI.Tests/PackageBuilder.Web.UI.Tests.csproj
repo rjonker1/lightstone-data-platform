@@ -55,6 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Common.cs" />
+    <Compile Include="DataProviders\DataProvidersPageObjects.cs" />
+    <Compile Include="DataProviders\when_loading_data_providers_overview_page.cs" />
+    <Compile Include="DataProviders\when_loading_data_provider_detail_page.cs" />
+    <Compile Include="DataProviders\when_loading_data_provider_view_page.cs" />
     <Compile Include="Industries\IndustriesPageObjects.cs" />
     <Compile Include="Industries\when_loading_industries_page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
