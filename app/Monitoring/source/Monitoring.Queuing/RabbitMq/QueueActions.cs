@@ -34,11 +34,11 @@ namespace Monitoring.Queuing.RabbitMq
                 _consumer.AddQueue(queue.QueueName, queue.ExchangeName, queue.RoutingKey, queue.ExchangeType);
             }
 
-            foreach (var queue in MonitoringQueues.QueuesForBinding)
-            {
-                _consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
-                    queue.Queue.ExchangeType);
-            }
+            //foreach (var queue in MonitoringQueues.QueuesForBinding)
+            //{
+            //    _consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
+            //        queue.Queue.ExchangeType);
+            //}
         }
 
         public void PurgeAllQueues()

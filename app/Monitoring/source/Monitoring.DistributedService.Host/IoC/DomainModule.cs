@@ -72,15 +72,15 @@ namespace Monitoring.DistributedService.Host.IoC
                 for (var i = 0; i < commit.Events.Count; i++)
                 {
                     var eventMessage = commit.Events[i];
-                    var busMessage = eventMessage.Body;
-                    //AppendHeaders(busMessage, commit.Headers,bus); // optional
-                    //AppendHeaders(busMessage, eventMessage.Headers,bus); // optional
-                    //AppendVersion(commit, i,bus); // optional
+                    var busMessage = eventMessage.Body as IDomainEvent;
+                    AppendHeaders(busMessage, commit.Headers, bus); // optional
+                    AppendHeaders(busMessage, eventMessage.Headers, bus); // optional
+                    AppendVersion(commit, i, bus); // optional
                     bus.Publish(busMessage);
-                    //var eventMessage = commit.Events[i];
+                    //var eventMessage = commit.Events[i] as Lace.Shared.Monitoring.Messages.Events.IDomainEvent;
                     //var busMessage = new TransportMessage() //eventMessage.Body as TransportMessage;
                     //{
-                    //   Body = Encoding.UTF8.GetBytes(eventMessage.Body.AsJsonString())
+                    //    Body = Encoding.UTF8.GetBytes(eventMessage.Body as IDomainEvent)
                     //};
                     //AppendHeaders(busMessage, commit.Headers);
                     //AppendHeaders(busMessage, eventMessage.Headers);
@@ -91,7 +91,7 @@ namespace Monitoring.DistributedService.Host.IoC
             }
         }
 
-        private static void AppendHeaders(IMessage message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
+        private static void AppendHeaders(IDomainEvent message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
         {
             headers = headers.Where(x => x.Key.StartsWith(BusPrefixKey));
             foreach (var header in headers)
@@ -104,7 +104,7 @@ namespace Monitoring.DistributedService.Host.IoC
         }
         private static void AppendVersion(Commit commit, int index, ISendOnlyBus bus)
         {
-            var busMessage = commit.Events[index].Body as IMessage;
+            var busMessage = commit.Events[index].Body as IDomainEvent;
             bus.SetMessageHeader(busMessage, AggregateIdKey, commit.StreamId.ToString());
             bus.SetMessageHeader(busMessage, CommitVersionKey, commit.StreamRevision.ToString());
             bus.SetMessageHeader(busMessage, EventVersionKey, GetSpecificEventVersion(commit, index).ToString());
