@@ -172,7 +172,7 @@
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
-                    <div data-cc-widget-header title="{{title}}"></div>
+                    <div id="title" data-cc-widget-header title="{{title}}"></div>
                     <div class="widget-content user">
 
                         <div id="info" class="row">
@@ -203,7 +203,7 @@
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProvsPkg.Package.state" ng-selected="dataProvsPkg.Package.state">
+                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-selected="dataProvsPkg.Package.state">
                                             <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
                                         </select>
                                     </div>
