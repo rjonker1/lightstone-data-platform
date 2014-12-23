@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Startup.cs" />
     <None Include="Dispatcher\NServiceBusDispatcher.cs.old" />
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="IoC\DomainModule.cs" />
@@ -109,6 +110,10 @@
     <ProjectReference Include="..\Monitoring.DomainModel\Monitoring.DomainModel.csproj">
       <Project>{ee9d1aec-1e3e-420e-acf0-3058feee6e7f}</Project>
       <Name>Monitoring.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Queuing\Monitoring.Queuing.csproj">
+      <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>
+      <Name>Monitoring.Queuing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring.Write.Services\Monitoring.Write.Service.csproj">
       <Project>{e5ef9629-c3af-48ec-8277-e3dcd18b2906}</Project>

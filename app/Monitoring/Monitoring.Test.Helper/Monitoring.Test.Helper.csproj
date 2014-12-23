@@ -32,6 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="EventStore.ClientAPI">
       <HintPath>..\..\packages\EventStore.Client.2.0.2\lib\net40\EventStore.ClientAPI.dll</HintPath>
     </Reference>
@@ -50,9 +57,39 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.384\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.384\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.390\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.390\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Dtos">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Dtos.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestObjects">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.384\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.373\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.EventTracking.Domain.Persistence.1.0.0.89\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.390\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
@@ -62,6 +99,9 @@
     </Reference>
     <Reference Include="NServiceBus.NHibernate">
       <HintPath>..\..\packages\NServiceBus.NHibernate.6.0.0\lib\net45\NServiceBus.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.ObjectBuilder.Autofac">
+      <HintPath>..\..\packages\NServiceBus.Autofac.5.0.0\lib\net45\NServiceBus.ObjectBuilder.Autofac.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Transports.RabbitMQ, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -84,10 +124,14 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Builder\DataProviderEvents\EventMessageBuilder.cs" />
+    <Compile Include="Builder\DataProviderInformation.cs" />
+    <None Include="Builder\DataProviderRequests\DataProviderLicensePlateNumberRequest.cs.old" />
     <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
     <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
     <Compile Include="Fakes\FakePersistEvent.cs" />
+    <Compile Include="Messages\MessageQueueing.cs" />
     <Compile Include="Mothers\BusFactory.cs" />
+    <Compile Include="Mothers\BusIocModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -103,6 +147,10 @@
     <ProjectReference Include="..\source\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj">
       <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
       <Name>Monitoring.Domain.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Queuing\Monitoring.Queuing.csproj">
+      <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>
+      <Name>Monitoring.Queuing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,10 +1,19 @@
-﻿using NHibernate.Exceptions;
+﻿using System;
+using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 using NServiceBus.Features;
-using NServiceBus.Persistence;
 
 namespace Monitoring.Test.Helper.Mothers
 {
+    public class BusBuilder
+    {
+        public static ISendMonitoringMessages ForMonitoringMessages(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new MonitoringMessageSender(bus, aggregateId);
+        }
+    }
+
     public class BusFactory
     {
         public static IBus NServiceRabbitMqBus()
@@ -16,12 +25,9 @@ namespace Monitoring.Test.Helper.Mothers
             configuration.EndpointName("DataPlatform.Monitoring.Host");
             configuration.Conventions()
                 .DefiningCommandsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"));
-            //.DefiningEventsAs(
-            //    c => c.Namespace != null && c.Namespace.StartsWith("Monitoring.Domain.Messages.Events"))
-            //.DefiningMessagesAs(
-            //    m => m.Namespace != null && m.Namespace.StartsWith("Monitoring.Domain.Messages.Messages"));
-            //configuration.EnableFeature<Sagas>();
+                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
+                .DefiningEventsAs(
+                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
             var bus = Bus.Create(configuration);
             return bus;
         }

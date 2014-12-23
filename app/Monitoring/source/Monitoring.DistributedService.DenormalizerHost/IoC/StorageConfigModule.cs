@@ -4,6 +4,8 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Monitoring.DistributedService.DenormalizerHost.Storage;
 using Monitoring.Domain.Core.Contracts;
+using Monitoring.Queuing.Contracts;
+using Monitoring.Queuing.RabbitMq;
 using Monitoring.Read.Denormalizer.DataProvider;
 using Monitoring.Read.Persistence.Mappings.DataProviderMaps;
 using NHibernate;
@@ -27,6 +29,8 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
 
             builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
             builder.RegisterType<DataProviderMonitoringHandler>();
+            builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
+            builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
         }
 
         private static ISessionFactory BuildNhibernateConfiguration()

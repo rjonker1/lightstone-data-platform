@@ -84,6 +84,7 @@
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.5\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -92,6 +93,7 @@
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="IoC\StorageConfigModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Storage\NHibernateStorage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,10 @@
     <ProjectReference Include="..\Monitoring.DomainModel\Monitoring.DomainModel.csproj">
       <Project>{ee9d1aec-1e3e-420e-acf0-3058feee6e7f}</Project>
       <Name>Monitoring.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Queuing\Monitoring.Queuing.csproj">
+      <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>
+      <Name>Monitoring.Queuing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj">
       <Project>{365e35da-ee0a-4ac8-8eb3-341f274988f7}</Project>
