@@ -72,6 +72,16 @@ namespace Monitoring.Queuing.RabbitMq
             Model.QueueBind(queueName, bindingToQueue.ExchangeName, bindingToQueue.RoutingKey);
         }
 
+        public void AddExchangeBindingToQueue(MonitoringQueue bindingToQueue, string exchangeName,
+            string routingKeyName)
+        {
+            ConnectToRabbitMq(bindingToQueue.ExchangeName, bindingToQueue.RoutingKey, bindingToQueue.QueueName,
+                bindingToQueue.ExchangeType);
+            BindToQueue(bindingToQueue.ExchangeName, bindingToQueue.QueueName, bindingToQueue.RoutingKey);
+            //Model.ExchangeBind(bindingToQueue.QueueName,exchangeName,routingKeyName);
+            Model.QueueBind(bindingToQueue.QueueName, exchangeName, routingKeyName);
+        }
+
         public void PurgeQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType)
         {
             ConnectToRabbitMq(exchangeName, routingKeyName, queueName, exchangeType);
@@ -97,7 +107,17 @@ namespace Monitoring.Queuing.RabbitMq
             Model.BasicQos(0, 1, false);
             var result = Model.QueueDeclare(queueName, Durable, Exclusive, AutoDelete, null);
             return result != null ? (int) result.MessageCount : 0;
+        }
 
+        public void DeleteExchange(string exchangeName, string exchangeType)
+        {
+            ConnectToRabbitMq(exchangeName, null, null, exchangeType,true);
+            Model.ExchangeDelete(exchangeName);
+        }
+
+        public void AddExchange(string exchangeName, string exchangeType)
+        {
+            ConnectToRabbitMq(exchangeName, null, null, exchangeType, true);
         }
 
         private void BindToQueue(string exchangeName, string queueName, string routingKeyName)
@@ -111,7 +131,7 @@ namespace Monitoring.Queuing.RabbitMq
             Model.QueueBind(queueName, exchangeName, routingKeyName);
         }
 
-        private bool ConnectToRabbitMq(string exchangeName, string routingKeyName, string queueName, string exchangeType)
+        private bool ConnectToRabbitMq(string exchangeName, string routingKeyName, string queueName, string exchangeType, bool exchangeOnly = false)
         {
             var attempts = 0;
             while (attempts < 3)
@@ -135,7 +155,12 @@ namespace Monitoring.Queuing.RabbitMq
                         };
 
                     Connection = connectionFactory.CreateConnection();
-                    CreateModel(exchangeName, routingKeyName, queueName, exchangeType);
+
+                    if (!exchangeOnly)
+                        CreateModel(exchangeName, routingKeyName, queueName, exchangeType);
+                    else
+                        CreateModel(exchangeName, exchangeType);
+
                     return true;
                 }
                 catch (System.IO.EndOfStreamException ex)
@@ -154,6 +179,16 @@ namespace Monitoring.Queuing.RabbitMq
                 Connection.Dispose();
 
             return false;
+        }
+
+        private void CreateModel(string exchangeName, string exchangeType)
+        {
+            Model = Connection.CreateModel();
+            Connection.AutoClose = true;
+            Model.BasicQos(0, 1, false);
+
+            if (!string.IsNullOrWhiteSpace(exchangeName))
+                Model.ExchangeDeclare(exchangeName, exchangeType, Durable, ExchangeAutoDelete, null);
         }
 
         private void CreateModel(string exchangeName, string routingKeyName, string queueName, string exchangeType)
@@ -182,6 +217,5 @@ namespace Monitoring.Queuing.RabbitMq
             if (Model != null)
                 Model.Abort();
         }
-
     }
 }

@@ -30,7 +30,11 @@ namespace Monitoring.Acceptance.Tests.Queues
             _actions = new QueueActions(_messageQueue.Consumer);
 
             _actions.DeleteAllQueues();
+            _actions.DeleteAllExchanges();
+
+            _actions.AddAllExchanges();
             _actions.AddAllQueues();
+           
 
             _request = DataProviderRequestBuilder.ForIvid();
 

@@ -18,9 +18,14 @@ namespace Monitoring.Queuing.Contracts
         void AddBindingToAQueue(MonitoringQueue bindingToQueue, string queueName, string exchangeName,
             string routingKeyName, string exchangeType);
 
+        void AddExchangeBindingToQueue(MonitoringQueue bindingToQueue, string exchangeName,
+            string routingKeyName);
+
         void PurgeQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType);
         void DeleteQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType);
         void AddQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType);
         int MessageCount(string queueName, string exchangeName, string routingKeyName, string exchangeType);
+        void DeleteExchange(string exchangeName, string exchangeType);
+        void AddExchange(string exchangeName, string exchangeType);
     }
 }

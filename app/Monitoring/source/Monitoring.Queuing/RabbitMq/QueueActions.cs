@@ -22,6 +22,7 @@ namespace Monitoring.Queuing.RabbitMq
         {
             throw new NotImplementedException();
         }
+
         private static void RaiseException(Exception ex, IConsumeQueue consumer, ulong deliveryTag)
         {
             throw new NotImplementedException();
@@ -34,11 +35,12 @@ namespace Monitoring.Queuing.RabbitMq
                 _consumer.AddQueue(queue.QueueName, queue.ExchangeName, queue.RoutingKey, queue.ExchangeType);
             }
 
-            //foreach (var queue in MonitoringQueues.QueuesForBinding)
-            //{
-            //    _consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
-            //        queue.Queue.ExchangeType);
-            //}
+            foreach (var queue in MonitoringQueues.QueuesForBinding)
+            {
+                //_consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
+                //    queue.Queue.ExchangeType);
+                _consumer.AddExchangeBindingToQueue(queue.Queue, queue.ExchangeName, queue.RoutingKey);
+            }
         }
 
         public void PurgeAllQueues()
@@ -60,6 +62,23 @@ namespace Monitoring.Queuing.RabbitMq
         public int GetMessageCount(string exchangeName, string queueName, string routingKey, string exchangeType)
         {
             return _consumer.MessageCount(queueName, exchangeName, routingKey, exchangeType);
+        }
+
+        public void DeleteAllExchanges()
+        {
+            foreach (var exchange in ConfigureMonitoringExchanges.ForEvents())
+            {
+                _consumer.DeleteExchange(exchange.ExchangeName, exchange.ExchangeType);
+            }
+        }
+
+
+        public void AddAllExchanges()
+        {
+            foreach (var exchange in ConfigureMonitoringExchanges.ForEvents())
+            {
+                _consumer.AddExchange(exchange.ExchangeName, exchange.ExchangeType);
+            }
         }
     }
 }

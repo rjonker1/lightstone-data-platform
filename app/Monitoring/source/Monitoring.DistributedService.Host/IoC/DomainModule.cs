@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Autofac;
 using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
 using Lace.Shared.Monitoring.Messages.Events;
-using Monitoring.Domain.Core;
-using Monitoring.Domain.Messages;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
 using Monitoring.Write.Service;
@@ -16,8 +13,6 @@ using NEventStore;
 using NEventStore.Dispatcher;
 using NEventStore.Persistence.SqlPersistence.SqlDialects;
 using NServiceBus;
-using NServiceBus.Transports;
-using NServiceBus.Unicast;
 using Module = Autofac.Module;
 
 namespace Monitoring.DistributedService.Host.IoC
@@ -65,33 +60,20 @@ namespace Monitoring.DistributedService.Host.IoC
             {
                 //var publisher = scope.Resolve<IPublishMessages>();
                 var bus = scope.Resolve<IBus>();
-                //bus.Publish(commit.Events.Select(e => e.Body).ToArray());
-
-                //publisher.Publish(commit.Events.Select(e => e.Body).ToArray());
 
                 for (var i = 0; i < commit.Events.Count; i++)
                 {
                     var eventMessage = commit.Events[i];
-                    var busMessage = eventMessage.Body as IDomainEvent;
+                    var busMessage = eventMessage.Body as IDataProviderEvent;
                     AppendHeaders(busMessage, commit.Headers, bus); // optional
                     AppendHeaders(busMessage, eventMessage.Headers, bus); // optional
                     AppendVersion(commit, i, bus); // optional
                     bus.Publish(busMessage);
-                    //var eventMessage = commit.Events[i] as Lace.Shared.Monitoring.Messages.Events.IDomainEvent;
-                    //var busMessage = new TransportMessage() //eventMessage.Body as TransportMessage;
-                    //{
-                    //    Body = Encoding.UTF8.GetBytes(eventMessage.Body as IDomainEvent)
-                    //};
-                    //AppendHeaders(busMessage, commit.Headers);
-                    //AppendHeaders(busMessage, eventMessage.Headers);
-                    //AppendVersion(commit, i);
-
-                    //publisher.Publish(busMessage, new PublishOptions(typeof(TransportMessage)));
                 }
             }
         }
 
-        private static void AppendHeaders(IDomainEvent message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
+        private static void AppendHeaders(IDataProviderEvent message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
         {
             headers = headers.Where(x => x.Key.StartsWith(BusPrefixKey));
             foreach (var header in headers)
@@ -99,54 +81,20 @@ namespace Monitoring.DistributedService.Host.IoC
                 var key = header.Key.Substring(BusPrefixKey.Length);
                 var value = (header.Value ?? string.Empty).ToString();
                 bus.SetMessageHeader(message, key, value);
-                //message.SetHeader(key, value);
             }
         }
         private static void AppendVersion(Commit commit, int index, ISendOnlyBus bus)
         {
-            var busMessage = commit.Events[index].Body as IDomainEvent;
+            var busMessage = commit.Events[index].Body as IDataProviderEvent;
             bus.SetMessageHeader(busMessage, AggregateIdKey, commit.StreamId.ToString());
             bus.SetMessageHeader(busMessage, CommitVersionKey, commit.StreamRevision.ToString());
             bus.SetMessageHeader(busMessage, EventVersionKey, GetSpecificEventVersion(commit, index).ToString());
-            //busMessage.SetHeader(AggregateIdKey, commit.StreamId.ToString());
-            //busMessage.SetHeader(CommitVersionKey, commit.StreamRevision.ToString());
-            //busMessage.SetHeader(EventVersionKey, GetSpecificEventVersion(commit, index).ToString());
         }
         private static int GetSpecificEventVersion(Commit commit, int index)
         {
             // e.g. (StreamRevision: 120) - (5 events) + 1 + (index @ 4: the last index) = event version: 120
             return commit.StreamRevision - commit.Events.Count + 1 + index;
         }
-
-        //private static void AppendHeaders(TransportMessage message, IEnumerable<KeyValuePair<string, object>> headers)
-        //{
-        //    headers = headers.Where(x => x.Key.StartsWith(BusPrefixKey));
-        //    foreach (var header in headers)
-        //    {
-        //        var key = header.Key.Substring(BusPrefixKey.Length);
-        //        var value = (header.Value ?? string.Empty).ToString();
-        //        message.Headers.Add(key, value);
-        //    }
-        //}
-
-        //private static void AppendVersion(Commit commit, int index)
-        //{
-        //    //var busMessage = commit.Events[index].Body as TransportMessage;
-        //    var busMessage = new TransportMessage() //eventMessage.Body as TransportMessage;
-        //    {
-        //        Body = Encoding.UTF8.GetBytes(commit.Events[index].Body.AsJsonString())
-        //    };
-
-        //    busMessage.Headers.Add(AggregateIdKey, commit.StreamId.ToString());
-        //    busMessage.Headers.Add(CommitVersionKey, commit.StreamRevision.ToString());
-        //    busMessage.Headers.Add(EventVersionKey, GetSpecificEventVersion(commit, index).ToString());
-        //}
-
-        //private static int GetSpecificEventVersion(Commit commit, int index)
-        //{
-        //    // e.g. (StreamRevision: 120) - (5 events) + 1 + (index @ 4: the last index) = event version: 120
-        //    return commit.StreamRevision - commit.Events.Count + 1 + index;
-        //}
         
     }
 

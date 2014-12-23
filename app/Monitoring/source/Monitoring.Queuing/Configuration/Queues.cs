@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using RabbitMQ.Client;
 
 namespace Monitoring.Queuing.Configuration
@@ -32,17 +35,10 @@ namespace Monitoring.Queuing.Configuration
                 return new[]
                 {
 
-                    new BindToQueue(ConfigureMonitoringWriteQueues.ForHost(),
-                        ConfigureMonitoringReadQueues.ForHost().QueueName,
-                        ConfigureMonitoringReadQueues.ForHost().ExchangeName,
-                        ConfigureMonitoringReadQueues.ForHost().RoutingKey)
-
-                    //new BindToQueue(
-                    //    new MonitoringQueue("DataPlatform.Monitoring.Host",
-                    //        "DataPlatform.Monitoring.Host",
-                    //        string.Empty, ExchangeType.Fanout, QueueFunction.WriteQueue),
-                    //    "DataPlatform.Monitoring.DenormalizerHost", "DataPlatform.Monitoring.DenormalizerHost",
-                    //    string.Empty)
+                    new BindToQueue(ConfigureMonitoringReadQueues.ForHost(),
+                        string.Empty,
+                        ConfigureMonitoringExchangesToBind.ForReadHost().ExchangeName,
+                        ConfigureMonitoringExchangesToBind.ForReadHost().RoutingKey)
                 };
             }
         }
@@ -82,6 +78,20 @@ namespace Monitoring.Queuing.Configuration
             ExchangeType = exchangeType;
             QueueFunction = queueFunction;
             QueueType = queueType;
+        }
+    }
+
+    public class MonitoringExchange
+    {
+        public readonly string ExchangeName;
+        public readonly string ExchangeType;
+        public readonly string RoutingKey;
+
+        public MonitoringExchange(string exchangeName, string exchangeType, string routingKey)
+        {
+            ExchangeName = exchangeName;
+            ExchangeType = exchangeType;
+            RoutingKey = routingKey;
         }
     }
 
@@ -138,5 +148,31 @@ namespace Monitoring.Queuing.Configuration
             () => new MonitoringQueue("DataPlatform.Monitoring.DenormalizerHost.Retries",
                 "DataPlatform.Monitoring.DenormalizerHost.Retries", string.Empty, ExchangeType.Fanout,
                 QueueFunction.ReadQueue, QueueType.Retries);
+    }
+
+    public class ConfigureMonitoringExchangesToBind
+    {
+        public static Func<MonitoringExchange> ForReadHost =
+            () =>
+                new MonitoringExchange("Lace.Shared.Monitoring.Messages.Events:IDataProviderEvent", ExchangeType.Fanout,string.Empty);
+    }
+
+    public class ConfigureMonitoringExchanges
+    {
+        public static Func<IEnumerable<MonitoringExchange>> ForEvents = () =>
+        {
+            var exchanges = new List<MonitoringExchange>();
+            var type = typeof (Lace.Shared.Monitoring.Messages.Events.IDataProviderEvent);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(w => type.IsAssignableFrom(w) && w.IsClass);
+
+            foreach (var t in types)
+            {
+                exchanges.Add(new MonitoringExchange(t.FullName, ExchangeType.Fanout, string.Empty));
+            }
+
+            return exchanges;
+        };
     }
 }
