@@ -52,8 +52,8 @@ namespace Monitoring.Queuing.RabbitMq
             try
             {
                 Log.InfoFormat("Attempting to add monitoring read queues. Number of queues to add {0} ",
-                    MonitoringQueues.Names.Count(w => w.QueueType == QueueType.ReadQueue));
-                foreach (var queue in MonitoringQueues.Names.Where(w => w.QueueType == (int) QueueType.ReadQueue))
+                    MonitoringQueues.Names.Count(w => w.QueueFunction == QueueFunction.ReadQueue));
+                foreach (var queue in MonitoringQueues.Names.Where(w => w.QueueFunction == (int) QueueFunction.ReadQueue))
                 {
                     _consumer.AddQueue(queue.QueueName, queue.ExchangeName, queue.RoutingKey, queue.ExchangeType);
                 }
@@ -80,8 +80,8 @@ namespace Monitoring.Queuing.RabbitMq
             try
             {
                 Log.InfoFormat("Attempting to add monitoring write queues. Number of queues to add {0} ",
-                    MonitoringQueues.Names.Count(w => w.QueueType == QueueType.WriteQueue));
-                foreach (var queue in MonitoringQueues.Names.Where(w => w.QueueType == QueueType.WriteQueue))
+                    MonitoringQueues.Names.Count(w => w.QueueFunction == QueueFunction.WriteQueue));
+                foreach (var queue in MonitoringQueues.Names.Where(w => w.QueueFunction == QueueFunction.WriteQueue))
                 {
                     _consumer.AddQueue(queue.QueueName, queue.ExchangeName, queue.RoutingKey, queue.ExchangeType);
                 }

@@ -21,5 +21,6 @@ namespace Monitoring.Queuing.Contracts
         void PurgeQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType);
         void DeleteQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType);
         void AddQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType);
+        int MessageCount(string queueName, string exchangeName, string routingKeyName, string exchangeType);
     }
 }

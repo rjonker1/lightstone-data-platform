@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
+using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
 using Monitoring.Test.Helper.Builder;
@@ -10,11 +12,11 @@ using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Queues
 {
-    public class when_handling_data_provider_executing_command_on_write_side : Specification
+    public class when_sending_command_messages_to_the_queues_on_the_bus : Specification
     {
-        private ISendMonitoringMessages _monitoring;
+        private readonly ISendMonitoringMessages _monitoring;
         private readonly RabbitMqMessageQueueing _messageQueue;
-        private readonly IHaveQueueActions _setup;
+        private readonly IHaveQueueActions _actions;
         private readonly string _request;
 
         private DataProviderStopWatch _stopWatch;
@@ -22,27 +24,46 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         private readonly Guid _aggregateId;
 
-        public when_handling_data_provider_executing_command_on_write_side()
+        public when_sending_command_messages_to_the_queues_on_the_bus()
         {
             _messageQueue = new RabbitMqMessageQueueing();
-            _setup = new QueueActions(_messageQueue.Consumer);
-            _setup.DeleteAllQueues();
-            _setup.AddAllQueues();
+            _actions = new QueueActions(_messageQueue.Consumer);
 
+            _actions.DeleteAllQueues();
+            _actions.AddAllQueues();
 
             _request = DataProviderRequestBuilder.ForIvid();
 
             _aggregateId = Guid.NewGuid();
+
+            _monitoring = BusBuilder.ForMonitoringMessages(_aggregateId);
         }
 
 
         public override void Observe()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(_aggregateId);
+            PutMessagesOnQueue();
         }
 
         [Observation]
-        public void then_monitoring_from_ivid_data_provider_should_be_handled()
+        public void then_messages_should_be_put_on_the__correct_write_queue()
+        {
+            var messageCount = _actions.GetMessageCount(ConfigureMonitoringWriteQueues.ForHost().ExchangeName,
+                ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
+                ConfigureMonitoringWriteQueues.ForHost().ExchangeType);
+            messageCount.ShouldEqual(8);
+        }
+
+        [Observation]
+        public void then_messages_should_be_put_on_the__correct_read_queue()
+        {
+            var messageCount = _actions.GetMessageCount(ConfigureMonitoringReadQueues.ForHost().ExchangeName,
+                ConfigureMonitoringReadQueues.ForHost().QueueName, ConfigureMonitoringReadQueues.ForHost().RoutingKey,
+                ConfigureMonitoringReadQueues.ForHost().ExchangeType);
+            messageCount.ShouldEqual(8);
+        }
+
+        private void PutMessagesOnQueue()
         {
             _monitoring.ShouldNotBeNull();
 
@@ -72,6 +93,8 @@ namespace Monitoring.Acceptance.Tests.Queues
                 DataProviderResponseBuilder.FromIvid());
 
             _monitoring.EndDataProvider(DataProvider.Ivid, _request, _dataProviderStopWatch);
+
+            Thread.Sleep(1000);
         }
     }
 }

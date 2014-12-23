@@ -1,46 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EventTracking.Domain;
-using EventTracking.Domain.Core;
-using EventTracking.Domain.Persistence;
+using CommonDomain;
+using CommonDomain.Persistence;
 
 namespace Monitoring.Test.Helper.Fakes.EventStore
 {
-    public class FakeEventStoreRepository : IWriteToEventTrackingRepository
+    public class FakeEventStoreRepository : IRepository
     {
-        private readonly Func<string, Guid, string> _aggregateIdToStreamName;
-
-
-        public FakeEventStoreRepository()
-            : this((t, g) => string.Format("{0}-{1}", t, g.ToString("N")))
+        public TAggregate GetById<TAggregate>(Guid id, int version) where TAggregate : class, IAggregate
         {
-
+            throw new NotImplementedException();
         }
 
-        public FakeEventStoreRepository(Func<string, Guid, string> streamName)
+        public TAggregate GetById<TAggregate>(Guid id) where TAggregate : class, IAggregate
         {
-            _aggregateIdToStreamName = streamName;
+            return (TAggregate)FakeDatabase.Events.FirstOrDefault(f => f.Value.Id == id).Value;
         }
 
-
-        public void Write(IAggregate aggregate, Guid commitId, Action<IDictionary<string, object>> updateHeaders)
+        public void Save(IAggregate aggregate, Guid commitId, Action<IDictionary<string, object>> updateHeaders)
         {
-            var streamName = _aggregateIdToStreamName(aggregate.Category, aggregate.Id);
-            var newEvents = aggregate.GetUncommittedEvents().Cast<object>().ToList();
-
-            var eventsToSave = newEvents
-                .Select(e => e.AsJsonEvent())
-                .ToList();
-
-            foreach (var eventData in eventsToSave)
-            {
-                var data = new StreamData(streamName, eventData);
-
-                FakeDatabase.Events.Add(Guid.NewGuid(), data);
-            }
-
+            FakeDatabase.Events.Add(commitId, aggregate);
             aggregate.ClearUncommittedEvents();
         }
+
+        //private readonly Func<Guid, string> _aggregateIdToStreamName;
+
+
+        //public FakeEventStoreRepository()
+        //    : this((t, g) => string.Format("{0}-{1}", t, g.ToString("N")))
+        //{
+
+        //}
+
+        //public FakeEventStoreRepository(Func<Guid, string> streamName)
+        //{
+        //    _aggregateIdToStreamName = streamName;
+        //}
+
+
+        //public void Write(IAggregate aggregate, Guid commitId, Action<IDictionary<string, object>> updateHeaders)
+        //{
+        //    var streamName = _aggregateIdToStreamName(aggregate.Category, aggregate.Id);
+        //    var newEvents = aggregate.GetUncommittedEvents().Cast<object>().ToList();
+
+        //    var eventsToSave = newEvents
+        //        .Select(e => e.AsJsonEvent())
+        //        .ToList();
+
+        //    foreach (var eventData in eventsToSave)
+        //    {
+        //        var data = new StreamData(streamName, eventData);
+
+        //        FakeDatabase.Events.Add(Guid.NewGuid(), data);
+        //    }
+
+        //    aggregate.ClearUncommittedEvents();
+        //}
+
+        
     }
 }
