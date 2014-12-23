@@ -1,4 +1,5 @@
-﻿using Monitoring.Queuing.Configuration;
+﻿using System;
+using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
 
 namespace Monitoring.Queuing.RabbitMq
@@ -10,6 +11,20 @@ namespace Monitoring.Queuing.RabbitMq
         public QueueActions(IConsumeQueue consumer)
         {
             _consumer = consumer;
+        }
+
+        public void ProcessQueue(string exchangeName, string queueName, string routingKey, string exchangeType)
+        {
+            _consumer.ReadFromQueue(ProcessMessage, RaiseException, exchangeName, queueName, routingKey, exchangeType);
+        }
+
+        private static void ProcessMessage(string message, IConsumeQueue consumer, ulong deliveryTag)
+        {
+            throw new NotImplementedException();
+        }
+        private static void RaiseException(Exception ex, IConsumeQueue consumer, ulong deliveryTag)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddAllQueues()
@@ -40,6 +55,11 @@ namespace Monitoring.Queuing.RabbitMq
             {
                 _consumer.DeleteQueue(queue.QueueName, queue.ExchangeName, queue.RoutingKey, queue.ExchangeType);
             }
+        }
+
+        public int GetMessageCount(string exchangeName, string queueName, string routingKey, string exchangeType)
+        {
+            return _consumer.MessageCount(queueName, exchangeName, routingKey, exchangeType);
         }
     }
 }

@@ -93,8 +93,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Queues\when_handling_data_provider_executing_command_on_read_side.cs" />
-    <Compile Include="Queues\when_handling_data_provider_executing_command_on_write_side.cs" />
+    <Compile Include="Queues\when_sending_command_messages_to_the_queues_on_the_bus.cs" />
     <None Include="Lace\Consumer\when_sending_external_source_events_to_monitoring_bus.cs.old" />
     <None Include="Lace\Consumer\when_sending_external_source_failure_event_to_monitoring_bus.cs.old" />
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
