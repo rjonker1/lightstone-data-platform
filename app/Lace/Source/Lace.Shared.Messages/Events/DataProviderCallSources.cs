@@ -3,13 +3,18 @@ using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Events
 {
-    public interface IDomainEvent
+    public interface IDataProviderEvent
+    {
+        
+    }
+
+    public interface IDataProviderNotUsedEvent
     {
         
     }
 
     [Serializable]
-    public class DataProviderEvent : IDomainEvent
+    public class DataProviderEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -44,7 +49,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderExecutingEvent : IDomainEvent
+    public class DataProviderExecutingEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -79,7 +84,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderHasExecutedEvent : IDomainEvent
+    public class DataProviderHasExecutedEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -114,7 +119,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderIsCalledEvent : IDomainEvent
+    public class DataProviderIsCalledEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -149,7 +154,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderCallEndedEvent : IDomainEvent
+    public class DataProviderCallEndedEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -185,7 +190,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderHasFaultEvent : IDomainEvent
+    public class DataProviderHasFaultEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -221,7 +226,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderHasSecurityEvent : IDomainEvent
+    public class DataProviderHasSecurityEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -257,7 +262,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderHasConfigurationEvent : IDomainEvent
+    public class DataProviderHasConfigurationEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -293,7 +298,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class AccountingDataProviderEvent : IDomainEvent
+    public class AccountingDataProviderEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
@@ -329,7 +334,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
     }
 
     [Serializable]
-    public class DataProviderasBeenTransformedEvent : IDomainEvent
+    public class DataProviderasBeenTransformedEvent : IDataProviderEvent
     {
         public readonly Guid RequestAggregateId;
         public readonly string DataProvider;
