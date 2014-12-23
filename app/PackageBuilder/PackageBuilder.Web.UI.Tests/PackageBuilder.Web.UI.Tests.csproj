@@ -68,6 +68,10 @@
     <Compile Include="DataProviders\when_loading_data_provider_view_page.cs" />
     <Compile Include="Industries\IndustriesPageObjects.cs" />
     <Compile Include="Industries\when_loading_industries_page.cs" />
+    <Compile Include="Packages\PackagesPageObjects.cs" />
+    <Compile Include="Packages\when_loading_package_create_page.cs" />
+    <Compile Include="Packages\when_loading_package_edit_page.cs" />
+    <Compile Include="Packages\when_loading_package_view_page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\StatesPageObjects.cs" />
     <Compile Include="Common\NgMockE2EModule.cs" />
