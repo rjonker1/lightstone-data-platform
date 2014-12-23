@@ -10,7 +10,7 @@ using RabbitMQ.Client.Exceptions;
 
 namespace Monitoring.Queuing.RabbitMq
 {
-    public class RabbitConsumer : IConsumeQueue
+    public class RabbitConsumer : IConsumeQueue, IDisposable
     {
         public IModel Model { get; set; }
         public IConnection Connection { get; private set; }
@@ -20,9 +20,15 @@ namespace Monitoring.Queuing.RabbitMq
 
         private readonly string _hostName, _userName, _password; // _exchangeName, _routingKeyName;
 
+        private const bool Durable = true,
+            AutoDelete = false,
+            Exclusive = false,
+            ExchangeAutoDelete = false,
+            QueueAutoDelete = false;
+
         public RabbitConsumer()
         {
-            
+
         }
 
         public RabbitConsumer(string hostName, string username, string password, bool useCredentials = false)
@@ -49,8 +55,8 @@ namespace Monitoring.Queuing.RabbitMq
 
             consumer.Shutdown += (o, e) =>
             {
-                ConnectToRabbitMq(exchangeName, routingKeyName,queueName,exchangeType);
-                ReadFromQueue(onDequeue, onError, exchangeName, queueName, routingKeyName,exchangeType);
+                ConnectToRabbitMq(exchangeName, routingKeyName, queueName, exchangeType);
+                ReadFromQueue(onDequeue, onError, exchangeName, queueName, routingKeyName, exchangeType);
             };
 
             Model.BasicConsume(queueName, false, consumer);
@@ -60,14 +66,15 @@ namespace Monitoring.Queuing.RabbitMq
         public void AddBindingToAQueue(MonitoringQueue bindingToQueue, string queueName, string exchangeName,
             string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(bindingToQueue.ExchangeName, bindingToQueue.RoutingKey, bindingToQueue.QueueName, exchangeType);
+            ConnectToRabbitMq(bindingToQueue.ExchangeName, bindingToQueue.RoutingKey, bindingToQueue.QueueName,
+                exchangeType);
             BindToQueue(bindingToQueue.ExchangeName, bindingToQueue.QueueName, bindingToQueue.RoutingKey);
             Model.QueueBind(queueName, bindingToQueue.ExchangeName, bindingToQueue.RoutingKey);
         }
 
         public void PurgeQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(exchangeName, routingKeyName,queueName,exchangeType);
+            ConnectToRabbitMq(exchangeName, routingKeyName, queueName, exchangeType);
             BindToQueue(exchangeName, queueName, routingKeyName);
             Model.QueuePurge(queueName);
         }
@@ -81,20 +88,27 @@ namespace Monitoring.Queuing.RabbitMq
 
         public void AddQueue(string queueName, string exchangeName, string routingKeyName, string exchangeType)
         {
-            ConnectToRabbitMq(exchangeName, routingKeyName, queueName,exchangeType);
+            ConnectToRabbitMq(exchangeName, routingKeyName, queueName, exchangeType);
             BindToQueue(exchangeName, queueName, routingKeyName);
+        }
+
+        public int MessageCount(string queueName, string exchangeName, string routingKeyName, string exchangeType)
+        {
+            Model.BasicQos(0, 1, false);
+            var result = Model.QueueDeclare(queueName, Durable, Exclusive, AutoDelete, null);
+            return result != null ? (int) result.MessageCount : 0;
+
         }
 
         private void BindToQueue(string exchangeName, string queueName, string routingKeyName)
         {
-            const bool durable = true, autoDelete = false, exclusive = false;
             Model.BasicQos(0, 1, false);
             //IDictionary<string, object> queueArgs = new Dictionary<string, object>
             //{
             //    {"x-ha-policy", "all"}
             //};
-           QueueName = Model.QueueDeclare(queueName, durable, exclusive, autoDelete, null);
-           Model.QueueBind(queueName, exchangeName, routingKeyName);
+            QueueName = Model.QueueDeclare(queueName, Durable, Exclusive, AutoDelete, null);
+            Model.QueueBind(queueName, exchangeName, routingKeyName);
         }
 
         private bool ConnectToRabbitMq(string exchangeName, string routingKeyName, string queueName, string exchangeType)
@@ -148,17 +162,26 @@ namespace Monitoring.Queuing.RabbitMq
             Connection.AutoClose = true;
             // BasicQos(0="Dont send me a new message untill I’ve finshed",  1= "Send me one message at a time", false ="Apply to this Model only")
             Model.BasicQos(0, 1, false);
-            const bool durable = true, exchangeAutoDelete = false, queueAutoDelete = false, exclusive = false;
 
             if (!string.IsNullOrWhiteSpace(exchangeName))
-                Model.ExchangeDeclare(exchangeName, exchangeType, durable, exchangeAutoDelete, null);
+                Model.ExchangeDeclare(exchangeName, exchangeType, Durable, ExchangeAutoDelete, null);
 
             IDictionary<string, object> queueArgs = new Dictionary<string, object>
             {
                 {"x-ha-policy", "all"}
             };
-            Model.QueueDeclare(queueName, durable, exclusive, queueAutoDelete, null);
+            Model.QueueDeclare(queueName, Durable, Exclusive, QueueAutoDelete, null);
             Model.QueueBind(queueName, exchangeName, routingKeyName);
         }
+
+        public void Dispose()
+        {
+            if (Connection != null)
+                Connection.Close();
+
+            if (Model != null)
+                Model.Abort();
+        }
+
     }
 }
