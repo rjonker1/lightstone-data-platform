@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointConfig.cs" />
-    <Compile Include="IoC\StorageConfigModule.cs" />
+    <Compile Include="IoC\DenormalizerHostModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Storage\NHibernateStorage.cs" />

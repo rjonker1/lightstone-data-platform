@@ -98,7 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Startup.cs" />
-    <None Include="Dispatcher\NServiceBusDispatcher.cs.old" />
+    <None Include="IoC\Dispatcher\NServiceBusDispatcher.cs.old" />
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="IoC\DomainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
