@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Contracts\IHandleTransactions.cs" />
     <Compile Include="Contracts\IQueryStorage.cs" />
-    <Compile Include="Contracts\IUpdateStorage.cs" />
+    <Compile Include="Contracts\IAccessToStorage.cs" />
     <Compile Include="JsonExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
