@@ -5,7 +5,7 @@ using NHibernate.Linq;
 
 namespace Monitoring.DistributedService.DenormalizerHost.Storage
 {
-    public class NHibernateStorage : IUpdateStorage
+    public class NHibernateStorage : IAccessToStorage
     {
         private readonly ISession _session;
         public NHibernateStorage(ISession session)

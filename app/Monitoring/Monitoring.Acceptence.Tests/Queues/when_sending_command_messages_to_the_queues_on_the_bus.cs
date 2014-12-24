@@ -40,7 +40,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 
             _aggregateId = Guid.NewGuid();
 
-            _monitoring = BusBuilder.ForMonitoringMessages(_aggregateId);
+            _monitoring = BusBuilder.ForMonitoringWriteMessages(_aggregateId);
         }
 
 
@@ -50,7 +50,7 @@ namespace Monitoring.Acceptance.Tests.Queues
         }
 
         [Observation]
-        public void then_messages_should_be_put_on_the__correct_write_queue()
+        public void then_messages_should_be_put_on_the_correct_write_queue()
         {
             var messageCount = _actions.GetMessageCount(ConfigureMonitoringWriteQueues.ForHost().ExchangeName,
                 ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
@@ -58,14 +58,14 @@ namespace Monitoring.Acceptance.Tests.Queues
             messageCount.ShouldEqual(8);
         }
 
-        [Observation]
-        public void then_messages_should_be_put_on_the__correct_read_queue()
-        {
-            var messageCount = _actions.GetMessageCount(ConfigureMonitoringReadQueues.ForHost().ExchangeName,
-                ConfigureMonitoringReadQueues.ForHost().QueueName, ConfigureMonitoringReadQueues.ForHost().RoutingKey,
-                ConfigureMonitoringReadQueues.ForHost().ExchangeType);
-            messageCount.ShouldEqual(8);
-        }
+        //[Observation]
+        //public void then_messages_should_be_put_on_the__correct_read_queue()
+        //{
+        //    var messageCount = _actions.GetMessageCount(ConfigureMonitoringReadQueues.ForHost().ExchangeName,
+        //        ConfigureMonitoringReadQueues.ForHost().QueueName, ConfigureMonitoringReadQueues.ForHost().RoutingKey,
+        //        ConfigureMonitoringReadQueues.ForHost().ExchangeType);
+        //    messageCount.ShouldEqual(8);
+        //}
 
         private void PutMessagesOnQueue()
         {

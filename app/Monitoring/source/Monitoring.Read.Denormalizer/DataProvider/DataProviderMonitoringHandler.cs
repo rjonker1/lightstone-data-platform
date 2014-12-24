@@ -11,16 +11,16 @@ namespace Monitoring.Read.Denormalizer.DataProvider
         IHandleMessages<DataProviderHasFaultEvent>, IHandleMessages<DataProviderHasSecurityEvent>,
         IHandleMessages<DataProviderasBeenTransformedEvent>, IHandleMessages<DataProviderIsCalledEvent>
     {
-        private readonly IUpdateStorage _storage;
+        private readonly IAccessToStorage _storage;
 
-        public DataProviderMonitoringHandler(IUpdateStorage storage)
+        public DataProviderMonitoringHandler(IAccessToStorage storage)
         {
             _storage = storage;
         }
 
         public void Handle(DataProviderExecutingEvent message)
         {
-            var @event = new DataProviderMonitoringPerformanceModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -35,12 +35,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
         public void Handle(DataProviderHasExecutedEvent message)
         {
-            var @event = new DataProviderMonitoringPerformanceModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -55,12 +55,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
         public void Handle(DataProviderIsCalledEvent message)
         {
-            var @event = new DataProviderMonitoringPerformanceModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -75,12 +75,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
         public void Handle(DataProviderCallEndedEvent message)
         {
-            var @event = new DataProviderMonitoringPerformanceModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -95,12 +95,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
         public void Handle(DataProviderHasConfigurationEvent message)
         {
-            var @event = new DataProviderMonitoringConfigurationModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -115,13 +115,13 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
 
         public void Handle(DataProviderHasFaultEvent message)
         {
-            var @event = new DataProviderMonitoringFaultModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -136,12 +136,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
         public void Handle(DataProviderHasSecurityEvent message)
         {
-            var @event = new DataProviderMonitoringSecurityModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -156,12 +156,12 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
 
         public void Handle(DataProviderasBeenTransformedEvent message)
         {
-            var @event = new DataProviderMonitoringTransformationModel(message.RequestAggregateId)
+            var model = new MonitoringDataProviderModel(message.RequestAggregateId)
             {
                 Payload = message.Payload,
                 Message = message.Message,
@@ -176,7 +176,7 @@ namespace Monitoring.Read.Denormalizer.DataProvider
                 TimeStamp = message.Date
             };
 
-            _storage.Add(@event);
+            _storage.Add(model);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Monitoring.DistributedService.DenormalizerHost
                      c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
 
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new StorageConfigModule());
+            builder.RegisterModule(new DenormalizerHostModule());
             var container = builder.Build();
             configuration.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(container));
         }
