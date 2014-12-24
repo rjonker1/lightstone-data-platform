@@ -14,6 +14,7 @@ namespace Monitoring.DistributedService.Host
 
         public void Start()
         {
+            _initializeQueues.InitializeAllExchanges();
             _initializeQueues.InitializeReadQueues();
         }
 
