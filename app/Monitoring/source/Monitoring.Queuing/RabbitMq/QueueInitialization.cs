@@ -35,8 +35,6 @@ namespace Monitoring.Queuing.RabbitMq
                     MonitoringQueues.QueuesForBinding.Count());
                 foreach (var queue in MonitoringQueues.QueuesForBinding)
                 {
-                    //_consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
-                    //    queue.Queue.ExchangeType);
                     _consumer.AddExchangeBindingToQueue(queue.Queue, queue.ExchangeName, queue.RoutingKey);
                 }
             }
@@ -65,9 +63,7 @@ namespace Monitoring.Queuing.RabbitMq
                     MonitoringQueues.QueuesForBinding.Count());
                 foreach (var queue in MonitoringQueues.QueuesForBinding)
                 {
-                    //_consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
-                    //    queue.Queue.ExchangeType);
-                    _consumer.AddExchangeBindingToQueue(queue.Queue, queue.ExchangeName, queue.RoutingKey);
+                   _consumer.AddExchangeBindingToQueue(queue.Queue, queue.ExchangeName, queue.RoutingKey);
                 }
             }
             catch (Exception ex)
@@ -88,15 +84,6 @@ namespace Monitoring.Queuing.RabbitMq
                 {
                     _consumer.AddQueue(queue.QueueName, queue.ExchangeName, queue.RoutingKey, queue.ExchangeType);
                 }
-
-                //Log.InfoFormat(
-                //    "Attempting to add monitoring queues that require binding. Number of queues to add {0} ",
-                //    MonitoringQueues.QueuesForBinding.Count());
-                //foreach (var queue in MonitoringQueues.QueuesForBinding)
-                //{
-                //    _consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
-                //        queue.Queue.ExchangeType);
-                //}
             }
             catch (Exception ex)
             {
@@ -124,33 +111,5 @@ namespace Monitoring.Queuing.RabbitMq
                 QueuesInitialized = false;
             }
         }
-
-        //public void InitializeReadExchanges()
-        //{
-        //    try
-        //    {
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.ErrorFormat(
-        //            "An error occurred initializing the read exchanges for the monitoring data platform. Error {0}", ex.Message);
-        //        QueuesInitialized = false;
-        //    }
-        //}
-
-        //public void InitializeWriteExchanges()
-        //{
-        //    try
-        //    {
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.ErrorFormat(
-        //            "An error occurred initializing the write exchanges for the monitoring data platform. Error {0}", ex.Message);
-        //        QueuesInitialized = false;
-        //    }
-        //}
     }
 }
