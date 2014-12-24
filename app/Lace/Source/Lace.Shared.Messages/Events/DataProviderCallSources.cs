@@ -16,16 +16,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderEvent()
         {
@@ -51,16 +51,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderExecutingEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderExecutingEvent()
         {
@@ -86,16 +86,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderHasExecutedEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderHasExecutedEvent()
         {
@@ -121,16 +121,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderIsCalledEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderIsCalledEvent()
         {
@@ -156,16 +156,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderCallEndedEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderCallEndedEvent()
         {
@@ -192,16 +192,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderHasFaultEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderHasFaultEvent()
         {
@@ -228,16 +228,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderHasSecurityEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderHasSecurityEvent()
         {
@@ -264,16 +264,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderHasConfigurationEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderHasConfigurationEvent()
         {
@@ -300,16 +300,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class AccountingDataProviderEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public AccountingDataProviderEvent()
         {
@@ -336,16 +336,16 @@ namespace Lace.Shared.Monitoring.Messages.Events
     [Serializable]
     public class DataProviderasBeenTransformedEvent : IDataProviderEvent
     {
-        public readonly Guid RequestAggregateId;
-        public readonly string DataProvider;
-        public readonly int DateProviderId;
-        public readonly string Category;
-        public readonly int CategoryId;
-        public readonly DateTime Date;
-        public readonly string Message;
-        public readonly string Payload;
-        public readonly string Metadata;
-        public readonly bool IsJson;
+        public Guid RequestAggregateId { get; private set; }
+        public string DataProvider { get; private set; }
+        public int DateProviderId { get; private set; }
+        public string Category { get; private set; }
+        public int CategoryId { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Message { get; private set; }
+        public string Payload { get; private set; }
+        public string Metadata { get; private set; }
+        public bool IsJson { get; private set; }
 
         public DataProviderasBeenTransformedEvent()
         {
