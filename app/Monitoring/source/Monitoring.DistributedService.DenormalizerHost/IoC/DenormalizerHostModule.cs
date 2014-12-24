@@ -14,7 +14,7 @@ using Configuration = NHibernate.Cfg.Configuration;
 
 namespace Monitoring.DistributedService.DenormalizerHost.IoC
 {
-    public class StorageConfigModule : Module
+    public class DenormalizerHostModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -27,7 +27,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .InstancePerDependency()
                 .OnActivated(c => c.Instance.BeginTransaction());
 
-            builder.RegisterType<NHibernateStorage>().As<IUpdateStorage>().InstancePerDependency();
+            builder.RegisterType<NHibernateStorage>().As<IAccessToStorage>().InstancePerDependency();
             builder.RegisterType<DataProviderMonitoringHandler>();
             builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
@@ -40,11 +40,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(
                         ConfigurationManager.ConnectionStrings["Monitoring.ReadModel"].ConnectionString))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringPerformanceMap>())
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringFaultMap>())
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringSecurityMap>())
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringConfigurationMap>())
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DataProviderMonitoringTransformationMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MonitoringDataProviderMap>())
                 .ExposeConfiguration(BuildMonitoringReadSchema).BuildSessionFactory();
         }
 
