@@ -14,6 +14,7 @@ namespace Monitoring.DistributedService.DenormalizerHost
 
         public void Start()
         {
+            _initializeQueues.InitializeAllExchanges();
             _initializeQueues.InitializeWriteQueues();
         }
 

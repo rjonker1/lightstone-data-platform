@@ -10,6 +10,7 @@ namespace Monitoring.Queuing.Contracts
         IModel Model { get; set; }
         IConnection Connection { get; }
         string QueueName { get; }
+        void Connect(string hostName, string username, string password, bool useCredentials = false);
 
         void ReadFromQueue(Action<string, RabbitConsumer, ulong> onDequeue,
             Action<Exception, RabbitConsumer, ulong> onError, string exchangeName, string queueName,

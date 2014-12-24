@@ -16,9 +16,9 @@ namespace Monitoring.Queuing.RabbitMq
         public IConnection Connection { get; private set; }
         public string QueueName { get; private set; }
 
-        private readonly bool _useCredentials;
+        private bool _useCredentials;
 
-        private readonly string _hostName, _userName, _password; // _exchangeName, _routingKeyName;
+        private string _hostName, _userName, _password; // _exchangeName, _routingKeyName;
 
         private const bool Durable = true,
             AutoDelete = false,
@@ -32,6 +32,14 @@ namespace Monitoring.Queuing.RabbitMq
         }
 
         public RabbitConsumer(string hostName, string username, string password, bool useCredentials = false)
+        {
+            _hostName = hostName;
+            _userName = username;
+            _password = password;
+            _useCredentials = useCredentials;
+        }
+
+        public void Connect(string hostName, string username, string password, bool useCredentials = false)
         {
             _hostName = hostName;
             _userName = username;

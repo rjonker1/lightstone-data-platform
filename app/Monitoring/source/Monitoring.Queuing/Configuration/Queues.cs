@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using RabbitMQ.Client;
@@ -40,6 +39,14 @@ namespace Monitoring.Queuing.Configuration
                         ConfigureMonitoringExchangesToBind.ForReadHost().ExchangeName,
                         ConfigureMonitoringExchangesToBind.ForReadHost().RoutingKey)
                 };
+            }
+        }
+
+        public static MonitoringExchange[] Exchanges
+        {
+            get
+            {
+                return ConfigureMonitoringExchanges.ForEvents().ToArray();
             }
         }
     }
@@ -161,16 +168,11 @@ namespace Monitoring.Queuing.Configuration
     {
         public static Func<IEnumerable<MonitoringExchange>> ForEvents = () =>
         {
-            var exchanges = new List<MonitoringExchange>();
             var type = typeof (Lace.Shared.Monitoring.Messages.Events.IDataProviderEvent);
-            var types = AppDomain.CurrentDomain.GetAssemblies()
+            var exchanges = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(w => type.IsAssignableFrom(w) && w.IsClass);
-
-            foreach (var t in types)
-            {
-                exchanges.Add(new MonitoringExchange(t.FullName, ExchangeType.Fanout, string.Empty));
-            }
+                .Where(w => type.IsAssignableFrom(w) && w.IsClass)
+                .Select(s => new MonitoringExchange(s.FullName, ExchangeType.Fanout, string.Empty));
 
             return exchanges;
         };
