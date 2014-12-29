@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="monitoringApp">
+<head>
+    <title>Monitoring</title>
+
+</head>
+<body>
+<div>
+    <a href="#/">Montoring</a>
+    <a href="#/dataProviders">Data Providers</a>
+</div>
+<div ng-controller="mainController">
+    <h2>{{message}}</h2>
+    <div ng-view></div>
+</div>
+
+<script src="../scripts/angular.js"></script>
+<script src="../scripts/angular-route.js"></script>
+<script src="App/app.js"></script>
+<script src="App/services/dataProviderService.js"></script>
+<script src="App/controllers/homeController.js"></script>
+<script src="App/controllers/dataProviders/dataProviderController.js"></script>
+</body>
+</html>
