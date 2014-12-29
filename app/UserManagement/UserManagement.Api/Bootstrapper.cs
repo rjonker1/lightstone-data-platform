@@ -18,14 +18,6 @@ namespace UserManagement.Api
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
-
-            //var handler = container.Resolve<IHandleMessages>();
-
-            //// Import Industries, States and DataProviders
-            //handler.Handle(new CreateIndustry(new Guid(), "All", true));
-            //foreach (var state in (StateName[])Enum.GetValues(typeof(StateName)))
-            //    handler.Handle(new CreateState(Guid.NewGuid(), state));
-            //handler.Handle(new ImportDataProvider());
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
