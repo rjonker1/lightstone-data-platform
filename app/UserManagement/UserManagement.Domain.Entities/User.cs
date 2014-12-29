@@ -15,6 +15,8 @@ namespace UserManagement.Domain.Entities
         public virtual string LastUpdatedBy { get; protected internal set; }
         public virtual DateTime LastUpdatedDate { get; protected internal set; }
         public virtual string Password { get; protected internal set; }
+        public virtual string UserName { get; protected internal set; }
+        public virtual Guid UserTypeId { get; protected internal set; }
 
         public User()
         {
