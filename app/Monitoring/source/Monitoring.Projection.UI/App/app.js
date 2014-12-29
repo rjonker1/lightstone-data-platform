@@ -1,28 +1,4 @@
-﻿//(function () {
-//    var app = angular.module("monitoringApp", ["ngRoute"]);
-
-//    app.config([
-//        "$routeProvider", function ($routeProvider) {
-
-//            var viewBase = "/app/views/";
-//            $routeProvider
-//                .when("/", {
-//                    templateUrl: viewBase + "home.html",
-//                    controller: "homeController"
-
-//                })
-//                .when("/dataProviders",
-//                {
-//                    templateUrl: viewBase + "dataProviders/dataProviders.html",
-//                    controller: "dataProviderController",
-//                    controllerAs: "vm"
-//                })
-//                .otherwise({ redirectTo: "/" });
-//        }
-//    ]);
-//}());
-//(function() {
-var app = angular.module("monitoringApp", ["ngRoute"]);
+﻿var app = angular.module("monitoringApp", ["ngRoute"]);
 
 app.config([
     "$routeProvider", function($routeProvider) {
@@ -43,7 +19,6 @@ app.config([
             .otherwise({ redirectTo: "/" });
     }
 ]).controller("mainController", function($scope) {
-    //$scope.message = "Monitoring Main";
 });
 
 app.factory("dataProviderService", function ($http) {
@@ -73,6 +48,4 @@ app.factory("dataProviderService", function ($http) {
 
     return factory;
 });
-
-//}());
 
