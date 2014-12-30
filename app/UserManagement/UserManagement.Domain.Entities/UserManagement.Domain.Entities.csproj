@@ -62,7 +62,6 @@
     <Compile Include="Package.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="PlatformStatus.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
