@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Monitoring.Projection.UI.Repository;
+using Monitoring.Projection.UI.Repository.Framework.Connections;
 
 namespace Monitoring.Projection.UI.Controllers
 {
@@ -13,17 +14,16 @@ namespace Monitoring.Projection.UI.Controllers
 
         public DataServiceController()
         {
-            _repository = new DataProviderRepository();
+            _repository = new DataProviderRepository(new ReadOnlyRepository(ConnectionFactory.ForReadDatabase()));
         }
 
         [HttpGet]
         public HttpResponseMessage DataProviders()
         {
-            var dataProviders = _repository.GetMDataProviders();
+            var dataProviders = _repository.GetMonitoringFromDataProviders();
             var totalRecords = dataProviders.Count();
             HttpContext.Current.Response.Headers.Add("X-InlineCount", totalRecords.ToString());
             return Request.CreateResponse(HttpStatusCode.OK, dataProviders);
         }
-
     }
 }

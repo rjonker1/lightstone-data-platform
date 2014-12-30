@@ -134,13 +134,31 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model\DataProvider.cs" />
+    <None Include="Model\DataProvider.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DataProviderRepository.cs" />
+    <Compile Include="Repository\Framework\Connections\ConnectionFactory.cs" />
+    <Compile Include="Repository\Framework\Orm\Dapper.cs" />
+    <Compile Include="Repository\Framework\SelectStatements.cs" />
+    <Compile Include="Repository\ReadOnlyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
+      <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
+      <Name>Monitoring.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Projection\Monitoring.Projection.csproj">
+      <Project>{aaa626bb-1436-461e-9426-13a320f594ab}</Project>
+      <Name>Monitoring.Projection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
+      <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
+      <Name>Monitoring.Read.ReadModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

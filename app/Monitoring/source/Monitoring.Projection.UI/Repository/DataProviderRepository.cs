@@ -1,21 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Monitoring.Projection.UI.Model;
+﻿using System.Linq;
+using Monitoring.Domain.Core.Contracts;
+using Monitoring.Projection.UI.Repository.Framework;
+using Monitoring.Read.ReadModel.Models.DataProviders;
 
 namespace Monitoring.Projection.UI.Repository
 {
     public class DataProviderRepository
     {
-        public IQueryable<DataProvider> GetMDataProviders()
-        {
-            //var query = 
-            return new List<DataProvider>()
-            {
-                new DataProvider(1, "Audatex"),
-                new DataProvider(2, "Ivid"),
-                new DataProvider(3, "IvidTitleHolder"),
+        private readonly IQueryStorage _queryStorage;
 
-            }.AsQueryable();
+        public DataProviderRepository(IQueryStorage queryStorage)
+        {
+            _queryStorage = queryStorage;
+        }
+
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProviders()
+        {
+            var results =
+                _queryStorage.Items<MonitoringDataProviderModel>(SelectStatements.GetMonitoringFromAllDataProviders);
+
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
+
+            //if (results.Any())
+            //{
+            //    return
+            //        results.Select(
+            //            s =>
+            //                new DataProviderPerformanceDto(s.DataProvider, s.Payload, s.Message, s.Metadata,
+            //                    s.Date.ToString(), s.RequestAggregateId, s.TimeStamp).GetElapsedTime()).ToArray();
+            //}
+
+            //return new List<DataProviderPerformanceDto>().ToArray();
         }
     }
 }

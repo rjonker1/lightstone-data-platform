@@ -1,8 +1,7 @@
 ﻿using System;
-using Lace.Shared.Monitoring.Messages.Core;
 using Newtonsoft.Json;
 
-namespace Monitoring.Projection.Core.Models
+namespace Monitoring.Projection.Core.Models.DataProviders
 {
     public class DataProviderPerformanceDto
     {
@@ -11,11 +10,12 @@ namespace Monitoring.Projection.Core.Models
         public readonly string Message;
         public readonly string MetaData;
         public readonly string Date;
+        public readonly DateTime TimeStamp;
         public readonly Guid AggregateId;
-        public TimeSpan ElapsedTime;
+        public string ElapsedTime;
 
         public DataProviderPerformanceDto(string dataProvider, string payload, string message, string metadata,
-            string date, Guid aggregateId)
+            string date, Guid aggregateId, DateTime timeStamp)
         {
             DataProvider = dataProvider;
             Payload = payload;
@@ -23,18 +23,18 @@ namespace Monitoring.Projection.Core.Models
             MetaData = metadata;
             Date = date;
             AggregateId = aggregateId;
+            TimeStamp = timeStamp;
         }
 
         public DataProviderPerformanceDto GetElapsedTime()
         {
-            if(string.IsNullOrWhiteSpace(MetaData))
+            if (string.IsNullOrWhiteSpace(MetaData))
                 return this;
 
-            var results = JsonConvert.DeserializeObject<StopWatchResults>(MetaData);
+            var results = JsonConvert.DeserializeObject<ElapsedTimeResult>(MetaData);
             ElapsedTime = results.ElapsedTime;
             return this;
         }
-
     }
 
     public class DataProviderConfigurationDto

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Domain.Core.Contracts;
 using Monitoring.Projection.Core.Contracts;
-using Monitoring.Projection.Core.Models;
+using Monitoring.Projection.Core.Models.DataProviders;
 using Monitoring.Read.ReadModel.Models.DataProviders;
 
 namespace Monitoring.Projection.DataProviders
@@ -19,10 +17,10 @@ namespace Monitoring.Projection.DataProviders
             _storage = storage;
         }
 
-        public DataProviderPerformanceDto[] ShowPerformanceResults()
+        public DataProviderPerformanceDto[] ShowPerformanceResults(int categoryId)
         {
             var results =
-                _storage.Items<MonitoringDataProviderModel>().Where(w => w.CategoryId == (int) Category.Performance);
+                _storage.Items<MonitoringDataProviderModel>().Where(w => w.CategoryId == categoryId);
 
             if (results.Any())
             {
@@ -30,7 +28,7 @@ namespace Monitoring.Projection.DataProviders
                     results.Select(
                         s =>
                             new DataProviderPerformanceDto(s.DataProvider, s.Payload, s.Message, s.Metadata,
-                                s.Date.ToString(), s.RequestAggregateId).GetElapsedTime()).ToArray();
+                                s.Date.ToString(), s.RequestAggregateId, s.TimeStamp).GetElapsedTime()).ToArray();
             }
 
             return new List<DataProviderPerformanceDto>().ToArray();
