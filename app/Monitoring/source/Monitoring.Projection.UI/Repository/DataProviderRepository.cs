@@ -1,36 +1,46 @@
-﻿using System.Linq;
-using Monitoring.Domain.Core.Contracts;
+﻿using System.Data;
+using System.Linq;
 using Monitoring.Projection.UI.Repository.Framework;
+using Monitoring.Projection.UI.Repository.Framework.Orm;
 using Monitoring.Read.ReadModel.Models.DataProviders;
 
 namespace Monitoring.Projection.UI.Repository
 {
     public class DataProviderRepository
     {
-        private readonly IQueryStorage _queryStorage;
+        private readonly IDbConnection _connection;
 
-        public DataProviderRepository(IQueryStorage queryStorage)
+        public DataProviderRepository(IDbConnection connection)
         {
-            _queryStorage = queryStorage;
+            _connection = connection;
         }
 
         public MonitoringDataProviderModel[] GetMonitoringFromDataProviders()
         {
             var results =
-                _queryStorage.Items<MonitoringDataProviderModel>(SelectStatements.GetMonitoringFromAllDataProviders);
+                _connection.Query<MonitoringDataProviderModel>(SelectStatements.GetMonitoringFromAllDataProviders)
+                    .ToList();
 
             return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
+        }
 
-            //if (results.Any())
-            //{
-            //    return
-            //        results.Select(
-            //            s =>
-            //                new DataProviderPerformanceDto(s.DataProvider, s.Payload, s.Message, s.Metadata,
-            //                    s.Date.ToString(), s.RequestAggregateId, s.TimeStamp).GetElapsedTime()).ToArray();
-            //}
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProvidersByCategory(int categoryId)
+        {
+            var results =
+                _connection.Query<MonitoringDataProviderModel>(
+                    SelectStatements.GetMonitoringFromDataProvidersByCategory, new {@CategoryId = categoryId}).ToList();
 
-            //return new List<DataProviderPerformanceDto>().ToArray();
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
+        }
+
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProvidersByType(int dataProviderId)
+        {
+            var results =
+                _connection.Query<MonitoringDataProviderModel>(
+                    SelectStatements.GetMonitoringFromDataProvidersByType, new {@DataProviderId = dataProviderId})
+                    .ToList();
+
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
         }
     }
 }

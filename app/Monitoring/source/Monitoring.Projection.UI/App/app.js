@@ -16,12 +16,24 @@ app.config([
                 controller: "dataProviderController",
                 controllerAs: "vm"
             })
+            .when("/dataproviderbytype/:DataProviderId",
+            {
+                templateUrl: viewBase + "dataProviders/dataProvidersByType.html",
+                controller: "dataProviderByTypeController",
+                controllerAs: "vm"
+            })
+            .when("/dataproviderbycategory/:CategoryId",
+            {
+                templateUrl: viewBase + "dataProviders/dataProvidersByCategory.html",
+                controller: "dataProviderByCategoryController",
+                controllerAs: "vm"
+            })
             .otherwise({ redirectTo: "/" });
     }
 ]).controller("mainController", function($scope) {
 });
 
-app.factory("dataProviderService", function ($http) {
+app.factory("dataProviderService", function($http) {
 
     var serviceBase = "api/dataservice/", factory = {};
 
@@ -46,6 +58,25 @@ app.factory("dataProviderService", function ($http) {
         return getPagedResource("dataProviders", pageIndex, pageSize);
     };
 
+    factory.getMonitoringFromDataProvidersByCategory = function(pageIndex, pageSize, categoryId) {
+        return $http.get(serviceBase + "dataProvidersByCategory?categoryId=" + categoryId).then(function (response) {
+            var data = response.data;
+            return {
+                totalRecords: parseInt(response.headers("X-InlineCount")),
+                results: data
+            }
+        });
+    };
+
+    factory.getMonitoringFromDataProvidersByType = function(pageIndex, pageSize, dataProviderId) {
+        return $http.get(serviceBase + "dataProvidersByType?dataProviderId=" + dataProviderId).then(function (response) {
+            var data = response.data;
+            return {
+                totalRecords: parseInt(response.headers("X-InlineCount")),
+                results: data
+            }
+        });
+    };
+
     return factory;
 });
-
