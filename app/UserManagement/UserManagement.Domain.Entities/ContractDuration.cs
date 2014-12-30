@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    class ContractDuration
+    public class ContractDuration : Entity
     {
+        public ContractDuration()
+        {
+            Contract = new HashSet<Contract>();
+        }
+
+        public string Value { get; set; }
+
+        public virtual ICollection<Contract> Contract { get; set; }
     }
 }

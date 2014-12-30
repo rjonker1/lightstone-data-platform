@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    class Province
+    public class Province : Entity
     {
+        public Province()
+        {
+            Customer = new HashSet<Customer>();
+        }
+
+        public string Value { get; set; }
+
+        public virtual ICollection<Customer> Customer { get; set; }
     }
 }

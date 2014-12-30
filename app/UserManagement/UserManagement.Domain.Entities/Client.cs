@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    class Client
+    public  class Client : Entity
     {
+
+        public string ClientName { get; set; }
+
+        public virtual ICollection<ClientPackage> ClientPackage { get; set; }
+        public virtual ICollection<ClientUser> ClientUser { get; set; }
+        public virtual ICollection<Contract> Contract { get; set; }
+
+        public Client()
+        {
+            ClientPackage = new HashSet<ClientPackage>();
+            ClientUser = new HashSet<ClientUser>();
+            Contract = new HashSet<Contract>();
+        }
+
     }
 }

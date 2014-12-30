@@ -29,8 +29,8 @@ namespace UserManagement.Api.Installers
                             ConventionBuilder.Id.Always(x => x.GeneratedBy.Assigned()),
                             ForeignKey.EndsWith("Id"),
                             new DomainSignatureConvention()
-                        )
-                        )).BuildConfiguration()));
+                        ))
+                        ).BuildConfiguration()));
 
             container.Register(Component.For<ISessionFactory>()
                      .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())

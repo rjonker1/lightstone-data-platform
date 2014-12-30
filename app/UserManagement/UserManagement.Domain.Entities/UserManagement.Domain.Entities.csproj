@@ -39,11 +39,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountOwner.cs" />
+    <Compile Include="Billing.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientPackage.cs" />
+    <Compile Include="ClientUser.cs" />
+    <Compile Include="CommercialState.cs" />
     <Compile Include="Contract.cs" />
+    <Compile Include="ContractDuration.cs" />
+    <Compile Include="ContractType.cs" />
+    <Compile Include="CreateSource.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerProfile.cs" />
+    <Compile Include="EscalationType.cs" />
+    <Compile Include="IClient.cs" />
+    <Compile Include="IClientUser.cs" />
+    <Compile Include="IRole.cs" />
+    <Compile Include="IUser.cs" />
+    <Compile Include="IUserRole.cs" />
+    <Compile Include="Package.cs" />
+    <Compile Include="PaymentType.cs" />
+    <Compile Include="PlatformStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Province.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserLinkedToCustomer.cs" />
+    <Compile Include="UserRole.cs" />
+    <Compile Include="UserType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">

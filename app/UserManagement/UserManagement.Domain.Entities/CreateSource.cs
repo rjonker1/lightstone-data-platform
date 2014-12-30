@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    class CreateSource
+    public class CreateSource : Entity
     {
+        public CreateSource()
+        {
+            CustomerProfile = new HashSet<CustomerProfile>();
+        }
+
+        public string Value { get; set; }
+
+        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
     }
 }

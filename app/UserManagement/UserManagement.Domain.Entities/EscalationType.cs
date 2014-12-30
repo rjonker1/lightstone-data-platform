@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    class EscalationType
+    public class EscalationType : Entity
     {
+        public EscalationType()
+        {
+            Contract = new HashSet<Contract>();
+        }
+
+        public string Value { get; set; }
+
+        public virtual ICollection<Contract> Contract { get; set; }
     }
 }
