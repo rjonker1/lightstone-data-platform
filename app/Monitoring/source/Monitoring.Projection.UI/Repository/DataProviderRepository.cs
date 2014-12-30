@@ -1,21 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using System.Data;
 using System.Linq;
-using Monitoring.Projection.UI.Model;
+using Monitoring.Projection.UI.Repository.Framework;
+using Monitoring.Projection.UI.Repository.Framework.Orm;
+using Monitoring.Read.ReadModel.Models.DataProviders;
 
 namespace Monitoring.Projection.UI.Repository
 {
     public class DataProviderRepository
     {
-        public IQueryable<DataProvider> GetMDataProviders()
-        {
-            //var query = 
-            return new List<DataProvider>()
-            {
-                new DataProvider(1, "Audatex"),
-                new DataProvider(2, "Ivid"),
-                new DataProvider(3, "IvidTitleHolder"),
+        private readonly IDbConnection _connection;
 
-            }.AsQueryable();
+        public DataProviderRepository(IDbConnection connection)
+        {
+            _connection = connection;
+        }
+
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProviders()
+        {
+            var results =
+                _connection.Query<MonitoringDataProviderModel>(SelectStatements.GetMonitoringFromAllDataProviders)
+                    .ToList();
+
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
+        }
+
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProvidersByCategory(int categoryId)
+        {
+            var results =
+                _connection.Query<MonitoringDataProviderModel>(
+                    SelectStatements.GetMonitoringFromDataProvidersByCategory, new {@CategoryId = categoryId}).ToList();
+
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
+        }
+
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProvidersByType(int dataProviderId)
+        {
+            var results =
+                _connection.Query<MonitoringDataProviderModel>(
+                    SelectStatements.GetMonitoringFromDataProvidersByType, new {@DataProviderId = dataProviderId})
+                    .ToList();
+
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
         }
     }
 }

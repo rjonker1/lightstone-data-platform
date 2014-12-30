@@ -103,10 +103,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\controllers\dataProviders\dataProviderByCategoryController.js" />
+    <Content Include="App\controllers\dataProviders\dataProviderByTypeController.js" />
     <Content Include="App\services\dataProviderService.js" />
+    <Content Include="App\views\dataProviders\dataProvidersByCategory.html" />
+    <Content Include="App\views\dataProviders\dataProvidersByType.html" />
+    <Content Include="Content\animations.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.icon-large.min.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\female.png" />
+    <Content Include="Content\images\male.png" />
+    <Content Include="Content\images\people.png" />
+    <Content Include="Content\images\report.png" />
+    <Content Include="Content\images\spinner.gif" />
+    <Content Include="Content\styles.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
@@ -124,6 +136,7 @@
     <Content Include="index.html" />
     <Content Include="App\views\dataProviders\dataProviders.html" />
     <Content Include="App\views\home.html" />
+    <Content Include="scripts\angular-ui-bootstrap.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -134,13 +147,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DataProviderRepository.cs" />
+    <Compile Include="Repository\Framework\Connections\ConnectionFactory.cs" />
+    <Compile Include="Repository\Framework\Orm\Dapper.cs" />
+    <Compile Include="Repository\Framework\SelectStatements.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="scripts\" />
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
+      <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
+      <Name>Monitoring.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Projection\Monitoring.Projection.csproj">
+      <Project>{aaa626bb-1436-461e-9426-13a320f594ab}</Project>
+      <Name>Monitoring.Projection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
+      <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
+      <Name>Monitoring.Read.ReadModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

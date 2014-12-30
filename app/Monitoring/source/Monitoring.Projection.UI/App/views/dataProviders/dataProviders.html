@@ -22,23 +22,36 @@
                         <thead>
                             <tr>
                                 <th>&nbsp;</th>
-                                <th>Id</th>
-                                <th>Name</th>
+                                <!--<th>Id</th>-->
+                                <th>Aggregate Id</th>
+                                <th>Payload</th>
+                                <th>Message</th>
+                                <th>Data Provider</th>
+                                <th>Category</th>
+                                <th>Metadata</th>
+                                <th>Date</th>
+                                <th>Time Stamp</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="dataProvider in vm.dataProviders" class="repeat-animation">
                                 <td></td>
-                                <td>{{dataProvider.Id}}</td>
-                                <td>{{dataProvider.Name}}</td>
+                                <!--<td>{{dataProvider.Id}}</td>-->
+                                <td>{{dataProvider.AggregateId}}</td>
+                                <td>{{dataProvider.Payload}}</td>
+                                <td>{{dataProvider.Message}}</td>
+                                <td><a href="#/dataproviderbytype/{{dataProvider.DataProviderId}}">{{dataProvider.DataProvider}}</a></td>
+                                <td><a href="#/dataproviderbycategory/{{dataProvider.CategoryId}}">{{dataProvider.Category}}</a></td>
+                                <td>{{dataProvider.Metadata}}</td>
+                                <td>{{dataProvider.Date}}</td>
+                                <td>{{dataProvider.TimeStamp}}</td>
                                 <td></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -43,5 +43,9 @@ namespace Monitoring.DistributedService.DenormalizerHost.Storage
                 trans.Commit();
             }
         }
+        public IQueryable<TItem> Items<TItem>(string sql) where TItem : class
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
