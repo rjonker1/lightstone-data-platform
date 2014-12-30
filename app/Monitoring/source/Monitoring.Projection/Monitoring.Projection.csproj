@@ -44,7 +44,6 @@
     <Compile Include="Core\Contracts\IProjection.cs" />
     <Compile Include="Core\Models\DataProviders\DataProviders.cs" />
     <Compile Include="Core\Models\DataProviders\ElapsedTime.cs" />
-    <None Include="DataProviders\DataProviderMonitoring.cs.old" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
