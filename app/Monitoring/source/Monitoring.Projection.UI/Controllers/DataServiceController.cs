@@ -7,6 +7,7 @@ using System.Web.Http;
 using Monitoring.Projection.Core.Models.DataProviders;
 using Monitoring.Projection.UI.Repository;
 using Monitoring.Projection.UI.Repository.Framework.Connections;
+using Monitoring.Read.ReadModel.Models.DataProviders;
 
 namespace Monitoring.Projection.UI.Controllers
 {
@@ -19,16 +20,14 @@ namespace Monitoring.Projection.UI.Controllers
             _repository = new DataProviderRepository(ConnectionFactory.ForReadDatabase());
         }
 
-        [HttpGet]
-        public HttpResponseMessage DataProviders()
+        private HttpResponseMessage BuildHttpResponseMessage(MonitoringDataProviderModel[] results)
         {
             var dataProviders =
-                _repository.GetMonitoringFromDataProviders()
-                    .Select(
-                        s =>
-                            new DataProviderDto(s.DataProvider, s.DataProviderId, s.Category, s.CategoryId, s.Payload,
-                                s.Message, s.Metadata, s.Date,
-                                s.AggregateId, s.TimeStamp))
+                results.Select(
+                    s =>
+                        new DataProviderDto(s.DataProvider, s.DataProviderId, s.Category, s.CategoryId, s.Payload,
+                            s.Message, s.Metadata, s.Date,
+                            s.AggregateId, s.TimeStamp))
                     .ToList();
 
             foreach (var provider in dataProviders)
@@ -42,62 +41,31 @@ namespace Monitoring.Projection.UI.Controllers
         }
 
         [HttpGet]
+        public HttpResponseMessage DataProviders()
+        {
+            var results = _repository.GetMonitoringFromDataProviders();
+            return BuildHttpResponseMessage(results);
+        }
+
+        [HttpGet]
         public HttpResponseMessage DataProvidersByCategory(int categoryId)
         {
-            var dataProviders = _repository.GetMonitoringFromDataProvidersByCategory(categoryId).Select(
-                s =>
-                    new DataProviderDto(s.DataProvider, s.DataProviderId, s.Category, s.CategoryId, s.Payload,
-                        s.Message, s.Metadata, s.Date,
-                        s.AggregateId, s.TimeStamp)).ToList();
-
-            foreach (var provider in dataProviders)
-            {
-                if (provider.IsPerformance) provider.GetElapsedTime();
-            }
-
-            var totalRecords = dataProviders.Count();
-            HttpContext.Current.Response.Headers.Add("X-InlineCount", totalRecords.ToString());
-            return Request.CreateResponse(HttpStatusCode.OK, dataProviders);
+            var results = _repository.GetMonitoringFromDataProvidersByCategory(categoryId);
+            return BuildHttpResponseMessage(results);
         }
 
         [HttpGet]
         public HttpResponseMessage DataProvidersByType(int dataProviderId)
         {
-            var dataProviders = _repository.GetMonitoringFromDataProvidersByType(dataProviderId).Select(
-                s =>
-                    new DataProviderDto(s.DataProvider, s.DataProviderId, s.Category, s.CategoryId, s.Payload,
-                        s.Message, s.Metadata, s.Date,
-                        s.AggregateId, s.TimeStamp))
-                .ToList();
-
-            foreach (var provider in dataProviders)
-            {
-                if (provider.IsPerformance) provider.GetElapsedTime();
-            }
-
-            var totalRecords = dataProviders.Count();
-            HttpContext.Current.Response.Headers.Add("X-InlineCount", totalRecords.ToString());
-            return Request.CreateResponse(HttpStatusCode.OK, dataProviders);
+            var results = _repository.GetMonitoringFromDataProvidersByType(dataProviderId);
+            return BuildHttpResponseMessage(results);
         }
 
         [HttpGet]
         public HttpResponseMessage DataProviderByAggregate(Guid aggregateId)
         {
-            var dataProviders = _repository.GetMonitoringFromDataProviderByAggregate(aggregateId).Select(
-                s =>
-                    new DataProviderDto(s.DataProvider, s.DataProviderId, s.Category, s.CategoryId, s.Payload,
-                        s.Message, s.Metadata, s.Date,
-                        s.AggregateId, s.TimeStamp))
-                .ToList();
-
-            foreach (var provider in dataProviders)
-            {
-                if (provider.IsPerformance) provider.GetElapsedTime();
-            }
-
-            var totalRecords = dataProviders.Count();
-            HttpContext.Current.Response.Headers.Add("X-InlineCount", totalRecords.ToString());
-            return Request.CreateResponse(HttpStatusCode.OK, dataProviders);
+            var results = _repository.GetMonitoringFromDataProviderByAggregate(aggregateId);
+            return BuildHttpResponseMessage(results);
         }
     }
 }
