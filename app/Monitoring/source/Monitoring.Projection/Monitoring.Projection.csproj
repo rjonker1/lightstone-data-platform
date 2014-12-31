@@ -40,7 +40,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Contracts\IDataProviderProjection.cs" />
+    <None Include="Core\Contracts\IDataProviderProjection.cs.old" />
     <Compile Include="Core\Contracts\IProjection.cs" />
     <Compile Include="Core\Models\DataProviders\DataProviders.cs" />
     <Compile Include="Core\Models\DataProviders\ElapsedTime.cs" />

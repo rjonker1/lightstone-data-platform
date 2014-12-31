@@ -28,6 +28,12 @@ app.config([
                 controller: "dataProviderByCategoryController",
                 controllerAs: "vm"
             })
+            .when("/dataproviderbyaggregate/:AggregateId",
+            {
+                templateUrl: viewBase + "dataProviders/dataProvidersByAggregate.html",
+                controller: "dataProviderByAggregateController",
+                controllerAs: "vm"
+            })
             .otherwise({ redirectTo: "/" });
     }
 ]).controller("mainController", function($scope) {
@@ -59,7 +65,7 @@ app.factory("dataProviderService", function($http) {
     };
 
     factory.getMonitoringFromDataProvidersByCategory = function(pageIndex, pageSize, categoryId) {
-        return $http.get(serviceBase + "dataProvidersByCategory?categoryId=" + categoryId).then(function (response) {
+        return $http.get(serviceBase + "dataProvidersByCategory?categoryId=" + categoryId).then(function(response) {
             var data = response.data;
             return {
                 totalRecords: parseInt(response.headers("X-InlineCount")),
@@ -69,7 +75,17 @@ app.factory("dataProviderService", function($http) {
     };
 
     factory.getMonitoringFromDataProvidersByType = function(pageIndex, pageSize, dataProviderId) {
-        return $http.get(serviceBase + "dataProvidersByType?dataProviderId=" + dataProviderId).then(function (response) {
+        return $http.get(serviceBase + "dataProvidersByType?dataProviderId=" + dataProviderId).then(function(response) {
+            var data = response.data;
+            return {
+                totalRecords: parseInt(response.headers("X-InlineCount")),
+                results: data
+            }
+        });
+    };
+
+    factory.getMonitoringFromDataProvidersByAggregate = function(pageIndex, pageSize, aggregateId) {
+        return $http.get(serviceBase + "dataProviderByAggregate?aggregateId=" + aggregateId).then(function(response) {
             var data = response.data;
             return {
                 totalRecords: parseInt(response.headers("X-InlineCount")),

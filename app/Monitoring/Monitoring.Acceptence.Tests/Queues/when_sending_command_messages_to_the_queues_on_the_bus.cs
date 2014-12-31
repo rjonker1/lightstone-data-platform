@@ -34,7 +34,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 
             _actions.AddAllExchanges();
             _actions.AddAllQueues();
-           
+
 
             _request = DataProviderRequestBuilder.ForIvid();
 
@@ -76,7 +76,11 @@ namespace Monitoring.Acceptance.Tests.Queues
 
             _monitoring.StartDataProvider(DataProvider.Ivid, _request, _dataProviderStopWatch);
 
+            Thread.Sleep(1000);
+
             _monitoring.DataProviderConfiguration(DataProvider.Ivid, _request, string.Empty);
+
+            Thread.Sleep(1000);
 
             var configJson = DataProviderConfigurationBuiler.ForIvid();
             _monitoring.DataProviderSecurity(DataProvider.Ivid, configJson,
@@ -84,17 +88,22 @@ namespace Monitoring.Acceptance.Tests.Queues
 
             _monitoring.StartCallingDataProvider(DataProvider.Ivid, _request, _stopWatch);
 
+            Thread.Sleep(1000);
+
             _monitoring.DataProviderFault(DataProvider.Ivid, _request,
                 "No response received from Ivid Data Provider");
 
+            Thread.Sleep(1000);
 
             _monitoring.EndCallingDataProvider(DataProvider.Ivid, DataProviderResponseBuilder.FromIvid(),
                 _stopWatch);
 
-
+            Thread.Sleep(1000);
             //var transformer = DataProviderTransformationBuilder.ForIvid(_ividResponse);
             _monitoring.DataProviderTransformation(DataProvider.Ivid, DataProviderTransformationBuilder.ForIvid(),
                 DataProviderResponseBuilder.FromIvid());
+
+            Thread.Sleep(1000);
 
             _monitoring.EndDataProvider(DataProvider.Ivid, _request, _dataProviderStopWatch);
 

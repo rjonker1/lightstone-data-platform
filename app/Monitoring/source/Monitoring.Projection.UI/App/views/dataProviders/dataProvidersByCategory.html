@@ -1,2 +1,49 @@
-﻿<div class="dataproviders view indent" ng-controller="dataProviderByCategoryController">
+﻿<div class="view indent" ng-controller="dataProviderByCategoryController">
+    <div class="container">
+        <header>
+            <h3>
+                <span class="glyphicon-file"></span>Data Providers by Category
+            </h3>
+        </header>
+        <div class="container">
+            <div class="row gridContainer">
+                <div class="col-md-10">
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <!--<th>Id</th>-->
+                                <th>Aggregate Id</th>
+                                <th>Payload</th>
+                                <th>Message</th>
+                                <th>Data Provider</th>
+                                <th>Category</th>
+                                <th ng-show="vm.dataProviders[0].IsPerformance">Elapsed Time</th>
+                                <th ng-show="!vm.dataProviders[0].IsPerformance">Metadata</th>
+                                <th>Date</th>
+                                <th>Time Stamp</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dataProvider in vm.dataProviders" class="repeat-animation">
+                                <td></td>
+                                <!--<td>{{dataProvider.Id}}</td>-->
+                                <td><a href="#/dataproviderbyaggregate/{{dataProvider.AggregateId}}">{{dataProvider.AggregateId}}</a></td>
+                                <td>{{dataProvider.Payload}}</td>
+                                <td>{{dataProvider.Message}}</td>
+                                <td>{{dataProvider.DataProvider}}</td>
+                                <td>{{dataProvider.Category}}</td>
+                                <th ng-show="dataProvider.IsPerformance">{{dataProvider.ElapsedTime}}</th>
+                                <td ng-show="!dataProvider.IsPerformance">{{dataProvider.MetaData}}</td>
+                                <td>{{dataProvider.Date}}</td>
+                                <td>{{dataProvider.TimeStamp}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -3,30 +3,39 @@ using Newtonsoft.Json;
 
 namespace Monitoring.Projection.Core.Models.DataProviders
 {
-    public class DataProviderPerformanceDto
+    public class DataProviderDto
     {
+        public readonly int DataProviderId;
+        public readonly int CategoryId;
+        public readonly string Category;
         public readonly string DataProvider;
         public readonly string Payload;
         public readonly string Message;
         public readonly string MetaData;
-        public readonly string Date;
+        public readonly DateTime Date;
         public readonly DateTime TimeStamp;
         public readonly Guid AggregateId;
+        public readonly bool IsPerformance;
         public string ElapsedTime;
 
-        public DataProviderPerformanceDto(string dataProvider, string payload, string message, string metadata,
-            string date, Guid aggregateId, DateTime timeStamp)
+        public DataProviderDto(string dataProvider, int dataProviderId, string category, int categoryId, string payload,
+            string message, string metadata,
+            DateTime date, Guid aggregateId, DateTime timeStamp)
         {
             DataProvider = dataProvider;
+            DataProviderId = dataProviderId;
+            Category = category;
+            CategoryId = categoryId;
             Payload = payload;
             Message = message;
             MetaData = metadata;
             Date = date;
             AggregateId = aggregateId;
             TimeStamp = timeStamp;
+            IsPerformance = Category.Equals("Performance", StringComparison.CurrentCultureIgnoreCase);
         }
 
-        public DataProviderPerformanceDto GetElapsedTime()
+        public DataProviderDto GetElapsedTime()
         {
             if (string.IsNullOrWhiteSpace(MetaData))
                 return this;
@@ -35,20 +44,5 @@ namespace Monitoring.Projection.Core.Models.DataProviders
             ElapsedTime = results.ElapsedTime;
             return this;
         }
-    }
-
-    public class DataProviderConfigurationDto
-    {
-        
-    }
-
-    public class DataProviderSecurityDto
-    {
-        
-    }
-
-    public class DataProviderFaultDto
-    {
-        
     }
 }

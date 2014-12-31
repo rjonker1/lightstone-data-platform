@@ -2,7 +2,7 @@
     <div class="container">
         <header>
             <h3>
-                <span class="glyphicon glyphicon-user"></span>DataProviders
+                <span class="glyphicon glyphicon-user"></span>Data Providers
             </h3>
         </header>
 
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>-->
-            <div class="row gridContainer dataProvidersTable show-hide-animation">
+            <div class="row gridContainer">
                 <div class="col-md-10">
                     <table class="table table-striped table-condensed">
                         <thead>
@@ -38,12 +38,13 @@
                             <tr ng-repeat="dataProvider in vm.dataProviders" class="repeat-animation">
                                 <td></td>
                                 <!--<td>{{dataProvider.Id}}</td>-->
-                                <td>{{dataProvider.AggregateId}}</td>
+                                <td><a href="#/dataproviderbyaggregate/{{dataProvider.AggregateId}}">{{dataProvider.AggregateId}}</a></td>
                                 <td>{{dataProvider.Payload}}</td>
                                 <td>{{dataProvider.Message}}</td>
                                 <td><a href="#/dataproviderbytype/{{dataProvider.DataProviderId}}">{{dataProvider.DataProvider}}</a></td>
                                 <td><a href="#/dataproviderbycategory/{{dataProvider.CategoryId}}">{{dataProvider.Category}}</a></td>
-                                <td>{{dataProvider.Metadata}}</td>
+                                <th ng-show="dataProvider.IsPerformance">{{dataProvider.ElapsedTime}}</th>
+                                <td ng-show="!dataProvider.IsPerformance">{{dataProvider.MetaData}}</td>
                                 <td>{{dataProvider.Date}}</td>
                                 <td>{{dataProvider.TimeStamp}}</td>
                                 <td></td>

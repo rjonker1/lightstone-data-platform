@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using Monitoring.Projection.UI.Repository.Framework;
 using Monitoring.Projection.UI.Repository.Framework.Orm;
@@ -38,6 +39,16 @@ namespace Monitoring.Projection.UI.Repository
             var results =
                 _connection.Query<MonitoringDataProviderModel>(
                     SelectStatements.GetMonitoringFromDataProvidersByType, new {@DataProviderId = dataProviderId})
+                    .ToList();
+
+            return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
+        }
+
+        public MonitoringDataProviderModel[] GetMonitoringFromDataProviderByAggregate(Guid aggregateId)
+        {
+            var results =
+                _connection.Query<MonitoringDataProviderModel>(
+                    SelectStatements.GetMonitoringFromDataProvidersByAggregate, new { @AggregateId = aggregateId })
                     .ToList();
 
             return results.Any() ? results.ToArray() : new MonitoringDataProviderModel[0];
