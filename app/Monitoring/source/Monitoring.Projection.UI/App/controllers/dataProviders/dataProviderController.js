@@ -15,11 +15,7 @@ app.controller("dataProviderController", function($scope, $location, $filter, $w
         dataProviderService.getMonitoringFromDataProviders(vm.currentPage - 1, vm.pageSize)
             .then(function(data) {
                 vm.totalRecords = data.totalRecords;
-                vm.dataProviders = data.results;
-
-            //$timeout(function() {
-            //    //vm.cardAnimationClass = ""; //Turn off animation since it won't keep up with filtering
-            //}, 1000);
+            vm.dataProviders = data.results;
 
         }, function(error) {
                 $window.alert("An error occurred retrieving monitoring information: " + error.data.message);

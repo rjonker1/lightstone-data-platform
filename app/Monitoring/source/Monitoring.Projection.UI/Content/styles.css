@@ -380,3 +380,8 @@ input.ng-valid, select.ng-valid, input.ng-valid-required, select.ng-valid.requir
     }
 
 }
+
+.monitoring-table {
+    font-size: 8pt;
+    width: auto;
+}
