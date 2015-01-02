@@ -3,6 +3,7 @@ using System.Reflection;
 using Castle.Windsor;
 using PackageBuilder.Api.Helpers.AutoMapper.Maps;
 using PackageBuilder.Api.Installers;
+using PackageBuilder.TestHelper;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests.Installers
@@ -13,7 +14,12 @@ namespace PackageBuilder.Api.Tests.Installers
 
         public override void Observe()
         {
-            _container.Install(new AutoMapperInstaller());
+            _container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
+            _container.Install(new NHibernateInstaller());
+            OverrideHelper.OverrideNhibernateCfg(_container);
+
+            _container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
+
         }
 
         [Observation]
