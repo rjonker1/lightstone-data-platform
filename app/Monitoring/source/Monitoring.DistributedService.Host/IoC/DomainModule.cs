@@ -5,6 +5,7 @@ using CommonDomain;
 using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
+using DataPlatform.Shared.Messaging;
 using Lace.Shared.Monitoring.Messages.Events;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
@@ -64,7 +65,7 @@ namespace Monitoring.DistributedService.Host.IoC
                 for (var i = 0; i < commit.Events.Count; i++)
                 {
                     var eventMessage = commit.Events[i];
-                    var busMessage = eventMessage.Body as IDataProviderEvent;
+                    var busMessage = eventMessage.Body as IPublishableMessage;
                     AppendHeaders(busMessage, commit.Headers, bus); // optional
                     AppendHeaders(busMessage, eventMessage.Headers, bus); // optional
                     AppendVersion(commit, i, bus); // optional
@@ -73,7 +74,7 @@ namespace Monitoring.DistributedService.Host.IoC
             }
         }
 
-        private static void AppendHeaders(IDataProviderEvent message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
+        private static void AppendHeaders(IPublishableMessage message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
         {
             headers = headers.Where(x => x.Key.StartsWith(BusPrefixKey));
             foreach (var header in headers)
