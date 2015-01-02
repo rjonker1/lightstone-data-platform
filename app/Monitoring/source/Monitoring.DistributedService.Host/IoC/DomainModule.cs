@@ -38,7 +38,7 @@ namespace Monitoring.DistributedService.Host.IoC
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
         }
 
-        private static IStoreEvents BuildEventStore(ILifetimeScope container)
+        public static IStoreEvents BuildEventStore(ILifetimeScope container)
         {
             return Wireup.Init()
                 .LogToConsoleWindow()
@@ -54,9 +54,8 @@ namespace Monitoring.DistributedService.Host.IoC
                 .Build();
         }
 
-        private static void DispatchCommit(ILifetimeScope container, Commit commit)
+        public static void DispatchCommit(ILifetimeScope container, Commit commit)
         {
-
             using (var scope = container.BeginLifetimeScope())
             {
                 //var publisher = scope.Resolve<IPublishMessages>();
