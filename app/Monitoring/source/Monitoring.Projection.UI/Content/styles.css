@@ -246,7 +246,7 @@ a.navbar-brand {
 }
 
 .navbar .nav li.toolbaritem a:hover, .navbar .nav li a:hover {
-    color: #E03930;
+    color: #E03930''
 }
 
 .navbar .nav > li  {
@@ -382,6 +382,12 @@ input.ng-valid, select.ng-valid, input.ng-valid-required, select.ng-valid.requir
 }
 
 .monitoring-table {
-    font-size: 8pt;
     width: auto;
+    display:inline-block;
+    overflow-x: scroll;
 }
+
+    .monitoring-table tbody {
+        width: auto;
+        overflow-x: scroll;
+    }
