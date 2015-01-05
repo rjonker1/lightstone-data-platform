@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -27,21 +26,18 @@ namespace PackageBuilder.Api.Modules
             IDataProviderRepository readRepo,
             INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
-
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
 
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-
             Get["/DataProvider"] = parameters =>
                 Response.AsJson(readRepo);
 
             Get["/DataProvider/Get/All"] = parameters =>
             {
-                var ids = readRepo.Select(x => x.DataProviderId).Distinct().ToList();
-                var dataSources = ids.Select(x => Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(x))).ToList();
+                var dataSources = readRepo.GetUniqueIds().Select(x => Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(x))).ToList();
                 return Response.AsJson(dataSources);
             };
 

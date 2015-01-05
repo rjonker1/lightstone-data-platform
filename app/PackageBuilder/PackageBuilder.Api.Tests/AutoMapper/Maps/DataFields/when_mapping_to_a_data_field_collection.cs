@@ -18,9 +18,11 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
         {
             var container = new WindsorContainer();
             container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
-            container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new NHibernateInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
+            container.Install(new NHibernateInstaller());
             OverrideHelper.OverrideNhibernateCfg(container);
+
+            container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
             _dataFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(new[] { DataFieldDtoMother.CarFullname, DataFieldDtoMother.CategoryCode, DataFieldDtoMother.SpecificInformation });
         }

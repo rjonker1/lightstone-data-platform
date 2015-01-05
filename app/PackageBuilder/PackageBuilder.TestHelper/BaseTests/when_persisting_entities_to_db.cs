@@ -16,20 +16,18 @@ namespace PackageBuilder.TestHelper.BaseTests
         public IWindsorContainer Container = new WindsorContainer();
         protected ISession Session;
 
-        public when_persisting_entities_to_db()
+        public when_persisting_entities_to_db(bool useSingleSession = false)
         {
+            Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
+            if (useSingleSession)
+                Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideNhibernateSessionLifestyle;
+
             Container.Install(new NHibernateInstaller());
+            OverrideHelper.OverrideNhibernateCfg(Container);
         }
 
         public override void Observe()
         {
-            var configuration = Container.Resolve<Configuration>();
-            configuration.SetProperty("cache.provider_class", "NHibernate.Cache.NoCacheProvider, NHibernate.Cache");
-            configuration.SetProperty("cache.use_second_level_cache", "false");
-            configuration.SetProperty("cache.use_query_cache", "false");
-            configuration.SetProperty("current_session_context_class", "thread_static");
-            configuration.SetProperty("show_sql", "true");
-
             Session = Container.Resolve<ISessionFactory>().OpenSession();
 
             new SchemaExport(Container.Resolve<Configuration>()).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));

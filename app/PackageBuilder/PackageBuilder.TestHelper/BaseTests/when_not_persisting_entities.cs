@@ -11,7 +11,6 @@ namespace PackageBuilder.TestHelper.BaseTests
             var container = new WindsorContainer();
             container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
             container.Install(new AutoMapperInstaller(), new NHibernateInstaller(), new RepositoryInstaller());
-
             OverrideHelper.OverrideNhibernateCfg(container);
         }
     }

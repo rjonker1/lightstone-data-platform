@@ -40,13 +40,11 @@ namespace PackageBuilder.Api.Installers
                 }).BuildConfiguration()));
 
             container.Register(Component.For<ISessionFactory>()
-                     .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
-                     .LifestyleSingleton()); 
+                .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
+                .LifestyleSingleton());
             container.Register(Component.For<ISession>()
-                     .UsingFactoryMethod(kernal => 
-                         kernal.Resolve<ISessionFactory>().OpenSession()
-                         )
-                     .LifestylePerWebRequest());
+                .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
+                .LifestylePerWebRequest());
         }
     }
 }

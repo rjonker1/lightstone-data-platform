@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;

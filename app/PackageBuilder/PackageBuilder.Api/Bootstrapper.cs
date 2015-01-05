@@ -41,8 +41,8 @@ namespace PackageBuilder.Api
 
             //container.Install(FromAssembly.InThisApplication());
             container.Install(
-                new RepositoryInstaller(),
                 new NHibernateInstaller(),
+                new RepositoryInstaller(),
                 new CommandInstaller(),
                 new BusInstaller(),
                 new NEventStoreInstaller(),
