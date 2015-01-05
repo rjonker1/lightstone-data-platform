@@ -7,7 +7,7 @@ using Monitoring.Test.Helper.Fakes.EventStore;
 using Monitoring.Write.Service.DataProviders;
 using Xunit.Extensions;
 
-namespace Monitoring.Unit.Tests.DataProvider
+namespace Monitoring.Unit.Tests.DataProviders
 {
     public class when_sending_data_provider_events_to_the_bus : Specification
     {

@@ -10,14 +10,14 @@ using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Queues
 {
-    public class when_sending_ivid_command_messages_to_the_queues_on_the_bus : Specification
+    public class when_sending_ivid_command_messages_to_the_write_queues_on_the_bus : Specification
     {
         private readonly string _request;
 
         private readonly Guid _aggregateId;
         private readonly IHaveQueueActions _actions;
 
-        public when_sending_ivid_command_messages_to_the_queues_on_the_bus()
+        public when_sending_ivid_command_messages_to_the_write_queues_on_the_bus()
         {
             var messageQueue = new RabbitMqMessageQueueing();
             _actions = new QueueActions(messageQueue.Consumer);
@@ -50,6 +50,7 @@ namespace Monitoring.Acceptance.Tests.Queues
                 ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
                 ConfigureMonitoringWriteQueues.ForHost().ExchangeType);
             messageCount.ShouldEqual(8);
+
         }
     }
 }

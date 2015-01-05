@@ -14,7 +14,6 @@ namespace Monitoring.DomainModel.DataProviders
             Register<DataProviderHasExecutedEvent>(e => Id = id);
             Register<DataProviderIsCalledEvent>(e => Id = id);
             Register<DataProviderCallEndedEvent>(e => Id = id);
-            Register<DataProviderCallEndedEvent>(e => Id = id);
             Register<DataProviderHasFaultEvent>(e => Id = id);
             Register<DataProviderHasConfigurationEvent>(e => Id = id);
             Register<DataProviderHasSecurityEvent>(e => Id = id);

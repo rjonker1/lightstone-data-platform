@@ -1,4 +1,5 @@
 ﻿using System;
+using Lace.Shared.Monitoring.Messages.Publisher;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 using NServiceBus.Features;
@@ -11,6 +12,12 @@ namespace Monitoring.Test.Helper.Mothers
         {
             var bus = BusFactory.NServiceRabbitMqWriteBus();
             return new MonitoringMessageSender(bus, aggregateId);
+        }
+
+        public static DataProviderMessagePublisher ForMonitoringReadMessages(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new DataProviderMessagePublisher(bus);
         }
     }
 
