@@ -1,27 +1,67 @@
-﻿namespace Monitoring.Test.Helper.Builder.DataProviderEvents
+﻿using System;
+using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Events;
+
+namespace Monitoring.Test.Helper.Builder.DataProviderEvents
 {
-    //public class EventMessageBuilder
-    //{
-    //    public static DataProviderExecutingStartingEvent DataProviderExecutedEvent()
-    //    {
-    //        return new DataProviderExecutingStartingEvent(Guid.NewGuid(), (int) DataProvider.Audatex,
-    //            DataProviderMonitoringMessages.StartCallingDataProvider, DateTime.UtcNow);
-    //    }
-    //}
+    public class DataProviderEvents
+    {
+        public DataProviderCallEndedEvent ForDataProviderCallEndedEvent(Guid aggreateId, DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderCallEndedEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
-    //[Serializable]
-    //public class DataProviderExecutedMessage : DataProviderExecuted
-    //{
-    //    public Guid Id { get; set; }
+        public DataProviderExecutingEvent ForDataProviderExecutingEvent(Guid aggreateId, DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderExecutingEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
-    //    public Guid AggregateId { get; set; }
+        public DataProviderHasConfigurationEvent ForDataProviderHasConfigurationEvent(Guid aggreateId,
+            DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderHasConfigurationEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
-    //    public int DataProviderId { get; set; }
+        public DataProviderHasExecutedEvent ForDataProviderHasExecutedEvent(Guid aggreateId, DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderHasExecutedEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
-    //    public string Message { get; set; }
+        public DataProviderHasFaultEvent ForDataProviderHasFaultEvent(Guid aggreateId, DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderHasFaultEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
-    //    public DateTime Date { get; set; }
+        public DataProviderHasSecurityEvent ForDataProviderHasSecurityEvent(Guid aggreateId, DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderHasSecurityEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
+        public DataProviderasBeenTransformedEvent ForDataProviderasBeenTransformedEvent(Guid aggreateId,
+            DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderasBeenTransformedEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
 
-    //}
+        public DataProviderIsCalledEvent ForDataProviderIsCalledEvent(Guid aggreateId, DataProvider dataProvider,
+            Category category)
+        {
+            return new DataProviderIsCalledEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
+                string.Empty, DateTime.UtcNow, true);
+        }
+    }
 }

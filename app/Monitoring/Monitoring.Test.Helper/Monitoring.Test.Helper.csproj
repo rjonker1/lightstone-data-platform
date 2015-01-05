@@ -100,6 +100,7 @@
     <Compile Include="Builder\DataProviderInformation.cs" />
     <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
     <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
+    <Compile Include="Fakes\FakeMonitoringReadDatabase.cs" />
     <Compile Include="Messages\MessageQueueing.cs" />
     <Compile Include="Mothers\BusFactory.cs" />
     <Compile Include="Queues\QueueFunctions.cs" />

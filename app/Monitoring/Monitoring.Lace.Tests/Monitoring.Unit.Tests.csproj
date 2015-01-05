@@ -85,7 +85,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataProvider\when_sending_data_provider_events_to_the_bus.cs" />
+    <Compile Include="DataProviders\when_handling_data_provider_events.cs" />
+    <Compile Include="DataProviders\when_sending_data_provider_events_to_the_bus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,9 +97,21 @@
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
+      <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
+      <Name>Monitoring.Domain.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Monitoring.DomainModel\Monitoring.DomainModel.csproj">
       <Project>{ee9d1aec-1e3e-420e-acf0-3058feee6e7f}</Project>
       <Name>Monitoring.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj">
+      <Project>{365e35da-ee0a-4ac8-8eb3-341f274988f7}</Project>
+      <Name>Monitoring.Read.Denormalizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
+      <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
+      <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Monitoring.Write.Services\Monitoring.Write.Service.csproj">
       <Project>{e5ef9629-c3af-48ec-8277-e3dcd18b2906}</Project>

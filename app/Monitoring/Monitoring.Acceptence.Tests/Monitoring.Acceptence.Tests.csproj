@@ -101,6 +101,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DataProviders\when_handling_data_provider_events.cs" />
     <Compile Include="Queues\when_sending_ivid_command_messages_to_the_read_queues_on_the_bus.cs" />
     <Compile Include="Queues\when_sending_ivid_command_messages_to_the_write_queues_on_the_bus.cs" />
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
@@ -119,6 +120,10 @@
       <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>
       <Name>Monitoring.Queuing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Read.Denormalizer\Monitoring.Read.Denormalizer.csproj">
+      <Project>{365e35da-ee0a-4ac8-8eb3-341f274988f7}</Project>
+      <Name>Monitoring.Read.Denormalizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Monitoring.Write.Services\Monitoring.Write.Service.csproj">
       <Project>{e5ef9629-c3af-48ec-8277-e3dcd18b2906}</Project>
       <Name>Monitoring.Write.Service</Name>
@@ -134,7 +139,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataProvider\" />
     <Folder Include="Fakes\" />
     <Folder Include="Lace\" />
   </ItemGroup>
