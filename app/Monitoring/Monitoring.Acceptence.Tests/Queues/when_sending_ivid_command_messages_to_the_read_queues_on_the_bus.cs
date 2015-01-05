@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
@@ -28,29 +29,29 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         public override void Observe()
         {
-            //var queue = new DataProviderQueueFunctions(_request, DataProvider.Ivid, _actions, _aggregateId);
-            //queue.TearDown()
-            //    .Setup()
-            //    .InitBus()
-            //    .InitStopWatch()
-            //    .StartingDataProviderMessage()
-            //    .ConfigurationMessage(string.Empty)
-            //    .SecurityMessage(DataProviderConfigurationBuiler.ForIvid(), "Ivid Data Provider Credentials")
-            //    .StartCallingMessage()
-            //    .FaultCallingMessage("No response received from Ivid Data Provider")
-            //    .EndCallingMessage(DataProviderResponseBuilder.FromIvid())
-            //    .TransformationMessage(DataProviderTransformationBuilder.ForIvid(), "Transforming Response from Ivid")
-            //    .EndingDataProvider();
+            var queue = new DataProviderQueueFunctions(_request, DataProvider.Ivid, _actions, _aggregateId);
+            queue.TearDown()
+                .Setup()
+                .InitReadBus()
+                .InitStopWatch()
+                .DataProviderExecutingEvent()
+                .DataProviderHasConfigurationEvent()
+                .DataProviderHasSecurityEvent()
+                .DataProviderIsCalledEvent()
+                .DataProviderHasFaultEvent()
+                .DataProviderCallEndedEvent()
+                .DataProviderasBeenTransformedEvent()
+                .DataProviderHasExecutedEvent();
         }
 
-        //[Observation]
-        //public void then_ivid_messages_should_be_put_on_the_correct_read_queue()
-        //{
-        //    var messageCount = _actions.GetMessageCount(ConfigureMonitoringWriteQueues.ForHost().ExchangeName,
-        //        ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
-        //        ConfigureMonitoringWriteQueues.ForHost().ExchangeType);
-        //    messageCount.ShouldEqual(8);
+        [Observation]
+        public void then_ivid_messages_should_be_put_on_the_correct_read_queue()
+        {
+            var messageCount = _actions.GetMessageCount(ConfigureMonitoringReadQueues.ForHost().ExchangeName,
+                ConfigureMonitoringReadQueues.ForHost().QueueName, ConfigureMonitoringReadQueues.ForHost().RoutingKey,
+                ConfigureMonitoringReadQueues.ForHost().ExchangeType);
+            messageCount.ShouldEqual(8);
 
-        //}
+        }
     }
 }

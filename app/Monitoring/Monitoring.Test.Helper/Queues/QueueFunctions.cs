@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading;
 using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Publisher;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Queuing.Contracts;
+using Monitoring.Test.Helper.Builder.DataProviderEvents;
 using Monitoring.Test.Helper.Mothers;
 
 namespace Monitoring.Test.Helper.Queues
@@ -10,6 +12,7 @@ namespace Monitoring.Test.Helper.Queues
     public class DataProviderQueueFunctions
     {
         private ISendMonitoringMessages _monitoring;
+        private DataProviderMessagePublisher _publisher;
         private readonly string _request;
         private readonly DataProvider _dataProvider;
         private readonly IHaveQueueActions _actions;
@@ -44,6 +47,12 @@ namespace Monitoring.Test.Helper.Queues
         public DataProviderQueueFunctions InitBus()
         {
             _monitoring = BusBuilder.ForMonitoringWriteMessages(_aggregateId);
+            return this;
+        }
+
+        public DataProviderQueueFunctions InitReadBus()
+        {
+            _publisher = BusBuilder.ForMonitoringReadMessages(_aggregateId);
             return this;
         }
 
@@ -113,6 +122,79 @@ namespace Monitoring.Test.Helper.Queues
             _monitoring.EndDataProvider(_dataProvider, _request, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
+        }
+
+        //**************************
+        //Events
+        //**************************
+        public DataProviderQueueFunctions DataProviderCallEndedEvent()
+        {
+            var eventMessage =
+            new DataProviderEvents().ForDataProviderCallEndedEvent(_aggregateId, _dataProvider, Category.Performance);
+            SendToBus(eventMessage);
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public DataProviderQueueFunctions DataProviderExecutingEvent()
+        {
+            SendToBus(new DataProviderEvents().ForDataProviderExecutingEvent(_aggregateId, _dataProvider, Category.Performance));
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public DataProviderQueueFunctions DataProviderHasConfigurationEvent()
+        {
+            _publisher.SendToBus(new DataProviderEvents().ForDataProviderHasConfigurationEvent(_aggregateId, _dataProvider, Category.Performance));
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public DataProviderQueueFunctions DataProviderHasExecutedEvent()
+        {
+            SendToBus(new DataProviderEvents().ForDataProviderHasExecutedEvent(_aggregateId, _dataProvider, Category.Performance));
+            Thread.Sleep(1000);
+            return this;
+        }
+
+
+        public DataProviderQueueFunctions DataProviderHasFaultEvent()
+        {
+            SendToBus(new DataProviderEvents().ForDataProviderHasFaultEvent(_aggregateId, _dataProvider, Category.Performance));
+            Thread.Sleep(1000); 
+            return this;
+        }
+
+        public DataProviderQueueFunctions DataProviderHasSecurityEvent()
+        {
+            SendToBus(new DataProviderEvents().ForDataProviderHasSecurityEvent(_aggregateId, _dataProvider, Category.Performance));
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public DataProviderQueueFunctions DataProviderasBeenTransformedEvent()
+        {
+            SendToBus(new DataProviderEvents().ForDataProviderasBeenTransformedEvent(_aggregateId, _dataProvider, Category.Performance));
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public DataProviderQueueFunctions DataProviderIsCalledEvent()
+        {
+            SendToBus(new DataProviderEvents().ForDataProviderIsCalledEvent(_aggregateId, _dataProvider,
+                Category.Performance));
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        private void SendToBus<T>(T message) where T : class
+        {
+            System.Threading.Tasks.Task.Run(() => SendMessagesAsync(message));
+        }
+
+        private void SendMessagesAsync<T>(T message) where T : class
+        {
+            _publisher.SendToBus(message);
         }
     }
 }

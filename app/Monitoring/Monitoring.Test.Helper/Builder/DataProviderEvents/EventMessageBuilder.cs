@@ -9,59 +9,59 @@ namespace Monitoring.Test.Helper.Builder.DataProviderEvents
         public DataProviderCallEndedEvent ForDataProviderCallEndedEvent(Guid aggreateId, DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderCallEndedEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderCallEndedEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderExecutingEvent ForDataProviderExecutingEvent(Guid aggreateId, DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderExecutingEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderExecutingEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderHasConfigurationEvent ForDataProviderHasConfigurationEvent(Guid aggreateId,
             DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderHasConfigurationEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderHasConfigurationEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderHasExecutedEvent ForDataProviderHasExecutedEvent(Guid aggreateId, DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderHasExecutedEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderHasExecutedEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderHasFaultEvent ForDataProviderHasFaultEvent(Guid aggreateId, DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderHasFaultEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderHasFaultEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderHasSecurityEvent ForDataProviderHasSecurityEvent(Guid aggreateId, DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderHasSecurityEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderHasSecurityEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderasBeenTransformedEvent ForDataProviderasBeenTransformedEvent(Guid aggreateId,
             DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderasBeenTransformedEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderasBeenTransformedEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
 
         public DataProviderIsCalledEvent ForDataProviderIsCalledEvent(Guid aggreateId, DataProvider dataProvider,
             Category category)
         {
-            return new DataProviderIsCalledEvent(aggreateId, dataProvider, category, string.Empty, string.Empty,
-                string.Empty, DateTime.UtcNow, true);
+            return new DataProviderIsCalledEvent(aggreateId, dataProvider, category, "{}", "{}",
+                "{}", DateTime.UtcNow, true);
         }
     }
 }
