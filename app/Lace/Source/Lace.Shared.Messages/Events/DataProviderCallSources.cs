@@ -1,14 +1,15 @@
 ﻿using System;
+using DataPlatform.Shared.Messaging;
 using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Events
 {
-    public interface IDataProviderEvent
+    public interface IDataProviderEvent : IPublishableMessage
     {
         
     }
 
-    public interface IDataProviderNotUsedEvent
+    public interface IDataProviderNotUsedEvent : IPublishableMessage
     {
         
     }

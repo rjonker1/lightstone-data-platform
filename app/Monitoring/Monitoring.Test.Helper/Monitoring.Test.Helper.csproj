@@ -101,6 +101,7 @@
     <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
     <Compile Include="Messages\MessageQueueing.cs" />
     <Compile Include="Mothers\BusFactory.cs" />
+    <Compile Include="Queues\QueueFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
