@@ -5,10 +5,10 @@ namespace DataPlatform.Shared.Enums
     public enum MonitoringSource
     {
         [EnumMember]
-        Lace,
+        Lace = 1,
         [EnumMember]
-        UserManagement,
+        UserManagement = 2,
         [EnumMember]
-        PackageBuilder
+        PackageBuilder = 3
     }
 }
