@@ -38,6 +38,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Models\MonitoringStorageModel.cs" />
+    <Compile Include="Models\DataProviders\DataProviderMonitoringModel.cs" />
     <Compile Include="ReadModelEntity.cs" />
   </ItemGroup>
   <ItemGroup />
