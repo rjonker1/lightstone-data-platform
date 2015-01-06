@@ -13,8 +13,6 @@ namespace Monitoring.Read.Persistence.Mappings
             Map(x => x.Payload).Length(2147483647);
             Map(x => x.Source).Length(20);
             Map(x => x.Date);
-            Map(x => x.Originator);
-            Map(x => x.OrignalMessageId);
             Map(x => x.TimeStamp);
         }
     }

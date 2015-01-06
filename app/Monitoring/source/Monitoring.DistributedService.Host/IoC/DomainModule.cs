@@ -6,7 +6,6 @@ using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
 using DataPlatform.Shared.Messaging;
-using Lace.Shared.Monitoring.Messages.Events;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
 using Monitoring.Write.Service;

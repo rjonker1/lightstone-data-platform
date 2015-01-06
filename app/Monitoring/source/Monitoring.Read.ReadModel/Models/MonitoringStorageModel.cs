@@ -13,8 +13,8 @@ namespace Monitoring.Read.ReadModel.Models
 
         }
 
-        public virtual string Originator { get; set; }
-        public virtual string OrignalMessageId { get; set; }
+        //public virtual string Originator { get; set; }
+        //public virtual string OrignalMessageId { get; set; }
         public virtual byte[] Payload { get; set; }
         public virtual int Source { get; set; }
         public virtual DateTime Date { get; set; }
