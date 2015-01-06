@@ -37,5 +37,15 @@ namespace PackageBuilder.Web.UI.Tests.DataProviders
             return ngDriver.FindElements(NgBy.Repeater(query)).Count;
         }
 
+        public void EditDataProvider(string dataProviderName)
+        {
+            ngDriver.FindElement(By.Id(dataProviderName + "_edit")).Click();
+        }
+
+        public string GetDataProviderMetaAttribute(string dataProviderName, string attributeName)
+        {
+            return ngDriver.FindElement(By.Id(dataProviderName + "_edit")).GetAttribute(attributeName);
+        }
+
     }
 }
