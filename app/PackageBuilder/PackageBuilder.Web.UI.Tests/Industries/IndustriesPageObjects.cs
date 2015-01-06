@@ -25,6 +25,13 @@ namespace PackageBuilder.Web.UI.Tests.Industries
             return ngDriver.FindElements(NgBy.Repeater("(rowRenderIndex, row) in rowContainer.renderedRows track by row.uid")).Count;
         }
 
+        public void AddIndustry(string industryName)
+        {
+            
+            ngDriver.FindElement(By.Id("industry_add")).SendKeys(industryName);
+            ngDriver.FindElement(By.Id("btn_industry_add")).Click();
+        }
+
 
     }
 }
