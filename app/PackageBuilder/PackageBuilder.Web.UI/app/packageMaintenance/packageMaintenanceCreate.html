@@ -47,7 +47,8 @@
                 </a>
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                    <div class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
                 </div>
             </div>
 
@@ -86,7 +87,8 @@
                 </a>
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                    <div class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
                 </div>
             </div>
 
@@ -123,8 +125,8 @@
                         </a>
                         <div>
                             <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
-                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">**{{subDF.name}}</div>
-                            <div ng-if="subDF.label.length > 0" class="col-md-6">**{{subDF.label}}</div>
+                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">{{subDF.name}}</div>
+                            <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
                         </div>
                     </div>
                     <div class="col-md-2"></div>
@@ -228,7 +230,7 @@
                                         <div multi-select
                                              input-model="industries"
                                              button-label="name"
-                                             item-label="name maker"
+                                             item-label="name"
                                              max-labels="1"
                                              tick-property="isSelected"
                                              output-model="selectedFields"

@@ -46,66 +46,107 @@
             $location.path('/packages');
         };
 
-        $scope.filterIndustry = function (fields) {
+        $scope.filterIndustry = function (field) {
 
-            if (filterVal != 'All') {
-                return fields.industry === filterVal;
+            var fieldIndustries = field.industries;
+
+            for (var i = 0; i < fieldIndustries.length; i++) {
+
+                for (var j = 0; j < filterVal.length; j++) {
+
+                    if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
+
+                        return field;
+                    }
+
+                }
+
             }
 
-            return fields;
+            return null;
         };
 
-        $scope.filterData = function (filter) {
+        $scope.filterData = function (filterIndustries) {
 
-            filterVal = filter.name;
+            filterVal = filterIndustries;
         }
 
         $scope.total = function () {
 
-            var rspEdit = angular.element(document.getElementById('rsp'));
+            var rspCreate = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
             var items = null;
-            var cos = null;
 
             try {
-                
-                items = $scope.dataProvsPkg.Package[0].dataProviders;
-                cos = $scope.dataProvsPkg.Package[0].costOfSale;
+
+                items = $scope.dataProvsPkg.Package[0].dataProviders; //Require array type for Package due to response build-up of NancyFx
+                console.log(items);
+
             } catch (e) {
 
-            } 
+                //console.log(e.message);
+            }
 
-            if ( items != null ) {
+            if (items != null) {
 
-                for (var i = 0; i < items.length; i++) { 
+                for (var i = 0; i < items.length; i++) {
 
                     var listItem = items[i];
 
                     switch (listItem.fieldLevelCostPriceOverride) {
                         case true:
-
+                            //Tier 1
                             for (var x = 0; x < (listItem.dataFields).length; x++) {
 
                                 if (listItem.dataFields[x].isSelected === true) {
 
-                                    valueTotal += listItem.dataFields[x].price;
-                                    //return valueTotal;
-                                }
+                                    var parent = listItem.dataFields[x];
+                                    var children = listItem.dataFields[x].dataFields;
 
+                                    if (children.length > 0) {
+
+                                        for (var m = 0; m < children.length; m++) {
+
+                                            children[m].isSelected = false;
+
+                                            //subChildren override
+                                            if (children[m].dataFields.length > 0) {
+
+                                                for (var n = 0; n < children[m].dataFields.length; n++) {
+
+                                                    children[m].dataFields[n].isSelected = false;
+                                                }
+                                            }
+
+                                        }
+                                    }
+
+                                    valueTotal += parent.price;
+                                }
+                                //Tier 2
                                 for (var j = 0; j < (listItem.dataFields[x].dataFields).length; j++) {
 
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
-                                        valueTotal += listItem.dataFields[x].dataFields[j].price;
-                                        //return valueTotal;
-                                    }
+                                        var child = listItem.dataFields[x].dataFields[j];
+                                        var subChildren = listItem.dataFields[x].dataFields[j].dataFields;
 
+                                        if (subChildren.length > 0) {
+
+                                            for (var l = 0; l < subChildren.length; l++) {
+
+                                                subChildren[l].isSelected = false;
+                                            }
+                                        }
+
+                                        valueTotal += child.price;
+                                    }
+                                    //Tier 3
                                     for (var k = 0; k < (listItem.dataFields[x].dataFields[j].dataFields).length; k++) {
 
                                         if (listItem.dataFields[x].dataFields[j].dataFields[k].isSelected === true) {
 
                                             valueTotal += listItem.dataFields[x].dataFields[j].dataFields[k].price;
-                                            break;
                                         }
                                     }
                                 }
@@ -128,7 +169,6 @@
                                     if (listItem.dataFields[x].dataFields[j].isSelected === true) {
 
                                         valueTotal += listItem.costOfSale;
-                                        break;
                                     }
                                 }
                             }
@@ -142,23 +182,34 @@
                 }
             }
 
-            if (cos != null) {
+            $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
 
-                $scope.dataProvsPkg.Package[0].costOfSale = valueTotal;
-            }
-
-            if (valueTotal > rspEdit[0].value) {
+            if (valueTotal > rspCreate[0].value) {
 
                 $scope.warning = true;
-                $scope.rspEditStyle = { 'color': 'red' };
+                $scope.rspCreateStyle = { 'color': 'red' };
             } else {
 
                 $scope.warning = false;
-                $scope.rspEditStyle = { 'color': 'none' };
+                $scope.rspCreateStyle = { 'color': 'none' };
             }
 
             return valueTotal;
         };
+
+        $scope.totalChildren = function (parent, children) {
+
+            var totalChildrenVal = 0;
+
+            for (var i = 0; i < children.length; i++) {
+
+                totalChildrenVal += children[i].price;
+            }
+
+            parent.price = totalChildrenVal;
+
+            return totalChildrenVal;
+        }
 
 
         activate();
@@ -217,7 +268,17 @@
             return datacontext.getIndustries().then(function (response) {
 
                 $scope.industries = response;
-                $scope.filteredConstraint = $scope.industries[0];
+                //$scope.filteredConstraint = $scope.industries[0];
+
+                var bootFilters = [];
+
+                for (var i = 0; i < $scope.industries.length; i++) {
+
+                    $scope.industries[i].isSelected = true;
+                    bootFilters.push($scope.industries[i]);
+                }
+
+                $scope.filterData(bootFilters);
             });
         }
 
