@@ -6,9 +6,11 @@ using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class DataProviderHandler : IHandleMessages<DataProviderExecutingCommand>, IHandleMessages<DataProviderHasBeenConfiguredCommand>,
+    public class DataProviderHandler : IHandleMessages<DataProviderExecutingCommand>,
+        IHandleMessages<DataProviderHasBeenConfiguredCommand>,
         IHandleMessages<DataProviderHasEndedCommand>, IHandleMessages<DataProviderHasExecutedCommand>,
-        IHandleMessages<DataProviderHasFaultCommand>, IHandleMessages<DataProviderHasSecurityCommand>, IHandleMessages<DataProviderResponseTransformedCommand>, IHandleMessages<DataProviderWasCalledCommand>
+        IHandleMessages<DataProviderHasFaultCommand>, IHandleMessages<DataProviderHasSecurityCommand>,
+        IHandleMessages<DataProviderResponseTransformedCommand>, IHandleMessages<DataProviderWasCalledCommand>
     {
         private readonly IRepository _repository;
 
@@ -23,7 +25,8 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderExecutingCommand message)
         {
-            var @event = new DataProviderFromLace(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            var @event = new MonitoringEvents(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -31,9 +34,10 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderHasExecutedCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.Executed(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -41,9 +45,10 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderWasCalledCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.Calling(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -51,9 +56,10 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderHasEndedCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.Called(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -61,9 +67,10 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderHasFaultCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.FaultHappened(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -71,9 +78,10 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderHasBeenConfiguredCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.Configured(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -81,9 +89,10 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderHasSecurityCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.SecurityApplied(message.Command.Id, message.Command.DataProvider, message.Command.Category, message.Command.Message,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+                message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -91,9 +100,9 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderResponseTransformedCommand message)
         {
-            var @event = _repository.GetById<DataProviderFromLace>(message.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
-            @event.ResponseTransformed(message.Command.Id, message.Command.DataProvider, message.Command.Category,
+            @event.Add(message.Command.Id, message.Command.DataProvider, message.Command.Category,
                 message.Command.Message,
                 message.Command.Payload, message.Command.MetaData, message.Command.Date, message.Command.IsJson);
 

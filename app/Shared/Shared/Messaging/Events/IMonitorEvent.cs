@@ -1,7 +1,7 @@
 ﻿using System;
 namespace DataPlatform.Shared.Messaging.Events
 {
-    interface IMonitorEvent : IPublishableMessage
+    public interface IMonitorEvent : IPublishableMessage
     {
         Guid AggregateId { get; }
         DateTime Date { get; }

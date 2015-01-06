@@ -35,7 +35,7 @@ namespace Monitoring.Unit.Tests.DataProviders
                 Category.Performance, "", true);
             _handler.Handle(command);
 
-            var @event = _repository.GetById<DataProviderFromLace>(command.Command.Id);
+            var @event = _repository.GetById<MonitoringEvents>(command.Command.Id);
             @event.ShouldNotBeNull();
             @event.Id.ShouldEqual(_aggregateId);
         }

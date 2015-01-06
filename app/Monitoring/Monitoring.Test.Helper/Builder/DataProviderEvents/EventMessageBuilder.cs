@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Messaging.Events;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Events;
 
