@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using Monitoring.Read.ReadModel.Models.DataProviders;
+using Monitoring.Read.ReadModel.Models;
 using Nancy;
 
 namespace Monitoring.Projection.UI.Modules
@@ -11,7 +11,7 @@ namespace Monitoring.Projection.UI.Modules
         {
             Get["/"] = _ =>
             {
-                var model = new MonitoringDataProviderModel(Guid.NewGuid());
+                var model = new MonitoringStorageModel(Guid.NewGuid());
                 return View["Index", model];
             };
         }

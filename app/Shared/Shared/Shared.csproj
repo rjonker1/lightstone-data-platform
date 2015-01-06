@@ -67,6 +67,7 @@
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
+    <Compile Include="Enums\DataProviderCommandSource.cs" />
     <Compile Include="Enums\DataProviderName.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />

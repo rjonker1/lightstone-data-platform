@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Linq;
-using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Read.Denormalizer.DataProvider;
-using Monitoring.Read.ReadModel.Models.DataProviders;
-using Monitoring.Test.Helper.Builder.DataProviderEvents;
 using Monitoring.Test.Helper.Fakes;
 using Xunit.Extensions;
 

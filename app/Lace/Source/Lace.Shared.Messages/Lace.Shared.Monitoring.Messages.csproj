@@ -72,7 +72,6 @@
     <Compile Include="Publisher\CommandMessageFactory.cs" />
     <Compile Include="RabbitMQ\BusFactory.cs" />
     <Compile Include="Commands\DataProviderHasEndedCommand.cs" />
-    <Compile Include="Events\DataProviderCallSources.cs" />
     <Compile Include="Shared\MonitoringMessageSender.cs" />
   </ItemGroup>
   <ItemGroup>
