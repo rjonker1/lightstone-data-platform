@@ -11,6 +11,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         public string Namespace;
         public string DisplayName;
         public double CostOfSale;
+        public bool? IsSelected;
         public IEnumerable<DataFieldOverride> DataFieldOverrides { get; set; }
     }
 }
