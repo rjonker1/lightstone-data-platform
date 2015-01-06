@@ -4,9 +4,9 @@ using Nancy;
 
 namespace Monitoring.Projection.UI.Modules
 {
-    public class HomeModule : NancyModule
+    public class IndexModule : NancyModule
     {
-        public HomeModule()
+        public IndexModule()
         {
             Get["/"] = _ =>
             {

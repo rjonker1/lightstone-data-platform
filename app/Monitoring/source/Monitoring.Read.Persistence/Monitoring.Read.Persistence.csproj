@@ -45,7 +45,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Mappings\DataProviderMonitoringMaps.cs" />
-    <Compile Include="Mappings\DataProviderMaps\DataProviderMonitoringMaps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
