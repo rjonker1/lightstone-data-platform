@@ -64,9 +64,9 @@ namespace Monitoring.DistributedService.Host.IoC
                 {
                     var eventMessage = commit.Events[i];
                     var busMessage = eventMessage.Body as IPublishableMessage;
-                    AppendHeaders(busMessage, commit.Headers, bus); // optional
-                    AppendHeaders(busMessage, eventMessage.Headers, bus); // optional
-                    AppendVersion(commit, i, bus); // optional
+                    AppendHeaders(busMessage, commit.Headers, bus);
+                    AppendHeaders(busMessage, eventMessage.Headers, bus);
+                    AppendVersion(commit, i, bus);
                     bus.Publish(busMessage);
                 }
             }

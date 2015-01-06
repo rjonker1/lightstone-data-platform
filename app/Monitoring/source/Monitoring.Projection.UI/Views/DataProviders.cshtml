@@ -1,0 +1,35 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Monitoring.Projection.UI.Infrastructure.Dto.DataProviderResponseDto>>
+@{
+    Layout = "_Layout.cshtml";
+}
+<table>
+    <thead>
+        <tr>
+            <th>Aggregate Id</th>
+            <th>Data Provider</th>
+            <th>Message</th>
+            <th>Category</th>
+            <th>Payload</th>
+            <th>Metadata</th>
+            <th>Date</th>
+            <th>Time Stamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var response in @Model)
+            {
+                <tr>
+                    <td>@response.Id</td>
+                    <td>@response.DataProvider</td>
+                    <td>@response.Message</td>
+                    <td>@response.Category</td>
+                    <td>@response.Payload</td>
+                    <td>@response.Metadata</td>
+                    <td>@response.Date</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

@@ -1,11 +1,15 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Monitoring.Read.ReadModel.Models.DataProviders.MonitoringDataProviderModel>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Monitoring.Read.ReadModel.Models.MonitoringStorageModel>
 
 @{
     Layout = "_Layout.cshtml";
 }
-<table>
-    <tr>
-        <td>Id</td>
-        <td>@Model.Id</td>
-    </tr>
-</table>
+<div>Monitoring</div>
+<header>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="/DataProviders">Data Providers</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

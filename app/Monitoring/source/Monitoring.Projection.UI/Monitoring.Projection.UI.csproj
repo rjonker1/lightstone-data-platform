@@ -40,6 +40,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.435\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -52,6 +58,10 @@
     <Reference Include="Nancy.ViewEngines.Razor, Version=0.23.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Nancy.Viewengines.Razor.0.23.2\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -78,6 +88,7 @@
     <Content Include="Views\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
+    <Content Include="Views\DataProviders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -92,7 +103,23 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Core\Contracts\Handlers\IHandleDataProviderCommands.cs" />
+    <Compile Include="Core\Contracts\Repositories\IDataProviderRepository.cs" />
+    <Compile Include="Core\Contracts\Repositories\IQueryStorage.cs" />
+    <Compile Include="Core\Contracts\Services\ICallDataProviderService.cs" />
+    <Compile Include="Core\Extensions\JsonExtensions.cs" />
+    <Compile Include="Infrastructure\Commands\DataProviderCommands.cs" />
+    <Compile Include="Infrastructure\Dto\DataProviderObjects.cs" />
+    <Compile Include="Infrastructure\Handlers\DataProviderHandler.cs" />
+    <Compile Include="Infrastructure\Repository\DataProviderRepository.cs" />
+    <Compile Include="Infrastructure\Repository\Repository.cs" />
+    <Compile Include="Infrastructure\Services\DataProviderService.cs" />
+    <Compile Include="Modules\DataProviderModule.cs" />
+    <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Infrastructure\Repository\Framework\Connection\ConnectionFactory.cs" />
+    <Compile Include="Infrastructure\Repository\Framework\Orm\Dapper.cs" />
+    <Compile Include="Infrastructure\Repository\SelectStatements.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monitoring.Projection\Monitoring.Projection.csproj">
@@ -103,6 +130,9 @@
       <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
       <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
