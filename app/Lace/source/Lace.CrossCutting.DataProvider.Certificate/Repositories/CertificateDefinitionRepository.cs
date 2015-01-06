@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto;
 using Lace.Shared.Extensions;
 
-namespace Lace.CrossCutting.DataProvider.Certificate.Repositories
+namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Repositories
 {
     public class CertificateRepository : IReadOnlyRepository<CoOrdinateCertificate>
     {

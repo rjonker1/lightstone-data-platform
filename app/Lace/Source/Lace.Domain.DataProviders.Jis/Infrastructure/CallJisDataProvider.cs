@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
 using Common.Logging;
-using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
+using DataPlatform.Shared.Enums;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Factory;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -11,7 +12,6 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
     public class CallJisDataProvider : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private const DataProvider Provider = DataProvider.Jis;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Jis;
 
         private readonly ILaceRequest _request;
         private readonly ISetupCertificateRepository _repository;

@@ -1,4 +1,4 @@
-﻿namespace Lace.CrossCutting.DataProvider.Certificate.Core.Contracts
+﻿namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts
 {
     public interface IDefineTheCertificate
     {

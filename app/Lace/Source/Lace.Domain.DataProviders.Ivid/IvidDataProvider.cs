@@ -31,13 +31,13 @@ namespace Lace.Domain.DataProviders.Ivid
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Ivid);
-                monitoring.StartDataProvider(DataProvider.Ivid, _request.ObjectToJson(), stopWatch);
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Ivid);
+                monitoring.StartDataProvider(DataProviderCommandSource.Ivid, _request.ObjectToJson(), stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
 
-                monitoring.EndDataProvider(DataProvider.Ivid, _request.ObjectToJson(), stopWatch);
+                monitoring.EndDataProvider(DataProviderCommandSource.Ivid, _request.ObjectToJson(), stopWatch);
 
                 if (response.IvidResponse == null)
                     CallFallbackSource(response, monitoring);

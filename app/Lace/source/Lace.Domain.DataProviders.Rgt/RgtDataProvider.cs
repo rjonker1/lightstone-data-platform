@@ -1,5 +1,5 @@
 ﻿using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Repositories.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
@@ -34,8 +34,8 @@ namespace Lace.Domain.DataProviders.Rgt
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Rgt);
-                monitoring.StartDataProvider(DataProvider.Rgt, _request.ObjectToJson(), stopWatch);
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
+                monitoring.StartDataProvider(DataProviderCommandSource.Rgt, _request.ObjectToJson(), stopWatch);
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_request,
@@ -46,7 +46,7 @@ namespace Lace.Domain.DataProviders.Rgt
 
                 consumer.ConsumeExternalSource(response, monitoring);
 
-                monitoring.EndDataProvider(DataProvider.Rgt, _request.ObjectToJson(), stopWatch);
+                monitoring.EndDataProvider(DataProviderCommandSource.Rgt, _request.ObjectToJson(), stopWatch);
 
                 if (response.RgtResponse == null && FallBack != null)
                     CallFallbackSource(response, monitoring);

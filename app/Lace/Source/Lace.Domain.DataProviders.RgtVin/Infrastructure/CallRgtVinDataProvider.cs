@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -23,7 +24,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProvider Provider = DataProvider.RgtVin;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.RgtVin;
 
         private readonly ISetupRepository _repository;
         private IEnumerable<Vin> _vins;

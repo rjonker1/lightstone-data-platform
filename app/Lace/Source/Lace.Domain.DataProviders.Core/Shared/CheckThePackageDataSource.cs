@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
             //foreach (var dataSet in package.DataSets)
             //{
-            //    if (dataSet.DataFields.FirstOrDefault(w => w.DataProvider.Id == serviceId) != null) return true;
+            //    if (dataSet.DataFields.FirstOrDefault(w => w.DataProviderCommandSource.Id == serviceId) != null) return true;
             //}
         }
     }

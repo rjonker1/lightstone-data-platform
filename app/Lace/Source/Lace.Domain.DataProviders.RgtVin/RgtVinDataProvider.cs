@@ -34,8 +34,8 @@ namespace Lace.Domain.DataProviders.RgtVin
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.Rgt);
-                monitoring.StartDataProvider(DataProvider.RgtVin, _request.ObjectToJson(), stopWatch);
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
+                monitoring.StartDataProvider(DataProviderCommandSource.RgtVin, _request.ObjectToJson(), stopWatch);
 
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_request,
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.RgtVin
                             CacheConnectionFactory.LocalClient())));
                 consumer.ConsumeExternalSource(response, monitoring);
 
-                monitoring.EndDataProvider(DataProvider.RgtVin, _request.ObjectToJson(), stopWatch);
+                monitoring.EndDataProvider(DataProviderCommandSource.RgtVin, _request.ObjectToJson(), stopWatch);
 
                 if (response.RgtVinResponse == null && FallBack != null)
                     CallFallbackSource(response, monitoring);

@@ -1,9 +1,9 @@
 ﻿using System;
 using Common.Logging;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure;
+using DataPlatform.Shared.Enums;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure;
 using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProvider Provider = DataProvider.Lightstone;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Lightstone;
         private IRetrieveValuationFromMetrics _metrics;
         private IRetrieveCarInformation _carInformation;
 

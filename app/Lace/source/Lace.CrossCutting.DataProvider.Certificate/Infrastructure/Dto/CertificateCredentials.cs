@@ -1,6 +1,6 @@
-﻿using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
+﻿using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts;
 
-namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto
+namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto
 {
     public class CertificateCredentials: IDefineTheCredentials
     {
