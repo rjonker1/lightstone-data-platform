@@ -1,40 +1,4 @@
-﻿<script type="text/ng-template" id="fields_renderer.html">
-
-    <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-    <div class="col-md-6">{{dataField.name}}</div>
-    <div ng-show="provider.fieldLevelCostPriceOverride == true">
-        <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
-    </div>
-
-    <li ng-include="'subFields_renderer.html'"></li>
-
-</script>
-
-<script type="text/ng-template" id="subFields_renderer.html">
-
-    <ol data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: collapsed}" style="padding-top: 35px; list-style-type: none;">
-        <li style="cursor:default" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields">
-
-            <input class="col-md-1" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
-            <div class="col-md-6">{{subDF.name}}</div>
-            <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-2">Price:</label>   <input class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
-            </div>
-
-            <ol ng-if="subDF.dataFields.length > 0" data-nodrag type="category" class="angular-ui-tree" ng-class="{hidden: collapsed}" style="padding-top: 35px; list-style-type: none;">
-                <li style="cursor:default" class="row category-title angular-ui-tree angular-ui-tree-handle"
-                    ng-repeat="dataField in subDF.dataFields" ng-include="'fields_renderer.html'"></li>
-            </ol>
-
-        </li>
-    </ol>
-
-
-
-</script>
-
-
-
+﻿<!-- TOP lvl -->
 <script type="text/ng-template" id="proivder_nodes_renderer.html">
 
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
@@ -62,8 +26,141 @@
         </div>
     </div>
     <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree" ng-model="provider.dataFields" data-nodrag type="category" ng-class="{hidden: collapsed}">
-        <li ui-tree-node style="cursor:default" class="row category-title angular-ui-tree-handle" ng-repeat="dataField in provider.dataFields | filter:filterIndustry"
-            ng-include="'fields_renderer.html'">
+        <li ui-tree-node style="cursor:default" class="category-title " ng-repeat="dataField in provider.dataFields | filter:filterIndustry"
+            ng-include="'parentFields_renderer.html'">
+
+        </li>
+    </ol>
+
+</script>
+
+<!-- PARENT -->
+<script type="text/ng-template" id="parentFields_renderer.html">
+
+    <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
+        <div class="row">
+
+            <div class="col-md-4">
+                <!-- ng-if="dataField.dataFields.length > 0"  -->
+                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
+                </a>
+                <div>
+                    <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
+                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                <label class="col-md-4">Cost:</label>
+
+                <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
+                       value="{{totalChildren(dataField, dataField.dataFields)}}" />
+
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+            </div>
+        </div>
+    </div>
+
+    <ol ui-tree-nodes style="cursor:default" class="angular-ui-tree" ng-model="dataField.dataFields" data-nodrag type="category" ng-class="{hidden: !collapsed}">
+        <li ui-tree-node style="cursor:default" class="category-title " ng-repeat="dataField in dataField.dataFields | filter:filterIndustry"
+            ng-include="'childrenFields_renderer.html'">
+
+        </li>
+    </ol>
+
+</script>
+
+<!-- Children -->
+<script type="text/ng-template" id="childrenFields_renderer.html">
+
+    <div style="cursor:default;" ng-class="{'toggled-child-selected': collapsed, 'toggled-child-rest': !collapsed}" class="group-title angular-ui-tree-handle" data-nodrag>
+        <div class="row">
+
+            <div class="col-md-4">
+                <!-- ng-if="dataField.dataFields.length > 0"  -->
+                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                </a>
+                <div>
+                    <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
+                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                <label class="col-md-4">Cost:</label>
+
+                <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
+                       value="{{totalChildren(dataField, dataField.dataFields)}}" />
+
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+            </div>
+        </div>
+    </div>
+
+    <li ng-include="'subChildrenFields_renderer.html'"></li>
+</script>
+
+<!-- SubChildren -->
+
+<script type="text/ng-template" id="subChildrenFields_renderer.html">
+
+    <ol data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: !collapsed}">
+        <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields">
+
+
+            <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
+                <div style="margin-left: -15px; margin-right: 0;" class="row">
+
+                    <div class="col-md-4">
+                        <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                        </a>
+                        <div>
+                            <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
+                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">{{subDF.name}}</div>
+                            <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                        <label class="col-md-4">Cost:</label>
+
+                        <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
+                               value="{{totalChildren(subDF, subDF.dataFields)}}" />
+
+                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
+                    </div>
+                </div>
+            </div>
+
+            <!--<ol ng-if="subDF.dataFields.length > 0" data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: collapsed}">
+                <li style="cursor:default; margin-left: -15px; margin-right: 0;" class="row category-title angular-ui-tree angular-ui-tree-handle"
+                    ng-repeat="dataField in subDF.dataFields">
+
+                    <div ng-if="dataField.dataFields.length <= 0">
+                        <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
+                        <div class="col-md-6">***{{dataField.name}}</div>
+                        <div ng-show="provider.fieldLevelCostPriceOverride == true">
+                            <label class="col-md-2">Cost:</label>
+
+                            <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
+                                   value="{{totalChildren(dataField, dataField.dataFields)}}" />
+
+                            <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+                        </div>
+                    </div>
+
+                </li>
+
+            </ol>-->
 
         </li>
     </ol>
@@ -130,9 +227,20 @@
                                 <div>
                                     <label>Package Industry:</label>
                                     <div>
-                                        <select class="form-control" ng-model="dataProvsPkg.Package[0].industry" ng-selected="dataProvsPkg.Package.industry">
-                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                        </select>
+                                        <!--<select class="form-control" ng-model="dataProvsPkg.Package[0].industry" ng-selected="dataProvsPkg.Package.industry">
+                                                <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                            </select>-->
+                                        
+                                        <div multi-select
+                                             input-model="industries"
+                                             button-label="name"
+                                             item-label="name maker"
+                                             max-labels="1"
+                                             tick-property="isSelected"
+                                             output-model="selectedFields"
+                                             on-item-click="filterData( selectedFields )">
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -174,12 +282,6 @@
 
                                 <div class="col-md-4" style="padding-bottom: 20px;">
                                     <div style="float: left;"><h3>Data Providers</h3></div>
-                                    <div style="float: right; text-align: right;">
-                                        <label>Filter Data Providers fields by Industry:</label>
-                                        <select class="form-control" ng-model="filteredConstraint"
-                                                ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>
-                                    </div>
-
                                 </div>
 
                                 <div class="col-md-4">

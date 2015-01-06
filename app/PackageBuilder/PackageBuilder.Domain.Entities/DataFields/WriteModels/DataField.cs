@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         public Type Type { get; internal set; }
         [DataMember]
         public IEnumerable<IDataField> DataFields { get; internal set; }
-        
+
         //todo: make private
         public DataField()
         {
@@ -71,9 +71,11 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             //Type = type;
         }
 
-        public void SetPrice(double costPrice)
+        public void OverrideValuesFromPackage(double costPrice, bool? selected)
         {
             CostOfSale = costPrice;
+            IsSelected = selected;
         }
+
     }
 }
