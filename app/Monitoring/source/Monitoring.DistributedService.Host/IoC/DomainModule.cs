@@ -85,7 +85,7 @@ namespace Monitoring.DistributedService.Host.IoC
         }
         private static void AppendVersion(Commit commit, int index, ISendOnlyBus bus)
         {
-            var busMessage = commit.Events[index].Body as IDataProviderEvent;
+            var busMessage = commit.Events[index].Body as IPublishableMessage;
             bus.SetMessageHeader(busMessage, AggregateIdKey, commit.StreamId.ToString());
             bus.SetMessageHeader(busMessage, CommitVersionKey, commit.StreamRevision.ToString());
             bus.SetMessageHeader(busMessage, EventVersionKey, GetSpecificEventVersion(commit, index).ToString());

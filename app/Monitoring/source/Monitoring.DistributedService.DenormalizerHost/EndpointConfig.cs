@@ -17,10 +17,10 @@ namespace Monitoring.DistributedService.DenormalizerHost
             configuration.EndpointName("DataPlatform.Monitoring.DenormalizerHost");
 
             configuration.Conventions()
-                 .DefiningCommandsAs(
-                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
+                 //.DefiningCommandsAs(
+                 //    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                  .DefiningEventsAs(
-                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
+                     c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DenormalizerHostModule());
