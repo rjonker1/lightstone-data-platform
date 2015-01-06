@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonDomain.Persistence;
+using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Publisher;
 using Monitoring.DomainModel.DataProviders;
@@ -31,7 +32,7 @@ namespace Monitoring.Unit.Tests.DataProviders
         public void then_monitoring_data_provider_executing_command_must_be_handled()
         {
             var command = CommandMessageFactory.StartDataProvider(_aggregateId,
-                Lace.Shared.Monitoring.Messages.Core.DataProvider.Ivid, string.Empty,
+                DataProviderCommandSource.Ivid, string.Empty,
                 Category.Performance, "", true);
             _handler.Handle(command);
 
