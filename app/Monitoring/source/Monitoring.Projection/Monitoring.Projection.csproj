@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Monitoring.Projection</RootNamespace>
-    <AssemblyName>Monitoring.Projection</AssemblyName>
+    <AssemblyName>Lightstone.DataPlatform.Monitoring.Projection</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
@@ -41,10 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Core\Contracts\IDataProviderProjection.cs.old" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Core\Contracts\IProjection.cs" />
     <Compile Include="Core\Models\DataProviders\DataProviders.cs" />
     <Compile Include="Core\Models\DataProviders\ElapsedTime.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
