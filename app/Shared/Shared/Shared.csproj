@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +67,9 @@
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
+    <Compile Include="Enums\DataProviderCommandSource.cs" />
     <Compile Include="Enums\DataProviderName.cs" />
+    <Compile Include="Enums\MonitoringSource.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />

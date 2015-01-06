@@ -7,7 +7,7 @@ using Monitoring.Domain.Core.Contracts;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
 using Monitoring.Read.Denormalizer.DataProvider;
-using Monitoring.Read.Persistence.Mappings.DataProviderMaps;
+using Monitoring.Read.Persistence.Mappings;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using Configuration = NHibernate.Cfg.Configuration;
@@ -40,7 +40,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(
                         ConfigurationManager.ConnectionStrings["Monitoring.ReadModel"].ConnectionString))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MonitoringDataProviderMap>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MonitoringMap>())
                 .ExposeConfiguration(BuildMonitoringReadSchema).BuildSessionFactory();
         }
 

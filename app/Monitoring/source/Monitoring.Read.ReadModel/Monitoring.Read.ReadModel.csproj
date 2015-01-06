@@ -37,7 +37,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Models\DataProviders\DataProviderMonitoringModel.cs" />
+    <Compile Include="Models\MonitoringStorageModel.cs" />
     <Compile Include="ReadModelEntity.cs" />
   </ItemGroup>
   <ItemGroup />
