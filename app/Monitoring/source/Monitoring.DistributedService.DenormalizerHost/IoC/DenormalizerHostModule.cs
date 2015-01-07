@@ -6,7 +6,7 @@ using Monitoring.DistributedService.DenormalizerHost.Storage;
 using Monitoring.Domain.Core.Contracts;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
-using Monitoring.Read.Denormalizer.DataProvider;
+using Monitoring.Read.Denormalizer;
 using Monitoring.Read.Persistence.Mappings;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;

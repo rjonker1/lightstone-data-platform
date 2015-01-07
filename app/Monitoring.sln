@@ -50,7 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projection", "Projection", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Projection", "Monitoring\source\Monitoring.Projection\Monitoring.Projection.csproj", "{AAA626BB-1436-461E-9426-13A320F594AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Projection.UI", "Monitoring\source\Monitoring.Projection.UI\Monitoring.Projection.UI.csproj", "{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Dashboard.UI", "Monitoring\source\Monitoring.Dashboard.UI\Monitoring.Dashboard.UI.csproj", "{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

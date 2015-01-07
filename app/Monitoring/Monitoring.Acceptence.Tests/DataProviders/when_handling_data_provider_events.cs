@@ -1,5 +1,4 @@
-﻿using Monitoring.Read.Denormalizer.DataProvider;
-using Xunit.Extensions;
+﻿using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.DataProviders
 {

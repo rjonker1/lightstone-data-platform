@@ -6,6 +6,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     [Serializable]
     public class CommandDto
     {
+
         public Guid Id { get; private set; }
         public MonitoringSource Source { get; private set; }
         public string Payload { get; private set; }

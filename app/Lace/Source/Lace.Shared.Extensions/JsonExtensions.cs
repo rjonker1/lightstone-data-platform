@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Lace.Shared.Extensions
 {
@@ -17,6 +19,15 @@ namespace Lace.Shared.Extensions
             {
                 return string.Empty;
             }
+        }
+
+        public static string AsJsonString(this object value)
+        {
+            if (value == null) return string.Empty;
+
+            return JsonConvert.SerializeObject(value, Formatting.Indented,
+                new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()});
+
         }
     }
 }
