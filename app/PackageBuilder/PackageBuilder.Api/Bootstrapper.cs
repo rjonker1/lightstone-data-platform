@@ -1,5 +1,4 @@
-﻿using System;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Nancy;
 using Nancy.Bootstrapper;
@@ -8,11 +7,11 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.States.Commands;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
+using DataPlatform.Shared.Helpers.Extensions;
 
 namespace PackageBuilder.Api
 {
@@ -26,12 +25,17 @@ namespace PackageBuilder.Api
             base.ApplicationStartup(container, pipelines);
 
             var handler = container.Resolve<IHandleMessages>();
+            
+            ImportInitialData(handler);
+        }
 
-            // Import Industries, States and DataProviders
-            handler.Handle(new CreateIndustry(new Guid(), "All", true));
-            foreach (var state in (StateName[]) Enum.GetValues(typeof (StateName)))
-                handler.Handle(new CreateState(Guid.NewGuid(), state));
+        private void ImportInitialData(IHandleMessages handler)
+        {
+            this.Info(() => "Attempting to import required data");
+            handler.Handle(new ImportIndustry());
+            handler.Handle(new ImportState());
             handler.Handle(new ImportDataProvider());
+            this.Info(() => "Successfully imported required data");
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -65,10 +69,16 @@ namespace PackageBuilder.Api
             //};
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
 
-            pipelines.OnError.AddItemToEndOfPipeline((z, a) =>
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                //log.Error("Unhandled error on request: " + context.Request.Url + " : " + a.Message, a);
-                return ErrorResponse.FromException(a);
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(context.Request.Method, context.Request.Url));
+                return null;
+            });
+            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(context.Request.Method, context.Request.Url)));
+            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            {
+                this.Error(() => "Unhandled error on Api request {0}[{1}] => {2}".FormatWith(context.Request.Method, context.Request.Url, exception));
+                return ErrorResponse.FromException(exception);
             });
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);

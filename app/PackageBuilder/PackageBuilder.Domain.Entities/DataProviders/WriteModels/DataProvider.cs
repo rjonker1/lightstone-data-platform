@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Attributes;
 using PackageBuilder.Domain.Entities.DataProviders.Events;
 using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
@@ -107,6 +108,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
             DataFields = @event.DataFields;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);
         }
     }
 }

@@ -24,7 +24,11 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
         {
             var exists = _readRepo.Exists(command.Id, command.Name);
             if (exists)
-                throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
+            {
+                var exception = new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => exception);
+                throw exception;                
+            }
 
             var entity = _writeRepo.GetById(command.Id);
             entity.CreatePackageRevision(command.Id, command.Name, command.Description, command.CostPrice,

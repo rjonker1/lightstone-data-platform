@@ -46,9 +46,9 @@
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.438, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.438\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
@@ -92,6 +92,7 @@
     <Compile Include="IGroupPackage.cs" />
     <Compile Include="IGroupPermission.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
+    <Compile Include="Industries\Commands\ImportIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
     <Compile Include="Industries\WriteModels\Industry.cs" />
     <Compile Include="IPackageAccessControl.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="RolePackage.cs" />
     <Compile Include="RolePermission.cs" />
     <Compile Include="States\Commands\CreateState.cs" />
+    <Compile Include="States\Commands\ImportState.cs" />
     <Compile Include="States\Commands\RenameState.cs" />
     <Compile Include="States\WriteModels\State.cs" />
     <Compile Include="User.cs" />

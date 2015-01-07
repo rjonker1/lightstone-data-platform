@@ -52,9 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.428, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.428\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
@@ -69,12 +69,14 @@
     <Compile Include="CommandHandlers\DataProviders\ImportDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\CreateDataProviderHandler.cs" />
     <Compile Include="CommandHandlers\DataProviders\UpdateDataProviderHandler.cs" />
+    <Compile Include="CommandHandlers\Industries\ImportIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Industries\RenameIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Industries\CreateIndustryHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
     <Compile Include="CommandHandlers\Packages\DeletePackageHandler.cs" />
     <Compile Include="CommandHandlers\Packages\UpdatePackageHandler.cs" />
     <Compile Include="CommandHandlers\States\CreateStateHandler.cs" />
+    <Compile Include="CommandHandlers\States\ImportStateHandler.cs" />
     <Compile Include="CommandHandlers\States\RenameStateHandler.cs" />
     <Compile Include="EventHandlers\DataProviders\DataProviderCreatedHandler.cs" />
     <Compile Include="EventHandlers\DataProviders\DataProviderUpdatedHandler.cs" />

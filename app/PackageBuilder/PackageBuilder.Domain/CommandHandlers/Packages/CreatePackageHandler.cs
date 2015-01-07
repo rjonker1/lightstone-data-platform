@@ -1,5 +1,4 @@
 ﻿using System;
-using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
@@ -24,7 +23,11 @@ namespace PackageBuilder.Domain.CommandHandlers.Packages
         {
             var exists = _readRepo.Exists(command.Id, command.Name);
             if (exists)
-                throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
+            {
+                //throw new LightstoneAutoException("A Package with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => "A Package with the name {0} already exists".FormatWith(command.Name));
+                return;
+            }
 
             var entity = new Package(command.Id, command.Name, command.Description, command.Industries, command.CostPrice, command.SalePrice,
                 command.State, 0.1M, command.Owner, command.CreatedDate, command.EditedDate, command.DataProviderValueOverrides);
