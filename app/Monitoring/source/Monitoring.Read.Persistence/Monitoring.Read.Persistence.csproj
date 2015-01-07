@@ -41,8 +41,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\DataProviderMaps\DataProviderMonitoringMaps.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Mappings\DataProviderMonitoringMaps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

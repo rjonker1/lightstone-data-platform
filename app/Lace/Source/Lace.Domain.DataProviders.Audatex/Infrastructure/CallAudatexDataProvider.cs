@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -20,7 +21,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         private GetDataResult _response;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProvider Provider = DataProvider.Audatex;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Audatex;
 
         public CallAudatexDataProvider(ILaceRequest request)
         {

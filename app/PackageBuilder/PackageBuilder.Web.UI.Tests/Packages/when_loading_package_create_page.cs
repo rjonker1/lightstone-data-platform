@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.PhantomJS;
@@ -31,20 +32,20 @@ namespace PackageBuilder.Web.UI.Tests.Packages
         public void should_set_title()
         {
 
-            var dataProvidersPage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
+            var createPackagePage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
 
-            Assert.AreEqual("Package Maintenance - Create", dataProvidersPage.FindByIdWithAttribute("title", "title"));
+            Assert.AreEqual("Package Maintenance - Create", createPackagePage.FindByIdWithAttribute("title", "title"));
         }
         
         [Test]
         public void should_set_states_options_for_package()
         {
 
-            var dataProvidersPage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
+            var createPackagePage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
 
-            dataProvidersPage.selectDropDownByNum(1);
+            createPackagePage.selectDropDownByNum(1);
 
-            var options = dataProvidersPage.ngDriver.FindElements(By.TagName("option"));
+            var options = createPackagePage.ngDriver.FindElements(By.TagName("option"));
 
             foreach (NgWebElement opt in options)
             {
@@ -59,9 +60,29 @@ namespace PackageBuilder.Web.UI.Tests.Packages
         public void should_have_dataproviders_available()
         {
 
-            var dataProvidersPage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
+            var createPackagePage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
 
-            Assert.GreaterOrEqual(dataProvidersPage.GetAvailableDataProviders("provider in providers"), 1);
+            Assert.GreaterOrEqual(createPackagePage.GetAvailableDataProviders("provider in providers"), 1);
+        }
+
+        [Test]
+        public void should_have_create_package_functionality()
+        {
+
+            var createPackagePage = new PackagesPageObjects(driver, common.CONN_STRING + "#/package-maintenance");
+
+            driver.Navigate().GoToUrl(common.CONN_STRING + "#/packages");
+            var countPackagesPre = createPackagePage.GetPackagesCount();
+
+            driver.Navigate().GoToUrl(common.CONN_STRING + "#/package-maintenance");
+            createPackagePage.CreatePackage("**ProtractorTestPackage");
+
+            Thread.Sleep(500);
+
+            driver.Navigate().GoToUrl(common.CONN_STRING + "#/packages");
+            var countPackagesPost = createPackagePage.GetPackagesCount();
+
+            Assert.Less(countPackagesPre, countPackagesPost);
         }
 
     }

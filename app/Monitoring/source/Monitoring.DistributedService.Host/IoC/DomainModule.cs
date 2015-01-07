@@ -6,7 +6,6 @@ using CommonDomain.Core;
 using CommonDomain.Persistence;
 using CommonDomain.Persistence.EventStore;
 using DataPlatform.Shared.Messaging;
-using Lace.Shared.Monitoring.Messages.Events;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
 using Monitoring.Write.Service;
@@ -65,9 +64,9 @@ namespace Monitoring.DistributedService.Host.IoC
                 {
                     var eventMessage = commit.Events[i];
                     var busMessage = eventMessage.Body as IPublishableMessage;
-                    AppendHeaders(busMessage, commit.Headers, bus); // optional
-                    AppendHeaders(busMessage, eventMessage.Headers, bus); // optional
-                    AppendVersion(commit, i, bus); // optional
+                    AppendHeaders(busMessage, commit.Headers, bus);
+                    AppendHeaders(busMessage, eventMessage.Headers, bus);
+                    AppendVersion(commit, i, bus);
                     bus.Publish(busMessage);
                 }
             }
@@ -85,7 +84,7 @@ namespace Monitoring.DistributedService.Host.IoC
         }
         private static void AppendVersion(Commit commit, int index, ISendOnlyBus bus)
         {
-            var busMessage = commit.Events[index].Body as IDataProviderEvent;
+            var busMessage = commit.Events[index].Body as IPublishableMessage;
             bus.SetMessageHeader(busMessage, AggregateIdKey, commit.StreamId.ToString());
             bus.SetMessageHeader(busMessage, CommitVersionKey, commit.StreamRevision.ToString());
             bus.SetMessageHeader(busMessage, EventVersionKey, GetSpecificEventVersion(commit, index).ToString());

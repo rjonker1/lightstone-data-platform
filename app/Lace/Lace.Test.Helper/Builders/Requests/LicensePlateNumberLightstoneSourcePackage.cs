@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;

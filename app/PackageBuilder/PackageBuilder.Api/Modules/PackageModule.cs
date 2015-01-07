@@ -23,8 +23,8 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages"] = parameters =>
                  Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
-            Get["/Package/Get/{id}/{version}"] = parameters =>
-                 Response.AsJson(new { Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) } });
+            Get["/Package/Get/{id}/{version}"] = parameters => 
+                Response.AsJson(new { Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) } });
 
             Post["/Package/Add"] = parameters =>
             {

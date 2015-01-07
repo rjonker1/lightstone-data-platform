@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure;
+using DataPlatform.Shared.Enums;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -22,7 +23,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
-        private const DataProvider Provider = DataProvider.Rgt;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Rgt;
         private readonly DataProviderStopWatch _stopWatch;
         private readonly ISetupRepository _repository;
         private readonly ISetupCarRepository _carRepository;

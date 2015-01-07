@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 
@@ -51,7 +51,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
             catch (Exception ex)
             {
-                _monitoring.DataProviderFault(DataProvider.EntryPoint, string.Format("Error {0}", ex.Message),
+                _monitoring.DataProviderFault(DataProviderCommandSource.EntryPoint, string.Format("Error {0}", ex.Message),
                     request.ObjectToJson());
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());

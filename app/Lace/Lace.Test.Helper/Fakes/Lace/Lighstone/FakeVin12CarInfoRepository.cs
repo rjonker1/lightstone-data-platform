@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Repositories;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Repositories;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Services;
 

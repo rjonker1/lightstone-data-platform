@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;

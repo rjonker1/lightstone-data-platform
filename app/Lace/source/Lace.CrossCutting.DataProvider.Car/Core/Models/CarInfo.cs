@@ -1,4 +1,4 @@
-﻿namespace Lace.CrossCutting.DataProvider.Car.Core.Models
+﻿namespace Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models
 {
     public class CarInfo
     {

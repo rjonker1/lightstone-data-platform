@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Monitoring</title>
+    @RenderSection("Header", false)
+</head>
+<body>
+   <div id="body">
+        @RenderBody()
+    </div>
+    <div id="footer">@RenderSection("Footer",false)</div>
+    <div id="optional">@RenderSection("Optional", false)</div>
+</body>
+</html>

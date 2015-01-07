@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Publisher;
 using NServiceBus;
@@ -20,7 +21,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             RequestId = requestAggregateId;
         }
 
-        public void StartCallingDataProvider(DataProvider dataProvider, string payload,
+        public void StartCallingDataProvider(DataProviderCommandSource dataProvider, string payload,
             DataProviderStopWatch stopWatch)
         {
             var command = CommandMessageFactory.StartCallingDataProviderSource(RequestId, dataProvider, payload,
@@ -29,7 +30,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             stopWatch.Start();
         }
 
-        public void EndCallingDataProvider(DataProvider dataProvider, string payload,
+        public void EndCallingDataProvider(DataProviderCommandSource dataProvider, string payload,
             DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
@@ -38,7 +39,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(command);
         }
 
-        public void StartDataProvider(DataProvider dataProvider, string payload, DataProviderStopWatch stopWatch)
+        public void StartDataProvider(DataProviderCommandSource dataProvider, string payload, DataProviderStopWatch stopWatch)
         {
             var command = CommandMessageFactory.StartDataProvider(RequestId, dataProvider, payload,
                  Category.Performance, "", true);
@@ -46,7 +47,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             stopWatch.Start();
         }
 
-        public void EndDataProvider(DataProvider dataProvider, string payload, DataProviderStopWatch stopWatch)
+        public void EndDataProvider(DataProviderCommandSource dataProvider, string payload, DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
             var command = CommandMessageFactory.StopDataProvider(RequestId, dataProvider, payload,
@@ -54,28 +55,28 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(command);
         }
 
-        public void DataProviderFault(DataProvider dataProvider, string payload, string metadata)
+        public void DataProviderFault(DataProviderCommandSource dataProvider, string payload, string metadata)
         {
             var command = CommandMessageFactory.FaultInDataProvider(RequestId, dataProvider, payload, Category.Fault,
                 metadata, true);
             SendToBus(command);
         }
 
-        public void DataProviderSecurity(DataProvider dataProvider, string payload, string metadata)
+        public void DataProviderSecurity(DataProviderCommandSource dataProvider, string payload, string metadata)
         {
             var command = CommandMessageFactory.SecurityFlagRaisedInDataProvider(RequestId, dataProvider, payload,
                 Category.Security, metadata, true);
             SendToBus(command);
         }
 
-        public void DataProviderConfiguration(DataProvider dataProvider, string payload, string metadata)
+        public void DataProviderConfiguration(DataProviderCommandSource dataProvider, string payload, string metadata)
         {
             var command = CommandMessageFactory.ConfigurationInDataProvider(RequestId, dataProvider, payload,
                 Category.Configuration, metadata, true);
             SendToBus(command);
         }
 
-        public void DataProviderTransformation(DataProvider dataProvider, string payload, string metadata)
+        public void DataProviderTransformation(DataProviderCommandSource dataProvider, string payload, string metadata)
         {
             var command = CommandMessageFactory.TransformationInDataProvider(RequestId, dataProvider, payload,
                 Category.Configuration, metadata, true);
@@ -107,25 +108,25 @@ namespace Lace.Shared.Monitoring.Messages.Shared
     {
         Guid RequestId { get; }
 
-        void StartCallingDataProvider(DataProvider dataProvider, string payload,
+        void StartCallingDataProvider(DataProviderCommandSource dataProvider, string payload,
             DataProviderStopWatch stopWatch);
 
-        void EndCallingDataProvider(DataProvider dataProvider, string payload,
+        void EndCallingDataProvider(DataProviderCommandSource dataProvider, string payload,
             DataProviderStopWatch stopWatch);
 
-        void StartDataProvider(DataProvider dataProvider, string payload, DataProviderStopWatch stopWatch);
+        void StartDataProvider(DataProviderCommandSource dataProvider, string payload, DataProviderStopWatch stopWatch);
 
-        void EndDataProvider(DataProvider dataProvider, string payload, DataProviderStopWatch stopWatch);
+        void EndDataProvider(DataProviderCommandSource dataProvider, string payload, DataProviderStopWatch stopWatch);
 
-        void DataProviderFault(DataProvider dataProvider, string payload, string metadata);
-        void DataProviderSecurity(DataProvider dataProvider, string payload, string metadata);
-        void DataProviderConfiguration(DataProvider dataProvider, string payload, string metadata);
-        void DataProviderTransformation(DataProvider dataProvider, string payload, string metadata);
+        void DataProviderFault(DataProviderCommandSource dataProvider, string payload, string metadata);
+        void DataProviderSecurity(DataProviderCommandSource dataProvider, string payload, string metadata);
+        void DataProviderConfiguration(DataProviderCommandSource dataProvider, string payload, string metadata);
+        void DataProviderTransformation(DataProviderCommandSource dataProvider, string payload, string metadata);
     }
 
     public class StopWatchFactory
     {
-        public Func<DataProvider, DataProviderStopWatch> StopWatchForDataProvider =
+        public Func<DataProviderCommandSource, DataProviderStopWatch> StopWatchForDataProvider =
             provider => new DataProviderStopWatch(provider.ToString());
     }
 }

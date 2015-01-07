@@ -26,7 +26,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             {
                 var dataField = currentDataFields.FirstOrDefault(fld => fld.Namespace.Trim().ToLower() == dataFieldValueOverride.Namespace.Trim().ToLower());
                 if (dataField != null)
-                    dataField.SetPrice(dataFieldValueOverride.CostOfSale);
+                    dataField.OverrideValuesFromPackage(dataFieldValueOverride.CostOfSale, dataFieldValueOverride.IsSelected);
             }
 
             return dataProvider;

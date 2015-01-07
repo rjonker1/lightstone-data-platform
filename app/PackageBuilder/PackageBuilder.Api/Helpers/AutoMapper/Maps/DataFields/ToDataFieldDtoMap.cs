@@ -17,6 +17,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
                 .ConvertUsing<ITypeConverter<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>>();
             Mapper.CreateMap<IDataField, DataProviderFieldItemDto>()
                 .ForMember(d => d.Price, opt => opt.MapFrom(x => x.CostOfSale))
+                .ForMember(d => d.IsSelected, opt => opt.MapFrom(x => x.IsSelected))
                 .ForMember(d => d.Industries, opt => opt.ResolveUsing<IndustryResolver>().ConstructedBy(() => new IndustryResolver(ServiceLocator.Current.GetInstance<IRepository<Industry>>())));
         }
     }

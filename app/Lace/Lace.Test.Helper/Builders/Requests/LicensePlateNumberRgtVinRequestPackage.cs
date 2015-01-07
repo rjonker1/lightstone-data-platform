@@ -13,7 +13,7 @@ namespace Lace.Test.Helper.Builders.Requests
             return LicensePlateSearchPackage;
         }
 
-        //private static DataProvider RgtVin
+        //private static DataProviderCommandSource RgtVin
         //{
         //    get
         //    {

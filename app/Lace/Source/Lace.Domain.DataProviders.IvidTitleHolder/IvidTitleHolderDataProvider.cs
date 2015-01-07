@@ -32,14 +32,14 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.IvidTitleHolder);
-                monitoring.StartDataProvider(DataProvider.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
+                monitoring.StartDataProvider(DataProviderCommandSource.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));
                 consumer.ConsumeExternalSource(response, monitoring);
 
-                monitoring.EndDataProvider(DataProvider.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
+                monitoring.EndDataProvider(DataProviderCommandSource.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
 
                 if (response.IvidTitleHolderResponse == null)
                     CallFallbackSource(response, monitoring);

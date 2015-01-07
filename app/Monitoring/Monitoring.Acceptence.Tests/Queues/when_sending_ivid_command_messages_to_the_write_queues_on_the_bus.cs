@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
@@ -28,7 +29,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         public override void Observe()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProvider.Ivid, _actions, _aggregateId);
+            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Ivid, _actions, _aggregateId);
             queue.TearDown()
                 .Setup()
                 .InitBus()

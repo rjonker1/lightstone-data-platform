@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Publisher;
 using Lace.Shared.Monitoring.Messages.Shared;
@@ -14,7 +15,7 @@ namespace Monitoring.Test.Helper.Queues
         private ISendMonitoringMessages _monitoring;
         private DataProviderMessagePublisher _publisher;
         private readonly string _request;
-        private readonly DataProvider _dataProvider;
+        private readonly DataProviderCommandSource _dataProvider;
         private readonly IHaveQueueActions _actions;
 
         private DataProviderStopWatch _stopWatch;
@@ -22,7 +23,7 @@ namespace Monitoring.Test.Helper.Queues
 
         private readonly Guid _aggregateId;
 
-        public DataProviderQueueFunctions(string request, DataProvider dataProvider, IHaveQueueActions actions, Guid aggregateId)
+        public DataProviderQueueFunctions(string request, DataProviderCommandSource dataProvider, IHaveQueueActions actions, Guid aggregateId)
         { 
             _request = request;
             _dataProvider = dataProvider;
@@ -129,30 +130,28 @@ namespace Monitoring.Test.Helper.Queues
         //**************************
         public DataProviderQueueFunctions DataProviderCallEndedEvent()
         {
-            var eventMessage =
-            new DataProviderEvents().ForDataProviderCallEndedEvent(_aggregateId, _dataProvider, Category.Performance);
-            SendToBus(eventMessage);
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions DataProviderExecutingEvent()
         {
-            SendToBus(new DataProviderEvents().ForDataProviderExecutingEvent(_aggregateId, _dataProvider, Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions DataProviderHasConfigurationEvent()
         {
-            _publisher.SendToBus(new DataProviderEvents().ForDataProviderHasConfigurationEvent(_aggregateId, _dataProvider, Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions DataProviderHasExecutedEvent()
         {
-            SendToBus(new DataProviderEvents().ForDataProviderHasExecutedEvent(_aggregateId, _dataProvider, Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }
@@ -160,29 +159,28 @@ namespace Monitoring.Test.Helper.Queues
 
         public DataProviderQueueFunctions DataProviderHasFaultEvent()
         {
-            SendToBus(new DataProviderEvents().ForDataProviderHasFaultEvent(_aggregateId, _dataProvider, Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000); 
             return this;
         }
 
         public DataProviderQueueFunctions DataProviderHasSecurityEvent()
         {
-            SendToBus(new DataProviderEvents().ForDataProviderHasSecurityEvent(_aggregateId, _dataProvider, Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions DataProviderasBeenTransformedEvent()
         {
-            SendToBus(new DataProviderEvents().ForDataProviderasBeenTransformedEvent(_aggregateId, _dataProvider, Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions DataProviderIsCalledEvent()
         {
-            SendToBus(new DataProviderEvents().ForDataProviderIsCalledEvent(_aggregateId, _dataProvider,
-                Category.Performance));
+            SendToBus(new DataProviderEvents().ForDataProviderEvent(_aggregateId, "{}", DateTime.Now));
             Thread.Sleep(1000);
             return this;
         }

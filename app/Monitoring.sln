@@ -50,7 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projection", "Projection", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Projection", "Monitoring\source\Monitoring.Projection\Monitoring.Projection.csproj", "{AAA626BB-1436-461E-9426-13A320F594AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Projection.UI", "Monitoring\source\Monitoring.Projection.UI\Monitoring.Projection.UI.csproj", "{067F5CB2-2CA1-491B-A9DF-BF9998F5689A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Dashboard.UI", "Monitoring\source\Monitoring.Dashboard.UI\Monitoring.Dashboard.UI.csproj", "{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,10 +114,10 @@ Global
 		{AAA626BB-1436-461E-9426-13A320F594AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAA626BB-1436-461E-9426-13A320F594AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAA626BB-1436-461E-9426-13A320F594AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{067F5CB2-2CA1-491B-A9DF-BF9998F5689A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{067F5CB2-2CA1-491B-A9DF-BF9998F5689A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{067F5CB2-2CA1-491B-A9DF-BF9998F5689A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{067F5CB2-2CA1-491B-A9DF-BF9998F5689A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +137,6 @@ Global
 		{EE9D1AEC-1E3E-420E-ACF0-3058FEEE6E7F} = {99ACBE10-32BF-4C11-8751-178A111BD5C7}
 		{CB6F50D2-5750-4231-982E-5DFC3336BDC1} = {E2049648-BDB1-43AA-9E3F-9FF8FD469294}
 		{AAA626BB-1436-461E-9426-13A320F594AB} = {8E06A796-C2FA-48E4-8C0C-2954E6A6FDAE}
-		{067F5CB2-2CA1-491B-A9DF-BF9998F5689A} = {8E06A796-C2FA-48E4-8C0C-2954E6A6FDAE}
+		{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17} = {8E06A796-C2FA-48E4-8C0C-2954E6A6FDAE}
 	EndGlobalSection
 EndGlobal

@@ -13,6 +13,7 @@ namespace PackageBuilder.Web.UI.Tests.Packages
     {
 
         public NgWebDriver ngDriver;
+        private Common.Common common = new Common.Common();
 
         //ngDriver setup
         public PackagesPageObjects(IWebDriver driver, string url)
@@ -41,6 +42,20 @@ namespace PackageBuilder.Web.UI.Tests.Packages
                 options[optionNumber].Click();
             }
             
+        }
+
+        public int GetPackagesCount()
+        {
+
+            //Return number of dataProviders in ui.Grid
+            return ngDriver.FindElements(NgBy.Repeater("(rowRenderIndex, row) in rowContainer.renderedRows track by row.uid")).Count;
+        }
+
+        public void CreatePackage(string packageName)
+        {
+
+            ngDriver.FindElement(By.Id("package_name")).SendKeys(packageName);
+            ngDriver.FindElement(By.Id("btn_save_package")).Click();
         }
 
     }

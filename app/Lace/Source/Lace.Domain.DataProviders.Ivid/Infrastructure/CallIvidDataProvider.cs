@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -22,7 +23,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProvider Provider = DataProvider.Ivid;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Ivid;
 
         public CallIvidDataProvider(ILaceRequest request)
         {
