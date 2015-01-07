@@ -1,5 +1,5 @@
 ﻿using System;
-using Monitoring.Read.Denormalizer.DataProvider;
+using Monitoring.Read.Denormalizer;
 using Monitoring.Test.Helper.Fakes;
 using Xunit.Extensions;
 
