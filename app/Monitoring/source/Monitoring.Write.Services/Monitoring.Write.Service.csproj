@@ -41,13 +41,13 @@
     <Reference Include="EventStore">
       <HintPath>..\..\..\packages\EventStore.3.2.0.28\lib\net40\EventStore.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.442, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.442\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.444\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.442, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.444, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.442\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.444\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.433, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,7 +58,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.442\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.444\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>

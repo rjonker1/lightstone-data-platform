@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 using Lace.Shared.Extensions;
 
 namespace Lace.Shared.Monitoring.Messages.Core
 {
     [Serializable]
+    [DataContract]
     public class DataProviderStopWatch : IDisposable
     {
         private readonly Stopwatch _stopwatch;
@@ -53,9 +55,13 @@ namespace Lace.Shared.Monitoring.Messages.Core
     }
 
     [Serializable]
+    [DataContract]
     public class StopWatchResults
     {
+        [DataMember]
         public TimeSpan ElapsedTime { get; private set; }
+
+        [DataMember]
         public string Name { get; private set; }
 
         public StopWatchResults(TimeSpan elapsedTime, string name)

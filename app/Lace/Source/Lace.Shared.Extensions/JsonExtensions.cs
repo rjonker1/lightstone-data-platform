@@ -12,7 +12,7 @@ namespace Lace.Shared.Extensions
             {
                 return JsonConvert.SerializeObject(value, Formatting.None, new JsonSerializerSettings()
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
                 });
             }
             catch

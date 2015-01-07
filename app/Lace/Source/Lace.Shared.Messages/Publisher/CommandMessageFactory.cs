@@ -30,7 +30,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider StopCallingDataProviderSource(Guid id,
@@ -48,7 +48,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider StartDataProvider(Guid id, DataProviderCommandSource dataProvider,
@@ -66,7 +66,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider StopDataProvider(Guid id, DataProviderCommandSource dataProvider,
@@ -84,7 +84,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider FaultInDataProvider(Guid id, DataProviderCommandSource dataProvider,
@@ -101,7 +101,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider SecurityFlagRaisedInDataProvider(Guid id,
@@ -118,7 +118,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider ConfigurationInDataProvider(Guid id,
@@ -135,7 +135,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
         public static MessageFromDataProvider TransformationInDataProvider(Guid id,
@@ -152,7 +152,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 }
             };
 
-            return GetCommand(id, command.AsJsonString(), DateTime.UtcNow);
+            return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
     }
 }

@@ -2,15 +2,22 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title>Monitoring</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Styles/json_formatter.css">
     @RenderSection("Header", false)
+    
 </head>
 <body>
-   <div id="body">
-        @RenderBody()
-    </div>
-    <div id="footer">@RenderSection("Footer",false)</div>
-    <div id="optional">@RenderSection("Optional", false)</div>
+<div id="body">
+    @RenderBody()
+</div>
+<div id="footer">@RenderSection("Footer", false)</div>
+<div id="optional">@RenderSection("Optional", false)</div>
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>*@
+    
+<div id="scripts">@RenderSection("Scripts", false)</div>
+
 </body>
 </html>

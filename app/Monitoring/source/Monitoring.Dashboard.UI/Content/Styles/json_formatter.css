@@ -1,0 +1,206 @@
+﻿/**
+*	This JSON tool is very nearly completely the work of Vladimir Bodurov
+*	the original can be found here :
+*		http://quickjsonformatter.codeplex.com/
+*			and
+*		http://www.bodurov.com/JsonFormatter/
+*	
+*	The MIT License (MIT)
+*	Copyright (c) 2008 Vladimir Bodurov
+*	
+*	Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+*	and associated documentation files (the "Software"), to deal in the Software without restriction,
+*	including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+*	and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+*	subject to the following conditions:
+*	
+*	The above copyright notice and this permission notice shall be included in all copies or substantial
+*	portions of the Software.
+*	
+*	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+*	INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+*	PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+*	FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+*	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+**/
+
+BODY
+{
+	font-family : "Courier New" Courier, Courier, monospace;
+	font-size : 12pt;
+	margin : 0px;
+}
+
+SELECT
+{
+	/* this does fix the vertical alignment snafu, but then it looks too small - FUCK!!
+	font-size : 10px;
+	*/
+}
+
+INPUT[type=button]
+{
+	/*
+	font-size : 20px;
+	font-weight : bold;
+	font-size-adjust: none;
+	height : 22px;
+	padding: 10px 8px 10px 8px;
+	*/
+	/* - NOPE! browser knows best!!
+	line-height : 30px !important;
+	*/
+}
+
+#header
+{
+	position : relative;
+	padding-top : 3px;
+	padding-left : 5px;
+	height : 190px;
+	display : block;
+}
+
+.rawJson
+{
+	position : absolute;
+	width : 99%;
+	height : 150px;
+	display : block;
+	margin : auto;
+	left : 0px;
+	right : 0px;
+	font-family : "Courier New" Courier, Courier, monospace;
+	font-size : 10pt;
+	padding-left : 3px;
+	background-color : #F9F9F9;
+}
+
+#actionBar
+{
+	position : absolute;
+	font-size : 11pt;
+	font-weight : bold;
+	background-color : #D8D9D9;
+	width : 100%;
+	top : 190px;
+	padding-top : 6px;
+	padding-left : 10px;
+	padding-bottom : 0px;
+	height : 33px;
+	border-top : solid #737373 1px;
+	border-bottom : solid #737373 1px;
+}
+
+.Canvas
+{
+	border : solid #396276 1px;
+	position : absolute;
+	font-family : "Courier New" Courier, Courier, monospace;
+	font-size : 11pt;
+	background-color : #E5F4FA;
+	padding-left : 3px;
+	padding-top : 3px;
+	color : #000000;
+	top : 231px;
+	width : 100%;
+	margin : 0px;
+	left : 0px;
+	right : 0px;
+}
+
+A
+{
+	line-height : 27px;
+	margin-top : 0px;
+	margin-bottom : 0px;
+}
+
+.uiLabelLeft
+{
+	display : inline-block;
+	text-align: right;
+	margin-right : -1px;
+	padding-right : 0px;
+}
+
+.uiLabelRight
+{
+	display : inline-block;
+	text-align: left;
+	margin-left : -1px;
+	padding-left : 0px;
+}
+
+.uiLabelCenter
+{
+	display : inline-block;
+}
+
+.ObjectBrace
+{
+	color : #000000;
+	/*font-weight : bold;*/
+}
+
+.ArrayBrace
+{
+	color : #000000;
+	/*font-weight : bold;*/
+}
+
+.PropertyName
+{
+	color : #FF0000;
+	/*font-weight : bold;*/
+}
+
+.String
+{
+	color : #006600;
+}
+
+.Number
+{
+	color : #000000;
+}
+
+.Boolean
+{
+	color : #0000FF;
+}
+
+.Function
+{
+	color : #FF0000;
+	text-decoration : italic;
+}
+
+.Null
+{
+    color: #666666;
+}
+
+.Comma
+{
+	color : #000000;
+	font-weight : bold;
+}
+
+PRE.CodeContainer
+{
+	margin-top : 0px;
+	margin-bottom : 0px;
+}
+
+PRE.CodeContainer img
+{
+	cursor : pointer;
+	border : none;
+	margin-bottom : -1px;
+}
+
+#CollapsibleViewDetail a
+{
+	padding-left : 10px;
+}
