@@ -5,7 +5,7 @@ using Monitoring.Domain.Core.Contracts;
 using Monitoring.Read.ReadModel.Models;
 using NServiceBus;
 
-namespace Monitoring.Read.Denormalizer.DataProvider
+namespace Monitoring.Read.Denormalizer
 {
     public class MonitoringHandler : IHandleMessages<MonitoringEvent>
     {
