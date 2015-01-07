@@ -4,7 +4,7 @@
     var controllerId = 'packageMaintenanceEdit';
 
     angular
-        .module('app')
+        .module( 'app' )
         .controller(controllerId, packageMaintenanceCreate);
 
     packageMaintenanceCreate.$inject = ['$scope', '$location', '$routeParams', '$parse', '$http', 'common', 'datacontext'];
@@ -73,7 +73,7 @@
 
         $scope.total = function () {
 
-            var rspCreate = angular.element(document.getElementById('rsp'));
+            var rspEdit = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
             var items = null;
 
@@ -184,14 +184,14 @@
 
             $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
 
-            if (valueTotal > rspCreate[0].value) {
+            if (valueTotal > rspEdit[0].value) {
 
                 $scope.warning = true;
-                $scope.rspCreateStyle = { 'color': 'red' };
+                $scope.rspEditStyle = { 'color': 'red' };
             } else {
 
                 $scope.warning = false;
-                $scope.rspCreateStyle = { 'color': 'none' };
+                $scope.rspEditStyle = { 'color': 'none' };
             }
 
             return valueTotal;

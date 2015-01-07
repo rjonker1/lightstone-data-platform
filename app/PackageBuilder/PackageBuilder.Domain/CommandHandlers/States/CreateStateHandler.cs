@@ -1,4 +1,5 @@
-﻿using PackageBuilder.Core.MessageHandling;
+﻿using DataPlatform.Shared.Helpers.Extensions;
+using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.Infrastructure.Repositories;
@@ -17,7 +18,10 @@ namespace PackageBuilder.Domain.CommandHandlers.States
         public override void Handle(CreateState command)
         {
             if (_repository.Exists(command.Id, command.Name))
-                return;
+            {
+                this.Warn(() => "State {0} already exists".FormatWith(command.Id, command.Name));
+                return;                
+            }
 
             var entity = new State(command.Id, command.Name, command.Alias);
 

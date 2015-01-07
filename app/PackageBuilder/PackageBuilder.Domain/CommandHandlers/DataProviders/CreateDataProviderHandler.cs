@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AutoMapper;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
@@ -25,7 +26,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
         {
             var existing = _readRepo.Exists(command.Id, command.Name);
             if (existing)
+            {
+                this.Warn(() => "A data provider with the name: {0} already exists".FormatWith(command.Name));
                 return;
+            }
 
             var dataFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
 

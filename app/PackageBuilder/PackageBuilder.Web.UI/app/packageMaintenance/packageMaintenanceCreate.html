@@ -183,7 +183,7 @@
                                 <div>
                                     <label>Name:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name" />
+                                        <input id="package_name" type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name" />
                                     </div>
 
                                     <label>Version:</label>
@@ -302,8 +302,8 @@
                                     <br />
 
                                     <div style="float: right;">
-                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                                        <button type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Save Package</button>
+                                        <button id="btn_cancel" type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                                        <button id="btn_save_package" type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Save Package</button>
                                     </div>
 
 

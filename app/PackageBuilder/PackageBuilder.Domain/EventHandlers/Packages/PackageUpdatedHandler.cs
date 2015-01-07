@@ -19,7 +19,11 @@ namespace PackageBuilder.Domain.EventHandlers.Packages
         public override void Handle(PackageUpdated command)
         {
             if (_repository.Exists(command.Id, command.Name))
-                throw new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
+            {
+                var exception = new LightstoneAutoException("A package with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => exception);
+                throw exception;
+            }
 
             _repository.Save(new Package(command.Id, command.Name, command.Description, command.State, command.Version, command.DisplayVersion, command.Owner, command.CreatedDate, command.EditedDate));
         }
