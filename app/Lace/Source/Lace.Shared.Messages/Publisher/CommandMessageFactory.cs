@@ -9,14 +9,14 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
     public static class CommandMessageFactory
     {
 
-        private static CommandInDataProvider GetCommand(Guid id, string payload, DateTime date)
+        private static MessageFromDataProvider GetCommand(Guid id, string payload, DateTime date)
         {
             return
-                new CommandInDataProvider(new CommandDto(id, MonitoringSource.Lace,
+                new MessageFromDataProvider(new CommandDto(id, MonitoringSource.Lace,
                     payload, date));
         }
 
-        public static CommandInDataProvider StartCallingDataProviderSource(Guid id,
+        public static MessageFromDataProvider StartCallingDataProviderSource(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -27,7 +27,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider StopCallingDataProviderSource(Guid id, DataProviderCommandSource dataProvider,
+        public static MessageFromDataProvider StopCallingDataProviderSource(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             var command = new EndCallingDataProviderSource(id, dataProvider,
@@ -38,7 +38,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider StartDataProvider(Guid id, DataProviderCommandSource dataProvider,
+        public static MessageFromDataProvider StartDataProvider(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             var command = new StartDataProvider(id, dataProvider,
@@ -49,7 +49,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider StopDataProvider(Guid id, DataProviderCommandSource dataProvider,
+        public static MessageFromDataProvider StopDataProvider(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             var command = new EndDataProvider(id, dataProvider,
@@ -60,7 +60,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider FaultInDataProvider(Guid id, DataProviderCommandSource dataProvider,
+        public static MessageFromDataProvider FaultInDataProvider(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             var command = new DataProviderHasFault(id, dataProvider,
@@ -71,7 +71,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider SecurityFlagRaisedInDataProvider(Guid id,
+        public static MessageFromDataProvider SecurityFlagRaisedInDataProvider(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -82,7 +82,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider ConfigurationInDataProvider(Guid id,
+        public static MessageFromDataProvider ConfigurationInDataProvider(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -93,7 +93,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), command.Date);
         }
 
-        public static CommandInDataProvider TransformationInDataProvider(Guid id,
+        public static MessageFromDataProvider TransformationInDataProvider(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {

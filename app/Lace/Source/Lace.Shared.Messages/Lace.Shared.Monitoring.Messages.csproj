@@ -59,7 +59,7 @@
     </Compile>
     <Compile Include="Commands\DataProviderCommand.cs" />
     <Compile Include="Commands\CommandDto.cs" />
-    <Compile Include="Commands\CommandInDataProvider.cs" />
+    <Compile Include="Commands\MessageFromDataProvider.cs" />
     <Compile Include="Commands\DataProviderCommands.cs" />
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\IMonitorDataProviderMessages.cs" />
