@@ -7,9 +7,9 @@
         .module('app')
         .controller(controllerId, packages);
 
-    packages.$inject = ['$scope', '$location', 'uiGridConstants', 'common', 'datacontext'];
+    packages.$inject = ['$scope', '$modal', '$location', 'uiGridConstants', 'common', 'datacontext'];
 
-    function packages($scope, $location, uiGridConstants, common, datacontext) {
+    function packages($scope, $modal, $location, uiGridConstants, common, datacontext) {
 
         $scope.title = 'Packages';
 
@@ -34,37 +34,33 @@
 
         $scope.selectedDatasource = [];
 
-        //$scope.gridOptions = {
-        //    data: 'dPackagesData',
-        //    selectedItems: $scope.selectedDatasource,
-        //    multiSelect: false,
-        //    enableFiltering: true,
-        //    showFilter: true,
-        //    showGroupPanel: true,
-        //    columnDefs: [
-        //        { field: 'name', displayName: 'Name', filter: { term: '' } },
-        //        { field: 'description', displayName: 'Description' },
-        //        { field: 'owner', displayName: 'Owner' },
-        //        { field: 'createdDate', displayName: 'Created' },
-        //        { field: 'editedDate', displayName: 'Edited' },
-        //        { field: 'state.alias', displayName: 'State' },
-        //        { field: 'displayVersion', displayName: 'Version', filter: { term: '' } },
-        //        //{ displayName: '', cellTemplate: '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' }
-        //        {
-        //            displayName: '',
-        //            width: 280,
-        //            cellTemplate: '<div ng-if="latestVersion.Get(row.entity.packageId) == row.entity.version">' +
-        //                '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="notify(row)" value="Edit" />' +
-        //                '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
-        //                '<input type="button" class="btn btn-warning grid-btn" name="expire" ng-click="" value="Expire" />' +
-        //                '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
-        //                '' +
-        //                '<div ng-if="latestVersion.Get(row.entity.packageId) != row.entity.version">' +
-        //                '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="viewPackage(row)" value="View" /></div>'
-        //        }
+        $scope.items = ['item1', 'item2', 'item3'];
 
-        //    ]
-        //};
+        $scope.open = function (packageName, packageId) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                //size: size,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    },
+                    packageName: function () {
+                        return packageName;
+                    },
+                    packageId: function () {
+                        return packageId;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.gridOptions = {
             data: 'dPackagesData',
@@ -94,7 +90,7 @@
              width: 280,
              cellTemplate: '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) == row.entity.version">' +
                  '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
-                 '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
+                 '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="getExternalScopes().open(row.entity.name, row.entity.packageId)" value="Clone" />' +
                  '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
                  '' +
                  '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) != row.entity.version">' +

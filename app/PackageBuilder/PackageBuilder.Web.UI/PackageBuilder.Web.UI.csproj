@@ -71,6 +71,7 @@
     <Content Include="app\packages\packageView.html" />
     <Content Include="app\repositories\stateRepository.js" />
     <Content Include="app\resources\stateResources.js" />
+    <Content Include="app\services\ModalInstanceCtrl.js" />
     <Content Include="app\states\headerTemplate.html" />
     <Content Include="app\states\states.html" />
     <Content Include="app\states\states.js" />
