@@ -1,6 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
+using Newtonsoft.Json;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
@@ -12,7 +13,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
             string metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            
+
         }
     }
 
