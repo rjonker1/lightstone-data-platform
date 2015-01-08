@@ -53,6 +53,26 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
             };
+
+            Post["/Package/Clone/{id}/{cloneName}"] = parameters =>
+            {
+                var packageToClone = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+                var dataProvidersToClone = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(packageToClone.DataProviders);
+                var stateResolve = stateRepo.Where(x => x.Alias == "Draft").Select(y => new State(y.Id, y.Name, y.Alias));
+
+                bus.Publish(new CreatePackage(Guid.NewGuid(),
+                        parameters.cloneName,
+                        packageToClone.Description,
+                        packageToClone.CostOfSale,
+                        packageToClone.RecommendedSalePrice,
+                        packageToClone.Notes,
+                        packageToClone.Industries,
+                        stateResolve.FirstOrDefault(),
+                        packageToClone.Owner, DateTime.Now, null,
+                        dataProvidersToClone));
+
+                return Response.AsJson(new { msg = "Success, Package with ID: " + parameters.id + " has been cloned to package '"+parameters.cloneName+"'" });
+            };
         }
     }
 }
