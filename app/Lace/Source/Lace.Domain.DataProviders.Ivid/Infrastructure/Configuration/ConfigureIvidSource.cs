@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration
 {
+    [Serializable]
+    [DataContract]
     public class ConfigureIvidSource
     {
+        [DataMember]
         public HpiServiceClient IvidServiceProxy { get; private set; }
+        [DataMember]
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
 
         public void ConfigureIvidWebServiceCredentials()

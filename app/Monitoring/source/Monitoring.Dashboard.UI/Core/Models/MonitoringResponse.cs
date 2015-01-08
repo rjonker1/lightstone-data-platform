@@ -9,8 +9,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
     {
         [DataMember]
         public Guid Id { get; private set; }
+
         [DataMember]
         public string Payload { get; private set; }
+
         [DataMember]
         public DateTime Date { get; private set; }
 

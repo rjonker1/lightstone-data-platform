@@ -174,6 +174,28 @@ function TraverseChildren(element, func, depth) {
     func(element, depth);
 }
 
+function EnsureIsPopulated(rawJsonId, canvasId) {
+    if (!$id(canvasId).innerHTML && !!$id(rawJsonId).value) Process();
+}
+
+function CollapseAllClicked(rawJsonId, canvasId) {
+    EnsureIsPopulated(rawJsonId, canvasId);
+    TraverseChildren($id(canvasId), function (element) {
+        if (element.className == "collapsible") {
+            MakeContentVisible(element, false);
+        }
+    }, 0);
+}
+
+function ExpandAllClicked(rawJsonId, canvasId) {
+    EnsureIsPopulated(rawJsonId, canvasId);
+    TraverseChildren($id(canvasId), function (element) {
+        if (element.className == "collapsible") {
+            MakeContentVisible(element, true);
+        }
+    }, 0);
+}
+
 function ExpImgClicked(img) {
     var container = img.parentNode.nextSibling;
     if (!container) return;
@@ -184,6 +206,21 @@ function ExpImgClicked(img) {
         src = window.imgMinus;
     }
     container.style.display = disp;
+    img.src = src;
+}
+
+function Toggle(elementId, img, rawJsonId, canvasId) {
+    var src = window.imgPlus;
+    var ele = document.getElementById(elementId);
+    if (ele.style.display === "block") {
+        ele.style.display = "none";
+        $id(canvasId).innerHTML = "<PRE class='CodeContainer'></PRE>";
+    } else {
+        ele.style.display = "block";
+        src = window.imgMinus;
+        Process(rawJsonId, canvasId);
+    }
+
     img.src = src;
 }
 

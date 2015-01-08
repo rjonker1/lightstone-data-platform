@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 ividWebService.ConfigureIvidWebServiceCredentials();
                 ividWebService.ConfigureIvidWebServiceRequestMessageProperty();
 
-                monitoring.DataProviderSecurity(Provider, ividWebService.IvidServiceProxy.ObjectToJson(), "Ivid Data Provider Credentials");
+                monitoring.DataProviderSecurity(Provider, new { Credentials = new { ividWebService.IvidServiceProxy.ClientCredentials.UserName.UserName, ividWebService.IvidServiceProxy.ClientCredentials.UserName.Password} }.ObjectToJson(), "Ivid Data Provider Credentials");
 
                 using (var scope = new OperationContextScope(ividWebService.IvidServiceProxy.InnerChannel))
                 {

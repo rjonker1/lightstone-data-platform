@@ -61,8 +61,7 @@ namespace Lace.Acceptance.Tests.Events
             _monitoring.DataProviderConfiguration(DataProviderCommandSource.Ivid, _ividRequest.ObjectToJson(), string.Empty);
 
             var proxy = DataProviderConfigurationBuilder.ForIvidWebServiceProxy();
-            _monitoring.DataProviderSecurity(DataProviderCommandSource.Ivid, proxy.ObjectToJson(),
-                "Ivid Data Provider Credentials");
+            _monitoring.DataProviderSecurity(DataProviderCommandSource.Ivid, new { Credentials = new { proxy.ClientCredentials.UserName.UserName, proxy.ClientCredentials.UserName.Password} }.ObjectToJson(), "Ivid Data Provider Credentials");
 
             _monitoring.StartCallingDataProvider(DataProviderCommandSource.Ivid, _ividRequest.ObjectToJson(), _stopWatch);
 
