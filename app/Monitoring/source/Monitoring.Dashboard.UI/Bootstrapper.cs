@@ -19,9 +19,9 @@ namespace Monitoring.Dashboard.UI
         {
             container.Register<IDbConnection>(ConnectionFactory.ForReadDatabase());
             container.Register<IQueryStorage, Repository>();
-            container.Register<IDataProviderRepository, DataProviderRepository>();
-            container.Register<IHandleDataProviderCommands, DataProviderHandler>();
-            container.Register<ICallDataProviderService, DataProviderService>();
+            container.Register<IMonitoringRepository, MonitoringRepository>();
+            container.Register<IHandleMonitoringCommands, MonitoringHandler>();
+            container.Register<ICallMonitoringService, MonitoringService>();
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

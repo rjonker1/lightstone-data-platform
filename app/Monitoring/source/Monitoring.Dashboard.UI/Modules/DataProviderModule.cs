@@ -1,16 +1,17 @@
-﻿using Monitoring.Dashboard.UI.Core.Contracts.Services;
+﻿using DataPlatform.Shared.Enums;
+using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Nancy;
 
 namespace Monitoring.Dashboard.UI.Modules
 {
     public class DataProviderModule : NancyModule
     {
-        public DataProviderModule(ICallDataProviderService service)
+        public DataProviderModule(ICallMonitoringService service)
         {
             Get["/dataProviders"] = _ =>
             {
-                var model = service.GetDataProviderMonitoringInformation();
-                return View["DataProviders", model];
+                var model = service.GetMonitoringInformationBySource((int) MonitoringSource.Lace);
+                return View["Monitoring", model];
             };
         }
     }

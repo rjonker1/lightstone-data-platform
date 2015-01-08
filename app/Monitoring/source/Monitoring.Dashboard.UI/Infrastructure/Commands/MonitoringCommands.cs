@@ -2,11 +2,11 @@
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Commands
 {
-    public class GetDataProviderViewCommand
+    public class GetMonitoringCommand
     {
-        public readonly DataProviderViewDto Request;
+        public readonly MonitoringRequestDto Request;
 
-        public GetDataProviderViewCommand(DataProviderViewDto request)
+        public GetMonitoringCommand(MonitoringRequestDto request)
         {
             Request = request;
         }

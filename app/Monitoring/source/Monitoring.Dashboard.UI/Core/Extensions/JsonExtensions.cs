@@ -25,5 +25,10 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
                 return string.Empty;
             }
         }
+
+        public static dynamic JsonToObject(this string json)
+        {
+            return JsonConvert.DeserializeObject(json);
+        }
     }
 }

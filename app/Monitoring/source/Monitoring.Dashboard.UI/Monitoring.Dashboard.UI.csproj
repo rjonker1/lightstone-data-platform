@@ -63,6 +63,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -89,13 +90,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\minus.gif" />
+    <Content Include="Content\Images\minus.png" />
     <Content Include="Content\Images\plus.gif" />
+    <Content Include="Content\Images\plus.png" />
     <Content Include="Content\Styles\json_formatter.css" />
-    <Content Include="scripts\json_formatter.js" />
+    <Content Include="scripts\json-formatter.js" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
-    <Content Include="Views\DataProviders.cshtml" />
+    <Content Include="Views\Monitoring.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,17 +114,19 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Core\Contracts\Handlers\IHandleDataProviderCommands.cs" />
-    <Compile Include="Core\Contracts\Repositories\IDataProviderRepository.cs" />
+    <Compile Include="Core\Contracts\Handlers\IHandleMonitoringCommands.cs" />
+    <Compile Include="Core\Contracts\Repositories\IMonitoringRepository.cs" />
     <Compile Include="Core\Contracts\Repositories\IQueryStorage.cs" />
-    <Compile Include="Core\Contracts\Services\ICallDataProviderService.cs" />
+    <Compile Include="Core\Contracts\Services\ICallMonitoringService.cs" />
     <Compile Include="Core\Extensions\JsonExtensions.cs" />
-    <Compile Include="Infrastructure\Commands\DataProviderCommands.cs" />
-    <Compile Include="Infrastructure\Dto\DataProviderObjects.cs" />
-    <Compile Include="Infrastructure\Handlers\DataProviderHandler.cs" />
-    <Compile Include="Infrastructure\Repository\DataProviderRepository.cs" />
+    <Compile Include="Core\Models\MonitoringResponse.cs" />
+    <Compile Include="Infrastructure\Commands\MonitoringCommands.cs" />
+    <Compile Include="Infrastructure\Dto\MonitoringResponseDto.cs" />
+    <Compile Include="Infrastructure\Dto\MonitoringRequestDto.cs" />
+    <Compile Include="Infrastructure\Handlers\MonitoringHandler.cs" />
+    <Compile Include="Infrastructure\Repository\MonitoringRepository.cs" />
     <Compile Include="Infrastructure\Repository\Repository.cs" />
-    <Compile Include="Infrastructure\Services\DataProviderService.cs" />
+    <Compile Include="Infrastructure\Services\MonitoringService.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Infrastructure\Repository\Framework\Connection\ConnectionFactory.cs" />
@@ -138,9 +143,7 @@
       <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
