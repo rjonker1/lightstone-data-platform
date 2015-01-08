@@ -27,6 +27,7 @@
             editDataProvider: editDataProvider,
             editPackage: editPackage,
             createPackage: createPackage,
+            clonePackage: clonePackage,
             deletePackage: deletePackage,
 
             getStates: getStates,
@@ -171,7 +172,6 @@
         //POST
         function createPackage(packageData) {
 
-            
             var deferred = $q.defer();
 
             $http.post('http://dev.lightstone.packagebuilder.api/Package/Add', packageData).then(function (result) {
@@ -184,7 +184,24 @@
             });
 
             return $q.when(deferred.promise);
+        }
 
+        //POST
+        function clonePackage(_packageToCloneId, _cloneName) {
+
+            var deferred = $q.defer();
+
+            $http.post('http://dev.lightstone.packagebuilder.api/Package/Clone/' + _packageToCloneId + '/' + _cloneName).then(function(result) {
+
+                deferred.resolve(result);
+
+            }, function(error) {
+
+                deferred.resolve(error);
+
+            });
+
+            return $q.when(deferred.promise);
         }
         
         //POST
