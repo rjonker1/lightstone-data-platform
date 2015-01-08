@@ -7,19 +7,19 @@ using Monitoring.Dashboard.UI.Infrastructure.Commands;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 {
-    public class DataProviderHandler : IHandleDataProviderCommands
+    public class MonitoringHandler : IHandleMonitoringCommands
     {
-        private readonly IDataProviderRepository _repository;
-        public IEnumerable<MonitoringResponse> DataProviders { get; private set; }
+        private readonly IMonitoringRepository _repository;
+        public IEnumerable<MonitoringResponse> MonitoringResponse { get; private set; }
 
-        public DataProviderHandler(IDataProviderRepository repository)
+        public MonitoringHandler(IMonitoringRepository repository)
         {
             _repository = repository;
         }
 
-        public void Handle(GetDataProviderViewCommand command)
+        public void Handle(GetMonitoringCommand command)
         {
-            DataProviders = _repository.GetAllDataProviderInformation().ToList();
+            MonitoringResponse = _repository.GetAllMonitoringInformation().ToList();
         }
 
     }

@@ -3,8 +3,8 @@ using Monitoring.Dashboard.UI.Core.Models;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Services
 {
-    public interface ICallDataProviderService
+    public interface ICallMonitoringService
     {
-        IEnumerable<MonitoringResponse> GetDataProviderMonitoringInformation();
+        IEnumerable<MonitoringResponse> GetMonitoringInformationBySource(int source);
     }
 }

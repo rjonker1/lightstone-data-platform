@@ -3,8 +3,8 @@ using Monitoring.Dashboard.UI.Core.Models;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Repositories
 {
-    public interface IDataProviderRepository
+    public interface IMonitoringRepository
     {
-        IEnumerable<MonitoringResponse> GetAllDataProviderInformation();
+        IEnumerable<MonitoringResponse> GetAllMonitoringInformation();
     }
 }

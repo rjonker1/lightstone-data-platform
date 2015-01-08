@@ -4,9 +4,9 @@ using Monitoring.Dashboard.UI.Infrastructure.Commands;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers
 {
-    public interface IHandleDataProviderCommands
+    public interface IHandleMonitoringCommands
     {
-        IEnumerable<MonitoringResponse> DataProviders { get; }
-        void Handle(GetDataProviderViewCommand command);
+        IEnumerable<MonitoringResponse> MonitoringResponse { get; }
+        void Handle(GetMonitoringCommand command);
     }
 }

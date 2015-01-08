@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Query.Dynamic;
 using DataPlatform.Shared.Enums;
 using Monitoring.Dashboard.UI.Core.Contracts.Repositories;
 using Monitoring.Dashboard.UI.Core.Extensions;
@@ -11,29 +11,30 @@ using Monitoring.Read.ReadModel.Models;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Repository
 {
-    public class DataProviderRepository : IDataProviderRepository
+    public class MonitoringRepository : IMonitoringRepository
     {
         private readonly IQueryStorage _storage;
 
-        public DataProviderRepository(IQueryStorage storage)
+        public MonitoringRepository(IQueryStorage storage)
         {
             _storage = storage;
         }
 
-        public IEnumerable<MonitoringResponse> GetAllDataProviderInformation()
+        public IEnumerable<MonitoringResponse> GetAllMonitoringInformation()
         {
             return _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
                 new {@Source = (int) MonitoringSource.Lace})
                 .Select(
                     s =>
-                        new DataProviderResponseDto(s.AggregateId, (object)Encoding.UTF8.GetString(s.Payload).JsonToObject(),
+                        new MonitoringResponseDto(s.AggregateId,
+                            (object) Encoding.UTF8.GetString(s.Payload).JsonToObject(),
                             s.Date))
                 .GroupBy(g => g.Id, g => g.Payload, (aggId, payload) => new
                 {
                     Id = aggId,
                     Payload = payload
 
-                }).Select(s => new MonitoringResponse(s.Id, s.ObjectToJson()));
+                }).Select(s => new MonitoringResponse(s.Id, s.ObjectToJson(), DateTime.UtcNow));
         }
     }
 }

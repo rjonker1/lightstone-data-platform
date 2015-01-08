@@ -3,18 +3,8 @@ using System.Runtime.Serialization;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 {
-    public class DataProviderViewDto
-    {
-        public readonly int SourceId;
-
-        public DataProviderViewDto(int source)
-        {
-            SourceId = source;
-        }
-    }
-
     [DataContract]
-    public class DataProviderResponseDto
+    public class MonitoringResponseDto
     {
         [DataMember] public readonly Guid Id;
 
@@ -24,7 +14,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
 
         [DataMember] public readonly DateTime Date;
 
-        public DataProviderResponseDto(Guid id, object payLoad, DateTime date)
+        public MonitoringResponseDto(Guid id, object payLoad, DateTime date)
         {
             Id = id;
             Payload = payLoad;
