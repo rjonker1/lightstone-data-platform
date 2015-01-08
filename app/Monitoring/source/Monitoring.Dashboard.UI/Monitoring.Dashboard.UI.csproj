@@ -63,6 +63,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -91,7 +92,7 @@
     <Content Include="Content\Images\minus.gif" />
     <Content Include="Content\Images\plus.gif" />
     <Content Include="Content\Styles\json_formatter.css" />
-    <Content Include="scripts\json_formatter.js" />
+    <Content Include="scripts\json-formatter.js" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
@@ -116,6 +117,7 @@
     <Compile Include="Core\Contracts\Repositories\IQueryStorage.cs" />
     <Compile Include="Core\Contracts\Services\ICallDataProviderService.cs" />
     <Compile Include="Core\Extensions\JsonExtensions.cs" />
+    <Compile Include="Core\Models\MonitoringResponse.cs" />
     <Compile Include="Infrastructure\Commands\DataProviderCommands.cs" />
     <Compile Include="Infrastructure\Dto\DataProviderObjects.cs" />
     <Compile Include="Infrastructure\Handlers\DataProviderHandler.cs" />
@@ -138,9 +140,7 @@
       <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

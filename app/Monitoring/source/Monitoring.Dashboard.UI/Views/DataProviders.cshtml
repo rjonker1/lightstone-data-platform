@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Monitoring.Dashboard.UI.Infrastructure.Dto.DataProviderResponseDto>>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -11,64 +11,39 @@
         <option value="5">5</option>
         <option value="6">6</option>
     </select>
-
-    <input id="QuoteKeys" type="checkbox" onclick="QuoteKeysClicked()" checked="true">
-    <div class="uiLabelRight">""</div>
-    &nbsp;
-    <input id="CollapsibleView" type="checkbox" onclick="CollapsibleViewClicked()" checked="true">
-    <div class="uiLabelRight">+/-</div>
-    &nbsp;
-    <input id="btnSelect" type="button" value="select all" onclick="SelectAllClicked()">
-    <input id="btnExpand" type="button" value="expand" onclick="ExpandAllClicked()">
-    <div class="uiLabelCenter">or</div>
-    <input id="btnCollapse" type="button" value="collapse" onclick="CollapseAllClicked()">
-    <div class="uiLabelLeft">to level:</div>
-    <input id="btnCollapse2" type="button" value="2" onclick="CollapseLevel(3)">
-    <input id="btnCollapse3" type="button" value="3" onclick="CollapseLevel(4)">
-    <input id="btnCollapse4" type="button" value="4" onclick="CollapseLevel(5)">
-    <input id="btnCollapse5" type="button" value="5" onclick="CollapseLevel(6)">
-    <input id="btnCollapse5" type="button" value="6" onclick="CollapseLevel(7)">
-    <input id="btnCollapse5" type="button" value="7" onclick="CollapseLevel(8)">
-    <input id="btnCollapse5" type="button" value="8" onclick=" CollapseLevel(9) ">
 </div>
-    <table>
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>Aggregate Id</th>
+            <th>Payload</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        var count = 0;
+        foreach (var response in @Model)
+        {
+            count++;
+            var jsonId = "rawJson-" + count;
+            var canvasId = "canvas-" + count;
             <tr>
-                <th>Aggregate Id</th>
-                <th></th>
-                <th>Payload</th>
-                <th>Date</th>
-                <th></th>
+                <td>@response.Id</td>
+                <td><input type="button" value="View Payload" onclick="Process('@jsonId', '@canvasId') "></td>
+                <td>
+                    <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
+                </td>
+                <td><textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea></td>
             </tr>
-        </thead>
-        <tbody>
-            @{
-                var count = 0;
-                foreach (var response in @Model)
-                {
-                    count++;
-                    var jsonId = "rawJson-" + count;
-                    var canvasId = "canvas-" + count;
-                    <tr>
-                        <td>@response.Id</td>
-                        @*<td><input id="btnDisplayJson" value="process" type="button" onclick="Process()"/></td>  data-json-id="@jsonId" data-canvas-id="@canvasId"*@
-                        <td><input type="button" value="View Payload" onclick="Process('@jsonId', '@canvasId')"></td>
-                        <td>
-                            <div class="Canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
-                        </td>
-                        <td>@response.Date</td>
-                        <td><textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea></td>
-                    </tr>
 
-                }
-            }
-
-        </tbody>
-    </table>
-    @section Scripts
-{
-        <script type="text/javascript" charset="utf-8" src="~/Scripts/json_formatter.js"></script>
+        }
     }
 
-
-
+    </tbody>
+</table>
+@section Scripts
+{
+    <script type="text/javascript" charset="utf-8" src="~/Scripts/json-formatter.js"></script>
+}

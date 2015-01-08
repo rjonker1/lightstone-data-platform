@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Monitoring.Dashboard.UI.Core.Extensions
@@ -24,6 +25,11 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
             {
                 return string.Empty;
             }
+        }
+
+        public static dynamic JsonToObject(this string json)
+        {
+            return JsonConvert.DeserializeObject(json);
         }
     }
 }

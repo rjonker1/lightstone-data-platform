@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Dashboard.UI.Core.Models;
 
 namespace Monitoring.Dashboard.UI.Core.Contracts.Repositories
 {
     public interface IDataProviderRepository
     {
-        IEnumerable<DataProviderResponseDto> GetAllDataProviderInformation();
+        IEnumerable<MonitoringResponse> GetAllDataProviderInformation();
     }
 }

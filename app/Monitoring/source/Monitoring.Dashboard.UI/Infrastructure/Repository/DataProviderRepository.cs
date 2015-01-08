@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Query.Dynamic;
 using DataPlatform.Shared.Enums;
 using Monitoring.Dashboard.UI.Core.Contracts.Repositories;
 using Monitoring.Dashboard.UI.Core.Extensions;
+using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Dto;
 using Monitoring.Read.ReadModel.Models;
-using Nancy;
-using Newtonsoft.Json;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Repository
 {
@@ -20,14 +20,20 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
             _storage = storage;
         }
 
-        public IEnumerable<DataProviderResponseDto> GetAllDataProviderInformation()
+        public IEnumerable<MonitoringResponse> GetAllDataProviderInformation()
         {
             return _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
                 new {@Source = (int) MonitoringSource.Lace})
                 .Select(
                     s =>
-                        new DataProviderResponseDto(s.AggregateId, Encoding.UTF8.GetString(s.Payload),
-                            s.Date));
+                        new DataProviderResponseDto(s.AggregateId, (object)Encoding.UTF8.GetString(s.Payload).JsonToObject(),
+                            s.Date))
+                .GroupBy(g => g.Id, g => g.Payload, (aggId, payload) => new
+                {
+                    Id = aggId,
+                    Payload = payload
+
+                }).Select(s => new MonitoringResponse(s.Id, s.ObjectToJson()));
         }
     }
 }

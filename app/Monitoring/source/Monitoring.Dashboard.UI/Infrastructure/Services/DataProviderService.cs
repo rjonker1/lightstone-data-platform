@@ -3,6 +3,7 @@ using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
+using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
 using Monitoring.Dashboard.UI.Infrastructure.Dto;
 
@@ -18,7 +19,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             _handler = handler;
         }
 
-        public IEnumerable<DataProviderResponseDto> GetDataProviderMonitoringInformation()
+        public IEnumerable<MonitoringResponse> GetDataProviderMonitoringInformation()
         {
             _log.InfoFormat("Getting Data Provider Monitoring View");
             _handler.Handle(
