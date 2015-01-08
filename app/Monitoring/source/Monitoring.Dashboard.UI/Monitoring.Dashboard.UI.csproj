@@ -94,11 +94,12 @@
     <Content Include="Content\Images\plus.gif" />
     <Content Include="Content\Images\plus.png" />
     <Content Include="Content\Styles\json_formatter.css" />
+    <Content Include="Content\Styles\monitoring_data_providers.css" />
     <Content Include="scripts\json-formatter.js" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
-    <Content Include="Views\Monitoring.cshtml" />
+    <Content Include="Views\MonitoringDataProviders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -25,7 +25,8 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 StartedCallingDataProviderSource = new
                 {
                     StartedCallingDataProviderSource = new StartedCallingDataProviderSource(id, dataProvider,
-                        string.Format("Start Calling Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Start Calling Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow, category)
                 }
             };
@@ -42,7 +43,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 EndCallingDataProviderSource = new
                 {
                     EndCallingDataProviderSource = new EndCallingDataProviderSource(id, dataProvider,
-                        string.Format("Stop Calling Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Stop Calling Data Provider {0}", dataProvider.ToString()), payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow,
                         category)
                 }
@@ -60,7 +61,8 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 StartDataProvider = new
                 {
                     StartDataProvider = new StartDataProvider(id, dataProvider,
-                        string.Format("Start Executing Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Start Executing Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow,
                         category)
                 }
@@ -78,7 +80,8 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 EndDataProvider = new
                 {
                     EndDataProvider = new EndDataProvider(id, dataProvider,
-                        string.Format("Stop Executing Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Stop Executing Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow,
                         category)
                 }
@@ -95,7 +98,8 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 DataProviderHasFault = new
                 {
                     DataProviderHasFault = new DataProviderHasFault(id, dataProvider,
-                        string.Format("Error Occurred in Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Error Occurred in Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow,
                         category)
                 }
@@ -113,8 +117,9 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 DataProviderSecurityFlag = new
                 {
                     DataProviderSecurityFlag = new DataProviderSecurityFlag(id, dataProvider,
-                        string.Format("Security flag raised in Data Provider {0}", dataProvider.ToString()), payload,
-                        metadata, DateTime.UtcNow, category)
+                        string.Format("Security flag raised in Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(),
+                        metadata.JsonToObject(), DateTime.UtcNow, category)
                 }
             };
 
@@ -130,7 +135,8 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 DataProviderConfigured = new
                 {
                     DataProviderConfigured = new DataProviderConfigured(id, dataProvider,
-                        string.Format("Configuration in Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Configuration in Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow, category)
                 }
             };
@@ -147,7 +153,8 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
                 DataProviderResponseTransformed = new
                 {
                     DataProviderResponseTransformed = new DataProviderResponseTransformed(id, dataProvider,
-                        string.Format("Transformation in Data Provider {0}", dataProvider.ToString()), payload, metadata,
+                        string.Format("Transformation in Data Provider {0}", dataProvider.ToString()),
+                        payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow, category)
                 }
             };
