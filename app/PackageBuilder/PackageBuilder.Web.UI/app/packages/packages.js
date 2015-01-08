@@ -56,11 +56,18 @@
             });
 
             modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
+                $scope.test = selectedItem;
+                //$scope.reintializeGridData();
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());
+                //getAllPackages();
             });
         };
+
+        $scope.reintializeGridData = function () {
+
+            getAllPackages();
+        }
 
         $scope.gridOptions = {
             data: 'dPackagesData',

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance,
+    angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance, datacontext,
                                                             items, packageName, packageId) {
 
         $scope.packageName = packageName;
@@ -12,8 +12,10 @@
             item: $scope.items[0]
         };
 
-        $scope.ok = function () {
-            $modalInstance.close($scope.selected.item);
+        $scope.ok = function (cloneName) {
+
+            datacontext.clonePackage(packageId, cloneName);
+            $modalInstance.close($scope.packageId);
         };
 
         $scope.cancel = function () {
