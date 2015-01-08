@@ -55,6 +55,7 @@
                 }
             });
 
+            //TODO: Refresh dataGrid after clone of Package
             modalInstance.result.then(function (selectedItem) {
                 $scope.test = selectedItem;
                 //$scope.reintializeGridData();
