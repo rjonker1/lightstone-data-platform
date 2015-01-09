@@ -23,10 +23,10 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages"] = parameters =>
                  Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
-            Get["/Package/Get/{id}/{version}"] = parameters => 
+            Get["/Packages/{id}/{version}"] = parameters => 
                 Response.AsJson(new { Response = new[] { Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id)) } });
 
-            Post["/Package/Add"] = parameters =>
+            Post["/Packages"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
@@ -36,7 +36,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success" });
             };
 
-            Post["/Package/Edit/{id}"] = parameters =>
+            Put["/Packages/{id}"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
@@ -47,14 +47,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
 
-            Post["/Package/Delete/{id}"] = parameters =>
-            {
-                bus.Publish(new DeletePackage(new Guid(parameters.id)));
-
-                return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
-            };
-
-            Post["/Package/Clone/{id}/{cloneName}"] = parameters =>
+            Put["/Packages/Clone/{id}/{cloneName}"] = parameters =>
             {
                 var packageToClone = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
                 var dataProvidersToClone = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(packageToClone.DataProviders);
@@ -71,7 +64,14 @@ namespace PackageBuilder.Api.Modules
                         packageToClone.Owner, DateTime.Now, null,
                         dataProvidersToClone));
 
-                return Response.AsJson(new { msg = "Success, Package with ID: " + parameters.id + " has been cloned to package '"+parameters.cloneName+"'" });
+                return Response.AsJson(new { msg = "Success, Package with ID: " + parameters.id + " has been cloned to package '" + parameters.cloneName + "'" });
+            };
+
+            Delete["/Packages/Delete/{id}"] = parameters =>
+            {
+                bus.Publish(new DeletePackage(new Guid(parameters.id)));
+
+                return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
             };
         }
     }

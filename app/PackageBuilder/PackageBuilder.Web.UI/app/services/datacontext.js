@@ -47,7 +47,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/Package/Get/' + _id + '/' + _version + '').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/Packages/' + _id + '/' + _version + '').then(function (result) {
 
                 deferred.resolve(result);
 
@@ -157,7 +157,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://dev.lightstone.packagebuilder.api/Package/Edit/' + _id + '', packageData).then(function (result) {
+            $http.put('http://dev.lightstone.packagebuilder.api/Packages/' + _id + '', packageData).then(function (result) {
 
                 deferred.resolve(result);
 
@@ -174,7 +174,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://dev.lightstone.packagebuilder.api/Package/Add', packageData).then(function (result) {
+            $http.post('http://dev.lightstone.packagebuilder.api/Packages', packageData).then(function (result) {
 
                 deferred.resolve(result);
 
@@ -191,7 +191,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://dev.lightstone.packagebuilder.api/Package/Clone/' + _packageToCloneId + '/' + _cloneName).then(function(result) {
+            $http.put('http://dev.lightstone.packagebuilder.api/Packages/Clone/' + _packageToCloneId + '/' + _cloneName).then(function(result) {
 
                 deferred.resolve(result);
 
@@ -209,7 +209,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://dev.lightstone.packagebuilder.api/Package/Delete/' + _id + '').then(function (result) {
+            $http.delete('http://dev.lightstone.packagebuilder.api/Packages/' + _id + '').then(function (result) {
 
                 deferred.resolve(result);
 
@@ -227,7 +227,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/State').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/States').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(data);

@@ -12,12 +12,12 @@ namespace PackageBuilder.Api.Modules
     {
         public IndustryModule(IBus bus, IRepository<Industry> repository)
         {
-            Get["/Industry"] = parameters =>
-            {
-                return Response.AsJson(repository);
-            };
+            const string industriesRoute = "/Industries";
 
-            Post["/Industry/Add"] = parameters =>
+            Get[industriesRoute] = parameters => 
+                Response.AsJson(repository);
+
+            Post[industriesRoute] = parameters =>
             {
                 var model = Request.Body<dynamic>();
                 if (model.name.Value == null)
@@ -28,7 +28,7 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new { response = "Success!" });
             };
 
-            Post["/Industry/Edit"] = parameters =>
+            Put[industriesRoute] = parameters =>
             {
                 var model = Request.Body<dynamic>();
                 if (model.id.Value == null && model.name.Value == null)
