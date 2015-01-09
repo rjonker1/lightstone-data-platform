@@ -246,7 +246,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/Industry').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/Industries').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(data);
