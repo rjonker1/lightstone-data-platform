@@ -36,7 +36,6 @@
         // Prevent $modelValue undefined error
         $scope.dataProvsPkg.Package = { 'mock': 'mock' };
 
-
         $scope.createPackage = function(packageData) {
 
             return datacontext.createPackage(packageData).then(function (response) {
@@ -237,7 +236,7 @@
                 if (response.status === 200) {
 
                     $scope.dataProvsPkg.Package.DataProviders = response.data;
-                    $scope.dataProvsPkg.Package.state = 'Draft';
+                    //$scope.dataProvsPkg.Package.state = 'Draft';
                     logSuccess('Data Providers loaded!');
                 }
 
@@ -267,6 +266,7 @@
             return datacontext.getStates().then(function (response) {
 
                 $scope.states = response;
+                $scope.dataProvsPkg.Package.state = $scope.states[0];
             });
         }
 

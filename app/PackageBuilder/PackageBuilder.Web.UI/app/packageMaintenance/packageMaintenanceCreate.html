@@ -205,8 +205,8 @@
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-selected="dataProvsPkg.Package.state">
-                                            <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
+                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-options="state.name for state in states">
+                                            <!--<option ng-repeat="state in states" value="{{state.id}}">{{state.alias}}</option>-->
                                         </select>
                                     </div>
                                 </div>
