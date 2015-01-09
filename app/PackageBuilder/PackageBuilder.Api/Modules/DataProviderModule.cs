@@ -7,6 +7,7 @@ using MemBus;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
+using NHibernate.Param;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
@@ -57,6 +58,11 @@ namespace PackageBuilder.Api.Modules
                     stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
+            };
+
+            Post["DataProvider/Clone/{id}/{cloneName}"] = ParametersBackTrackExtensions =>
+            {
+                return Response.AsJson(new {msg = "Works"});
             };
         }
     }

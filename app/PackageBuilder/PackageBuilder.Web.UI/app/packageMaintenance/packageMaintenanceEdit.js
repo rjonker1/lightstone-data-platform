@@ -80,7 +80,6 @@
             try {
 
                 items = $scope.dataProvsPkg.Package[0].dataProviders; //Require array type for Package due to response build-up of NancyFx
-                console.log(items);
 
             } catch (e) {
 
@@ -231,8 +230,17 @@
                     $scope.dataProvsPkg.Package = response.data.response;
                     //Manipulate current state of Pakage at load to reflect alias of enum from API
 
-                    logSuccess('Data Providers loaded!');
+                    //State comparison
+                    for (var i = 0; i < $scope.states.length; i++) {
 
+                        if ($scope.dataProvsPkg.Package[0].state.id == $scope.states[i].id) {
+
+                            $scope.dataProvsPkg.Package[0].state = $scope.states[i];
+                        }
+                    }
+
+                    logSuccess('Data Providers loaded!');
+                    //console.log($scope.dataProvsPkg.Package[0].state.id);
                 }
 
                 if (response.status === 404) {

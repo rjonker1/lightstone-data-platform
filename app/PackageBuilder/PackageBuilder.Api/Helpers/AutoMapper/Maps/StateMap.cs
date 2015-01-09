@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
@@ -8,8 +9,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<string, State>()
-                .ConvertUsing<ITypeConverter<string, State>>();
+            Mapper.CreateMap<Guid, State>()
+                .ConvertUsing<ITypeConverter<Guid, State>>();
             Mapper.CreateMap<State, StateName>();
         }
     }

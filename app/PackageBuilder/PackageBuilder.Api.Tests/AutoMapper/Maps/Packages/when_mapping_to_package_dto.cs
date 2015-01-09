@@ -32,7 +32,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
             _packageDto.RecommendedSalePrice.ShouldEqual(0d);
             _packageDto.Notes.ShouldEqual("");
             _packageDto.Industries.Count().ShouldEqual(2);
-            _packageDto.State.ShouldEqual("Published");
+            _packageDto.State.Alias.ShouldEqual("Published");
             _packageDto.DisplayVersion.ShouldEqual(0.1m);
             _packageDto.Owner.ShouldEqual("");
             _packageDto.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
