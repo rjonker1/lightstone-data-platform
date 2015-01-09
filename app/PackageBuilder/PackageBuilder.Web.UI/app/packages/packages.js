@@ -56,19 +56,16 @@
             });
 
             //TODO: Refresh dataGrid after clone of Package
-            modalInstance.result.then(function (selectedItem) {
-                $scope.test = selectedItem;
-                //$scope.reintializeGridData();
+            modalInstance.result.then(function () {
+
+                getAllPackages();
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());
                 //getAllPackages();
             });
+
+
         };
-
-        $scope.reintializeGridData = function () {
-
-            getAllPackages();
-        }
 
         $scope.gridOptions = {
             data: 'dPackagesData',
@@ -139,10 +136,7 @@
                         });
                     });
 
-                //$scope.dPackagesData = result;
-
                 (result.indexOf('Error') > -1) ? logError(result) : $scope.dPackagesData = result;
-
             });
         }
     }

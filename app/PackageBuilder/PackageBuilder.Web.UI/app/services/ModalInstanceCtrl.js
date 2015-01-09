@@ -1,8 +1,14 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance, datacontext,
+    angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance, datacontext, common,
                                                             items, packageName, packageId) {
+
+        var controllerId = 'packages';
+
+        var getLogFn = common.logger.getLogFn;
+        var log = getLogFn(controllerId);
+        var logError = getLogFn(controllerId, 'error');
 
         $scope.packageName = packageName;
         $scope.packageId = packageId;
@@ -14,8 +20,16 @@
 
         $scope.ok = function (cloneName) {
 
-            datacontext.clonePackage(packageId, cloneName);
-            $modalInstance.close($scope.packageId);
+            datacontext.clonePackage(packageId, cloneName).then(function(result) {
+
+                if (result.status == 200) {
+
+                    log('New Package: ' + cloneName + ' was been cloned successfully');
+                    $modalInstance.close();
+                } else {
+                    logError(result);
+                }
+            });
         };
 
         $scope.cancel = function () {
