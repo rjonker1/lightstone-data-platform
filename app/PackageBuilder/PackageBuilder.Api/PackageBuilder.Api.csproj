@@ -156,6 +156,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderOverrideMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\IndustryMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\ComplexObjectToDataFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataFieldDtoToDataFieldConverter.cs" />
@@ -168,7 +169,7 @@
     <Compile Include="Helpers\AutoMapper\TypeConverters\StringToStateConverter.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
-    <Compile Include="Helpers\AutoMapper\ValueResolvers\IndustryResolver.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidTitleHolderResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap.cs" />

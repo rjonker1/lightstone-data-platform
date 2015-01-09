@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Microsoft.Practices.ServiceLocation;
-using PackageBuilder.Api.Helpers.AutoMapper.ValueResolvers;
-using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
@@ -18,7 +15,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
             Mapper.CreateMap<IDataField, DataProviderFieldItemDto>()
                 .ForMember(d => d.Price, opt => opt.MapFrom(x => x.CostOfSale))
                 .ForMember(d => d.IsSelected, opt => opt.MapFrom(x => x.IsSelected))
-                .ForMember(d => d.Industries, opt => opt.ResolveUsing<IndustryResolver>().ConstructedBy(() => new IndustryResolver(ServiceLocator.Current.GetInstance<IRepository<Industry>>())));
+                .ForMember(d => d.Industries, opt => opt.MapFrom(x => Mapper.Map<IDataField, IEnumerable<Industry>>(x)));
         }
     }
 }
