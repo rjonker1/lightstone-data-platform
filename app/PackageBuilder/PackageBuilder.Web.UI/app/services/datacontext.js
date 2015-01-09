@@ -65,7 +65,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/' + _id + '/' + _version + '').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProviders/' + _id + '/' + _version + '').then(function (result) {
 
                 deferred.resolve(result);
 
@@ -83,7 +83,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProviders').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(data);
@@ -102,7 +102,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProvider/Get/All').then(function (result) {
+            $http.get('http://dev.lightstone.packagebuilder.api/DataProviders/Latest').then(function (result) {
 
                 data = result.data;
                 deferred.resolve(result);
@@ -140,7 +140,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://dev.lightstone.packagebuilder.api/DataProvider/Edit/' + _id + '', providerData).then(function (result) {
+            $http.put('http://dev.lightstone.packagebuilder.api/DataProviders/' + _id + '', providerData).then(function (result) {
 
                 deferred.resolve(result);
 
