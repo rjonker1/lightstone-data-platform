@@ -71,13 +71,13 @@ namespace PackageBuilder.Api
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
             {
-                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(context.Request.Method, context.Request.Url));
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
                 return null;
             });
-            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(context.Request.Method, context.Request.Url)));
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Unhandled error on Api request {0}[{1}] => {2}".FormatWith(context.Request.Method, context.Request.Url, exception));
+                this.Error(() => "Unhandled error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
                 return ErrorResponse.FromException(exception);
             });
             pipelines.EnableCors(); // cross origin resource sharing

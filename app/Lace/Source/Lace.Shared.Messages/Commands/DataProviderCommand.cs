@@ -11,22 +11,29 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     {
         [DataMember]
         public Category Category { get; private set; }
+
         [DataMember]
         public DataProviderCommandSource DataProviderCommandSource { get; private set; }
+
         [DataMember]
         public DateTime Date { get; private set; }
+
         [DataMember]
         public Guid Id { get; private set; }
+
         [DataMember]
         public string Message { get; private set; }
+
         [DataMember]
-        public string MetaData { get; private set; }
+        public object MetaData { get; private set; }
+
         [DataMember]
-        public string Payload { get; private set; }
+        //public string Payload { get; private set; }
+        public object Payload { get; private set; }
 
 
-        public DataProviderCommand(Guid id, DataProviderCommandSource dataProvider, string message, string payload,
-            string metadata, DateTime date, Category category)
+        public DataProviderCommand(Guid id, DataProviderCommandSource dataProvider, string message, object payload,
+            object metadata, DateTime date, Category category)
         {
             Id = id;
             DataProviderCommandSource = dataProvider;
@@ -41,12 +48,12 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     public interface ICommand
     {
-        Category Category { get;}
-        DataProviderCommandSource DataProviderCommandSource { get;}
-        DateTime Date { get;}
-        Guid Id { get;}
-        string Message { get;}
-        string MetaData { get;}
-        string Payload { get;}
+        Category Category { get; }
+        DataProviderCommandSource DataProviderCommandSource { get; }
+        DateTime Date { get; }
+        Guid Id { get; }
+        string Message { get; }
+        object MetaData { get; }
+        object Payload { get; }
     }
 }

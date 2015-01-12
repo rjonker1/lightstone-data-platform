@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.Industries.Commands;
@@ -18,7 +19,14 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
         {
             this.Info(() => "Attempting to import industries");
 
-            _handler.Handle(new CreateIndustry(new Guid(), "All", true));
+            try
+            {
+                _handler.Handle(new CreateIndustry(new Guid(), "All", true));
+            }
+            catch (LightstoneAutoException exception)
+            {
+                this.Warn(() => exception);
+            }
 
             this.Info(() => "Successfully imported industries");
         }

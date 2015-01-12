@@ -1,0 +1,52 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>>
+@{
+    Layout = "_Layout.cshtml";
+}
+@section Header
+{
+    <link type="text/css" rel="stylesheet" href="~/Content/Styles/json_formatter.css">
+    <link type="text/css" rel="stylesheet" href="../Content/Styles/monitoring_data_providers.css" />
+}
+<h1>Monitoring<span>Event Log for Data Providers</span></h1>
+<div>
+    <div class="tabbed-area">
+        <ul class="tabs group">
+            <li><a href="/dataProviders/log">Log</a></li>
+        </ul>
+        <div class="box-wrap">
+        </div>
+    </div>
+</div>
+<div class="box-wrap">
+
+    @{
+        var count = 0;
+        foreach (var response in @Model)
+        {
+            count++;
+            var jsonId = "rawJson-" + count;
+            var canvasId = "canvas-" + count;
+            var toggleId = "toggle-" + count;
+
+            <div>
+                <span><img src="../Content/Images/plus.gif" alt="expand" onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); " /></span>Events for Aggregate @response.Id @response.Date
+            </div>
+            <div>
+                <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId' );" value="Collapse all" /> <input type="button" value="Expand All" onclick="ExpandAllClicked('@jsonId', '@canvasId' ); ">
+            </div>
+            <div>
+                <div style="display: none; border-width: 2px; border-style: solid" id="@toggleId">
+                    <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
+                    <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
+                </div>
+            </div>
+
+        }
+    }
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" charset="utf-8" src="~/Scripts/json-formatter.js"></script>
+}
