@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance, datacontext, common,
+    angular.module('app').controller('PkgCloneModalInstanceCtrl', function ($scope, $modalInstance, datacontext, common,
                                                             items, packageName, packageId) {
 
         var controllerId = 'packages';
@@ -24,7 +24,7 @@
 
                 if (result.status == 200) {
 
-                    log('New Package: ' + cloneName + ' was been cloned successfully');
+                    log('New Package: ' + cloneName + ' has been cloned successfully');
                     $modalInstance.close();
                 } else {
                     logError(result);

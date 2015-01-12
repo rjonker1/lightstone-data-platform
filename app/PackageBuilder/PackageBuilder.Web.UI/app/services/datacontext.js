@@ -209,7 +209,7 @@
 
             var deferred = $q.defer();
 
-            $http.delete('http://dev.lightstone.packagebuilder.api/Packages/' + _id + '').then(function (result) {
+            $http.delete('http://dev.lightstone.packagebuilder.api/Packages/Delete/' + _id + '').then(function (result) {
 
                 deferred.resolve(result);
 
