@@ -10,6 +10,7 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
@@ -32,8 +33,10 @@ namespace PackageBuilder.Api.Modules
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-            Get["/DataProviders"] = parameters =>
-                Response.AsJson(readRepo);
+            Get["/DataProviders"] = parameters => {
+                var test = Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.ReadModels.DataProvider>, IEnumerable<Domain.Dtos.ReadModels.DataProviderDto>>(readRepo));
+                return test;
+            };
 
             Get["/DataProviders/Latest"] = parameters =>
             {

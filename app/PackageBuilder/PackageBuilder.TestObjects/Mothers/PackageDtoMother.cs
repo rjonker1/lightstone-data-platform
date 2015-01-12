@@ -1,5 +1,6 @@
 ﻿using System;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers

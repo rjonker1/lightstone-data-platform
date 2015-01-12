@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
-namespace PackageBuilder.Domain.Dtos
+namespace PackageBuilder.Domain.Dtos.WriteModels
 {
     public class PackageDto
     {

@@ -3,7 +3,7 @@ using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.WriteModels.Responses
 {
     public class IvidResponseMap : ICreateAutoMapperMaps
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PackageBuilder.Domain.Dtos
+namespace PackageBuilder.Domain.Dtos.WriteModels
 {
     public class DataProviderDto
     {
