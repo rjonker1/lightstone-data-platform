@@ -60,8 +60,6 @@ namespace PackageBuilder.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            pipelines.EnableCors(); // cross origin resource sharing
-
             //Make every request SSL based
             //pipelines.BeforeRequest += ctx =>
             //{
@@ -79,9 +77,16 @@ namespace PackageBuilder.Api
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
             pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
             {
-                this.Error(() => "Unhandled error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
-                return ErrorResponse.FromException(exception);
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                var fromException = ErrorResponse.FromException(exception);
+                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
+                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+                return fromException;
             });
+
+            pipelines.EnableCors(); // cross origin resource sharing
+
             pipelines.AddTransactionScope(container);
 
             base.RequestStartup(container, pipelines, context);

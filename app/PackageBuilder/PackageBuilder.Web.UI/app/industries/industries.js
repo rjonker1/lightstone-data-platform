@@ -56,7 +56,7 @@
                         $scope.data = successCallback;
                         logSuccess("Industries retrieved");
                 }, function(errorCallback) {
-                        logError(errorCallback.response);
+                        logError(errorCallback.data.errorMessage);
                 });
         }
             
@@ -74,8 +74,8 @@
                     getIndustries();
                     logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                    logError(errorCallback);
-                    console.log(errorCallback);
+                    logError(errorCallback.data.errorMessage);
+                    console.log(errorCallback.data.errorMessage);
 
                 });
         };
@@ -86,7 +86,7 @@
                         getIndustries();
                         logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                        logError(errorCallback.response);
+                    logError(errorCallback.data.errorMessage);
                 });
         }
     }

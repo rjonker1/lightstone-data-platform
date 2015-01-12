@@ -58,15 +58,6 @@ namespace Shared.BuildingBlocks.Api.Security
                 nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
             });
 
-            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
-            {
-                nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
-                nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
-
-                return null;
-            });
-
             return pipelines;
         }
     }

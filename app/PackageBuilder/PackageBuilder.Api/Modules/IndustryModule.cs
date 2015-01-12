@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using PackageBuilder.Api.Helpers.Extensions;
@@ -21,7 +22,7 @@ namespace PackageBuilder.Api.Modules
             {
                 var model = Request.Body<dynamic>();
                 if (model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+                    throw new LightstoneAutoException("Could not bind 'Name' value");
 
                 bus.Publish(new CreateIndustry(Guid.NewGuid(), model.name.Value, false));
 
@@ -32,7 +33,7 @@ namespace PackageBuilder.Api.Modules
             {
                 var model = Request.Body<dynamic>();
                 if (model.id.Value == null && model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+                    throw new LightstoneAutoException("Could not bind 'id' or 'Name' value");
                     
                 bus.Publish(new RenameIndustry(new Guid(model.id.Value), model.name.Value, false));
 
