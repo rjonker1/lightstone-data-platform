@@ -37,29 +37,18 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
                 summary = "";
 
             var statusCode = HttpStatusCode.InternalServerError;
-            var error = new Error { ErrorMessage = summary, FullException = exception.ToString() };
+            var error = new Error();
             if (exception is LightstoneAutoException)
             {
                 statusCode = HttpStatusCode.InternalServerError;
-                error.FullException = null;
+                error.ErrorMessage = summary;
             }
             else if (exception is NotImplementedException)
-            {
                 statusCode = HttpStatusCode.NotImplemented;
-                error.FullException = null;
-            }
             else if (exception is UnauthorizedAccessException)
-            {
                 statusCode = HttpStatusCode.Unauthorized;
-                error.FullException = null;
-            }
             else if (exception is ArgumentException)
-            {
                 statusCode = HttpStatusCode.BadRequest;
-                error.FullException = null;
-            }
-            else
-                error.FullException = null;
 
             return new ErrorResponse(error) { StatusCode = statusCode };
         }
