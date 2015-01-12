@@ -96,7 +96,7 @@
              cellTemplate: '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) == row.entity.version">' +
                  '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
                  '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="getExternalScopes().open(row.entity.name, row.entity.packageId)" value="Clone" />' +
-                 '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
+                 '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="getExternalScopes().deletePackage(row.entity.id)" value="Remove" /></div>' +
                  '' +
                  '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) != row.entity.version">' +
                  '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" /></div>'
@@ -137,6 +137,14 @@
                     });
 
                 (result.indexOf('Error') > -1) ? logError(result) : $scope.dPackagesData = result;
+            });
+        }
+
+        function deletePackage(_id) {
+
+            return datacontext.deletePackage(_id).then(function(result) {
+
+                (result.indexOf('Error') > -1) ? logError(result) : logSuccess('Package has been removed!');
             });
         }
     }
