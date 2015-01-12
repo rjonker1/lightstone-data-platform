@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using PackageBuilder.Api.Helpers.Extensions;
@@ -16,14 +17,14 @@ namespace PackageBuilder.Api.Modules
         {
             const string statesRoute = "/States";
 
-            Get[statesRoute] = parameters => 
+            Get[statesRoute] = parameters =>
                 Response.AsJson(repository.Select(x => new { id = x.Id, name = x.Name.ToString(), alias = x.Alias }));
 
             Put[statesRoute] = parameters =>
             {
                 var model = Request.Body<dynamic>();
                 if (model.id.Value == null && model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+                    throw new LightstoneAutoException("Could not bind 'id' or 'Name' value");
 
                 bus.Publish(new RenameState(new Guid(model.id.Value), Enum.Parse(typeof(StateName), model.name.Value, true), model.alias.Value));
 
