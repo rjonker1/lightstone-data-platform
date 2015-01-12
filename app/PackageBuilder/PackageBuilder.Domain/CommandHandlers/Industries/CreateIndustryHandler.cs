@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Helpers.Extensions;
+﻿using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
@@ -19,8 +20,9 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
         {
             if (_repository.Exists(command.Id, command.Name))
             {
-                this.Warn(() => "An industry with the name {0} already exists".FormatWith(command.Name));
-                return;
+                var exception = new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => exception);
+                throw exception;
             }
 
             _repository.Save(new Industry(command.Id, command.Name, command.IsSelected));
