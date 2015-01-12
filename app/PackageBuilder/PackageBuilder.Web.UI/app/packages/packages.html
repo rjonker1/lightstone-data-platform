@@ -14,25 +14,3 @@
         </div>
     </section>
 </section>
-
-<script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Clone package: {{packageName}}?</h3>
-    </div>
-    <div class="modal-body">
-
-        <label>*Cloned Package Name: </label><br />
-        <p>Please specify the name of the package to be cloned from {{packageName}}.</p>
-        
-        <input type="text" ng-model="cloneName"/>
-        
-        <br />
-        <br />
-        <p>PackageId (Package to be cloned): {{packageId}}</p>
-
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        <button ng-if="cloneName.length >= 1" class="btn btn-primary" ng-click="ok(cloneName)">Clone</button>
-    </div>
-</script>

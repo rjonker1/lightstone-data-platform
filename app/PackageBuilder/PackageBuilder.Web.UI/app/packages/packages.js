@@ -17,6 +17,7 @@
 
         var getLogFn = common.logger.getLogFn;
         var log = getLogFn(controllerId);
+        var logSuccess = getLogFn(controllerId, 'success');
         var logError = getLogFn(controllerId, 'error');
 
         $scope.test = '';
@@ -32,15 +33,19 @@
             $location.path('/package-maintenance-view/' + row.entity.packageId + '/' + row.entity.version);
         }
 
+        $scope.removePkg = function(id) {
+            deletePackage(id);
+        }
+
         $scope.selectedDatasource = [];
 
         $scope.items = ['item1', 'item2', 'item3'];
 
-        $scope.open = function (packageName, packageId) {
+        $scope.clone = function (packageName, packageId) {
 
             var modalInstance = $modal.open({
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
+                templateUrl: 'app/viewTemplates/pkgCloneModalTemplate.html',
+                controller: 'PkgCloneModalInstanceCtrl',
                 //size: size,
                 resolve: {
                     items: function () {
@@ -55,16 +60,38 @@
                 }
             });
 
-            //TODO: Refresh dataGrid after clone of Package
             modalInstance.result.then(function () {
 
                 getAllPackages();
+
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());
-                //getAllPackages();
+            });
+        };
+
+        $scope.delete = function (packageName, packageId) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'app/viewTemplates/pkgDeleteModalTemplate.html',
+                controller: 'PkgDeleteModalInstanceCtrl',
+                //size: size,
+                resolve: {
+                    packageName: function () {
+                        return packageName;
+                    },
+                    packageId: function () {
+                        return packageId;
+                    }
+                }
             });
 
+            modalInstance.result.then(function () {
 
+                getAllPackages();
+
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
         $scope.gridOptions = {
@@ -95,8 +122,8 @@
              width: 280,
              cellTemplate: '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) == row.entity.version">' +
                  '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
-                 '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="getExternalScopes().open(row.entity.name, row.entity.packageId)" value="Clone" />' +
-                 '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="getExternalScopes().deletePackage(row.entity.id)" value="Remove" /></div>' +
+                 '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="getExternalScopes().clone(row.entity.name, row.entity.packageId)" value="Clone" />' +
+                 '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="getExternalScopes().delete(row.entity.name, row.entity.packageId)" value="Remove" /></div>' +
                  '' +
                  '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) != row.entity.version">' +
                  '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" /></div>'
@@ -140,12 +167,5 @@
             });
         }
 
-        function deletePackage(_id) {
-
-            return datacontext.deletePackage(_id).then(function(result) {
-
-                (result.indexOf('Error') > -1) ? logError(result) : logSuccess('Package has been removed!');
-            });
-        }
     }
 })();
