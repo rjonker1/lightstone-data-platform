@@ -39,7 +39,10 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
             var statusCode = HttpStatusCode.InternalServerError;
             var error = new Error { ErrorMessage = summary, FullException = exception.ToString() };
             if (exception is LightstoneAutoException)
-                statusCode = HttpStatusCode.OK;
+            {
+                statusCode = HttpStatusCode.InternalServerError;
+                error.FullException = null;
+            }
             else if (exception is NotImplementedException)
             {
                 statusCode = HttpStatusCode.NotImplemented;
@@ -70,14 +73,6 @@ namespace Shared.BuildingBlocks.Api.ExceptionHandling
 
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string[] Errors { get; set; }
-
-            public bool IsError
-            {
-                get
-                {
-                    return true;
-                }
-            }
         }
     }
 }
