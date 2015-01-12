@@ -3,7 +3,6 @@
 
     angular.module('app').controller('PkgCloneModalInstanceCtrl', function ($scope, $modalInstance, datacontext, common,
                                                             items, packageName, packageId) {
-
         var controllerId = 'packages';
 
         var getLogFn = common.logger.getLogFn;
@@ -19,16 +18,15 @@
         };
 
         $scope.ok = function (cloneName) {
-
             datacontext.clonePackage(packageId, cloneName).then(function(result) {
-
                 if (result.status == 200) {
-
                     log('New Package: ' + cloneName + ' has been cloned successfully');
                     $modalInstance.close();
                 } else {
                     logError(result);
                 }
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         };
 
@@ -36,5 +34,4 @@
             $modalInstance.dismiss('cancel');
         };
     });
-
 })();

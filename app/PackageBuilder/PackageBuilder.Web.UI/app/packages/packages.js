@@ -10,7 +10,6 @@
     packages.$inject = ['$scope', '$modal', '$location', 'uiGridConstants', 'common', 'datacontext'];
 
     function packages($scope, $modal, $location, uiGridConstants, common, datacontext) {
-
         $scope.title = 'Packages';
 
         $scope.$scope = $scope; //ui-grid
@@ -23,26 +22,23 @@
         $scope.test = '';
         $scope.dPackagesData = '';
 
-        $scope.notify = function (row) {
-
+        $scope.notify = function(row) {
             $location.path('/package-maintenance-edit/' + row.entity.packageId + '/' + row.entity.version);
-        }
+        };
 
-        $scope.viewPackage = function (row) {
-
+        $scope.viewPackage = function(row) {
             $location.path('/package-maintenance-view/' + row.entity.packageId + '/' + row.entity.version);
-        }
+        };
 
         $scope.removePkg = function(id) {
             deletePackage(id);
-        }
+        };
 
         $scope.selectedDatasource = [];
 
         $scope.items = ['item1', 'item2', 'item3'];
 
         $scope.clone = function (packageName, packageId) {
-
             var modalInstance = $modal.open({
                 templateUrl: 'app/viewTemplates/pkgCloneModalTemplate.html',
                 controller: 'PkgCloneModalInstanceCtrl',
@@ -61,16 +57,13 @@
             });
 
             modalInstance.result.then(function () {
-
                 getAllPackages();
-
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());
             });
         };
 
         $scope.delete = function (packageName, packageId) {
-
             var modalInstance = $modal.open({
                 templateUrl: 'app/viewTemplates/pkgDeleteModalTemplate.html',
                 controller: 'PkgDeleteModalInstanceCtrl',
@@ -86,9 +79,7 @@
             });
 
             modalInstance.result.then(function () {
-
                 getAllPackages();
-
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());
             });
@@ -131,19 +122,15 @@
             ]
         };
 
-
         activate();
 
         function activate() {
-
             common.activateController([getAllPackages()], controllerId)
                 .then(function () { log('Activated Data Providers View'); });
         }
 
         function getAllPackages() {
-
             return datacontext.getAllPackages().then(function (result) {
-
                 var distinctProviders = Enumerable.From(result)
                     .Distinct(function (x) {
                         return x.packageId;
@@ -162,10 +149,11 @@
                             return x.version;
                         });
                     });
-
+                
                 (result.indexOf('Error') > -1) ? logError(result) : $scope.dPackagesData = result;
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
-
     }
 })();

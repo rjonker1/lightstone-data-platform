@@ -3,7 +3,6 @@
 
     angular.module('app').controller('PkgDeleteModalInstanceCtrl', function ($scope, $modalInstance, datacontext, common,
                                                             packageName, packageId) {
-
         var controllerId = 'packages';
 
         var getLogFn = common.logger.getLogFn;
@@ -14,16 +13,15 @@
         $scope.packageId = packageId;
 
         $scope.ok = function () {
-
             datacontext.deletePackage(packageId).then(function (result) {
-
                 if (result.status == 200) {
-
                     log('Package: ' + packageName + ' was removed successfully');
                     $modalInstance.close();
                 } else {
                     logError(result);
                 }
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         };
 
@@ -31,5 +29,4 @@
             $modalInstance.dismiss('cancel');
         };
     });
-
 })();

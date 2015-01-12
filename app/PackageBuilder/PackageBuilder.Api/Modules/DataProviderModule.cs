@@ -7,7 +7,6 @@ using MemBus;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
-using NHibernate.Param;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
