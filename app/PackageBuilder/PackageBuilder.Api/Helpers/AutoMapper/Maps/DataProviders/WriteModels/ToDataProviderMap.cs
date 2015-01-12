@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.WriteModels
 {
     public class ToDataProviderMap : ICreateAutoMapperMaps
     {

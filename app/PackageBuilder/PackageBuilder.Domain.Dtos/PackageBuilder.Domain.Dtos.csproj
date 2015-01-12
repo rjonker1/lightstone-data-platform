@@ -34,11 +34,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProviderDto.cs">
+    <Compile Include="ReadModels\DataProviderDto.cs" />
+    <Compile Include="WriteModels\DataProviderDto.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataProviderFieldItemDto.cs" />
-    <Compile Include="PackageDto.cs" />
+    <Compile Include="WriteModels\DataProviderFieldItemDto.cs" />
+    <Compile Include="WriteModels\PackageDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +51,9 @@
       <Project>{AF32C137-D01E-4243-8DE5-6920113CFC6A}</Project>
       <Name>PackageBuilder.Domain.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

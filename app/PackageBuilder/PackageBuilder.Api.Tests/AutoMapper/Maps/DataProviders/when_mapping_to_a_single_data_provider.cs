@@ -5,6 +5,7 @@ using Castle.Windsor;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;

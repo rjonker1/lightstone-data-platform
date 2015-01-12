@@ -3,13 +3,13 @@ using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.WriteModels.Responses
 {
-    public class RgtVinResponseMap : ICreateAutoMapperMaps
+    public class IvidTitleHolderResponseMap : ICreateAutoMapperMaps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromRgtVin, IEnumerable<IDataField>>()
+            Mapper.CreateMap<IProvideDataFromIvidTitleHolder, IEnumerable<IDataField>>()
                 .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
         }
     }

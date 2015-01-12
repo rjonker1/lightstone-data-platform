@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 
 namespace PackageBuilder.TestObjects.Builders
 {
