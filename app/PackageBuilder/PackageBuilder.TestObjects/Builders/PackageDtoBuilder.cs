@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 

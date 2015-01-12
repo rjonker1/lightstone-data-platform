@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
 namespace PackageBuilder.TestObjects.Builders

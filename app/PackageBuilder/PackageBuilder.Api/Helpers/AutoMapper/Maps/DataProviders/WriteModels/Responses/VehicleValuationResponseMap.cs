@@ -4,7 +4,7 @@ using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.WriteModels.Responses
 {
     public class VehicleValuationResponseMap : ICreateAutoMapperMaps
     {

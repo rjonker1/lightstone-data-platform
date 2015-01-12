@@ -2,7 +2,7 @@
 using System.Linq;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
-namespace PackageBuilder.Domain.Dtos
+namespace PackageBuilder.Domain.Dtos.WriteModels
 {
     public class DataProviderFieldItemDto
     {
