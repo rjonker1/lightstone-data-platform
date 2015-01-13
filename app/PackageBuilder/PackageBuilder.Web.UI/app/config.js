@@ -15,6 +15,9 @@
         spinnerToggle: 'spinner.toggle'
     };
 
+    // used by Octopus Deploy
+    var apiUrl = "#{Lightstone.dp.api.hostname}";
+
     var config = {
         appErrorPrefix: '[LSA Error] ', //Configure the exceptionHandler decorator
         docTitle: 'LightstoneAuto: ',
@@ -22,8 +25,12 @@
         remoteServiceName: remoteServiceName,
         version: '2.1.0',
         baseUri: "http://localhost:62500",
-        apiUri: "http://dev.lightstone.packagebuilder.api"
+        apiUri: apiUrl
     };
+    
+    if (config.apiUri == "#{Lightstone.dp.api.hostname}") {
+        config.apiUri = "http://dev.lightstone.packagebuilder.api";
+    }
 
     app.value('config', config); //Global placeholder for config settings
     
