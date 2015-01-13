@@ -1,24 +1,24 @@
 ﻿'use strict';
 
-var stateResources = angular.module('stateResources', ['ngResource']);
+var stateResources = angular.module('stateResources', ['ngResource', 'app']);
 
-stateResources.factory('getIndexStateResource', ['$resource',
-    function($resource) {
-        return $resource('http://dev.lightstone.packagebuilder.api/States', {}, {
+stateResources.factory('getIndexStateResource', ['$resource', 'config',
+    function($resource, config) {
+        return $resource( config.apiUri + '/States', {}, {
             query: { method: 'GET', isArray: true }
         });
     }]);
 
-stateResources.factory('postAddStateResource', ['$resource',
-    function($resource) {
-        return $resource('http://dev.lightstone.packagebuilder.api/States', {}, {
+stateResources.factory('postAddStateResource', ['$resource', 'config',
+    function ($resource, config) {
+        return $resource( config.apiUri + '/States', {}, {
             save: { method: 'POST', isObject: true }
         });
     }]);
 
-stateResources.factory('postEditStateResource', ['$resource',
-    function($resource) {
-        return $resource('http://dev.lightstone.packagebuilder.api/States', {}, {
+stateResources.factory('postEditStateResource', ['$resource', 'config',
+    function ($resource, config) {
+        return $resource( config.apiUri + '/States', {}, {
             save: { method: 'PUT', isObject: true }
         });
     }]);

@@ -5,9 +5,9 @@
     //angular.module('app').factory(serviceId, ['$http', 'common', 'GetDataProvider', 'GetDataProviders',
     //                        'GetDataProviderSources', 'GetPackages', 'PostDataProvider', datacontext]);
 
-    angular.module('app').factory(serviceId, ['$http', 'common', datacontext]);
+    angular.module('app').factory(serviceId, ['$http', 'common', 'config', datacontext]);
 
-    function datacontext($http, common) {
+    function datacontext($http, common, config) {
         //function datacontext($http, common, GetDataProvider, GetDataProviders, GetDataProviderSources,
         //            GetPackages, PostDataProvider) {
 
@@ -40,7 +40,7 @@
         function getPackage(_id, _version) {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/Packages/' + _id + '/' + _version + '').then(function (result) {
+            $http.get( config.apiUri + '/Packages/' + _id + '/' + _version + '').then(function (result) {
                 deferred.resolve(result);
             }, function (error) {
                 deferred.reject(error);
@@ -53,7 +53,7 @@
         function getDataProvider(_id, _version) {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProviders/' + _id + '/' + _version + '').then(function (result) {
+            $http.get( config.apiUri + '/DataProviders/' + _id + '/' + _version + '').then(function (result) {
                 deferred.resolve(result);
             }, function (error) {
                 deferred.reject(error);
@@ -66,7 +66,7 @@
         function getAllDataProviders() {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProviders').then(function (result) {
+            $http.get( config.apiUri + '/DataProviders').then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {
@@ -80,7 +80,7 @@
         function getDataProviderSources() {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/DataProviders/Latest').then(function (result) {
+            $http.get( config.apiUri + '/DataProviders/Latest').then(function (result) {
                 data = result.data;
                 deferred.resolve(result);
             }, function (error) {
@@ -94,7 +94,7 @@
         function getAllPackages() {
             var deferred = $q.defer();
             
-            $http.get('http://dev.lightstone.packagebuilder.api/Packages').then(function (result) {
+            $http.get( config.apiUri + '/Packages').then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {
@@ -108,7 +108,7 @@
         function editDataProvider(_id, providerData) {
             var deferred = $q.defer();
 
-            $http.put('http://dev.lightstone.packagebuilder.api/DataProviders/' + _id + '', providerData).then(function (result) {
+            $http.put( config.apiUri + '/DataProviders/' + _id + '', providerData).then(function (result) {
                 deferred.resolve(result);
             }, function(error) {
                 deferred.reject(error);
@@ -121,7 +121,7 @@
         function editPackage(_id, packageData) {
             var deferred = $q.defer();
 
-            $http.put('http://dev.lightstone.packagebuilder.api/Packages/' + _id + '', packageData).then(function (result) {
+            $http.put( config.apiUri + '/Packages/' + _id + '', packageData).then(function (result) {
                 deferred.resolve(result);
             }, function (error) {
                 deferred.reject(error);
@@ -134,7 +134,7 @@
         function createPackage(packageData) {
             var deferred = $q.defer();
 
-            $http.post('http://dev.lightstone.packagebuilder.api/Packages', packageData).then(function (result) {
+            $http.post( config.apiUri + '/Packages', packageData).then(function (result) {
                 deferred.resolve(result);
             }, function (error) {
                 deferred.reject(error);
@@ -147,7 +147,7 @@
         function clonePackage(_packageToCloneId, _cloneName) {
             var deferred = $q.defer();
 
-            $http.put('http://dev.lightstone.packagebuilder.api/Packages/Clone/' + _packageToCloneId + '/' + _cloneName).then(function(result) {
+            $http.put( config.apiUri + '/Packages/Clone/' + _packageToCloneId + '/' + _cloneName).then(function (result) {
                 deferred.resolve(result);
             }, function(error) {
                 deferred.reject(error);
@@ -160,7 +160,7 @@
         function deletePackage(_id) {
             var deferred = $q.defer();
 
-            $http.delete('http://dev.lightstone.packagebuilder.api/Packages/Delete/' + _id + '').then(function (result) {
+            $http.delete( config.apiUri + '/Packages/Delete/' + _id + '').then(function (result) {
                 deferred.resolve(result);
             }, function (error) {
                 deferred.reject(error);
@@ -173,7 +173,7 @@
         function getStates() {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/States').then(function (result) {
+            $http.get( config.apiUri + '/States').then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {
@@ -187,7 +187,7 @@
         function getIndustries() {
             var deferred = $q.defer();
 
-            $http.get('http://dev.lightstone.packagebuilder.api/Industries').then(function (result) {
+            $http.get( config.apiUri + '/Industries').then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {

@@ -21,7 +21,8 @@
         events: events,
         remoteServiceName: remoteServiceName,
         version: '2.1.0',
-        baseUri: "http://localhost:62500"
+        baseUri: "http://localhost:62500",
+        apiUri: "http://dev.lightstone.packagebuilder.api"
     };
 
     app.value('config', config); //Global placeholder for config settings
