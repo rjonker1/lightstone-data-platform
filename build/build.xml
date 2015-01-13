@@ -34,8 +34,8 @@
       <includes>
         <include pattern="bin\*.dll" to="content\bin"/>
         <include pattern="bin\*.pdb" to="content\bin"/>
+        <include pattern="hibernate.cfg.xml" to="content\bin"/>       
         <include pattern="*.config" to="content"/>
-        <include pattern="hibernate.cfg.xml" to="content"/>        
       </includes>
     </nuget> 
     <nuget deploy="false">
