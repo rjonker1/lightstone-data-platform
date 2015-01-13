@@ -16,7 +16,7 @@
     };
 
     // used by Octopus Deploy
-    var apiUrl = "#{Lightstone.dp.api.hostname}";
+    var apiUrl = "#{Lightstone.dp.pb.api.url}";
 
     var config = {
         appErrorPrefix: '[LSA Error] ', //Configure the exceptionHandler decorator
@@ -28,7 +28,7 @@
         apiUri: apiUrl
     };
     
-    if (config.apiUri.indexOf("Lightstone.dp.api.hostname") > -1) {
+    if (config.apiUri.indexOf("Lightstone.dp.pb.api.url") > -1) {
         config.apiUri = "http://dev.lightstone.packagebuilder.api";
     }
 
