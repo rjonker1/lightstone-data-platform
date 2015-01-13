@@ -28,7 +28,7 @@
         apiUri: apiUrl
     };
     
-    if (config.apiUri == "#{Lightstone.dp.api.hostname}") {
+    if (config.apiUri.indexOf("Lightstone.dp.api.hostname") > -1) {
         config.apiUri = "http://dev.lightstone.packagebuilder.api";
     }
 
