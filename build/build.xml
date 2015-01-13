@@ -24,7 +24,7 @@
         <include pattern="bin\*.pdb" to="content\bin"/>
         <include pattern="*.config" to="content"/>
       </includes>
-    </nuget>
+    </nuget>    
     <nuget deploy="true">
       <name>Lightstone.DataPlatform.PackageBuilder.Api</name>
       <folder>app/PackageBuilder/PackageBuilder.Api</folder>
@@ -36,6 +36,24 @@
         <include pattern="bin\*.pdb" to="content\bin"/>
         <include pattern="hibernate.cfg.xml" to="content\bin"/>       
         <include pattern="*.config" to="content"/>
+      </includes>
+    </nuget> 
+    <nuget deploy="true">
+      <name>Lightstone.DataPlatform.PackageBuilder.Web.UI</name>
+      <folder>app/PackageBuilder/PackageBuilder.Web.UI</folder>
+      <author>CustomApp</author>
+      <description>Lightstone.DataPlatform.PackageBuilder.Web.UI</description>
+      <deploymentProject>LighstoneDataPlatform</deploymentProject>
+      <includes>
+        <include pattern="app\" to="content\app"/>
+        <include pattern="bin\" to="content\bin"/>
+        <include pattern="Content\" to="content\Content"/>
+        <include pattern="fonts\" to="content\fonts"/>       
+        <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="favicon.ico" to="content"/>
+        <include pattern="index.html" to="content"/>
+        <include pattern="packages.config" to="content"/>
+        <include pattern="Web.config" to="content"/>
       </includes>
     </nuget> 
     <nuget deploy="false">
