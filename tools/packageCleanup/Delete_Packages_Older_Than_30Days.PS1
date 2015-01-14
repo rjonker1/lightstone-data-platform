@@ -4,7 +4,7 @@ $Now = Get-Date
 #----- define amount of days ----#
 $Days = "30"
 #----- define folder where files are located ----#
-$TargetFolder = "D:\Development\Packages"
+$TargetFolder = "C:\Development\Tools\NuGet.Klondike\App_Data\Packages"
 #----- define extension ----#
 $packagesToDelete = 
 "*Lightstone.DataPlatform.Api.*", 
@@ -26,7 +26,6 @@ $packagesToDelete =
 "*Lightstone.DataPlatform.Workflow.BuildingBlocks*",
 "*Lightstone.DataPlatform.Workflow.RabbitMQ*",
 "*Lightstone.Dataplatform.PackageBuilder.Domain.Entities*",
-"*Lightstone.Dataplatform.PackageBuilder.TestObjects*",
 "*Lightstone.Dataplatform.PackageBuilder.TestObjects*",
 "*Lightstone.DataPlatform.EventTracking.Domain.Persistence*",
 "*Lightstone.DataPlatform.Lace.Domain.Core*"
