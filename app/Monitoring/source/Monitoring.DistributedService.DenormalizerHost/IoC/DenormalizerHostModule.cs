@@ -41,7 +41,8 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                     MsSqlConfiguration.MsSql2012.ConnectionString(
                         ConfigurationManager.ConnectionStrings["Monitoring.ReadModel"].ConnectionString))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MonitoringMap>())
-                .ExposeConfiguration(BuildMonitoringReadSchema).BuildSessionFactory();
+                //.ExposeConfiguration(BuildMonitoringReadSchema)
+                .BuildSessionFactory();
         }
 
         private static void BuildMonitoringReadSchema(Configuration config)
