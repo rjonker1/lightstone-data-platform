@@ -41,10 +41,12 @@
         <div class="row">
 
             <div class="col-md-4">
-                <!-- ng-if="dataField.dataFields.length > 0"  -->
-                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
+
+                <div class="col-md-2" ng-if="dataField.dataFields.length <= 0"></div>
+
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
                     <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
@@ -81,8 +83,7 @@
         <div class="row">
 
             <div class="col-md-4">
-                <!-- ng-if="dataField.dataFields.length > 0"  -->
-                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                 </a>
                 <div>
@@ -141,27 +142,6 @@
                 </div>
             </div>
 
-            <!--<ol ng-if="subDF.dataFields.length > 0" data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: collapsed}">
-                <li style="cursor:default; margin-left: -15px; margin-right: 0;" class="row category-title angular-ui-tree angular-ui-tree-handle"
-                    ng-repeat="dataField in subDF.dataFields">
-
-                    <div ng-if="dataField.dataFields.length <= 0">
-                        <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                        <div class="col-md-6">***{{dataField.name}}</div>
-                        <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                            <label class="col-md-2">Cost:</label>
-
-                            <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
-                                   value="{{totalChildren(dataField, dataField.dataFields)}}" />
-
-                            <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
-                        </div>
-                    </div>
-
-                </li>
-
-            </ol>-->
-
         </li>
     </ol>
 
@@ -205,8 +185,9 @@
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-selected="dataProvsPkg.Package.state">
-                                            <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
+                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-options="state.name for state in states">
+                                            <!--<option ng-repeat="state in states" value="{{state.id}}">{{state.alias}}</option>-->
+
                                         </select>
                                     </div>
                                 </div>

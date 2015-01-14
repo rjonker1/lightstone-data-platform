@@ -60,7 +60,7 @@
                         $scope.data = successCallback;
                         logSuccess("States retrieved");
                 }, function(errorCallback) {
-                        logError(errorCallback.response);
+                    logError(errorCallback.data.errorMessage);
                 });
         }
 
@@ -78,7 +78,7 @@
                         getStates();
                         logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                        logError(errorCallback);
+                    logError(errorCallback.data.errorMessage);
                 });
         };
 
@@ -88,7 +88,7 @@
                         getStates();
                         logSuccess(successCallback.response);
                 }, function(errorCallback) {
-                        logError(errorCallback.response);
+                    logError(errorCallback.data.errorMessage);
                 });
         }
     }

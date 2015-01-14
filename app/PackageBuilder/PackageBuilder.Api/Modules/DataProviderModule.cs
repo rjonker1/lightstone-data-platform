@@ -10,6 +10,7 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
@@ -32,19 +33,24 @@ namespace PackageBuilder.Api.Modules
             //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
-            Get["/DataProvider"] = parameters =>
-                Response.AsJson(readRepo);
+            Get["/DataProviders"] = parameters => {
+                var test = Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.ReadModels.DataProvider>, IEnumerable<Domain.Dtos.ReadModels.DataProviderDto>>(readRepo));
+                return test;
+            };
 
-            Get["/DataProvider/Get/All"] = parameters =>
+            Get["/DataProviders/Latest"] = parameters =>
             {
                 var dataSources = readRepo.GetUniqueIds().Select(x => Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(x))).ToList();
                 return Response.AsJson(dataSources);
             };
 
-            Get["/DataProvider/Get/{id}/{version}"] = parameters => 
+            Get["/DataProviders/{id}"] = parameters => 
                 Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
 
-            Post["/Dataprovider/Edit/{id}"] = parameters =>
+            Get["/DataProviders/{id}/{version}"] = parameters =>
+                Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id, parameters.version)) } });
+
+            Put["/Dataproviders/{id}"] = parameters =>
             {
                 var dto = this.Bind<DataProviderDto>();
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
@@ -54,6 +60,11 @@ namespace PackageBuilder.Api.Modules
                     stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
+            };
+
+            Post["DataProvider/Clone/{id}/{cloneName}"] = ParametersBackTrackExtensions =>
+            {
+                return Response.AsJson(new {msg = "Works"});
             };
         }
     }

@@ -10,7 +10,6 @@
     packageMaintenanceCreate.$inject = ['$scope', '$location', '$routeParams', '$parse', '$http', 'common', 'datacontext'];
 
     function packageMaintenanceCreate($scope, $location, $routeParams, $parse, $http, common, datacontext) {
-
         $scope.title = 'Package Maintenance - Edit';
         var filterVal = 'All';
         var getLogFn = common.logger.getLogFn;
@@ -29,61 +28,46 @@
 
         $scope.dataProvsPkg = {};
         //Prevent $modelValue undefined error
-        $scope.dataProvsPkg.Package = { 'mock' : 'mock' }
+        $scope.dataProvsPkg.Package = { 'mock': 'mock' };
 
-
-        $scope.editPackage = function (packageData) {
-
-            return datacontext.editPackage($routeParams.id, packageData).then(function (response) {
-
+        $scope.editPackage = function(packageData) {
+            return datacontext.editPackage($routeParams.id, packageData).then(function(response) {
                 console.log(response);
                 (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
-        }
+        };
 
         $scope.cancel = function () {
-
             $location.path('/packages');
         };
 
         $scope.filterIndustry = function (field) {
-
             var fieldIndustries = field.industries;
-
             for (var i = 0; i < fieldIndustries.length; i++) {
-
                 for (var j = 0; j < filterVal.length; j++) {
-
                     if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
-
                         return field;
                     }
-
                 }
-
             }
 
             return null;
         };
 
-        $scope.filterData = function (filterIndustries) {
-
+        $scope.filterData = function(filterIndustries) {
             filterVal = filterIndustries;
-        }
+        };
 
         $scope.total = function () {
-
             var rspEdit = angular.element(document.getElementById('rsp'));
             var valueTotal = 0;
             var items = null;
 
             try {
-
                 items = $scope.dataProvsPkg.Package[0].dataProviders; //Require array type for Package due to response build-up of NancyFx
-                console.log(items);
-
             } catch (e) {
-
                 //console.log(e.message);
             }
 
@@ -178,18 +162,15 @@
                         default:
                             break;
                     }
-
                 }
             }
 
             $scope.dataProvsPkg.Package.CostOfSale = valueTotal;
 
             if (valueTotal > rspEdit[0].value) {
-
                 $scope.warning = true;
                 $scope.rspEditStyle = { 'color': 'red' };
             } else {
-
                 $scope.warning = false;
                 $scope.rspEditStyle = { 'color': 'none' };
             }
@@ -197,90 +178,88 @@
             return valueTotal;
         };
 
-        $scope.totalChildren = function (parent, children) {
-
+        $scope.totalChildren = function(parent, children) {
             var totalChildrenVal = 0;
-
             for (var i = 0; i < children.length; i++) {
-
                 totalChildrenVal += children[i].price;
             }
 
             parent.price = totalChildrenVal;
 
             return totalChildrenVal;
-        }
-
+        };
 
         activate();
 
         function activate() {
-
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId)
-               .then(function () { log('Activated Package Maintenance View'); });
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId).then(function() {
+                log('Activated Package Maintenance View');
+            }, function(error) {
+                logError(error.data.errorMessage);
+            });
         }
 
         function getDataProvider(id, version) {
-
             return datacontext.getPackage(id, version).then(function (response) {
-
                 console.log(response);
 
                 if (response.status === 200) {
-
                     $scope.dataProvsPkg.Package = response.data.response;
                     //Manipulate current state of Pakage at load to reflect alias of enum from API
 
-                    logSuccess('Data Providers loaded!');
+                    //State comparison
+                    for (var i = 0; i < $scope.states.length; i++) {
+                        if ($scope.dataProvsPkg.Package[0].state.id == $scope.states[i].id) {
+                            $scope.dataProvsPkg.Package[0].state = $scope.states[i];
+                        }
+                    }
 
+                    logSuccess('Data Providers loaded!');
+                    //console.log($scope.dataProvsPkg.Package[0].state.id);
                 }
 
                 if (response.status === 404) {
-
                     //Load MOCK data
                     $http({
                         method: 'GET',
                         url: '/app/packageMaintenance/DataProviders.json'
                     }).success(function (data, status, headers, config) {
-
                         $scope.dataProvsPkg = data;
-
                     }).error(function (data, status, headers, config) {
 
                     });
 
                     logError('Error 404. Please check your connection settings');
                 }
-
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
 
         function getStates() {
-
             return datacontext.getStates().then(function (response) {
-
                 $scope.states = response;
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
 
         function getIndustries() {
-
             return datacontext.getIndustries().then(function (response) {
-
                 $scope.industries = response;
                 //$scope.filteredConstraint = $scope.industries[0];
 
                 var bootFilters = [];
 
                 for (var i = 0; i < $scope.industries.length; i++) {
-
                     $scope.industries[i].isSelected = true;
                     bootFilters.push($scope.industries[i]);
                 }
 
                 $scope.filterData(bootFilters);
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
-
     }
 })();

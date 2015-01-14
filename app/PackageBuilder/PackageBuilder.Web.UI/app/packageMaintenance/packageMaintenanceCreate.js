@@ -10,11 +10,9 @@
     packageMaintenanceCreate.$inject = ['$scope', '$location', '$timeout', '$parse', '$http', 'common', 'datacontext'];
 
     function packageMaintenanceCreate($scope, $location, $timeout, $parse, $http, common, datacontext) {
-
         $scope.tt = function(item) {
-
             console.log(item);
-        }
+        };
 
         $scope.title = 'Package Maintenance - Create';
         var filterVal = {};
@@ -36,49 +34,39 @@
         // Prevent $modelValue undefined error
         $scope.dataProvsPkg.Package = { 'mock': 'mock' };
 
-
         $scope.createPackage = function(packageData) {
-
-            return datacontext.createPackage(packageData).then(function (response) {
-
+            return datacontext.createPackage(packageData).then(function(response) {
                 console.log(response);
                 (response.status === 200) ? logSuccess('Package Created!') : logError('Error 404. Please check your connection settings');
 
+            }, function(errorCallback) {
+                logError(errorCallback.data.errorMessage);
             });
-
-        }
+        };
 
         $scope.cancel = function () {
-
             //console.error('Test');
             $location.path('/packages');
         };
 
-
         $scope.filterIndustry = function (field) {
-
             var fieldIndustries = field.industries;
 
             for (var i = 0; i < fieldIndustries.length; i++) {
-
                 for (var j = 0; j < filterVal.length; j++) {
-
                     if ((fieldIndustries[i].name === filterVal[j].name) && (fieldIndustries[i].isSelected)) {
-
                         return field;
                     }
-
                 }
-
             }
             
             return null;
         };
 
-        $scope.filterData = function (filterIndustries) {
+        $scope.filterData = function(filterIndustries) {
 
             filterVal = filterIndustries;
-        }
+        };
 
         $scope.total = function () {
 
@@ -185,7 +173,6 @@
                         default:
                             break;
                     }
-
                 }
             } 
 
@@ -204,45 +191,37 @@
             return valueTotal;
         };
 
-        $scope.totalChildren = function (parent, children) {
-
+        $scope.totalChildren = function(parent, children) {
             var totalChildrenVal = 0;
 
             for (var i = 0; i < children.length; i++) {
-
                 totalChildrenVal += children[i].price;
             }
 
             parent.price = totalChildrenVal;
 
             return totalChildrenVal;
-        }
-
+        };
 
         activate();
       
         function activate() {
-            
-            common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId)
-               .then(function () {
-
+            common.activateController([getDataProviders(), getStates(), getIndustries()], controllerId).then(function () {
                    log('Activated Package Maintenance View');
-            });
+               }, function (error) {
+                   logError(error.data.errorMessage);
+               });
         }
 
         function getDataProviders() {
-
             return datacontext.getDataProviderSources().then(function (response) {
-
                 if (response.status === 200) {
-
                     $scope.dataProvsPkg.Package.DataProviders = response.data;
-                    $scope.dataProvsPkg.Package.state = 'Draft';
+                    //$scope.dataProvsPkg.Package.state = 'Draft';
                     logSuccess('Data Providers loaded!');
                 }
 
                 if (response.status === 404) {
-
                     //Load MOCK data
                     $http({
                         method: 'GET',
@@ -258,22 +237,28 @@
 
                     logError('Error 404. Please check your connection settings');
                 }
-
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
 
         function getStates() {
-
             return datacontext.getStates().then(function (response) {
-
                 $scope.states = response;
+
+                for (var i = 0; i < $scope.states.length; i++) {
+
+                    if ($scope.states[i].name == 'Draft') {
+                        $scope.dataProvsPkg.Package.state = $scope.states[i];
+                    }
+                }
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
 
         function getIndustries() {
-
             return datacontext.getIndustries().then(function (response) {
-
                 $scope.industries = response;
                 //$scope.filteredConstraint = $scope.industries[0];
 
@@ -286,8 +271,9 @@
                 }
 
                 $scope.filterData(bootFilters);
+            }, function (error) {
+                logError(error.data.errorMessage);
             });
         }
-
     }
 })();

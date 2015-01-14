@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 

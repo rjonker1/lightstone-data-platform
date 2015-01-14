@@ -56,6 +56,8 @@
     <Content Include="app\config.exceptionHandler.js" />
     <Content Include="app\config.js" />
     <Content Include="app\config.route.js" />
+    <Content Include="app\controllerHelpers\PkgCloneModalInstanceCtrl.js" />
+    <Content Include="app\controllerHelpers\PkgDeleteModalInstanceCtrl.js" />
     <Content Include="app\dashboard\dashboard.html" />
     <Content Include="app\dashboard\dashboard.js" />
     <Content Include="app\dataProviders\dataProviderView.js" />
@@ -71,7 +73,7 @@
     <Content Include="app\packages\packageView.html" />
     <Content Include="app\repositories\stateRepository.js" />
     <Content Include="app\resources\stateResources.js" />
-    <Content Include="app\services\ModalInstanceCtrl.js" />
+    <Content Include="app\controllerHelpers\PkgCloneModalInstanceCtrl.js" />
     <Content Include="app\states\headerTemplate.html" />
     <Content Include="app\states\states.html" />
     <Content Include="app\states\states.js" />
@@ -111,6 +113,8 @@
     <Content Include="app\views_old\home.html" />
     <Content Include="app\views_old\packageDetail.html" />
     <Content Include="app\views_old\packages.html" />
+    <Content Include="app\viewTemplates\PkgDeleteModalTemplate.html" />
+    <Content Include="app\viewTemplates\PkgCloneModalTemplate.html" />
     <Content Include="Content\angular-multi-select\angular-multi-select.css" />
     <Content Include="Content\angular-ui-tree.min.css" />
     <Content Include="Content\bootstrap-theme.css" />

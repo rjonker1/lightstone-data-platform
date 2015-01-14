@@ -54,9 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.308\lib\net45\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.466\lib\net45\Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
@@ -72,25 +72,26 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.331, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.464, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.464\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.331, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.464, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.331\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.464\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.425, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.425\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.466\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.466\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.308, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.308\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.466\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -152,10 +153,12 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderDtoMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderOverrideMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ReadModels\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderOverrideMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\IndustryMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\ComplexObjectToDataFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataFieldDtoToDataFieldConverter.cs" />
@@ -163,23 +166,24 @@
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataFieldsToDataFieldDtosConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderDtoToDataProviderConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderOverrideToDataProviderConverter.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ToDataProviderMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMap.cs" />
-    <Compile Include="Helpers\AutoMapper\TypeConverters\StringToStateConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\IdToStateConverter.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
-    <Compile Include="Helpers\AutoMapper\ValueResolvers\IndustryResolver.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidTitleHolderResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\IvidResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\IvidTitleHolderResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\LightstoneResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtVinResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\RgtResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\RgtVinResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\StateMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\VehicleValuationResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\VehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderToDtoConverter.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Helpers\Extensions\ResponseExtensions.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
