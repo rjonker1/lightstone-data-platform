@@ -117,7 +117,7 @@
                  '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="getExternalScopes().delete(row.entity.name, row.entity.packageId)" value="Remove" /></div>' +
                  '' +
                  '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.packageId) != row.entity.version">' +
-                 '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" /></div>'
+                 '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewPackage(row)" value="View" /></div>'
          }
             ]
         };
