@@ -2,16 +2,16 @@
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class MessageFromDataProvider
+    public class DataProviderCommandEnvelope
     {
         public CommandDto Command { get; private set; }
 
-        public MessageFromDataProvider(CommandDto command)
+        public DataProviderCommandEnvelope(CommandDto command)
         {
             Command = command;
         }
 
-        public MessageFromDataProvider()
+        public DataProviderCommandEnvelope()
         {
         }
     }

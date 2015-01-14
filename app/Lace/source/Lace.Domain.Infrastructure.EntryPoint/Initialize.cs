@@ -6,6 +6,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
+using NServiceBus;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
@@ -20,13 +21,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly IBus _bus;
 
-        public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ISendMonitoringMessages monitoring,
+        public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, IBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;
-            _monitoring = monitoring;
+            _bus = bus;
             _response = response;
             _buildSourceChain = buildSourceChain;
         }
@@ -40,7 +41,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 throw new Exception("Source Chain cannot be null");
             }
 
-            _buildSourceChain.SourceChain(_request, _monitoring, _response);
+            _buildSourceChain.SourceChain(_request, _bus, _response);
 
             LaceResponses = new List<LaceExternalSourceResponse>()
             {

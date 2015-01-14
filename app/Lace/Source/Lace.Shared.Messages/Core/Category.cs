@@ -11,4 +11,16 @@ namespace Lace.Shared.Monitoring.Messages.Core
         [EnumMember] Performance,
         [EnumMember] Security
     }
+
+    [DataContract]
+    public enum CommandType
+    {
+        [EnumMember] Accounting,
+        [EnumMember] Configuration,
+        [EnumMember] Fault,
+        [EnumMember] Performance,
+        [EnumMember] Security,
+        [EnumMember] Begin,
+        [EnumMember] End
+    }
 }

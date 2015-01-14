@@ -9,14 +9,14 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
     public static class CommandMessageFactory
     {
 
-        private static MessageFromDataProvider GetCommand(Guid id, string payload, DateTime date)
+        private static DataProviderCommandEnvelope GetCommand(Guid id, string payload, DateTime date)
         {
             return
-                new MessageFromDataProvider(new CommandDto(id, MonitoringSource.Lace,
+                new DataProviderCommandEnvelope(new CommandDto(id, MonitoringSource.Lace,
                     payload, date));
         }
 
-        public static MessageFromDataProvider StartCallingDataProviderSource(Guid id,
+        public static DataProviderCommandEnvelope StartCallingDataProviderSource(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -24,7 +24,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             {
                 StartedCallingDataProviderSource = new
                 {
-                    StartedCallingDataProviderSource = new StartedCallingDataProviderSource(id, dataProvider,
+                    StartedCallingDataProviderSource = new EntryPointInitalizationHasStarted(id, dataProvider,
                         string.Format("Start Calling Data Provider {0}", dataProvider.ToString()),
                         payload.JsonToObject(), metadata.JsonToObject(),
                         DateTime.UtcNow, category)
@@ -34,7 +34,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider StopCallingDataProviderSource(Guid id,
+        public static DataProviderCommandEnvelope StopCallingDataProviderSource(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -52,7 +52,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider StartDataProvider(Guid id, DataProviderCommandSource dataProvider,
+        public static DataProviderCommandEnvelope StartDataProvider(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
 
@@ -71,7 +71,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider StopDataProvider(Guid id, DataProviderCommandSource dataProvider,
+        public static DataProviderCommandEnvelope StopDataProvider(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
 
@@ -90,7 +90,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider FaultInDataProvider(Guid id, DataProviderCommandSource dataProvider,
+        public static DataProviderCommandEnvelope FaultInDataProvider(Guid id, DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
             var command = new
@@ -108,7 +108,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider SecurityFlagRaisedInDataProvider(Guid id,
+        public static DataProviderCommandEnvelope SecurityFlagRaisedInDataProvider(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -126,7 +126,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider ConfigurationInDataProvider(Guid id,
+        public static DataProviderCommandEnvelope ConfigurationInDataProvider(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {
@@ -144,7 +144,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             return GetCommand(id, command.ObjectToJson(), DateTime.UtcNow);
         }
 
-        public static MessageFromDataProvider TransformationInDataProvider(Guid id,
+        public static DataProviderCommandEnvelope TransformationInDataProvider(Guid id,
             DataProviderCommandSource dataProvider,
             string payload, Category category, string metadata, bool isJson)
         {

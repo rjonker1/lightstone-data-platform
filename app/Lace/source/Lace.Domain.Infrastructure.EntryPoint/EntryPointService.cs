@@ -16,8 +16,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private ISendMonitoringMessages _monitoring;
         private readonly IBus _bus;
+        private readonly ISendMonitoringMessages _monitoring;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
 
@@ -31,7 +31,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             try
             {
-                _monitoring = new MonitoringMessageSender(_bus, request.RequestAggregation.AggregateId);
+                //_monitoring = new MonitoringMessageSender(_bus, request.RequestAggregation.AggregateId);
                 _sourceChain = new CreateSourceChain(request.Package);
                 _sourceChain.Build();
 
@@ -43,7 +43,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
                 if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return EmptyResponse;
 
-                _bootstrap = new Initialize(new LaceResponse(), request, _monitoring, _sourceChain);
+                _bootstrap = new Initialize(new LaceResponse(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
 
                 return _bootstrap.LaceResponses ?? EmptyResponse;
