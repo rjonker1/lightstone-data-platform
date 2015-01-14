@@ -245,7 +245,13 @@
         function getStates() {
             return datacontext.getStates().then(function (response) {
                 $scope.states = response;
-                $scope.dataProvsPkg.Package.state = $scope.states[0];
+
+                for (var i = 0; i < $scope.states.length; i++) {
+
+                    if ($scope.states[i].name == 'Draft') {
+                        $scope.dataProvsPkg.Package.state = $scope.states[i];
+                    }
+                }
             }, function (error) {
                 logError(error.data.errorMessage);
             });
