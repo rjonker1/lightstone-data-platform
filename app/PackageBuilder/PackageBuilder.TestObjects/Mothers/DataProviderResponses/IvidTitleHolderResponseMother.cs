@@ -11,7 +11,7 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses
             get
             {
                 return new IvidTitleHolderResponseBuilder()
-                    .With("", false, "", DateTime.Now, DateTime.Now, "")
+                    .With("", false, "", DateTime.UtcNow, DateTime.UtcNow, "")
                     .Build();
             }
         }

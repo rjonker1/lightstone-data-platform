@@ -56,7 +56,7 @@ namespace PackageBuilder.Api.Modules
                 bus.Publish(new UpdateDataProvider(parameters.id,
                     (DataProviderName) Enum.Parse(typeof (DataProviderName), dto.Name, true), dto.Description,
                     dto.CostOfSale, typeof (DataProviderDto), dto.FieldLevelCostPriceOverride,
-                    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dFields));
+                    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dFields));
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
             };

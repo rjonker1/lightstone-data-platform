@@ -16,7 +16,7 @@ namespace PackageBuilder.Domain.Tests.EventHandlers.DataProviders
 
         public override void Observe()
         {
-            var command = new PackageUpdated(Guid.NewGuid(), "VVi", "VVi", 10d, 20d, "Notes", new[] { IndustryMother.Automotive }, StateMother.Published, 1, 0.1m, "Owner", DateTime.Now, null, new[] { DataProviderOverrideMother.Ivid });
+            var command = new PackageUpdated(Guid.NewGuid(), "VVi", "VVi", 10d, 20d, "Notes", new[] { IndustryMother.Automotive }, StateMother.Published, 1, 0.1m, "Owner", DateTime.UtcNow, null, new[] { DataProviderOverrideMother.Ivid });
             _handler = new PackageUpdatedHandler(_repository.Object);
             _handler.Handle(command);
         }

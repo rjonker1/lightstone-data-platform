@@ -23,7 +23,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.DataProviders
         {
             base.Observe();
 
-            var command = new UpdateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, typeof(IvidResponse), false, StateMother.Published, 1, "Owner", DateTime.Now, null, new []{ DataFieldMother.LicenseField });
+            var command = new UpdateDataProvider(Guid.NewGuid(), DataProviderName.Ivid, "Description", 10d, typeof(IvidResponse), false, StateMother.Published, 1, "Owner", DateTime.UtcNow, null, new []{ DataFieldMother.LicenseField });
             _handler = new UpdateDataProviderHandler(_writeRepository.Object, _readRepository.Object);
 
             _writeRepository.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(WriteDataProviderMother.Ivid);

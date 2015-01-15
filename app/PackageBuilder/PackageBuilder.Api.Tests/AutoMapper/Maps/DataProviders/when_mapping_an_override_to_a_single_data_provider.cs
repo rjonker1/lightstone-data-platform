@@ -45,7 +45,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             _dataProvider.SourceConfiguration.IsApiConfiguration.ShouldBeTrue();
             _dataProvider.SourceConfiguration.Url.ShouldEqual("IvidUrlTest");
             _dataProvider.SourceConfiguration.Username.ShouldEqual("IvidUsernameTest");
-            _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
+            _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dataProvider.FieldLevelCostPriceOverride.ShouldBeFalse();
         }
 

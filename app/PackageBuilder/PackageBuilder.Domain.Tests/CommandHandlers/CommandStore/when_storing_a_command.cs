@@ -33,7 +33,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
                 0d, 
                 typeof (IProvideDataFromRgt), 
                 "Owner", 
-                DateTime.Now);
+                DateTime.UtcNow);
             var command = new StoreCommand(Guid.NewGuid(), createDataProvider);
             _handler = new StoreCommandHandler(_repository);
             _handler.Handle(command);

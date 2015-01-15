@@ -32,7 +32,7 @@ namespace PackageBuilder.Api.Modules
                 var dto = this.Bind<PackageDto>();
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
                 //var state = Mapper.Map<PackageDto, State>(dto);
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.Now, null, dProviders));
+                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.UtcNow, null, dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -43,7 +43,7 @@ namespace PackageBuilder.Api.Modules
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
                 //var state = Mapper.Map<PackageDto, State>(dto);
 
-                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner, dto.CreatedDate, DateTime.Now, dProviders));
+                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
@@ -62,7 +62,7 @@ namespace PackageBuilder.Api.Modules
                         packageToClone.Notes,
                         packageToClone.Industries,
                         stateResolve.FirstOrDefault(),
-                        packageToClone.Owner, DateTime.Now, null,
+                        packageToClone.Owner, DateTime.UtcNow, null,
                         dataProvidersToClone));
 
                 return Response.AsJson(new { msg = "Success, Package with ID: " + parameters.id + " has been cloned to package '" + parameters.cloneName + "'" });
