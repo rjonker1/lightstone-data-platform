@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataPlatform.Shared.Enums;
@@ -22,19 +21,24 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
 
         public IEnumerable<MonitoringResponse> GetAllMonitoringInformation()
         {
-            return _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
+            var commands = _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
                 new {@Source = (int) MonitoringSource.Lace})
                 .Select(
                     s =>
                         new MonitoringResponseDto(s.AggregateId,
                             (object) Encoding.UTF8.GetString(s.Payload).JsonToObject(),
-                            s.Date))
+                            s.Date));
+
+            if (!commands.Any())
+                return new List<MonitoringResponse>();
+
+            return commands
                 .GroupBy(g => g.Id, g => g.Payload, (aggId, payload) => new
                 {
                     Id = aggId,
                     Payload = payload
-
-                }).Select(s => new MonitoringResponse(s.Id, s.ObjectToJson(), DateTime.UtcNow));
+                })
+                .Select(s => new MonitoringResponse(s.Id, s.Payload.ObjectToJson(), commands.Max(m => m.Date)));
         }
     }
 }

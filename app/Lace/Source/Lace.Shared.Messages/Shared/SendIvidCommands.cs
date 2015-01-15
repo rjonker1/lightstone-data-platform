@@ -66,9 +66,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidExcutionHasStarted = new
+                IvidExecutionHasStarted = new
                 {
-                    IvidExcutionHasStarted =
+                    IvidExecutionHasStarted =
                         new IvidExcutionHasStarted(_requestId, DataProviderCommandSource.Ivid,
                             CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
                             payload, metadata, DateTime.UtcNow,
@@ -101,10 +101,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidExcutionHasStarted = new
+                IvidDataSourceCallHasStarted = new
                 {
-                    IvidExcutionHasStarted =
-                        new IvidExcutionHasStarted(_requestId, DataProviderCommandSource.Ivid,
+                    IvidDataSourceCallHasStarted =
+                        new IvidDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Ivid,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -118,10 +118,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidExcutionHasEnded = new
+                IvidDataSourceCallHasEnded = new
                 {
-                    IvidExcutionHasEnded =
-                        new IvidExcutionHasEnded(_requestId, DataProviderCommandSource.Ivid,
+                    IvidDataSourceCallHasEnded =
+                        new IvidDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Ivid,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
