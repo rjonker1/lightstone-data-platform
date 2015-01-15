@@ -13,6 +13,12 @@ namespace Lace.Test.Helper.Builders.Buses
             var bus = BusFactory.NServiceRabbitMqBus();
             return new SendIvidCommands(bus, aggregateId, (int) ExecutionOrder.First);
         }
+
+        public static ISendCommandsToBus ForAudatexCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendAudatexCommands(bus, aggregateId, (int) ExecutionOrder.Sixth);
+        }
     }
 
     public class BusFactory

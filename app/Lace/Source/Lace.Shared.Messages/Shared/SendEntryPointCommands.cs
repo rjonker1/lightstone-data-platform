@@ -35,14 +35,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
         public void Begin(dynamic payload, DataProviderStopWatch stopWatch)
         {
-            Begin(payload, new MetadataContainer()).SendToBus(_publisher, _log);
+            BusExtensions.SendToBus(Begin(payload, new MetadataContainer()), _publisher, _log);
             stopWatch.Start();
         }
 
         public void End(dynamic payload, DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
-            End(payload, new MetadataContainer(stopWatch.ToObject())).SendToBus(_publisher, _log); ;
+            BusExtensions.SendToBus(End(payload, new MetadataContainer(stopWatch.ToObject())), _publisher, _log);
         }
 
         public void StartCall(dynamic payload, DataProviderStopWatch stopWatch)
