@@ -34,7 +34,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
                     Id = aggId,
                     Payload = payload
 
-                }).Select(s => new MonitoringResponse(s.Id, s.ObjectToJson()));
+                }).Select(s => new MonitoringResponse(s.Id, s.ObjectToJson(), DateTime.UtcNow));
         }
     }
 }
