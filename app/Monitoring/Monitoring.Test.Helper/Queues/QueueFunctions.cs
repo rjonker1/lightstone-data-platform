@@ -2,8 +2,9 @@
 using System.Threading;
 using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 using Lace.Shared.Monitoring.Messages.Publisher;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Test.Helper.Builder.DataProviderEvents;
 using Monitoring.Test.Helper.Mothers;
@@ -12,8 +13,8 @@ namespace Monitoring.Test.Helper.Queues
 {
     public class DataProviderQueueFunctions
     {
-        private ISendMonitoringMessages _monitoring;
-        private DataProviderMessagePublisher _publisher;
+        private ISendCommandsToBus _monitoring;
+        private CommandPublisher _publisher;
         private readonly string _request;
         private readonly DataProviderCommandSource _dataProvider;
         private readonly IHaveQueueActions _actions;
@@ -47,7 +48,7 @@ namespace Monitoring.Test.Helper.Queues
 
         public DataProviderQueueFunctions InitBus()
         {
-            _monitoring = BusBuilder.ForMonitoringWriteMessages(_aggregateId);
+            _monitoring = BusBuilder.ForIvidCommands(_aggregateId);
             return this;
         }
 
@@ -67,60 +68,56 @@ namespace Monitoring.Test.Helper.Queues
 
         public DataProviderQueueFunctions StartingDataProviderMessage()
         {
-            _monitoring.StartDataProvider(_dataProvider, _request, _dataProviderStopWatch);
+            _monitoring.Begin(_request, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions ConfigurationMessage(string metadata)
         {
-            _monitoring.DataProviderConfiguration(_dataProvider, _request, metadata);
+            _monitoring.Send(CommandType.Configuration, _request, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions SecurityMessage(string payload, string metadata)
         {
-            _monitoring.DataProviderSecurity(_dataProvider, payload,
-              metadata);
+            _monitoring.Send(CommandType.Security, _request, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions StartCallingMessage()
         {
-            _monitoring.StartCallingDataProvider(_dataProvider, _request, _stopWatch);
+            _monitoring.StartCall(_request, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions FaultCallingMessage(string metatdata)
         {
-            _monitoring.DataProviderFault(_dataProvider, _request,
-                metatdata);
+            _monitoring.Send(CommandType.Fault, _request, metatdata);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions EndCallingMessage(string payload)
         {
-            _monitoring.EndCallingDataProvider(_dataProvider, payload,
-                _stopWatch);
+            _monitoring.EndCall(payload, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions TransformationMessage(string payload, string metaData)
         {
-            _monitoring.DataProviderTransformation(_dataProvider, payload,
-                metaData);
+            _monitoring.Send(CommandType.Transformation, payload, metaData);
             Thread.Sleep(1000);
             return this;
         }
 
         public DataProviderQueueFunctions EndingDataProvider()
         {
-            _monitoring.EndDataProvider(_dataProvider, _request, _dataProviderStopWatch);
+            _monitoring.End(_request, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
         }

@@ -7,7 +7,7 @@ using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class DataProviderHandler : IHandleMessages<MessageFromDataProvider>
+    public class DataProviderHandler : IHandleMessages<DataProviderCommandEnvelope>
     {
         private readonly IRepository _repository;
 
@@ -20,18 +20,18 @@ namespace Monitoring.Write.Service.DataProviders
             _repository = repository;
         }
 
-        public void Handle(MessageFromDataProvider message)
+        public void Handle(DataProviderCommandEnvelope message)
         {
             var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
 
             if (@event == null || @event.Id == Guid.Empty)
             {
-                @event = new MonitoringEvents(message.Command.Id, message.Command.Payload, message.Command.Date,
+                @event = new MonitoringEvents(message.Command.Id, message.Command.Payload, message.Command.DateUtc,
                     MonitoringSource.Lace);
             }
             else
             {
-                @event.Add(message.Command.Id, message.Command.Payload, message.Command.Date,
+                @event.Add(message.Command.Id, message.Command.Payload, message.Command.DateUtc,
                     MonitoringSource.Lace);
             }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Publisher;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
@@ -8,16 +9,16 @@ namespace Monitoring.Test.Helper.Mothers
 {
     public class BusBuilder
     {
-        public static ISendMonitoringMessages ForMonitoringWriteMessages(Guid aggregateId)
+        public static ISendCommandsToBus ForIvidCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqWriteBus();
-            return new MonitoringMessageSender(bus, aggregateId);
+            return new SendRgtVinCommands(bus, aggregateId, (int) ExecutionOrder.First);
         }
 
-        public static DataProviderMessagePublisher ForMonitoringReadMessages(Guid aggregateId)
+        public static CommandPublisher ForMonitoringReadMessages(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqReadBus();
-            return new DataProviderMessagePublisher(bus);
+            return new CommandPublisher(bus);
         }
     }
 
