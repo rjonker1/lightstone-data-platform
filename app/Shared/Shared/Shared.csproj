@@ -41,6 +41,10 @@
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
@@ -76,6 +80,7 @@
     <Compile Include="Helpers\Builders\LinqList.cs" />
     <Compile Include="Helpers\Extensions\LoggingExtensions.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\Json\ConcreteTypeConverter.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />

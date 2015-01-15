@@ -1,5 +1,7 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Models;
 
 namespace Lace.Domain.Core.Entities
@@ -171,5 +173,19 @@ namespace Lace.Domain.Core.Entities
 
         public string CarFullname { get; private set; }
 
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        Type IPointToLaceProvider.Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
     public class CreateDataProvider : DomainCommand
     {
+        //[JsonConverter(typeof(ConcreteTypeConverter<>))]
         public IPointToLaceProvider DataProvider { get; set; }
         public readonly DataProviderName Name;
         public readonly string Description;

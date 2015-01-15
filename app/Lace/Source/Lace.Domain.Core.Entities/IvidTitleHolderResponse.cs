@@ -1,6 +1,7 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Models.IvidTitleHolder;
 
 namespace Lace.Domain.Core.Entities
@@ -99,7 +100,19 @@ namespace Lace.Domain.Core.Entities
             }
         }
 
-
-       
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        Type IPointToLaceProvider.Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }
