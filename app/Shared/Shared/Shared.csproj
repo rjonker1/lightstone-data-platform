@@ -71,6 +71,7 @@
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
+    <Compile Include="Entities\IProvideType.cs" />
     <Compile Include="Enums\DataProviderCommandSource.cs" />
     <Compile Include="Enums\DataProviderName.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="RabbitMQ\BusFactorycs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
