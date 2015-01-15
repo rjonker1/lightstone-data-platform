@@ -1,24 +1,24 @@
 ﻿'use strict';
 
-var industryResources = angular.module('industryResources', ['ngResource']);
+var industryResources = angular.module('industryResources', ['ngResource', 'app']);
 
-industryResources.factory('getIndexIndustryResource', ['$resource',
-	function ($resource) {
-	    return $resource('http://dev.lightstone.packagebuilder.api/Industries', {}, {
+industryResources.factory('getIndexIndustryResource', ['$resource', 'config',
+	function ($resource, config) {
+	    return $resource( config.apiUri + '/Industries', {}, {
 	        query: { method: 'GET', isArray: true }
 	    });
 	}]);
 
-industryResources.factory('postAddIndustryResource', ['$resource',
-	function ($resource) {
-	    return $resource('http://dev.lightstone.packagebuilder.api/Industries', {}, {
+industryResources.factory('postAddIndustryResource', ['$resource', 'config',
+	function ($resource, config) {
+	    return $resource( config.apiUri + '/Industries', {}, {
 	        save: { method: 'POST', isObject: true }
 	    });
 	}]);
 
-industryResources.factory('postEditIndustryResource', ['$resource',
-	function ($resource) {
-	    return $resource('http://dev.lightstone.packagebuilder.api/Industries', {}, {
+industryResources.factory('postEditIndustryResource', ['$resource', 'config',
+	function ($resource, config) {
+	    return $resource( config.apiUri + '/Industries', {}, {
 	        save: { method: 'PUT', isObject: true }
 	    });
 	}]);

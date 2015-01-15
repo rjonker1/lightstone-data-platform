@@ -131,12 +131,17 @@
 
             return datacontext.getPackage(id, version).then(function (response) {
 
-                console.log(response);
-
                 if (response.status === 200) {
 
                     $scope.dataProvsPkg.Package = response.data.response;
                     //Manipulate current state of Pakage at load to reflect alias of enum from API
+
+                    //State comparison
+                    for (var i = 0; i < $scope.states.length; i++) {
+                        if ($scope.dataProvsPkg.Package[0].state.id == $scope.states[i].id) {
+                            $scope.dataProvsPkg.Package[0].state = $scope.states[i];
+                        }
+                    }
 
                     logSuccess('Data Providers loaded!');
 
