@@ -44,6 +44,8 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         }
     }
 
+    
+
     //[Serializable]
     //[DataContract]
     //public class StartedCallingDataProviderSource : DataProviderCommand

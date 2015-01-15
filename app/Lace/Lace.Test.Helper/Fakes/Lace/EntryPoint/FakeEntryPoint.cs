@@ -5,9 +5,11 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Builder;
+using NServiceBus;
 
 namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 {
@@ -15,12 +17,12 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private IBuildSourceChain _buildSourceChain;
-        private ISendMonitoringMessages _monitoring;
+        private readonly IBus _bus;
         private IBootstrap _bootstrap;
 
         public FakeEntryPoint()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
+            _bus = BusFactory.NServiceRabbitMqBus();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
@@ -31,7 +33,7 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 
             if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return null;
 
-            _bootstrap = new Initialize(new LaceResponse(), request, _monitoring, _buildSourceChain);
+            _bootstrap = new Initialize(new LaceResponse(), request, _bus, _buildSourceChain);
             _bootstrap.Execute();
 
             return _bootstrap.LaceResponses;

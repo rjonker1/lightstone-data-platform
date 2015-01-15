@@ -7,6 +7,7 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 
@@ -17,7 +18,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly IBus _bus;
-        private readonly ISendMonitoringMessages _monitoring;
+        private ISendCommandsToBus _monitoring;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
 
@@ -31,7 +32,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             try
             {
-                //_monitoring = new MonitoringMessageSender(_bus, request.RequestAggregation.AggregateId);
+                _monitoring = new SendEntryPointCommands(_bus, request.RequestAggregation.AggregateId,
+                    (int) ExecutionOrder.First);
                 _sourceChain = new CreateSourceChain(request.Package);
                 _sourceChain.Build();
 
@@ -51,8 +53,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
             catch (Exception ex)
             {
-                _monitoring.DataProviderFault(DataProviderCommandSource.EntryPoint, string.Format("Error {0}", ex.Message),
-                    request.ObjectToJson());
+                _monitoring.Send(CommandType.Fault, ex.Message, request);
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;

@@ -10,9 +10,9 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
@@ -37,26 +37,25 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendMonitoringMessages monitoring)
+            ISendCommandsToBus monitoring)
         {
             try
             {
-                monitoring.StartCallingDataProvider(Provider, _request.ObjectToJson(), _stopWatch);
+                monitoring.StartCall(_request, _stopWatch);
 
                 GetCarInformation();
                 GetMetrics();
                 Dispose();
 
-                monitoring.EndCallingDataProvider(Provider, response != null ? response.ObjectToJson() : string.Empty,
-                    _stopWatch);
+                monitoring.EndCall(response, _stopWatch);
 
                 TransformResponse(response, monitoring);
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
-                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(),
-                    "Error calling Lightstone Data Provider");
+                monitoring.Send(CommandType.Fault, ex.Message,
+                    new { ErrorMessage = "Error calling Lightstone Data Provider"});
                 LightstoneResponseFailed(response);
             }
         }
@@ -67,7 +66,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _repositories.Dispose();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response,ISendMonitoringMessages monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
 
@@ -76,8 +75,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
-                transformer.ObjectToJson());
+            monitoring.Send(CommandType.Transformation, transformer.Result,transformer);
 
             response.LightstoneResponse = transformer.Result;
             response.LightstoneResponseHandled = new LightstoneResponseHandled();

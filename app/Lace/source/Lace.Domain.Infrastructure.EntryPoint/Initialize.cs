@@ -41,7 +41,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 throw new Exception("Source Chain cannot be null");
             }
 
-            _buildSourceChain.SourceChain(_request, _bus, _response);
+            _buildSourceChain.SourceChain(_request, _bus, _response, _request.RequestAggregation.AggregateId);
 
             LaceResponses = new List<LaceExternalSourceResponse>()
             {

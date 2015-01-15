@@ -5,7 +5,7 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Specification;
-using Lace.Shared.Monitoring.Messages.Shared;
+using NServiceBus;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
@@ -35,6 +35,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
                     w => w.Key.Equals(_package.Action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders> SourceChain { get; private set; }
+        public Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid> SourceChain { get;
+            private set; }
     }
 }

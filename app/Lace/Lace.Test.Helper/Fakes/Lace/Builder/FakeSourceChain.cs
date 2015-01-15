@@ -3,6 +3,7 @@ using System.Linq;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using PackageBuilder.Domain.Entities;
 
@@ -30,6 +31,8 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                     w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, ISendMonitoringMessages, IProvideResponseFromLaceDataProviders> SourceChain { get; private set; }
+        public Action<ILaceRequest, NServiceBus.IBus, IProvideResponseFromLaceDataProviders, Guid> SourceChain { get; private set; }
+
+
     }
 }
