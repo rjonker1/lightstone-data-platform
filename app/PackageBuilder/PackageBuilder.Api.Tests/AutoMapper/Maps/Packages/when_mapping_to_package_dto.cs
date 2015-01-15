@@ -36,7 +36,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
             _packageDto.State.Alias.ShouldEqual("Published");
             _packageDto.DisplayVersion.ShouldEqual(0.1m);
             _packageDto.Owner.ShouldEqual("");
-            _packageDto.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
+            _packageDto.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _packageDto.EditedDate.Date.ShouldEqual(new DateTime().Date);
             _packageDto.DataProviders.Count().ShouldEqual(6);
         }

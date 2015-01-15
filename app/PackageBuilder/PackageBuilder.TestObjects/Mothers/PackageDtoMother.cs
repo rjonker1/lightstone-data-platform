@@ -18,7 +18,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(1)
                     .With(0.1m)
                     .With(10d, 20d)
-                    .With(DateTime.Now)
+                    .With(DateTime.UtcNow)
                     .With(IndustryMother.Automotive)
                     .With(DataProviderDtoMother.Ivid, DataProviderDtoMother.IvidTitleHolder)
                     .Build();

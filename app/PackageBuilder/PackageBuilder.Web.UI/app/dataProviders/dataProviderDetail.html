@@ -103,7 +103,8 @@
                 <li>{{data}}</li>
             </div>
 
-        </div>
+        </div> -->
+
     <!--{{dataProvider.response}}-->
     
     <section class="matter" data-ng-model="dataProvider.response">
@@ -148,7 +149,7 @@
                                     </div>
                                 </div>
                                 <div ng-if="switch == true">
-                                    <label>COS Per Field(Total Rands):</label>
+                                    <label>COS Per Field (Total Rands):</label>
                                     <div>
                                         <input type="text" class="form-control" value="{{total()}}" readonly />
                                  </div>
@@ -278,13 +279,13 @@
                                 <div>
                                     <label>Username:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProv.username" readonly/>
+                                        <input type="textbox" class="form-control" ng-model="dataProv.sourceConfigurationUsername" readonly />
                                     </div>
                                 </div>
                                
-                                <label>Source URL:</label>
+                                <label>Configuration URL:</label>
                                 <div>
-                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceURL" readonly/>
+                                    <input type="textbox" class="form-control" ng-model="dataProv.sourceConfigurationUrl" readonly />
                                 </div>
                             </div>
                         </div>

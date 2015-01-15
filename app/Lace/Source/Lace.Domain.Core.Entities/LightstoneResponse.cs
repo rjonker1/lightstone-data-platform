@@ -1,5 +1,7 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using System;
+using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -37,5 +39,19 @@ namespace Lace.Domain.Core.Entities
         public string Model { get; private set; }
 
         public IRespondWithValuation VehicleValuation { get; private set; }
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

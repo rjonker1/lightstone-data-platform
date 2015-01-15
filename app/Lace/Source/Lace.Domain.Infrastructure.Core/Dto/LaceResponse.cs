@@ -1,6 +1,5 @@
 ﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Infrastructure.Core.Dto
 {

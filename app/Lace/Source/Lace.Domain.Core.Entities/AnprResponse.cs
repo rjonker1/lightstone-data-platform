@@ -47,5 +47,21 @@ namespace Lace.Domain.Core.Entities
             ErrorMessage = errorMessage;
             return this;
         }
+
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

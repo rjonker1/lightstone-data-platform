@@ -1,4 +1,6 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using System;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -30,5 +32,19 @@ namespace Lace.Domain.Core.Entities
         public string EngineNumber { get; private set; }
 
         public string CategoryDescription { get; private set; }
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }
