@@ -1,6 +1,6 @@
 ﻿namespace Lace.Shared.Monitoring.Messages.Core
 {
-    internal interface IPublishCommandMessages
+    public interface IPublishCommandMessages
     {
         void SendToBus<T>(T message) where T : class;
     }

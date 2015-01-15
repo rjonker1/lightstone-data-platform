@@ -78,7 +78,6 @@
     <Compile Include="Infrastructure\Dto\StopWatchResults.cs" />
     <Compile Include="Infrastructure\Factories\StopWatchFactory.cs" />
     <Compile Include="Publisher\CommandPublisher.cs" />
-    <None Include="Publisher\CommandMessageFactory.cs.nu" />
     <Compile Include="RabbitMQ\BusFactory.cs" />
     <Compile Include="Shared\SendEntryPointCommands.cs" />
     <Compile Include="Shared\SendAudatexCommands.cs" />
@@ -87,7 +86,6 @@
     <Compile Include="Shared\SendLightstoneCommands.cs" />
     <Compile Include="Shared\SendIvidTitleHolderCommands.cs" />
     <Compile Include="Shared\SendIvidCommands.cs" />
-    <None Include="Shared\MonitoringMessageSender.cs.nu" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">

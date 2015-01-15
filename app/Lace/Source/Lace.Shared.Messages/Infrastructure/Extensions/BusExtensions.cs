@@ -7,14 +7,14 @@ using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Infrastructure.Extensions
 {
-    internal static class BusExtensions
+    public static class BusExtensions
     {
-        internal static void SendToBus<T>(this T message, IPublishCommandMessages publisher, ILog log) where T : class
+        public static void SendToBus<T>(this T message, IPublishCommandMessages publisher, ILog log) where T : class
         {
             Task.Run(() => SendMessagesAsync(message,publisher,log));
         }
-        
-        internal static DataProviderCommandEnvelope GetCommand(this string payload, Guid id, int subOrder,
+
+        public static DataProviderCommandEnvelope GetCommand(this string payload, Guid id, int subOrder,
             int executionOrder)
         {
             return
