@@ -155,6 +155,9 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.pdb" to="lib\net45"/>
       </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+      </dependencies>
     </nuget>
 
     <nuget deploy="false">
@@ -168,6 +171,9 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Entities.pdb" to="lib\net45"/>
       </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+      </dependencies>
     </nuget>
 
     <nuget deploy="false">

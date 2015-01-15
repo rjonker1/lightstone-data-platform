@@ -1,11 +1,8 @@
-﻿using System;
+﻿using DataPlatform.Shared.Entities;
 
 namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IPointToLaceProvider
+    public interface IPointToLaceProvider : IProvideType
     {
-        // DO NOT REMOVE - important for serialization
-        Type Type { get; }
-        string TypeName { get; }
     }
 }

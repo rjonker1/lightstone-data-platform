@@ -59,7 +59,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
-        Type IPointToLaceProvider.Type
+        public Type Type
         {
             get
             {
