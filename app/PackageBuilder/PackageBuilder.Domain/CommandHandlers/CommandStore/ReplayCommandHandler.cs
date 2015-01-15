@@ -55,7 +55,7 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
             }
             catch (JsonException exception)
             {
-                this.Error(() => "Could not deserialize command by type: {0} attempting to deserialize by type name {1}".FormatWith(command.Type, command.TypeName), exception);
+                this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(command.Type, command.TypeName), exception);
                 return null;
             }
         }
@@ -69,9 +69,8 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
         {
             var returnVal = new List<Type>();
 
-            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assemblyTypes in AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetTypes()))
             {
-                var assemblyTypes = a.GetTypes();
                 returnVal.AddRange(assemblyTypes.Where(t => t.Name == className));
             }
 
