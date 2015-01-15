@@ -7,9 +7,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class StartedCallingDataProviderSource : DataProviderCommand
+    public class RgtExcutionHasStarted : DataProviderCommand
     {
-        public StartedCallingDataProviderSource(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtExcutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -20,9 +20,23 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class EndCallingDataProviderSource : DataProviderCommand
+    public class RgtExcutionHasEnded : DataProviderCommand
     {
-        public EndCallingDataProviderSource(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtExcutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
+        {
+
+        }
+    }
+
+
+    [Serializable]
+    [DataContract]
+    public class RgtDataSourceCallHasStarted : DataProviderCommand
+    {
+        public RgtDataSourceCallHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -33,9 +47,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class StartDataProvider : DataProviderCommand
+    public class RgtDataSourceCallHasEnded : DataProviderCommand
     {
-        public StartDataProvider(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtDataSourceCallHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -46,9 +60,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class EndDataProvider : DataProviderCommand
+    public class RgtError : DataProviderCommand
     {
-        public EndDataProvider(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtError(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -59,9 +73,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class DataProviderHasFault : DataProviderCommand
+    public class RgtSecurityFlag : DataProviderCommand
     {
-        public DataProviderHasFault(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -72,9 +86,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class DataProviderSecurityFlag : DataProviderCommand
+    public class RgtConfigured : DataProviderCommand
     {
-        public DataProviderSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtConfigured(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -85,9 +99,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class DataProviderConfigured : DataProviderCommand
+    public class RgtResponseTransformed : DataProviderCommand
     {
-        public DataProviderConfigured(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtResponseTransformed(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -95,19 +109,4 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
         }
     }
-
-    [Serializable]
-    [DataContract]
-    public class DataProviderResponseTransformed : DataProviderCommand
-    {
-        public DataProviderResponseTransformed(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
-
-        }
-    }
-
-
 }

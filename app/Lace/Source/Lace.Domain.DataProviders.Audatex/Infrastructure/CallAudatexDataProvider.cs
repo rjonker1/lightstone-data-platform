@@ -9,9 +9,9 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 {
@@ -30,7 +30,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendMonitoringMessages monitoring)
+            ISendCommandsToBus monitoring)
         {
             try
             {
@@ -41,30 +41,39 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     .Build()
                     .AudatexRequest;
 
-                monitoring.DataProviderConfiguration(Provider, audatexWebService.ObjectToJson(), request.ObjectToJson());
+                monitoring.Send(CommandType.Configuration,
+                    new
+                    {
+                        EndPoint =
+                            new
+                            {
+                                audatexWebService.AudatexServiceProxy.Endpoint,
+                                audatexWebService.AudatexServiceProxy.State
+                            }
+                    }, request);
 
-                monitoring.StartCallingDataProvider(Provider, request.ObjectToJson(), _stopWatch);
+                monitoring.StartCall(request, _stopWatch);
 
                 _response = audatexWebService
                     .AudatexServiceProxy
                     .GetDataEx(GetCredentials(), request.MessageType, request.Message, 0);
 
-                monitoring.EndCallingDataProvider(Provider,
-                    _response != null ? _response.ObjectToJson() : new GetDataResult().ObjectToJson(), _stopWatch);
+                monitoring.EndCall(_response ?? new GetDataResult(), _stopWatch);
 
                 audatexWebService
                     .Close();
 
                 if (_response == null)
-                    monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
-                        "No response received from Audatex Data Provider");
+                    monitoring.Send(CommandType.Fault, _request,
+                        new {NoRequestReceived = "No response received from Audatex Data Provider"});
 
                 TransformResponse(response, monitoring);
             }
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
-                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling Audatex Data Provider");
+                monitoring.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Audatex Data Provider"});
                 AudatexResponseFailed(response);
             }
         }
@@ -86,7 +95,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             };
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformAudatexResponse(_response, response, _request);
 
@@ -95,8 +104,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
-                transformer.ObjectToJson());
+            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             response.AudatexResponse = transformer.Result;
             response.AudatexResponseHandled = new AudatexResponseHandled();

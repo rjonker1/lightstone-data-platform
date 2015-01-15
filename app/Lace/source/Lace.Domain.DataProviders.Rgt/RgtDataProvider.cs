@@ -10,21 +10,24 @@ using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Domain.DataProviders.Rgt.Repositories.Factory;
 using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.Rgt
 {
     public class RgtDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
+        private readonly ISendCommandsToBus _monitoring;
 
         public RgtDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource) : base(nextSource, fallbackSource)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
+            : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Rgt, _request);
 
@@ -35,7 +38,7 @@ namespace Lace.Domain.DataProviders.Rgt
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                monitoring.StartDataProvider(DataProviderCommandSource.Rgt, _request.ObjectToJson(), stopWatch);
+                _monitoring.Begin(_request, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_request,
@@ -44,15 +47,15 @@ namespace Lace.Domain.DataProviders.Rgt
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
 
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
-                monitoring.EndDataProvider(DataProviderCommandSource.Rgt, _request.ObjectToJson(), stopWatch);
+                _monitoring.End(_request, stopWatch);
 
                 if (response.RgtResponse == null && FallBack != null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

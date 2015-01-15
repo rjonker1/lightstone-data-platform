@@ -1,4 +1,5 @@
 ﻿using System;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 using NServiceBus.Features;
@@ -7,10 +8,10 @@ namespace Lace.Test.Helper.Builders.Buses
 {
     public class BusBuilder
     {
-        public static ISendMonitoringMessages ForMonitoringMessages(Guid aggregateId)
+        public static ISendCommandsToBus ForIvidCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
-            return new MonitoringMessageSender(bus, aggregateId);
+            return new SendIvidCommands(bus, aggregateId, (int) ExecutionOrder.First);
         }
     }
 

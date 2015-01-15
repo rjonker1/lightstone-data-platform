@@ -4,21 +4,22 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr
 {
     public class AnprDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
-
-        public AnprDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource)
+        private readonly ISendCommandsToBus _monitoring;
+        public AnprDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Anpr, _request);
 
@@ -37,7 +38,7 @@ namespace Lace.Domain.DataProviders.Anpr
                 //consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (response.AnprResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
         }
 

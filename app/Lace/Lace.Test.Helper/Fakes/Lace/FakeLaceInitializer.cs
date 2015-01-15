@@ -4,6 +4,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Shared;
+using NServiceBus;
 
 namespace Lace.Test.Helper.Fakes.Lace
 {
@@ -17,20 +18,20 @@ namespace Lace.Test.Helper.Fakes.Lace
 
         private readonly IBuildSourceChain _buildSourceChain;
 
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly IBus _bus;
 
-        public FakeLaceInitializer(IProvideResponseFromLaceDataProviders response, ILaceRequest request, ISendMonitoringMessages monitoring,
+        public FakeLaceInitializer(IProvideResponseFromLaceDataProviders response, ILaceRequest request, IBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _request = request;
-            _monitoring = monitoring;
+            _bus = bus;
             _response = response;
             _buildSourceChain = buildSourceChain;
         }
 
         public void Execute()
         {
-            _buildSourceChain.SourceChain(_request, _monitoring, _response);
+            _buildSourceChain.SourceChain(_request, _bus, _response, _request.RequestAggregation.AggregateId);
 
             LaceResponses = new List<LaceExternalSourceResponse>()
             {

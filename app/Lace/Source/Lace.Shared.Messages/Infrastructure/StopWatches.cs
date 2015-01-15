@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using Lace.Shared.Extensions;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Dto;
 
-namespace Lace.Shared.Monitoring.Messages.Core
+namespace Lace.Shared.Monitoring.Messages.Infrastructure
 {
     [Serializable]
     [DataContract]
@@ -52,22 +53,12 @@ namespace Lace.Shared.Monitoring.Messages.Core
         {
             return new StopWatchResults(Elapsed, _name).ObjectToJson();
         }
-    }
 
-    [Serializable]
-    [DataContract]
-    public class StopWatchResults
-    {
-        [DataMember]
-        public TimeSpan ElapsedTime { get; private set; }
-
-        [DataMember]
-        public string Name { get; private set; }
-
-        public StopWatchResults(TimeSpan elapsedTime, string name)
+        public StopWatchResults ToObject()
         {
-            ElapsedTime = elapsedTime;
-            Name = name;
+            return new StopWatchResults(Elapsed, _name);
         }
     }
+
+   
 }

@@ -5,24 +5,25 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.Audatex
 {
     public class AudatexDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
+        private readonly ISendCommandsToBus _monitoring;
 
         public AudatexDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Audatex, _request);
 
@@ -33,18 +34,18 @@ namespace Lace.Domain.DataProviders.Audatex
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Audatex);
-                monitoring.StartDataProvider(DataProviderCommandSource.Audatex, _request.ObjectToJson(), stopWatch);
+                _monitoring.Begin(_request, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_request));
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
-                monitoring.EndDataProvider(DataProviderCommandSource.Audatex, _request.ObjectToJson(), stopWatch);
+                _monitoring.End(_request, stopWatch);
 
                 if (response.AudatexResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

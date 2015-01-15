@@ -5,12 +5,12 @@ using NServiceBus;
 
 namespace Lace.Shared.Monitoring.Messages.Publisher
 {
-    public class DataProviderMessagePublisher : IMonitorDataProviderMessages
+    public class CommandPublisher : IPublishCommandMessages
     {
         private readonly IBus _bus;
         private readonly ILog _log = LogManager.GetCurrentClassLogger();
 
-        public DataProviderMessagePublisher(IBus bus)
+        public CommandPublisher(IBus bus)
         {
             _bus = bus;
         }

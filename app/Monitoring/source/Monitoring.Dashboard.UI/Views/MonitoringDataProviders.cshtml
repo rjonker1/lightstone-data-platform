@@ -32,7 +32,7 @@
                 <span><img src="../Content/Images/plus.gif" alt="expand" onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); " /></span>Events for Aggregate @response.Id @response.Date
             </div>
             <div>
-                <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId' );" value="Collapse all" /> <input type="button" value="Expand All" onclick="ExpandAllClicked('@jsonId', '@canvasId' ); ">
+                <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId' );" value="Collapse" /> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId' ); ">
             </div>
             <div>
                 <div style="display: none; border-width: 2px; border-style: solid" id="@toggleId">

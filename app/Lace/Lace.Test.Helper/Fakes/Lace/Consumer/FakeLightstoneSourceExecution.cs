@@ -5,7 +5,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 
@@ -14,16 +14,18 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
     public class FakeLightstoneSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
+        private readonly ISendCommandsToBus _monitoring;
 
         public FakeLightstoneSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Lightstone, _request);
 
@@ -35,13 +37,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleLighstoneSourceCall(),
                     new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),new FakeCarRepositioryFactory()));
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
                 if (response.LightstoneResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

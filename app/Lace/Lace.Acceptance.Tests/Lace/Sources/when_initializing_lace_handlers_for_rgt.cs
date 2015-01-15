@@ -3,6 +3,7 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
@@ -15,20 +16,20 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly ISendCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_rgt()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
+            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForRgt();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
-            _dataProvider = new RgtDataProvider(_request, null, null);
+            _dataProvider = new RgtDataProvider(_request, null, null,_monitoring);
         }
 
         public override void Observe()
         {
-            _dataProvider.CallSource(_response, _monitoring);
+            _dataProvider.CallSource(_response);
         }
 
         [Observation]

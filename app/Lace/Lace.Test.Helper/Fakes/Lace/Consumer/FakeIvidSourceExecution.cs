@@ -4,6 +4,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
@@ -14,14 +15,16 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
     {
 
         private readonly ILaceRequest _request;
+        private readonly ISendCommandsToBus _monitoring;
 
-        public FakeIvidSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource)
+        public FakeIvidSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Ivid, _request);
 
@@ -33,13 +36,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleIvidServiceCall(),
                     new FakeCallingIvidExternalWebService());
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
                 if (response.IvidResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
 
         }
 

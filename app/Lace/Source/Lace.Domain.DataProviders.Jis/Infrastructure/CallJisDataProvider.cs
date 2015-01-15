@@ -12,6 +12,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
@@ -33,7 +34,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 

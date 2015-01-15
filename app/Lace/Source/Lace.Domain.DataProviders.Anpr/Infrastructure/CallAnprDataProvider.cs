@@ -12,7 +12,7 @@ using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 {
@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.RequestAggregation.AggregateId);
             if (transformer.Continue)

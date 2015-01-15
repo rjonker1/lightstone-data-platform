@@ -1,5 +1,5 @@
 ﻿using Lace.Domain.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Core.Contracts
 {
@@ -14,18 +14,18 @@ namespace Lace.Domain.DataProviders.Core.Contracts
             FallBack = fallbackSource;
         }
 
-        public void CallNextSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallNextSource(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             if (Next == null) return;
 
-            Next.CallSource(response, monitoring);
+            Next.CallSource(response);
         }
 
-        public void CallFallbackSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallFallbackSource(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             if (FallBack == null) return;
 
-            FallBack.CallSource(response, monitoring);
+            FallBack.CallSource(response);
         }
     }
 }

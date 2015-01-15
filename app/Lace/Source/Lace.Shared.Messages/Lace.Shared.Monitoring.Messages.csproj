@@ -60,15 +60,32 @@
     </Compile>
     <Compile Include="Commands\DataProviderCommand.cs" />
     <Compile Include="Commands\CommandDto.cs" />
-    <Compile Include="Commands\MessageFromDataProvider.cs" />
-    <Compile Include="Commands\DataProviderCommands.cs" />
+    <Compile Include="Commands\AudatexCommands.cs" />
+    <Compile Include="Commands\RgtVinCommands.cs" />
+    <Compile Include="Commands\RgtCommands.cs" />
+    <Compile Include="Commands\LightstoneCommands.cs" />
+    <Compile Include="Commands\IvidTitleHolderCommands.cs" />
+    <Compile Include="Commands\IvidCommands.cs" />
+    <Compile Include="Commands\DataProviderCommandEnvelope.cs" />
+    <Compile Include="Commands\EntryPointCommands.cs" />
     <Compile Include="Core\Category.cs" />
-    <Compile Include="Core\IMonitorDataProviderMessages.cs" />
-    <Compile Include="Core\StopWatches.cs" />
-    <Compile Include="Publisher\DataProviderMessagePublisher.cs" />
-    <Compile Include="Publisher\CommandMessageFactory.cs" />
+    <Compile Include="Core\Constants.cs" />
+    <Compile Include="Core\IPublishCommandMessages.cs" />
+    <Compile Include="Core\ISendCommandsToBus.cs" />
+    <Compile Include="Infrastructure\Dto\Metadata.cs" />
+    <Compile Include="Infrastructure\Extensions\BusExtensions.cs" />
+    <Compile Include="Infrastructure\StopWatches.cs" />
+    <Compile Include="Infrastructure\Dto\StopWatchResults.cs" />
+    <Compile Include="Infrastructure\Factories\StopWatchFactory.cs" />
+    <Compile Include="Publisher\CommandPublisher.cs" />
     <Compile Include="RabbitMQ\BusFactory.cs" />
-    <Compile Include="Shared\MonitoringMessageSender.cs" />
+    <Compile Include="Shared\SendEntryPointCommands.cs" />
+    <Compile Include="Shared\SendAudatexCommands.cs" />
+    <Compile Include="Shared\SendRgtVinCommands.cs" />
+    <Compile Include="Shared\SendRgtCommands.cs" />
+    <Compile Include="Shared\SendLightstoneCommands.cs" />
+    <Compile Include="Shared\SendIvidTitleHolderCommands.cs" />
+    <Compile Include="Shared\SendIvidCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
@@ -80,6 +97,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

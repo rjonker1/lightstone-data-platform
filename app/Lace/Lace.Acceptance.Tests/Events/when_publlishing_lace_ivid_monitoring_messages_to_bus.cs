@@ -4,6 +4,8 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.DataProviders;
@@ -15,7 +17,7 @@ namespace Lace.Acceptance.Tests.Events
 {
     public class when_publlishing_lace_ivid_monitoring_messages_to_bus : Specification
     {
-        private ISendMonitoringMessages _monitoring;
+        private ISendCommandsToBus _monitoring;
         private readonly ILaceRequest _request;
         private readonly HpiStandardQueryResponse _ividResponse;
         private readonly HpiStandardQueryRequest _ividRequest;
@@ -41,7 +43,7 @@ namespace Lace.Acceptance.Tests.Events
         {
             try
             {
-                _monitoring = BusBuilder.ForMonitoringMessages(_aggregateId);
+                _monitoring = BusBuilder.ForIvidCommands(_aggregateId);
             }
             catch (Exception e)
             {
@@ -56,29 +58,35 @@ namespace Lace.Acceptance.Tests.Events
 
             _monitoring.ShouldNotBeNull();
 
-            _monitoring.StartDataProvider(DataProviderCommandSource.Ivid, _request.ObjectToJson(), _dataProviderStopWatch);
+            _monitoring.Begin(_request,_dataProviderStopWatch);
 
-            _monitoring.DataProviderConfiguration(DataProviderCommandSource.Ivid, _ividRequest.ObjectToJson(), string.Empty);
+            _monitoring.Send(CommandType.Configuration, _ividRequest,null);
+
 
             var proxy = DataProviderConfigurationBuilder.ForIvidWebServiceProxy();
-            _monitoring.DataProviderSecurity(DataProviderCommandSource.Ivid, new { Credentials = new { proxy.ClientCredentials.UserName.UserName, proxy.ClientCredentials.UserName.Password} }.ObjectToJson(), "Ivid Data Provider Credentials");
+            _monitoring.Send(CommandType.Security, new
+            {
+                Credentials =
+                    new
+                    {
+                        proxy.ClientCredentials.UserName.UserName,
+                        proxy.ClientCredentials.UserName.Password
+                    }
+            },
+                    new { ContextMessage = "Ivid Data Provider Credentials" });
 
-            _monitoring.StartCallingDataProvider(DataProviderCommandSource.Ivid, _ividRequest.ObjectToJson(), _stopWatch);
 
-            _monitoring.DataProviderFault(DataProviderCommandSource.Ivid, _request.ObjectToJson(),
-                "No response received from Ivid Data Provider");
+            _monitoring.StartCall(_ividRequest, _stopWatch);
 
+            _monitoring.Send(CommandType.Fault, _request, new { NoRequestReceived = "No response received from Ivid Data Provider" });
 
-            _monitoring.EndCallingDataProvider(DataProviderCommandSource.Ivid,
-                _ividResponse != null ? _ividResponse.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson(),
-                _stopWatch);
+            _monitoring.EndCall(_ividResponse ?? new HpiStandardQueryResponse(),_stopWatch);
 
 
             var transformer = DataProviderTransformationBuilder.ForIvid(_ividResponse);
-            _monitoring.DataProviderTransformation(DataProviderCommandSource.Ivid, transformer.Result.ObjectToJson(),
-                transformer.ObjectToJson());
+            _monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
-            _monitoring.EndDataProvider(DataProviderCommandSource.Ivid, _request.ObjectToJson(), _dataProviderStopWatch);
+            _monitoring.End(_request,_dataProviderStopWatch);
           
         }
     }

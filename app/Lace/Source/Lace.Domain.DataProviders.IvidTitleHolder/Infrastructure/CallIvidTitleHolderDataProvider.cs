@@ -11,9 +11,9 @@ using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
@@ -31,11 +31,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             try
             {
-               var ividTitleHolderWebService = new ConfigureIvidTitleHolderSource();
+                var ividTitleHolderWebService = new ConfigureIvidTitleHolderSource();
 
                 ividTitleHolderWebService.ConfigureIvidTitleHolderServiceCredentials();
                 ividTitleHolderWebService.ConfigureIvidTitleHolderWebServiceRequestMessageProperty();
@@ -51,9 +51,9 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                         .TitleholderQueryRequest;
 
 
-                    monitoring.DataProviderConfiguration(Provider,request.ObjectToJson(),string.Empty);
+                    monitoring.Send(CommandType.Configuration, request, null);
 
-                    monitoring.StartCallingDataProvider(Provider, request.ObjectToJson(), _stopWatch);
+                    monitoring.StartCall(request, _stopWatch);
 
                     _response = ividTitleHolderWebService
                         .IvidTitleHolderProxy
@@ -62,11 +62,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     ividTitleHolderWebService
                         .CloseWebService();
 
-                    monitoring.EndCallingDataProvider(Provider, _response != null ? _response.ObjectToJson() : new TitleholderQueryResponse().ObjectToJson(), _stopWatch);
+                    monitoring.EndCall(_response ?? new TitleholderQueryResponse(), _stopWatch);
 
                     if (_response == null)
-                        monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
-                       "No response received from Ivid Title Holder Data Provider");
+                        monitoring.Send(CommandType.Fault, _request,
+                            new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
 
                     TransformResponse(response, monitoring);
                 }
@@ -74,7 +74,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
-                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling Ivid Title Holder Data Provider");
+                monitoring.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
                 IvidTitleHolderResponseFailed(response);
             }
         }
@@ -85,8 +86,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
-        
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformIvidTitleHolderResponse(_response);
 
@@ -96,8 +97,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             }
 
 
-            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
-                transformer.ObjectToJson());
+            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             response.IvidTitleHolderResponse = transformer.Result;
             response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();

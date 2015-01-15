@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2CE8A9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Infrastructure", "Shared Infrastructure", "{C6E762ED-2030-40CF-A694-8F6C44800226}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Distributed Service", "Distributed Service", "{4D3724DA-EBF7-4722-91DE-22898570BF2D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{87DF0D42-4BA9-42DD-8A56-91238364B357}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core", "Lace\source\Lace.Domain.Core\Lace.Domain.Core.csproj", "{CA721B03-EFC7-45CE-A70E-BB9EF72C075B}"
