@@ -18,13 +18,37 @@ namespace Monitoring.Test.Helper.Mothers
         public static ISendCommandsToBus ForAudatexCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqWriteBus();
-            return new SendAudatexCommands(bus, aggregateId, (int)ExecutionOrder.Sixth);
+            return new SendAudatexCommands(bus, aggregateId, (int) ExecutionOrder.Sixth);
         }
 
         public static CommandPublisher ForMonitoringReadMessages(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqReadBus();
             return new CommandPublisher(bus);
+        }
+
+        public static ISendCommandsToBus ForLightstoneCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendLightstoneCommands(bus, aggregateId, (int) ExecutionOrder.Second);
+        }
+
+        public static ISendCommandsToBus ForIvidTitleHolderCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int) ExecutionOrder.Third);
+        }
+
+        public static ISendCommandsToBus ForRgtCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int) ExecutionOrder.Fifth);
+        }
+
+        public static ISendCommandsToBus ForRgtVinCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int) ExecutionOrder.Fourth);
         }
     }
 

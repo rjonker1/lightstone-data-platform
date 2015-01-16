@@ -29,28 +29,30 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         public override void Observe()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Audatex, _actions, _aggregateId);
+            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Audatex, _actions,
+                _aggregateId);
             queue.TearDown()
                 .Setup()
-                .InitBus(BusBuilder.ForAudatexCommands(_aggregateId))
+                .InitBus(BusBuilder.ForLightstoneCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingDataProviderMessage()
-                .ConfigurationMessage(DataProviderConfigurationBuiler.ForAudatex())
+                //.ConfigurationMessage)
                 //.SecurityMessage(DataProviderConfigurationBuiler.ForAudatex(), null)
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Audatex Data Provider" })
-                .EndCallingMessage(DataProviderResponseBuilder.FromAudatex())
-                .TransformationMessage(DataProviderTransformationBuilder.ForAudatex(), new { TrasformationMetaData = "Transforming Response from Audatex" })
+                .FaultCallingMessage(new {NoRequestReceived = "No response received from Lightstone Data Provider"})
+                .EndCallingMessage(DataProviderResponseBuilder.FromLightstone())
+                .TransformationMessage(DataProviderTransformationBuilder.ForLightstone(),
+                    new {TrasformationMetaData = "Transforming Response from Lightstone"})
                 .EndingDataProvider();
         }
 
         [Observation]
-        public void then_audatex_messages_should_be_put_on_the_correct_write_queue()
+        public void then_lightstone_messages_should_be_put_on_the_correct_write_queue()
         {
             var messageCount = _actions.GetMessageCount(ConfigureMonitoringWriteQueues.ForHost().ExchangeName,
                 ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
                 ConfigureMonitoringWriteQueues.ForHost().ExchangeType);
-            messageCount.ShouldEqual(7);
+            messageCount.ShouldEqual(6);
 
         }
     }

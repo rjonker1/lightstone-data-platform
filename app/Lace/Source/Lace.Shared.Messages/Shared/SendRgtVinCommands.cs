@@ -62,10 +62,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtVinExcutionHasStarted = new
+                RgtVinExecutionHasStarted = new
                 {
-                    RgtVinExcutionHasStarted =
-                        new RgtVinExcutionHasStarted(_requestId, DataProviderCommandSource.RgtVin,
+                    RgtVinExecutionHasStarted =
+                        new RgtVinExecutionHasStarted(_requestId, DataProviderCommandSource.RgtVin,
                             CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.RgtVin),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -79,10 +79,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtVinExcutionHasEnded = new
+                RgtVinExecutionHasEnded = new
                 {
-                    RgtVinExcutionHasEnded =
-                        new RgtVinExcutionHasEnded(_requestId, DataProviderCommandSource.RgtVin,
+                    RgtVinExecutionHasEnded =
+                        new RgtVinExecutionHasEnded(_requestId, DataProviderCommandSource.RgtVin,
                             CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.RgtVin),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -96,10 +96,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtVinExcutionHasStarted = new
+                RgtVinExecutionHasStarted = new
                 {
-                    RgtVinExcutionHasStarted =
-                        new RgtVinExcutionHasStarted(_requestId, DataProviderCommandSource.RgtVin,
+                    RgtVinExecutionHasStarted =
+                        new RgtVinExecutionHasStarted(_requestId, DataProviderCommandSource.RgtVin,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.RgtVin),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -113,10 +113,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtVinExcutionHasEnded = new
+                RgtVinExecutionHasEnded = new
                 {
-                    RgtVinExcutionHasEnded =
-                        new RgtVinExcutionHasEnded(_requestId, DataProviderCommandSource.RgtVin,
+                    RgtVinExecutionHasEnded =
+                        new RgtVinExecutionHasEnded(_requestId, DataProviderCommandSource.RgtVin,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.RgtVin),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)

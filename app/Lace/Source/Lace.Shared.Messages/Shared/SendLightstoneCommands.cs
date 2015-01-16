@@ -62,10 +62,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExcutionHasStarted = new
+                LightstoneExecutionHasStarted = new
                 {
-                    LightstoneExcutionHasStarted =
-                        new LightstoneExcutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
+                    LightstoneExecutionHasStarted =
+                        new LightstoneExecutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -79,10 +79,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExcutionHasEnded = new
+                LightstoneExecutionHasEnded = new
                 {
-                    LightstoneExcutionHasEnded =
-                        new LightstoneExcutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
+                    LightstoneExecutionHasEnded =
+                        new LightstoneExecutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -96,10 +96,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExcutionHasStarted = new
+                LightstoneExecutionHasStarted = new
                 {
-                    LightstoneExcutionHasStarted =
-                        new LightstoneExcutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
+                    LightstoneExecutionHasStarted =
+                        new LightstoneExecutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -113,10 +113,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExcutionHasEnded = new
+                LightstoneExecutionHasEnded = new
                 {
-                    LightstoneExcutionHasEnded =
-                        new LightstoneExcutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
+                    LightstoneExecutionHasEnded =
+                        new LightstoneExecutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)

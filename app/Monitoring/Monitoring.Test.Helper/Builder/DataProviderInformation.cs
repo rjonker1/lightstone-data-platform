@@ -275,6 +275,34 @@ namespace Monitoring.Test.Helper.Builder
                 }
             };
         }
+
+        public static object FromLightstone()
+        {
+            return new
+            {
+                BaseRetrievalMetric = new
+                {
+                    LastFiveSalesMetric = new {},
+                    EstimatedValuesMetric = new {},
+                    TotalSalesByGenderMetric = new {},
+                    TotalSalesByAgeMetric = new {},
+                    RepairIndexMetric = new {},
+                    AuctionFactorsMetric = new {},
+                    AmortisedValueMetric = new {},
+                    AccidentDistributionMetric = new {},
+                    ImageGaugesMetric = new {}
+                },
+                CarInfo = new
+                {
+                    CarId = 107483,
+                    Year = 2008,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Quarter = "3rd Quarter",
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarModel = "Auris 1.6 RT 5-dr"
+                }
+            };
+        }
     }
 
     public class DataProviderTransformationBuilder
@@ -364,6 +392,43 @@ namespace Monitoring.Test.Helper.Builder
                     QuoteValueIndicatorNote = "* Indicates the repair quote band segment",
                     LowConfidenceLevelIndicatorNote = "! Indicates that we have a low confidence in the record returned",
                     RegistrationNumberOnlyIndicatorNote = "** This record is matched on Registration number only"
+                }
+            };
+        }
+
+        public static object ForLightstone()
+        {
+            return new
+            {
+                LaceResponse = new
+                {
+                    LightstoneResponse = new
+                    {
+                        CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                        CarId = 107483,
+                        ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                        Model = "Auris 1.6 RT 5-dr",
+                        Quarter = "3rd Quarter",
+                        Vin = "SB1KV58E40F039277",
+                        Year = "2008",
+                        VehicleValuation = new
+                        {
+                            AccidentDistribution = new { },
+                            AmortisationFactors = new { },
+                            AmortisedValues = new { },
+                            AreaFactors = new { },
+                            AuctionFactors = new { },
+                            Confidence = new { },
+                            EstimatedValue = new { },
+                            Frequency = new { },
+                            ImageGauges = new { },
+                            LastFiveSales = new { },
+                            Prices = new { },
+                            RepairIndex = new { },
+                            TotalSalesByAge = new { },
+                            TotalSalesByGender = new { },
+                        }
+                    }
                 }
             };
         }
