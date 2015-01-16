@@ -11,14 +11,14 @@ using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Queues
 {
-    public class when_sending_audatex_command_messages_to_the_write_queues_on_the_bus : Specification
+    public class when_sending_lightstone_command_messages_to_the_write_queues_on_the_bus : Specification
     {
         private readonly object _request;
 
         private readonly Guid _aggregateId;
         private readonly IHaveQueueActions _actions;
 
-        public when_sending_audatex_command_messages_to_the_write_queues_on_the_bus()
+        public when_sending_lightstone_command_messages_to_the_write_queues_on_the_bus()
         {
             var messageQueue = new RabbitMqMessageQueueing();
             _actions = new QueueActions(messageQueue.Consumer);

@@ -26,6 +26,38 @@ namespace Monitoring.Test.Helper.Builder
                 }
             };
         }
+
+        public static object ForAudatex()
+        {
+            return new
+            {
+                AudatexMessageData = new
+                {
+                    Header = new
+                    {
+                        RequestHeader = new
+                        {
+
+                        }
+                    },
+                    Body = new
+                    {
+                        RequestBody = new
+                        {
+                            HistoryCheckRequest = new
+                            {
+                                VIN = "SB1KV58E40F039277",
+                                Registration = "XMC167GP",
+                                EngineNumber = "",
+                                ClaimReferenceNumber = "",
+                                AssessmentNumber = "",
+                                Originator = ""
+                            }
+                        }
+                    }
+                }
+            };
+        }
     }
 
     public class DataProviderRequestBuilder

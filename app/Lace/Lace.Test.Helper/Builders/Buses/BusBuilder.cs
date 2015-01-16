@@ -19,6 +19,29 @@ namespace Lace.Test.Helper.Builders.Buses
             var bus = BusFactory.NServiceRabbitMqBus();
             return new SendAudatexCommands(bus, aggregateId, (int) ExecutionOrder.Sixth);
         }
+
+        public static ISendCommandsToBus ForLightstoneCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendLightstoneCommands(bus, aggregateId, (int)ExecutionOrder.Second);
+        }
+        public static ISendCommandsToBus ForIvidTitleHolderCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int)ExecutionOrder.Third);
+        }
+
+        public static ISendCommandsToBus ForRgtCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int)ExecutionOrder.Fifth);
+        }
+
+        public static ISendCommandsToBus ForRgtVinCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+        }
     }
 
     public class BusFactory

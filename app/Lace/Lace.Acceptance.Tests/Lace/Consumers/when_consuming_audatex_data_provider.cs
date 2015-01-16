@@ -21,7 +21,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_audatex_data_provider()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForAudatexCommands(Guid.NewGuid());
             _request = new LicensePlateNumberAudatexOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandledAndVin12();
         }

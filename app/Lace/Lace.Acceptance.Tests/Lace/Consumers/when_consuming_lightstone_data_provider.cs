@@ -20,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_lightstone_data_provider()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new LicensePlateNumberLightstoneOnlyRequest();
             _response = new LaceResponse();
         }

@@ -20,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         
         public when_consuming_ivid_title_holder_source_with_financed_interest()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
             _request = new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest();
             _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
         }

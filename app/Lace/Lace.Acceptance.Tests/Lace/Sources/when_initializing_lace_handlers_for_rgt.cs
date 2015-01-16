@@ -21,7 +21,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_rgt()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForRgtCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForRgt();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider = new RgtDataProvider(_request, null, null,_monitoring);

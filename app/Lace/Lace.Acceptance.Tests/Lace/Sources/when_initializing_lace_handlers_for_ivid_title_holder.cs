@@ -21,7 +21,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_ivid_title_holder()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolder();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider = new IvidTitleHolderDataProvider(_request, null, null,_monitoring);

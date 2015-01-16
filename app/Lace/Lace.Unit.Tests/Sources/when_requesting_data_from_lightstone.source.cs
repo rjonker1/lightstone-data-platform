@@ -24,7 +24,7 @@ namespace Lace.Unit.Tests.Sources
 
         public when_requesting_data_from_lightstone_source()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponse();
