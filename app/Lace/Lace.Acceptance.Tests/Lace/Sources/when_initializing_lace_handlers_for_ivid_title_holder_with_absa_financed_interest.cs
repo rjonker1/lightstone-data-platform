@@ -21,7 +21,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolderWithAbsaFinancedInterest();
             _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
             _dataProvider = new IvidTitleHolderDataProvider(_request, null, null, _monitoring);

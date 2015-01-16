@@ -15,7 +15,7 @@ namespace Monitoring.Test.Helper.Queues
     {
         private ISendCommandsToBus _monitoring;
         private CommandPublisher _publisher;
-        private readonly string _request;
+        private readonly object _request;
         private readonly DataProviderCommandSource _dataProvider;
         private readonly IHaveQueueActions _actions;
 
@@ -24,7 +24,7 @@ namespace Monitoring.Test.Helper.Queues
 
         private readonly Guid _aggregateId;
 
-        public DataProviderQueueFunctions(string request, DataProviderCommandSource dataProvider, IHaveQueueActions actions, Guid aggregateId)
+        public DataProviderQueueFunctions(object request, DataProviderCommandSource dataProvider, IHaveQueueActions actions, Guid aggregateId)
         { 
             _request = request;
             _dataProvider = dataProvider;
@@ -46,9 +46,9 @@ namespace Monitoring.Test.Helper.Queues
             return this;
         }
 
-        public DataProviderQueueFunctions InitBus()
+        public DataProviderQueueFunctions InitBus(ISendCommandsToBus monitoringBus)
         {
-            _monitoring = BusBuilder.ForIvidCommands(_aggregateId);
+            _monitoring = monitoringBus; 
             return this;
         }
 
@@ -73,14 +73,14 @@ namespace Monitoring.Test.Helper.Queues
             return this;
         }
 
-        public DataProviderQueueFunctions ConfigurationMessage(string metadata)
+        public DataProviderQueueFunctions ConfigurationMessage(object metadata)
         {
             _monitoring.Send(CommandType.Configuration, _request, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
-        public DataProviderQueueFunctions SecurityMessage(string payload, string metadata)
+        public DataProviderQueueFunctions SecurityMessage(object payload, object metadata)
         {
             _monitoring.Send(CommandType.Security, _request, metadata);
             Thread.Sleep(1000);
@@ -94,21 +94,21 @@ namespace Monitoring.Test.Helper.Queues
             return this;
         }
 
-        public DataProviderQueueFunctions FaultCallingMessage(string metatdata)
+        public DataProviderQueueFunctions FaultCallingMessage(object metatdata)
         {
             _monitoring.Send(CommandType.Fault, _request, metatdata);
             Thread.Sleep(1000);
             return this;
         }
 
-        public DataProviderQueueFunctions EndCallingMessage(string payload)
+        public DataProviderQueueFunctions EndCallingMessage(object payload)
         {
             _monitoring.EndCall(payload, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
-        public DataProviderQueueFunctions TransformationMessage(string payload, string metaData)
+        public DataProviderQueueFunctions TransformationMessage(object payload, object metaData)
         {
             _monitoring.Send(CommandType.Transformation, payload, metaData);
             Thread.Sleep(1000);

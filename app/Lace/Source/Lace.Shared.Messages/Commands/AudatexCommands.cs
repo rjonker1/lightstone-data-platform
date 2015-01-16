@@ -7,9 +7,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class AudatexExcutionHasStarted : DataProviderCommand
+    public class AudatexExecutionHasStarted : DataProviderCommand
     {
-        public AudatexExcutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
+        public AudatexExecutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -20,9 +20,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class AudatexExcutionHasEnded : DataProviderCommand
+    public class AudatexExecutionHasEnded : DataProviderCommand
     {
-        public AudatexExcutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
+        public AudatexExecutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)

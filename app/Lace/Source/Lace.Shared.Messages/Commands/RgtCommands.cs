@@ -7,9 +7,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class RgtExcutionHasStarted : DataProviderCommand
+    public class RgtExecutionHasStarted : DataProviderCommand
     {
-        public RgtExcutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtExecutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -20,9 +20,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class RgtExcutionHasEnded : DataProviderCommand
+    public class RgtExecutionHasEnded : DataProviderCommand
     {
-        public RgtExcutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RgtExecutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)

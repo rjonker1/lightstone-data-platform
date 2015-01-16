@@ -7,9 +7,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class LightstoneExcutionHasStarted : DataProviderCommand
+    public class LightstoneExecutionHasStarted : DataProviderCommand
     {
-        public LightstoneExcutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
+        public LightstoneExecutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -20,9 +20,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class LightstoneExcutionHasEnded : DataProviderCommand
+    public class LightstoneExecutionHasEnded : DataProviderCommand
     {
-        public LightstoneExcutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
+        public LightstoneExecutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)

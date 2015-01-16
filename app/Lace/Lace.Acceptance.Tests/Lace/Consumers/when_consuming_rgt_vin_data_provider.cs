@@ -21,7 +21,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 
         public when_consuming_rgt_vin_data_provider()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForRgtVinCommands(Guid.NewGuid());
             _request = new LicensePlateNumberRgtVinOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }

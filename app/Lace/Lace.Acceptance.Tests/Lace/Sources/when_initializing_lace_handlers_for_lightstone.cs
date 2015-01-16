@@ -21,7 +21,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_lightstone()
         {
-            _monitoring = BusBuilder.ForIvidCommands(Guid.NewGuid());
+            _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider = new LightstoneDataProvider(_request, null, null, _monitoring);
