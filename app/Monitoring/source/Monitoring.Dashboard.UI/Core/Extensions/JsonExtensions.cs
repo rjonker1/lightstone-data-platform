@@ -28,7 +28,21 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
 
         public static dynamic JsonToObject(this string json)
         {
-            return JsonConvert.DeserializeObject(json);
+            try
+            {
+                return string.IsNullOrWhiteSpace(json) || !IsJson(json) ? json : JsonConvert.DeserializeObject(json);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static bool IsJson(string json)
+        {
+            json = json.Trim();
+            return json.StartsWith("{") && json.EndsWith("}")
+                   || json.StartsWith("[") && json.EndsWith("]");
         }
     }
 }

@@ -41,10 +41,10 @@
         <div class="row">
 
             <div class="col-md-4">
-                <a ng-if="dataField.dataFields.length > 0"  style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
-                
+
                 <div class="col-md-2" ng-if="dataField.dataFields.length <= 0"></div>
 
                 <div>
@@ -159,7 +159,7 @@
 
                         <div id="info" class="row">
 
-                            <div id="1" class="col-md-3">
+                            <div id="1" class="col-lg-3 col-md-6">
                                 <div>
                                     <label>Name:</label>
                                     <div>
@@ -183,7 +183,7 @@
 
                             <!--<div class="col-lg-4" />-->
 
-                            <div id="2" class="col-md-3">
+                            <div id="2" class="col-lg-3 col-md-6">
                                 <div>
                                     <label>State:</label>
                                     <div>
@@ -208,9 +208,9 @@
                                     <label>Package Industry:</label>
                                     <div>
                                         <!--<select class="form-control" ng-model="dataProvsPkg.Package[0].industry" ng-selected="dataProvsPkg.Package.industry">
-                                                <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                            </select>-->
-                                        
+                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                        </select>-->
+
                                         <div multi-select
                                              input-model="industries"
                                              button-label="name"
@@ -260,11 +260,11 @@
 
                             <div class="row">
 
-                                <div class="col-md-4" style="padding-bottom: 20px;">
+                                <div class="col-lg-4 col-md-6" style="padding-bottom: 20px;">
                                     <div style="float: left;"><h3>Data Providers</h3></div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-lg-4 col-md-8">
 
                                     <div ui-tree id="asdt" ng-model="dataProvsPkg">
                                         <div ng-repeat="providers in dataProvsPkg.Package">
