@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using DataPlatform.Shared.Helpers.Extensions;
 using Newtonsoft.Json;
+using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.CommandStore;
@@ -51,30 +49,13 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
         {
             try
             {
-                return JsonConvert.DeserializeObject(Encoding.UTF8.GetString(command.CommandData), getTypeByName(command.TypeName)[0]);
+                return JsonConvert.DeserializeObject(Encoding.UTF8.GetString(command.CommandData), TypeHelper.GetTypeByName(command.TypeName)[0]);
             }
             catch (JsonException exception)
             {
                 this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(command.Type, command.TypeName), exception);
                 return null;
             }
-        }
-
-        /// <summary>
-        /// Gets a all Type instances matching the specified class name with just non-namespace qualified class name.
-        /// </summary>
-        /// <param name="className">Name of the class sought.</param>
-        /// <returns>Types that have the class name specified. They may not be in the same namespace.</returns>
-        private static Type[] getTypeByName(string className)
-        {
-            var returnVal = new List<Type>();
-
-            foreach (var assemblyTypes in AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetTypes()))
-            {
-                returnVal.AddRange(assemblyTypes.Where(t => t.Name == className));
-            }
-
-            return returnVal.ToArray();
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class VehicleSpecificInformation : IProvideVehicleSpecificInformation
     {
         public VehicleSpecificInformation(string odometer, string color, string registrationNumber, string vinNumber,
@@ -19,18 +20,19 @@ namespace Lace.Domain.Core.Entities
             CategoryDescription = categoryDescription;
         }
 
+        [DataMember]
         public string Odometer { get; private set; }
-
+        [DataMember]
         public string Colour { get; private set; }
-
+        [DataMember]
         public string RegistrationNumber { get; private set; }
-
+        [DataMember]
         public string VinNumber { get; private set; }
-
+        [DataMember]
         public string LicenseNumber { get; private set; }
-
+        [DataMember]
         public string EngineNumber { get; private set; }
-
+        [DataMember]
         public string CategoryDescription { get; private set; }
         public string TypeName
         {

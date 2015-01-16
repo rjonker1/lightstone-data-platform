@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class Valuation : IRespondWithValuation
     {
         public Valuation()
@@ -93,32 +95,33 @@ namespace Lace.Domain.Core.Entities
             LastFiveSales = model;
         }
 
+        [DataMember]
         public IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithAuctionFactorModel> AuctionFactors { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithAccidentDistributionModel> AccidentDistribution { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithRepairIndexModel> RepairIndex { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithTotalSalesByAgeModel> TotalSalesByAge { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithTotalSalesByGenderModel> TotalSalesByGender { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithEstimatedValueModel> EstimatedValue { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithSaleModel> LastFiveSales { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithPriceModel> Prices { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithFrequencyModel> Frequency { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithConfidenceModel> Confidence { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithAmortisedValueModel> AmortisedValues { get; private set; }
-
+        [DataMember]
         public IEnumerable<IRespondWithImageGaugeModel> ImageGauges { get; private set; }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders.Metric;
+﻿using System.Runtime.Serialization;
+using Lace.Domain.Core.Contracts.DataProviders.Metric;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class TotalSalesByAgeModel : IRespondWithTotalSalesByAgeModel
     {
         public TotalSalesByAgeModel()
@@ -16,12 +18,13 @@ namespace Lace.Domain.Core.Entities
             Band = band;
         }
 
+        [DataMember]
         public string Band
         {
             get;
             private set;
         }
-
+        [DataMember]
         public IPair<string, double>[] Values
         {
             get;

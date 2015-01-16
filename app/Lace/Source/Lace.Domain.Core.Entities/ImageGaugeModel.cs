@@ -1,7 +1,9 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+﻿using System.Runtime.Serialization;
+using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class ImageGaugeModel : IRespondWithImageGaugeModel
     {
         public ImageGaugeModel(double? minValue, double? maxValue, double? value, double? quarter, string gaugeName)
@@ -13,30 +15,31 @@ namespace Lace.Domain.Core.Entities
             GaugeName = gaugeName;
         }
 
+        [DataMember]
         public double? MinValue
         {
             get;
             private set;
         }
-
+        [DataMember]
         public double? MaxValue
         {
             get;
             private set;
         }
-
+        [DataMember]
         public double? Value
         {
             get;
             private set;
         }
-
+        [DataMember]
         public double? Quarter
         {
             get;
             private set;
         }
-
+        [DataMember]
         public string GaugeName
         {
             get;

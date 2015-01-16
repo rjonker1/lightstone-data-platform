@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class LightstoneResponse : IProvideDataFromLightstone
     {
         public LightstoneResponse()
@@ -24,20 +25,21 @@ namespace Lace.Domain.Core.Entities
             VehicleValuation = vehicleValuation;
         }
 
+        [DataMember]
         public int? CarId { get; private set; }
-
+        [DataMember]
         public int? Year { get; private set; }
-
+        [DataMember]
         public string Vin { get; private set; }
-
+        [DataMember]
         public string ImageUrl { get; private set; }
-
+        [DataMember]
         public string Quarter { get; private set; }
-
+        [DataMember]
         public string CarFullname { get; private set; }
-
+        [DataMember]
         public string Model { get; private set; }
-
+        [DataMember]
         public IRespondWithValuation VehicleValuation { get; private set; }
         public string TypeName
         {

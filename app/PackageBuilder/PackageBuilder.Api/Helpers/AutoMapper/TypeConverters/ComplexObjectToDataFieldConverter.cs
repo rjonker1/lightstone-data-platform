@@ -40,7 +40,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             var properties = source.GetType().GetPublicProperties();
             var complexProperties = properties.Where(property =>
                         (property.PropertyType.IsClass || property.PropertyType.IsInterface) &&
-                        !TypeExtensions.IsSimple(property.PropertyType) &&
+                        !TypeExtensions.IsSimple(property.PropertyType) && 
+                        !property.PropertyType.IsInstanceOfType(Type.GetType("System.Type")) &&
                         property.PropertyType != typeof (IPair<string, double>[])).ToList();
             var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof (IDataField)) as IDataField).ToList();
             list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType, _industryRepository.ToList())).ToList());

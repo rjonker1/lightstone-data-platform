@@ -1,7 +1,9 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+﻿using System.Runtime.Serialization;
+using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class EstimatedValueModel : IRespondWithEstimatedValueModel
     {
         public EstimatedValueModel(string estimatedValue, string estimatedLow, string estimatedHigh,
@@ -14,14 +16,15 @@ namespace Lace.Domain.Core.Entities
             ConfidenceValue = confidenceValue;
         }
 
+        [DataMember]
         public string EstimatedValue { get; private set; }
-
+        [DataMember]
         public string EstimatedLow { get; private set; }
-
+        [DataMember]
         public string EstimatedHigh { get; private set; }
-
+        [DataMember]
         public string ConfidenceValue { get; private set; }
-
+        [DataMember]
         public string ConfidenceLevel { get; private set; }
     }
 }

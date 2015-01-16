@@ -4,22 +4,26 @@ using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
+using PackageBuilder.Domain.Entities.CommandStore.Commands;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders
+
 {
     public class CreateDataProviderHandler : AbstractMessageHandler<CreateDataProvider>
     {
         private readonly INEventStoreRepository<DataProvider> _writeRepo;
         private readonly IDataProviderRepository _readRepo;
+        private readonly IHandleMessages _handler;
 
-        public CreateDataProviderHandler(INEventStoreRepository<DataProvider> writeRepo, IDataProviderRepository readRepo)
+        public CreateDataProviderHandler(INEventStoreRepository<DataProvider> writeRepo, IDataProviderRepository readRepo, IHandleMessages handler)
         {
             _writeRepo = writeRepo;
             _readRepo = readRepo;
+            _handler = handler;
         }
 
         public override void Handle(CreateDataProvider command)
@@ -38,6 +42,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 command.Owner, command.CreatedDate, dataFields);
 
             _writeRepo.Save(entity, Guid.NewGuid());
+
+            _handler.Handle(new StoreCommand(Guid.NewGuid(), command));
         }
     }
 }

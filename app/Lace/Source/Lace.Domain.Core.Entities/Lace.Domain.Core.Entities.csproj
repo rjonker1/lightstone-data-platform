@@ -36,6 +36,7 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.495\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\AssemblyInfo.cs">

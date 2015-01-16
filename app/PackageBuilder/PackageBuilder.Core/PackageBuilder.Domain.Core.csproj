@@ -87,6 +87,7 @@
     <Compile Include="Helpers\DataProviderSourceConfiguration.cs" />
     <Compile Include="Helpers\Extensions\TypeExtensions.cs" />
     <Compile Include="Helpers\Extensions\TypeRules.cs" />
+    <Compile Include="Helpers\TypeHelper.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NEventStore\AggregateFactory.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\NamedEntityRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="TypeConverter.cs" />
+    <Compile Include="JsonTypeResolverConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

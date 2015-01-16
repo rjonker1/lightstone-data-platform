@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace DataPlatform.Shared.Helpers.Json
 {
-    public class ConcreteTypeConverter<TConcrete> : JsonConverter
+    public class JsonConcreteTypeConverter<TConcrete> : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

@@ -58,13 +58,13 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
         {
             base.Observe();
 
-            Container.Install(new WindsorInstaller(), new CommandInstaller());
+            Container.Install(new WindsorInstaller(), new CommandInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
             _repository = new Repository<Command>(Session);
             _handler = Container.Resolve<IHandleMessages>();
             _replayCommandHandler = new ReplayCommandHandler(_repository, _handler);
 
-            new when_storing_a_command().Observe();
+            //new when_storing_a_command().Observe();
 
             _replayCommandHandler.Handle(new ReplayCommand());
         }

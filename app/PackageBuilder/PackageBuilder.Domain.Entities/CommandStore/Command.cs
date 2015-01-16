@@ -5,6 +5,7 @@ namespace PackageBuilder.Domain.Entities.CommandStore
 {
     public class Command : Entity
     {
+        public virtual DateTime CreatedDate { get; protected set; }
         public virtual Type Type { get; protected set; }
         public virtual string TypeName { get; protected set; }
         public virtual byte[] CommandData { get; protected set; }
@@ -13,6 +14,7 @@ namespace PackageBuilder.Domain.Entities.CommandStore
 
         public Command(Guid id, Type type, string typeName, byte[] commandData) : base(id)
         {
+            CreatedDate = DateTime.UtcNow;
             Type = type;
             TypeName = typeName;
             CommandData = commandData;

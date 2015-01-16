@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.IO;
 using Castle.Windsor;
 using NHibernate;
@@ -29,8 +30,16 @@ namespace PackageBuilder.TestHelper.BaseTests
         public override void Observe()
         {
             Session = Container.Resolve<ISessionFactory>().OpenSession();
-
-            new SchemaExport(Container.Resolve<Configuration>()).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));
+            // select * from dbo.sysobjects where id = object_id(N'PackageBuilderCommandStore.dbo.[Command]') and OBJECTPROPERTY(id, N'IsUserTable') = 1
+            // the above query to check for existing objects will run per table in the database (schema), therefore we need to switch schemas to drop 
+            // the tables before they are to be checked for and created by the latter packageBuilder schema, as the packageBuilderCommandStore schema is specified in the 
+            // Nhibernate AutomappingOverride mapping to query both schemas via the packageBuilder SessionFactory will then be able to query accross the 2 schemas 
+            // but will obviously only detect sysobjects per relevant schema. 
+            var configuration = Container.Resolve<Configuration>();
+            configuration.SetProperty("connection.connection_string_name", "packageBuilderCommandStore");
+            new SchemaExport(configuration).Drop(true, true);
+            configuration.SetProperty("connection.connection_string_name", "packageBuilder");
+            new SchemaExport(configuration).Execute(true, true, false, Session.Connection, new StreamWriter(new MemoryStream()));
         }
 
         protected void SaveAndFlush(ISession session, params object[] objects)

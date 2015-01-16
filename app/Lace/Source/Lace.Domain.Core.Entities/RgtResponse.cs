@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class RgtResponse : IProvideDataFromRgt
     {
         public RgtResponse()
@@ -39,47 +40,47 @@ namespace Lace.Domain.Core.Entities
             CarType = carType;
         }
 
-
+        [DataMember]
         public string Manufacturer { get; private set; }
-
+        [DataMember]
         public int ModelYear { get; private set; }
-
+        [DataMember]
         public string ModelType { get; private set; }
-
+        [DataMember]
         public string TopSpeed { get; private set; }
-
+        [DataMember]
         public string Kilowatts { get; private set; }
-
+        [DataMember]
         public string FuelEconomy { get; private set; }
-
+        [DataMember]
         public string Acceleration { get; private set; }
-
+        [DataMember]
         public string Torque { get; private set; }
-
+        [DataMember]
         public string Emissions { get; private set; }
-
+        [DataMember]
         public string EngineSize { get; private set; }
-
+        [DataMember]
         public string BodyShape { get; private set; }
-
+        [DataMember]
         public string FuelType { get; private set; }
-
+        [DataMember]
         public string TransmissionType { get; private set; }
-
+        [DataMember]
         public string CarFullname { get; private set; }
-
+        [DataMember]
         public string Colour { get; private set; }
-
+        [DataMember]
         public string RainSensorWindscreenWipers { get; private set; }
-
+        [DataMember]
         public string HeadUpDisplay { get; private set; }
-
+        [DataMember]
         public string VehicleType { get; private set; }
-
+        [DataMember]
         public string Model { get; private set; }
-
+        [DataMember]
         public string Make { get; private set; }
-
+        [DataMember]
         public string CarType { get; private set; }
         public string TypeName
         {

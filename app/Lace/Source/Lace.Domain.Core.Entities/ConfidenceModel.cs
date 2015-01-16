@@ -1,7 +1,9 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+﻿using System.Runtime.Serialization;
+using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class ConfidenceModel : IRespondWithConfidenceModel
     {
 
@@ -12,19 +14,19 @@ namespace Lace.Domain.Core.Entities
             Value = value;
         }
 
-
+        [DataMember]
         public string CarType
         {
             get;
             private set;
         }
-
+        [DataMember]
         public int Year
         {
             get;
             private set;
         }
-
+        [DataMember]
         public double Value
         {
             get;

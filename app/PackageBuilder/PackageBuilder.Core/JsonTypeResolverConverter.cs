@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using DataPlatform.Shared.Helpers.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PackageBuilder.Core.Helpers;
 
 namespace PackageBuilder.Core
 {
-    public class TypeConverter : JsonConverter
+    public class JsonTypeResolverConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -36,7 +35,7 @@ namespace PackageBuilder.Core
             }
             catch (JsonException exception)
             {
-                //this.Error(() => "Could not deserialize command by type: {0} attempting to deserialize by type name {1}".FormatWith(type, typeName), exception);
+                this.Error(() => string.Format("Could not deserialize command by type: {0} attempting to deserialize by type name {1}", dObject.Type, dObject.TypeName), exception);
                 return DeserializeObjectByTypeName(json, dObject.Type, dObject.TypeName);
             }
         }
@@ -45,23 +44,13 @@ namespace PackageBuilder.Core
         {
             try
             {
-                return JsonConvert.DeserializeObject(json, getTypeByName(type)[0]);
+                return JsonConvert.DeserializeObject(json, TypeHelper.GetTypeByName(type)[0]);
             }
             catch (JsonException exception)
             {
                 this.Error(() => "Could not deserialize command by type: {0} or type name {1}".FormatWith(type, typeName), exception);
                 return null;
             }
-        }
-
-        private static Type[] getTypeByName(string className)
-        {
-            var returnVal = new List<Type>();
-
-            foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
-                returnVal.AddRange(a.GetTypes().Where(t => t.Name == className));
-
-            return returnVal.ToArray();
         }
     }
 }
