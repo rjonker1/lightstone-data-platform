@@ -12,7 +12,7 @@ namespace Monitoring.Test.Helper.Mothers
         public static ISendCommandsToBus ForIvidCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqWriteBus();
-            return new SendRgtVinCommands(bus, aggregateId, (int) ExecutionOrder.First);
+            return new SendIvidCommands(bus, aggregateId, (int) ExecutionOrder.First);
         }
 
         public static CommandPublisher ForMonitoringReadMessages(Guid aggregateId)

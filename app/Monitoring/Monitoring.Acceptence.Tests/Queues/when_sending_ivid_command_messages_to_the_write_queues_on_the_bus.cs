@@ -1,6 +1,5 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using Lace.Shared.Monitoring.Messages.Core;
 using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
@@ -13,7 +12,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 {
     public class when_sending_ivid_command_messages_to_the_write_queues_on_the_bus : Specification
     {
-        private readonly string _request;
+        private readonly object _request;
 
         private readonly Guid _aggregateId;
         private readonly IHaveQueueActions _actions;
@@ -23,7 +22,7 @@ namespace Monitoring.Acceptance.Tests.Queues
             var messageQueue = new RabbitMqMessageQueueing();
             _actions = new QueueActions(messageQueue.Consumer);
 
-            _request = DataProviderRequestBuilder.ForIvid();
+            _request = DataProviderRequestBuilder.ForLicensePlateSearch();
             _aggregateId = Guid.NewGuid();
         }
 
@@ -35,12 +34,22 @@ namespace Monitoring.Acceptance.Tests.Queues
                 .InitBus()
                 .InitStopWatch()
                 .StartingDataProviderMessage()
-                .ConfigurationMessage(string.Empty)
-                .SecurityMessage(DataProviderConfigurationBuiler.ForIvid(), "Ivid Data Provider Credentials")
+                .ConfigurationMessage(null)
+                //.SecurityMessage(DataProviderConfigurationBuiler.ForIvid(), "Ivid Data Provider Credentials")
+                .SecurityMessage(new
+                {
+                    Credentials =
+                        new
+                        {
+                            UserName = "CARSTATS-CARSTATS",
+                            Password = "8B5Jk3Q66"
+                        }
+                },
+                new { ContextMessage = "Ivid Data Provider Credentials" })
                 .StartCallingMessage()
-                .FaultCallingMessage("No response received from Ivid Data Provider")
+                .FaultCallingMessage(new { NoRequestReceived = "No response received from Ivid Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromIvid())
-                .TransformationMessage(DataProviderTransformationBuilder.ForIvid(), "Transforming Response from Ivid")
+                .TransformationMessage(DataProviderTransformationBuilder.ForIvid(), new{ TrasformationMetaData = "Transforming Response from Ivid"})
                 .EndingDataProvider();
         }
 

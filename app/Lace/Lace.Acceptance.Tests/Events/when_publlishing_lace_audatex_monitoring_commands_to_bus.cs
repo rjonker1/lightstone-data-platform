@@ -6,7 +6,6 @@ using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
-using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;

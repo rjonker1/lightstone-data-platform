@@ -78,6 +78,8 @@ namespace Lace.Acceptance.Tests.Events
 
             _monitoring.End(_request, _dataProviderStopWatch);
 
+
+
         }
     }
 }

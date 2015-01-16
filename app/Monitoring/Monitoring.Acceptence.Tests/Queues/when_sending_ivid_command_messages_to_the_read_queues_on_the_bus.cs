@@ -14,7 +14,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 {
     public class when_sending_ivid_command_messages_to_the_read_queues_on_the_bus : Specification
     {
-        private readonly string _request;
+        private readonly object _request;
 
         private readonly Guid _aggregateId;
         private readonly IHaveQueueActions _actions;
@@ -24,7 +24,7 @@ namespace Monitoring.Acceptance.Tests.Queues
             var messageQueue = new RabbitMqMessageQueueing();
             _actions = new QueueActions(messageQueue.Consumer);
 
-            _request = DataProviderRequestBuilder.ForIvid();
+            _request = DataProviderRequestBuilder.ForLicensePlateSearch();
             _aggregateId = Guid.NewGuid();
         }
 
