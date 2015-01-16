@@ -15,6 +15,12 @@ namespace Monitoring.Test.Helper.Mothers
             return new SendIvidCommands(bus, aggregateId, (int) ExecutionOrder.First);
         }
 
+        public static ISendCommandsToBus ForAudatexCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqWriteBus();
+            return new SendAudatexCommands(bus, aggregateId, (int)ExecutionOrder.Sixth);
+        }
+
         public static CommandPublisher ForMonitoringReadMessages(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqReadBus();

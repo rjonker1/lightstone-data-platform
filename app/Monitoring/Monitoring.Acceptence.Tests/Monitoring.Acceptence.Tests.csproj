@@ -102,7 +102,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DataProviders\when_handling_data_provider_events.cs" />
-    <Compile Include="Queues\when_sending_ivid_command_messages_to_the_read_queues_on_the_bus.cs" />
+    <None Include="Queues\when_sending_ivid_command_messages_to_the_read_queues_on_the_bus.cs.error" />
+    <Compile Include="Queues\when_sending_audatex_command_messages_to_the_write_queues_on_the_bus.cs" />
     <Compile Include="Queues\when_sending_ivid_command_messages_to_the_write_queues_on_the_bus.cs" />
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>

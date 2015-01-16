@@ -1,4 +1,5 @@
-﻿using System.Resources;
+﻿using System.Collections.Specialized;
+using System.Resources;
 
 namespace Monitoring.Test.Helper.Builder
 {
@@ -200,17 +201,44 @@ namespace Monitoring.Test.Helper.Builder
                 {
                     RgtVinResponse = new
                     {
-                        CarFullname = string.Empty,
-                        Colour,
-                        Month,
-                        Price,
-                        Quarter,
-                        RgtCode,
-                        VehicleMake,
-                        VehicleModel,
-                        VehicleType,
-                        Vin,
-                        Year
+                        CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                        Colour = "STANDARD WHITE",
+                        Month = 2,
+                        Price = 0,
+                        Quarter = 0,
+                        RgtCode = string.Empty,
+                        VehicleMake = "TOYOTA",
+                        VehicleModel = "Auris 1.6 RT 5-dr",
+                        VehicleType = string.Empty,
+                        Vin = "SB1KV58E40F039277",
+                        Year = 2008
+                    }
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new {},
+                        AmortisationFactors = new {},
+                        AmortisedValues = new {},
+                        AreaFactors = new {},
+                        AuctionFactors = new {},
+                        Confidence = new {},
+                        EstimatedValue = new {},
+                        Frequency = new {},
+                        ImageGauges = new {},
+                        LastFiveSales = new {},
+                        Prices = new {},
+                        RepairIndex = new {},
+                        TotalSalesByAge = new {},
+                        TotalSalesByGender = new {},
                     }
                 }
             };
@@ -264,6 +292,46 @@ namespace Monitoring.Test.Helper.Builder
                         HasErrors = false,
                         CarFullname = "Toyota AURIS"
                     }
+                }
+            };
+        }
+
+        public static object ForAudatex()
+        {
+            return new
+            {
+                AudatexResponse = new
+                {
+                    AccidentClaims = new
+                    {
+                        AccidentClaim = new
+                        {
+                            AccidentDate = string.Empty,
+                            AssessmentNumber = string.Empty,
+                            ClaimReferenceNumber = string.Empty,
+                            CreationDate = string.Empty,
+                            CreationDateString = string.Empty,
+                            DataSource = string.Empty,
+                            InsuredName = string.Empty,
+                            Manufacturer = string.Empty,
+                            Mileage = string.Empty,
+                            Model = string.Empty,
+                            Originator = string.Empty,
+                            PolicyNumber = string.Empty,
+                            Registration = string.Empty,
+                            RepairCostExVat = string.Empty,
+                            RepairCostIncVat = string.Empty,
+                            VersionDate = string.Empty,
+                            Vin = string.Empty,
+                            WorkproviderReference = string.Empty,
+                            MatchType = string.Empty,
+                            QuoteValueIndicator = string.Empty,
+                        }
+                    },
+                    HasAccidentClaims = true,
+                    QuoteValueIndicatorNote = "* Indicates the repair quote band segment",
+                    LowConfidenceLevelIndicatorNote = "! Indicates that we have a low confidence in the record returned",
+                    RegistrationNumberOnlyIndicatorNote = "** This record is matched on Registration number only"
                 }
             };
         }

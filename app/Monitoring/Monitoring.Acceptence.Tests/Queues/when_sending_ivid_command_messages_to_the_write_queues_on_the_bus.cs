@@ -5,6 +5,7 @@ using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
 using Monitoring.Test.Helper.Builder;
 using Monitoring.Test.Helper.Messages;
+using Monitoring.Test.Helper.Mothers;
 using Monitoring.Test.Helper.Queues;
 using Xunit.Extensions;
 
@@ -31,11 +32,11 @@ namespace Monitoring.Acceptance.Tests.Queues
             var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Ivid, _actions, _aggregateId);
             queue.TearDown()
                 .Setup()
-                .InitBus()
+                .InitBus(BusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingDataProviderMessage()
                 .ConfigurationMessage(null)
-                //.SecurityMessage(DataProviderConfigurationBuiler.ForIvid(), "Ivid Data Provider Credentials")
+                .SecurityMessage(DataProviderConfigurationBuiler.ForIvid(), null)
                 .SecurityMessage(new
                 {
                     Credentials =

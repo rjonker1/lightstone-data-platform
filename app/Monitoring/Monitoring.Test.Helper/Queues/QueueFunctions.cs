@@ -46,9 +46,9 @@ namespace Monitoring.Test.Helper.Queues
             return this;
         }
 
-        public DataProviderQueueFunctions InitBus()
+        public DataProviderQueueFunctions InitBus(ISendCommandsToBus monitoringBus)
         {
-            _monitoring = BusBuilder.ForIvidCommands(_aggregateId);
+            _monitoring = monitoringBus; 
             return this;
         }
 
