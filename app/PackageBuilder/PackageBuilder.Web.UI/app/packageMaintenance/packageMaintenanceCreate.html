@@ -41,13 +41,16 @@
         <div class="row">
 
             <div class="col-md-4">
-                <!-- ng-if="dataField.dataFields.length > 0"  -->
-                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
+
+                <div class="col-md-2" ng-if="dataField.dataFields.length <= 0"></div>
+
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                    <div class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
                 </div>
             </div>
 
@@ -80,13 +83,13 @@
         <div class="row">
 
             <div class="col-md-4">
-                <!-- ng-if="dataField.dataFields.length > 0"  -->
-                <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
+                <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                 </a>
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                    <div class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
+                    <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
                 </div>
             </div>
 
@@ -123,8 +126,8 @@
                         </a>
                         <div>
                             <input class="col-md-2" ng-model="subDF.isSelected" value="{{subDF.id}}" type="checkbox">
-                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">**{{subDF.name}}</div>
-                            <div ng-if="subDF.label.length > 0" class="col-md-6">**{{subDF.label}}</div>
+                            <div ng-if="(subDF.label == null) || (subDF.label.length <= 0)" class="col-md-6">{{subDF.name}}</div>
+                            <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
                         </div>
                     </div>
                     <div class="col-md-2"></div>
@@ -138,27 +141,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--<ol ng-if="subDF.dataFields.length > 0" data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: collapsed}">
-                <li style="cursor:default; margin-left: -15px; margin-right: 0;" class="row category-title angular-ui-tree angular-ui-tree-handle"
-                    ng-repeat="dataField in subDF.dataFields">
-
-                    <div ng-if="dataField.dataFields.length <= 0">
-                        <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
-                        <div class="col-md-6">***{{dataField.name}}</div>
-                        <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                            <label class="col-md-2">Cost:</label>
-
-                            <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
-                                   value="{{totalChildren(dataField, dataField.dataFields)}}" />
-
-                            <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
-                        </div>
-                    </div>
-
-                </li>
-
-            </ol>-->
 
         </li>
     </ol>
@@ -177,11 +159,11 @@
 
                         <div id="info" class="row">
 
-                            <div id="1" class="col-md-3">
+                            <div id="1" class="col-lg-3 col-md-6">
                                 <div>
                                     <label>Name:</label>
                                     <div>
-                                        <input type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name" />
+                                        <input id="package_name" type="textbox" class="form-control" ng-model="dataProvsPkg.Package.name" />
                                     </div>
 
                                     <label>Version:</label>
@@ -199,12 +181,13 @@
                                 </div>
                             </div>
 
-                            <div id="2" class="col-md-3">
+                            <div id="2" class="col-lg-3 col-md-6">
                                 <div>
                                     <label>State:</label>
                                     <div>
-                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-selected="dataProvsPkg.Package.state">
-                                            <option ng-repeat="state in states" value="{{state.name}}">{{state.alias}}</option>
+                                        <select id="state_selection" class="form-control" ng-model="dataProvsPkg.Package.state" ng-options="state.name for state in states">
+                                            <!--<option ng-repeat="state in states" value="{{state.id}}">{{state.alias}}</option>-->
+
                                         </select>
                                     </div>
                                 </div>
@@ -222,13 +205,13 @@
                                     <label>Package Industry:</label>
                                     <div>
                                         <!--<select class="form-control" ng-model="dataProvsPkg.Package.industry" ng-selected="dataProvsPkg.Package.industry">
-                                                <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
-                                            </select>-->
+                                            <option ng-repeat="industry in industries" value="{{industry.name}}">{{industry.name}}</option>
+                                        </select>-->
 
                                         <div multi-select
                                              input-model="industries"
                                              button-label="name"
-                                             item-label="name maker"
+                                             item-label="name"
                                              max-labels="1"
                                              tick-property="isSelected"
                                              output-model="selectedFields"
@@ -275,17 +258,11 @@
 
                             <div class="row">
 
-                                <div class="col-md-4" style="padding-bottom: 20px;">
+                                <div class="col-lg-4 col-md-6" style="padding-bottom: 20px;">
                                     <div style="float: left;"><h3>Data Providers</h3></div>
-                                    <div style="float: right; text-align: right;">
-                                        <!--<label>Filter Data Providers fields by Industry:</label>
-                                        <select class="form-control" ng-model="filteredConstraint"
-                                                ng-options="industry.name for industry in industries" ng-change="filterData(filteredConstraint)"></select>-->
-                                    </div>
-
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-lg-4 col-md-8">
 
 
 
@@ -300,8 +277,8 @@
                                     <br />
 
                                     <div style="float: right;">
-                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                                        <button type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Save Package</button>
+                                        <button id="btn_cancel" type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                                        <button id="btn_save_package" type="button" class="btn btn-success" ng-click="createPackage(dataProvsPkg.Package)">Save Package</button>
                                     </div>
 
 

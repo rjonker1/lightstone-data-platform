@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Lace.Shared.Extensions
 {
@@ -17,6 +18,35 @@ namespace Lace.Shared.Extensions
             {
                 return string.Empty;
             }
+        }
+
+        public static string AsJsonString(this object value)
+        {
+            if (value == null) return string.Empty;
+
+            return JsonConvert.SerializeObject(value, Formatting.Indented,
+                new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()});
+
+        }
+
+        public static object JsonToObject(this string json)
+        {
+            try
+            {
+                return string.IsNullOrWhiteSpace(json) || !IsJson(json) ? json : JsonConvert.DeserializeObject(json);
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
+        private static bool IsJson(string json)
+        {
+            json = json.Trim();
+            return json.StartsWith("{") && json.EndsWith("}")
+                   || json.StartsWith("[") && json.EndsWith("]");
         }
     }
 }

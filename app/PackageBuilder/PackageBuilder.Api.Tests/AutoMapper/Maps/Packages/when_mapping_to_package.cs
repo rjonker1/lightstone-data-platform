@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.TestHelper.BaseTests;
@@ -38,7 +39,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
             _package.State.Name.ShouldEqual(StateName.Published);
             _package.DisplayVersion.ShouldEqual(0.1m);
             _package.Owner.ShouldEqual("Owner");
-            _package.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
+            _package.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _package.EditedDate.Value.Date.ShouldEqual(new DateTime().Date);
             _package.DataProviders.Count().ShouldEqual(2);
         }

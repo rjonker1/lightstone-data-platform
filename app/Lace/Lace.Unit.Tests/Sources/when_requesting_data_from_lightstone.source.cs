@@ -5,6 +5,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
@@ -18,12 +19,12 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _request;
         private IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly ISendCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _callTheSource;
 
         public when_requesting_data_from_lightstone_source()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
+            _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponse();

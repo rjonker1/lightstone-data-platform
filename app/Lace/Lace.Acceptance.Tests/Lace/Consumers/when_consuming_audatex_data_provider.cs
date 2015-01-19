@@ -2,6 +2,7 @@
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Responses;
@@ -13,22 +14,22 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     public class when_consuming_audatex_data_provider : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly ISendCommandsToBus _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private AudatexDataProvider _consumer;
 
 
         public when_consuming_audatex_data_provider()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
+            _monitoring = BusBuilder.ForAudatexCommands(Guid.NewGuid());
             _request = new LicensePlateNumberAudatexOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandledAndVin12();
         }
 
         public override void Observe()
         {
-            _consumer = new AudatexDataProvider(_request, null, null);
-            _consumer.CallSource(_response, _monitoring);
+            _consumer = new AudatexDataProvider(_request, null, null,_monitoring);
+            _consumer.CallSource(_response);
         }
 
 

@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Entities.Enums;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
@@ -33,10 +33,10 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
             _packageDto.RecommendedSalePrice.ShouldEqual(0d);
             _packageDto.Notes.ShouldEqual("");
             _packageDto.Industries.Count().ShouldEqual(2);
-            _packageDto.State.ShouldEqual("Published");
+            _packageDto.State.Alias.ShouldEqual("Published");
             _packageDto.DisplayVersion.ShouldEqual(0.1m);
             _packageDto.Owner.ShouldEqual("");
-            _packageDto.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
+            _packageDto.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _packageDto.EditedDate.Date.ShouldEqual(new DateTime().Date);
             _packageDto.DataProviders.Count().ShouldEqual(6);
         }

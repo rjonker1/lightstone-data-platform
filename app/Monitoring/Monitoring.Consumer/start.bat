@@ -1,1 +1,0 @@
-Monitoring.Consumer start

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Models.IvidTitleHolder;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class IvidTitleHolderResponse : IProvideDataFromIvidTitleHolder, IBuildIvidTitleHolderResponse
     {
         private const string NotAvailableError = "Error - Not Available";
@@ -60,36 +62,39 @@ namespace Lace.Domain.Core.Entities
 
         }
 
-
+        [DataMember]
         public string BankName { get; private set; }
+        [DataMember]
         public string AccountNumber { get; private set; }
+        [DataMember]
         public DateTime? DateOpened { get;  private set; }
-
+        [DataMember]
         public bool FlaggedOnAnpr { get; private set; }
-
+        [DataMember]
         public string FinancialInterestsHeading
         {
             get { return "Financial Interests"; }
         }
-
+        [DataMember]
         public string AccountOpenDate { get; private set; }
+        [DataMember]
         public string AccountClosedDate { get; private set; }
-
+        [DataMember]
         public string AgreementType
         {
             get { return "Regular Finance Contract"; }
         }
-
+        [DataMember]
         public string YearOfLiabilityForLicensing { get; private set; }
-
+        [DataMember]
         public string RequestFinancialInterestInvite { get; private set; }
-
+        [DataMember]
         public bool FinancialInterestAvailable { get; private set; }
-
-
+        [DataMember]
         public bool PartialResponse { get; private set; }
+        [DataMember]
         public bool HasErrors { get; private set; }
-
+        [DataMember]
         public string ExpiredMessage
         {
             get
@@ -98,8 +103,21 @@ namespace Lace.Domain.Core.Entities
                     "This report is older than 15 days, we recommend you generate a new one as information may have changed since then";
             }
         }
-
-
-       
+        [DataMember]
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        [DataMember]
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

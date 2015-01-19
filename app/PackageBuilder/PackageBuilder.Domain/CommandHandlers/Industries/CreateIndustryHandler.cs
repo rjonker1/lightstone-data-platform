@@ -1,4 +1,6 @@
-﻿using PackageBuilder.Core.MessageHandling;
+﻿using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Helpers.Extensions;
+using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
@@ -17,11 +19,13 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
         public override void Handle(CreateIndustry command)
         {
             if (_repository.Exists(command.Id, command.Name))
-                return;
-                //throw new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
+            {
+                var exception = new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => exception);
+                throw exception;
+            }
 
-            var industry = new Industry(command.Id, command.Name, command.IsSelected);
-            _repository.Save(industry);
+            _repository.Save(new Industry(command.Id, command.Name, command.IsSelected));
         }
     }
 }

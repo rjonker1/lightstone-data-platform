@@ -37,7 +37,7 @@ namespace PackageBuilder.Domain.Entities.Packages.ReadModels
         public virtual void DeletePackage()
         {
             IsDeleted = true;
-            DeletedDate = DateTime.Now;
+            DeletedDate = DateTime.UtcNow;
         }
     }
 }

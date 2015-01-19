@@ -3,6 +3,7 @@
 
     var app = angular.module('app', [
         // Angular modules 
+        'ngTouch',          // touch
         'ngAnimate',        // animations
         'ngRoute',          // routing
         'ngSanitize',       // sanitizes html bindings (ex: sidebar.js)

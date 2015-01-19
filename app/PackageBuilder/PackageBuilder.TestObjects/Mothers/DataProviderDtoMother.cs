@@ -1,5 +1,6 @@
 ﻿using System;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers
@@ -17,8 +18,8 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(10d)
                     .With(true)
                     .With(1)
-                    .With(DateTime.Now)
-                    .With((DateTime?)DateTime.Now.AddDays(1))
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
                     .With(DataFieldDtoMother.CarFullname, DataFieldDtoMother.SpecificInformation)
                     .Build();
             }
@@ -34,8 +35,8 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(10d)
                     .With(true)
                     .With(1)
-                    .With(DateTime.Now)
-                    .With((DateTime?)DateTime.Now.AddDays(1))
+                    .With(DateTime.UtcNow)
+                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
                     .With(DataFieldDtoMother.CategoryCode)
                     .Build();
             }

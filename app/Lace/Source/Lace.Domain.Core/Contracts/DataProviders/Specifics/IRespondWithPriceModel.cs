@@ -1,6 +1,8 @@
-﻿namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
+﻿using DataPlatform.Shared.Entities;
+
+namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
 {
-    public interface IRespondWithPriceModel
+    public interface IRespondWithPriceModel : IProvideType
     {
         string Name { get; }
         decimal Value { get; }

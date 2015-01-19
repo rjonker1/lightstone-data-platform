@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -16,8 +17,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private ISendMonitoringMessages _monitoring;
         private readonly IBus _bus;
+        private ISendCommandsToBus _monitoring;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
 
@@ -31,7 +32,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             try
             {
-                _monitoring = new MonitoringMessageSender(_bus, request.RequestAggregation.AggregateId);
+                _monitoring = new SendEntryPointCommands(_bus, request.RequestAggregation.AggregateId,
+                    (int) ExecutionOrder.First);
                 _sourceChain = new CreateSourceChain(request.Package);
                 _sourceChain.Build();
 
@@ -43,7 +45,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
                 if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return EmptyResponse;
 
-                _bootstrap = new Initialize(new LaceResponse(), request, _monitoring, _sourceChain);
+                _bootstrap = new Initialize(new LaceResponse(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
 
                 return _bootstrap.LaceResponses ?? EmptyResponse;
@@ -51,8 +53,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
             catch (Exception ex)
             {
-                _monitoring.DataProviderFault(DataProvider.EntryPoint, string.Format("Error {0}", ex.Message),
-                    request.ObjectToJson());
+                _monitoring.Send(CommandType.Fault, ex.Message, request);
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;

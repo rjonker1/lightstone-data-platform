@@ -6,6 +6,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using PackageBuilder.Infrastructure.NHibernate.Conventions;
@@ -37,16 +38,20 @@ namespace PackageBuilder.Api.Installers
                             .UseOverridesFromAssemblyOf<PackageMappingOverride>());
                     //.Conventions.Add<>());
                     //cfg.FluentMappings.AddFromAssemblyOf<Entity>();
-                }).BuildConfiguration()));
+                }).ExposeConfiguration(TreatConfiguration).BuildConfiguration()));
 
             container.Register(Component.For<ISessionFactory>()
-                     .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
-                     .LifestyleSingleton()); 
+                .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
+                .LifestyleSingleton());
             container.Register(Component.For<ISession>()
-                     .UsingFactoryMethod(kernal => 
-                         kernal.Resolve<ISessionFactory>().OpenSession()
-                         )
-                     .LifestylePerWebRequest());
+                .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
+                .LifestylePerWebRequest());
+        }
+
+        protected virtual void TreatConfiguration(Configuration configuration)
+        {
+            var update = new SchemaUpdate(configuration);
+            update.Execute(false, true);
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace PackageBuilder.TestObjects.Builders
 {
@@ -14,7 +16,8 @@ namespace PackageBuilder.TestObjects.Builders
         private IEnumerable<Industry> _industries;
         private int _version;
         private decimal _displayVersion;
-        private string _state;
+        //private string _state;
+        private State _state;
         private DateTime _createdDate;
         private DateTime _editedDate;
         private string _owner;
@@ -74,7 +77,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public PackageDtoBuilder With(string state, string owner = "")
+        public PackageDtoBuilder With(State state, string owner = "")
         {
             _state = state;
             _owner = owner;

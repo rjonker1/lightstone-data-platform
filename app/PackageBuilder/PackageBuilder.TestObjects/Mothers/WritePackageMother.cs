@@ -17,7 +17,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(IndustryMother.Finance, IndustryMother.Automotive)
                     .With(StateMother.Published)
                     .With(0.1m)
-                    .With(DateTime.Now)
+                    .With(DateTime.UtcNow)
                     .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
@@ -33,7 +33,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(IndustryMother.Finance, IndustryMother.Automotive)
                     .With(StateMother.Published)
                     .With(0.1m)
-                    .With(DateTime.Now)
+                    .With(DateTime.UtcNow)
                     .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
@@ -49,7 +49,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(IndustryMother.Finance, IndustryMother.Automotive)
                     .With(StateMother.Published)
                     .With(0.1m)
-                    .With(DateTime.Now)
+                    .With(DateTime.UtcNow)
                     .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
@@ -65,7 +65,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(IndustryMother.Finance, IndustryMother.Automotive)
                     .With(StateMother.Published)
                     .With(0.1m)
-                    .With(DateTime.Now)
+                    .With(DateTime.UtcNow)
                     .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }
@@ -80,7 +80,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(IndustryMother.Finance, IndustryMother.Automotive)
                     .With(StateMother.Published)
                     .With(0.1m)
-                    .With(DateTime.Now)
+                    .With(DateTime.UtcNow)
                     .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
                     .Build();
             }

@@ -1,9 +1,14 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System;
+using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Json;
+using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Models;
+using Newtonsoft.Json;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class IvidResponse : IProvideDataFromIvid, IBuildIvidResponse
     {
         private const string NotAvailableError = "Error - Not Available";
@@ -108,68 +113,83 @@ namespace Lace.Domain.Core.Entities
             return value;
         }
 
-
+        [DataMember, JsonConverter(typeof(JsonTypeResolverConverter))]
         public IProvideVehicleSpecificInformation SpecificInformation { get; private set; }
-
+        [DataMember]
         public string StatusMessage { get; private set; }
-
+        [DataMember]
         public string Reference { get; private set; }
-
+        [DataMember]
         public string License { get; private set; }
-
+        [DataMember]
         public string Registration { get; private set; }
-
+        [DataMember]
         public string RegistrationDate { get; private set; }
-
+        [DataMember]
         public string Vin { get; private set; }
-
+        [DataMember]
         public string Engine { get; private set; }
-
+        [DataMember]
         public string Displacement { get; private set; }
-
+        [DataMember]
         public string Tare { get; private set; }
-
+        [DataMember]
         public string MakeCode { get; private set; }
-
+        [DataMember]
         public string MakeDescription { get; private set; }
-
+        [DataMember]
         public string ModelCode { get; private set; }
-
+        [DataMember]
         public string ModelDescription { get; private set; }
-
+        [DataMember]
         public string ColourCode { get; private set; }
-
+        [DataMember]
         public string ColourDescription { get; private set; }
-
+        [DataMember]
         public string DrivenCode { get; private set; }
-
+        [DataMember]
         public string DrivenDescription { get; private set; }
-
+        [DataMember]
         public string CategoryCode { get; private set; }
-
+        [DataMember]
         public string CategoryDescription { get; private set; }
-
+        [DataMember]
         public string DescriptionCode { get; private set; }
-
+        [DataMember]
         public string Description { get; private set; }
-
+        [DataMember]
         public string EconomicSectorCode { get; private set; }
-
+        [DataMember]
         public string EconomicSectorDescription { get; private set; }
-
+        [DataMember]
         public string LifeStatusCode { get; private set; }
-
+        [DataMember]
         public string LifeStatusDescription { get; private set; }
-
+        [DataMember]
         public string SapMarkCode { get; private set; }
-
+        [DataMember]
         public string SapMarkDescription { get; private set; }
-
+        [DataMember]
         public bool HasIssues { get; private set; }
-
+        [DataMember]
         public bool HasErrors { get; private set; }
-
+        [DataMember]
         public string CarFullname { get; private set; }
-
+        [DataMember]
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        [DataMember]
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

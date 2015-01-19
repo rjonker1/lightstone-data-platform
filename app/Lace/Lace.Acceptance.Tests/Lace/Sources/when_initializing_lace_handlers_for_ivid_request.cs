@@ -5,9 +5,11 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
+using NServiceBus;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
@@ -15,14 +17,14 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_ivid_request : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly IBus _monitoring;
         private readonly IBootstrap _initialize;
         private IList<LaceExternalSourceResponse> _laceResponses;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_initializing_lace_handlers_for_ivid_request()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
+            _monitoring = BusFactory.NServiceRabbitMqBus();
             _request = new LicensePlateRequestBuilder().ForIvid();
             _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();

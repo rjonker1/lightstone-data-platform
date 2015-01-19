@@ -1,4 +1,5 @@
 ﻿using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Helpers;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
@@ -24,28 +25,52 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
         {
             get
             {
-                return DataProviderSourceConfiguration.Url(_name);
+                this.Info(() => "Attempting to find data provider Url for {0}".FormatWith(_name));
+
+                var url = DataProviderSourceConfiguration.Url(_name);
+
+                this.Info(() => "Successfully found data provider Url for {0}".FormatWith(_name));
+
+                return url;
             }
         }
         public string Username
         {
             get
             {
-                return DataProviderSourceConfiguration.Username(_name);
+                this.Info(() => "Attempting to find data provider Username for {0}".FormatWith(_name));
+
+                var username = DataProviderSourceConfiguration.Username(_name);
+
+                this.Info(() => "Successfully found data provider Username for {0}".FormatWith(_name));
+
+                return username;
             }
         }
         public string Password
         {
             get
             {
-                return DataProviderSourceConfiguration.Password(_name);
+                this.Info(() => "Attempting to find data provider Password for {0}".FormatWith(_name));
+
+                var password = DataProviderSourceConfiguration.Password(_name);
+
+                this.Info(() => "Successfully found data provider Password for {0}".FormatWith(_name));
+
+                return password;
             }
         }
         public string ConnectionString
         {
             get
             {
-                return DataProviderSourceConfiguration.ConnectionString(_name);
+                this.Info(() => "Attempting to find data provider ConnectionString for {0}".FormatWith(_name));
+
+                var connectionString = DataProviderSourceConfiguration.ConnectionString(_name);
+
+                this.Info(() => "Successfully found data provider ConnectionString for {0}".FormatWith(_name));
+
+                return connectionString;
             }
         }
     }

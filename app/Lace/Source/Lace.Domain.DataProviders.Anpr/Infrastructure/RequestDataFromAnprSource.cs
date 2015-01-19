@@ -1,13 +1,13 @@
 ﻿using Lace.Domain.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 {
     public class RequestDataFromAnprSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
-            ISendMonitoringMessages monitoring)
+            ISendCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

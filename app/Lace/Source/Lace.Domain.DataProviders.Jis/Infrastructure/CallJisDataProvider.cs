@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
 using Common.Logging;
-using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
+using DataPlatform.Shared.Enums;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Factory;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -19,7 +20,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
     public class CallJisDataProvider : ICallTheDataProviderSource
     {
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-        private const DataProvider Provider = DataProvider.Jis;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Jis;
 
         private readonly ILaceRequest _request;
         private readonly ISetupCertificateRepository _repository;
@@ -33,7 +34,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             try
             {
@@ -78,7 +79,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 

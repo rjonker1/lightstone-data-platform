@@ -27,7 +27,7 @@ namespace PackageBuilder.Api.Helpers.Extensions
 
         public static void AddTransactionScope(this IPipelines pipelines, IWindsorContainer container)
         {
-            pipelines.BeforeRequest += ctx =>
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
                 var session = container.Resolve<ISession>();
                 if (session != null)
@@ -36,9 +36,9 @@ namespace PackageBuilder.Api.Helpers.Extensions
                     return null;
                 }
                 return null;
-            };
+            });
 
-            pipelines.AfterRequest.AddItemToEndOfPipeline((ctx =>
+            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
             {
                 var session = container.Resolve<ISession>();
                 if (session == null)
@@ -49,7 +49,7 @@ namespace PackageBuilder.Api.Helpers.Extensions
                     session.Transaction.Rollback();
                 else
                     session.Transaction.Commit();
-            }));
+            });
         }
     }
 }

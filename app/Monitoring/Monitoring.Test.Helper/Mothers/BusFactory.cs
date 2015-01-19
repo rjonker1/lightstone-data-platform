@@ -1,4 +1,6 @@
 ﻿using System;
+using Lace.Shared.Monitoring.Messages.Core;
+using Lace.Shared.Monitoring.Messages.Publisher;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 using NServiceBus.Features;
@@ -7,10 +9,46 @@ namespace Monitoring.Test.Helper.Mothers
 {
     public class BusBuilder
     {
-        public static ISendMonitoringMessages ForMonitoringWriteMessages(Guid aggregateId)
+        public static ISendCommandsToBus ForIvidCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqWriteBus();
-            return new MonitoringMessageSender(bus, aggregateId);
+            return new SendIvidCommands(bus, aggregateId, (int) ExecutionOrder.First);
+        }
+
+        public static ISendCommandsToBus ForAudatexCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqWriteBus();
+            return new SendAudatexCommands(bus, aggregateId, (int) ExecutionOrder.Sixth);
+        }
+
+        public static CommandPublisher ForMonitoringReadMessages(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new CommandPublisher(bus);
+        }
+
+        public static ISendCommandsToBus ForLightstoneCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendLightstoneCommands(bus, aggregateId, (int) ExecutionOrder.Second);
+        }
+
+        public static ISendCommandsToBus ForIvidTitleHolderCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int) ExecutionOrder.Third);
+        }
+
+        public static ISendCommandsToBus ForRgtCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendRgtCommands(bus, aggregateId, (int) ExecutionOrder.Fifth);
+        }
+
+        public static ISendCommandsToBus ForRgtVinCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendRgtVinCommands(bus, aggregateId, (int) ExecutionOrder.Fourth);
         }
     }
 
@@ -27,7 +65,7 @@ namespace Monitoring.Test.Helper.Mothers
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
+                    c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
             var bus = Bus.Create(configuration);
             return bus;
         }
@@ -43,7 +81,7 @@ namespace Monitoring.Test.Helper.Mothers
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"));
+                    c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
             var bus = Bus.Create(configuration);
             return bus;
         }

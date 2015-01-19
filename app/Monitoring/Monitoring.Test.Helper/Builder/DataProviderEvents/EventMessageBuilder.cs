@@ -1,27 +1,15 @@
-﻿namespace Monitoring.Test.Helper.Builder.DataProviderEvents
+﻿using System;
+using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Messaging.Events;
+
+namespace Monitoring.Test.Helper.Builder.DataProviderEvents
 {
-    //public class EventMessageBuilder
-    //{
-    //    public static DataProviderExecutingStartingEvent DataProviderExecutedEvent()
-    //    {
-    //        return new DataProviderExecutingStartingEvent(Guid.NewGuid(), (int) DataProvider.Audatex,
-    //            DataProviderMonitoringMessages.StartCallingDataProvider, DateTime.UtcNow);
-    //    }
-    //}
+    public class DataProviderEvents
+    {
+        public MonitoringEvent ForDataProviderEvent(Guid aggreateId,string payload, DateTime date )
+        {
+            return new MonitoringEvent(aggreateId, payload,date, MonitoringSource.Lace);
+        }
 
-    //[Serializable]
-    //public class DataProviderExecutedMessage : DataProviderExecuted
-    //{
-    //    public Guid Id { get; set; }
-
-    //    public Guid AggregateId { get; set; }
-
-    //    public int DataProviderId { get; set; }
-
-    //    public string Message { get; set; }
-
-    //    public DateTime Date { get; set; }
-
-
-    //}
+    }
 }

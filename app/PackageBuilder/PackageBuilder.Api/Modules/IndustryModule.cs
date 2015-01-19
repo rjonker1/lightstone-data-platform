@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using PackageBuilder.Api.Helpers.Extensions;
@@ -12,27 +13,27 @@ namespace PackageBuilder.Api.Modules
     {
         public IndustryModule(IBus bus, IRepository<Industry> repository)
         {
-            Get["/Industry"] = parameters =>
-            {
-                return Response.AsJson(repository);
-            };
+            const string industriesRoute = "/Industries";
 
-            Post["/Industry/Add"] = parameters =>
+            Get[industriesRoute] = parameters => 
+                Response.AsJson(repository);
+
+            Post[industriesRoute] = parameters =>
             {
                 var model = Request.Body<dynamic>();
                 if (model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+                    throw new LightstoneAutoException("Could not bind 'Name' value");
 
                 bus.Publish(new CreateIndustry(Guid.NewGuid(), model.name.Value, false));
 
                 return Response.AsJson(new { response = "Success!" });
             };
 
-            Post["/Industry/Edit"] = parameters =>
+            Put[industriesRoute] = parameters =>
             {
                 var model = Request.Body<dynamic>();
                 if (model.id.Value == null && model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+                    throw new LightstoneAutoException("Could not bind 'id' or 'Name' value");
                     
                 bus.Publish(new RenameIndustry(new Guid(model.id.Value), model.name.Value, false));
 

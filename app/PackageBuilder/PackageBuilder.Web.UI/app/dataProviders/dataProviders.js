@@ -64,13 +64,20 @@
          name: ' ',
          displayName: ' ',
          width: 280,
-         cellTemplate: '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) == row.entity.version">' +
-             '<input type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
-             '<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
-             '<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" /></div>' +
-             '' +
+         cellTemplate:
+             '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) == row.entity.version">' +
+                '<input id="{{row.entity.description}}_edit" dp_Id="{{row.entity.dataProviderId}}" dp_version="{{row.entity.version}}" ' +
+                    'type="button" class="btn btn-success grid-btn" name="edit" ng-click="getExternalScopes().notify(row)" value="Edit" />' +
+                //'<input type="button" class="btn btn-defualt grid-btn" name="clone" ng-click="" value="Clone" />' +
+                //'<input type="button" class="btn btn-danger grid-btn" style="width: 100px;" name="remove" ng-click="" value="Remove" />' +
+             '</div>' +
+
              '<div ng-if="getExternalScopes().latestVersion.Get(row.entity.dataProviderId) != row.entity.version">' +
-             '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" /></div>'
+                '<input type="button" class="btn btn-info grid-btn" name="view" ng-click="getExternalScopes().viewDataProvider(row)" value="View" />' +
+             '</div>'
+
+             
+             
      }
             ]
         };

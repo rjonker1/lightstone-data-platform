@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
+using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
@@ -8,21 +8,23 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Jis
 {
     public class JisDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
+        private readonly ISendCommandsToBus _monitoring;
 
-        public JisDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource)
+        public JisDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Jis, _request);
 
@@ -38,13 +40,13 @@ namespace Lace.Domain.DataProviders.Jis
                             CacheConnectionFactory.LocalClient(),
                             ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
                                 ].ConnectionString)));
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
                 if (response.IvidResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

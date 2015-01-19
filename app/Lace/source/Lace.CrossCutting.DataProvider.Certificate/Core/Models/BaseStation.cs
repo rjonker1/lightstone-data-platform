@@ -1,4 +1,4 @@
-﻿namespace Lace.CrossCutting.DataProvider.Certificate.Core.Models
+﻿namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Models
 {
     public class BaseStation
     {

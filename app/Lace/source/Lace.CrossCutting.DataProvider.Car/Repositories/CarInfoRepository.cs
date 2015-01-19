@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
-using Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure.SqlStatements;
 using Lace.CrossCutting.Infrastructure.Orm;
 using ServiceStack.Redis;
 
-namespace Lace.CrossCutting.DataProvider.Car.Repositories
+namespace Lace.CrossCutting.DataProviderCommandSource.Car.Repositories
 {
     public class CarInfoRepository : IReadOnlyCarRepository<CarInfo>
     {

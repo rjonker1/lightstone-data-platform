@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -12,7 +13,8 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 {
@@ -22,7 +24,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProvider Provider = DataProvider.Ivid;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Ivid;
 
         public CallIvidDataProvider(ILaceRequest request)
         {
@@ -31,7 +33,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendMonitoringMessages monitoring)
+            ISendCommandsToBus monitoring)
         {
             try
             {
@@ -40,7 +42,17 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 ividWebService.ConfigureIvidWebServiceCredentials();
                 ividWebService.ConfigureIvidWebServiceRequestMessageProperty();
 
-                monitoring.DataProviderSecurity(Provider, ividWebService.IvidServiceProxy.ObjectToJson(), "Ivid Data Provider Credentials");
+                monitoring.Send(CommandType.Security,
+                    new
+                    {
+                        Credentials =
+                            new
+                            {
+                                ividWebService.IvidServiceProxy.ClientCredentials.UserName.UserName,
+                                ividWebService.IvidServiceProxy.ClientCredentials.UserName.Password
+                            }
+                    },
+                    new {ContextMessage = "Ivid Data Provider Credentials"});
 
                 using (var scope = new OperationContextScope(ividWebService.IvidServiceProxy.InnerChannel))
                 {
@@ -51,9 +63,9 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                         .Build()
                         .HpiQueryRequest;
 
-                    monitoring.DataProviderConfiguration(Provider, request.ObjectToJson(), string.Empty);
+                    monitoring.Send(CommandType.Configuration, request, null);
 
-                    monitoring.StartCallingDataProvider(Provider, request.ObjectToJson(), _stopWatch);
+                    monitoring.StartCall(request, _stopWatch);
 
                     _response = ividWebService
                         .IvidServiceProxy
@@ -61,13 +73,11 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
 
                     ividWebService.CloseWebService();
 
-                    monitoring.EndCallingDataProvider(Provider,
-                        _response != null ? _response.ObjectToJson() : new HpiStandardQueryResponse().ObjectToJson(),
-                        _stopWatch);
+                    monitoring.EndCall(_response ?? new HpiStandardQueryResponse(), _stopWatch);
 
                     if (_response == null)
-                        monitoring.DataProviderFault(Provider, _request.ObjectToJson(),
-                            "No response received from Ivid Data Provider");
+                        monitoring.Send(CommandType.Fault, _request,
+                            new {NoRequestReceived = "No response received from Ivid Data Provider"});
 
                     TransformResponse(response, monitoring);
                 }
@@ -75,7 +85,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             catch (Exception ex)
             {
                 Log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
-                monitoring.DataProviderFault(Provider, ex.Message.ObjectToJson(), "Error calling Ivid Data Provider");
+                monitoring.Send(CommandType.Fault, ex.Message, new {ErrorMessage = "Error calling Ivid Data Provider"});
                 IvidResponseFailed(response);
             }
         }
@@ -87,7 +97,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             response.IvidResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
             var transformer = new TransformIvidResponse(_response);
 
@@ -96,8 +106,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.DataProviderTransformation(Provider, transformer.Result.ObjectToJson(),
-                transformer.ObjectToJson());
+            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             response.IvidResponse = transformer.Result;
             response.IvidResponseHandled = new IvidResponseHandled();

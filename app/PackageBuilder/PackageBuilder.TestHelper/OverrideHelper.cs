@@ -27,6 +27,12 @@ namespace PackageBuilder.TestHelper
                 model.LifestyleType = LifestyleType.Transient;
         }
 
+        public static void OverrideNhibernateSessionLifestyle(ComponentModel model)
+        {
+            if (model.ComponentName.Name.Equals("Late bound NHibernate.ISession"))
+                model.LifestyleType = LifestyleType.Singleton;
+        }
+
         public static void OverrideNhibernateCfg(IWindsorContainer container)
         {
             var configuration = container.Resolve<Configuration>();
@@ -34,6 +40,7 @@ namespace PackageBuilder.TestHelper
             configuration.SetProperty("cache.use_second_level_cache", "false");
             configuration.SetProperty("cache.use_query_cache", "false");
             configuration.SetProperty("current_session_context_class", "thread_static");
+            configuration.SetProperty("show_sql", "true");
         }
     }
 }

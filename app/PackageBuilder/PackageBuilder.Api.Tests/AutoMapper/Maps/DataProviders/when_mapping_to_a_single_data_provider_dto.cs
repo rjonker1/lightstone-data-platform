@@ -4,6 +4,7 @@ using AutoMapper;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
@@ -36,8 +37,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             _dto.SourceConfigurationUrl.ShouldEqual("IvidUrlTest");
             _dto.SourceConfigurationUsername.ShouldEqual("IvidUsernameTest");
             _dto.CostOfSale.ShouldEqual(0d);
-            _dto.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
-            _dto.EditedDate.Value.Date.ShouldEqual(DateTime.Now.AddDays(1).Date);
+            _dto.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
+            _dto.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);
             _dto.FieldLevelCostPriceOverride.ShouldBeFalse();
             _dto.DataFields.Count().ShouldEqual(6);
             _dto.DataFields.ElementAt(0).Name.ShouldEqual("CarFullname");

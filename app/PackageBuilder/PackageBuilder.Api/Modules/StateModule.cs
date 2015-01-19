@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using PackageBuilder.Api.Helpers.Extensions;
@@ -14,27 +15,16 @@ namespace PackageBuilder.Api.Modules
     {
         public StateModule(IBus bus, IRepository<State> repository)
         {
-            Get["/State"] = parameters =>
-            {
-                return Response.AsJson(repository.Select(x => new { id = x.Id, name = x.Name.ToString(), alias = x.Alias }));
-            };
+            const string statesRoute = "/States";
 
-            Post["/State/Add"] = parameters =>
-            {
-                var model = Request.Body<dynamic>();
-                if (model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+            Get[statesRoute] = parameters =>
+                Response.AsJson(repository.Select(x => new { id = x.Id, name = x.Name.ToString(), alias = x.Alias }));
 
-                bus.Publish(new CreateState(Guid.NewGuid(), Enum.Parse(typeof(StateName), model.name.Value, true)));
-
-                return Response.AsJson(new { response = "Success!" });
-            };
-
-            Post["/State/Edit"] = parameters =>
+            Put[statesRoute] = parameters =>
             {
                 var model = Request.Body<dynamic>();
                 if (model.id.Value == null && model.name.Value == null)
-                    return Response.AsJson(new { response = "Failure!" });
+                    throw new LightstoneAutoException("Could not bind 'id' or 'Name' value");
 
                 bus.Publish(new RenameState(new Guid(model.id.Value), Enum.Parse(typeof(StateName), model.name.Value, true), model.alias.Value));
 

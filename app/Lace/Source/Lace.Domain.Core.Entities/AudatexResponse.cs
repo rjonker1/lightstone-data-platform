@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 
@@ -6,6 +7,20 @@ namespace Lace.Domain.Core.Entities
 {
     public class AudatexResponse : IProvideDataFromAudatex
     {
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
 
         public AudatexResponse(IList<IProvideAccidentClaim> accidentClaims)
         {

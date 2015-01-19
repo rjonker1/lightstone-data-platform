@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using AutoMapper;
 using CommonDomain.Core;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
@@ -103,7 +104,12 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
+
+            this.Info(() => "Attempting to map data provider overrides from PackageCreated event");
+
             DataProviders = Mapper.Map<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
+
+            this.Info(() => "Successfully mapped data provider overrides from PackageCreated event");
         }
 
         private void Apply(PackageUpdated @event)
@@ -120,7 +126,17 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             Owner = @event.Owner;
             CreatedDate = @event.CreatedDate;
             EditedDate = @event.EditedDate;
+
+            this.Info(() => "Attempting to map data provider overrides from PackageUpdated event");
+
             DataProviders = Mapper.Map<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
+
+            this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);
         }
     }
 }

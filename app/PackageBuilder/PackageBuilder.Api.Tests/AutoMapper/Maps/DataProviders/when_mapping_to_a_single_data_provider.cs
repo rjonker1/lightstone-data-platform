@@ -5,6 +5,7 @@ using Castle.Windsor;
 using DataPlatform.Shared.Enums;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
@@ -37,8 +38,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             _dataProvider.SourceConfiguration.Url.ShouldEqual("IvidUrlTest");
             _dataProvider.SourceConfiguration.Username.ShouldEqual("IvidUsernameTest");
             _dataProvider.CostOfSale.ShouldEqual(10d);
-            _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.Now.Date);
-            _dataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.Now.AddDays(1).Date);
+            _dataProvider.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
+            _dataProvider.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);
             _dataProvider.FieldLevelCostPriceOverride.ShouldBeTrue();
             _dataProvider.DataFields.Count().ShouldEqual(2);
             _dataProvider.DataFields.ElementAt(0).Name.ShouldEqual("CarFullname");

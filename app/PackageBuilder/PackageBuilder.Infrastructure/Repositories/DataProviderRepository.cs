@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using NHibernate;
@@ -16,6 +17,11 @@ namespace PackageBuilder.Infrastructure.Repositories
         public bool Exists(Guid id, DataProviderName name)
         {
             return this.Any(x => x.DataProviderId != id && x.Name == name);
+        }
+
+        public IEnumerable<Guid> GetUniqueIds()
+        {
+            return this.Select(x => x.DataProviderId).Distinct().ToList();
         }
     }
 }

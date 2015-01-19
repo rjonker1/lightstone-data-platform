@@ -6,8 +6,8 @@ using Monitoring.DistributedService.DenormalizerHost.Storage;
 using Monitoring.Domain.Core.Contracts;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;
-using Monitoring.Read.Denormalizer.DataProvider;
-using Monitoring.Read.Persistence.Mappings.DataProviderMaps;
+using Monitoring.Read.Denormalizer;
+using Monitoring.Read.Persistence.Mappings;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using Configuration = NHibernate.Cfg.Configuration;
@@ -28,7 +28,7 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .OnActivated(c => c.Instance.BeginTransaction());
 
             builder.RegisterType<NHibernateStorage>().As<IAccessToStorage>().InstancePerDependency();
-            builder.RegisterType<DataProviderMonitoringHandler>();
+            builder.RegisterType<MonitoringHandler>();
             builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
         }
@@ -40,8 +40,9 @@ namespace Monitoring.DistributedService.DenormalizerHost.IoC
                 .Database(
                     MsSqlConfiguration.MsSql2012.ConnectionString(
                         ConfigurationManager.ConnectionStrings["Monitoring.ReadModel"].ConnectionString))
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MonitoringDataProviderMap>())
-                .ExposeConfiguration(BuildMonitoringReadSchema).BuildSessionFactory();
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<MonitoringMap>())
+                //.ExposeConfiguration(BuildMonitoringReadSchema)
+                .BuildSessionFactory();
         }
 
         private static void BuildMonitoringReadSchema(Configuration config)

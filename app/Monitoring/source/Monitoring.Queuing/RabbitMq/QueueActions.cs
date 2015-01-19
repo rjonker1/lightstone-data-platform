@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.Messaging;
 using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
 
@@ -37,8 +38,6 @@ namespace Monitoring.Queuing.RabbitMq
 
             foreach (var queue in MonitoringQueues.QueuesForBinding)
             {
-                //_consumer.AddBindingToAQueue(queue.Queue, queue.QueueName, queue.ExchangeName, queue.RoutingKey,
-                //    queue.Queue.ExchangeType);
                 _consumer.AddExchangeBindingToQueue(queue.Queue, queue.ExchangeName, queue.RoutingKey);
             }
         }

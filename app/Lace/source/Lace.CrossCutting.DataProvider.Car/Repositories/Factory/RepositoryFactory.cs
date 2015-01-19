@@ -1,9 +1,9 @@
 ﻿using System.Data;
-using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
+using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
 using ServiceStack.Redis;
 
-namespace Lace.CrossCutting.DataProvider.Car.Repositories.Factory
+namespace Lace.CrossCutting.DataProviderCommandSource.Car.Repositories.Factory
 {
     public class CarRepositoryFactory : ISetupCarRepository
     {

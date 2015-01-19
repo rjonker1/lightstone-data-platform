@@ -4,11 +4,13 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace;
 using Lace.Test.Helper.Fakes.Lace.Builder;
+using NServiceBus;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Chain
@@ -19,14 +21,14 @@ namespace Lace.Unit.Tests.Chain
         private IBootstrap _initialize;
 
         private readonly ILaceRequest _request;
-        private readonly ISendMonitoringMessages _monitoring;
+        private readonly IBus _bus;
         private Dictionary<Type, Func<ILaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_building_lace_source_chain_for_license_plate_number_search()
         {
-            _monitoring = BusBuilder.ForMonitoringMessages(Guid.NewGuid());
+            _bus = BusFactory.NServiceRabbitMqBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new FakeSourceChain(_request.Package.Action);
             _buildSourceChain.Build();
@@ -34,7 +36,7 @@ namespace Lace.Unit.Tests.Chain
 
         public override void Observe()
         {
-            _initialize = new FakeLaceInitializer(new LaceResponse(), _request, _monitoring, _buildSourceChain);
+            _initialize = new FakeLaceInitializer(new LaceResponse(), _request, _bus, _buildSourceChain);
             _initialize.Execute();
         }
 

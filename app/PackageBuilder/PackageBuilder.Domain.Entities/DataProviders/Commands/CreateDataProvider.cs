@@ -1,6 +1,8 @@
 using System;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.Requests;
+using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
@@ -8,6 +10,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
 {
     public class CreateDataProvider : DomainCommand
     {
+        [JsonConverter(typeof(JsonTypeResolverConverter))]
         public IPointToLaceProvider DataProvider { get; set; }
         public readonly DataProviderName Name;
         public readonly string Description;

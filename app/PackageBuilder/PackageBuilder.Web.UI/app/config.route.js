@@ -13,23 +13,24 @@
         routes.forEach(function (r) {
             $routeProvider.when(r.url, r.config);
         });
-        $routeProvider.otherwise({ redirectTo: '/' });
+        $routeProvider.otherwise({ redirectTo: '/packages' });
     }
 
     // Define the routes 
     function getRoutes() {
         return [
+            //{
+            //    url: '/',
+            //    config: {
+            //        templateUrl: 'app/dashboard/dashboard.html',
+            //        title: 'dashboard',
+            //        settings: {
+            //            nav: 1,
+            //            content: '<i class="fa fa-dashboard"></i> Dashboard'
+            //        }
+            //    }
+            //}, 
             {
-                url: '/',
-                config: {
-                    templateUrl: 'app/dashboard/dashboard.html',
-                    title: 'dashboard',
-                    settings: {
-                        nav: 1,
-                        content: '<i class="fa fa-dashboard"></i> Dashboard'
-                    }
-                }
-            }, {
                 url: '/packages',
                 config: {
                     title: 'packages',

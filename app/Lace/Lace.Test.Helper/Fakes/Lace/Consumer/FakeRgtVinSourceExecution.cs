@@ -4,7 +4,7 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
@@ -15,17 +15,19 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         private readonly IHandleDataProviderSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
+        private readonly ISendCommandsToBus _monitoring;
 
         public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
             _handleServiceCall = new FakeHandleRgtVinServiceCall();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
 
@@ -37,13 +39,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleRgtServiceCall(),
                     new FakeCallingRgtVinExternalWebService());
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
                 if (response.RgtVinResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
 
         }
 

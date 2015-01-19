@@ -161,14 +161,15 @@ namespace Monitoring.Queuing.Configuration
     {
         public static Func<MonitoringExchange> ForReadHost =
             () =>
-                new MonitoringExchange("Lace.Shared.Monitoring.Messages.Events:IDataProviderEvent", ExchangeType.Fanout,string.Empty);
+                new MonitoringExchange("DataPlatform.Shared.Messaging:IPublishableMessage", ExchangeType.Fanout, string.Empty);
     }
 
     public class ConfigureMonitoringExchanges
     {
         public static Func<IEnumerable<MonitoringExchange>> ForEvents = () =>
         {
-            var type = typeof (Lace.Shared.Monitoring.Messages.Events.IDataProviderEvent);
+            //var type = typeof (Lace.Shared.Monitoring.Messages.Events.IDataProviderEvent);
+            var type = typeof (DataPlatform.Shared.Messaging.IPublishableMessage);
             var exchanges = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(w => type.IsAssignableFrom(w) && w.IsClass)

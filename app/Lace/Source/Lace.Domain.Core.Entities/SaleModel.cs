@@ -1,7 +1,10 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+﻿using System;
+using System.Runtime.Serialization;
+using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class SaleModel : IRespondWithSaleModel
     {
         public SaleModel(string salesDate, string licensingDistrict, string salesPrice)
@@ -11,11 +14,27 @@ namespace Lace.Domain.Core.Entities
             SalesPrice = salesPrice;
         }
 
-
+        [DataMember]
         public string SalesDate { get; private set; }
-
+        [DataMember]
         public string LicensingDistrict { get; private set; }
-
+        [DataMember]
         public string SalesPrice { get; private set; }
+        [DataMember]
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        [DataMember]
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

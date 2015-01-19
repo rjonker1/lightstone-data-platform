@@ -5,24 +5,25 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder
 {
     public class IvidTitleHolderDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
+        private readonly ISendCommandsToBus _monitoring;
 
         public IvidTitleHolderDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
+            _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringMessages monitoring)
+        public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.IvidTitleHolder, _request);
 
@@ -32,20 +33,20 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProvider.IvidTitleHolder);
-                monitoring.StartDataProvider(DataProvider.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
+                _monitoring.Begin(_request, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));
-                consumer.ConsumeExternalSource(response, monitoring);
+                consumer.ConsumeExternalSource(response, _monitoring);
 
-                monitoring.EndDataProvider(DataProvider.IvidTitleHolder, _request.ObjectToJson(), stopWatch);
+                _monitoring.End(_request, stopWatch);
 
                 if (response.IvidTitleHolderResponse == null)
-                    CallFallbackSource(response, monitoring);
+                    CallFallbackSource(response, _monitoring);
             }
 
-            CallNextSource(response, monitoring);
+            CallNextSource(response, _monitoring);
         }
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)

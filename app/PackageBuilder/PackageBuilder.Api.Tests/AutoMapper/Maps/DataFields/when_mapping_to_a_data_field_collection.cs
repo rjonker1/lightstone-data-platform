@@ -4,6 +4,7 @@ using AutoMapper;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
@@ -18,9 +19,11 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
         {
             var container = new WindsorContainer();
             container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
-            container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new NHibernateInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
+            container.Install(new NHibernateInstaller());
             OverrideHelper.OverrideNhibernateCfg(container);
+
+            container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
             _dataFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(new[] { DataFieldDtoMother.CarFullname, DataFieldDtoMother.CategoryCode, DataFieldDtoMother.SpecificInformation });
         }

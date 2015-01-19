@@ -1,6 +1,8 @@
-﻿namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
+﻿using DataPlatform.Shared.Entities;
+
+namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
 {
-    public interface IRespondWithFrequencyModel
+    public interface IRespondWithFrequencyModel : IProvideType
     {
         string CarType { get; }
         int Year { get; }
