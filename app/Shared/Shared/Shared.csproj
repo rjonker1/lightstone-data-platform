@@ -81,7 +81,7 @@
     <Compile Include="Helpers\Builders\LinqList.cs" />
     <Compile Include="Helpers\Extensions\LoggingExtensions.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
-    <Compile Include="Helpers\Json\ConcreteTypeConverter.cs" />
+    <Compile Include="Helpers\Json\JsonConcreteTypeConverter.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
