@@ -6,13 +6,14 @@ namespace UserManagement.Domain.Entities
 {
     public class CreateSource : Entity
     {
+
+        public string Value { get; set; }
+        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
+
         public CreateSource()
         {
             CustomerProfile = new HashSet<CustomerProfile>();
         }
 
-        public string Value { get; set; }
-
-        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
     }
 }

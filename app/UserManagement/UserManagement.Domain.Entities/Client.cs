@@ -8,7 +8,9 @@ namespace UserManagement.Domain.Entities
     {
 
         public string ClientName { get; set; }
+        public Guid? ClientProfileId { get; set; }
 
+        public virtual ProfileDetail ProfileDetail { get; set; }
         public virtual ICollection<ClientPackage> ClientPackage { get; set; }
         public virtual ICollection<ClientUser> ClientUser { get; set; }
         public virtual ICollection<Contract> Contract { get; set; }

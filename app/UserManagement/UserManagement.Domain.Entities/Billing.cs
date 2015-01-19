@@ -12,14 +12,14 @@ namespace UserManagement.Domain.Entities
         public string CompanyRegistration { get; set; }
         public DateTime FirstCreateDate { get; set; }
         public Guid PaymentTypeId { get; set; }
-        public Nullable<DateTime> DebitOrderDate { get; set; }
+        public DateTime? DebitOrderDate { get; set; }
 
         public virtual PaymentType PaymentType { get; set; }
         public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
         public Billing()
         {
-            this.CustomerProfile = new HashSet<CustomerProfile>();
+            CustomerProfile = new HashSet<CustomerProfile>();
         }
 
     }

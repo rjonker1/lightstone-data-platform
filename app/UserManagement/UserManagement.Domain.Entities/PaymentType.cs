@@ -6,13 +6,14 @@ namespace UserManagement.Domain.Entities
 {
     public class PaymentType : Entity
     {
+
+        public string Value { get; set; }
+        public virtual ICollection<Billing> Billing { get; set; }
+
         public PaymentType()
         {
             Billing = new HashSet<Billing>();
         }
 
-        public string Value { get; set; }
-
-        public virtual ICollection<Billing> Billing { get; set; }
     }
 }

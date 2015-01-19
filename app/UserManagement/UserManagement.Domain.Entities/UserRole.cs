@@ -8,14 +8,7 @@ namespace UserManagement.Domain.Entities
         public Guid RoleId { get; set; }
         public Guid UserId { get; set; }
 
-        //public IUser User { get; set; }
-        //public IRole Role { get; set; }
-
-        //public UserRole(IUser user, IRole role)
-        //{
-        //    Id = new Guid();
-        //    User = user;
-        //    Role = role;
-        //}
+        public virtual Role Role { get; set; }
+        public virtual User User { get; set; }
     }
 }

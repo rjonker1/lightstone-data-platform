@@ -6,19 +6,20 @@ namespace UserManagement.Domain.Entities
 {
     public class Customer : Entity
     {
+
+        public string CustomerName { get; set; }
+        public string AccountOwnerName { get; set; }
+        public Guid? CustomerProfileId { get; set; }
+        public Guid? ProvinceId { get; set; }
+
+        public virtual Province Province { get; set; }
+        public virtual CustomerProfile CustomerProfile { get; set; }
+        public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
+
         public Customer()
         {
             UserLinkedToCustomer = new HashSet<UserLinkedToCustomer>();
         }
 
-        public string CustomerName { get; set; }
-        public Nullable<Guid> AccountOwnerId { get; set; }
-        public Nullable<Guid> CustomerProfileId { get; set; }
-        public Nullable<Guid> ProvinceId { get; set; }
-
-        public virtual AccountOwner AccountOwner { get; set; }
-        public virtual Province Province { get; set; }
-        public virtual CustomerProfile CustomerProfile { get; set; }
-        public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
     }
 }

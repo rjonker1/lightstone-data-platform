@@ -5,13 +5,14 @@ namespace UserManagement.Domain.Entities
 {
     public class EscalationType : Entity
     {
+
+        public string Value { get; set; }
+        public virtual ICollection<Contract> Contract { get; set; }
+
         public EscalationType()
         {
             Contract = new HashSet<Contract>();
         }
 
-        public string Value { get; set; }
-
-        public virtual ICollection<Contract> Contract { get; set; }
     }
 }

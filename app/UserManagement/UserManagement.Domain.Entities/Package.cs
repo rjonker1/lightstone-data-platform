@@ -6,17 +6,21 @@ namespace UserManagement.Domain.Entities
 {
     public class Package : Entity
     {
-        public Package()
-        {
-            this.ClientPackage = new HashSet<ClientPackage>();
-        }
 
-        public Guid ContractId { get; set; }
         public string LastUpdateBy { get; set; }
         public DateTime LastUpdateDate { get; set; }
-        public Nullable<bool> IsActivated { get; set; }
+        public string Name { get; set; }
+        public string Version { get; set; }
+        public bool? IsActivated { get; set; }
 
         public virtual ICollection<ClientPackage> ClientPackage { get; set; }
-        public virtual Contract Contract { get; set; }
+        public virtual ICollection<ContractPackage> ContractPackage { get; set; }
+
+        public Package()
+        {
+            ClientPackage = new HashSet<ClientPackage>();
+            ContractPackage = new HashSet<ContractPackage>();
+        }
+
     }
 }

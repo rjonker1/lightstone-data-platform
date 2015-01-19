@@ -6,13 +6,14 @@ namespace UserManagement.Domain.Entities
 {
     public class UserType : Entity
     {
+
+        public string Value { get; set; }
+        public virtual ICollection<User> User { get; set; }
+
         public UserType()
         {
             User = new HashSet<User>();
         }
 
-        public string Value { get; set; }
-
-        public virtual ICollection<User> User { get; set; }
     }
 }

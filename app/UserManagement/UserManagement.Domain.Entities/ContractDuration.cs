@@ -6,13 +6,13 @@ namespace UserManagement.Domain.Entities
 {
     public class ContractDuration : Entity
     {
+
+        public string Value { get; set; }
+        public virtual ICollection<Contract> Contract { get; set; }
+
         public ContractDuration()
         {
             Contract = new HashSet<Contract>();
         }
-
-        public string Value { get; set; }
-
-        public virtual ICollection<Contract> Contract { get; set; }
     }
 }
