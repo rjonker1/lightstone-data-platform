@@ -62,14 +62,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtExecutionHasStarted = new
-                {
                     RgtExecutionHasStarted =
                         new RgtExecutionHasStarted(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Rgt),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
@@ -79,14 +76,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtExcutionHasEnded = new
-                {
-                    RgtExcutionHasEnded =
+                    RgtExecutionHasEnded =
                         new RgtExecutionHasEnded(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Rgt),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.StoneLast, _orderOfExecution);
@@ -96,14 +90,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtExecutionHasStarted = new
-                {
                     RgtExecutionHasStarted =
                         new RgtExecutionHasStarted(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.Rgt),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheBegining, _orderOfExecution);
@@ -113,14 +104,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtExecutionHasEnded = new
-                {
                     RgtExecutionHasEnded =
                         new RgtExecutionHasEnded(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.Rgt),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
@@ -130,14 +118,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtError = new
-                {
+                //RgtError = new
+                //{
                     RgtError =
                         new RgtError(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.FaultDescription(DataProviderCommandSource.Rgt), payload, metadata,
                             DateTime.UtcNow,
                             Category.Performance)
-                }
+                //}
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -147,13 +135,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtSecurityFlag = new
-                {
                     RgtSecurityFlag = new RgtSecurityFlag(_requestId, DataProviderCommandSource.Rgt,
                         CommandDescriptions.SecurityDescription(DataProviderCommandSource.Rgt),
                         payload,
                         metadata, DateTime.UtcNow, Category.Security)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -163,13 +148,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtConfigured = new
-                {
                     RgtConfigured = new RgtConfigured(_requestId, DataProviderCommandSource.Rgt,
                         CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Rgt),
                         payload, metadata,
                         DateTime.UtcNow, Category.Configuration)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -179,13 +161,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtResponseTransformed = new
-                {
                     RgtResponseTransformed = new RgtResponseTransformed(_requestId, DataProviderCommandSource.Rgt,
                         CommandDescriptions.TransformationDescription(DataProviderCommandSource.Rgt),
                         payload, metadata,
                         DateTime.UtcNow, Category.Configuration)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);

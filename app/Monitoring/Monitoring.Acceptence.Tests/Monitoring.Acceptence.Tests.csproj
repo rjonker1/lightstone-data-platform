@@ -103,6 +103,8 @@
     </Compile>
     <Compile Include="DataProviders\when_handling_data_provider_events.cs" />
     <None Include="Queues\when_sending_ivid_command_messages_to_the_read_queues_on_the_bus.cs.error" />
+    <Compile Include="Queues\when_sending_rgt_vin_command_messages_to_the_write_queues_on_the_bus.cs" />
+    <Compile Include="Queues\when_sending_rgt_command_messages_to_the_write_queues_on_the_bus.cs" />
     <Compile Include="Queues\when_sending_ivid_title_holder_command_messages_to_the_write_queue_on_the_bus.cs" />
     <Compile Include="Queues\when_sending_lightstone_command_messages_to_the_write_queues_on_the_bus.cs" />
     <Compile Include="Queues\when_sending_audatex_command_messages_to_the_write_queues_on_the_bus.cs" />

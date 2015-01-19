@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Monitoring.Test.Helper.Builder
 {
@@ -341,6 +342,58 @@ namespace Monitoring.Test.Helper.Builder
                 }
             };
         }
+
+        public static object FromRgt()
+        {
+            return new
+            {
+                CarSpecification = new
+                {
+                    ManufacturerName = "",
+                    ModelYear = 0,
+                    CarTypeName = "",
+                    TopSpeed = "",
+                    Kilowatts = "",
+                    FuelEconomy = "",
+                    Acceleration = "",
+                    Torque = "",
+                    Emissions = "",
+                    EngineSize = "",
+                    BodyShape = "",
+                    FuelType = "",
+                    TransmissionType = "",
+                    CarFullname = "",
+                    Colour = "",
+                    RainSensorWindscreenWipers = "",
+                    HeadUpDisplay = "",
+                    VehicleType = "",
+                    CarModel = "",
+                    Make = "",
+                    CarType = "",
+                }
+            };
+        }
+
+        public static object FromRgtVin()
+        {
+            return new
+            {
+                Vin = new
+                {
+                    Vin_ID = 0,
+                    VIN = "",
+                    Car_ID = 0,
+                    MakeName = "",
+                    CarTypeName = "",
+                    CarModel = "",
+                    Year_ID = 0,
+                    Period = "",
+                    Month = "",
+                    Colour = "",
+                    Source = ""
+                }
+            };
+        }
     }
 
     public class DataProviderTransformationBuilder
@@ -491,6 +544,59 @@ namespace Monitoring.Test.Helper.Builder
                             TotalSalesByGender = new { },
                         }
                     }
+                }
+            };
+        }
+
+        public static object ForRgt()
+        {
+            return new
+            {
+                RgtResponse = new
+                {
+                    Manufacturer = "",
+                    ModelYear = "",
+                    ModelType = "",
+                    TopSpeed = "",
+                    Kilowatts = "",
+                    FuelEconomy = "",
+                    Acceleration = "",
+                    Torque = "",
+                    Emissions = "",
+                    EngineSize = "",
+                    BodyShape = "",
+                    FuelType = "",
+                    TransmissionType = "",
+                    CarFullname = "",
+                    Colour = "",
+                    RainSensorWindscreenWipers = "",
+                    HeadUpDisplay = "",
+                    VehicleType = "",
+                    Model = "",
+                    Make = "",
+                    CarType = ""
+
+                }
+            };
+        }
+
+        public static object ForRgtVin()
+        {
+            return new
+            {
+                RgtVinResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    Colour = "STANDARD WHITE",
+                    Month = 2,
+                    Price = 0,
+                    Quarter = 0,
+                    RgtCode = string.Empty,
+                    VehicleMake = "TOYOTA",
+                    VehicleModel = "Auris 1.6 RT 5-dr",
+                    VehicleType = string.Empty,
+                    Vin = "SB1KV58E40F039277",
+                    Year = 2008
                 }
             };
         }

@@ -62,14 +62,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExecutionHasStarted = new
-                {
                     LightstoneExecutionHasStarted =
                         new LightstoneExecutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
@@ -79,14 +76,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExecutionHasEnded = new
-                {
                     LightstoneExecutionHasEnded =
                         new LightstoneExecutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.StoneLast, _orderOfExecution);
@@ -96,14 +90,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExecutionHasStarted = new
-                {
                     LightstoneExecutionHasStarted =
                         new LightstoneExecutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheBegining, _orderOfExecution);
@@ -113,14 +104,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneExecutionHasEnded = new
-                {
                     LightstoneExecutionHasEnded =
                         new LightstoneExecutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
@@ -130,14 +118,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneError = new
-                {
                     LightstoneError =
                         new LightstoneError(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.FaultDescription(DataProviderCommandSource.Lightstone), payload, metadata,
                             DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -147,13 +132,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneSecurityFlag = new
-                {
                     LightstoneSecurityFlag = new LightstoneSecurityFlag(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.SecurityDescription(DataProviderCommandSource.Lightstone),
                         payload,
                         metadata, DateTime.UtcNow, Category.Security)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -163,13 +145,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneConfigured = new
-                {
                     LightstoneConfigured = new LightstoneConfigured(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Lightstone),
                         payload, metadata,
                         DateTime.UtcNow, Category.Configuration)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -179,13 +158,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneResponseTransformed = new
-                {
                     LightstoneResponseTransformed = new LightstoneResponseTransformed(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.TransformationDescription(DataProviderCommandSource.Lightstone),
                         payload, metadata,
                         DateTime.UtcNow, Category.Configuration)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);

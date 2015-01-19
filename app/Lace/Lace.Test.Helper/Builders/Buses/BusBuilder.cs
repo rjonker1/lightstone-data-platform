@@ -34,13 +34,13 @@ namespace Lace.Test.Helper.Builders.Buses
         public static ISendCommandsToBus ForRgtCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
-            return new SendIvidTitleHolderCommands(bus, aggregateId, (int)ExecutionOrder.Fifth);
+            return new SendRgtCommands(bus, aggregateId, (int)ExecutionOrder.Fifth);
         }
 
         public static ISendCommandsToBus ForRgtVinCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
-            return new SendIvidTitleHolderCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+            return new SendRgtVinCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
         }
     }
 

@@ -59,13 +59,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                EntryPointReceivedRequest = new
-                {
-                    EntryPointReceivedRequest =
-                        new EntryPointReceivedRequest(_requestId, DataProviderCommandSource.EntryPoint,
-                            "Receiving Request in the Data Provider Entry Point", payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-                }
+                EntryPointReceivedRequest =
+                    new EntryPointReceivedRequest(_requestId, DataProviderCommandSource.EntryPoint,
+                        "Receiving Request in the Data Provider Entry Point", payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
             return command.ObjectToJson().GetCommand(_requestId, 1, _orderOfExecution);
@@ -75,13 +72,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                EntryPointFinishedProcessingRequest = new
-                {
-                    EntryPointFinishedProcessingRequest =
-                        new EntryPointFinishedProcessingRequest(_requestId, DataProviderCommandSource.EntryPoint,
-                            "End Proccessing Request in Entry Point", payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-                }
+                EntryPointFinishedProcessingRequest =
+                    new EntryPointFinishedProcessingRequest(_requestId, DataProviderCommandSource.EntryPoint,
+                        "End Proccessing Request in Entry Point", payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
             return command.ObjectToJson().GetCommand(_requestId, 3, _orderOfExecution);
@@ -91,16 +85,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                EntryPointErrorOccurred = new
-                {
-                    EntryPointErrorOccurred =
-                        new EntryPointErrorOccurred(_requestId, DataProviderCommandSource.EntryPoint,
-                            "An error occurred in the entry point while processing the request", payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-                }
+                EntryPointErrorOccurred =
+                    new EntryPointErrorOccurred(_requestId, DataProviderCommandSource.EntryPoint,
+                        "An error occurred in the entry point while processing the request", payload, metadata,
+                        DateTime.UtcNow,
+                        Category.Performance)
             };
 
-           return command.ObjectToJson().GetCommand(_requestId, 2, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, 2, _orderOfExecution);
         }
 
         private void Security(dynamic payload, MetadataContainer metadata)
@@ -148,6 +140,5 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                 }
             });
         }
-
     }
 }
