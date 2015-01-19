@@ -29,19 +29,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         public override void Observe()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Audatex, _actions, _aggregateId);
-            queue.TearDown()
-                .Setup()
-                .InitBus(BusBuilder.ForAudatexCommands(_aggregateId))
-                .InitStopWatch()
-                .StartingDataProviderMessage()
-                .ConfigurationMessage(DataProviderConfigurationBuiler.ForAudatex())
-                //.SecurityMessage(DataProviderConfigurationBuiler.ForAudatex(), null)
-                .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Audatex Data Provider" })
-                .EndCallingMessage(DataProviderResponseBuilder.FromAudatex())
-                .TransformationMessage(DataProviderTransformationBuilder.ForAudatex(), new { TrasformationMetaData = "Transforming Response from Audatex" })
-                .EndingDataProvider();
+            new DataProviderCommands(_request, _actions, _aggregateId).ForAudatex();
         }
 
         [Observation]
