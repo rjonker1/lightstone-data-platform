@@ -103,6 +103,7 @@ namespace Lace.Domain.Core.Entities
                     "This report is older than 15 days, we recommend you generate a new one as information may have changed since then";
             }
         }
+        [DataMember]
         public string TypeName
         {
             get
@@ -110,6 +111,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+        [DataMember]
         public Type Type
         {
             get

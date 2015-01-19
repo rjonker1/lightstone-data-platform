@@ -46,7 +46,7 @@ namespace Lace.Domain.Core.Entities
             get;
             private set;
         }
-
+        [DataMember]
         public string TypeName
         {
             get
@@ -54,6 +54,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+        [DataMember]
         public Type Type
         {
             get

@@ -82,6 +82,7 @@ namespace Lace.Domain.Core.Entities
         public string Make { get; private set; }
         [DataMember]
         public string CarType { get; private set; }
+        [DataMember]
         public string TypeName
         {
             get
@@ -89,6 +90,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+        [DataMember]
         public Type Type
         {
             get

@@ -34,6 +34,7 @@ namespace Lace.Domain.Core.Entities
         public string EngineNumber { get; private set; }
         [DataMember]
         public string CategoryDescription { get; private set; }
+        [DataMember]
         public string TypeName
         {
             get
@@ -41,6 +42,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+        [DataMember]
         public Type Type
         {
             get

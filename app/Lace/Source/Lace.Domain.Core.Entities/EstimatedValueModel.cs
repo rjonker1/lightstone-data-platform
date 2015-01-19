@@ -27,7 +27,7 @@ namespace Lace.Domain.Core.Entities
         public string ConfidenceValue { get; private set; }
         [DataMember]
         public string ConfidenceLevel { get; private set; }
-
+        [DataMember]
         public string TypeName
         {
             get
@@ -35,6 +35,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+        [DataMember]
         public Type Type
         {
             get

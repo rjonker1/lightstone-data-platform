@@ -124,7 +124,7 @@ namespace Lace.Domain.Core.Entities
         public IEnumerable<IRespondWithAmortisedValueModel> AmortisedValues { get; private set; }
         [DataMember]
         public IEnumerable<IRespondWithImageGaugeModel> ImageGauges { get; private set; }
-
+        [DataMember]
         public string TypeName
         {
             get
@@ -132,6 +132,7 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+        [DataMember]
         public Type Type
         {
             get
