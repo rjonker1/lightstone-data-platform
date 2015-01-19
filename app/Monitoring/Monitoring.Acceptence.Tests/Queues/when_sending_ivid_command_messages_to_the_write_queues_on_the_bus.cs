@@ -35,8 +35,7 @@ namespace Monitoring.Acceptance.Tests.Queues
                 .InitBus(BusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingDataProviderMessage()
-                .ConfigurationMessage(null)
-                .SecurityMessage(DataProviderConfigurationBuiler.ForIvid(), null)
+                .ConfigurationMessage(DataProviderConfigurationBuiler.ForIvid())
                 .SecurityMessage(new
                 {
                     Credentials =
@@ -46,11 +45,12 @@ namespace Monitoring.Acceptance.Tests.Queues
                             Password = "8B5Jk3Q66"
                         }
                 },
-                new { ContextMessage = "Ivid Data Provider Credentials" })
+                    new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Ivid Data Provider" })
+                .FaultCallingMessage(new {NoRequestReceived = "No response received from Ivid Data Provider"})
                 .EndCallingMessage(DataProviderResponseBuilder.FromIvid())
-                .TransformationMessage(DataProviderTransformationBuilder.ForIvid(), new{ TrasformationMetaData = "Transforming Response from Ivid"})
+                .TransformationMessage(DataProviderTransformationBuilder.ForIvid(),
+                    new {TrasformationMetaData = "Transforming Response from Ivid"})
                 .EndingDataProvider();
         }
 

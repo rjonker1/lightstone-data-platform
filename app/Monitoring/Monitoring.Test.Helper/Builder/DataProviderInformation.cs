@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Resources;
+﻿using System;
 
 namespace Monitoring.Test.Helper.Builder
 {
@@ -23,6 +22,23 @@ namespace Monitoring.Test.Helper.Builder
                     {
                         
                     }
+                }
+            };
+        }
+
+        public static object ForIvidTitleHolder()
+        {
+            return new
+            {
+                TitleholderQueryRequest = new
+                {
+                    RequesterDetailsElement = new
+                    {
+                        UserEmail = "pennyl@lightstone.co.za",
+                        UserFirstName = "Penny",
+                        UserPhone = "",
+                    },
+                    vin = "SB1KV58E40F039277"
                 }
             };
         }
@@ -164,6 +180,29 @@ namespace Monitoring.Test.Helper.Builder
 
     public class DataProviderResponseBuilder
     {
+        public static object FromIvidTitleHolder()
+        {
+            return new
+            {
+                TitleholderQueryResponse = new
+                {
+                    accountClosedDate = DateTime.Now.AddYears(-5),
+                    accountNumber = "00009009838",
+                    accountClosedDateSpecified = true,
+                    accountOpenDate = DateTime.Now.AddYears(-10),
+                    accountOpenDateSpecified = true,
+                    bankName = "WesBank",
+                    engineNumber = "",
+                    flaggedOnAnpr = false,
+                    make = "Toyota",
+                    model = "Hilux",
+                    partialResponse = false,
+                    vin = "AHT31UNK408007735",
+                    yearOfLiabilityForLicensing = ""
+                }
+            };
+        }
+
         public static object FromIvid()
         {
             return
@@ -206,7 +245,6 @@ namespace Monitoring.Test.Helper.Builder
                 };
 
         }
-
         public static object FromAudatex()
         {
             return new
@@ -307,6 +345,30 @@ namespace Monitoring.Test.Helper.Builder
 
     public class DataProviderTransformationBuilder
     {
+
+        public static object ForIvidTitleHolder()
+        {
+            return new
+            {
+                IvidTitleHolderResponse = new
+                {
+                    BankName = "",
+                    AccountNumber = "",
+                    DateOpened = DateTime.Now,
+                    FinancialInterestsHeading = "",
+                    AccountOpenDate = "",
+                    AccountClosedDate = "",
+                    AgreementType = "",
+                    YearOfLiabilityForLicensing = "",
+                    RequestFinancialInterestInvite = "",
+                    FinancialInterestAvailable = false,
+                    PartialResponse = false,
+                    HasErrors = false,
+                    ExpiredMessage = ""
+                }
+            };
+        }
+
         public static object ForIvid()
         {
             return new
