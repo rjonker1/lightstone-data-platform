@@ -62,14 +62,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderExcutionHasStarted = new
-                {
                     IvidTitleHolderExcutionHasStarted =
                         new IvidTitleHolderExcutionHasStarted(_requestId, DataProviderCommandSource.Ivid,
                             CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
@@ -79,14 +76,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderExcutionHasEnded = new
-                {
                     IvidTitleHolderExcutionHasEnded =
                         new IvidTitleHolderExcutionHasEnded(_requestId, DataProviderCommandSource.IvidTitleHolder,
                             CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.IvidTitleHolder),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.StoneLast, _orderOfExecution);
@@ -96,14 +90,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderExcutionHasStarted = new
-                {
                     IvidTitleHolderExcutionHasStarted =
                         new IvidTitleHolderExcutionHasStarted(_requestId, DataProviderCommandSource.IvidTitleHolder,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.IvidTitleHolder),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheBegining, _orderOfExecution);
@@ -113,14 +104,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderExcutionHasEnded = new
-                {
                     IvidTitleHolderExcutionHasEnded =
                         new IvidTitleHolderExcutionHasEnded(_requestId, DataProviderCommandSource.IvidTitleHolder,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.IvidTitleHolder),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
@@ -130,14 +118,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderError = new
-                {
                     IvidTitleHolderError =
                         new IvidTitleHolderError(_requestId, DataProviderCommandSource.IvidTitleHolder,
                             CommandDescriptions.FaultDescription(DataProviderCommandSource.IvidTitleHolder), payload, metadata,
                             DateTime.UtcNow,
                             Category.Performance)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -147,13 +132,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderSecurityFlag = new
-                {
                     IvidTitleHolderSecurityFlag = new IvidTitleHolderSecurityFlag(_requestId, DataProviderCommandSource.IvidTitleHolder,
                         CommandDescriptions.SecurityDescription(DataProviderCommandSource.IvidTitleHolder),
                         payload,
                         metadata, DateTime.UtcNow, Category.Security)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -163,13 +145,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderConfigured = new
-                {
                     IvidTitleHolderConfigured = new IvidTitleHolderConfigured(_requestId, DataProviderCommandSource.IvidTitleHolder,
                         CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.IvidTitleHolder),
                         payload, metadata,
                         DateTime.UtcNow, Category.Configuration)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -179,13 +158,10 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidTitleHolderResponseTransformed = new
-                {
                     IvidTitleHolderResponseTransformed = new IvidTitleHolderResponseTransformed(_requestId, DataProviderCommandSource.IvidTitleHolder,
                         CommandDescriptions.TransformationDescription(DataProviderCommandSource.IvidTitleHolder),
                         payload, metadata,
                         DateTime.UtcNow, Category.Configuration)
-                }
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);

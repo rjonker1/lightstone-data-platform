@@ -11,14 +11,16 @@ using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Queues
 {
-    public class when_sending_ivid_command_messages_to_the_write_queues_on_the_bus : Specification
+    public class when_sending_ivid_title_holder_command_messages_to_the_write_queue_on_the_bus : Specification
     {
+
         private readonly object _request;
 
         private readonly Guid _aggregateId;
         private readonly IHaveQueueActions _actions;
 
-        public when_sending_ivid_command_messages_to_the_write_queues_on_the_bus()
+
+        public when_sending_ivid_title_holder_command_messages_to_the_write_queue_on_the_bus()
         {
             var messageQueue = new RabbitMqMessageQueueing();
             _actions = new QueueActions(messageQueue.Consumer);
@@ -29,13 +31,14 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         public override void Observe()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Ivid, _actions, _aggregateId);
+            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.IvidTitleHolder, _actions,
+                _aggregateId);
             queue.TearDown()
                 .Setup()
-                .InitBus(BusBuilder.ForIvidCommands(_aggregateId))
+                .InitBus(BusBuilder.ForIvidTitleHolderCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingDataProviderMessage()
-                .ConfigurationMessage(DataProviderConfigurationBuiler.ForIvid())
+                .ConfigurationMessage(DataProviderConfigurationBuiler.ForIvidTitleHolder())
                 .SecurityMessage(new
                 {
                     Credentials =
@@ -45,23 +48,23 @@ namespace Monitoring.Acceptance.Tests.Queues
                             Password = "8B5Jk3Q66"
                         }
                 },
-                    new {ContextMessage = "Ivid Data Provider Credentials"})
+                    new {ContextMessage = "Ivid Title Holder Data Provider Credentials"})
                 .StartCallingMessage()
-                .FaultCallingMessage(new {NoRequestReceived = "No response received from Ivid Data Provider"})
-                .EndCallingMessage(DataProviderResponseBuilder.FromIvid())
-                .TransformationMessage(DataProviderTransformationBuilder.ForIvid(),
-                    new {TrasformationMetaData = "Transforming Response from Ivid"})
+                .FaultCallingMessage(
+                    new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"})
+                .EndCallingMessage(DataProviderResponseBuilder.FromIvidTitleHolder())
+                .TransformationMessage(DataProviderTransformationBuilder.ForIvidTitleHolder(),
+                    new {TrasformationMetaData = "Transforming Response from Ivid Title Holder"})
                 .EndingDataProvider();
         }
 
         [Observation]
-        public void then_ivid_messages_should_be_put_on_the_correct_write_queue()
+        public void then_ivid_title_holder_messages_should_be_put_on_the_correct_queue()
         {
             var messageCount = _actions.GetMessageCount(ConfigureMonitoringWriteQueues.ForHost().ExchangeName,
                 ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
                 ConfigureMonitoringWriteQueues.ForHost().ExchangeType);
             messageCount.ShouldEqual(8);
-
         }
     }
 }
