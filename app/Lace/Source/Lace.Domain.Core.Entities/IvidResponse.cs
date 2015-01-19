@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Models;
+using Newtonsoft.Json;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -111,7 +113,7 @@ namespace Lace.Domain.Core.Entities
             return value;
         }
 
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonTypeResolverConverter))]
         public IProvideVehicleSpecificInformation SpecificInformation { get; private set; }
         [DataMember]
         public string StatusMessage { get; private set; }

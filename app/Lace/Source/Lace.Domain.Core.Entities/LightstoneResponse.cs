@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
+using Newtonsoft.Json;
 
 namespace Lace.Domain.Core.Entities
 {
@@ -39,7 +41,7 @@ namespace Lace.Domain.Core.Entities
         public string CarFullname { get; private set; }
         [DataMember]
         public string Model { get; private set; }
-        [DataMember]
+        [DataMember, JsonConverter(typeof(JsonTypeResolverConverter))]
         public IRespondWithValuation VehicleValuation { get; private set; }
         [DataMember]
         public string TypeName
