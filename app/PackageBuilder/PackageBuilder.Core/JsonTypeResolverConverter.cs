@@ -29,14 +29,15 @@ namespace PackageBuilder.Core
             var json = jObject.ToString();
             var dObject = (dynamic)jObject;
             var type = Type.GetType(dObject.Type.ToString());
+            var typeName = dObject.TypeName.ToString();
             try
             {
                 return JsonConvert.DeserializeObject(json, type);
             }
             catch (JsonException exception)
             {
-                this.Error(() => string.Format("Could not deserialize command by type: {0} attempting to deserialize by type name {1}", dObject.Type, dObject.TypeName), exception);
-                return DeserializeObjectByTypeName(json, dObject.Type, dObject.TypeName);
+                this.Error(() => string.Format("Could not deserialize command by type: {0} attempting to deserialize by type name {1}", type + "", typeName), exception);
+                return DeserializeObjectByTypeName(json, type + "", typeName);
             }
         }
 

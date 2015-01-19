@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
@@ -123,5 +124,20 @@ namespace Lace.Domain.Core.Entities
         public IEnumerable<IRespondWithAmortisedValueModel> AmortisedValues { get; private set; }
         [DataMember]
         public IEnumerable<IRespondWithImageGaugeModel> ImageGauges { get; private set; }
+
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

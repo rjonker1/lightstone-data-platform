@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using DataPlatform.Shared.Entities;
 
 namespace Lace.Domain.Core.Contracts.DataProviders.Specifics
 {
-    public interface IRespondWithValuation : IAddValuationItem
+    public interface IRespondWithValuation : IAddValuationItem, IProvideType
     {
         IEnumerable<IRespondWithAmortisationFactorModel> AmortisationFactors { get; }
         IEnumerable<IRespondWithAreaFactorModel> AreaFactors { get; }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 
 namespace Lace.Domain.Core.Entities
@@ -24,6 +25,21 @@ namespace Lace.Domain.Core.Entities
         {
             get;
             private set;
+        }
+
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
         }
     }
 }
