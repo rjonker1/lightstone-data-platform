@@ -10,8 +10,6 @@ namespace DataPlatform.Shared.Messaging.Events
         DateTime Date { get; }
         string Payload { get; }
         MonitoringSource Source { get; }
-        int ExecutedOrder { get; }
-        int NestedExecutedOrder { get; }
     }
 
     [Serializable]
@@ -26,11 +24,7 @@ namespace DataPlatform.Shared.Messaging.Events
         public string Payload { get; private set; }
         [DataMember]
         public MonitoringSource Source { get; private set; }
-        [DataMember]
-        public int ExecutedOrder { get; private set; }
-        [DataMember]
-        public int NestedExecutedOrder { get; private set; }
-
+       
         public MonitoringEvent()
         {
 
@@ -42,16 +36,6 @@ namespace DataPlatform.Shared.Messaging.Events
             Payload = payload;
             Date = date;
             Source = source;
-        }
-
-        public MonitoringEvent(Guid aggregateId, string payload, DateTime date, MonitoringSource source, int executedOrder, int nestedExecutedOrder)
-        {
-            AggregateId = aggregateId;
-            Payload = payload;
-            Date = date;
-            Source = source;
-            ExecutedOrder = executedOrder;
-            NestedExecutedOrder = nestedExecutedOrder;
         }
         
     }
