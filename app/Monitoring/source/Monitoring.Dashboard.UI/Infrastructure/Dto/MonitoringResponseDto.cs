@@ -9,7 +9,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Dto
         [DataMember] public readonly Guid Id;
 
         [DataMember]
-        //public readonly string Payload;
         public readonly object Payload;
 
         [DataMember] public readonly DateTime Date;

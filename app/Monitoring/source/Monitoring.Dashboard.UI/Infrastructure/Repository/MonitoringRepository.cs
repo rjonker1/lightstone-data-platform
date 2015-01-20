@@ -19,10 +19,10 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
             _storage = storage;
         }
 
-        public IEnumerable<MonitoringResponse> GetAllMonitoringInformation()
+        public IEnumerable<MonitoringResponse> GetAllMonitoringInformation(int source)
         {
             var commands = _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
-                new {@Source = (int) MonitoringSource.Lace})
+                new {@Source = source})
                 .Select(
                     s =>
                         new MonitoringResponseDto(s.AggregateId,

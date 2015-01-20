@@ -19,10 +19,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 
         public void Handle(GetMonitoringCommand command)
         {
-            MonitoringResponse = _repository.GetAllMonitoringInformation().ToList();
+            MonitoringResponse = _repository.GetAllMonitoringInformation(command.Request.SourceId).ToList();
         }
-
     }
-
-    
 }

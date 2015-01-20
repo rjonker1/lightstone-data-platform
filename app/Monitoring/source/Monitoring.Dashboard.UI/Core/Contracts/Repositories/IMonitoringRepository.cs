@@ -5,6 +5,6 @@ namespace Monitoring.Dashboard.UI.Core.Contracts.Repositories
 {
     public interface IMonitoringRepository
     {
-        IEnumerable<MonitoringResponse> GetAllMonitoringInformation();
+        IEnumerable<MonitoringResponse> GetAllMonitoringInformation(int source);
     }
 }
