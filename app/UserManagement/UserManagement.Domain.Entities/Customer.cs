@@ -7,10 +7,10 @@ namespace UserManagement.Domain.Entities
     public class Customer : Entity
     {
 
-        public string CustomerName { get; set; }
-        public string AccountOwnerName { get; set; }
-        public Guid? CustomerProfileId { get; set; }
-        public Guid? ProvinceId { get; set; }
+        public virtual string CustomerName { get; set; }
+        public virtual string AccountOwnerName { get; set; }
+        public virtual Guid? CustomerProfileId { get; set; }
+        public virtual Guid? ProvinceId { get; set; }
 
         public virtual Province Province { get; set; }
         public virtual CustomerProfile CustomerProfile { get; set; }

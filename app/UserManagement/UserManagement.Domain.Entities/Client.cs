@@ -7,8 +7,8 @@ namespace UserManagement.Domain.Entities
     public  class Client : Entity
     {
 
-        public string ClientName { get; set; }
-        public Guid? ClientProfileId { get; set; }
+        public virtual string ClientName { get; set; }
+        public virtual Guid? ClientProfileId { get; set; }
 
         public virtual ProfileDetail ProfileDetail { get; set; }
         public virtual ICollection<ClientPackage> ClientPackage { get; set; }

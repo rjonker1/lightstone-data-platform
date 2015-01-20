@@ -7,12 +7,12 @@ namespace UserManagement.Domain.Entities
     public class Billing : Entity
     {
 
-        public string BillingContactNumber { get; set; }
-        public string BillingContractPersion { get; set; }
-        public string CompanyRegistration { get; set; }
-        public DateTime FirstCreateDate { get; set; }
-        public Guid PaymentTypeId { get; set; }
-        public DateTime? DebitOrderDate { get; set; }
+        public virtual string BillingContactNumber { get; set; }
+        public virtual string BillingContractPersion { get; set; }
+        public virtual string CompanyRegistration { get; set; }
+        public virtual DateTime FirstCreateDate { get; set; }
+        public virtual Guid PaymentTypeId { get; set; }
+        public virtual DateTime? DebitOrderDate { get; set; }
 
         public virtual PaymentType PaymentType { get; set; }
         public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }

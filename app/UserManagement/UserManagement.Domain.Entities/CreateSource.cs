@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
     public class CreateSource : Entity
     {
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
         public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
         public CreateSource()

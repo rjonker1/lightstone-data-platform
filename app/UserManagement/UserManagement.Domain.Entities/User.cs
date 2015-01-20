@@ -7,13 +7,13 @@ namespace UserManagement.Domain.Entities
     public class User : Entity
     {
 
-        public DateTime FirstCreateDate { get; set; }
-        public string LastUpdateBy { get; set; }
-        public DateTime LastUpdateDate { get; set; }
-        public string Password { get; set; }
-        public string UserName { get; set; }
-        public Guid UserTypeId { get; set; }
-        public bool? IsActive { get; set; }
+        public virtual DateTime FirstCreateDate { get; set; }
+        public virtual string LastUpdateBy { get; set; }
+        public virtual DateTime LastUpdateDate { get; set; }
+        public virtual string Password { get; set; }
+        public virtual string UserName { get; set; }
+        public virtual Guid UserTypeId { get; set; }
+        public virtual bool? IsActive { get; set; }
 
         public virtual ICollection<ClientUser> ClientUser { get; set; }
         public virtual UserType UserType { get; set; }
@@ -21,12 +21,25 @@ namespace UserManagement.Domain.Entities
         public virtual ICollection<UserProfile> UserProfile { get; set; }
         public virtual ICollection<UserRole> UserRole { get; set; }
 
-        public User()
+        protected User() { }
+
+        //public User()
+        //{
+        //    ClientUser = new HashSet<ClientUser>();
+        //    UserLinkedToCustomer = new HashSet<UserLinkedToCustomer>();
+        //    UserProfile = new HashSet<UserProfile>();
+        //    UserRole = new HashSet<UserRole>();
+        //}
+
+        public User(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, Guid userTypeId, bool? isActive)
         {
-            ClientUser = new HashSet<ClientUser>();
-            UserLinkedToCustomer = new HashSet<UserLinkedToCustomer>();
-            UserProfile = new HashSet<UserProfile>();
-            UserRole = new HashSet<UserRole>();
+            FirstCreateDate = firstCreateDate;
+            LastUpdateBy = lastUpdateBy;
+            LastUpdateDate = lastUpdateDate;
+            Password = password;
+            UserName = userName;
+            UserTypeId = userTypeId;
+            IsActive = isActive;
         }
 
     }

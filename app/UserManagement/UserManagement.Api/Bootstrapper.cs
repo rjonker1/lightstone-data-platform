@@ -2,9 +2,11 @@
 using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using NHibernate.Tool.hbm2ddl;
+using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 
 namespace UserManagement.Api
@@ -27,12 +29,47 @@ namespace UserManagement.Api
 
             //container.Install(FromAssembly.InThisApplication());
             container.Install(
-                new NHibernateInstaller()
+                new NHibernateInstaller(),
+                new CommandInstaller()
                 );
 
             new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
             //container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
+        }
+
+        protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
+        {
+            //Make every request SSL based
+            //pipelines.BeforeRequest += ctx =>
+            //{
+            //    return (!ctx.Request.Url.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)) ?
+            //        (Response)HttpStatusCode.Unauthorized :
+            //        null;
+            //};
+            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+
+            //pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
+            //{
+            //    this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+            //    return null;
+            //});
+            //pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
+            //pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            //{
+            //    this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+            //    var fromException = ErrorResponse.FromException(exception);
+            //    fromException.Headers.Add("Access-Control-Allow-Origin", "*");
+            //    fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+            //    fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+            //    return fromException;
+            //});
+
+            //pipelines.EnableCors(); // cross origin resource sharing
+
+            pipelines.AddTransactionScope(container);
+
+            base.RequestStartup(container, pipelines, context);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
     public class UserType : Entity
     {
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
         public virtual ICollection<User> User { get; set; }
 
         public UserType()

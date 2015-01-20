@@ -7,15 +7,15 @@ namespace UserManagement.Domain.Entities
     public class CustomerProfile : Entity
     {
 
-        public Guid CommercialStateId { get; set; }
-        public Guid CreateSourceId { get; set; }
-        public DateTime FirstCreateDate { get; set; }
-        public string LastUpdateBy { get; set; }
-        public DateTime LastUpdateDate { get; set; }
-        public Guid PlatformStatusId { get; set; }
-        public Guid? BillingId { get; set; }
-        public string PastelID { get; set; }
-        public Guid? ProfileDetailId { get; set; }
+        public virtual Guid CommercialStateId { get; set; }
+        public virtual Guid CreateSourceId { get; set; }
+        public virtual DateTime FirstCreateDate { get; set; }
+        public virtual string LastUpdateBy { get; set; }
+        public virtual DateTime LastUpdateDate { get; set; }
+        public virtual Guid PlatformStatusId { get; set; }
+        public virtual Guid? BillingId { get; set; }
+        public virtual string PastelID { get; set; }
+        public virtual Guid? ProfileDetailId { get; set; }
 
         public virtual Billing Billing { get; set; }
         public virtual CommercialState CommercialState { get; set; }

@@ -6,7 +6,7 @@ namespace UserManagement.Domain.Entities
     public class Role : Entity
     {
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
         public virtual ICollection<UserRole> UserRole { get; set; }
 
         public Role()

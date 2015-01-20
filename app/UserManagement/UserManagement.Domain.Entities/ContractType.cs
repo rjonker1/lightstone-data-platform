@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
     public class ContractType : Entity
     {
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
         public virtual ICollection<Contract> Contract { get; set; }
 
         public ContractType()

@@ -7,13 +7,13 @@ namespace UserManagement.Domain.Entities
     public class ProfileDetail : Entity
     {
 
-        public string LegalEntityName { get; set; }
-        public string AccountsContactName { get; set; }
-        public string EmailAddress { get; set; }
-        public Guid? PhysicalAddressId { get; set; }
-        public Guid? PostalAddressId { get; set; }
-        public string TelephoneNumber { get; set; }
-        public string VATNumber { get; set; }
+        public virtual string LegalEntityName { get; set; }
+        public virtual string AccountsContactName { get; set; }
+        public virtual string EmailAddress { get; set; }
+        public virtual Guid? PhysicalAddressId { get; set; }
+        public virtual Guid? PostalAddressId { get; set; }
+        public virtual string TelephoneNumber { get; set; }
+        public virtual string VATNumber { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual Address Address1 { get; set; }

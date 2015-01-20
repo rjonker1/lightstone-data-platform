@@ -7,13 +7,13 @@ namespace UserManagement.Domain.Entities
     public class Address : Entity
     {
 
-        public string AddressType { get; set; }
-        public string Line1 { get; set; }
-        public string PostalCode { get; set; }
-        public Guid ProvinceId { get; set; }
-        public string Line2 { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
+        public virtual string AddressType { get; set; }
+        public virtual string Line1 { get; set; }
+        public virtual string PostalCode { get; set; }
+        public virtual Guid ProvinceId { get; set; }
+        public virtual string Line2 { get; set; }
+        public virtual string City { get; set; }
+        public virtual string Country { get; set; }
 
         public virtual Province Province { get; set; }
         public virtual ICollection<ProfileDetail> ProfileDetail { get; set; }

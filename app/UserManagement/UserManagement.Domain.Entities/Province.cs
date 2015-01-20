@@ -6,7 +6,7 @@ namespace UserManagement.Domain.Entities
     public class Province : Entity
     {
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
         public virtual ICollection<Address> Address { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }
 

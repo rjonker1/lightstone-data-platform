@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
     public class PaymentType : Entity
     {
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
         public virtual ICollection<Billing> Billing { get; set; }
 
         public PaymentType()

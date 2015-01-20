@@ -7,20 +7,20 @@ namespace UserManagement.Domain.Entities
     public class Contract : Entity
     {
 
-        public DateTime ContractCommencementDate { get; set; }
-        public Guid ContractDurationId { get; set; }
-        public string ContractName { get; set; }
-        public Guid ContractTypeId { get; set; }
-        public Guid EscalationTypeId { get; set; }
-        public string LastUpdateBy { get; set; }
-        public DateTime LastUpdateDate { get; set; }
-        public Nullable<Guid> ClientId { get; set; }
-        public string ContactDetail { get; set; }
-        public string EnteredIntoBy { get; set; }
-        public Nullable<DateTime> OnlineAcceptance { get; set; }
-        public Nullable<Guid> ProfileDetailId { get; set; }
-        public string RegisteredName { get; set; }
-        public string RegistrationNumber { get; set; }
+        public virtual DateTime ContractCommencementDate { get; set; }
+        public virtual Guid ContractDurationId { get; set; }
+        public virtual string ContractName { get; set; }
+        public virtual Guid ContractTypeId { get; set; }
+        public virtual Guid EscalationTypeId { get; set; }
+        public virtual string LastUpdateBy { get; set; }
+        public virtual DateTime LastUpdateDate { get; set; }
+        public virtual Nullable<Guid> ClientId { get; set; }
+        public virtual string ContactDetail { get; set; }
+        public virtual string EnteredIntoBy { get; set; }
+        public virtual Nullable<DateTime> OnlineAcceptance { get; set; }
+        public virtual Nullable<Guid> ProfileDetailId { get; set; }
+        public virtual string RegisteredName { get; set; }
+        public virtual string RegistrationNumber { get; set; }
 
         public virtual Client Client { get; set; }
         public virtual ProfileDetail ProfileDetail { get; set; }
