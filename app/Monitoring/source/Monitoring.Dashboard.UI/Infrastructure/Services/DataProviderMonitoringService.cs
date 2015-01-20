@@ -59,18 +59,18 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                     response.Date));
             }
 
-            foreach (var response in responses)
-            {
-                var commandDetail = response.Payload.OrderBy(o => o.SubOrder).JsonToObject<List<CommandDetail>>();
+            //foreach (var response in responses)
+            //{
+            //    var commandDetail = response.Payload.OrderBy(o => o.SubOrder).JsonToObject<List<CommandDetail>>();
 
-                if (commandDetail == null || !commandDetail.Any())
-                    continue;
+            //    if (commandDetail == null || !commandDetail.Any())
+            //        continue;
 
-                commandDetail.OrderBy(o => o.SubOrder);
+            //    commandDetail.OrderBy(o => o.SubOrder);
 
 
 
-            }
+            //}
         }
     }
 }
