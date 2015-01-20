@@ -7,8 +7,7 @@ h1 {
     font-weight: normal;
     font-size: 40px;
     font-weight: normal;
-    text-transform: uppercase;
-    /*float: left;*/
+    text-transform: uppercase; 
     margin: 20px 0 10px 4px;
 }
 
@@ -18,73 +17,214 @@ h1 {
         padding-left: 4px;
     }
 
-
-.group:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-}
-
 .tabs {
+    width: 100%;
+    float: none;
     list-style: none;
-    padding-left: 4px;
+    position: relative;
+    margin: 20px 0 0 5px;
+    text-align: left;
 }
 
     .tabs li {
-        display: inline;
+        float: left;
+        display: block;
+        border: 1px solid #dce7eb;
     }
 
-        .tabs li a {
-            color: black;
-            float: left;
-            display: block;
-            padding: 4px 10px;
-            margin-left: -1px;
-            position: relative;
-            left: 1px;
-            background: white;
-            text-decoration: none;
-            width: 100px;
+    .tabs input[type="radio"] {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .tabs label {
+        display: block;
+        padding: 14px 21px;
+        border-radius: 2px 2px 0 0;
+        font-size: 20px;
+        font-weight: normal;
+        text-transform: uppercase;
+        background: #fff;
+        cursor: pointer;
+        position: relative;
+        top: 4px;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .tabs label:hover {
+            background: #fff;
         }
 
-            .tabs li a:hover {
-                background: #ccc;
-            }
+    .tabs .tab-content {
+        z-index: 2;
+        display: none;
+        overflow: hidden;
+        width: 100%;
+        line-height: 25px;
+        padding: 5px;
+        position: absolute;
+        left: 0;
+        background: #fff;
+        border: 1px solid #dce7eb;
+    }
 
-.tabbed-area {
-    margin: 0 0 0 0;
+    .tabs [id^="tab"]:checked + label {
+        top: 0;
+        padding-top: 17px;
+        background: #fff;
+    }
+
+    .tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+        display: block;
+    }
+
+.data-provider-container h1, h2 {
+    color: #000000;
 }
 
-    .tabbed-area div div {
-        background: white;
-        padding: 20px;
-        min-height: 500px;
-        position: absolute;
-        top: -1px;
-        left: 4px;
+.data-provider-container h1 {
+    text-transform: uppercase;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: 3px;
+    font-weight: 100;
+}
+
+.data-provider-container h2 {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    display: block;
+    background-color: #fff;
+    margin: 0;
+    cursor: pointer;
+}
+
+.data-provider-container p {
+    color: #30455c;
+    color: rgba(48, 69, 92, 0.8);
+    font-size: 17px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    max-height: 800px;
+    opacity: 1;
+    transform: translate(0, 0);
+    margin-top: 14px;
+    z-index: 2;
+}
+
+.data-provider-container ul {
+    list-style: none;
+    perspective: 900;
+    padding: 0;
+    margin: 0;
+}
+
+    .data-provider-container ul li {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        border-top: 1px dotted #dce7eb;
         width: 100%;
     }
 
-    .tabbed-area div div {
-        border-top: 1px solid #ccc;
+        /*.data-provider-container ul li:nth-of-type(1) {
+            animation-delay: 0.5s;
+        }
+
+        .data-provider-container ul li:nth-of-type(2) {
+            animation-delay: 0.75s;
+        }
+
+        .data-provider-container ul li:nth-of-type(3) {
+            animation-delay: 1s;
+        }
+
+        .data-provider-container ul li:last-of-type {
+            padding-bottom: 0;
+        }
+
+        .data-provider-container ul li i {
+            position: absolute;
+            transform: translate(-6px, 0);
+            margin-top: 10px;
+            left: 0;
+        }
+
+            .data-provider-container ul li i:before, ul li i:after {
+                content: "";
+                position: absolute;
+                background-color: #000000;
+                width: 3px;
+                height: 9px;
+            }
+
+            .data-provider-container ul li i:before {
+                transform: translate(-2px, 0) rotate(45deg);
+            }
+
+           .data-provider-container  ul li i:after {
+                transform: translate(2px, 0) rotate(-45deg);
+            }
+
+        .data-provider-container ul li input[type=checkbox] {
+            position: absolute;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+        }
+
+            .data-provider-container ul li input[type=checkbox]:checked ~ p {
+                margin-top: 0;
+                max-height: 0;
+                opacity: 0;
+                transform: translate(0, 50%);
+            }*/
+
+            /*.data-provider-container ul li input[type=checkbox]:checked ~ i:before {
+                transform: translate(2px, 0) rotate(45deg);
+            }
+
+            .data-provider-container ul li input[type=checkbox]:checked ~ i:after {
+                transform: translate(-2px, 0) rotate(-45deg);
+            }*/
+
+@keyframes flipdown {
+    0% {
+        opacity: 0;
+        transform-origin: top center;
+        transform: rotateX(-90deg);
     }
 
-.tabs li a {
-    border: 1px solid #ccc;
-    border-bottom: 0;
-}
+    5% {
+        opacity: 1;
+    }
 
+    80% {
+        transform: rotateX(8deg);
+    }
 
-/*#box-one:target, #box-two:target {
-    z-index: 1;
-}*/
+    83% {
+        transform: rotateX(6deg);
+    }
 
-.box-wrap {
-    position: relative;
-    padding-left: 4px;
-    padding-bottom: 5px;
-    border-top: 1px solid #ccc;
+    92% {
+        transform: rotateX(-3deg);
+    }
+
+    100% {
+        transform-origin: top center;
+        transform: rotateX(0deg);
+    }
 }

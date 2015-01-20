@@ -31,31 +31,7 @@ namespace Monitoring.Acceptance.Tests.Queues
 
         public override void Observe()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.IvidTitleHolder, _actions,
-                _aggregateId);
-            queue.TearDown()
-                .Setup()
-                .InitBus(BusBuilder.ForIvidTitleHolderCommands(_aggregateId))
-                .InitStopWatch()
-                .StartingDataProviderMessage()
-                .ConfigurationMessage(DataProviderConfigurationBuiler.ForIvidTitleHolder())
-                .SecurityMessage(new
-                {
-                    Credentials =
-                        new
-                        {
-                            UserName = "CARSTATS-CARSTATS",
-                            Password = "8B5Jk3Q66"
-                        }
-                },
-                    new {ContextMessage = "Ivid Title Holder Data Provider Credentials"})
-                .StartCallingMessage()
-                .FaultCallingMessage(
-                    new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"})
-                .EndCallingMessage(DataProviderResponseBuilder.FromIvidTitleHolder())
-                .TransformationMessage(DataProviderTransformationBuilder.ForIvidTitleHolder(),
-                    new {TrasformationMetaData = "Transforming Response from Ivid Title Holder"})
-                .EndingDataProvider();
+            new DataProviderCommands(_request, _actions, _aggregateId).ForIvidTitleHolder();
         }
 
         [Observation]

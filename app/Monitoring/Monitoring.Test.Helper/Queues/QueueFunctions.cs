@@ -24,16 +24,22 @@ namespace Monitoring.Test.Helper.Queues
 
         private readonly Guid _aggregateId;
 
-        public DataProviderQueueFunctions(object request, DataProviderCommandSource dataProvider, IHaveQueueActions actions, Guid aggregateId)
+        private readonly bool _setupAndTearDown;
+
+        public DataProviderQueueFunctions(object request, DataProviderCommandSource dataProvider, IHaveQueueActions actions, Guid aggregateId, bool setupAndTearDown = true)
         { 
             _request = request;
             _dataProvider = dataProvider;
             _actions = actions;
             _aggregateId = aggregateId;
+            _setupAndTearDown = setupAndTearDown;
         }
 
         public DataProviderQueueFunctions TearDown()
         {
+            if (!_setupAndTearDown)
+                return this;
+
             _actions.DeleteAllQueues();
             _actions.DeleteAllExchanges();
             return this;
@@ -41,6 +47,9 @@ namespace Monitoring.Test.Helper.Queues
 
         public DataProviderQueueFunctions Setup()
         {
+            if (!_setupAndTearDown)
+                return this;
+
             _actions.AddAllExchanges();
             _actions.AddAllQueues();
             return this;

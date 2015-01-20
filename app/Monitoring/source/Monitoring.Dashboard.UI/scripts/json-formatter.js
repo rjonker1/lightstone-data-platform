@@ -21,7 +21,7 @@ function $id(id) {
 }
 
 function IsArray(obj) {
-    return obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'));
+    return obj && typeof obj === "object" && typeof obj.length === "number" && !(obj.propertyIsEnumerable("length"));
 }
 
 function Process(rawJsonId, canvasId) {
@@ -71,7 +71,7 @@ function ProcessObject(obj, indent, addComma, isArray, isPropertyContent) {
             html += GetRow(indent, clpsHtml + "<span class='ArrayBrace'>]</span>" + comma);
         }
     }
-    else if (type == 'object') {
+    else if (type == "object") {
         if (obj == null) {
             html += FormatLiteral("null", "", comma, indent, isArray, "Null");
         }
@@ -101,13 +101,13 @@ function ProcessObject(obj, indent, addComma, isArray, isPropertyContent) {
             }
         }
     }
-    else if (type == 'number') {
+    else if (type == "number") {
         html += FormatLiteral(obj, "", comma, indent, isArray, "Number");
     }
-    else if (type == 'boolean') {
+    else if (type == "boolean") {
         html += FormatLiteral(obj, "", comma, indent, isArray, "Boolean");
     }
-    else if (type == 'function') {
+    else if (type == "function") {
         if (obj.constructor == window._regexpObj.constructor) {
             html += FormatLiteral("new RegExp( " + obj + " )", "", comma, indent, isArray, "RegExp");
         }
@@ -237,3 +237,4 @@ function MultiplyString(num, str) {
     }
     return sb.join("");
 }
+
