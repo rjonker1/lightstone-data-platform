@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 
 namespace DataPlatform.Shared.Messaging.Events
@@ -9,15 +10,26 @@ namespace DataPlatform.Shared.Messaging.Events
         DateTime Date { get; }
         string Payload { get; }
         MonitoringSource Source { get; }
+        int ExecutedOrder { get; }
+        int NestedExecutedOrder { get; }
     }
 
     [Serializable]
+    [DataContract]
     public class MonitoringEvent : IMonitorEvent
     {
+        [DataMember]
         public Guid AggregateId { get; private set; }
+        [DataMember]
         public DateTime Date { get; private set; }
+        [DataMember]
         public string Payload { get; private set; }
+        [DataMember]
         public MonitoringSource Source { get; private set; }
+        [DataMember]
+        public int ExecutedOrder { get; private set; }
+        [DataMember]
+        public int NestedExecutedOrder { get; private set; }
 
         public MonitoringEvent()
         {
@@ -31,5 +43,16 @@ namespace DataPlatform.Shared.Messaging.Events
             Date = date;
             Source = source;
         }
+
+        public MonitoringEvent(Guid aggregateId, string payload, DateTime date, MonitoringSource source, int executedOrder, int nestedExecutedOrder)
+        {
+            AggregateId = aggregateId;
+            Payload = payload;
+            Date = date;
+            Source = source;
+            ExecutedOrder = executedOrder;
+            NestedExecutedOrder = nestedExecutedOrder;
+        }
+        
     }
 }
