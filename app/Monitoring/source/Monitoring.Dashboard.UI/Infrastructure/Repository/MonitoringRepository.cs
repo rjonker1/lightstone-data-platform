@@ -38,7 +38,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
                     Id = aggId,
                     Payload = payload
                 })
-                .Select(s => new MonitoringResponse(s.Id, s.Payload.ObjectToJson(), commands.Where(w => w.Id == s.Id).Max(m => m.Date)));
+                .Select(
+                    s =>
+                        new MonitoringResponse(s.Id, s.Payload.ObjectToJson(),
+                            commands.Where(w => w.Id == s.Id).Max(m => m.Date)))
+                .OrderByDescending(o => o.Date);
         }
     }
 }
