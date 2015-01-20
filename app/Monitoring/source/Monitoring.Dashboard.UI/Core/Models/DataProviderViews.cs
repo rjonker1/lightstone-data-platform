@@ -2,6 +2,17 @@
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
+
+    [DataContract]
+    public class CommandDetail
+    {
+        [DataMember]
+        public int Order { get; set; }
+
+        [DataMember]
+        public int SubOrder { get; set; }
+    }
+
     [DataContract]
     public class PackageInformation
     {

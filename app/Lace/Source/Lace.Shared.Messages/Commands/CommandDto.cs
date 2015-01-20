@@ -41,5 +41,6 @@ namespace Lace.Shared.Monitoring.Messages.Commands
             Order = order;
             SubOrder = subOrder;
         }
+
     }
 }

@@ -32,7 +32,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         public void Begin(dynamic payload, DataProviderStopWatch stopWatch)
         {
             //Begin(payload, new MetadataContainer()).SendToBus(_publisher, _log);
-            BusExtensions.SendToBus(Begin(payload, new MetadataContainer()),_publisher,_log);
+            BusExtensions.SendToBus(Begin(payload, new MetadataContainer()), _publisher, _log);
             stopWatch.Start();
         }
 
@@ -66,14 +66,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    IvidExecutionHasStarted =
-                        new IvidExcutionHasStarted(_requestId, DataProviderCommandSource.Ivid,
-                            CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
+                IvidExecutionHasStarted =
+                    new IvidExcutionHasStarted(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
-            var cmd =  command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
+            var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing,_orderOfExecution);
             return cmd;
         }
 
@@ -81,53 +81,53 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    IvidExecutionHasEnded =
-                        new IvidExcutionHasEnded(_requestId, DataProviderCommandSource.Ivid,
-                            CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
+                IvidExecutionHasEnded =
+                    new IvidExcutionHasEnded(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.StoneLast, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope StartCall(object payload, MetadataContainer metadata)
         {
             var command = new
             {
-                    IvidDataSourceCallHasStarted =
-                        new IvidDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Ivid,
-                            CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
+                IvidDataSourceCallHasStarted =
+                    new IvidDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheBegining, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope EndCall(object payload, MetadataContainer metadata)
         {
             var command = new
             {
-                    IvidDataSourceCallHasEnded =
-                        new IvidDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Ivid,
-                            CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
+                IvidDataSourceCallHasEnded =
+                    new IvidDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId,(int) DisplayOrder.FirstThing,_orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Fault(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
-                    IvidError =
-                        new IvidError(_requestId, DataProviderCommandSource.Ivid,
-                            CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
-                            DateTime.UtcNow,
-                            Category.Performance)
+                IvidError =
+                    new IvidError(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
+                        DateTime.UtcNow,
+                        Category.Performance)
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
@@ -137,39 +137,39 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    IvidSecurityFlag = new IvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
-                        payload,
-                        metadata, DateTime.UtcNow, Category.Security)
+                IvidSecurityFlag = new IvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
+                    CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
+                    payload,
+                    metadata, DateTime.UtcNow, Category.Security)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle,_orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Configuration(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
-                    IvidConfigured = new IvidConfigured(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
-                        payload, metadata,
-                        DateTime.UtcNow, Category.Configuration)
+                IvidConfigured = new IvidConfigured(_requestId, DataProviderCommandSource.Ivid,
+                    CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Transformation(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
-                    IvidResponseTransformed = new IvidResponseTransformed(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
-                        payload, metadata,
-                        DateTime.UtcNow, Category.Configuration)
+                IvidResponseTransformed = new IvidResponseTransformed(_requestId, DataProviderCommandSource.Ivid,
+                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class
