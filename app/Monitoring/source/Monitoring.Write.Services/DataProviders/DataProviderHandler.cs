@@ -27,7 +27,7 @@ namespace Monitoring.Write.Service.DataProviders
             if (@event == null || @event.Id == Guid.Empty)
             {
                 @event = new MonitoringEvents(message.Command.Id, message.Command.Payload, message.Command.DateUtc,
-                    MonitoringSource.Lace);
+                    message.Command.Source);
             }
             else
             {

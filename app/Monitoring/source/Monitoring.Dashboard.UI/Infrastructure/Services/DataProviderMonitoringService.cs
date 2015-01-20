@@ -25,15 +25,15 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             _log.InfoFormat("Getting Data Provider Monitoring View");
             _handler.Handle(
                 new GetMonitoringCommand(new MonitoringRequestDto(source)));
-            SetSearchMetaData(_handler.MonitoringResponse);
+            SetSearchMetaData(_handler.MonitoringResponse.ToList());
             return _handler.MonitoringResponse;
         }
 
-        private static void SetSearchMetaData(IEnumerable<MonitoringResponse> responses)
+        private static void SetSearchMetaData(List<MonitoringResponse> responses)
         {
             foreach (var response in responses)
             {
-                var requestInformation = response.Payload.JsonToObject<List<PackageInformation>>();
+                var requestInformation = response.Payload.JsonToObject<PackageInformation[]>();
                 if (requestInformation == null || !requestInformation.Any())
                 {
                     response.SetMetadata(string.Format("Aggregate {0} Date {1}", response.Id, response.Date));
@@ -57,6 +57,19 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                     requestDetail.EntryPointReceivedRequest.Payload.Request.Package.Name,
                     requestDetail.EntryPointReceivedRequest.Payload.Request.SearchTerm, response.Id,
                     response.Date));
+            }
+
+            foreach (var response in responses)
+            {
+                var commandDetail = response.Payload.OrderBy(o => o.SubOrder).JsonToObject<List<CommandDetail>>();
+
+                if (commandDetail == null || !commandDetail.Any())
+                    continue;
+
+                commandDetail.OrderBy(o => o.SubOrder);
+
+
+
             }
         }
     }

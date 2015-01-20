@@ -62,14 +62,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                //AudatexExecutionHasStarted = new
-                //{
                 AudatexExecutionHasStarted =
                     new AudatexExecutionHasStarted(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Audatex),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-                //}
             };
 
             return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
