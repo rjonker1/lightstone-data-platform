@@ -33,6 +33,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
                 return new List<MonitoringResponse>();
 
             return commands
+                .OrderBy(o => o.Date)
                 .GroupBy(g => g.Id, g => g.Payload, (aggId, payload) => new
                 {
                     Id = aggId,
