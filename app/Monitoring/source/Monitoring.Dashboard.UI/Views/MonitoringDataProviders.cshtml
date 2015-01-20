@@ -8,7 +8,6 @@
     <link type="text/css" rel="stylesheet" href="../Content/Styles/monitoring_data_providers.css" />
 }
 <h1>Monitoring<span>Event Log for Data Providers</span></h1>
-
 <ul class="tabs">
     <li>
         <input type="radio" name="tabs" id="tab1" checked />
@@ -17,7 +16,6 @@
             <p></p>
         </div>
     </li>
-
     <li>
         <input type="radio" name="tabs" id="tab2" />
         <label for="tab2">Log</label>
@@ -33,104 +31,43 @@
                             var canvasId = "canvas-" + count;
                             var toggleId = "toggle-" + count;
 
-
-                            <li onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId');">
-                                <input type="checkbox" checked />
-                                <i></i>
-                                <h2>&nbsp;Events for Aggregate @response.Id @response.Date</h2>
-                                <p>
-                                    <div style="display: none; border-width: 2px; border-style: solid" id="@toggleId">
-                                        <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
-                                        <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
-                                    </div>
-                                </p>
-                            </li>
-
-                            @*<div>
+                            <li>
+                                <h2>
                                     <span><img src="../Content/Images/plus.gif" alt="expand" onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); " /></span>Events for Aggregate @response.Id @response.Date
-                                </div>
+                                </h2>
+
                                 <div>
-                                    <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId' );" value="Collapse" /> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId' ); ">
-                                </div>
-                                <div>
-                                    <div style="display: none; border-width: 2px; border-style: solid" id="@toggleId">
+                                    <div style="display: none;" id="@toggleId">
+                                        <div>
+                                            <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId'); " value="Collapse"/> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId'); ">
+                                        </div>
                                         <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
                                         <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
                                     </div>
-                                </div>*@
-
+                                </div>
+                            </li>
+                         @*<li onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); ">
+                        <input type="checkbox" checked/>
+                        <i></i>
+                        <h2>&nbsp;Events for Aggregate @response.Id @response.Date</h2>
+                        <p>
+                            <div style="display: none;" id="@toggleId">
+                                <div>
+                                    <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId' ); " value=" collapse" /> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId'); ">
+                                </div>
+                                <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
+                                <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
+                            </div>
+                        </p>
+                    </li>*@
                         }
                     }
 
                 </ul>
-                @*<ul>
-                        <li>
-                            <input type="checkbox" checked>
-                            <i></i>
-                            <h2>Languages Used</h2>
-                            <p></p>
-                        </li>
-                        <li>
-                            <input type="checkbox" checked>
-                            <i></i>
-                            <h2>How it Works</h2>
-                            <p></p>
-                        </li>
-                        <li>
-                            <input type="checkbox" checked>
-                            <i></i>
-                            <h2>Points of Interest</h2>
-                            <p></p>
-                        </li>
-                    </ul>*@
             </div>
         </div>
     </li>
 </ul>
-
-
-@*<div>
-        <div class="tabbed-area">
-            <ul class="tabs group">
-                <li><a href="/dataProviders/log">Log</a></li>
-            </ul>
-            <div class="box-wrap">
-            </div>
-        </div>
-    </div>*@
-
-
-
-
-
-@*<div class="box-wrap">
-
-        @{
-            var count = 0;
-            foreach (var response in @Model)
-            {
-                count++;
-                var jsonId = "rawJson-" + count;
-                var canvasId = "canvas-" + count;
-                var toggleId = "toggle-" + count;
-
-                <div>
-                    <span><img src="../Content/Images/plus.gif" alt="expand" onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); " /></span>Events for Aggregate @response.Id @response.Date
-                </div>
-                <div>
-                    <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId' );" value="Collapse" /> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId' ); ">
-                </div>
-                <div>
-                    <div style="display: none; border-width: 2px; border-style: solid" id="@toggleId">
-                        <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
-                        <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
-                    </div>
-                </div>
-
-            }
-        }
-
-    </div>*@
 
 @section Scripts
 {

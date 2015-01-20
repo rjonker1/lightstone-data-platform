@@ -21,7 +21,7 @@ function $id(id) {
 }
 
 function IsArray(obj) {
-    return obj && typeof obj === 'object' && typeof obj.length === 'number' && !(obj.propertyIsEnumerable('length'));
+    return obj && typeof obj === "object" && typeof obj.length === "number" && !(obj.propertyIsEnumerable("length"));
 }
 
 function Process(rawJsonId, canvasId) {
@@ -237,3 +237,4 @@ function MultiplyString(num, str) {
     }
     return sb.join("");
 }
+
