@@ -81,7 +81,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    IvidExcutionHasEnded =
+                    IvidExecutionHasEnded =
                         new IvidExcutionHasEnded(_requestId, DataProviderCommandSource.Ivid,
                             CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
                             payload, metadata, DateTime.UtcNow,

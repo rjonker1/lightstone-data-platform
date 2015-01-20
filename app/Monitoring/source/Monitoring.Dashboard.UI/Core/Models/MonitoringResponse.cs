@@ -16,11 +16,19 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         public DateTime Date { get; private set; }
 
+        [DataMember]
+        public string Metadata { get; set; }
+
         public MonitoringResponse(Guid id, string payload, DateTime date)
         {
             Id = id;
             Payload = payload;
             Date = date;
+        }
+
+        public void SetMetadata(string metadata)
+        {
+            Metadata = metadata;
         }
     }
 }

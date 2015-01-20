@@ -34,19 +34,41 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             {
                 _monitoring = new SendEntryPointCommands(_bus, request.RequestAggregation.AggregateId,
                     (int) ExecutionOrder.First);
+
+                _monitoring.Begin(request, null);
+
                 _sourceChain = new CreateSourceChain(request.Package);
                 _sourceChain.Build();
 
                 if (_sourceChain.SourceChain == null)
                 {
                     Log.ErrorFormat("Source chain could not be built for action {0}", request.Package.Action.Name);
+                    _monitoring.Send(CommandType.Fault, request,
+                        new
+                        {
+                            ChainBuilderError =
+                                string.Format("Source chain could not be built for action {0}",
+                                    request.Package.Action.Name)
+                        });
+                    _monitoring.End(request, null);
                     return EmptyResponse;
                 }
 
-                if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return EmptyResponse;
+                if (_checkForDuplicateRequests.IsRequestDuplicated(request))
+                {
+                    _monitoring.Send(CommandType.Fault, request,
+                        new
+                        {
+                            DuplicateRequest = "This Request is duplicated and will not be executed"
+                        });
+                    _monitoring.End(request, null);
+                    return EmptyResponse;
+                }
 
                 _bootstrap = new Initialize(new LaceResponse(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
+
+                _monitoring.End(request, null);
 
                 return _bootstrap.LaceResponses ?? EmptyResponse;
 
@@ -54,6 +76,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             catch (Exception ex)
             {
                 _monitoring.Send(CommandType.Fault, ex.Message, request);
+                _monitoring.End(request, null);
                 Log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;

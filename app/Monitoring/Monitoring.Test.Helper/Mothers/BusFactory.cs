@@ -50,6 +50,12 @@ namespace Monitoring.Test.Helper.Mothers
             var bus = BusFactory.NServiceRabbitMqReadBus();
             return new SendRgtVinCommands(bus, aggregateId, (int) ExecutionOrder.Fourth);
         }
+
+        public static ISendCommandsToBus ForEntryPoint(Guid aggreagateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqReadBus();
+            return new SendEntryPointCommands(bus, aggreagateId, (int) ExecutionOrder.First);
+        }
     }
 
     public class BusFactory

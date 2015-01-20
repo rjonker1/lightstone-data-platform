@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Monitoring.Dashboard.UI.Core.Extensions
@@ -23,6 +24,18 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
             catch
             {
                 return string.Empty;
+            }
+        }
+
+        public static T JsonToObject<T>(this string json) where T : class
+        {
+            try
+            {
+                return string.IsNullOrWhiteSpace(json) || !IsJson(json) ? null : JsonConvert.DeserializeObject<T>(json);
+            }
+            catch
+            {
+                return null;
             }
         }
 

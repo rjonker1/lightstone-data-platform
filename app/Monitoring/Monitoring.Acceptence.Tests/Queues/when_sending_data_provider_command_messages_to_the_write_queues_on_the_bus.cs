@@ -28,6 +28,7 @@ namespace Monitoring.Acceptance.Tests.Queues
         {
             new DataProviderCommands(_request, _actions, _aggregateId, false)
                 .SetupAndTearDownOnly()
+                .ForEntryPoint()
                 .ForIvid()
                 .ForLightstone()
                 .ForIvidTitleHolder()
@@ -42,7 +43,7 @@ namespace Monitoring.Acceptance.Tests.Queues
             var messageCount = _actions.GetMessageCount(ConfigureMonitoringWriteQueues.ForHost().ExchangeName,
                 ConfigureMonitoringWriteQueues.ForHost().QueueName, ConfigureMonitoringWriteQueues.ForHost().RoutingKey,
                 ConfigureMonitoringWriteQueues.ForHost().ExchangeType);
-            messageCount.ShouldEqual(42);
+            messageCount.ShouldEqual(44);
 
         }
     }

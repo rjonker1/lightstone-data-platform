@@ -167,6 +167,19 @@ namespace Monitoring.Test.Helper.Builder
             return this;
         }
 
+        public DataProviderCommands ForEntryPoint()
+        {
+            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.EntryPoint, _actions,
+                _aggregateId, _setupAndTearDown);
+            queue.TearDown()
+                .Setup()
+                .InitBus(BusBuilder.ForEntryPoint(_aggregateId))
+                .InitStopWatch()
+                .StartingDataProviderMessage()
+                .EndingDataProvider();
+            return this;
+        }
+
         public DataProviderCommands SetupAndTearDownOnly()
         {
             var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.EntryPoint, _actions, _aggregateId);
