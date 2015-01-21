@@ -9,7 +9,9 @@
         <td>
             <input class="form-control" ng-model="dField.definition" type="text" >
         </td>
-
+        <td>
+            <input class="form-control" ng-model="dField.order" spinner-only type="number">
+        </td>
         <td>
 
             <div ng-show="(dField.dataFields).length <= 0"
@@ -47,6 +49,7 @@
 
         <td><input class="form-control" ng-model="subDF.label" type="text"></td>
         <td><input class="form-control" ng-model="subDF.definition" type="text"></td>
+        <td><input class="form-control" ng-model="subDF.order" spinner-only type="number"></td>
 
         <td>
 
@@ -73,6 +76,7 @@
         <td>System.Type</td>
         <td><input class="form-control" ng-model="subChildDF.label" type="text"></td>
         <td><input class="form-control" ng-model="subChildDF.definition" type="text"></td>
+        <td><input class="form-control" ng-model="subChildDF.order" spinner-only type="number"></td>
 
         <td>
 
@@ -226,6 +230,7 @@
                                                     <th>Type</th>
                                                     <th>Label</th>
                                                     <th>Definition</th>
+                                                    <th>Order</th>
                                                     <th>Industry</th>
                                                     <!--<th style="width: 18%;">
                                                         <div style="float: left;">
