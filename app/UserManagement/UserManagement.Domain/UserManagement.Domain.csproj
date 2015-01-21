@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\Users\CreateUserHandler.cs" />
+    <Compile Include="CommandHandlers\UserTypes\CreateUserTypeHandler.cs" />
+    <Compile Include="CommandHandlers\UserTypes\ImportUserTypeHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

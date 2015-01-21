@@ -8,11 +8,15 @@ namespace UserManagement.Domain.Entities
     {
 
         public virtual string Value { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        //public virtual ICollection<User> User { get; set; }
 
-        public UserType()
+        protected UserType() { }
+
+        public UserType(string val)
         {
-            User = new HashSet<User>();
+            Id = Guid.NewGuid();
+            Value = val;
+            // User = new HashSet<User>();
         }
 
     }
