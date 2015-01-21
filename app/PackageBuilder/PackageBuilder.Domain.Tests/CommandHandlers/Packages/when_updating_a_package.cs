@@ -22,7 +22,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.Packages
         public override void Observe()
         {
             base.Observe();
-            var command = new UpdatePackage(Guid.NewGuid(), "Name", "Description", 10d, 20d, "Notes", new[] { IndustryMother.Automotive }, StateMother.Draft, 1, "Owner", DateTime.UtcNow, DateTime.UtcNow, new List<DataProviderOverride> { DataProviderOverrideMother.Ivid }.AsEnumerable());
+            var command = new UpdatePackage(Guid.NewGuid(), "Name", "Description", 10d, 20d, "Notes", new[] { IndustryMother.Automotive }, StateMother.Draft, 1, "Owner", DateTime.UtcNow, DateTime.UtcNow, new List<IDataProviderOverride> { DataProviderOverrideMother.Ivid }.AsEnumerable());
             _handler = new UpdatePackageHandler(_writeRepository.Object, _readRepository.Object);
 
             _writeRepository.Setup(x => x.GetById(It.IsAny<Guid>())).Returns(WritePackageMother.FullVerificationPackage);

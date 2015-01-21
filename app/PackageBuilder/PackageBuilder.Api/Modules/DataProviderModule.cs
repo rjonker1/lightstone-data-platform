@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
-using MemBus;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
@@ -22,7 +22,7 @@ namespace PackageBuilder.Api.Modules
     {
         private static int _defaultJsonMaxLength;
 
-        public DataProviderModule(IBus bus,
+        public DataProviderModule(IPublishStorableCommands publisher,
             IDataProviderRepository readRepo,
             INEventStoreRepository<DataProvider> writeRepo, IRepository<State> stateRepo)
         {
@@ -53,10 +53,11 @@ namespace PackageBuilder.Api.Modules
             {
                 var dto = this.Bind<DataProviderDto>();
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
-                bus.Publish(new UpdateDataProvider(parameters.id,
+                var command = new UpdateDataProvider(parameters.id,
                     (DataProviderName) Enum.Parse(typeof (DataProviderName), dto.Name, true), dto.Description,
                     dto.CostOfSale, typeof (DataProviderDto), dto.FieldLevelCostPriceOverride,
-                    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dFields));
+                    stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dFields);
+                publisher.Publish(command);
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " created"});
             };

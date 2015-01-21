@@ -175,7 +175,7 @@
 
         };
 
-        $scope.checkChildren = function (childIndusName) {
+        $scope.checkChildren = function(childIndusName) {
 
             var childArray = [];
             var items = null;
@@ -183,7 +183,7 @@
             try {
 
                 items = $scope.dataProvider.response;
-            } catch (e) {
+            } catch(e) {
 
                 //console.log(e.message);
             }
@@ -197,7 +197,6 @@
                     for (var x = 0; x < (listItem.dataFields).length; x++) {
 
 
-
                         if ((listItem.dataFields[x].dataFields).length > 0) {
 
                             var subFields = listItem.dataFields[x].dataFields;
@@ -207,7 +206,7 @@
                                 var industries = subFields[j].industries;
 
                                 //Child Industries
-                                for (var k = 0; k < (industries).length ; k++) {
+                                for (var k = 0; k < (industries).length; k++) {
 
                                     if ((industries[k].name == childIndusName) && (industries[k].isSelected == true)) {
 
@@ -239,21 +238,21 @@
             }
 
             return childArray;
-        }
+        };
 
         $scope.editProvider = function (providerData) {
-
             return datacontext.editDataProvider($routeParams.id, providerData).then(function (response) {
-
                 //console.log(response);
-                (response.status === 200) ? logSuccess('Data Provider edited!') : logError('Error 404. Please check your connection settings');
-
-
+                if (response.status === 200) {
+                    logSuccess('Data Provider edited!');
+                    $location.path('/data-providers');
+                } else {
+                    logError('Error 404. Please check your connection settings');
+                }
             });
         };
 
         $scope.cancel = function () {
-
             $location.path('/data-providers');
         };
 

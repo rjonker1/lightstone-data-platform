@@ -10,22 +10,22 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
 {
     public class ImportDataProviderHandler : AbstractMessageHandler<ImportDataProvider>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IPublishStorableCommands _publisher;
 
-        public ImportDataProviderHandler(IHandleMessages handler)
+        public ImportDataProviderHandler(IPublishStorableCommands publisher)
         {
-            _handler = handler;
+            _publisher = publisher;
         }
 
         public override void Handle(ImportDataProvider command)
         {
             this.Info(() => "Attempting to import data providers");
 
-            _handler.Handle(new CreateDataProvider(DefaultIvidResponse(), Guid.NewGuid(), DataProviderName.Ivid, DataProviderName.Ivid.ToString(), 0d, typeof(IProvideDataFromIvid), "Owner", DateTime.UtcNow));
-            _handler.Handle(new CreateDataProvider(new IvidTitleHolderResponse(), Guid.NewGuid(), DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d, typeof(IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
-            _handler.Handle(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(), DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d, typeof(IProvideDataFromLightstone), "Owner", DateTime.UtcNow));
-            _handler.Handle(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt, DataProviderName.Rgt.ToString(), 0d, typeof(IProvideDataFromRgt), "Owner", DateTime.UtcNow));
-            _handler.Handle(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin, DataProviderName.RgtVin.ToString(), 0d, typeof(IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(DefaultIvidResponse(), Guid.NewGuid(), DataProviderName.Ivid, DataProviderName.Ivid.ToString(), 0d, typeof(IProvideDataFromIvid), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new IvidTitleHolderResponse(), Guid.NewGuid(), DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d, typeof(IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(), DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d, typeof(IProvideDataFromLightstone), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt, DataProviderName.Rgt.ToString(), 0d, typeof(IProvideDataFromRgt), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin, DataProviderName.RgtVin.ToString(), 0d, typeof(IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }

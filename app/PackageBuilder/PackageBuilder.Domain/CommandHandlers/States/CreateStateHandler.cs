@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Helpers.Extensions;
+﻿using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
@@ -19,8 +20,9 @@ namespace PackageBuilder.Domain.CommandHandlers.States
         {
             if (_repository.Exists(command.Id, command.Name))
             {
-                this.Warn(() => "State {0} already exists".FormatWith(command.Id, command.Name));
-                return;                
+                var exception = new LightstoneAutoException("State {0} already exists".FormatWith(command.Id, command.Name));
+                this.Warn(() => exception);
+                throw exception;                
             }
 
             var entity = new State(command.Id, command.Name, command.Alias);

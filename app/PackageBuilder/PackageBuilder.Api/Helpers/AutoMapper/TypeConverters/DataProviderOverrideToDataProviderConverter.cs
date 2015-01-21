@@ -6,7 +6,7 @@ using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class DataProviderOverrideToDataProviderConverter : TypeConverter<DataProviderOverride, IDataProvider>
+    public class DataProviderOverrideToDataProviderConverter : TypeConverter<IDataProviderOverride, IDataProvider>
     {
         private readonly INEventStoreRepository<DataProvider> _repository;
 
@@ -15,7 +15,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             _repository = repository;
         }
 
-        protected override IDataProvider ConvertCore(DataProviderOverride source)
+        protected override IDataProvider ConvertCore(IDataProviderOverride source)
         {
             var dataProvider = _repository.GetById(source.Id);
 

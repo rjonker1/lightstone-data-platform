@@ -18,9 +18,9 @@ namespace PackageBuilder.Domain.CommandHandlers.CommandStore
 
         public override void Handle(StoreCommand command)
         {
-            var json = JsonConvert.SerializeObject(command.Command);
+            var json = JsonConvert.SerializeObject(command.Command, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            _repository.Save(new Command(command.Id, command.Type, command.TypeName, Encoding.UTF8.GetBytes(json)));
+            _repository.Save(new Command(command.Id, command.Command.Id, command.Type, command.TypeName, Encoding.UTF8.GetBytes(json)));
         }
     }
 }

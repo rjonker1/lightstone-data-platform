@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Json;
+using Newtonsoft.Json;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 
 namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
@@ -7,10 +10,14 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
     /// <summary>
     /// Overrides data provider values on package level
     /// </summary>
-    public class DataProviderOverride
+    [DataContract]
+    public class DataProviderOverride : IDataProviderOverride
     {
-        public Guid Id;
-        public double CostOfSale;
-        public IEnumerable<DataFieldOverride> DataFieldOverrides;
+        [DataMember]
+        public Guid Id { get; internal set; }
+        [DataMember]
+        public double CostOfSale { get; internal set; }
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
+        public IEnumerable<IDataFieldOverride> DataFieldOverrides { get; internal set; } 
     }
 }

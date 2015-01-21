@@ -1,5 +1,10 @@
 ﻿
+using System;
+
 namespace PackageBuilder.Core.Commands
 {
-    public interface IDomainCommand { }
+    public interface IDomainCommand
+    {
+        Guid Id { get; }
+    }
 }

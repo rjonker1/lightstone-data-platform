@@ -3,6 +3,7 @@ using Nancy.Testing;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Api.Modules;
 using PackageBuilder.Core.Repositories;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
@@ -26,7 +27,7 @@ namespace PackageBuilder.Api.Tests.Modules.States
 
             _browser = new Browser(with =>
             {
-                with.Module(new StateModule(Container.Resolve<IBus>(), Container.Resolve<IRepository<State>>()));
+                with.Module(new StateModule(Container.Resolve<IPublishStorableCommands>(), Container.Resolve<IRepository<State>>()));
             });
 
             _response = _browser.Get("/State", with =>
@@ -36,7 +37,7 @@ namespace PackageBuilder.Api.Tests.Modules.States
             });
         }
 
-        [Fact(Skip = "Not necessary could be double work, decided to rely on ui tests as acceptance tests")]
+        [Fact(Skip = "Not necessary could be double work effort, decided to rely on ui tests as acceptance tests")]
         [Observation]
         public void should_return_all_states_as_json()
         {

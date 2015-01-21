@@ -1,5 +1,6 @@
 using System;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts.Requests;
 using Newtonsoft.Json;
@@ -22,16 +23,20 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
 
-        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate)
+        public CreateDataProvider(IPointToLaceProvider dataProvider, Guid id, DataProviderName name, string description, double costOfSale, Type responseType, string owner, DateTime createdDate) : base(id)
         {
             DataProvider = dataProvider;
-			Id = id;
 			Name = name;
             Description = description;
             CostOfSale = costOfSale;
             ResponseType = responseType;
             Owner = owner;
             CreatedDate = createdDate;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }

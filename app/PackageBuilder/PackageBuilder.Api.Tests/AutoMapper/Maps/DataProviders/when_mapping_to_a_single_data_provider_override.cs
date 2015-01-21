@@ -2,7 +2,6 @@
 using AutoMapper;
 using Castle.Windsor;
 using PackageBuilder.Api.Installers;
-using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.TestHelper;
@@ -13,7 +12,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
 {
     public class when_mapping_to_a_single_data_provider_override : Specification
     {
-        private DataProviderOverride _dto;
+        private IDataProviderOverride _dto;
 
         public override void Observe()
         {

@@ -1,8 +1,8 @@
-﻿using MemBus;
-using Nancy.Testing;
+﻿using Nancy.Testing;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Api.Modules;
 using PackageBuilder.Core.Repositories;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit;
@@ -23,9 +23,8 @@ namespace PackageBuilder.Api.Tests.Modules.States
 
             _browser = new Browser(with =>
             {
-                with.Module(new StateModule(Container.Resolve<IBus>(), Container.Resolve<IRepository<State>>()));
+                with.Module(new StateModule(Container.Resolve<IPublishStorableCommands>(), Container.Resolve<IRepository<State>>()));
             });
-
 
             Transaction(Session =>
             {
@@ -37,11 +36,9 @@ namespace PackageBuilder.Api.Tests.Modules.States
                     //with.Header("Authorization", "ApiKey 4E7106BA-16B6-44F2-AF4C-D1C411440F8E");
                 });
             });
-            
-            
         }
 
-        [Fact(Skip = "Not necessary could be double work, decided to rely on ui tests as acceptance tests")]
+        [Fact(Skip = "Not necessary could be double work effort, decided to rely on ui tests as acceptance tests")]
         [Observation]
         public void should_return_success_response()
         {

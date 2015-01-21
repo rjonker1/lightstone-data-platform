@@ -32,8 +32,8 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             repository.Save(entity, id);
 
             var dataProviderOverride = DataProviderOverrideMother.Ivid;
-            dataProviderOverride.Id = dataProvider.Id;
-            _dataProvider = Mapper.Map<DataProviderOverride, IDataProvider>(dataProviderOverride);
+            //dataProviderOverride.Id = dataProvider.Id;
+            _dataProvider = Mapper.Map<IDataProviderOverride, IDataProvider>(dataProviderOverride);
         }
 
         [Observation]

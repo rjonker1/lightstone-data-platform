@@ -8,11 +8,11 @@ namespace PackageBuilder.Domain.CommandHandlers.States
 {
     public class ImportStateHandler : AbstractMessageHandler<ImportState>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IPublishStorableCommands _publisher;
 
-        public ImportStateHandler(IHandleMessages handler)
+        public ImportStateHandler(IPublishStorableCommands publisher)
         {
-            _handler = handler;
+            _publisher = publisher;
         }
 
         public override void Handle(ImportState command)
@@ -20,7 +20,7 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             this.Info(() => "Attempting to import states");
 
             foreach (var state in (StateName[])Enum.GetValues(typeof(StateName)))
-                _handler.Handle(new CreateState(Guid.NewGuid(), state));
+                _publisher.Publish(new CreateState(Guid.NewGuid(), state));
 
             this.Info(() => "Successfully imported states");
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
@@ -24,8 +25,9 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var existing = _readRepo.Exists(command.Id, command.Name);
             if (existing)
             {
-                this.Warn(() => "A data provider with the name {0} already exists".FormatWith(command.Name));
-                return; //todo: throw exception and catch in module to return correct json response msg
+                var exception = new LightstoneAutoException("A data provider with the name {0} already exists".FormatWith(command.Name));
+                this.Warn(() => exception);
+                throw exception;
             }
 
             var entity = _writeRepo.GetById(command.Id);

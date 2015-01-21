@@ -9,7 +9,9 @@
         <td>
             <input class="form-control" ng-model="dField.definition" type="text" readonly/>
         </td>
-
+        <td>
+            <input class="form-control" ng-model="dField.order" type="text" readonly />
+        </td>
         <td>
 
             <div multi-select
@@ -37,9 +39,11 @@
             <input class="form-control" ng-model="subDF.label" type="text" readonly/>
         </td>
         <td>
-            <input class="form-control" ng-model="subDF.definition" type="text" readonly/>
+            <input class="form-control" ng-model="subDF.definition" type="text" readonly />
         </td>
-
+        <td>
+            <input class="form-control" ng-model="subDF.order" type="text" readonly />
+        </td>
         <td>
 
             <div multi-select
@@ -65,9 +69,11 @@
             <input class="form-control" ng-model="subChildDF.label" type="text" readonly/>
         </td>
         <td>
-            <input class="form-control" ng-model="subChildDF.definition" type="text" readonly/>
+            <input class="form-control" ng-model="subChildDF.definition" readonly />
         </td>
-
+        <td>
+            <input class="form-control" ng-model="subChildDF.order" readonly />
+        </td>
         <td>
 
             <div multi-select
@@ -213,6 +219,7 @@
                                                     <th>Type</th>
                                                     <th>Label</th>
                                                     <th>Definition</th>
+                                                    <th>Order</th>
                                                     <th>Industry</th>
                                                     <th ng-show="switch == true">Price</th>
                                                 </tr>

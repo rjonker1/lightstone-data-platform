@@ -2,8 +2,13 @@
 
 namespace PackageBuilder.Core.Commands
 {
-    public class DomainCommand : IDomainCommand
+    public abstract class DomainCommand : IDomainCommand
     {
-        public Guid Id;
+        public Guid Id { get; private set; }
+
+        protected DomainCommand(Guid id)
+        {
+            Id = id;
+        }
     }
 }

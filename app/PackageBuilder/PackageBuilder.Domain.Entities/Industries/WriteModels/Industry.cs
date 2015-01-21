@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Core.NHibernate.Attributes;
 
@@ -19,6 +20,11 @@ namespace PackageBuilder.Domain.Entities.Industries.WriteModels
         {
             Name = name;
             IsSelected = selected;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }

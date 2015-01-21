@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Helpers.Json;
+using Newtonsoft.Json;
 using PackageBuilder.Core.Attributes;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
 
@@ -10,7 +12,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
     public class DataField : IDataField
     {
         [DataMember]
-        public Guid DataProviderId { get; internal set; }
+        public Guid DataProviderId { get; internal set; } //todo check if in use else remove
         public string Namespace { get; set; }
         [DataMember]
         public string Name { get; internal set; }
@@ -25,8 +27,10 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         [DataMember]
         public bool? IsSelected { get; internal set; }
         [DataMember]
-        public Type Type { get; internal set; }
+        public int Order { get; internal set; }
         [DataMember]
+        public Type Type { get; internal set; }
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public IEnumerable<IDataField> DataFields { get; internal set; }
 
         //todo: make private
@@ -59,7 +63,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             //Type = type;
         }
 
-        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double costOfSale, bool isSelected, IEnumerable<IDataField> dataFields)//, Type type)
+        public DataField(string name, string label, string definition, IEnumerable<Industry> industries, double costOfSale, bool isSelected, int order, IEnumerable<IDataField> dataFields)//, Type type)
         {
             Name = name;
             Label = label;
@@ -67,6 +71,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             Industries = industries;
             CostOfSale = costOfSale;
             IsSelected = isSelected;
+            Order = order;
             DataFields = dataFields;
             //Type = type;
         }
@@ -76,6 +81,5 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
             CostOfSale = costPrice;
             IsSelected = selected;
         }
-
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
