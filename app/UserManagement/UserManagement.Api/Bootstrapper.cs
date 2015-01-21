@@ -35,22 +35,22 @@ namespace UserManagement.Api
             //container.Install(FromAssembly.InThisApplication());
             container.Install(
                 new NHibernateInstaller(),
+                new RepositoryInstaller(),
                 new CommandInstaller(),
                 new BusInstaller()
                 );
 
             //Drop create
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
-
-            //container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
-            //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
         }
 
+        //TODO: Update to include check in UserType Repository for existing records - to prevent duplications
         private void ImportStartupData(IHandleMessages handler)
         {
-            handler.Handle(new ImportUserType());
+            //handler.Handle(new ImportUserType());
         }
 
+        //Updates schema if there are any structural changes
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
             //pipelines.EnableCors(); // cross origin resource sharing

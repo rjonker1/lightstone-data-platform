@@ -4,7 +4,7 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class User : Entity
+    public class User : Entity, INamedEntity
     {
 
         public virtual DateTime FirstCreateDate { get; set; }
@@ -43,6 +43,7 @@ namespace UserManagement.Domain.Entities
             IsActive = isActive;
         }
 
+        public virtual string Name { get; set; }
     }
 }
 
