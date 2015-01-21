@@ -37,7 +37,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
         {
             this.Info(() => "Attempting to map {0} to IEnumerable<IDataField>".FormatWith(source));
 
-            var properties = source.GetType().GetPublicProperties();
+            var properties = source.GetType().GetPublicProperties().Where(x => x.Name != "Type" && x.Name != "TypeName"); //Type & TypeName are used for deserialization via DataPlatform.Shared.Helpers.Json.JsonTypeResolverConverter
             var complexProperties = properties.Where(property =>
                         (property.PropertyType.IsClass || property.PropertyType.IsInterface) &&
                         !TypeExtensions.IsSimple(property.PropertyType) && 
