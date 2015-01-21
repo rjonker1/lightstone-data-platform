@@ -15,11 +15,11 @@ namespace UserManagement.Domain.Entities
         public virtual Guid UserTypeId { get; set; }
         public virtual bool? IsActive { get; set; }
 
-        public virtual ICollection<ClientUser> ClientUser { get; set; }
-        public virtual UserType UserType { get; set; }
-        public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
-        public virtual ICollection<UserRole> UserRole { get; set; }
+        //public virtual ICollection<ClientUser> ClientUser { get; set; }
+        //public virtual UserType UserType { get; set; }
+        //public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
+        //public virtual ICollection<UserProfile> UserProfile { get; set; }
+        //public virtual ICollection<UserRole> UserRole { get; set; }
 
         protected User() { }
 
@@ -33,6 +33,7 @@ namespace UserManagement.Domain.Entities
 
         public User(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, Guid userTypeId, bool? isActive)
         {
+            Id = Guid.NewGuid();
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
             LastUpdateDate = lastUpdateDate;

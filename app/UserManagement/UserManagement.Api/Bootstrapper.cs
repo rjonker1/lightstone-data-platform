@@ -30,10 +30,13 @@ namespace UserManagement.Api
             //container.Install(FromAssembly.InThisApplication());
             container.Install(
                 new NHibernateInstaller(),
-                new CommandInstaller()
+                new CommandInstaller(),
+                new BusInstaller()
                 );
 
-            new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
+            //Drop create
+            //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
+
             //container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
         }

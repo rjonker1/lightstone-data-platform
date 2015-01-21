@@ -6,6 +6,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.NHibernate.Conventions;
@@ -30,7 +31,9 @@ namespace UserManagement.Api.Installers
                             ForeignKey.EndsWith("Id"),
                             new DomainSignatureConvention()
                         )
-                        )).BuildConfiguration()));
+                        ))
+                        .ExposeConfiguration(ExportSchemaConfig)
+                        .BuildConfiguration()));
 
             container.Register(Component.For<ISessionFactory>()
                      .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
@@ -40,6 +43,12 @@ namespace UserManagement.Api.Installers
                          kernal.Resolve<ISessionFactory>().OpenSession()
                          )
                      .LifestylePerWebRequest());
+        }
+
+        protected virtual void ExportSchemaConfig(Configuration config)
+        {
+            var update = new SchemaUpdate(config);
+            update.Execute(false, true);
         }
 
     }
