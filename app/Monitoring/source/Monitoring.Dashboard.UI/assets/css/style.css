@@ -1,0 +1,19 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+	font-family : "Courier New", Courier, monospace;
+	font-size : 12pt;
+	margin : 0px;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 40px;
+    font-weight: normal;
+    text-transform: uppercase; 
+    margin: 20px 0 10px 4px;
+}

@@ -1,11 +1,4 @@
-﻿BODY
-{
-	font-family : "Courier New", Courier, monospace;
-	font-size : 12pt;
-	margin : 0px;
-}
-
-.rawJson
+﻿.rawJson
 {
 	position : absolute;
 	width : 99%;
