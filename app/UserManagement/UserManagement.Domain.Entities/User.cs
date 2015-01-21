@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
+//using IUserType = UserManagement.Domain.Entities.IUserType;
 
 namespace UserManagement.Domain.Entities
 {
@@ -16,21 +18,15 @@ namespace UserManagement.Domain.Entities
         public virtual Guid UserTypeId { get; set; }
         public virtual bool? IsActive { get; set; }
 
-        //public virtual ICollection<ClientUser> ClientUser { get; set; }
-        //public virtual UserType UserType { get; set; }
-        //public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
-        //public virtual ICollection<UserProfile> UserProfile { get; set; }
-        //public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual ICollection<ClientUser> ClientUser { get; set; }
+
+        //TODO: Implement UserType mapping
+        //public virtual IEnumerable<UserType> UserType { get; set; }
+        public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
+        public virtual ICollection<UserProfile> UserProfile { get; set; }
+        public virtual ICollection<UserRole> UserRole { get; set; }
 
         protected User() { }
-
-        //public User()
-        //{
-        //    ClientUser = new HashSet<ClientUser>();
-        //    UserLinkedToCustomer = new HashSet<UserLinkedToCustomer>();
-        //    UserProfile = new HashSet<UserProfile>();
-        //    UserRole = new HashSet<UserRole>();
-        //}
 
         public User(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, Guid userTypeId, bool? isActive)
         {
@@ -43,11 +39,11 @@ namespace UserManagement.Domain.Entities
             UserTypeId = userTypeId;
             IsActive = isActive;
 
-            //ClientUser = new Collection<ClientUser>();
-            //UserType = new UserType(userTypeId, "User");
-            //UserLinkedToCustomer = new Collection<UserLinkedToCustomer>();
-            //UserProfile = new Collection<UserProfile>();
-            //UserRole = new Collection<UserRole>();
+            ClientUser = new Collection<ClientUser>();
+            //UserType = new UserType(userTypeId, "User"); 
+            UserLinkedToCustomer = new Collection<UserLinkedToCustomer>();
+            UserProfile = new Collection<UserProfile>();
+            UserRole = new Collection<UserRole>();
         }
     }
 }

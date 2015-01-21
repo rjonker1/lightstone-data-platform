@@ -4,7 +4,8 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class UserType : Entity, INamedEntity
+
+    public class UserType : Entity, IUserType
     {
         //Required for NamedEntity Comparison
         public virtual string Name { get; set; }
