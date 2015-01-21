@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class User : Entity, INamedEntity
+    public class User : Entity
     {
 
         public virtual DateTime FirstCreateDate { get; set; }
@@ -41,9 +42,13 @@ namespace UserManagement.Domain.Entities
             UserName = userName;
             UserTypeId = userTypeId;
             IsActive = isActive;
-        }
 
-        public virtual string Name { get; set; }
+            //ClientUser = new Collection<ClientUser>();
+            //UserType = new UserType(userTypeId, "User");
+            //UserLinkedToCustomer = new Collection<UserLinkedToCustomer>();
+            //UserProfile = new Collection<UserProfile>();
+            //UserRole = new Collection<UserRole>();
+        }
     }
 }
 

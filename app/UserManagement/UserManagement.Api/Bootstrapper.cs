@@ -47,7 +47,7 @@ namespace UserManagement.Api
         //TODO: Update to include check in UserType Repository for existing records - to prevent duplications
         private void ImportStartupData(IHandleMessages handler)
         {
-            //handler.Handle(new ImportUserType());
+            handler.Handle(new ImportUserType());
         }
 
         //Updates schema if there are any structural changes

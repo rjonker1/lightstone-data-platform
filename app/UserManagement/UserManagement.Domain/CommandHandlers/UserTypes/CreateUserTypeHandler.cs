@@ -1,6 +1,7 @@
 ﻿using System;
 using NHibernate;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Users;
 using UserManagement.Domain.Entities.Commands.UserTypes;
@@ -9,32 +10,20 @@ namespace UserManagement.Domain.CommandHandlers.UserTypes
 {
     public class CreateUserTypeHandler : AbstractMessageHandler<CreateUserType>
     {
-        private static ISession Session;
 
-        public CreateUserTypeHandler(ISession _session)
+        private readonly INamedEntityRepository<UserType> _repository;
+
+        public CreateUserTypeHandler(INamedEntityRepository<UserType> repository)
         {
-            Session = _session;
+            _repository = repository;
         }
 
         public override void Handle(CreateUserType command)
         {
 
+            if (_repository.Exists(command.Id, command.Name)) return;
 
-            using (ITransaction transaction = Session.BeginTransaction())
-            {
-                try
-                {
-                    var entity = new UserType(command.Value);
-
-                    Session.Save(entity);
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    throw;
-                }
-            }
+            _repository.Save(new UserType(command.Id, command.Name));
         }
 
     }

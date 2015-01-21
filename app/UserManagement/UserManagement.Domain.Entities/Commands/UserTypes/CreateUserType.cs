@@ -1,14 +1,16 @@
-﻿using UserManagement.Domain.Core.Commands;
+﻿using System;
+using UserManagement.Domain.Core.Commands;
 
 namespace UserManagement.Domain.Entities.Commands.UserTypes
 {
-    public class CreateUserType : IDomainCommand
+    public class CreateUserType : DomainCommand
     {
-        public string Value;
+        public string Name;
 
-        public CreateUserType(string value)
+        public CreateUserType(string name)
         {
-            Value = value;
+            Id = Guid.NewGuid();
+            Name = name;
         }
     }
 }
