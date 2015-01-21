@@ -74,6 +74,7 @@
     <Compile Include="CustomerContract.cs" />
     <Compile Include="CustomerUser.cs" />
     <Compile Include="DataFields\WriteModels\IDataField.cs" />
+    <Compile Include="DataFields\WriteModels\IDataFieldOverride.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
     <Compile Include="DataProviders\Commands\ImportDataProvider.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
     <Compile Include="DataProviders\WriteModels\IDataProvider.cs" />
+    <Compile Include="DataProviders\WriteModels\IDataProviderOverride.cs" />
     <Compile Include="DataProviders\WriteModels\SourceConfiguration.cs" />
     <Compile Include="Enums\StateName.cs" />
     <Compile Include="Group.cs" />

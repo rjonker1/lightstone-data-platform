@@ -6,7 +6,7 @@ namespace PackageBuilder.TestObjects.Mothers
 {
     public class DataProviderOverrideMother
     {
-        public static DataProviderOverride Ivid
+        public static IDataProviderOverride Ivid
         {
             get
             {

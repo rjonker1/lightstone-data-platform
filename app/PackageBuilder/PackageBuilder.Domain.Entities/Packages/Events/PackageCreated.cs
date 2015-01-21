@@ -20,9 +20,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Events
         public readonly string Owner;        
         public readonly DateTime CreatedDate;
         public readonly DateTime? EditedDate;
-        public readonly IEnumerable<DataProviderOverride> DataProviderValueOverrides;
+        public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviderValueOverrides)
+        public PackageCreated(Guid id, string name, string description, double costPrice, double salePrice, IEnumerable<Industry> industries, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides)
         {
             Id = id;
             Name = name;

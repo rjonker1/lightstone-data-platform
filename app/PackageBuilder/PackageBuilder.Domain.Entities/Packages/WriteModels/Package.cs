@@ -71,13 +71,13 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
             DataProviders = dataProviders;
         }
 
-        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviders)
+        public Package(Guid id, string name, string description, IEnumerable<Industry> industries, double costPrice, double salePrice, State state, decimal displayVersion, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
             : this(id)
         {
             RaiseEvent(new PackageCreated(id, name, description, costPrice, salePrice, industries, state, displayVersion, owner, createdDate, editedDate, dataProviders));
         }
 
-        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviders)
+        public void CreatePackageRevision(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviders)
         {
             if (state.Name == StateName.Published) 
                 DisplayVersion = Math.Ceiling(DisplayVersion);
@@ -107,7 +107,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
 
             this.Info(() => "Attempting to map data provider overrides from PackageCreated event");
 
-            DataProviders = Mapper.Map<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
+            DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
 
             this.Info(() => "Successfully mapped data provider overrides from PackageCreated event");
         }
@@ -129,7 +129,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
 
             this.Info(() => "Attempting to map data provider overrides from PackageUpdated event");
 
-            DataProviders = Mapper.Map<IEnumerable<DataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
+            DataProviders = Mapper.Map<IEnumerable<IDataProviderOverride>, IEnumerable<IDataProvider>>(@event.DataProviderValueOverrides);
 
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
         }

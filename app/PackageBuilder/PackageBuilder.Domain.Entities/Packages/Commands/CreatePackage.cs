@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Helpers.Json;
+using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Industries.WriteModels;
@@ -20,9 +22,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Commands
         public readonly string Owner;
         public readonly DateTime CreatedDate;
         public readonly DateTime? EditedDate;
-        public readonly IEnumerable<DataProviderOverride> DataProviderValueOverrides;
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataProviderOverride>>))]
+        public readonly IEnumerable<IDataProviderOverride> DataProviderValueOverrides;
 
-        public CreatePackage(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<DataProviderOverride> dataProviderValueOverrides) : base(id)
+        public CreatePackage(Guid id, string name, string description, double costPrice, double salePrice, string notes, IEnumerable<Industry> industries, State state, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataProviderOverride> dataProviderValueOverrides) : base(id)
         {
             Name = name;
             Description = description;
