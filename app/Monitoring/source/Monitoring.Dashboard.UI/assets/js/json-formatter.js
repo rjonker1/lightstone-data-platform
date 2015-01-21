@@ -12,8 +12,8 @@
 
 // spaces are used for tabs to retain format when copying and pasting
 window.SINGLE_TAB = "  ";
-window.imgPlus = "../Content/Images/plus.gif";
-window.imgMinus = "../Content/Images/minus.gif";
+window.imgPlus = "../assets/images/plus.gif";
+window.imgMinus = "../assets/images/minus.gif";
 window.QuoteKeys = false;
 
 function $id(id) {
@@ -162,7 +162,7 @@ function getIndent(indent) {
 function MakeContentVisible(element, visible) {
     var img = element.previousSibling.firstChild;
     if (!!img.tagName && img.tagName.toLowerCase() == "img") {
-        element.style.display = visible ? 'inline' : 'none';
+        element.style.display = visible ? "inline" : "none";
         element.previousSibling.firstChild.src = visible ? window.imgMinus : window.imgPlus;
     }
 }
