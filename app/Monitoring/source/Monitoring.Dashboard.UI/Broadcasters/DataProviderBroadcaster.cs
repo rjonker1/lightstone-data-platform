@@ -3,7 +3,9 @@ using System.Net.Http;
 using System.Threading;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Hubs;
+using Newtonsoft.Json;
 
 namespace Monitoring.Dashboard.UI.Broadcasters
 {
@@ -15,7 +17,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext _clients;
         private Uri _root = null;
-        private readonly TimeSpan _interval = TimeSpan.FromMilliseconds(2000);
+        private readonly TimeSpan _interval = TimeSpan.FromMilliseconds(60000);
         private readonly Timer _timer;
 
         public DataProviderBroadcaster(IHubConnectionContext clients)
@@ -41,12 +43,12 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         private void BroadCastDataProviderMonitoring(object state)
         {
             var result = GetDataProviderMonitoringFromApi();
-            //if (result == null)
-            //    return;
-            _clients.All.dataProviderMonitoringInfo();
+            if (result == null)
+                return;
+            _clients.All.dataProviderMonitoringInfo(result);
         }
 
-        private string GetDataProviderMonitoringFromApi()
+        private object GetDataProviderMonitoringFromApi()
         {
             try
             {
@@ -55,8 +57,19 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                     BaseAddress = _root
                 };
 
-                var response = client.GetAsync("/dataProviders/updatedLog").Result;
-                return response.IsSuccessStatusCode ? response.Content.ReadAsStringAsync().Result : null;
+                var model = new MonitoringResponse[] {};
+
+                var task = client.GetAsync("dataProviders/updatedLog").ContinueWith(t =>
+                {
+                    var response = t.Result;
+                    var json = response.Content.ReadAsStringAsync();
+                    json.Wait();
+                    model = JsonConvert.DeserializeObject<MonitoringResponse[]>(json.Result);
+                });
+
+                task.Wait();
+
+                return model;
             }
             catch (Exception)
             {

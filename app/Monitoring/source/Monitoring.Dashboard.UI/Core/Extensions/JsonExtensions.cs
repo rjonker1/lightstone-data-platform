@@ -1,5 +1,4 @@
-﻿using Microsoft.SqlServer.Server;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Monitoring.Dashboard.UI.Core.Extensions
