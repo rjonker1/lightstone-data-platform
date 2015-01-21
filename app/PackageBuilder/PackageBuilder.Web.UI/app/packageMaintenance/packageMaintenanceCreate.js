@@ -37,7 +37,13 @@
         $scope.createPackage = function(packageData) {
             return datacontext.createPackage(packageData).then(function(response) {
                 console.log(response);
-                (response.status === 200) ? logSuccess('Package Created!') : logError('Error 404. Please check your connection settings');
+                if (response.status === 200) {
+                    logSuccess('Package Created!');
+                    $location.path('/packages');
+                } else
+                {
+                    logError('Error 404. Please check your connection settings');
+                }
 
             }, function(errorCallback) {
                 logError(errorCallback.data.errorMessage);

@@ -33,7 +33,12 @@
         $scope.editPackage = function(packageData) {
             return datacontext.editPackage($routeParams.id, packageData).then(function(response) {
                 console.log(response);
-                (response.status === 200) ? logSuccess('Package edited!') : logError('Error 404. Please check your connection settings');
+                if (response.status === 200) {
+                    logSuccess('Package edited!');
+                    $location.path('/packages');
+                } else {
+                    logError('Error 404. Please check your connection settings');
+                } 
             }, function (error) {
                 logError(error.data.errorMessage);
             });
