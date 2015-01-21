@@ -9,9 +9,9 @@ namespace PackageBuilder.TestObjects.Builders
     {
         private Guid _id;
         private double _costOfSale;
-        private IEnumerable<DataFieldOverride> _dataFieldOverrides;
+        private IEnumerable<IDataFieldOverride> _dataFieldOverrides;
 
-        public DataProviderOverride Build()
+        public IDataProviderOverride Build()
         {
             return new DataProviderOverride
             {
@@ -33,7 +33,7 @@ namespace PackageBuilder.TestObjects.Builders
             return this;
         }
 
-        public DataProviderOverrideBuilder With(params DataFieldOverride[] dataFieldValueOverrides)
+        public DataProviderOverrideBuilder With(params IDataFieldOverride[] dataFieldValueOverrides)
         {
             _dataFieldOverrides = dataFieldValueOverrides;
             return this;

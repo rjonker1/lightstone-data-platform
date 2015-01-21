@@ -29,12 +29,12 @@ namespace PackageBuilder.Domain.Entities
             }
         }
 
-        public static IEnumerable<DataFieldOverride> Traverse(this IEnumerable<DataFieldOverride> dataFields)
+        public static IEnumerable<IDataFieldOverride> Traverse(this IEnumerable<IDataFieldOverride> dataFields)
         {
-            return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFieldOverrides, x.Name)) : Enumerable.Empty<DataFieldOverride>();
+            return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFieldOverrides, x.Name)) : Enumerable.Empty<IDataFieldOverride>();
         }
 
-        public static IEnumerable<DataFieldOverride> Traverse(this DataFieldOverride root, Func<DataFieldOverride, IEnumerable<DataFieldOverride>> childrenSelector, string name) 
+        public static IEnumerable<IDataFieldOverride> Traverse(this IDataFieldOverride root, Func<IDataFieldOverride, IEnumerable<IDataFieldOverride>> childrenSelector, string name) 
         {
             root.Namespace = name;
             yield return root;

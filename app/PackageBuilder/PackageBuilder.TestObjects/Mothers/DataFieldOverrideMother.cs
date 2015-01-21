@@ -5,7 +5,7 @@ namespace PackageBuilder.TestObjects.Mothers
 {
     public class DataFieldOverrideMother
     {
-        public static DataFieldOverride Vin
+        public static IDataFieldOverride Vin
         {
             get
             {
@@ -16,7 +16,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride License
+        public static IDataFieldOverride License
         {
             get
             {
@@ -27,7 +27,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride Registration
+        public static IDataFieldOverride Registration
         {
             get
             {
@@ -38,7 +38,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride SpecificInformation
+        public static IDataFieldOverride SpecificInformation
         {
             get
             {
@@ -50,7 +50,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride Colour
+        public static IDataFieldOverride Colour
         {
             get
             {
@@ -61,7 +61,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride EngineNumber
+        public static IDataFieldOverride EngineNumber
         {
             get
             {
@@ -72,7 +72,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride LicenseNumber
+        public static IDataFieldOverride LicenseNumber
         {
             get
             {
@@ -83,7 +83,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride Odometer
+        public static IDataFieldOverride Odometer
         {
             get
             {
@@ -94,7 +94,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride RegistrationNumber
+        public static IDataFieldOverride RegistrationNumber
         {
             get
             {
@@ -105,7 +105,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataFieldOverride VinNumber
+        public static IDataFieldOverride VinNumber
         {
             get
             {
