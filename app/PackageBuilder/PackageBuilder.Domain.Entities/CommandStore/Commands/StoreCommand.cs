@@ -9,9 +9,8 @@ namespace PackageBuilder.Domain.Entities.CommandStore.Commands
         public readonly string TypeName;
         public readonly IDomainCommand Command;
 
-        public StoreCommand(Guid id, IDomainCommand command)
+        public StoreCommand(Guid id, IDomainCommand command) : base(id)
         {
-            Id = id;
             Type = command.GetType();
             TypeName = command.GetType().Name;
             Command = command;

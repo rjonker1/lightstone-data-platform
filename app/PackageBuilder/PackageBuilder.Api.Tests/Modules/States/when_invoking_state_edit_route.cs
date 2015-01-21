@@ -4,6 +4,7 @@ using NHibernate;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Api.Modules;
 using PackageBuilder.Core.Repositories;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
@@ -36,7 +37,7 @@ namespace PackageBuilder.Api.Tests.Modules.States
             var id = GetFromDb(state).Id;
             _browser = new Browser(with =>
             {
-                with.Module(new StateModule(Container.Resolve<IBus>(), Container.Resolve<IRepository<State>>()));
+                with.Module(new StateModule(Container.Resolve<IPublishStorableCommands>(), Container.Resolve<IRepository<State>>()));
             });
 
             Session.FlushMode = FlushMode.Never;
@@ -56,7 +57,7 @@ namespace PackageBuilder.Api.Tests.Modules.States
             // Session.Close();
         }
 
-        [Fact(Skip = "Not necessary could be double work, decided to rely on ui tests as acceptance tests")]
+        [Fact(Skip = "Not necessary could be double work effort, decided to rely on ui tests as acceptance tests")]
         [Observation]
         public void should_return_success_response()
         {

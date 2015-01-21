@@ -2,6 +2,7 @@
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
+using MemBus;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
@@ -51,7 +52,7 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
     public class when_replaying_a_command : when_persisting_entities_to_db
     {
         private ReplayCommandHandler _replayCommandHandler;
-        private IHandleMessages _handler;
+        private IBus _bus;
         private IRepository<Command> _repository;
 
         public override void Observe()
@@ -61,8 +62,8 @@ namespace PackageBuilder.Domain.Tests.CommandHandlers.CommandStore
             Container.Install(new WindsorInstaller(), new CommandInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
             _repository = new Repository<Command>(Session);
-            _handler = Container.Resolve<IHandleMessages>();
-            _replayCommandHandler = new ReplayCommandHandler(_repository, _handler);
+            _bus = Container.Resolve<IBus>();
+            _replayCommandHandler = new ReplayCommandHandler(_repository, _bus);
 
             //new when_storing_a_command().Observe();
 

@@ -1,18 +1,13 @@
-﻿using Castle.Windsor;
-using NHibernate.Tool.hbm2ddl;
-using PackageBuilder.Api.Installers;
+﻿using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
 namespace PackageBuilder.Api.Tests
 {
-    public class when_exporting_nhibernate_schema : Specification
+    public class when_exporting_nhibernate_schema : when_persisting_entities_to_db
     {
         public override void Observe()
         {
-            var windsorContainer = new WindsorContainer();
-            windsorContainer.Install(new NHibernateInstaller());
-
-            new SchemaExport(windsorContainer.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
+            base.Observe();
         }
 
         [Observation]

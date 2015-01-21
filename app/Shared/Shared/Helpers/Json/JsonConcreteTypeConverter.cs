@@ -12,7 +12,23 @@ namespace DataPlatform.Shared.Helpers.Json
         }
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            //explicitly specify the concrete type we want to create
+            //JObject jObject;
+            //JArray jArray;
+            //var json = "";
+            //if (reader.TokenType == JsonToken.StartArray)
+            //{
+            //    jArray = JArray.Load(reader);
+            //    json = jArray.ToString();
+            //}
+            //else
+            //{
+            //    jObject = JObject.Load(reader);
+            //    json = jObject.ToString();
+            //}
+                
+            //var type = typeof(TConcrete);
+            //var test = JsonConvert.DeserializeObject(json, type);
+
             return serializer.Deserialize<TConcrete>(reader);
         }
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

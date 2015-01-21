@@ -4,6 +4,7 @@ using Castle.Windsor;
 using MemBus;
 using MemBus.Configurators;
 using PackageBuilder.Core.MessageHandling;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Infrastructure.NEventStore;
 
 namespace PackageBuilder.Api.Installers
@@ -16,6 +17,7 @@ namespace PackageBuilder.Api.Installers
                                                                       .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
                                                                       .SetHandlerInterface(typeof(IHandleMessages<>)))
                                                                       .Construct()));
+            container.Register(Component.For<IPublishStorableCommands>().ImplementedBy<PublishStorableCommands>());
         }
     }
 }

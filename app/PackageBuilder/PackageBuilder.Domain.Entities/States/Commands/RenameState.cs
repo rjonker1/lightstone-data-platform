@@ -1,16 +1,15 @@
 ﻿using System;
+using PackageBuilder.Core.Commands;
 using PackageBuilder.Domain.Entities.Enums;
 
 namespace PackageBuilder.Domain.Entities.States.Commands
 {
-    public class RenameState
+    public class RenameState : DomainCommand
     {
-        public Guid Id;
         public readonly StateName Name;
         public readonly string Alias;
-        public RenameState(Guid id, StateName name, string alias)
+        public RenameState(Guid id, StateName name, string alias) : base(id)
         {
-            Id = id;
             Name = name;
             Alias = alias;
         }

@@ -1,14 +1,12 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using MemBus;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
-using PackageBuilder.Core.MessageHandling;
-using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.Industries.Commands;
-using PackageBuilder.Domain.Entities.States.Commands;
+using PackageBuilder.Domain.Entities.DataImports;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -24,18 +22,7 @@ namespace PackageBuilder.Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            var handler = container.Resolve<IHandleMessages>();
-            
-            ImportInitialData(handler);
-        }
-
-        private void ImportInitialData(IHandleMessages handler)
-        {
-            this.Info(() => "Attempting to import required data");
-            handler.Handle(new ImportIndustry());
-            handler.Handle(new ImportState());
-            handler.Handle(new ImportDataProvider());
-            this.Info(() => "Successfully imported required data");
+            container.Resolve<IBus>().Publish(new ImportStartupData());
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

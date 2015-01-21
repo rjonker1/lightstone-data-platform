@@ -5,6 +5,7 @@ using MemBus;
 using Nancy;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.Enums;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.WriteModels;
@@ -13,7 +14,7 @@ namespace PackageBuilder.Api.Modules
 {
     public class StateModule : NancyModule
     {
-        public StateModule(IBus bus, IRepository<State> repository)
+        public StateModule(IPublishStorableCommands publisher, IRepository<State> repository)
         {
             const string statesRoute = "/States";
 
@@ -26,7 +27,7 @@ namespace PackageBuilder.Api.Modules
                 if (model.id.Value == null && model.name.Value == null)
                     throw new LightstoneAutoException("Could not bind 'id' or 'Name' value");
 
-                bus.Publish(new RenameState(new Guid(model.id.Value), Enum.Parse(typeof(StateName), model.name.Value, true), model.alias.Value));
+                publisher.Publish(new RenameState(new Guid(model.id.Value), Enum.Parse(typeof(StateName), model.name.Value, true), model.alias.Value));
 
                 return Response.AsJson(new { response = "Success!" });
             };
