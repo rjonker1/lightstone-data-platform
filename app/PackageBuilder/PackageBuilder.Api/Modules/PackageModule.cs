@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Dtos;
+using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
@@ -18,7 +17,7 @@ namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
-        public PackageModule(IBus bus, IRepository<Domain.Entities.Packages.ReadModels.Package> readRepo,
+        public PackageModule(IPublishStorableCommands publisher, IRepository<Domain.Entities.Packages.ReadModels.Package> readRepo,
                                         INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo)
         {
             Get["/Packages"] = parameters =>
@@ -31,8 +30,8 @@ namespace PackageBuilder.Api.Modules
             {
                 var dto = this.Bind<PackageDto>();
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
-                //var state = Mapper.Map<PackageDto, State>(dto);
-                bus.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.UtcNow, null, dProviders));
+                
+                publisher.Publish(new CreatePackage(Guid.NewGuid(), dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Owner, DateTime.UtcNow, null, dProviders));
 
                 return Response.AsJson(new { msg = "Success" });
             };
@@ -41,9 +40,8 @@ namespace PackageBuilder.Api.Modules
             {
                 var dto = this.Bind<PackageDto>();
                 var dProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(dto.DataProviders);
-                //var state = Mapper.Map<PackageDto, State>(dto);
-
-                bus.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dProviders));
+                
+                publisher.Publish(new UpdatePackage(parameters.id, dto.Name, dto.Description, dto.CostOfSale, dto.RecommendedSalePrice, dto.Notes, dto.Industries, dto.State, dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dProviders));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " edited" });
             };
@@ -54,7 +52,7 @@ namespace PackageBuilder.Api.Modules
                 var dataProvidersToClone = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>(packageToClone.DataProviders);
                 var stateResolve = stateRepo.Where(x => x.Alias == "Draft").Select(y => new State(y.Id, y.Name, y.Alias));
 
-                bus.Publish(new CreatePackage(Guid.NewGuid(),
+                publisher.Publish(new CreatePackage(Guid.NewGuid(),
                         parameters.cloneName,
                         packageToClone.Description,
                         packageToClone.CostOfSale,
@@ -70,7 +68,7 @@ namespace PackageBuilder.Api.Modules
 
             Delete["/Packages/Delete/{id}"] = parameters =>
             {
-                bus.Publish(new DeletePackage(new Guid(parameters.id)));
+                publisher.Publish(new DeletePackage(new Guid(parameters.id)));
 
                 return Response.AsJson(new { msg = "Success, " + parameters.id + " deleted" });
             };

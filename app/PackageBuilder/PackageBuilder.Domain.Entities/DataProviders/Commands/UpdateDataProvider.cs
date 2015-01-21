@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Helpers.Json;
+using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using IDataField = PackageBuilder.Domain.Entities.DataFields.WriteModels.IDataField;
 
@@ -20,11 +24,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
         public readonly DateTime CreatedDate;
         public readonly DateTime? EditedDate;
         public readonly Type DataProviderType;
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public readonly IEnumerable<IDataField> DataFields;
 
-        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields)       
+        public UpdateDataProvider(Guid id, DataProviderName name, string description, double costOfSale, Type responseType, bool fieldLevelCostPriceOverride, State state, int version, string owner, DateTime createdDate, DateTime? editedDate, IEnumerable<IDataField> dataFields) : base(id)
         {
-            Id = id;
             Name = name;
             Description = description;
             CostOfSale = costOfSale;
@@ -37,6 +41,11 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Commands
             CreatedDate = createdDate;
             EditedDate = editedDate;
             DataFields = dataFields;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }

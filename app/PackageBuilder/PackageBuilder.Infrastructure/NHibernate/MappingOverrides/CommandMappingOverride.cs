@@ -9,7 +9,8 @@ namespace PackageBuilder.Infrastructure.NHibernate.MappingOverrides
         public void Override(AutoMapping<Command> mapping)
         {
             mapping.SchemaAction.All();
-            mapping.Schema("PackageBuilderCommandStore.dbo");
+            mapping.Schema("PackageBuilderCommandStore.dbo"); //todo refactor
+            mapping.Map(x => x.CommandData).Length(int.MaxValue);
         }
     }
 }
