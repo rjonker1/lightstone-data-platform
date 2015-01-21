@@ -89,13 +89,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\minus.gif" />
-    <Content Include="Content\Images\minus.png" />
-    <Content Include="Content\Images\plus.gif" />
-    <Content Include="Content\Images\plus.png" />
-    <Content Include="Content\Styles\json_formatter.css" />
-    <Content Include="Content\Styles\monitoring_data_providers.css" />
-    <Content Include="scripts\json-formatter.js" />
+    <Content Include="assets\images\minus.gif" />
+    <Content Include="assets\images\minus.png" />
+    <Content Include="assets\images\plus.gif" />
+    <Content Include="assets\images\plus.png" />
+    <Content Include="assets\css\json_formatter.css" />
+    <Content Include="assets\css\monitoring_data_providers.css" />
+    <Content Include="assets\js\json-formatter.js" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
@@ -145,9 +145,7 @@
       <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\jquery\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
