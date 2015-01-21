@@ -19,6 +19,7 @@ namespace PackageBuilder.Domain.Dtos.WriteModels
         // todo: change to CostOfSale
         public double Price { get; set; }
         public bool? IsSelected { get; set; }
+        public int Order { get; set; }
         public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
     }
 }

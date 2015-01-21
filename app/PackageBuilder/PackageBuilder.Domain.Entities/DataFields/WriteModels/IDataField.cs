@@ -13,6 +13,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         IEnumerable<Industry> Industries { get; }
         double CostOfSale { get; }
         bool? IsSelected { get; }
+        int Order { get; }
         Type Type { get; }
         IEnumerable<IDataField> DataFields { get; }
         void OverrideValuesFromPackage(double costPrice, bool? selected);
