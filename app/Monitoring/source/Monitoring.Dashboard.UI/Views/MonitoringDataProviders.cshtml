@@ -58,4 +58,16 @@
 @section Scripts
 {
     <script type="text/javascript" charset="utf-8" src="~/assets/js/json-formatter.js"></script>
+    <script src="../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../Scripts/jquery.signalR-2.0.0.min.js"></script>
+    <script src="http://dev.lightstone.monitoring/signalr/hubs"></script>
+    <script type="text/javascript">
+        var hub = $.connection.dataProviderHub;
+
+        hub.client.dataProviderMonitoringInfo = function() {
+            console.log("receiving monitoring information");
+        }
+
+        $.connection.hub.start();
+    </script>
 }

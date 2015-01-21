@@ -21,6 +21,11 @@ namespace Monitoring.Dashboard.UI.Modules
                 var model = service.GetMonitoringInformationBySource((int) MonitoringSource.Lace);
                 return View["MonitoringDataProviders", model];
             };
+
+            Get["/dataProviders/updatedLog"] = _ =>
+            {
+                return new {result = "result"};
+            };
         }
     }
 }
