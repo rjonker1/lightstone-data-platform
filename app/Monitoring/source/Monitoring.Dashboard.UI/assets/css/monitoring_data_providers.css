@@ -1,21 +1,8 @@
-﻿* {
-    margin: 0;
-    padding: 0;
+﻿h1 span {
+    font-size: 13px;
+    display: block;
+    padding-left: 4px;
 }
-
-h1 {
-    font-weight: normal;
-    font-size: 40px;
-    font-weight: normal;
-    text-transform: uppercase; 
-    margin: 20px 0 10px 4px;
-}
-
-    h1 span {
-        font-size: 13px;
-        display: block;
-        padding-left: 4px;
-    }
 
 .tabs {
     width: 100%;

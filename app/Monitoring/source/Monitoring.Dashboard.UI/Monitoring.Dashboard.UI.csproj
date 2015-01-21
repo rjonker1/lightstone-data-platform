@@ -89,6 +89,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\style.css" />
     <Content Include="assets\images\minus.gif" />
     <Content Include="assets\images\minus.png" />
     <Content Include="assets\images\plus.gif" />
