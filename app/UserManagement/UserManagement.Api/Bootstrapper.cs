@@ -9,6 +9,7 @@ using NHibernate.Tool.hbm2ddl;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities.Commands.Roles;
 using UserManagement.Domain.Entities.Commands.UserTypes;
 
 namespace UserManagement.Api
@@ -47,6 +48,7 @@ namespace UserManagement.Api
         //TODO: Update to include check in UserType Repository for existing records - to prevent duplications
         private void ImportStartupData(IHandleMessages handler)
         {
+            handler.Handle(new ImportRole());
             handler.Handle(new ImportUserType());
         }
 

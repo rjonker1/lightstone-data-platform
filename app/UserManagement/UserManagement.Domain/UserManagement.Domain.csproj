@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\Roles\CreateRoleHandler.cs" />
+    <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
     <Compile Include="CommandHandlers\Users\CreateUserHandler.cs" />
     <Compile Include="CommandHandlers\UserTypes\CreateUserTypeHandler.cs" />
     <Compile Include="CommandHandlers\UserTypes\ImportUserTypeHandler.cs" />
@@ -63,6 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

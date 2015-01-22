@@ -1,17 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Role : Entity
+    public class Role : Entity, IRole
     {
 
-        public virtual string Value { get; set; }
-        public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual string Name { get; set; }
 
-        public Role()
+        public virtual string Value { get; set; }
+        public virtual IList<User> Users { get; set; }
+
+        protected Role() { }
+
+        public Role(Guid _id, string val)
         {
-            UserRole = new HashSet<UserRole>();
+            Id = _id;
+            Name = val;
+            Value = val;
+            //Users = new HashSet<UserRole>();
         }
 
     }

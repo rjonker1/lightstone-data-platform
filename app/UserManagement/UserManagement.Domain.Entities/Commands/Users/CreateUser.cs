@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UserManagement.Domain.Core.Commands;
 
 namespace UserManagement.Domain.Entities.Commands.Users
@@ -11,18 +12,31 @@ namespace UserManagement.Domain.Entities.Commands.Users
         public DateTime LastUpdateDate;
         public string Password;
         public string UserName;
-        public Guid UserTypeId;
         public bool? IsActive;
+        public IEnumerable<ClientUser> ClientUser;
 
-        public CreateUser(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, Guid userTypeId, bool? isActive)
+        public UserType UserType;
+        public IEnumerable<UserLinkedToCustomer> UserLinkedToCustomer;
+        public IEnumerable<UserProfile> UserProfile;
+        public IList<Role> Roles;
+
+        public CreateUser(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
+                            //IEnumerable<ClientUser> clientUser, 
+                            UserType userType
+                            //IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, IEnumerable<UserRole> userRole
+                            )
         {
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
             LastUpdateDate = lastUpdateDate;
             Password = password;
             UserName = userName;
-            UserTypeId = userTypeId;
             IsActive = isActive;
+            //ClientUser = clientUser;
+            UserType = userType;
+            //UserLinkedToCustomer = userLinkedToCustomer;
+            //UserProfile = userProfile;
+            //UserRole = userRole;
         }
     }
 }

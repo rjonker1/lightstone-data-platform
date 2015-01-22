@@ -10,25 +10,25 @@ namespace UserManagement.Domain.Entities
     public class User : Entity
     {
 
-        public virtual DateTime FirstCreateDate { get; set; }
-        public virtual string LastUpdateBy { get; set; }
-        public virtual DateTime LastUpdateDate { get; set; }
-        public virtual string Password { get; set; }
-        public virtual string UserName { get; set; }
-        public virtual Guid UserTypeId { get; set; }
-        public virtual bool? IsActive { get; set; }
+        public virtual DateTime FirstCreateDate { get; protected internal set; }
+        public virtual string LastUpdateBy { get; protected internal set; }
+        public virtual DateTime LastUpdateDate { get; protected internal set; }
+        public virtual string Password { get; protected internal set; }
+        public virtual string UserName { get; protected internal set; }
+        public virtual bool? IsActive { get; protected internal set; }
 
-        public virtual ICollection<ClientUser> ClientUser { get; set; }
+        public virtual IEnumerable<ClientUser> ClientUser { get; protected internal set; }
 
         //TODO: Implement UserType mapping
-        //public virtual IEnumerable<UserType> UserType { get; set; }
-        public virtual ICollection<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
-        public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual UserType UserType { get; protected internal set; }
+        public virtual IEnumerable<UserLinkedToCustomer> UserLinkedToCustomer { get; protected internal set; }
+        public virtual IEnumerable<UserProfile> UserProfile { get; protected internal set; }
+        public virtual IList<Role> Roles { get; protected internal set; }
 
         protected User() { }
 
-        public User(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, Guid userTypeId, bool? isActive)
+        public User(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
+                            IEnumerable<ClientUser> clientUser, UserType userType, IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, IList<Role> roles)
         {
             Id = Guid.NewGuid();
             FirstCreateDate = firstCreateDate;
@@ -36,14 +36,12 @@ namespace UserManagement.Domain.Entities
             LastUpdateDate = lastUpdateDate;
             Password = password;
             UserName = userName;
-            UserTypeId = userTypeId;
             IsActive = isActive;
-
-            ClientUser = new Collection<ClientUser>();
-            //UserType = new UserType(userTypeId, "User"); 
-            UserLinkedToCustomer = new Collection<UserLinkedToCustomer>();
-            UserProfile = new Collection<UserProfile>();
-            UserRole = new Collection<UserRole>();
+            ClientUser = clientUser;
+            UserType = userType;
+            UserLinkedToCustomer = userLinkedToCustomer;
+            UserProfile = userProfile;
+            Roles = roles;
         }
     }
 }

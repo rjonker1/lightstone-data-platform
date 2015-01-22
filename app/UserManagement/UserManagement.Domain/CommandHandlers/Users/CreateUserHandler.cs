@@ -24,7 +24,8 @@ namespace UserManagement.Domain.CommandHandlers.Users
         {
 
             _repository.Save(new User(command.FirstCreateDate, command.LastUpdateBy, command.LastUpdateDate,
-                    command.Password, command.UserName, command.UserTypeId, command.IsActive));
+                    command.Password, command.UserName, command.IsActive, command.ClientUser,
+                    command.UserType, command.UserLinkedToCustomer, command.UserProfile, command.Roles));
         }
     }
 }

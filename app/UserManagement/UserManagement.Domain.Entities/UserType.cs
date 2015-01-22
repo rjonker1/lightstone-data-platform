@@ -23,5 +23,9 @@ namespace UserManagement.Domain.Entities
             User = new HashSet<User>();
         }
 
+        public override string ToString()
+        {
+            return string.Format("User type {0} - {1}", Id, Name);
+        }
     }
 }
