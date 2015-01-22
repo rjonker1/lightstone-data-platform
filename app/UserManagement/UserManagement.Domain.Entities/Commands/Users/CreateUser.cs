@@ -22,8 +22,9 @@ namespace UserManagement.Domain.Entities.Commands.Users
 
         public CreateUser(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
                             //IEnumerable<ClientUser> clientUser, 
-                            UserType userType
-                            //IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, IEnumerable<UserRole> userRole
+                            UserType userType,
+                            //IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, 
+                            IList<Role> roles
                             )
         {
             FirstCreateDate = firstCreateDate;
@@ -36,7 +37,7 @@ namespace UserManagement.Domain.Entities.Commands.Users
             UserType = userType;
             //UserLinkedToCustomer = userLinkedToCustomer;
             //UserProfile = userProfile;
-            //UserRole = userRole;
+            Roles = roles;
         }
     }
 }

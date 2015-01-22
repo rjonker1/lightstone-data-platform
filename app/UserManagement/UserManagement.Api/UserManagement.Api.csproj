@@ -106,7 +106,6 @@
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

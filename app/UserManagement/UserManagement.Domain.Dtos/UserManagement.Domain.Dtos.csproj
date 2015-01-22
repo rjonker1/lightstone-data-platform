@@ -43,11 +43,11 @@
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UserManagement\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">
+    <ProjectReference Include="..\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">
       <Project>{4CA5036F-E26D-4345-AB68-D670E948F50F}</Project>
       <Name>UserManagement.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserManagement\UserManagement.Domain.Entities\UserManagement.Domain.Entities.csproj">
+    <ProjectReference Include="..\UserManagement.Domain.Entities\UserManagement.Domain.Entities.csproj">
       <Project>{3CFF1FF6-1AAE-435A-9C81-BB0793979596}</Project>
       <Name>UserManagement.Domain.Entities</Name>
     </ProjectReference>

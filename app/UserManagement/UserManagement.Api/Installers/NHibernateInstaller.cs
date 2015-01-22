@@ -49,8 +49,8 @@ namespace UserManagement.Api.Installers
 
         protected virtual void ExportSchemaConfig(Configuration config)
         {
-            //var update = new SchemaUpdate(config);
-            //update.Execute(false, true);
+            var update = new SchemaUpdate(config);
+            update.Execute(false, true);
 
             //new SchemaExport(config).Drop(false, true);
             //new SchemaExport(config).Create(false, true);

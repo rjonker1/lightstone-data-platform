@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using NHibernate;
-using NHibernate.Criterion;
-using UserManagement.Domain.Core.MessageHandling;
+﻿using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Users;
@@ -13,7 +9,6 @@ namespace UserManagement.Domain.CommandHandlers.Users
     {
 
         private readonly IRepository<User> _repository;  
-        //private static ISession Session;
 
         public CreateUserHandler(IRepository<User> repository)
         {

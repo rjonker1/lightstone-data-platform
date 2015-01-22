@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MemBus;
 using Nancy;
 using UserManagement.Domain.Entities;
@@ -12,8 +13,9 @@ namespace UserManagement.Api.Modules
         {
             Get["/User/Create"] = _ =>
             {
-                var userTypeId = new Guid("B8BCBCC8-DDE0-4F10-B30C-606C07C99DA0");
-                bus.Publish(new CreateUser(DateTime.Now, "APITestUser", DateTime.Now, "password", "username", true, new UserType(new Guid("D5F56601-B618-4CB9-ACA9-577764A5C3C9"), "User")));
+                bus.Publish(new CreateUser(DateTime.Now, "APITestUser1", DateTime.Now, "password", "username", true,
+                    new UserType(new Guid("D0AC08B8-1D35-437B-9C72-B8341C13C20C"), "User"),
+                    new List<Role> { new Role(new Guid("c628ba87-bab5-44a1-98f8-16ec5c560f85"), "Admin") }));
 
                 return "Success!";
             };
