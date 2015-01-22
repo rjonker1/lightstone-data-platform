@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -12,62 +12,12 @@
     <li>
         <input type="radio" name="tabs" id="tab1" checked />
         <label for="tab1">Summary</label>
-        <div id="tab-content1" class="tab-content">
-            <p></p>
-        </div>
+        @Html.Partial("DataProviders/_Summary.cshtml")
     </li>
     <li>
         <input type="radio" name="tabs" id="tab2" />
         <label for="tab2">Log</label>
-        <div id="tab-content2" class="tab-content" ng-app="dataProviderMonitoringApp">
-            <div id="data-provider-event-log" class="data-provider-container" ng-controller="DataProviderController">
-                <ul>
-                    <li ng-repeat="response in dataProviderMonitoring">
-                        <h2>
-                            <span><img src="../assets/images/plus.gif" alt="expand" ng-click="Toggle($index,this);" /></span>{{response.Metadata}}
-                        </h2>
-
-                        <div>
-                            <div style="display: none;" id="toggle-{{$index}}">
-                                <div>
-                                    <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse" /><input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
-                                </div>
-                                <div class="canvas" id="canvas-{{$index}}"><pre class="CodeContainer"></pre></div>
-                                <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>
-                            </div>
-                        </div>
-                    </li>
-
-                    @*@{
-                        var count = 0;
-                        foreach (var response in @Model)
-                        {
-                            count++;
-                            var jsonId = "rawJson-" + count;
-                            var canvasId = "canvas-" + count;
-                            var toggleId = "toggle-" + count;
-
-                            <li>
-                                <h2>
-                                    <span><img src="../assets/images/plus.gif" alt="expand" onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); " /></span>@response.Metadata
-                                </h2>
-
-                                <div>
-                                    <div style="display: none;" id="@toggleId">
-                                        <div>
-                                            <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId'); " value="Collapse" /> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId'); ">
-                                        </div>
-                                        <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
-                                        <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                    }*@
-
-                </ul>
-            </div>
-        </div>
+        @Html.Partial("DataProviders/_Item.cshtml",Model)
     </li>
 </ul>
 
@@ -81,15 +31,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
     <script src="../assets/ang/angular-ui-bootstrap.js"></script>
     <script src="../assets/ang/app/app.js"></script>
-
     <script src="http://dev.lightstone.monitoring/signalr/hubs"></script>
-    @*<script type="text/javascript">
-        var hub = $.connection.dataProviderHub;
-
-        hub.client.dataProviderMonitoringInfo = function() {
-            console.log("receiving monitoring information");
-        }
-
-        $.connection.hub.start();
-    </script>*@
 }

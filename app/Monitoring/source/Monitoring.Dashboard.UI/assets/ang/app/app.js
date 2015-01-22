@@ -17,36 +17,29 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
     })
     .controller("DataProviderController", function($scope, dataProviderSignalRService, $rootScope) {
 
-        $scope.dataProviderMonitoring = [];
-        dataProviderSignalRService.init();
+    $scope.dataProviderMonitoring = [];
+    dataProviderSignalRService.init();
 
-        $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
-            $scope.$apply(function() {
-                $scope.dataProviderMonitoring = result;
-                console.log($scope.dataProviderMonitoring);
-            });
+    var rawJsonId = "rawJson-";
+    var canvasId = "canvas-";
+    var toggleId = "toggle-";
 
-            $scope.Toggle = function(elementIndex, img) {
-
-                var rawJsonId = "rawJson-" + elementIndex;
-                var canvasId = "canvas-" + elementIndex;
-                var toggleId = "toggle-" + elementIndex;
-
-                Toggle(toggleId, img, rawJsonId, canvasId);
-            };
-
-            $scope.CollapseAllClicked = function(elementIndex) {
-
-                var rawJsonId = "rawJson-" + elementIndex;
-                var canvasId = "canvas-" + elementIndex;
-
-                CollapseAllClicked(rawJsonId, canvasId);
-            };
-
-            $scope.ExpandAllClicked = function(elementIndex) {
-                var rawJsonId = "rawJson-" + elementIndex;
-                var canvasId = "canvas-" + elementIndex;
-                ExpandAllClicked(rawJsonId, canvasId);
-            };
+    $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
+        $scope.$apply(function() {
+            $scope.dataProviderMonitoring = result;
+            //console.log($scope.dataProviderMonitoring);
         });
+
+        $scope.Toggle = function(elementIndex, img) {
+            Toggle(toggleId + elementIndex, img, rawJsonId + elementIndex, canvasId + elementIndex);
+        };
+
+        $scope.CollapseAllClicked = function(elementIndex) {
+            CollapseAllClicked(rawJsonId + elementIndex, canvasId + elementIndex);
+        };
+
+        $scope.ExpandAllClicked = function(elementIndex) {
+            ExpandAllClicked(rawJsonId + elementIndex, canvasId + elementIndex);
+        };
     });
+});
