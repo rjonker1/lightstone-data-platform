@@ -23,6 +23,12 @@ namespace UserManagement.Api.Modules
 
                 return "Success!";
             };
+
+            Get["/User/Profile"] = _ =>
+            {
+
+                return "Success";
+            };
         }
     }
 }
