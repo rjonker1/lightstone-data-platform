@@ -1,0 +1,22 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Collections.Generic.IEnumerable<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>>
+<div id="tab-content1" class="tab-content" ng-app="dataProviderMonitoringApp">
+    <div id="data-provider-event-log" class="data-provider-container" ng-controller="DataProviderController">
+        <ul>
+            <li ng-repeat="response in dataProviderMonitoring">
+                <h2>
+                    <span><img src="../assets/images/plus.gif" alt="expand" /></span><a href="#/dataProviders/logItem/{{response.Id}}">{{response.Metadata}}</a>
+                </h2>
+
+                @*<div>
+                    <div style="display: none;" id="toggle-{{$index}}">
+                        <div>
+                            <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse" /> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
+                        </div>
+                        <div class="canvas" id="canvas-{{$index}}"><pre class="CodeContainer"></pre></div>
+                        <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>
+                    </div>
+                </div>*@
+            </li>
+        </ul>
+    </div>
+</div>

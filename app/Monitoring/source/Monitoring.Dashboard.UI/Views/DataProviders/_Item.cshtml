@@ -1,0 +1,18 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>
+<ul>
+    <li>
+        <h2>
+            <span><img src="../assets/images/plus.gif" alt="expand" onclick=" Toggle('toggle-0', this, 'rawJson-0', 'canvas-0'); " /></span>@Model.Metadata
+        </h2>
+
+        <div>
+            <div style="display: none;" id="toggle-0">
+                <div>
+                    <input type="button" onclick=" CollapseAllClicked('rawJson-0', 'canvas-0'); " value="Collapse"/> <input type="button" value="Expand" onclick=" ExpandAllClicked('rawJson-0', 'canvas-0'); ">
+                </div>
+                <div class="canvas" id="canvas - 0"><pre class="CodeContainer"></pre></div>
+                <textarea style="display: none" id="rawJson - 0" class="rawJson">@Model.Payload</textarea>
+            </div>
+        </div>
+    </li>
+</ul>

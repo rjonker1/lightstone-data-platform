@@ -59,7 +59,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
                 var model = new MonitoringResponse[] {};
 
-                var task = client.GetAsync("dataProviders/updatedLog").ContinueWith(t =>
+                var task = client.GetAsync("dataProviders/logSummary").ContinueWith(t =>
                 {
                     var response = t.Result;
                     var json = response.Content.ReadAsStringAsync();
