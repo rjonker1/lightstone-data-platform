@@ -46,22 +46,6 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
         }
     };
 
-    //var setLastSelected = function(elementIndex, isCollapsed, img) {
-    //    if (typeof(Storage) == "undefined") {
-    //        console.log("Cannot store last selected item in the monitoring log. Storage not supported by browser");
-    //    } else {
-    //        localStorage.setItem("lastElementIndex", elementIndex);
-    //        localStorage.setItem("isCollapsed", isCollapsed);
-
-    //        if (img != null) {
-    //            //var currentImageObject = new Image(img);
-    //            localStorage.setItem("image", img);
-    //        }
-
-    //        console.log("Stored Last selected index = " + elementIndex + " And is collapsed = " + isCollapsed + " And img = " + img);
-    //    }
-    //};
-
     $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
         $scope.$apply(function() {
             $scope.dataProviderMonitoring = result;
