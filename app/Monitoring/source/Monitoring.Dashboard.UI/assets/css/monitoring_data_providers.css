@@ -72,7 +72,6 @@
 .data-provider-container h1, h2 {
     color: #000000;
 }
-
 .data-provider-container h1 {
     text-transform: uppercase;
     font-size: 36px;
@@ -82,8 +81,8 @@
 }
 
 .data-provider-container h2 {
-    font-size: 15px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 15px;
     font-weight: 300;
     letter-spacing: 1px;
     display: block;
