@@ -20,13 +20,20 @@ namespace UserManagement.Domain.Entities.Commands.Users
         public IEnumerable<UserProfile> UserProfile;
         public IList<Role> Roles;
 
+        //Profile data
+        public string ContactNumber;
+        public string FirstName;
+        public string Surname;
+        public string IdNumber;
+
         public CreateUser(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
                             //IEnumerable<ClientUser> clientUser, 
                             UserType userType,
                             //IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, 
-                            IList<Role> roles
-                            )
+                            IList<Role> roles, 
+                            string firstName, string surname, string idNumber, string contactNumber)
         {
+            Id = Guid.NewGuid();
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
             LastUpdateDate = lastUpdateDate;
@@ -38,6 +45,13 @@ namespace UserManagement.Domain.Entities.Commands.Users
             //UserLinkedToCustomer = userLinkedToCustomer;
             //UserProfile = userProfile;
             Roles = roles;
+
+            //Profile
+            ContactNumber = contactNumber;
+            FirstName = firstName;
+            Surname = surname;
+            IdNumber = idNumber;
+
         }
     }
 }

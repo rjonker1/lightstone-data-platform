@@ -27,10 +27,9 @@ namespace UserManagement.Domain.Entities
 
         protected User() { }
 
-        public User(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
-                            IEnumerable<ClientUser> clientUser, UserType userType, IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, IList<Role> roles)
+        public User(Guid id, DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
+                            IEnumerable<ClientUser> clientUser, UserType userType, IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, IEnumerable<UserProfile> userProfile, IList<Role> roles): base(id)
         {
-            Id = Guid.NewGuid();
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
             LastUpdateDate = lastUpdateDate;

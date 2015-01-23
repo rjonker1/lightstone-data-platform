@@ -128,6 +128,10 @@
       <Project>{4ca5036f-e26d-4345-ab68-d670e948f50f}</Project>
       <Name>UserManagement.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Domain.Dtos\UserManagement.Domain.Dtos.csproj">
+      <Project>{5DE944C7-90FF-4FD0-913E-44AEF7158562}</Project>
+      <Name>UserManagement.Domain.Dtos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserManagement.Domain.Entities\UserManagement.Domain.Entities.csproj">
       <Project>{3cff1ff6-1aae-435a-9c81-bb0793979596}</Project>
       <Name>UserManagement.Domain.Entities</Name>
