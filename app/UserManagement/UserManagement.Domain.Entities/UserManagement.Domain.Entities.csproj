@@ -40,9 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
-    <Compile Include="Commands\Roles\AddRole.cs" />
     <Compile Include="Commands\Roles\CreateRole.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
+    <Compile Include="Commands\UserProfiles\CreateUserProfile.cs" />
     <Compile Include="Commands\Users\CreateUser.cs" />
     <Compile Include="Commands\UserTypes\CreateUserType.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />

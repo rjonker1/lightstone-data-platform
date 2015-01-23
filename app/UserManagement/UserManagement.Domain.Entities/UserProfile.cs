@@ -5,7 +5,6 @@ namespace UserManagement.Domain.Entities
 {
     public class UserProfile : Entity
     {
-        public virtual Guid UserId { get; set; }
         public virtual string ContactNumber { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string IdNumber { get; set; }
@@ -13,9 +12,13 @@ namespace UserManagement.Domain.Entities
 
         public virtual User User { get; set; }
 
-        public UserProfile(Guid id, Guid userId, string contactNumber, string firstName, string idNumber, string surname, User user) : base(id)
+        protected UserProfile()
         {
-            UserId = userId;
+            
+        }
+
+        public UserProfile(Guid id, string contactNumber, string firstName, string idNumber, string surname, User user) : base(id)
+        {
             ContactNumber = contactNumber;
             FirstName = firstName;
             IdNumber = idNumber;
