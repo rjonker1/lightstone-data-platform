@@ -196,6 +196,16 @@ function ExpandAllClicked(rawJsonId, canvasId) {
     }, 0);
 }
 
+function SetExpandOrCollapseImage(img) {
+    var src = window.imgMinus;
+    if (img.src == src) {
+        src = window.imgPlus;
+    } else {
+        src = window.imgMinus;
+    }
+    img.src = src;
+}
+
 function ExpImgClicked(img) {
     var container = img.parentNode.nextSibling;
     if (!container) return;
@@ -216,7 +226,6 @@ function Toggle(elementId, rawJsonId, canvasId) {
         $id(canvasId).innerHTML = "<PRE class='CodeContainer'></PRE>";
     } else {
         ele.style.display = "block";
-        src = window.imgMinus;
         Process(rawJsonId, canvasId);
     }
 }
