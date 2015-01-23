@@ -7,7 +7,7 @@ namespace UserManagement.Api.Modules
     {
         public IndexModule()
         {
-            Get["/"] = x => "Hello World";
+            //Get["/"] = x => "Hello World";
         }
     }
 }

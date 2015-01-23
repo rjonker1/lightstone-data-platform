@@ -7,10 +7,10 @@ namespace UserManagement.Api.Modules
 {
     public class RoleModule : NancyModule
     {
-        public RoleModule(IRepository<Role> roleRepository)
+        public RoleModule(IRepository<Role> roles)
         {
 
-            Get["/Roles"] = _ => Response.AsJson(roleRepository.ToList());
+            Get["/Roles"] = _ => Response.AsJson(roles.ToList());
 
         }
     }

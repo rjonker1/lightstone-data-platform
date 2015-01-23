@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using MemBus;
 using Nancy;
 using UserManagement.Domain.Core.MessageHandling;
@@ -14,7 +13,7 @@ namespace UserManagement.Api.Modules
 {
     public class UserModule : NancyModule
     {
-        public UserModule(IBus bus, IHandleMessages handler, IRepository<User> userRepository )
+        public UserModule(IBus bus, IHandleMessages handler, IRepository<User> users )
         {
 
             //Test params until front-end is established
@@ -22,8 +21,8 @@ namespace UserManagement.Api.Modules
             var surname = "Testeroonie";
 
             var dto = new UserDto(DateTime.Now, username, DateTime.Now, "password", "username", true,
-                    new UserType(new Guid("7AAA58C6-5632-442F-B63F-D985715163D7"), "User"),
-                    new List<Role> { new Role(new Guid("42C4CF23-F9E7-4354-B0A8-FC611C38E5D3"), "Admin") },
+                    new UserType(new Guid("8371A39B-0595-43EF-A519-C2E8C0298075"), "User"),
+                    new List<Role> { new Role(new Guid("60ABB4FA-4654-4FE2-9B4A-7FC6282B5094"), "Admin") },
                     username, surname, "IdNumber", "contactNumber");
 
 
@@ -38,7 +37,7 @@ namespace UserManagement.Api.Modules
             Get["/User"] = _ =>
             {
 
-                var random = userRepository.AsEnumerable();
+                var random = users.AsEnumerable();
                 var refined = random.Select(x => x).Where(x => x.IsActive == false);
                 //var test = userRepository.Get(new Guid("74CB623E-A081-498F-A54C-58E7AC4182A8"));
 

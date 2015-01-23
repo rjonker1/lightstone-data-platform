@@ -108,6 +108,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\RoleModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
+    <Compile Include="Modules\UserProfileModule.cs" />
     <Compile Include="Modules\UserTypeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

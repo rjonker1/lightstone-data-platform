@@ -7,10 +7,10 @@ namespace UserManagement.Api.Modules
 {
     public class UserTypeModule : NancyModule
     {
-        public UserTypeModule(IRepository<UserType> userTypeRepo )
+        public UserTypeModule(IRepository<UserType> userTypes )
         {
 
-            Get["/UserTypes"] = _ => Response.AsJson(userTypeRepo.ToList());
+            Get["/UserTypes"] = _ => Response.AsJson(userTypes.ToList());
 
         }
     }
