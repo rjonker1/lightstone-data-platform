@@ -1,6 +1,5 @@
 ﻿using System;
 using CommonDomain.Persistence;
-using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Commands;
 using Monitoring.DomainModel.DataProviders;
 using NServiceBus;
@@ -32,7 +31,7 @@ namespace Monitoring.Write.Service.DataProviders
             else
             {
                 @event.Add(message.Command.Id, message.Command.Payload, message.Command.DateUtc,
-                    MonitoringSource.Lace);
+                    message.Command.Source);
             }
 
             _repository.Save(@event, Guid.NewGuid(), null);
