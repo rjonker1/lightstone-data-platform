@@ -29,6 +29,9 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
     var canvasId = "canvas-display";
     var toggleId = "toggle-";
 
+    var imgPlus = "../assets/images/plus.gif";
+    var imgMinus = "../assets/images/minus.gif";
+
     var setLastSelectedIndex = function (elementIndex) {
         if (typeof(Storage) == "undefined") {
             console.log("Cannot store last selected item in the monitoring log. Storage not supported by browser");
@@ -46,27 +49,49 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
         }
     };
 
+    var makeFormattedJsonVisible = function(formattedJsonId) {
+        var ele = document.getElementById(formattedJsonId);
+        if (ele.style.display === "none") {
+            ele.style.display = "block";
+        }
+    };
+
     $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
         $scope.$apply(function() {
             $scope.dataProviderMonitoring = result;
         });
 
-        $scope.Toggle = function(elementIndex) {
+        $scope.Toggle = function (elementIndex, formattedJsonId) {
             Toggle(toggleId + elementIndex, rawJsonId + elementIndex, canvasId);
             setLastSelectedIndex(elementIndex);
+            makeFormattedJsonVisible(formattedJsonId);
         };
 
-        $scope.CollapseAllClicked = function () {
-            var lastIndex = getLastIndex();
-            if (lastIndex >= 0) {
-                CollapseAllClicked(rawJsonId + lastIndex, canvasId);
-            }
-        };
+        //$scope.CollapseAllClicked = function (img) {
+        //    var lastIndex = getLastIndex();
+        //    if (lastIndex >= 0) {
+        //        CollapseAllClicked(rawJsonId + lastIndex, canvasId);
+        //        img.src = imgPlus;
+        //    }
+        //};
 
-        $scope.ExpandAllClicked = function () {
+        //$scope.ExpandAllClicked = function (img) {
+        //    var lastIndex = getLastIndex();
+        //    if (lastIndex >= 0) {
+        //        ExpandAllClicked(rawJsonId + lastIndex, canvasId);
+        //        img.src = imgMinus;
+        //    }
+        //};
+
+        $scope.CollapseOrExpand = function(img) {
             var lastIndex = getLastIndex();
             if (lastIndex >= 0) {
-                ExpandAllClicked(rawJsonId + lastIndex, canvasId);
+                if (img.src === imgMinus) {
+                    CollapseAllClicked(rawJsonId + lastIndex, canvasId);
+                } else {
+                    ExpandAllClicked(rawJsonId + lastIndex, canvasId);
+                }
+                SetExpandOrCollapseImage(img);
             }
         };
     });
