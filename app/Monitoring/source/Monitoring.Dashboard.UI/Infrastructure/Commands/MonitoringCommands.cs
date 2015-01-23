@@ -11,14 +11,4 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Commands
             Request = request;
         }
     }
-
-    public class GetMonitoringItemCommand
-    {
-        public readonly MonitoringRequestDto Request;
-
-        public GetMonitoringItemCommand(MonitoringRequestDto request)
-        {
-            Request = request;
-        }
-    }
 }

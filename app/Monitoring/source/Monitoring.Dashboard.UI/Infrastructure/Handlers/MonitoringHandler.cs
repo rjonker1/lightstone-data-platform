@@ -11,7 +11,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
     {
         private readonly IMonitoringRepository _repository;
         public IEnumerable<MonitoringResponse> MonitoringResponse { get; private set; }
-        public MonitoringResponse MonitoringResponseItem { get; private set; }
 
         public MonitoringHandler(IMonitoringRepository repository)
         {
@@ -23,9 +22,5 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
             MonitoringResponse = _repository.GetAllMonitoringInformation(command.Request.SourceId).ToList();
         }
 
-        public void Handle(GetMonitoringItemCommand command)
-        {
-            MonitoringResponseItem = _repository.GetMonitoringResponseItem(command.Request.Id, command.Request.SourceId);
-        }
     }
 }

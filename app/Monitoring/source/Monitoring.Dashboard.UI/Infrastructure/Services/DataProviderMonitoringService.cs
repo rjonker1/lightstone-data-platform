@@ -29,38 +29,6 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             return _handler.MonitoringResponse;
         }
 
-        public IEnumerable<MonitoringResponse> GetMonitoringSummaryBySource(int source)
-        {
-            _log.InfoFormat("Getting Data Provider Monitoring Summary View");
-            _handler.Handle(
-                new GetMonitoringCommand(new MonitoringRequestDto(source)));
-            SetSearchMetaData(_handler.MonitoringResponse);
-            RemovePayload(_handler.MonitoringResponse);
-            return _handler.MonitoringResponse;
-        }
-
-        public MonitoringResponse GetMonitoringResponseItem(System.Guid id, int source)
-        {
-            _log.InfoFormat("Getting Data Provider Monitoring Item");
-            _handler.Handle(
-                new GetMonitoringItemCommand(new MonitoringRequestDto(source, id)));
-            SetSearchMetaData(new List<MonitoringResponse>()
-            {
-                {
-                    _handler.MonitoringResponseItem
-                }
-            });
-            return _handler.MonitoringResponseItem;
-        }
-
-        private static void RemovePayload(IEnumerable<MonitoringResponse> responses)
-        {
-            foreach (var response in responses)
-            {
-                response.RemovePayload();
-            }
-        }
-
         private static void SetSearchMetaData(IEnumerable<MonitoringResponse> responses)
         {
             foreach (var response in responses)

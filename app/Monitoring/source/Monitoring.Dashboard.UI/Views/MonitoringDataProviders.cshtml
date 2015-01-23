@@ -1,5 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Monitoring.Dashboard.UI.Core.Models.MonitoringResponse>
-@{
+﻿@{
     Layout = "_Layout.cshtml";
 }
 @section Header
@@ -11,14 +10,14 @@
 <ul class="tabs">
     <li>
         <input type="radio" name="tabs" id="tab1" checked />
-        <label for="tab1">Summary</label>
-        @Html.Partial("DataProviders/_Summary.cshtml")
+        <label for="tab1">Log</label>
+        @Html.Partial("DataProviders/_Log.cshtml")
     </li>
-    <li>
+    @*<li>
         <input type="radio" name="tabs" id="tab2" />
-        <label for="tab2">Log</label>
-        @Html.Partial("DataProviders/_Item.cshtml",Model)
-    </li>
+        <label for="tab2">Detail</label>
+       
+    </li>*@
 </ul>
 
 @section Scripts
@@ -30,6 +29,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
     <script src="../assets/ang/angular-ui-bootstrap.js"></script>
-    <script src="../assets/ang/app/app.js"></script>
+    <script src="../assets/ang/app/dataProviderMonitoringApp.js"></script>
     <script src="http://dev.lightstone.monitoring/signalr/hubs"></script>
 }
