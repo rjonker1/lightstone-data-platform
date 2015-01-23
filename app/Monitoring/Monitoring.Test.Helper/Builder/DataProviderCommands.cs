@@ -42,7 +42,7 @@ namespace Monitoring.Test.Helper.Builder
                 },
                     new { ContextMessage = "Ivid Data Provider Credentials" })
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Ivid Data Provider" })
+                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Ivid Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromIvid())
                 .TransformationMessage(DataProviderTransformationBuilder.ForIvid(),
                     new { TrasformationMetaData = "Transforming Response from Ivid" })
@@ -62,7 +62,7 @@ namespace Monitoring.Test.Helper.Builder
                 .ConfigurationMessage(DataProviderConfigurationBuiler.ForAudatex())
                 //.SecurityMessage(DataProviderConfigurationBuiler.ForAudatex(), null)
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Audatex Data Provider" })
+                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Audatex Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromAudatex())
                 .TransformationMessage(DataProviderTransformationBuilder.ForAudatex(), new { TrasformationMetaData = "Transforming Response from Audatex" })
                 .EndingDataProvider();
@@ -91,8 +91,8 @@ namespace Monitoring.Test.Helper.Builder
                 },
                     new { ContextMessage = "Ivid Title Holder Data Provider Credentials" })
                 .StartCallingMessage()
-                .FaultCallingMessage(
-                    new { NoRequestReceived = "No response received from Ivid Title Holder Data Provider" })
+                //.FaultCallingMessage(
+                //    new { NoRequestReceived = "No response received from Ivid Title Holder Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromIvidTitleHolder())
                 .TransformationMessage(DataProviderTransformationBuilder.ForIvidTitleHolder(),
                     new { TrasformationMetaData = "Transforming Response from Ivid Title Holder" })
@@ -112,7 +112,7 @@ namespace Monitoring.Test.Helper.Builder
                 //.ConfigurationMessage)
                 //.SecurityMessage(DataProviderConfigurationBuiler.ForAudatex(), null)
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Lightstone Data Provider" })
+                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Lightstone Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromLightstone())
                 .TransformationMessage(DataProviderTransformationBuilder.ForLightstone(),
                     new { TrasformationMetaData = "Transforming Response from Lightstone" })
@@ -140,7 +140,7 @@ namespace Monitoring.Test.Helper.Builder
                 //},
                 //    new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No response received from Rgt Data Provider" })
+                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Rgt Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromRgt())
                 .TransformationMessage(DataProviderTransformationBuilder.ForRgt(),
                     new { TrasformationMetaData = "Transforming Response from Rgt" })
@@ -159,7 +159,7 @@ namespace Monitoring.Test.Helper.Builder
                 .ConfigurationMessage(new { VinNumber = "AHT31UNK408007735" })
                 //.SecurityMessage()
                 .StartCallingMessage()
-                .FaultCallingMessage(new { NoRequestReceived = "No VINs were received" })
+                //.FaultCallingMessage(new { NoRequestReceived = "No VINs were received" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromRgtVin())
                 .TransformationMessage(DataProviderTransformationBuilder.ForRgtVin(),
                     new { TrasformationMetaData = "Transforming Response from Rgt Vin" })

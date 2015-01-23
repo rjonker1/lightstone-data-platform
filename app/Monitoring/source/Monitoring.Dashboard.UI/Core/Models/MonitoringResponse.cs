@@ -17,7 +17,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public DateTime Date { get; private set; }
 
         [DataMember]
-        public string Metadata { get; set; }
+        public string Metadata { get; private set; }
+
+        [DataMember]
+        public bool HasErrors { get; private set; }
 
         public MonitoringResponse()
         {
@@ -39,6 +42,11 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public void RemovePayload()
         {
             Payload = string.Empty;
+        }
+
+        public void ErrorsExist()
+        {
+            HasErrors = true;
         }
     }
 }
