@@ -209,7 +209,19 @@ function ExpImgClicked(img) {
     img.src = src;
 }
 
-function Toggle(elementId, img, rawJsonId, canvasId) {
+function Toggle(elementId, rawJsonId, canvasId) {
+    var ele = document.getElementById(elementId);
+    if (ele.style.display === "block") {
+        ele.style.display = "none";
+        $id(canvasId).innerHTML = "<PRE class='CodeContainer'></PRE>";
+    } else {
+        ele.style.display = "block";
+        src = window.imgMinus;
+        Process(rawJsonId, canvasId);
+    }
+}
+
+function ToggleWithImage(elementId, img, rawJsonId, canvasId) {
     var src = window.imgPlus;
     var ele = document.getElementById(elementId);
     if (ele.style.display === "block") {

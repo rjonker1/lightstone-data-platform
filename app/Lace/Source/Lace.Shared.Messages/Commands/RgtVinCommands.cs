@@ -60,19 +60,6 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class RgtVinError : DataProviderCommand
-    {
-        public RgtVinError(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
-
-        }
-    }
-
-    [Serializable]
-    [DataContract]
     public class RgtVinSecurityFlag : DataProviderCommand
     {
         public RgtVinSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,

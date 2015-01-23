@@ -3,16 +3,9 @@
         <div id="data-provider-event-log" class="data-provider-container">
             <ul>
                 <li ng-repeat="response in dataProviderMonitoring">
-                    <h2>
-                        <span><img src="../assets/images/plus.gif" alt="expand" ng-click="Toggle($index,this);" /></span>{{response.Metadata}}
-                    </h2>
-
+                  <h2 ng-click="Toggle($index);">&nbsp;{{response.Metadata}}</h2>
                     <div>
                         <div style="display: none;" id="toggle-{{$index}}">
-                            @*<div>
-                                    <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse"/> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
-                                </div>*@
-                            @*<div class="canvas" id="canvas-{{$index}}"><pre class="CodeContainer"></pre></div>*@
                             <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>
                         </div>
                     </div>

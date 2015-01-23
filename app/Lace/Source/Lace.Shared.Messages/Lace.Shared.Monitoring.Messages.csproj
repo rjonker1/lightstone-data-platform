@@ -61,6 +61,7 @@
     <Compile Include="Commands\DataProviderCommand.cs" />
     <Compile Include="Commands\CommandDto.cs" />
     <Compile Include="Commands\AudatexCommands.cs" />
+    <Compile Include="Commands\GenericCommands.cs" />
     <Compile Include="Commands\RgtVinCommands.cs" />
     <Compile Include="Commands\RgtCommands.cs" />
     <Compile Include="Commands\LightstoneCommands.cs" />

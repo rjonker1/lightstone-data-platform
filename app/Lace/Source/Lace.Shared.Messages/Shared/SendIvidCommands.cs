@@ -123,14 +123,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                IvidError =
-                    new IvidError(_requestId, DataProviderCommandSource.Ivid,
+                ErrorThrown =
+                    new ErrorThrown(_requestId, DataProviderCommandSource.Ivid,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Security(dynamic payload, MetadataContainer metadata)

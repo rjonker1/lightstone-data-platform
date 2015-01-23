@@ -85,8 +85,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                EntryPointErrorOccurred =
-                    new EntryPointErrorOccurred(_requestId, DataProviderCommandSource.EntryPoint,
+                ErrorThrown =
+                    new ErrorThrown(_requestId, DataProviderCommandSource.EntryPoint,
                         "An error occurred in the entry point while processing the request", payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)

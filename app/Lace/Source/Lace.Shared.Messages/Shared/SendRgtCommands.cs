@@ -120,15 +120,15 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             {
                 //RgtError = new
                 //{
-                    RgtError =
-                        new RgtError(_requestId, DataProviderCommandSource.Rgt,
-                            CommandDescriptions.FaultDescription(DataProviderCommandSource.Rgt), payload, metadata,
-                            DateTime.UtcNow,
-                            Category.Performance)
+                ErrorThrown =
+                    new ErrorThrown(_requestId, DataProviderCommandSource.Rgt,
+                        CommandDescriptions.FaultDescription(DataProviderCommandSource.Rgt), payload, metadata,
+                        DateTime.UtcNow,
+                        Category.Performance)
                 //}
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Security(dynamic payload, MetadataContainer metadata)
