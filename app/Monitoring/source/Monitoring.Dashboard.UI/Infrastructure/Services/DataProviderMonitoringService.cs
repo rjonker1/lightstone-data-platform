@@ -26,7 +26,26 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             _handler.Handle(
                 new GetMonitoringCommand(new MonitoringRequestDto(source)));
             SetSearchMetaData(_handler.MonitoringResponse);
+            CheckForErrors(_handler.MonitoringResponse);
             return _handler.MonitoringResponse;
+        }
+
+        private static void CheckForErrors(IEnumerable<MonitoringResponse> responses)
+        {
+            foreach (var response in responses)
+            {
+                var errors = response.Payload.JsonToObject<Errors[]>();
+
+                if (errors == null || !errors.Any())
+                    continue;
+
+                var errorsExist = errors.FirstOrDefault(w => w.ErrorThrown != null);
+
+                if(errorsExist == null)
+                    continue;
+
+                response.ErrorsExist();
+            }
         }
 
         private static void SetSearchMetaData(IEnumerable<MonitoringResponse> responses)

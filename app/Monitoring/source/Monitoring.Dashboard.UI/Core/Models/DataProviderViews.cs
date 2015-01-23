@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
@@ -50,5 +51,21 @@ namespace Monitoring.Dashboard.UI.Core.Models
     {
         [DataMember]
         public string Name { get; set; }
+    }
+
+    [DataContract]
+    public class Errors
+    {
+        [DataMember]
+        public ErrorThrown ErrorThrown { get; set; } 
+    }
+
+    [DataContract]
+    public class ErrorThrown
+    {
+        [DataMember]
+        public int DataProviderCommandSource { get; set; }
+        [DataMember]
+        Guid Id { get; set; }
     }
 }

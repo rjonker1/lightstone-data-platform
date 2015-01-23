@@ -46,11 +46,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.531\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.534, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.534\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.531\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.534, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.534\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.433, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,7 +64,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.531\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.534\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
