@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DataPlatform.Shared.Enums;
 using Monitoring.Dashboard.UI.Core.Contracts.Repositories;
 using Monitoring.Dashboard.UI.Core.Extensions;
 using Monitoring.Dashboard.UI.Core.Models;

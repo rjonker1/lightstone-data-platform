@@ -19,6 +19,11 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         public string Metadata { get; set; }
 
+        public MonitoringResponse()
+        {
+            
+        }
+
         public MonitoringResponse(Guid id, string payload, DateTime date)
         {
             Id = id;
@@ -29,6 +34,11 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public void SetMetadata(string metadata)
         {
             Metadata = metadata;
+        }
+
+        public void RemovePayload()
+        {
+            Payload = string.Empty;
         }
     }
 }

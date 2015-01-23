@@ -29,7 +29,7 @@ function Process(rawJsonId, canvasId) {
     window.IsCollapsible = true;
     var braceType;
     var json = $id(rawJsonId).value;
-    console.log(json);
+    //console.log(json);
     var html = "";
     try {
         if (json == "") json = "\"\"";

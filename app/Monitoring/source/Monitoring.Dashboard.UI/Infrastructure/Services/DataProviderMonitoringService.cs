@@ -19,18 +19,17 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
         {
             _handler = handler;
         }
-        
 
         public IEnumerable<MonitoringResponse> GetMonitoringInformationBySource(int source)
         {
             _log.InfoFormat("Getting Data Provider Monitoring View");
             _handler.Handle(
                 new GetMonitoringCommand(new MonitoringRequestDto(source)));
-            SetSearchMetaData(_handler.MonitoringResponse.ToList());
+            SetSearchMetaData(_handler.MonitoringResponse);
             return _handler.MonitoringResponse;
         }
 
-        private static void SetSearchMetaData(List<MonitoringResponse> responses)
+        private static void SetSearchMetaData(IEnumerable<MonitoringResponse> responses)
         {
             foreach (var response in responses)
             {

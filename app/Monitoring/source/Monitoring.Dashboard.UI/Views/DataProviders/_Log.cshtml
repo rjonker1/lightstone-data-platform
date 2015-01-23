@@ -1,0 +1,95 @@
+﻿<div style="width: 100%;" ng-app="dataProviderMonitoringApp" ng-controller="DataProviderController">
+    <div style="float: left; width: 50%">
+        <div id="data-provider-event-log" class="data-provider-container">
+            <ul>
+                <li ng-repeat="response in dataProviderMonitoring">
+                    <h2>
+                        <span><img src="../assets/images/plus.gif" alt="expand" ng-click="Toggle($index,this);" /></span>{{response.Metadata}}
+                    </h2>
+
+                    <div>
+                        <div style="display: none;" id="toggle-{{$index}}">
+                            @*<div>
+                                    <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse"/> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
+                                </div>*@
+                            @*<div class="canvas" id="canvas-{{$index}}"><pre class="CodeContainer"></pre></div>*@
+                            <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="float: right; width: 48%">
+        <div>
+            <div>
+                <input type="button" ng-click="CollapseAllClicked();" value="Collapse" /> <input type="button" value="Expand" ng-click="ExpandAllClicked();">
+            </div>
+            <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+
+
+        @*<div id="tab-content2" class="tab-content" ng-app="dataProviderMonitoringApp">
+                <div id="data-provider-event-log" class="data-provider-container" ng-controller="DataProviderController">
+                    <ul>
+                        <li ng-repeat="response in dataProviderMonitoring">
+                            <h2>
+                                <span><img src="../assets/images/plus.gif" alt="expand" ng-click="Toggle($index,this);" /></span>{{response.Metadata}}
+                            </h2>
+
+                            <div>
+                                <div style="display: none;" id="toggle-{{$index}}">
+                                    <div>
+                                        <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse"/> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
+                                    </div>
+                                    <div class="canvas" id="canvas-{{$index}}"><pre class="CodeContainer"></pre></div>
+                                    <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>*@
+
+        @*<li>
+                <div>
+                    <div>
+                        <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse" /> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
+                    </div>
+                    <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
+                </div>
+            </li>*@
+
+
+        @*@{
+                var count = 0;
+                foreach (var response in @Model)
+                {
+                    count++;
+                    var jsonId = "rawJson-" + count;
+                    var canvasId = "canvas-" + count;
+                    var toggleId = "toggle-" + count;
+
+                    <li>
+                        <h2>
+                            <span><img src="../assets/images/plus.gif" alt="expand" onclick="Toggle('@toggleId', this, '@jsonId', '@canvasId'); " /></span>@response.Metadata
+                        </h2>
+
+                        <div>
+                            <div style="display: none;" id="@toggleId">
+                                <div>
+                                    <input type="button" onclick="CollapseAllClicked('@jsonId', '@canvasId'); " value="Collapse" /> <input type="button" value="Expand" onclick="ExpandAllClicked('@jsonId', '@canvasId'); ">
+                                </div>
+                                <div class="canvas" id="@canvasId"><pre class="CodeContainer"></pre></div>
+                                <textarea style="display: none" id="@jsonId" class="rawJson">@response.Payload</textarea>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }*@
+
+

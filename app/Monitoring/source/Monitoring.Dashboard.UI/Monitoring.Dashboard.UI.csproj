@@ -114,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\ang\angular-ui-bootstrap.js" />
-    <Content Include="assets\ang\app\app.js" />
+    <Content Include="assets\ang\app\dataProviderMonitoringApp.js" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\images\minus.gif" />
     <Content Include="assets\images\minus.png" />
@@ -133,7 +133,7 @@
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\MonitoringDataProviders.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\_MonitoringLog.cshtml" />
+    <Content Include="Views\DataProviders\_Log.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -182,9 +182,7 @@
       <Name>Monitoring.Read.ReadModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\ang\app\dataProviders\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

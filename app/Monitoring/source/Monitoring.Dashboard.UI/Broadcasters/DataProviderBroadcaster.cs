@@ -17,13 +17,14 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext _clients;
         private Uri _root = null;
-        private readonly TimeSpan _interval = TimeSpan.FromMilliseconds(60000);
-        private readonly Timer _timer;
+        private TimeSpan _interval = TimeSpan.FromMilliseconds(1000);
+        private Timer _timer;
+        private bool _isFirstCall = true;
 
         public DataProviderBroadcaster(IHubConnectionContext clients)
         {
             _clients = clients;
-            _timer = new Timer(BroadCastDataProviderMonitoring, null, _interval, _interval);
+            SetTimer();
         }
 
         public static DataProviderBroadcaster Instance
@@ -40,11 +41,24 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             }
         }
 
+        private void SetTimer()
+        {
+            _timer = new Timer(BroadCastDataProviderMonitoring, null, _interval, _interval);
+        }
+
         private void BroadCastDataProviderMonitoring(object state)
         {
             var result = GetDataProviderMonitoringFromApi();
             if (result == null)
                 return;
+
+            if (_isFirstCall)
+            {
+                _isFirstCall = false;
+                _interval = TimeSpan.FromMilliseconds(10000);
+                SetTimer();
+            }
+
             _clients.All.dataProviderMonitoringInfo(result);
         }
 
@@ -59,7 +73,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
                 var model = new MonitoringResponse[] {};
 
-                var task = client.GetAsync("dataProviders/updatedLog").ContinueWith(t =>
+                var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
                 {
                     var response = t.Result;
                     var json = response.Content.ReadAsStringAsync();
