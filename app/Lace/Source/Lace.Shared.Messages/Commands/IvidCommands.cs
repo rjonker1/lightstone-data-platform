@@ -60,19 +60,6 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidError : DataProviderCommand
-    {
-        public IvidError(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
-
-        }
-    }
-
-    [Serializable]
-    [DataContract]
     public class IvidSecurityFlag : DataProviderCommand
     {
         public IvidSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,

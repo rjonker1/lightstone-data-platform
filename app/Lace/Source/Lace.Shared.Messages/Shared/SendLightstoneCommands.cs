@@ -118,14 +118,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    LightstoneError =
-                        new LightstoneError(_requestId, DataProviderCommandSource.Lightstone,
-                            CommandDescriptions.FaultDescription(DataProviderCommandSource.Lightstone), payload, metadata,
-                            DateTime.UtcNow,
-                            Category.Performance)
+                ErrorThrown =
+                    new ErrorThrown(_requestId, DataProviderCommandSource.Lightstone,
+                        CommandDescriptions.FaultDescription(DataProviderCommandSource.Lightstone), payload, metadata,
+                        DateTime.UtcNow,
+                        Category.Performance)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Security(dynamic payload, MetadataContainer metadata)

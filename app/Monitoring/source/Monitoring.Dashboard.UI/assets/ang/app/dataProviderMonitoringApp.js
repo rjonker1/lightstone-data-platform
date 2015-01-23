@@ -51,8 +51,8 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             $scope.dataProviderMonitoring = result;
         });
 
-        $scope.Toggle = function(elementIndex, img) {
-            Toggle(toggleId + elementIndex, img, rawJsonId + elementIndex, canvasId);
+        $scope.Toggle = function(elementIndex) {
+            Toggle(toggleId + elementIndex, rawJsonId + elementIndex, canvasId);
             setLastSelectedIndex(elementIndex);
         };
 

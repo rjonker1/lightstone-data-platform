@@ -118,8 +118,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                RgtVinError =
-                    new RgtVinError(_requestId, DataProviderCommandSource.RgtVin,
+                ErrorThrown =
+                    new ErrorThrown(_requestId, DataProviderCommandSource.RgtVin,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.RgtVin), payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)
