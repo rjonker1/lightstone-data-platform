@@ -106,7 +106,9 @@
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\RoleModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
+    <Compile Include="Modules\UserTypeModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

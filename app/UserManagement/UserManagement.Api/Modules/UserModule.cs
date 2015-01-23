@@ -20,8 +20,8 @@ namespace UserManagement.Api.Modules
             var surname = "Testeroonie";
 
             var dto = new UserDto(DateTime.Now, username, DateTime.Now, "password", "username", true,
-                    new UserType(new Guid("5e72ef30-a675-4af7-bce8-1e801a580bf3"), "User"),
-                    new List<Role> { new Role(new Guid("a0f7e94b-c469-45b5-a76b-129e3b0d926b"), "Admin") },
+                    new UserType(new Guid("7AAA58C6-5632-442F-B63F-D985715163D7"), "User"),
+                    new List<Role> { new Role(new Guid("42C4CF23-F9E7-4354-B0A8-FC611C38E5D3"), "Admin") },
                     username, surname, "IdNumber", "contactNumber");
 
 

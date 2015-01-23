@@ -11,7 +11,6 @@ namespace UserManagement.Domain.Entities
 
         public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual IList<User> Users { get; set; }
 
         protected Role() { }
 
@@ -20,7 +19,6 @@ namespace UserManagement.Domain.Entities
             Id = _id;
             Name = val;
             Value = val;
-            //Users = new HashSet<UserRole>();
         }
 
     }

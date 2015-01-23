@@ -11,7 +11,6 @@ namespace UserManagement.Domain.Entities
         public virtual string Name { get; set; }
 
         public virtual string Value { get; set; }
-        public virtual ICollection<User> User { get; set; }
 
         protected UserType() { }
 
@@ -20,12 +19,11 @@ namespace UserManagement.Domain.Entities
             Id = _id;
             Name = val;
             Value = val;
-            User = new HashSet<User>();
         }
 
-        public override string ToString()
-        {
-            return string.Format("User type {0} - {1}", Id, Name);
-        }
+        //public override string ToString()
+        //{
+        //    return string.Format("User type {0} - {1}", Id, Name);
+        //}
     }
 }
