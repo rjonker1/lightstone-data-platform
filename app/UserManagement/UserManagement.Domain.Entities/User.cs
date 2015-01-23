@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
 //using IUserType = UserManagement.Domain.Entities.IUserType;
 

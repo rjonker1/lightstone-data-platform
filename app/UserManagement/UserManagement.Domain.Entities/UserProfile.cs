@@ -10,20 +10,17 @@ namespace UserManagement.Domain.Entities
         public virtual string IdNumber { get; set; }
         public virtual string Surname { get; set; }
 
-        public virtual User User { get; set; }
-
         protected UserProfile()
         {
             
         }
 
-        public UserProfile(Guid id, string contactNumber, string firstName, string idNumber, string surname, User user) : base(id)
+        public UserProfile(Guid id, string contactNumber, string firstName, string idNumber, string surname) : base(id)
         {
             ContactNumber = contactNumber;
             FirstName = firstName;
             IdNumber = idNumber;
             Surname = surname;
-            User = user;
         }
     }
 }

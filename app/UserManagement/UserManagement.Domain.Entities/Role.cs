@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Entities.Commands.Roles;
 
 namespace UserManagement.Domain.Entities
 {

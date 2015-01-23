@@ -26,8 +26,9 @@ namespace UserManagement.Domain.CommandHandlers.Users
                     command.Password, command.UserName, command.IsActive, command.ClientUser,
                     command.UserType, command.UserLinkedToCustomer, command.UserProfile, command.Roles));
 
-            _handler.Handle(new CreateUserProfile(command.ContactNumber, command.UserName, command.IdNumber, command.Surname,
-                    _repository.Get(command.Id)));
+            _handler.Handle(new CreateUserProfile(command.ContactNumber, command.UserName, command.IdNumber, command.Surname
+                    //_repository.Get(command.Id)));
+                    ));
         }
     }
 }

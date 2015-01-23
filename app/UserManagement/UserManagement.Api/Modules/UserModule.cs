@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using MemBus;
 using Nancy;
 using UserManagement.Domain.Core.MessageHandling;
@@ -31,6 +33,16 @@ namespace UserManagement.Api.Modules
                                             dto.Roles, dto.FirstName, dto.Surname, dto.IdNumber, dto.ContactNumber));
 
                 return "Success!";
+            };
+
+            Get["/User"] = _ =>
+            {
+
+                var random = userRepository.AsEnumerable();
+                var refined = random.Select(x => x).Where(x => x.IsActive == false);
+                //var test = userRepository.Get(new Guid("74CB623E-A081-498F-A54C-58E7AC4182A8"));
+
+                return Response.AsJson(refined);
             };
 
         }
