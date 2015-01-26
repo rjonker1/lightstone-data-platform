@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -11,12 +12,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
     {
         public List<EstimatedValueModel> MetricResult { get; private set; }
         public IEnumerable<Statistic> Statistics { get; private set; }
-
-        //private static readonly MetricTypes[] Metrics =
-        //{
-        //    MetricTypes.EstimatedPrice, MetricTypes.SalePriceLow,
-        //    MetricTypes.SalePriceHigh, MetricTypes.Confidence
-        //};
 
         private IList<Statistic> _gauges;
         private readonly IProvideCarInformationForRequest _request;
@@ -34,22 +29,50 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
             if (!_gauges.Any()) return this;
 
-            var estimatedPrice = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.EstimatedPrice);
-            var salePriceHigh = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.SalePriceHigh);
-            var salePriceLow = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.SalePriceLow);
-            var confidence = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.Confidence);
+            var estimatedValues = new EstimatedValueModel();
+
+            SetRetailEstimatedValues(estimatedValues);
+            SetTradeEstimatedValues(estimatedValues);
+
+            MetricResult.Add(estimatedValues);
+
+            return this;
+        }
+
+        private void SetRetailEstimatedValues(IRespondWithEstimatedValueModel model)
+        {
+            var estimatedPrice = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailEstimatedPrice);
+            var salePriceHigh = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailPriceHigh);
+            var salePriceLow = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailPriceLow);
+            var confidence = _gauges.FirstOrDefault(w => w.Metric_ID == (int) MetricTypes.RetailConfidence);
 
 
-            if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return this;
+            if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return;
 
-            MetricResult.Add(new EstimatedValueModel(
+            model.SetRetailEstimatedValues(
                 estimatedPrice.MoneyValue.HasValue ? estimatedPrice.MoneyValue.Value.ToString("C") : "",
                 salePriceLow.MoneyValue.HasValue ? salePriceLow.MoneyValue.Value.ToString("C") : "",
                 salePriceHigh.MoneyValue.HasValue ? salePriceHigh.MoneyValue.Value.ToString("C") : "",
                 confidence.MoneyValue.HasValue ? confidence.MoneyValue.Value.ToString("C") : "",
-                GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00)));
+                GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00));
+        }
 
-            return this;
+        private void SetTradeEstimatedValues(IRespondWithEstimatedValueModel model)
+        {
+            var estimatedPrice = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradeEstimatedPrice);
+            var salePriceHigh = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradePriceHigh);
+            var salePriceLow = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradePriceLow);
+            var confidence = _gauges.FirstOrDefault(w => w.Metric_ID == (int)MetricTypes.TradeConfidence);
+
+
+            if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return;
+
+            model.SetRetailEstimatedValues(
+                estimatedPrice.MoneyValue.HasValue ? estimatedPrice.MoneyValue.Value.ToString("C") : "",
+                salePriceLow.MoneyValue.HasValue ? salePriceLow.MoneyValue.Value.ToString("C") : "",
+                salePriceHigh.MoneyValue.HasValue ? salePriceHigh.MoneyValue.Value.ToString("C") : "",
+                confidence.MoneyValue.HasValue ? confidence.MoneyValue.Value.ToString("C") : "",
+                GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00));
         }
 
         private IList<Statistic> GetGauges()

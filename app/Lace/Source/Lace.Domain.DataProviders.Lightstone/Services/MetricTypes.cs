@@ -10,12 +10,12 @@
         RepairIndex = 5,
         TotalSalesByAge = 6,
         TotalSalesByGender = 7,
-        SalePriceNew = 8,
-        SalePriceLow = 9,
-        SalePriceHigh = 10,
-        EstimatedPrice = 11,
+        RetailPriceNew = 8,
+        RetailPriceLow = 9,
+        RetailPriceHigh = 10,
+        RetailEstimatedPrice = 11,
         Frequency = 12,
-        Confidence = 13,
+        RetailConfidence = 13,
         AmortisedValues = 14,
         AmortisedValuesMarketAverage = 15,
         NewVehicleSalesAveragePrice = 16,
@@ -31,6 +31,12 @@
         Torque = 26,
         FuelEconomy = 27,
         Co2 = 28,
-        TotalCostOfParts = 29
+        TotalCostOfParts = 29,
+        TradeEstimatedPrice = 37,
+        TradePriceLow = 35,
+        TradePriceHigh = 36,
+        TradeConfidence = 38,
+        RetailAdjustment = 43,
+        TradeAdjustment = 44
     }
 }
