@@ -24,7 +24,7 @@ namespace UserManagement.Domain.CommandHandlers.Users
 
             var newUser = new User(command.Id, command.FirstCreateDate, command.LastUpdateBy, command.LastUpdateDate,
                 command.Password, command.UserName, command.IsActive, command.ClientUser,
-                command.UserType, command.UserLinkedToCustomer,
+                command.UserType,
                 command.Roles);
 
             _repository.Save(newUser);
