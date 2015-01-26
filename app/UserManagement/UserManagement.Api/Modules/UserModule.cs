@@ -26,7 +26,7 @@ namespace UserManagement.Api.Modules
                     username, surname, "IdNumber", "contactNumber");
 
 
-            Get["/User/Create"] = _ =>
+            Get["/Users/Create"] = _ =>
             {
                 bus.Publish(new CreateUser(dto.FirstCreateDate, dto.LastUpdateBy, dto.LastUpdateDate, dto.Password, dto.UserName, dto.IsActive, dto.UserType, 
                                             dto.Roles,
@@ -35,7 +35,7 @@ namespace UserManagement.Api.Modules
                 return "Success!";
             };
 
-            Get["/User"] = _ =>
+            Get["/Users"] = _ =>
             {
 
                 var random = users.AsEnumerable();
