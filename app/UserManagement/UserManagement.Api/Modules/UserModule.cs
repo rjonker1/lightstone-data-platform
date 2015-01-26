@@ -18,6 +18,16 @@ namespace UserManagement.Api.Modules
         public UserModule(IBus bus, IHandleMessages handler, IRepository<User> users, IRepository<Customer> customers)
         {
 
+            Get["/Users"] = _ =>
+            {
+
+                var random = users.AsEnumerable();
+                var refined = random.Select(x => x).Where(x => x.IsActive == true);
+                //var test = userRepository.Get(new Guid("74CB623E-A081-498F-A54C-58E7AC4182A8"));
+
+                return Response.AsJson(refined);
+            };
+
             Get["/Users/Create"] = _ =>
             {
 
@@ -42,16 +52,6 @@ namespace UserManagement.Api.Modules
                                             dto.ContactNumber, dto.FirstName, dto.Surname, dto.IdNumber));
 
                 return "Success!";
-            };
-
-            Get["/Users"] = _ =>
-            {
-
-                var random = users.AsEnumerable();
-                var refined = random.Select(x => x).Where(x => x.IsActive == true);
-                //var test = userRepository.Get(new Guid("74CB623E-A081-498F-A54C-58E7AC4182A8"));
-
-                return Response.AsJson(refined);
             };
 
         }
