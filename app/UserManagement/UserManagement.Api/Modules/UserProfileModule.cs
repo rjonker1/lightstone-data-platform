@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using System.Linq;
+using Nancy;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 
@@ -8,11 +9,7 @@ namespace UserManagement.Api.Modules
     {
         public UserProfileModule(IRepository<UserProfile> userProfiles )
         {
-            Get["/UserProfile"] = _ =>
-            {
-
-                return Response.AsJson(userProfiles);
-            };
+            Get["/UserProfile"] = _ => Response.AsJson(userProfiles);
         }
     }
 }
