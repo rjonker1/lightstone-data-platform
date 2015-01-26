@@ -173,10 +173,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Monitoring.Projection\Monitoring.Projection.csproj">
-      <Project>{aaa626bb-1436-461e-9426-13a320f594ab}</Project>
-      <Name>Monitoring.Projection</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
       <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
       <Name>Monitoring.Read.ReadModel</Name>
