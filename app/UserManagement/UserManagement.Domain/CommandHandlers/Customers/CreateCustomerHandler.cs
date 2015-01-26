@@ -8,7 +8,7 @@ namespace UserManagement.Domain.CommandHandlers.Customers
     public class CreateCustomerHandler : AbstractMessageHandler<CreateCustomer>
     {
 
-        public readonly IRepository<Customer> _repsoitory;
+        private readonly IRepository<Customer> _repsoitory;
 
         public CreateCustomerHandler(IRepository<Customer> repsoitory)
         {

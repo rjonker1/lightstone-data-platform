@@ -20,13 +20,6 @@ namespace UserManagement.Domain.CommandHandlers.Roles
         {
 
             if (_repository.Exists(command.Id, command.Name)) return;
-            //{
-
-            //    var addRepoToUser = _repository.Get(command.Id);
-            //    _repository.SaveOrUpdate(addRepoToUser);
-
-            //    return;
-            //}
 
             _repository.Save(new Role(command.Id, command.Name));
         }

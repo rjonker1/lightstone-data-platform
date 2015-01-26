@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandHandlers\Customers\CreateCustomerHandler.cs" />
+    <Compile Include="CommandHandlers\Provinces\CreateProvinceHandler.cs" />
+    <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\CreateRoleHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
     <Compile Include="CommandHandlers\UserProfiles\CreateUserProfileHandler.cs" />

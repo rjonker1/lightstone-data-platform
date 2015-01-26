@@ -9,6 +9,7 @@ using NHibernate.Tool.hbm2ddl;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
 using UserManagement.Domain.Entities.Commands.UserTypes;
 
@@ -50,6 +51,7 @@ namespace UserManagement.Api
         {
             handler.Handle(new ImportRole());
             handler.Handle(new ImportUserType());
+            handler.Handle(new ImportProvince());
         }
 
         //Updates schema if there are any structural changes
