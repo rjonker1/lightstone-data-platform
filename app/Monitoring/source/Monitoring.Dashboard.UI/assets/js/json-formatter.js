@@ -245,6 +245,10 @@ function ToggleWithImage(elementId, img, rawJsonId, canvasId) {
     img.src = src;
 }
 
+function GetCollapsibleImage () {
+    return window.imgMinus;
+}
+
 function SetTab() {
     //var select = $id("TabSize");
     //window.TAB = MultiplyString(parseInt(select.options[select.selectedIndex].value), window.SINGLE_TAB);

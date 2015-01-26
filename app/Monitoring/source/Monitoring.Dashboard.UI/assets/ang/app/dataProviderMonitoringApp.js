@@ -29,9 +29,6 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
     var canvasId = "canvas-display";
     var toggleId = "toggle-";
 
-    var imgPlus = "../assets/images/plus.gif";
-    var imgMinus = "../assets/images/minus.gif";
-
     var setLastSelectedIndex = function (elementIndex) {
         if (typeof(Storage) == "undefined") {
             console.log("Cannot store last selected item in the monitoring log. Storage not supported by browser");
@@ -86,7 +83,7 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
         $scope.CollapseOrExpand = function(img) {
             var lastIndex = getLastIndex();
             if (lastIndex >= 0) {
-                if (img.src === imgMinus) {
+                if (img.src == GetCollapsibleImage()) {
                     CollapseAllClicked(rawJsonId + lastIndex, canvasId);
                 } else {
                     ExpandAllClicked(rawJsonId + lastIndex, canvasId);
