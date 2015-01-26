@@ -22,13 +22,14 @@ namespace UserManagement.Domain.CommandHandlers.Users
         public override void Handle(CreateUser command)
         {
 
-            _repository.Save(new User(command.Id, command.FirstCreateDate, command.LastUpdateBy, command.LastUpdateDate,
-                    command.Password, command.UserName, command.IsActive, command.ClientUser,
-                    command.UserType, command.UserLinkedToCustomer, command.UserProfile, command.Roles));
+            var newUser = new User(command.Id, command.FirstCreateDate, command.LastUpdateBy, command.LastUpdateDate,
+                command.Password, command.UserName, command.IsActive, command.ClientUser,
+                command.UserType, command.UserLinkedToCustomer,
+                command.Roles);
 
-            _handler.Handle(new CreateUserProfile(command.ContactNumber, command.UserName, command.IdNumber, command.Surname
-                    //_repository.Get(command.Id)));
-                    ));
+            _repository.Save(newUser);
+
+            _handler.Handle(new CreateUserProfile(command.ContactNumber, command.UserName, command.IdNumber, command.Surname, newUser));
         }
     }
 }

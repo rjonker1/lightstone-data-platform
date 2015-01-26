@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices;
-using MemBus.Support;
-using Nancy;
+﻿using Nancy;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 

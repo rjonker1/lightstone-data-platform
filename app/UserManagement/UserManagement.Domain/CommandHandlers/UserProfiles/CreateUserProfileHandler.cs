@@ -16,8 +16,8 @@ namespace UserManagement.Domain.CommandHandlers.UserProfiles
 
         public override void Handle(CreateUserProfile command)
         {
-            _repository.Save(new UserProfile(command.Id, command.ContactNumber, command.FirstName, 
-                                                command.IdNumber, command.Surname));
+            _repository.Save(new UserProfile(command.ContactNumber, command.FirstName, 
+                                                command.IdNumber, command.Surname, command.User));
         }
     }
 }

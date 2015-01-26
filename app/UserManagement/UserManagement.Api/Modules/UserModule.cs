@@ -21,15 +21,16 @@ namespace UserManagement.Api.Modules
             var surname = "Testeroonie";
 
             var dto = new UserDto(DateTime.Now, username, DateTime.Now, "password", "username", true,
-                    new UserType(new Guid("8371A39B-0595-43EF-A519-C2E8C0298075"), "User"),
-                    new List<Role> { new Role(new Guid("60ABB4FA-4654-4FE2-9B4A-7FC6282B5094"), "Admin") },
+                    new UserType(new Guid("85484589-40DE-4B71-BF24-5FBC8537146C"), "User"),
+                    new List<Role> { new Role(new Guid("B383C718-6E37-451A-B3C9-D22363219C12"), "Admin") },
                     username, surname, "IdNumber", "contactNumber");
 
 
             Get["/User/Create"] = _ =>
             {
                 bus.Publish(new CreateUser(dto.FirstCreateDate, dto.LastUpdateBy, dto.LastUpdateDate, dto.Password, dto.UserName, dto.IsActive, dto.UserType, 
-                                            dto.Roles, dto.FirstName, dto.Surname, dto.IdNumber, dto.ContactNumber));
+                                            dto.Roles,
+                                            dto.ContactNumber, dto.FirstName, dto.Surname, dto.IdNumber));
 
                 return "Success!";
             };
@@ -38,7 +39,7 @@ namespace UserManagement.Api.Modules
             {
 
                 var random = users.AsEnumerable();
-                var refined = random.Select(x => x).Where(x => x.IsActive == false);
+                var refined = random.Select(x => x).Where(x => x.IsActive == true);
                 //var test = userRepository.Get(new Guid("74CB623E-A081-498F-A54C-58E7AC4182A8"));
 
                 return Response.AsJson(refined);
