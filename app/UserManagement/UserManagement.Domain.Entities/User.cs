@@ -18,14 +18,14 @@ namespace UserManagement.Domain.Entities
         public virtual IEnumerable<ClientUser> ClientUser { get; protected internal set; }
 
         public virtual UserType UserType { get; protected internal set; }
-        //public virtual IEnumerable<UserLinkedToCustomer> UserLinkedToCustomer { get; protected internal set; }
+        public virtual IEnumerable<Customer> Customers { get; protected internal set; }
         public virtual IList<Role> Roles { get; protected internal set; }
 
         protected User() { }
 
         public User(Guid id, DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
                         IEnumerable<ClientUser> clientUser, UserType userType, 
-                        //IEnumerable<UserLinkedToCustomer> userLinkedToCustomer, 
+                        IEnumerable<Customer> customers, 
                         IList<Role> roles): base(id)
         {
             FirstCreateDate = firstCreateDate;
@@ -36,7 +36,7 @@ namespace UserManagement.Domain.Entities
             IsActive = isActive;
             ClientUser = clientUser;
             UserType = userType;
-            //UserLinkedToCustomer = userLinkedToCustomer;
+            Customers = customers;
             Roles = roles;
         }
     }

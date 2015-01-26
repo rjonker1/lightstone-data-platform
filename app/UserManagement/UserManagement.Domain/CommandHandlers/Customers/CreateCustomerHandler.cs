@@ -18,7 +18,7 @@ namespace UserManagement.Domain.CommandHandlers.Customers
         public override void Handle(CreateCustomer command)
         {
             
-            _repsoitory.Save(new Customer(command.Id, command.CustomerName, command.AccountOwnerName));
+            _repsoitory.Save(new Customer(command.Id, command.CustomerName, command.AccountOwnerName, command.Province));
         }
     }
 }
