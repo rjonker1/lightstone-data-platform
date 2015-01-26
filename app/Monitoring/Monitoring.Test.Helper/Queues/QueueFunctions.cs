@@ -82,6 +82,13 @@ namespace Monitoring.Test.Helper.Queues
             return this;
         }
 
+        public DataProviderQueueFunctions StartingDataProviderMessageWithRequest(object request)
+        {
+            _monitoring.Begin(request, _dataProviderStopWatch);
+            Thread.Sleep(1000);
+            return this;
+        }
+
         public DataProviderQueueFunctions ConfigurationMessage(object metadata)
         {
             _monitoring.Send(CommandType.Configuration, _request, metadata);
@@ -102,6 +109,13 @@ namespace Monitoring.Test.Helper.Queues
             Thread.Sleep(1000);
             return this;
         }
+
+        public DataProviderQueueFunctions StartCallingMessageWithDataProviderSourceRequest(object request)
+        {
+            _monitoring.StartCall(request, _stopWatch);
+            Thread.Sleep(1000);
+            return this;
+        } 
 
         public DataProviderQueueFunctions FaultCallingMessage(object metatdata)
         {
@@ -127,6 +141,13 @@ namespace Monitoring.Test.Helper.Queues
         public DataProviderQueueFunctions EndingDataProvider()
         {
             _monitoring.End(_request, _dataProviderStopWatch);
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public DataProviderQueueFunctions EndingDataProviderWithResponse(object response)
+        {
+            _monitoring.End(response, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
         }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
 
 namespace Lace.Test.Helper.Mothers.Sources.Lightstone
 {

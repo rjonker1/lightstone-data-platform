@@ -1,6 +1,6 @@
 ﻿using Lace.Domain.Core.Contracts.Requests;
 
-namespace Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure.Dto
+namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
 {
     public class CarInformationRequest : IProvideCarInformationForRequest
     {

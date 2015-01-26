@@ -1,4 +1,4 @@
-﻿namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Repositories
+﻿namespace Lace.CrossCutting.DataProvider.Certificate.Repositories
 {
     public interface IReadOnlyRepository<T>
     {

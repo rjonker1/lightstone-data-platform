@@ -1,7 +1,7 @@
 ﻿using System;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Repositories;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;

@@ -16,20 +16,21 @@ namespace Monitoring.Test.Helper.Builder
 
         public DataProviderCommands(object request, IHaveQueueActions actions, Guid aggregateId, bool setupAndTearDown = true)
         {
-            this._request = request;
-            this._aggregateId = aggregateId;
-            this._actions = actions;
+            _request = request;
+            _aggregateId = aggregateId;
+            _actions = actions;
             _setupAndTearDown = setupAndTearDown;
         }
 
         public DataProviderCommands ForIvid()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Ivid, _actions, _aggregateId, _setupAndTearDown);
+            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Ivid, _actions, _aggregateId,
+                _setupAndTearDown);
             queue.TearDown()
                 .Setup()
                 .InitBus(BusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
-                .StartingDataProviderMessage()
+                .StartingDataProviderMessageWithRequest(DataProviderRequestBuilder.ForIvidLicensePlateSearch())
                 .ConfigurationMessage(DataProviderConfigurationBuiler.ForIvid())
                 .SecurityMessage(new
                 {
@@ -40,32 +41,33 @@ namespace Monitoring.Test.Helper.Builder
                             Password = "8B5Jk3Q66"
                         }
                 },
-                    new { ContextMessage = "Ivid Data Provider Credentials" })
-                .StartCallingMessage()
-                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Ivid Data Provider" })
+                    new {ContextMessage = "Ivid Data Provider Credentials"})
+                .StartCallingMessageWithDataProviderSourceRequest(DataProviderSourceRequestBuilder.ForIvid())
+                .FaultCallingMessage(new {NoRequestReceived = "No response received from Ivid Data Provider"})
                 .EndCallingMessage(DataProviderResponseBuilder.FromIvid())
                 .TransformationMessage(DataProviderTransformationBuilder.ForIvid(),
-                    new { TrasformationMetaData = "Transforming Response from Ivid" })
-                .EndingDataProvider();
+                    new {TrasformationMetaData = "Transforming Response from Ivid"})
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.FromIvid());
 
             return this;
         }
 
         public DataProviderCommands ForAudatex()
         {
-            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Audatex, _actions, _aggregateId, _setupAndTearDown);
+            var queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.Audatex, _actions,
+                _aggregateId, _setupAndTearDown);
             queue.TearDown()
                 .Setup()
                 .InitBus(BusBuilder.ForAudatexCommands(_aggregateId))
                 .InitStopWatch()
-                .StartingDataProviderMessage()
+                .StartingDataProviderMessageWithRequest(DataProviderRequestBuilder.ForAudatexLicensePlateSearch())
                 .ConfigurationMessage(DataProviderConfigurationBuiler.ForAudatex())
-                //.SecurityMessage(DataProviderConfigurationBuiler.ForAudatex(), null)
-                .StartCallingMessage()
-                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Audatex Data Provider" })
+                .StartCallingMessageWithDataProviderSourceRequest(DataProviderSourceRequestBuilder.ForAudatex())
+                .FaultCallingMessage(new {NoRequestReceived = "No response received from Audatex Data Provider"})
                 .EndCallingMessage(DataProviderResponseBuilder.FromAudatex())
-                .TransformationMessage(DataProviderTransformationBuilder.ForAudatex(), new { TrasformationMetaData = "Transforming Response from Audatex" })
-                .EndingDataProvider();
+                .TransformationMessage(DataProviderTransformationBuilder.ForAudatex(),
+                    new {TrasformationMetaData = "Transforming Response from Audatex"})
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.ForAudatex());
 
             return this;
         }
@@ -78,7 +80,7 @@ namespace Monitoring.Test.Helper.Builder
                 .Setup()
                 .InitBus(BusBuilder.ForIvidTitleHolderCommands(_aggregateId))
                 .InitStopWatch()
-                .StartingDataProviderMessage()
+                .StartingDataProviderMessageWithRequest(DataProviderRequestBuilder.ForIvidTitleHolderLicensePlateSearch())
                 .ConfigurationMessage(DataProviderConfigurationBuiler.ForIvidTitleHolder())
                 .SecurityMessage(new
                 {
@@ -90,13 +92,13 @@ namespace Monitoring.Test.Helper.Builder
                         }
                 },
                     new { ContextMessage = "Ivid Title Holder Data Provider Credentials" })
-                .StartCallingMessage()
-                //.FaultCallingMessage(
-                //    new { NoRequestReceived = "No response received from Ivid Title Holder Data Provider" })
+                .StartCallingMessageWithDataProviderSourceRequest(DataProviderSourceRequestBuilder.ForIvidTitleHolder())
+                .FaultCallingMessage(
+                   new { NoRequestReceived = "No response received from Ivid Title Holder Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromIvidTitleHolder())
                 .TransformationMessage(DataProviderTransformationBuilder.ForIvidTitleHolder(),
                     new { TrasformationMetaData = "Transforming Response from Ivid Title Holder" })
-                .EndingDataProvider();
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.FromIvidTitleHolder());
             return this;
         }
 
@@ -108,15 +110,15 @@ namespace Monitoring.Test.Helper.Builder
                 .Setup()
                 .InitBus(BusBuilder.ForLightstoneCommands(_aggregateId))
                 .InitStopWatch()
-                .StartingDataProviderMessage()
+                .StartingDataProviderMessageWithRequest(DataProviderRequestBuilder.ForLightstoneLicensePlateSearch())
                 //.ConfigurationMessage)
                 //.SecurityMessage(DataProviderConfigurationBuiler.ForAudatex(), null)
-                .StartCallingMessage()
-                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Lightstone Data Provider" })
+                .StartingDataProviderMessageWithRequest(DataProviderSourceRequestBuilder.ForLightstone())
+                .FaultCallingMessage(new { NoRequestReceived = "No response received from Lightstone Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromLightstone())
                 .TransformationMessage(DataProviderTransformationBuilder.ForLightstone(),
                     new { TrasformationMetaData = "Transforming Response from Lightstone" })
-                .EndingDataProvider();
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.FromLighstone());
             return this;
         }
 
@@ -127,24 +129,13 @@ namespace Monitoring.Test.Helper.Builder
                 .Setup()
                 .InitBus(BusBuilder.ForRgtCommands(_aggregateId))
                 .InitStopWatch()
-                .StartingDataProviderMessage()
-                //.ConfigurationMessage(DataProviderConfigurationBuiler.ForIvid())
-                //.SecurityMessage(new
-                //{
-                //    Credentials =
-                //        new
-                //        {
-                //            UserName = "CARSTATS-CARSTATS",
-                //            Password = "8B5Jk3Q66"
-                //        }
-                //},
-                //    new {ContextMessage = "Ivid Data Provider Credentials"})
-                .StartCallingMessage()
-                //.FaultCallingMessage(new { NoRequestReceived = "No response received from Rgt Data Provider" })
+                .StartingDataProviderMessageWithRequest(DataProviderRequestBuilder.ForRgtLicensePlateSearch())
+                .StartCallingMessageWithDataProviderSourceRequest(DataProviderSourceRequestBuilder.ForRgt())
+                .FaultCallingMessage(new { NoRequestReceived = "No response received from Rgt Data Provider" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromRgt())
                 .TransformationMessage(DataProviderTransformationBuilder.ForRgt(),
                     new { TrasformationMetaData = "Transforming Response from Rgt" })
-                .EndingDataProvider();
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.FromRgt());
             return this;
         }
 
@@ -155,15 +146,15 @@ namespace Monitoring.Test.Helper.Builder
                 .Setup()
                 .InitBus(BusBuilder.ForRgtVinCommands(_aggregateId))
                 .InitStopWatch()
-                .StartingDataProviderMessage()
+                .StartingDataProviderMessageWithRequest(DataProviderRequestBuilder.ForRgtVinLicensePlateSearch())
                 .ConfigurationMessage(new { VinNumber = "AHT31UNK408007735" })
                 //.SecurityMessage()
-                .StartCallingMessage()
-                //.FaultCallingMessage(new { NoRequestReceived = "No VINs were received" })
+                .StartCallingMessageWithDataProviderSourceRequest(DataProviderSourceRequestBuilder.ForRgtVin())
+                .FaultCallingMessage(new { NoRequestReceived = "No VINs were received" })
                 .EndCallingMessage(DataProviderResponseBuilder.FromRgtVin())
                 .TransformationMessage(DataProviderTransformationBuilder.ForRgtVin(),
                     new { TrasformationMetaData = "Transforming Response from Rgt Vin" })
-                .EndingDataProvider();
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.FromRgtVin());
             return this;
         }
 
@@ -176,7 +167,7 @@ namespace Monitoring.Test.Helper.Builder
                 .InitBus(BusBuilder.ForEntryPoint(_aggregateId))
                 .InitStopWatch()
                 .StartingDataProviderMessage()
-                .EndingDataProvider();
+                .EndingDataProviderWithResponse(ResponseFromDataProvider.ForVViProduct());
             return this;
         }
 

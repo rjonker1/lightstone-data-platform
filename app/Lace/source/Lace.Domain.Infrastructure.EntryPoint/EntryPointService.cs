@@ -68,7 +68,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 _bootstrap = new Initialize(new LaceResponse(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
 
-                _monitoring.End(request, null);
+                _monitoring.End(_bootstrap.LaceResponses ?? EmptyResponse, null);
 
                 return _bootstrap.LaceResponses ?? EmptyResponse;
 

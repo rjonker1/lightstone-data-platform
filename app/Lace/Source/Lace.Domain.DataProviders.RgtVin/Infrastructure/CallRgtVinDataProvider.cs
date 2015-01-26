@@ -47,7 +47,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     .Build()
                     .Vin;
 
-                monitoring.Send(CommandType.Configuration, new {VinNumber = vin}, null);
+                monitoring.Send(CommandType.Configuration, new { VinNumber = vin}, null);
 
                 monitoring.StartCall(vin, _stopWatch);
 

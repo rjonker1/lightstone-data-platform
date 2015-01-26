@@ -1,8 +1,8 @@
-﻿using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Models;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Repositories;
+﻿using Lace.CrossCutting.DataProvider.Certificate.Core.Models;
+using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
+using Lace.CrossCutting.DataProvider.Certificate.Repositories;
 
-namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts
+namespace Lace.CrossCutting.DataProvider.Certificate.Core.Contracts
 {
     public interface ISetupCertificateRepository
     {

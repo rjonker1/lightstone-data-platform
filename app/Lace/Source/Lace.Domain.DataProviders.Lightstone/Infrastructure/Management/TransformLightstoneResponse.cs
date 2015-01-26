@@ -1,4 +1,4 @@
-﻿using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
+﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;

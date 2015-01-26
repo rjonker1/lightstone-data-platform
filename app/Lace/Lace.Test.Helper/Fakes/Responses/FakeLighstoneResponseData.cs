@@ -1,5 +1,5 @@
-﻿using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure;
+﻿using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Lightstone.Services;

@@ -2,9 +2,9 @@
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Factory;
+using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
+using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
