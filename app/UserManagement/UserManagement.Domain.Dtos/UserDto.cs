@@ -15,7 +15,7 @@ namespace UserManagement.Domain.Dtos
         public bool? IsActive { get; set; }
         //public IEnumerable<ClientUser> ClientUser { get; set; }
         public UserType UserType { get; set; }
-        //public IEnumerable<UserLinkedToCustomer> UserLinkedToCustomer { get; set; }
+        public IEnumerable<Customer> Customers { get; set; }
         //public UserProfile UserProfile { get; set; }
 
         public IList<Role> Roles { get; set; } 
@@ -27,7 +27,7 @@ namespace UserManagement.Domain.Dtos
         public virtual string ContactNumber { get; set; }
 
         public UserDto(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive, UserType userType,
-                        IList<Role> roles, string firstName, string surname, string idNumber, string contactNumber)
+                        IEnumerable<Customer> customers, IList<Role> roles, string firstName, string surname, string idNumber, string contactNumber)
         {
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
@@ -36,7 +36,7 @@ namespace UserManagement.Domain.Dtos
             UserName = userName;
             IsActive = isActive;
             UserType = userType;
-            //UserProfile = userProfile;
+            Customers = customers;
             Roles = roles;
             FirstName = firstName;
             Surname = surname;
