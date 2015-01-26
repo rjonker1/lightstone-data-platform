@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Repositories;
-using Lace.CrossCutting.DataProviderCommandSource.Car.UnitOfWork;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
+using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Test.Helper.Builders.Requests;

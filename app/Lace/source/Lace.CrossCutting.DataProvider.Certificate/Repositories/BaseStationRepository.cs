@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Models;
+using Lace.CrossCutting.DataProvider.Certificate.Core.Models;
 using Lace.CrossCutting.Infrastructure.Orm;
 using ServiceStack.Redis;
 
-namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Repositories
+namespace Lace.CrossCutting.DataProvider.Certificate.Repositories
 {
     public class BaseStationRepository : IReadOnlyRepository<BaseStation>
     {

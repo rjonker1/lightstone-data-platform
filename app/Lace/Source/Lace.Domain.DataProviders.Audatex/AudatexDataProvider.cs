@@ -34,12 +34,12 @@ namespace Lace.Domain.DataProviders.Audatex
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Audatex);
-                _monitoring.Begin(_request, stopWatch);
+                _monitoring.Begin(new { _request.Vehicle, response.IvidResponse }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                _monitoring.End(_request, stopWatch);
+                _monitoring.End(response, stopWatch);
 
                 if (response.AudatexResponse == null)
                     CallFallbackSource(response, _monitoring);

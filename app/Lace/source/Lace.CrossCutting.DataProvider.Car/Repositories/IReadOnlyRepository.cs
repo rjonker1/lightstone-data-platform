@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lace.CrossCutting.DataProviderCommandSource.Car.Repositories
+namespace Lace.CrossCutting.DataProvider.Car.Repositories
 {
     public interface IReadOnlyCarRepository<T>
     {

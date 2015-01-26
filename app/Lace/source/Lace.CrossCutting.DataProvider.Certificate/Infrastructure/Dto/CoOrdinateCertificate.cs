@@ -1,5 +1,5 @@
-﻿using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts;
-namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Infrastructure.Dto
+﻿using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
+namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto
 {
     public class CoOrdinateCertificate : IDefineTheCertificate
     {

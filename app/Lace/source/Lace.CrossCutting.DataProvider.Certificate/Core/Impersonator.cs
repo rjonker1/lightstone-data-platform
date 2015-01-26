@@ -2,9 +2,9 @@
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using Common.Logging;
-using Lace.CrossCutting.DataProviderCommandSource.Certificate.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 
-namespace Lace.CrossCutting.DataProviderCommandSource.Certificate.Core
+namespace Lace.CrossCutting.DataProvider.Certificate.Core
 {
     public class Impersonator : IImpersonateACertificateUser
     {

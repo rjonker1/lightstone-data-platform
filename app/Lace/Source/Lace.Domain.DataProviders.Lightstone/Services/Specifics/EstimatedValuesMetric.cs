@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.Core.Contracts.Requests;
@@ -53,7 +54,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
                 estimatedPrice.MoneyValue.HasValue ? estimatedPrice.MoneyValue.Value.ToString("C") : "",
                 salePriceLow.MoneyValue.HasValue ? salePriceLow.MoneyValue.Value.ToString("C") : "",
                 salePriceHigh.MoneyValue.HasValue ? salePriceHigh.MoneyValue.Value.ToString("C") : "",
-                confidence.MoneyValue.HasValue ? confidence.MoneyValue.Value.ToString("C") : "",
+                confidence.FloatValue.HasValue ? confidence.FloatValue.Value.ToString(CultureInfo.CurrentCulture) : "",
                 GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00));
         }
 
@@ -67,11 +68,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
 
             if (estimatedPrice == null || salePriceHigh == null || salePriceLow == null || confidence == null) return;
 
-            model.SetRetailEstimatedValues(
+            model.SetTradeEstimatedValues(
                 estimatedPrice.MoneyValue.HasValue ? estimatedPrice.MoneyValue.Value.ToString("C") : "",
                 salePriceLow.MoneyValue.HasValue ? salePriceLow.MoneyValue.Value.ToString("C") : "",
                 salePriceHigh.MoneyValue.HasValue ? salePriceHigh.MoneyValue.Value.ToString("C") : "",
-                confidence.MoneyValue.HasValue ? confidence.MoneyValue.Value.ToString("C") : "",
+                confidence.FloatValue.HasValue ? confidence.FloatValue.Value.ToString(CultureInfo.CurrentCulture) : "",
                 GetConfidenceLevel(confidence.FloatValue.HasValue ? confidence.FloatValue.Value : 0.00));
         }
 

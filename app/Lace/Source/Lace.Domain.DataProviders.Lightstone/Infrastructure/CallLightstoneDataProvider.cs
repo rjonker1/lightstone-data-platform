@@ -1,8 +1,8 @@
 ﻿using System;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Infrastructure;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                monitoring.StartCall(_request, _stopWatch);
+                monitoring.StartCall(new { _request.User, _request.Vehicle, _request.Context }, _stopWatch);
 
                 GetCarInformation();
                 GetMetrics();

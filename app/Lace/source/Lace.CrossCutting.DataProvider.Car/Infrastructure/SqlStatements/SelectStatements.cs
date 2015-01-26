@@ -1,4 +1,4 @@
-﻿namespace Lace.CrossCutting.DataProviderCommandSource.Car.Infrastructure.SqlStatements
+﻿namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements
 {
     public class SelectStatements
     {

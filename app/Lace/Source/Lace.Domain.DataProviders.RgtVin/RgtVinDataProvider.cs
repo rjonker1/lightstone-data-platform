@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                _monitoring.Begin(_request, stopWatch);
+                _monitoring.Begin(new {_request.Vehicle, response.IvidResponse}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_request,
@@ -44,7 +44,7 @@ namespace Lace.Domain.DataProviders.RgtVin
                             CacheConnectionFactory.LocalClient())));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                _monitoring.End(_request, stopWatch);
+                _monitoring.End(response, stopWatch);
 
                 if (response.RgtVinResponse == null && FallBack != null)
                     CallFallbackSource(response, _monitoring);

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Models;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Repositories;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Models;
+using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.Core.Contracts.Requests;
 
-namespace Lace.CrossCutting.DataProviderCommandSource.Car.UnitOfWork
+namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
 {
     public class CarInfoUnitOfWork : IGetCarInfo
     {

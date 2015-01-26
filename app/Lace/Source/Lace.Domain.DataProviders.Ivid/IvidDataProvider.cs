@@ -33,12 +33,12 @@ namespace Lace.Domain.DataProviders.Ivid
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Ivid);
-                _monitoring.Begin(_request, stopWatch);
+                _monitoring.Begin(new {_request.User, _request.Vehicle, _request.Context}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                _monitoring.End(_request, stopWatch);
+                _monitoring.End(response, stopWatch);
 
                 if (response.IvidResponse == null)
                     CallFallbackSource(response, _monitoring);

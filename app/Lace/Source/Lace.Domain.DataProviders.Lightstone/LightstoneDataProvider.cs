@@ -1,5 +1,5 @@
 ﻿using DataPlatform.Shared.Enums;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Repositories.Factory;
+using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
@@ -37,7 +37,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Lightstone);
-                _monitoring.Begin(_request, stopWatch);
+                _monitoring.Begin(new { _request.User, _request.Vehicle, _request.Context }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
                     new CallLightstoneDataProvider(_request,
@@ -48,7 +48,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                _monitoring.End(_request, stopWatch);
+                _monitoring.End(response, stopWatch);
 
                 if (response.LightstoneResponse == null)
                     CallFallbackSource(response, _monitoring);

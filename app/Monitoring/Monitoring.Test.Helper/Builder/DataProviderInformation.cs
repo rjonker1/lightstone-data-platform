@@ -177,6 +177,452 @@ namespace Monitoring.Test.Helper.Builder
 
             };
         }
+
+        public static object ForIvidLicensePlateSearch()
+        {
+            return new
+            {
+                Request = new
+                {
+                    User = new
+                    {
+                        UserId = "4a17b499-845f-43e2-aa2f-cfcb06920ab6",
+                        AggregateId = "72e7523f - 7278 - 408e-8b7f-77d 745412c8a",
+                        UserName = string.Empty,
+                        UserFirstName = "Penny",
+                        UserLastName = string.Empty,
+                        UserEmail = "pennyl@lightstone.co.za",
+                        UserPhone = string.Empty
+                    },
+                    Context =
+                        new
+                        {
+                            Product = "VVi+ADX+VPi",
+                            ReasonForApplication = string.Empty,
+                            SecurityCode = "c99ef6d2-fdea-4a81-b15f-ff8251ac9050"
+                        },
+                    RequestAggregation = new {AggregateId = "80c39ef1-ab67-43bf-963c-b6afa7acab56"},
+                    Vehicle =
+                        new
+                        {
+                            EngineNo = string.Empty,
+                            VinOrChassis = string.Empty,
+                            Make = string.Empty,
+                            RegisterNo = string.Empty,
+                            LicenceNo = "XMC167GP",
+                            Vin = "SB1KV58E40F039277"
+                        },
+                    RequestDate = "2014-12-19T16=14=33.1329013+02=00",
+                    SearchTerm = "XMC167GP"
+                }
+
+            };
+        }
+
+        public static object ForIvidTitleHolderLicensePlateSearch()
+        {
+            return new
+            {
+                Request = new
+                {
+                    User = new
+                    {
+                        UserId = "4a17b499-845f-43e2-aa2f-cfcb06920ab6",
+                        AggregateId = "72e7523f - 7278 - 408e-8b7f-77d 745412c8a",
+                        UserName = string.Empty,
+                        UserFirstName = "Penny",
+                        UserLastName = string.Empty,
+                        UserEmail = "pennyl@lightstone.co.za",
+                        UserPhone = string.Empty
+                    }
+                },
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new {},
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = false
+                },
+                LightstoneResponse = new {},
+                LightstoneResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtVinResponse = new {},
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new {},
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new {},
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object ForRgtVinLicensePlateSearch()
+        {
+            return new
+            {
+                Request = new
+                {
+                    Vehicle =
+                         new
+                         {
+                             EngineNo = string.Empty,
+                             VinOrChassis = string.Empty,
+                             Make = string.Empty,
+                             RegisterNo = string.Empty,
+                             LicenceNo = "XMC167GP",
+                             Vin = "SB1KV58E40F039277"
+                         }
+                },
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new { },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = false
+                },
+                LightstoneResponse = new { },
+                LightstoneResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtVinResponse = new { },
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new { },
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object ForRgtLicensePlateSearch()
+        {
+            return new
+            {
+                Request = new
+                {
+                    Vehicle =
+                         new
+                         {
+                             EngineNo = string.Empty,
+                             VinOrChassis = string.Empty,
+                             Make = string.Empty,
+                             RegisterNo = string.Empty,
+                             LicenceNo = "XMC167GP",
+                             Vin = "SB1KV58E40F039277"
+                         }
+                },
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new { },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = false
+                },
+                LightstoneResponse = new { },
+                LightstoneResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtVinResponse = new { },
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new { },
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object ForAudatexLicensePlateSearch()
+        {
+            return new
+            {
+                Request = new
+                {
+                    Vehicle =
+                         new
+                         {
+                             EngineNo = string.Empty,
+                             VinOrChassis = string.Empty,
+                             Make = string.Empty,
+                             RegisterNo = string.Empty,
+                             LicenceNo = "XMC167GP",
+                             Vin = "SB1KV58E40F039277"
+                         }
+                },
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new { },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = false
+                },
+                LightstoneResponse = new { },
+                LightstoneResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtVinResponse = new { },
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new { },
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object ForLightstoneLicensePlateSearch()
+        {
+            return new
+            {
+                Request = new
+                {
+                    User = new
+                    {
+                        UserId = "4a17b499-845f-43e2-aa2f-cfcb06920ab6",
+                        AggregateId = "72e7523f - 7278 - 408e-8b7f-77d 745412c8a",
+                        UserName = string.Empty,
+                        UserFirstName = "Penny",
+                        UserLastName = string.Empty,
+                        UserEmail = "pennyl@lightstone.co.za",
+                        UserPhone = string.Empty
+                    },
+                    Context =
+                        new
+                        {
+                            Product = "VVi+ADX+VPi",
+                            ReasonForApplication = string.Empty,
+                            SecurityCode = "c99ef6d2-fdea-4a81-b15f-ff8251ac9050"
+                        },
+                    RequestAggregation = new { AggregateId = "80c39ef1-ab67-43bf-963c-b6afa7acab56" },
+                    Vehicle =
+                        new
+                        {
+                            EngineNo = string.Empty,
+                            VinOrChassis = string.Empty,
+                            Make = string.Empty,
+                            RegisterNo = string.Empty,
+                            LicenceNo = "XMC167GP",
+                            Vin = "SB1KV58E40F039277"
+                        },
+                    RequestDate = "2014-12-19T16=14=33.1329013+02=00",
+                    SearchTerm = "XMC167GP"
+                }
+
+            };
+        }
     }
 
     public class DataProviderResponseBuilder
@@ -209,7 +655,7 @@ namespace Monitoring.Test.Helper.Builder
             return
                 new
                 {
-                    HpiStandardQueryRequest =
+                    HpiStandardQueryResponse =
                         new
                         {
                             ividQueryResult = 1,
@@ -598,6 +1044,1072 @@ namespace Monitoring.Test.Helper.Builder
                     Vin = "SB1KV58E40F039277",
                     Year = 2008
                 }
+            };
+        }
+    }
+
+    public class ResponseFromDataProvider
+    {
+        public static object ForVViProduct()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new
+                {
+                    BankName = "",
+                    AccountNumber = "",
+                    DateOpened = DateTime.Now,
+                    FinancialInterestsHeading = "",
+                    AccountOpenDate = "",
+                    AccountClosedDate = "",
+                    AgreementType = "",
+                    YearOfLiabilityForLicensing = "",
+                    RequestFinancialInterestInvite = "",
+                    FinancialInterestAvailable = false,
+                    PartialResponse = false,
+                    HasErrors = false,
+                    ExpiredMessage = ""
+                },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = true
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new { },
+                        AmortisationFactors = new { },
+                        AmortisedValues = new { },
+                        AreaFactors = new { },
+                        AuctionFactors = new { },
+                        Confidence = new { },
+                        EstimatedValue = new { },
+                        Frequency = new { },
+                        ImageGauges = new { },
+                        LastFiveSales = new { },
+                        Prices = new { },
+                        RepairIndex = new { },
+                        TotalSalesByAge = new { },
+                        TotalSalesByGender = new { },
+                    }
+                },
+                LightstoneResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtVinResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    Colour = "STANDARD WHITE",
+                    Month = 2,
+                    Price = 0,
+                    Quarter = 0,
+                    RgtCode = string.Empty,
+                    VehicleMake = "TOYOTA",
+                    VehicleModel = "Auris 1.6 RT 5-dr",
+                    VehicleType = string.Empty,
+                    Vin = "SB1KV58E40F039277",
+                    Year = 2008
+                },
+                RgtVinResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtResponse = new
+                {
+                    Manufacturer = "",
+                    ModelYear = "",
+                    ModelType = "",
+                    TopSpeed = "",
+                    Kilowatts = "",
+                    FuelEconomy = "",
+                    Acceleration = "",
+                    Torque = "",
+                    Emissions = "",
+                    EngineSize = "",
+                    BodyShape = "",
+                    FuelType = "",
+                    TransmissionType = "",
+                    CarFullname = "",
+                    Colour = "",
+                    RainSensorWindscreenWipers = "",
+                    HeadUpDisplay = "",
+                    VehicleType = "",
+                    Model = "",
+                    Make = "",
+                    CarType = ""
+
+                },
+                RgtResponseHandled = new
+                {
+                    Handled = true
+                },
+                AudatexResponse = new
+                {
+                    AccidentClaims = new
+                    {
+                        AccidentClaim = new
+                        {
+                            AccidentDate = string.Empty,
+                            AssessmentNumber = string.Empty,
+                            ClaimReferenceNumber = string.Empty,
+                            CreationDate = string.Empty,
+                            CreationDateString = string.Empty,
+                            DataSource = string.Empty,
+                            InsuredName = string.Empty,
+                            Manufacturer = string.Empty,
+                            Mileage = string.Empty,
+                            Model = string.Empty,
+                            Originator = string.Empty,
+                            PolicyNumber = string.Empty,
+                            Registration = string.Empty,
+                            RepairCostExVat = string.Empty,
+                            RepairCostIncVat = string.Empty,
+                            VersionDate = string.Empty,
+                            Vin = string.Empty,
+                            WorkproviderReference = string.Empty,
+                            MatchType = string.Empty,
+                            QuoteValueIndicator = string.Empty,
+                        }
+                    },
+                    HasAccidentClaims = true,
+                    QuoteValueIndicatorNote = "* Indicates the repair quote band segment",
+                    LowConfidenceLevelIndicatorNote = "! Indicates that we have a low confidence in the record returned",
+                    RegistrationNumberOnlyIndicatorNote = "** This record is matched on Registration number only"
+                },
+                AudatexResponseHandled = new
+                {
+                    Handled = true
+                }
+            };
+        }
+
+        public static object FromIvid()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new {},
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = false
+                },
+                LightstoneResponse = new {},
+                LightstoneResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtVinResponse = new {},
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new {},
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new {},
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object FromLighstone()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new { },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = false
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new { },
+                        AmortisationFactors = new { },
+                        AmortisedValues = new { },
+                        AreaFactors = new { },
+                        AuctionFactors = new { },
+                        Confidence = new { },
+                        EstimatedValue = new { },
+                        Frequency = new { },
+                        ImageGauges = new { },
+                        LastFiveSales = new { },
+                        Prices = new { },
+                        RepairIndex = new { },
+                        TotalSalesByAge = new { },
+                        TotalSalesByGender = new { },
+                    }
+                },
+                LightstoneResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtVinResponse = new { },
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new { },
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object FromIvidTitleHolder()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new
+                {
+                    BankName = "",
+                    AccountNumber = "",
+                    DateOpened = DateTime.Now,
+                    FinancialInterestsHeading = "",
+                    AccountOpenDate = "",
+                    AccountClosedDate = "",
+                    AgreementType = "",
+                    YearOfLiabilityForLicensing = "",
+                    RequestFinancialInterestInvite = "",
+                    FinancialInterestAvailable = false,
+                    PartialResponse = false,
+                    HasErrors = false,
+                    ExpiredMessage = ""
+                },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = true
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new { },
+                        AmortisationFactors = new { },
+                        AmortisedValues = new { },
+                        AreaFactors = new { },
+                        AuctionFactors = new { },
+                        Confidence = new { },
+                        EstimatedValue = new { },
+                        Frequency = new { },
+                        ImageGauges = new { },
+                        LastFiveSales = new { },
+                        Prices = new { },
+                        RepairIndex = new { },
+                        TotalSalesByAge = new { },
+                        TotalSalesByGender = new { },
+                    }
+                },
+                LightstoneResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtVinResponse = new { },
+                RgtVinResponseHandled = new
+                {
+                    Handled = false
+                },
+                RgtResponse = new { },
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object FromRgtVin()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new
+                {
+                    BankName = "",
+                    AccountNumber = "",
+                    DateOpened = DateTime.Now,
+                    FinancialInterestsHeading = "",
+                    AccountOpenDate = "",
+                    AccountClosedDate = "",
+                    AgreementType = "",
+                    YearOfLiabilityForLicensing = "",
+                    RequestFinancialInterestInvite = "",
+                    FinancialInterestAvailable = false,
+                    PartialResponse = false,
+                    HasErrors = false,
+                    ExpiredMessage = ""
+                },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = true
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new { },
+                        AmortisationFactors = new { },
+                        AmortisedValues = new { },
+                        AreaFactors = new { },
+                        AuctionFactors = new { },
+                        Confidence = new { },
+                        EstimatedValue = new { },
+                        Frequency = new { },
+                        ImageGauges = new { },
+                        LastFiveSales = new { },
+                        Prices = new { },
+                        RepairIndex = new { },
+                        TotalSalesByAge = new { },
+                        TotalSalesByGender = new { },
+                    }
+                },
+                LightstoneResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtVinResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    Colour = "STANDARD WHITE",
+                    Month = 2,
+                    Price = 0,
+                    Quarter = 0,
+                    RgtCode = string.Empty,
+                    VehicleMake = "TOYOTA",
+                    VehicleModel = "Auris 1.6 RT 5-dr",
+                    VehicleType = string.Empty,
+                    Vin = "SB1KV58E40F039277",
+                    Year = 2008
+                },
+                RgtVinResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtResponse = new { },
+                RgtResponseHandled = new
+                {
+                    Handled = false
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object FromRgt()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new
+                {
+                    BankName = "",
+                    AccountNumber = "",
+                    DateOpened = DateTime.Now,
+                    FinancialInterestsHeading = "",
+                    AccountOpenDate = "",
+                    AccountClosedDate = "",
+                    AgreementType = "",
+                    YearOfLiabilityForLicensing = "",
+                    RequestFinancialInterestInvite = "",
+                    FinancialInterestAvailable = false,
+                    PartialResponse = false,
+                    HasErrors = false,
+                    ExpiredMessage = ""
+                },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = true
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new { },
+                        AmortisationFactors = new { },
+                        AmortisedValues = new { },
+                        AreaFactors = new { },
+                        AuctionFactors = new { },
+                        Confidence = new { },
+                        EstimatedValue = new { },
+                        Frequency = new { },
+                        ImageGauges = new { },
+                        LastFiveSales = new { },
+                        Prices = new { },
+                        RepairIndex = new { },
+                        TotalSalesByAge = new { },
+                        TotalSalesByGender = new { },
+                    }
+                },
+                LightstoneResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtVinResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    Colour = "STANDARD WHITE",
+                    Month = 2,
+                    Price = 0,
+                    Quarter = 0,
+                    RgtCode = string.Empty,
+                    VehicleMake = "TOYOTA",
+                    VehicleModel = "Auris 1.6 RT 5-dr",
+                    VehicleType = string.Empty,
+                    Vin = "SB1KV58E40F039277",
+                    Year = 2008
+                },
+                RgtVinResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtResponse = new
+                {
+                    Manufacturer = "",
+                    ModelYear = "",
+                    ModelType = "",
+                    TopSpeed = "",
+                    Kilowatts = "",
+                    FuelEconomy = "",
+                    Acceleration = "",
+                    Torque = "",
+                    Emissions = "",
+                    EngineSize = "",
+                    BodyShape = "",
+                    FuelType = "",
+                    TransmissionType = "",
+                    CarFullname = "",
+                    Colour = "",
+                    RainSensorWindscreenWipers = "",
+                    HeadUpDisplay = "",
+                    VehicleType = "",
+                    Model = "",
+                    Make = "",
+                    CarType = ""
+
+                },
+                RgtResponseHandled = new
+                {
+                    Handled = true
+                },
+                AudatexResponse = new { },
+                AudatexResponseHandled = new
+                {
+                    Handled = false
+                }
+            };
+        }
+
+        public static object ForAudatex()
+        {
+            return new
+            {
+                IvidResponse = new
+                {
+                    SpecificInformation = new
+                    {
+                        Odometer = "Odometer Not Available",
+                        Colour = "White",
+                        RegistrationNumber = "CNC407L",
+                        VinNumber = "SB1KV58E40F039277",
+                        LicenseNumber = "XMC167GP",
+                        EngineNumber = "1ZRU041295",
+                        CategoryDescription = "Light passenger mv(less than 12 persons)",
+                        StatusMessage = "NO_ISSUES",
+                        Reference = "IVD - 01468460493",
+                        License = "XMC167GP",
+                        Registration = "CNC407L",
+                        RegistrationDate = "2/18/2014",
+                        Vin = "SB1KV58E40F039277",
+                        Engine = "1ZRU041295",
+                        Displacement = 1598,
+                        Tare = 1276,
+                        MakeCode = "T05",
+                        MakeDescription = "Toyota",
+                        ModelCode = "D166",
+                        ModelDescription = "AURIS",
+                        ColourCode = 3,
+                        ColourDescription = "White",
+                        DrivenCode = 1,
+                        DrivenDescription = "Self-propelled",
+                        CategoryCode = "B",
+                        DescriptionCode = 18,
+                        Description = "Hatch back",
+                        EconomicSectorCode = 1,
+                        EconomicSectorDescription = "Private",
+                        LifeStatusCode = 2,
+                        LifeStatusDescription = "Used",
+                        SapMarkCode = 99,
+                        SapMarkDescription = "None",
+                        HasIssues = false,
+                        HasErrors = false,
+                        CarFullname = "Toyota AURIS"
+                    }
+                },
+                IvidResponseHandled = new
+                {
+                    Handled = true
+                },
+                IvidTitleHolderResponse = new
+                {
+                    BankName = "",
+                    AccountNumber = "",
+                    DateOpened = DateTime.Now,
+                    FinancialInterestsHeading = "",
+                    AccountOpenDate = "",
+                    AccountClosedDate = "",
+                    AgreementType = "",
+                    YearOfLiabilityForLicensing = "",
+                    RequestFinancialInterestInvite = "",
+                    FinancialInterestAvailable = false,
+                    PartialResponse = false,
+                    HasErrors = false,
+                    ExpiredMessage = ""
+                },
+                IvidTitleHolderResponseHandled = new
+                {
+                    Handled = true
+                },
+                LightstoneResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    CarId = 107483,
+                    ImageUrl = "http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg",
+                    Model = "Auris 1.6 RT 5-dr",
+                    Quarter = "3rd Quarter",
+                    Vin = "SB1KV58E40F039277",
+                    Year = "2008",
+                    VehicleValuation = new
+                    {
+                        AccidentDistribution = new { },
+                        AmortisationFactors = new { },
+                        AmortisedValues = new { },
+                        AreaFactors = new { },
+                        AuctionFactors = new { },
+                        Confidence = new { },
+                        EstimatedValue = new { },
+                        Frequency = new { },
+                        ImageGauges = new { },
+                        LastFiveSales = new { },
+                        Prices = new { },
+                        RepairIndex = new { },
+                        TotalSalesByAge = new { },
+                        TotalSalesByGender = new { },
+                    }
+                },
+                LightstoneResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtVinResponse = new
+                {
+                    CarFullname = "TOYOTA Auris 1.6 RT 5-dr",
+                    Colour = "STANDARD WHITE",
+                    Month = 2,
+                    Price = 0,
+                    Quarter = 0,
+                    RgtCode = string.Empty,
+                    VehicleMake = "TOYOTA",
+                    VehicleModel = "Auris 1.6 RT 5-dr",
+                    VehicleType = string.Empty,
+                    Vin = "SB1KV58E40F039277",
+                    Year = 2008
+                },
+                RgtVinResponseHandled = new
+                {
+                    Handled = true
+                },
+                RgtResponse = new
+                {
+                    Manufacturer = "",
+                    ModelYear = "",
+                    ModelType = "",
+                    TopSpeed = "",
+                    Kilowatts = "",
+                    FuelEconomy = "",
+                    Acceleration = "",
+                    Torque = "",
+                    Emissions = "",
+                    EngineSize = "",
+                    BodyShape = "",
+                    FuelType = "",
+                    TransmissionType = "",
+                    CarFullname = "",
+                    Colour = "",
+                    RainSensorWindscreenWipers = "",
+                    HeadUpDisplay = "",
+                    VehicleType = "",
+                    Model = "",
+                    Make = "",
+                    CarType = ""
+
+                },
+                RgtResponseHandled = new
+                {
+                    Handled = true
+                },
+                AudatexResponse = new
+                {
+                    AccidentClaims = new
+                    {
+                        AccidentClaim = new
+                        {
+                            AccidentDate = string.Empty,
+                            AssessmentNumber = string.Empty,
+                            ClaimReferenceNumber = string.Empty,
+                            CreationDate = string.Empty,
+                            CreationDateString = string.Empty,
+                            DataSource = string.Empty,
+                            InsuredName = string.Empty,
+                            Manufacturer = string.Empty,
+                            Mileage = string.Empty,
+                            Model = string.Empty,
+                            Originator = string.Empty,
+                            PolicyNumber = string.Empty,
+                            Registration = string.Empty,
+                            RepairCostExVat = string.Empty,
+                            RepairCostIncVat = string.Empty,
+                            VersionDate = string.Empty,
+                            Vin = string.Empty,
+                            WorkproviderReference = string.Empty,
+                            MatchType = string.Empty,
+                            QuoteValueIndicator = string.Empty,
+                        }
+                    },
+                    HasAccidentClaims = true,
+                    QuoteValueIndicatorNote = "* Indicates the repair quote band segment",
+                    LowConfidenceLevelIndicatorNote = "! Indicates that we have a low confidence in the record returned",
+                    RegistrationNumberOnlyIndicatorNote = "** This record is matched on Registration number only"
+                },
+                AudatexResponseHandled = new
+                {
+                    Handled = true
+                }
+            };
+        }
+    }
+
+    public class DataProviderSourceRequestBuilder
+    {
+        public static object ForIvid()
+        {
+            return new
+            {
+                HpiQueryRequest = new
+                {
+                    ApplicantName = "pennyl@lightstone.co.za",
+                    EngineNo = string.Empty,
+                    HpiRequestReference = Guid.NewGuid().ToString().Split('-')[0],
+                    Label = string.Empty,
+                    LicenceNo = "XMC167GP",
+                    Make = string.Empty,
+                    ReasonForApplication = string.Empty,
+                    RegisterNo = string.Empty,
+                    VinOrChassis = "SB1KV58E40F039277"
+                }
+            };
+        }
+
+        public static object ForAudatex()
+        {
+            return new
+            {
+                AudatexMessageData = new
+                {
+                    RequestHeader = new {},
+                    Body = new
+                    {
+                        RequestBody = new
+                        {
+                            HistoryCheckRequest = new
+                            {
+                                VIN = "SB1KV58E40F039277",
+                                EngineNumber = "1ZRU041295",
+                                Registration = "XMC167GP",
+                                ClaimReferenceNumber = "",
+                                AssessmentNumber = "",
+                                Originator = ""
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        public static object ForLightstone()
+        {
+            return new
+            {
+                VinNumber = "SB1KV58E40F039277"
+            };
+        }
+
+        public static object ForIvidTitleHolder()
+        {
+            return new
+            {
+                TitleholderQueryRequest = new
+                {
+                    RequesterDetailsElement = new
+                    {
+                        requesterEmail = "pennyl@lightstone.co.za",
+                        requesterName = "Penny",
+                        requesterPhone = string.Empty
+                    },
+                    vin = "SB1KV58E40F039277"
+                }
+            };
+        }
+
+         public static object ForRgtVin()
+        {
+            return new
+            {
+                Vin = "SB1KV58E40F039277"
+            };
+        }
+
+        public static object ForRgt()
+        {
+            return new
+            {
+                Vehicle =
+                    new
+                    {
+                        EngineNo = string.Empty,
+                        VinOrChassis = string.Empty,
+                        Make = string.Empty,
+                        RegisterNo = string.Empty,
+                        LicenceNo = "XMC167GP",
+                        Vin = "SB1KV58E40F039277"
+                    }
             };
         }
     }

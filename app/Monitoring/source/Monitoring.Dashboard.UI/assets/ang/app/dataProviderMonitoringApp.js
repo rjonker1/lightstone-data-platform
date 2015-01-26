@@ -12,9 +12,21 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                 hub.server.initRootUri();
             });
 
-            //var sendRequest = function() {
-            //    this.hub.invoke();
-            //};
+            hub.error = function(error) {
+                console.warn("Error in Data Provider's SignalR Service: " + error);
+            };
+
+            hub.reconnected = function() {
+                console.log("Data Provider's SignalR Service Reconnected");
+            };
+
+            hub.stateChanged = function(change) {
+                if (change.newState === $.signalR.connectionState.reconnecting) {
+                    console.log("Reconnecting to Data Provider SignalR Service");
+                } else if (change.newState === $.signalR.connectionState.connected) {
+                    console.log("Dataprovider Monitoring App is online");
+                }
+            };
         };
 
         return { init: init};
@@ -80,15 +92,18 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
         //    }
         //};
 
-        $scope.CollapseOrExpand = function(img) {
+        $scope.CollapseOrExpand = function(button) {
             var lastIndex = getLastIndex();
             if (lastIndex >= 0) {
-                if (img.src == GetCollapsibleImage()) {
+                if (button.value == "Collapse") {
                     CollapseAllClicked(rawJsonId + lastIndex, canvasId);
+                    button.value = "Expand";
                 } else {
                     ExpandAllClicked(rawJsonId + lastIndex, canvasId);
+                    button.value = "Collapse";
                 }
-                SetExpandOrCollapseImage(img);
+                //SetExpandOrCollapseImage(button);
+                console.log(button.id);
             }
         };
     });

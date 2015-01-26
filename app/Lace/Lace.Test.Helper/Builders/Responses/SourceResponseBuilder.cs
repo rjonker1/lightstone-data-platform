@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.CrossCutting.DataProviderCommandSource.Car.Core.Contracts;
+using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;

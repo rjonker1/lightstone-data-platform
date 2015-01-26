@@ -103,32 +103,53 @@ namespace Lace.Unit.Tests.Sources
 
 
         [Observation]
-        public void lace_lighstone_response_vehicleValuation_estimated_value_confidence_level_must_be_correct()
+        public void lace_lighstone_response_vehicleValuation_retail_estimated_value_confidence_level_must_be_correct()
         {
             _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
-                .ConfidenceLevel.ShouldEqual("Medium");
+                .RetailConfidenceLevel.ShouldEqual("Medium");
         }
 
         [Observation]
-        public void lace_lighstone_response_vehicleValuation_estimated_value_estimated_high_must_be_correct()
+        public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_high_must_be_correct()
         {
             _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
-                .EstimatedHigh.ShouldEqual("R 98 700,00");
+                .RetailEstimatedHigh.ShouldEqual("R 98 700,00");
         }
 
         [Observation]
-        public void lace_lighstone_response_vehicleValuation_estimated_value_estimated_low_must_be_correct()
+        public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_low_must_be_correct()
         {
             _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
-                .EstimatedLow.ShouldEqual("R 80 600,00");
+                .RetailEstimatedLow.ShouldEqual("R 80 600,00");
+        }
+
+        [Observation]
+        public void lace_lighstone_response_vehicleValuation_trade_estimated_value_confidence_level_must_be_correct()
+        {
+            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+                .RetailConfidenceLevel.ShouldEqual("Medium");
+        }
+
+        [Observation]
+        public void lace_lighstone_response_vehicleValuation_trade_estimated_value_estimated_high_must_be_correct()
+        {
+            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+                .TradeEstimatedHigh.ShouldEqual("R 1 000 000,00");
+        }
+
+        [Observation]
+        public void lace_lighstone_response_vehicleValuation_trade_estimated_value_estimated_low_must_be_correct()
+        {
+            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+                .TradeEstimatedLow.ShouldEqual("R 100,00");
         }
 
 
         [Observation]
-        public void lace_lighstone_response_vehicleValuation_estimated_value_estimated_value_must_be_correct()
+        public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_value_must_be_correct()
         {
             _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
-                .EstimatedValue.ShouldEqual("R 89 200,00");
+                .TradeEstimatedValue.ShouldEqual("R 79 600,00");
         }
 
         [Observation]
