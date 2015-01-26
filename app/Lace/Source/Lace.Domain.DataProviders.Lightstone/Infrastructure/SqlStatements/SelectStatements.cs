@@ -10,7 +10,7 @@
 					 or (s.Metric_ID = 5 and s.Year_ID = @YearId)
 					 or (s.Metric_ID = 6 and s.Make_ID = @MakeId)
 					 or (s.Metric_ID = 7 and s.Make_ID = @MakeId)
-					 or (s.Metric_ID in (9, 10, 11, 13) and s.Car_ID = @CarId and s.Year_ID = @YearId)
+					 or (s.Metric_ID in (9, 10, 11, 13, 37, 35, 36, 38) and s.Car_ID = @CarId and s.Year_ID = @YearId)
 					 or (s.Metric_ID in (23, 24, 25, 26, 27, 28) and s.Car_ID = @CarId)";
 
         public const string GetAllCarVendors =

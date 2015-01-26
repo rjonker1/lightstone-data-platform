@@ -248,6 +248,18 @@ namespace Lace.Test.Helper.Mothers.Sources.Lightstone
                 new Statistic(964597, 28, 48, 93, 823, 107483, null, null, null, null, 166, null),
                 new Statistic(981268, 28, 50, 93, 823, 107483, null, null, null, null, 117, null),
                 new Statistic(981269, 28, 51, 93, 823, 107483, null, null, null, null, 2, null),
+                new Statistic(1693707, 35, 0, 95, 848, 107483, 2007, null, null, null, null, 100.00M),
+                new Statistic(1703404, 35, 0, 95, 848, 107483, 2009, null, null, null, null, 100.00M),
+                new Statistic(1710244, 35, 0, 95, 848, 107483, 2008, null, null, null, null, 100.00M),
+                new Statistic(1720520, 36, 0, 95, 848, 107483, 2007, null, null, null, null, 1000000.00M),
+                new Statistic(1730217, 36, 0, 95, 848, 107483, 2009, null, null, null, null, 1000000.00M),
+                new Statistic(1737057, 36, 0, 95, 848, 107483, 2008, null, null, null, null, 1000000.00M),
+                new Statistic(1746754, 37, 0, 95, 848, 107483, 2009, null, null, null, null, 92800.00M),
+                new Statistic(1759049, 37, 0, 95, 848, 107483, 2007, null, null, null, null, 77000.00M),
+                new Statistic(1769118, 37, 0, 95, 848, 107483, 2008, null, null, null, null, 79600.00M),
+                new Statistic(1774146, 38, 0, 95, 848, 107483, 2007, null, null, null, 50, null),
+                new Statistic(1783843, 38, 0, 95, 848, 107483, 2009, null, null, null, 50, null),
+                new Statistic(1790683, 38, 0, 95, 848, 107483, 2008, null, null, null, 50, null),
             };
         }
 
