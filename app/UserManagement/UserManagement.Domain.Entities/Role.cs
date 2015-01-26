@@ -11,9 +11,8 @@ namespace UserManagement.Domain.Entities
 
         protected Role() { }
 
-        public Role(Guid _id, string val)
+        public Role(Guid id, string val) : base(id)
         {
-            Id = _id;
             Name = val;
             Value = val;
         }

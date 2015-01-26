@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using UserManagement.Domain.Core.Entities;
+﻿using System.Collections.Generic;
+using UserManagement.Domain.Core.Commands;
 
-namespace UserManagement.Domain.Entities
+namespace UserManagement.Domain.Entities.Commands.Customers
 {
-    public class Customer : Entity
+    public class CreateCustomer : DomainCommand
     {
         public virtual string CustomerName { get; set; }
         public virtual string AccountOwnerName { get; set; }
@@ -13,15 +12,9 @@ namespace UserManagement.Domain.Entities
         //public virtual CustomerProfile CustomerProfile { get; set; }
         //public virtual IList<User> Users { get; set; }
 
-        protected Customer()
-        {
-            
-        }
-
-        public Customer(Guid id, string customerName, string accountOwnerName//, Province province 
+        public CreateCustomer(string customerName, string accountOwnerName//, Province province
             //CustomerProfile customerProfile, IList<User> users
             )
-            : base(id)
         {
             CustomerName = customerName;
             AccountOwnerName = accountOwnerName;

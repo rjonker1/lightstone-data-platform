@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Province : Entity
+    public class Province : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<Address> Address { get; set; }
-        public virtual ICollection<Customer> Customer { get; set; }
 
-        public Province()
+        protected Province() { }
+
+        public Province(Guid id, string val) : base(id)
         {
-            Address = new HashSet<Address>();
-            Customer = new HashSet<Customer>();
+            Name = val;
+            Value = val;
         }
 
     }

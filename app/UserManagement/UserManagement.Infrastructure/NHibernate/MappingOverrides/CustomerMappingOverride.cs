@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Customer> mapping)
         {
-            mapping.HasManyToMany(x => x.Users).Cascade.All().Table("UserLinkedToCustomer").ParentKeyColumn("CustomerId").ChildKeyColumn("UserId");
+            //mapping.HasManyToMany(x => x.Users).Cascade.All().Table("UserLinkedToCustomer").ParentKeyColumn("CustomerId").ChildKeyColumn("UserId");
         }
     }
 }

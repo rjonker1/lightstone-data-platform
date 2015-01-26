@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Commands\Customers\CreateCustomer.cs" />
+    <Compile Include="Commands\Provinces\CreateProvince.cs" />
+    <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\CreateRole.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
     <Compile Include="Commands\UserProfiles\CreateUserProfile.cs" />

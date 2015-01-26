@@ -9,7 +9,7 @@ namespace UserManagement.Api.Modules
     {
         public UserProfileModule(IRepository<UserProfile> userProfiles )
         {
-            Get["/UserProfile"] = _ => Response.AsJson(userProfiles);
+            Get["/UserProfiles"] = _ => Response.AsJson(userProfiles);
         }
     }
 }
