@@ -24,4 +24,26 @@ namespace Lace.Shared.Monitoring.Messages.Infrastructure.Dto
             Metadata = metadata;
         }
     }
+
+    [Serializable]
+    [DataContract]
+    public class PerformanceMetadata
+    {
+        [DataMember]
+        public object Results { get; private set; }
+
+        [DataMember]
+        public bool HasResults { get; private set; }
+
+        public PerformanceMetadata()
+        {
+            HasResults = false;
+        }
+
+        public PerformanceMetadata(object results)
+        {
+            HasResults = results != null;
+            Results = results;
+        }
+    }
 }

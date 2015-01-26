@@ -40,7 +40,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             stopWatch.Stop();
             //End(payload, new MetadataContainer(stopWatch.ToObject())).SendToBus(_publisher, _log);
-            BusExtensions.SendToBus(End(payload, new MetadataContainer(stopWatch.ToObject())), _publisher, _log);
+            BusExtensions.SendToBus(End(payload, new PerformanceMetadata(stopWatch.ToObject())), _publisher, _log);
         }
 
         public void StartCall(dynamic payload, DataProviderStopWatch stopWatch)
@@ -54,7 +54,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             stopWatch.Stop();
             //EndCall(payload, new MetadataContainer(stopWatch.ToObject())).SendToBus(_publisher, _log);
-            BusExtensions.SendToBus(EndCall(payload, new MetadataContainer(stopWatch.ToObject())), _publisher, _log);
+            BusExtensions.SendToBus(EndCall(payload, new PerformanceMetadata(stopWatch.ToObject())), _publisher, _log);
         }
 
         public void Send(CommandType commandType, dynamic payload, dynamic metadata)
@@ -77,7 +77,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return cmd;
         }
 
-        private DataProviderCommandEnvelope End(object payload, MetadataContainer metadata)
+        private DataProviderCommandEnvelope End(object payload, object metadata)
         {
             var command = new
             {
@@ -105,7 +105,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope EndCall(object payload, MetadataContainer metadata)
+        private DataProviderCommandEnvelope EndCall(object payload, object metadata)
         {
             var command = new
             {
