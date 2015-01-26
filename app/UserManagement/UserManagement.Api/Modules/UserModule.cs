@@ -26,7 +26,6 @@ namespace UserManagement.Api.Modules
                 var surname = "Testeroonie";
 
                 var customerToLink = customers.Select(x => x).FirstOrDefault(x => x.CustomerName == "Testeroonie Inc. Global");
-                var customerId = "B383C718-6E37-451A-B3C9-D22363219C12";
 
                 var dto = new UserDto(DateTime.Now, username, DateTime.Now, "password", "username", true,
                         new UserType(new Guid("CD39D5F5-F635-4604-B527-B606D8773E32"), "User"),
