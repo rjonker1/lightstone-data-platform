@@ -68,4 +68,36 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         Guid Id { get; set; }
     }
+
+    [DataContract]
+    public class PerformanceMetaData
+    {
+
+        [DataMember]
+        public EntryPointFinishedProcessingRequest EntryPointFinishedProcessingRequest { get; set; }
+    }
+
+    [DataContract]
+    public class EntryPointFinishedProcessingRequest
+    {
+        [DataMember]
+        public MetaData MetaData { get; set; }
+    }
+
+    [DataContract]
+    public class MetaData
+    {
+        [DataMember]
+        public Results Results { get; set; }
+    }
+
+    [DataContract]
+    public class Results
+    {
+        [DataMember]
+        public string ElapsedTime { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
+    }
 }

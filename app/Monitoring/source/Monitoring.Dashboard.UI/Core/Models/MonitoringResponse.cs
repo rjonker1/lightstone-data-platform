@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Microsoft.SqlServer.Server;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
@@ -21,6 +22,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         [DataMember]
         public bool HasErrors { get; private set; }
+
+        [DataMember]
+        public bool HasPerformanceData { get; private set; }
+
+        [DataMember]
+        public string PeformanceData { get; private set; }
 
         public MonitoringResponse()
         {
@@ -47,6 +54,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public void ErrorsExist()
         {
             HasErrors = true;
+        }
+
+        public void SetPerformanceData(string performanceData)
+        {
+            HasPerformanceData = !string.IsNullOrEmpty(performanceData);
+            PeformanceData = performanceData;
         }
     }
 }

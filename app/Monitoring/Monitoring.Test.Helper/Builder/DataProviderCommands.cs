@@ -14,6 +14,8 @@ namespace Monitoring.Test.Helper.Builder
         private readonly IHaveQueueActions _actions;
         private readonly bool _setupAndTearDown;
 
+        public DataProviderQueueFunctions Queue { get; private set; }
+
         public DataProviderCommands(object request, IHaveQueueActions actions, Guid aggregateId, bool setupAndTearDown = true)
         {
             _request = request;
@@ -168,6 +170,24 @@ namespace Monitoring.Test.Helper.Builder
                 .InitStopWatch()
                 .StartingDataProviderMessage()
                 .EndingDataProviderWithResponse(ResponseFromDataProvider.ForVViProduct());
+            return this;
+        }
+
+        public DataProviderCommands ForEntryPointStart()
+        {
+            Queue = new DataProviderQueueFunctions(_request, DataProviderCommandSource.EntryPoint, _actions,
+                _aggregateId, _setupAndTearDown);
+            Queue.TearDown()
+                .Setup()
+                .InitBus(BusBuilder.ForEntryPoint(_aggregateId))
+                .InitStopWatch()
+                .StartingDataProviderMessage();
+            return this;
+        }
+
+        public DataProviderCommands ForEntryPointEnd()
+        {
+            Queue.EndingDataProviderWithResponse(ResponseFromDataProvider.ForVViProduct());
             return this;
         }
 

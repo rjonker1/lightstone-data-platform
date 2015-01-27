@@ -28,13 +28,14 @@ namespace Monitoring.Acceptance.Tests.Queues
         {
             new DataProviderCommands(_request, _actions, _aggregateId, false)
                 .SetupAndTearDownOnly()
-                .ForEntryPoint()
+                .ForEntryPointStart()
                 .ForIvid()
                 .ForLightstone()
                 .ForIvidTitleHolder()
                 .ForRgtVin()
                 .ForRgt()
-                .ForAudatex();
+                .ForAudatex()
+                .ForEntryPointEnd();
         }
 
         [Observation]

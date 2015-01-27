@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
@@ -27,6 +28,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                 new GetMonitoringCommand(new MonitoringRequestDto(source)));
             SetSearchMetaData(_handler.MonitoringResponse);
             CheckForErrors(_handler.MonitoringResponse);
+            GetPerformanceResults(_handler.MonitoringResponse);
             return _handler.MonitoringResponse;
         }
 
@@ -45,6 +47,39 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                     continue;
 
                 response.ErrorsExist();
+            }
+        }
+
+        private void GetPerformanceResults(IEnumerable<MonitoringResponse> responses)
+        {
+            try
+            {
+
+
+                foreach (var response in responses)
+                {
+                    var performance = response.Payload.JsonToObject<PerformanceMetaData[]>();
+                    if (performance == null || !performance.Any())
+                        continue;
+
+                    var performanceExists =
+                        performance.FirstOrDefault(
+                            w =>
+                                w.EntryPointFinishedProcessingRequest != null &&
+                                w.EntryPointFinishedProcessingRequest.MetaData != null &&
+                                w.EntryPointFinishedProcessingRequest.MetaData.Results != null &&
+                                w.EntryPointFinishedProcessingRequest.MetaData.Results.Name == "EntryPoint");
+
+                    if (performanceExists == null)
+                        continue;
+
+                    response.SetPerformanceData(string.Format("Elapsed Time: {0}",
+                        performanceExists.EntryPointFinishedProcessingRequest.MetaData.Results.ElapsedTime));
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Data Provider Monitoring Service error getting performance results: {0}", ex.Message);
             }
         }
 
@@ -72,10 +107,9 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                     continue;
                 }
 
-                response.SetMetadata(string.Format("{0} using {1}. Aggregate {2} Date {3}",
+                response.SetMetadata(string.Format("{0} using {1}. Date {2}",
                     requestDetail.EntryPointReceivedRequest.Payload.Request.Package.Name,
-                    requestDetail.EntryPointReceivedRequest.Payload.Request.SearchTerm, response.Id,
-                    response.Date));
+                    requestDetail.EntryPointReceivedRequest.Payload.Request.SearchTerm, response.Date));
             }
         }
     }

@@ -5,7 +5,8 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
         var init = function() {
             var hub = $.connection.dataProviderHub;
 
-            hub.client.dataProviderMonitoringInfo = function(result) {
+            hub.client.dataProviderMonitoringInfo = function (result) {
+                console.info("Data Provider Monitoring App executing service");
                 $rootScope.$emit("dataProviderMonitoringInfo", result);
             }
             $.connection.hub.start().done(function() {
@@ -103,7 +104,6 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                     button.value = "Collapse";
                 }
                 //SetExpandOrCollapseImage(button);
-                console.log(button.id);
             }
         };
     });
