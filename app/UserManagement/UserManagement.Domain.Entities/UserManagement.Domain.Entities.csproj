@@ -43,6 +43,8 @@
     <Compile Include="Commands\ContractDurations\CreateContractDuration.cs" />
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
     <Compile Include="Commands\Customers\CreateCustomer.cs" />
+    <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
+    <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\Provinces\CreateProvince.cs" />
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\CreateRole.cs" />

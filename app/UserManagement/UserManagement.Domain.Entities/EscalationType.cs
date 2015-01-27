@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class EscalationType : Entity
+    public class EscalationType : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<Contract> Contract { get; set; }
 
-        public EscalationType()
+        protected EscalationType() { }
+
+        public EscalationType(Guid id, string val) : base(id)
         {
-            Contract = new HashSet<Contract>();
+            Name = val;
+            Value = val;
         }
-
     }
 }

@@ -50,6 +50,8 @@
     <Compile Include="CommandHandlers\ContractDurations\CreateContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\Customers\CreateCustomerHandler.cs" />
+    <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
+    <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\CreateProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\CreateRoleHandler.cs" />
