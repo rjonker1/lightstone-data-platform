@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class PlatformStatus : Entity
+    public class PlatformStatus : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
-        public PlatformStatus()
+        protected PlatformStatus() { }
+
+        public PlatformStatus(Guid id, string val) : base(id)
         {
-            CustomerProfile = new HashSet<CustomerProfile>();
+            Name = val;
+            Value = val;
         }
-
     }
 }
