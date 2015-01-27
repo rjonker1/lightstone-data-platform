@@ -66,6 +66,14 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
         }
     };
 
+    var setButtonToCollapseValue = function() {
+        $("#button-collapse-expand").val("Collapse");
+    };
+
+    var setButtonToExpandValue = function() {
+        $("#button-collapse-expand").val("Expand");
+    };
+
     $scope.$parent.$on("dataProviderMonitoringInfo", function(e, result) {
         $scope.$apply(function() {
             $scope.dataProviderMonitoring = result;
@@ -75,6 +83,7 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             Toggle(toggleId + elementIndex, rawJsonId + elementIndex, canvasId);
             setLastSelectedIndex(elementIndex);
             makeFormattedJsonVisible(formattedJsonId);
+            setButtonToCollapseValue();
         };
 
        $scope.CollapseOrExpand = function(button) {
@@ -83,11 +92,11 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                 if (button.value == "Collapse") {
                     CollapseAllClicked(rawJsonId + lastIndex, canvasId);
                     button.value = "Expand";
-                    $("#button-collapse-expand").val("Expand");
+                    setButtonToCollapseValue();
                 } else {
                     ExpandAllClicked(rawJsonId + lastIndex, canvasId);
                     button.value = "Collapse";
-                    $("#button-collapse-expand").val("Collapse");
+                    setButtonToExpandValue();
                 }
             }
        };

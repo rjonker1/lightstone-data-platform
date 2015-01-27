@@ -90,8 +90,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                AudatexExecutionHasStarted =
-                    new AudatexExecutionHasStarted(_requestId, DataProviderCommandSource.Audatex,
+                AudatexDataSourceCallHasStarted =
+                    new AudatexDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.StartCallDescription(DataProviderCommandSource.Audatex),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -104,8 +104,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                AudatexExecutionHasEnded =
-                    new AudatexExecutionHasEnded(_requestId, DataProviderCommandSource.Audatex,
+                AudatexDataSourceCallHasEnded =
+                    new AudatexDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.EndCallDescription(DataProviderCommandSource.Audatex),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)

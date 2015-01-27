@@ -5,12 +5,16 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
     public class AggregationInformation : IProvideRequestAggregation
     {
+        private readonly Guid _aggregateId;
+
+        public AggregationInformation()
+        {
+            _aggregateId = Guid.NewGuid();
+        }
+
         public Guid AggregateId
         {
-            get
-            {
-                return Guid.NewGuid();
-            }
+            get { return _aggregateId; }
         }
     }
 

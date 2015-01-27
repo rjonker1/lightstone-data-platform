@@ -32,13 +32,6 @@ namespace Monitoring.Dashboard.UI.Core.Models
     public class Payload
     {
         [DataMember]
-        public Request Request { get; set; }
-    }
-
-    [DataContract]
-    public class Request
-    {
-        [DataMember]
         public Package Package { get; set; }
         [DataMember]
         public string SearchTerm { get; set; }

@@ -83,98 +83,110 @@ namespace Monitoring.Test.Helper.Builder
         {
             return new
             {
-                Request = new
+                EntryPointReceivedRequest = new
                 {
-                    Package =
-                        new
-                        {
-                            Name = "License plate search",
-                            Description = "",
-                            CostOfSale = 10.0,
-                            RecommendedSalePrice = 20.0,
-                            Action =
-                                new
-                                {
-                                    Criteria =
-                                        new
-                                        {
-                                            Fields =
-                                                new
-                                                {
-                                                    Name = "LicenceNo",
-                                                    Label = string.Empty,
-                                                    Definition = string.Empty,
-                                                    Industries = new {},
-                                                    Price = 0.0,
-                                                    IsSelected = string.Empty,
-                                                    Type = string.Empty,
-                                                    DataFields = string.Empty
-                                                }
-                                        },
-                                    Name = "License plate search",
-                                    Id = "5e199827-1130-45ee-a15f-c3dd972728a9"
-                                },
-                            Notes = string.Empty,
-                            Industries =
-                                new {Name = "Finance", IsSelected = false, Id = "98a9d7a0-1e4c-4233-8e13-15e38675c5d0"},
-                            IsSelected = false,
-                            Id = "038176a8-aa67-4485-91fc-978c5de17716"
-                        },
-                    State = new {Id = "c78e07f2-0c30-4704-8577-3db20e5c784b"},
-                    DisplayVersion = 0.1,
-                    Owner = string.Empty,
-                    CreatedDate = "2014-12-19T16=14=33.0849398+02=00",
-                    EditedDate = string.Empty,
-                    DataProviders = new {},
-                    User = new
+                    Payload = new
                     {
-                        UserId = "4a17b499-845f-43e2-aa2f-cfcb06920ab6",
-                        AggregateId = "72e7523f - 7278 - 408e-8b7f-77d 745412c8a",
-                        UserName = string.Empty,
-                        UserFirstName = "Penny",
-                        UserLastName = string.Empty,
-                        UserEmail = "pennyl@lightstone.co.za",
-                        UserPhone = string.Empty
-                    },
-                    Context =
-                        new
+                        Package =
+                            new
+                            {
+                                Name = "License plate search",
+                                Description = "",
+                                CostOfSale = 10.0,
+                                RecommendedSalePrice = 20.0,
+                                Action =
+                                    new
+                                    {
+                                        Criteria =
+                                            new
+                                            {
+                                                Fields =
+                                                    new
+                                                    {
+                                                        Name = "LicenceNo",
+                                                        Label = string.Empty,
+                                                        Definition = string.Empty,
+                                                        Industries = new {},
+                                                        Price = 0.0,
+                                                        IsSelected = string.Empty,
+                                                        Type = string.Empty,
+                                                        DataFields = string.Empty
+                                                    }
+                                            },
+                                        Name = "License plate search",
+                                        Id = "5e199827-1130-45ee-a15f-c3dd972728a9"
+                                    },
+                                Notes = string.Empty,
+                                Industries =
+                                    new
+                                    {
+                                        Name = "Finance",
+                                        IsSelected = false,
+                                        Id = "98a9d7a0-1e4c-4233-8e13-15e38675c5d0"
+                                    },
+                                IsSelected = false,
+                                Id = "038176a8-aa67-4485-91fc-978c5de17716"
+                            },
+                        State = new {Id = "c78e07f2-0c30-4704-8577-3db20e5c784b"},
+                        DisplayVersion = 0.1,
+                        Owner = string.Empty,
+                        CreatedDate = "2014-12-19T16=14=33.0849398+02=00",
+                        EditedDate = string.Empty,
+                        DataProviders = new {},
+                        User = new
                         {
-                            Product = "VVi+ADX+VPi",
-                            ReasonForApplication = string.Empty,
-                            SecurityCode = "c99ef6d2-fdea-4a81-b15f-ff8251ac9050"
-                        },
-                    RequestAggregation = new {AggregateId = "80c39ef1-ab67-43bf-963c-b6afa7acab56"},
-                    Vehicle =
-                        new
-                        {
-                            EngineNo = string.Empty,
-                            VinOrChassis = string.Empty,
-                            Make = string.Empty,
-                            RegisterNo = string.Empty,
-                            LicenceNo = "XMC167GP",
-                            Vin = "SB1KV58E40F039277"
-                        },
-                    CoOrdinates =
-                        new {Latitude = "-26.864250004641011", Longitude = "32.829399989305713", Image = string.Empty},
-                    Jis =
-                        new
-                        {
-                            CroppedImage = string.Empty,
-                            FullImage = string.Empty,
-                            FullImageThumb = string.Empty,
-                            Latitude = 0.0,
-                            Longitude = 0.0,
-                            SightingDate = "0001-01-01T00=00=00",
-                            SiteLocation = string.Empty,
-                            SiteName = string.Empty,
-                            SessionId = 0,
+                            UserId = "4a17b499-845f-43e2-aa2f-cfcb06920ab6",
+                            AggregateId = "72e7523f - 7278 - 408e-8b7f-77d 745412c8a",
                             UserName = string.Empty,
-                            LicensePlateNumber = string.Empty
+                            UserFirstName = "Penny",
+                            UserLastName = string.Empty,
+                            UserEmail = "pennyl@lightstone.co.za",
+                            UserPhone = string.Empty
                         },
-                    RequestDate = "2014-12-19T16=14=33.1329013+02=00",
-                    SearchTerm = "XMC167GP"
+                        Context =
+                            new
+                            {
+                                Product = "VVi+ADX+VPi",
+                                ReasonForApplication = string.Empty,
+                                SecurityCode = "c99ef6d2-fdea-4a81-b15f-ff8251ac9050"
+                            },
+                        RequestAggregation = new {AggregateId = "80c39ef1-ab67-43bf-963c-b6afa7acab56"},
+                        Vehicle =
+                            new
+                            {
+                                EngineNo = string.Empty,
+                                VinOrChassis = string.Empty,
+                                Make = string.Empty,
+                                RegisterNo = string.Empty,
+                                LicenceNo = "XMC167GP",
+                                Vin = "SB1KV58E40F039277"
+                            },
+                        CoOrdinates =
+                            new
+                            {
+                                Latitude = "-26.864250004641011",
+                                Longitude = "32.829399989305713",
+                                Image = string.Empty
+                            },
+                        Jis =
+                            new
+                            {
+                                CroppedImage = string.Empty,
+                                FullImage = string.Empty,
+                                FullImageThumb = string.Empty,
+                                Latitude = 0.0,
+                                Longitude = 0.0,
+                                SightingDate = "0001-01-01T00=00=00",
+                                SiteLocation = string.Empty,
+                                SiteName = string.Empty,
+                                SessionId = 0,
+                                UserName = string.Empty,
+                                LicensePlateNumber = string.Empty
+                            },
+                        RequestDate = "2014-12-19T16=14=33.1329013+02=00",
+                        SearchTerm = "XMC167GP"
+                    }
                 }
-
             };
         }
 

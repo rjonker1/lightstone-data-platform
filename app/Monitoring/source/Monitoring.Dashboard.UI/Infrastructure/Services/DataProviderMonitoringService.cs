@@ -98,8 +98,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                     requestInformation.FirstOrDefault(
                         f =>
                             f.EntryPointReceivedRequest != null && f.EntryPointReceivedRequest.Payload != null &&
-                            f.EntryPointReceivedRequest.Payload.Request != null &&
-                            f.EntryPointReceivedRequest.Payload.Request.Package != null);
+                            f.EntryPointReceivedRequest.Payload.Package != null);
 
                 if (requestDetail == null)
                 {
@@ -108,8 +107,8 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                 }
 
                 response.SetMetadata(string.Format("{0} using {1}. Date {2}",
-                    requestDetail.EntryPointReceivedRequest.Payload.Request.Package.Name,
-                    requestDetail.EntryPointReceivedRequest.Payload.Request.SearchTerm, response.Date));
+                    requestDetail.EntryPointReceivedRequest.Payload.Package.Name,
+                    requestDetail.EntryPointReceivedRequest.Payload.SearchTerm, response.Date));
             }
         }
     }

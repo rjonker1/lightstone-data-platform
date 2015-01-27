@@ -35,7 +35,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections">
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.536, Culture=neutral, processorArchitecture=MSIL">
@@ -48,23 +49,23 @@
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.551\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Dtos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Dtos.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Dtos">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.551\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Dtos.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.536\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.551\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.536\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.551\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.535, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.551, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.535\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.551\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
@@ -73,10 +74,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.NHibernate">
+    <Reference Include="NServiceBus.NHibernate, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NServiceBus.NHibernate.6.0.0\lib\net45\NServiceBus.NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Transports.RabbitMQ, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">

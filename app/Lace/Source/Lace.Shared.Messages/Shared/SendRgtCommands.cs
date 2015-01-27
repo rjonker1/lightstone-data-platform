@@ -90,8 +90,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    RgtExecutionHasStarted =
-                        new RgtExecutionHasStarted(_requestId, DataProviderCommandSource.Rgt,
+                    RgtDataSourceCallHasStarted =
+                        new RgtDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.Rgt),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -104,8 +104,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    RgtExecutionHasEnded =
-                        new RgtExecutionHasEnded(_requestId, DataProviderCommandSource.Rgt,
+                    RgtDataSourceCallHasEnded =
+                        new RgtDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Rgt,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.Rgt),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)

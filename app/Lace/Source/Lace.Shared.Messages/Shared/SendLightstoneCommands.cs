@@ -90,8 +90,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    LightstoneExecutionHasStarted =
-                        new LightstoneExecutionHasStarted(_requestId, DataProviderCommandSource.Lightstone,
+                    LightstoneDataSourceCallHasStarted =
+                        new LightstoneDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Lightstone,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.Lightstone),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -104,14 +104,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    LightstoneExecutionHasEnded =
-                        new LightstoneExecutionHasEnded(_requestId, DataProviderCommandSource.Lightstone,
-                            CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lightstone),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
+                LightstoneDataSourceCallHasEnded =
+                    new LightstoneDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Lightstone,
+                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lightstone),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
             };
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.AtTheEnd, _orderOfExecution);
         }
 
         private DataProviderCommandEnvelope Fault(dynamic payload, MetadataContainer metadata)

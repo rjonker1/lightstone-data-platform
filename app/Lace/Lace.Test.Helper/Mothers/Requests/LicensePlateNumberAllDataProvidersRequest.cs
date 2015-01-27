@@ -9,6 +9,15 @@ namespace Lace.Test.Helper.Mothers.Requests
 
     public class LicensePlateNumberAllDataProvidersRequest : Domain.Core.Requests.Contracts.ILaceRequest
     {
+        private readonly IProvideRequestAggregation _aggregation;
+        private readonly DateTime _requestDate;
+
+        public LicensePlateNumberAllDataProvidersRequest()
+        {
+            _aggregation = new AggregationInformation();
+            _requestDate = DateTime.Now;
+        }
+
 
         public IPackage Package
         {
@@ -36,10 +45,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IProvideRequestAggregation RequestAggregation
         {
-            get
-            {
-                return new AggregationInformation();
-            }
+            get { return _aggregation; }
         }
 
         public IProvideVehicleInformationForRequest Vehicle
@@ -62,10 +68,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public DateTime RequestDate
         {
-            get
-            {
-                return DateTime.Now;
-            }
+            get { return _requestDate; }
         }
 
         public string SearchTerm

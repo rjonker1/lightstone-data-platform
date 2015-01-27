@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.535\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.551\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -50,19 +50,23 @@
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.535\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.551\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.535\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.551\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.535, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.551, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.535\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.551\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,7 +116,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Events\when_publishing_lace_data_provider_monitoring_commands_to_bus.cs" />
     <Compile Include="Events\when_publlishing_lace_audatex_monitoring_commands_to_bus.cs" />
     <Compile Include="Events\when_publlishing_lace_ivid_monitoring_commands_to_bus.cs" />
     <Compile Include="Lace\Chain\when_inititializing_lace_source_chain_for_licensePlate_number_search.cs" />

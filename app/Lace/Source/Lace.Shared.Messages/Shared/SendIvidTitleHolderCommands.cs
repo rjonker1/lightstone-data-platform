@@ -90,8 +90,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    IvidTitleHolderExcutionHasStarted =
-                        new IvidTitleHolderExcutionHasStarted(_requestId, DataProviderCommandSource.IvidTitleHolder,
+                IvidTitleHolderDataSourceCallHasStarted =
+                        new IvidTitleHolderDataSourceCallHasStarted(_requestId, DataProviderCommandSource.IvidTitleHolder,
                             CommandDescriptions.StartCallDescription(DataProviderCommandSource.IvidTitleHolder),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
@@ -104,8 +104,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                    IvidTitleHolderExcutionHasEnded =
-                        new IvidTitleHolderExcutionHasEnded(_requestId, DataProviderCommandSource.IvidTitleHolder,
+                    IvidTitleHolderDataSourceCallHasEnded =
+                        new IvidTitleHolderDataSourceCallHasEnded(_requestId, DataProviderCommandSource.IvidTitleHolder,
                             CommandDescriptions.EndCallDescription(DataProviderCommandSource.IvidTitleHolder),
                             payload, metadata, DateTime.UtcNow,
                             Category.Performance)
