@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
-//using IUserType = UserManagement.Domain.Entities.IUserType;
 
 namespace UserManagement.Domain.Entities
 {
@@ -15,7 +15,7 @@ namespace UserManagement.Domain.Entities
         public virtual string UserName { get; protected internal set; }
         public virtual bool? IsActive { get; protected internal set; }
 
-        public virtual IEnumerable<ClientUser> ClientUser { get; protected internal set; }
+        public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
 
         public virtual UserType UserType { get; protected internal set; }
         public virtual IEnumerable<Customer> Customers { get; protected internal set; }
@@ -24,7 +24,8 @@ namespace UserManagement.Domain.Entities
         protected User() { }
 
         public User(Guid id, DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive,
-                        IEnumerable<ClientUser> clientUser, UserType userType, 
+                        //IEnumerable<ClientUser> clientUsers, 
+                        UserType userType, 
                         IEnumerable<Customer> customers, 
                         IList<Role> roles): base(id)
         {
@@ -34,7 +35,7 @@ namespace UserManagement.Domain.Entities
             Password = password;
             UserName = userName;
             IsActive = isActive;
-            ClientUser = clientUser;
+            ClientUsers = new Collection<ClientUser>();
             UserType = userType;
             Customers = customers;
             Roles = roles;

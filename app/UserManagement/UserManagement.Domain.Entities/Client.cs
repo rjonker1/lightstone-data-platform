@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -8,19 +9,18 @@ namespace UserManagement.Domain.Entities
     {
 
         public virtual string ClientName { get; set; }
-        public virtual Guid? ClientProfileId { get; set; }
+        //public virtual Guid? ClientProfileId { get; set; }
 
-        public virtual ProfileDetail ProfileDetail { get; set; }
-        public virtual ICollection<ClientPackage> ClientPackage { get; set; }
-        public virtual ICollection<ClientUser> ClientUser { get; set; }
-        public virtual ICollection<Contract> Contract { get; set; }
+        //public virtual ProfileDetail ProfileDetail { get; set; }
 
-        public Client()
+        //public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
+
+        protected Client() { }
+
+        public Client(Guid id, string clientName) : base(id)
         {
-            ClientPackage = new HashSet<ClientPackage>();
-            ClientUser = new HashSet<ClientUser>();
-            Contract = new HashSet<Contract>();
+            ClientName = clientName;
+            //ClientUsers = new Collection<ClientUser>();
         }
-
     }
 }

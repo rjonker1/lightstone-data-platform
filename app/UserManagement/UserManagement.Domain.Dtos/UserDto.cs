@@ -6,6 +6,7 @@ namespace UserManagement.Domain.Dtos
 {
     public class UserDto
     {
+
         //User
         public DateTime FirstCreateDate { get; set; }
         public string LastUpdateBy { get; set; }
@@ -13,11 +14,12 @@ namespace UserManagement.Domain.Dtos
         public string Password { get; set; }
         public string UserName { get; set; }
         public bool? IsActive { get; set; }
-        //public IEnumerable<ClientUser> ClientUser { get; set; }
         public UserType UserType { get; set; }
         public IEnumerable<Customer> Customers { get; set; }
-        //public UserProfile UserProfile { get; set; }
+        //public IEnumerable<Client> Clients { get; set; }
+        //private List<ClientUser> ClientUsers { get; set; }
 
+        //public IList<Client> Clients { get; set; } 
         public IList<Role> Roles { get; set; } 
 
         //Profile data
@@ -37,6 +39,7 @@ namespace UserManagement.Domain.Dtos
             IsActive = isActive;
             UserType = userType;
             Customers = customers;
+            //Clients = clients;
             Roles = roles;
             FirstName = firstName;
             Surname = surname;

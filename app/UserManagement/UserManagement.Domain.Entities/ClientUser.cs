@@ -5,9 +5,18 @@ namespace UserManagement.Domain.Entities
 {
     public class ClientUser : Entity
     {
-        public virtual string Alias { get; set; }
+
+        public virtual string UserAlias { get; set; }
 
         public virtual Client Client { get; set; }
         public virtual User User { get; set; }
+
+        public ClientUser(string userAlias, Client client, User user)
+        {
+            Id = Guid.NewGuid();
+            UserAlias = userAlias;
+            Client = client;
+            User = user;
+        }
     }
 }

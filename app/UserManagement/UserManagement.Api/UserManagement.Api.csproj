@@ -105,6 +105,7 @@
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\CustomerModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\RoleModule.cs" />

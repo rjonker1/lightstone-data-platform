@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="MessageAdapter.cs" />
     <Compile Include="NHibernate\Conventions\DomainSignatureConvention.cs" />
+    <Compile Include="NHibernate\MappingOverrides\ClientMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\ClientUserMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
