@@ -4,16 +4,18 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class CreateSource : Entity
+    public class CreateSource : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
-        public CreateSource()
+        protected CreateSource() { }
+
+        public CreateSource(Guid id, string val) : base(id)
         {
-            CustomerProfile = new HashSet<CustomerProfile>();
+            Name = val;
+            Value = val;
         }
-
     }
 }
