@@ -5,6 +5,7 @@ using Nancy.Bootstrappers.Windsor;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
 using UserManagement.Domain.Entities.Commands.EscalationTypes;
@@ -54,6 +55,7 @@ namespace UserManagement.Api
             handler.Handle(new ImportContractDuration());
             handler.Handle(new ImportEscalationType());
             handler.Handle(new ImportContractType());
+            handler.Handle(new ImportCommercialState());
         }
 
         //Updates schema if there are any structural changes

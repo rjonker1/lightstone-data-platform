@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\CommercialStates\CreateCommercialStateHandler.cs" />
+    <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\CreateContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\CreateContractTypeHandler.cs" />
