@@ -10,6 +10,7 @@ using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
 using UserManagement.Domain.Entities.Commands.CreateSources;
 using UserManagement.Domain.Entities.Commands.EscalationTypes;
+using UserManagement.Domain.Entities.Commands.PaymentTypes;
 using UserManagement.Domain.Entities.Commands.PlatformStatuses;
 using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
@@ -60,6 +61,7 @@ namespace UserManagement.Api
             handler.Handle(new ImportCommercialState());
             handler.Handle(new ImportCreateSource());
             handler.Handle(new ImportPlatformStatus());
+            handler.Handle(new ImportPaymentType());
         }
 
         //Updates schema if there are any structural changes

@@ -58,6 +58,8 @@
     <Compile Include="CommandHandlers\Customers\CreateCustomerHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
+    <Compile Include="CommandHandlers\PaymentTypes\CreatePaymentTypeHandler.cs" />
+    <Compile Include="CommandHandlers\PaymentTypes\ImportPaymentTypeHandler.cs" />
     <Compile Include="CommandHandlers\PlatformStatuses\CreatePlatformStatusHandler.cs" />
     <Compile Include="CommandHandlers\PlatformStatuses\ImportPlatformStatusHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\CreateProvinceHandler.cs" />
