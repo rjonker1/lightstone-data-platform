@@ -11,9 +11,26 @@ body
 }
 
 h1 {
-    font-weight: normal;
+    font-weight: bold;
     font-size: 40px;
     font-weight: normal;
-    text-transform: uppercase; 
+    text-transform: lowercase; 
     margin: 20px 0 10px 4px;
+}
+    h1 span {
+        font-size: 15px;
+        display: block;
+        padding-left: 1px;
+        text-transform: lowercase;
+    }
+header {
+    padding-left: 5px;
+}
+
+header ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: lowercase;
+    font-weight: bold;
+    color: #000000;
 }

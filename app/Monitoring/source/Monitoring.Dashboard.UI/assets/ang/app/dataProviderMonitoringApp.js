@@ -18,14 +18,14 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             };
 
             hub.reconnected = function() {
-                console.log("Data Provider's SignalR Service Reconnected");
+                console.infolog("Data Provider's SignalR Service Reconnected");
             };
 
             hub.stateChanged = function(change) {
                 if (change.newState === $.signalR.connectionState.reconnecting) {
-                    console.log("Reconnecting to Data Provider SignalR Service");
+                    console.info("Reconnecting to Data Provider SignalR Service");
                 } else if (change.newState === $.signalR.connectionState.connected) {
-                    console.log("Dataprovider Monitoring App is online");
+                    console.info("Dataprovider Monitoring App is online");
                 }
             };
         };
@@ -77,34 +77,24 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             makeFormattedJsonVisible(formattedJsonId);
         };
 
-        //$scope.CollapseAllClicked = function (img) {
-        //    var lastIndex = getLastIndex();
-        //    if (lastIndex >= 0) {
-        //        CollapseAllClicked(rawJsonId + lastIndex, canvasId);
-        //        img.src = imgPlus;
-        //    }
-        //};
-
-        //$scope.ExpandAllClicked = function (img) {
-        //    var lastIndex = getLastIndex();
-        //    if (lastIndex >= 0) {
-        //        ExpandAllClicked(rawJsonId + lastIndex, canvasId);
-        //        img.src = imgMinus;
-        //    }
-        //};
-
-        $scope.CollapseOrExpand = function(button) {
+       $scope.CollapseOrExpand = function(button) {
             var lastIndex = getLastIndex();
             if (lastIndex >= 0) {
                 if (button.value == "Collapse") {
                     CollapseAllClicked(rawJsonId + lastIndex, canvasId);
                     button.value = "Expand";
+                    $("#button-collapse-expand").val("Expand");
                 } else {
                     ExpandAllClicked(rawJsonId + lastIndex, canvasId);
                     button.value = "Collapse";
+                    $("#button-collapse-expand").val("Collapse");
                 }
-                //SetExpandOrCollapseImage(button);
             }
-        };
+       };
+
+       $scope.ReInitializeService = function() {
+           $scope.dataProviderMonitoring = [];
+           dataProviderSignalRService.init();
+       }
     });
 });

@@ -1,10 +1,4 @@
-﻿h1 span {
-    font-size: 13px;
-    display: block;
-    padding-left: 4px;
-}
-
-.tabs {
+﻿.tabs {
     width: 98%;
     float: none;
     list-style: none;
@@ -27,11 +21,11 @@
 
     .tabs label {
         display: block;
-        padding: 14px 21px;
+        padding: 10px 17px;
         border-radius: 2px 2px 0 0;
         font-size: 20px;
-        font-weight: normal;
-        text-transform: uppercase;
+        font-weight: bold;
+        text-transform: lowercase;
         background: #fff;
         cursor: pointer;
         position: relative;
@@ -77,7 +71,7 @@
         color: #000000;
     }
     .data-provider-container h1 {
-        text-transform: uppercase;
+        text-transform: lowercase;
         font-size: 36px;
         line-height: 42px;
         letter-spacing: 1px;
