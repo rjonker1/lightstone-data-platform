@@ -1,7 +1,7 @@
 ﻿<div class="data-provider-log" ng-app="dataProviderMonitoringApp" ng-controller="DataProviderController">
-    <div>
+    @*<div>
         <input type="button" id="re-initialize-log-data" value="Refresh" ng-click="ReInitializeService" />
-    </div>
+    </div>*@
     <div id="data-provider-event-log" class="data-provider-container">
         <ul>
             <li ng-repeat="response in dataProviderMonitoring" class="" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
