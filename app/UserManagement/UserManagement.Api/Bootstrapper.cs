@@ -6,6 +6,7 @@ using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
+using UserManagement.Domain.Entities.Commands.ContractTypes;
 using UserManagement.Domain.Entities.Commands.EscalationTypes;
 using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
@@ -52,6 +53,7 @@ namespace UserManagement.Api
             handler.Handle(new ImportProvince());
             handler.Handle(new ImportContractDuration());
             handler.Handle(new ImportEscalationType());
+            handler.Handle(new ImportContractType());
         }
 
         //Updates schema if there are any structural changes

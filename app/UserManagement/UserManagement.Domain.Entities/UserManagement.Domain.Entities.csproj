@@ -42,6 +42,8 @@
     <Compile Include="Address.cs" />
     <Compile Include="Commands\ContractDurations\CreateContractDuration.cs" />
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
+    <Compile Include="Commands\ContractTypes\CreateContractType.cs" />
+    <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
     <Compile Include="Commands\Customers\CreateCustomer.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
