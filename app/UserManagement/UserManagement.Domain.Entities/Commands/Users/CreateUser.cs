@@ -13,7 +13,7 @@ namespace UserManagement.Domain.Entities.Commands.Users
         public string Password;
         public string UserName;
         public bool? IsActive;
-        public IEnumerable<ClientUser> ClientUser;
+        public IList<Client> ClientObject;
 
         public UserType UserType;
         public IEnumerable<Customer> Customers;
@@ -25,13 +25,13 @@ namespace UserManagement.Domain.Entities.Commands.Users
         public string Surname;
         public string IdNumber;
 
-        public CreateUser(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive, UserType userType, 
+        public CreateUser(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive, UserType userType,
                             IEnumerable<Customer> customers,
-                            IList<Role> roles, 
-                            string contactNumber, string firstName, string surname, string idNumber
-                            //IEnumerable<ClientUser> clientUser, 
-            )
+                            IList<Client> client,
+                            IList<Role> roles,
+                            string contactNumber, string firstName, string surname, string idNumber)
         {
+
             Id = Guid.NewGuid();
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
@@ -39,9 +39,9 @@ namespace UserManagement.Domain.Entities.Commands.Users
             Password = password;
             UserName = userName;
             IsActive = isActive;
-            //ClientUser = clientUser;
             UserType = userType;
             Customers = customers;
+            ClientObject = client;
             Roles = roles;
 
             //Profile
@@ -49,7 +49,6 @@ namespace UserManagement.Domain.Entities.Commands.Users
             FirstName = firstName;
             Surname = surname;
             IdNumber = idNumber;
-
         }
     }
 }

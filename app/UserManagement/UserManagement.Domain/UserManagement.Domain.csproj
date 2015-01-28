@@ -47,7 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\Clients\CreateClientHandler.cs" />
+    <Compile Include="CommandHandlers\CommercialStates\CreateCommercialStateHandler.cs" />
+    <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
+    <Compile Include="CommandHandlers\ContractDurations\CreateContractDurationHandler.cs" />
+    <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
+    <Compile Include="CommandHandlers\Contracts\CreateContractHandler.cs" />
+    <Compile Include="CommandHandlers\ContractTypes\CreateContractTypeHandler.cs" />
+    <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
+    <Compile Include="CommandHandlers\CreateSources\CreateCreateSourceHandler.cs" />
+    <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\Customers\CreateCustomerHandler.cs" />
+    <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
+    <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
+    <Compile Include="CommandHandlers\PaymentTypes\CreatePaymentTypeHandler.cs" />
+    <Compile Include="CommandHandlers\PaymentTypes\ImportPaymentTypeHandler.cs" />
+    <Compile Include="CommandHandlers\PlatformStatuses\CreatePlatformStatusHandler.cs" />
+    <Compile Include="CommandHandlers\PlatformStatuses\ImportPlatformStatusHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\CreateProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\CreateRoleHandler.cs" />
@@ -72,6 +88,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

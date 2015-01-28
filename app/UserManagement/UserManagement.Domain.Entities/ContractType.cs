@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class ContractType : Entity
+    public class ContractType : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<Contract> Contract { get; set; }
 
-        public ContractType()
+        protected ContractType() { }
+
+        public ContractType(Guid id, string val) : base(id)
         {
-            Contract = new HashSet<Contract>();
+            Name = val;
+            Value = val;
         }
     }
 }

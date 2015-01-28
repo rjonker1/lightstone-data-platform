@@ -4,16 +4,18 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class PaymentType : Entity
+    public class PaymentType : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<Billing> Billing { get; set; }
 
-        public PaymentType()
+        protected PaymentType() { }
+
+        public PaymentType(Guid id, string val) : base(id)
         {
-            Billing = new HashSet<Billing>();
+            Name = val;
+            Value = val;
         }
-
     }
 }

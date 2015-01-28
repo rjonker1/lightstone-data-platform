@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class CommercialState : Entity
+    public class CommercialState : Entity, INamedEntity
     {
-
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
-        public CommercialState()
+        protected CommercialState() { }
+
+        public CommercialState(Guid id, string val) : base(id)
         {
-            CustomerProfile = new HashSet<CustomerProfile>();
+            Name = val;
+            Value = val;
         }
     }
 }

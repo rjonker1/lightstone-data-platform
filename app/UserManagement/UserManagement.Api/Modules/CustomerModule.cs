@@ -14,7 +14,14 @@ namespace UserManagement.Api.Modules
 
         public CustomerModule(IBus bus, IRepository<Customer> customers, IRepository<Province> provinces)
         {
+
             Get["/Customers"] = _ =>
+            {
+                return Response.AsJson(customers);
+            };
+
+
+            Get["/Customers/Create"] = _ =>
             {
 
                 var province = provinces.Select(x => x).Where(x => x.Name == "Gauteng");
@@ -25,6 +32,7 @@ namespace UserManagement.Api.Modules
 
                 return "Success!";
             };
+
         }
     }
 }

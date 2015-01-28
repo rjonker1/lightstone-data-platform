@@ -4,15 +4,18 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class ContractDuration : Entity
+    public class ContractDuration : Entity, INamedEntity
     {
 
+        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
-        public virtual ICollection<Contract> Contract { get; set; }
 
-        public ContractDuration()
+        protected ContractDuration() { }
+
+        public ContractDuration(Guid id, string val) : base(id)
         {
-            Contract = new HashSet<Contract>();
+            Name = val;
+            Value = val;
         }
     }
 }
