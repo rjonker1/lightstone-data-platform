@@ -48,12 +48,12 @@ namespace Monitoring.Unit.Tests.DataProviders
         public void then_data_provider_command_handler_message_should_be_handled()
         {
             NServiceBus.Testing.Test.Handler<DataProviderHandler>(new DataProviderHandler(_repository))
-                .OnMessage<DataProviderCommandEnvelope>(GetDataProviderCommandEnvelope());
+                .OnMessage<ExecutingDataProviderMonitoringCommand>(GetDataProviderCommandEnvelope());
 
             FakeDatabase.Events.Count.ShouldEqual(1);
         }
 
-        private DataProviderCommandEnvelope GetDataProviderCommandEnvelope()
+        private ExecutingDataProviderMonitoringCommand GetDataProviderCommandEnvelope()
         {
             var payload = DataProviderRequestBuilder.ForIvidLicensePlateSearch();
             _dataProviderStopWatch = new DataProviderStopWatch(DataProviderCommandSource.Ivid.ToString());
