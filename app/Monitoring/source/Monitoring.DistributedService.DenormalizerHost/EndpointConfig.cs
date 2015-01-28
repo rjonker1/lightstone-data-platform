@@ -18,7 +18,7 @@ namespace Monitoring.DistributedService.DenormalizerHost
 
             configuration.Conventions()
                  .DefiningEventsAs(
-                     c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
+                     c => (c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events") || (c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"))));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DenormalizerHostModule());

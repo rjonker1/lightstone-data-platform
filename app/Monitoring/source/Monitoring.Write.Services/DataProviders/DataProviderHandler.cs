@@ -6,7 +6,7 @@ using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class DataProviderHandler : IHandleMessages<DataProviderCommandEnvelope>
+    public class DataProviderHandler : IHandleMessages<DataProviderCommandEnvelope>, IHandleMessages<ThrowError>
     {
         private readonly IRepository _repository;
 
@@ -35,6 +35,11 @@ namespace Monitoring.Write.Service.DataProviders
             }
 
             _repository.Save(@event, Guid.NewGuid(), null);
+        }
+
+        public void Handle(ThrowError message)
+        {
+            //TODO: Implment
         }
     }
 }

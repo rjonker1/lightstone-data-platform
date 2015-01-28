@@ -60,9 +60,9 @@ namespace Monitoring.Unit.Tests.DataProviders
 
             var command = new
             {
-                IvidExecutionHasStarted =
-                    new IvidExcutionHasStarted(_aggregateId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+                AudatexExecutionHasStarted =
+                    new AudatexExecutionHasStarted(_aggregateId, DataProviderCommandSource.Audatex,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Audatex),
                         payload, _dataProviderStopWatch, DateTime.UtcNow,
                         Category.Performance)
             };

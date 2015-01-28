@@ -81,9 +81,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             //return cmd;
         }
 
-        private EndIvidExcution End(object payload, object metadata)
+        private EndIvidExecution End(object payload, object metadata)
         {
-            return new EndIvidExcution(_requestId, DataProviderCommandSource.Ivid,
+            return new EndIvidExecution(_requestId, DataProviderCommandSource.Ivid,
                 CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
                 payload, metadata, DateTime.UtcNow,
                 Category.Performance);
@@ -190,9 +190,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private TrasformIvidResponse Transformation(dynamic payload, MetadataContainer metadata)
+        private TransformIvidResponse Transformation(dynamic payload, MetadataContainer metadata)
         {
-            return new TrasformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
+            return new TransformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
                 CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
                 payload, metadata,
                 DateTime.UtcNow, Category.Configuration);

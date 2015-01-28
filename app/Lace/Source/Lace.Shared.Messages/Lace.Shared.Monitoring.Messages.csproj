@@ -73,6 +73,7 @@
     <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\IPublishCommandMessages.cs" />
     <Compile Include="Core\ISendCommandsToBus.cs" />
+    <Compile Include="Events\GenericEvents.cs" />
     <Compile Include="Events\IvidEvents.cs" />
     <Compile Include="Infrastructure\Dto\Metadata.cs" />
     <Compile Include="Infrastructure\Extensions\BusExtensions.cs" />

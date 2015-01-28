@@ -20,9 +20,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class EndIvidExcution : DataProviderCommand
+    public class EndIvidExecution : DataProviderCommand
     {
-        public EndIvidExcution(Guid id, DataProviderCommandSource dataProvider, string message,
+        public EndIvidExecution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -86,9 +86,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class TrasformIvidResponse : DataProviderCommand
+    public class TransformIvidResponse : DataProviderCommand
     {
-        public TrasformIvidResponse(Guid id, DataProviderCommandSource dataProvider, string message,
+        public TransformIvidResponse(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
