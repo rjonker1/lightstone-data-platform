@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using MemBus;
 using Nancy;
-using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -15,7 +13,7 @@ namespace UserManagement.Api.Modules
 {
     public class UserModule : NancyModule
     {
-        public UserModule(IBus bus, IHandleMessages handler, IRepository<User> users, IRepository<Customer> customers, IRepository<Client> clients)
+        public UserModule(IBus bus, IRepository<User> users, IRepository<Customer> customers, IRepository<Client> clients)
         {
 
             Get["/Users"] = _ =>
@@ -23,7 +21,6 @@ namespace UserManagement.Api.Modules
 
                 var random = users.AsEnumerable();
                 var refined = random.Select(x => x).Where(x => x.IsActive == true);
-                //var test = userRepository.Get(new Guid("74CB623E-A081-498F-A54C-58E7AC4182A8"));
 
                 return Response.AsJson(refined);
             };
@@ -45,7 +42,7 @@ namespace UserManagement.Api.Modules
                         new List<Role> { new Role(new Guid("CF1CC26F-2A00-4DB9-8483-27FEB3E254D8"), "Admin") },
                         username, surname, "IdNumber", "contactNumber");
 
-
+                //End params
 
                 bus.Publish(new CreateUser(dto.FirstCreateDate, dto.LastUpdateBy, dto.LastUpdateDate, dto.Password, dto.UserName, dto.IsActive, dto.UserType, 
                                             dto.Customers,

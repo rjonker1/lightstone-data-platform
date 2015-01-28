@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities

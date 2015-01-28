@@ -17,9 +17,6 @@ namespace UserManagement.Domain.Dtos
         public UserType UserType { get; set; }
         public IEnumerable<Customer> Customers { get; set; }
         public List<Client> Clients { get; set; }
-        //private List<ClientUser> ClientUsers { get; set; }
-
-        //public IList<Client> Clients { get; set; } 
         public IList<Role> Roles { get; set; } 
 
         //Profile data
@@ -31,6 +28,7 @@ namespace UserManagement.Domain.Dtos
         public UserDto(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive, UserType userType,
                         IEnumerable<Customer> customers, List<Client> clients, IList<Role> roles, string firstName, string surname, string idNumber, string contactNumber)
         {
+
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
             LastUpdateDate = lastUpdateDate;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -29,6 +28,7 @@ namespace UserManagement.Domain.Entities
                         IEnumerable<Customer> customers, 
                         IList<Role> roles): base(id)
         {
+
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
             LastUpdateDate = lastUpdateDate;

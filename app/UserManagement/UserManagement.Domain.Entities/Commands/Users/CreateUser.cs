@@ -31,6 +31,7 @@ namespace UserManagement.Domain.Entities.Commands.Users
                             IList<Role> roles,
                             string contactNumber, string firstName, string surname, string idNumber)
         {
+
             Id = Guid.NewGuid();
             FirstCreateDate = firstCreateDate;
             LastUpdateBy = lastUpdateBy;
@@ -48,7 +49,6 @@ namespace UserManagement.Domain.Entities.Commands.Users
             FirstName = firstName;
             Surname = surname;
             IdNumber = idNumber;
-
         }
     }
 }

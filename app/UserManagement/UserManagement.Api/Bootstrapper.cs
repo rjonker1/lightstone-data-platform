@@ -34,10 +34,9 @@ namespace UserManagement.Api
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
-            // Perform registation that should have an application lifetime
+            // Perform registations that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            //container.Install(FromAssembly.InThisApplication());
             container.Install(
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
@@ -49,7 +48,6 @@ namespace UserManagement.Api
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
         }
 
-        //TODO: Update to include check in UserType Repository for existing records - to prevent duplications
         private void ImportStartupData(IHandleMessages handler)
         {
             handler.Handle(new ImportRole());
