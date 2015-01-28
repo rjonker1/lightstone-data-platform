@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using DataPlatform.Shared.Enums;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
@@ -61,150 +62,118 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private StartIvidExecution Begin(object payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
         {
-            return new StartIvidExecution(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
-                payload, metadata, DateTime.UtcNow,
-                Category.Performance);
+            var command = new
+            {
+                StartIvidExecution =
+                    new StartIvidExecution(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+            };
 
-            //var command = new
-            //{
-            //    StartIvidExecution =
-            //        new StartIvidExecution(_requestId, DataProviderCommandSource.Ivid,
-            //            CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
-            //            payload, metadata, DateTime.UtcNow,
-            //            Category.Performance)
-            //};
-
-            //var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing,_orderOfExecution);
-            //return cmd;
+            var cmd = command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
+            return cmd;
         }
 
-        private EndIvidExecution End(object payload, object metadata)
+        private ExecutingDataProviderMonitoringCommand End(object payload, object metadata)
         {
-            return new EndIvidExecution(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
-                payload, metadata, DateTime.UtcNow,
-                Category.Performance);
+            var command = new
+            {
+                EndIvidExecution =
+                    new EndIvidExecution(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+            };
 
-            //var command = new
-            //{
-            //    EndIvidExcution =
-            //        new EndIvidExcution(_requestId, DataProviderCommandSource.Ivid,
-            //            CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
-            //            payload, metadata, DateTime.UtcNow,
-            //            Category.Performance)
-            //};
-
-            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private StartIvidDataSourceCall StartCall(object payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand StartCall(object payload, MetadataContainer metadata)
         {
-            return new StartIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
-                payload, metadata, DateTime.UtcNow,
-                Category.Performance);
-            //var command = new
-            //{
-            //    StartIvidDataSourceCall =
-            //        new StartIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
-            //            CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
-            //            payload, metadata, DateTime.UtcNow,
-            //            Category.Performance)
-            //};
 
-            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
+            var command = new
+            {
+                StartIvidDataSourceCall =
+                    new StartIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private EndIvidDataSourceCall EndCall(object payload, object metadata)
+        private ExecutingDataProviderMonitoringCommand EndCall(object payload, object metadata)
         {
+            var command = new
+            {
+                EndIvidDataSourceCall =
+                    new EndIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+            };
 
-            return new EndIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
-                payload, metadata, DateTime.UtcNow,
-                Category.Performance);
-
-            //    var command = new
-            //    {
-            //        EndIvidDataSourceCall =
-            //            new EndIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
-            //                CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
-            //                payload, metadata, DateTime.UtcNow,
-            //                Category.Performance)
-            //    };
-
-            //    return command.ObjectToJson().GetCommand(_requestId,(int) DisplayOrder.FirstThing,_orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private ThrowError Fault(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
         {
-            return new ThrowError(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
-                DateTime.UtcNow,
-                Category.Fault);
-            //var command = new
-            //{
-            //    ThrowError =
-            //        new ThrowError(_requestId, DataProviderCommandSource.Ivid,
-            //            CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
-            //            DateTime.UtcNow,
-            //            Category.Performance)
-            //};
 
-            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            var command = new
+            {
+                ErrorThrown =
+                    new ErrorThrown(_requestId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
+                        DateTime.UtcNow,
+                        Category.Performance)
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private RaiseIvidSecurityFlag Security(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Security(dynamic payload, MetadataContainer metadata)
         {
-            return new RaiseIvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
-                payload,
-                metadata, DateTime.UtcNow, Category.Security);
-            //var command = new
-            //{
-            //    IvidSecurityFlag = new RaiseIvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
-            //        CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
-            //        payload,
-            //        metadata, DateTime.UtcNow, Category.Security)
-            //};
+            var command = new
+            {
+                IvidSecurityFlag = new RaiseIvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
+                    CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
+                    payload,
+                    metadata, DateTime.UtcNow, Category.Security)
+            };
 
-            //return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle,_orderOfExecution);
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private ConfigureIvid Configuration(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Configuration(dynamic payload, MetadataContainer metadata)
         {
-            return new ConfigureIvid(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
-                payload, metadata,
-                DateTime.UtcNow, Category.Configuration);
-            //var command = new
-            //{
-            //    ConfigureIvid = new ConfigureIvid(_requestId, DataProviderCommandSource.Ivid,
-            //        CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
-            //        payload, metadata,
-            //        DateTime.UtcNow, Category.Configuration)
-            //};
 
-            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            var command = new
+            {
+                ConfigureIvid = new ConfigureIvid(_requestId, DataProviderCommandSource.Ivid,
+                    CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private TransformIvidResponse Transformation(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Transformation(dynamic payload, MetadataContainer metadata)
         {
-            return new TransformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
-                payload, metadata,
-                DateTime.UtcNow, Category.Configuration);
-            //var command = new
-            //{
-            //    TrasformIvidResponse = new TrasformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
-            //        CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
-            //        payload, metadata,
-            //        DateTime.UtcNow, Category.Configuration)
-            //};
 
-            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            var command = new
+            {
+                TransformIvidResponse = new TransformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
+                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class

@@ -58,7 +58,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private DataProviderCommandEnvelope Begin(object payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
         {
             var command = new
             {
@@ -72,7 +72,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope End(object payload, object metadata)
+        private ExecutingDataProviderMonitoringCommand End(object payload, object metadata)
         {
             var command = new
             {
@@ -86,7 +86,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.StoneLast, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope StartCall(object payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand StartCall(object payload, MetadataContainer metadata)
         {
             var command = new
             {
@@ -100,7 +100,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheBegining, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope EndCall(object payload, object metadata)
+        private ExecutingDataProviderMonitoringCommand EndCall(object payload, object metadata)
         {
             var command = new
             {
@@ -114,14 +114,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Fault(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
                 //RgtError = new
                 //{
                 ErrorThrown =
-                    new ThrowError(_requestId, DataProviderCommandSource.Rgt,
+                    new ErrorThrown(_requestId, DataProviderCommandSource.Rgt,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Rgt), payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)
@@ -131,7 +131,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Security(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Security(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
@@ -144,7 +144,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Configuration(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Configuration(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
@@ -157,7 +157,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Transformation(dynamic payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Transformation(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {

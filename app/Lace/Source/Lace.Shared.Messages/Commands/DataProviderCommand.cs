@@ -46,6 +46,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         }
     }
 
+  
     public interface ICommand
     {
         Category Category { get; }

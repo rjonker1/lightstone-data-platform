@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    [DataContract]
     public class StartIvidExecution : DataProviderCommand
     {
         public StartIvidExecution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }
@@ -25,12 +25,12 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public EndIvidExecution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }
-    }
 
+    }
 
     [Serializable]
     [DataContract]
@@ -39,7 +39,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public StartIvidDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }
@@ -52,7 +52,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public EndIvidDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }
@@ -65,7 +65,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public RaiseIvidSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }
@@ -78,7 +78,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public ConfigureIvid(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }
@@ -91,7 +91,7 @@ namespace Lace.Shared.Monitoring.Messages.Commands
         public TransformIvidResponse(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+            : base(id, dataProvider, message, payload.ObjectToJson(), metadata == null ? "" : metadata.ObjectToJson(), date, category)
         {
 
         }

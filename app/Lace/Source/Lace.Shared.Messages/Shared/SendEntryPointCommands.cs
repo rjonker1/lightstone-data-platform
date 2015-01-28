@@ -55,7 +55,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             throw new NotImplementedException();
         }
 
-        private DataProviderCommandEnvelope Begin(object payload, MetadataContainer metadata)
+        private ExecutingDataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
         {
             var command = new
             {
@@ -68,7 +68,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, 1, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope End(object payload, object metadata)
+        private ExecutingDataProviderMonitoringCommand End(object payload, object metadata)
         {
             var command = new
             {
@@ -81,12 +81,12 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             return command.ObjectToJson().GetCommand(_requestId, 3, _orderOfExecution);
         }
 
-        public DataProviderCommandEnvelope Fault(dynamic payload, MetadataContainer metadata)
+        public ExecutingDataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
         {
             var command = new
             {
                 ErrorThrown =
-                    new ThrowError(_requestId, DataProviderCommandSource.EntryPoint,
+                    new ErrorThrown(_requestId, DataProviderCommandSource.EntryPoint,
                         "An error occurred in the entry point while processing the request", payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)

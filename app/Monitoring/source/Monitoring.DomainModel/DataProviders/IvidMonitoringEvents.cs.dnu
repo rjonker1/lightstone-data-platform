@@ -30,7 +30,7 @@ namespace Monitoring.DomainModel.DataProviders
                 message.Payload, message.MetaData, message.Date, message.Category));
         }
 
-        public void Apply(EndIvidExcution message)
+        public void Apply(EndIvidExecution message)
         {
             RaiseEvent(new IvidExcutionHasEnded(message.Id, message.DataProviderCommandSource, message.Message,
                 message.Payload, message.MetaData, message.Date, message.Category));
@@ -62,7 +62,7 @@ namespace Monitoring.DomainModel.DataProviders
                 message.Payload, message.MetaData, message.Date, message.Category));
         }
 
-        public void Apply(TrasformIvidResponse message)
+        public void Apply(TransformIvidResponse message)
         {
             RaiseEvent(new IvidResponseTransformed(message.Id, message.DataProviderCommandSource, message.Message,
                 message.Payload, message.MetaData, message.Date, message.Category));

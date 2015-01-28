@@ -5,15 +5,15 @@ using DataPlatform.Shared.Messaging.Events;
 
 namespace Monitoring.DomainModel.DataProviders
 {
-    public class MonitoringEvents : AggregateBase
+    public class DataProviderMonitoringExecuted : AggregateBase
     {
-        private MonitoringEvents(Guid id)
+        private DataProviderMonitoringExecuted(Guid id)
         {
             Id = id;
             Register<MonitoringEvent>(e => Id = id);
         }
 
-        public MonitoringEvents(Guid id, string payload, DateTime date, MonitoringSource source)
+        public DataProviderMonitoringExecuted(Guid id, string payload, DateTime date, MonitoringSource source)
             : this(id)
         {
             RaiseEvent(new MonitoringEvent(id, payload, date,source));
