@@ -98,7 +98,7 @@ namespace Monitoring.Test.Helper.Queues
 
         public DataProviderQueueFunctions SecurityMessage(object payload, object metadata)
         {
-            _monitoring.Send(CommandType.Security, _request, metadata);
+            _monitoring.Send(CommandType.Security, payload, metadata);
             Thread.Sleep(1000);
             return this;
         }

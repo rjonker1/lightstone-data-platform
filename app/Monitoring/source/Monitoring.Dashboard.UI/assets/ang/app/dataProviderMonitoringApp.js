@@ -9,16 +9,17 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                 console.info("Data Provider Monitoring App executing service");
                 $rootScope.$emit("dataProviderMonitoringInfo", result);
             }
+
             $.connection.hub.start().done(function() {
                 hub.server.initRootUri();
             });
 
             hub.error = function(error) {
-                console.warn("Error in Data Provider's SignalR Service: " + error);
+                console.warn("Error in Data Provider's Service: " + error);
             };
 
             hub.reconnected = function() {
-                console.infolog("Data Provider's SignalR Service Reconnected");
+                console.infolog("Data Provider's Service Reconnected");
             };
 
             hub.stateChanged = function(change) {
@@ -28,9 +29,18 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
                     console.info("Dataprovider Monitoring App is online");
                 }
             };
+
+            
         };
 
-        return { init: init};
+        var restart = function () {
+            console.log("Restarting connection for service");
+            var hub = $.connection.dataProviderHub;
+            $.connection.hub.stop();
+            $.connection.hub.start();
+        };
+
+        return { init: init, restart : restart};
     })
     .controller("DataProviderController", function($scope, dataProviderSignalRService, $rootScope) {
 
@@ -81,19 +91,20 @@ var dataProviderMonitoringApp = angular.module("dataProviderMonitoringApp", ["ng
             var element = document.getElementById(buttonId);
             var lastIndex = getLastIndex();
             if (lastIndex >= 0) {
-                if (element.value == "Collapse") {
+                if (element.value == "collapse") {
                     CollapseAllClicked(rawJsonId + lastIndex, canvasId);
-                    element.value = "Expand";
+                    element.value = "expand";
                 } else {
                     ExpandAllClicked(rawJsonId + lastIndex, canvasId);
-                    element.value = "Collapse";
+                    element.value = "collapse";
                 }
             }
        };
 
        $scope.ReInitializeService = function() {
            $scope.dataProviderMonitoring = [];
-           dataProviderSignalRService.init();
+           //dataProviderSignalRService.init();
+           dataProviderSignalRService.restart();
        }
     });
 });

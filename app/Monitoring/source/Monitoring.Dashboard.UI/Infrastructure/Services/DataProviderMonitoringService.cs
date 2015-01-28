@@ -90,7 +90,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                 var requestInformation = response.Payload.JsonToObject<PackageInformation[]>();
                 if (requestInformation == null || !requestInformation.Any())
                 {
-                    response.SetMetadata(string.Format("Aggregate {0} Date {1}", response.Id, response.Date));
+                    response.SetMetadata(string.Format("Id {0} Date {1}", response.Id, response.Date));
                     continue;
                 }
 
@@ -102,7 +102,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
 
                 if (requestDetail == null)
                 {
-                    response.SetMetadata(string.Format("Aggregate {0} Date {1}", response.Id, response.Date));
+                    response.SetMetadata(string.Format("Id {0} Date {1}", response.Id, response.Date));
                     continue;
                 }
 

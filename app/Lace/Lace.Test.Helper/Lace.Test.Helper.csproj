@@ -105,6 +105,8 @@
     </Compile>
     <Compile Include="Builders\Buses\BusBuilder.cs" />
     <Compile Include="Builders\Buses\CommandSenderBuilder.cs" />
+    <Compile Include="Builders\Buses\QueueSender.cs" />
+    <Compile Include="Builders\Cmds\CommandBuilder.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
@@ -205,13 +207,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Fakes\Bus\" />
-    <Folder Include="Fakes\Jis\" />
     <Folder Include="Fakes\Lace\Responses\" />
-    <Folder Include="Mothers\Consumers\" />
-    <Folder Include="Mothers\Packages\" />
-    <Folder Include="Mothers\Responses\" />
-    <Folder Include="Mothers\Sources\Lightstone\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

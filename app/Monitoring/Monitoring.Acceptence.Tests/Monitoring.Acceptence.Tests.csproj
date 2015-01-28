@@ -102,7 +102,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataProviders\when_handling_data_provider_events.cs" />
     <None Include="Queues\when_sending_ivid_command_messages_to_the_read_queues_on_the_bus.cs.error" />
     <Compile Include="Queues\when_sending_data_provider_command_messages_to_the_write_queues_on_the_bus.cs" />
     <Compile Include="Queues\when_sending_rgt_vin_command_messages_to_the_write_queues_on_the_bus.cs" />
@@ -149,10 +148,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Fakes\" />
-    <Folder Include="Lace\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

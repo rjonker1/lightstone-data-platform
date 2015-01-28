@@ -1,7 +1,7 @@
 ﻿<div class="data-provider-log" ng-app="dataProviderMonitoringApp" ng-controller="DataProviderController">
-    @*<div>
-        <input type="button" id="re-initialize-log-data" value="Refresh" ng-click="ReInitializeService" />
-    </div>*@
+    <div>
+        <input type="button" id="re-initialize-log-data" value="re-connect" ng-click="ReInitializeService();" />
+    </div>
     <div id="data-provider-event-log" class="data-provider-container">
         <ul>
             <li ng-repeat="response in dataProviderMonitoring" class="" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
@@ -16,7 +16,7 @@
     </div>
     <div id="log-formatted-json" style="display: none;">
         <div>
-            <input type="button" id="button-collapse-expand" ng-click="CollapseOrExpand('button-collapse-expand');" value="Collapse" />
+            <input type="button" id="button-collapse-expand" ng-click="CollapseOrExpand('button-collapse-expand');" value="collapse" />
         </div>
         <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
     </div>
