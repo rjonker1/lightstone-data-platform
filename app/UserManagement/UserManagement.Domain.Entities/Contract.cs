@@ -29,9 +29,30 @@ namespace UserManagement.Domain.Entities
         public virtual ContractDuration ContractDuration { get; set; }
         public virtual ICollection<ContractPackage> ContractPackage { get; set; }
 
-        public Contract()
+        protected Contract() { }
+
+        public Contract(Guid id, DateTime contractCommencementDate, Guid contractDurationId, string contractName, Guid contractTypeId, Guid escalationTypeId, string lastUpdateBy, DateTime lastUpdateDate, Guid? clientId, string contactDetail, string enteredIntoBy, DateTime? onlineAcceptance, Guid? profileDetailId, string registeredName, string registrationNumber, Client client, ProfileDetail profileDetail, ContractType contractType, EscalationType escalationType, ContractDuration contractDuration, ICollection<ContractPackage> contractPackage) : base(id)
         {
-            this.ContractPackage = new HashSet<ContractPackage>();
+            ContractCommencementDate = contractCommencementDate;
+            ContractDurationId = contractDurationId;
+            ContractName = contractName;
+            ContractTypeId = contractTypeId;
+            EscalationTypeId = escalationTypeId;
+            LastUpdateBy = lastUpdateBy;
+            LastUpdateDate = lastUpdateDate;
+            ClientId = clientId;
+            ContactDetail = contactDetail;
+            EnteredIntoBy = enteredIntoBy;
+            OnlineAcceptance = onlineAcceptance;
+            ProfileDetailId = profileDetailId;
+            RegisteredName = registeredName;
+            RegistrationNumber = registrationNumber;
+            Client = client;
+            ProfileDetail = profileDetail;
+            ContractType = contractType;
+            EscalationType = escalationType;
+            ContractDuration = contractDuration;
+            ContractPackage = contractPackage;
         }
     }
 }
