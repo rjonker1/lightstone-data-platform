@@ -119,7 +119,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.Lightstone,
+                    new ThrowError(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Lightstone), payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)

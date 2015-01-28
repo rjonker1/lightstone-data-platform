@@ -119,7 +119,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.Audatex,
+                    new ThrowError(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Audatex), payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)

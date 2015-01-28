@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using DataPlatform.Shared.Enums;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
@@ -62,114 +61,150 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private DataProviderCommandEnvelope Begin(object payload, MetadataContainer metadata)
+        private StartIvidExecution Begin(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                IvidExecutionHasStarted =
-                    new IvidExcutionHasStarted(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
-                        payload, metadata, DateTime.UtcNow,
-                        Category.Performance)
-            };
+            return new StartIvidExecution(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+                payload, metadata, DateTime.UtcNow,
+                Category.Performance);
 
-            var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing,_orderOfExecution);
-            return cmd;
+            //var command = new
+            //{
+            //    StartIvidExecution =
+            //        new StartIvidExecution(_requestId, DataProviderCommandSource.Ivid,
+            //            CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+            //            payload, metadata, DateTime.UtcNow,
+            //            Category.Performance)
+            //};
+
+            //var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing,_orderOfExecution);
+            //return cmd;
         }
 
-        private DataProviderCommandEnvelope End(object payload, object metadata)
+        private EndIvidExcution End(object payload, object metadata)
         {
-            var command = new
-            {
-                IvidExecutionHasEnded =
-                    new IvidExcutionHasEnded(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
-                        payload, metadata, DateTime.UtcNow,
-                        Category.Performance)
-            };
+            return new EndIvidExcution(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
+                payload, metadata, DateTime.UtcNow,
+                Category.Performance);
 
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
+            //var command = new
+            //{
+            //    EndIvidExcution =
+            //        new EndIvidExcution(_requestId, DataProviderCommandSource.Ivid,
+            //            CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
+            //            payload, metadata, DateTime.UtcNow,
+            //            Category.Performance)
+            //};
+
+            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope StartCall(object payload, MetadataContainer metadata)
+        private StartIvidDataSourceCall StartCall(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                IvidDataSourceCallHasStarted =
-                    new IvidDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
-                        payload, metadata, DateTime.UtcNow,
-                        Category.Performance)
-            };
+            return new StartIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
+                payload, metadata, DateTime.UtcNow,
+                Category.Performance);
+            //var command = new
+            //{
+            //    StartIvidDataSourceCall =
+            //        new StartIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
+            //            CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
+            //            payload, metadata, DateTime.UtcNow,
+            //            Category.Performance)
+            //};
 
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
+            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope EndCall(object payload, object metadata)
+        private EndIvidDataSourceCall EndCall(object payload, object metadata)
         {
-            var command = new
-            {
-                IvidDataSourceCallHasEnded =
-                    new IvidDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
-                        payload, metadata, DateTime.UtcNow,
-                        Category.Performance)
-            };
 
-            return command.ObjectToJson().GetCommand(_requestId,(int) DisplayOrder.FirstThing,_orderOfExecution);
+            return new EndIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
+                payload, metadata, DateTime.UtcNow,
+                Category.Performance);
+
+            //    var command = new
+            //    {
+            //        EndIvidDataSourceCall =
+            //            new EndIvidDataSourceCall(_requestId, DataProviderCommandSource.Ivid,
+            //                CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
+            //                payload, metadata, DateTime.UtcNow,
+            //                Category.Performance)
+            //    };
+
+            //    return command.ObjectToJson().GetCommand(_requestId,(int) DisplayOrder.FirstThing,_orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Fault(dynamic payload, MetadataContainer metadata)
+        private ThrowError Fault(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.Ivid,
-                        CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
-                        DateTime.UtcNow,
-                        Category.Performance)
-            };
+            return new ThrowError(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
+                DateTime.UtcNow,
+                Category.Fault);
+            //var command = new
+            //{
+            //    ThrowError =
+            //        new ThrowError(_requestId, DataProviderCommandSource.Ivid,
+            //            CommandDescriptions.FaultDescription(DataProviderCommandSource.Ivid), payload, metadata,
+            //            DateTime.UtcNow,
+            //            Category.Performance)
+            //};
 
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Security(dynamic payload, MetadataContainer metadata)
+        private RaiseIvidSecurityFlag Security(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                IvidSecurityFlag = new IvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
-                    CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
-                    payload,
-                    metadata, DateTime.UtcNow, Category.Security)
-            };
+            return new RaiseIvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
+                payload,
+                metadata, DateTime.UtcNow, Category.Security);
+            //var command = new
+            //{
+            //    IvidSecurityFlag = new RaiseIvidSecurityFlag(_requestId, DataProviderCommandSource.Ivid,
+            //        CommandDescriptions.SecurityDescription(DataProviderCommandSource.Ivid),
+            //        payload,
+            //        metadata, DateTime.UtcNow, Category.Security)
+            //};
 
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle,_orderOfExecution);
+            //return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle,_orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Configuration(dynamic payload, MetadataContainer metadata)
+        private ConfigureIvid Configuration(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                IvidConfigured = new IvidConfigured(_requestId, DataProviderCommandSource.Ivid,
-                    CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
-                    payload, metadata,
-                    DateTime.UtcNow, Category.Configuration)
-            };
+            return new ConfigureIvid(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
+                payload, metadata,
+                DateTime.UtcNow, Category.Configuration);
+            //var command = new
+            //{
+            //    ConfigureIvid = new ConfigureIvid(_requestId, DataProviderCommandSource.Ivid,
+            //        CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Ivid),
+            //        payload, metadata,
+            //        DateTime.UtcNow, Category.Configuration)
+            //};
 
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private DataProviderCommandEnvelope Transformation(dynamic payload, MetadataContainer metadata)
+        private TrasformIvidResponse Transformation(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                IvidResponseTransformed = new IvidResponseTransformed(_requestId, DataProviderCommandSource.Ivid,
-                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
-                    payload, metadata,
-                    DateTime.UtcNow, Category.Configuration)
-            };
+            return new TrasformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
+                payload, metadata,
+                DateTime.UtcNow, Category.Configuration);
+            //var command = new
+            //{
+            //    TrasformIvidResponse = new TrasformIvidResponse(_requestId, DataProviderCommandSource.Ivid,
+            //        CommandDescriptions.TransformationDescription(DataProviderCommandSource.Ivid),
+            //        payload, metadata,
+            //        DateTime.UtcNow, Category.Configuration)
+            //};
 
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            //return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class

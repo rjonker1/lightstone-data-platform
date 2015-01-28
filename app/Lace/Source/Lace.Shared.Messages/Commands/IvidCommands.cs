@@ -7,9 +7,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class IvidExcutionHasStarted : DataProviderCommand
+    public class StartIvidExecution : DataProviderCommand
     {
-        public IvidExcutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
+        public StartIvidExecution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -20,9 +20,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidExcutionHasEnded : DataProviderCommand
+    public class EndIvidExcution : DataProviderCommand
     {
-        public IvidExcutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
+        public EndIvidExcution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -34,9 +34,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidDataSourceCallHasStarted : DataProviderCommand
+    public class StartIvidDataSourceCall : DataProviderCommand
     {
-        public IvidDataSourceCallHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
+        public StartIvidDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -47,9 +47,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidDataSourceCallHasEnded : DataProviderCommand
+    public class EndIvidDataSourceCall : DataProviderCommand
     {
-        public IvidDataSourceCallHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
+        public EndIvidDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -60,9 +60,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidSecurityFlag : DataProviderCommand
+    public class RaiseIvidSecurityFlag : DataProviderCommand
     {
-        public IvidSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RaiseIvidSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -73,9 +73,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidConfigured : DataProviderCommand
+    public class ConfigureIvid : DataProviderCommand
     {
-        public IvidConfigured(Guid id, DataProviderCommandSource dataProvider, string message,
+        public ConfigureIvid(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -86,9 +86,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class IvidResponseTransformed : DataProviderCommand
+    public class TrasformIvidResponse : DataProviderCommand
     {
-        public IvidResponseTransformed(Guid id, DataProviderCommandSource dataProvider, string message,
+        public TrasformIvidResponse(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)

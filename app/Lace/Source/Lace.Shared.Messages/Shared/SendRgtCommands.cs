@@ -121,7 +121,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                 //RgtError = new
                 //{
                 ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.Rgt,
+                    new ThrowError(_requestId, DataProviderCommandSource.Rgt,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Rgt), payload, metadata,
                         DateTime.UtcNow,
                         Category.Performance)

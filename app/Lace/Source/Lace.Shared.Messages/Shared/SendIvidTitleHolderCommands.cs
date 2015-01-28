@@ -119,7 +119,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.IvidTitleHolder,
+                    new ThrowError(_requestId, DataProviderCommandSource.IvidTitleHolder,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.IvidTitleHolder), payload,
                         metadata,
                         DateTime.UtcNow,
