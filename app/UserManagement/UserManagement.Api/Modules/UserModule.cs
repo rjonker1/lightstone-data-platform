@@ -36,12 +36,12 @@ namespace UserManagement.Api.Modules
                 var surname = "Testeroonie";
 
                 var customerToLink = customers.Select(x => x).FirstOrDefault(x => x.CustomerName == "Testeroonie Inc. Global");
-                //var clientToLink = clients.Select(x => x).FirstOrDefault(x => x.ClientName == "Testeroonie Client");
+                var clientToLink = clients.Select(x => x).FirstOrDefault(x => x.ClientName == "Testeroonie Client");
 
                 var dto = new UserDto(DateTime.Now, username, DateTime.Now, "password", "username", true,
                         new UserType(new Guid("505941EE-C0F7-4A32-AF85-BCEFD172E8FA"), "User"),
                         new Collection<Customer> { customerToLink },
-                        //new List<Client> { clientToLink },
+                        new List<Client> { clientToLink },
                         new List<Role> { new Role(new Guid("CF1CC26F-2A00-4DB9-8483-27FEB3E254D8"), "Admin") },
                         username, surname, "IdNumber", "contactNumber");
 
@@ -49,7 +49,7 @@ namespace UserManagement.Api.Modules
 
                 bus.Publish(new CreateUser(dto.FirstCreateDate, dto.LastUpdateBy, dto.LastUpdateDate, dto.Password, dto.UserName, dto.IsActive, dto.UserType, 
                                             dto.Customers,
-                                            //dto.Clients,
+                                            dto.Clients,
                                             dto.Roles,
                                             dto.ContactNumber, dto.FirstName, dto.Surname, dto.IdNumber));
 

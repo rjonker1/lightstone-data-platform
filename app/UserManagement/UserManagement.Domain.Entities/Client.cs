@@ -13,7 +13,7 @@ namespace UserManagement.Domain.Entities
 
         //public virtual ProfileDetail ProfileDetail { get; set; }
 
-        //public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
+        public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
 
         protected Client() { }
 

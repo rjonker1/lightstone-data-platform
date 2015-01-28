@@ -11,6 +11,8 @@ namespace UserManagement.Domain.Entities
         public virtual Client Client { get; set; }
         public virtual User User { get; set; }
 
+        protected ClientUser() { }
+
         public ClientUser(string userAlias, Client client, User user)
         {
             Id = Guid.NewGuid();

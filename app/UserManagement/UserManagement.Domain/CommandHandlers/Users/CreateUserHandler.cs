@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using NHibernate;
 using NHibernate.Mapping;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
@@ -15,12 +17,14 @@ namespace UserManagement.Domain.CommandHandlers.Users
     {
 
         private readonly IRepository<User> _repository;
+        private readonly ISession _session;
         private readonly IRepository<Client> _clientRepo;
         private readonly IRepository<ClientUser> _clientUserRepo;
         private readonly IHandleMessages _handler;
 
-        public CreateUserHandler(IRepository<Client> clientRepo, IRepository<ClientUser> clientUserRepo, IHandleMessages handler, IRepository<User> repository)
+        public CreateUserHandler(ISession session, IRepository<Client> clientRepo, IRepository<ClientUser> clientUserRepo, IHandleMessages handler, IRepository<User> repository)
         {
+            _session = session;
             _clientRepo = clientRepo;
             _clientUserRepo = clientUserRepo;
             _handler = handler;
@@ -49,11 +53,11 @@ namespace UserManagement.Domain.CommandHandlers.Users
                 command.Customers,
                 command.Roles);
 
-
             _repository.Save(newUser);
+            _session.Transaction.Commit();
 
-            var clientUser = new ClientUser("Alias", client, newUser);
-            _clientUserRepo.Save(clientUser);
+            _session.BeginTransaction();
+            _clientUserRepo.Save(new ClientUser("Alias", client, newUser));
 
             _handler.Handle(new CreateUserProfile(command.ContactNumber, command.UserName, command.IdNumber, command.Surname, newUser));
         }

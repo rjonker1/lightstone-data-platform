@@ -35,7 +35,7 @@ namespace UserManagement.Domain.Entities
             Password = password;
             UserName = userName;
             IsActive = isActive;
-            ClientUsers = new Collection<ClientUser>();
+            //ClientUsers = new Collection<ClientUser>();
             UserType = userType;
             Customers = customers;
             Roles = roles;

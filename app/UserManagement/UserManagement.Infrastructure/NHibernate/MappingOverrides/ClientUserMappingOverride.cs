@@ -9,11 +9,11 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<ClientUser> mapping)
         {
-            mapping.Table("ClientUser");
-            mapping.CompositeId().KeyReference(x => x.Client, "ClientId")
-                                 .KeyReference(x => x.User, "UserId");
+            //mapping.Table("ClientUser");
+            //mapping.CompositeId().KeyReference(x => x.Client, "ClientId")
+            //                     .KeyReference(x => x.User, "UserId");
 
-            mapping.Map(x => x.UserAlias);
+            //mapping.Map(x => x.UserAlias);
 
         }
     }
