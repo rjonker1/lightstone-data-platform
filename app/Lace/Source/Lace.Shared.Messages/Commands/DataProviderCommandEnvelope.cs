@@ -1,17 +1,18 @@
 ﻿using System;
+
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class DataProviderCommandEnvelope
+    public class ExecutingDataProviderMonitoringCommand
     {
         public CommandDto Command { get; private set; }
 
-        public DataProviderCommandEnvelope(CommandDto command)
+        public ExecutingDataProviderMonitoringCommand(CommandDto command)
         {
             Command = command;
         }
 
-        public DataProviderCommandEnvelope()
+        public ExecutingDataProviderMonitoringCommand()
         {
         }
     }

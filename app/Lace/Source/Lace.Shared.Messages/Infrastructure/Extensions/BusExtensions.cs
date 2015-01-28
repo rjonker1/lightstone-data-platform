@@ -14,13 +14,14 @@ namespace Lace.Shared.Monitoring.Messages.Infrastructure.Extensions
             Task.Run(() => SendMessagesAsync(message,publisher,log));
         }
 
-        public static DataProviderCommandEnvelope GetCommand(this string payload, Guid id, int subOrder,
+        public static ExecutingDataProviderMonitoringCommand GetCommand(this string payload, Guid id, int subOrder,
             int executionOrder)
         {
             return
-                new DataProviderCommandEnvelope(new CommandDto(id, MonitoringSource.Lace,
+                new ExecutingDataProviderMonitoringCommand(new CommandDto(id, MonitoringSource.Lace,
                     payload, DateTime.UtcNow, executionOrder, subOrder));
         }
+
 
         private static void SendMessagesAsync<T>(T message, IPublishCommandMessages publisher, ILog log) where T : class
         {

@@ -6,7 +6,7 @@ using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class DataProviderHandler : IHandleMessages<DataProviderCommandEnvelope>, IHandleMessages<ThrowError>
+    public class DataProviderHandler : IHandleMessages<DataProviderCommandEnvelope>
     {
         private readonly IRepository _repository;
 
@@ -21,11 +21,11 @@ namespace Monitoring.Write.Service.DataProviders
 
         public void Handle(DataProviderCommandEnvelope message)
         {
-            var @event = _repository.GetById<MonitoringEvents>(message.Command.Id);
+            var @event = _repository.GetById<DataProviderMonitoringExecuted>(message.Command.Id);
 
             if (@event == null || @event.Id == Guid.Empty)
             {
-                @event = new MonitoringEvents(message.Command.Id, message.Command.Payload, message.Command.DateUtc,
+                @event = new DataProviderMonitoringExecuted(message.Command.Id, message.Command.Payload, message.Command.DateUtc,
                     message.Command.Source);
             }
             else
@@ -35,11 +35,6 @@ namespace Monitoring.Write.Service.DataProviders
             }
 
             _repository.Save(@event, Guid.NewGuid(), null);
-        }
-
-        public void Handle(ThrowError message)
-        {
-            //TODO: Implment
         }
     }
 }

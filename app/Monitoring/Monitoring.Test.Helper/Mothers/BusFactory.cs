@@ -71,7 +71,7 @@ namespace Monitoring.Test.Helper.Mothers
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
+                    c => (c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events") || (c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"))));
             var bus = Bus.Create(configuration);
             return bus;
         }
@@ -87,7 +87,7 @@ namespace Monitoring.Test.Helper.Mothers
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
+                     c => (c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events") || (c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Events"))));
             var bus = Bus.Create(configuration);
             return bus;
         }

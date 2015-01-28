@@ -6,9 +6,9 @@ using NServiceBus;
 
 namespace Monitoring.Write.Service.DataProviders
 {
-    public class IvidMonitoringHandler : IHandleMessages<StartIvidExecution>, IHandleMessages<EndIvidExcution>,
+    public class IvidMonitoringHandler : IHandleMessages<StartIvidExecution>, IHandleMessages<EndIvidExecution>,
         IHandleMessages<StartIvidDataSourceCall>, IHandleMessages<EndIvidDataSourceCall>,
-        IHandleMessages<RaiseIvidSecurityFlag>, IHandleMessages<ConfigureIvid>, IHandleMessages<TrasformIvidResponse>, IHandleMessages<ThrowError>
+        IHandleMessages<RaiseIvidSecurityFlag>, IHandleMessages<ConfigureIvid>, IHandleMessages<TransformIvidResponse>, IHandleMessages<ThrowError>
     {
 
         private readonly IRepository _repository;
@@ -33,7 +33,7 @@ namespace Monitoring.Write.Service.DataProviders
             Save(@event);
         }
 
-        public void Handle(EndIvidExcution message)
+        public void Handle(EndIvidExecution message)
         {
             var @event = IvidMonitoringEvent(message.Id);
             if ((@event == null || @event.Id == Guid.Empty))
@@ -88,7 +88,7 @@ namespace Monitoring.Write.Service.DataProviders
             Save(@event);
         }
 
-        public void Handle(TrasformIvidResponse message)
+        public void Handle(TransformIvidResponse message)
         {
             var @event = IvidMonitoringEvent(message.Id);
             if ((@event == null || @event.Id == Guid.Empty))
