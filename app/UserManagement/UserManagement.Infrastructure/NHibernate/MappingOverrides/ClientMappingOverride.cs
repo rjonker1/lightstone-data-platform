@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Client> mapping)
         {
-            mapping.HasMany(x => x.ClientUsers).Cascade.All().KeyColumn("ClientId");
+            mapping.HasMany(x => x.ClientUsers).Inverse().Table("ClientUser").KeyColumn("ClientId");
         }
     }
 }

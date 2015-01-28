@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
     public  class Client : Entity
     {
 
-        public virtual string ClientName { get; set; }
+        public virtual string ClientName { get; protected internal set; }
         //public virtual Guid? ClientProfileId { get; set; }
 
         //public virtual ProfileDetail ProfileDetail { get; set; }
