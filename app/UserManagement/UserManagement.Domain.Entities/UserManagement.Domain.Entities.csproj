@@ -45,6 +45,7 @@
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
     <Compile Include="Commands\ContractDurations\CreateContractDuration.cs" />
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
+    <Compile Include="Commands\Contracts\CreateContract.cs" />
     <Compile Include="Commands\ContractTypes\CreateContractType.cs" />
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
     <Compile Include="Commands\CreateSources\CreateCreateSource.cs" />

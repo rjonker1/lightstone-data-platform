@@ -25,6 +25,7 @@ namespace UserManagement.Domain.Dtos
         public virtual string IdNumber { get; set; }
         public virtual string ContactNumber { get; set; }
 
+        //Temporary contructor to be removed when fron-end established
         public UserDto(DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string password, string userName, bool? isActive, UserType userType,
                         IEnumerable<Customer> customers, List<Client> clients, IList<Role> roles, string firstName, string surname, string idNumber, string contactNumber)
         {

@@ -52,6 +52,7 @@
     <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\CreateContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
+    <Compile Include="CommandHandlers\Contracts\CreateContractHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\CreateContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\CreateCreateSourceHandler.cs" />
