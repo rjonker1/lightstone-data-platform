@@ -86,9 +86,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataProviders\when_handling_data_provider_events.cs" />
     <Compile Include="DataProviders\when_handling_data_provider_messages.cs" />
-    <Compile Include="DataProviders\when_sending_data_provider_events_to_the_bus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
