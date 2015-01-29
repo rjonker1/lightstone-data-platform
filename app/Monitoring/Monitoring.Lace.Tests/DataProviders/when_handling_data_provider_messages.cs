@@ -1,15 +1,11 @@
 ﻿using System;
-using CommonDomain;
 using DataPlatform.Shared.Enums;
-using DataPlatform.Shared.Messaging.Events;
 using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Extensions;
-using Monitoring.DomainModel.DataProviders;
 using Monitoring.Test.Helper.Builder;
-using Monitoring.Test.Helper.Fakes;
 using Monitoring.Test.Helper.Fakes.EventStore;
 using Monitoring.Write.Service.DataProviders;
 using NServiceBus;
@@ -60,8 +56,8 @@ namespace Monitoring.Unit.Tests.DataProviders
 
             var command = new
             {
-                AudatexExecutionHasStarted =
-                    new AudatexExecutionHasStarted(_aggregateId, DataProviderCommandSource.Audatex,
+                StartIvidExecution =
+                    new StartIvidExecution(_aggregateId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Audatex),
                         payload, _dataProviderStopWatch, DateTime.UtcNow,
                         Category.Performance)

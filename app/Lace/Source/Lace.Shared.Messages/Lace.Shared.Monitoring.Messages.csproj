@@ -62,6 +62,7 @@
     <Compile Include="Commands\CommandDto.cs" />
     <Compile Include="Commands\AudatexCommands.cs" />
     <Compile Include="Commands\GenericCommands.cs" />
+    <None Include="Commands\IvidCommands.cs.bkup" />
     <Compile Include="Commands\RgtVinCommands.cs" />
     <Compile Include="Commands\RgtCommands.cs" />
     <Compile Include="Commands\LightstoneCommands.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="RabbitMQ\BusFactory.cs" />
     <Compile Include="Shared\SendEntryPointCommands.cs" />
     <Compile Include="Shared\SendAudatexCommands.cs" />
+    <None Include="Shared\SendIvidCommands.cs.bkup" />
     <Compile Include="Shared\SendRgtVinCommands.cs" />
     <Compile Include="Shared\SendRgtCommands.cs" />
     <Compile Include="Shared\SendLightstoneCommands.cs" />

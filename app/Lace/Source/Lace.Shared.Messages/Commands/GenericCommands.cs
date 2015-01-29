@@ -17,4 +17,20 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
         }
     }
+
+    [Serializable]
+    [DataContract]
+    public class ThrowError
+    {
+        public CommandDto Command { get; private set; }
+
+        public ThrowError(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public ThrowError()
+        {
+        }
+    }
 }

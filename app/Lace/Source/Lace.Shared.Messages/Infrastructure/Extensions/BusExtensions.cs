@@ -22,6 +22,14 @@ namespace Lace.Shared.Monitoring.Messages.Infrastructure.Extensions
                     payload, DateTime.UtcNow, executionOrder, subOrder));
         }
 
+        public static CommandDto GetCommandDto(this string payload, Guid id, int subOrder,
+            int executionOrder)
+        {
+            return
+                new CommandDto(id, MonitoringSource.Lace,
+                    payload, DateTime.UtcNow, executionOrder, subOrder);
+        }
+
 
         private static void SendMessagesAsync<T>(T message, IPublishCommandMessages publisher, ILog log) where T : class
         {
