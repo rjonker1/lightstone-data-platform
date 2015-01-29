@@ -22,11 +22,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
         public IEnumerable<MonitoringResponse> GetAllMonitoringInformation(int source)
         {
             var commands = _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
-                new {@Source = source})
+                new { @Source = source })
                 .Select(
                     s =>
                         new MonitoringResponseDto(s.AggregateId,
-                            (object) Encoding.UTF8.GetString(s.Payload).JsonToObject(),
+                            (object)Encoding.UTF8.GetString(s.Payload).JsonToObject(),
                             s.Date));
 
             if (!commands.Any())

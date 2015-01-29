@@ -55,33 +55,48 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             throw new NotImplementedException();
         }
 
-        private EntryPointReceivingRequest Begin(object payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
         {
-
-            return new EntryPointReceivingRequest(new DataProviderCommand(_requestId, DataProviderCommandSource.EntryPoint,
-                        "Receiving Request in the Data Provider Entry Point", payload, metadata, DateTime.UtcNow,
+            var command = new
+            {
+                EntryPointReceivingRequest =
+                    new EntryPointReceivingRequest(_requestId, DataProviderCommandSource.EntryPoint,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.EntryPoint),
+                        payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-               .ObjectToJson()
-               .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
+            return cmd;
         }
 
-        private EntryPointProcessedAndReturningRequest End(object payload, object metadata)
+        private DataProviderMonitoringCommand End(object payload, object metadata)
         {
-            return new EntryPointProcessedAndReturningRequest(new DataProviderCommand(_requestId, DataProviderCommandSource.EntryPoint,
-                        "End Proccessing Request in Entry Point", payload, metadata, DateTime.UtcNow,
+            var command = new
+            {
+                EntryPointProcessedAndReturningRequest =
+                    new EntryPointProcessedAndReturningRequest(_requestId, DataProviderCommandSource.EntryPoint,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.EntryPoint),
+                        payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-                .ObjectToJson()
-                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
+            return cmd;
         }
 
-        public ThrowError Fault(dynamic payload, MetadataContainer metadata)
+        public DataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
         {
-            return new ThrowError(new DataProviderCommand(_requestId, DataProviderCommandSource.EntryPoint,
-                CommandDescriptions.FaultDescription(DataProviderCommandSource.EntryPoint), payload, metadata,
-                DateTime.UtcNow,
-                Category.Fault)
-                .ObjectToJson()
-                .GetCommandDto(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution));
+            var command = new
+            {
+                ThrowError =
+                    new ThrowError(_requestId, DataProviderCommandSource.EntryPoint,
+                        CommandDescriptions.FaultDescription(DataProviderCommandSource.EntryPoint), payload, metadata,
+                        DateTime.UtcNow,
+                        Category.Fault)
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private void Security(dynamic payload, MetadataContainer metadata)

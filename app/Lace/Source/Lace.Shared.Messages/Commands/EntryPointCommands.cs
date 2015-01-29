@@ -1,39 +1,30 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    [DataContract]
-    public class EntryPointReceivingRequest
+    public class EntryPointReceivingRequest : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public EntryPointReceivingRequest(CommandDto command)
+        public EntryPointReceivingRequest(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EntryPointReceivingRequest()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EntryPointProcessedAndReturningRequest
+    public class EntryPointProcessedAndReturningRequest : DataProviderCommand
     {
-      public CommandDto Command { get; private set; }
-
-        public EntryPointProcessedAndReturningRequest(CommandDto command)
+        public EntryPointProcessedAndReturningRequest(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EntryPointProcessedAndReturningRequest()
-        {
         }
     }
 }

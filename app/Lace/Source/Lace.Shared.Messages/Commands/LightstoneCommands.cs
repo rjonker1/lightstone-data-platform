@@ -1,117 +1,90 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class StartingLightstoneExecution
+    public class StartLightstoneExecution : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public StartingLightstoneExecution(CommandDto command)
+        public StartLightstoneExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public StartingLightstoneExecution()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EndingLightstoneExecution
+    public class EndLightstoneExecution : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public EndingLightstoneExecution(CommandDto command)
+        public EndLightstoneExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EndingLightstoneExecution()
-        {
-        }
-
-    }
-
-    [Serializable]
-    [DataContract]
-    public class StartingLightstoneDataSourceCall
-    {
-        public CommandDto Command { get; private set; }
-
-        public StartingLightstoneDataSourceCall(CommandDto command)
-        {
-            Command = command;
-        }
-
-        public StartingLightstoneDataSourceCall()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EndingLightstoneDataSourceCall
+    public class StartLightstoneDataSourceCall : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public EndingLightstoneDataSourceCall(CommandDto command)
+        public StartLightstoneDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EndingLightstoneDataSourceCall()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class RaiseLightstoneSecurityFlag
+    public class EndLightstoneDataSourceCall : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public RaiseLightstoneSecurityFlag(CommandDto command)
+        public EndLightstoneDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public RaiseLightstoneSecurityFlag()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class ConfigureLightstone
+    public class RaiseLightstoneSecurityFlag : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public ConfigureLightstone(CommandDto command)
+        public RaiseLightstoneSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public ConfigureLightstone()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class TransformLightstoneResponse
+    public class ConfigureLightstone : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public TransformLightstoneResponse(CommandDto command)
+        public ConfigureLightstone(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
+
         }
+    }
 
-        public TransformLightstoneResponse()
+    [Serializable]
+    public class TransformLightstoneResponse : DataProviderCommand
+    {
+        public TransformLightstoneResponse(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
+
         }
     }
 }

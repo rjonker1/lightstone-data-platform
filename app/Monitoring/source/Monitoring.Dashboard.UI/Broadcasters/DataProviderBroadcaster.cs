@@ -55,7 +55,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             if (_isFirstCall)
             {
                 _isFirstCall = false;
-                _interval = TimeSpan.FromMilliseconds(10000);
+                _interval = TimeSpan.FromMilliseconds(60000000);
                 SetTimer();
             }
 

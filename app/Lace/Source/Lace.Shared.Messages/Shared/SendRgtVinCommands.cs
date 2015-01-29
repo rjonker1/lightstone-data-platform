@@ -58,84 +58,118 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private StartingRgtVinExecution Begin(object payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
         {
-            return new StartingRgtVinExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
-                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.RgtVin),
-                payload, metadata, DateTime.UtcNow,
-                Category.Performance)
-                .ObjectToJson()
-                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            var command = new
+            {
+                StartRgtVinExecution =
+                    new StartRgtVinExecution(_requestId, DataProviderCommandSource.RgtVin,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.RgtVin),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+            };
+
+            var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
+            return cmd;
         }
 
-        private EndingRgtVinExecution End(object payload, object metadata)
+        private DataProviderMonitoringCommand End(object payload, object metadata)
         {
-            return new EndingRgtVinExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+            var command = new
+            {
+                EndRgtVinExecution =
+                    new EndRgtVinExecution(_requestId, DataProviderCommandSource.RgtVin,
                         CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.RgtVin),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-                .ObjectToJson()
-                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private StartingRgtVinDataSourceCall StartCall(object payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand StartCall(object payload, MetadataContainer metadata)
         {
-            return new StartingRgtVinDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+
+            var command = new
+            {
+                StartRgtVinDataSourceCall =
+                    new StartRgtVinDataSourceCall(_requestId, DataProviderCommandSource.RgtVin,
                         CommandDescriptions.StartCallDescription(DataProviderCommandSource.RgtVin),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-               .ObjectToJson()
-               .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private EndingRgtVinDataSourceCall EndCall(object payload, object metadata)
+        private DataProviderMonitoringCommand EndCall(object payload, object metadata)
         {
-            return new EndingRgtVinDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+            var command = new
+            {
+                EndRgtVinDataSourceCall =
+                    new EndRgtVinDataSourceCall(_requestId, DataProviderCommandSource.RgtVin,
                         CommandDescriptions.EndCallDescription(DataProviderCommandSource.RgtVin),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private ThrowError Fault(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
         {
-            return new ThrowError(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+
+            var command = new
+            {
+                ThrowError =
+                    new ThrowError(_requestId, DataProviderCommandSource.RgtVin,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.RgtVin), payload, metadata,
                         DateTime.UtcNow,
                         Category.Fault)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private RaiseRgtVinSecurityFlag Security(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Security(dynamic payload, MetadataContainer metadata)
         {
-            return new RaiseRgtVinSecurityFlag(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+            var command = new
+            {
+                RgtVinSecurityFlag = new RaiseRgtVinSecurityFlag(_requestId, DataProviderCommandSource.RgtVin,
                     CommandDescriptions.SecurityDescription(DataProviderCommandSource.RgtVin),
                     payload,
                     metadata, DateTime.UtcNow, Category.Security)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private ConfigureRgtVin Configuration(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Configuration(dynamic payload, MetadataContainer metadata)
         {
-            return new ConfigureRgtVin(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+
+            var command = new
+            {
+                ConfigureRgtVin = new ConfigureRgtVin(_requestId, DataProviderCommandSource.RgtVin,
                     CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.RgtVin),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private TransformRgtVinResponse Transformation(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Transformation(dynamic payload, MetadataContainer metadata)
         {
-            return new TransformRgtVinResponse(new DataProviderCommand(_requestId, DataProviderCommandSource.RgtVin,
+
+            var command = new
+            {
+                TransformRgtVinResponse = new TransformRgtVinResponse(_requestId, DataProviderCommandSource.RgtVin,
                     CommandDescriptions.TransformationDescription(DataProviderCommandSource.RgtVin),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
-            .ObjectToJson()
-            .GetCommandDto(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class

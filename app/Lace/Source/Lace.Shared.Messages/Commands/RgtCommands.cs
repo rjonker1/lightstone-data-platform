@@ -1,117 +1,90 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class StartingRgtExecution
+    public class StartRgtExecution : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public StartingRgtExecution(CommandDto command)
+        public StartRgtExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public StartingRgtExecution()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EndingRgtExecution
+    public class EndRgtExecution : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public EndingRgtExecution(CommandDto command)
+        public EndRgtExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EndingRgtExecution()
-        {
-        }
-
-    }
-
-    [Serializable]
-    [DataContract]
-    public class StartingRgtDataSourceCall
-    {
-        public CommandDto Command { get; private set; }
-
-        public StartingRgtDataSourceCall(CommandDto command)
-        {
-            Command = command;
-        }
-
-        public StartingRgtDataSourceCall()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EndingRgtDataSourceCall
+    public class StartRgtDataSourceCall : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public EndingRgtDataSourceCall(CommandDto command)
+        public StartRgtDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EndingRgtDataSourceCall()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class RaiseRgtSecurityFlag
+    public class EndRgtDataSourceCall : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public RaiseRgtSecurityFlag(CommandDto command)
+        public EndRgtDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public RaiseRgtSecurityFlag()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class ConfigureRgt
+    public class RaiseRgtSecurityFlag : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public ConfigureRgt(CommandDto command)
+        public RaiseRgtSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public ConfigureRgt()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class TransformRgtResponse
+    public class ConfigureRgt : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public TransformRgtResponse(CommandDto command)
+        public ConfigureRgt(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
+
         }
+    }
 
-        public TransformRgtResponse()
+    [Serializable]
+    public class TransformRgtResponse : DataProviderCommand
+    {
+        public TransformRgtResponse(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
+
         }
     }
 }

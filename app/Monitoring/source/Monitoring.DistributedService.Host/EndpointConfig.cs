@@ -19,7 +19,7 @@ namespace Monitoring.DistributedService.Host
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.EndsWith("Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
+                    c => c.Namespace != null && c.Namespace.EndsWith("Monitoring.Messages.Events"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DomainModule());

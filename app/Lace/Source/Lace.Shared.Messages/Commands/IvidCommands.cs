@@ -1,117 +1,90 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
+using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class StartingIvidExecution
+    public class StartIvidExecution : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public StartingIvidExecution(CommandDto command)
+        public StartIvidExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public StartingIvidExecution()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EndingIvidExecution
+    public class EndIvidExecution : DataProviderCommand
     {
-      public CommandDto Command { get; private set; }
-
-        public EndingIvidExecution(CommandDto command)
+        public EndIvidExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EndingIvidExecution()
-        {
-        }
-
-    }
-
-    [Serializable]
-    [DataContract]
-    public class StartingIvidDataSourceCall
-    {
-        public CommandDto Command { get; private set; }
-
-        public StartingIvidDataSourceCall(CommandDto command)
-        {
-            Command = command;
-        }
-
-        public StartingIvidDataSourceCall()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class EndingIvidDataSourceCall
+    public class StartIvidDataSourceCall : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public EndingIvidDataSourceCall(CommandDto command)
+        public StartIvidDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public EndingIvidDataSourceCall()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class RaiseIvidSecurityFlag
+    public class EndIvidDataSourceCall : DataProviderCommand
     {
-       public CommandDto Command { get; private set; }
-
-        public RaiseIvidSecurityFlag(CommandDto command)
+        public EndIvidDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public RaiseIvidSecurityFlag()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class ConfigureIvid
+    public class RaiseIvidSecurityFlag : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public ConfigureIvid(CommandDto command)
+        public RaiseIvidSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
-        }
 
-        public ConfigureIvid()
-        {
         }
     }
 
     [Serializable]
-    [DataContract]
-    public class TransformIvidResponse
+    public class ConfigureIvid : DataProviderCommand
     {
-        public CommandDto Command { get; private set; }
-
-        public TransformIvidResponse(CommandDto command)
+        public ConfigureIvid(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
-            Command = command;
+
         }
+    }
 
-        public TransformIvidResponse()
+    [Serializable]
+    public class TransformIvidResponse : DataProviderCommand
+    {
+        public TransformIvidResponse(Guid id, DataProviderCommandSource dataProvider, string message,
+            object payload,
+            object metadata, DateTime date, Category category)
+            : base(id, dataProvider, message, payload, metadata, date, category)
         {
+
         }
     }
 }

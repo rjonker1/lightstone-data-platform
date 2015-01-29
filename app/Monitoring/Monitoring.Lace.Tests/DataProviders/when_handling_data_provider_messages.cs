@@ -5,6 +5,7 @@ using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Extensions;
+using Monitoring.DomainModel.DataProviders;
 using Monitoring.Test.Helper.Builder;
 using Monitoring.Test.Helper.Fakes.EventStore;
 using Monitoring.Write.Service.DataProviders;
@@ -33,9 +34,9 @@ namespace Monitoring.Unit.Tests.DataProviders
             var configuration = new BusConfiguration();
             configuration.Conventions()
                 .DefiningCommandsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("Lace.Shared.Monitoring.Messages.Commands"))
+                    c => c.Namespace != null && c.Namespace.EndsWith("Monitoring.Messages.Commands"))
                 .DefiningEventsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith("DataPlatform.Shared.Messaging.Events"));
+                    c => c.Namespace != null && c.Namespace.EndsWith("Monitoring.Messages.Events"));
 
             NServiceBus.Testing.Test.Initialize();
         }
@@ -43,27 +44,23 @@ namespace Monitoring.Unit.Tests.DataProviders
         [Observation]
         public void then_data_provider_command_handler_message_should_be_handled()
         {
-            NServiceBus.Testing.Test.Handler<DataProviderHandler>(new DataProviderHandler(_repository))
-                .OnMessage<ExecutingDataProviderMonitoringCommand>(GetDataProviderCommandEnvelope());
+            NServiceBus.Testing.Test.Handler<DataProviderCommandHandler>(new DataProviderCommandHandler(_repository))
+                .OnMessage<StartingIvidExecution>(GetDataProviderCommandEnvelope());
 
             FakeDatabase.Events.Count.ShouldEqual(1);
         }
 
-        private ExecutingDataProviderMonitoringCommand GetDataProviderCommandEnvelope()
+        private StartingIvidExecution GetDataProviderCommandEnvelope()
         {
             var payload = DataProviderRequestBuilder.ForIvidLicensePlateSearch();
             _dataProviderStopWatch = new DataProviderStopWatch(DataProviderCommandSource.Ivid.ToString());
 
-            var command = new
-            {
-                StartIvidExecution =
-                    new StartIvidExecution(_aggregateId, DataProviderCommandSource.Audatex,
-                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Audatex),
-                        payload, _dataProviderStopWatch, DateTime.UtcNow,
-                        Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_aggregateId, (int) DisplayOrder.FirstThing, 1);
+            return new StartingIvidExecution(new DataProviderCommand(_aggregateId, DataProviderCommandSource.Ivid,
+                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+                payload, null, DateTime.UtcNow,
+                Category.Performance)
+                .ObjectToJson()
+                .GetCommandDto(_aggregateId, (int)DisplayOrder.FirstThing, 1));
         }
     }
 }

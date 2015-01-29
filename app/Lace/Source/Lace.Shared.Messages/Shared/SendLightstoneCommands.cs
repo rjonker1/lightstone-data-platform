@@ -58,84 +58,118 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private StartingLightstoneExecution Begin(object payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
         {
-            return new StartingLightstoneExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
-                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Lightstone),
-                payload, metadata, DateTime.UtcNow,
-                Category.Performance)
-                .ObjectToJson()
-                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            var command = new
+            {
+                StartLightstoneExecution =
+                    new StartLightstoneExecution(_requestId, DataProviderCommandSource.Lightstone,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Lightstone),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+            };
+
+            var cmd = command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
+            return cmd;
         }
 
-        private EndingLightstoneExecution End(object payload, object metadata)
+        private DataProviderMonitoringCommand End(object payload, object metadata)
         {
-            return new EndingLightstoneExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+            var command = new
+            {
+                EndLightstoneExecution =
+                    new EndLightstoneExecution(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Lightstone),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-                .ObjectToJson()
-                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private StartingLightstoneDataSourceCall StartCall(object payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand StartCall(object payload, MetadataContainer metadata)
         {
-            return new StartingLightstoneDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+
+            var command = new
+            {
+                StartLightstoneDataSourceCall =
+                    new StartLightstoneDataSourceCall(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.StartCallDescription(DataProviderCommandSource.Lightstone),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-               .ObjectToJson()
-               .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private EndingLightstoneDataSourceCall EndCall(object payload, object metadata)
+        private DataProviderMonitoringCommand EndCall(object payload, object metadata)
         {
-            return new EndingLightstoneDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+            var command = new
+            {
+                EndLightstoneDataSourceCall =
+                    new EndLightstoneDataSourceCall(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lightstone),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
         }
 
-        private ThrowError Fault(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
         {
-            return new ThrowError(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+
+            var command = new
+            {
+                ThrowError =
+                    new ThrowError(_requestId, DataProviderCommandSource.Lightstone,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Lightstone), payload, metadata,
                         DateTime.UtcNow,
                         Category.Fault)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private RaiseLightstoneSecurityFlag Security(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Security(dynamic payload, MetadataContainer metadata)
         {
-            return new RaiseLightstoneSecurityFlag(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+            var command = new
+            {
+                LightstoneSecurityFlag = new RaiseLightstoneSecurityFlag(_requestId, DataProviderCommandSource.Lightstone,
                     CommandDescriptions.SecurityDescription(DataProviderCommandSource.Lightstone),
                     payload,
                     metadata, DateTime.UtcNow, Category.Security)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private ConfigureLightstone Configuration(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Configuration(dynamic payload, MetadataContainer metadata)
         {
-            return new ConfigureLightstone(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+
+            var command = new
+            {
+                ConfigureLightstone = new ConfigureLightstone(_requestId, DataProviderCommandSource.Lightstone,
                     CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Lightstone),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
-              .ObjectToJson()
-              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
-        private TransformLightstoneResponse Transformation(dynamic payload, MetadataContainer metadata)
+        private DataProviderMonitoringCommand Transformation(dynamic payload, MetadataContainer metadata)
         {
-            return new TransformLightstoneResponse(new DataProviderCommand(_requestId, DataProviderCommandSource.Lightstone,
+
+            var command = new
+            {
+                TransformLightstoneResponse = new TransformLightstoneResponse(_requestId, DataProviderCommandSource.Lightstone,
                     CommandDescriptions.TransformationDescription(DataProviderCommandSource.Lightstone),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
-            .ObjectToJson()
-            .GetCommandDto(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution));
+            };
+
+            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
         }
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class
