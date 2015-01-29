@@ -7,7 +7,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 {
     [Serializable]
     [DataContract]
-    public class IvidExecutionStarted : IMonitorEvent
+    public class AudatexExecutionStarted : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -18,12 +18,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidExecutionStarted()
+        public AudatexExecutionStarted()
         {
 
         }
 
-        public IvidExecutionStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexExecutionStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -34,7 +34,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidExecutionEnded : IMonitorEvent
+    public class AudatexExecutionEnded : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -45,12 +45,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidExecutionEnded()
+        public AudatexExecutionEnded()
         {
 
         }
 
-        public IvidExecutionEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexExecutionEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -62,7 +62,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidDataSourceCallStarted : IMonitorEvent
+    public class AudatexDataSourceCallStarted : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -73,12 +73,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidDataSourceCallStarted()
+        public AudatexDataSourceCallStarted()
         {
 
         }
 
-        public IvidDataSourceCallStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexDataSourceCallStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -89,7 +89,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidDataSourceCallEnded : IMonitorEvent
+    public class AudatexDataSourceCallEnded : IMonitorEvent
     {
        [DataMember]
         public Guid AggregateId { get; private set; }
@@ -100,12 +100,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidDataSourceCallEnded()
+        public AudatexDataSourceCallEnded()
         {
 
         }
 
-        public IvidDataSourceCallEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexDataSourceCallEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -116,7 +116,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidSecurityFlagRisen : IMonitorEvent
+    public class AudatexSecurityFlagRisen : IMonitorEvent
     {
        [DataMember]
         public Guid AggregateId { get; private set; }
@@ -127,12 +127,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidSecurityFlagRisen()
+        public AudatexSecurityFlagRisen()
         {
 
         }
 
-        public IvidSecurityFlagRisen(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexSecurityFlagRisen(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -143,7 +143,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidConfigured : IMonitorEvent
+    public class AudatexConfigured : IMonitorEvent
     {
        [DataMember]
         public Guid AggregateId { get; private set; }
@@ -154,12 +154,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidConfigured()
+        public AudatexConfigured()
         {
 
         }
 
-        public IvidConfigured(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexConfigured(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -170,7 +170,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidResponseTransformed : IMonitorEvent
+    public class AudatexResponseTransformed : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -181,12 +181,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidResponseTransformed()
+        public AudatexResponseTransformed()
         {
 
         }
 
-        public IvidResponseTransformed(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public AudatexResponseTransformed(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;

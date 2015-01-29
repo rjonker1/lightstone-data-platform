@@ -43,13 +43,6 @@
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Transports.RabbitMQ, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\NServiceBus.RabbitMQ.2.0.5\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
-    </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.5\lib\net30\RabbitMQ.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -62,7 +55,6 @@
     <Compile Include="Commands\CommandDto.cs" />
     <Compile Include="Commands\AudatexCommands.cs" />
     <Compile Include="Commands\GenericCommands.cs" />
-    <None Include="Commands\IvidCommands.cs.bkup" />
     <Compile Include="Commands\RgtVinCommands.cs" />
     <Compile Include="Commands\RgtCommands.cs" />
     <Compile Include="Commands\LightstoneCommands.cs" />
@@ -75,6 +67,12 @@
     <Compile Include="Core\IPublishCommandMessages.cs" />
     <Compile Include="Core\ISendCommandsToBus.cs" />
     <Compile Include="Events\GenericEvents.cs" />
+    <Compile Include="Events\AudatexEvents.cs" />
+    <Compile Include="Events\EntryPointEvent.cs" />
+    <Compile Include="Events\RgtVinEvents.cs" />
+    <Compile Include="Events\RgtEvents.cs" />
+    <Compile Include="Events\LightstoneEvents.cs" />
+    <Compile Include="Events\IvidTitleHolderEvents.cs" />
     <Compile Include="Events\IvidEvents.cs" />
     <Compile Include="Infrastructure\Dto\Metadata.cs" />
     <Compile Include="Infrastructure\Extensions\BusExtensions.cs" />
@@ -82,10 +80,8 @@
     <Compile Include="Infrastructure\Dto\StopWatchResults.cs" />
     <Compile Include="Infrastructure\Factories\StopWatchFactory.cs" />
     <Compile Include="Publisher\CommandPublisher.cs" />
-    <Compile Include="RabbitMQ\BusFactory.cs" />
     <Compile Include="Shared\SendEntryPointCommands.cs" />
     <Compile Include="Shared\SendAudatexCommands.cs" />
-    <None Include="Shared\SendIvidCommands.cs.bkup" />
     <Compile Include="Shared\SendRgtVinCommands.cs" />
     <Compile Include="Shared\SendRgtCommands.cs" />
     <Compile Include="Shared\SendLightstoneCommands.cs" />

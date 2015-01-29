@@ -1,99 +1,117 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
-using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    [DataContract]
-    public class AudatexExecutionHasStarted : DataProviderCommand
+    public class StartingAudatexExecution
     {
-        public AudatexExecutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public StartingAudatexExecution(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public StartingAudatexExecution()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class AudatexExecutionHasEnded : DataProviderCommand
+    public class EndingAudatexExecution
     {
-        public AudatexExecutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+        public CommandDto Command { get; private set; }
+
+        public EndingAudatexExecution(CommandDto command)
         {
-
+            Command = command;
         }
-    }
 
-
-    [Serializable]
-    [DataContract]
-    public class AudatexDataSourceCallHasStarted : DataProviderCommand
-    {
-        public AudatexDataSourceCallHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+        public EndingAudatexExecution()
         {
-
         }
+
     }
 
     [Serializable]
     [DataContract]
-    public class AudatexDataSourceCallHasEnded : DataProviderCommand
+    public class StartingAudatexDataSourceCall
     {
-        public AudatexDataSourceCallHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public StartingAudatexDataSourceCall(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public StartingAudatexDataSourceCall()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class AudatexSecurityFlag : DataProviderCommand
+    public class EndingAudatexDataSourceCall
     {
-        public AudatexSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public EndingAudatexDataSourceCall(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public EndingAudatexDataSourceCall()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class AudatexConfigured : DataProviderCommand
+    public class RaiseAudatexSecurityFlag
     {
-        public AudatexConfigured(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public RaiseAudatexSecurityFlag(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public RaiseAudatexSecurityFlag()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class AudatexResponseTransformed : DataProviderCommand
+    public class ConfigureAudatex
     {
-        public AudatexResponseTransformed(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public ConfigureAudatex(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public ConfigureAudatex()
+        {
+        }
+    }
+
+    [Serializable]
+    [DataContract]
+    public class TransformAudatexResponse
+    {
+        public CommandDto Command { get; private set; }
+
+        public TransformAudatexResponse(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public TransformAudatexResponse()
+        {
         }
     }
 }

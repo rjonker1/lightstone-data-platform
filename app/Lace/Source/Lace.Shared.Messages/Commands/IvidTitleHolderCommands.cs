@@ -1,99 +1,117 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
-using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    [DataContract]
-    public class IvidTitleHolderExcutionHasStarted : DataProviderCommand
+    public class StartingIvidTitleHolderExecution
     {
-        public IvidTitleHolderExcutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public StartingIvidTitleHolderExecution(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public StartingIvidTitleHolderExecution()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class IvidTitleHolderExcutionHasEnded : DataProviderCommand
+    public class EndingIvidTitleHolderExecution
     {
-        public IvidTitleHolderExcutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+        public CommandDto Command { get; private set; }
+
+        public EndingIvidTitleHolderExecution(CommandDto command)
         {
-
+            Command = command;
         }
-    }
 
-
-    [Serializable]
-    [DataContract]
-    public class IvidTitleHolderDataSourceCallHasStarted : DataProviderCommand
-    {
-        public IvidTitleHolderDataSourceCallHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+        public EndingIvidTitleHolderExecution()
         {
-
         }
+
     }
 
     [Serializable]
     [DataContract]
-    public class IvidTitleHolderDataSourceCallHasEnded : DataProviderCommand
+    public class StartingIvidTitleHolderDataSourceCall
     {
-        public IvidTitleHolderDataSourceCallHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public StartingIvidTitleHolderDataSourceCall(CommandDto command)
+        {
+            Command = command;
         }
-    }
-    
-    [Serializable]
-    [DataContract]
-    public class IvidTitleHolderSecurityFlag : DataProviderCommand
-    {
-        public IvidTitleHolderSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
 
+        public StartingIvidTitleHolderDataSourceCall()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class IvidTitleHolderConfigured : DataProviderCommand
+    public class EndingIvidTitleHolderDataSourceCall
     {
-        public IvidTitleHolderConfigured(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public EndingIvidTitleHolderDataSourceCall(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public EndingIvidTitleHolderDataSourceCall()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class IvidTitleHolderResponseTransformed : DataProviderCommand
+    public class RaiseIvidTitleHolderSecurityFlag
     {
-        public IvidTitleHolderResponseTransformed(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public RaiseIvidTitleHolderSecurityFlag(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public RaiseIvidTitleHolderSecurityFlag()
+        {
+        }
+    }
+
+    [Serializable]
+    [DataContract]
+    public class ConfigureIvidTitleHolder
+    {
+        public CommandDto Command { get; private set; }
+
+        public ConfigureIvidTitleHolder(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public ConfigureIvidTitleHolder()
+        {
+        }
+    }
+
+    [Serializable]
+    [DataContract]
+    public class TransformIvidTitleHolderResponse
+    {
+        public CommandDto Command { get; private set; }
+
+        public TransformIvidTitleHolderResponse(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public TransformIvidTitleHolderResponse()
+        {
         }
     }
 }

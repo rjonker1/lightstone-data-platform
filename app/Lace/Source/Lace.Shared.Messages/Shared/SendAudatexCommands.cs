@@ -58,115 +58,86 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private ExecutingDataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
+        private StartingAudatexExecution Begin(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                AudatexExecutionHasStarted =
-                    new AudatexExecutionHasStarted(_requestId, DataProviderCommandSource.Audatex,
-                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Audatex),
-                        payload, metadata, DateTime.UtcNow,
-                        Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution);
+            return new StartingAudatexExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
+                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Audatex),
+                payload, metadata, DateTime.UtcNow,
+                Category.Performance)
+                .ObjectToJson()
+                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand End(object payload, object metadata)
+        private EndingAudatexExecution End(object payload, object metadata)
         {
-            var command = new
-            {
-                AudatexExecutionHasEnded =
-                    new AudatexExecutionHasEnded(_requestId, DataProviderCommandSource.Audatex,
+            return new EndingAudatexExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Audatex),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.StoneLast, _orderOfExecution);
+                .ObjectToJson()
+                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand StartCall(object payload, MetadataContainer metadata)
+        private StartingAudatexDataSourceCall StartCall(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                AudatexDataSourceCallHasStarted =
-                    new AudatexDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Audatex,
+            return new StartingAudatexDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.StartCallDescription(DataProviderCommandSource.Audatex),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheBegining, _orderOfExecution);
+               .ObjectToJson()
+               .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand EndCall(object payload, object metadata)
+        private EndingAudatexDataSourceCall EndCall(object payload, object metadata)
         {
-            var command = new
-            {
-                AudatexDataSourceCallHasEnded =
-                    new AudatexDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Audatex,
+            return new EndingAudatexDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.EndCallDescription(DataProviderCommandSource.Audatex),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.AtTheEnd, _orderOfExecution);
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
+        private ThrowError Fault(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.Audatex,
+            return new ThrowError(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Audatex), payload, metadata,
                         DateTime.UtcNow,
-                        Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+                        Category.Fault)
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Security(dynamic payload, MetadataContainer metadata)
+        private RaiseAudatexSecurityFlag Security(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                AudatexSecurityFlag = new AudatexSecurityFlag(_requestId, DataProviderCommandSource.Audatex,
+            return new RaiseAudatexSecurityFlag(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
                     CommandDescriptions.SecurityDescription(DataProviderCommandSource.Audatex),
                     payload,
                     metadata, DateTime.UtcNow, Category.Security)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Configuration(dynamic payload, MetadataContainer metadata)
+        private ConfigureAudatex Configuration(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                AudatexConfigured = new AudatexConfigured(_requestId, DataProviderCommandSource.Audatex,
+            return new ConfigureAudatex(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
                     CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Audatex),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Transformation(dynamic payload, MetadataContainer metadata)
+        private TransformAudatexResponse Transformation(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                AudatexResponseTransformed =
-                    new AudatexResponseTransformed(_requestId, DataProviderCommandSource.Audatex,
-                        CommandDescriptions.TransformationDescription(DataProviderCommandSource.Audatex),
-                        payload, metadata,
-                        DateTime.UtcNow, Category.Configuration)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+            return new TransformAudatexResponse(new DataProviderCommand(_requestId, DataProviderCommandSource.Audatex,
+                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.Audatex),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
+            .ObjectToJson()
+            .GetCommandDto(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution));
         }
+       
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class
         {

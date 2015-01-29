@@ -55,44 +55,33 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             throw new NotImplementedException();
         }
 
-        private ExecutingDataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
+        private EntryPointReceivingRequest Begin(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                EntryPointReceivedRequest =
-                    new EntryPointReceivedRequest(_requestId, DataProviderCommandSource.EntryPoint,
+
+            return new EntryPointReceivingRequest(new DataProviderCommand(_requestId, DataProviderCommandSource.EntryPoint,
                         "Receiving Request in the Data Provider Entry Point", payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, 1, _orderOfExecution);
+               .ObjectToJson()
+               .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand End(object payload, object metadata)
+        private EntryPointProcessedAndReturningRequest End(object payload, object metadata)
         {
-            var command = new
-            {
-                EntryPointFinishedProcessingRequest =
-                    new EntryPointFinishedProcessingRequest(_requestId, DataProviderCommandSource.EntryPoint,
+            return new EntryPointProcessedAndReturningRequest(new DataProviderCommand(_requestId, DataProviderCommandSource.EntryPoint,
                         "End Proccessing Request in Entry Point", payload, metadata, DateTime.UtcNow,
                         Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, 3, _orderOfExecution);
+                .ObjectToJson()
+                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        public ExecutingDataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
+        public ThrowError Fault(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.EntryPoint,
-                        "An error occurred in the entry point while processing the request", payload, metadata,
-                        DateTime.UtcNow,
-                        Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, 2, _orderOfExecution);
+            return new ThrowError(new DataProviderCommand(_requestId, DataProviderCommandSource.EntryPoint,
+                CommandDescriptions.FaultDescription(DataProviderCommandSource.EntryPoint), payload, metadata,
+                DateTime.UtcNow,
+                Category.Fault)
+                .ObjectToJson()
+                .GetCommandDto(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
         private void Security(dynamic payload, MetadataContainer metadata)

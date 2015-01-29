@@ -4,32 +4,32 @@ using System.Runtime.Serialization;
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class StartIvidExecution
+    public class StartingIvidExecution
     {
         public CommandDto Command { get; private set; }
 
-        public StartIvidExecution(CommandDto command)
+        public StartingIvidExecution(CommandDto command)
         {
             Command = command;
         }
 
-        public StartIvidExecution()
+        public StartingIvidExecution()
         {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class EndIvidExecution
+    public class EndingIvidExecution
     {
       public CommandDto Command { get; private set; }
 
-        public EndIvidExecution(CommandDto command)
+        public EndingIvidExecution(CommandDto command)
         {
             Command = command;
         }
 
-        public EndIvidExecution()
+        public EndingIvidExecution()
         {
         }
 
@@ -37,32 +37,32 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 
     [Serializable]
     [DataContract]
-    public class StartIvidDataSourceCall
+    public class StartingIvidDataSourceCall
     {
         public CommandDto Command { get; private set; }
 
-        public StartIvidDataSourceCall(CommandDto command)
+        public StartingIvidDataSourceCall(CommandDto command)
         {
             Command = command;
         }
 
-        public StartIvidDataSourceCall()
+        public StartingIvidDataSourceCall()
         {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class EndIvidDataSourceCall
+    public class EndingIvidDataSourceCall
     {
         public CommandDto Command { get; private set; }
 
-        public EndIvidDataSourceCall(CommandDto command)
+        public EndingIvidDataSourceCall(CommandDto command)
         {
             Command = command;
         }
 
-        public EndIvidDataSourceCall()
+        public EndingIvidDataSourceCall()
         {
         }
     }

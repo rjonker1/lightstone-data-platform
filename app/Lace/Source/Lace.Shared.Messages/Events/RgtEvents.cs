@@ -7,7 +7,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 {
     [Serializable]
     [DataContract]
-    public class IvidExecutionStarted : IMonitorEvent
+    public class RgtExecutionStarted : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -18,12 +18,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidExecutionStarted()
+        public RgtExecutionStarted()
         {
 
         }
 
-        public IvidExecutionStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtExecutionStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -34,7 +34,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidExecutionEnded : IMonitorEvent
+    public class RgtExecutionEnded : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -45,12 +45,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidExecutionEnded()
+        public RgtExecutionEnded()
         {
 
         }
 
-        public IvidExecutionEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtExecutionEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -62,7 +62,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidDataSourceCallStarted : IMonitorEvent
+    public class RgtDataSourceCallStarted : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -73,12 +73,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidDataSourceCallStarted()
+        public RgtDataSourceCallStarted()
         {
 
         }
 
-        public IvidDataSourceCallStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtDataSourceCallStarted(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -89,7 +89,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidDataSourceCallEnded : IMonitorEvent
+    public class RgtDataSourceCallEnded : IMonitorEvent
     {
        [DataMember]
         public Guid AggregateId { get; private set; }
@@ -100,12 +100,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidDataSourceCallEnded()
+        public RgtDataSourceCallEnded()
         {
 
         }
 
-        public IvidDataSourceCallEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtDataSourceCallEnded(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -116,7 +116,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidSecurityFlagRisen : IMonitorEvent
+    public class RgtSecurityFlagRisen : IMonitorEvent
     {
        [DataMember]
         public Guid AggregateId { get; private set; }
@@ -127,12 +127,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidSecurityFlagRisen()
+        public RgtSecurityFlagRisen()
         {
 
         }
 
-        public IvidSecurityFlagRisen(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtSecurityFlagRisen(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -143,7 +143,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidConfigured : IMonitorEvent
+    public class RgtConfigured : IMonitorEvent
     {
        [DataMember]
         public Guid AggregateId { get; private set; }
@@ -154,12 +154,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidConfigured()
+        public RgtConfigured()
         {
 
         }
 
-        public IvidConfigured(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtConfigured(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;
@@ -170,7 +170,7 @@ namespace Lace.Shared.Monitoring.Messages.Events
 
     [Serializable]
     [DataContract]
-    public class IvidResponseTransformed : IMonitorEvent
+    public class RgtResponseTransformed : IMonitorEvent
     {
         [DataMember]
         public Guid AggregateId { get; private set; }
@@ -181,12 +181,12 @@ namespace Lace.Shared.Monitoring.Messages.Events
         [DataMember]
         public MonitoringSource Source { get; private set; }
        
-        public IvidResponseTransformed()
+        public RgtResponseTransformed()
         {
 
         }
 
-        public IvidResponseTransformed(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
+        public RgtResponseTransformed(Guid aggregateId, string payload, DateTime date, MonitoringSource source)
         {
             AggregateId = aggregateId;
             Payload = payload;

@@ -31,7 +31,6 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
         public void Begin(dynamic payload, DataProviderStopWatch stopWatch)
         {
-            //Begin(payload, new MetadataContainer()).SendToBus(_publisher, _log);
             BusExtensions.SendToBus(Begin(payload, new MetadataContainer()), _publisher, _log);
             stopWatch.Start();
         }
@@ -39,13 +38,11 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         public void End(dynamic payload, DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
-            //End(payload, new MetadataContainer(stopWatch.ToObject())).SendToBus(_publisher, _log);
             BusExtensions.SendToBus(End(payload, new PerformanceMetadata(stopWatch.ToObject())), _publisher, _log);
         }
 
         public void StartCall(dynamic payload, DataProviderStopWatch stopWatch)
         {
-            //StartCall(payload, new MetadataContainer()).SendToBus(_publisher, _log);
             BusExtensions.SendToBus(StartCall(payload, new MetadataContainer()), _publisher, _log);
             stopWatch.Start();
         }
@@ -53,7 +50,6 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         public void EndCall(dynamic payload, DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
-            //EndCall(payload, new MetadataContainer(stopWatch.ToObject())).SendToBus(_publisher, _log);
             BusExtensions.SendToBus(EndCall(payload, new PerformanceMetadata(stopWatch.ToObject())), _publisher, _log);
         }
 
@@ -62,9 +58,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private StartIvidExecution Begin(object payload, MetadataContainer metadata)
+        private StartingIvidExecution Begin(object payload, MetadataContainer metadata)
         {
-            return new StartIvidExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
+            return new StartingIvidExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
                 CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
                 payload, metadata, DateTime.UtcNow,
                 Category.Performance)
@@ -72,9 +68,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                 .GetCommandDto(_requestId, (int) DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private EndIvidExecution End(object payload, object metadata)
+        private EndingIvidExecution End(object payload, object metadata)
         {
-            return new EndIvidExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
+            return new EndingIvidExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
                         CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Ivid),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -82,9 +78,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                 .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private StartIvidDataSourceCall StartCall(object payload, MetadataContainer metadata)
+        private StartingIvidDataSourceCall StartCall(object payload, MetadataContainer metadata)
         {
-            return new StartIvidDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
+            return new StartingIvidDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
                         CommandDescriptions.StartCallDescription(DataProviderCommandSource.Ivid),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -92,9 +88,9 @@ namespace Lace.Shared.Monitoring.Messages.Shared
                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private EndIvidDataSourceCall EndCall(object payload, object metadata)
+        private EndingIvidDataSourceCall EndCall(object payload, object metadata)
         {
-            return new EndIvidDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
+            return new EndingIvidDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Ivid,
                         CommandDescriptions.EndCallDescription(DataProviderCommandSource.Ivid),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)

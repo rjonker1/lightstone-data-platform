@@ -58,116 +58,84 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             SendToBus(payload, metadata, commandType);
         }
 
-        private ExecutingDataProviderMonitoringCommand Begin(object payload, MetadataContainer metadata)
+        private StartingRgtExecution Begin(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                    RgtExecutionHasStarted =
-                        new RgtExecutionHasStarted(_requestId, DataProviderCommandSource.Rgt,
-                            CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Rgt),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution);
+            return new StartingRgtExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Rgt),
+                payload, metadata, DateTime.UtcNow,
+                Category.Performance)
+                .ObjectToJson()
+                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand End(object payload, object metadata)
+        private EndingRgtExecution End(object payload, object metadata)
         {
-            var command = new
-            {
-                    RgtExecutionHasEnded =
-                        new RgtExecutionHasEnded(_requestId, DataProviderCommandSource.Rgt,
-                            CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Rgt),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.StoneLast, _orderOfExecution);
+            return new EndingRgtExecution(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                        CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Rgt),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+                .ObjectToJson()
+                .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand StartCall(object payload, MetadataContainer metadata)
+        private StartingRgtDataSourceCall StartCall(object payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                    RgtDataSourceCallHasStarted =
-                        new RgtDataSourceCallHasStarted(_requestId, DataProviderCommandSource.Rgt,
-                            CommandDescriptions.StartCallDescription(DataProviderCommandSource.Rgt),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheBegining, _orderOfExecution);
+            return new StartingRgtDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                        CommandDescriptions.StartCallDescription(DataProviderCommandSource.Rgt),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+               .ObjectToJson()
+               .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand EndCall(object payload, object metadata)
+        private EndingRgtDataSourceCall EndCall(object payload, object metadata)
         {
-            var command = new
-            {
-                    RgtDataSourceCallHasEnded =
-                        new RgtDataSourceCallHasEnded(_requestId, DataProviderCommandSource.Rgt,
-                            CommandDescriptions.EndCallDescription(DataProviderCommandSource.Rgt),
-                            payload, metadata, DateTime.UtcNow,
-                            Category.Performance)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution);
+            return new EndingRgtDataSourceCall(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.Rgt),
+                        payload, metadata, DateTime.UtcNow,
+                        Category.Performance)
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.FirstThing, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Fault(dynamic payload, MetadataContainer metadata)
+        private ThrowError Fault(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                //RgtError = new
-                //{
-                ErrorThrown =
-                    new ErrorThrown(_requestId, DataProviderCommandSource.Rgt,
+            return new ThrowError(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
                         CommandDescriptions.FaultDescription(DataProviderCommandSource.Rgt), payload, metadata,
                         DateTime.UtcNow,
-                        Category.Performance)
-                //}
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int) DisplayOrder.InTheMiddle, _orderOfExecution);
+                        Category.Fault)
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Security(dynamic payload, MetadataContainer metadata)
+        private RaiseRgtSecurityFlag Security(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                    RgtSecurityFlag = new RgtSecurityFlag(_requestId, DataProviderCommandSource.Rgt,
-                        CommandDescriptions.SecurityDescription(DataProviderCommandSource.Rgt),
-                        payload,
-                        metadata, DateTime.UtcNow, Category.Security)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return new RaiseRgtSecurityFlag(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                    CommandDescriptions.SecurityDescription(DataProviderCommandSource.Rgt),
+                    payload,
+                    metadata, DateTime.UtcNow, Category.Security)
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Configuration(dynamic payload, MetadataContainer metadata)
+        private ConfigureRgt Configuration(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                    RgtConfigured = new RgtConfigured(_requestId, DataProviderCommandSource.Rgt,
-                        CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Rgt),
-                        payload, metadata,
-                        DateTime.UtcNow, Category.Configuration)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return new ConfigureRgt(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                    CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Rgt),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
+              .ObjectToJson()
+              .GetCommandDto(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution));
         }
 
-        private ExecutingDataProviderMonitoringCommand Transformation(dynamic payload, MetadataContainer metadata)
+        private TransformRgtResponse Transformation(dynamic payload, MetadataContainer metadata)
         {
-            var command = new
-            {
-                    RgtResponseTransformed = new RgtResponseTransformed(_requestId, DataProviderCommandSource.Rgt,
-                        CommandDescriptions.TransformationDescription(DataProviderCommandSource.Rgt),
-                        payload, metadata,
-                        DateTime.UtcNow, Category.Configuration)
-            };
-
-            return command.ObjectToJson().GetCommand(_requestId, (int)DisplayOrder.InTheMiddle, _orderOfExecution);
+            return new TransformRgtResponse(new DataProviderCommand(_requestId, DataProviderCommandSource.Rgt,
+                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.Rgt),
+                    payload, metadata,
+                    DateTime.UtcNow, Category.Configuration)
+            .ObjectToJson()
+            .GetCommandDto(_requestId, (int)DisplayOrder.AtTheEnd, _orderOfExecution));
         }
 
         private void SendToBus<T>(T payload, dynamic metadata, CommandType type) where T : class

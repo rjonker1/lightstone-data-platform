@@ -1,99 +1,117 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
-using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    [DataContract]
-    public class RgtVinExecutionHasStarted : DataProviderCommand
+    public class StartingRgtVinExecution
     {
-        public RgtVinExecutionHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public StartingRgtVinExecution(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public StartingRgtVinExecution()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class RgtVinExecutionHasEnded : DataProviderCommand
+    public class EndingRgtVinExecution
     {
-        public RgtVinExecutionHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+        public CommandDto Command { get; private set; }
+
+        public EndingRgtVinExecution(CommandDto command)
         {
-
+            Command = command;
         }
-    }
 
-
-    [Serializable]
-    [DataContract]
-    public class RgtVinDataSourceCallHasStarted : DataProviderCommand
-    {
-        public RgtVinDataSourceCallHasStarted(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
+        public EndingRgtVinExecution()
         {
-
         }
+
     }
 
     [Serializable]
     [DataContract]
-    public class RgtVinDataSourceCallHasEnded : DataProviderCommand
+    public class StartingRgtVinDataSourceCall
     {
-        public RgtVinDataSourceCallHasEnded(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public StartingRgtVinDataSourceCall(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public StartingRgtVinDataSourceCall()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class RgtVinSecurityFlag : DataProviderCommand
+    public class EndingRgtVinDataSourceCall
     {
-        public RgtVinSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public EndingRgtVinDataSourceCall(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public EndingRgtVinDataSourceCall()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class RgtVinConfigured : DataProviderCommand
+    public class RaiseRgtVinSecurityFlag
     {
-        public RgtVinConfigured(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public RaiseRgtVinSecurityFlag(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public RaiseRgtVinSecurityFlag()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class RgtVinResponseTransformed : DataProviderCommand
+    public class ConfigureRgtVin
     {
-        public RgtVinResponseTransformed(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public ConfigureRgtVin(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public ConfigureRgtVin()
+        {
+        }
+    }
+
+    [Serializable]
+    [DataContract]
+    public class TransformRgtVinResponse
+    {
+        public CommandDto Command { get; private set; }
+
+        public TransformRgtVinResponse(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public TransformRgtVinResponse()
+        {
         }
     }
 }

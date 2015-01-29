@@ -7,27 +7,33 @@ namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class EntryPointReceivedRequest : DataProviderCommand
+    public class EntryPointReceivingRequest
     {
-        public EntryPointReceivedRequest(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+        public CommandDto Command { get; private set; }
 
+        public EntryPointReceivingRequest(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public EntryPointReceivingRequest()
+        {
         }
     }
 
     [Serializable]
     [DataContract]
-    public class EntryPointFinishedProcessingRequest : DataProviderCommand
+    public class EntryPointProcessedAndReturningRequest
     {
-        public EntryPointFinishedProcessingRequest(Guid id, DataProviderCommandSource dataProvider, string message,
-            object payload,
-            object metadata, DateTime date, Category category)
-            : base(id, dataProvider, message, payload, metadata, date, category)
-        {
+      public CommandDto Command { get; private set; }
 
+        public EntryPointProcessedAndReturningRequest(CommandDto command)
+        {
+            Command = command;
+        }
+
+        public EntryPointProcessedAndReturningRequest()
+        {
         }
     }
 }
