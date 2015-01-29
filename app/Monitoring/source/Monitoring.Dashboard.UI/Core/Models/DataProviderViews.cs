@@ -50,11 +50,11 @@ namespace Monitoring.Dashboard.UI.Core.Models
     public class Errors
     {
         [DataMember]
-        public ErrorThrown ErrorThrown { get; set; } 
+        public ThrowError ThrowError { get; set; } 
     }
 
     [DataContract]
-    public class ErrorThrown
+    public class ThrowError
     {
         [DataMember]
         public int DataProviderCommandSource { get; set; }

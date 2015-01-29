@@ -4,6 +4,7 @@ using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Commands;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
+using Lace.Shared.Monitoring.Messages.Infrastructure.Dto;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Extensions;
 using Monitoring.DomainModel.DataProviders;
 using Monitoring.Test.Helper.Builder;
@@ -45,22 +46,27 @@ namespace Monitoring.Unit.Tests.DataProviders
         public void then_data_provider_command_handler_message_should_be_handled()
         {
             NServiceBus.Testing.Test.Handler<DataProviderCommandHandler>(new DataProviderCommandHandler(_repository))
-                .OnMessage<StartingIvidExecution>(GetDataProviderCommandEnvelope());
+                .OnMessage<DataProviderMonitoringCommand>(GetDataProviderCommandEnvelope());
 
             FakeDatabase.Events.Count.ShouldEqual(1);
         }
 
-        private StartingIvidExecution GetDataProviderCommandEnvelope()
+        private DataProviderMonitoringCommand GetDataProviderCommandEnvelope()
         {
             var payload = DataProviderRequestBuilder.ForIvidLicensePlateSearch();
             _dataProviderStopWatch = new DataProviderStopWatch(DataProviderCommandSource.Ivid.ToString());
 
-            return new StartingIvidExecution(new DataProviderCommand(_aggregateId, DataProviderCommandSource.Ivid,
-                CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
-                payload, null, DateTime.UtcNow,
-                Category.Performance)
-                .ObjectToJson()
-                .GetCommandDto(_aggregateId, (int)DisplayOrder.FirstThing, 1));
+            var command = new
+            {
+                StartIvidExecution =
+                    new StartIvidExecution(_aggregateId, DataProviderCommandSource.Ivid,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Ivid),
+                        payload, new PerformanceMetadata(_dataProviderStopWatch.ToObject()), DateTime.UtcNow,
+                        Category.Performance)
+            };
+
+            var cmd = command.ObjectToJson().GetCommand(_aggregateId, (int) DisplayOrder.FirstThing, 1);
+            return cmd;
         }
     }
 }

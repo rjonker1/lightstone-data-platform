@@ -41,7 +41,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                 if (errors == null || !errors.Any())
                     continue;
 
-                var errorsExist = errors.FirstOrDefault(w => w.ErrorThrown != null);
+                var errorsExist = errors.FirstOrDefault(w => w.ThrowError != null);
 
                 if(errorsExist == null)
                     continue;

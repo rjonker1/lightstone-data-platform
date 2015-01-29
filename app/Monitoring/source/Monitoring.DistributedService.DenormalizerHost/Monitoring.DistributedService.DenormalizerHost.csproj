@@ -51,11 +51,13 @@
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.559\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.560, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.560\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.559\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.560, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.560\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.433\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
@@ -66,7 +68,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.559\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.560\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>

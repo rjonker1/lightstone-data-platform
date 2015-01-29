@@ -13,12 +13,12 @@ namespace Monitoring.DistributedService.DenormalizerHost
             configuration.EnableFeature<XmlSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
-            
+
             configuration.EndpointName("DataPlatform.Monitoring.DenormalizerHost");
 
             configuration.Conventions()
-                 .DefiningEventsAs(
-                     c => c.Namespace != null && c.Namespace.EndsWith("Monitoring.Messages.Events"));
+                .DefiningEventsAs(
+                    c => c.Namespace != null && c.Namespace.EndsWith("Messaging.Events"));
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new DenormalizerHostModule());
