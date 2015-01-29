@@ -18,7 +18,6 @@ namespace UserManagement.Domain.Entities
 
         protected Billing() { }
 
-
         public Billing(Guid id, string billingContactNumber, string billingContractPersion, string companyRegistration, DateTime firstCreateDate, DateTime? debitOrderDate, PaymentType paymentType)
             : base(id)
         {
