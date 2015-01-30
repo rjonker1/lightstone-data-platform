@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\Billings\CreateBilling.cs" />
     <Compile Include="Commands\Clients\CreateClient.cs" />
     <Compile Include="Commands\CommercialStates\CreateCommercialState.cs" />
