@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -11,16 +10,23 @@ namespace UserManagement.Domain.Entities
         public virtual string BillingContractPersion { get; set; }
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime FirstCreateDate { get; set; }
-        public virtual Guid PaymentTypeId { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
 
         public virtual PaymentType PaymentType { get; set; }
-        public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
+        //public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
-        public Billing()
+        protected Billing() { }
+
+        public Billing(Guid id, string billingContactNumber, string billingContractPersion, string companyRegistration, DateTime firstCreateDate, DateTime? debitOrderDate, PaymentType paymentType)
+            : base(id)
         {
-            CustomerProfile = new HashSet<CustomerProfile>();
-        }
 
+            BillingContactNumber = billingContactNumber;
+            BillingContractPersion = billingContractPersion;
+            CompanyRegistration = companyRegistration;
+            FirstCreateDate = firstCreateDate;
+            DebitOrderDate = debitOrderDate;
+            PaymentType = paymentType;
+        }
     }
 }

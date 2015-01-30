@@ -105,10 +105,13 @@
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Modules\BillingModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\ContractModule.cs" />
     <Compile Include="Modules\CustomerModule.cs" />
+    <Compile Include="Modules\CustomerProfileModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\RoleModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Modules\UserProfileModule.cs" />
