@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -13,14 +12,18 @@ namespace UserManagement.Domain.Entities
         public virtual string Version { get; set; }
         public virtual bool? IsActivated { get; set; }
 
-        public virtual ICollection<ClientPackage> ClientPackage { get; set; }
-        public virtual ICollection<ContractPackage> ContractPackage { get; set; }
 
-        public Package()
+        protected Package() { }
+
+        public Package(Guid id, string lastUpdateBy, DateTime lastUpdateDate, string name, string version, bool? isActivated) 
+            : base(id)
         {
-            ClientPackage = new HashSet<ClientPackage>();
-            ContractPackage = new HashSet<ContractPackage>();
-        }
 
+            LastUpdateBy = lastUpdateBy;
+            LastUpdateDate = lastUpdateDate;
+            Name = name;
+            Version = version;
+            IsActivated = isActivated;
+        }
     }
 }
