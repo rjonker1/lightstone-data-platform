@@ -65,16 +65,16 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
                     var performanceExists =
                         performance.FirstOrDefault(
                             w =>
-                                w.EntryPointFinishedProcessingRequest != null &&
-                                w.EntryPointFinishedProcessingRequest.MetaData != null &&
-                                w.EntryPointFinishedProcessingRequest.MetaData.Results != null &&
-                                w.EntryPointFinishedProcessingRequest.MetaData.Results.Name == "EntryPoint");
+                                w.EntryPointProcessedAndReturningRequest != null &&
+                                w.EntryPointProcessedAndReturningRequest.MetaData != null &&
+                                w.EntryPointProcessedAndReturningRequest.MetaData.Results != null &&
+                                w.EntryPointProcessedAndReturningRequest.MetaData.Results.Name == "EntryPoint");
 
                     if (performanceExists == null)
                         continue;
 
                     response.SetPerformanceData(string.Format("Elapsed Time: {0}",
-                        performanceExists.EntryPointFinishedProcessingRequest.MetaData.Results.ElapsedTime));
+                        performanceExists.EntryPointProcessedAndReturningRequest.MetaData.Results.ElapsedTime));
                 }
             }
             catch (Exception ex)

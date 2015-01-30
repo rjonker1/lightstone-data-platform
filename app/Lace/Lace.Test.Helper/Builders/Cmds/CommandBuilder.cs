@@ -68,8 +68,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     },
                     new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCall(
-                    new IvidRequestMessage(new LicensePlateRequestBuilder().ForIvid()).Build()
-                        .HpiQueryRequest, null)
+                    new IvidRequestMessage(new LicensePlateRequestBuilder().ForIvid()).HpiQueryRequest, null)
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(

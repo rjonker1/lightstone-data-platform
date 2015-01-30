@@ -67,11 +67,11 @@ namespace Monitoring.Dashboard.UI.Core.Models
     {
 
         [DataMember]
-        public EntryPointFinishedProcessingRequest EntryPointFinishedProcessingRequest { get; set; }
+        public EntryPointProcessedAndReturningRequest EntryPointProcessedAndReturningRequest { get; set; }
     }
 
     [DataContract]
-    public class EntryPointFinishedProcessingRequest
+    public class EntryPointProcessedAndReturningRequest
     {
         [DataMember]
         public MetaData MetaData { get; set; }

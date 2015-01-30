@@ -11,7 +11,6 @@ namespace Lace.Test.Helper.Builders.DataProviders
         public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(ILaceRequest request)
         {
             return new IvidRequestMessage(request)
-               .Build()
                .HpiQueryRequest;
         }
     }
@@ -21,9 +20,6 @@ namespace Lace.Test.Helper.Builders.DataProviders
         public static HpiServiceClient ForIvidWebServiceProxy()
         {
             var ividWebService = new ConfigureIvidSource();
-
-            ividWebService.ConfigureIvidWebServiceCredentials();
-            ividWebService.ConfigureIvidWebServiceRequestMessageProperty();
             return ividWebService.IvidServiceProxy;
         }
     }

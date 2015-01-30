@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.ServiceModel.Channels;
-using System.Text;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
@@ -12,7 +10,13 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Configuration
         public IvidTitleholderServiceClient IvidTitleHolderProxy { get; private set; }
         public HttpRequestMessageProperty IvidTitleHolderRequestMessageProperty { get; private set; }
 
-        public void ConfigureIvidTitleHolderServiceCredentials()
+        public ConfigureIvidTitleHolderSource()
+        {
+            ConfigureIvidTitleHolderServiceCredentials();
+            ConfigureIvidTitleHolderWebServiceRequestMessageProperty();
+        }
+
+        private void ConfigureIvidTitleHolderServiceCredentials()
         {
             IvidTitleHolderProxy = new IvidTitleholderServiceClient();
 
@@ -23,12 +27,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Configuration
             IvidTitleHolderProxy.ClientCredentials.UserName.Password = Credentials.IvidTitleHolderServiceUserPassword();
         }
 
-        public void ConfigureIvidTitleHolderWebServiceRequestMessageProperty()
+        private void ConfigureIvidTitleHolderWebServiceRequestMessageProperty()
         {
-            IvidTitleHolderRequestMessageProperty = new HttpRequestMessageProperty();
-            IvidTitleHolderRequestMessageProperty
-                .Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}",
-                    Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", Credentials.IvidTitleHolderServiceUserName(), Credentials.IvidTitleHolderServiceUserPassword()))));
+            IvidTitleHolderRequestMessageProperty =
+                AuthenticationHeaders.CreateBasicHttpRequestMessageProperty(
+                    Credentials.IvidTitleHolderServiceUserName(), Credentials.IvidTitleHolderServiceUserPassword());
         }
 
         public void CloseWebService()
