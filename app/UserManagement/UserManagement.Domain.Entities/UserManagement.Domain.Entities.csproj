@@ -52,6 +52,7 @@
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
     <Compile Include="Commands\CreateSources\CreateCreateSource.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
+    <Compile Include="Commands\CustomerProfiles\CreateCustomerProfile.cs" />
     <Compile Include="Commands\Customers\CreateCustomer.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Commands\PaymentTypes\ImportPaymentType.cs" />
     <Compile Include="Commands\PlatformStatuses\CreatePlatformStatus.cs" />
     <Compile Include="Commands\PlatformStatuses\ImportPlatformStatus.cs" />
+    <Compile Include="Commands\ProfileDetails\CreateProfileDetail.cs" />
     <Compile Include="Commands\Provinces\CreateProvince.cs" />
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
     <Compile Include="Commands\Roles\CreateRole.cs" />

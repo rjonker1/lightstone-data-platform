@@ -21,7 +21,7 @@ namespace UserManagement.Domain.Entities
         protected CustomerProfile() { }
 
         public CustomerProfile(Guid id, DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, string pastelId, Billing billing, CommercialState commercialState, 
-                                CreateSource createSource, Customer customer, PlatformStatus platformStatus/*, ProfileDetail profileDetail*/)
+                                CreateSource createSource, Customer customer, PlatformStatus platformStatus, ProfileDetail profileDetail)
             : base(id)
         {
 
@@ -34,7 +34,7 @@ namespace UserManagement.Domain.Entities
             CreateSource = createSource;
             Customer = customer;
             PlatformStatus = platformStatus;
-            //ProfileDetail = profileDetail;
+            ProfileDetail = profileDetail;
         }
     }
 }

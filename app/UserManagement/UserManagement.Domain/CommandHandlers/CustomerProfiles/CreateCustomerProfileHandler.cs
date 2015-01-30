@@ -19,7 +19,7 @@ namespace UserManagement.Domain.CommandHandlers.CustomerProfiles
         {
 
             _repository.Save(new CustomerProfile(command.Id, command.FirstCreateDate, command.LastUpdateBy, command.LastUpdateDate, command.PastelID, command.Billing, command.CommercialState,
-                                                    command.CreateSource, command.Customer, command.PlatformStatus/*, command.ProfileDetail*/));
+                                                    command.CreateSource, command.Customer, command.PlatformStatus, command.ProfileDetail));
         }
     }
 }
