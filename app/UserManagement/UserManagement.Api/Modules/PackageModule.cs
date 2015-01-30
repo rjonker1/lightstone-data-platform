@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using MemBus;
 using Nancy;
 using UserManagement.Domain.Core.Repositories;
