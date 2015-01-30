@@ -24,7 +24,7 @@ namespace UserManagement.Domain.Entities
         public virtual EscalationType EscalationType { get; set; }
         public virtual ContractDuration ContractDuration { get; set; }
 
-        //public virtual ICollection<ContractPackage> ContractPackage { get; set; }
+        public virtual List<Package> Packages { get; set; }
 
         protected Contract() { }
 
