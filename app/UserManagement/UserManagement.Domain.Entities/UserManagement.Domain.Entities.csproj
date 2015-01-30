@@ -55,6 +55,7 @@
     <Compile Include="Commands\Customers\CreateCustomer.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
+    <Compile Include="Commands\Packages\CreatePackage.cs" />
     <Compile Include="Commands\PaymentTypes\CreatePaymentType.cs" />
     <Compile Include="Commands\PaymentTypes\ImportPaymentType.cs" />
     <Compile Include="Commands\PlatformStatuses\CreatePlatformStatus.cs" />

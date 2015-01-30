@@ -18,8 +18,8 @@ namespace UserManagement.Domain.CommandHandlers.Packages
 
         public override void Handle(CreatePackage command)
         {
-            
-            _repository.Save(new Package(command.Id, "Updating user", DateTime.Now, "Package 1", "version", true));
+
+            _repository.Save(new Package(command.Id, command.LastUpdateBy, command.LastUpdateDate, command.Name, command.Version, command.IsActivated));
         }
     }
 }

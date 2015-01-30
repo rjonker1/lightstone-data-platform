@@ -110,6 +110,7 @@
     <Compile Include="Modules\ContractModule.cs" />
     <Compile Include="Modules\CustomerModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\RoleModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Modules\UserProfileModule.cs" />
