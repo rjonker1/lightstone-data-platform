@@ -6,10 +6,8 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Dto;
-using Lace.Domain.DataProviders.Audatex.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
-using Lace.Source.Audatex.Transform;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 {
@@ -56,10 +54,12 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 
             foreach (var f in HistoryCheckResponses)
             {
-                if (
-                    !CompareRequestedAndResponseData.ShowClaim(_request.Vehicle.Vin, _manufacturer, f.VIN,
-                        f.Manufacturer,
-                        _warrantyYear, f.CreationDate, _request.Vehicle.LicenceNo, f.Registration)) continue;
+                var compare = new CompareRequestAndResponse(_request.Vehicle.Vin, _manufacturer,
+                    f.VIN,
+                    f.Manufacturer, _request.Vehicle.LicenceNo, f.Registration, _canApplyRepairInfo);
+
+                if (!compare.ShowClaim(_warrantyYear, f.CreationDate))
+                    continue;
 
                 var claim = new AccidentClaim(
                     f.AccidentDate.HasValue ? f.AccidentDate.Value : (DateTime?) null,
@@ -68,17 +68,13 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
                     f.Originator, f.PolicyNumber, f.Registration, f.RepairCostExVAT, f.RepairCostIncVAT,
                     f.VersionDate, f.VIN, f.WorkproviderReference, f.MatchType,
                     string.Format("{0} {1}", TransformRepairCosts.Transform(f.RepairCostExVAT),
-                        CompareRequestedAndResponseData.MatchInformation(_request.Vehicle.Vin, _manufacturer,
-                            f.VIN,
-                            f.Manufacturer, _request.Vehicle.LicenceNo, f.Registration, _canApplyRepairInfo)));
-
+                        compare.GetMatchIndicator()));
 
                 Result.CheckForAccidentClaims(!string.IsNullOrEmpty(claim.AssessmentNumber) ||
                                               claim.RepairCostExVat.HasValue);
 
                 Result.AddAccidentClaim(claim);
             }
-
             Result.CleanAccidentClaims();
         }
 

@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lace.Source.Audatex.Transform
+namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 {
     public class TransformRepairCosts
     {
         private const string DefaultResult = "Not Available";
         private const string Sign = "to";
 
-        public static string Transform(decimal? repairCost)
-        {
-            var result = DefaultResult;
-            var bands = new List<CostBand>()
+        private static readonly IList<CostBand> Bands =  new List<CostBand>()
             {
                 new CostBand(null, 10000, false, false),
                 new CostBand(10000, 20000, true, false),
@@ -32,11 +29,13 @@ namespace Lace.Source.Audatex.Transform
                 new CostBand(150000, null, true, false)
             };
 
+        public static string Transform(decimal? repairCost)
+        {
+            var result = DefaultResult;
             if (!repairCost.HasValue) return result;
 
 
-            var band = bands.FirstOrDefault(b => b.Contains(repairCost.Value));
-
+            var band = Bands.FirstOrDefault(b => b.Contains(repairCost.Value));
             if (band == null) return result;
 
             if (band.IsUnaryBoundary)
@@ -53,7 +52,6 @@ namespace Lace.Source.Audatex.Transform
 
         private static string ToRepairCostBand(decimal amount, decimal threshold)
         {
-            var result = string.Empty;
             var sign = '=';
 
             if (amount > threshold)
@@ -65,16 +63,14 @@ namespace Lace.Source.Audatex.Transform
                 sign = '<';
             }
 
-            result = string.Format("{0} {1:C}", sign, threshold);
+            var result = string.Format("{0} {1:C}", sign, threshold);
             result = result.Replace(".", ",");
             return result;
         }
 
         private static string ToRepairCostBand(decimal amount, decimal low, decimal high)
         {
-            var result = string.Empty;
-
-            result = string.Format("{1:C} {0} {2:C}", Sign, low, high);
+            var result = string.Format("{1:C} {0} {2:C}", Sign, low, high);
             result = result.Replace(".", ",");
             return result;
         }
@@ -113,8 +109,7 @@ namespace Lace.Source.Audatex.Transform
                     return result;
                 }
             }
-
-
+            
             public bool Contains(decimal amount)
             {
                 var result = IsBinaryBoundary;
@@ -122,31 +117,20 @@ namespace Lace.Source.Audatex.Transform
                 if (Item1.HasValue)
                 {
                     if (LowInclusive)
-                    {
                         result = amount >= Item1.Value;
-                    }
                     else
-                    {
                         result = amount > Item1.Value;
-                    }
                 }
                 else
-                {
                     result = true;
-                }
 
-                if (Item2.HasValue)
-                {
-                    if (HighInclusive)
-                    {
-                        result = result && (amount <= Item2.Value);
-                    }
-                    else
-                    {
-                        result = result && (amount < Item2.Value);
-                    }
-                }
+                if (!Item2.HasValue)
+                    return result;
 
+                if (HighInclusive)
+                    result = result && (amount <= Item2.Value);
+                else
+                    result = result && (amount < Item2.Value);
 
                 return result;
             }

@@ -37,9 +37,6 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             {
                 var ividTitleHolderWebService = new ConfigureIvidTitleHolderSource();
 
-                ividTitleHolderWebService.ConfigureIvidTitleHolderServiceCredentials();
-                ividTitleHolderWebService.ConfigureIvidTitleHolderWebServiceRequestMessageProperty();
-
                 using (
                     var scope = new OperationContextScope(ividTitleHolderWebService.IvidTitleHolderProxy.InnerChannel))
                 {
@@ -47,9 +44,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
                     var request = new IvidTitleHolderRequestMessage(_request, response)
-                        .Build()
                         .TitleholderQueryRequest;
-
 
                     monitoring.Send(CommandType.Configuration, request, null);
 

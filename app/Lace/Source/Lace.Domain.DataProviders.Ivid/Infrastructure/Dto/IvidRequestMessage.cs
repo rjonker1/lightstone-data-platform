@@ -13,9 +13,10 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
         public IvidRequestMessage(ILaceRequest request)
         {
             _request = request;
+            BuildRequest();
         }
 
-        public IvidRequestMessage Build()
+        private void BuildRequest()
         {
             HpiQueryRequest = new HpiStandardQueryRequest()
             {
@@ -29,8 +30,6 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
                 RegisterNo = _request.Vehicle.RegisterNo ?? string.Empty,
                 VinOrChassis = _request.Vehicle.VinOrChassis ?? string.Empty
             };
-
-            return this;
         }
     }
 }

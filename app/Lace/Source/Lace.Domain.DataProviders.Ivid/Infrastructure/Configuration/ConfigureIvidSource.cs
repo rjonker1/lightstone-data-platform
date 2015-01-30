@@ -15,7 +15,13 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration
         [DataMember]
         public HttpRequestMessageProperty IvidRequestMessageProperty { get; private set; }
 
-        public void ConfigureIvidWebServiceCredentials()
+        public ConfigureIvidSource()
+        {
+            ConfigureIvidWebServiceCredentials();
+            ConfigureIvidWebServiceRequestMessageProperty();
+        }
+
+        private void ConfigureIvidWebServiceCredentials()
         {
             IvidServiceProxy = new HpiServiceClient();
 
@@ -26,7 +32,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration
             IvidServiceProxy.ClientCredentials.UserName.Password = Credentials.IvidServiceUserPassword();
         }
 
-        public void ConfigureIvidWebServiceRequestMessageProperty()
+        private void ConfigureIvidWebServiceRequestMessageProperty()
         {
             IvidRequestMessageProperty =
                 AuthenticationHeaders.CreateBasicHttpRequestMessageProperty(Credentials.IvidServiceUsername(),

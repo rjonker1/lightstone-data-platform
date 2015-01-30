@@ -148,7 +148,7 @@
     <Content Include="Views\Index.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
-    <Content Include="Views\MonitoringDataProviders.cshtml" />
+    <Content Include="Views\DataProviders\MonitoringDataProviders.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\DataProviders\_Log.cshtml" />
     <None Include="Web.Debug.config">

@@ -11,7 +11,7 @@ namespace Monitoring.Dashboard.UI.Modules
         public DataProviderModule(ICallMonitoringService service)
         {
            
-            Get["/dataProviders/log"] = _ => View["MonitoringDataProviders"];
+            Get["/dataProviders/log"] = _ => View["DataProviders/MonitoringDataProviders"];
           
             Get["/dataProviders/freshenLog"] = _ =>
             {

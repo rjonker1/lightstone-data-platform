@@ -38,9 +38,6 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             {
                 var ividWebService = new ConfigureIvidSource();
 
-                ividWebService.ConfigureIvidWebServiceCredentials();
-                ividWebService.ConfigureIvidWebServiceRequestMessageProperty();
-
                 monitoring.Send(CommandType.Security,
                     new
                     {
@@ -59,7 +56,6 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                         ividWebService.IvidRequestMessageProperty;
 
                     var request = new IvidRequestMessage(_request)
-                        .Build()
                         .HpiQueryRequest;
 
                     monitoring.Send(CommandType.Configuration, request, null);

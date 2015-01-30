@@ -10,11 +10,12 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
         private readonly IProvideResponseFromLaceDataProviders _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
-      
+
         public IvidTitleHolderRequestMessage(ILaceRequest request, IProvideResponseFromLaceDataProviders response)
         {
             _request = request;
             _response = response;
+            BuildRequest();
         }
 
         private bool CanContinue
@@ -25,7 +26,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
             }
         }
 
-        public IvidTitleHolderRequestMessage Build()
+        private void BuildRequest()
         {
             TitleholderQueryRequest = new TitleholderQueryRequest()
             {
@@ -40,9 +41,6 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
                     ? _response.IvidResponse.Vin
                     : string.Empty
             };
-
-            return this;
         }
-
     }
 }
