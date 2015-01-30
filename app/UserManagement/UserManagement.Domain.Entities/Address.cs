@@ -8,8 +8,8 @@ namespace UserManagement.Domain.Entities
 
         public virtual string AddressType { get; set; }
         public virtual string Line1 { get; set; }
-        public virtual string PostalCode { get; set; }
         public virtual string Line2 { get; set; }
+        public virtual string PostalCode { get; set; }
         public virtual string City { get; set; }
         public virtual string Country { get; set; }
 
@@ -17,7 +17,7 @@ namespace UserManagement.Domain.Entities
 
         protected Address() { }
 
-        public Address(Guid id, string addressType, string line1, string postalCode, string line2, string city, string country, Province province)
+        public Address(Guid id, string addressType, string line1, string line2, string postalCode, string city, string country, Province province)
             : base(id)
         {
 
