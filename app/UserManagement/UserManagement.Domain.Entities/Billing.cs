@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -21,6 +20,7 @@ namespace UserManagement.Domain.Entities
         public Billing(Guid id, string billingContactNumber, string billingContractPersion, string companyRegistration, DateTime firstCreateDate, DateTime? debitOrderDate, PaymentType paymentType)
             : base(id)
         {
+
             BillingContactNumber = billingContactNumber;
             BillingContractPersion = billingContractPersion;
             CompanyRegistration = companyRegistration;
