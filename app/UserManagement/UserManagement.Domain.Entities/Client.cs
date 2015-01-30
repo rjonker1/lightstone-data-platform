@@ -8,6 +8,7 @@ namespace UserManagement.Domain.Entities
     {
 
         public virtual string ClientName { get; protected internal set; }
+        public virtual List<Package> Packages { get; protected internal set; } 
         //public virtual Guid? ClientProfileId { get; set; }
 
         //public virtual ProfileDetail ProfileDetail { get; set; }

@@ -3,7 +3,7 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class ClientPackage : Entity
+    public class ClientPackage //: Entity
     {
         public virtual Guid ClientId { get; set; }
         public virtual Guid PackageId { get; set; }
