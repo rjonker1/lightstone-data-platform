@@ -17,7 +17,9 @@ namespace UserManagement.Domain.CommandHandlers.Billings
 
         public override void Handle(CreateBilling command)
         {
-            throw new System.NotImplementedException();
+            
+            _repository.Save(new Billing(command.Id, command.BillingContactNumber, command.BillingContractPersion, command.CompanyRegistration, command.FirstCreateDate,
+                                            command.DebitOrderDate, command.PaymentType));
         }
     }
 }

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\Billings\CreateBillingHandler.cs" />
     <Compile Include="CommandHandlers\Clients\CreateClientHandler.cs" />
     <Compile Include="CommandHandlers\CommercialStates\CreateCommercialStateHandler.cs" />
     <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
