@@ -40,6 +40,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
@@ -71,6 +72,8 @@
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="LightstoneResponseHandled.cs" />
     <Compile Include="Pair.cs" />
+    <Compile Include="PCubedFicaVerficationResponseHandled.cs" />
+    <Compile Include="PCubedFicaVerficationResponse.cs" />
     <Compile Include="PriceModel.cs" />
     <Compile Include="RepairIndexModel.cs" />
     <Compile Include="RgtResponse.cs" />
@@ -78,6 +81,8 @@
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="RgtVinResponseHandled.cs" />
     <Compile Include="SaleModel.cs" />
+    <Compile Include="SignioDriversLicenseDecryptionResponse.cs" />
+    <Compile Include="SignioDriversLicenseDecryptionResponseHandled.cs" />
     <Compile Include="TotalSalesByAgeModel.cs" />
     <Compile Include="TotalSalesByGenderModel.cs" />
     <Compile Include="Valuation.cs" />

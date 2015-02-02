@@ -40,10 +40,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideContextForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideCoOrdinateInformationForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideDriversLicenseInformationForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvideFicaInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideJisInformation.cs" />
     <Compile Include="Contracts\Requests\IProvideRequestAggregation.cs" />
     <Compile Include="Contracts\Requests\IProvideUserInformationForRequest.cs" />

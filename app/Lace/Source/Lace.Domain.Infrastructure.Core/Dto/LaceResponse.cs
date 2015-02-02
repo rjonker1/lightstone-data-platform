@@ -28,5 +28,12 @@ namespace Lace.Domain.Infrastructure.Core.Dto
 
         public IProvideDataFromJis JisResponse { get; set; }
         public IResponseProviderHandled JisResponseHandled { get; set; }
+
+
+        public IProvideDataFromPCubedFicaVerfication FicaVerficationResponse { get; set; }
+        public IResponseProviderHandled FicaVerficationResponseHandled { get; set; }
+
+        public IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryption { get; set; }
+        public IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
     }
 }

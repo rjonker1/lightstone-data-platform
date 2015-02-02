@@ -9,6 +9,8 @@
         Lightstone,
         Audatex,
         Jis,
-        Anpr
+        Anpr,
+        PCubedFica,
+        SignioDecryptDriversLicense
     }
 }

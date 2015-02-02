@@ -14,6 +14,8 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] EntryPoint,
         [EnumMember] Initialization,
         [EnumMember] Anpr,
-        [EnumMember] Jis
+        [EnumMember] Jis,
+        [EnumMember] PCubedFica,
+        [EnumMember] SignioDecryptDriversLicense
     }
 }

@@ -59,6 +59,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Entities",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Requests", "Lace\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj", "{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Signio.DriversLicense", "Lace\source\Lace.Domain.DataProviders.Signio\Lace.Domain.DataProviders.Signio.DriversLicense.csproj", "{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.PCubed", "Lace\source\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj", "{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +157,14 @@ Global
 		{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,5 +195,7 @@ Global
 		{D2F75A1A-20E2-4B05-8F04-EF932D6F6B38} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{AE3F8127-622B-4E02-A21F-6EE7BEA123E2} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 		{52A528C9-B875-4487-A5F0-3820CB98ACFF} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
+		{8BF3D0CF-01E3-4397-BDAF-1B20D9BD7934} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
+		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8} = {61D1E1F1-7F8D-4DF7-A4F5-72189D632FA3}
 	EndGlobalSection
 EndGlobal
