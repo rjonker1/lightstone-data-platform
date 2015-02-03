@@ -12,5 +12,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
 
         public static Func<string> IvidTitleHolderServiceUserName = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidTitleHolderServiceUserName");
         public static Func<string> IvidTitleHolderServiceUserPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("IvidTitleHolderServiceUserPassword");
+
+        public static Func<string> DecryptyDriversLicenseApiUsername = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseApiUsername");
+        public static Func<string> DecryptyDriversLicenseApiPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseApiPassword");
+        public static Func<string> DecryptyDriversLicenseoApiXAuthToken = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseoApiXAuthToken");
+        public static Func<string> DecryptyDriversLicenseApiOperation = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseApiOperation");
+        public static Func<string> DecryptyDriversLicenseApiUrl = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseApiUrl");
+
     }
 }

@@ -21,7 +21,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.DriversLicense
     public interface IRespondWithIdentityDocument : IProvideType
     {
         string Number { get;}
-        string Type { get;}
+        string IdentityType { get; }
     }
 
     public interface IRespondWithPerson : IProvideType

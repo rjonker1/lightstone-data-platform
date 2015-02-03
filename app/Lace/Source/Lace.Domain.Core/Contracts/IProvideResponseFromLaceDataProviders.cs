@@ -31,7 +31,7 @@ namespace Lace.Domain.Core.Contracts
         IProvideDataFromPCubedFicaVerfication FicaVerficationResponse { get; set; }
         IResponseProviderHandled FicaVerficationResponseHandled { get; set; }
 
-        IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryption { get; set; }
+        IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryptionResponse { get; set; }
         IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
     }
 }

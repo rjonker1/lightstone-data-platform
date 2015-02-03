@@ -33,7 +33,7 @@ namespace Lace.Domain.Infrastructure.Core.Dto
         public IProvideDataFromPCubedFicaVerfication FicaVerficationResponse { get; set; }
         public IResponseProviderHandled FicaVerficationResponseHandled { get; set; }
 
-        public IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryption { get; set; }
+        public IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryptionResponse { get; set; }
         public IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
     }
 }

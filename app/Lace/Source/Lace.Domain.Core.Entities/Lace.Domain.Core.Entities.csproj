@@ -59,6 +59,7 @@
     <Compile Include="AudatexResponse.cs" />
     <Compile Include="AudatexResponseHandled.cs" />
     <Compile Include="ConfidenceModel.cs" />
+    <Compile Include="DriversLicenseModels.cs" />
     <Compile Include="EstimatedValueModel.cs" />
     <Compile Include="FinancedInterestValidation.cs" />
     <Compile Include="FrequencyModel.cs" />
