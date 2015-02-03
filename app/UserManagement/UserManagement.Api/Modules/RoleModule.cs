@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Nancy;
+﻿using Nancy;
 using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -14,7 +13,7 @@ namespace UserManagement.Api.Modules
             {
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {data = roles.ToList()});
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {data = roles});
             };
         }
     }

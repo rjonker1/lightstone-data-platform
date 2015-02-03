@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Nancy;
+﻿using Nancy;
 using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -12,9 +11,9 @@ namespace UserManagement.Api.Modules
         {
             Get["/UserTypes"] = _ =>
             {
-                    return Negotiate
+                return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {data = userTypes.ToList()});
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {data = userTypes});
             };
         }
     }

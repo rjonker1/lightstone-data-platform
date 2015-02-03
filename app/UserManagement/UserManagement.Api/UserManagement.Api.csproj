@@ -275,6 +275,7 @@
     <Content Include="Views\Shared\PageHeading.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\UserType\Index.cshtml" />
+    <Content Include="Views\Province\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
