@@ -8,7 +8,8 @@ namespace Api.Modules.Verification
         public VerificationSecureModule()
             : base("/api/verification")
         {
-            this.RequiresAuthentication();
+            //TODO: Enable once user management API is working
+            //this.RequiresAuthentication();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Api.Infrastructure.Requests;
 using AutoMapper;
 using Billing.Api.Connector;
 using Billing.Api.Dtos;

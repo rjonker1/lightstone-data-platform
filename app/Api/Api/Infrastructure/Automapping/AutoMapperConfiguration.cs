@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Api.Core;
+using AutoMapper;
 using Nancy;
 using Newtonsoft.Json;
 

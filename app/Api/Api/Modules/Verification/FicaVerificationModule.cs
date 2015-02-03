@@ -4,6 +4,7 @@ using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Commands;
 using Api.Verfication.Infrastructure.Dto;
 using Api.Verfication.Infrastructure.Handlers.Contracts;
+using Nancy;
 using Nancy.ModelBinding;
 
 namespace Api.Modules.Verification
@@ -12,7 +13,7 @@ namespace Api.Modules.Verification
     {
         public FicaVerificationModule(IHandleFicaVerficationRequests handler)
         {
-            Get["/ficaVerification"] = _ => _metaData;
+            Get["/ficaVerification"] = _ => _metaData.AsJsonString();
 
             Post["/ficaVerification/"] = _ =>
             {
@@ -22,9 +23,8 @@ namespace Api.Modules.Verification
             };
         }
 
-        private readonly Func<IHaveFicaVerficationResponse> _metaData =
-            () =>
-                new FicaVerficationResponseDto(0, Guid.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                    DateTime.MinValue, DateTime.MinValue);
+        private readonly IHaveFicaVerficationResponse _metaData = new FicaVerficationResponseDto(0, Guid.Empty,
+            string.Empty, string.Empty, string.Empty, string.Empty,
+            DateTime.MinValue, DateTime.MinValue);
     }
 }

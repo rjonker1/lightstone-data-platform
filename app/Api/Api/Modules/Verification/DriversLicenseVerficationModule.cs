@@ -4,6 +4,7 @@ using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Commands;
 using Api.Verfication.Infrastructure.Dto;
 using Api.Verfication.Infrastructure.Handlers.Contracts;
+using Nancy;
 using Nancy.ModelBinding;
 
 namespace Api.Modules.Verification
@@ -15,7 +16,7 @@ namespace Api.Modules.Verification
 
             Get["/driversLicenseVerification"] =
                 _ =>
-                    _metaData;
+                    _metaData.AsJsonString();
 
             Post["/driversLicenseVerification/"] = _ =>
             {
@@ -25,7 +26,7 @@ namespace Api.Modules.Verification
             };
         }
 
-        private readonly Func<IHaveDriversLicenseResponse> _metaData = () =>
+        private readonly IHaveDriversLicenseResponse _metaData =
             new DriversLicenseResponseDto(new DrivingLicenseCard(new IdentityDocument(string.Empty, string.Empty),
                 new Person(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
                     string.Empty),
