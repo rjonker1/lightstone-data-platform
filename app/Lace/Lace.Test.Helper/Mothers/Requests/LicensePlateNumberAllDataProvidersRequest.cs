@@ -78,6 +78,17 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return "XMC167GP";
             }
         }
-      
+
+
+
+        public IProvideDriversLicenseInformationForRequest DriversLicense
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IProvideFicaInformationForRequest Fica
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

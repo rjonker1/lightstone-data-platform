@@ -8,7 +8,6 @@ namespace Lace.Test.Helper.Mothers.Requests
 {
     public class LicensePlateNumberIvidOnlyRequest : Domain.Core.Requests.Contracts.ILaceRequest
     {
-
         public IPackage Package
         {
             get
@@ -73,6 +72,16 @@ namespace Lace.Test.Helper.Mothers.Requests
             {
                 return "XMC167GP";
             }
+        }
+
+        public IProvideDriversLicenseInformationForRequest DriversLicense
+        {
+            get { return new RequestDriversLicenseInformation(); }
+        }
+
+        public IProvideFicaInformationForRequest Fica
+        {
+            get { return new RequestFicaInformation(); }
         }
       
     }
