@@ -9,8 +9,14 @@ namespace UserManagement.Api.Modules
     {
         public RoleModule(IRepository<Role> roles)
         {
-
-            Get["/Roles"] = _ => Response.AsJson(roles.ToList());
+            Get["/RolesIndex"] = parameters =>
+            {
+                return View["Index"];
+            };
+            Get["/Roles"] = _ =>
+            {
+                return Response.AsJson(new {data = roles.ToList()});
+            };
 
         }
     }
