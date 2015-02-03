@@ -4,8 +4,8 @@
 }
 
 @{
-    var viewModel = new PageHeadingViewModel("Roles", "");
-    var tableId = string.Format("{0}_table", viewModel.Title);
+    var viewModel = new PageHeadingViewModel("User Types", "");
+    var tableId = string.Format("{0}_table", viewModel.Title.Replace(" ", ""));
 }
 @Html.Partial("Shared/PageHeading", viewModel)
 
@@ -25,7 +25,7 @@
         $(function () {
             var table = $("#@tableId").DataTable({
                 dom: '<"toolbar">frtip',
-                ajax: "/Roles",
+                ajax: "/UserTypes",
                 columns: [
                     { data: "id", visible: false },
                     { data: "name" },
