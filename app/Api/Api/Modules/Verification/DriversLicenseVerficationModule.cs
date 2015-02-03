@@ -16,7 +16,7 @@ namespace Api.Modules.Verification
 
             Get["/driversLicenseVerification"] =
                 _ =>
-                    _requestMetaData.AsJsonString();
+                    _metaData.AsJsonString();
 
             Post["/driversLicenseVerification/"] = _ =>
             {

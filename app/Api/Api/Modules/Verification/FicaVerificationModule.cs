@@ -12,7 +12,7 @@ namespace Api.Modules.Verification
     {
         public FicaVerificationModule(IHandleFicaVerficationRequests handler)
         {
-            Get["/ficaVerification"] = _ => _requestMetaData.AsJsonString();
+            Get["/ficaVerification"] = _ => _metaData.AsJsonString();
 
             Post["/ficaVerification/"] = _ =>
             {

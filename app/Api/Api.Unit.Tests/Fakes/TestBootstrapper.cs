@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Api.Infrastructure.Automapping;
 using Billing.Api.Connector;
 using Billing.Api.Dtos;
 using Lace.Request;
