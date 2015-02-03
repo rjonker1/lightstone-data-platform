@@ -106,6 +106,7 @@
     <Compile Include="Builders\Buses\QueueSender.cs" />
     <Compile Include="Builders\Cmds\CommandBuilder.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
+    <Compile Include="Builders\Requests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAudatexRequestPackage.cs" />
@@ -114,6 +115,9 @@
     <Compile Include="Builders\Requests\LicensePlateNumberRgtVinRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateRequestBuilder.cs" />
     <Compile Include="Builders\Responses\LaceResponseBuilder.cs" />
+    <Compile Include="Builders\Scans\DriversLicenseRequestBuilder.cs" />
+    <Compile Include="Builders\Scans\DriversLicenseScan.cs" />
+    <Compile Include="Builders\Scans\DriversLicenseSourcePackage.cs" />
     <Compile Include="Builders\Sources\Lightstone\BandsDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\CarDataBuilder.cs" />
     <Compile Include="Builders\Sources\Lightstone\CarTypeDataBuilder.cs" />
@@ -168,6 +172,7 @@
     <Compile Include="Fakes\Responses\FakeIvidTitleHolderQueryResponse.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
+    <Compile Include="Mothers\Requests\DriversLicenseRequests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483ButNoVin.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />

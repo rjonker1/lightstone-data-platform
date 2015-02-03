@@ -113,6 +113,10 @@
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj">
+      <Project>{8f3eb9bb-7f5b-43af-8033-4ac91443a0e8}</Project>
+      <Name>Lace.Domain.DataProviders.PCubed</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.DataProviders.RgtVin\Lace.Domain.DataProviders.RgtVin.csproj">
       <Project>{ae3f8127-622b-4e02-a21f-6ee7bea123e2}</Project>
       <Name>Lace.Domain.DataProviders.RgtVin</Name>
@@ -120,6 +124,10 @@
     <ProjectReference Include="..\Lace.Domain.DataProviders.Rgt\Lace.Domain.DataProviders.Rgt.csproj">
       <Project>{52a528c9-b875-4487-a5f0-3820cb98acff}</Project>
       <Name>Lace.Domain.DataProviders.Rgt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.Signio\Lace.Domain.DataProviders.Signio.DriversLicense.csproj">
+      <Project>{8bf3d0cf-01e3-4397-bdaf-1b20d9bd7934}</Project>
+      <Name>Lace.Domain.DataProviders.Signio.DriversLicense</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Infrastructure.Core\Lace.Domain.Infrastructure.Core.csproj">
       <Project>{ae8a5548-01cc-481f-935f-66bf89b08081}</Project>

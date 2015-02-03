@@ -243,6 +243,10 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll" to="lib\net45"/>
