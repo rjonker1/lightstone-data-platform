@@ -277,6 +277,7 @@
     <Content Include="Views\UserType\Index.cshtml" />
     <Content Include="Views\Province\Index.cshtml" />
     <Content Include="Views\ContractDuration\Index.cshtml" />
+    <Content Include="Views\EscalationType\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
