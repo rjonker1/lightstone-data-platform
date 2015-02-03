@@ -2,7 +2,7 @@
 using DataPlatform.Shared.Entities;
 using Lace.Request;
 
-namespace Api
+namespace Api.Infrastructure.Requests
 {
     public class LicensePlateNumberRequest : ILaceRequest
     {

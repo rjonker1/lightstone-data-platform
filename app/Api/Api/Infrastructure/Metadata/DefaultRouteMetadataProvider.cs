@@ -2,7 +2,7 @@
 using Nancy;
 using Nancy.Routing;
 
-namespace Api
+namespace Api.Infrastructure.Metadata
 {
     public class DefaultRouteMetadataProvider : IRouteMetadataProvider
     {

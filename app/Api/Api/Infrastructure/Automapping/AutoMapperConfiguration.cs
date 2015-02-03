@@ -1,8 +1,9 @@
-﻿using AutoMapper;
+﻿using Api.Core;
+using AutoMapper;
 using Nancy;
 using Newtonsoft.Json;
 
-namespace Api
+namespace Api.Infrastructure.Automapping
 {
     public static class AutoMapperConfiguration
     {

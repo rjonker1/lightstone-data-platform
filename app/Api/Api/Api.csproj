@@ -238,19 +238,23 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="IRequest.cs" />
-    <Compile Include="IResponse.cs" />
-    <Compile Include="ApiMetaDataGenerator.cs" />
-    <Compile Include="AggregationInformation.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Core\IRequest.cs" />
+    <Compile Include="Core\IResponse.cs" />
+    <Compile Include="Infrastructure\Metadata\ApiMetaDataGenerator.cs" />
+    <Compile Include="Infrastructure\Requests\AggregationInformation.cs" />
     <Compile Include="Modules\ApiNancyModule.cs" />
-    <Compile Include="ApiRouteDescriptionProvider.cs" />
-    <Compile Include="DefaultRouteMetadata.cs" />
-    <Compile Include="DefaultRouteMetadataProvider.cs" />
-    <Compile Include="IApiMetaDataGenerator.cs" />
+    <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />
+    <Compile Include="Infrastructure\Metadata\DefaultRouteMetadata.cs" />
+    <Compile Include="Infrastructure\Metadata\DefaultRouteMetadataProvider.cs" />
+    <Compile Include="Infrastructure\Metadata\IApiMetaDataGenerator.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="LicensePlateNumberRequest.cs" />
+    <Compile Include="Infrastructure\Requests\LicensePlateNumberRequest.cs" />
+    <Compile Include="Modules\Verification\DriversLicenseVerficationModule.cs" />
+    <Compile Include="Modules\Verification\FicaVerificationModule.cs" />
+    <Compile Include="Modules\Verification\VerificationSecureModule.cs" />
     <Compile Include="PiplineExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -305,6 +309,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Verification\Api.Verfication.Core\Api.Verfication.Core.csproj">
+      <Project>{f0500b19-dc53-423c-b5aa-be8dde1b3619}</Project>
+      <Name>Api.Verfication.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Verification\Api.Verfication.Infrastructure\Api.Verfication.Infrastructure.csproj">
+      <Project>{c1720b63-b55f-481d-97b3-1826777039c5}</Project>
+      <Name>Api.Verfication.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

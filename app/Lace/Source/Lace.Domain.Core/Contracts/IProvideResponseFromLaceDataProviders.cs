@@ -28,5 +28,10 @@ namespace Lace.Domain.Core.Contracts
         IProvideDataFromJis JisResponse { get; set; }
         IResponseProviderHandled JisResponseHandled { get; set; }
 
+        IProvideDataFromPCubedFicaVerfication FicaVerficationResponse { get; set; }
+        IResponseProviderHandled FicaVerficationResponseHandled { get; set; }
+
+        IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryption { get; set; }
+        IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
     }
 }
