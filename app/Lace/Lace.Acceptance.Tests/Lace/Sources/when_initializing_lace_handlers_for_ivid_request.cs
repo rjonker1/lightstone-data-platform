@@ -5,8 +5,6 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using NServiceBus;

@@ -9,6 +9,16 @@ namespace Lace.Test.Helper.Mothers.Requests
 {
     public class LicensePlateNumberIvidTitleHolderOnlyRequest : ILaceRequest
     {
+        public IProvideDriversLicenseInformationForRequest DriversLicense
+        {
+            get { return new RequestDriversLicenseInformation(); }
+        }
+
+        public IProvideFicaInformationForRequest Fica
+        {
+            get { return new RequestFicaInformation(); }
+        }
+
         public IPackage Package
         {
             get

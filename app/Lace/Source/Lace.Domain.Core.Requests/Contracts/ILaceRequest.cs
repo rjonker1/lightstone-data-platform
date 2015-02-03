@@ -18,6 +18,10 @@ namespace Lace.Domain.Core.Requests.Contracts
 
         IProvideJisInformation Jis { get; }
 
+        IProvideDriversLicenseInformationForRequest DriversLicense { get; }
+
+        IProvideFicaInformationForRequest Fica { get; }
+
         DateTime RequestDate { get; }
 
         IPackage Package { get; }

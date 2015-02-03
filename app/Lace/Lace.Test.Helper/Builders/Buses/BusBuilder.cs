@@ -23,21 +23,34 @@ namespace Lace.Test.Helper.Builders.Buses
         public static ISendCommandsToBus ForLightstoneCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
-            return new SendLightstoneCommands(bus, aggregateId, (int)ExecutionOrder.Second);
+            return new SendLightstoneCommands(bus, aggregateId, (int) ExecutionOrder.Second);
         }
+
         public static ISendCommandsToBus ForIvidTitleHolderCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
-            return new SendIvidTitleHolderCommands(bus, aggregateId, (int)ExecutionOrder.Third);
+            return new SendIvidTitleHolderCommands(bus, aggregateId, (int) ExecutionOrder.Third);
         }
 
         public static ISendCommandsToBus ForRgtCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
-            return new SendRgtCommands(bus, aggregateId, (int)ExecutionOrder.Fifth);
+            return new SendRgtCommands(bus, aggregateId, (int) ExecutionOrder.Fifth);
         }
 
         public static ISendCommandsToBus ForRgtVinCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendRgtVinCommands(bus, aggregateId, (int) ExecutionOrder.Fourth);
+        }
+
+        public static ISendCommandsToBus ForSignioDriversLicenseCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendSignioCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+        }
+
+        public static ISendCommandsToBus ForPCubedCommands(Guid aggregateId)
         {
             var bus = BusFactory.NServiceRabbitMqBus();
             return new SendRgtVinCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);

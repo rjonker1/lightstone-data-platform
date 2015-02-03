@@ -6,8 +6,10 @@ using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
+using Lace.Domain.DataProviders.PCubed;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
+using Lace.Domain.DataProviders.Signio.DriversLicense;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
@@ -34,6 +36,24 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                 new SendLightstoneCommands(bus, requestId, (int) ExecutionOrder.Second)), null,
                             new SendIvidCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
+
+
+        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+            _driversLicenseDecryptionRequestSpecification =
+                () =>
+                    (request, bus, response, requestId) =>
+                        new SignioDataProvider(request, null, null,
+                            new SendSignioCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
+
+
+        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+            _ficaRequestSpecification =
+                () =>
+                    (request, bus, response, requestId) =>
+                        new PCubedDataProvider(request, null, null,
+                            new SendPCubedCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
+
+
         public
             IEnumerable
                 <
@@ -48,6 +68,12 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 {
                     {
                         "License plate search", _defaultLicenseNumberRequestSpecification()
+                    },
+                    {
+                        "Drivers License Decryption", _driversLicenseDecryptionRequestSpecification()
+                    },
+                    {
+                        "Fica Verfication", _ficaRequestSpecification()
                     }
                 };
             }
