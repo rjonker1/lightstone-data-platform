@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Scans.Verfication", "Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Verification", "Verification", "{8B495B58-14C4-4116-AC36-F24C47290ABA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Verfication.Core", "Api\Verification\Api.Verfication.Core\Api.Verfication.Core.csproj", "{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Verfication.Infrastructure", "Api\Verification\Api.Verfication.Infrastructure\Api.Verfication.Infrastructure.csproj", "{C1720B63-B55F-481D-97B3-1826777039C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,22 @@ Global
 		{CEDF6E40-2467-40DD-AF36-4C59F4E2ADD0}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{CEDF6E40-2467-40DD-AF36-4C59F4E2ADD0}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDF6E40-2467-40DD-AF36-4C59F4E2ADD0}.Test|Any CPU.Build.0 = Release|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619}.Test|Any CPU.Build.0 = Release|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{C1720B63-B55F-481D-97B3-1826777039C5}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{31BCF2FE-006D-4F35-B697-2A538C9BA0D3} = {B721F577-C2A4-4A2E-8B2B-1155B241FBF5}
 		{CEDF6E40-2467-40DD-AF36-4C59F4E2ADD0} = {8B495B58-14C4-4116-AC36-F24C47290ABA}
+		{F0500B19-DC53-423C-B5AA-BE8DDE1B3619} = {8B495B58-14C4-4116-AC36-F24C47290ABA}
+		{C1720B63-B55F-481D-97B3-1826777039C5} = {8B495B58-14C4-4116-AC36-F24C47290ABA}
 	EndGlobalSection
 EndGlobal

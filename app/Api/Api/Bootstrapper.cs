@@ -1,4 +1,10 @@
-﻿using Billing.Api.Connector;
+﻿using Api.Infrastructure.Automapping;
+using Api.Infrastructure.Metadata;
+using Api.Verfication.Core.Contracts;
+using Api.Verfication.Infrastructure.Handlers;
+using Api.Verfication.Infrastructure.Handlers.Contracts;
+using Api.Verfication.Infrastructure.Services;
+using Billing.Api.Connector;
 using Billing.Api.Connector.Configuration;
 using Lace.Request.Entry;
 using Nancy;
@@ -63,13 +69,13 @@ namespace Api
             container.Register<IEntryPoint>(new EntryPoint(publisher));
 
             container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
-        }
 
-        protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
-        {
-            // Perform registrations that should have a request lifetime
-            base.ConfigureRequestContainer(container, context);
+            //verification
+            container.Register<ICallFicaVerification, FicaVerificationService>();
+            container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();
 
+            container.Register<ICallDriversLicenseVerification, DriversLicenseVerificationService>();
+            container.Register<IHandleDriversLicenseVerficationRequests, DriversLicenseVerificationHandler>();
         }
     }
 }

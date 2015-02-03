@@ -1,4 +1,5 @@
 ﻿using System;
+using Api.Core;
 using AutoMapper;
 using Common.Logging;
 using Nancy;

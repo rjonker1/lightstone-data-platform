@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using Api.Infrastructure.Metadata;
+using Nancy;
 
 namespace Api.Modules
 {
@@ -7,10 +8,7 @@ namespace Api.Modules
         public ApiNancyModule(IApiMetaDataGenerator apiMetaDataGenerator)
             : base("/api")
         {
-            Get["/"] = parameters =>
-            {
-                return Response.AsJson(apiMetaDataGenerator.GetAllModuleRouteMetaData(Context));
-            };
+            Get["/"] = parameters => Response.AsJson(apiMetaDataGenerator.GetAllModuleRouteMetaData(Context));
         }
     }
 }

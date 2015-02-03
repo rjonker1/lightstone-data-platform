@@ -1,7 +1,7 @@
 ﻿using System;
 using Lace.Request;
 
-namespace Api
+namespace Api.Infrastructure.Requests
 {
     public class AggregationInformation : IProvideRequestAggregation
     {

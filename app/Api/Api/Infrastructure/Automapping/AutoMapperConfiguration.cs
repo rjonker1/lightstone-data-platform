@@ -2,7 +2,7 @@
 using Nancy;
 using Newtonsoft.Json;
 
-namespace Api
+namespace Api.Infrastructure.Automapping
 {
     public static class AutoMapperConfiguration
     {
