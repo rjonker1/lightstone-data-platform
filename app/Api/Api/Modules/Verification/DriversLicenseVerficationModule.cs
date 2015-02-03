@@ -16,11 +16,11 @@ namespace Api.Modules.Verification
 
             Get["/driversLicenseVerification"] =
                 _ =>
-                    _metaData.AsJsonString();
+                    _requestMetaData.AsJsonString();
 
             Post["/driversLicenseVerification/"] = _ =>
             {
-                var request = this.Bind<IHaveDriversLicenseRequest>();
+                var request = this.Bind<DriversLicenseRequestDto>();
                 handler.Handle(new DriversLicenseVerficationCommand(request));
                 return handler.Response.AsJsonString();
             };
@@ -38,5 +38,7 @@ namespace Api.Modules.Verification
                 new VehicleClass(string.Empty, string.Empty, string.Empty),
                 new VehicleClass(string.Empty, string.Empty, string.Empty),
                 string.Empty, string.Empty, string.Empty), string.Empty);
+
+        private readonly IHaveDriversLicenseRequest _requestMetaData = new DriversLicenseRequestDto(string.Empty, string.Empty, string.Empty, Guid.Empty);
     }
 }

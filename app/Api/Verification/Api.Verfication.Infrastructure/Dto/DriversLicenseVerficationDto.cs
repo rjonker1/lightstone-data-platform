@@ -6,6 +6,10 @@ namespace Api.Verfication.Infrastructure.Dto
 
     public class DriversLicenseRequestDto : IHaveDriversLicenseRequest
     {
+        public DriversLicenseRequestDto()
+        {
+            
+        }
         public DriversLicenseRequestDto(string scanData, string registrationCode,
             string username, Guid userId)
         {
@@ -23,6 +27,11 @@ namespace Api.Verfication.Infrastructure.Dto
 
     public class DriversLicenseResponseDto : IHaveDriversLicenseResponse
     {
+        public DriversLicenseResponseDto()
+        {
+            
+        }
+
         public DriversLicenseResponseDto(IHaveDrivingLicenseCard driversLicense, string decodedData)
         {
             DrivingLicense = driversLicense;
@@ -35,6 +44,7 @@ namespace Api.Verfication.Infrastructure.Dto
 
     public class DrivingLicenseCard : IHaveDrivingLicenseCard
     {
+
         public DrivingLicenseCard(IHaveIdentityDocument identityDocument, IHavePerson person, IHaveDrivingLicense drivingLicense, IHaveCard card,
             IHaveProfessionalDrivingPermit professionalDrivingPermit, IHaveVehicleClass vehicleClass1, IHaveVehicleClass vehicleClass2,
             IHaveVehicleClass vehicleClass3, IHaveVehicleClass vehicleClass4, string photo, string cellphone, string emailAddress)

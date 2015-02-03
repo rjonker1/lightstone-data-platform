@@ -5,6 +5,10 @@ namespace Api.Verfication.Infrastructure.Dto
 {
     public class FicaVerficationResponseDto : IHaveFicaVerficationResponse
     {
+        public FicaVerficationResponseDto()
+        {
+            
+        }
         public FicaVerficationResponseDto(long idNumber, Guid transactionToken, string initials, string surname,
             string cellNumer, string lifeStatus,
             DateTime? dateOfBirth, DateTime responseDate)
