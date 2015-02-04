@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class CommercialState : Entity, INamedEntity
+    public class CommercialState : NamedEntity
     {
-        public virtual string Name { get; set; }
-        public virtual string Value { get; set; }
+        public virtual string Value { get; protected internal set; }
 
         protected CommercialState() { }
 
-        public CommercialState(Guid id, string val) : base(id)
+        public CommercialState(Guid id, string val) : base(id, val)
         {
-            Name = val;
             Value = val;
         }
     }

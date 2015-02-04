@@ -281,6 +281,7 @@
     <Content Include="Views\ContractType\Index.cshtml" />
     <Content Include="Views\CommercialState\Index.cshtml" />
     <Content Include="Views\CreateSource\Index.cshtml" />
+    <Content Include="Views\PlatformStatus\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

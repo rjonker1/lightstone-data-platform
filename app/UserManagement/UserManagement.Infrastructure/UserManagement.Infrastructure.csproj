@@ -55,6 +55,7 @@
       <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,9 +65,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageAdapter.cs" />
+    <Compile Include="NHibernate\AutoPersistenceModel.cs" />
+    <Compile Include="NHibernate\Conventions\CustomForeignAndSubclassKeyConvention.cs" />
     <Compile Include="NHibernate\Conventions\DomainSignatureConvention.cs" />
+    <Compile Include="NHibernate\Conventions\ManyToManyConvention.cs" />
+    <Compile Include="NHibernate\Conventions\PrimaryKeyConvention.cs" />
+    <Compile Include="NHibernate\Conventions\PropertyConvention.cs" />
+    <Compile Include="NHibernate\Conventions\ReferenceConvention.cs" />
+    <Compile Include="NHibernate\Conventions\RequiredConvention.cs" />
+    <Compile Include="NHibernate\Conventions\SubClassConvention.cs" />
+    <Compile Include="NHibernate\Conventions\TableNameConvention.cs" />
     <Compile Include="NHibernate\MappingOverrides\ClientMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ContractMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

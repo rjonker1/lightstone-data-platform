@@ -1,5 +1,6 @@
 ﻿using Nancy;
 using Nancy.Responses.Negotiation;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 
@@ -7,7 +8,7 @@ namespace UserManagement.Api.Modules
 {
     public class RoleModule : NancyModule
     {
-        public RoleModule(IRepository<Role> roles)
+        public RoleModule(INamedEntityRepository<NamedEntity> roles)
         {
             Get["/Roles"] = _ =>
             {

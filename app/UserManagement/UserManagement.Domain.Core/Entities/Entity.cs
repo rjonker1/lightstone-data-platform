@@ -7,13 +7,13 @@ namespace UserManagement.Domain.Core.Entities
     public abstract class Entity : IEntity
     {
         [DataMember]
-        public virtual Guid Id { get; protected set; }
+        public virtual Guid Id { get; protected internal set; }
 
         protected Entity() { }
 
         protected Entity(Guid id)
         {
-            Id = id == new Guid() ? Guid.NewGuid() : id;
+            Id = id;
         }
     }
 }
