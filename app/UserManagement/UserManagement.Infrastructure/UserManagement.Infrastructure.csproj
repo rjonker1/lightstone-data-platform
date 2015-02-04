@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageAdapter.cs" />
-    <Compile Include="NHibernate\AutoPersistenceModel.cs" />
+    <Compile Include="NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="NHibernate\Conventions\CustomForeignAndSubclassKeyConvention.cs" />
     <Compile Include="NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="NHibernate\Conventions\ManyToManyConvention.cs" />

@@ -2,7 +2,6 @@
 using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Modules
 {

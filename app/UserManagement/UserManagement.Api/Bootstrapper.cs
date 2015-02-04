@@ -42,7 +42,8 @@ namespace UserManagement.Api
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
                 new CommandInstaller(),
-                new BusInstaller()
+                new BusInstaller(),
+                new ServiceLocatorInstaller()
                 );
 
             //Drop create

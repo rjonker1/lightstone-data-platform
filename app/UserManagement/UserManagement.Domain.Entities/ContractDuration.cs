@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class ContractDuration : Entity, INamedEntity
+    public class ContractDuration : NamedEntity
     {
-
-        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
 
         protected ContractDuration() { }
 
-        public ContractDuration(Guid id, string val) : base(id)
+        public ContractDuration(Guid id, string val) : base(id, val)
         {
-            Name = val;
             Value = val;
         }
     }

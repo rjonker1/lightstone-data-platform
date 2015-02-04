@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-
-    public class UserType : Entity, IUserType
+    public class UserType : NamedEntity
     {
-        //Required for NamedEntity Comparison
-        public virtual string Name { get; set; }
-
         public virtual string Value { get; set; }
 
         protected UserType() { }
 
-        public UserType(Guid _id, string val)
+        public UserType(Guid id, string name) : base(id, name)
         {
-            Id = _id;
-            Name = val;
-            Value = val;
+            Value = name;
         }
-
-        //public override string ToString()
-        //{
-        //    return string.Format("User type {0} - {1}", Id, Name);
-        //}
     }
 }
