@@ -40,7 +40,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void lace_signio_drivers_license_decryption_response_shuould_not_be_null_test()
         {
-            _response.SignioDriversLicenseDecryption.ShouldNotBeNull();
+            _response.SignioDriversLicenseDecryptionResponse.ShouldNotBeNull();
         }
     }
 }

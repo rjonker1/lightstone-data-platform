@@ -78,8 +78,7 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
         {
             get
             {
-                return new RequestDriversLicenseInformation(string.Empty, DriversLicenseScan.GetBase64String(),
-                    "5A3DA2CD-6036-440C-B591-58C70B6F2EF2", "jonathan@dnacars.co.za");
+                return new RequestDriversLicenseInformation();
             }
         }
 

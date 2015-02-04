@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.DataProviders.PCubed;
+using Lace.Domain.DataProviders.Signio.DriversLicense;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
@@ -35,6 +37,22 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                             .CallSource(response);
 
 
+        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+            _driversLicenseDecryptionRequestSpecification =
+                () =>
+                    (request, bus, response, requestId) =>
+                        new SignioDataProvider(request, null, null,
+                            new SendSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
+
+
+        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+            _ficaRequestSpecification =
+                () =>
+                    (request, bus, response, requestId) =>
+                        new PCubedDataProvider(request, null, null,
+                            new SendPCubedCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
+
+
         public
             IEnumerable
                 <
@@ -49,6 +67,12 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                 {
                     {
                         "License plate search", _licenseNumberRequestSpecification()
+                    },
+                    {
+                        "Drivers License", _driversLicenseDecryptionRequestSpecification()
+                    },
+                    {
+                        "Fica", _ficaRequestSpecification()
                     }
                 };
             }

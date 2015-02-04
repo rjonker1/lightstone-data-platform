@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Infrastructure\CallSignioDataProvider.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureSignioClient.cs" />
+    <Compile Include="Infrastructure\Dto\DriversLicenseCardDto.cs" />
     <Compile Include="Infrastructure\HandleSignioSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformSignioResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromSignioSource.cs" />

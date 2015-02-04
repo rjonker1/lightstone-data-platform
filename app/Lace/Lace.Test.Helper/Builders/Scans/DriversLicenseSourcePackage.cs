@@ -36,7 +36,7 @@ namespace Lace.Test.Helper.Builders.Scans
             get
             {
                 return new WritePackageBuilder()
-                    .With("Drivers License Decryption")
+                    .With("Drivers License")
                     .With(10d, 20d)
                     .With(ActionMother.EzScoreAction)
                     .With(IndustryMother.Finance, IndustryMother.Automotive)

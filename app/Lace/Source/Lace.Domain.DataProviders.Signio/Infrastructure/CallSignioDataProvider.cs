@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
         {
             try
             {
-                _client = new ConfigureSignioClient(_request.DriversLicense.ScanData,_request.DriversLicense.UserId);
+                _client = new ConfigureSignioClient(_request.DriversLicense.ScanData, _request.DriversLicense.UserId);
 
                 monitoring.Send(CommandType.Configuration,
                     new
@@ -89,7 +89,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            monitoring.Send(CommandType.Transformation,
+                transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), transformer);
 
             response.SignioDriversLicenseDecryptionResponse = transformer.Result;
             response.SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled();
