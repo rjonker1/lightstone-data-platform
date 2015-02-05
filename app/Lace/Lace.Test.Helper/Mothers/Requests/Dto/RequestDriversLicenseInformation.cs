@@ -1,5 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Test.Helper.Builders.Scans;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
@@ -10,20 +11,36 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             
         }
 
-        public RequestDriversLicenseInformation(string registrationCode, string scanData, string userId, string userName)
+        //public RequestDriversLicenseInformation(string registrationCode, string scanData, string userId, string userName)
+        //{
+        //    RegistrationCode = registrationCode;
+        //    ScanData = scanData;
+        //    UserId = userId;
+        //    Username = userName;
+        //}
+
+        public string RegistrationCode
         {
-            RegistrationCode = registrationCode;
-            ScanData = scanData;
-            UserId = userId;
-            Username = userName;
+            get { return string.Empty; }
         }
 
-        public string RegistrationCode { get; private set; }
+        public string ScanData
+        {
+            get { return DriversLicenseScan.GetBase64String(); }
+        }
 
-        public string ScanData { get; private set; }
+        public Guid UserId
+        {
+            get { return new Guid("5A3DA2CD-6036-440C-B591-58C70B6F2EF2"); }
+        }
 
-        public string UserId { get; private set; }
+        public string Username
+        {
+            get
+            {
+                return "jonathan@dnacars.co.za";
+            }
+        }
 
-        public string Username { get; private set; }
     }
 }

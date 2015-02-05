@@ -53,5 +53,32 @@ namespace Lace.Shared.Extensions
                 return default(T);
             }
         }
+
+        public static T XmlToObject<T>(this string xml, Type[] expectedTypes) where T : new()
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(T), expectedTypes);
+                using (var stringReader = new StringReader(xml))
+                {
+                    using (var xmlTextReader = new XmlTextReader(stringReader))
+                    {
+                        try
+                        {
+                            var o = (T)serializer.Deserialize(xmlTextReader);
+                            return o;
+                        }
+                        catch
+                        {
+                            return default(T);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
     }
 }

@@ -34,19 +34,19 @@
   <ItemGroup>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.570\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.577\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.567, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.570\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.577\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.570\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.577\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.570\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.577\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.567, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,7 +57,7 @@
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.570\lib\net45\NHibernate.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.577\lib\net45\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>

@@ -6,16 +6,16 @@ namespace Lace.Domain.Core.Contracts.DataProviders.DriversLicense
     {
         IRespondWithIdentityDocument IdentityDocument { get; }
         IRespondWithPerson Person { get; }
-        IRespondWithDrivingLicense DrivingLicense { get;}
-        IRespondWithCard Card { get;}
-        IRespondWithProfessionalDrivingPermit ProfessionalDrivingPermit { get;}
+        IRespondWithDrivingLicense DrivingLicense { get; }
+        IRespondWithCard Card { get; }
+        IRespondWithProfessionalDrivingPermit ProfessionalDrivingPermit { get; }
         IRespondWithVehicleClass VehicleClass1 { get; }
         IRespondWithVehicleClass VehicleClass2 { get; }
         IRespondWithVehicleClass VehicleClass3 { get; }
         IRespondWithVehicleClass VehicleClass4 { get; }
-        string Photo { get;}
-        string Cellphone { get;}
-        string EmailAddress { get;}
+        string Photo { get; }
+        string Cellphone { get; }
+        string EmailAddress { get; }
     }
 
     public interface IRespondWithIdentityDocument : IProvideType

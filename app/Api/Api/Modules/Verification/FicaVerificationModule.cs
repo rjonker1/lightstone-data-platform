@@ -12,7 +12,11 @@ namespace Api.Modules.Verification
     {
         public FicaVerificationModule(IHandleFicaVerficationRequests handler)
         {
-            Get["/ficaVerification"] = _ => _metaData.AsJsonString();
+            Get["/ficaVerification"] = _ => new
+            {
+                _request,
+                _response
+            }.AsJsonString();
 
             Post["/ficaVerification/"] = _ =>
             {
@@ -22,10 +26,11 @@ namespace Api.Modules.Verification
             };
         }
 
-        private readonly IHaveFicaVerficationResponse _metaData = new FicaVerficationResponseDto(0, Guid.Empty,
+        private readonly IHaveFicaVerficationResponse _response = new FicaVerficationResponseDto(0, Guid.Empty,
             string.Empty, string.Empty, string.Empty, string.Empty,
             DateTime.MinValue, DateTime.MinValue);
 
-        private readonly IHaveFicaVerficationRequest _requestMetaData = new FicaVerficationRequestDto(000000000, string.Empty, 0, Guid.Empty);
+        private readonly IHaveFicaVerficationRequest _request = new FicaVerficationRequestDto(000000000, string.Empty, 0,
+            Guid.Empty);
     }
 }

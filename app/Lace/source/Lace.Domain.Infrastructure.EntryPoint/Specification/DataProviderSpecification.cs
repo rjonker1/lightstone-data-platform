@@ -70,10 +70,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                         "License plate search", _defaultLicenseNumberRequestSpecification()
                     },
                     {
-                        "Drivers License Decryption", _driversLicenseDecryptionRequestSpecification()
+                        "Drivers License", _driversLicenseDecryptionRequestSpecification()
                     },
                     {
-                        "Fica Verfication", _ficaRequestSpecification()
+                        "Fica", _ficaRequestSpecification()
                     }
                 };
             }

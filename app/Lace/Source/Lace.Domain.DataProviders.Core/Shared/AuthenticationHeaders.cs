@@ -20,6 +20,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 string.Format("Basic {0}",
                     Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));
 
+        public static Func<string, string, string> CreateBasicAuthorizationStringHeader =
+            (username, password) =>
+            {
+                var byteArray = Encoding.UTF8.GetBytes(username + ":" + password);
+                return string.Format("Basic {0}", Convert.ToBase64String(byteArray));
+            };
+
 
         public static Func<string, string, HttpRequestMessageProperty> CreateBasicHttpRequestMessageProperty =
             (username, password) =>
@@ -28,5 +35,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
                 property.Headers[HttpRequestHeader.Authorization] = CreateBasicAuthorizationHeader(username, password);
                 return property;
             };
+
+        
     }
 }
