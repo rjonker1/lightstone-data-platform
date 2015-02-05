@@ -15,5 +15,11 @@ namespace UserManagement.Domain.Core.Entities
         {
             Id = id;
         }
+
+
+        public virtual DateTime? Modified { get; protected internal set; }
+        public virtual string ModifiedBy { get; protected internal set; }
+        public virtual DateTime? Created { get; protected internal set; }
+        public virtual string CreatedBy { get; protected internal set; }
     }
 }

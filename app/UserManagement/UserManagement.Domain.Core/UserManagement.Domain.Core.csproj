@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +69,8 @@
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NHibernate\Attributes\DomainSignatureAttribute.cs" />
+    <Compile Include="NHibernate\Interceptors\SessionExtensions.cs" />
+    <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\INamedEntityRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

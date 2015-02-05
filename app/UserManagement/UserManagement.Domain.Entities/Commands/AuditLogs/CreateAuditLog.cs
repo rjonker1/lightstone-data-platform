@@ -9,41 +9,42 @@ namespace UserManagement.Domain.Entities.Commands.AuditLogs
 {
     public class CreateAuditLog : DomainCommand
     {
-        public int Userid;
-        public DateTime Eventdateutc;
-        public string Eventtype;
-        public string Tablename;
-        public string Recordid;
-        public string Columnname;
-        public string Originalvalue;
-        public string Newvalue;
-        public string Datatype;
-        public bool Revertable;
+        public readonly int UserId;
+        public DateTime EventDateUtc;
+        public readonly string EventType;
+        public readonly string TableName;
+        public readonly Guid RecordId;
+        public readonly string ColumnName;
+        public readonly string OriginalValue;
+        public readonly string NewValue;
+        public readonly string DataType;
+        public readonly bool Revertable;
         public Guid? RevertedId;
         public Guid? CommitId;
         public int? CommitSequence;
         public int? CommitVersion;
-        public long CheckpointNumber;
+        public readonly long CheckpointNumber;
 
-        public ICollection<Auditlog> Auditlogs;
-        public Auditlog AuditlogRoot;
+        public ICollection<AuditLog> Auditlogs;
+        public AuditLog AuditLogRoot;
 
         public CreateAuditLog(int userId, DateTime eventdateutc, string eventtype, string tablename
-            , string recordid, string columnname, string originalvalue, string newValue, string dataType
-            ,bool revertable, Guid? commitId, int? commitSequence, int? commitVersion, long checkpointNumber)
+            , Guid recordid, string columnname, string originalvalue, string newValue, string dataType
+            ,bool revertable, Guid? revertedId, Guid? commitId, int? commitSequence, int? commitVersion, long checkpointNumber)
             
         {
             Id = Guid.NewGuid();
-            Userid = userId;
-            Eventdateutc = eventdateutc;
-            Eventtype = eventtype;
-            Tablename = tablename;
-            Recordid = recordid;
-            Columnname = columnname;
-            Originalvalue = originalvalue;
-            Newvalue = newValue;
-            Datatype = dataType;
+            UserId = userId;
+            EventDateUtc = eventdateutc;
+            EventType = eventtype;
+            TableName = tablename;
+            RecordId = recordid;
+            ColumnName = columnname;
+            OriginalValue = originalvalue;
+            NewValue = newValue;
+            DataType = dataType;
             Revertable = revertable;
+            RevertedId = revertedId;
             CommitId = commitId;
             CommitSequence = commitSequence;
             CommitVersion = commitVersion;

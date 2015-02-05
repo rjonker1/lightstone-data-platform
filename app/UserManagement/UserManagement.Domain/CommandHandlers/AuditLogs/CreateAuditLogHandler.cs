@@ -12,18 +12,18 @@ namespace UserManagement.Domain.CommandHandlers.Audits
 {
     public class CreateAuditLogHandler : AbstractMessageHandler<CreateAuditLog>
     {
-        private readonly IRepository<Auditlog> _repository;
+        private readonly IRepository<AuditLog> _repository;
 
-        public CreateAuditLogHandler(IRepository<Auditlog> repository)
+        public CreateAuditLogHandler(IRepository<AuditLog> repository)
         {
             _repository = repository;
         }
 
         public override void Handle(CreateAuditLog command)
         {
-            _repository.Save(new Auditlog(command.Id, command.Userid, command.Eventdateutc, command.Eventtype, command.Tablename
-            , command.Recordid, command.Columnname, command.Originalvalue, command.Newvalue, command.Datatype
-            , command.Revertable, command.CommitId, command.CommitSequence, command.CommitVersion, command.CheckpointNumber));
+            _repository.Save(new AuditLog(command.Id, command.UserId, command.EventDateUtc, command.EventType, command.TableName
+            , command.RecordId, command.ColumnName, command.OriginalValue, command.NewValue, command.DataType
+            , command.Revertable, command.RevertedId, command.CommitId, command.CommitSequence, command.CommitVersion, command.CheckpointNumber));
         }
     }
 }
