@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
@@ -82,7 +81,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
         public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
         {
-            var transformer = new TransformSignioResponse(_response);
+            var transformer = new TransformPCubedResponse(_response);
 
             if (transformer.Continue)
             {

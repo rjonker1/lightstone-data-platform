@@ -4,14 +4,14 @@ using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.PCubed.Infrastructure.Management
 {
-    public class TransformSignioResponse : ITransformResponseFromDataProvider
+    public class TransformPCubedResponse : ITransformResponseFromDataProvider
     {
         public string Message { get; private set; }
         public IProvideDataFromPCubedFicaVerfication Result { get; private set; }
 
         public bool Continue { get; private set; }
 
-        public TransformSignioResponse(string response)
+        public TransformPCubedResponse(string response)
         {
             Continue = !string.IsNullOrWhiteSpace(response);
             Message = response;

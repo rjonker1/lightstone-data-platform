@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.PCubed;
-using Lace.Domain.DataProviders.Signio.DriversLicense;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
@@ -41,7 +39,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
-                        new SignioDataProvider(request, null, null,
+                        new FakeSignioDataProvider(request, null, null,
                             new SendSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 
@@ -49,7 +47,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
-                        new PCubedDataProvider(request, null, null,
+                        new FakePCubedDataProvider(request, null, null,
                             new SendPCubedCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 

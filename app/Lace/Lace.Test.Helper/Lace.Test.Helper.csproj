@@ -139,6 +139,7 @@
     <Compile Include="Fakes\Lace\Consumer\FakeRgtSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeRgtVinSourceExecution.cs" />
     <Compile Include="Fakes\Lace\Consumer\FakeAudatexSourceExecution.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakeSignioDataProvider.cs" />
     <Compile Include="Fakes\Lace\EntryPoint\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Lace\FakeLaceInitializer.cs" />
     <Compile Include="Fakes\Lace\Handlers\FakeHandleAudatexServiceCall.cs" />
@@ -164,8 +165,11 @@
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingAudatexExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidExternalWebService.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingIvidTitleHolderExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingPCubedDataProvider.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtDataProvider.cs" />
     <Compile Include="Fakes\Lace\SourceCalls\FakeCallingRgtVinExternalWebService.cs" />
+    <Compile Include="Fakes\Lace\SourceCalls\FakeCallingSignioDataProvider.cs" />
+    <Compile Include="Fakes\Lace\Consumer\FakePCubedDataProvider.cs" />
     <Compile Include="Fakes\Request\FakeEntryPoint.cs" />
     <Compile Include="Fakes\Responses\FakeLighstoneResponseData.cs" />
     <Compile Include="Fakes\Responses\FakeRgtVinResponse.cs" />

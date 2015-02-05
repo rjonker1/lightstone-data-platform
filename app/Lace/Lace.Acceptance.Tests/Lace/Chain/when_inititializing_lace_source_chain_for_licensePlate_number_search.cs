@@ -4,12 +4,10 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using Lace.Domain.Infrastructure.EntryPoint;
+using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Fakes.Lace;
-using Lace.Test.Helper.Fakes.Lace.Builder;
 using NServiceBus;
 using Xunit.Extensions;
 
@@ -30,13 +28,13 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
             _monitoring = BusFactory.NServiceRabbitMqBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new FakeSourceChain(_request.Package.Action);
+            _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();
         }
 
         public override void Observe()
         {
-            _initialize = new FakeLaceInitializer(new LaceResponse(), _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new LaceResponse(), _request, _monitoring, _buildSourceChain);
             _initialize.Execute();
         }
 
