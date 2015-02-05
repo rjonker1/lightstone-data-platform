@@ -20,7 +20,7 @@ namespace DataPlatform.Shared.RabbitMQ
             configuration.DisableFeature<TimeoutManager>();
             configuration.Conventions()
                 .DefiningCommandsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith(_namespace));
+                    c => c.Namespace != null && c.Namespace.EndsWith(_namespace));
             var bus = Bus.Create(configuration);
             return bus;
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nancy;
 
-namespace Api.Core
+namespace Api.Domain.Core.Contracts
 {
     public interface IResponse
     {

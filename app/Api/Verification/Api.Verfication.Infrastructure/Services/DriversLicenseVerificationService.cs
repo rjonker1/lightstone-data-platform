@@ -1,12 +1,27 @@
-﻿using Api.Verfication.Core.Contracts;
+﻿using System.Net.NetworkInformation;
+using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Dto;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using NServiceBus;
 
 namespace Api.Verfication.Infrastructure.Services
 {
     public class DriversLicenseVerificationService : ICallDriversLicenseVerification
     {
+        private readonly IEntryPoint _entryPointService;
+
+        public DriversLicenseVerificationService(IEntryPoint entryPointService)
+        {
+            _entryPointService = entryPointService;
+        }
+
         public IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(IHaveDriversLicenseRequest request)
         {
+
+            
+
+
             var driversLicense = new DrivingLicenseCard(new IdentityDocument("5110245084084", "02"),
                 new Person("Louw", "VJ", "None", "Glasses/Contact Lenses", "1951-10-24 00:00:00.000", "", "Male"),
                 new DrivingLicense("605400055T2H", "ZA"),
@@ -19,6 +34,5 @@ namespace Api.Verfication.Infrastructure.Services
 
             return new DriversLicenseResponseDto(driversLicense, string.Empty);
         }
-
     }
 }
