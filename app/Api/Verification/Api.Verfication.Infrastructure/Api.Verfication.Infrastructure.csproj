@@ -162,6 +162,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Api.Domain.Infrastructure\Api.Domain.Infrastructure.csproj">
+      <Project>{3185c675-2461-4382-b123-3090d3c45d2e}</Project>
+      <Name>Api.Domain.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Api.Verfication.Core\Api.Verfication.Core.csproj">
       <Project>{f0500b19-dc53-423c-b5aa-be8dde1b3619}</Project>
       <Name>Api.Verfication.Core</Name>

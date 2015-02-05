@@ -1,9 +1,13 @@
-﻿using System.Net.NetworkInformation;
+﻿using System;
+using System.Net.NetworkInformation;
+using Api.Domain.Infrastructure.Requests;
 using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Dto;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using NServiceBus;
+using PackageBuilder.Domain.Entities;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
 namespace Api.Verfication.Infrastructure.Services
 {
@@ -18,9 +22,12 @@ namespace Api.Verfication.Infrastructure.Services
 
         public IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(IHaveDriversLicenseRequest request)
         {
+            //var laceRequest = new LaceRequest();
+            //laceRequest.DriversLicenseRequest(new Package(),
+            //    new DriversLicense(null, request.ScanData, request.UserId, request.Username));
 
-            
-
+            //var response = _entryPointService.GetResponsesFromLace(laceRequest);
+            //return new DriversLicenseResponseDto(new DrivingLicenseCard(), );
 
             var driversLicense = new DrivingLicenseCard(new IdentityDocument("5110245084084", "02"),
                 new Person("Louw", "VJ", "None", "Glasses/Contact Lenses", "1951-10-24 00:00:00.000", "", "Male"),
@@ -34,5 +41,37 @@ namespace Api.Verfication.Infrastructure.Services
 
             return new DriversLicenseResponseDto(driversLicense, string.Empty);
         }
+
+        //private static IPackage TemporaryPackageUnitilApiIsCorrect()
+        //{
+            
+        //}
+
+        //private static Package LicensePlateSearchPackage
+        //{
+        //    get
+        //    {
+        //        return new WritePackageBuilder()
+        //            .With("Drivers License")
+        //            .With(10d, 20d)
+        //            .With(DriversLicenseDecryptionAction)
+        //            .With(IndustryMother.Finance, IndustryMother.Automotive)
+        //            .With(StateMother.Published)
+        //            .With(0.1m)
+        //            .With(DateTime.Now)
+        //            .With(SignioDriversLicenseDecryption)
+        //            .Build();
+        //    }
+        //}
+
+        //public static IAction DriversLicenseDecryptionAction
+        //{
+        //    get
+        //    {
+        //        return new ActionBuilder()
+        //                    .With("Drivers License")
+        //                    .Build();
+        //    }
+        //}
     }
 }
