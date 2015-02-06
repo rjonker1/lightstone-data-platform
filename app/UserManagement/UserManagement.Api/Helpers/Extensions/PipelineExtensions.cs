@@ -1,8 +1,12 @@
-﻿using System.Transactions;
+﻿using System.Linq;
+using System.Transactions;
 using Castle.Windsor;
+using Microsoft.Practices.ServiceLocation;
 using Nancy;
 using Nancy.Bootstrapper;
 using NHibernate;
+using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.Extensions
 {
@@ -51,6 +55,11 @@ namespace UserManagement.Api.Helpers.Extensions
                     session.Transaction.Commit();
             });
         }
-    
+
+        public static void AddProvincesToViewBag(this IPipelines pipelines, IWindsorContainer container, NancyContext context)
+        {
+            var repo = ServiceLocator.Current.GetInstance<IRepository<Province>>();
+            context.ViewBag.Provinces = repo.ToList();
+        }
     }
 }

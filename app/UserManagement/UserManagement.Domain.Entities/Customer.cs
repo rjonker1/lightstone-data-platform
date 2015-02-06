@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -13,10 +12,7 @@ namespace UserManagement.Domain.Entities
         //public virtual CustomerProfile CustomerProfile { get; set; }
         //public virtual IList<User> Users { get; protected internal set; }
 
-        protected Customer()
-        {
-            
-        }
+        protected Customer() { }
 
         public Customer(Guid id, string customerName, string accountOwnerName, Province province 
             //CustomerProfile customerProfile, IList<User> users
@@ -29,6 +25,5 @@ namespace UserManagement.Domain.Entities
             //CustomerProfile = customerProfile;
             //Users = users;
         }
-
     }
 }

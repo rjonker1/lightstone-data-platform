@@ -1,0 +1,70 @@
+﻿@using System
+@using System.Collections.Generic
+@using Nancy.ViewEngines.Razor.HtmlHelpers;
+@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Dtos
+@using UserManagement.Domain.Entities
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+@{
+    var isCreate = Model.Id == new Guid();
+    var pageHeadingViewModel = new PageHeadingViewModel("Customer detail", isCreate ? "Add" : "Update");
+    var method = isCreate ? "POST" : "PUT";
+    var url = isCreate ? "/Customers" : "/Customers/" + Model.Id;
+}
+@Html.Partial("Shared/PageHeading", pageHeadingViewModel)
+
+<div class="box dark">
+    <header>
+        <div class="icons">
+            <i class="fa fa-edit"></i>
+        </div>
+        <h5>Input Text Fields</h5>
+        <div class="toolbar">
+            <nav style="padding: 8px;">
+                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
+                    <i class="fa fa-minus"></i>
+                </a>
+                <a class="btn btn-default btn-xs full-box" href="javascript:;">
+                    <i class="fa fa-expand"></i>
+                </a>
+                <a class="btn btn-danger btn-xs close-box" href="javascript:;">
+                    <i class="fa fa-times"></i>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+        <form action="@url" data-method="@method" class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(x => x.CustomerName, new { @class = "control-label col-lg-4" })
+                <div class="col-lg-3">
+                    @Html.TextBoxFor(x => x.CustomerName, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.AccountOwnerName, new { @class = "control-label col-lg-4" })
+                <div class="col-lg-3">
+                    @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-lg-4">Read only input</label>
+                <div class="col-lg-3">
+                    <select name="Province" data-placeholder="Choose a country..." class="chosen-select">
+                        @foreach (Province province in ViewBag.Provinces.Value)
+                        {
+                        <option value="@province.Id">@province.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

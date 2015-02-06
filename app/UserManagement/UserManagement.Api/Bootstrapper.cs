@@ -70,6 +70,7 @@ namespace UserManagement.Api
             //pipelines.EnableCors(); // cross origin resource sharing
 
             pipelines.AddTransactionScope(container);
+            pipelines.AddProvincesToViewBag(container, context);
 
             base.RequestStartup(container, pipelines, context);
         }

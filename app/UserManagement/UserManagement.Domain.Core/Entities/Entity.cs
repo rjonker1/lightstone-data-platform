@@ -13,7 +13,7 @@ namespace UserManagement.Domain.Core.Entities
 
         protected Entity(Guid id)
         {
-            Id = id;
+            Id = id == new Guid() ? Guid.NewGuid() : id;
         }
     }
 }
