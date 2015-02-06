@@ -18,7 +18,7 @@ namespace UserManagement.Infrastructure.NHibernate
         {
             return AutoMap.AssemblyOf<User>(this)
                 //.Where(type => type.IsSubclassOf(typeof (Entity)))
-                .IncludeBase<NamedEntity>()
+                .IncludeBase<NamedEntity>() //todo: need to store duplicated Name column in NamedEntity
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
                 .UseOverridesFromAssemblyOf<UserMappingOverride>();
         }

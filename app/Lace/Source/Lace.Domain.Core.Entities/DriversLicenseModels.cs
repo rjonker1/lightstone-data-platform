@@ -4,13 +4,14 @@ using Lace.Domain.Core.Contracts.DataProviders.DriversLicense;
 
 namespace Lace.Domain.Core.Entities
 {
+
     [Serializable]
     [DataContract]
     public class DrivingLicenseCard : IRespondWithDriversLicenseCard
     {
         public DrivingLicenseCard()
         {
-            
+
         }
 
         public DrivingLicenseCard(IRespondWithIdentityDocument identityDocument, IRespondWithPerson person,
@@ -89,7 +90,7 @@ namespace Lace.Domain.Core.Entities
     {
         public IdentityDocument()
         {
-            
+
         }
         public IdentityDocument(string number, string identityType)
         {
@@ -102,13 +103,13 @@ namespace Lace.Domain.Core.Entities
         [DataMember]
         public string IdentityType { get; private set; }
 
-        [DataMember]
+
         public System.Type Type
         {
             get { return GetType(); }
         }
 
-        [DataMember]
+
         public string TypeName
         {
             get { return GetType().Name; }
@@ -121,7 +122,7 @@ namespace Lace.Domain.Core.Entities
     {
         public Person()
         {
-            
+
         }
 
         public Person(string surname, string initials, string driversRestriction1, string driversRestriction2,
@@ -170,7 +171,7 @@ namespace Lace.Domain.Core.Entities
     {
         public DrivingLicense()
         {
-            
+
         }
 
         public DrivingLicense(string certificateNumber, string countryOfIssue)
@@ -203,7 +204,7 @@ namespace Lace.Domain.Core.Entities
     {
         public Card()
         {
-            
+
         }
 
 
@@ -240,7 +241,7 @@ namespace Lace.Domain.Core.Entities
     {
         public ProfessionalDrivingPermit()
         {
-            
+
         }
 
         public ProfessionalDrivingPermit(string category, string dateValidUntil)
@@ -273,7 +274,7 @@ namespace Lace.Domain.Core.Entities
     {
         public VehicleClass()
         {
-            
+
         }
 
         public VehicleClass(string code, string vehicleRestriction, string firstIssueDate)
@@ -302,4 +303,5 @@ namespace Lace.Domain.Core.Entities
             get { return GetType().Name; }
         }
     }
+
 }

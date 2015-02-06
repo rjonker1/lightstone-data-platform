@@ -21,26 +21,17 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IPackage Package
         {
-            get
-            {
-                return LicensePlateNumberAllRequestPackage.LicenseNumberPackage();
-            }
+            get { return LicensePlateNumberAllRequestPackage.LicenseNumberPackage(); }
         }
 
         public IProvideUserInformationForRequest User
         {
-            get
-            {
-                return new RequestUserInformation();
-            }
+            get { return new RequestUserInformation(); }
         }
 
         public IProvideContextForRequest Context
         {
-            get
-            {
-                return new ContextInformation();
-            }
+            get { return new ContextInformation(); }
         }
 
         public IProvideRequestAggregation RequestAggregation
@@ -50,10 +41,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IProvideVehicleInformationForRequest Vehicle
         {
-            get
-            {
-                return new RequestVehicleInformation();
-            }
+            get { return new RequestVehicleInformation(); }
         }
 
         public IProvideCoOrdinateInformationForRequest CoOrdinates
@@ -73,22 +61,19 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public string SearchTerm
         {
-            get
-            {
-                return "XMC167GP";
-            }
+            get { return "XMC167GP"; }
         }
 
 
 
         public IProvideDriversLicenseInformationForRequest DriversLicense
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public IProvideFicaInformationForRequest Fica
         {
-            get { throw new NotImplementedException(); }
+            get { return null; }
         }
     }
 }

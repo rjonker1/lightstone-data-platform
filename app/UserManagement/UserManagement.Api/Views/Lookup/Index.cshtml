@@ -1,10 +1,13 @@
-﻿@using UserManagement.Api.ViewModels
+﻿@using UserManagement.Api.Modules
+@using UserManagement.Api.ViewModels
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>
+
 @{
     Layout = "Shared/_Layout.cshtml";
 }
 
 @{
-    var viewModel = new PageHeadingViewModel("Contract Durations", "");
+    var viewModel = new PageHeadingViewModel(Model.Name, "");
     var tableId = string.Format("{0}_table", viewModel.Title.Replace(" ", ""));
 }
 @Html.Partial("Shared/PageHeading", viewModel)
@@ -25,7 +28,7 @@
         $(function () {
             var table = $("#@tableId").DataTable({
                 dom: '<"toolbar">frtip',
-                ajax: "/ContractDurations",
+                ajax: "/Lookups/" + "@Model.AssemblyQualifiedName",
                 columns: [
                     { data: "id", visible: false },
                     { data: "name" },

@@ -21,13 +21,14 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<Configuration>().UsingFactoryMethod(() => Fluently.Configure(new Configuration().Configure())
+            container.Register(Component.For<Configuration>().UsingFactoryMethod(() =>
+                Fluently.Configure(new Configuration().Configure())
                 .Mappings(cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()))
                 .ExposeConfiguration(ExportSchemaConfig)
-                .BuildConfiguration()));
+                    .BuildConfiguration()).LifestyleTransient());
 
             container.Register(Component.For<ISessionFactory>()
-                     .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
+                     .UsingFactoryMethod(kernal => kernal.Resolve<Configuration>().BuildSessionFactory())
                      .LifestyleSingleton());
             container.Register(Component.For<ISession>()
                      .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
@@ -40,8 +41,6 @@ namespace UserManagement.Api.Installers
 
             var update = new SchemaUpdate(config);
             update.Execute(false, true);
-
-
 
             //new SchemaExport(config).Drop(false, true);
             //new SchemaExport(config).Create(false, true);

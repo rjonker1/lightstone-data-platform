@@ -3,17 +3,14 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class PlatformStatus : Entity, INamedEntity
+    public class PlatformStatus : NamedEntity
     {
-
-        public virtual string Name { get; set; }
         public virtual string Value { get; set; }
 
         protected PlatformStatus() { }
 
-        public PlatformStatus(Guid id, string val) : base(id)
+        public PlatformStatus(Guid id, string val) : base(id, val)
         {
-            Name = val;
             Value = val;
         }
     }

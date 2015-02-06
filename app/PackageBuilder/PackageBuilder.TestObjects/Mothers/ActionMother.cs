@@ -59,5 +59,25 @@ namespace PackageBuilder.TestObjects.Mothers
                             .Build();
             }
         }
+
+        public static IAction DriversLicenseDecryptionAction
+        {
+            get
+            {
+                return new ActionBuilder()
+                            .With("Drivers License")
+                            .Build();
+            }
+        }
+
+        public static IAction FicaVerificationAction
+        {
+            get
+            {
+                return new ActionBuilder()
+                            .With("Fica")
+                            .Build();
+            }
+        }
     }
 }

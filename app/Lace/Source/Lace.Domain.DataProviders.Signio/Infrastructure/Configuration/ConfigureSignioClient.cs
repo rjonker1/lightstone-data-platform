@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
 
         public ConfigureSignioClient(string content, Guid userId)
         {
-            Operation = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiOperation,userId);
+            Operation = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiOperation(),userId);
             Content = content;
         }
 
@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/xml");
                 client.Headers.Add("X-Auth-Token", XAuthToken);
                 client.Headers.Add(HttpRequestHeader.Authorization,
-                    AuthenticationHeaders.CreateBasicAuthorizationHeader(Username, Password));
+                    AuthenticationHeaders.CreateBasicAuthorizationStringHeader(Username, Password));
                 client.BaseAddress = Url;
 
                 var response = client.UploadString(Operation, Content);

@@ -59,5 +59,10 @@ namespace Lace.Test.Helper.Builders.Responses
         {
             return FakeLighstoneRetrievalData.GetCarInformation(request);
         }
+
+        public string ForSignioDriversLicenseDecryptedResponse()
+        {
+            return FakeSignioDecryptedDriversLicenseResponse.GetDecryptedDriversLicenseXmlResponse();
+        }
     }
 }

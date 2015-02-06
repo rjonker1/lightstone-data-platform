@@ -45,12 +45,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Infrastructure\CallPCubedDataProvider.cs" />
     <Compile Include="Infrastructure\HandlePCubedSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformPCubedResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromPCubedSource.cs" />
     <Compile Include="PCubedDataProvider.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">

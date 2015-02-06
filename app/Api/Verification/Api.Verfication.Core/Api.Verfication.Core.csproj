@@ -42,13 +42,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Contracts\ICallDriversLicenseVerification.cs" />
     <Compile Include="Contracts\ICallFicaVerification.cs" />
     <Compile Include="Contracts\ICallUserManagement.cs" />
     <Compile Include="Contracts\IHaveDriversLicenseDetails.cs" />
     <Compile Include="Contracts\IHaveFicaDetails.cs" />
     <Compile Include="Contracts\IHaveUserManagementDetails.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

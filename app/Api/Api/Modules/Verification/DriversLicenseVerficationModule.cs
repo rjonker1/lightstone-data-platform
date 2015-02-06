@@ -15,8 +15,11 @@ namespace Api.Modules.Verification
         {
 
             Get["/driversLicenseVerification"] =
-                _ =>
-                    _metaData.AsJsonString();
+                _ => new
+                {
+                    _request,
+                    _response
+                }.AsJsonString();
 
             Post["/driversLicenseVerification/"] = _ =>
             {
@@ -26,7 +29,7 @@ namespace Api.Modules.Verification
             };
         }
 
-        private readonly IHaveDriversLicenseResponse _metaData =
+        private readonly IHaveDriversLicenseResponse _response =
             new DriversLicenseResponseDto(new DrivingLicenseCard(new IdentityDocument(string.Empty, string.Empty),
                 new Person(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
                     string.Empty),
@@ -39,6 +42,6 @@ namespace Api.Modules.Verification
                 new VehicleClass(string.Empty, string.Empty, string.Empty),
                 string.Empty, string.Empty, string.Empty), string.Empty);
 
-        private readonly IHaveDriversLicenseRequest _requestMetaData = new DriversLicenseRequestDto(string.Empty, string.Empty, string.Empty, Guid.Empty);
+        private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty, string.Empty, Guid.Empty);
     }
 }
