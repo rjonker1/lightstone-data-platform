@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageAdapter.cs" />
-    <Compile Include="NHibernate\AutoPersistenceModel.cs" />
     <Compile Include="NHibernate\Conventions\AuditLogConvention.cs" />
     <Compile Include="NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="NHibernate\Conventions\CustomForeignAndSubclassKeyConvention.cs" />
