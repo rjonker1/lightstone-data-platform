@@ -38,7 +38,7 @@
     <script src="~/Scripts/jquery.form.min.js"></script>
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
-        $.ajaxSetup({ cache: false });
+        $.ajaxSetup({ global: true, cache: false });
 
         $(".chosen-select").chosen();
         $(function () {
@@ -113,10 +113,10 @@
             $(".toolbar-add").on("click", function () {
                 var $self = $(this);
                 var url = $self.data('url');
-                $.ajaxSetup({ cache: false });
 
                 $.get(url, function (response) {
                     $("#container").html(response);
+                    ReinitializeComponents();
                 });
             });
             $('form').ajaxForm(options);
