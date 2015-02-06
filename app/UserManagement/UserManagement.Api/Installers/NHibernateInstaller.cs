@@ -15,21 +15,16 @@ using UserManagement.Infrastructure.NHibernate.Conventions;
 
 namespace UserManagement.Api.Installers
 {
-   
+
 
     public class NHibernateInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<Configuration>().UsingFactoryMethod(() => Fluently.Configure(new Configuration().Configure())
-                .Mappings(cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()
-                    .Conventions.Add < AuditLogConvention>() )
-                )
-                
+                .Mappings(cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()))
                 .ExposeConfiguration(ExportSchemaConfig)
                 .BuildConfiguration()));
-
-
 
             container.Register(Component.For<ISessionFactory>()
                      .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())
@@ -46,7 +41,7 @@ namespace UserManagement.Api.Installers
             var update = new SchemaUpdate(config);
             update.Execute(false, true);
 
-            
+
 
             //new SchemaExport(config).Drop(false, true);
             //new SchemaExport(config).Create(false, true);
