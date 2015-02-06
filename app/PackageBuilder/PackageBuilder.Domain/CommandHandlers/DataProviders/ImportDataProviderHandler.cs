@@ -21,11 +21,22 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
         {
             this.Info(() => "Attempting to import data providers");
 
-            _publisher.Publish(new CreateDataProvider(DefaultIvidResponse(), Guid.NewGuid(), DataProviderName.Ivid, DataProviderName.Ivid.ToString(), 0d, typeof(IProvideDataFromIvid), "Owner", DateTime.UtcNow));
-            _publisher.Publish(new CreateDataProvider(new IvidTitleHolderResponse(), Guid.NewGuid(), DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d, typeof(IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
-            _publisher.Publish(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(), DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d, typeof(IProvideDataFromLightstone), "Owner", DateTime.UtcNow));
-            _publisher.Publish(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt, DataProviderName.Rgt.ToString(), 0d, typeof(IProvideDataFromRgt), "Owner", DateTime.UtcNow));
-            _publisher.Publish(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin, DataProviderName.RgtVin.ToString(), 0d, typeof(IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(DefaultIvidResponse(), Guid.NewGuid(), DataProviderName.Ivid,
+                DataProviderName.Ivid.ToString(), 0d, typeof (IProvideDataFromIvid), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new IvidTitleHolderResponse(), Guid.NewGuid(),
+                DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d,
+                typeof (IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(),
+                DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d,
+                typeof (IProvideDataFromLightstone), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt,
+                DataProviderName.Rgt.ToString(), 0d, typeof (IProvideDataFromRgt), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin,
+                DataProviderName.RgtVin.ToString(), 0d, typeof (IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
+
+            _publisher.Publish(new CreateDataProvider(DefaultSignioDriversLicenseDecryptionResponse(), Guid.NewGuid(),
+                DataProviderName.SignioDecryptDriversLicense, DataProviderName.SignioDecryptDriversLicense.ToString(),
+                0d, typeof (IProvideDataFromSignioDriversLicenseDecryption), "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }
@@ -35,6 +46,15 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             var ivid = new IvidResponse();
             ivid.BuildSpecificInformation();
             return ivid;
+        }
+
+        private static SignioDriversLicenseDecryptionResponse DefaultSignioDriversLicenseDecryptionResponse()
+        {
+            return
+                new SignioDriversLicenseDecryptionResponse(
+                    new DrivingLicenseCard(new IdentityDocument(), new Person(), new DrivingLicense(), new Card(),
+                        new ProfessionalDrivingPermit(), new VehicleClass(), new VehicleClass(), new VehicleClass(),
+                        new VehicleClass(), string.Empty, string.Empty, string.Empty), string.Empty);
         }
 
         private LightstoneResponse DefaultLightstoneResponse()
@@ -52,7 +72,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             vehicleValuation.AddConfidence(new[] { new ConfidenceModel("", 0, 0d) });
             vehicleValuation.AddAmortisedValues(new[] { new AmortisedValueModel("", 0m) });
             vehicleValuation.AddImageGauages(new[] { new ImageGaugeModel(null, null, null, null, "") });
-            vehicleValuation.AddEstimatedValue(new[] { new EstimatedValueModel("", "", "", "", "") });
+            vehicleValuation.AddEstimatedValue(new[] { new EstimatedValueModel() });
             vehicleValuation.AddLastFiveSales(new[] { new SaleModel("", "", "") });
             return new LightstoneResponse(0, 0, "", "", "", "", "", vehicleValuation);
         }
