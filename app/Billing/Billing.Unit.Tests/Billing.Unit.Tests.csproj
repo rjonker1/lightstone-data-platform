@@ -63,14 +63,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.581\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.55\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.1.0.0.581\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
@@ -122,7 +114,7 @@
     <Compile Include="Api\AsUnautorisedUser.cs" />
     <Compile Include="Connectors\when_pinging_the_billing_api_and_the_url_is_not_found.cs" />
     <Compile Include="Connectors\when_pinging_the_billing_api.cs" />
-    <Compile Include="Consumers\Billing\when_receiving_a_bill_transaction_message_and_an_exiting_transaction_exists.cs" />
+    <None Include="Consumers\Billing\when_receiving_a_bill_transaction_message_and_an_exiting_transaction_exists.cs.to.be.re.added" />
     <Compile Include="Consumers\Billing\when_receiving_a_bill_transaction_message_and_no_exiting_transaction_exists.cs" />
     <Compile Include="Api\TestingBootstrapper.cs" />
     <Compile Include="Api\Transaction\TransactionModuleTestBase.cs" />

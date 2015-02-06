@@ -356,7 +356,7 @@
 				<dependency id="Common.Logging" version="2.1.2" />
 			</dependencies>
 		</nuget>
-    <!--<nuget deploy="false">
+    <nuget deploy="false">
       <name>Lightstone.Dataplatform.Shared.Public.TestHelpers</name>
       <folder>app/Shared/Shared.Public.TestHelpers</folder>
       <author>CustomApp</author>
@@ -372,7 +372,7 @@
         <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
         <dependency id="Moq" version="4.0.10827" />
       </dependencies>
-    </nuget>-->
+    </nuget>
 		<!-- SHARED END -->
 
 
