@@ -154,7 +154,6 @@
     <Compile Include="Handlers\Contracts\IHandleUserManagementRequests.cs" />
     <Compile Include="Handlers\DriversLicenseVerificationHandler.cs" />
     <Compile Include="Handlers\FicaVerificationHandler.cs" />
-    <Compile Include="Handlers\TestHandler.cs" />
     <Compile Include="Handlers\UserManagementHandler.cs" />
     <Compile Include="Services\DriversLicenseVerificationService.cs" />
     <Compile Include="Services\FicaVerificationService.cs" />
