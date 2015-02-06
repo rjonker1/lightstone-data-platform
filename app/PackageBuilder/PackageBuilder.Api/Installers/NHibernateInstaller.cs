@@ -38,7 +38,9 @@ namespace PackageBuilder.Api.Installers
                             .UseOverridesFromAssemblyOf<PackageMappingOverride>());
                     //.Conventions.Add<>());
                     //cfg.FluentMappings.AddFromAssemblyOf<Entity>();
-                }).ExposeConfiguration(TreatConfiguration).BuildConfiguration()));
+                })
+                .ExposeConfiguration(TreatConfiguration).BuildConfiguration()));
+                
 
             container.Register(Component.For<ISessionFactory>()
                 .UsingFactoryMethod(kernal => container.Resolve<Configuration>().BuildSessionFactory())

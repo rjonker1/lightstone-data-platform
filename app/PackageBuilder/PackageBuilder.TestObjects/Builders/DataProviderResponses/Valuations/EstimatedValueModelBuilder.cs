@@ -5,25 +5,28 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses.Valuations
 {
     public class EstimatedValueModelBuilder
     {
-        private string _estimatedValue;
-        private string _estimatedLow;
-        private string _estimatedHigh;
-        private string _confidenceValue;
-        private string _confidenceLevel;
+        private string _retailEstimatedValue;
+        private string _retailEstimatedLow;
+        private string _retailEstimatedHigh;
+        private string _retailConfidenceValue;
+        private string _retailConfidenceLevel;
 
         public IRespondWithEstimatedValueModel Build()
         {
-            return new EstimatedValueModel(_estimatedValue, _estimatedLow, _estimatedHigh, _confidenceValue, _confidenceLevel);
+            var model = new EstimatedValueModel();
+            model.SetRetailEstimatedValues(_retailEstimatedValue, _retailEstimatedLow, _retailEstimatedHigh, _retailConfidenceValue, _retailConfidenceLevel);
+            return model;
         }
 
-        public EstimatedValueModelBuilder With(string estimatedValue, string estimatedLow, string estimatedHigh,
-            string confidenceValue, string confidenceLevel)
+        public EstimatedValueModelBuilder With(string retailEstimatedValue, string retailEstimatedLow,
+            string retailEstimatedHigh,
+            string retailConfidenceValue, string retailConfidenceLevel)
         {
-            _estimatedValue = estimatedValue;
-            _estimatedLow = estimatedLow;
-            _estimatedHigh = estimatedHigh;
-            _confidenceValue = confidenceValue;
-            _confidenceLevel = confidenceLevel;
+            _retailEstimatedValue = retailEstimatedValue;
+            _retailEstimatedLow = retailEstimatedLow;
+            _retailEstimatedHigh = retailEstimatedHigh;
+            _retailConfidenceValue = retailConfidenceValue;
+            _retailConfidenceLevel = retailConfidenceLevel;
             return this;
         }
     }
