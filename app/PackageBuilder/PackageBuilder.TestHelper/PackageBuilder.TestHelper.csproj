@@ -62,12 +62,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.581\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.308\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.308\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
