@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Domain.Entit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.TestHelper", "UserManagement\UserManagement.TestHelper\UserManagement.TestHelper.csproj", "{0199B050-C976-4A15-800C-284891A7BDD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuditLogTests", "UserManagement\UserManagement.Auditlog.Tests\AuditLogTests\AuditLogTests.csproj", "{03A18B88-743B-49F7-8E9F-2DEAAEF57009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{0199B050-C976-4A15-800C-284891A7BDD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0199B050-C976-4A15-800C-284891A7BDD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0199B050-C976-4A15-800C-284891A7BDD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A18B88-743B-49F7-8E9F-2DEAAEF57009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A18B88-743B-49F7-8E9F-2DEAAEF57009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A18B88-743B-49F7-8E9F-2DEAAEF57009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A18B88-743B-49F7-8E9F-2DEAAEF57009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,5 +103,6 @@ Global
 		{5DE944C7-90FF-4FD0-913E-44AEF7158562} = {A7728004-43F0-4FB1-80FF-834122E36ADB}
 		{8B7A9825-9DFD-446B-83B8-A8D55A4A2E67} = {A7728004-43F0-4FB1-80FF-834122E36ADB}
 		{0199B050-C976-4A15-800C-284891A7BDD0} = {7B42DB83-4424-4E54-A616-068292873944}
+		{03A18B88-743B-49F7-8E9F-2DEAAEF57009} = {7B42DB83-4424-4E54-A616-068292873944}
 	EndGlobalSection
 EndGlobal

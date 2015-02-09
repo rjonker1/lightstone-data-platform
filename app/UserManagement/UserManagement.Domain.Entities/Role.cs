@@ -13,5 +13,11 @@ namespace UserManagement.Domain.Entities
         {
             Value = val;
         }
+
+        public virtual void UpdateValue(string value)
+        {
+            Value = value;
+            base.Name = value;
+        }
     }
 }
