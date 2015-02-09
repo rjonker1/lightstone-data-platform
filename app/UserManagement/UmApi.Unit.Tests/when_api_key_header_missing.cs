@@ -1,6 +1,5 @@
 ﻿using Nancy.Testing;
 using Shared.BuildingBlocks.Api.Security;
-using UmApi.Modules;
 using Xunit.Extensions;
 
 namespace UmApi.Unit.Tests
@@ -9,7 +8,7 @@ namespace UmApi.Unit.Tests
     {
         private readonly Browser _browser = new Browser(cfg =>
         {
-            cfg.Module<AuthModule>();
+            //cfg.Module<AuthModule>();
             var fakeAuthenticator = new TestNullAuthenticator();
             cfg.Dependency<IAuthenticateUser>(fakeAuthenticator);
         });
