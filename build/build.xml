@@ -259,6 +259,7 @@
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
         <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
+        <include pattern="ServiceStack.Common.dll" to="lib\net45" />
         <include pattern="ServiceStack.Text.dll" to="lib\net45" />       
 			</includes>
 			<dependencies>
