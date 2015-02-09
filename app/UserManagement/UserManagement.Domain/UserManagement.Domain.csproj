@@ -60,7 +60,7 @@
     <Compile Include="CommandHandlers\CreateSources\CreateCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\CustomerProfiles\CreateCustomerProfileHandler.cs" />
-    <Compile Include="CommandHandlers\Customers\CreateCustomerHandler.cs" />
+    <Compile Include="CommandHandlers\Customers\CreateUpdateCustomerHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />

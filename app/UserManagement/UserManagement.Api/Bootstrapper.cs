@@ -3,6 +3,7 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
@@ -67,8 +68,7 @@ namespace UserManagement.Api
         //Updates schema if there are any structural changes
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            //pipelines.EnableCors(); // cross origin resource sharing
-
+            pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
             pipelines.AddProvincesToViewBag(container, context);
 

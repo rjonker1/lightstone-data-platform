@@ -26,39 +26,34 @@ namespace UserManagement.Api.Modules
             Post["/Customers"] = _ =>
             {
                 var customerDto = this.Bind<CustomerDto>();
-                var province = provinces.Select(x => x).Where(x => x.Name == "Gauteng");
-                var provId = province.Select(x => x.Id).FirstOrNull().ToString();
-                var provName = province.Select(x => x.Name).FirstOrNull().ToString();
+                var province = provinces.FirstOrDefault(x => x.Id == customerDto.Id);
 
-                bus.Publish(new CreateCustomer(customerDto.CustomerName, customerDto.AccountOwnerName, customerDto.Province));
+                bus.Publish(new CreateUpdateCustomer(customerDto.CustomerName, customerDto.AccountOwnerName, province));
 
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
             };
 
-            Get["/Put/{id}"] = _ =>
+            Get["/Customers/{id}"] = parameters =>
             {
-                return View["CustomerSave", new CustomerDto()];
+                var guid = (Guid)parameters.id;
+
+                var customer = customers.FirstOrDefault(x => x.Id == guid);
+                return View["CustomerSave", new CustomerDto{Id= customer.Id, CustomerName = customer.CustomerName, AccountOwnerName = customer.AccountOwnerName}];
             };
 
-            Get["/Customers/{id}"] = _ =>
+            Put["/Customers/{id}"] = _ =>
             {
-                return View["CustomerSave", new CustomerDto()];
+                var model = this.Bind<CustomerDto>();
+                var province = provinces.FirstOrDefault(x => x.Id == model.Id);
+
+                bus.Publish(new CreateUpdateCustomer(model.Id, model.CustomerName, model.AccountOwnerName, province));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
             };
-
-            Get["/Customers/Create"] = _ =>
-            {
-                var province = provinces.Select(x => x).Where(x => x.Name == "Gauteng");
-                var provId = province.Select(x => x.Id).FirstOrNull().ToString();
-                var provName = province.Select(x => x.Name).FirstOrNull().ToString();
-
-                bus.Publish(new CreateCustomer("Testeroonie Inc. Global", "Random account owner", new Province(new Guid(provId), provName)));
-
-                return "Success!";
-            };
-
-            
         }
     }
 }

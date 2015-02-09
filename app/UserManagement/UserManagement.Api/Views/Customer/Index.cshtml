@@ -4,44 +4,33 @@
 @using UserManagement.Domain.Dtos
 @*@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>*@
 
-@*@{
-    Layout = "Shared/_Layout.cshtml";
-}*@
 @Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Customers", ""))
-@*@Html.Partial("Customer/Grid")*@
 
 <table id="customers_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Value</th>
+            <th>Customer Name</th>
+            <th>Account Owner Name</th>
             <th></th>
         </tr>
     </thead>
 </table>
 
 <script>
-        //(function () {
-            var table = $("#customers_table").DataTable({
-                dom: '<"table-toolbar">frtip',
-                retrieve: true,
-                ajax: "/Customers",
-                columns: [
-                    { data: "id", visible: false },
-                    { data: "customerName" },
-                    { data: "accountOwnerName" },
-                    { data: null, defaultContent: "<button class='btn btn-primary'>Edit</button>" }
-                ]
-            });
+    var table = $("#customers_table").DataTable({
+        dom: '<"table-toolbar">frtip',
+        retrieve: true,
+        ajax: "/Customers",
+        columns: [
+            { data: "id", visible: false },
+            { data: "customerName" },
+            { data: "accountOwnerName" },
+            { data: null, defaultContent: "<button class='btn btn-primary entity-edit' data-url='/Customers/'>Edit</button>" }
+        ]
+    });
 
-            $("div.table-toolbar").html("<button class='btn btn-default toolbar-add' data-url='/Customers/@Guid.Empty'>Add</button>");
-
-            $('#customers_table tbody').on('click', 'button', function () {
-                var data = table.row($(this).parents('tr')).data();
-                alert(data.id + " - " + data.name);
-            });
-        //})();
+    $("div.table-toolbar").html("<button class='btn btn-default entity-add' data-url='/Customers/@Guid.Empty'>Add</button>");
 </script>
 
 @*@section Scripts{
@@ -62,13 +51,13 @@
                     { data: null, defaultContent: "<button class='btn btn-primary'>Edit</button>" }
                 ]
             });
-            
+
             $("div.table-toolbar").html("<button class='btn btn-default toolbar-add' data-url='/Customers/@Guid.Empty'>Add</button>");
-            
+
             $('#customers_table tbody').on('click', 'button', function () {
                 var data = table.row($(this).parents('tr')).data();
                 alert(data.id + " - " + data.name);
             });*@
-        @*});
+@*});
     </script>*@
 @*}*@

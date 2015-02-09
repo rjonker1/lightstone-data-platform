@@ -53,7 +53,7 @@
     <Compile Include="Commands\CreateSources\CreateCreateSource.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\CustomerProfiles\CreateCustomerProfile.cs" />
-    <Compile Include="Commands\Customers\CreateCustomer.cs" />
+    <Compile Include="Commands\Customers\CreateUpdateCustomer.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\Packages\CreatePackage.cs" />

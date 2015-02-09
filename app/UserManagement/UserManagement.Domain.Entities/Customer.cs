@@ -25,5 +25,12 @@ namespace UserManagement.Domain.Entities
             //CustomerProfile = customerProfile;
             //Users = users;
         }
+
+        public virtual void UpdateCustomer(string customerName, string accountOwnerName, Province province)
+        {
+            CustomerName = customerName;
+            AccountOwnerName = accountOwnerName;
+            Province = province;
+        }
     }
 }

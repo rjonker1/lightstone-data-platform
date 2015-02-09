@@ -110,11 +110,20 @@
         function ReinitializeComponents() {
             ExecuteScriptsFromAjaxResponse();
             $(".chosen-select").chosen();
-            $(".toolbar-add").on("click", function () {
+            $(".entity-add").on("click", function () {
                 var $self = $(this);
                 var url = $self.data('url');
 
                 $.get(url, function (response) {
+                    $("#container").html(response);
+                    ReinitializeComponents();
+                });
+            });
+            $('table tbody').on('click', 'button.entity-edit', function () {
+                var $self = $(this);
+                var url = $self.data('url');
+                var data = table.row($(this).parents('tr')).data();
+                $.get(url + data.id, function (response) {
                     $("#container").html(response);
                     ReinitializeComponents();
                 });
