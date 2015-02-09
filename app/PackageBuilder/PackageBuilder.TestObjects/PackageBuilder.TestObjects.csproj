@@ -131,6 +131,7 @@
     <Compile Include="Mothers\PackageDtoMother.cs" />
     <Compile Include="Mothers\ReadDataProviderMother.cs" />
     <Compile Include="Mothers\ReadPackageMother.cs" />
+    <Compile Include="Mothers\DataProviderResponses\SignioResponseMother.cs" />
     <Compile Include="Mothers\StateMother.cs" />
     <Compile Include="Mothers\UserMother.cs" />
     <Compile Include="Mothers\WriteDataProviderMother.cs" />

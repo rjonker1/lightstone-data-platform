@@ -19,12 +19,12 @@ namespace Api.Modules
 {
     public class IndexModule : SecureModule
     {
-        public IndexModule(IPbApiClient pbApiClient, IEntryPoint entryPoint, IConnectToBilling billingConnector)
+        public IndexModule(IPbApiClient packageBuilderApi, IEntryPoint entryPoint, IConnectToBilling billingConnector)
         {
             Get["/"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();
-                var metaData = pbApiClient.Get<ApiMetaData>(token, "getUserMetaData");
+                var metaData = packageBuilderApi.Get<ApiMetaData>(token, "getUserMetaData");
 
                 return Response.AsJson(metaData);
             };
@@ -32,7 +32,7 @@ namespace Api.Modules
             Post["/action/{action}"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();
-                var packageResponse = pbApiClient.Get<Package>(token, "package/" + parameters.action);
+                var packageResponse = packageBuilderApi.Get<Package>(token, "package/" + parameters.action);
 
                 var package = Mapper.DynamicMap<IPackage>(packageResponse);
                 var vehicle = this.Bind<Vehicle>();

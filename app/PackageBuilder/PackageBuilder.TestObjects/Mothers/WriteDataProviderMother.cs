@@ -89,5 +89,31 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static DataProvider SignioDriversLicenseDataProvider
+        {
+            get
+            {
+                return new WriteDataProviderBuilder()
+                    .With(DataProviderName.SignioDecryptDriversLicense)
+                    .With("Signio")
+                    .With(10d)
+                    .With(typeof(IProvideDataFromSignioDriversLicenseDecryption))
+                    .Build();
+            }
+        }
+
+        public static DataProvider PCubedFicaDataProvider
+        {
+            get
+            {
+                return new WriteDataProviderBuilder()
+                    .With(DataProviderName.PCubedFica)
+                    .With("PCubed")
+                    .With(10d)
+                    .With(typeof(IProvideDataFromPCubedFicaVerfication))
+                    .Build();
+            }
+        }
     }
 }

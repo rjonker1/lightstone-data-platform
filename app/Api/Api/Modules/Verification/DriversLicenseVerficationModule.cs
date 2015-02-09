@@ -17,7 +17,7 @@ namespace Api.Modules.Verification
 {
     public class DriversLicenseVerficationModule : VerificationSecureModule
     {
-        public DriversLicenseVerficationModule(IPbApiClient pbApiClient,
+        public DriversLicenseVerficationModule(IPbApiClient packageBuilderApi,
             IHandleDriversLicenseVerficationRequests handler, IConnectToBilling billingConnector)
         {
 
@@ -31,7 +31,7 @@ namespace Api.Modules.Verification
             Post["/driversLicenseVerification/{packageId}/{packageVersion}"] = _ =>
             {
                 var token = Context.AuthorizationHeaderToken();
-                var packageResponse = pbApiClient.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
+                var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
 
                 var package = Mapper.DynamicMap<IPackage>(packageResponse);
                 var request = this.Bind<DriversLicenseRequestDto>();
@@ -68,5 +68,7 @@ namespace Api.Modules.Verification
 
         private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty,
             string.Empty, Guid.Empty);
+
+        private readonly I
     }
 }

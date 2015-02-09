@@ -32,9 +32,9 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new ActionBuilder()
-                            .With("License Scan")
-                            .With(DataFieldMother.ColourCode)
-                            .Build();
+                    .With("License Scan")
+                    .With(DataFieldMother.ColourCode)
+                    .Build();
             }
         }
 
@@ -60,16 +60,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static IAction DriversLicenseDecryptionAction
-        {
-            get
-            {
-                return new ActionBuilder()
-                            .With("Drivers License")
-                            .Build();
-            }
-        }
-
+      
         public static IAction FicaVerificationAction
         {
             get
