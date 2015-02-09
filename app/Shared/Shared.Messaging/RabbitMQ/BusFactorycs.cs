@@ -1,7 +1,7 @@
 ﻿using NServiceBus;
 using NServiceBus.Features;
 
-namespace DataPlatform.Shared.RabbitMQ
+namespace DataPlatform.Shared.Messaging.RabbitMQ
 {
     public class BusFactory
     {
