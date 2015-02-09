@@ -319,7 +319,6 @@
 				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-        <dependency id="Common.Logging" version="2.1.2.0" />
         <dependency id="Iesi.Collections" version="4.0.1.4000" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
         <dependency id="NServiceBus" version="5.0.1" />
