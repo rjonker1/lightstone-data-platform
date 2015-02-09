@@ -17,10 +17,11 @@ namespace DataPlatform.Shared.RabbitMQ
             var configuration = new BusConfiguration();
 
             configuration.UseTransport<RabbitMQTransport>();
+            configuration.UsePersistence<NHibernatePersistence>();
             configuration.DisableFeature<TimeoutManager>();
             configuration.Conventions()
                 .DefiningCommandsAs(
-                    c => c.Namespace != null && c.Namespace.StartsWith(_namespace));
+                    c => c.Namespace != null && c.Namespace.EndsWith(_namespace));
             var bus = Bus.Create(configuration);
             return bus;
         }

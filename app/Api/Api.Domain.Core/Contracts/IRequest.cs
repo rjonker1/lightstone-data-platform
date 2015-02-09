@@ -1,6 +1,6 @@
 ﻿using Nancy;
 
-namespace Api.Core
+namespace Api.Domain.Core.Contracts
 {
     public interface IRequest
     {

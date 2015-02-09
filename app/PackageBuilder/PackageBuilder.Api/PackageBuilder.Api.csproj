@@ -71,17 +71,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.518, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.518\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.581\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.518, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.518\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.581\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.523, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.523\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.581\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.505\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
@@ -150,6 +150,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ReadModels\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\SignioResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderOverrideMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldDtoMap.cs" />

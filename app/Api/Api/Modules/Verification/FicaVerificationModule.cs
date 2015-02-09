@@ -1,9 +1,9 @@
 ﻿using System;
-using Api.Extensions;
 using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Commands;
 using Api.Verfication.Infrastructure.Dto;
 using Api.Verfication.Infrastructure.Handlers.Contracts;
+using Lace.Shared.Extensions;
 using Nancy.ModelBinding;
 
 namespace Api.Modules.Verification

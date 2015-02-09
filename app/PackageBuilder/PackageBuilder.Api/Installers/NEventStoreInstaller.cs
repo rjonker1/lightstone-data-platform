@@ -19,6 +19,7 @@ namespace PackageBuilder.Api.Installers
             container.Register(Component.For<IDispatchCommits>().ImplementedBy<InMemoryDispatcher>().LifestyleTransient());
 
             var eventStore = Wireup.Init()
+                .LogToConsoleWindow()
                 //.UsingRavenPersistence("packageBuilder/database")
                 .UsingSqlPersistence("packageBuilder")
                 .WithDialect(new MsSqlDialect())

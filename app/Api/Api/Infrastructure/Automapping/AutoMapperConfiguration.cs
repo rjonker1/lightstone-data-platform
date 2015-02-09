@@ -1,4 +1,4 @@
-﻿using Api.Core;
+﻿using Api.Domain.Core.Contracts;
 using AutoMapper;
 using Nancy;
 using Newtonsoft.Json;

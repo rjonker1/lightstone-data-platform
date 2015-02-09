@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.581\lib\net45\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="CsQuery, Version=1.3.3.249, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
@@ -47,29 +51,21 @@
     <Reference Include="FluentMigrator.Runner">
       <HintPath>..\..\packages\FluentMigrator.Runner.1.2.1.0\lib\40\FluentMigrator.Runner.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.581\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.581\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.55\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.581\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Public, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.55\lib\net45\Lightstone.DataPlatform.Shared.Public.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.55\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.1.0.0.55\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Workflow.1.0.0.581\lib\net45\Lightstone.DataPlatform.Workflow.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -118,7 +114,7 @@
     <Compile Include="Api\AsUnautorisedUser.cs" />
     <Compile Include="Connectors\when_pinging_the_billing_api_and_the_url_is_not_found.cs" />
     <Compile Include="Connectors\when_pinging_the_billing_api.cs" />
-    <Compile Include="Consumers\Billing\when_receiving_a_bill_transaction_message_and_an_exiting_transaction_exists.cs" />
+    <None Include="Consumers\Billing\when_receiving_a_bill_transaction_message_and_an_exiting_transaction_exists.cs.to.be.re.added" />
     <Compile Include="Consumers\Billing\when_receiving_a_bill_transaction_message_and_no_exiting_transaction_exists.cs" />
     <Compile Include="Api\TestingBootstrapper.cs" />
     <Compile Include="Api\Transaction\TransactionModuleTestBase.cs" />

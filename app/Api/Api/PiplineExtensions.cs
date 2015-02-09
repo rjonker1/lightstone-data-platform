@@ -1,5 +1,5 @@
 ﻿using System;
-using Api.Core;
+using Api.Domain.Core.Contracts;
 using AutoMapper;
 using Common.Logging;
 using Nancy;

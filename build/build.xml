@@ -319,7 +319,13 @@
 				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-
+        <dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="Iesi.Collections" version="4.0.1.4000" />
+        <dependency id="Newtonsoft.Json" version="6.0.5" />
+        <dependency id="NServiceBus" version="5.0.1" />
+        <dependency id="NServiceBus.NHibernate" version="6.0.0" />
+        <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
+        <dependency id="RabbitMQ.Client" version="3.3.5" />
 			</dependencies>
 		</nuget>
 		<nuget deploy="false">
@@ -356,7 +362,7 @@
 				<dependency id="Common.Logging" version="2.1.2" />
 			</dependencies>
 		</nuget>
-    <!--<nuget deploy="false">
+    <nuget deploy="false">
       <name>Lightstone.Dataplatform.Shared.Public.TestHelpers</name>
       <folder>app/Shared/Shared.Public.TestHelpers</folder>
       <author>CustomApp</author>
@@ -372,7 +378,7 @@
         <dependency id="FluentMigrator.Runner" version="1.2.1.0" />
         <dependency id="Moq" version="4.0.10827" />
       </dependencies>
-    </nuget>-->
+    </nuget>
 		<!-- SHARED END -->
 
 

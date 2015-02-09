@@ -2,23 +2,31 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using FluentNHibernate.Cfg;
+using FluentNHibernate.Conventions;
+using FluentNHibernate.Conventions.AcceptanceCriteria;
+using FluentNHibernate.Conventions.Inspections;
+using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using UserManagement.Domain.Core.NHibernate.Interceptors;
 using UserManagement.Infrastructure.NHibernate;
+using UserManagement.Infrastructure.NHibernate.Conventions;
 
 namespace UserManagement.Api.Installers
 {
+
+
     public class NHibernateInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<Configuration>().UsingFactoryMethod(() =>
                 Fluently.Configure(new Configuration().Configure())
-                    .Mappings(cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()))
-                    .ExposeConfiguration(ExportSchemaConfig)
+                .Mappings(cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()))
+                .ExposeConfiguration(ExportSchemaConfig)
                     .BuildConfiguration()).LifestyleTransient());
-            
+
             container.Register(Component.For<ISessionFactory>()
                      .UsingFactoryMethod(kernal => kernal.Resolve<Configuration>().BuildSessionFactory())
                      .LifestyleSingleton());
@@ -29,7 +37,9 @@ namespace UserManagement.Api.Installers
 
         protected virtual void ExportSchemaConfig(Configuration config)
         {
+            config.SetInterceptor(new TrackingInterceptor());
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
+
             var update = new SchemaUpdate(config);
             update.Execute(false, true);
 
