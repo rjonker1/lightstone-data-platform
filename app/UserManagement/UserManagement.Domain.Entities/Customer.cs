@@ -7,7 +7,11 @@ namespace UserManagement.Domain.Entities
     {
         public virtual string CustomerName { get; protected internal set; }
         public virtual string AccountOwnerName { get; protected internal set; }
-
+        public virtual Billing Billing { get; set; }
+        public virtual CommercialState CommercialState { get; set; }
+        public virtual CreateSource CreateSource { get; set; }
+        public virtual PlatformStatus PlatformStatus { get; set; }
+        public virtual ProfileDetail ProfileDetail { get; set; }
         public virtual Province Province { get; protected internal set; }
         //public virtual CustomerProfile CustomerProfile { get; set; }
         //public virtual IList<User> Users { get; protected internal set; }

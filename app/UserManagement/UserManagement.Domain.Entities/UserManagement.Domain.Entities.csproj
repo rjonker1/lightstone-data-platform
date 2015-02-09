@@ -85,7 +85,6 @@
     <Compile Include="ContractType.cs" />
     <Compile Include="CreateSource.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="CustomerProfile.cs" />
     <Compile Include="EscalationType.cs" />
     <Compile Include="IClient.cs" />
     <Compile Include="IClientUser.cs" />

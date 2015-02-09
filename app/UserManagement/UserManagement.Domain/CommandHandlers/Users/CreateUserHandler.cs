@@ -10,7 +10,6 @@ namespace UserManagement.Domain.CommandHandlers.Users
 {
     public class CreateUserHandler : AbstractMessageHandler<CreateUser>
     {
-
         private readonly IRepository<User> _repository;
         private readonly ISession _session;
         private readonly IRepository<ClientUser> _clientUserRepo;
@@ -26,7 +25,6 @@ namespace UserManagement.Domain.CommandHandlers.Users
 
         public override void Handle(CreateUser command)
         {
-
             var clientId = new Guid();
             var clientName = "";
 
@@ -38,7 +36,7 @@ namespace UserManagement.Domain.CommandHandlers.Users
 
             var client = new Client(clientId, clientName);
 
-            var newUser = new User(command.Id, command.FirstCreateDate, command.LastUpdateBy, command.LastUpdateDate,
+            var newUser = new User(command.Id,
                 command.Password, command.UserName, command.IsActive,
                 //command.Clients,
                 command.UserType,

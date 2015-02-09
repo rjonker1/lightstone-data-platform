@@ -273,7 +273,6 @@
     <Compile Include="Modules\ContractTypeModule.cs" />
     <Compile Include="Modules\CreateSourceModule.cs" />
     <Compile Include="Modules\CustomerModule.cs" />
-    <Compile Include="Modules\CustomerProfileModule.cs" />
     <Compile Include="Modules\EscalationTypeModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\LookupModule.cs" />
