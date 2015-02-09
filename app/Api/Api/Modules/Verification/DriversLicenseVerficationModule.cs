@@ -68,7 +68,5 @@ namespace Api.Modules.Verification
 
         private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty,
             string.Empty, Guid.Empty);
-
-        private readonly I
     }
 }
