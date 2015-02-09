@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UserManagement.Domain.Core.Commands;
 
 namespace UserManagement.Domain.Entities.Commands.Customers
@@ -9,29 +8,36 @@ namespace UserManagement.Domain.Entities.Commands.Customers
         public Guid Id;
         public string CustomerName;
         public string AccountOwnerName;
-
-        public Province Province;
+        public CommercialState CommercialState;
+        public CreateSource CreateSource;
+        public PlatformStatus PlatformStatus;
         //public virtual CustomerProfile CustomerProfile { get; set; }
         //public virtual IList<User> Users { get; set; }
 
-        public CreateUpdateCustomer(string customerName, string accountOwnerName, Province province
+        public CreateUpdateCustomer(string customerName, string accountOwnerName, CommercialState commercialState,
+            CreateSource createSource, PlatformStatus platformStatus
             //CustomerProfile customerProfile, IList<User> users
             )
         {
             CustomerName = customerName;
             AccountOwnerName = accountOwnerName;
-            Province = province;
+            CommercialState = commercialState;
+            CreateSource = createSource;
+            PlatformStatus = platformStatus;
             //CustomerProfile = customerProfile;
             //Users = users;
         }
-        public CreateUpdateCustomer(Guid id, string customerName, string accountOwnerName, Province province
+        public CreateUpdateCustomer(Guid id, string customerName, string accountOwnerName, CommercialState commercialState,
+            CreateSource createSource, PlatformStatus platformStatus
             //CustomerProfile customerProfile, IList<User> users
             )
         {
             Id = id;
             CustomerName = customerName;
             AccountOwnerName = accountOwnerName;
-            Province = province;
+            CommercialState = commercialState;
+            CreateSource = createSource;
+            PlatformStatus = platformStatus;
             //CustomerProfile = customerProfile;
             //Users = users;
         }

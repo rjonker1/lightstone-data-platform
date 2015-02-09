@@ -7,6 +7,7 @@ using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
@@ -71,9 +72,24 @@ namespace UserManagement.Api
         {
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
-            pipelines.AddProvincesToViewBag(container, context);
+
+            AddLookupData(container, pipelines, context);
 
             base.RequestStartup(container, pipelines, context);
+        }
+
+        private static void AddLookupData(IWindsorContainer container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.AddLookupDataToViewBag<PaymentType>(container);
+            pipelines.AddLookupDataToViewBag<PlatformStatus>(container);
+            pipelines.AddLookupDataToViewBag<CreateSource>(container);
+            pipelines.AddLookupDataToViewBag<CommercialState>(container);
+            pipelines.AddLookupDataToViewBag<ContractType>(container);
+            pipelines.AddLookupDataToViewBag<EscalationType>(container);
+            pipelines.AddLookupDataToViewBag<ContractDuration>(container);
+            pipelines.AddLookupDataToViewBag<Province>(container);
+            pipelines.AddLookupDataToViewBag<UserType>(container);
+            pipelines.AddLookupDataToViewBag<Role>(container);
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

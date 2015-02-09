@@ -13,7 +13,7 @@ namespace UserManagement.Api.Modules
 {
     public class CustomerModule : NancyModule
     {
-        public CustomerModule(IBus bus, IRepository<Customer> customers, IRepository<Province> provinces)
+        public CustomerModule(IBus bus, IRepository<Customer> customers, IRepository<CommercialState> commercialStates, IRepository<CreateSource> createSources, IRepository<PlatformStatus> platformStatuses)
         {
             Get["/Customers"] = _ =>
             {
@@ -24,10 +24,12 @@ namespace UserManagement.Api.Modules
 
             Post["/Customers"] = _ =>
             {
-                var customerDto = this.Bind<CustomerDto>();
-                var province = provinces.Get(customerDto.ProvinceId);
+                var dto = this.Bind<CustomerDto>();
+                var commercialState = commercialStates.Get(dto.CommercialStateId);
+                var createSource = createSources.Get(dto.CreateSourceId);
+                var platformStatus = platformStatuses.Get(dto.PlatformStatusId);
 
-                bus.Publish(new CreateUpdateCustomer(customerDto.CustomerName, customerDto.AccountOwnerName, province));
+                bus.Publish(new CreateUpdateCustomer(dto.CustomerName, dto.AccountOwnerName, commercialState, createSource, platformStatus));
 
                 return Negotiate
                     .WithView("Index")
@@ -49,10 +51,12 @@ namespace UserManagement.Api.Modules
 
             Put["/Customers/{id}"] = _ =>
             {
-                var customerDto = this.Bind<CustomerDto>();
-                var province = provinces.Get(customerDto.ProvinceId);
+                var dto = this.Bind<CustomerDto>();
+                var commercialState = commercialStates.Get(dto.CommercialStateId);
+                var createSource = createSources.Get(dto.CreateSourceId);
+                var platformStatus = platformStatuses.Get(dto.PlatformStatusId);
 
-                bus.Publish(new CreateUpdateCustomer(customerDto.Id, customerDto.CustomerName, customerDto.AccountOwnerName, province));
+                bus.Publish(new CreateUpdateCustomer(dto.Id, dto.CustomerName, dto.AccountOwnerName, commercialState, createSource, platformStatus));
 
                 return Negotiate
                     .WithView("Index")

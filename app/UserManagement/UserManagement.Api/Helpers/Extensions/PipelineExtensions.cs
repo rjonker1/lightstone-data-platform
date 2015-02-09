@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
 using Castle.Windsor;
 using Microsoft.Practices.ServiceLocation;
@@ -6,6 +9,7 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.ViewEngines.Razor.HtmlHelpers;
 using NHibernate;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 
@@ -57,10 +61,18 @@ namespace UserManagement.Api.Helpers.Extensions
             });
         }
 
-        public static void AddProvincesToViewBag(this IPipelines pipelines, IWindsorContainer container, NancyContext context)
+        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IWindsorContainer container) where T : INamedEntity, IEntity
         {
-            var repo = ServiceLocator.Current.GetInstance<IRepository<Province>>();
-            context.ViewBag.Provinces = repo.Select(x => new SelectListItem(x.Value, x.Id + "", false));
+            var type = typeof (T);
+            var executorType = typeof(INamedEntityRepository<>).MakeGenericType(type);
+            var repo = (IEnumerable)container.Resolve(executorType);
+            var list = (from object item in repo select new SelectListItem(((INamedEntity) item).Name, ((IEntity) item).Id + "")).ToList();
+
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
+            {
+                ctx.ViewBag[type.Name + "s"] = list;
+                return null;
+            });
         }
     }
 }
