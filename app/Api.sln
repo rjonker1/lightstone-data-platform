@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Domain.Core", "Api\Api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Domain.Infrastructure", "Api\Api.Domain.Infrastructure\Api.Domain.Infrastructure.csproj", "{3185C675-2461-4382-B123-3090D3C45D2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Verfication.Fakes", "Api\Verification\Api.Verfication.Fakes\Api.Verfication.Fakes.csproj", "{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,14 @@ Global
 		{3185C675-2461-4382-B123-3090D3C45D2E}.TeamCity|Any CPU.Build.0 = Release|Any CPU
 		{3185C675-2461-4382-B123-3090D3C45D2E}.Test|Any CPU.ActiveCfg = Release|Any CPU
 		{3185C675-2461-4382-B123-3090D3C45D2E}.Test|Any CPU.Build.0 = Release|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.TeamCity|Any CPU.ActiveCfg = Release|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.TeamCity|Any CPU.Build.0 = Release|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +97,6 @@ Global
 		{C1720B63-B55F-481D-97B3-1826777039C5} = {8B495B58-14C4-4116-AC36-F24C47290ABA}
 		{03AFD087-7C76-44D0-9ECB-386B6F500C62} = {9F759FEA-92E4-4EDD-A54B-8584078CC196}
 		{3185C675-2461-4382-B123-3090D3C45D2E} = {9F759FEA-92E4-4EDD-A54B-8584078CC196}
+		{65CC28F0-B92C-4A3D-855C-8AA8D5CB1457} = {9F759FEA-92E4-4EDD-A54B-8584078CC196}
 	EndGlobalSection
 EndGlobal

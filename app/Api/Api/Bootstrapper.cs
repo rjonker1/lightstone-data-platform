@@ -59,7 +59,7 @@ namespace Api
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
-            IBus bus = new BusFactory("Monitoring.Messages.Commands").CreateBus();
+            var bus = new BusFactory("Monitoring.Messages.Commands").CreateBus();
 
             //container.Register(publisher);
             container.Register<IEntryPoint>(new EntryPointService(bus));

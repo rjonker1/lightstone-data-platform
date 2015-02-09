@@ -31,7 +31,13 @@ namespace Api.Modules.Verification
             Post["/driversLicenseVerification/{packageId}/{packageVersion}"] = _ =>
             {
                 var token = Context.AuthorizationHeaderToken();
-                var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
+
+
+                //var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
+                //test package id = "EB49A837-D9E3-4F2A-8DC9-2CB0BB5D48E2"
+                //test
+                //packageBuilderApi = new FakePackageBuilderApi();
+                var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, _.packageId);
 
                 var package = Mapper.DynamicMap<IPackage>(packageResponse);
                 var request = this.Bind<DriversLicenseRequestDto>();
@@ -44,6 +50,7 @@ namespace Api.Modules.Verification
                 return handler.Response.AsJsonString();
             };
         }
+
 
         private static ILaceRequest BuildLaceRequest(IPackage package, IHaveDriversLicenseRequest request)
         {
