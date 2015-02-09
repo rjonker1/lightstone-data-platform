@@ -39,9 +39,6 @@
     <Reference Include="Common.Logging">
       <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car, Version=1.0.0.608, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.608\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll</HintPath>
@@ -120,9 +117,9 @@
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.581\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.610, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.616, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.610\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.616\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\..\packages\Nancy.0.23.2\lib\net40\Nancy.dll</HintPath>
@@ -137,15 +134,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.608\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.NHibernate">
-      <HintPath>..\..\..\packages\NServiceBus.NHibernate.6.0.0\lib\net45\NServiceBus.NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Transports.RabbitMQ">
       <HintPath>..\..\..\packages\NServiceBus.RabbitMQ.2.0.5\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>

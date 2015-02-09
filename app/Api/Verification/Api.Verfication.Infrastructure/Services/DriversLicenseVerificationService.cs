@@ -1,8 +1,8 @@
-﻿using Api.Verfication.Core.Contracts;
+﻿using System.Linq;
+using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Dto;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using NHibernate.Util;
 
 namespace Api.Verfication.Infrastructure.Services
 {

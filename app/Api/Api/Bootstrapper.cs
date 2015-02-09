@@ -6,15 +6,13 @@ using Api.Verfication.Infrastructure.Handlers.Contracts;
 using Api.Verfication.Infrastructure.Services;
 using Billing.Api.Connector;
 using Billing.Api.Connector.Configuration;
-using DataPlatform.Shared.ExceptionHandling;
-using DataPlatform.Shared.RabbitMQ;
+using DataPlatform.Shared.Messaging.RabbitMQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
-using NServiceBus;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api
@@ -60,7 +58,7 @@ namespace Api
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
-            var bus = new  BusFactory("Monitoring.Messages.Commands").CreateBus();
+            var bus = new BusFactory("Monitoring.Messages.Commands").CreateBus();
 
             //container.Register(publisher);
             container.Register<IEntryPoint>(new EntryPointService(bus));
