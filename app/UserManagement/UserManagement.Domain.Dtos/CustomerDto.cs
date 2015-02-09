@@ -1,5 +1,4 @@
 ﻿using System;
-using UserManagement.Domain.Entities;
 
 namespace UserManagement.Domain.Dtos
 {
@@ -8,6 +7,6 @@ namespace UserManagement.Domain.Dtos
         public Guid Id { get; set; }
         public string CustomerName { get; set; }
         public string AccountOwnerName { get; set; }
-        public Province Province { get; set; }
+        public Guid ProvinceId { get; set; }
     }
 }

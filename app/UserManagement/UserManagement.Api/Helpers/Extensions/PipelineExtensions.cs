@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Microsoft.Practices.ServiceLocation;
 using Nancy;
 using Nancy.Bootstrapper;
+using Nancy.ViewEngines.Razor.HtmlHelpers;
 using NHibernate;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -59,7 +60,7 @@ namespace UserManagement.Api.Helpers.Extensions
         public static void AddProvincesToViewBag(this IPipelines pipelines, IWindsorContainer container, NancyContext context)
         {
             var repo = ServiceLocator.Current.GetInstance<IRepository<Province>>();
-            context.ViewBag.Provinces = repo.ToList();
+            context.ViewBag.Provinces = repo.Select(x => new SelectListItem(x.Value, x.Id + "", false));
         }
     }
 }

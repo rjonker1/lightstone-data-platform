@@ -44,7 +44,8 @@ namespace UserManagement.Api
                 new RepositoryInstaller(),
                 new CommandInstaller(),
                 new BusInstaller(),
-                new ServiceLocatorInstaller()
+                new ServiceLocatorInstaller(),
+                new AutoMapperInstaller()
                 );
 
             //Drop create
