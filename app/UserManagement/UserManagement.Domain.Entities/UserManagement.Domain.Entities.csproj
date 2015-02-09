@@ -44,7 +44,7 @@
     <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\Billings\CreateBilling.cs" />
-    <Compile Include="Commands\Clients\CreateClient.cs" />
+    <Compile Include="Commands\Clients\CreateUpdateClient.cs" />
     <Compile Include="Commands\CommercialStates\CreateCommercialState.cs" />
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
     <Compile Include="Commands\ContractDurations\CreateContractDuration.cs" />

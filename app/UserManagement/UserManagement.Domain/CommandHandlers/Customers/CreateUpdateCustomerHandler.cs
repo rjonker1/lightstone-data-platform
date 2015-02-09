@@ -17,7 +17,6 @@ namespace UserManagement.Domain.CommandHandlers.Customers
         public override void Handle(CreateUpdateCustomer command)
         {
             var customer = _repository.Get(command.Id);
-
             if (customer == null)
                 _repository.Save(new Customer(command.Id, command.CustomerName, command.AccountOwnerName, command.Province));
             else

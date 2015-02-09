@@ -6,9 +6,8 @@ namespace UserManagement.Domain.Entities
 {
     public  class Client : Entity
     {
-
         public virtual string ClientName { get; protected internal set; }
-        public virtual List<Package> Packages { get; protected internal set; } 
+        public virtual IEnumerable<Package> Packages { get; protected internal set; } 
         //public virtual Guid? ClientProfileId { get; set; }
 
         //public virtual ProfileDetail ProfileDetail { get; set; }
@@ -21,6 +20,11 @@ namespace UserManagement.Domain.Entities
         {
             ClientName = clientName;
             //ClientUsers = new Collection<ClientUser>();
+        }
+
+        public virtual void UpdateName(string name)
+        {
+            ClientName = name;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace UserManagement.Api.Modules
 
             Get["/Customers/Add"] = parameters =>
             {
-                return View["CustomerSave", new CustomerDto()];
+                return View["Save", new CustomerDto()];
             };
 
             Get["/Customers/{id}"] = parameters =>
@@ -44,7 +44,7 @@ namespace UserManagement.Api.Modules
                 var guid = (Guid)parameters.id;
                 var customer = customers.Get(guid);
                 var dto = Mapper.Map<Customer, CustomerDto>(customer);
-                return View["CustomerSave", dto];
+                return View["Save", dto];
             };
 
             Put["/Customers/{id}"] = _ =>
