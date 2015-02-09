@@ -2,9 +2,9 @@
 using Api.Infrastructure.Automapping;
 using Billing.Api.Connector;
 using Billing.Api.Dtos;
-using Lace.Request;
-using Lace.Request.Entry;
-using Lace.Response.ExternalServices;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -29,7 +29,7 @@ namespace Api.Unit.Tests.Fakes
 
     public class FakeEntryPoint : IEntryPoint
     {
-        public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
+        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
         {
             throw new System.NotImplementedException();
         }

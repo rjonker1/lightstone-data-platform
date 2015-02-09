@@ -56,9 +56,9 @@
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ, Version=0.35.6.302, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EasyNetQ, Version=0.28.5.245, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EasyNetQ.0.35.6.302\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.581, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
