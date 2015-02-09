@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagement.Domain.Core.Commands;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities.Commands.AuditLogs
 {
