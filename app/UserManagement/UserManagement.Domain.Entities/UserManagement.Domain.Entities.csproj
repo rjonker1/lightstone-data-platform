@@ -100,7 +100,6 @@
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserLinkedToCustomer.cs" />
-    <Compile Include="UserProfile.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="UserType.cs" />
   </ItemGroup>

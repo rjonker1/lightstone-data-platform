@@ -6,17 +6,18 @@ namespace UserManagement.Domain.Entities
 {
     public class User : Entity
     {
-
+        public virtual string FirstName { get; set; }
+        public virtual string Surname { get; set; }
+        public virtual string IdNumber { get; set; }
+        public virtual string ContactNumber { get; set; }
+        public virtual string UserName { get; protected internal set; }
+        public virtual string Password { get; protected internal set; }
+        public virtual bool? IsActive { get; protected internal set; }
+        public virtual UserType UserType { get; protected internal set; }
         public virtual DateTime FirstCreateDate { get; protected internal set; }
         public virtual string LastUpdateBy { get; protected internal set; }
         public virtual DateTime LastUpdateDate { get; protected internal set; }
-        public virtual string Password { get; protected internal set; }
-        public virtual string UserName { get; protected internal set; }
-        public virtual bool? IsActive { get; protected internal set; }
-
         public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
-
-        public virtual UserType UserType { get; protected internal set; }
         public virtual IEnumerable<Customer> Customers { get; protected internal set; }
         public virtual IList<Role> Roles { get; protected internal set; }
 
