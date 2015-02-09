@@ -67,7 +67,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                         "License plate search", _licenseNumberRequestSpecification()
                     },
                     {
-                        "Drivers License", _driversLicenseDecryptionRequestSpecification()
+                        "License Scan", _driversLicenseDecryptionRequestSpecification()
                     },
                     {
                         "Fica", _ficaRequestSpecification()

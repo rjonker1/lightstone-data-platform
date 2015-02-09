@@ -1,17 +1,24 @@
 ﻿using System;
-using Api.Extensions;
+using Api.Domain.Infrastructure.Requests;
 using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Commands;
 using Api.Verfication.Infrastructure.Dto;
 using Api.Verfication.Infrastructure.Handlers.Contracts;
-using Nancy;
+using AutoMapper;
+using Billing.Api.Connector;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Shared.Extensions;
 using Nancy.ModelBinding;
+using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using Shared.BuildingBlocks.Api;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Modules.Verification
 {
     public class DriversLicenseVerficationModule : VerificationSecureModule
     {
-        public DriversLicenseVerficationModule(IHandleDriversLicenseVerficationRequests handler)
+        public DriversLicenseVerficationModule(IPbApiClient packageBuilderApi,
+            IHandleDriversLicenseVerficationRequests handler, IConnectToBilling billingConnector)
         {
 
             Get["/driversLicenseVerification"] =
@@ -21,12 +28,36 @@ namespace Api.Modules.Verification
                     _response
                 }.AsJsonString();
 
-            Post["/driversLicenseVerification/"] = _ =>
+            Post["/driversLicenseVerification/{packageId}/{packageVersion}"] = _ =>
             {
+                var token = Context.AuthorizationHeaderToken();
+
+
+                //var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
+                //test package id = "EB49A837-D9E3-4F2A-8DC9-2CB0BB5D48E2"
+                //test
+                //packageBuilderApi = new FakePackageBuilderApi();
+                var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, _.packageId);
+
+                var package = Mapper.DynamicMap<IPackage>(packageResponse);
                 var request = this.Bind<DriversLicenseRequestDto>();
-                handler.Handle(new DriversLicenseVerficationCommand(request));
+
+                handler.Handle(new DriversLicenseVerficationCommand(BuildLaceRequest(package, request)));
+
+
+                //TODO: implement billing
+
                 return handler.Response.AsJsonString();
             };
+        }
+
+
+        private static ILaceRequest BuildLaceRequest(IPackage package, IHaveDriversLicenseRequest request)
+        {
+            var laceRequest = new LaceRequest();
+            laceRequest.DriversLicenseRequest(package,
+                new DriversLicense(null, request.ScanData, request.UserId, request.Username));
+            return laceRequest;
         }
 
         private readonly IHaveDriversLicenseResponse _response =
@@ -42,6 +73,7 @@ namespace Api.Modules.Verification
                 new VehicleClass(string.Empty, string.Empty, string.Empty),
                 string.Empty, string.Empty, string.Empty), string.Empty);
 
-        private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty, string.Empty, Guid.Empty);
+        private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty,
+            string.Empty, Guid.Empty);
     }
 }

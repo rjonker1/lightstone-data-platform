@@ -6,15 +6,15 @@ using Api.Verfication.Infrastructure.Handlers.Contracts;
 using Api.Verfication.Infrastructure.Services;
 using Billing.Api.Connector;
 using Billing.Api.Connector.Configuration;
-using Lace.Request.Entry;
+using DataPlatform.Shared.RabbitMQ;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.EntryPoint;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
+using NServiceBus;
 using Shared.BuildingBlocks.Api.Security;
-using Workflow;
-using Workflow.BuildingBlocks;
-using Workflow.RabbitMQ;
 
 namespace Api
 {
@@ -59,14 +59,10 @@ namespace Api
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
-            IPublishMessages publisher;
-            using (var bus = BusFactory.CreateBus("monitor-event-tracking/queue"))
-            {
-                publisher = new Publisher(bus);
-            }
+            var bus = new BusFactory("Monitoring.Messages.Commands").CreateBus();
 
-            container.Register(publisher);
-            container.Register<IEntryPoint>(new EntryPoint(publisher));
+            //container.Register(publisher);
+            container.Register<IEntryPoint>(new EntryPointService(bus));
 
             container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
 

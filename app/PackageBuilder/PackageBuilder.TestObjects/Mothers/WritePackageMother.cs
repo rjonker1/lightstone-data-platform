@@ -66,10 +66,11 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.UtcNow)
-                    .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
+                    .With(WriteDataProviderMother.SignioDriversLicenseDataProvider)
                     .Build();
             }
         }
+
         public static Package EzScorePackage
         {
             get
@@ -82,6 +83,22 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(0.1m)
                     .With(DateTime.UtcNow)
                     .With(WriteDataProviderMother.Ivid, WriteDataProviderMother.IvidTitleHolder, WriteDataProviderMother.Rgt, WriteDataProviderMother.RgtVin, WriteDataProviderMother.Audatex, WriteDataProviderMother.Lightstone)
+                    .Build();
+            }
+        }
+
+        public static Package FicaVerificationPackage
+        {
+            get
+            {
+                return new WritePackageBuilder()
+                    .With("Fica verfication package")
+                    .With(ActionMother.FicaVerificationAction)
+                    .With(IndustryMother.Finance, IndustryMother.Automotive)
+                    .With(StateMother.Published)
+                    .With(0.1m)
+                    .With(DateTime.UtcNow)
+                    .With(WriteDataProviderMother.PCubedFicaDataProvider)
                     .Build();
             }
         }
