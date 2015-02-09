@@ -17,6 +17,7 @@ namespace DataPlatform.Shared.RabbitMQ
             var configuration = new BusConfiguration();
 
             configuration.UseTransport<RabbitMQTransport>();
+            configuration.UsePersistence<NHibernatePersistence>();
             configuration.DisableFeature<TimeoutManager>();
             configuration.Conventions()
                 .DefiningCommandsAs(
