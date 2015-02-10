@@ -38,23 +38,29 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.616\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.618, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.618\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.616\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.618, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.618\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.616\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.618\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Dtos">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.616\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Dtos.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Dtos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.618\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Dtos.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.616\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.618\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestObjects">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.616\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.618\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.616\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
