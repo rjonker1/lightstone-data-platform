@@ -1,4 +1,5 @@
-﻿using NServiceBus;
+﻿using System.Reflection;
+using NServiceBus;
 using NServiceBus.Features;
 
 namespace DataPlatform.Shared.Messaging.RabbitMQ
@@ -19,6 +20,7 @@ namespace DataPlatform.Shared.Messaging.RabbitMQ
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
             configuration.DisableFeature<TimeoutManager>();
+            //configuration.AssembliesToScan(Assembly.GetExecutingAssembly());
             configuration.Conventions()
                 .DefiningCommandsAs(
                     c => c.Namespace != null && c.Namespace.EndsWith(_namespace));

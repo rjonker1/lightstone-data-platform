@@ -1,7 +1,6 @@
 ﻿using System;
 using Api.Domain.Core.Contracts;
 using AutoMapper;
-using Common.Logging;
 using Nancy;
 using Nancy.Bootstrapper;
 using Newtonsoft.Json;
@@ -12,13 +11,14 @@ namespace Api
     {
         public static IPipelines EnableMonitoring(this IPipelines pipelines)
         {
-            var log = LogManager.GetCurrentClassLogger();
+            //
+            //ILog log = LogManager.GetCurrentClassLogger();
             pipelines.BeforeRequest += context =>
             {
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
 
-                log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
+                //log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
 
                 return null;
             };
@@ -30,15 +30,15 @@ namespace Api
                 //log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
             };
 
-            //pipelines.OnError += (context, ex) =>
-            //{
-            //    var iRequest = Mapper.Map<Request, IRequest>(context.Request);
-            //    var request = JsonConvert.SerializeObject(iRequest);
+            pipelines.OnError += (context, ex) =>
+            {
+                var iRequest = Mapper.Map<Request, IRequest>(context.Request);
+                var request = JsonConvert.SerializeObject(iRequest);
 
-            //    log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
+                //log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
 
-            //    return HttpStatusCode.InternalServerError;
-            //};
+                return HttpStatusCode.InternalServerError;
+            };
 
             return pipelines;
         }
