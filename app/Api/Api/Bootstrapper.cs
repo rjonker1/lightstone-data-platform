@@ -25,21 +25,20 @@ namespace Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            //var configuration = new StatelessAuthenticationConfiguration(context =>
-            //{
-            //    var token = context.AuthorizationHeaderToken();
-            //    var authenticator = container.Resolve<IAuthenticateUser>();
+            var configuration = new StatelessAuthenticationConfiguration(context =>
+            {
+                var token = context.AuthorizationHeaderToken();
+                var authenticator = container.Resolve<IAuthenticateUser>();
 
 
-            //    return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
-            //});
+                return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
+            });
 
-            //StatelessAuthentication.Enable(pipelines, configuration);
+            StatelessAuthentication.Enable(pipelines, configuration);
 
-            //TODO: Implement
-            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
-            //pipelines.EnableCors(); // cross origin resource sharing
-            //pipelines.EnableMonitoring();
+            pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+            pipelines.EnableCors(); // cross origin resource sharing
+            pipelines.EnableMonitoring();
 
             //Make every request SSL based
             //pipelines.BeforeRequest += ctx =>
@@ -56,7 +55,7 @@ namespace Api
 
             AutoMapperConfiguration.Init();
 
-            //container.Register<IAuthenticateUser, UmApiAuthenticator>();
+            container.Register<IAuthenticateUser, UmApiAuthenticator>();
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 

@@ -4,6 +4,7 @@ using AutoMapper;
 using Nancy;
 using Nancy.Bootstrapper;
 using Newtonsoft.Json;
+using Common.Logging;
 
 namespace Api
 {
@@ -11,14 +12,13 @@ namespace Api
     {
         public static IPipelines EnableMonitoring(this IPipelines pipelines)
         {
-            //
-            //ILog log = LogManager.GetCurrentClassLogger();
+            var log = LogManager.GetCurrentClassLogger();
             pipelines.BeforeRequest += context =>
             {
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
 
-                //log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
+                log.InfoFormat("Request date {0}: {1}", DateTime.Now, request);
 
                 return null;
             };
@@ -35,7 +35,7 @@ namespace Api
                 var iRequest = Mapper.Map<Request, IRequest>(context.Request);
                 var request = JsonConvert.SerializeObject(iRequest);
 
-                //log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
+                log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
 
                 return HttpStatusCode.InternalServerError;
             };
