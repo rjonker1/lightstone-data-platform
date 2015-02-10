@@ -22,10 +22,10 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.UserName, "test")
                 .CheckProperty(c => c.Password, "test")
-                .CheckProperty(c => c.LastUpdateBy, "test")
+                .CheckProperty(c => c.ModifiedBy, "test")
                 .CheckProperty(c => c.IsActive, true)
-                .CheckProperty(c => c.FirstCreateDate, DateTime.Now.Date)
-                .CheckProperty(c => c.LastUpdateDate, DateTime.Now.Date)
+                .CheckProperty(c => c.Created, DateTime.Now.Date)
+                .CheckProperty(c => c.Modified, DateTime.Now.Date)
                 .CheckReference(c => c.UserType, new UserType(Guid.NewGuid(), "Test"))
                 .CheckComponentList(c => c.Roles, new List<Role> { new Role(new Guid("c628ba87-bab5-44a1-98f8-16ec5c560f85"), "Admin") })
                 .VerifyTheMappings();
