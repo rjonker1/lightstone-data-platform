@@ -9,13 +9,12 @@ namespace UserManagement.Domain.Core.Entities
         [DataMember]
         public virtual Guid Id { get; protected internal set; }
 
-        protected Entity() { }
+        protected internal Entity() { }
 
         protected Entity(Guid id)
         {
             Id = id == new Guid() ? Guid.NewGuid() : id;
         }
-
 
         public virtual DateTime? Modified { get; protected internal set; }
         public virtual string ModifiedBy { get; protected internal set; }

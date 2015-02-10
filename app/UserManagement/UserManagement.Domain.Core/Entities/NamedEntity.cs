@@ -8,7 +8,7 @@ namespace UserManagement.Domain.Core.Entities
 
         protected NamedEntity() { }
 
-        protected NamedEntity(Guid id, string name) : base(id)
+        protected NamedEntity(string name, Guid id = new Guid()) : base(id)
         {
             Name = name;
         }

@@ -18,7 +18,7 @@ namespace UserManagement.Domain.CommandHandlers.Clients
         {
             var customer = _repository.Get(command.Id);
             if (customer == null)
-                _repository.Save(new Client(command.Id, command.ClientName));
+                _repository.Save(new Client(command.ClientName));
             else
                 customer.UpdateName(command.ClientName);
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using UserManagement.Domain.Core.Entities;
+﻿using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
@@ -9,7 +8,7 @@ namespace UserManagement.Domain.Entities
 
         protected ContractType() { }
 
-        public ContractType(Guid id, string val) : base(id, val)
+        public ContractType(string val) : base(val)
         {
             Value = val;
         }

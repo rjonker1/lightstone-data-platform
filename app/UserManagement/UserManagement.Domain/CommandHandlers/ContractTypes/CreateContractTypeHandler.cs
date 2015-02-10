@@ -19,7 +19,7 @@ namespace UserManagement.Domain.CommandHandlers.ContractTypes
 
             if (_repository.Exists(command.Id, command.Name)) return;
 
-            _repository.Save(new ContractType(command.Id, command.Name));
+            _repository.Save(new ContractType(command.Name));
         }
     }
 }

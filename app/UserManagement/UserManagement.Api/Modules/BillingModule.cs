@@ -12,15 +12,13 @@ namespace UserManagement.Api.Modules
     {
         public BillingModule(IBus bus, IRepository<Billing> billings, IRepository<PaymentType> paymentTypes)
         {
-
             Get["/Billings"] = _ => Response.AsJson(billings);
 
             Get["/Billings/Create"] = _ =>
             {
-
                 var paymentType = paymentTypes.Select(x => x).FirstOrDefault(x => x.Name == "Debit Order");
 
-                bus.Publish(new CreateBilling("Contact number", "Contact person", "Company Reg", DateTime.Now, DateTime.Now, paymentType));
+                bus.Publish(new CreateBilling("Contact number", "Contact person", "Company Reg", DateTime.Now, "", "", paymentType));
 
                 return "Success";
             };

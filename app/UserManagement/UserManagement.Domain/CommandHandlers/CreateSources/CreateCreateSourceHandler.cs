@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.CreateSources
 {
     public class CreateCreateSourceHandler : AbstractMessageHandler<CreateCreateSource>
     {
-
         private readonly INamedEntityRepository<CreateSource> _repository;
 
         public CreateCreateSourceHandler(INamedEntityRepository<CreateSource> repository)
@@ -17,10 +16,9 @@ namespace UserManagement.Domain.CommandHandlers.CreateSources
 
         public override void Handle(CreateCreateSource command)
         {
-
             if (_repository.Exists(command.Id, command.Name)) return;
             
-            _repository.Save(new CreateSource(command.Id, command.Name));
+            _repository.Save(new CreateSource(command.Name));
         }
     }
 }

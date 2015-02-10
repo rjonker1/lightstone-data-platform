@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.Addresses
 {
     public class CreateAddressHandler : AbstractMessageHandler<CreateAddress>
     {
-
         private readonly IRepository<Address> _repository;
 
         public CreateAddressHandler(IRepository<Address> repository)
@@ -17,8 +16,7 @@ namespace UserManagement.Domain.CommandHandlers.Addresses
 
         public override void Handle(CreateAddress command)
         {
-
-            _repository.Save(new Address(command.Id, command.AddressType, command.Line1, command.Line2, command.PostalCode, command.City, command.Country, command.Province));
+            _repository.Save(new Address(command.AddressType, command.Line1, command.Line2, command.Suburb, command.City, command.Country, command.PostalCode, command.Province));
         }
     }
 }

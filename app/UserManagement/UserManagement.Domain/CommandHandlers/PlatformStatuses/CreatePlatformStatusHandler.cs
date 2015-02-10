@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.PlatformStatuses
 {
     public class CreatePlatformStatusHandler : AbstractMessageHandler<CreatePlatformStatus>
     {
-
         private readonly INamedEntityRepository<PlatformStatus> _repository;
 
         public CreatePlatformStatusHandler(INamedEntityRepository<PlatformStatus> repository)
@@ -17,10 +16,9 @@ namespace UserManagement.Domain.CommandHandlers.PlatformStatuses
 
         public override void Handle(CreatePlatformStatus command)
         {
-
             if (_repository.Exists(command.Id, command.Name)) return;
 
-            _repository.Save(new PlatformStatus(command.Id, command.Name));
+            _repository.Save(new PlatformStatus(command.Name));
         }
     }
 }

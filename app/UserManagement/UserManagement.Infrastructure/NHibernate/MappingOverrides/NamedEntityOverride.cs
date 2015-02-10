@@ -1,8 +1,6 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
-using NHibernate.Cfg;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
 {

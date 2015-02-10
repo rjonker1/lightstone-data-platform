@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DataPlatform.Shared.Helpers.Extensions;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -9,9 +9,14 @@ namespace UserManagement.Domain.Entities
 
         protected UserType() { }
 
-        public UserType(Guid id, string name) : base(id, name)
+        public UserType(string name) : base(name)
         {
             Value = name;
+        }
+
+        public override string ToString()
+        {
+            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }

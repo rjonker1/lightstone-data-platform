@@ -1,5 +1,4 @@
-﻿using System;
-using UserManagement.Domain.Core.Entities;
+﻿using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
@@ -9,7 +8,7 @@ namespace UserManagement.Domain.Entities
 
         protected PaymentType() { }
 
-        public PaymentType(Guid id, string name) : base(id, name)
+        public PaymentType(string name) : base(name)
         {
             Value = name;
         }

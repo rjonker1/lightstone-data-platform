@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.CommercialStates
 {
     public class CreateCommercialStateHandler : AbstractMessageHandler<CreateCommercialState>
     {
-
         private readonly INamedEntityRepository<CommercialState> _repository;
 
         public CreateCommercialStateHandler(INamedEntityRepository<CommercialState> repository)
@@ -17,10 +16,9 @@ namespace UserManagement.Domain.CommandHandlers.CommercialStates
 
         public override void Handle(CreateCommercialState command)
         {
-
             if (_repository.Exists(command.Id, command.Name)) return;
 
-            _repository.Save(new CommercialState(command.Id, command.Name));
+            _repository.Save(new CommercialState(command.Name));
         }
     }
 }

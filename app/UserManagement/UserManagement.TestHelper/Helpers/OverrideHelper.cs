@@ -2,7 +2,7 @@
 using Castle.Windsor;
 using NHibernate.Cfg;
 
-namespace UserManagement.TestHelper
+namespace UserManagement.TestHelper.Helpers
 {
     public class OverrideHelper
     {

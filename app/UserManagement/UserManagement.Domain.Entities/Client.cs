@@ -7,16 +7,13 @@ namespace UserManagement.Domain.Entities
     public  class Client : Entity
     {
         public virtual string ClientName { get; protected internal set; }
-        public virtual IEnumerable<Package> Packages { get; protected internal set; } 
-        //public virtual Guid? ClientProfileId { get; set; }
-
-        //public virtual ProfileDetail ProfileDetail { get; set; }
-
-        public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
+        public virtual ContactDetail ContactDetail { get; protected internal set; }
+        public virtual ISet<Package> Packages { get; protected internal set; }
+        public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
 
         protected Client() { }
 
-        public Client(Guid id, string clientName) : base(id)
+        public Client(string clientName, Guid id = new Guid()) : base(id)
         {
             ClientName = clientName;
             //ClientUsers = new Collection<ClientUser>();

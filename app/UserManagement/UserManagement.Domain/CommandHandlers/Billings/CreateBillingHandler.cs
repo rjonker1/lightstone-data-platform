@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.Billings
 {
     public class CreateBillingHandler : AbstractMessageHandler<CreateBilling>
     {
-
         private readonly IRepository<Billing> _repository;
 
         public CreateBillingHandler(IRepository<Billing> repository)
@@ -17,9 +16,7 @@ namespace UserManagement.Domain.CommandHandlers.Billings
 
         public override void Handle(CreateBilling command)
         {
-            
-            _repository.Save(new Billing(command.Id, command.BillingContactNumber, command.BillingContractPersion, command.CompanyRegistration, command.FirstCreateDate,
-                                            command.DebitOrderDate, command.PaymentType));
+            _repository.Save(new Billing(command.BillingContactNumber, command.BillingContractPersion, command.CompanyRegistration, command.DebitOrderDate, command.PastelId, command.VatNumber, command.PaymentType));
         }
     }
 }
