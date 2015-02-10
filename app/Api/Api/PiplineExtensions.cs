@@ -1,10 +1,10 @@
 ﻿using System;
 using Api.Domain.Core.Contracts;
 using AutoMapper;
-using Common.Logging;
 using Nancy;
 using Nancy.Bootstrapper;
 using Newtonsoft.Json;
+using Common.Logging;
 
 namespace Api
 {
@@ -30,15 +30,15 @@ namespace Api
                 //log.InfoFormat("Response date {0}: {1}", DateTime.Now, response);
             };
 
-            //pipelines.OnError += (context, ex) =>
-            //{
-            //    var iRequest = Mapper.Map<Request, IRequest>(context.Request);
-            //    var request = JsonConvert.SerializeObject(iRequest);
+            pipelines.OnError += (context, ex) =>
+            {
+                var iRequest = Mapper.Map<Request, IRequest>(context.Request);
+                var request = JsonConvert.SerializeObject(iRequest);
 
-            //    log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
+                log.ErrorFormat("Request date {0}: {1}", DateTime.Now, request);
 
-            //    return HttpStatusCode.InternalServerError;
-            //};
+                return HttpStatusCode.InternalServerError;
+            };
 
             return pipelines;
         }

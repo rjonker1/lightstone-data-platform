@@ -54,6 +54,7 @@
     <Compile Include="when_creating_a_new_rabbitMQ_bus.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
