@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.616\lib\net45\Common.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
@@ -62,14 +59,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.618\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.616\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.619, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.619\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.616\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.619, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.619\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.616\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.619, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.619\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
