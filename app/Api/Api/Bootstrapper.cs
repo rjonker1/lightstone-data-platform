@@ -52,7 +52,6 @@ namespace Api
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            // Perform registation that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
             AutoMapperConfiguration.Init();
@@ -62,8 +61,6 @@ namespace Api
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
             var bus = new BusFactory("Monitoring.Messages.Commands").CreateBus();
-
-            //container.Register(publisher);
             container.Register<IEntryPoint>(new EntryPointService(bus));
 
             //TODO: Implement
