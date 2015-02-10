@@ -462,7 +462,7 @@ task :acceptance_tests => ['testing:acceptance'] do end
 task :default => [
 	'environment:default',
 	'build:default',
-	'testing:unit',
+	#'testing:unit',
 	'package:default'
 	] do
 end
