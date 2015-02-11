@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 using Api.Infrastructure.Automapping;
 using Api.Infrastructure.Metadata;
 using Api.Verfication.Core.Contracts;
@@ -15,6 +18,7 @@ using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
+using NHibernate.Mapping;
 using NServiceBus;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -60,11 +64,13 @@ namespace Api
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
-            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands").CreateBus());
+            var assembliesToScan = AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages");
+
+            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands", assembliesToScan).CreateBus());
             container.Register<IEntryPoint, EntryPointService>();
 
             //TODO: Implement
-           // container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
+            // container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
 
             container.Register<ICallFicaVerification, FicaVerificationService>();
             container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();
@@ -72,5 +78,7 @@ namespace Api
             container.Register<ICallDriversLicenseVerification, DriversLicenseVerificationService>();
             container.Register<IHandleDriversLicenseVerficationRequests, DriversLicenseVerificationHandler>();
         }
+
+
     }
 }
