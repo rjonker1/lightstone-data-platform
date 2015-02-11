@@ -60,7 +60,7 @@
     <Compile Include="Commands\CreateSources\CreateCreateSource.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\CustomerProfiles\CreateCustomerProfile.cs" />
-    <Compile Include="Commands\Customers\CreateUpdateCustomer.cs" />
+    <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\Packages\CreatePackage.cs" />
@@ -114,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\Customers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

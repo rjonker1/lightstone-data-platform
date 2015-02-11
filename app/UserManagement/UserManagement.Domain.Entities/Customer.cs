@@ -17,8 +17,8 @@ namespace UserManagement.Domain.Entities
 
         protected Customer() { }
 
-        public Customer(Guid id, string customerName, string accountOwnerName, CommercialState commercialState, 
-            CreateSource createSource, PlatformStatus platformStatus)
+        public Customer(string customerName, string accountOwnerName, CommercialState commercialState, 
+            CreateSource createSource, PlatformStatus platformStatus, Guid id = new Guid())
             : base(id)
         {
             CustomerName = customerName;
@@ -26,6 +26,18 @@ namespace UserManagement.Domain.Entities
             CommercialState = commercialState;
             CreateSource = createSource;
             PlatformStatus = platformStatus;
+        }
+
+        public Customer(string customerName, string accountOwnerName, CommercialState commercialState,
+            CreateSource createSource, PlatformStatus platformStatus, Billing billing = null, Guid id = new Guid())
+            : base(id)
+        {
+            CustomerName = customerName;
+            AccountOwnerName = accountOwnerName;
+            CommercialState = commercialState;
+            CreateSource = createSource;
+            PlatformStatus = platformStatus;
+            Billing = billing;
         }
 
         public virtual void UpdateCustomer(string customerName, string accountOwnerName, CommercialState commercialState,

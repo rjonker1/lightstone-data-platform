@@ -5,8 +5,8 @@ namespace UserManagement.Domain.Entities
 {
     public class Billing : Entity
     {
-        public virtual string BillingContactNumber { get; set; }
-        public virtual string BillingContractPerson { get; set; }
+        public virtual string ContactNumber { get; set; }
+        public virtual string ContractPerson { get; set; }
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
         public virtual string PastelId { get; set; }
@@ -15,10 +15,10 @@ namespace UserManagement.Domain.Entities
 
         protected internal Billing() { }
 
-        public Billing(string billingContactNumber, string billingContractPerson, string companyRegistration, DateTime? debitOrderDate, string pastelId, string vatNumber, PaymentType paymentType, Guid id = new Guid()) : base(id)
+        public Billing(string contactNumber, string contractPerson, string companyRegistration, DateTime? debitOrderDate, string pastelId, string vatNumber, PaymentType paymentType, Guid id = new Guid()) : base(id)
         {
-            BillingContactNumber = billingContactNumber;
-            BillingContractPerson = billingContractPerson;
+            ContactNumber = contactNumber;
+            ContractPerson = contractPerson;
             CompanyRegistration = companyRegistration;
             DebitOrderDate = debitOrderDate;
             PastelId = pastelId;
