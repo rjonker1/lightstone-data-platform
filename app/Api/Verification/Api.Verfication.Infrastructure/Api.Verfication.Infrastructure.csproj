@@ -194,7 +194,6 @@
     <Compile Include="Handlers\FicaVerificationHandler.cs" />
     <Compile Include="Handlers\TestHandler.cs" />
     <Compile Include="Handlers\UserManagementHandler.cs" />
-    <Compile Include="Messaging\RabbitMQ\BusFactory.cs" />
     <Compile Include="Services\DriversLicenseVerificationService.cs" />
     <Compile Include="Services\FicaVerificationService.cs" />
     <Compile Include="Services\UsermanagementService.cs" />

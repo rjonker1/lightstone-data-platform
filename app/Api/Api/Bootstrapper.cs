@@ -7,10 +7,10 @@ using Api.Infrastructure.Metadata;
 using Api.Verfication.Core.Contracts;
 using Api.Verfication.Infrastructure.Handlers;
 using Api.Verfication.Infrastructure.Handlers.Contracts;
-using Api.Verfication.Infrastructure.Messaging.RabbitMQ;
 using Api.Verfication.Infrastructure.Services;
 using Billing.Api.Connector;
 using Billing.Api.Connector.Configuration;
+using DataPlatform.Shared.Messaging.RabbitMQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Nancy;
@@ -66,7 +66,7 @@ namespace Api
 
             var assembliesToScan = AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages").And("NServiceBus.NHibernate").And("NServiceBus.Transports.RabbitMQ");
 
-            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands", assembliesToScan).CreateBus());
+            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands", assembliesToScan,"DataPlatform.Monitoring.Host").CreateBus());
             container.Register<IEntryPoint, EntryPointService>();
 
             //TODO: Implement
