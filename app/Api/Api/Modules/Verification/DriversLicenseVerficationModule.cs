@@ -55,7 +55,8 @@ namespace Api.Modules.Verification
         {
             var laceRequest = new LaceRequest();
             laceRequest.DriversLicenseRequest(package,
-                new DriversLicense(null, request.ScanData, request.UserId, request.Username));
+                new DriversLicense(null, request.ScanData, request.UserId, request.Username),
+                new Aggregation(Guid.NewGuid()));
             return laceRequest;
         }
 

@@ -3,19 +3,17 @@ using System.Reflection;
 using NServiceBus;
 using NServiceBus.Features;
 
-namespace DataPlatform.Shared.Messaging.RabbitMQ
+namespace Api.Verfication.Infrastructure.Messaging.RabbitMQ
 {
     public class BusFactory
     {
         private readonly string _namespace;
-        private readonly string _endpointName;
         private readonly IEnumerable<Assembly> _assembliesToScan;
 
-        public BusFactory(string @namespace, IEnumerable<Assembly> assembliesToScan, string endpointName)
+        public BusFactory(string @namespace, IEnumerable<Assembly> assembliesToScan)
         {
             _namespace = @namespace;
             _assembliesToScan = assembliesToScan;
-            _endpointName = endpointName;
         }
 
         public IBus CreateBus()
@@ -25,7 +23,7 @@ namespace DataPlatform.Shared.Messaging.RabbitMQ
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
             configuration.DisableFeature<TimeoutManager>();
-            configuration.EndpointName(_endpointName);
+            configuration.EndpointName("DataPlatform.Monitoring.Host");
             configuration.AssembliesToScan(_assembliesToScan);
             configuration.Conventions()
                 .DefiningCommandsAs(
