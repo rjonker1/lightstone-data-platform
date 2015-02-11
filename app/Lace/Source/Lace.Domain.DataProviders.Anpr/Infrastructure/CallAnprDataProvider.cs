@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 {
     public class CallAnprDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Anpr;
 
         private readonly ILaceRequest _request;
@@ -28,6 +28,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 
         public CallAnprDataProvider(ILaceRequest request, ISetupCertificateRepository repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _repository = repository;
         }
@@ -59,7 +60,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Anpr Web Service {0}", ex.Message);
+                _log.ErrorFormat("Error calling Anpr Web Service {0}", ex.Message);
                 AnprResponseFailed(response);
             }
         }

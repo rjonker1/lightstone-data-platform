@@ -10,12 +10,13 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class MuncipalityUnitOfWork : IGetMuncipalities
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         public IEnumerable<Municipality> Municipalities { get; private set; }
         private readonly IReadOnlyRepository<Municipality> _repository;
 
         public MuncipalityUnitOfWork(IReadOnlyRepository<Municipality> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -27,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Metric data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Metric data because of {0}", ex.Message);
             }
         }
 

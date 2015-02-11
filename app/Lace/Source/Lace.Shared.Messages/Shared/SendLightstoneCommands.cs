@@ -17,13 +17,14 @@ namespace Lace.Shared.Monitoring.Messages.Shared
     public class SendLightstoneCommands : ISendCommandsToBus
     {
         private readonly IPublishCommandMessages _publisher;
-        private readonly ILog _log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly int _orderOfExecution;
 
         private readonly Guid _requestId;
 
         public SendLightstoneCommands(IBus bus, Guid requestAggregateId, int orderOfExecution)
         {
+            _log = LogManager.GetLogger(GetType());
             _publisher = new CommandPublisher(bus);
             _requestId = requestAggregateId;
             _orderOfExecution = orderOfExecution;

@@ -10,12 +10,13 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class CarTypeUnitOfWork : IGetCarType
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         public IEnumerable<CarType> CarTypes { get; private set; }
         private readonly IReadOnlyRepository<CarType> _repository;
 
         public CarTypeUnitOfWork(IReadOnlyRepository<CarType> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -27,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Car Type data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Car Type data because of {0}", ex.Message);
             }
         }
     }

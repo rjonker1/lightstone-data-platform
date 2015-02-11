@@ -20,13 +20,14 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
     public class CallIvidDataProvider : ICallTheDataProviderSource
     {
         private HpiStandardQueryResponse _response;
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Ivid;
 
         public CallIvidDataProvider(ILaceRequest request)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
@@ -79,7 +80,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message, new {ErrorMessage = "Error calling Ivid Data Provider"});
                 IvidResponseFailed(response);
             }

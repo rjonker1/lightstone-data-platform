@@ -11,11 +11,12 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
     {
         public IEnumerable<CarSpecification> CarSpecifications { get; private set; }
 
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly IReadOnlyRepository<CarSpecification> _repository;
 
         public CarSpecificationsUnitOfWork(IReadOnlyRepository<CarSpecification> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -27,7 +28,7 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Car Specification data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Car Specification data because of {0}", ex.Message);
                 throw;
             }
         }

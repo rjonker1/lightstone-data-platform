@@ -10,12 +10,13 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class BandUnitOfWork : IGetBands
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         public IEnumerable<Band> Bands { get; private set; }
         private readonly IReadOnlyRepository<Band> _repository;
 
         public BandUnitOfWork(IReadOnlyRepository<Band> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -27,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Band data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Band data because of {0}", ex.Message);
             }
         }
     }

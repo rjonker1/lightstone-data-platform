@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
     public class CallLightstoneDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Lightstone;
@@ -30,6 +30,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
         public CallLightstoneDataProvider(ILaceRequest request, ISetupRepository repositories, ISetupCarRepository carRepository)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _repositories = repositories;
             _carRepository = carRepository;
@@ -53,7 +54,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
                     new { ErrorMessage = "Error calling Lightstone Data Provider"});
                 LightstoneResponseFailed(response);

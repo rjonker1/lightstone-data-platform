@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 {
     public class CallAudatexDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private GetDataResult _response;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
@@ -25,6 +25,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 
         public CallAudatexDataProvider(ILaceRequest request)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
@@ -71,7 +72,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Audatex Data Provider"});
                 AudatexResponseFailed(response);

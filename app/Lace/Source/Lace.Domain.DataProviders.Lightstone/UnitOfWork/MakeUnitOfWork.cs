@@ -10,12 +10,13 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class MakeUnitOfWork : IGetMakes
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         public IEnumerable<Make> Makes { get; private set; }
         private readonly IReadOnlyRepository<Make> _repository;
 
         public MakeUnitOfWork(IReadOnlyRepository<Make> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -27,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Make data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Make data because of {0}", ex.Message);
             }
         }
     }

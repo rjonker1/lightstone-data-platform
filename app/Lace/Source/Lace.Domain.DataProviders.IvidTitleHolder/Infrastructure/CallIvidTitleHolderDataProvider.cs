@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
     public class CallIvidTitleHolderDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private TitleholderQueryResponse _response;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
@@ -27,6 +27,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
         public CallIvidTitleHolderDataProvider(ILaceRequest request)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
@@ -68,7 +69,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
                 IvidTitleHolderResponseFailed(response);
