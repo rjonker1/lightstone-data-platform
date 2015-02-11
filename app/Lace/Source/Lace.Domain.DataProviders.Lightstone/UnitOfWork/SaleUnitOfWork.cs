@@ -10,13 +10,14 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class SaleUnitOfWork : IGetSales
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         public IEnumerable<Sale> Sales { get; private set; }
 
         private readonly IReadOnlyRepository<Sale> _repository;
 
         public SaleUnitOfWork(IReadOnlyRepository<Sale> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -28,7 +29,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Sales data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Sales data because of {0}", ex.Message);
             }
         }
     }

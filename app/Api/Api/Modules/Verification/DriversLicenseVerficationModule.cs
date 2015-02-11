@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Api.Domain.Infrastructure.Requests;
 using Api.Verfication.Core.Contracts;
+using Api.Verfication.Fakes;
 using Api.Verfication.Infrastructure.Commands;
 using Api.Verfication.Infrastructure.Dto;
 using Api.Verfication.Infrastructure.Handlers.Contracts;
@@ -35,11 +38,7 @@ namespace Api.Modules.Verification
 
                 //var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
                 //test package id = "EB49A837-D9E3-4F2A-8DC9-2CB0BB5D48E2"
-                //test
-                //packageBuilderApi = new FakePackageBuilderApi();
-                var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, _.packageId);
-
-                var package = Mapper.DynamicMap<IPackage>(packageResponse);
+                var package = new FakePackageBuilderApi().PackageDatabase.First().Value;
                 var request = this.Bind<DriversLicenseRequestDto>();
 
                 handler.Handle(new DriversLicenseVerficationCommand(BuildLaceRequest(package, request)));
@@ -50,13 +49,14 @@ namespace Api.Modules.Verification
                 return handler.Response.AsJsonString();
             };
         }
-
+        
 
         private static ILaceRequest BuildLaceRequest(IPackage package, IHaveDriversLicenseRequest request)
         {
             var laceRequest = new LaceRequest();
             laceRequest.DriversLicenseRequest(package,
-                new DriversLicense(null, request.ScanData, request.UserId, request.Username));
+                new DriversLicense(null, request.ScanData, request.UserId, request.Username),
+                new Aggregation(Guid.NewGuid()));
             return laceRequest;
         }
 
@@ -75,5 +75,7 @@ namespace Api.Modules.Verification
 
         private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty,
             string.Empty, Guid.Empty);
+
+
     }
 }

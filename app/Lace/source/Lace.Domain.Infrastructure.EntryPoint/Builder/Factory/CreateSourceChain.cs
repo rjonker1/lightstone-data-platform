@@ -13,10 +13,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
     public class CreateSourceChain : IBuildSourceChain
     {
         private readonly IPackage _package;
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
 
         public CreateSourceChain(IPackage package)
         {
+            _log = LogManager.GetLogger(GetType());
             _package = package;
         }
 
@@ -24,11 +25,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
         {
             if (string.IsNullOrEmpty(_package.Action.Name))
             {
-                Log.Error("Package Name for request is empty. Source chain cannot be built");
+                _log.Error("Package Name for request is empty. Source chain cannot be built");
                 throw new Exception("Action for request is empty");
             }
 
-            Log.ErrorFormat("Building source chain for action {0}", _package.Action.Name);
+            _log.ErrorFormat("Building source chain for action {0}", _package.Action.Name);
 
             SourceChain =
                 new DataProviderSpecification().Specifications.SingleOrDefault(

@@ -11,13 +11,14 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
 {
     public class CarInfoUnitOfWork : IGetCarInfo
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         public IEnumerable<CarInfo> Cars { get; private set; }
         private readonly IReadOnlyCarRepository<CarInfo> _repository;
         private readonly IReadOnlyCarRepository<CarInfo> _vin12Repository;
 
         public CarInfoUnitOfWork(IReadOnlyCarRepository<CarInfo> repository, IReadOnlyCarRepository<CarInfo> vin12Repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
             _vin12Repository = vin12Repository;
         }
@@ -36,7 +37,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Car Information because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Car Information because of {0}", ex.Message);
             }
         }
 
