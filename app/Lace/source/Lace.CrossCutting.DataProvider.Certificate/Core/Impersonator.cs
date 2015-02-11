@@ -8,12 +8,17 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Core
 {
     public class Impersonator : IImpersonateACertificateUser
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
 
         private const int Logon32LogonInteractive = 2;
         private const int Logon32ProviderDefault = 0;
 
         private WindowsImpersonationContext _impersonationContext;
+
+        public Impersonator()
+        {
+            _log = LogManager.GetLogger(GetType());
+        }
 
         [DllImport("advapi32.dll")]
         private static extern int LogonUserA(string lpszUserName, string lpszDomain, string lpszPassword,
@@ -30,7 +35,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Core
 
         public bool ImpersonateAUser(string userName, string domain, string password)
         {
-            Log.InfoFormat("Impersonating User {0}.", userName);
+            _log.InfoFormat("Impersonating User {0}.", userName);
 
             var token = IntPtr.Zero;
             var duplicateToken = IntPtr.Zero;
@@ -58,7 +63,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Core
             if (duplicateToken != IntPtr.Zero)
                 CloseHandle(duplicateToken);
 
-            Log.ErrorFormat("Impersonation for User {0} failed.", userName);
+            _log.ErrorFormat("Impersonation for User {0} failed.", userName);
             return false;
         }
 

@@ -15,7 +15,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 {
     public class CallSignioDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.SignioDecryptDriversLicense;
@@ -23,6 +23,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 
         public CallSignioDataProvider(ILaceRequest request)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
@@ -66,7 +67,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Signio Drivers License Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Signio Drivers License Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Signio Drivers License Decryption"});
                 SignioResponseFailed(response);

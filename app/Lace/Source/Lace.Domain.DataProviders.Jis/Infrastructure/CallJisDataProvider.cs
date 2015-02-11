@@ -13,13 +13,12 @@ using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
 {
     public class CallJisDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Jis;
 
         private readonly ILaceRequest _request;
@@ -30,6 +29,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
         public CallJisDataProvider(ILaceRequest request, ISetupCertificateRepository repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _repository = repository;
         }
@@ -53,7 +53,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
                 proxy.Connect();
 
-                var session = new SessionManager(proxy, Log, _request).Build().SessionManagement;
+                var session = new SessionManager(proxy, _log, _request).Build().SessionManagement;
 
                 _jisResponse = proxy.DataStoreQuery(session.Id, new BuildJisRequest(_request).JisRequest,
                     _request.User.UserName);
@@ -73,7 +73,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling Jis Web Service {0}", ex.Message);
+                _log.ErrorFormat("Error calling Jis Web Service {0}", ex.Message);
                // monitoring.PublishFailedSourceCallMessage(Source);
                 JisResponseFailed(response);
             }

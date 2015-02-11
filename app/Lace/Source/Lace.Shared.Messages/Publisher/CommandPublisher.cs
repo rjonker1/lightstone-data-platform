@@ -8,11 +8,12 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
     public class CommandPublisher : IPublishCommandMessages
     {
         private readonly IBus _bus;
-        private readonly ILog _log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
 
         public CommandPublisher(IBus bus)
         {
             _bus = bus;
+            _log = LogManager.GetLogger(GetType());
         }
 
         public void SendToBus<T>(T message) where T : class

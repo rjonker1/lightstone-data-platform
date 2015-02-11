@@ -15,6 +15,7 @@ using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
+using NServiceBus;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api
@@ -59,13 +60,12 @@ namespace Api
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
 
-            var bus = new BusFactory("Monitoring.Messages.Commands").CreateBus();
-            container.Register<IEntryPoint>(new EntryPointService(bus));
+            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands").CreateBus());
+            container.Register<IEntryPoint, EntryPointService>();
 
             //TODO: Implement
            // container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
 
-            //verification
             container.Register<ICallFicaVerification, FicaVerificationService>();
             container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();
 
