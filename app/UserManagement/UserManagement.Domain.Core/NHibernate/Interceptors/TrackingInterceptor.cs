@@ -1,55 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using NHibernate;
-using NHibernate.Event.Default;
-using NHibernate.Id;
 using NHibernate.Transaction;
 using NHibernate.Type;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Entities;
+//using IsolationLevel = System.Data.IsolationLevel;
 
 namespace UserManagement.Domain.Core.NHibernate.Interceptors
 {
     public class TrackingInterceptor : EmptyInterceptor
     {
-        public class TransactionSynchronization : ISynchronization
+        private TransactionSynchronization _transactionSynchronization;
+        private ISession session = null;
+
+        private class TransactionSynchronization : ISynchronization
         {
-            private readonly Action _action;
-
-            public TransactionSynchronization(Action action)
-            {
-                _action = action;
-            }
-
             public void BeforeCompletion()
             {
-
+                //LogAudits(Session, AuditLogs);
             }
+
+            public ISession Session { get; set; }
+            public IEnumerable<AuditLog> AuditLogs { get; set; }
+            //public string EntityState { get; set; }
+            public object Entity { get; set; }
+            public Guid EntityId { get; set; }
 
             public void AfterCompletion(bool success)
             {
-                if (success)
-                    _action();
+                if (!success) return;
+
+                LogAudits(Session, AuditLogs);
+            }
+
+
+            private void LogAudits(ISession session, IEnumerable<AuditLog> logs)
+            {
+                session.SessionFactory.OpenSession();
+
+                //session.GetSession(EntityMode.Poco);
+
+                session.BeginTransaction(IsolationLevel.RepeatableRead);
+
+                var auditLogRepository = new Repository<AuditLog>(session);
+
+                var commitSequence = 0;
+
+                foreach (var auditLog in logs.Where(x => x.NewValue != null && x.OriginalValue != null))
+                {
+                    //auditLog.EventType = EntityState;
+
+                    if (auditLog.EventType == "D")
+                    {
+                        auditLog.NewValue = null;
+                    }
+
+                    if (auditLog.EventType == "A")
+                    {
+                        auditLog.OriginalValue = null;
+                    }
+
+                    if (auditLog.NewValue != auditLog.OriginalValue)
+                    {
+                        auditLog.CommitSequence = commitSequence;
+                        commitSequence++;
+                        auditLogRepository.SaveOrUpdate(auditLog);
+                    }
+                }
+
+                session.Transaction.Commit();
             }
         }
 
-        private ISession session = null;
-        //private AuditLog _auditLog;
-
-        private Repository<AuditLog> _auditLogRepository;
-
-        private List<AuditLog> _sessionAuditLogs;
 
         public override void SetSession(ISession session)
         {
-            _auditLogRepository = new Repository<AuditLog>(session);
-
-            _sessionAuditLogs = new List<AuditLog>();
-
+            //_sessionAuditLogs = new List<AuditLog>();
 
             this.session = session;
             base.SetSession(session);
@@ -59,20 +89,23 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
         public override int[] FindDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
            IType[] types)
         {
+            GetChanges(entity, id, currentState, previousState, propertyNames, types, "A");
 
+            return null;
+        }
+
+        private void GetChanges(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
+            IType[] types, string state)
+        {
             if (entity.GetType() == typeof(AuditLog))
             {
-                return new[] { 0 };
+                return;
             }
 
-            session.SessionFactory.OpenSession();
-            
-
-            _sessionAuditLogs = new List<AuditLog>();
-
-            var dirtyObjectIds = base.FindDirty(entity, id, currentState, previousState, propertyNames, types);
-
             var ordinal = 0;
+            var commitId = Guid.NewGuid();
+            var recordId = Guid.Parse(id.ToString());
+            var sessionAuditLogs = new List<AuditLog>(propertyNames.Length);
 
             foreach (var propertyName in propertyNames)
             {
@@ -86,74 +119,91 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
                     }
                 }
 
-
                 object newValue = null;
 
-                if (currentState[ordinal] != null)
+                if (currentState != null && currentState[ordinal] != null)
                 {
                     newValue = currentState[ordinal];
                 }
 
-
-                var auditLog = new AuditLog(Guid.NewGuid())
+                var auditLog = new AuditLog(commitId)
                 {
+                    Id = Guid.NewGuid(),
                     EntityName = entity.GetType().Name,
                     FieldName = propertyName,
                     OriginalValue = originalValue as string,
-                    NewValue = newValue as string
+                    NewValue = newValue as string,
+                    RecordId = recordId,
+                    DataType = types[ordinal].Name
                 };
 
-                _sessionAuditLogs.Add(auditLog);
+                var time = DateTime.Now;
 
+                auditLog.Created = time;
+                auditLog.EventDateUtc = time;
+                auditLog.Modified = time;
+                //auditLog.EventType = state;
 
+                auditLog.CommitSequence = ordinal;
+                auditLog.CommitVersion = 0;
+                auditLog.Revertable = true;
+
+                if (auditLog.OriginalValue == auditLog.NewValue)
+                {
+                    if (auditLog.OriginalValue == null && auditLog.NewValue == null)
+                    {
+                        ordinal++;
+                        break;
+                    }
+
+                    auditLog.EventType = "A";
+                }
+
+                if (auditLog.OriginalValue == null && auditLog.NewValue != null)
+                {
+                    auditLog.EventType = "A";
+                }
+
+                if (auditLog.OriginalValue != null && auditLog.NewValue != null)
+                {
+                    if (auditLog.OriginalValue != auditLog.NewValue)
+                    {
+                        auditLog.EventType = "M";
+                    }
+                    ;
+                }
+
+                if (auditLog.NewValue == null && auditLog.OriginalValue != null)
+                {
+                    auditLog.EventType = "D";
+                }
+
+                sessionAuditLogs.Add(auditLog);
 
                 ordinal++;
-
             }
 
-            return dirtyObjectIds;
-
+            AuditObjectModification(entity, id, sessionAuditLogs);
         }
 
         public override void OnDelete(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
-            AuditObjectModification(entity, id, EntityState.Deleted);
+            GetChanges(entity, id, null, state, propertyNames, types, "D");
 
             base.OnDelete(entity, id, state, propertyNames, types);
         }
 
-        private void AuditObjectModification(object entity, object id, EntityState state)
+        private void AuditObjectModification(object entity, object id, IEnumerable<AuditLog> sessionAuditLogs)
         {
-
-            session.Transaction.RegisterSynchronization(new TransactionSynchronization(() =>
+            _transactionSynchronization = new TransactionSynchronization
             {
+                Session = session,
+                AuditLogs = sessionAuditLogs,
+                Entity = entity,
+                EntityId = Guid.Parse(id.ToString())
+            };
 
-                // TODO: submit message to the bus here!
-
-
-                // TODO: persite the AuditLog session
-
-
-                session.Transaction.Begin();
-
-                foreach (var log in _sessionAuditLogs)
-                {
-
-                    
-
-
-                    
-                }
-
-                
-
-                session.Transaction.Commit();
-
-                _sessionAuditLogs.Clear();
-
-            })); 
-
-
+            session.Transaction.RegisterSynchronization(_transactionSynchronization);
         }
 
 
@@ -161,82 +211,62 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             string[] propertyNames,
             global::NHibernate.Type.IType[] types)
         {
+            Footprint(entity, state, propertyNames);
 
-            // AuditObjectModification(entity, id, EntityState.Persistent);
+            GetChanges(entity, id, state, null, propertyNames, types, "A");
 
-
-
-            var time = DateTime.Now;
-
-            var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
-
-            var userName = "System";
-
-            if (identity != null)
-            {
-                userName = identity.Name;
-            }
-
-
-            var typedEntity = (Entity)entity;
-            typedEntity.Created = time;
-            typedEntity.CreatedBy = userName;
-            typedEntity.Modified = time;
-            typedEntity.ModifiedBy = userName;
-
-            var indexOfCreated = GetIndex(propertyNames, "Created");
-            var indexOfCreatedBy = GetIndex(propertyNames, "CreatedBy");
-            var indexOfModified = GetIndex(propertyNames, "Modified");
-            var indexOfModifiedBy = GetIndex(propertyNames, "ModifiedBy");
-
-            state[indexOfCreated] = time;
-            state[indexOfCreatedBy] = userName;
-            state[indexOfModified] = time;
-            state[indexOfModifiedBy] = userName;
-
-
-            AuditObjectModification(entity, id, EntityState.Persistent);
             return base.OnSave(entity, id, state, propertyNames, types);
         }
 
-        public override bool OnFlushDirty(object entity, object id, object[] currentState,
-            object[] previousState, string[] propertyNames,
-            global::NHibernate.Type.IType[] types)
+        private void Footprint(object entity, object[] state, string[] propertyNames)
         {
+            var time = DateTime.Now;
             var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
-
             var userName = "System";
+            var typedEntity = (Entity)entity;
 
             if (identity != null)
             {
                 userName = identity.Name;
             }
 
-            var time = DateTime.Now;
-
-            var indexOfCreated = GetIndex(propertyNames, "Created");
-            var indexOfCreatedBy = GetIndex(propertyNames, "CreatedBy");
-            var indexOfModified = GetIndex(propertyNames, "Modified");
-            var indexOfModifiedBy = GetIndex(propertyNames, "ModifiedBy");
-
-            var typedEntity = (Entity)entity;
-            if (typedEntity.Created == DateTime.MinValue)
+            if (typedEntity.Created == null)
             {
-                currentState[indexOfCreated] = time;
-                currentState[indexOfCreatedBy] = userName;
                 typedEntity.Created = time;
                 typedEntity.CreatedBy = userName;
             }
 
-            currentState[indexOfModified] = time;
-            currentState[indexOfModifiedBy] = userName;
             typedEntity.Modified = time;
             typedEntity.ModifiedBy = userName;
 
-            AuditObjectModification(entity, id, EntityState.Transient);
+            var indexOfCreated = GetIndex(propertyNames, "Created");
+            var indexOfCreatedBy = GetIndex(propertyNames, "CreatedBy");
+            var indexOfModified = GetIndex(propertyNames, "Modified");
+            var indexOfModifiedBy = GetIndex(propertyNames, "ModifiedBy");
+
+            if (typedEntity.Created == null)
+            {
+                state[indexOfCreated] = time;
+                state[indexOfCreatedBy] = userName;
+            }
+
+            state[indexOfModified] = time;
+            state[indexOfModifiedBy] = userName;
+        }
+
+        public override bool OnFlushDirty(object entity, object id, object[] currentState,
+            object[] previousState, string[] propertyNames,
+            IType[] types)
+        {
+            session.SessionFactory.OpenSession();
+
+            Footprint(entity, currentState, propertyNames);
+
+            GetChanges(entity, id, currentState, previousState, propertyNames, types, "M");
 
             return base.OnFlushDirty(entity, id, currentState, previousState, propertyNames, types);
         }
+
 
         private int GetIndex(object[] array, string property)
         {

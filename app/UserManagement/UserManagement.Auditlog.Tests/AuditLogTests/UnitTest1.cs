@@ -29,50 +29,35 @@ namespace AuditLogTests
 
             _session = _container.Resolve<ISession>();
 
+            // create the role
+
             _session.BeginTransaction();
 
             var roleRepo = new Repository<Role>(_session);
 
             var roleId = Guid.Parse("7C270960-0C16-4812-9CEF-275EA308A1AD");
 
-            var role = new Role(roleId, "TestRole");
+            var role = new Role(roleId, "TestRole " + roleId);
 
             roleRepo.SaveOrUpdate(role);
 
             _session.Transaction.Commit();
 
-            _session.BeginTransaction();
 
-           // roleRepo.Delete(role);
+            // fine the role and modify the role
 
-           // roleRepo.SaveOrUpdate(role);
+            //_session.BeginTransaction();
 
-           // _session.Transaction.Commit();
+            var role1 = roleRepo.Get(roleId);
 
-           
-           // _session.BeginTransaction();
-
-
-            // fine the role
-            //
-            var role1 = roleRepo.Get(role.Id);
-
-            _session.BeginTransaction();
-
-            // modify the role
-
-        
-            role1.UpdateValue("TestRoleX");
-
-            
-            //roleRepo.SaveOrUpdate(role1);
-
-            _session.Transaction.Commit();
+            //role1.UpdateValue("TestRoleX");
+            //_session.Transaction.Commit();
 
 
             // delete
+
             _session.BeginTransaction();
-            role1 = roleRepo.Get(role1.Id);
+            //role1 = roleRepo.Get(role1.Id);
             roleRepo.Delete(role1);
             _session.Transaction.Commit();
           
