@@ -1,4 +1,5 @@
 ﻿using System;
+using Api.Domain.Infrastructure.Metadata;
 using Nancy;
 using Nancy.Routing;
 

@@ -1,4 +1,4 @@
-﻿using Api.Infrastructure.Metadata;
+﻿using Api.Domain.Infrastructure.Metadata;
 using Nancy;
 
 namespace Api.Modules

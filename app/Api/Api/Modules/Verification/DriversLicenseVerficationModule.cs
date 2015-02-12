@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Api.Domain.Infrastructure.Requests;
-using Api.Verfication.Core.Contracts;
-using Api.Verfication.Fakes;
-using Api.Verfication.Infrastructure.Commands;
-using Api.Verfication.Infrastructure.Dto;
-using Api.Verfication.Infrastructure.Handlers.Contracts;
-using AutoMapper;
+using Api.Domain.Verification.Core.Contracts;
+using Api.Domain.Verification.Fakes;
+using Api.Domain.Verification.Infrastructure.Commands;
+using Api.Domain.Verification.Infrastructure.Dto;
+using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
 using Billing.Api.Connector;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Shared.Extensions;
+using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using Shared.BuildingBlocks.Api;
@@ -18,38 +16,36 @@ using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Modules.Verification
 {
-    public class DriversLicenseVerficationModule : VerificationSecureModule
+    public class DriversLicenseVerficationModule : VerificationModule
     {
         public DriversLicenseVerficationModule(IPbApiClient packageBuilderApi,
             IHandleDriversLicenseVerficationRequests handler, IConnectToBilling billingConnector)
         {
 
             Get["/driversLicenseVerification"] =
-                _ => new
+                _ => Response.AsJson(new
                 {
                     _request,
                     _response
-                }.AsJsonString();
+                });
 
             Post["/driversLicenseVerification/{packageId}/{packageVersion}"] = _ =>
             {
                 var token = Context.AuthorizationHeaderToken();
 
-
-                //var packageResponse = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
-                //test package id = "EB49A837-D9E3-4F2A-8DC9-2CB0BB5D48E2"
+                //var package = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
                 var package = new FakePackageBuilderApi().PackageDatabase.First().Value;
                 var request = this.Bind<DriversLicenseRequestDto>();
 
                 handler.Handle(new DriversLicenseVerficationCommand(BuildLaceRequest(package, request)));
 
-
                 //TODO: implement billing
 
-                return handler.Response.AsJsonString();
+                //return handler.Response.AsJsonString();
+                return Response.AsJson(handler.Response);
             };
         }
-        
+
 
         private static ILaceRequest BuildLaceRequest(IPackage package, IHaveDriversLicenseRequest request)
         {
@@ -75,7 +71,5 @@ namespace Api.Modules.Verification
 
         private readonly IHaveDriversLicenseRequest _request = new DriversLicenseRequestDto(string.Empty, string.Empty,
             string.Empty, Guid.Empty);
-
-
     }
 }

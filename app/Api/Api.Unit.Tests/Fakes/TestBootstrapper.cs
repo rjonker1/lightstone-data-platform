@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Api.Infrastructure.Automapping;
+using Api.Domain.Infrastructure.Automapping;
 using Billing.Api.Connector;
 using Billing.Api.Dtos;
 using Lace.Domain.Core.Requests.Contracts;

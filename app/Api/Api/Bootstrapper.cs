@@ -1,16 +1,11 @@
-﻿
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
-using Api.Infrastructure.Automapping;
+﻿using Api.Domain.Infrastructure.Automapping;
+using Api.Domain.Infrastructure.Extensions;
+using Api.Domain.Verification.Core.Contracts;
+using Api.Domain.Verification.Infrastructure.Handlers;
+using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
+using Api.Domain.Verification.Infrastructure.Services;
 using Api.Infrastructure.Metadata;
-using Api.Verfication.Core.Contracts;
-using Api.Verfication.Infrastructure.Handlers;
-using Api.Verfication.Infrastructure.Handlers.Contracts;
-using Api.Verfication.Infrastructure.Messaging.RabbitMQ;
-using Api.Verfication.Infrastructure.Services;
-using Billing.Api.Connector;
-using Billing.Api.Connector.Configuration;
+using DataPlatform.Shared.Messaging.RabbitMQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Nancy;
@@ -18,9 +13,9 @@ using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
-using NHibernate.Mapping;
 using NServiceBus;
 using Shared.BuildingBlocks.Api.Security;
+
 
 namespace Api
 {
@@ -66,7 +61,7 @@ namespace Api
 
             var assembliesToScan = AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages").And("NServiceBus.NHibernate").And("NServiceBus.Transports.RabbitMQ");
 
-            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands", assembliesToScan).CreateBus());
+            container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands", assembliesToScan, "DataPlatform.Monitoring.Host").CreateBus());
             container.Register<IEntryPoint, EntryPointService>();
 
             //TODO: Implement
