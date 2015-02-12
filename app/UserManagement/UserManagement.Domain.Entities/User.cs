@@ -16,7 +16,7 @@ namespace UserManagement.Domain.Entities
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
         //public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
-        //public virtual IEnumerable<Customer> Customers { get; protected internal set; }
+        public virtual ISet<Customer> Customers { get; protected internal set; }
 
         protected User() { }
 
