@@ -267,8 +267,8 @@
     <Compile Include="Modules\ApiNancyModule.cs" />
     <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="Modules\Verification\DriversLicenseVerficationModule.cs" />
-    <Compile Include="Modules\Verification\FicaVerificationModule.cs" />
+    <Compile Include="Modules\Verification\DriversLicenseModule.cs" />
+    <Compile Include="Modules\Verification\FicaModule.cs" />
     <Compile Include="Modules\Verification\VerificationModule.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
