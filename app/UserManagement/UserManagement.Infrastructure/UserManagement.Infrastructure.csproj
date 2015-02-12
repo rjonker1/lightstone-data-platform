@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\EntitiesByTypeHelper.cs" />
     <Compile Include="MessageAdapter.cs" />
     <Compile Include="NHibernate\Conventions\AuditLogConvention.cs" />
     <Compile Include="NHibernate\AutoPersistenceModelConfiguration.cs" />

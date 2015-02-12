@@ -18,6 +18,7 @@ using UserManagement.Domain.Entities.Commands.PlatformStatuses;
 using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
 using UserManagement.Domain.Entities.Commands.UserTypes;
+using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api
 {
@@ -46,7 +47,8 @@ namespace UserManagement.Api
                 new CommandInstaller(),
                 new BusInstaller(),
                 new ServiceLocatorInstaller(),
-                new AutoMapperInstaller()
+                new AutoMapperInstaller(),
+                new HelperInstaller()
                 );
 
             //Drop create
@@ -73,23 +75,23 @@ namespace UserManagement.Api
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
 
-            AddLookupData(container, pipelines, context);
+            AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
 
             base.RequestStartup(container, pipelines, context);
         }
 
-        private static void AddLookupData(IWindsorContainer container, IPipelines pipelines, NancyContext context)
+        private static void AddLookupData(IPipelines pipelines, IRetrieveEntitiesByType entityRetriever)
         {
-            pipelines.AddLookupDataToViewBag<PaymentType>(container);
-            pipelines.AddLookupDataToViewBag<PlatformStatus>(container);
-            pipelines.AddLookupDataToViewBag<CreateSource>(container);
-            pipelines.AddLookupDataToViewBag<CommercialState>(container);
-            pipelines.AddLookupDataToViewBag<ContractType>(container);
-            pipelines.AddLookupDataToViewBag<EscalationType>(container);
-            pipelines.AddLookupDataToViewBag<ContractDuration>(container);
-            pipelines.AddLookupDataToViewBag<Province>(container);
-            pipelines.AddLookupDataToViewBag<UserType>(container);
-            pipelines.AddLookupDataToViewBag<Role>(container);
+            pipelines.AddLookupDataToViewBag<PaymentType>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<PlatformStatus>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<CreateSource>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<CommercialState>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<ContractType>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<EscalationType>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<ContractDuration>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<Province>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<UserType>(entityRetriever);
+            pipelines.AddLookupDataToViewBag<Role>(entityRetriever);
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
