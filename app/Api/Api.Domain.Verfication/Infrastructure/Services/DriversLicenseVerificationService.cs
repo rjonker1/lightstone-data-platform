@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using Api.Verfication.Core.Contracts;
-using Api.Verfication.Infrastructure.Dto;
+using Api.Domain.Verification.Core.Contracts;
+using Api.Domain.Verification.Infrastructure.Dto;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 
-namespace Api.Verfication.Infrastructure.Services
+namespace Api.Domain.Verification.Infrastructure.Services
 {
     public class DriversLicenseVerificationService : ICallDriversLicenseVerification
     {
@@ -17,7 +17,6 @@ namespace Api.Verfication.Infrastructure.Services
 
         public IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(ILaceRequest request)
         {
-
             var responses = _entryPointService.GetResponsesFromLace(request);
 
             if (responses == null || !responses.Any())
