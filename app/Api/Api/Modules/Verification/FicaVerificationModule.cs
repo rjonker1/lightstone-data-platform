@@ -1,28 +1,28 @@
 ﻿using System;
-using Api.Verfication.Core.Contracts;
-using Api.Verfication.Infrastructure.Commands;
-using Api.Verfication.Infrastructure.Dto;
-using Api.Verfication.Infrastructure.Handlers.Contracts;
-using Lace.Shared.Extensions;
+using Api.Domain.Verification.Core.Contracts;
+using Api.Domain.Verification.Infrastructure.Commands;
+using Api.Domain.Verification.Infrastructure.Dto;
+using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
+using Nancy;
 using Nancy.ModelBinding;
 
 namespace Api.Modules.Verification
 {
-    public class FicaVerificationModule : VerificationSecureModule
+    public class FicaVerificationModule : VerificationModule
     {
         public FicaVerificationModule(IHandleFicaVerficationRequests handler)
         {
-            Get["/ficaVerification"] = _ => new
+            Get["/ficaVerification"] = _ => Response.AsJson(new
             {
                 _request,
                 _response
-            }.AsJsonString();
+            });
 
             Post["/ficaVerification/"] = _ =>
             {
                 var request = this.Bind<FicaVerficationRequestDto>();
                 handler.Handle(new VerifyPersonsFicaInformationCommand(request));
-                return handler.FicaVerficationResponse.AsJsonString();
+                return Response.AsJson(handler.FicaVerficationResponse);
             };
         }
 

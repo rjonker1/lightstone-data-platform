@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -76,77 +76,77 @@
     <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.619\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.610, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.628, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.630, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.628\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -167,6 +167,9 @@
     <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api, Version=1.0.0.619, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.619\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.1.0.0.630\lib\net45\Lightstone.DataPlatform.Shared.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Nancy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -191,7 +194,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.628\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -218,19 +221,19 @@
     </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.628\lib\net45\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -259,8 +262,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Infrastructure\Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Infrastructure\Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Metadata\ApiMetaDataGenerator.cs" />
     <Compile Include="Modules\ApiNancyModule.cs" />
     <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />
@@ -270,7 +273,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Verification\DriversLicenseVerficationModule.cs" />
     <Compile Include="Modules\Verification\FicaVerificationModule.cs" />
-    <Compile Include="Modules\Verification\VerificationSecureModule.cs" />
+    <Compile Include="Modules\Verification\VerificationModule.cs" />
     <Compile Include="PiplineExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -335,17 +338,9 @@
       <Project>{3185c675-2461-4382-b123-3090d3c45d2e}</Project>
       <Name>Api.Domain.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Verification\Api.Verfication.Core\Api.Verfication.Core.csproj">
-      <Project>{f0500b19-dc53-423c-b5aa-be8dde1b3619}</Project>
-      <Name>Api.Verfication.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Verification\Api.Verfication.Fakes\Api.Verfication.Fakes.csproj">
-      <Project>{65cc28f0-b92c-4a3d-855c-8aa8d5cb1457}</Project>
-      <Name>Api.Verfication.Fakes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Verification\Api.Verfication.Infrastructure\Api.Verfication.Infrastructure.csproj">
-      <Project>{c1720b63-b55f-481d-97b3-1826777039c5}</Project>
-      <Name>Api.Verfication.Infrastructure</Name>
+    <ProjectReference Include="..\Api.Domain.Verfication\Api.Domain.Verification.csproj">
+      <Project>{5fee228c-b7f0-46aa-a06a-0b345157de69}</Project>
+      <Name>Api.Domain.Verification</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
