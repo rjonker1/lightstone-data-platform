@@ -438,4 +438,4 @@ task :default => [
 	] do
 end
 
-task :deploy => ['convention:spec_generation', 'deploy:default'] do en
+task :deploy => ['convention:spec_generation', 'deploy:default'] do end
