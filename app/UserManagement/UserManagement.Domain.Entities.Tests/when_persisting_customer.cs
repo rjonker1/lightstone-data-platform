@@ -26,7 +26,7 @@ namespace UserManagement.Domain.Entities.Tests
             var user = new User("FirstName", "LastName", "IdNumber", "ContactNumber", "UserName", "Password", false, userType, roles);
             new PersistenceSpecification<Customer>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.CustomerName, "FirstName")
+                .CheckProperty(c => c.Name, "FirstName")
                 .CheckProperty(c => c.AccountOwnerName, "LastName")
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState(""))

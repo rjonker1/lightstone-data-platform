@@ -10,7 +10,7 @@ namespace UserManagement.Domain.Dtos
         }
 
         public Guid Id { get; set; }
-        public string CustomerName { get; set; }
+        public string Name { get; set; }
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
         public Guid CreateSourceId { get; set; }

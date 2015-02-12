@@ -145,6 +145,7 @@
 
         $(document).ajaxComplete(function () {
             ReinitializeComponents();
+            $.unblockUI;
         });
         $(document).ajaxStop($.unblockUI);
         
