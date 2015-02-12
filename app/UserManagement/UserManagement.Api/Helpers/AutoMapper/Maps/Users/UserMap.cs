@@ -12,6 +12,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
     {
         public void CreateMaps()
         {
+            Mapper.CreateMap<IEnumerable<User>, IEnumerable<UserDto>>()
+                .ConvertUsing(s => s.Select(Mapper.Map<User, UserDto>));
+
             Mapper.CreateMap<User, UserDto>()
                 .ForMember(dest => dest.RoleIds, opt => opt.MapFrom(x => x.Roles.Select(y => y.Id)));
 

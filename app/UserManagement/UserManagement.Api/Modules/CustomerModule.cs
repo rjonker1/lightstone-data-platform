@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using MemBus;
 using Nancy;
@@ -17,9 +18,10 @@ namespace UserManagement.Api.Modules
         {
             Get["/Customers"] = _ =>
             {
+                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers);
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
             };
 
             Get["/Customers/Add"] = parameters =>

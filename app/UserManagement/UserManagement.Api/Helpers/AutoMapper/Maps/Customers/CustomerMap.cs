@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
@@ -10,6 +12,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
     {
         public void CreateMaps()
         {
+            Mapper.CreateMap<IEnumerable<Customer>, IEnumerable<CustomerDto>>()
+                .ConvertUsing(s => s.Select(Mapper.Map<Customer, CustomerDto>));
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<CustomerDto, Customer>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
