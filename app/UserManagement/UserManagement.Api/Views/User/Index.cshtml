@@ -1,0 +1,34 @@
+﻿@using System
+@using UserManagement.Api.Modules
+@using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Dtos
+@*@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>*@
+
+@Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Users", ""))
+
+<table id="users_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+
+<script>
+    var table = $("#users_table").DataTable({
+        dom: '<"table-toolbar">frtip',
+        retrieve: true,
+        ajax: "/Users",
+        columns: [
+            { data: "id", visible: false },
+            { data: "firstName" },
+            { data: "lastName" },
+            { data: null, defaultContent: "<button class='btn btn-primary entity-edit' data-url='/Users/'>Edit</button>" }
+        ]
+    });
+
+    $("div.table-toolbar").html("<button class='btn btn-default entity-add' data-url='/Users/Add'>Add</button>");
+</script>

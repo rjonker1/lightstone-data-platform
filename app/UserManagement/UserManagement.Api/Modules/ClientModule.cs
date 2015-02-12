@@ -31,9 +31,9 @@ namespace UserManagement.Api.Modules
             Post["/Clients"] = _ =>
             {
                 var dto = this.Bind<ClientDto>();
-                var client = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+                var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new CreateUpdateEntity(client));
+                bus.Publish(new CreateUpdateEntity(entity));
 
                 return Negotiate
                     .WithView("Index")
@@ -51,9 +51,9 @@ namespace UserManagement.Api.Modules
             Put["/Clients/{id}"] = _ =>
             {
                 var dto = this.Bind<ClientDto>();
-                var client = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+                var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new CreateUpdateEntity(client));
+                bus.Publish(new CreateUpdateEntity(entity));
 
                 return Negotiate
                     .WithView("Index")

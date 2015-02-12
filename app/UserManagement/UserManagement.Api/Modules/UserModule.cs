@@ -1,33 +1,62 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using AutoMapper;
 using MemBus;
 using Nancy;
+using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.Commands.Users;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules
 {
     public class UserModule : NancyModule
     {
-        public UserModule(IBus bus, IRepository<User> users, IRepository<Customer> customers, IRepository<Client> clients)
+        public UserModule(IBus bus, IRepository<User> users)
         {
             Get["/Users"] = _ =>
             {
-                var random = users.AsEnumerable();
-                var refined = random.Select(x => x).Where(x => x.IsActive == true);
-
-                return Response.AsJson(refined);
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = users });
             };
 
-            Get["/Users/Create"] = _ =>
+            Get["/Users/Add"] = _ =>
             {
-                var dto = new UserDto("Johnny", "Testeroonie", "IdNumber", "contactNumber", "username", "password", true, new UserType("User"), new HashSet<Role> { new Role("Admin") });
+                return View["Save", new UserDto()];
+            };
 
-                bus.Publish(new CreateUser(dto.FirstName, dto.LastName, dto.IdNumber, dto.ContactNumber, dto.UserName, dto.Password, dto.IsActive, dto.UserType, dto.Roles));
+            Post["/Users"] = _ =>
+            {
+                var dto = this.Bind<UserDto>();
+                var entity = Mapper.Map(dto, users.Get(dto.Id));
 
-                return "Success!";
+                bus.Publish(new CreateUpdateEntity(entity));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = users });
+            };
+
+            Get["/Users/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var dto = Mapper.Map<User, UserDto>(users.Get(guid));
+
+                return View["Save", dto];
+            };
+
+            Put["/Users/{id}"] = _ =>
+            {
+                var dto = this.Bind<UserDto>();
+                var entity = Mapper.Map<UserDto, User>(dto, users.Get(dto.Id));
+
+                bus.Publish(new CreateUpdateEntity(entity));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = users });
             };
         }
     }
