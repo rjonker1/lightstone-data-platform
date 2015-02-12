@@ -3,7 +3,7 @@ using AutoMapper;
 using Nancy;
 using Newtonsoft.Json;
 
-namespace Api.Infrastructure.Automapping
+namespace Api.Domain.Infrastructure.Automapping
 {
     public static class AutoMapperConfiguration
     {

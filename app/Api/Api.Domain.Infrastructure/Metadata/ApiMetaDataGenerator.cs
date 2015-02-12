@@ -2,7 +2,7 @@
 using Nancy;
 using Nancy.Routing;
 
-namespace Api.Infrastructure.Metadata
+namespace Api.Domain.Infrastructure.Metadata
 {
     public class ApiMetaDataGenerator : IApiMetaDataGenerator
     {

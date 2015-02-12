@@ -6,7 +6,7 @@ using Nancy.Bootstrapper;
 using Newtonsoft.Json;
 using Common.Logging;
 
-namespace Api
+namespace Api.Domain.Infrastructure.Extensions
 {
     public static class PiplineExtensions
     {

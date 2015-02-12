@@ -263,18 +263,13 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Infrastructure\Automapping\AutoMapperConfiguration.cs" />
-    <Compile Include="Infrastructure\Metadata\ApiMetaDataGenerator.cs" />
+    <Compile Include="Infrastructure\Metadata\DefaultRouteMetadataProvider.cs" />
     <Compile Include="Modules\ApiNancyModule.cs" />
     <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />
-    <Compile Include="Infrastructure\Metadata\DefaultRouteMetadata.cs" />
-    <Compile Include="Infrastructure\Metadata\DefaultRouteMetadataProvider.cs" />
-    <Compile Include="Infrastructure\Metadata\IApiMetaDataGenerator.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Verification\DriversLicenseVerficationModule.cs" />
     <Compile Include="Modules\Verification\FicaVerificationModule.cs" />
     <Compile Include="Modules\Verification\VerificationModule.cs" />
-    <Compile Include="PiplineExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

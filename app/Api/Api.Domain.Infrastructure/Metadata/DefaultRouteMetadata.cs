@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nancy;
 
-namespace Api.Infrastructure.Metadata
+namespace Api.Domain.Infrastructure.Metadata
 {
     public class DefaultRouteMetadata
     {

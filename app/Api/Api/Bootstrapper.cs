@@ -1,8 +1,9 @@
-﻿using Api.Domain.Verification.Core.Contracts;
+﻿using Api.Domain.Infrastructure.Automapping;
+using Api.Domain.Infrastructure.Extensions;
+using Api.Domain.Verification.Core.Contracts;
 using Api.Domain.Verification.Infrastructure.Handlers;
 using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
 using Api.Domain.Verification.Infrastructure.Services;
-using Api.Infrastructure.Automapping;
 using Api.Infrastructure.Metadata;
 using DataPlatform.Shared.Messaging.RabbitMQ;
 using Lace.Domain.Infrastructure.Core.Contracts;

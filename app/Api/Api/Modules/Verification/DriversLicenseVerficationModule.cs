@@ -33,13 +33,11 @@ namespace Api.Modules.Verification
             {
                 var token = Context.AuthorizationHeaderToken();
 
-
                 //var package = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
                 var package = new FakePackageBuilderApi().PackageDatabase.First().Value;
                 var request = this.Bind<DriversLicenseRequestDto>();
 
                 handler.Handle(new DriversLicenseVerficationCommand(BuildLaceRequest(package, request)));
-
 
                 //TODO: implement billing
 
