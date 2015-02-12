@@ -262,8 +262,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Infrastructure\Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Infrastructure\Automapping\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Metadata\ApiMetaDataGenerator.cs" />
     <Compile Include="Modules\ApiNancyModule.cs" />
     <Compile Include="Infrastructure\Metadata\ApiRouteDescriptionProvider.cs" />
