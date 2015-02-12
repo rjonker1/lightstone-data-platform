@@ -36,6 +36,7 @@
     <script src="~/Scripts/DataTables-1.10.4/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/chosen.jquery.min.js"></script>
     <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
         $.ajaxSetup({ global: true, cache: false });
@@ -45,6 +46,7 @@
             $(".menu-link").click(function () {
                 var $self = $(this);
                 var url = $self.attr('href');
+                block();
                 $.get(url, function (response) {
                     $("#container").html(response);
                 }, 'html');
@@ -53,6 +55,7 @@
         });
 
         function showRequest(formData, jqForm, options) {
+            block();
             var method = jqForm.data('method');
             options.type = method;
             $.ajaxSetup({
@@ -117,7 +120,7 @@
                 }
                 var $self = $(this);
                 var url = $self.data('url');
-
+                block();
                 $.get(url, function (response) {
                     $("#container").html(response);
                     ReinitializeComponents();
@@ -131,6 +134,7 @@
                 var $self = $(this);
                 var url = $self.data('url');
                 var data = table.row($(this).parents('tr')).data();
+                block();
                 $.get(url + data.id, function (response) {
                     $("#container").html(response);
                     ReinitializeComponents();
@@ -142,6 +146,11 @@
         $(document).ajaxComplete(function () {
             ReinitializeComponents();
         });
+        $(document).ajaxStop($.unblockUI);
+        
+        function block() {
+            $.blockUI({ message: '<h1><img src="Content/ajax-loader.gif" /> Loading...</h1>' });
+        }
     </script>
 </body>
 </html>
