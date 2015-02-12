@@ -95,7 +95,7 @@
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.Roles.Value)
                         {
-                            var isSelected = Model.RoleIds.Contains(new Guid(item.Value));
+                            var isSelected = Model.RoleIds != null && Model.RoleIds.Contains(new Guid(item.Value));
                             <option selected="@isSelected" value="@item.Value">@item.Text</option>
                         }
                     </select>

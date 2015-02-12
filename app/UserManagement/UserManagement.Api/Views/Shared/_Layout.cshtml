@@ -110,7 +110,11 @@
         function ReinitializeComponents() {
             ExecuteScriptsFromAjaxResponse();
             $(".chosen-select").chosen();
-            $(".entity-add").on("click", function () {
+            $(".entity-add").on("click", function (e) {
+                if (e.handled !== true) // This will prevent event triggering more then once
+                {
+                    e.handled = true;
+                }
                 var $self = $(this);
                 var url = $self.data('url');
 
@@ -119,7 +123,11 @@
                     ReinitializeComponents();
                 });
             });
-            $('table tbody').on('click', 'button.entity-edit', function () {
+            $('table tbody').on('click', 'button.entity-edit', function (e) {
+                if (e.handled !== true) // This will prevent event triggering more then once
+                {
+                    e.handled = true;
+                }
                 var $self = $(this);
                 var url = $self.data('url');
                 var data = table.row($(this).parents('tr')).data();
