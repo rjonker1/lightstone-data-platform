@@ -8,6 +8,7 @@ using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Clients;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules
 {
@@ -30,7 +31,9 @@ namespace UserManagement.Api.Modules
             Post["/Clients"] = _ =>
             {
                 var dto = this.Bind<ClientDto>();
-                bus.Publish(new CreateUpdateClient(dto.ClientName));
+                var client = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+
+                bus.Publish(new CreateUpdateEntity(client));
 
                 return Negotiate
                     .WithView("Index")
@@ -48,7 +51,9 @@ namespace UserManagement.Api.Modules
             Put["/Clients/{id}"] = _ =>
             {
                 var dto = this.Bind<ClientDto>();
-                bus.Publish(new CreateUpdateClient(dto.Id, dto.ClientName));
+                var client = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+
+                bus.Publish(new CreateUpdateEntity(client));
 
                 return Negotiate
                     .WithView("Index")

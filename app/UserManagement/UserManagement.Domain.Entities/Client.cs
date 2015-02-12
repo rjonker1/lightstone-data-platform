@@ -11,7 +11,7 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Package> Packages { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
 
-        protected Client() { }
+        public Client() { }
 
         public Client(string clientName, Guid id = new Guid()) : base(id)
         {

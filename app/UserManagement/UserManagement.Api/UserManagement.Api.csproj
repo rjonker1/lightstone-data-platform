@@ -254,8 +254,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Addresses\AddressMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Clients\ClientMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Billings\BillingMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ContactDetails\ContactDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Customers\CustomerMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Converters\IdToEntityConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Entities\EntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
