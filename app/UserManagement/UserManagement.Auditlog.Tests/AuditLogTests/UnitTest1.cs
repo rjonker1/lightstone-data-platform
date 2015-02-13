@@ -17,17 +17,29 @@ namespace AuditLogTests
         private readonly IWindsorContainer _container = new WindsorContainer();
         private ISession _session;
 
-        [TestMethod]
-        public void TestMethod1()
+        [TestInitialize]
+        public void IntializaTest()
         {
             _container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
 
-           // Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideNhibernateSessionLifestyle;
+            // Container.Kernel.ComponentModelCreated += OverrideHelper.OverrideNhibernateSessionLifestyle;
 
             _container.Install(new NHibernateInstaller());
             OverrideHelper.OverrideNhibernateCfg(_container);
 
             _session = _container.Resolve<ISession>();
+        }
+
+        public void CleanupTest()
+        {
+            _session.Dispose();
+        }
+
+
+        [TestMethod]
+        public void TestAddRole()
+        {
+            
 
             // create the role
 
@@ -42,25 +54,41 @@ namespace AuditLogTests
             roleRepo.SaveOrUpdate(role);
 
             _session.Transaction.Commit();
+          
+          
+        }
 
+        [TestMethod]
+        public void TestModifyRole()
+        {
+            var roleRepo = new Repository<Role>(_session);
+            var roleId = Guid.Parse("7C270960-0C16-4812-9CEF-275EA308A1AD");
 
             // fine the role and modify the role
 
-            //_session.BeginTransaction();
+            _session.BeginTransaction();
 
             var role1 = roleRepo.Get(roleId);
 
-            //role1.UpdateValue("TestRoleX");
-            //_session.Transaction.Commit();
+            role1.UpdateValue("TestRoleX");
+            _session.Transaction.Commit();
+        }
 
+        [TestMethod]
+        public void TestDeleteRole()
+        {
+            var roleRepo = new Repository<Role>(_session);
 
+            var roleId = Guid.Parse("7C270960-0C16-4812-9CEF-275EA308A1AD");
+
+            // fine the role and modify the role
+            var role1 = roleRepo.Get(roleId);
+        
             // delete
-
             _session.BeginTransaction();
-            //role1 = roleRepo.Get(role1.Id);
             roleRepo.Delete(role1);
             _session.Transaction.Commit();
-          
+
         }
     }
 }

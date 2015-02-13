@@ -17,11 +17,20 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
         private TransactionSynchronization _transactionSynchronization;
         private ISession session = null;
 
+        public bool ChangedTracked { get; set; }
+
         private class TransactionSynchronization : ISynchronization
         {
+            public TransactionSynchronization(TrackingInterceptor trackingInterceptor)
+            {
+                this.TrackingInterceptor = trackingInterceptor;
+            }
+
+            private TrackingInterceptor TrackingInterceptor { get; set; }
+
             public void BeforeCompletion()
             {
-                //LogAudits(Session, AuditLogs);
+                // TODO: find previous commits for the record
             }
 
             public ISession Session { get; set; }
@@ -42,18 +51,22 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             {
                 session.SessionFactory.OpenSession();
 
-                //session.GetSession(EntityMode.Poco);
-
                 session.BeginTransaction(IsolationLevel.RepeatableRead);
 
                 var auditLogRepository = new Repository<AuditLog>(session);
 
                 var commitSequence = 0;
 
-                foreach (var auditLog in logs.Where(x => x.NewValue != null && x.OriginalValue != null))
-                {
-                    //auditLog.EventType = EntityState;
+                // TODO: find previous commits for the record
 
+                var previousAudidtsCommitVersion = auditLogRepository.Where(x => x.RecordId == EntityId).OrderByDescending(o => o.CommitVersion).Select(s => s.CommitVersion.Value).Distinct().FirstOrDefault();
+
+                var commitVersion = 1;
+
+                commitVersion = commitVersion + previousAudidtsCommitVersion;
+
+                foreach (var auditLog in logs)
+                {
                     if (auditLog.EventType == "D")
                     {
                         auditLog.NewValue = null;
@@ -66,6 +79,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
 
                     if (auditLog.NewValue != auditLog.OriginalValue)
                     {
+                        auditLog.CommitVersion = commitVersion;
                         auditLog.CommitSequence = commitSequence;
                         commitSequence++;
                         auditLogRepository.SaveOrUpdate(auditLog);
@@ -73,14 +87,14 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
                 }
 
                 session.Transaction.Commit();
+
+                TrackingInterceptor.ChangedTracked = false;
             }
         }
 
 
         public override void SetSession(ISession session)
         {
-            //_sessionAuditLogs = new List<AuditLog>();
-
             this.session = session;
             base.SetSession(session);
         }
@@ -89,6 +103,8 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
         public override int[] FindDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
            IType[] types)
         {
+            //Footprint(entity, currentState, propertyNames);
+
             GetChanges(entity, id, currentState, previousState, propertyNames, types, "A");
 
             return null;
@@ -97,6 +113,9 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
         private void GetChanges(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
             IType[] types, string state)
         {
+
+            if(ChangedTracked) return;
+
             if (entity.GetType() == typeof(AuditLog))
             {
                 return;
@@ -142,8 +161,6 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
                 auditLog.Created = time;
                 auditLog.EventDateUtc = time;
                 auditLog.Modified = time;
-                //auditLog.EventType = state;
-
                 auditLog.CommitSequence = ordinal;
                 auditLog.CommitVersion = 0;
                 auditLog.Revertable = true;
@@ -188,6 +205,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
 
         public override void OnDelete(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
+            Footprint(entity, state, propertyNames);
             GetChanges(entity, id, null, state, propertyNames, types, "D");
 
             base.OnDelete(entity, id, state, propertyNames, types);
@@ -195,7 +213,11 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
 
         private void AuditObjectModification(object entity, object id, IEnumerable<AuditLog> sessionAuditLogs)
         {
-            _transactionSynchronization = new TransactionSynchronization
+           // session.SessionFactory.OpenSession();
+
+            if (ChangedTracked) return;
+
+            _transactionSynchronization = new TransactionSynchronization(this)
             {
                 Session = session,
                 AuditLogs = sessionAuditLogs,
@@ -204,6 +226,8 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             };
 
             session.Transaction.RegisterSynchronization(_transactionSynchronization);
+
+            ChangedTracked = true;
         }
 
 
@@ -213,7 +237,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
         {
             Footprint(entity, state, propertyNames);
 
-            GetChanges(entity, id, state, null, propertyNames, types, "A");
+            //GetChanges(entity, id, state, null, propertyNames, types, "A");
 
             return base.OnSave(entity, id, state, propertyNames, types);
         }
@@ -244,7 +268,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             var indexOfModified = GetIndex(propertyNames, "Modified");
             var indexOfModifiedBy = GetIndex(propertyNames, "ModifiedBy");
 
-            if (typedEntity.Created == null)
+            if (state[indexOfCreated] == null)
             {
                 state[indexOfCreated] = time;
                 state[indexOfCreatedBy] = userName;
@@ -258,7 +282,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             object[] previousState, string[] propertyNames,
             IType[] types)
         {
-            session.SessionFactory.OpenSession();
+            //session.SessionFactory.OpenSession();
 
             Footprint(entity, currentState, propertyNames);
 

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="orderedtest1" storage="c:\development\lightstone-data-platform\app\usermanagement\usermanagement.auditlog.tests\auditlogtests\orderedtest1.orderedtest" id="4468e7b4-4497-4414-b795-a58ebfce99d4" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="96eb120a-91f0-36aa-1beb-575f0aa6b057" name="TestAddRole" storage="bin\debug\auditlogtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="be22e0b5-a0dc-630e-a31f-3ddbc6058775" name="TestModifyRole" storage="bin\debug\auditlogtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="614e49a1-e3d4-3521-bec0-3d081e9a107c" name="TestDeleteRole" storage="bin\debug\auditlogtests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>
