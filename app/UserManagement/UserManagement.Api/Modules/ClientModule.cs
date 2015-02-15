@@ -1,29 +1,63 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using AutoMapper;
 using MemBus;
 using Nancy;
+using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Clients;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules
 {
     public class ClientModule : NancyModule
     {
-
         public ClientModule(IBus bus, IRepository<Client> clients)
         {
-
             Get["/Clients"] = _ =>
             {
-                return Response.AsJson(clients);
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = clients });
             };
 
-            Get["/Clients/Create"] = _ =>
+            Get["/Clients/Add"] = parameters =>
             {
+                return View["Save", new ClientDto()];
+            };
 
-                bus.Publish(new CreateClient("Testeroonie Client"));
+            Post["/Clients"] = _ =>
+            {
+                var dto = this.Bind<ClientDto>();
+                var client = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                return "Success";
+                bus.Publish(new CreateUpdateEntity(client));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = clients });
+            };
+
+            Get["/Clients/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var client = clients.Get(guid);
+                var dto = Mapper.Map<Client, ClientDto>(client);
+                return View["Save", dto];
+            };
+
+            Put["/Clients/{id}"] = _ =>
+            {
+                var dto = this.Bind<ClientDto>();
+                var client = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+
+                bus.Publish(new CreateUpdateEntity(client));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = clients });
             };
         }
     }

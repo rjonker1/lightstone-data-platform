@@ -16,7 +16,7 @@ namespace UserManagement.Domain.Entities.Commands.CustomerProfiles
         public CreateSource CreateSource;
         public Customer Customer;
         public PlatformStatus PlatformStatus;
-        public ProfileDetail ProfileDetail;
+        public ContactDetail ContactDetail;
 
         public CreateCustomerProfile(string pastelId, DateTime firstCreateDate, string lastUpdateBy, DateTime lastUpdateDate, CommercialState commercialState, Billing billing, 
                                         CreateSource createSource, Customer customer, PlatformStatus platformStatus/*, ProfileDetail profileDetail*/)

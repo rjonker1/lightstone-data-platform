@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.EscalationTypes
 {
     public class CreateEscalationTypeHandler : AbstractMessageHandler<CreateEscalationType>
     {
-
         private readonly INamedEntityRepository<EscalationType> _repository;
 
         public CreateEscalationTypeHandler(INamedEntityRepository<EscalationType> repository)
@@ -17,10 +16,9 @@ namespace UserManagement.Domain.CommandHandlers.EscalationTypes
 
         public override void Handle(CreateEscalationType command)
         {
-
             if (_repository.Exists(command.Id, command.Name)) return;
 
-            _repository.Save(new EscalationType(command.Id, command.Name));
+            _repository.Save(new EscalationType(command.Name));
         }
     }
 }

@@ -11,6 +11,8 @@
     <AssemblyName>UserManagement.Domain.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +34,8 @@
   <ItemGroup>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.616\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,7 +51,7 @@
     <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\Billings\CreateBilling.cs" />
-    <Compile Include="Commands\Clients\CreateClient.cs" />
+    <Compile Include="Commands\Clients\CreateUpdateClient.cs" />
     <Compile Include="Commands\CommercialStates\CreateCommercialState.cs" />
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
     <Compile Include="Commands\ContractDurations\CreateContractDuration.cs" />
@@ -58,7 +62,7 @@
     <Compile Include="Commands\CreateSources\CreateCreateSource.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\CustomerProfiles\CreateCustomerProfile.cs" />
-    <Compile Include="Commands\Customers\CreateCustomer.cs" />
+    <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\Packages\CreatePackage.cs" />
@@ -89,7 +93,6 @@
     <Compile Include="ContractType.cs" />
     <Compile Include="CreateSource.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="CustomerProfile.cs" />
     <Compile Include="EscalationType.cs" />
     <Compile Include="IClient.cs" />
     <Compile Include="IClientUser.cs" />
@@ -99,12 +102,10 @@
     <Compile Include="Package.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="PlatformStatus.cs" />
-    <Compile Include="ProfileDetail.cs" />
+    <Compile Include="ContactDetail.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserLinkedToCustomer.cs" />
-    <Compile Include="UserProfile.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="UserType.cs" />
   </ItemGroup>
@@ -114,7 +115,20 @@
       <Name>UserManagement.Domain.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\Customers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

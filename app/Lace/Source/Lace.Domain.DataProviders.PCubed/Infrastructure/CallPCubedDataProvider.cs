@@ -14,7 +14,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 {
     public class CallPCubedDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.PCubedFica;
@@ -22,6 +22,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
         public CallPCubedDataProvider(ILaceRequest request)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
@@ -65,7 +66,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling PCubed Fica Data Provider"});
                 SignioResponseFailed(response);

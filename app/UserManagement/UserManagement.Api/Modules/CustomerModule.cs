@@ -1,38 +1,63 @@
 ﻿using System;
-using System.Linq;
+using AutoMapper;
 using MemBus;
 using Nancy;
-using NHibernate.Util;
+using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.Commands.Customers;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules
 {
     public class CustomerModule : NancyModule
     {
-
-        public CustomerModule(IBus bus, IRepository<Customer> customers, IRepository<Province> provinces)
+        public CustomerModule(IBus bus, IRepository<Customer> customers)
         {
-
             Get["/Customers"] = _ =>
             {
-                return Response.AsJson(customers);
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
             };
 
-
-            Get["/Customers/Create"] = _ =>
+            Get["/Customers/Add"] = parameters =>
             {
-
-                var province = provinces.Select(x => x).Where(x => x.Name == "Gauteng");
-                var provId = province.Select(x => x.Id).FirstOrNull().ToString();
-                var provName = province.Select(x => x.Name).FirstOrNull().ToString();
-
-                bus.Publish(new CreateCustomer("Testeroonie Inc. Global", "Random account owner", new Province(new Guid(provId), provName)));
-
-                return "Success!";
+                return View["Save", new CustomerDto { BillingDto = new BillingDto() }];
             };
 
+            Post["/Customers"] = _ =>
+            {
+                var dto = this.Bind<CustomerDto>();
+                var customer = Mapper.Map(dto, customers.Get(dto.Id));
+
+                bus.Publish(new CreateUpdateEntity(customer));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
+            };
+
+            Get["/Customers/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var dto = Mapper.Map<Customer, CustomerDto>(customers.Get(guid));
+
+                return View["Save", dto];
+            };
+
+            Put["/Customers/{id}"] = _ =>
+            {
+                var dto = this.Bind<CustomerDto>();
+                var customer = Mapper.Map(dto, customers.Get(dto.Id));
+
+                bus.Publish(new CreateUpdateEntity(customer));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
+            };
         }
     }
 }

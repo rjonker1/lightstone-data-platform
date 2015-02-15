@@ -116,7 +116,7 @@
         <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="RestSharp" version="104.4.0.0" />
       </dependencies>
     </nuget>
@@ -205,11 +205,11 @@
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Common.Logging" version="2.1.2" />
+        <dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="Lightstone.DataPlatform.Shared" />
         <dependency id="NServiceBus" version="5.0.1" />
         <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
-        <dependency id="RabbitMQ.Client" version="3.3.5" />       
+        <dependency id="RabbitMQ.Client" version="3.3.5" />
       </dependencies>
     </nuget>
 
@@ -259,10 +259,11 @@
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
         <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
-        <include pattern="ServiceStack.Text.dll" to="lib\net45" />       
+        <include pattern="ServiceStack.Common.dll" to="lib\net45" />
+        <include pattern="ServiceStack.Text.dll" to="lib\net45" />
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2.0" />
+				<dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="NServiceBus" version="5.0.1" />
         <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
 				<dependency id="Lightstone.DataPlatform.Shared" />
@@ -319,9 +320,32 @@
 				<include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-
+       <dependency id="Common.Logging" version="3.0.0"  />
+       <dependency id="Newtonsoft.Json" version="6.0.5" />
 			</dependencies>
 		</nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Shared.Messaging</name>
+      <folder>app/Shared/Shared.Messaging</folder>
+      <author>CustomApp</author>
+      <description>Shared Messagin domain common code</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Shared.Messaging.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.Messaging.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Iesi.Collections" version="4.0.1.4000" />
+        <dependency id="NHibernate" version="4.0.3.4000" />s
+        <dependency id="NServiceBus" version="5.0.1" />
+        <dependency id="NServiceBus.NHibernate" version="6.0.0" />
+        <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
+        <dependency id="RabbitMQ.Client" version="3.3.5" />
+      </dependencies>
+    </nuget>
+
+
+
 		<nuget deploy="false">
 			<name>Lightstone.Dataplatform.Shared.BuildingBlocks.Api</name>
 			<folder>app/Shared/Shared.BuildingBlocks.Api</folder>
@@ -334,7 +358,6 @@
 				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.pdb" to="lib\net45"/>
 				<include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll" to="lib\net45"/>
         <include pattern="Lightstone.Dataplatform.Shared.BuildingBlocks.Api.pdb" to="lib\net45"/>
-				<include pattern="Common.Logging.dll" to="lib\net45"/>
 			</includes>
 			<dependencies>
 				<dependency id="Nancy" version="0.23.0" />
@@ -353,7 +376,7 @@
 				<include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2" />
+				<dependency id="Common.Logging" version="3.0.0.0" />
 			</dependencies>
 		</nuget>
     <nuget deploy="false">
@@ -402,7 +425,7 @@
       <dependencies>
         <dependency id="Castle.Core" version="3.3.0" />
         <dependency id="Castle.Windsor" version="3.3.0" />
-        <dependency id="Common.Logging" version="2.1.2.0" />
+        <dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="EasyNetQ" version="0.28.3.229" />
         <dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
       </dependencies>
@@ -419,7 +442,7 @@
 				<include pattern="Lightstone.DataPlatform.Workflow.RabbitMQ.pdb" to="lib\net45"/>
 			</includes>
 			<dependencies>
-				<dependency id="Common.Logging" version="2.1.2.0" />
+				<dependency id="Common.Logging" version="3.0.0.0" />
 				<dependency id="EasyNetQ" version="0.28.3.229" />
 				<dependency id="Lightstone.Dataplatform.Shared.BuildingBlocks" />
 				<dependency id="Lightstone.Dataplatform.Shared" />

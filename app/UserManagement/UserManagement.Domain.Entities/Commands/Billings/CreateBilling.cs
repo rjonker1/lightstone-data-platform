@@ -5,23 +5,23 @@ namespace UserManagement.Domain.Entities.Commands.Billings
 {
     public class CreateBilling : DomainCommand
     {
-
         public string BillingContactNumber;
         public string BillingContractPersion;
         public string CompanyRegistration;
-        public DateTime FirstCreateDate;
         public DateTime? DebitOrderDate;
-
+        public string PastelId;
+        public string VatNumber;
         public PaymentType PaymentType;
 
-        public CreateBilling(string billingContactNumber, string billingContractPersion, string companyRegistration, DateTime firstCreateDate, DateTime? debitOrderDate, PaymentType paymentType)
+        public CreateBilling(string billingContactNumber, string billingContractPersion, string companyRegistration, DateTime? debitOrderDate, string pastelId, string vatNumber, PaymentType paymentType)
         {
             Id = Guid.NewGuid();
             BillingContactNumber = billingContactNumber;
             BillingContractPersion = billingContractPersion;
             CompanyRegistration = companyRegistration;
-            FirstCreateDate = firstCreateDate;
             DebitOrderDate = debitOrderDate;
+            PastelId = pastelId;
+            VatNumber = vatNumber;
             PaymentType = paymentType;
         }
     }

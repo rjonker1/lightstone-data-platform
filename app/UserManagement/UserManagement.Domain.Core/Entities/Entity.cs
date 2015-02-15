@@ -9,11 +9,11 @@ namespace UserManagement.Domain.Core.Entities
         [DataMember]
         public virtual Guid Id { get; set; }
 
-        protected Entity() { }
+        protected internal Entity() { }
 
         protected Entity(Guid id)
         {
-            Id = id;
+            Id = id == new Guid() ? Guid.NewGuid() : id;
         }
 
 

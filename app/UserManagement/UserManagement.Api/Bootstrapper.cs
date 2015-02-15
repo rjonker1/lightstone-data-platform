@@ -3,9 +3,11 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
@@ -43,7 +45,8 @@ namespace UserManagement.Api
                 new RepositoryInstaller(),
                 new CommandInstaller(),
                 new BusInstaller(),
-                new ServiceLocatorInstaller()
+                new ServiceLocatorInstaller(),
+                new AutoMapperInstaller()
                 );
 
             //Drop create
@@ -67,11 +70,26 @@ namespace UserManagement.Api
         //Updates schema if there are any structural changes
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            //pipelines.EnableCors(); // cross origin resource sharing
-
+            pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
 
+            AddLookupData(container, pipelines, context);
+
             base.RequestStartup(container, pipelines, context);
+        }
+
+        private static void AddLookupData(IWindsorContainer container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.AddLookupDataToViewBag<PaymentType>(container);
+            pipelines.AddLookupDataToViewBag<PlatformStatus>(container);
+            pipelines.AddLookupDataToViewBag<CreateSource>(container);
+            pipelines.AddLookupDataToViewBag<CommercialState>(container);
+            pipelines.AddLookupDataToViewBag<ContractType>(container);
+            pipelines.AddLookupDataToViewBag<EscalationType>(container);
+            pipelines.AddLookupDataToViewBag<ContractDuration>(container);
+            pipelines.AddLookupDataToViewBag<Province>(container);
+            pipelines.AddLookupDataToViewBag<UserType>(container);
+            pipelines.AddLookupDataToViewBag<Role>(container);
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)

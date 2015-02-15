@@ -10,13 +10,14 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
 {
     public class StatisticsUnitOfWork : IGetStatistics
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly IReadOnlyRepository<Statistic> _repository;
 
         public IEnumerable<Statistic> Statistics { get; private set; }
 
         public StatisticsUnitOfWork(IReadOnlyRepository<Statistic> repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _repository = repository;
         }
 
@@ -28,7 +29,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error getting Statistics data because of {0}", ex.Message);
+                _log.ErrorFormat("Error getting Statistics data because of {0}", ex.Message);
             }
         }
     }

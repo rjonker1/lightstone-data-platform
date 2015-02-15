@@ -7,6 +7,7 @@ using NHibernate.Tool.hbm2ddl;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.TestHelper.Extensions;
+using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
 
 namespace UserManagement.TestHelper.BaseTests

@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.Provinces
 {
     public class CreateProvinceHandler : AbstractMessageHandler<CreateProvince>
     {
-
         private readonly INamedEntityRepository<Province> _repository;
 
         public CreateProvinceHandler(INamedEntityRepository<Province> repository)
@@ -19,7 +18,7 @@ namespace UserManagement.Domain.CommandHandlers.Provinces
         {
             if (_repository.Exists(command.Id, command.Name)) return;
 
-            _repository.Save(new Province(command.Id, command.Name));
+            _repository.Save(new Province(command.Name));
         }
     }
 }

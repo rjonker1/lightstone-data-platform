@@ -18,7 +18,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     public class EntryPointService : IEntryPoint
     {
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly IBus _bus;
         private ISendCommandsToBus _monitoring;
         private IBuildSourceChain _sourceChain;
@@ -27,12 +27,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         public EntryPointService(IBus bus)
         {
+            _log = LogManager.GetLogger(GetType());
             _bus = bus;
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
         public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
         {
+            _log.DebugFormat("Receiving request into entry point. Request {0}",request);
             try
             {
                 _monitoring = new SendEntryPointCommands(_bus, request.RequestAggregation.AggregateId,
@@ -46,7 +48,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
                 if (_sourceChain.SourceChain == null)
                 {
-                    Log.ErrorFormat("Source chain could not be built for action {0}", request.Package.Action.Name);
+                    _log.ErrorFormat("Source chain could not be built for action {0}", request.Package.Action.Name);
                     _monitoring.Send(CommandType.Fault, request,
                         new
                         {
@@ -81,7 +83,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             {
                 _monitoring.Send(CommandType.Fault, ex.Message, request);
                 _monitoring.End(request, _stopWatch ?? new DataProviderStopWatch(DataProviderCommandSource.EntryPoint.ToString()));
-                Log.ErrorFormat("Error occurred receiving request {0}",
+                _log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
                 return EmptyResponse;
             }

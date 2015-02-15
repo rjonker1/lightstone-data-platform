@@ -8,13 +8,18 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory
 {
     public class CoOrdinateCertificateFactory : IProvideCertificate
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly IRequestCoOrdinateCertificate _request;
         private readonly ISetupCertificateRepository _repositories;
 
         private IImpersonateACertificateUser _impersonator;
 
         public IDefineTheCertificate Certificate { get; private set; }
+
+        public CoOrdinateCertificateFactory()
+        {
+            _log = LogManager.GetLogger(GetType());
+        }
 
         private bool CertifcateFound
         {
@@ -54,7 +59,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory
 
         private void FindCertificate()
         {
-            Log.InfoFormat("Getting Certificate for Co-Ordinates Lat {0} Long {1}", _request.Latitude,
+            _log.InfoFormat("Getting Certificate for Co-Ordinates Lat {0} Long {1}", _request.Latitude,
                 _request.Longitude);
 
 
@@ -63,7 +68,7 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory
 
             if (definition == null) return;
 
-            Log.InfoFormat("Found Certificate definition for Co-Ordinates Lat {0} Long {1}",
+            _log.InfoFormat("Found Certificate definition for Co-Ordinates Lat {0} Long {1}",
                 _request.Latitude,
                 _request.Longitude);
 
@@ -75,14 +80,14 @@ namespace Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory
 
             if (CertifcateFound)
             {
-                Log.InfoFormat("Found Certificate for Co-Ordinates Lat {0} Long {1}. Certificate Name is {2}",
+                _log.InfoFormat("Found Certificate for Co-Ordinates Lat {0} Long {1}. Certificate Name is {2}",
                     _request.Latitude,
                     _request.Longitude, definition.Name);
 
                 return;
             }
 
-            Log.InfoFormat("Could Not find Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {2}",
+            _log.InfoFormat("Could Not find Certificate for Co Ordinates Lat {0} Long {1}. Certificate Name is {2}",
                 _request.Latitude,
                 _request.Longitude, definition.Name);
         }

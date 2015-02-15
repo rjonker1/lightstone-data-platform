@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
-using Api.Infrastructure.Automapping;
+using System.Linq;
+using Api.Domain.Infrastructure.Automapping;
+using Api.Domain.Verification.Core.Contracts;
+using Api.Domain.Verification.Infrastructure.Handlers;
+using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
+using Api.Domain.Verification.Infrastructure.Services;
+using Api.Tests.Helper.Builder;
 using Billing.Api.Connector;
 using Billing.Api.Dtos;
-using Lace.Request;
-using Lace.Request.Entry;
-using Lace.Response.ExternalServices;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Domain.Infrastructure.Core.Dto;
 using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -12,7 +18,8 @@ namespace Api.Unit.Tests.Fakes
 {
     public class TestBootstrapper : Bootstrapper
     {
-        private readonly string _username = string.Empty;
+        private readonly string _username;
+
         public TestBootstrapper(string username)
         {
             _username = username;
@@ -24,14 +31,22 @@ namespace Api.Unit.Tests.Fakes
             container.Register<IAuthenticateUser>(new TestAuthenticator(_username));
             container.Register<IEntryPoint>(new FakeEntryPoint());
             container.Register<IConnectToBilling>(new FakeConnectToBilling());
+
+            container.Register<ICallFicaVerification, FicaVerificationService>();
+            container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();
+
+            container.Register<ICallDriversLicenseVerification, DriversLicenseVerificationService>();
+            container.Register<IHandleDriversLicenseVerficationRequests, DriversLicenseVerificationHandler>();
         }
     }
 
     public class FakeEntryPoint : IEntryPoint
     {
-        public IList<LaceExternalServiceResponse> GetResponsesFromLace(ILaceRequest request)
+        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
         {
-            throw new System.NotImplementedException();
+            return
+                new FakeDataProviderResults().LaceResponse.FirstOrDefault(w => w.Key == request.Package.Action.Name)
+                    .Value;
         }
     }
 
@@ -39,17 +54,19 @@ namespace Api.Unit.Tests.Fakes
     {
         public BillingConnectorResponse Ping(PingRequest request)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public BillingConnectorResponse CreateTransaction(CreateTransaction transaction)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public GetTransactionResponse GetTransaction(GetTransactionRequest request)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
     }
+
+    
 }

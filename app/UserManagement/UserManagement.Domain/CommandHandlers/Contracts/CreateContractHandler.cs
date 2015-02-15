@@ -7,7 +7,6 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 {
     public class CreateContractHandler : AbstractMessageHandler<CreateContract>
     {
-
         private readonly IRepository<Contract> _repository;
 
         public CreateContractHandler(IRepository<Contract> repository)
@@ -17,9 +16,7 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
         public override void Handle(CreateContract command)
         {
-
-            _repository.Save(new Contract(command.Id, command.ContractCommencementDate, command.ContractName,
-                                            command.LastUpdateBy, command.LastUpdateDate, command.ContactDetail, command.EnteredIntoBy, command.OnlineAcceptance, 
+            _repository.Save(new Contract(command.Id, command.ContractCommencementDate, command.ContractName, command.ContactDetail, command.EnteredIntoBy, command.OnlineAcceptance, 
                                             command.RegisteredName, command.RegistrationNumber, command.Client, command.ContractType, command.EscalationType,
                                             command.ContractDuration));
         }

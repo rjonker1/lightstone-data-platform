@@ -5,7 +5,6 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
@@ -13,8 +12,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     public class Initialize : IBootstrap
     {
         public IList<LaceExternalSourceResponse> LaceResponses { get; private set; }
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
+        private readonly ILog _log;
         private readonly ILaceRequest _request;
 
         private readonly IProvideResponseFromLaceDataProviders _response;
@@ -26,6 +24,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, IBus bus,
             IBuildSourceChain buildSourceChain)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _bus = bus;
             _response = response;
@@ -37,7 +36,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         {
             if (_buildSourceChain.SourceChain == null)
             {
-                Log.Error("Source chain for request is null and cannot be executed");
+                _log.Error("Source chain for request is null and cannot be executed");
                 throw new Exception("Source Chain cannot be null");
             }
 

@@ -5,27 +5,24 @@ namespace UserManagement.Domain.Entities
 {
     public class Billing : Entity
     {
-
-        public virtual string BillingContactNumber { get; set; }
-        public virtual string BillingContractPersion { get; set; }
+        public virtual string ContactNumber { get; set; }
+        public virtual string ContractPerson { get; set; }
         public virtual string CompanyRegistration { get; set; }
-        public virtual DateTime FirstCreateDate { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
-
+        public virtual string PastelId { get; set; }
+        public virtual string VatNumber { get; set; }
         public virtual PaymentType PaymentType { get; set; }
-        //public virtual ICollection<CustomerProfile> CustomerProfile { get; set; }
 
-        protected Billing() { }
+        protected internal Billing() { }
 
-        public Billing(Guid id, string billingContactNumber, string billingContractPersion, string companyRegistration, DateTime firstCreateDate, DateTime? debitOrderDate, PaymentType paymentType)
-            : base(id)
+        public Billing(string contactNumber, string contractPerson, string companyRegistration, DateTime? debitOrderDate, string pastelId, string vatNumber, PaymentType paymentType, Guid id = new Guid()) : base(id)
         {
-
-            BillingContactNumber = billingContactNumber;
-            BillingContractPersion = billingContractPersion;
+            ContactNumber = contactNumber;
+            ContractPerson = contractPerson;
             CompanyRegistration = companyRegistration;
-            FirstCreateDate = firstCreateDate;
             DebitOrderDate = debitOrderDate;
+            PastelId = pastelId;
+            VatNumber = vatNumber;
             PaymentType = paymentType;
         }
     }

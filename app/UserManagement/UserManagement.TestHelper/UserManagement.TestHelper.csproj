@@ -60,13 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CustomEqualityComparer.cs" />
     <Compile Include="BaseTests\when_persisting_entities_to_db.cs" />
     <Compile Include="BaseTests\when_persisting_entities_to_memory.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
-    <Compile Include="OverrideHelper.cs" />
+    <Compile Include="Helpers\OverrideHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

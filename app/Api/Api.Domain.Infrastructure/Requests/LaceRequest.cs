@@ -40,17 +40,19 @@ namespace Api.Domain.Infrastructure.Requests
         }
 
         public void DriversLicenseRequest(IPackage package,
-            IProvideDriversLicenseInformationForRequest driversLicense)
+            IProvideDriversLicenseInformationForRequest driversLicense, IProvideRequestAggregation aggregation)
         {
             DriversLicense = driversLicense;
             Package = package;
+            RequestAggregation = aggregation;
         }
 
         public void FicaRequest(IPackage package,
-            IProvideFicaInformationForRequest fica)
+            IProvideFicaInformationForRequest fica,IProvideRequestAggregation aggregation)
         {
             Fica = fica;
             Package = package;
+            RequestAggregation = aggregation;
         }
     }
 

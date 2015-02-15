@@ -12,7 +12,6 @@ using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
-using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -21,7 +20,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 {
     public class CallRgtVinDataProvider : ICallTheDataProviderSource
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
 
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
@@ -33,6 +32,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
         public CallRgtVinDataProvider(ILaceRequest request, ISetupRepository repository)
         {
+            _log = LogManager.GetLogger(GetType());
             _request = request;
             _repository = repository;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
@@ -66,7 +66,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
             catch (Exception ex)
             {
-                Log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling RGT Vin Data Provider"});
                 RgtVinResponseFailed(response);
