@@ -6,6 +6,7 @@ using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.TestHelper;
+using UserManagement.TestHelper.Helpers;
 
 namespace AuditLogTests
 {
@@ -49,7 +50,9 @@ namespace AuditLogTests
 
             var roleId = Guid.Parse("7C270960-0C16-4812-9CEF-275EA308A1AD");
 
-            var role = new Role(roleId, "TestRole " + roleId);
+            var role = new Role("TestRole " + roleId);
+
+            role.Id = roleId;
 
             roleRepo.SaveOrUpdate(role);
 

@@ -1,5 +1,4 @@
-﻿using DataPlatform.Shared.Helpers.Extensions;
-using UserManagement.Domain.Core.Entities;
+﻿using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
@@ -14,9 +13,9 @@ namespace UserManagement.Domain.Entities
             Value = name;
         }
 
-        public override string ToString()
-        {
-            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
-        }
+        //public override string ToString()
+        //{
+        //    return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
+        //}
     }
 }
