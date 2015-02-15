@@ -10,6 +10,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using UserManagement.Domain.Core.NHibernate.Interceptors;
+using UserManagement.Domain.Entities.NHibernate.Interceptors;
 using UserManagement.Infrastructure.NHibernate;
 using UserManagement.Infrastructure.NHibernate.Conventions;
 

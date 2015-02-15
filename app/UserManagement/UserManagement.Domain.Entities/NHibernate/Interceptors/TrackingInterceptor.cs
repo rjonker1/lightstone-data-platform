@@ -7,15 +7,13 @@ using NHibernate.Transaction;
 using NHibernate.Type;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities;
-//using IsolationLevel = System.Data.IsolationLevel;
 
-namespace UserManagement.Domain.Core.NHibernate.Interceptors
+namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 {
     public class TrackingInterceptor : EmptyInterceptor
     {
         private TransactionSynchronization _transactionSynchronization;
-        private ISession session = null;
+        private ISession _session;
 
         public bool ChangedTracked { get; set; }
 
@@ -23,7 +21,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
         {
             public TransactionSynchronization(TrackingInterceptor trackingInterceptor)
             {
-                this.TrackingInterceptor = trackingInterceptor;
+                TrackingInterceptor = trackingInterceptor;
             }
 
             private TrackingInterceptor TrackingInterceptor { get; set; }
@@ -33,11 +31,12 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
                 // TODO: find previous commits for the record
             }
 
-            public ISession Session { get; set; }
-            public IEnumerable<AuditLog> AuditLogs { get; set; }
-            //public string EntityState { get; set; }
+            public ISession Session { private get; set; }
+            public IEnumerable<AuditLog> AuditLogs { private get; set; }
+
             public object Entity { get; set; }
-            public Guid EntityId { get; set; }
+
+            public Guid EntityId { private get; set; }
 
             public void AfterCompletion(bool success)
             {
@@ -95,7 +94,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
 
         public override void SetSession(ISession session)
         {
-            this.session = session;
+            _session = session;
             base.SetSession(session);
         }
 
@@ -114,7 +113,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             IType[] types, string state)
         {
 
-            if(ChangedTracked) return;
+            if (ChangedTracked) return;
 
             if (entity.GetType() == typeof(AuditLog))
             {
@@ -213,19 +212,19 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
 
         private void AuditObjectModification(object entity, object id, IEnumerable<AuditLog> sessionAuditLogs)
         {
-           // session.SessionFactory.OpenSession();
+            // session.SessionFactory.OpenSession();
 
             if (ChangedTracked) return;
 
             _transactionSynchronization = new TransactionSynchronization(this)
             {
-                Session = session,
+                Session = _session,
                 AuditLogs = sessionAuditLogs,
                 Entity = entity,
                 EntityId = Guid.Parse(id.ToString())
             };
 
-            session.Transaction.RegisterSynchronization(_transactionSynchronization);
+            _session.Transaction.RegisterSynchronization(_transactionSynchronization);
 
             ChangedTracked = true;
         }
@@ -233,7 +232,7 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
 
         public override bool OnSave(object entity, object id, object[] state,
             string[] propertyNames,
-            global::NHibernate.Type.IType[] types)
+            IType[] types)
         {
             Footprint(entity, state, propertyNames);
 
@@ -268,11 +267,10 @@ namespace UserManagement.Domain.Core.NHibernate.Interceptors
             var indexOfModified = GetIndex(propertyNames, "Modified");
             var indexOfModifiedBy = GetIndex(propertyNames, "ModifiedBy");
 
-            if (state[indexOfCreated] == null)
-            {
-                state[indexOfCreated] = time;
-                state[indexOfCreatedBy] = userName;
-            }
+
+            state[indexOfCreated] = time;
+            state[indexOfCreatedBy] = userName;
+
 
             state[indexOfModified] = time;
             state[indexOfModifiedBy] = userName;
