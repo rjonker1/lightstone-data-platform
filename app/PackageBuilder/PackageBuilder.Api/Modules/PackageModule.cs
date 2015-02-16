@@ -34,7 +34,7 @@ namespace PackageBuilder.Api.Modules
                             {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            Post["/Packages/Package/{id}"] = parameters =>
+            Get["/Packages/Package/{id}"] = parameters =>
             {
                 IPackage package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 

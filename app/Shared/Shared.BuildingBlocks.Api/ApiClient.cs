@@ -1,6 +1,7 @@
 ﻿using System;
 using Shared.Configuration;
 using RestSharp;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace Shared.BuildingBlocks.Api
 {
@@ -20,6 +21,9 @@ namespace Shared.BuildingBlocks.Api
     public interface IPackageBuilderApiClient : IApiClient
     {
     }
+    
+    public interface IUserAuthenticationClient : IApiClient
+    { }
 
     public abstract class ApiClientBase : IApiClient
     {
@@ -88,16 +92,24 @@ namespace Shared.BuildingBlocks.Api
         }
     }
 
+    public class UserAuthenticatorClient : ApiClientBase, IUserAuthenticationClient
+    {
+        public UserAuthenticatorClient()
+            : base(AppSettings.UserAuthenticationApi.BaseUrl)
+        {
+        }
+    }
+
     public class UserManagementApiClient : ApiClientBase, IUserManagementApiClient
     {
-        public UserManagementApiClient() : base(AppSettings.UmApi.BaseUrl)
+        public UserManagementApiClient() : base(AppSettings.UserManagementApi.BaseUrl)
         {
         }
     }
 
     public class PackageBuilderApiClient : ApiClientBase, IPackageBuilderApiClient
     {
-        public PackageBuilderApiClient() : base(AppSettings.PbApi.BaseUrl)
+        public PackageBuilderApiClient() : base(AppSettings.PackageBuilderApi.BaseUrl)
         {
         }
     }

@@ -7,7 +7,7 @@ using Shared.BuildingBlocks.Api;
 
 namespace Api.Domain.Verification.Fakes
 {
-    public class FakePackageBuilderApi : IPbApiClient
+    public class FakePackageBuilderApi : IPackageBuilderApiClient
     {
 
         //private IEnumerable<KeyValuePair<Guid, IPackage>> PacakgeBuilderDatabase = new Dictionary<Guid, IPackage>()

@@ -8,9 +8,9 @@ namespace UserManagement.Domain.Dtos
         public Guid ContractId { get; private set; }
         public Package Package { get; private set; }
 
-        public ContractPackageResponseDto(Guid contractDurationId, Package package)
+        public ContractPackageResponseDto(Guid contractId, Package package)
         {
-            ContractId = contractDurationId;
+            ContractId = contractId;
             Package = package;
         }
 
