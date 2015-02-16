@@ -302,6 +302,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\ContactDetails\ContactDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Customers\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\IdToEntityConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\NamedEntities\NamedEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Entities\EntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />

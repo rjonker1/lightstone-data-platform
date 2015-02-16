@@ -67,7 +67,7 @@ namespace UserManagement.Api.Helpers.Extensions
         {
             var type = typeof (T);
             var namedEntities = entityRetriever.GetNamedEntities(type);
-            var list = (from object item in namedEntities select item).ToList().Select(x => new SelectListItem(((INamedEntity) x).Name, ((IEntity) x).Id + ""));
+            var list = namedEntities.ToList().Select(x => new SelectListItem(x.Name, x.Id + ""));
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {
