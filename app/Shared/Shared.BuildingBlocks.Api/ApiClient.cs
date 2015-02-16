@@ -19,7 +19,6 @@ namespace Shared.BuildingBlocks.Api
 
     public interface IPackageBuilderApiClient : IApiClient
     {
-
     }
 
     public abstract class ApiClientBase : IApiClient

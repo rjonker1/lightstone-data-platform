@@ -49,6 +49,10 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(new {Response = requestPackage});
             };
 
+            Get["/Package/{id}"] = parameters =>
+                Response.AsJson(
+                    new {Response = new[] {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id))}});
+
             Post["/Packages"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();
