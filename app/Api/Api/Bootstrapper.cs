@@ -5,6 +5,8 @@ using Api.Domain.Verification.Infrastructure.Handlers;
 using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
 using Api.Domain.Verification.Infrastructure.Services;
 using Api.Infrastructure.Metadata;
+using Billing.Api.Connector;
+using Billing.Api.Connector.Configuration;
 using DataPlatform.Shared.Messaging.RabbitMQ;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint;
@@ -62,8 +64,7 @@ namespace Api
             container.Register<IBus>(new BusFactory("Monitoring.Messages.Commands", assembliesToScan, "DataPlatform.Monitoring.Host").CreateBus());
             container.Register<IEntryPoint, EntryPointService>();
 
-            //TODO: Implement
-            // container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
+            container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
 
             container.Register<ICallFicaVerification, FicaVerificationService>();
             container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();

@@ -2,6 +2,8 @@
 using System.Linq;
 using MemBus;
 using Nancy;
+using Nancy.ModelBinding;
+using UserManagement.Domain.CommandHandlers.Contracts;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -19,6 +21,17 @@ namespace UserManagement.Api.Modules
             {
 
                 return Response.AsJson(contracts.Select(x => x));
+            };
+
+            Post["/Contracts/GetPackage"] = _ =>
+            {
+                var dto = this.Bind<ContractPackageRequestDto>();
+                if (dto == null)
+                    return Response.AsJson(new {});
+
+                var handler = new GetContractPackageHandler(contracts);
+                handler.Handle(new GetPackageOnContract(dto.ContractId));
+                return Response.AsJson(handler.Response);
             };
 
             Get["/Contracts/Create"] = _ =>
