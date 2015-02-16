@@ -1,4 +1,5 @@
-﻿using UserManagement.Domain.Core.Entities;
+﻿using DataPlatform.Shared.Helpers.Extensions;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
@@ -15,14 +16,7 @@ namespace UserManagement.Domain.Entities
 
         public override string ToString()
         {
-            // Had to comment this out and replace implementation as the common packack was not \
-            // being referenced / installed for some reason. Hope the resutl is the same.
-
-            // TODO: revert the implementaion.
-            
-           // return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
-
-            return string.Format("{0} - {1} - {2}", Id, Name, GetType());
+          return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }
