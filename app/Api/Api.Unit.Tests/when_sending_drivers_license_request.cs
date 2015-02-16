@@ -46,7 +46,9 @@ namespace Api.Unit.Tests
                 with.Header("Content-Type", "application/json");
                 with.JsonBody(_request);
             });
+
             result.ShouldNotBeNull();
+            result.StatusCode.ShouldEqual(HttpStatusCode.OK);
         }
     }
 
