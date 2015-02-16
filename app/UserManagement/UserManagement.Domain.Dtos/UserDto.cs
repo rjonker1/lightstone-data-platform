@@ -15,5 +15,6 @@ namespace UserManagement.Domain.Dtos
         public bool? IsActive { get; set; }
         public Guid UserTypeId { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
+        public IEnumerable<Guid> CustomerIds { get; set; }
     }
 }

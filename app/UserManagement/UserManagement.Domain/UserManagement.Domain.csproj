@@ -59,6 +59,7 @@
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\CreateCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
+    <Compile Include="CommandHandlers\Entities\CreateUpdateEntityHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />

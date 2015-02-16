@@ -20,6 +20,18 @@ namespace UserManagement.Api.Modules
                     .WithModel(new LookupViewModel(type))
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = entityRetriever.GetNamedEntities(type) });
             };
+
+            Get["/Lookups/{type}/{filter}"] = parameters =>
+            {
+                var typeName = parameters.type.ToString();
+                var type = Type.GetType(typeName);
+                var namedEntities = entityRetriever.GetNamedEntities(type);
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithModel(new LookupViewModel(type))
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = namedEntities });
+            };
         }
     }
 }

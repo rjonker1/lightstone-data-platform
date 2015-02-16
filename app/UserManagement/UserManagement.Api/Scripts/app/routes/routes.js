@@ -130,6 +130,9 @@ function initializeLookupRoutes(sammy) {
     sammy.get('/Lookups/:type', function (context) {
         context.load('/Lookups/' + context.params.type, { dataType: 'html' }).swap();
     });
+    sammy.get('/Lookups/:type/:filter', function (context) {
+        //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html' }).swap();
+    });
 }
 
 function initializePlugins() {
