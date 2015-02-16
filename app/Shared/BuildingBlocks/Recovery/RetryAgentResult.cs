@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BuildingBlocks.Recovery
+namespace Shared.Recovery
 {
     public class RetryAgentResult
     {

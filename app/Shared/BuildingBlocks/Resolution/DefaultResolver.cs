@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuildingBlocks.Resolution
+namespace Shared.Resolution
 {
     public class DefaultResolver : IResolver
     {
