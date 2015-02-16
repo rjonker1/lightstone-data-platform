@@ -26,9 +26,14 @@
             { data: "id", visible: false },
             { data: "firstName" },
             { data: "lastName" },
-            { data: null, defaultContent: "<button class='btn btn-primary entity-edit' data-url='/Users/'>Edit</button>" }
+            {
+                data: null,
+                render: function(data, type, full, meta) {
+                    return '<a class="btn btn-primary entity-edit" href="#/Users/' + data.id + '">Edit</a>';
+                }
+            }
         ]
     });
 
-    $("div.table-toolbar").html("<button class='btn btn-default entity-add' data-url='/Users/Add'>Add</button>");
+    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='#/Users/Add'>Add</a>");
 </script>

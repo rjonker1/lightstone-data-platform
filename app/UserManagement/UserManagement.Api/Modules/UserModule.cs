@@ -32,7 +32,7 @@ namespace UserManagement.Api.Modules
             Post["/Users"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
-                var entity = Mapper.Map(dto, users.Get(dto.Id));
+                var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
 
                 bus.Publish(new CreateUpdateEntity(entity));
 
@@ -49,7 +49,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Put["/Users/{id}"] = _ =>
+            Post["/Users/{id}"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
                 var entity = Mapper.Map<UserDto, User>(dto, users.Get(dto.Id));

@@ -18,7 +18,7 @@ namespace UserManagement.Domain.Entities
         //public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
         public virtual ISet<Customer> Customers { get; protected internal set; }
 
-        protected User() { }
+        public User() { }
 
         public User(string firstName, string lastName, string idNumber, string contactNumber, string userName, string password, 
             bool? isActive, UserType userType, HashSet<Role> roles, Guid id = new Guid())

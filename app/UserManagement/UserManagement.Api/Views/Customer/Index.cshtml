@@ -26,11 +26,16 @@
             { data: "id", visible: false },
             { data: "name" },
             { data: "accountOwnerName" },
-            { data: null, defaultContent: "<button class='btn btn-primary entity-edit' data-url='/Customers/'>Edit</button>" }
+            {
+                data: null,
+                render: function (data, type, full, meta) {
+                    return '<a class="btn btn-primary entity-edit" href="#/Customers/' + data.id + '">Edit</a>'; //"<a class='btn btn-primary entity-edit' href='#/Customers/'" + data.id + ">Edit</a>";
+                }
+            }
         ]
     });
 
-    $("div.table-toolbar").html("<button class='btn btn-default entity-add' data-url='/Customers/Add'>Add</button>");
+    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='/Customers/Add'>Add</a>");
 </script>
 
 @*@section Scripts{

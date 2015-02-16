@@ -10,6 +10,11 @@ namespace UserManagement.Api.Modules
             {
                 return View["Index"];
             };
+
+            Get["/Home"] = parameters =>
+            {
+                return View["Home"];
+            };
         }
     }
 }

@@ -3,7 +3,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>
 
 @{
-    Layout = "Shared/_Layout.cshtml";
+    //Layout = "Shared/_Layout.cshtml";
 }
 
 @{
@@ -23,26 +23,22 @@
     </thead>
 </table>
 
-@section Scripts{
-    <script>
-        $(function () {
-            var table = $("#@tableId").DataTable({
-                dom: '<"toolbar">frtip',
-                ajax: "/Lookups/" + "@Model.AssemblyQualifiedName",
-                columns: [
-                    { data: "id", visible: false },
-                    { data: "name" },
-                    { data: "value" },
-                    { data: null, defaultContent: "<button class='btn btn-primary'>Edit</button>" }
-                ]
-            });
-            
-            $("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
-            
-            $('#@tableId tbody').on('click', 'button', function () {
-                var data = table.row($(this).parents('tr')).data();
-                alert(data.id + " - " + data.name);
-            });
-        });
-    </script>
-}
+<script>
+    var table = $("#@tableId").DataTable({
+        dom: '<"toolbar">frtip',
+        ajax: "/Lookups/" + "@Model.AssemblyQualifiedName",
+        columns: [
+            { data: "id", visible: false },
+            { data: "name" },
+            { data: "value" },
+            { data: null, defaultContent: "<button class='btn btn-primary'>Edit</button>" }
+        ]
+    });
+
+    $("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
+
+    $('#@tableId tbody').on('click', 'button', function () {
+        var data = table.row($(this).parents('tr')).data();
+        alert(data.id + " - " + data.name);
+    });
+</script>

@@ -23,9 +23,14 @@
         columns: [
             { data: "id", visible: false },
             { data: "clientName" },
-            { data: null, defaultContent: "<button class='btn btn-primary entity-edit' data-url='/Clients/'>Edit</button>" }
+            {
+                data: null,
+                render: function(data, type, full, meta) {
+                    return '<a class="btn btn-primary entity-edit" href="#/Clients/' + data.id + '">Edit</a>';
+                }
+            }
         ]
     });
 
-    $("div.table-toolbar").html("<button class='btn btn-default entity-add' data-url='/Clients/Add'>Add</button>");
+    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='#/Clients/Add'>Add</a>");
 </script>

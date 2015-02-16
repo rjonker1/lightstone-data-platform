@@ -35,6 +35,7 @@ namespace UserManagement.Api.Modules
 
                 bus.Publish(new CreateUpdateEntity(entity));
 
+                return Response.AsJson("Test");
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = clients });
@@ -48,7 +49,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Put["/Clients/{id}"] = _ =>
+            Post["/Clients/{id}"] = _ =>
             {
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());

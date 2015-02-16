@@ -9,7 +9,7 @@
 @{
     var isCreate = Model.Id == new Guid();
     var pageHeadingViewModel = new PageHeadingViewModel("Client detail", isCreate ? "Add" : "Update");
-    var method = isCreate ? "POST" : "PUT";
+    var method = isCreate ? "POST" : "POST";
     var url = isCreate ? "/Clients" : "/Clients/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)
@@ -35,7 +35,7 @@
         </div>
     </header>
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
-        <form action="@url" data-method="@method" class="form-horizontal">
+        <form action="@url" method="@method" class="form-horizontal">
             <div class="form-group">
                 @Html.LabelFor(x => x.ClientName, new { @class = "control-label col-lg-4" })
                 <div class="col-lg-3">
