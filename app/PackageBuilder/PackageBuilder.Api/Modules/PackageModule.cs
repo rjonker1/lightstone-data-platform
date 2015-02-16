@@ -8,7 +8,6 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
@@ -35,7 +34,7 @@ namespace PackageBuilder.Api.Modules
                             {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            Get["/Package/{id}"] = parameters =>
+            Post["/Packages/Package/{id}"] = parameters =>
             {
                 IPackage package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
