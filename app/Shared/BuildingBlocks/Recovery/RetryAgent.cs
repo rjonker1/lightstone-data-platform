@@ -2,7 +2,7 @@
 using System.Threading;
 using Common.Logging;
 
-namespace BuildingBlocks.Recovery
+namespace Shared.Recovery
 {
     public class RetryAgent
     {
