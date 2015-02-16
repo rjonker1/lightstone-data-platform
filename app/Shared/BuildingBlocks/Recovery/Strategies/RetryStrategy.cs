@@ -1,7 +1,7 @@
 using System;
-using BuildingBlocks.Fluency;
+using Shared.Fluency;
 
-namespace BuildingBlocks.Recovery.Strategies
+namespace Shared.Recovery.Strategies
 {
     public abstract class RetryStrategy : IRetryStrategy
     {

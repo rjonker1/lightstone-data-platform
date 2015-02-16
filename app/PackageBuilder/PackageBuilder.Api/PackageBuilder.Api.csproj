@@ -264,6 +264,10 @@
       <Project>{622131d3-b807-49a9-a41e-5309d3e14a37}</Project>
       <Name>PackageBuilder.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.TestObjects\PackageBuilder.TestObjects.csproj">
+      <Project>{e399e536-36b5-4281-ab56-e4d2cc90dbe5}</Project>
+      <Name>PackageBuilder.TestObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

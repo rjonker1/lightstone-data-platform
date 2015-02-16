@@ -1,7 +1,7 @@
 ﻿using System;
-using BuildingBlocks.Fluency;
+using Shared.Fluency;
 
-namespace BuildingBlocks.Recovery
+namespace Shared.Recovery
 {
     public interface IRetryStrategy
     {

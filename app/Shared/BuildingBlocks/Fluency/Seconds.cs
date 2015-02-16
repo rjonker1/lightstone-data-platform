@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Fluency
+﻿namespace Shared.Fluency
 {
     public class Seconds
     {
