@@ -110,6 +110,11 @@ namespace Api.Domain.Infrastructure.Requests
 
     public class Vehicle : IProvideVehicleInformationForRequest
     {
+        public Vehicle()
+        {
+            
+        }
+
         public Vehicle(string engineNumber, string licenseNumber, string make, string registrationNumber,
             string vinNumber, string vinOrChassisNumber)
         {
