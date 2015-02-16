@@ -12,13 +12,13 @@ namespace AuditLogTests
 {
 
 
-    [TestClass]
+   // [TestClass]
     public class UnitTest1
     {
         private readonly IWindsorContainer _container = new WindsorContainer();
         private ISession _session;
 
-        [TestInitialize]
+       // [TestInitialize]
         public void IntializaTest()
         {
             _container.Kernel.ComponentModelCreated += OverrideHelper.OverrideContainerLifestyle;
@@ -37,7 +37,7 @@ namespace AuditLogTests
         }
 
 
-        [TestMethod]
+     //   [TestMethod]
         public void TestAddRole()
         {
             
@@ -61,7 +61,7 @@ namespace AuditLogTests
           
         }
 
-        [TestMethod]
+       // [TestMethod]
         public void TestModifyRole()
         {
             var roleRepo = new Repository<Role>(_session);
@@ -77,7 +77,7 @@ namespace AuditLogTests
             _session.Transaction.Commit();
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void TestDeleteRole()
         {
             var roleRepo = new Repository<Role>(_session);
