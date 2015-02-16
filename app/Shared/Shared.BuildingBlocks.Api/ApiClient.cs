@@ -11,17 +11,17 @@ namespace Shared.BuildingBlocks.Api
         T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
 
-    public interface IUmApiClient : IApiClient
+    public interface IUserManagementApiClient : IApiClient
     {
 
     }
 
-    public interface IPbApiClient : IApiClient
+    public interface IPackageBuilderApiClient : IApiClient
     {
-        string Get(string token, string resource = "", object body = null);
-        string Post(string token, string resource = "", object body = null);
-        T Get<T>(string token, string resource = "", object body = null) where T : new();
-        T Post<T>(string token, string resource = "", object body = null) where T : new();
+        //string Get(string token, string resource = "", object body = null);
+        //string Post(string token, string resource = "", object body = null);
+        //T Get<T>(string token, string resource = "", object body = null) where T : new();
+        //T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -86,12 +86,12 @@ namespace Shared.BuildingBlocks.Api
         public ApiClient() : base(AppSettings.Api.BaseUrl) { }
     }
 
-    public class UmApiClient : ApiClientBase, IUmApiClient
+    public class UmApiClient : ApiClientBase, IUserManagementApiClient
     {
         public UmApiClient() : base(AppSettings.UmApi.BaseUrl) { }
     }
 
-    public class PbApiClient : ApiClientBase, IPbApiClient
+    public class PbApiClient : ApiClientBase, IPackageBuilderApiClient
     {
         public PbApiClient() : base(AppSettings.PbApi.BaseUrl) { }
     }

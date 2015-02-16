@@ -34,7 +34,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataImports
         {
             this.Info(() => "Attempting to import required data");
             _bus.Publish(new ImportIndustry());
-            _bus.Publish(new ImportState());
+            //_bus.Publish(new ImportState());
             _bus.Publish(new ImportDataProvider());
             this.Info(() => "Successfully imported required data");
         }
