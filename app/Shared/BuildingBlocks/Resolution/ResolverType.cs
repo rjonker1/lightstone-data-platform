@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BuildingBlocks.Resolution
+namespace Shared.Resolution
 {
     public class ResolverType
     {

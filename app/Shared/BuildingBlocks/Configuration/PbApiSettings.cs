@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Configuration
+﻿namespace Shared.Configuration
 {
     public class PbApiSettings
     {

@@ -3,9 +3,9 @@ using Nancy;
 
 namespace Api.Modules
 {
-    public class ApiNancyModule : NancyModule
+    public class ApiModule : NancyModule
     {
-        public ApiNancyModule(IApiMetaDataGenerator apiMetaDataGenerator)
+        public ApiModule(IApiMetaDataGenerator apiMetaDataGenerator)
             : base("/api")
         {
             Get["/"] = parameters => Response.AsJson(apiMetaDataGenerator.GetAllModuleRouteMetaData(Context));
