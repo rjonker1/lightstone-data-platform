@@ -62,6 +62,7 @@ namespace Api
 
             container.Register<IPackageBuilderApiClient, PackageBuilderApiClient>();
             container.Register<IUserManagementApiClient, UserManagementApiClient>();
+            container.Register<IUserAuthenticationClient, UserAuthenticatorClient>();
 
             var assembliesToScan = AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages").And("NServiceBus.NHibernate").And("NServiceBus.Transports.RabbitMQ");
 
