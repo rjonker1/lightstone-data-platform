@@ -1,6 +1,6 @@
-﻿using BuildingBlocks.Fluency;
+﻿using Shared.Fluency;
 
-namespace BuildingBlocks.Recovery.Strategies
+namespace Shared.Recovery.Strategies
 {
     public class CustomisableRetryStrategy : RetryStrategy
     {

@@ -52,7 +52,7 @@ namespace UserManagement.Api.Modules
             Post["/Users/{id}"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
-                var entity = Mapper.Map<UserDto, User>(dto, users.Get(dto.Id));
+                var entity = Mapper.Map(dto, users.Get(dto.Id));
 
                 bus.Publish(new CreateUpdateEntity(entity));
 

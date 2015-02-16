@@ -2,7 +2,7 @@
 using System.Configuration;
 using Common.Logging;
 
-namespace BuildingBlocks.Configuration
+namespace Shared.Configuration
 {
     internal class AppSettingsReader
     {

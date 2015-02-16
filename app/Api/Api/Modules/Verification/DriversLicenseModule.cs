@@ -7,9 +7,12 @@ using Api.Domain.Verification.Infrastructure.Commands;
 using Api.Domain.Verification.Infrastructure.Dto;
 using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
 using Billing.Api.Connector;
+using Billing.Api.Dtos;
+using DataPlatform.Shared.Identifiers;
 using Lace.Domain.Core.Requests.Contracts;
 using Nancy;
 using Nancy.ModelBinding;
+using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.Security;
@@ -33,13 +36,21 @@ namespace Api.Modules.Verification
             {
                 var token = Context.AuthorizationHeaderToken();
 
+                if (string.IsNullOrEmpty(token))
+                    return Response.AsJson(new {});
+
                 //var package = packageBuilderApi.Get<DataPlatform.Shared.Dtos.Package>(token, string.Format("Packages/{0}/{1}", _.packageId,_.packageVersion));
                 var package = new FakePackageBuilderApi().PackageDatabase.First().Value;
                 var request = this.Bind<DriversLicenseRequestDto>();
 
                 handler.Handle(new DriversLicenseVerficationCommand(BuildLaceRequest(package, request)));
 
-                //TODO: implement billing
+                var packageIdentifier = new PackageIdentifier(package.Id, new VersionIdentifier(1));
+                var requestIdentifier = new RequestIdentifier(Guid.NewGuid(), SystemIdentifier.CreateApi());
+                var userIdentifier = new UserIdentifier(new Guid(token));
+                var transactionContext = new TransactionContext(Guid.NewGuid(), userIdentifier, requestIdentifier);
+                var createTransaction = new CreateTransaction(packageIdentifier, transactionContext);
+                billingConnector.CreateTransaction(createTransaction);
 
 
                 return Response.AsJson(handler.Response);

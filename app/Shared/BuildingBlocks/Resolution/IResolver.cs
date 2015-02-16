@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BuildingBlocks.Resolution
+namespace Shared.Resolution
 {
     public interface IResolver
     {

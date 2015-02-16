@@ -130,8 +130,30 @@ function initializeLookupRoutes(sammy) {
     sammy.get('/Lookups/:type', function (context) {
         context.load('/Lookups/' + context.params.type, { dataType: 'html' }).swap();
     });
+    sammy.get('/Lookups/:type/:filter', function (context) {
+        //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html' }).swap();
+    });
 }
 
 function initializePlugins() {
-    $(".chosen-select").chosen();
+    $(".chosen-select").chosen({ width: "95%" });
+    $('.chosen-autocomplete .chosen-choices input').autocomplete({
+        source: function (request, response) {
+            var $container = $(this.element).closest('.chosen-autocomplete');
+            $.ajax({
+                url: "/Lookups/UserManagement.Domain.Entities.Customer, UserManagement.Domain.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function () { $('ul.chosen-results').empty(); },
+                success: function (data) {
+                    response($.map(data, function (items) {
+                        $.each(items, function (index) {
+                            var $select = $container.find('select');
+                            $select.append('<option selected="true" value="' + this.id + '">' + this.name + '</option>');
+                            $select.trigger("chosen:updated");
+                        });
+                    }));
+                }
+            });
+        }
+    });
 }

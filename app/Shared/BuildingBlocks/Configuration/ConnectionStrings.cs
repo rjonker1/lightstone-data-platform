@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace BuildingBlocks.Configuration
+namespace Shared.Configuration
 {
     public class ConnectionStrings
     {

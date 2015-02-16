@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Configuration;
+﻿using System;
+using Shared.Configuration;
 using RestSharp;
 
 namespace Shared.BuildingBlocks.Api
@@ -11,17 +12,13 @@ namespace Shared.BuildingBlocks.Api
         T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
 
-    public interface IUmApiClient : IApiClient
+    public interface IUserManagementApiClient : IApiClient
     {
 
     }
 
-    public interface IPbApiClient : IApiClient
+    public interface IPackageBuilderApiClient : IApiClient
     {
-        string Get(string token, string resource = "", object body = null);
-        string Post(string token, string resource = "", object body = null);
-        T Get<T>(string token, string resource = "", object body = null) where T : new();
-        T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -31,7 +28,9 @@ namespace Shared.BuildingBlocks.Api
 
         protected ApiClientBase(string baseUrl)
         {
-            //ToDo: Null checking
+            if (string.IsNullOrEmpty(baseUrl))
+                throw new Exception("baseUrl is missing");
+
             _client = new RestClient(baseUrl);
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
@@ -70,7 +69,8 @@ namespace Shared.BuildingBlocks.Api
             return Content(token, resource, body, Method.POST);
         }
 
-        private static RestRequest RestRequest(string resource, string token, object body = null, Method method = Method.GET)
+        private static RestRequest RestRequest(string resource, string token, object body = null,
+            Method method = Method.GET)
         {
             var request = new RestRequest(resource, method);
             request.AddHeader("Authorization", "ApiKey " + token);
@@ -83,16 +83,22 @@ namespace Shared.BuildingBlocks.Api
 
     public class ApiClient : ApiClientBase
     {
-        public ApiClient() : base(AppSettings.Api.BaseUrl) { }
+        public ApiClient() : base(AppSettings.Api.BaseUrl)
+        {
+        }
     }
 
-    public class UmApiClient : ApiClientBase, IUmApiClient
+    public class UserManagementApiClient : ApiClientBase, IUserManagementApiClient
     {
-        public UmApiClient() : base(AppSettings.UmApi.BaseUrl) { }
+        public UserManagementApiClient() : base(AppSettings.UmApi.BaseUrl)
+        {
+        }
     }
 
-    public class PbApiClient : ApiClientBase, IPbApiClient
+    public class PackageBuilderApiClient : ApiClientBase, IPackageBuilderApiClient
     {
-        public PbApiClient() : base(AppSettings.PbApi.BaseUrl) { }
+        public PackageBuilderApiClient() : base(AppSettings.PbApi.BaseUrl)
+        {
+        }
     }
 }

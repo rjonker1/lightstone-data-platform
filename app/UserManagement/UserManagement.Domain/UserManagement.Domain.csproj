@@ -55,10 +55,12 @@
     <Compile Include="CommandHandlers\ContractDurations\CreateContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\Contracts\CreateContractHandler.cs" />
+    <Compile Include="CommandHandlers\Contracts\GetContractPackageHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\CreateContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\CreateCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
+    <Compile Include="CommandHandlers\Entities\CreateUpdateEntityHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
@@ -79,6 +81,10 @@
     <ProjectReference Include="..\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">
       <Project>{4CA5036F-E26D-4345-AB68-D670E948F50F}</Project>
       <Name>UserManagement.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Domain.Dtos\UserManagement.Domain.Dtos.csproj">
+      <Project>{5de944c7-90ff-4fd0-913e-44aef7158562}</Project>
+      <Name>UserManagement.Domain.Dtos</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserManagement.Domain.Entities\UserManagement.Domain.Entities.csproj">
       <Project>{3CFF1FF6-1AAE-435A-9C81-BB0793979596}</Project>

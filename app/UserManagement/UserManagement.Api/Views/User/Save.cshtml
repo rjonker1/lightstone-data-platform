@@ -92,11 +92,23 @@
                 <div class="col-lg-3">
                     @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
                     <select name="RoleIds" data-placeholder="Role..." multiple class="chosen-select">
-                        <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.Roles.Value)
                         {
                             var isSelected = Model.RoleIds != null && Model.RoleIds.Contains(new Guid(item.Value));
                             <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.CustomerIds, new { @class = "control-label col-lg-4" })
+                <div class="col-lg-3 chosen-autocomplete">
+                    @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
+                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Role..." multiple class="chosen-select">
+                        @foreach (NamedEntityDto item in Model.Customers)
+                        {
+                            var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
+                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
                         }
                     </select>
                 </div>
@@ -110,3 +122,20 @@
         </form>
     </div>
 </div>
+
+<script>
+    $('.chosen-choices input').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Lookups/UserManagement.Domain.Entities.Customer, UserManagement.Domain.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function () { $('ul.chosen-results').empty(); },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        $('ul.chosen-results').append('<li class="active-result">' + item.name + '</li>');
+                    }));
+                }
+            });
+        }
+    });
+</script>
