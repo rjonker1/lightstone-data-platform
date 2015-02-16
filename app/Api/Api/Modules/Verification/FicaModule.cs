@@ -8,17 +8,17 @@ using Nancy.ModelBinding;
 
 namespace Api.Modules.Verification
 {
-    public class FicaVerificationModule : VerificationModule
+    public class FicaModule : VerificationModule
     {
-        public FicaVerificationModule(IHandleFicaVerficationRequests handler)
+        public FicaModule(IHandleFicaVerficationRequests handler)
         {
-            Get["/ficaVerification"] = _ => Response.AsJson(new
+            Get["/fica"] = _ => Response.AsJson(new
             {
                 _request,
                 _response
             });
 
-            Post["/ficaVerification/"] = _ =>
+            Post["/fica/"] = _ =>
             {
                 var request = this.Bind<FicaVerficationRequestDto>();
                 handler.Handle(new VerifyPersonsFicaInformationCommand(request));

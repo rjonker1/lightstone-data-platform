@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Core.Entities
     public abstract class Entity : IEntity
     {
         [DataMember]
-        public virtual Guid Id { get; protected internal set; }
+        public virtual Guid Id { get; set; }
 
         protected internal Entity() { }
 
@@ -16,9 +16,10 @@ namespace UserManagement.Domain.Core.Entities
             Id = id == new Guid() ? Guid.NewGuid() : id;
         }
 
-        public virtual DateTime? Modified { get; protected internal set; }
-        public virtual string ModifiedBy { get; protected internal set; }
-        public virtual DateTime? Created { get; protected internal set; }
-        public virtual string CreatedBy { get; protected internal set; }
+
+        public virtual DateTime? Modified { get; set; }
+        public virtual string ModifiedBy { get; set; }
+        public virtual DateTime? Created { get; set; }
+        public virtual string CreatedBy { get; set; }
     }
 }

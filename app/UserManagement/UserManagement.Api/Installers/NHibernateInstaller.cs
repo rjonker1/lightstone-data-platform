@@ -10,6 +10,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using UserManagement.Domain.Core.NHibernate.Interceptors;
+using UserManagement.Domain.Entities.NHibernate.Interceptors;
 using UserManagement.Infrastructure.NHibernate;
 using UserManagement.Infrastructure.NHibernate.Conventions;
 
@@ -37,6 +38,9 @@ namespace UserManagement.Api.Installers
 
         protected virtual void ExportSchemaConfig(Configuration config)
         {
+            var interceptor = new TrackingInterceptor();
+
+            
             config.SetInterceptor(new TrackingInterceptor());
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
 

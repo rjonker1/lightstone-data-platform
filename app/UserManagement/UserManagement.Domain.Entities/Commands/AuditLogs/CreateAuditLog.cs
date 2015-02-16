@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagement.Domain.Core.Commands;
+using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities.Commands.AuditLogs
 {
     public class CreateAuditLog : DomainCommand
     {
-        public readonly int UserId;
+        public readonly Guid? UserId;
         public DateTime EventDateUtc;
         public readonly string EventType;
         public readonly string TableName;
@@ -28,7 +29,7 @@ namespace UserManagement.Domain.Entities.Commands.AuditLogs
         public ICollection<AuditLog> Auditlogs;
         public AuditLog AuditLogRoot;
 
-        public CreateAuditLog(int userId, DateTime eventdateutc, string eventtype, string tablename
+        public CreateAuditLog(Guid? userId, DateTime eventdateutc, string eventtype, string tablename
             , Guid recordid, string columnname, string originalvalue, string newValue, string dataType
             ,bool revertable, Guid? revertedId, Guid? commitId, int? commitSequence, int? commitVersion, long checkpointNumber)
             

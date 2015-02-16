@@ -16,7 +16,7 @@ namespace UserManagement.Domain.Entities
 
         public override string ToString()
         {
-            return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
+          return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
         }
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities.Commands.AuditLogs;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.Commands.AuditLogs;
 
 namespace UserManagement.Domain.CommandHandlers.Audits
 {

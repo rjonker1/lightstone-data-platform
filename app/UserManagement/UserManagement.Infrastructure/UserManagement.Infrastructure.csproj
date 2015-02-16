@@ -79,11 +79,8 @@
     <Compile Include="NHibernate\Conventions\TableNameConvention.cs" />
     <Compile Include="NHibernate\MappingOverrides\AddressOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\BillingOverride.cs" />
-    <Compile Include="NHibernate\MappingOverrides\ClientMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ClientUserMappingOverride.cs" />
-    <Compile Include="NHibernate\MappingOverrides\ContactDetailOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\ContractMappingOverride.cs" />
-    <Compile Include="NHibernate\MappingOverrides\CustomerMappingOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

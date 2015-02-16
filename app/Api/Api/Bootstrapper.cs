@@ -29,8 +29,6 @@ namespace Api
             {
                 var token = context.AuthorizationHeaderToken();
                 var authenticator = container.Resolve<IAuthenticateUser>();
-
-
                 return string.IsNullOrWhiteSpace(token) ? null : authenticator != null ? authenticator.GetUserIdentity(token) : null;
             });
 

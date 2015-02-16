@@ -16,20 +16,20 @@ using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Modules.Verification
 {
-    public class DriversLicenseVerficationModule : VerificationModule
+    public class DriversLicenseModule : VerificationModule
     {
-        public DriversLicenseVerficationModule(IPbApiClient packageBuilderApi,
+        public DriversLicenseModule(IPbApiClient packageBuilderApi,
             IHandleDriversLicenseVerficationRequests handler, IConnectToBilling billingConnector)
         {
 
-            Get["/driversLicenseVerification"] =
+            Get["/driversLicense"] =
                 _ => Response.AsJson(new
                 {
                     _request,
                     _response
                 });
 
-            Post["/driversLicenseVerification/{packageId}/{packageVersion}"] = _ =>
+            Post["/driversLicense/{packageId}/{packageVersion}"] = _ =>
             {
                 var token = Context.AuthorizationHeaderToken();
 
@@ -41,7 +41,7 @@ namespace Api.Modules.Verification
 
                 //TODO: implement billing
 
-                //return handler.Response.AsJsonString();
+
                 return Response.AsJson(handler.Response);
             };
         }

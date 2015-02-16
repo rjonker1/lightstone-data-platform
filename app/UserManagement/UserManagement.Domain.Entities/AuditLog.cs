@@ -1,8 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -21,7 +18,7 @@ namespace UserManagement.Domain.Entities
         }
 
 
-        public AuditLog(Guid id, int userId, DateTime eventdateutc, string eventtype, string tablename
+        public AuditLog(Guid id, Guid? userId, DateTime eventdateutc, string eventtype, string tablename
             , Guid recordid, string columnname, string originalvalue, string newValue, string dataType
             ,bool revertable, Guid? revertedId, Guid? commitId, int? commitSequence, int? commitVersion, long checkpointNumber)
             : base(id)
@@ -45,7 +42,7 @@ namespace UserManagement.Domain.Entities
         }
 
         //public Guid Id { get; set; }
-        public virtual int UserId { get; set; }
+        public virtual Guid? UserId { get; set; }
         public virtual DateTime EventDateUtc { get; set; }
         public virtual string EventType { get; set; }
         public virtual string EntityName { get; set; }
