@@ -83,6 +83,7 @@
     <Compile Include="ValueTypes\when_persisting_province.cs" />
     <Compile Include="ValueTypes\when_persisting_user_type.cs" />
     <Compile Include="when_persisting_address.cs" />
+    <Compile Include="when_persisting_audit_log.cs" />
     <Compile Include="when_persisting_billing.cs" />
     <Compile Include="when_persisting_client.cs" />
     <Compile Include="when_persisting_contact_detail.cs" />
