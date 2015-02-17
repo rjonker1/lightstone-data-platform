@@ -38,10 +38,11 @@ namespace UserManagement.Api.Installers
 
         protected virtual void ExportSchemaConfig(Configuration config)
         {
-            var interceptor = new TrackingInterceptor();
+            //var interceptor = new TrackingInterceptor();
 
             
-            config.SetInterceptor(new TrackingInterceptor());
+            //config.SetInterceptor(new TrackingInterceptor());
+            config.SetInterceptor(new NhInterceptor());
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
 
             var update = new SchemaUpdate(config);
