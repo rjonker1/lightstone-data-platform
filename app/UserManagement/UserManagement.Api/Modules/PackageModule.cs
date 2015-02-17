@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using MemBus;
 using Nancy;
+using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.Commands.Packages;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules
 {
@@ -11,15 +16,50 @@ namespace UserManagement.Api.Modules
     {
         public PackageModule(IBus bus, IRepository<Package> packages)
         {
-
-            Get["/Packages"] = _ => Response.AsJson(packages);
-
-            Get["/Packages/Create"] = _ =>
+            Get["/Packages"] = _ =>
             {
+                var dto = Mapper.Map<IEnumerable<Package>, IEnumerable<PackageDto>>(packages);
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+            };
 
-                bus.Publish(new CreatePackage("test", DateTime.Now, "Package 1", "1", true));
+            Get["/Packages/Add"] = parameters =>
+            {
+                return View["Save", new PackageDto()];
+            };
 
-                return "Success";
+            Post["/Packages"] = _ =>
+            {
+                var dto = this.Bind<PackageDto>();
+                var entity = Mapper.Map(dto, packages.Get(dto.Id) ?? new Package());
+
+                bus.Publish(new CreateUpdateEntity(entity));
+
+                return Response.AsJson("Test");
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = packages });
+            };
+
+            Get["/Packages/{id}"] = parameters =>
+            {
+                var guid = (Guid)parameters.id;
+                var entity = packages.Get(guid);
+                var dto = Mapper.Map<Package, PackageDto>(entity);
+                return View["Save", dto];
+            };
+
+            Post["/Packages/{id}"] = _ =>
+            {
+                var dto = this.Bind<PackageDto>();
+                var entity = Mapper.Map(dto, packages.Get(dto.Id) ?? new Package());
+
+                bus.Publish(new CreateUpdateEntity(entity));
+
+                return Negotiate
+                    .WithView("Index")
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = packages });
             };
         }
     }

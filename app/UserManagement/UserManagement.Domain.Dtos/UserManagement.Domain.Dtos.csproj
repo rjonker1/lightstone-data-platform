@@ -33,12 +33,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressDto.cs" />
     <Compile Include="ClientDto.cs" />
     <Compile Include="ClientUserDto.cs" />
+    <Compile Include="ContactDetailDto.cs" />
     <Compile Include="ContractDto.cs" />
     <Compile Include="ContractPackageDto.cs" />
     <Compile Include="CustomerDto.cs" />
     <Compile Include="NamedEntityDto.cs" />
+    <Compile Include="PackageDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>

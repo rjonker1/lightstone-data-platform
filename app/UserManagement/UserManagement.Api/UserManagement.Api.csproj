@@ -295,6 +295,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Contracts\ContractMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Packages\PackageMap.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\IdsToEntitiesConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\ClientUserDtoToClientUserConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Addresses\AddressMap.cs" />
@@ -392,6 +394,10 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Save.cshtml" />
     <Content Include="Views\Index\Home.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
+    <Content Include="Views\Contract\Save.cshtml" />
+    <Content Include="Views\Package\Index.cshtml" />
+    <Content Include="Views\Package\Save.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -7,6 +7,8 @@ function initializeRoutes(sammy) {
     initializeCusomerRoutes(sammy);
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
+    initializeContractRoutes(sammy);
+    initializePackageRoutes(sammy);
     initializeLookupRoutes(sammy);
 }
 
@@ -121,6 +123,79 @@ function initializeUserRoutes(sammy) {
             .swap()
             .then(function () {
                 context.redirect('/#/Users');
+            });
+        return true; // Allow form submit
+    });
+}
+
+function initializeContractRoutes(sammy) {
+
+    sammy.get('/Contracts', function (context) {
+        context.load('/Contracts', { dataType: 'html' }).swap();
+    });
+    sammy.get('/Contracts/Add', function (context) {
+        context.load('/Contracts/Add', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Contracts', function (context) {
+        context.load('/Contracts', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Contracts');
+            });
+        return true; // Allow form submit
+    });
+    sammy.get('/Contracts/:id', function (context) {
+        context.load('/Contracts/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Contracts/:id', function (context) {
+        context.load('/Contracts/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Contracts');
+            });
+        return true; // Allow form submit
+    });
+}
+function initializePackageRoutes(sammy) {
+
+    sammy.get('/Packages', function (context) {
+        context.load('/Packages', { dataType: 'html' }).swap();
+    });
+    sammy.get('/Packages/Add', function (context) {
+        context.load('/Packages/Add', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Packages', function (context) {
+        context.load('/Packages', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Packages');
+            });
+        return true; // Allow form submit
+    });
+    sammy.get('/Packages/:id', function (context) {
+        context.load('/Packages/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Packages/:id', function (context) {
+        context.load('/Packages/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Packages');
             });
         return true; // Allow form submit
     });
