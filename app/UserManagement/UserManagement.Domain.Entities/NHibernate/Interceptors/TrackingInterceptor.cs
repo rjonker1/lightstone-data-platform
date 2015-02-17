@@ -32,7 +32,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             }
 
             public ISession Session { private get; set; }
-            public IEnumerable<AuditLog> AuditLogs { private get; set; }
+            public List<AuditLog> AuditLogs { private get; set; }
 
             public object Entity { get; set; }
 
@@ -42,12 +42,16 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             {
                 if (!success) return;
 
-                LogAudits(Session, AuditLogs);
+                LogAudits();
             }
 
 
-            private void LogAudits(ISession session, IEnumerable<AuditLog> logs)
+            private void LogAudits()
             {
+                var session = Session;
+
+                var logs = AuditLogs;
+
                 session.SessionFactory.OpenSession();
 
                 session.BeginTransaction(IsolationLevel.RepeatableRead);
@@ -56,15 +60,36 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 var commitSequence = 0;
 
-                // TODO: find previous commits for the record
+                // find previous commits for the record
 
-                var previousAudidtsCommitVersion = auditLogRepository.Where(x => x.RecordId == EntityId).OrderByDescending(o => o.CommitVersion).Select(s => s.CommitVersion.Value).Distinct().FirstOrDefault();
+                var firstLogSet = auditLogRepository.Where(x => x.RecordId == EntityId && x.EventType == "A")
+                    .OrderBy(o => o.CommitVersion).ToList();
+
+                var previousAudidtsCommitVersion = firstLogSet.Where(x => x.RecordId == EntityId)
+                    .OrderByDescending(o => o.CommitVersion).Distinct().FirstOrDefault();
 
                 var commitVersion = 1;
 
-                commitVersion = commitVersion + previousAudidtsCommitVersion;
+                var logsToExclude = new List<AuditLog>();
 
-                foreach (var auditLog in logs)
+
+                if (previousAudidtsCommitVersion != null)
+                {
+                    if (previousAudidtsCommitVersion.CommitVersion != null)
+                        commitVersion = commitVersion + previousAudidtsCommitVersion.CommitVersion.Value;
+
+                    foreach (var l1 in logs)
+                    {
+                        // exclude duplicate "A" records
+                        logsToExclude.AddRange(from l2 in firstLogSet
+                                               where l1.EventType == "A"
+                                                   && l2.EventType == "A"
+                                               where l2.CommitVersion == 1
+                                               select l1);
+                    }
+                }
+
+                foreach (var auditLog in logs.Except(logsToExclude))
                 {
                     if (auditLog.EventType == "D")
                     {
@@ -81,6 +106,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                         auditLog.CommitVersion = commitVersion;
                         auditLog.CommitSequence = commitSequence;
                         commitSequence++;
+
                         auditLogRepository.SaveOrUpdate(auditLog);
                     }
                 }
@@ -113,7 +139,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             IType[] types, string state)
         {
 
-            if (ChangedTracked) return;
+            //if (!ChangedTracked) return;
 
             if (entity.GetType() == typeof(AuditLog))
             {
@@ -210,12 +236,8 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             base.OnDelete(entity, id, state, propertyNames, types);
         }
 
-        private void AuditObjectModification(object entity, object id, IEnumerable<AuditLog> sessionAuditLogs)
+        private void AuditObjectModification(object entity, object id, List<AuditLog> sessionAuditLogs)
         {
-            // session.SessionFactory.OpenSession();
-
-            if (ChangedTracked) return;
-
             _transactionSynchronization = new TransactionSynchronization(this)
             {
                 Session = _session,
