@@ -50,6 +50,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.WriteModels
             Id = id;
         }
 
+        //Default constructor for deserialization
         public DataProvider()
         {
         }

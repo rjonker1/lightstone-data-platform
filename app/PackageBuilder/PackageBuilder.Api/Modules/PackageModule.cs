@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Dtos.WriteModels;
+using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.TestObjects.Mothers;
+
 
 namespace PackageBuilder.Api.Modules
 {
@@ -34,18 +37,23 @@ namespace PackageBuilder.Api.Modules
                             {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            Post["/Packages/Package/{id}"] = parameters =>
+            Get["/Packages/Package/{id}"] = parameters =>
             {
-                IPackage package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+                PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 //TODO: Remove Fake Action Request Items
                 var requestPackage = new Package(package.Id, package.Name, ActionMother.LicensePlateSearchAction,
                     package.DataProviders.Select(
                         s =>
-                            new DataProvider(s.Id, s.Name, s.Description, s.CostOfSale, s.ResponseType,
-                                s.FieldLevelCostPriceOverride, s.Owner, s.CreatedDate, s.EditedDate, s.DataFields)));
+                            new DataProvider(s.Id, (DataProviderName) Enum.Parse(typeof (DataProviderName), s.Name),
+                                s.Description, s.CostOfSale, null,
+                                s.FieldLevelCostPriceOverride, s.Owner, s.CreatedDate, s.EditedDate,
+                                s.DataFields.Select(
+                                    d =>
+                                        new DataField(d.Name, d.Type, d.Definition, d.Industries, d.Price,
+                                            d.IsSelected.HasValue ? d.IsSelected.Value : false)))));
 
-                return Response.AsJson(new {Response = requestPackage});
+                return Response.AsJson(requestPackage);
             };
 
             Post["/Packages"] = parameters =>

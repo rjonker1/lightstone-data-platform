@@ -33,7 +33,7 @@ namespace PackageBuilder.Domain.Entities.DataFields.WriteModels
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataField>>))]
         public IEnumerable<IDataField> DataFields { get; internal set; }
 
-        //todo: make private
+        //Default constructor for deserialization
         public DataField()
         {
         }

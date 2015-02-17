@@ -5,6 +5,11 @@ namespace PackageBuilder.Domain.Entities
 {
     public class Action : NamedEntity, IAction
     {
+        public Action()
+        {
+            
+        }
+
         public Action(string name)
             : base(name)
         {

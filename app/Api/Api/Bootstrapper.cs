@@ -16,6 +16,7 @@ using Nancy.Bootstrapper;
 using Nancy.Routing;
 using Nancy.TinyIoc;
 using NServiceBus;
+using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.Security;
 
 
@@ -58,6 +59,10 @@ namespace Api
             container.Register<IAuthenticateUser, UmApiAuthenticator>();
             container.Register<IRouteMetadataProvider, DefaultRouteMetadataProvider>();
             container.Register<IRouteDescriptionProvider, ApiRouteDescriptionProvider>();
+
+            container.Register<IPackageBuilderApiClient, PackageBuilderApiClient>();
+            container.Register<IUserManagementApiClient, UserManagementApiClient>();
+            container.Register<IUserAuthenticationClient, UserAuthenticatorClient>();
 
             var assembliesToScan = AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages").And("NServiceBus.NHibernate").And("NServiceBus.Transports.RabbitMQ");
 

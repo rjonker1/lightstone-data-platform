@@ -6,7 +6,7 @@ namespace Shared.BuildingBlocks.Api.Security
     {
         public IUserIdentity GetUserIdentity(string token)
         {
-            return new UserManagementApiClient().Post<ApiUser>(token, "authenticate");
+            return new UserAuthenticatorClient().Post<ApiUser>(token, "authenticate");
         }
     }
 }
