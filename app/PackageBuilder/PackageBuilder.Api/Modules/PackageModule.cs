@@ -40,7 +40,7 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages/Package/{id}"] = parameters =>
             {
                 PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
-                
+
                 //TODO: Remove Fake Action Request Items
                 var requestPackage = new Package(package.Id, package.Name, ActionMother.LicensePlateSearchAction,
                     package.DataProviders.Select(
@@ -50,9 +50,10 @@ namespace PackageBuilder.Api.Modules
                                 s.FieldLevelCostPriceOverride, s.Owner, s.CreatedDate, s.EditedDate,
                                 s.DataFields.Select(
                                     d =>
-                                        new DataField(d.Name, d.Type, d.Definition, d.Industries, d.Price, d.IsSelected.HasValue ? d.IsSelected.Value : false)))));
+                                        new DataField(d.Name, d.Type, d.Definition, d.Industries, d.Price,
+                                            d.IsSelected.HasValue ? d.IsSelected.Value : false)))));
 
-                return Response.AsJson(new { Response = requestPackage });
+                return Response.AsJson(requestPackage);
             };
 
             Post["/Packages"] = parameters =>

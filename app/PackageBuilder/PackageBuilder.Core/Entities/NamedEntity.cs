@@ -7,6 +7,10 @@ namespace PackageBuilder.Core.Entities
         public Guid Id { get; private set; }
         public string Name { get; private set; }
 
+        public NamedEntity()
+        {
+        }
+
         protected NamedEntity(string name)
         {
             Id = Guid.NewGuid();
