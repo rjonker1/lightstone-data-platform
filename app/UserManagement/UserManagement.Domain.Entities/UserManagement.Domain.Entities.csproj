@@ -131,6 +131,9 @@
     <Compile Include="User.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="UserType.cs" />
+    <Reference Include="UserManagement.Domain">
+      <HintPath>..\UserManagement.Api\Bin\UserManagement.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">

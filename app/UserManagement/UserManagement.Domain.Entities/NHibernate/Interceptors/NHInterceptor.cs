@@ -1,4 +1,5 @@
 ﻿using NHibernate;
+using UserManagement.Domain.BusinessRules;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 {
@@ -7,7 +8,9 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
         public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, global::NHibernate.Type.IType[] types)
         {
-            var test = 123;
+            var brv = new BusinessRulesValidator();
+            brv.CheckRules(entity);
+
             return base.OnSave(entity, id, state, propertyNames, types);
         }
     }

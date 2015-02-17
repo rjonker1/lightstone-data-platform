@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
     <Compile Include="CommandHandlers\Addresses\CreateAddressHandler.cs" />
     <Compile Include="CommandHandlers\AuditLogs\CreateAuditLogHandler.cs" />
     <Compile Include="CommandHandlers\Billings\CreateBillingHandler.cs" />
