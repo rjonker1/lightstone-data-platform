@@ -101,7 +101,6 @@
     <Compile Include="Commands\Users\CreateUser.cs" />
     <Compile Include="Commands\UserTypes\CreateUserType.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
-    <Compile Include="ContractPackage.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

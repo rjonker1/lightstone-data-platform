@@ -23,16 +23,16 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson(contracts.Select(x => x));
             };
 
-            Post["/Contracts/GetPackage"] = _ =>
-            {
-                var dto = this.Bind<ContractPackageRequestDto>();
-                if (dto == null)
-                    return Response.AsJson(new {});
+            //Post["/Contracts/GetPackage"] = _ =>
+            //{
+            //    var dto = this.Bind<ContractPackageRequestDto>();
+            //    if (dto == null)
+            //        return Response.AsJson(new {});
 
-                var handler = new GetContractPackageHandler(contracts);
-                handler.Handle(new GetPackageOnContract(dto.ContractId));
-                return Response.AsJson(handler.Response);
-            };
+            //    var handler = new GetContractPackageHandler(contracts);
+            //    handler.Handle(new GetPackageOnContract(dto.ContractId));
+            //    return Response.AsJson(handler.Response);
+            //};
 
             Get["/Contracts/Create"] = _ =>
             {

@@ -28,8 +28,8 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.Id, id)
                 .CheckProperty(c => c.Name, "Client")
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
-                .CheckComponentList(c => c.Packages, new List<Package>{new Package("Name", "Version", false)})
-                .CheckComponentList(c => c.ClientUsers, new List<ClientUser>{new ClientUser(client, user, "Alias")})
+                .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
+                .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(client, user, "Alias") })
                 .VerifyTheMappings(client);
         }
     }

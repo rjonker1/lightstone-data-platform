@@ -17,6 +17,7 @@ namespace UserManagement.Domain.Entities.Tests
         [Observation]
         public void should_persist()
         {
+            var customer = new Customer();
             var paymentType = new PaymentType("PaymentType");
             var physicalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Gauteng"));
             var postalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Gauteng"));
@@ -34,7 +35,8 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus"))
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
                 .CheckComponentList(c => c.Users, new HashSet<User>{ user })
-                .VerifyTheMappings();
+                .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
+                .VerifyTheMappings(customer);
         }
     }
 }

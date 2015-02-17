@@ -10,7 +10,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
         {
             mapping.References(x => x.ContactDetail).Cascade.All();
             mapping.HasMany(x => x.ClientUsers).Cascade.All();
-            mapping.HasManyToMany(x => x.Packages).Cascade.All().Table("ClientPackage");
+            mapping.HasManyToMany(x => x.Contracts).Cascade.All().Table("ClientContract");
         }
     }
 }
