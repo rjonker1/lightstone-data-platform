@@ -136,12 +136,13 @@ function initializeLookupRoutes(sammy) {
 }
 
 function initializePlugins() {
-    $(".chosen-select").chosen({ width: "95%" });
+    $(".chosen-select").chosen({ width: "100%" });
     $('.chosen-autocomplete .chosen-choices input').autocomplete({
         source: function (request, response) {
             var $container = $(this.element).closest('.chosen-autocomplete');
+            var type = $container.data('type');
             $.ajax({
-                url: "/Lookups/UserManagement.Domain.Entities.Customer, UserManagement.Domain.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null/" + request.term + "/",
+                url: "/Lookups/" + type + "/" + request.term + "/",
                 dataType: "json",
                 beforeSend: function () { $('ul.chosen-results').empty(); },
                 success: function (data) {
@@ -154,6 +155,89 @@ function initializePlugins() {
                     }));
                 }
             });
+        }
+    });
+    //var tags = [{ label: "Choice1", value: "value1" }];
+    //$(".auto-list-complete input").autocomplete({
+    //    source: function (request, response) {
+            
+            
+    //        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
+    //        response($.grep(tags, function(item) {
+    //            return matcher.test(item.label);
+    //        }));
+    //    },
+    //    select: function (event, ui) {
+    //        var $container = $(this).closest('div');
+    //        var $ul = $container.find('ul');
+    //        var $li = $("<li>", {
+    //            text: ""
+    //        }).appendTo($ul);
+    //        var $id = $("<input>", {
+    //            value: ui.item.value,
+    //            type: 'hidden'
+    //        }).appendTo($li);
+    //        var $label = $("<label>", {
+    //            text: ui.item.label
+    //        }).appendTo($li);
+    //        var $value = $("<input>", {
+    //            value: "",
+    //            "class": "form-control"
+    //        }).appendTo($li);
+    //    }
+    //});
+    $('.auto-list-complete input').autocomplete({
+        source: function(request, response) {
+            var $container = $(this.element).closest('div');
+            var type = $container.data('type');
+            //var $ul = $container.find('ul');
+            //var $ul = $("<ul>", {
+            //    text: "",
+            //    "class": "custom-colorize-changer"
+            //}).appendTo($container);
+            $.ajax({
+                url: "/Lookups/" + type + "/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function() {
+                },
+                success: function(data) {
+                    response($.map(data.dto, function(item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            var $container = $(this).closest('div');
+            var $ul = $container.find('ul');
+            if ($('#' + ui.item.value).length) {
+                return;
+            }
+            
+            var index = $ul.children('li').length;
+            var $li = $("<li>", {
+                text: ""
+            }).appendTo($ul);
+            var $id = $("<input>", {
+                id: ui.item.value,
+                name: "ClientId[" + index + "]",
+                value: ui.item.value,
+                type: 'hidden'
+            }).appendTo($li);
+            var $label = $("<label>", {
+                text: ui.item.label
+            }).appendTo($li);
+            var $value = $("<input>", {
+                name: "UserAlias[" + index + "]",
+                value: "",
+                "class": "form-control"
+            }).appendTo($li);
+        },
+        close: function(event, ui) {
+            $(this).val('');
         }
     });
 }

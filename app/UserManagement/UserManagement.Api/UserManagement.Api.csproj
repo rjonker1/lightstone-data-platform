@@ -296,9 +296,11 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\IdsToEntitiesConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Converters\ClientUserDtoToClientUserConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Addresses\AddressMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Clients\ClientMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Billings\BillingMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ClientUsers\ClientUserMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ContactDetails\ContactDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Customers\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\IdToEntityConverter.cs" />

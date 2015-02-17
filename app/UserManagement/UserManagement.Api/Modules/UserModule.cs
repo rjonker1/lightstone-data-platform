@@ -32,7 +32,12 @@ namespace UserManagement.Api.Modules
             Post["/Users"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
+                var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                dto.ClientUsers = clientUsersDto;
+
                 var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
+                //foreach (var clientuser in entity.ClientUsers)
+                //    clientuser.User = entity;
 
                 bus.Publish(new CreateUpdateEntity(entity));
 
@@ -52,7 +57,12 @@ namespace UserManagement.Api.Modules
             Post["/Users/{id}"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
+                var clientUsersDto = this.Bind<List<ClientUserDto>>();
+                dto.ClientUsers = clientUsersDto;
+
                 var entity = Mapper.Map(dto, users.Get(dto.Id));
+                //foreach (var clientuser in entity.ClientUsers)
+                //    clientuser.User = entity;
 
                 bus.Publish(new CreateUpdateEntity(entity));
 

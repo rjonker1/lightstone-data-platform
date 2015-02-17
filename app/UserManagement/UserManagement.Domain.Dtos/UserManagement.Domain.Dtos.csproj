@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientDto.cs" />
+    <Compile Include="ClientUserDto.cs" />
     <Compile Include="ContractDto.cs" />
     <Compile Include="ContractPackageDto.cs" />
     <Compile Include="CustomerDto.cs" />

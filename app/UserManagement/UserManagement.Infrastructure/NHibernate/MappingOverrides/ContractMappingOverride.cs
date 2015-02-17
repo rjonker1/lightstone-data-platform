@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Contract> mapping)
         {
-            mapping.HasManyToMany(x => x.Packages).Cascade.All().Table("ContractPackage").ParentKeyColumn("ContractId").ChildKeyColumn("PackageId");
+            mapping.HasManyToMany(x => x.Packages).Cascade.All().Table("ContractPackage");
         }
     }
 }

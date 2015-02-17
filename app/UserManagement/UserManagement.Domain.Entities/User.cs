@@ -15,8 +15,8 @@ namespace UserManagement.Domain.Entities
         public virtual bool? IsActive { get; protected internal set; }
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
-        //public virtual IEnumerable<ClientUser> ClientUsers { get; protected internal set; }
         public virtual ISet<Customer> Customers { get; protected internal set; }
+        public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
 
         public User() { }
 
@@ -34,22 +34,6 @@ namespace UserManagement.Domain.Entities
             UserType = userType;
             Roles = roles;
         }
-
-        //public User(string password, string userName, bool? isActive,
-        //                //IEnumerable<ClientUser> clientUsers, 
-        //                UserType userType, 
-        //                IEnumerable<Customer> customers, 
-        //                IList<Role> roles, Guid id =  new Guid()): base(id)
-        //{
-
-        //    Password = password;
-        //    UserName = userName;
-        //    IsActive = isActive;
-        //    //ClientUsers = new Collection<ClientUser>();
-        //    UserType = userType;
-        //    //Customers = customers;
-        //    Roles = roles;
-        //}
     }
 }
 
