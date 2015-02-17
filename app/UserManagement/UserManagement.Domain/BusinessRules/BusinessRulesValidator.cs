@@ -1,4 +1,5 @@
-﻿using UserManagement.Domain.Entities;
+﻿using UserManagement.Domain.BusinessRules.Users;
+using UserManagement.Domain.Entities;
 
 namespace UserManagement.Domain.BusinessRules
 {
@@ -10,7 +11,8 @@ namespace UserManagement.Domain.BusinessRules
 
             if (enity is User)
             {
-                //User rule reference
+                var userRule = new CreateUpdateUserRule();
+                userRule.Apply();
             }
             else if (enity is Customer)
             {

@@ -2,6 +2,9 @@
 {
     public class CreateUpdateUserRule
     {
-         
+        public void Apply()
+        {
+            
+        }
     }
 }
