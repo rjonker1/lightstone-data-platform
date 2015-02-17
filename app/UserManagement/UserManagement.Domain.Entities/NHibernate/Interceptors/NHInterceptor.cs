@@ -1,5 +1,4 @@
 ﻿using NHibernate;
-using UserManagement.Domain.BusinessRules;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 {
