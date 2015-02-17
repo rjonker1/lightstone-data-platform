@@ -14,7 +14,7 @@
     <RootNamespace>UserManagement.Api</RootNamespace>
     <AssemblyName>UserManagement.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -296,12 +296,15 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\IdsToEntitiesConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Converters\ClientUserDtoToClientUserConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Addresses\AddressMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Clients\ClientMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Billings\BillingMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ClientUsers\ClientUserMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ContactDetails\ContactDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Customers\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\IdToEntityConverter.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\NamedEntities\NamedEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Entities\EntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
@@ -445,7 +448,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>22484</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:22484/</IISUrl>
+          <IISUrl>http://dev.lightstone.usermanagement.api</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

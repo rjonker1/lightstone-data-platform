@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UserManagement.Domain.Dtos
 {
     public class UserDto
     {
+        public UserDto()
+        {
+            Customers = Enumerable.Empty<NamedEntityDto>();
+            ClientUsers = Enumerable.Empty<ClientUserDto>();
+        }
+
         public virtual Guid Id { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
@@ -16,5 +23,7 @@ namespace UserManagement.Domain.Dtos
         public Guid UserTypeId { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
+        public IEnumerable<NamedEntityDto> Customers { get; set; }
+        public IEnumerable<ClientUserDto> ClientUsers { get; set; }
     }
 }

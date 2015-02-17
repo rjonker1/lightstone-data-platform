@@ -40,7 +40,7 @@ namespace UserManagement.Api.Modules
                 var contractDuration = contractDurations.Select(x => x).FirstOrDefault(x => x.Name == "Rolling MoM");
                 var contractType = contractTypes.Select(x => x).FirstOrDefault(x => x.Name == "Online Agreement");
                 var esalationType = escalationTypes.Select(x => x).FirstOrDefault(x => x.Name == "Annual % per product");
-                var client = clients.Select(x => x).FirstOrDefault(x => x.ClientName == "Testeroonie Client");
+                var client = clients.Select(x => x).FirstOrDefault(x => x.Name == "Testeroonie Client");
 
                 var dto = new ContractDto(DateTime.Now, contractDuration.Id, "New Contract", contractType.Id,
                     esalationType.Id, "Testeroonie", DateTime.Now, null, "This is a legit test contract", "Contract entering user", DateTime.Now, null, "Contract 1", "132",

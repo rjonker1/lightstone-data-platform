@@ -21,7 +21,7 @@ namespace Api.Modules.Verification
 {
     public class DriversLicenseModule : VerificationModule
     {
-        public DriversLicenseModule(IPbApiClient packageBuilderApi,
+        public DriversLicenseModule(IPackageBuilderApiClient packageBuilderApi,
             IHandleDriversLicenseVerficationRequests handler, IConnectToBilling billingConnector)
         {
 

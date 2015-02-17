@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Linq;
 using Castle.Windsor;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 
 namespace UserManagement.Infrastructure.Helpers
 {
     public interface IRetrieveEntitiesByType
     {
-        System.Linq.IQueryable GetEntities(Type type);
-        System.Linq.IQueryable GetNamedEntities(Type type);
+        IQueryable GetEntities(Type type);
+        IQueryable<NamedEntity> GetNamedEntities(Type type);
+        IQueryable<NamedEntity> GetNamedEntities(Type type, string name);
     }
 
     public class EntitiesByTypeHelper : IRetrieveEntitiesByType
@@ -19,16 +22,28 @@ namespace UserManagement.Infrastructure.Helpers
             _container = container;
         }
 
-        public System.Linq.IQueryable GetEntities(Type type)
+        public IQueryable GetEntities(Type type)
         {
             var executorType = typeof(IRepository<>).MakeGenericType(type);
-            return (System.Linq.IQueryable)_container.Resolve(executorType);
+            return (IQueryable)_container.Resolve(executorType);
         }
 
-        public System.Linq.IQueryable GetNamedEntities(Type type)
+        //public IQueryable GetNamedEntities(Type type)
+        //{
+        //    var executorType = typeof(INamedEntityRepository<>).MakeGenericType(type);
+        //    return (IQueryable)_container.Resolve(executorType);
+        //}
+
+        public IQueryable<NamedEntity> GetNamedEntities(Type type)
         {
             var executorType = typeof(INamedEntityRepository<>).MakeGenericType(type);
-            return (System.Linq.IQueryable)_container.Resolve(executorType);
+            var namedEntities = (IQueryable)_container.Resolve(executorType);
+            return (from NamedEntity item in namedEntities select item);
+        }
+
+        public IQueryable<NamedEntity> GetNamedEntities(Type type, string name)
+        {
+            return GetNamedEntities(type).Where(x => (x.Name + "").Trim().ToLower().StartsWith((name + "").Trim().ToLower()));
         }
     }
 }

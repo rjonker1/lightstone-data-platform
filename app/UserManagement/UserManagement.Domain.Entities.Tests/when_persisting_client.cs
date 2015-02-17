@@ -20,13 +20,13 @@ namespace UserManagement.Domain.Entities.Tests
             var physicalAddress = new Address("Type", "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
             var postalAddress = new Address("Type", "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
             var id = Guid.NewGuid();
-            var client = new Client("Client", id);
+            var client = new Client("Client");
             var roles = new HashSet<Role>{new Role("Role")};
             var userType = new UserType("UserType");
             var user = new User("FirstName", "LastName", "IdNumber", "ContactNumber", "UserName", "Password", false, userType, roles);
             new PersistenceSpecification<Client>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, id)
-                .CheckProperty(c => c.ClientName, "Client")
+                .CheckProperty(c => c.Name, "Client")
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
                 .CheckComponentList(c => c.Packages, new List<Package>{new Package("Name", "Version", false)})
                 .CheckComponentList(c => c.ClientUsers, new List<ClientUser>{new ClientUser(client, user, "Alias")})

@@ -12,8 +12,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             mapping.References(x => x.UserType).Cascade.All();
             mapping.HasManyToMany(x => x.Roles).Cascade.All().Table("UserRole");
             mapping.HasManyToMany(x => x.Customers).Cascade.All().Table("CustomerUser");
-
-            //mapping.HasMany(x => x.ClientUsers).Cascade.All().KeyColumn("UserId");
+            mapping.HasMany(x => x.ClientUsers).Cascade.All().Table("ClientUser");
         }
     }
 
