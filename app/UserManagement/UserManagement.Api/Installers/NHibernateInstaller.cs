@@ -41,8 +41,8 @@ namespace UserManagement.Api.Installers
             //var interceptor = new TrackingInterceptor();
 
             
-            //config.SetInterceptor(new TrackingInterceptor());
-            config.SetInterceptor(new NhInterceptor());
+            config.SetInterceptor(new TrackingInterceptor());
+            //config.SetInterceptor(new NhInterceptor());
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
 
             var update = new SchemaUpdate(config);

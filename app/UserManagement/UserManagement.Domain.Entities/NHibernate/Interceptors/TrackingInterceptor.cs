@@ -5,6 +5,7 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Transaction;
 using NHibernate.Type;
+using UserManagement.Domain.BusinessRules;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 
@@ -234,6 +235,9 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             string[] propertyNames,
             IType[] types)
         {
+            var brv = new BusinessRulesValidator();
+            brv.CheckRules(entity);
+
             Footprint(entity, state, propertyNames);
 
             //GetChanges(entity, id, state, null, propertyNames, types, "A");
