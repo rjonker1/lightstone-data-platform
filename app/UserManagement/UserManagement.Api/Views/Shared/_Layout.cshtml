@@ -8,6 +8,7 @@
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/sb-admin.css" rel="stylesheet">
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
     <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="~/Content/DataTables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/chosen.min.css" rel="stylesheet" />
@@ -33,13 +34,17 @@
     <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
     <script src="~/Scripts/app/routes/routes.js"></script>
     <script src="~/Scripts/app/app.js"></script>
+
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
+        $(document).ajaxStart(function () {
+            $.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
+        });
         $(document).ajaxStop(function () {
             $.unblockUI();
         });
-        $(document).ajaxStart(function () {
-            $.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
+        $(document).ajaxError(function () {
+            $.unblockUI();
         });
     </script>
 </body>

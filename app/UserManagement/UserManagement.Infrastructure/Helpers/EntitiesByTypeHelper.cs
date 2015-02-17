@@ -43,7 +43,7 @@ namespace UserManagement.Infrastructure.Helpers
 
         public IQueryable<NamedEntity> GetNamedEntities(Type type, string name)
         {
-            return GetNamedEntities(type).Where(x => (x.Name + "").Trim().ToLower() == (name + "").Trim().ToLower());
+            return GetNamedEntities(type).Where(x => (x.Name + "").Trim().ToLower().StartsWith((name + "").Trim().ToLower()));
         }
     }
 }

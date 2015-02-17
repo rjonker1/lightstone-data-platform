@@ -29,7 +29,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.Name, "FirstName")
                 .CheckProperty(c => c.AccountOwnerName, "LastName")
                 .CheckReference(c => c.Billing, billing)
-                .CheckReference(c => c.CommercialState, new CommercialState(""))
+                .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
                 .CheckReference(c => c.CreateSource, new CreateSource("CommercialState"))
                 .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus"))
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
