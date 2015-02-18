@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
 using Nancy;
@@ -41,9 +43,15 @@ namespace PackageBuilder.Api.Modules
             {
                 PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
-                //TODO: Remove Fake Action Request Items
+
+                if (package == null)
+                    throw new Exception("Package could not be found");
+
+                var dataProviders = GetSelectedDataProvidersForSearchRequest(package);
+
+                //TODO: Building Request Package here is not the best place. Should come already built from Read Side together with its ACTION??
                 var requestPackage = new Package(package.Id, package.Name, ActionMother.LicensePlateSearchAction,
-                    package.DataProviders.Select(
+                    dataProviders.Select(
                         s =>
                             new DataProvider(s.Id, (DataProviderName) Enum.Parse(typeof (DataProviderName), s.Name),
                                 s.Description, s.CostOfSale, null,
@@ -118,6 +126,55 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " deleted"});
             };
+        }
+
+        private static IEnumerable<DataProviderDto> GetSelectedDataProvidersForSearchRequest(PackageDto package)
+        {
+            var dataProviderList = new List<DataProviderDto>();
+
+            foreach (var dataProvider in package.DataProviders)
+            {
+
+                CheckForSelectedDataFields(dataProvider.DataFields.ToList(), dataProviderList,
+                    dataProvider);
+            }
+
+            return dataProviderList;
+        }
+
+
+        private static bool CheckForSelectedDataFields(IEnumerable<DataProviderFieldItemDto> dataFields,
+            ICollection<DataProviderDto> dataProviderList, DataProviderDto dataProvider)
+        {
+            Debug.Write("\n\n***********************");
+            Debug.Write(string.Format("\nData Provider {0}", dataProvider.Name));
+
+            foreach (var field in dataFields)
+            {
+                var isSelected = field.IsSelected != null && field.IsSelected.Value ||
+                                 field.DataFields.FirstOrDefault(
+                                     w => w.IsSelected != null && w.IsSelected.Value) != null;
+
+                Debug.Write(string.Format("\n{0} has selected datafields or is selected? {1} Fields Selected Value {2}",
+                    field.Name, isSelected, field.IsSelected));
+
+                if (isSelected)
+                {
+                    dataProviderList.Add(dataProvider);
+                    return true;
+                }
+
+                Debug.Write("\n++++++++++++++++++++++++++++++++++++++++");
+                Debug.Write("\nContinue to next list.....");
+                var stop = CheckForSelectedDataFields(field.DataFields.ToList(), dataProviderList, dataProvider);
+
+                if (stop)
+                    return true;
+            }
+
+            Debug.Write("\n========================================");
+            Debug.Write("\nReturning false.....");
+            return false;
         }
     }
 }
