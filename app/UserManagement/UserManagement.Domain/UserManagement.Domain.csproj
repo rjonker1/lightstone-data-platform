@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
+    <Compile Include="BusinessRulesValidator.cs" />
     <Compile Include="BusinessRules\Clients\CreateUpdateClientRule.cs" />
     <Compile Include="BusinessRules\Customers\CreateUpdateCustomerRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUpdateUserRule.cs" />

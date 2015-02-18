@@ -1,11 +1,12 @@
 ﻿using UserManagement.Domain.BusinessRules.Users;
 using UserManagement.Domain.Entities;
 
-namespace UserManagement.Domain.BusinessRules
+namespace UserManagement.Domain
 {
     public class BusinessRulesValidator
     {
-     
+        public BusinessRulesValidator() { }
+
         public void CheckRules(object enity)
         {
 
@@ -23,6 +24,6 @@ namespace UserManagement.Domain.BusinessRules
                 //Client rule reference
             }
 
-        }
+        } 
     }
 }
