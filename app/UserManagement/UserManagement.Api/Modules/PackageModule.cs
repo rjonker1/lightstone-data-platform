@@ -5,6 +5,7 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -14,10 +15,11 @@ namespace UserManagement.Api.Modules
 {
     public class PackageModule : NancyModule
     {
-        public PackageModule(IBus bus, IRepository<Package> packages)
+        public PackageModule(IBus bus, IRepository<Package> packages, IPackageBuilderApiClient packageBuilderApi)
         {
             Get["/Packages"] = _ =>
             {
+                var packageResponse = packageBuilderApi.Get("", "Packages");
                 var dto = Mapper.Map<IEnumerable<Package>, IEnumerable<PackageDto>>(packages);
                 return Negotiate
                     .WithView("Index")
