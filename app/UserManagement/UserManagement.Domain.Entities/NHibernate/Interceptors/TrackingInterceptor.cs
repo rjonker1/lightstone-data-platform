@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Nancy.Session;
 using NHibernate;
 using NHibernate.Transaction;
 using NHibernate.Type;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities.BusinessRules;
+using ISession = NHibernate.ISession;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 {
@@ -257,15 +260,23 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             string[] propertyNames,
             IType[] types)
         {
-            var brv = new BusinessRulesValidator();
-            brv.CheckRules(entity);
+
+            //var brv = new BusinessRulesValidator();
+            //brv.CheckRules(entity);
 
             Footprint(entity, state, propertyNames);
 
             //GetChanges(entity, id, state, null, propertyNames, types, "A");
 
-            return base.OnSave(entity, id, state, propertyNames, types);
+            //return base.OnSave(entity, id, state, propertyNames, types);
+            return false;
         }
+
+        //public override void BeforeTransactionCompletion(ITransaction tx)
+        //{
+        //    tx.Rollback();
+        //    base.BeforeTransactionCompletion(tx);
+        //}
 
         private void Footprint(object entity, object[] state, string[] propertyNames)
         {
