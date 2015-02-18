@@ -1,53 +1,31 @@
 ﻿using System;
-using UserManagement.Domain.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UserManagement.Domain.Dtos
 {
     public class ContractDto
     {
+        public ContractDto()
+        {
+            Clients = Enumerable.Empty<NamedEntityDto>();
+            Customers = Enumerable.Empty<NamedEntityDto>();
+        }
 
-        public DateTime ContractCommencementDate { get; set; }
-        public Guid ContractDurationId { get; set; }
-        public string ContractName { get; set; }
-        public Guid ContractTypeId { get; set; }
-        public Guid EscalationTypeId { get; set; }
-        public string LastUpdateBy { get; set; }
-        public DateTime LastUpdateDate { get; set; }
-        public Guid? ClientId { get; set; }
-        public string ContactDetail { get; set; }
+        public Guid Id { get; set; }
+        public DateTime CommencementDate { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public string EnteredIntoBy { get; set; }
         public DateTime? OnlineAcceptance { get; set; }
-        public Guid? ProfileDetailId { get; set; }
         public string RegisteredName { get; set; }
         public string RegistrationNumber { get; set; }
-
-        public Client Client { get; set; }
-        //public ProfileDetail ProfileDetail { get; set; }
-        public ContractType ContractType { get; set; }
-        public EscalationType EscalationType { get; set; }
-        public ContractDuration ContractDuration { get; set; }
-
-        public ContractDto(DateTime contractCommencementDate, Guid contractDurationId, string contractName, Guid contractTypeId, Guid escalationTypeId, string lastUpdateBy, DateTime lastUpdateDate, Guid? clientId, string contactDetail, string enteredIntoBy, DateTime? onlineAcceptance, Guid? profileDetailId, string registeredName, string registrationNumber, Client client, /*ProfileDetail profileDetail,*/ ContractType contractType, EscalationType escalationType, ContractDuration contractDuration)
-        {
-            ContractCommencementDate = contractCommencementDate;
-            ContractDurationId = contractDurationId;
-            ContractName = contractName;
-            ContractTypeId = contractTypeId;
-            EscalationTypeId = escalationTypeId;
-            LastUpdateBy = lastUpdateBy;
-            LastUpdateDate = lastUpdateDate;
-            ClientId = clientId;
-            ContactDetail = contactDetail;
-            EnteredIntoBy = enteredIntoBy;
-            OnlineAcceptance = onlineAcceptance;
-            ProfileDetailId = profileDetailId;
-            RegisteredName = registeredName;
-            RegistrationNumber = registrationNumber;
-            Client = client;
-            //ProfileDetail = profileDetail;
-            ContractType = contractType;
-            EscalationType = escalationType;
-            ContractDuration = contractDuration;
-        }
+        public Guid ContractTypeId { get; set; }
+        public Guid EscalationTypeId { get; set; }
+        public Guid ContractDurationId { get; set; }
+        public IEnumerable<Guid> ClientIds { get; set; }
+        public IEnumerable<NamedEntityDto> Clients { get; set; }
+        public IEnumerable<Guid> CustomerIds { get; set; }
+        public IEnumerable<NamedEntityDto> Customers { get; set; }
     }
 }

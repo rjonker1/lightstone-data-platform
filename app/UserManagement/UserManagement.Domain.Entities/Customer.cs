@@ -13,8 +13,9 @@ namespace UserManagement.Domain.Entities
         public virtual PlatformStatus PlatformStatus { get; protected internal set; }
         public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual ISet<User> Users { get; protected internal set; }
+        public virtual ISet<Contract> Contracts { get; protected internal set; }
 
-        protected Customer() { }
+        public Customer() { }
 
         public Customer(string name, string accountOwnerName, CommercialState commercialState, 
             CreateSource createSource, PlatformStatus platformStatus, Guid id = new Guid())

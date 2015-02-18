@@ -1,5 +1,6 @@
 ﻿using Api.Domain.Infrastructure.Automapping;
 using Api.Domain.Infrastructure.Extensions;
+using Api.Domain.Infrastructure.Transactions;
 using Api.Domain.Verification.Core.Contracts;
 using Api.Domain.Verification.Infrastructure.Handlers;
 using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
@@ -18,7 +19,6 @@ using Nancy.TinyIoc;
 using NServiceBus;
 using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.Security;
-
 
 namespace Api
 {
@@ -70,6 +70,7 @@ namespace Api
             container.Register<IEntryPoint, EntryPointService>();
 
             container.Register<IConnectToBilling>(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration()));
+            container.Register<ICreateBillingTransaction, CreateBillingTransaction>();
 
             container.Register<ICallFicaVerification, FicaVerificationService>();
             container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();
@@ -77,7 +78,5 @@ namespace Api
             container.Register<ICallDriversLicenseVerification, DriversLicenseVerificationService>();
             container.Register<IHandleDriversLicenseVerficationRequests, DriversLicenseVerificationHandler>();
         }
-
-
     }
 }

@@ -59,15 +59,11 @@ namespace Api.Domain.Infrastructure.Requests
     public class User : IProvideUserInformationForRequest
     {
 
-        public User(string email, string firstName, Guid userId, string lastName, string userName,
-            string phoneNumber)
+        public User(Guid userId, string userName, string firstName)
         {
-            UserEmail = email;
             UserFirstName = firstName;
             UserId = userId;
-            UserLastName = lastName;
             UserName = userName;
-            UserPhone = phoneNumber;
         }
 
         public string UserEmail { get; private set; }
@@ -85,11 +81,10 @@ namespace Api.Domain.Infrastructure.Requests
 
     public class Context : IProvideContextForRequest
     {
-        public Context(string product, string reasonForApplication, string securityCode)
+        public Context(string product, string reasonForApplication)
         {
             Product = product;
             ReasonForApplication = reasonForApplication;
-            SecurityCode = securityCode;
         }
 
         public string Product { get; private set; }

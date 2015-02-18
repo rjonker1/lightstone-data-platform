@@ -16,8 +16,8 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
         public override void Handle(CreateContract command)
         {
-            _repository.Save(new Contract(command.Id, command.ContractCommencementDate, command.ContractName, command.ContactDetail, command.EnteredIntoBy, command.OnlineAcceptance, 
-                                            command.RegisteredName, command.RegistrationNumber, command.Client, command.ContractType, command.EscalationType,
+            _repository.Save(new Contract(command.ContractCommencementDate, command.ContractName, command.ContactDetail, command.EnteredIntoBy, command.OnlineAcceptance, 
+                                            command.RegisteredName, command.RegistrationNumber, command.ContractType, command.EscalationType,
                                             command.ContractDuration));
         }
     }
