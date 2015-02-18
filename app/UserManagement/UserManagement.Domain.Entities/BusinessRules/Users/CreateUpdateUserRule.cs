@@ -1,4 +1,4 @@
-﻿namespace UserManagement.Domain.BusinessRules.Users
+﻿namespace UserManagement.Domain.Entities.BusinessRules.Users
 {
     public class CreateUpdateUserRule
     {

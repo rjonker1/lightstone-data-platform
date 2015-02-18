@@ -1,12 +1,9 @@
-﻿using UserManagement.Domain.BusinessRules.Users;
-using UserManagement.Domain.Entities;
+﻿using UserManagement.Domain.Entities.BusinessRules.Users;
 
-namespace UserManagement.Domain
+namespace UserManagement.Domain.Entities.BusinessRules
 {
     public class BusinessRulesValidator
     {
-        public BusinessRulesValidator() { }
-
         public void CheckRules(object enity)
         {
 
