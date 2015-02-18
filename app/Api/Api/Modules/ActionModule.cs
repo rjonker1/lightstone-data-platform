@@ -45,8 +45,8 @@ namespace Api.Modules
                 if (packageDetails == null)
                     throw new Exception("Could not get package for contract");
 
-                var packageJson = packageBuilderApi.Get(token, "Packages/Package/" + packageDetails.Package.Id);
-                var package = packageJson.ToPackage();
+                var jsonPackage = packageBuilderApi.Get(token, "Packages/Package/" + packageDetails.Package.Id);
+                var package = jsonPackage.ToPackage();
 
                 if (package == null)
                     throw new Exception("Package could not be resolved");
