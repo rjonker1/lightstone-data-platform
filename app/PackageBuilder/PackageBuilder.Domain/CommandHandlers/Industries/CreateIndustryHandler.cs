@@ -22,7 +22,8 @@ namespace PackageBuilder.Domain.CommandHandlers.Industries
             {
                 var exception = new LightstoneAutoException("An industry with the name {0} already exists".FormatWith(command.Name));
                 this.Warn(() => exception);
-                throw exception;
+                //throw exception;
+                return;
             }
 
             _repository.Save(new Industry(command.Id, command.Name, command.IsSelected));

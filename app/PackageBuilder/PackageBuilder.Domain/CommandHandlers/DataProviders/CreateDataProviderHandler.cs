@@ -31,7 +31,8 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             {
                 var exception = new LightstoneAutoException("A data provider with the name: {0} already exists".FormatWith(command.Name));
                 this.Warn(() => exception);
-                throw exception;
+                //throw exception;
+                return;
             }
 
             var dataFields = Mapper.Map(command.DataProvider, command.DataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
