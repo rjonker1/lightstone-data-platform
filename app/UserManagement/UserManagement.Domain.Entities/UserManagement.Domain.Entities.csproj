@@ -69,6 +69,10 @@
     <Reference Include="System.Xml" />
     <Compile Include="Address.cs" />
     <Compile Include="AuditLog.cs" />
+    <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
+    <Compile Include="BusinessRules\Clients\CreateUpdateClientRule.cs" />
+    <Compile Include="BusinessRules\Customers\CreateUpdateCustomerRule.cs" />
+    <Compile Include="BusinessRules\Users\CreateUpdateUserRule.cs" />
     <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\Billings\CreateBilling.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="Commands\UserTypes\CreateUserType.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
     <Compile Include="IUserType.cs" />
+    <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Billing.cs" />
@@ -129,6 +134,9 @@
     <Compile Include="User.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="UserType.cs" />
+    <Reference Include="UserManagement.Domain">
+      <HintPath>..\UserManagement.Api\Bin\UserManagement.Domain.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UserManagement.Domain.Core\UserManagement.Domain.Core.csproj">

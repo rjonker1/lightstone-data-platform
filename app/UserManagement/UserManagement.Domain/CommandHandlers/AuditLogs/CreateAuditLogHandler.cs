@@ -1,10 +1,9 @@
-﻿
-using UserManagement.Domain.Core.MessageHandling;
+﻿using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.AuditLogs;
 
-namespace UserManagement.Domain.CommandHandlers.Audits
+namespace UserManagement.Domain.CommandHandlers.AuditLogs
 {
     public class CreateAuditLogHandler : AbstractMessageHandler<CreateAuditLog>
     {
