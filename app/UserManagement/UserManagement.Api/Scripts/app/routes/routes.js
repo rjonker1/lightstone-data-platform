@@ -221,15 +221,20 @@ function initializePlugins() {
                 dataType: "json",
                 beforeSend: function () { $('ul.chosen-results').empty(); },
                 success: function (data) {
-                    response($.map(data, function (items) {
-                        $.each(items, function (index) {
-                            var $select = $container.find('select');
-                            $select.append('<option selected="true" value="' + this.id + '">' + this.name + '</option>');
-                            $select.trigger("chosen:updated");
-                        });
+                    response($.map(data.dto, function (item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
                     }));
                 }
             });
+        },
+        select: function (event, ui) {
+            var $container = $(this).closest('.chosen-autocomplete');
+            var $select = $container.find('select');
+            $select.append('<option selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
+            $select.trigger("chosen:updated");
         }
     });
     //var tags = [{ label: "Choice1", value: "value1" }];

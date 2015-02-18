@@ -1,6 +1,7 @@
 ﻿@using System
 @using System.Collections
 @using System.Collections.Generic
+@using System.Linq
 @using Nancy.ViewEngines.Razor.HtmlHelpers;
 @using UserManagement.Api.ViewModels
 @using UserManagement.Domain.Dtos
@@ -42,6 +43,18 @@
                     @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Client Name" })
                 </div>
             </div>
+            @*<div class="form-group">
+                @Html.LabelFor(x => x.ContractIds, new { @class = "control-label col-lg-4" })
+                <div class="col-lg-3 chosen-autocomplete" data-type="@typeof(Contract).AssemblyQualifiedName">
+                    <select id="ContractIds" name="ContractIds" data-placeholder="Role..." multiple class="chosen-select">
+                        @foreach (NamedEntityDto item in Model.Contracts)
+                        {
+                            var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);
+                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>*@
             <div class="form-group">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-3">

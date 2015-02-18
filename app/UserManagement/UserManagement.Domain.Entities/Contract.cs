@@ -4,10 +4,9 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Contract : Entity
+    public class Contract : NamedEntity
     {
         public virtual DateTime CommencementDate { get; set; }
-        public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual string EnteredIntoBy { get; set; }
         public virtual DateTime? OnlineAcceptance { get; set; }
@@ -23,7 +22,7 @@ namespace UserManagement.Domain.Entities
         protected Contract() { }
 
         public Contract(DateTime commencementDate, string name, string description, string enteredIntoBy, DateTime? onlineAcceptance, string registeredName, string registrationNumber, ContractType contractType, EscalationType escalationType, ContractDuration contractDuration, Guid id = new Guid()) 
-            : base(id)
+            : base(name)
         {
             CommencementDate = commencementDate;
             Name = name;
