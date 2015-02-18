@@ -23,18 +23,22 @@ namespace PackageBuilder.Domain.CommandHandlers.DataImports
         {
             bool importDataOnApiStartUp;
             this.Info(() => "Looking for ImportDataOnApiStartUp AppSetting");
-            bool.TryParse(ConfigurationManager.AppSettings["ImportDataOnApiStartUp"], out importDataOnApiStartUp); //todo refactor
+            bool.TryParse(ConfigurationManager.AppSettings["ImportDataOnApiStartUp"], out importDataOnApiStartUp);
             this.Info(() => "Found ImportDataOnApiStartUp - {0} AppSetting".FormatWith(importDataOnApiStartUp));
-
+            
             if (importDataOnApiStartUp)
+            {
                 ImportData();
+                return;
+            }
+
         }
 
         private void ImportData()
         {
             this.Info(() => "Attempting to import required data");
             _bus.Publish(new ImportIndustry());
-            //_bus.Publish(new ImportState());
+            _bus.Publish(new ImportState());
             _bus.Publish(new ImportDataProvider());
             this.Info(() => "Successfully imported required data");
         }

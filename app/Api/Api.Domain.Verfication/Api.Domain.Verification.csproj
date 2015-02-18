@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
@@ -42,58 +42,58 @@
       <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.DataProvider.Car.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.CrossCutting.Infrastructure.Orm.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Ivid.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.IvidTitleHolder.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Rgt.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.RgtVin.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.DataProviders.Signio.DriversLicense.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.630\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
@@ -125,9 +125,9 @@
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.630\lib\net45\NHibernate.dll</HintPath>
@@ -145,16 +145,16 @@
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.630\lib\net45\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.655\lib\net45\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

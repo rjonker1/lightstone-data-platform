@@ -87,6 +87,7 @@
     <Compile Include="when_persisting_billing.cs" />
     <Compile Include="when_persisting_client.cs" />
     <Compile Include="when_persisting_contact_detail.cs" />
+    <Compile Include="when_persisting_contract.cs" />
     <Compile Include="when_persisting_customer.cs" />
     <Compile Include="when_persisting_package.cs" />
     <Compile Include="when_persisting_user.cs" />

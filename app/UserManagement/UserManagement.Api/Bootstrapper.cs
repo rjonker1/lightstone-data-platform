@@ -48,7 +48,8 @@ namespace UserManagement.Api
                 new BusInstaller(),
                 new ServiceLocatorInstaller(),
                 new AutoMapperInstaller(),
-                new HelperInstaller()
+                new HelperInstaller(),
+                new ApiClientInstaller()
                 );
 
             //Drop create

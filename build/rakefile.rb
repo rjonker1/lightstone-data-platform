@@ -269,26 +269,26 @@ namespace :deploy do
 				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
 				cmd = Exec.new
 				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
+				cmd.parameters = 'create-release --ignoreexisting --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
 				cmd.execute
 			end
 		end
 	end
 
-	task :to_test => ['convention:spec_generation', 'deploy:deploy_to_test'] do
-	end
+	#task :to_test => ['convention:spec_generation', 'deploy:deploy_to_test'] do
+	#end
 
-	task :deploy_to_test do
-		@settings.Configs.each do |c|
-			if c.deploy
-				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
-				cmd = Exec.new
-				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=Test --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
-				cmd.execute
-			end
-		end
-	end
+	# task :deploy_to_test do
+	# 	@settings.Configs.each do |c|
+	# 		if c.deploy
+	# 			puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
+	# 			cmd = Exec.new
+	# 			cmd.command = '../tools/octopus/Octo.exe'
+	# 			cmd.parameters = 'create-release --force --waitfordeployment --deployto=Test --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
+	# 			cmd.execute
+	# 		end
+	# 	end
+	# end
 end
 
 # CONVENTIONS #

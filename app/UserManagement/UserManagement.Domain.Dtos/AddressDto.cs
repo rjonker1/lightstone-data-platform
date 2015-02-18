@@ -1,0 +1,17 @@
+﻿using System;
+
+namespace UserManagement.Domain.Dtos
+{
+    public class AddressDto
+    {
+        public Guid Id { get; set; } 
+        public virtual string AddressType { get; set; }
+        public virtual string Line1 { get; set; }
+        public virtual string Line2 { get; set; }
+        public virtual string Suburb { get; set; }
+        public virtual string City { get; set; }
+        public virtual string Country { get; set; }
+        public virtual string PostalCode { get; set; }
+        public virtual Guid ProvinceId { get; set; }
+    }
+}

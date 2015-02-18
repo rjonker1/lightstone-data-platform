@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
             {
                 requesterDetails = new RequesterDetailsElement()
                 {
-                    requesterEmail = _request.User.UserEmail ?? string.Empty,
+                    requesterEmail = _request.User.UserName ?? string.Empty,
                     requesterName = _request.User.UserFirstName ?? string.Empty,
                     requesterPhone = _request.User.UserPhone ?? string.Empty
                 },

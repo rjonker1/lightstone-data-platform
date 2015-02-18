@@ -7,6 +7,8 @@ function initializeRoutes(sammy) {
     initializeCusomerRoutes(sammy);
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
+    initializeContractRoutes(sammy);
+    initializePackageRoutes(sammy);
     initializeLookupRoutes(sammy);
 }
 
@@ -126,6 +128,79 @@ function initializeUserRoutes(sammy) {
     });
 }
 
+function initializeContractRoutes(sammy) {
+
+    sammy.get('/Contracts', function (context) {
+        context.load('/Contracts', { dataType: 'html' }).swap();
+    });
+    sammy.get('/Contracts/Add', function (context) {
+        context.load('/Contracts/Add', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Contracts', function (context) {
+        context.load('/Contracts', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Contracts');
+            });
+        return true; // Allow form submit
+    });
+    sammy.get('/Contracts/:id', function (context) {
+        context.load('/Contracts/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Contracts/:id', function (context) {
+        context.load('/Contracts/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Contracts');
+            });
+        return true; // Allow form submit
+    });
+}
+function initializePackageRoutes(sammy) {
+
+    sammy.get('/Packages', function (context) {
+        context.load('/Packages', { dataType: 'html' }).swap();
+    });
+    sammy.get('/Packages/Add', function (context) {
+        context.load('/Packages/Add', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Packages', function (context) {
+        context.load('/Packages', { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Packages');
+            });
+        return true; // Allow form submit
+    });
+    sammy.get('/Packages/:id', function (context) {
+        context.load('/Packages/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Packages/:id', function (context) {
+        context.load('/Packages/' + context.params.id, { dataType: 'html' })
+            .swap()
+            .then(function () {
+                context.redirect('/#/Packages');
+            });
+        return true; // Allow form submit
+    });
+}
+
 function initializeLookupRoutes(sammy) {
     sammy.get('/Lookups/:type', function (context) {
         context.load('/Lookups/' + context.params.type, { dataType: 'html' }).swap();
@@ -146,15 +221,20 @@ function initializePlugins() {
                 dataType: "json",
                 beforeSend: function () { $('ul.chosen-results').empty(); },
                 success: function (data) {
-                    response($.map(data, function (items) {
-                        $.each(items, function (index) {
-                            var $select = $container.find('select');
-                            $select.append('<option selected="true" value="' + this.id + '">' + this.name + '</option>');
-                            $select.trigger("chosen:updated");
-                        });
+                    response($.map(data.dto, function (item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
                     }));
                 }
             });
+        },
+        select: function (event, ui) {
+            var $container = $(this).closest('.chosen-autocomplete');
+            var $select = $container.find('select');
+            $select.append('<option selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
+            $select.trigger("chosen:updated");
         }
     });
     //var tags = [{ label: "Choice1", value: "value1" }];

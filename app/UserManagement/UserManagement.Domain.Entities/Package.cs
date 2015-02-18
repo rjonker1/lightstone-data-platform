@@ -9,7 +9,7 @@ namespace UserManagement.Domain.Entities
         public virtual string Version { get; set; }
         public virtual bool? IsActivated { get; set; }
 
-        protected Package() { }
+        public Package() { }
 
         public Package(string name, string version, bool? isActivated, Guid id = new Guid()) 
             : base(id)

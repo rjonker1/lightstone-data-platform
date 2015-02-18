@@ -35,13 +35,13 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
         private static Contract FakeContract(Guid contractId)
         {
-            return new Contract(contractId,DateTime.Now,"VVI Product",null,null,null,null,null,null,null,null,null)
+            return new Contract(DateTime.Now, "VVI Product", null, null, null, null, null, null, null, null, contractId)
             {
                 Id = contractId,
-                Packages = new List<Package>()
+                Packages = new HashSet<Package>()
                 {
-                    new Package("Vvi Package","1",true,new Guid("C2FB758F-B313-448B-9B19-9AC893DEFE3F")),
-                    new Package("Vvi Package","2",true,new Guid("C2FB758F-B313-448B-9B19-9AC893DEFE3F"))
+                    new Package("VVI Product","1",true,new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB")),
+                    new Package("VVI Product","2",true,new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB"))
                 }
             };
         }
