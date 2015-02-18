@@ -7,6 +7,7 @@ using NHibernate.Transaction;
 using NHibernate.Type;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Entities.BusinessRules;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 {
@@ -246,6 +247,9 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             string[] propertyNames,
             IType[] types)
         {
+            var brv = new BusinessRulesValidator();
+            brv.CheckRules(entity);
+
             Footprint(entity, state, propertyNames);
 
             return base.OnSave(entity, id, state, propertyNames, types);
