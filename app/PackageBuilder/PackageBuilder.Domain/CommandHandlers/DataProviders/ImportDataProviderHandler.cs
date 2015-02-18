@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders;
@@ -34,11 +35,28 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             _publisher.Publish(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin,
                 DataProviderName.RgtVin.ToString(), 0d, typeof (IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
 
+            _publisher.Publish(new CreateDataProvider(DefaultAudatexResponse(), Guid.NewGuid(), DataProviderName.Audatex,
+              DataProviderName.Audatex.ToString(), 0d, typeof(IProvideDataFromAudatex), "Owner", DateTime.UtcNow));
+
+            _publisher.Publish(new CreateDataProvider(new PCubedFicaVerficationResponse(), Guid.NewGuid(), DataProviderName.PCubedFica,
+              DataProviderName.PCubedFica.ToString(), 0d, typeof(IProvideDataFromPCubedFicaVerfication), "Owner", DateTime.UtcNow));
+
             _publisher.Publish(new CreateDataProvider(DefaultSignioDriversLicenseDecryptionResponse(), Guid.NewGuid(),
                 DataProviderName.SignioDecryptDriversLicense, DataProviderName.SignioDecryptDriversLicense.ToString(),
                 0d, typeof (IProvideDataFromSignioDriversLicenseDecryption), "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
+        }
+
+        private static AudatexResponse DefaultAudatexResponse()
+        {
+            return
+                new AudatexResponse(new List<IProvideAccidentClaim>()
+                {
+                    new AccidentClaim(DateTime.MinValue, string.Empty, string.Empty, DateTime.MinValue, string.Empty,
+                        string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                        0.0M, 0.0M, DateTime.MinValue, string.Empty, string.Empty, string.Empty, string.Empty)
+                });
         }
 
         private static IvidResponse DefaultIvidResponse()

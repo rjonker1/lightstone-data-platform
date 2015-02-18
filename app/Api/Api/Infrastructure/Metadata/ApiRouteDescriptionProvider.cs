@@ -11,7 +11,7 @@ namespace Api.Infrastructure.Metadata
     {
         private readonly IEnumerable<Tuple<string, string, string>> _moduleDescriptions = new List<Tuple<string, string, string>>
         {
-            new Tuple<string, string, string>(typeof(IndexModule).ToString(), "/", "Index Module: Default module for the API")
+            new Tuple<string, string, string>(typeof(ActionModule).ToString(), "/", "Index Module: Default module for the API")
         };
 
         public string GetDescription(INancyModule module, string path)

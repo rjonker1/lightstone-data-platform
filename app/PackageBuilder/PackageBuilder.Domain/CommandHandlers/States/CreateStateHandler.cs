@@ -22,7 +22,8 @@ namespace PackageBuilder.Domain.CommandHandlers.States
             {
                 var exception = new LightstoneAutoException("State {0} already exists".FormatWith(command.Id, command.Name));
                 this.Warn(() => exception);
-                throw exception;                
+                //throw exception;
+                return;
             }
 
             var entity = new State(command.Id, command.Name, command.Alias);
