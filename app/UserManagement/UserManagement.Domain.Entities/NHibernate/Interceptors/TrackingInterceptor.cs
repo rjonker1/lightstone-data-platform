@@ -15,7 +15,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         private TransactionSynchronization _transactionSynchronization;
         private ISession _session;
 
-        public bool ChangedTracked { get; set; }
+        public bool ChangesTracked { get; set; }
 
         private class TransactionSynchronization : ISynchronization
         {
@@ -58,38 +58,38 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 var auditLogRepository = new Repository<AuditLog>(session);
 
-                var commitSequence = 0;
+              //  var commitSequence = 0;
 
-                // find previous commits for the record
+              //  // find previous commits for the record
 
-                var firstLogSet = auditLogRepository.Where(x => x.RecordId == EntityId && x.EventType == "A")
-                    .OrderBy(o => o.CommitVersion).ToList();
+              //  var firstLogSet = auditLogRepository.Where(x => x.RecordId == EntityId && x.EventType == "A")
+              //      .OrderBy(o => o.CommitVersion).ToList();
 
-                var previousAudidtsCommitVersion = firstLogSet.Where(x => x.RecordId == EntityId)
-                    .OrderByDescending(o => o.CommitVersion).Distinct().FirstOrDefault();
+              //  var previousAudidtsCommitVersion = firstLogSet.Where(x => x.RecordId == EntityId)
+              //      .OrderByDescending(o => o.CommitVersion).Distinct().FirstOrDefault();
 
-                var commitVersion = 1;
+              //  var commitVersion = 1;
 
-                var logsToExclude = new List<AuditLog>();
+              ////  var logsToExclude = new List<AuditLog>();
 
 
-                if (previousAudidtsCommitVersion != null)
-                {
-                    if (previousAudidtsCommitVersion.CommitVersion != null)
-                        commitVersion = commitVersion + previousAudidtsCommitVersion.CommitVersion.Value;
+              //  if (previousAudidtsCommitVersion != null)
+              //  {
+              //      if (previousAudidtsCommitVersion.CommitVersion != null)
+              //          commitVersion = commitVersion + previousAudidtsCommitVersion.CommitVersion.Value;
 
-                    foreach (var l1 in logs)
-                    {
-                        // exclude duplicate "A" records
-                        logsToExclude.AddRange(from l2 in firstLogSet
-                                               where l1.EventType == "A"
-                                                   && l2.EventType == "A"
-                                               where l2.CommitVersion == 1
-                                               select l1);
-                    }
-                }
+              //  //    foreach (var l1 in logs)
+              //  //    {
+              //  //        // exclude duplicate "A" records
+              //  //        logsToExclude.AddRange(from l2 in firstLogSet
+              //  //                               where l1.EventType == "A"
+              //  //                                   && l2.EventType == "A"
+              //  //                               where l2.CommitVersion == 1
+              //  //                               select l1);
+              //  //    }
+              //  }
 
-                foreach (var auditLog in logs.Except(logsToExclude))
+                foreach (var auditLog in logs) //.Except(logsToExclude))
                 {
                     if (auditLog.EventType == "D")
                     {
@@ -103,9 +103,9 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                     if (auditLog.NewValue != auditLog.OriginalValue)
                     {
-                        auditLog.CommitVersion = commitVersion;
-                        auditLog.CommitSequence = commitSequence;
-                        commitSequence++;
+                        //auditLog.CommitVersion = commitVersion;
+                        //auditLog.CommitSequence = commitSequence;
+                       // commitSequence++;
 
                         auditLogRepository.SaveOrUpdate(auditLog);
                     }
@@ -113,7 +113,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 session.Transaction.Commit();
 
-                TrackingInterceptor.ChangedTracked = false;
+                TrackingInterceptor.ChangesTracked = true;
             }
         }
 
@@ -121,6 +121,8 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         public override void SetSession(ISession session)
         {
             _session = session;
+
+            ChangesTracked = false;
             base.SetSession(session);
         }
 
@@ -138,12 +140,43 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         private void GetChanges(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
             IType[] types, string state)
         {
-
-            //if (!ChangedTracked) return;
+            if (ChangesTracked) return;
 
             if (entity.GetType() == typeof(AuditLog))
             {
                 return;
+            }
+
+            var auditLogRepository = new Repository<AuditLog>(_session);
+
+            var commitSequence = 0;
+
+            // find previous commits for the record
+
+            var firstLogSet = auditLogRepository.Where(x => x.RecordId == (Guid) id && x.EventType == "A")
+                .OrderBy(o => o.CommitVersion).ToList();
+
+            var previousAudidtsCommitVersion = firstLogSet.OrderByDescending(o => o.CommitVersion).Distinct().FirstOrDefault();
+
+            var commitVersion = 1;
+
+            //  var logsToExclude = new List<AuditLog>();
+
+
+            if (previousAudidtsCommitVersion != null)
+            {
+                if (previousAudidtsCommitVersion.CommitVersion != null)
+                    commitVersion = commitVersion + previousAudidtsCommitVersion.CommitVersion.Value;
+
+                //    foreach (var l1 in logs)
+                //    {
+                //        // exclude duplicate "A" records
+                //        logsToExclude.AddRange(from l2 in firstLogSet
+                //                               where l1.EventType == "A"
+                //                                   && l2.EventType == "A"
+                //                               where l2.CommitVersion == 1
+                //                               select l1);
+                //    }
             }
 
             var ordinal = 0;
@@ -187,7 +220,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                 auditLog.EventDateUtc = time;
                 auditLog.Modified = time;
                 auditLog.CommitSequence = ordinal;
-                auditLog.CommitVersion = 0;
+                auditLog.CommitVersion = commitVersion;
                 auditLog.Revertable = true;
 
                 if (auditLog.OriginalValue == auditLog.NewValue)
@@ -212,7 +245,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     {
                         auditLog.EventType = "M";
                     }
-                    ;
                 }
 
                 if (auditLog.NewValue == null && auditLog.OriginalValue != null)
@@ -221,6 +253,10 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                 }
 
                 sessionAuditLogs.Add(auditLog);
+
+                if(auditLog.EventType == "A" && auditLog.CommitVersion > 1)
+                    sessionAuditLogs.Remove(auditLog);
+
 
                 ordinal++;
             }
@@ -238,17 +274,20 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
         private void AuditObjectModification(object entity, object id, List<AuditLog> sessionAuditLogs)
         {
-            _transactionSynchronization = new TransactionSynchronization(this)
+            if (!ChangesTracked)
             {
-                Session = _session,
-                AuditLogs = sessionAuditLogs,
-                Entity = entity,
-                EntityId = Guid.Parse(id.ToString())
-            };
+                _transactionSynchronization = new TransactionSynchronization(this)
+                {
+                    Session = _session,
+                    AuditLogs = sessionAuditLogs,
+                    Entity = entity,
+                    EntityId = Guid.Parse(id.ToString())
+                };
 
-            _session.Transaction.RegisterSynchronization(_transactionSynchronization);
+                _session.Transaction.RegisterSynchronization(_transactionSynchronization);
+            }
 
-            ChangedTracked = true;
+            ChangesTracked = true;
         }
 
 
