@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
@@ -23,7 +24,7 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         public override void Handle(CreateUpdateEntity command)
         {
 
-
+            IEnumerable<Entity> test = _repository.OfType<Package>();
             //var test = _repository.Select(x => x).Where(x => x.GetType() == typeof(Package));
 
             var brv = new BusinessRulesValidator();
