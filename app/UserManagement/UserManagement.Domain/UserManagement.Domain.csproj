@@ -47,10 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessRulesValidator.cs" />
-    <Compile Include="BusinessRules\Clients\CreateUpdateClientRule.cs" />
-    <Compile Include="BusinessRules\Customers\CreateUpdateCustomerRule.cs" />
-    <Compile Include="BusinessRules\Users\CreateUpdateUserRule.cs" />
     <Compile Include="CommandHandlers\Addresses\CreateAddressHandler.cs" />
     <Compile Include="CommandHandlers\AuditLogs\CreateAuditLogHandler.cs" />
     <Compile Include="CommandHandlers\Billings\CreateBillingHandler.cs" />
