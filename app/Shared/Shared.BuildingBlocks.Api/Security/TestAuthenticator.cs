@@ -1,4 +1,5 @@
 ﻿using Nancy.Security;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Shared.BuildingBlocks.Api.Security
 {
