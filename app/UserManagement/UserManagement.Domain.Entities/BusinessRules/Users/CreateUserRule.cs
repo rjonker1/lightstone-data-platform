@@ -1,5 +1,4 @@
 ﻿using UserManagement.Domain.Core.Commands;
-using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities.BusinessRules.Users
 {

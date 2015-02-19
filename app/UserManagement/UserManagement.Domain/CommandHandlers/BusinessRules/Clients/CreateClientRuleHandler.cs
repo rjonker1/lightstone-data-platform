@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.ExceptionHandling;
+﻿using System.Linq;
+using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
@@ -19,18 +20,14 @@ namespace UserManagement.Domain.CommandHandlers.BusinessRules.Clients
 
         public override void Handle(CreateClientRule command)
         {
-
             var entity = command.Entity;
 
             //Check if Username for specific user already exists
-            foreach (var client in _currentClients)
+            if (Enumerable.Any(_currentClients, client => client.Name.Equals(entity.Name)))
             {
-                if (client.Name.Equals(entity.Name))
-                {
-                    var exception = new LightstoneAutoException("Client already exists".FormatWith(entity.GetType().Name));
-                    this.Warn(() => exception);
-                    throw exception;
-                }
+                var exception = new LightstoneAutoException("Client already exists".FormatWith(entity.GetType().Name));
+                this.Warn(() => exception);
+                throw exception;
             }
         }
     }
