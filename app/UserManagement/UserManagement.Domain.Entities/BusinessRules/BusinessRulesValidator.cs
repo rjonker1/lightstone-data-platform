@@ -1,5 +1,6 @@
 ﻿using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities.BusinessRules.Clients;
+using UserManagement.Domain.Entities.BusinessRules.Packages;
 using UserManagement.Domain.Entities.BusinessRules.Users;
 
 namespace UserManagement.Domain.Entities.BusinessRules
@@ -32,7 +33,7 @@ namespace UserManagement.Domain.Entities.BusinessRules
             }
             else if (enity is Package)
             {
-                //Package rule reference
+                _handler.Handle(new CreatePackageRule(enity as Package));
             }
 
         }
