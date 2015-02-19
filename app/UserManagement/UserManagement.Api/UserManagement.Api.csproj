@@ -129,6 +129,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\..\packages\StackExchange.Redis.1.0.281\lib\net45\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
@@ -321,6 +324,8 @@
     <Compile Include="Helpers\AutoMapper\Maps\Entities\EntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Helpers\Security\RedisAuthenticator.cs" />
+    <Compile Include="Helpers\Security\UmAuthenticator.cs" />
     <Compile Include="Installers\ApiClientInstaller.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
@@ -330,6 +335,7 @@
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\ServiceLocatorInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Modules\AuthModule.cs" />
     <Compile Include="Modules\BillingModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />
     <Compile Include="Modules\CommercialStateModule.cs" />

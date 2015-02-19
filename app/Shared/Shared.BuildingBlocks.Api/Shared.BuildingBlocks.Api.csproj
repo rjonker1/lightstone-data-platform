@@ -58,12 +58,14 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ApiClient.cs" />
+    <Compile Include="ApiClients\ApiClient.cs" />
+    <Compile Include="ApiClients\ApiClientBase.cs" />
     <Compile Include="ExceptionHandling\ErrorHtmlPageResponse.cs" />
     <Compile Include="ExceptionHandling\ErrorResponse.cs" />
     <Compile Include="ExceptionHandling\ErrorStatusCodeHandler.cs" />
-    <Compile Include="SecureModule.cs" />
-    <Compile Include="Security\ApiUser.cs" />
+    <Compile Include="ApiClients\PackageBuilderApiClient.cs" />
+    <Compile Include="Security\SecureModule.cs" />
+    <Compile Include="ApiClients\ApiUser.cs" />
     <Compile Include="CannedResponses.cs" />
     <Compile Include="Security\ContextExtensions.cs" />
     <Compile Include="Security\IAuthenticateUser.cs" />
@@ -71,7 +73,9 @@
     <Compile Include="Security\PiplineExtensions.cs" />
     <Compile Include="Security\TestAuthenticator.cs" />
     <Compile Include="Security\TestNullAuthenticator.cs" />
-    <Compile Include="Security\UmApiAuthenticator.cs" />
+    <Compile Include="Security\UerManagementAuthenticator.cs" />
+    <Compile Include="ApiClients\UserAuthenticatorClient.cs" />
+    <Compile Include="ApiClients\UserManagementApiClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
