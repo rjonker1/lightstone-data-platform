@@ -30,6 +30,13 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages"] = parameters =>
                 Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
+            Get["/Packages/{filter}"] = parameters =>
+            {
+                string filter = (parameters.filter + "").Trim().ToLower();
+
+                return Response.AsJson(readRepo.Where(x => !x.IsDeleted && (x.Name + "").Trim().ToLower().StartsWith(filter)));
+            };
+
             Get["/Packages/{id}/{version}"] = parameters =>
                 Response.AsJson(
                     new

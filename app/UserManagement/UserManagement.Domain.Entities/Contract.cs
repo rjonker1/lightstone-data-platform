@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -17,6 +18,16 @@ namespace UserManagement.Domain.Entities
         public virtual ContractDuration ContractDuration { get; set; }
         public virtual ISet<Client> Clients { get; set; }
         public virtual ISet<Customer> Customers { get; set; }
+        //public virtual ISet<ContractPackage> ContractPackages { get; set; }
+        //public virtual IEnumerable<Guid> ContractPackageIds
+        //{
+        //    get
+        //    {
+        //        return ContractPackages != null
+        //            ? ContractPackages.Select(x => x.Id)
+        //            : Enumerable.Empty<Guid>();
+        //    }
+        //}
         public virtual ISet<Package> Packages { get; set; }
 
         protected Contract() { }

@@ -105,13 +105,13 @@
     <Compile Include="Commands\Users\CreateUser.cs" />
     <Compile Include="Commands\UserTypes\CreateUserType.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
+    <Compile Include="ContractPackage.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Billing.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="ClientPackage.cs" />
     <Compile Include="ClientUser.cs" />
     <Compile Include="CommercialState.cs" />
     <Compile Include="Contract.cs" />

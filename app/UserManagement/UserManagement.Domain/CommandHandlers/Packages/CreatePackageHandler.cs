@@ -16,7 +16,7 @@ namespace UserManagement.Domain.CommandHandlers.Packages
 
         public override void Handle(CreatePackage command)
         {
-            _repository.Save(new Package(command.Name, command.Version, command.IsActivated));
+            //_repository.Save(new Package(command.Name));
         }
     }
 }

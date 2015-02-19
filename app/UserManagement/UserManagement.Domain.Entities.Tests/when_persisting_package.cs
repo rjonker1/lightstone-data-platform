@@ -19,8 +19,8 @@ namespace UserManagement.Domain.Entities.Tests
             new PersistenceSpecification<Package>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "Name")
-                .CheckProperty(c => c.Version, "Version")
-                .CheckProperty(c => c.IsActivated, true)
+                //.CheckProperty(c => c.Version, "Version")
+                //.CheckProperty(c => c.IsActivated, true)
                 .VerifyTheMappings();
         }
     }
