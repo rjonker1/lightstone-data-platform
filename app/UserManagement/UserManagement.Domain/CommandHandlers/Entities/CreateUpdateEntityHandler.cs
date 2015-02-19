@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using MemBus;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
@@ -16,30 +17,20 @@ namespace UserManagement.Domain.CommandHandlers.Entities
     {
         private readonly IRepository<Entity> _repository;
 
-        public CreateUpdateEntityHandler(IRepository<Entity> repository)
+        private readonly IHandleMessages _handler;
+
+        public CreateUpdateEntityHandler(IRepository<Entity> repository, IHandleMessages handler)
         {
             _repository = repository;
+            _handler = handler;
         }
-
 
 
         public override void Handle(CreateUpdateEntity command)
         {
 
-            var commandEntityName = command.Entity.GetType().Name;
-            var brEntities = new Collection<Entity>();
-
-            foreach (var entity in _repository)
-            {
-
-                if (entity.GetType().Name == commandEntityName)
-                {
-                    brEntities.Add(entity);
-                }
-            }
-
-            //var brv = new BusinessRulesValidator();
-            //brv.CheckRules(command.Entity, brEntities);
+            var brv = new BusinessRulesValidator(_handler);
+            brv.CheckRules(command.Entity);
 
             _repository.SaveOrUpdate(command.Entity);
         }
