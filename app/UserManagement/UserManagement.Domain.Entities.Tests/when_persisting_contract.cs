@@ -30,7 +30,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckReference(c => c.ContractDuration, new ContractDuration("ContractDuration"))
                 .CheckComponentList(c => c.Clients, new HashSet<Client> { new Client() })
                 .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer() })
-                .CheckComponentList(c => c.Packages, new HashSet<Package> { new Package("Name", "1", true) })
+                .CheckComponentList(c => c.Packages, new HashSet<Package> { new Package("Name", Guid.NewGuid()) })
                 .VerifyTheMappings();
         }
     }

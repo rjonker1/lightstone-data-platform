@@ -3,21 +3,15 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class Package : Entity
+    public class Package : NamedEntity
     {
-        public virtual string Name { get; set; }
-        public virtual string Version { get; set; }
-        public virtual bool? IsActivated { get; set; }
-
+        public virtual Guid PackageId { get; protected internal set; }
         public Package() { }
 
-        public Package(string name, string version, bool? isActivated, Guid id = new Guid()) 
-            : base(id)
+        public Package(string name, Guid packageId, Guid id = new Guid())
+            : base(name, id)
         {
-
-            Name = name;
-            Version = version;
-            IsActivated = isActivated;
+            PackageId = packageId;
         }
     }
 }

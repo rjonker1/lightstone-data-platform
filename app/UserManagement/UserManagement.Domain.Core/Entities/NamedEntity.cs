@@ -12,6 +12,5 @@ namespace UserManagement.Domain.Core.Entities
         {
             Name = name;
         }
-
     }
 }

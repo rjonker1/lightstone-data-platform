@@ -32,7 +32,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckReference(c => c.UserType, new UserType("Test"))
                 .CheckComponentList(c => c.Roles, roles)
                 .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer("Name", "AccName", new CommercialState("State"), new CreateSource("Source"), new PlatformStatus("Status"), null) })
-                .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(new Client("Client"), user, "Alias") })
+                .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(new Client("Client"), "Alias") })
                 .VerifyTheMappings(user);
         }
     }

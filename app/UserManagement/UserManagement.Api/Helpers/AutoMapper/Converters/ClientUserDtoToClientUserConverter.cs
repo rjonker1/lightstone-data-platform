@@ -17,7 +17,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Converters
         protected override ClientUser ConvertCore(ClientUserDto source)
         {
             var client = _clients.Get(source.ClientId);
-            return new ClientUser(client, null, source.UserAlias);
+            return new ClientUser(client, source.UserAlias);
         }
     }
 }
