@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
@@ -24,11 +26,20 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         public override void Handle(CreateUpdateEntity command)
         {
 
-            IEnumerable test = _repository.OfType<Package>();
-            //var test = _repository.Select(x => x).Where(x => x.GetType() == typeof(Package));
+            var commandEntityName = command.Entity.GetType().Name;
+            var brEntities = new Collection<Entity>();
 
-            var brv = new BusinessRulesValidator();
-            brv.CheckRules(command.Entity, _repository);
+            foreach (var entity in _repository)
+            {
+
+                if (entity.GetType().Name == commandEntityName)
+                {
+                    brEntities.Add(entity);
+                }
+            }
+
+            //var brv = new BusinessRulesValidator();
+            //brv.CheckRules(command.Entity, brEntities);
 
             _repository.SaveOrUpdate(command.Entity);
         }

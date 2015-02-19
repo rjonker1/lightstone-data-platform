@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -10,7 +11,7 @@ namespace UserManagement.Domain.Entities.BusinessRules
 {
     public class BusinessRulesValidator
     {
-        public void CheckRules(object enity, IRepository<Entity> entityRepo)
+        public void CheckRules(object enity, ICollection<Entity> entityRepo)
         {
 
 
@@ -35,12 +36,12 @@ namespace UserManagement.Domain.Entities.BusinessRules
             {
                 //Package rule reference
 
-                //if (entityRepo.Get().Contains(enity as Entity))
-                //{
+                if (entityRepo.Contains(enity as Entity))
+                {
                     var exception = new LightstoneAutoException("Package Reference already exists".FormatWith(enity.GetType().Name));
                     this.Warn(() => exception);
                     throw exception;
-                //}
+                }
 
             }
 
