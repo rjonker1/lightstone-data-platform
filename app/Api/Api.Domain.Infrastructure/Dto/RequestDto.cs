@@ -8,7 +8,7 @@ namespace Api.Domain.Infrastructure.Dto
         public Guid SourceId { get; private set; }
         public string SearchTerm { get; private set; }
 
-        public string Username { get; private set; }
+        public string Username { get; set; }
 
         public ApiRequestDto()
         {

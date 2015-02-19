@@ -2,7 +2,7 @@
 using Nancy;
 using Shared.BuildingBlocks.Api.Security;
 
-namespace UmApi.Modules
+namespace UserManagement.Api.Modules
 {
     public class AuthModule : NancyModule
     {

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
-using Common.Logging;
 using Nancy.Security;
+using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using StackExchange.Redis;
+using DataPlatform.Shared.Helpers.Extensions;
 
 namespace UserManagement.Api.Helpers.Security
 {
     public class RedisAuthenticator : IRedisAuthenticator
     {
-        private readonly ILog _log = LogManager.GetCurrentClassLogger();
         private readonly ConnectionMultiplexer _redis;
         private readonly IUmAuthenticator _umAuthenticator;
 
@@ -26,7 +26,7 @@ namespace UserManagement.Api.Helpers.Security
 
             try
             {
-                if (_redis == null)
+                if (!_redis.IsConnected)
                     return _umAuthenticator.GetUserIdentity(token); 
                 
                 var db = _redis.GetDatabase();
@@ -42,7 +42,7 @@ namespace UserManagement.Api.Helpers.Security
             }
             catch (Exception exception)
             {
-                _log.ErrorFormat("Error getting ApiUser from Redis {0} for token {1}", exception, _redis.Configuration, token);
+                this.Error(() => "Error getting ApiUser from Redis {0} for token {1}".FormatWith(exception, _redis.Configuration, token));
                 return null;
             }
 

@@ -15,6 +15,7 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using Shared.BuildingBlocks.Api;
+using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Modules.Verification

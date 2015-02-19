@@ -7,12 +7,13 @@ namespace Api.Infrastructure.Metadata
 {
     public class DefaultRouteMetadataProvider : IRouteMetadataProvider
     {
-        private readonly IRouteDescriptionProvider _routeDescriptionProvider = new ApiRouteDescriptionProvider();
+        //private readonly IRouteDescriptionProvider _routeDescriptionProvider = new ApiRouteDescriptionProvider();
+        private readonly IRouteDescriptionProvider _routeDescriptionProvider;
 
-        //public DefaultRouteMetadataProvider(IRouteDescriptionProvider routeDescriptionProvider)
-        //{
-        //    _routeDescriptionProvider = routeDescriptionProvider;
-        //}
+        public DefaultRouteMetadataProvider(IRouteDescriptionProvider routeDescriptionProvider)
+        {
+            _routeDescriptionProvider = routeDescriptionProvider;
+        }
 
         public Type GetMetadataType(INancyModule module, RouteDescription routeDescription)
         {
