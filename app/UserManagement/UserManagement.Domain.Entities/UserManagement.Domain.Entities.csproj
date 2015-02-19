@@ -67,7 +67,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="AuditLog.cs" />
     <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
-    <Compile Include="BusinessRules\Clients\CreateUpdateClientRule.cs" />
+    <Compile Include="BusinessRules\Clients\CreateClientRule.cs" />
     <Compile Include="BusinessRules\Customers\CreateUpdateCustomerRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="Commands\Addresses\CreateAddress.cs" />
