@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Common.Logging;
 using Nancy.Security;
+using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using StackExchange.Redis;
 

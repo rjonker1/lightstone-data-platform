@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Nancy.Security;
+using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;

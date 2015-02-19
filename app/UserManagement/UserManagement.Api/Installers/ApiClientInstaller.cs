@@ -2,6 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Shared.BuildingBlocks.Api;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace UserManagement.Api.Installers
 {

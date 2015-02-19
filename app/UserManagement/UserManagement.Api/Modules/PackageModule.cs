@@ -4,6 +4,7 @@ using Nancy;
 using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api;
+using Shared.BuildingBlocks.Api.ApiClients;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 
