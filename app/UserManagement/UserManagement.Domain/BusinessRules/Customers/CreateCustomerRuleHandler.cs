@@ -6,7 +6,7 @@ using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules.Customers;
 
-namespace UserManagement.Domain.CommandHandlers.BusinessRules.Customers
+namespace UserManagement.Domain.BusinessRules.Customers
 {
     public class CreateCustomerRuleHandler : AbstractMessageHandler<CreateCustomerRule>
     {

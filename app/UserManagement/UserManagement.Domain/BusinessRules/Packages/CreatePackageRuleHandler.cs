@@ -6,7 +6,7 @@ using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities.BusinessRules.Packages;
 
-namespace UserManagement.Domain.CommandHandlers.BusinessRules.Packages
+namespace UserManagement.Domain.BusinessRules.Packages
 {
     public class CreatePackageRuleHandler : AbstractMessageHandler<CreatePackageRule>
     {
