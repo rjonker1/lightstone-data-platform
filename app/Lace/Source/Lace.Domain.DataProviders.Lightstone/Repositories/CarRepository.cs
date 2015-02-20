@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -44,22 +45,25 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
         public IEnumerable<Car> FindByCarIdAndYear(int? carId, int year)
         {
             if (carId == null) return new List<Car>();
-
-            //using (_connection)
+            
             using (_cacheClient)
             {
                 var key = string.Format(CarKey, carId, year);
                 var cachedCar = _cacheClient.As<Car>();
                 var response = cachedCar.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<Car>(SelectStatements.GetCarById, new {@CarId = carId}).ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+
                 return dbResponse;
             }
         }
@@ -73,14 +77,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var cachedCar = _cacheClient.As<Car>();
                 var response = cachedCar.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<Car>(SelectStatements.GetCarByVin, new {@Vin = vinNumber}).ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+
                 return dbResponse;
             }
         }

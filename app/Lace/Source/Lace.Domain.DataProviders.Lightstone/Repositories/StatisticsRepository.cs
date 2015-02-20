@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -35,7 +36,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var cachedStatistics = _cacheClient.As<Statistic>();
                 var response = cachedStatistics.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 IEnumerable<Statistic> dbResponse =
@@ -48,8 +49,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
 
                         }).ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+
                 return dbResponse;
             }
         }
@@ -75,15 +80,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var cachedMakeStats = _cacheClient.As<Statistic>();
                 var response = cachedMakeStats.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<Statistic>(SelectStatements.GetStatisticsByMake,
-                        new { @Metrics = ConcatenateMetrics(metricTypes), @MakeId = makeId }).ToList();
+                        new {@Metrics = ConcatenateMetrics(metricTypes), @MakeId = makeId}).ToList();
+
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddHours(1));
-                return response;
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+                return dbResponse;
             }
         }
 

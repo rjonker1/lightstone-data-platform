@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -57,15 +58,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var response = cachedSale.Lists[key];
 
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
                     .Query<Sale>(SelectStatements.GetTopFiveSalesForCarIdAndYear, new {@CarId = carId, @YearId = year})
                     .ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
         }

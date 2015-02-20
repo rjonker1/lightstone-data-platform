@@ -63,6 +63,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.PCubed", "Lace\source\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj", "{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A01E79A2-4A20-4FCD-8C48-688B62B69010}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

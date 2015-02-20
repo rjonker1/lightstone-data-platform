@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 using Lace.Domain.DataProviders.Lightstone.Services;
+using ServiceStack.Common.Extensions;
 using ServiceStack.Redis;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories
@@ -38,20 +40,21 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var carVendors = _cacheClient.As<CarVendor>();
                 var response = carVendors.Lists[CarVendorKey];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
                     .Query(SelectStatements.GetAllCarVendors)
-                    .ToList();
+                    .Select(f => new CarVendor(f.CarModelId, f.Car_ID, f.MakeName, f.CarTypeName, f.SaleYear_ID,
+                        f.CarModel, f.CarFullName, f.ImageUrlSmall))
+                        .ToList();
 
-                dbResponse.ForEach(
-                    f =>
-                        response.Add(new CarVendor(f.CarModelId, f.Car_ID, f.MakeName, f.CarTypeName, f.SaleYear_ID,
-                            f.CarModel, f.CarFullName, f.ImageUrlSmall)));
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
 
-                _cacheClient.Add(CarVendorKey, response, DateTime.UtcNow.AddDays(1));
-                return response;
+                dbResponse.ForEach(f => response.Add(f));
+                dbResponse.AddItemsToCache(_cacheClient, CarVendorKey, DateTime.UtcNow.AddDays(1));
+                return dbResponse;
             }
         }
 
