@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Nancy.Security;
 
-namespace Shared.BuildingBlocks.Api.Security
+namespace Shared.BuildingBlocks.Api.ApiClients
 {
     public class ApiUser : IUserIdentity
     {

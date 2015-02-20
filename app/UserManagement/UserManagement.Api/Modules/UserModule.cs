@@ -8,6 +8,7 @@ using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.BusinessRules.Users;
 using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules

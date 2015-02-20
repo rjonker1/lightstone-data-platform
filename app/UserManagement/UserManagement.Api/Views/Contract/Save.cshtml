@@ -144,6 +144,18 @@
                 </div>
             </div>
             <div class="form-group">
+                @Html.LabelFor(x => x.PackageIdNames, new { @class = "control-label col-lg-4" })
+                <div class="col-lg-3 chosen-autocomplete-packages" data-type="@typeof(Customer).AssemblyQualifiedName">
+                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Role..." multiple class="chosen-select">
+                        @foreach (var item in Model.Packages)
+                        {
+                            var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);
+                            <option selected="@isSelected" value="@item.Key|@item.Value">@item.Value</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-3">
                     <input type="submit" class="btn btn-primary" value="Save">

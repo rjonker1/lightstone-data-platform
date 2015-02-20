@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Nancy.Session;
 using NHibernate;
 using NHibernate.Transaction;
 using NHibernate.Type;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities.BusinessRules;
+using ISession = NHibernate.ISession;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 {
@@ -16,7 +19,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         private TransactionSynchronization _transactionSynchronization;
         private ISession _session;
 
-       private class TransactionSynchronization : ISynchronization
+        private class TransactionSynchronization : ISynchronization
         {
             public TransactionSynchronization(TrackingInterceptor trackingInterceptor)
             {
@@ -247,13 +250,20 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             string[] propertyNames,
             IType[] types)
         {
-            var brv = new BusinessRulesValidator();
-            brv.CheckRules(entity);
+
+            //var brv = new BusinessRulesValidator();
+            //brv.CheckRules(entity);
 
             Footprint(entity, state, propertyNames);
 
             return base.OnSave(entity, id, state, propertyNames, types);
         }
+
+        //public override void BeforeTransactionCompletion(ITransaction tx)
+        //{
+        //    tx.Rollback();
+        //    base.BeforeTransactionCompletion(tx);
+        //}
 
         private void Footprint(object entity, object[] state, string[] propertyNames)
         {

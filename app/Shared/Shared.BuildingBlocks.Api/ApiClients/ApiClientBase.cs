@@ -1,9 +1,8 @@
 ﻿using System;
-using Shared.Configuration;
 using RestSharp;
-using Shared.BuildingBlocks.Api.Security;
+using Shared.Configuration;
 
-namespace Shared.BuildingBlocks.Api
+namespace Shared.BuildingBlocks.Api.ApiClients
 {
     public interface IApiClient
     {
@@ -12,18 +11,6 @@ namespace Shared.BuildingBlocks.Api
         T Get<T>(string token, string resource = "", object body = null) where T : new();
         T Post<T>(string token, string resource = "", object body = null) where T : new();
     }
-
-    public interface IUserManagementApiClient : IApiClient
-    {
-
-    }
-
-    public interface IPackageBuilderApiClient : IApiClient
-    {
-    }
-    
-    public interface IUserAuthenticationClient : IApiClient
-    { }
 
     public abstract class ApiClientBase : IApiClient
     {
@@ -82,35 +69,6 @@ namespace Shared.BuildingBlocks.Api
                 request.AddObject(body);
 
             return request;
-        }
-    }
-
-    public class ApiClient : ApiClientBase
-    {
-        public ApiClient() : base(AppSettings.Api.BaseUrl)
-        {
-        }
-    }
-
-    public class UserAuthenticatorClient : ApiClientBase, IUserAuthenticationClient
-    {
-        public UserAuthenticatorClient()
-            : base(AppSettings.UserAuthenticationApi.BaseUrl)
-        {
-        }
-    }
-
-    public class UserManagementApiClient : ApiClientBase, IUserManagementApiClient
-    {
-        public UserManagementApiClient() : base(AppSettings.UserManagementApi.BaseUrl)
-        {
-        }
-    }
-
-    public class PackageBuilderApiClient : ApiClientBase, IPackageBuilderApiClient
-    {
-        public PackageBuilderApiClient() : base(AppSettings.PackageBuilderApi.BaseUrl)
-        {
         }
     }
 }

@@ -27,10 +27,7 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
 
             Response = response == null
                 ? new ContractPackageResponseDto()
-                : new ContractPackageResponseDto(response.Id,
-                    response.Packages.Where(w => w.IsActivated.HasValue && w.IsActivated.Value)
-                        .OrderByDescending(o => o.Version)
-                        .FirstOrDefault());
+                : new ContractPackageResponseDto(response.Id, response.Packages.FirstOrDefault());
         }
 
         private static Contract FakeContract(Guid contractId)
@@ -40,8 +37,8 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
                 Id = contractId,
                 Packages = new HashSet<Package>()
                 {
-                    new Package("VVI Product","1",true,new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB")),
-                    new Package("VVI Product","2",true,new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB"))
+                    new Package("VVI Product", new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB")),
+                    new Package("VVI Product", new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB"))
                 }
             };
         }

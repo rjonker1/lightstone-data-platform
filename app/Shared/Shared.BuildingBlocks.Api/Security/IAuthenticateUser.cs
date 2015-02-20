@@ -16,9 +16,5 @@ namespace Shared.BuildingBlocks.Api.Security
     {
 
     }
-
-    public interface IUmApiAuthenticator : IAuthenticateUser
-    {
-
-    }
+    
 }

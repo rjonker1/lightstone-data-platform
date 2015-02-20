@@ -8,10 +8,11 @@ using Api.Domain.Verification.Infrastructure.Services;
 using Api.Tests.Helper.Builder;
 using Billing.Api.Connector;
 using Billing.Api.Dtos;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
-using Nancy.TinyIoc;
 using Shared.BuildingBlocks.Api.Security;
 
 namespace Api.Unit.Tests.Fakes
@@ -25,18 +26,18 @@ namespace Api.Unit.Tests.Fakes
             _username = username;
         }
 
-        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+        protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
             AutoMapperConfiguration.Init();
-            container.Register<IAuthenticateUser>(new TestAuthenticator(_username));
-            container.Register<IEntryPoint>(new FakeEntryPoint());
-            container.Register<IConnectToBilling>(new FakeConnectToBilling());
+            container.Register(Component.For<IAuthenticateUser>().Instance(new TestAuthenticator(_username)));
+            container.Register(Component.For<IEntryPoint>().Instance(new FakeEntryPoint()));
+            container.Register(Component.For<IConnectToBilling>().Instance(new FakeConnectToBilling()));
 
-            container.Register<ICallFicaVerification, FicaVerificationService>();
-            container.Register<IHandleFicaVerficationRequests, FicaVerificationHandler>();
+            container.Register(Component.For<ICallFicaVerification>().ImplementedBy<FicaVerificationService>());
+            container.Register(Component.For<IHandleFicaVerficationRequests>().ImplementedBy<FicaVerificationHandler>());
 
-            container.Register<ICallDriversLicenseVerification, DriversLicenseVerificationService>();
-            container.Register<IHandleDriversLicenseVerficationRequests, DriversLicenseVerificationHandler>();
+            container.Register(Component.For<ICallDriversLicenseVerification>().ImplementedBy<DriversLicenseVerificationService>());
+            container.Register(Component.For<IHandleDriversLicenseVerficationRequests>().ImplementedBy<DriversLicenseVerificationHandler>());
         }
     }
 

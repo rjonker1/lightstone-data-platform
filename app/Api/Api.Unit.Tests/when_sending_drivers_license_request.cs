@@ -1,8 +1,7 @@
 ﻿using Api.Domain.Verification.Infrastructure.Dto;
-using Api.Modules.Verification;
 using Api.Tests.Helper.Builder;
-using Api.Unit.Tests.Fakes;
 using Nancy;
+using Nancy.Bootstrappers.Windsor;
 using Nancy.Testing;
 using Xunit.Extensions;
 
@@ -10,7 +9,7 @@ namespace Api.Unit.Tests
 {
     public class when_sending_drivers_license_request : Specification
     {
-        private readonly DefaultNancyBootstrapper _bootstrapper;
+        private readonly WindsorNancyBootstrapper _bootstrapper;
         private readonly Browser _browser;
         private BrowserResponse _result;
         private readonly DriversLicenseRequestDto _request;
@@ -35,7 +34,6 @@ namespace Api.Unit.Tests
             //_result.StatusCode.ShouldEqual(HttpStatusCode.OK);
         }
 
-
         [Observation]
         public void then_drivers_verifcation_should_return_a_valid_result()
         {
@@ -51,7 +49,4 @@ namespace Api.Unit.Tests
             result.StatusCode.ShouldEqual(HttpStatusCode.OK);
         }
     }
-
-
-   
 }

@@ -28,12 +28,6 @@ namespace UserManagement.Infrastructure.Helpers
             return (IQueryable)_container.Resolve(executorType);
         }
 
-        //public IQueryable GetNamedEntities(Type type)
-        //{
-        //    var executorType = typeof(INamedEntityRepository<>).MakeGenericType(type);
-        //    return (IQueryable)_container.Resolve(executorType);
-        //}
-
         public IQueryable<NamedEntity> GetNamedEntities(Type type)
         {
             var executorType = typeof(INamedEntityRepository<>).MakeGenericType(type);

@@ -3,6 +3,7 @@ using System.Linq;
 using Nancy;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Shared.BuildingBlocks.Api.Security
 {

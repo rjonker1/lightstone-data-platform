@@ -38,11 +38,8 @@
     <Reference Include="Lightstone.DataPlatform.Shared">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.637\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.637\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.637\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
+    <Reference Include="MemBus">
+      <HintPath>..\..\packages\MemBus.3.0.1\lib\portable-windows8+net45+wp8\MemBus.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.0.23.0\lib\net40\Nancy.dll</HintPath>
@@ -70,9 +67,10 @@
     <Compile Include="Address.cs" />
     <Compile Include="AuditLog.cs" />
     <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
-    <Compile Include="BusinessRules\Clients\CreateUpdateClientRule.cs" />
-    <Compile Include="BusinessRules\Customers\CreateUpdateCustomerRule.cs" />
-    <Compile Include="BusinessRules\Users\CreateUpdateUserRule.cs" />
+    <Compile Include="BusinessRules\Clients\CreateClientRule.cs" />
+    <Compile Include="BusinessRules\Customers\CreateCustomerRule.cs" />
+    <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
+    <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\Billings\CreateBilling.cs" />
@@ -105,13 +103,13 @@
     <Compile Include="Commands\Users\CreateUser.cs" />
     <Compile Include="Commands\UserTypes\CreateUserType.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
+    <Compile Include="ContractPackage.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Billing.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="ClientPackage.cs" />
     <Compile Include="ClientUser.cs" />
     <Compile Include="CommercialState.cs" />
     <Compile Include="Contract.cs" />

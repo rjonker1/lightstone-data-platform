@@ -8,7 +8,7 @@ function initializeRoutes(sammy) {
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
     initializeContractRoutes(sammy);
-    initializePackageRoutes(sammy);
+    //initializePackageRoutes(sammy);
     initializeLookupRoutes(sammy);
 }
 
@@ -164,42 +164,42 @@ function initializeContractRoutes(sammy) {
         return true; // Allow form submit
     });
 }
-function initializePackageRoutes(sammy) {
+//function initializePackageRoutes(sammy) {
 
-    sammy.get('/Packages', function (context) {
-        context.load('/Packages', { dataType: 'html' }).swap();
-    });
-    sammy.get('/Packages/Add', function (context) {
-        context.load('/Packages/Add', { dataType: 'html' })
-            .swap()
-            .then(function () {
-                initializePlugins();
-            });
-    });
-    sammy.post('/Packages', function (context) {
-        context.load('/Packages', { dataType: 'html' })
-            .swap()
-            .then(function () {
-                context.redirect('/#/Packages');
-            });
-        return true; // Allow form submit
-    });
-    sammy.get('/Packages/:id', function (context) {
-        context.load('/Packages/' + context.params.id, { dataType: 'html' })
-            .swap()
-            .then(function () {
-                initializePlugins();
-            });
-    });
-    sammy.post('/Packages/:id', function (context) {
-        context.load('/Packages/' + context.params.id, { dataType: 'html' })
-            .swap()
-            .then(function () {
-                context.redirect('/#/Packages');
-            });
-        return true; // Allow form submit
-    });
-}
+//    sammy.get('/Packages', function (context) {
+//        context.load('/Packages', { dataType: 'html' }).swap();
+//    });
+//    sammy.get('/Packages/Add', function (context) {
+//        context.load('/Packages/Add', { dataType: 'html' })
+//            .swap()
+//            .then(function () {
+//                initializePlugins();
+//            });
+//    });
+//    sammy.post('/Packages', function (context) {
+//        context.load('/Packages', { dataType: 'html' })
+//            .swap()
+//            .then(function () {
+//                context.redirect('/#/Packages');
+//            });
+//        return true; // Allow form submit
+//    });
+//    sammy.get('/Packages/:id', function (context) {
+//        context.load('/Packages/' + context.params.id, { dataType: 'html' })
+//            .swap()
+//            .then(function () {
+//                initializePlugins();
+//            });
+//    });
+//    sammy.post('/Packages/:id', function (context) {
+//        context.load('/Packages/' + context.params.id, { dataType: 'html' })
+//            .swap()
+//            .then(function () {
+//                context.redirect('/#/Packages');
+//            });
+//        return true; // Allow form submit
+//    });
+//}
 
 function initializeLookupRoutes(sammy) {
     sammy.get('/Lookups/:type', function (context) {
@@ -237,35 +237,33 @@ function initializePlugins() {
             $select.trigger("chosen:updated");
         }
     });
-    //var tags = [{ label: "Choice1", value: "value1" }];
-    //$(".auto-list-complete input").autocomplete({
-    //    source: function (request, response) {
-            
-            
-    //        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-    //        response($.grep(tags, function(item) {
-    //            return matcher.test(item.label);
-    //        }));
-    //    },
-    //    select: function (event, ui) {
-    //        var $container = $(this).closest('div');
-    //        var $ul = $container.find('ul');
-    //        var $li = $("<li>", {
-    //            text: ""
-    //        }).appendTo($ul);
-    //        var $id = $("<input>", {
-    //            value: ui.item.value,
-    //            type: 'hidden'
-    //        }).appendTo($li);
-    //        var $label = $("<label>", {
-    //            text: ui.item.label
-    //        }).appendTo($li);
-    //        var $value = $("<input>", {
-    //            value: "",
-    //            "class": "form-control"
-    //        }).appendTo($li);
-    //    }
-    //});
+    
+    $('.chosen-autocomplete-packages .chosen-choices input').autocomplete({
+        source: function (request, response) {
+            var $container = $(this.element).closest('.chosen-autocomplete');
+            var type = $container.data('type');
+            $.ajax({
+                url: "/packages/" + request.term + "/",
+                dataType: "json",
+                beforeSend: function () { $('ul.chosen-results').empty(); },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.name,
+                            value: item.packageId
+                        };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            var $container = $(this).closest('.chosen-autocomplete-packages');
+            var $select = $container.find('select');
+            $select.append('<option selected="true" value="' + ui.item.value + '|' + ui.item.label + '">' + ui.item.label + '</option>');
+            $select.trigger("chosen:updated");
+        }
+    });
+    
     $('.auto-list-complete input').autocomplete({
         source: function(request, response) {
             var $container = $(this.element).closest('div');

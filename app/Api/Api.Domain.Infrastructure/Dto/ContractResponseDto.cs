@@ -7,6 +7,7 @@ namespace Api.Domain.Infrastructure.Dto
     {
         public Guid ContractId { get; set; }
         public ContractPackage Package { get; set; }
+        public Guid PackageId { get; set; }
     }
 
     public class ContractPackage

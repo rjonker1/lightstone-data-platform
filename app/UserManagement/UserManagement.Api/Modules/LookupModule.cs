@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
-using FluentNHibernate.Utils;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using UserManagement.Api.ViewModels;
@@ -42,11 +40,5 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
             };
         }
-
-        //public IQueryable<NamedEntity> GetNamedEntities(Type type)
-        //{
-        //    var namedEntities = _entityRetriever.GetNamedEntities(type);
-        //    return namedEntities.Where(x =);
-        //}
     }
 }
