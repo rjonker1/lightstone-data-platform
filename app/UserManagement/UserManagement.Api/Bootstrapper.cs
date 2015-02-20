@@ -39,7 +39,7 @@ namespace UserManagement.Api
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
             // Perform registations that should have an application lifetime
-            base.ConfigureApplicationContainer(container);
+            base.ConfigureApplicationContainer(container);            
 
             container.Install(
                 new NHibernateInstaller(),
@@ -49,7 +49,9 @@ namespace UserManagement.Api
                 new ServiceLocatorInstaller(),
                 new AutoMapperInstaller(),
                 new HelperInstaller(),
-                new ApiClientInstaller()
+                new ApiClientInstaller(),
+                new RedisInstaller(),
+                new AuthenticationInstaller()
                 );
 
             //Drop create

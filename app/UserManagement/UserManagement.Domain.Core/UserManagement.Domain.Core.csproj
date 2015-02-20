@@ -72,6 +72,7 @@
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NHibernate\Attributes\DomainSignatureAttribute.cs" />
+    <Compile Include="NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="NHibernate\Interceptors\SessionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\INamedEntityRepository.cs" />

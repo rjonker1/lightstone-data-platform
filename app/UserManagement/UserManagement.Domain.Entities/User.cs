@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {
@@ -17,7 +19,24 @@ namespace UserManagement.Domain.Entities
         public virtual ISet<Role> Roles { get; protected internal set; }
         public virtual ISet<Customer> Customers { get; protected internal set; }
         public virtual ISet<ClientUser> ClientUsers { get; protected internal set; }
-
+        [DoNotMap]
+        public virtual IEnumerable<Client> Clients
+        {
+            get
+            {
+                return ClientUsers != null ? ClientUsers.Select(x => x.Client) : Enumerable.Empty<Client>();
+            }
+        }
+        [DoNotMap]
+        public virtual IEnumerable<Contract> Contracts
+        {
+            get
+            {
+                var customerContracts = Customers.SelectMany(x => x.Contracts);
+                var clientContracts = Clients.SelectMany(x => x.Contracts);
+                return customerContracts.Union(clientContracts);
+            }
+        } 
         public User() { }
 
         public User(string firstName, string lastName, string idNumber, string contactNumber, string userName, string password, 
@@ -36,5 +55,3 @@ namespace UserManagement.Domain.Entities
         }
     }
 }
-
-

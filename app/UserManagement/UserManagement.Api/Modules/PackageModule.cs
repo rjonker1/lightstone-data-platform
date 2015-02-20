@@ -1,27 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Nancy;
+using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
-using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.ApiClients;
+using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Modules
 {
+    public class PDto
+    {
+        public Guid UserId { get; set; }
+    }
     public class PackageModule : NancyModule
     {
-        public PackageModule(IPackageBuilderApiClient packageBuilderApi)
+        public PackageModule(IPackageBuilderApiClient packageBuilderApi, IRepository<User> users)
         {
             Get["/Packages/{filter}"] = parameters =>
             {
-                var packagesJson = packageBuilderApi.Get("", "Packages", new { filter = parameters.filter });
+                var packagesJson = packageBuilderApi.Get("", "Packages", new { parameters.filter });
                 var packages = JsonConvert.DeserializeObject<IEnumerable<PackageDto>>(packagesJson);
                 //var dto = Mapper.Map<IEnumerable<PackageBuilder.Domain.Entities.Packages.ReadModels.Package>, IEnumerable<PackageDto>>(packages);
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), packages);
+            };
+
+            Post["/Packages/GetPackage"] = parameters =>
+            {
+                var dto = this.Bind<PDto>();
+                var user = users.Get(dto.UserId);
+                var contractDto = Mapper.Map<Contract, ContractDto>(user.Contracts.First());
+                return Response.AsJson(new { PackageId = contractDto.Packages.First().Key });
             };
         }
 

@@ -1,7 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace UserManagement.Api.Installers
@@ -10,7 +9,7 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>());
+            container.Register(Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>().LifestyleTransient());
         }
     }
 }
