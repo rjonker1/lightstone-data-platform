@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
@@ -33,15 +34,19 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
                 var cachedSpecifications = _cacheClient.As<CarSpecification>();
                 var response = cachedSpecifications.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<CarSpecification>(SelectStatements.GetCarSpecifications,
                         new {@CarId = request.CarId}).ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+
                 return dbResponse;
             }
         }
