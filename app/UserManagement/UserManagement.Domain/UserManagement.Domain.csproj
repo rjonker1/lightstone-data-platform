@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessRules\Clients\CreateClientRuleHandler.cs" />
+    <Compile Include="BusinessRules\Contracts\CreateContractRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRuleHandler.cs" />

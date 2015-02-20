@@ -68,6 +68,7 @@
     <Compile Include="AuditLog.cs" />
     <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
     <Compile Include="BusinessRules\Clients\CreateClientRule.cs" />
+    <Compile Include="BusinessRules\Contracts\CreateContractRule.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />

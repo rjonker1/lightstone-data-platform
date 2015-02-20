@@ -8,7 +8,6 @@ using Nancy.Responses.Negotiation;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.BusinessRules.Users;
 using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Api.Modules
@@ -42,9 +41,7 @@ namespace UserManagement.Api.Modules
 
                 bus.Publish(new CreateUpdateEntity(entity));
 
-                return Negotiate
-                    .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = users });
+                return null;
             };
 
             Get["/Users/{id}"] = parameters =>
@@ -67,9 +64,7 @@ namespace UserManagement.Api.Modules
 
                 bus.Publish(new CreateUpdateEntity(entity));
 
-                return Negotiate
-                    .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = users });
+                return null;
             };
         }
     }

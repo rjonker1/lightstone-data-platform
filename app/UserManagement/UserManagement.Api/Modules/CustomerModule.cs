@@ -37,9 +37,6 @@ namespace UserManagement.Api.Modules
                 bus.Publish(new CreateUpdateEntity(entity));
 
                 return null;
-                return Negotiate
-                    .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
             };
 
             Get["/Customers/{id}"] = parameters =>
@@ -59,9 +56,6 @@ namespace UserManagement.Api.Modules
                 bus.Publish(new CreateUpdateEntity(entity));
 
                 return null;
-                return Negotiate
-                    .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customers });
             };
         }
     }

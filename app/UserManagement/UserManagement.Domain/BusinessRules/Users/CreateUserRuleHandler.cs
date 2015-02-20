@@ -22,7 +22,7 @@ namespace UserManagement.Domain.BusinessRules.Users
             var entity = command.Entity;
 
             //Check if Username for specific user already exists
-            if (Enumerable.Any(_currentUsers, user => user.UserName.Equals(entity.UserName)))
+            if (_currentUsers.Any(x => x.Id != entity.Id && x.UserName.Equals(entity.UserName)))
             {
                 var exception = new LightstoneAutoException("Username already exists".FormatWith(entity.GetType().Name));
                 this.Warn(() => exception);

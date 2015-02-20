@@ -25,12 +25,12 @@ function initializeCusomerRoutes(sammy) {
             });
     });
     sammy.post('/Customers', function(context) {
-        context.load('/Customers', { dataType: 'html' })
-            .swap()
-            .then(function() {
-                this.redirect('/#/Customers');
-            });
-        return true; // Allow form submit
+        $(context.target).ajaxSubmit({
+            success: function () {
+                context.redirect('/#/Customers');
+            }
+        });
+        return false; // Allow form submit
     });
     sammy.get('/Customers/:id', function (context) {
         context.load('/Customers/' + context.params.id, { dataType: 'html' })
@@ -44,12 +44,12 @@ function initializeCusomerRoutes(sammy) {
     //    return true; // Allow form submit
     //});
     sammy.post('/Customers/:id', function (context) {
-        context.load('/Customers/' + context.params.id, { dataType: 'html' })
-            .swap()
-            .then(function() {
-                this.redirect('/#/Customers');
-            });
-        return true; // Allow form submit
+        $(context.target).ajaxSubmit({
+            success: function () {
+                context.redirect('/#/Customers');
+            }
+        });
+        return false; // Allow form submit
     });
     
 }
@@ -67,12 +67,12 @@ function initializeClientRoutes(sammy) {
             });
     });
     sammy.post('/Clients', function (context) {
-        context.load('/Clients', { dataType: 'html' })
-            .swap()
-            .then(function() {
+        $(context.target).ajaxSubmit({
+            success: function () {
                 context.redirect('/#/Clients');
-            });
-        return true; // Allow form submit
+            }
+        });
+        return false; // Allow form submit
     });
     sammy.get('/Clients/:id', function (context) {
         context.load('/Clients/' + context.params.id, { dataType: 'html' })
@@ -82,12 +82,12 @@ function initializeClientRoutes(sammy) {
             });
     });
     sammy.post('/Clients/:id', function (context) {
-        context.load('/Clients/' + context.params.id, { dataType: 'html' })
-            .swap()
-            .then(function() {
+        $(context.target).ajaxSubmit({
+            success: function () {
                 context.redirect('/#/Clients');
-            });
-        return true; // Allow form submit
+            }
+        });
+        return false; // Allow form submit
     });
 }
 
@@ -104,12 +104,12 @@ function initializeUserRoutes(sammy) {
             });
     });
     sammy.post('/Users', function (context) {
-        context.load('/Users', { dataType: 'html' })
-            .swap()
-            .then(function () {
+        $(context.target).ajaxSubmit({
+            success: function () {
                 context.redirect('/#/Users');
-            });
-        return true; // Allow form submit
+            }
+        });
+        return false; // Allow form submit
     });
     sammy.get('/Users/:id', function (context) {
         context.load('/Users/' + context.params.id, { dataType: 'html' })
@@ -119,12 +119,12 @@ function initializeUserRoutes(sammy) {
             });
     });
     sammy.post('/Users/:id', function (context) {
-        context.load('/Users/' + context.params.id, { dataType: 'html' })
-            .swap()
-            .then(function () {
+        $(context.target).ajaxSubmit({
+            success: function () {
                 context.redirect('/#/Users');
-            });
-        return true; // Allow form submit
+            }
+        });
+        return false; // Allow form submit
     });
 }
 
@@ -141,12 +141,12 @@ function initializeContractRoutes(sammy) {
             });
     });
     sammy.post('/Contracts', function (context) {
-        context.load('/Contracts', { dataType: 'html' })
-            .swap()
-            .then(function () {
+        $(context.target).ajaxSubmit({
+            success: function () {
                 context.redirect('/#/Contracts');
-            });
-        return true; // Allow form submit
+            }
+        });
+        return false; // Allow form submit
     });
     sammy.get('/Contracts/:id', function (context) {
         context.load('/Contracts/' + context.params.id, { dataType: 'html' })
@@ -156,12 +156,12 @@ function initializeContractRoutes(sammy) {
             });
     });
     sammy.post('/Contracts/:id', function (context) {
-        context.load('/Contracts/' + context.params.id, { dataType: 'html' })
-            .swap()
-            .then(function () {
+        $(context.target).ajaxSubmit({
+            success: function () {
                 context.redirect('/#/Contracts');
-            });
-        return true; // Allow form submit
+            }
+        });
+        return false; // Allow form submit
     });
 }
 //function initializePackageRoutes(sammy) {
