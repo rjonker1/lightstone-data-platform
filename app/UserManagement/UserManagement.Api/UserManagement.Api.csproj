@@ -348,6 +348,7 @@
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\ServiceLocatorInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Modules\AuditLogModule.cs" />
     <Compile Include="Modules\AuthModule.cs" />
     <Compile Include="Modules\BillingModule.cs" />
     <Compile Include="Modules\ClientModule.cs" />
@@ -428,6 +429,7 @@
     <Content Include="Views\Contract\Save.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Package\Save.cshtml" />
+    <Content Include="Views\AuditLog\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

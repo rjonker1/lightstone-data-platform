@@ -4,12 +4,21 @@ function initializeRoutes(sammy) {
         this.$element().html('Welcome!');
     });
     
+    initializeAuditLogRoutes(sammy);
     initializeCusomerRoutes(sammy);
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
     initializeContractRoutes(sammy);
     //initializePackageRoutes(sammy);
     initializeLookupRoutes(sammy);
+}
+
+function initializeAuditLogRoutes(sammy) {
+
+    sammy.get('/AuditLogs', function (context) {
+        context.load('/AuditLogs', { dataType: 'html' }).swap();
+    });
+
 }
 
 function initializeCusomerRoutes(sammy) {
