@@ -39,7 +39,7 @@ namespace UserManagement.Api.Modules
                 //foreach (var clientuser in entity.ClientUsers)
                 //    clientuser.User = entity;
 
-                bus.Publish(new CreateUpdateEntity(entity));
+                bus.Publish(new CreateUpdateEntity(entity, true));
 
                 return null;
             };
@@ -62,7 +62,7 @@ namespace UserManagement.Api.Modules
                 //foreach (var clientuser in entity.ClientUsers)
                 //    clientuser.User = entity;
 
-                bus.Publish(new CreateUpdateEntity(entity));
+                bus.Publish(new CreateUpdateEntity(entity, false));
 
                 return null;
             };

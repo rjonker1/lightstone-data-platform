@@ -20,7 +20,7 @@ namespace UserManagement.Domain.BusinessRules.Users
         public override void Handle(CreateUserRule command)
         {
             var entity = command.Entity;
-
+ 
             //Check if Username for specific user already exists
             if (_currentUsers.Any(x => x.Id != entity.Id && x.UserName.Equals(entity.UserName)))
             {

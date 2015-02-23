@@ -30,7 +30,7 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         {
 
             var brv = new BusinessRulesValidator(_handler);
-            brv.CheckRules(command.Entity);
+            brv.CheckRules(command.Entity, command.Create);
 
             _repository.SaveOrUpdate(command.Entity);
         }

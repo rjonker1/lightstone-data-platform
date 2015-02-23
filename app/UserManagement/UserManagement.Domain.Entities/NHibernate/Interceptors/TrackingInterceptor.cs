@@ -31,6 +31,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             public void BeforeCompletion()
             {
                 // TODO: find previous commits for the record
+               
             }
 
             public ISession Session { private get; set; }
@@ -88,7 +89,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                         // exclude duplicate "A" records
                         logsToExclude.AddRange(firstLogSetList.Where(l2 => l1.EventType == "A" 
                             && l2.EventType == "A")
-                            .Where(l2 => l2.CommitVersion == 1)
+                            .Where(l2 => l1.CommitVersion == 1)
                             .Distinct().Select(l2 => l1));
                     }
                 }
