@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -39,16 +40,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var cacheMetric = _cacheClient.As<Metric>();
                 var response = cacheMetric.Lists[MetricKey];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
                     .Query<Metric>(SelectStatements.GetAllTheMetricTypes)
                     .ToList();
 
-                dbResponse.ForEach(f => response.Add(f));
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
 
-                _cacheClient.Add(MetricKey, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.ForEach(f => response.Add(f));
+                dbResponse.AddItemsToCache(_cacheClient, MetricKey, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
         }

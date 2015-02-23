@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -38,16 +39,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var cacheBands = _cacheClient.As<Band>();
                 var response = cacheBands.Lists[BandsKey];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
                     .Query<Band>(SelectStatements.GetAllTheBands)
                     .ToList();
 
-                dbResponse.ForEach(f => response.Add(f));
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
 
-                _cacheClient.Add(BandsKey, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.ForEach(f => response.Add(f));
+                dbResponse.AddItemsToCache(_cacheClient, BandsKey, DateTime.UtcNow.AddDays(1));
+
                 return dbResponse;
             }
 

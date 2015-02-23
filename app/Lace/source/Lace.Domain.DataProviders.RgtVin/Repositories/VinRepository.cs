@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.DataProviders.RgtVin.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.SqlStatements;
@@ -32,15 +33,19 @@ namespace Lace.Domain.DataProviders.RgtVin.Repositories
                 var cachedVins = _cacheClient.As<Vin>();
                 var response = cachedVins.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<Vin>(SelectStatements.GetVehicleVin,
                         new {@Vin = vin}).ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+
                 return dbResponse;
             }
         }

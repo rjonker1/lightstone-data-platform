@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -38,17 +39,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var makes = _cacheClient.As<Make>();
                 var response = makes.Lists[MakeKey];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
                     .Query<Make>(SelectStatements.GetAllTheMakes)
                     .ToList();
 
-                dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(MakeKey, response);
-                return dbResponse;
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
 
+                dbResponse.ForEach(f => response.Add(f));
+                dbResponse.AddItemsToCache(_cacheClient, MakeKey, DateTime.UtcNow.AddDays(1));
+                return dbResponse;
             }
         }
 

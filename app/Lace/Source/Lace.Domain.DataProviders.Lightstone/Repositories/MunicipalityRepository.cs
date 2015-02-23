@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
@@ -39,16 +40,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
                 var cacheMuncipalities = _cacheClient.As<Municipality>();
                 var response = cacheMuncipalities.Lists[MunicipaliiesKey];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse = _connection
                     .Query<Municipality>(SelectStatements.GetAllTheMuncipalities)
                     .ToList();
 
-                dbResponse.ForEach(f => response.Add(f));
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
 
-                _cacheClient.Add(MunicipaliiesKey, response, DateTime.UtcNow.AddDays(10));
+                dbResponse.ForEach(f => response.Add(f));
+                dbResponse.AddItemsToCache(_cacheClient, MunicipaliiesKey, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
         }
