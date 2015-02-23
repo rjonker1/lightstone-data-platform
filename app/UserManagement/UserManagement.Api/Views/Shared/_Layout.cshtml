@@ -47,10 +47,11 @@
     <script src="~/Scripts/app/app.js"></script>
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
-        toastr.options = {
-            "progressBar": true,
-            "positionClass": "toast-top-full-width"
-        };
+        
+        // Configure Toastr
+        toastr.options.timeOut = 4000;
+        toastr.options.positionClass = 'toast-bottom-right';
+
         $(document).ajaxStart(function () {
             $.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
         });
@@ -58,7 +59,7 @@
             $.unblockUI();
         });
         $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
-            toastr["error"](jqxhr.responseText);
+            toastr["error"]("Error : " + jqxhr.responseJSON.errorMessage);
             $.unblockUI();
         });
     </script>
