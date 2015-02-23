@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Nancy.Session;
 using NHibernate;
 using NHibernate.Transaction;
 using NHibernate.Type;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities.BusinessRules;
 using ISession = NHibernate.ISession;
 
 namespace UserManagement.Domain.Entities.NHibernate.Interceptors
@@ -54,6 +51,9 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                 var session = Session;
 
                 var logs = AuditLogs;
+
+                if (AuditLogs.Count == 0)
+                    return;
 
                 session.SessionFactory.OpenSession();
 
@@ -132,12 +132,12 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         public override int[] FindDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
            IType[] types)
         {
-            GetChanges(entity, id, currentState, previousState, propertyNames, types, "A");
+            GetChanges(entity, id, currentState, previousState, propertyNames.ToList(), types, "A");
 
             return null;
         }
 
-        private void GetChanges(object entity, object id, IList<object> currentState, IList<object> previousState, ICollection<string> propertyNames,
+        private void GetChanges(object entity, object id, IList<object> currentState, IList<object> previousState, List<string> propertyNames,
             IList<IType> types, string state)
         {
             if (entity.GetType() == typeof(AuditLog))
@@ -150,6 +150,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             var recordId = Guid.Parse(id.ToString());
             var sessionAuditLogs = new List<AuditLog>(propertyNames.Count);
 
+          
             foreach (var propertyName in propertyNames)
             {
                 object originalValue = null;
@@ -169,6 +170,22 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     newValue = currentState[ordinal];
                 }
 
+                if (newValue == null && originalValue == null)
+                {
+                    
+                        var objects = (object[])(currentState);
+                        if (objects != null) newValue = objects[ordinal];
+
+                    if (newValue != null)
+                    {
+                        
+                    }
+                    
+                   
+
+                }
+
+                
                 var auditLog = new AuditLog(commitId)
                 {
                     Id = Guid.NewGuid(),
@@ -191,11 +208,10 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 if (auditLog.OriginalValue == auditLog.NewValue)
                 {
-                    if (auditLog.OriginalValue == null && auditLog.NewValue == null)
-                    {
-                        ordinal++;
-                        break;
-                    }
+                    //if (auditLog.OriginalValue == null && auditLog.NewValue == null)
+                    //{
+                    //    break;
+                    //}
 
                     auditLog.EventType = "A";
                 }
@@ -223,13 +239,16 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                 ordinal++;
             }
 
-            AuditObjectModification(entity, id, sessionAuditLogs);
+            if (sessionAuditLogs.Count > 0)
+            {
+                AuditObjectModification(entity, id, sessionAuditLogs);
+            }
         }
 
         public override void OnDelete(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
             Footprint(entity, state, propertyNames);
-            GetChanges(entity, id, null, state, propertyNames, types, "D");
+            GetChanges(entity, id, null, state, new List<string>(propertyNames), types, "D");
 
             base.OnDelete(entity, id, state, propertyNames, types);
         }
@@ -257,6 +276,14 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             //brv.CheckRules(entity);
 
             Footprint(entity, state, propertyNames);
+
+            var props = new List<string>();
+
+            foreach (var propertyName in propertyNames)
+            {
+                props.Add(propertyName);
+            }
+            GetChanges(entity, id, state, null, props, types, "A");
 
             return base.OnSave(entity, id, state, propertyNames, types);
         }
@@ -308,7 +335,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         {
             Footprint(entity, currentState, propertyNames);
 
-            GetChanges(entity, id, currentState, previousState, propertyNames, types, "M");
+            GetChanges(entity, id, currentState, previousState, new List<string>(propertyNames), types, "M");
 
             return base.OnFlushDirty(entity, id, currentState, previousState, propertyNames, types);
         }

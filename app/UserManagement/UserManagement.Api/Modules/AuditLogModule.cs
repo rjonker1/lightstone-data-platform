@@ -16,7 +16,7 @@ namespace UserManagement.Api.Modules
                 .WithView("Index")
                 .WithMediaRangeModel(MediaRange.FromString("application/json"), new
                 {
-                    data = auditlogs.OrderByDescending( o=> o.EventDateUtc).ThenByDescending(o => o.CommitVersion)
+                    data = auditlogs.OrderByDescending( o=> o.EventDateUtc).ThenByDescending(o => o.CommitVersion).Take(100)
                 });
         }
     }
