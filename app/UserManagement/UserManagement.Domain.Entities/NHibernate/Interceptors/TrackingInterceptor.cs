@@ -19,8 +19,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         private TransactionSynchronization _transactionSynchronization;
         private ISession _session;
 
-        public bool ChangedTracked { get; set; }
-
         private class TransactionSynchronization : ISynchronization
         {
             public TransactionSynchronization(TrackingInterceptor trackingInterceptor)
@@ -66,10 +64,11 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 // find previous commits for the record
 
-                var firstLogSet = auditLogRepository.Where(x => x.RecordId == EntityId && x.EventType == "A")
-                    .OrderBy(o => o.CommitVersion).ToList();
+                var firstLogSet = auditLogRepository.Where(x => x.RecordId == EntityId
+                    && x.EventType == "A" && x.CommitVersion == 1);
 
-                var previousAudidtsCommitVersion = firstLogSet.Where(x => x.RecordId == EntityId)
+
+                var previousAudidtsCommitVersion = auditLogRepository.Where(x => x.RecordId == EntityId)
                     .OrderByDescending(o => o.CommitVersion).Distinct().FirstOrDefault();
 
                 var commitVersion = 1;
@@ -82,14 +81,15 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     if (previousAudidtsCommitVersion.CommitVersion != null)
                         commitVersion = commitVersion + previousAudidtsCommitVersion.CommitVersion.Value;
 
+                    var firstLogSetList = firstLogSet.ToList();
+
                     foreach (var l1 in logs)
                     {
                         // exclude duplicate "A" records
-                        logsToExclude.AddRange(from l2 in firstLogSet
-                                               where l1.EventType == "A"
-                                                   && l2.EventType == "A"
-                                               where l2.CommitVersion == 1
-                                               select l1);
+                        logsToExclude.AddRange(firstLogSetList.Where(l2 => l1.EventType == "A" 
+                            && l2.EventType == "A")
+                            .Where(l2 => l2.CommitVersion == 1)
+                            .Distinct().Select(l2 => l1));
                     }
                 }
 
@@ -110,14 +110,12 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                         auditLog.CommitVersion = commitVersion;
                         auditLog.CommitSequence = commitSequence;
                         commitSequence++;
-
                         auditLogRepository.SaveOrUpdate(auditLog);
                     }
                 }
 
                 session.Transaction.Commit();
-
-                TrackingInterceptor.ChangedTracked = false;
+                session.Evict(Entity);
             }
         }
 
@@ -132,19 +130,14 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         public override int[] FindDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
            IType[] types)
         {
-            //Footprint(entity, currentState, propertyNames);
-
             GetChanges(entity, id, currentState, previousState, propertyNames, types, "A");
 
             return null;
         }
 
-        private void GetChanges(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
-            IType[] types, string state)
+        private void GetChanges(object entity, object id, IList<object> currentState, IList<object> previousState, ICollection<string> propertyNames,
+            IList<IType> types, string state)
         {
-
-            //if (!ChangedTracked) return;
-
             if (entity.GetType() == typeof(AuditLog))
             {
                 return;
@@ -153,7 +146,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             var ordinal = 0;
             var commitId = Guid.NewGuid();
             var recordId = Guid.Parse(id.ToString());
-            var sessionAuditLogs = new List<AuditLog>(propertyNames.Length);
+            var sessionAuditLogs = new List<AuditLog>(propertyNames.Count);
 
             foreach (var propertyName in propertyNames)
             {
@@ -216,7 +209,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     {
                         auditLog.EventType = "M";
                     }
-                    ;
                 }
 
                 if (auditLog.NewValue == null && auditLog.OriginalValue != null)
@@ -251,8 +243,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             };
 
             _session.Transaction.RegisterSynchronization(_transactionSynchronization);
-
-            ChangedTracked = true;
         }
 
 
@@ -266,10 +256,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
             Footprint(entity, state, propertyNames);
 
-            //GetChanges(entity, id, state, null, propertyNames, types, "A");
-
-            //return base.OnSave(entity, id, state, propertyNames, types);
-            return false;
+            return base.OnSave(entity, id, state, propertyNames, types);
         }
 
         //public override void BeforeTransactionCompletion(ITransaction tx)
@@ -317,8 +304,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             object[] previousState, string[] propertyNames,
             IType[] types)
         {
-            //session.SessionFactory.OpenSession();
-
             Footprint(entity, currentState, propertyNames);
 
             GetChanges(entity, id, currentState, previousState, propertyNames, types, "M");
