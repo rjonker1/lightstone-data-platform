@@ -56,7 +56,10 @@
                 @*@Html.LabelFor(x => x.CommencementDate, new { @class = "control-label col-lg-4" })*@
                 <label class="control-label col-lg-4">Commencement Date</label>
                 <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.CommencementDate, new { @class = "form-control", placeholder = "" })
+                    <div class="input-group date">
+                        @*@Html.TextBoxFor(x => x.CommencementDate, new { @class = "form-control", placeholder = "" })*@
+                        <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -70,7 +73,10 @@
                 @*@Html.LabelFor(x => x.OnlineAcceptance, new { @class = "control-label col-lg-4" })*@
                 <label class="control-label col-lg-4">Online Acceptance</label>
                 <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.OnlineAcceptance, new { @class = "form-control", placeholder = "" })
+                    <div class="input-group date">
+                        @*@Html.TextBoxFor(x => x.CommencementDate, new { @class = "form-control", placeholder = "" })*@
+                        <input type="text" class="form-control" name="OnlineAcceptance" readonly="true" value="@Model.OnlineAcceptance"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
                 </div>
             </div>
             <div class="form-group">

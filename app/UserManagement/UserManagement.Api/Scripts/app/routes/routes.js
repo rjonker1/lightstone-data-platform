@@ -221,6 +221,7 @@ function initializeLookupRoutes(sammy) {
 
 function initializePlugins() {
     $(".chosen-select").chosen({ width: "100%" });
+    $('.input-group.date').bootstrapdatepicker({ autoclose:true, format: "yyyy-mm-dd" });
     $('.chosen-autocomplete .chosen-choices input').autocomplete({
         source: function (request, response) {
             var $container = $(this.element).closest('.chosen-autocomplete');
