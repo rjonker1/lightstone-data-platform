@@ -89,7 +89,8 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                         // exclude duplicate "A" records
                         logsToExclude.AddRange(firstLogSetList.Where(l2 => l1.EventType == "A" 
                             && l2.EventType == "A")
-                            .Where(l2 => l1.CommitVersion == 1)
+                            .Where(l2 => l2.CommitVersion == 1)
+                            .Where(l2 => l1.RecordId == l2.RecordId)
                             .Distinct().Select(l2 => l1));
                     }
                 }
