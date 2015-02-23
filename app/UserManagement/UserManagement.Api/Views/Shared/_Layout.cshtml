@@ -34,6 +34,7 @@
         // Conflict between jQueryUi datepicker and bootstrap datepicker, thus the rename of the plugin
         $.fn.bootstrapdatepicker = $.fn.datepicker;
     </script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/DataTables-1.10.4/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/chosen.jquery.min.js"></script>
     <script src="~/Scripts/toastr.min.js"></script>
@@ -42,8 +43,8 @@
     <script src="~/Scripts/sammy-0.7.5.js"></script>
     <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
     <script src="~/Scripts/app/routes/routes.js"></script>
+    <script src="~/Scripts/app/core.js"></script>
     <script src="~/Scripts/app/app.js"></script>
-
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
         toastr.options = {
