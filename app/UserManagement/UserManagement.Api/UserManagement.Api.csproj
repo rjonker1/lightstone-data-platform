@@ -486,7 +486,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>22484</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:22484/</IISUrl>
+          <IISUrl>http://dev.lightstone.usermanagement.api/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
