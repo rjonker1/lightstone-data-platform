@@ -37,7 +37,7 @@ namespace UserManagement.Api.Helpers.Security
                 {
                     user = _umAuthenticator.GetUserIdentity(token);
                     if (user != null) 
-                        db.HashSet(token, new[] { new HashEntry("UserName", user.UserName), new HashEntry("Claims", user.Claims.Aggregate((current, next) => current + "|" + next)) });
+                        db.HashSet(token, new[] { new HashEntry("UserName", user.UserName + ""), new HashEntry("Claims", user.Claims.Aggregate((current, next) => current + "|" + next)) });
                 }
             }
             catch (Exception exception)
