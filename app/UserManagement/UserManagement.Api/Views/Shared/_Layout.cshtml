@@ -12,6 +12,7 @@
     <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="~/Content/DataTables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/chosen.min.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
 
@@ -29,6 +30,7 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/DataTables-1.10.4/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/chosen.jquery.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/jquery.blockUI.js"></script>
     <script src="~/Scripts/jquery.form.min.js"></script>
     <script src="~/Scripts/sammy-0.7.5.js"></script>
@@ -38,13 +40,18 @@
 
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
+        toastr.options = {
+            "progressBar": true,
+            "positionClass": "toast-top-full-width"
+        };
         $(document).ajaxStart(function () {
             $.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
         });
         $(document).ajaxStop(function () {
             $.unblockUI();
         });
-        $(document).ajaxError(function () {
+        $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+            toastr["error"](jqxhr.responseText);
             $.unblockUI();
         });
     </script>

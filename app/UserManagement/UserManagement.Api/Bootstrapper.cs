@@ -1,8 +1,10 @@
 ﻿using Castle.Windsor;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
@@ -75,6 +77,21 @@ namespace UserManagement.Api
         //Updates schema if there are any structural changes
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
+            {
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                return null;
+            });
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
+            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            {
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                var fromException = ErrorResponse.FromException(exception);
+                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
+                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+                return fromException;
+            });
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
 

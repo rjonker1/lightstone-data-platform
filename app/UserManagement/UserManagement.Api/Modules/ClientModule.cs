@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoMapper;
+using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
