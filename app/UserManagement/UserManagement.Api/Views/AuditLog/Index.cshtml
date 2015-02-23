@@ -4,16 +4,15 @@
 @using UserManagement.Domain.Dtos
 @*@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>*@
 
-@Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Audit Logs", ""))
+@Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Audit Logs", "An audit log of all changes to the data"))
 
 <table id="auditlog_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>UserId</th>
+            @*<th>Id</th>*@
             <th>Event Date</th>
             <th>Event Type</th>
-            <th>Event Name</th>
+            <th>Entity Name</th>
             <th>Record Id</th>
             <th>Field Name</th>
             <th>Original Value</th>
@@ -21,7 +20,8 @@
             <th>Data Type</th>
             <th>Commit Id</th>
             <th>Commit Sequence</th>
-            <th>Commit Version</th>
+            <th>Commit Version</th> 
+            
 
          
         </tr>
@@ -33,20 +33,22 @@
         dom: '<"table-toolbar">frtip',
         retrieve: true,
         ajax: "/AuditLogs",
-        columns: [
-            { data: "id", visible: false },
-            { data: "UserId" },
-            { data: "EventDateUtc" },
-            { data: "EventType" },
-            { data: "EventName" },
-            { data: "RecordId" },
-            { data: "FieldName" },
-            { data: "OriginalValue" },
-            { data: "NewValue" },
-            { data: "DataType" },
-            { data: "CommitId" },
-            { data: "CommitSequence" },
-            { data: "CommitVersion" }
+        "columns": [
+           // { data: "id", visible: true, "defaultContent": "" },
+            { data: "eventDateUtc", visible: true, "defaultContent": "" },
+            { data: "eventType" },
+            { data: "entityName", "defaultContent": "Unknown" },
+            { data: "recordId" },
+            { data: "fieldName" },
+            { data: "originalValue", "defaultContent": "NULL" },
+            { data: "newValue", "defaultContent": "NULL" },
+            { data: "dataType" },
+            { data: "commitId" },
+            { data: "commitSequence" },
+            { data: "commitVersion" }
+           
+            
+
             
         ]
     });
