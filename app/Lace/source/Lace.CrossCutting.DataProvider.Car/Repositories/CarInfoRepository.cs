@@ -5,6 +5,7 @@ using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure.SqlStatements;
 using Lace.CrossCutting.Infrastructure.Orm;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using ServiceStack.Redis;
 
 namespace Lace.CrossCutting.DataProvider.Car.Repositories
@@ -31,15 +32,18 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
                 var cachedCar = _cacheClient.As<CarInfo>();
                 var response = cachedCar.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<CarInfo>(SelectStatements.GetCarInformationById, new {@CarId = carId})
                         .ToList();
 
+                if (!response.CanAddItemsToCache().HasValue)
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
                 return dbResponse;
             }
         }
@@ -53,18 +57,21 @@ namespace Lace.CrossCutting.DataProvider.Car.Repositories
                 var cachedCar = _cacheClient.As<CarInfo>();
                 var response = cachedCar.Lists[key];
 
-                if (response != null && response.Any())
+                if (response.DoesExistInTheCache())
                     return response;
 
                 var dbResponse =
                     _connection.Query<CarInfo>(SelectStatements.GetCarInformationByVin, new {@Vin = vinNumber})
                         .ToList();
 
+                if (!response.CanAddItemsToCache().HasValue) 
+                    return dbResponse;
+
                 dbResponse.ForEach(f => response.Add(f));
-                _cacheClient.Add(key, response, DateTime.UtcNow.AddDays(1));
+                dbResponse.AddItemsToCache(_cacheClient, key, DateTime.UtcNow.AddDays(1));
+                
                 return dbResponse;
             }
-
         }
     }
 }
