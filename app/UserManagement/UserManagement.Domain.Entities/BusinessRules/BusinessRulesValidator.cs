@@ -17,17 +17,17 @@ namespace UserManagement.Domain.Entities.BusinessRules
         }
 
         //Run rules based on entity type of the currently transacted entity.
-        public void CheckRules(object enity)
+        public void CheckRules(object enity, bool create)
         {
-            if (enity is User)
-                _handler.Handle(new CreateUserRule(enity as User));
-            else if (enity is Customer)
+            if (enity is User && create)
+                 _handler.Handle(new CreateUserRule(enity as User));
+            else if (enity is Customer && create)
                 _handler.Handle(new CreateCustomerRule(enity as Customer));
-            else if (enity is Client)
+            else if (enity is Client && create)
                 _handler.Handle(new CreateClientRule(enity as Client));
-            else if (enity is Package)
+            else if (enity is Package && create)
                 _handler.Handle(new CreatePackageRule(enity as Package));
-            else if (enity is Contract)
+            else if (enity is Contract && create)
                 _handler.Handle(new CreateContractRule(enity as Contract));
         }
     }
