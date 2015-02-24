@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using NHibernate;
@@ -28,7 +29,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             public void BeforeCompletion()
             {
                 // TODO: find previous commits for the record
-               
+
             }
 
             public ISession Session { private get; set; }
@@ -87,13 +88,15 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     foreach (var l1 in logs)
                     {
                         // exclude duplicate "A" records
-                        logsToExclude.AddRange(firstLogSetList.Where(l2 => l1.EventType == "A" 
+                        logsToExclude.AddRange(firstLogSetList.Where(l2 => l1.EventType == "A"
                             && l2.EventType == "A")
                             .Where(l2 => l2.CommitVersion == 1)
                             .Where(l2 => l1.RecordId == l2.RecordId)
                             .Distinct().Select(l2 => l1));
                     }
                 }
+
+                var mods = new List<AuditLog>();
 
                 foreach (var auditLog in logs.Except(logsToExclude))
                 {
@@ -111,13 +114,44 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     {
                         auditLog.CommitVersion = commitVersion;
                         auditLog.CommitSequence = commitSequence;
-                        commitSequence++;
+
+                        if (auditLog.EventType == "M")
+                        {
+                            mods.Add(auditLog);
+                        }
+
                         auditLogRepository.SaveOrUpdate(auditLog);
+                        
+                        commitSequence++;
                     }
                 }
 
+                
+
                 session.Transaction.Commit();
                 session.Evict(Entity);
+
+                // remove duplicates
+
+                if (mods.Count <= 0) return;
+                
+                var recordId = mods[0].RecordId;
+
+                var modsInDb = auditLogRepository.Where(x => x.RecordId == recordId && x.EventType == "M"
+                    && x.FieldName == mods[0].FieldName
+                        && x.OriginalValue == mods[0].OriginalValue
+                        && x.EntityName == mods[0].EntityName
+                                                             && x.EventDateUtc == mods[0].EventDateUtc)
+                    .OrderByDescending(o => o.CommitVersion)
+                    .Select(x => x).ToList();
+                
+                if (modsInDb.Count > 1)
+                {
+                    session.BeginTransaction();
+                    auditLogRepository.Delete(modsInDb[0]);
+                    session.Transaction.Commit();
+                    session.Evict(Entity);
+                }
             }
         }
 
@@ -126,6 +160,8 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         {
             _session = session;
             base.SetSession(session);
+
+
         }
 
 
@@ -136,6 +172,8 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
             return null;
         }
+
+        //  public bool FindDirtyExicuted { get; private set; }
 
         private void GetChanges(object entity, object id, IList<object> currentState, IList<object> previousState, List<string> propertyNames,
             IList<IType> types, string state)
@@ -150,7 +188,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             var recordId = Guid.Parse(id.ToString());
             var sessionAuditLogs = new List<AuditLog>(propertyNames.Count);
 
-          
+
             foreach (var propertyName in propertyNames)
             {
                 object originalValue = null;
@@ -172,20 +210,11 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 if (newValue == null && originalValue == null)
                 {
-                    
-                        var objects = (object[])(currentState);
-                        if (objects != null) newValue = objects[ordinal];
-
-                    if (newValue != null)
-                    {
-                        
-                    }
-                    
-                   
-
+                    var objects = (object[])(currentState);
+                    if (objects != null) newValue = objects[ordinal];
                 }
 
-                
+
                 var auditLog = new AuditLog(commitId)
                 {
                     Id = Guid.NewGuid(),
