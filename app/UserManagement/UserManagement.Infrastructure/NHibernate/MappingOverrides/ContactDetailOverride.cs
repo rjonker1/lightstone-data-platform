@@ -8,8 +8,8 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<ContactDetail> mapping)
         {
-            mapping.References(x => x.PhysicalAddress).Cascade.All();
-            mapping.References(x => x.PostalAddress).Cascade.All();
+            mapping.References(x => x.PhysicalAddress).Cascade.SaveUpdate();
+            mapping.References(x => x.PostalAddress).Cascade.SaveUpdate();
         }
     }
 }

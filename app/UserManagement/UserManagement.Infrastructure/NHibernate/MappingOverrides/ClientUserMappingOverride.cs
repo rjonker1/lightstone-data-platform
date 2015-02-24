@@ -8,8 +8,8 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<ClientUser> mapping)
         {
-            mapping.References(x => x.Client).Cascade.All();
-            mapping.References(x => x.User).Cascade.All();
+            mapping.References(x => x.Client).Cascade.SaveUpdate();
+            mapping.References(x => x.User).Cascade.SaveUpdate();
         }
     }
 }

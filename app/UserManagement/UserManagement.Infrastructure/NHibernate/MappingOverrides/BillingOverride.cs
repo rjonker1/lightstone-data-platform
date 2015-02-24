@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Billing> mapping)
         {
-            mapping.References(x => x.PaymentType).Cascade.All();
+            mapping.References(x => x.PaymentType).Cascade.SaveUpdate();
         }
     }
 }

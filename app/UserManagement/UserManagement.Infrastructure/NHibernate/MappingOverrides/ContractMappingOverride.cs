@@ -8,13 +8,13 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Contract> mapping)
         {
-            mapping.References(x => x.ContractType).Cascade.All();
-            mapping.References(x => x.EscalationType).Cascade.All();
-            mapping.References(x => x.ContractDuration).Cascade.All();
+            mapping.References(x => x.ContractType).Cascade.SaveUpdate();
+            mapping.References(x => x.EscalationType).Cascade.SaveUpdate();
+            mapping.References(x => x.ContractDuration).Cascade.SaveUpdate();
             //mapping.HasMany(x => x.ContractPackages).Cascade.All();
-            mapping.HasManyToMany(x => x.Packages).Cascade.All().Table("ContractPackage");
-            mapping.HasManyToMany(x => x.Customers).Cascade.All().Table("CustomerContract");
-            mapping.HasManyToMany(x => x.Clients).Cascade.All().Table("ClientContract");
+            mapping.HasManyToMany(x => x.Packages).Cascade.SaveUpdate().Table("ContractPackage");
+            mapping.HasManyToMany(x => x.Customers).Cascade.SaveUpdate().Table("CustomerContract");
+            mapping.HasManyToMany(x => x.Clients).Cascade.SaveUpdate().Table("ClientContract");
         }
     }
 }

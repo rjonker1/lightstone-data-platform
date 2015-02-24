@@ -9,10 +9,10 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<User> mapping)
         {
-            mapping.References(x => x.UserType).Cascade.All();
-            mapping.HasManyToMany(x => x.Roles).Cascade.All().Table("UserRole");
-            mapping.HasManyToMany(x => x.Customers).Cascade.All().Table("CustomerUser");
-            mapping.HasMany(x => x.ClientUsers).Cascade.All().Table("ClientUser");
+            mapping.References(x => x.UserType).Cascade.SaveUpdate();
+            mapping.HasManyToMany(x => x.Roles).Cascade.SaveUpdate().Table("UserRole");
+            mapping.HasManyToMany(x => x.Customers).Cascade.SaveUpdate().Table("CustomerUser");
+            mapping.HasMany(x => x.ClientUsers).Cascade.SaveUpdate().Table("ClientUser");
         }
     }
 
