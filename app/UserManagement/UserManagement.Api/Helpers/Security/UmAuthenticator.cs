@@ -25,7 +25,7 @@ namespace UserManagement.Api.Helpers.Security
                 : new ApiUser(user.UserName)
                 {
                     Id = user.Id,
-                    Claims = user.Roles != null ? user.Roles.Select(x => x.Value) : Enumerable.Empty<string>()
+                    Claims = user.Roles != null ? user.Roles.ToList().Select(x => x.Value) : Enumerable.Empty<string>()
                 };
         }
     }
