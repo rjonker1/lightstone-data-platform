@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using NHibernate;
@@ -30,6 +29,37 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             {
                 // TODO: find previous commits for the record
 
+                var logs = AuditLogs;
+
+                if (AuditLogs.Count == 0)
+                    return;
+
+                var list1 = new List<AuditLog>();
+
+                foreach (var auditLog in logs)
+                {
+                    if (auditLog.EventType == "D")
+                    {
+                        auditLog.NewValue = null;
+                    }
+
+                    if (auditLog.EventType == "A")
+                    {
+                        auditLog.OriginalValue = null;
+                    }
+                }
+
+                list1.AddRange(logs);
+
+                foreach (var auditLog in list1.Where(auditLog => auditLog.NewValue == auditLog.OriginalValue))
+                {
+                    logs.Remove(auditLog);
+                }
+
+                list1.Clear();
+
+                AuditLogs = logs;
+
             }
 
             public ISession Session { private get; set; }
@@ -55,7 +85,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 if (AuditLogs.Count == 0)
                     return;
-
+               
                 session.SessionFactory.OpenSession();
 
                 session.BeginTransaction(IsolationLevel.RepeatableRead);
@@ -98,17 +128,11 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
 
                 var mods = new List<AuditLog>();
 
-                foreach (var auditLog in logs.Except(logsToExclude))
-                {
-                    if (auditLog.EventType == "D")
-                    {
-                        auditLog.NewValue = null;
-                    }
+                var exlude = logsToExclude.Distinct();
 
-                    if (auditLog.EventType == "A")
-                    {
-                        auditLog.OriginalValue = null;
-                    }
+                foreach (var auditLog in logs.Except(exlude))
+                {
+                  
 
                     if (auditLog.NewValue != auditLog.OriginalValue)
                     {
@@ -126,8 +150,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                     }
                 }
 
-                
-
                 session.Transaction.Commit();
                 session.Evict(Entity);
 
@@ -137,11 +159,12 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
                 
                 var recordId = mods[0].RecordId;
 
-                var modsInDb = auditLogRepository.Where(x => x.RecordId == recordId && x.EventType == "M"
+                var modsInDb = auditLogRepository.Where(x => x.RecordId == recordId 
+                    && x.EventType == "M"
                     && x.FieldName == mods[0].FieldName
-                        && x.OriginalValue == mods[0].OriginalValue
-                        && x.EntityName == mods[0].EntityName
-                                                             && x.EventDateUtc == mods[0].EventDateUtc)
+                    && x.OriginalValue == mods[0].OriginalValue
+                    && x.EntityName == mods[0].EntityName
+                    && x.EventDateUtc == mods[0].EventDateUtc)
                     .OrderByDescending(o => o.CommitVersion)
                     .Select(x => x).ToList();
                 
@@ -168,7 +191,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         public override int[] FindDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames,
            IType[] types)
         {
-            GetChanges(entity, id, currentState, previousState, propertyNames.ToList(), types, "A");
+            GetChanges(entity, id, currentState, previousState, propertyNames.ToList(), types);
 
             return null;
         }
@@ -176,7 +199,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         //  public bool FindDirtyExicuted { get; private set; }
 
         private void GetChanges(object entity, object id, IList<object> currentState, IList<object> previousState, List<string> propertyNames,
-            IList<IType> types, string state)
+            IList<IType> types)
         {
             if (entity.GetType() == typeof(AuditLog))
             {
@@ -277,7 +300,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         public override void OnDelete(object entity, object id, object[] state, string[] propertyNames, IType[] types)
         {
             Footprint(entity, state, propertyNames);
-            GetChanges(entity, id, null, state, new List<string>(propertyNames), types, "D");
+            GetChanges(entity, id, null, state, new List<string>(propertyNames), types);
 
             base.OnDelete(entity, id, state, propertyNames, types);
         }
@@ -312,7 +335,7 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             {
                 props.Add(propertyName);
             }
-            GetChanges(entity, id, state, null, props, types, "A");
+            GetChanges(entity, id, state, null, props, types);
 
             return base.OnSave(entity, id, state, propertyNames, types);
         }
@@ -358,16 +381,16 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
         {
             Footprint(entity, currentState, propertyNames);
 
-            GetChanges(entity, id, currentState, previousState, new List<string>(propertyNames), types, "M");
+            GetChanges(entity, id, currentState, previousState, new List<string>(propertyNames), types);
 
             return base.OnFlushDirty(entity, id, currentState, previousState, propertyNames, types);
         }
 
 
-        private int GetIndex(object[] array, string property)
+        private static int GetIndex(string[] array, string property)
         {
             for (var i = 0; i < array.Length; i++)
-                if (array[i].ToString() == property)
+                if (array[i] == property)
                     return i;
 
             return -1;
