@@ -35,7 +35,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new CreateUpdateEntity(entity, true));
+                bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                 return null;
             };
@@ -53,7 +53,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new CreateUpdateEntity(entity, false));
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
                 return null;
             };
@@ -64,7 +64,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new SoftDeleteEntity(entity));
+                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
 
                 return null;
             };

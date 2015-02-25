@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using MemBus;
-using UserManagement.Domain.Core.Entities;
+﻿using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.BusinessRules;
 using UserManagement.Domain.Entities.Commands.Entities;
 
@@ -30,7 +23,7 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         {
 
             var brv = new BusinessRulesValidator(_handler);
-            brv.CheckRules(command.Entity, command.Create);
+            brv.CheckRules(command.Entity, command.Function);
 
             _repository.SaveOrUpdate(command.Entity);
         }

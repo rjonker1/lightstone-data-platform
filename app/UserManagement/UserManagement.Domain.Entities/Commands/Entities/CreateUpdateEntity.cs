@@ -6,12 +6,12 @@ namespace UserManagement.Domain.Entities.Commands.Entities
     public class CreateUpdateEntity : DomainCommand
     {
         public Entity Entity;
-        public bool Create;
+        public string Function;
 
-        public CreateUpdateEntity(Entity entity, bool create)
+        public CreateUpdateEntity(Entity entity, string function)
         {
             Entity = entity;
-            Create = create;
+            Function = function;
         }
     }
 }

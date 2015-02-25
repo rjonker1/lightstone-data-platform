@@ -6,10 +6,12 @@ namespace UserManagement.Domain.Entities.Commands.Entities
     public class SoftDeleteEntity : DomainCommand
     {
         public Entity Entity;
+        public string Function;
 
-        public SoftDeleteEntity(Entity entity)
+        public SoftDeleteEntity(Entity entity, string function)
         {
             Entity = entity;
+            Function = function;
         }
     }
 }
