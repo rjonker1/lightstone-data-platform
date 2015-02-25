@@ -12,6 +12,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             mapping.References(x => x.CommercialState).Cascade.All();
             mapping.References(x => x.CreateSource).Cascade.All();
             mapping.References(x => x.PlatformStatus).Cascade.All();
+            mapping.References(x => x.Billing).Cascade.All();
             mapping.HasManyToMany(x => x.Users).Cascade.All().Table("CustomerUser"); // Inverse as User entity responsible for saving
         }
     }

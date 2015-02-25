@@ -99,13 +99,7 @@ namespace UserManagement.Api
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.AddTransactionScope(container);
 
-            // if roles exist assume all lookup data exists
-            var iSession = container.Resolve<ISession>();
-            var sessionActive = (iSession.Transaction).IsActive;
-            var roleRepo = new Repository<Role>(iSession);
-            var exists = roleRepo.Any();
-            if (!exists && sessionActive)
-                AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
+            AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
 
             base.RequestStartup(container, pipelines, context);
         }
