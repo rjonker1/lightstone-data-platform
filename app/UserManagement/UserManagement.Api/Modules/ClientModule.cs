@@ -57,6 +57,17 @@ namespace UserManagement.Api.Modules
 
                 return null;
             };
+
+            Delete["/Clients/{id}"] = _ =>
+            {
+
+                var dto = this.Bind<ClientDto>();
+                var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
+
+                bus.Publish(new SoftDeleteEntity(entity));
+
+                return null;
+            };
         }
     }
 }
