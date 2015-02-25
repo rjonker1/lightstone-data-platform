@@ -1,11 +1,5 @@
 ﻿@using System
-@using System.Collections
-@using System.Collections.Generic
-@using System.Linq
-@using Nancy.ViewEngines.Razor.HtmlHelpers;
 @using UserManagement.Api.ViewModels
-@using UserManagement.Domain.Dtos
-@using UserManagement.Domain.Entities
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 @{
     var isCreate = Model.Id == new Guid();
@@ -14,54 +8,10 @@
     var url = isCreate ? "/Clients" : "/Clients/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)
-
-<div class="box dark">
-    <header>
-        <div class="icons">
-            <i class="fa fa-edit"></i>
-        </div>
-        <h5>Input Text Fields</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-                <a class="btn btn-default btn-xs full-box" href="javascript:;">
-                    <i class="fa fa-expand"></i>
-                </a>
-                <a class="btn btn-danger btn-xs close-box" href="javascript:;">
-                    <i class="fa fa-times"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
-        <form action="@url" method="@method" class="form-horizontal">
-            <div class="form-group">
-                @Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Client Name" })
-                </div>
-            </div>
-            @*<div class="form-group">
-                @Html.LabelFor(x => x.ContractIds, new { @class = "control-label col-lg-4" })
-                <div class="col-lg-3 chosen-autocomplete" data-type="@typeof(Contract).AssemblyQualifiedName">
-                    <select id="ContractIds" name="ContractIds" data-placeholder="Role..." multiple class="chosen-select">
-                        @foreach (NamedEntityDto item in Model.Contracts)
-                        {
-                            var isSelected = Model.Contracts != null && Model.Contracts.Select(x => x.Id).Contains(item.Id);
-                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
-                        }
-                    </select>
-                </div>
-            </div>*@
-            <div class="form-group">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<form action="@url" method="@method" class="form-horizontal">
+    @Html.Partial("Client", Model)
+    @Html.Partial("ContactDetail", Model)
+    @Html.Partial("PhysicalAddress", Model)
+    @Html.Partial("PostalAddress", Model)
+</form>
 

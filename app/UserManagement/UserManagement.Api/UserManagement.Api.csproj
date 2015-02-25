@@ -266,6 +266,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
@@ -513,6 +514,10 @@
     <Content Include="Views\Customer\PhysicalAddress.cshtml" />
     <Content Include="Views\Customer\PostalAddress.cshtml" />
     <Content Include="Views\Customer\Customer.cshtml" />
+    <Content Include="Views\Client\ContactDetail.cshtml" />
+    <Content Include="Views\Client\PostalAddress.cshtml" />
+    <Content Include="Views\Client\PhysicalAddress.cshtml" />
+    <Content Include="Views\Client\Client.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
