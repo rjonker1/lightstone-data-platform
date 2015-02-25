@@ -88,6 +88,7 @@
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\CustomerProfiles\CreateCustomerProfile.cs" />
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
+    <Compile Include="Commands\Entities\SoftDeleteEntity.cs" />
     <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\Packages\CreatePackage.cs" />
