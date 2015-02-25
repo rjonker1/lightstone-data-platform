@@ -19,7 +19,7 @@ namespace UserManagement.Domain.Entities.Tests
             var paymentType = new PaymentType("PaymentType");
             new PersistenceSpecification<Address>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.AddressType, "AddressType")
+                .CheckProperty(c => c.Type, "AddressType")
                 .CheckProperty(c => c.Line1, "Line1")
                 .CheckProperty(c => c.Line2, "Line2")
                 .CheckProperty(c => c.Suburb, "Suburb")

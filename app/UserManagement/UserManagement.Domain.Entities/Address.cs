@@ -5,7 +5,7 @@ namespace UserManagement.Domain.Entities
 {
     public class Address : Entity
     {
-        public virtual string AddressType { get; set; }
+        public virtual string Type { get; set; }
         public virtual string Line1 { get; set; }
         public virtual string Line2 { get; set; }
         public virtual string Suburb { get; set; }
@@ -16,9 +16,9 @@ namespace UserManagement.Domain.Entities
 
         protected Address() { }
 
-        public Address(string addressType, string line1, string line2, string suburb, string city, string country, string postalCode, Province province, Guid id = new Guid()) : base(id)
+        public Address(string type, string line1, string line2, string suburb, string city, string country, string postalCode, Province province, Guid id = new Guid()) : base(id)
         {
-            AddressType = addressType;
+            Type = type;
             Line1 = line1;
             Line2 = line2;
             Suburb = suburb;

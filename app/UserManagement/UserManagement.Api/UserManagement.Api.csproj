@@ -508,6 +508,11 @@
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Package\Save.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
+    <Content Include="Views\Customer\Billing.cshtml" />
+    <Content Include="Views\Customer\ContactDetail.cshtml" />
+    <Content Include="Views\Customer\PhysicalAddress.cshtml" />
+    <Content Include="Views\Customer\PostalAddress.cshtml" />
+    <Content Include="Views\Customer\Customer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

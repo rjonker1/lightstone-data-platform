@@ -1,0 +1,91 @@
+﻿@using Nancy.ViewEngines.Razor.HtmlHelpers;
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+
+<div class="box dark">
+    <header>
+        <div class="icons">
+            <i class="fa fa-edit"></i>
+        </div>
+        <h5>Customer Info</h5>
+        <div class="toolbar">
+            <nav style="padding: 8px;">
+                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
+                    <i class="fa fa-minus"></i>
+                </a>
+                @*<a class="btn btn-default btn-xs full-box" href="javascript:;">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs close-box" href="javascript:;">
+                        <i class="fa fa-times"></i>
+                    </a>*@
+            </nav>
+        </div>
+    </header>
+    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+        <div class="form-group">
+            @*@Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })*@
+            <label class="control-label col-lg-4">Name</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            @*@Html.LabelFor(x => x.AccountOwnerName, new { @class = "control-label col-lg-4" })*@
+            <label class="control-label col-lg-4">Account Owner Name</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            @*@Html.LabelFor(x => x.CommercialStateId, new { @class = "control-label col-lg-4" })*@
+            <label class="control-label col-lg-4">Commercial State</label>
+            <div class="col-lg-3">
+                @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
+                <select name="CommercialStateId" data-placeholder="Choose a province..." class="chosen-select">
+                    <option value=""></option>
+                    @foreach (SelectListItem item in ViewBag.CommercialStates.Value)
+                        {
+                            var isSelected = item.Value == Model.CommercialStateId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                        }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            @*@Html.LabelFor(x => x.CreateSourceId, new { @class = "control-label col-lg-4" })*@
+            <label class="control-label col-lg-4">Create Source</label>
+            <div class="col-lg-3">
+                @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
+                <select name="CreateSourceId" data-placeholder="Choose a province..." class="chosen-select">
+                    <option value=""></option>
+                    @foreach (SelectListItem item in ViewBag.CreateSources.Value)
+                        {
+                            var isSelected = item.Value == Model.CreateSourceId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                        }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            @*@Html.LabelFor(x => x.PlatformStatusId, new { @class = "control-label col-lg-4" })*@
+            <label class="control-label col-lg-4">Platform Status</label>
+            <div class="col-lg-3">
+                @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
+                <select name="PlatformStatusId" data-placeholder="Choose a province..." class="chosen-select">
+                    <option value=""></option>
+                    @foreach (SelectListItem item in ViewBag.PlatformStatuss.Value)
+                        {
+                            var isSelected = item.Value == Model.PlatformStatusId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                        }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-3">
+                <input type="submit" class="btn btn-primary" value="Save">
+            </div>
+        </div>
+    </div>
+</div>
