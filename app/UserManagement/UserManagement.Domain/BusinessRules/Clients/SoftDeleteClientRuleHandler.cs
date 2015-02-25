@@ -12,7 +12,9 @@ namespace UserManagement.Domain.BusinessRules.Clients
 
         public override void Handle(SoftDeleteClientRule command)
         {
-            throw new System.NotImplementedException();
+            //TODO: IsDeleted implementation on entity
+
+            command.Entity.IsDeleted = true;
         }
     }
 }
