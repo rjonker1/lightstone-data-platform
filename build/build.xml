@@ -20,8 +20,7 @@
       <description>Lightstone.DataPlatform.UserManagement.Api</description>
       <deploymentProject>LighstoneDataPlatform</deploymentProject>
       <includes>
-        <include pattern="bin\*.dll" to="content\bin"/>
-        <include pattern="bin\*.pdb" to="content\bin"/>
+        <include pattern="bin\" to="content\bin"/>
         <include pattern="Content\" to="content\Content"/>
         <include pattern="font-awesome\" to="content\font-awesome"/>       
         <include pattern="fonts\" to="content\fonts"/>       
