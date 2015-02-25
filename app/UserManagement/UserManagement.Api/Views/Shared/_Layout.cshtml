@@ -47,7 +47,6 @@
     <script src="~/Scripts/app/app.js"></script>
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
-        
         // Configure Toastr
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
@@ -59,7 +58,10 @@
             $.unblockUI();
         });
         $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
-            toastr["error"]("Error : " + jqxhr.responseJSON.errorMessage);
+            if (jqxhr.responseJSON)
+                toastr["error"]("Error", jqxhr.responseJSON.errorMessage);
+            else
+                toastr["error"]("Error", jqxhr.responseText);
             $.unblockUI();
         });
     </script>

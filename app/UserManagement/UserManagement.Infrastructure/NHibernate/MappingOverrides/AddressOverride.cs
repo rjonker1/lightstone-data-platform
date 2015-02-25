@@ -8,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Address> mapping)
         {
-            mapping.References(x => x.Province).Cascade.All();
+            mapping.References(x => x.Province).Cascade.SaveUpdate();
         }
     }
 }

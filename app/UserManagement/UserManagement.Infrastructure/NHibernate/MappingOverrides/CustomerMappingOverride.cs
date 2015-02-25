@@ -8,11 +8,12 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Customer> mapping)
         {
-            mapping.References(x => x.ContactDetail).Cascade.All();
-            mapping.References(x => x.CommercialState).Cascade.All();
-            mapping.References(x => x.CreateSource).Cascade.All();
-            mapping.References(x => x.PlatformStatus).Cascade.All();
-            mapping.HasManyToMany(x => x.Users).Cascade.All().Table("CustomerUser"); // Inverse as User entity responsible for saving
+            mapping.References(x => x.ContactDetail).Cascade.SaveUpdate();
+            mapping.References(x => x.CommercialState).Cascade.SaveUpdate();
+            mapping.References(x => x.CreateSource).Cascade.SaveUpdate();
+            mapping.References(x => x.PlatformStatus).Cascade.SaveUpdate();
+            mapping.References(x => x.Billing).Cascade.All();
+            mapping.HasManyToMany(x => x.Users).Cascade.SaveUpdate().Table("CustomerUser"); // Inverse as User entity responsible for saving
         }
     }
 }

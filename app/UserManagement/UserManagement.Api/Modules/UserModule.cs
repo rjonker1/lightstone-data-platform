@@ -36,8 +36,6 @@ namespace UserManagement.Api.Modules
                 dto.ClientUsers = clientUsersDto;
 
                 var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
-                //foreach (var clientuser in entity.ClientUsers)
-                //    clientuser.User = entity;
 
                 bus.Publish(new CreateUpdateEntity(entity, true));
 
@@ -59,8 +57,6 @@ namespace UserManagement.Api.Modules
                 dto.ClientUsers = clientUsersDto;
 
                 var entity = Mapper.Map(dto, users.Get(dto.Id));
-                //foreach (var clientuser in entity.ClientUsers)
-                //    clientuser.User = entity;
 
                 bus.Publish(new CreateUpdateEntity(entity, false));
 

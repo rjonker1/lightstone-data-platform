@@ -317,12 +317,6 @@ namespace UserManagement.Domain.Entities.NHibernate.Interceptors
             return base.OnSave(entity, id, state, propertyNames, types);
         }
 
-        //public override void BeforeTransactionCompletion(ITransaction tx)
-        //{
-        //    tx.Rollback();
-        //    base.BeforeTransactionCompletion(tx);
-        //}
-
         private void Footprint(object entity, object[] state, string[] propertyNames)
         {
             var time = DateTime.Now;

@@ -20,7 +20,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
                 .ForMember(dest => dest.CommercialState, opt => opt.MapFrom(x => Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(x.CommercialStateId, typeof(CommercialState)))))
                 .ForMember(dest => dest.CreateSource, opt => opt.MapFrom(x => Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(x.CreateSourceId, typeof(CreateSource)))))
                 .ForMember(dest => dest.PlatformStatus, opt => opt.MapFrom(x => Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(x.PlatformStatusId, typeof(PlatformStatus)))))
-                .ForMember(dest => dest.Billing, opt => opt.MapFrom(x => Mapper.Map<BillingDto, Billing>(x.BillingDto)));
+                .ForMember(dest => dest.Billing, opt => opt.MapFrom(x => Mapper.Map<CustomerDto, Billing>(x)));
         }
     }
 }

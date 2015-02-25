@@ -9,14 +9,13 @@ function initializeRoutes(sammy) {
     initializeClientRoutes(sammy);
     initializeUserRoutes(sammy);
     initializeContractRoutes(sammy);
-    //initializePackageRoutes(sammy);
     initializeLookupRoutes(sammy);
 }
 
 function initializeAuditLogRoutes(sammy) {
 
     sammy.get('/AuditLogs', function (context) {
-        context.load('/AuditLogs', { dataType: 'html' }).swap();
+        context.load('/AuditLogs', { dataType: 'html', cache: false }).swap();
     });
 
 }
@@ -24,10 +23,10 @@ function initializeAuditLogRoutes(sammy) {
 function initializeCusomerRoutes(sammy) {
 
     sammy.get('/Customers', function (context) {
-        context.load('/Customers', { dataType: 'html' }).swap();
+        context.load('/Customers', { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/Customers/Add', function(context) {
-        context.load('/Customers/Add', { dataType: 'html' })
+        context.load('/Customers/Add', { dataType: 'html', cache: false })
             .swap()
             .then(function() {
                 initializePlugins();
@@ -39,10 +38,12 @@ function initializeCusomerRoutes(sammy) {
                 context.redirect('/#/Customers');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
     sammy.get('/Customers/:id', function (context) {
-        context.load('/Customers/' + context.params.id, { dataType: 'html' })
+        context.load('/Customers/' + context.params.id, { dataType: 'html', cache: false })
             .swap()
             .then(function() {
                 initializePlugins();
@@ -58,7 +59,9 @@ function initializeCusomerRoutes(sammy) {
                 context.redirect('/#/Customers');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
     
 }
@@ -66,10 +69,10 @@ function initializeCusomerRoutes(sammy) {
 function initializeClientRoutes(sammy) {
 
     sammy.get('/Clients', function (context) {
-        context.load('/Clients', { dataType: 'html' }).swap();
+        context.load('/Clients', { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/Clients/Add', function (context) {
-        context.load('/Clients/Add', { dataType: 'html' })
+        context.load('/Clients/Add', { dataType: 'html', cache: false })
             .swap()
             .then(function() {
                 initializePlugins();
@@ -81,10 +84,12 @@ function initializeClientRoutes(sammy) {
                 context.redirect('/#/Clients');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false;
     });
     sammy.get('/Clients/:id', function (context) {
-        context.load('/Clients/' + context.params.id, { dataType: 'html' })
+        context.load('/Clients/' + context.params.id, { dataType: 'html', cache: false })
             .swap()
             .then(function() {
                 initializePlugins();
@@ -96,17 +101,19 @@ function initializeClientRoutes(sammy) {
                 context.redirect('/#/Clients');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
 }
 
 function initializeUserRoutes(sammy) {
     
     sammy.get('/Users', function (context) {
-        context.load('/Users', { dataType: 'html' }).swap();
+        context.load('/Users', { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/Users/Add', function (context) {
-        context.load('/Users/Add', { dataType: 'html' })
+        context.load('/Users/Add', { dataType: 'html', cache: false })
             .swap()
             .then(function () {
                 initializePlugins();
@@ -118,10 +125,12 @@ function initializeUserRoutes(sammy) {
                 context.redirect('/#/Users');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
     sammy.get('/Users/:id', function (context) {
-        context.load('/Users/' + context.params.id, { dataType: 'html' })
+        context.load('/Users/' + context.params.id, { dataType: 'html', cache: false })
             .swap()
             .then(function() {
                 initializePlugins();
@@ -133,17 +142,19 @@ function initializeUserRoutes(sammy) {
                 context.redirect('/#/Users');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
 }
 
 function initializeContractRoutes(sammy) {
 
     sammy.get('/Contracts', function (context) {
-        context.load('/Contracts', { dataType: 'html' }).swap();
+        context.load('/Contracts', { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/Contracts/Add', function (context) {
-        context.load('/Contracts/Add', { dataType: 'html' })
+        context.load('/Contracts/Add', { dataType: 'html', cache: false })
             .swap()
             .then(function () {
                 initializePlugins();
@@ -155,10 +166,12 @@ function initializeContractRoutes(sammy) {
                 context.redirect('/#/Contracts');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
     sammy.get('/Contracts/:id', function (context) {
-        context.load('/Contracts/' + context.params.id, { dataType: 'html' })
+        context.load('/Contracts/' + context.params.id, { dataType: 'html', cache: false })
             .swap()
             .then(function () {
                 initializePlugins();
@@ -170,52 +183,18 @@ function initializeContractRoutes(sammy) {
                 context.redirect('/#/Contracts');
             }
         });
-        return false; // Allow form submit
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false; 
     });
 }
-//function initializePackageRoutes(sammy) {
-
-//    sammy.get('/Packages', function (context) {
-//        context.load('/Packages', { dataType: 'html' }).swap();
-//    });
-//    sammy.get('/Packages/Add', function (context) {
-//        context.load('/Packages/Add', { dataType: 'html' })
-//            .swap()
-//            .then(function () {
-//                initializePlugins();
-//            });
-//    });
-//    sammy.post('/Packages', function (context) {
-//        context.load('/Packages', { dataType: 'html' })
-//            .swap()
-//            .then(function () {
-//                context.redirect('/#/Packages');
-//            });
-//        return true; // Allow form submit
-//    });
-//    sammy.get('/Packages/:id', function (context) {
-//        context.load('/Packages/' + context.params.id, { dataType: 'html' })
-//            .swap()
-//            .then(function () {
-//                initializePlugins();
-//            });
-//    });
-//    sammy.post('/Packages/:id', function (context) {
-//        context.load('/Packages/' + context.params.id, { dataType: 'html' })
-//            .swap()
-//            .then(function () {
-//                context.redirect('/#/Packages');
-//            });
-//        return true; // Allow form submit
-//    });
-//}
 
 function initializeLookupRoutes(sammy) {
     sammy.get('/Lookups/:type', function (context) {
-        context.load('/Lookups/' + context.params.type, { dataType: 'html' }).swap();
+        context.load('/Lookups/' + context.params.type, { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/Lookups/:type/:filter', function (context) {
-        //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html' }).swap();
+        //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
     });
 }
 
