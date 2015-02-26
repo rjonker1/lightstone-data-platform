@@ -12,26 +12,28 @@ namespace UserManagement.Domain.BusinessRules.Users
     {
 
         private readonly IRepository<ClientUser> _clientUsers;
+        private readonly IRepository<UserRole> _userRoles;
 
-        public SoftDeleteUserRuleHandler(IRepository<ClientUser> clientUsers)
+        public SoftDeleteUserRuleHandler(IRepository<ClientUser> clientUsers, IRepository<UserRole> userRoles)
         {
             _clientUsers = clientUsers;
+            _userRoles = userRoles;
         }
 
         public override void Handle(SoftDeleteUserRule command)
         {
 
             var entity = command.Entity;
-            var hasClientUser = _clientUsers.Where(x => x.User.Id.Equals(entity.Id));
+            //var hasClientUser = _clientUsers.Where(x => x.User.Id.Equals(entity.Id));
 
-            if (hasClientUser.Any())
-            {
-                var exception = new LightstoneAutoException("User cannot be deleted due to Client - User relationship".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception);
-                throw exception;
-            }
+            //if (hasClientUser.Any())
+            //{
+            //    var exception = new LightstoneAutoException("User cannot be deleted due to Client - User relationship".FormatWith(entity.GetType().Name));
+            //    this.Warn(() => exception);
+            //    throw exception;
+            //}
 
-            entity.IsDeleted = true;
+            entity.IsActive = false;
         }
     }
 }

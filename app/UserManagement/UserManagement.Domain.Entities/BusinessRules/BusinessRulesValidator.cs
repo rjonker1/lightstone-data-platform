@@ -22,6 +22,7 @@ namespace UserManagement.Domain.Entities.BusinessRules
             if (enity is User)
             {
                 if(func.Equals("Create")) _handler.Handle(new CreateUserRule(enity as User));
+                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteUserRule(enity as User));
             }
 
             else if (enity is Customer && func.Equals("Create"))
