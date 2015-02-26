@@ -1,16 +1,12 @@
 ﻿@using System
-@using System.Collections
-@using System.Collections.Generic
 @using Nancy.ViewEngines.Razor.HtmlHelpers;
 @using UserManagement.Api.ViewModels
-@using UserManagement.Domain.Dtos
-@using UserManagement.Domain.Entities
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.PackageDto>
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.NamedEntityDto>
 @{
     var isCreate = Model.Id == new Guid();
-    var pageHeadingViewModel = new PageHeadingViewModel("Package detail", isCreate ? "Add" : "Update");
+    var pageHeadingViewModel = new PageHeadingViewModel("Lookups detail", isCreate ? "Create" : "Update");
     var method = isCreate ? "POST" : "POST";
-    var url = isCreate ? "/Packages" : "/Packages/" + Model.Id;
+    var url = isCreate ? "/Lookups" : "/Lookups/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)
 
@@ -25,21 +21,16 @@
                 <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
                     <i class="fa fa-minus"></i>
                 </a>
-                <a class="btn btn-default btn-xs full-box" href="javascript:;">
-                    <i class="fa fa-expand"></i>
-                </a>
-                <a class="btn btn-danger btn-xs close-box" href="javascript:;">
-                    <i class="fa fa-times"></i>
-                </a>
             </nav>
         </div>
     </header>
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <form action="@url" method="@method" class="form-horizontal">
             <div class="form-group">
+                @Html.HiddenFor(x => x.AssemblyQualifiedName)
                 @Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })
                 <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Package Name" })
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Name" })
                 </div>
             </div>
             <div class="form-group">

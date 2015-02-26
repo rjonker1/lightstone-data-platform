@@ -497,8 +497,6 @@
     <Content Include="Views\Index\Home.cshtml" />
     <Content Include="Views\Contract\Index.cshtml" />
     <Content Include="Views\Contract\Save.cshtml" />
-    <Content Include="Views\Package\Index.cshtml" />
-    <Content Include="Views\Package\Save.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
     <Content Include="Views\Customer\Billing.cshtml" />
     <Content Include="Views\Customer\ContactDetail.cshtml" />
@@ -509,6 +507,7 @@
     <Content Include="Views\Client\PostalAddress.cshtml" />
     <Content Include="Views\Client\PhysicalAddress.cshtml" />
     <Content Include="Views\Client\Client.cshtml" />
+    <Content Include="Views\Lookup\Save.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
