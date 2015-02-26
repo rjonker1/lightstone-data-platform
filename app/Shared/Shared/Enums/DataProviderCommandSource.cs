@@ -16,6 +16,8 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] Anpr,
         [EnumMember] Jis,
         [EnumMember] PCubedFica,
-        [EnumMember] SignioDecryptDriversLicense
+        [EnumMember] SignioDecryptDriversLicense,
+        [EnumMember] Lsp
+
     }
 }
