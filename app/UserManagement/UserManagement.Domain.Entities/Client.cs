@@ -3,7 +3,7 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public  class Client : NamedEntity
+    public class Client : NamedEntity
     {
         public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }

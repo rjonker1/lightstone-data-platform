@@ -85,6 +85,7 @@
     <Compile Include="BusinessRules\Customers\CreateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRuleHandler.cs" />
+    <Compile Include="BusinessRules\Users\SoftDeleteUserRuleHandler.cs" />
     <Compile Include="CommandHandlers\Addresses\CreateAddressHandler.cs" />
     <Compile Include="CommandHandlers\AuditLogs\CreateAuditLogHandler.cs" />
     <Compile Include="CommandHandlers\Billings\CreateBillingHandler.cs" />

@@ -73,6 +73,7 @@
     <Compile Include="BusinessRules\Customers\CreateCustomerRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
+    <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
     <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\Billings\CreateBilling.cs" />
