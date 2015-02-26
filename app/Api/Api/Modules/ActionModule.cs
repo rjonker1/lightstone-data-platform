@@ -27,7 +27,7 @@ namespace Api.Modules
                 return Response.AsJson(metaData);
             };
 
-            Post["/action/SearchUsingLicensePlateNumber"] = parameters =>
+            Post["/action/LicensePlateNumberSearch"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();
 

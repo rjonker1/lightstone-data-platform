@@ -37,8 +37,8 @@ namespace UserManagement.Domain.CommandHandlers.Contracts
                 Id = contractId,
                 Packages = new HashSet<Package>()
                 {
-                    new Package("VVI Product", new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB")),
-                    new Package("VVI Product", new Guid("E84C2222-C0F0-4B81-A3DD-75CE4DD5D8AB"))
+                    new Package("VVI Product", new Guid("FBCD304A-ACC8-4F30-BF1E-D084256573A2")),
+                    new Package("VVI Product", new Guid("FBCD304A-ACC8-4F30-BF1E-D084256573A2"))
                 }
             };
         }
