@@ -19,8 +19,10 @@ namespace UserManagement.Domain.Entities.BusinessRules
         //Run rules based on entity type of the currently transacted entity.
         public void CheckRules(object enity, string func)
         {
-            if (enity is User && func.Equals("Create"))
-                 _handler.Handle(new CreateUserRule(enity as User));
+            if (enity is User)
+            {
+                if(func.Equals("Create")) _handler.Handle(new CreateUserRule(enity as User));
+            }
 
             else if (enity is Customer && func.Equals("Create"))
                 _handler.Handle(new CreateCustomerRule(enity as Customer));
