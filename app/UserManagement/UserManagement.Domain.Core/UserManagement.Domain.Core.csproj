@@ -69,6 +69,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\INamedEntity.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
+    <Compile Include="Helpers\PagedList.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NHibernate\Attributes\DomainSignatureAttribute.cs" />
