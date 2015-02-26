@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
+using NHibernate.Util;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
@@ -12,6 +15,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
     {
 
         private readonly IRepository<Customer> _customers;
+        private readonly IRepository<User> _users;
 
         public SoftDeleteCustomerRuleHandler(IRepository<Customer> customers)
         {
@@ -22,9 +26,9 @@ namespace UserManagement.Domain.BusinessRules.Customers
         {
 
             var entity = command.Entity;
-            var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Where(u => u.Users.Any());
+            var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Users.Where(usr => usr.IsActive != null && usr.IsActive.Value.Equals(true))).ToList();
 
-            if (hasCustomerUser.Any())
+            if (hasCustomerUser.Any(user => user.Any()))
             {
                 var exception = new LightstoneAutoException("Customer cannot be deleted due to Customer - User relationship".FormatWith(entity.GetType().Name));
                 this.Warn(() => exception);
