@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Configuration;
+﻿using Shared.Configuration;
 using Topshelf;
 
 namespace Workflow.Billing.Consumer

@@ -7,7 +7,7 @@ namespace Workflow.Billing.Consumer
 {
     public class BillingService : IBillingService
     {
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ILog log = LogManager.GetLogger<BillingService>();
         private IBus bus;
 
         public void Start()
@@ -27,7 +27,7 @@ namespace Workflow.Billing.Consumer
                 bus.Dispose();
             }
 
-            log.DebugFormat("Stopped billing service");
+           log.DebugFormat("Stopped billing service");
         }
     }
 }

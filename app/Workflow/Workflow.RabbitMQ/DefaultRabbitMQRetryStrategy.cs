@@ -1,5 +1,5 @@
-﻿using BuildingBlocks.Extentions;
-using BuildingBlocks.Recovery.Strategies;
+﻿using Shared.Extentions;
+using Shared.Recovery.Strategies;
 
 namespace Workflow.RabbitMQ
 {
