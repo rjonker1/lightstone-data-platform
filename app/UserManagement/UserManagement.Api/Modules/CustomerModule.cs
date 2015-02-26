@@ -65,7 +65,7 @@ namespace UserManagement.Api.Modules
 
                 bus.Publish(new SoftDeleteEntity(entity, "Delete"));
 
-                return null;
+                return Response.AsJson("Customer has been soft deleted");
             };
         }
     }

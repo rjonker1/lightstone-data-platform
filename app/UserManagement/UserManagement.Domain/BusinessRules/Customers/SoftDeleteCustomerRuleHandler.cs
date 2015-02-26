@@ -22,7 +22,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
         {
 
             var entity = command.Entity;
-            var hasCustomerUser = _customers.Where(x => x.Users.Any());
+            var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Where(u => u.Users.Any());
 
             if (hasCustomerUser.Any())
             {
