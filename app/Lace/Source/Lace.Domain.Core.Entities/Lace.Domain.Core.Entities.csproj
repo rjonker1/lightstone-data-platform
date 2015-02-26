@@ -72,6 +72,7 @@
     <Compile Include="JisResponseHandled.cs" />
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="LightstoneResponseHandled.cs" />
+    <Compile Include="LspModels.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PCubedFicaVerficationResponseHandled.cs" />
     <Compile Include="PCubedFicaVerficationResponse.cs" />

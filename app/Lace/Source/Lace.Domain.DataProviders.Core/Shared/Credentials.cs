@@ -19,5 +19,10 @@ namespace Lace.Domain.DataProviders.Core.Shared
         public static Func<string> DecryptyDriversLicenseApiOperation = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseApiOperation");
         public static Func<string> DecryptyDriversLicenseApiUrl = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyDriversLicenseApiUrl");
 
+
+        public static Func<string> DecryptyLspServiceFuncUsername = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyLspServiceFuncUsername");
+        public static Func<string> DecryptyLspServicePassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptySlpServicePassword");
+        public static Func<string> DecryptyLspServiceOperation = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyLspServiceOperation");
+
     }
 }

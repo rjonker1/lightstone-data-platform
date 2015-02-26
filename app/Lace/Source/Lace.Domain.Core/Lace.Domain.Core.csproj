@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLspDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
+    <Compile Include="Contracts\DataProviders\Lsp\IRespondWithLspInformation.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideContextForRequest.cs" />
