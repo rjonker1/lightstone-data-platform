@@ -26,7 +26,8 @@ namespace UserManagement.Domain.BusinessRules.Customers
         {
 
             var entity = command.Entity;
-            var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Users.Where(usr => usr.IsActive != null && usr.IsActive.Value.Equals(true))).ToList();
+            //var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Users.Where(usr => usr.IsActive != null && usr.IsActive.Value.Equals(true))).ToList();
+            var hasCustomerUser = _customers.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Users.Where(usr => usr.IsActive.Equals(true))).ToList();
 
             if (hasCustomerUser.Any(user => user.Any()))
             {
@@ -35,7 +36,7 @@ namespace UserManagement.Domain.BusinessRules.Customers
                 throw exception;
             }
 
-            entity.IsDeleted = true;
+            entity.IsActive = false;
         }
     }
 }

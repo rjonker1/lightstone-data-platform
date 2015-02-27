@@ -16,6 +16,6 @@ namespace UserManagement.Domain.Dtos
         public ContactDetailDto ContactDetailDto { get; set; }
         public IEnumerable<Guid> ContractIds { get; set; }
         public IEnumerable<NamedEntityDto> Contracts { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsActive { get; set; }
     }
 }

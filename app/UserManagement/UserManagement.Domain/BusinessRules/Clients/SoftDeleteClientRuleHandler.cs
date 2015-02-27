@@ -22,7 +22,7 @@ namespace UserManagement.Domain.BusinessRules.Clients
         {
 
             var entity = command.Entity;
-            var hasClientUser = _clientUsers.Where(x => x.Client.Id.Equals(entity.Id)).Select(u => u.User).Where(usr => usr.IsActive != null && usr.IsActive.Value.Equals(true)).ToList();
+            var hasClientUser = _clientUsers.Where(x => x.Client.Id.Equals(entity.Id)).Select(u => u.User).Where(usr => usr.IsActive.Equals(true)).ToList();
             //var hasClientUser = _clientUsers.Where(x => x.Client.Id.Equals(entity.Id));
 
             if (hasClientUser.Any())
@@ -32,7 +32,7 @@ namespace UserManagement.Domain.BusinessRules.Clients
                 throw exception;
             }
 
-            entity.IsDeleted = true;
+            entity.IsActive = false;
         }
     }
 }
