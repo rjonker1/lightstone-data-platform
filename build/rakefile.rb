@@ -1,6 +1,42 @@
 require 'albacore'
 require 'fileutils'
 
+@solutions = []
+@unit_tests = []
+@acceptance_tests = []
+@service_specs = []
+@custom_specs = []
+@assembly_info = ''
+@assembly_company_name = ''
+@assembly_description = ''
+@config = {
+	:xunit_executable => '../tools/xunit/xunit.console.clr4.exe',
+	:artifact_folder => 'artifacts',
+	:nuget => {
+		:specs_folder => 'nuget/specs',
+		:package_folder => 'nuget/packages',
+		:prefix => '',
+		:executable => '../tools/nuget/nuget.exe',
+	},
+	:octupus => {
+  		:server => 'http://dev.octopus/api',
+  		:apiKey => 'API-ONI3VWBDTIWUFPOJOJIOMOC7AZA'
+ 	}
+}
+
+# CONFIG #
+Albacore.configure do |config|
+	config.msbuild.targets = [:clean, :build]
+	config.msbuild.properties = {
+									:configuration => :Release,
+									:documentationFile => "bin/iBroker.Api.XML",
+									:nowarn => 1591
+								}
+	config.msbuild.verbosity = "minimal"
+
+	config.xunit.command = @config[:xunit_executable]
+end
+
 class Include
 	def initialize(pattern, to)
 		self.pattern = pattern
@@ -28,22 +64,23 @@ class Dependency
 end
 
 class SingleBuildConfig
-	def initialize(folder, author, deploy, description, version)
+	def initialize(name, folder, author, deploy, description, version, deployment_project)
+		self.name = name
 		self.folder = folder
 		self.author = author
 		self.deploy = deploy
 		self.description = description
+		self.deployment_project = deployment_project
 		self.version = version
 		self.includes = []
-		self.dependencies = []
+		self.dependencies = []		
 	end
 
-	attr_accessor :folder, :author, :deploy, :description, :includes, :dependencies, :version
+	attr_accessor :name, :folder, :author, :deploy, :description, :includes, :dependencies, :version, :deployment_project
 
 	def to_s
-		"Folder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description}"
+		"Name: #{name},\nFolder: #{folder},\nAuthor: #{author},\nDeploy: #{deploy},\nDescription: #{description},\nDeploymentProject: #{deployment_project}"
 	end
-
 end
 
 class BuildConfig
@@ -54,179 +91,50 @@ class BuildConfig
 	def Configs
 		@configs
 	end
-
-end
-
-
-@config = {
-	:xunit_executable => '../tools/xunit/xunit.console.clr4.exe',
-	:artifact_folder => 'artifacts',
-	:nuget => {
-		:specs_folder => 'nuget/specs',
-		:package_folder => 'nuget/packages',
-		:prefix => '',
-		:executable => '../tools/nuget/nuget.exe',
-	},
-	:octupus => {
-		:server => 'http://deploy.gaul:8883/api',
-		:apiKey => 'A3IRIEKVHRZNTTCYCTRAI8NET18'
-	}
-}
-
-# CONVENTIONS #
-namespace :convention do
-	task :before_build => [:solutions, :assembly_info] do
-
-	end
-
-	task :after_build => [:tests, :spec_generation] do
-	end
-
-	task :assembly_info do
-		@assembly_info = Dir.glob("../**/AssemblyInfo.cs")[0]
-		puts "Found an AssemblyInfo.cs file at '#{@assembly_info}'"
-	end
-
-	task :spec_generation do
-
-		@settings = BuildConfig.new
-
-		build_config = File.join("build.xml")
-
-		xml = File.read(build_config)
-		doc, package_folders = REXML::Document.new(xml), []
-		doc.elements.each('build/nugets/nuget') do |p|
-
-			@current = SingleBuildConfig.new(p.get_elements("folder")[0].text,
-				p.get_elements("author")[0].text,
-				p.attributes["deploy"] == nil ? false : p.attributes["deploy"] == "true" ? true : false,
-				p.get_elements("description")[0].text,
-				get_version())
-
-			p.get_elements('includes/*').each do |e|
-				@current.includes << Include.new(e.attributes["pattern"], e.attributes["to"])
-			end
-
-			p.get_elements('dependencies/*').each do |e|
-				@current.dependencies << Dependency.new(e.attributes["id"], e.attributes["version"])
-			end
-
-			#@custom_specs << "../app/#{folder_name}"
-			@settings.Configs << @current
-		end
-
-		puts "BUILD CONFIG"
-		counter = 1
-		@settings.Configs.each do |c|
-			puts "Item #{counter} "
-			puts "#{c}"
-			c.includes.each do |i|
-				puts "#{i}"
-			end
-			c.dependencies.each do |d|
-				puts "#{d}"
-			end
-			counter = counter + 1
-		end
-	end
-
-	task :tests do
-		@unit_tests = []
-		@acceptance_tests = []
-
-		potential_tests = Dir.glob("../**/*.Tests.dll")
-		puts "Found #{potential_tests.length} test assemblies"
-
-		potential_tests.each do |test_assembly|
-			puts "Potential test assembly '#{test_assembly}'"
-			if test_assembly.downcase.index("libs") == nil && # ignore lib tests
-				test_assembly.downcase.index("bin/release") != nil # only release build tests
-
-				@unit_tests << test_assembly unless test_assembly.downcase.index("acceptance") != nil || test_assembly.downcase.index("infrastructure") != nil
-
-				@acceptance_tests << test_assembly if test_assembly.downcase.index("acceptance") != nil || test_assembly.downcase.index("infrastructure") != nil
-			else
-				puts "Ignoring #{test_assembly} as a test assembly."
-			end
-		end
-
-		puts "#{@unit_tests.length} unit test assemblies have been found."
-		puts "#{@acceptance_tests.length} acceptance test assemblies have been found."
-	end
-
-	task :solutions do
-		Dir.glob('../**/*.sln').each do |solution_file|
-			if solution_file.index("libs") == nil
-				@solutions << solution_file
-			else
-				puts "Ignoring #{solution_file} as a solution file to build"
-			end
-		end
-
-		puts "#{@solutions.length} solutions found"
-	end
 end
 
 # VERSIONING #
 def get_version
 
   if ENV['BUILD_NUMBER'].nil?
-	'1.0.0.94'
+	'0.0.0.1'
   else
 	"#{ENV['BUILD_NUMBER']}"
   end
 end
 
 def custom_build
-
 	custom_build_file = File.join("build.xml")
 
 	return File.exists?(custom_build_file)
-
 end
 
-namespace :versioning do
-	task :default => [:assemblyinfo] do
+namespace :environment do
+	task :default => ['specs', 'artifact_folder'] do
 	end
 
-	task :assemblyinfo do
-		if @assembly_info == nil
-			puts "Could not find an assemblyinfo.cs file"
-		else
-			puts "Updating #{@assembly_info} with the latest version"
-			File.open(@assembly_info, 'r') do |file|
-				file.readlines.each do | line |
-					if line.downcase.index("assemblycompany") != nil
-						@assembly_company_name = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
-					end
-					if line.downcase.index("assemblydescription") != nil
-						@assembly_description = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
-					end
-				end
-			end
-
-			asm = AssemblyInfo.new
-			asm.version = get_version()
-			asm.output_file = @assembly_info
-			asm.company_name = @assembly_company_name
-			asm.description = @assembly_description
-			asm.execute
+	task :artifact_folder do
+		puts "Removing and adding #{@config[:artifact_folder]}"
+		if !File.directory?(@config[:artifact_folder])
+			FileUtils.mkdir_p @config[:artifact_folder]
 		end
+		Dir.glob(File.join(Dir.pwd, @config[:artifact_folder], "/*.*")).each { |f| File.delete f }
 	end
 
-end
+	task :specs do
+		puts "Removing and adding #{@config[:nuget][:specs_folder]}"
+		if !File.directory?(@config[:nuget][:specs_folder])
+			FileUtils.mkdir_p @config[:nuget][:specs_folder]
+		end
+		Dir.glob(File.join(Dir.pwd, @config[:nuget][:specs_folder], "/*.*")).each { |f| File.delete f }
 
-# CONFIG #
-Albacore.configure do |config|
-	config.msbuild.targets = [:clean, :build]
-	config.msbuild.properties = {
-									:configuration => :Release,
-									:documentationFile => "bin/iBroker.Api.XML",
-									:nowarn => 1591
-								}
-	config.msbuild.verbosity = "minimal"
 
-	config.xunit.command = @config[:xunit_executable]
+		puts "Removing and adding #{@config[:nuget][:package_folder]}"
+		if !File.directory?(@config[:nuget][:package_folder])
+			FileUtils.mkdir_p @config[:nuget][:package_folder]
+		end
+		Dir.glob(File.join(Dir.pwd, @config[:nuget][:package_folder], "/*.*")).each { |f| File.delete f }
+	end
 end
 
 # BUILD #
@@ -295,52 +203,23 @@ namespace :testing do
 	end
 end
 
-# DEPLOY #
-namespace :deploy do
-	task :default do
-		@settings.Configs.each do |c|
-			if c.deploy
-				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
-				cmd = Exec.new
-				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
-				cmd.execute
-			end
-		end
-	end
-
-	task :to_test => ['convention:spec_generation', 'deploy:deploy_to_test'] do
-	end
-
-	task :deploy_to_test do
-		@settings.Configs.each do |c|
-			if c.deploy
-				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
-				cmd = Exec.new
-				cmd.command = '../tools/octopus/Octo.exe'
-				cmd.parameters = 'create-release --force --waitfordeployment --deployto=Test --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
-				cmd.execute
-			end
-		end
-	end
-end
-
 # PACKAGE #
 namespace :package do
-	task :default => [:specs, :pack, :zip] do
+	task :default => [:specs, :pack] do
 	end
 
-	task :specs do
+	task :specs => ['convention:spec_generation'] do
 		@settings.Configs.each do |c|
-			output_file = "#{c.folder}.#{get_version()}.nuspec"
+
+			output_file = "#{c.name}.#{get_version()}.nuspec"
 			nuspec_file = File.join(Dir.pwd, @config[:nuget][:specs_folder], output_file)
 
 			nuspec = Nuspec.new
-			nuspec.id = c.folder
+			nuspec.id = c.name
 			nuspec.version = c.version
 			nuspec.authors = c.author
 			nuspec.description = c.description
-			nuspec.title = c.folder
+			nuspec.title = c.name
 			nuspec.output_file = nuspec_file
 
 			c.includes.each do |i|
@@ -356,33 +235,6 @@ namespace :package do
 		end
 	end
 
-	task :zip do
-		puts "#{(@settings.Configs).length} apps to zip found"
-
-		@settings.Configs.each do |c|
-			folder = "../app/#{c.folder}"
-			spec_file = "#{c.folder}.#{get_version()}.nuspec"
-			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
-			base_path = File.join(folder, 'bin/release')
-
-			if !File.exists?(base_path)
-				base_path = folder
-			end
-			puts "Zipping '#{folder}' as '#{c.folder}.zip' to '#{@config[:artifact_folder]}'"
-
-			zip = ZipDirectory.new
-
-			if File.directory?(@config[:artifact_folder])
-				zip.directories_to_zip = folder
-				zip.output_file = "#{c.folder}.zip"
-				zip.output_path = @config[:artifact_folder]
-				zip.execute
-			end
-
-			zip = nil
-		end
-	end
-
 	task :pack do
 		puts "#{@settings.Configs.length} nuspec definitions to pack"
 
@@ -390,8 +242,8 @@ namespace :package do
 		package_folder = File.join(Dir.pwd, @config[:nuget][:package_folder])
 
 		@settings.Configs.each do |c|
-			folder = "../app/#{c.folder}"
-			spec_file = "#{c.folder}.#{get_version()}.nuspec"
+			folder = "../#{c.folder}"
+			spec_file = "#{c.name}.#{get_version()}.nuspec"
 			spec_file_location = File.join(Dir.pwd, @config[:nuget][:specs_folder], spec_file)
 			base_path = File.join(folder, 'bin/release')
 
@@ -409,48 +261,167 @@ namespace :package do
 	end
 end
 
-
-namespace :environment do
-	task :default => ['specs', 'artifact_folder'] do
+# DEPLOY #
+namespace :deploy do
+	task :default do
+		@settings.Configs.each do |c|
+			if c.deploy
+				puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
+				cmd = Exec.new
+				cmd.command = '../tools/octopus/Octo.exe'
+				cmd.parameters = 'create-release --ignoreexisting --force --waitfordeployment --deployto=TeamCity --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.deployment_project + ' --apiKey=' + @config[:octupus][:apiKey]
+				cmd.execute
+			end
+		end
 	end
 
-	task :artifact_folder do
-		puts "Removing and adding #{@config[:artifact_folder]}"
-		if !File.directory?(@config[:artifact_folder])
-			FileUtils.mkdir_p @config[:artifact_folder]
-		end
-		Dir.glob(File.join(Dir.pwd, @config[:artifact_folder], "/*.*")).each { |f| File.delete f }
+	#task :to_test => ['convention:spec_generation', 'deploy:deploy_to_test'] do
+	#end
+
+	# task :deploy_to_test do
+	# 	@settings.Configs.each do |c|
+	# 		if c.deploy
+	# 			puts "Deploying #{c.folder} to project #{c.folder} with version number #{get_version}"
+	# 			cmd = Exec.new
+	# 			cmd.command = '../tools/octopus/Octo.exe'
+	# 			cmd.parameters = 'create-release --force --waitfordeployment --deployto=Test --version=' + get_version() + ' --server=' + @config[:octupus][:server] + ' --project=' + c.folder + ' --apiKey=' + @config[:octupus][:apiKey]
+	# 			cmd.execute
+	# 		end
+	# 	end
+	# end
+end
+
+# CONVENTIONS #
+namespace :convention do
+	task :before_build => [:solutions, :assembly_info] do
+
 	end
 
-	task :specs do
-		puts "Removing and adding #{@config[:nuget][:specs_folder]}"
-		if !File.directory?(@config[:nuget][:specs_folder])
-			FileUtils.mkdir_p @config[:nuget][:specs_folder]
-		end
-		Dir.glob(File.join(Dir.pwd, @config[:nuget][:specs_folder], "/*.*")).each { |f| File.delete f }
+	task :after_build => [:tests, :spec_generation] do
+	end
 
+	task :assembly_info do
+		@assembly_info = Dir.glob("../**/AssemblyInfo.cs")[0]
+		puts "Found an AssemblyInfo.cs file at '#{@assembly_info}'"
+	end
 
-		puts "Removing and adding #{@config[:nuget][:package_folder]}"
-		if !File.directory?(@config[:nuget][:package_folder])
-			FileUtils.mkdir_p @config[:nuget][:package_folder]
+	task :spec_generation do
+
+		@settings = BuildConfig.new
+
+		build_config = File.join("build.xml")
+
+		xml = File.read(build_config)
+		doc, package_folders = REXML::Document.new(xml), []
+		doc.elements.each('build/nugets/nuget') do |p|
+
+			@current = SingleBuildConfig.new(
+				p.get_elements("name")[0].text,
+				p.get_elements("folder")[0].text,
+				p.get_elements("author")[0].text,
+				p.attributes["deploy"] == nil ? false : p.attributes["deploy"] == "true" ? true : false,
+				p.get_elements("description")[0].text,
+				get_version(),
+				p.get_elements("deploymentProject")[0] == nil ? "" : p.get_elements("deploymentProject")[0].text)
+
+			p.get_elements('includes/*').each do |e|
+				@current.includes << Include.new(e.attributes["pattern"], e.attributes["to"])
+			end
+
+			p.get_elements('dependencies/*').each do |e|
+				@current.dependencies << Dependency.new(e.attributes["id"], e.attributes["version"])
+			end
+
+			#@custom_specs << "../app/#{folder_name}"
+			@settings.Configs << @current
 		end
-		Dir.glob(File.join(Dir.pwd, @config[:nuget][:package_folder], "/*.*")).each { |f| File.delete f }
+
+		puts "BUILD CONFIG"
+		counter = 1
+		@settings.Configs.each do |c|
+			puts "Item #{counter} "
+			puts "#{c}"
+			c.includes.each do |i|
+				puts "#{i}"
+			end
+			c.dependencies.each do |d|
+				puts "#{d}"
+			end
+			counter = counter + 1
+		end
+	end
+
+	task :tests do
+		@unit_tests = []
+		@acceptance_tests = []
+
+		potential_tests = Dir.glob("../**/*.Tests.dll")
+		puts "Found #{potential_tests.length} test assemblies"
+
+		potential_tests.each do |test_assembly|
+			puts "Potential test assembly '#{test_assembly}'"
+			if test_assembly.downcase.index("libs") == nil && # ignore lib tests
+				test_assembly.downcase.index("bin/release") != nil # only release build tests
+
+				@unit_tests << test_assembly unless test_assembly.downcase.index("acceptance") != nil || test_assembly.downcase.index("infrastructure") != nil
+
+				@acceptance_tests << test_assembly if test_assembly.downcase.index("acceptance") != nil || test_assembly.downcase.index("infrastructure") != nil
+			else
+				puts "Ignoring #{test_assembly} as a test assembly."
+			end
+		end
+
+		puts "#{@unit_tests.length} unit test assemblies have been found."
+		puts "#{@acceptance_tests.length} acceptance test assemblies have been found."
+	end
+
+	task :solutions do
+		Dir.glob('../app/*.sln').each do |solution_file|
+			if solution_file.index("libs") == nil
+				@solutions << solution_file
+			else
+				puts "Ignoring #{solution_file} as a solution file to build"
+			end
+		end
+
+		puts "#{@solutions.length} solutions found"
 	end
 end
 
-@solutions = []
-@unit_tests = []
-@acceptance_tests = []
-@service_specs = []
-@custom_specs = []
-@assembly_info = ''
-@assembly_company_name = ''
-@assembly_description = ''
+namespace :versioning do
+	task :default => [:assemblyinfo] do
+	end
+
+	task :assemblyinfo do
+		if @assembly_info == nil
+			puts "Could not find an assemblyinfo.cs file"
+		else
+			puts "Updating #{@assembly_info} with the latest version"
+			File.open(@assembly_info, 'r') do |file|
+				file.readlines.each do | line |
+					if line.downcase.index("assemblycompany") != nil
+						@assembly_company_name = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
+					end
+					if line.downcase.index("assemblydescription") != nil
+						@assembly_description = /([""'])(?:(?=(\\?))\2.)*?\1/.match(line).to_s.gsub( /\A"/m, "" ).gsub( /"\Z/m, "" )
+					end
+				end
+			end
+
+			asm = AssemblyInfo.new
+			asm.version = get_version()
+			asm.output_file = @assembly_info
+			asm.company_name = @assembly_company_name
+			asm.description = @assembly_description
+			asm.execute
+		end
+	end
+end
 
 task :team_city => [
 	'environment:default',
 	'build:default',
-	'testing:unit',
+	#'testing:unit',
 	'package:default'
 	] do
 end
@@ -462,7 +433,7 @@ task :acceptance_tests => ['testing:acceptance'] do end
 task :default => [
 	'environment:default',
 	'build:default',
-	'testing:unit',
+	#'testing:unit',
 	'package:default'
 	] do
 end
