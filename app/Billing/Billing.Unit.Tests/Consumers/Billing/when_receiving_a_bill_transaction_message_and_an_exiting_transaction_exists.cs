@@ -48,7 +48,7 @@ namespace Billing.Api.Tests.Consumers.Billing
         [Observation]
         public void a_new_transaction_is_not_created()
         {
-            repository.IsNeverCalled(r => r.Add(It.IsAny<InvoiceTransaction>()));
+            repository.VerifySet(r => It.IsAny<InvoiceTransaction>(), Times.Never());
         }
     }
 }
