@@ -93,6 +93,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Automapping\AutoMapperConfiguration.cs" />
+    <Compile Include="Billing\CreateBillingResponse.cs" />
     <Compile Include="Dto\ContractResponseDto.cs" />
     <Compile Include="Dto\PackageDto.cs" />
     <Compile Include="Dto\RequestDto.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Metadata\IApiMetaDataGenerator.cs" />
     <Compile Include="Extensions\PiplineExtensions.cs" />
     <Compile Include="Requests\LaceRequest.cs" />
-    <Compile Include="Transactions\CreateBillingTransaction.cs" />
+    <Compile Include="Billing\CreateBillingTransaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Api.Domain.Core\Api.Domain.Core.csproj">

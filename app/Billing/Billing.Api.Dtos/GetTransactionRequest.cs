@@ -15,4 +15,18 @@ namespace Billing.Api.Dtos
             TransactionId = transactionId;
         }
     }
+
+    public class GetResponseRequest
+    {
+        public Guid TransactionId { get; private set; }
+
+        public GetResponseRequest()
+        {
+        }
+
+        public GetResponseRequest(Guid transactionId)
+        {
+            TransactionId = transactionId;
+        }
+    }
 }

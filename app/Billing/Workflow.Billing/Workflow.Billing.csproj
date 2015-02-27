@@ -62,14 +62,18 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Consumers\BillResponseConsumer.cs" />
     <Compile Include="Consumers\BillTransactionConsumer.cs" />
     <Compile Include="Consumers\SqlServerConnectionController.cs" />
+    <Compile Include="Domain\InvoiceResponse.cs" />
     <Compile Include="Domain\InvoiceTransaction.cs" />
+    <Compile Include="Domain\Request.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\Dapper.cs" />
     <Compile Include="Repository\RepositoryMapper.cs" />
+    <Compile Include="Repository\ResponseTypeMapper.cs" />
     <Compile Include="Repository\TransactionTypeMapper.cs" />
     <Compile Include="Repository\TypeMapper.cs" />
   </ItemGroup>
