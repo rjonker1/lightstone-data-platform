@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace UserManagement.Domain.Core.Entities
@@ -6,7 +7,7 @@ namespace UserManagement.Domain.Core.Entities
     [DataContract]
     public abstract class Entity : IEntity
     {
-        [DataMember]
+        [Required, DataMember]
         public virtual Guid Id { get; set; }
 
         protected internal Entity() { }

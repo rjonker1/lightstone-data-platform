@@ -1,12 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
     public class ClientUser : Entity
     {
+        [Required]
         public virtual Client Client { get; protected internal set; }
+        [Required]
         public virtual User User { get; protected internal set; }
+        [Required]
         public virtual string UserAlias { get; protected internal set; }
 
         protected ClientUser() { }

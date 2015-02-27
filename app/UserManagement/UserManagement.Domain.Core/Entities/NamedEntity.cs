@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UserManagement.Domain.Core.Entities
 {
     public abstract class NamedEntity : Entity, INamedEntity
     {
+        [Required]
         public virtual string Name { get; protected internal set; }
 
         protected NamedEntity() { }

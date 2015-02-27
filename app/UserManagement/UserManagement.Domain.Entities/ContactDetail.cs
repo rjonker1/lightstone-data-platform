@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
     public class ContactDetail : Entity
     {
+        [Required]
         public virtual string LegalEntityName { get; set; }
         public virtual string AccountsContactName { get; set; }
         public virtual string EmailAddress { get; set; }
