@@ -37,8 +37,11 @@ namespace UserManagement.Domain.Entities.BusinessRules
             else if (enity is Package && func.Equals("Create"))
                 _handler.Handle(new CreatePackageRule(enity as Package));
 
-            else if (enity is Contract && func.Equals("Create"))
-                _handler.Handle(new CreateContractRule(enity as Contract));
+            else if (enity is Contract)
+            {
+                if(func.Equals("Create")) _handler.Handle(new CreateContractRule(enity as Contract));
+                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteContractRule(enity as Contract));
+            }
         }
     }
 }
