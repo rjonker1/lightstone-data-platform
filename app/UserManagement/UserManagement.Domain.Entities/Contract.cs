@@ -17,6 +17,7 @@ namespace UserManagement.Domain.Entities
         public virtual ContractDuration ContractDuration { get; set; }
         public virtual ISet<Client> Clients { get; set; }
         public virtual ISet<Customer> Customers { get; set; }
+        public virtual bool IsActive { get; set; }
         //public virtual ISet<ContractPackage> ContractPackages { get; set; }
         //public virtual IEnumerable<Guid> ContractPackageIds
         //{

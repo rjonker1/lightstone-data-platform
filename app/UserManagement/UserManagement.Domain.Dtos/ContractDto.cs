@@ -30,5 +30,7 @@ namespace UserManagement.Domain.Dtos
         public IEnumerable<NamedEntityDto> Customers { get; set; }// Used in populating edit view
         public IEnumerable<string> PackageIdNames { get; set; } // Used to post Ids on form submit
         public IEnumerable<KeyValuePair<Guid, string>> Packages { get; set; } // Used in populating edit view
+
+        public bool IsActive { get; set; }
     }
 }
