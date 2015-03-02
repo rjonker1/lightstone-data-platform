@@ -45,7 +45,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ValueEntityDto>();
                 var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
 
-                bus.Publish(new CreateUpdateEntity(entity, true));
+                bus.Publish(new CreateUpdateEntity(entity, "Read"));
 
                 return Response.AsJson(dto.AssemblyQualifiedName);
             };
@@ -65,7 +65,7 @@ namespace UserManagement.Api.Modules
                 var valueEntity = entities.First(x => x.Id == dto.Id);
                 var entity = (ValueEntity)Mapper.Map(dto, valueEntity, typeof(ValueEntityDto), valueEntity.GetType());
 
-                bus.Publish(new CreateUpdateEntity(entity, false));
+                bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                 return Response.AsJson(valueEntity.GetType().AssemblyQualifiedName);
             };

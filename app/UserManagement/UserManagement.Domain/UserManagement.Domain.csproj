@@ -88,34 +88,19 @@
     <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRuleHandler.cs" />
-    <Compile Include="CommandHandlers\Addresses\CreateAddressHandler.cs" />
     <Compile Include="CommandHandlers\AuditLogs\CreateAuditLogHandler.cs" />
-    <Compile Include="CommandHandlers\Billings\CreateBillingHandler.cs" />
-    <Compile Include="CommandHandlers\CommercialStates\CreateCommercialStateHandler.cs" />
     <Compile Include="CommandHandlers\CommercialStates\ImportCommercialStateHandler.cs" />
-    <Compile Include="CommandHandlers\ContractDurations\CreateContractDurationHandler.cs" />
     <Compile Include="CommandHandlers\ContractDurations\ImportContractDurationHandler.cs" />
-    <Compile Include="CommandHandlers\Contracts\CreateContractHandler.cs" />
     <Compile Include="CommandHandlers\Contracts\GetContractPackageHandler.cs" />
-    <Compile Include="CommandHandlers\ContractTypes\CreateContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
-    <Compile Include="CommandHandlers\CreateSources\CreateCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
     <Compile Include="CommandHandlers\Entities\CreateUpdateEntityHandler.cs" />
     <Compile Include="CommandHandlers\Entities\SoftDeleteEntityHandler.cs" />
-    <Compile Include="CommandHandlers\EscalationTypes\CreateEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
-    <Compile Include="CommandHandlers\Packages\CreatePackageHandler.cs" />
-    <Compile Include="CommandHandlers\PaymentTypes\CreatePaymentTypeHandler.cs" />
     <Compile Include="CommandHandlers\PaymentTypes\ImportPaymentTypeHandler.cs" />
-    <Compile Include="CommandHandlers\PlatformStatuses\CreatePlatformStatusHandler.cs" />
     <Compile Include="CommandHandlers\PlatformStatuses\ImportPlatformStatusHandler.cs" />
-    <Compile Include="CommandHandlers\Provinces\CreateProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
-    <Compile Include="CommandHandlers\Roles\CreateRoleHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
-    <Compile Include="CommandHandlers\Users\CreateUserHandler.cs" />
-    <Compile Include="CommandHandlers\UserTypes\CreateUserTypeHandler.cs" />
     <Compile Include="CommandHandlers\UserTypes\ImportUserTypeHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -138,7 +123,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CommandHandlers\Addresses\" />
+    <Folder Include="CommandHandlers\Billings\" />
     <Folder Include="CommandHandlers\Clients\" />
+    <Folder Include="CommandHandlers\Packages\" />
+    <Folder Include="CommandHandlers\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

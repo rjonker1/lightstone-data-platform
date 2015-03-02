@@ -58,6 +58,7 @@
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -76,38 +77,19 @@
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
-    <Compile Include="Commands\Addresses\CreateAddress.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
-    <Compile Include="Commands\Billings\CreateBilling.cs" />
-    <Compile Include="Commands\Clients\CreateUpdateClient.cs" />
-    <Compile Include="Commands\CommercialStates\CreateCommercialState.cs" />
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
-    <Compile Include="Commands\ContractDurations\CreateContractDuration.cs" />
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
-    <Compile Include="Commands\Contracts\CreateContract.cs" />
     <Compile Include="Commands\Contracts\GetPackageOnContract.cs" />
-    <Compile Include="Commands\ContractTypes\CreateContractType.cs" />
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
-    <Compile Include="Commands\CreateSources\CreateCreateSource.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
-    <Compile Include="Commands\CustomerProfiles\CreateCustomerProfile.cs" />
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
     <Compile Include="Commands\Entities\SoftDeleteEntity.cs" />
-    <Compile Include="Commands\EscalationTypes\CreateEscalationType.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
-    <Compile Include="Commands\Packages\CreatePackage.cs" />
-    <Compile Include="Commands\PaymentTypes\CreatePaymentType.cs" />
     <Compile Include="Commands\PaymentTypes\ImportPaymentType.cs" />
-    <Compile Include="Commands\PlatformStatuses\CreatePlatformStatus.cs" />
     <Compile Include="Commands\PlatformStatuses\ImportPlatformStatus.cs" />
-    <Compile Include="Commands\ProfileDetails\CreateProfileDetail.cs" />
-    <Compile Include="Commands\Provinces\CreateProvince.cs" />
     <Compile Include="Commands\Provinces\ImportProvince.cs" />
-    <Compile Include="Commands\Roles\CreateRole.cs" />
     <Compile Include="Commands\Roles\ImportRole.cs" />
-    <Compile Include="Commands\UserProfiles\CreateUserProfile.cs" />
-    <Compile Include="Commands\Users\CreateUser.cs" />
-    <Compile Include="Commands\UserTypes\CreateUserType.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
     <Compile Include="ContractPackage.cs" />
     <Compile Include="IUserType.cs" />
@@ -152,7 +134,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Commands\Addresses\" />
+    <Folder Include="Commands\Billings\" />
+    <Folder Include="Commands\Clients\" />
+    <Folder Include="Commands\CustomerProfiles\" />
     <Folder Include="Commands\Customers\" />
+    <Folder Include="Commands\Packages\" />
+    <Folder Include="Commands\ProfileDetails\" />
+    <Folder Include="Commands\UserProfiles\" />
+    <Folder Include="Commands\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NHibernate\Interceptors\QueryAuditLog.sql" />
