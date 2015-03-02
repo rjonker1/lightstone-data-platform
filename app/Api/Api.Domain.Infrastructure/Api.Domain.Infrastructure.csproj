@@ -47,11 +47,13 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.658\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Connector, Version=1.0.0.710, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.710\lib\net45\Lightstone.DataPlatform.Billing.Api.Connector.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.658\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=1.0.0.710, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.710\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.655\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
@@ -65,9 +67,9 @@
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.655\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.610, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.710, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Billing.Api.Connector.1.0.0.658\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.710\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Nancy">
       <HintPath>..\..\packages\Nancy.1.0.0\lib\net40\Nancy.dll</HintPath>

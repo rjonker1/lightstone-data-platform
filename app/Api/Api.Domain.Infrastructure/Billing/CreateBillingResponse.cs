@@ -33,10 +33,10 @@ namespace Api.Domain.Infrastructure.Billing
                 var packageIdentifier = new PackageIdentifier(package.Id, new VersionIdentifier(package.Version));
                 var requestIdentifier = new RequestIdentifier(requestId, SystemIdentifier.CreateApi());
                 var userIdentifier = new UserIdentifier(userId);
-                var transactionContext = new TransactionContext(Guid.NewGuid(), userIdentifier, requestIdentifier);
-                var createTransaction = new CreateTransaction(packageIdentifier, transactionContext);
+                var requestContext = new RequestContext(requestId, userIdentifier, requestIdentifier);
+                var createResponse = new CreateResponse(packageIdentifier, requestContext);
 
-                _billing.CreateTransaction(createTransaction);
+                //_billing(createResponse);
 
                 BillingCreated = true;
             }

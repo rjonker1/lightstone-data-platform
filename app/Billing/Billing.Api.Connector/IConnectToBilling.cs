@@ -6,6 +6,8 @@ namespace Billing.Api.Connector
     {
         BillingConnectorResponse Ping(PingRequest request);
         BillingConnectorResponse CreateTransaction(CreateTransaction transaction);
+        BillingConnectorResponse CreateResponse(CreateResponse transactionResponse);
         GetTransactionResponse GetTransaction(GetTransactionRequest request);
+        GetResponseFromTransaction GetResponse(GetResponseRequest request);
     }
 }
