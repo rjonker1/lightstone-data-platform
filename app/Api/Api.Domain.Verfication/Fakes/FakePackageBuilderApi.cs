@@ -4,6 +4,7 @@ using System.Linq;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.TestObjects.Mothers;
 using Shared.BuildingBlocks.Api;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Api.Domain.Verification.Fakes
 {
