@@ -18,16 +18,16 @@ namespace UserManagement.Api.Modules
 {
     public class LookupModule : NancyModule
     {
-        public LookupModule(IBus bus, IRetrieveEntitiesByType entityRetriever, INamedEntityRepository<NamedEntity> entities)
+        public LookupModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {
             Get["/Lookups/{type}"] = parameters =>
             {
                 var model = this.Bind<DataTablesViewModel>();
                 var typeName = parameters.type.ToString();
                 var type = Type.GetType(typeName);
-                var namedEntities = entityRetriever.GetNamedEntities(type, Context.Request.Query["search[value]"].Value,
+                var valueEntities = entityRetriever.GetValueEntities(type, Context.Request.Query["search[value]"].Value,
                     model.Start, model.Length);
-                var dto = (DataTablesViewModel)Mapper.Map<PagedList<NamedEntity>, DataTablesViewModel>(namedEntities, model);
+                var dto = (DataTablesViewModel)Mapper.Map<PagedList<ValueEntity>, DataTablesViewModel>(valueEntities, model);
 
                 return Negotiate
                     .WithView("Index")
@@ -37,13 +37,13 @@ namespace UserManagement.Api.Modules
 
             Get["/Lookups/Add/{type}"] = parameters =>
             {
-                return View["Save", new NamedEntityDto{AssemblyQualifiedName = parameters.type.ToString()}];
+                return View["Save", new ValueEntityDto { AssemblyQualifiedName = parameters.type.ToString() }];
             };
 
             Post["/Lookups"] = _ =>
             {
-                var dto = this.Bind<NamedEntityDto>();
-                var entity = (NamedEntity)Mapper.Map(dto, entities.Get(dto.Id), typeof(NamedEntityDto), Type.GetType(dto.AssemblyQualifiedName));
+                var dto = this.Bind<ValueEntityDto>();
+                var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
 
                 bus.Publish(new CreateUpdateEntity(entity, true));
 
@@ -53,28 +53,29 @@ namespace UserManagement.Api.Modules
             Get["/Lookups/{id:guid}"] = parameters =>
             {
                 var id = (Guid)parameters.id;
-                var dto = Mapper.Map<NamedEntity, NamedEntityDto>(entities.First(x => x.Id == id)); //todo: repo.Get() not loading entity
+                var valueEntity = entities.First(x => x.Id == id);
+                var dto = Mapper.Map(valueEntity, new ValueEntityDto(), valueEntity.GetType(), typeof(ValueEntityDto)); //todo: repo.Get() not loading entity
 
                 return View["Save", dto];
             };
 
             Post["/Lookups/{id}"] = _ =>
             {
-                var dto = this.Bind<NamedEntityDto>();
-                var namedEntity = entities.First(x => x.Id == dto.Id);
-                var entity = (NamedEntity)Mapper.Map(dto, namedEntity, typeof(NamedEntityDto), namedEntity.GetType());
+                var dto = this.Bind<ValueEntityDto>();
+                var valueEntity = entities.First(x => x.Id == dto.Id);
+                var entity = (ValueEntity)Mapper.Map(dto, valueEntity, typeof(ValueEntityDto), valueEntity.GetType());
 
                 bus.Publish(new CreateUpdateEntity(entity, false));
 
-                return Response.AsJson(namedEntity.GetType().AssemblyQualifiedName);
+                return Response.AsJson(valueEntity.GetType().AssemblyQualifiedName);
             };
 
             Get["/Lookups/{type}/{filter}"] = parameters =>
             {
                 var typeName = parameters.type.ToString();
                 var type = Type.GetType(typeName);
-                var namedEntities = entityRetriever.GetNamedEntities(type, parameters.filter);
-                var dto = Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(namedEntities);
+                var valueEntities = entityRetriever.GetValueEntities(type, parameters.filter);
+                var dto = Mapper.Map<IEnumerable<ValueEntity>, IEnumerable<ValueEntityDto>>(valueEntities);
                 return Negotiate
                     .WithView("Index")
                     .WithModel(new LookupViewModel(type))

@@ -86,23 +86,6 @@
             Provides a null implmentation of a procesor that does not do any work
             </summary>
         </member>
-        <member name="T:FluentMigrator.ExplicitUnicodeString">
-            <summary>
-            Insert text with unicode data. Primarily for Sql Server, it prefixes the string with 'N
-            </summary>
-        </member>
-        <member name="M:FluentMigrator.ExplicitUnicodeString.#ctor(System.String)">
-            <summary>
-            Insert text with unicode data. Primarily for Sql Server, it prefixes the string with 'N
-            </summary>
-            <param name="text">Unicode string</param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "T:FluentMigrator.Helpers.LazyLoader`1" -->
-        <member name="T:FluentMigrator.Infrastructure.NonAttributedMigrationToMigrationInfoAdapter">
-            <summary>
-            This adapter wraps a migration into a MigrationInfo instance, used to keep IMigration backwards compatible with new IMigrationInfo.
-            </summary>
-        </member>
         <member name="M:FluentMigrator.Expressions.CreateConstraintExpression.#ctor(FluentMigrator.Model.ConstraintType)">
             <summary>
             Initializes a new instance of the <see cref="T:CreateConstraintExpression"/> class.
@@ -119,11 +102,6 @@
         <member name="P:FluentMigrator.MigrationBase.ApplicationContext">
             <summary>The arbitrary application context passed to the task runner.</summary>
         </member>
-        <member name="P:FluentMigrator.MigrationBase.ConnectionString">
-            <summary>
-            Connection String that is used to execute migrations.
-            </summary>
-        </member>
         <member name="M:FluentMigrator.Model.ConstraintDefinition.#ctor(FluentMigrator.Model.ConstraintType)">
             <summary>
             Initializes a new instance of the <see cref="T:ConstraintDefinition"/> class.
@@ -132,16 +110,6 @@
         <member name="T:FluentMigrator.TagsAttribute">
             <summary>
              Used to filter which migrations are run.
-            </summary>
-        </member>
-        <member name="F:FluentMigrator.TransactionBehavior.Default">
-            <summary>
-            The default transaction behavior, meaning 1 transaction per migration if the Processor allows it.
-            </summary>
-        </member>
-        <member name="F:FluentMigrator.TransactionBehavior.None">
-            <summary>
-            A migration will not use a transaction.
             </summary>
         </member>
         <member name="M:FluentMigrator.Builders.Delete.IDeleteExpressionRoot.Index(System.String)">
@@ -176,11 +144,6 @@
         </member>
         <member name="P:FluentMigrator.Infrastructure.MigrationContext.ApplicationContext">
             <summary>The arbitrary application context passed to the task runner.</summary>
-        </member>
-        <member name="P:FluentMigrator.Infrastructure.MigrationContext.Connection">
-            <summary>
-            Connection String from the runner.
-            </summary>
         </member>
     </members>
 </doc>

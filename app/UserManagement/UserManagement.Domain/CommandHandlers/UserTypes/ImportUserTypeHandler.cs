@@ -1,5 +1,6 @@
-﻿using System;
-using UserManagement.Domain.Core.MessageHandling;
+﻿using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.UserTypes;
 
 namespace UserManagement.Domain.CommandHandlers.UserTypes
@@ -16,16 +17,8 @@ namespace UserManagement.Domain.CommandHandlers.UserTypes
 
         public override void Handle(ImportUserType command)
         {
-            try
-            {
-                _handler.Handle(new CreateUserType("User"));
-                _handler.Handle(new CreateUserType("Internal"));
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
+            _handler.Handle(new ValueEntityDto("User", typeof (UserType)));
+            _handler.Handle(new ValueEntityDto("Internal", typeof (UserType)));
         }
     }
 }

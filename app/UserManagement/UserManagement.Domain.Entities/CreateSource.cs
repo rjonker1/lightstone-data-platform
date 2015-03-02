@@ -2,10 +2,8 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class CreateSource : NamedEntity
+    public class CreateSource : ValueEntity
     {
-        public virtual string Value { get; set; }
-
         protected CreateSource() { }
 
         public CreateSource(string val) : base(val)

@@ -9,7 +9,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.DataTables
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<PagedList<NamedEntity>, DataTablesViewModel>()
+            Mapper.CreateMap<PagedList<ValueEntity>, DataTablesViewModel>()
                 .ForMember(d => d.Data, opt => opt.MapFrom(x => x));
         }
     }
