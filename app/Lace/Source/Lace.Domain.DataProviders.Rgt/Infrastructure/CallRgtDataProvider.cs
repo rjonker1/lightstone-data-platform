@@ -44,6 +44,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         {
             try
             {
+                ValidateVehicleDetail(response);
+
                 monitoring.StartCall(_request.Vehicle, _stopWatch);
 
                 GetCarInformation();
@@ -117,6 +119,15 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     .GenerateData()
                     .BuildCarInformation()
                     .BuildCarInformationRequest();
+        }
+
+        private void ValidateVehicleDetail(IProvideResponseFromLaceDataProviders response)
+        {
+            if (_request.Vehicle != null && !string.IsNullOrEmpty(_request.Vehicle.Vin) &&
+                _request.Vehicle.Vin.Equals(response.IvidResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
+                return;
+
+            _request.Vehicle.SetVinNumber(response.IvidResponse.Vin);
         }
     }
 }
