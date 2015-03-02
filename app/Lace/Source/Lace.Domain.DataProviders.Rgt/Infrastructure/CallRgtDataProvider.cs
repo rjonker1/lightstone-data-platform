@@ -109,7 +109,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             response.RgtResponseHandled.HasBeenHandled();
         }
 
-          private void GetCarInformation()
+        private void GetCarInformation()
         {
             _carInformation =
                 new RetrieveCarInformationDetail(_request, _carRepository)
