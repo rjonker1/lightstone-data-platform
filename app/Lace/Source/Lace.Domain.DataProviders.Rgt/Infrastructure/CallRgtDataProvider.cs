@@ -44,6 +44,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         {
             try
             {
+                
                 ValidateVehicleDetail(response);
 
                 monitoring.StartCall(_request.Vehicle, _stopWatch);
