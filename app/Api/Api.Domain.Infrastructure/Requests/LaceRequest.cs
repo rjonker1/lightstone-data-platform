@@ -132,6 +132,22 @@ namespace Api.Domain.Infrastructure.Requests
         public string Vin { get; private set; }
 
         public string VinOrChassis { get; private set; }
+
+
+        public void SetLicenseNo(string licenceNo)
+        {
+            LicenceNo = licenceNo;
+        }
+
+        public void SetMake(string make)
+        {
+            Make = make;
+        }
+
+        public void SetVinNumber(string vinNumber)
+        {
+            Vin = vinNumber;
+        }
     }
 
     public class DriversLicense : IProvideDriversLicenseInformationForRequest
