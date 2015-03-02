@@ -25,6 +25,20 @@ namespace UserManagement.Domain.BusinessRules.Contracts
 
             var hasClients = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Clients.Where(cl => cl.IsActive.Equals(true))).ToList();
             var hasCustomers = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Customers.Where(cus => cus.IsActive.Equals(true))).ToList();
+
+            if (hasClients.Any())
+            {
+                var exception = new LightstoneAutoException("Contract cannot be deleted due to Client constraint".FormatWith(entity.GetType().Name));
+                this.Warn(() => exception);
+                throw exception;
+            }
+
+            if (hasCustomers.Any())
+            {
+                var exception = new LightstoneAutoException("Contract cannot be deleted due to Customer constraint".FormatWith(entity.GetType().Name));
+                this.Warn(() => exception);
+                throw exception;
+            }
         }
     }
 }
