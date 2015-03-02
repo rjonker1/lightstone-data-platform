@@ -70,6 +70,16 @@ namespace UserManagement.Api.Modules
 
                 return Response.AsJson(handler.Response);
             };
+
+            Delete["/Contracts/{id}"] = _ =>
+            {
+                var dto = this.Bind<ContractDto>();
+                var entity = Mapper.Map(dto, contracts.Get(dto.Id));
+
+                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+
+                return Response.AsJson("Contract has been soft deleted");
+            };
         }
     }
 }
