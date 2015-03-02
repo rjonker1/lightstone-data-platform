@@ -39,6 +39,8 @@ namespace UserManagement.Domain.BusinessRules.Contracts
                 this.Warn(() => exception);
                 throw exception;
             }
+
+            entity.IsActive = false;
         }
     }
 }
