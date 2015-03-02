@@ -70,6 +70,7 @@
     <Compile Include="BusinessRules\Clients\CreateClientRule.cs" />
     <Compile Include="BusinessRules\Clients\SoftDeleteClientRule.cs" />
     <Compile Include="BusinessRules\Contracts\CreateContractRule.cs" />
+    <Compile Include="BusinessRules\Contracts\SoftDeleteContractRule.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRule.cs" />
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />

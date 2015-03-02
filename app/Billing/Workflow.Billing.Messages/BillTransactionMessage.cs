@@ -10,7 +10,8 @@ namespace Workflow.Billing.Messages
         {
         }
 
-        public BillTransactionMessage(PackageIdentifier packageIdentifier, UserIdentifier userIdentifier, RequestIdentifier requestIdentifier,
+        public BillTransactionMessage(PackageIdentifier packageIdentifier, UserIdentifier userIdentifier,
+            RequestIdentifier requestIdentifier,
             DateTime transactionDate, Guid transactionId)
         {
             PackageIdentifier = packageIdentifier;

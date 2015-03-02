@@ -15,14 +15,13 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Clients
             Mapper.CreateMap<IEnumerable<Client>, IEnumerable<ClientDto>>()
                .ConvertUsing(s => s.Select(Mapper.Map<Client, ClientDto>));
 
-            Mapper.CreateMap<Client, ClientDto>()
-                .ForMember(dest => dest.Contracts, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Contracts)));
+            Mapper.CreateMap<Client, ClientDto>();
+            //    .ForMember(dest => dest.Contracts, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Contracts)));
 
             Mapper.CreateMap<ClientDto, Client>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
-                .ForMember(dest => dest.Contracts, opt => opt.MapFrom(x => x.ContractIds != null ? new HashSet<Contract>(x.ContractIds.Select(id => (Contract)Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(id, typeof(Contract))))) : Enumerable.Empty<Contract>()))
-                .ForMember(dest => dest.ContactDetail, opt => opt.Ignore())
-                //.ForMember(dest => dest.Packages, opt => opt.Ignore())
+                //.ForMember(dest => dest.Contracts, opt => opt.MapFrom(x => x.ContractIds != null ? new HashSet<Contract>(x.ContractIds.Select(id => (Contract)Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(id, typeof(Contract))))) : Enumerable.Empty<Contract>()))
+                .ForMember(dest => dest.ContactDetail, opt => opt.MapFrom(x => Mapper.Map<ClientDto, ContactDetail>(x)))
                 .ForMember(dest => dest.ClientUsers, opt => opt.Ignore());
         }
     }

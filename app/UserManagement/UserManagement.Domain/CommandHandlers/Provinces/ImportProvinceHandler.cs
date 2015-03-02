@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using UserManagement.Domain.Core.MessageHandling;
+﻿using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Dtos;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Provinces;
 
 namespace UserManagement.Domain.CommandHandlers.Provinces
 {
     public class ImportProvinceHandler : AbstractMessageHandler<ImportProvince>
     {
-
         private readonly IHandleMessages _handler;
 
         public ImportProvinceHandler(IHandleMessages handler)
@@ -17,22 +16,15 @@ namespace UserManagement.Domain.CommandHandlers.Provinces
 
         public override void Handle(ImportProvince command)
         {
-            IList provinces = new ArrayList();
-
-            provinces.Add("Eastern Cape");
-            provinces.Add("Free State");
-            provinces.Add("Gauteng");
-            provinces.Add("KwaZulu-Natal");
-            provinces.Add("Limpopo");
-            provinces.Add("Mpumalanga");
-            provinces.Add("North West");
-            provinces.Add("Northern Cape");
-            provinces.Add("Western Cape");
-
-            foreach (object province in provinces)
-            {
-                _handler.Handle(new CreateProvince(province.ToString()));
-            }
+            _handler.Handle(new ValueEntityDto("Eastern Cape", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("Free State", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("Gauteng", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("KwaZulu-Natal", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("Limpopo", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("Mpumalanga", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("ENorth West", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("Northern Cape", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("Western Cape", typeof(Province)));
         }
     }
 }

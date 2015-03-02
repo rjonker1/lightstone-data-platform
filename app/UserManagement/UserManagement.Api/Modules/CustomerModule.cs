@@ -43,7 +43,6 @@ namespace UserManagement.Api.Modules
             {
                 var guid = (Guid)parameters.id;
                 var dto = Mapper.Map<Customer, CustomerDto>(customers.Get(guid));
-                //dto.BillingDto = dto.BillingDto ?? new BillingDto();
 
                 return View["Save", dto];
             };

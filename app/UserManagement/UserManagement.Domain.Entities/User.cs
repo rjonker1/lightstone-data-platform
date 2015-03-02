@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
@@ -12,7 +13,9 @@ namespace UserManagement.Domain.Entities
         public virtual string LastName { get; set; }
         public virtual string IdNumber { get; set; }
         public virtual string ContactNumber { get; set; }
+        [Required]
         public virtual string UserName { get; protected internal set; }
+        [Required]
         public virtual string Password { get; protected internal set; }
         public virtual bool? IsActive { get; set; }
         public virtual UserType UserType { get; protected internal set; }

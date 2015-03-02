@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using BuildingBlocks.Configuration;
 using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
+using Shared.Configuration;
 using Workflow.BuildingBlocks.Consumers;
 using Workflow.BuildingBlocks.Dispatcher;
 

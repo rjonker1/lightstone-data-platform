@@ -20,7 +20,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Billings
                 .ForMember(dest => dest.PastelId, opt => opt.MapFrom(x => x.BillingPastelId))
                 .ForMember(dest => dest.VatNumber, opt => opt.MapFrom(x => x.BillingVatNumber))
                 .ForMember(dest => dest.PaymentType, opt => opt.MapFrom(x => Mapper.Map<Tuple<Guid, Type>, Entity>(new Tuple<Guid, Type>(x.BillingPaymentTypeId, typeof(PaymentType)))));
-
         }
     }
 }

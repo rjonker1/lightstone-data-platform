@@ -18,10 +18,8 @@ namespace UserManagement.Domain.CommandHandlers.Entities
             _handler = handler;
         }
 
-
         public override void Handle(CreateUpdateEntity command)
         {
-
             var brv = new BusinessRulesValidator(_handler);
             brv.CheckRules(command.Entity, command.Function);
 

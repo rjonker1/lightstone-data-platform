@@ -3,10 +3,8 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
-    public class UserType : NamedEntity
+    public class UserType : ValueEntity
     {
-        public virtual string Value { get; set; }
-
         protected UserType() { }
 
         public UserType(string name) : base(name)
@@ -14,15 +12,14 @@ namespace UserManagement.Domain.Entities
             Value = name;
         }
 
-        public override string ToString()
-        {
-          return "{0} - {1} - {2}".FormatWith(Id, Name, GetType());
-        }
-
         public virtual void UpdateValue(string value)
         {
             Value = value;
-            base.Name = value;
+        }
+
+        public override string ToString()
+        {
+          return "{0} - {1} - {2}".FormatWith(Id, Value, GetType());
         }
     }
 }

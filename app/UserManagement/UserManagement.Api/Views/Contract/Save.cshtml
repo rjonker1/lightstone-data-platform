@@ -1,6 +1,4 @@
 ﻿@using System
-@using System.Collections
-@using System.Collections.Generic
 @using System.Linq
 @using Nancy.ViewEngines.Razor.HtmlHelpers;
 @using UserManagement.Api.ViewModels
@@ -12,7 +10,6 @@
     var pageHeadingViewModel = new PageHeadingViewModel("Contract detail", isCreate ? "Create a new contract" : "Update existing contract");
     var method = isCreate ? "POST" : "POST";
     var url = isCreate ? "/Contracts" : "/Contracts/" + Model.Id;
-    var count = 0;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)
 

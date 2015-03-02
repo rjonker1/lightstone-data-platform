@@ -1,17 +1,17 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using BuildingBlocks.Configuration;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
+using Shared.Configuration;
 using Workflow.Billing.Repository;
 
 namespace Workflow.Billing.Consumer.Installers
 {
     public class RepositoryInstaller : IWindsorInstaller
     {
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ILog log = LogManager.GetLogger<RepositoryInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

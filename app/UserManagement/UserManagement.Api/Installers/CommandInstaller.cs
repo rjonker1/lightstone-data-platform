@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using UserManagement.Domain.CommandHandlers.Users;
+using UserManagement.Domain.CommandHandlers.Entities;
 using UserManagement.Domain.Core.MessageHandling;
 
 namespace UserManagement.Api.Installers
@@ -12,7 +12,7 @@ namespace UserManagement.Api.Installers
         {
             container.Register(Component.For<IHandleMessages>().ImplementedBy<MessageHandlerResolver>());
             container.Register(
-                Classes.FromAssemblyContaining<CreateUserHandler>()
+                Classes.FromAssemblyContaining<CreateUpdateEntityHandler>()
                     .BasedOn(typeof (IHandleMessages<>))
                     .WithServiceAllInterfaces()
                     .LifestyleTransient());

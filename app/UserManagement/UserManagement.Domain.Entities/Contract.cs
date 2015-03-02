@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
     public class Contract : NamedEntity
     {
+        [Required]
         public virtual DateTime CommencementDate { get; set; }
         public virtual string Description { get; set; }
         public virtual string EnteredIntoBy { get; set; }
         public virtual DateTime? OnlineAcceptance { get; set; }
         public virtual string RegisteredName { get; set; }
         public virtual string RegistrationNumber { get; set; }
+        [Required]
         public virtual ContractType ContractType { get; set; }
+        [Required]
         public virtual EscalationType EscalationType { get; set; }
+        [Required]
         public virtual ContractDuration ContractDuration { get; set; }
         public virtual ISet<Client> Clients { get; set; }
         public virtual ISet<Customer> Customers { get; set; }

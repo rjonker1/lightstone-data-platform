@@ -1,0 +1,82 @@
+﻿@using Nancy.ViewEngines.Razor.HtmlHelpers;
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+
+<div class="box dark">
+    <header>
+        <div class="icons">
+            <i class="fa fa-money"></i>
+        </div>
+        <h5>Billing Info</h5>
+        <div class="toolbar">
+            <nav style="padding: 8px;">
+                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
+                    <i class="fa fa-minus"></i>
+                </a>
+                @*<a class="btn btn-default btn-xs full-box" href="javascript:;">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs close-box" href="javascript:;">
+                        <i class="fa fa-times"></i>
+                    </a>*@
+            </nav>
+        </div>
+    </header>
+    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+        <div class="form-group">
+            <label class="control-label col-lg-4">Contact Number</label>
+            <div class="col-lg-3">
+                @Html.HiddenFor(x => x.BillingId)
+                @Html.TextBoxFor(x => x.BillingContactNumber, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4">Contact Person</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.BillingContractPerson, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4">Company Registration</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.BillingCompanyRegistration, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4">Debit Order Date</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4">Pastel Id</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.BillingPastelId, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4">Vat Number</label>
+            <div class="col-lg-3">
+                @Html.TextBoxFor(x => x.BillingVatNumber, new { @class = "form-control", placeholder = "" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-4">Payment Type</label>
+            <div class="col-lg-3">
+                <select name="BillingPaymentTypeId" data-placeholder="Choose a province..." class="chosen-select">
+                    <option value=""></option>
+                    @foreach (SelectListItem item in ViewBag.PaymentTypes.Value)
+                        {
+                            var isSelected = item.Value == Model.BillingPaymentTypeId.ToString();
+                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                        }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-3">
+                <input type="submit" class="btn btn-primary" value="Save">
+            </div>
+        </div>
+    </div>
+</div>

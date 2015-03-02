@@ -2,10 +2,8 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class PlatformStatus : NamedEntity
+    public class PlatformStatus : ValueEntity
     {
-        public virtual string Value { get; set; }
-
         protected PlatformStatus() { }
 
         public PlatformStatus(string val) : base(val)

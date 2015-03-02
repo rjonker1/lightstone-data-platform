@@ -1,16 +1,21 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
 {
     public class Billing : Entity
     {
+        [Required]
         public virtual string ContactNumber { get; set; }
+        [Required]
         public virtual string ContractPerson { get; set; }
+        [Required]
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
         public virtual string PastelId { get; set; }
         public virtual string VatNumber { get; set; }
+        [Required]
         public virtual PaymentType PaymentType { get; set; }
 
         protected internal Billing() { }

@@ -1,5 +1,4 @@
 ﻿using System;
-using UserManagement.Domain.Entities;
 
 namespace UserManagement.Domain.Dtos
 {
@@ -10,7 +9,7 @@ namespace UserManagement.Domain.Dtos
         public virtual string AccountsContactName { get; set; }
         public virtual string EmailAddress { get; set; }
         public virtual string TelephoneNumber { get; set; }
-        public virtual Address PhysicalAddress { get; set; }
-        public virtual Address PostalAddress { get; set; }
+        public virtual AddressDto PhysicalAddress { get; set; }
+        public virtual AddressDto PostalAddress { get; set; }
     }
 }

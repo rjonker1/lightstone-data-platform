@@ -17,4 +17,20 @@ namespace Billing.Api.Dtos
         public PackageIdentifier PackageIdentifier { get; set; }
         public TransactionContext Context { get; set; }
     }
+
+    public class CreateResponse
+    {
+        public CreateResponse()
+        {
+        }
+
+        public CreateResponse(PackageIdentifier packageIdentifier, RequestContext context)
+        {
+            PackageIdentifier = packageIdentifier;
+            Context = context;
+        }
+
+        public PackageIdentifier PackageIdentifier { get; set; }
+        public RequestContext Context { get; set; }
+    }
 }

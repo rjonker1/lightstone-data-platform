@@ -82,6 +82,7 @@
     <Compile Include="BusinessRules\Clients\CreateClientRuleHandler.cs" />
     <Compile Include="BusinessRules\Clients\SoftDeleteClientRuleHandler.cs" />
     <Compile Include="BusinessRules\Contracts\CreateContractRuleHandler.cs" />
+    <Compile Include="BusinessRules\Contracts\SoftDeleteContractRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
