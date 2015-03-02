@@ -6,6 +6,7 @@ using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
+using Lace.Domain.DataProviders.Lsp;
 using Lace.Domain.DataProviders.PCubed;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
@@ -44,6 +45,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                     (request, bus, response, requestId) =>
                         new SignioDataProvider(request, null, null,
                             new SendSignioCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
+
+        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+    _LspRequestSpecification =
+        () =>
+            (request, bus, response, requestId) =>
+                new LspDataProvider(request, null, null,
+                    new SendLspCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 
         private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>

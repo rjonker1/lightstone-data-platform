@@ -90,12 +90,12 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                 transformer.Transform();
             }
 
-          //  monitoring.Send(CommandType.Transformation,
-          //      transformer.Result ?? new LspDriversLicenseDecryptionResponse(null, null), transformer);
+            monitoring.Send(CommandType.Transformation,
+                transformer.Result ?? new LspResponse(null, null), transformer);
 
-            //response.LspDriversLicenseDecryptionResponse = transformer.Result;
-            //response.LspDriversLicenseDecryptionResponseHandled = new LspDriversLicenseDecryptionResponseHandled();
-            //response.LspDriversLicenseDecryptionResponseHandled.HasBeenHandled();
+            response.LspResponse = transformer.Result;
+            response.LspResponseHandled = new LspResponseHandled();
+            response.LspResponseHandled.HasBeenHandled();
         }
     }
 }

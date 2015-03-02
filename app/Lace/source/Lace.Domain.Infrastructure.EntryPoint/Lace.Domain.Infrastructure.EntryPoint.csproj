@@ -108,6 +108,10 @@
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.Lsp\Lace.Domain.DataProviders.Lsp.csproj">
+      <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
+      <Name>Lace.Domain.DataProviders.Lsp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj">
       <Project>{8f3eb9bb-7f5b-43af-8033-4ac91443a0e8}</Project>
       <Name>Lace.Domain.DataProviders.PCubed</Name>

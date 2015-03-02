@@ -84,6 +84,7 @@
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="RgtVinResponseHandled.cs" />
     <Compile Include="SaleModel.cs" />
+    <Compile Include="LspResponse.cs" />
     <Compile Include="SignioDriversLicenseDecryptionResponse.cs" />
     <Compile Include="SignioDriversLicenseDecryptionResponseHandled.cs" />
     <Compile Include="TotalSalesByAgeModel.cs" />
