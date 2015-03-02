@@ -67,7 +67,15 @@ namespace Api.Unit.Tests.Fakes
         {
             return null;
         }
-    }
 
-    
+        public BillingConnectorResponse CreateResponse(CreateResponse transactionResponse)
+        {
+            return null;
+        }
+
+        public GetResponseFromTransaction GetResponse(GetResponseRequest request)
+        {
+            return null;
+        }
+    }
 }

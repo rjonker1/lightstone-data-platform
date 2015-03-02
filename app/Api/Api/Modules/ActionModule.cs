@@ -6,6 +6,7 @@ using Api.Domain.Infrastructure.Extensions;
 using Billing.Api.Connector;
 using DataPlatform.Shared.Dtos;
 using Lace.Domain.Infrastructure.Core.Contracts;
+using Lace.Shared.Monitoring.Messages.Commands;
 using Nancy;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -63,8 +64,13 @@ namespace Api.Modules
 
                 var responses = entryPoint.GetResponsesFromLace(request);
 
-                if(responses.Any())
-                    billingResponse.CreateBillingResponseForPackage(package, userId, requestId);
+                if(!responses.Any())
+                    throw new Exception("No response for package");
+
+                billingResponse.CreateBillingResponseForPackage(package, userId, requestId);
+
+                if (!billingResponse.BillingCreated)
+                    throw new Exception("Response for request could not be processed");
 
                 return Response.AsJson(responses.First().Response);
             };

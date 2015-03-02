@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities;
+using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 
 namespace Api.Domain.Infrastructure.Dto
@@ -31,4 +33,27 @@ namespace Api.Domain.Infrastructure.Dto
 
     //    public ICriteria Criteria { get; set; }
     //}
+
+    public class PackageResponseDto
+    {
+        public Guid Id { get; private set; }
+
+        public string Name { get; private set; }
+
+        public IAction Action { get; private set; }
+
+        public IEnumerable<IDataProvider> DataProviders { get; private set; }
+
+        public PackageResponseDto()
+        {
+        }
+
+        public PackageResponseDto(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders)
+        {
+            Id = id;
+            Name = name;
+            Action = action;
+            DataProviders = dataProviders;
+        }
+    }
 }
