@@ -4,27 +4,27 @@ using DataPlatform.Shared.Messaging;
 
 namespace Workflow.Billing.Messages
 {
-    public class BillTransactionMessage : IPublishableMessage
+    public class BillResponseMessage : IPublishableMessage
     {
-        public BillTransactionMessage()
+        public BillResponseMessage()
         {
         }
 
-        public BillTransactionMessage(PackageIdentifier packageIdentifier, UserIdentifier userIdentifier,
+        public BillResponseMessage(PackageIdentifier packageIdentifier, UserIdentifier userIdentifier,
             RequestIdentifier requestIdentifier,
-            DateTime transactionDate, Guid transactionId)
+            DateTime transactionDate, Guid requestId)
         {
             PackageIdentifier = packageIdentifier;
             UserIdentifier = userIdentifier;
             RequestIdentifier = requestIdentifier;
             TransactionDate = transactionDate;
-            TransactionId = transactionId;
+            RequestId = requestId;
         }
 
         public PackageIdentifier PackageIdentifier { get; set; }
         public UserIdentifier UserIdentifier { get; set; }
         public RequestIdentifier RequestIdentifier { get; set; }
         public DateTime TransactionDate { get; set; }
-        public Guid TransactionId { get; set; }
+        public Guid RequestId { get; set; }
     }
 }

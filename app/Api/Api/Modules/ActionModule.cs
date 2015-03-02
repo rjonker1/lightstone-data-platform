@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Api.Domain.Infrastructure.Billing;
 using Api.Domain.Infrastructure.Dto;
 using Api.Domain.Infrastructure.Extensions;
-using Api.Domain.Infrastructure.Transactions;
 using Billing.Api.Connector;
 using DataPlatform.Shared.Dtos;
 using Lace.Domain.Infrastructure.Core.Contracts;
@@ -17,7 +17,7 @@ namespace Api.Modules
     {
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IEntryPoint entryPoint,
             IConnectToBilling billingConnector, IUserManagementApiClient userManagementApi,
-            ICreateBillingTransaction billingTransaction)
+            ICreateBillingTransaction billingTransaction, ICreateBillingResponse billingResponse)
         {
             Get["/"] = parameters =>
             {
@@ -46,20 +46,25 @@ namespace Api.Modules
                 if (packageDetails == null)
                     throw new Exception("Could not get package for contract");
 
-                var jsonPackage = packageBuilderApi.Get(token, "Packages/Package/" + packageDetails.PackageId);
+                var jsonPackage = packageBuilderApi.Get(token, "Packages/DataProvider/" + packageDetails.PackageId);
                 var package = jsonPackage.ToPackage();
 
                 if (package == null)
-                    throw new Exception("Package could not be resolved");
-                
+                    throw new Exception("Package for data provider could not be resolved");
+
+                var requestId = Guid.NewGuid(); //for billing!!
+
+                billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
+                if (!billingTransaction.BillingCreated) 
+                    throw new Exception("Package could not be processed");
+
                 var request = package.ToLicensePlateSearchRequest(userId, apiRequest.Username,
-                    apiRequest.SearchTerm, apiRequest.Username);
+                    apiRequest.SearchTerm, apiRequest.Username, requestId);
 
                 var responses = entryPoint.GetResponsesFromLace(request);
 
-                billingTransaction.CreateBillingTransactionForPackage(package, userId);
-                if (!billingTransaction.BillingTransactionCreated)
-                    throw new Exception("Package could not be processed");
+                if(responses.Any())
+                    billingResponse.CreateBillingResponseForPackage(package, userId, requestId);
 
                 return Response.AsJson(responses.First().Response);
             };

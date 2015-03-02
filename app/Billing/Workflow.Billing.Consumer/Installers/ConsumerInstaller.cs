@@ -8,15 +8,16 @@ namespace Workflow.Billing.Consumer.Installers
 {
     public class ConsumerInstaller : IWindsorInstaller
     {
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private ILog _log;
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            log.InfoFormat("Installing BillTransactionConsumer");
+            _log = LogManager.GetLogger(GetType());
+            _log.InfoFormat("Installing Billing Consumer");
 
             container.Register(
-                Component.For<BillTransactionConsumer>().ImplementedBy<BillTransactionConsumer>()
-                );
+                Component.For<BillTransactionConsumer>().ImplementedBy<BillTransactionConsumer>(),
+                Component.For<BillResponseConsumer>().ImplementedBy<BillResponseConsumer>());
         }
     }
 }

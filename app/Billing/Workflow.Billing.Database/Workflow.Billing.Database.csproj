@@ -46,6 +46,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Migrations\201502271648_Create_Response_Table.cs" />
     <Compile Include="Migrations\201406061645_Create_Transaction_Table.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -51,7 +51,7 @@ namespace PackageBuilder.Domain.Entities.Packages.WriteModels
         {
             Id = id;
         }
-
+        
         //TODO: Remove - Constructor used for testing in LACE
         public Package(Guid id, string name, IAction action, IEnumerable<IDataProvider> dataProviders) 
             : this(id)

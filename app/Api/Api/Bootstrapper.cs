@@ -1,7 +1,7 @@
 ﻿using Api.Domain.Infrastructure.Automapping;
+using Api.Domain.Infrastructure.Billing;
 using Api.Domain.Infrastructure.Extensions;
 using Api.Domain.Infrastructure.Metadata;
-using Api.Domain.Infrastructure.Transactions;
 using Api.Domain.Verification.Core.Contracts;
 using Api.Domain.Verification.Infrastructure.Handlers;
 using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
@@ -76,6 +76,7 @@ namespace Api
 
             container.Register(Component.For<IConnectToBilling>().Instance(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration())));
             container.Register(Component.For<ICreateBillingTransaction>().ImplementedBy<CreateBillingTransaction>().LifestyleTransient());
+            container.Register(Component.For<ICreateBillingResponse>().ImplementedBy<CreateBillingResponse>().LifestyleTransient());
 
             container.Register(Component.For<ICallFicaVerification>().ImplementedBy<FicaVerificationService>().LifestyleTransient());
             container.Register(Component.For<IHandleFicaVerficationRequests>().ImplementedBy<FicaVerificationHandler>().LifestyleTransient());

@@ -26,5 +26,15 @@ namespace Billing.Api.Connector
         {
             return "/transaction";
         }
+
+        public string CreateResponseSegment()
+        {
+            return "/response";
+        }
+
+        public string GetResponseSegment()
+        {
+            return "/response";
+        }
     }
 }
