@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Api.Domain.Infrastructure.Dto;
 using Api.Domain.Infrastructure.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Newtonsoft.Json;
@@ -45,16 +46,15 @@ namespace Api.Domain.Infrastructure.Extensions
                 //settings.Converters.Add(dataFieldConverter);
                 //settings.Converters.Add(dataProviderConverter);
 
-                return JsonConvert.DeserializeObject<Package>(
+                var dto = JsonConvert.DeserializeObject<PackageResponseDto>(
                     json, settings);
 
+                return new Package(dto.Id, dto.Name, dto.Action, dto.DataProviders);
             }
             catch
             {
                 return null;
             }
-
-
         }
 
         private class Action : IAction

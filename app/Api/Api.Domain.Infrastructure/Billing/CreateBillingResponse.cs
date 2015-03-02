@@ -36,7 +36,7 @@ namespace Api.Domain.Infrastructure.Billing
                 var requestContext = new RequestContext(requestId, userIdentifier, requestIdentifier);
                 var createResponse = new CreateResponse(packageIdentifier, requestContext);
 
-                //_billing(createResponse);
+                _billing.CreateResponse(createResponse);
 
                 BillingCreated = true;
             }
