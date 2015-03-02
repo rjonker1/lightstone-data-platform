@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Transactions;
 using Castle.Windsor;
-using FluentNHibernate.Utils;
-using Microsoft.Practices.ServiceLocation;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.ViewEngines.Razor.HtmlHelpers;
 using NHibernate;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Repositories;
-using UserManagement.Domain.Entities;
 using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Helpers.Extensions
@@ -63,11 +56,11 @@ namespace UserManagement.Api.Helpers.Extensions
             });
         }
 
-        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IRetrieveEntitiesByType entityRetriever) where T : INamedEntity, IEntity
+        public static void AddLookupDataToViewBag<T>(this IPipelines pipelines, IRetrieveEntitiesByType entityRetriever) where T : IValueEntity, IEntity
         {
             var type = typeof (T);
-            var namedEntities = entityRetriever.GetNamedEntities(type);
-            var list = namedEntities.ToList().Select(x => new SelectListItem(x.Name, x.Id + ""));
+            var valueEntities = entityRetriever.GetValueEntities(type);
+            var list = valueEntities.ToList().Select(x => new SelectListItem(x.Value, x.Id + ""));
 
             pipelines.BeforeRequest.AddItemToEndOfPipeline(ctx =>
             {

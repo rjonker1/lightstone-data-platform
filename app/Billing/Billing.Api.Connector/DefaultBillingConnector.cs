@@ -56,6 +56,26 @@ namespace Billing.Api.Connector
             return response;
         }
 
+        public BillingConnectorResponse CreateResponse(CreateResponse transactionResponse)
+        {
+            log.InfoFormat("Creating a response transaction via the billing API at {0} with segment {1}", configuration.Url,
+                urlBuilder.CreateResponseSegment());
+
+            var postRequest = new RestRequest(urlBuilder.CreateResponseSegment())
+            {
+                RequestFormat = DataFormat.Json,
+
+            };
+            postRequest.AddHeader("Content-Type", "application/json");
+            postRequest.AddBody(transactionResponse);
+
+            var response = PostApi(urlBuilder.CreateResponseSegment(), postRequest);
+
+            log.InfoFormat("Creating a response transaction via the billing API at {0} completed. The response was {1}", configuration.Url, response);
+
+            return response;
+        }
+
         public GetTransactionResponse GetTransaction(GetTransactionRequest request)
         {
             log.InfoFormat("Getting a transaction from the billing API at {0} with segment {1}", configuration.Url, urlBuilder.GetTransactionSegment());
@@ -63,6 +83,17 @@ namespace Billing.Api.Connector
             var response = PostApi(urlBuilder.GetTransactionSegment(), new RestRequest(urlBuilder.GetTransactionSegment()));
 
             log.InfoFormat("Get of the transaction at {0} completed. The response was {1}", configuration.Url, response);
+
+            return null;
+        }
+
+        public GetResponseFromTransaction GetResponse(GetResponseRequest request)
+        {
+            log.InfoFormat("Getting a response for transaction from the billing API at {0} with segment {1}", configuration.Url, urlBuilder.GetResponseSegment());
+
+            var response = PostApi(urlBuilder.GetTransactionSegment(), new RestRequest(urlBuilder.GetResponseSegment()));
+
+            log.InfoFormat("Get of the response for the transaction at {0} completed. The response was {1}", configuration.Url, response);
 
             return null;
         }

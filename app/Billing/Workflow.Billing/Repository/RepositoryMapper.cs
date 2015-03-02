@@ -12,7 +12,8 @@ namespace Workflow.Billing.Repository
         {
             mappings = new Dictionary<Type, TypeMapper>()
             {
-                {typeof (InvoiceTransaction), new TransactionTypeMapper()}
+                {typeof (InvoiceTransaction), new TransactionTypeMapper()},
+                {typeof (InvoiceResponse), new ResponseTypeMapper()}
             };
         }
 

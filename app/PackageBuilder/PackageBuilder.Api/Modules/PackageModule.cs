@@ -10,13 +10,17 @@ using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
+using PackageBuilder.Domain.Dtos.ReadModels;
 using PackageBuilder.Domain.Dtos.WriteModels;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
 using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
 using PackageBuilder.Domain.Entities.Packages.Commands;
+using PackageBuilder.Domain.Entities.Packages.ReadModels;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 using PackageBuilder.Domain.Entities.States.WriteModels;
 using PackageBuilder.TestObjects.Mothers;
+using DataProviderDto = PackageBuilder.Domain.Dtos.WriteModels.DataProviderDto;
+using Package = PackageBuilder.Domain.Entities.Packages.WriteModels.Package;
 
 
 namespace PackageBuilder.Api.Modules
@@ -46,29 +50,17 @@ namespace PackageBuilder.Api.Modules
                             {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            Get["/Packages/Package/{id}"] = parameters =>
+            Get["/Packages/DataProvider/{id}"] = parameters =>
             {
                 PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
-
 
                 if (package == null)
                     throw new Exception("Package could not be found");
 
-                var dataProviders = GetSelectedDataProvidersForSearchRequest(package);
+                var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
+                dto.SetDataProviders(package);
 
-                //TODO: Building Request Package here is not the best place. Should come already built from Read Side together with its ACTION??
-                var requestPackage = new Package(package.Id, package.Name, ActionMother.LicensePlateSearchAction,
-                    dataProviders.Select(
-                        s =>
-                            new DataProvider(s.Id, (DataProviderName) Enum.Parse(typeof (DataProviderName), s.Name),
-                                s.Description, s.CostOfSale, null,
-                                s.FieldLevelCostPriceOverride, s.Owner, s.CreatedDate, s.EditedDate,
-                                s.DataFields.Select(
-                                    d =>
-                                        new DataField(d.Name, d.Type, d.Definition, d.Industries, d.Price,
-                                            d.IsSelected.HasValue ? d.IsSelected.Value : false)))));
-
-                return Response.AsJson(requestPackage);
+                return Response.AsJson(dto);
             };
 
             Post["/Packages"] = parameters =>
@@ -133,55 +125,6 @@ namespace PackageBuilder.Api.Modules
 
                 return Response.AsJson(new {msg = "Success, " + parameters.id + " deleted"});
             };
-        }
-
-        private static IEnumerable<DataProviderDto> GetSelectedDataProvidersForSearchRequest(PackageDto package)
-        {
-            var dataProviderList = new List<DataProviderDto>();
-
-            foreach (var dataProvider in package.DataProviders)
-            {
-
-                CheckForSelectedDataFields(dataProvider.DataFields.ToList(), dataProviderList,
-                    dataProvider);
-            }
-
-            return dataProviderList;
-        }
-
-
-        private static bool CheckForSelectedDataFields(IEnumerable<DataProviderFieldItemDto> dataFields,
-            ICollection<DataProviderDto> dataProviderList, DataProviderDto dataProvider)
-        {
-            Debug.Write("\n\n***********************");
-            Debug.Write(string.Format("\nData Provider {0}", dataProvider.Name));
-
-            foreach (var field in dataFields)
-            {
-                var isSelected = field.IsSelected != null && field.IsSelected.Value ||
-                                 field.DataFields.FirstOrDefault(
-                                     w => w.IsSelected != null && w.IsSelected.Value) != null;
-
-                Debug.Write(string.Format("\n{0} has selected datafields or is selected? {1} Fields Selected Value {2}",
-                    field.Name, isSelected, field.IsSelected));
-
-                if (isSelected)
-                {
-                    dataProviderList.Add(dataProvider);
-                    return true;
-                }
-
-                Debug.Write("\n++++++++++++++++++++++++++++++++++++++++");
-                Debug.Write("\nContinue to next list.....");
-                var stop = CheckForSelectedDataFields(field.DataFields.ToList(), dataProviderList, dataProvider);
-
-                if (stop)
-                    return true;
-            }
-
-            Debug.Write("\n========================================");
-            Debug.Write("\nReturning false.....");
-            return false;
         }
     }
 }

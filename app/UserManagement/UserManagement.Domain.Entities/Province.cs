@@ -2,10 +2,8 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class Province : NamedEntity
+    public class Province : ValueEntity
     {
-        public virtual string Value { get; set; }
-
         protected Province() { }
 
         public Province(string val) : base(val)

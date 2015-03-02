@@ -2,10 +2,8 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class Role : NamedEntity
+    public class Role : ValueEntity
     {
-        public virtual string Value { get; protected internal set; }
-
         protected Role() { }
 
         public Role(string val) : base(val)
@@ -16,7 +14,6 @@ namespace UserManagement.Domain.Entities
         public virtual void UpdateValue(string value)
         {
             Value = value;
-            base.Name = value;
         }
     }
 }

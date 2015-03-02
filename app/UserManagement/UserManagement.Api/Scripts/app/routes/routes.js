@@ -193,6 +193,33 @@ function initializeLookupRoutes(sammy) {
     sammy.get('/Lookups/:type', function (context) {
         context.load('/Lookups/' + context.params.type, { dataType: 'html', cache: false }).swap();
     });
+    sammy.get('/Lookups/Add/:type', function (context) {
+        context.load('/Lookups/Add/' + context.params.type, { dataType: 'html', cache: false })
+            .swap()
+            .then(function () {
+                initializePlugins();
+            });
+    });
+    sammy.post('/Lookups', function (context) {
+        $(context.target).ajaxSubmit({
+            success: function (response) {
+                context.redirect('/#/Lookups/' + response);
+            }
+        });
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false;
+    });
+    sammy.post('/Lookups/:id', function (context) {
+        $(context.target).ajaxSubmit({
+            success: function (response) {
+                context.redirect('/#/Lookups/' + response);
+            }
+        });
+        // !!! Important !!! 
+        // always return false to prevent standard browser submit and page navigation
+        return false;
+    });
     sammy.get('/Lookups/:type/:filter', function (context) {
         //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
     });

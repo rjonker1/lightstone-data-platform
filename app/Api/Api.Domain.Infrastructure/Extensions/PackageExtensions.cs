@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.Reflection;
+using Api.Domain.Infrastructure.Dto;
 using Api.Domain.Infrastructure.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
@@ -17,7 +20,6 @@ namespace Api.Domain.Infrastructure.Extensions
         {
             try
             {
-                var settings = new JsonSerializerSettings();
 
                 var actionConverter = new ActionDataConverter(typeof (Action));
                 var criteriaConverter = new CriteriaDataConverter(typeof (Criteria));
@@ -25,22 +27,34 @@ namespace Api.Domain.Infrastructure.Extensions
                 var dataProviderConverter =
                     new DataProviderDataConverter(
                         typeof (PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider));
+                var contractResolver = new DefaultContractResolver();
+                contractResolver.DefaultMembersSearchFlags |= BindingFlags.NonPublic;
 
-                settings.Converters.Add(actionConverter);
-                settings.Converters.Add(criteriaConverter);
-                settings.Converters.Add(dataFieldConverter);
-                settings.Converters.Add(dataProviderConverter);
+                var settings = new JsonSerializerSettings()
+                {
+                    ContractResolver = contractResolver,
+                    Converters = new List<JsonConverter>()
+                    {
+                        actionConverter,
+                        criteriaConverter,
+                        dataFieldConverter,
+                        dataProviderConverter
+                    }
+                };
+                //settings.Converters.Add(actionConverter);
+                //settings.Converters.Add(criteriaConverter);
+                //settings.Converters.Add(dataFieldConverter);
+                //settings.Converters.Add(dataProviderConverter);
 
-                return JsonConvert.DeserializeObject<Package>(
+                var dto = JsonConvert.DeserializeObject<PackageResponseDto>(
                     json, settings);
 
+                return new Package(dto.Id, dto.Name, dto.Action, dto.DataProviders);
             }
             catch
             {
                 return null;
             }
-
-
         }
 
         private class Action : IAction
@@ -52,7 +66,7 @@ namespace Api.Domain.Infrastructure.Extensions
         }
 
         public static ILaceRequest ToLicensePlateSearchRequest(this Package package, Guid userId, string userName,
-            string searchTerm, string firstName)
+            string searchTerm, string firstName, Guid requestId)
         {
             var request = new LaceRequest();
 
@@ -60,7 +74,7 @@ namespace Api.Domain.Infrastructure.Extensions
                 new Requests.User(userId, userName, firstName), new Context(package.Name, null),
                 new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty,
                     string.Empty),
-                new Aggregation(Guid.NewGuid()));
+                new Aggregation(requestId));
 
             return request;
         }

@@ -1,10 +1,5 @@
-﻿@using UserManagement.Api.Modules
-@using UserManagement.Api.ViewModels
+﻿@using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>
-
-@{
-    //Layout = "Shared/_Layout.cshtml";
-}
 
 @{
     var viewModel = new PageHeadingViewModel(Model.Name, "");
@@ -24,21 +19,28 @@
 </table>
 
 <script>
-    var table = $("#@tableId").DataTable({
-        dom: '<"toolbar">frtip',
+    var table = $("#@tableId").dataTable({
+        dom: '<"table-toolbar">frtip<"bottom"l>',
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        processing: true,
+        serverSide: true,
         ajax: "/Lookups/" + "@Model.AssemblyQualifiedName",
         columns: [
             { data: "id", visible: false },
-            { data: "name" },
             { data: "value" },
-            { data: null, defaultContent: "<button class='btn btn-primary'>Edit</button>" }
+            {
+                data: null,
+                render: function (data, type, full, meta) {
+                    return '<a class="btn btn-primary entity-edit" href="#/Lookups/' + data.id + '">Edit</a>'; //"<a class='btn btn-primary entity-edit' href='#/Customers/'" + data.id + ">Edit</a>";
+                }
+            }
         ]
     });
 
-    $("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
-
-    $('#@tableId tbody').on('click', 'button', function () {
+    //$("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
+    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='#/Lookups/Add/@Model.AssemblyQualifiedName'>Add</a>");
+    @*$('#@tableId tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
         alert(data.id + " - " + data.name);
-    });
+    });*@
 </script>

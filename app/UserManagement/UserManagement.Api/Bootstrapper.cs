@@ -1,17 +1,14 @@
-﻿using System.Linq;
-using Castle.Windsor;
+﻿using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
-using Nancy.Session;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
 using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
@@ -24,7 +21,6 @@ using UserManagement.Domain.Entities.Commands.Provinces;
 using UserManagement.Domain.Entities.Commands.Roles;
 using UserManagement.Domain.Entities.Commands.UserTypes;
 using UserManagement.Infrastructure.Helpers;
-using ISession = NHibernate.ISession;
 
 namespace UserManagement.Api
 {

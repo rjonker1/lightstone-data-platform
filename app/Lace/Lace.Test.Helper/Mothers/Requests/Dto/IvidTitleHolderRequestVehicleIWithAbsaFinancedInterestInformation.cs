@@ -36,17 +36,45 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             }
         }
 
-        public string LicenceNo
+          public string LicenceNo
         {
-            get
-            {
-                return "NRB891W";
-            }
+            get;
+            private set;
+            //get
+            //{
+            //    return "XMC167GP";
+            //}
         }
 
         public string Vin
         {
-            get { return "KMHSH81XSBU704415"; }
+            get;
+            private set;
+            //get { return "SB1KV58E40F039277"; }
         }
+
+
+        public void SetLicenseNo(string licenceNo)
+        {
+            LicenceNo = licenceNo;
+        }
+
+        public void SetMake(string make)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetVinNumber(string vinNumber)
+        {
+            Vin = vinNumber;
+        }
+
+        public IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation()
+        {
+            Vin = "KMHSH81XSBU704415";
+            LicenceNo = "NRB891W";
+        }
+
+      
     }
 }

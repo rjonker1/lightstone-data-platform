@@ -36,6 +36,10 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<PDto>();
                 var user = users.Get(dto.UserId);
                 var contractDto = Mapper.Map<Contract, ContractDto>(user.Contracts.First());
+
+                if(!contractDto.Packages.Any())
+                    throw new Exception("No packages for contract");
+
                 return Response.AsJson(new { PackageId = contractDto.Packages.First().Key });
             };
         }

@@ -7,17 +7,17 @@ namespace Workflow.Billing.Consumer
 {
     public class BillingService : IBillingService
     {
-        private readonly ILog log = LogManager.GetLogger<BillingService>();
+        private readonly ILog _log = LogManager.GetLogger<BillingService>();
         private IBus bus;
 
         public void Start()
         {
-            log.DebugFormat("Started billing service");
+            _log.DebugFormat("Started billing service");
 
             var container = new WindsorContainer().Install(FromAssembly.This());
             bus = container.Resolve<IBus>();
 
-            log.DebugFormat("Billing service started");
+            _log.DebugFormat("Billing service started");
         }
 
         public void Stop()
@@ -27,7 +27,7 @@ namespace Workflow.Billing.Consumer
                 bus.Dispose();
             }
 
-           log.DebugFormat("Stopped billing service");
+           _log.DebugFormat("Stopped billing service");
         }
     }
 }

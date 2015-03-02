@@ -2,15 +2,14 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class PaymentType : NamedEntity
+    public class PaymentType : ValueEntity
     {
-        public virtual string Value { get; set; }
-
         protected PaymentType() { }
 
-        public PaymentType(string name) : base(name)
+        public PaymentType(string value)
+            : base(value)
         {
-            Value = name;
+            Value = value;
         }
     }
 }

@@ -2,10 +2,8 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class EscalationType : NamedEntity
+    public class EscalationType : ValueEntity
     {
-        public virtual string Value { get; set; }
-
         protected EscalationType() { }
 
         public EscalationType(string val) : base(val)

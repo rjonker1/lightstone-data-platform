@@ -9,14 +9,16 @@ namespace Workflow.Billing.Consumer.Installers
 {
     public class BusInstaller : IWindsorInstaller
     {
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log = LogManager.GetLogger<BusInstaller>();
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            log.InfoFormat("Installing bus");
+            _log.InfoFormat("Installing bus");
 
             container.Register(
-                Component.For<IBus>().UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container)).LifestyleSingleton()
+                Component.For<IBus>()
+                    .UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container))
+                    .LifestyleSingleton()
                 );
         }
     }

@@ -2,10 +2,8 @@
 
 namespace UserManagement.Domain.Entities
 {
-    public class CommercialState : NamedEntity
+    public class CommercialState : ValueEntity
     {
-        public virtual string Value { get; protected internal set; }
-
         protected CommercialState() { }
 
         public CommercialState(string val) : base(val)
