@@ -42,6 +42,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
+                ValidateVehicleDetail(response);
+
                 monitoring.StartCall(new { _request.User, _request.Vehicle, _request.Context }, _stopWatch);
 
                 GetCarInformation();
@@ -108,6 +110,15 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .SetupDataSources()
                     .GenerateData()
                     .BuildValuation();
+        }
+
+        private void ValidateVehicleDetail(IProvideResponseFromLaceDataProviders response)
+        {
+            if (_request.Vehicle != null && !string.IsNullOrEmpty(_request.Vehicle.Vin) &&
+                _request.Vehicle.Vin.Equals(response.IvidResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
+                return;
+
+            _request.Vehicle.SetVinNumber(response.IvidResponse.Vin);
         }
 
     }
