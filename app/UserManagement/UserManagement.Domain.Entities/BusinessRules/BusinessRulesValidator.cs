@@ -2,6 +2,7 @@
 using UserManagement.Domain.Entities.BusinessRules.Clients;
 using UserManagement.Domain.Entities.BusinessRules.Contracts;
 using UserManagement.Domain.Entities.BusinessRules.Customers;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.PaymentTypes;
 using UserManagement.Domain.Entities.BusinessRules.Packages;
 using UserManagement.Domain.Entities.BusinessRules.Users;
 
@@ -47,6 +48,7 @@ namespace UserManagement.Domain.Entities.BusinessRules
             //Hard delete entities
             else if (enity is PaymentType)
             {
+                _handler.Handle(new DeletePaymentTypeRule(enity as PaymentType));
             }
         }
     }
