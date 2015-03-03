@@ -17,9 +17,7 @@ namespace UserManagement.Domain.Entities.Tests
         [Observation]
         public void should_persist()
         {
-            var user = new User();
             var roles = new HashSet<Role> { new Role("Admin") };
-            //var user1 = new User("Name", "Surname", "IdNumber", "Number", "UserName", "Password", true, new UserType("Type"), roles);
             new PersistenceSpecification<User>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.FirstName, "FirstName")
@@ -31,9 +29,9 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.IsActive, true)
                 .CheckReference(c => c.UserType, new UserType("Test"))
                 .CheckComponentList(c => c.Roles, roles)
-                .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer("Name", "AccName", new CommercialState("State"), new CreateSource("Source"), new PlatformStatus("Status"), null) })
+                .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer {Name = "Name", AccountOwnerName = "AccName", CommercialState = new CommercialState("State"),  PlatformStatus = new PlatformStatus("Status")} })
                 .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(new Client("Client"), "Alias") })
-                .VerifyTheMappings(user);
+                .VerifyTheMappings();
         }
     }
 }

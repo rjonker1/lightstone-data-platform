@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UserManagement.Domain.Dtos
 {
     public class CustomerDto
     {
+        public CustomerDto()
+        {
+            CreateSourceIds = Enumerable.Empty<Guid>();
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
-        public Guid CreateSourceId { get; set; }
+        public IEnumerable<Guid> CreateSourceIds { get; set; }
         public Guid PlatformStatusId { get; set; }
         public Guid BillingId { get; set; }
         public string BillingContactNumber { get; set; }
