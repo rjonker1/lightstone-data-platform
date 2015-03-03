@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Entities
 {
@@ -10,7 +11,7 @@ namespace UserManagement.Domain.Entities
         public virtual string ContactNumber { get; set; }
         [Required]
         public virtual string ContractPerson { get; set; }
-        [Required]
+        [Required, DomainSignature]
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
         public virtual string PastelId { get; set; }

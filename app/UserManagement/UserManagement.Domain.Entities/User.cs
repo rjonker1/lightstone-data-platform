@@ -13,7 +13,7 @@ namespace UserManagement.Domain.Entities
         public virtual string LastName { get; set; }
         public virtual string IdNumber { get; set; }
         public virtual string ContactNumber { get; set; }
-        [Required]
+        [Required, DomainSignature]
         public virtual string UserName { get; protected internal set; }
         [Required]
         public virtual string Password { get; protected internal set; }
