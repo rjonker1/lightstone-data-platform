@@ -65,7 +65,6 @@ namespace UserManagement.Api.Modules
 
             Delete["/Users/{id}"] = _ =>
             {
-
                 var dto = this.Bind<UserDto>();
                 var entity = Mapper.Map(dto, users.Get(dto.Id));
 

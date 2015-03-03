@@ -142,9 +142,25 @@ function initializeUserRoutes(sammy) {
                 context.redirect('/#/Users');
             }
         });
-        // !!! Important !!! 
+        /// !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
         return false; 
+    });
+    sammy.get('/Users/Delete/:id', function (context) {
+
+        console.log(context);
+        $.ajax({
+            type: "DELETE",
+            url: '/Users/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json',
+            success: function (result) {
+                toastr["success"]("Success", result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                toastr["error"]("Error", thrownError);
+            }
+        });
     });
 }
 
