@@ -64,6 +64,11 @@
                 toastr["error"]("Error", jqxhr.responseText);
             $.unblockUI();
         });
+        $(document).ajaxSuccess(function (event, jqxhr, settings, thrownError) {
+            if (jqxhr.responseJSON)
+                toastr["success"]("Success", jqxhr.responseJSON);
+            $.unblockUI();
+        });
     </script>
 </body>
 </html>

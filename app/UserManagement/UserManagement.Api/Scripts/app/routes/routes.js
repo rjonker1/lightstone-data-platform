@@ -155,10 +155,8 @@ function initializeUserRoutes(sammy) {
             contentType: 'application/json',
             datatype: 'json',
             success: function (result) {
-                toastr["success"]("Success", result);
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                toastr["error"]("Error", thrownError);
             }
         });
     });
