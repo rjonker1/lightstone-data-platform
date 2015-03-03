@@ -3,12 +3,12 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities.Commands.Entities
 {
-    public class CreateUpdateEntity : DomainCommand
+    public class SoftDeleteEntity : DomainCommand
     {
         public Entity Entity;
         public string Function;
 
-        public CreateUpdateEntity(Entity entity, string function)
+        public SoftDeleteEntity(Entity entity, string function)
         {
             Entity = entity;
             Function = function;

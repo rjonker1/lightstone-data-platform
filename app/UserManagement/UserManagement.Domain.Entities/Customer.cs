@@ -14,6 +14,7 @@ namespace UserManagement.Domain.Entities
         public virtual ContactDetail ContactDetail { get; protected internal set; }
         public virtual ISet<User> Users { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
+        public virtual bool IsActive { get; set; }
 
         public Customer() { }
 

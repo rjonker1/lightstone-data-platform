@@ -6,7 +6,6 @@ using Api.Domain.Infrastructure.Extensions;
 using Billing.Api.Connector;
 using DataPlatform.Shared.Dtos;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Commands;
 using Nancy;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -18,7 +17,7 @@ namespace Api.Modules
     {
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IEntryPoint entryPoint,
             IConnectToBilling billingConnector, IUserManagementApiClient userManagementApi,
-            ICreateBillingTransaction billingTransaction, ICreateBillingResponse billingResponse)
+            ICreateBillingTransaction billingTransaction)
         {
             Get["/"] = parameters =>
             {
@@ -53,11 +52,7 @@ namespace Api.Modules
                 if (package == null)
                     throw new Exception("Package for data provider could not be resolved");
 
-                var requestId = Guid.NewGuid(); //for billing!!
-
-                billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
-                if (!billingTransaction.BillingCreated) 
-                    throw new Exception("Package could not be processed");
+                var requestId = Guid.NewGuid();
 
                 var request = package.ToLicensePlateSearchRequest(userId, apiRequest.Username,
                     apiRequest.SearchTerm, apiRequest.Username, requestId);
@@ -67,10 +62,9 @@ namespace Api.Modules
                 if(!responses.Any())
                     throw new Exception("No response for package");
 
-                billingResponse.CreateBillingResponseForPackage(package, userId, requestId);
-
-                if (!billingResponse.BillingCreated)
-                    throw new Exception("Response for request could not be processed");
+                billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
+                if (!billingTransaction.BillingCreated)
+                    throw new Exception("Package could not be processed");
 
                 return Response.AsJson(responses.First().Response);
             };

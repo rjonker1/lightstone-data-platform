@@ -6,22 +6,24 @@ using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Domain.CommandHandlers.Entities
 {
-    public class CreateUpdateEntityHandler : AbstractMessageHandler<CreateUpdateEntity>
+    public class SoftDeleteEntityHandler : AbstractMessageHandler<SoftDeleteEntity>
     {
+
         private readonly IRepository<Entity> _repository;
 
         private readonly IHandleMessages _handler;
 
-        public CreateUpdateEntityHandler(IRepository<Entity> repository, IHandleMessages handler)
+        public SoftDeleteEntityHandler(IRepository<Entity> repository, IHandleMessages handler)
         {
             _repository = repository;
             _handler = handler;
         }
 
-        public override void Handle(CreateUpdateEntity command)
+        public override void Handle(SoftDeleteEntity command)
         {
+
             var brv = new BusinessRulesValidator(_handler);
-            brv.CheckRules(command.Entity, command.Function);
+            brv.CheckRules(command.Entity, "Delete");
 
             _repository.SaveOrUpdate(command.Entity);
         }

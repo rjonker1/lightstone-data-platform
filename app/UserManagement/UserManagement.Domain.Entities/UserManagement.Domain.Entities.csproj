@@ -69,10 +69,14 @@
     <Compile Include="AuditLog.cs" />
     <Compile Include="BusinessRules\BusinessRulesValidator.cs" />
     <Compile Include="BusinessRules\Clients\CreateClientRule.cs" />
+    <Compile Include="BusinessRules\Clients\SoftDeleteClientRule.cs" />
     <Compile Include="BusinessRules\Contracts\CreateContractRule.cs" />
+    <Compile Include="BusinessRules\Contracts\SoftDeleteContractRule.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRule.cs" />
+    <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
+    <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
+    <Compile Include="Commands\Entities\SoftDeleteEntity.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\PaymentTypes\ImportPaymentType.cs" />
     <Compile Include="Commands\PlatformStatuses\ImportPlatformStatus.cs" />
@@ -128,7 +133,17 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Commands\Addresses\" />
+    <Folder Include="Commands\Billings\" />
+    <Folder Include="Commands\Clients\" />
+    <Folder Include="Commands\CustomerProfiles\" />
+    <Folder Include="Commands\Customers\" />
+    <Folder Include="Commands\Packages\" />
+    <Folder Include="Commands\ProfileDetails\" />
+    <Folder Include="Commands\UserProfiles\" />
+    <Folder Include="Commands\Users\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="NHibernate\Interceptors\QueryAuditLog.sql" />
   </ItemGroup>
