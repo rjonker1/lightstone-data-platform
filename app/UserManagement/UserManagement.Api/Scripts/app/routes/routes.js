@@ -63,7 +63,16 @@ function initializeCusomerRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
-    
+    sammy.get('/Customers/Delete/:id', function (context) {
+
+        console.log(context);
+        $.ajax({
+            type: "DELETE",
+            url: '/Customers/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
+    });
 }
 
 function initializeClientRoutes(sammy) {
