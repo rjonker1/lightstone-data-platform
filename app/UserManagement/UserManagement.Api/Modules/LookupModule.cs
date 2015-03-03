@@ -87,7 +87,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ValueEntityDto>();
                 var valueEntity = entities.First(x => x.Id == dto.Id);
 
-                bus.Publish(new SoftDeleteEntity(valueEntity));
+                bus.Publish(new DeleteLookupEntity(valueEntity));
 
                 return Response.AsJson("TEST");
             };
