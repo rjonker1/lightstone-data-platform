@@ -62,7 +62,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Consumers\BillResponseConsumer.cs" />
     <Compile Include="Consumers\BillTransactionConsumer.cs" />
     <Compile Include="Consumers\SqlServerConnectionController.cs" />
     <Compile Include="Domain\InvoiceResponse.cs" />

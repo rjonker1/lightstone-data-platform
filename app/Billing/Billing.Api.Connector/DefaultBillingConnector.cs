@@ -10,9 +10,9 @@ namespace Billing.Api.Connector
     public class DefaultBillingConnector : IConnectToBilling
     {
         private static readonly ILog log = LogManager.GetLogger<DefaultBillingConnector>();
-        private readonly IRestClient client;
-        private readonly IBillingConnectorConfiguration configuration;
-        private readonly BillingUrlBuilder urlBuilder;
+        private readonly IRestClient _client;
+        private readonly IBillingConnectorConfiguration _configuration;
+        private readonly BillingUrlBuilder _urlBuilder;
 
         public DefaultBillingConnector(IBillingConnectorConfiguration configuration) : this(configuration, new RestClient(configuration.Url))
         {
@@ -20,28 +20,28 @@ namespace Billing.Api.Connector
 
         public DefaultBillingConnector(IBillingConnectorConfiguration configuration, IRestClient client)
         {
-            this.configuration = configuration;
-            urlBuilder = new BillingUrlBuilder(configuration);
-            this.client = client;
+            this._configuration = configuration;
+            _urlBuilder = new BillingUrlBuilder(configuration);
+            this._client = client;
         }
 
         public BillingConnectorResponse Ping(PingRequest request)
         {
-            log.InfoFormat("Pinging the billing API at {0} with segment {1}", configuration.Url, urlBuilder.PingSegment());
+            log.InfoFormat("Pinging the billing API at {0} with segment {1}", _configuration.Url, _urlBuilder.PingSegment());
 
-            var response = PostApi(urlBuilder.PingSegment(), new RestRequest(urlBuilder.PingSegment()));
+            var response = PostApi(_urlBuilder.PingSegment(), new RestRequest(_urlBuilder.PingSegment()));
 
-            log.InfoFormat("Pinging the billing API at {0} completed. The response was {1}", configuration.Url, response);
+            log.InfoFormat("Pinging the billing API at {0} completed. The response was {1}", _configuration.Url, response);
 
             return response;
         }
 
         public BillingConnectorResponse CreateTransaction(CreateTransaction transaction)
         {
-            log.InfoFormat("Creating a transaction via the billing API at {0} with segment {1}", configuration.Url,
-                urlBuilder.CreateTransactionSegment());
+            log.InfoFormat("Creating a transaction via the billing API at {0} with segment {1}", _configuration.Url,
+                _urlBuilder.CreateTransactionSegment());
 
-            var postRequest = new RestRequest(urlBuilder.CreateTransactionSegment())
+            var postRequest = new RestRequest(_urlBuilder.CreateTransactionSegment())
             {
                 RequestFormat = DataFormat.Json,
                 
@@ -49,51 +49,19 @@ namespace Billing.Api.Connector
             postRequest.AddHeader("Content-Type", "application/json");
             postRequest.AddBody(transaction);
 
-            var response = PostApi(urlBuilder.CreateTransactionSegment(), postRequest);
+            var response = PostApi(_urlBuilder.CreateTransactionSegment(), postRequest);
 
-            log.InfoFormat("Creating a transaction via the billing API at {0} completed. The response was {1}", configuration.Url, response);
-
-            return response;
-        }
-
-        public BillingConnectorResponse CreateResponse(CreateResponse transactionResponse)
-        {
-            log.InfoFormat("Creating a response transaction via the billing API at {0} with segment {1}", configuration.Url,
-                urlBuilder.CreateResponseSegment());
-
-            var postRequest = new RestRequest(urlBuilder.CreateResponseSegment())
-            {
-                RequestFormat = DataFormat.Json,
-
-            };
-            postRequest.AddHeader("Content-Type", "application/json");
-            postRequest.AddBody(transactionResponse);
-
-            var response = PostApi(urlBuilder.CreateResponseSegment(), postRequest);
-
-            log.InfoFormat("Creating a response transaction via the billing API at {0} completed. The response was {1}", configuration.Url, response);
+            log.InfoFormat("Creating a transaction via the billing API at {0} completed. The response was {1}", _configuration.Url, response);
 
             return response;
         }
-
         public GetTransactionResponse GetTransaction(GetTransactionRequest request)
         {
-            log.InfoFormat("Getting a transaction from the billing API at {0} with segment {1}", configuration.Url, urlBuilder.GetTransactionSegment());
+            log.InfoFormat("Getting a transaction from the billing API at {0} with segment {1}", _configuration.Url, _urlBuilder.GetTransactionSegment());
 
-            var response = PostApi(urlBuilder.GetTransactionSegment(), new RestRequest(urlBuilder.GetTransactionSegment()));
+            var response = PostApi(_urlBuilder.GetTransactionSegment(), new RestRequest(_urlBuilder.GetTransactionSegment()));
 
-            log.InfoFormat("Get of the transaction at {0} completed. The response was {1}", configuration.Url, response);
-
-            return null;
-        }
-
-        public GetResponseFromTransaction GetResponse(GetResponseRequest request)
-        {
-            log.InfoFormat("Getting a response for transaction from the billing API at {0} with segment {1}", configuration.Url, urlBuilder.GetResponseSegment());
-
-            var response = PostApi(urlBuilder.GetTransactionSegment(), new RestRequest(urlBuilder.GetResponseSegment()));
-
-            log.InfoFormat("Get of the response for the transaction at {0} completed. The response was {1}", configuration.Url, response);
+            log.InfoFormat("Get of the transaction at {0} completed. The response was {1}", _configuration.Url, response);
 
             return null;
         }
@@ -102,11 +70,11 @@ namespace Billing.Api.Connector
         {
             try
             {
-                log.InfoFormat("Invoking billing API on {0} with segment {1}", configuration.Url, segment);
+                log.InfoFormat("Invoking billing API on {0} with segment {1}", _configuration.Url, segment);
 
-                request.AddHeader("apikey", configuration.ApiKey);
+                request.AddHeader("apikey", _configuration.ApiKey);
 
-                var response = client.Post(request);
+                var response = _client.Post(request);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                     return new BillingConnectorResponse(true);
@@ -120,7 +88,7 @@ namespace Billing.Api.Connector
             }
             catch (Exception e)
             {
-                log.ErrorFormat("Failed to invoke billing API on {0} because {1}", configuration.Url, e);
+                log.ErrorFormat("Failed to invoke billing API on {0} because {1}", _configuration.Url, e);
             }
             return new BillingConnectorResponse(false);
         }

@@ -5,11 +5,11 @@ namespace Billing.Api.Connector
 {
     internal class BillingUrlBuilder
     {
-        private readonly IBillingConnectorConfiguration configuration;
+        private readonly IBillingConnectorConfiguration _configuration;
 
         public BillingUrlBuilder(IBillingConnectorConfiguration configuration)
         {
-            this.configuration = configuration;
+            _configuration = configuration;
         }
 
         public string PingSegment()
@@ -25,16 +25,6 @@ namespace Billing.Api.Connector
         public string GetTransactionSegment()
         {
             return "/transaction";
-        }
-
-        public string CreateResponseSegment()
-        {
-            return "/response";
-        }
-
-        public string GetResponseSegment()
-        {
-            return "/response";
         }
     }
 }
