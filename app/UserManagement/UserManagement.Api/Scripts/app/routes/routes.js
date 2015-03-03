@@ -65,7 +65,6 @@ function initializeCusomerRoutes(sammy) {
     });
     sammy.get('/Customers/Delete/:id', function (context) {
 
-        console.log(context);
         $.ajax({
             type: "DELETE",
             url: '/Customers/' + context.params.id,
@@ -116,7 +115,6 @@ function initializeClientRoutes(sammy) {
     });
     sammy.get('/Clients/Delete/:id', function (context) {
 
-        console.log(context);
         $.ajax({
             type: "DELETE",
             url: '/Clients/' + context.params.id,
@@ -167,7 +165,6 @@ function initializeUserRoutes(sammy) {
     });
     sammy.get('/Users/Delete/:id', function (context) {
 
-        console.log(context);
         $.ajax({
             type: "DELETE",
             url: '/Users/' + context.params.id,
@@ -217,8 +214,6 @@ function initializeContractRoutes(sammy) {
         return false; 
     });
     sammy.get('/Contracts/Delete/:id', function (context) {
-
-        console.log(context);
         $.ajax({
             type: "DELETE",
             url: '/Contracts/' + context.params.id,
@@ -250,6 +245,7 @@ function initializeLookupRoutes(sammy) {
         return false;
     });
     sammy.post('/Lookups/:id', function (context) {
+        console.log("TEST");
         $(context.target).ajaxSubmit({
             success: function (response) {
                 context.redirect('/#/Lookups/' + response);
@@ -258,6 +254,16 @@ function initializeLookupRoutes(sammy) {
         // !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
         return false;
+    });
+    sammy.get('/Lookups/Delete/:id', function (context) {
+        console.log("TEST");
+
+        $.ajax({
+            type: "DELETE",
+            url: '/Lookups/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
     });
     sammy.get('/Lookups/:type/:filter', function (context) {
         //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();

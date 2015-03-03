@@ -19,6 +19,7 @@ namespace UserManagement.Domain.Entities.BusinessRules
         //Run rules based on entity type of the currently transacted entity.
         public void CheckRules(object enity, string func)
         {
+            //Soft delete entities
             if (enity is User)
             {
                 if(func.Equals("Create")) _handler.Handle(new CreateUserRule(enity as User));
@@ -41,6 +42,11 @@ namespace UserManagement.Domain.Entities.BusinessRules
             {
                 if(func.Equals("Create")) _handler.Handle(new CreateContractRule(enity as Contract));
                 if(func.Equals("Delete")) _handler.Handle(new SoftDeleteContractRule(enity as Contract));
+            }
+
+            //Hard delete entities
+            else if (enity is PaymentType)
+            {
             }
         }
     }

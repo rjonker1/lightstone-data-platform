@@ -81,6 +81,16 @@ namespace UserManagement.Api.Modules
                     .WithModel(new LookupViewModel(type))
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
             };
+
+            Delete["/Lookups/{id}"] = _ =>
+            {
+                var dto = this.Bind<ValueEntityDto>();
+                var valueEntity = entities.First(x => x.Id == dto.Id);
+
+                bus.Publish(new SoftDeleteEntity(valueEntity));
+
+                return Response.AsJson("TEST");
+            };
         }
     }
 }

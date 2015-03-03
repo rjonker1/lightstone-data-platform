@@ -79,7 +79,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ContractDto>();
                 var entity = contracts.Get(dto.Id);
 
-                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+                bus.Publish(new SoftDeleteEntity(entity));
 
                 return Response.AsJson("Contract has been soft deleted");
             };
