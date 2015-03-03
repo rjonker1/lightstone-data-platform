@@ -207,6 +207,16 @@ function initializeContractRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
+    sammy.get('/Contracts/Delete/:id', function (context) {
+
+        console.log(context);
+        $.ajax({
+            type: "DELETE",
+            url: '/Contracts/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
+    });
 }
 
 function initializeLookupRoutes(sammy) {
