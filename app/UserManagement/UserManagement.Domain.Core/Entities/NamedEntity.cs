@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UserManagement.Domain.Core.NHibernate.Attributes;
 
 namespace UserManagement.Domain.Core.Entities
 {
     public abstract class NamedEntity : Entity, INamedEntity
     {
-        [Required]
+        [Required, DomainSignature]
         public virtual string Name { get; protected internal set; }
 
         protected NamedEntity() { }
