@@ -1,27 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using UserManagement.Domain.Core.Repositories;
+using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
     public class CustomerModule : NancyModule
     {
-        public CustomerModule(IBus bus, IRepository<Customer> customers)
+        public CustomerModule(IBus bus, ICustomerRepository customers)
         {
             Get["/Customers"] = _ =>
             {
-                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers);
+                var model = this.Bind<DataTablesViewModel>();
+                var dto = (IEnumerable<CustomerDto>)Mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(customers.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
             Get["/Customers/Add"] = parameters =>

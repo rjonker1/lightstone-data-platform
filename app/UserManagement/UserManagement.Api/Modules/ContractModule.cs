@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using UserManagement.Api.ViewModels;
 using UserManagement.Domain.CommandHandlers.Contracts;
-using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Contracts;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
     public class ContractModule : NancyModule
     {
-        public ContractModule(IBus bus, IRepository<Contract> contracts)
+        public ContractModule(IBus bus, IContractRepository contracts)
         {
             Get["/Contracts"] = _ =>
             {
-                var dto = Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(contracts);
+                var model = this.Bind<DataTablesViewModel>();
+                var dto = (IEnumerable<ContractDto>)Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(contracts.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
             Get["/Contracts/Add"] = parameters =>

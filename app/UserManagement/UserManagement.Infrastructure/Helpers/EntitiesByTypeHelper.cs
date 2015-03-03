@@ -73,9 +73,9 @@ namespace UserManagement.Infrastructure.Helpers
 
         public PagedList<ValueEntity> GetValueEntities(Type type, string value, int pageIndex, int pageSize)
         {
-            return !string.IsNullOrEmpty(value)
-                ? new PagedList<ValueEntity>(GetValueEntities(type), pageIndex, pageSize, x => (x.Value + "").Trim().ToLower().StartsWith((value + "").Trim().ToLower()))
-                : new PagedList<ValueEntity>(GetValueEntities(type), pageIndex, pageSize);
+            var predicate = PredicateBuilder.False<ValueEntity>();
+            predicate = predicate.Or(x => (x.Value + "").Trim().ToLower().StartsWith((value + "").Trim().ToLower()));
+            return new PagedList<ValueEntity>(GetValueEntities(type), pageIndex, pageSize, predicate);
         }
     }
 }

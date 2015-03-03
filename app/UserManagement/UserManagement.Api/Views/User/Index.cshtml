@@ -9,6 +9,7 @@
             <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>User Name</th>
             <th></th>
         </tr>
     </thead>
@@ -16,13 +17,16 @@
 
 <script>
     var table = $("#users_table").DataTable({
-        dom: '<"table-toolbar">frtip',
-        retrieve: true,
+        dom: '<"table-toolbar">frtip<"bottom"l>',
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        processing: true,
+        serverSide: true,
         ajax: "/Users",
         columns: [
             { data: "id", visible: false },
             { data: "firstName" },
             { data: "lastName" },
+            { data: "userName" },
             {
                 data: null,
                 render: function(data, type, full, meta) {

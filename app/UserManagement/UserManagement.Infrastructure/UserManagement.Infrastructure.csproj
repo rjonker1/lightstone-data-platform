@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\EntitiesByTypeHelper.cs" />
+    <Compile Include="Helpers\PredicateBuilder.cs" />
     <Compile Include="MessageAdapter.cs" />
     <Compile Include="NHibernate\Conventions\AuditLogConvention.cs" />
     <Compile Include="NHibernate\AutoPersistenceModelConfiguration.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="NHibernate\MappingOverrides\NamedEntityOverride.cs" />
     <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ClientRepository.cs" />
+    <Compile Include="Repositories\ContractRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
