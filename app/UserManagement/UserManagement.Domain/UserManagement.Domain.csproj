@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
@@ -102,6 +108,7 @@
     <Compile Include="CommandHandlers\Provinces\ImportProvinceHandler.cs" />
     <Compile Include="CommandHandlers\Roles\ImportRoleHandler.cs" />
     <Compile Include="CommandHandlers\UserTypes\ImportUserTypeHandler.cs" />
+    <Compile Include="CommandHandlers\ValueEntities\CreateValueEntityHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +123,10 @@
     <ProjectReference Include="..\UserManagement.Domain.Entities\UserManagement.Domain.Entities.csproj">
       <Project>{3CFF1FF6-1AAE-435A-9C81-BB0793979596}</Project>
       <Name>UserManagement.Domain.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Infrastructure\UserManagement.Infrastructure.csproj">
+      <Project>{9C48FF0A-FB6D-4905-A0A3-23965471C74D}</Project>
+      <Name>UserManagement.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +148,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
