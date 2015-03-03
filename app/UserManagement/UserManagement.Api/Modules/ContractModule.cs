@@ -39,7 +39,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ContractDto>();
                 var entity = Mapper.Map(dto, contracts.Get(dto.Id));
 
-                bus.Publish(new CreateUpdateEntity(entity, true));
+                bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                 return null;
             };
@@ -57,7 +57,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ContractDto>();
                 var entity = Mapper.Map(dto, contracts.Get(dto.Id));
 
-                bus.Publish(new CreateUpdateEntity(entity, false));
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
                 return null;
             };
@@ -72,6 +72,16 @@ namespace UserManagement.Api.Modules
                 handler.Handle(new GetPackageOnContract(dto.ContractId));
 
                 return Response.AsJson(handler.Response);
+            };
+
+            Delete["/Contracts/{id}"] = _ =>
+            {
+                var dto = this.Bind<ContractDto>();
+                var entity = Mapper.Map(dto, contracts.Get(dto.Id));
+
+                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+
+                return Response.AsJson("Contract has been soft deleted");
             };
         }
     }

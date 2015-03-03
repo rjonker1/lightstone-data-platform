@@ -17,7 +17,7 @@ namespace Api.Modules
     {
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IEntryPoint entryPoint,
             IConnectToBilling billingConnector, IUserManagementApiClient userManagementApi,
-            ICreateBillingTransaction billingTransaction, ICreateBillingResponse billingResponse)
+            ICreateBillingTransaction billingTransaction)
         {
             Get["/"] = parameters =>
             {
@@ -52,19 +52,19 @@ namespace Api.Modules
                 if (package == null)
                     throw new Exception("Package for data provider could not be resolved");
 
-                var requestId = Guid.NewGuid(); //for billing!!
-
-                billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
-                if (!billingTransaction.BillingCreated) 
-                    throw new Exception("Package could not be processed");
+                var requestId = Guid.NewGuid();
 
                 var request = package.ToLicensePlateSearchRequest(userId, apiRequest.Username,
                     apiRequest.SearchTerm, apiRequest.Username, requestId);
 
                 var responses = entryPoint.GetResponsesFromLace(request);
 
-                if(responses.Any())
-                    billingResponse.CreateBillingResponseForPackage(package, userId, requestId);
+                if(!responses.Any())
+                    throw new Exception("No response for package");
+
+                billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
+                if (!billingTransaction.BillingCreated)
+                    throw new Exception("Package could not be processed");
 
                 return Response.AsJson(responses.First().Response);
             };

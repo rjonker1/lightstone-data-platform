@@ -21,7 +21,7 @@ namespace UserManagement.Domain.CommandHandlers.Entities
         public override void Handle(CreateUpdateEntity command)
         {
             var brv = new BusinessRulesValidator(_handler);
-            brv.CheckRules(command.Entity, command.Create);
+            brv.CheckRules(command.Entity, command.Function);
 
             _repository.SaveOrUpdate(command.Entity);
         }

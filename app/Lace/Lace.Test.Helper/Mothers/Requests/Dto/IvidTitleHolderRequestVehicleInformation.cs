@@ -38,15 +38,43 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 
         public string LicenceNo
         {
-            get
-            {
-                return "XMC167GP";
-            }
+            get;
+            private set;
+            //get
+            //{
+            //    return "XMC167GP";
+            //}
         }
 
         public string Vin
         {
-            get { return "AHT31UNK408007735"; }
+            get;
+            private set;
+            //get { return "SB1KV58E40F039277"; }
         }
+
+
+        public void SetLicenseNo(string licenceNo)
+        {
+            LicenceNo = licenceNo;
+        }
+
+        public void SetMake(string make)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetVinNumber(string vinNumber)
+        {
+            Vin = vinNumber;
+        }
+
+        public IvidTitleHolderRequestVehicleInformation()
+        {
+            Vin = "AHT31UNK408007735";
+            LicenceNo = "XMC167GP";
+        }
+
+     
     }
 }

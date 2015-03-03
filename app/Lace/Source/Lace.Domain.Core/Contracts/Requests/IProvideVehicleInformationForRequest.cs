@@ -9,5 +9,9 @@
         string LicenceNo { get; }
         string Vin { get; }
 
+        void SetVinNumber(string vinNumber);
+        void SetLicenseNo(string licenceNo);
+        void SetMake(string make);
+
     }
 }

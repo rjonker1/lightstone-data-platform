@@ -68,6 +68,4 @@ namespace Api.Unit.Tests.Fakes
             return null;
         }
     }
-
-    
 }
