@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using UserManagement.Domain.Core.Entities;
@@ -11,7 +12,6 @@ namespace UserManagement.Domain.Core.Repositories
 {
     public class Repository<T> : IRepository<T>
     {
-
         private readonly ISession _session;
 
         public Repository(ISession session)
@@ -73,7 +73,7 @@ namespace UserManagement.Domain.Core.Repositories
         {
             if ((entity is Entity) && (entity as Entity).Id == new Guid())
             {
-                //this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity));
+                this.Info(() => "Not a valid NHibernate entity {0} - {1}".FormatWith((entity as Entity).Id, entity));
                 throw new InvalidOperationException();
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace UserManagement.Domain.Core.Helpers
 {
@@ -28,11 +29,11 @@ namespace UserManagement.Domain.Core.Helpers
             : this(source, pageIndex, pageSize, source.Count(), x => true)
         { }
 
-        public PagedList(IQueryable<T> source, int pageIndex, int pageSize, Func<T, bool> filter)
-            : this(source, pageIndex, pageSize, source.Count(), filter)
+        public PagedList(IQueryable<T> source, int pageIndex, int pageSize, Expression<Func<T, bool>> predicate)
+            : this(source, pageIndex, pageSize, source.Count(), predicate)
         { }
 
-        public PagedList(IQueryable<T> source, int pageIndex, int pageSize, int recordsTotal, Func<T, bool> filter)
+        public PagedList(IQueryable<T> source, int pageIndex, int pageSize, int recordsTotal, Expression<Func<T, bool>> predicate)
         {
             _inner = new List<T>();
 
@@ -47,7 +48,7 @@ namespace UserManagement.Domain.Core.Helpers
                     PageTotal++;
             }
             
-            var filtered = source.Where(filter);
+            var filtered = source.Where(predicate);
             RecordsFiltered = filtered.Count();
 
             _inner.AddRange(filtered.Skip(pageIndex * pageSize).Take(pageSize));

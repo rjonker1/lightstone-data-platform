@@ -105,6 +105,16 @@ function initializeClientRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
+    sammy.get('/Clients/Delete/:id', function (context) {
+
+        console.log(context);
+        $.ajax({
+            type: "DELETE",
+            url: '/Clients/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
+    });
 }
 
 function initializeUserRoutes(sammy) {
@@ -142,9 +152,19 @@ function initializeUserRoutes(sammy) {
                 context.redirect('/#/Users');
             }
         });
-        // !!! Important !!! 
+        /// !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
         return false; 
+    });
+    sammy.get('/Users/Delete/:id', function (context) {
+
+        console.log(context);
+        $.ajax({
+            type: "DELETE",
+            url: '/Users/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
     });
 }
 

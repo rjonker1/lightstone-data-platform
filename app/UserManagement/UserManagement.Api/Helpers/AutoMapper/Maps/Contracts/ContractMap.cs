@@ -13,9 +13,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Contracts
         public void CreateMaps()
         {
             Mapper.CreateMap<Contract, ContractDto>()
-                .ForMember(dest => dest.Clients, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Clients)))
-                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers)))
-                .ForMember(dest => dest.Packages, opt => opt.MapFrom(x => x.Packages != null ? x.Packages.Select(p => new KeyValuePair<Guid, string>(p.PackageId, p.Name)) : Enumerable.Empty<KeyValuePair<Guid, string>>()));
+                .ForMember(dest => dest.Clients, opt => opt.MapFrom(x => x.Clients != null && x.Clients.Any() ? Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Clients) : Enumerable.Empty<NamedEntityDto>()))
+                .ForMember(dest => dest.Customers, opt => opt.MapFrom(x => x.Customers != null && x.Customers.Any() ? Mapper.Map<IEnumerable<NamedEntity>, IEnumerable<NamedEntityDto>>(x.Customers) : Enumerable.Empty<NamedEntityDto>()))
+                .ForMember(dest => dest.Packages, opt => opt.MapFrom(x => x.Packages != null && x.Packages.Any() ? x.Packages.Select(p => new KeyValuePair<Guid, string>(p.PackageId, p.Name)) : Enumerable.Empty<KeyValuePair<Guid, string>>()));
 
             Mapper.CreateMap<IEnumerable<Contract>, IEnumerable<ContractDto>>()
                 .ConvertUsing(s => s.Select(Mapper.Map<Contract, ContractDto>));

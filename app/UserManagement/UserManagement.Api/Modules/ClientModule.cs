@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.ExceptionHandling;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using UserManagement.Domain.Core.Repositories;
+using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
     public class ClientModule : NancyModule
     {
-        public ClientModule(IBus bus, IRepository<Client> clients)
+        public ClientModule(IBus bus, IClientRepository clients)
         {
             Get["/Clients"] = _ =>
             {
-                var dto = Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients);
+                var model = this.Bind<DataTablesViewModel>();
+                var dto = (IEnumerable<ClientDto>)Mapper.Map<IEnumerable<Client>, IEnumerable<ClientDto>>(clients.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
             Get["/Clients/Add"] = parameters =>
@@ -35,7 +37,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new CreateUpdateEntity(entity, true));
+                bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                 return null;
             };
@@ -53,9 +55,20 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
 
-                bus.Publish(new CreateUpdateEntity(entity, false));
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
                 return null;
+            };
+
+            Delete["/Clients/{id}"] = _ =>
+            {
+
+                var dto = this.Bind<ClientDto>();
+                var entity = clients.Get(dto.Id);
+
+                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+
+                return Response.AsJson("Client has been soft deleted");
             };
         }
     }

@@ -76,7 +76,6 @@ namespace Api
 
             container.Register(Component.For<IConnectToBilling>().Instance(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration())));
             container.Register(Component.For<ICreateBillingTransaction>().ImplementedBy<CreateBillingTransaction>().LifestyleTransient());
-            container.Register(Component.For<ICreateBillingResponse>().ImplementedBy<CreateBillingResponse>().LifestyleTransient());
 
             container.Register(Component.For<ICallFicaVerification>().ImplementedBy<FicaVerificationService>().LifestyleTransient());
             container.Register(Component.For<IHandleFicaVerficationRequests>().ImplementedBy<FicaVerificationHandler>().LifestyleTransient());

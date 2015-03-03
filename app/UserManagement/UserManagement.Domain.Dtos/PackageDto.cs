@@ -7,5 +7,6 @@ namespace UserManagement.Domain.Dtos
         public virtual Guid Id { get; set; }
         public virtual Guid PackageId { get; set; }
         public virtual string Name { get; set; }
+        public virtual bool IsActive { get; set; }
     }
 }
