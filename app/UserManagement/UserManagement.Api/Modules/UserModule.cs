@@ -65,9 +65,8 @@ namespace UserManagement.Api.Modules
 
             Delete["/Users/{id}"] = _ =>
             {
-
                 var dto = this.Bind<UserDto>();
-                var entity = Mapper.Map(dto, users.Get(dto.Id));
+                var entity = users.Get(dto.Id);
 
                 bus.Publish(new SoftDeleteEntity(entity, "Delete"));
 

@@ -62,7 +62,7 @@ namespace UserManagement.Api.Modules
             {
 
                 var dto = this.Bind<ClientDto>();
-                var entity = Mapper.Map(dto, clients.Get(dto.Id));
+                var entity = clients.Get(dto.Id);
 
                 bus.Publish(new SoftDeleteEntity(entity, "Delete"));
 
