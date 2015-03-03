@@ -34,7 +34,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<CustomerDto>();
                 var entity = Mapper.Map(dto, customers.Get(dto.Id));
 
-                bus.Publish(new CreateUpdateEntity(entity, true));
+                bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                 return null;
             };
@@ -52,9 +52,19 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<CustomerDto>();
                 var entity = Mapper.Map(dto, customers.Get(dto.Id));
 
-                bus.Publish(new CreateUpdateEntity(entity, false));
+                bus.Publish(new CreateUpdateEntity(entity, "Update"));
 
                 return null;
+            };
+
+            Delete["/Customers/{id}"] = _ =>
+            {
+                var dto = this.Bind<CustomerDto>();
+                var entity = Mapper.Map(dto, customers.Get(dto.Id));
+
+                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+
+                return Response.AsJson("Customer has been soft deleted");
             };
         }
     }
