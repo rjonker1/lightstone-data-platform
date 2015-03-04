@@ -49,8 +49,8 @@ namespace UserManagement.Api.Modules
 
                 return View["Save", dto];
             };
-            //todo: Get Sammy.js to work with Put route
-            Post["/Customers/{id}"] = _ =>
+            
+            Put["/Customers/{id}"] = _ =>
             {
                 var dto = this.Bind<CustomerDto>();
                 var entity = Mapper.Map(dto, customers.Get(dto.Id));

@@ -59,7 +59,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Post["/Lookups/{id}"] = _ =>
+            Put["/Lookups/{id}"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
                 var valueEntity = entities.First(x => x.Id == dto.Id);

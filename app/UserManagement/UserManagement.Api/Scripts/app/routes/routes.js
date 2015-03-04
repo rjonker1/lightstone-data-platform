@@ -49,12 +49,10 @@ function initializeCusomerRoutes(sammy) {
                 initializePlugins();
             });
     });
-    //sammy.put('/Customers/:id', function(context) {
-    //    context.load('/Customers/' + context.params.id, { dataType: 'html', cache: false }).swap();
-    //    return true; // Allow form submit
-    //});
-    sammy.post('/Customers/:id', function (context) {
+    sammy.put('/Customers/:id', function (context) {
+        var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
+            type: method,
             success: function () {
                 context.redirect('/#/Customers');
             }
@@ -95,8 +93,10 @@ function initializeClientRoutes(sammy) {
                 initializePlugins();
             });
     });
-    sammy.post('/Clients/:id', function (context) {
+    sammy.put('/Clients/:id', function (context) {
+        var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
+            type: method,
             success: function () {
                 context.redirect('/#/Clients');
             }
@@ -146,8 +146,10 @@ function initializeUserRoutes(sammy) {
                 initializePlugins();
             });
     });
-    sammy.post('/Users/:id', function (context) {
+    sammy.put('/Users/:id', function (context) {
+        var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
+            type: method,
             success: function () {
                 context.redirect('/#/Users');
             }
@@ -197,8 +199,10 @@ function initializeContractRoutes(sammy) {
                 initializePlugins();
             });
     });
-    sammy.post('/Contracts/:id', function (context) {
+    sammy.put('/Contracts/:id', function (context) {
+        var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
+            type: method,
             success: function () {
                 context.redirect('/#/Contracts');
             }
@@ -230,8 +234,10 @@ function initializeLookupRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false;
     });
-    sammy.post('/Lookups/:id', function (context) {
+    sammy.put('/Lookups/:id', function (context) {
+        var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
+            type: method,
             success: function (response) {
                 context.redirect('/#/Lookups/' + response);
             }

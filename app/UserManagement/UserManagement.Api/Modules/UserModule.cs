@@ -53,7 +53,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Post["/Users/{id}"] = _ =>
+            Put["/Users/{id}"] = _ =>
             {
                 var dto = this.Bind<UserDto>();
                 var clientUsersDto = this.Bind<List<ClientUserDto>>();

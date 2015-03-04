@@ -8,7 +8,7 @@
 @{
     var isCreate = Model.Id == new Guid();
     var pageHeadingViewModel = new PageHeadingViewModel("User detail", isCreate ? "Create a new user" : "Update existing user");
-    var method = isCreate ? "POST" : "POST";
+    var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Users" : "/Users/" + Model.Id;
     var count = 0;
 }
