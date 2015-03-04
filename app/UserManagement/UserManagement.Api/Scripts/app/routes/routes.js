@@ -255,8 +255,10 @@ function initializeLookupRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false;
     });
+    sammy.get('/Lookups/:type/:filter', function (context) {
+        //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
+    });
     sammy.get('/Lookups/Delete/:id', function (context) {
-        console.log("TEST");
 
         $.ajax({
             type: "DELETE",
@@ -264,9 +266,6 @@ function initializeLookupRoutes(sammy) {
             contentType: 'application/json',
             datatype: 'json'
         });
-    });
-    sammy.get('/Lookups/:type/:filter', function (context) {
-        //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
     });
 }
 

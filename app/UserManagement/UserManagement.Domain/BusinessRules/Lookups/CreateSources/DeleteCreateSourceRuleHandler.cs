@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using UserManagement.Domain.Core.MessageHandling;
@@ -21,7 +22,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.CreateSources
         public override void Handle(DeleteCreateSourceRule command)
         {
             var entity = command.Entity;
-            var createSources = _customerListings.Select(x => x).Where(x => x.CreateSource.Id.Equals(entity.Id));
+            var createSources = _customerListings.Select(cus => cus.CreateSources.Where(crs => crs.Id.Equals(entity.Id)));
 
             if (createSources.Any())
             {
