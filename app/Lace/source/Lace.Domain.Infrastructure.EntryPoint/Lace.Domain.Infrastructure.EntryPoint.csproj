@@ -59,9 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.715\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.715, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.715\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.726\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -119,6 +119,10 @@
     <ProjectReference Include="..\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.DataProviders.Lsp\Lace.Domain.DataProviders.Lsp.csproj">
+      <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
+      <Name>Lace.Domain.DataProviders.Lsp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj">
       <Project>{8f3eb9bb-7f5b-43af-8033-4ac91443a0e8}</Project>

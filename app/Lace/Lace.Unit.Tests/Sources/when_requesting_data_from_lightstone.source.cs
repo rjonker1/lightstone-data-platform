@@ -8,6 +8,7 @@ using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
+using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
 using Xunit.Extensions;
 
@@ -26,7 +27,7 @@ namespace Lace.Unit.Tests.Sources
             _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
-            _response = new LaceResponse();
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _callTheSource = new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),
                 new FakeCarRepositioryFactory());
 
