@@ -60,14 +60,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.715\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.726, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.728, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.726\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.728\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging, Version=1.0.0.715, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.1.0.0.715\lib\net45\Lightstone.DataPlatform.Shared.Messaging.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.1.0.0.728\lib\net45\Lightstone.DataPlatform.Shared.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NEventStore">
