@@ -63,6 +63,7 @@
     <Compile Include="Contracts\Requests\IProvideJisInformation.cs" />
     <Compile Include="Contracts\Requests\IProvideRequestAggregation.cs" />
     <Compile Include="Contracts\Requests\IProvideUserInformationForRequest.cs" />
+    <Compile Include="Contracts\Requests\IProvidePropertyInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideVehicleInformationForRequest.cs" />
     <Compile Include="Models\IvidCodePair.cs" />
     <None Include="Contracts\DataProviders\Specifics\IRespondWithCarModel.cs.old" />

@@ -117,5 +117,13 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new DataFieldBuilder().With("AccidentClaims").With(typeof(string)).Build();
             }
         }
+
+        public static IDataField ErfNumberField
+        {
+            get
+            {
+                return new DataFieldBuilder().With("ErfNumber").With(typeof(string)).Build();
+            }
+        }
     }
 }

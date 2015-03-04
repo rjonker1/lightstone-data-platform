@@ -28,5 +28,13 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new IndustryBuilder().With("All").Build();
             }
         }
+
+        public static Industry Property
+        {
+            get
+            {
+                return new IndustryBuilder().With("Property").Build();
+            }
+        }
     }
 }

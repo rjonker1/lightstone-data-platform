@@ -144,6 +144,9 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_request.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_ivid_title_holder.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_lightstone.cs" />
+    <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_Lsp.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
@@ -198,6 +201,10 @@
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lsp\Lace.Domain.DataProviders.Lsp.csproj">
+      <Project>{FB2933C0-2D3D-4ACC-80DC-7162BE740442}</Project>
+      <Name>Lace.Domain.DataProviders.Lsp</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj">
       <Project>{8f3eb9bb-7f5b-43af-8033-4ac91443a0e8}</Project>

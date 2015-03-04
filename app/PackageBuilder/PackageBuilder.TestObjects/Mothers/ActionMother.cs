@@ -70,5 +70,16 @@ namespace PackageBuilder.TestObjects.Mothers
                             .Build();
             }
         }
+
+        public static IAction LspAction
+        {
+            get
+            {
+                return new ActionBuilder()
+                    .With("Lsp")
+                    .With(DataFieldMother.ErfNumberField)
+                    .Build();
+            }
+        }
     }
 }

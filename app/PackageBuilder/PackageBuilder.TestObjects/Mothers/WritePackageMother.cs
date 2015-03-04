@@ -102,5 +102,21 @@ namespace PackageBuilder.TestObjects.Mothers
                     .Build();
             }
         }
+
+        public static Package LspPackage
+        {
+            get
+            {
+                return new WritePackageBuilder()
+                    .With("Lightstone Property package")
+                    .With(ActionMother.LspAction)
+                    .With(IndustryMother.Finance, IndustryMother.Property)
+                    .With(StateMother.Published)
+                    .With(0.1m)
+                    .With(DateTime.UtcNow)
+                    .With(WriteDataProviderMother.SignioDriversLicenseDataProvider)
+                    .Build();
+            }
+        }
     }
 }

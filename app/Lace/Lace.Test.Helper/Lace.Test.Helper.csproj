@@ -117,6 +117,8 @@
     <Compile Include="Builders\Buses\QueueSender.cs" />
     <Compile Include="Builders\Cmds\CommandBuilder.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
+    <Compile Include="Builders\Property\LspRequestBuilder.cs" />
+    <Compile Include="Builders\Property\LspSourcePackage.cs" />
     <Compile Include="Builders\Requests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Builders\Requests\LaceRequestCarInformationRequestBuilder.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberLightstoneSourcePackage.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Mothers\Requests\LicensePlateNumberRgtOnlyRequest.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberRgtVinOnlyRequest.cs" />
     <Compile Include="Builders\Responses\SourceResponseBuilder.cs" />
+    <Compile Include="Mothers\Requests\LSPRequests\PropertiesRequest.cs" />
     <Compile Include="Mothers\Sources\Lightstone\BandData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\CarData.cs" />
     <Compile Include="Mothers\Sources\Lightstone\CarInfoData.cs" />
