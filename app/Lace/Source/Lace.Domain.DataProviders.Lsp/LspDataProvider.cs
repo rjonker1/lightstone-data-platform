@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Lsp
 
         public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.SignioDecryptDriversLicense, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.Lsp, _request);
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lsp
             {
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
-                        DataProviderCommandSource.SignioDecryptDriversLicense);
+                        DataProviderCommandSource.Lsp);
                 _monitoring.Begin(new {_request.DriversLicense}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLspSourceCall(), new CallLspDataProvider(_request));
@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Lsp
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.SignioDriversLicenseDecryptionResponse == null)
+                if (response.LightstoneResponse == null)
                     CallFallbackSource(response, _monitoring);
             }
 
@@ -52,9 +52,9 @@ namespace Lace.Domain.DataProviders.Lsp
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
-            response.SignioDriversLicenseDecryptionResponse = null;
-            response.SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled();
-            response.SignioDriversLicenseDecryptionResponseHandled.HasNotBeenHandled();
+            response.LightstoneResponse = null;
+            response.LightstoneResponseHandled = new LightstoneResponseHandled();
+            response.LightstoneResponseHandled.HasNotBeenHandled();
         }
     }
 }
