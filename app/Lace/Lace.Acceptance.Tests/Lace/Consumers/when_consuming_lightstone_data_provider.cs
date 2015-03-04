@@ -5,6 +5,7 @@ using Lace.Domain.DataProviders.Lightstone;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
+using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
 
@@ -21,7 +22,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _request = new LicensePlateNumberLightstoneOnlyRequest();
-            _response = new LaceResponse();
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }
 
         public override void Observe()
