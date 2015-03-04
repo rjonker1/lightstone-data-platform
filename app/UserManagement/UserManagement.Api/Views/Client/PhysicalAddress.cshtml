@@ -4,7 +4,7 @@
 <div class="box dark">
     <header>
         <div class="icons">
-            <i class="fa fa-money"></i>
+            <i class="glyphicon glyphicon-home"></i>
         </div>
         <h5>Physical Address</h5>
         <div class="toolbar">
@@ -12,62 +12,92 @@
                 <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
                     <i class="fa fa-minus"></i>
                 </a>
-                @*<a class="btn btn-default btn-xs full-box" href="javascript:;">
-                        <i class="fa fa-expand"></i>
-                    </a>
-                    <a class="btn btn-danger btn-xs close-box" href="javascript:;">
-                        <i class="fa fa-times"></i>
-                    </a>*@
             </nav>
         </div>
     </header>
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Type</label>
-            <div class="col-lg-3">
-                @Html.HiddenFor(x => x.ContactDetailPhysicalAddressId)
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressType, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.HiddenFor(x => x.ContactDetailPhysicalAddressId)
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressType, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Line1</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressLine1, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressLine1, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Line2</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressLine2, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressLine2, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Suburb</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressSuburb, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressSuburb, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address City</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCity, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-tower" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCity, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Country</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCountry, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-globe" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCountry, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Postal Code</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressPostalCode, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressPostalCode, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+
             <label class="control-label col-lg-4">Physical Address Province</label>
-            <div class="col-lg-3">
+            <div class="input-group col-lg-2">
                 <select name="ContactDetailPhysicalAddressProvinceId" data-placeholder="Choose a province..." class="chosen-select">
                     <option value=""></option>
                     @foreach (SelectListItem item in ViewBag.Provinces.Value)
@@ -77,6 +107,7 @@
                     }
                 </select>
             </div>
+
         </div>
         <div class="form-group">
             <div class="col-lg-4"></div>
