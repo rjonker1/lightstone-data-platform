@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.ContractDurations
         public override void Handle(DeleteContractDurationRule command)
         {
             var entity = command.Entity;
-            var contractDurations = _contractListings.Select(x => x).Where(x => x.ContractDuration != null);
+            var contractDurations = _contractListings.Select(x => x).Where(x => x.ContractDuration.Id.Equals(entity.Id));
 
             if (contractDurations.Any())
             {

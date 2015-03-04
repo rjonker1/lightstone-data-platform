@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.PlatformStatuses
         public override void Handle(DeletePlatformStatusRule command)
         {
             var entity = command.Entity;
-            var platformStatuses = _customerListings.Select(x => x).Where(x => x.PlatformStatus != null);
+            var platformStatuses = _customerListings.Select(x => x).Where(x => x.PlatformStatus.Id.Equals(entity.Id));
 
             if (platformStatuses.Any())
             {

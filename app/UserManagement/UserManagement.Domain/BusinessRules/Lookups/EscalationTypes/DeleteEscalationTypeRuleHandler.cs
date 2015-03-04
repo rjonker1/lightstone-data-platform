@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.EscalationTypes
         public override void Handle(DeleteEscalationTypeRule command)
         {
             var entity = command.Entity;
-            var escalationTypes = _contractListings.Select(x => x).Where(x => x.EscalationType != null);
+            var escalationTypes = _contractListings.Select(x => x).Where(x => x.EscalationType.Id.Equals(entity.Id));
 
             if (escalationTypes.Any())
             {

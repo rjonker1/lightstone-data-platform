@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.CreateSources
         public override void Handle(DeleteCreateSourceRule command)
         {
             var entity = command.Entity;
-            var createSources = _customerListings.Select(x => x).Where(x => x.CreateSource != null);
+            var createSources = _customerListings.Select(x => x).Where(x => x.CreateSource.Id.Equals(entity.Id));
 
             if (createSources.Any())
             {

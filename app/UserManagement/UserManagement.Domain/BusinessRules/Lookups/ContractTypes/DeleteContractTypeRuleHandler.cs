@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.ContractTypes
         public override void Handle(DeleteContractTypeRule command)
         {
             var entity = command.Entity;
-            var contractTypes = _contractListings.Select(x => x).Where(x => x.ContractType != null);
+            var contractTypes = _contractListings.Select(x => x).Where(x => x.ContractType.Id.Equals(entity.Id));
 
             if (contractTypes.Any())
             {

@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.Provinces
         public override void Handle(DeleteProvinceRule command)
         {
             var entity = command.Entity;
-            var provinces = _addressListings.Select(x => x).Where(x => x.Province != null);
+            var provinces = _addressListings.Select(x => x).Where(x => x.Province.Id.Equals(entity.Id));
 
             if (provinces.Any())
             {

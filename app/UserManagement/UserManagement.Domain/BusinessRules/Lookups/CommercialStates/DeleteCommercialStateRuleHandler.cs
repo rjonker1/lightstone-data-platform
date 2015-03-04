@@ -22,7 +22,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.CommercialStates
         {
 
             var entity = command.Entity;
-            var commercialStates = _customerListings.Select(x => x).Where(x => x.CommercialState != null);
+            var commercialStates = _customerListings.Select(x => x).Where(x => x.CommercialState.Id.Equals(entity.Id));
 
             if (commercialStates.Any())
             {

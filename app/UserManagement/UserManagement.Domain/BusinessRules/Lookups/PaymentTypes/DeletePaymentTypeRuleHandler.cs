@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.PaymentTypes
         public override void Handle(DeletePaymentTypeRule command)
         {
             var entity = command.Entity;
-            var paymentTypes = _billingListings.Select(x => x).Where(x => x.PaymentType != null);
+            var paymentTypes = _billingListings.Select(x => x).Where(x => x.PaymentType.Id.Equals(entity.Id));
 
             if (paymentTypes.Any())
             {
