@@ -53,7 +53,8 @@ namespace UserManagement.Api
                 new HelperInstaller(),
                 new ApiClientInstaller(),
                 new RedisInstaller(),
-                new AuthenticationInstaller()
+                new AuthenticationInstaller(),
+                new HashProviderInstaller()
                 );
 
             //Drop create
