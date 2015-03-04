@@ -17,7 +17,7 @@
 <div class="box dark">
     <header>
         <div class="icons">
-            <i class="fa fa-edit"></i>
+            <i class="glyphicon glyphicon-user"></i>
         </div>
         <h5>Input Text Fields</h5>
         <div class="toolbar">
@@ -37,53 +37,76 @@
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <form action="@url" method="@method" class="form-horizontal">
             <div class="form-group">
-                @*@Html.LabelFor(x => x.FirstName, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Name</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                       @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.LastName, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Surname</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.IdNumber, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">ID Number</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.ContactNumber, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Contact Number</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-book" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.UserName, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Username</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.Password, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Password</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "", type = "password" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "", type = "password" })
+                    </div>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.UserTypeId, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">User Type</label>
-                <div class="col-lg-3">
-                    @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
-                    <select name="UserTypeId" data-placeholder="User Type..." class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select name="UserTypeId" data-placeholder="Choose user type..." class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.UserTypes.Value)
                         {
@@ -92,13 +115,13 @@
                         }
                     </select>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.RoleIds, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Roles</label>
-                <div class="col-lg-3">
-                    @*@Html.DropDownListFor(x => x.ProvinceId, "", (IEnumerable<SelectListItem>)ViewBag.Provinces.Value, Model.ProvinceId, new { @class = "chosen-select", data_placeholder = "Choose a province..." })*@
-                    <select name="RoleIds" data-placeholder="Role..." multiple class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select name="RoleIds" data-placeholder="Search Roles..." multiple class="chosen-select">
                         @foreach (SelectListItem item in ViewBag.Roles.Value)
                         {
                             var isSelected = Model.RoleIds != null && Model.RoleIds.Contains(new Guid(item.Value));
@@ -106,12 +129,13 @@
                         }
                     </select>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.CustomerIds, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Customers</label>
-                <div class="col-lg-3 chosen-autocomplete" data-type="@typeof(Customer).AssemblyQualifiedName">
-                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Role..." multiple class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Search Customers..." multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Customers)
                         {
                             var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
@@ -119,11 +143,12 @@
                         }
                     </select>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.ClientUsers, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Clients</label>
-                <div class="col-lg-3 auto-list-complete" data-type="@typeof(Client).AssemblyQualifiedName">
+                <div class="input-group col-lg-2">
                     <input id="ClientIds" class="form-control" type="text" />
 
                     <ul>
@@ -138,6 +163,7 @@
                         }
                     </ul>
                 </div>
+                
             </div>
             <div class="form-group">
                 <div class="col-lg-4"></div>
