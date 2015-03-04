@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UserManagement.Domain.Entities</RootNamespace>
-    <AssemblyName>Lightstone.Dataplatform.UserManagement.Domain.Entities</AssemblyName>
+    <AssemblyName>UserManagement.Domain.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -82,6 +82,8 @@
     <Compile Include="BusinessRules\Lookups\PaymentTypes\DeletePaymentTypeRule.cs" />
     <Compile Include="BusinessRules\Lookups\PlatformStatuses\DeletePlatformStatusRule.cs" />
     <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRule.cs" />
+    <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRule.cs" />
+    <Compile Include="BusinessRules\Lookups\UserTypes\DeleteUserTypeRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
