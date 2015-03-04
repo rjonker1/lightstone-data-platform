@@ -2,7 +2,16 @@
 using UserManagement.Domain.Entities.BusinessRules.Clients;
 using UserManagement.Domain.Entities.BusinessRules.Contracts;
 using UserManagement.Domain.Entities.BusinessRules.Customers;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.CommercialStates;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.ContractDurations;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.ContractTypes;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.CreateSources;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.EscalationTypes;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.PaymentTypes;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.PlatformStatuses;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.Provinces;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.Roles;
+using UserManagement.Domain.Entities.BusinessRules.Lookups.UserTypes;
 using UserManagement.Domain.Entities.BusinessRules.Packages;
 using UserManagement.Domain.Entities.BusinessRules.Users;
 
@@ -18,38 +27,44 @@ namespace UserManagement.Domain.Entities.BusinessRules
         }
 
         //Run rules based on entity type of the currently transacted entity.
-        public void CheckRules(object enity, string func)
+        public void CheckRules(object entity, string func)
         {
             //Soft delete entities
-            if (enity is User)
+            if (entity is User)
             {
-                if(func.Equals("Create")) _handler.Handle(new CreateUserRule(enity as User));
-                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteUserRule(enity as User));
+                if(func.Equals("Create")) _handler.Handle(new CreateUserRule(entity as User));
+                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteUserRule(entity as User));
             }
-            else if (enity is Customer)
+            else if (entity is Customer)
             {
-                if(func.Equals("Create")) _handler.Handle(new CreateCustomerRule(enity as Customer));
-                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteCustomerRule(enity as Customer));
+                if(func.Equals("Create")) _handler.Handle(new CreateCustomerRule(entity as Customer));
+                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteCustomerRule(entity as Customer));
             }
-            else if (enity is Client)
+            else if (entity is Client)
             {
-                if (func.Equals("Create")) _handler.Handle(new CreateClientRule(enity as Client));
-                if (func.Equals("Delete")) _handler.Handle(new SoftDeleteClientRule(enity as Client));
+                if (func.Equals("Create")) _handler.Handle(new CreateClientRule(entity as Client));
+                if (func.Equals("Delete")) _handler.Handle(new SoftDeleteClientRule(entity as Client));
             }
-            else if (enity is Package && func.Equals("Create"))
-                _handler.Handle(new CreatePackageRule(enity as Package));
+            else if (entity is Package && func.Equals("Create"))
+                _handler.Handle(new CreatePackageRule(entity as Package));
 
-            else if (enity is Contract)
+            else if (entity is Contract)
             {
-                if(func.Equals("Create")) _handler.Handle(new CreateContractRule(enity as Contract));
-                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteContractRule(enity as Contract));
+                if(func.Equals("Create")) _handler.Handle(new CreateContractRule(entity as Contract));
+                if(func.Equals("Delete")) _handler.Handle(new SoftDeleteContractRule(entity as Contract));
             }
 
             //Hard delete entities
-            else if (enity is PaymentType)
-            {
-                _handler.Handle(new DeletePaymentTypeRule(enity as PaymentType));
-            }
+            if (entity is PaymentType) _handler.Handle(new DeletePaymentTypeRule(entity as PaymentType));
+            if (entity is PlatformStatus) _handler.Handle(new DeletePlatformStatusRule(entity as PlatformStatus));
+            if (entity is CreateSource) _handler.Handle(new DeleteCreateSourceRule(entity as CreateSource));
+            if (entity is CommercialState) _handler.Handle(new DeleteCommercialStateRule(entity as CommercialState));
+            if (entity is ContractType) _handler.Handle(new DeleteContractTypeRule(entity as ContractType));
+            if (entity is EscalationType) _handler.Handle(new DeleteEscalationTypeRule(entity as EscalationType));
+            if (entity is ContractDuration) _handler.Handle(new DeleteContractDurationRule(entity as ContractDuration));
+            if (entity is Province) _handler.Handle(new DeleteProvinceRule(entity as Province));
+            if (entity is UserType) _handler.Handle(new DeleteUserTypeRule(entity as UserType));
+            if (entity is Role) _handler.Handle(new DeleteRoleRule(entity as Role));
         }
     }
 }
