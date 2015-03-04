@@ -61,7 +61,15 @@ function initializeCusomerRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
-    
+    sammy.get('/Customers/Delete/:id', function (context) {
+
+        $.ajax({
+            type: "DELETE",
+            url: '/Customers/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
+    });
 }
 
 function initializeClientRoutes(sammy) {
@@ -107,7 +115,6 @@ function initializeClientRoutes(sammy) {
     });
     sammy.get('/Clients/Delete/:id', function (context) {
 
-        console.log(context);
         $.ajax({
             type: "DELETE",
             url: '/Clients/' + context.params.id,
@@ -160,7 +167,6 @@ function initializeUserRoutes(sammy) {
     });
     sammy.get('/Users/Delete/:id', function (context) {
 
-        console.log(context);
         $.ajax({
             type: "DELETE",
             url: '/Users/' + context.params.id,
@@ -211,6 +217,14 @@ function initializeContractRoutes(sammy) {
         // always return false to prevent standard browser submit and page navigation
         return false; 
     });
+    sammy.get('/Contracts/Delete/:id', function (context) {
+        $.ajax({
+            type: "DELETE",
+            url: '/Contracts/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
+    });
 }
 
 function initializeLookupRoutes(sammy) {
@@ -248,6 +262,15 @@ function initializeLookupRoutes(sammy) {
     });
     sammy.get('/Lookups/:type/:filter', function (context) {
         //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
+    });
+    sammy.get('/Lookups/Delete/:id', function (context) {
+
+        $.ajax({
+            type: "DELETE",
+            url: '/Lookups/' + context.params.id,
+            contentType: 'application/json',
+            datatype: 'json'
+        });
     });
 }
 

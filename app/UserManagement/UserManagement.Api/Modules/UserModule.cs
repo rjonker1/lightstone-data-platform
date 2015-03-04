@@ -71,7 +71,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<UserDto>();
                 var entity = users.Get(dto.Id);
 
-                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+                bus.Publish(new SoftDeleteEntity(entity));
 
                 return Response.AsJson("User has been soft deleted");
             };

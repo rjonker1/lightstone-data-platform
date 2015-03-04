@@ -3,11 +3,11 @@ using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities.Commands.Entities
 {
-    public class SoftDeleteEntity : DomainCommand
+    public class DeleteLookupEntity : DomainCommand
     {
         public Entity Entity;
 
-        public SoftDeleteEntity(Entity entity)
+        public DeleteLookupEntity(Entity entity)
         {
             Entity = entity;
         }
