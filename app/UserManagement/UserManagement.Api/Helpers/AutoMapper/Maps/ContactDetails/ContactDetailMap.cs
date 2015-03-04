@@ -37,7 +37,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                         ProvinceId = s.ContactDetailPostalAddressProvinceId
                     };
                 })
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.ContactDetailId == new Guid() ? Guid.NewGuid() : x.ContactDetailId))
                 .ForMember(dest => dest.LegalEntityName, opt => opt.MapFrom(x => x.ContactDetailLegalEntityName))
                 .ForMember(dest => dest.AccountsContactName, opt => opt.MapFrom(x => x.ContactDetailAccountsContactName))
                 .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(x => x.ContactDetailEmailAddress))
@@ -73,7 +73,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                         ProvinceId = s.ContactDetailPostalAddressProvinceId
                     };
                 })
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.ContactDetailId == new Guid() ? Guid.NewGuid() : x.ContactDetailId))
                 .ForMember(dest => dest.LegalEntityName, opt => opt.MapFrom(x => x.ContactDetailLegalEntityName))
                 .ForMember(dest => dest.AccountsContactName, opt => opt.MapFrom(x => x.ContactDetailAccountsContactName))
                 .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(x => x.ContactDetailEmailAddress))
