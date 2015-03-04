@@ -4,7 +4,7 @@
 @{
     var isCreate = Model.Id == new Guid();
     var pageHeadingViewModel = new PageHeadingViewModel("Customer detail", isCreate ? "Create a new customer" : "Update existing customer");
-    var method = isCreate ? "POST" : "POST";
+    var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Customers" : "/Customers/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)

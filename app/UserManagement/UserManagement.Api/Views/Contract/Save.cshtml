@@ -8,7 +8,7 @@
 @{
     var isCreate = Model.Id == new Guid();
     var pageHeadingViewModel = new PageHeadingViewModel("Contract detail", isCreate ? "Create a new contract" : "Update existing contract");
-    var method = isCreate ? "POST" : "POST";
+    var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Contracts" : "/Contracts/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)
@@ -16,7 +16,7 @@
 <div class="box dark">
     <header>
         <div class="icons">
-            <i class="fa fa-edit"></i>
+            <i class="glyphicon glyphicon-eye-open"></i>
         </div>
         <h5>Input Text Fields</h5>
         <div class="toolbar">
@@ -24,77 +24,93 @@
                 <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
                     <i class="fa fa-minus"></i>
                 </a>
-                @*<a class="btn btn-default btn-xs full-box" href="javascript:;">
-                    <i class="fa fa-expand"></i>
-                </a>
-                <a class="btn btn-danger btn-xs close-box" href="javascript:;">
-                    <i class="fa fa-times"></i>
-                </a>*@
             </nav>
         </div>
     </header>
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <form action="@url" method="@method" class="form-horizontal">
             <div class="form-group">
-                @*@Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })*@
+
                 <label class="control-label col-lg-4">Name</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.Description, new { @class = "control-label col-lg-4" })*@
+
                 <label class="control-label col-lg-4">Description</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.CommencementDate, new { @class = "control-label col-lg-4" })*@
+
                 <label class="control-label col-lg-4">Commencement Date</label>
-                <div class="col-lg-3">
+                <div class="input-group col-lg-6">
                     <div class="input-group date">
-                        @*@Html.TextBoxFor(x => x.CommencementDate, new { @class = "form-control", placeholder = "" })*@
-                        <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                        <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate">
                     </div>
                 </div>
+
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.EnteredIntoBy, new { @class = "control-label col-lg-4" })*@
+
                 <label class="control-label col-lg-4">Entered Into By</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.EnteredIntoBy, new { @class = "form-control", placeholder = "" })
-                </div>
-            </div>
-            <div class="form-group">
-                @*@Html.LabelFor(x => x.OnlineAcceptance, new { @class = "control-label col-lg-4" })*@
-                <label class="control-label col-lg-4">Online Acceptance</label>
-                <div class="col-lg-3">
-                    <div class="input-group date">
-                        @*@Html.TextBoxFor(x => x.CommencementDate, new { @class = "form-control", placeholder = "" })*@
-                        <input type="text" class="form-control" name="OnlineAcceptance" readonly="true" value="@Model.OnlineAcceptance"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.EnteredIntoBy, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
+
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.RegisteredName, new { @class = "control-label col-lg-4" })*@
+
+                <label class="control-label col-lg-4">Online Acceptance</label>
+                <div class="input-group col-lg-6">
+                    <div class="input-group date">
+                        <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                        <input type="text" class="form-control" name="OnlineAcceptance" readonly="true" value="@Model.OnlineAcceptance">
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                
                 <label class="control-label col-lg-4">Registered Name</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                       @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.RegistrationNumber, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Registration Number</label>
-                <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.RegistrationNumber, new { @class = "form-control", placeholder = "" })
+                <div class="input-group col-lg-2">
+                    <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.RegistrationNumber, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.ContractTypeId, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Contract Type</label>
-                <div class="col-lg-3">
-                    <select name="ContractTypeId" data-placeholder="User Type..." class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select name="ContractTypeId" data-placeholder="Choose user type..." class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
                         {
@@ -103,12 +119,13 @@
                         }
                     </select>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.EscalationTypeId, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Escalation Type</label>
-                <div class="col-lg-3">
-                    <select name="EscalationTypeId" data-placeholder="User Type..." class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select name="EscalationTypeId" data-placeholder="Choose escalation type..." class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
                         {
@@ -117,12 +134,13 @@
                         }
                     </select>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.ContractDurationId, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Contrac Duration</label>
-                <div class="col-lg-3">
-                    <select name="ContractDurationId" data-placeholder="User Type..." class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select name="ContractDurationId" data-placeholder="Choose contrat duration..." class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
                         {
@@ -131,12 +149,13 @@
                         }
                     </select>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.ClientIds, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Clients</label>
-                <div class="col-lg-3 chosen-autocomplete" data-type="@typeof(Client).AssemblyQualifiedName">
-                    <select id="ClientIds" name="ClientIds" data-placeholder="Role..." multiple class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select id="ClientIds" name="ClientIds" data-placeholder="Search for client..." multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Clients)
                         {
                             var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
@@ -144,12 +163,13 @@
                         }
                     </select>
                 </div>
+                
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.CustomerIds, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Customers</label>
-                <div class="col-lg-3 chosen-autocomplete" data-type="@typeof(Customer).AssemblyQualifiedName">
-                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Role..." multiple class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Search for customer..." multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Customers)
                         {
                             var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
@@ -157,12 +177,13 @@
                         }
                     </select>
                 </div>
+               
             </div>
             <div class="form-group">
-                @*@Html.LabelFor(x => x.PackageIdNames, new { @class = "control-label col-lg-4" })*@
+                
                 <label class="control-label col-lg-4">Packages</label>
-                <div class="col-lg-3 chosen-autocomplete-packages" data-type="@typeof(Customer).AssemblyQualifiedName">
-                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Role..." multiple class="chosen-select">
+                <div class="input-group col-lg-2">
+                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Search for package..." multiple class="chosen-select">
                         @foreach (var item in Model.Packages)
                         {
                             var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);
@@ -170,6 +191,7 @@
                         }
                     </select>
                 </div>
+                
             </div>
             <div class="form-group">
                 <div class="col-lg-4"></div>

@@ -4,7 +4,7 @@
 <div class="box dark">
     <header>
         <div class="icons">
-            <i class="fa fa-money"></i>
+            <i class="glyphicon glyphicon-book"></i>
         </div>
         <h5>Contact Info</h5>
         <div class="toolbar">
@@ -23,29 +23,49 @@
     </header>
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Legal Entity Name</label>
-            <div class="col-lg-3">
-                @Html.HiddenFor(x => x.ContactDetailId)
-                @Html.TextBoxFor(x => x.ContactDetailLegalEntityName, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.HiddenFor(x => x.ContactDetailId)
+                    @Html.TextBoxFor(x => x.ContactDetailLegalEntityName, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Accounts Contact Name</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailAccountsContactName, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailAccountsContactName, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Email Address</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailEmailAddress, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailEmailAddress, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Telephone Number</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailTelephoneNumber, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailTelephoneNumber, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
             <div class="col-lg-4"></div>

@@ -28,7 +28,10 @@
             {
                 data: null,
                 render: function(data, type, full, meta) {
-                    return '<a class="btn btn-primary entity-edit" href="#/Contracts/' + data.id + '">Edit</a>';
+                    return '<div class="row">' +
+                            '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + data.id + '">Edit</a></div>' +
+                            '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + data.id + '">Delete</a></div>' +
+                           '</div>';
                 }
             }
         ]

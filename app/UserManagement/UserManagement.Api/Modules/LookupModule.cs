@@ -59,7 +59,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Post["/Lookups/{id}"] = _ =>
+            Put["/Lookups/{id}"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
                 var valueEntity = entities.First(x => x.Id == dto.Id);
@@ -80,6 +80,16 @@ namespace UserManagement.Api.Modules
                     .WithView("Index")
                     .WithModel(new LookupViewModel(type))
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
+            };
+
+            Delete["/Lookups/{id}"] = _ =>
+            {
+                var dto = this.Bind<ValueEntityDto>();
+                var valueEntity = entities.First(x => x.Id == dto.Id);
+
+                bus.Publish(new DeleteLookupEntity(valueEntity));
+
+                return Response.AsJson("TEST");
             };
         }
     }

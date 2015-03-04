@@ -36,10 +36,10 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Users
                 .ForMember(dest => dest.ClientUsers, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<ClientUserDto>, IEnumerable<ClientUser>>(x.ClientUsers)))
                 .AfterMap((src, dest) =>
                 {
+                    dest.HashPassword();
                     foreach (var clientuser in dest.ClientUsers)
                         clientuser.LinkUser(dest);
                 });
-            //.ForMember(dest => dest.Roles, opt => opt.MapFrom(x => Mapper.Map<Tuple<IEnumerable<Guid>, Type>, HashSet<Role>>(new Tuple<IEnumerable<Guid>, Type>(x.RoleIds, typeof(Role)))));
         }
     }
 }

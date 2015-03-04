@@ -50,7 +50,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Post["/Clients/{id}"] = _ =>
+            Put["/Clients/{id}"] = _ =>
             {
                 var dto = this.Bind<ClientDto>();
                 var entity = Mapper.Map(dto, clients.Get(dto.Id) ?? new Client());
@@ -66,7 +66,7 @@ namespace UserManagement.Api.Modules
                 var dto = this.Bind<ClientDto>();
                 var entity = clients.Get(dto.Id);
 
-                bus.Publish(new SoftDeleteEntity(entity, "Delete"));
+                bus.Publish(new SoftDeleteEntity(entity));
 
                 return Response.AsJson("Client has been soft deleted");
             };

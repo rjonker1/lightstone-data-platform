@@ -77,6 +77,7 @@
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -91,6 +92,15 @@
     <Compile Include="BusinessRules\Contracts\SoftDeleteContractRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRuleHandler.cs" />
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\CommercialStates\DeleteCommercialStateRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\ContractDurations\DeleteContractDurationRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\ContractTypes\DeleteContractTypeRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\CreateSources\DeleteCreateSourceRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\EscalationTypes\DeleteEscalationTypeRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\PaymentTypes\DeletePaymentTypeRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\PlatformStatuses\DeletePlatformStatusRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRuleHandler.cs" />
+    <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRuleHandler.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRuleHandler.cs" />
@@ -100,7 +110,9 @@
     <Compile Include="CommandHandlers\Contracts\GetContractPackageHandler.cs" />
     <Compile Include="CommandHandlers\ContractTypes\ImportContractTypeHandler.cs" />
     <Compile Include="CommandHandlers\CreateSources\ImportCreateSourceHandler.cs" />
+    <Compile Include="CommandHandlers\DataImports\ImportStartupDataHandler.cs" />
     <Compile Include="CommandHandlers\Entities\CreateUpdateEntityHandler.cs" />
+    <Compile Include="CommandHandlers\Entities\DeleteLookupEntityHandler.cs" />
     <Compile Include="CommandHandlers\Entities\SoftDeleteEntityHandler.cs" />
     <Compile Include="CommandHandlers\EscalationTypes\ImportEscalationTypeHandler.cs" />
     <Compile Include="CommandHandlers\PaymentTypes\ImportPaymentTypeHandler.cs" />
