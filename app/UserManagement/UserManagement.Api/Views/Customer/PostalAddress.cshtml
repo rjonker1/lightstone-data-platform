@@ -4,7 +4,7 @@
 <div class="box dark">
     <header>
         <div class="icons">
-            <i class="fa fa-money"></i>
+            <i class="glyphicon glyphicon-tags"></i>
         </div>
         <h5>Postal Address</h5>
         <div class="toolbar">
@@ -23,51 +23,87 @@
     </header>
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Type</label>
-            <div class="col-lg-3">
-                @Html.HiddenFor(x => x.ContactDetailPostalAddressId)
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressType, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.HiddenFor(x => x.ContactDetailPostalAddressId)
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressType, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Line1</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine1, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine1, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+            
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Line2</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine2, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine2, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Suburb</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressSuburb, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressSuburb, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address City</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressCity, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-tower" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressCity, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Country</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressCountry, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-globe" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressCountry, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+           
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Postal Code</label>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(x => x.ContactDetailPostalAddressPostalCode, new { @class = "form-control", placeholder = "" })
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressPostalCode, new { @class = "form-control", placeholder = "" })
+                </div>
             </div>
+
         </div>
         <div class="form-group">
+            
             <label class="control-label col-lg-4">Postal Address Province</label>
-            <div class="col-lg-3">
+            <div class="input-group col-lg-2">
                 <select name="ContactDetailPostalAddressProvinceId" data-placeholder="Choose a province..." class="chosen-select">
                     <option value=""></option>
                     @foreach (SelectListItem item in ViewBag.Provinces.Value)
@@ -77,6 +113,7 @@
                     }
                 </select>
             </div>
+
         </div>
         <div class="form-group">
             <div class="col-lg-4"></div>
