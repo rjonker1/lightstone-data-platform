@@ -19,7 +19,7 @@ namespace UserManagement.Domain.Entities.Tests
         {
             var customer = new Customer();
             var paymentType = new PaymentType("PaymentType");
-            var physicalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Gauteng"));
+            var physicalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Limpopo"));
             var postalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Gauteng"));
             var billing = new Billing("ContactNumber", "ContactPerson", "RegistrationNumber", DateTime.Now, "PastelId", "VatNumber", paymentType);
             var roles = new HashSet<Role>{new Role("Role")};
@@ -31,9 +31,9 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.AccountOwnerName, "LastName")
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
-                .CheckReference(c => c.CreateSource, new CreateSource("CommercialState"))
                 .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus"))
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
+                .CheckComponentList(c => c.CreateSources, new HashSet<CreateSource> { new CreateSource("CreateSource1") })
                 .CheckComponentList(c => c.Users, new HashSet<User>{ user })
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
                 .VerifyTheMappings(customer);

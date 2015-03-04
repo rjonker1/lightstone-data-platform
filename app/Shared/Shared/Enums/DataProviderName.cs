@@ -11,6 +11,7 @@
         Jis,
         Anpr,
         PCubedFica,
-        SignioDecryptDriversLicense
+        SignioDecryptDriversLicense,
+        Lsp
     }
 }

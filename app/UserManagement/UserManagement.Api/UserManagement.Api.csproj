@@ -401,7 +401,6 @@
     <Compile Include="Helpers\AutoMapper\Maps\DataTables\DataTablesMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ValueEntities\ValueEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\PackageMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Converters\IdsToEntitiesConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Converters\ClientUserDtoToClientUserConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Addresses\AddressMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Clients\ClientMap.cs" />
@@ -409,7 +408,6 @@
     <Compile Include="Helpers\AutoMapper\Maps\ClientUsers\ClientUserMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ContactDetails\ContactDetailMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Customers\CustomerMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Converters\IdToEntityConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\NamedEntities\NamedEntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Redis\RedisMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Users\UserMap.cs" />
@@ -423,6 +421,7 @@
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
+    <Compile Include="Installers\HashProviderInstaller.cs" />
     <Compile Include="Installers\HelperInstaller.cs" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RedisInstaller.cs" />

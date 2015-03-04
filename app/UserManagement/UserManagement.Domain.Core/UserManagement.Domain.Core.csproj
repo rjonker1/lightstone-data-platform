@@ -101,6 +101,7 @@
     <Compile Include="Repositories\NamedEntityRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\ValueEntityRepository.cs" />
+    <Compile Include="Security\SaltedHash.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
