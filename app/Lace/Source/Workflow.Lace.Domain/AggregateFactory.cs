@@ -3,7 +3,7 @@ using System.Reflection;
 using CommonDomain;
 using CommonDomain.Persistence;
 
-namespace Workflow.Lace.Write.Service
+namespace Workflow.Lace.Domain
 {
     public class AggregateFactory : IConstructAggregates
     {

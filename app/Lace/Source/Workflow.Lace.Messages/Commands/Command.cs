@@ -9,11 +9,10 @@ namespace Workflow.Lace.Messages.Commands
     public class Command
     {
 
-        public Command(Guid id, DataProviderCommandSource dataProvider, object payload, DateTime date)
+        public Command(Guid id, DataProviderCommandSource dataProvider, DateTime date)
         {
             Id = id;
-            DataProvider = dataProvider,
-            Payload = payload;
+            DataProvider = dataProvider;
             Date = date;
         }
 
@@ -22,9 +21,6 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
-
-        [DataMember]
-        public object Payload { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
