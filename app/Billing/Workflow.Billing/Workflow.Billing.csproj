@@ -64,15 +64,12 @@
     </Compile>
     <Compile Include="Consumers\BillTransactionConsumer.cs" />
     <Compile Include="Consumers\SqlServerConnectionController.cs" />
-    <None Include="Domain\InvoiceResponse.cs.delete" />
     <Compile Include="Domain\InvoiceTransaction.cs" />
-    <None Include="Domain\Request.cs.delete" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\Dapper.cs" />
     <Compile Include="Repository\RepositoryMapper.cs" />
-    <None Include="Repository\ResponseTypeMapper.cs.delete" />
     <Compile Include="Repository\TransactionTypeMapper.cs" />
     <Compile Include="Repository\TypeMapper.cs" />
   </ItemGroup>
