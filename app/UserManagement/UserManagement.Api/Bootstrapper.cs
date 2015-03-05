@@ -9,18 +9,7 @@ using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
-using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.Commands.CommercialStates;
-using UserManagement.Domain.Entities.Commands.ContractDurations;
-using UserManagement.Domain.Entities.Commands.ContractTypes;
-using UserManagement.Domain.Entities.Commands.CreateSources;
-using UserManagement.Domain.Entities.Commands.EscalationTypes;
-using UserManagement.Domain.Entities.Commands.PaymentTypes;
-using UserManagement.Domain.Entities.Commands.PlatformStatuses;
-using UserManagement.Domain.Entities.Commands.Provinces;
-using UserManagement.Domain.Entities.Commands.Roles;
-using UserManagement.Domain.Entities.Commands.UserTypes;
 using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
 
