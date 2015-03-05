@@ -41,7 +41,7 @@ namespace PackageBuilder.Api
                 new AutoMapperInstaller()
                 );
 
-            container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
+          //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
             //container.Register(Component.For<IPackageLookupRepository>().Instance(PackageLookupMother.GetCannedVersion())); // Canned test data (sliver implementation)
         }
 
