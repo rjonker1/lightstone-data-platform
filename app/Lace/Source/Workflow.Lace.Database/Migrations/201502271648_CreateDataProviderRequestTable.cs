@@ -12,7 +12,9 @@ namespace Workflow.Lace.Database.Migrations
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("DataProvider").AsInt32().NotNullable()
-                .WithColumn("DataProviderName").AsString().NotNullable();
+                .WithColumn("DataProviderName").AsString().NotNullable()
+                .WithColumn("ConnectionType").AsString().NotNullable()
+                .WithColumn("Connection").AsString().NotNullable();
         }
 
         public override void Down()

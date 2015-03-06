@@ -7,7 +7,7 @@ namespace Workflow.Lace.Database.Migrations
     {
         public override void Up()
         {
-            Create.Table("Requests")
+            Create.Table("RequestHeader")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("RequestId").AsGuid().NotNullable();
@@ -15,7 +15,7 @@ namespace Workflow.Lace.Database.Migrations
 
         public override void Down()
         {
-            Delete.Table("Requests");
+            Delete.Table("RequestHeader");
         }
     }
 }

@@ -13,8 +13,7 @@ namespace Workflow.Lace.Database.Migrations
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("DataProvider").AsInt32().NotNullable()
                 .WithColumn("DataProviderName").AsString().NotNullable()
-                .WithColumn("DataProviderRequestId").AsGuid().NotNullable()
-                .WithColumn("DataProviderResponseId").AsGuid().NotNullable();
+                .WithColumn("DataProviderRequestId").AsGuid().NotNullable();
         }
 
         public override void Down()
