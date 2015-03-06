@@ -13,6 +13,7 @@
     <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="~/Content/DataTables-1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/jasny-bootstrap/css/navmenu-push.css" rel="stylesheet" />
     <link href="~/Content/chosen.min.css" rel="stylesheet" />
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
@@ -20,9 +21,12 @@
 
     @RenderSection("Header", false)
 </head>
-<body>
-    <div id="wrapper">
+<body class="canvas-slid" style="position: relative; overflow: hidden;">
+
+
+    <div id="wrapper" style="padding-left: 15px !important; padding-right: 15px !important;">
         @Html.Partial("Shared/Navigation")
+
         <div id="page-wrapper">
             @RenderBody()
         </div>
@@ -49,6 +53,10 @@
     <script src="~/Scripts/app/app.js"></script>
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
+
+        //Navmenu initialization
+        $('.navmenu').offcanvas('toggle');
+
         // Configure Toastr
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';

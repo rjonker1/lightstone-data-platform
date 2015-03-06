@@ -29,12 +29,15 @@
 </table>
 
 <script>
+    
+    $('.navmenu').offcanvas('toggle');
+
     var table = $("#auditlog_table").DataTable({
         dom: '<"table-toolbar">frtip',
         retrieve: true,
         ajax: "/AuditLogs",
         "columns": [
-           // { data: "id", visible: true, "defaultContent": "" },
+            // { data: "id", visible: true, "defaultContent": "" },
             { data: "eventDateUtc", visible: true, "defaultContent": "" },
             { data: "eventType" },
             { data: "entityName", "defaultContent": "Unknown" },
@@ -50,5 +53,5 @@
         "order": [[1, 'desc']]
     });
 
-   
+
 </script>

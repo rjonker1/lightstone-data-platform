@@ -15,6 +15,9 @@
 </table>
 
 <script>
+    
+    $('.navmenu').offcanvas('toggle');
+
     var table = $("#users_table").DataTable({
         dom: '<"table-toolbar">frtip<"bottom"l>',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -29,9 +32,9 @@
                 data: null,
                 render: function(data, type, full, meta) {
                     return '<div class="row">' +
-                            '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + data.id + '">Edit</a></div>' +
-                            '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + data.id + '">Delete</a></div>' +
-                           '</div>';
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + data.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + data.id + '">Delete</a></div>' +
+                        '</div>';
                 }
             }
         ]
