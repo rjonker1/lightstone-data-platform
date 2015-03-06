@@ -3,7 +3,6 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lsp;
-using Lace.Domain.DataProviders.Signio.DriversLicense;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
@@ -29,20 +28,20 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public override void Observe()
         {
-          //  _dataProvider.CallSource(_response);
+            //_dataProvider.CallSource(_response);
+        }
+
+      //  [Observation]
+        public void lace_Lsp_response_should_be_handled_test()
+        {
+            _response.LspResponseHandled.Handled.ShouldBeTrue();
         }
 
         //[Observation]
-        //public void lace_Lsp_response_should_be_handled_test()
-        //{
-        //    _response.LspResponseHandled.Handled.ShouldBeTrue();
-        //}
-
-        //[Observation]
-        //public void lace_Lsp_response_shuould_not_be_null_test()
-        //{
-        //    _response.LspResponse.ShouldNotBeNull();
-        //}
+        public void lace_Lsp_response_shuould_not_be_null_test()
+        {
+            _response.LspResponse.ShouldNotBeNull();
+        }
         
     }
 }

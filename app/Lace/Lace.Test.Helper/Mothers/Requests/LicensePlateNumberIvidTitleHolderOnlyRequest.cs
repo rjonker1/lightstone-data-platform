@@ -92,5 +92,13 @@ namespace Lace.Test.Helper.Mothers.Requests
         //        return new RequestCarInformationForCarHavingId107483();
         //    }
         //}
+
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
+            }
+        }
     }
 }

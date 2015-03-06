@@ -11,7 +11,7 @@ namespace Lace.Test.Helper.Builders.Scans
         {
 
             // TODO: implement once package is published
-           // _request = new LspRequest();
+            _request = new PropertiesRequest();
             return _request;
         }
     }

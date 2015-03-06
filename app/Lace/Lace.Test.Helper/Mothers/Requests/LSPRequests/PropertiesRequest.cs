@@ -1,6 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Test.Helper.Builders.Scans;
+using Lace.Test.Helper.Builders.Property;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
@@ -12,7 +12,15 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
         {
             get
             {
-                return DriversLicenseSourcePackage.DriversLicenseDecryptionPackage();
+                return LspSourcePackage.LspPackage();
+            }
+        }
+
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
             }
         }
 
@@ -47,13 +55,7 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
         public IProvideDriversLicenseInformationForRequest DriversLicense { get; private set; }
         public IProvideFicaInformationForRequest Fica { get; private set; }
 
-        //public IProvidePropertyInformationForRequest PropertyInformation
-        //{
-        //    get
-        //    {
-        //        return new IProvidePropertyInformationForRequest();
-        //    }
-        //}
+       
 
    
 
@@ -73,16 +75,5 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
                 return "XXXX";
             }
         }
-
-        //public IProvidePropertyInformationForRequest PropertyInformation
-        //{
-        //    get
-        //    {
-        //        return new RequestProperyInformation();
-        //    }
-        //}
-
-     
-
     }
 }

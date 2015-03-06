@@ -16,6 +16,14 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
             }
         }
 
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
+            }
+        }
+
         public IProvideUserInformationForRequest User
         {
             get

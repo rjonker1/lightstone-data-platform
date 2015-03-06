@@ -84,5 +84,13 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
            
         }
+
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
+            }
+        }
     }
 }

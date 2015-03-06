@@ -84,5 +84,13 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return "NRB891W";
             }
         }
+
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
+            }
+        }
     }
 }

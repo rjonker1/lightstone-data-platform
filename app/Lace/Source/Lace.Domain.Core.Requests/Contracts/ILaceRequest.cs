@@ -27,6 +27,6 @@ namespace Lace.Domain.Core.Requests.Contracts
         IPackage Package { get; }
 
         // TODO: implement once core package is published
-        //IProvidePropertyInformationForRequest Property { get; }
+        IProvidePropertyInformationForRequest Property { get; }
     }
 }
