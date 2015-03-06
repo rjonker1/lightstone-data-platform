@@ -1,5 +1,4 @@
 ﻿using System;
-using DataPlatform.Shared.Enums;
 using Monitoring.Queuing.Configuration;
 using Monitoring.Queuing.Contracts;
 using Monitoring.Queuing.RabbitMq;

@@ -35,40 +35,11 @@
     <Reference Include="Autofac">
       <HintPath>..\..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Common.Logging.2.1.2\lib\net40\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="CommonDomain">
-      <HintPath>..\..\..\packages\CommonDomain.1.6.0.3\lib\net40\CommonDomain.dll</HintPath>
-    </Reference>
-    <Reference Include="EventStore">
-      <HintPath>..\..\..\packages\EventStore.3.2.0.28\lib\net40\EventStore.dll</HintPath>
-    </Reference>
-    <Reference Include="EventStore.Serialization.Json">
-      <HintPath>..\..\..\packages\EventStore.Serialization.Json.3.2.0.28\lib\net40\EventStore.Serialization.Json.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions, Version=1.0.0.560, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.560\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages, Version=1.0.0.560, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.560\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
-    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.433\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NEventStore">
-      <HintPath>..\..\..\packages\NEventStore.4.0.0.15\lib\net40\NEventStore.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.560\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.745\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
@@ -90,13 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NServiceBus.RabbitMQ.2.0.5\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\..\packages\RabbitMQ.Client.3.3.5\lib\net30\RabbitMQ.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\AssemblyInfo.cs">
@@ -111,14 +78,6 @@
     <ProjectReference Include="..\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
       <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
       <Name>Monitoring.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monitoring.Domain.Messages\Monitoring.Domain.Messages.csproj">
-      <Project>{9241bd29-8bb4-4ee8-9ceb-f0b665823ba2}</Project>
-      <Name>Monitoring.Domain.Messages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Monitoring.DomainModel\Monitoring.DomainModel.csproj">
-      <Project>{ee9d1aec-1e3e-420e-acf0-3058feee6e7f}</Project>
-      <Name>Monitoring.DomainModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Monitoring.Queuing\Monitoring.Queuing.csproj">
       <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>

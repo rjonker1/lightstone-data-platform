@@ -1,5 +1,4 @@
 ﻿using System;
-using NHibernate.Mapping.ByCode;
 
 namespace Api.Domain.Infrastructure.Dto
 {
