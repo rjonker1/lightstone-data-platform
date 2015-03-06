@@ -39,6 +39,8 @@
         // Conflict between jQueryUi datepicker and bootstrap datepicker, thus the rename of the plugin
         $.fn.bootstrapdatepicker = $.fn.datepicker;
     </script>
+    <script src="~/Scripts/GreenSock/TweenMax.min.js"></script>
+    <script src="~/Scripts/GreenSock/UIpreloader.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/DataTables-1.10.4/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
@@ -62,7 +64,9 @@
         toastr.options.positionClass = 'toast-bottom-right';
 
         $(document).ajaxStart(function () {
-            $.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
+            //$.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
+            $.blockUI();
+            preloader.active(true);
         });
         $(document).ajaxStop(function () {
             $.unblockUI();
@@ -78,7 +82,9 @@
             if (jqxhr.responseJSON)
                 toastr["success"]("Success", jqxhr.responseJSON);
             $.unblockUI();
+            preloader.active(false);
         });
+
     </script>
 </body>
 </html>
