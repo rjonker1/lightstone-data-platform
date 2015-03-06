@@ -1,18 +1,13 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using DataPlatform.Shared.Helpers.Extensions;
 using FluentNHibernate.Cfg;
-using FluentNHibernate.Conventions;
-using FluentNHibernate.Conventions.AcceptanceCriteria;
-using FluentNHibernate.Conventions.Inspections;
-using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using UserManagement.Domain.Core.NHibernate.Interceptors;
 using UserManagement.Domain.Entities.NHibernate.Interceptors;
 using UserManagement.Infrastructure.NHibernate;
-using UserManagement.Infrastructure.NHibernate.Conventions;
 
 namespace UserManagement.Api.Installers
 {
@@ -22,6 +17,8 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            this.Info(() => "Attempting to install NHibernateInstaller");
+
             container.Register(Component.For<Configuration>().UsingFactoryMethod(() =>
                 Fluently.Configure(new Configuration().Configure())
                 .Mappings(cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()))
@@ -34,13 +31,12 @@ namespace UserManagement.Api.Installers
             container.Register(Component.For<ISession>()
                      .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
                      .LifestylePerWebRequest());
+
+            this.Info(() => "Successfully installed NHibernateInstaller");
         }
 
         protected virtual void ExportSchemaConfig(Configuration config)
         {
-            //var interceptor = new TrackingInterceptor();
-
-            
             config.SetInterceptor(new TrackingInterceptor());
             //config.SetInterceptor(new NhInterceptor());
             SchemaMetadataUpdater.QuoteTableAndColumns(config);

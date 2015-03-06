@@ -23,6 +23,8 @@ namespace UserManagement.Api
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
+
+            this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
             container.Resolve<IBus>().Publish(new ImportStartupData());

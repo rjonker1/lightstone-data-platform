@@ -1,6 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using DataPlatform.Shared.Helpers.Extensions;
 using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Installers
@@ -9,7 +10,9 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            this.Info(() => "Attempting to install HelperInstaller");
             container.Register(Component.For<IRetrieveEntitiesByType>().ImplementedBy<EntitiesByTypeHelper>().LifestyleTransient());
+            this.Info(() => "Successfully installed HelperInstaller");
         }
     }
 }

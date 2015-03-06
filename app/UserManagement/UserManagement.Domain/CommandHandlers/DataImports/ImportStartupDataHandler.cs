@@ -2,6 +2,7 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using UserManagement.Domain.Core.MessageHandling;
+using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
