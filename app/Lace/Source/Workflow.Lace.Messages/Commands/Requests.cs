@@ -25,11 +25,19 @@ namespace Workflow.Lace.Messages.Commands
         [DataMember]
         public object RequestPayload { get; private set; }
 
+        [DataMember]
+        public string ConnectionType { get; private set; }
+
+        [DataMember]
+        public string Connection { get; private set; }
+
         public SendRequestToDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, object payload,
-            DateTime date) : base(id, dataProvider, date)
+            DateTime date, string connectionType, string connection) : base(id, dataProvider, date)
         {
             RequestId = requestId;
             RequestPayload = payload;
+            ConnectionType = connectionType;
+            Connection = connection;
 
         }
     }

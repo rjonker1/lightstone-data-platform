@@ -28,15 +28,16 @@ namespace Workflow.Lace.Domain.Aggregates
             RaiseEvent(new RequestReceived(requestId, date));
         }
 
-        public void RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider, object payload,
-            DateTime date)
+        public void RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
+            object payload,
+            DateTime date, string connectionType, string connection)
         {
             RequestId = requestId;
             DataProvider = dataProvider;
             ResponsePayload = payload;
             Date = date;
 
-            RaiseEvent(new RequestSentToDataProvider(id, requestId, dataProvider, date));
+            RaiseEvent(new RequestSentToDataProvider(id, requestId, dataProvider, date, connection, connectionType));
         }
 
         public void ResponseReceivedFromDataProvider(Guid id, Guid requestId, Guid responseId, DataProviderCommandSource dataProvider,

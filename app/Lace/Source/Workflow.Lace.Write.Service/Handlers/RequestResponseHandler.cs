@@ -7,7 +7,8 @@ using Workflow.Lace.Messages.Commands;
 namespace Workflow.Lace.Write.Service.Handlers
 {
     public class RequestResponseHandler : IHandleMessages<ReceiveRequestCommand>,
-        IHandleMessages<ReceiveResponseFromDataProviderCommand>, IHandleMessages<SendRequestToDataProviderCommand>, IHandleMessages<ReturnResponseCommmand>
+        IHandleMessages<ReceiveResponseFromDataProviderCommand>, IHandleMessages<SendRequestToDataProviderCommand>,
+        IHandleMessages<ReturnResponseCommmand>
     {
         private readonly IRepository _repository;
 
@@ -23,7 +24,8 @@ namespace Workflow.Lace.Write.Service.Handlers
         public void Handle(ReceiveResponseFromDataProviderCommand message)
         {
             var @event = _repository.GetById<Request>(message.RequestId);
-            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId, message.ResponseId, message.DataProvider,
+            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId, message.ResponseId,
+                message.DataProvider,
                 message.ResponsePayload, message.Date);
 
             _repository.Save(@event, Guid.NewGuid(), null);
@@ -39,7 +41,7 @@ namespace Workflow.Lace.Write.Service.Handlers
         {
             var @event = _repository.GetById<Request>(message.RequestId);
             @event.RequestSentToDataProvider(message.Id, message.RequestId, message.DataProvider,
-                message.RequestPayload, message.Date);
+                message.RequestPayload, message.Date, message.ConnectionType, message.Connection);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }
