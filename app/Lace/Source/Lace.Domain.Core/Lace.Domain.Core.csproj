@@ -38,9 +38,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.728, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.750, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.728\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.750\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -54,6 +54,8 @@
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
     <Compile Include="Contracts\DataProviders\Lsp\IRespondWithLspInformation.cs" />
+    <Compile Include="Contracts\DataProviders\Lsp\IRespondWithReturnProperties.cs" />
+    <Compile Include="Contracts\DataProviders\Lsp\IRespondWithReturnPropertiesRequestData.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideContextForRequest.cs" />

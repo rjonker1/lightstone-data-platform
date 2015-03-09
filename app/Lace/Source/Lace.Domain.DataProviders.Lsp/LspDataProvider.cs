@@ -36,9 +36,8 @@ namespace Lace.Domain.DataProviders.Lsp
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.Lsp);
-
-                // TODO: implement once core package is published
-                //_monitoring.Begin(new {_request.Property}, stopWatch);
+                
+                _monitoring.Begin(new {_request.Property}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLspSourceCall(), new CallLspDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);

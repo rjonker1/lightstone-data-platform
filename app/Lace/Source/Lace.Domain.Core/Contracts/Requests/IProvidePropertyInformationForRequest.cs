@@ -7,7 +7,6 @@ namespace Lace.Domain.Core.Contracts.Requests
     /// </summary>
     public interface IProvidePropertyInformationForRequest
     {
-
         /// <summary>
         /// Is a unique sequence of characters that is given to a user of the system and this is used to identify that user.
 
@@ -44,7 +43,7 @@ namespace Lace.Domain.Core.Contracts.Requests
         /// This field contains the erf number of the property.
         /// </summary>
         string Erf { get; set; }
-        
+
         /// <summary>
         /// This field contains the portion number of the property.
         /// </summary>
@@ -55,19 +54,21 @@ namespace Lace.Domain.Core.Contracts.Requests
         /// </summary>
         string Sectional_Title { get; set; }
 
+        string Unit { get; set; }
+
         /// <summary>
         /// This is the suburb name that the property is registered in 
         /// </summary>
         string Suburb { get; set; }
 
-        
+
 
         /// <summary>
         /// This field contains the street name of the property.
         /// </summary>
         string Street { get; set; }
 
-        
+
         /// <summary>
         /// This field contains the name of the owner of the property.
         /// </summary>
@@ -78,7 +79,7 @@ namespace Lace.Domain.Core.Contracts.Requests
         /// </summary>
         string ID_CK { get; set; }
 
-        
+
         /// <summary>
         /// This is the name of the Estate that the property is located in
         /// </summary>

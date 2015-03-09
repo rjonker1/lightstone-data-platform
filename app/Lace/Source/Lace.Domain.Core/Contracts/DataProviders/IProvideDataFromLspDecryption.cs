@@ -6,7 +6,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromLspDecryption : IPointToLaceProvider
     {
-        IRespondWithReturnProperties ReturnProperties { get; }
-        string DecodedData { get; }
+        IRespondWithLspInformation LspInformation { get; }
+        string Data { get; }
     }
 }

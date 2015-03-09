@@ -38,12 +38,18 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                 var prop = _request.Property;
 
                 // TODO: update content after next package deployment
-                //var content =
+                ///var content =
                 //    string.Format(
-                //        "User_ID={0}&Province={1}1&Municipality={2}&DeedTown={3}&Erf={4}&Portion={5}&Sectional_Title=s{6}&Unit={7}&Suburb={8}&Street={9}&StreetNumber={10}&Owner_Name={11}&ID_CK={12}&Estate_Name={13}&FARM_NAME={14}&MaxRowsToReturn={15}&TrackingNumber={16}",
+                //        "User_ID={0}&Province={1}&Municipality={2}&DeedTown={3}&Erf={4}&Portion={5}&Sectional_Title=s{6}&Unit={7}&Suburb={8}&Street={9}&StreetNumber={10}&Owner_Name={11}&ID_CK={12}&Estate_Name={13}&FARM_NAME={14}&MaxRowsToReturn={15}&TrackingNumber={16}",
                 //        _request.User.UserId.ToString(),
-                //        prop.MUNICNAME,prop.DEEDTOWN,
-                        
+                //        prop.Municipality,
+                //        prop.DeedTown,
+                //        prop.Erf,
+                //        prop.Portion,
+                //        prop.Sectional_Title,
+                //"Unit",
+                //prop.Suburb,
+                //prop.s.......
                 //        );
 
                 // TODO: update content after next package deployment
