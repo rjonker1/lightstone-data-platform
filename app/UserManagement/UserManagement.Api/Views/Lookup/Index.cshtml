@@ -10,7 +10,7 @@
 
 <style>
 
-    #TABLE_18, tbody tr {
+    #@tableId, tbody tr {
         border-collapse: collapse;
         box-sizing: border-box;
         clear: both;
@@ -22,7 +22,6 @@
         font: normal normal normal normal 14px/20px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
         outline: rgb(69, 78, 89) none 0px;
     }
-    /*#TABLE_18*/
 
     #THEAD_19 {
         border-collapse: collapse;
@@ -110,21 +109,9 @@
 </style>
 
 
-@*<table id="@tableId" class="table table-striped table-bordered" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Value</th>
-            <th></th>
-        </tr>
-    </thead>
-</table>*@
-
-
-<table id="TABLE_18">
+<table id="@tableId">
     <thead id="THEAD_19">
-        <tr >
+        <tr>
             <th id="TH_21">
                 Id
             </th>
@@ -166,7 +153,8 @@
         ]
     });*@
 
-    var table2 = $("#TABLE_18").dataTable({
+    var table2 = $("#@tableId").dataTable({
+        dom: '<"table-toolbar">frtilp',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
@@ -187,7 +175,7 @@
     });
 
     //$("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
-    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='#/Lookups/Add/@Model.AssemblyQualifiedName'>Add</a>");
+    $("div.table-toolbar").append("<div><a class='btn btn-default entity-add' href='#/Lookups/Add/@Model.AssemblyQualifiedName'>Add</a></div>");
     @*$('#@tableId tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
         alert(data.id + " - " + data.name);
