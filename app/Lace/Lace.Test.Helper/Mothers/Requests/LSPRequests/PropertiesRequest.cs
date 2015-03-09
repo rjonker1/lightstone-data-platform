@@ -4,7 +4,7 @@ using Lace.Test.Helper.Builders.Property;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
-namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
+namespace Lace.Test.Helper.Mothers.Requests.LSPRequests
 {
     public class PropertiesRequest : Domain.Core.Requests.Contracts.ILaceRequest
     {

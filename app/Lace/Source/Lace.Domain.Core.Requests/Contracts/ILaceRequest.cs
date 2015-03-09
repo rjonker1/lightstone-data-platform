@@ -25,8 +25,6 @@ namespace Lace.Domain.Core.Requests.Contracts
         DateTime RequestDate { get; }
 
         IPackage Package { get; }
-
-        // TODO: implement once core package is published
         IProvidePropertyInformationForRequest Property { get; }
     }
 }
