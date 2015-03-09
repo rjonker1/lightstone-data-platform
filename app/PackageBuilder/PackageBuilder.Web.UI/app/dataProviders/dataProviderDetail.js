@@ -90,6 +90,10 @@
                 //console.log(e.message);
             }
 
+            //Validates a check between CoS per request | per field
+            if (!$scope.switch) return null;
+
+            //Calculation logic
             if (items != null) {
 
                 for (var i = 0; i < items.length; i++) {

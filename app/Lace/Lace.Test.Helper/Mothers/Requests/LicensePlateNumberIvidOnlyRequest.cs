@@ -83,6 +83,14 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get { return new RequestFicaInformation(); }
         }
+
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
+            }
+        }
       
     }
 }

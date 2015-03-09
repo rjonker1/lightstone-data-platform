@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Core.NHibernate.Attributes;
+using UserManagement.Domain.Core.Security;
 
 namespace UserManagement.Domain.Entities
 {
@@ -13,10 +14,11 @@ namespace UserManagement.Domain.Entities
         public virtual string LastName { get; set; }
         public virtual string IdNumber { get; set; }
         public virtual string ContactNumber { get; set; }
-        [Required]
+        [Required, DomainSignature]
         public virtual string UserName { get; protected internal set; }
         [Required]
         public virtual string Password { get; protected internal set; }
+        public virtual string Salt { get; protected internal set; }
         public virtual bool? IsActive { get; set; }
         public virtual UserType UserType { get; protected internal set; }
         public virtual ISet<Role> Roles { get; protected internal set; }
@@ -56,6 +58,15 @@ namespace UserManagement.Domain.Entities
             IsActive = isActive;
             UserType = userType;
             Roles = roles;
+        }
+
+        public virtual void HashPassword()
+        {
+            string hash;
+            string salt;
+            new SaltedHash().GetHashAndSaltString(Password, out hash, out salt);
+            Password = hash;
+            Salt = salt;
         }
     }
 }

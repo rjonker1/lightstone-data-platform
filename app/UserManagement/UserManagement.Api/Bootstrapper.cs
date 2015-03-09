@@ -1,5 +1,6 @@
 ﻿using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using MemBus;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
@@ -8,18 +9,8 @@ using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
 using UserManagement.Api.Installers;
-using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
-using UserManagement.Domain.Entities.Commands.CommercialStates;
-using UserManagement.Domain.Entities.Commands.ContractDurations;
-using UserManagement.Domain.Entities.Commands.ContractTypes;
-using UserManagement.Domain.Entities.Commands.CreateSources;
-using UserManagement.Domain.Entities.Commands.EscalationTypes;
-using UserManagement.Domain.Entities.Commands.PaymentTypes;
-using UserManagement.Domain.Entities.Commands.PlatformStatuses;
-using UserManagement.Domain.Entities.Commands.Provinces;
-using UserManagement.Domain.Entities.Commands.Roles;
-using UserManagement.Domain.Entities.Commands.UserTypes;
+using UserManagement.Domain.Entities.DataImports;
 using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api
@@ -32,10 +23,11 @@ namespace UserManagement.Api
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
         protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
+
+            this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
-            var containerHandler = container.Resolve<IHandleMessages>();
-            ImportStartupData(containerHandler);
+            container.Resolve<IBus>().Publish(new ImportStartupData());
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -53,25 +45,12 @@ namespace UserManagement.Api
                 new HelperInstaller(),
                 new ApiClientInstaller(),
                 new RedisInstaller(),
-                new AuthenticationInstaller()
+                new AuthenticationInstaller(),
+                new HashProviderInstaller()
                 );
 
             //Drop create
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
-        }
-
-        private void ImportStartupData(IHandleMessages handler)
-        {
-            handler.Handle(new ImportRole());
-            handler.Handle(new ImportUserType());
-            handler.Handle(new ImportProvince());
-            handler.Handle(new ImportContractDuration());
-            handler.Handle(new ImportEscalationType());
-            handler.Handle(new ImportContractType());
-            handler.Handle(new ImportCommercialState());
-            handler.Handle(new ImportCreateSource());
-            handler.Handle(new ImportPlatformStatus());
-            handler.Handle(new ImportPaymentType());
         }
 
         //Updates schema if there are any structural changes

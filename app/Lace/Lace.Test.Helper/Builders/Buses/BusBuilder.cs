@@ -56,6 +56,12 @@ namespace Lace.Test.Helper.Builders.Buses
             var bus = BusFactory.NServiceRabbitMqBus();
             return new SendRgtVinCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
         }
+
+        public static ISendCommandsToBus ForLspCommands(Guid aggregateId)
+        {
+            var bus = BusFactory.NServiceRabbitMqBus();
+            return new SendLspCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+        }
     }
 
     public class BusFactory

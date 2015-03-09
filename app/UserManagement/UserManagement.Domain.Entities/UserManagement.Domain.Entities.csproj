@@ -74,6 +74,16 @@
     <Compile Include="BusinessRules\Contracts\SoftDeleteContractRule.cs" />
     <Compile Include="BusinessRules\Customers\CreateCustomerRule.cs" />
     <Compile Include="BusinessRules\Customers\SoftDeleteCustomerRule.cs" />
+    <Compile Include="BusinessRules\Lookups\CommercialStates\DeleteCommercialStateRule.cs" />
+    <Compile Include="BusinessRules\Lookups\ContractDurations\DeleteContractDurationRule.cs" />
+    <Compile Include="BusinessRules\Lookups\ContractTypes\DeleteContractTypeRule.cs" />
+    <Compile Include="BusinessRules\Lookups\CreateSources\DeleteCreateSourceRule.cs" />
+    <Compile Include="BusinessRules\Lookups\EscalationTypes\DeleteEscalationTypeRule.cs" />
+    <Compile Include="BusinessRules\Lookups\PaymentTypes\DeletePaymentTypeRule.cs" />
+    <Compile Include="BusinessRules\Lookups\PlatformStatuses\DeletePlatformStatusRule.cs" />
+    <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRule.cs" />
+    <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRule.cs" />
+    <Compile Include="BusinessRules\Lookups\UserTypes\DeleteUserTypeRule.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
@@ -84,6 +94,7 @@
     <Compile Include="Commands\ContractTypes\ImportContractType.cs" />
     <Compile Include="Commands\CreateSources\ImportCreateSource.cs" />
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
+    <Compile Include="Commands\Entities\DeleteLookupEntity.cs" />
     <Compile Include="Commands\Entities\SoftDeleteEntity.cs" />
     <Compile Include="Commands\EscalationTypes\ImportEscalationType.cs" />
     <Compile Include="Commands\PaymentTypes\ImportPaymentType.cs" />
@@ -92,6 +103,7 @@
     <Compile Include="Commands\Roles\ImportRole.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
     <Compile Include="ContractPackage.cs" />
+    <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />
     <Compile Include="NHibernate\Interceptors\TrackingInterceptor.cs" />

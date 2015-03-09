@@ -1,6 +1,7 @@
 ﻿@using UserManagement.Domain.Entities
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav side-nav">
+<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas in canvas-slid" style="left: 0">
+    <a class="navmenu-brand" href="#">User Management</a>
+    <ul class="nav navmenu-nav">
         <li class="active">
             <a class="menu-link" href="#/AuditLogs"><i class="fa fa-fw fa-dashboard"></i> Audit Logs</a>
         </li>
@@ -16,45 +17,38 @@
         <li class="active">
             <a class="menu-link" href="#/Contracts"><i class="fa fa-file-text-o"></i> Contracts</a>
         </li>
-        @*<li class="active">
-            <a class="menu-link" href="#/Packages"><i class="fa fa-fw fa-dashboard"></i> Packages</a>
-        </li>*@
+    </ul>
+    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Lookups<i class="fa fa-fw fa-caret-down"></i></a>
+    <ul id="demo" class="collapse">
+        <li class="active">
+            <a href="#/Lookups/@typeof(PaymentType).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Payment Types</a>
+        </li>
+        <li class="active">
+            <a href="#/Lookups/@typeof(PlatformStatus).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Platform Statuses</a>
+        </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Lookups<i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="demo" class="collapse">
-                <li class="active">
-                    <a href="#/Lookups/@typeof(PaymentType).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Payment Types</a>
-                </li>
-                <li class="active">
-                    <a href="#/Lookups/@typeof(PlatformStatus).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Platform Statuses</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(CreateSource).AssemblyQualifiedName"><i class="fa fa-fw fa-bar-chart-o"></i> Create Sources</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(CommercialState).AssemblyQualifiedName"><i class="fa fa-fw fa-table"></i> Commercial States</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(ContractType).AssemblyQualifiedName"><i class="fa fa-fw fa-edit"></i> Contract Types</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(EscalationType).AssemblyQualifiedName"><i class="fa fa-fw fa-desktop"></i> Escalation Types</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(ContractDuration).AssemblyQualifiedName"><i class="fa fa-fw fa-wrench"></i> Contract Durations</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(Province).AssemblyQualifiedName"><i class="fa fa-fw fa-arrows-v"></i> Provinces</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(UserType).AssemblyQualifiedName"><i class="fa fa-fw fa-file"></i> User Types</a>
-                </li>
-                <li>
-                    <a href="#/Lookups/@typeof(Role).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Roles</a>
-                </li>
-            </ul>
+            <a href="#/Lookups/@typeof(CreateSource).AssemblyQualifiedName"><i class="fa fa-fw fa-bar-chart-o"></i> Create Sources</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(CommercialState).AssemblyQualifiedName"><i class="fa fa-fw fa-table"></i> Commercial States</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(ContractType).AssemblyQualifiedName"><i class="fa fa-fw fa-edit"></i> Contract Types</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(EscalationType).AssemblyQualifiedName"><i class="fa fa-fw fa-desktop"></i> Escalation Types</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(ContractDuration).AssemblyQualifiedName"><i class="fa fa-fw fa-wrench"></i> Contract Durations</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(Province).AssemblyQualifiedName"><i class="fa fa-fw fa-arrows-v"></i> Provinces</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(UserType).AssemblyQualifiedName"><i class="fa fa-fw fa-file"></i> User Types</a>
+        </li>
+        <li>
+            <a href="#/Lookups/@typeof(Role).AssemblyQualifiedName"><i class="fa fa-fw fa-dashboard"></i> Roles</a>
         </li>
     </ul>
 </div>
-
-

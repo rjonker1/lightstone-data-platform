@@ -2,6 +2,7 @@
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lsp.Infrastructure.Configuration;
@@ -17,14 +18,14 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
         private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        //private const DataProviderCommandSource Provider = DataProviderCommandSource.Lsp;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.Lsp;
         private ConfigureLspClient _client;
 
         public CallLspDataProvider(ILaceRequest request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
-            //_stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
+            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
@@ -47,7 +48,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                                 _client.Operation
                             }
                     },
-                    new {ContextMessage = "Lsp Data Provider Decrypting Drivers License Configuration"});
+                    new {ContextMessage = "Lsp Data Provider Decrypting Configuration"});
 
                 monitoring.StartCall(_client.Operation, _stopWatch);
 
@@ -59,25 +60,25 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                     monitoring.Send(CommandType.Fault, _request,
                         new
                         {
-                            NoRequestReceived = "No response received from Lsp's Drivers License Decryptions Service"
+                            NoRequestReceived = "No response received from Lsp Service"
                         });
 
                 TransformResponse(response, monitoring);
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error calling Lsp Drivers License Data Provider {0}", ex.Message);
+                _log.ErrorFormat("Error calling Lsp Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lsp Drivers License Decryption"});
+                    new {ErrorMessage = "Error calling Lsp"});
                 LspResponseFailed(response);
             }
         }
 
         private static void LspResponseFailed(IProvideResponseFromLaceDataProviders response)
         {
-            //response.LspDriversLicenseDecryptionResponse = null;
-            //response.LspDriversLicenseDecryptionResponseHandled = new LspDriversLicenseDecryptionResponseHandled();
-            //response.LspDriversLicenseDecryptionResponseHandled.HasBeenHandled();
+            response.LspResponse = null;
+            response.LspResponseHandled = new LspResponseHandled();
+            response.LspResponseHandled.HasBeenHandled();
         }
 
         public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
@@ -89,12 +90,12 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                 transformer.Transform();
             }
 
-            //monitoring.Send(CommandType.Transformation,
-            //    transformer.Result ?? new LspDriversLicenseDecryptionResponse(null, null), transformer);
+            monitoring.Send(CommandType.Transformation,
+                transformer.Result ?? new LspResponse(null, null), transformer);
 
-            //response.LspDriversLicenseDecryptionResponse = transformer.Result;
-            //response.LspDriversLicenseDecryptionResponseHandled = new LspDriversLicenseDecryptionResponseHandled();
-            //response.LspDriversLicenseDecryptionResponseHandled.HasBeenHandled();
+            response.LspResponse = transformer.Result;
+            response.LspResponseHandled = new LspResponseHandled();
+            response.LspResponseHandled.HasBeenHandled();
         }
     }
 }

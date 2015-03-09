@@ -8,7 +8,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure.Management
     public class TransformLspResponse : ITransformResponseFromDataProvider
     {
         public string Message { get; private set; }
-      //  public IProvideDataFromLspDriversLicenseDecryption Result { get; private set; }
+        public IProvideDataFromLspDecryption Result { get; private set; }
 
         public bool Continue { get; private set; }
 

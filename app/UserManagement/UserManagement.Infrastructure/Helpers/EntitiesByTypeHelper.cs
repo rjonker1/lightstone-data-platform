@@ -9,7 +9,7 @@ namespace UserManagement.Infrastructure.Helpers
 {
     public interface IRetrieveEntitiesByType
     {
-        IQueryable GetEntities(Type type);
+        IQueryable<Entity> GetEntities(Type type);
         IQueryable<NamedEntity> GetNamedEntities(Type type);
         IQueryable<NamedEntity> GetNamedEntities(Type type, string name);
         PagedList<NamedEntity> GetNamedEntities(Type type, string name, int pageIndex, int pageSize);
@@ -29,10 +29,11 @@ namespace UserManagement.Infrastructure.Helpers
             _container = container;
         }
 
-        public IQueryable GetEntities(Type type)
+        public IQueryable<Entity> GetEntities(Type type)
         {
             var executorType = typeof(IRepository<>).MakeGenericType(type);
-            return (IQueryable)_container.Resolve(executorType);
+            var namedEntities = (IQueryable)_container.Resolve(executorType);
+            return (from Entity item in namedEntities select item);
         }
 
         public IQueryable<NamedEntity> GetNamedEntities(Type type)

@@ -80,6 +80,14 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return "XMC167GP";
             }
         }
+
+        public IProvidePropertyInformationForRequest Property
+        {
+            get
+            {
+                return new RequesPropertyInformation();
+            }
+        }
       
     }
 }

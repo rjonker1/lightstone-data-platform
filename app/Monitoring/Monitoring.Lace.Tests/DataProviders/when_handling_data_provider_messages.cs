@@ -6,7 +6,6 @@ using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Dto;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Extensions;
-using Monitoring.DomainModel.DataProviders;
 using Monitoring.Test.Helper.Builder;
 using Monitoring.Test.Helper.Fakes.EventStore;
 using Monitoring.Write.Service.DataProviders;

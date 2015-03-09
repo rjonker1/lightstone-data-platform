@@ -38,9 +38,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.715, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.726, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.715\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.728\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,6 +79,7 @@
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="LightstoneResponseHandled.cs" />
     <Compile Include="LspModels.cs" />
+    <Compile Include="LspResponseHandled.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PCubedFicaVerficationResponseHandled.cs" />
     <Compile Include="PCubedFicaVerficationResponse.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="RgtVinResponseHandled.cs" />
     <Compile Include="SaleModel.cs" />
+    <Compile Include="LspResponse.cs" />
     <Compile Include="SignioDriversLicenseDecryptionResponse.cs" />
     <Compile Include="SignioDriversLicenseDecryptionResponseHandled.cs" />
     <Compile Include="TotalSalesByAgeModel.cs" />

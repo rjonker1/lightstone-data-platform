@@ -4,7 +4,7 @@
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                 </a>
@@ -12,15 +12,15 @@
                     {{provider.name}}
                 </div>
             </div>
-            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
+            <div class="col-md-3" ng-show="provider.fieldLevelCostPriceOverride == false">
                 Cost Of Sale: R {{provider.costOfSale}}
             </div>
-            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
+            <div class="col-md-3" ng-show="provider.fieldLevelCostPriceOverride == false">
                 *Per request
             </div>
 
-            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == true" />
-            <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == true">
+            <div class="col-md-3" ng-show="provider.fieldLevelCostPriceOverride == true" />
+            <div class="col-md-3" ng-show="provider.fieldLevelCostPriceOverride == true">
                 *Per field requested
             </div>
         </div>
@@ -40,12 +40,12 @@
     <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
                 </a>
 
-                <div class="col-md-2" ng-if="dataField.dataFields.length <= 0"></div>
+                <div class="col-md-1" ng-if="dataField.dataFields.length <= 0"></div>
 
                 <div>
                     <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
@@ -54,15 +54,15 @@
                 </div>
             </div>
 
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
 
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-4">Cost:</label>
+                <label class="col-md-2">Cost:</label>
 
-                <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" />
+                <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
+                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly/>
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.price" readonly/>
             </div>
         </div>
     </div>
@@ -82,26 +82,26 @@
     <div style="cursor:default;" ng-class="{'toggled-child-selected': collapsed, 'toggled-child-rest': !collapsed}" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                 </a>
                 <div>
-                    <input class="col-md-2" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
+                    <input class="col-md-1" ng-model="dataField.isSelected" value="{{dataField.id}}" type="checkbox">
                     <div ng-if="(dataField.label == null) || (dataField.label.length <= 0)" class="col-md-6">{{dataField.name}}</div>
                     <div ng-if="dataField.label.length > 0" class="col-md-6">{{dataField.label}}</div>
                 </div>
             </div>
 
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
 
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                <label class="col-md-4">Cost:</label>
+                <label class="col-md-2">Cost:</label>
 
-                <input ng-if="dataField.dataFields.length > 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0"
-                       value="{{totalChildren(dataField, dataField.dataFields)}}" />
+                <input ng-if="dataField.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
+                       value="{{totalChildren(dataField, dataField.dataFields)}}" readonly/>
 
-                <input ng-if="dataField.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="dataField.price" />
+                <input ng-if="dataField.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="dataField.price" readonly/>
             </div>
         </div>
     </div>
@@ -120,7 +120,7 @@
             <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
                 <div style="margin-left: -15px; margin-right: 0;" class="row">
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                             <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                         </a>
@@ -130,14 +130,14 @@
                             <div ng-if="subDF.label.length > 0" class="col-md-6">{{subDF.label}}</div>
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
+                    <div class="col-md-1"></div>
                     <div ng-show="provider.fieldLevelCostPriceOverride == true">
-                        <label class="col-md-4">Cost:</label>
+                        <label class="col-md-2">Cost:</label>
 
-                        <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 12% !important;" type="number" min="0"
-                               value="{{totalChildren(subDF, subDF.dataFields)}}" />
+                        <input ng-if="subDF.dataFields.length > 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0"
+                               value="{{totalChildren(subDF, subDF.dataFields)}}" readonly/>
 
-                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-4 form-control" style="width: 12% !important;" type="number" min="0" ng-model="subDF.price" />
+                        <input ng-if="subDF.dataFields.length <= 0" class="col-md-2 form-control" style="width: 15% !important;" type="number" min="0" ng-model="subDF.price" readonly/>
                     </div>
                 </div>
             </div>
