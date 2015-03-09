@@ -54,7 +54,6 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BillResponseMessage.cs" />
     <Compile Include="BillTransactionMessage.cs" />
   </ItemGroup>
   <ItemGroup>

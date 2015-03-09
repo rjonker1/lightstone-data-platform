@@ -36,18 +36,22 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentMigrator, Version=1.2.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="FluentMigrator">
       <HintPath>..\..\packages\FluentMigrator.1.2.1.0\lib\40\FluentMigrator.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Migrations\201502271648_Create_Response_Table.cs" />
     <Compile Include="Migrations\201406061645_Create_Transaction_Table.cs" />
+    <None Include="Migrations\201502271647_Create_Data_Provider_Request_Table.cs.old" />
+    <None Include="Migrations\201502271649_Create_Data_Provider_Response_Table.cs.old" />
+    <None Include="Migrations\201502271650_Create_Request_Table.cs.old" />
+    <None Include="Migrations\201502271651_Create_Response_Table.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -63,11 +67,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\tools\migrator\FluentMigrator.Runner.dll">
+    <Content Include="..\..\packages\FluentMigrator.1.2.1.0\tools\FluentMigrator.Runner.dll">
       <Link>FluentMigrator.Runner.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\tools\migrator\Migrate.exe">
+    <Content Include="..\..\packages\FluentMigrator.1.2.1.0\tools\Migrate.exe">
       <Link>Migrate.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

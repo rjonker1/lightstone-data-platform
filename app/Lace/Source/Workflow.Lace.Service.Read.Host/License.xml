@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<license id="101310c1-8bfc-44ce-be3a-72a2567deef5" expiration="2015-04-05T00:00:00.0000000" type="Standard" LicenseVersion="5.0" WorkerThreads="Max" AllowedNumberOfWorkerNodes="Max" MaxMessageThroughputPerSecond="Max" Quantity="1" Edition="Enterprise" Applications="All">
+  <name>Wayne Munro</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>oRX4KoABrXmZsn8yoNuqEFZDnXo=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>FbKcA8Ui7jShQoDxEbxyTfxHkHo9KKTMgW2SQTMS+K1AZ0/HVfOuLm2sWCqKfaYcuCTleKRFFG7b4fnnRAgPy1idnu7GQQZWxewN2KbZdNXIdmWhkRVvAqetmoaT/OVaA1GFUBr/1IPctmbUayHehPjBo5fSDD+D4F+e41JPkro=</SignatureValue>
+  </Signature>
+</license>
