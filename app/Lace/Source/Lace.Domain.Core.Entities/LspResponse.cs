@@ -7,17 +7,20 @@ namespace Lace.Domain.Core.Entities
     [DataContract]
     public class LspResponse : IProvideDataFromLspDecryption
     {
-        public LspResponse(IRespondWithReturnProperties returnProperties, string decodedData)
+        public LspResponse(IRespondWithLspInformation lspInformation, string data)
         {
-            ReturnProperties = returnProperties;
-            DecodedData = decodedData;
+            LspInformation = lspInformation;
+
+
+            Data = data;
         }
+       
+
+         [DataMember]
+        public IRespondWithLspInformation LspInformation { get; private set; }
 
         [DataMember]
-        public IRespondWithReturnProperties ReturnProperties { get; private set; }
-
-        [DataMember]
-        public string DecodedData { get; private set; }
+        public string Data { get; private set; }
 
         [DataMember]
         public System.Type Type
