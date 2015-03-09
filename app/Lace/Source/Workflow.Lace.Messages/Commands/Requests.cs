@@ -8,9 +8,13 @@ namespace Workflow.Lace.Messages.Commands
     [DataContract]
     public class ReceiveRequestCommand : Command
     {
+        [DataMember]
+        public DataProviderCommandSource DataProvider { get; private set; }
+
         public ReceiveRequestCommand(Guid id, DataProviderCommandSource dataProvider, DateTime date)
-            : base(id, dataProvider, date)
+            : base(id, date)
         {
+            DataProvider = dataProvider;
         }
     }
 
@@ -31,13 +35,17 @@ namespace Workflow.Lace.Messages.Commands
         [DataMember]
         public string Connection { get; private set; }
 
+        [DataMember]
+        public DataProviderCommandSource DataProvider { get; private set; }
+
         public SendRequestToDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, object payload,
-            DateTime date, string connectionType, string connection) : base(id, dataProvider, date)
+            DateTime date, string connectionType, string connection) : base(id, date)
         {
             RequestId = requestId;
             RequestPayload = payload;
             ConnectionType = connectionType;
             Connection = connection;
+            DataProvider = dataProvider;
 
         }
     }

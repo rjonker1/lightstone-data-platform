@@ -1,13 +1,13 @@
 ﻿using FluentMigrator;
 
-namespace Workflow.Lace.Database.Migrations
+namespace Workflow.Billing.Database.Migrations
 {
-    [Migration(201502271648)]
-    public class CreateResponseTable : Migration
+    [Migration(201502271650)]
+    public class Create_Request_Table : Migration
     {
         public override void Up()
         {
-            Create.Table("ResponseHeader")
+            Create.Table("RequestHeader")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("RequestId").AsGuid().NotNullable();
@@ -15,7 +15,7 @@ namespace Workflow.Lace.Database.Migrations
 
         public override void Down()
         {
-            Delete.Table("ResponseHeader");
+            Delete.Table("RequestHeader");
         }
     }
 }

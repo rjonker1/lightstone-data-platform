@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Workflow.Lace.Database</RootNamespace>
     <AssemblyName>Lightstone.DataPlatform.Workflow.Lace.Database</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,30 +39,37 @@
     <Reference Include="FluentMigrator">
       <HintPath>..\..\..\packages\FluentMigrator.1.2.1.0\lib\40\FluentMigrator.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="connections.config" />
-    <None Include="migrate_down.bat" />
-    <None Include="migrate_up.bat" />
+    <None Include="connections.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="migrate_down.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="migrate_up.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Migrations\201502271648_CreateDataProviderRequestTable.cs" />
-    <Compile Include="Migrations\201502271648_CreateDataProviderResponseTable.cs" />
-    <Compile Include="Migrations\201502271648_CreateRequestTable.cs" />
-    <Compile Include="Migrations\201502271648_CreateResponseTable.cs" />
+    <Compile Include="Migrations\201502271647_Create_Data_Provider_Request_Table.cs" />
+    <Compile Include="Migrations\201502271649_Create_Data_Provider_Response_Table.cs" />
+    <Compile Include="Migrations\201502271650_Create_Request_Table.cs" />
+    <Compile Include="Migrations\201502271651_Create_Response_Table.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\tools\migrator\FluentMigrator.Runner.dll">
+    <Content Include="..\..\..\packages\FluentMigrator.1.2.1.0\tools\FluentMigrator.Runner.dll">
       <Link>FluentMigrator.Runner.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\tools\migrator\Migrate.exe">
+    <Content Include="..\..\..\packages\FluentMigrator.1.2.1.0\tools\Migrate.exe">
       <Link>Migrate.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

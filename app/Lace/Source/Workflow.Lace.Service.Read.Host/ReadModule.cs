@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using Autofac;
 using CommonDomain;
@@ -32,6 +34,11 @@ namespace Workflow.Lace.Service.Read.Host
             builder.RegisterType<AggregateFactory>().As<IConstructAggregates>();
             builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
+            builder.Register(
+                c =>
+                    new Repository.Repository(
+                        new SqlConnection(ConfigurationManager.ConnectionStrings["workflow/dataprovider/database/read"].ConnectionString)))
+                .As<Repository.IRepository>();
         }
 
         private IStoreEvents BuildEventStore(ILifetimeScope container)

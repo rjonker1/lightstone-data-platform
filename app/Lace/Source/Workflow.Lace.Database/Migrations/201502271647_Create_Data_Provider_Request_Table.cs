@@ -1,9 +1,9 @@
 ﻿using FluentMigrator;
 
-namespace Workflow.Lace.Database.Migrations
+namespace Workflow.Billing.Database.Migrations
 {
-    [Migration(201502271648)]
-    public class CreateDataProviderRequestTable : Migration
+    [Migration(201502271647)]
+    public class Create_Data_Provider_Request_Table : Migration
     {
         public override void Up()
         {

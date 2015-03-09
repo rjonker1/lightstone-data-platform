@@ -9,18 +9,14 @@ namespace Workflow.Lace.Messages.Commands
     public class Command
     {
 
-        public Command(Guid id, DataProviderCommandSource dataProvider, DateTime date)
+        public Command(Guid id, DateTime date)
         {
             Id = id;
-            DataProvider = dataProvider;
             Date = date;
         }
 
         [DataMember]
         public Guid Id { get; private set; }
-
-        [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
