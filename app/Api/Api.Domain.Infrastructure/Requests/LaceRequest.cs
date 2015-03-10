@@ -18,6 +18,7 @@ namespace Api.Domain.Infrastructure.Requests
         public IProvideJisInformation Jis { get; private set; }
 
         public IPackage Package { get; private set; }
+        public Lace.Domain.Core.Contracts.Requests.IProvidePropertyInformationForRequest Property { get; private set; }
 
         public IProvideRequestAggregation RequestAggregation { get; private set; }
 
