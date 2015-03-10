@@ -85,18 +85,18 @@
 
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Registered Name</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
-                       @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
+                        @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
-               
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Registration Number</label>
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
@@ -104,10 +104,10 @@
                         @Html.TextBoxFor(x => x.RegistrationNumber, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
-               
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Contract Type</label>
                 <div class="input-group col-lg-2">
                     <select name="ContractTypeId" data-placeholder="Choose user type..." class="chosen-select">
@@ -119,10 +119,10 @@
                         }
                     </select>
                 </div>
-                
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Escalation Type</label>
                 <div class="input-group col-lg-2">
                     <select name="EscalationTypeId" data-placeholder="Choose escalation type..." class="chosen-select">
@@ -134,10 +134,10 @@
                         }
                     </select>
                 </div>
-               
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Contrac Duration</label>
                 <div class="input-group col-lg-2">
                     <select name="ContractDurationId" data-placeholder="Choose contrat duration..." class="chosen-select">
@@ -149,12 +149,12 @@
                         }
                     </select>
                 </div>
-                
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Clients</label>
-                <div class="input-group col-lg-2">
+                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Client).AssemblyQualifiedName">
                     <select id="ClientIds" name="ClientIds" data-placeholder="Search for client..." multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Clients)
                         {
@@ -163,12 +163,12 @@
                         }
                     </select>
                 </div>
-                
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Customers</label>
-                <div class="input-group col-lg-2">
+                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Customer).AssemblyQualifiedName">
                     <select id="CustomerIds" name="CustomerIds" data-placeholder="Search for customer..." multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Customers)
                         {
@@ -177,21 +177,21 @@
                         }
                     </select>
                 </div>
-               
+
             </div>
             <div class="form-group">
-                
+
                 <label class="control-label col-lg-4">Packages</label>
-                <div class="input-group col-lg-2">
+                <div class="input-group col-lg-2 packag-autocomplete">
                     <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Search for package..." multiple class="chosen-select">
                         @foreach (var item in Model.Packages)
                         {
                             var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);
-                            <option selected="@isSelected" value="@item.Key|@item.Value">@item.Value</option>
+                            <option id="@item.Key" selected="@isSelected" value="@item.Key|@item.Value">@item.Value</option>
                         }
                     </select>
                 </div>
-                
+
             </div>
             <div class="form-group">
                 <div class="col-lg-4"></div>

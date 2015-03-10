@@ -306,9 +306,9 @@ function initializePlugins() {
         }
     });
     
-    $('.chosen-autocomplete-packages .chosen-choices input').autocomplete({
+    $('.packag-autocomplete .chosen-choices input').autocomplete({
         source: function (request, response) {
-            var $container = $(this.element).closest('.chosen-autocomplete');
+            var $container = $(this.element).closest('.packag-autocomplete');
             var type = $container.data('type');
             $.ajax({
                 url: "/packages/" + request.term + "/",
@@ -325,9 +325,12 @@ function initializePlugins() {
             });
         },
         select: function (event, ui) {
-            var $container = $(this).closest('.chosen-autocomplete-packages');
+            if ($('#' + ui.item.value).length) {
+                return;
+            }
+            var $container = $(this).closest('.packag-autocomplete');
             var $select = $container.find('select');
-            $select.append('<option selected="true" value="' + ui.item.value + '|' + ui.item.label + '">' + ui.item.label + '</option>');
+            $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '|' + ui.item.label + '">' + ui.item.label + '</option>');
             $select.trigger("chosen:updated");
         }
     });
@@ -357,11 +360,12 @@ function initializePlugins() {
             });
         },
         select: function (event, ui) {
-            var $container = $(this).closest('div');
-            var $listGroup = $container.find('.list-group');
             if ($('#' + ui.item.value).length) {
                 return;
             }
+            
+            var $container = $(this).closest('div');
+            var $listGroup = $container.find('.list-group');
             
             var $item = $("<div>", { "class": "list-group-item" }).appendTo($listGroup);
 
