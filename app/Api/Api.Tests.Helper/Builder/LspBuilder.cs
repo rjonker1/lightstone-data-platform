@@ -14,10 +14,9 @@ namespace Api.Tests.Helper.Builder
                 Response = new LaceResponse()
                 {
                     // TODO: update after Lightstone Package updated
-                    //LspResponse = new LspResponse()
-                    //SignioDriversLicenseDecryptionResponse =
-                    //    new LspResponse(new Lace.Domain.Core.Entities.DrivingLicenseCard(),
-                    //        string.Empty),
+                    //LspResponse = 
+                    //     new LspResponse(new Lace.Domain.Core.Entities.ReturnPropertiesResponse(),
+                    //         string.Empty),
                     //LspResponseHandled = new LspResponseHandled()
                 }
             };
