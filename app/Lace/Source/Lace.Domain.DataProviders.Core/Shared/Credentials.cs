@@ -24,5 +24,13 @@ namespace Lace.Domain.DataProviders.Core.Shared
         public static Func<string> DecryptyLspServicePassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptySlpServicePassword");
         public static Func<string> DecryptyLspServiceOperation = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("DecryptyLspServiceOperation");
 
+        // Lightstone Property Web Service
+        public static Func<string> LspWsUrl = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LspWsUrl");
+        public static Func<string> ReturnPropertiesOperation = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("ReturnPropertiesOperation");
+        public static Func<string> LspWsUsername = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LspWsUsername");
+        public static Func<string> LspWPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LspWPassword");
+        public static Func<string> LspWsUser_ID = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LspWsUser_ID");
+
+
     }
 }

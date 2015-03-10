@@ -74,13 +74,18 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Core\Contracts\Lsp\ICallLspVerification.cs" />
     <Compile Include="Core\Contracts\ICallDriversLicenseVerification.cs" />
     <Compile Include="Core\Contracts\ICallFicaVerification.cs" />
+    <Compile Include="Core\Contracts\Lsp\IHaveLspDetails.cs" />
     <Compile Include="Core\Contracts\IHaveDriversLicenseDetails.cs" />
     <Compile Include="Core\Contracts\IHaveFicaDetails.cs" />
+    <Compile Include="Core\Contracts\Lsp\IHaveLspPropertiesRequest.cs" />
+    <Compile Include="Core\Contracts\Lsp\IHaveReturnPropertiesResponse.cs" />
     <Compile Include="Fakes\FakePackageBuilderApi.cs" />
     <Compile Include="Infrastructure\Commands\DriversLicenseVerficationCommands.cs" />
     <Compile Include="Infrastructure\Commands\FicaVerficationCommands.cs" />
+    <Compile Include="Infrastructure\Dto\LspVerficationDto.cs" />
     <Compile Include="Infrastructure\Dto\DriversLicenseVerficationDto.cs" />
     <Compile Include="Infrastructure\Dto\FicaVerficationDto.cs" />
     <Compile Include="Infrastructure\Handlers\Contracts\IHandleDriversLicenseVerficationRequest.cs" />

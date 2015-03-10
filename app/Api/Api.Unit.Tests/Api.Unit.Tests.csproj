@@ -199,6 +199,7 @@
     <Compile Include="Fakes\TestBootstrapper.cs" />
     <Compile Include="when_api_key_header_missing.cs" />
     <Compile Include="when_api_key_header_added.cs" />
+    <Compile Include="when_sending_Lsp_request.cs" />
     <Compile Include="when_sending_drivers_license_request.cs" />
   </ItemGroup>
   <ItemGroup>

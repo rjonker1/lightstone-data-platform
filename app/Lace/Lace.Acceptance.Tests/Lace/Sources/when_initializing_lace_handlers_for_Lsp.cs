@@ -1,5 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lsp;
@@ -33,16 +34,16 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public override void Observe()
         {
-        //    _dataProvider.CallSource(_response);
+            _dataProvider.CallSource(_response);
         }
 
-        //[Observation]
+        [Observation]
         public void lace_Lsp_response_should_be_handled_test()
         {
             _response.LspResponseHandled.Handled.ShouldBeTrue();
         }
 
-       // [Observation]
+        [Observation]
         public void lace_Lsp_response_shuould_not_be_null_test()
         {
             _response.LspResponse.ShouldNotBeNull();

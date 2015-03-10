@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
-    <Compile Include="Contracts\DataProviders\IProvideDataFromLspDecryption.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLsp.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
     <Compile Include="Contracts\DataProviders\Lsp\IRespondWithLspInformation.cs" />

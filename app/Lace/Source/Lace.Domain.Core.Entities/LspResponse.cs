@@ -5,7 +5,7 @@ using Lace.Domain.Core.Contracts.DataProviders.Lsp;
 namespace Lace.Domain.Core.Entities
 {
     [DataContract]
-    public class LspResponse : IProvideDataFromLspDecryption
+    public class LspResponse : IProvideDataFromLsp
     {
         public LspResponse(IRespondWithLspInformation lspInformation, string data)
         {

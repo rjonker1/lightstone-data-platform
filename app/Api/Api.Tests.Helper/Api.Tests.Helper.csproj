@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Builder\DriversLicenseScanBuilder.cs" />
     <Compile Include="Builder\LaceResponseBuilder.cs" />
+    <Compile Include="Builder\LspBuilder.cs" />
     <Compile Include="Fakes\Vehicles\FakeVehicleSearches.cs" />
     <Compile Include="Fakes\Verification\FakeDriversLicenseScans.cs" />
   </ItemGroup>

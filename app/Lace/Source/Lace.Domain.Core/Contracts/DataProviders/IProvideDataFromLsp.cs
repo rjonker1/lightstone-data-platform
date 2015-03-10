@@ -4,7 +4,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
-    public interface IProvideDataFromLspDecryption : IPointToLaceProvider
+    public interface IProvideDataFromLsp : IPointToLaceProvider
     {
         IRespondWithLspInformation LspInformation { get; }
         string Data { get; }

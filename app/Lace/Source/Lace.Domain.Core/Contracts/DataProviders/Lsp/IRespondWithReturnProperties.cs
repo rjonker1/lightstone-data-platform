@@ -75,9 +75,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Lsp
         /// This is the textual description of the Sectional Title scheme name that the property resides in.
         /// </summary>
         string SECTIONAL_TITLE { get; set; }
-
-        //TODO: the reset of the fields as per the specification in excel speadsheet
-
+      
         /// <summary>
         /// If the property is registered in a sectional scheme the unit number is populated in this field.
         /// </summary>
@@ -395,20 +393,5 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Lsp
         /// If they are estimated then Lightstone does not guarantee accuracy and GPS co-ortinates should not be displayed. 
         /// </summary>
         bool Estimatedcad { get; set; }
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
