@@ -91,10 +91,14 @@ namespace Lace.Domain.Core.Entities
     [DataContract]
     public class ReturnPropertiesResponse
     {
+        
+        // Default Constructor
         public ReturnPropertiesResponse()
         {
             
         }
+
+
 
 
         public ReturnPropertiesResponse(Type type, string typeName, decimal propId, decimal proptypeId, decimal ssId,

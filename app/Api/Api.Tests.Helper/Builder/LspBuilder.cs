@@ -14,7 +14,9 @@ namespace Api.Tests.Helper.Builder
                 Response = new LaceResponse()
                 {
                     // TODO: update after Lightstone Package updated
-                    //LspResponse = 
+
+                    // Seems that the package Domain.Core.Entities package did not publish so try again.
+                    //LspResponse =
                     //     new LspResponse(new Lace.Domain.Core.Entities.ReturnPropertiesResponse(),
                     //         string.Empty),
                     //LspResponseHandled = new LspResponseHandled()
