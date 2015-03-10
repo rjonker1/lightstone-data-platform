@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.ConstrainedExecution;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
@@ -38,23 +39,30 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                 var prop = _request.Property;
 
                 // TODO: update content after next package deployment
-                ///var content =
-                //    string.Format(
-                //        "User_ID={0}&Province={1}&Municipality={2}&DeedTown={3}&Erf={4}&Portion={5}&Sectional_Title=s{6}&Unit={7}&Suburb={8}&Street={9}&StreetNumber={10}&Owner_Name={11}&ID_CK={12}&Estate_Name={13}&FARM_NAME={14}&MaxRowsToReturn={15}&TrackingNumber={16}",
-                //        _request.User.UserId.ToString(),
-                //        prop.Municipality,
-                //        prop.DeedTown,
-                //        prop.Erf,
-                //        prop.Portion,
-                //        prop.Sectional_Title,
-                //"Unit",
-                //prop.Suburb,
-                //prop.s.......
-                //        );
+                var content =
+                    string.Format(
+                        "User_ID={0}&Province={1}&Municipality={2}&DeedTown={3}&Erf={4}&Portion={5}&Sectional_Title=s{6}&Unit={7}&Suburb={8}&Street={9}&StreetNumber={10}&Owner_Name={11}&ID_CK={12}&Estate_Name={13}&FARM_NAME={14}&MaxRowsToReturn={15}&TrackingNumber={16}",
+                        _request.User.UserId.ToString(),
+                        prop.Municipality,
+                        prop.DeedTown,
+                        prop.Erf,
+                        prop.Portion,
+                        prop.Sectional_Title,
+                        prop.Unit,
+                        prop.Suburb,
+                        prop.Street,
+                        "",//prop.StreetNumber,
+                        prop.Owner_Name,
+                        prop.ID_CK,
+                        prop.Estate_Name,
+                        prop.FARM_NAME,
+                        prop.MaxRowsToReturn,
+                        prop.TrackingNumber
+                        );
 
                 // TODO: update content after next package deployment
 
-                _client = new ConfigureLspClient("content", _request.User.UserId);
+                _client = new ConfigureLspClient(content, _request.User.UserId);
 
                 monitoring.Send(CommandType.Configuration,
                     new
@@ -69,7 +77,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                                 _client.Operation
                             }
                     },
-                    new {ContextMessage = "Lsp Data Provider Decrypting Configuration"});
+                    new { ContextMessage = "Lsp Data Provider Decrypting Configuration" });
 
                 monitoring.StartCall(_client.Operation, _stopWatch);
 
@@ -90,7 +98,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
             {
                 _log.ErrorFormat("Error calling Lsp Data Provider {0}", ex.Message);
                 monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lsp"});
+                    new { ErrorMessage = "Error calling Lsp" });
                 LspResponseFailed(response);
             }
         }

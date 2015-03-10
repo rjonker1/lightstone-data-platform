@@ -68,6 +68,11 @@ namespace Lace.Domain.Core.Contracts.Requests
         /// </summary>
         string Street { get; set; }
 
+        /// <summary>
+        /// This field contains the street number of the property.
+        /// </summary>
+        string StreetNumber{ get; set; }
+
 
         /// <summary>
         /// This field contains the name of the owner of the property.
