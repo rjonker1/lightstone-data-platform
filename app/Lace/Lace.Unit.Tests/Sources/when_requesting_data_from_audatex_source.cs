@@ -16,7 +16,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _audatexRequest;
         private readonly IProvideResponseFromLaceDataProviders _laceResponse;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
 

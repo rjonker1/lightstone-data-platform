@@ -28,7 +28,7 @@ namespace Lace.Unit.Tests.Chain
 
         public when_building_lace_source_chain_for_license_plate_number_search()
         {
-            _bus = BusFactory.NServiceRabbitMqBus();
+            _bus = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new FakeSourceChain(_request.Package.Action);
             _buildSourceChain.Build();

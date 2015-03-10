@@ -5,6 +5,6 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface IRequestDataFromDataProviderSource
     {
-        void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource, ISendCommandsToBus monitoring);
+        void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource, ISendMonitoringCommandsToBus monitoring);
     }
 }

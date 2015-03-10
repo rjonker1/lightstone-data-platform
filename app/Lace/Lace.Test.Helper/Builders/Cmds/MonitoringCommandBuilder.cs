@@ -11,20 +11,20 @@ using Lace.Test.Helper.Fakes.Responses;
 
 namespace Lace.Test.Helper.Builders.Cmds
 {
-    public class CommandBuilder
+    public class MonitoringCommandBuilder
     {
         private readonly Guid _aggregateId;
 
-        public CommandBuilder(Guid aggregateId)
+        public MonitoringCommandBuilder(Guid aggregateId)
         {
             _aggregateId = aggregateId;
         }
 
 
-        public CommandBuilder ForAudatex()
+        public MonitoringCommandBuilder ForAudatex()
         {
-            var queue = new QueueSender(DataProviderCommandSource.Audatex, _aggregateId);
-            queue.InitQueue(BusBuilder.ForAudatexCommands(_aggregateId))
+            var queue = new MonitoirngQueueSender(DataProviderCommandSource.Audatex, _aggregateId);
+            queue.InitQueue(MonitoringBusBuilder.ForAudatexCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingExecution(new LicensePlateRequestBuilder().ForAudatex())
                 .Configuration(
@@ -50,10 +50,10 @@ namespace Lace.Test.Helper.Builders.Cmds
             return this;
         }
 
-        public CommandBuilder ForIvid()
+        public MonitoringCommandBuilder ForIvid()
         {
-            var queue = new QueueSender(DataProviderCommandSource.Ivid, _aggregateId);
-            queue.InitQueue(BusBuilder.ForIvidCommands(_aggregateId))
+            var queue = new MonitoirngQueueSender(DataProviderCommandSource.Ivid, _aggregateId);
+            queue.InitQueue(MonitoringBusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
                 .StartingExecution(new LicensePlateRequestBuilder().ForIvid())
                 .Configuration(

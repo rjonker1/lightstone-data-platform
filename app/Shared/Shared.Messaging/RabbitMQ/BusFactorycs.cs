@@ -18,12 +18,28 @@ namespace DataPlatform.Shared.Messaging.RabbitMQ
             _endpointName = endpointName;
         }
 
-        public IBus CreateBus()
+        public IBus CreateBusWithNHibernatePersistence()
         {
             var configuration = new BusConfiguration();
 
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<NHibernatePersistence>();
+            configuration.DisableFeature<TimeoutManager>();
+            configuration.EndpointName(_endpointName);
+            configuration.AssembliesToScan(_assembliesToScan);
+            configuration.Conventions()
+                .DefiningCommandsAs(
+                    c => c.Namespace != null && c.Namespace.EndsWith(_namespace));
+            var bus = Bus.Create(configuration);
+            return bus;
+        }
+
+        public IBus CreateBusWithInMemmorPersistence()
+        {
+            var configuration = new BusConfiguration();
+
+            configuration.UseTransport<RabbitMQTransport>();
+            configuration.UsePersistence<InMemoryPersistence>();
             configuration.DisableFeature<TimeoutManager>();
             configuration.EndpointName(_endpointName);
             configuration.AssembliesToScan(_assembliesToScan);

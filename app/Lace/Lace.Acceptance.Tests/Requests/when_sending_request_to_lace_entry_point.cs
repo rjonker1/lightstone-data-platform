@@ -19,7 +19,7 @@ namespace Lace.Acceptance.Tests.Requests
 
         public when_sending_request_to_lace_entry_point()
         {
-            _bus = BusFactory.NServiceRabbitMqBus();
+            _bus = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _entryPoint = new EntryPointService(_bus);
         }

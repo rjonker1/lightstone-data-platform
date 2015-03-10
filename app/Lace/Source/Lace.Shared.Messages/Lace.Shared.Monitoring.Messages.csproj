@@ -90,13 +90,13 @@
     <Compile Include="Core\Category.cs" />
     <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\IPublishCommandMessages.cs" />
-    <Compile Include="Core\ISendCommandsToBus.cs" />
+    <Compile Include="Core\ISendMonitoringCommandsToBus.cs" />
     <Compile Include="Infrastructure\Dto\Metadata.cs" />
     <Compile Include="Infrastructure\Extensions\BusExtensions.cs" />
     <Compile Include="Infrastructure\StopWatches.cs" />
     <Compile Include="Infrastructure\Dto\StopWatchResults.cs" />
     <Compile Include="Infrastructure\Factories\StopWatchFactory.cs" />
-    <Compile Include="Publisher\CommandPublisher.cs" />
+    <Compile Include="Publisher\MonitoringCommandPublisher.cs" />
     <Compile Include="Shared\SendEntryPointCommands.cs" />
     <Compile Include="Shared\SendAudatexCommands.cs" />
     <Compile Include="Shared\SendPCubedCommands.cs" />

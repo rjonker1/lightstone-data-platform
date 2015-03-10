@@ -6,44 +6,57 @@ namespace Workflow.Lace.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class ReceiveResponseFromDataProviderCommand : Command
+    public class ReceiveResponseFromDataProviderCommand
     {
         [DataMember]
-        public Guid ResponseId { get; private set; }
+        public Guid Id { get; private set; }
+
+        [DataMember]
+        public DateTime Date { get; private set; }
 
         [DataMember]
         public Guid RequestId { get; private set; }
 
-        [DataMember]
-        public object ResponsePayload { get; private set; }
+        //[DataMember]
+        //public object ResponsePayload { get; private set; }
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
 
-        public ReceiveResponseFromDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            Guid responseId, object payload)
-            : base(id, date)
+        public ReceiveResponseFromDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date)
         {
-            ResponseId = responseId;
+            Id = id;
+            Date = date;
             RequestId = requestId;
-            ResponsePayload = payload;
             DataProvider = dataProvider;
         }
     }
 
     [Serializable]
     [DataContract]
-    public class ReturnResponseCommmand : Command
+    public class ReturnResponseCommmand
     {
         [DataMember]
+        public Guid Id { get; private set; }
+
+        [DataMember]
+        public DateTime Date { get; private set; }
+
+        [DataMember]
         public Guid RequestId { get; private set; }
+
+        //[DataMember]
+        //public object ResponsePayload { get; private set; }
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
         public ReturnResponseCommmand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date)
-            : base(id, date)
         {
+            Id = id;
+            Date = date;
             DataProvider = dataProvider;
+            RequestId = requestId;
+            //ResponsePayload = payload;
         }
     }
 }

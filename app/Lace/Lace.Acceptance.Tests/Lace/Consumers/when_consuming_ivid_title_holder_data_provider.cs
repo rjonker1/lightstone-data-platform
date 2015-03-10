@@ -14,14 +14,14 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     public class when_consuming_ivid_title_holder_data_provider : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private IvidTitleHolderDataProvider _consumer;
 
 
         public when_consuming_ivid_title_holder_data_provider()
         {
-            _monitoring = BusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
              _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }

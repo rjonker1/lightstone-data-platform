@@ -18,7 +18,7 @@ namespace Lace.Acceptance.Tests.Events
         {
             try
             {
-                new CommandBuilder(_aggregateId)
+                new MonitoringCommandBuilder(_aggregateId)
               .ForIvid();
             }
             catch (Exception ex)

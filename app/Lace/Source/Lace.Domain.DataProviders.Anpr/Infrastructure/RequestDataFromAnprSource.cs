@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
     public class RequestDataFromAnprSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

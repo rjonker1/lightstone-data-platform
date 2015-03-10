@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
     public class RequestDataFromIvidSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

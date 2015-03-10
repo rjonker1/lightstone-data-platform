@@ -19,13 +19,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             _request = request;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 

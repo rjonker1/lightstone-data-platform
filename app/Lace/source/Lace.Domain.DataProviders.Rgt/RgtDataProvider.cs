@@ -17,10 +17,10 @@ namespace Lace.Domain.DataProviders.Rgt
     public class RgtDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
 
         public RgtDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;

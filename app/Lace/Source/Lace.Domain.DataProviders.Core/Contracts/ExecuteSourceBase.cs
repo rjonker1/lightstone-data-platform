@@ -14,14 +14,14 @@ namespace Lace.Domain.DataProviders.Core.Contracts
             FallBack = fallbackSource;
         }
 
-        public void CallNextSource(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallNextSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             if (Next == null) return;
 
             Next.CallSource(response);
         }
 
-        public void CallFallbackSource(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallFallbackSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             if (FallBack == null) return;
 

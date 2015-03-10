@@ -28,7 +28,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             response.FicaVerficationResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformPCubedResponse(_response);
 
