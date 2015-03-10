@@ -3,28 +3,35 @@
 
 @Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Customers", ""))
 
-<table id="customers_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-    <thead>
+<table id="customers_table" class="customTable">
+    <thead id="ctHead">
         <tr>
-            <th>Id</th>
-            <th>Customer Name</th>
-            <th>Account Owner Name</th>
-            <th></th>
+            <th>
+                Id
+            </th>
+            <th id="ctSubHead1">
+                Customer Name
+            </th>
+            <th id="ctSubHead1">
+                Account Owner Name
+            </th>
+            <th id="ctSubHead2">
+                <i id="ctActionIcon" class="fa fa-bolt"></i>
+            </th>
         </tr>
     </thead>
 </table>
 
 <script>
-    
+
     $('.navmenu').offcanvas('toggle');
 
-    var table = $("#customers_table").DataTable({
-        dom: '<"table-toolbar">frtip<"bottom"l>',
+    var table = $("#customers_table").dataTable({
+        dom: '<"table-toolbar">frtlip',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //retrieve: true,
         processing: true,
         serverSide: true,
-        ajax: "/Customers",
+        ajax: "/Customers/",
         columns: [
             { data: "id", visible: false },
             { data: "name" },
@@ -41,7 +48,8 @@
         ]
     });
 
-    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='/Customers/Add'>Add</a>");
+
+    $("div.table-toolbar").append("<a class='btn btn-default entity-add' href='/Customers/Add'>Add</a>");
 </script>
 
 @*@section Scripts{
