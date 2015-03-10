@@ -38,7 +38,6 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
 
                 var prop = _request.Property;
 
-                // TODO: update content after next package deployment
                 var content =
                     string.Format(
                         "User_ID={0}&Province={1}&Municipality={2}&DeedTown={3}&Erf={4}&Portion={5}&Sectional_Title=s{6}&Unit={7}&Suburb={8}&Street={9}&StreetNumber={10}&Owner_Name={11}&ID_CK={12}&Estate_Name={13}&FARM_NAME={14}&MaxRowsToReturn={15}&TrackingNumber={16}",
@@ -51,7 +50,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                         prop.Unit,
                         prop.Suburb,
                         prop.Street,
-                        "",//prop.StreetNumber,
+                        prop.StreetNumber,
                         prop.Owner_Name,
                         prop.ID_CK,
                         prop.Estate_Name,
@@ -60,8 +59,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
                         prop.TrackingNumber
                         );
 
-                // TODO: update content after next package deployment
-
+                
                 _client = new ConfigureLspClient(content, _request.User.UserId);
 
                 monitoring.Send(CommandType.Configuration,
