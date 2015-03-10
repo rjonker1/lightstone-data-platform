@@ -3,14 +3,24 @@
 
 @Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Users", ""))
 
-<table id="users_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-    <thead>
+<table id="users_table" class="customTable">
+    <thead id="ctHead">
         <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>User Name</th>
-            <th></th>
+            <th>
+                Id
+            </th>
+            <th id="ctSubHead1">
+                First Name
+            </th>
+            <th id="ctSubHead1">
+                Last Name
+            </th>
+            <th id="ctSubHead1">
+                User Name
+            </th>
+            <th id="ctSubHead2">
+                <i id="ctActionIcon" class="fa fa-bolt"></i>
+            </th>
         </tr>
     </thead>
 </table>
@@ -19,8 +29,8 @@
     
     $('.navmenu').offcanvas('toggle');
 
-    var table = $("#users_table").DataTable({
-        dom: '<"table-toolbar">frtip<"bottom"l>',
+    var table = $("#users_table").dataTable({
+        dom: '<"table-toolbar">frtlip',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
@@ -32,7 +42,7 @@
             { data: "userName" },
             {
                 data: null,
-                render: function(data, type, full, meta) {
+                render: function (data, type, full, meta) {
                     return '<div class="row">' +
                         '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Users/' + data.id + '">Edit</a></div>' +
                         '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + data.id + '">Delete</a></div>' +
