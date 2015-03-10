@@ -170,7 +170,9 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.min.css" />
-    <Content Include="Content\DataTables-1.10.4\css\CustomTable.css" />
+    <Content Include="Content\DataTables-1.10.4\css\CustomTable.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\DataTables-1.10.4\css\dataTables.autoFill.css" />
     <Content Include="Content\DataTables-1.10.4\css\dataTables.autoFill.min.css" />
     <Content Include="Content\DataTables-1.10.4\css\dataTables.bootstrap.css" />
