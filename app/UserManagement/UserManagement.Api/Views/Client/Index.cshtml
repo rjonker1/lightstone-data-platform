@@ -2,12 +2,18 @@
 
 @Html.Partial("Shared/PageHeading", new PageHeadingViewModel("Clients", ""))
 
-<table id="client_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-    <thead>
+<table id="client_table" class="customTable">
+    <thead id="ctHead">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th></th>
+            <th>
+                Id
+            </th>
+            <th id="ctSubHead1">
+                Name
+            </th>
+            <th id="ctSubHead2">
+                <i id="ctActionIcon" class="fa fa-bolt"></i>
+            </th>
         </tr>
     </thead>
 </table>
@@ -16,8 +22,8 @@
     
     $('.navmenu').offcanvas('toggle');
 
-    var table = $("#client_table").DataTable({
-        dom: '<"table-toolbar">frtip<"bottom"l>',
+    var table = $("#client_table").dataTable({
+        dom: '<"table-toolbar">frtlip',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
@@ -27,7 +33,7 @@
             { data: "name" },
             {
                 data: null,
-                render: function(data, type, full, meta) {
+                render: function (data, type, full, meta) {
                     return '<div class="row">' +
                         '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + data.id + '">Edit</a></div>' +
                         '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + data.id + '">Delete</a></div>' +
