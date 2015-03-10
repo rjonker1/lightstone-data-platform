@@ -8,121 +8,18 @@
 @Html.Partial("Shared/PageHeading", viewModel)
 
 
-<style>
 
-    #@tableId, tbody tr {
-        border-collapse: collapse;
-        box-sizing: border-box;
-        clear: both;
-        color: rgb(69, 78, 89);
-        perspective-origin: 801.5px 234px;
-        transform-origin: 801.5px 234px;
-        border: 1px solid rgb(235, 238, 242);
-        border-spacing: 0px 0px;
-        font: normal normal normal normal 14px/20px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        outline: rgb(69, 78, 89) none 0px;
-    }
-
-    #THEAD_19 {
-        border-collapse: collapse;
-        box-sizing: border-box;
-        color: rgb(69, 78, 89);
-        height: 57px;
-        width: 1602px;
-        perspective-origin: 801px 28.5px;
-        transform-origin: 801px 28.5px;
-        border: 0px none rgb(235, 238, 242);
-        font: normal normal normal normal 14px/20px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        outline: rgb(69, 78, 89) none 0px;
-    }
-    /*#THEAD_19*/
-
-    #TH_22 {
-        background-position: 100% 50%;
-        border-collapse: collapse;
-        color: rgb(69, 78, 89);
-        cursor: pointer;
-        height: 25px;
-        text-align: left;
-        vertical-align: middle;
-        width: 65%;
-        perspective-origin: 207.5px 28.5px;
-        transform-origin: 207.5px 28.5px;
-        border-top: 0px none rgb(69, 78, 89);
-        border-right: 1px solid rgb(235, 238, 242);
-        border-bottom: 2px solid rgb(235, 238, 242);
-        border-left: 1px solid rgb(235, 238, 242);
-        font: normal normal 600 normal 18px/25.7142868041992px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        outline: rgb(69, 78, 89) none 0px;
-        padding: 15px 18px;
-    }
-    /*#TH_22*/
-
-    #TH_25 {
-        border-collapse: collapse;
-        color: rgb(69, 78, 89);
-        height: 25px;
-        vertical-align: middle;
-        width: 35%;
-        perspective-origin: 56px 28.5px;
-        transform-origin: 56px 28.5px;
-        border-top: 0px none rgb(69, 78, 89);
-        border-right: 1px solid rgb(235, 238, 242);
-        border-bottom: 2px solid rgb(235, 238, 242);
-        border-left: 1px solid rgb(235, 238, 242);
-        font: normal normal 600 normal 18px/25.7142868041992px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        outline: rgb(69, 78, 89) none 0px;
-        padding: 15px 18px;
-    }
-    /*#TH_25*/
-
-    #I_26 {
-        border-collapse: collapse;
-        box-sizing: border-box;
-        color: rgb(69, 78, 89);
-        display: inline-block;
-        height: 18px;
-        text-align: center;
-        width: 9px;
-        z-index: 0;
-        perspective-origin: 4.5px 9px;
-        transform: matrix(1, 0, 0, 1, 0, 0);
-        transform-origin: 4.5px 9px;
-        border: 0px none rgb(69, 78, 89);
-        font: normal normal normal normal 18px/18px FontAwesome;
-        outline: rgb(69, 78, 89) none 0px;
-    }
-        /*#I_26*/
-
-        #I_26:before {
-            border-collapse: collapse;
-            box-sizing: border-box;
-            color: rgb(69, 78, 89);
-            text-align: center;
-            content: '';
-            border: 0px none rgb(69, 78, 89);
-            font: normal normal normal normal 18px/18px FontAwesome;
-            outline: rgb(69, 78, 89) none 0px;
-        }
-    /*#I_26:before*/
-
-</style>
-
-
-<table id="@tableId">
-    <thead id="THEAD_19">
+<table id="@tableId" class="customTable">
+    <thead id="ctHead">
         <tr>
-            <th id="TH_21">
+            <th>
                 Id
             </th>
-            <th id="TH_22">
+            <th id="ctSubHead1">
                 Name
             </th>
-            @*<th rowspan="1" colspan="1" id="TH_24">
-                    Status
-                </th>*@
-            <th id="TH_25">
-                <i id="I_26"></i>
+            <th id="ctSubHead2">
+                <i id="ctActionIcon" class="fa fa-bolt"></i>
             </th>
         </tr>
     </thead>
@@ -132,29 +29,8 @@
 
     $('.navmenu').offcanvas('toggle');
 
-    @*var table = $("#@tableId").dataTable({
-        dom: '<"table-toolbar">frtip<"bottom"l>',
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        processing: true,
-        serverSide: true,
-        ajax: "/Lookups/" + "@Model.AssemblyQualifiedName",
-        columns: [
-            { data: "id", visible: false },
-            { data: "value" },
-            {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Lookups/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Lookups/Delete/' + data.id + '">Delete</a></div>' +
-                        '</div>';
-                }
-            }
-        ]
-    });*@
-
     var table2 = $("#@tableId").dataTable({
-        dom: '<"table-toolbar">frtilp',
+        dom: '<"table-toolbar">frtlip',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,

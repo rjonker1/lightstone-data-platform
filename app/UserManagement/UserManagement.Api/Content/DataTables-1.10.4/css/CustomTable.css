@@ -1,0 +1,93 @@
+﻿.customTable, tbody tr {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(69, 78, 89);
+    perspective-origin: 801.5px 234px;
+    transform-origin: 801.5px 234px;
+    border: 1px solid rgb(235, 238, 242);
+    border-spacing: 0px 0px;
+    font: normal normal normal normal 14px/20px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(69, 78, 89) none 0px;
+}
+
+#ctHead {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(69, 78, 89);
+    height: 57px;
+    width: 1602px;
+    perspective-origin: 801px 28.5px;
+    transform-origin: 801px 28.5px;
+    border: 0px none rgb(235, 238, 242);
+    font: normal normal normal normal 14px/20px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(69, 78, 89) none 0px;
+}
+
+#ctSubHead1 {
+    background-position: 100% 50%;
+    border-collapse: collapse;
+    color: rgb(69, 78, 89);
+    cursor: pointer;
+    height: 25px;
+    text-align: left;
+    vertical-align: middle;
+    width: 65%;
+    perspective-origin: 207.5px 28.5px;
+    transform-origin: 207.5px 28.5px;
+    border-top: 0 none rgb(69, 78, 89);
+    border-right: 1px solid rgb(235, 238, 242);
+    border-bottom: 2px solid rgb(235, 238, 242);
+    border-left: 1px solid rgb(235, 238, 242);
+    font: normal normal 600 18px/25.7142868041992px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(69, 78, 89) none 0;
+    padding: 15px 18px;
+}
+
+#ctSubHead2 {
+    border-collapse: collapse;
+    color: rgb(69, 78, 89);
+    height: 25px;
+    vertical-align: middle;
+    width: 35%;
+    perspective-origin: 56px 28.5px;
+    transform-origin: 56px 28.5px;
+    border-top: 0 none rgb(69, 78, 89);
+    border-right: 1px solid rgb(235, 238, 242);
+    border-bottom: 2px solid rgb(235, 238, 242);
+    border-left: 1px solid rgb(235, 238, 242);
+    font: normal normal 600 18px/25.7142868041992px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(69, 78, 89) none 0;
+    padding: 15px 18px;
+}
+
+#ctActionIcon {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(69, 78, 89);
+    display: inline-block;
+    height: 18px;
+    text-align: center;
+    width: 9px;
+    z-index: 0;
+    perspective-origin: 4.5px 9px;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transform-origin: 4.5px 9px;
+    border: 0 none rgb(69, 78, 89);
+    font: normal normal normal 18px/18px FontAwesome;
+    outline: rgb(69, 78, 89) none 0;
+}
+
+    #ctActionIcon:before {
+        border-collapse: collapse;
+        box-sizing: border-box;
+        color: rgb(69, 78, 89);
+        text-align: center;
+        border: 0 none rgb(69, 78, 89);
+        font: normal normal normal 18px/18px FontAwesome;
+        outline: rgb(69, 78, 89) none 0;
+    }
+
+    table.dataTable.no-footer {
+        border-bottom: 2px solid rgb(235, 238, 242) !important;
+    }
