@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.ExceptionHandling;
+using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
@@ -39,7 +41,7 @@ namespace UserManagement.Api.Modules
 
                 if (!ModelValidationResult.IsValid)
                 {
-                    return View["Save", dto];
+                    return View["Customer", dto];
                 }
 
                 var entity = Mapper.Map(dto, customers.Get(dto.Id));
@@ -55,7 +57,7 @@ namespace UserManagement.Api.Modules
 
                 return View["Save", dto];
             };
-            
+
             Put["/Customers/{id}"] = _ =>
             {
                 var dto = this.Bind<CustomerDto>();

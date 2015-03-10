@@ -1,13 +1,9 @@
 ﻿@using System
-@using System.CodeDom
 @using System.Linq
-@using DataPlatform.Shared.Helpers.Extensions
 @using Nancy.ViewEngines.Razor.HtmlHelpers;
-@using Shared.BuildingBlocks.Api.ExceptionHandling
 @using UserManagement.Api.Helpers.HtmlFormHelpers
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
-              
-@Html.ValidationSummary("Validation Results")
+
 
 <div class="box dark">
     <header>
@@ -23,10 +19,10 @@
             </nav>
         </div>
     </header>
-    
+
     <div class="body collapse in" id="div-1" aria-expanded="true" style="">
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -37,7 +33,7 @@
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Account Owner Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -45,10 +41,10 @@
                     @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Commercial State</label>
             <div class="input-group col-lg-2">
                 <select name="CommercialStateId" data-placeholder="Choose a state..." class="chosen-select">
@@ -63,7 +59,7 @@
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Create Sources</label>
             <div class="input-group col-lg-2">
                 <select name="CreateSourceIds" data-placeholder="Search for source..." multiple class="chosen-select">
@@ -78,7 +74,7 @@
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Platform Status</label>
             <div class="input-group col-lg-2">
                 <select name="PlatformStatusId" data-placeholder="Choose a province..." class="chosen-select">
