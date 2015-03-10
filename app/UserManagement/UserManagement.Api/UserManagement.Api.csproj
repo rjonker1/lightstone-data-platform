@@ -452,7 +452,8 @@
     <Compile Include="Modules\ContractModule.cs" />
     <Compile Include="Modules\CustomerModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
-    <Compile Include="Modules\LookupModule.cs" />
+    <Compile Include="Modules\NamedEntityModule.cs" />
+    <Compile Include="Modules\ValueEntityModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\LookupViewModel.cs" />
     <Compile Include="Modules\PackageModule.cs" />
@@ -505,7 +506,7 @@
     <Content Include="Views\Shared\TopLeftNavigation.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\Shared\PageHeading.cshtml" />
-    <Content Include="Views\Lookup\Index.cshtml" />
+    <Content Include="Views\ValueEntity\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Save.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
@@ -525,7 +526,7 @@
     <Content Include="Views\Client\PostalAddress.cshtml" />
     <Content Include="Views\Client\PhysicalAddress.cshtml" />
     <Content Include="Views\Client\Client.cshtml" />
-    <Content Include="Views\Lookup\Save.cshtml" />
+    <Content Include="Views\ValueEntity\Save.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

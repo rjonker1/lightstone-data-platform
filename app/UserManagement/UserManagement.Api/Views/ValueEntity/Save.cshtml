@@ -6,7 +6,7 @@
     var isCreate = Model.Id == new Guid();
     var pageHeadingViewModel = new PageHeadingViewModel("Lookups detail", isCreate ? "Create" : "Update");
     var method = isCreate ? "POST" : "PUT";
-    var url = isCreate ? "/Lookups" : "/Lookups/" + Model.Id;
+    var url = isCreate ? "/ValueEntities" : "/ValueEntities/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeading", pageHeadingViewModel)
 

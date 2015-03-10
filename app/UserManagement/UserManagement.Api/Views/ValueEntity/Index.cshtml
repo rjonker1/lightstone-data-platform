@@ -41,7 +41,7 @@
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
-        ajax: "/Lookups/" + "@Model.AssemblyQualifiedName",
+        ajax: "/ValueEntities/" + "@Model.AssemblyQualifiedName",
         columns: [
             { data: "id", visible: false },
             { data: "value" },
@@ -49,8 +49,8 @@
                 data: null,
                 render: function (data, type, full, meta) {
                     return '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Lookups/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Lookups/Delete/' + data.id + '">Delete</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/ValueEntities/' + data.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/ValueEntities/Delete/' + data.id + '">Delete</a></div>' +
                         '</div>';
                 }
             }
@@ -58,7 +58,7 @@
     });
 
     //$("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
-    $("div.table-toolbar").append("<div><a class='btn btn-default entity-add' href='#/Lookups/Add/@Model.AssemblyQualifiedName'>Add</a></div>");
+    $("div.table-toolbar").append("<div><a class='btn btn-default entity-add' href='#/ValueEntities/Add/@Model.AssemblyQualifiedName'>Add</a></div>");
     @*$('#@tableId tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
         alert(data.id + " - " + data.name);

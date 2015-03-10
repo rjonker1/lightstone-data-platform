@@ -228,46 +228,46 @@ function initializeContractRoutes(sammy) {
 }
 
 function initializeLookupRoutes(sammy) {
-    sammy.get('/Lookups/:type', function (context) {
-        context.load('/Lookups/' + context.params.type, { dataType: 'html', cache: false }).swap();
+    sammy.get('/ValueEntities/:type', function (context) {
+        context.load('/ValueEntities/' + context.params.type, { dataType: 'html', cache: false }).swap();
     });
-    sammy.get('/Lookups/Add/:type', function (context) {
-        context.load('/Lookups/Add/' + context.params.type, { dataType: 'html', cache: false })
+    sammy.get('/ValueEntities/Add/:type', function (context) {
+        context.load('/ValueEntities/Add/' + context.params.type, { dataType: 'html', cache: false })
             .swap()
             .then(function () {
                 initializePlugins();
             });
     });
-    sammy.post('/Lookups', function (context) {
+    sammy.post('/ValueEntities', function (context) {
         $(context.target).ajaxSubmit({
             success: function (response) {
-                context.redirect('/#/Lookups/' + response);
+                context.redirect('/#/ValueEntities/' + response);
             }
         });
         // !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
         return false;
     });
-    sammy.put('/Lookups/:id', function (context) {
+    sammy.put('/ValueEntities/:id', function (context) {
         var method = $(context.target).attr('method');
         $(context.target).ajaxSubmit({
             type: method,
             success: function (response) {
-                context.redirect('/#/Lookups/' + response);
+                context.redirect('/#/ValueEntities/' + response);
             }
         });
         // !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
         return false;
     });
-    sammy.get('/Lookups/:type/:filter', function (context) {
+    sammy.get('/ValueEntities/:type/:filter', function (context) {
         //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
     });
-    sammy.get('/Lookups/Delete/:id', function (context) {
+    sammy.get('/ValueEntities/Delete/:id', function (context) {
 
         $.ajax({
             type: "DELETE",
-            url: '/Lookups/' + context.params.id,
+            url: '/ValueEntities/' + context.params.id,
             contentType: 'application/json',
             datatype: 'json'
         });
@@ -278,12 +278,14 @@ function initializePlugins() {
     $(".chosen-select").chosen({ width: "100%" });
     $('.input-group.date').bootstrapdatepicker({ autoclose: true, format: "yyyy-mm-dd" });
     UserManagement.panelBodyCollapse();
-    $('.chosen-autocomplete .chosen-choices input').autocomplete({
+    
+    $('.entity-autocomplete .chosen-choices input').autocomplete({
         source: function (request, response) {
-            var $container = $(this.element).closest('.chosen-autocomplete');
+            var $container = $(this.element).closest('.entity-autocomplete');
+            var url = $container.data('url');
             var type = $container.data('type');
             $.ajax({
-                url: "/Lookups/" + type + "/" + request.term + "/",
+                url: url + "/" + type + "/" + request.term + "/",
                 dataType: "json",
                 beforeSend: function () { $('ul.chosen-results').empty(); },
                 success: function (data) {
@@ -297,7 +299,7 @@ function initializePlugins() {
             });
         },
         select: function (event, ui) {
-            var $container = $(this).closest('.chosen-autocomplete');
+            var $container = $(this).closest('.entity-autocomplete');
             var $select = $container.find('select');
             $select.append('<option selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
             $select.trigger("chosen:updated");
@@ -330,7 +332,7 @@ function initializePlugins() {
         }
     });
     
-    $('.auto-list-complete input').autocomplete({
+    $('#ClientIds').autocomplete({
         source: function(request, response) {
             var $container = $(this.element).closest('div');
             var type = $container.data('type');
@@ -340,7 +342,7 @@ function initializePlugins() {
             //    "class": "custom-colorize-changer"
             //}).appendTo($container);
             $.ajax({
-                url: "/Lookups/" + type + "/" + request.term + "/",
+                url: "/NamedEntities/" + type + "/" + request.term + "/",
                 dataType: "json",
                 beforeSend: function() {
                 },
@@ -356,29 +358,33 @@ function initializePlugins() {
         },
         select: function (event, ui) {
             var $container = $(this).closest('div');
-            var $ul = $container.find('ul');
+            var $listGroup = $container.find('.list-group');
             if ($('#' + ui.item.value).length) {
                 return;
             }
             
-            var index = $ul.children('li').length;
-            var $li = $("<li>", {
-                text: ""
-            }).appendTo($ul);
+            var $item = $("<div>", { "class": "list-group-item" }).appendTo($listGroup);
+
+            var $left = $("<div>", { "class": "pull-left" }).appendTo($item);
+            var $remove = $("<a>", { "class": "btn btn-danger btn-xs close-box", href: "javascript:;" }).appendTo($left);
+            var $removeIcon = $("<i>", { "class": "fa fa-times" }).appendTo($remove);
+            
+            var index = $listGroup.children('li').length;
+            
             var $id = $("<input>", {
                 id: ui.item.value,
                 name: "ClientId[" + index + "]",
                 value: ui.item.value,
                 type: 'hidden'
-            }).appendTo($li);
-            var $label = $("<label>", {
-                text: ui.item.label
-            }).appendTo($li);
+            }).appendTo($item);
+            
+            var $label = $("<label>", { text: ui.item.label }).appendTo($item);
+            
             var $value = $("<input>", {
                 name: "UserAlias[" + index + "]",
                 value: "",
                 "class": "form-control"
-            }).appendTo($li);
+            }).appendTo($item);
         },
         close: function(event, ui) {
             $(this).val('');

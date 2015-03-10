@@ -16,11 +16,11 @@ using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Modules
 {
-    public class LookupModule : NancyModule
+    public class ValueEntityModule : NancyModule
     {
-        public LookupModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
+        public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {
-            Get["/Lookups/{type}"] = parameters =>
+            Get["/ValueEntities/{type}"] = parameters =>
             {
                 var model = this.Bind<DataTablesViewModel>();
                 var typeName = parameters.type.ToString();
@@ -35,12 +35,12 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), dto);
             };
 
-            Get["/Lookups/Add/{type}"] = parameters =>
+            Get["/ValueEntities/Add/{type}"] = parameters =>
             {
                 return View["Save", new ValueEntityDto { AssemblyQualifiedName = parameters.type.ToString() }];
             };
 
-            Post["/Lookups"] = _ =>
+            Post["/ValueEntities"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
                 var entity = (ValueEntity)Mapper.Map(dto, null, typeof(ValueEntityDto), Type.GetType(dto.AssemblyQualifiedName));
@@ -50,7 +50,7 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson(dto.AssemblyQualifiedName);
             };
 
-            Get["/Lookups/{id:guid}"] = parameters =>
+            Get["/ValueEntities/{id:guid}"] = parameters =>
             {
                 var id = (Guid)parameters.id;
                 var valueEntity = entities.First(x => x.Id == id);
@@ -59,7 +59,7 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
-            Put["/Lookups/{id}"] = _ =>
+            Put["/ValueEntities/{id}"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
                 var valueEntity = entities.First(x => x.Id == dto.Id);
@@ -70,7 +70,7 @@ namespace UserManagement.Api.Modules
                 return Response.AsJson(valueEntity.GetType().AssemblyQualifiedName);
             };
 
-            Get["/Lookups/{type}/{filter}"] = parameters =>
+            Get["/ValueEntities/{type}/{filter}"] = parameters =>
             {
                 var typeName = parameters.type.ToString();
                 var type = Type.GetType(typeName);
@@ -82,7 +82,7 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { dto });
             };
 
-            Delete["/Lookups/{id}"] = _ =>
+            Delete["/ValueEntities/{id}"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();
                 var valueEntity = entities.First(x => x.Id == dto.Id);
