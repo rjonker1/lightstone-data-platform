@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Mothers.Sources
 {
     public class RequestDataFromIvidTitleHolderService : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalWebService, ISendCommandsToBus monitoring)
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalWebService, ISendMonitoringCommandsToBus monitoring)
         {
             externalWebService.CallTheDataProvider(response, monitoring);
         }

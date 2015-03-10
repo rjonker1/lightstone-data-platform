@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 

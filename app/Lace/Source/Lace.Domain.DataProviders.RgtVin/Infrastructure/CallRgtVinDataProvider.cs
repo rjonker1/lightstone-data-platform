@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformRgtVinResponse(_vins);
 

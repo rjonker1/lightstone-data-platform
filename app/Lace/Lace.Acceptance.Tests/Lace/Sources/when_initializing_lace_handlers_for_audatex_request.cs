@@ -17,12 +17,12 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_audatex_request()
         {
-            _monitoring = BusBuilder.ForAudatexCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForAudatexCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForAudatex();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider = new AudatexDataProvider(_request, null, null,_monitoring);

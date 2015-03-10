@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
             response.LspResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformLspResponse(_client.Resonse);
 

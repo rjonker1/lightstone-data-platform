@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             _repositories.Dispose();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
 

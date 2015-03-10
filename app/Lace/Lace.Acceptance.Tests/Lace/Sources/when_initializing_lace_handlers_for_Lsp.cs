@@ -17,14 +17,14 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
 
         //TODO: run tests
         public when_initializing_lace_handlers_for_Lsp()
         {
-            _monitoring = BusBuilder.ForLspCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForLspCommands(Guid.NewGuid());
             var lspRequestBuilder = new LspRequestBuilder();
 
             _request = lspRequestBuilder.ForReturnProperties();

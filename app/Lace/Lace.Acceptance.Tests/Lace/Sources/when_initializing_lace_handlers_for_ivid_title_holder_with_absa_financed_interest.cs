@@ -16,12 +16,12 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest()
         {
-            _monitoring = BusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForIvidTitleHolderWithAbsaFinancedInterest();
             _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
             _dataProvider = new IvidTitleHolderDataProvider(_request, null, null, _monitoring);

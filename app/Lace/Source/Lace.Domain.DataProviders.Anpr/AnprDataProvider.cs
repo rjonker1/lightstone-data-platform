@@ -11,8 +11,8 @@ namespace Lace.Domain.DataProviders.Anpr
     public class AnprDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
-        public AnprDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
+        private readonly ISendMonitoringCommandsToBus _monitoring;
+        public AnprDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;

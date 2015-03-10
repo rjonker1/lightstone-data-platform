@@ -1,19 +1,19 @@
 ﻿using System;
 using Common.Logging;
-using Lace.Shared.Monitoring.Messages.Core;
 using NServiceBus;
+using Workflow.Lace.Messages.Core;
 
-namespace Lace.Shared.Monitoring.Messages.Publisher
+namespace Workflow.Lace.Messages.Shared
 {
-    public class CommandPublisher : IPublishCommandMessages
+    public class WorkflowCommandPublisher : IPublishCommandMessages
     {
         private readonly IBus _bus;
         private readonly ILog _log;
 
-        public CommandPublisher(IBus bus)
+        public WorkflowCommandPublisher(IBus bus, ILog log)
         {
             _bus = bus;
-            _log = LogManager.GetLogger(GetType());
+            _log = log;
         }
 
         public void SendToBus<T>(T message) where T : class
@@ -24,7 +24,7 @@ namespace Lace.Shared.Monitoring.Messages.Publisher
             }
             catch (Exception ex)
             {
-                _log.ErrorFormat("Error sending message to Data Provider Message Bus: {0}", ex.Message);
+                _log.ErrorFormat("Error sending message to Data Provider Workflow Bus: {0}", ex.Message);
             }
         }
     }

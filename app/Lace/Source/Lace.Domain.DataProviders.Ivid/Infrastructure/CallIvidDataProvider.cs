@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         }
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             response.IvidResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformIvidResponse(_response);
 

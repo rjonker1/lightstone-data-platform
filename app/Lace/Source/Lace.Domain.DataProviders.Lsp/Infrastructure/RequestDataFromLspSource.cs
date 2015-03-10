@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.Lsp.Infrastructure
     public class RequestDataFromLspSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

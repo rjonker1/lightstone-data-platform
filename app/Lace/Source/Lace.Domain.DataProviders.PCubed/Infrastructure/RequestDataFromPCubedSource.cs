@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
     public class RequestDataFromPCubedSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

@@ -14,14 +14,14 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     public class when_consuming_audatex_data_provider : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private AudatexDataProvider _consumer;
 
 
         public when_consuming_audatex_data_provider()
         {
-            _monitoring = BusBuilder.ForAudatexCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForAudatexCommands(Guid.NewGuid());
             _request = new LicensePlateNumberAudatexOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandledAndVin12();
         }

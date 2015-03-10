@@ -24,9 +24,8 @@ namespace Workflow.Lace.Write.Service.Handlers
         public void Handle(ReceiveResponseFromDataProviderCommand message)
         {
             var @event = _repository.GetById<Request>(message.RequestId);
-            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId, message.ResponseId,
-                message.DataProvider,
-                message.ResponsePayload, message.Date);
+            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId,
+                message.DataProvider,message.Date);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }

@@ -22,7 +22,7 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
 
         public FakeEntryPoint()
         {
-            _bus = BusFactory.NServiceRabbitMqBus();
+            _bus = BusFactory.MonitoringBus();
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 

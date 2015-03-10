@@ -19,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public when_initializing_lace_source_chain_for_drivers_license_decryption()
         {
-            _monitoring = BusFactory.NServiceRabbitMqBus();
+            _monitoring = BusFactory.MonitoringBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
             _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();

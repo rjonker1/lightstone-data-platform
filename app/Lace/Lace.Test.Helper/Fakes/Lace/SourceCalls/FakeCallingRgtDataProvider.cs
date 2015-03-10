@@ -10,13 +10,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
     public class FakeCallingRgtDataProvider : ICallTheDataProviderSource
     {
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             //TODO: Add stubbed data for response
             TransformResponse(response,monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformRgtResponse(new List<CarSpecification>());
 

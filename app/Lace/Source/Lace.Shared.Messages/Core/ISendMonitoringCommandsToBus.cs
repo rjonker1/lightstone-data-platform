@@ -2,7 +2,7 @@
 
 namespace Lace.Shared.Monitoring.Messages.Core
 {
-    public interface ISendCommandsToBus
+    public interface ISendMonitoringCommandsToBus
     {
         void Begin(dynamic payload,
             DataProviderStopWatch stopWatch);

@@ -8,10 +8,10 @@ using Lace.Shared.Monitoring.Messages.Publisher;
 
 namespace Lace.Test.Helper.Builders.Buses
 {
-    public class QueueSender
+    public class MonitoirngQueueSender
     {
-        private ISendCommandsToBus _monitoring;
-        private CommandPublisher _publisher;
+        private ISendMonitoringCommandsToBus _monitoring;
+        private MonitoringCommandPublisher _publisher;
         private readonly DataProviderCommandSource _dataProvider;
 
         private DataProviderStopWatch _stopWatch;
@@ -19,19 +19,19 @@ namespace Lace.Test.Helper.Builders.Buses
 
         private readonly Guid _aggregateId;
 
-        public QueueSender(DataProviderCommandSource dataProvider, Guid aggregateId)
+        public MonitoirngQueueSender(DataProviderCommandSource dataProvider, Guid aggregateId)
         {
             _dataProvider = dataProvider;
             _aggregateId = aggregateId;
         }
 
-        public QueueSender InitQueue(ISendCommandsToBus monitoring)
+        public MonitoirngQueueSender InitQueue(ISendMonitoringCommandsToBus monitoring)
         {
             _monitoring = monitoring;
             return this;
         }
 
-        public QueueSender InitStopWatch()
+        public MonitoirngQueueSender InitStopWatch()
         {
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProvider);
             _dataProviderStopWatch = new StopWatchFactory().StopWatchForDataProvider(_dataProvider);
@@ -39,56 +39,56 @@ namespace Lace.Test.Helper.Builders.Buses
             return this;
         }
 
-        public QueueSender StartingExecution(object message)
+        public MonitoirngQueueSender StartingExecution(object message)
         {
             _monitoring.Begin(message, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender Configuration(object message, object metadata)
+        public MonitoirngQueueSender Configuration(object message, object metadata)
         {
             _monitoring.Send(CommandType.Configuration, message, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender Security(object message, object metadata)
+        public MonitoirngQueueSender Security(object message, object metadata)
         {
             _monitoring.Send(CommandType.Security, message, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender StartCall(object message, object metadata)
+        public MonitoirngQueueSender StartCall(object message, object metadata)
         {
             _monitoring.StartCall(message, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender Error(object message, object metatdata)
+        public MonitoirngQueueSender Error(object message, object metatdata)
         {
             _monitoring.Send(CommandType.Fault, message, metatdata);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender EndCall(object message)
+        public MonitoirngQueueSender EndCall(object message)
         {
             _monitoring.EndCall(message, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender Transform(object message, object metaData)
+        public MonitoirngQueueSender Transform(object message, object metaData)
         {
             _monitoring.Send(CommandType.Transformation, message, metaData);
             Thread.Sleep(1000);
             return this;
         }
 
-        public QueueSender EndExecution(object message)
+        public MonitoirngQueueSender EndExecution(object message)
         {
             _monitoring.End(message, _dataProviderStopWatch);
             Thread.Sleep(1000);

@@ -17,7 +17,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ILaceRequest _ividTitleHolderRequest;
         private IProvideResponseFromLaceDataProviders _laceResponse;
-        private readonly ISendCommandsToBus _laceEvent;
+        private readonly ISendMonitoringCommandsToBus _laceEvent;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_ivid_title_holder_source()

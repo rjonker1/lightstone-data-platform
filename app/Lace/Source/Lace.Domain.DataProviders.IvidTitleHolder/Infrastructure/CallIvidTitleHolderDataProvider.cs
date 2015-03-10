@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             response.IvidTitleHolderResponseHandled.HasBeenHandled();
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformIvidTitleHolderResponse(_response);
 

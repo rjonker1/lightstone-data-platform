@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
     public class RequestDataFromSignioSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

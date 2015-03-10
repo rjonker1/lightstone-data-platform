@@ -6,7 +6,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 {
     public class RequestDataFromRgtVinSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalWebService, ISendCommandsToBus monitoring)
+        public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalWebService, ISendMonitoringCommandsToBus monitoring)
         {
             externalWebService.CallTheDataProvider(response, monitoring);
         }

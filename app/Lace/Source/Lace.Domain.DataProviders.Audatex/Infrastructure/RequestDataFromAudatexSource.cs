@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
     public class RequestDataFromAudatexSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response,
-            ICallTheDataProviderSource externalWebService, ISendCommandsToBus monitoring)
+            ICallTheDataProviderSource externalWebService, ISendMonitoringCommandsToBus monitoring)
         {
             externalWebService.CallTheDataProvider(response, monitoring);
         }
