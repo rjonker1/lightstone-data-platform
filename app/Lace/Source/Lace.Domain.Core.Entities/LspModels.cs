@@ -7,6 +7,12 @@ namespace Lace.Domain.Core.Entities
     [DataContract]
     public class ReturnPropertiesRequest //: IProvidePropertyInformationForRequest
     {
+
+        public ReturnPropertiesRequest()
+        {
+            
+        }
+
         public ReturnPropertiesRequest(string userId, string province, string municipality, string deedTown, string erf,
             string sectionalTitle, string unit, string suburb, string street, string streetNumber, string ownerName,
             string idCk, string estateName, string farmName, int maxRowsToReturn, string trackingNumber)
@@ -85,6 +91,12 @@ namespace Lace.Domain.Core.Entities
     [DataContract]
     public class ReturnPropertiesResponse
     {
+
+        public ReturnPropertiesResponse()
+        {
+            
+        }
+        
         public ReturnPropertiesResponse(Type type, string typeName, decimal propId, decimal proptypeId, decimal ssId,
             string propertyType, string province, string municname, string deedtown, string farmname,
             string sectionalTitle, int unit, decimal portion, string buyerName, string firstname, string middlename,
