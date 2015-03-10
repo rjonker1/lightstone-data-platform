@@ -6,6 +6,7 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Nancy.Validation;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -34,9 +35,14 @@ namespace UserManagement.Api.Modules
 
             Post["/Customers"] = _ =>
             {
-                var dto = this.Bind<CustomerDto>();
-                var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                var dto = this.BindAndValidate<CustomerDto>();
 
+                if (!ModelValidationResult.IsValid)
+                {
+                    return View["Save", dto];
+                }
+
+                var entity = Mapper.Map(dto, customers.Get(dto.Id));
                 bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                 return null;

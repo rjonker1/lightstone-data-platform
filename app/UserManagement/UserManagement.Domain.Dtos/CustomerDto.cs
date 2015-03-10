@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace UserManagement.Domain.Dtos
@@ -12,7 +13,11 @@ namespace UserManagement.Domain.Dtos
         }
 
         public Guid Id { get; set; }
+
+        [Required]
+        [Display(Name = "Customer name is required")]
         public string Name { get; set; }
+
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
         public IEnumerable<Guid> CreateSourceIds { get; set; }
