@@ -1,7 +1,7 @@
 ﻿using UserManagement.Domain.Core.Security;
 using Xunit.Extensions;
 
-namespace UserManagement.Infrastructure.Tests
+namespace UserManagement.Domain.Core.Tests
 {
     public class when_hashing_password : Specification
     {
