@@ -13,12 +13,12 @@ namespace PackageBuilder.TestObjects.Builders
 
         public IDataProviderOverride Build()
         {
-            return new DataProviderOverride
-            {
-                Id = _id,
-                CostOfSale = _costOfSale,
-                DataFieldOverrides = _dataFieldOverrides
-            };
+            //return new DataProviderOverride()
+            //{
+            //    Id = _id,
+            //    CostOfSale = _costOfSale,
+            //    DataFieldOverrides = _dataFieldOverrides
+            //};
         }
 
         public DataProviderOverrideBuilder With(Guid id)
