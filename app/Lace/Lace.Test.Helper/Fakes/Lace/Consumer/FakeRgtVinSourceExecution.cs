@@ -15,10 +15,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         private readonly IHandleDataProviderSourceCall _handleServiceCall;
         private readonly ILaceRequest _request;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
 
         public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;

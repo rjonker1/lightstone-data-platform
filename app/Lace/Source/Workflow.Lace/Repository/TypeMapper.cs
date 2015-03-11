@@ -18,7 +18,7 @@ namespace Workflow.Lace.Repository
             var fields = FieldNames.Aggregate(string.Empty, (c, field) => c + string.Format("[{0}], ", field));
             fields = fields.Substring(0, fields.Length - 2);
 
-            return string.Format("@insert into [{0}] ({1}) values({2})", TableName, fields, values);
+            return string.Format("insert into [{0}] ({1}) values({2})", TableName, fields, values);
         }
 
         protected string SelectStatementWithId()

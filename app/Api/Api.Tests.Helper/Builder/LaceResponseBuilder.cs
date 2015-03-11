@@ -24,6 +24,9 @@ namespace Api.Tests.Helper.Builder
                         "License Scan", new List<LaceExternalSourceResponse>() { new DriversLicenseScanBuilder().ForDriversLicenseResponseFromLace() }
                     },
                     {
+                        "Lightstone Properties Search", new List<LaceExternalSourceResponse>() { new LspBuilder().ForLspResponseFromLace() }
+                    },
+                    {
                         "Fica", new List<LaceExternalSourceResponse>()
                     }
                 };

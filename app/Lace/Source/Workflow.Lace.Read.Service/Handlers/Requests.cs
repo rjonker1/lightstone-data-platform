@@ -12,20 +12,25 @@ namespace Workflow.Lace.Read.Service.Handlers
     {
         private readonly IRepository _repository;
 
+        public Request()
+        {
+            
+        }
+
         public Request(IRepository repository)
         {
             _repository = repository;
         }
         public void Handle(RequestReceived message)
         {
-            var request = new RequestHeader(Guid.NewGuid(), message.Date, new RequestIdentifier(message.Id, null));
+            var request = new RequestHeader(Guid.NewGuid(), message.Id, message.Date, new RequestIdentifier(message.Id, null));
             _repository.Add(request);
         }
 
         public void Handle(RequestSentToDataProvider message)
         {
             var request =
-                new DataProviderRequest(new DataProviderRequestIdentifier(message.Id, message.Date,
+                new DataProviderRequest(new DataProviderRequestIdentifier(Guid.NewGuid(), message.Id, message.Date,
                     new RequestIdentifier(message.RequestId, null),
                     new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString()),
                     new DataProviderConnectionTypeIdentifier(message.ConnectionType, message.Connection)));
@@ -33,3 +38,4 @@ namespace Workflow.Lace.Read.Service.Handlers
         }
     }
 }
+ 

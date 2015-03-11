@@ -15,8 +15,8 @@ namespace Workflow.Lace.Service.Read.Host
             configuration.UseTransport<RabbitMQTransport>();
             configuration.EndpointName("DataPlatform.DataProviders.Host.Read");
             configuration.Conventions()
-                .DefiningEventsAs(c => c.Namespace != null && c.Namespace.EndsWith("Messages.Events"))
-                .DefiningCommandsAs(c => c.Namespace != null && c.Namespace.EndsWith("Messages.Commands"));
+                .DefiningEventsAs(c => c.Namespace != null && c.Namespace.EndsWith("Messages.Events"));
+                
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new ReadModule());

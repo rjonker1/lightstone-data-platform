@@ -5,6 +5,8 @@ using DataPlatform.Shared.Messaging;
 
 namespace Workflow.Lace.Messages.Events
 {
+    [Serializable]
+    [DataContract]
     public class ResponseReceivedFromDataProvider : IPublishableMessage
     {
         public ResponseReceivedFromDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -29,6 +31,8 @@ namespace Workflow.Lace.Messages.Events
         public DateTime Date { get; private set; }
     }
 
+    [Serializable]
+    [DataContract]
     public class ResponseReturned : IPublishableMessage
     {
         public ResponseReturned(Guid id, Guid requestId, DateTime date)

@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.RequestAggregation.AggregateId);
             if (transformer.Continue)

@@ -68,8 +68,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A01E79
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lsp", "Lace\source\Lace.Domain.DataProviders.Lsp\Lace.Domain.DataProviders.Lsp.csproj", "{FB2933C0-2D3D-4ACC-80DC-7162BE740442}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflow", "Workflow", "{19FB4BB8-3AF1-41CC-A029-C6D3B6A89235}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WriteSide", "WriteSide", "{4B41A382-0094-4340-A481-9FCBA2AC8EC0}"
@@ -95,6 +93,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Lace.Shared", "Lace\source\Workflow.Lace.Shared\Workflow.Lace.Shared.csproj", "{3047F71B-9F70-4824-B4E4-4F00BC0CD1C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Lace", "Lace\source\Workflow.Lace\Workflow.Lace.csproj", "{758EEE8F-B527-4446-B499-29CAD8D63B2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.Lightstone.Property", "Lace\source\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj", "{FB2933C0-2D3D-4ACC-80DC-7162BE740442}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -198,10 +198,6 @@ Global
 		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F3EB9BB-7F5B-43AF-8033-4AC91443A0E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BDF29B6A-E38E-4D86-B386-2BE6EB60E7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BDF29B6A-E38E-4D86-B386-2BE6EB60E7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDF29B6A-E38E-4D86-B386-2BE6EB60E7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -238,6 +234,10 @@ Global
 		{758EEE8F-B527-4446-B499-29CAD8D63B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{758EEE8F-B527-4446-B499-29CAD8D63B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{758EEE8F-B527-4446-B499-29CAD8D63B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB2933C0-2D3D-4ACC-80DC-7162BE740442}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

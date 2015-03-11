@@ -10,7 +10,6 @@ namespace Worflow.Lace.Service.Write.Host
         {
             configuration.EnableFeature<JsonSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
-           // configuration.UsePersistence<NHibernatePersistence>();
             configuration.UsePersistence<InMemoryPersistence>();
           
             configuration.EndpointName("DataPlatform.DataProviders.Host.Write");

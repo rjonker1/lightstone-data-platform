@@ -6,7 +6,7 @@ using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Domain.DataProviders.Lightstone;
-using Lace.Domain.DataProviders.Lsp;
+using Lace.Domain.DataProviders.Lightstone.Property;
 using Lace.Domain.DataProviders.PCubed;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
@@ -28,18 +28,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                 new IvidTitleHolderDataProvider(request,
                                     new RgtVinDataProvider(request,
                                         new RgtDataProvider(request,
-                                            new AudatexDataProvider(request,
-                                                new LspDataProvider(request,
-                                                    null, null,
-                                                    new SendLightstoneCommands(bus, requestId,
-                                                        (int)ExecutionOrder.Seventh)), null,
-                                                new SendAudatexCommands(bus, requestId, (int)ExecutionOrder.Sixth)),
+                                            new AudatexDataProvider(request, null, null,
+                                                new SendAudatexCommands(bus, requestId, (int) ExecutionOrder.Sixth)),
                                             null,
-                                            new SendRgtCommands(bus, requestId, (int)ExecutionOrder.Fifth)), null,
-                                        new SendRgtVinCommands(bus, requestId, (int)ExecutionOrder.Fourth)), null,
-                                    new SendIvidTitleHolderCommands(bus, requestId, (int)ExecutionOrder.Third)), null,
-                                new SendLightstoneCommands(bus, requestId, (int)ExecutionOrder.Second)), null,
-                            new SendIvidCommands(bus, requestId, (int)ExecutionOrder.First))
+                                            new SendRgtCommands(bus, requestId, (int) ExecutionOrder.Fifth)), null,
+                                        new SendRgtVinCommands(bus, requestId, (int) ExecutionOrder.Fourth)), null,
+                                    new SendIvidTitleHolderCommands(bus, requestId, (int) ExecutionOrder.Third)), null,
+                                new SendLightstoneCommands(bus, requestId, (int) ExecutionOrder.Second)), null,
+                            new SendIvidCommands(bus, requestId, (int) ExecutionOrder.First))
                             .CallSource(response);
 
 
@@ -49,14 +45,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 () =>
                     (request, bus, response, requestId) =>
                         new SignioDataProvider(request, null, null,
-                            new SendSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
+                            new SendSignioCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
         private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
-            _LspRequestSpecification =
-        () =>
-            (request, bus, response, requestId) =>
-                new LspDataProvider(request, null, null,
-                    new SendLspCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
+            _propertyRequestSpecification =
+                () =>
+                    (request, bus, response, requestId) =>
+                        new LightstoneProperyDataProvider(request, null, null,
+                            new SendLspCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
 
         private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
@@ -64,9 +60,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 () =>
                     (request, bus, response, requestId) =>
                         new PCubedDataProvider(request, null, null,
-                            new SendPCubedCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
-
-
+                            new SendPCubedCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
         public
             IEnumerable
                 <
@@ -88,8 +82,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                     {
                         "Fica", _ficaRequestSpecification()
                     },
-                     {
-                        "Lsp", _LspRequestSpecification()
+                    {
+                        "Property Search", _propertyRequestSpecification()
                     }
                 };
             }

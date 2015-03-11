@@ -8,7 +8,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response,
             ICallTheDataProviderSource externalSource,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

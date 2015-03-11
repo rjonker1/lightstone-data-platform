@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Workflow.Billing.Database.Migrations
+namespace Workflow.Lace.Database.Migrations
 {
     [Migration(201502271649)]
     public class Create_Data_Provider_Response_Table : Migration
@@ -9,6 +9,7 @@ namespace Workflow.Billing.Database.Migrations
         {
             Create.Table("DataProviderResponses")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
+                .WithColumn("StreamId").AsGuid().NotNullable()
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("DataProvider").AsInt32().NotNullable()

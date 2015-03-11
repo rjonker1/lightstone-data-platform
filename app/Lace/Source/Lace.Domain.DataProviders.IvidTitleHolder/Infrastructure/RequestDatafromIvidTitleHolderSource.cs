@@ -7,7 +7,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
     public class RequestDatafromIvidTitleHolderSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response,
-            ICallTheDataProviderSource externalSource, ISendCommandsToBus monitoring)
+            ICallTheDataProviderSource externalSource, ISendMonitoringCommandsToBus monitoring)
         {
             externalSource.CallTheDataProvider(response, monitoring);
         }

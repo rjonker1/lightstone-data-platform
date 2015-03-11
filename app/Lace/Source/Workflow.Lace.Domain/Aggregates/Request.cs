@@ -7,6 +7,8 @@ using Workflow.Lace.Messages.Events;
 
 namespace Workflow.Lace.Domain.Aggregates
 {
+    [Serializable]
+    [DataContract]
     public class Request :  AggregateBase, IAggregate
     {
         private Request(Guid id)
@@ -34,18 +36,18 @@ namespace Workflow.Lace.Domain.Aggregates
         {
             RequestId = requestId;
             DataProvider = dataProvider;
-            ResponsePayload = payload;
+            //ResponsePayload = payload;
             Date = date;
 
             RaiseEvent(new RequestSentToDataProvider(id, requestId, dataProvider, date, connection, connectionType));
         }
 
-        public void ResponseReceivedFromDataProvider(Guid id, Guid requestId, Guid responseId, DataProviderCommandSource dataProvider,
-            object payload,DateTime date)
+        public void ResponseReceivedFromDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
+            DateTime date)
         {
             RequestId = requestId;
             DataProvider = dataProvider;
-            RequestPayload = payload;
+            //RequestPayload = payload;
             Date = date;
 
             RaiseEvent(new ResponseReceivedFromDataProvider(id,requestId, dataProvider, date));
@@ -73,8 +75,8 @@ namespace Workflow.Lace.Domain.Aggregates
         [DataMember]
         public object RequestPayload { get; private set; }
 
-        [DataMember]
-        public object ResponsePayload { get; private set; }
+        //[DataMember]
+        //public object ResponsePayload { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }

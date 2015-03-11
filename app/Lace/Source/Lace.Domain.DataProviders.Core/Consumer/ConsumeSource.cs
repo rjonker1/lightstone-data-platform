@@ -17,7 +17,7 @@ namespace Lace.Domain.DataProviders.Core.Consumer
             _externalWebSourceCall = externalSourceCall;
         }
 
-        public void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             _handleServiceCall
                 .Request(c =>

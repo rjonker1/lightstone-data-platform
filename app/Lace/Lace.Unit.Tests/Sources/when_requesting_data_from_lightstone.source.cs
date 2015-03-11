@@ -19,12 +19,12 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _request;
         private IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _callTheSource;
 
         public when_requesting_data_from_lightstone_source()
         {
-            _monitoring = BusBuilder.ForLightstoneCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();

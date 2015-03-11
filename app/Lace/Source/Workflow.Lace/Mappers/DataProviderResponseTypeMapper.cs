@@ -22,7 +22,7 @@ namespace Workflow.Lace.Mappers
             {
                 return new[]
                 {
-                    "Id", "Date", "RequestId", "DataProvider", "DataProviderName", "DataProviderRequestId"
+                    "Id", "StreamId", "Date", "RequestId", "DataProvider", "DataProviderName", "DataProviderRequestId"
                 };
             }
         }
@@ -34,6 +34,7 @@ namespace Workflow.Lace.Mappers
             var values = new
             {
                 Id = response.Response.Id,
+                StreamId = response.Response.StreamId,
                 Date = response.Response.Date,
                 RequestId = response.Response.Request.ParentRequest.Id,
                 DataProvider = response.Response.Request.DataProvider.Id,
@@ -51,8 +52,8 @@ namespace Workflow.Lace.Mappers
             var match = connection.Query(sql, new {Id = id}).FirstOrDefault();
             return match == null
                 ? null
-                : new DataProviderResponse(new DataProviderResponseIdentifier(match.Id, match.Date,
-                    new DataProviderRequestIdentifier(match.DataProviderRequestId, match.Date,
+                : new DataProviderResponse(new DataProviderResponseIdentifier(match.Id,match.StreamId,match.Date,
+                    new DataProviderRequestIdentifier(match.DataProviderRequestId,match.StreamId, match.Date,
                         new RequestIdentifier(match.RequestId, null),
                         new DataProviderIdentifier(match.DataProvider, match.DataProviderName),
                         new DataProviderConnectionTypeIdentifier())));

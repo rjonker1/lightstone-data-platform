@@ -36,6 +36,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         public string Unit { get; set; }
         public string Suburb { get; set; }
         public string Street { get; set; }
+        public string StreetNumber { get; set; }
         public string Owner_Name { get; set; }
         public string ID_CK { get; set; }
         public string Estate_Name { get; set; }

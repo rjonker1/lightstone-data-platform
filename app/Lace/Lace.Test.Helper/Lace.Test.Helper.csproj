@@ -46,13 +46,13 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.754\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.758, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.758\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.754\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.758, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.758\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.747\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
@@ -110,10 +110,13 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Builders\Buses\BusBuilder.cs" />
-    <Compile Include="Builders\Buses\CommandSenderBuilder.cs" />
-    <Compile Include="Builders\Buses\QueueSender.cs" />
-    <Compile Include="Builders\Cmds\CommandBuilder.cs" />
+    <Compile Include="Builders\Buses\MonitoringBusBuilder.cs" />
+    <Compile Include="Builders\Buses\MonitoirngCommandSenderBuilder.cs" />
+    <Compile Include="Builders\Buses\MonitoirngQueueSender.cs" />
+    <Compile Include="Builders\Buses\WorkflowBusBuilder.cs" />
+    <Compile Include="Builders\Buses\WorkflowQueueSender.cs" />
+    <Compile Include="Builders\Cmds\MonitoringCommandBuilder.cs" />
+    <Compile Include="Builders\Cmds\WorkflowCommandBuilder.cs" />
     <Compile Include="Builders\DataProviders\DataProviderResponseBuilder.cs" />
     <Compile Include="Builders\Property\LspRequestBuilder.cs" />
     <Compile Include="Builders\Property\LspSourcePackage.cs" />
@@ -309,6 +312,10 @@
     <ProjectReference Include="..\source\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj">
       <Project>{c275d974-7e8e-440d-b244-b9db85e839b1}</Project>
       <Name>Lace.Shared.Monitoring.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
+      <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
+      <Name>Workflow.Lace.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

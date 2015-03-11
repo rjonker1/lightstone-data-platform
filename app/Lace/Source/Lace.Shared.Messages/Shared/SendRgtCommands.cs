@@ -14,7 +14,7 @@ using NServiceBus;
 
 namespace Lace.Shared.Monitoring.Messages.Shared
 {
-    public class SendRgtCommands : ISendCommandsToBus
+    public class SendRgtCommands : ISendMonitoringCommandsToBus
     {
         private readonly IPublishCommandMessages _publisher;
         private readonly ILog _log;
@@ -25,7 +25,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         public SendRgtCommands(IBus bus, Guid requestAggregateId, int orderOfExecution)
         {
             _log = LogManager.GetLogger(GetType());
-            _publisher = new CommandPublisher(bus);
+            _publisher = new MonitoringCommandPublisher(bus);
             _requestId = requestAggregateId;
             _orderOfExecution = orderOfExecution;
         }

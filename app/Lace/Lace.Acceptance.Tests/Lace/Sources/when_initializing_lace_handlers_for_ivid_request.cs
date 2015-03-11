@@ -22,7 +22,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_ivid_request()
         {
-            _monitoring = BusFactory.NServiceRabbitMqBus();
+            _monitoring = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForIvid();
             _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();
