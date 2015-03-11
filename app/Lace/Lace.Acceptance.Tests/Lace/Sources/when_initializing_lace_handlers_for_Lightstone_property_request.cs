@@ -13,7 +13,7 @@ using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
 {
-    public class when_initializing_lace_handlers_for_Lsp : Specification
+    public class when_initializing_lace_handlers_for_Lightstone_property_request : Specification
     {
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
@@ -22,9 +22,9 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
 
         //TODO: run tests
-        public when_initializing_lace_handlers_for_Lsp()
+        public when_initializing_lace_handlers_for_Lightstone_property_request()
         {
-            _monitoring = MonitoringBusBuilder.ForLspCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForLightstonePropertyCommands(Guid.NewGuid());
             var lspRequestBuilder = new LspRequestBuilder();
 
             _request = lspRequestBuilder.ForReturnProperties();
@@ -38,16 +38,16 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         }
 
         [Observation]
-        public void lace_Lsp_response_should_be_handled_test()
+        public void lace_lightstone_property_response_should_be_handled_test()
         {
-            _response.LspResponseHandled.Handled.ShouldBeTrue();
+            _response.LightstonePropertyResponseHandled.Handled.ShouldBeTrue();
         }
 
         [Observation]
-        public void lace_Lsp_response_shuould_not_be_null_test()
+        public void lace_lightstone_property_response_shuould_not_be_null_test()
         {
-            _response.LspResponse.ShouldNotBeNull();
+            _response.LightstonePropertyResponse.ShouldNotBeNull();
         }
-        
+
     }
 }

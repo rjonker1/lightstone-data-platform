@@ -1,6 +1,6 @@
 ﻿using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests;
-using Lace.Test.Helper.Mothers.Requests.LSPRequests;
+using Lace.Test.Helper.Mothers.Requests.PropertyRequests;
 
 namespace Lace.Test.Helper.Builders.Property
 {

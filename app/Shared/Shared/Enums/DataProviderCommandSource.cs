@@ -10,14 +10,13 @@ namespace DataPlatform.Shared.Enums
         [EnumMember] IvidTitleHolder,
         [EnumMember] RgtVin,
         [EnumMember] Rgt,
-        [EnumMember] Lightstone,
+        [EnumMember] LightstoneAuto,
         [EnumMember] EntryPoint,
         [EnumMember] Initialization,
         [EnumMember] Anpr,
         [EnumMember] Jis,
         [EnumMember] PCubedFica,
         [EnumMember] SignioDecryptDriversLicense,
-        [EnumMember] Lsp
-
+        [EnumMember] LightstoneProperty
     }
 }

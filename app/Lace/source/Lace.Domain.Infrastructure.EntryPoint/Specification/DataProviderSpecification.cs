@@ -52,7 +52,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 () =>
                     (request, bus, response, requestId) =>
                         new LightstoneProperyDataProvider(request, null, null,
-                            new SendLspCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
+                            new SendLightstonePropertyCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
 
         private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>

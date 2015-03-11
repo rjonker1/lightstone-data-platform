@@ -1,24 +1,27 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Contracts.DataProviders.LightstoneProperty;
+using Lace.Domain.Core.Contracts.DataProviders.Property;
 
 namespace Lace.Domain.Core.Entities
 {
+    [Serializable]
     [DataContract]
     public class LightstonePropertyResponse : IProvideDataFromLightstoneProperty
     {
-        public LightstonePropertyResponse(IRespondWithLightstonePropertyInformation lightstonePropertyInformation, string data)
+        public LightstonePropertyResponse()
         {
-            LightstonePropertyInformation = lightstonePropertyInformation;
-            Data = data;
+            
         }
-       
+
+        public LightstonePropertyResponse(IEnumerable<IRespondWithProperty> properties)
+        {
+            Properties = properties;
+        }
 
         [DataMember]
-        public IRespondWithLightstonePropertyInformation LightstonePropertyInformation { get; private set; }
-
-        [DataMember]
-        public string Data { get; private set; }
+        public IEnumerable<IRespondWithProperty> Properties { get; private set; }
 
         [DataMember]
         public System.Type Type

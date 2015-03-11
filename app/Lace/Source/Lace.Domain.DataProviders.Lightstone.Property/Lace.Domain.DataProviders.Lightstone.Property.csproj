@@ -48,8 +48,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,15 +59,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Infrastructure\CallLightstonePropertyDataProvider.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureLightstonePropertyClient.cs" />
-    <Compile Include="Infrastructure\Dto\ReturnProperties.cs" />
+    <None Include="Infrastructure\Configuration\ConfigureLightstonePropertyClient.cs.to.be.deleted" />
+    <Compile Include="Infrastructure\Configuration\ConfigureLighstonePropertySource.cs" />
+    <Compile Include="Infrastructure\Dto\GetPropertiesRequest.cs" />
     <Compile Include="Infrastructure\HandleLightstonePropertyCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstonePropertyResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneProperty.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LightstonePropertyDataProvider.cs" />
-    <Compile Include="Service References\LspServiceReference\Reference.cs">
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\LightstonePropertyServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -75,7 +85,11 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Service References\LspServiceReference\properties.wsdl" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\LightstonePropertyServiceReference\properties.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
@@ -87,7 +101,7 @@
       <Name>Lace.Domain.Core.Requests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
-      <Project>{CA721B03-EFC7-45CE-A70E-BB9EF72C075B}</Project>
+      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
@@ -107,23 +121,24 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\LspServiceReference\" />
+    <WCFMetadataStorage Include="Service References\LightstonePropertyServiceReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\LspServiceReference\properties.disco" />
+    <None Include="Service References\LightstonePropertyServiceReference\properties.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\LspServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\LightstonePropertyServiceReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\LspServiceReference\configuration.svcinfo" />
+    <None Include="Service References\LightstonePropertyServiceReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\LspServiceReference\Reference.svcmap">
+    <None Include="Service References\LightstonePropertyServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

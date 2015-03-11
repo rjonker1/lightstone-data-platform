@@ -79,7 +79,7 @@
     <Compile Include="Commands\AudatexCommands.cs" />
     <Compile Include="Commands\CrossCuttingCommands.cs" />
     <Compile Include="Commands\PCubedCommands.cs" />
-    <Compile Include="Commands\LspCommands.cs" />
+    <Compile Include="Commands\LightstonePropertyCommands.cs" />
     <Compile Include="Commands\SignioCommands.cs" />
     <Compile Include="Commands\RgtVinCommands.cs" />
     <Compile Include="Commands\RgtCommands.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Shared\SendEntryPointCommands.cs" />
     <Compile Include="Shared\SendAudatexCommands.cs" />
     <Compile Include="Shared\SendPCubedCommands.cs" />
-    <Compile Include="Shared\SendLspCommands.cs" />
+    <Compile Include="Shared\SendLightstonePropertyCommands.cs" />
     <Compile Include="Shared\SendSignioCommands.cs" />
     <Compile Include="Shared\SendRgtVinCommands.cs" />
     <Compile Include="Shared\SendRgtCommands.cs" />
