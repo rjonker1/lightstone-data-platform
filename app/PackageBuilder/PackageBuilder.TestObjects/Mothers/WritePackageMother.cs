@@ -114,7 +114,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.UtcNow)
-                    .With(WriteDataProviderMother.LightstoneDataProvider)
+                    .With(WriteDataProviderMother.LightstoneProperty)
                     .Build();
             }
         }

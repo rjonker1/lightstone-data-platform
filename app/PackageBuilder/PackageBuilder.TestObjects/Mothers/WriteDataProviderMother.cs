@@ -84,7 +84,7 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.Lightstone)
+                    .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
                     .With(10d)
                     .With(typeof (IProvideDataFromLightstone))
@@ -118,12 +118,12 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static DataProvider LightstoneDataProvider
+        public static DataProvider LightstoneProperty
         {
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.Lsp)
+                    .With(DataProviderName.LightstoneProperty)
                     .With("LightstoneProperty")
                     .With(10d)
                     .With(typeof (IProvideDataFromLightstoneProperty))
