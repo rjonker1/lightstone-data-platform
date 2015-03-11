@@ -37,16 +37,20 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.RgtVin.ToString(), 0d, typeof (IProvideDataFromRgtVin), "Owner", DateTime.UtcNow));
 
             _publisher.Publish(new CreateDataProvider(DefaultAudatexResponse(), Guid.NewGuid(), DataProviderName.Audatex,
-              DataProviderName.Audatex.ToString(), 0d, typeof(IProvideDataFromAudatex), "Owner", DateTime.UtcNow));
+                DataProviderName.Audatex.ToString(), 0d, typeof (IProvideDataFromAudatex), "Owner", DateTime.UtcNow));
 
-            _publisher.Publish(new CreateDataProvider(new PCubedFicaVerficationResponse(), Guid.NewGuid(), DataProviderName.PCubedFica,
-              DataProviderName.PCubedFica.ToString(), 0d, typeof(IProvideDataFromPCubedFicaVerfication), "Owner", DateTime.UtcNow));
+            _publisher.Publish(new CreateDataProvider(new PCubedFicaVerficationResponse(), Guid.NewGuid(),
+                DataProviderName.PCubedFica,
+                DataProviderName.PCubedFica.ToString(), 0d, typeof (IProvideDataFromPCubedFicaVerfication), "Owner",
+                DateTime.UtcNow));
 
             _publisher.Publish(new CreateDataProvider(DefaultSignioDriversLicenseDecryptionResponse(), Guid.NewGuid(),
                 DataProviderName.SignioDecryptDriversLicense, DataProviderName.SignioDecryptDriversLicense.ToString(),
                 0d, typeof (IProvideDataFromSignioDriversLicenseDecryption), "Owner", DateTime.UtcNow));
 
-           // _publisher.Publish(new CreateDataProvider());
+            _publisher.Publish(new CreateDataProvider(DefaultLightstonePropertyResponse(), Guid.NewGuid(),
+                DataProviderName.LightstoneProperty, DataProviderName.LightstoneProperty.ToString(), 0d,
+                typeof (IProvideDataFromLightstoneProperty), "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }
@@ -55,10 +59,14 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
         {
             return new LightstonePropertyResponse(new List<IRespondWithProperty>()
             {
-                new PropertyModel()
+                new PropertyModel(0, 0M, 0M, 0M, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                    string.Empty, 0, 0M, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                    string.Empty, string.Empty, string.Empty, 0M, 0M, string.Empty, string.Empty, string.Empty,
+                    Guid.Empty, 0, string.Empty, 0, 0, 0D, 0D, 0D, string.Empty, string.Empty, string.Empty,
+                    string.Empty, 0, 0, string.Empty, string.Empty, string.Empty, 0, 0M, string.Empty, string.Empty, 0,
+                    0, false)
             });
         }
-
 
         private static AudatexResponse DefaultAudatexResponse()
         {
