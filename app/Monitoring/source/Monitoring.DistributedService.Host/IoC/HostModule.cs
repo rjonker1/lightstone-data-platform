@@ -17,7 +17,7 @@ using Module = Autofac.Module;
 
 namespace Monitoring.DistributedService.Host.IoC
 {
-    public class DomainModule : Module
+    public class HostModule : Module
     {
         private const string AggregateIdKey = "AggregateId";
         private const string CommitVersionKey = "CommitVersion";
@@ -42,7 +42,7 @@ namespace Monitoring.DistributedService.Host.IoC
             return Wireup.Init()
                 .LogToConsoleWindow()
                 //.UsingRavenPersistence("EventStore")
-                .UsingSqlPersistence("Monitoring.EventStore")
+                .UsingSqlPersistence("monitoring/database/write")
                 .WithDialect(new MsSqlDialect())
                 .InitializeStorageEngine()
                 .UsingBinarySerialization()

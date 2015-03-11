@@ -10,9 +10,10 @@ namespace Workflow.Lace.Identifiers
             
         }
 
-        public DataProviderRequestIdentifier(Guid id, DateTime date, RequestIdentifier parentRequest, DataProviderIdentifier dataProvider, DataProviderConnectionTypeIdentifier connectionType)
+        public DataProviderRequestIdentifier(Guid id, Guid streamId, DateTime date, RequestIdentifier parentRequest, DataProviderIdentifier dataProvider, DataProviderConnectionTypeIdentifier connectionType)
         {
             Id = id;
+            StreamId = streamId;
             Date = date;
             ParentRequest = parentRequest;
             DataProvider = dataProvider;
@@ -20,6 +21,7 @@ namespace Workflow.Lace.Identifiers
         }
 
         public Guid Id { get; private set; }
+        public Guid StreamId { get; private set; }
         public DateTime Date { get; private set; }
         public RequestIdentifier ParentRequest { get; set; }
         public DataProviderIdentifier DataProvider { get; set; }

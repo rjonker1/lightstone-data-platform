@@ -20,7 +20,7 @@ namespace Workflow.Lace.Mappers
             {
                 return new[]
                 {
-                    "Id", "Date", "RequestId"
+                    "Id", "StreamId", "Date", "RequestId"
                 };
             }
         }
@@ -32,6 +32,7 @@ namespace Workflow.Lace.Mappers
             var values = new
             {
                 Id = request.Id,
+                StreamId = request.StreamId,
                 Date = request.Date,
                 RequestId = request.Request.Id
             };
@@ -46,7 +47,7 @@ namespace Workflow.Lace.Mappers
             var match = connection.Query(sql, new {Id = id}).FirstOrDefault();
             return match == null
                 ? null
-                : new RequestHeader(match.Id, match.Date, new RequestIdentifier(match.RequestId, null));
+                : new RequestHeader(match.Id, match.StreamId, match.Date, new RequestIdentifier(match.RequestId, null));
         }
     }
 }
