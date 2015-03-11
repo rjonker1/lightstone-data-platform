@@ -101,6 +101,7 @@ namespace UserManagement.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/fonts"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
+            StaticConfiguration.Caching.EnableRuntimeViewUpdates = true;
         }
     }
 }

@@ -541,6 +541,7 @@
     <Content Include="Views\Client\PhysicalAddress.cshtml" />
     <Content Include="Views\Client\Client.cshtml" />
     <Content Include="Views\Lookup\Save.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

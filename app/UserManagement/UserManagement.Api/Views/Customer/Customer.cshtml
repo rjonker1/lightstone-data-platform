@@ -4,6 +4,7 @@
 @using UserManagement.Api.Helpers.HtmlFormHelpers
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
+@Html.ValidationSummary("Validation Results")
 
 <div class="box dark">
     <header>

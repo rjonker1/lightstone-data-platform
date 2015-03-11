@@ -20,6 +20,29 @@
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
+    
+    <style>
+        .validation.validation-summary {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+            .validation.validation-summary h4 {
+                margin-top: 0;
+                color: inherit;
+            }
+
+        .validation .validation-summary-errors {
+            margin-bottom: 0;
+        }
+    </style>
+
+
 
     @RenderSection("Header", false)
 </head>
@@ -74,6 +97,7 @@
         });
         $(document).ajaxStop(function () {
             $.unblockUI();
+            preloader.active(false);
         });
         $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
             if (jqxhr.responseJSON)
@@ -86,7 +110,6 @@
             if (jqxhr.responseJSON)
                 toastr["success"]("Success", jqxhr.responseJSON);
             $.unblockUI();
-            preloader.active(false);
         });
 
     </script>

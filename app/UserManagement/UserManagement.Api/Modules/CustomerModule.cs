@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.ModelBinding;
 using AutoMapper;
 using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -30,24 +31,21 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
-            Get["/Customers/Add"] = parameters =>
-            {
-                return View["Save", new CustomerDto()];
-            };
+            Get["/Customers/Add"] = parameters => View["Save", new CustomerDto()];
 
             Post["/Customers"] = _ =>
             {
                 var dto = this.BindAndValidate<CustomerDto>();
 
-                if (!ModelValidationResult.IsValid)
+                if (ModelValidationResult.IsValid)
                 {
-                    return View["Customer", dto];
+                    var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
+
+                    return null;
                 }
 
-                var entity = Mapper.Map(dto, customers.Get(dto.Id));
-                bus.Publish(new CreateUpdateEntity(entity, "Create"));
-
-                return null;
+                return View["Save", dto];
             };
 
             Get["/Customers/{id}"] = parameters =>

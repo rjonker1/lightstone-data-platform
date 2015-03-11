@@ -16,6 +16,7 @@ namespace UserManagement.Domain.Dtos
 
         [Required]
         [Display(Name = "Customer name is required")]
+        [MinLength(5)]
         public string Name { get; set; }
 
         public string AccountOwnerName { get; set; }

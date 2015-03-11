@@ -34,8 +34,9 @@ function initializeCusomerRoutes(sammy) {
     });
     sammy.post('/Customers', function(context) {
         $(context.target).ajaxSubmit({
-            success: function () {
-                context.redirect('/#/Customers');
+            success: function (data) {
+                console.log(data);
+                //context.redirect('/#/Customers');
             }
         });
         // !!! Important !!! 

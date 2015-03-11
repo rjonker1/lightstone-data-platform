@@ -1,0 +1,22 @@
+﻿@using System
+@using UserManagement.Api.Helpers.HtmlFormHelpers
+@using UserManagement.Api.ViewModels
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
+@{
+    //var isCreate = Model.Id == new Guid();
+    var pageHeadingViewModel = new PageHeadingViewModel("Customer detail", "Create a new customer");
+    //var method = isCreate ? "POST" : "PUT";
+    //var url = isCreate ? "/Customers" : "/Customers/" + Model.Id;
+}
+@Html.Partial("Shared/PageHeading", pageHeadingViewModel)
+
+<form action="/Customers" method="POST" class="form-horizontal">
+
+    @Html.ValidationSummary("Validation Results")
+
+    @Html.Partial("Customer", Model)
+    @Html.Partial("Billing", Model)
+    @Html.Partial("ContactDetail", Model)
+    @Html.Partial("PhysicalAddress", Model)
+    @Html.Partial("PostalAddress", Model)
+</form>
