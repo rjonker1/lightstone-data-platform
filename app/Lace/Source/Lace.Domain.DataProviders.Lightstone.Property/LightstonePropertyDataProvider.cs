@@ -54,8 +54,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
             response.LightstonePropertyResponse = null;
-            response.LighttonePropertyResponseHandled = new LightstonePropertyResponseHandled();
-            response.LighttonePropertyResponseHandled.HasNotBeenHandled();
+            response.LightstonePropertyResponseHandled = new LightstonePropertyResponseHandled();
+            response.LightstonePropertyResponseHandled.HasNotBeenHandled();
         }
     }
 }

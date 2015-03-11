@@ -1,45 +1,32 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using System.Data;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management
 {
     public class TransformLightstonePropertyResponse : ITransformResponseFromDataProvider
     {
-        public string Message { get; private set; }
+        public DataSet Response { get; private set; }
         public IProvideDataFromLightstoneProperty Result { get; private set; }
-
         public bool Continue { get; private set; }
 
-        public TransformLightstonePropertyResponse(string response)
+        public TransformLightstonePropertyResponse(DataSet response)
         {
-            Continue = !string.IsNullOrWhiteSpace(response);
-            Message = response;
+            Response = response;
+            Continue = Response != null && Response.Tables.Count > 0;
+            Result = Continue ? new LightstonePropertyResponse() : null;
         }
 
         public void Transform()
         {
+            
+            //var property = Response.Tables[0].AsEnumerable()
+            //    .Select(s => new LightstonePropertyResponse(new li))
+
             //var card = Message.XmlToObject<Dto.DrivingLicenseCard>();
 
-            //Result = card == null
-            //    ? null
-            //    : new LspDriversLicenseDecryptionResponse(new DrivingLicenseCard(
-            //        new IdentityDocument(card.IdentityDocument.Number, card.IdentityDocument.IdentityType),
-            //        new Person(card.Person.Surname, card.Person.Initials, card.Person.DriverRestriction1,
-            //            card.Person.DriverRestriction2, card.Person.DateOfBirth, card.Person.PreferenceLanguage,
-            //            card.Person.Gender),
-            //        new DrivingLicense(card.DrivingLicense.CertificateNumber, card.DrivingLicense.CountryOfIssue),
-            //        new Card(card.Card.IssueNumber, card.Card.DateValidFrom, card.Card.DateValidUntil),
-            //        new ProfessionalDrivingPermit(card.ProfessionalDrivingPermit.Category,
-            //            card.ProfessionalDrivingPermit.DateValidUntil),
-            //        new VehicleClass(card.VehicleClass1.Code, card.VehicleClass1.VehicleRestriction,
-            //            card.VehicleClass1.FirstIssueDate),
-            //        new VehicleClass(card.VehicleClass2.Code, card.VehicleClass2.VehicleRestriction,
-            //            card.VehicleClass2.FirstIssueDate),
-            //        new VehicleClass(card.VehicleClass3.Code, card.VehicleClass3.VehicleRestriction,
-            //            card.VehicleClass3.FirstIssueDate),
-            //        new VehicleClass(card.VehicleClass4.Code, card.VehicleClass4.VehicleRestriction,
-            //            card.VehicleClass4.FirstIssueDate),
-            //        card.Photo, card.Cellphone, card.EmailAddress), Message);
+          
         }
 
         

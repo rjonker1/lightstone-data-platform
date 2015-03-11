@@ -103,18 +103,18 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static Package LspPackage
+        public static Package PropertyPackage
         {
             get
             {
                 return new WritePackageBuilder()
-                    .With("Lightstone Property package")
-                    .With(ActionMother.LspAction)
+                    .With("Property verification package")
+                    .With(ActionMother.ProperyVerificationAction)
                     .With(IndustryMother.Finance, IndustryMother.Property)
                     .With(StateMother.Published)
                     .With(0.1m)
                     .With(DateTime.UtcNow)
-                    .With(WriteDataProviderMother.SignioDriversLicenseDataProvider)
+                    .With(WriteDataProviderMother.LightstoneDataProvider)
                     .Build();
             }
         }

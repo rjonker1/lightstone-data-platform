@@ -5,9 +5,9 @@ using Lace.Shared.Monitoring.Messages.Core;
 namespace Lace.Shared.Monitoring.Messages.Commands
 {
     [Serializable]
-    public class StartLspExecution : DataProviderCommand
+    public class StartLightstonePropertyExecution : DataProviderCommand
     {
-        public StartLspExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+        public StartLightstonePropertyExecution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -17,9 +17,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     }
 
     [Serializable]
-    public class EndLspExecution : DataProviderCommand
+    public class EndLightstonePropertyExecution : DataProviderCommand
     {
-        public EndLspExecution(Guid id, DataProviderCommandSource dataProvider, string message,
+        public EndLightstonePropertyExecution(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -29,9 +29,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     }
 
     [Serializable]
-    public class StartLspDataSourceCall : DataProviderCommand
+    public class StartLightstonePropertyDataSourceCall : DataProviderCommand
     {
-        public StartLspDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+        public StartLightstonePropertyDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -41,9 +41,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     }
 
     [Serializable]
-    public class EndLspDataSourceCall : DataProviderCommand
+    public class EndLightstonePropertyDataSourceCall : DataProviderCommand
     {
-        public EndLspDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
+        public EndLightstonePropertyDataSourceCall(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -53,9 +53,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     }
 
     [Serializable]
-    public class RaiseLspSecurityFlag : DataProviderCommand
+    public class RaiseLightstonePropertySecurityFlag : DataProviderCommand
     {
-        public RaiseLspSecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
+        public RaiseLightstonePropertySecurityFlag(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -65,9 +65,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     }
 
     [Serializable]
-    public class ConfigureLsp : DataProviderCommand
+    public class ConfigureLightstoneProperty : DataProviderCommand
     {
-        public ConfigureLsp(Guid id, DataProviderCommandSource dataProvider, string message,
+        public ConfigureLightstoneProperty(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)
@@ -77,9 +77,9 @@ namespace Lace.Shared.Monitoring.Messages.Commands
     }
 
     [Serializable]
-    public class TransformLspResponse : DataProviderCommand
+    public class TransformLightstonePropertyResponse : DataProviderCommand
     {
-        public TransformLspResponse(Guid id, DataProviderCommandSource dataProvider, string message,
+        public TransformLightstonePropertyResponse(Guid id, DataProviderCommandSource dataProvider, string message,
             object payload,
             object metadata, DateTime date, Category category)
             : base(id, dataProvider, message, payload, metadata, date, category)

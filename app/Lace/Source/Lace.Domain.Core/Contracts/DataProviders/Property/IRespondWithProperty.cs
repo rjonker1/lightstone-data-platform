@@ -1,7 +1,7 @@
 using System;
 using DataPlatform.Shared.Entities;
 
-namespace Lace.Domain.Core.Contracts.DataProviders.LightstoneProperty
+namespace Lace.Domain.Core.Contracts.DataProviders.Property
 {
     public interface IRespondWithProperty : IProvideType
     {

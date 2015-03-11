@@ -35,6 +35,6 @@ namespace Lace.Domain.Core.Contracts
         IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
 
         IProvideDataFromLightstoneProperty LightstonePropertyResponse { get; set; }
-        IResponseProviderHandled LighttonePropertyResponseHandled { get; set; }
+        IResponseProviderHandled LightstonePropertyResponseHandled { get; set; }
     }
 }

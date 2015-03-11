@@ -4,7 +4,7 @@ using Lace.Test.Helper.Builders.Property;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using PackageBuilder.Domain.Entities.Packages.WriteModels;
 
-namespace Lace.Test.Helper.Mothers.Requests.LSPRequests
+namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
 {
     public class PropertiesRequest : Domain.Core.Requests.Contracts.ILaceRequest
     {
@@ -12,7 +12,7 @@ namespace Lace.Test.Helper.Mothers.Requests.LSPRequests
         {
             get
             {
-                return LspSourcePackage.LspPackage();
+                return PropertySourcePackage.PropertyPackage();
             }
         }
 
@@ -54,11 +54,6 @@ namespace Lace.Test.Helper.Mothers.Requests.LSPRequests
         public IProvideJisInformation Jis { get; private set; }
         public IProvideDriversLicenseInformationForRequest DriversLicense { get; private set; }
         public IProvideFicaInformationForRequest Fica { get; private set; }
-
-       
-
-   
-
    
         public DateTime RequestDate
         {
@@ -72,7 +67,7 @@ namespace Lace.Test.Helper.Mothers.Requests.LSPRequests
         {
             get
             {
-                return "XXXX";
+                return "";
             }
         }
     }

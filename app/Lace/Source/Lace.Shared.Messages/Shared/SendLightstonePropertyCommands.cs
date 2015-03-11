@@ -11,13 +11,9 @@ using Lace.Shared.Monitoring.Messages.Infrastructure.Extensions;
 using Lace.Shared.Monitoring.Messages.Publisher;
 using NServiceBus;
 
-namespace DataPlatform.Shared.Enums
-{
-}
-
 namespace Lace.Shared.Monitoring.Messages.Shared
 {
-    public class SendLspCommands : ISendMonitoringCommandsToBus
+    public class SendLightstonePropertyCommands : ISendMonitoringCommandsToBus
     {
         private readonly IPublishCommandMessages _publisher;
         private readonly ILog _log;
@@ -25,7 +21,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
         private readonly Guid _requestId;
 
-        public SendLspCommands(IBus bus, Guid requestAggregateId, int orderOfExecution)
+        public SendLightstonePropertyCommands(IBus bus, Guid requestAggregateId, int orderOfExecution)
         {
             _log = LogManager.GetLogger(GetType());
             _publisher = new MonitoringCommandPublisher(bus);
@@ -66,8 +62,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                StartLspExecution =
-                    new StartLspExecution(_requestId, DataProviderCommandSource.Lsp,
+                StartLightstonePropertyExecution =
+                    new StartLightstonePropertyExecution(_requestId, DataProviderCommandSource.Lsp,
                         CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Lsp),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -81,8 +77,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                EndLspExecution =
-                    new EndLspExecution(_requestId, DataProviderCommandSource.Lsp,
+                EndLightstonePropertyExecution =
+                    new EndLightstonePropertyExecution(_requestId, DataProviderCommandSource.Lsp,
                         CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Lsp),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -96,8 +92,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
             var command = new
             {
-                StartLspDataSourceCall =
-                    new StartLspDataSourceCall(_requestId, DataProviderCommandSource.Lsp,
+                StartLightstonePropertyDataSourceCall =
+                    new StartLightstonePropertyDataSourceCall(_requestId, DataProviderCommandSource.Lsp,
                         CommandDescriptions.StartCallDescription(DataProviderCommandSource.Lsp),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -110,8 +106,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                EndLspDataSourceCall =
-                    new EndLspDataSourceCall(_requestId, DataProviderCommandSource.Lsp,
+                EndLightstonePropertyDataSourceCall =
+                    new EndLightstonePropertyDataSourceCall(_requestId, DataProviderCommandSource.Lsp,
                         CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lsp),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
@@ -139,7 +135,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LspSecurityFlag = new RaiseLspSecurityFlag(_requestId, DataProviderCommandSource.Lsp,
+                LightstonePropertySecurityFlag = new RaiseLightstonePropertySecurityFlag(_requestId, DataProviderCommandSource.Lsp,
                     CommandDescriptions.SecurityDescription(DataProviderCommandSource.Lsp),
                     payload,
                     metadata, DateTime.UtcNow, Category.Security)
@@ -153,7 +149,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
             var command = new
             {
-                ConfigureLsp = new ConfigureLsp(_requestId, DataProviderCommandSource.Lsp,
+                ConfigureLightstoneProperty = new ConfigureLightstoneProperty(_requestId, DataProviderCommandSource.Lsp,
                     CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Lsp),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
@@ -167,7 +163,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
             var command = new
             {
-                TransformLspResponse = new TransformLspResponse(_requestId, DataProviderCommandSource.Lsp,
+                TransformLightstonePropertyResponse = new TransformLightstonePropertyResponse(_requestId, DataProviderCommandSource.Lsp,
                     CommandDescriptions.TransformationDescription(DataProviderCommandSource.Lsp),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)

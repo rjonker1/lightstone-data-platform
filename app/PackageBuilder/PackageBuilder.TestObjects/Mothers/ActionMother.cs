@@ -71,12 +71,12 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static IAction LspAction
+        public static IAction ProperyVerificationAction
         {
             get
             {
                 return new ActionBuilder()
-                    .With("Lsp")
+                    .With("Property Search")
                     .With(DataFieldMother.ErfNumberField)
                     .Build();
             }
