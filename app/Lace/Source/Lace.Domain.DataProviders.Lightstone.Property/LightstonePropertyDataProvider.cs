@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
         public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.Lsp, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneProperty, _request);
             if (!spec.IsSatisfied)
             {
                 NotHandledResponse(response);
@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
             {
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
-                        DataProviderCommandSource.Lsp);
+                        DataProviderCommandSource.LightstoneProperty);
                 
                 //_monitoring.Begin(new {_request.Property}, stopWatch);
 

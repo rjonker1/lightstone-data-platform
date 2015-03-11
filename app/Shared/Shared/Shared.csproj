@@ -73,13 +73,8 @@
     <Compile Include="Helpers\Json\JsonTypeResolverConverter.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
-    <Compile Include="Identifiers\DataProviderIdentifier.cs" />
-    <Compile Include="Identifiers\DataProviderRequestIdentifier.cs" />
-    <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
-    <Compile Include="Identifiers\DataProviderConnectionTypeIdentifier.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
-    <Compile Include="Identifiers\ResponseIdentifier.cs" />
     <Compile Include="Identifiers\ServerIdentifier.cs" />
     <Compile Include="Identifiers\SystemIdentifier.cs" />
     <Compile Include="Identifiers\UserIdentifier.cs" />

@@ -64,8 +64,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 StartLightstoneExecution =
-                    new StartLightstoneExecution(_requestId, DataProviderCommandSource.Lightstone,
-                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.Lightstone),
+                    new StartLightstoneExecution(_requestId, DataProviderCommandSource.LightstoneAuto,
+                        CommandDescriptions.StartExecutionDescription(DataProviderCommandSource.LightstoneAuto),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
             };
@@ -79,8 +79,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 EndLightstoneExecution =
-                    new EndLightstoneExecution(_requestId, DataProviderCommandSource.Lightstone,
-                        CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.Lightstone),
+                    new EndLightstoneExecution(_requestId, DataProviderCommandSource.LightstoneAuto,
+                        CommandDescriptions.EndExecutionDescription(DataProviderCommandSource.LightstoneAuto),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
             };
@@ -94,8 +94,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 StartLightstoneDataSourceCall =
-                    new StartLightstoneDataSourceCall(_requestId, DataProviderCommandSource.Lightstone,
-                        CommandDescriptions.StartCallDescription(DataProviderCommandSource.Lightstone),
+                    new StartLightstoneDataSourceCall(_requestId, DataProviderCommandSource.LightstoneAuto,
+                        CommandDescriptions.StartCallDescription(DataProviderCommandSource.LightstoneAuto),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
             };
@@ -108,8 +108,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 EndLightstoneDataSourceCall =
-                    new EndLightstoneDataSourceCall(_requestId, DataProviderCommandSource.Lightstone,
-                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.Lightstone),
+                    new EndLightstoneDataSourceCall(_requestId, DataProviderCommandSource.LightstoneAuto,
+                        CommandDescriptions.EndCallDescription(DataProviderCommandSource.LightstoneAuto),
                         payload, metadata, DateTime.UtcNow,
                         Category.Performance)
             };
@@ -123,8 +123,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
             var command = new
             {
                 ThrowError =
-                    new ThrowError(_requestId, DataProviderCommandSource.Lightstone,
-                        CommandDescriptions.FaultDescription(DataProviderCommandSource.Lightstone), payload, metadata,
+                    new ThrowError(_requestId, DataProviderCommandSource.LightstoneAuto,
+                        CommandDescriptions.FaultDescription(DataProviderCommandSource.LightstoneAuto), payload, metadata,
                         DateTime.UtcNow,
                         Category.Fault)
             };
@@ -136,8 +136,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
         {
             var command = new
             {
-                LightstoneSecurityFlag = new RaiseLightstoneSecurityFlag(_requestId, DataProviderCommandSource.Lightstone,
-                    CommandDescriptions.SecurityDescription(DataProviderCommandSource.Lightstone),
+                LightstoneSecurityFlag = new RaiseLightstoneSecurityFlag(_requestId, DataProviderCommandSource.LightstoneAuto,
+                    CommandDescriptions.SecurityDescription(DataProviderCommandSource.LightstoneAuto),
                     payload,
                     metadata, DateTime.UtcNow, Category.Security)
             };
@@ -150,8 +150,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
             var command = new
             {
-                ConfigureLightstone = new ConfigureLightstone(_requestId, DataProviderCommandSource.Lightstone,
-                    CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.Lightstone),
+                ConfigureLightstone = new ConfigureLightstone(_requestId, DataProviderCommandSource.LightstoneAuto,
+                    CommandDescriptions.ConfigurationDescription(DataProviderCommandSource.LightstoneAuto),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
             };
@@ -164,8 +164,8 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
             var command = new
             {
-                TransformLightstoneResponse = new TransformLightstoneResponse(_requestId, DataProviderCommandSource.Lightstone,
-                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.Lightstone),
+                TransformLightstoneResponse = new TransformLightstoneResponse(_requestId, DataProviderCommandSource.LightstoneAuto,
+                    CommandDescriptions.TransformationDescription(DataProviderCommandSource.LightstoneAuto),
                     payload, metadata,
                     DateTime.UtcNow, Category.Configuration)
             };

@@ -39,7 +39,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 
         public string DeedTown { get; private set; }
 
-        public string Erf { get; private set; }
+        public string ErfNumber { get; private set; }
 
         public int MaxRowsToReturn { get; private set; }
 
@@ -58,5 +58,8 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         public string TrackingNumber { get; private set; }
 
         public string Unit { get; private set; }
+
+
+       
     }
 }

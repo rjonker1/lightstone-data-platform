@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Builders.Property
         public static IPackage PropertyPackage()
         {
 
-            return WritePackageMother.LspPackage;
+            return WritePackageMother.PropertyPackage;
         }
 
         
