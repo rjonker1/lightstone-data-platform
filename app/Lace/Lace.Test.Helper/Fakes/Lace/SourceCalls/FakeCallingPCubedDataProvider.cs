@@ -11,14 +11,14 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         private string _response;
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
             _response = string.Empty; //TODO: Build fake response for PCbubed
 
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformPCubedResponse(_response);
 

@@ -34,7 +34,7 @@ namespace Lace.Domain.Core.Contracts
         IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryptionResponse { get; set; }
         IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
 
-        IProvideDataFromLspDecryption LspResponse { get; set; }
-        IResponseProviderHandled LspResponseHandled { get; set; }
+        IProvideDataFromLightstoneProperty LightstonePropertyResponse { get; set; }
+        IResponseProviderHandled LighttonePropertyResponseHandled { get; set; }
     }
 }

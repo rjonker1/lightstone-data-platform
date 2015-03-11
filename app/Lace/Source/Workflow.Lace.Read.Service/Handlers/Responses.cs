@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Identifiers;
+﻿using System;
+using DataPlatform.Shared.Identifiers;
 using NServiceBus;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
@@ -11,6 +12,11 @@ namespace Workflow.Lace.Read.Service.Handlers
     {
         private readonly IRepository _repository;
 
+        public Response()
+        {
+            
+        }
+
         public Response(IRepository repository)
         {
             _repository = repository;
@@ -20,8 +26,8 @@ namespace Workflow.Lace.Read.Service.Handlers
         public void Handle(ResponseReceivedFromDataProvider message)
         {
             var response =
-                new DataProviderResponse(new DataProviderResponseIdentifier(message.Id, message.Date,
-                    new DataProviderRequestIdentifier(message.RequestId, message.Date,
+                new DataProviderResponse(new DataProviderResponseIdentifier(Guid.NewGuid(), message.Id, message.Date,
+                    new DataProviderRequestIdentifier(Guid.NewGuid(), message.Id, message.Date,
                         new RequestIdentifier(message.RequestId, null),
                         new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString()),
                         new DataProviderConnectionTypeIdentifier())));
@@ -31,7 +37,7 @@ namespace Workflow.Lace.Read.Service.Handlers
 
         public void Handle(ResponseReturned message)
         {
-            var response = new ResponseHeader(new ResponseIdentifier(message.Id, message.RequestId, message.Date));
+            var response = new ResponseHeader(new ResponseIdentifier(Guid.NewGuid(),message.Id, message.RequestId, message.Date));
             _repository.Add(response);
         }
     }

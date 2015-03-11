@@ -5,6 +5,6 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface IConsumeDataProviderSource
     {
-        void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring);
+        void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring);
     }
 }

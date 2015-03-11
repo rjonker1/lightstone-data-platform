@@ -20,7 +20,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly ILog _log;
         private readonly IBus _bus;
-        private ISendCommandsToBus _monitoring;
+        private ISendMonitoringCommandsToBus _monitoring;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
         private DataProviderStopWatch _stopWatch;

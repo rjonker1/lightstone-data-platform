@@ -22,7 +22,7 @@ namespace Monitoring.DistributedService.Host
                     c => c.Namespace != null && c.Namespace.EndsWith("Messaging.Events"));
 
             var builder = new ContainerBuilder();
-            builder.RegisterModule(new DomainModule());
+            builder.RegisterModule(new HostModule());
             var container = builder.Build();
 
             configuration.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(container));

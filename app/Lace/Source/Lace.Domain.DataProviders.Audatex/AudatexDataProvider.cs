@@ -13,10 +13,10 @@ namespace Lace.Domain.DataProviders.Audatex
     public class AudatexDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
 
         public AudatexDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;

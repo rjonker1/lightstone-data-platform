@@ -49,9 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.750, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.758, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.750\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.1.0.0.758\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.750\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
@@ -65,7 +65,8 @@
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.750\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.1.0.0.728\lib\net45\Lightstone.DataPlatform.Shared.Messaging.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.1.0.0.754\lib\net45\Lightstone.DataPlatform.Shared.Messaging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NEventStore">
@@ -150,6 +151,7 @@
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_rgt_vin.cs" />
     <Compile Include="Lace\Sources\when_initializing_lace_handlers_for_signio_drivers_license_decryption.cs" />
     <Compile Include="Requests\when_sending_request_to_lace_entry_point.cs" />
+    <Compile Include="Workflow\when_sending_request_for_data_provider_to_workflow_bus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -197,13 +199,13 @@
       <Project>{3180c3d9-5f65-4ab3-9111-1144f96a352c}</Project>
       <Name>Lace.Domain.DataProviders.Ivid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone.Property\Lace.Domain.DataProviders.Lightstone.Property.csproj">
+      <Project>{fb2933c0-2d3d-4acc-80dc-7162be740442}</Project>
+      <Name>Lace.Domain.DataProviders.Lightstone.Property</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lightstone\Lace.Domain.DataProviders.Lightstone.csproj">
       <Project>{b1b1bb75-20b9-4eb5-8cfc-75e3bf8d96d1}</Project>
       <Name>Lace.Domain.DataProviders.Lightstone</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Lace.Domain.DataProviders.Lsp\Lace.Domain.DataProviders.Lsp.csproj">
-      <Project>{FB2933C0-2D3D-4ACC-80DC-7162BE740442}</Project>
-      <Name>Lace.Domain.DataProviders.Lsp</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.PCubed\Lace.Domain.DataProviders.PCubed.csproj">
       <Project>{8f3eb9bb-7f5b-43af-8033-4ac91443a0e8}</Project>

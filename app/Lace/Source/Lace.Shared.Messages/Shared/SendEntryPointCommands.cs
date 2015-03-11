@@ -13,7 +13,7 @@ using NServiceBus;
 
 namespace Lace.Shared.Monitoring.Messages.Shared
 {
-    public class SendEntryPointCommands : ISendCommandsToBus
+    public class SendEntryPointCommands : ISendMonitoringCommandsToBus
     {
         private readonly IPublishCommandMessages _publisher;
         private readonly ILog _log;
@@ -23,7 +23,7 @@ namespace Lace.Shared.Monitoring.Messages.Shared
 
         public SendEntryPointCommands(IBus bus, Guid requestAggregateId, int orderOfExecution)
         {
-            _publisher = new CommandPublisher(bus);
+            _publisher = new MonitoringCommandPublisher(bus);
             _requestId = requestAggregateId;
             _orderOfExecution = orderOfExecution;
             _log = LogManager.GetLogger(GetType());

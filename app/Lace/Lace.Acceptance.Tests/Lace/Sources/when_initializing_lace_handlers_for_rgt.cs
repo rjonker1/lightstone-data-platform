@@ -16,12 +16,12 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ILaceRequest _request;
         private readonly IProvideResponseFromLaceDataProviders _response;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_rgt()
         {
-            _monitoring = BusBuilder.ForRgtCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForRgtCommands(Guid.NewGuid());
             _request = new LicensePlateRequestBuilder().ForRgt();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _dataProvider = new RgtDataProvider(_request, null, null,_monitoring);

@@ -70,7 +70,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="EndpointConfig.cs" />
-    <Compile Include="IoC\DomainModule.cs" />
+    <Compile Include="IoC\HostModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

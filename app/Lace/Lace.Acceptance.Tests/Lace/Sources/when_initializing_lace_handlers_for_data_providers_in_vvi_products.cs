@@ -20,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
         public when_initializing_lace_handlers_for_data_providers_in_vvi_products()
         {
-            _monitoring = BusFactory.NServiceRabbitMqBus();
+            _monitoring = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();

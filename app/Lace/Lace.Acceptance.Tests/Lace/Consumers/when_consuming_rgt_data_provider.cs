@@ -15,14 +15,14 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     public class when_consuming_rgt_data_provider : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private RgtDataProvider _provider;
 
 
         public when_consuming_rgt_data_provider()
         {
-            _monitoring = BusBuilder.ForRgtCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForRgtCommands(Guid.NewGuid());
             _request = new LicensePlateNumberRgtOnlyRequest();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }

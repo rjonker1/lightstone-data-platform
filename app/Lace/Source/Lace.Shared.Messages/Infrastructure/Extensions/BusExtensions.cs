@@ -30,7 +30,7 @@ namespace Lace.Shared.Monitoring.Messages.Infrastructure.Extensions
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("Error sending message to Data Provider Message Bus: {0}", ex.Message);
+                log.ErrorFormat("Error sending message to Data Provider Monitoring Bus: {0}", ex.Message);
             }
         }
     }

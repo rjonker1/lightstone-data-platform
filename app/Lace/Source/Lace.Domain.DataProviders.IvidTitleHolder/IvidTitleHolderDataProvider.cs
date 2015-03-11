@@ -13,10 +13,10 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
     public class IvidTitleHolderDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
 
         public IvidTitleHolderDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;

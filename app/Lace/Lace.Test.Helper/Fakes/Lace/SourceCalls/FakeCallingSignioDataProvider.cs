@@ -12,14 +12,14 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         private string _resonse;
 
         public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
-            ISendCommandsToBus monitoring)
+            ISendMonitoringCommandsToBus monitoring)
         {
 
             _resonse = new SourceResponseBuilder().ForSignioDriversLicenseDecryptedResponse();
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring)
+        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer =
                 new TransformSignioResponse(

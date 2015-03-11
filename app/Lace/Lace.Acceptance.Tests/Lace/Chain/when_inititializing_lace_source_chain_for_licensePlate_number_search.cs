@@ -26,7 +26,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
 
-            _monitoring = BusFactory.NServiceRabbitMqBus();
+            _monitoring = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();

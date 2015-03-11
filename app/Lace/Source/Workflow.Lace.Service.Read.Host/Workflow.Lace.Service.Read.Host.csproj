@@ -96,6 +96,10 @@
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace.Read.Service\Workflow.Lace.Read.Service.csproj">
+      <Project>{9d8e33d3-c48b-4320-8cfb-061704ca43e8}</Project>
+      <Name>Workflow.Lace.Read.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Lace.Shared\Workflow.Lace.Shared.csproj">
       <Project>{3047f71b-9f70-4824-b4e4-4f00bc0cd1c5}</Project>
       <Name>Workflow.Lace.Shared</Name>

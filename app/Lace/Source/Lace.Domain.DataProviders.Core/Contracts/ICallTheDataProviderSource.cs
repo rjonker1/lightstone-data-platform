@@ -5,7 +5,7 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface ICallTheDataProviderSource
     {
-        void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring);
-        void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendCommandsToBus monitoring);
+        void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring);
+        void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring);
     }
 }

@@ -14,13 +14,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     public class when_consuming_ivid_title_holder_source_with_financed_interest : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly ISendCommandsToBus _monitoring;
+        private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IProvideResponseFromLaceDataProviders _response;
         private IvidTitleHolderDataProvider _consumer;
         
         public when_consuming_ivid_title_holder_source_with_financed_interest()
         {
-            _monitoring = BusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
+            _monitoring = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
             _request = new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest();
             _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
         }

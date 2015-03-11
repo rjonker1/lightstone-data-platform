@@ -48,6 +48,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\..\..\packages\NServiceBus.5.2.0\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -56,14 +59,23 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\Requests.cs" />
     <Compile Include="Commands\Responses.cs" />
     <Compile Include="Commands\Transactions.cs" />
+    <Compile Include="Core\IPublishCommandMessages.cs" />
+    <Compile Include="Core\ISendWorflowCommandsToBus.cs" />
     <Compile Include="Events\Requests.cs" />
     <Compile Include="Events\Responses.cs" />
+    <Compile Include="Extensions\WorkflowBusExtensions.cs" />
+    <Compile Include="Shared\SendWorkflowCommands.cs" />
+    <Compile Include="Shared\WorkflowCommandPublisher.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
