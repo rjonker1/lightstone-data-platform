@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
             UserId = _request.User.UserId.ToString();
             Municipality = _request.Property.Municipality;
             DeedTown = _request.Property.DeedTown;
-            //Erf = _request.Property.Erf;
+            ErfNumber = _request.Property.ErfNumber;
             Province = _request.Property.Province;
             Portion = _request.Property.Portion;
             SectionalTitle = _request.Property.SectionalTitle;
@@ -45,7 +45,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
         public string UserId { get; private set; }
         public string Municipality { get; private set; }
         public string DeedTown { get; private set; }
-        public string Erf { get; private set; }
+        public string ErfNumber { get; private set; }
         public string Province { get; private set; }
         public string Portion { get; private set; }
         public string SectionalTitle { get; private set; }

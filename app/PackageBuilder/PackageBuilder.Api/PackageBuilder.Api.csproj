@@ -138,6 +138,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ReadModels\ToDataProviderDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\AudatexResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\LightstonePropertyResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\PCubedFicaResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\SignioResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderDtoMap.cs" />
