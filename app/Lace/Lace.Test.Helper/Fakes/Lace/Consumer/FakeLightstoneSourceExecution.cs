@@ -27,7 +27,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.Lightstone, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneAuto, _request);
 
             if (!spec.IsSatisfied)
             {

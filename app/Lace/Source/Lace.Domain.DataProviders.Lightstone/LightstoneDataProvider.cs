@@ -28,7 +28,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
         public void CallSource(IProvideResponseFromLaceDataProviders response)
         {
-            var spec = new CanHandlePackageSpecification(DataProviderName.Lightstone, _request);
+            var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneAuto, _request);
 
             if (!spec.IsSatisfied)
             {
@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Lightstone);
+                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.LightstoneAuto);
                 _monitoring.Begin(new { _request.User, _request.Vehicle, _request.Context }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),

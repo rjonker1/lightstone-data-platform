@@ -51,7 +51,7 @@ namespace Lace.Test.Helper.Builders.Requests
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.Lightstone)
+                    .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
                     .With(10d)
                     .With(typeof(IProvideDataFromLightstone))

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Identifiers;
 using Workflow.Lace.Domain;
-using Workflow.Lace.Identifiers;
 using Workflow.Lace.Repository;
+using DataProviderConnectionTypeIdentifier = Workflow.Lace.Identifiers.DataProviderConnectionTypeIdentifier;
+using DataProviderIdentifier = Workflow.Lace.Identifiers.DataProviderIdentifier;
+using DataProviderRequestIdentifier = Workflow.Lace.Identifiers.DataProviderRequestIdentifier;
+using DataProviderResponseIdentifier = Workflow.Lace.Identifiers.DataProviderResponseIdentifier;
 
 namespace Workflow.Lace.Mappers
 {

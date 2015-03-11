@@ -22,7 +22,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
         private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.Lsp;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneProperty;
         private DataSet _result;
 
         public CallLightstonePropertyDataProvider(ILaceRequest request)

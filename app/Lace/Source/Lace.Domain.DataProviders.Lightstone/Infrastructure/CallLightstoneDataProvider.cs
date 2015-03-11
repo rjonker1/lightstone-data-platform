@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private readonly ILog _log;
         private readonly ILaceRequest _request;
         private readonly DataProviderStopWatch _stopWatch;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.Lightstone;
+        private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneAuto;
         private IRetrieveValuationFromMetrics _metrics;
         private IRetrieveCarInformation _carInformation;
 
