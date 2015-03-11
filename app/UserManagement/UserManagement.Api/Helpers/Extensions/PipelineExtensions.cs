@@ -3,8 +3,8 @@ using System.Transactions;
 using Castle.Windsor;
 using Nancy;
 using Nancy.Bootstrapper;
-using Nancy.ViewEngines.Razor.HtmlHelpers;
 using NHibernate;
+using UserManagement.Api.Helpers.NancyRazorHelpers;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Infrastructure.Helpers;
 

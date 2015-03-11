@@ -1,12 +1,10 @@
 ﻿@using System
 @using System.Linq
-@using Nancy.ViewEngines.Razor.HtmlHelpers;
-@using UserManagement.Api.Helpers.HtmlFormHelpers
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
-@Html.ValidationSummary("Validation Results")
-
-<div class="box dark">
+<div id="customerView" class="box dark">
     <header>
         <div class="icons">
             <i class="fa fa-edit"></i>
@@ -29,6 +27,9 @@
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(x => x.Name)
                 </div>
             </div>
 

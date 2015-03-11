@@ -35,13 +35,13 @@ function initializeCusomerRoutes(sammy) {
     sammy.post('/Customers', function(context) {
         $(context.target).ajaxSubmit({
             success: function (data) {
-                console.log(data);
+                //$('#page-wrapper').html( data );
                 //context.redirect('/#/Customers');
             }
         });
         // !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
-        return false; 
+        return true; 
     });
     sammy.get('/Customers/:id', function (context) {
         context.load('/Customers/' + context.params.id, { dataType: 'html', cache: false })

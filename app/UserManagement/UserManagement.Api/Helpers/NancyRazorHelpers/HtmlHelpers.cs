@@ -4,7 +4,7 @@ using System.Text;
 using Nancy.Validation;
 using Nancy.ViewEngines.Razor;
 
-namespace UserManagement.Api.Helpers.HtmlFormHelpers
+namespace UserManagement.Api.Helpers.NancyRazorHelpers
 {
     public static class HtmlHelpers
     {

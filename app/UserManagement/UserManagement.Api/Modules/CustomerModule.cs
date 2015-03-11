@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.ModelBinding;
 using AutoMapper;
-using DataPlatform.Shared.ExceptionHandling;
-using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Nancy.Validation;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
