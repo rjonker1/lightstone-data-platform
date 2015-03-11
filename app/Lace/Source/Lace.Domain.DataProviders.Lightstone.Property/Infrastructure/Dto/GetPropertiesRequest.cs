@@ -13,7 +13,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
             _request = request;
         }
 
-        public void MapRequest()
+        public GetPropertiesRequest Map()
         {
             UserId = _request.User.UserId.ToString();
             Municipality = _request.Property.Municipality;
@@ -31,12 +31,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
             EstateName = _request.Property.EstateName;
             MaxRowsToReturn = _request.Property.MaxRowsToReturn == 0 ? 1 : _request.Property.MaxRowsToReturn;
             TrackingNumber = _request.Property.TrackingNumber;
+            return this;
         }
 
-        public void Validate()
+        public GetPropertiesRequest Validate()
         {
             RequestIsValid = !string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(IdCkOfOwner) &&
                              !string.IsNullOrEmpty(TrackingNumber);
+            return this;
         }
 
 

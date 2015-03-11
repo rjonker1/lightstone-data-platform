@@ -40,7 +40,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void lace_lightstone_property_response_should_be_handled_test()
         {
-            _response.LighttonePropertyResponseHandled.Handled.ShouldBeTrue();
+            _response.LightstonePropertyResponseHandled.Handled.ShouldBeTrue();
         }
 
         [Observation]

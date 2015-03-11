@@ -42,8 +42,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 if(client.Proxy.State == CommunicationState.Closed)
                     client.Proxy.Open();
 
-                var request = new GetPropertiesRequest(_request);
-                request.Validate();
+                var request = new GetPropertiesRequest(_request)
+                    .Map()
+                    .Validate();
 
                 if (!request.RequestIsValid)
                     throw new Exception(
