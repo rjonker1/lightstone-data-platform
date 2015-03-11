@@ -63,7 +63,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Infrastructure\CallLightstonePropertyDataProvider.cs" />
-    <None Include="Infrastructure\Configuration\ConfigureLightstonePropertyClient.cs.to.be.deleted" />
     <Compile Include="Infrastructure\Configuration\ConfigureLighstonePropertySource.cs" />
     <Compile Include="Infrastructure\Dto\GetPropertiesRequest.cs" />
     <Compile Include="Infrastructure\HandleLightstonePropertyCall.cs" />

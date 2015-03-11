@@ -36,13 +36,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.LightstoneProperty);
-                
-                //_monitoring.Begin(new {_request.Property}, stopWatch);
 
-                var consumer = new ConsumeSource(new HandleLightstonePropertyCall(), new CallLightstonePropertyDataProvider(_request));
+                _monitoring.Begin(new {_request.Property}, stopWatch);
+
+                var consumer = new ConsumeSource(new HandleLightstonePropertyCall(),
+                    new CallLightstonePropertyDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-               // _monitoring.End(response, stopWatch);
+                _monitoring.End(response, stopWatch);
 
                 if (response.LightstonePropertyResponse == null)
                     CallFallbackSource(response, _monitoring);

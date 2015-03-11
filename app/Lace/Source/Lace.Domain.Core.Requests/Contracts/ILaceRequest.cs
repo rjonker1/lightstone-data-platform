@@ -23,8 +23,8 @@ namespace Lace.Domain.Core.Requests.Contracts
         IProvideFicaInformationForRequest Fica { get; }
 
         DateTime RequestDate { get; }
-
         IPackage Package { get; }
+
         IProvidePropertyInformationForRequest Property { get; }
     }
 }

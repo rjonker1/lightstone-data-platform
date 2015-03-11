@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.DataProviders.Property;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
@@ -45,8 +46,19 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.SignioDecryptDriversLicense, DataProviderName.SignioDecryptDriversLicense.ToString(),
                 0d, typeof (IProvideDataFromSignioDriversLicenseDecryption), "Owner", DateTime.UtcNow));
 
+           // _publisher.Publish(new CreateDataProvider());
+
             this.Info(() => "Successfully imported data providers");
         }
+
+        private static LightstonePropertyResponse DefaultLightstonePropertyResponse()
+        {
+            return new LightstonePropertyResponse(new List<IRespondWithProperty>()
+            {
+                new PropertyModel()
+            });
+        }
+
 
         private static AudatexResponse DefaultAudatexResponse()
         {

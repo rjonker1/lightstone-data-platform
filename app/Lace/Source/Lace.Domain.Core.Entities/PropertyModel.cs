@@ -31,22 +31,22 @@ namespace Lace.Domain.Core.Entities
             EstateName = estateName;
             ActiveStatus = activeStatus;
             StreetId = streetId;
-            SubId = subId;
-            AddDescription = addDescription;
+            SuburbId = subId;
+            AdditionalDescription = addDescription;
             TownshipAlt = townshipAlt;
             BondNumber = bondNumber;
             PurchaseDate = purchaseDate;
             PurchasePrice = purchasePrice;
-            TownShip = townShip;
-            RegDate = regDate;
+            Township = townShip;
+            RegistrationDate = regDate;
             TitleDeedNo = titleDeedNo;
             Suburb = suburb;
             YCoOrdinates = yCordinates;
             XCoOrdinates = xCoOrdinates;
             Size = size;
-            SsUnitTo = ssUnitTo;
-            SsUnitNoFrom = ssUnitNoFrom;
-            SsNumber = ssNumber;
+            SectionalSchemeUnitTo = ssUnitTo;
+            SectionlSchemeUnitNoFrom = ssUnitNoFrom;
+            SectionSchemeNumber = ssNumber;
             Garage = garage;
             UserId = userId;
             PostalCode = postalCode;
@@ -71,7 +71,7 @@ namespace Lace.Domain.Core.Entities
             Province = province;
             PropertyType = propertyType;
             SsId = ssId;
-            PropTypeId = propertyTypeId;
+            PropertyTypeId = propertyTypeId;
             PropertyId = propertyId;
         }
 
@@ -88,7 +88,7 @@ namespace Lace.Domain.Core.Entities
         public decimal DeedId { get; private set; }
 
         [DataMember]
-        public decimal PropTypeId { get; private set; }
+        public decimal PropertyTypeId { get; private set; }
 
         [DataMember]
         public decimal SsId { get; private set; }
@@ -163,13 +163,13 @@ namespace Lace.Domain.Core.Entities
         public int Garage { get; private set; }
 
         [DataMember]
-        public string SsNumber { get; private set; }
+        public string SectionSchemeNumber { get; private set; }
 
         [DataMember]
-        public int SsUnitNoFrom { get; private set; }
+        public int SectionlSchemeUnitNoFrom { get; private set; }
 
         [DataMember]
-        public int SsUnitTo { get; private set; }
+        public int SectionalSchemeUnitTo { get; private set; }
 
         [DataMember]
         public double Size { get; private set; }
@@ -187,10 +187,10 @@ namespace Lace.Domain.Core.Entities
         public string TitleDeedNo { get; private set; }
 
         [DataMember]
-        public string RegDate { get; private set; }
+        public string RegistrationDate { get; private set; }
 
         [DataMember]
-        public string TownShip { get; private set; }
+        public string Township { get; private set; }
 
         [DataMember]
         public int PurchasePrice { get; private set; }
@@ -208,10 +208,10 @@ namespace Lace.Domain.Core.Entities
         public bool RemainingExtent { get; private set; }
 
         [DataMember]
-        public string AddDescription { get; private set; }
+        public string AdditionalDescription { get; private set; }
 
         [DataMember]
-        public int SubId { get; private set; }
+        public int SuburbId { get; private set; }
 
         [DataMember]
         public decimal StreetId { get; private set; }

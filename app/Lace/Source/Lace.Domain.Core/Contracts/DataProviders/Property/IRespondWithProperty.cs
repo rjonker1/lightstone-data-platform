@@ -24,7 +24,7 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Property
         /// <summary>
         /// 1 = Farm, 2 = Sectional Scheme, 3 = Freehold
         /// </summary>
-        decimal PropTypeId { get; }
+        decimal PropertyTypeId { get; }
 
         /// <summary>
         /// This is an internal number used by Lightstone
@@ -282,17 +282,17 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Property
         /// <summary>
         /// This is the registered sectional scheme number if the property is of type SS
         /// </summary>
-        string SsNumber { get; }
+        string SectionSchemeNumber { get; }
 
         /// <summary>
         /// This is the unit number range from is the property is of type sectional scheme.
         /// </summary>
-        int SsUnitNoFrom { get; }
+        int SectionlSchemeUnitNoFrom { get; }
 
         /// <summary>
         /// This is the unit number range to is the property is of type sectional scheme.
         /// </summary>
-        int SsUnitTo { get; }
+        int SectionalSchemeUnitTo { get; }
 
         /// <summary>
         /// This is the unit size if the property is a sectional scheme or the erf size if free hold.
@@ -322,12 +322,12 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Property
         /// <summary>
         /// the date the property was registered to the current owner
         /// </summary>
-        string RegDate { get; }
+        string RegistrationDate { get; }
 
         /// <summary>
         /// the township name that the property is registered in
         /// </summary>
-        string TownShip { get; }
+        string Township { get; }
 
         /// <summary>
         /// the purchase price of the property
@@ -356,12 +356,12 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Property
         /// <summary>
         /// This field refers to the additional description/ sub division description of the system
         /// </summary>
-        string AddDescription { get; }
+        string AdditionalDescription { get; }
 
         /// <summary>
         /// this is the lookup key for suburbs in the lookups web servcie (separate to the properties web service) 
         /// </summary>
-        int SubId { get; }
+        int SuburbId { get; }
 
         /// <summary>
         /// this is the lookup key for suburbs in the lookups web servcie (separate to the properties web service) 
