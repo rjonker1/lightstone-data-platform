@@ -1,6 +1,6 @@
 (function ($) {
 
-    var app = $.sammy('#page-wrapper', function () {
+    var app = $.sammy('.content', function () {
 
         initializeRoutes(this);
     });

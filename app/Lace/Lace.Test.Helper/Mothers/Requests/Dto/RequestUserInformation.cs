@@ -9,7 +9,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         {
             get
             {
-                return new Guid("4A17B499-845F-43E2-AA2F-CFCB06920AB6");
+                return new Guid("5a7222e1-ee65-433b-b673-827319e89cbb");
             }
         }
 
@@ -33,7 +33,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         {
             get
             {
-                return "Penny";
+                return "Murray";
             }
         }
 
@@ -49,7 +49,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         {
             get
             {
-                return "pennyl@lightstone.co.za";
+                return "murrayw@lightstone.co.za";
             }
         }
 

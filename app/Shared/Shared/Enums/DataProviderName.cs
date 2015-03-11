@@ -6,12 +6,12 @@
         IvidTitleHolder,
         Rgt,
         RgtVin,
-        Lightstone,
+        LightstoneAuto,
         Audatex,
         Jis,
         Anpr,
         PCubedFica,
         SignioDecryptDriversLicense,
-        Lsp
+        LightstoneProperty
     }
 }

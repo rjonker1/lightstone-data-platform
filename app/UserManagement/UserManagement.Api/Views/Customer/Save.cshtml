@@ -8,7 +8,7 @@
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Customers" : "/Customers/" + Model.Id;
 }
-@Html.Partial("Shared/PageHeading", pageHeadingViewModel)
+@Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 <form action="@url" @*data-method="@method"*@ method="@method" class="form-horizontal">
     

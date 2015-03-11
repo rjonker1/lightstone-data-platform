@@ -16,11 +16,13 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.Ivid)
                     .With("Ivid")
                     .With(DateTime.UtcNow)
-                    .With((DateTime?)DateTime.UtcNow.AddDays(1))
+                    .With((DateTime?) DateTime.UtcNow.AddDays(1))
                     .With(true)
                     .With(10d)
-                    .With(typeof(IProvideDataFromIvid))
-                    .With(DataFieldMother.CarFullname, DataFieldMother.CategoryCode, DataFieldMother.CategoryDescription, DataFieldMother.ColourCode, DataFieldMother.CategoryDescription, DataFieldMother.SpecificInformation)
+                    .With(typeof (IProvideDataFromIvid))
+                    .With(DataFieldMother.CarFullname, DataFieldMother.CategoryCode, DataFieldMother.CategoryDescription,
+                        DataFieldMother.ColourCode, DataFieldMother.CategoryDescription,
+                        DataFieldMother.SpecificInformation)
                     .Build();
             }
         }
@@ -33,7 +35,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.IvidTitleHolder)
                     .With("IvidTitleHolder")
                     .With(10d)
-                    .With(typeof(IProvideDataFromIvidTitleHolder))
+                    .With(typeof (IProvideDataFromIvidTitleHolder))
                     .Build();
             }
         }
@@ -46,7 +48,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.RgtVin)
                     .With("RgtVin")
                     .With(10d)
-                    .With(typeof(IProvideDataFromRgtVin))
+                    .With(typeof (IProvideDataFromRgtVin))
                     .Build();
             }
         }
@@ -59,7 +61,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.Rgt)
                     .With("Rgt")
                     .With(10d)
-                    .With(typeof(IProvideDataFromRgt))
+                    .With(typeof (IProvideDataFromRgt))
                     .Build();
             }
         }
@@ -72,7 +74,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.Audatex)
                     .With("Audatex")
                     .With(10d)
-                    .With(typeof(IProvideDataFromAudatex))
+                    .With(typeof (IProvideDataFromAudatex))
                     .Build();
             }
         }
@@ -82,10 +84,10 @@ namespace PackageBuilder.TestObjects.Mothers
             get
             {
                 return new WriteDataProviderBuilder()
-                    .With(DataProviderName.Lightstone)
+                    .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
                     .With(10d)
-                    .With(typeof(IProvideDataFromLightstone))
+                    .With(typeof (IProvideDataFromLightstone))
                     .Build();
             }
         }
@@ -98,7 +100,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.SignioDecryptDriversLicense)
                     .With("Signio")
                     .With(10d)
-                    .With(typeof(IProvideDataFromSignioDriversLicenseDecryption))
+                    .With(typeof (IProvideDataFromSignioDriversLicenseDecryption))
                     .Build();
             }
         }
@@ -111,7 +113,20 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.PCubedFica)
                     .With("PCubed")
                     .With(10d)
-                    .With(typeof(IProvideDataFromPCubedFicaVerfication))
+                    .With(typeof (IProvideDataFromPCubedFicaVerfication))
+                    .Build();
+            }
+        }
+
+        public static DataProvider LightstoneProperty
+        {
+            get
+            {
+                return new WriteDataProviderBuilder()
+                    .With(DataProviderName.LightstoneProperty)
+                    .With("LightstoneProperty")
+                    .With(10d)
+                    .With(typeof (IProvideDataFromLightstoneProperty))
                     .Build();
             }
         }

@@ -84,6 +84,7 @@
     <Compile Include="PCubedFicaVerficationResponseHandled.cs" />
     <Compile Include="PCubedFicaVerficationResponse.cs" />
     <Compile Include="PriceModel.cs" />
+    <Compile Include="PropertyModel.cs" />
     <Compile Include="RepairIndexModel.cs" />
     <Compile Include="RgtResponse.cs" />
     <Compile Include="RgtResponseHandled.cs" />
@@ -99,14 +100,14 @@
     <Compile Include="VehicleSpecificInformation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

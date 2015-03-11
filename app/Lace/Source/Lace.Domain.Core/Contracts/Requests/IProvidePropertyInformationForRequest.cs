@@ -40,7 +40,7 @@
         /// <summary>
         /// This field contains the erf number of the property.
         /// </summary>
-        string Erf { get; }
+        string ErfNumber { get; }
 
         /// <summary>
         /// This field contains the portion number of the property.

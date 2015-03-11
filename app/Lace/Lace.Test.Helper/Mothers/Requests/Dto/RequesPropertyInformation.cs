@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 
         public RequesPropertyInformation()
         {
-            User_ID = "5a7222e1-ee65-433b-b673-827319e89cbb";
+            UserId = "5a7222e1-ee65-433b-b673-827319e89cbb";
             //Province = "Province";
             //Municipality = "Municipality";
             //DeedTown = "DeedTown";
@@ -18,30 +18,45 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             //Suburb = "Suburb";
             //Street = "Street";
             //Owner_Name = "Owner_Name";
-            ID_CK = "7902065199085";
+            IdCkOfOwner = "7902065199085";
             //Estate_Name = "Estate_Name";
             //FARM_NAME = "FARM_NAME";
             MaxRowsToReturn = 1000;
             TrackingNumber = Guid.NewGuid().ToString();
-
         }
 
-        public string User_ID { get; set; }
-        public string Province { get; set; }
-        public string Municipality { get; set; }
-        public string DeedTown { get; set; }
-        public string Erf { get; set; }
-        public string Portion { get; set; }
-        public string Sectional_Title { get; set; }
-        public string Unit { get; set; }
-        public string Suburb { get; set; }
-        public string Street { get; set; }
-        public string StreetNumber { get; set; }
-        public string Owner_Name { get; set; }
-        public string ID_CK { get; set; }
-        public string Estate_Name { get; set; }
-        public string FARM_NAME { get; set; }
-        public int MaxRowsToReturn { get; set; }
-        public string TrackingNumber { get; set; }
+        public string EstateName { get; private set; }
+
+        public string FarmName { get; private set; }
+
+        public string IdCkOfOwner { get; private set; }
+
+        public string OwnerName { get; private set; }
+
+        public string SectionalTitle { get; private set; }
+
+        public string UserId { get; private set; }
+
+        public string DeedTown { get; private set; }
+
+        public string Erf { get; private set; }
+
+        public int MaxRowsToReturn { get; private set; }
+
+        public string Municipality { get; private set; }
+
+        public string Portion { get; private set; }
+
+        public string Province { get; private set; }
+
+        public string Street { get; private set; }
+
+        public string StreetNumber { get; private set; }
+
+        public string Suburb { get; private set; }
+
+        public string TrackingNumber { get; private set; }
+
+        public string Unit { get; private set; }
     }
 }

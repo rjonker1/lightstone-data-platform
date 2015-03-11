@@ -13,7 +13,7 @@ namespace PackageBuilder.TestObjects.Builders
 
         public IDataProviderOverride Build()
         {
-            return new DataProviderOverride
+            return new DataProviderOverride()
             {
                 Id = _id,
                 CostOfSale = _costOfSale,

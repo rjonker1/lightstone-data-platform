@@ -28,7 +28,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.IvidTitleHolder, DataProviderName.IvidTitleHolder.ToString(), 0d,
                 typeof (IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(),
-                DataProviderName.Lightstone, DataProviderName.Lightstone.ToString(), 0d,
+                DataProviderName.LightstoneAuto, DataProviderName.LightstoneAuto.ToString(), 0d,
                 typeof (IProvideDataFromLightstone), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt,
                 DataProviderName.Rgt.ToString(), 0d, typeof (IProvideDataFromRgt), "Owner", DateTime.UtcNow));

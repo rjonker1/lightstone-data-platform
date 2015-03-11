@@ -57,10 +57,10 @@ namespace Lace.Test.Helper.Builders.Buses
             return new SendRgtVinCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
         }
 
-        public static ISendMonitoringCommandsToBus ForLspCommands(Guid aggregateId)
+        public static ISendMonitoringCommandsToBus ForLightstonePropertyCommands(Guid aggregateId)
         {
             var bus = BusFactory.MonitoringBus();
-            return new SendLspCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+            return new SendLightstonePropertyCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
         }
     }
 

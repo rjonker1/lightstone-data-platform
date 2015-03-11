@@ -36,6 +36,6 @@ namespace Lace.Domain.Infrastructure.Core.Dto
         public IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryptionResponse { get; set; }
         public IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
         public IProvideDataFromLightstoneProperty LightstonePropertyResponse { get; set; }
-        public IResponseProviderHandled LighttonePropertyResponseHandled { get; set; }
+        public IResponseProviderHandled LightstonePropertyResponseHandled { get; set; }
     }
 }

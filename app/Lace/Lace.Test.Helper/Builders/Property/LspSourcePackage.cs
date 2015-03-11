@@ -3,9 +3,9 @@ using PackageBuilder.TestObjects.Mothers;
 
 namespace Lace.Test.Helper.Builders.Property
 {
-    public class LspSourcePackage
+    public class PropertySourcePackage
     {
-        public static IPackage LspPackage()
+        public static IPackage PropertyPackage()
         {
 
             return WritePackageMother.LspPackage;
