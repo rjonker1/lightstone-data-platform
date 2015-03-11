@@ -53,9 +53,7 @@
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneProperty.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
-    <None Include="Contracts\DataProviders\Property\IRespondWithLightstonePropertyInformation.cs.dnu" />
     <Compile Include="Contracts\DataProviders\Property\IRespondWithProperty.cs" />
-    <None Include="Contracts\DataProviders\Property\IRespondWithPropertyRequestData.cs.dnu" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideContextForRequest.cs" />
