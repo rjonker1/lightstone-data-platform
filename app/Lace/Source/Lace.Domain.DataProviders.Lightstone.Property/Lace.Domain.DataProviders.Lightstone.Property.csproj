@@ -7,8 +7,8 @@
     <ProjectGuid>{FB2933C0-2D3D-4ACC-80DC-7162BE740442}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lace.Domain.DataProviders.Lsp</RootNamespace>
-    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.Lsp</AssemblyName>
+    <RootNamespace>Lace.Domain.DataProviders.Lightstone.Property</RootNamespace>
+    <AssemblyName>Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Property</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -57,14 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\CallLspDataProvider.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureLspClient.cs" />
+    <Compile Include="Infrastructure\CallLightstonePropertyDataProvider.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureLightstonePropertyClient.cs" />
     <Compile Include="Infrastructure\Dto\ReturnProperties.cs" />
-    <Compile Include="Infrastructure\HandleLspSourceCall.cs" />
-    <Compile Include="Infrastructure\Management\TransformLspResponse.cs" />
-    <Compile Include="Infrastructure\RequestDataFromLspSource.cs" />
+    <Compile Include="Infrastructure\HandleLightstonePropertyCall.cs" />
+    <Compile Include="Infrastructure\Management\TransformLightstonePropertyResponse.cs" />
+    <Compile Include="Infrastructure\RequestDataFromLightstoneProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LspDataProvider.cs" />
+    <Compile Include="LightstonePropertyDataProvider.cs" />
     <Compile Include="Service References\LspServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Lsp;
+using Lace.Domain.DataProviders.Lightstone.Property;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
@@ -29,7 +29,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
             _request = lspRequestBuilder.ForReturnProperties();
             _response = new LaceResponse();
-            _dataProvider = new LspDataProvider(_request, null, null, _monitoring);
+            _dataProvider = new LightstoneProperyDataProvider(_request, null, null, _monitoring);
         }
 
         public override void Observe()

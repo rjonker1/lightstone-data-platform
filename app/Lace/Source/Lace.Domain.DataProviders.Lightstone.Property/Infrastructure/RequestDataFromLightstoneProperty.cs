@@ -2,9 +2,9 @@
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
 
-namespace Lace.Domain.DataProviders.Lsp.Infrastructure
+namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 {
-    public class RequestDataFromLspSource : IRequestDataFromDataProviderSource
+    public class RequestDataFromLightstonePropertySource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(IProvideResponseFromLaceDataProviders response, ICallTheDataProviderSource externalSource,
             ISendMonitoringCommandsToBus monitoring)

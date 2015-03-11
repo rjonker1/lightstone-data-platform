@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Entities
 {
-    public class LspResponseHandled : IResponseProviderHandled
+    public class LightstonePropertyResponseHandled : IResponseProviderHandled
     {
         public bool Handled { get; private set; }
 

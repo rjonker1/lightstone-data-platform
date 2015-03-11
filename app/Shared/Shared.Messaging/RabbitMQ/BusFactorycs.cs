@@ -34,7 +34,7 @@ namespace DataPlatform.Shared.Messaging.RabbitMQ
             return bus;
         }
 
-        public IBus CreateBusWithInMemmorPersistence()
+        public IBus CreateBusWithInMemoryPersistence()
         {
             var configuration = new BusConfiguration();
 

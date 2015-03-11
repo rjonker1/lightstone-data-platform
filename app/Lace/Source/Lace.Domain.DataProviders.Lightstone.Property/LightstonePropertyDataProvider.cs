@@ -4,19 +4,19 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Domain.DataProviders.Lsp.Infrastructure;
+using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
-namespace Lace.Domain.DataProviders.Lsp
+namespace Lace.Domain.DataProviders.Lightstone.Property
 {
-    public class LspDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class LightstoneProperyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
 
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public LspDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public LightstoneProperyDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -39,12 +39,12 @@ namespace Lace.Domain.DataProviders.Lsp
                 
                 _monitoring.Begin(new {_request.Property}, stopWatch);
 
-                var consumer = new ConsumeSource(new HandleLspSourceCall(), new CallLspDataProvider(_request));
+                var consumer = new ConsumeSource(new HandleLightstonePropertyCall(), new CallLightstonePropertyDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.LightstoneResponse == null)
+                if (response.LightstonePropertyResponse == null)
                     CallFallbackSource(response, _monitoring);
             }
 
@@ -53,9 +53,9 @@ namespace Lace.Domain.DataProviders.Lsp
 
         private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
         {
-            response.LightstoneResponse = null;
-            response.LightstoneResponseHandled = new LightstoneResponseHandled();
-            response.LightstoneResponseHandled.HasNotBeenHandled();
+            response.LightstonePropertyResponse = null;
+            response.LighttonePropertyResponseHandled = new LightstonePropertyResponseHandled();
+            response.LighttonePropertyResponseHandled.HasNotBeenHandled();
         }
     }
 }

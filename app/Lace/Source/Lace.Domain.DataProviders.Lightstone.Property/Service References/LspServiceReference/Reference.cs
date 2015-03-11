@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lace.Domain.DataProviders.Lsp.LspServiceReference {
+namespace Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference {
     using System.Data;
     
     
@@ -166,10 +166,10 @@ namespace Lace.Domain.DataProviders.Lsp.LspServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ReturnProperties_Crit", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet ReturnProperties_Crit(Lace.Domain.DataProviders.Lsp.LspServiceReference.Property_Search_Criteria Criteria);
+        System.Data.DataSet ReturnProperties_Crit(Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.Property_Search_Criteria Criteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ReturnProperties_Crit", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> ReturnProperties_CritAsync(Lace.Domain.DataProviders.Lsp.LspServiceReference.Property_Search_Criteria Criteria);
+        System.Threading.Tasks.Task<System.Data.DataSet> ReturnProperties_CritAsync(Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.Property_Search_Criteria Criteria);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ReturnProperties_SplitNames", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -1167,12 +1167,12 @@ namespace Lace.Domain.DataProviders.Lsp.LspServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface PropertiesSoapChannel : Lace.Domain.DataProviders.Lsp.LspServiceReference.PropertiesSoap, System.ServiceModel.IClientChannel {
+    public interface PropertiesSoapChannel : Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.PropertiesSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PropertiesSoapClient : System.ServiceModel.ClientBase<Lace.Domain.DataProviders.Lsp.LspServiceReference.PropertiesSoap>, Lace.Domain.DataProviders.Lsp.LspServiceReference.PropertiesSoap {
+    public partial class PropertiesSoapClient : System.ServiceModel.ClientBase<Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.PropertiesSoap>, Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.PropertiesSoap {
         
         public PropertiesSoapClient() {
         }
@@ -1345,11 +1345,11 @@ namespace Lace.Domain.DataProviders.Lsp.LspServiceReference {
             return base.Channel.ReturnProperties_Alt_CoordsAsync(User_ID, Province, Municipality, DeedTown, Erf, Portion, Sectional_Title, Unit, Suburb, Street, StreetNumber, Street_Type, Registrar, FirstName, SecondName, Surname, Owner_Name, ID_CK, Estate_Name, FARM_NAME, MaxRowsToReturn, TrackingNumber, x, y);
         }
         
-        public System.Data.DataSet ReturnProperties_Crit(Lace.Domain.DataProviders.Lsp.LspServiceReference.Property_Search_Criteria Criteria) {
+        public System.Data.DataSet ReturnProperties_Crit(Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.Property_Search_Criteria Criteria) {
             return base.Channel.ReturnProperties_Crit(Criteria);
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataSet> ReturnProperties_CritAsync(Lace.Domain.DataProviders.Lsp.LspServiceReference.Property_Search_Criteria Criteria) {
+        public System.Threading.Tasks.Task<System.Data.DataSet> ReturnProperties_CritAsync(Lace.Domain.DataProviders.Lightstone.Property.LspServiceReference.Property_Search_Criteria Criteria) {
             return base.Channel.ReturnProperties_CritAsync(Criteria);
         }
         

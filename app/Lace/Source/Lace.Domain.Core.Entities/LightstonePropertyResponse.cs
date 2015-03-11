@@ -1,23 +1,21 @@
 ﻿using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Contracts.DataProviders.Lsp;
+using Lace.Domain.Core.Contracts.DataProviders.LightstoneProperty;
 
 namespace Lace.Domain.Core.Entities
 {
     [DataContract]
-    public class LspResponse : IProvideDataFromLsp
+    public class LightstonePropertyResponse : IProvideDataFromLightstoneProperty
     {
-        public LspResponse(IRespondWithLspInformation lspInformation, string data)
+        public LightstonePropertyResponse(IRespondWithLightstonePropertyInformation lightstonePropertyInformation, string data)
         {
-            LspInformation = lspInformation;
-
-
+            LightstonePropertyInformation = lightstonePropertyInformation;
             Data = data;
         }
        
 
-         [DataMember]
-        public IRespondWithLspInformation LspInformation { get; private set; }
+        [DataMember]
+        public IRespondWithLightstonePropertyInformation LightstonePropertyInformation { get; private set; }
 
         [DataMember]
         public string Data { get; private set; }

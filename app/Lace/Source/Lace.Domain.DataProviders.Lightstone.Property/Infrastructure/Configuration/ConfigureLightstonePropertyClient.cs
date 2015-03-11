@@ -2,24 +2,24 @@
 using System.Net;
 using Lace.Domain.DataProviders.Core.Shared;
 
-namespace Lace.Domain.DataProviders.Lsp.Infrastructure.Configuration
+namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Configuration
 {
 
-    public class ConfigureLspClient
+    public class ConfigureLightstonePropertyClient
     {
         public readonly string Url = Credentials.DecryptyDriversLicenseApiUrl();
         public readonly string Operation;
-        public readonly string Username = Credentials.DecryptyLspServiceFuncUsername();
-        public readonly string Password = Credentials.DecryptyLspServicePassword();
+        public readonly string Username = Credentials.DecryptyLightstonePropertyUsername();
+        public readonly string Password = Credentials.DecryptyLightstonePropertyPassword();
         public readonly string XAuthToken = Credentials.DecryptyDriversLicenseoApiXAuthToken();
         public readonly string Content;
 
         public bool IsSuccessful { get; private set; }
         public string Resonse { get; private set; }
 
-        public ConfigureLspClient(string content, Guid userId)
+        public ConfigureLightstonePropertyClient(string content, Guid userId)
         {
-            Operation = string.Format("{0}/{1}", Credentials.DecryptyLspServiceOperation(), userId);
+            Operation = string.Format("{0}/{1}", Credentials.DecryptyLightstonePropertyOperation(), userId);
             Content = content;
         }
 

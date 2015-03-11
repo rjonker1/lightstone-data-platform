@@ -1,47 +1,47 @@
 using System;
 using DataPlatform.Shared.Entities;
 
-namespace Lace.Domain.Core.Contracts.DataProviders.Lsp
+namespace Lace.Domain.Core.Contracts.DataProviders.LightstoneProperty
 {
-    public interface IRespondWithReturnProperties : IProvideType
+    public interface IRespondWithProperty : IProvideType
     {
         /// <summary>
         /// This is an internal number used by Lightstone
         /// </summary>
-        int sr_id { get; set; }
+        int SrId { get; }
 
         /// <summary>
         /// This is the unique property ID for each property on the Lightstone property database and must be stored for 
         /// validated properties where further processing is required for the selected property
         /// </summary>
-        decimal prop_id { get; set; }
+        decimal PropertyId { get; }
 
         /// <summary>
         /// This is an internal Lightstone field
         /// </summary>
-        decimal DEED_ID { get; set; }
+        decimal DeedId { get; }
 
         /// <summary>
         /// 1 = Farm, 2 = Sectional Scheme, 3 = Freehold
         /// </summary>
-        decimal PROPTYPE_ID { get; set; }
+        decimal PropTypeId { get; }
 
         /// <summary>
         /// This is an internal number used by Lightstone
         /// </summary>
 
-        decimal SS_ID { get; set; }
+        decimal SsId { get; }
 
         /// <summary>
         /// This is an internal Lightstone field
         /// </summary>
-        decimal NAD_ID { get; set; }
+        decimal NadId { get; }
 
 
         /// <summary>
         /// SS = Sectional scheme, FH = Free Hold, FR = Farm
         /// </summary>
-        string property_type { get; set; }
+        string PropertyType { get; }
 
         /// <summary>
         /// "PROV_ID:PROVINCE:PROVINCE_ABBREV
@@ -56,65 +56,65 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Lsp
         ///9 EASTERN CAPE EC
         ///10 FARMS FR"
         /// </summary>
-        string PROVINCE { get; set; }
+        string Province { get; }
 
         //This is the textual description of the municipality name that the property resides in.
-        string MUNICNAME { get; set; }
+        string Muncipality { get; }
 
         /// <summary>
         /// This is the textual description of the Deedtown name that the property resides in.
         /// </summary>
-        string DEEDTOWN { get; set; }
+        string Deedtown { get; }
 
         /// <summary>
         /// This is the name of the farm if the property returned is a farm.
         /// </summary>
-        string FARMNAME { get; set; }
+        string FarmName { get; }
 
         /// <summary>
         /// This is the textual description of the Sectional Title scheme name that the property resides in.
         /// </summary>
-        string SECTIONAL_TITLE { get; set; }
+        string SectionalTitle { get; }
       
         /// <summary>
         /// If the property is registered in a sectional scheme the unit number is populated in this field.
         /// </summary>
-        int UNIT { get; set; }
+        int Unit { get; }
 
         /// <summary>
         /// This field contains the portion number of the property.
         /// </summary>
-        decimal PORTION { get; set; }
+        decimal Portion { get; }
 
         /// <summary>
         /// This field contains the full registered owner’s name of the property.
         /// </summary>
-        string BUYER_NAME { get; set; }
+        string BuyerName { get; }
 
         /// <summary>
         /// This field contains the registered owner’s first name of the property.
         /// </summary>
-        string FIRSTNAME { get; set; }
+        string FirstName { get; }
 
         /// <summary>
         /// This field contains the registered owner’s first middle name of the property.
         /// </summary>
-        string MIDDLENAME { get; set; }
+        string MiddleName { get; }
 
         /// <summary>
         /// This field contains the registered owner’s second middle name of the property.
         /// </summary>
-        string MIDDLENAME2 { get; set; }
+        string SecondMiddleName { get; }
 
         /// <summary>
         /// This field contains the registered owner’s third middle name of the property.
         /// </summary>
-        string MIDDLENAME3 { get; set; }
+        string ThirdMiddleName { get; }
 
         /// <summary>
         /// This field contains the registered owner’s surname of the property.
         /// </summary>
-        string SURNAME { get; set; }
+        string Surname { get; }
 
         /// <summary>
         /// PERSON_TYPE_ID: PERSON_TYPE_NAME
@@ -141,24 +141,24 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Lsp
         /// TS TRUSTEES
         /// UN UNION
         /// </summary>
-        string PERSON_TYPE_ID { get; set; }
+        string PersonTypeId { get; }
 
         /// <summary>
         /// ID number of the property buyer if a natural person or Company Registration number of property owners if Legal Entity
         /// </summary>
-        string BUYER_IDCK { get; set; }
+        string BuyerIdCk { get; }
 
         /// <summary>
         /// This is an internal number used by Lightstone so you can disregard 
         /// </summary>
-        decimal MUNIC_ID { get; set; }
+        decimal MunicId { get; }
 
-        decimal PROV_ID { get; set; }
+        decimal ProvId { get; }
 
         /// <summary>
         /// This field contains the street number of the property.
         /// </summary>
-        string STREET_NUMBER { get; set; }
+        string StreetNumber { get; }
 
         /// <summary>
         /// street_type
@@ -262,136 +262,136 @@ namespace Lace.Domain.Core.Contracts.DataProviders.Lsp
         /// 98 WAY WEST      
         /// 99 WEST
         /// </summary>
-        string STREET_TYPE { get; set; }
+        string StreetType { get; }
 
         /// <summary>
         /// This field contains the postal code of the property.
         /// </summary>
-        string PO_CODE { get; set; }
+        string PostalCode { get; }
 
         /// <summary>
         /// Is a unique sequence of characters that is given to a user of the system and this is used to identify that user.
         /// </summary>
-        Guid User_ID { get; set; }
+        Guid UserId { get; }
 
         /// <summary>
         /// This field contains the garage number of the property if the property is a sectional title unit.
         /// </summary>
-        int GARAGE { get; set; }
+        int Garage { get; }
 
         /// <summary>
         /// This is the registered sectional scheme number if the property is of type SS
         /// </summary>
-        string SS_Number { get; set; }
+        string SsNumber { get; }
 
         /// <summary>
         /// This is the unit number range from is the property is of type sectional scheme.
         /// </summary>
-        int SS_UnitNoFrom { get; set; }
+        int SsUnitNoFrom { get; }
 
         /// <summary>
         /// This is the unit number range to is the property is of type sectional scheme.
         /// </summary>
-        int SS_UnitTo { get; set; }
+        int SsUnitTo { get; }
 
         /// <summary>
         /// This is the unit size if the property is a sectional scheme or the erf size if free hold.
         /// </summary>
-        double Size { get; set; }
+        double Size { get; }
 
         /// <summary>
         /// This is the X co-ordinate of the subject property.
         /// </summary>
-        double X { get; set; }
+        double XCoOrdinates { get; }
 
         /// <summary>
         /// This is the Y co-ordinate of the subject property.
         /// </summary>
-        double Y { get; set; }
+        double YCoOrdinates { get; }
 
         /// <summary>
         /// This is the suburb name that the property is registered in 
         /// </summary>
-        string SUBURB { get; set; }
+        string Suburb { get; }
 
         /// <summary>
         /// the title deed number of the property if any
         /// </summary>
-        string Title_Deed_No { get; set; }
+        string TitleDeedNo { get; }
 
         /// <summary>
         /// the date the property was registered to the current owner
         /// </summary>
-        string Reg_Date { get; set; }
+        string RegDate { get; }
 
         /// <summary>
         /// the township name that the property is registered in
         /// </summary>
-        string TownShip { get; set; }
+        string TownShip { get; }
 
         /// <summary>
         /// the purchase price of the property
         /// </summary>
-        int Purchase_Price { get; set; }
+        int PurchasePrice { get; }
 
-        int Purchase_Date { get; set; }
+        int PurchaseDate { get; }
 
         /// <summary>
         /// the bond number held over the property if any
         /// </summary>
-        string Bond_Number { get; set; }
+        string BondNumber { get; }
 
 
         /// <summary>
         /// This is an internal mapping field used by Lightstone and ABSA
         /// </summary>
-        string Township_alt { get; set; }
+        string TownshipAlt { get; }
 
         /// <summary>
         /// if the property is a remaining extent this will be populated
         /// </summary>
-        bool RE { get; set; }
+        bool RemainingExtent { get; }
 
         
         /// <summary>
         /// This field refers to the additional description/ sub division description of the system
         /// </summary>
-        string ADD_Description { get; set; }
+        string AddDescription { get; }
 
         /// <summary>
         /// this is the lookup key for suburbs in the lookups web servcie (separate to the properties web service) 
         /// </summary>
-        int sub_id { get; set; }
+        int SubId { get; }
 
         /// <summary>
         /// this is the lookup key for suburbs in the lookups web servcie (separate to the properties web service) 
         /// </summary>
-        decimal street_id { get; set; }
+        decimal StreetId { get; }
 
         /// <summary>
         /// The service returns properties that are retired where clients need this information 
         /// e.g. the mother erf of a sectional title development may still be searchable on the system even though there is now a sectional scheme registered on it.
         /// In this case the Active _Status will be false and users of the service can choose to filter this property out of their results or not. 
         /// </summary>
-        string Active_Status { get; set; }
+        string ActiveStatus { get; }
 
         /// <summary>
         /// This is the name of the Estate that the property is located in
         /// </summary>
-        string Estate_Name { get; set; }
+        string EstateName { get; }
 
         /// <summary>
         /// This is a lookup ID that references the Estate name lookup
         /// </summary>
-        int est_id { get; set; }
+        int EstateId { get; }
 
 
-        int ReqStatus_ID { get; set; }
+        int ReqStatusId { get; }
 
         /// <summary>
         /// This is an indicator that shows if the GPS co-ordinates linked to the property are estimated or not. 
         /// If they are estimated then Lightstone does not guarantee accuracy and GPS co-ortinates should not be displayed. 
         /// </summary>
-        bool Estimatedcad { get; set; }
+        bool EstimatedCoOrdinates { get; }
     }
 }

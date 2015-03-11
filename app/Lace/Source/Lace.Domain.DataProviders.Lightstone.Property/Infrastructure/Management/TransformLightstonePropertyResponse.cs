@@ -1,18 +1,16 @@
 ﻿using Lace.Domain.Core.Contracts.DataProviders;
-using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Extensions;
 
-namespace Lace.Domain.DataProviders.Lsp.Infrastructure.Management
+namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management
 {
-    public class TransformLspResponse : ITransformResponseFromDataProvider
+    public class TransformLightstonePropertyResponse : ITransformResponseFromDataProvider
     {
         public string Message { get; private set; }
-        public IProvideDataFromLsp Result { get; private set; }
+        public IProvideDataFromLightstoneProperty Result { get; private set; }
 
         public bool Continue { get; private set; }
 
-        public TransformLspResponse(string response)
+        public TransformLightstonePropertyResponse(string response)
         {
             Continue = !string.IsNullOrWhiteSpace(response);
             Message = response;
