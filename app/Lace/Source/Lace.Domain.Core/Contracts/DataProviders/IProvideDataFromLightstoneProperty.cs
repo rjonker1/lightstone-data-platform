@@ -6,6 +6,6 @@ namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromLightstoneProperty : IPointToLaceProvider
     {
-        IEnumerable<IRespondWithProperty> Properties { get; }
+        IEnumerable<IRespondWithProperty> PropertyInformation { get; }
     }
 }

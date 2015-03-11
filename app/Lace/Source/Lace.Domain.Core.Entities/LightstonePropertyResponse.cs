@@ -17,11 +17,11 @@ namespace Lace.Domain.Core.Entities
 
         public LightstonePropertyResponse(IEnumerable<IRespondWithProperty> properties)
         {
-            Properties = properties;
+            PropertyInformation = properties;
         }
 
         [DataMember]
-        public IEnumerable<IRespondWithProperty> Properties { get; private set; }
+        public IEnumerable<IRespondWithProperty> PropertyInformation { get; private set; }
 
         [DataMember]
         public System.Type Type
