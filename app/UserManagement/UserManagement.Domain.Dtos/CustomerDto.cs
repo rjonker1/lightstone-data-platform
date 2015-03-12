@@ -16,7 +16,6 @@ namespace UserManagement.Domain.Dtos
 
         [Required]
         [Display(Name = "Customer name is required")]
-        [MinLength(5)]
         public string Name { get; set; }
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
@@ -24,6 +23,7 @@ namespace UserManagement.Domain.Dtos
         public Guid PlatformStatusId { get; set; }
         public Guid BillingId { get; set; }
         [Required]
+        [Display(Name = "BillingContactNumber is required")]
         public string BillingContactNumber { get; set; }
         public string BillingContractPerson { get; set; }
         public string BillingCompanyRegistration { get; set; }
