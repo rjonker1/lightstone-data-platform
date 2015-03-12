@@ -25,6 +25,7 @@
         <include pattern="font-awesome\" to="content\font-awesome"/>       
         <include pattern="fonts\" to="content\fonts"/>       
         <include pattern="Scripts\" to="content\Scripts"/>
+        <include pattern="Template\" to="content\Template"/>
         <include pattern="Views\" to="content\Views"/>
         <include pattern="favicon.ico" to="content"/>
         <include pattern="*.config" to="content"/>
