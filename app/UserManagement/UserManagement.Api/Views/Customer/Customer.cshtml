@@ -1,9 +1,10 @@
 ﻿@using System
 @using System.Linq
-@using Nancy.ViewEngines.Razor.HtmlHelpers;
+@using UserManagement.Api.Helpers.NancyRazorHelpers
+@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
-<div class="box dark">
+<div id="customerView" class="box dark">
     <header>
         <div class="icons">
             <i class="fa fa-edit"></i>
@@ -17,9 +18,10 @@
             </nav>
         </div>
     </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+
+    <div class="body collapse in row" id="div-1" aria-expanded="true" style="">
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -27,10 +29,13 @@
                     @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Account Owner Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -38,10 +43,13 @@
                     @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.AccountOwnerName)
+            </div>
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Commercial State</label>
             <div class="input-group col-lg-2">
                 <select name="CommercialStateId" data-placeholder="Choose a state..." class="chosen-select">
@@ -53,10 +61,13 @@
                     }
                 </select>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.CommercialStateId)
+            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Create Sources</label>
             <div class="input-group col-lg-2">
                 <select name="CreateSourceIds" data-placeholder="Search for source..." multiple class="chosen-select">
@@ -68,10 +79,13 @@
                     }
                 </select>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.CreateSourceIds)
+            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Platform Status</label>
             <div class="input-group col-lg-2">
                 <select name="PlatformStatusId" data-placeholder="Choose a province..." class="chosen-select">
@@ -82,6 +96,9 @@
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
                     }
                 </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.PlatformStatusId)
             </div>
 
         </div>

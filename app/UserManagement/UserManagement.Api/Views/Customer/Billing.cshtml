@@ -1,4 +1,5 @@
-﻿@using Nancy.ViewEngines.Razor.HtmlHelpers;
+﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using UserManagement.Api.Helpers.NancyRazorHelpers
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
 <div class="box dark">
@@ -26,6 +27,9 @@
                     @Html.TextBoxFor(x => x.BillingContactNumber, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingContactNumber)
+            </div>
 
         </div>
         <div class="form-group">
@@ -36,6 +40,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.BillingContractPerson, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingContractPerson)
             </div>
            
         </div>
@@ -48,6 +55,9 @@
                     @Html.TextBoxFor(x => x.BillingCompanyRegistration, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingCompanyRegistration)
+            </div>
 
         </div>
         <div class="form-group">
@@ -58,6 +68,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingDebitOrderDate)
             </div>
 
         </div>
@@ -70,6 +83,9 @@
                     @Html.TextBoxFor(x => x.BillingPastelId, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingPastelId)
+            </div>
            
         </div>
         <div class="form-group">
@@ -80,6 +96,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.BillingVatNumber, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingVatNumber)
             </div>
             
         </div>
@@ -95,6 +114,9 @@
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
                     }
                 </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.BillingPaymentTypeId)
             </div>
             
         </div>

@@ -75,6 +75,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
@@ -118,11 +121,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Nancy.Hosting.Aspnet.1.0.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Validation.DataAnnotations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Nancy.Validation.DataAnnotations.1.0.0\lib\net40\Nancy.Validation.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Validation.DataAnnotations.Extensions">
+      <HintPath>..\..\packages\Nancy.Validation.DataAnnotations.Extensions.0.2.0\lib\net45\Nancy.Validation.DataAnnotations.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Validation.FluentValidation">
+      <HintPath>..\..\packages\Nancy.Validation.FluentValidation.0.23.2\lib\net40\Nancy.Validation.FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy.ViewEngines.Razor">
       <HintPath>..\..\packages\Nancy.Viewengines.Razor.1.0.0\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy.ViewEngines.Razor.HtmlHelpers">
-      <HintPath>..\..\packages\Nancy.ViewEngines.Razor.HtmlHelpers.0.1.14-alpha\lib\net40\Nancy.ViewEngines.Razor.HtmlHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -144,6 +154,7 @@
       <HintPath>..\..\packages\StackExchange.Redis.1.0.394\lib\net45\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
@@ -338,6 +349,11 @@
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.form.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.bg.js" />
@@ -485,6 +501,21 @@
     <Compile Include="Helpers\AutoMapper\Maps\Entities\EntityMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\EditorExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Extensions\HtmlTagExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Extensions\PropertyInfoExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\InputElementsExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\LabelExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\SelectExtensions.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\SelectList.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\SelectListItem.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Tag\HtmlAttribute.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Tag\HtmlInputType.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Tag\HtmlTag.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\Tag\HtmlTagBuilder.cs" />
+    <Compile Include="Helpers\NancyRazorHelpers\ValidationMessageExtensions.cs" />
     <Compile Include="Helpers\Security\RedisAuthenticator.cs" />
     <Compile Include="Helpers\Security\UmAuthenticator.cs" />
     <Compile Include="Installers\ApiClientInstaller.cs" />
@@ -521,8 +552,12 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Index\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="font-awesome\scss\font-awesome.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
@@ -554,6 +589,12 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Views\Customer\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Customer\Save.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Shared\Sidebar.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\PageHeader.cshtml" />
@@ -562,17 +603,33 @@
     <Content Include="Views\Customer\Save.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Save.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Save.cshtml" />
-    <Content Include="Views\Index\Home.cshtml" />
+    <Content Include="Views\User\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\User\Save.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Index\Home.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Contract\Index.cshtml" />
     <Content Include="Views\Contract\Save.cshtml" />
     <Content Include="Views\AuditLog\Index.cshtml" />
-    <Content Include="Views\Customer\Billing.cshtml" />
-    <Content Include="Views\Customer\ContactDetail.cshtml" />
-    <Content Include="Views\Customer\PhysicalAddress.cshtml" />
-    <Content Include="Views\Customer\PostalAddress.cshtml" />
-    <Content Include="Views\Customer\Customer.cshtml" />
+    <Content Include="Views\Customer\Billing.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Customer\ContactDetail.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Customer\PhysicalAddress.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Customer\PostalAddress.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Customer\Customer.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Client\ContactDetail.cshtml" />
     <Content Include="Views\Client\PostalAddress.cshtml" />
     <Content Include="Views\Client\PhysicalAddress.cshtml" />

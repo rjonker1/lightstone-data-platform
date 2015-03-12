@@ -1,4 +1,5 @@
-﻿@using Nancy.ViewEngines.Razor.HtmlHelpers;
+﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
+@using UserManagement.Api.Helpers.NancyRazorHelpers
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
 <div class="box dark">
@@ -26,6 +27,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressType, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressType)
+            </div>
 
         </div>
         <div class="form-group">
@@ -36,6 +40,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressLine1, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressLine1)
             </div>
             
         </div>
@@ -48,6 +55,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressLine2, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressLine2)
+            </div>
             
         </div>
         <div class="form-group">
@@ -58,6 +68,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressSuburb, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressSuburb)
             </div>
             
         </div>
@@ -70,6 +83,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCity, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressCity)
+            </div>
 
         </div>
         <div class="form-group">
@@ -81,6 +97,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressCountry, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressCountry)
+            </div>
            
         </div>
         <div class="form-group">
@@ -91,6 +110,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.ContactDetailPhysicalAddressPostalCode, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressPostalCode)
             </div>
 
         </div>
@@ -106,6 +128,9 @@
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
                     }
                 </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPhysicalAddressProvinceId)
             </div>
             
         </div>

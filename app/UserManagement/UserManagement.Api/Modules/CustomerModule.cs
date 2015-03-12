@@ -27,19 +27,21 @@ namespace UserManagement.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
             };
 
-            Get["/Customers/Add"] = parameters =>
-            {
-                return View["Save", new CustomerDto()];
-            };
+            Get["/Customers/Add"] = parameters => View["Save", new CustomerDto()];
 
             Post["/Customers"] = _ =>
             {
-                var dto = this.Bind<CustomerDto>();
-                var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                var dto = this.BindAndValidate<CustomerDto>();
 
-                bus.Publish(new CreateUpdateEntity(entity, "Create"));
+                if (ModelValidationResult.IsValid)
+                {
+                    var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                    bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
-                return null;
+                    return View["Index"];
+                }
+
+                return View["Save", dto];
             };
 
             Get["/Customers/{id}"] = parameters =>
@@ -49,7 +51,7 @@ namespace UserManagement.Api.Modules
 
                 return View["Save", dto];
             };
-            
+
             Put["/Customers/{id}"] = _ =>
             {
                 var dto = this.Bind<CustomerDto>();
