@@ -48,10 +48,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Migrations\201406061645_Create_Transaction_Table.cs" />
-    <None Include="Migrations\201502271647_Create_Data_Provider_Request_Table.cs.old" />
-    <None Include="Migrations\201502271649_Create_Data_Provider_Response_Table.cs.old" />
-    <None Include="Migrations\201502271650_Create_Request_Table.cs.old" />
-    <None Include="Migrations\201502271651_Create_Response_Table.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

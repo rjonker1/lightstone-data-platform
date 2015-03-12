@@ -125,6 +125,27 @@
         <dependency id="RestSharp" version="104.4.0.0" />
       </dependencies>
     </nuget>
+
+    <nuget deploy="false">
+        <name>Lightstone.DataPlatform.Workflow.Billing.Messages</name>
+        <folder>app/Billing/Workflow.Billing.Messages</folder>
+        <author>CustomApp</author>
+        <description>Workflow.Billing.Messages</description>
+        <includes>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Newtonsoft.Json" version="6.0.5" />
+      </dependencies>
+    </nuget>
+
+
+
+
     <!-- BILLING END -->
 
 

@@ -25,7 +25,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 
             _request = lspRequestBuilder.ForReturnProperties();
             _response = new LaceResponse();
-            _dataProvider = new LightstoneProperyDataProvider(_request, null, null, _monitoring);
+            _dataProvider = new LightstonePropertyDataProvider(_request, null, null, _monitoring);
         }
 
         public override void Observe()
