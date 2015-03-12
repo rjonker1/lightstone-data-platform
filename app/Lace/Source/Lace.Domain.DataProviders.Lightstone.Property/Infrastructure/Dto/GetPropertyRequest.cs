@@ -2,20 +2,20 @@
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
 {
-    public class GetPropertiesRequest
+    public class GetPropertyRequest
     {
         private readonly ILaceRequest _request;
 
         public bool RequestIsValid { get; private set; }
 
-        public GetPropertiesRequest(ILaceRequest request)
+        public GetPropertyRequest(ILaceRequest request)
         {
             _request = request;
         }
 
-        public GetPropertiesRequest Map()
+        public GetPropertyRequest Map()
         {
-            UserId = _request.User.UserId.ToString();
+            UserId = _request.Property.UserId;
             Municipality = _request.Property.Municipality;
             DeedTown = _request.Property.DeedTown;
             ErfNumber = _request.Property.ErfNumber;
@@ -34,7 +34,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
             return this;
         }
 
-        public GetPropertiesRequest Validate()
+        public GetPropertyRequest Validate()
         {
             RequestIsValid = !string.IsNullOrEmpty(UserId) && !string.IsNullOrEmpty(IdCkOfOwner) &&
                              !string.IsNullOrEmpty(TrackingNumber);

@@ -51,7 +51,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
             _propertyRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
-                        new LightstoneProperyDataProvider(request, null, null,
+                        new LightstonePropertyDataProvider(request, null, null,
                             new SendLightstonePropertyCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
 

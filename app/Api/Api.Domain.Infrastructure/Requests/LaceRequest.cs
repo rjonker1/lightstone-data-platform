@@ -18,7 +18,7 @@ namespace Api.Domain.Infrastructure.Requests
         public IProvideJisInformation Jis { get; private set; }
 
         public IPackage Package { get; private set; }
-        public Lace.Domain.Core.Contracts.Requests.IProvidePropertyInformationForRequest Property { get; private set; }
+        public IProvidePropertyInformationForRequest Property { get; private set; }
 
         public IProvideRequestAggregation RequestAggregation { get; private set; }
 
@@ -55,6 +55,60 @@ namespace Api.Domain.Infrastructure.Requests
             Package = package;
             RequestAggregation = aggregation;
         }
+
+        public void PropertyRequest(IPackage package, IProvideUserInformationForRequest user, IProvidePropertyInformationForRequest property, IProvideRequestAggregation aggregation)
+        {
+            Package = package;
+            User = user;
+            RequestAggregation = aggregation;
+            Property = property;
+        }
+    }
+
+    public class Property : IProvidePropertyInformationForRequest
+    {
+
+        public Property (string trackingNumber, int maxNumberOfRows, Guid userid, string idNumber)
+        {
+            IdCkOfOwner = idNumber;
+            TrackingNumber = trackingNumber;
+            MaxRowsToReturn = maxNumberOfRows;
+            UserId = userid.ToString();
+        }
+
+        public string DeedTown { get; private set; }
+
+        public string ErfNumber { get; private set; }
+
+        public string EstateName { get; private set; }
+
+        public string FarmName { get; private set; }
+
+        public string IdCkOfOwner { get; private set; }
+
+        public int MaxRowsToReturn { get; private set; }
+
+        public string Municipality { get; private set; }
+
+        public string OwnerName { get; private set; }
+
+        public string Portion { get; private set; }
+
+        public string Province { get; private set; }
+
+        public string SectionalTitle { get; private set; }
+
+        public string Street { get; private set; }
+
+        public string StreetNumber { get; private set; }
+
+        public string Suburb { get; private set; }
+
+        public string TrackingNumber { get; private set; }
+
+        public string Unit { get; private set; }
+
+        public string UserId { get; private set; }
     }
 
     public class User : IProvideUserInformationForRequest

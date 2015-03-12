@@ -1,4 +1,5 @@
 ﻿@using System
+@using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 @{
@@ -10,6 +11,9 @@
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 <form action="@url" @*data-method="@method"*@ method="@method" class="form-horizontal">
+    
+    @*@Html.ValidationSummary("Validation Results")*@
+
     @Html.Partial("Customer", Model)
     @Html.Partial("Billing", Model)
     @Html.Partial("ContactDetail", Model)

@@ -71,7 +71,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-        public static IAction ProperyVerificationAction
+        public static IAction PropertyVerificationAction
         {
             get
             {

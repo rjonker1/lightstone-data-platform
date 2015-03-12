@@ -10,13 +10,13 @@ using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property
 {
-    public class LightstoneProperyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
+    public class LightstonePropertyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
 
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public LightstoneProperyDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public LightstonePropertyDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {

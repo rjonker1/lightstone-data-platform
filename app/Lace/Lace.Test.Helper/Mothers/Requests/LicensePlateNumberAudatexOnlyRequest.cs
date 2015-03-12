@@ -93,7 +93,7 @@ namespace Lace.Test.Helper.Mothers.Requests
         {
             get
             {
-                return new RequesPropertyInformation();
+                return new RequestPropertyInformation();
             }
         }
     }

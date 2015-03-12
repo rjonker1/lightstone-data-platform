@@ -18,8 +18,31 @@
     <link href="~/Template/css/AdminLTE.min.css" rel="stylesheet" />
     <link href="~/Template/css/skins/_all-skins.min.css" rel="stylesheet" />
     <!-- Template -->
-
+    
     <link href="~/Content/site.css" rel="stylesheet" />
+    
+    <style>
+        .validation.validation-summary {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+            .validation.validation-summary h4 {
+                margin-top: 0;
+                color: inherit;
+            }
+
+        .validation .validation-summary-errors {
+            margin-bottom: 0;
+        }
+    </style>
+
+
 
     @RenderSection("Header", false)
 </head>
@@ -50,6 +73,8 @@
     <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/jquery.blockUI.js"></script>
     <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/sammy-0.7.5.js"></script>
     <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
     <script src="~/Scripts/app/routes/routes.js"></script>
@@ -75,6 +100,7 @@
         });
         $(document).ajaxStop(function () {
             $.unblockUI();
+            preloader.active(false);
         });
         $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
             if (jqxhr.responseJSON)
@@ -87,7 +113,6 @@
             if (jqxhr.responseJSON)
                 toastr["success"]("Success", jqxhr.responseJSON);
             $.unblockUI();
-            preloader.active(false);
         });
     </script>
 </body>

@@ -3,10 +3,10 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequesPropertyInformation : IProvidePropertyInformationForRequest
+    public class RequestPropertyInformation : IProvidePropertyInformationForRequest
     {
 
-        public RequesPropertyInformation()
+        public RequestPropertyInformation()
         {
             UserId = "5a7222e1-ee65-433b-b673-827319e89cbb";
             //Province = "Province";
