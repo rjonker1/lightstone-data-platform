@@ -21,7 +21,7 @@
 </div>
 <script>
     var table = $("#client_table").dataTable({
-        dom: '<"box-header"f>rtlip',
+        dom: '<"box-header"f>t<"box-footer"lip>r',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
@@ -40,7 +40,8 @@
             }
         ]
     });
-
-    $(".dataTables_filter input").remove("label");
+    
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Clients/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
 </script>

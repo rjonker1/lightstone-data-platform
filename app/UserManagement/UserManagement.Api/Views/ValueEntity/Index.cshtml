@@ -7,37 +7,26 @@
 }
 @Html.Partial("Shared/PageHeader", viewModel)
 
-
-<style>
-    
-
-
-
-</style>
-
-
-<table id="@tableId" class="customTable">
-    <thead id="ctHead">
-        <tr>
-            <th>
-                Id
-            </th>
-            <th id="ctSubHead1">
-                Name
-            </th>
-            <th id="ctSubHead2">
-                <i id="ctActionIcon" class="fa fa-bolt"></i>
-            </th>
-        </tr>
-    </thead>
-</table>
-
+<div class="box">
+    <table id="@tableId" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    <i id="ctActionIcon" class="fa fa-bolt"></i>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
 <script>
-
-    $('.navmenu').offcanvas('toggle');
-
     var table = $("#@tableId").dataTable({
-        dom: '<"table-toolbar">frtlip',
+        dom: '<"box-header"f>t<"box-footer"lip>r',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
@@ -57,8 +46,11 @@
         ]
     });
 
-    //$("div.table-toolbar").html('<button class="btn btn-default">Add</button>');
-    $("div.table-toolbar").append("<div><a class='btn btn-default entity-add' href='#/ValueEntities/Add/@Model.AssemblyQualifiedName'>Add</a></div>");
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/ValueEntities/Add/@Model.AssemblyQualifiedName", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
+
+    //$("div.table-toolbar").append("<div><a class='btn btn-default entity-add' href='#/ValueEntities/Add/@Model.AssemblyQualifiedName'>Add</a></div>");
     @*$('#@tableId tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
         alert(data.id + " - " + data.name);

@@ -82,6 +82,50 @@
 
   return UserManagement;
 })(jQuery, UserManagement || {});
+
+; (function ($, UserManagement) {
+    "use strict";
+    UserManagement.overrideDataTablesStyling = function () {
+        var $footer = $(".box-footer");
+        $footer.css("min-height", "60px");
+        $footer.css("border-top", "none");
+
+        var $filter = $(".dataTables_filter");
+        $filter.css("padding-right", "0");
+        $filter.addClass("col-lg-2");
+
+        var $filterLabel = $filter.find("label");
+        $filterLabel.addClass("input-group");
+        //remove text without removing inner elements from parent element
+        $filterLabel.contents().filter(function () {
+            return this.nodeType === 3;
+        }).remove();
+
+        var $search = $filter.find("input");
+        $search.appendTo($filterLabel);
+        var $searchSpan = $("<span>", { "class": "input-group-addon" }).appendTo($filterLabel);
+        var $searchIcon = $("<i>", { "class": "fa fa-search" }).appendTo($searchSpan);
+
+        var $pageSize = $(".dataTables_length");
+        $pageSize.css("padding-left", "0");
+        $pageSize.addClass("col-lg-1");
+        //remove text without removing inner elements from parent element
+        $pageSize.find("label").contents().filter(function () {
+            return this.nodeType === 3;
+        }).remove();
+
+        var $pageInfo = $(".dataTables_info");
+        $pageInfo.addClass("col-lg-3");
+
+        var $paging = $(".dataTables_paginate");
+        $paging.css("padding-right", "0");
+        $paging.addClass("col-lg-3");
+        $paging.addClass("pull-right");
+    };
+
+    return UserManagement;
+})(jQuery, UserManagement || {});
+
 //;(function($) {
 //   $(document).ready(function() {
 //       UserManagement.panelBodyCollapse();

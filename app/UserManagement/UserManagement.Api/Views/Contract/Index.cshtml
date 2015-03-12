@@ -3,31 +3,29 @@
 
 @Html.Partial("Shared/PageHeader", new PageHeadingViewModel("Contracts", ""))
 
-<table id="contracts_table" class="customTable">
-    <thead id="ctHead">
-        <tr>
-            <th>
-                Id
-            </th>
-            <th id="ctSubHead1">
-                Name
-            </th>
-            <th id="ctSubHead1">
-                Description
-            </th>
-            <th id="ctSubHead2">
-                <i id="ctActionIcon" class="fa fa-bolt"></i>
-            </th>
-        </tr>
-    </thead>
-</table>
-
+<div class="box">
+    <table id="contracts_table" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    <i id="ctActionIcon" class="fa fa-bolt"></i>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
 <script>
-    
-    $('.navmenu').offcanvas('toggle');
-
     var table = $("#contracts_table").dataTable({
-        dom: '<"table-toolbar">frtlip',
+        dom: '<"box-header"f>t<"box-footer"lip>r',
         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
         processing: true,
         serverSide: true,
@@ -48,5 +46,7 @@
         ]
     });
 
-    $("div.table-toolbar").html("<a class='btn btn-default entity-add' href='#/Contracts/Add'>Add</a>");
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Contracts/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    UserManagement.overrideDataTablesStyling();
 </script>
