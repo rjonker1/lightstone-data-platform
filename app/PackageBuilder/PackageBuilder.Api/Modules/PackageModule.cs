@@ -63,6 +63,20 @@ namespace PackageBuilder.Api.Modules
                 return Response.AsJson(dto);
             };
 
+            //TODO: This route must be removed. Data Provider pacakges should all come through /Packages/DataProvider/{id
+            Get["/Packages/DataProvider/ForPropertySearch/{id}"] = parameters =>
+            {
+                PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+
+                if (package == null)
+                    throw new Exception("Package could not be found");
+
+                var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.PropertyVerificationAction);
+                dto.SetDataProviders(package);
+
+                return Response.AsJson(dto);
+            };
+
             Post["/Packages"] = parameters =>
             {
                 var dto = this.Bind<PackageDto>();

@@ -7,6 +7,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using NHibernate.Linq.Functions;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.DataFields.WriteModels;
@@ -76,6 +77,15 @@ namespace Api.Domain.Infrastructure.Extensions
                     string.Empty),
                 new Aggregation(requestId));
 
+            return request;
+        }
+
+        public static ILaceRequest ToPropertySearchRequest(this Package package, Guid userId, string idNumber,
+            int rowsToReturn, string trackingNumber, Guid requestId)
+        {
+            var request = new LaceRequest();
+            request.PropertyRequest(package, new Api.Domain.Infrastructure.Requests.User(userId, string.Empty, string.Empty),
+                new Property(trackingNumber, rowsToReturn, userId, idNumber), new Aggregation(requestId));
             return request;
         }
     }

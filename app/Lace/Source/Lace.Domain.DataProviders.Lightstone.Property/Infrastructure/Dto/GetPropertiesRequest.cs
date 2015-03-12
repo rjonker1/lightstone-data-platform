@@ -15,7 +15,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
 
         public GetPropertiesRequest Map()
         {
-            UserId = _request.User.UserId.ToString();
+            UserId = _request.Property.UserId;
             Municipality = _request.Property.Municipality;
             DeedTown = _request.Property.DeedTown;
             ErfNumber = _request.Property.ErfNumber;
