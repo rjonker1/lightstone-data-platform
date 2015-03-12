@@ -28,6 +28,9 @@
                         @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.Name)
+                </div>
 
             </div>
             <div class="form-group">
@@ -38,6 +41,9 @@
                     <div aria-describedby="basic-addon1">
                         @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "" })
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.Description)
                 </div>
 
             </div>
@@ -50,6 +56,9 @@
                         <input type="text" class="form-control" name="CommencementDate" readonly="true" value="@Model.CommencementDate">
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.CommencementDate)
+                </div>
 
             </div>
             <div class="form-group">
@@ -60,6 +69,9 @@
                     <div aria-describedby="basic-addon1">
                         @Html.TextBoxFor(x => x.EnteredIntoBy, new { @class = "form-control", placeholder = "" })
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.EnteredIntoBy)
                 </div>
 
             </div>
@@ -72,6 +84,9 @@
                         <input type="text" class="form-control" name="OnlineAcceptance" readonly="true" value="@Model.OnlineAcceptance">
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.OnlineAcceptance)
+                </div>
 
             </div>
             <div class="form-group">
@@ -83,6 +98,9 @@
                         @Html.TextBoxFor(x => x.RegisteredName, new { @class = "form-control", placeholder = "" })
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.RegisteredName)
+                </div>
 
             </div>
             <div class="form-group">
@@ -93,6 +111,9 @@
                     <div aria-describedby="basic-addon1">
                         @Html.TextBoxFor(x => x.RegistrationNumber, new { @class = "form-control", placeholder = "" })
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.RegistrationNumber)
                 </div>
 
             </div>
@@ -109,6 +130,9 @@
                         }
                     </select>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.ContractTypeId)
+                </div>
 
             </div>
             <div class="form-group">
@@ -123,6 +147,9 @@
                             <option selected="@isSelected" value="@item.Value">@item.Text</option>
                         }
                     </select>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.EscalationTypeId)
                 </div>
 
             </div>
@@ -139,6 +166,9 @@
                         }
                     </select>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.ContractDurationId)
+                </div>
 
             </div>
             <div class="form-group">
@@ -152,6 +182,9 @@
                             <option selected="@isSelected" value="@item.Id">@item.Name</option>
                         }
                     </select>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.ClientIds)
                 </div>
 
             </div>
@@ -167,6 +200,9 @@
                         }
                     </select>
                 </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.CustomerIds)
+                </div>
 
             </div>
             <div class="form-group">
@@ -180,6 +216,9 @@
                             <option id="@item.Key" selected="@isSelected" value="@item.Key|@item.Value">@item.Value</option>
                         }
                     </select>
+                </div>
+                <div class="col-lg-6">
+                    @Html.ValidationMessageFor(x => x.PackageIdNames)
                 </div>
 
             </div>

@@ -14,6 +14,9 @@
                     @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Client Name" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
         </div>
     </div>
     @Html.Partial("Shared/BoxFooter")

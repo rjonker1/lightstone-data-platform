@@ -16,6 +16,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressType, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressType)
+            </div>
 
         </div>
         <div class="form-group">
@@ -26,6 +29,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine1, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressLine1)
             </div>
 
         </div>
@@ -38,6 +44,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine2, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressLine2)
+            </div>
 
         </div>
         <div class="form-group">
@@ -48,6 +57,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressSuburb, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressSuburb)
             </div>
 
         </div>
@@ -60,6 +72,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressCity, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressCity)
+            </div>
 
         </div>
         <div class="form-group">
@@ -71,6 +86,9 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressCountry, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressCountry)
+            </div>
 
         </div>
         <div class="form-group">
@@ -81,6 +99,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressPostalCode, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressPostalCode)
             </div>
 
         </div>
@@ -96,6 +117,9 @@
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
                     }
                 </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressProvinceId)
             </div>
 
         </div>
