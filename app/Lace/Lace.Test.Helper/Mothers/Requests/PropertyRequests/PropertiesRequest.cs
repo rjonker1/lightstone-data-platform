@@ -20,7 +20,7 @@ namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
         {
             get
             {
-                return new RequesPropertyInformation();
+                return new RequestPropertyInformation();
             }
         }
 

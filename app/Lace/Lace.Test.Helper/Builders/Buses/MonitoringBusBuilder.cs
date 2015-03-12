@@ -75,7 +75,7 @@ namespace Lace.Test.Helper.Builders.Buses
                     .And("NServiceBus.Transports.RabbitMQ");
             return
                 new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Monitoring.Messages.Commands", assembliesToScan,
-                    "DataPlatform.Monitoring.Host").CreateBus();
+                    "DataPlatform.Monitoring.Host").CreateBusWithNHibernatePersistence();
         }
 
         public static IBus WorkflowBus()
@@ -87,7 +87,7 @@ namespace Lace.Test.Helper.Builders.Buses
             return
                 new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Workflow.Lace.Messages.Commands",
                     assembliesToScan,
-                    "DataPlatform.DataProviders.Host.Write").CreateBus();
+                    "DataPlatform.DataProviders.Host.Write").CreateBusWithInMemoryPersistence();
         }
     }
 }

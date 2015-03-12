@@ -109,7 +109,7 @@ namespace PackageBuilder.TestObjects.Mothers
             {
                 return new WritePackageBuilder()
                     .With("Property verification package")
-                    .With(ActionMother.ProperyVerificationAction)
+                    .With(ActionMother.PropertyVerificationAction)
                     .With(IndustryMother.Finance, IndustryMother.Property)
                     .With(StateMother.Published)
                     .With(0.1m)
