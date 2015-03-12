@@ -18,12 +18,12 @@ namespace UserManagement.Domain.Dtos
         [Display(Name = "Customer name is required")]
         [MinLength(5)]
         public string Name { get; set; }
-
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
         public IEnumerable<Guid> CreateSourceIds { get; set; }
         public Guid PlatformStatusId { get; set; }
         public Guid BillingId { get; set; }
+        [Required]
         public string BillingContactNumber { get; set; }
         public string BillingContractPerson { get; set; }
         public string BillingCompanyRegistration { get; set; }
@@ -32,11 +32,13 @@ namespace UserManagement.Domain.Dtos
         public string BillingVatNumber { get; set; }
         public Guid BillingPaymentTypeId { get; set; }
         public Guid ContactDetailId { get; set; }
+        [Required]
         public string ContactDetailLegalEntityName { get; set; }
         public string ContactDetailAccountsContactName { get; set; }
         public string ContactDetailEmailAddress { get; set; }
         public string ContactDetailTelephoneNumber { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }
+        [Required]
         public string ContactDetailPhysicalAddressType { get; set; }
         public string ContactDetailPhysicalAddressLine1 { get; set; }
         public string ContactDetailPhysicalAddressLine2 { get; set; }
@@ -46,6 +48,7 @@ namespace UserManagement.Domain.Dtos
         public string ContactDetailPhysicalAddressPostalCode { get; set; }
         public Guid ContactDetailPhysicalAddressProvinceId { get; set; }
         public Guid ContactDetailPostalAddressId { get; set; }
+        [Required]
         public string ContactDetailPostalAddressType { get; set; }
         public string ContactDetailPostalAddressLine1 { get; set; }
         public string ContactDetailPostalAddressLine2 { get; set; }

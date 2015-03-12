@@ -19,7 +19,7 @@
         </div>
     </header>
 
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+    <div class="body collapse in row" id="div-1" aria-expanded="true" style="">
         <div class="form-group">
 
             <label class="control-label col-lg-4">Name</label>
@@ -28,9 +28,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "" })
                 </div>
-                <div>
-                    @Html.ValidationMessageFor(x => x.Name)
-                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.Name)
             </div>
 
         </div>
@@ -42,6 +42,9 @@
                 <div aria-describedby="basic-addon1">
                     @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-control", placeholder = "" })
                 </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.AccountOwnerName)
             </div>
 
         </div>
@@ -58,6 +61,9 @@
                     }
                 </select>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.CommercialStateId)
+            </div>
 
         </div>
         <div class="form-group">
@@ -73,6 +79,9 @@
                     }
                 </select>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.CreateSourceIds)
+            </div>
 
         </div>
         <div class="form-group">
@@ -87,6 +96,9 @@
                         <option selected="@isSelected" value="@item.Value">@item.Text</option>
                     }
                 </select>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.PlatformStatusId)
             </div>
 
         </div>

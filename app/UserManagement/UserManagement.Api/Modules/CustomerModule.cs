@@ -38,7 +38,7 @@ namespace UserManagement.Api.Modules
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
-                    return null;
+                    return View["Index"];
                 }
 
                 return View["Save", dto];

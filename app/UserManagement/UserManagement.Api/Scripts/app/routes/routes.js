@@ -22,7 +22,7 @@ function initializeAuditLogRoutes(sammy) {
 
 function initializeCusomerRoutes(sammy) {
 
-    sammy.get('/Customers', function (context) {
+    sammy.get('#/Customers', function (context) {
         context.load('/Customers', { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/Customers/Add', function(context) {
@@ -35,13 +35,13 @@ function initializeCusomerRoutes(sammy) {
     sammy.post('/Customers', function(context) {
         $(context.target).ajaxSubmit({
             success: function (data) {
-                //$('#page-wrapper').html( data );
-                //context.redirect('/#/Customers');
+                context.$element().html(data);
+                initializePlugins();
             }
         });
         // !!! Important !!! 
         // always return false to prevent standard browser submit and page navigation
-        return true; 
+        return false; 
     });
     sammy.get('/Customers/:id', function (context) {
         context.load('/Customers/' + context.params.id, { dataType: 'html', cache: false })
