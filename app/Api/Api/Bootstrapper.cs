@@ -39,7 +39,7 @@ namespace Api
                     : authenticator != null ? authenticator.GetUserIdentity(token) : null;
             });
 
-          //  StatelessAuthentication.Enable(pipelines, configuration);
+            StatelessAuthentication.Enable(pipelines, configuration);
 
             pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
             pipelines.EnableCors(); // cross origin resource sharing
