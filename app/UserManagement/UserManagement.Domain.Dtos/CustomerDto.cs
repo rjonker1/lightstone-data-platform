@@ -23,7 +23,7 @@ namespace UserManagement.Domain.Dtos
         public Guid PlatformStatusId { get; set; }
         public Guid BillingId { get; set; }
         [Required]
-        [Display(Name = "BillingContactNumber is required")]
+        [Display(Name = "Billing contact number is required")]
         public string BillingContactNumber { get; set; }
         public string BillingContractPerson { get; set; }
         public string BillingCompanyRegistration { get; set; }

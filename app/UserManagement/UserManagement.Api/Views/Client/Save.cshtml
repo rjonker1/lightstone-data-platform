@@ -1,4 +1,5 @@
 ﻿@using System
+@using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 @{
@@ -8,7 +9,11 @@
     var url = isCreate ? "/Clients" : "/Clients/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
+
 <form action="@url" method="@method" class="form-horizontal">
+    
+    @Html.ValidationSummary("Validation Results")
+
     @Html.Partial("Client", Model)
     @Html.Partial("ContactDetail", Model)
     @Html.Partial("PhysicalAddress", Model)
