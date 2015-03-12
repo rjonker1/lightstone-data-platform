@@ -1,24 +1,13 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
-<div class="box dark">
-    <header>
-        <div class="icons">
-            <i class="glyphicon glyphicon-tags"></i>
-        </div>
-        <h5>Postal Address</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Postal Address", "", "glyphicon glyphicon-tags"))
+    <div class="box-body">
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Type</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -27,13 +16,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressType, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressType)
-            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Line1</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -41,13 +27,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine1, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressLine1)
-            </div>
-            
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Line2</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -55,13 +38,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressLine2, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressLine2)
-            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Suburb</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -69,13 +49,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressSuburb, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressSuburb)
-            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address City</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-tower" id="basic-addon1"></span>
@@ -83,13 +60,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressCity, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressCity)
-            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Country</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-globe" id="basic-addon1"></span>
@@ -97,13 +71,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressCountry, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressCountry)
-            </div>
-           
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Postal Code</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
@@ -111,13 +82,10 @@
                     @Html.TextBoxFor(x => x.ContactDetailPostalAddressPostalCode, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressPostalCode)
-            </div>
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Postal Address Province</label>
             <div class="input-group col-lg-2">
                 <select name="ContactDetailPostalAddressProvinceId" data-placeholder="Choose a province..." class="chosen-select">
@@ -129,16 +97,8 @@
                     }
                 </select>
             </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailPostalAddressProvinceId)
-            </div>
 
         </div>
-        <div class="form-group">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-3">
-                <input type="submit" class="btn btn-primary" value="Save">
-            </div>
-        </div>
     </div>
+    @Html.Partial("Shared/BoxFooter")
 </div>

@@ -1,25 +1,13 @@
 ﻿@using System
 @using System.Linq
 @using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
 @*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
-<div id="customerView" class="box dark">
-    <header>
-        <div class="icons">
-            <i class="fa fa-edit"></i>
-        </div>
-        <h5>Customer Info</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-
-    <div class="body collapse in row" id="div-1" aria-expanded="true" style="">
+<div id="customerView" class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Customer Info", "", "fa fa-edit"))
+    <div class="box-body">
         <div class="form-group">
 
             <label class="control-label col-lg-4">Name</label>
@@ -102,11 +90,6 @@
             </div>
 
         </div>
-        <div class="form-group">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-3">
-                <input type="submit" class="btn btn-primary" value="Save">
-            </div>
-        </div>
     </div>
+    @Html.Partial("Shared/BoxFooter")
 </div>

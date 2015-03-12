@@ -1,24 +1,13 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 
-<div class="box dark">
-    <header>
-        <div class="icons">
-            <i class="glyphicon glyphicon-user"></i>
-        </div>
-        <h5>Contact Info</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contact Info", "", "glyphicon glyphicon-book"))
+    <div class="box-body">
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Legal Entity Name</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
@@ -27,32 +16,41 @@
                     @Html.TextBoxFor(x => x.ContactDetailLegalEntityName, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-            
-        </div>
-        <div class="form-group">
-            
-            <label class="control-label col-lg-4">Accounts Contact Name</label>
-            <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                   @Html.TextBoxFor(x => x.ContactDetailAccountsContactName, new { @class = "form-control", placeholder = "" })
-                </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailLegalEntityName)
             </div>
 
         </div>
         <div class="form-group">
-            
+
+            <label class="control-label col-lg-4">Accounts Contact Name</label>
+            <div class="input-group col-lg-2">
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.ContactDetailAccountsContactName, new { @class = "form-control", placeholder = "" })
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailAccountsContactName)
+            </div>
+
+        </div>
+        <div class="form-group">
+
             <label class="control-label col-lg-4">Email Address</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                   @Html.TextBoxFor(x => x.ContactDetailEmailAddress, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.ContactDetailEmailAddress, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
-           
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailEmailAddress)
+            </div>
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Telephone Number</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1"></span>
@@ -60,13 +58,11 @@
                     @Html.TextBoxFor(x => x.ContactDetailTelephoneNumber, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
+            <div class="col-lg-6">
+                @Html.ValidationMessageFor(x => x.ContactDetailTelephoneNumber)
+            </div>
 
         </div>
-        <div class="form-group">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-3">
-                <input type="submit" class="btn btn-primary" value="Save">
-            </div>
-        </div>
     </div>
+    @Html.Partial("Shared/BoxFooter")
 </div>

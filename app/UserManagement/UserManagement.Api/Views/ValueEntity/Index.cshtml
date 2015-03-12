@@ -2,7 +2,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>
 
 @{
-    var viewModel = new PageHeadingViewModel(Model.Name, "");
+    var viewModel = new HeaderViewModel(Model.Name, "");
     var tableId = string.Format("{0}_table", viewModel.Title.Replace(" ", ""));
 }
 @Html.Partial("Shared/PageHeader", viewModel)

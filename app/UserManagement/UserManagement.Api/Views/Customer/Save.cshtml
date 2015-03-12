@@ -4,7 +4,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 @{
     var isCreate = Model.Id == new Guid();
-    var pageHeadingViewModel = new PageHeadingViewModel("Customer detail", isCreate ? "Create a new customer" : "Update existing customer");
+    var pageHeadingViewModel = new HeaderViewModel("Customer detail", isCreate ? "Create a new customer" : "Update existing customer");
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Customers" : "/Customers/" + Model.Id;
 }

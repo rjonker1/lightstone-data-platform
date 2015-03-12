@@ -3,7 +3,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 @{
     var isCreate = Model.Id == new Guid();
-    var pageHeadingViewModel = new PageHeadingViewModel("Client detail", isCreate ? "Create a new client" : "Update existing client");
+    var pageHeadingViewModel = new HeaderViewModel("Client detail", isCreate ? "Create a new client" : "Update existing client");
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Clients" : "/Clients/" + Model.Id;
 }

@@ -1,24 +1,13 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @using UserManagement.Api.Helpers.NancyRazorHelpers
+@using UserManagement.Api.ViewModels
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
-<div class="box dark">
-    <header>
-        <div class="icons">
-            <i class="fa fa-money"></i>
-        </div>
-        <h5>Billing Info</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Billing Info", "", "fa fa-money"))
+    <div class="box-body">
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Contact Number</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
@@ -33,7 +22,7 @@
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Contact Person</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
@@ -44,10 +33,10 @@
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.BillingContractPerson)
             </div>
-           
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Company Registration</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-file" id="basic-addon1"></span>
@@ -61,7 +50,7 @@
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Debit Order Date</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
@@ -75,7 +64,7 @@
 
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Pastel Id</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-barcode" id="basic-addon1"></span>
@@ -86,10 +75,10 @@
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.BillingPastelId)
             </div>
-           
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Vat Number</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-flag" id="basic-addon1"></span>
@@ -100,10 +89,10 @@
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.BillingVatNumber)
             </div>
-            
+
         </div>
         <div class="form-group">
-            
+
             <label class="control-label col-lg-4">Payment Type</label>
             <div class="input-group col-lg-2">
                 <select name="BillingPaymentTypeId" data-placeholder="Choose a province..." class="chosen-select">
@@ -118,13 +107,8 @@
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.BillingPaymentTypeId)
             </div>
-            
-        </div>
-        <div class="form-group">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-3">
-                <input type="submit" class="btn btn-primary" value="Save">
-            </div>
+
         </div>
     </div>
+    @Html.Partial("Shared/BoxFooter")
 </div>

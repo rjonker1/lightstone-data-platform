@@ -8,28 +8,17 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ContractDto>
 @{
     var isCreate = Model.Id == new Guid();
-    var pageHeadingViewModel = new PageHeadingViewModel("Contract detail", isCreate ? "Create a new contract" : "Update existing contract");
+    var pageHeadingViewModel = new HeaderViewModel("Contract detail", isCreate ? "Create a new contract" : "Update existing contract");
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Contracts" : "/Contracts/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
-<div class="box dark">
-    <header>
-        <div class="icons">
-            <i class="glyphicon glyphicon-eye-open"></i>
-        </div>
-        <h5>Input Text Fields</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
-        <form action="@url" method="@method" class="form-horizontal">
+<div class="box">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contract Info", "", "glyphicon glyphicon-eye-open"))
+    <form action="@url" method="@method" class="form-horizontal">
+        <div class="box-body">
+
             <div class="form-group">
 
                 <label class="control-label col-lg-4">Name</label>
@@ -194,12 +183,7 @@
                 </div>
 
             </div>
-            <div class="form-group">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+        @Html.Partial("Shared/BoxFooter")
+    </form>
 </div>

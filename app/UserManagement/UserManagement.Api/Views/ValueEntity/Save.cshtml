@@ -5,28 +5,16 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ValueEntityDto>
 @{
     var isCreate = Model.Id == new Guid();
-    var pageHeadingViewModel = new PageHeadingViewModel("Lookups detail", isCreate ? "Create" : "Update");
+    var pageHeadingViewModel = new HeaderViewModel("Lookups detail", isCreate ? "Create" : "Update");
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/ValueEntities" : "/ValueEntities/" + Model.Id;
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 <div class="box dark">
-    <header>
-        <div class="icons">
-            <i class="fa fa-edit"></i>
-        </div>
-        <h5>Input Text Fields</h5>
-        <div class="toolbar">
-            <nav style="padding: 8px;">
-                <a class="btn btn-default btn-xs collapse-box" href="javascript:;">
-                    <i class="fa fa-minus"></i>
-                </a>
-            </nav>
-        </div>
-    </header>
-    <div class="body collapse in" id="div-1" aria-expanded="true" style="">
-        <form action="@url" method="@method" class="form-horizontal">
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Lookup Info", "", "fa fa-edit"))
+    <form action="@url" method="@method" class="form-horizontal">
+        <div class="box-body">
             <div class="form-group">
                 @Html.HiddenFor(x => x.AssemblyQualifiedName)
                 @Html.LabelFor(x => x.Value, new { @class = "control-label col-lg-4" })
@@ -34,13 +22,8 @@
                     @Html.TextBoxFor(x => x.Value, new { @class = "form-control", placeholder = "Name" })
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary" value="Save">
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+        @Html.Partial("Shared/BoxFooter")
+    </form>
 </div>
 

@@ -1,7 +1,7 @@
 ﻿@using UserManagement.Api.ViewModels
 @*@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LookupViewModel>*@
 
-@Html.Partial("Shared/PageHeader", new PageHeadingViewModel("Users", ""))
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Users", ""))
 
 <div class="box">
     <table id="users_table" class="table table-bordered table-hover">

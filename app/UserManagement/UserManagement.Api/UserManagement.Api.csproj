@@ -543,7 +543,7 @@
     <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\UserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\PageHeadingViewModel.cs" />
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -589,12 +589,6 @@
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
-    <Content Include="Views\Customer\Index.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\Customer\Save.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Shared\Sidebar.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\PageHeader.cshtml" />
@@ -621,20 +615,20 @@
     <Content Include="Views\Customer\ContactDetail.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Customer\PhysicalAddress.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Views\Customer\PostalAddress.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Customer\Customer.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Client\ContactDetail.cshtml" />
     <Content Include="Views\Client\PostalAddress.cshtml" />
     <Content Include="Views\Client\PhysicalAddress.cshtml" />
     <Content Include="Views\Client\Client.cshtml" />
     <Content Include="Views\ValueEntity\Save.cshtml" />
+    <Content Include="Views\Shared\BoxHeader.cshtml" />
+    <Content Include="Views\Shared\BoxFooter.cshtml" />
+    <Content Include="Views\Client\ContactDetail.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Customer\PhysicalAddress.cshtml" />
+    <Content Include="Views\Customer\PostalAddress.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

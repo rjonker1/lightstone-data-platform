@@ -20,33 +20,10 @@
     <!-- Template -->
     
     <link href="~/Content/site.css" rel="stylesheet" />
-    
-    <style>
-        .validation.validation-summary {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
-
-            .validation.validation-summary h4 {
-                margin-top: 0;
-                color: inherit;
-            }
-
-        .validation .validation-summary-errors {
-            margin-bottom: 0;
-        }
-    </style>
-
-
 
     @RenderSection("Header", false)
 </head>
-<body class="skin-blue" style="position: relative; overflow: hidden;">
+<body class="skin-blue">
     <div class="wrapper">
         @Html.Partial("Shared/Header")
         @Html.Partial("Shared/Sidebar")
