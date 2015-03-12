@@ -64,7 +64,7 @@
     </Compile>
     <Compile Include="Infrastructure\CallLightstonePropertyDataProvider.cs" />
     <Compile Include="Infrastructure\Configuration\ConfigureLighstonePropertySource.cs" />
-    <Compile Include="Infrastructure\Dto\GetPropertiesRequest.cs" />
+    <Compile Include="Infrastructure\Dto\GetPropertyRequest.cs" />
     <Compile Include="Infrastructure\HandleLightstonePropertyCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstonePropertyResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromLightstoneProperty.cs" />
