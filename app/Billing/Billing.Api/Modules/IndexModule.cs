@@ -6,7 +6,11 @@ namespace Billing.Api.Modules
     {
         public IndexModule()
         {
-            Get["/"] = parameters => "Billing API";
+            Get["/"] = parameters =>
+            {
+                //"Billing API"
+                return View["Index"];
+            };
         }
     }
 }

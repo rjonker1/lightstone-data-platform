@@ -1,0 +1,39 @@
+﻿.table-toolbar {
+    float: left;
+}
+
+.user-alias ul {
+    list-style: none;
+}
+
+.content-header {
+    padding-left: 0;
+    padding-bottom: 15px;
+}
+
+.content {
+    padding-top: 0;
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.validation.validation-summary {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.validation.validation-summary h4 {
+    margin-top: 0;
+    color: inherit;
+}
+
+.validation .validation-summary-errors {
+    margin-bottom: 0;
+}
