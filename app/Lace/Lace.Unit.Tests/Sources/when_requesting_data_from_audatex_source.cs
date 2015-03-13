@@ -1,4 +1,8 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -15,39 +19,34 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _audatexRequest;
-        private readonly IProvideResponseFromLaceDataProviders _laceResponse;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
 
         public when_requesting_data_from_audatex_source()
         {
-            //var bus = new FakeBus();
-            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            
             _requestDataFromSource = new RequestDataFromAudatexSource();
             _audatexRequest = new LicensePlateRequestBuilder().ForAudatex();
-            _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingAudatexExternalWebService(_audatexRequest);
-
-            //_monitoring = new PublishLaceEventMessages(publisher, _audatexRequest.RequestAggregation.AggregateId);
         }
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _monitoring);
+            _requestDataFromSource.FetchDataFromSource(_response, _externalWebServiceCall, _monitoring);
         }
 
         [Observation]
         public void lace_audatex_request_data_from_service_web_response_must_not_be_null()
         {
-            _laceResponse.AudatexResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
         }
 
         [Observation]
         public void lace_audatex_request_data_from_service_must_be_handled()
         {
-            _laceResponse.AudatexResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
         }
     }
 }

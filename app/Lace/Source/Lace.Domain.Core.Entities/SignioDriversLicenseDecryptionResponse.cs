@@ -7,6 +7,11 @@ namespace Lace.Domain.Core.Entities
     [DataContract]
     public class SignioDriversLicenseDecryptionResponse : IProvideDataFromSignioDriversLicenseDecryption
     {
+        public SignioDriversLicenseDecryptionResponse()
+        {
+            
+        }
+
         public SignioDriversLicenseDecryptionResponse(IRespondWithDriversLicenseCard driversLicense, string decodedData)
         {
             DrivingLicense = driversLicense;
@@ -29,6 +34,19 @@ namespace Lace.Domain.Core.Entities
         public string TypeName
         {
             get { return GetType().Name; }
+        }
+
+        [DataMember]
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.WriteModels.R
         {
             Mapper.CreateMap<IProvideDataFromLightstoneProperty, IEnumerable<IDataField>>()
                 .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
-            Mapper.CreateMap<IEnumerable<IRespondWithProperty>, IDataField>().ConvertUsing(s => new DataField("Properties", s.GetType(), ToDataFields(s)));
+            Mapper.CreateMap<IEnumerable<IRespondWithProperty>, IDataField>().ConvertUsing(s => new DataField("PropertyInformation", s.GetType(), ToDataFields(s)));
             Mapper.CreateMap<IRespondWithProperty, IEnumerable<IDataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
         }
 

@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -16,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
 
         private readonly ILaceRequest _request;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
@@ -44,13 +48,13 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void lace_functional_test_audatex_response_should_be_handled_test()
         {
-            _response.AudatexResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_functional_test_audatex_response_shuould_not_be_null_test()
         {
-            _response.AudatexResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
         }
     }
 }

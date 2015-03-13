@@ -62,6 +62,7 @@
     <Compile Include="Contracts\IBuildSourceChain.cs" />
     <Compile Include="Contracts\ICheckForDuplicateRequests.cs" />
     <Compile Include="Contracts\IEntryPoint.cs" />
+    <Compile Include="Dto\DataProviderResponse.cs" />
     <Compile Include="Dto\LaceExternalSourceResponse.cs" />
     <Compile Include="Dto\LaceResponse.cs" />
   </ItemGroup>

@@ -5,7 +5,8 @@ using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -40,7 +41,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -89,7 +90,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformRgtResponse(_carSpecifications);
 
@@ -100,16 +101,15 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
             monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
-            response.RgtResponse = transformer.Result;
-            response.RgtResponseHandled = new RgtResponseHandled();
-            response.RgtResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
 
-        private static void RgtResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void RgtResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.RgtResponse = null;
-            response.RgtResponseHandled = new RgtResponseHandled();
-            response.RgtResponseHandled.HasBeenHandled();
+            var rgtResponse = new RgtResponse();
+            rgtResponse.HasBeenHandled();
+            response.Add(rgtResponse);
         }
 
         private void GetCarInformation()
@@ -122,13 +122,18 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     .BuildCarInformationRequest();
         }
 
-        private void ValidateVehicleDetail(IProvideResponseFromLaceDataProviders response)
+        private void ValidateVehicleDetail(IEnumerable<IPointToLaceProvider> response)
         {
-            if (_request.Vehicle != null && !string.IsNullOrEmpty(_request.Vehicle.Vin) &&
-                _request.Vehicle.Vin.Equals(response.IvidResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
+            var ividResponse = response.OfType<IProvideDataFromIvid>().First();
+            if (ividResponse == null)
                 return;
 
-            _request.Vehicle.SetVinNumber(response.IvidResponse.Vin);
+
+            if (_request.Vehicle != null && !string.IsNullOrEmpty(_request.Vehicle.Vin) &&
+                _request.Vehicle.Vin.Equals(ividResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
+                return;
+
+            _request.Vehicle.SetVinNumber(ividResponse.Vin);
         }
     }
 }

@@ -42,5 +42,18 @@ namespace Lace.Domain.Core.Entities
         {
             get { return GetType(); }
         }
+
+        [DataMember]
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
+        }
     }
 }

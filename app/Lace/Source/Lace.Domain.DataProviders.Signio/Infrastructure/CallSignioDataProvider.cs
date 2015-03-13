@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -28,7 +30,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
             try
@@ -74,14 +76,15 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             }
         }
 
-        private static void SignioResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.SignioDriversLicenseDecryptionResponse = null;
-            response.SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled();
-            response.SignioDriversLicenseDecryptionResponseHandled.HasBeenHandled();
+            var signioDriversLicenseDecryptionResponse = new SignioDriversLicenseDecryptionResponse();
+            signioDriversLicenseDecryptionResponse.HasBeenHandled();
+            response.Add(signioDriversLicenseDecryptionResponse);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformSignioResponse(_client.Resonse);
 
@@ -93,9 +96,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             monitoring.Send(CommandType.Transformation,
                 transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), transformer);
 
-            response.SignioDriversLicenseDecryptionResponse = transformer.Result;
-            response.SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled();
-            response.SignioDriversLicenseDecryptionResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

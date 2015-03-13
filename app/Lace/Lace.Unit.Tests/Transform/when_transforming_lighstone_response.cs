@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
@@ -14,7 +15,7 @@ namespace Lace.Unit.Tests.Transform
 {
     public class when_transforming_lighstone_response : Specification
     {
-        private IProvideDataFromLightstone _response;
+        private IProvideDataFromLightstoneAuto _response;
         private TransformLightstoneResponse _transform;
         private readonly ILaceRequest _request;
         private readonly IProvideCarInformationForRequest _carInformationRequest;

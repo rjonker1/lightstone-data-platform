@@ -3,13 +3,14 @@ using System.Runtime.Serialization;
 using CommonDomain;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Identifiers;
 using Workflow.Lace.Messages.Events;
 
 namespace Workflow.Lace.Domain.Aggregates
 {
     [Serializable]
     [DataContract]
-    public class Request :  AggregateBase, IAggregate
+    public class Request : AggregateBase, IAggregate
     {
         private Request(Guid id)
         {
@@ -18,8 +19,8 @@ namespace Workflow.Lace.Domain.Aggregates
             Register<RequestSentToDataProvider>(e => e.Id = id);
             Register<ResponseReceivedFromDataProvider>(e => e.Id = id);
             Register<ResponseReturned>(e => e.Id = id);
+            Register<TransactionCreated>(e => e.Id = id);
         }
-
 
         public Request(Guid requestId, DateTime date)
             : this(requestId)
@@ -50,7 +51,7 @@ namespace Workflow.Lace.Domain.Aggregates
             //RequestPayload = payload;
             Date = date;
 
-            RaiseEvent(new ResponseReceivedFromDataProvider(id,requestId, dataProvider, date));
+            RaiseEvent(new ResponseReceivedFromDataProvider(id, requestId, dataProvider, date));
         }
 
         public void ReturnResponse(Guid id, Guid requestId, DateTime date)
@@ -59,6 +60,17 @@ namespace Workflow.Lace.Domain.Aggregates
             Date = date;
 
             RaiseEvent(new ResponseReturned(id, requestId, date));
+        }
+
+        public void CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+            Guid contractId,
+            string system)
+        {
+            RequestId = requestId;
+            Date = date;
+
+            RaiseEvent(new TransactionCreated(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
+                new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date));
         }
 
         public static Request ReceiveRequest(Guid requestId, DateTime date)

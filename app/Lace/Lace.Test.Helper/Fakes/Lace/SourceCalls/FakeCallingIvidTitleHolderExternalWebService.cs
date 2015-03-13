@@ -1,5 +1,5 @@
-﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Entities;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
@@ -12,13 +12,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingIvidTitleHolderExternalWebService : ICallTheDataProviderSource
     {
         private TitleholderQueryResponse _ividTitleHolderResponse;
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             _ividTitleHolderResponse = new SourceResponseBuilder().ForIvidTitleHolder();
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformIvidTitleHolderResponse(_ividTitleHolderResponse);
 
@@ -27,9 +27,8 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
                 transformer.Transform();
             }
 
-            response.IvidTitleHolderResponse = transformer.Result;
-            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
-            response.IvidTitleHolderResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

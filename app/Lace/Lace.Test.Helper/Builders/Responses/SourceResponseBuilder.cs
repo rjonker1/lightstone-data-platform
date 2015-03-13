@@ -39,7 +39,7 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeAudatexWebResponseData.GetAudatexWebServiceResultWithHyundaiHistoryResponseInformation();
         }
 
-        public IProvideResponseFromLaceDataProviders ForAudatexWithLaceResponse()
+        public ICollection<IPointToLaceProvider> ForAudatexWithLaceResponse()
         {
             return FakeAudatexWebResponseData.GetLaceResponseToUserInAudatexRequest();
         }

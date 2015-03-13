@@ -1,5 +1,6 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts;
+using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using NServiceBus;
 
@@ -8,6 +9,6 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
     public interface IBuildSourceChain
     {
         void Build();
-        Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid> SourceChain { get; }
+        Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; }
     }
 }

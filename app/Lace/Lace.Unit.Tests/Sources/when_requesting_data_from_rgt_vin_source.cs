@@ -1,4 +1,8 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
@@ -15,38 +19,34 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ILaceRequest _rgtVinRequest;
-        private IProvideResponseFromLaceDataProviders _laceResponse;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _laceEvent;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_rgt_vin_source()
         {
-            //var bus = new FakeBus();
-            //var publisher = new Workflow.RabbitMQ.Publisher(bus);
-            
             _requestDataFromService = new RequestDataFromIvidSource();
             _rgtVinRequest = new LicensePlateRequestBuilder().ForRgtVin();
-            _laceResponse = new LaceResponseBuilder().WithIvidResponseHandled();
+            _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
-            //_laceEvent = new PublishLaceEventMessages(publisher, _rgtVinRequest.RequestAggregation.AggregateId);
         }
         
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _laceEvent);
+            _requestDataFromService.FetchDataFromSource(_response, _externalWebServiceCall, _laceEvent);
         }
 
 
         [Observation]
         public void rgt_vin_request_data_from_service_response_must_not_be_null()
         {
-            _laceResponse.RgtVinResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromRgtVin>().First().ShouldNotBeNull();
         }
 
         [Observation]
         public void rgt_vin_request_data_from_service_must_be_handled()
         {
-            _laceResponse.RgtVinResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromRgtVin>().First().Handled.ShouldBeTrue();
         }
 
 

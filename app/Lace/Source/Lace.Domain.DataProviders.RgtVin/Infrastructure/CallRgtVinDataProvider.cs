@@ -4,6 +4,7 @@ using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -38,7 +39,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
             try
@@ -47,7 +48,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     .Build()
                     .Vin;
 
-                monitoring.Send(CommandType.Configuration, new { VinNumber = vin}, null);
+                monitoring.Send(CommandType.Configuration, new {VinNumber = vin}, null);
 
                 monitoring.StartCall(vin, _stopWatch);
 
@@ -73,7 +74,8 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformRgtVinResponse(_vins);
 
@@ -84,17 +86,15 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
             monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
-            response.RgtVinResponse = transformer.Result;
-            response.RgtVinResponseHandled = new RgtVinResponseHandled();
-            response.RgtVinResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
 
-        private static void RgtVinResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void RgtVinResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.RgtVinResponse = null;
-            response.RgtVinResponseHandled = new RgtVinResponseHandled();
-            response.RgtVinResponseHandled.HasBeenHandled();
+            var rgtVinResponse = new RgtVinResponse();
+            rgtVinResponse.HasBeenHandled();
+            response.Add(rgtVinResponse);
         }
-
     }
 }

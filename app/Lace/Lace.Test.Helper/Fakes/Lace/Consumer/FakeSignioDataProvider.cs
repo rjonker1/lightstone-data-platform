@@ -1,5 +1,8 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -24,7 +27,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.SignioDecryptDriversLicense, _request);
             if (!spec.IsSatisfied)
@@ -36,18 +39,18 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                 var consumer = new ConsumeSource(new HandleSignioSourceCall(), new FakeCallingSignioDataProvider());
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                if (response.SignioDriversLicenseDecryptionResponse == null)
+                if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() || response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.SignioDriversLicenseDecryptionResponse = null;
-            response.SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled();
-            response.SignioDriversLicenseDecryptionResponseHandled.HasNotBeenHandled();
+            var sigi = new SignioDriversLicenseDecryptionResponse();
+            sigi.HasNotBeenHandled();
+            response.Add(sigi);
         }
     }
 }

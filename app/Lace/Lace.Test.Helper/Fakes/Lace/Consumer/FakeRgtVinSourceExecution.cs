@@ -1,5 +1,9 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -27,7 +31,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
 
@@ -41,7 +45,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                     new FakeCallingRgtVinExternalWebService());
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                if (response.RgtVinResponse == null)
+                if (!response.OfType<IProvideDataFromRgtVin>().Any() || response.OfType<IProvideDataFromRgtVin>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
@@ -49,11 +53,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.RgtVinResponse = null;
-            response.RgtVinResponseHandled = new RgtVinResponseHandled();
-            response.RgtVinResponseHandled.HasNotBeenHandled();
+            var rgtVinResponseHandled = new RgtVinResponse();
+            rgtVinResponseHandled.HasNotBeenHandled();
+            response.Add(rgtVinResponseHandled);
         }
     }
 }

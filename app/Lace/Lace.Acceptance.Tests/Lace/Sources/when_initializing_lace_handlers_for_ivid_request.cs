@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Test.Helper.Builders.Buses;
@@ -17,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         private readonly ILaceRequest _request;
         private readonly IBus _monitoring;
         private readonly IBootstrap _initialize;
-        private IList<LaceExternalSourceResponse> _laceResponses;
+        private ICollection<IPointToLaceProvider> _response;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_initializing_lace_handlers_for_ivid_request()
@@ -26,32 +29,32 @@ namespace Lace.Acceptance.Tests.Lace.Sources
             _request = new LicensePlateRequestBuilder().ForIvid();
             _buildSourceChain = new CreateSourceChain(_request.Package);
             _buildSourceChain.Build();
-            _initialize = new Initialize(new LaceResponse(), _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(),  _request, _monitoring, _buildSourceChain);
         }
 
 
         public override void Observe()
         {
             _initialize.Execute();
-            _laceResponses = _initialize.LaceResponses;
+            _response = _initialize.DataProviderResponses;
         }
 
         [Observation]
         public void lace_response_to_be_returned_should_be_one()
         {
-            _laceResponses.Count.ShouldEqual(1);
+            _response.Count.ShouldEqual(1);
         }
 
         [Observation]
         public void lace_ivid_response_should_be_handled()
         {
-            _laceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_ivid_response_shuould_not_be_null()
         {
-            _laceResponses[0].Response.IvidResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
         }
     }
 }

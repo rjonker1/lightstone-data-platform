@@ -1,11 +1,13 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 
@@ -25,7 +27,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Audatex, _request);
 
@@ -39,18 +41,18 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                     new FakeCallingAudatexExternalWebService(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                if (response.AudatexResponse == null)
+                if (!response.OfType<IProvideDataFromAudatex>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.AudatexResponse = null;
-            response.AudatexResponseHandled = new AudatexResponseHandled();
-            response.AudatexResponseHandled.HasNotBeenHandled();
+            var audatexResponse = new AudatexResponse();
+            audatexResponse.HasNotBeenHandled();
+            response.Add(audatexResponse);
         }
     }
 }
