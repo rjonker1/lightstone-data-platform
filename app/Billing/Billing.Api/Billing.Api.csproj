@@ -331,6 +331,8 @@
     <Content Include="Scripts\DataTables-1.10.4\jquery.dataTables.min.js" />
     <Content Include="Scripts\fastclick\fastclick.js" />
     <Content Include="Scripts\fastclick\fastclick.min.js" />
+    <Content Include="Scripts\GreenSock\TweenMax.min.js" />
+    <Content Include="Scripts\GreenSock\UIpreloader.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.1.js" />
@@ -341,6 +343,8 @@
     <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.bg.js" />
