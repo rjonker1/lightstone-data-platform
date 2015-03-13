@@ -18,7 +18,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         {
             base.Observe(); 
 
-            _dataFields = Mapper.Map<IProvideDataFromLightstone, IEnumerable<IDataField>>(LightstoneResponseMother.Response);
+            _dataFields = Mapper.Map<IProvideDataFromLightstoneAuto, IEnumerable<IDataField>>(LightstoneResponseMother.Response);
         }
 
         [Observation]
