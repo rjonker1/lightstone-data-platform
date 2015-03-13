@@ -1,49 +1,122 @@
-﻿using EasyNetQ;
+﻿using Billing.Api.Installers;
+using Castle.Windsor;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Bootstrapper;
-using Nancy.TinyIoc;
-using Workflow;
-using Workflow.BuildingBlocks;
-using Workflow.RabbitMQ;
+using Nancy.Bootstrappers.Windsor;
+using Shared.BuildingBlocks.Api.ExceptionHandling;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace Billing.Api
 {
-    public class Bootstrapper : DefaultNancyBootstrapper
+    public class Bootstrapper : WindsorNancyBootstrapper
     {
+
         // The bootstrapper enables you to reconfigure the composition of the framework,
         // by overriding the various methods and properties.
         // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
-
-        private IBus bus;
-        private Publisher publisher;
-        private static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger<Bootstrapper>();
-
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        protected override void ApplicationStartup(IWindsorContainer container, IPipelines pipelines)
         {
+
+            this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
-//            pipelines.EnableStatelessAuthentication();
-//            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
-//            {
-////                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
-////                {
-////                    log.ErrorFormat("Error occured on route {0}", ctx.ResolvedRoute.ToString());
-////                    log.ErrorFormat("The error was {0}", e);
-////                }
-//
-//                return null;
-//            });
+            //container.Resolve<IBus>().Publish(new ImportStartupData());
         }
 
-        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+        protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
+            // Perform registations that should have an application lifetime
             base.ConfigureApplicationContainer(container);
 
-            bus = BusFactory.CreateBus("workflow/billing/queue");
-            publisher = new Publisher(bus);
+            container.Install(
+                new NHibernateInstaller(),
+                //new RepositoryInstaller(),
+                //new CommandInstaller(),
+                new BusInstaller()
+                //new ServiceLocatorInstaller(),
+                //new AutoMapperInstaller(),
+                //new HelperInstaller(),
+                //new ApiClientInstaller(),
+                //new RedisInstaller(),
+                //new AuthenticationInstaller(),
+                //new HashProviderInstaller()
+                );
 
-            container.Register<IPublishMessages>(publisher);
+            //Drop create
+            //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
         }
+
+        protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
+        {
+            pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
+            {
+                this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                return null;
+            });
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
+            pipelines.OnError.AddItemToEndOfPipeline((nancyContext, exception) =>
+            {
+                this.Error(() => "Error on Api request {0}[{1}] => {2}".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url, exception));
+                var fromException = ErrorResponse.FromException(exception);
+                fromException.Headers.Add("Access-Control-Allow-Origin", "*");
+                fromException.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+                fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+                return fromException;
+            });
+            pipelines.EnableCors(); // cross origin resource sharing
+            //pipelines.AddTransactionScope(container);
+
+            //AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
+
+            base.RequestStartup(container, pipelines, context);
+        }
+
+
+
+
+
+
+
+
+
+        //Default setup
+
+
+//        // The bootstrapper enables you to reconfigure the composition of the framework,
+//        // by overriding the various methods and properties.
+//        // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
+
+//        private IBus bus;
+//        private Publisher publisher;
+//        private static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger<Bootstrapper>();
+
+//        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+//        {
+//            base.ApplicationStartup(container, pipelines);
+
+////            pipelines.EnableStatelessAuthentication();
+////            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
+////            {
+//////                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
+//////                {
+//////                    log.ErrorFormat("Error occured on route {0}", ctx.ResolvedRoute.ToString());
+//////                    log.ErrorFormat("The error was {0}", e);
+//////                }
+////
+////                return null;
+////            });
+//        }
+
+//        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
+//        {
+//            base.ConfigureApplicationContainer(container);
+
+//            bus = BusFactory.CreateBus("workflow/billing/queue");
+//            publisher = new Publisher(bus);
+
+//            container.Register<IPublishMessages>(publisher);
+//        }
 
     }
 }
