@@ -10,7 +10,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.WriteModels.R
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromLightstone, IEnumerable<IDataField>>()
+            Mapper.CreateMap<IProvideDataFromLightstoneAuto, IEnumerable<IDataField>>()
                 .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
             Mapper.CreateMap<IRespondWithValuation, IDataField>()
                 .ConvertUsing(s => new DataField("VehicleValuation", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));

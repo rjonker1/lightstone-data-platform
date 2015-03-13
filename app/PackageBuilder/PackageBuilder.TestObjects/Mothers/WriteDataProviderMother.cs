@@ -87,7 +87,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
                     .With(10d)
-                    .With(typeof (IProvideDataFromLightstone))
+                    .With(typeof (IProvideDataFromLightstoneAuto))
                     .Build();
             }
         }

@@ -30,7 +30,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 typeof (IProvideDataFromIvidTitleHolder), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(DefaultLightstoneResponse(), Guid.NewGuid(),
                 DataProviderName.LightstoneAuto, DataProviderName.LightstoneAuto.ToString(), 0d,
-                typeof (IProvideDataFromLightstone), "Owner", DateTime.UtcNow));
+                typeof (IProvideDataFromLightstoneAuto), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(new RgtResponse(), Guid.NewGuid(), DataProviderName.Rgt,
                 DataProviderName.Rgt.ToString(), 0d, typeof (IProvideDataFromRgt), "Owner", DateTime.UtcNow));
             _publisher.Publish(new CreateDataProvider(new RgtVinResponse(), Guid.NewGuid(), DataProviderName.RgtVin,
@@ -95,7 +95,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                         new VehicleClass(), string.Empty, string.Empty, string.Empty), string.Empty);
         }
 
-        private LightstoneResponse DefaultLightstoneResponse()
+        private LightstoneAutoResponse DefaultLightstoneResponse()
         {
             var vehicleValuation = new Valuation();
             vehicleValuation.AddAmortisationFactors(new[] { new AmortisationFactorModel(0, 0d) });
@@ -112,7 +112,7 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
             vehicleValuation.AddImageGauages(new[] { new ImageGaugeModel(null, null, null, null, "") });
             vehicleValuation.AddEstimatedValue(new[] { new EstimatedValueModel() });
             vehicleValuation.AddLastFiveSales(new[] { new SaleModel("", "", "") });
-            return new LightstoneResponse(0, 0, "", "", "", "", "", vehicleValuation);
+            return new LightstoneAutoResponse(0, 0, "", "", "", "", "", vehicleValuation);
         }
     }
 }

@@ -63,8 +63,6 @@
     <Compile Include="Contracts\ICheckForDuplicateRequests.cs" />
     <Compile Include="Contracts\IEntryPoint.cs" />
     <Compile Include="Dto\DataProviderResponse.cs" />
-    <Compile Include="Dto\LaceExternalSourceResponse.cs" />
-    <Compile Include="Dto\LaceResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">

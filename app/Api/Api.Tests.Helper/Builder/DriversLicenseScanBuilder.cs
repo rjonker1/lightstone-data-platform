@@ -1,23 +1,19 @@
-﻿using Api.Domain.Verification.Infrastructure.Dto;
+﻿using System.Collections.ObjectModel;
+using Api.Domain.Verification.Infrastructure.Dto;
 using Api.Tests.Helper.Fakes.Verification;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
-using Lace.Domain.Infrastructure.Core.Dto;
 
 namespace Api.Tests.Helper.Builder
 {
     public class DriversLicenseScanBuilder
     {
-        public LaceExternalSourceResponse ForDriversLicenseResponseFromLace()
+        public Collection<IPointToLaceProvider> ForDriversLicenseResponseFromLace()
         {
-            return new LaceExternalSourceResponse()
+            return new Collection<IPointToLaceProvider>()
             {
-                Response = new LaceResponse()
-                {
-                    SignioDriversLicenseDecryptionResponse =
-                        new SignioDriversLicenseDecryptionResponse(new Lace.Domain.Core.Entities.DrivingLicenseCard(),
-                            string.Empty),
-                    SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled()
-                }
+                new SignioDriversLicenseDecryptionResponse(new Lace.Domain.Core.Entities.DrivingLicenseCard(),
+                    string.Empty)
             };
         }
 

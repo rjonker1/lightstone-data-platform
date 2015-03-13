@@ -6,7 +6,7 @@ namespace PackageBuilder.TestObjects.Mothers.DataProviderResponses
 {
     public class LightstoneResponseMother
     {
-        public static IProvideDataFromLightstone Response
+        public static IProvideDataFromLightstoneAuto Response
         {
             get
             {

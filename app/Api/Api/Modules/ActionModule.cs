@@ -68,7 +68,7 @@ namespace Api.Modules
                 if (!billingTransaction.BillingCreated)
                     throw new Exception("Package could not be processed");
 
-                return Response.AsJson(responses.First().Response);
+                return Response.AsJson(responses);
             };
 
             //TODO: Refactor!!!! This looks crap too
@@ -119,7 +119,7 @@ namespace Api.Modules
                 //if (!billingTransaction.BillingCreated)
                 //    throw new Exception("Package could not be processed");
 
-                return Response.AsJson(responses.First().Response);
+                return Response.AsJson(responses);
             };
         }
     }
