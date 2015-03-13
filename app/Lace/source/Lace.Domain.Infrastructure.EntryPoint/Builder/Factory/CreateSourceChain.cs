@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Specification;
@@ -36,7 +39,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
                     w => w.Key.Equals(_package.Action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid> SourceChain { get;
+        public Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain
+        {
+            get;
             private set; }
     }
 }

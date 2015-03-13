@@ -1,4 +1,9 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
@@ -15,7 +20,7 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ILaceRequest _ividRequest;
-        private IProvideResponseFromLaceDataProviders _laceResponse;
+        private ICollection<IPointToLaceProvider> _laceResponse;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
@@ -26,9 +31,8 @@ namespace Lace.Unit.Tests.Sources
            
             _requestDataFromService = new RequestDataFromIvidSource();
             _ividRequest = new LicensePlateRequestBuilder().ForIvid();
-            _laceResponse = new LaceResponse();
+            _laceResponse = new Collection<IPointToLaceProvider>();
             _externalWebServiceCall = new FakeCallingIvidExternalWebService();
-           // _monitoring = new PublishLaceEventMessages(publisher, _ividRequest.RequestAggregation.AggregateId);
         }
         
         public override void Observe()
@@ -39,15 +43,13 @@ namespace Lace.Unit.Tests.Sources
         [Observation]
         public void lace_ivid_request_data_from_service_response_must_not_be_null()
         {
-            _laceResponse.IvidResponse.ShouldNotBeNull();
+            _laceResponse.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
         }
 
         [Observation]
         public void lace_ivid_request_data_from_service_must_be_handled()
         {
-            _laceResponse.IvidResponseHandled.Handled.ShouldBeTrue();
+            _laceResponse.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
         }
-
-
     }
 }

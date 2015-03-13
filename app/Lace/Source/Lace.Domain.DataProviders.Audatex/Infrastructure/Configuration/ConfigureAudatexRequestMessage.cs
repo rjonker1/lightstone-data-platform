@@ -1,24 +1,27 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Dto;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 {
     public class ConfigureAudatexRequestMessage
     {
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private AudatexMessageData _audatexMessageData;
 
         private bool CanContinue
         {
             get
             {
-                return _response.IvidResponse != null && _response.IvidResponseHandled.Handled;
+                return _response.OfType<IProvideDataFromIvid>().First() != null;
             }
         }
-      
+
         private const string MessageType = "MSGTYPE_HISTORYCHECK";
 
-        public ConfigureAudatexRequestMessage(IProvideResponseFromLaceDataProviders response)
+        public ConfigureAudatexRequestMessage(ICollection<IPointToLaceProvider> response)
         {
             _response = response;
         }
@@ -32,7 +35,10 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
                     ? new RequestBody()
                     : new RequestBody()
                     {
-                        HistoryCheckRequest = new HistoryCheckRequestBody(_response.IvidResponse.Vin, _response.IvidResponse.License, _response.IvidResponse.Engine)
+                        HistoryCheckRequest =
+                            new HistoryCheckRequestBody(_response.OfType<IProvideDataFromIvid>().First().Vin,
+                                _response.OfType<IProvideDataFromIvid>().First().License,
+                                _response.OfType<IProvideDataFromIvid>().First().Engine)
                     }
             };
 
@@ -47,7 +53,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 
         public AudatexRequest AudatexRequest { get; private set; }
 
-       
+
     }
 
 }

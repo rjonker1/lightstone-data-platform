@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -34,33 +38,33 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public override void Observe()
         {
-            _initialize = new Initialize(new LaceResponse(), _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _monitoring, _buildSourceChain);
             _initialize.Execute();
         }
 
         [Observation]
         public void lace_data_providers_for_VVI_product_must_be_handled_loaded_correclty()
         {
-            _initialize.LaceResponses.Count.ShouldEqual(1);
-            _initialize.LaceResponses[0].Response.ShouldNotBeNull();
+            _initialize.DataProviderResponses.ShouldNotBeNull();
+            _initialize.DataProviderResponses.Count.ShouldEqual(6);
 
-            _initialize.LaceResponses[0].Response.IvidResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.IvidTitleHolderResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.RgtVinResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.RgtVinResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgtVin>().First().Handled.ShouldBeTrue();
 
-            //_initialize.LaceResponses[0].Response.RgtResponse.ShouldNotBeNull();
-            //_initialize.LaceResponses[0].Response.RgtResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromRgt>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.LightstoneResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.LightstoneResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
 
-            _initialize.LaceResponses[0].Response.AudatexResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.AudatexResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
 
         }
     }

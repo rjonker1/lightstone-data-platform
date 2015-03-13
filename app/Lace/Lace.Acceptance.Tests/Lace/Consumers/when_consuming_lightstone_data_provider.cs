@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -15,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private LightstoneDataProvider _consumer;
 
         public when_consuming_lightstone_data_provider()
@@ -34,13 +38,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void lightstone_consumer_must_be_handled()
         {
-            _response.LightstoneResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lightstone_response_from_consumer_must_not_be_null()
         {
-            _response.LightstoneResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
         }
     }
 }

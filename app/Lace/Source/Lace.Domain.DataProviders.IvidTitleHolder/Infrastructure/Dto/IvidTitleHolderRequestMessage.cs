@@ -1,4 +1,8 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
@@ -7,11 +11,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
     public class IvidTitleHolderRequestMessage
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
 
-        public IvidTitleHolderRequestMessage(ILaceRequest request, IProvideResponseFromLaceDataProviders response)
+        public IvidTitleHolderRequestMessage(ILaceRequest request, ICollection<IPointToLaceProvider> response)
         {
             _request = request;
             _response = response;
@@ -22,7 +26,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
         {
             get
             {
-                return _response.IvidResponseHandled.Handled && _response.IvidResponse != null;
+                return _response.OfType<IProvideDataFromIvid>().First() != null &&
+                       _response.OfType<IProvideDataFromIvid>().First().Handled;
             }
         }
 
@@ -38,7 +43,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
                 },
 
                 vin = CanContinue
-                    ? _response.IvidResponse.Vin
+                    ? _response.OfType<IProvideDataFromIvid>().First().Vin
                     : string.Empty
             };
         }

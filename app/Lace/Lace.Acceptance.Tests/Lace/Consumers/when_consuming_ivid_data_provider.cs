@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Ivid;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -15,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private IvidDataProvider _consumer;
 
 
@@ -23,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         {
             _monitoring = MonitoringBusBuilder.ForIvidCommands(Guid.NewGuid());
             _request = new LicensePlateNumberIvidOnlyRequest();
-            _response = new LaceResponse();
+            _response = new Collection<IPointToLaceProvider>();
         }
 
         public override void Observe()
@@ -36,13 +41,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void ivid_consumer_must_be_handled()
         {
-            _response.IvidResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvid>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void ivid_response_from_consumer_must_not_be_null()
         {
-            _response.IvidResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvid>().First().ShouldNotBeNull();
         }
 
         [Observation]

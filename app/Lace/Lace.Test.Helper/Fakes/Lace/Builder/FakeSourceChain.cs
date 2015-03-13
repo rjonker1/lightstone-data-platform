@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using PackageBuilder.Domain.Entities;
@@ -29,7 +31,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                     w => w.Key.Equals(_action.Name, StringComparison.CurrentCultureIgnoreCase)).Value;
         }
 
-        public Action<ILaceRequest, NServiceBus.IBus, IProvideResponseFromLaceDataProviders, Guid> SourceChain { get; private set; }
+        public Action<ILaceRequest, NServiceBus.IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; private set; }
 
 
     }

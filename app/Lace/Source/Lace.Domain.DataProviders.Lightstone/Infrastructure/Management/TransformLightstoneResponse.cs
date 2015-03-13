@@ -9,7 +9,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
     public class TransformLightstoneResponse : ITransformResponseFromDataProvider
     {
         public bool Continue { get; private set; }
-        public IProvideDataFromLightstone Result { get; private set; }
+        public IProvideDataFromLightstoneAuto Result { get; private set; }
         private readonly IRetrieveValuationFromMetrics _metricResponse;
         private readonly IRetrieveCarInformation _carInformation;
 
@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
             IRetrieveCarInformation carInformation)
         {
             Continue = metricResponse != null && metricResponse.IsSatisfied;
-            Result = Continue ? new LightstoneResponse() : null;
+            Result = Continue ? new LightstoneAutoResponse() : null;
 
             _metricResponse = metricResponse;
             _carInformation = carInformation;
@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure.Management
 
         public void Transform()
         {
-            Result = new LightstoneResponse(_carInformation.CarInformation.CarId, _carInformation.CarInformation.Year,
+            Result = new LightstoneAutoResponse(_carInformation.CarInformation.CarId, _carInformation.CarInformation.Year,
                 _carInformation.CarInformationRequest.Vin, _carInformation.CarInformation.ImageUrl,
                 _carInformation.CarInformation.Quarter,
                 _carInformation.CarInformation.CarFullname, _carInformation.CarInformation.CarModel,

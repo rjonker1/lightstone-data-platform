@@ -54,7 +54,7 @@ namespace Lace.Test.Helper.Builders.Requests
                     .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
                     .With(10d)
-                    .With(typeof(IProvideDataFromLightstone))
+                    .With(typeof(IProvideDataFromLightstoneAuto))
                     .Build();
             }
         }

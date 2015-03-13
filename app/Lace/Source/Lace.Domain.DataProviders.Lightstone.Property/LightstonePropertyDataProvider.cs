@@ -1,5 +1,8 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -24,7 +27,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneProperty, _request);
             if (!spec.IsSatisfied)
@@ -45,18 +48,18 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.LightstonePropertyResponse == null)
+                if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() || response.OfType<IProvideDataFromLightstoneProperty>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.LightstonePropertyResponse = null;
-            response.LightstonePropertyResponseHandled = new LightstonePropertyResponseHandled();
-            response.LightstonePropertyResponseHandled.HasNotBeenHandled();
+            var lightstonePropertyResponse = new LightstonePropertyResponse();
+            lightstonePropertyResponse.HasNotBeenHandled();
+            response.Add(lightstonePropertyResponse);
         }
     }
 }

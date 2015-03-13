@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
 
@@ -17,7 +18,7 @@ namespace Lace.Domain.DataProviders.Core.Consumer
             _externalWebSourceCall = externalSourceCall;
         }
 
-        public void ConsumeExternalSource(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void ConsumeExternalSource(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             _handleServiceCall
                 .Request(c =>

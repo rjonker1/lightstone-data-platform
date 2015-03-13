@@ -1,6 +1,9 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Test.Helper.Builders.Scans;
@@ -27,18 +30,18 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public override void Observe()
         {
-            _initialize = new Initialize(new LaceResponse(), _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _monitoring, _buildSourceChain);
             _initialize.Execute();
         }
 
         [Observation]
         public void lace_data_providers_for_drivers_license_decryption_should_loaded_correclty()
         {
-            _initialize.LaceResponses.Count.ShouldEqual(1);
-            _initialize.LaceResponses[0].Response.ShouldNotBeNull();
+            _initialize.DataProviderResponses.ShouldNotBeNull();
+            _initialize.DataProviderResponses.Count.ShouldEqual(1);
 
-            _initialize.LaceResponses[0].Response.SignioDriversLicenseDecryptionResponse.ShouldNotBeNull();
-            _initialize.LaceResponses[0].Response.SignioDriversLicenseDecryptionResponseHandled.Handled.ShouldBeTrue();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
+            _initialize.DataProviderResponses.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeTrue();
 
         }
     }

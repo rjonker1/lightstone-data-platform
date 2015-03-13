@@ -1,5 +1,8 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -25,7 +28,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         }
 
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneAuto, _request);
 
@@ -39,18 +42,18 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
                     new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),new FakeCarRepositioryFactory()));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
-                if (response.LightstoneResponse == null)
+                if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() || response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.LightstoneResponse = null;
-            response.LightstoneResponseHandled = new LightstoneResponseHandled();
-            response.LightstoneResponseHandled.HasNotBeenHandled();
+            var lightstoneResponseHandled = new LightstoneAutoResponse();
+            lightstoneResponseHandled.HasNotBeenHandled();
+            response.Add(lightstoneResponseHandled);
         }
     }
 }

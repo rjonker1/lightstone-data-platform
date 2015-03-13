@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
@@ -19,8 +20,6 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
     public class CallAnprDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private const DataProviderCommandSource Provider = DataProviderCommandSource.Anpr;
-
         private readonly ILaceRequest _request;
         private readonly ISetupCertificateRepository _repository;
         private IProvideCertificate _certificate;
@@ -33,7 +32,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -65,7 +64,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.RequestAggregation.AggregateId);
             if (transformer.Continue)
@@ -73,16 +72,15 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
                 transformer.Transform();
             }
 
-            response.AnprResponse = transformer.Result;
-            response.AnprResponseHandled = new AnprResponseHandled();
-            response.AnprResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
 
-        private static void AnprResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void AnprResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.AnprResponse = null;
-            response.AnprResponseHandled = new AnprResponseHandled();
-            response.AnprResponseHandled.HasBeenHandled();
+            var anprResponse = new AnprResponse();
+            anprResponse.HasBeenHandled();
+            response.Add(anprResponse);
         }
     }
 }

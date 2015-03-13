@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="Handlers\Requests.cs" />
     <Compile Include="Handlers\Responses.cs" />
+    <Compile Include="Handlers\Transactions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

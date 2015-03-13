@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
@@ -16,7 +20,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private RgtDataProvider _provider;
 
 
@@ -37,13 +41,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void rgt_consumer_must_be_handled()
         {
-            _response.RgtResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromRgt>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void rgt_response_from_consumer_must_not_be_null()
         {
-            _response.RgtResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromRgt>().First().ShouldNotBeNull();
         }
 
         [Observation]

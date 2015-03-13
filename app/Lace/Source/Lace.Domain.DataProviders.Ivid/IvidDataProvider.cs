@@ -1,5 +1,9 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -15,14 +19,15 @@ namespace Lace.Domain.DataProviders.Ivid
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public IvidDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
+        public IvidDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
             _request = request;
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Ivid, _request);
 
@@ -40,19 +45,19 @@ namespace Lace.Domain.DataProviders.Ivid
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.IvidResponse == null)
-                    CallFallbackSource(response, _monitoring);
+               if(!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
+                   CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.IvidResponse = null;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasNotBeenHandled();
+            var ividResponse = new IvidResponse();
+            ividResponse.HasNotBeenHandled();
+            response.Add(ividResponse);
         }
     }
 }

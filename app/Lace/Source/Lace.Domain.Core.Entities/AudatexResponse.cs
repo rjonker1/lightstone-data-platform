@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 
 namespace Lace.Domain.Core.Entities
 {
+    [DataContract]
     public class AudatexResponse : IProvideDataFromAudatex
     {
+        public AudatexResponse()
+        {
+            
+        }
+
+        [DataMember]
         public string TypeName
         {
             get
@@ -14,6 +22,8 @@ namespace Lace.Domain.Core.Entities
                 return GetType().Name;
             }
         }
+
+        [DataMember]
         public Type Type
         {
             get
@@ -22,13 +32,28 @@ namespace Lace.Domain.Core.Entities
             }
         }
 
+        [DataMember]
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
+        }
+
         public AudatexResponse(IList<IProvideAccidentClaim> accidentClaims)
         {
             AccidentClaims = accidentClaims;
         }
 
+        [DataMember]
         public IList<IProvideAccidentClaim> AccidentClaims { get; private set; }
 
+        [DataMember]
         public bool HasAccidentClaims { get; private set; }
 
         public string QuoteValueIndicatorNote

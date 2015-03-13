@@ -1,4 +1,6 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
@@ -12,7 +14,7 @@ namespace Lace.Unit.Tests.Transform
     {
         private readonly GetDataResult _audatexWebServiceResponse;
         private TransformAudatexResponse _transformer;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ILaceRequest _request;
 
 

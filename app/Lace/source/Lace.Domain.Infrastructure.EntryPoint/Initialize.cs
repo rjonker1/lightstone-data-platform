@@ -1,33 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Logging;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using NServiceBus;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
     public class Initialize : IBootstrap
     {
-        public IList<LaceExternalSourceResponse> LaceResponses { get; private set; }
+        public ICollection<IPointToLaceProvider> DataProviderResponses { get; private set; }
         private readonly ILog _log;
         private readonly ILaceRequest _request;
-
-        private readonly IProvideResponseFromLaceDataProviders _response;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         private readonly IBus _bus;
 
-        public Initialize(IProvideResponseFromLaceDataProviders response, ILaceRequest request, IBus bus,
+        public Initialize(ICollection<IPointToLaceProvider> responses, ILaceRequest request, IBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
             _bus = bus;
-            _response = response;
+            DataProviderResponses = responses;
             _buildSourceChain = buildSourceChain;
         }
 
@@ -40,12 +37,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 throw new Exception("Source Chain cannot be null");
             }
 
-            _buildSourceChain.SourceChain(_request, _bus, _response, _request.RequestAggregation.AggregateId);
-
-            LaceResponses = new List<LaceExternalSourceResponse>()
-            {
-                new LaceExternalSourceResponse() {Response = _response}
-            };
+            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses, _request.RequestAggregation.AggregateId);
         }
     }
 }

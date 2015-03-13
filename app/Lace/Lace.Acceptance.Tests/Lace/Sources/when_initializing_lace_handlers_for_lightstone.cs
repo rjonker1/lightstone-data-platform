@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone;
@@ -15,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_lightstone : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
@@ -35,13 +39,13 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void lace_rgt_response_should_be_handled()
         {
-            _response.LightstoneResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_rgt_response_should_not_be_null()
         {
-            _response.LightstoneResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
         }
     }
 }

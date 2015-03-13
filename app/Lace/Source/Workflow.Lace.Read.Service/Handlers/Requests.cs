@@ -2,11 +2,9 @@
 using DataPlatform.Shared.Identifiers;
 using NServiceBus;
 using Workflow.Lace.Domain;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Events;
 using Workflow.Lace.Repository;
-using DataProviderConnectionTypeIdentifier = Workflow.Lace.Identifiers.DataProviderConnectionTypeIdentifier;
-using DataProviderIdentifier = Workflow.Lace.Identifiers.DataProviderIdentifier;
-using DataProviderRequestIdentifier = Workflow.Lace.Identifiers.DataProviderRequestIdentifier;
 
 namespace Workflow.Lace.Read.Service.Handlers
 {
