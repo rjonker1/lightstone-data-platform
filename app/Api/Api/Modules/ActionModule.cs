@@ -94,7 +94,7 @@ namespace Api.Modules
                 //    throw new Exception("Could not get package for contract");
 
                 //TODO: Need to remove hardcoded package id - Just for testing and until multiple packages per user is sorted out
-                var packageid = new Guid("42B098E7-3E90-410D-8702-FED0A16897CE");
+                var packageid = new Guid("936867FA-D9F4-4E9C-9D62-6B7B48FAC974");
 
                 //var jsonPackage = packageBuilderApi.Get(token, "Packages/DataProvider/ForPropertySearch/" + packageDetails.PackageId);
                 var jsonPackage = packageBuilderApi.Get(token, "Packages/DataProvider/ForPropertySearch/" + packageid);
