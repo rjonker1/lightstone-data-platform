@@ -15,7 +15,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Management
         public TransformIvidResponse(HpiStandardQueryResponse response)
         {
             Continue = response != null;
-            Result = Continue ? new IvidResponse() : null;
+            Result = new IvidResponse();
             Message = response;
         }
 

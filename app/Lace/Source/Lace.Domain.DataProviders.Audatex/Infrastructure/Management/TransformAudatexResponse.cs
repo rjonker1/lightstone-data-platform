@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
             ILaceRequest request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
-            Result = Continue ? new AudatexResponse(new List<IProvideAccidentClaim>()) : null;
+            Result = new AudatexResponse(new List<IProvideAccidentClaim>());
             Message = audatexResponse;
 
             _response = response;
@@ -83,7 +83,8 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 
         private string GetManufacturer()
         {
-            if (_response.OfType<IProvideDataFromRgt>().First() == null)
+            if (!_response.OfType<IProvideDataFromRgt>().Any() ||
+                _response.OfType<IProvideDataFromRgt>().First() == null)
                 return GetManufacturerFromRgtVin() ?? string.Empty;
 
             return _response.OfType<IProvideDataFromRgt>().First().Manufacturer ?? string.Empty;
@@ -91,14 +92,16 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 
         private string GetManufacturerFromRgtVin()
         {
-            if (_response.OfType<IProvideDataFromRgtVin>().First() == null) return null;
+            if (!_response.OfType<IProvideDataFromRgtVin>().Any() ||
+                _response.OfType<IProvideDataFromRgtVin>().First() == null) return null;
 
             return _response.OfType<IProvideDataFromRgtVin>().First().VehicleMake ?? string.Empty;
         }
 
         private int GetYear()
         {
-            if (_response.OfType<IProvideDataFromLightstoneAuto>().First() == null) return 1900;
+            if (!_response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
+                _response.OfType<IProvideDataFromLightstoneAuto>().First() == null) return 1900;
 
             return _response.OfType<IProvideDataFromLightstoneAuto>().First().Year ?? 1900;
         }

@@ -48,7 +48,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
 
                 _monitoring.End(response, stopWatch);
 
-                if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
+                if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() || response.OfType<IProvideDataFromLightstoneProperty>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 

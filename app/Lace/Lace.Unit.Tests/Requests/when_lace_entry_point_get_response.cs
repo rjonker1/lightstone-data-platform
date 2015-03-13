@@ -35,7 +35,7 @@ namespace Lace.Unit.Tests.Requests
         [Observation]
         public void lace_entry_point_get_response_must_be_availble()
         {
-            _response.Count.ShouldEqual(1);
+            _response.Count.ShouldEqual(6);
         }
         
     }

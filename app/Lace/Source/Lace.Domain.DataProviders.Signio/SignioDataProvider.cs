@@ -47,7 +47,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
                 _monitoring.End(response, stopWatch);
 
                 if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() ||
-                    response.OfType<IProvideDataFromIvid>().First() == null)
+                    response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 

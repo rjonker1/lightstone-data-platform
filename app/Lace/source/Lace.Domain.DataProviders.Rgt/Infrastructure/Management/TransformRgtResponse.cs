@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure.Management
         {
             Continue = carSpecifications != null && carSpecifications.Any();
             _carSpecification = Continue ? carSpecifications.FirstOrDefault() : new CarSpecification();
-            Result = Continue ? new RgtResponse() : null;
+            Result = Continue ? null : new RgtResponse();
         }
 
         public void Transform()
