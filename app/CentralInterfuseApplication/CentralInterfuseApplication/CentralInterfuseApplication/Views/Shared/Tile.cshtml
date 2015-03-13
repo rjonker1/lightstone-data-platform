@@ -1,0 +1,16 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<CentralInterfuseApplication.ViewModels.SystemViewModel>
+
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-@Model.Colour">
+            <div class="inner">
+                <h3>@Model.Name</h3>
+                @*<p>@Model.Description</p>*@
+                <br /><br /><br /><br /><br />
+            </div>
+            <div class="icon">
+                <i class="@Model.Icon"></i>
+            </div>
+            <a class="small-box-footer" href="@Model.Url">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div><!-- ./col -->
