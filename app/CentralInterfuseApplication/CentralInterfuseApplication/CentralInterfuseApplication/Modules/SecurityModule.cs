@@ -1,10 +1,11 @@
 ﻿using Nancy;
+using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace CentralInterfuseApplication.Modules
 {
     public class SecurityModule : NancyModule
     {
-        public SecurityModule()
+        public SecurityModule(IUserManagementApiClient client)
         {
             Get["/login"] = parameters =>
             {
@@ -23,9 +24,9 @@ namespace CentralInterfuseApplication.Modules
 
             Post["/login"] = parameters =>
             {
-                // Called when the user submits the contents of the login form. Should
-                // validate the user based on the posted form data, and perform one of the
-                // Login actions (see below)
+                //client.Post<ApiUser>("", "/login", )
+
+
                 return null;
             };
         }

@@ -9,8 +9,8 @@ namespace Shared.BuildingBlocks.Api.ApiClients
     {
         string Get(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers);
         string Post(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers);
-        T Get<T>(string token, string resource = "", object body = null) where T : new();
-        T Post<T>(string token, string resource = "", object body = null) where T : new();
+        T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new();
+        T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -27,19 +27,19 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
-        private T Data<T>(string token, string resource, object body, Method method = Method.GET) where T : new()
+        private T Data<T>(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers) where T : new()
         {
             var request = RestRequest(resource, token, body, method);
 
             return _client.Execute<T>(request).Data;
         }
 
-        public T Get<T>(string token, string resource = "", object body = null) where T : new()
+        public T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
             return Data<T>(token, resource, body);
         }
 
-        public T Post<T>(string token, string resource = "", object body = null) where T : new()
+        public T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
             return Data<T>(token, resource, body, Method.POST);
         }
