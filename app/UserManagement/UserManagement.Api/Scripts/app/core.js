@@ -46,14 +46,14 @@
 ; (function ($, UserManagement) {
   "use strict";
   UserManagement.panelBodyCollapse = function () {
-    var $collapseButton = $('.collapse-box'),
-      $collapsedPanelBody = $collapseButton.closest('.box').children('.body');
+      var $collapseButton = $('.collapse-box'),
+          $collapsedPanelBody = $collapseButton.closest('.box').children(".box-body, .box-footer");
 
-      //$collapsedPanelBody.collapse('show'); // collapse on render
+      $collapsedPanelBody.collapse('show'); // collapse on render
 
     $collapseButton.on(UserManagement.buttonPressedEvent, function (e) {
-      var $collapsePanelBody = $(this).closest('.box').children('.body'),
-        $toggleButtonImage = $(this).children('i');
+        var $collapsePanelBody = $(this).closest('.box').children(".box-body, .box-footer"),
+            $toggleButtonImage = $(this).children('i');
       $collapsePanelBody.on('show.bs.collapse', function() {
         $toggleButtonImage.removeClass('fa-minus fa-plus').addClass('fa-spinner fa-spin');
       });
