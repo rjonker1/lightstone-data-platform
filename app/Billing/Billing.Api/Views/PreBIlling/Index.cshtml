@@ -38,6 +38,9 @@
             </tr>
         </thead>
     </table>
+    
+    <table id="table"></table>
+
 </div>
 <script>
     var table = $("#preBilling_table").dataTable({
@@ -69,6 +72,47 @@
     });
 
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/PreBilling/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    $('#table').bootstrapTable({
+        url: '/PreBilling',
+        columns: [{
+            field: 'id',
+            title: 'Item ID'
+        }, {
+            field: 'customerName',
+            title: 'Customer Name'
+        }, {
+            field: 'numUsers',
+            title: '# Users'
+        }, {
+            field: 'type',
+            title: 'User Type'
+        }, {
+            field: 'owner',
+            title: 'Owner'
+        }, {
+            field: 'numProducts',
+            title: '# Products'
+        }, {
+            field: 'numTransactions',
+            title: '# Transactions'
+        }, {
+            field: 'userType',
+            title: 'User Type'
+        }, {
+            field: 'total',
+            title: 'Total'
+        }]
+        //data: [{
+        //    id: 1,
+        //    name: 'Item 1',
+        //    price: '$1'
+        //}, {
+        //    id: 2,
+        //    name: 'Item 2',
+        //    price: '$2'
+        //}]
+    });
 
     Billing.overrideDataTablesStyling();
 </script>
