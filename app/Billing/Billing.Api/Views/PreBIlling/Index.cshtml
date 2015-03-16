@@ -1,0 +1,74 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Pre Billing", ""))
+
+<div class="box">
+    <table id="preBilling_table" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Customer Name
+                </th>
+                <th>
+                    # Users
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Owner
+                </th>
+                <th>
+                    # Products
+                </th>
+                <th>
+                    # Tx
+                </th>
+                <th>
+                    New / Existing
+                </th>
+                <th>
+                    Total (excl VAT.)
+                </th>
+                <th>
+                    <i id="ctActionIcon" class="fa fa-bolt"></i>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<script>
+    var table = $("#preBilling_table").dataTable({
+        dom: '<"box-header"f>t<"box-footer"lip>r',
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        processing: true,
+        serverSide: true,
+        ajax: { url: "/PreBilling/", type: "POST"},
+        columns: [
+            { data: "id", visible: false },
+            { data: "customerName" },
+            { data: "numUsers" },
+            { data: "type" },
+            { data: "owner" },
+            { data: "numProducts" },
+            { data: "numTransactions" },
+            { data: "userType" },
+            { data: "total" },
+            {
+                data: null,
+                render: function (data, type, full, meta) {
+                    return '<div class="row">' +
+                        '<div class="col-lg-2"><a class="btn btn-primary entity-edit" href="#/PreBilling/' + data.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/PreBilling/Delete/' + data.id + '">Delete</a></div>' +
+                        '</div>';
+                }
+            }
+        ]
+    });
+
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/PreBilling/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    Billing.overrideDataTablesStyling();
+</script>

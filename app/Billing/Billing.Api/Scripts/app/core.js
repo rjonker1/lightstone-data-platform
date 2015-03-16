@@ -40,18 +40,18 @@
             return client;
     };
 
-    // Creates a UserManagement object.
-    window.UserManagement = new Billing();
+    // Creates a Billing object.
+    window.Billing = new Billing();
 })(this);
-; (function ($, UserManagement) {
+; (function ($, Billing) {
     "use strict";
-    UserManagement.panelBodyCollapse = function () {
+    Billing.panelBodyCollapse = function () {
         var $collapseButton = $('.collapse-box'),
             $collapsedPanelBody = $collapseButton.closest('.box').children(".box-body, .box-footer");
 
         $collapsedPanelBody.collapse('show'); // collapse on render
 
-        $collapseButton.on(UserManagement.buttonPressedEvent, function (e) {
+        $collapseButton.on(Billing.buttonPressedEvent, function (e) {
             var $collapsePanelBody = $(this).closest('.box').children(".box-body, .box-footer"),
                 $toggleButtonImage = $(this).children('i');
             $collapsePanelBody.on('show.bs.collapse', function () {
@@ -74,18 +74,18 @@
             e.preventDefault();
         });
     };
-    UserManagement.boxHiding = function () {
-        $('.close-box').on(UserManagement.buttonPressedEvent, function () {
+    Billing.boxHiding = function () {
+        $('.close-box').on(Billing.buttonPressedEvent, function () {
             $(this).closest('.box').hide('slow');
         });
     };
 
-    return UserManagement;
-})(jQuery, UserManagement || {});
+    return Billing;
+})(jQuery, Billing || {});
 
-; (function ($, UserManagement) {
+; (function ($, Billing) {
     "use strict";
-    UserManagement.overrideDataTablesStyling = function () {
+    Billing.overrideDataTablesStyling = function () {
         var $footer = $(".box-footer");
         $footer.css("min-height", "60px");
         $footer.css("border-top", "none");
@@ -123,12 +123,5 @@
         $paging.addClass("pull-right");
     };
 
-    return UserManagement;
-})(jQuery, UserManagement || {});
-
-//;(function($) {
-//   $(document).ready(function() {
-//       UserManagement.panelBodyCollapse();
-//       UserManagement.boxHiding();
-//  });
-//})(jQuery);
+    return Billing;
+})(jQuery, Billing || {});

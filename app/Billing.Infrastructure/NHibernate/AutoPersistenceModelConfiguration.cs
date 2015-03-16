@@ -1,6 +1,9 @@
 ﻿using System;
+using Billing.Domain.Core.Entities;
+using Billing.Domain.Core.NHibernate;
+using Billing.Domain.Entities;
+using Billing.Infrastructure.NHibernate.Conventions;
 using FluentNHibernate.Automapping;
-using FluentNHibernate.Data;
 
 namespace Billing.Infrastructure.NHibernate
 {
@@ -13,14 +16,11 @@ namespace Billing.Infrastructure.NHibernate
 
         public AutoPersistenceModel GetAutoPersistenceModel()
         {
-            //return AutoMap.AssemblyOf<User>(this)
-            //    //.Where(type => type.IsSubclassOf(typeof (Entity)))
-            //    .IncludeBase<NamedEntity>() //todo: need to store duplicated Name column in NamedEntity
-            //    .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
-            //    .UseOverridesFromAssemblyOf<UserMappingOverride>()
-            //    .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));
-
-            return null;
+            return AutoMap.AssemblyOf<PreBilling>(this)
+                //.Where(type => type.IsSubclassOf(typeof (Entity)))
+                //.IncludeBase<NamedEntity>()
+                .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
+                .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));
         }
     }
 }

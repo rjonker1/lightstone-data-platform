@@ -258,7 +258,9 @@
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="hibernate.cfg.xml" />
+    <Content Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\DataTables-1.10.4\css\dataTables.responsive.scss" />
@@ -298,6 +300,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\DataTables-1.10.4\jquery.dataTables.min.js.map">
+      <DependentUpon>jquery.dataTables.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\core.js" />
@@ -471,11 +476,14 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
+    <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Modules\PreBillingModule.cs" />
     <Compile Include="Modules\Foo.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
     <Compile Include="Modules\Transaction.cs" />
+    <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -485,7 +493,6 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="connectionStrings.config" />
     <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -494,6 +501,7 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\PageHeader.cshtml" />
     <Content Include="Views\Shared\Sidebar.cshtml" />
+    <Content Include="Views\PreBIlling\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -502,6 +510,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Billing.Domain.Core\Billing.Domain.Core.csproj">
+      <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
+      <Name>Billing.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
+      <Project>{8888cf49-7dcf-4984-a710-d2660f2cdbed}</Project>
+      <Name>Billing.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Billing.Infrastructure\Billing.Infrastructure.csproj">
       <Project>{1fb58a9a-5e4e-48c2-82da-22694acc31cc}</Project>
       <Name>Billing.Infrastructure</Name>

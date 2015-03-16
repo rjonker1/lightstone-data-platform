@@ -32,7 +32,7 @@ namespace Billing.Api
 
             container.Install(
                 new NHibernateInstaller(),
-                //new RepositoryInstaller(),
+                new RepositoryInstaller(),
                 //new CommandInstaller(),
                 new BusInstaller()
                 //new ServiceLocatorInstaller(),
@@ -83,11 +83,6 @@ namespace Billing.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
         }
-
-
-
-
-
 
 
         //Default setup
