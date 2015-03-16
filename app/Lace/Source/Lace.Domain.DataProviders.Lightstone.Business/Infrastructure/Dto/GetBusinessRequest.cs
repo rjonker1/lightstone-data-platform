@@ -30,6 +30,21 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
         }
 
 
+        public string UserToken { get; private set; }
+
+       
+        public string CompanyName { get; private set; }
+
+       
+        public string CompanyRegnum { get; private set; }
+
+       
+        public string CompanyVatnumber { get; private set; }
+
+
+
       
     }
+
+   
 }

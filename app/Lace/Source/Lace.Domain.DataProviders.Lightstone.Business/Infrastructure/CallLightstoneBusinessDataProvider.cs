@@ -4,7 +4,9 @@ using System.Data;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders.Business;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration;
@@ -41,6 +43,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 if (client.Proxy.State == CommunicationState.Closed)
                     client.Proxy.Open();
 
+
+                // 
                 var request = new GetBusinessRequest(_request)
                     .Map()
                     .Validate();
@@ -52,11 +56,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                     throw new Exception(
                         string.Format(
                             "Minimum requirements for Lightstone Business request has not been met with user_token {0} ",
-                            request., request.IdCkOfOwner, request.MaxRowsToReturn, request.TrackingNumber));
+                            request.UserToken));
 
                 monitoring.StartCall(request, _stopWatch);
 
-                _result = client.Proxy.returnCompanies(request.email, request.password);
+                //TODO: call authenticateUser to get the UserToke by email and password
+
+                _result = client.Proxy.returnCompanies(request.UserToken, request.CompanyName,request.CompanyRegnum, request.CompanyVatnumber);
 
                 client.CloseSource();
 
@@ -91,7 +97,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
             }
 
             monitoring.Send(CommandType.Transformation,
-                transformer.Result ?? new LightstoneBusinessResponse(new List<BusinessModel>()), transformer);
+                transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), transformer);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);
