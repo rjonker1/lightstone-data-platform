@@ -13,25 +13,25 @@ namespace Lace.Domain.Core.Entities
         }
 
 
-        public ReturnCompaniesRequest(string userToken, string companyname, string companyregnum, string companyvatnumber)
+        public ReturnCompaniesRequest(string userToken, string companyName, string companyRegnum, string companyVatNumber)
         {
-            user_token = userToken;
-            company_name = companyname;
-            company_regnum = companyregnum;
-            company_vatnumber = companyvatnumber;
+            UserToken = userToken;
+            CompanyName = companyName;
+            CompanyRegnum = companyRegnum;
+            CompanyVatnumber = companyVatNumber;
         }
 
         [DataMember]
-        public string user_token { get; private set; }
+        public string UserToken { get; private set; }
 
         [DataMember]
-        public string company_name { get; private set; }
+        public string CompanyName { get; private set; }
 
         [DataMember]
-        public string company_regnum { get; private set; }
+        public string CompanyRegnum { get; private set; }
 
         [DataMember]
-        public string company_vatnumber { get; private set; }
+        public string CompanyVatnumber { get; private set; }
         
     }
 
