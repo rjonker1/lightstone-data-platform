@@ -54,6 +54,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                         new LightstonePropertyDataProvider(request, null, null,
                             new SendLightstonePropertyCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
+        // TODO: Lightstone Business
+
 
         private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =

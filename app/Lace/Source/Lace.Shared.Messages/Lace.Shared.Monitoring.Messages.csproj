@@ -78,6 +78,7 @@
     <Compile Include="Commands\CommandDto.cs" />
     <Compile Include="Commands\AudatexCommands.cs" />
     <Compile Include="Commands\CrossCuttingCommands.cs" />
+    <Compile Include="Commands\LightstoneBusinessCommands.cs" />
     <Compile Include="Commands\PCubedCommands.cs" />
     <Compile Include="Commands\LightstonePropertyCommands.cs" />
     <Compile Include="Commands\SignioCommands.cs" />

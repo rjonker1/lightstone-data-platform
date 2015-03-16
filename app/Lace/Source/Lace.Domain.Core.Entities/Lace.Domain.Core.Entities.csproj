@@ -72,6 +72,8 @@
     <Compile Include="IvidResponseHandled.cs" />
     <Compile Include="IvidTitleHolderResponse.cs" />
     <Compile Include="JisResponse.cs" />
+    <Compile Include="LightstoneBusinessResponse.cs" />
+    <Compile Include="LightstoneBusinessModels.cs" />
     <Compile Include="LightstoneResponse.cs" />
     <Compile Include="LightstonePropertyModels.cs" />
     <Compile Include="Pair.cs" />

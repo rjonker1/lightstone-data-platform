@@ -26,5 +26,9 @@ namespace Lace.Domain.Core.Requests.Contracts
         IPackage Package { get; }
 
         IProvidePropertyInformationForRequest Property { get; }
+
+        //TODO:
+
+       // IProvideBusinessInformationForRequest Business { get; }
     }
 }
