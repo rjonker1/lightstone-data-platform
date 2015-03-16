@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Workflow.Billing.Repository
 {
-    internal abstract class TypeMapper
+    public abstract class TypeMapper
     {
         protected abstract string TableName { get; }
         protected abstract IEnumerable<string> FieldNames { get; }

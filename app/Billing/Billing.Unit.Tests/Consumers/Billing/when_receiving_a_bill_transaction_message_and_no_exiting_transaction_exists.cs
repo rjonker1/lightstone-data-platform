@@ -1,7 +1,6 @@
 ﻿using System;
 using Billing.TestHelper.Mothers.BillTransactionMessages;
 using Moq;
-using Workflow.Billing;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Domain;
 using Workflow.Billing.Messages;

@@ -88,6 +88,7 @@
     <Compile Include="IBillingService.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
+    <Compile Include="Installers\MappingInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -123,6 +124,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Workflow.Billing.Consumers\Workflow.Billing.Consumers.csproj">
+      <Project>{7ba3ebc5-1b9c-44bd-848a-c8d15c25a216}</Project>
+      <Name>Workflow.Billing.Consumers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{ea4e1ff1-8581-4680-aa28-126294163093}</Project>
       <Name>Workflow.Billing.Messages</Name>

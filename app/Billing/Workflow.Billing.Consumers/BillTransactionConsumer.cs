@@ -8,33 +8,33 @@ namespace Workflow.Billing.Consumers
 {
     public class BillTransactionConsumer : IConsume<BillTransactionMessage>
     {
-        private static readonly ILog log = LogManager.GetLogger<BillTransactionConsumer>();
-        private readonly IRepository repository;
+        private static readonly ILog _log = LogManager.GetLogger<BillTransactionConsumer>();
+        private readonly IRepository _repository;
 
         public BillTransactionConsumer(IRepository repository)
         {
-            this.repository = repository;
+            this._repository = repository;
         }
 
         public void Consume(BillTransactionMessage message)
         {
             if (!ShouldCreateTransaction(message))
             {
-                log.WarnFormat("Not creating a new transaction for message with transaction Id {0}", message.TransactionId);
+                _log.WarnFormat("Not creating a new transaction for message with transaction Id {0}", message.TransactionId);
                 return;
             }
 
             var transaction = new InvoiceTransaction(message.TransactionId, message.TransactionDate, 
                 message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier);
 
-            repository.Add(transaction);
+            _repository.Add(transaction);
 
-            log.InfoFormat("Transaction {0} was created", message.TransactionId);
+            _log.InfoFormat("Transaction {0} was created", message.TransactionId);
         }
 
         private bool ShouldCreateTransaction(BillTransactionMessage message)
         {
-            var match = repository.Get<InvoiceTransaction>(message.TransactionId);
+            var match = _repository.Get<InvoiceTransaction>(message.TransactionId);
 
             return match == null;
         }

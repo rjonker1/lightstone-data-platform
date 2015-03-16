@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using Workflow.Billing.Domain;
 
 namespace Workflow.Billing.Repository
 {
-    internal class RepositoryMapper
+    public class RepositoryMapper : IRepositoryMapper
     {
-        private readonly Dictionary<Type, TypeMapper> mappings = new Dictionary<Type, TypeMapper>();
+        private readonly IHaveTypeMappings _mappings;
 
-        public RepositoryMapper()
+        public RepositoryMapper(IHaveTypeMappings mappings)
         {
-            mappings = new Dictionary<Type, TypeMapper>()
-            {
-                {typeof (InvoiceTransaction), new TransactionTypeMapper()} //,
-                //{typeof (InvoiceResponse), new ResponseTypeMapper()}
-            };
+            _mappings = mappings;
         }
 
         public TypeMapper GetMapping(Type type)
         {
-            if (!mappings.ContainsKey(type))
+            if (!_mappings.Mappings.ContainsKey(type))
                 throw new Exception(string.Format("Could not find a mapping for type {0}", type));
 
-            return mappings[type];
+            return _mappings.Mappings[type];
         }
 
         public TypeMapper GetMapping<TType>(TType instance)

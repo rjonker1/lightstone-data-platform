@@ -144,6 +144,24 @@
       </dependencies>
     </nuget>
 
+    <nuget deploy="false">
+        <name>Lightstone.DataPlatform.Workflow.Billing</name>
+        <folder>app/Billing/Workflow.Billing</folder>
+        <author>CustomApp</author>
+        <description>Workflow.Billing</description>
+        <includes>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.dll" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.pdb" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Newtonsoft.Json" version="6.0.5" />
+      </dependencies>
+    </nuget>
+
 
 
 
