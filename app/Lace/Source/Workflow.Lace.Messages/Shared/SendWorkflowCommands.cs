@@ -21,7 +21,7 @@ namespace Workflow.Lace.Messages.Shared
             _publisher = new WorkflowCommandPublisher(bus, _log);
         }
 
-        public void SendRequestToDataProvider(DataProviderCommandSource dataProvider,
+        public void RequestToDataProvider(DataProviderCommandSource dataProvider,
             string connectionType,
             string connection, DateTime date, DataProviderAction action, DataProviderState state)
         {
@@ -30,7 +30,7 @@ namespace Workflow.Lace.Messages.Shared
         }
 
 
-        public void ReceiveResponseFromDataProvider(DataProviderCommandSource dataProvider, string connectionType,
+        public void ResponseFromDataProvider(DataProviderCommandSource dataProvider, string connectionType,
             string connection,
             DateTime date, DataProviderAction action, DataProviderState state)
         {
@@ -38,6 +38,13 @@ namespace Workflow.Lace.Messages.Shared
                 connectionType, state, action).SendToBus(
                     _publisher,
                     _log);
+        }
+
+        public void CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+            Guid contractId, string system, long contractVersion, DataProviderState state)
+        {
+            new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, date, userId, requestId, contractId,
+                system, contractVersion, state).SendToBus(_publisher, _log);
         }
     }
 }

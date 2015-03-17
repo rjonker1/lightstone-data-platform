@@ -4,6 +4,7 @@ using CommonDomain;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
+using Workflow.Billing.Messages;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
 
@@ -18,7 +19,7 @@ namespace Workflow.Lace.Domain.Aggregates
             Id = id;
             Register<RequestToDataProvider>(e => e.Id = id);
             Register<ResponseFromDataProvider>(e => e.Id = id);
-            Register<TransactionCreated>(e => e.Id = id);
+            Register<BillTransactionMessage>(e => e.TransactionId = id);
         }
 
         public Request(Guid requestId, DataProviderCommandSource dataProvider,
@@ -76,7 +77,7 @@ namespace Workflow.Lace.Domain.Aggregates
             ContractVersion = contractVersion;
             State = state;
 
-            RaiseEvent(new TransactionCreated(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
+            RaiseEvent(new BillTransactionMessage(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
                 new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date, id, new StateIdentifier((int)state, state.ToString())));
         }
 
