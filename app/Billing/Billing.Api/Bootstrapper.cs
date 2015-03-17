@@ -34,9 +34,9 @@ namespace Billing.Api
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
                 //new CommandInstaller(),
-                new BusInstaller()
+                new BusInstaller(),
                 //new ServiceLocatorInstaller(),
-                //new AutoMapperInstaller(),
+                new AutoMapperInstaller()
                 //new HelperInstaller(),
                 //new ApiClientInstaller(),
                 //new RedisInstaller(),

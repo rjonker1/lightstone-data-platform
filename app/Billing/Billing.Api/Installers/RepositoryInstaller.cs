@@ -1,4 +1,5 @@
-﻿using Billing.Domain.Core.Repositories;
+﻿using Billing.Api.Modules;
+using Billing.Domain.Core.Repositories;
 using Billing.Infrastructure.Repositories;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -16,6 +17,7 @@ namespace Billing.Api.Installers
             container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
 
             container.Register(Classes.FromAssemblyContaining<IPreBillingRepository>().BasedOn(typeof(IRepository<>)).WithServiceAllInterfaces().LifestyleTransient());
+            container.Register(Classes.FromAssemblyContaining<IServerPageRepo>().BasedOn(typeof(IRepository<>)).WithServiceAllInterfaces().LifestyleTransient());
 
             this.Info(() => "Successfully installed RepositoryInstaller");
         }
