@@ -5,15 +5,14 @@ namespace Workflow.Lace.Messages.Core
 {
     public interface ISendWorkflowCommandsToBus
     {
-        void ReceiveRequest(DataProviderCommandSource dataProvider, DateTime date);
+        void RequestToDataProvider(DataProviderCommandSource dataProvider, string connectionType, string connection,
+            DateTime date, DataProviderAction action, DataProviderState state);
 
-        void SendRequestToDataProvider(DataProviderCommandSource dataProvider, dynamic payload,
-            string connectionType, string connection, DateTime date);
+        void ResponseFromDataProvider(DataProviderCommandSource dataProvider, string connectionType, string connection,
+            DateTime date, DataProviderAction action, DataProviderState state);
 
-        void ReceiveResponseFromDataProvider(DataProviderCommandSource dataProvider, dynamic payload,
-            DateTime date);
-
-        void ReturnResponse(DataProviderCommandSource dataProvider, DateTime date, dynamic payload);
+        void CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+            Guid contractId, string system, long contractVersion, DataProviderState state);
 
     }
 }

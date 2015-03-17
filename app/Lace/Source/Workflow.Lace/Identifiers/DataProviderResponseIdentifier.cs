@@ -8,7 +8,7 @@ namespace Workflow.Lace.Identifiers
             
         }
 
-        public DataProviderResponseIdentifier(Guid id, Guid streamId, DateTime date, DataProviderRequestIdentifier request)
+        public DataProviderResponseIdentifier(Guid id, Guid streamId, DateTime date, DataProviderTransactionIdentifier request)
         {
             Id = id;
             StreamId = streamId;
@@ -19,6 +19,6 @@ namespace Workflow.Lace.Identifiers
         public Guid Id { get; set; }
         public Guid StreamId { get; private set; }
         public DateTime Date { get; private set; }
-        public DataProviderRequestIdentifier Request { get; set; }
+        public DataProviderTransactionIdentifier Request { get; set; }
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Workflow.Lace.Database.Migrations
 {
-    [Migration(201502271647)]
-    public class Create_Data_Provider_Request_Table : Migration
+    [Migration(201502271652)]
+    public class Create_Data_Provider_Transaction_Table : Migration
     {
         public override void Up()
         {
-            Create.Table("DataProviderRequests")
+            Create.Table("DataProviderTransaction")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("StreamId").AsGuid().NotNullable()
                 .WithColumn("Date").AsDateTime().NotNullable()
@@ -15,12 +15,14 @@ namespace Workflow.Lace.Database.Migrations
                 .WithColumn("DataProvider").AsInt32().NotNullable()
                 .WithColumn("DataProviderName").AsString().NotNullable()
                 .WithColumn("ConnectionType").AsString().NotNullable()
-                .WithColumn("Connection").AsString().NotNullable();
+                .WithColumn("Connection").AsString().NotNullable()
+                .WithColumn("Action").AsString().NotNullable()
+                .WithColumn("State").AsString().NotNullable();
         }
 
         public override void Down()
         {
-            Delete.Table("DataProviderRequests");
+            Delete.Table("DataProviderTransaction");
         }
     }
 }

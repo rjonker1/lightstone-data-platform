@@ -1,5 +1,6 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
+using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Builders.Buses
@@ -20,29 +21,28 @@ namespace Lace.Test.Helper.Builders.Buses
             return this;
         }
 
-        public WorkflowQueueSender ReceiveRequest(DateTime date)
+
+        public WorkflowQueueSender SendRequestToDataProvider(DateTime date, string connectionTpe,
+            string connection, DataProviderAction action, DataProviderState state)
         {
-            _workflow.ReceiveRequest(_dataProvider, date);
+            _workflow.RequestToDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
             return this;
         }
 
-        public WorkflowQueueSender SendRequestToDataProvider(DateTime date, object message, string connectionTpe,
-            string connection)
+        public WorkflowQueueSender ReceiveResponseFromDataProvider(DateTime date, string connectionTpe,
+            string connection, DataProviderAction action, DataProviderState state)
         {
-            _workflow.SendRequestToDataProvider(_dataProvider, message, connectionTpe, connection, date);
+            _workflow.ResponseFromDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
             return this;
         }
 
-        public WorkflowQueueSender ReceiveResponseFromDataProvider(object message, DateTime date)
+        public WorkflowQueueSender CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+            Guid contractId, string system, long contractVersion, DataProviderState state)
         {
-            _workflow.ReceiveResponseFromDataProvider(_dataProvider,message,date);
+            _workflow.CreateTransaction(packageId, packageVersion, date, userId, requestId, contractId, system,
+                contractVersion, state);
             return this;
         }
 
-        public WorkflowQueueSender ReturnResponse(DateTime date, object message)
-        {
-            _workflow.ReturnResponse(_dataProvider, date, message);
-            return this;
-        }
     }
 }

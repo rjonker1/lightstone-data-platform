@@ -70,9 +70,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.788\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.794, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.798, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.794\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.798\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging, Version=1.0.0.773, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -89,17 +89,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Core">
-      <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
+    <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NServiceBus.5.2.0\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.NHibernate">
-      <HintPath>..\..\packages\NServiceBus.NHibernate.6.0.0\lib\net45\NServiceBus.NHibernate.dll</HintPath>
+    <Reference Include="NServiceBus.NHibernate, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NServiceBus.NHibernate.6.1.0\lib\net45\NServiceBus.NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Transports.RabbitMQ">
-      <HintPath>..\..\packages\NServiceBus.RabbitMQ.2.0.5\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
+    <Reference Include="NServiceBus.Transports.RabbitMQ, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NServiceBus.RabbitMQ.2.1.1\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.5\lib\net30\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

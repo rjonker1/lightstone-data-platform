@@ -60,9 +60,11 @@
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
     <Compile Include="Entities\IProvideType.cs" />
+    <Compile Include="Enums\DataProviderAction.cs" />
     <Compile Include="Enums\DataProviderCommandSource.cs" />
     <Compile Include="Enums\DataProviderName.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
+    <Compile Include="Enums\DataProviderState.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />
@@ -73,9 +75,11 @@
     <Compile Include="Helpers\Json\JsonTypeResolverConverter.cs" />
     <Compile Include="Helpers\SystemTime.cs" />
     <Compile Include="Helpers\TypeHelper.cs" />
+    <Compile Include="Identifiers\ContractIdentifier.cs" />
     <Compile Include="Identifiers\PackageIdentifier.cs" />
     <Compile Include="Identifiers\RequestIdentifier.cs" />
     <Compile Include="Identifiers\ServerIdentifier.cs" />
+    <Compile Include="Identifiers\StateIdentifier.cs" />
     <Compile Include="Identifiers\SystemIdentifier.cs" />
     <Compile Include="Identifiers\UserIdentifier.cs" />
     <Compile Include="Identifiers\VersionIdentifier.cs" />
@@ -84,10 +88,7 @@
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RabbitMQ\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

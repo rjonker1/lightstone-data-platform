@@ -9,7 +9,8 @@ namespace Workflow.Lace.Messages.Extensions
     {
         public static void SendToBus<T>(this T message, IPublishCommandMessages publisher, ILog log) where T : class
         {
-            Task.Run(() => SendMessagesAsync(message, publisher, log));
+            //Task.Run(() => SendMessagesAsync(message, publisher, log));
+            SendMessagesAsync(message, publisher, log);
         }
 
         private static void SendMessagesAsync<T>(T message, IPublishCommandMessages publisher, ILog log) where T : class
@@ -23,5 +24,7 @@ namespace Workflow.Lace.Messages.Extensions
                 log.ErrorFormat("Error sending message to Data Provider Workflow Bus: {0}", ex.Message);
             }
         }
+
+        
     }
 }
