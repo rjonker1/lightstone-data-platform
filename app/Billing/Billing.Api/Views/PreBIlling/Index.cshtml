@@ -2,42 +2,6 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Pre Billing", ""))
 
 <div class="box">
-    @*<table id="preBilling_table" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Customer Name
-                </th>
-                <th>
-                    # Users
-                </th>
-                <th>
-                    Type
-                </th>
-                <th>
-                    Owner
-                </th>
-                <th>
-                    # Products
-                </th>
-                <th>
-                    # Tx
-                </th>
-                <th>
-                    New / Existing
-                </th>
-                <th>
-                    Total (excl VAT.)
-                </th>
-                <th>
-                    <i id="ctActionIcon" class="fa fa-bolt"></i>
-                </th>
-            </tr>
-        </thead>
-    </table>*@
 
     <div class="box-header"></div>
     <table id="table"></table>
@@ -69,6 +33,91 @@
             </div>
         </div>
     </div>
+    
+    
+    
+    <div class="table-height">
+        <table class="table table-condensed" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th>Select Available Group(s)</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <a href="#" class="btn btn-default" id="openBtn">Open modal</a>
+
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <h3>Modal header</h3>
+                            </div>
+                            <div class="modal-body">
+                                <p>My modal content here…</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <tr style="height: 0px;">
+                    <td class="col-md-8">
+                        <input type="checkbox" id="selectAuthoriser" data-id="66" data-name="group1" data-address="">
+                        <label for="selectAuthoriser">group1</label>
+
+                    </td>
+                    <td class="col-md-8">
+                        <button data-toggle="collapse" data-target=".demo1"><span class="glyphicon glyphicon-chevron-down"></span></button>
+
+                    </td>
+
+                </tr>
+                <tr class="collapse demo1">
+                    <td colspan="2" class="col-md-8">
+                        <div><ul><li>Authoriser1</li><li>Authoriser2</li><li>Authoriser3</li></ul></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-8">
+                        <input type="checkbox" id="selectAuthoriser2" data-id="66" data-name="group1" data-address="">
+                        <label for="selectAuthoriser2">group2</label>
+
+                    </td>
+                    <td class="col-md-8">
+                        <button><span class="glyphicon glyphicon-chevron-down"></span></button>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-8">
+                        <input type="checkbox" id="selectAuthoriser3" data-id="66" data-name="group3" data-address="">
+                        <label for="selectAuthoriser3">group1</label>
+
+                    </td>
+                    <td class="col-md-8">
+                        <button><span class="glyphicon glyphicon-chevron-down"></span></button>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="hiddenRow">
+                        <div>
+                            Test
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+
 
     <script>
 
@@ -93,7 +142,8 @@
                 sortable: true
             }, {
                 field: 'numUsers',
-                title: '# Users'
+                title: '# Users',
+                formatter: gridUsersFormatter
             }, {
                 field: 'type',
                 title: 'User Type',

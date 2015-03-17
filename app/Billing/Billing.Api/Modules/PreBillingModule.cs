@@ -33,23 +33,13 @@ namespace Billing.Api.Modules
                 if (limit == null) limit = 10;
                 //var dto = new PreBillingDto();
                 //var dto = (IEnumerable<PreBilling>)(preBilling.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
-                var dto = (IEnumerable<PreBillingDto>)Mapper.Map<IEnumerable<PreBilling>, IEnumerable<PreBillingDto>>(serverPageRepo.Search("", offset, limit));
-                //var dto = new ArrayList
-                //{
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto(),
-                //    new PreBillingDto()
-                //};
+
+                //var dto = (IEnumerable<PreBillingDto>)Mapper.Map<IEnumerable<PreBilling>, IEnumerable<PreBillingDto>>(serverPageRepo.Search("", offset, limit));
+
+                var dto = new ArrayList
+                {
+                    new PreBilling()
+                };
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
