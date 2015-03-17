@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataPlatform.Shared.Enums;
 using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Commands
