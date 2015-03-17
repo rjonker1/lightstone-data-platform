@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Billing.Domain.Core.NHibernate;
+using Billing.Domain.Core.NHibernate.Attributes;
 
 namespace Billing.Domain.Core.Entities
 {

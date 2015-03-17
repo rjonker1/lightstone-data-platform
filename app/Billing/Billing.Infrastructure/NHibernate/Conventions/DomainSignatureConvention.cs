@@ -1,4 +1,5 @@
 ﻿using Billing.Domain.Core.NHibernate;
+using Billing.Domain.Core.NHibernate.Attributes;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
 

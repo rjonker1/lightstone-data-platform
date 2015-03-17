@@ -1,6 +1,7 @@
 ﻿using System;
 using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.NHibernate;
+using Billing.Domain.Core.NHibernate.Attributes;
 using Billing.Domain.Entities;
 using Billing.Infrastructure.NHibernate.Conventions;
 using FluentNHibernate.Automapping;

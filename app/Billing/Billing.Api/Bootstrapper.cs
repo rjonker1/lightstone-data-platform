@@ -1,12 +1,16 @@
 ﻿using Billing.Api.Installers;
+using Billing.Domain.Entities;
+using Billing.Domain.Entities.Commands.Entities;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using MemBus;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
+using Workflow;
 
 namespace Billing.Api
 {
@@ -22,7 +26,7 @@ namespace Billing.Api
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
-            //container.Resolve<IBus>().Publish(new ImportStartupData());
+            container.Resolve<IBus>().Publish(new CreateUpdateEntity(new PreBilling()));//.Publish(new CreateUpdateEntity(new PreBilling()));
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -33,7 +37,7 @@ namespace Billing.Api
             container.Install(
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
-                //new CommandInstaller(),
+                new CommandInstaller(),
                 new BusInstaller(),
                 //new ServiceLocatorInstaller(),
                 new AutoMapperInstaller()
