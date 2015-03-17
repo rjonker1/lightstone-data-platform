@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Billing.Api.ViewModels;
@@ -19,11 +20,24 @@ namespace Billing.Api.Modules
             {
                 var model = this.Bind<DataTablesViewModel>();
                 //var dto = new PreBillingDto();
-                var dto = (IEnumerable<PreBilling>)(preBilling.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
-                //dto = new[] {new PreBillingDto()};
+                //var dto = (IEnumerable<PreBilling>)(preBilling.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = new ArrayList();
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
+                dto.Add(new PreBillingDto());
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = new[] { new PreBillingDto() }.ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
             };
 
             Post["/PreBilling"] = _ =>

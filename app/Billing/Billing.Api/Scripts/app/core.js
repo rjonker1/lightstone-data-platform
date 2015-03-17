@@ -125,3 +125,26 @@
 
     return Billing;
 })(jQuery, Billing || {});
+
+
+//Bootstrap-table functions
+
+function gridActionFormatter(value, row, index) {
+    return [
+        '<div class="row" style="margin-right:0px;">' +
+        '<div class="edit col-lg-2"><a class="btn btn-primary entity-edit">Edit</a></div>' +
+        '<div class="delete col-lg-1"><a class="btn btn-danger entity-remove">Delete</a></div>' +
+        '</div>'
+    ].join('');
+};
+
+window.gridActionEvents = {
+    'click .edit': function (e, value, row, index) {
+        alert('You click edit icon, row: ' + JSON.stringify(row));
+        console.log(value, row, index);
+    },
+    'click .delete': function (e, value, row, index) {
+        alert('You click remove icon, row: ' + JSON.stringify(row));
+        console.log(value, row, index);
+    }
+};

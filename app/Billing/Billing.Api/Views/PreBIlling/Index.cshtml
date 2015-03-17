@@ -2,7 +2,7 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Pre Billing", ""))
 
 <div class="box">
-    <table id="preBilling_table" class="table table-bordered table-hover">
+    @*<table id="preBilling_table" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>
@@ -37,82 +37,63 @@
                 </th>
             </tr>
         </thead>
-    </table>
-    
+    </table>*@
+
+    <div class="box-header"></div>
     <table id="table"></table>
 
+    <script>
+
+        $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/PreBilling/Add", text: "Add" }).appendTo($("div.box-header"));
+
+        $('#table').bootstrapTable({
+            url: '/PreBilling',
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'customerName',
+                title: 'Customer Name',
+                sortable: true
+            }, {
+                field: 'numUsers',
+                title: '# Users'
+            }, {
+                field: 'type',
+                title: 'User Type',
+                sortable: true
+            }, {
+                field: 'owner',
+                title: 'Owner',
+                sortable: true
+            }, {
+                field: 'numProducts',
+                title: '# Products'
+            }, {
+                field: 'numTransactions',
+                title: '# Transactions'
+            }, {
+                field: 'userType',
+                title: 'User Type',
+                sortable: true
+            }, {
+                field: 'total',
+                title: 'Total',
+            }, {
+                title: 'Action',
+                formatter: gridActionFormatter,
+                events: gridActionEvents
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+    </script>
 </div>
-<script>
-    var table = $("#preBilling_table").dataTable({
-        dom: '<"box-header"f>t<"box-footer"lip>r',
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        processing: true,
-        serverSide: true,
-        ajax: { url: "/PreBilling/", type: "POST"},
-        columns: [
-            { data: "id", visible: false },
-            { data: "customerName" },
-            { data: "numUsers" },
-            { data: "type" },
-            { data: "owner" },
-            { data: "numProducts" },
-            { data: "numTransactions" },
-            { data: "userType" },
-            { data: "total" },
-            {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<div class="row">' +
-                        '<div class="col-lg-2"><a class="btn btn-primary entity-edit" href="#/PreBilling/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/PreBilling/Delete/' + data.id + '">Delete</a></div>' +
-                        '</div>';
-                }
-            }
-        ]
-    });
-
-    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/PreBilling/Add", text: "Add" }).appendTo($("div.box-header"));
-
-    $('#table').bootstrapTable({
-        url: '/PreBilling',
-        columns: [{
-            field: 'id',
-            title: 'Item ID'
-        }, {
-            field: 'customerName',
-            title: 'Customer Name'
-        }, {
-            field: 'numUsers',
-            title: '# Users'
-        }, {
-            field: 'type',
-            title: 'User Type'
-        }, {
-            field: 'owner',
-            title: 'Owner'
-        }, {
-            field: 'numProducts',
-            title: '# Products'
-        }, {
-            field: 'numTransactions',
-            title: '# Transactions'
-        }, {
-            field: 'userType',
-            title: 'User Type'
-        }, {
-            field: 'total',
-            title: 'Total'
-        }]
-        //data: [{
-        //    id: 1,
-        //    name: 'Item 1',
-        //    price: '$1'
-        //}, {
-        //    id: 2,
-        //    name: 'Item 2',
-        //    price: '$2'
-        //}]
-    });
-
-    Billing.overrideDataTablesStyling();
-</script>
