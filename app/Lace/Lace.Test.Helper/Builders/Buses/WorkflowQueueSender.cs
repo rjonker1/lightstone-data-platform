@@ -25,14 +25,22 @@ namespace Lace.Test.Helper.Builders.Buses
         public WorkflowQueueSender SendRequestToDataProvider(DateTime date, string connectionTpe,
             string connection, DataProviderAction action, DataProviderState state)
         {
-            _workflow.SendRequestToDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
+            _workflow.RequestToDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
             return this;
         }
 
         public WorkflowQueueSender ReceiveResponseFromDataProvider(DateTime date, string connectionTpe,
             string connection, DataProviderAction action, DataProviderState state)
         {
-            _workflow.ReceiveResponseFromDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
+            _workflow.ResponseFromDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
+            return this;
+        }
+
+        public WorkflowQueueSender CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+            Guid contractId, string system, long contractVersion, DataProviderState state)
+        {
+            _workflow.CreateTransaction(packageId, packageVersion, date, userId, requestId, contractId, system,
+                contractVersion, state);
             return this;
         }
 
