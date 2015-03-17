@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
+using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Commands
 {
     [Serializable]
     [DataContract]
-    public class ReceiveResponseFromDataProviderCommand
+    public class GetResponseFromDataProviderCommmand
     {
         [DataMember]
         public Guid Id { get; private set; }
@@ -17,46 +18,32 @@ namespace Workflow.Lace.Messages.Commands
         [DataMember]
         public Guid RequestId { get; private set; }
 
-        //[DataMember]
-        //public object ResponsePayload { get; private set; }
+        [DataMember]
+        public string ConnectionType { get; private set; }
+
+        [DataMember]
+        public string Connection { get; private set; }
 
         [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
 
-        public ReceiveResponseFromDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date)
-        {
-            Id = id;
-            Date = date;
-            RequestId = requestId;
-            DataProvider = dataProvider;
-        }
-    }
-
-    [Serializable]
-    [DataContract]
-    public class ReturnResponseCommmand
-    {
         [DataMember]
-        public Guid Id { get; private set; }
+        public DataProviderAction Action { get; private set; }
 
         [DataMember]
-        public DateTime Date { get; private set; }
+        public DataProviderState State { get; private set; }
 
-        [DataMember]
-        public Guid RequestId { get; private set; }
-
-        //[DataMember]
-        //public object ResponsePayload { get; private set; }
-
-        [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
-        public ReturnResponseCommmand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date)
+        public GetResponseFromDataProviderCommmand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date, string connection, string connectionType,
+            DataProviderState state, DataProviderAction action)
         {
             Id = id;
             Date = date;
             DataProvider = dataProvider;
             RequestId = requestId;
-            //ResponsePayload = payload;
+            Connection = connection;
+            ConnectionType = connectionType;
+            State = state;
+            Action = action;
         }
     }
 }

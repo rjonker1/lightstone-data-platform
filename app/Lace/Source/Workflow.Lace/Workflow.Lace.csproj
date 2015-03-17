@@ -43,6 +43,12 @@
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.794\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.791\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.791\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -57,24 +63,13 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Domain\DataProviderRequest.cs" />
-    <Compile Include="Domain\RequestHeader.cs" />
-    <Compile Include="Domain\DataProviderResponse.cs" />
-    <Compile Include="Domain\ResponseHeader.cs" />
+    <Compile Include="Identifiers\ActionIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderRequestIdentifier.cs" />
-    <None Include="Identifiers\DataProviderRequestIdentifier.cs.tbd" />
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
-    <Compile Include="Identifiers\DataProviderConnectionTypeIdentifier.cs" />
-    <Compile Include="Identifiers\ResponseIdentifier.cs" />
-    <Compile Include="Mappers\DataProviderResponseTypeMapper.cs" />
-    <Compile Include="Mappers\DataProviderRequestTypeMapper.cs" />
-    <Compile Include="Mappers\RequestHeaderTypeMapper.cs" />
-    <Compile Include="Mappers\ResponseHeaderTypeMapper.cs" />
-    <Compile Include="Repository\Dapper.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\Repository.cs" />
-    <Compile Include="Repository\RepositoryMapper.cs" />
-    <Compile Include="Repository\TypeMapper.cs" />
+    <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
+    <Compile Include="Identifiers\StateIdentifier.cs" />
+    <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

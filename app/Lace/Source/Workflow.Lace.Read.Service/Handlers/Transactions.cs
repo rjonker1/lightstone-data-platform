@@ -1,6 +1,8 @@
-﻿using NServiceBus;
+﻿using System;
+using NServiceBus;
+using Workflow.Billing.Domain;
+using Workflow.Billing.Repository;
 using Workflow.Lace.Messages.Events;
-using Workflow.Lace.Repository;
 
 namespace Workflow.Lace.Read.Service.Handlers
 {
@@ -20,7 +22,10 @@ namespace Workflow.Lace.Read.Service.Handlers
 
         public void Handle(TransactionCreated message)
         {
-            
+            var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
+                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier);
+
+            _repository.Add(transaction);
         }
     }
 }

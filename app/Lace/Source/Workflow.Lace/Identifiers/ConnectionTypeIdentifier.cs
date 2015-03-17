@@ -1,17 +1,17 @@
 ﻿namespace Workflow.Lace.Identifiers
 {
-    public class DataProviderConnectionTypeIdentifier
+    public class ConnectionTypeIdentifier
     {
         public string Type { get; set; }
         public string Connection { get; set; }
 
-        public DataProviderConnectionTypeIdentifier(string type, string source)
+        public ConnectionTypeIdentifier(string type, string source)
         {
             Type = type;
             Connection = source;
         }
 
-        public DataProviderConnectionTypeIdentifier()
+        public ConnectionTypeIdentifier()
         {
             
         }

@@ -1,14 +1,14 @@
 ﻿using System;
 using DataPlatform.Shared.Identifiers;
 using NServiceBus;
+using Workflow.Billing.Repository;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Events;
-using Workflow.Lace.Repository;
 
 namespace Workflow.Lace.Read.Service.Handlers
 {
-    public class Response : IHandleMessages<ResponseReceivedFromDataProvider>, IHandleMessages<ResponseReturned>
+    public class Response : IHandleMessages<ResponseFromDataProvider>
     {
         private readonly IRepository _repository;
 
@@ -23,21 +23,15 @@ namespace Workflow.Lace.Read.Service.Handlers
         }
 
 
-        public void Handle(ResponseReceivedFromDataProvider message)
+        public void Handle(ResponseFromDataProvider message)
         {
             var response =
-                new DataProviderResponse(new DataProviderResponseIdentifier(Guid.NewGuid(), message.Id, message.Date,
-                    new DataProviderRequestIdentifier(Guid.NewGuid(), message.Id, message.Date,
-                        new RequestIdentifier(message.RequestId, null),
-                        new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString()),
-                        new DataProviderConnectionTypeIdentifier())));
-
-            _repository.Add(response);
-        }
-
-        public void Handle(ResponseReturned message)
-        {
-            var response = new ResponseHeader(new ResponseIdentifier(Guid.NewGuid(),message.Id, message.RequestId, message.Date));
+                new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Id,
+                    message.Date, new RequestIdentifier(message.Id, null),
+                    new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString())
+                    , new ConnectionTypeIdentifier(message.ConnectionType, message.Connection),
+                    new ActionIdentifier((int) message.Action, message.Action.ToString()),
+                    new StateIdentifier((int) message.State, message.State.ToString())));
             _repository.Add(response);
         }
     }
