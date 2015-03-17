@@ -2,31 +2,16 @@
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
+using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
-    [DataContract]
-    public class RequestReceived : IPublishableMessage
-    {
-        public RequestReceived(Guid id, DateTime date)
-        {
-            Id = id;
-            Date = date;
-        }
-
-        [DataMember]
-        public Guid Id { get; set; }
-
-        [DataMember]
-        public DateTime Date { get; private set; }
-    }
 
     [Serializable]
     [DataContract]
-    public class RequestSentToDataProvider : IPublishableMessage
+    public class RequestToDataProvider : IPublishableMessage
     {
-        public RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date, string connection, string connectionType)
+        public RequestToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date, string connection, string connectionType, DataProviderState state, DataProviderAction action)
         {
             Id = id;
             RequestId = requestId;
@@ -34,6 +19,8 @@ namespace Workflow.Lace.Messages.Events
             Date = date;
             Connection = connection;
             ConnectionType = connectionType;
+            State = state;
+            Action = action;
         }
 
         [DataMember]
@@ -53,5 +40,10 @@ namespace Workflow.Lace.Messages.Events
 
         [DataMember]
         public string Connection { get; private set; }
+
+        [DataMember]
+        public DataProviderState State { get; private set; }
+        [DataMember]
+        public DataProviderAction Action { get; private set; }
     }
 }

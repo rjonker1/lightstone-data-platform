@@ -1,39 +1,37 @@
 ﻿using System;
 using DataPlatform.Shared.Identifiers;
 using NServiceBus;
+using Workflow.Billing.Repository;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Events;
-using Workflow.Lace.Repository;
 
 namespace Workflow.Lace.Read.Service.Handlers
 {
-    public class Request : IHandleMessages<RequestReceived>, IHandleMessages<RequestSentToDataProvider>
+    public class Request : IHandleMessages<RequestToDataProvider>
     {
         private readonly IRepository _repository;
 
         public Request()
         {
-            
+
         }
 
         public Request(IRepository repository)
         {
             _repository = repository;
         }
-        public void Handle(RequestReceived message)
-        {
-            var request = new RequestHeader(Guid.NewGuid(), message.Id, message.Date, new RequestIdentifier(message.Id, null));
-            _repository.Add(request);
-        }
 
-        public void Handle(RequestSentToDataProvider message)
+        public void Handle(RequestToDataProvider message)
         {
             var request =
-                new DataProviderRequest(new DataProviderRequestIdentifier(Guid.NewGuid(), message.Id, message.Date,
+                new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Id,
+                    message.Date,
                     new RequestIdentifier(message.RequestId, null),
                     new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString()),
-                    new DataProviderConnectionTypeIdentifier(message.ConnectionType, message.Connection)));
+                    new ConnectionTypeIdentifier(message.ConnectionType, message.Connection),
+                    new ActionIdentifier((int) message.Action, message.Action.ToString()),
+                    new StateIdentifier((int) message.State, message.State.ToString())));
             _repository.Add(request);
         }
     }

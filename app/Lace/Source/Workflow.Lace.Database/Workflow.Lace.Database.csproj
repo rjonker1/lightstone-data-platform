@@ -59,10 +59,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Migrations\201502271647_Create_Data_Provider_Request_Table.cs" />
-    <Compile Include="Migrations\201502271649_Create_Data_Provider_Response_Table.cs" />
-    <Compile Include="Migrations\201502271650_Create_Request_Table.cs" />
-    <Compile Include="Migrations\201502271651_Create_Response_Table.cs" />
+    <Compile Include="Migrations\201502271652_Create_Data_Provider_Transaction_Table.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\packages\FluentMigrator.1.2.1.0\tools\FluentMigrator.Runner.dll">

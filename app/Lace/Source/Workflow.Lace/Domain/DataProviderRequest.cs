@@ -2,13 +2,13 @@
 
 namespace Workflow.Lace.Domain
 {
-    public class DataProviderRequest
+    public class DataProviderTransaction
     {
-        public DataProviderRequest(DataProviderRequestIdentifier request)
+        public DataProviderTransaction(DataProviderTransactionIdentifier transaction)
         {
-            Request = request;
+            Transaction = transaction;
         }
 
-        public DataProviderRequestIdentifier Request { get; private set; }
+        public DataProviderTransactionIdentifier Transaction { get; private set; }
     }
 }

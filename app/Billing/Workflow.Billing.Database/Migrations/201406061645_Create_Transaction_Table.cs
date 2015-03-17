@@ -12,11 +12,13 @@ namespace Workflow.Billing.Database.Migrations
                 .WithColumn("Date").AsDateTime().NotNullable()
                 .WithColumn("PackageId").AsGuid().NotNullable()
                 .WithColumn("PackageVersion").AsInt64().NotNullable()
+                .WithColumn("ContractId").AsGuid().NotNullable()
+                .WithColumn("ContractVersion").AsInt64().NotNullable()
                 .WithColumn("UserId").AsGuid().NotNullable()
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("System").AsString().NotNullable()
                 .WithColumn("Server").AsString().NotNullable()
-                ;
+                .WithColumn("State").AsString().NotNullable();
         }
 
         public override void Down()

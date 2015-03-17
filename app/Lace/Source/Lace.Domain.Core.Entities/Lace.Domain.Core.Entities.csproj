@@ -73,7 +73,6 @@
     <Compile Include="IvidTitleHolderResponse.cs" />
     <Compile Include="JisResponse.cs" />
     <Compile Include="LightstoneResponse.cs" />
-    <Compile Include="LightstonePropertyModels.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="PCubedFicaVerficationResponse.cs" />
     <Compile Include="PriceModel.cs" />
