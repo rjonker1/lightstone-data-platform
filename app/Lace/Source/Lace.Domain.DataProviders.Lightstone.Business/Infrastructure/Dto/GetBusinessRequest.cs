@@ -17,6 +17,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
         {
 
             // TODO: _request.Business.user_token and the other fields;
+            //UserToken = _request.Business.UserToken;
            
             return this;
         }
