@@ -77,7 +77,7 @@ namespace Workflow.Lace.Domain.Aggregates
             State = state;
 
             RaiseEvent(new TransactionCreated(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
-                new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date, id));
+                new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date, id, new StateIdentifier((int)state, state.ToString())));
         }
 
         public static Request ReceiveRequest(Guid requestId, DataProviderCommandSource dataProvider,
