@@ -64,6 +64,7 @@
     <Compile Include="Contracts\Requests\IProvideDriversLicenseInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideFicaInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideJisInformation.cs" />
+    <Compile Include="Contracts\Requests\IProvideBusinessInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideRequestAggregation.cs" />
     <Compile Include="Contracts\Requests\IProvideUserInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvidePropertyInformationForRequest.cs" />

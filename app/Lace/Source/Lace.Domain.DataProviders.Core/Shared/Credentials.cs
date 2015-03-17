@@ -31,6 +31,12 @@ namespace Lace.Domain.DataProviders.Core.Shared
         //public static Func<string> LightstonePropertyWsPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LspWPassword");
         //public static Func<string> LightstonePropertyWsUserId = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LspWsUser_ID");
 
+        // Lightstone Business API
+
+        public static Func<string> LightstoneBusinessApiEmail = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LightstoneBusinessApiEmail");
+        public static Func<string> LightstoneBusinessApiPassword = () => AppSettings.DefaultAppSettingConfiguration.GetSetting("LightstoneBusinessApiPassword");
+
+
 
     }
 }

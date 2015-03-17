@@ -9,6 +9,7 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Management;
@@ -27,6 +28,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneBusiness;
         private DataSet _result;
 
+        private readonly string _username = Credentials.LightstoneBusinessApiEmail();
+        private readonly string _password = Credentials.LightstoneBusinessApiPassword();
+
+        //public readonly string UserToken;
+
         public CallLightstoneBusinessDataProvider(ILaceRequest request)
         {
             _log = LogManager.GetLogger(GetType());
@@ -43,8 +49,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 if (client.Proxy.State == CommunicationState.Closed)
                     client.Proxy.Open();
 
+                // authenticate
+                // call authenticateUser to get the UserToke by email and password
 
-                // 
+
+                var token = client.Proxy.authenticateUser(_username, _password);
+                
+
+                
                 var request = new GetBusinessRequest(_request)
                     .Map()
                     .Validate();
@@ -60,9 +72,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 monitoring.StartCall(request, _stopWatch);
 
-                //TODO: call authenticateUser to get the UserToke by email and password
 
-                _result = client.Proxy.returnCompanies(request.UserToken, request.CompanyName,request.CompanyRegnum, request.CompanyVatnumber);
+                _result = client.Proxy.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum, request.CompanyVatnumber);
 
                 client.CloseSource();
 
