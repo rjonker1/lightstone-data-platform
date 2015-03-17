@@ -5,7 +5,7 @@ using PackageBuilder.Api.Installers;
 using PackageBuilder.Api.Modules;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit;

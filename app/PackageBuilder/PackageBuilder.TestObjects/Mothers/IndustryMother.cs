@@ -1,4 +1,4 @@
-﻿using PackageBuilder.Domain.Entities.Industries.WriteModels;
+﻿using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers

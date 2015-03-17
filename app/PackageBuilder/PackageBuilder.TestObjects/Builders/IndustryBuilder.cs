@@ -1,5 +1,5 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.TestObjects.Builders
 {

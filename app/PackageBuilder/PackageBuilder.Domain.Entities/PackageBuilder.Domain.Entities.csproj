@@ -36,17 +36,19 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.789, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.789\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.795\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.789, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.789\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.795\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.788, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.795\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.795, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.788\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.795\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore">
       <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
@@ -55,98 +57,76 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.795\lib\net45\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action.cs" />
+    <Compile Include="DataProviders\Write\SourceConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommandStore\Command.cs" />
     <Compile Include="CommandStore\Commands\ReplayCommand.cs" />
     <Compile Include="CommandStore\Commands\StoreCommand.cs" />
-    <Compile Include="Contract.cs" />
-    <Compile Include="ContractPackage.cs" />
     <Compile Include="Criteria.cs" />
-    <Compile Include="Customer.cs" />
-    <Compile Include="CustomerContract.cs" />
-    <Compile Include="CustomerUser.cs" />
-    <Compile Include="DataFields\WriteModels\IDataField.cs" />
-    <Compile Include="DataFields\WriteModels\IDataFieldOverride.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="DataProviders\Commands\CreateDataProvider.cs" />
     <Compile Include="DataProviders\Commands\ImportDataProvider.cs" />
     <Compile Include="DataProviders\Commands\UpdateDataProvider.cs" />
     <Compile Include="DataProviders\Events\DataProviderCreated.cs" />
     <Compile Include="DataProviders\Events\DataProviderUpdated.cs" />
-    <Compile Include="DataProviders\ReadModels\DataProvider.cs" />
-    <Compile Include="DataProviders\WriteModels\DataProvider.cs" />
-    <Compile Include="DataProviders\WriteModels\IDataProvider.cs" />
-    <Compile Include="DataProviders\WriteModels\IDataProviderOverride.cs" />
-    <Compile Include="DataProviders\WriteModels\SourceConfiguration.cs" />
-    <Compile Include="Enums\StateName.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="GroupPackage.cs" />
-    <Compile Include="GroupPermission.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="IContract.cs" />
-    <Compile Include="IContractPackage.cs" />
-    <Compile Include="ICriteria.cs" />
-    <Compile Include="ICustomer.cs" />
-    <Compile Include="ICustomerContract.cs" />
-    <Compile Include="ICustomerUser.cs" />
+    <Compile Include="DataProviders\Read\DataProvider.cs" />
+    <Compile Include="DataProviders\Write\DataProvider.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IExpirable.cs" />
-    <Compile Include="IGroup.cs" />
-    <Compile Include="IGroupPackage.cs" />
-    <Compile Include="IGroupPermission.cs" />
     <Compile Include="Industries\Commands\CreateIndustry.cs" />
     <Compile Include="Industries\Commands\ImportIndustry.cs" />
     <Compile Include="Industries\Commands\RenameIndustry.cs" />
-    <Compile Include="Industries\WriteModels\Industry.cs" />
-    <Compile Include="IPackageAccessControl.cs" />
-    <Compile Include="IRole.cs" />
-    <Compile Include="IRolePackage.cs" />
-    <Compile Include="IRolePermission.cs" />
-    <Compile Include="IUser.cs" />
-    <Compile Include="IUserGroup.cs" />
-    <Compile Include="IUserPackage.cs" />
-    <Compile Include="IUserRole.cs" />
+    <Compile Include="Industries\Read\Industry.cs" />
     <Compile Include="IWorkflow.cs" />
-    <Compile Include="DataProviders\WriteModels\DataProviderOverride.cs" />
-    <Compile Include="DataFields\WriteModels\DataFieldOverride.cs" />
+    <Compile Include="DataProviders\Write\DataProviderOverride.cs" />
+    <Compile Include="DataFields\Write\DataFieldOverride.cs" />
     <Compile Include="Packages\Commands\DeletePackage.cs" />
     <Compile Include="Packages\Commands\UpdatePackage.cs" />
     <Compile Include="Packages\Events\PackageCreated.cs" />
     <Compile Include="Packages\Events\PackageUpdated.cs" />
-    <Compile Include="Packages\ReadModels\Package.cs" />
-    <Compile Include="Packages\WriteModels\IPackage.cs" />
-    <Compile Include="Packages\WriteModels\Package.cs" />
+    <Compile Include="Packages\Read\Package.cs" />
+    <Compile Include="Packages\Write\Package.cs" />
     <Compile Include="Packages\Commands\CreatePackage.cs" />
-    <Compile Include="DataFields\WriteModels\DataField.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="RolePackage.cs" />
-    <Compile Include="RolePermission.cs" />
+    <Compile Include="DataFields\Write\DataField.cs" />
+    <Compile Include="Requests\LaceRequest.cs" />
     <Compile Include="States\Commands\CreateState.cs" />
     <Compile Include="States\Commands\ImportState.cs" />
     <Compile Include="States\Commands\RenameState.cs" />
-    <Compile Include="States\WriteModels\State.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserGroup.cs" />
-    <Compile Include="UserPackage.cs" />
-    <Compile Include="UserRole.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
-      <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
-      <Name>PackageBuilder.Domain.Core</Name>
-    </ProjectReference>
+    <Compile Include="States\Read\State.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
+      <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
+      <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
+      <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
+      <Name>PackageBuilder.Domain.Core.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15ea3113-e3a9-4baa-8746-a92973e7d3c0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-b92b-44b2-8099-eb31042ee399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

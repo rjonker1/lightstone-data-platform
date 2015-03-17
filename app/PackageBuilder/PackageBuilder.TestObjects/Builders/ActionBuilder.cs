@@ -1,5 +1,6 @@
 ﻿using PackageBuilder.Domain.Entities;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Actions;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 
 namespace PackageBuilder.TestObjects.Builders
 {

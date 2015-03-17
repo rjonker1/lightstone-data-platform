@@ -1,4 +1,4 @@
-﻿using PackageBuilder.Domain.Entities;
+﻿using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers
@@ -60,7 +60,7 @@ namespace PackageBuilder.TestObjects.Mothers
             }
         }
 
-      
+
         public static IAction FicaVerificationAction
         {
             get

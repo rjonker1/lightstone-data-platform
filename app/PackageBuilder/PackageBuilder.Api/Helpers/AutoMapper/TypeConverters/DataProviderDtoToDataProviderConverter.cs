@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoMapper;
-using DataPlatform.Shared.Enums;
-using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {

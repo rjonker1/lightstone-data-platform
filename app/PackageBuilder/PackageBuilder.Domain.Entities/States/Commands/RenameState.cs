@@ -1,6 +1,6 @@
 ﻿using System;
 using PackageBuilder.Core.Commands;
-using PackageBuilder.Domain.Entities.Enums;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Domain.Entities.States.Commands
 {

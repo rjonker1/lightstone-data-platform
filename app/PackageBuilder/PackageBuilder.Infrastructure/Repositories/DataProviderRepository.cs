@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Enums;
 using NHibernate;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
+using PackageBuilder.Domain.Entities.DataProviders.Read;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Infrastructure.Repositories
 {

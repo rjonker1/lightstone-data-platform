@@ -1,4 +1,5 @@
 ﻿using System;
+using PackageBuilder.Domain.Core.Contracts.Commands;
 
 namespace PackageBuilder.Core.Commands
 {

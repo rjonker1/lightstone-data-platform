@@ -1,7 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
-using PackageBuilder.Core.Commands;
+using PackageBuilder.Domain.Core.Contracts.Commands;
 using PackageBuilder.Domain.Entities.CommandStore.Commands;
 
 namespace PackageBuilder.Domain.CommandHandlers

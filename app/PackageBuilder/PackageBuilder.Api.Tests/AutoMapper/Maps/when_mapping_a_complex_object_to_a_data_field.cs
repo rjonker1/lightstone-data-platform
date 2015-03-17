@@ -4,7 +4,7 @@ using AutoMapper;
 using Castle.Windsor;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Api.Installers;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.TestHelper;
 using Xunit.Extensions;
 

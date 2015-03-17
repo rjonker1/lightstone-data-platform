@@ -4,12 +4,13 @@ using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
 using Nancy.Extensions;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class IndustryConverter : TypeConverter<IDataField, IEnumerable<Industry>>
+    public class IndustryConverter : TypeConverter<IDataField, IEnumerable<IIndustry>>
     {
         private readonly IRepository<Industry> _industryRepository;
 
@@ -18,7 +19,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             _industryRepository = industryRepository;
         }
 
-        protected override IEnumerable<Industry> ConvertCore(IDataField source)
+        protected override IEnumerable<IIndustry> ConvertCore(IDataField source)
         {
             return source.Industries != null
                 ? source.Industries.ToList().Concat(_industryRepository.ToList()).DistinctBy(c => c.Id)

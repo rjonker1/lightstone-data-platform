@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.TestObjects.Builders
 {

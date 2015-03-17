@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Enums;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
+using PackageBuilder.Domain.Entities.DataProviders.Read;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.Infrastructure.Repositories
 {

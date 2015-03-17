@@ -1,34 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Windows;
 using AutoMapper;
-using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
-using PackageBuilder.Domain.Dtos.ReadModels;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Dtos.Read;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Packages.Commands;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestObjects.Mothers;
-using DataProviderDto = PackageBuilder.Domain.Dtos.WriteModels.DataProviderDto;
-using Package = PackageBuilder.Domain.Entities.Packages.WriteModels.Package;
-
+using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
+using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
         public PackageModule(IPublishStorableCommands publisher,
-            IRepository<Domain.Entities.Packages.ReadModels.Package> readRepo,
+            IRepository<Domain.Entities.Packages.Read.Package> readRepo,
             INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo)
         {
             Get["/Packages"] = parameters =>

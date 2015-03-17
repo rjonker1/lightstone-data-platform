@@ -1,9 +1,9 @@
 ﻿using System;
 using Moq;
 using PackageBuilder.Domain.CommandHandlers.States;
-using PackageBuilder.Domain.Entities.Enums;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.States.Commands;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;

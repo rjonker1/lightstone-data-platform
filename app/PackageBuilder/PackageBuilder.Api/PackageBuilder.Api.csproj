@@ -147,13 +147,13 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\ReadModels\ToDataProviderDtoMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\AudatexResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\LightstonePropertyResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\PCubedFicaResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\SignioResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderDtoMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderOverrideMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Read\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\AudatexResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\LightstonePropertyResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\PCubedFicaResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\SignioResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\ToDataProviderOverrideMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\IndustryMap.cs" />
@@ -164,20 +164,20 @@
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataFieldsToDataFieldDtosConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderDtoToDataProviderConverter.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderOverrideToDataProviderConverter.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\ToDataProviderMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\ToDataProviderMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMap.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\IdToStateConverter.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryConverter.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\IvidResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\IvidTitleHolderResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\LightstoneResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\IvidResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\IvidTitleHolderResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\LightstoneResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\RgtResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\RgtVinResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\RgtResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\RgtVinResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\StateMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\WriteModels\Responses\VehicleValuationResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\VehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\DataProviderToDtoConverter.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
@@ -249,9 +249,21 @@
       <Project>{a3368386-392b-476d-8b6c-910e73a9c21c}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
+      <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
+      <Name>PackageBuilder.Domain.Core.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Dtos\PackageBuilder.Domain.Dtos.csproj">
       <Project>{3ed18243-3a71-4e3f-adfb-fc6777af5225}</Project>
       <Name>PackageBuilder.Domain.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15ea3113-e3a9-4baa-8746-a92973e7d3c0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-B92B-44B2-8099-EB31042EE399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>

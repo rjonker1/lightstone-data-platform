@@ -1,6 +1,6 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.Domain.Entities.Packages.Read;
 
 namespace PackageBuilder.Infrastructure.NHibernate.MappingOverrides
 {

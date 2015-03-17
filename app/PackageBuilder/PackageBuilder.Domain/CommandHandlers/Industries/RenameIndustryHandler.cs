@@ -4,7 +4,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.Industries.Commands;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Domain.CommandHandlers.Industries
 {

@@ -73,14 +73,11 @@
   <ItemGroup>
     <Compile Include="Attributes\MapToCurrentValueAttribute.cs" />
     <Compile Include="Commands\DomainCommand.cs" />
-    <Compile Include="Commands\IDomainCommand.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\INamedEntity.cs" />
     <Compile Include="Entities\NamedEntity.cs" />
     <Compile Include="Events\DomainEvent.cs" />
-    <Compile Include="Events\IDomainEvent.cs" />
-    <Compile Include="Helpers\DataProviderSourceConfiguration.cs" />
     <Compile Include="Helpers\Extensions\TypeExtensions.cs" />
     <Compile Include="Helpers\Extensions\TypeRules.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
@@ -96,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
+      <Project>{361d1b44-9c69-4fbc-8ffa-184909e28d19}</Project>
+      <Name>PackageBuilder.Domain.Core.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

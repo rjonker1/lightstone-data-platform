@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using AutoMapper;
 using PackageBuilder.Api.Installers;
-using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;

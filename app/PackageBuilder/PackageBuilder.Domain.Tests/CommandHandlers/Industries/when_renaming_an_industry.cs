@@ -3,7 +3,7 @@ using Moq;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers.Industries;
 using PackageBuilder.Domain.Entities.Industries.Commands;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 

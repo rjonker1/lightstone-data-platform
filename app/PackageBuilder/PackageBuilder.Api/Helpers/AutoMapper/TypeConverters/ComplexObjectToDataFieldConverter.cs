@@ -6,8 +6,9 @@ using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders.Metric;
 using PackageBuilder.Core.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {

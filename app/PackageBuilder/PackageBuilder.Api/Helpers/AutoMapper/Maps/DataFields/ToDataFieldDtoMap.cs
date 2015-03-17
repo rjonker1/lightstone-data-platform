@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
-using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
 {
@@ -16,7 +17,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
             Mapper.CreateMap<IDataField, DataProviderFieldItemDto>()
                 .ForMember(d => d.Price, opt => opt.MapFrom(x => x.CostOfSale))
                 .ForMember(d => d.IsSelected, opt => opt.MapFrom(x => x.IsSelected))
-                .ForMember(d => d.Industries, opt => opt.MapFrom(x => Mapper.Map<IDataField, IEnumerable<Industry>>(x)));
+                .ForMember(d => d.Industries, opt => opt.MapFrom(x => Mapper.Map<IDataField, IEnumerable<IIndustry>>(x).Cast<Industry>()));
         }
     }
 }

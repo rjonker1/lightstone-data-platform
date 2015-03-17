@@ -3,7 +3,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using NEventStore;
 using NEventStore.Dispatcher;
-using PackageBuilder.Core.Events;
+using PackageBuilder.Domain.Core.Contracts.Events;
 
 namespace PackageBuilder.Infrastructure.NEventStore
 {

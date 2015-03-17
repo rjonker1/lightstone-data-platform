@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Enums;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
+using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
 
 namespace PackageBuilder.Api.Modules
 {
@@ -33,29 +35,29 @@ namespace PackageBuilder.Api.Modules
             JsonSettings.MaxJsonLength = Int32.MaxValue;
 
             Get["/DataProviders"] = parameters => {
-                var test = Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.ReadModels.DataProvider>, IEnumerable<Domain.Dtos.ReadModels.DataProviderDto>>(readRepo));
+                var test = Response.AsJson(Mapper.Map<IEnumerable<Domain.Entities.DataProviders.Read.DataProvider>, IEnumerable<DataProviderDto>>(readRepo));
                 return test;
             };
 
             Get["/DataProviders/Latest"] = parameters =>
             {
-                var dataSources = readRepo.GetUniqueIds().Select(x => Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(x))).ToList();
+                var dataSources = readRepo.GetUniqueIds().Select(x => Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(x))).ToList();
                 return Response.AsJson(dataSources);
             };
 
             Get["/DataProviders/{id}"] = parameters => 
-                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id)) } });
+                Response.AsJson(new { Response = new []{ Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(parameters.id)) } });
 
             Get["/DataProviders/{id}/{version}"] = parameters =>
-                Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, DataProviderDto>(writeRepo.GetById(parameters.id, parameters.version)) } });
+                Response.AsJson(new { Response = new[] { Mapper.Map<IDataProvider, Domain.Dtos.Write.DataProviderDto>(writeRepo.GetById(parameters.id, parameters.version)) } });
 
             Put["/Dataproviders/{id}"] = parameters =>
             {
-                var dto = this.Bind<DataProviderDto>();
+                var dto = this.Bind<Domain.Dtos.Write.DataProviderDto>("Industries");
                 var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
                 var command = new UpdateDataProvider(parameters.id,
                     (DataProviderName) Enum.Parse(typeof (DataProviderName), dto.Name, true), dto.Description,
-                    dto.CostOfSale, typeof (DataProviderDto), dto.FieldLevelCostPriceOverride,
+                    dto.CostOfSale, typeof (Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride,
                     stateRepo.FirstOrDefault(), dto.Version, dto.Owner, dto.CreatedDate, DateTime.UtcNow, dFields);
                 publisher.Publish(command);
 
