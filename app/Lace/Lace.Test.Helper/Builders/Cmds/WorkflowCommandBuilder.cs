@@ -19,15 +19,15 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder ForIvid()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
-            queue.InitQueue(WorkflowBusBuilder.ForIvid(_requestId))
-                .ReceiveRequest(DateTime.Now)
-                .SendRequestToDataProvider(DateTime.Now,
-                    new IvidRequestMessage(new LicensePlateRequestBuilder().ForIvid()).HpiQueryRequest,
-                    "(TEST)Web Service", "https://secure1.ubiquitech.co.za:443/ivid/ws/")
-                .ReceiveResponseFromDataProvider(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(),
-                    DateTime.Now)
-                .ReturnResponse(DateTime.Now, new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result);
+            //var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            //queue.InitQueue(WorkflowBusBuilder.ForIvid(_requestId))
+            //    .ReceiveRequest(DateTime.Now)
+            //    .SendRequestToDataProvider(DateTime.Now,
+            //        new IvidRequestMessage(new LicensePlateRequestBuilder().ForIvid()).HpiQueryRequest,
+            //        "(TEST)Web Service", "https://secure1.ubiquitech.co.za:443/ivid/ws/")
+            //    .ReceiveResponseFromDataProvider(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp(),
+            //        DateTime.Now)
+            //    .ReturnResponse(DateTime.Now, new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result);
             return this;
         }
     }
