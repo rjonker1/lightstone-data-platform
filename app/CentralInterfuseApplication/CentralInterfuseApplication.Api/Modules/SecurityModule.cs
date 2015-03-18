@@ -1,4 +1,6 @@
-﻿using Nancy;
+﻿using System;
+using Nancy;
+using Nancy.Authentication.Forms;
 using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace CentralInterfuseApplication.Api.Modules
@@ -14,15 +16,13 @@ namespace CentralInterfuseApplication.Api.Modules
 
             Get["/logout"] = parameters =>
             {
-                return null;
+                return this.Logout("/");
             };
 
             Post["/login"] = parameters =>
             {
                 //client.Post<ApiUser>("", "/login", )
-
-
-                return Response.AsRedirect("/");
+                return this.LoginAndRedirect(Guid.NewGuid());
             };
         }
     }

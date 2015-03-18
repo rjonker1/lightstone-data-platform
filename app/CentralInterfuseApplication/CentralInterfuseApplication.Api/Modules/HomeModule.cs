@@ -9,7 +9,7 @@ namespace CentralInterfuseApplication.Api.Modules
         {
             Get["/"] = parameters =>
             {
-                //this.RequiresAuthentication();
+                this.RequiresAuthentication();
                 return View["Index"];
             };
         }

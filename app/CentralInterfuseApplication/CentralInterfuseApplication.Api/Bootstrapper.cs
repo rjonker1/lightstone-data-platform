@@ -34,12 +34,12 @@ namespace CentralInterfuseApplication.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            //var formsAuthConfiguration = new FormsAuthenticationConfiguration
-            //{
-            //    RedirectUrl = "/login",
-            //    //UserMapper = container.Resolve<IUserMapper>(),
-            //};
-            //FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+            var formsAuthConfiguration = new FormsAuthenticationConfiguration
+            {
+                RedirectUrl = "/login",
+                UserMapper = container.Resolve<IUserMapper>(),
+            };
+            FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
