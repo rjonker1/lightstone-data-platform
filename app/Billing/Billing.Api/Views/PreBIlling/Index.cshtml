@@ -44,10 +44,12 @@
             }, {
                 field: 'numProducts',
                 title: '# Products',
-                formatter: gridProductsFormatter
+                formatter: gridProductsFormatter,
+                events: productGridActionEvents
             }, {
                 field: 'numTransactions',
-                title: '# Transactions'
+                title: '# Transactions',
+                formatter: gridTransactionsFormatter
             }, {
                 field: 'userType',
                 title: 'User Type',

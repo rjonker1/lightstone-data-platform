@@ -1,6 +1,5 @@
 ﻿//Bootstrap-table functions
 
-
 function gridUsersFormatter(value, row, index) {
 
     var count = 0;
@@ -15,7 +14,7 @@ function gridUsersFormatter(value, row, index) {
     }
 
     return [
-        'Total Users(' + count + ') ' +
+        'Total Users: ( ' + count + ' ) ' +
         '<button type="button" class="edit btn btn-primary btn-md">' +
             'View' +
             '</button>'
@@ -29,53 +28,49 @@ function gridProductsFormatter(value, row, index) {
 
         count++;
 
-        if (row.numUsers.hasOwnProperty(user)) {
+        if (row.numProducts.hasOwnProperty(product)) {
 
             break;
         }
     }
 
     return [
-        'Total Products(' + count + ') ' +
+        'Total Products: ( ' + count + ' ) ' +
         '<button type="button" class="edit btn btn-primary btn-md">' +
             'View' +
             '</button>'
     ].join('');
 };
 
-function gridActionFormatter(value, row, index) {
+function gridTransactionsFormatter(value, row, index) {
+
+    var count = 0;
+    for (user in row.numUsers) {
+
+        if (row.numUsers.hasOwnProperty(user)) {
+
+            count += row.numUsers.numTransactionsUser;
+            break;
+        }
+    }
 
     return [
-        '<button type="button" class="edit btn btn-primary btn-md" data-toggle="modal" data-target="#editEntityModal">' +
-            'Launch demo modal' +
-            '</button>'
+        'Total Transactions: ( ' + count + ' ) '
     ].join('');
 };
 
 window.userGridActionEvents = {
     'click .edit': function (e, value, row, index) {
 
-        //$('#detail').bootstrapTable('insertRow', {
-        //    index: ++index,
-        //    row: {
-        //        numUsers: '<div class="row"><div class="col-sm-9">Level 1: .col-sm-9<div class="row"><div class="col-xs-8 col-sm-6">Level 2: .col-xs-8 .col-sm-6</div><div class="col-xs-4 col-sm-6">Level 2: .col-xs-4 .col-sm-6</div></div></div></div>'
-        //    }
-        //});
+        $('#detail').bootstrapTable('destroy');
 
-        //$('#detail').bootstrapTable('mergeCells', {
-        //    index: 1,
-        //    field: 'numUsers',
-        //    colspan: 8,
-        //    rowspan: 1
-        //});
-
-        $('#detail-table-header').text('Users');
+        $('#detail-table-header').text('Users Detail:');
 
         $('#detail').bootstrapTable({
             url: '/PreBilling/Users',
+            cache: false,
             search: true,
             showRefresh: true,
-            showColumns: true,
             pagination: true,
             pageNumber: 1,
             pageSize: 10,
@@ -94,6 +89,36 @@ window.userGridActionEvents = {
             }, {
                 field: 'numTransactionsUser',
                 title: 'User Transactions (Total)',
+            }]
+        });
+
+    }
+};
+
+window.productGridActionEvents = {
+    'click .edit': function (e, value, row, index) {
+
+        $('#detail').bootstrapTable('destroy');
+
+        $('#detail-table-header').text('Products Detail:');
+
+        $('#detail').bootstrapTable({
+            url: '/PreBilling/Products',
+            cache: false,
+            search: true,
+            showRefresh: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'User ID',
+                visible: false
+            }, {
+                field: 'productName',
+                title: 'Product Name',
+                sortable: true
             }]
         });
 

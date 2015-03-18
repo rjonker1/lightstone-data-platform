@@ -55,14 +55,15 @@ namespace Billing.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
             };
 
-            //Post["/PreBilling"] = _ =>
-            //{
-            //    var model = this.Bind<DataTablesViewModel>();
-            //    //var dto = new PreBillingDto();
-            //    var dto = (IEnumerable<PreBilling>)(preBilling.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
-            //    //dto = new[] {new PreBillingDto()};
-            //    return Response.AsJson( new { data = new[] { new PreBillingDto() }.ToList() });
-            //};
+            Get["/PreBilling/Products"] = _ =>
+            {
+                var dto = new ArrayList
+                {
+                    new PreBilling().NumProducts
+                };
+                return Negotiate
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+            };
 
         }
     }
