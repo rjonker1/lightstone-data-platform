@@ -310,6 +310,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\app\data.js" />
     <Content Include="Scripts\bootstrap-table\bootstrap-table.min.js" />
     <Content Include="Scripts\bootstrap-table\extensions\editable\bootstrap-table-editable.min.js" />
     <Content Include="Scripts\bootstrap-table\extensions\export\bootstrap-table-export.min.js" />
