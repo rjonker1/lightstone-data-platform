@@ -1,7 +1,7 @@
 ﻿using System;
-using DataPlatform.Shared.Enums;
 using FluentNHibernate.Testing;
 using PackageBuilder.Domain.Entities.DataProviders.Read;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestHelper.BaseTests;
 using Xunit.Extensions;
 
