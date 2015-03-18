@@ -36,27 +36,43 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.795\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.805, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core, Version=1.0.0.807, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.805\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.807\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.805\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.805, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.807, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.805\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.807\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.807, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.807\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.803, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.803\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="NEventStore">
-      <HintPath>..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,7 +80,15 @@
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.1.0.0.795\lib\net45\NHibernate.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="PackageBuilder.Domain.Core.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\PackageBuilder.Domain.Core.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.807\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -113,24 +137,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
-      <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
-      <Name>PackageBuilder.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Domain.Core.Contracts\PackageBuilder.Domain.Core.Contracts.csproj">
-      <Project>{361D1B44-9C69-4FBC-8FFA-184909E28D19}</Project>
-      <Name>PackageBuilder.Domain.Core.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
-      <Project>{15ea3113-e3a9-4baa-8746-a92973e7d3c0}</Project>
-      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
-      <Project>{90905013-b92b-44b2-8099-eb31042ee399}</Project>
-      <Name>PackageBuilder.Domain.Entities.Enums</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

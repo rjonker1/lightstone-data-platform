@@ -144,7 +144,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             var request = new LaceRequest();
 
             request.LicensePlateNumberRequest(this,
-                new Requests.User(userId, userName, firstName), new Context(Name, null),
+                new User(userId, userName, firstName), new Context(Name, null),
                 new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty,
                     string.Empty),
                 new Aggregation(requestId));
