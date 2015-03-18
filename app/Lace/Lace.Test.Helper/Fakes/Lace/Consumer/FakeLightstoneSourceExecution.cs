@@ -11,6 +11,7 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
@@ -26,7 +27,6 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             _request = request;
             _monitoring = monitoring;
         }
-
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
         {

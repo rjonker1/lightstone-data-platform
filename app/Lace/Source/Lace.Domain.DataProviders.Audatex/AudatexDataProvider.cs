@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -11,6 +10,7 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.Audatex
 {

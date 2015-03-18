@@ -10,6 +10,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder
 {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -10,12 +9,12 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
     class FakeSignioDataProvider: ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 

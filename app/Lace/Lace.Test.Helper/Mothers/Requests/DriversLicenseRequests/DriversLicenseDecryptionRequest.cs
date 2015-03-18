@@ -2,7 +2,7 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Test.Helper.Builders.Scans;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 
 namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
 {

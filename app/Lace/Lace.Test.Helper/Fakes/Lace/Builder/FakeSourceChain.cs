@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using PackageBuilder.Domain.Entities;
+using PackageBuilder.Domain.Entities.Contracts.Actions;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {

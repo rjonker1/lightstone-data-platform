@@ -1,6 +1,5 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
-using PackageBuilder.Domain.Entities.DataProviders.ReadModels;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Builders.Buses

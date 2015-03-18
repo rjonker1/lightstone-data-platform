@@ -13,6 +13,7 @@ using Lace.Domain.DataProviders.Rgt.Infrastructure;
 using Lace.Domain.DataProviders.Rgt.Repositories.Factory;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.Rgt
 {
