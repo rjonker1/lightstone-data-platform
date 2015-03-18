@@ -3,125 +3,13 @@
 
 <div class="box">
 
-    <div class="box-header"></div>
     <table id="table"></table>
     
-    <!-- Modal -->
-    <div class="modal fade" id="editEntityModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="control-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    
-    <div class="table-height">
-        <table class="table table-condensed" style="border-collapse:collapse;">
-            <thead>
-                <tr>
-                    <th>Select Available Group(s)</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody>
-                <a href="#" class="btn btn-default" id="openBtn">Open modal</a>
-
-                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">×</button>
-                                <h3>Modal header</h3>
-                            </div>
-                            <div class="modal-body">
-                                <p>My modal content here…</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <tr style="height: 0px;">
-                    <td class="col-md-8">
-                        <input type="checkbox" id="selectAuthoriser" data-id="66" data-name="group1" data-address="">
-                        <label for="selectAuthoriser">group1</label>
-
-                    </td>
-                    <td class="col-md-8">
-                        <button data-toggle="collapse" data-target=".demo1"><span class="glyphicon glyphicon-chevron-down"></span></button>
-
-                    </td>
-
-                </tr>
-                <tr class="collapse demo1">
-                    <td colspan="2" class="col-md-8">
-                        <div><ul><li>Authoriser1</li><li>Authoriser2</li><li>Authoriser3</li></ul></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-8">
-                        <input type="checkbox" id="selectAuthoriser2" data-id="66" data-name="group1" data-address="">
-                        <label for="selectAuthoriser2">group2</label>
-
-                    </td>
-                    <td class="col-md-8">
-                        <button><span class="glyphicon glyphicon-chevron-down"></span></button>
-
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-8">
-                        <input type="checkbox" id="selectAuthoriser3" data-id="66" data-name="group3" data-address="">
-                        <label for="selectAuthoriser3">group1</label>
-
-                    </td>
-                    <td class="col-md-8">
-                        <button><span class="glyphicon glyphicon-chevron-down"></span></button>
-
-
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="hiddenRow">
-                        <div>
-                            Test
-
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    
-
+    <h2 id="detail-table-header"></h2>
+    <table id="detail"></table>
+ 
 
     <script>
-
-        $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/PreBilling/Add", text: "Add" }).appendTo($("div.box-header"));
 
         $('#table').bootstrapTable({
             url: '/PreBilling',
@@ -143,7 +31,8 @@
             }, {
                 field: 'numUsers',
                 title: '# Users',
-                formatter: gridUsersFormatter
+                formatter: gridUsersFormatter,
+                events: userGridActionEvents
             }, {
                 field: 'type',
                 title: 'User Type',
@@ -154,7 +43,8 @@
                 sortable: true
             }, {
                 field: 'numProducts',
-                title: '# Products'
+                title: '# Products',
+                formatter: gridProductsFormatter
             }, {
                 field: 'numTransactions',
                 title: '# Transactions'
@@ -165,10 +55,6 @@
             }, {
                 field: 'total',
                 title: 'Total',
-            }, {
-                title: 'Action',
-                formatter: gridActionFormatter,
-                events: gridActionEvents
             }]
         });
 

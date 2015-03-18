@@ -45,6 +45,16 @@ namespace Billing.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
             };
 
+            Get["/PreBilling/Users"] = _ =>
+            {
+                var dto = new ArrayList
+                {
+                    new PreBilling().NumUsers
+                };
+                return Negotiate
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+            };
+
             //Post["/PreBilling"] = _ =>
             //{
             //    var model = this.Bind<DataTablesViewModel>();

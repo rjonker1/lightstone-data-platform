@@ -7,11 +7,13 @@ namespace Billing.Domain.Entities.DemoEntities
     {
         public virtual string Name { get; set; }
         public virtual string Surname { get; set; }
+        public virtual int NumTransactionsUser { get; set; }
 
         public User()
         {
             Name = "TT";
             Surname = "QQ";
+            NumTransactionsUser = 322;
         }
     }
 }
