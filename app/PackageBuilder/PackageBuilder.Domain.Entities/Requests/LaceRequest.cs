@@ -2,35 +2,36 @@
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+using PackageBuilder.Domain.Entities.Packages.Write;
 
 namespace PackageBuilder.Domain.Entities.Requests
 {
-    //public class LaceRequest : ILaceRequest
-    //{
-    //    public IProvideUserInformationForRequest User { get; private set; }
-    //    public IProvideContextForRequest Context { get; private set; }
-    //    public IProvideVehicleInformationForRequest Vehicle { get; private set; }
-    //    public IProvideRequestAggregation RequestAggregation { get; private set; }
-    //    public IProvideCoOrdinateInformationForRequest CoOrdinates { get; private set; }
-    //    public IProvideJisInformation Jis { get; private set; }
-    //    public IProvideDriversLicenseInformationForRequest DriversLicense { get; private set; }
-    //    public IProvideFicaInformationForRequest Fica { get; private set; }
-    //    public DateTime RequestDate { get; private set; }
-    //    public IPackage Package { get; private set; }
-    //    public IProvidePropertyInformationForRequest Property { get; private set; }
+    public class LaceRequest : ILaceRequest
+    {
+        public IProvideUserInformationForRequest User { get; private set; }
+        public IProvideContextForRequest Context { get; private set; }
+        public IProvideVehicleInformationForRequest Vehicle { get; private set; }
+        public IProvideRequestAggregation RequestAggregation { get; private set; }
+        public IProvideCoOrdinateInformationForRequest CoOrdinates { get; private set; }
+        public IProvideJisInformation Jis { get; private set; }
+        public IProvideDriversLicenseInformationForRequest DriversLicense { get; private set; }
+        public IProvideFicaInformationForRequest Fica { get; private set; }
+        public DateTime RequestDate { get; private set; }
+        public IPackage Package { get; private set; }
+        public IProvidePropertyInformationForRequest Property { get; private set; }
 
-    //    public void LicensePlateNumberRequest(Package package, IProvideUserInformationForRequest user,
-    //        IProvideContextForRequest context, IProvideVehicleInformationForRequest vehicle,
-    //        IProvideRequestAggregation requestAggregation)
-    //    {
-    //        Package = package;
-    //        User = user;
-    //        Context = context;
-    //        Vehicle = vehicle;
-    //        RequestAggregation = requestAggregation;
-    //        RequestDate = DateTime.UtcNow;
-    //    }
-    //}
+        public void LicensePlateNumberRequest(Package package, IProvideUserInformationForRequest user,
+            IProvideContextForRequest context, IProvideVehicleInformationForRequest vehicle,
+            IProvideRequestAggregation requestAggregation)
+        {
+            Package = package;
+            User = user;
+            Context = context;
+            Vehicle = vehicle;
+            RequestAggregation = requestAggregation;
+            RequestDate = DateTime.UtcNow;
+        }
+    }
 
     public class Context : IProvideContextForRequest
     {

@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Helpers.Extensions;
+using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
@@ -12,6 +13,7 @@ using PackageBuilder.Domain.Entities.Contracts.States.Read;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Events;
+using PackageBuilder.Domain.Entities.Requests;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.Packages.Write
@@ -137,18 +139,18 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
         }
 
-        //public ILaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId)
-        //{
-        //    var request = new LaceRequest();
+        public ILaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId)
+        {
+            var request = new LaceRequest();
 
-        //    request.LicensePlateNumberRequest(this,
-        //        new Requests.User(userId, userName, firstName), new Context(Name, null),
-        //        new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty,
-        //            string.Empty),
-        //        new Aggregation(requestId));
+            request.LicensePlateNumberRequest(this,
+                new Requests.User(userId, userName, firstName), new Context(Name, null),
+                new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty,
+                    string.Empty),
+                new Aggregation(requestId));
 
-        //    return request;
-        //}
+            return request;
+        }
 
         public override string ToString()
         {
