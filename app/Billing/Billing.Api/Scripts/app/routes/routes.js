@@ -5,12 +5,27 @@
     });
 
     initializePreBilling(sammy);
+    intitializeMI(sammy);
+    initializeAdminBilling(sammy);
 }
 
 function initializePreBilling(sammy) {
 
     sammy.get('#/PreBilling', function(context) {
         context.load('/PreBilling', { dataType: 'html', cache: false }).swap();
+    });
+}
+
+function intitializeMI(sammy) {
+
+    sammy.get('#/MI', function(context) {
+        context.load('/MI', { dataType: 'html', cache: false }).swap();
+    });
+}
+
+function initializeAdminBilling(sammy) {
+    sammy.get('#/AdminBilling', function(context) {
+        context.load('/Admin/Billing', { dataType: 'html', cache: false }).swap();
     });
 }
 

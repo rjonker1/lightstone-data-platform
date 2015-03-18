@@ -499,6 +499,8 @@
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />
+    <Compile Include="Modules\AdminBillingModule.cs" />
+    <Compile Include="Modules\MIModule.cs" />
     <Compile Include="Modules\PreBillingModule.cs" />
     <Compile Include="Modules\Foo.cs" />
     <Compile Include="Modules\IndexModule.cs" />
@@ -523,6 +525,8 @@
     <Content Include="Views\Shared\PageHeader.cshtml" />
     <Content Include="Views\Shared\Sidebar.cshtml" />
     <Content Include="Views\PreBIlling\Index.cshtml" />
+    <Content Include="Views\MI\Index.cshtml" />
+    <Content Include="Views\AdminBilling\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

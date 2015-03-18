@@ -1,0 +1,54 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("M.I.", ""))
+
+<div class="box">
+
+    <table id="table"></table>
+
+    <h2 id="detail-table-header"></h2>
+    <table id="detail"></table>
+
+    <script>
+
+        $('#table').bootstrapTable({
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'customerName',
+                title: 'Customer Name',
+                sortable: true
+            }, {
+                field: 'username',
+                title: 'Username',
+                sortable: true
+            }, {
+                field: 'productType',
+                title: 'Product Type',
+                sortable: true
+            }, {
+                field: 'accountManager',
+                title: 'Account Manager',
+                sortable: true
+            }, {
+                field: 'industry',
+                title: 'Industry',
+                sortable: true
+            }, {
+                field: 'period',
+                title: 'Period',
+                sortable: true
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+    </script>
+</div>
