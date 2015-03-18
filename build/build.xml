@@ -520,6 +520,32 @@
     </nuget> 
 
     <nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts</name>
+      <folder>app/PackageBuilder/PackageBuilder.Domain.Entities.Contracts</folder>
+      <author>CustomApp</author>
+      <description>PackageBuilder.Domain.Entities.Contracts</description>
+      <includes>
+        <include pattern="*.dll" to="lib\net45" />
+        <include pattern="*.pdb" to="lib\net45" />        
+      </includes>
+      <dependencies>
+      </dependencies>
+    </nuget> 
+
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums</name>
+      <folder>app/PackageBuilder/PackageBuilder.Domain.Entities.Enums</folder>
+      <author>CustomApp</author>
+      <description>PackageBuilder.Domain.Entities.Enums</description>
+      <includes>
+        <include pattern="*.dll" to="lib\net45" />
+        <include pattern="*.pdb" to="lib\net45" />        
+      </includes>
+      <dependencies>
+      </dependencies>
+    </nuget> 
+
+    <nuget deploy="false">
       <name>Lightstone.Dataplatform.PackageBuilder.TestObjects</name>
       <folder>app/PackageBuilder/PackageBuilder.TestObjects</folder>
       <author>CustomApp</author>
