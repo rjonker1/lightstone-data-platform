@@ -7,7 +7,6 @@ using Lace.Domain.Core.Requests.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
@@ -30,10 +29,10 @@ namespace Api.Domain.Infrastructure.Extensions
                 var contractResolver = new DefaultContractResolver();
                 contractResolver.DefaultMembersSearchFlags |= BindingFlags.NonPublic;
 
-                var settings = new JsonSerializerSettings()
+                var settings = new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver,
-                    Converters = new List<JsonConverter>()
+                    Converters = new List<JsonConverter>
                     {
                         new CustomConverter<IAction, Action>(),
                         new CustomConverter<IIndustry, Industry>(),
@@ -42,10 +41,6 @@ namespace Api.Domain.Infrastructure.Extensions
                         new CustomConverter<IDataProvider, DataProvider>(),
                     }
                 };
-                //settings.Converters.Add(actionConverter);
-                //settings.Converters.Add(criteriaConverter);
-                //settings.Converters.Add(dataFieldConverter);
-                //settings.Converters.Add(dataProviderConverter);
 
                 var dto = JsonConvert.DeserializeObject<PackageResponseDto>(
                     json, settings);
@@ -90,79 +85,11 @@ namespace Api.Domain.Infrastructure.Extensions
         }
     }
 
-    public class EntityConverter : CustomCreationConverter<PackageBuilder.Core.Entities.IEntity>
-    {
-        public Type Type { get; private set; }
-
-        public EntityConverter(Type type)
-        {
-            Type = type;
-        }
-
-        public override IEntity Create(Type objectType)
-        {
-            return (IEntity) Activator.CreateInstance(Type);
-        }
-    }
-
-
     public class CustomConverter<I, T> : CustomCreationConverter<I>
     {
-        //public Type Type { get; private set; }
-
-        //public ActionDataConverter(Type type)
-        //{
-        //    Type = type;
-        //}
-
         public override I Create(Type objectType)
         {
             return (I) Activator.CreateInstance(typeof(T));
-        }
-    }
-
-    public class CriteriaDataConverter : CustomCreationConverter<ICriteria>
-    {
-        public Type Type { get; private set; }
-
-        public CriteriaDataConverter(Type type)
-        {
-            Type = type;
-        }
-
-        public override ICriteria Create(Type objectType)
-        {
-            return (ICriteria) Activator.CreateInstance(Type);
-        }
-    }
-
-    public class DataFieldDataConverter : CustomCreationConverter<IDataField>
-    {
-        public Type Type { get; private set; }
-
-        public DataFieldDataConverter(Type type)
-        {
-            Type = type;
-        }
-
-        public override IDataField Create(Type objectType)
-        {
-            return (IDataField) Activator.CreateInstance(Type);
-        }
-    }
-
-    public class DataProviderDataConverter : CustomCreationConverter<IDataProvider>
-    {
-        public Type Type { get; private set; }
-
-        public DataProviderDataConverter(Type type)
-        {
-            Type = type;
-        }
-
-        public override IDataProvider Create(Type objectType)
-        {
-            return (IDataProvider) Activator.CreateInstance(Type);
         }
     }
 }

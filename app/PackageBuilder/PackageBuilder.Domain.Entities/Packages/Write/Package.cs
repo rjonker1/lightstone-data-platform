@@ -4,12 +4,15 @@ using System.Runtime.Serialization;
 using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Helpers.Extensions;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.Contracts.States.Read;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Events;
@@ -152,9 +155,21 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             return request;
         }
 
+        public IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders)
+        {
+            foreach (var dataProvider in dataProviders)
+            {
+                var dataFields = Mapper.Map(dataProvider, dataProvider.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
+                
+                yield return new DataProvider(new Guid(), DataProviderName.Ivid, "", 0, null, "", DateTime.UtcNow, dataFields);
+            }
+        }
+
         public override string ToString()
         {
             return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);
         }
     }
+
+    public class 
 }
