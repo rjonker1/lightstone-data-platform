@@ -170,6 +170,4 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             return "{0} - {1} - {2}".FormatWith(GetType().FullName, Id, Name);
         }
     }
-
-    public class 
 }
