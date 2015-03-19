@@ -1,19 +1,25 @@
 ﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Data;
 using System.Runtime.Serialization;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+using Lace.Domain.Core.Contracts.DataProviders.Business;
 
 namespace Lace.Domain.Core.Entities
 {
     [Serializable]
     [DataContract]
-    public class ReturnCompaniesRequest 
+    public class ReturnCompaniesRequest
     {
         public ReturnCompaniesRequest()
         {
-            
         }
 
 
-        public ReturnCompaniesRequest(string userToken, string companyName, string companyRegnum, string companyVatNumber)
+        public ReturnCompaniesRequest(string userToken, string companyName, string companyRegnum,
+            string companyVatNumber)
         {
             UserToken = userToken;
             CompanyName = companyName;
@@ -32,29 +38,70 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public string CompanyVatnumber { get; private set; }
-        
     }
 
     [Serializable]
     [DataContract]
-    public class ReturnCompaniesResponse
+    public class ReturnCompaniesResponse : LightstoneBusinessResponse
     {
-        
-        // Default Constructor
+
         public ReturnCompaniesResponse()
         {
             
         }
 
+       
 
-        public ReturnCompaniesResponse(string result)
+        /// <remarks />
+       //[XmlType(AnonymousType = true)]
+        [DataContract]
+        public class Company : IRespondWithBusiness
+        {
+            /// <remarks />
+
+            [DataMember]
+            public uint CompanyId { get; set; }
+
+            /// <remarks />
+            [DataMember]
+            public string CompanyName { get; set; }
+
+            /// <remarks />
+            [DataMember]
+            public string CompanyRegNumber { get; set; }
+
+            /// <remarks />
+            [DataMember]
+            public string VatNo { get; set; }
+
+            /// <remarks />
+            [DataMember]
+            public byte StatusCode { get; set; }
+
+            /// <remarks />
+            [DataMember]
+            public string Id { get; set; }
+
+            /// <remarks />
+            [DataMember]
+            public byte RowOrder { get; set; }
+
+
+            public Type Type { get; private set; }
+            public string TypeName { get; private set; }
+            //public DataSet Result { get; private set; }
+        }
+
+      
+
+        public ReturnCompaniesResponse(IEnumerable<Company> result)
+            
         {
             Result = result;
         }
 
-       
 
         [DataMember]
-        public string Result { get; private set; }
+        public IEnumerable<Company> Result { get; private set; }
     }
 }
