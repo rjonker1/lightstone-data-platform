@@ -19,6 +19,7 @@ namespace PackageBuilder.Domain.Entities.Requests
         public DateTime RequestDate { get; private set; }
         public IPackage Package { get; private set; }
         public IProvidePropertyInformationForRequest Property { get; private set; }
+        public IProvideBusinessInformationForRequest Business { get; private set; }
 
         public void LicensePlateNumberRequest(Package package, IProvideUserInformationForRequest user,
             IProvideContextForRequest context, IProvideVehicleInformationForRequest vehicle,
