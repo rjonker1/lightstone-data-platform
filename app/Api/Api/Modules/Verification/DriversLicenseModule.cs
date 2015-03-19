@@ -12,9 +12,7 @@ using DataPlatform.Shared.Identifiers;
 using Lace.Domain.Core.Requests.Contracts;
 using Nancy;
 using Nancy.ModelBinding;
-using PackageBuilder.Core.Entities;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
-using Shared.BuildingBlocks.Api;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 

@@ -56,8 +56,8 @@ namespace Api.Modules
 
                 var requestId = Guid.NewGuid();
 
-                var request = package.ToLicensePlateSearchRequest(userId, apiRequest.Username,
-                    apiRequest.SearchTerm, apiRequest.Username, requestId);
+                //var request = package.ToLicensePlateSearchRequest(userId, apiRequest.Username, apiRequest.SearchTerm, apiRequest.Username, requestId);
+                var request = package.FormLaceRequest(userId, apiRequest.Username, apiRequest.SearchTerm, apiRequest.Username, requestId);
 
                 var responses = entryPoint.GetResponsesFromLace(request);
 

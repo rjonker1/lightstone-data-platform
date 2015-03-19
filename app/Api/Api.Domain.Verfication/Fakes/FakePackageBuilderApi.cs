@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.TestObjects.Mothers;
-using Shared.BuildingBlocks.Api;
 using Shared.BuildingBlocks.Api.ApiClients;
 
 namespace Api.Domain.Verification.Fakes
@@ -22,7 +21,7 @@ namespace Api.Domain.Verification.Fakes
         {
             get
             {
-                return new Dictionary<Guid, IPackage>()
+                return new Dictionary<Guid, IPackage>
                 {
                     {
                         new Guid("EB49A837-D9E3-4F2A-8DC9-2CB0BB5D48E2"), WritePackageMother.LicenseScanPackage

@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.Industries.Read
         [DataMember]
         public virtual bool IsSelected { get; set; }
 
-        protected Industry() { }
+        public Industry() { }
 
         public Industry(Guid id, string name, bool selected) : base(id)
         {

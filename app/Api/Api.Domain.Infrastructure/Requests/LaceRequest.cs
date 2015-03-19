@@ -1,7 +1,7 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 
 namespace Api.Domain.Infrastructure.Requests
 {
@@ -19,6 +19,7 @@ namespace Api.Domain.Infrastructure.Requests
 
         public IPackage Package { get; private set; }
         public IProvidePropertyInformationForRequest Property { get; private set; }
+        public IProvideBusinessInformationForRequest Business { get; private set; }
 
         public IProvideRequestAggregation RequestAggregation { get; private set; }
 

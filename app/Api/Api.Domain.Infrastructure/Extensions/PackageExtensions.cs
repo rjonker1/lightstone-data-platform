@@ -7,11 +7,17 @@ using Lace.Domain.Core.Requests.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using NHibernate.Linq.Functions;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Domain.Entities;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts;
+using PackageBuilder.Domain.Entities.Contracts.Actions;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
+using PackageBuilder.Domain.Entities.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
+using PackageBuilder.Domain.Entities.Packages.Write;
 
 namespace Api.Domain.Infrastructure.Extensions
 {
@@ -21,13 +27,6 @@ namespace Api.Domain.Infrastructure.Extensions
         {
             try
             {
-
-                var actionConverter = new ActionDataConverter(typeof (Action));
-                var criteriaConverter = new CriteriaDataConverter(typeof (Criteria));
-                var dataFieldConverter = new DataFieldDataConverter(typeof (DataField));
-                var dataProviderConverter =
-                    new DataProviderDataConverter(
-                        typeof (PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider));
                 var contractResolver = new DefaultContractResolver();
                 contractResolver.DefaultMembersSearchFlags |= BindingFlags.NonPublic;
 
@@ -36,10 +35,11 @@ namespace Api.Domain.Infrastructure.Extensions
                     ContractResolver = contractResolver,
                     Converters = new List<JsonConverter>()
                     {
-                        actionConverter,
-                        criteriaConverter,
-                        dataFieldConverter,
-                        dataProviderConverter
+                        new CustomConverter<IAction, Action>(),
+                        new CustomConverter<IIndustry, Industry>(),
+                        new CustomConverter<ICriteria, Criteria>(),
+                        new CustomConverter<IDataField, DataField>(),
+                        new CustomConverter<IDataProvider, DataProvider>(),
                     }
                 };
                 //settings.Converters.Add(actionConverter);
@@ -106,19 +106,18 @@ namespace Api.Domain.Infrastructure.Extensions
     }
 
 
-
-    public class ActionDataConverter : CustomCreationConverter<IAction>
+    public class CustomConverter<I, T> : CustomCreationConverter<I>
     {
-        public Type Type { get; private set; }
+        //public Type Type { get; private set; }
 
-        public ActionDataConverter(Type type)
-        {
-            Type = type;
-        }
+        //public ActionDataConverter(Type type)
+        //{
+        //    Type = type;
+        //}
 
-        public override IAction Create(Type objectType)
+        public override I Create(Type objectType)
         {
-            return (IAction) Activator.CreateInstance(Type);
+            return (I) Activator.CreateInstance(typeof(T));
         }
     }
 
@@ -137,8 +136,7 @@ namespace Api.Domain.Infrastructure.Extensions
         }
     }
 
-    public class DataFieldDataConverter :
-        CustomCreationConverter<IDataField>
+    public class DataFieldDataConverter : CustomCreationConverter<IDataField>
     {
         public Type Type { get; private set; }
 
@@ -153,8 +151,7 @@ namespace Api.Domain.Infrastructure.Extensions
         }
     }
 
-    public class DataProviderDataConverter :
-        CustomCreationConverter<PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider>
+    public class DataProviderDataConverter : CustomCreationConverter<IDataProvider>
     {
         public Type Type { get; private set; }
 
@@ -163,10 +160,9 @@ namespace Api.Domain.Infrastructure.Extensions
             Type = type;
         }
 
-        public override PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider Create(Type objectType)
+        public override IDataProvider Create(Type objectType)
         {
-            return
-                (PackageBuilder.Domain.Entities.DataProviders.WriteModels.IDataProvider) Activator.CreateInstance(Type);
+            return (IDataProvider) Activator.CreateInstance(Type);
         }
     }
 }

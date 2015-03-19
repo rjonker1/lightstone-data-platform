@@ -3,7 +3,7 @@ using Billing.Api.Connector;
 using Billing.Api.Dtos;
 using Common.Logging;
 using DataPlatform.Shared.Identifiers;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.Write;
 
 namespace Api.Domain.Infrastructure.Billing
 {
