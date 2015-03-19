@@ -36,10 +36,12 @@ namespace Billing.Api.Modules
 
                 //var dto = (IEnumerable<PreBillingDto>)Mapper.Map<IEnumerable<PreBilling>, IEnumerable<PreBillingDto>>(serverPageRepo.Search("", offset, limit));
 
-                var dto = new ArrayList
-                {
-                    new PreBilling()
-                };
+                //var dto = new ArrayList
+                //{
+                //    new PreBilling()
+                //};
+
+                const string dto = "[{'customerName':'CUST01','numUsers':{'name':'TT','surname':'QQ','numTransactionsUser':322,'id':'00000000-0000-0000-0000-000000000000','modified':null,'modifiedBy':null,'created':null,'createdBy':null},'type':'Type123','owner':'Testeroonie','numProducts':{'productName':'PROD001','id':'00000000-0000-0000-0000-000000000000','modified':null,'modifiedBy':null,'created':null,'createdBy':null},'numTransactions':{'transactionDetail':'Trans001','state':'Successful','id':'00000000-0000-0000-0000-000000000000','modified':null,'modifiedBy':null,'created':null,'createdBy':null},'userType':'User Type 1','total':123,'id':'b94ec2d5-bc22-4d5b-b2f4-12df26060077','modified':null,'modifiedBy':null,'created':null,'createdBy':null}]";
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
@@ -49,7 +51,7 @@ namespace Billing.Api.Modules
             {
                 var dto = new ArrayList
                 {
-                    new PreBilling().NumUsers
+                    //new PreBilling().NumUsers
                 };
                 return Negotiate
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
@@ -59,7 +61,7 @@ namespace Billing.Api.Modules
             {
                 var dto = new ArrayList
                 {
-                    new PreBilling().NumProducts
+                    //new PreBilling().NumProducts
                 };
                 return Negotiate
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
@@ -115,7 +117,7 @@ namespace Billing.Api.Modules
         public PagedList<PreBilling> Search(string searchValue, int pageIndex, int pageSize)
         {
             var predicate = PredicateBuilder.False<PreBilling>();
-            predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+            //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
             return new PagedList<PreBilling>(this, pageIndex, pageSize);
         }
     }

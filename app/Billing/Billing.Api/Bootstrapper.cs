@@ -26,7 +26,7 @@ namespace Billing.Api
             this.Info(() => "Application startup initiated");
             base.ApplicationStartup(container, pipelines);
 
-            container.Resolve<IBus>().Publish(new CreateUpdateEntity(new PreBilling()));//.Publish(new CreateUpdateEntity(new PreBilling()));
+            //container.Resolve<IBus>().Publish(new CreateUpdateEntity(new PreBilling()));//.Publish(new CreateUpdateEntity(new PreBilling()));
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

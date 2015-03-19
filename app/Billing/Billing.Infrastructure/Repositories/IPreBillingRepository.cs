@@ -21,7 +21,7 @@ namespace Billing.Infrastructure.Repositories
         public PagedList<PreBilling> Search(string searchValue, int pageIndex, int pageSize)
         {
             var predicate = PredicateBuilder.False<PreBilling>();
-            predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+            //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
             return new PagedList<PreBilling>(this, pageIndex, pageSize, predicate);
         }
     }

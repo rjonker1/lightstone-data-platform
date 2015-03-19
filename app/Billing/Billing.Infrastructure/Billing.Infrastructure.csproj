@@ -66,12 +66,13 @@
     <Compile Include="NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="NHibernate\Conventions\PrimaryKeyConvention.cs" />
+    <Compile Include="NHibernate\MappingOverrides\CustomerMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\ProductMappingOverride.cs" />
+    <Compile Include="NHibernate\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPreBillingRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NHibernate\MappingOverrides\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
