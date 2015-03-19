@@ -24,6 +24,11 @@ namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
             }
         }
 
+        public IProvideBusinessInformationForRequest Business
+        {
+            get { return new RequestComapanyInformation(); }
+        }
+
         public IProvideUserInformationForRequest User
         {
             get

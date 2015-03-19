@@ -100,5 +100,10 @@ namespace Lace.Test.Helper.Mothers.Requests
                 return new RequestPropertyInformation();
             }
         }
+
+        public IProvideBusinessInformationForRequest Business
+        {
+            get { return new RequestComapanyInformation(); }
+        }
     }
 }

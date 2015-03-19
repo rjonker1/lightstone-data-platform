@@ -24,6 +24,8 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
             }
         }
 
+        public IProvideBusinessInformationForRequest Business { get; private set; }
+
         public IProvideUserInformationForRequest User
         {
             get

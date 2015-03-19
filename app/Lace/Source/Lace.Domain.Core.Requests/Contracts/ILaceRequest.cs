@@ -27,8 +27,6 @@ namespace Lace.Domain.Core.Requests.Contracts
 
         IProvidePropertyInformationForRequest Property { get; }
 
-        //TODO:
-
-     //   IProvideBusinessInformationForRequest Business { get; }
+        IProvideBusinessInformationForRequest Business { get; }
     }
 }
