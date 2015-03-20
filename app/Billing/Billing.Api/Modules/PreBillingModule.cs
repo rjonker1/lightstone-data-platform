@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.Helpers;
@@ -38,7 +39,13 @@ namespace Billing.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
             };
 
-            Get["/PreBilling/Users"] = _ => Response.AsJson(new { Users = users });
+            Get["/PreBilling/Customer/{id}/Users"] = param =>
+            {
+                var searchId = new Guid(param.id);
+                var customerUsers = customers.Where(x => x.Id.Equals(searchId)).Select(x => x.Users);
+
+                return Response.AsJson(new { data = customerUsers });
+            };
 
             Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Transactions = transactions });
 

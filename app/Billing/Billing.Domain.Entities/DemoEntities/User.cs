@@ -12,20 +12,13 @@ namespace Billing.Domain.Entities.DemoEntities
         public virtual string Surname { get; protected internal set; }
         public virtual IEnumerable<TransactionMocks> Transactions { get; protected internal set; }
 
-        [DoNotMap]
-        public virtual IEnumerable<Product> Products
-        {
-            get
-            {
-                return Transactions != null ? Transactions.Select(x => x.Product) : Enumerable.Empty<Product>();
-            }
-        } 
-
-        //public User()
+        //[DoNotMap]
+        //public virtual IEnumerable<Product> Products
         //{
-        //    Name = "TT";
-        //    Surname = "QQ";
-        //    NumTransactionsUser = 322;
-        //}
+        //    get
+        //    {
+        //        return Transactions != null ? Transactions.Select(x => x.Product) : Enumerable.Empty<Product>();
+        //    }
+        //} 
     }
 }

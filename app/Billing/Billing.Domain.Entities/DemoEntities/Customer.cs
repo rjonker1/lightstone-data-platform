@@ -16,7 +16,13 @@ namespace Billing.Domain.Entities.DemoEntities
         {
             get
             {
-                return Users != null ? Users.SelectMany(x => x.Products) : Enumerable.Empty<Product>();
+                var products = Users.Select(x => x.Transactions).SelectMany(y =>
+                {
+                    var transactionMocks = y as IList<TransactionMocks> ?? y.ToList();
+                    return transactionMocks;
+                }).Select(x => x.Product);
+
+                return Users != null ? products : Enumerable.Empty<Product>();
             }
         }
 

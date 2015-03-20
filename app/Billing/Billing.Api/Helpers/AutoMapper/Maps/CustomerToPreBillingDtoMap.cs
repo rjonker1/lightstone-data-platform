@@ -17,7 +17,6 @@ namespace Billing.Api.Helpers.AutoMapper.Maps
             Mapper.CreateMap<Customer, PreBillingDto>()
                 //.ConvertUsing(s => new PreBillingDto{ CustomerName =  s.Name});
                 .ForMember(d => d.CustomerName, opt => opt.MapFrom(x => x.Name));
-
         }
     }
 }
