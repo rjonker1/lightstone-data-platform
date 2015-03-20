@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Billing.Api.ViewModels;
+using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.Helpers;
 using Billing.Domain.Core.Repositories;
 using Billing.Domain.Entities;
@@ -11,20 +8,20 @@ using Billing.Domain.Entities.DemoEntities;
 using Billing.Infrastructure.Helpers;
 using Billing.Infrastructure.Repositories;
 using Nancy;
-using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using NHibernate;
 
 namespace Billing.Api.Modules
 {
     public class PreBillingModule : NancyModule
-    {
-        public PreBillingModule(IPreBillingRepository preBilling, IServerPageRepo serverPageRepo)
+    { 
+        public PreBillingModule(IPreBillingRepository preBilling, IServerPageRepo serverPageRepo, 
+                                IRepository<Customer> customers, IRepository<User> users, IRepository<TransactionMocks> transactions, IRepository<Product> products)
         {
 
             Get["/PreBilling/"] = _ =>
             {
-                var model = this.Bind<DataTablesViewModel>();
+                //var model = this.Bind<DataTablesViewModel>();
 
                 var offset = Context.Request.Query["offset"];
                 var limit = Context.Request.Query["limit"];
@@ -41,66 +38,48 @@ namespace Billing.Api.Modules
                 //    new PreBilling()
                 //};
 
-                const string dto = "[{'customerName':'CUST01','numUsers':{'name':'TT','surname':'QQ','numTransactionsUser':322,'id':'00000000-0000-0000-0000-000000000000','modified':null,'modifiedBy':null,'created':null,'createdBy':null},'type':'Type123','owner':'Testeroonie','numProducts':{'productName':'PROD001','id':'00000000-0000-0000-0000-000000000000','modified':null,'modifiedBy':null,'created':null,'createdBy':null},'numTransactions':{'transactionDetail':'Trans001','state':'Successful','id':'00000000-0000-0000-0000-000000000000','modified':null,'modifiedBy':null,'created':null,'createdBy':null},'userType':'User Type 1','total':123,'id':'b94ec2d5-bc22-4d5b-b2f4-12df26060077','modified':null,'modifiedBy':null,'created':null,'createdBy':null}]";
+                const string dto = "gh";
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
             };
 
-            Get["/PreBilling/Users"] = _ =>
-            {
-                var dto = new ArrayList
-                {
-                    //new PreBilling().NumUsers
-                };
-                return Negotiate
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
-            };
+            Get["/PreBilling/Users"] = _ => Response.AsJson(new { Users = users });
 
-            Get["/PreBilling/Products"] = _ =>
-            {
-                var dto = new ArrayList
-                {
-                    //new PreBilling().NumProducts
-                };
-                return Negotiate
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
-            };
+            Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Transactions = transactions });
+
+            Get["/PreBilling/Products"] = _ => Response.AsJson(new { Products = products });
+
+            Get["/PreBilling/Customers"] = _ => Response.AsJson(new {Customers = customers});
 
         }
     }
 
-    public class PreBillingDto
+    public class PreBillingDto : Entity
     {
-        public Guid Id = Guid.NewGuid();
+        public Guid Id { get; set; }
         public string CustomerName { get; set; }
-        public User NumUsers { get; set; }
+        public IEnumerable<User> Users { get; set; }
         public string Type { get; set; }
         public string Owner { get; set; }
-        public Product NumProducts { get; set; }
-        public TransactionMocks NumTransactions { get; set; }
+        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<TransactionMocks> Transactions { get; set; }
         public string UserType { get; set; }
         public int Total { get; set; }
+
+        public PreBillingDto(Guid id, string customerName, IEnumerable<User> users, string type, string owner, IEnumerable<Product> products, IEnumerable<TransactionMocks> transactions, string userType, int total)
+            : base(id)
+        {
+            CustomerName = customerName;
+            Users = users;
+            Type = type;
+            Owner = owner;
+            Products = products;
+            Transactions = transactions;
+            UserType = userType;
+            Total = total;
+        }
     }
-
-    //public class UsersDto
-    //{
-    //    public Guid Id = Guid.NewGuid();
-    //    public string Name = "TT";
-    //    public string Surname = "QQ";
-    //}
-
-    //public class ProductsDto
-    //{
-    //    public Guid Id = Guid.NewGuid();
-    //    public string ProductName = "Product 123";
-    //}
-
-    //public class TransactionsDto
-    //{
-    //    public Guid Id = Guid.NewGuid();
-    //    public string TransactionDetail = "trans001";
-    //}
 
     public interface IServerPageRepo : IRepository<PreBilling>
     {

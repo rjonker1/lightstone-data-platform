@@ -8,7 +8,7 @@ namespace Billing.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Product> mapping)
         {
-            mapping.HasMany(x => x.Transactions).Cascade.SaveUpdate();
+            //mapping.HasMany(x => x.Transactions).Cascade.SaveUpdate();
         }
     }
 }

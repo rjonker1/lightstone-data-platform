@@ -10,10 +10,6 @@ namespace Billing.Domain.Entities.DemoEntities
         public virtual string State { get; protected internal set; }
         public virtual Product Product { get; protected internal set; } 
 
-        public TransactionMocks()
-        {
-            TransactionDetail = "Trans001";
-            State = "Successful";
-        }
+        public TransactionMocks() { }
     }
 }
