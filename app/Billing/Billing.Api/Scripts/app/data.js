@@ -3,14 +3,9 @@
 function gridUsersFormatter(value, row, index) {
 
     var count = 0;
-    for (user in row.numUsers) {
+    for (user in row.users) {
 
         count++;
-
-        if (row.numUsers.hasOwnProperty(user)) {
-
-            break;
-        }
     }
 
     return [
@@ -24,14 +19,9 @@ function gridUsersFormatter(value, row, index) {
 function gridProductsFormatter(value, row, index) {
 
     var count = 0;
-    for (product in row.numProducts) {
+    for (product in row.products) {
 
         count++;
-
-        if (row.numProducts.hasOwnProperty(product)) {
-
-            break;
-        }
     }
 
     return [
@@ -45,13 +35,9 @@ function gridProductsFormatter(value, row, index) {
 function gridTransactionsFormatter(value, row, index) {
 
     var count = 0;
-    for (user in row.numUsers) {
+    for (user in row.transactions) {
 
-        if (row.numUsers.hasOwnProperty(user)) {
-
-            count += row.numUsers.numTransactionsUser;
-            break;
-        }
+        count++;
     }
 
     return [

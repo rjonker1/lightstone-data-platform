@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoMapper;
 using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.Helpers;
 using Billing.Domain.Core.Repositories;
@@ -28,17 +29,10 @@ namespace Billing.Api.Modules
 
                 if (offset == null) offset = 0;
                 if (limit == null) limit = 10;
-                //var dto = new PreBillingDto();
-                //var dto = (IEnumerable<PreBilling>)(preBilling.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
 
-                //var dto = (IEnumerable<PreBillingDto>)Mapper.Map<IEnumerable<PreBilling>, IEnumerable<PreBillingDto>>(serverPageRepo.Search("", offset, limit));
+                var dto = Mapper.Map<IRepository<Customer>, IEnumerable<PreBillingDto>>(customers, new [] {  new PreBillingDto() });
 
-                //var dto = new ArrayList
-                //{
-                //    new PreBilling()
-                //};
-
-                const string dto = "gh";
+                //const string dto = "gh";
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
@@ -66,6 +60,8 @@ namespace Billing.Api.Modules
         public IEnumerable<TransactionMocks> Transactions { get; set; }
         public string UserType { get; set; }
         public int Total { get; set; }
+
+        public PreBillingDto() { }
 
         public PreBillingDto(Guid id, string customerName, IEnumerable<User> users, string type, string owner, IEnumerable<Product> products, IEnumerable<TransactionMocks> transactions, string userType, int total)
             : base(id)

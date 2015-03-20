@@ -491,6 +491,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\CustomerToPreBillingDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
