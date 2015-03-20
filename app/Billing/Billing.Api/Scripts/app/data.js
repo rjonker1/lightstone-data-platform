@@ -10,50 +10,21 @@ function gridUsersFormatter(value, row, index) {
 
     return [
         'Total Users: ( ' + count + ' ) ' +
-        '<button type="button" class="edit btn btn-primary btn-md">' +
+        '<button type="button" class="view btn btn-primary btn-md">' +
             'View' +
             '</button>'
-    ].join('');
-};
-
-function gridProductsFormatter(value, row, index) {
-
-    var count = 0;
-    for (product in row.products) {
-
-        count++;
-    }
-
-    return [
-        'Total Products: ( ' + count + ' ) ' +
-        '<button type="button" class="edit btn btn-primary btn-md">' +
-            'View' +
-            '</button>'
-    ].join('');
-};
-
-function gridTransactionsFormatter(value, row, index) {
-
-    var count = 0;
-    for (user in row.transactions) {
-
-        count++;
-    }
-
-    return [
-        'Total Transactions: ( ' + count + ' ) '
     ].join('');
 };
 
 window.userGridActionEvents = {
-    'click .edit': function (e, value, row, index) {
+    'click .view': function (e, value, row, index) {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('Users Detail:');
+        $('#detail-table-header').text('Users Detail For Customer: '+row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/PreBilling/Users',
+            url: '/PreBilling/Customer/'+row.id+'/Users',
             cache: false,
             search: true,
             showRefresh: true,
@@ -81,12 +52,28 @@ window.userGridActionEvents = {
     }
 };
 
+function gridProductsFormatter(value, row, index) {
+
+    var count = 0;
+    for (product in row.products) {
+
+        count++;
+    }
+
+    return [
+        'Total Products: ( ' + count + ' ) ' +
+        '<button type="button" class="view btn btn-primary btn-md">' +
+            'View' +
+            '</button>'
+    ].join('');
+};
+
 window.productGridActionEvents = {
-    'click .edit': function (e, value, row, index) {
+    'click .view': function (e, value, row, index) {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('Products Detail:');
+        $('#detail-table-header').text('Products Detail For Customer: '+row.customerName);
 
         $('#detail').bootstrapTable({
             url: '/PreBilling/Products',
@@ -109,4 +96,17 @@ window.productGridActionEvents = {
         });
 
     }
+};
+
+function gridTransactionsFormatter(value, row, index) {
+
+    var count = 0;
+    for (user in row.transactions) {
+
+        count++;
+    }
+
+    return [
+        'Total Transactions: ( ' + count + ' ) '
+    ].join('');
 };

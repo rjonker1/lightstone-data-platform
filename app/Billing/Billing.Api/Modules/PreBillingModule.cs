@@ -43,8 +43,8 @@ namespace Billing.Api.Modules
             {
                 var searchId = new Guid(param.id);
                 var customerUsers = customers.Where(x => x.Id.Equals(searchId)).Select(x => x.Users);
-
-                return Response.AsJson(new { data = customerUsers });
+             
+                return Response.AsJson(new { data = customerUsers.SelectMany(x => x.Select(y => y)) });
             };
 
             Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Transactions = transactions });
