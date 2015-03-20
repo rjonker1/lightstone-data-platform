@@ -44,8 +44,9 @@ window.userGridActionEvents = {
                 field: 'surname',
                 title: 'Surname',
             }, {
-                field: 'numTransactionsUser',
+                field: 'transactions',
                 title: 'User Transactions (Total)',
+                formatter: gridTransactionsFormatter
             }]
         });
 
@@ -76,7 +77,7 @@ window.productGridActionEvents = {
         $('#detail-table-header').text('Products Detail For Customer: '+row.customerName);
 
         $('#detail').bootstrapTable({
-            url: '/PreBilling/Products',
+            url: '/PreBilling/Customer/' + row.id + '/Products',
             cache: false,
             search: true,
             showRefresh: true,
@@ -101,7 +102,8 @@ window.productGridActionEvents = {
 function gridTransactionsFormatter(value, row, index) {
 
     var count = 0;
-    for (user in row.transactions) {
+    console.log(row.transaction);
+    for (transaction in row.transactions) {
 
         count++;
     }

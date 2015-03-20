@@ -47,9 +47,15 @@ namespace Billing.Api.Modules
                 return Response.AsJson(new { data = customerUsers.SelectMany(x => x.Select(y => y)) });
             };
 
-            Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Transactions = transactions });
+            Get["/PreBilling/Customer/{id}/Products"] = param =>
+            {
+                var searchId = new Guid(param.id);
+                var customerProducts = customers.Get(searchId).Products;
 
-            Get["/PreBilling/Products"] = _ => Response.AsJson(new { Products = products });
+                return Response.AsJson(new { data = customerProducts });
+            };
+
+            Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
 
             Get["/PreBilling/Customers"] = _ => Response.AsJson(new {Customers = customers});
 
