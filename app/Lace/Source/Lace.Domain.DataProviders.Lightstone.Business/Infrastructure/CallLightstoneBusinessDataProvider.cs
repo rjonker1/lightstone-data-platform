@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -17,6 +16,7 @@ using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
 using CommandType = Lace.Shared.Monitoring.Messages.Core.CommandType;
+using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 {
@@ -54,8 +54,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
 
                 var token = client.Proxy.authenticateUser(_username, _password);
-                
-
                 
                 var request = new GetBusinessRequest(_request)
                     .Map()

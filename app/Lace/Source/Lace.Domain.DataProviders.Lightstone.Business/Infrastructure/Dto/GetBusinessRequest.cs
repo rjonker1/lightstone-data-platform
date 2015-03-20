@@ -1,4 +1,6 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using System.Xml.Schema;
+using System.Xml.Serialization;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
 {
@@ -15,37 +17,29 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
 
         public GetBusinessRequest Map()
         {
-
-            // TODO: _request.Business.user_token and the other fields;
-            //UserToken = _request.Business.UserToken;
-           
+            UserToken = _request.Business.UserToken;
+            CompanyName = _request.Business.CompanyName;
+            CompanyRegnum = _request.Business.CompanyRegNumber;
+            CompanyVatnumber = _request.Business.CompanyVatNumber;
             return this;
         }
 
         public GetBusinessRequest Validate()
         {
-            // TODO
-            //RequestIsValid = !string.IsNullOrEmpty(user_token) && !string.IsNullOrEmpty(IdCkOfOwner) &&
-            //                 !string.IsNullOrEmpty(TrackingNumber);
+            RequestIsValid = !string.IsNullOrEmpty(UserToken);
             return this;
         }
 
 
         public string UserToken { get; private set; }
 
-       
+
         public string CompanyName { get; private set; }
 
-       
+
         public string CompanyRegnum { get; private set; }
 
-       
+
         public string CompanyVatnumber { get; private set; }
-
-
-
-      
     }
-
-   
 }
