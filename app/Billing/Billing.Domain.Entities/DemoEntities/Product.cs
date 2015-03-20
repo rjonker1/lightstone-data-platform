@@ -7,6 +7,8 @@ namespace Billing.Domain.Entities.DemoEntities
     public class Product : Entity
     {
         public virtual string ProductName { get; set; }
+        public virtual float CoS { get; set; }
+        public virtual float Revenue { get; set; }
         //public virtual IEnumerable<TransactionMocks> Transactions { get; protected internal set; }
 
         public Product() { }

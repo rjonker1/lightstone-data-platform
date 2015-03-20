@@ -87,11 +87,19 @@ window.productGridActionEvents = {
             pageList: [10, 25, 50, 100, 'All'],
             columns: [{
                 field: 'id',
-                title: 'User ID',
+                title: 'Product ID',
                 visible: false
             }, {
                 field: 'productName',
                 title: 'Product Name',
+                sortable: true
+            }, {
+                field: 'coS',
+                title: 'Cost Of Sale',
+                sortable: true
+            }, {
+                field: 'revenue',
+                title: 'Revenue',
                 sortable: true
             }]
         });
@@ -101,14 +109,15 @@ window.productGridActionEvents = {
 
 function gridTransactionsFormatter(value, row, index) {
 
-    var count = 0;
-    console.log(row.transaction);
-    for (transaction in row.transactions) {
+   
+};
 
-        count++;
-    }
+function gridCOSFormatter(value, row, index) {
+
+    var total = 0;
+    total += row.coS;
 
     return [
-        'Total Transactions: ( ' + count + ' ) '
+        total
     ].join('');
 };

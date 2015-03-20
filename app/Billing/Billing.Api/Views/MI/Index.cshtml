@@ -11,6 +11,7 @@
     <script>
 
         $('#table').bootstrapTable({
+            url: "/MI",
             search: true,
             showRefresh: true,
             showColumns: true,
@@ -23,28 +24,17 @@
                 title: 'Item ID',
                 visible: false
             }, {
-                field: 'customerName',
-                title: 'Customer Name',
+                field: 'revenue',
+                title: 'Revenue (Total)',
                 sortable: true
             }, {
-                field: 'username',
-                title: 'Username',
-                sortable: true
+                field: 'coS',
+                title: 'Cost Of Sale (Total)',
+                sortable: true,
+                formatter: gridCOSFormatter
             }, {
-                field: 'productType',
-                title: 'Product Type',
-                sortable: true
-            }, {
-                field: 'accountManager',
-                title: 'Account Manager',
-                sortable: true
-            }, {
-                field: 'industry',
-                title: 'Industry',
-                sortable: true
-            }, {
-                field: 'period',
-                title: 'Period',
+                field: 'nonBillable',
+                title: 'Non-Billable (Total)',
                 sortable: true
             }]
         });
