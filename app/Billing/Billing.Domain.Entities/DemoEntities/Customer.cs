@@ -10,6 +10,7 @@ namespace Billing.Domain.Entities.DemoEntities
         public virtual IEnumerable<PreBilling> InvoicePreBillings { get; protected internal set; }
         public virtual IEnumerable<User> Users { get; protected internal set; }
 
+        //Used for AutoMapper (Flatten structure for maaping)
         [DoNotMap]
         public virtual IEnumerable<Product> Products
         {
@@ -19,6 +20,7 @@ namespace Billing.Domain.Entities.DemoEntities
             }
         }
 
+        //Used for AutoMapper (Flatten structure for maaping)
         [DoNotMap]
         public virtual IEnumerable<TransactionMocks> Transactions
         {
