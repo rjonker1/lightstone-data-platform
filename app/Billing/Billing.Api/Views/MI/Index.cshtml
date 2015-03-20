@@ -31,12 +31,18 @@
                 field: 'coS',
                 title: 'Cost Of Sale (Total)',
                 sortable: true,
-                formatter: gridCOSFormatter
+                //formatter: gridCOSFormatter
             }, {
                 field: 'nonBillable',
                 title: 'Non-Billable (Total)',
                 sortable: true
             }]
+        });
+
+
+        $.get("/MI")
+        .done(function (data) {
+            console.log(data);
         });
 
         Billing.overrideDataTablesStyling();

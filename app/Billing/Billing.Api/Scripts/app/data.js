@@ -107,17 +107,7 @@ window.productGridActionEvents = {
     }
 };
 
-function gridTransactionsFormatter(value, row, index) {
-
-   
-};
-
 function gridCOSFormatter(value, row, index) {
 
-    var total = 0;
-    total += row.coS;
-
-    return [
-        total
-    ].join('');
+  
 };
