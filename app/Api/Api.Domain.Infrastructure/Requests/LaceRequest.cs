@@ -64,6 +64,30 @@ namespace Api.Domain.Infrastructure.Requests
             RequestAggregation = aggregation;
             Property = property;
         }
+
+        public void BusinessRequest(IPackage package, IProvideBusinessInformationForRequest business, IProvideRequestAggregation aggregation)
+        {
+            Package = package;
+            //User = user;
+            RequestAggregation = aggregation;
+            Business = business;
+        }
+    }
+
+    public class Business : IProvideBusinessInformationForRequest
+    {
+        public Business(string userToken, string companyName, string companyRegNumber, string companyVatNumber)
+        {
+            CompanyVatNumber = companyVatNumber;
+            CompanyRegNumber = companyRegNumber;
+            CompanyName = companyName;
+            UserToken = userToken;
+        }
+
+        public string UserToken { get; private set; }
+        public string CompanyName { get; private set; }
+        public string CompanyRegNumber { get; private set; }
+        public string CompanyVatNumber { get; private set; }
     }
 
     public class Property : IProvidePropertyInformationForRequest

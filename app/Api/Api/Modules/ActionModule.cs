@@ -126,6 +126,56 @@ namespace Api.Modules
 
                 return Response.AsJson(responses);
             };
+
+            //TODO: Refactor!!!! This looks crap too
+            Post["/action/BusinessSearch"] = parameters =>
+            {
+                var token = Context.AuthorizationHeaderToken();
+
+                if (string.IsNullOrEmpty(token))
+                    throw new Exception("Invalid user credentials");
+
+                var apiRequest = this.Bind<ApiBusinessRequest>();
+                apiRequest.Username = Context.CurrentUser.UserName;
+
+                if (!apiRequest.IsValid())
+                    throw new Exception("Invalid search request");
+
+                //TODo: Need to uncomment. Only commented out because mutliple packages per user has not bee sorted out yet
+                var userId = new Guid(token);
+                //var packageDetails = userManagementApi.Post<ContractResponse>(token, "/Packages/GetPackage",
+                //    new {userId});
+
+                //if (packageDetails == null)
+                //    throw new Exception("Could not get package for contract");
+
+                //TODO: Need to remove hardcoded package id - Just for testing and until multiple packages per user is sorted out
+                var packageid = new Guid("936867FA-D9F4-4E9C-9D62-6B7B48FAC974");
+
+                //var jsonPackage = packageBuilderApi.Get(token, "Packages/DataProvider/ForPropertySearch/" + packageDetails.PackageId);
+                var jsonPackage = packageBuilderApi.Get(token, "Packages/DataProvider/ForBusinessSearch/" + packageid);
+                var package = jsonPackage.ToPackage();
+
+                if (package == null)
+                    throw new Exception("Package for data provider could not be resolved");
+
+                var requestId = Guid.NewGuid();
+
+
+                //TODO: Hard coded user id to get working - NEED TO REMOVE!!!!
+                var request = package.ToBusinessSearchRequest(new Guid("5a7222e1-ee65-433b-b673-827319e89cbb").ToString(), apiRequest.UserToken, apiRequest.CompanyRegNumber,apiRequest.CompanyVatNumber, requestId);
+
+                var responses = entryPoint.GetResponsesFromLace(request);
+
+                if (!responses.Any())
+                    throw new Exception("No response for package");
+
+                //billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
+                //if (!billingTransaction.BillingCreated)
+                //    throw new Exception("Package could not be processed");
+
+                return Response.AsJson(responses);
+            };
         }
     }
 }

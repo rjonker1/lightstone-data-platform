@@ -28,6 +28,9 @@ namespace Api.Tests.Helper.Builder
                         "Lightstone Properties Search", new LightstonePropertyBuilder().ForLightstonePropertyResponse()
                     },
                     {
+                        "Lightstone Business Search", new LightstoneBusinessBuilder().ForLightstoneBusinessResponse()
+                    },
+                    {
                         "Fica", new Collection<IPointToLaceProvider>()
                     }
                 };

@@ -83,13 +83,21 @@ namespace Api.Domain.Infrastructure.Extensions
                 new Property(trackingNumber, rowsToReturn, userId, idNumber), new Aggregation(requestId));
             return request;
         }
+
+        public static ILaceRequest ToBusinessSearchRequest(this Package package, string userToken, string companyName, string companyRegNumber, string companyVatNumber, Guid requestId)
+        {
+            var request = new LaceRequest();
+            request.BusinessRequest(package,
+                new Business(userToken, companyName, companyRegNumber, companyVatNumber), new Aggregation(requestId));
+            return request;
+        }
     }
 
     public class CustomConverter<I, T> : CustomCreationConverter<I>
     {
         public override I Create(Type objectType)
         {
-            return (I) Activator.CreateInstance(typeof(T));
+            return (I)Activator.CreateInstance(typeof(T));
         }
     }
 }
