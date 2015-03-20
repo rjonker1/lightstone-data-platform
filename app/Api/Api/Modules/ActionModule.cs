@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Api.Domain.Infrastructure.Billing;
 using Api.Domain.Infrastructure.Dto;
 using Api.Domain.Infrastructure.Extensions;
 using Billing.Api.Connector;
 using DataPlatform.Shared.Dtos;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
 using Nancy.ModelBinding;
@@ -60,7 +63,9 @@ namespace Api.Modules
                 var request = package.FormLaceRequest(userId, apiRequest.Username, apiRequest.SearchTerm, apiRequest.Username, requestId);
 
                 var responses = entryPoint.GetResponsesFromLace(request);
-
+                var test = package.MapLaceResponses(responses);
+                var ivid = ((IProvideDataFromIvid) responses.First());
+                var test1 = package.MapLaceResponses(new List<IPointToLaceProvider>() { ivid });
                 if (!responses.Any())
                     throw new Exception("No response for package");
 
