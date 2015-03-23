@@ -107,6 +107,20 @@ window.productGridActionEvents = {
     }
 };
 
+function gridTransactionsFormatter(value, row, index) {
+
+    var count = 0;
+    console.log(row.transaction);
+    for (transaction in row.transactions) {
+
+        count++;
+    }
+
+    return [
+        'Total Transactions: ( ' + count + ' ) '
+    ].join('');
+};
+
 function gridCOSFormatter(value, row, index) {
 
   

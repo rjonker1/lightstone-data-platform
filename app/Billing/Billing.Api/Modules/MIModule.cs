@@ -13,9 +13,24 @@ namespace Billing.Api.Modules
         {
             Get["/MI"] = _ =>
             {
+                var result = new Hashtable();
+                var totalCoS = 0.0;
+                var totalRev = 0.0;
+
+                foreach (var product in products)
+                {
+                    totalCoS += product.CoS;
+                    totalRev += product.Revenue;
+                }
+
+                result.Add("totalCoS", totalCoS);
+                result.Add("totalRevenue", totalRev);
+
+                var test = new ArrayList {result};
+
                 return Negotiate
                    .WithView("Index")
-                   .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = products });
+                   .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = test });
             };
         }
     }
