@@ -73,16 +73,10 @@
         </div><!-- /.col -->
         <div class="col-md-9">
             <div class="box box-primary">
-                @*<div class="box-header with-border">
-                    <h3 class="box-title">Inbox</h3>
-                    <div class="box-tools pull-right">
-                        <div class="has-feedback">
-                            <input type="text" class="form-control input-sm" placeholder="Search Mail" />
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                        </div>
-                    </div><!-- /.box-tools -->
-                </div><!-- /.box-header -->*@
-
+                <div class="box-header with-border">
+                    <h2 id="detail-table-header" class="box-title">Overview</h2>
+                </div><!-- /.box-header -->
+            
                 <table id="table"></table>
 
             </div><!-- /. box -->
@@ -95,9 +89,9 @@
     var startDateFilter = moment().subtract(29, 'days').format('YYYY-MM-DD');
     var endDateFilter = moment().format('YYYY-MM-DD');;
 
-    $("#filterMIData").click(function () {
+    $('#filterMIData').click(function () {
 
-        alert("Start: "+startDateFilter+" End: "+endDateFilter);
+        $('#detail-table-header').text('Showing filtered data for period: ' + startDateFilter + ' -to- ' + endDateFilter);
     });
 
     $('#table').bootstrapTable({
