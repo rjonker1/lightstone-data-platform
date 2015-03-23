@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.DataProviders.Business;
 using Lace.Domain.Core.Contracts.DataProviders.Property;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Core.MessageHandling;
@@ -52,6 +54,10 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.LightstoneProperty, DataProviderName.LightstoneProperty.ToString(), 0d,
                 typeof (IProvideDataFromLightstoneProperty), "Owner", DateTime.UtcNow));
 
+            _publisher.Publish(new CreateDataProvider(DefaultLightstoneBusinessResponse(), Guid.NewGuid(),
+                DataProviderName.LightstoneBusiness, DataProviderName.LightstoneBusiness.ToString(), 0d,
+                typeof(IProvideDataFromLightstoneBusiness), "Owner", DateTime.UtcNow));
+
             this.Info(() => "Successfully imported data providers");
         }
 
@@ -66,6 +72,17 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                     string.Empty, 0, 0, string.Empty, string.Empty, string.Empty, 0, 0M, string.Empty, string.Empty, 0,
                     0, false)
             });
+        }
+
+        private static LightstoneBusinessResponse DefaultLightstoneBusinessResponse()
+        {
+
+            var result  = new List<IRespondWithBusiness>(); // List<ReturnCompaniesResponse.Company>();
+            
+            return new LightstoneBusinessResponse(result)
+            {
+                // TODO: new up a company response
+            };
         }
 
         private static AudatexResponse DefaultAudatexResponse()

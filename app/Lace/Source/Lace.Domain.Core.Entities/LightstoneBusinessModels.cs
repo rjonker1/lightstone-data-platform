@@ -42,7 +42,65 @@ namespace Lace.Domain.Core.Entities
 
     [Serializable]
     [DataContract]
-    public class ReturnCompaniesResponse : LightstoneBusinessResponse
+    public class Company : IRespondWithBusiness
+    {
+
+        public Company()
+        {
+
+        }
+
+        public Company(uint companyId, string companyName, string companyRegNumber, byte statusCode, string id, byte rowOrder, Type type, string typeName)
+        {
+            TypeName = typeName;
+            Type = type;
+            RowOrder = rowOrder;
+            Id = id;
+            StatusCode = statusCode;
+            CompanyRegNumber = companyRegNumber;
+            CompanyName = companyName;
+            CompanyId = companyId;
+        }
+
+        /// <remarks />
+
+        [DataMember]
+        public uint CompanyId { get; private set; }
+
+        /// <remarks />
+        [DataMember]
+        public string CompanyName { get; private set; }
+
+        /// <remarks />
+        [DataMember]
+        public string CompanyRegNumber { get; private set; }
+
+        /// <remarks />
+        [DataMember]
+        public string VatNo { get; set; }
+
+        /// <remarks />
+        [DataMember]
+        public byte StatusCode { get; private set; }
+
+        /// <remarks />
+        [DataMember]
+        public string Id { get; private set; }
+
+        /// <remarks />
+        [DataMember]
+        public byte RowOrder { get; private set; }
+
+        [DataMember]
+        public Type Type { get; private set; }
+        [DataMember]
+        public string TypeName { get; private set; }
+    }
+
+
+    [Serializable]
+    [DataContract]
+    public class ReturnCompaniesResponse : IRespondWithBusiness
     {
 
         public ReturnCompaniesResponse()
@@ -51,47 +109,6 @@ namespace Lace.Domain.Core.Entities
         }
 
        
-
-        /// <remarks />
-       //[XmlType(AnonymousType = true)]
-        [DataContract]
-        public class Company : IRespondWithBusiness
-        {
-            /// <remarks />
-
-            [DataMember]
-            public uint CompanyId { get; set; }
-
-            /// <remarks />
-            [DataMember]
-            public string CompanyName { get; set; }
-
-            /// <remarks />
-            [DataMember]
-            public string CompanyRegNumber { get; set; }
-
-            /// <remarks />
-            [DataMember]
-            public string VatNo { get; set; }
-
-            /// <remarks />
-            [DataMember]
-            public byte StatusCode { get; set; }
-
-            /// <remarks />
-            [DataMember]
-            public string Id { get; set; }
-
-            /// <remarks />
-            [DataMember]
-            public byte RowOrder { get; set; }
-
-
-            public Type Type { get; private set; }
-            public string TypeName { get; private set; }
-            //public DataSet Result { get; private set; }
-        }
-
       
 
         public ReturnCompaniesResponse(IEnumerable<Company> result)
@@ -103,5 +120,8 @@ namespace Lace.Domain.Core.Entities
 
         [DataMember]
         public IEnumerable<Company> Result { get; private set; }
+
+        public Type Type { get; private set; }
+        public string TypeName { get; private set; }
     }
 }
