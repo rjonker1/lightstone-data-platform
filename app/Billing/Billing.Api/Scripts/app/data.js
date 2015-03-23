@@ -110,7 +110,6 @@ window.productGridActionEvents = {
 function gridTransactionsFormatter(value, row, index) {
 
     var count = 0;
-    console.log(row.transaction);
     for (transaction in row.transactions) {
 
         count++;
