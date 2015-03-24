@@ -12,6 +12,7 @@
         Anpr,
         PCubedFica,
         SignioDecryptDriversLicense,
-        LightstoneProperty
+        LightstoneProperty,
+        LightstoneBusiness
     }
 }
