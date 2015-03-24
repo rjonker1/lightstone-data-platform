@@ -144,6 +144,24 @@
       </dependencies>
     </nuget>
 
+    <nuget deploy="false">
+        <name>Lightstone.DataPlatform.Workflow.Billing</name>
+        <folder>app/Billing/Workflow.Billing</folder>
+        <author>CustomApp</author>
+        <description>Workflow.Billing</description>
+        <includes>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.dll" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.pdb" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
+          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Newtonsoft.Json" version="6.0.5" />
+      </dependencies>
+    </nuget>
+
 
 
 
@@ -214,8 +232,7 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Lightstone.DataPlatform.Shared" />
-        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities" />
+        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts" />
       </dependencies>
     </nuget>
 
@@ -276,6 +293,8 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.PCubed.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Property.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Property.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.DataProviders.Lightstone.Business.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.Core.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.dll" to="lib\net45"/>
@@ -295,8 +314,7 @@
 				<dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="NServiceBus" version="5.0.1" />
         <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
-				<dependency id="Lightstone.DataPlatform.Shared" />
-        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities" />
+        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts" />
 			</dependencies>
 		</nuget>
 		<!-- LACE END -->
@@ -496,6 +514,32 @@
          <dependency id="Lightstone.DataPlatform.Lace.Domain.Core" />
          <dependency id="Lightstone.DataPlatform.Shared" />
          <dependency id="NEventStore" version="5.1.0" />
+      </dependencies>
+    </nuget> 
+
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts</name>
+      <folder>app/PackageBuilder/PackageBuilder.Domain.Entities.Contracts</folder>
+      <author>CustomApp</author>
+      <description>PackageBuilder.Domain.Entities.Contracts</description>
+      <includes>
+        <include pattern="*.dll" to="lib\net45" />
+        <include pattern="*.pdb" to="lib\net45" />        
+      </includes>
+      <dependencies>
+      </dependencies>
+    </nuget> 
+
+    <nuget deploy="false">
+      <name>Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums</name>
+      <folder>app/PackageBuilder/PackageBuilder.Domain.Entities.Enums</folder>
+      <author>CustomApp</author>
+      <description>PackageBuilder.Domain.Entities.Enums</description>
+      <includes>
+        <include pattern="*.dll" to="lib\net45" />
+        <include pattern="*.pdb" to="lib\net45" />        
+      </includes>
+      <dependencies>
       </dependencies>
     </nuget> 
 

@@ -10,37 +10,20 @@ namespace Billing.Api.Dtos
         {
         }
 
-        public TransactionContext(Guid transactionId, UserIdentifier user, RequestIdentifier request)
+        public TransactionContext(Guid transactionId, UserIdentifier user, RequestIdentifier request, StateIdentifier state)
         {
             TransactionId = transactionId;
             User = user;
             Request = request;
             TransactionDate = SystemTime.Now();
+            State = state;
         }
 
         public DateTime TransactionDate { get; private set; }
         public Guid TransactionId { get; private set; }
         public UserIdentifier User { get; private set; }
         public RequestIdentifier Request { get; private set; }
+        public StateIdentifier State { get; private set; }
     }
 
-    public class RequestContext
-    {
-        public RequestContext()
-        {
-        }
-
-        public RequestContext(Guid transactionId, UserIdentifier user, RequestIdentifier request)
-        {
-            TransactionId = transactionId;
-            User = user;
-            Request = request;
-            TransactionDate = SystemTime.Now();
-        }
-
-        public DateTime TransactionDate { get; private set; }
-        public Guid TransactionId { get; private set; }
-        public UserIdentifier User { get; private set; }
-        public RequestIdentifier Request { get; private set; }
-    }
 }

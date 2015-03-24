@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+
+namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
+{
+    public interface IDataProviderOverride
+    {
+        Guid Id { get; }
+        double CostOfSale { get; }
+        IEnumerable<IDataFieldOverride> DataFieldOverrides { get; }
+    }
+}

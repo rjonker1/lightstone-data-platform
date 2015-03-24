@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
 using Workflow.Billing.Domain;
 
@@ -20,7 +21,7 @@ namespace Workflow.Billing.Repository
             {
                 return new[]
                 {
-                    "Id", "Date", "PackageId", "PackageVersion", "UserId", "RequestId", "System", "Server"
+                    "Id", "Date", "PackageId", "PackageVersion", "UserId", "RequestId", "System", "Server", "State"
                 };
             }
         }
@@ -40,7 +41,8 @@ namespace Workflow.Billing.Repository
                 UserId = transaction.User.Id,
                 RequestId = transaction.Request.Id,
                 System = transaction.Request.System.Name,
-                Server = transaction.Request.System.Server.MachineName
+                Server = transaction.Request.System.Server.MachineName,
+                State = transaction.State.Name
             };
 
             connection.Execute(sql, values);
@@ -56,7 +58,7 @@ namespace Workflow.Billing.Repository
                 return null;
 
             return new InvoiceTransaction(match.Id, match.Date, new PackageIdentifier(match.PackageId, new VersionIdentifier(match.PackageVersion)),
-                new RequestIdentifier(match.RequestId, new SystemIdentifier(match.System)), new UserIdentifier(match.UserId));
+                new RequestIdentifier(match.RequestId, new SystemIdentifier(match.System)), new UserIdentifier(match.UserId), new StateIdentifier(0, match.State));
         }
     }
 }

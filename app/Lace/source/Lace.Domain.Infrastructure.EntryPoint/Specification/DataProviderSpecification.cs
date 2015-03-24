@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
 using Lace.Domain.DataProviders.Ivid;
@@ -19,7 +19,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
     public class DataProviderSpecification
     {
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _defaultLicenseNumberRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -40,22 +40,24 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 
 
 
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new SignioDataProvider(request, null, null,
                             new SendSignioCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _propertyRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new LightstonePropertyDataProvider(request, null, null,
                             new SendLightstonePropertyCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
+        // TODO: Lightstone Business
 
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -65,13 +67,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
             IEnumerable
                 <
                     KeyValuePair
-                        <string, Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>>
+                        <string, Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>>
             Specifications
         {
             get
             {
                 return new Dictionary
-                    <string, Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>()
+                    <string, Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>()
                 {
                     {
                         "License plate search", _defaultLicenseNumberRequestSpecification()

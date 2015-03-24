@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -6,6 +7,7 @@ using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -34,7 +36,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
@@ -79,7 +81,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 
@@ -88,16 +90,15 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
                 transformer.Transform();
             }
 
-            response.JisResponse = transformer.Result;
-            response.JisResponseHandled = new JisResponseHandled();
-            response.JisResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
 
-        private static void JisResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void JisResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.JisResponse = null;
-            response.JisResponseHandled = new JisResponseHandled();
-            response.JisResponseHandled.HasBeenHandled();
+            var jisResponse = new JisResponse();
+            jisResponse.HasBeenHandled();
+            response.Add(jisResponse);
         }
     }
 }

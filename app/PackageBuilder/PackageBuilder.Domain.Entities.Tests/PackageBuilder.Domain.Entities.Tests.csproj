@@ -42,9 +42,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.770, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.770\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.817\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,15 +60,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProviders\ReadModels\when_persisting_a_data_provider.cs" />
+    <Compile Include="DataProviders\Read\when_persisting_a_data_provider.cs" />
     <Compile Include="DataProviders\when_reading_ivid_data_provider_source_configuration.cs" />
     <Compile Include="DataProviders\when_reading_ivid_title_holder_data_provider_source_configuration.cs" />
     <Compile Include="DataProviders\when_reading_lightstone_source_configuration.cs" />
     <Compile Include="DataProviders\when_reading_rgt_source_configuration.cs" />
     <Compile Include="DataProviders\when_reading_rgt_vin_source_configuration.cs" />
-    <Compile Include="Industries\WriteModels\when_persisting_a_industry.cs" />
-    <Compile Include="States\WriteModels\when_persisting_a_state.cs" />
-    <Compile Include="Packages\ReadModels\when_persisting_a_package.cs" />
+    <Compile Include="Industries\Write\when_persisting_a_industry.cs" />
+    <Compile Include="States\Write\when_persisting_a_state.cs" />
+    <Compile Include="Packages\Read\when_persisting_a_package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +86,14 @@
     <ProjectReference Include="..\PackageBuilder.Core\PackageBuilder.Domain.Core.csproj">
       <Project>{A3368386-392B-476D-8B6C-910E73A9C21C}</Project>
       <Name>PackageBuilder.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Contracts\PackageBuilder.Domain.Entities.Contracts.csproj">
+      <Project>{15EA3113-E3A9-4BAA-8746-A92973E7D3C0}</Project>
+      <Name>PackageBuilder.Domain.Entities.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PackageBuilder.Domain.Entities.Enums\PackageBuilder.Domain.Entities.Enums.csproj">
+      <Project>{90905013-B92B-44B2-8099-EB31042EE399}</Project>
+      <Name>PackageBuilder.Domain.Entities.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\PackageBuilder.Domain.Entities\PackageBuilder.Domain.Entities.csproj">
       <Project>{af32c137-d01e-4243-8de5-6920113cfc6a}</Project>
@@ -106,7 +114,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Packages\WriteModels\" />
+    <Folder Include="Packages\Write\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

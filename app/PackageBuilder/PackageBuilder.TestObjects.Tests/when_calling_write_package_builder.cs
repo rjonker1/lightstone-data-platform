@@ -1,4 +1,4 @@
-﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
+﻿using PackageBuilder.Domain.Entities.Packages.Write;
 using PackageBuilder.TestObjects.Builders;
 using Xunit.Extensions;
 

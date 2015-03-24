@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataPlatform.Shared.Enums;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace PackageBuilder.TestObjects.Builders
 {

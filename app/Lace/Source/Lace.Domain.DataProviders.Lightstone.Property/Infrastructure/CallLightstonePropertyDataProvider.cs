@@ -4,7 +4,7 @@ using System.Data;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -33,7 +33,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
             try
@@ -78,14 +78,14 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             }
         }
 
-        private static void LightstonePropertyResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void LightstonePropertyResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.LightstonePropertyResponse = null;
-            response.LightstonePropertyResponseHandled = new LightstonePropertyResponseHandled();
-            response.LightstonePropertyResponseHandled.HasBeenHandled();
+            var lightstonePropertyResponse = new LightstonePropertyResponse();
+            lightstonePropertyResponse.HasBeenHandled();
+            response.Add(lightstonePropertyResponse);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response,
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformLightstonePropertyResponse(_result);
@@ -98,9 +98,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
             monitoring.Send(CommandType.Transformation,
                 transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), transformer);
 
-            response.LightstonePropertyResponse = transformer.Result;
-            response.LightstonePropertyResponseHandled = new LightstonePropertyResponseHandled();
-            response.LightstonePropertyResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

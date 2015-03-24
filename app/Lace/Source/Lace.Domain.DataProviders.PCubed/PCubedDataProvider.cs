@@ -1,5 +1,8 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -7,6 +10,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.PCubed.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.PCubed
 {
@@ -23,7 +27,7 @@ namespace Lace.Domain.DataProviders.PCubed
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.PCubedFica, _request);
             if (!spec.IsSatisfied)
@@ -42,18 +46,18 @@ namespace Lace.Domain.DataProviders.PCubed
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.FicaVerficationResponse == null)
+                if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() || response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.FicaVerficationResponse = null;
-            response.FicaVerficationResponseHandled = new PCubedFicaVerficationResponseHandled();
-            response.FicaVerficationResponseHandled.HasNotBeenHandled();
+            var ficaVerficationResponse = new PCubedFicaVerficationResponse();
+            ficaVerficationResponse.HasNotBeenHandled();
+            response.Add(ficaVerficationResponse);
         }
     }
 }

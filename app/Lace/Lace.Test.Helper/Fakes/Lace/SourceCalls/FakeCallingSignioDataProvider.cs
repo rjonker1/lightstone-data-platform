@@ -1,5 +1,5 @@
-﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Entities;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Responses;
@@ -11,7 +11,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     {
         private string _resonse;
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
 
@@ -19,7 +19,8 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             var transformer =
                 new TransformSignioResponse(
@@ -30,9 +31,8 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
                 transformer.Transform();
             }
 
-            response.SignioDriversLicenseDecryptionResponse = transformer.Result;
-            response.SignioDriversLicenseDecryptionResponseHandled = new SignioDriversLicenseDecryptionResponseHandled();
-            response.SignioDriversLicenseDecryptionResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts;
+using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Mothers.Requests;
@@ -15,7 +17,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderDataProvider _consumer;
         
         public when_consuming_ivid_title_holder_source_with_financed_interest()
@@ -35,13 +37,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void ivid_title_holder_consumer_with_financed_interest_must_be_handled()
         {
-            _response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void ivid_title_holder_response_from_consumer_with_financed_interest_must_not_be_null()
         {
-            _response.IvidTitleHolderResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
         }
 
         [Observation]
@@ -59,7 +61,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void ivid_title_holder_consumer_with_financed_interest_should_be_available()
         {
-           _response.IvidTitleHolderResponse.FinancialInterestAvailable.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().FinancialInterestAvailable.ShouldBeTrue();
         }
     }
 }

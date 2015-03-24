@@ -1,5 +1,6 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+using PackageBuilder.Domain.Entities.Packages.Write;
 using PackageBuilder.TestObjects.Builders;
 using PackageBuilder.TestObjects.Mothers;
 

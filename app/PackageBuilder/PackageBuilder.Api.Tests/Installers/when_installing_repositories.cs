@@ -1,7 +1,7 @@
 ﻿using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.TestHelper;
 using Xunit.Extensions;
 

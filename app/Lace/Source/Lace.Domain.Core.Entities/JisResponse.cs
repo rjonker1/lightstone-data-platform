@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts.DataProviders;
 
 namespace Lace.Domain.Core.Entities
 {
     public class JisResponse : IProvideDataFromJis
     {
+        public JisResponse()
+        {
+            
+        }
       
         public JisResponse(string caseNumber, string description, bool empty, string errorType, string id, bool isHot,
             bool limited, string policeStation, string status, int unicodeErrorCode, string vehicleChassisNumber,
@@ -92,5 +97,34 @@ namespace Lace.Domain.Core.Entities
         public string VehicleImage { get; private set; }
 
         public string VehiclePlateImage { get; private set; }
+
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
+        }
+
+        [DataMember]
+        public string TypeName
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
+        [DataMember]
+        public Type Type
+        {
+            get
+            {
+                return GetType();
+            }
+        }
     }
 }

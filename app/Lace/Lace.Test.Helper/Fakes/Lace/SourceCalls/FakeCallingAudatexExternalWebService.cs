@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
@@ -19,13 +20,15 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
             _request = request;
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             _audatexResponse = new SourceResponseBuilder().ForAudatexWithHuyandaiHistory();
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformAudatexResponse(_audatexResponse, response, _request);
 
@@ -34,9 +37,8 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
                 transformer.Transform();
             }
 
-            response.AudatexResponse = transformer.Result;
-            response.AudatexResponseHandled = new AudatexResponseHandled();
-            response.AudatexResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

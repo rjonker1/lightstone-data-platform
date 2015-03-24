@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
 using Lace.Shared.Monitoring.Messages.Core;
@@ -15,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private AudatexDataProvider _consumer;
 
 
@@ -36,13 +40,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void audatex_consumer_must_be_handled()
         {
-            _response.AudatexResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromAudatex>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void audatex_response_from_consumer_must_not_be_null()
         {
-            _response.AudatexResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromAudatex>().First().ShouldNotBeNull();
         }
 
         [Observation]
@@ -60,7 +64,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void audatex_consumer_accident_claims_should_not_be_zero()
         {
-            _response.AudatexResponse.AccidentClaims.Count.ShouldNotEqual(0);
+            _response.OfType<IProvideDataFromAudatex>().First().AccidentClaims.Count.ShouldNotEqual(0);
         }
     }
 }

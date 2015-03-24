@@ -1,7 +1,7 @@
 ﻿using System;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.Enums;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Infrastructure.Repositories
 {

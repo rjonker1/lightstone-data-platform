@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
@@ -27,7 +28,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
             try
@@ -45,7 +46,7 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                 //                _client.Operation
                 //            }
                 //    },
-                //    new {ContextMessage = "PCubed Fica Data Provider Configuration"});
+                //    new { ContextMessage = "PCubed Fica Data Provider Configuration" });
 
                 //monitoring.StartCall(_client.Operation, _stopWatch);
 
@@ -73,14 +74,14 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
             }
         }
 
-        private static void SignioResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void SignioResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.FicaVerficationResponse = null;
-            response.FicaVerficationResponseHandled = new PCubedFicaVerficationResponseHandled();
-            response.FicaVerficationResponseHandled.HasBeenHandled();
+            var ficaVerficationResponse = new PCubedFicaVerficationResponse();
+            ficaVerficationResponse.HasNotBeenHandled();
+            response.Add(ficaVerficationResponse);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformPCubedResponse(_response);
 
@@ -91,9 +92,8 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
 
             monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
-            response.FicaVerficationResponse = transformer.Result;
-            response.FicaVerficationResponseHandled = new PCubedFicaVerficationResponseHandled();
-            response.FicaVerficationResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

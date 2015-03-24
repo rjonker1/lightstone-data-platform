@@ -5,9 +5,9 @@ using DataPlatform.Shared.ExceptionHandling;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Core.NEventStore;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.CommandHandlers.DataProviders

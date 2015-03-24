@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
@@ -10,13 +11,15 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
     public class FakeCallingRgtDataProvider : ICallTheDataProviderSource
     {
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             //TODO: Add stubbed data for response
-            TransformResponse(response,monitoring);
+            TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformRgtResponse(new List<CarSpecification>());
 
@@ -25,9 +28,8 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
                 transformer.Transform();
             }
 
-            response.RgtResponse = transformer.Result;
-            response.RgtResponseHandled = new RgtResponseHandled();
-            response.RgtResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

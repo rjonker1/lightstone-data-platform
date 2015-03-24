@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
@@ -32,9 +33,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ILaceRequest request)
         {
-            _log.DebugFormat("Receiving request into entry point. Request {0}",request);
+            _log.DebugFormat("Receiving request into entry point. Request {0}", request);
             try
             {
                 _monitoring = new SendEntryPointCommands(_bus, request.RequestAggregation.AggregateId,
@@ -71,38 +72,31 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                     return EmptyResponse;
                 }
 
-                _bootstrap = new Initialize(new LaceResponse(), request, _bus, _sourceChain);
+                _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
 
-                _monitoring.End(_bootstrap.LaceResponses ?? EmptyResponse, _stopWatch);
+                _monitoring.End(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch);
+                
 
-                return _bootstrap.LaceResponses ?? EmptyResponse;
+                return _bootstrap.DataProviderResponses ?? EmptyResponse;
 
             }
             catch (Exception ex)
             {
                 _monitoring.Send(CommandType.Fault, ex.Message, request);
-                _monitoring.End(request, _stopWatch ?? new DataProviderStopWatch(DataProviderCommandSource.EntryPoint.ToString()));
+                _monitoring.End(request,
+                    _stopWatch ?? new DataProviderStopWatch(DataProviderCommandSource.EntryPoint.ToString()));
                 _log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
-                return EmptyResponse;
+               return EmptyResponse;
             }
         }
 
-        private static IList<LaceExternalSourceResponse> EmptyResponse
+        private static ICollection<IPointToLaceProvider> EmptyResponse
         {
             get
             {
-                return new List<LaceExternalSourceResponse>()
-                {
-                    new LaceExternalSourceResponse()
-                    {
-                        Response = new LaceResponse()
-                        {
-
-                        }
-                    }
-                };
+                return new List<IPointToLaceProvider>();
             }
         }
     }

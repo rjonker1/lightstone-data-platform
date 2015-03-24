@@ -20,8 +20,12 @@ namespace Workflow.Billing.Consumer.Installers
 
             container.Register(
                 Component.For<IDbConnection>()
-                    .UsingFactoryMethod(() => new SqlConnection(appSettings.ConnectionStrings.Get("workflow/billing/database", () => string.Empty))));
+                    .UsingFactoryMethod(
+                        () =>
+                            new SqlConnection(appSettings.ConnectionStrings.Get("workflow/billing/database",
+                                () => string.Empty))));
 
+            container.Register(Component.For<IRepositoryMapper>().ImplementedBy<RepositoryMapper>());
             container.Register(Component.For<IRepository>().ImplementedBy<Repository.Repository>());
         }
     }

@@ -1,10 +1,13 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Domain.DataProviders.Anpr
 {
@@ -19,7 +22,7 @@ namespace Lace.Domain.DataProviders.Anpr
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.Anpr, _request);
 
@@ -37,16 +40,16 @@ namespace Lace.Domain.DataProviders.Anpr
 
                 //consumer.ConsumeExternalSource(response, laceEvent);
 
-                if (response.AnprResponse == null)
+                if (!response.OfType<IProvideDataFromAnpr>().Any() || response.OfType<IProvideDataFromAnpr>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.AnprResponse = null;
-            response.AnprResponseHandled = new AnprResponseHandled();
-            response.AnprResponseHandled.HasNotBeenHandled();
+            var anprResponse = new AnprResponse();
+            anprResponse.HasNotBeenHandled();
+            response.Add(anprResponse);
         }
     }
 }

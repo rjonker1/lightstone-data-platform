@@ -59,9 +59,12 @@
     <Compile Include="Dtos\DataSet.cs" />
     <Compile Include="Dtos\DataSource.cs" />
     <Compile Include="Dtos\Package.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\INamedEntity.cs" />
     <Compile Include="Entities\IProvideType.cs" />
+    <Compile Include="Enums\DataProviderAction.cs" />
     <Compile Include="Enums\DataProviderCommandSource.cs" />
-    <Compile Include="Enums\DataProviderName.cs" />
+    <Compile Include="Enums\DataProviderState.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
@@ -83,10 +86,11 @@
     <Compile Include="Messaging\IPublishableMessage.cs" />
     <Compile Include="Messaging\ITopicPublishableMessage.cs" />
     <Compile Include="Messaging\MessageTopic.cs" />
+    <Compile Include="Repositories\INamedEntityRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RabbitMQ\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

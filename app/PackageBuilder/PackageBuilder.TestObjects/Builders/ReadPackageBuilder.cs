@@ -1,6 +1,6 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.Packages.Read;
+using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.TestObjects.Builders
 {

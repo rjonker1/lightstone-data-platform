@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Api.Tests.Helper.Fakes.Vehicles;
-using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace Api.Tests.Helper.Builder
 {
@@ -10,24 +11,27 @@ namespace Api.Tests.Helper.Builder
 
     public class FakeDataProviderResults
     {
-        public IEnumerable<KeyValuePair<string, IList<LaceExternalSourceResponse>>> LaceResponse
+        public IEnumerable<KeyValuePair<string, ICollection<IPointToLaceProvider>>> LaceResponse
         {
             get
             {
                 return new Dictionary
-                    <string, IList<LaceExternalSourceResponse>>()
+                    <string, ICollection<IPointToLaceProvider>>()
                 {
                     {
-                        "License plate search", new List<LaceExternalSourceResponse>() { new FakeVehicleSearches().ResponseForVviProduct() } 
+                        "License plate search", new FakeVehicleSearches().ResponseForVviProduct()
                     },
                     {
-                        "License Scan", new List<LaceExternalSourceResponse>() { new DriversLicenseScanBuilder().ForDriversLicenseResponseFromLace() }
+                        "License Scan", new DriversLicenseScanBuilder().ForDriversLicenseResponseFromLace()
                     },
                     {
-                        "Lightstone Properties Search", new List<LaceExternalSourceResponse>() { new LspBuilder().ForLspResponseFromLace() }
+                        "Lightstone Properties Search", new LightstonePropertyBuilder().ForLightstonePropertyResponse()
                     },
                     {
-                        "Fica", new List<LaceExternalSourceResponse>()
+                        "Lightstone Business Search", new LightstoneBusinessBuilder().ForLightstoneBusinessResponse()
+                    },
+                    {
+                        "Fica", new Collection<IPointToLaceProvider>()
                     }
                 };
             }

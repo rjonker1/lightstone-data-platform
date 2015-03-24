@@ -63,4 +63,38 @@ namespace Api.Domain.Infrastructure.Dto
             Username = username;
         }
     }
+
+    public class ApiBusinessRequest
+    {
+        public Guid ContractId { get; private set; }
+        public Guid SourceId { get; private set; }
+        public string SearchTerm { get; private set; }
+
+
+        public string UserToken { get; private set; }
+        public string CompanyName { get; private set; }
+        public string CompanyRegNumber { get; private set; }
+        public string CompanyVatNumber { get; private set; }
+        public string Username { get; set; }
+
+        public ApiBusinessRequest(Guid contractId, Guid sourceId, string searchTerm, string userToken, string companyName, string companyRegNumber, string companyVatNumber, string username)
+        {
+            Username = username;
+            CompanyVatNumber = companyVatNumber;
+            CompanyRegNumber = companyRegNumber;
+            CompanyName = companyName;
+            UserToken = userToken;
+            SearchTerm = searchTerm;
+            SourceId = sourceId;
+            ContractId = contractId;
+        }
+
+        public bool IsValid()
+        {
+            return ContractId != Guid.Empty && SourceId != Guid.Empty &&
+                   !string.IsNullOrEmpty(UserToken);
+        }
+
+
+    }
 }

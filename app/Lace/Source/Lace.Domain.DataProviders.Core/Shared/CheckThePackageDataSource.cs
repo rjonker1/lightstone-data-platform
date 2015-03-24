@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using DataPlatform.Shared.Enums;
 using Lace.Domain.DataProviders.Core.Contracts;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Domain.DataProviders.Core.Shared
 {

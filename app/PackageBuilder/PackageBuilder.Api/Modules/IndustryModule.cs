@@ -5,7 +5,7 @@ using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.Industries.Commands;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Api.Modules
 {

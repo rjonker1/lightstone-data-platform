@@ -5,28 +5,28 @@ namespace Workflow.Billing.Repository
 {
     public class Repository : IRepository
     {
-        private readonly IDbConnection connection;
-        private readonly RepositoryMapper mapper;
+        private readonly IDbConnection _connection;
+        private readonly IRepositoryMapper _mapper;
 
-        public Repository(IDbConnection connection)
+        public Repository(IDbConnection connection, IRepositoryMapper mapper)
         {
-            mapper = new RepositoryMapper();
-            this.connection = connection;
+            _mapper = mapper;
+            _connection = connection;
         }
 
         public TType Get<TType>(Guid id) where TType : class
         {
-            var mapping = mapper.GetMapping(typeof(TType));
+            var mapping = _mapper.GetMapping(typeof(TType));
 
-            return mapping.Get(connection, id) as TType;
+            return mapping.Get(_connection, id) as TType;
 
         }
 
         public void Add<TType>(TType instance)
         {
-            var mapping = mapper.GetMapping(instance);
+            var mapping = _mapper.GetMapping(instance);
 
-            mapping.Insert(connection, instance);
+            mapping.Insert(_connection, instance);
         }
     }
 }

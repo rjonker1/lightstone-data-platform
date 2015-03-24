@@ -8,7 +8,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using PackageBuilder.Core.Entities;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.Domain.Entities.Packages.Read;
 using PackageBuilder.Infrastructure.NHibernate.Conventions;
 using PackageBuilder.Infrastructure.NHibernate.MappingOverrides;
 

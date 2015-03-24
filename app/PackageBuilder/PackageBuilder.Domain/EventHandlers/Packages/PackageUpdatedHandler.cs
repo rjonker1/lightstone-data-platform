@@ -2,7 +2,7 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.MessageHandling;
 using PackageBuilder.Domain.Entities.Packages.Events;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.Domain.Entities.Packages.Read;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Domain.EventHandlers.Packages

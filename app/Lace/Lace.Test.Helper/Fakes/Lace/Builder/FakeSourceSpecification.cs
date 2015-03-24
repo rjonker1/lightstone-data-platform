@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Shared;
@@ -12,7 +12,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceSpecification
     {
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _licenseNumberRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -35,7 +35,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                             .CallSource(response);
 
 
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -43,7 +43,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                             new SendSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 
-        private readonly Func<Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>
+        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -55,13 +55,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
             IEnumerable
                 <
                     KeyValuePair
-                        <string, Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>>
+                        <string, Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>>
             Specifications
         {
             get
             {
                 return new Dictionary
-                    <string, Action<ILaceRequest, IBus, IProvideResponseFromLaceDataProviders, Guid>>()
+                    <string, Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>()
                 {
                     {
                         "License plate search", _licenseNumberRequestSpecification()

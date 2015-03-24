@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
+using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.TestObjects.Builders
 {

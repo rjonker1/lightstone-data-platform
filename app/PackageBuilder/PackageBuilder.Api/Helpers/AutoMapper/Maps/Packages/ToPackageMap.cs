@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using PackageBuilder.Domain.Dtos;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+using PackageBuilder.Domain.Entities.Packages.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.Packages
 {

@@ -1,4 +1,4 @@
-﻿using PackageBuilder.Domain.Entities.Packages.WriteModels;
+﻿using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.TestObjects.Mothers;
 
 namespace Lace.Test.Helper.Builders.Property
@@ -10,7 +10,5 @@ namespace Lace.Test.Helper.Builders.Property
 
             return WritePackageMother.PropertyPackage;
         }
-
-        
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
+using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.Packages.Events
 {

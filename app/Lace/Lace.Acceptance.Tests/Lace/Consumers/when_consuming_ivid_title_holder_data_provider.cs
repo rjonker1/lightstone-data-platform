@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder;
 using Lace.Shared.Monitoring.Messages.Core;
@@ -15,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
     {
         private readonly ILaceRequest _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderDataProvider _consumer;
 
 
@@ -36,13 +40,13 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         [Observation]
         public void ivid_title_holder_consumer_must_be_handled()
         {
-            _response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void ivid_title_holder_response_from_consumer_must_not_be_null()
         {
-            _response.IvidTitleHolderResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
         }
 
         [Observation]

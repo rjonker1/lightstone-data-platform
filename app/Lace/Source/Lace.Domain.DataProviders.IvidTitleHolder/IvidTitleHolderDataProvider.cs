@@ -1,5 +1,8 @@
-﻿using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -7,6 +10,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder
 {
@@ -23,7 +27,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.IvidTitleHolder, _request);
 
@@ -33,8 +37,9 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             }
             else
             {
-                var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
-                _monitoring.Begin(new { _request.User, response.IvidResponse }, stopWatch);
+                var stopWatch =
+                    new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
+                _monitoring.Begin(new { _request.User, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));
@@ -42,18 +47,18 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.IvidTitleHolderResponse == null)
+                if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() || response.OfType<IProvideDataFromIvidTitleHolder>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.IvidTitleHolderResponse = null;
-            response.IvidTitleHolderResponseHandled = new IvidTitleHolderResponseHandled();
-            response.IvidTitleHolderResponseHandled.HasNotBeenHandled();
+            var ividTitleHolderResponse = new IvidTitleHolderResponse();
+            ividTitleHolderResponse.HasNotBeenHandled();
+            response.Add(ividTitleHolderResponse);
         }
     }
 }

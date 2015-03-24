@@ -1,6 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
-using PackageBuilder.Domain.Entities.Packages.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
@@ -26,5 +26,7 @@ namespace Lace.Domain.Core.Requests.Contracts
         IPackage Package { get; }
 
         IProvidePropertyInformationForRequest Property { get; }
+
+        IProvideBusinessInformationForRequest Business { get; }
     }
 }

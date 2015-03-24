@@ -4,9 +4,10 @@ using DataPlatform.Shared.Helpers.Extensions;
 using DataPlatform.Shared.Helpers.Json;
 using Newtonsoft.Json;
 using PackageBuilder.Core.Commands;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Industries.Read;
+using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Domain.Entities.Packages.Commands
 {

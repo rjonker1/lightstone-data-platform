@@ -1,7 +1,7 @@
 ﻿using System;
 using Moq;
 using PackageBuilder.Domain.Entities.Packages.Events;
-using PackageBuilder.Domain.Entities.Packages.ReadModels;
+using PackageBuilder.Domain.Entities.Packages.Read;
 using PackageBuilder.Domain.EventHandlers.Packages;
 using PackageBuilder.Infrastructure.Repositories;
 using PackageBuilder.TestObjects.Mothers;

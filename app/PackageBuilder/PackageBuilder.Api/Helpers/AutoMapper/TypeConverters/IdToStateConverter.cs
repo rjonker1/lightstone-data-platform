@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters

@@ -1,5 +1,7 @@
 ﻿
 using PackageBuilder.Core.Entities;
+using PackageBuilder.Domain.Entities.Contracts;
+using PackageBuilder.Domain.Entities.Contracts.Actions;
 
 namespace PackageBuilder.Domain.Entities
 {

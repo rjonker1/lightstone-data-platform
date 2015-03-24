@@ -10,6 +10,7 @@ using Billing.Api.Connector;
 using Billing.Api.Dtos;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -43,7 +44,7 @@ namespace Api.Unit.Tests.Fakes
 
     public class FakeEntryPoint : IEntryPoint
     {
-        public IList<LaceExternalSourceResponse> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ILaceRequest request)
         {
             return
                 new FakeDataProviderResults().LaceResponse.FirstOrDefault(w => w.Key == request.Package.Action.Name)

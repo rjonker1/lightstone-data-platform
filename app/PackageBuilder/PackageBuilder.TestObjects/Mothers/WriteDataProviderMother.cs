@@ -1,7 +1,8 @@
 ﻿using System;
-using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers
@@ -87,7 +88,7 @@ namespace PackageBuilder.TestObjects.Mothers
                     .With(DataProviderName.LightstoneAuto)
                     .With("Lightstone")
                     .With(10d)
-                    .With(typeof (IProvideDataFromLightstone))
+                    .With(typeof (IProvideDataFromLightstoneAuto))
                     .Build();
             }
         }

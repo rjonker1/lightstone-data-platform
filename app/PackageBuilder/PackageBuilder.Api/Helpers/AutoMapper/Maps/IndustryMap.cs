@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
-using PackageBuilder.Domain.Entities.Industries.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
 {
@@ -9,8 +9,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IDataField, IEnumerable<Industry>>()
-                .ConvertUsing<ITypeConverter<IDataField, IEnumerable<Industry>>>();
+            Mapper.CreateMap<IDataField, IEnumerable<IIndustry>>()
+                .ConvertUsing<ITypeConverter<IDataField, IEnumerable<IIndustry>>>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RestSharp;
 using Shared.Configuration;
 
@@ -6,10 +7,10 @@ namespace Shared.BuildingBlocks.Api.ApiClients
 {
     public interface IApiClient
     {
-        string Get(string token, string resource = "", object body = null);
-        string Post(string token, string resource = "", object body = null);
-        T Get<T>(string token, string resource = "", object body = null) where T : new();
-        T Post<T>(string token, string resource = "", object body = null) where T : new();
+        string Get(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers);
+        string Post(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers);
+        T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new();
+        T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new();
     }
 
     public abstract class ApiClientBase : IApiClient
@@ -26,45 +27,47 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             _client.AddHandler("application/json", new RestSharpDataContractJsonDeserializer());
         }
 
-        private T Data<T>(string token, string resource, object body, Method method = Method.GET) where T : new()
+        private T Data<T>(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers) where T : new()
         {
             var request = RestRequest(resource, token, body, method);
 
             return _client.Execute<T>(request).Data;
         }
 
-        public T Get<T>(string token, string resource = "", object body = null) where T : new()
+        public T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
             return Data<T>(token, resource, body);
         }
 
-        public T Post<T>(string token, string resource = "", object body = null) where T : new()
+        public T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
             return Data<T>(token, resource, body, Method.POST);
         }
 
-        private string Content(string token, string resource, object body, Method method = Method.GET)
+        private string Content(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers)
         {
             var request = RestRequest(resource, token, body, method);
 
             return _client.Execute(request).Content;
         }
 
-        public string Get(string token, string resource = "", object body = null)
+        public string Get(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers)
         {
             return Content(token, resource, body);
         }
 
-        public string Post(string token, string resource = "", object body = null)
+        public string Post(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers)
         {
-            return Content(token, resource, body, Method.POST);
+            return Content(token, resource, body, Method.POST, headers);
         }
 
         private static RestRequest RestRequest(string resource, string token, object body = null,
-            Method method = Method.GET)
+            Method method = Method.GET, params KeyValuePair<string, string>[] headers)
         {
             var request = new RestRequest(resource, method);
             request.AddHeader("Authorization", "ApiKey " + token);
+            foreach (var valuePair in headers)
+                request.AddHeader(valuePair.Key, valuePair.Value);
             if (body != null)
                 request.AddObject(body);
 

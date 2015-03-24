@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder;
@@ -15,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_ivid_title_holder_with_absa_financed_interest : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
@@ -35,19 +39,19 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void ivid_title_holder_with_absa_financed_interest_response_should_be_handled()
         {
-            _response.IvidTitleHolderResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void ivid_title_holder_with_absa_financed_interest_response_shuould_not_be_null()
         {
-            _response.IvidTitleHolderResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().ShouldNotBeNull();
         }
 
         [Observation]
         public void ivid_title_holder_with_absa_financed_interest_should_be_available()
         {
-            _response.IvidTitleHolderResponse.FinancialInterestAvailable.ShouldBeTrue();
+            _response.OfType<IProvideDataFromIvidTitleHolder>().First().FinancialInterestAvailable.ShouldBeTrue();
         }
 
     }

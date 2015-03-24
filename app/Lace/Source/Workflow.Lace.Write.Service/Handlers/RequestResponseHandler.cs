@@ -6,9 +6,8 @@ using Workflow.Lace.Messages.Commands;
 
 namespace Workflow.Lace.Write.Service.Handlers
 {
-    public class RequestResponseHandler : IHandleMessages<ReceiveRequestCommand>,
-        IHandleMessages<ReceiveResponseFromDataProviderCommand>, IHandleMessages<SendRequestToDataProviderCommand>,
-        IHandleMessages<ReturnResponseCommmand>
+    public class RequestResponseHandler : IHandleMessages<SendRequestToDataProviderCommand>,
+        IHandleMessages<GetResponseFromDataProviderCommmand>, IHandleMessages<CreateTransactionCommand>
     {
         private readonly IRepository _repository;
 
@@ -21,34 +20,35 @@ namespace Workflow.Lace.Write.Service.Handlers
             _repository = repository;
         }
 
-        public void Handle(ReceiveResponseFromDataProviderCommand message)
-        {
-            var @event = _repository.GetById<Request>(message.RequestId);
-            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId,
-                message.DataProvider,message.Date);
-
-            _repository.Save(@event, Guid.NewGuid(), null);
-        }
-
-        public void Handle(ReceiveRequestCommand message)
-        {
-            var @event = Request.ReceiveRequest(message.Id, message.Date);
-            _repository.Save(@event, Guid.NewGuid(), null);
-        }
 
         public void Handle(SendRequestToDataProviderCommand message)
         {
-            var @event = _repository.GetById<Request>(message.RequestId);
-            @event.RequestSentToDataProvider(message.Id, message.RequestId, message.DataProvider,
-                message.RequestPayload, message.Date, message.ConnectionType, message.Connection);
+            var @event = _repository.GetById<Request>(message.RequestId) ??
+                         Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date, message.Action,
+                             message.State, message.Connection, message.ConnectionType);
+
+            @event.RequestSentToDataProvider(message.Id, message.RequestId, message.DataProvider, message.Date,
+                message.ConnectionType, message.Connection, message.Action, message.State);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
-        public void Handle(ReturnResponseCommmand message)
+        public void Handle(GetResponseFromDataProviderCommmand message)
+        {
+            var @event = _repository.GetById<Request>(message.RequestId) ??
+                        Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date, message.Action,
+                            message.State, message.Connection, message.ConnectionType);
+            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId, message.DataProvider, message.Date,
+                message.Connection, message.ConnectionType, message.Action, message.State);
+
+            _repository.Save(@event, Guid.NewGuid(), null);
+        }
+
+        public void Handle(CreateTransactionCommand message)
         {
             var @event = _repository.GetById<Request>(message.RequestId);
-            @event.ReturnResponse(message.Id, message.RequestId, message.Date);
+            @event.CreateTransaction(message.Id, message.PackageId, message.PackageVersion, message.Date, message.UserId,
+                message.RequestId, message.ContractId, message.System, message.ContractVersion, message.State);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }

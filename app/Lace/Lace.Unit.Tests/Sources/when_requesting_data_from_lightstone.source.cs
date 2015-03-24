@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
@@ -18,7 +21,7 @@ namespace Lace.Unit.Tests.Sources
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ILaceRequest _request;
-        private IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _callTheSource;
 
@@ -41,106 +44,106 @@ namespace Lace.Unit.Tests.Sources
         [Observation]
         public void lace_lightstone_response_data_from_service_response_must_not_be_null()
         {
-            _response.LightstoneResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().ShouldNotBeNull();
         }
 
         [Observation]
         public void lace_lightstone_response_data_from_service_must_be_handled()
         {
-            _response.LightstoneResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_lightstone_response_car_full_name_must_be_correct()
         {
-            _response.LightstoneResponse.CarFullname.ShouldEqual("TOYOTA Auris 1.6 RT 5-dr");
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().CarFullname.ShouldEqual("TOYOTA Auris 1.6 RT 5-dr");
         }
 
         [Observation]
         public void lace_lightstone_response_carid_must_be_correct()
         {
-            _response.LightstoneResponse.CarId.ShouldEqual(107483);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().CarId.ShouldEqual(107483);
         }
 
         [Observation]
         public void lace_lightstone_response_image_url_must_be_correct()
         {
-            _response.LightstoneResponse.ImageUrl.ShouldEqual("http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg");
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().ImageUrl.ShouldEqual("http://www.rgt.co.za/photos/TOYOTA/107483_1_P.jpg");
         }
 
         [Observation]
         public void lace_lighstone_response_model_must_be_correct()
         {
-            _response.LightstoneResponse.Model.ShouldEqual("Auris 1.6 RT 5-dr");
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().Model.ShouldEqual("Auris 1.6 RT 5-dr");
         }
 
 
         [Observation]
         public void lace_lighstone_response_quarter_must_be_correct()
         {
-            _response.LightstoneResponse.Quarter.ShouldEqual("3rd Quarter");
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().Quarter.ShouldEqual("3rd Quarter");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_accident_distribution_count_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.AccidentDistribution.Count().ShouldEqual(3);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AccidentDistribution.Count().ShouldEqual(3);
         }
 
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_amortised_values_count_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.AmortisedValues.Count().ShouldEqual(4);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AmortisedValues.Count().ShouldEqual(4);
         }
 
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_area_factors_count_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.AreaFactors.Count().ShouldEqual(104);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.AreaFactors.Count().ShouldEqual(104);
         }
 
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_confidence_level_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .RetailConfidenceLevel.ShouldEqual("Medium");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_high_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .RetailEstimatedHigh.ShouldEqual("R 98 700,00");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_low_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .RetailEstimatedLow.ShouldEqual("R 80 600,00");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_trade_estimated_value_confidence_level_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .RetailConfidenceLevel.ShouldEqual("Medium");
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_trade_estimated_value_estimated_high_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .TradeEstimatedHigh.Trim().ShouldEqual(1000000.ToString("C"));
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_trade_estimated_value_estimated_low_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .TradeEstimatedLow.ShouldEqual(100.ToString("C"));
         }
 
@@ -148,26 +151,26 @@ namespace Lace.Unit.Tests.Sources
         [Observation]
         public void lace_lighstone_response_vehicleValuation_retail_estimated_value_estimated_value_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.EstimatedValue.FirstOrDefault()
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.EstimatedValue.FirstOrDefault()
                 .TradeEstimatedValue.Trim().ShouldEqual(79600.ToString("C"));
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_image_gauges_count_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.ImageGauges.Count().ShouldEqual(5);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.ImageGauges.Count().ShouldEqual(5);
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_last_five_sales_count_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.LastFiveSales.Count().ShouldEqual(5);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.LastFiveSales.Count().ShouldEqual(5);
         }
 
         [Observation]
         public void lace_lighstone_response_vehicleValuation_repair_index_count_must_be_correct()
         {
-            _response.LightstoneResponse.VehicleValuation.RepairIndex.Count().ShouldEqual(9);
+            _response.OfType<IProvideDataFromLightstoneAuto>().First().VehicleValuation.RepairIndex.Count().ShouldEqual(9);
         }
     }
 }

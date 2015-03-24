@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
@@ -30,7 +32,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response,
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
             try
@@ -79,11 +81,11 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             }
         }
 
-        private static void AudatexResponseFailed(IProvideResponseFromLaceDataProviders response)
+        private static void AudatexResponseFailed(ICollection<IPointToLaceProvider> response)
         {
-            response.AudatexResponse = null;
-            response.AudatexResponseHandled = new AudatexResponseHandled();
-            response.AudatexResponseHandled.HasBeenHandled();
+            var audatexResponse = new AudatexResponse();
+            audatexResponse.HasBeenHandled();
+            response.Add(audatexResponse);
         }
 
         private static CredentialsInfo GetCredentials()
@@ -96,7 +98,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             };
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformAudatexResponse(_response, response, _request);
 
@@ -107,9 +109,8 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 
             monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
-            response.AudatexResponse = transformer.Result;
-            response.AudatexResponseHandled = new AudatexResponseHandled();
-            response.AudatexResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

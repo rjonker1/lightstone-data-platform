@@ -1,5 +1,5 @@
-﻿using Lace.Domain.Core.Contracts;
-using Lace.Domain.Core.Entities;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
@@ -11,13 +11,13 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
     public class FakeCallingIvidExternalWebService : ICallTheDataProviderSource
     {
         private HpiStandardQueryResponse _ividResponse;
-        public void CallTheDataProvider(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             _ividResponse = new SourceResponseBuilder().ForIvid();
             TransformResponse(response, monitoring);
         }
 
-        public void TransformResponse(IProvideResponseFromLaceDataProviders response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformIvidResponse(_ividResponse);
 
@@ -26,9 +26,8 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
                 transformer.Transform();
             }
 
-            response.IvidResponse = transformer.Result;
-            response.IvidResponseHandled = new IvidResponseHandled();
-            response.IvidResponseHandled.HasBeenHandled();
+            transformer.Result.HasBeenHandled();
+            response.Add(transformer.Result);
         }
     }
 }

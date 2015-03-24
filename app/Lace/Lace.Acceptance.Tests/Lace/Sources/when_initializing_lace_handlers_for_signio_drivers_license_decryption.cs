@@ -1,9 +1,12 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
-using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Scans;
@@ -14,7 +17,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_signio_drivers_license_decryption : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
@@ -22,7 +25,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _monitoring = MonitoringBusBuilder.ForSignioDriversLicenseCommands(Guid.NewGuid());
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
-            _response = new LaceResponse();
+            _response = new Collection<IPointToLaceProvider>();
             _dataProvider = new SignioDataProvider(_request, null, null, _monitoring);
         }
 
@@ -34,13 +37,13 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         [Observation]
         public void lace_signio_drivers_license_decryption_response_should_be_handled_test()
         {
-            _response.SignioDriversLicenseDecryptionResponseHandled.Handled.ShouldBeTrue();
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().Handled.ShouldBeTrue();
         }
 
         [Observation]
         public void lace_signio_drivers_license_decryption_response_shuould_not_be_null_test()
         {
-            _response.SignioDriversLicenseDecryptionResponse.ShouldNotBeNull();
+            _response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First().ShouldNotBeNull();
         }
     }
 }

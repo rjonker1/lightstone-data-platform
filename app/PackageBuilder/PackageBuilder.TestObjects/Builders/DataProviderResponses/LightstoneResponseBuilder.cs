@@ -14,9 +14,9 @@ namespace PackageBuilder.TestObjects.Builders.DataProviderResponses
         private string _carFullName;
         private string _model;
         private IRespondWithValuation _vehicleValuation;
-        public IProvideDataFromLightstone Build()
+        public IProvideDataFromLightstoneAuto Build()
         {
-            return new LightstoneResponse(_carId, _year, _vin, _imageUrl, _quarter, _carFullName, _model, _vehicleValuation);
+            return new LightstoneAutoResponse(_carId, _year, _vin, _imageUrl, _quarter, _carFullName, _model, _vehicleValuation);
         }
 
         public LightstoneResponseBuilder With(int carId, int year)

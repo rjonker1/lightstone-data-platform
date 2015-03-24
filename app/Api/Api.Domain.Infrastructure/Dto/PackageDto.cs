@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using PackageBuilder.Core.Entities;
-using PackageBuilder.Domain.Entities;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.Actions;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 
 namespace Api.Domain.Infrastructure.Dto
 {

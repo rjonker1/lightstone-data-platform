@@ -1,7 +1,8 @@
 using AutoMapper;
 using Microsoft.Practices.ServiceLocation;
 using PackageBuilder.Core.NEventStore;
-using PackageBuilder.Domain.Entities.DataProviders.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.ValueResolvers
 {

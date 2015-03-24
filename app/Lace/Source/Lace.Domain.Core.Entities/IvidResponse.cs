@@ -96,6 +96,7 @@ namespace Lace.Domain.Core.Entities
         {
             SpecificInformation = new VehicleSpecificInformation("Odometer Not Available", ColourDescription,
                 Registration, Vin, License, Engine, CategoryDescription);
+            SpecificInformation.HasBeenHandled();
         }
 
         public void SetCarFullName()
@@ -190,6 +191,19 @@ namespace Lace.Domain.Core.Entities
             {
                 return GetType();
             }
+        }
+
+        [DataMember]
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
         }
     }
 }

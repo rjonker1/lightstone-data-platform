@@ -3,7 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
@@ -18,7 +18,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.Light
         {
             base.Observe(); 
 
-            _dataFields = Mapper.Map<IProvideDataFromLightstone, IEnumerable<IDataField>>(LightstoneResponseMother.Response);
+            _dataFields = Mapper.Map<IProvideDataFromLightstoneAuto, IEnumerable<IDataField>>(LightstoneResponseMother.Response);
         }
 
         [Observation]

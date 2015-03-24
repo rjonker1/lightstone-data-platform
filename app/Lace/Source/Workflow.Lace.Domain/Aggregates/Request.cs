@@ -3,82 +3,121 @@ using System.Runtime.Serialization;
 using CommonDomain;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Identifiers;
+using Workflow.Billing.Messages;
+using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
 
 namespace Workflow.Lace.Domain.Aggregates
 {
     [Serializable]
     [DataContract]
-    public class Request :  AggregateBase, IAggregate
+    public class Request : AggregateBase, IAggregate
     {
         private Request(Guid id)
         {
             Id = id;
-            Register<RequestReceived>(e => e.Id = id);
-            Register<RequestSentToDataProvider>(e => e.Id = id);
-            Register<ResponseReceivedFromDataProvider>(e => e.Id = id);
-            Register<ResponseReturned>(e => e.Id = id);
+            Register<RequestToDataProvider>(e => e.Id = id);
+            Register<ResponseFromDataProvider>(e => e.Id = id);
+            Register<BillTransactionMessage>(e => e.TransactionId = id);
         }
 
-
-        public Request(Guid requestId, DateTime date)
+        public Request(Guid requestId, DataProviderCommandSource dataProvider,
+            DateTime date, DataProviderAction action, DataProviderState state, string connection, string connectionType)
             : this(requestId)
         {
             RequestId = requestId;
             Date = date;
+            State = state;
+            Action = action;
+            DataProvider = dataProvider;
 
-            RaiseEvent(new RequestReceived(requestId, date));
+            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection,
+                connectionType,
+                state, action));
+            //RaiseEvent(new RequestReceived(requestId, date));
         }
 
         public void RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            object payload,
-            DateTime date, string connectionType, string connection)
+            DateTime date, string connectionType, string connection, DataProviderAction action, DataProviderState state)
         {
             RequestId = requestId;
             DataProvider = dataProvider;
-            //ResponsePayload = payload;
             Date = date;
 
-            RaiseEvent(new RequestSentToDataProvider(id, requestId, dataProvider, date, connection, connectionType));
+            RaiseEvent(new RequestToDataProvider(id, requestId, dataProvider, date, connection, connectionType,
+                state, action));
         }
 
         public void ResponseReceivedFromDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date)
+            DateTime date, string connection, string connectionType, DataProviderAction action, DataProviderState state)
         {
             RequestId = requestId;
             DataProvider = dataProvider;
-            //RequestPayload = payload;
             Date = date;
+            State = state;
+            Action = action;
+            ConnectionType = connectionType;
+            Connection = connection;
 
-            RaiseEvent(new ResponseReceivedFromDataProvider(id,requestId, dataProvider, date));
+            RaiseEvent(new ResponseFromDataProvider(id, requestId, dataProvider, date, connection, connectionType, state,
+                action));
         }
 
-        public void ReturnResponse(Guid id, Guid requestId, DateTime date)
+        public void CreateTransaction(Guid id, Guid packageId, long packageVersion, DateTime date, Guid userId,
+            Guid requestId,
+            Guid contractId,
+            string system, long contractVersion, DataProviderState state)
         {
             RequestId = requestId;
             Date = date;
+            ContractId = contractId;
+            PackageId = packageId;
+            PackageVersion = packageVersion;
+            ContractVersion = contractVersion;
+            State = state;
 
-            RaiseEvent(new ResponseReturned(id, requestId, date));
+            RaiseEvent(new BillTransactionMessage(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
+                new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date, id, new StateIdentifier((int)state, state.ToString())));
         }
 
-        public static Request ReceiveRequest(Guid requestId, DateTime date)
+        public static Request ReceiveRequest(Guid requestId, DataProviderCommandSource dataProvider,
+            DateTime date, DataProviderAction action, DataProviderState state, string connection, string connectionType)
         {
-            return new Request(requestId, date);
+            return new Request(requestId, dataProvider, date, action, state, connection, connectionType);
         }
 
         [DataMember]
         public Guid RequestId { get; private set; }
 
         [DataMember]
+        public Guid PackageId { get; private set; }
+
+        [DataMember]
+        public long PackageVersion { get; private set; }
+
+        [DataMember]
+        public Guid ContractId { get; private set; }
+
+        [DataMember]
+        public long ContractVersion { get; private set; }
+
+        [DataMember]
         public DataProviderCommandSource DataProvider { get; private set; }
 
         [DataMember]
-        public object RequestPayload { get; private set; }
+        public DataProviderState State { get; private set; }
 
-        //[DataMember]
-        //public object ResponsePayload { get; private set; }
+        [DataMember]
+        public DataProviderAction Action { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
+
+        [DataMember]
+        public string Connection { get; private set; }
+
+        [DataMember]
+        public string ConnectionType { get; private set; }
     }
 }

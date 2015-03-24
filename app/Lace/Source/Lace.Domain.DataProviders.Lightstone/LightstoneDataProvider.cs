@@ -1,7 +1,10 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Repositories.Factory;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -10,6 +13,7 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.Lightstone
 {
@@ -26,7 +30,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.LightstoneAuto, _request);
 
@@ -50,18 +54,18 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.LightstoneResponse == null)
+                if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
             CallNextSource(response, _monitoring);
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.LightstoneResponse = null;
-            response.LightstoneResponseHandled = new LightstoneResponseHandled();
-            response.LightstoneResponseHandled.HasNotBeenHandled();
+            var lightstoneResponse = new LightstoneAutoResponse();
+            lightstoneResponse.HasNotBeenHandled();
+            response.Add(lightstoneResponse);
         }
     }
 }

@@ -38,22 +38,27 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.773, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.798, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.773\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.798\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\DataProviders\Business\IRespondWithBusiness.cs" />
     <Compile Include="Contracts\DataProviders\DriversLicense\IRespondWithDriversLicenseInformation.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneBusiness.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneProperty.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromSignioDriversLicenseDecryption.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromPCubedFicaVerfication.cs" />
     <Compile Include="Contracts\DataProviders\Property\IRespondWithProperty.cs" />
+    <Compile Include="Contracts\IProvideResponseFromDataProviders.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
     <Compile Include="Contracts\Requests\IProvideCarInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideContextForRequest.cs" />
@@ -61,6 +66,7 @@
     <Compile Include="Contracts\Requests\IProvideDriversLicenseInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideFicaInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideJisInformation.cs" />
+    <Compile Include="Contracts\Requests\IProvideBusinessInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvideRequestAggregation.cs" />
     <Compile Include="Contracts\Requests\IProvideUserInformationForRequest.cs" />
     <Compile Include="Contracts\Requests\IProvidePropertyInformationForRequest.cs" />
@@ -77,7 +83,7 @@
     <Compile Include="Contracts\DataProviders\IProvideDataFromIvid.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromIvidTitleHolder.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromJis.cs" />
-    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstone.cs" />
+    <Compile Include="Contracts\DataProviders\IProvideDataFromLightstoneAuto.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromRgt.cs" />
     <Compile Include="Contracts\DataProviders\IProvideDataFromRgtVin.cs" />
     <Compile Include="Contracts\DataProviders\IProvideHitStatusDataStoreNamesMapping.cs" />

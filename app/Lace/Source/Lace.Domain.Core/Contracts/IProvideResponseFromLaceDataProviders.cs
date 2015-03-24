@@ -1,40 +1,22 @@
-﻿using Lace.Domain.Core.Contracts.DataProviders;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Contracts
 {
     public interface IProvideResponseFromLaceDataProviders
     {
         IProvideDataFromIvid IvidResponse { get; set; }
-        IResponseProviderHandled IvidResponseHandled { get; set; }
-
         IProvideDataFromIvidTitleHolder IvidTitleHolderResponse { get; set; }
-        IResponseProviderHandled IvidTitleHolderResponseHandled { get; set; }
-
         IProvideDataFromRgtVin RgtVinResponse { get; set; }
-        IResponseProviderHandled RgtVinResponseHandled { get; set; }
-
         IProvideDataFromAudatex AudatexResponse { get; set; }
-        IResponseProviderHandled AudatexResponseHandled { get; set; }
-
         IProvideDataFromRgt RgtResponse { get; set; }
-        IResponseProviderHandled RgtResponseHandled { get; set; }
-
-        IProvideDataFromLightstone LightstoneResponse { get; set; }
-        IResponseProviderHandled LightstoneResponseHandled { get; set; }
-
+        IProvideDataFromLightstoneAuto LightstoneResponse { get; set; }
         IProvideDataFromAnpr AnprResponse { get; set; }
-        IResponseProviderHandled AnprResponseHandled { get; set; }
-
         IProvideDataFromJis JisResponse { get; set; }
-        IResponseProviderHandled JisResponseHandled { get; set; }
-
         IProvideDataFromPCubedFicaVerfication FicaVerficationResponse { get; set; }
-        IResponseProviderHandled FicaVerficationResponseHandled { get; set; }
-
         IProvideDataFromSignioDriversLicenseDecryption SignioDriversLicenseDecryptionResponse { get; set; }
-        IResponseProviderHandled SignioDriversLicenseDecryptionResponseHandled { get; set; }
-
         IProvideDataFromLightstoneProperty LightstonePropertyResponse { get; set; }
-        IResponseProviderHandled LightstonePropertyResponseHandled { get; set; }
     }
 }

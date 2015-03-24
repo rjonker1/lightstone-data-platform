@@ -1,5 +1,5 @@
-﻿using PackageBuilder.Domain.Entities.Enums;
-using PackageBuilder.Domain.Entities.States.WriteModels;
+﻿using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestObjects.Builders;
 
 namespace PackageBuilder.TestObjects.Mothers

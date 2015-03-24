@@ -8,13 +8,13 @@ using Newtonsoft.Json;
 namespace Lace.Domain.Core.Entities
 {
     [DataContract]
-    public class LightstoneResponse : IProvideDataFromLightstone
+    public class LightstoneAutoResponse : IProvideDataFromLightstoneAuto
     {
-        public LightstoneResponse()
+        public LightstoneAutoResponse()
         {
         }
 
-        public LightstoneResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
+        public LightstoneAutoResponse(int carId, int year, string vin, string imageUrl, string quarter, string carFullName,
             string model, IRespondWithValuation vehicleValuation)
         {
             CarId = carId;
@@ -58,6 +58,19 @@ namespace Lace.Domain.Core.Entities
             {
                 return GetType();
             }
+        }
+
+        [DataMember]
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
         }
     }
 }

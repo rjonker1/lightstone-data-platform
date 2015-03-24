@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using PackageBuilder.Domain.Dtos.WriteModels;
-using PackageBuilder.Domain.Entities.DataFields.WriteModels;
+using PackageBuilder.Domain.Dtos.Write;
+using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
 {

@@ -1,4 +1,7 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.Infrastructure.Core.Dto;
@@ -38,15 +41,12 @@ namespace Lace.Test.Helper.Fakes.Responses
             };
         }
 
-        public static IProvideResponseFromLaceDataProviders GetLaceResponseToUserInAudatexRequest()
+        public static ICollection<IPointToLaceProvider> GetLaceResponseToUserInAudatexRequest()
         {
-            return new LaceResponse()
+            return new Collection<IPointToLaceProvider>()
             {
-                RgtVinResponse =
-                    new RgtVinResponse(string.Empty, 0, 0, 0, 0, "Hyundai", string.Empty, string.Empty, string.Empty, 0),
-                LightstoneResponse =
-                    new LightstoneResponse(0, 2011, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                        null)
+                new RgtVinResponse(string.Empty, 0, 0, 0, 0, "Hyundai", string.Empty, string.Empty, string.Empty, 0),
+                new LightstoneAutoResponse(0, 2011, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, null)
             };
         }
     }

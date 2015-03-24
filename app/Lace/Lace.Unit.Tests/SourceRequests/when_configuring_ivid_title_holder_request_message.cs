@@ -1,4 +1,6 @@
-﻿using Lace.Domain.Core.Contracts;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Test.Helper.Builders.Requests;
@@ -10,7 +12,7 @@ namespace Lace.Unit.Tests.SourceRequests
     internal class when_configuring_ivid_title_holder_request_message : Specification
     {
         private readonly ILaceRequest _request;
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderRequestMessage _configureRequestMessage;
 
 

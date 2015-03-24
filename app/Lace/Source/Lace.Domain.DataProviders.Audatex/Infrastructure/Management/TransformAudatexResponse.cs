@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lace.Domain.Core.Contracts;
+using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
@@ -26,17 +27,18 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
             }
         }
 
-        private readonly IProvideResponseFromLaceDataProviders _response;
+        private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ILaceRequest _request;
 
         private readonly string _manufacturer;
         private readonly int _warrantyYear;
         private readonly bool _canApplyRepairInfo;
 
-        public TransformAudatexResponse(GetDataResult audatexResponse, IProvideResponseFromLaceDataProviders response, ILaceRequest request)
+        public TransformAudatexResponse(GetDataResult audatexResponse, ICollection<IPointToLaceProvider> response,
+            ILaceRequest request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
-            Result = Continue ? new AudatexResponse(new List<IProvideAccidentClaim>()) : null;
+            Result = new AudatexResponse(new List<IProvideAccidentClaim>());
             Message = audatexResponse;
 
             _response = response;
@@ -81,23 +83,27 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 
         private string GetManufacturer()
         {
-            if (_response.RgtResponse == null) return GetManufacturerFromRgtVin() ?? string.Empty;
+            if (!_response.OfType<IProvideDataFromRgt>().Any() ||
+                _response.OfType<IProvideDataFromRgt>().First() == null)
+                return GetManufacturerFromRgtVin() ?? string.Empty;
 
-            return _response.RgtResponse.Manufacturer ?? string.Empty;
+            return _response.OfType<IProvideDataFromRgt>().First().Manufacturer ?? string.Empty;
         }
 
         private string GetManufacturerFromRgtVin()
         {
-            if (_response.RgtVinResponse == null) return null;
+            if (!_response.OfType<IProvideDataFromRgtVin>().Any() ||
+                _response.OfType<IProvideDataFromRgtVin>().First() == null) return null;
 
-            return _response.RgtVinResponse.VehicleMake ?? string.Empty;
+            return _response.OfType<IProvideDataFromRgtVin>().First().VehicleMake ?? string.Empty;
         }
 
         private int GetYear()
         {
-            if (_response.LightstoneResponse == null) return 1900;
+            if (!_response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
+                _response.OfType<IProvideDataFromLightstoneAuto>().First() == null) return 1900;
 
-            return _response.LightstoneResponse.Year ?? 1900;
+            return _response.OfType<IProvideDataFromLightstoneAuto>().First().Year ?? 1900;
         }
     }
 }

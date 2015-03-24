@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 
@@ -20,19 +21,25 @@ namespace Lace.Domain.Core.Entities
             TransactionToken = transactionToken;
         }
 
-
+        [DataMember]
         public string ProcessedImage { get; private set; }
 
+        [DataMember]
         public string EnhancedImage { get; private set; }
 
+        [DataMember]
         public string EnhancedImageThumbnail { get; private set; }
 
+        [DataMember]
         public string LicensePlateNumber { get; private set; }
 
+        [DataMember]
         public string ErrorMessage { get; private set; }
 
+        [DataMember]
         public bool Successful { get; private set; }
 
+        [DataMember]
         public Guid TransactionToken { get; private set; }
 
         public IProvideDataFromAnpr WasASuccess()
@@ -62,6 +69,19 @@ namespace Lace.Domain.Core.Entities
             {
                 return GetType();
             }
+        }
+
+        [DataMember]
+        public bool Handled { get; private set; }
+
+        public void HasNotBeenHandled()
+        {
+            Handled = false;
+        }
+
+        public void HasBeenHandled()
+        {
+            Handled = true;
         }
     }
 }

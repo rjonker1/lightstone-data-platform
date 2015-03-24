@@ -1,6 +1,9 @@
-﻿using DataPlatform.Shared.Enums;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Contracts;
+using Lace.Domain.Core.Contracts.DataProviders;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
@@ -9,6 +12,7 @@ using Lace.Domain.DataProviders.RgtVin.Infrastructure;
 using Lace.Domain.DataProviders.RgtVin.Repositories.Factory;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.RgtVin
 {
@@ -25,7 +29,7 @@ namespace Lace.Domain.DataProviders.RgtVin
             _monitoring = monitoring;
         }
 
-        public void CallSource(IProvideResponseFromLaceDataProviders response)
+        public void CallSource(ICollection<IPointToLaceProvider> response)
         {
             var spec = new CanHandlePackageSpecification(DataProviderName.RgtVin, _request);
 
@@ -36,7 +40,7 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                _monitoring.Begin(new {_request.Vehicle, response.IvidResponse}, stopWatch);
+                _monitoring.Begin(new { _request.Vehicle, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_request,
@@ -46,7 +50,8 @@ namespace Lace.Domain.DataProviders.RgtVin
 
                 _monitoring.End(response, stopWatch);
 
-                if (response.RgtVinResponse == null && FallBack != null)
+                if (!response.OfType<IProvideDataFromRgtVin>().Any() ||
+                    response.OfType<IProvideDataFromIvid>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 
@@ -54,11 +59,11 @@ namespace Lace.Domain.DataProviders.RgtVin
 
         }
 
-        private static void NotHandledResponse(IProvideResponseFromLaceDataProviders response)
+        private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
-            response.RgtVinResponse = null;
-            response.RgtVinResponseHandled = new RgtVinResponseHandled();
-            response.RgtVinResponseHandled.HasNotBeenHandled();
+            var rgtVinResponse = new RgtVinResponse();
+            rgtVinResponse.HasNotBeenHandled();
+            response.Add(rgtVinResponse);
         }
     }
 }

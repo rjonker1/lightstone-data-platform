@@ -5,12 +5,12 @@ namespace PackageBuilder.TestObjects.Mothers
 {
     public class ContractMother
     {
-        public static IContract WesbankContract
-        {
-            get
-            {
-                return new ContractBuilder().With("Wesbank contract").Build();
-            }
-        } 
+        //public static IContract WesbankContract
+        //{
+        //    get
+        //    {
+        //        return new ContractBuilder().With("Wesbank contract").Build();
+        //    }
+        //} 
     }
 }
