@@ -89,11 +89,11 @@
         $(document).ajaxStart(function () {
             //$.blockUI({ message: '<h3><img src="Content/ajax-loader.gif" /> Loading...</h3>' });
             $.blockUI();
-            //preloader.active(true);
+            preloader.active(true);
         });
         $(document).ajaxStop(function () {
             $.unblockUI();
-            //preloader.active(false);
+            preloader.active(false);
         });
         $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
             if (jqxhr.responseJSON)
