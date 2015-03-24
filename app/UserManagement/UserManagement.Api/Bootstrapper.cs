@@ -53,7 +53,6 @@ namespace UserManagement.Api
             //new SchemaExport(container.Resolve<NHibernate.Cfg.Configuration>()).Create(false, true);
         }
 
-        //Updates schema if there are any structural changes
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
             pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>

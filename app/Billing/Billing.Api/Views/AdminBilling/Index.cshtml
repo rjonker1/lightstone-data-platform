@@ -1,0 +1,126 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Admin Billing", ""))
+
+<!-- ROW 1 -->
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-stack-overflow"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Billing Run</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Automated</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-purple"><i class="fa fa-refresh"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Force Billing Run Process</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Run</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-gray-active"><i class="fa fa-envelope-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Statement Template Layout</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-blue-gradient"><i class="fa fa-star-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Invoice Template Layout</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>  
+
+<!-- ROW 2 -->
+<div class="row">
+    
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-olive-active"><i class="fa fa-flag-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Pastel</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Action</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Merchant</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">Action</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-teal-gradient"><i class="fa fa-inbox"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Provider Notifications</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-gears"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Billing Run Notification Settings</span>
+                <br />
+                <span class="info-box-text">
+                    <button type="button" class="btn btn-primary btn-md">View</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

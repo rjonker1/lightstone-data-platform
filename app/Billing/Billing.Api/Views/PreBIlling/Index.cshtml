@@ -1,0 +1,65 @@
+﻿@using Billing.Api.ViewModels
+@Html.Partial("Shared/PageHeader", new HeaderViewModel("Pre Billing", ""))
+
+<div class="box">
+
+    <table id="table"></table>
+    
+    <h2 id="detail-table-header"></h2>
+    <table id="detail"></table>
+ 
+
+    <script>
+
+        $('#table').bootstrapTable({
+            url: '/PreBilling',
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'customerName',
+                title: 'Customer Name',
+                sortable: true
+            }, {
+                field: 'users',
+                title: '# Users',
+                formatter: gridUsersFormatter,
+                events: userGridActionEvents
+            }, {
+                field: 'type',
+                title: 'User Type',
+                sortable: true
+            }, {
+                field: 'owner',
+                title: 'Owner',
+                sortable: true
+            }, {
+                field: 'products',
+                title: '# Products',
+                formatter: gridProductsFormatter,
+                events: productGridActionEvents
+            }, {
+                field: 'transactions',
+                title: '# Transactions',
+                formatter: gridTransactionsFormatter
+            }, {
+                field: 'userType',
+                title: 'User Type',
+                sortable: true
+            }, {
+                field: 'total',
+                title: 'Total',
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+    </script>
+</div>
