@@ -125,3 +125,196 @@
 
     return Billing;
 })(jQuery, Billing || {});
+
+
+; (function ($, Billing) {
+    "use strict";
+    Billing.MIDashboard = function () {
+        
+        var startDateFilter = moment().subtract(29, 'days').format('YYYY-MM-DD');
+        var endDateFilter = moment().format('YYYY-MM-DD');;
+
+        $('#filterMIData').click(function () {
+
+            var displayText = 'Showing filtered data for period: ' + startDateFilter + ' -to- ' + endDateFilter + '<br /><br />';
+
+            if ($('#client_customer').val()) {
+
+                displayText += 'Where Client | Customer name is: ' + $('#client_customer').val() + '<br />';
+            }
+
+            if ($('#username').val()) {
+
+                displayText += 'Where Username is: ' + $('#username').val() + '<br />';
+            }
+
+            if ($('#product_type').val()) {
+
+                displayText += 'Where Product Type is: ' + $('#product_type').val() + '<br />';
+            }
+
+            if ($('#account_manager').val()) {
+
+                displayText += 'Where Account Manager is: ' + $('#account_manager').val() + '<br />';
+            }
+
+            if ($('#industry').val()) {
+
+                displayText += 'Where Industry is: ' + $('#industry').val() + '<br />';
+            }
+
+            $('#detail-table-header').html(displayText);
+        });
+
+        $('#table').bootstrapTable({
+            url: "/MI",
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            pagination: true,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [10, 25, 50, 100, 'All'],
+            columns: [{
+                field: 'id',
+                title: 'Item ID',
+                visible: false
+            }, {
+                field: 'totalCoS',
+                title: 'Cost Of Sale (Total)',
+                sortable: true,
+                //formatter: gridCOSFormatter
+            }, {
+                field: 'totalRevenue',
+                title: 'Revenue (Total)',
+                sortable: true
+            }, {
+                field: 'nonBillable',
+                title: 'Non-Billable (Total)',
+                sortable: true
+            }]
+        });
+
+        Billing.overrideDataTablesStyling();
+
+
+        $(function () {
+
+            var totalCoS = 0;
+            var totalRevenue = 0;
+
+            $.get("/MI")
+            .done(function (data) {
+
+                totalCoS += data.data[0].totalCoS;
+                totalRevenue += data.data[0].totalRevenue;
+
+                /*
+                * DONUT CHART
+                * -----------
+                */
+
+                var donutData = [
+                  { label: "CoS", data: totalCoS, color: "#3c8dbc" },
+                  { label: "Revenue", data: totalRevenue, color: "#0073b7" },
+                  { label: "Non-Billable", data: 0, color: "#00c0ef" }
+                ];
+                $.plot("#donut-chart", donutData, {
+                    series: {
+                        pie: {
+                            show: true,
+                            radius: 1,
+                            innerRadius: 0.5,
+                            label: {
+                                show: true,
+                                radius: 2 / 3,
+                                formatter: labelFormatter,
+                                threshold: 0.1
+                            }
+
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+                });
+                /*
+                 * END DONUT CHART
+                 */
+
+            });
+
+        });
+
+        /*
+         * Custom Label formatter
+         * ----------------------
+         */
+        function labelFormatter(label, series) {
+            return "<div style='font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;'>"
+                    + label
+                    + "<br/>"
+                    + Math.round(series.percent) + "%</div>";
+        }
+
+
+
+        $(function () {
+
+            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+            $('#reportrange').daterangepicker({
+                format: 'MM/DD/YYYY',
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2015',
+                dateLimit: { days: 60 },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                opens: 'right',
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-primary',
+                cancelClass: 'btn-default',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Cancel',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            });
+
+            //Hook to feed back to API
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+
+                startDateFilter = picker.startDate.format('YYYY-MM-DD');
+                endDateFilter = picker.endDate.format('YYYY-MM-DD');
+
+                console.log(picker.startDate.format('YYYY-MM-DD'));
+                console.log(picker.endDate.format('YYYY-MM-DD'));
+            });
+
+        });
+    };
+
+    return Billing;
+})(jQuery, Billing || {});

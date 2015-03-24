@@ -14,7 +14,7 @@
                             <div id="startDateFilter"></div>
                             <div id="endDateFilter"></div>
                         </div>
-                        
+
                         <div id="reportrange" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; float: left;">
                             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                             <span></span> <b class="caret"></b>
@@ -26,37 +26,37 @@
                         <li>
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-briefcase" id="basic-addon1"></span>
-                                <input type="text" class="form-control" placeholder="Client / Customer" aria-describedby="basic-addon1">
+                                <input id="client_customer" type="text" class="form-control" placeholder="Client / Customer" aria-describedby="basic-addon1">
                             </div>
                         </li>
                         <li>
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
-                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                                <input id="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
                             </div>
                         </li>
                         <li>
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-tag" id="basic-addon1"></span>
-                                <input type="text" class="form-control" placeholder="Product type" aria-describedby="basic-addon1">
+                                <input id="product_type" type="text" class="form-control" placeholder="Product type" aria-describedby="basic-addon1">
                             </div>
                         </li>
                         <li>
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-bell" id="basic-addon1"></span>
-                                <input type="text" class="form-control" placeholder="Account Manager" aria-describedby="basic-addon1">
+                                <input id="account_manager" type="text" class="form-control" placeholder="Account Manager" aria-describedby="basic-addon1">
                             </div>
                         </li>
                         <li>
                             <div class="input-group">
                                 <span class="input-group-addon glyphicon glyphicon-pushpin" id="basic-addon1"></span>
-                                <input type="text" class="form-control" placeholder="Industry" aria-describedby="basic-addon1">
+                                <input id="industry" type="text" class="form-control" placeholder="Industry" aria-describedby="basic-addon1">
                             </div>
                         </li>
                     </ul>
                 </div><!-- /.box-body -->
             </div><!-- /. box -->
-        
+
             <div class="box box-solid">
                 <!-- Donut chart -->
                 <div class="box box-primary">
@@ -69,14 +69,14 @@
                     </div><!-- /.box-body-->
                 </div><!-- /.box -->
             </div><!-- /.box -->
-            
+
         </div><!-- /.col -->
         <div class="col-md-9">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h2 id="detail-table-header" class="box-title">Overview</h2>
+                    <p id="detail-table-header" class="box-title">Overview</p>
                 </div><!-- /.box-header -->
-            
+
                 <table id="table"></table>
 
             </div><!-- /. box -->
@@ -86,161 +86,6 @@
 
 <script>
 
-    var startDateFilter = moment().subtract(29, 'days').format('YYYY-MM-DD');
-    var endDateFilter = moment().format('YYYY-MM-DD');;
-
-    $('#filterMIData').click(function () {
-
-        $('#detail-table-header').text('Showing filtered data for period: ' + startDateFilter + ' -to- ' + endDateFilter);
-    });
-
-    $('#table').bootstrapTable({
-        url: "/MI",
-        search: true,
-        showRefresh: true,
-        showColumns: true,
-        pagination: true,
-        pageNumber: 1,
-        pageSize: 10,
-        pageList: [10, 25, 50, 100, 'All'],
-        columns: [{
-            field: 'id',
-            title: 'Item ID',
-            visible: false
-        }, {
-            field: 'totalCoS',
-            title: 'Cost Of Sale (Total)',
-            sortable: true,
-            //formatter: gridCOSFormatter
-        }, {
-            field: 'totalRevenue',
-            title: 'Revenue (Total)',
-            sortable: true
-        }, {
-            field: 'nonBillable',
-            title: 'Non-Billable (Total)',
-            sortable: true
-        }]
-    });
-
-    Billing.overrideDataTablesStyling();
-
-
-    $(function () {
-
-        var totalCoS = 0;
-        var totalRevenue = 0;
-
-        $.get("/MI")
-        .done(function (data) {
-
-            totalCoS += data.data[0].totalCoS;
-            totalRevenue += data.data[0].totalRevenue;
-
-         /*
-         * DONUT CHART
-         * -----------
-         */
-
-            var donutData = [
-              { label: "CoS", data: totalCoS, color: "#3c8dbc" },
-              { label: "Revenue", data: totalRevenue, color: "#0073b7" },
-              { label: "Non-Billable", data: 0, color: "#00c0ef" }
-            ];
-            $.plot("#donut-chart", donutData, {
-                series: {
-                    pie: {
-                        show: true,
-                        radius: 1,
-                        innerRadius: 0.5,
-                        label: {
-                            show: true,
-                            radius: 2 / 3,
-                            formatter: labelFormatter,
-                            threshold: 0.1
-                        }
-
-                    }
-                },
-                legend: {
-                    show: false
-                }
-            });
-            /*
-             * END DONUT CHART
-             */
-
-        });
-
-    });
-
-    /*
-     * Custom Label formatter
-     * ----------------------
-     */
-    function labelFormatter(label, series) {
-        return "<div style='font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;'>"
-                + label
-                + "<br/>"
-                + Math.round(series.percent) + "%</div>";
-    }
-
-
-
-    $(function () {
-
-        $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-
-        $('#reportrange').daterangepicker({
-            format: 'MM/DD/YYYY',
-            startDate: moment().subtract(29, 'days'),
-            endDate: moment(),
-            minDate: '01/01/2012',
-            maxDate: '12/31/2015',
-            dateLimit: { days: 60 },
-            showDropdowns: true,
-            showWeekNumbers: true,
-            timePicker: false,
-            timePickerIncrement: 1,
-            timePicker12Hour: true,
-            ranges: {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            },
-            opens: 'right',
-            buttonClasses: ['btn', 'btn-sm'],
-            applyClass: 'btn-primary',
-            cancelClass: 'btn-default',
-            separator: ' to ',
-            locale: {
-                applyLabel: 'Submit',
-                cancelLabel: 'Cancel',
-                fromLabel: 'From',
-                toLabel: 'To',
-                customRangeLabel: 'Custom',
-                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                firstDay: 1
-            }
-        }, function (start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        });
-
-        //Hook to feed back to API 
-        $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-
-            startDateFilter = picker.startDate.format('YYYY-MM-DD');
-            endDateFilter = picker.endDate.format('YYYY-MM-DD');
-
-            console.log(picker.startDate.format('YYYY-MM-DD'));
-            console.log(picker.endDate.format('YYYY-MM-DD'));
-        });
-
-    });
+    Billing.MIDashboard();
 
 </script>
