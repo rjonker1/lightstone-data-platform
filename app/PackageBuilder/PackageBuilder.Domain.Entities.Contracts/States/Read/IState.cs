@@ -1,5 +1,4 @@
 ﻿using PackageBuilder.Core.Entities;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.Enums.States;
 
 namespace PackageBuilder.Domain.Entities.Contracts.States.Read
