@@ -10,6 +10,7 @@ using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -18,10 +19,18 @@ namespace Api.Modules
 {
     public class ActionModule : SecureModule
     {
+        private static int _defaultJsonMaxLength;
+
         public ActionModule(IPackageBuilderApiClient packageBuilderApi, IEntryPoint entryPoint,
             IConnectToBilling billingConnector, IUserManagementApiClient userManagementApi,
             ICreateBillingTransaction billingTransaction)
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             Get["/"] = parameters =>
             {
                 var token = Context.AuthorizationHeaderToken();
@@ -51,29 +60,31 @@ namespace Api.Modules
                 if (packageDetails == null)
                     throw new Exception("Could not get package for contract");
 
-                var jsonPackage = packageBuilderApi.Get(token, "Packages/DataProvider/" + packageDetails.PackageId);
-                var package = jsonPackage.ToPackage();
+                var responses = packageBuilderApi.Get(token, string.Format("Packages/Execute/{0}/{1}/{2}/{3}", packageDetails.PackageId, userId, apiRequest.SearchTerm, Guid.NewGuid()));
+                //var package = jsonPackage.ToPackage();
 
-                if (package == null)
-                    throw new Exception("Package for data provider could not be resolved");
+                //if (package == null)
+                //    throw new Exception("Package for data provider could not be resolved");
 
-                var requestId = Guid.NewGuid();
+                //var requestId = Guid.NewGuid();
 
                 //var request = package.ToLicensePlateSearchRequest(userId, apiRequest.Username, apiRequest.SearchTerm, apiRequest.Username, requestId);
-                var request = package.FormLaceRequest(userId, apiRequest.Username, apiRequest.SearchTerm, apiRequest.Username, requestId);
+                //var request = package.FormLaceRequest(userId, apiRequest.Username, apiRequest.SearchTerm, apiRequest.Username, requestId);
 
-                var responses = entryPoint.GetResponsesFromLace(request);
-                var test = package.MapLaceResponses(responses);
-                var ivid = ((IProvideDataFromIvid) responses.First());
-                var test1 = package.MapLaceResponses(new List<IPointToLaceProvider>() { ivid });
-                if (!responses.Any())
-                    throw new Exception("No response for package");
+                //var responses = entryPoint.GetResponsesFromLace(request);
+                //var test = package.MapLaceResponses(responses);
+                //var ivid = ((IProvideDataFromIvid) responses.First());
+                //var test1 = package.MapLaceResponses(new List<IPointToLaceProvider>() { ivid });
+                //if (!responses.Any())
+                //    throw new Exception("No response for package");
 
-                billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
-                if (!billingTransaction.BillingCreated)
-                    throw new Exception("Package could not be processed");
+                
 
-                return Response.AsJson(responses);
+                //billingTransaction.CreateBillingTransactionForPackage(package, userId, requestId);
+                //if (!billingTransaction.BillingCreated)
+                //    throw new Exception("Package could not be processed");
+
+                return responses;
             };
 
             //TODO: Refactor!!!! This looks crap too

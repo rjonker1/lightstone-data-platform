@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.ExceptionHandling;
+using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
+using Nancy.Json;
 using Nancy.ModelBinding;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
@@ -21,10 +24,17 @@ namespace PackageBuilder.Api.Modules
 {
     public class PackageModule : NancyModule
     {
+        private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,
             IRepository<Domain.Entities.Packages.Read.Package> readRepo,
-            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo)
+            INEventStoreRepository<Package> writeRepo, IRepository<State> stateRepo, IEntryPoint entryPoint)
         {
+            if (_defaultJsonMaxLength == 0)
+                _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
+
+            //Hackeroonie - Required, due to complex model structures (Nancy default restriction length [102400])
+            JsonSettings.MaxJsonLength = Int32.MaxValue;
+
             Get["/Packages"] = parameters =>
                 Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
@@ -44,17 +54,25 @@ namespace PackageBuilder.Api.Modules
                             {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
-            Get["/Packages/DataProvider/{id}"] = parameters =>
+            Get["/Packages/Execute/{id}/{userId}/{searchTerm}/{requestId}"] = parameters =>
             {
-                PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+                //Guid id = (Guid) parameters.id;
+                var package = writeRepo.GetById(parameters.id);// Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 if (package == null)
-                    throw new Exception("Package could not be found");
+                    throw new LightstoneAutoException("Package could not be found");
 
-                var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
-                dto.SetDataProviders(package);
+                //var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.LicensePlateSearchAction);
+                //dto.SetDataProviders(package);
 
-                return Response.AsJson(dto);
+                //var request = package.FormLaceRequest(parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
+
+                //var responses = entryPoint.GetResponsesFromLace(request);
+
+                var responses = package.Execute(entryPoint, parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
+                //return Response.AsJson(model);
+
+                return responses;
             };
 
             //TODO: This route must be removed. Data Provider pacakges should all come through /Packages/DataProvider/{id
@@ -63,7 +81,7 @@ namespace PackageBuilder.Api.Modules
                 PackageDto package = Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 if (package == null)
-                    throw new Exception("Package could not be found");
+                    throw new LightstoneAutoException("Package could not be found");
 
                 var dto = new DataProviderRequestDto(package.Id, package.Name, ActionMother.PropertyVerificationAction);
                 dto.SetDataProviders(package);

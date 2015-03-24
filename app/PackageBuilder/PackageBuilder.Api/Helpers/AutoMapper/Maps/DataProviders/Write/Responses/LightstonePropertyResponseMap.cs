@@ -12,15 +12,13 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Respons
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromLightstoneProperty, IEnumerable<IDataField>>()
-                .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
-            Mapper.CreateMap<IEnumerable<IRespondWithProperty>, IDataField>().ConvertUsing(s => new DataField("PropertyInformation", s.GetType(), ToDataFields(s)));
-            Mapper.CreateMap<IRespondWithProperty, IEnumerable<IDataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
-        }
-
-        private static IEnumerable<IDataField> ToDataFields<T>(IEnumerable<T> s)
-        {
-            return s.SelectMany(x => Mapper.Map<object, IEnumerable<IDataField>>(x)).ToList();
+            Mapper.CreateMap<IProvideDataFromLightstoneProperty, IEnumerable<DataField>>()
+                .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            Mapper.CreateMap<IEnumerable<IRespondWithProperty>, DataField>()
+                .ForMember(s => s.Name, opt => opt.MapFrom(x => "PropertyInformation"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x != null ? x.SelectMany(Mapper.Map<object, IEnumerable<DataField>>).ToList() : Enumerable.Empty<IDataField>()));
+            Mapper.CreateMap<IRespondWithProperty, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
         }
     }
 }

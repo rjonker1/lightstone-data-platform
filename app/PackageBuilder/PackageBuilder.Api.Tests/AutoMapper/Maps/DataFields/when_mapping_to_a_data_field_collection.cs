@@ -5,6 +5,7 @@ using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -24,7 +25,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
 
             container.Install(new ServiceLocatorInstaller(), new BusInstaller(), new NEventStoreInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
-            _dataFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(new[] { DataFieldDtoMother.CarFullname, DataFieldDtoMother.CategoryCode, DataFieldDtoMother.SpecificInformation });
+            _dataFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(new[] { DataFieldDtoMother.CarFullname, DataFieldDtoMother.CategoryCode, DataFieldDtoMother.SpecificInformation } );
         }
 
         [Observation]

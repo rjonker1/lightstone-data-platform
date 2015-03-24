@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.States.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps

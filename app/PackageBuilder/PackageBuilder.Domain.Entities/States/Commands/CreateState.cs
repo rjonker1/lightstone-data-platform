@@ -1,7 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Commands;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.Enums.States;
 
 namespace PackageBuilder.Domain.Entities.States.Commands
 {

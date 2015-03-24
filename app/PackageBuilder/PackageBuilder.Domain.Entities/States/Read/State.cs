@@ -3,7 +3,7 @@ using DataPlatform.Shared.Helpers.Extensions;
 using PackageBuilder.Core.Entities;
 using PackageBuilder.Core.NHibernate.Attributes;
 using PackageBuilder.Domain.Entities.Contracts.States.Read;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.Enums.States;
 
 namespace PackageBuilder.Domain.Entities.States.Read
 {

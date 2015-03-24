@@ -1,6 +1,6 @@
 ﻿using System;
 using PackageBuilder.Core.Commands;
-using IDomainCommand = PackageBuilder.Domain.Core.Contracts.Commands.IDomainCommand;
+using PackageBuilder.Domain.Core.Contracts.Commands;
 
 namespace PackageBuilder.Domain.Entities.CommandStore.Commands
 {

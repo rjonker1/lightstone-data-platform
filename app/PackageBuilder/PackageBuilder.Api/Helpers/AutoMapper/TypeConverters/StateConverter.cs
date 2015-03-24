@@ -1,23 +1,21 @@
 ﻿using System;
 using AutoMapper;
+using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.States.Read;
-using PackageBuilder.Infrastructure.Repositories;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class IdToStateConverter : TypeConverter<Guid, State>
+    public class StateConverter : TypeConverter<Guid, State> 
     {
-        private readonly IStateRepository _repository;
+        private readonly IRepository<State> _repository;
 
-        public IdToStateConverter(IStateRepository repository)
+        public StateConverter(IRepository<State> repository)
         {
             _repository = repository;
         }
 
         protected override State ConvertCore(Guid source)
         {
-            //var stateName = (StateName)Enum.Parse(typeof(StateName), source, true);
-
             return _repository.Get(source);
         }
     }

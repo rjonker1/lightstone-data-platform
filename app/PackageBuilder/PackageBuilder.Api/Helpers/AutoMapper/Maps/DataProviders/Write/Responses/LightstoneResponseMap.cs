@@ -2,7 +2,6 @@
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Responses
@@ -11,10 +10,12 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Respons
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromLightstoneAuto, IEnumerable<IDataField>>()
-                .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
-            Mapper.CreateMap<IRespondWithValuation, IDataField>()
-                .ConvertUsing(s => new DataField("VehicleValuation", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IProvideDataFromLightstoneAuto, IEnumerable<DataField>>()
+                .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
+            Mapper.CreateMap<IRespondWithValuation, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "VehicleValuation"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
         }
     }
 }

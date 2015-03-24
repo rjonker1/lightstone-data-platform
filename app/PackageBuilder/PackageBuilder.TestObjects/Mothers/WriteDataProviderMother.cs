@@ -16,6 +16,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new WriteDataProviderBuilder()
                     .With(DataProviderName.Ivid)
                     .With("Ivid")
+                    .With("Ivid", "Owner")
                     .With(DateTime.UtcNow)
                     .With((DateTime?) DateTime.UtcNow.AddDays(1))
                     .With(true)

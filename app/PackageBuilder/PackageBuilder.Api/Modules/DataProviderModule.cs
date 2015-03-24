@@ -9,8 +9,8 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Dtos.Write;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Commands;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
@@ -54,7 +54,7 @@ namespace PackageBuilder.Api.Modules
             Put["/Dataproviders/{id}"] = parameters =>
             {
                 var dto = this.Bind<Domain.Dtos.Write.DataProviderDto>("Industries");
-                var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<IDataField>>(dto.DataFields);
+                var dFields = Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataField>>(dto.DataFields);
                 var command = new UpdateDataProvider(parameters.id,
                     (DataProviderName) Enum.Parse(typeof (DataProviderName), dto.Name, true), dto.Description,
                     dto.CostOfSale, typeof (Domain.Dtos.Write.DataProviderDto), dto.FieldLevelCostPriceOverride,

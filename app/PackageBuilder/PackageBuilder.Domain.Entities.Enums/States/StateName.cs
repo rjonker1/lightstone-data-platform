@@ -1,4 +1,4 @@
-﻿namespace PackageBuilder.Domain.Entities.Enums.DataProviders
+﻿namespace PackageBuilder.Domain.Entities.Enums.States
 {
     public enum StateName
     {

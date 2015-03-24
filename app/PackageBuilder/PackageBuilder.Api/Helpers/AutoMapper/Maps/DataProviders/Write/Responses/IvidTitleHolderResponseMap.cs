@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Responses
 {
@@ -9,8 +9,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Respons
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromIvidTitleHolder, IEnumerable<IDataField>>()
-                .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
+            Mapper.CreateMap<IProvideDataFromIvidTitleHolder, IEnumerable<DataField>>()
+                .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
         }
     }
 }

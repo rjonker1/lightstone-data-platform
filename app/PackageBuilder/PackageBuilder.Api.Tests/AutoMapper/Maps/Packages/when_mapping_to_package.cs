@@ -4,7 +4,7 @@ using AutoMapper;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Packages.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
@@ -21,9 +21,12 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
 
             Container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
-            SaveAndFlush(StateMother.Published);
+            var state = StateMother.Published;
+            SaveAndFlush(state);
 
-            _package = Mapper.Map<PackageDto, Package>(PackageDtoMother.VVi);
+            var packageDto = PackageDtoMother.VVi;
+            packageDto.State = state;
+            _package = Mapper.Map<PackageDto, Package>(packageDto);
         }
 
         [Observation]

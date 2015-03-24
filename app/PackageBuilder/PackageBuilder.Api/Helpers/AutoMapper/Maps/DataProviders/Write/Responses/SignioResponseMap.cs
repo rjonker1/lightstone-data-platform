@@ -2,7 +2,6 @@
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.DriversLicense;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Responses
@@ -11,42 +10,58 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Respons
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, IEnumerable<IDataField>>()
-              .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
+            Mapper.CreateMap<IProvideDataFromSignioDriversLicenseDecryption, IEnumerable<DataField>>()
+              .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
 
-            Mapper.CreateMap<IRespondWithDriversLicenseCard, IDataField>()
-                .ConvertUsing(s => new DataField("DrivingLicense", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithDriversLicenseCard, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "DrivingLicenseCard"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithIdentityDocument, IDataField>()
-                .ConvertUsing(s => new DataField("IdentityDocument", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithIdentityDocument, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "IdentityDocument"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithCard, IDataField>()
-                .ConvertUsing(s => new DataField("Card", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithCard, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "Card"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithDrivingLicense, IDataField>()
-                .ConvertUsing(s => new DataField("DrivingLicense", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithDrivingLicense, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "DrivingLicense"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithPerson, IDataField>()
-                .ConvertUsing(s => new DataField("Person", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithPerson, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "Person"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithProfessionalDrivingPermit, IDataField>()
-                .ConvertUsing(s => new DataField("ProfessionalDrivingPermit", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithProfessionalDrivingPermit, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "ProfessionalDrivingPermit"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithVehicleClass, IDataField>()
-                .ConvertUsing(s => new DataField("VehicleClass1", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithVehicleClass, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "VehicleClass1"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithVehicleClass, IDataField>()
-               .ConvertUsing(s => new DataField("VehicleClass2", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithVehicleClass, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "VehicleClass2"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithVehicleClass, IDataField>()
-               .ConvertUsing(s => new DataField("VehicleClass3", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithVehicleClass, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "VehicleClass3"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
 
-            Mapper.CreateMap<IRespondWithVehicleClass, IDataField>()
-               .ConvertUsing(s => new DataField("VehicleClass4", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
-
-
-            Mapper.CreateMap<IRespondWithDrivingLicense, IDataField>()
-                .ConvertUsing(s => new DataField("DrivingLicense", s.GetType(), Mapper.Map<object, IEnumerable<IDataField>>(s)));
+            Mapper.CreateMap<IRespondWithVehicleClass, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "VehicleClass4"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<object, IEnumerable<DataField>>(x)));
         }
     }
 }

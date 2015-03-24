@@ -1,5 +1,4 @@
 ﻿using System;
-using PackageBuilder.Domain.Dtos;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.TestObjects.Builders;
 
@@ -14,7 +13,7 @@ namespace PackageBuilder.TestObjects.Mothers
                 return new PackageDtoBuilder()
                     .With(Guid.NewGuid())
                     .With("VVi", "Description", "Notes")
-                    .With("Published", "Owner")
+                    .With(StateMother.Published, "Owner")
                     .With(1)
                     .With(0.1m)
                     .With(10d, 20d)

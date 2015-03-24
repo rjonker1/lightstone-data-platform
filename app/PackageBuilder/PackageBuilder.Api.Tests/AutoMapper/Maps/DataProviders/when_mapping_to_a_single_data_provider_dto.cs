@@ -35,10 +35,10 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
             _dto.SourceConfigurationIsApiConfiguration.ShouldBeTrue();
             _dto.SourceConfigurationUrl.ShouldEqual("IvidUrlTest");
             _dto.SourceConfigurationUsername.ShouldEqual("IvidUsernameTest");
-            _dto.CostOfSale.ShouldEqual(0d);
+            _dto.CostOfSale.ShouldEqual(10d);
             _dto.CreatedDate.Date.ShouldEqual(DateTime.UtcNow.Date);
             _dto.EditedDate.Value.Date.ShouldEqual(DateTime.UtcNow.AddDays(1).Date);
-            _dto.FieldLevelCostPriceOverride.ShouldBeFalse();
+            _dto.FieldLevelCostPriceOverride.ShouldBeTrue();
             _dto.DataFields.Count().ShouldEqual(6);
             _dto.DataFields.ElementAt(0).Name.ShouldEqual("CarFullname");
             _dto.DataFields.ElementAt(1).Name.ShouldEqual("CategoryCode");

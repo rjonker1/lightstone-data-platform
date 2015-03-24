@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
 {
@@ -8,8 +8,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<object, IEnumerable<IDataField>>()
-                .ConvertUsing<ITypeConverter<object, IEnumerable<IDataField>>>();
+            Mapper.CreateMap<object, IEnumerable<DataField>>()
+                .ConvertUsing<ITypeConverter<object, IEnumerable<DataField>>>();
         }
     }
 }

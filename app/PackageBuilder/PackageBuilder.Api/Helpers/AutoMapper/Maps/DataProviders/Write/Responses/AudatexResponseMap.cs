@@ -11,16 +11,14 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Respons
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IProvideDataFromAudatex, IEnumerable<IDataField>>()
-                .ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
+            Mapper.CreateMap<IProvideDataFromAudatex, IEnumerable<DataField>>()
+                .ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
 
-            Mapper.CreateMap<IEnumerable<IProvideAccidentClaim>, IDataField>().ConvertUsing(s => new DataField("AccidentClaims", s.GetType(), ToDataFields(s)));
-            Mapper.CreateMap<IProvideAccidentClaim, IEnumerable<IDataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<IDataField>>);
-        }
-
-        private static IEnumerable<IDataField> ToDataFields<T>(IEnumerable<T> s)
-        {
-            return s.SelectMany(x => Mapper.Map<object, IEnumerable<IDataField>>(x)).ToList();
+            Mapper.CreateMap<IEnumerable<IProvideAccidentClaim>, DataField>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => "AccidentClaims"))
+                .ForMember(d => d.Type, opt => opt.MapFrom(x => x.GetType()))
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x != null ? x.SelectMany(Mapper.Map<object, IEnumerable<DataField>>).ToList() : Enumerable.Empty<IDataField>()));
+            Mapper.CreateMap<IProvideAccidentClaim, IEnumerable<DataField>>().ConvertUsing(Mapper.Map<object, IEnumerable<DataField>>);
         }
     }
 }

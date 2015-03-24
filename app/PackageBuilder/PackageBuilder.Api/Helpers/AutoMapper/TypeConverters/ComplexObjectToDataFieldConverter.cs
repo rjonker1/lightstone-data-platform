@@ -6,13 +6,12 @@ using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders.Metric;
 using PackageBuilder.Core.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class ComplexObjectToDataFieldConverter : TypeConverter<object, IEnumerable<IDataField>>
+    public class ComplexObjectToDataFieldConverter : TypeConverter<object, IEnumerable<DataField>>
     {
         private readonly IRepository<Industry> _industryRepository;
 
@@ -21,7 +20,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             _industryRepository = industryRepository;
         }
 
-        protected override IEnumerable<IDataField> ConvertCore(object source)
+        protected override IEnumerable<DataField> ConvertCore(object source)
         {
             try
             {
@@ -34,7 +33,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
             }
         }
 
-        private IEnumerable<IDataField> DataFields(object source)
+        private IEnumerable<DataField> DataFields(object source)
         {
             this.Info(() => "Attempting to map {0} to IEnumerable<IDataField>".FormatWith(source));
 
@@ -44,7 +43,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                         !TypeExtensions.IsSimple(property.PropertyType) && 
                         !property.PropertyType.IsInstanceOfType(Type.GetType("System.Type")) &&
                         property.PropertyType != typeof (IPair<string, double>[])).ToList();
-            var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof (IDataField)) as IDataField).ToList();
+            var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof (DataField)) as DataField).ToList();
             list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType, _industryRepository.ToList())).ToList());
 
             this.Info(() => "Successfully mapped {0} to IEnumerable<IDataField>".FormatWith(source));

@@ -7,16 +7,16 @@ using PackageBuilder.Domain.Entities.DataProviders.Write;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class DataProviderOverrideToDataProviderConverter : TypeConverter<IDataProviderOverride, IDataProvider>
+    public class DataProviderConverter : TypeConverter<IDataProviderOverride, DataProvider>
     {
         private readonly INEventStoreRepository<DataProvider> _repository;
 
-        public DataProviderOverrideToDataProviderConverter(INEventStoreRepository<DataProvider> repository)
+        public DataProviderConverter(INEventStoreRepository<DataProvider> repository)
         {
             _repository = repository;
         }
 
-        protected override IDataProvider ConvertCore(IDataProviderOverride source)
+        protected override DataProvider ConvertCore(IDataProviderOverride source)
         {
             var dataProvider = _repository.GetById(source.Id);
 

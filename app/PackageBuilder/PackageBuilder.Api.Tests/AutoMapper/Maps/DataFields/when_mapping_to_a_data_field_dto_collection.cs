@@ -5,6 +5,7 @@ using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -22,7 +23,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
 
             OverrideHelper.OverrideNhibernateCfg(container);
 
-            _dtos = Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataProviderFieldItemDto>>(new []{ DataFieldMother.CategoryCode, DataFieldMother.CategoryDescription, DataFieldMother.SpecificInformation });
+            _dtos = Mapper.Map<IEnumerable<DataField>, IEnumerable<DataProviderFieldItemDto>>(new []{ DataFieldMother.CategoryCode, DataFieldMother.CategoryDescription, DataFieldMother.SpecificInformation }.Cast<DataField>());
         }
 
         [Observation]

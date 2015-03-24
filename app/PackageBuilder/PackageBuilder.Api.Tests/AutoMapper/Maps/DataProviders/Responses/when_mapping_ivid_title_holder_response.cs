@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
@@ -17,13 +18,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses
         {
             base.Observe();
 
-            _dataFields = Mapper.Map<IProvideDataFromIvidTitleHolder, IEnumerable<IDataField>>(IvidTitleHolderResponseMother.Response);
+            _dataFields = Mapper.Map<IProvideDataFromIvidTitleHolder, IEnumerable<DataField>>(IvidTitleHolderResponseMother.Response);
         }
 
         [Observation]
         public void should_map_all_ivid_title_holder_data_fields()
         {
-            _dataFields.Count().ShouldEqual(14);
+            _dataFields.Count().ShouldEqual(15);
 
             _dataFields.FirstOrDefault(x => x.Name == "BankName").Name.ShouldEqual("BankName");
             _dataFields.FirstOrDefault(x => x.Name == "BankName").Type.ShouldEqual(typeof(string));

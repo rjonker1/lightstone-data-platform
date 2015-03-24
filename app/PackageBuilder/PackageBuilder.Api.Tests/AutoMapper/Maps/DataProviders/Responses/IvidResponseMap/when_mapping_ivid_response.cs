@@ -4,6 +4,7 @@ using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
@@ -17,13 +18,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.IvidR
         {
             base.Observe();
 
-            _dataFields = Mapper.Map<IProvideDataFromIvid, IEnumerable<IDataField>>(IvidResponseMother.Response);
+            _dataFields = Mapper.Map<IProvideDataFromIvid, IEnumerable<DataField>>(IvidResponseMother.Response);
         }
 
         [Observation]
         public void should_map_all_ivid_data_fields()
         {
-            _dataFields.Count().ShouldEqual(31);
+            _dataFields.Count().ShouldEqual(32);
 
             _dataFields.FirstOrDefault(x => x.Name == "SpecificInformation").Name.ShouldEqual("SpecificInformation");
             _dataFields.FirstOrDefault(x => x.Name == "SpecificInformation").Type.ShouldEqual(typeof(VehicleSpecificInformation));

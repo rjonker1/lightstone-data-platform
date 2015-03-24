@@ -2,6 +2,7 @@
 using Moq;
 using PackageBuilder.Domain.CommandHandlers.States;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.Infrastructure.Repositories;

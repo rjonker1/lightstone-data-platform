@@ -5,7 +5,7 @@ using Nancy;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
 

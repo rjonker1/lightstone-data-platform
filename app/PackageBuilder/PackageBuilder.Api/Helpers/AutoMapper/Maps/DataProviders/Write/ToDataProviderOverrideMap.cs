@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -12,7 +13,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write
         public void CreateMaps()
         {
             Mapper.CreateMap<IEnumerable<DataProviderDto>, IEnumerable<DataProviderOverride>>()
-                .ConvertUsing(s => s.Select(Mapper.Map<DataProviderDto, DataProviderOverride>).ToList());
+                .ConvertUsing(s => s != null ? s.Select(Mapper.Map<DataProviderDto, DataProviderOverride>).ToList() : Enumerable.Empty<DataProviderOverride>());
             Mapper.CreateMap<DataProviderDto, DataProviderOverride>()
                 .ForMember(d => d.DataFieldOverrides, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<DataProviderFieldItemDto>, IEnumerable<DataFieldOverride>>(x.DataFields)));
         }

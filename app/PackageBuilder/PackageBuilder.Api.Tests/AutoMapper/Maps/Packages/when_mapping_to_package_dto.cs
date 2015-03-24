@@ -19,7 +19,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.Packages
 
             Container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
-            _packageDto = Mapper.Map<IPackage, PackageDto>(WritePackageMother.FullVerificationPackage);
+            var state = StateMother.Published;
+            SaveAndFlush(state);
+
+            var package = WritePackageMother.FullVerificationPackage;
+            package.State = state;
+
+            _packageDto = Mapper.Map<IPackage, PackageDto>(package);
         }
 
         [Observation]

@@ -5,6 +5,7 @@ using Castle.Windsor;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper;
 using Xunit.Extensions;
 
@@ -25,15 +26,15 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps
             var ivid = new IvidResponse();
             ivid.BuildSpecificInformation();
 
-            _dataFields = Mapper.Map(ivid, ivid.GetType(), typeof(IEnumerable<IDataField>)) as IEnumerable<IDataField>;
+            _dataFields = Mapper.Map(ivid, ivid.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
         }
 
         [Observation]
         public void should_map_all_data_fields()
         {
-            _dataFields.Count().ShouldEqual(31);
+            _dataFields.Count().ShouldEqual(32);
             _dataFields.First(x => x.Name == "CarFullname").Type.ToString().ShouldEqual(typeof(string).ToString());
-            _dataFields.First(x => x.Name == "SpecificInformation").DataFields.Count().ShouldEqual(7);
+            _dataFields.First(x => x.Name == "SpecificInformation").DataFields.Count().ShouldEqual(8);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
@@ -17,13 +18,13 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses
         {
             base.Observe();
 
-            _dataFields = Mapper.Map<IProvideDataFromRgtVin, IEnumerable<IDataField>>(RgtVinResponseMother.Response);
+            _dataFields = Mapper.Map<IProvideDataFromRgtVin, IEnumerable<DataField>>(RgtVinResponseMother.Response);
         }
 
         [Observation]
         public void should_map_all_rgt_vin_data_fields()
         {
-            _dataFields.Count().ShouldEqual(11);
+            _dataFields.Count().ShouldEqual(12);
 
             _dataFields.FirstOrDefault(x => x.Name == "Vin").Name.ShouldEqual("Vin");
             _dataFields.FirstOrDefault(x => x.Name == "Vin").Type.ShouldEqual(typeof(string));

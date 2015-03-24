@@ -3,6 +3,7 @@ using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers.DataProviderResponses;
 using Xunit.Extensions;
@@ -17,7 +18,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.IvidR
         {
             base.Observe();
 
-            _dataField = Mapper.Map<IProvideVehicleSpecificInformation, IDataField>(IvidResponseMother.Response.SpecificInformation);
+            _dataField = Mapper.Map<IProvideVehicleSpecificInformation, DataField>(IvidResponseMother.Response.SpecificInformation);
         }
 
         [Observation]
@@ -28,7 +29,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders.Responses.IvidR
 
             var dataFields = _dataField.DataFields;
 
-            dataFields.Count().ShouldEqual(7);
+            dataFields.Count().ShouldEqual(8);
 
             dataFields.FirstOrDefault(x => x.Name == "Odometer").Name.ShouldEqual("Odometer");
             dataFields.FirstOrDefault(x => x.Name == "Odometer").Type.ShouldEqual(typeof(string));

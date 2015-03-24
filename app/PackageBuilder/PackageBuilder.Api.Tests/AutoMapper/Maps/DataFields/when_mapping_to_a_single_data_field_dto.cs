@@ -2,7 +2,7 @@
 using AutoMapper;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
-using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestHelper.BaseTests;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -16,11 +16,11 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
         {
             base.Observe();
 
-            Container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
+            Container.Install(new RepositoryInstaller(), new AutoMapperInstaller());
 
             SaveAndFlush(IndustryMother.All);
 
-            _dto = Mapper.Map<IDataField, DataProviderFieldItemDto>(DataFieldMother.SpecificInformation);
+            _dto = Mapper.Map<DataField, DataProviderFieldItemDto>(DataFieldMother.SpecificInformation as DataField);
         }
 
         [Observation]

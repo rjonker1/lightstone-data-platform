@@ -5,6 +5,7 @@ using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
+using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.TestHelper;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
@@ -23,7 +24,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataProviders
 
             OverrideHelper.OverrideNhibernateCfg(container);
 
-            _dataProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<IDataProvider>>(new[] { DataProviderDtoMother.Ivid, DataProviderDtoMother.IvidTitleHolder });
+            _dataProviders = Mapper.Map<IEnumerable<DataProviderDto>, IEnumerable<DataProvider>>(new[] { DataProviderDtoMother.Ivid, DataProviderDtoMother.IvidTitleHolder });
         }
 
         [Observation]

@@ -12,7 +12,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write
         public void CreateMaps()
         {
             Mapper.CreateMap<IEnumerable<IDataProvider>, IEnumerable<DataProviderDto>>()
-                .ConvertUsing(s => s.Select(Mapper.Map<IDataProvider, DataProviderDto>));
+                .ConvertUsing(s => s != null ? s.Select(Mapper.Map<IDataProvider, DataProviderDto>) : Enumerable.Empty<DataProviderDto>());
             Mapper.CreateMap<IDataProvider, DataProviderDto>()
                 //.ForMember(d => d.CostOfSale, opt => opt.ResolveUsing(new DataProviderCostPriceResolver()))
                 //.ForMember(d => d.FieldLevelCostPriceOverride, opt => opt.ResolveUsing(new DataProviderCostPriceOverrideResolver()))

@@ -15,7 +15,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.Packages.Write
         string Description { get; }
         double CostOfSale { get; }
         double RecommendedSalePrice { get; }
-        IAction Action { get; }
+        IAction Action { get; set; }
         string Notes { get; }
         IEnumerable<IIndustry> Industries { get; }
         IState State { get; }

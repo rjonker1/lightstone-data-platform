@@ -4,6 +4,7 @@ using Castle.Windsor;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
+using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.TestObjects.Mothers;
 using Xunit.Extensions;
 
@@ -18,7 +19,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
 
             container.Install(new ServiceLocatorInstaller(), new RepositoryInstaller(), new AutoMapperInstaller());
 
-            _dataField = Mapper.Map<DataProviderFieldItemDto, IDataField>(DataFieldDtoMother.SpecificInformation);
+            _dataField = Mapper.Map<DataProviderFieldItemDto, DataField>(DataFieldDtoMother.SpecificInformation);
         }
 
         [Observation]
@@ -27,7 +28,7 @@ namespace PackageBuilder.Api.Tests.AutoMapper.Maps.DataFields
             _dataField.Name.ShouldEqual("SpecificInformation");
             _dataField.Label.ShouldEqual("Label");
             _dataField.Definition.ShouldEqual("Definition");
-            _dataField.CostOfSale.ShouldEqual(10d);
+            _dataField.CostOfSale.ShouldEqual(0);
             _dataField.IsSelected.Value.ShouldBeTrue();
             _dataField.Industries.Count().ShouldEqual(2);
             _dataField.DataFields.Count().ShouldEqual(6);
