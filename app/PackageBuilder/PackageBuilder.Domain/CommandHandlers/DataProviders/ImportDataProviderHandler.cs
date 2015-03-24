@@ -54,9 +54,9 @@ namespace PackageBuilder.Domain.CommandHandlers.DataProviders
                 DataProviderName.LightstoneProperty, DataProviderName.LightstoneProperty.ToString(), 0d,
                 typeof (IProvideDataFromLightstoneProperty), "Owner", DateTime.UtcNow));
 
-            _publisher.Publish(new CreateDataProvider(DefaultLightstoneBusinessResponse(), Guid.NewGuid(),
-                DataProviderName.LightstoneBusiness, DataProviderName.LightstoneBusiness.ToString(), 0d,
-                typeof(IProvideDataFromLightstoneBusiness), "Owner", DateTime.UtcNow));
+            //_publisher.Publish(new CreateDataProvider(DefaultLightstoneBusinessResponse(), Guid.NewGuid(),
+            //    DataProviderName.LightstoneBusiness, DataProviderName.LightstoneBusiness.ToString(), 0d,
+            //    typeof(IProvideDataFromLightstoneBusiness), "Owner", DateTime.UtcNow));
 
             this.Info(() => "Successfully imported data providers");
         }
