@@ -58,26 +58,26 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
                 .Include<ValueEntityDto, Province>()
                 .Include<ValueEntityDto, UserType>()
                 .Include<ValueEntityDto, Role>();
-            Mapper.CreateMap<ValueEntityDto, PaymentType>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, PlatformStatus>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, CreateSource>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, CommercialState>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, ContractType>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, EscalationType>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, ContractDuration>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, Province>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, UserType>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
-            Mapper.CreateMap<ValueEntityDto, Role>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, PaymentType>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, PlatformStatus>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, CreateSource>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, CommercialState>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, ContractType>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, EscalationType>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, ContractDuration>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, Province>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, UserType>();
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
+            Mapper.CreateMap<ValueEntityDto, Role>();
+            //.ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id));
         }
     }
 }

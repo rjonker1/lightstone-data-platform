@@ -244,6 +244,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Read\ToDataProviderDtoMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\LaceResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\AudatexResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\LightstonePropertyResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\PCubedFicaResponseMap.cs" />

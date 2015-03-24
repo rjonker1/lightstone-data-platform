@@ -162,9 +162,9 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         {
             foreach (var dataProvider in dataProviders)
             {
-                var dataFields = Mapper.Map(dataProvider, dataProvider.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>;
-                
-                yield return new DataProvider(new Guid(), DataProviderName.Ivid, "", 0, null, "", DateTime.UtcNow, dataFields);
+                var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
+                var response = Mapper.Map(DataProviders.First(x => x.Name == laceResponse.Name), laceResponse);
+                yield return response;
             }
         }
 
