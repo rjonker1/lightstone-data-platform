@@ -105,7 +105,7 @@
          return this.each(function () {
             remove(this, opts);
          });
-      };
+      };  
 
       $.blockUI.version = 2.70; // 2nd generation blocking at no extra cost!
 

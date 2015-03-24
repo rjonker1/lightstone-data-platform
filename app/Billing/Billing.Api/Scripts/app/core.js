@@ -261,14 +261,14 @@
 
         $(function () {
 
-            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+            $('#reportrange span').html(moment({ day: 26 }).subtract(1, 'month').format('MMMM D, YYYY') + ' - ' + moment({ day: 25 }).format('MMMM D, YYYY'));
 
             $('#reportrange').daterangepicker({
                 format: 'MM/DD/YYYY',
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment(),
+                startDate: moment({ day: 26 }).subtract(1, 'month'),
+                endDate: moment({ day: 25 }),
                 minDate: '01/01/2012',
-                maxDate: '12/31/2015',
+                maxDate: '12/31/2020',
                 dateLimit: { days: 60 },
                 showDropdowns: true,
                 showWeekNumbers: true,
@@ -278,10 +278,10 @@
                 ranges: {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    //'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    'This Month': [moment({day: 26}).subtract(1, 'month'), moment({day: 25})],
+                    'Last Month': [moment({ day: 26 }).subtract(2, 'month'), moment({ day: 25 }).subtract(1, 'month')]
                 },
                 opens: 'right',
                 buttonClasses: ['btn', 'btn-sm'],
