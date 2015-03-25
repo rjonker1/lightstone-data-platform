@@ -44,10 +44,11 @@ namespace Billing.Api.Modules
                 var monthBillingEnd = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 25);
 
 
-                var totalCustomers = customers.Select(x => x.Transactions
-                    .Where(t => t.Created != null && (t.Created.Value >= lastMonthBillingEnd && 
-                                                      t.Created.Value <= monthBillingEnd))).Count();
+                //var totalCustomers = customers.Select(x => x.Transactions
+                //    .Where(t => t.Created != null && (t.Created.Value >= lastMonthBillingEnd && 
+                //                                      t.Created.Value <= monthBillingEnd))).Count();
 
+                var totalCustomers = customers.Count();
                 var totalUsers = users.Count();
                 var totalProducts = products.Count();
 
