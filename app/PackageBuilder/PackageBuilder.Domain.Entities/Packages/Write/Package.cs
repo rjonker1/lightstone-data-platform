@@ -149,7 +149,10 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         {
             var request = new LaceRequest();
 
-            request.LicensePlateNumberRequest(this,
+            var package = Mapper.Map<IPackage, Package>(this);
+            package.DataProviders = package.DataProviders.Where(x => x.DataFields.Any());
+
+            request.LicensePlateNumberRequest(package,
                 new User(userId, userName, firstName), new Context(Name, null),
                 new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty,
                     string.Empty),
@@ -164,6 +167,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
                 var response = Mapper.Map(DataProviders.First(x => x.Name == laceResponse.Name), laceResponse);
+                if (response.DataFields.Any())
                 yield return response;
             }
         }

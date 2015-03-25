@@ -26,7 +26,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Converters
                 if (!Guid.TryParse(values[0], out id)) continue;
                 if (string.IsNullOrEmpty(values[1])) continue;
 
-                var package = _repository.First(x => x.PackageId == id);
+                var package = _repository.FirstOrDefault(x => x.PackageId == id);
 
                 yield return package ?? new Package(values[1], id);
             }
