@@ -135,14 +135,17 @@
         var endDateFilter = moment().format('YYYY-MM-DD');;
 
         function fadeReplace() {
-            $('#mi_dashboard').addClass('animated fadeOutRight');
+
+            //$('#mi_dashboard').addClass('animated fadeOutRight hidden');
+            $('#mi_dashboard').addClass('animated fadeOutRight hidden');
 
             $('#mi_dashboard').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', test());
 
             function test() {
 
                 $('#mi_dashboard').attr('hidden');
-                $('#mi_dashboard_filtered').attr("class", "animated fadeInLeft col-md-4");
+                $('#mi_dashboard_filtered').attr("class", "animated fadeInRight col-md-4");
+                $('#detail-table-header').attr("class", "animated fadeInRight box-title");
             }
         }
 
