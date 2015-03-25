@@ -257,7 +257,15 @@
                     + Math.round(series.percent) + "%</div>";
         }
 
+        $(function() {
+            $.get("/MI/Metrics")
+                .done(function (data) {
 
+                $('#customers_transacted').html(data.totalCustomers);
+                $('#users_transacted').html(data.totalCustomers);
+                $('#products_transacted').html(data.totalCustomers);
+            });
+        });
 
         $(function () {
 
