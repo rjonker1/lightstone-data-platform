@@ -226,6 +226,9 @@
                 totalCoS += data.data[0].totalCoS;
                 totalRevenue += data.data[0].totalRevenue;
 
+                $('#filtered_cos').html('Cost of Sale Pre-BIlling: R' + totalCoS);
+                $('#filtered_revenue').html('Revenue Pre-BIlling: R' + totalRevenue);
+
                 /*
                 * DONUT CHART
                 * -----------
