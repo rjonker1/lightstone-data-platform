@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using PackageBuilder.Domain.Entities;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataFields.Write;
@@ -36,11 +37,11 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write
             Mapper.CreateMap<IProvideDataFromPCubedFicaVerfication, DataProviderName>().ConvertUsing(s => DataProviderName.PCubedFica);
 
             Mapper.CreateMap<IPointToLaceProvider, DataProvider>()
-                .ForMember(d => d.Name, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(DataProviderName)))) //Mapper.Map<IPointToLaceProvider, DataProviderName>(x)))
+                .ForMember(d => d.Name, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(DataProviderName))))
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>));
 
             Mapper.CreateMap<IDataProvider, DataProvider>()
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.Where(fld => fld.IsSelected == true)));
+                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.SelectHierarchy(fld => fld.DataFields, fld => fld.IsSelected == true)));
 
             Mapper.CreateMap<IEnumerable<IDataField>, IEnumerable<DataField>>()
                 .ConvertUsing(s => s != null ? s.Select(Mapper.Map<IDataField, DataField>).ToList() : Enumerable.Empty<DataField>());
