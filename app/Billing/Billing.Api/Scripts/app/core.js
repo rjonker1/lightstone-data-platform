@@ -142,7 +142,7 @@
             function test() {
 
                 $('#mi_dashboard').attr('hidden');
-                $('#mi_dashboard_filtered').attr("class", "animated fadeInRight col-md-4");
+                $('#mi_dashboard_filtered').attr("class", "animated fadeInLeft col-md-4");
             }
         }
 
