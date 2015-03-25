@@ -40,7 +40,7 @@
 
             <label class="control-label col-lg-4">Commercial State</label>
             <div class="input-group col-lg-2">
-                <select name="CommercialStateId" data-placeholder="Choose a state..." class="chosen-select">
+                <select name="CommercialStateId" data-placeholder="Select commercial state" class="chosen-select">
                     <option value=""></option>
                     @foreach (SelectListItem item in ViewBag.CommercialStates.Value)
                     {
@@ -58,7 +58,7 @@
 
             <label class="control-label col-lg-4">Create Sources</label>
             <div class="input-group col-lg-2">
-                <select name="CreateSourceIds" data-placeholder="Search for source..." multiple class="chosen-select">
+                <select name="CreateSourceIds" data-placeholder="Type to search & add sources" multiple class="chosen-select">
                     <option value=""></option>
                     @foreach (SelectListItem item in ViewBag.CreateSources.Value)
                     {
@@ -76,7 +76,7 @@
 
             <label class="control-label col-lg-4">Platform Status</label>
             <div class="input-group col-lg-2">
-                <select name="PlatformStatusId" data-placeholder="Choose a province..." class="chosen-select">
+                <select name="PlatformStatusId" data-placeholder="Select platform status" class="chosen-select">
                     <option value=""></option>
                     @foreach (SelectListItem item in ViewBag.PlatformStatuss.Value)
                     {

@@ -19,7 +19,7 @@
                 @Html.HiddenFor(x => x.AssemblyQualifiedName)
                 @Html.LabelFor(x => x.Value, new { @class = "control-label col-lg-4" })
                 <div class="col-lg-3">
-                    @Html.TextBoxFor(x => x.Value, new { @class = "form-control", placeholder = "Name" })
+                    @Html.TextBoxFor(x => x.Value, new { @class = "form-control", placeholder = "" })
                 </div>
                 <div class="col-lg-6">
                     @Html.ValidationMessageFor(x => x.Value)

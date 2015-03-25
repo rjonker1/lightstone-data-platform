@@ -121,7 +121,7 @@
 
                 <label class="control-label col-lg-4">Contract Type</label>
                 <div class="input-group col-lg-2">
-                    <select name="ContractTypeId" data-placeholder="Choose user type..." class="chosen-select">
+                    <select name="ContractTypeId" data-placeholder="Select user type" class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.ContractTypes.Value)
                         {
@@ -139,7 +139,7 @@
 
                 <label class="control-label col-lg-4">Escalation Type</label>
                 <div class="input-group col-lg-2">
-                    <select name="EscalationTypeId" data-placeholder="Choose escalation type..." class="chosen-select">
+                    <select name="EscalationTypeId" data-placeholder="Select escalation type" class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.EscalationTypes.Value)
                         {
@@ -157,7 +157,7 @@
 
                 <label class="control-label col-lg-4">Contrac Duration</label>
                 <div class="input-group col-lg-2">
-                    <select name="ContractDurationId" data-placeholder="Choose contrat duration..." class="chosen-select">
+                    <select name="ContractDurationId" data-placeholder="Select contract duration" class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.ContractDurations.Value)
                         {
@@ -175,7 +175,7 @@
 
                 <label class="control-label col-lg-4">Clients</label>
                 <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Client).AssemblyQualifiedName">
-                    <select id="ClientIds" name="ClientIds" data-placeholder="Search for client..." multiple class="chosen-select">
+                    <select id="ClientIds" name="ClientIds" data-placeholder="Type to search & add clients" multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Clients)
                         {
                             var isSelected = Model.Clients != null && Model.Clients.Select(x => x.Id).Contains(item.Id);
@@ -192,7 +192,7 @@
 
                 <label class="control-label col-lg-4">Customers</label>
                 <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities" data-type="@typeof(Customer).AssemblyQualifiedName">
-                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Search for customer..." multiple class="chosen-select">
+                    <select id="CustomerIds" name="CustomerIds" data-placeholder="Type to search & add customers" multiple class="chosen-select">
                         @foreach (NamedEntityDto item in Model.Customers)
                         {
                             var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
@@ -209,7 +209,7 @@
 
                 <label class="control-label col-lg-4">Packages</label>
                 <div class="input-group col-lg-2 packag-autocomplete">
-                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Search for package..." multiple class="chosen-select">
+                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Type to search & add packages" multiple class="chosen-select">
                         @foreach (var item in Model.Packages)
                         {
                             var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);
