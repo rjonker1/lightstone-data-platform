@@ -2,7 +2,7 @@
 
 namespace UserManagement.Domain.Dtos
 {
-    public class AddressDto
+    public class AddressDto : EntityDto
     {
         public Guid Id { get; set; } 
         public virtual string Type { get; set; }

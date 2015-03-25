@@ -12,7 +12,7 @@
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 <div class="box dark">
-    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Lookup Info", "", "fa fa-edit"))
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Lookup Info", "", "fa fa-edit", Model))
     <form action="@url" method="@method" class="form-horizontal">
         <div class="box-body">
             <div class="form-group">

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UserManagement.Domain.Dtos
 {
-    public class ValueEntityDto
+    public class ValueEntityDto : EntityDto
     {
         public Guid Id { get; set; }
         [Required]

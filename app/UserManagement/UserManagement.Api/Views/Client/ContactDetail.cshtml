@@ -4,7 +4,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 
 <div class="box">
-    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contact Info", "", "glyphicon glyphicon-book"))
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contact Info", "", "glyphicon glyphicon-book", Model))
     <div class="box-body">
         <div class="form-group">
 

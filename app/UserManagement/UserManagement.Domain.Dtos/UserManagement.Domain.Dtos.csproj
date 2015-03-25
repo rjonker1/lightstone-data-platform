@@ -42,6 +42,7 @@
     <Compile Include="ContractPackageResponseDto.cs" />
     <Compile Include="ContractPackageRequestDto.cs" />
     <Compile Include="CustomerDto.cs" />
+    <Compile Include="EntityDto.cs" />
     <Compile Include="NamedEntityDto.cs" />
     <Compile Include="PackageDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

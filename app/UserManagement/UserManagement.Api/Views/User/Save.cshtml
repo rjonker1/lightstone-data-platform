@@ -16,7 +16,7 @@
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 <div class="box">
-    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user"))
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
     <form action="@url" method="@method" class="form-horizontal">
         <div class="box-body">
 

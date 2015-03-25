@@ -2,7 +2,7 @@
 
 namespace UserManagement.Domain.Dtos
 {
-    public class ContactDetailDto
+    public class ContactDetailDto : EntityDto
     {
         public Guid Id { get; set; } 
         public virtual string LegalEntityName { get; set; }

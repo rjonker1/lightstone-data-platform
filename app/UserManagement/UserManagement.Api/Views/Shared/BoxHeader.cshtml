@@ -1,8 +1,23 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Api.ViewModels.HeaderViewModel>
-
 <div class="box-header with-border">
     <i class="@Model.IconClass"></i>
     <h3 class="box-title">@Model.Title</h3>
+    @if (!string.IsNullOrEmpty(Model.EntityDto.CreatedBy))
+    {
+        <small><span><b>Created by:</b></span> @Model.EntityDto.CreatedBy | </small>
+    }
+    @if (!string.IsNullOrEmpty(Model.EntityDto.CreatedBy))
+    {
+        <small><span><b>Created date:</b></span> @Model.EntityDto.Created | </small>
+    }
+    @if (!string.IsNullOrEmpty(Model.EntityDto.CreatedBy))
+    {
+        <small><span><b>Modified by:</b></span> @Model.EntityDto.ModifiedBy | </small>
+    }
+    @if (!string.IsNullOrEmpty(Model.EntityDto.CreatedBy))
+    {
+        <small><span><b>Modified date:</b></span> @Model.EntityDto.Modified</small>
+    }
     <div class="box-tools pull-right">
         <a class="btn btn-box-tool collapse-box" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></a>
     </div><!-- /.box-tools -->

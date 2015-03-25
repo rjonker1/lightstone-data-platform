@@ -4,7 +4,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.ClientDto>
 
 <div class="box">
-    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Client Info", "", "fa fa-edit"))
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Client Info", "", "fa fa-edit", Model))
     <div class="box-body">
         <div class="form-group">
             @Html.LabelFor(x => x.Name, new { @class = "control-label col-lg-4" })

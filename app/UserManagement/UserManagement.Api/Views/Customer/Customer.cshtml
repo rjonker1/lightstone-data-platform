@@ -6,7 +6,7 @@
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
 <div id="customerView" class="box">
-    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Customer Info", "", "fa fa-edit"))
+    @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Customer Info", "", "fa fa-edit", Model))
     <div class="box-body">
         <div class="form-group">
 
