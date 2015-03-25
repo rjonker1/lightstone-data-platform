@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Converters
 {
     public class StringToPackageConverter : TypeConverter<IEnumerable<string>, IEnumerable<Package>>
     {
+        private IRepository<Package> _repository;
+
+        public StringToPackageConverter(IRepository<Package> repository)
+        {
+            _repository = repository;
+        }
+
         protected override IEnumerable<Package> ConvertCore(IEnumerable<string> source)
         {
             if (source == null) yield break;
@@ -18,7 +26,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Converters
                 if (!Guid.TryParse(values[0], out id)) continue;
                 if (string.IsNullOrEmpty(values[1])) continue;
 
-                yield return new Package(values[1], id);
+                var package = _repository.First(x => x.PackageId == id);
+
+                yield return package ?? new Package(values[1], id);
             }
         }
     }
