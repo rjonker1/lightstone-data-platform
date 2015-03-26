@@ -12,8 +12,34 @@
     var method = isCreate ? "POST" : "PUT";
     var url = isCreate ? "/Users" : "/Users/" + Model.Id;
     var count = 0;
+    var userTypeCheck = "";
 }
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
+
+
+@*<script>
+    $(function () {
+        var $test = $("#rolesSelect_chosen").on("click", function() {
+            alert("test");
+        });
+        $test.click();
+        var $admin = $("option:contains('Admin')");
+        var $adminLi = $("li:contains('Admin')");
+        console.log($test);
+        $("#userTypeSelect").on('change', function () {
+            var selected = $("#userTypeSelect option:selected").text();
+            if (selected === "User") {
+                $admin.hide();
+                $adminLi.hide();
+            }
+
+
+
+        });
+    });
+    
+</script>*@
+
 
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
@@ -108,7 +134,7 @@
 
                 <label class="control-label col-lg-4">User Type</label>
                 <div class="input-group col-lg-2">
-                    <select name="UserTypeId" data-placeholder="Select user type" class="chosen-select">
+                    <select id="userTypeSelect" name="UserTypeId" data-placeholder="Select user type" class="chosen-select">
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.UserTypes.Value)
                         {
@@ -126,13 +152,32 @@
 
                 <label class="control-label col-lg-4">Roles</label>
                 <div class="input-group col-lg-2">
-                    <select name="RoleIds" data-placeholder="Type to search & add roles" multiple class="chosen-select">
+                    <select id="rolesSelect" name="RoleIds" data-placeholder="Type to search & add roles" multiple class="chosen-select">
                         @foreach (SelectListItem item in ViewBag.Roles.Value)
                         {
+
                             var isSelected = Model.RoleIds != null && Model.RoleIds.Contains(new Guid(item.Value));
-                            <option selected="@isSelected" value="@item.Value">@item.Text</option>
+
+
+                            if (@userTypeCheck == "Internal" && (item.Text == "Admin" || item.Text == "AccountManager" || item.Text == "ProductManager" || item.Text == "Support"))
+                            {
+                                <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                            }
+
+                            if (@userTypeCheck == "User" && (item.Text == "Owner" || item.Text == "SuperUser" || item.Text == "User"))
+                            {
+                                <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                            }
+
+                            if (@userTypeCheck == "")
+                            {
+                                <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                            }
+
                         }
                     </select>
+
+
                 </div>
                 <div class="col-lg-6">
                     @Html.ValidationMessageFor(x => x.RoleIds)
