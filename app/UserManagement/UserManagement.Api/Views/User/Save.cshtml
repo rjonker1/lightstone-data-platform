@@ -19,23 +19,33 @@
 
 @*<script>
     $(function () {
-        var $test = $("#rolesSelect_chosen").on("click", function() {
-            alert("test");
-        });
-        $test.click();
+        //var $test = $("#rolesSelect_chosen").on("click", function() {
+        //    alert("test");
+        //});
+        //$test.click();
+
+
         var $admin = $("option:contains('Admin')");
         var $adminLi = $("li:contains('Admin')");
-        console.log($test);
+        //console.log($test);
         $("#userTypeSelect").on('change', function () {
             var selected = $("#userTypeSelect option:selected").text();
             if (selected === "User") {
-                $admin.hide();
-                $adminLi.hide();
+                //$admin.hide();
+                //$adminLi.hide();
+
+                test();
             }
 
 
 
         });
+
+        function test() {
+            $("#userTypeSelect option:contains('Admin')").hide();
+            
+            console.log($("#rolesSelect_chosen .chosen-drop .chosen-results"));
+        }
     });
     
 </script>*@
@@ -171,7 +181,7 @@
 
                             if (@userTypeCheck == "")
                             {
-                                <option selected="@isSelected" value="@item.Value">@item.Text</option>
+                                <option id="@item.Text+_test" selected="@isSelected" value="@item.Value">@item.Text</option>
                             }
 
                         }
