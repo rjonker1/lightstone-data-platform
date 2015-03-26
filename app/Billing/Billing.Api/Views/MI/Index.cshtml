@@ -78,66 +78,112 @@
 
         </div><!-- /.col -->
         <div class="col-md-9">
-            
-        <!---->
 
-                <div class="col-md-4">
-                    <!-- Info Boxes Style 2 -->
-                    <div class="info-box bg-yellow">
-                        <span class="info-box-icon"><i class="fa fa-stack-exchange"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Client | Customers</span>
-                            <span id="customers_transacted" class="info-box-number"></span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 50%"></div>
-                            </div>
-                            <span class="progress-description">
-                                50% Increase in 30 Days
-                            </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fa fa-users"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Users</span>
-                            <span id="users_transacted" class="info-box-number"></span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 20%"></div>
-                            </div>
-                            <span class="progress-description">
-                                20% Increase in 30 Days
-                            </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
-                    <div class="info-box bg-red">
-                        <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Products</span>
-                            <span id="products_transacted" class="info-box-number"></span>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description">
-                                70% Increase in 30 Days
-                            </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
-                </div><!-- /.col -->
-            
+            <div id="mi_dashboard_filtered" class="hidden col-md-4">
+                <div class="info-box bg-purple">
+                    <span class="info-box-icon"><i class="fa fa-stack-exchange"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Cost of Sale</span>
+                        <span class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span id="filtered_cos" class="progress-description"></span>
+                        <span class="progress-description">Cost of Sale Final Billing: *Billing run required</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-purple">
+                    <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Revenue</span>
+                        <span class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span id="filtered_revenue" class="progress-description"></span>
+                        <span class="progress-description">Revenue Final Billing: *Billing run required</span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-purple">
+                    <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Non-Billable</span>
+                        <span class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description">
+                            
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div>
             <!---->
 
-            @*<div class="box box-primary">
+            <div id="mi_dashboard" class="col-md-4">
+                <!-- Info Boxes Style 2 -->
+                <div class="info-box bg-yellow">
+                    <span class="info-box-icon"><i class="fa fa-stack-exchange"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Client | Customers</span>
+                        <span id="customers_transacted" class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 50%"></div>
+                        </div>
+                        <span class="progress-description">
+                            50% Increase in 30 Days
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-blue">
+                    <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Users</span>
+                        <span id="users_transacted" class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 20%"></div>
+                        </div>
+                        <span class="progress-description">
+                            20% Increase in 30 Days
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+                <div class="info-box bg-red">
+                    <span class="info-box-icon"><i class="fa fa-wrench"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Products</span>
+                        <span id="products_transacted" class="info-box-number"></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-description">
+                            70% Increase in 30 Days
+                        </span>
+                    </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div><!-- /.col -->
+        
+        
+            <div class="col-md-6">
                 <div class="box-header with-border">
                     <p id="detail-table-header" class="box-title">Overview</p>
-                </div><!-- /.box-header -->
+                </div>
+            </div>
 
-                <table id="table"></table>
-            
-                
+            <!---->
+            @*<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <p id="detail-table-header" class="box-title">Overview</p>
+                    </div><!-- /.box-header -->
 
-            </div><!-- /. box -->*@
+                    <table id="table"></table>
+
+
+
+                </div><!-- /. box -->*@
         </div><!-- /.col -->
-    </div><!-- /.row -->
+
+        </div><!-- /.row -->
 </section><!-- /.content -->
 
 <script>

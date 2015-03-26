@@ -134,6 +134,21 @@
         var startDateFilter = moment().subtract(29, 'days').format('YYYY-MM-DD');
         var endDateFilter = moment().format('YYYY-MM-DD');;
 
+        function fadeReplace() {
+
+            //$('#mi_dashboard').addClass('animated fadeOutRight hidden');
+            $('#mi_dashboard').addClass('animated fadeOutRight hidden');
+
+            $('#mi_dashboard').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', test());
+
+            function test() {
+
+                $('#mi_dashboard').attr('hidden');
+                $('#mi_dashboard_filtered').attr("class", "animated fadeInRight col-md-4");
+                $('#detail-table-header').attr("class", "animated fadeInRight box-title");
+            }
+        }
+
         $('#filterMIData').click(function () {
 
             var displayText = 'Showing filtered data for period: ' + startDateFilter + ' -to- ' + endDateFilter + '<br /><br />';
@@ -141,26 +156,31 @@
             if ($('#client_customer').val()) {
 
                 displayText += 'Where Client | Customer name is: ' + $('#client_customer').val() + '<br />';
+                fadeReplace();
             }
 
             if ($('#username').val()) {
 
                 displayText += 'Where Username is: ' + $('#username').val() + '<br />';
+                fadeReplace();
             }
 
             if ($('#product_type').val()) {
 
                 displayText += 'Where Product Type is: ' + $('#product_type').val() + '<br />';
+                fadeReplace();
             }
 
             if ($('#account_manager').val()) {
 
                 displayText += 'Where Account Manager is: ' + $('#account_manager').val() + '<br />';
+                fadeReplace();
             }
 
             if ($('#industry').val()) {
 
                 displayText += 'Where Industry is: ' + $('#industry').val() + '<br />';
+                fadeReplace();
             }
 
             $('#detail-table-header').html(displayText);
@@ -208,6 +228,9 @@
 
                 totalCoS += data.data[0].totalCoS;
                 totalRevenue += data.data[0].totalRevenue;
+
+                $('#filtered_cos').html('Cost of Sale Pre-BIlling: R' + totalCoS);
+                $('#filtered_revenue').html('Revenue Pre-BIlling: R' + totalRevenue);
 
                 /*
                 * DONUT CHART
