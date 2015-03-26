@@ -3,11 +3,12 @@
 function gridUsersFormatter(value, row, index) {
 
     var count = 0;
-    for (user in row.users) {
 
-        count++;
+    for (var i = 0; i < row.users.length; i++) {
+        
+        if (row.users[i].hasTransactions) count++;
     }
-
+    
     return [
         'Total Users: ( ' + count + ' ) ' +
         '<button type="button" class="view btn btn-primary btn-md">' +
@@ -21,7 +22,13 @@ window.userGridActionEvents = {
 
         $('#detail').bootstrapTable('destroy');
 
-        $('#detail-table-header').text('Users Detail For Customer: '+row.customerName);
+        $('#detail-table-header').text('Users Detail For Customer: ' + row.customerName);
+
+        //$.get('/PreBilling/Customer/'+row.id+'/Users')
+        //    .done(function (data) {
+
+        //        console.log(data);
+        //});
 
         $('#detail').bootstrapTable({
             url: '/PreBilling/Customer/'+row.id+'/Users',
