@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Billing.Api.Modules;
@@ -15,6 +16,11 @@ namespace Billing.Api.Helpers.AutoMapper.Maps
                 .ConvertUsing(s => s.Select(Mapper.Map<PreBilling, PreBillingDto>));
             Mapper.CreateMap<PreBilling, PreBillingDto>();
             //.ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.NumUsers));
+
+            Mapper.CreateMap<IEnumerable<Customer>, IEnumerable<PreBillingDto>>()
+                .ConvertUsing(s => s.Select(Mapper.Map<Customer, PreBillingDto>));
+            Mapper.CreateMap<Customer, PreBillingDto>()
+                .ForMember(d => d.CustomerName, opt => opt.MapFrom(x => x.Name));
         }
     }
 }

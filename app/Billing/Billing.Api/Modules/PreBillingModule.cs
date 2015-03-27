@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -16,9 +17,9 @@ using NHibernate;
 namespace Billing.Api.Modules
 {
     public class PreBillingModule : NancyModule
-    { 
-        public PreBillingModule(IPreBillingRepository preBilling, IServerPageRepo serverPageRepo, 
-                                IRepository<Customer> customers, IRepository<User> users, IRepository<TransactionMocks> transactions, IRepository<Product> products)
+    {
+        public PreBillingModule(IPreBillingRepository preBilling, IServerPageRepo serverPageRepo,
+                                IRepository<Customer> customersRepo, IRepository<User> users, IRepository<TransactionMocks> transactions, IRepository<Product> products)
         {
 
             Get["/PreBilling/"] = _ =>
@@ -31,7 +32,10 @@ namespace Billing.Api.Modules
                 if (offset == null) offset = 0;
                 if (limit == null) limit = 10;
 
-                var dto = Mapper.Map<IRepository<Customer>, IEnumerable<PreBillingDto>>(customers, new [] {  new PreBillingDto() });
+                var userIds = users.ToList().Where(x => x.HasTransactions).Select(x => x.Id);
+
+                var customers = customersRepo.Where(c => c.Users.Any(x => userIds.Contains(x.Id)));
+                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<PreBillingDto>>(customers, new[] { new PreBillingDto() });
 
                 //const string dto = "gh";
                 return Negotiate
@@ -42,22 +46,24 @@ namespace Billing.Api.Modules
             Get["/PreBilling/Customer/{id}/Users"] = param =>
             {
                 var searchId = new Guid(param.id);
-                var customerUsers = customers.Where(x => x.Id.Equals(searchId)).Select(x => x.Users);
-             
-                return Response.AsJson(new { data = customerUsers.SelectMany(x => x.Select(y => y)) });
+
+                var userIds = users.ToList().Where(x => x.HasTransactions).Select(x => x.Id);
+                var customerUsers = customersRepo.Where(x => x.Id.Equals(searchId)).Select(x => x.Users.Where(u => userIds.Contains(u.Id)));
+
+                return Response.AsJson(new { data = customerUsers.Select(x => x).SelectMany(y => y) });
             };
 
             Get["/PreBilling/Customer/{id}/Products"] = param =>
             {
                 var searchId = new Guid(param.id);
-                var customerProducts = customers.Get(searchId).Products;
+                var customerProducts = customersRepo.Get(searchId).Products;
 
                 return Response.AsJson(new { data = customerProducts });
             };
 
             Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
 
-            Get["/PreBilling/Customers"] = _ => Response.AsJson(new {Customers = customers});
+            Get["/PreBilling/Customers"] = _ => Response.AsJson(new { Customers = customersRepo });
 
         }
     }
