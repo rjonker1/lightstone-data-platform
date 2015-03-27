@@ -21,6 +21,8 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         [DataMember]
         public string Label { get; internal set; }
         [DataMember]
+        public string Value { get; internal set; }
+        [DataMember]
         public string Definition { get; internal set; }
         [DataMember]
         public IEnumerable<IIndustry> Industries { get; internal set; }
@@ -40,11 +42,12 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         {
         }
 
-        public DataField(string name, Type type, IEnumerable<Industry> industries)
+        public DataField(string name, Type type, IEnumerable<Industry> industries, string value = "")
         {
             Name = name;
             Type = type;
 			Industries = industries;
+            Value = value;
         }
 
         public DataField(string name, Type type, IEnumerable<IDataField> dataFields)

@@ -46,18 +46,53 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
                 .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map(x, x.GetType(), typeof(IEnumerable<DataField>)) as IEnumerable<DataField>));
 
             Mapper.CreateMap<IDataProvider, DataProvider>()
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.SelectHierarchy(fld => fld.DataFields, fld => fld.IsSelected == true)))
-                .AfterMap((s, d) =>
+                .ForMember(d => d.Id, opt => opt.Ignore())
+                .BeforeMap((s, d) =>
                 {
-                    if (!d.DataFields.Any())
-                        d = null;
-                });
+                    if (s.DataFields != null)
+                    {
+                        var objects = s.DataFields.ToNamespace().Select(x => (IDataField)Mapper.Map(x, d.DataFields.ToNamespace().Filter(f => x != null && f.Namespace == x.Namespace)
+                            .FirstOrDefault(), typeof(IDataField), typeof(DataField))).ToList();
+                        d.DataFields = objects.Filter(x => x.IsSelected == true);
+                    }
+                })
+            .ForMember(d => d.DataFields, opt => opt.Ignore());
+            //.ForMember(d => d.DataFields, opt => opt.ResolveUsing(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataField>>(x.DataFields)));
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map(x.DataFields, typeof(IEnumerable<DataField>))));
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.Select(f => Mapper.Map(f, typeof(DataField)))));
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.SelectHierarchy(fld => fld.DataFields, fld => fld.IsSelected == true)))
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataField>>(x.DataFields.SelectHierarchy(fld => fld.DataFields, fld => fld.IsSelected == true))))
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.SelectHierarchy(fld => fld.DataFields, fld => fld.IsSelected == true).Select(Mapper.Map<IDataField, DataField>)))
+            //.AfterMap((s, d) =>
+            //{
+            //    d.DataFields = d.DataFields.SelectHierarchy(fld => fld.DataFields, fld => fld.IsSelected == true).ToList();
+            //    if (!d.DataFields.Any())
+            //        d = null;
+            //});
 
-            Mapper.CreateMap<IEnumerable<IDataField>, IEnumerable<DataField>>()
-                .ConvertUsing(s => s != null ? s.Select(Mapper.Map<IDataField, DataField>).ToList() : Enumerable.Empty<DataField>());
+            //Mapper.CreateMap<IEnumerable<IDataField>, IEnumerable<DataField>>()
+            //    .BeforeMap((s, d) =>
+            //    {
+            //        d = s.Traverse()
+            //            .Select(x => Mapper.Map(x, d.Traverse()
+            //                .SelectHierarchy(f => f.DataFields, f => f.Namespace == x.Namespace).FirstOrDefault())).Cast<DataField>();
+            //    })
+             //.ConvertUsing<ITypeConverter<IEnumerable<IDataField>, IEnumerable<DataField>>>();
+               //.ConvertUsing(s => s != null ? s.Select(Mapper.Map<IDataField, DataField>) : Enumerable.Empty<DataField>());
+               //.ConvertUsing(s => s != null ? s.Select(x => Mapper.Map(x, typeof(DataField))).Cast<DataField>() : Enumerable.Empty<DataField>());
             Mapper.CreateMap<IDataField, DataField>()
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.Where(fld => fld.IsSelected == true)))
-                .ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataField>>(x.DataFields)));
+                .BeforeMap((s, d) =>
+                {
+
+                })
+                .ForMember(d => d.IsSelected, opt => opt.Ignore());
+            //.ForMember(d => d.IsSelected, opt => opt.MapFrom(x => Mapper.Map<IDataField, bool>(x)))
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => x.DataFields.Where(fld => fld.IsSelected == true)))
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map(x.DataFields, typeof(IEnumerable<IDataField>))));
+            //.ForMember(d => d.DataFields, opt => opt.MapFrom(x => Mapper.Map<IEnumerable<IDataField>, IEnumerable<DataField>>(x.DataFields)));
+
+            //Mapper.CreateMap<IDataField, bool>()
+            //    .ConvertUsing<ITypeConverter<IDataField, bool>>();
         }
     }
 }

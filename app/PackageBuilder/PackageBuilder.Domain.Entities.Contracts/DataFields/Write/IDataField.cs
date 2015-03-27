@@ -9,6 +9,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataFields.Write
     {
         string Namespace { get; set; }
         string Label { get; }
+        string Value { get; }
         string Definition { get; }
         IEnumerable<IIndustry> Industries { get; }
         double CostOfSale { get; }
