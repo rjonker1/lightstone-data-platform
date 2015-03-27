@@ -47,9 +47,13 @@
         ajax: "/Users",
         columns: [
             { data: "id", visible: false },
+            { data: "userName" },
             { data: "firstName" },
             { data: "lastName" },
-            { data: "userName" },
+            { data: "userType" },
+            { data: "role" },
+            { data: "customers" },
+            { data: "clients" },
             {
                 data: null,
                 render: function (data, type, full, meta) {
