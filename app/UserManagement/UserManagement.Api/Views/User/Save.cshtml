@@ -47,6 +47,69 @@
             console.log($("#rolesSelect_chosen .chosen-drop .chosen-results"));
         }
     });
+
+    $('#rolesSelect').autocomplete({
+        //source: function (request, response) {
+        //    var $container = $(this.element).closest('div');
+        //    var type = $container.data('type');
+        //    //var $ul = $container.find('ul');
+        //    //var $ul = $("<ul>", {
+        //    //    text: "",
+        //    //    "class": "custom-colorize-changer"
+        //    //}).appendTo($container);
+        //    $.ajax({
+        //        url: "/NamedEntities/" + type + "/" + request.term + "/",
+        //        dataType: "json",
+        //        beforeSend: function () {
+        //        },
+        //        success: function (data) {
+        //            response($.map(data.dto, function (item) {
+        //                return {
+        //                    label: item.name,
+        //                    value: item.id
+        //                };
+        //            }));
+        //        }
+        //    });
+        //},
+        select: function (event, ui) {
+
+            console.log(ui);
+
+            //if ($('#' + ui.item.value).length) {
+            //    return;
+            //}
+
+            //var $container = $(this).closest('div');
+            //var $listGroup = $container.find('.list-group');
+
+            //var $item = $("<div>", { "class": "list-group-item" }).appendTo($listGroup);
+
+            //var $left = $("<div>", { "class": "pull-left" }).appendTo($item);
+            //var $remove = $("<a>", { "class": "btn btn-danger btn-xs close-box", href: "javascript:;" }).appendTo($left);
+            //var $removeIcon = $("<i>", { "class": "fa fa-times" }).appendTo($remove);
+
+            //var index = $listGroup.children('li').length;
+
+            //var $id = $("<input>", {
+            //    id: ui.item.value,
+            //    name: "ClientId[" + index + "]",
+            //    value: ui.item.value,
+            //    type: 'hidden'
+            //}).appendTo($item);
+
+            //var $label = $("<label>", { text: ui.item.label }).appendTo($item);
+
+            //var $value = $("<input>", {
+            //    name: "UserAlias[" + index + "]",
+            //    value: "",
+            //    "class": "form-control"
+            //}).appendTo($item);
+        },
+        close: function (event, ui) {
+            $(this).val('');
+        }
+    });
     
 </script>*@
 
@@ -161,7 +224,7 @@
             <div class="form-group">
 
                 <label class="control-label col-lg-4">Roles</label>
-                <div class="input-group col-lg-2">
+                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities">
                     <select id="rolesSelect" name="RoleIds" data-placeholder="Type to search & add roles" multiple class="chosen-select">
                         @foreach (SelectListItem item in ViewBag.Roles.Value)
                         {
