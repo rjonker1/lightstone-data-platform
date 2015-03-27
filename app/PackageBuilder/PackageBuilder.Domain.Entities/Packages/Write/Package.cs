@@ -149,8 +149,8 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
         {
             var request = new LaceRequest();
 
-            var package = Mapper.Map<IPackage, Package>(this);
-            package.DataProviders = package.DataProviders.Where(x => x.DataFields.Any());
+            var package = this;
+            package.DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
 
             request.LicensePlateNumberRequest(package,
                 new User(userId, userName, firstName), new Context(Name, null),
@@ -163,12 +163,13 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         private IEnumerable<IDataProvider> MapLaceResponses(IEnumerable<IPointToLaceProvider> dataProviders)
         {
-            foreach (var dataProvider in dataProviders)
+            if (dataProviders == null) yield break;
+            foreach (var dataProvider in dataProviders.Where(x => x.Handled))
             {
                 var laceResponse = Mapper.Map<IPointToLaceProvider, DataProvider>(dataProvider);
-                var response = Mapper.Map(DataProviders.First(x => x.Name == laceResponse.Name), laceResponse);
+                var response = (IDataProvider)Mapper.Map(laceResponse, DataProviders.FirstOrDefault(x => x.Name == laceResponse.Name), typeof(IDataProvider), typeof(DataProvider));
                 if (response.DataFields.Any())
-                yield return response;
+                    yield return response;
             }
         }
 

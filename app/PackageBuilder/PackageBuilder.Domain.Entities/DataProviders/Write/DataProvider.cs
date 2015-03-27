@@ -44,7 +44,7 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         [DataMember]
         public DateTime? EditedDate { get; internal set; }
         [DataMember]
-        public IEnumerable<IDataField> DataFields { get; internal set; }
+        public IEnumerable<IDataField> DataFields { get; set; }
 
         private DataProvider(Guid id)
         {

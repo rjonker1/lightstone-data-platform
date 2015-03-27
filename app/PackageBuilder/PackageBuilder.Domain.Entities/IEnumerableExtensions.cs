@@ -12,7 +12,7 @@ namespace PackageBuilder.Domain.Entities
             return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFields, x.Name)) : Enumerable.Empty<IDataField>();
         }
 
-        public static IEnumerable<T> Traverse<T>(this T root, Func<T, IEnumerable<T>> childrenSelector, string name) where T : class, IDataField
+        private static IEnumerable<T> Traverse<T>(this T root, Func<T, IEnumerable<T>> childrenSelector, string name) where T : class, IDataField
         {
             root.Namespace = name;
             yield return root;
@@ -34,7 +34,7 @@ namespace PackageBuilder.Domain.Entities
             return dataFields != null ? dataFields.SelectMany(x => x.Traverse(y => y.DataFieldOverrides, x.Name)) : Enumerable.Empty<IDataFieldOverride>();
         }
 
-        public static IEnumerable<IDataFieldOverride> Traverse(this IDataFieldOverride root, Func<IDataFieldOverride, IEnumerable<IDataFieldOverride>> childrenSelector, string name) 
+        private static IEnumerable<IDataFieldOverride> Traverse(this IDataFieldOverride root, Func<IDataFieldOverride, IEnumerable<IDataFieldOverride>> childrenSelector, string name) 
         {
             root.Namespace = name;
             yield return root;
@@ -77,6 +77,38 @@ namespace PackageBuilder.Domain.Entities
                 if (predicate(item))
                     yield return item;
                 var childResults = SelectHierarchy(childrenSelector(item), childrenSelector, predicate);
+                foreach (var childItem in childResults)
+                    yield return childItem;
+            }
+        }
+
+        public static IEnumerable<IDataField> ToNamespace(this IEnumerable<IDataField> dataFields, string namespaceRoot = "")
+        {
+            if (dataFields == null)
+                return Enumerable.Empty<IDataField>();
+
+            var fields = dataFields as IList<IDataField> ?? dataFields.ToList();
+            foreach (var dataField in fields.Where(x => x != null))
+            {
+                dataField.Namespace = string.IsNullOrEmpty(namespaceRoot) ? dataField.Name : namespaceRoot + "." + dataField.Name;
+                dataField.DataFields.ToNamespace(dataField.Namespace);
+            }
+
+            return fields;
+        }
+
+        public static IEnumerable<IDataField> Filter(this IEnumerable<IDataField> dataFields, Func<IDataField, bool> predicate = null)
+        {
+            if (dataFields == null)
+                yield break;
+            if (predicate == null)
+                predicate = field => true;
+            foreach (var dataField in dataFields.Where(x => x != null))
+            {
+                if (predicate(dataField))
+                    yield return dataField;
+
+                var childResults = dataField.DataFields.Filter(predicate);
                 foreach (var childItem in childResults)
                     yield return childItem;
             }
