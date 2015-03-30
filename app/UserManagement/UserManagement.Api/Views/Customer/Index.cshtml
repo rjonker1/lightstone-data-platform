@@ -50,11 +50,26 @@
             title: 'Platform State',
             //formatter: gridTransactionsFormatter
         }, {
-            field: 'commercial State',
-            title: 'User Type',
+            field: 'commercialState',
+            title: 'Commercial State',
             sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
         }]
     });
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row">' +
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Customers/' + row.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Customers/Delete/' + row.id + '">Delete</a></div>' +
+                        '</div>'
+        ].join('');
+    };
 
     UserManagement.overrideDataTablesStyling();
 </script>
