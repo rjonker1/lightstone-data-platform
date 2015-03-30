@@ -23,7 +23,7 @@ namespace Workflow.Lace.Read.Service.Handlers
         public void Handle(BillTransactionMessage message)
         {
             var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
-                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State);
+                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract);
 
             _repository.Add(transaction);
         }

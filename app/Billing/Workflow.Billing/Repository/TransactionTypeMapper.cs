@@ -39,7 +39,7 @@ namespace Workflow.Billing.Repository
                 PackageId = transaction.Package.Id,
                 PackageVersion = transaction.Package.Version.Number,
                 ContractId = transaction.Contract.Id,
-                ContractVersion = transaction.Contract.Version,
+                ContractVersion = transaction.Contract.Version.Number,
                 UserId = transaction.User.Id,
                 RequestId = transaction.Request.Id,
                 System = transaction.Request.System.Name,
