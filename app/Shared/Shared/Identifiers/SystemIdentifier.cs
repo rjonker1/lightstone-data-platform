@@ -1,5 +1,10 @@
-﻿namespace DataPlatform.Shared.Identifiers
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class SystemIdentifier
     {
         public SystemIdentifier()
@@ -16,7 +21,9 @@
             Server = server;
         }
 
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public ServerIdentifier Server { get; set; }
 
         public static SystemIdentifier CreateApi()

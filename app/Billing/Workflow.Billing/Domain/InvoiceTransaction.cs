@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 
 namespace Workflow.Billing.Domain
 {
+    [Serializable]
+    [DataContract]
     public class InvoiceTransaction : Transaction
     {
         public InvoiceTransaction()

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class PackageIdentifier
     {
         public PackageIdentifier()
@@ -14,7 +17,9 @@ namespace DataPlatform.Shared.Identifiers
             Version = version;
         }
 
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public VersionIdentifier Version { get; set; }
 
         protected bool Equals(PackageIdentifier other)

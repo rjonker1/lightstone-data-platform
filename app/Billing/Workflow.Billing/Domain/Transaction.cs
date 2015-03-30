@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Data;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 
 namespace Workflow.Billing.Domain
 {
+    [Serializable]
+    [DataContract]
     public class Transaction
     {
         public Transaction()
@@ -19,11 +23,17 @@ namespace Workflow.Billing.Domain
             State = state;
         }
 
+        [DataMember]
         public Guid Id { get; private set; }
+        [DataMember]
         public DateTime Date { get; private set; }
+        [DataMember]
         public PackageIdentifier Package { get; private set; }
+        [DataMember]
         public RequestIdentifier Request { get; private set; }
+        [DataMember]
         public UserIdentifier User { get; private set; }
+        [DataMember]
         public StateIdentifier State { get; private set; }
     }
 }

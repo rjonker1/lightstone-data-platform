@@ -2,12 +2,17 @@
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
 
 namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class ServerIdentifier
     {
+        [DataMember]
         public string MachineName { get; set; }
+        [DataMember]
         public string LocalIP { get; set; }
 
         public ServerIdentifier()

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class UserIdentifier
     {
         public UserIdentifier()
@@ -13,6 +16,7 @@ namespace DataPlatform.Shared.Identifiers
             Id = id;
         }
 
+        [DataMember]
         public Guid Id { get; set; }
 
         protected bool Equals(UserIdentifier other)
