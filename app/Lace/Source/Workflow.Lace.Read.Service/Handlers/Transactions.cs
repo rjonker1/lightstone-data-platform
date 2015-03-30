@@ -22,11 +22,10 @@ namespace Workflow.Lace.Read.Service.Handlers
 
         public void Handle(BillTransactionMessage message)
         {
-            //TODO: Uncommont after updating packages
-            //var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
-            //    message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State);
+            var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
+                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State);
 
-            //_repository.Add(transaction);
+            _repository.Add(transaction);
         }
     }
 }

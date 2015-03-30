@@ -77,9 +77,8 @@ namespace Workflow.Lace.Domain.Aggregates
             ContractVersion = contractVersion;
             State = state;
 
-            //TODO: Uncomment once package is updated
-            //RaiseEvent(new BillTransactionMessage(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
-            //    new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date, id, new StateIdentifier((int)state, state.ToString())));
+            RaiseEvent(new BillTransactionMessage(new PackageIdentifier(packageId, new VersionIdentifier(packageVersion)),
+                new UserIdentifier(userId), new RequestIdentifier(requestId, new SystemIdentifier(system)), date, id, new StateIdentifier((int)state, state.ToString())));
 
            
 

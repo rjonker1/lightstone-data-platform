@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace DataPlatform.Shared.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class ContractIdentifier
     {
           public ContractIdentifier()
@@ -18,7 +17,9 @@ namespace DataPlatform.Shared.Identifiers
             Version = version;
         }
 
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public VersionIdentifier Version { get; set; }
     }
 }
