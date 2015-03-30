@@ -43,13 +43,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.846\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.851, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.851\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.852\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.851, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.851\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.852\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
