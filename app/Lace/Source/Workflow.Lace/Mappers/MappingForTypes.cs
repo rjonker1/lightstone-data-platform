@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Workflow.Billing.Domain;
 using Workflow.Billing.Repository;
 using Workflow.Lace.Domain;
 
@@ -13,7 +14,7 @@ namespace Workflow.Lace.Mappers
         {
             Mappings = new Dictionary<Type, TypeMapper>()
             {
-                //{typeof (InvoiceTransaction), new TransactionTypeMapper()}
+                {typeof (InvoiceTransaction), new TransactionTypeMapper()},
                 {typeof(DataProviderTransaction), new DataProviderTransactionTypeMapper()}
             };
         }

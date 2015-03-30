@@ -12,7 +12,7 @@ namespace Workflow.Billing.Domain
         {
         }
 
-        public Transaction(Guid id, DateTime date, PackageIdentifier package, RequestIdentifier request, UserIdentifier user, StateIdentifier state)
+        public Transaction(Guid id, DateTime date, PackageIdentifier package, RequestIdentifier request, UserIdentifier user, StateIdentifier state, ContractIdentifier contract)
         {
             Id = id;
             Date = date;
@@ -20,6 +20,7 @@ namespace Workflow.Billing.Domain
             Request = request;
             User = user;
             State = state;
+            Contract = contract;
         }
 
         [DataMember]
@@ -34,5 +35,8 @@ namespace Workflow.Billing.Domain
         public UserIdentifier User { get; private set; }
         [DataMember]
         public StateIdentifier State { get; private set; }
+        [DataMember]
+        public ContractIdentifier Contract { get; private set; }
+
     }
 }

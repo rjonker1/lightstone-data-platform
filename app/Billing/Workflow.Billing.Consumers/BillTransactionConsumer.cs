@@ -25,7 +25,7 @@ namespace Workflow.Billing.Consumers
             }
 
             var transaction = new InvoiceTransaction(message.TransactionId, message.TransactionDate, 
-                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State);
+                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract);
 
             _repository.Add(transaction);
 

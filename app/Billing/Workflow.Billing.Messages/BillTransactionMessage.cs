@@ -15,7 +15,7 @@ namespace Workflow.Billing.Messages
 
         public BillTransactionMessage(PackageIdentifier packageIdentifier, UserIdentifier userIdentifier,
             RequestIdentifier requestIdentifier,
-            DateTime transactionDate, Guid transactionId, StateIdentifier state)
+            DateTime transactionDate, Guid transactionId, StateIdentifier state, ContractIdentifier contract)
         {
             PackageIdentifier = packageIdentifier;
             UserIdentifier = userIdentifier;
@@ -23,6 +23,7 @@ namespace Workflow.Billing.Messages
             TransactionDate = transactionDate;
             TransactionId = transactionId;
             State = state;
+            Contract = contract;
         }
 
         [DataMember]
@@ -37,5 +38,7 @@ namespace Workflow.Billing.Messages
         public Guid TransactionId { get; set; }
         [DataMember]
         public StateIdentifier State { get; set; }
+        [DataMember]
+        public ContractIdentifier Contract { get; set; }
     }
 }

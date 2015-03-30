@@ -15,10 +15,11 @@ namespace Billing.TestHelper.Mothers.BillTransactionMessages
         private Guid transactionId;
         private UserIdentifier userIdentifier;
         private StateIdentifier state;
+        private ContractIdentifier contract;
 
         public BillTransactionMessage Build()
         {
-            return new BillTransactionMessage(packageIdentifier, userIdentifier, requestIdentifier, transactionDate, transactionId, state);
+            return new BillTransactionMessage(packageIdentifier, userIdentifier, requestIdentifier, transactionDate, transactionId, state,contract);
         }
 
         public BillTransactionMessageBuilder With(IDefineBillingTransaction data)

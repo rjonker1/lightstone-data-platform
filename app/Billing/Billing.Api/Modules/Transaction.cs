@@ -30,7 +30,7 @@ namespace Billing.Api.Modules
                     transaction.Context.User,
                     transaction.Context.Request,
                     transaction.Context.TransactionDate,
-                    transaction.Context.TransactionId, transaction.Context.State);
+                    transaction.Context.TransactionId, transaction.Context.State, transaction.Contract);
 
                 try
                 {
