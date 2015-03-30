@@ -4,7 +4,7 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Customers", ""))
 
 <div class="box">
-    <table id="customers_table" class="table table-bordered table-hover">
+    @*<table id="customers_table" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>
@@ -30,64 +30,87 @@
                 </th>
             </tr>
         </thead>
-    </table>
+    </table>*@
+    
+    <table id="table"></table>
+
 </div>
 <script>
-    var table = $("#customers_table").dataTable({
-        dom: '<"box-header"f>t<"box-footer"lip>r',
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        processing: true,
-        serverSide: true,
-        ajax: "/Customers/",
-        columns: [
-            { data: "id", visible: false },
-            { data: "name" },
-            { data: "accountOwnerName" },
-            { data: "createdDate" },
-            { data: "PlatformState" },
-            { data: "CommercialState" },
-            {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Customers/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Customers/Delete/' + data.id + '">Delete</a></div>' +
-                        '</div>';
-                }
-            }
-        ]
-    });
+    //var table = $("#customers_table").dataTable({
+    //    dom: '<"box-header"f>t<"box-footer"lip>r',
+    //    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    //    processing: true,
+    //    serverSide: true,
+    //    ajax: "/Customers/",
+    //    columns: [
+    //        { data: "id", visible: false },
+    //        { data: "name" },
+    //        { data: "accountOwnerName" },
+    //        { data: "createdDate" },
+    //        { data: "PlatformState" },
+    //        { data: "CommercialState" },
+    //        {
+    //            data: null,
+    //            render: function (data, type, full, meta) {
+    //                return '<div class="row">' +
+    //                    '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Customers/' + data.id + '">Edit</a></div>' +
+    //                    '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Customers/Delete/' + data.id + '">Delete</a></div>' +
+    //                    '</div>';
+    //            }
+    //        }
+    //    ]
+    //});
 
-    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Customers/Add", text: "Add" }).appendTo($("div.box-header"));
+    //$("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Customers/Add", text: "Add" }).appendTo($("div.box-header"));
+
+    $('#table').bootstrapTable({
+        url: '/Customers',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Customer Name',
+            sortable: true
+        }, {
+            field: 'accountOwnerName',
+            title: 'Account Owner Name'
+            //formatter: gridUsersFormatter,
+            //events: userGridActionEvents
+        }, {
+            field: 'type',
+            title: 'User Type',
+            sortable: true
+        }, {
+            field: 'owner',
+            title: 'Owner',
+            sortable: true
+        }, {
+            field: 'createdDate',
+            title: 'Created Date',
+            //formatter: gridProductsFormatter,
+            //events: productGridActionEvents
+        }, {
+            field: 'platformState',
+            title: 'Platform State',
+            //formatter: gridTransactionsFormatter
+        }, {
+            field: 'commercial State',
+            title: 'User Type',
+            sortable: true
+        }, {
+            field: 'total',
+            title: 'Total',
+        }]
+    });
 
     UserManagement.overrideDataTablesStyling();
 </script>
-
-@*@section Scripts{
-    <script>
-        $(function () {
-            var $div = $("#container");
-            //$div.html(responseText);
-            $div.find("script").each(function (i) {
-                eval($(this).text());
-            });
-            @*var table = $("#customers_table").DataTable({
-                dom: '<"table-toolbar">frtip',
-                ajax: "/Customers",
-                columns: [
-                    { data: "id", visible: false },
-                    { data: "customerName" },
-                    { data: "accountOwnerName" },
-                    { data: null, defaultContent: "<button class='btn btn-primary'>Edit</button>" }
-                ]
-            });
-
-            $("div.table-toolbar").html("<button class='btn btn-default toolbar-add' data-url='/Customers/@Guid.Empty'>Add</button>");
-
-            $('#customers_table tbody').on('click', 'button', function () {
-                var data = table.row($(this).parents('tr')).data();
-                alert(data.id + " - " + data.name);
-            });*@
-@*});
-    </script>*@
-@*}*@
