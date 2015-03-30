@@ -21,7 +21,7 @@ namespace Workflow.Billing.Repository
             {
                 return new[]
                 {
-                    "Id", "Date", "PackageId", "PackageVersion","ContractId"," ContractVersion", "UserId", "RequestId", "System", "Server", "State"
+                    "Id", "Date", "PackageId", "PackageVersion","ContractId", "ContractVersion", "UserId", "RequestId", "System", "Server", "State"
                 };
             }
         }
