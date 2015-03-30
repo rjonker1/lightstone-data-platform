@@ -8,7 +8,7 @@ using Workflow.Billing.Domain;
 
 namespace Workflow.Billing.Repository
 {
-    internal class TransactionTypeMapper : TypeMapper
+    public class TransactionTypeMapper : TypeMapper
     {
         protected override string TableName
         {

@@ -4,6 +4,7 @@ using NServiceBus.Features;
 namespace Worflow.Lace.Service.Write.Host
 {
     using NServiceBus;
+
     public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
         public void Customize(BusConfiguration configuration)
@@ -11,13 +12,16 @@ namespace Worflow.Lace.Service.Write.Host
             configuration.EnableFeature<JsonSerialization>();
             configuration.UseTransport<RabbitMQTransport>();
             configuration.UsePersistence<InMemoryPersistence>();
-          
+
             configuration.EndpointName("DataPlatform.DataProviders.Host.Write");
 
             configuration.Conventions()
                 .DefiningCommandsAs(c => c.Namespace != null && c.Namespace.EndsWith("Messages.Commands"))
-                .DefiningEventsAs(c => c.Namespace != null && c.Namespace.EndsWith("Messages.Events"));
-                
+                .DefiningEventsAs(
+                    c =>
+                        c.Namespace != null &&
+                        (c.Namespace.EndsWith("Messages.Events") || c.Namespace.Equals("Workflow.Billing.Messages")));
+
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(new WriteModule());

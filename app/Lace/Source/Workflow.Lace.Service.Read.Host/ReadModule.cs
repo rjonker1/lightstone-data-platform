@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using Autofac;
 using Workflow.Billing.Repository;
+using Workflow.Lace.Mappers;
 using Workflow.Lace.Shared.Queuing;
 using Workflow.Lace.Shared.RabbitMq;
 
@@ -18,7 +19,7 @@ namespace Workflow.Lace.Service.Read.Host
                     new Repository(
                         new SqlConnection(
                             ConfigurationManager.ConnectionStrings["workflow/dataprovider/database/read"]
-                                .ConnectionString), new RepositoryMapper(new MappingsforTypes())))
+                                .ConnectionString), new RepositoryMapper(new MappingForTypes())))
                 .As<IRepository>();
         }
     }
