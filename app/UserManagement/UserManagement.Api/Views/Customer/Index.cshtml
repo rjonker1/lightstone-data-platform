@@ -4,64 +4,11 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Customers", ""))
 
 <div class="box">
-    @*<table id="customers_table" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Customer Name
-                </th>
-                <th>
-                    Account Owner Name
-                </th>
-                <th>
-                    Created Date
-                </th>
-                <th>
-                    Platform State
-                </th>
-                <th>
-                    Commercial State
-                </th>
-                <th>
-                    <i id="ctActionIcon" class="fa fa-bolt"></i>
-                </th>
-            </tr>
-        </thead>
-    </table>*@
     
     <table id="table"></table>
 
 </div>
 <script>
-    //var table = $("#customers_table").dataTable({
-    //    dom: '<"box-header"f>t<"box-footer"lip>r',
-    //    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    //    processing: true,
-    //    serverSide: true,
-    //    ajax: "/Customers/",
-    //    columns: [
-    //        { data: "id", visible: false },
-    //        { data: "name" },
-    //        { data: "accountOwnerName" },
-    //        { data: "createdDate" },
-    //        { data: "PlatformState" },
-    //        { data: "CommercialState" },
-    //        {
-    //            data: null,
-    //            render: function (data, type, full, meta) {
-    //                return '<div class="row">' +
-    //                    '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Customers/' + data.id + '">Edit</a></div>' +
-    //                    '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Customers/Delete/' + data.id + '">Delete</a></div>' +
-    //                    '</div>';
-    //            }
-    //        }
-    //    ]
-    //});
-
-    //$("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Customers/Add", text: "Add" }).appendTo($("div.box-header"));
 
     $('#table').bootstrapTable({
         url: '/Customers',
