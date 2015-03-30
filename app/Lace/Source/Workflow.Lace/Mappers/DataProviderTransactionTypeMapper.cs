@@ -22,7 +22,7 @@ namespace Workflow.Lace.Mappers
                 return new[]
                 {
                     "Id", "StreamId", "Date", "RequestId", "DataProvider", "DataProviderName", "ConnectionType",
-                    "Connection", "Action", "State"
+                    "Connection", "Action", "State", "StateId"
                 };
             }
         }
@@ -42,7 +42,8 @@ namespace Workflow.Lace.Mappers
                 ConnectionType = request.Transaction.ConnectionType.Type,
                 Connection = request.Transaction.ConnectionType.Connection,
                 Action = request.Transaction.Action.Name,
-                State = request.Transaction.State.Name
+                State = request.Transaction.State.Name,
+                StateId = request.Transaction.State.Id
             };
 
             connection.Execute(sql, values);
@@ -59,7 +60,7 @@ namespace Workflow.Lace.Mappers
                     new RequestIdentifier(match.RequestId, null),
                     new DataProviderIdentifier(match.DataProvider, match.DataProviderName),
                     new ConnectionTypeIdentifier(match.ConnectionType, match.Connection),
-                    new ActionIdentifier(0, match.Name), new StateIdentifier(0, match.State)));
+                    new ActionIdentifier(0, match.Name), new StateIdentifier(match.StateId, match.State)));
         }
     }
 }

@@ -18,7 +18,8 @@ namespace Workflow.Billing.Database.Migrations
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("System").AsString().NotNullable()
                 .WithColumn("Server").AsString().NotNullable()
-                .WithColumn("State").AsString().NotNullable();
+                .WithColumn("State").AsString().NotNullable()
+                .WithColumn("StateId").AsInt32().NotNullable();
         }
 
         public override void Down()
