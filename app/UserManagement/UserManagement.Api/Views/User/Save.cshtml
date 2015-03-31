@@ -18,10 +18,10 @@
 
 
 <script>
-    var $userRoleSelect = $("<select>", { id: "userRoleSelect" });
-    var $internalRoleSelect = $("<select>", { id: "internalRoleSelect" });
+    
     var userRoles = [];
     var internalRoles = [];
+
     @foreach (SelectListItem userItem in ViewBag.UserTypes.Value)
     {
         foreach (SelectListItem roleItem in ViewBag.Roles.Value)
@@ -152,7 +152,6 @@
                 <label class="control-label col-lg-4">User Type</label>
                 <div class="input-group col-lg-2">
                     <select id="userTypeSelect" name="UserTypeId" data-placeholder="Select user type" class="chosen-select">
-                        @*<option>Select user type</option>*@
                         <option value=""></option>
                         @foreach (SelectListItem item in ViewBag.UserTypes.Value)
                         {
