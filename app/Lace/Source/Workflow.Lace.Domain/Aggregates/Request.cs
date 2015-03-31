@@ -5,7 +5,6 @@ using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
 using Workflow.Billing.Messages;
-using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
 
 namespace Workflow.Lace.Domain.Aggregates
@@ -35,7 +34,6 @@ namespace Workflow.Lace.Domain.Aggregates
             RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection,
                 connectionType,
                 state, action));
-            //RaiseEvent(new RequestReceived(requestId, date));
         }
 
         public void RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,

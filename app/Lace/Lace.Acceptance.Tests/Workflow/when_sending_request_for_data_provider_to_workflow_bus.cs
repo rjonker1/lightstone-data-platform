@@ -1,9 +1,7 @@
 ﻿using System;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Cmds;
-using NHibernate.Type;
 using Workflow.Lace.Messages.Core;
-using Workflow.Lace.Messages.Shared;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Workflow

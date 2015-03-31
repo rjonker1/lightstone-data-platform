@@ -87,7 +87,7 @@ namespace Lace.Test.Helper.Builders.Buses
             return
                 new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Workflow.Lace.Messages.Commands",
                     assembliesToScan,
-                    "DataPlatform.DataProviders.Host.Write").CreateBusWithNHibernatePersistence();
+                    "DataPlatform.Transactions.Host.Write").CreateBusWithNHibernatePersistence();
         }
     }
 }

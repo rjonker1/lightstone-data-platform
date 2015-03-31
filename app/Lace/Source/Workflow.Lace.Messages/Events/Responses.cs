@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
-using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Events
 {

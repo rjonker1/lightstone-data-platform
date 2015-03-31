@@ -31,6 +31,16 @@ namespace DataPlatform.Shared.Identifiers
             return new SystemIdentifier("API", ServerIdentifier.Create());
         }
 
+        public static SystemIdentifier CreateLim()
+        {
+            return new SystemIdentifier("LIM", ServerIdentifier.Create());
+        }
+
+        public static SystemIdentifier CreateWeb()
+        {
+            return new SystemIdentifier("WEB", ServerIdentifier.Create());
+        }
+
         protected bool Equals(SystemIdentifier other)
         {
             return string.Equals(Name, other.Name) && Equals(Server, other.Server);
