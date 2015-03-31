@@ -61,3 +61,65 @@
 
     UserManagement.overrideDataTablesStyling();
 </script>
+
+<div class="box">
+
+    <table id="table"></table>
+
+</div>
+<script>
+
+    $('#table').bootstrapTable({
+        url: '/Customers',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Name',
+            sortable: true
+        }, {
+            field: 'owner',
+            title: 'Owner',
+            sortable: true
+        }, {
+            field: 'createdDate',
+            title: 'Created Date',
+            //formatter: gridProductsFormatter,
+            //events: productGridActionEvents
+        }, {
+            field: 'platformState',
+            title: 'Platform State',
+            //formatter: gridTransactionsFormatter
+        }, {
+            field: 'commercialState',
+            title: 'Commercial State',
+            sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
+    });
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row">' +
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + data.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + data.id + '">Delete</a></div>' +
+                        '</div>'
+        ].join('');
+    };
+
+    UserManagement.overrideDataTablesStyling();
+</script>
