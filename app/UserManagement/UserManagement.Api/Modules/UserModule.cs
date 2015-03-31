@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Repositories;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
