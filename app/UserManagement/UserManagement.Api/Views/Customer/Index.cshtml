@@ -5,6 +5,7 @@
 
 <div class="box">
     
+    <div class="box-header"></div>
     <table id="table"></table>
 
 </div>
@@ -70,6 +71,8 @@
                         '</div>'
         ].join('');
     };
+
+    $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Customers/Add", text: "Add" }).appendTo($("div.box-header"));
 
     UserManagement.overrideDataTablesStyling();
 </script>
