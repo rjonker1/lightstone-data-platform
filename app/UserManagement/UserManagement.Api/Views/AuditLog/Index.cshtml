@@ -7,48 +7,66 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Audit Logs", "An audit log of all changes to the data"))
 
 <div class="box">
-    <table id="auditlog_table" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                @*<th>Id</th>*@
-                <th>Event Date</th>
-                <th>Event Type</th>
-                <th>Entity Name</th>
-                <th>Record Id</th>
-                <th>Field Name</th>
-                <th>Original Value</th>
-                <th>New Value</th>
-                <th>Data Type</th>
-                <th>Commit Id</th>
-                <th>Commit Sequence</th>
-                <th>Commit Version</th>
-            </tr>
-        </thead>
-    </table>
+
+    <div class="box-header"></div>
+    <table id="table"></table>
+
 </div>
 <script>
-    var table = $("#auditlog_table").DataTable({
-        dom: '<"box-header"f>t<"box-footer"lip>r',
-        retrieve: true,
-        processing: true,
-        //serverSide: true,
-        ajax: "/AuditLogs",
-        columns: [
-            // { data: "id", visible: true, "defaultContent": "" },
-            { data: "eventDateUtc", visible: true, "defaultContent": "" },
-            { data: "eventType" },
-            { data: "entityName", "defaultContent": "Unknown" },
-            { data: "recordId" },
-            { data: "fieldName" },
-            { data: "originalValue", "defaultContent": "NULL" },
-            { data: "newValue", "defaultContent": "NULL" },
-            { data: "dataType" },
-            { data: "commitId" },
-            { data: "commitSequence" },
-            { data: "commitVersion" }
-        ],
-        order: [[1, 'desc']]
+
+    $('#table').bootstrapTable({
+        url: '/AuditLogs',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        setOrder: 'desc',
+        columns: [{
+            field: 'eventDateUtc',
+            title: 'Event Date',
+            visible: false
+        }, {
+            field: 'eventType',
+            title: 'Event Type',
+            sortable: true
+        }, {
+            field: 'entityName',
+            title: 'Entity Name'
+        }, {
+            field: 'recordId',
+            title: 'Record Id',
+            sortable: true
+        }, {
+            field: 'fieldName',
+            title: 'Field Name',
+            sortable: true
+        }, {
+            field: 'originalValue',
+            title: 'Original Value',
+        }, {
+            field: 'newValue',
+            title: 'New Value',
+        }, {
+            field: 'dataType',
+            title: 'Data Type',
+            sortable: true
+        }, {
+            field: 'commitId',
+            title: 'Commit Id',
+            sortable: true
+        }, {
+            field: 'commitSequence',
+            title: 'Commit Sequence',
+            sortable: true
+        }, {
+            field: 'commitVersion',
+            title: 'Commit Version',
+            sortable: true
+        }]
     });
-    
+
     UserManagement.overrideDataTablesStyling();
 </script>
