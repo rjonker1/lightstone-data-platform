@@ -26,7 +26,7 @@ namespace Billing.Domain.Entities.DemoEntities
             }
         }
 
-        //Used for AutoMapper (Flatten structure for maaping)
+        //Used for AutoMapper (Flatten structure for mapping)
         [DoNotMap]
         public virtual IEnumerable<TransactionMocks> Transactions
         {

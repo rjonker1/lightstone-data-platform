@@ -2,61 +2,67 @@
 
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Clients", "All clients"))
 
+
 <div class="box">
-    <table id="client_table" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Owner
-                </th>
-                <th>
-                    Created Date
-                </th>
-                <th>
-                    Platform State
-                </th>
-                <th>
-                    Commercial State
-                </th>
-                <th>
-                    <i id="ctActionIcon" class="fa fa-bolt"></i>
-                </th>
-            </tr>
-        </thead>
-    </table>
+    
+    <div class="box-header"></div>
+    <table id="table"></table>
+
 </div>
 <script>
-    var table = $("#client_table").dataTable({
-        dom: '<"box-header"f>t<"box-footer"lip>r',
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        processing: true,
-        serverSide: true,
-        ajax: "/Clients",
-        columns: [
-            { data: "id", visible: false },
-            { data: "name" },
-            { data: "owner" },
-            { data: "createdDate" },
-            { data: "PlatformState" },
-            { data: "CommercialState" },
-            {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + data.id + '">Delete</a></div>' +
-                        '</div>';
-                }
-            }
-        ]
+
+    $('#table').bootstrapTable({
+        url: '/Clients',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Name',
+            sortable: true
+        }, {
+            field: 'owner',
+            title: 'Owner',
+            sortable: true
+        }, {
+            field: 'createdDate',
+            title: 'Created Date',
+            //formatter: gridProductsFormatter,
+            //events: productGridActionEvents
+        }, {
+            field: 'platformState',
+            title: 'Platform State',
+            //formatter: gridTransactionsFormatter
+        }, {
+            field: 'commercialState',
+            title: 'Commercial State',
+            sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
     });
-    
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row">' +
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Clients/' + row.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Clients/Delete/' + row.id + '">Delete</a></div>' +
+                        '</div>'
+        ].join('');
+    };
+
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Clients/Add", text: "Add" }).appendTo($("div.box-header"));
 
     UserManagement.overrideDataTablesStyling();

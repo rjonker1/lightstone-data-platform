@@ -4,67 +4,69 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Users", ""))
 
 <div class="box">
-    <table id="users_table" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Username
-                </th>
-                <th>
-                    First Name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    User Type
-                </th>
-                <th>
-                    Role
-                </th>
-                <th>
-                    Customers
-                </th>
-                <th>
-                    Clients
-                </th>
-                <th>
-                    <i id="ctActionIcon" class="fa fa-bolt"></i>
-                </th>
-            </tr>
-        </thead>
-    </table>
+
+    <div class="box-header"></div>
+    <table id="table"></table>
+
 </div>
 <script>
-    var table = $("#users_table").dataTable({
-        dom: '<"box-header"f>t<"box-footer"lip>r',
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        processing: true,
-        serverSide: true,
-        ajax: "/Users",
-        columns: [
-            { data: "id", visible: false },
-            { data: "userName" },
-            { data: "firstName" },
-            { data: "lastName" },
-            { data: "userType" },
-            { data: "role" },
-            { data: "customers" },
-            { data: "clients" },
-            {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Users/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + data.id + '">Delete</a></div>' +
-                        '</div>';
-                }
-            }
-        ]
+
+    $('#table').bootstrapTable({
+        url: '/Users',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'userName',
+            title: 'Username',
+            sortable: true
+        }, {
+            field: 'firstName',
+            title: 'First Name'
+        }, {
+            field: 'lastName',
+            title: 'Last Name',
+            sortable: true
+        }, {
+            field: 'userType',
+            title: 'User Type',
+            sortable: true
+        }, {
+            field: 'role',
+            title: 'Role',
+        }, {
+            field: 'customers',
+            title: 'Customers',
+            //formatter: gridTransactionsFormatter
+        }, {
+            field: 'clients',
+            title: 'Clients',
+            sortable: true
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
     });
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row">' +
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
+                        '</div>'
+        ].join('');
+    };
 
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Users/Add", text: "Add" }).appendTo($("div.box-header"));
 

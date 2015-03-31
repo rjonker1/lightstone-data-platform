@@ -4,47 +4,50 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Contracts", ""))
 
 <div class="box">
-    <table id="contracts_table" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    <i id="ctActionIcon" class="fa fa-bolt"></i>
-                </th>
-            </tr>
-        </thead>
-    </table>
+
+    <div class="box-header"></div>
+    <table id="table"></table>
+
 </div>
 <script>
-    var table = $("#contracts_table").dataTable({
-        dom: '<"box-header"f>t<"box-footer"lip>r',
-        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        processing: true,
-        serverSide: true,
-        ajax: "/Contracts",
-        columns: [
-             { data: "id", visible: false },
-            { data: "name" },
-            { data: "description" },
-            {
-                data: null,
-                render: function (data, type, full, meta) {
-                    return '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + data.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + data.id + '">Delete</a></div>' +
-                        '</div>';
-                }
-            }
-        ]
+
+    $('#table').bootstrapTable({
+        url: '/Contracts',
+        search: true,
+        showRefresh: true,
+        showColumns: true,
+        pagination: true,
+        pageNumber: 1,
+        pageSize: 10,
+        pageList: [10, 25, 50, 100, 'All'],
+        columns: [{
+            field: 'id',
+            title: 'Item ID',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Name',
+            sortable: true
+        }, {
+            field: 'description',
+            title: 'Description'
+        }, {
+            field: '',
+            title: '',
+            formatter: gridActionFormatter
+
+        }]
     });
+
+    function gridActionFormatter(value, row, index) {
+
+        return [
+            '<div class="row">' +
+                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Contracts/' + row.id + '">Edit</a></div>' +
+                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Contracts/Delete/' + row.id + '">Delete</a></div>' +
+                        '</div>'
+        ].join('');
+    };
 
     $("<a>", { "class": "btn btn-default entity-add pull-left", href: "#/Contracts/Add", text: "Add" }).appendTo($("div.box-header"));
 

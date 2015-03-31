@@ -53,9 +53,11 @@
 
             <label class="control-label col-lg-4">Debit Order Date</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
+                <div class="input-group date">
+                    <span class="input-group-addon glyphicon glyphicon-calendar" id="basic-addon1"></span>
+                    <div aria-describedby="basic-addon1">
+                        @Html.TextBoxFor(x => x.BillingDebitOrderDate, new { @class = "form-control", placeholder = "" })
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
