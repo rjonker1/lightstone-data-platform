@@ -23,7 +23,8 @@ namespace UserManagement.Api.Modules
             Get["/Contracts"] = _ =>
             {
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = (IEnumerable<ContractDto>)Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(contracts.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto =
+                    (IEnumerable<ContractDto>) Mapper.Map<IEnumerable<Contract>, IEnumerable<ContractDto>>(contracts);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });

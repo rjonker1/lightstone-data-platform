@@ -20,8 +20,15 @@ namespace UserManagement.Api.Modules
         {
             Get["/Users"] = _ =>
             {
+                var search = Context.Request.Query["search"];
+                var offset = Context.Request.Query["offset"];
+                var limit = Context.Request.Query["limit"];
+
+                if (offset == null) offset = 0;
+                if (limit == null) limit = 10;
+
                 var model = this.Bind<DataTablesViewModel>();
-                var dto = (IEnumerable<UserDto>)Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+                var dto = (IEnumerable<UserDto>) Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
                 return Negotiate
                     .WithView("Index")
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
