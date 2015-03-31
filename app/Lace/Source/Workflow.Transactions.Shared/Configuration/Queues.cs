@@ -38,8 +38,8 @@ namespace Workflow.Transactions.Shared.Configuration
 
                     new BindToQueue(ConfigureTransactionReadQueues.ForHost(),
                         string.Empty,
-                        ConfigureDataProviderExchangesToBind.ForReadHost().ExchangeName,
-                        ConfigureDataProviderExchangesToBind.ForReadHost().RoutingKey)
+                        ConfigureTransactionsExchangesToBind.ForReadHost().ExchangeName,
+                        ConfigureTransactionsExchangesToBind.ForReadHost().RoutingKey)
                 };
             }
         }
@@ -81,11 +81,11 @@ namespace Workflow.Transactions.Shared.Configuration
                 QueueFunction.ReadQueue, QueueType.Host);
 
         public static Func<IAmAQueue> ForAudit =
-            () => new Queue("DataPlatform.Transactions.Read.Audit", "DataPlatform.DataProviders.Read.Audit",
+            () => new Queue("DataPlatform.Transactions.Read.Audit", "DataPlatform.Transactions.Read.Audit",
                 string.Empty, ExchangeType.Fanout, QueueFunction.ReadQueue, QueueType.Audit);
 
         public static Func<IAmAQueue> ForErrors =
-            () => new Queue("DataPlatform.Transactions.Read.Error", "DataPlatform.DataProviders.Read.Error",
+            () => new Queue("DataPlatform.Transactions.Read.Error", "DataPlatform.Transactions.Read.Error",
                 string.Empty, ExchangeType.Fanout, QueueFunction.ReadQueue, QueueType.Error);
 
         public static Func<IAmAQueue> ForRetries =
@@ -93,7 +93,8 @@ namespace Workflow.Transactions.Shared.Configuration
                 "DataPlatform.Transactions.Host.Read.Retries", string.Empty, ExchangeType.Fanout,
                 QueueFunction.ReadQueue, QueueType.Retries);
     }
-    public class ConfigureDataProviderExchangesToBind
+
+    public class ConfigureTransactionsExchangesToBind
     {
         public static Func<IAmAnExchange> ForReadHost =
             () =>
@@ -104,12 +105,15 @@ namespace Workflow.Transactions.Shared.Configuration
     {
         public static Func<IEnumerable<IAmAnExchange>> ForEvents = () =>
         {
-            //var type = typeof (Lace.Shared.Monitoring.Messages.Events.IDataProviderEvent);
             var type = typeof (DataPlatform.Shared.Messaging.IPublishableMessage);
             var exchanges = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(w => type.IsAssignableFrom(w) && w.IsClass)
-                .Select(s => new Exchange(s.FullName, ExchangeType.Fanout, string.Empty));
+                .Select(s => new Exchange(s.FullName, ExchangeType.Fanout, string.Empty)).ToList();
+
+            exchanges.Add(new Exchange(ConfigureTransactionsExchangesToBind.ForReadHost().ExchangeName,
+                ConfigureTransactionsExchangesToBind.ForReadHost().ExchangeType,
+                ConfigureTransactionsExchangesToBind.ForReadHost().RoutingKey));
 
             return exchanges;
         };

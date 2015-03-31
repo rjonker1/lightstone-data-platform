@@ -40,7 +40,7 @@ namespace Worflow.Transactions.Service.Write.Host
         {
             return Wireup.Init()
                 .LogToConsoleWindow()
-                .UsingSqlPersistence("workflow/dataprovider/database/write")
+                .UsingSqlPersistence("workflow/transactions/database/write")
                 .WithDialect(new MsSqlDialect())
                 .InitializeStorageEngine()
                 .UsingBinarySerialization()

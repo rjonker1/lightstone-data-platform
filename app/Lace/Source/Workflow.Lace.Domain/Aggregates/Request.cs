@@ -34,7 +34,6 @@ namespace Workflow.Lace.Domain.Aggregates
             RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection,
                 connectionType,
                 state, action));
-            //RaiseEvent(new RequestReceived(requestId, date));
         }
 
         public void RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,

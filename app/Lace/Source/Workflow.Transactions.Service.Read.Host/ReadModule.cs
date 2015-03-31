@@ -18,7 +18,7 @@ namespace Workflow.Transactions.Service.Read.Host
                 c =>
                     new Repository(
                         new SqlConnection(
-                            ConfigurationManager.ConnectionStrings["workflow/dataprovider/database/read"]
+                            ConfigurationManager.ConnectionStrings["workflow/transactions/database/read"]
                                 .ConnectionString), new RepositoryMapper(new MappingForTypes())))
                 .As<IRepository>();
         }

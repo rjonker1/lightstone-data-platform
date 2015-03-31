@@ -45,9 +45,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.843, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.854, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.Messages.1.0.0.852\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.854\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -110,6 +110,10 @@
     <ProjectReference Include="..\Workflow.Transactions.Shared\Workflow.Transactions.Shared.csproj">
       <Project>{3047f71b-9f70-4824-b4e4-4f00bc0cd1c5}</Project>
       <Name>Workflow.Transactions.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Transactions.Write.Service\Workflow.Transactions.Write.Service.csproj">
+      <Project>{71008eb4-33ea-44a9-a7ad-295b70aa11ff}</Project>
+      <Name>Workflow.Transactions.Write.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

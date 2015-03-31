@@ -42,9 +42,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.846, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.854, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.846\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.854\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -108,6 +108,10 @@
     <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
       <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
       <Name>Workflow.Lace</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Transactions.Read.Service\Workflow.Transactions.Read.Service.csproj">
+      <Project>{9d8e33d3-c48b-4320-8cfb-061704ca43e8}</Project>
+      <Name>Workflow.Transactions.Read.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Transactions.Shared\Workflow.Transactions.Shared.csproj">
       <Project>{3047f71b-9f70-4824-b4e4-4f00bc0cd1c5}</Project>
