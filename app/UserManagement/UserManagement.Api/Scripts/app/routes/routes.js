@@ -265,7 +265,6 @@ function initializeLookupRoutes(sammy) {
         //context.load('/Lookups/' + context.params.type + '/' + , { dataType: 'html', cache: false }).swap();
     });
     sammy.get('/ValueEntities/Delete/:id', function (context) {
-
         $.ajax({
             type: "DELETE",
             url: '/ValueEntities/' + context.params.id,

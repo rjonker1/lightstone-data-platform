@@ -17,104 +17,48 @@
 @Html.Partial("Shared/PageHeader", pageHeadingViewModel)
 
 
-@*<script>
-    $(function () {
-        //var $test = $("#rolesSelect_chosen").on("click", function() {
-        //    alert("test");
-        //}); 
-        //$test.click();
+<script>
+    
+    var userRoles = [];
+    var internalRoles = [];
 
-
-        var $admin = $("option:contains('Admin')");
-        var $adminLi = $("li:contains('Admin')");
-        //console.log($test);
-        $("#userTypeSelect").on('change', function () {
-            var selected = $("#userTypeSelect option:selected").text();
-            if (selected === "User") {
-                //$admin.hide();
-                //$adminLi.hide();
-
-                test();
+    @foreach (SelectListItem userItem in ViewBag.UserTypes.Value)
+    {
+        foreach (SelectListItem roleItem in ViewBag.Roles.Value)
+        {
+            if (userItem.Text == "User" && (roleItem.Text == "Owner" || roleItem.Text == "SuperUser" || roleItem.Text == "User"))
+            {
+                @:userRoles.push({ 'id': 'test', 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'user' });
             }
 
+            if (userItem.Text == "Internal" && (roleItem.Text == "Admin" || roleItem.Text == "AccountManager" || roleItem.Text == "ProductManager" || roleItem.Text == "Support"))
+            {
+                @:internalRoles.push({ 'label': '@roleItem.Text', 'value': '@roleItem.Value', 'type': 'internal' });
+            }
+        }
+    }
 
-
-        });
-
-        function test() {
-            $("#userTypeSelect option:contains('Admin')").hide();
-            
-            console.log($("#rolesSelect_chosen .chosen-drop .chosen-results"));
+    $('#userTypeSelect').on("change", function () {
+        $('#rolesSelect').empty();
+        if ($('#userTypeSelect option:selected').text() == 'Internal') {
+            for (var role in internalRoles) {
+                $('#rolesSelect').append($('<option>', { value: internalRoles[role].value, text: internalRoles[role].label }));
+            }
+            $("#rolesSelect").trigger("chosen:updated");
+        }
+        if ($('#userTypeSelect option:selected').text() == 'User') {
+            for (var role in userRoles) {
+                $('#rolesSelect').append($('<option>', { value: userRoles[role].value, text: userRoles[role].label }));
+            }
+            $("#rolesSelect").trigger("chosen:updated");
         }
     });
 
-    $('#rolesSelect').autocomplete({
-        //source: function (request, response) {
-        //    var $container = $(this.element).closest('div');
-        //    var type = $container.data('type');
-        //    //var $ul = $container.find('ul');
-        //    //var $ul = $("<ul>", {
-        //    //    text: "",
-        //    //    "class": "custom-colorize-changer"
-        //    //}).appendTo($container);
-        //    $.ajax({
-        //        url: "/NamedEntities/" + type + "/" + request.term + "/",
-        //        dataType: "json",
-        //        beforeSend: function () {
-        //        },
-        //        success: function (data) {
-        //            response($.map(data.dto, function (item) {
-        //                return {
-        //                    label: item.name,
-        //                    value: item.id
-        //                };
-        //            }));
-        //        }
-        //    });
-        //},
-        select: function (event, ui) {
-
-            console.log(ui);
-
-            //if ($('#' + ui.item.value).length) {
-            //    return;
-            //}
-
-            //var $container = $(this).closest('div');
-            //var $listGroup = $container.find('.list-group');
-
-            //var $item = $("<div>", { "class": "list-group-item" }).appendTo($listGroup);
-
-            //var $left = $("<div>", { "class": "pull-left" }).appendTo($item);
-            //var $remove = $("<a>", { "class": "btn btn-danger btn-xs close-box", href: "javascript:;" }).appendTo($left);
-            //var $removeIcon = $("<i>", { "class": "fa fa-times" }).appendTo($remove);
-
-            //var index = $listGroup.children('li').length;
-
-            //var $id = $("<input>", {
-            //    id: ui.item.value,
-            //    name: "ClientId[" + index + "]",
-            //    value: ui.item.value,
-            //    type: 'hidden'
-            //}).appendTo($item);
-
-            //var $label = $("<label>", { text: ui.item.label }).appendTo($item);
-
-            //var $value = $("<input>", {
-            //    name: "UserAlias[" + index + "]",
-            //    value: "",
-            //    "class": "form-control"
-            //}).appendTo($item);
-        },
-        close: function (event, ui) {
-            $(this).val('');
-        }
-    });
-    
-</script>*@
-
+</script>
 
 <div class="box">
+
+
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("User Info", "", "glyphicon glyphicon-user", Model))
     <form action="@url" method="@method" class="form-horizontal">
         <div class="box-body">
@@ -224,33 +168,9 @@
             <div class="form-group">
 
                 <label class="control-label col-lg-4">Roles</label>
-                <div class="input-group col-lg-2 entity-autocomplete" data-url="/NamedEntities">
-                    <select id="rolesSelect" name="RoleIds" data-placeholder="Type to search & add roles" multiple class="chosen-select">
-                        @foreach (SelectListItem item in ViewBag.Roles.Value)
-                        {
-
-                            var isSelected = Model.RoleIds != null && Model.RoleIds.Contains(new Guid(item.Value));
-
-
-                            if (@userTypeCheck == "Internal" && (item.Text == "Admin" || item.Text == "AccountManager" || item.Text == "ProductManager" || item.Text == "Support"))
-                            {
-                                <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                            }
-
-                            if (@userTypeCheck == "User" && (item.Text == "Owner" || item.Text == "SuperUser" || item.Text == "User"))
-                            {
-                                <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                            }
-
-                            if (@userTypeCheck == "")
-                            {
-                                <option id="@item.Text+_test" selected="@isSelected" value="@item.Value">@item.Text</option>
-                            }
-
-                        }
+                <div id="roles" class="input-group col-lg-2">
+                    <select id="rolesSelect" name="RoleIds" data-placeholder="Select roles" multiple class="chosen-select">
                     </select>
-
-
                 </div>
                 <div class="col-lg-6">
                     @Html.ValidationMessageFor(x => x.RoleIds)

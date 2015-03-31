@@ -25,14 +25,15 @@ namespace UserManagement.Api.Modules
                 var model = this.Bind<DataTablesViewModel>();
                 var typeName = parameters.type.ToString();
                 var type = Type.GetType(typeName);
-                var valueEntities = entityRetriever.GetValueEntities(type, Context.Request.Query["search[value]"].Value,
-                    model.Start, model.Length);
-                var dto = (DataTablesViewModel)Mapper.Map<PagedList<ValueEntity>, DataTablesViewModel>(valueEntities, model);
+                var valueEntities = entityRetriever.GetValueEntities(type);//, Context.Request.Query["search[value]"].Value,
+                    //model.Start, model.Length);
+                //var dto = (DataTablesViewModel)Mapper.Map<PagedList<ValueEntity>, DataTablesViewModel>(valueEntities, model);
 
                 return Negotiate
                     .WithView("Index")
                     .WithModel(new LookupViewModel(type))
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), dto);
+                    //.WithMediaRangeModel(MediaRange.FromString("application/json"), dto);
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {data = valueEntities});
             };
 
             Get["/ValueEntities/Add/{type}"] = parameters =>
