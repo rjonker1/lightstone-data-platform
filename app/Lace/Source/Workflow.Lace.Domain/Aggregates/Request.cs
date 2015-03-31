@@ -5,7 +5,6 @@ using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
 using Workflow.Billing.Messages;
-using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
 
 namespace Workflow.Lace.Domain.Aggregates

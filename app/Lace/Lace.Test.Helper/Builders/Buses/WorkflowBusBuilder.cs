@@ -12,6 +12,4 @@ namespace Lace.Test.Helper.Builders.Buses
             return new SendWorkflowCommands(bus,requestId);
         }
     }
-
-  
 }
