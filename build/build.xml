@@ -285,7 +285,6 @@
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.pdb" to="lib\net45"/>
-        <include pattern="Castle.Windsor.dll" to="lib\net45" />
         <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
         <include pattern="ServiceStack.Interfaces.dll" to="lib\net45" />
         <include pattern="ServiceStack.Redis.dll" to="lib\net45" />
