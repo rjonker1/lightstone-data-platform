@@ -45,10 +45,10 @@
                 config: {
                     title: 'package-maintenance',
                     templateUrl: 'app/packageMaintenance/packageMaintenanceCreate.html',
-                    settings: {
-                        nav: 3,
-                        content: '<i class="fa fa-gear"></i> Package Maintenance'
-                    }
+                    //settings: {
+                    //    nav: 3,
+                    //    content: '<i class="fa fa-gear"></i> Package Maintenance'
+                    //}
                 }
             }, {
                 url: '/package-maintenance-edit/:id/:version',
