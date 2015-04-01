@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
@@ -12,6 +13,7 @@ using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -22,11 +24,11 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
     {
         private HpiStandardQueryResponse _response;
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Ivid;
 
-        public CallIvidDataProvider(ILaceRequest request)
+        public CallIvidDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -57,7 +59,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividWebService.IvidRequestMessageProperty;
 
-                    var request = new IvidRequestMessage(_request)
+                    var request = new IvidRequestMessage(_request.GetFromRequest<IAmVehicleRequest>().User, _request.GetFromRequest<IAmVehicleRequest>().Vehicle, _request.GetFromRequest<IAmVehicleRequest>().Package.Name)
                         .HpiQueryRequest;
 
                     monitoring.Send(CommandType.Configuration, request, null);

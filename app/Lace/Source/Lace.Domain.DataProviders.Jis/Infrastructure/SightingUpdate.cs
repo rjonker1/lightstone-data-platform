@@ -1,4 +1,4 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Jis.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
 
@@ -9,10 +9,10 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         public SightingUpdateResult SightingUpdateResult { get; private set; }
 
         private SightingUpdateRequest _sightingUpdate;
-        private readonly ILaceRequest _request;
+        private readonly IHaveUserInformation _request;
         private readonly DataStoreResult _response;
 
-        public SightingUpdate(ILaceRequest request,  DataStoreResult response)
+        public SightingUpdate(IHaveUserInformation request,  DataStoreResult response)
         {
             _request = request;
             _response = response;
@@ -31,7 +31,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
         public IUpdateSighting Update(JisWsInterfaceSoapClient jisClient, SessionManagementResult session)
         {
-            SightingUpdateResult = jisClient.UpdateSighting(session.Id, _sightingUpdate, _request.User.UserName);
+            SightingUpdateResult = jisClient.UpdateSighting(session.Id, _sightingUpdate, _request.UserName);
             return this;
         }
     }

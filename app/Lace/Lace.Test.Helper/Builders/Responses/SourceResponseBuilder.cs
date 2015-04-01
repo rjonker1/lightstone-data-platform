@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Test.Helper.Fakes.Responses;
-using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
@@ -49,13 +48,13 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber();
         }
 
-        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(IProvideCarInformationForRequest request)
+        public IRetrieveValuationFromMetrics ForLightstoneMetricValuationResponse(IHaveCarInformation request)
         {
 
             return FakeLighstoneRetrievalData.GetValuationFromMetrics(request);
         }
 
-        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ILaceRequest request)
+        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ICollection<IPointToLaceRequest> request)
         {
             return FakeLighstoneRetrievalData.GetCarInformation(request);
         }

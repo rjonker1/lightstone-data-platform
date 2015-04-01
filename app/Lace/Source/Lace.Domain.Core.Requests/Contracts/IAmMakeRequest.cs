@@ -1,13 +1,6 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
-using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
-
-namespace Lace.Domain.Core.Requests.Contracts
+﻿namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmMakeRequest : IPointToLaceRequest
+    public interface IAmMakeRequest : IAmVehicleRequest
     {
-        IProvideUserInformationForRequest User { get; }
-        IProvideVehicleInformationForRequest Vehicle { get; }
-        IProvideRequestAggregation Aggregation { get; }
-        IPackage Package { get; }
     }
 }

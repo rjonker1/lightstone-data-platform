@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -33,35 +34,38 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
         {
             _log.DebugFormat("Receiving request into entry point. Request {0}", request);
             try
             {
-                _monitoring = new SendEntryPointCommands(_bus, request.RequestAggregation.AggregateId,
+                if (request.First().Aggregation.AggregateId == Guid.Empty)
+                    throw new Exception("Request Id for Aggregation is required. Cannot complete request");
+
+                _monitoring = new SendEntryPointCommands(_bus, request.First().Aggregation.AggregateId,
                     (int) ExecutionOrder.First);
 
                 _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
                 _monitoring.Begin(request, _stopWatch);
 
-                _sourceChain = new CreateSourceChain(request.Package);
+                _sourceChain = new CreateSourceChain(request.First().Package);
                 _sourceChain.Build();
 
                 if (_sourceChain.SourceChain == null)
                 {
-                    _log.ErrorFormat("Source chain could not be built for action {0}", request.Package.Action.Name);
+                    _log.ErrorFormat("Source chain could not be built for action {0}", request.First().Package.Action);
                     _monitoring.Send(CommandType.Fault, request,
                         new
                         {
                             ChainBuilderError =
                                 string.Format("Source chain could not be built for action {0}",
-                                    request.Package.Action.Name)
+                                    request.First().Package.Action)
                         });
                     _monitoring.End(request, _stopWatch);
                     return EmptyResponse;
                 }
 
-                if (_checkForDuplicateRequests.IsRequestDuplicated(request))
+                if (_checkForDuplicateRequests.IsRequestDuplicated(request.First()))
                 {
                     _monitoring.Send(CommandType.Fault, request,
                         new

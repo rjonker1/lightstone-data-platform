@@ -17,10 +17,10 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
     public class SignioDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
 
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public SignioDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public SignioDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -40,7 +40,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.SignioDecryptDriversLicense);
-                _monitoring.Begin(new {_request.DriversLicense}, stopWatch);
+
+                _monitoring.Begin(new {_request}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);

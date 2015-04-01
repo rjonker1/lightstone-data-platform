@@ -66,9 +66,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.802\lib\net45\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain.Core.Contracts">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.802\lib\net45\PackageBuilder.Domain.Core.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="PackageBuilder.Domain.Entities.Enums">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.802\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
     </Reference>
@@ -145,6 +142,10 @@
     <ProjectReference Include="..\Lace.Domain.DataProviders.Core\Lace.Domain.DataProviders.Core.csproj">
       <Project>{f9080e76-2491-4361-a915-e87262d900bf}</Project>
       <Name>Lace.Domain.DataProviders.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj">
       <Project>{c275d974-7e8e-440d-b244-b9db85e839b1}</Project>

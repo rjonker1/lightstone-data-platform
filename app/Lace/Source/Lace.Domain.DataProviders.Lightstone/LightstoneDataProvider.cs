@@ -19,10 +19,10 @@ namespace Lace.Domain.DataProviders.Lightstone
 {
     public class LightstoneDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public LightstoneDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public LightstoneDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.LightstoneAuto);
-                _monitoring.Begin(new { _request.User, _request.Vehicle, _request.Context }, stopWatch);
+                _monitoring.Begin(new {_request}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
                     new CallLightstoneDataProvider(_request,
@@ -54,7 +54,8 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 _monitoring.End(response, stopWatch);
 
-                if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
+                if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
+                    response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 

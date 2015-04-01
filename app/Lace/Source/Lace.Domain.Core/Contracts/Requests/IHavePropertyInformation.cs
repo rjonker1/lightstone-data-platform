@@ -3,7 +3,7 @@
     /// <summary>
     /// ReturnProperties Input Data
     /// </summary>
-    public interface IProvidePropertyInformationForRequest
+    public interface IHavePropertyInformation
     {
         /// <summary>
         /// Is a unique sequence of characters that is given to a user of the system and this is used to identify that user.

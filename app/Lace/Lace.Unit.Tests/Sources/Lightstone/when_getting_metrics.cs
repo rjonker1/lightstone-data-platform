@@ -14,7 +14,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
     {
         private readonly IReadOnlyRepository<Metric> _repository;
         private readonly IGetMetrics _getMetrics;
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
 
         public when_getting_metrics()
         {

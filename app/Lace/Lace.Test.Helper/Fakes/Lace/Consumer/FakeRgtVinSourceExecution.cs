@@ -16,11 +16,11 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
     public class FakeRgtVinSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly IHandleDataProviderSourceCall _handleServiceCall;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public FakeRgtVinSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public FakeRgtVinSourceExecution(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {

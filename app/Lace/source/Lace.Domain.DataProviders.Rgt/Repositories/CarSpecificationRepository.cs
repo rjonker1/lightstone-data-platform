@@ -25,7 +25,7 @@ namespace Lace.Domain.DataProviders.Rgt.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<CarSpecification> FindWithRequest(IProvideCarInformationForRequest request)
+        public IEnumerable<CarSpecification> FindWithRequest(IHaveCarInformation request)
         {
             using (_connection)
             using (_cacheClient)

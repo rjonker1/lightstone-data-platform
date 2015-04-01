@@ -16,7 +16,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 {
     public class when_initializing_lace_handlers_for_signio_drivers_license_decryption : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly IExecuteTheDataProviderSource _dataProvider;

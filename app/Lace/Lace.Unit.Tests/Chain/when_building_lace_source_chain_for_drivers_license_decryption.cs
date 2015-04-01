@@ -8,6 +8,7 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Scans;
 using Lace.Test.Helper.Fakes.Lace;
 using Lace.Test.Helper.Fakes.Lace.Builder;
@@ -20,16 +21,16 @@ namespace Lace.Unit.Tests.Chain
     {
         private IBootstrap _initialize;
 
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IBus _bus;
-        private Dictionary<Type, Func<ILaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
+        private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_building_lace_source_chain_for_drivers_license_decryption()
         {
             _bus = Lace.Test.Helper.Builders.Buses.BusFactory.MonitoringBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
-            _buildSourceChain = new FakeSourceChain(_request.Package.Action);
+            _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IAmDriversLicenseRequest>().Package);
             _buildSourceChain.Build();
         }
 

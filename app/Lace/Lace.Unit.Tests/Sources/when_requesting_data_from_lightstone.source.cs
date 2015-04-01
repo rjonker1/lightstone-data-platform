@@ -20,7 +20,7 @@ namespace Lace.Unit.Tests.Sources
     public class when_requesting_data_from_lightstone_source : Specification
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _callTheSource;

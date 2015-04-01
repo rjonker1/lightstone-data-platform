@@ -17,7 +17,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 {
     public class when_consuming_audatex_data_provider : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICollection<IPointToLaceProvider> _response;
         private AudatexDataProvider _consumer;
@@ -26,7 +26,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         public when_consuming_audatex_data_provider()
         {
             _monitoring = MonitoringBusBuilder.ForAudatexCommands(Guid.NewGuid());
-            _request = new LicensePlateNumberAudatexOnlyRequest();
+            _request = new[] {new LicensePlateNumberAudatexOnlyRequest()};
             _response = new LaceResponseBuilder().WithIvidResponseHandledAndVin12();
         }
 

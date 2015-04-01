@@ -1,53 +1,15 @@
-﻿using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
-using PackageBuilder.TestObjects.Mothers;
+﻿using System;
+using Lace.Domain.Core.Requests.Contracts;
+using Lace.Test.Helper.Mothers.Packages;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Builders.Scans
 {
     public class DriversLicenseSourcePackage
     {
-        public static IPackage DriversLicenseDecryptionPackage()
+        public static IAmPackageForRequest DriversLicenseDecryptionPackage()
         {
-
-            return WritePackageMother.LicenseScanPackage;
+            return new DriversLicensePackage(new[] {DataProviderName.SignioDecryptDriversLicense}, Guid.NewGuid());
         }
-
-        //private static PackageBuilder.Domain.Entities.DataProviders.WriteModels.DataProvider SignioDriversLicenseDecryption
-        //{
-        //    get
-        //    {
-        //        return new WriteDataProviderBuilder()
-        //            .With(DataProviderName.SignioDecryptDriversLicense)
-        //            .With("Signio")
-        //            .With(10d)
-        //            .With(typeof(IProvideDataFromSignioDriversLicenseDecryption))
-        //            .Build();
-        //    }
-        //}
-        //private static Package LicensePlateSearchPackage
-        //{
-        //    get
-        //    {
-        //        return new WritePackageBuilder()
-        //            .With("Drivers License")
-        //            .With(10d, 20d)
-        //            .With(DriversLicenseDecryptionAction)
-        //            .With(IndustryMother.Finance, IndustryMother.Automotive)
-        //            .With(StateMother.Published)
-        //            .With(0.1m)
-        //            .With(DateTime.Now)
-        //            .With(SignioDriversLicenseDecryption)
-        //            .Build();
-        //    }
-        //}
-
-        //public static IAction DriversLicenseDecryptionAction
-        //{
-        //    get
-        //    {
-        //        return new ActionBuilder()
-        //                    .With("Drivers License")
-        //                    .Build();
-        //    }
-        //}
     }
 }

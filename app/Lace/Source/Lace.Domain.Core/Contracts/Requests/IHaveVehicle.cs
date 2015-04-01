@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IProvideVehicleInformationForRequest
+    public interface IHaveVehicle
     {
         string EngineNo { get; }
         string VinOrChassis { get; }

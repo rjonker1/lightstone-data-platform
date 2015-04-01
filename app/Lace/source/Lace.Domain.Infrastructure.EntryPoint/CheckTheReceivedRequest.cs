@@ -5,7 +5,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 {
     public class CheckTheReceivedRequest : ICheckForDuplicateRequests
     {
-        public bool IsRequestDuplicated(ILaceRequest request)
+        public bool IsRequestDuplicated(IPointToLaceRequest request)
         {
             return false;
         }

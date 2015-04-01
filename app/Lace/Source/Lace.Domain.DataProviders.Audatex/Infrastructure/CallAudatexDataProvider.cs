@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -11,6 +10,7 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -21,11 +21,11 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
     {
         private readonly ILog _log;
         private GetDataResult _response;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Audatex;
 
-        public CallAudatexDataProvider(ILaceRequest request)
+        public CallAudatexDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -100,7 +100,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
-            var transformer = new TransformAudatexResponse(_response, response, _request);
+            var transformer = new TransformAudatexResponse(_response, response, _request.GetFromRequest<IHaveVehicle>());
 
             if (transformer.Continue)
             {

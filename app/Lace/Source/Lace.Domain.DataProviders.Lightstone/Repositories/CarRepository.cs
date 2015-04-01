@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Repositories
             _cacheClient = cacheClient;
         }
 
-        public IEnumerable<Car> FindAllWithRequest(IProvideCarInformationForRequest request)
+        public IEnumerable<Car> FindAllWithRequest(IHaveCarInformation request)
         {
             throw new NotImplementedException();
         }

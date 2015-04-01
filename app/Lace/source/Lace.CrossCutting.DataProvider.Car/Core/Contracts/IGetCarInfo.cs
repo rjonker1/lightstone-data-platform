@@ -7,6 +7,6 @@ namespace Lace.CrossCutting.DataProvider.Car.Core.Contracts
     public interface IGetCarInfo
     {
         IEnumerable<CarInfo> Cars { get; }
-        void GetCarInfo(IProvideCarInformationForRequest request);
+        void GetCarInfo(IHaveCarInformation request);
     }
 }

@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
     public interface IGetMakes
     {
         IEnumerable<Make> Makes { get; }
-        void GetMakes(IProvideCarInformationForRequest request);
+        void GetMakes(IHaveCarInformation request);
     }
 }

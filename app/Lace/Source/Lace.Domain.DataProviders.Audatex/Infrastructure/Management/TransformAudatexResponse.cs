@@ -28,14 +28,14 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
         }
 
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ILaceRequest _request;
+        private readonly IHaveVehicle _request;
 
         private readonly string _manufacturer;
         private readonly int _warrantyYear;
         private readonly bool _canApplyRepairInfo;
 
         public TransformAudatexResponse(GetDataResult audatexResponse, ICollection<IPointToLaceProvider> response,
-            ILaceRequest request)
+             IHaveVehicle request)
         {
             Continue = audatexResponse != null && !string.IsNullOrEmpty(audatexResponse.MessageEnvelope);
             Result = new AudatexResponse(new List<IProvideAccidentClaim>());
@@ -56,9 +56,9 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Management
 
             foreach (var f in HistoryCheckResponses)
             {
-                var compare = new CompareRequestAndResponse(_request.Vehicle.Vin, _manufacturer,
+                var compare = new CompareRequestAndResponse(_request.Vin, _manufacturer,
                     f.VIN,
-                    f.Manufacturer, _request.Vehicle.LicenceNo, f.Registration, _canApplyRepairInfo);
+                    f.Manufacturer, _request.LicenceNo, f.Registration, _canApplyRepairInfo);
 
                 if (!compare.ShowClaim(_warrantyYear, f.CreationDate))
                     continue;

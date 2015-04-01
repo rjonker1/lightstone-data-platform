@@ -16,10 +16,10 @@ namespace Lace.Domain.DataProviders.Audatex
 {
     public class AudatexDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public AudatexDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public AudatexDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.Audatex
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Audatex);
                 _monitoring.Begin(
-                    new {_request.Vehicle, IvidResponse = response.OfType<IProvideDataFromIvid>().First()}, stopWatch);
+                    new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);

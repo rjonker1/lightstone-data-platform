@@ -13,12 +13,12 @@ namespace Lace.Unit.Tests.Requests
     {
         private readonly IEntryPoint _entryPoint;
         private ICollection<IPointToLaceProvider> _response;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
 
         public when_lace_entry_point_get_response()
         {
             _entryPoint = new FakeEntryPoint();
-            _request = new LicensePlateNumberAllDataProvidersRequest();
+            _request = new[] {new LicensePlateNumberAllDataProvidersRequest()};
         }
 
         public override void Observe()

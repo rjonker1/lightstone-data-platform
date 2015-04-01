@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Entities;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;

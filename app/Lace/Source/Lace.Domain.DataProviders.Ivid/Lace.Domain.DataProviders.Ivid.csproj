@@ -59,9 +59,6 @@
     <Reference Include="NHibernate">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.802\lib\net45\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain.Core.Contracts">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.802\lib\net45\PackageBuilder.Domain.Core.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="PackageBuilder.Domain.Entities.Enums">
       <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.802\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
     </Reference>

@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Jis.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Images;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
@@ -9,9 +9,9 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure.Dto
     public class BuildJisRequest : IBuildRequestForJis
     {
         public DataStoreRequest JisRequest { get; private set; }
-        private readonly ILaceRequest _request;
+        private readonly IHaveJisInformation _request;
 
-        public BuildJisRequest(ILaceRequest request)
+        public BuildJisRequest(IHaveJisInformation request)
         {
             _request = request;
         }
@@ -23,14 +23,14 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure.Dto
                 VehicleSightingRequest = new VehicleSightingRequest()
                 {
                     ClientHasImages = true,
-                    CroppedImage = Convert.FromBase64String(_request.Jis.CroppedImage),
-                    FullImage = new Base64Image(_request.Jis.FullImageThumb).BinaryImage,
+                    CroppedImage = Convert.FromBase64String(_request.CroppedImage),
+                    FullImage = new Base64Image(_request.FullImageThumb).BinaryImage,
                     FullImageIsThumb = true,
-                    Latitude = _getCoordinate(_request.Jis.Latitude),
-                    Longitude = _getCoordinate(_request.Jis.Longitude)
+                    Latitude = _getCoordinate(_request.Latitude),
+                    Longitude = _getCoordinate(_request.Longitude)
                 },
                 DataStoresToQuery = new[] {"UniCode"},
-                VehicleRegNoToQuery = _request.Jis.LicensePlateNumber
+                VehicleRegNoToQuery = _request.LicensePlateNumber
             };
             return this;
         }

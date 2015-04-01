@@ -1,15 +1,15 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
 
-    public class LicensePlateNumberAllDataProvidersRequest : Domain.Core.Requests.Contracts.ILaceRequest
+    public class LicensePlateNumberAllDataProvidersRequest : IAmLicensePlateRequest
     {
-        private readonly IProvideRequestAggregation _aggregation;
+        private readonly IHaveAggregation _aggregation;
         private readonly DateTime _requestDate;
 
         public LicensePlateNumberAllDataProvidersRequest()
@@ -18,40 +18,19 @@ namespace Lace.Test.Helper.Mothers.Requests
             _requestDate = DateTime.Now;
         }
 
-
-        public IPackage Package
-        {
-            get { return LicensePlateNumberAllRequestPackage.LicenseNumberPackage(); }
-        }
-
-        public IProvideUserInformationForRequest User
+        public IHaveUserInformation User
         {
             get { return new RequestUserInformation(); }
         }
 
-        public IProvideContextForRequest Context
-        {
-            get { return new ContextInformation(); }
-        }
-
-        public IProvideRequestAggregation RequestAggregation
-        {
-            get { return _aggregation; }
-        }
-
-        public IProvideVehicleInformationForRequest Vehicle
+        public IHaveVehicle Vehicle
         {
             get { return new RequestVehicleInformation(); }
         }
 
-        public IProvideCoOrdinateInformationForRequest CoOrdinates
+        public IHaveAggregation Aggregation
         {
-            get { return new CoOrdinateInformation(); }
-        }
-
-        public IProvideJisInformation Jis
-        {
-            get { return new RequestJisInformation(); }
+            get { return _aggregation; }
         }
 
         public DateTime RequestDate
@@ -59,32 +38,9 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return _requestDate; }
         }
 
-        public string SearchTerm
+        public IAmPackageForRequest Package
         {
-            get { return "XMC167GP"; }
-        }
-
-        public IProvideDriversLicenseInformationForRequest DriversLicense
-        {
-            get { return null; }
-        }
-
-        public IProvideFicaInformationForRequest Fica
-        {
-            get { return null; }
-        }
-
-        public IProvidePropertyInformationForRequest Property
-        {
-            get
-            {
-                return new RequestPropertyInformation();
-            }
-        }
-
-        public IProvideBusinessInformationForRequest Business
-        {
-            get { return new RequestComapanyInformation(); }
+            get { return LicensePlateNumberAllRequestPackage.LicenseNumberPackage(); }
         }
     }
 }

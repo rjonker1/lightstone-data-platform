@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
     public interface IGetMuncipalities
     {
         IEnumerable<Municipality> Municipalities { get; }
-        void GetMunicipalities(IProvideCarInformationForRequest request);
+        void GetMunicipalities(IHaveCarInformation request);
     }
 }

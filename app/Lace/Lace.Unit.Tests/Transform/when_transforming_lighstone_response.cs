@@ -3,13 +3,13 @@ using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Sources.Lightstone;
 using Lace.Test.Helper.Mothers.Requests;
 using Xunit.Extensions;
-using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Unit.Tests.Transform
 {
@@ -17,14 +17,14 @@ namespace Lace.Unit.Tests.Transform
     {
         private IProvideDataFromLightstoneAuto _response;
         private TransformLightstoneResponse _transform;
-        private readonly ILaceRequest _request;
-        private readonly IProvideCarInformationForRequest _carInformationRequest;
+        private readonly ICollection<IPointToLaceRequest> _request;
+        private readonly IHaveCarInformation _carInformationRequest;
         private readonly IRetrieveValuationFromMetrics _retrieveValuationFromMetrics;
         private readonly IRetrieveCarInformation _retrieveCarInformation;
         
         public when_transforming_lighstone_response()
         {
-            _request = new LicensePlateNumberLightstoneOnlyRequest();
+            _request = new[] {new LicensePlateNumberLightstoneOnlyRequest()};
             _carInformationRequest = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
             _retrieveValuationFromMetrics =
                 LighstoneVehicleInformationBuilder.ForValuationFromMetrics(_carInformationRequest);

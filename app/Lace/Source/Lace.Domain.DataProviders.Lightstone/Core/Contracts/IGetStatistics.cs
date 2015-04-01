@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
     public interface IGetStatistics
     {
         IEnumerable<Statistic> Statistics { get; }
-        void GetStatistics(IProvideCarInformationForRequest request);
+        void GetStatistics(IHaveCarInformation request);
     }
 }

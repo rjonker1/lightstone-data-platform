@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.ServiceModel;
 using Common.Logging;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Jis.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
@@ -13,7 +14,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         public SessionManagementResult SessionManagement { get; private set; }
         private readonly JisWsInterfaceSoapClient _jisClient;
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly IHaveUserInformation _request;
 
         private static string SessionName
         {
@@ -25,7 +26,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public SessionManager(JisWsInterfaceSoapClient jisClient, ILog log, ILaceRequest request)
+        public SessionManager(JisWsInterfaceSoapClient jisClient, ILog log, IHaveUserInformation request)
         {
             _jisClient = jisClient;
             _log = log;
@@ -51,7 +52,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         private void CreateSession()
         {
             SessionManagement = _jisClient.SessionManagementProcess((int) JisSessionType.LatestSession, SessionName,
-                _request.User.UserName);
+                _request.UserName);
 
             if (SessionIsNotValid() || SessionIsExpired())
             {
@@ -62,7 +63,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         private void CreateNewSession()
         {
             SessionManagement = _jisClient.SessionManagementProcess((int)JisSessionType.NewSession, SessionName,
-                    _request.User.UserName);
+                    _request.UserName);
         }
 
         private bool SessionIsNotValid()

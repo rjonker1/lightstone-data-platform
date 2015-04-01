@@ -1,14 +1,10 @@
-﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
-using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+﻿using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
     public interface IAmPropertyRequest : IPointToLaceRequest
     {
-        IProvideUserInformationForRequest User { get; }
-        IProvidePropertyInformationForRequest Property { get; }
-        IProvideRequestAggregation Aggregation { get; }
-        IPackage Package { get; }
+        IHaveUserInformation User { get; }
+        IHavePropertyInformation Property { get; }
     }
 }

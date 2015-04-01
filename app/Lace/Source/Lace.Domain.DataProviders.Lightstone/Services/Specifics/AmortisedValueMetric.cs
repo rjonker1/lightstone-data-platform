@@ -12,11 +12,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         public IEnumerable<Statistic> Statistics { get; private set; }
 
         private static readonly MetricTypes[] Metrics = {MetricTypes.AmortisedValues};
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
         private IList<Statistic> _gauges;
         private readonly IEnumerable<Band> _bands;
 
-        public AmortisedValueMetric(IProvideCarInformationForRequest request, IEnumerable<Statistic> statistics,
+        public AmortisedValueMetric(IHaveCarInformation request, IEnumerable<Statistic> statistics,
             IEnumerable<Band> bands)
         {
             Statistics = statistics;

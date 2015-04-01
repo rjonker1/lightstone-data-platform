@@ -15,7 +15,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 {
     public class when_consuming_ivid_title_holder_source_with_financed_interest : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderDataProvider _consumer;
@@ -23,7 +23,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         public when_consuming_ivid_title_holder_source_with_financed_interest()
         {
             _monitoring = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
-            _request = new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest();
+            _request = new[] {new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest()};
             _response = new LaceResponseBuilder().WithIvidResponseAndFinancedInterestVin();
         }
 

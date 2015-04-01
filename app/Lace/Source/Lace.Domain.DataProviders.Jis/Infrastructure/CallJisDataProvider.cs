@@ -6,7 +6,6 @@ using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -14,6 +13,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
@@ -23,13 +23,13 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         private readonly ILog _log;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Jis;
 
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISetupCertificateRepository _repository;
         private IProvideCertificate _certificate;
         private DataStoreResult _jisResponse;
         private SightingUpdateResult _sightingUpdate;
 
-        public CallJisDataProvider(ILaceRequest request, ISetupCertificateRepository repository)
+        public CallJisDataProvider(ICollection<IPointToLaceRequest> request, ISetupCertificateRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -42,7 +42,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             {
                 _certificate =
                     new CoOrdinateCertificateFactory(
-                        new CoOrdinateCertificateRequest(_request.CoOrdinates.Latitude, _request.CoOrdinates.Longitude),
+                        new CoOrdinateCertificateRequest(_request.GetFromRequest<IAmJisRequest>().Jis.Latitude, _request.GetFromRequest<IAmJisRequest>().Jis.Longitude),
                         _repository);
 
                 if (!_certificate.IsSuccessfull || _certificate.Certificate == null ||
@@ -55,15 +55,15 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
                 proxy.Connect();
 
-                var session = new SessionManager(proxy, _log, _request).Build().SessionManagement;
+                var session = new SessionManager(proxy, _log, _request.GetFromRequest<IHaveUserInformation>()).Build().SessionManagement;
 
-                _jisResponse = proxy.DataStoreQuery(session.Id, new BuildJisRequest(_request).JisRequest,
-                    _request.User.UserName);
+                _jisResponse = proxy.DataStoreQuery(session.Id, new BuildJisRequest(_request.GetFromRequest<IHaveJisInformation>()).JisRequest,
+                    _request.GetFromRequest<IHaveUserInformation>().UserName);
 
                 if (_jisResponse.IsHot)
                 {
                     _sightingUpdate =
-                        new SightingUpdate(_request, _jisResponse).BuildRequest()
+                        new SightingUpdate(_request.GetFromRequest<IHaveUserInformation>(), _jisResponse).BuildRequest()
                             .Update(proxy, session)
                             .SightingUpdateResult;
                 }

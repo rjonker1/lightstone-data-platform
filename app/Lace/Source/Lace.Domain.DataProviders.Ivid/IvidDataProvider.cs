@@ -16,10 +16,10 @@ namespace Lace.Domain.DataProviders.Ivid
 {
     public class IvidDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public IvidDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public IvidDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.Ivid
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Ivid);
-                _monitoring.Begin(new {_request.User, _request.Vehicle, _request.Context}, stopWatch);
+                _monitoring.Begin(new {_request }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);

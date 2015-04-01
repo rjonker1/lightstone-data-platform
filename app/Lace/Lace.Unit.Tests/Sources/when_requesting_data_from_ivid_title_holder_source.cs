@@ -19,7 +19,7 @@ namespace Lace.Unit.Tests.Sources
     public class when_requesting_data_from_ivid_title_holder_source : Specification
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
-        private readonly ILaceRequest _ividTitleHolderRequest;
+        private readonly ICollection<IPointToLaceRequest> _ividTitleHolderRequest;
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _laceEvent;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;

@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class AggregationInformation : IProvideRequestAggregation
+    public class AggregationInformation : IHaveAggregation
     {
         private readonly Guid _aggregateId;
 

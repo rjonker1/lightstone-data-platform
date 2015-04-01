@@ -3,15 +3,17 @@ using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
+using ServiceStack.Common.Extensions;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.SourceRequests
 {
     internal class when_configuring_ivid_title_holder_request_message : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderRequestMessage _configureRequestMessage;
 
@@ -24,7 +26,7 @@ namespace Lace.Unit.Tests.SourceRequests
 
         public override void Observe()
         {
-            _configureRequestMessage = new IvidTitleHolderRequestMessage(_request, _response);
+            _configureRequestMessage = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IAmVehicleRequest>().User, _response);
         }
 
         [Observation]

@@ -17,10 +17,10 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
     public class LightstonePropertyDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
 
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public LightstonePropertyDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.LightstoneProperty);
 
-                _monitoring.Begin(new {_request.Property}, stopWatch);
+                _monitoring.Begin(new {_request}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLightstonePropertyCall(),
                     new CallLightstonePropertyDataProvider(_request));

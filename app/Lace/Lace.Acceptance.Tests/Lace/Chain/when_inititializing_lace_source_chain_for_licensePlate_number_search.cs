@@ -10,6 +10,7 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using NServiceBus;
@@ -21,9 +22,9 @@ namespace Lace.Acceptance.Tests.Lace.Chain
     {
         private IBootstrap _initialize;
 
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IBus _monitoring;
-        private Dictionary<Type, Func<ILaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
+        private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
@@ -32,7 +33,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
             _monitoring = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new CreateSourceChain(_request.Package);
+            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IAmVehicleRequest>().Package);
             _buildSourceChain.Build();
         }
 

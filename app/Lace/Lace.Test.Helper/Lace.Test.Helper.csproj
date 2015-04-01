@@ -35,13 +35,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -51,56 +49,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\Iesi.Collections.dll</HintPath>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.808\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Entities, Version=1.0.0.808, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.808\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Dtos">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.808\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Dtos.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.808\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.TestObjects">
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.TestObjects.1.0.0.808\lib\net45\Lightstone.Dataplatform.PackageBuilder.TestObjects.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.854, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.854\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.1.0.0.808\lib\net45\Lightstone.DataPlatform.Shared.Messaging.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\NEventStore.dll</HintPath>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\NEventStore.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -114,13 +81,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NServiceBus.RabbitMQ.2.1.1\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain.Core.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\PackageBuilder.Domain.Core.Contracts.dll</HintPath>
+    <Reference Include="PackageBuilder.Domain.Core.Contracts">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\PackageBuilder.Domain.Core.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts.1.0.0.841\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
+    <Reference Include="PackageBuilder.Domain.Entities.Enums">
+      <HintPath>..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -219,6 +184,10 @@
     <Compile Include="Builders\Requests\LicensePlateNumberAllRequestPackage.cs" />
     <Compile Include="Builders\Requests\LicensePlateNumberIvidSourcePackage.cs" />
     <Compile Include="Fakes\Responses\FakeSignioDecryptedDriversLicenseResponse.cs" />
+    <Compile Include="Mothers\Packages\DriversLicensePackage.cs" />
+    <Compile Include="Mothers\Packages\FicaPackage.cs" />
+    <Compile Include="Mothers\Packages\LicensePlateNumberPackage.cs" />
+    <Compile Include="Mothers\Packages\PropertyPackage.cs" />
     <Compile Include="Mothers\Requests\DriversLicenseRequests\DriversLicenseDecryptionRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\CoOrdinateInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequesCompanyInformation.cs" />
@@ -234,7 +203,6 @@
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest.cs" />
-    <Compile Include="Mothers\Requests\Dto\ContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestUserInformation.cs" />
@@ -278,9 +246,17 @@
       <Project>{7b07823d-3f48-470b-9a43-739d9eb9dc22}</Project>
       <Name>Lace.CrossCutting.Infrastructure.Orm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj">
+      <Project>{e18650c0-3965-4793-891b-20f3a0dfba9e}</Project>
+      <Name>Lace.Domain.Core.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
       <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
       <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Lace.Domain.Core\Lace.Domain.Core.csproj">
+      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
+      <Name>Lace.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\source\Lace.Domain.DataProviders.Anpr\Lace.Domain.DataProviders.Anpr.csproj">
       <Project>{b3c39de4-4b23-4604-8732-06ed64a790b4}</Project>

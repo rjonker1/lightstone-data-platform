@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
 {
     public class FakeStatisticsRepository : IReadOnlyRepository<Statistic>
     {
-        public IEnumerable<Statistic> FindAllWithRequest(IProvideCarInformationForRequest request)
+        public IEnumerable<Statistic> FindAllWithRequest(IHaveCarInformation request)
         {
             return Builders.Sources.Lightstone.StatisticsDataBuilder.ForCarId_107483();
         }

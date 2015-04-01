@@ -1,105 +1,37 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
-using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberAudatexOnlyRequest : ILaceRequest
+    public class LicensePlateNumberAudatexOnlyRequest : IAmLicensePlateRequest
     {
-        public IPackage Package
+        public IHaveUserInformation User
         {
-            get
-            {
-                return LicensePlateNumberAudatexRequestPackage.LicenseNumberPackage();
-            }
+            get { return new RequestUserInformation(); }
         }
 
-        public IProvideUserInformationForRequest User
+        public IHaveVehicle Vehicle
         {
-            get
-            {
-                return new RequestUserInformation();
-            }
+            get { return new RequestVehicleInformation(); }
         }
 
-        public IProvideContextForRequest Context
+        public IHaveAggregation Aggregation
         {
-            get
-            {
-                return new ContextInformation();
-            }
+            get { return new AggregationInformation(); }
         }
-
-        public IProvideVehicleInformationForRequest Vehicle
-        {
-            get
-            {
-                return new RequestVehicleInformation();
-            }
-        }
-
-        public IProvideRequestAggregation RequestAggregation
-        {
-            get
-            {
-                return new AggregationInformation();
-            }
-        }
-
-        public IProvideCoOrdinateInformationForRequest CoOrdinates
-        {
-            get { return new CoOrdinateInformation(); }
-        }
-
 
         public DateTime RequestDate
         {
-            get
-            {
-                return DateTime.Now;
-            }
+            get { return DateTime.Now; }
         }
 
-        public string SearchTerm
+        public IAmPackageForRequest Package
         {
-            get
-            {
-                // return "SYB459GP";
-                return "XMC167GP";
-            }
+            get { return LicensePlateNumberAudatexRequestPackage.LicenseNumberPackage(); }
         }
-        
-
-        public IProvideJisInformation Jis
-        {
-            get { return new RequestJisInformation();  }
-        }
-
-
-        public IProvideDriversLicenseInformationForRequest DriversLicense
-        {
-            get { return new RequestDriversLicenseInformation(); }
-        }
-
-        public IProvideFicaInformationForRequest Fica
-        {
-            get { return new RequestFicaInformation();}
-        }
-
-        public IProvidePropertyInformationForRequest Property
-        {
-            get
-            {
-                return new RequestPropertyInformation();
-            }
-        }
-
-        public IProvideBusinessInformationForRequest Business
-        {
-            get { return new RequestComapanyInformation(); }
-        }
+       
     }
 }

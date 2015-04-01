@@ -14,9 +14,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         private static readonly MetricTypes[] Metrics = {MetricTypes.RepairIndex};
         private IList<Statistic> _gauges;
         private readonly IEnumerable<Band> _bands;
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
 
-        public RepairIndexMetric(IProvideCarInformationForRequest request, IEnumerable<Statistic> statistics,
+        public RepairIndexMetric(IHaveCarInformation request, IEnumerable<Statistic> statistics,
             IEnumerable<Band> bands)
         {
             _bands = bands;

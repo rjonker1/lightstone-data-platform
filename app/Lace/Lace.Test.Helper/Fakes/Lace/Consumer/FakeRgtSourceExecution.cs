@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -16,10 +15,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
     public class FakeRgtSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public FakeRgtSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public FakeRgtSourceExecution(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {

@@ -15,10 +15,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
     public class FakePCubedDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public FakePCubedDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public FakePCubedDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {

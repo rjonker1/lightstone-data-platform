@@ -1,101 +1,36 @@
 ﻿using System;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
-using ILaceRequest = Lace.Domain.Core.Requests.Contracts.ILaceRequest;
 
 namespace Lace.Test.Helper.Mothers.Requests
 {
-    public class LicensePlateNumberRgtOnlyRequest : ILaceRequest
+    public class LicensePlateNumberRgtOnlyRequest : IAmLicensePlateRequest
     {
-        public IProvideDriversLicenseInformationForRequest DriversLicense
+        public IHaveUserInformation User
         {
-            get { return new RequestDriversLicenseInformation(); }
+            get { return new RequestUserInformation(); }
         }
 
-        public IProvideFicaInformationForRequest Fica
+        public IHaveVehicle Vehicle
         {
-            get { return new RequestFicaInformation(); }
-        }
-        public IProvideUserInformationForRequest User
-        {
-            get
-            {
-                return new RequestUserInformation();
-            }
+            get { return new RequestVehicleInformation(); }
         }
 
-        public IProvideContextForRequest Context
+        public IHaveAggregation Aggregation
         {
-            get
-            {
-                return new ContextInformation();
-            }
-        }
-
-        public IProvideVehicleInformationForRequest Vehicle
-        {
-            get
-            {
-                return new RequestVehicleInformation();
-            }
-        }
-
-        public IProvideRequestAggregation RequestAggregation
-        {
-            get
-            {
-                return new AggregationInformation();
-            }
-        }
-
-        public IProvideCoOrdinateInformationForRequest CoOrdinates
-        {
-            get { return new CoOrdinateInformation(); }
-        }
-
-        public IProvideJisInformation Jis
-        {
-            get { return new RequestJisInformation(); }
+            get { return new AggregationInformation(); }
         }
 
         public DateTime RequestDate
         {
-            get
-            {
-                return DateTime.Now;
-            }
+            get { return DateTime.Now; }
         }
 
-        public string SearchTerm
+        public IAmPackageForRequest Package
         {
-            get
-            {
-                return "XMC167GP";
-            }
-        }
-
-        public IPackage Package
-        {
-            get
-            {
-                return LicensePlateNumberRgtRequestPackage.LicenseNumberPackage();
-            }
-           
-        }
-
-        public IProvidePropertyInformationForRequest Property
-        {
-            get
-            {
-                return new RequestPropertyInformation();
-            }
-        }
-
-        public IProvideBusinessInformationForRequest Business
-        {
-            get { return new RequestComapanyInformation(); }
+            get { return LicensePlateNumberRgtRequestPackage.LicenseNumberPackage(); }
         }
     }
 }

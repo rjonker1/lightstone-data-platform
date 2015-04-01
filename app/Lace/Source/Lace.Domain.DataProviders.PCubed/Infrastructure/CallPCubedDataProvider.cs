@@ -16,12 +16,12 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
     public class CallPCubedDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.PCubedFica;
         private string _response;
 
-        public CallPCubedDataProvider(ILaceRequest request)
+        public CallPCubedDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;

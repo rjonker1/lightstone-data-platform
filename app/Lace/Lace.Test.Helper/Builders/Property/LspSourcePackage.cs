@@ -1,14 +1,46 @@
-﻿using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
-using PackageBuilder.TestObjects.Mothers;
+﻿using System;
+using Lace.Domain.Core.Requests.Contracts;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Builders.Property
 {
     public class PropertySourcePackage
     {
-        public static IPackage PropertyPackage()
+        public static IAmPackageForRequest PropertyPackage()
         {
 
-            return WritePackageMother.PropertyPackage;
+            return new PropertyPackage();
+        }
+    }
+
+    public class PropertyPackage : IAmPackageForRequest
+    {
+        public Guid Id
+        {
+            get
+            {
+                return Guid.NewGuid();
+            }
+        }
+
+        public long Version
+        {
+            get { return 1; }
+        }
+
+        public DataProviderName[] DataProviders
+        {
+            get { return new DataProviderName[] {DataProviderName.LightstoneProperty}; }
+        }
+
+        public string Name
+        {
+            get { return "Property Package"; }
+        }
+
+        public string Action
+        {
+            get { return "Property Search"; }
         }
     }
 }

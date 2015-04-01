@@ -12,11 +12,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         public IEnumerable<Statistic> Statistics { get; private set; }
 
         private static readonly MetricTypes[] Metrics = {MetricTypes.AuctionFactors};
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
         private IList<Statistic> _gauges;
         private readonly IEnumerable<Make> _makes;
 
-        public AuctionFactorsMetric(IProvideCarInformationForRequest request, IEnumerable<Statistic> statistics,
+        public AuctionFactorsMetric(IHaveCarInformation request, IEnumerable<Statistic> statistics,
             IEnumerable<Make> makes)
         {
             _makes = makes;

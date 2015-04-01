@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
 {
     public class IvidTitleHolderRequestMessage
     {
-        private readonly ILaceRequest _request;
+        private readonly IHaveUserInformation _request;
         private readonly ICollection<IPointToLaceProvider> _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
 
-        public IvidTitleHolderRequestMessage(ILaceRequest request, ICollection<IPointToLaceProvider> response)
+        public IvidTitleHolderRequestMessage(IHaveUserInformation request, ICollection<IPointToLaceProvider> response)
         {
             _request = request;
             _response = response;
@@ -37,8 +35,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
             {
                 requesterDetails = new RequesterDetailsElement()
                 {
-                    requesterEmail = _request.User.UserName ?? string.Empty,
-                    requesterName = _request.User.UserFirstName ?? string.Empty,
+                    requesterEmail = _request.UserName ?? string.Empty,
+                    requesterName = _request.UserFirstName ?? string.Empty,
                     requesterPhone = string.Empty
                 },
 

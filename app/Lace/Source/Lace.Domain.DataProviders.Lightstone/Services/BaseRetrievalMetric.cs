@@ -18,13 +18,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Services
         private IGetCarType _getCarType;
         private IGetSales _getSales;
 
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
         private readonly ISetupRepository _repositories;
 
         public bool IsSatisfied { get; private set; }
         public IRespondWithValuation Valuation { get; private set; }
 
-        public BaseRetrievalMetric(IProvideCarInformationForRequest request, IRespondWithValuation valuation,
+        public BaseRetrievalMetric(IHaveCarInformation request, IRespondWithValuation valuation,
             ISetupRepository repositories)
         {
             _request = request;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
@@ -23,12 +24,12 @@ namespace Lace.Test.Helper.Fakes.Lace.EntryPoint
             _checkForDuplicateRequests = new CheckTheReceivedRequest();
         }
 
-        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
         {
-            _buildSourceChain = new FakeSourceChain(request.Package.Action);
+            _buildSourceChain = new FakeSourceChain(request.First().Package);
             _buildSourceChain.Build();
 
-            if (_checkForDuplicateRequests.IsRequestDuplicated(request)) return null;
+            if (_checkForDuplicateRequests.IsRequestDuplicated(request.First())) return null;
 
             _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _buildSourceChain);
             _bootstrap.Execute();

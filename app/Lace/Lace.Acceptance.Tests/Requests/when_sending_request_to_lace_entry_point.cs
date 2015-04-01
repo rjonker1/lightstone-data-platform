@@ -17,7 +17,7 @@ namespace Lace.Acceptance.Tests.Requests
 {
     public class when_sending_request_to_lace_entry_point : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private ICollection<IPointToLaceProvider> _response;
         private readonly IEntryPoint _entryPoint;
         private readonly IBus _bus;

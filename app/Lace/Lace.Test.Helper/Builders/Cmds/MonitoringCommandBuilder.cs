@@ -1,9 +1,12 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
@@ -38,20 +41,25 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .Transform(
                     new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
                         new LaceResponseBuilder().WithIvidResponseHandled(),
-                        new LicensePlateRequestBuilder().ForAudatex()).Result,
+                        new LicensePlateRequestBuilder().ForAudatex()
+                            .GetFromRequest<IAmVehicleRequest>().Vehicle).Result,
                     new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
                         new LaceResponseBuilder().WithIvidResponseHandled(),
-                        new LicensePlateRequestBuilder().ForAudatex()))
+                        new LicensePlateRequestBuilder().ForAudatex()
+                            .GetFromRequest<IAmVehicleRequest>().Vehicle))
                 .EndExecution(
                     new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
                         new LaceResponseBuilder().WithIvidResponseHandled(),
-                        new LicensePlateRequestBuilder().ForAudatex()).Result);
+                        new LicensePlateRequestBuilder().ForAudatex()
+                            .GetFromRequest<IAmVehicleRequest>().Vehicle).Result);
 
             return this;
         }
 
         public MonitoringCommandBuilder ForIvid()
         {
+            var request = new LicensePlateRequestBuilder().ForIvid();
+
             var queue = new MonitoirngQueueSender(DataProviderCommandSource.Ivid, _aggregateId);
             queue.InitQueue(MonitoringBusBuilder.ForIvidCommands(_aggregateId))
                 .InitStopWatch()
@@ -68,7 +76,9 @@ namespace Lace.Test.Helper.Builders.Cmds
                     },
                     new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCall(
-                    new IvidRequestMessage(new LicensePlateRequestBuilder().ForIvid()).HpiQueryRequest, null)
+                    new IvidRequestMessage(request.GetFromRequest<IAmVehicleRequest>().User,
+                        request.GetFromRequest<IAmVehicleRequest>().Vehicle,
+                        request.GetFromRequest<IAmVehicleRequest>().Package.Name).HpiQueryRequest, null)
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(

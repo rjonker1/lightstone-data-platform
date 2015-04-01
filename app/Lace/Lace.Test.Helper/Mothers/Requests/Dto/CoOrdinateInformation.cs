@@ -2,7 +2,7 @@
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class CoOrdinateInformation : IProvideCoOrdinateInformationForRequest
+    public class CoOrdinateInformation : IHaveCoOrdinateInformation
     {
         public double Latitude
         {

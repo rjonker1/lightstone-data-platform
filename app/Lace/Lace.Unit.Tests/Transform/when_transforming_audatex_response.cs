@@ -4,6 +4,7 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.AudatexServiceReference;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Xunit.Extensions;
@@ -15,7 +16,7 @@ namespace Lace.Unit.Tests.Transform
         private readonly GetDataResult _audatexWebServiceResponse;
         private TransformAudatexResponse _transformer;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
 
 
         public when_transforming_audatex_response()
@@ -27,7 +28,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transformer = new TransformAudatexResponse(_audatexWebServiceResponse, _response, _request);
+            _transformer = new TransformAudatexResponse(_audatexWebServiceResponse, _response, _request.GetFromRequest<IAmVehicleRequest>().Vehicle);
             _transformer.Transform();
         }
 

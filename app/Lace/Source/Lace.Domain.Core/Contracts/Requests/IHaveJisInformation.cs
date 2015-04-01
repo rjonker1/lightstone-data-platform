@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IProvideJisInformation
+    public interface IHaveJisInformation
     {
         string CroppedImage { get; }
 

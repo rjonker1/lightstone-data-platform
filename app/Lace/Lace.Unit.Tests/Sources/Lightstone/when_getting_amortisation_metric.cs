@@ -12,7 +12,7 @@ namespace Lace.Unit.Tests.Sources.Lightstone
     public class when_getting_amortisation_metric : Specification
     {
         private readonly IRetrieveATypeOfMetric<AmortisedValueModel> _metric;
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
 
         public when_getting_amortisation_metric()
         {

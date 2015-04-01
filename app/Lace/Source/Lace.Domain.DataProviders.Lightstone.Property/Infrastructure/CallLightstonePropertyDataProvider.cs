@@ -11,6 +11,7 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -21,12 +22,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
     public class CallLightstonePropertyDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneProperty;
         private DataSet _result;
 
-        public CallLightstonePropertyDataProvider(ILaceRequest request)
+        public CallLightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -42,7 +43,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 if (client.Proxy.State == CommunicationState.Closed)
                     client.Proxy.Open();
 
-                var request = new GetPropertyRequest(_request)
+                var request = new GetPropertyRequest(_request.GetFromRequest<IHavePropertyInformation>())
                     .Map()
                     .Validate();
 

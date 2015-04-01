@@ -19,7 +19,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
     public class DataProviderSpecification
     {
-        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _defaultLicenseNumberRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -40,14 +40,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 
 
 
-        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new SignioDataProvider(request, null, null,
                             new SendSignioCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
 
-        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _propertyRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -57,7 +57,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
         // TODO: Lightstone Business
 
 
-        private readonly Func<Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>
+        private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
@@ -67,13 +67,13 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
             IEnumerable
                 <
                     KeyValuePair
-                        <string, Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>>
+                        <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>>
             Specifications
         {
             get
             {
                 return new Dictionary
-                    <string, Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid>>()
+                    <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>()
                 {
                     {
                         "License plate search", _defaultLicenseNumberRequestSpecification()

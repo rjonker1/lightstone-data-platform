@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    class RequestFicaInformation : IProvideFicaInformationForRequest
+    class RequestFicaInformation : IHaveFicaInformation
     {
         public int FicaTransactionId { get; private set; }
 

@@ -3,7 +3,7 @@ using System;
 
 namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IProvideRequestAggregation
+    public interface IHaveAggregation
     {
         Guid AggregateId { get; }
     }

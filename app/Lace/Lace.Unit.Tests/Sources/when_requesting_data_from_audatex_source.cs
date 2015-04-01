@@ -18,7 +18,7 @@ namespace Lace.Unit.Tests.Sources
     public class when_requesting_data_from_audatex_source : Specification
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
-        private readonly ILaceRequest _audatexRequest;
+        private readonly ICollection<IPointToLaceRequest> _audatexRequest;
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;

@@ -1,4 +1,4 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Anpr.Core.Contracts;
 
@@ -6,11 +6,11 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure.Dto
 {
     public class BuildAnprRequest : IBuildTheRequestForAnpr
     {
-        private readonly ILaceRequest _request;
+        private readonly IHaveCoOrdinateInformation _request;
 
         public AnprSubComplexType AnprRequest { get; private set; }
 
-        public BuildAnprRequest(ILaceRequest request)
+        public BuildAnprRequest(IHaveCoOrdinateInformation request)
         {
             _request = request;
         }
@@ -19,11 +19,10 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure.Dto
         {
             AnprRequest = new AnprSubComplexType()
             {
-                ImagetoAnpr = _request.CoOrdinates.Image
+                ImagetoAnpr = _request.Image
             };
 
             return this;
         }
     }
-
 }

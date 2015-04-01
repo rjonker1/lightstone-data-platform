@@ -9,6 +9,6 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
     public interface IBuildSourceChain
     {
         void Build();
-        Action<ILaceRequest, IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; }
+        Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid> SourceChain { get; }
     }
 }

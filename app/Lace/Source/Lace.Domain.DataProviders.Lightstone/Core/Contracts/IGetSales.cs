@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
     public interface IGetSales
     {
         IEnumerable<Sale> Sales { get; }
-        void GetSales(IProvideCarInformationForRequest request);
+        void GetSales(IHaveCarInformation request);
     }
 }

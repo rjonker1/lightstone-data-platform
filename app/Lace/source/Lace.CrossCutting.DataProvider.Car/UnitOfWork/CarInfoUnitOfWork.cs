@@ -23,7 +23,7 @@ namespace Lace.CrossCutting.DataProvider.Car.UnitOfWork
             _vin12Repository = vin12Repository;
         }
 
-        public void GetCarInfo(IProvideCarInformationForRequest request)
+        public void GetCarInfo(IHaveCarInformation request)
         {
             try
             {

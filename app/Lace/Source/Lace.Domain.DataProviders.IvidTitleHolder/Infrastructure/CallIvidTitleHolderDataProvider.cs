@@ -4,7 +4,6 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -13,6 +12,7 @@ using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -23,11 +23,11 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
     {
         private readonly ILog _log;
         private TitleholderQueryResponse _response;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.IvidTitleHolder;
 
-        public CallIvidTitleHolderDataProvider(ILaceRequest request)
+        public CallIvidTitleHolderDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -47,7 +47,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
-                    var request = new IvidTitleHolderRequestMessage(_request, response)
+                    var request = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IAmVehicleRequest>().User, response)
                         .TitleholderQueryRequest;
 
                     monitoring.Send(CommandType.Configuration, request, null);

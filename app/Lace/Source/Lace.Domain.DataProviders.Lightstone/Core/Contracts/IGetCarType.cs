@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
     public interface IGetCarType
     {
         IEnumerable<CarType> CarTypes { get; }
-        void GetCarTypes(IProvideCarInformationForRequest request);
+        void GetCarTypes(IHaveCarInformation request);
     }
 }

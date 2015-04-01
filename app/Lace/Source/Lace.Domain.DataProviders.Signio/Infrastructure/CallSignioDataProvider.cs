@@ -8,6 +8,7 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Management;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -17,12 +18,12 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
     public class CallSignioDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.SignioDecryptDriversLicense;
         private ConfigureSignioClient _client;
 
-        public CallSignioDataProvider(ILaceRequest request)
+        public CallSignioDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -34,7 +35,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
         {
             try
             {
-                _client = new ConfigureSignioClient(_request.DriversLicense.ScanData, _request.DriversLicense.UserId);
+                _client = new ConfigureSignioClient(_request.GetFromRequest<IHaveDriversLicenseInformation>());
 
                 monitoring.Send(CommandType.Configuration,
                     new

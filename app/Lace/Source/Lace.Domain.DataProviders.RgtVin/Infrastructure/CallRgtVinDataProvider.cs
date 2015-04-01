@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -23,7 +22,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
     {
         private readonly ILog _log;
 
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.RgtVin;
 
@@ -31,7 +30,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         private IEnumerable<Vin> _vins;
 
 
-        public CallRgtVinDataProvider(ILaceRequest request, ISetupRepository repository)
+        public CallRgtVinDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;

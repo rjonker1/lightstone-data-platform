@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IProvideCarInformationForRequest
+    public interface IHaveCarInformation
     {
         int? CarId { get; }
         string Make { get; }

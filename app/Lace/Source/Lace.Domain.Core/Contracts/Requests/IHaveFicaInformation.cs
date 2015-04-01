@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Contracts.Requests
 {
-    public interface IProvideFicaInformationForRequest
+    public interface IHaveFicaInformation
     {
         long IdNumber { get; }
         string Username { get; }

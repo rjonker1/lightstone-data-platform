@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Core.Contracts
     public interface IGetMetrics
     {
         IEnumerable<Metric> Metrics { get; }
-        void GetMetrics(IProvideCarInformationForRequest request);
+        void GetMetrics(IHaveCarInformation request);
     }
 }

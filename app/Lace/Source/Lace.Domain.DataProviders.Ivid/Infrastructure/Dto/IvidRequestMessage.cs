@@ -1,5 +1,5 @@
 ﻿using System;
-using Lace.Domain.Core.Requests.Contracts;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
 
 namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
@@ -8,27 +8,29 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
     {
         public HpiStandardQueryRequest HpiQueryRequest { get; private set; }
 
-        private readonly ILaceRequest _request;
+        private readonly IHaveUserInformation _user;
+        private readonly IHaveVehicle _vehicle;
 
-        public IvidRequestMessage(ILaceRequest request)
+        public IvidRequestMessage(IHaveUserInformation user, IHaveVehicle vehicle, string packageName)
         {
-            _request = request;
-            BuildRequest();
+            _user = user;
+            _vehicle = vehicle;
+            BuildRequest(packageName);
         }
 
-        private void BuildRequest()
+        private void BuildRequest(string packageName)
         {
             HpiQueryRequest = new HpiStandardQueryRequest()
             {
-                ApplicantName = _request.User.UserName ?? string.Empty,
-                EngineNo = _request.Vehicle.EngineNo ?? string.Empty,
+                ApplicantName = _user.UserName ?? string.Empty,
+                EngineNo = _vehicle.EngineNo ?? string.Empty,
                 HpiRequestReference = Guid.NewGuid().ToString().Split('-')[0],
-                Label = _request.Context.Product ?? string.Empty,
-                LicenceNo = _request.Vehicle.LicenceNo ?? string.Empty,
-                Make = _request.Vehicle.Make ?? string.Empty,
-                ReasonForApplication = _request.Context.ReasonForApplication ?? string.Empty,
-                RegisterNo = _request.Vehicle.RegisterNo ?? string.Empty,
-                VinOrChassis = _request.Vehicle.VinOrChassis ?? string.Empty
+                Label = packageName ?? string.Empty,
+                LicenceNo = _vehicle.LicenceNo ?? string.Empty,
+                Make = _vehicle.Make ?? string.Empty,
+                ReasonForApplication = string.Empty,
+                RegisterNo = _vehicle.RegisterNo ?? string.Empty,
+                VinOrChassis = _vehicle.VinOrChassis ?? string.Empty
             };
         }
     }

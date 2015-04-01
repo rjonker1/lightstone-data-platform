@@ -7,6 +7,6 @@ namespace Lace.Domain.DataProviders.Rgt.Core.Contracts
     public interface IGetCarSpecifications
     {
         IEnumerable<CarSpecification> CarSpecifications { get; }
-        void GetCarSpecifications(IProvideCarInformationForRequest request);
+        void GetCarSpecifications(IHaveCarInformation request);
     }
 }

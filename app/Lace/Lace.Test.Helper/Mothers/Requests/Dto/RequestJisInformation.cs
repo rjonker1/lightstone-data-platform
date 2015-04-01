@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestJisInformation : IProvideJisInformation
+    public class RequestJisInformation : IHaveJisInformation
     {
         public string CroppedImage
         {

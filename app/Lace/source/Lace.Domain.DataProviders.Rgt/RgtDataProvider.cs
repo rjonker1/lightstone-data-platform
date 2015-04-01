@@ -19,10 +19,10 @@ namespace Lace.Domain.DataProviders.Rgt
 {
     public class RgtDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public RgtDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public RgtDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -41,7 +41,8 @@ namespace Lace.Domain.DataProviders.Rgt
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                _monitoring.Begin(new {_request.Vehicle, IvidResponse = response.OfType<IProvideDataFromIvid>().First()}, stopWatch);
+                _monitoring.Begin(new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()},
+                    stopWatch);
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_request,

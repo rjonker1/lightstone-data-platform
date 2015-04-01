@@ -12,6 +12,7 @@ using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Management;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -23,7 +24,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
     public class CallLightstoneBusinessDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly DataProviderStopWatch _stopWatch;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.LightstoneBusiness;
         private DataSet _result;
@@ -33,7 +34,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
         //public readonly string UserToken;
 
-        public CallLightstoneBusinessDataProvider(ILaceRequest request)
+        public CallLightstoneBusinessDataProvider(ICollection<IPointToLaceRequest> request)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -55,7 +56,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 var token = client.Proxy.authenticateUser(_username, _password);
                 
-                var request = new GetBusinessRequest(_request)
+                var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusinessInformation>())
                     .Map()
                     .Validate();
 

@@ -1,26 +1,24 @@
-﻿using System.Xml.Schema;
-using System.Xml.Serialization;
-using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
 {
     public class GetBusinessRequest
     {
-        private readonly ILaceRequest _request;
+        private readonly IHaveBusinessInformation _request;
 
         public bool RequestIsValid { get; private set; }
 
-        public GetBusinessRequest(ILaceRequest request)
+        public GetBusinessRequest(IHaveBusinessInformation request)
         {
             _request = request;
         }
 
         public GetBusinessRequest Map()
         {
-            UserToken = _request.Business.UserToken;
-            CompanyName = _request.Business.CompanyName;
-            CompanyRegnum = _request.Business.CompanyRegNumber;
-            CompanyVatnumber = _request.Business.CompanyVatNumber;
+            UserToken = _request.UserToken;
+            CompanyName = _request.CompanyName;
+            CompanyRegnum = _request.CompanyRegNumber;
+            CompanyVatnumber = _request.CompanyVatNumber;
             return this;
         }
 

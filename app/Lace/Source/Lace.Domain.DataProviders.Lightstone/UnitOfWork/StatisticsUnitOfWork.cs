@@ -21,7 +21,7 @@ namespace Lace.Domain.DataProviders.Lightstone.UnitOfWork
             _repository = repository;
         }
 
-        public void GetStatistics(IProvideCarInformationForRequest request)
+        public void GetStatistics(IHaveCarInformation request)
         {
             try
             {

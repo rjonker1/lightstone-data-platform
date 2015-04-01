@@ -47,10 +47,21 @@
     </Compile>
     <Compile Include="DataSetExtensions.cs" />
     <Compile Include="JsonExtensions.cs" />
+    <Compile Include="RequestExtensions.cs" />
     <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
+      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
+      <Name>Lace.Domain.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

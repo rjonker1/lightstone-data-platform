@@ -14,6 +14,7 @@ using Lace.Domain.DataProviders.Rgt.Core.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Models;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Shared.Monitoring.Messages.Infrastructure;
 using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
@@ -23,16 +24,17 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
     public class CallRgtDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private const DataProviderCommandSource Provider = DataProviderCommandSource.Rgt;
         private readonly DataProviderStopWatch _stopWatch;
         private readonly ISetupRepository _repository;
         private readonly ISetupCarRepository _carRepository;
-        
+
         private IRetrieveCarInformation _carInformation;
         private IEnumerable<CarSpecification> _carSpecifications;
 
-        public CallRgtDataProvider(ILaceRequest request, ISetupRepository repository, ISetupCarRepository carRepository)
+        public CallRgtDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository,
+            ISetupCarRepository carRepository)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -41,23 +43,24 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(Provider);
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             try
             {
-                
+
                 ValidateVehicleDetail(response);
 
-                monitoring.StartCall(_request.Vehicle, _stopWatch);
+                monitoring.StartCall(_request, _stopWatch);
 
                 GetCarInformation();
                 var carUow =
                     new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository());
                 carUow.GetCarSpecifications(
-                        _carInformation.CarInformationRequest);
+                    _carInformation.CarInformationRequest);
                 _carSpecifications = carUow.CarSpecifications;
 
-                 monitoring.EndCall(_carSpecifications, _stopWatch);
+                monitoring.EndCall(_carSpecifications, _stopWatch);
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
@@ -90,7 +93,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response,
+            ISendMonitoringCommandsToBus monitoring)
         {
             var transformer = new TransformRgtResponse(_carSpecifications);
 
@@ -115,7 +119,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private void GetCarInformation()
         {
             _carInformation =
-                new RetrieveCarInformationDetail(_request, _carRepository)
+                new RetrieveCarInformationDetail(_request.GetFromRequest<IAmVehicleRequest>().Vehicle,
+                    _carRepository)
                     .SetupDataSources()
                     .GenerateData()
                     .BuildCarInformation()
@@ -129,11 +134,13 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 return;
 
 
-            if (_request.Vehicle != null && !string.IsNullOrEmpty(_request.Vehicle.Vin) &&
-                _request.Vehicle.Vin.Equals(ividResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
+            if (_request.GetFromRequest<IAmVehicleRequest>().Vehicle != null &&
+                !string.IsNullOrEmpty(_request.GetFromRequest<IAmVehicleRequest>().Vehicle.Vin) &&
+                _request.GetFromRequest<IAmVehicleRequest>().Vehicle
+                    .Vin.Equals(ividResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
                 return;
 
-            _request.Vehicle.SetVinNumber(ividResponse.Vin);
+            _request.GetFromRequest<IAmVehicleRequest>().Vehicle.SetVinNumber(ividResponse.Vin);
         }
     }
 }

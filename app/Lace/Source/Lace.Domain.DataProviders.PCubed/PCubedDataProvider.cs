@@ -16,10 +16,10 @@ namespace Lace.Domain.DataProviders.PCubed
 {
     public class PCubedDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public PCubedDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public PCubedDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -39,14 +39,15 @@ namespace Lace.Domain.DataProviders.PCubed
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.PCubedFica);
-                _monitoring.Begin(new {_request.Fica}, stopWatch);
+                _monitoring.Begin(new {_request}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new CallPCubedDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _monitoring);
 
                 _monitoring.End(response, stopWatch);
 
-                if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() || response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)
+                if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() ||
+                    response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)
                     CallFallbackSource(response, _monitoring);
             }
 

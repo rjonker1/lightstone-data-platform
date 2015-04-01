@@ -1,4 +1,6 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Mothers.Requests;
 using Lace.Test.Helper.Mothers.Requests.PropertyRequests;
 
@@ -6,59 +8,59 @@ namespace Lace.Test.Helper.Builders.Requests
 {
     public class LicensePlateRequestBuilder
     {
-        private ILaceRequest _request;
+        private ICollection<IPointToLaceRequest> _request;
 
-        public ILaceRequest ForIvid()
+        public ICollection<IPointToLaceRequest> ForIvid()
         {
-            _request = new LicensePlateNumberIvidOnlyRequest();
+            _request = new[] {new LicensePlateNumberIvidOnlyRequest()};
             return _request;
         }
 
-        public ILaceRequest ForAudatex()
+        public ICollection<IPointToLaceRequest> ForAudatex()
         {
-            _request = new LicensePlateNumberAudatexOnlyRequest();
+            _request = new[] { new LicensePlateNumberAudatexOnlyRequest()};
             return _request;
         }
 
-        public ILaceRequest ForIvidTitleHolder()
+        public ICollection<IPointToLaceRequest> ForIvidTitleHolder()
         {
-            _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
+            _request = new[] { new LicensePlateNumberIvidTitleHolderOnlyRequest()};
             return _request;
         }
 
-        public ILaceRequest ForIvidTitleHolderWithAbsaFinancedInterest()
+        public ICollection<IPointToLaceRequest> ForIvidTitleHolderWithAbsaFinancedInterest()
         {
-            _request = new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest();
+            _request = new[] {new LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest()};
             return _request;
         }
 
-        public ILaceRequest ForRgtVin()
+        public ICollection<IPointToLaceRequest> ForRgtVin()
         {
-            _request = new LicensePlateNumberRgtVinOnlyRequest();
+            _request = new[] { new LicensePlateNumberRgtVinOnlyRequest() };
             return _request;
         }
 
-        public ILaceRequest ForRgt()
+        public ICollection<IPointToLaceRequest> ForRgt()
         {
-            _request = new LicensePlateNumberRgtOnlyRequest();
+            _request = new[] {new LicensePlateNumberRgtOnlyRequest()};
             return _request;
         }
 
-        public ILaceRequest ForLightstone()
+        public ICollection<IPointToLaceRequest> ForLightstone()
         {
-            _request = new LicensePlateNumberLightstoneOnlyRequest();
+            _request = new[] {new LicensePlateNumberLightstoneOnlyRequest()};
             return _request;
         }
 
-        public ILaceRequest ForAllSources()
+        public ICollection<IPointToLaceRequest> ForAllSources()
         {
-            _request = new LicensePlateNumberAllDataProvidersRequest();
+            _request = new[] {new LicensePlateNumberAllDataProvidersRequest()};
             return _request;
         }
 
-        public ILaceRequest ForPropertySources()
+        public ICollection<IPointToLaceRequest> ForPropertySources()
         {
-            return new PropertiesRequest();
+            return new Collection<IPointToLaceRequest>() {new PropertiesRequest()};
         }
 
     }

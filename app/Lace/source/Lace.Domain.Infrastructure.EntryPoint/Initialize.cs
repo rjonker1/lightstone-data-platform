@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
@@ -12,13 +13,14 @@ namespace Lace.Domain.Infrastructure.EntryPoint
     {
         public ICollection<IPointToLaceProvider> DataProviderResponses { get; private set; }
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
 
         private readonly IBuildSourceChain _buildSourceChain;
 
         private readonly IBus _bus;
 
-        public Initialize(ICollection<IPointToLaceProvider> responses, ILaceRequest request, IBus bus,
+        public Initialize(ICollection<IPointToLaceProvider> responses, ICollection<IPointToLaceRequest> request,
+            IBus bus,
             IBuildSourceChain buildSourceChain)
         {
             _log = LogManager.GetLogger(GetType());
@@ -37,7 +39,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 throw new Exception("Source Chain cannot be null");
             }
 
-            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses, _request.RequestAggregation.AggregateId);
+            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses,
+                _request.First().Aggregation.AggregateId);
         }
     }
 }

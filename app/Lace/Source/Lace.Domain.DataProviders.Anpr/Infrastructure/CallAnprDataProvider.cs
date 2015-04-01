@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using Common.Logging;
-using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Certificate.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Certificate.Infrastructure.Factory;
@@ -13,6 +12,7 @@ using Lace.Domain.DataProviders.Anpr.AnprServiceReference;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
+using Lace.Shared.Extensions;
 using Lace.Shared.Monitoring.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure
@@ -20,12 +20,12 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
     public class CallAnprDataProvider : ICallTheDataProviderSource
     {
         private readonly ILog _log;
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISetupCertificateRepository _repository;
         private IProvideCertificate _certificate;
         private AnprResComplexType _anprResponse;
 
-        public CallAnprDataProvider(ILaceRequest request, ISetupCertificateRepository repository)
+        public CallAnprDataProvider(ICollection<IPointToLaceRequest> request, ISetupCertificateRepository repository)
         {
             _log = LogManager.GetLogger(GetType());
             _request = request;
@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             {
                 _certificate =
                     new CoOrdinateCertificateFactory(
-                        new CoOrdinateCertificateRequest(_request.CoOrdinates.Latitude, _request.CoOrdinates.Longitude),
+                        new CoOrdinateCertificateRequest(_request.GetFromRequest<IHaveCoOrdinateInformation>().Latitude, _request.GetFromRequest<IHaveCoOrdinateInformation>().Longitude),
                         _repository);
 
                 if (!_certificate.IsSuccessfull || _certificate.Certificate == null ||
@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
                 if (proxy.State == CommunicationState.Closed)
                     proxy.Open();
 
-                var builder = new BuildAnprRequest(_request).Build();
+                var builder = new BuildAnprRequest(_request.GetFromRequest<IHaveCoOrdinateInformation>()).Build();
                 _anprResponse = proxy.AnprProcessRecognition(builder.AnprRequest);
 
                 proxy.Close();
@@ -66,7 +66,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
-            var transformer = new TransformAnprResponse(_anprResponse, _request.RequestAggregation.AggregateId);
+            var transformer = new TransformAnprResponse(_anprResponse, _request.GetFromRequest<IAmVehicleRequest>().Aggregation.AggregateId);
             if (transformer.Continue)
             {
                 transformer.Transform();

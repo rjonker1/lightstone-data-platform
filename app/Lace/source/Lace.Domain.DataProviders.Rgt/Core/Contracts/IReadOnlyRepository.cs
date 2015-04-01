@@ -5,6 +5,6 @@ namespace Lace.Domain.DataProviders.Rgt.Core.Contracts
 {
     public interface IReadOnlyRepository<T>
     {
-        IEnumerable<T> FindWithRequest(IProvideCarInformationForRequest request);
+        IEnumerable<T> FindWithRequest(IHaveCarInformation request);
     }
 }

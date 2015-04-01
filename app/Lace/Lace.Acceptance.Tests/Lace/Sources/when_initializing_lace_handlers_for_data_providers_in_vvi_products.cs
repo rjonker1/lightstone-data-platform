@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
@@ -8,6 +9,7 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.Core.Dto;
 using Lace.Domain.Infrastructure.EntryPoint;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
+using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using NServiceBus;
@@ -17,7 +19,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
 {
     public class when_initializing_lace_handlers_for_data_providers_in_vvi_products : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly IBus _monitoring;
         private readonly IBootstrap _initialize;
         private readonly IBuildSourceChain _buildSourceChain;
@@ -26,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _monitoring = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new CreateSourceChain(_request.Package);
+            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IAmVehicleRequest>().Package);
             _buildSourceChain.Build();
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _monitoring,
                 _buildSourceChain);

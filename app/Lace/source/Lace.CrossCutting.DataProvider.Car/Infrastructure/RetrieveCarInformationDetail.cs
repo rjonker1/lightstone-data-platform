@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using System.Net.Cache;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto;
 using Lace.CrossCutting.DataProvider.Car.UnitOfWork;
 using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {
@@ -13,17 +11,17 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
     {
         public bool IsSatisfied { get; private set; }
         public CarInfo CarInformation { get; private set; }
-        public IProvideCarInformationForRequest CarInformationRequest { get; private set; }
+        public IHaveCarInformation CarInformationRequest { get; private set; }
 
         private IGetCarInfo _getCarInformation;
         private readonly ISetupCarRepository _repositories;
-        private readonly ILaceRequest _request;
+        private readonly IHaveVehicle _request;
 
-        public RetrieveCarInformationDetail(ILaceRequest request, ISetupCarRepository repositories)
+        public RetrieveCarInformationDetail(IHaveVehicle request, ISetupCarRepository repositories)
         {
             _repositories = repositories;
             _request = request;
-            CarInformationRequest = new CarInformationRequest(_request.Vehicle.Vin);
+            CarInformationRequest = new CarInformationRequest(_request.Vin);
         }
 
         public IRetrieveCarInformation SetupDataSources()

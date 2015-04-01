@@ -17,7 +17,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
 {
     public class when_consuming_ivid_title_holder_data_provider : Specification
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
         private readonly ICollection<IPointToLaceProvider> _response;
         private IvidTitleHolderDataProvider _consumer;
@@ -26,7 +26,7 @@ namespace Lace.Acceptance.Tests.Lace.Consumers
         public when_consuming_ivid_title_holder_data_provider()
         {
             _monitoring = MonitoringBusBuilder.ForIvidTitleHolderCommands(Guid.NewGuid());
-             _request = new LicensePlateNumberIvidTitleHolderOnlyRequest();
+            _request = new[] {new LicensePlateNumberIvidTitleHolderOnlyRequest()};
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
         }
 

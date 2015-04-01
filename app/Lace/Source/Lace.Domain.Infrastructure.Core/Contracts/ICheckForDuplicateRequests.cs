@@ -4,6 +4,6 @@ namespace Lace.Domain.Infrastructure.Core.Contracts
 {
     public interface ICheckForDuplicateRequests
     {
-        bool IsRequestDuplicated(ILaceRequest request);
+        bool IsRequestDuplicated(IPointToLaceRequest request);
     }
 }

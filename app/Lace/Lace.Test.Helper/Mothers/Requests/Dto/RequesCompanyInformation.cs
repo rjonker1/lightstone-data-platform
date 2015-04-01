@@ -3,7 +3,7 @@ using Lace.Domain.Core.Contracts.Requests;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestComapanyInformation : IProvideBusinessInformationForRequest
+    public class RequestComapanyInformation : IHaveBusinessInformation
     {
 
         public RequestComapanyInformation()

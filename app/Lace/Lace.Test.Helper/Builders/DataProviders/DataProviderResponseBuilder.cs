@@ -1,17 +1,22 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.Ivid.IvidServiceReference;
+using Lace.Shared.Extensions;
 
 namespace Lace.Test.Helper.Builders.DataProviders
 {
     public class DataProviderResponseBuilder
     {
-        public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(ILaceRequest request)
+        public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(ICollection<IPointToLaceRequest> request)
         {
-            return new IvidRequestMessage(request)
-               .HpiQueryRequest;
+            return
+                new IvidRequestMessage(request.GetFromRequest<IAmVehicleRequest>().User,
+                    request.GetFromRequest<IAmVehicleRequest>().Vehicle,
+                    request.GetFromRequest<IAmVehicleRequest>().Package.Name)
+                    .HpiQueryRequest;
         }
     }
 

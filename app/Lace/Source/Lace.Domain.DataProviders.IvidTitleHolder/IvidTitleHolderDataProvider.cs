@@ -16,10 +16,10 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
 {
     public class IvidTitleHolderDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public IvidTitleHolderDataProvider(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public IvidTitleHolderDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {
@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             {
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
-                _monitoring.Begin(new { _request.User, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch);
+                _monitoring.Begin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));

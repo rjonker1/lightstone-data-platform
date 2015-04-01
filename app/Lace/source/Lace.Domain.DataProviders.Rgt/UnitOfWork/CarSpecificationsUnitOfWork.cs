@@ -20,7 +20,7 @@ namespace Lace.Domain.DataProviders.Rgt.UnitOfWork
             _repository = repository;
         }
 
-        public void GetCarSpecifications(IProvideCarInformationForRequest request)
+        public void GetCarSpecifications(IHaveCarInformation request)
         {
             try
             {

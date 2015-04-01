@@ -16,10 +16,10 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
     public class FakeIvidTitleHolderSourceExecution : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
-        private readonly ILaceRequest _request;
+        private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendMonitoringCommandsToBus _monitoring;
 
-        public FakeIvidTitleHolderSourceExecution(ILaceRequest request, IExecuteTheDataProviderSource nextSource,
+        public FakeIvidTitleHolderSourceExecution(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
             : base(nextSource, fallbackSource)
         {

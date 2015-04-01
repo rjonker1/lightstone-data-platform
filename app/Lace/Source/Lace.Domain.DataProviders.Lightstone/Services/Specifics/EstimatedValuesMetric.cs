@@ -15,9 +15,9 @@ namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics
         public IEnumerable<Statistic> Statistics { get; private set; }
 
         private IList<Statistic> _gauges;
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
 
-        public EstimatedValuesMetric(IProvideCarInformationForRequest request, IEnumerable<Statistic> statistics)
+        public EstimatedValuesMetric(IHaveCarInformation request, IEnumerable<Statistic> statistics)
         {
             Statistics = statistics;
             _request = request;

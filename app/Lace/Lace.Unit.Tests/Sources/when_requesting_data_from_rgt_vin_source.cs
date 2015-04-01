@@ -18,7 +18,7 @@ namespace Lace.Unit.Tests.Sources
     public class when_requesting_data_from_rgt_vin_source : Specification
     {
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
-        private readonly ILaceRequest _rgtVinRequest;
+        private readonly ICollection<IPointToLaceRequest> _rgtVinRequest;
         private readonly ICollection<IPointToLaceProvider> _response;
         private readonly ISendMonitoringCommandsToBus _laceEvent;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;

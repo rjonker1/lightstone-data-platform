@@ -2,7 +2,7 @@
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure.Dto
 {
-    public class CarInformationRequest : IProvideCarInformationForRequest
+    public class CarInformationRequest : IHaveCarInformation
     {
         public CarInformationRequest()
         {

@@ -21,9 +21,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Lighstone
         private IGetCarType _getCarType;
         private IGetSales _getSales;
 
-        private readonly IProvideCarInformationForRequest _request;
+        private readonly IHaveCarInformation _request;
 
-        public FakeBaseRetrievalMetric(IProvideCarInformationForRequest request, IRespondWithValuation valuation)
+        public FakeBaseRetrievalMetric(IHaveCarInformation request, IRespondWithValuation valuation)
         {
             _request = request;
             Valuation = valuation;
