@@ -299,9 +299,13 @@ function initializePlugins() {
             });
         },
         select: function (event, ui) {
+            if ($('#' + ui.item.value).length) {
+                return;
+            }
+
             var $container = $(this).closest('.entity-autocomplete');
             var $select = $container.find('select');
-            $select.append('<option selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
+            $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '">' + ui.item.label + '</option>');
             $select.trigger("chosen:updated");
         }
     });

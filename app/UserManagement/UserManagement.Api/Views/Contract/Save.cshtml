@@ -196,7 +196,7 @@
                         @foreach (NamedEntityDto item in Model.Customers)
                         {
                             var isSelected = Model.Customers != null && Model.Customers.Select(x => x.Id).Contains(item.Id);
-                            <option selected="@isSelected" value="@item.Id">@item.Name</option>
+                            <option id="@item.Id" selected="@isSelected" value="@item.Id">@item.Name</option>
                         }
                     </select>
                 </div>
