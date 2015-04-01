@@ -39,7 +39,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
                 {
                     requesterEmail = _request.User.UserName ?? string.Empty,
                     requesterName = _request.User.UserFirstName ?? string.Empty,
-                    requesterPhone = _request.User.UserPhone ?? string.Empty
+                    requesterPhone = string.Empty
                 },
 
                 vin = CanContinue

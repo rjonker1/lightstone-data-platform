@@ -79,7 +79,14 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Contracts\IAmBusinessRequest.cs" />
+    <Compile Include="Contracts\IAmDriversLicenseRequest.cs" />
+    <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
+    <Compile Include="Contracts\IAmMakeRequest.cs" />
+    <Compile Include="Contracts\IAmPropertyRequest.cs" />
+    <Compile Include="Contracts\IAmVinNumberRequest.cs" />
     <Compile Include="Contracts\ILaceRequest.cs" />
+    <Compile Include="Contracts\IPointToLaceRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
