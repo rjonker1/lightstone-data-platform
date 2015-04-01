@@ -18,7 +18,7 @@ namespace Billing.Infrastructure.NHibernate
 
         public AutoPersistenceModel GetAutoPersistenceModel()
         {
-            return AutoMap.AssemblyOf<PreBilling>(this)
+            return AutoMap.AssemblyOf<Transaction>(this)
                 //.Where(type => type.IsSubclassOf(typeof (Entity)))
                 //.IncludeBase<NamedEntity>()
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()

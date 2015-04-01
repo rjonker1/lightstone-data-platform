@@ -62,7 +62,7 @@
     <Compile Include="DemoEntities\Product.cs" />
     <Compile Include="DemoEntities\TransactionMock.cs" />
     <Compile Include="DemoEntities\User.cs" />
-    <Compile Include="PreBilling.cs" />
+    <Compile Include="Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageBilling.cs" />
   </ItemGroup>

@@ -96,23 +96,23 @@ namespace Billing.Api.Modules
         }
     }
 
-    public interface IServerPageRepo : IRepository<PreBilling>
+    public interface IServerPageRepo : IRepository<Domain.Entities.Transaction>
     {
-        PagedList<PreBilling> Search(string searchValue, int pageIndex, int pageSize);
+        PagedList<Domain.Entities.Transaction> Search(string searchValue, int pageIndex, int pageSize);
     }
 
-    public class PreBillingDtoRepository : Repository<PreBilling>, IServerPageRepo
+    public class PreBillingDtoRepository : Repository<Domain.Entities.Transaction>, IServerPageRepo
     {
         public PreBillingDtoRepository(ISession session)
             : base(session)
         {
         }
 
-        public PagedList<PreBilling> Search(string searchValue, int pageIndex, int pageSize)
+        public PagedList<Domain.Entities.Transaction> Search(string searchValue, int pageIndex, int pageSize)
         {
-            var predicate = PredicateBuilder.False<PreBilling>();
+            var predicate = PredicateBuilder.False<Domain.Entities.Transaction>();
             //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            return new PagedList<PreBilling>(this, pageIndex, pageSize);
+            return new PagedList<Domain.Entities.Transaction>(this, pageIndex, pageSize);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Billing.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Customer> mapping)
         {
-            mapping.HasMany(x => x.InvoicePreBillings).Cascade.SaveUpdate();
+            //mapping.HasMany(x => x.InvoicePreBillings).Cascade.SaveUpdate();
             mapping.HasMany(x => x.Users).Cascade.SaveUpdate();
         }
     }

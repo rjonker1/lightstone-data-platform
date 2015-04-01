@@ -6,23 +6,23 @@ using NHibernate;
 
 namespace Billing.Infrastructure.Repositories
 {
-    public interface IPreBillingRepository : IRepository<PreBilling>
+    public interface IPreBillingRepository : IRepository<Transaction>
     {
-        PagedList<PreBilling> Search(string searchValue, int pageIndex, int pageSize);
+        PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize);
     }
 
-    public class PreBillingRepository : Repository<PreBilling>, IPreBillingRepository
+    public class PreBillingRepository : Repository<Transaction>, IPreBillingRepository
     {
         public PreBillingRepository(ISession session)
             : base(session)
         {
         }
 
-        public PagedList<PreBilling> Search(string searchValue, int pageIndex, int pageSize)
+        public PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize)
         {
-            var predicate = PredicateBuilder.False<PreBilling>();
+            var predicate = PredicateBuilder.False<Transaction>();
             //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            return new PagedList<PreBilling>(this, pageIndex, pageSize, predicate);
+            return new PagedList<Transaction>(this, pageIndex, pageSize, predicate);
         }
     }
 }

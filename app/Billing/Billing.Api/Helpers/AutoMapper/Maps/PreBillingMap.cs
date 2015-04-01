@@ -5,6 +5,7 @@ using AutoMapper;
 using Billing.Api.Modules;
 using Billing.Domain.Entities;
 using Billing.Domain.Entities.DemoEntities;
+using Transaction = Billing.Domain.Entities.Transaction;
 
 namespace Billing.Api.Helpers.AutoMapper.Maps
 {
@@ -12,9 +13,9 @@ namespace Billing.Api.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IEnumerable<PreBilling>, IEnumerable<PreBillingDto>>()
-                .ConvertUsing(s => s.Select(Mapper.Map<PreBilling, PreBillingDto>));
-            Mapper.CreateMap<PreBilling, PreBillingDto>();
+            Mapper.CreateMap<IEnumerable<Transaction>, IEnumerable<PreBillingDto>>()
+                .ConvertUsing(s => s.Select(Mapper.Map<Transaction, PreBillingDto>));
+            Mapper.CreateMap<Transaction, PreBillingDto>();
             //.ForMember(dest => dest.CustomerName, opt => opt.MapFrom(x => x.NumUsers));
 
             Mapper.CreateMap<IEnumerable<Customer>, IEnumerable<PreBillingDto>>()
