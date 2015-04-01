@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Entities\CreateUpdateEntity.cs" />
+    <Compile Include="DataProviderTransaction.cs" />
     <Compile Include="DemoEntities\Customer.cs" />
     <Compile Include="DemoEntities\Product.cs" />
     <Compile Include="DemoEntities\TransactionMock.cs" />
