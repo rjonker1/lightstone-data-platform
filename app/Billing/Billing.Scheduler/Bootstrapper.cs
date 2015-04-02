@@ -1,7 +1,10 @@
 ﻿using System;
 using Hangfire;
 using Hangfire.SqlServer;
+using Microsoft.Owin;
 using Owin;
+
+[assembly: OwinStartup(typeof(Billing.Scheduler.Bootstrapper))]
 
 namespace Billing.Scheduler
 {
