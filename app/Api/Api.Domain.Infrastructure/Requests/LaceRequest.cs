@@ -7,7 +7,7 @@ namespace Api.Domain.Infrastructure.Requests
     public class LicensePlateRequest : IAmLicensePlateRequest
     {
 
-        public LicensePlateRequest(IHaveUserInformation user, IHaveVehicle vehicle, IHaveContractInformation contract,
+        public LicensePlateRequest(IHaveUser user, IHaveVehicle vehicle, IHaveContract contract,
             IHavePackageForRequest package, IHaveRequestContext context, DateTime requestDate)
         {
             User = user;
@@ -17,11 +17,11 @@ namespace Api.Domain.Infrastructure.Requests
             Request = context;
             RequestDate = requestDate;
         }
-        public IHaveUserInformation User { get; private set; }
+        public IHaveUser User { get; private set; }
 
         public IHaveVehicle Vehicle { get; private set; }
 
-        public IHaveContractInformation Contract { get; private set; }
+        public IHaveContract Contract { get; private set; }
 
         public IHavePackageForRequest Package { get; private set; }
 
@@ -33,11 +33,11 @@ namespace Api.Domain.Infrastructure.Requests
 
     public class BusinessRequest : IAmBusinessRequest
     {
-        public IHaveBusinessInformation Business { get; private set; }
+        public IHaveBusiness Business { get; private set; }
 
-        public IHaveUserInformation User { get; private set; }
+        public IHaveUser User { get; private set; }
 
-        public IHaveContractInformation Contract { get; private set; }
+        public IHaveContract Contract { get; private set; }
 
         public IHavePackageForRequest Package { get; private set; }
 
@@ -48,7 +48,7 @@ namespace Api.Domain.Infrastructure.Requests
 
     public class PropertyRequest : IAmPropertyRequest
     {
-        public PropertyRequest(IHavePropertyInformation property, IHaveUserInformation user, IHaveContractInformation contract,
+        public PropertyRequest(IHaveProperty property, IHaveUser user, IHaveContract contract,
             IHavePackageForRequest package, IHaveRequestContext request, DateTime requestDate)
         {
             Property = property;
@@ -59,11 +59,11 @@ namespace Api.Domain.Infrastructure.Requests
             RequestDate = requestDate;
         }
 
-        public IHavePropertyInformation Property { get; private set; }
+        public IHaveProperty Property { get; private set; }
 
-        public IHaveUserInformation User { get; private set; }
+        public IHaveUser User { get; private set; }
 
-        public IHaveContractInformation Contract { get; private set; }
+        public IHaveContract Contract { get; private set; }
 
         public IHavePackageForRequest Package { get; private set; }
 
@@ -77,9 +77,9 @@ namespace Api.Domain.Infrastructure.Requests
     public class DriversLicenseRequest : IAmDriversLicenseRequest
     {
 
-        public IHaveDriversLicenseInformation DriversLicense { get; private set; }
+        public IHaveDriversLicense DriversLicense { get; private set; }
 
-        public IHaveContractInformation Contract { get; private set; }
+        public IHaveContract Contract { get; private set; }
 
         public IHavePackageForRequest Package { get; private set; }
 
@@ -88,7 +88,7 @@ namespace Api.Domain.Infrastructure.Requests
         public DateTime RequestDate { get; private set; }
     }
 
-    public class User : IHaveUserInformation
+    public class User : IHaveUser
     {
 
         public User(Guid userId, string userName, string firstName)
@@ -175,7 +175,7 @@ namespace Api.Domain.Infrastructure.Requests
         }
     }
 
-    public class DriversLicense : IHaveDriversLicenseInformation
+    public class DriversLicense : IHaveDriversLicense
     {
         public DriversLicense(string registrationCode, string scanData, Guid userId, string userName)
         {
@@ -194,7 +194,7 @@ namespace Api.Domain.Infrastructure.Requests
         public string Username { get; private set; }
     }
 
-    public class Fica : IHaveFicaInformation
+    public class Fica : IHaveFica
     {
         public Fica(int ficaTransactionId, long idNumber, Guid transactionToken, string username)
         {
@@ -213,7 +213,7 @@ namespace Api.Domain.Infrastructure.Requests
         public string Username { get; private set; }
     }
 
-    public class Contract : IHaveContractInformation
+    public class Contract : IHaveContract
     {
         public Contract(long contractVersion, string accountNumber, Guid contractId)
         {
@@ -250,7 +250,7 @@ namespace Api.Domain.Infrastructure.Requests
         public long Version { get; private set; }
     }
 
-    public class Property : IHavePropertyInformation
+    public class Property : IHaveProperty
     {
         public Property(string trackingNumber, int maxNumberOfRows, Guid userid, string idNumber)
         {
