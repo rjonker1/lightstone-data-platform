@@ -53,13 +53,13 @@
     <Compile Include="Contracts\IHaveCarInformation.cs" />
     <Compile Include="Contracts\IHaveContract.cs" />
     <Compile Include="Contracts\IHaveCoOrdinates.cs" />
-    <Compile Include="Contracts\IHaveDriversLicenseInformation.cs" />
-    <Compile Include="Contracts\IHaveFicaInformation.cs" />
+    <Compile Include="Contracts\IHaveDriversLicense.cs" />
+    <Compile Include="Contracts\IHaveFica.cs" />
     <Compile Include="Contracts\IHaveJisInformation.cs" />
     <Compile Include="Contracts\IHavePackageForRequest.cs" />
     <Compile Include="Contracts\IAmPropertyRequest.cs" />
-    <Compile Include="Contracts\IHavePropertyInformation.cs" />
-    <Compile Include="Contracts\IHaveUserInformation.cs" />
+    <Compile Include="Contracts\IHaveProperty.cs" />
+    <Compile Include="Contracts\IHaveUser.cs" />
     <Compile Include="Contracts\IHaveVehicle.cs" />
     <Compile Include="Contracts\IPointToVehicleRequest.cs" />
     <Compile Include="Contracts\IAmVinNumberRequest.cs" />
