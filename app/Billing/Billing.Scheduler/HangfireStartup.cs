@@ -1,14 +1,13 @@
-﻿using System;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Billing.Scheduler.Bootstrapper))]
+[assembly: OwinStartup(typeof(Billing.Scheduler.HangfireStartup))]
 
 namespace Billing.Scheduler
 {
-    public class Bootstrapper
+    public class HangfireStartup
     {
         public void Configuration(IAppBuilder app)
         {
@@ -18,7 +17,7 @@ namespace Billing.Scheduler
                 config.UseServer();
             });
 
-            RecurringJob.AddOrUpdate(() => Console.Write("Integrity Testeroonie"), "*/5 * * * *");
+           // new ApiSchedule(userManagementApiClient);
         }
     }
 }
