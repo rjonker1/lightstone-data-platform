@@ -548,6 +548,7 @@
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
     <Compile Include="Modules\Transaction.cs" />
+    <Compile Include="Modules\UMModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>

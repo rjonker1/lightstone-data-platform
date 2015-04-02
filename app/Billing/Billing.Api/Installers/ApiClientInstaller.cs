@@ -12,6 +12,7 @@ namespace Billing.Api.Installers
         {
             this.Info(() => "Attempting to install ApiClientInstaller");
             container.Register(Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>().LifestyleTransient());
+            container.Register(Component.For<IUserManagementApiClient>().ImplementedBy<UserManagementApiClient>().LifestyleTransient());
             this.Info(() => "Successfully installed ApiClientInstaller");
         }
     }

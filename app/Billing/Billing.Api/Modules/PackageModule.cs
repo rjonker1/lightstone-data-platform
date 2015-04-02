@@ -9,13 +9,7 @@ namespace Billing.Api.Modules
     {
         public PackageModule(IPackageBuilderApiClient packageBuilderApiClient)
         {
-            Get["/Packages/{filter}"] = parameters =>
-            {
-                var packagesJson = packageBuilderApiClient.Get("", "Packages", new { parameters.filter });
-                //var packages = JsonConvert.DeserializeObject<IEnumerable<PackageDto>>(packagesJson);
-
-                return packagesJson;
-            };
+            Get["/Packages"] = parameters => packageBuilderApiClient.Get("", "Packages");
         }
     }
 }
