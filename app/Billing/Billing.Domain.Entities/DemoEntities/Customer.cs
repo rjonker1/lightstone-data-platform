@@ -7,7 +7,7 @@ namespace Billing.Domain.Entities.DemoEntities
 {
     public class Customer : NamedEntity
     {
-        public virtual IEnumerable<PreBilling> InvoicePreBillings { get; protected internal set; }
+        public virtual IEnumerable<Transaction> InvoicePreBillings { get; protected internal set; }
         public virtual IEnumerable<User> Users { get; protected internal set; }
 
         //Used for AutoMapper (Flatten structure for maaping)

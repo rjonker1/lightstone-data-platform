@@ -39,13 +39,8 @@ namespace Billing.Api
                 new RepositoryInstaller(),
                 new CommandInstaller(),
                 new BusInstaller(),
-                //new ServiceLocatorInstaller(),
-                new AutoMapperInstaller()
-                //new HelperInstaller(),
-                //new ApiClientInstaller(),
-                //new RedisInstaller(),
-                //new AuthenticationInstaller(),
-                //new HashProviderInstaller()
+                new AutoMapperInstaller(),
+                new ApiClientInstaller()
                 );
 
             //Drop create

@@ -19,6 +19,8 @@ namespace UserManagement.Api.Modules
     {
         public UserModule(IBus bus, IUserRepository users)
         {
+            Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users));
+
             Get["/Users"] = _ =>
             {
                 var search = Context.Request.Query["search"];

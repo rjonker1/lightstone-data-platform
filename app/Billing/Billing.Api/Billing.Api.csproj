@@ -533,6 +533,7 @@
     <Compile Include="Helpers\AutoMapper\Maps\CustomerToPreBillingDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />
+    <Compile Include="Installers\ApiClientInstaller.cs" />
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\CommandInstaller.cs" />
@@ -541,11 +542,13 @@
     <Compile Include="Installers\WindsorInstaller.cs" />
     <Compile Include="Modules\AdminBillingModule.cs" />
     <Compile Include="Modules\MIModule.cs" />
+    <Compile Include="Modules\PackageModule.cs" />
     <Compile Include="Modules\PreBillingModule.cs" />
     <Compile Include="Modules\Foo.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\Ping.cs" />
     <Compile Include="Modules\Transaction.cs" />
+    <Compile Include="Modules\UMModule.cs" />
     <Compile Include="ViewModels\DataTablesViewModel.cs" />
     <Compile Include="ViewModels\HeaderViewModel.cs" />
   </ItemGroup>
