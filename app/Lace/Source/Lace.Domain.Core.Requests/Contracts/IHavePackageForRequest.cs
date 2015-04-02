@@ -3,7 +3,7 @@ using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmPackageForRequest
+    public interface IHavePackageForRequest
     {
         Guid Id { get; }
         long Version { get; }

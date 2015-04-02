@@ -26,7 +26,7 @@ namespace Lace.Unit.Tests.SourceRequests
 
         public override void Observe()
         {
-            _configureRequestMessage = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IAmVehicleRequest>().User, _response);
+            _configureRequestMessage = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User, _response);
         }
 
         [Observation]

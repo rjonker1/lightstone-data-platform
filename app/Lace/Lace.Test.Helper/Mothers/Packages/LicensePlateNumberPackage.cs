@@ -4,7 +4,7 @@ using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Mothers.Packages
 {
-    public class LicensePlateNumberPackage : IAmPackageForRequest
+    public class LicensePlateNumberPackage : IHavePackageForRequest
     {
         private readonly DataProviderName[] _dataProviders;
         private readonly Guid _packageId;

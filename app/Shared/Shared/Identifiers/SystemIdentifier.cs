@@ -33,7 +33,7 @@ namespace DataPlatform.Shared.Identifiers
 
         public static SystemIdentifier CreateLim()
         {
-            return new SystemIdentifier("LIM", ServerIdentifier.Create());
+            return new SystemIdentifier("LIMM", ServerIdentifier.Create());
         }
 
         public static SystemIdentifier CreateWeb()

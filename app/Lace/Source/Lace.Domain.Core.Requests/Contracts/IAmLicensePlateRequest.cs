@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmLicensePlateRequest : IAmVehicleRequest
+    public interface IAmLicensePlateRequest : IPointToVehicleRequest
     {
      
     }

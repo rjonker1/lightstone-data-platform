@@ -28,7 +28,7 @@ namespace Lace.Acceptance.Tests.Lace.Sources
         {
             _monitoring = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForIvid();
-            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IAmVehicleRequest>().Package);
+            _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToVehicleRequest>().Package);
             _buildSourceChain.Build();
             _initialize = new Initialize(new Collection<IPointToLaceProvider>(),  _request, _monitoring, _buildSourceChain);
         }

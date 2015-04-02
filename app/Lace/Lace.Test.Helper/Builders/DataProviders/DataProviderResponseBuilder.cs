@@ -13,9 +13,9 @@ namespace Lace.Test.Helper.Builders.DataProviders
         public static HpiStandardQueryRequest IvidHpiStandardQueryRequest(ICollection<IPointToLaceRequest> request)
         {
             return
-                new IvidRequestMessage(request.GetFromRequest<IAmVehicleRequest>().User,
-                    request.GetFromRequest<IAmVehicleRequest>().Vehicle,
-                    request.GetFromRequest<IAmVehicleRequest>().Package.Name)
+                new IvidRequestMessage(request.GetFromRequest<IPointToVehicleRequest>().User,
+                    request.GetFromRequest<IPointToVehicleRequest>().Vehicle,
+                    request.GetFromRequest<IPointToVehicleRequest>().Package.Name)
                     .HpiQueryRequest;
         }
     }

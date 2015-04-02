@@ -27,7 +27,7 @@ namespace Lace.Test.Helper.Fakes.Lace
 
         public void Execute()
         {
-            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses, _request.First().Aggregation.AggregateId);
+            _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses, _request.First().Request.RequestId);
         }
 
 

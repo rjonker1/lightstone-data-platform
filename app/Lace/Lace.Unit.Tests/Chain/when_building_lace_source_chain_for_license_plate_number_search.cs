@@ -32,7 +32,7 @@ namespace Lace.Unit.Tests.Chain
         {
             _bus = BusFactory.MonitoringBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
-            _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IAmVehicleRequest>().Package);
+            _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IPointToVehicleRequest>().Package);
             _buildSourceChain.Build();
         }
 

@@ -28,7 +28,7 @@ namespace Lace.Unit.Tests.Transform
 
         public override void Observe()
         {
-            _transformer = new TransformAudatexResponse(_audatexWebServiceResponse, _response, _request.GetFromRequest<IAmVehicleRequest>().Vehicle);
+            _transformer = new TransformAudatexResponse(_audatexWebServiceResponse, _response, _request.GetFromRequest<IPointToVehicleRequest>().Vehicle);
             _transformer.Transform();
         }
 

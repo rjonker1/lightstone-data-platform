@@ -40,7 +40,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             }
 
             _buildSourceChain.SourceChain(_request, _bus, DataProviderResponses,
-                _request.First().Aggregation.AggregateId);
+                _request.First().Request.RequestId);
         }
     }
 }

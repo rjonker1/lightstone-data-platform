@@ -1,5 +1,4 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
@@ -18,9 +17,9 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return new RequestVehicleInformation(); }
         }
 
-        public IHaveAggregation Aggregation
+        public IHaveRequestContext Request
         {
-            get { return new AggregationInformation(); }
+            get { return new RequestContextInformation(); }
         }
 
         public DateTime RequestDate
@@ -28,9 +27,15 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return DateTime.Now; }
         }
 
-        public IAmPackageForRequest Package
+        public IHavePackageForRequest Package
         {
             get { return LicensePlateNumberLightstoneSourcePackage.LicenseNumberPackage(); }
+        }
+
+
+        public IHaveContractInformation Contract
+        {
+            get { return new RequestContractInformation(); }
         }
     }
 }

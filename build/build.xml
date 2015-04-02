@@ -214,7 +214,7 @@
         <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
-        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Contracts" />
+        <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums" />
       </dependencies>
     </nuget>
 

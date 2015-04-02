@@ -2,6 +2,7 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 
 namespace Lace.Domain.DataProviders.Lightstone.Services.Specifics

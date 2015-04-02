@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmVinNumberRequest : IAmVehicleRequest
+    public interface IAmVinNumberRequest : IPointToVehicleRequest
     {
     }
 }

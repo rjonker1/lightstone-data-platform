@@ -100,7 +100,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private void GetCarInformation()
         {
             _carInformation =
-                new RetrieveCarInformationDetail(_request.GetFromRequest<IAmVehicleRequest>().Vehicle,
+                new RetrieveCarInformationDetail(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle,
                     _carRepository)
                     .SetupDataSources()
                     .GenerateData()
@@ -124,13 +124,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             if (ividResponse == null)
                 return;
 
-            if (_request.GetFromRequest<IAmVehicleRequest>().Vehicle != null &&
-                !string.IsNullOrEmpty(_request.GetFromRequest<IAmVehicleRequest>().Vehicle.Vin) &&
-                _request.GetFromRequest<IAmVehicleRequest>()
+            if (_request.GetFromRequest<IPointToVehicleRequest>().Vehicle != null &&
+                !string.IsNullOrEmpty(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin) &&
+                _request.GetFromRequest<IPointToVehicleRequest>()
                     .Vehicle.Vin.Equals(ividResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
                 return;
 
-            _request.GetFromRequest<IAmVehicleRequest>().Vehicle.SetVinNumber(ividResponse.Vin);
+            _request.GetFromRequest<IPointToVehicleRequest>().Vehicle.SetVinNumber(ividResponse.Vin);
         }
 
     }

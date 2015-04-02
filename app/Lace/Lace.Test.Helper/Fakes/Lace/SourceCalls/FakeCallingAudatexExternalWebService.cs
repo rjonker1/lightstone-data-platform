@@ -30,7 +30,7 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         public void TransformResponse(ICollection<IPointToLaceProvider> response,
             ISendMonitoringCommandsToBus monitoring)
         {
-            var transformer = new TransformAudatexResponse(_audatexResponse, response, _request.GetFromRequest<IAmVehicleRequest>().Vehicle);
+            var transformer = new TransformAudatexResponse(_audatexResponse, response, _request.GetFromRequest<IPointToVehicleRequest>().Vehicle);
 
             if (transformer.Continue)
             {

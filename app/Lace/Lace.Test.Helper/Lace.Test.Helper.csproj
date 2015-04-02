@@ -195,6 +195,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId113018.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId110490.cs" />
     <Compile Include="Mothers\Requests\Dto\RequesPropertyInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestContractInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestDriversLicenseInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestFicaInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestJisInformation.cs" />
@@ -204,7 +205,7 @@
     <Compile Include="Mothers\Requests\Dto\RequestCarInformationForCarHavingId107483.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest.cs" />
     <Compile Include="Mothers\Requests\Dto\IvidTitleHolderRequestVehicleInformation.cs" />
-    <Compile Include="Mothers\Requests\Dto\RequestAggregationInformation.cs" />
+    <Compile Include="Mothers\Requests\Dto\RequestContextInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestUserInformation.cs" />
     <Compile Include="Mothers\Requests\Dto\RequestVehicleInformation.cs" />
     <Compile Include="Mothers\Requests\LicensePlateNumberAudatexOnlyRequest.cs" />

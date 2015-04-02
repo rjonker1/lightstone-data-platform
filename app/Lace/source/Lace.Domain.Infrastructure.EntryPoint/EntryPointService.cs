@@ -39,10 +39,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             _log.DebugFormat("Receiving request into entry point. Request {0}", request);
             try
             {
-                if (request.First().Aggregation.AggregateId == Guid.Empty)
+                if (request.First().Request.RequestId == Guid.Empty)
                     throw new Exception("Request Id for Aggregation is required. Cannot complete request");
 
-                _monitoring = new SendEntryPointCommands(_bus, request.First().Aggregation.AggregateId,
+                _monitoring = new SendEntryPointCommands(_bus, request.First().Request.RequestId,
                     (int) ExecutionOrder.First);
 
                 _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);

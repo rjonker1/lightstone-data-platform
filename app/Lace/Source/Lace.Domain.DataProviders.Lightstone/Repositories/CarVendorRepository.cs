@@ -4,12 +4,11 @@ using System.Data;
 using System.Linq;
 using Lace.CrossCutting.Infrastructure.Orm;
 using Lace.CrossCutting.Infrastructure.Orm.Connections;
-using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core;
 using Lace.Domain.DataProviders.Lightstone.Core.Models;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.SqlStatements;
 using Lace.Domain.DataProviders.Lightstone.Services;
-using ServiceStack.Common.Extensions;
 using ServiceStack.Redis;
 
 namespace Lace.Domain.DataProviders.Lightstone.Repositories

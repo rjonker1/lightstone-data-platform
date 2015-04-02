@@ -1,5 +1,4 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Property;
 using Lace.Test.Helper.Mothers.Requests.Dto;
@@ -17,9 +16,9 @@ namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
             get { return new RequestPropertyInformation(); }
         }
 
-        public IHaveAggregation Aggregation
+        public IHaveRequestContext Request
         {
-            get { return new AggregationInformation(); }
+            get { return new RequestContextInformation(); }
         }
 
         public DateTime RequestDate
@@ -27,10 +26,14 @@ namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
             get { return DateTime.Now; }
         }
 
-        public IAmPackageForRequest Package
+        public IHavePackageForRequest Package
         {
             get { return PropertySourcePackage.PropertyPackage(); }
         }
-      
+
+        public IHaveContractInformation Contract
+        {
+            get { return new RequestContractInformation();}
+        }
     }
 }

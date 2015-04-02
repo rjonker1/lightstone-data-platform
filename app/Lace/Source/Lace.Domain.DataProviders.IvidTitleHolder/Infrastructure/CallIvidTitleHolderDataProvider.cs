@@ -47,7 +47,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
 
-                    var request = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IAmVehicleRequest>().User, response)
+                    var request = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User, response)
                         .TitleholderQueryRequest;
 
                     monitoring.Send(CommandType.Configuration, request, null);

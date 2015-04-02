@@ -1,4 +1,4 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
 {

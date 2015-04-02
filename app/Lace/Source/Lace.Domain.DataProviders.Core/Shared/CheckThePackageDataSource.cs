@@ -18,7 +18,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
             }
         }
 
-        public bool CheckIfPackageRequiresDataProvider(IAmPackageForRequest package, DataProviderName dataProvider)
+        public bool CheckIfPackageRequiresDataProvider(IHavePackageForRequest package, DataProviderName dataProvider)
         {
             if (package == null || package.DataProviders == null || !package.DataProviders.Any()) return false;
 

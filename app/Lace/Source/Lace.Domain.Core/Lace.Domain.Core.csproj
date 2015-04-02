@@ -60,16 +60,6 @@
     <Compile Include="Contracts\DataProviders\Property\IRespondWithProperty.cs" />
     <Compile Include="Contracts\IProvideResponseFromDataProviders.cs" />
     <Compile Include="Contracts\Requests\IPointToLaceProvider.cs" />
-    <Compile Include="Contracts\Requests\IHaveCarInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveCoOrdinateInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveDriversLicenseInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveFicaInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveJisInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveBusinessInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveAggregation.cs" />
-    <Compile Include="Contracts\Requests\IHaveUserInformation.cs" />
-    <Compile Include="Contracts\Requests\IHavePropertyInformation.cs" />
-    <Compile Include="Contracts\Requests\IHaveVehicle.cs" />
     <Compile Include="Models\IvidCodePair.cs" />
     <None Include="Contracts\DataProviders\Specifics\IRespondWithCarModel.cs.old" />
     <None Include="Contracts\DataProviders\Specifics\IRespondWithVin12.cs.old" />

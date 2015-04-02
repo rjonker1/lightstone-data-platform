@@ -9,9 +9,9 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
     public class FakeSourceChain : IBuildSourceChain
     {
-        private readonly IAmPackageForRequest _action;
+        private readonly IHavePackageForRequest _action;
 
-        public FakeSourceChain(IAmPackageForRequest action)
+        public FakeSourceChain(IHavePackageForRequest action)
         {
             _action = action;
         }

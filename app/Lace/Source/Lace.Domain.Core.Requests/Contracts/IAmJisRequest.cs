@@ -1,6 +1,4 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
-
-namespace Lace.Domain.Core.Requests.Contracts
+﻿namespace Lace.Domain.Core.Requests.Contracts
 {
     public interface IAmJisRequest : IPointToLaceRequest
     {

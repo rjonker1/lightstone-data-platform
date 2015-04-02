@@ -2,6 +2,7 @@
 using System.Linq;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto

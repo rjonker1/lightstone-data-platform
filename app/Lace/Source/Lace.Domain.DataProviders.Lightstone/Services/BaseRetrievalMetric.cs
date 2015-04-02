@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Services.Specifics;

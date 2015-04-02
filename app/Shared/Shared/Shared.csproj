@@ -65,7 +65,9 @@
     <Compile Include="Enums\DataProviderAction.cs" />
     <Compile Include="Enums\DataProviderCommandSource.cs" />
     <Compile Include="Enums\DataProviderState.cs" />
+    <Compile Include="Enums\DeviceTypes.cs" />
     <Compile Include="Enums\MonitoringSource.cs" />
+    <Compile Include="Enums\SystemType.cs" />
     <Compile Include="ExceptionHandling\Guard.cs" />
     <Compile Include="ExceptionHandling\LightstoneAutoException.cs" />
     <Compile Include="Helpers\DynamicTypeCreator.cs" />

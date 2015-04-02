@@ -9,12 +9,12 @@ namespace Lace.Test.Helper.Mothers.Requests
 
     public class LicensePlateNumberAllDataProvidersRequest : IAmLicensePlateRequest
     {
-        private readonly IHaveAggregation _aggregation;
+        private readonly IHaveRequestContext _aggregation;
         private readonly DateTime _requestDate;
 
         public LicensePlateNumberAllDataProvidersRequest()
         {
-            _aggregation = new AggregationInformation();
+            _aggregation = new RequestContextInformation();
             _requestDate = DateTime.Now;
         }
 
@@ -28,7 +28,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return new RequestVehicleInformation(); }
         }
 
-        public IHaveAggregation Aggregation
+        public IHaveRequestContext Request
         {
             get { return _aggregation; }
         }
@@ -38,9 +38,15 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return _requestDate; }
         }
 
-        public IAmPackageForRequest Package
+        public IHavePackageForRequest Package
         {
             get { return LicensePlateNumberAllRequestPackage.LicenseNumberPackage(); }
+        }
+
+
+        public IHaveContractInformation Contract
+        {
+            get { return new RequestContractInformation(); }
         }
     }
 }

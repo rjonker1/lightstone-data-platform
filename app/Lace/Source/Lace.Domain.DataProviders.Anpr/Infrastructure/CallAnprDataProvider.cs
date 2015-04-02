@@ -66,7 +66,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
         {
-            var transformer = new TransformAnprResponse(_anprResponse, _request.GetFromRequest<IAmVehicleRequest>().Aggregation.AggregateId);
+            var transformer = new TransformAnprResponse(_anprResponse, _request.GetFromRequest<IPointToVehicleRequest>().Request.RequestId);
             if (transformer.Continue)
             {
                 transformer.Transform();

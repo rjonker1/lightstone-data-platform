@@ -59,7 +59,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
                         ividWebService.IvidRequestMessageProperty;
 
-                    var request = new IvidRequestMessage(_request.GetFromRequest<IAmVehicleRequest>().User, _request.GetFromRequest<IAmVehicleRequest>().Vehicle, _request.GetFromRequest<IAmVehicleRequest>().Package.Name)
+                    var request = new IvidRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User, _request.GetFromRequest<IPointToVehicleRequest>().Vehicle, _request.GetFromRequest<IPointToVehicleRequest>().Package.Name)
                         .HpiQueryRequest;
 
                     monitoring.Send(CommandType.Configuration, request, null);

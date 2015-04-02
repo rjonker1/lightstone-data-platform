@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Builders.Requests
 {
     public class LicensePlateNumberLightstoneSourcePackage
     {
-        public static IAmPackageForRequest LicenseNumberPackage()
+        public static IHavePackageForRequest LicenseNumberPackage()
         {
             return new LicensePlateNumberPackage(new[] { DataProviderName.LightstoneAuto }, Guid.NewGuid());
         }

@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Builders.Scans
 {
     public class DriversLicenseSourcePackage
     {
-        public static IAmPackageForRequest DriversLicenseDecryptionPackage()
+        public static IHavePackageForRequest DriversLicenseDecryptionPackage()
         {
             return new DriversLicensePackage(new[] {DataProviderName.SignioDecryptDriversLicense}, Guid.NewGuid());
         }

@@ -42,16 +42,16 @@ namespace Lace.Test.Helper.Builders.Cmds
                     new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
                         new LaceResponseBuilder().WithIvidResponseHandled(),
                         new LicensePlateRequestBuilder().ForAudatex()
-                            .GetFromRequest<IAmVehicleRequest>().Vehicle).Result,
+                            .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result,
                     new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
                         new LaceResponseBuilder().WithIvidResponseHandled(),
                         new LicensePlateRequestBuilder().ForAudatex()
-                            .GetFromRequest<IAmVehicleRequest>().Vehicle))
+                            .GetFromRequest<IPointToVehicleRequest>().Vehicle))
                 .EndExecution(
                     new TransformAudatexResponse(FakeAudatexWebResponseData.GetAudatextWebServiceResponse(),
                         new LaceResponseBuilder().WithIvidResponseHandled(),
                         new LicensePlateRequestBuilder().ForAudatex()
-                            .GetFromRequest<IAmVehicleRequest>().Vehicle).Result);
+                            .GetFromRequest<IPointToVehicleRequest>().Vehicle).Result);
 
             return this;
         }
@@ -76,9 +76,9 @@ namespace Lace.Test.Helper.Builders.Cmds
                     },
                     new {ContextMessage = "Ivid Data Provider Credentials"})
                 .StartCall(
-                    new IvidRequestMessage(request.GetFromRequest<IAmVehicleRequest>().User,
-                        request.GetFromRequest<IAmVehicleRequest>().Vehicle,
-                        request.GetFromRequest<IAmVehicleRequest>().Package.Name).HpiQueryRequest, null)
+                    new IvidRequestMessage(request.GetFromRequest<IPointToVehicleRequest>().User,
+                        request.GetFromRequest<IPointToVehicleRequest>().Vehicle,
+                        request.GetFromRequest<IPointToVehicleRequest>().Package.Name).HpiQueryRequest, null)
                 .Error(new {NoRequestReceived = "No response received from Ivid Data Provider"}, null)
                 .EndCall(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp())
                 .Transform(

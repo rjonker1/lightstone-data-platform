@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 {
     public class LicensePlateNumberIvidOnlyRequest : IAmLicensePlateRequest
     {
-        public IAmPackageForRequest Package
+        public IHavePackageForRequest Package
         {
             get
             {
@@ -26,15 +26,19 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return new RequestVehicleInformation(); }
         }
 
-        public IHaveAggregation Aggregation
+        public IHaveRequestContext Request
         {
-            get { return new AggregationInformation(); }
+            get { return new RequestContextInformation(); }
         }
 
         public DateTime RequestDate
         {
             get { return DateTime.Now; }
         }
-       
+
+        public IHaveContractInformation Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
     }
 }

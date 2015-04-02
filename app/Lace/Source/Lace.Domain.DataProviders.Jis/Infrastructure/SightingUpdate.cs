@@ -1,4 +1,4 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
+﻿using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Jis.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
 

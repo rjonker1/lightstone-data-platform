@@ -68,18 +68,24 @@
     <Compile Include="Contracts\IAmJisRequest.cs" />
     <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
     <Compile Include="Contracts\IAmMakeRequest.cs" />
-    <Compile Include="Contracts\IAmPackageForRequest.cs" />
+    <Compile Include="Contracts\IHaveRequestContext.cs" />
+    <Compile Include="Contracts\IHaveBusinessInformation.cs" />
+    <Compile Include="Contracts\IHaveCarInformation.cs" />
+    <Compile Include="Contracts\IHaveContractInformation.cs" />
+    <Compile Include="Contracts\IHaveCoOrdinateInformation.cs" />
+    <Compile Include="Contracts\IHaveDriversLicenseInformation.cs" />
+    <Compile Include="Contracts\IHaveFicaInformation.cs" />
+    <Compile Include="Contracts\IHaveJisInformation.cs" />
+    <Compile Include="Contracts\IHavePackageForRequest.cs" />
     <Compile Include="Contracts\IAmPropertyRequest.cs" />
-    <Compile Include="Contracts\IAmVehicleRequest.cs" />
+    <Compile Include="Contracts\IHavePropertyInformation.cs" />
+    <Compile Include="Contracts\IHaveUserInformation.cs" />
+    <Compile Include="Contracts\IHaveVehicle.cs" />
+    <Compile Include="Contracts\IPointToVehicleRequest.cs" />
     <Compile Include="Contracts\IAmVinNumberRequest.cs" />
     <Compile Include="Contracts\IPointToLaceRequest.cs" />
+    <Compile Include="EnumsToBeRemoved.cs" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
-      <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
-      <Name>Lace.Domain.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

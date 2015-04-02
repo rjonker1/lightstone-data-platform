@@ -5,6 +5,6 @@ namespace Lace.Domain.DataProviders.Core.Contracts
 {
     public interface ICheckThePackageDataSource
     {
-        bool CheckIfPackageRequiresDataProvider(IAmPackageForRequest package, DataProviderName dataProvider);
+        bool CheckIfPackageRequiresDataProvider(IHavePackageForRequest package, DataProviderName dataProvider);
     }
 }

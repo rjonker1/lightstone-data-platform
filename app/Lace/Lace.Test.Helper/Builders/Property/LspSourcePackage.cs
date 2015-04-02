@@ -6,14 +6,14 @@ namespace Lace.Test.Helper.Builders.Property
 {
     public class PropertySourcePackage
     {
-        public static IAmPackageForRequest PropertyPackage()
+        public static IHavePackageForRequest PropertyPackage()
         {
 
             return new PropertyPackage();
         }
     }
 
-    public class PropertyPackage : IAmPackageForRequest
+    public class PropertyPackage : IHavePackageForRequest
     {
         public Guid Id
         {

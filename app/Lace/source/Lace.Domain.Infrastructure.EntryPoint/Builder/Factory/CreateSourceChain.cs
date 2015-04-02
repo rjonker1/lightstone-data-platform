@@ -12,10 +12,10 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Builder.Factory
 {
     public class CreateSourceChain : IBuildSourceChain
     {
-        private readonly IAmPackageForRequest _package;
+        private readonly IHavePackageForRequest _package;
         private readonly ILog _log;
 
-        public CreateSourceChain(IAmPackageForRequest package)
+        public CreateSourceChain(IHavePackageForRequest package)
         {
             _log = LogManager.GetLogger(GetType());
             _package = package;

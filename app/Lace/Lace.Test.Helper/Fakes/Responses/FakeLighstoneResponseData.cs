@@ -22,7 +22,7 @@ namespace Lace.Test.Helper.Fakes.Responses
 
         public static IRetrieveCarInformation GetCarInformation(ICollection<IPointToLaceRequest> request)
         {
-            return new RetrieveCarInformationDetail(request.GetFromRequest<IAmVehicleRequest>().Vehicle, new FakeCarRepositioryFactory())
+            return new RetrieveCarInformationDetail(request.GetFromRequest<IPointToVehicleRequest>().Vehicle, new FakeCarRepositioryFactory())
                 .SetupDataSources()
                 .GenerateData()
                 .BuildCarInformation()

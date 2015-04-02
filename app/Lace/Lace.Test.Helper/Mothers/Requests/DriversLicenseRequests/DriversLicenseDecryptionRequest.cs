@@ -18,14 +18,20 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
             get { return DateTime.Now; }
         }
 
-        public IAmPackageForRequest Package
+        public IHavePackageForRequest Package
         {
             get { return DriversLicenseSourcePackage.DriversLicenseDecryptionPackage(); }
         }
 
-        public IHaveAggregation Aggregation
+        public IHaveRequestContext Request
         {
-            get { return new AggregationInformation();}
+            get { return new RequestContextInformation();}
+        }
+
+
+        public IHaveContractInformation Contract
+        {
+            get { return new RequestContractInformation(); }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 
 namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configuration
@@ -41,24 +42,5 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
                 Resonse = response;
             }
         }
-
-        //public async Task RunAsync()
-        //{
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri(_url);
-        //        client.DefaultRequestHeaders.Accept.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-        //        client.DefaultRequestHeaders.Authorization = AutorizationHelper.CreateBasicHeader(_username, _password);
-        //        client.DefaultRequestHeaders.Add("X-Auth-Token", _xAuthToken);
-
-        //        var request = new HttpRequestMessage(HttpMethod.Post, _operation);
-        //        request.Content = _stringContent;
-        //        var response = await client.SendAsync(request);
-        //        IsSuccessful = response.IsSuccessStatusCode;
-
-        //        Resonse = await response.Content.ReadAsStringAsync();
-        //    }
-        //}
     }
 }

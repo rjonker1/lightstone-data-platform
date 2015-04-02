@@ -4,6 +4,7 @@ using System.Linq;
 using Lace.CrossCutting.DataProvider.Car.Core.Models;
 using Lace.CrossCutting.DataProvider.Car.Repositories;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Services;
 
 namespace Lace.Test.Helper.Fakes.Lace.Lighstone

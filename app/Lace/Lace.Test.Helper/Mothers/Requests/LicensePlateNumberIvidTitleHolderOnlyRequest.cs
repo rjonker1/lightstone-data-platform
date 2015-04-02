@@ -18,9 +18,9 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return new IvidTitleHolderRequestVehicleInformation(); }
         }
 
-        public IHaveAggregation Aggregation
+        public IHaveRequestContext Request
         {
-            get { return new AggregationInformation(); }
+            get { return new RequestContextInformation(); }
         }
 
         public DateTime RequestDate
@@ -28,10 +28,16 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return DateTime.Now; }
         }
 
-        public IAmPackageForRequest Package
+        public IHavePackageForRequest Package
         {
             get { return LicensePlateNumberIvidTitleHolderRequestPackage.LicenseNumberPackage(); }
         }
-      
+
+
+
+        public IHaveContractInformation Contract
+        {
+            get { return new RequestContractInformation(); }
+        }
     }
 }
