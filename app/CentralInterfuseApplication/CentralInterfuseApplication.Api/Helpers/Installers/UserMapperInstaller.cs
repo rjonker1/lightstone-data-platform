@@ -9,7 +9,7 @@ namespace CentralInterfuseApplication.Api.Helpers.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IUserMapper>().ImplementedBy<UserMapper>());
+            container.Register(Component.For<IUserMapper>().ImplementedBy<UserMapper>().LifestyleTransient());
         }
     }
 }

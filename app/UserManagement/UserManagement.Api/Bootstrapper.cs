@@ -2,9 +2,11 @@
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using Nancy;
+using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Extensions;
@@ -46,7 +48,8 @@ namespace UserManagement.Api
                 new ApiClientInstaller(),
                 new RedisInstaller(),
                 new AuthenticationInstaller(),
-                new HashProviderInstaller()
+                new HashProviderInstaller(),
+                new AuthInstaller()
                 );
 
             //Drop create
@@ -75,6 +78,8 @@ namespace UserManagement.Api
 
             AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());
 
+            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
+
             base.RequestStartup(container, pipelines, context);
         }
 
@@ -101,6 +106,11 @@ namespace UserManagement.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/fonts"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
+        }
+
+        protected override IRootPathProvider RootPathProvider
+        {
+            get { return new AspNetRootPathProvider(); }
         }
     }
 }

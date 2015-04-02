@@ -4,13 +4,13 @@ using Nancy.Security;
 
 namespace Shared.BuildingBlocks.Api.ApiClients
 {
-    public class ApiUser : IUserIdentity
+    public class UserIdentity : IUserIdentity
     {
-        public ApiUser()
+        public UserIdentity()
         {
         }
 
-        public ApiUser(string userName)
+        public UserIdentity(string userName)
         {
             UserName = userName;
             Claims = new List<string>();

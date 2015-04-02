@@ -10,7 +10,7 @@ namespace CentralInterfuseApplication.Api.Helpers
     {
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
-            return new ApiUser("Test");
+            return new UserIdentity("Test");
         }
     }
 }

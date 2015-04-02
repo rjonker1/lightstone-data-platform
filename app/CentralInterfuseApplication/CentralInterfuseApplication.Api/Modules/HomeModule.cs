@@ -1,4 +1,6 @@
-﻿using Nancy;
+﻿using System;
+using Nancy;
+using Nancy.Extensions;
 using Nancy.Security;
 
 namespace CentralInterfuseApplication.Api.Modules
@@ -9,7 +11,17 @@ namespace CentralInterfuseApplication.Api.Modules
         {
             Get["/"] = parameters =>
             {
-                this.RequiresAuthentication();
+                try
+                {
+                    this.RequiresAuthentication();
+                }
+                catch (Exception)
+                {
+                    if (Context.IsAjaxRequest())
+                        return View["Auth/Login"];
+                      
+                    return Response.AsRedirect("/login");
+                }
                 return View["Index"];
             };
         }

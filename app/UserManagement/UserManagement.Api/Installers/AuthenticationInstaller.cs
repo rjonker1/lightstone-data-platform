@@ -2,8 +2,6 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using Shared.BuildingBlocks.Api.ApiClients;
-using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.Helpers.Security;
 
 namespace UserManagement.Api.Installers
@@ -14,9 +12,9 @@ namespace UserManagement.Api.Installers
         {
             this.Info(() => "Attempting to install AuthenticationInstaller");
 
-            container.Register(Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
+            //container.Register(Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
             container.Register(Component.For<IUmAuthenticator>().ImplementedBy<UmAuthenticator>().LifestyleTransient());
-            container.Register(Component.For<IAuthenticateUser>().ImplementedBy<RedisAuthenticator>().LifestyleTransient());
+            //container.Register(Component.For<IAuthenticateUser>().ImplementedBy<RedisAuthenticator>().LifestyleTransient());
 
             this.Info(() => "Successfully installed AuthenticationInstaller");
         }

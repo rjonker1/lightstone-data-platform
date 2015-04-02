@@ -2,9 +2,11 @@
 using Castle.Windsor.Installer;
 using Nancy;
 using Nancy.Authentication.Forms;
+using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Nancy.Hosting.Aspnet;
 
 namespace CentralInterfuseApplication.Api
 {
@@ -34,12 +36,14 @@ namespace CentralInterfuseApplication.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            var formsAuthConfiguration = new FormsAuthenticationConfiguration
-            {
-                RedirectUrl = "/login",
-                UserMapper = container.Resolve<IUserMapper>(),
-            };
-            FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+            //var formsAuthConfiguration = new FormsAuthenticationConfiguration
+            //{
+            //    RedirectUrl = "/login",
+            //    UserMapper = container.Resolve<IUserMapper>(),
+            //};
+            //FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+
+            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
         }
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
@@ -51,6 +55,11 @@ namespace CentralInterfuseApplication.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/fonts"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
+        }
+
+        protected override IRootPathProvider RootPathProvider
+        {
+            get { return new AspNetRootPathProvider(); }
         }
     }
 }

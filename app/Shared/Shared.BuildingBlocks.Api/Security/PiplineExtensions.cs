@@ -20,7 +20,7 @@ namespace Shared.BuildingBlocks.Api.Security
                     return null;
                 }
 
-                return new ApiUser("Testing");
+                return new UserIdentity("Testing");
             });
 
             StatelessAuthentication.Enable(pipelines, configuration);

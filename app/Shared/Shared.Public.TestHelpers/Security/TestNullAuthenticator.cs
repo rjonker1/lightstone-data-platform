@@ -1,6 +1,7 @@
 ﻿using Nancy.Security;
+using Shared.BuildingBlocks.Api.Security;
 
-namespace Shared.BuildingBlocks.Api.Security
+namespace Shared.Public.TestHelpers.Security
 {
     public class TestNullAuthenticator : IAuthenticateUser
     {
