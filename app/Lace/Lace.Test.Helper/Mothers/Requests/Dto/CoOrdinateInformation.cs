@@ -3,7 +3,7 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class CoOrdinateInformation : IHaveCoOrdinateInformation
+    public class CoOrdinateInformation : IHaveCoOrdinates
     {
         public double Latitude
         {

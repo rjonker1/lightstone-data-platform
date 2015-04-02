@@ -6,12 +6,12 @@ namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
 {
     public class PropertiesRequest : IAmPropertyRequest
     {
-        public IHaveUserInformation User
+        public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
 
-        public IHavePropertyInformation Property
+        public IHaveProperty Property
         {
             get { return new RequestPropertyInformation(); }
         }
@@ -31,7 +31,7 @@ namespace Lace.Test.Helper.Mothers.Requests.PropertyRequests
             get { return PropertySourcePackage.PropertyPackage(); }
         }
 
-        public IHaveContractInformation Contract
+        public IHaveContract Contract
         {
             get { return new RequestContractInformation();}
         }

@@ -9,12 +9,12 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto
 {
     public class IvidTitleHolderRequestMessage
     {
-        private readonly IHaveUserInformation _request;
+        private readonly IHaveUser _request;
         private readonly ICollection<IPointToLaceProvider> _response;
         public TitleholderQueryRequest TitleholderQueryRequest { get; private set; }
 
 
-        public IvidTitleHolderRequestMessage(IHaveUserInformation request, ICollection<IPointToLaceProvider> response)
+        public IvidTitleHolderRequestMessage(IHaveUser request, ICollection<IPointToLaceProvider> response)
         {
             _request = request;
             _response = response;

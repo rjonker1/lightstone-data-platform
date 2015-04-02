@@ -56,7 +56,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 var token = client.Proxy.authenticateUser(_username, _password);
                 
-                var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusinessInformation>())
+                var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusiness>())
                     .Map()
                     .Validate();
 

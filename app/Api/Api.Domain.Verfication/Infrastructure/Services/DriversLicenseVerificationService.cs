@@ -16,9 +16,9 @@ namespace Api.Domain.Verification.Infrastructure.Services
             _entryPointService = entryPointService;
         }
 
-        public IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(ILaceRequest request)
+        public IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(IPointToLaceRequest request)
         {
-            var responses = _entryPointService.GetResponsesFromLace(request);
+            var responses = _entryPointService.GetResponsesFromLace(new [] {request});
 
             if (responses == null || !responses.Any())
                 return new DriversLicenseResponseDto();

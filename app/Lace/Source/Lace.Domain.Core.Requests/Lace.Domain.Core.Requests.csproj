@@ -49,10 +49,10 @@
     <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
     <Compile Include="Contracts\IAmMakeRequest.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
-    <Compile Include="Contracts\IHaveBusinessInformation.cs" />
+    <Compile Include="Contracts\IHaveBusiness.cs" />
     <Compile Include="Contracts\IHaveCarInformation.cs" />
-    <Compile Include="Contracts\IHaveContractInformation.cs" />
-    <Compile Include="Contracts\IHaveCoOrdinateInformation.cs" />
+    <Compile Include="Contracts\IHaveContract.cs" />
+    <Compile Include="Contracts\IHaveCoOrdinates.cs" />
     <Compile Include="Contracts\IHaveDriversLicenseInformation.cs" />
     <Compile Include="Contracts\IHaveFicaInformation.cs" />
     <Compile Include="Contracts\IHaveJisInformation.cs" />

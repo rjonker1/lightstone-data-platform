@@ -6,11 +6,11 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure.Dto
 {
     public class BuildAnprRequest : IBuildTheRequestForAnpr
     {
-        private readonly IHaveCoOrdinateInformation _request;
+        private readonly IHaveCoOrdinates _request;
 
         public AnprSubComplexType AnprRequest { get; private set; }
 
-        public BuildAnprRequest(IHaveCoOrdinateInformation request)
+        public BuildAnprRequest(IHaveCoOrdinates request)
         {
             _request = request;
         }

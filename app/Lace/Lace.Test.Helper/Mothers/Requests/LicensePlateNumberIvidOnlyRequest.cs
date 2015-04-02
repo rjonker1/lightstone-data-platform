@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             }
         }
 
-        public IHaveUserInformation User
+        public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
@@ -36,7 +36,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return DateTime.Now; }
         }
 
-        public IHaveContractInformation Contract
+        public IHaveContract Contract
         {
             get { return new RequestContractInformation(); }
         }

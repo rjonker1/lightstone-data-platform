@@ -5,7 +5,7 @@ using Lace.Test.Helper.Builders.Scans;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestDriversLicenseInformation : IHaveDriversLicenseInformation
+    public class RequestDriversLicenseInformation : IHaveDriversLicense
     {
         public RequestDriversLicenseInformation()
         {

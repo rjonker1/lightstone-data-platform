@@ -2,6 +2,6 @@
 {
     public interface IAmDriversLicenseRequest : IPointToLaceRequest
     {
-        IHaveDriversLicenseInformation DriversLicense { get; }
+        IHaveDriversLicense DriversLicense { get; }
     }
 }

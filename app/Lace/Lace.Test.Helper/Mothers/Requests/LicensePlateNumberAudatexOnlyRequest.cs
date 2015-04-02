@@ -7,7 +7,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 {
     public class LicensePlateNumberAudatexOnlyRequest : IAmLicensePlateRequest
     {
-        public IHaveUserInformation User
+        public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
@@ -32,7 +32,7 @@ namespace Lace.Test.Helper.Mothers.Requests
             get { return LicensePlateNumberAudatexRequestPackage.LicenseNumberPackage(); }
         }
 
-        public IHaveContractInformation Contract
+        public IHaveContract Contract
         {
             get { return new RequestContractInformation(); }
         }

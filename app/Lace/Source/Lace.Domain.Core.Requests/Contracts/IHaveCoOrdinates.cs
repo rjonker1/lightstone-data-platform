@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IHaveCoOrdinateInformation
+    public interface IHaveCoOrdinates
     {
         double Latitude { get; }
         double Longitude { get; }

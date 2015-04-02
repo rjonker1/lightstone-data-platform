@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
 {
     public class DriversLicenseDecryptionRequest : IAmDriversLicenseRequest
     {
-        public IHaveDriversLicenseInformation DriversLicense
+        public IHaveDriversLicense DriversLicense
         {
             get { return new RequestDriversLicenseInformation(); }
         }
@@ -29,7 +29,7 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
         }
 
 
-        public IHaveContractInformation Contract
+        public IHaveContract Contract
         {
             get { return new RequestContractInformation(); }
         }

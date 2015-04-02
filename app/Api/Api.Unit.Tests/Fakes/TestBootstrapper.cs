@@ -44,11 +44,9 @@ namespace Api.Unit.Tests.Fakes
 
     public class FakeEntryPoint : IEntryPoint
     {
-        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ILaceRequest request)
+        public ICollection<IPointToLaceProvider> GetResponsesFromLace(ICollection<IPointToLaceRequest> request)
         {
-            return
-                new FakeDataProviderResults().LaceResponse.FirstOrDefault(w => w.Key == request.Package.Action.Name)
-                    .Value;
+            throw new System.NotImplementedException();
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IHaveUserInformation
+    public interface IHaveUser
     {
         Guid UserId { get; }
         string UserName { get; }

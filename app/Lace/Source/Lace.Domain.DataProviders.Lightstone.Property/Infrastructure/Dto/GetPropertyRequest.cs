@@ -4,11 +4,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto
 {
     public class GetPropertyRequest
     {
-        private readonly IHavePropertyInformation _request;
+        private readonly IHaveProperty _request;
 
         public bool RequestIsValid { get; private set; }
 
-        public GetPropertyRequest(IHavePropertyInformation request)
+        public GetPropertyRequest(IHaveProperty request)
         {
             _request = request;
         }

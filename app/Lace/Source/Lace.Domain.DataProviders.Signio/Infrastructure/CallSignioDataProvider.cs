@@ -35,7 +35,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
         {
             try
             {
-                _client = new ConfigureSignioClient(_request.GetFromRequest<IHaveDriversLicenseInformation>());
+                _client = new ConfigureSignioClient(_request.GetFromRequest<IHaveDriversLicense>());
 
                 monitoring.Send(CommandType.Configuration,
                     new

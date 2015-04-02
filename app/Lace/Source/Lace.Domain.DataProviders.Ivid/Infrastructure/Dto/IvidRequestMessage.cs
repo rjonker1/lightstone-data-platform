@@ -8,10 +8,10 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure.Dto
     {
         public HpiStandardQueryRequest HpiQueryRequest { get; private set; }
 
-        private readonly IHaveUserInformation _user;
+        private readonly IHaveUser _user;
         private readonly IHaveVehicle _vehicle;
 
-        public IvidRequestMessage(IHaveUserInformation user, IHaveVehicle vehicle, string packageName)
+        public IvidRequestMessage(IHaveUser user, IHaveVehicle vehicle, string packageName)
         {
             _user = user;
             _vehicle = vehicle;

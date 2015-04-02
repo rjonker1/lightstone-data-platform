@@ -8,7 +8,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 {
     public class LicensePlateNumberIvidTitleHolderWithAbsaFinancedInterestRequest : IAmLicensePlateRequest
     {
-        public IHaveUserInformation User
+        public IHaveUser User
         {
             get { return new RequestUserInformation(); }
         }
@@ -34,7 +34,7 @@ namespace Lace.Test.Helper.Mothers.Requests
         }
 
 
-        public IHaveContractInformation Contract
+        public IHaveContract Contract
         {
             get { return new RequestContractInformation(); }
         }

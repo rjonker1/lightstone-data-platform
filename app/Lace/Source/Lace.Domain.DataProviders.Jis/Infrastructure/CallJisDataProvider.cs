@@ -55,15 +55,15 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
                 proxy.Connect();
 
-                var session = new SessionManager(proxy, _log, _request.GetFromRequest<IHaveUserInformation>()).Build().SessionManagement;
+                var session = new SessionManager(proxy, _log, _request.GetFromRequest<IHaveUser>()).Build().SessionManagement;
 
                 _jisResponse = proxy.DataStoreQuery(session.Id, new BuildJisRequest(_request.GetFromRequest<IHaveJisInformation>()).JisRequest,
-                    _request.GetFromRequest<IHaveUserInformation>().UserName);
+                    _request.GetFromRequest<IHaveUser>().UserName);
 
                 if (_jisResponse.IsHot)
                 {
                     _sightingUpdate =
-                        new SightingUpdate(_request.GetFromRequest<IHaveUserInformation>(), _jisResponse).BuildRequest()
+                        new SightingUpdate(_request.GetFromRequest<IHaveUser>(), _jisResponse).BuildRequest()
                             .Update(proxy, session)
                             .SightingUpdateResult;
                 }

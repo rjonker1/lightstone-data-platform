@@ -14,7 +14,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         public SessionManagementResult SessionManagement { get; private set; }
         private readonly JisWsInterfaceSoapClient _jisClient;
         private readonly ILog _log;
-        private readonly IHaveUserInformation _request;
+        private readonly IHaveUser _request;
 
         private static string SessionName
         {
@@ -26,7 +26,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             }
         }
 
-        public SessionManager(JisWsInterfaceSoapClient jisClient, ILog log, IHaveUserInformation request)
+        public SessionManager(JisWsInterfaceSoapClient jisClient, ILog log, IHaveUser request)
         {
             _jisClient = jisClient;
             _log = log;

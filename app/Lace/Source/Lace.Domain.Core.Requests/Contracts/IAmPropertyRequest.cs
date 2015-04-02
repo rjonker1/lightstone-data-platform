@@ -2,7 +2,7 @@
 {
     public interface IAmPropertyRequest : IPointToLaceRequest
     {
-        IHaveUserInformation User { get; }
-        IHavePropertyInformation Property { get; }
+        IHaveUser User { get; }
+        IHaveProperty Property { get; }
     }
 }

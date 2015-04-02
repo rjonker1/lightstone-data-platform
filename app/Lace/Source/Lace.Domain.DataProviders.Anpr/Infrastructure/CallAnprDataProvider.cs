@@ -38,7 +38,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             {
                 _certificate =
                     new CoOrdinateCertificateFactory(
-                        new CoOrdinateCertificateRequest(_request.GetFromRequest<IHaveCoOrdinateInformation>().Latitude, _request.GetFromRequest<IHaveCoOrdinateInformation>().Longitude),
+                        new CoOrdinateCertificateRequest(_request.GetFromRequest<IHaveCoOrdinates>().Latitude, _request.GetFromRequest<IHaveCoOrdinates>().Longitude),
                         _repository);
 
                 if (!_certificate.IsSuccessfull || _certificate.Certificate == null ||
@@ -49,7 +49,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
                 if (proxy.State == CommunicationState.Closed)
                     proxy.Open();
 
-                var builder = new BuildAnprRequest(_request.GetFromRequest<IHaveCoOrdinateInformation>()).Build();
+                var builder = new BuildAnprRequest(_request.GetFromRequest<IHaveCoOrdinates>()).Build();
                 _anprResponse = proxy.AnprProcessRecognition(builder.AnprRequest);
 
                 proxy.Close();

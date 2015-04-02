@@ -43,7 +43,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 if (client.Proxy.State == CommunicationState.Closed)
                     client.Proxy.Open();
 
-                var request = new GetPropertyRequest(_request.GetFromRequest<IHavePropertyInformation>())
+                var request = new GetPropertyRequest(_request.GetFromRequest<IHaveProperty>())
                     .Map()
                     .Validate();
 

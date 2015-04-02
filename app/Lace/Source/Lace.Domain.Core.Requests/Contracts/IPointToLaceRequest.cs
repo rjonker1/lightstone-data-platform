@@ -6,6 +6,6 @@ namespace Lace.Domain.Core.Requests.Contracts
         DateTime RequestDate { get; }
         IHavePackageForRequest Package { get; }
         IHaveRequestContext Request { get; }
-        IHaveContractInformation Contract { get; }
+        IHaveContract Contract { get; }
     }
 }

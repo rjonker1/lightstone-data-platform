@@ -3,7 +3,7 @@
     /// <summary>
     /// ReturnCompanies Input Data
     /// </summary>
-    public interface IHaveBusinessInformation
+    public interface IHaveBusiness
     {
         /// <summary>
         /// user_token

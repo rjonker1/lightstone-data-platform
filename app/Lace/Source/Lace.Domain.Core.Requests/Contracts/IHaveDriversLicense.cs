@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IHaveDriversLicenseInformation
+    public interface IHaveDriversLicense
     {
         string ScanData { get; }
         string RegistrationCode { get; }
