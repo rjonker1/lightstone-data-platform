@@ -13,9 +13,8 @@ using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
@@ -35,7 +34,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             try
             {
@@ -50,9 +49,9 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     var request = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User, response)
                         .TitleholderQueryRequest;
 
-                    monitoring.Send(CommandType.Configuration, request, null);
+                    command.Monitoring.Send(CommandType.Configuration, request, null);
 
-                    monitoring.StartCall(request, _stopWatch);
+                    command.Monitoring.StartCall(request, _stopWatch);
 
                     _response = ividTitleHolderWebService
                         .IvidTitleHolderProxy
@@ -61,19 +60,19 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     ividTitleHolderWebService
                         .CloseWebService();
 
-                    monitoring.EndCall(_response ?? new TitleholderQueryResponse(), _stopWatch);
+                    command.Monitoring.EndCall(_response ?? new TitleholderQueryResponse(), _stopWatch);
 
                     if (_response == null)
-                        monitoring.Send(CommandType.Fault, _request,
+                        command.Monitoring.Send(CommandType.Fault, _request,
                             new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
 
-                    TransformResponse(response, monitoring);
+                    TransformResponse(response, command);
                 }
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
-                monitoring.Send(CommandType.Fault, ex.Message,
+                command.Monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
                 IvidTitleHolderResponseFailed(response);
             }
@@ -87,7 +86,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             var transformer = new TransformIvidTitleHolderResponse(_response);
 
@@ -96,7 +95,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

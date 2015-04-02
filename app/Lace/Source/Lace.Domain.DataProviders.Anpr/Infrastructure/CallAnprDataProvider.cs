@@ -13,7 +13,7 @@ using Lace.Domain.DataProviders.Anpr.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Anpr.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 {
@@ -32,7 +32,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
 
                 proxy.Close();
 
-                TransformResponse(response, monitoring);
+                TransformResponse(response, command);
 
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace Lace.Domain.DataProviders.Anpr.Infrastructure
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             var transformer = new TransformAnprResponse(_anprResponse, _request.GetFromRequest<IPointToVehicleRequest>().Request.RequestId);
             if (transformer.Continue)

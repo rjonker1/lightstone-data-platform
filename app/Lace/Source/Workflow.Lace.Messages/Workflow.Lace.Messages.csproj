@@ -55,6 +55,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.852\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="NEventStore">
       <HintPath>..\..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
     </Reference>
@@ -72,16 +73,41 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Commands\Monitoring\AudatexCommands.cs" />
+    <Compile Include="Commands\Monitoring\CommandDto.cs" />
+    <Compile Include="Commands\Monitoring\CrossCuttingCommands.cs" />
+    <Compile Include="Commands\Monitoring\DataProviderCommand.cs" />
+    <Compile Include="Commands\Monitoring\EntryPointCommands.cs" />
+    <Compile Include="Commands\Monitoring\IvidCommands.cs" />
+    <Compile Include="Commands\Monitoring\IvidTitleHolderCommands.cs" />
+    <Compile Include="Commands\Monitoring\LightstoneBusinessCommands.cs" />
+    <Compile Include="Commands\Monitoring\LightstoneCommands.cs" />
+    <Compile Include="Commands\Monitoring\LightstonePropertyCommands.cs" />
+    <Compile Include="Commands\Monitoring\Monitoring.cs" />
+    <Compile Include="Commands\Monitoring\PCubedCommands.cs" />
+    <Compile Include="Commands\Monitoring\RgtCommands.cs" />
+    <Compile Include="Commands\Monitoring\RgtVinCommands.cs" />
+    <Compile Include="Commands\Monitoring\SignioCommands.cs" />
     <Compile Include="Commands\Requests.cs" />
     <Compile Include="Commands\Responses.cs" />
     <Compile Include="Commands\Transactions.cs" />
+    <Compile Include="Core\Category.cs" />
+    <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\IPublishCommandMessages.cs" />
-    <Compile Include="Core\ISendWorflowCommandsToBus.cs" />
+    <Compile Include="Core\ISendCommandToBus.cs" />
+    <Compile Include="Core\ISendWorflowCommand.cs" />
     <Compile Include="Events\Requests.cs" />
     <Compile Include="Events\Responses.cs" />
-    <Compile Include="Extensions\WorkflowBusExtensions.cs" />
+    <Compile Include="Extensions\BusExtensions.cs" />
+    <Compile Include="Infrastructure\DataProviderStopWatch.cs" />
+    <Compile Include="Infrastructure\Metadata.cs" />
+    <Compile Include="Infrastructure\MonitoringCommandBuilder.cs" />
+    <Compile Include="Infrastructure\StopWatchFactory.cs" />
+    <Compile Include="Infrastructure\StopWatchResults.cs" />
+    <Compile Include="Shared\CommandSender.cs" />
+    <Compile Include="Shared\SendMonitoringCommand.cs" />
     <Compile Include="Shared\SendWorkflowCommands.cs" />
-    <Compile Include="Shared\WorkflowCommandPublisher.cs" />
+    <Compile Include="Shared\CommandPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">

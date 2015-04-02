@@ -14,9 +14,8 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 {
@@ -43,26 +42,26 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             try
             {
                 ValidateVehicleDetail(response);
 
-                monitoring.StartCall(new {_request}, _stopWatch);
+                command.Monitoring.StartCall(new {_request}, _stopWatch);
 
                 GetCarInformation();
                 GetMetrics();
                 Dispose();
 
-                monitoring.EndCall(response, _stopWatch);
+                command.Monitoring.EndCall(response, _stopWatch);
 
-                TransformResponse(response, monitoring);
+                TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
-                monitoring.Send(CommandType.Fault, ex.Message,
+                command.Monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Lightstone Data Provider"});
                 LightstoneResponseFailed(response);
             }
@@ -75,7 +74,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             var transformer = new TransformLightstoneResponse(_metrics, _carInformation);
 
@@ -84,7 +83,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

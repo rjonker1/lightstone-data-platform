@@ -8,14 +8,14 @@ namespace Lace.Test.Helper.Builders.Cmds
     public class WorkflowCommandBuilder
     {
         private readonly Guid _requestId;
-        private readonly ISendWorkflowCommandsToBus _bus;
+        private readonly ISendWorkflowCommand _bus;
         private readonly Guid _packageId;
         private readonly Guid _contractId;
         private readonly Guid _userId;
         private readonly long _packageVersion;
         private readonly string _system;
 
-        public WorkflowCommandBuilder(ISendWorkflowCommandsToBus bus, Guid packageId, Guid contractId, Guid userId, long packageVersion, Guid requestId, string system)
+        public WorkflowCommandBuilder(ISendWorkflowCommand bus, Guid packageId, Guid contractId, Guid userId, long packageVersion, Guid requestId, string system)
         {
             _requestId = requestId;
             _bus = bus;

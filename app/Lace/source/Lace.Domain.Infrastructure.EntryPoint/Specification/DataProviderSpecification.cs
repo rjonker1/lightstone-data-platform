@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex;
@@ -11,9 +12,9 @@ using Lace.Domain.DataProviders.PCubed;
 using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Specification
 {
@@ -29,45 +30,53 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                     new RgtVinDataProvider(request,
                                         new RgtDataProvider(request,
                                             new AudatexDataProvider(request, null, null,
-                                                new SendAudatexCommands(bus, requestId, (int) ExecutionOrder.Sixth)),
+                                                CommandSender.InitCommandSender(bus, requestId,
+                                                    (int) ExecutionOrder.Sixth,
+                                                    DataProviderCommandSource.Audatex)),
                                             null,
-                                            new SendRgtCommands(bus, requestId, (int) ExecutionOrder.Fifth)), null,
-                                        new SendRgtVinCommands(bus, requestId, (int) ExecutionOrder.Fourth)), null,
-                                    new SendIvidTitleHolderCommands(bus, requestId, (int) ExecutionOrder.Third)), null,
-                                new SendLightstoneCommands(bus, requestId, (int) ExecutionOrder.Second)), null,
-                            new SendIvidCommands(bus, requestId, (int) ExecutionOrder.First))
+                                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Fifth,
+                                                DataProviderCommandSource.Rgt)), null,
+                                        CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Fourth,
+                                            DataProviderCommandSource.RgtVin)), null,
+                                    CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Third,
+                                        DataProviderCommandSource.IvidTitleHolder)), null,
+                                CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Second,
+                                    DataProviderCommandSource.LightstoneAuto)), null,
+                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
+                                DataProviderCommandSource.Ivid))
                             .CallSource(response);
-
-
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _driversLicenseDecryptionRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new SignioDataProvider(request, null, null,
-                            new SendSignioCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
+                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
+                                DataProviderCommandSource.SignioDecryptDriversLicense)).CallSource(response);
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _propertyRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new LightstonePropertyDataProvider(request, null, null,
-                            new SendLightstonePropertyCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
-
-        // TODO: Lightstone Business
-
+                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
+                                DataProviderCommandSource.LightstoneProperty)).CallSource(
+                                    response);
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new PCubedDataProvider(request, null, null,
-                            new SendPCubedCommands(bus, requestId, (int) ExecutionOrder.First)).CallSource(response);
+                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
+                                DataProviderCommandSource.PCubedFica)).CallSource(response);
+
         public
             IEnumerable
                 <
                     KeyValuePair
-                        <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>>
+                        <string, Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>
+                            >>
             Specifications
         {
             get

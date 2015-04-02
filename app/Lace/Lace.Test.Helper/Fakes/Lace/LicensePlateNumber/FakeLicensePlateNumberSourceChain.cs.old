@@ -16,7 +16,7 @@ namespace Lace.Test.Helper.Fakes.Lace.LicensePlateNumber
             _response = new LaceResponse();
         }
 
-        public FakeLicensePlateNumberResponse Build(ILaceRequest request, ISendMonitoringMessages monitoring)
+        public FakeLicensePlateNumberResponse Build(ILaceRequest request, ISendMonitoringMessages command)
         {
             var handlers = new Dictionary<string, Action<ILaceRequest, ILaceEvent, ILaceResponse>>()
             {

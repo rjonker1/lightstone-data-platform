@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
+using Workflow.Lace.Messages.Core;
+
 
 namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 {
     public class RequestDatafromIvidTitleHolderSource : IRequestDataFromDataProviderSource
     {
         public void FetchDataFromSource(ICollection<IPointToLaceProvider> response,
-            ICallTheDataProviderSource externalSource, ISendMonitoringCommandsToBus monitoring)
+            ICallTheDataProviderSource externalSource, ISendCommandToBus command)
         {
-            externalSource.CallTheDataProvider(response, monitoring);
+            externalSource.CallTheDataProvider(response, command);
         }
     }
 }

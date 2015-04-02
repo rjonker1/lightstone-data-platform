@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Fakes.Lace.Consumer;
 using NServiceBus;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Builder
 {
@@ -40,7 +39,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                 () =>
                     (request, bus, response, requestId) =>
                         new FakeSignioDataProvider(request, null, null,
-                            new SendSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
+                            MonitoirngCommandSenderBuilder.ForSignioCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
@@ -48,7 +47,7 @@ namespace Lace.Test.Helper.Fakes.Lace.Builder
                 () =>
                     (request, bus, response, requestId) =>
                         new FakePCubedDataProvider(request, null, null,
-                            new SendPCubedCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
+                            MonitoirngCommandSenderBuilder.ForPCubedCommands(bus, requestId, (int)ExecutionOrder.First)).CallSource(response);
 
 
         public

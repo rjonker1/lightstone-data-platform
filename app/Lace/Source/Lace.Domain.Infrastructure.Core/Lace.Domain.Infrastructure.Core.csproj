@@ -74,10 +74,6 @@
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj">
-      <Project>{c275d974-7e8e-440d-b244-b9db85e839b1}</Project>
-      <Name>Lace.Shared.Monitoring.Messages</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

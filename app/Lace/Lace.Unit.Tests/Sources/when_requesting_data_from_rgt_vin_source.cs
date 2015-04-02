@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
@@ -20,7 +18,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ICollection<IPointToLaceRequest> _rgtVinRequest;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ISendMonitoringCommandsToBus _laceEvent;
+        private readonly ISendCommandToBus _laceEvent;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_rgt_vin_source()

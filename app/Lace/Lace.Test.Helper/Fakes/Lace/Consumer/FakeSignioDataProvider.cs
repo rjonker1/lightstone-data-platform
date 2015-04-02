@@ -7,23 +7,23 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
     class FakeSignioDataProvider: ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
 
         public FakeSignioDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
-            _monitoring = monitoring;
+            _command = command;
         }
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
@@ -36,13 +36,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             else
             {
                 var consumer = new ConsumeSource(new HandleSignioSourceCall(), new FakeCallingSignioDataProvider());
-                consumer.ConsumeExternalSource(response, _monitoring);
+                consumer.ConsumeExternalSource(response, _command);
 
                 if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() || response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)
-                    CallFallbackSource(response, _monitoring);
+                    CallFallbackSource(response, _command);
             }
 
-            CallNextSource(response, _monitoring);
+            CallNextSource(response, _command);
         }
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)

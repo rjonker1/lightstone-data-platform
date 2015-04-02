@@ -28,7 +28,7 @@ namespace Lace.Unit.Tests.Chain
 
         public when_building_lace_source_chain_for_drivers_license_decryption()
         {
-            _bus = Lace.Test.Helper.Builders.Buses.BusFactory.MonitoringBus();
+            _bus = Lace.Test.Helper.Builders.Buses.BusFactory.WorkflowBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
             _buildSourceChain = new FakeSourceChain(_request.GetFromRequest<IAmDriversLicenseRequest>().Package);
             _buildSourceChain.Build();

@@ -6,10 +6,10 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Fakes.Lace.Handlers;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.Consumer
 {
@@ -18,16 +18,16 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
         private readonly IHandleDataProviderSourceCall _handleServiceCall;
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
 
         public FakeRgtVinSourceExecution(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
             _handleServiceCall = new FakeHandleRgtVinServiceCall();
             _externalWebServiceCall = new FakeCallingRgtVinExternalWebService();
-            _monitoring = monitoring;
+            _command = command;
         }
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
@@ -42,13 +42,13 @@ namespace Lace.Test.Helper.Fakes.Lace.Consumer
             {
                 var consumer = new ConsumeSource(new FakeHandleRgtServiceCall(),
                     new FakeCallingRgtVinExternalWebService());
-                consumer.ConsumeExternalSource(response, _monitoring);
+                consumer.ConsumeExternalSource(response, _command);
 
                 if (!response.OfType<IProvideDataFromRgtVin>().Any() || response.OfType<IProvideDataFromRgtVin>().First() == null)
-                    CallFallbackSource(response, _monitoring);
+                    CallFallbackSource(response, _command);
             }
 
-            CallNextSource(response, _monitoring);
+            CallNextSource(response, _command);
 
         }
 

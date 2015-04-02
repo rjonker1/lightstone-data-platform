@@ -6,7 +6,7 @@ namespace Lace.Test.Helper.Builders.Buses
 {
     public class WorkflowQueueSender
     {
-        private ISendWorkflowCommandsToBus _workflow;
+        private ISendWorkflowCommand _workflow;
         private readonly DataProviderCommandSource _dataProvider;
 
         public WorkflowQueueSender(DataProviderCommandSource dataProvider)
@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Builders.Buses
             _dataProvider = dataProvider;
         }
 
-        public WorkflowQueueSender InitQueue(ISendWorkflowCommandsToBus workflow)
+        public WorkflowQueueSender InitQueue(ISendWorkflowCommand workflow)
         {
             _workflow = workflow;
             return this;
@@ -24,14 +24,14 @@ namespace Lace.Test.Helper.Builders.Buses
         public WorkflowQueueSender SendRequestToDataProvider(DateTime date, string connectionTpe,
             string connection, DataProviderAction action, DataProviderState state)
         {
-            _workflow.RequestToDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
+            _workflow.DataProviderRequestTransaction(_dataProvider, connectionTpe, connection, date, action, state);
             return this;
         }
 
         public WorkflowQueueSender ReceiveResponseFromDataProvider(DateTime date, string connectionTpe,
             string connection, DataProviderAction action, DataProviderState state)
         {
-            _workflow.ResponseFromDataProvider(_dataProvider, connectionTpe, connection, date, action, state);
+            _workflow.DataProviderResponseTransaction(_dataProvider, connectionTpe, connection, date, action, state);
             return this;
         }
 

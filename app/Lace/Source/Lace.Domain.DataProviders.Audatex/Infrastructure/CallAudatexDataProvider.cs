@@ -11,9 +11,8 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure
 {
@@ -33,7 +32,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             try
             {
@@ -44,7 +43,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     .Build()
                     .AudatexRequest;
 
-                monitoring.Send(CommandType.Configuration,
+                command.Monitoring.Send(CommandType.Configuration,
                     new
                     {
                         EndPoint =
@@ -55,27 +54,27 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                             }
                     }, request);
 
-                monitoring.StartCall(request, _stopWatch);
+                command.Monitoring.StartCall(request, _stopWatch);
 
                 _response = audatexWebService
                     .AudatexServiceProxy
                     .GetDataEx(GetCredentials(), request.MessageType, request.Message, 0);
 
-                monitoring.EndCall(_response ?? new GetDataResult(), _stopWatch);
+                command.Monitoring.EndCall(_response ?? new GetDataResult(), _stopWatch);
 
                 audatexWebService
                     .Close();
 
                 if (_response == null)
-                    monitoring.Send(CommandType.Fault, _request,
+                    command.Monitoring.Send(CommandType.Fault, _request,
                         new {NoRequestReceived = "No response received from Audatex Data Provider"});
 
-                TransformResponse(response, monitoring);
+                TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
-                monitoring.Send(CommandType.Fault, ex.Message,
+                command.Monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Audatex Data Provider"});
                 AudatexResponseFailed(response);
             }
@@ -98,7 +97,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
             };
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             var transformer = new TransformAudatexResponse(_response, response, _request.GetFromRequest<IHaveVehicle>());
 
@@ -107,7 +106,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

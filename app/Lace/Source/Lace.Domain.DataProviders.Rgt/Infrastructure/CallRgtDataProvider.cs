@@ -15,9 +15,8 @@ using Lace.Domain.DataProviders.Rgt.Core.Models;
 using Lace.Domain.DataProviders.Rgt.Infrastructure.Management;
 using Lace.Domain.DataProviders.Rgt.UnitOfWork;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 {
@@ -44,14 +43,14 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             try
             {
 
                 ValidateVehicleDetail(response);
 
-                monitoring.StartCall(_request, _stopWatch);
+                command.Monitoring.StartCall(_request, _stopWatch);
 
                 GetCarInformation();
                 var carUow =
@@ -60,12 +59,12 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     _carInformation.CarInformationRequest);
                 _carSpecifications = carUow.CarSpecifications;
 
-                monitoring.EndCall(_carSpecifications, _stopWatch);
+                command.Monitoring.EndCall(_carSpecifications, _stopWatch);
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
                     _log.ErrorFormat("Could not generate Car information request");
-                    monitoring.Send(CommandType.Fault, _request,
+                    command.Monitoring.Send(CommandType.Fault, _request,
                         new {NoRequestReceived = "No car specifications received from RGT Data Provider"});
                     RgtResponseFailed(response);
                 }
@@ -75,7 +74,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     _log.ErrorFormat("Could not get car information for Car id {0} Vin {1}",
                         _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin);
 
-                    monitoring.Send(CommandType.Fault, _request,
+                    command.Monitoring.Send(CommandType.Fault, _request,
                         new
                         {
                             NoRequestReceived = string.Format("Could not get car information for Car id {0} Vin {1}",
@@ -83,18 +82,18 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                         });
                 }
 
-                TransformResponse(response, monitoring);
+                TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling RGT Data Provider {0}", ex.Message);
-                monitoring.Send(CommandType.Fault, ex.Message, new {ErrorMessage = "Error calling RGT Data Provider"});
+                command.Monitoring.Send(CommandType.Fault, ex.Message, new {ErrorMessage = "Error calling RGT Data Provider"});
                 RgtResponseFailed(response);
             }
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             var transformer = new TransformRgtResponse(_carSpecifications);
 
@@ -103,7 +102,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

@@ -23,7 +23,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         private IBootstrap _initialize;
 
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _monitoring;
+        private readonly IBus _command;
         private Dictionary<Type, Func<IPointToLaceRequest, IProvideResponseFromLaceDataProviders>> _handlers;
 
         private readonly IBuildSourceChain _buildSourceChain;
@@ -31,7 +31,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
         public when_inititializing_lace_source_chain_for_licensePlate_number_search()
         {
 
-            _monitoring = BusFactory.MonitoringBus();
+            _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToVehicleRequest>().Package);
             _buildSourceChain.Build();
@@ -39,7 +39,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public override void Observe()
         {
-            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
             _initialize.Execute();
         }
 

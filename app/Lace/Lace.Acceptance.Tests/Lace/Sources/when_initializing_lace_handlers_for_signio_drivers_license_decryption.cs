@@ -7,9 +7,9 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Scans;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
@@ -18,15 +18,15 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_signio_drivers_license_decryption()
         {
-            _monitoring = MonitoringBusBuilder.ForSignioDriversLicenseCommands(Guid.NewGuid());
+            _command = MonitoringBusBuilder.ForSignioDriversLicenseCommands(Guid.NewGuid());
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
             _response = new Collection<IPointToLaceProvider>();
-            _dataProvider = new SignioDataProvider(_request, null, null, _monitoring);
+            _dataProvider = new SignioDataProvider(_request, null, null, _command);
         }
 
         public override void Observe()

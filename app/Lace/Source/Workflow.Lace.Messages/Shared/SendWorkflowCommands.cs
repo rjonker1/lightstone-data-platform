@@ -8,7 +8,7 @@ using Workflow.Lace.Messages.Extensions;
 
 namespace Workflow.Lace.Messages.Shared
 {
-    public class SendWorkflowCommands : ISendWorkflowCommandsToBus
+    public class SendWorkflowCommands : ISendWorkflowCommand
     {
         private readonly IPublishCommandMessages _publisher;
         private readonly ILog _log;
@@ -21,7 +21,7 @@ namespace Workflow.Lace.Messages.Shared
             _publisher = new WorkflowCommandPublisher(bus, _log);
         }
 
-        public void RequestToDataProvider(DataProviderCommandSource dataProvider,
+        public void DataProviderRequestTransaction(DataProviderCommandSource dataProvider,
             string connectionType,
             string connection, DateTime date, DataProviderAction action, DataProviderState state)
         {
@@ -30,7 +30,7 @@ namespace Workflow.Lace.Messages.Shared
         }
 
 
-        public void ResponseFromDataProvider(DataProviderCommandSource dataProvider, string connectionType,
+        public void DataProviderResponseTransaction(DataProviderCommandSource dataProvider, string connectionType,
             string connection,
             DateTime date, DataProviderAction action, DataProviderState state)
         {

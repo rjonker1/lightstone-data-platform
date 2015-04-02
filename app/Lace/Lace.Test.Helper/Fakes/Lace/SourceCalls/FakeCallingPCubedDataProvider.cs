@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Domain.DataProviders.PCubed.Infrastructure.Management;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
@@ -11,14 +11,14 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         private string _response;
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             _response = string.Empty; //TODO: Build fake response for PCbubed
 
-            TransformResponse(response, monitoring);
+            TransformResponse(response, command);
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             var transformer = new TransformPCubedResponse(_response);
 

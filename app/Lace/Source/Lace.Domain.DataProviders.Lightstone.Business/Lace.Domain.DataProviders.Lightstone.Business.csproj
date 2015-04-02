@@ -102,9 +102,9 @@
       <Project>{129BBFFE-0D3E-4CC5-95B4-5C466669421D}</Project>
       <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj">
-      <Project>{C275D974-7E8E-440D-B244-B9DB85E839B1}</Project>
-      <Name>Lace.Shared.Monitoring.Messages</Name>
+    <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
+      <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
+      <Name>Workflow.Lace.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

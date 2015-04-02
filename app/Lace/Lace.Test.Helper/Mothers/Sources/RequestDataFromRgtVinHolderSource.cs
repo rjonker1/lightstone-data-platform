@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
-
+using Workflow.Lace.Messages.Core;
 namespace Lace.Test.Helper.Mothers.Sources
 {
     public class RequestDataFromRgtVinHolderSource : IRequestDataFromDataProviderSource
     {
-        public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalWebService, ISendMonitoringCommandsToBus monitoring)
+        public void FetchDataFromSource(ICollection<IPointToLaceProvider> response, ICallTheDataProviderSource externalWebService, ISendCommandToBus command)
         {
-            externalWebService.CallTheDataProvider(response, monitoring);
+            externalWebService.CallTheDataProvider(response, command);
         }
     }
 }

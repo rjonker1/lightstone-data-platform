@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Ivid.Infrastructure;
-using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
@@ -21,7 +18,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromService;
         private readonly ICollection<IPointToLaceRequest> _ividRequest;
         private ICollection<IPointToLaceProvider> _laceResponse;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
         public when_requesting_data_from_ivid_source()
@@ -37,7 +34,7 @@ namespace Lace.Unit.Tests.Sources
         
         public override void Observe()
         {
-            _requestDataFromService.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _monitoring);
+            _requestDataFromService.FetchDataFromSource(_laceResponse, _externalWebServiceCall, _command);
         }
 
         [Observation]

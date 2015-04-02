@@ -10,21 +10,22 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Jis.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Core;
+
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Jis
 {
     public class JisDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
 
-        public JisDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
+        public JisDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
-            _monitoring = monitoring;
+            _command = command;
         }
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
@@ -43,20 +44,19 @@ namespace Lace.Domain.DataProviders.Jis
                             CacheConnectionFactory.LocalClient(),
                             ConfigurationManager.ConnectionStrings["lace/source/database/jis/certificates/configuration"
                                 ].ConnectionString)));
-                consumer.ConsumeExternalSource(response, _monitoring);
+                consumer.ConsumeExternalSource(response, _command);
 
                 if (!response.OfType<IProvideDataFromJis>().Any() || response.OfType<IProvideDataFromJis>().First() == null)
-                    CallFallbackSource(response, _monitoring);
+                    CallFallbackSource(response, _command);
             }
 
-            CallNextSource(response, _monitoring);
+            CallNextSource(response, _command);
         }
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)
         {
             var jisResponse = new JisResponse();
             jisResponse.HasNotBeenHandled();
-            //response.Add(response);
         }
     }
 }

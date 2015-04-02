@@ -20,17 +20,17 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_data_providers_in_vvi_products : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _monitoring;
+        private readonly IBus _command;
         private readonly IBootstrap _initialize;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_initializing_lace_handlers_for_data_providers_in_vvi_products()
         {
-            _monitoring = BusFactory.MonitoringBus();
+            _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForAllSources();
             _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToVehicleRequest>().Package);
             _buildSourceChain.Build();
-            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _monitoring,
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command,
                 _buildSourceChain);
         }
 

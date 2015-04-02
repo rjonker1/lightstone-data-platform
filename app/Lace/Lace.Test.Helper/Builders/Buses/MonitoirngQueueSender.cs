@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Threading;
 using DataPlatform.Shared.Enums;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
-using Lace.Shared.Monitoring.Messages.Publisher;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Test.Helper.Builders.Buses
 {
     public class MonitoirngQueueSender
     {
-        private ISendMonitoringCommandsToBus _monitoring;
-        private MonitoringCommandPublisher _publisher;
+        private ISendCommandToBus _command;
+        private IPublishCommandMessages _publisher;
         private readonly DataProviderCommandSource _dataProvider;
 
         private DataProviderStopWatch _stopWatch;
@@ -25,9 +23,9 @@ namespace Lace.Test.Helper.Builders.Buses
             _aggregateId = aggregateId;
         }
 
-        public MonitoirngQueueSender InitQueue(ISendMonitoringCommandsToBus monitoring)
+        public MonitoirngQueueSender InitQueue(ISendCommandToBus command)
         {
-            _monitoring = monitoring;
+            _command = command;
             return this;
         }
 
@@ -41,56 +39,56 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender StartingExecution(object message)
         {
-            _monitoring.Begin(message, _dataProviderStopWatch);
+            _command.Monitoring.Begin(message, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Configuration(object message, object metadata)
         {
-            _monitoring.Send(CommandType.Configuration, message, metadata);
+            _command.Monitoring.Send(CommandType.Configuration, message, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Security(object message, object metadata)
         {
-            _monitoring.Send(CommandType.Security, message, metadata);
+            _command.Monitoring.Send(CommandType.Security, message, metadata);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender StartCall(object message, object metadata)
         {
-            _monitoring.StartCall(message, _stopWatch);
+            _command.Monitoring.StartCall(message, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Error(object message, object metatdata)
         {
-            _monitoring.Send(CommandType.Fault, message, metatdata);
+            _command.Monitoring.Send(CommandType.Fault, message, metatdata);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender EndCall(object message)
         {
-            _monitoring.EndCall(message, _stopWatch);
+            _command.Monitoring.EndCall(message, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Transform(object message, object metaData)
         {
-            _monitoring.Send(CommandType.Transformation, message, metaData);
+            _command.Monitoring.Send(CommandType.Transformation, message, metaData);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender EndExecution(object message)
         {
-            _monitoring.End(message, _dataProviderStopWatch);
+            _command.Monitoring.End(message, _dataProviderStopWatch);
             Thread.Sleep(1000);
             return this;
         }
