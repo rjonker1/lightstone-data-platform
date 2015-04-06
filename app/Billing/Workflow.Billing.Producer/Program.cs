@@ -19,7 +19,7 @@ namespace Workflow.Billing.Producer
             var appSettings = new AppSettings();
 
 
-            var container = new WindsorContainer().Install(FromAssembly.This());
+            var container = new WindsorContainer().Install(new BusInstaller());
             var bus = container.Resolve<IBus>();
 
             var input = "";

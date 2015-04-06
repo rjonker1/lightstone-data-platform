@@ -12,7 +12,7 @@ namespace Workflow.Billing.Producer.Installers
         {
             container.Register(
                 Component.For<IBus>()
-                    .UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container))
+                    .UsingFactoryMethod(() => BusFactory.CreateBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
                     .LifestyleSingleton()
                 );
         }
