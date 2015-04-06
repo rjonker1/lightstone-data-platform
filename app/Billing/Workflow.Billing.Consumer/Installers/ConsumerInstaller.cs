@@ -17,7 +17,7 @@ namespace Workflow.Billing.Consumer.Installers
 
             container.Register(
                 Component.For<BillTransactionConsumer>().ImplementedBy<BillTransactionConsumer>(),
-                Component.For<TestConsumer>().ImplementedBy<TestConsumer>());
+                Component.For<TextMessageConsumer>().ImplementedBy<TextMessageConsumer>());
         }
     }
 }

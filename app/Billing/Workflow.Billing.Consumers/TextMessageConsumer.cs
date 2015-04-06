@@ -11,11 +11,14 @@ using Workflow.Billing.Repository;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TestConsumer : IConsume<TestMessage>
+    public class TextMessageConsumer : IConsume<TextMessage>
     {
 
-        public void Consume(TestMessage message)
+        private static readonly ILog _log = LogManager.GetLogger<TextMessageConsumer>();
+
+        public void Consume(TextMessage message)
         {
+            _log.InfoFormat("Test message {0}", message);
         }
     }
 }

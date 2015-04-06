@@ -6,10 +6,11 @@ namespace Workflow.Billing.Messages
 {
     [Serializable]
     [DataContract]
-    public class TestMessage : IPublishableMessage
+    public class TextMessage : IPublishableMessage
     {
-        public TestMessage()
-        {
-        }
+        public TextMessage() { }
+
+        [DataMember]
+        public string Text { get; set; }
     }
 }

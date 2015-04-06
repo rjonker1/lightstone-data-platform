@@ -56,7 +56,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BillTransactionMessage.cs" />
-    <Compile Include="TestMessage.cs" />
+    <Compile Include="TextMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
