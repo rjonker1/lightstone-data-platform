@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Consumers"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Scheduler", "Billing\Billing.Scheduler\Billing.Scheduler.csproj", "{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Producer", "Billing\Workflow.Billing.Producer\Workflow.Billing.Producer.csproj", "{6AFE8DB7-A933-4625-9A2B-491DAEC53DF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +114,10 @@ Global
 		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AFE8DB7-A933-4625-9A2B-491DAEC53DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AFE8DB7-A933-4625-9A2B-491DAEC53DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AFE8DB7-A933-4625-9A2B-491DAEC53DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AFE8DB7-A933-4625-9A2B-491DAEC53DF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
