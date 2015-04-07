@@ -1,5 +1,8 @@
-﻿using Castle.Windsor;
+﻿using System;
+using System.Runtime.Serialization;
+using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Messaging;
 using MemBus;
 using Nancy;
 using Nancy.Bootstrapper;
@@ -28,6 +31,11 @@ namespace UserManagement.Api
             base.ApplicationStartup(container, pipelines);
 
             container.Resolve<IBus>().Publish(new ImportStartupData());
+
+            //var bus = container.Resolve<EasyNetQ.IBus>();
+
+            //var message = new TextMessage() { Text = "From UserManagement" };
+            //bus.Publish(message);
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
@@ -102,5 +110,5 @@ namespace UserManagement.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
         }
-    }
+    }  
 }
