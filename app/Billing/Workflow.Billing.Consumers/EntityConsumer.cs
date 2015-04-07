@@ -1,6 +1,4 @@
 ﻿//using EasyNetQ.AutoSubscribe;
-//using Shared.Messaging.Billing.Helpers;
-//using Shared.Messaging.Billing.Messages;
 
 //namespace Workflow.Billing.Consumers
 //{
