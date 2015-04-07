@@ -1,14 +1,10 @@
-﻿using System;
-using System.Runtime.Serialization;
-using DataPlatform.Shared.Messaging;
+﻿using Workflow.Billing.Messages.EntitiesBuilder;
 
 namespace Workflow.Billing.Messages
 {
    
-    public class TextMessage : IPublishableMessage
+    public class TextMessage : Entity
     {
-        public TextMessage() { }
-
         public string Text { get; set; }
     }
 }
