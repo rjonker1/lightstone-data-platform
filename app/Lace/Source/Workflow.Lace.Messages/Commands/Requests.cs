@@ -30,9 +30,17 @@ namespace Workflow.Lace.Messages.Commands
         public DataProviderAction Action { get; private set; }
         [DataMember]
         public DataProviderState State { get; private set; }
+        [DataMember]
+        public string MetaData { get; private set; }
+
+        [DataMember]
+        public string Payload { get; private set; }
+
+        [DataMember]
+        public string Message { get; private set; }
 
         public SendRequestToDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, string connectionType, string connection, DataProviderAction action, DataProviderState state)
+            DateTime date, string connectionType, string connection, DataProviderAction action, DataProviderState state, string metaData, string payload, string message)
         {
             Id = id;
             Date = date;
@@ -42,7 +50,9 @@ namespace Workflow.Lace.Messages.Commands
             DataProvider = dataProvider;
             Action = action;
             State = state;
-
+            MetaData = metaData;
+            Payload = payload;
+            Message = message;
         }
     }
 }

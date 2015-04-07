@@ -79,17 +79,16 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 _workflow = new SendWorkflowCommands(_bus, request.First().Request.RequestId);
                 _workflow.DataProviderRequestTransaction(DataProviderCommandSource.EntryPoint, string.Empty,
                     string.Empty,
-                    DateTime.Now, DataProviderAction.Request, DataProviderState.Successful);
+                    DataProviderAction.Request, DataProviderState.Successful, request,_stopWatch);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
 
                 _workflow.DataProviderResponseTransaction(DataProviderCommandSource.EntryPoint, string.Empty,
-                    string.Empty,
-                    DateTime.Now, DataProviderAction.Response,
+                    string.Empty, DataProviderAction.Response,
                     _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
                         ? DataProviderState.Failed
-                        : DataProviderState.Successful);
+                        : DataProviderState.Successful, _bootstrap.DataProviderResponses ?? EmptyResponse,_stopWatch);
                 _command.Monitoring.End(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch);
 
 

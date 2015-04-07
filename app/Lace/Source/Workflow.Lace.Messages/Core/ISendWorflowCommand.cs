@@ -7,15 +7,17 @@ namespace Workflow.Lace.Messages.Core
     public interface ISendWorkflowCommand
     {
         void DataProviderRequestTransaction(DataProviderCommandSource dataProvider, string connectionType,
-            string connection,
-            DateTime date, DataProviderAction action, DataProviderState state);
+            string connection, DataProviderAction action, DataProviderState state, object payload,
+            DataProviderStopWatch stopWatch);
 
         void DataProviderResponseTransaction(DataProviderCommandSource dataProvider, string connectionType,
-            string connection,
-            DateTime date, DataProviderAction action, DataProviderState state);
+            string connection, DataProviderAction action, DataProviderState state, object payload,
+            DataProviderStopWatch stopWatch);
 
-        void CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+        void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
             Guid contractId, string system, long contractVersion, DataProviderState state);
+
+        void Send(CommandType commandType, dynamic payload, dynamic metadata);
 
     }
 

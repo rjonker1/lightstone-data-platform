@@ -1,10 +1,12 @@
 ﻿using System;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using Lace.Shared.Extensions;
 using NServiceBus;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Extensions;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Workflow.Lace.Messages.Shared
 {
@@ -23,28 +25,43 @@ namespace Workflow.Lace.Messages.Shared
 
         public void DataProviderRequestTransaction(DataProviderCommandSource dataProvider,
             string connectionType,
-            string connection, DateTime date, DataProviderAction action, DataProviderState state)
+            string connection, DataProviderAction action, DataProviderState state, object payload,
+            DataProviderStopWatch stopWatch)
         {
-            new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId, dataProvider, date,
-                connectionType, connection, action, state).SendToBus(_publisher, _log);
+            new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId, dataProvider, DateTime.UtcNow,
+                connectionType, connection, action, state, new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
+                CommandDescriptions.StartExecutionDescription(dataProvider))
+                .SendToBus(_publisher, _log);
+            stopWatch.Start();
         }
 
 
         public void DataProviderResponseTransaction(DataProviderCommandSource dataProvider, string connectionType,
-            string connection,
-            DateTime date, DataProviderAction action, DataProviderState state)
+            string connection, DataProviderAction action, DataProviderState state, object payload,
+            DataProviderStopWatch stopWatch)
         {
-            new GetResponseFromDataProviderCommmand(Guid.NewGuid(), _requestId, dataProvider, date, connection,
-                connectionType, state, action).SendToBus(
+            stopWatch.Stop();
+            new GetResponseFromDataProviderCommmand(Guid.NewGuid(), _requestId, dataProvider, DateTime.UtcNow,
+                connection,
+                connectionType, state, action, new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), payload.ObjectToJson(),
+                CommandDescriptions.EndExecutionDescription(dataProvider))
+                .SendToBus(
                     _publisher,
                     _log);
         }
 
-        public void CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
+        public void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
             Guid contractId, string system, long contractVersion, DataProviderState state)
         {
-            new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, date, userId, requestId, contractId,
-                system, contractVersion, state).SendToBus(_publisher, _log);
+            new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, DateTime.UtcNow, userId, requestId,
+                contractId,
+                system, contractVersion, state)
+                .SendToBus(_publisher, _log);
+        }
+
+        public void Send(CommandType commandType, dynamic payload, dynamic metadata)
+        {
+            throw new NotImplementedException();
         }
     }
 }

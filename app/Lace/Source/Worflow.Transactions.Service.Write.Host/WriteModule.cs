@@ -43,9 +43,10 @@ namespace Worflow.Transactions.Service.Write.Host
                 .UsingSqlPersistence("workflow/transactions/database/write")
                 .WithDialect(new MsSqlDialect())
                 .InitializeStorageEngine()
-                .UsingBinarySerialization()
-                .Compress()
-                .UsingEventUpconversion()
+                //.UsingBinarySerialization()
+                .UsingJsonSerialization()
+                //.Compress()
+                //.UsingEventUpconversion()
                 .UsingAsynchronousDispatchScheduler()
                 .DispatchTo(new DelegateMessageDispatcher(c => DispatchCommits(container, c)))
                 .Build();

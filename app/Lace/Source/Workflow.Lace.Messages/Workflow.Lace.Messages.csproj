@@ -73,6 +73,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Commands\Context.cs" />
     <Compile Include="Commands\Monitoring\AudatexCommands.cs" />
     <Compile Include="Commands\Monitoring\CommandDto.cs" />
     <Compile Include="Commands\Monitoring\CrossCuttingCommands.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Core\IPublishCommandMessages.cs" />
     <Compile Include="Core\ISendCommandToBus.cs" />
     <Compile Include="Core\ISendWorflowCommand.cs" />
+    <Compile Include="Events\Context.cs" />
     <Compile Include="Events\Requests.cs" />
     <Compile Include="Events\Responses.cs" />
     <Compile Include="Extensions\BusExtensions.cs" />
