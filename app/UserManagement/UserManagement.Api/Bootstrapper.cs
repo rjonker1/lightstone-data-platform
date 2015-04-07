@@ -1,8 +1,5 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Castle.Windsor;
+﻿using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using DataPlatform.Shared.Messaging;
 using MemBus;
 using Nancy;
 using Nancy.Bootstrapper;

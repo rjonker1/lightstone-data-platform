@@ -1,5 +1,7 @@
 ﻿
-namespace DataPlatform.Shared.Messaging.Messages
+using DataPlatform.Shared.Messaging;
+
+namespace Shared.Messaging.Billing.Messages
 {
     public class TextMessage : IPublishableMessage
     {
