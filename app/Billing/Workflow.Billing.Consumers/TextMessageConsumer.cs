@@ -1,7 +1,8 @@
 ﻿using Common.Logging;
 using EasyNetQ.AutoSubscribe;
 //using Shared.Messaging.Billing.Messages;
-using Workflow.Billing.Messages;
+using Shared.Messaging.Billing.Messages;
+//using Workflow.Billing.Messages;
 
 namespace Workflow.Billing.Consumers
 {

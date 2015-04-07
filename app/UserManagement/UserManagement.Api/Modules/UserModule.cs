@@ -6,7 +6,7 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
-using Shared.Messaging.Billing.Messages;
+//using Shared.Messaging.Billing.Messages;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -52,9 +52,9 @@ namespace UserManagement.Api.Modules
 
                 bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
-                //RabbitMQ
-                var metaEntity = Mapper.Map(entity, new UserMessage());
-                eBus.Publish(metaEntity);
+                ////RabbitMQ
+                //var metaEntity = Mapper.Map(entity, new UserMessage());
+                //eBus.Publish(metaEntity);
 
                 return null;
             };

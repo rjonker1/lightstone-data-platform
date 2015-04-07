@@ -384,7 +384,7 @@
       <dependencies>
         <dependency id="Common.Logging" version="3.0.0" />
         <dependency id="Common.Logging.Core" version="3.0.0" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared" />s
         <dependency id="Newtonsoft.Json" version="6.0.5" />
       </dependencies>
     </nuget>
