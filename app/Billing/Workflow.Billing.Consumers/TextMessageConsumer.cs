@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Logging;
+﻿using Common.Logging;
 using EasyNetQ.AutoSubscribe;
-using Workflow.Billing.Domain;
-using Workflow.Billing.Messages;
-using Workflow.Billing.Repository;
+using Shared.Messaging.Billing.Messages;
 
 namespace Workflow.Billing.Consumers
 {

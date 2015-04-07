@@ -2,7 +2,8 @@
 using Castle.Windsor;
 using EasyNetQ;
 using Shared.Configuration;
-using Workflow.Billing.Messages;
+//using Workflow.Billing.Messages;
+using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Producer.Installers;
 
 namespace Workflow.Billing.Producer

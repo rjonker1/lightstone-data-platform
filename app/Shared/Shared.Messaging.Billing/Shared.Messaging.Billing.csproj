@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messages\Entity.cs" />
-    <Compile Include="Messages\IEntity.cs" />
+    <Compile Include="Helpers\Entity.cs" />
+    <Compile Include="Messages\EntityMessage.cs" />
+    <Compile Include="Helpers\IEntity.cs" />
     <Compile Include="Messages\TextMessage.cs" />
+    <Compile Include="Messages\UserMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

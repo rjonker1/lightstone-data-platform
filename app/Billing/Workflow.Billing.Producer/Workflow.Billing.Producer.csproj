@@ -65,6 +65,9 @@
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.3.2\lib\net30\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Shared.Messaging.Billing">
+      <HintPath>..\..\Shared\Shared.Messaging.Billing\bin\Debug\Shared.Messaging.Billing.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

@@ -28,11 +28,6 @@ namespace UserManagement.Api
             base.ApplicationStartup(container, pipelines);
 
             container.Resolve<IBus>().Publish(new ImportStartupData());
-
-            //var bus = container.Resolve<EasyNetQ.IBus>();
-
-            //var message = new TextMessage() { Text = "From UserManagement" };
-            //bus.Publish(message);
         }
 
         protected override void ConfigureApplicationContainer(IWindsorContainer container)

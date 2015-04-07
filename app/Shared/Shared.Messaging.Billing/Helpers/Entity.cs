@@ -1,15 +1,14 @@
 ﻿using System;
-using DataPlatform.Shared.Messaging;
 
-namespace Shared.Messaging.Billing.Messages
+namespace Shared.Messaging.Billing.Helpers
 {
-    public class Entity : IEntity, IPublishableMessage
+    public class Entity : IEntity
     {
         public Guid Id { get; set; }
 
-        protected internal Entity() { }
+        public Entity() { }
 
-        protected Entity(Guid id)
+        public Entity(Guid id)
         {
             Id = id == new Guid() ? Guid.NewGuid() : id;
         }
