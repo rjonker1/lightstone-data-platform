@@ -9,10 +9,10 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
         public SightingUpdateResult SightingUpdateResult { get; private set; }
 
         private SightingUpdateRequest _sightingUpdate;
-        private readonly IHaveUserInformation _request;
+        private readonly IHaveUser _request;
         private readonly DataStoreResult _response;
 
-        public SightingUpdate(IHaveUserInformation request,  DataStoreResult response)
+        public SightingUpdate(IHaveUser request,  DataStoreResult response)
         {
             _request = request;
             _response = response;

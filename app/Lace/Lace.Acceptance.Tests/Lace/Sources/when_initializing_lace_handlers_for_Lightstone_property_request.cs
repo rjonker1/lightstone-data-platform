@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Property;
-using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Property;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Acceptance.Tests.Lace.Sources
@@ -20,17 +18,17 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     {
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
         private readonly IExecuteTheDataProviderSource _dataProvider;
 
         public when_initializing_lace_handlers_for_Lightstone_property_request()
         {
-            _monitoring = MonitoringBusBuilder.ForLightstonePropertyCommands(Guid.NewGuid());
+            _command = MonitoringBusBuilder.ForLightstonePropertyCommands(Guid.NewGuid());
             var lspRequestBuilder = new LspRequestBuilder();
 
             _request = lspRequestBuilder.ForReturnProperties();
             _response = new Collection<IPointToLaceProvider>();
-            _dataProvider = new LightstonePropertyDataProvider(_request, null, null, _monitoring);
+            _dataProvider = new LightstonePropertyDataProvider(_request, null, null, _command);
         }
 
         public override void Observe()

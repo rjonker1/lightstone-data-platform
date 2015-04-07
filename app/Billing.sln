@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing", "Billing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Consumer", "Billing\Workflow.Billing.Consumer\Workflow.Billing.Consumer.csproj", "{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Database", "Billing\Workflow.Billing.Database\Workflow.Billing.Database.csproj", "{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Messages", "Billing\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj", "{EA4E1FF1-8581-4680-AA28-126294163093}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BFDDFD5C-3B26-4EF3-87AC-D4DD3D53673B}"
@@ -43,7 +41,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7E5EFE
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Billing.Consumers", "Billing\Workflow.Billing.Consumers\Workflow.Billing.Consumers.csproj", "{7BA3EBC5-1B9C-44BD-848A-C8D15C25A216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing.Scheduler", "Billing\Billing.Scheduler\Billing.Scheduler.csproj", "{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +84,6 @@ Global
 		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE01F6BA-D18F-4958-81E3-0B9984F6F5ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F8BD7F7-3B75-40EC-BE50-2192F0780A58}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA4E1FF1-8581-4680-AA28-126294163093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA4E1FF1-8581-4680-AA28-126294163093}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA4E1FF1-8581-4680-AA28-126294163093}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -111,6 +108,10 @@ Global
 		{7BA3EBC5-1B9C-44BD-848A-C8D15C25A216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BA3EBC5-1B9C-44BD-848A-C8D15C25A216}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BA3EBC5-1B9C-44BD-848A-C8D15C25A216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +125,6 @@ Global
 		{2A13D18D-B281-47CD-BF87-7415C857F2CD} = {0CD1CFE3-2C52-4038-88BB-60E528A6C77D}
 		{8888CF49-7DCF-4984-A710-D2660F2CDBED} = {0CD1CFE3-2C52-4038-88BB-60E528A6C77D}
 		{1FB58A9A-5E4E-48C2-82DA-22694ACC31CC} = {5A13D445-E5A9-4F22-B317-923977838009}
+		{887A8565-4A10-44C8-82EF-F2F2D1D2BFBF} = {BFDDFD5C-3B26-4EF3-87AC-D4DD3D53673B}
 	EndGlobalSection
 EndGlobal

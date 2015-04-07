@@ -4,6 +4,6 @@ namespace Api.Domain.Verification.Core.Contracts
 {
     public interface ICallDriversLicenseVerification
     {
-        IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(ILaceRequest request);
+        IHaveDriversLicenseResponse DecodeDriversLincenseFromScan(IPointToLaceRequest request);
     }
 }

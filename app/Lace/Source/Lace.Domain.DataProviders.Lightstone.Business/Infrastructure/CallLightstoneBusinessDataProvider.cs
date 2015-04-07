@@ -13,10 +13,8 @@ using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Management;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
-using CommandType = Lace.Shared.Monitoring.Messages.Core.CommandType;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 using DataSet = System.Data.DataSet;
 
 namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
@@ -42,7 +40,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         }
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             try
             {
@@ -56,11 +54,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
 
                 var token = client.Proxy.authenticateUser(_username, _password);
                 
-                var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusinessInformation>())
+                var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusiness>())
                     .Map()
                     .Validate();
 
-                monitoring.Send(CommandType.Configuration, request, null);
+                command.Monitoring.Send(CommandType.Configuration, request, null);
 
 
                 if (!request.RequestIsValid)
@@ -69,21 +67,21 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                             "Minimum requirements for Lightstone Business request has not been met with user_token {0} ",
                             request.UserToken));
 
-                monitoring.StartCall(request, _stopWatch);
+                command.Monitoring.StartCall(request, _stopWatch);
 
 
                 _result = client.Proxy.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum, request.CompanyVatnumber);
 
                 client.CloseSource();
 
-                monitoring.EndCall(_result ?? new DataSet(), _stopWatch);
+                command.Monitoring.EndCall(_result ?? new DataSet(), _stopWatch);
 
-                TransformResponse(response, monitoring);
+                TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex.Message);
-                monitoring.Send(CommandType.Fault, ex.Message,
+                command.Monitoring.Send(CommandType.Fault, ex.Message,
                     new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
                 LightstoneBusinessResponseFailed(response);
             }
@@ -97,7 +95,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             var transformer = new TransformLightstoneBusinessResponse(_result);
 
@@ -106,7 +104,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 transformer.Transform();
             }
 
-            monitoring.Send(CommandType.Transformation,
+            command.Monitoring.Send(CommandType.Transformation,
                 transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), transformer);
 
             transformer.Result.HasBeenHandled();

@@ -18,9 +18,9 @@ namespace Billing.Infrastructure.NHibernate
 
         public AutoPersistenceModel GetAutoPersistenceModel()
         {
-            return AutoMap.AssemblyOf<PreBilling>(this)
+            return AutoMap.AssemblyOf<Transaction>(this)
                 //.Where(type => type.IsSubclassOf(typeof (Entity)))
-                //.IncludeBase<NamedEntity>()
+                .IgnoreBase<NamedEntity>()
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
                 .UseOverridesFromAssemblyOf<UserMappingOverride>()
                 .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));

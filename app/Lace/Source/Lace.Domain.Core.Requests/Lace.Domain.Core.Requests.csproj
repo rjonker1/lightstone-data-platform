@@ -32,29 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.Dataplatform.PackageBuilder.Core">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Lightstone.Dataplatform.PackageBuilder.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-    </Reference>
-    <Reference Include="NEventStore">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\NEventStore.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="PackageBuilder.Domain.Entities.Enums">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.859\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
+    <Reference Include="PackageBuilder.Domain.Entities.Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.863\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,22 +49,24 @@
     <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
     <Compile Include="Contracts\IAmMakeRequest.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
-    <Compile Include="Contracts\IHaveBusinessInformation.cs" />
+    <Compile Include="Contracts\IHaveBusiness.cs" />
     <Compile Include="Contracts\IHaveCarInformation.cs" />
-    <Compile Include="Contracts\IHaveContractInformation.cs" />
-    <Compile Include="Contracts\IHaveCoOrdinateInformation.cs" />
-    <Compile Include="Contracts\IHaveDriversLicenseInformation.cs" />
-    <Compile Include="Contracts\IHaveFicaInformation.cs" />
+    <Compile Include="Contracts\IHaveContract.cs" />
+    <Compile Include="Contracts\IHaveCoOrdinates.cs" />
+    <Compile Include="Contracts\IHaveDriversLicense.cs" />
+    <Compile Include="Contracts\IHaveFica.cs" />
     <Compile Include="Contracts\IHaveJisInformation.cs" />
     <Compile Include="Contracts\IHavePackageForRequest.cs" />
     <Compile Include="Contracts\IAmPropertyRequest.cs" />
-    <Compile Include="Contracts\IHavePropertyInformation.cs" />
-    <Compile Include="Contracts\IHaveUserInformation.cs" />
+    <Compile Include="Contracts\IHaveProperty.cs" />
+    <Compile Include="Contracts\IHaveUser.cs" />
     <Compile Include="Contracts\IHaveVehicle.cs" />
     <Compile Include="Contracts\IPointToVehicleRequest.cs" />
     <Compile Include="Contracts\IAmVinNumberRequest.cs" />
     <Compile Include="Contracts\IPointToLaceRequest.cs" />
-    <Compile Include="EnumsToBeRemoved.cs" />
+    <Compile Include="Enums.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

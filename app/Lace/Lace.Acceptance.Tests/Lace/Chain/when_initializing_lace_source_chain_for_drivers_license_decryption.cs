@@ -19,12 +19,12 @@ namespace Lace.Acceptance.Tests.Lace.Chain
     {
         private IBootstrap _initialize;
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _monitoring;
+        private readonly IBus _command;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_initializing_lace_source_chain_for_drivers_license_decryption()
         {
-            _monitoring = BusFactory.MonitoringBus();
+            _command = BusFactory.WorkflowBus();
             _request = new DriversLicenseRequestBuilder().ForDriversLicenseScan();
             _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IAmDriversLicenseRequest>().Package);
             _buildSourceChain.Build();
@@ -32,7 +32,7 @@ namespace Lace.Acceptance.Tests.Lace.Chain
 
         public override void Observe()
         {
-            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(), _request, _command, _buildSourceChain);
             _initialize.Execute();
         }
 

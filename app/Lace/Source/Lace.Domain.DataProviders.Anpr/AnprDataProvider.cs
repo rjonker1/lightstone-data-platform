@@ -6,20 +6,21 @@ using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
+
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Domain.DataProviders.Anpr
 {
     public class AnprDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
-        public AnprDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
+        private readonly ISendCommandToBus _command;
+        public AnprDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource, IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
-            _monitoring = monitoring;
+            _command = command;
         }
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
@@ -41,7 +42,7 @@ namespace Lace.Domain.DataProviders.Anpr
                 //consumer.ConsumeExternalSource(response, laceEvent);
 
                 if (!response.OfType<IProvideDataFromAnpr>().Any() || response.OfType<IProvideDataFromAnpr>().First() == null)
-                    CallFallbackSource(response, _monitoring);
+                    CallFallbackSource(response, _command);
             }
         }
 

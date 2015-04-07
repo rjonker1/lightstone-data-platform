@@ -1,142 +1,94 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Api.Domain.Infrastructure.Requests
 {
-    public class LaceRequest : ILaceRequest
+    public class LicensePlateRequest : IAmLicensePlateRequest
     {
-        public IProvideCoOrdinateInformationForRequest CoOrdinates { get; private set; }
 
-        public IProvideContextForRequest Context { get; private set; }
+        public LicensePlateRequest(IHaveUser user, IHaveVehicle vehicle, IHaveContract contract,
+            IHavePackageForRequest package, IHaveRequestContext context, DateTime requestDate)
+        {
+            User = user;
+            Vehicle = vehicle;
+            Contract = contract;
+            Package = package;
+            Request = context;
+            RequestDate = requestDate;
+        }
+        public IHaveUser User { get; private set; }
 
-        public IProvideDriversLicenseInformationForRequest DriversLicense { get; private set; }
+        public IHaveVehicle Vehicle { get; private set; }
 
-        public IProvideFicaInformationForRequest Fica { get; private set; }
+        public IHaveContract Contract { get; private set; }
 
-        public IProvideJisInformation Jis { get; private set; }
+        public IHavePackageForRequest Package { get; private set; }
 
-        public IPackage Package { get; private set; }
-        public IProvidePropertyInformationForRequest Property { get; private set; }
-        public IProvideBusinessInformationForRequest Business { get; private set; }
-
-        public IProvideRequestAggregation RequestAggregation { get; private set; }
+        public IHaveRequestContext Request { get; private set; }
 
         public DateTime RequestDate { get; private set; }
+       
+    }
 
-        public IProvideUserInformationForRequest User { get; private set; }
+    public class BusinessRequest : IAmBusinessRequest
+    {
+        public IHaveBusiness Business { get; private set; }
 
-        public IProvideVehicleInformationForRequest Vehicle { get; private set; }
+        public IHaveUser User { get; private set; }
 
-        public void LicensePlateNumberRequest(IPackage package, IProvideUserInformationForRequest user,
-            IProvideContextForRequest context, IProvideVehicleInformationForRequest vehicle,
-            IProvideRequestAggregation requestAggregation)
+        public IHaveContract Contract { get; private set; }
+
+        public IHavePackageForRequest Package { get; private set; }
+
+        public IHaveRequestContext Request { get; private set; }
+
+        public DateTime RequestDate { get; private set; }
+    }
+
+    public class PropertyRequest : IAmPropertyRequest
+    {
+        public PropertyRequest(IHaveProperty property, IHaveUser user, IHaveContract contract,
+            IHavePackageForRequest package, IHaveRequestContext request, DateTime requestDate)
         {
-            Package = package;
-            User = user;
-            Context = context;
-            Vehicle = vehicle;
-            RequestAggregation = requestAggregation;
-            RequestDate = DateTime.UtcNow;
-        }
-
-        public void DriversLicenseRequest(IPackage package,
-            IProvideDriversLicenseInformationForRequest driversLicense, IProvideRequestAggregation aggregation)
-        {
-            DriversLicense = driversLicense;
-            Package = package;
-            RequestAggregation = aggregation;
-        }
-
-        public void FicaRequest(IPackage package,
-            IProvideFicaInformationForRequest fica,IProvideRequestAggregation aggregation)
-        {
-            Fica = fica;
-            Package = package;
-            RequestAggregation = aggregation;
-        }
-
-        public void PropertyRequest(IPackage package, IProvideUserInformationForRequest user, IProvidePropertyInformationForRequest property, IProvideRequestAggregation aggregation)
-        {
-            Package = package;
-            User = user;
-            RequestAggregation = aggregation;
             Property = property;
-        }
-
-        public void BusinessRequest(IPackage package, IProvideBusinessInformationForRequest business, IProvideRequestAggregation aggregation)
-        {
+            User = user;
+            Contract = contract;
             Package = package;
-            //User = user;
-            RequestAggregation = aggregation;
-            Business = business;
-        }
-    }
-
-    public class Business : IProvideBusinessInformationForRequest
-    {
-        public Business(string userToken, string companyName, string companyRegNumber, string companyVatNumber)
-        {
-            CompanyVatNumber = companyVatNumber;
-            CompanyRegNumber = companyRegNumber;
-            CompanyName = companyName;
-            UserToken = userToken;
+            Request = request;
+            RequestDate = requestDate;
         }
 
-        public string UserToken { get; private set; }
-        public string CompanyName { get; private set; }
-        public string CompanyRegNumber { get; private set; }
-        public string CompanyVatNumber { get; private set; }
+        public IHaveProperty Property { get; private set; }
+
+        public IHaveUser User { get; private set; }
+
+        public IHaveContract Contract { get; private set; }
+
+        public IHavePackageForRequest Package { get; private set; }
+
+        public IHaveRequestContext Request { get; private set; }
+
+        public DateTime RequestDate { get; private set; }
+       
+       
     }
 
-    public class Property : IProvidePropertyInformationForRequest
+    public class DriversLicenseRequest : IAmDriversLicenseRequest
     {
 
-        public Property (string trackingNumber, int maxNumberOfRows, Guid userid, string idNumber)
-        {
-            IdCkOfOwner = idNumber;
-            TrackingNumber = trackingNumber;
-            MaxRowsToReturn = maxNumberOfRows;
-            UserId = userid.ToString();
-        }
+        public IHaveDriversLicense DriversLicense { get; private set; }
 
-        public string DeedTown { get; private set; }
+        public IHaveContract Contract { get; private set; }
 
-        public string ErfNumber { get; private set; }
+        public IHavePackageForRequest Package { get; private set; }
 
-        public string EstateName { get; private set; }
+        public IHaveRequestContext Request { get; private set; }
 
-        public string FarmName { get; private set; }
-
-        public string IdCkOfOwner { get; private set; }
-
-        public int MaxRowsToReturn { get; private set; }
-
-        public string Municipality { get; private set; }
-
-        public string OwnerName { get; private set; }
-
-        public string Portion { get; private set; }
-
-        public string Province { get; private set; }
-
-        public string SectionalTitle { get; private set; }
-
-        public string Street { get; private set; }
-
-        public string StreetNumber { get; private set; }
-
-        public string Suburb { get; private set; }
-
-        public string TrackingNumber { get; private set; }
-
-        public string Unit { get; private set; }
-
-        public string UserId { get; private set; }
+        public DateTime RequestDate { get; private set; }
     }
 
-    public class User : IProvideUserInformationForRequest
+    public class User : IHaveUser
     {
 
         public User(Guid userId, string userName, string firstName)
@@ -146,44 +98,37 @@ namespace Api.Domain.Infrastructure.Requests
             UserName = userName;
         }
 
-        public string UserEmail { get; private set; }
-
         public string UserFirstName { get; private set; }
 
         public Guid UserId { get; private set; }
 
-        public string UserLastName { get; private set; }
-
         public string UserName { get; private set; }
-
-        public string UserPhone { get; private set; }
     }
 
-    public class Context : IProvideContextForRequest
+
+    public class RequestContext : IHaveRequestContext
     {
-        public Context(string product, string reasonForApplication)
+        public RequestContext(Guid requestId, Lace.Domain.Core.Requests.DeviceTypes fromDevice, string fromIpAddress, string osVersion, Lace.Domain.Core.Requests.SystemType system)
         {
-            Product = product;
-            ReasonForApplication = reasonForApplication;
+            RequestId = requestId;
+            FromDeviceType = fromDevice;
+            FromIpAddress = fromIpAddress;
+            OsVersion = osVersion;
+            System = system;
         }
+        
+        public Lace.Domain.Core.Requests.DeviceTypes FromDeviceType { get; private set; }
 
-        public string Product { get; private set; }
-        public string ReasonForApplication { get; private set; }
+        public string FromIpAddress { get; private set; }
 
-        public string SecurityCode { get; private set; }
+        public string OsVersion { get; private set; }
+
+        public Guid RequestId { get; private set; }
+
+        public Lace.Domain.Core.Requests.SystemType System { get; private set; }
     }
 
-    public class Aggregation : IProvideRequestAggregation
-    {
-        public Aggregation(Guid aggregateId)
-        {
-            AggregateId = aggregateId;
-        }
-
-        public Guid AggregateId { get; private set; }
-    }
-
-    public class Vehicle : IProvideVehicleInformationForRequest
+    public class Vehicle : IHaveVehicle
     {
         public Vehicle()
         {
@@ -230,7 +175,7 @@ namespace Api.Domain.Infrastructure.Requests
         }
     }
 
-    public class DriversLicense : IProvideDriversLicenseInformationForRequest
+    public class DriversLicense : IHaveDriversLicense
     {
         public DriversLicense(string registrationCode, string scanData, Guid userId, string userName)
         {
@@ -249,7 +194,7 @@ namespace Api.Domain.Infrastructure.Requests
         public string Username { get; private set; }
     }
 
-    public class Fica : IProvideFicaInformationForRequest
+    public class Fica : IHaveFica
     {
         public Fica(int ficaTransactionId, long idNumber, Guid transactionToken, string username)
         {
@@ -266,5 +211,87 @@ namespace Api.Domain.Infrastructure.Requests
         public Guid TransactionToken { get; private set; }
 
         public string Username { get; private set; }
+    }
+
+    public class Contract : IHaveContract
+    {
+        public Contract(long contractVersion, string accountNumber, Guid contractId)
+        {
+            ContractVersion = contractVersion;
+            AccountNumber = accountNumber;
+            ContractId = contractId;
+        }
+        public string AccountNumber { get; private set; }
+
+        public Guid ContractId { get; private set; }
+
+        public long ContractVersion { get; private set; }
+    }
+
+    public class RequestPackage : IHavePackageForRequest
+    {
+        public RequestPackage(string action, DataProviderName[] dataProviders, Guid id, string name, long version)
+        {
+            Action = action;
+            DataProviders = dataProviders;
+            Id = id;
+            Name = name;
+            Version = version;
+        }
+
+        public string Action { get; private set; }
+
+        public DataProviderName[] DataProviders { get; private set; }
+
+        public Guid Id { get; private set; }
+
+        public string Name { get; private set; }
+
+        public long Version { get; private set; }
+    }
+
+    public class Property : IHaveProperty
+    {
+        public Property(string trackingNumber, int maxNumberOfRows, Guid userid, string idNumber)
+        {
+            IdCkOfOwner = idNumber;
+            TrackingNumber = trackingNumber;
+            MaxRowsToReturn = maxNumberOfRows;
+            UserId = userid.ToString();
+        }
+
+        public string DeedTown { get; private set; }
+
+        public string ErfNumber { get; private set; }
+
+        public string EstateName { get; private set; }
+
+        public string FarmName { get; private set; }
+
+        public string IdCkOfOwner { get; private set; }
+
+        public int MaxRowsToReturn { get; private set; }
+
+        public string Municipality { get; private set; }
+
+        public string OwnerName { get; private set; }
+
+        public string Portion { get; private set; }
+
+        public string Province { get; private set; }
+
+        public string SectionalTitle { get; private set; }
+
+        public string Street { get; private set; }
+
+        public string StreetNumber { get; private set; }
+
+        public string Suburb { get; private set; }
+
+        public string TrackingNumber { get; private set; }
+
+        public string Unit { get; private set; }
+
+        public string UserId { get; private set; }
     }
 }

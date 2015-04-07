@@ -3,7 +3,7 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestContractInformation : IHaveContractInformation
+    public class RequestContractInformation : IHaveContract
     {
         public Guid ContractId
         {

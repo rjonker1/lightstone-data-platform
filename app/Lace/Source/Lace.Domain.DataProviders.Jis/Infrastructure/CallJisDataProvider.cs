@@ -14,7 +14,8 @@ using Lace.Domain.DataProviders.Jis.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Jis.Infrastructure.Management;
 using Lace.Domain.DataProviders.Jis.JisServiceReference;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
+using Workflow.Lace.Messages.Core;
+
 
 namespace Lace.Domain.DataProviders.Jis.Infrastructure
 {
@@ -36,7 +37,7 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
             _repository = repository;
         }
 
-        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void CallTheDataProvider(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             try
             {
@@ -55,33 +56,33 @@ namespace Lace.Domain.DataProviders.Jis.Infrastructure
 
                 proxy.Connect();
 
-                var session = new SessionManager(proxy, _log, _request.GetFromRequest<IHaveUserInformation>()).Build().SessionManagement;
+                var session = new SessionManager(proxy, _log, _request.GetFromRequest<IHaveUser>()).Build().SessionManagement;
 
                 _jisResponse = proxy.DataStoreQuery(session.Id, new BuildJisRequest(_request.GetFromRequest<IHaveJisInformation>()).JisRequest,
-                    _request.GetFromRequest<IHaveUserInformation>().UserName);
+                    _request.GetFromRequest<IHaveUser>().UserName);
 
                 if (_jisResponse.IsHot)
                 {
                     _sightingUpdate =
-                        new SightingUpdate(_request.GetFromRequest<IHaveUserInformation>(), _jisResponse).BuildRequest()
+                        new SightingUpdate(_request.GetFromRequest<IHaveUser>(), _jisResponse).BuildRequest()
                             .Update(proxy, session)
                             .SightingUpdateResult;
                 }
 
                 proxy.Close();
 
-                TransformResponse(response, monitoring);
+                TransformResponse(response, command);
 
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Jis Web Service {0}", ex.Message);
-               // monitoring.PublishFailedSourceCallMessage(Source);
+               // command.Monitoring.PublishFailedSourceCallMessage(Source);
                 JisResponseFailed(response);
             }
         }
 
-        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void TransformResponse(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             var transformer = new TransformJisResponse(_jisResponse,_sightingUpdate);
 

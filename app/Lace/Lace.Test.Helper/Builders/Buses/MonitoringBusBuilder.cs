@@ -1,82 +1,81 @@
 ﻿using System;
-using DataPlatform.Shared.ExceptionHandling;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
+using DataPlatform.Shared.Enums;
 using NServiceBus;
-using NServiceBus.Features;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Test.Helper.Builders.Buses
 {
     public class MonitoringBusBuilder
     {
-        public static ISendMonitoringCommandsToBus ForIvidCommands(Guid aggregateId)
+        public static ISendCommandToBus ForIvidCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendIvidCommands(bus, aggregateId, (int) ExecutionOrder.First);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.Ivid);
         }
 
-        public static ISendMonitoringCommandsToBus ForAudatexCommands(Guid aggregateId)
+        public static ISendCommandToBus ForAudatexCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendAudatexCommands(bus, aggregateId, (int) ExecutionOrder.Sixth);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Sixth, DataProviderCommandSource.Audatex);
         }
 
-        public static ISendMonitoringCommandsToBus ForLightstoneCommands(Guid aggregateId)
+        public static ISendCommandToBus ForLightstoneCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendLightstoneCommands(bus, aggregateId, (int) ExecutionOrder.Second);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Second, DataProviderCommandSource.LightstoneAuto);
         }
 
-        public static ISendMonitoringCommandsToBus ForIvidTitleHolderCommands(Guid aggregateId)
+        public static ISendCommandToBus ForIvidTitleHolderCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendIvidTitleHolderCommands(bus, aggregateId, (int) ExecutionOrder.Third);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Third, DataProviderCommandSource.IvidTitleHolder);
         }
 
-        public static ISendMonitoringCommandsToBus ForRgtCommands(Guid aggregateId)
+        public static ISendCommandToBus ForRgtCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendRgtCommands(bus, aggregateId, (int) ExecutionOrder.Fifth);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Fifth, DataProviderCommandSource.Rgt);
         }
 
-        public static ISendMonitoringCommandsToBus ForRgtVinCommands(Guid aggregateId)
+        public static ISendCommandToBus ForRgtVinCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendRgtVinCommands(bus, aggregateId, (int) ExecutionOrder.Fourth);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Fourth, DataProviderCommandSource.RgtVin);
         }
 
-        public static ISendMonitoringCommandsToBus ForSignioDriversLicenseCommands(Guid aggregateId)
+        public static ISendCommandToBus ForSignioDriversLicenseCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendSignioCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.SignioDecryptDriversLicense);
         }
 
-        public static ISendMonitoringCommandsToBus ForPCubedCommands(Guid aggregateId)
+        public static ISendCommandToBus ForPCubedCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendRgtVinCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.PCubedFica);
         }
 
-        public static ISendMonitoringCommandsToBus ForLightstonePropertyCommands(Guid aggregateId)
+        public static ISendCommandToBus ForLightstonePropertyCommands(Guid requestId)
         {
-            var bus = BusFactory.MonitoringBus();
-            return new SendLightstonePropertyCommands(bus, aggregateId, (int)ExecutionOrder.Fourth);
+            var bus = BusFactory.WorkflowBus();
+            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.LightstoneProperty);
         }
     }
 
     public class BusFactory
     {
-        public static IBus MonitoringBus()
-        {
+        //public static IBus MonitoringBus()
+        //{
 
-            var assembliesToScan =
-                AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages")
-                    .And("NServiceBus.NHibernate")
-                    .And("NServiceBus.Transports.RabbitMQ");
-            return
-                new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Monitoring.Messages.Commands", assembliesToScan,
-                    "DataPlatform.Monitoring.Host").CreateBusWithNHibernatePersistence();
-        }
+        //    var assembliesToScan =
+        //        AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.command.Monitoring.Messages")
+        //            .And("NServiceBus.NHibernate")
+        //            .And("NServiceBus.Transports.RabbitMQ");
+        //    return
+        //        new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Monitoring.Messages.Commands", assembliesToScan,
+        //            "DataPlatform.command.Monitoring.Host").CreateBusWithNHibernatePersistence();
+        //}
 
         public static IBus WorkflowBus()
         {

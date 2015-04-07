@@ -2,7 +2,7 @@
 {
     public interface IAmBusinessRequest : IPointToLaceRequest
     {
-        IHaveUserInformation User { get; }
-        IHaveBusinessInformation Business { get; }
+        IHaveUser User { get; }
+        IHaveBusiness Business { get; }
     }
 }

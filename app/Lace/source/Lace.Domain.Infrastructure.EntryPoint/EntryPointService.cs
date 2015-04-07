@@ -9,11 +9,10 @@ using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
-using Lace.Shared.Monitoring.Messages.Shared;
 using NServiceBus;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
+using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint
 {
@@ -22,7 +21,8 @@ namespace Lace.Domain.Infrastructure.EntryPoint
         private readonly ICheckForDuplicateRequests _checkForDuplicateRequests;
         private readonly ILog _log;
         private readonly IBus _bus;
-        private ISendMonitoringCommandsToBus _monitoring;
+        private ISendCommandToBus _command;
+        private ISendWorkflowCommand _workflow;
         private IBuildSourceChain _sourceChain;
         private IBootstrap _bootstrap;
         private DataProviderStopWatch _stopWatch;
@@ -42,11 +42,11 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 if (request.First().Request.RequestId == Guid.Empty)
                     throw new Exception("Request Id for Aggregation is required. Cannot complete request");
 
-                _monitoring = new SendEntryPointCommands(_bus, request.First().Request.RequestId,
-                    (int) ExecutionOrder.First);
+                _command = CommandSender.InitCommandSender(_bus, request.First().Request.RequestId,
+                    (int) ExecutionOrder.First, DataProviderCommandSource.EntryPoint);
 
                 _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
-                _monitoring.Begin(request, _stopWatch);
+                _command.Monitoring.Begin(request, _stopWatch);
 
                 _sourceChain = new CreateSourceChain(request.First().Package);
                 _sourceChain.Build();
@@ -54,45 +54,56 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 if (_sourceChain.SourceChain == null)
                 {
                     _log.ErrorFormat("Source chain could not be built for action {0}", request.First().Package.Action);
-                    _monitoring.Send(CommandType.Fault, request,
+                    _command.Monitoring.Send(CommandType.Fault, request,
                         new
                         {
                             ChainBuilderError =
                                 string.Format("Source chain could not be built for action {0}",
                                     request.First().Package.Action)
                         });
-                    _monitoring.End(request, _stopWatch);
+                    _command.Monitoring.End(request, _stopWatch);
                     return EmptyResponse;
                 }
 
                 if (_checkForDuplicateRequests.IsRequestDuplicated(request.First()))
                 {
-                    _monitoring.Send(CommandType.Fault, request,
+                    _command.Monitoring.Send(CommandType.Fault, request,
                         new
                         {
                             DuplicateRequest = "This Request is duplicated and will not be executed"
                         });
-                    _monitoring.End(request, _stopWatch);
+                    _command.Monitoring.End(request, _stopWatch);
                     return EmptyResponse;
                 }
+
+                _workflow = new SendWorkflowCommands(_bus, request.First().Request.RequestId);
+                _workflow.DataProviderRequestTransaction(DataProviderCommandSource.EntryPoint, string.Empty,
+                    string.Empty,
+                    DateTime.Now, DataProviderAction.Request, DataProviderState.Successful);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
 
-                _monitoring.End(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch);
-                
+                _workflow.DataProviderResponseTransaction(DataProviderCommandSource.EntryPoint, string.Empty,
+                    string.Empty,
+                    DateTime.Now, DataProviderAction.Response,
+                    _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
+                        ? DataProviderState.Failed
+                        : DataProviderState.Successful);
+                _command.Monitoring.End(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch);
+
 
                 return _bootstrap.DataProviderResponses ?? EmptyResponse;
 
             }
             catch (Exception ex)
             {
-                _monitoring.Send(CommandType.Fault, ex.Message, request);
-                _monitoring.End(request,
+                _command.Monitoring.Send(CommandType.Fault, ex.Message, request);
+                _command.Monitoring.End(request,
                     _stopWatch ?? new DataProviderStopWatch(DataProviderCommandSource.EntryPoint.ToString()));
                 _log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
-               return EmptyResponse;
+                return EmptyResponse;
             }
         }
 

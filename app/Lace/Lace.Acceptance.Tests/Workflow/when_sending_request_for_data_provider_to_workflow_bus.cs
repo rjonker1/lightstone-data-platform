@@ -15,7 +15,7 @@ namespace Lace.Acceptance.Tests.Workflow
         private readonly long _packageVersion;
         private readonly string _system;
         private Exception _exception;
-        private readonly ISendWorkflowCommandsToBus _bus;
+        private readonly ISendWorkflowCommand _bus;
 
         public when_sending_request_for_data_provider_to_workflow_bus()
         {

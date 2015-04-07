@@ -11,8 +11,8 @@ using Lace.Domain.DataProviders.Core.Consumer;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Infrastructure.Factories;
+using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 using DataProviderName = PackageBuilder.Domain.Entities.Enums.DataProviders.DataProviderName;
 
 namespace Lace.Domain.DataProviders.Lightstone
@@ -20,14 +20,14 @@ namespace Lace.Domain.DataProviders.Lightstone
     public class LightstoneDataProvider : ExecuteSourceBase, IExecuteTheDataProviderSource
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
 
         public LightstoneDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
-            IExecuteTheDataProviderSource fallbackSource, ISendMonitoringCommandsToBus monitoring)
+            IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
             _request = request;
-            _monitoring = monitoring;
+            _command = command;
         }
 
         public void CallSource(ICollection<IPointToLaceProvider> response)
@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.LightstoneAuto);
-                _monitoring.Begin(new {_request}, stopWatch);
+                _command.Monitoring.Begin(new {_request}, stopWatch);
 
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
                     new CallLightstoneDataProvider(_request,
@@ -50,16 +50,16 @@ namespace Lace.Domain.DataProviders.Lightstone
                         new CarRepositoryFactory(ConnectionFactory.ForAutoCarStatsDatabase(),
                             CacheConnectionFactory.LocalClient())));
 
-                consumer.ConsumeExternalSource(response, _monitoring);
+                consumer.ConsumeExternalSource(response, _command);
 
-                _monitoring.End(response, stopWatch);
+                _command.Monitoring.End(response, stopWatch);
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
                     response.OfType<IProvideDataFromLightstoneAuto>().First() == null)
-                    CallFallbackSource(response, _monitoring);
+                    CallFallbackSource(response, _command);
             }
 
-            CallNextSource(response, _monitoring);
+            CallNextSource(response, _command);
         }
 
         private static void NotHandledResponse(ICollection<IPointToLaceProvider> response)

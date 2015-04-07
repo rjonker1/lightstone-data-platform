@@ -19,18 +19,18 @@ namespace Lace.Acceptance.Tests.Lace.Sources
     public class when_initializing_lace_handlers_for_ivid_request : Specification
     {
         private readonly ICollection<IPointToLaceRequest> _request;
-        private readonly IBus _monitoring;
+        private readonly IBus _command;
         private readonly IBootstrap _initialize;
         private ICollection<IPointToLaceProvider> _response;
         private readonly IBuildSourceChain _buildSourceChain;
 
         public when_initializing_lace_handlers_for_ivid_request()
         {
-            _monitoring = BusFactory.MonitoringBus();
+            _command = BusFactory.WorkflowBus();
             _request = new LicensePlateRequestBuilder().ForIvid();
             _buildSourceChain = new CreateSourceChain(_request.GetFromRequest<IPointToVehicleRequest>().Package);
             _buildSourceChain.Build();
-            _initialize = new Initialize(new Collection<IPointToLaceProvider>(),  _request, _monitoring, _buildSourceChain);
+            _initialize = new Initialize(new Collection<IPointToLaceProvider>(),  _request, _command, _buildSourceChain);
         }
 
 

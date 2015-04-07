@@ -53,8 +53,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.CrossCutting.DataProvider.Certificate", "Lace\source\Lace.CrossCutting.DataProvider.Certificate\Lace.CrossCutting.DataProvider.Certificate.csproj", "{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Shared.Monitoring.Messages", "Lace\source\Lace.Shared.Messages\Lace.Shared.Monitoring.Messages.csproj", "{C275D974-7E8E-440D-B244-B9DB85E839B1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Entities", "Lace\source\Lace.Domain.Core.Entities\Lace.Domain.Core.Entities.csproj", "{E18650C0-3965-4793-891B-20F3A0DFBA9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.Core.Requests", "Lace\source\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj", "{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}"
@@ -90,7 +88,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lace.Domain.DataProviders.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Transactions.Read.Service", "Lace\Source\Workflow.Transactions.Read.Service\Workflow.Transactions.Read.Service.csproj", "{9D8E33D3-C48B-4320-8CFB-061704CA43E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worflow.Transactions.Service.Write.Host", "Lace\Source\Worflow.Transactions.Service.Write.Host\Worflow.Transactions.Service.Write.Host.csproj", "{FAA86EA2-503C-4BDF-A279-7FD8D445A7DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Transactions.Service.Write.Host", "Lace\Source\Worflow.Transactions.Service.Write.Host\Workflow.Transactions.Service.Write.Host.csproj", "{FAA86EA2-503C-4BDF-A279-7FD8D445A7DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workflow.Transactions.Service.Read.Host", "Lace\Source\Workflow.Transactions.Service.Read.Host\Workflow.Transactions.Service.Read.Host.csproj", "{45637260-A38D-4396-A96E-60C0AB6BF995}"
 EndProject
@@ -180,10 +178,6 @@ Global
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C275D974-7E8E-440D-B244-B9DB85E839B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -259,7 +253,6 @@ Global
 		{7B07823D-3F48-470B-9A43-739D9EB9DC22} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{A4ADE647-0238-4C9F-B320-DBF8D5227C1B} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{2C5986E6-3ED6-4BD7-9C54-EB82AE6E3285} = {C6E762ED-2030-40CF-A694-8F6C44800226}
-		{C275D974-7E8E-440D-B244-B9DB85E839B1} = {C6E762ED-2030-40CF-A694-8F6C44800226}
 		{CA721B03-EFC7-45CE-A70E-BB9EF72C075B} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
 		{E18650C0-3965-4793-891B-20F3A0DFBA9E} = {87DF0D42-4BA9-42DD-8A56-91238364B357}
 		{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4} = {87DF0D42-4BA9-42DD-8A56-91238364B357}

@@ -4,7 +4,7 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
-    public class RequestPropertyInformation : IHavePropertyInformation
+    public class RequestPropertyInformation : IHaveProperty
     {
 
         public RequestPropertyInformation()

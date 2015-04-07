@@ -19,7 +19,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configu
         public bool IsSuccessful { get; private set; }
         public string Resonse { get; private set; }
 
-        public ConfigureSignioClient(IHaveDriversLicenseInformation request)
+        public ConfigureSignioClient(IHaveDriversLicense request)
         {
             Operation = string.Format("{0}/{1}", Credentials.DecryptyDriversLicenseApiOperation(), request.UserId);
             Content = request.ScanData;

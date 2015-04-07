@@ -6,11 +6,10 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
-using Lace.Shared.Monitoring.Messages.Shared;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Lace.SourceCalls;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
@@ -20,7 +19,7 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ICollection<IPointToLaceRequest> _audatexRequest;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
         private readonly ICallTheDataProviderSource _externalWebServiceCall;
 
 
@@ -34,7 +33,7 @@ namespace Lace.Unit.Tests.Sources
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_response, _externalWebServiceCall, _monitoring);
+            _requestDataFromSource.FetchDataFromSource(_response, _externalWebServiceCall, _command);
         }
 
         [Observation]

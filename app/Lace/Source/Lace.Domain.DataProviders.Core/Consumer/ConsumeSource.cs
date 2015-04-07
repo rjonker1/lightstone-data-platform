@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
-using Lace.Shared.Monitoring.Messages.Core;
+using Workflow.Lace.Messages.Core;
+
 
 namespace Lace.Domain.DataProviders.Core.Consumer
 {
@@ -9,7 +10,7 @@ namespace Lace.Domain.DataProviders.Core.Consumer
     {
         private readonly ICallTheDataProviderSource _externalWebSourceCall;
         private readonly IHandleDataProviderSourceCall _handleServiceCall;
-        
+
 
         public ConsumeSource(IHandleDataProviderSourceCall handleServiceCall,
             ICallTheDataProviderSource externalSourceCall)
@@ -18,11 +19,11 @@ namespace Lace.Domain.DataProviders.Core.Consumer
             _externalWebSourceCall = externalSourceCall;
         }
 
-        public void ConsumeExternalSource(ICollection<IPointToLaceProvider> response, ISendMonitoringCommandsToBus monitoring)
+        public void ConsumeExternalSource(ICollection<IPointToLaceProvider> response, ISendCommandToBus command)
         {
             _handleServiceCall
                 .Request(c =>
-                    c.FetchDataFromSource(response, _externalWebSourceCall, monitoring));
+                    c.FetchDataFromSource(response, _externalWebSourceCall, command));
         }
     }
 }

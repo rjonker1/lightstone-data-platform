@@ -4,9 +4,9 @@ namespace Api.Domain.Verification.Infrastructure.Commands
 {
     public class DriversLicenseVerficationCommand
     {
-        public readonly ILaceRequest Request;
+        public readonly IAmDriversLicenseRequest Request;
 
-        public DriversLicenseVerficationCommand(ILaceRequest request)
+        public DriversLicenseVerficationCommand(IAmDriversLicenseRequest request)
         {
             Request = request;
         }

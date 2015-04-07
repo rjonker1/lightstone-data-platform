@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure;
-using Lace.Domain.Infrastructure.Core.Dto;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Lace.Lighstone;
+using Workflow.Lace.Messages.Core;
 using Xunit.Extensions;
 
 namespace Lace.Unit.Tests.Sources
@@ -22,12 +20,12 @@ namespace Lace.Unit.Tests.Sources
         private readonly IRequestDataFromDataProviderSource _requestDataFromSource;
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ICollection<IPointToLaceProvider> _response;
-        private readonly ISendMonitoringCommandsToBus _monitoring;
+        private readonly ISendCommandToBus _command;
         private readonly ICallTheDataProviderSource _callTheSource;
 
         public when_requesting_data_from_lightstone_source()
         {
-            _monitoring = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
+            _command = MonitoringBusBuilder.ForLightstoneCommands(Guid.NewGuid());
             _requestDataFromSource = new RequestDataFromLightstoneSource();
             _request = new LicensePlateRequestBuilder().ForLightstone();
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
@@ -38,7 +36,7 @@ namespace Lace.Unit.Tests.Sources
 
         public override void Observe()
         {
-            _requestDataFromSource.FetchDataFromSource(_response, _callTheSource, _monitoring);
+            _requestDataFromSource.FetchDataFromSource(_response, _callTheSource, _command);
         }
 
         [Observation]

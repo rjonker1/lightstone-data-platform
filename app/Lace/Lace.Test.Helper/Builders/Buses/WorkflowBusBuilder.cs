@@ -6,7 +6,7 @@ namespace Lace.Test.Helper.Builders.Buses
 {
     public class WorkflowBusBuilder
     {
-        public static ISendWorkflowCommandsToBus ForWorkflowBus(Guid requestId)
+        public static ISendWorkflowCommand ForWorkflowBus(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
             return new SendWorkflowCommands(bus,requestId);

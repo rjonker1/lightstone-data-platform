@@ -3,8 +3,8 @@ using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
-using Lace.Shared.Monitoring.Messages.Core;
 using Lace.Test.Helper.Builders.Responses;
+using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
 {
@@ -14,14 +14,14 @@ namespace Lace.Test.Helper.Fakes.Lace.SourceCalls
         private IEnumerable<Vin> _vin;
 
         public void CallTheDataProvider(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             _vin = new SourceResponseBuilder().ForRgtVin();
-            TransformResponse(response, monitoring);
+            TransformResponse(response, command);
         }
 
         public void TransformResponse(ICollection<IPointToLaceProvider> response,
-            ISendMonitoringCommandsToBus monitoring)
+            ISendCommandToBus command)
         {
             var transformer = new TransformRgtVinResponse(_vin);
 

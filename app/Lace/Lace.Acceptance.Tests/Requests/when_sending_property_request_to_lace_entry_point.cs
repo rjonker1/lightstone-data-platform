@@ -25,13 +25,13 @@ namespace Lace.Acceptance.Tests.Requests
         public when_sending_property_request_to_lace_entry_point()
         {
             var assembliesToScan =
-                AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages")
+                AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.command.Monitoring.Messages")
                     .And("NServiceBus.NHibernate")
                     .And("NServiceBus.Transports.RabbitMQ");
 
             _bus =
-                new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Monitoring.Messages.Commands", assembliesToScan,
-                    "DataPlatform.Monitoring.Host").CreateBusWithNHibernatePersistence();
+                new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("command.Monitoring.Messages.Commands", assembliesToScan,
+                    "DataPlatform.command.Monitoring.Host").CreateBusWithNHibernatePersistence();
 
             _request = new LicensePlateRequestBuilder().ForPropertySources();
             _entryPoint = new EntryPointService(_bus);

@@ -4,11 +4,11 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto
 {
     public class GetBusinessRequest
     {
-        private readonly IHaveBusinessInformation _request;
+        private readonly IHaveBusiness _request;
 
         public bool RequestIsValid { get; private set; }
 
-        public GetBusinessRequest(IHaveBusinessInformation request)
+        public GetBusinessRequest(IHaveBusiness request)
         {
             _request = request;
         }
