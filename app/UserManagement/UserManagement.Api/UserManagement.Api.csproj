@@ -157,9 +157,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Shared.Messaging.Billing">
-      <HintPath>..\..\Shared\Shared.Messaging.Billing\bin\Debug\Shared.Messaging.Billing.dll</HintPath>
-    </Reference>
     <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\StackExchange.Redis.1.0.394\lib\net45\StackExchange.Redis.dll</HintPath>

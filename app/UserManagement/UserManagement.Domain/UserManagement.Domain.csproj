@@ -82,9 +82,6 @@
     <Reference Include="RestSharp">
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Shared.Messaging.Billing">
-      <HintPath>..\..\Shared\Shared.Messaging.Billing\bin\Debug\Shared.Messaging.Billing.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
