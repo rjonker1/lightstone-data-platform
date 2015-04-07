@@ -1,5 +1,4 @@
 ﻿using System;
-using Workflow.Billing.Messages.Entities;
 
 namespace Workflow.Billing.Messages.EntitiesBuilder
 {

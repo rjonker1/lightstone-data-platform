@@ -56,8 +56,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BillTransactionMessage.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="EntitiesBuilder\Entity.cs" />
+    <Compile Include="EntitiesBuilder\IEntity.cs" />
     <Compile Include="TextMessage.cs" />
   </ItemGroup>
   <ItemGroup>
