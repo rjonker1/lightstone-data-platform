@@ -56,19 +56,19 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                 _response = string.Empty;
 
                 if (string.IsNullOrWhiteSpace(_response))
-                    command.Monitoring.Send(CommandType.Fault, _request,
+                    command.Workflow.Send(CommandType.Fault, _request,
                         new
                         {
                             NoRequestReceived = "No response received from PCubed Fica Service"
-                        });
+                        }, DataProviderCommandSource.PCubedFica);
 
                 TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling PCubed Fica Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling PCubed Fica Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling PCubed Fica Data Provider"}, DataProviderCommandSource.PCubedFica);
                 SignioResponseFailed(response);
             }
         }
@@ -89,7 +89,8 @@ namespace Lace.Domain.DataProviders.PCubed.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,
+                DataProviderCommandSource.PCubedFica);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

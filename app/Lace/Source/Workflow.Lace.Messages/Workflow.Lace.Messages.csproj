@@ -74,21 +74,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\Context.cs" />
-    <Compile Include="Commands\Monitoring\AudatexCommands.cs" />
-    <Compile Include="Commands\Monitoring\CommandDto.cs" />
-    <Compile Include="Commands\Monitoring\CrossCuttingCommands.cs" />
-    <Compile Include="Commands\Monitoring\DataProviderCommand.cs" />
-    <Compile Include="Commands\Monitoring\EntryPointCommands.cs" />
-    <Compile Include="Commands\Monitoring\IvidCommands.cs" />
-    <Compile Include="Commands\Monitoring\IvidTitleHolderCommands.cs" />
-    <Compile Include="Commands\Monitoring\LightstoneBusinessCommands.cs" />
-    <Compile Include="Commands\Monitoring\LightstoneCommands.cs" />
-    <Compile Include="Commands\Monitoring\LightstonePropertyCommands.cs" />
-    <Compile Include="Commands\Monitoring\Monitoring.cs" />
-    <Compile Include="Commands\Monitoring\PCubedCommands.cs" />
-    <Compile Include="Commands\Monitoring\RgtCommands.cs" />
-    <Compile Include="Commands\Monitoring\RgtVinCommands.cs" />
-    <Compile Include="Commands\Monitoring\SignioCommands.cs" />
     <Compile Include="Commands\Requests.cs" />
     <Compile Include="Commands\Responses.cs" />
     <Compile Include="Commands\Transactions.cs" />
@@ -103,11 +88,9 @@
     <Compile Include="Extensions\BusExtensions.cs" />
     <Compile Include="Infrastructure\DataProviderStopWatch.cs" />
     <Compile Include="Infrastructure\Metadata.cs" />
-    <Compile Include="Infrastructure\MonitoringCommandBuilder.cs" />
     <Compile Include="Infrastructure\StopWatchFactory.cs" />
     <Compile Include="Infrastructure\StopWatchResults.cs" />
     <Compile Include="Shared\CommandSender.cs" />
-    <Compile Include="Shared\SendMonitoringCommand.cs" />
     <Compile Include="Shared\SendWorkflowCommands.cs" />
     <Compile Include="Shared\CommandPublisher.cs" />
   </ItemGroup>

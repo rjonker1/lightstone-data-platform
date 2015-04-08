@@ -14,6 +14,7 @@ namespace Lace.Acceptance.Tests.Workflow
         private readonly Guid _userId;
         private readonly long _packageVersion;
         private readonly string _system;
+        private readonly string _accountNumber;
         private Exception _exception;
         private readonly ISendWorkflowCommand _bus;
 
@@ -25,6 +26,7 @@ namespace Lace.Acceptance.Tests.Workflow
             _userId = new Guid("7A6E95C4-46B6-460A-89E6-259BA6792FD0");
             _packageVersion = 1;
             _system = "API";
+            _accountNumber = "UNITTEST0001";
             _bus = WorkflowBusBuilder.ForWorkflowBus(_requestId);
         }
 
@@ -32,7 +34,7 @@ namespace Lace.Acceptance.Tests.Workflow
         {
             try
             {
-                new WorkflowCommandBuilder(_bus, _packageId, _contractId, _userId, _packageVersion, _requestId, _system)
+                new WorkflowCommandBuilder(_bus, _packageId, _contractId, _userId, _packageVersion, _requestId, _system, _accountNumber)
                     .ForRequestReceived()
                     .ForSuccessfulCallIvid()
                     .ForSuccessfulCallLightstoneAuto()

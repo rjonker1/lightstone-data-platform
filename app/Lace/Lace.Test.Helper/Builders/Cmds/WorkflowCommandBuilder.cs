@@ -16,6 +16,7 @@ using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Lace.Consumer;
 using Lace.Test.Helper.Fakes.Responses;
 using Lace.Test.Helper.Mothers.Requests.Dto;
+using Microsoft.SqlServer.Server;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Builders.Cmds
@@ -27,11 +28,12 @@ namespace Lace.Test.Helper.Builders.Cmds
         private readonly Guid _packageId;
         private readonly Guid _contractId;
         private readonly Guid _userId;
+        private readonly string _accountNumber;
         private readonly long _packageVersion;
         private readonly string _system;
 
         public WorkflowCommandBuilder(ISendWorkflowCommand bus, Guid packageId, Guid contractId, Guid userId,
-            long packageVersion, Guid requestId, string system)
+            long packageVersion, Guid requestId, string system, string accountNumber)
         {
             _requestId = requestId;
             _bus = bus;
@@ -40,6 +42,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             _userId = userId;
             _packageVersion = packageVersion;
             _system = system;
+            _accountNumber = accountNumber;
         }
 
         public WorkflowCommandBuilder ForRequestReceived()
@@ -150,7 +153,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     "none", DataProviderAction.Response,
                     DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources())
                 .CreateTransaction(_packageId, _packageVersion, _userId, _requestId, _contractId, _system,
-                    0, DataProviderState.Successful);
+                    0, DataProviderState.Successful, _accountNumber);
             return this;
         }
     }

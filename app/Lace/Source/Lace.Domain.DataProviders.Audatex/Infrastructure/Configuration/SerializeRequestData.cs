@@ -3,7 +3,7 @@ using Lace.Shared.Extensions;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 {
-    public class SerializeAuduatexRequestData
+    public class SerializeRequestData
     {
         public string SerializedMessage
         {
@@ -15,7 +15,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 
         private readonly AudatexMessageData _message;
 
-        public SerializeAuduatexRequestData(AudatexMessageData message)
+        public SerializeRequestData(AudatexMessageData message)
         {
             _message = message;
         }

@@ -36,7 +36,7 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
             {
                 _client = new ConfigureSignioClient(_request.GetFromRequest<IHaveDriversLicense>());
 
-                command.Monitoring.Send(CommandType.Configuration,
+                command.Workflow.Send(CommandType.Configuration,
                     new
                     {
                         Configuration =
@@ -49,28 +49,34 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                                 _client.Operation
                             }
                     },
-                    new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"});
+                    new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"},
+                    Provider);
 
-                command.Monitoring.StartCall(_client.Operation, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider,
+                    "API", _client.Url, DataProviderAction.Request, DataProviderState.Successful, _client.Operation,
+                    _stopWatch);
 
                 _client.Run();
 
-                command.Monitoring.EndCall(_client.IsSuccessful ? _client.Resonse : "No Response Returned", _stopWatch);
+                command.Workflow.DataProviderResponse(Provider,
+                    "API", _client.Url, DataProviderAction.Response,
+                    _client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed, _client.Resonse,
+                    _stopWatch);
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))
-                    command.Monitoring.Send(CommandType.Fault, _request,
+                    command.Workflow.Send(CommandType.Fault, _request,
                         new
                         {
                             NoRequestReceived = "No response received from Signio's Drivers License Decryptions Service"
-                        });
+                        }, Provider);
 
                 TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Signio Drivers License Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Signio Drivers License Decryption"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Signio Drivers License Decryption"}, Provider);
                 SignioResponseFailed(response);
             }
         }
@@ -92,8 +98,8 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation,
-                transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), transformer);
+            command.Workflow.Send(CommandType.Transformation,
+                transformer.Result ?? new SignioDriversLicenseDecryptionResponse(null, null), transformer, Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Shared.Extensions;
@@ -23,45 +24,113 @@ namespace Workflow.Lace.Messages.Shared
             _publisher = new WorkflowCommandPublisher(bus, _log);
         }
 
-        public void DataProviderRequestTransaction(DataProviderCommandSource dataProvider,
+        public void DataProviderRequest(DataProviderCommandSource dataProvider,
             string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
             DataProviderStopWatch stopWatch)
         {
             new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId, dataProvider, DateTime.UtcNow,
-                connectionType, connection, action, state, new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
+                connectionType, connection, action, state, new MetadataContainer().ObjectToJson(),
+                payload.ObjectToJson(),
                 CommandDescriptions.StartExecutionDescription(dataProvider))
                 .SendToBus(_publisher, _log);
             stopWatch.Start();
         }
 
 
-        public void DataProviderResponseTransaction(DataProviderCommandSource dataProvider, string connectionType,
+        public void DataProviderResponse(DataProviderCommandSource dataProvider, string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
             DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
             new GetResponseFromDataProviderCommmand(Guid.NewGuid(), _requestId, dataProvider, DateTime.UtcNow,
                 connection,
-                connectionType, state, action, new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), payload.ObjectToJson(),
+                connectionType, state, action, new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
+                payload.ObjectToJson(),
                 CommandDescriptions.EndExecutionDescription(dataProvider))
                 .SendToBus(
                     _publisher,
                     _log);
         }
 
+        public void Begin(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
+        {
+            new StartingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.StartCallDescription(dataProvider),
+                payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
+                new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(
+                    _publisher, _log);
+        }
+
+        public void End(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
+        {
+            new EndingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.StartCallDescription(dataProvider),
+                payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
+                new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(
+                    _publisher, _log);
+        }
+
         public void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state)
+            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber)
         {
             new CreateTransactionCommand(Guid.NewGuid(), packageId, packageVersion, DateTime.UtcNow, userId, requestId,
                 contractId,
-                system, contractVersion, state)
+                system, contractVersion, state,accountNumber)
                 .SendToBus(_publisher, _log);
         }
 
-        public void Send(CommandType commandType, dynamic payload, dynamic metadata)
+        public void Send(CommandType commandType, object payload, object metadata,
+            DataProviderCommandSource dataProvider)
         {
-            throw new NotImplementedException();
+            Task.Run(() =>
+            {
+                switch (commandType)
+                {
+                    case CommandType.Fault:
+                        Error(payload, new MetadataContainer(metadata), dataProvider);
+                        break;
+                    case CommandType.Configuration:
+                        Configuring(payload, new MetadataContainer(metadata), dataProvider);
+                        break;
+                    case CommandType.Security:
+                        Security(payload, new MetadataContainer(metadata), dataProvider);
+                        break;
+                    case CommandType.Transformation:
+                        Transforming(payload, new MetadataContainer(metadata), dataProvider);
+                        break;
+                }
+            });
+        }
+
+        private void Error(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        {
+            new ErrorInDataProviderCommand(Guid.NewGuid(), _requestId,
+                CommandDescriptions.FaultDescription(dataProvider), payload.ObjectToJson(), dataProvider,
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Fault)
+                .SendToBus(_publisher, _log);
+        }
+
+        private void Transforming(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        {
+            new TransformingDataProviderResponseCommand(Guid.NewGuid(), _requestId,
+                CommandDescriptions.TransformationDescription(dataProvider), payload.ObjectToJson(), dataProvider,
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration)
+                .SendToBus(_publisher, _log);
+        }
+
+        private void Configuring(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        {
+            new ConfiguringDataProviderCommand(Guid.NewGuid(), _requestId,
+                CommandDescriptions.ConfigurationDescription(dataProvider), payload.ObjectToJson(), dataProvider,
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Configuration)
+                .SendToBus(_publisher, _log);
+        }
+
+        private void Security(object payload, MetadataContainer metadata, DataProviderCommandSource dataProvider)
+        {
+            new RaisingSecurityFlagCommand(Guid.NewGuid(), _requestId,
+                CommandDescriptions.SecurityDescription(dataProvider), payload.ObjectToJson(), dataProvider,
+                DateTime.UtcNow, metadata.ObjectToJson(), Category.Security)
+                .SendToBus(_publisher, _log);
         }
     }
 }

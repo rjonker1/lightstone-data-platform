@@ -36,46 +36,52 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
         {
             try
             {
-                var audatexWebService = new ConfigureAudatexSource()
+                var webService = new ConfigureAudatex()
                     .Create();
 
-                var request = new ConfigureAudatexRequestMessage(response)
+                var request = new ConfigureRequestMessage(response)
                     .Build()
                     .AudatexRequest;
 
-                command.Monitoring.Send(CommandType.Configuration,
+                command.Workflow.Send(CommandType.Configuration,
                     new
                     {
                         EndPoint =
                             new
                             {
-                                audatexWebService.AudatexServiceProxy.Endpoint,
-                                audatexWebService.AudatexServiceProxy.State
+                                webService.Client.Endpoint,
+                                webService.Client.State
                             }
-                    }, request);
+                    }, request, Provider);
 
-                command.Monitoring.StartCall(request, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider,
+                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
+                    DataProviderState.Successful, request,
+                    _stopWatch);
 
-                _response = audatexWebService
-                    .AudatexServiceProxy
+                _response = webService
+                    .Client
                     .GetDataEx(GetCredentials(), request.MessageType, request.Message, 0);
 
-                command.Monitoring.EndCall(_response ?? new GetDataResult(), _stopWatch);
+                command.Workflow.DataProviderResponse(Provider,
+                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
+                    _response != null ? DataProviderState.Successful : DataProviderState.Failed,
+                    _response ?? new GetDataResult(),
+                    _stopWatch);
 
-                audatexWebService
-                    .Close();
+                webService.Close();
 
                 if (_response == null)
-                    command.Monitoring.Send(CommandType.Fault, _request,
-                        new {NoRequestReceived = "No response received from Audatex Data Provider"});
+                    command.Workflow.Send(CommandType.Fault, _request,
+                        new {NoRequestReceived = "No response received from Audatex Data Provider"}, Provider);
 
                 TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Audatex Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Audatex Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Audatex Data Provider"}, Provider);
                 AudatexResponseFailed(response);
             }
         }
@@ -106,7 +112,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer, Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

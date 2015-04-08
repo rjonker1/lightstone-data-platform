@@ -5,6 +5,7 @@ using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -48,21 +49,27 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             {
                 ValidateVehicleDetail(response);
 
-                command.Monitoring.StartCall(new {_request}, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider,
+                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
+                    DataProviderState.Successful, new {_request}, _stopWatch);
 
                 GetCarInformation();
                 GetMetrics();
                 Dispose();
 
-                command.Monitoring.EndCall(response, _stopWatch);
+                command.Workflow.DataProviderResponse(Provider,
+                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString,
+                    DataProviderAction.Response,
+                    response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                    new {response}, _stopWatch);
 
                 TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lightstone Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Lightstone Data Provider"}, Provider);
                 LightstoneResponseFailed(response);
             }
         }
@@ -83,7 +90,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer, Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

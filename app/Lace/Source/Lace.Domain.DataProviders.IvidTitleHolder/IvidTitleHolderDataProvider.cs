@@ -39,13 +39,13 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder
             {
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.IvidTitleHolder);
-                _command.Monitoring.Begin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch);
+                _command.Workflow.Begin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch, DataProviderCommandSource.IvidTitleHolder);
 
                 var consumer = new ConsumeSource(new HandleIvidTitleHolderSourceCall(),
                     new CallIvidTitleHolderDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.IvidTitleHolder);
 
                 if (!response.OfType<IProvideDataFromIvidTitleHolder>().Any() || response.OfType<IProvideDataFromIvidTitleHolder>().First() == null)
                     CallFallbackSource(response, _command);

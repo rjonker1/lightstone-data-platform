@@ -6,35 +6,25 @@ namespace Workflow.Lace.Messages.Core
 {
     public interface ISendWorkflowCommand
     {
-        void DataProviderRequestTransaction(DataProviderCommandSource dataProvider, string connectionType,
+        void DataProviderRequest(DataProviderCommandSource dataProvider, string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
             DataProviderStopWatch stopWatch);
 
-        void DataProviderResponseTransaction(DataProviderCommandSource dataProvider, string connectionType,
+        void DataProviderResponse(DataProviderCommandSource dataProvider, string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
             DataProviderStopWatch stopWatch);
 
         void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state);
+            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber);
 
-        void Send(CommandType commandType, dynamic payload, dynamic metadata);
+        void Begin(object payload,
+            DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider);
 
-    }
+        void End(object payload,
+            DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider);
 
-    public interface ISendMonitoringCommand
-    {
-        void Begin(dynamic payload,
-            DataProviderStopWatch stopWatch);
+        void Send(CommandType commandType, object payload, object metadata,
+            DataProviderCommandSource dataProvider);
 
-        void End(dynamic payload,
-            DataProviderStopWatch stopWatch);
-
-        void StartCall(dynamic payload,
-            DataProviderStopWatch stopWatch);
-
-        void EndCall(dynamic payload,
-            DataProviderStopWatch stopWatch);
-
-        void Send(CommandType commandType, dynamic payload, dynamic metadata);
     }
 }

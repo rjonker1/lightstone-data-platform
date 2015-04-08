@@ -40,7 +40,8 @@ namespace Lace.Domain.DataProviders.RgtVin
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                _command.Monitoring.Begin(new { _request, IvidResponse = response.OfType<IProvideDataFromIvid>().First() }, stopWatch);
+                _command.Workflow.Begin(new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()},
+                    stopWatch, DataProviderCommandSource.RgtVin);
 
                 var consumer = new ConsumeSource(new HandleRgtVinDataProviderCall(),
                     new CallRgtVinDataProvider(_request,
@@ -48,7 +49,7 @@ namespace Lace.Domain.DataProviders.RgtVin
                             CacheConnectionFactory.LocalClient())));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.RgtVin);
 
                 if (!response.OfType<IProvideDataFromRgtVin>().Any() ||
                     response.OfType<IProvideDataFromIvid>().First() == null)

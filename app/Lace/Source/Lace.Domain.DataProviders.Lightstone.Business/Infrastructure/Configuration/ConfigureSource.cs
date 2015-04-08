@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Domain.DataProviders.Lightstone.Business.LightstoneBusinessServiceReference;
 
 
@@ -8,21 +7,19 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configura
 {
     [Serializable]
     [DataContract]
-    public class ConfigureLighstoneBusinessSource
+    public class ConfigureSource
     {
-
-
         //private readonly string Username = Credentials.LightstoneBusinessApiEmail();
         //private readonly string Password = Credentials.LightstoneBusinessApiPassword();
 
         //public readonly string UserToken;
 
         [DataMember]
-        public LightstoneBusinessServiceReference.apiSoapClient Proxy { get; private set; }
+        public apiSoapClient Client { get; private set; }
 
-        public ConfigureLighstoneBusinessSource()
+        public ConfigureSource()
         {
-            Proxy = new apiSoapClient();
+            Client = new apiSoapClient();
 
 
             // TODO: confirm if this should be called in the configuration or per request.
@@ -34,8 +31,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configura
 
         public void CloseSource()
         {
-            if (Proxy == null) return;
-            Proxy.Close();
+            if (Client == null) return;
+            Client.Close();
         }
     }
 }

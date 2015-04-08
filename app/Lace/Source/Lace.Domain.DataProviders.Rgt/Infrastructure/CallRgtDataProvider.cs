@@ -5,6 +5,7 @@ using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.CrossCutting.DataProvider.Car.Core.Contracts;
 using Lace.CrossCutting.DataProvider.Car.Infrastructure;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
@@ -30,7 +31,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
         private readonly ISetupCarRepository _carRepository;
 
         private IRetrieveCarInformation _carInformation;
-        private IEnumerable<CarSpecification> _carSpecifications;
+        private IList<CarSpecification> _carSpecifications;
 
         public CallRgtDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository,
             ISetupCarRepository carRepository)
@@ -50,22 +51,30 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
                 ValidateVehicleDetail(response);
 
-                command.Monitoring.StartCall(_request, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider, "Database",
+                    ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
+                    DataProviderState.Successful, _request, _stopWatch);
 
                 GetCarInformation();
                 var carUow =
                     new CarSpecificationsUnitOfWork(_repository.CarSpecificationRepository());
                 carUow.GetCarSpecifications(
                     _carInformation.CarInformationRequest);
-                _carSpecifications = carUow.CarSpecifications;
+                _carSpecifications = carUow.CarSpecifications != null
+                    ? carUow.CarSpecifications.ToList()
+                    : new List<CarSpecification>();
 
-                command.Monitoring.EndCall(_carSpecifications, _stopWatch);
+                command.Workflow.DataProviderResponse(Provider, "Database",
+                    ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Response,
+                    _carSpecifications.Any()
+                        ? DataProviderState.Successful
+                        : DataProviderState.Failed, _carSpecifications, _stopWatch);
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {
                     _log.ErrorFormat("Could not generate Car information request");
-                    command.Monitoring.Send(CommandType.Fault, _request,
-                        new {NoRequestReceived = "No car specifications received from RGT Data Provider"});
+                    command.Workflow.Send(CommandType.Fault, _request,
+                        new {NoRequestReceived = "No car specifications received from RGT Data Provider"}, Provider);
                     RgtResponseFailed(response);
                 }
 
@@ -74,12 +83,12 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     _log.ErrorFormat("Could not get car information for Car id {0} Vin {1}",
                         _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin);
 
-                    command.Monitoring.Send(CommandType.Fault, _request,
+                    command.Workflow.Send(CommandType.Fault, _request,
                         new
                         {
                             NoRequestReceived = string.Format("Could not get car information for Car id {0} Vin {1}",
                                 _carInformation.CarInformationRequest.CarId, _carInformation.CarInformationRequest.Vin)
-                        });
+                        }, Provider);
                 }
 
                 TransformResponse(response, command);
@@ -87,7 +96,8 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling RGT Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message, new {ErrorMessage = "Error calling RGT Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling RGT Data Provider"}, Provider);
                 RgtResponseFailed(response);
             }
         }
@@ -102,7 +112,7 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

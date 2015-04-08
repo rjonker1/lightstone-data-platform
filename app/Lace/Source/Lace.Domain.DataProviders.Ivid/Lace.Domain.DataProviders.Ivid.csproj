@@ -60,7 +60,7 @@
     </Compile>
     <Compile Include="Infrastructure\CallIvidDataProvider.cs" />
     <Compile Include="Infrastructure\Dto\IvidRequestMessage.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureIvidSource.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureIvid.cs" />
     <Compile Include="Infrastructure\HandleIvidSourceCall.cs" />
     <Compile Include="Infrastructure\Management\TransformIvidResponse.cs" />
     <Compile Include="Infrastructure\RequestDataFromIvidSource.cs" />

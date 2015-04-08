@@ -11,55 +11,55 @@ namespace Lace.Test.Helper.Builders.Buses
         public static ISendCommandToBus ForIvidCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.Ivid);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid);
         }
 
         public static ISendCommandToBus ForAudatexCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Sixth, DataProviderCommandSource.Audatex);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Audatex);
         }
 
         public static ISendCommandToBus ForLightstoneCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Second, DataProviderCommandSource.LightstoneAuto);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto);
         }
 
         public static ISendCommandToBus ForIvidTitleHolderCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Third, DataProviderCommandSource.IvidTitleHolder);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IvidTitleHolder);
         }
 
         public static ISendCommandToBus ForRgtCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Fifth, DataProviderCommandSource.Rgt);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt);
         }
 
         public static ISendCommandToBus ForRgtVinCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.Fourth, DataProviderCommandSource.RgtVin);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin);
         }
 
         public static ISendCommandToBus ForSignioDriversLicenseCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.SignioDecryptDriversLicense);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.SignioDecryptDriversLicense);
         }
 
         public static ISendCommandToBus ForPCubedCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.PCubedFica);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.PCubedFica);
         }
 
         public static ISendCommandToBus ForLightstonePropertyCommands(Guid requestId)
         {
             var bus = BusFactory.WorkflowBus();
-            return CommandSender.InitCommandSender(bus, requestId, (int)ExecutionOrder.First, DataProviderCommandSource.LightstoneProperty);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneProperty);
         }
     }
 

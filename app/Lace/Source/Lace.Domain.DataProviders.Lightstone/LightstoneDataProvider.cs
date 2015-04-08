@@ -41,7 +41,7 @@ namespace Lace.Domain.DataProviders.Lightstone
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.LightstoneAuto);
-                _command.Monitoring.Begin(new {_request}, stopWatch);
+                _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.LightstoneAuto);
 
                 var consumer = new ConsumeSource(new HandleLightstoneSourceCall(),
                     new CallLightstoneDataProvider(_request,
@@ -52,7 +52,7 @@ namespace Lace.Domain.DataProviders.Lightstone
 
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.LightstoneAuto);
 
                 if (!response.OfType<IProvideDataFromLightstoneAuto>().Any() ||
                     response.OfType<IProvideDataFromLightstoneAuto>().First() == null)

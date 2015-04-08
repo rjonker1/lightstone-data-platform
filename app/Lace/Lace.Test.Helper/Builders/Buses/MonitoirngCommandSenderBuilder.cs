@@ -10,43 +10,43 @@ namespace Lace.Test.Helper.Builders.Buses
     {
         public static ISendCommandToBus ForIvidCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.Ivid);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid);
         }
 
         public static ISendCommandToBus ForIvidTitleHolderCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.IvidTitleHolder);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.IvidTitleHolder);
         }
 
         public static ISendCommandToBus ForRgtCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.Rgt);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Rgt);
         }
 
         public static ISendCommandToBus ForRgtVinCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.RgtVin);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin);
         }
 
 
         public static ISendCommandToBus ForLighstoneCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.LightstoneAuto);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto);
         }
 
         public static ISendCommandToBus ForAudatexCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.Audatex);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Audatex);
         }
 
         public static ISendCommandToBus ForSignioCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.SignioDecryptDriversLicense);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.SignioDecryptDriversLicense);
         }
 
         public static ISendCommandToBus ForPCubedCommands(IBus bus, Guid requestId, int executionOrder)
         {
-            return CommandSender.InitCommandSender(bus, requestId, executionOrder, DataProviderCommandSource.PCubedFica);
+            return CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.PCubedFica);
         }
     }
 }

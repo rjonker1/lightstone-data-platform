@@ -38,13 +38,14 @@ namespace Lace.Domain.DataProviders.Audatex
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Audatex);
-                _command.Monitoring.Begin(
-                    new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()}, stopWatch);
+                _command.Workflow.Begin(
+                    new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()}, stopWatch,
+                    DataProviderCommandSource.Audatex);
 
                 var consumer = new ConsumeSource(new HandleAudatexSourceCall(), new CallAudatexDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Audatex);
 
                 if (!response.OfType<IProvideDataFromAudatex>().Any() ||
                     response.OfType<IProvideDataFromAudatex>().First() == null)

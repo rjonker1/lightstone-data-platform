@@ -37,15 +37,15 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
         {
             try
             {
-                var client = new ConfigureLighstonePropertySource();
-                if (client.Proxy.State == CommunicationState.Closed)
-                    client.Proxy.Open();
+                var webService = new ConfigureSource();
+                if (webService.Client.State == CommunicationState.Closed)
+                    webService.Client.Open();
 
                 var request = new GetPropertyRequest(_request.GetFromRequest<IHaveProperty>())
                     .Map()
                     .Validate();
 
-                command.Monitoring.Send(Workflow.Lace.Messages.Core.CommandType.Configuration, request, null);
+                command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Configuration, request, null, Provider);
 
 
                 if (!request.RequestIsValid)
@@ -54,25 +54,32 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                             "Minimum requirements for Lightstone Property request has not been met with User id {0} and  Id or CK {1} and Max Rows to Return {2} and Tracking Number {3}",
                             request.UserId, request.IdCkOfOwner, request.MaxRowsToReturn, request.TrackingNumber));
 
-                command.Monitoring.StartCall(request, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider,
+                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
+                    DataProviderState.Successful, new {request},
+                    _stopWatch);
 
-                _result = client.Proxy.ReturnProperties(request.UserId, request.Province, request.Municipality,
+                _result = webService.Client.ReturnProperties(request.UserId, request.Province, request.Municipality,
                     request.DeedTown,
-                    request.ErfNumber, request.Portion, request.SectionalTitle, request.Unit, request.Suburb, request.Street,
+                    request.ErfNumber, request.Portion, request.SectionalTitle, request.Unit, request.Suburb,
+                    request.Street,
                     request.StreetNumber, request.OwnerName, request.IdCkOfOwner, request.EstateName, request.FarmName,
                     request.MaxRowsToReturn, request.TrackingNumber);
 
-                client.CloseSource();
+                webService.CloseSource();
 
-                command.Monitoring.EndCall(_result ?? new DataSet(), _stopWatch);
+                command.Workflow.DataProviderResponse(Provider,
+                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
+                    _result != null ? DataProviderState.Successful : DataProviderState.Failed, new {_result},
+                    _stopWatch);
 
                 TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Property Data Provider {0}", ex.Message);
-                command.Monitoring.Send(Workflow.Lace.Messages.Core.CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lightstone Property Data Provider"});
+                command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Lightstone Property Data Provider"}, Provider);
                 LightstonePropertyResponseFailed(response);
             }
         }
@@ -94,8 +101,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(Workflow.Lace.Messages.Core.CommandType.Transformation,
-                transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), transformer);
+            command.Workflow.Send(Workflow.Lace.Messages.Core.CommandType.Transformation,
+                transformer.Result ?? new LightstonePropertyResponse(new List<PropertyModel>()), transformer,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

@@ -6,7 +6,7 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure.Dto;
 
 namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 {
-    public class ConfigureAudatexRequestMessage
+    public class ConfigureRequestMessage
     {
         private readonly ICollection<IPointToLaceProvider> _response;
         private AudatexMessageData _audatexMessageData;
@@ -21,12 +21,12 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 
         private const string MessageType = "MSGTYPE_HISTORYCHECK";
 
-        public ConfigureAudatexRequestMessage(ICollection<IPointToLaceProvider> response)
+        public ConfigureRequestMessage(ICollection<IPointToLaceProvider> response)
         {
             _response = response;
         }
 
-        public ConfigureAudatexRequestMessage Build()
+        public ConfigureRequestMessage Build()
         {
             _audatexMessageData = new AudatexMessageData()
             {
@@ -44,7 +44,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure.Configuration
 
             AudatexRequest = new AudatexRequest()
             {
-                Message = new SerializeAuduatexRequestData(_audatexMessageData).SerializedMessage,
+                Message = new SerializeRequestData(_audatexMessageData).SerializedMessage,
                 MessageType = MessageType
             };
 

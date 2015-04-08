@@ -41,12 +41,12 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.SignioDecryptDriversLicense);
 
-                _command.Monitoring.Begin(new {_request}, stopWatch);
+                _command.Workflow.Begin(new { _request }, stopWatch, DataProviderCommandSource.SignioDecryptDriversLicense);
 
                 var consumer = new ConsumeSource(new HandleSignioSourceCall(), new CallSignioDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.SignioDecryptDriversLicense);
 
                 if (!response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().Any() ||
                     response.OfType<IProvideDataFromSignioDriversLicenseDecryption>().First() == null)

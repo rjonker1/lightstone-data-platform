@@ -7,20 +7,20 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Configura
 {
     [Serializable]
     [DataContract]
-    public class ConfigureLighstonePropertySource
+    public class ConfigureSource
     {
         [DataMember]
-        public LightstonePropertyServiceReference.PropertiesSoapClient Proxy { get; private set; }
+        public PropertiesSoapClient Client { get; private set; }
 
-        public ConfigureLighstonePropertySource()
+        public ConfigureSource()
         {
-            Proxy = new PropertiesSoapClient();
+            Client = new PropertiesSoapClient();
         }
 
         public void CloseSource()
         {
-            if (Proxy == null) return;
-            Proxy.Close();
+            if (Client == null) return;
+            Client.Close();
         }
     }
 }
