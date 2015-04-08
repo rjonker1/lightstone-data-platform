@@ -38,7 +38,7 @@ namespace Workflow.Billing.Repository
         //}
     //}
 
-    public class Repository<Q> : IRepository<Q>
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ISession _session;
 
@@ -47,42 +47,42 @@ namespace Workflow.Billing.Repository
             _session = session;
         }
 
-        public Q Get(object id)
+        public T Get(object id)
         {
-            return _session.Get<Q>(id);
+            return _session.Get<T>(id);
         }
 
-        public Q Load(object id)
+        public T Load(object id)
         {
-            return _session.Load<Q>(id);
+            return _session.Load<T>(id);
         }
 
-        public Q Persist(Q entity)
+        public T Persist(T entity)
         {
             ValidateEntity(entity);
             _session.Persist(entity);
             return entity;
         }
 
-        public void Save(Q entity)
+        public void Save(T entity)
         {
             ValidateEntity(entity);
             _session.Save(entity);
         }
 
-        public void Update(Q entity)
+        public void Update(T entity)
         {
             ValidateEntity(entity);
             _session.Update(entity);
         }
 
-        public void SaveOrUpdate(Q entity)
+        public void SaveOrUpdate(T entity)
         {
             ValidateEntity(entity);
             _session.SaveOrUpdate(entity);
         }
 
-        public void Refresh(Q entity)
+        public void Refresh(T entity)
         {
             ValidateEntity(entity);
 
@@ -91,13 +91,13 @@ namespace Workflow.Billing.Repository
             _session.Load(entity, id);
         }
 
-        public void Delete(Q entity)
+        public void Delete(T entity)
         {
             ValidateEntity(entity);
             _session.Delete(entity);
         }
 
-        private void ValidateEntity(Q entity)
+        private void ValidateEntity(T entity)
         {
             if ((entity is Entity) && (entity as Entity).Id == new Guid())
             {
@@ -108,7 +108,7 @@ namespace Workflow.Billing.Repository
 
         #region IQueryable members
 
-        public IEnumerator<Q> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return GetLinq().GetEnumerator();
         }
@@ -133,9 +133,9 @@ namespace Workflow.Billing.Repository
             get { return GetLinq().Provider; }
         }
 
-        protected virtual IQueryable<Q> GetLinq()
+        protected virtual IQueryable<T> GetLinq()
         {
-            return _session.Query<Q>();
+            return _session.Query<T>();
         }
 
         #endregion

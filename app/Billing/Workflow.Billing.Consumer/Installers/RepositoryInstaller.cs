@@ -28,7 +28,7 @@ namespace Workflow.Billing.Consumer.Installers
             //container.Register(Component.For<IRepositoryMapper>().ImplementedBy<RepositoryMapper>());
             //container.Register(Component.For<IRepository>().ImplementedBy<Repository.Repository>());
 
-           // container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
+            container.Register(Component.For(typeof(IRepository<>)).ImplementedBy(typeof(Repository<>)).LifestyleTransient());
         }
     }
 }
