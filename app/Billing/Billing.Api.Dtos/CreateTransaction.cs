@@ -8,15 +8,17 @@ namespace Billing.Api.Dtos
         {
         }
 
-        public CreateTransaction(PackageIdentifier packageIdentifier, TransactionContext context, ContractIdentifier contract)
+        public CreateTransaction(PackageIdentifier packageIdentifier, TransactionContext context, ContractIdentifier contract, AccountIdentifier account)
         {
             PackageIdentifier = packageIdentifier;
             Context = context;
             Contract = contract;
+            Account = account;
         }
 
         public PackageIdentifier PackageIdentifier { get; set; }
         public TransactionContext Context { get; set; }
         public ContractIdentifier Contract { get; set; }
+        public AccountIdentifier Account { get; set; }
     }
 }
