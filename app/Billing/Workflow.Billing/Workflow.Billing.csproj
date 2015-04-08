@@ -39,14 +39,26 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.843, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.880, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.843\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.880\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.880\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,8 +71,14 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\InvoiceTransaction.cs" />
+    <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
+    <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
+    <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
+    <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Repository\IHaveTypeMappings.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IRepositoryMapper.cs" />
@@ -81,7 +99,9 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\NHibernate\MappingOverrides\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

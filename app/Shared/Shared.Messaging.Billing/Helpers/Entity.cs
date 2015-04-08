@@ -4,7 +4,7 @@ namespace Shared.Messaging.Billing.Helpers
 {
     public class Entity : IEntity
     {
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         public Entity() { }
 
@@ -13,9 +13,9 @@ namespace Shared.Messaging.Billing.Helpers
             Id = id == new Guid() ? Guid.NewGuid() : id;
         }
 
-        public DateTime? Modified { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime? Created { get; set; }
-        public string CreatedBy { get; set; }
+        public virtual DateTime? Modified { get; set; }
+        public virtual string ModifiedBy { get; set; }
+        public virtual DateTime? Created { get; set; }
+        public virtual string CreatedBy { get; set; }
     }
 }
