@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using System.Linq;
+using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
 using MemBus;
 using Nancy;
@@ -6,6 +7,7 @@ using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
@@ -58,9 +60,23 @@ namespace UserManagement.Api
 
         protected override void RequestStartup(IWindsorContainer container, IPipelines pipelines, NancyContext context)
         {
-            pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
+            //pipelines.BeforeRequest.AddItemToStartOfPipeline((ctx, response) =>
+            //{
+                
+            //    return null;
+            //});
+            pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
                 this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                var token = "";
+                var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
+                if (cookie != null)
+                    token = HttpUtility.UrlDecode(cookie.Value);
+                //nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(HttpUtility.UrlDecode(token.Value));
+
+                var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
+                if (user != null)
+                    nancyContext.CurrentUser = user;
                 return null;
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
@@ -73,7 +89,13 @@ namespace UserManagement.Api
                 fromException.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
                 return fromException;
             });
-            pipelines.EnableCors(); // cross origin resource sharing
+            //pipelines.EnableCors(); // cross origin resource sharing
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
+            {
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+            });
             pipelines.AddTransactionScope(container);
 
             AddLookupData(pipelines, container.Resolve<IRetrieveEntitiesByType>());

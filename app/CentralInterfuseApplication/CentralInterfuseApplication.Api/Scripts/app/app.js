@@ -15,10 +15,15 @@
         this.post('/login', function (context) {
             $(context.target).ajaxSubmit({
                 success: function (data) {
-                    $.ajaxSetup({
-                        headers: { 'Authorization': 'Token ' + data }
-                    });
+                    //$.ajaxSetup({
+                    //    headers: { 'Authorization': 'Token ' + data }
+                    //});
                     //context.$element().html(data);
+                    //document.domain = "lightstone.com";
+                    //var store = new Sammy.Store({ type: 'cookie', domain: 'lightstone.com' });
+                    //store.set('token', data);
+                    $.removeCookie('token');
+                    $.cookie('token', data, { domain: 'lightstone.com' });
                     context.redirect("/");
                 }
             });

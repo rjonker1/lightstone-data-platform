@@ -1,11 +1,14 @@
-﻿using Castle.Windsor;
+﻿using System.Linq;
+using Castle.Windsor;
 using Castle.Windsor.Installer;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
+using Nancy.Helpers;
 using Nancy.Hosting.Aspnet;
 
 namespace CentralInterfuseApplication.Api
@@ -42,7 +45,20 @@ namespace CentralInterfuseApplication.Api
             //    UserMapper = container.Resolve<IUserMapper>(),
             //};
             //FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+            pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
+            {
+                //nancyContext.Request.Headers.UserAgent = "Lightstone";
+                var token = "";
+                var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
+                if (cookie != null)
+                    token = HttpUtility.UrlDecode(cookie.Value);
+                    //nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(HttpUtility.UrlDecode(token.Value));
 
+                var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
+                if (user != null)
+                    nancyContext.CurrentUser = user;
+                return null;
+            });
             TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
         }
 

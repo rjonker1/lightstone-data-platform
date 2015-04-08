@@ -1,6 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
+using System.Configuration;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -14,9 +13,8 @@ namespace UserManagement.Api.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            //container.Register(Component.For<ITokenizer>().ImplementedBy<Tokenizer>().LifestyleTransient());
-
-            container.Register(Component.For<ITokenizer>().Instance(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = "1").WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())))));
+            var userAgent = ConfigurationManager.AppSettings["TokenAuthUserAgentValue"];
+            container.Register(Component.For<ITokenizer>().Instance(new Tokenizer(cfg => cfg.AdditionalItems(ctx => ctx.Request.Headers.UserAgent = userAgent).WithKeyCache(new FileSystemTokenKeyStore(new RootPathProvider())))).LifestyleTransient());
         }
     }
 
@@ -24,7 +22,8 @@ namespace UserManagement.Api.Installers
     {
         public string GetRootPath()
         {
-            return new Uri(@"D:\").LocalPath;
+            var keyStore = ConfigurationManager.AppSettings["TokenAuthKeyStorePath"];
+            return new Uri(keyStore).LocalPath;
         }
 
         //public string GetRootPath()

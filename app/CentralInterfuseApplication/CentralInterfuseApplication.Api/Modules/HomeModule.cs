@@ -22,7 +22,8 @@ namespace CentralInterfuseApplication.Api.Modules
                       
                     return Response.AsRedirect("/login");
                 }
-                return View["Index"];
+
+                return Context.IsAjaxRequest() ? View["Home"] : View["Index"];
             };
         }
     }
