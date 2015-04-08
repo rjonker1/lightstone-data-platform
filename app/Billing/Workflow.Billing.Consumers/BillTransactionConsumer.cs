@@ -6,37 +6,37 @@ using Workflow.Billing.Repository;
 
 namespace Workflow.Billing.Consumers
 {
-    public class BillTransactionConsumer : IConsume<BillTransactionMessage>
+    public class BillTransactionConsumer //: IConsume<BillTransactionMessage>
     {
-        private static readonly ILog _log = LogManager.GetLogger<BillTransactionConsumer>();
-        private readonly IRepository _repository;
+        //private static readonly ILog _log = LogManager.GetLogger<BillTransactionConsumer>();
+        //private readonly IRepository _repository;
 
-        public BillTransactionConsumer(IRepository repository)
-        {
-            this._repository = repository;
-        }
+        //public BillTransactionConsumer(IRepository repository)
+        //{
+        //    this._repository = repository;
+        //}
 
-        public void Consume(BillTransactionMessage message)
-        {
-            if (!ShouldCreateTransaction(message))
-            {
-                _log.WarnFormat("Not creating a new transaction for message with transaction Id {0}", message.TransactionId);
-                return;
-            }
+        //public void Consume(BillTransactionMessage message)
+        //{
+        //    if (!ShouldCreateTransaction(message))
+        //    {
+        //        _log.WarnFormat("Not creating a new transaction for message with transaction Id {0}", message.TransactionId);
+        //        return;
+        //    }
 
-            var transaction = new InvoiceTransaction(message.TransactionId, message.TransactionDate, 
-                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract);
+        //    var transaction = new InvoiceTransaction(message.TransactionId, message.TransactionDate, 
+        //        message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract);
 
-            _repository.Add(transaction);
+        //    _repository.Add(transaction);
 
-            _log.InfoFormat("Transaction {0} was created", message.TransactionId);
-        }
+        //    _log.InfoFormat("Transaction {0} was created", message.TransactionId);
+        //}
 
-        private bool ShouldCreateTransaction(BillTransactionMessage message)
-        {
-            var match = _repository.Get<InvoiceTransaction>(message.TransactionId);
+        //private bool ShouldCreateTransaction(BillTransactionMessage message)
+        //{
+        //    var match = _repository.Get<InvoiceTransaction>(message.TransactionId);
 
-            return match == null;
-        }
+        //    return match == null;
+        //}
     }
 }

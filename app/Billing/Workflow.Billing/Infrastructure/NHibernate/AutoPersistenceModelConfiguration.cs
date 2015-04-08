@@ -19,6 +19,7 @@ namespace Workflow.Billing.Infrastructure.NHibernate
         {
             return AutoMap.AssemblyOf<UserMeta>(this)
                 //.Where(type => type.IsSubclassOf(typeof (Entity)))
+                .IgnoreBase<Entity>()
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
                 .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));
         }
