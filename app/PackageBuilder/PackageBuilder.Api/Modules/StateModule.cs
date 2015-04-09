@@ -8,10 +8,11 @@ using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.States.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class StateModule : NancyModule
+    public class StateModule : SecureModule
     {
         public StateModule(IPublishStorableCommands publisher, IRepository<State> repository)
         {

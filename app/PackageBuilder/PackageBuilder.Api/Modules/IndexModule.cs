@@ -4,10 +4,11 @@ using Common.Logging;
 using Nancy;
 using Shared.BuildingBlocks.Api;
 using PackageBuilder.Domain.Entities;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class IndexModule : NancyModule//SecureModule
+    public class IndexModule : SecureModule
     {
         private readonly ILog _log = LogManager.GetCurrentClassLogger();
 

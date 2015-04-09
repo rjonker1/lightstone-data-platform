@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using Nancy;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
@@ -10,7 +11,7 @@ using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Modules
 {
-    public class NamedEntityModule : NancyModule
+    public class NamedEntityModule : SecureModule
     {
         public NamedEntityModule(IRetrieveEntitiesByType entityRetriever)
         {

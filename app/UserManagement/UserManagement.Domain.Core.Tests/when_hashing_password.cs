@@ -10,7 +10,7 @@ namespace UserManagement.Domain.Core.Tests
         private string _salt = "ivcPLQ==";
         public override void Observe()
         {
-            //_saltedHash.GetHashAndSaltString("MyGlook234", out _hash, out _salt);
+            _saltedHash.GetHashAndSaltString("RightPassword123", out _hash, out _salt);
         }
 
         [Observation]
@@ -22,7 +22,7 @@ namespace UserManagement.Domain.Core.Tests
         [Observation]
         public void should_not_verify_hash_string()
         {
-            _saltedHash.VerifyHashString("WrongPassword123", _hash, _salt).ShouldBeTrue();
+            _saltedHash.VerifyHashString("WrongPassword123", _hash, _salt).ShouldBeFalse();
         }
     }
 }

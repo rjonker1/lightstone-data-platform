@@ -7,6 +7,7 @@ using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.ApiClients;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -17,7 +18,7 @@ namespace UserManagement.Api.Modules
     {
         public Guid UserId { get; set; }
     }
-    public class PackageModule : NancyModule
+    public class PackageModule : SecureModule
     {
         public PackageModule(IPackageBuilderApiClient packageBuilderApi, IRepository<User> users)
         {

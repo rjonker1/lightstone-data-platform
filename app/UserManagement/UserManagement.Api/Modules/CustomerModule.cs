@@ -6,6 +6,7 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -14,7 +15,7 @@ using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
-    public class CustomerModule : NancyModule
+    public class CustomerModule : SecureModule
     {
         public CustomerModule(IBus bus, ICustomerRepository customers)
         {

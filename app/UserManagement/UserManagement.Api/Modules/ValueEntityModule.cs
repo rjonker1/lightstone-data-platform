@@ -6,9 +6,9 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Core.Entities;
-using UserManagement.Domain.Core.Helpers;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities.Commands.Entities;
@@ -16,7 +16,7 @@ using UserManagement.Infrastructure.Helpers;
 
 namespace UserManagement.Api.Modules
 {
-    public class ValueEntityModule : NancyModule
+    public class ValueEntityModule : SecureModule
     {
         public ValueEntityModule(IBus bus, IRetrieveEntitiesByType entityRetriever, IValueEntityRepository<ValueEntity> entities)
         {

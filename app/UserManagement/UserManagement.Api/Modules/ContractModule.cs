@@ -6,6 +6,7 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.CommandHandlers.Contracts;
 using UserManagement.Domain.Dtos;
@@ -16,7 +17,7 @@ using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
-    public class ContractModule : NancyModule
+    public class ContractModule : SecureModule
     {
         public ContractModule(IBus bus, IContractRepository contracts)
         {

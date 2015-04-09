@@ -43,7 +43,8 @@
     
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
-        //document.domain = "lightstone.com";
+        $.removeCookie('token');
+    //document.domain = "lightstone.com";
     </script>
 </body>
 </html>
