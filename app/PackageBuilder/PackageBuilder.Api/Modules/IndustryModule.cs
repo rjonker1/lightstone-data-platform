@@ -10,7 +10,7 @@ using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class IndustryModule : SecureModule
+    public class IndustryModule : NancyModule// : SecureModule
     {
         public IndustryModule(IPublishStorableCommands publisher, IRepository<Industry> repository)
         {

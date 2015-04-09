@@ -21,7 +21,7 @@ using DataProviderDto = PackageBuilder.Domain.Dtos.Read.DataProviderDto;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class DataProviderModule : SecureModule
+    public class DataProviderModule : NancyModule// : SecureModule
     {
         private static int _defaultJsonMaxLength;
 
