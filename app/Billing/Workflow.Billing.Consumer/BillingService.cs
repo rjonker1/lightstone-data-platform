@@ -2,6 +2,7 @@
 using Castle.Windsor.Installer;
 using Common.Logging;
 using EasyNetQ;
+using Workflow.Billing.Consumer.Installers;
 
 namespace Workflow.Billing.Consumer
 {
@@ -14,7 +15,15 @@ namespace Workflow.Billing.Consumer
         {
             _log.DebugFormat("Started billing service");
 
-            var container = new WindsorContainer().Install(FromAssembly.This());
+            var container = new WindsorContainer().Install(
+                new NHibernateInstaller(),
+                new WindsorInstaller(),
+                new BusInstaller(),
+                new MappingTypeInstaller(),
+                new RepositoryInstaller(),
+                new AutoMapperInstaller(),
+                new ConsumerInstaller());
+
             bus = container.Resolve<IBus>();
 
             _log.DebugFormat("Billing service started");

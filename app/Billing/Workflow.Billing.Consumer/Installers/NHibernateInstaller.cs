@@ -35,9 +35,8 @@ namespace Workflow.Billing.Consumer.Installers
                 .UsingFactoryMethod(kernal => kernal.Resolve<ISessionFactory>().OpenSession())
                 .LifestyleTransient());
 
-            var sess = container.Resolve<ISession>();
-
-
+            //Initialize ISession to build up first run schema
+            //var init = container.Resolve<ISession>();
 
             this.Info(() => "Successfully installed NHibernateInstaller for WorkFlow");
         }

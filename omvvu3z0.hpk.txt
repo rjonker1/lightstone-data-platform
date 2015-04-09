@@ -1,0 +1,60 @@
+﻿Merge branch 'BillingScheduler' into develop
+
+Conflicts:
+	app/Billing/Workflow.Billing.Consumers/BillTransactionConsumer.cs
+	app/Billing/Workflow.Billing.Consumers/packages.config
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch develop
+# Your branch is behind 'origin/develop' by 1 commit, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   app/Billing/Billing.Api/Web.config
+#	modified:   app/Billing/Billing.TestHelper/app.config
+#	modified:   app/Billing/Billing.Unit.Tests/Consumers/Billing/when_receiving_a_bill_transaction_message_and_an_exiting_transaction_exists.cs
+#	modified:   app/Billing/Billing.Unit.Tests/Consumers/Billing/when_receiving_a_bill_transaction_message_and_no_exiting_transaction_exists.cs
+#	modified:   app/Billing/Billing.Unit.Tests/app.config
+#	modified:   app/Billing/Workflow.Billing.Consumer/App.config
+#	modified:   app/Billing/Workflow.Billing.Consumer/BillingService.cs
+#	new file:   app/Billing/Workflow.Billing.Consumer/Installers/AutoMapperInstaller.cs
+#	modified:   app/Billing/Workflow.Billing.Consumer/Installers/ConsumerInstaller.cs
+#	modified:   app/Billing/Workflow.Billing.Consumer/Installers/NHibernateInstaller.cs
+#	modified:   app/Billing/Workflow.Billing.Consumer/Installers/RepositoryInstaller.cs
+#	new file:   app/Billing/Workflow.Billing.Consumer/Installers/WindsorInstaller.cs
+#	modified:   app/Billing/Workflow.Billing.Consumer/Workflow.Billing.Consumer.csproj
+#	modified:   app/Billing/Workflow.Billing.Consumer/connections.config
+#	modified:   app/Billing/Workflow.Billing.Consumer/hibernate.cfg.xml
+#	modified:   app/Billing/Workflow.Billing.Consumer/packages.config
+#	new file:   app/Billing/Workflow.Billing.Consumers/App_Readme/NHibernate.Session.Readme..txt
+#	modified:   app/Billing/Workflow.Billing.Consumers/BillTransactionConsumer.cs
+#	modified:   app/Billing/Workflow.Billing.Consumers/EntityConsumer.cs
+#	modified:   app/Billing/Workflow.Billing.Consumers/Workflow.Billing.Consumers.csproj
+#	modified:   app/Billing/Workflow.Billing.Consumers/app.config
+#	modified:   app/Billing/Workflow.Billing.Consumers/packages.config
+#	new file:   app/Billing/Workflow.Billing/Helpers/AutoMapper/Maps/ICreateAutoMapperMaps.cs
+#	new file:   app/Billing/Workflow.Billing/Helpers/AutoMapper/Maps/UserMetaMaps.cs
+#	new file:   app/Billing/Workflow.Billing/Helpers/Extensions/PipelineExtensions.cs
+#	modified:   app/Billing/Workflow.Billing/Infrastructure/NHibernate/AutoPersistenceModelConfiguration.cs
+#	modified:   app/Billing/Workflow.Billing/Repository/IRepository.cs
+#	modified:   app/Billing/Workflow.Billing/Repository/Repository.cs
+#	modified:   app/Billing/Workflow.Billing/Workflow.Billing.csproj
+#	modified:   app/Billing/Workflow.Billing/packages.config
+#	modified:   app/UserManagement/UserManagement.Infrastructure/NHibernate/AutoPersistenceModelConfiguration.cs
+#
+# Changes not staged for commit:
+#	modified:   app/AssemblyInfo.cs
+#	modified:   app/Billing/Workflow.Billing.Consumer/Workflow.Billing.Consumer.csproj
+#	modified:   app/Billing/Workflow.Billing.Consumers/Workflow.Billing.Consumers.csproj
+#	modified:   app/Billing/Workflow.Billing/Workflow.Billing.csproj
+#
+

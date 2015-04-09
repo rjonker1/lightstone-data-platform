@@ -2,6 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
+using EasyNetQ.AutoSubscribe;
 using Workflow.Billing.Consumers;
 
 namespace Workflow.Billing.Consumer.Installers
@@ -16,9 +17,11 @@ namespace Workflow.Billing.Consumer.Installers
             _log.InfoFormat("Installing Billing Consumer");
 
             container.Register(
-                Component.For<BillTransactionConsumer>().ImplementedBy<BillTransactionConsumer>(),
-                Component.For<TextMessageConsumer>().ImplementedBy<TextMessageConsumer>(),
+                //Component.For<BillTransactionConsumer>().ImplementedBy<BillTransactionConsumer>(),
+                //Component.For<TextMessageConsumer>().ImplementedBy<TextMessageConsumer>(),
                 Component.For<EntityConsumer>().ImplementedBy<EntityConsumer>());
+            //container.Register(Classes.FromAssemblyContaining<EntityConsumer>().BasedOn(typeof(IConsume<>)).WithServiceAllInterfaces().LifestyleTransient());
+
         }
     }
 }

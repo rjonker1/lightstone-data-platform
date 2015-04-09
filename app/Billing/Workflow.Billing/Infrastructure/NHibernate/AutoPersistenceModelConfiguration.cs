@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentNHibernate.Automapping;
 using Shared.Messaging.Billing.Helpers;
-using Workflow.Billing.Domain;
+using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.NHibernate.Attributes;
 using Workflow.Billing.Infrastructure.NHibernate.Conventions;
@@ -18,7 +18,8 @@ namespace Workflow.Billing.Infrastructure.NHibernate
         public AutoPersistenceModel GetAutoPersistenceModel()
         {
             return AutoMap.AssemblyOf<UserMeta>(this)
-                //.Where(type => type.IsSubclassOf(typeof (Entity)))
+                //.AddEntityAssembly(typeof(UserMessage).Assembly)
+                .IgnoreBase<Entity>()
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
                 .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));
         }
