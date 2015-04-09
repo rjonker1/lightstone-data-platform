@@ -26,12 +26,19 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
     [DataContract]
     public class Package : AggregateBase, IPackage
     {
+        [DataMember]
+        public Guid Id
+        {
+            get { return base.Id; }
+            internal set { base.Id = value; }
+        }
 
         [DataMember]
-        public Guid Id { get; internal set; }
-
-        [DataMember]
-        public int Version { get; internal set; }
+        public int Version
+        {
+            get { return base.Version; }
+            internal set { base.Version = value; }
+        }
         [DataMember]
         public string Name { get; internal set; }
         [DataMember]
