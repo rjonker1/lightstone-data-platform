@@ -33,9 +33,10 @@ namespace UserManagement.Api.Modules
 
                 var model = this.Bind<DataTablesViewModel>();
                 var dto = (IEnumerable<UserDto>) Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);//.Search(Context.Request.Query["search[value]"].Value, model.Start, model.Length));
+
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.ToList() });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto.Where(x => x.IsActive != false).ToList() });
             };
 
             Get["/Users/Add"] = _ =>

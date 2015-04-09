@@ -62,8 +62,8 @@
 
         return [
             '<div class="row">' +
-                        '<div class="col-lg-1"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
-                        '<div class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
+                        '<div id="indexEdit" class="col-lg-2"><a class="btn btn-primary entity-edit" href="#/Users/' + row.id + '">Edit</a></div>' +
+                        '<div id="indexDelete" class="col-lg-1"><a class="btn btn-danger entity-remove" href="#/Users/Delete/' + row.id + '">Delete</a></div>' +
                         '</div>'
         ].join('');
     };
