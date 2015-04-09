@@ -4,6 +4,7 @@ using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 
+
 namespace PackageBuilder.Api.Helpers.AutoMapper.ValueResolvers
 {
     public class DataProviderCostPriceResolver : ValueResolver<IDataProvider, double>

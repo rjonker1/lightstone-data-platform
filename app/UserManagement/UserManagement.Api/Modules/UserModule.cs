@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Repositories;
 using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Shared.Messaging.Billing.Messages;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -17,7 +17,7 @@ namespace UserManagement.Api.Modules
 {
     public class UserModule : NancyModule
     {
-        public UserModule(IBus bus, IUserRepository users)
+        public UserModule(IBus bus, EasyNetQ.IBus eBus, IUserRepository users)
         {
             Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users));
 
@@ -51,6 +51,10 @@ namespace UserManagement.Api.Modules
                 var entity = Mapper.Map(dto, users.Get(dto.Id) ?? new User());
 
                 bus.Publish(new CreateUpdateEntity(entity, "Create"));
+
+                ////RabbitMQ
+                var metaEntity = Mapper.Map(entity, new UserMessage());
+                eBus.Publish(metaEntity);
 
                 return null;
             };

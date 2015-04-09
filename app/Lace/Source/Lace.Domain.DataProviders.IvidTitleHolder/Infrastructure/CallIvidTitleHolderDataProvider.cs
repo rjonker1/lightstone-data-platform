@@ -38,33 +38,41 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
         {
             try
             {
-                var ividTitleHolderWebService = new ConfigureIvidTitleHolderSource();
+                var webService = new ConfigureIvidTitleHolder();
 
                 using (
-                    var scope = new OperationContextScope(ividTitleHolderWebService.IvidTitleHolderProxy.InnerChannel))
+                    var scope = new OperationContextScope(webService.Client.InnerChannel))
                 {
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
-                        ividTitleHolderWebService.IvidTitleHolderRequestMessageProperty;
+                        webService.RequestMessageProperty;
 
-                    var request = new IvidTitleHolderRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User, response)
-                        .TitleholderQueryRequest;
+                    var request =
+                        new IvidTitleHolderRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User,
+                            response)
+                            .TitleholderQueryRequest;
 
-                    command.Monitoring.Send(CommandType.Configuration, request, null);
+                    command.Workflow.Send(CommandType.Configuration, request, null, Provider);
 
-                    command.Monitoring.StartCall(request, _stopWatch);
+                    command.Workflow.DataProviderRequest(Provider, "API",
+                        webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
+                        DataProviderState.Successful, _request, _stopWatch);
 
-                    _response = ividTitleHolderWebService
-                        .IvidTitleHolderProxy
+                    _response = webService
+                        .Client
                         .TitleholderQuery(request);
 
-                    ividTitleHolderWebService
+                    webService
                         .CloseWebService();
 
-                    command.Monitoring.EndCall(_response ?? new TitleholderQueryResponse(), _stopWatch);
+                    command.Workflow.DataProviderResponse(Provider, "API",
+                        webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
+                        _response == null ? DataProviderState.Failed : DataProviderState.Successful,
+                        _response ?? new TitleholderQueryResponse(), _stopWatch);
 
                     if (_response == null)
-                        command.Monitoring.Send(CommandType.Fault, _request,
-                            new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"});
+                        command.Workflow.Send(CommandType.Fault, _request,
+                            new {NoRequestReceived = "No response received from Ivid Title Holder Data Provider"},
+                            Provider);
 
                     TransformResponse(response, command);
                 }
@@ -72,8 +80,8 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new { ErrorMessage = "Error calling Ivid Title Holder Data Provider" }, Provider);
                 IvidTitleHolderResponseFailed(response);
             }
         }
@@ -95,7 +103,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

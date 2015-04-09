@@ -1,6 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Enums;
 using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Test.Helper.Builders.Buses
 {
@@ -8,10 +9,12 @@ namespace Lace.Test.Helper.Builders.Buses
     {
         private ISendWorkflowCommand _workflow;
         private readonly DataProviderCommandSource _dataProvider;
+        private DataProviderStopWatch _stopWatch;
 
         public WorkflowQueueSender(DataProviderCommandSource dataProvider)
         {
             _dataProvider = dataProvider;
+            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(dataProvider);
         }
 
         public WorkflowQueueSender InitQueue(ISendWorkflowCommand workflow)
@@ -21,25 +24,25 @@ namespace Lace.Test.Helper.Builders.Buses
         }
 
 
-        public WorkflowQueueSender SendRequestToDataProvider(DateTime date, string connectionTpe,
-            string connection, DataProviderAction action, DataProviderState state)
+        public WorkflowQueueSender SendRequestToDataProvider(string connectionTpe,
+            string connection, DataProviderAction action, DataProviderState state, object payload)
         {
-            _workflow.DataProviderRequestTransaction(_dataProvider, connectionTpe, connection, date, action, state);
+            _workflow.DataProviderRequest(_dataProvider, connectionTpe, connection, action, state,payload, _stopWatch);
             return this;
         }
 
-        public WorkflowQueueSender ReceiveResponseFromDataProvider(DateTime date, string connectionTpe,
-            string connection, DataProviderAction action, DataProviderState state)
+        public WorkflowQueueSender ReceiveResponseFromDataProvider(string connectionTpe,
+            string connection, DataProviderAction action, DataProviderState state, object payload)
         {
-            _workflow.DataProviderResponseTransaction(_dataProvider, connectionTpe, connection, date, action, state);
+            _workflow.DataProviderResponse(_dataProvider, connectionTpe, connection, action, state, payload, _stopWatch);
             return this;
         }
 
-        public WorkflowQueueSender CreateTransaction(Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId,
-            Guid contractId, string system, long contractVersion, DataProviderState state)
+        public WorkflowQueueSender CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
+            Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber)
         {
-            _workflow.CreateTransaction(packageId, packageVersion, date, userId, requestId, contractId, system,
-                contractVersion, state);
+            _workflow.CreateTransaction(packageId, packageVersion, userId, requestId, contractId, system,
+                contractVersion, state,accountNumber);
             return this;
         }
 

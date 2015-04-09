@@ -20,7 +20,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
         private readonly ICollection<IPointToLaceRequest> _request;
         private readonly ISendCommandToBus _command;
 
-        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request, IExecuteTheDataProviderSource nextSource,
+        public LightstonePropertyDataProvider(ICollection<IPointToLaceRequest> request,
+            IExecuteTheDataProviderSource nextSource,
             IExecuteTheDataProviderSource fallbackSource, ISendCommandToBus command)
             : base(nextSource, fallbackSource)
         {
@@ -41,15 +42,16 @@ namespace Lace.Domain.DataProviders.Lightstone.Property
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.LightstoneProperty);
 
-                _command.Monitoring.Begin(new {_request}, stopWatch);
+                _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.LightstoneProperty);
 
                 var consumer = new ConsumeSource(new HandleLightstonePropertyCall(),
                     new CallLightstonePropertyDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(new {response}, stopWatch, DataProviderCommandSource.LightstoneProperty);
 
-                if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() || response.OfType<IProvideDataFromLightstoneProperty>().First() == null)
+                if (!response.OfType<IProvideDataFromLightstoneProperty>().Any() ||
+                    response.OfType<IProvideDataFromLightstoneProperty>().First() == null)
                     CallFallbackSource(response, _command);
             }
 

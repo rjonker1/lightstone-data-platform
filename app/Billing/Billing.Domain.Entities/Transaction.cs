@@ -16,6 +16,7 @@ namespace Billing.Domain.Entities
         public virtual string Server { get; protected internal set; }
         public virtual string State { get; protected internal set; }
         public virtual int StateId { get; protected internal set; }
+        public virtual string AccountNumber { get; protected internal set; }
 
         public Transaction() { }
     }

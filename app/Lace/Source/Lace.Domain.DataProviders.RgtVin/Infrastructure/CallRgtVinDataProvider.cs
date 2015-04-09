@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using Lace.CrossCutting.Infrastructure.Orm.Connections;
 using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Entities;
 using Lace.Domain.Core.Requests.Contracts;
@@ -26,7 +27,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
         private const DataProviderCommandSource Provider = DataProviderCommandSource.RgtVin;
 
         private readonly ISetupRepository _repository;
-        private IEnumerable<Vin> _vins;
+        private IList<Vin> _vins;
 
 
         public CallRgtVinDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repository)
@@ -46,19 +47,25 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     .Build()
                     .Vin;
 
-                command.Monitoring.Send(CommandType.Configuration, new {VinNumber = vin}, null);
+                command.Workflow.Send(CommandType.Configuration, new {VinNumber = vin}, null, Provider);
 
-                command.Monitoring.StartCall(vin, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider,
+                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
+                    DataProviderState.Successful, new {vin}, _stopWatch);
 
                 var uow = new VehicleVinUnitOfWork(_repository.VinRepository());
                 uow.GetVin(vin);
-                _vins = uow.Vins;
+                _vins = uow.Vins != null ? uow.Vins.ToList() : new List<Vin>();
 
-                command.Monitoring.EndCall(_vins ?? new List<Vin>(), _stopWatch);
+                command.Workflow.DataProviderResponse(Provider,
+                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString,
+                    DataProviderAction.Response,
+                    _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
+                    new {_vins}, _stopWatch);
 
                 if (_vins == null || !_vins.Any())
-                    command.Monitoring.Send(CommandType.Fault, new {VinNumber = vin},
-                        new {ErrorMessage = "No VINs were received"});
+                    command.Workflow.Send(CommandType.Fault, new {VinNumber = vin},
+                        new {ErrorMessage = "No VINs were received"}, Provider);
 
                 TransformResponse(response, command);
 
@@ -66,8 +73,8 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling RGT Vin Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling RGT Vin Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling RGT Vin Data Provider"}, Provider);
                 RgtVinResponseFailed(response);
             }
         }
@@ -82,7 +89,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer, Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

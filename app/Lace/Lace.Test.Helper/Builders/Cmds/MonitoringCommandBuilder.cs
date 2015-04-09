@@ -31,10 +31,10 @@ namespace Lace.Test.Helper.Builders.Cmds
                 .InitStopWatch()
                 .StartingExecution(new LicensePlateRequestBuilder().ForAudatex())
                 .Configuration(
-                    new ConfigureAudatexRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
+                    new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
                         .AudatexRequest, null)
                 .StartCall(
-                    new ConfigureAudatexRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
+                    new ConfigureRequestMessage(new LaceResponseBuilder().WithIvidResponseHandled()).Build()
                         .AudatexRequest, null)
                 .Error(new {NoRequestReceived = "No response received from Audatex Data Provider"}, null)
                 .EndCall(FakeAudatexWebResponseData.GetAudatextWebServiceResponse())

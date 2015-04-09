@@ -44,21 +44,21 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
         {
             try
             {
-                var client = new ConfigureLighstoneBusinessSource();
-                if (client.Proxy.State == CommunicationState.Closed)
-                    client.Proxy.Open();
+                var webService = new ConfigureSource();
+                if (webService.Client.State == CommunicationState.Closed)
+                    webService.Client.Open();
 
                 // authenticate
                 // call authenticateUser to get the UserToke by email and password
 
 
-                var token = client.Proxy.authenticateUser(_username, _password);
-                
+                var token = webService.Client.authenticateUser(_username, _password);
+
                 var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusiness>())
                     .Map()
                     .Validate();
 
-                command.Monitoring.Send(CommandType.Configuration, request, null);
+                command.Workflow.Send(CommandType.Configuration, request, null, Provider);
 
 
                 if (!request.RequestIsValid)
@@ -67,22 +67,28 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                             "Minimum requirements for Lightstone Business request has not been met with user_token {0} ",
                             request.UserToken));
 
-                command.Monitoring.StartCall(request, _stopWatch);
+                command.Workflow.DataProviderRequest(Provider,
+                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
+                    DataProviderState.Successful, new {request},
+                    _stopWatch);
 
+                _result = webService.Client.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum,
+                    request.CompanyVatnumber);
 
-                _result = client.Proxy.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum, request.CompanyVatnumber);
+                webService.CloseSource();
 
-                client.CloseSource();
-
-                command.Monitoring.EndCall(_result ?? new DataSet(), _stopWatch);
+                command.Workflow.DataProviderResponse(Provider,
+                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
+                    _result != null ? DataProviderState.Successful : DataProviderState.Failed, new {_result},
+                    _stopWatch);
 
                 TransformResponse(response, command);
             }
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Lightstone Business Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message,
-                    new {ErrorMessage = "Error calling Lightstone Business Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Lightstone Business Data Provider"}, Provider);
                 LightstoneBusinessResponseFailed(response);
             }
         }
@@ -104,8 +110,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation,
-                transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), transformer);
+            command.Workflow.Send(CommandType.Transformation,
+                transformer.Result ?? new LightstoneBusinessResponse(new List<IRespondWithBusiness>()), transformer,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

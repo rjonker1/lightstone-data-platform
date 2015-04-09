@@ -24,8 +24,8 @@ namespace Lace.Test.Helper.Builders.DataProviders
     {
         public static HpiServiceClient ForIvidWebServiceProxy()
         {
-            var ividWebService = new ConfigureIvidSource();
-            return ividWebService.IvidServiceProxy;
+            var ividWebService = new ConfigureIvid();
+            return ividWebService.Client;
         }
     }
 

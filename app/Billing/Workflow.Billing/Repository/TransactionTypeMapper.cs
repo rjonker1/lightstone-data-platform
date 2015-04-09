@@ -21,7 +21,7 @@ namespace Workflow.Billing.Repository
             {
                 return new[]
                 {
-                    "Id", "Date", "PackageId", "PackageVersion","ContractId", "ContractVersion", "UserId", "RequestId", "System", "Server", "State", "StateId"
+                    "Id", "Date", "PackageId", "PackageVersion","ContractId", "ContractVersion", "UserId", "RequestId", "System", "Server", "State", "StateId", "AccountNumber"
                 };
             }
         }
@@ -45,7 +45,8 @@ namespace Workflow.Billing.Repository
                 System = transaction.Request.System.Name,
                 Server = transaction.Request.System.Server.MachineName,
                 State = transaction.State.Name,
-                StateId = transaction.State.Id
+                StateId = transaction.State.Id,
+                AccountNumber = transaction.Account.AccountNumber
             };
 
             connection.Execute(sql, values);
@@ -61,7 +62,7 @@ namespace Workflow.Billing.Repository
                 return null;
 
             return new InvoiceTransaction(match.Id, match.Date, new PackageIdentifier(match.PackageId, new VersionIdentifier(match.PackageVersion)),
-                new RequestIdentifier(match.RequestId, new SystemIdentifier(match.System)), new UserIdentifier(match.UserId), new StateIdentifier(match.StateId, match.State), new ContractIdentifier(match.ContractId, match.ContractVersion));
+                new RequestIdentifier(match.RequestId, new SystemIdentifier(match.System)), new UserIdentifier(match.UserId), new StateIdentifier(match.StateId, match.State), new ContractIdentifier(match.ContractId, match.ContractVersion), new AccountIdentifier(match.AccountNumber));
         }
     }
 }

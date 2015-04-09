@@ -32,5 +32,15 @@ namespace Billing.TestHelper.Mothers.BillTransactionMessages
         {
             get { return new RequestIdentifierBuilder().With(new DefaultRequestIdentifier()); }
         }
+
+        public DataPlatform.Shared.Identifiers.ContractIdentifier Contract
+        {
+            get { return null; }
+        }
+
+        public DataPlatform.Shared.Identifiers.AccountIdentifier Account
+        {
+            get { return null; }
+        }
     }
 }

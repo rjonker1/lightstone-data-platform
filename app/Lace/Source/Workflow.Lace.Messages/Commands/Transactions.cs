@@ -29,8 +29,11 @@ namespace Workflow.Lace.Messages.Commands
         [DataMember]
         public DataProviderState State { get; private set; }
 
+        [DataMember]
+        public string AccountNumber { get; private set; }
+
         public CreateTransactionCommand(Guid id, Guid packageId, long packageVersion, DateTime date, Guid userId, Guid requestId, Guid contractId,
-            string system, long contractVersion, DataProviderState state)
+            string system, long contractVersion, DataProviderState state, string accountNumber)
         {
             Id = id;
             PackageId = packageId;
@@ -42,6 +45,7 @@ namespace Workflow.Lace.Messages.Commands
             System = system;
             State = state;
             ContractVersion = contractVersion;
+            AccountNumber = accountNumber;
         }
     }
 }

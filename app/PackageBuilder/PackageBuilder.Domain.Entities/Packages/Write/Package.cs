@@ -6,6 +6,7 @@ using AutoMapper;
 using CommonDomain.Core;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using PackageBuilder.Domain.Entities.Contracts.Actions;
@@ -13,9 +14,7 @@ using PackageBuilder.Domain.Entities.Contracts.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.Contracts.States.Read;
-using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Industries.Read;
 using PackageBuilder.Domain.Entities.Packages.Events;
@@ -27,6 +26,12 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
     [DataContract]
     public class Package : AggregateBase, IPackage
     {
+
+        [DataMember]
+        public Guid Id { get; internal set; }
+
+        [DataMember]
+        public int Version { get; internal set; }
         [DataMember]
         public string Name { get; internal set; }
         [DataMember]
@@ -145,18 +150,19 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             this.Info(() => "Successfully mapped data provider overrides from PackageUpdated event");
         }
 
-        private ILaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId)
+        private IPointToLaceRequest FormLaceRequest(Guid userId, string userName, string searchTerm, string firstName, Guid requestId, string accountNumber,Guid contractId, long contractVersion, DeviceTypes fromDevice,string fromIpAddress, string osVersion, SystemType system)
         {
-            var request = new LaceRequest();
-
             var package = this;
             package.DataProviders = DataProviders.Where(fld => fld.DataFields.Filter(x => x.IsSelected == true).Any());
 
-            request.LicensePlateNumberRequest(package,
-                new User(userId, userName, firstName), new Context(Name, null),
-                new Vehicle(string.Empty, searchTerm, string.Empty, string.Empty, string.Empty,
-                    string.Empty),
-                new Aggregation(requestId));
+            var dataProviderNames = package.DataProviders.Select(s => s.Name).ToArray();
+
+            var request = new LicensePlateRequest(
+                new User(userId, userName, firstName),new Vehicle(string.Empty,searchTerm,string.Empty,string.Empty,string.Empty,string.Empty),
+                new Contract(contractVersion, accountNumber, contractId),
+                new RequestPackage("License plate search", dataProviderNames, package.Id, package.Name, (long)package.DisplayVersion),
+                new RequestContext(requestId,fromDevice,fromIpAddress,osVersion,system),
+                DateTime.UtcNow);
 
             return request;
         }
@@ -173,12 +179,13 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
             }
         }
 
-        public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName, string searchTerm, string firstName, Guid requestId)
+        public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
+            string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
         {
-            var request = FormLaceRequest(userId, userName, searchTerm, firstName, requestId);
-
-            request.Package.Action = new Action("License plate search");
-            var responses = entryPoint.GetResponsesFromLace(request);
+            var request = FormLaceRequest(userId, userName, searchTerm, firstName, requestId, accountNumber, contractId,
+                contractVersion, fromDevice, fromIpAddress, osVersion, system);
+            var responses = entryPoint.GetResponsesFromLace(new[] {request});
 
             return MapLaceResponses(responses).ToList();
         }

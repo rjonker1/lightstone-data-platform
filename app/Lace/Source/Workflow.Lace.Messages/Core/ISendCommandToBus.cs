@@ -3,7 +3,5 @@
     public interface ISendCommandToBus
     {
         ISendWorkflowCommand Workflow { get; }
-
-        ISendMonitoringCommand Monitoring { get; }
     }
 }

@@ -134,5 +134,5 @@ namespace UserManagement.Api
         {
             get { return new AspNetRootPathProvider(); }
         }
-    }
+    }  
 }

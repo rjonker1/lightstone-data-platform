@@ -13,7 +13,6 @@ using Lace.Domain.DataProviders.Rgt;
 using Lace.Domain.DataProviders.RgtVin;
 using Lace.Domain.DataProviders.Signio.DriversLicense;
 using NServiceBus;
-using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Shared;
 
 namespace Lace.Domain.Infrastructure.EntryPoint.Specification
@@ -31,19 +30,17 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                                         new RgtDataProvider(request,
                                             new AudatexDataProvider(request, null, null,
                                                 CommandSender.InitCommandSender(bus, requestId,
-                                                    (int) ExecutionOrder.Sixth,
                                                     DataProviderCommandSource.Audatex)),
                                             null,
-                                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Fifth,
+                                            CommandSender.InitCommandSender(bus, requestId,
                                                 DataProviderCommandSource.Rgt)), null,
-                                        CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Fourth,
-                                            DataProviderCommandSource.RgtVin)), null,
-                                    CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Third,
+                                        CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.RgtVin)),
+                                    null,
+                                    CommandSender.InitCommandSender(bus, requestId,
                                         DataProviderCommandSource.IvidTitleHolder)), null,
-                                CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.Second,
-                                    DataProviderCommandSource.LightstoneAuto)), null,
-                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
-                                DataProviderCommandSource.Ivid))
+                                CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneAuto)),
+                            null,
+                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.Ivid))
                             .CallSource(response);
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
@@ -51,7 +48,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 () =>
                     (request, bus, response, requestId) =>
                         new SignioDataProvider(request, null, null,
-                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
+                            CommandSender.InitCommandSender(bus, requestId,
                                 DataProviderCommandSource.SignioDecryptDriversLicense)).CallSource(response);
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
@@ -59,17 +56,17 @@ namespace Lace.Domain.Infrastructure.EntryPoint.Specification
                 () =>
                     (request, bus, response, requestId) =>
                         new LightstonePropertyDataProvider(request, null, null,
-                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
-                                DataProviderCommandSource.LightstoneProperty)).CallSource(
-                                    response);
+                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.LightstoneProperty))
+                            .CallSource(
+                                response);
 
         private readonly Func<Action<ICollection<IPointToLaceRequest>, IBus, ICollection<IPointToLaceProvider>, Guid>>
             _ficaRequestSpecification =
                 () =>
                     (request, bus, response, requestId) =>
                         new PCubedDataProvider(request, null, null,
-                            CommandSender.InitCommandSender(bus, requestId, (int) ExecutionOrder.First,
-                                DataProviderCommandSource.PCubedFica)).CallSource(response);
+                            CommandSender.InitCommandSender(bus, requestId, DataProviderCommandSource.PCubedFica))
+                            .CallSource(response);
 
         public
             IEnumerable

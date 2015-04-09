@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
@@ -39,43 +38,49 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
         {
             try
             {
-                var ividWebService = new ConfigureIvidSource();
+                var webService = new ConfigureIvid();
 
-                command.Monitoring.Send(CommandType.Security,
+                command.Workflow.Send(CommandType.Security,
                     new
                     {
                         Credentials =
                             new
                             {
-                                ividWebService.IvidServiceProxy.ClientCredentials.UserName.UserName,
-                                ividWebService.IvidServiceProxy.ClientCredentials.UserName.Password
+                                webService.Client.ClientCredentials.UserName.UserName,
+                                webService.Client.ClientCredentials.UserName.Password
                             }
                     },
-                    new {ContextMessage = "Ivid Data Provider Credentials"});
+                    new {ContextMessage = "Ivid Data Provider Credentials"}, Provider);
 
-                using (var scope = new OperationContextScope(ividWebService.IvidServiceProxy.InnerChannel))
+                using (var scope = new OperationContextScope(webService.Client.InnerChannel))
                 {
                     OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] =
-                        ividWebService.IvidRequestMessageProperty;
+                        webService.RequestMessageProperty;
 
-                    var request = new IvidRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User, _request.GetFromRequest<IPointToVehicleRequest>().Vehicle, _request.GetFromRequest<IPointToVehicleRequest>().Package.Name)
-                        .HpiQueryRequest;
+                    var request =
+                        new IvidRequestMessage(_request.GetFromRequest<IPointToVehicleRequest>().User,
+                            _request.GetFromRequest<IPointToVehicleRequest>().Vehicle,
+                            _request.GetFromRequest<IPointToVehicleRequest>().Package.Name)
+                            .HpiQueryRequest;
 
-                    command.Monitoring.Send(CommandType.Configuration, request, null);
+                    command.Workflow.Send(CommandType.Configuration, request, null, Provider);
 
-                    command.Monitoring.StartCall(request, _stopWatch);
+                    command.Workflow.DataProviderRequest(Provider, "API",
+                        webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
+                        DataProviderState.Successful, request, _stopWatch);
 
-                    _response = ividWebService
-                        .IvidServiceProxy
+                    _response = webService
+                        .Client
                         .HpiStandardQuery(request);
 
-                    ividWebService.CloseWebService();
+                    webService.CloseWebService();
 
-                    command.Monitoring.EndCall(_response ?? new HpiStandardQueryResponse(), _stopWatch);
+                    command.Workflow.DataProviderResponse(Provider, "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response, CheckState(), _response ?? new HpiStandardQueryResponse(),
+                        _stopWatch);
 
                     if (_response == null)
-                        command.Monitoring.Send(CommandType.Fault, _request,
-                            new {NoRequestReceived = "No response received from Ivid Data Provider"});
+                        command.Workflow.Send(CommandType.Fault, _request,
+                            new {NoRequestReceived = "No response received from Ivid Data Provider"}, Provider);
 
                     TransformResponse(response, command);
                 }
@@ -83,9 +88,17 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error calling Ivid Data Provider {0}", ex.Message);
-                command.Monitoring.Send(CommandType.Fault, ex.Message, new {ErrorMessage = "Error calling Ivid Data Provider"});
+                command.Workflow.Send(CommandType.Fault, ex.Message,
+                    new {ErrorMessage = "Error calling Ivid Data Provider"}, Provider);
                 IvidResponseFailed(response);
             }
+        }
+
+        private DataProviderState CheckState()
+        {
+            return _response == null
+                ? DataProviderState.Failed
+                : _response.partialResponse ? DataProviderState.PartialFailure : DataProviderState.Successful;
         }
 
         private static void IvidResponseFailed(ICollection<IPointToLaceProvider> response)
@@ -105,7 +118,7 @@ namespace Lace.Domain.DataProviders.Ivid.Infrastructure
                 transformer.Transform();
             }
 
-            command.Monitoring.Send(CommandType.Transformation, transformer.Result, transformer);
+            command.Workflow.Send(CommandType.Transformation, transformer.Result, transformer,Provider);
 
             transformer.Result.HasBeenHandled();
             response.Add(transformer.Result);

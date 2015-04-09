@@ -1,24 +1,13 @@
 ﻿using Api.Domain.Infrastructure.Automapping;
-using Api.Domain.Infrastructure.Billing;
 using Api.Domain.Infrastructure.Extensions;
 using Api.Domain.Infrastructure.Metadata;
-using Api.Domain.Verification.Core.Contracts;
-using Api.Domain.Verification.Infrastructure.Handlers;
-using Api.Domain.Verification.Infrastructure.Handlers.Contracts;
-using Api.Domain.Verification.Infrastructure.Services;
 using Api.Infrastructure.Metadata;
-using Billing.Api.Connector;
-using Billing.Api.Connector.Configuration;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using DataPlatform.Shared.Messaging.RabbitMQ;
-using Lace.Domain.Infrastructure.Core.Contracts;
-using Lace.Domain.Infrastructure.EntryPoint;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Routing;
-using NServiceBus;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 
@@ -69,8 +58,6 @@ namespace Api
                     .LifestyleTransient());
             container.Register(
                 Component.For<IApiMetaDataGenerator>().ImplementedBy<ApiMetaDataGenerator>().LifestyleTransient());
-
-
             container.Register(
                 Component.For<IPackageBuilderApiClient>().ImplementedBy<PackageBuilderApiClient>().LifestyleTransient());
             container.Register(
@@ -78,42 +65,42 @@ namespace Api
             container.Register(
                 Component.For<IUserAuthenticationClient>().ImplementedBy<UserAuthenticatorClient>().LifestyleTransient());
 
-            var assembliesToScan =
-                AllAssemblies.Matching("Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages")
-                    .And("NServiceBus.NHibernate")
-                    .And("NServiceBus.Transports.RabbitMQ");
+            //var assembliesToScan =
+            //    AllAssemblies.Matching("Lightstone.DataPlatform.Workflow.Lace.Messages")
+            //        .And("NServiceBus.NHibernate")
+            //        .And("NServiceBus.Transports.RabbitMQ");
 
-            container.Register(
-                Component.For<IBus>()
-                    .Instance(
-                        new BusFactory("Monitoring.Messages.Commands", assembliesToScan, "DataPlatform.Monitoring.Host")
-                            .CreateBusWithNHibernatePersistence()));
-            container.Register(Component.For<IEntryPoint>().ImplementedBy<EntryPointService>().LifestyleTransient());
+            //container.Register(
+            //    Component.For<IBus>()
+            //        .Instance(
+            //            new BusFactory("Workflow.Lace.Messages.Commands", assembliesToScan, "DataPlatform.Transactions.Host.Write")
+            //                .CreateBusWithNHibernatePersistence()));
+            //container.Register(Component.For<IEntryPoint>().ImplementedBy<EntryPointService>().LifestyleTransient());
 
 
-            container.Register(
-                Component.For<IConnectToBilling>()
-                    .Instance(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration())));
-            container.Register(
-                Component.For<ICreateBillingTransaction>()
-                    .ImplementedBy<CreateBillingTransaction>()
-                    .LifestyleTransient());
+            //container.Register(
+            //    Component.For<IConnectToBilling>()
+            //        .Instance(new DefaultBillingConnector(new ApplicationConfigurationBillingConnectorConfiguration())));
+            //container.Register(
+            //    Component.For<ICreateBillingTransaction>()
+            //        .ImplementedBy<CreateBillingTransaction>()
+            //        .LifestyleTransient());
 
-            container.Register(
-                Component.For<ICallFicaVerification>().ImplementedBy<FicaVerificationService>().LifestyleTransient());
-            container.Register(
-                Component.For<IHandleFicaVerficationRequests>()
-                    .ImplementedBy<FicaVerificationHandler>()
-                    .LifestyleTransient());
+            //container.Register(
+            //    Component.For<ICallFicaVerification>().ImplementedBy<FicaVerificationService>().LifestyleTransient());
+            //container.Register(
+            //    Component.For<IHandleFicaVerficationRequests>()
+            //        .ImplementedBy<FicaVerificationHandler>()
+            //        .LifestyleTransient());
 
-            container.Register(
-                Component.For<ICallDriversLicenseVerification>()
-                    .ImplementedBy<DriversLicenseVerificationService>()
-                    .LifestyleTransient());
-            container.Register(
-                Component.For<IHandleDriversLicenseVerficationRequests>()
-                    .ImplementedBy<DriversLicenseVerificationHandler>()
-                    .LifestyleTransient());
+            //container.Register(
+            //    Component.For<ICallDriversLicenseVerification>()
+            //        .ImplementedBy<DriversLicenseVerificationService>()
+            //        .LifestyleTransient());
+            //container.Register(
+            //    Component.For<IHandleDriversLicenseVerficationRequests>()
+            //        .ImplementedBy<DriversLicenseVerificationHandler>()
+            //        .LifestyleTransient());
         }
     }
 }

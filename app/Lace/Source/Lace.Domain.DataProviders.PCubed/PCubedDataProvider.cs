@@ -39,12 +39,12 @@ namespace Lace.Domain.DataProviders.PCubed
                 var stopWatch =
                     new StopWatchFactory().StopWatchForDataProvider(
                         DataProviderCommandSource.PCubedFica);
-                _command.Monitoring.Begin(new {_request}, stopWatch);
+                _command.Workflow.Begin(new {_request}, stopWatch, DataProviderCommandSource.PCubedFica);
 
                 var consumer = new ConsumeSource(new HandlePCubedSourceCall(), new CallPCubedDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.PCubedFica);
 
                 if (!response.OfType<IProvideDataFromPCubedFicaVerfication>().Any() ||
                     response.OfType<IProvideDataFromPCubedFicaVerfication>().First() == null)

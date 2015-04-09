@@ -38,12 +38,12 @@ namespace Lace.Domain.DataProviders.Ivid
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Ivid);
-                _command.Monitoring.Begin(new {_request }, stopWatch);
+                _command.Workflow.Begin(new {_request }, stopWatch, DataProviderCommandSource.Ivid);
 
                 var consumer = new ConsumeSource(new HandleIvidSourceCall(), new CallIvidDataProvider(_request));
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Ivid);
 
                if(!response.OfType<IProvideDataFromIvid>().Any() || response.OfType<IProvideDataFromIvid>().First() == null)
                    CallFallbackSource(response, _command);

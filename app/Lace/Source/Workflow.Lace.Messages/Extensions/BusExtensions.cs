@@ -26,13 +26,5 @@ namespace Workflow.Lace.Messages.Extensions
                 log.ErrorFormat("Error sending message to Data Provider Workflow Bus: {0}", ex.Message);
             }
         }
-
-        public static DataProviderMonitoringCommand GetCommand(this string payload, Guid id, int subOrder,
-            int executionOrder)
-        {
-            return
-                new DataProviderMonitoringCommand(new CommandDto(id, MonitoringSource.Lace,
-                    payload, DateTime.UtcNow, executionOrder, subOrder));
-        }
     }
 }

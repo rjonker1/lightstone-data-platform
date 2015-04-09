@@ -6,6 +6,7 @@ using MemBus;
 using MemBus.Configurators;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Infrastructure;
+using Workflow.BuildingBlocks;
 
 namespace UserManagement.Api.Installers
 {
@@ -19,6 +20,13 @@ namespace UserManagement.Api.Installers
                                                                      .Apply<IoCSupport>(s => s.SetAdapter(new MessageAdapter(container))
                                                                      .SetHandlerInterface(typeof(IHandleMessages<>)))
                                                                      .Construct()));
+
+            container.Register(
+                Component.For<EasyNetQ.IBus>()
+                    .UsingFactoryMethod(() => BusFactory.CreateBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
+                    .LifestyleSingleton()
+                );
+
             this.Info(() => "Successfully installed BusInstaller");
         }
     }

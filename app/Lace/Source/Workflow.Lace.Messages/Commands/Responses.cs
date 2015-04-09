@@ -31,9 +31,17 @@ namespace Workflow.Lace.Messages.Commands
 
         [DataMember]
         public DataProviderState State { get; private set; }
+        [DataMember]
+        public string MetaData { get; private set; }
+
+        [DataMember]
+        public string Payload { get; private set; }
+
+        [DataMember]
+        public string Message { get; private set; }
 
         public GetResponseFromDataProviderCommmand(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date, string connection, string connectionType,
-            DataProviderState state, DataProviderAction action)
+            DataProviderState state, DataProviderAction action, string metaData, string payload, string message)
         {
             Id = id;
             Date = date;
@@ -43,6 +51,9 @@ namespace Workflow.Lace.Messages.Commands
             ConnectionType = connectionType;
             State = state;
             Action = action;
+            MetaData = metaData;
+            Payload = payload;
+            Message = message;
         }
     }
 }

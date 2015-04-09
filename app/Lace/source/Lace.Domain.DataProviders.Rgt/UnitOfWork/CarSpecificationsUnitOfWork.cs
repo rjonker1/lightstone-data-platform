@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Rgt.Core.Contracts;

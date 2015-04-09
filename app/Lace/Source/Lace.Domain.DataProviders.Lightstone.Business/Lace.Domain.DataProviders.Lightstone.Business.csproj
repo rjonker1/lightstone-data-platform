@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\CallLightstoneBusinessDataProvider.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureLighstoneBusinessSource.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureSource.cs" />
     <Compile Include="Infrastructure\Dto\GetBusinessRequest.cs" />
     <Compile Include="Infrastructure\HandleLightstoneBusinessCall.cs" />
     <Compile Include="Infrastructure\Management\TransformLightstoneBusinessResponse.cs" />

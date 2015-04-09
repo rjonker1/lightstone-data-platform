@@ -41,8 +41,8 @@ namespace Lace.Domain.DataProviders.Rgt
             else
             {
                 var stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.Rgt);
-                _command.Monitoring.Begin(new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()},
-                    stopWatch);
+                _command.Workflow.Begin(new {_request, IvidResponse = response.OfType<IProvideDataFromIvid>().First()},
+                    stopWatch, DataProviderCommandSource.Rgt);
 
                 var consumer = new ConsumeSource(new HandleRgtDataProviderCall(),
                     new CallRgtDataProvider(_request,
@@ -53,7 +53,7 @@ namespace Lace.Domain.DataProviders.Rgt
 
                 consumer.ConsumeExternalSource(response, _command);
 
-                _command.Monitoring.End(response, stopWatch);
+                _command.Workflow.End(response, stopWatch, DataProviderCommandSource.Rgt);
 
                 if (!response.OfType<IProvideDataFromRgt>().Any() ||
                     response.OfType<IProvideDataFromRgt>().First() == null)

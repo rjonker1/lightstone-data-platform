@@ -12,8 +12,8 @@ namespace Workflow.Billing.Domain
         {
         }
 
-        public InvoiceTransaction(Guid id, DateTime date, PackageIdentifier package, RequestIdentifier request, UserIdentifier user, StateIdentifier state, ContractIdentifier contract)
-            : base(id, date, package, request, user, state, contract)
+        public InvoiceTransaction(Guid id, DateTime date, PackageIdentifier package, RequestIdentifier request, UserIdentifier user, StateIdentifier state, ContractIdentifier contract, AccountIdentifier account)
+            : base(id, date, package, request, user, state, contract, account)
         {
         }
     }

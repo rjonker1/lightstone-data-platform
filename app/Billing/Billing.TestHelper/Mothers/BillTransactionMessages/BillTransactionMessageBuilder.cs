@@ -9,17 +9,18 @@ namespace Billing.TestHelper.Mothers.BillTransactionMessages
 {
     public class BillTransactionMessageBuilder
     {
-        private PackageIdentifier packageIdentifier;
-        private RequestIdentifier requestIdentifier;
-        private DateTime transactionDate;
-        private Guid transactionId;
-        private UserIdentifier userIdentifier;
-        private StateIdentifier state;
-        private ContractIdentifier contract;
+        private PackageIdentifier _packageIdentifier;
+        private RequestIdentifier _requestIdentifier;
+        private DateTime _transactionDate;
+        private Guid _transactionId;
+        private UserIdentifier _userIdentifier;
+        private StateIdentifier _state;
+        private ContractIdentifier _contract;
+        private AccountIdentifier _account;
 
         public BillTransactionMessage Build()
         {
-            return new BillTransactionMessage(packageIdentifier, userIdentifier, requestIdentifier, transactionDate, transactionId, state,contract);
+            return new BillTransactionMessage(_packageIdentifier, _userIdentifier, _requestIdentifier, _transactionDate, _transactionId, _state,_contract,_account);
         }
 
         public BillTransactionMessageBuilder With(IDefineBillingTransaction data)
@@ -28,36 +29,49 @@ namespace Billing.TestHelper.Mothers.BillTransactionMessages
                 .WithRequestBuilder(data.RequestIdentifier)
                 .WithTransactionDate(data.TransactionDate)
                 .WithTransactionId(data.TransactionId)
-                .WithUserIdentifierBuilder(data.UserIdentifier);
+                .WithUserIdentifierBuilder(data.UserIdentifier)
+                .WithAccount(data.Account);
         }
 
         public BillTransactionMessageBuilder WithPackageBuilder(PackageIdentifierBuilder packageBuilder)
         {
-            this.packageIdentifier = packageBuilder.Build();
+            _packageIdentifier = packageBuilder.Build();
             return this;
         }
 
         public BillTransactionMessageBuilder WithRequestBuilder(RequestIdentifierBuilder requestIdentifierBuilder)
         {
-            this.requestIdentifier = requestIdentifierBuilder.Build();
+            _requestIdentifier = requestIdentifierBuilder.Build();
             return this;
         }
 
         public BillTransactionMessageBuilder WithUserIdentifierBuilder(UserIdentifierBuilder userBuilder)
         {
-            this.userIdentifier = userBuilder.Build();
+            _userIdentifier = userBuilder.Build();
             return this;
         }
 
         public BillTransactionMessageBuilder WithTransactionId(Guid transactionId)
         {
-            this.transactionId = transactionId;
+            _transactionId = transactionId;
             return this;
         }
 
         public BillTransactionMessageBuilder WithTransactionDate(DateTime transactionDate)
         {
-            this.transactionDate = transactionDate;
+            _transactionDate = transactionDate;
+            return this;
+        }
+
+        public BillTransactionMessageBuilder WithAccount(AccountIdentifier account)
+        {
+            this._account = account;
+            return this;
+        }
+
+        public BillTransactionMessageBuilder WithContract(ContractIdentifier contract)
+        {
+            _contract = contract;
             return this;
         }
     }

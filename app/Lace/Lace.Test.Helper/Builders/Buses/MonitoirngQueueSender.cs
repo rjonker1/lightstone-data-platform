@@ -39,56 +39,56 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender StartingExecution(object message)
         {
-            _command.Monitoring.Begin(message, _dataProviderStopWatch);
+            _command.Workflow.Begin(message, _dataProviderStopWatch, _dataProvider);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Configuration(object message, object metadata)
         {
-            _command.Monitoring.Send(CommandType.Configuration, message, metadata);
+            _command.Workflow.Send(CommandType.Configuration, message, metadata, _dataProvider);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Security(object message, object metadata)
         {
-            _command.Monitoring.Send(CommandType.Security, message, metadata);
+            _command.Workflow.Send(CommandType.Security, message, metadata, _dataProvider);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender StartCall(object message, object metadata)
         {
-            _command.Monitoring.StartCall(message, _stopWatch);
+            _command.Workflow.DataProviderRequest(_dataProvider,"TEST","TEST",DataProviderAction.Request,DataProviderState.Successful,new { message}, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Error(object message, object metatdata)
         {
-            _command.Monitoring.Send(CommandType.Fault, message, metatdata);
+            _command.Workflow.Send(CommandType.Fault, message, metatdata, _dataProvider);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender EndCall(object message)
         {
-            _command.Monitoring.EndCall(message, _stopWatch);
+            _command.Workflow.DataProviderRequest(_dataProvider, "TEST", "TEST", DataProviderAction.Response, DataProviderState.Successful, new { message }, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender Transform(object message, object metaData)
         {
-            _command.Monitoring.Send(CommandType.Transformation, message, metaData);
+            _command.Workflow.Send(CommandType.Transformation, message, metaData, _dataProvider);
             Thread.Sleep(1000);
             return this;
         }
 
         public MonitoirngQueueSender EndExecution(object message)
         {
-            _command.Monitoring.End(message, _dataProviderStopWatch);
+            _command.Workflow.End(message, _dataProviderStopWatch, _dataProvider);
             Thread.Sleep(1000);
             return this;
         }

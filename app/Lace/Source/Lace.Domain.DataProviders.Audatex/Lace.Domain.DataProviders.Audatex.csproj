@@ -60,9 +60,9 @@
     </Compile>
     <Compile Include="AudatexDataProvider.cs" />
     <Compile Include="Infrastructure\CallAudatexDataProvider.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureAudatexRequestMessage.cs" />
-    <Compile Include="Infrastructure\Configuration\ConfigureAudatexSource.cs" />
-    <Compile Include="Infrastructure\Configuration\SerializeAuduatexRequestData.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureRequestMessage.cs" />
+    <Compile Include="Infrastructure\Configuration\ConfigureAudatex.cs" />
+    <Compile Include="Infrastructure\Configuration\SerializeRequestData.cs" />
     <Compile Include="Infrastructure\Dto\AudatexMessageData.cs" />
     <Compile Include="Infrastructure\Dto\AudatexRequest.cs" />
     <Compile Include="Infrastructure\Dto\HistoryCheckRequestBody.cs" />
