@@ -21,6 +21,7 @@ namespace Workflow.Billing.Consumer
                 new BusInstaller(),
                 new MappingTypeInstaller(),
                 new RepositoryInstaller(),
+                new AutoMapperInstaller(),
                 new ConsumerInstaller());
 
             bus = container.Resolve<IBus>();
