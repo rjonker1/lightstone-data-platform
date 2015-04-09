@@ -17,6 +17,7 @@ namespace Workflow.Billing.Consumer
 
             var container = new WindsorContainer().Install(
                 new NHibernateInstaller(),
+                new WindsorInstaller(),
                 new BusInstaller(),
                 new MappingTypeInstaller(),
                 new RepositoryInstaller(),

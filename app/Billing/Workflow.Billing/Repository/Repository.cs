@@ -1,50 +1,53 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using Shared.Messaging.Billing.Helpers;
+using Workflow.Billing.Helpers.Extensions;
 
 namespace Workflow.Billing.Repository
 {
     //public class Repository : IRepository
     //{
-        //private readonly IDbConnection _connection;
-        //private readonly IRepositoryMapper _mapper;
+    //private readonly IDbConnection _connection;
+    //private readonly IRepositoryMapper _mapper;
 
-        //public Repository(IDbConnection connection, IRepositoryMapper mapper)
-        //{
-        //    _mapper = mapper;
-        //    _connection = connection;
-        //}
+    //public Repository(IDbConnection connection, IRepositoryMapper mapper)
+    //{
+    //    _mapper = mapper;
+    //    _connection = connection;
+    //}
 
-        //public TType Get<TType>(Guid id) where TType : class
-        //{
-        //    var mapping = _mapper.GetMapping(typeof(TType));
+    //public TType Get<TType>(Guid id) where TType : class
+    //{
+    //    var mapping = _mapper.GetMapping(typeof(TType));
 
-        //    return mapping.Get(_connection, id) as TType;
+    //    return mapping.Get(_connection, id) as TType;
 
-        //}
+    //}
 
-        //public void Add<TType>(TType instance)
-        //{
-        //    var mapping = _mapper.GetMapping(instance);
+    //public void Add<TType>(TType instance)
+    //{
+    //    var mapping = _mapper.GetMapping(instance);
 
-        //    mapping.Insert(_connection, instance);
-        //}
+    //    mapping.Insert(_connection, instance);
+    //}
     //}
 
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ISession _session;
 
+        private PipelineExtensions pipelineExtensions;
+
         public Repository(ISession session)
         {
             _session = session;
+            pipelineExtensions = new PipelineExtensions();
         }
 
         public T Get(object id)
@@ -79,7 +82,12 @@ namespace Workflow.Billing.Repository
         public void SaveOrUpdate(T entity)
         {
             ValidateEntity(entity);
-            _session.SaveOrUpdate(entity);
+
+            var currSession = pipelineExtensions.BeforeTransaction(_session);
+
+            currSession.SaveOrUpdate(entity);
+
+            pipelineExtensions.AfterTransaction(currSession);
         }
 
         public void Refresh(T entity)

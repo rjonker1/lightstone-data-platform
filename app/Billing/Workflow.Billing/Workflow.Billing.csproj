@@ -76,6 +76,7 @@
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />

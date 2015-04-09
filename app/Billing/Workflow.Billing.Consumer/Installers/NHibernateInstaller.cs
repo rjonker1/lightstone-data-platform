@@ -36,7 +36,7 @@ namespace Workflow.Billing.Consumer.Installers
                 .LifestyleTransient());
 
             //Initialize ISession to build up first run schema
-            var init = container.Resolve<ISession>();
+            //var init = container.Resolve<ISession>();
 
             this.Info(() => "Successfully installed NHibernateInstaller for WorkFlow");
         }
