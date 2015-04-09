@@ -6,6 +6,7 @@ using MemBus;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using Shared.Messaging.Billing.Messages;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
@@ -15,7 +16,7 @@ using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
-    public class UserModule : NancyModule
+    public class UserModule : SecureModule
     {
         public UserModule(IBus bus, EasyNetQ.IBus eBus, IUserRepository users)
         {

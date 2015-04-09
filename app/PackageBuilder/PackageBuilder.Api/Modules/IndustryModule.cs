@@ -6,10 +6,11 @@ using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
 using PackageBuilder.Domain.Entities.Industries.Commands;
 using PackageBuilder.Domain.Entities.Industries.Read;
+using Shared.BuildingBlocks.Api.Security;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class IndustryModule : NancyModule
+    public class IndustryModule : SecureModule
     {
         public IndustryModule(IPublishStorableCommands publisher, IRepository<Industry> repository)
         {

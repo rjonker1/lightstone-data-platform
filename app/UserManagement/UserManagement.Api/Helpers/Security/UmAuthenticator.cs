@@ -4,6 +4,7 @@ using Nancy.Security;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Domain.Core.Repositories;
+using UserManagement.Domain.Core.Security;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.Security
@@ -11,16 +12,17 @@ namespace UserManagement.Api.Helpers.Security
     public interface IUmAuthenticator : IAuthenticateUser
     {
         IUserIdentity GetUserIdentity(string username, string password);
-
     }
 
     public class UmAuthenticator : IUmAuthenticator
     {
         private readonly IRepository<User> _repository;
+        private readonly IHashProvider _hashProvider;
 
-        public UmAuthenticator(IRepository<User> repository)
+        public UmAuthenticator(IRepository<User> repository, IHashProvider hashProvider)
         {
             _repository = repository;
+            _hashProvider = hashProvider;
         }
 
         public IUserIdentity GetUserIdentity(string token)
@@ -37,8 +39,13 @@ namespace UserManagement.Api.Helpers.Security
 
         public IUserIdentity GetUserIdentity(string username, string password)
         {
-            var user = _repository.FirstOrDefault(x => (x.UserName + "").Trim().ToLower() == (username + "").Trim().ToLower() );
-            return user == null
+            var user = _repository.FirstOrDefault(x => (x.UserName + "").Trim().ToLower() == (username + "").Trim().ToLower());
+            if (user == null)
+                return null;
+
+            var isValid = _hashProvider.VerifyHashString(password, user.Password, user.Salt);
+
+            return isValid
                 ? null
                 : new ApiUser(user.UserName)
                 {

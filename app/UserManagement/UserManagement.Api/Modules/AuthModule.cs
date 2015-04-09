@@ -23,10 +23,9 @@ namespace UserManagement.Api.Modules
 
             Post["/login"] = parameters =>
             {
-                var username = Context.Request.Headers["Username"];
-                var password = Context.Request.Headers["Password"];
-
-                var userIdentity = authenticator.GetUserIdentity(username.FirstOrDefault(), password.FirstOrDefault());
+                var username = Context.Request.Headers["Username"].FirstOrDefault();
+                var password = Context.Request.Headers["Password"].FirstOrDefault();
+                var userIdentity = authenticator.GetUserIdentity(username, password);
 
                 return userIdentity == null 
                     ? HttpStatusCode.Unauthorized 

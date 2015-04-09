@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Nancy;
 using Nancy.Responses.Negotiation;
+using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Modules
 {
-    public class AuditLogModule : NancyModule
+    public class AuditLogModule : SecureModule
     {
         public AuditLogModule(IRepository<AuditLog> auditlogs)
         {
