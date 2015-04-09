@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
@@ -58,7 +59,8 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages/Execute/{id}/{userId}/{searchTerm}/{requestId}"] = parameters =>
             {
                 //Guid id = (Guid) parameters.id;
-                var package = writeRepo.GetById(parameters.id);// Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
+                var package = writeRepo.GetById(parameters.id);
+                // Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id));
 
                 if (package == null)
                     throw new LightstoneAutoException("Package could not be found");
@@ -70,7 +72,19 @@ namespace PackageBuilder.Api.Modules
 
                 //var responses = entryPoint.GetResponsesFromLace(request);
 
-                var responses = package.Execute(entryPoint, parameters.userId, parameters.username, parameters.searchTerm, "", parameters.requestId);
+                //TODO: Get these values from request or user management
+                var contractId = new Guid("713669a9-1506-42aa-88a6-80edb14757dc");
+                const string accountNumber = "ACC00000";
+                const long contractVersion = (long) 1.0;
+                const Lace.Domain.Core.Requests.DeviceTypes fromDevice = Lace.Domain.Core.Requests.DeviceTypes.ApiClient;
+                const string fromIpAddress = "127.0.0.1";
+                const string osVersion = "";
+                const Lace.Domain.Core.Requests.SystemType systemType = Lace.Domain.Core.Requests.SystemType.Api;
+
+
+                var responses = ((Package)package).Execute(entryPoint, parameters.userId, parameters.username,
+                    parameters.searchTerm, "", parameters.requestId, accountNumber, contractId, contractVersion,
+                    fromDevice, fromIpAddress, osVersion, systemType);
                 //return Response.AsJson(model);
 
                 return responses;
