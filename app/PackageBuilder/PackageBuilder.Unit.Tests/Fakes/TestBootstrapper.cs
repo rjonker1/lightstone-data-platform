@@ -2,6 +2,7 @@
 using Castle.Windsor;
 using PackageBuilder.Api;
 using Shared.BuildingBlocks.Api.Security;
+using Shared.Public.TestHelpers.Security;
 
 namespace PackageBuilder.Unit.Tests.Fakes
 {
