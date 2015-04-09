@@ -13,7 +13,6 @@
     <link href="~/Template/css/AdminLTE.min.css" rel="stylesheet" />
     <link href="~/Template/css/skins/_all-skins.min.css" rel="stylesheet" />
     <!-- Template -->
-
     @RenderSection("Header", false)
 </head>
 <body class="skin-black layout-top-nav">
@@ -30,14 +29,22 @@
     <script src="~/Scripts/jquery-2.1.3.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
+    <script src="~/Scripts/sammy-0.7.5.js"></script>
+    <script src="~/Scripts/app/routes/routes.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
 
     <!-- Template -->
     <script src="~/Scripts/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="~/Scripts/fastclick/fastclick.min.js"></script>
     <script src="~/Template/js/app.min.js"></script>
     <!-- Template -->
-
+    
     <div id="scripts">@RenderSection("Scripts", false)</div>
+    <script>
+        //document.domain = "lightstone.com";
+    </script>
 </body>
 </html>
 

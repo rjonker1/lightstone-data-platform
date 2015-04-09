@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using Common.Logging;
 using Nancy;
-using Shared.BuildingBlocks.Api.ApiClients;
-using Shared.BuildingBlocks.Api.Security;
+using Nancy.Authentication.Token;
+using UserManagement.Api.Helpers.Security;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Entities;
 
@@ -10,27 +9,28 @@ namespace UserManagement.Api.Modules
 {
     public class AuthModule : NancyModule
     {
-        private readonly ILog _log = LogManager.GetCurrentClassLogger();
-
-        public AuthModule(IAuthenticateUser authenticator, IRepository<User> users)
+        public AuthModule(IUmAuthenticator authenticator, IRepository<User> users, ITokenizer tokenizer)
         {
-            Post["/authenticate"] = parameters =>
-            {
-                _log.InfoFormat("authenticate");
+            //Post["/authenticate"] = parameters =>
+            //{
+            //    _log.InfoFormat("authenticate");
 
-                var token = Context.AuthorizationHeaderToken();
+            //    //var token = Context.AuthorizationHeaderToken();
+            //    var token = tokenizer.Tokenize(userIdentity, Context);
 
-                return string.IsNullOrWhiteSpace(token) ? Response.AsJson((string)null) : Response.AsJson(authenticator.GetUserIdentity(token));
-            };
+            //    return string.IsNullOrWhiteSpace(token) ? Response.AsJson((string)null) : Response.AsJson(authenticator.GetUserIdentity(token));
+            //};
 
             Post["/login"] = parameters =>
             {
                 var username = Context.Request.Headers["Username"];
-                var password = Context.Request.Headers["Username"];
+                var password = Context.Request.Headers["Password"];
 
-                var user = users.First(x => x.UserName.ToLower() == username.ToString().ToLower());
+                var userIdentity = authenticator.GetUserIdentity(username.FirstOrDefault(), password.FirstOrDefault());
 
-                return Response.AsJson(new ApiUser(user.UserName));
+                return userIdentity == null 
+                    ? HttpStatusCode.Unauthorized 
+                    : Response.AsText(tokenizer.Tokenize(userIdentity, Context));
             };
         }
     }

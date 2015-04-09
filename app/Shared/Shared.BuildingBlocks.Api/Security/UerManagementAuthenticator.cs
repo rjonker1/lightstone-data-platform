@@ -19,7 +19,7 @@ namespace Shared.BuildingBlocks.Api.Security
 
         public IUserIdentity GetUserIdentity(string token)
         {
-            return _userAuthenticationClient.Post<ApiUser>(token, "authenticate");
+            return _userAuthenticationClient.Post<UserIdentity>(token, "authenticate");
         }
     }
 }

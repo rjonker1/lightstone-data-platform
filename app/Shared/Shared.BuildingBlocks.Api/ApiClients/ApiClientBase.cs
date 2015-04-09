@@ -29,31 +29,31 @@ namespace Shared.BuildingBlocks.Api.ApiClients
 
         private T Data<T>(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers) where T : new()
         {
-            var request = RestRequest(resource, token, body, method);
+            var request = RestRequest(resource, token, body, method, headers);
 
             return _client.Execute<T>(request).Data;
         }
 
         public T Get<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
-            return Data<T>(token, resource, body);
+            return Data<T>(token, resource, body, Method.GET, headers);
         }
 
         public T Post<T>(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers) where T : new()
         {
-            return Data<T>(token, resource, body, Method.POST);
+            return Data<T>(token, resource, body, Method.POST, headers);
         }
 
         private string Content(string token, string resource, object body, Method method = Method.GET, params KeyValuePair<string, string>[] headers)
         {
-            var request = RestRequest(resource, token, body, method);
+            var request = RestRequest(resource, token, body, method, headers);
 
             return _client.Execute(request).Content;
         }
 
         public string Get(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers)
         {
-            return Content(token, resource, body);
+            return Content(token, resource, body, Method.GET, headers);
         }
 
         public string Post(string token, string resource = "", object body = null, params KeyValuePair<string, string>[] headers)

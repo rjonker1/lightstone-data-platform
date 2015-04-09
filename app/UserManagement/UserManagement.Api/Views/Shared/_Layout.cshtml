@@ -57,6 +57,7 @@
     <script src="~/Scripts/sammy-0.7.5.js"></script>
     <script src="~/Scripts/jquery-ui.min-1.11.1.js"></script>
     <script src="~/Scripts/cascadeDropdown/jquery.cascadingdropdown.js"></script>
+    <script src="~/Scripts/jquery.cookie.js"></script>
     <script src="~/Scripts/app/routes/routes.js"></script>
     <script src="~/Scripts/app/core.js"></script>
     <script src="~/Scripts/app/app.js"></script>
@@ -66,9 +67,25 @@
     <script src="~/Scripts/fastclick/fastclick.min.js"></script>
     <script src="~/Template/js/app.min.js"></script>
     <!-- Template -->
-
+    
     <div id="scripts">@RenderSection("Scripts", false)</div>
     <script>
+        //document.domain = "lightstone.com";
+        
+        //var token = $.cookie('token');
+        //$.cookie('name', 'value', { domain: 'lightstone.com' });
+        
+        //var store = new Sammy.Store({ type: 'cookie', domain: 'lightstone.com' });
+        //var token = store.get('token');
+
+        //$.ajaxSetup({
+        //    headers: { 'Authorization': 'Token ' + token }
+        //});
+        //$(document).ajaxSetup({
+        //    beforeSend: function (xhr) {
+        //        xhr.setRequestHeader('Authorization', 'Token ' + token);
+        //    }
+        //});
         // Configure Toastr
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
