@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Api.Domain.Infrastructure.Dto;
 using DataPlatform.Shared.Dtos;
+using DataPlatform.Shared.Helpers.Extensions;
 using Nancy;
+using Nancy.Authentication.Token;
+using Nancy.Helpers;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -13,8 +17,7 @@ namespace Api.Modules
     {
         private static int _defaultJsonMaxLength;
 
-        public ActionModule(IPackageBuilderApiClient packageBuilderApi,
-            IUserManagementApiClient userManagementApi)
+        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi, ITokenizer tokenizer)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
@@ -33,27 +36,26 @@ namespace Api.Modules
             //TODO: Refactor!!!! This looks crap
             Post["/action/LicensePlateNumberSearch"] = parameters =>
             {
-                var token = Context.AuthorizationHeaderToken();
+                //var token = Context.AuthorizationHeaderToken();
 
-                if (string.IsNullOrEmpty(token))
-                    throw new Exception("Invalid user credentials");
+                //if (string.IsNullOrEmpty(token))
+                //    throw new Exception("Invalid user credentials");
 
                 var apiRequest = this.Bind<ApiRequestDto>();
                 apiRequest.Username = Context.CurrentUser.UserName;
-                if (!apiRequest.IsValid())
-                    throw new Exception("Invalid search request");
+                //if (!apiRequest.IsValid())
+                //    throw new Exception("Invalid search request");
 
-                //var packageDetails = userManagementApi.Post<ContractResponse>(token, "/Contracts/GetPackage", new {apiRequest.ContractId});
-                var userId = new Guid(token);
-                var packageDetails = userManagementApi.Post<ContractResponse>(token, "/Packages/GetPackage",
-                    new {userId});
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                //var userIdentity = tokenizer.Detokenize(token, Context, new DefaultUserIdentityResolver());
+
+
+                var packageDetails = userManagementApi.Post<ContractResponse>("", "/Packages/GetPackage", new { Context.CurrentUser.UserName }, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
 
                 if (packageDetails == null)
                     throw new Exception("Could not get package for contract");
 
-                var responses = packageBuilderApi.Get(token,
-                    string.Format("Packages/Execute/{0}/{1}/{2}/{3}", packageDetails.PackageId, userId,
-                        apiRequest.SearchTerm, Guid.NewGuid()));
+                var responses = packageBuilderApi.Get(token, string.Format("Packages/Execute/{0}/{1}/{2}/{3}", packageDetails.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()));
                 //var package = jsonPackage.ToPackage();
 
                 //if (package == null)

@@ -24,7 +24,8 @@ namespace UserManagement.Api.Modules
         {
             Get["/Packages/{filter}"] = parameters =>
             {
-                var packagesJson = packageBuilderApi.Get("", "Packages", new { parameters.filter });
+                var token = Context.Request.Headers.Authorization.Split(' ')[1];
+                var packagesJson = packageBuilderApi.Get("", "Packages", new { parameters.filter }, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
                 var packages = JsonConvert.DeserializeObject<IEnumerable<PackageDto>>(packagesJson);
                 //var dto = Mapper.Map<IEnumerable<PackageBuilder.Domain.Entities.Packages.ReadModels.Package>, IEnumerable<PackageDto>>(packages);
                 return Negotiate

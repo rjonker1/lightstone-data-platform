@@ -137,5 +137,15 @@
     <script src="app/services/entityManagerFactory.js"></script>
     
     <script src="Scripts/jquery.cookie.js"></script>
+    <script>
+        $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+            options.crossDomain = {
+                crossDomain: true
+            };
+            options.xhrFields = {
+                withCredentials: true
+            };
+        });
+    </script>
 </body>
 </html>

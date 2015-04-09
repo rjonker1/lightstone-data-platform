@@ -1,12 +1,15 @@
 ﻿using Api.Domain.Infrastructure.Automapping;
 using Api.Domain.Infrastructure.Extensions;
 using Api.Domain.Infrastructure.Metadata;
+using Api.Helpers.Installers;
 using Api.Infrastructure.Metadata;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Nancy.Authentication.Stateless;
+using Nancy;
+using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
+using Nancy.Hosting.Aspnet;
 using Nancy.Routing;
 using Shared.BuildingBlocks.Api.ApiClients;
 using Shared.BuildingBlocks.Api.Security;
@@ -19,18 +22,20 @@ namespace Api
         {
             base.ApplicationStartup(container, pipelines);
 
-            var configuration = new StatelessAuthenticationConfiguration(context =>
-            {
-                var token = context.AuthorizationHeaderToken();
-                var authenticator = container.Resolve<IAuthenticateUser>();
-                return string.IsNullOrWhiteSpace(token)
-                    ? null
-                    : authenticator != null ? authenticator.GetUserIdentity(token) : null;
-            });
+            //var configuration = new StatelessAuthenticationConfiguration(context =>
+            //{
+            //    var token = context.AuthorizationHeaderToken();
+            //    var authenticator = container.Resolve<IAuthenticateUser>();
+            //    return string.IsNullOrWhiteSpace(token)
+            //        ? null
+            //        : authenticator != null ? authenticator.GetUserIdentity(token) : null;
+            //});
 
-            StatelessAuthentication.Enable(pipelines, configuration);
+            //StatelessAuthentication.Enable(pipelines, configuration);
 
-            pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+            //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
+
+            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
             pipelines.EnableCors(); // cross origin resource sharing
             pipelines.EnableMonitoring();
 
@@ -48,6 +53,8 @@ namespace Api
             base.ConfigureApplicationContainer(container);
 
             AutoMapperConfiguration.Init();
+
+            container.Install(new AuthInstaller());
 
             container.Register(
                 Component.For<IAuthenticateUser>().ImplementedBy<UerManagementAuthenticator>().LifestyleTransient());
@@ -101,6 +108,11 @@ namespace Api
             //    Component.For<IHandleDriversLicenseVerficationRequests>()
             //        .ImplementedBy<DriversLicenseVerificationHandler>()
             //        .LifestyleTransient());
+        }
+
+        protected override IRootPathProvider RootPathProvider
+        {
+            get { return new AspNetRootPathProvider(); }
         }
     }
 }

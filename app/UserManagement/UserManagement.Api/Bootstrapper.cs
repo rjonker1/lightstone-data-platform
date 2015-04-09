@@ -40,7 +40,7 @@ namespace UserManagement.Api
         protected override void ConfigureApplicationContainer(IWindsorContainer container)
         {
             // Perform registations that should have an application lifetime
-            base.ConfigureApplicationContainer(container);            
+            base.ConfigureApplicationContainer(container);
 
             container.Install(
                 new NHibernateInstaller(),
@@ -65,7 +65,7 @@ namespace UserManagement.Api
         {
             //pipelines.BeforeRequest.AddItemToStartOfPipeline((ctx, response) =>
             //{
-                
+
             //    return null;
             //});
             pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
@@ -75,7 +75,8 @@ namespace UserManagement.Api
                 var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
                 if (cookie != null)
                     token = HttpUtility.UrlDecode(cookie.Value);
-                //nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(HttpUtility.UrlDecode(token.Value));
+                
+                nancyContext.Request.Headers.Authorization = "Token {0}".FormatWith(token);
 
                 var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
                 if (user != null)
@@ -149,6 +150,6 @@ namespace UserManagement.Api
         protected override IRootPathProvider RootPathProvider
         {
             get { return new AspNetRootPathProvider(); }
+        }
     }
-    }  
 }

@@ -65,7 +65,7 @@ namespace Shared.BuildingBlocks.Api.ApiClients
             Method method = Method.GET, params KeyValuePair<string, string>[] headers)
         {
             var request = new RestRequest(resource, method);
-            request.AddHeader("Authorization", "ApiKey " + token);
+            //request.AddHeader("Authorization", "ApiKey " + token);
             foreach (var valuePair in headers)
                 request.AddHeader(valuePair.Key, valuePair.Value);
             if (body != null)

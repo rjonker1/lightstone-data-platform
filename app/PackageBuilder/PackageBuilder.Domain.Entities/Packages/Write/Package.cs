@@ -181,7 +181,7 @@ namespace PackageBuilder.Domain.Entities.Packages.Write
 
         public IEnumerable<IDataProvider> Execute(IEntryPoint entryPoint, Guid userId, string userName,
             string searchTerm, string firstName, Guid requestId, string accountNumber, Guid contractId,
-            long contractVersion, Lace.Domain.Core.Requests.DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
+            long contractVersion, DeviceTypes fromDevice, string fromIpAddress, string osVersion, SystemType system)
         {
             var request = FormLaceRequest(userId, userName, searchTerm, firstName, requestId, accountNumber, contractId,
                 contractVersion, fromDevice, fromIpAddress, osVersion, system);

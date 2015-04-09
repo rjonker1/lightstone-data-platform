@@ -1,9 +1,16 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using System.Linq;
+using System.Web.Configuration;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using MemBus;
 using Nancy;
+using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
+using Nancy.Extensions;
+using Nancy.Helpers;
+using Nancy.Hosting.Aspnet;
 using PackageBuilder.Api.Helpers.Extensions;
 using PackageBuilder.Api.Installers;
 using PackageBuilder.Domain.Entities.DataImports;
@@ -39,7 +46,8 @@ namespace PackageBuilder.Api
                 new NEventStoreInstaller(),
                 new ServiceLocatorInstaller(),
                 new AutoMapperInstaller(),
-                new LaceInstaller()
+                new LaceInstaller(),
+                new AuthInstaller()
                 );
 
           //  container.Register(Component.For<IAuthenticateUser>().ImplementedBy<UmApiAuthenticator>());
@@ -57,9 +65,17 @@ namespace PackageBuilder.Api
             //};
             //pipelines.EnableStatelessAuthentication(container.Resolve<IAuthenticateUser>());
 
-            pipelines.BeforeRequest.AddItemToEndOfPipeline(nancyContext =>
+            pipelines.BeforeRequest.AddItemToStartOfPipeline(nancyContext =>
             {
                 this.Info(() => "Api invoked at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url));
+                var token = "";
+                var cookie = nancyContext.Request.Headers.Cookie.FirstOrDefault(x => (x.Name + "").ToLower() == "token");
+                if (cookie != null)
+                    token = HttpUtility.UrlDecode(cookie.Value);
+
+                var user = container.Resolve<ITokenizer>().Detokenize(token, nancyContext, new DefaultUserIdentityResolver());
+                if (user != null)
+                    nancyContext.CurrentUser = user;
                 return null;
             });
             pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext => this.Info(() => "Api invoked successfully at {0}[{1}]".FormatWith(nancyContext.Request.Method, nancyContext.Request.Url)));
@@ -73,11 +89,36 @@ namespace PackageBuilder.Api
                 return fromException;
             });
 
-            pipelines.EnableCors(); // cross origin resource sharing
-
+            //pipelines.EnableCors(); // cross origin resource sharing
+            pipelines.AfterRequest.AddItemToEndOfPipeline(nancyContext =>
+            {
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+                nancyContext.Response.Headers.Add("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,OPTIONS");
+            });
             pipelines.AddTransactionScope(container);
 
+            TokenAuthentication.Enable(pipelines, new TokenAuthenticationConfiguration(container.Resolve<ITokenizer>()));
+
+            pipelines.AfterRequest.AddItemToEndOfPipeline(GetRedirectToLoginHook());
+
             base.RequestStartup(container, pipelines, context);
+        }
+
+        private static Action<NancyContext> GetRedirectToLoginHook()
+        {
+            return context =>
+            {
+                var contentTypes = context.Request.Headers.FirstOrDefault(x => x.Key == "Accept");
+                var isHtml = (contentTypes.Value.FirstOrDefault(x => x.Contains("text/html")) + "").Any();
+                if (context.Response.StatusCode == HttpStatusCode.Unauthorized && isHtml)
+                    context.Response = context.GetRedirect("http://dev.cia.lightstone.com/login");
+            };
+        }
+
+        protected override IRootPathProvider RootPathProvider
+        {
+            get { return new AspNetRootPathProvider(); }
         }
     }
 }

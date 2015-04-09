@@ -30,7 +30,7 @@ namespace UserManagement.Api.Helpers.Security
             var user = _repository.Get(new Guid(token));
             return user == null
                 ? null
-                : new ApiUser(user.UserName)
+                : new UserIdentity(user.UserName)
                 {
                     Id = user.Id,
                     Claims = user.Roles != null ? user.Roles.ToList().Select(x => x.Value) : Enumerable.Empty<string>()
@@ -47,7 +47,7 @@ namespace UserManagement.Api.Helpers.Security
 
             return isValid
                 ? null
-                : new ApiUser(user.UserName)
+                : new UserIdentity(user.UserName)
                 {
                     Id = user.Id,
                     Claims = user.Roles != null ? user.Roles.ToList().Select(x => x.Value) : Enumerable.Empty<string>()
