@@ -60,6 +60,15 @@ namespace UserManagement.Api.Modules
                 return View["Save", dto];
             };
 
+            Get["/ValueEntities/Lookup/{id:guid}"] = parameters =>
+            {
+                var id = (Guid)parameters.id;
+                var valueEntity = entities.First(x => x.Id == id);
+                var dto = Mapper.Map(valueEntity, new ValueEntityDto(), valueEntity.GetType(), typeof(ValueEntityDto)); //todo: repo.Get() not loading entity
+
+                return Response.AsJson(new {data = dto});
+            };
+
             Put["/ValueEntities/{id}"] = _ =>
             {
                 var dto = this.Bind<ValueEntityDto>();

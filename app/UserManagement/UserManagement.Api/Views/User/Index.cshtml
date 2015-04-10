@@ -38,10 +38,13 @@
         }, {
             field: 'userTypeValue',
             title: 'User Type',
-            sortable: true
+            sortable: true,
+            formatter: userFormatter
         }, {
             field: 'role',
             title: 'Role',
+            sortable: true,
+            formatter: roleFormatter
         }, {
             field: 'customers',
             title: 'Customers',
@@ -57,6 +60,41 @@
 
         }]
     });
+
+    function userFormatter(value, row, index) {
+
+        var state = "";
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/ValueEntities/Lookup/' + row.userTypeId,
+            success: function (response) {
+                //callback
+
+                state = response.data.value;
+            }
+        });
+
+        return state;
+    }
+    function roleFormatter(value, row, index) {
+
+        var state = "";
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/ValueEntities/Lookup/' + row.roleIds[0],
+            success: function (response) {
+                //callback
+
+                state = response.data.value;
+            }
+        });
+
+        return state;
+    }
 
     function gridActionFormatter(value, row, index) {
 
