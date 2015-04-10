@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using UserManagement.Domain.Core.Entities;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Entities
 {
     public class Address : Entity
     {
         [Required]
-        public virtual string Type { get; set; } // todo: should be lookup value
+        public virtual AddressType Type { get; set; } 
         [Required]
         public virtual string Line1 { get; set; }
         public virtual string Line2 { get; set; }
@@ -21,7 +22,8 @@ namespace UserManagement.Domain.Entities
 
         protected Address() { }
 
-        public Address(string type, string line1, string line2, string suburb, string city, string country, string postalCode, Province province, Guid id = new Guid()) : base(id)
+        public Address(AddressType type, string line1, string line2, string suburb, string city, string country, string postalCode, Province province, Guid id = new Guid())
+            : base(id)
         {
             Type = type;
             Line1 = line1;

@@ -147,6 +147,10 @@
       <Project>{4CA5036F-E26D-4345-AB68-D670E948F50F}</Project>
       <Name>UserManagement.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Domain.Enums\UserManagement.Domain.Enums.csproj">
+      <Project>{900877B3-80BE-472F-AC73-4E88D3B90D53}</Project>
+      <Name>UserManagement.Domain.Enums</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

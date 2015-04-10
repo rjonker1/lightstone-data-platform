@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using UserManagement.Domain.Enums;
 using UserManagement.TestHelper.BaseTests;
 using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
@@ -19,8 +20,8 @@ namespace UserManagement.Domain.Entities.Tests
         {
             var customer = new Customer();
             var paymentType = new PaymentType("PaymentType");
-            var physicalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Limpopo"));
-            var postalAddress = new Address("Type", "Line1", "Line2", "PostalCode","City","Country", "PostalCode", new Province("Gauteng"));
+            var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Limpopo"));
+            var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
             var billing = new Billing("ContactNumber", "ContactPerson", "RegistrationNumber", DateTime.Now, "PastelId", "VatNumber", paymentType);
             var roles = new HashSet<Role>{new Role("Role")};
             var userType = new UserType("UserType");
@@ -32,7 +33,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
                 .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus"))
-                .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
+                .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddress", physicalAddress, postalAddress))
                 .CheckComponentList(c => c.CreateSources, new HashSet<CreateSource> { new CreateSource("CreateSource1") })
                 .CheckComponentList(c => c.Users, new HashSet<User>{ user })
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })

@@ -675,6 +675,10 @@
       <Project>{3cff1ff6-1aae-435a-9c81-bb0793979596}</Project>
       <Name>UserManagement.Domain.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Domain.Enums\UserManagement.Domain.Enums.csproj">
+      <Project>{900877b3-80be-472f-ac73-4e88d3b90d53}</Project>
+      <Name>UserManagement.Domain.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserManagement.Domain\UserManagement.Domain.csproj">
       <Project>{8EDC89E0-1FD5-456B-8451-E01B02ADD3E5}</Project>
       <Name>UserManagement.Domain</Name>

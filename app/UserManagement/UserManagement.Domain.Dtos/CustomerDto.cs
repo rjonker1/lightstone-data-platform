@@ -50,7 +50,6 @@ namespace UserManagement.Domain.Dtos
         public string ContactDetailPhysicalAddressPostalCode { get; set; }
         public Guid ContactDetailPhysicalAddressProvinceId { get; set; }
         public Guid ContactDetailPostalAddressId { get; set; }
-        [Required]
         public string ContactDetailPostalAddressType { get; set; }
         public string ContactDetailPostalAddressLine1 { get; set; }
         public string ContactDetailPostalAddressLine2 { get; set; }

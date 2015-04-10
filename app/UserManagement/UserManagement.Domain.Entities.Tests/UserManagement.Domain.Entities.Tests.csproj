@@ -115,6 +115,10 @@
       <Project>{3CFF1FF6-1AAE-435A-9C81-BB0793979596}</Project>
       <Name>UserManagement.Domain.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManagement.Domain.Enums\UserManagement.Domain.Enums.csproj">
+      <Project>{900877B3-80BE-472F-AC73-4E88D3B90D53}</Project>
+      <Name>UserManagement.Domain.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserManagement.TestHelper\UserManagement.TestHelper.csproj">
       <Project>{0199b050-c976-4a15-800c-284891a7bdd0}</Project>
       <Name>UserManagement.TestHelper</Name>

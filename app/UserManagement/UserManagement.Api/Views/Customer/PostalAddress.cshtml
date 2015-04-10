@@ -1,26 +1,17 @@
 ﻿@*@using Nancy.ViewEngines.Razor.HtmlHelpers;*@
 @using UserManagement.Api.Helpers.NancyRazorHelpers
 @using UserManagement.Api.ViewModels
+@using UserManagement.Domain.Enums
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<UserManagement.Domain.Dtos.CustomerDto>
 
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Postal Address", "", "glyphicon glyphicon-tags", Model))
     <div class="box-body">
+        @Html.HiddenFor(x => x.ContactDetailPostalAddressId)
+        @Html.HiddenFor(x => x.ContactDetailPhysicalAddressType, new { value = AddressType.Postal })
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address Type</label>
-            <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.HiddenFor(x => x.ContactDetailPostalAddressId)
-                    @Html.TextBoxFor(x => x.ContactDetailPostalAddressType, new { @class = "form-control", placeholder = "" })
-                </div>
-            </div>
-
-        </div>
-        <div class="form-group">
-
-            <label class="control-label col-lg-4">Postal Address Line1</label>
+            <label class="control-label col-lg-4">Line1</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -31,7 +22,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address Line2</label>
+            <label class="control-label col-lg-4">Line2</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -42,7 +33,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address Suburb</label>
+            <label class="control-label col-lg-4">Suburb</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -53,7 +44,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address City</label>
+            <label class="control-label col-lg-4">City</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-tower" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -64,7 +55,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address Country</label>
+            <label class="control-label col-lg-4">Country</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-globe" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -75,7 +66,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address Postal Code</label>
+            <label class="control-label col-lg-4">Postal Code</label>
             <div class="input-group col-lg-2">
                 <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
@@ -86,7 +77,7 @@
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Postal Address Province</label>
+            <label class="control-label col-lg-4">Province</label>
             <div class="input-group col-lg-2">
                 <select name="ContactDetailPostalAddressProvinceId" data-placeholder="Select province" class="chosen-select">
                     <option value=""></option>
