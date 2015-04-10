@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataPlatform.Shared.Repositories;
 using EasyNetQ.AutoSubscribe;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;

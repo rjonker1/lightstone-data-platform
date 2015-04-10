@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Repositories;
 using NHibernate;
 using NHibernate.Linq;
 using Shared.Messaging.Billing.Helpers;
