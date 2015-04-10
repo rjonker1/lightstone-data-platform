@@ -13,8 +13,8 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Billings
         {
             Mapper.CreateMap<CustomerDto, Billing>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.BillingId))
-                .ForMember(dest => dest.ContactNumber, opt => opt.MapFrom(x => x.BillingContactNumber))
-                .ForMember(dest => dest.ContractPerson, opt => opt.MapFrom(x => x.BillingContractPerson))
+                .ForMember(dest => dest.LegalEntityName, opt => opt.MapFrom(x => x.BillingLegalEntityName))
+                .ForMember(dest => dest.AccountContactName, opt => opt.MapFrom(x => x.BillingAccountContactName))
                 .ForMember(dest => dest.CompanyRegistration, opt => opt.MapFrom(x => x.BillingCompanyRegistration))
                 .ForMember(dest => dest.DebitOrderDate, opt => opt.MapFrom(x => x.BillingDebitOrderDate))
                 .ForMember(dest => dest.PastelId, opt => opt.MapFrom(x => x.BillingPastelId))

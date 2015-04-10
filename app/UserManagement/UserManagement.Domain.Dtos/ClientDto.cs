@@ -7,10 +7,9 @@ namespace UserManagement.Domain.Dtos
         public Guid Id { get; set; } 
         public string Name { get; set; }
         public Guid ContactDetailId { get; set; }
-        public string ContactDetailLegalEntityName { get; set; }
-        public string ContactDetailAccountsContactName { get; set; }
+        public string ContactDetailContactNumber { get; set; }
+        public string ContactDetailContactPerson { get; set; }
         public string ContactDetailEmailAddress { get; set; }
-        public string ContactDetailTelephoneNumber { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }
         public string ContactDetailPhysicalAddressType { get; set; }
         public string ContactDetailPhysicalAddressLine1 { get; set; }

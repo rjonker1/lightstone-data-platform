@@ -17,8 +17,8 @@ namespace UserManagement.Domain.CommandHandlers.UserTypes
 
         public override void Handle(ImportUserType command)
         {
-            _handler.Handle(new ValueEntityDto("User", typeof (UserType)));
             _handler.Handle(new ValueEntityDto("Internal", typeof (UserType)));
+            _handler.Handle(new ValueEntityDto("External", typeof(UserType)));
         }
     }
 }

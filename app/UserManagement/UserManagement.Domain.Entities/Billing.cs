@@ -8,9 +8,8 @@ namespace UserManagement.Domain.Entities
     public class Billing : Entity
     {
         [Required]
-        public virtual string ContactNumber { get; set; }
-        [Required]
-        public virtual string ContractPerson { get; set; }
+        public virtual string LegalEntityName { get; set; }
+        public virtual string AccountContactName { get; set; }
         [Required, DomainSignature]
         public virtual string CompanyRegistration { get; set; }
         public virtual DateTime? DebitOrderDate { get; set; }
@@ -21,10 +20,11 @@ namespace UserManagement.Domain.Entities
 
         protected internal Billing() { }
 
-        public Billing(string contactNumber, string contractPerson, string companyRegistration, DateTime? debitOrderDate, string pastelId, string vatNumber, PaymentType paymentType, Guid id = new Guid()) : base(id)
+        public Billing(string legalEntityName, string accountContactName, string companyRegistration, DateTime? debitOrderDate, string pastelId, string vatNumber, PaymentType paymentType, Guid id = new Guid())
+            : base(id)
         {
-            ContactNumber = contactNumber;
-            ContractPerson = contractPerson;
+            LegalEntityName = legalEntityName;
+            AccountContactName = accountContactName;
             CompanyRegistration = companyRegistration;
             DebitOrderDate = debitOrderDate;
             PastelId = pastelId;

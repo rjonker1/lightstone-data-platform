@@ -26,8 +26,8 @@ namespace UserManagement.Domain.Dtos
         public Guid BillingId { get; set; }
         [Required]
         [Display(Name = "Billing contact number is required")]
-        public string BillingContactNumber { get; set; }
-        public string BillingContractPerson { get; set; }
+        public string ContactDetailContactNumber { get; set; }
+        public string ContactDetailContactPerson { get; set; }
         public string BillingCompanyRegistration { get; set; }
         public DateTime? BillingDebitOrderDate { get; set; }
         public string BillingPastelId { get; set; }
@@ -35,8 +35,8 @@ namespace UserManagement.Domain.Dtos
         public Guid BillingPaymentTypeId { get; set; }
         public Guid ContactDetailId { get; set; }
         [Required]
-        public string ContactDetailLegalEntityName { get; set; }
-        public string ContactDetailAccountsContactName { get; set; }
+        public string BillingLegalEntityName { get; set; }
+        public string BillingAccountContactName { get; set; }
         public string ContactDetailEmailAddress { get; set; }
         public string ContactDetailTelephoneNumber { get; set; }
         public Guid ContactDetailPhysicalAddressId { get; set; }
