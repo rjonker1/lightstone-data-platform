@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Api.Domain.Infrastructure.Dto;
 using DataPlatform.Shared.Dtos;
 using Nancy;
-using Nancy.Authentication.Token;
 using Nancy.Json;
 using Nancy.ModelBinding;
 using Shared.BuildingBlocks.Api.ApiClients;
@@ -15,7 +14,7 @@ namespace Api.Modules
     {
         private static int _defaultJsonMaxLength;
 
-        public ActionModule(IPackageBuilderApiClient packageBuilderApi, IUserManagementApiClient userManagementApi, ITokenizer tokenizer)
+        public ActionModule(IPackageBuilderApiClient packageBuilderApi)
         {
             if (_defaultJsonMaxLength == 0)
                 _defaultJsonMaxLength = JsonSettings.MaxJsonLength;
