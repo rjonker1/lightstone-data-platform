@@ -9,7 +9,7 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Redis
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<HashEntry[], ApiUser>()
+            Mapper.CreateMap<HashEntry[], UserIdentity>()
                 .ForMember(id => id.UserName, opt => opt.MapFrom(entries => entries.FirstOrDefault(x => (x.Name + "").ToLower() == "username").Value))
                 .ForMember(id => id.Claims, opt => opt.MapFrom(entries => (entries.FirstOrDefault(x => (x.Name + "").ToLower() == "claims").Value + "").Split('|')));
         }

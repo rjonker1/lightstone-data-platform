@@ -22,7 +22,7 @@ namespace UserManagement.Domain.CommandHandlers.Provinces
             _handler.Handle(new ValueEntityDto("KwaZulu-Natal", typeof(Province)));
             _handler.Handle(new ValueEntityDto("Limpopo", typeof(Province)));
             _handler.Handle(new ValueEntityDto("Mpumalanga", typeof(Province)));
-            _handler.Handle(new ValueEntityDto("ENorth West", typeof(Province)));
+            _handler.Handle(new ValueEntityDto("North West", typeof(Province)));
             _handler.Handle(new ValueEntityDto("Northern Cape", typeof(Province)));
             _handler.Handle(new ValueEntityDto("Western Cape", typeof(Province)));
         }

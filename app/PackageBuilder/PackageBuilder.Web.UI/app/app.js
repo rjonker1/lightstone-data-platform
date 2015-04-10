@@ -31,5 +31,13 @@
     // Trigger breeze configuration
     app.run(['$route', function ($route) {
         // Include $route to kick start the router.
+        $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+            options.crossDomain = {
+                crossDomain: true
+            };
+            options.xhrFields = {
+                withCredentials: true
+            };
+        });
     }]);
 })();

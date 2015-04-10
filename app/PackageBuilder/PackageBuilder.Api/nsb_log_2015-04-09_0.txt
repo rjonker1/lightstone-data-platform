@@ -273,3 +273,6 @@ Status: Disabled
 Deactivation reason: Did not meet one of the dependencies: 
 
 
+2015-04-09 15:34:53.914 INFO  NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Disconnected from RabbitMQ Broker, reason: AMQP close-reason, initiated by Peer, code=320, text="CONNECTION_FORCED - broker forced connection closure with reason 'shutdown'", classId=0, methodId=0, cause= , going to reconnect
+2015-04-09 15:34:55.942 ERROR NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Failed to connect to Broker: 'localhost', Port: 5672 VHost: '/'. ExceptionMessage: 'None of the specified endpoints were reachable'
+2015-04-09 15:34:55.942 ERROR NServiceBus.Transports.RabbitMQ.RabbitMqConnectionManager Failed to connected to any Broker. Retrying in 00:00:10

@@ -10,13 +10,13 @@ namespace UserManagement.Domain.Core.Tests
         private string _salt = "ivcPLQ==";
         public override void Observe()
         {
-            _saltedHash.GetHashAndSaltString("RightPassword123", out _hash, out _salt);
+            _saltedHash.GetHashAndSaltString("123456", out _hash, out _salt);
         }
 
         [Observation]
         public void should_verify_hash_string()
         {
-            _saltedHash.VerifyHashString("RightPassword123", _hash, _salt).ShouldBeTrue();
+            _saltedHash.VerifyHashString("123456", _hash, _salt).ShouldBeTrue();
         }
 
         [Observation]

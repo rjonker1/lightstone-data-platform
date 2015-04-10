@@ -4,7 +4,9 @@ namespace Api.Domain.Infrastructure.Dto
 {
     public class ApiRequestDto
     {
+        public Guid UserId { get; private set; }
         public Guid ContractId { get; private set; }
+        public Guid PackageId { get; private set; }
         public Guid SourceId { get; private set; }
         public string SearchTerm { get; private set; }
         public string Username { get; set; }

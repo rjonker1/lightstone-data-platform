@@ -6,32 +6,32 @@
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Billing Info", "", "fa fa-money", Model))
     <div class="box-body">
+        @Html.HiddenFor(x => x.BillingId)
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Contact Number</label>
+            <label class="control-label col-lg-4">Legal Entity Name</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.HiddenFor(x => x.BillingId)
-                    @Html.TextBoxFor(x => x.BillingContactNumber, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.BillingLegalEntityName, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingContactNumber)
+                @Html.ValidationMessageFor(x => x.BillingLegalEntityName)
             </div>
 
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Contact Person</label>
+            <label class="control-label col-lg-4">Accounts Contact Name</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.BillingContractPerson, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.BillingAccountContactName, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.BillingContractPerson)
+                @Html.ValidationMessageFor(x => x.BillingAccountContactName)
             </div>
 
         </div>

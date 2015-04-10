@@ -29,10 +29,28 @@
     };
     
     if (config.apiUri.indexOf("Lightstone.dp.pb.api.url") > -1) {
-        config.apiUri = "http://dev.lightstone.packagebuilder.api";
+        config.apiUri = "http://dev.packagebuilder.api.lightstone.com";
     }
 
     app.value('config', config); //Global placeholder for config settings
+    
+    //app.config(['$logProvider', '$httpProvider', function ($logProvider, $httpProvider) {
+    //    $httpProvider.defaults.useXDomain = true;
+    //    $httpProvider.defaults.headers.common['X-Requested-With'];
+    //    $httpProvider.defaults.withCredentials = true;
+    //    // turn debugging off/on (no info or warn)
+    //    if ($logProvider.debugEnabled) {
+    //        $logProvider.debugEnabled(true);
+    //    }
+    //}]);
+    
+    app.config(['$httpProvider', function ($httpProvider) {
+        //$httpProvider.defaults.withCredentials = true;
+        //$httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.headers.common.Authorization = 'Token ' + $.cookie('token');
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }]);
     
     app.config(['$logProvider', function ($logProvider) {
         // turn debugging off/on (no info or warn)

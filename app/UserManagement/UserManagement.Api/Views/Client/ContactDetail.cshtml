@@ -6,35 +6,35 @@
 <div class="box">
     @Html.Partial("Shared/BoxHeader", new HeaderViewModel("Contact Info", "", "glyphicon glyphicon-book", Model))
     <div class="box-body">
+        @Html.HiddenFor(x => x.ContactDetailId)
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Legal Entity Name</label>
+            <label class="control-label col-lg-4">Contact Person</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.HiddenFor(x => x.ContactDetailId)
-                    @Html.TextBoxFor(x => x.ContactDetailLegalEntityName, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.ContactDetailContactPerson, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailLegalEntityName)
+                @Html.ValidationMessageFor(x => x.ContactDetailContactPerson)
             </div>
 
         </div>
         <div class="form-group">
 
-            <label class="control-label col-lg-4">Accounts Contact Name</label>
+            <label class="control-label col-lg-4">Contact Number</label>
             <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <span class="input-group-addon" id="basic-addon1"><b>123</b></span>
                 <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailAccountsContactName, new { @class = "form-control", placeholder = "" })
+                    @Html.TextBoxFor(x => x.ContactDetailContactNumber, new { @class = "form-control", placeholder = "" })
                 </div>
             </div>
             <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailAccountsContactName)
+                @Html.ValidationMessageFor(x => x.ContactDetailContactNumber)
             </div>
 
-        </div>
+        </div>      
         <div class="form-group">
 
             <label class="control-label col-lg-4">Email Address</label>
@@ -49,20 +49,6 @@
             </div>
             <div class="col-lg-6">
                 @Html.ValidationMessageFor(x => x.ContactDetailEmailAddress)
-            </div>
-
-        </div>
-        <div class="form-group">
-
-            <label class="control-label col-lg-4">Telephone Number</label>
-            <div class="input-group col-lg-2">
-                <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1"></span>
-                <div aria-describedby="basic-addon1">
-                    @Html.TextBoxFor(x => x.ContactDetailTelephoneNumber, new { @class = "form-control", placeholder = "" })
-                </div>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.ContactDetailTelephoneNumber)
             </div>
 
         </div>

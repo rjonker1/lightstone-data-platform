@@ -24,7 +24,7 @@ using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
 namespace PackageBuilder.Api.Modules
 {
-    public class PackageModule : SecureModule
+    public class PackageModule : NancyModule// : SecureModule
     {
         private static int _defaultJsonMaxLength;
         public PackageModule(IPublishStorableCommands publisher,

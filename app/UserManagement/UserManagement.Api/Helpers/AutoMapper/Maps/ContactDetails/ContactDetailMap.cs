@@ -38,10 +38,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                     };
                 })
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.ContactDetailId == new Guid() ? Guid.NewGuid() : x.ContactDetailId))
-                .ForMember(dest => dest.LegalEntityName, opt => opt.MapFrom(x => x.ContactDetailLegalEntityName))
-                .ForMember(dest => dest.AccountsContactName, opt => opt.MapFrom(x => x.ContactDetailAccountsContactName))
+                .ForMember(dest => dest.ContactNumber, opt => opt.MapFrom(x => x.ContactDetailContactNumber))
+                .ForMember(dest => dest.ContactPerson, opt => opt.MapFrom(x => x.ContactDetailContactPerson))
                 .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(x => x.ContactDetailEmailAddress))
-                .ForMember(dest => dest.TelephoneNumber, opt => opt.MapFrom(x => x.ContactDetailTelephoneNumber))
                 .ForMember(dest => dest.PhysicalAddress, opt => opt.MapFrom(x => Mapper.Map<AddressDto, Address>(x.PhysicalAddressDto)))
                 .ForMember(dest => dest.PostalAddress, opt => opt.MapFrom(x => Mapper.Map<AddressDto, Address>(x.PostalAddressDto)));
 
@@ -74,10 +73,9 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ContactDetails
                     };
                 })
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.ContactDetailId == new Guid() ? Guid.NewGuid() : x.ContactDetailId))
-                .ForMember(dest => dest.LegalEntityName, opt => opt.MapFrom(x => x.ContactDetailLegalEntityName))
-                .ForMember(dest => dest.AccountsContactName, opt => opt.MapFrom(x => x.ContactDetailAccountsContactName))
+                .ForMember(dest => dest.ContactNumber, opt => opt.MapFrom(x => x.ContactDetailContactNumber))
+                .ForMember(dest => dest.ContactPerson, opt => opt.MapFrom(x => x.ContactDetailContactPerson))
                 .ForMember(dest => dest.EmailAddress, opt => opt.MapFrom(x => x.ContactDetailEmailAddress))
-                .ForMember(dest => dest.TelephoneNumber, opt => opt.MapFrom(x => x.ContactDetailTelephoneNumber))
                 .ForMember(dest => dest.PhysicalAddress, opt => opt.MapFrom(x => Mapper.Map<AddressDto, Address>(x.PhysicalAddressDto)))
                 .ForMember(dest => dest.PostalAddress, opt => opt.MapFrom(x => Mapper.Map<AddressDto, Address>(x.PostalAddressDto)));
         }

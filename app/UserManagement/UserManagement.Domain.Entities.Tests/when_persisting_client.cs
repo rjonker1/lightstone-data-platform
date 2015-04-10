@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using UserManagement.Domain.Enums;
 using UserManagement.TestHelper.BaseTests;
 using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
@@ -17,8 +18,8 @@ namespace UserManagement.Domain.Entities.Tests
         [Observation]
         public void should_persist()
         {
-            var physicalAddress = new Address("Type", "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
-            var postalAddress = new Address("Type", "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
+            var physicalAddress = new Address(AddressType.Physical, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
+            var postalAddress = new Address(AddressType.Postal, "Line1", "Line2", "PostalCode", "City", "Country", "PostalCode", new Province("Gauteng"));
             var id = Guid.NewGuid();
             var client = new Client("Client");
             var roles = new HashSet<Role>{new Role("Role")};
@@ -27,7 +28,7 @@ namespace UserManagement.Domain.Entities.Tests
             new PersistenceSpecification<Client>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, id)
                 .CheckProperty(c => c.Name, "Client")
-                .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddess", "Tel", physicalAddress, postalAddress))
+                .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "Number", "EmailAddress", physicalAddress, postalAddress))
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
                 .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(client, "Alias") })
                 .VerifyTheMappings(client);

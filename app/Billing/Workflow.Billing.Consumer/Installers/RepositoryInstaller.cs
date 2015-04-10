@@ -4,6 +4,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Common.Logging;
+using DataPlatform.Shared.Repositories;
 using Shared.Configuration;
 using Workflow.Billing.Repository;
 

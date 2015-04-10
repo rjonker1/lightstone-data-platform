@@ -31,7 +31,7 @@ namespace UserManagement.Api.Helpers.Security
                 
                 var db = _redis.GetDatabase();
                 var hashEntries = db.HashGetAll(token);
-                user = Mapper.Map<HashEntry[], ApiUser>(hashEntries);
+                user = Mapper.Map<HashEntry[], UserIdentity>(hashEntries);
 
                 if (!hashEntries.Any())
                 {

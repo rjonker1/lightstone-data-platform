@@ -18,8 +18,8 @@ namespace UserManagement.Domain.Entities.Tests
         {
             new PersistenceSpecification<Billing>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.ContactNumber, "BillingContactNumber")
-                .CheckProperty(c => c.ContractPerson, "BillingContractPerson")
+                .CheckProperty(c => c.LegalEntityName, "LegalEntityName")
+                .CheckProperty(c => c.AccountContactName, "AccountContactName")
                 .CheckProperty(c => c.CompanyRegistration, "CompanyRegistration")
                 .CheckProperty(c => c.DebitOrderDate, DateTime.Now.Date)
                 .CheckProperty(c => c.PastelId, "PastelId")
