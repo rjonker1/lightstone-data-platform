@@ -19,8 +19,10 @@ namespace UserManagement.Domain.Dtos
         public string Name { get; set; }
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
+        public string CommercialStateValue { get; set; }
         public IEnumerable<Guid> CreateSourceIds { get; set; }
         public Guid PlatformStatusId { get; set; }
+        public string PlatformStatusValue { get; set; }
         public Guid BillingId { get; set; }
         [Required]
         [Display(Name = "Billing contact number is required")]

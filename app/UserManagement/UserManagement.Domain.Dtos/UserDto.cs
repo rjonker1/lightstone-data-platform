@@ -21,6 +21,7 @@ namespace UserManagement.Domain.Dtos
         public string Password { get; set; }
         public bool? IsActive { get; set; }
         public Guid UserTypeId { get; set; }
+        public string UserTypeValue { get; set; }
         public IEnumerable<Guid> RoleIds { get; set; }
         public IEnumerable<Guid> CustomerIds { get; set; }
         public IEnumerable<NamedEntityDto> Customers { get; set; }
