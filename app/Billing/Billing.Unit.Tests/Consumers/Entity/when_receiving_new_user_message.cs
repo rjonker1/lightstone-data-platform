@@ -1,6 +1,16 @@
 ﻿using System;
+<<<<<<< Updated upstream
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+=======
+using AutoMapper;
+using Billing.Api.Helpers.AutoMapper.Maps;
+using Billing.Api.Installers;
+using Billing.TestHelper;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using DataPlatform.Shared.Repositories;
+>>>>>>> Stashed changes
 using Moq;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Consumers;
@@ -15,6 +25,7 @@ namespace Billing.Api.Tests.Consumers.Entity
         private readonly EntityConsumer consumer;
         private readonly UserMessage message;
         private readonly Mock<IRepository<UserMeta>> repository;
+
         private Exception thrownException;
 
         public when_receiving_new_user_message()
@@ -28,7 +39,8 @@ namespace Billing.Api.Tests.Consumers.Entity
         {
             try
             {
-                //consumer.Consume(message);
+                Mapper.CreateMap<UserMessage, UserMeta>();
+                consumer.Consume(message);
             }
             catch (Exception e)
             {
@@ -39,7 +51,7 @@ namespace Billing.Api.Tests.Consumers.Entity
         [Observation]
         public void should_consume_message()
         {
-            //thrownException.ShouldBeNull();
+            thrownException.ShouldBeNull();
         }
     }
 }
