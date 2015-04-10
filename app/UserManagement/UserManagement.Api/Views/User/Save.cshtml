@@ -139,7 +139,8 @@
                 <div class="input-group col-lg-2">
                     <span class="input-group-addon glyphicon glyphicon-certificate" id="basic-addon1"></span>
                     <div aria-describedby="basic-addon1">
-                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "" })
+                        @*@Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "" })*@
+                        <input type="password" class="form-control" name="password" value="@Model.Password">
                     </div>
                 </div>
                 <div class="col-lg-6">
