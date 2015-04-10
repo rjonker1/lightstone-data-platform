@@ -4,7 +4,7 @@
 @Html.Partial("Shared/PageHeader", new HeaderViewModel("Customers", ""))
 
 <div class="box">
-    
+
     <div class="box-header"></div>
     <table id="table"></table>
 
@@ -34,26 +34,20 @@
             //formatter: gridUsersFormatter,
             //events: userGridActionEvents
         }, {
-            field: 'type',
-            title: 'User Type',
-            sortable: true
-        }, {
-            field: 'owner',
-            title: 'Owner',
-            sortable: true
-        }, {
-            field: 'createdDate',
+            field: 'created',
             title: 'Created Date',
             //formatter: gridProductsFormatter,
             //events: productGridActionEvents
         }, {
             field: 'platformState',
             title: 'Platform State',
-            //formatter: gridTransactionsFormatter
+            srtable: true,
+            formatter: platformFormatter
         }, {
             field: 'commercialState',
             title: 'Commercial State',
-            sortable: true
+            sortable: true,
+            formatter: commercialFormatter
         }, {
             field: '',
             title: '',
@@ -61,6 +55,42 @@
 
         }]
     });
+
+    function platformFormatter(value, row, index) {
+
+        var state = "";
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/ValueEntities/Lookup/' + row.platformStatusId,
+            success: function (response) {
+                //callback
+
+                state = response.data.value;
+            }
+        });
+
+        return state;
+    }
+
+    function commercialFormatter(value, row, index) {
+
+        var state = "";
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/ValueEntities/Lookup/' + row.commercialStateId,
+            success: function (response) {
+                //callback
+
+                state = response.data.value;
+            }
+        });
+
+        return state;
+    }
 
     function gridActionFormatter(value, row, index) {
 
