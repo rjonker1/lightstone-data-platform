@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
@@ -12,32 +13,32 @@ using Workflow.Billing.Helpers.Extensions;
 
 namespace Workflow.Billing.Repository
 {
-    //public class Repository : IRepository
-    //{
-    //private readonly IDbConnection _connection;
-    //private readonly IRepositoryMapper _mapper;
+    public class Repository : IRepository
+    {
+        private readonly IDbConnection _connection;
+        private readonly IRepositoryMapper _mapper;
 
-    //public Repository(IDbConnection connection, IRepositoryMapper mapper)
-    //{
-    //    _mapper = mapper;
-    //    _connection = connection;
-    //}
+        public Repository(IDbConnection connection, IRepositoryMapper mapper)
+        {
+            _mapper = mapper;
+            _connection = connection;
+        }
 
-    //public TType Get<TType>(Guid id) where TType : class
-    //{
-    //    var mapping = _mapper.GetMapping(typeof(TType));
+        public TType Get<TType>(Guid id) where TType : class
+        {
+            var mapping = _mapper.GetMapping(typeof(TType));
 
-    //    return mapping.Get(_connection, id) as TType;
+            return mapping.Get(_connection, id) as TType;
 
-    //}
+        }
 
-    //public void Add<TType>(TType instance)
-    //{
-    //    var mapping = _mapper.GetMapping(instance);
+        public void Add<TType>(TType instance)
+        {
+            var mapping = _mapper.GetMapping(instance);
 
-    //    mapping.Insert(_connection, instance);
-    //}
-    //}
+            mapping.Insert(_connection, instance);
+        }
+    }
 
     public class Repository<T> : IRepository<T> where T : class
     {
