@@ -7,7 +7,7 @@ using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 {
-    public class RetrieveCarInformationDetail : IRetrieveCarInformation
+    public class GetCarInformationWithVin : IRetrieveCarInformation
     {
         public bool IsSatisfied { get; private set; }
         public CarInfo CarInformation { get; private set; }
@@ -15,13 +15,11 @@ namespace Lace.CrossCutting.DataProvider.Car.Infrastructure
 
         private IGetCarInfo _getCarInformation;
         private readonly ISetupCarRepository _repositories;
-        private readonly IHaveVehicle _request;
 
-        public RetrieveCarInformationDetail(IHaveVehicle request, ISetupCarRepository repositories)
+        public GetCarInformationWithVin(string vinNumber, ISetupCarRepository repositories)
         {
             _repositories = repositories;
-            _request = request;
-            CarInformationRequest = new CarInformationRequest(_request.Vin);
+            CarInformationRequest = new CarInformationRequest(vinNumber);
         }
 
         public IRetrieveCarInformation SetupDataSources()

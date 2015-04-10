@@ -5,6 +5,20 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
     public class IvidTitleHolderRequestVehicleInformation : IHaveVehicle
     {
+        public static IHaveVehicle WithLicensePlate(string licensePlate)
+        {
+            var vehicle = new IvidTitleHolderRequestVehicleInformation();
+            vehicle.SetLicenseNo(licensePlate);
+            return vehicle;
+        }
+
+        public static IHaveVehicle WithVin(string vinumber)
+        {
+            var vehicle = new IvidTitleHolderRequestVehicleInformation();
+            vehicle.SetVinNumber(vinumber);
+            return vehicle;
+        }
+
         public string EngineNo
         {
             get
@@ -50,7 +64,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         public string Vin
         {
             get;
-            private set;
+            set;
             //get { return "SB1KV58E40F039277"; }
         }
 
@@ -70,10 +84,10 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             Vin = vinNumber;
         }
 
-        public IvidTitleHolderRequestVehicleInformation()
+        private IvidTitleHolderRequestVehicleInformation()
         {
-            Vin = "AHT31UNK408007735";
-            LicenceNo = "XMC167GP";
+            //Vin = "AHT31UNK408007735";
+            //LicenceNo = "XMC167GP";
         }
 
      

@@ -28,7 +28,7 @@ namespace Lace.Unit.Tests.Transform
             _carInformationRequest = LaceRequestCarInformationRequestBuilder.ForCarId_107483_ButNoVin();
             _retrieveValuationFromMetrics =
                 LighstoneVehicleInformationBuilder.ForValuationFromMetrics(_carInformationRequest);
-            _retrieveCarInformation = LighstoneVehicleInformationBuilder.ForCarInformation(_request);
+            _retrieveCarInformation = LighstoneVehicleInformationBuilder.ForCarInformation("SB1KV58E40F039277");
         }
 
         public override void Observe()

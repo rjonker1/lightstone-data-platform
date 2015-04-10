@@ -48,7 +48,7 @@ namespace Workflow.Transactions.Write.Service.Handlers
         {
             var @event = _repository.GetById<Request>(message.RequestId);
             @event.CreateTransaction(message.Id, message.PackageId, message.PackageVersion, message.Date, message.UserId,
-                message.RequestId, message.ContractId, message.System, message.ContractVersion, message.State);
+                message.RequestId, message.ContractId, message.System, message.ContractVersion, message.State, message.AccountNumber);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }

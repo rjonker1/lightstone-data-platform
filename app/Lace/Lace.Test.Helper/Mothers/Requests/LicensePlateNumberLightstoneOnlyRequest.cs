@@ -14,7 +14,7 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHaveVehicle Vehicle
         {
-            get { return new RequestVehicleInformation(); }
+            get { return RequestVehicleInformation.WithLicensePlate("XMC167GP"); }
         }
 
         public IHaveRequestContext Request

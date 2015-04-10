@@ -1,10 +1,23 @@
-﻿using Lace.Domain.Core.Contracts.Requests;
-using Lace.Domain.Core.Requests.Contracts;
+﻿using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Test.Helper.Mothers.Requests.Dto
 {
     public class RequestVehicleInformation : IHaveVehicle
     {
+        public static IHaveVehicle WithLicensePlate(string licensePlate)
+        {
+            var vehicle = new RequestVehicleInformation();
+            vehicle.SetLicenseNo(licensePlate);
+            return vehicle;
+        }
+
+        public static IHaveVehicle WithVin(string vinumber)
+        {
+            var vehicle = new RequestVehicleInformation();
+            vehicle.SetVinNumber(vinumber);
+            return vehicle;
+        }
+
         public string EngineNo
         {
             get
@@ -50,7 +63,7 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
         public string Vin
         {
             get;
-            private set;
+            set;
             //get { return "SB1KV58E40F039277"; }
         }
 
@@ -70,10 +83,11 @@ namespace Lace.Test.Helper.Mothers.Requests.Dto
             Vin = vinNumber;
         }
 
-        public RequestVehicleInformation()
+        private RequestVehicleInformation()
         {
-            Vin = "SB1KV58E40F039277";
-            LicenceNo = "XMC167GP";
+            //Vin = "SB1KV58E40F039277";
+            //LicenceNo = "XMC167GP";
+            //LicenceNo = "DD14HPGP";
         }
     }
 }

@@ -109,7 +109,7 @@
             </restriction>
           </simpleType>
         </attribute>
-        <attribute name="requesterPhone" use="required">
+        <attribute name="requesterPhone" use="optional">
           <simpleType>
             <restriction base="string">
               <maxLength value="15" />

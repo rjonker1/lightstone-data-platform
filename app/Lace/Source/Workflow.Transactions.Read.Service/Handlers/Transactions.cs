@@ -23,7 +23,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
         public void Handle(BillTransactionMessage message)
         {
             var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
-                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract);
+                message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract, message.Account);
 
             _repository.Add(transaction);
         }
