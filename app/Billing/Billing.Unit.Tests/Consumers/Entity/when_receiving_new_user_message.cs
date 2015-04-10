@@ -1,8 +1,4 @@
 ﻿using System;
-<<<<<<< Updated upstream
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-=======
 using AutoMapper;
 using Billing.Api.Helpers.AutoMapper.Maps;
 using Billing.Api.Installers;
@@ -10,12 +6,10 @@ using Billing.TestHelper;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataPlatform.Shared.Repositories;
->>>>>>> Stashed changes
 using Moq;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Domain.Entities;
-using Workflow.Billing.Repository;
 using Xunit.Extensions;
 
 namespace Billing.Api.Tests.Consumers.Entity
