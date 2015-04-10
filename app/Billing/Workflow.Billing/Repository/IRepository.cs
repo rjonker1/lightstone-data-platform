@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Workflow.Billing.Repository
 {
-    public interface IRepository : IQueryable// where T : class 
+    public interface IRepository //: IQueryable where T : class 
     {
         TType Get<TType>(Guid id) where TType : class;
         void Add<TType>(TType instance);

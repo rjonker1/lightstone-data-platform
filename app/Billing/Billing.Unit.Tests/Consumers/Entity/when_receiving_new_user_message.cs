@@ -1,11 +1,9 @@
 ﻿using System;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
+using DataPlatform.Shared.Repositories;
 using Moq;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Consumers;
 using Workflow.Billing.Domain.Entities;
-using Workflow.Billing.Repository;
 using Xunit.Extensions;
 
 namespace Billing.Api.Tests.Consumers.Entity
