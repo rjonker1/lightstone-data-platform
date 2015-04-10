@@ -50,12 +50,13 @@ namespace Api.Modules
                 //var userIdentity = tokenizer.Detokenize(token, Context, new DefaultUserIdentityResolver());
 
 
-                var packageDetails = userManagementApi.Post<ContractResponse>("", "/Packages/GetPackage", new { apiRequest.UserId }, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
+                //var packageDetails = userManagementApi.Post<ContractResponse>("", "/Packages/GetPackage", new { apiRequest.UserId }, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
 
-                if (packageDetails == null)
-                    throw new Exception("Could not get package for contract");
+                //if (packageDetails == null)
+                //    throw new Exception("Could not get package for contract");
 
-                var responses = packageBuilderApi.Get(token, string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", packageDetails.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()));
+                //var responses = packageBuilderApi.Get("", string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", packageDetails.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
+                var responses = packageBuilderApi.Get("", string.Format("/Packages/Execute/{0}/{1}/{2}/{3}", apiRequest.PackageId, apiRequest.UserId, apiRequest.SearchTerm, Guid.NewGuid()), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
                 //var package = jsonPackage.ToPackage();
 
                 //if (package == null)
