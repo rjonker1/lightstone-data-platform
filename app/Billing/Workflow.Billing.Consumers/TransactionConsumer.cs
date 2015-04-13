@@ -1,25 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Billing.Domain.Core.Repositories;
-using DataPlatform.Shared.Messaging;
+﻿using Billing.Domain.Core.Repositories;
 using EasyNetQ.AutoSubscribe;
+using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer : IConsume<IPublishableMessage>
+    public class TransactionConsumer : IConsume<TransactionMessage>
     {
-
-        private readonly IRepository<UserMeta> _repository;
-
-
-        public TransactionConsumer(IRepository<UserMeta> repository)
-        {
-            _repository = repository;
-        }
-
-        public void Consume(IPublishableMessage message)
+        public void Consume(TransactionMessage message)
         {
             var test = message;
         }

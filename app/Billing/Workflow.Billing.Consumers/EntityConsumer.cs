@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Repositories;
+using Billing.Domain.Core.Repositories;
 using EasyNetQ.AutoSubscribe;
-using RabbitMQ.Client.Framing.Impl.v0_8;
 using Shared.Messaging.Billing.Helpers;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Dtos;
