@@ -59,6 +59,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Handlers\RequestContextHandler.cs" />
     <Compile Include="Handlers\RequestResponseHandler.cs" />
   </ItemGroup>
   <ItemGroup>
