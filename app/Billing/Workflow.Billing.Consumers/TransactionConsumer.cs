@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Billing.Domain.Core.Repositories;
 using EasyNetQ.AutoSubscribe;
 using Shared.Messaging.Billing.Messages;
@@ -29,6 +31,11 @@ namespace Workflow.Billing.Consumers
                 foreach (var transaction in _transactions)
                 {
                     //Logic to build up Denomalized data structure for new transaction
+                    var customerUsers = _users.Where(x => x.Id == transaction.UserId);
+
+                    //Mappings for User, Customer, Products(Dataproviders), Transaction
+                    //Build up entity with each mapping
+                    var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
                 }
             }
         }
