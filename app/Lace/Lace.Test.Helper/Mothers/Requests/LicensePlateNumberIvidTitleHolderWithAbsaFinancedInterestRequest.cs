@@ -1,5 +1,4 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Mothers.Requests.Dto;
@@ -15,7 +14,10 @@ namespace Lace.Test.Helper.Mothers.Requests
 
         public IHaveVehicle Vehicle
         {
-            get { return new IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation(); }
+            get
+            {
+                return IvidTitleHolderRequestVehicleIWithAbsaFinancedInterestInformation.WithLicensePlate("NRB891W");
+            }
         }
 
         public IHaveRequestContext Request

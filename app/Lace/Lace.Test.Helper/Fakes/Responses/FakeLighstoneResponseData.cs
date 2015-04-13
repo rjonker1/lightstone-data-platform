@@ -20,9 +20,9 @@ namespace Lace.Test.Helper.Fakes.Responses
                 .BuildValuation();
         }
 
-        public static IRetrieveCarInformation GetCarInformation(ICollection<IPointToLaceRequest> request)
+        public static IRetrieveCarInformation GetCarInformation(string vinNumber)
         {
-            return new RetrieveCarInformationDetail(request.GetFromRequest<IPointToVehicleRequest>().Vehicle, new FakeCarRepositioryFactory())
+            return new GetCarInformationWithVin(vinNumber, new FakeCarRepositioryFactory())
                 .SetupDataSources()
                 .GenerateData()
                 .BuildCarInformation()

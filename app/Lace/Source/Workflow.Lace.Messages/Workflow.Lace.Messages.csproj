@@ -39,21 +39,21 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Billing.Api.Dtos, Version=1.0.0.906, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Billing.Api.Dtos.1.0.0.852\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Billing.Api.Dtos.1.0.0.906\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.863, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.906, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.863\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.906\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.910, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.852\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.910\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.852, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.910, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.852\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.910\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NEventStore">

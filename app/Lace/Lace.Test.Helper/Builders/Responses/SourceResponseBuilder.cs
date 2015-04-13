@@ -8,6 +8,7 @@ using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Test.Helper.Fakes.Responses;
+using Microsoft.SqlServer.Server;
 
 namespace Lace.Test.Helper.Builders.Responses
 {
@@ -54,9 +55,9 @@ namespace Lace.Test.Helper.Builders.Responses
             return FakeLighstoneRetrievalData.GetValuationFromMetrics(request);
         }
 
-        public IRetrieveCarInformation ForLightstoneCarInformationResponse(ICollection<IPointToLaceRequest> request)
+        public IRetrieveCarInformation ForLightstoneCarInformationResponse(string vinNumber)
         {
-            return FakeLighstoneRetrievalData.GetCarInformation(request);
+            return FakeLighstoneRetrievalData.GetCarInformation(vinNumber);
         }
 
         public string ForSignioDriversLicenseDecryptedResponse()

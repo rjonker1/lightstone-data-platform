@@ -31,7 +31,6 @@ namespace Lace.Unit.Tests.Sources
             _response = new LaceResponseBuilder().WithIvidResponseHandled();
             _callTheSource = new CallLightstoneDataProvider(_request, new FakeRepositoryFactory(),
                 new FakeCarRepositioryFactory());
-
         }
 
         public override void Observe()
