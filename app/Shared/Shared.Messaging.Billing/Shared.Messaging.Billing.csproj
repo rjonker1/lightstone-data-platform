@@ -61,6 +61,7 @@
     <Compile Include="Messages\EntityMessage.cs" />
     <Compile Include="Helpers\IEntity.cs" />
     <Compile Include="Messages\TextMessage.cs" />
+    <Compile Include="Messages\TransactionMessage.cs" />
     <Compile Include="Messages\UserMessage.cs" />
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>

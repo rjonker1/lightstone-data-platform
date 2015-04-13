@@ -8,7 +8,7 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer : IConsume<IPublishableMessage>
+    public class TransactionConsumer : IConsume<TransactionMessage>
     {
 
         private readonly IRepository<UserMeta> _repository;
@@ -19,7 +19,7 @@ namespace Workflow.Billing.Consumers
             _repository = repository;
         }
 
-        public void Consume(IPublishableMessage message)
+        public void Consume(TransactionMessage message)
         {
             var test = message;
         }
