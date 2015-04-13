@@ -48,8 +48,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\..\packages\NServiceBus.5.2.0\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +64,7 @@
     <Compile Include="Helpers\Entity.cs" />
     <Compile Include="Messages\EntityMessage.cs" />
     <Compile Include="Helpers\IEntity.cs" />
+    <Compile Include="Messages\InvoiceTransactionCreated.cs" />
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Messages\TransactionMessage.cs" />
     <Compile Include="Messages\UserMessage.cs" />
