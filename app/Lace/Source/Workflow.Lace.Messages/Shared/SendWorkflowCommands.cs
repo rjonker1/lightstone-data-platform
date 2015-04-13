@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Shared.Extensions;
 using NServiceBus;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Commands;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Extensions;
@@ -27,12 +29,15 @@ namespace Workflow.Lace.Messages.Shared
         public void DataProviderRequest(DataProviderCommandSource dataProvider,
             string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
-            DataProviderStopWatch stopWatch)
+            DataProviderStopWatch stopWatch, decimal costPrice, decimal recommendedPrice)
         {
-            new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId, dataProvider, DateTime.UtcNow,
-                connectionType, connection, action, state, new MetadataContainer().ObjectToJson(),
-                payload.ObjectToJson(),
-                CommandDescriptions.StartExecutionDescription(dataProvider))
+            new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId,
+                new DataProviderIdentifier((int) dataProvider, dataProvider.ToString(), costPrice, recommendedPrice,
+                    action, state),
+                DateTime.UtcNow,
+                new ConnectionTypeIdentifier(connectionType, connection),
+                new PayloadIdentifier(new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
+                    CommandDescriptions.StartExecutionDescription(dataProvider)))
                 .SendToBus(_publisher, _log);
             stopWatch.Start();
         }
@@ -40,14 +45,16 @@ namespace Workflow.Lace.Messages.Shared
 
         public void DataProviderResponse(DataProviderCommandSource dataProvider, string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
-            DataProviderStopWatch stopWatch)
+            DataProviderStopWatch stopWatch, decimal costPrice, decimal recommendedPrice)
         {
             stopWatch.Stop();
-            new GetResponseFromDataProviderCommmand(Guid.NewGuid(), _requestId, dataProvider, DateTime.UtcNow,
-                connection,
-                connectionType, state, action, new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
-                payload.ObjectToJson(),
-                CommandDescriptions.EndExecutionDescription(dataProvider))
+            new GetResponseFromDataProviderCommmand(Guid.NewGuid(), _requestId,
+                new DataProviderIdentifier((int) dataProvider, dataProvider.ToString(), costPrice, recommendedPrice,
+                    action, state),
+                DateTime.UtcNow,
+                new ConnectionTypeIdentifier(connectionType, connection),
+                new PayloadIdentifier(new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
+                    CommandDescriptions.StartExecutionDescription(dataProvider)))
                 .SendToBus(
                     _publisher,
                     _log);

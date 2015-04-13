@@ -70,7 +70,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 command.Workflow.DataProviderRequest(Provider,
                     "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
                     DataProviderState.Successful, new {request},
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 _result = webService.Client.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum,
                     request.CompanyVatnumber);
@@ -80,7 +80,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 command.Workflow.DataProviderResponse(Provider,
                     "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
                     _result != null ? DataProviderState.Successful : DataProviderState.Failed, new {_result},
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 TransformResponse(response, command);
             }

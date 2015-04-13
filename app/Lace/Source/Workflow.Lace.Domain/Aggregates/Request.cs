@@ -5,6 +5,7 @@ using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
 using Workflow.Billing.Messages;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
 
@@ -29,9 +30,8 @@ namespace Workflow.Lace.Domain.Aggregates
             Register<DataProviderError>(e => e.Id = id);
         }
 
-        public Request(Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, DataProviderAction action, DataProviderState state, string connection, string connectionType,
-            string metaData, string payload, string message)
+        public Request(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
+            ConnectionTypeIdentifier connection, PayloadIdentifier payload)
             : this(requestId)
         {
             //RequestId = requestId;
@@ -43,9 +43,7 @@ namespace Workflow.Lace.Domain.Aggregates
             //Payload = payload;
             //Message = message;
 
-            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection,
-                connectionType,
-                state, action, metaData, payload, message));
+            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
         }
 
         public void StartCall(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -92,9 +90,8 @@ namespace Workflow.Lace.Domain.Aggregates
 
 
 
-        public void RequestSentToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, string connectionType, string connection, DataProviderAction action, DataProviderState state,
-            string metaData, string payload, string message)
+        public void RequestSentToDataProvider(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
+            ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
             //RequestId = requestId;
             //DataProvider = dataProvider;
@@ -103,13 +100,11 @@ namespace Workflow.Lace.Domain.Aggregates
             //Payload = payload;
             //Message = message;
 
-            RaiseEvent(new RequestToDataProvider(id, requestId, dataProvider, date, connection, connectionType,
-                state, action, metaData, payload, message));
+            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
         }
 
-        public void ResponseReceivedFromDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, string connection, string connectionType, DataProviderAction action, DataProviderState state,
-            string metaData, string payload, string message)
+        public void ResponseReceivedFromDataProvider(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
+            ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
             //RequestId = requestId;
             //DataProvider = dataProvider;
@@ -122,8 +117,7 @@ namespace Workflow.Lace.Domain.Aggregates
             //Payload = payload;
             //Message = message;
 
-            RaiseEvent(new ResponseFromDataProvider(id, requestId, dataProvider, date, connection, connectionType, state,
-                action,metaData,payload,message));
+            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
         }
 
         public void CreateTransaction(Guid id, Guid packageId, long packageVersion, DateTime date, Guid userId,
@@ -146,12 +140,10 @@ namespace Workflow.Lace.Domain.Aggregates
                     new ContractIdentifier(contractId, new VersionIdentifier(contractVersion)),new AccountIdentifier(accountNumber)));
         }
 
-        public static Request ReceiveRequest(Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, DataProviderAction action, DataProviderState state, string connection, string connectionType,
-            string metaData, string payload, string message)
+        public static Request ReceiveRequest(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
+            ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
-            return new Request(requestId, dataProvider, date, action, state, connection, connectionType, metaData,
-                payload, message);
+            return new Request(requestId, dataProvider, date, connection, payload);
         }
 
         //[DataMember]

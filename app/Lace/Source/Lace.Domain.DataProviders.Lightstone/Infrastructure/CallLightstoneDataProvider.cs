@@ -53,7 +53,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
 
                 command.Workflow.DataProviderRequest(Provider,
                     "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
-                    DataProviderState.Successful, new {_request}, _stopWatch);
+                    DataProviderState.Successful, new { _request }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 GetCarInformation();
                 GetMetrics();
@@ -63,7 +63,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString,
                     DataProviderAction.Response,
                     response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new {response}, _stopWatch);
+                    new { response }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 TransformResponse(response, command);
             }

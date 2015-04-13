@@ -55,7 +55,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
                     command.Workflow.DataProviderRequest(Provider, "API",
                         webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
-                        DataProviderState.Successful, _request, _stopWatch);
+                        DataProviderState.Successful, _request, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                     _response = webService
                         .Client
@@ -67,7 +67,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     command.Workflow.DataProviderResponse(Provider, "API",
                         webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
                         _response == null ? DataProviderState.Failed : DataProviderState.Successful,
-                        _response ?? new TitleholderQueryResponse(), _stopWatch);
+                        _response ?? new TitleholderQueryResponse(), _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                     if (_response == null)
                         command.Workflow.Send(CommandType.Fault, _request,

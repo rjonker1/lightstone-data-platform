@@ -55,7 +55,9 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
 
                 command.Workflow.DataProviderRequest(Provider, "Database",
                     ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
-                    DataProviderState.Successful, _request, _stopWatch);
+                    DataProviderState.Successful, _request, _stopWatch,
+                    _request.GetFromRequest<IAmDataProvider>().CostPrice,
+                    _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 GetCarInformation();
                 var carUow =
@@ -70,7 +72,9 @@ namespace Lace.Domain.DataProviders.Rgt.Infrastructure
                     ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Response,
                     _carSpecifications.Any()
                         ? DataProviderState.Successful
-                        : DataProviderState.Failed, _carSpecifications, _stopWatch);
+                        : DataProviderState.Failed, _carSpecifications, _stopWatch,
+                    _request.GetFromRequest<IAmDataProvider>().CostPrice,
+                    _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 if (_carInformation == null || _carInformation.CarInformationRequest == null)
                 {

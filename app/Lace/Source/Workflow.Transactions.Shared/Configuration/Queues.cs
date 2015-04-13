@@ -23,7 +23,9 @@ namespace Workflow.Transactions.Shared.Configuration
                     ConfigureTransactionReadQueues.ForHost(),
                     ConfigureTransactionReadQueues.ForAudit(),
                     ConfigureTransactionReadQueues.ForErrors(),
-                    ConfigureTransactionReadQueues.ForRetries()
+                    ConfigureTransactionReadQueues.ForRetries(),
+
+                    ConfigureTransactionForBillingCreatedQueue.ForHost()
 
                 };
             }
@@ -39,7 +41,11 @@ namespace Workflow.Transactions.Shared.Configuration
                     new BindToQueue(ConfigureTransactionReadQueues.ForHost(),
                         string.Empty,
                         ConfigureTransactionsExchangesToBind.ForReadHost().ExchangeName,
-                        ConfigureTransactionsExchangesToBind.ForReadHost().RoutingKey)
+                        ConfigureTransactionsExchangesToBind.ForReadHost().RoutingKey) //,
+
+                    //new BindToQueue(ConfigureTransactionForBillingCreatedQueue.ForHost(), string.Empty,
+                    //    ConfigureTransactionsExchangesToBind.ForReadHost().ExchangeName,
+                    //    ConfigureTransactionsExchangesToBind.ForReadHost().RoutingKey),
                 };
             }
         }
@@ -92,6 +98,13 @@ namespace Workflow.Transactions.Shared.Configuration
             () => new Queue("DataPlatform.Transactions.Host.Read.Retries",
                 "DataPlatform.Transactions.Host.Read.Retries", string.Empty, ExchangeType.Fanout,
                 QueueFunction.ReadQueue, QueueType.Retries);
+    }
+
+    public class ConfigureTransactionForBillingCreatedQueue
+    {
+        public static Func<IAmAQueue> ForHost =
+            () => new Queue("DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing.Read",
+                string.Empty, ExchangeType.Fanout, QueueFunction.ReadQueue, QueueType.Host);
     }
 
     public class ConfigureTransactionsExchangesToBind

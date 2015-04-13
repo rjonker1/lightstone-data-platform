@@ -13,6 +13,7 @@ using Lace.Domain.DataProviders.RgtVin.Core.Models;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
+using Lace.Shared.Extensions;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -51,7 +52,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
                 command.Workflow.DataProviderRequest(Provider,
                     "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
-                    DataProviderState.Successful, new {vin}, _stopWatch);
+                    DataProviderState.Successful, new { vin }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 var uow = new VehicleVinUnitOfWork(_repository.VinRepository());
                 uow.GetVin(vin);
@@ -61,7 +62,7 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
                     "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString,
                     DataProviderAction.Response,
                     _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new {_vins}, _stopWatch);
+                    new { _vins }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 if (_vins == null || !_vins.Any())
                     command.Workflow.Send(CommandType.Fault, new {VinNumber = vin},

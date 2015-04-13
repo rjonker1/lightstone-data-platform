@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
+
 namespace Workflow.Lace.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class DataProviderResponseIdentifier
     {
         public DataProviderResponseIdentifier()
@@ -16,9 +20,13 @@ namespace Workflow.Lace.Identifiers
             Request = request;
         }
 
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public Guid StreamId { get; private set; }
+        [DataMember]
         public DateTime Date { get; private set; }
+        [DataMember]
         public DataProviderTransactionIdentifier Request { get; set; }
     }
 }

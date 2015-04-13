@@ -1,5 +1,4 @@
 ﻿using System;
-using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
@@ -7,7 +6,7 @@ namespace Lace.Domain.Core.Requests.Contracts
     {
         Guid Id { get; }
         long Version { get; }
-        DataProviderName[] DataProviders { get; }
+        IAmDataProvider[] DataProviders { get; }
         string Name { get; }
         string Action { get; }
     }

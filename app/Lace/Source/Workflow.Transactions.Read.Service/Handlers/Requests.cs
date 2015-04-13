@@ -26,12 +26,10 @@ namespace Workflow.Transactions.Read.Service.Handlers
         {
             var request =
                 new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Id,
-                    message.Date,
-                    new RequestIdentifier(message.RequestId, null),
-                    new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString()),
-                    new ConnectionTypeIdentifier(message.ConnectionType, message.Connection),
-                    new ActionIdentifier((int) message.Action, message.Action.ToString()),
-                    new StateIdentifier((int) message.State, message.State.ToString())));
+                    message.Date, new RequestIdentifier(message.Id, null),
+                    message.DataProvider, message.Connection,
+                    new ActionIdentifier((int) message.DataProvider.Action, message.DataProvider.Action.ToString()),
+                    new StateIdentifier((int) message.DataProvider.State, message.DataProvider.State.ToString())));
             _repository.Add(request);
         }
     }

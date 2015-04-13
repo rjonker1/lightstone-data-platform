@@ -25,6 +25,8 @@ namespace Workflow.Transactions.Read.Service.Handlers
             var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
                 message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State, message.Contract, message.Account);
 
+            R
+
             _repository.Add(transaction);
         }
     }

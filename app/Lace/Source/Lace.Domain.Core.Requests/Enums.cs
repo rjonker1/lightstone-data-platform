@@ -1,6 +1,6 @@
 ﻿namespace Lace.Domain.Core.Requests
 {
-    public enum SystemType
+   public enum SystemType
     {
         Api,
         Limm,

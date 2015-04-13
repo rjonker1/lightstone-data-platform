@@ -1,10 +1,13 @@
-﻿namespace DataPlatform.Shared.Enums
+﻿using System.Runtime.Serialization;
+
+namespace DataPlatform.Shared.Enums
 {
+    [DataContract]
     public enum DeviceTypes
     {
-        Desktop,
-        Phone,
-        Tablet,
-        ApiClient
+        [EnumMember] Desktop,
+        [EnumMember] Phone,
+        [EnumMember] Tablet,
+        [EnumMember] ApiClient
     }
 }

@@ -60,7 +60,7 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender StartCall(object message, object metadata)
         {
-            _command.Workflow.DataProviderRequest(_dataProvider,"TEST","TEST",DataProviderAction.Request,DataProviderState.Successful,new { message}, _stopWatch);
+            _command.Workflow.DataProviderRequest(_dataProvider,"TEST","TEST",DataProviderAction.Request,DataProviderState.Successful,new { message}, _stopWatch,55,110);
             Thread.Sleep(1000);
             return this;
         }
@@ -74,7 +74,7 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender EndCall(object message)
         {
-            _command.Workflow.DataProviderRequest(_dataProvider, "TEST", "TEST", DataProviderAction.Response, DataProviderState.Successful, new { message }, _stopWatch);
+            _command.Workflow.DataProviderRequest(_dataProvider, "TEST", "TEST", DataProviderAction.Response, DataProviderState.Successful, new { message }, _stopWatch,0,0);
             Thread.Sleep(1000);
             return this;
         }

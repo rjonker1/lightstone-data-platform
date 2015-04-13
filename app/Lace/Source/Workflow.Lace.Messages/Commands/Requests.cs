@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
+using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Commands
 {
@@ -18,41 +18,23 @@ namespace Workflow.Lace.Messages.Commands
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public string ConnectionType { get; private set; }
+        public ConnectionTypeIdentifier Connection { get; private set; }
 
         [DataMember]
-        public string Connection { get; private set; }
+        public DataProviderIdentifier DataProvider { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
-        [DataMember]
-        public DataProviderAction Action { get; private set; }
-        [DataMember]
-        public DataProviderState State { get; private set; }
-        [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
-
-        public SendRequestToDataProviderCommand(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, string connectionType, string connection, DataProviderAction action, DataProviderState state, string metaData, string payload, string message)
+        public SendRequestToDataProviderCommand(Guid id, Guid requestId, DataProviderIdentifier dataProvider,
+            DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
             Id = id;
             Date = date;
             RequestId = requestId;
-            ConnectionType = connectionType;
             Connection = connection;
             DataProvider = dataProvider;
-            Action = action;
-            State = state;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 }
