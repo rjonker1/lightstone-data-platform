@@ -80,12 +80,17 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Domain\Dtos\PreBillingDto.cs" />
+    <Compile Include="Domain\Entities\PreBilling.cs" />
+    <Compile Include="Domain\Entities\Transaction.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\InvoiceTransaction.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\PreBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\UserMetaMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />

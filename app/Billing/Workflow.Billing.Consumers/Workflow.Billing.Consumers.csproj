@@ -94,12 +94,21 @@
     <Compile Include="EntityConsumer.cs" />
     <Compile Include="SqlServerConnectionController.cs" />
     <Compile Include="TextMessageConsumer.cs" />
+    <Compile Include="TransactionConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Billing.Domain.Core\Billing.Domain.Core.csproj">
+      <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
+      <Name>Billing.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
+      <Project>{8888cf49-7dcf-4984-a710-d2660f2cdbed}</Project>
+      <Name>Billing.Domain.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{EA4E1FF1-8581-4680-AA28-126294163093}</Project>
       <Name>Workflow.Billing.Messages</Name>

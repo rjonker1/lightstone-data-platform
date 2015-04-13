@@ -1,8 +1,11 @@
 ﻿using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Common.Logging;
+using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Workflow.Billing.Consumer.Installers;
+using Workflow.Billing.Consumers;
+using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumer
 {
