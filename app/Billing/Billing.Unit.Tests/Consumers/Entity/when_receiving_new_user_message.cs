@@ -19,13 +19,15 @@ namespace Billing.Api.Tests.Consumers.Entity
         private readonly EntityConsumer consumer;
         private readonly UserMessage message;
         private readonly Mock<IRepository<UserMeta>> repository;
+        private readonly Mock<IRepository<Transaction>> transactions;
+        private readonly Mock<IRepository<PreBilling>> preBillings;
 
         private Exception thrownException;
 
         public when_receiving_new_user_message()
         {
             repository = new Mock<IRepository<UserMeta>>();
-            consumer = new EntityConsumer(repository.Object);
+            consumer = new EntityConsumer(repository.Object, transactions.Object, preBillings.Object);
             message = new UserMessage();
         }
 
