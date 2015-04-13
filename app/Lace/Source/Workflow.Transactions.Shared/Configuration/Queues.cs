@@ -103,7 +103,7 @@ namespace Workflow.Transactions.Shared.Configuration
     public class ConfigureTransactionForBillingCreatedQueue
     {
         public static Func<IAmAQueue> ForHost =
-            () => new Queue("DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing.Read",
+            () => new Queue("DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing",
                 string.Empty, ExchangeType.Fanout, QueueFunction.ReadQueue, QueueType.Host);
     }
 

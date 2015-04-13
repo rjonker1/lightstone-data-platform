@@ -7,6 +7,8 @@ using DataPlatform.Shared.Messaging;
 using NEventStore;
 using NEventStore.Dispatcher;
 using NServiceBus;
+using NServiceBus.Features;
+using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Repository;
 using Workflow.Lace.Mappers;
 using Workflow.Transactions.Shared.Queuing;
@@ -16,17 +18,8 @@ namespace Workflow.Transactions.Service.Read.Host
 {
     public class ReadModule : Module
     {
-        private const string AggregateIdKey = "AggregateId";
-        private const string CommitVersionKey = "CommitVersion";
-        private const string EventVersionKey = "EventVersion";
-        private const string BusPrefixKey = "Bus.";
-
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => BuildEventStore(c.Resolve<ILifetimeScope>()))
-                .As<IStoreEvents>()
-                .SingleInstance();
-
             builder.RegisterType<RabbitConsumer>().As<IConsumeQueue>();
             builder.RegisterType<QueueInitialization>().As<IInitializeQueues>();
             builder.Register(
@@ -36,56 +29,52 @@ namespace Workflow.Transactions.Service.Read.Host
                             ConfigurationManager.ConnectionStrings["workflow/transactions/database/read"]
                                 .ConnectionString), new RepositoryMapper(new MappingForTypes())))
                 .As<IRepository>();
+            builder.Register(c => BillingTransactionsBus()).As<ISendOnlyBus>();
         }
+        
+        public ISendOnlyBus BillingTransactionsBus()
+        {
+            var assembliesToScan =
+                AllAssemblies.Matching("Lightstone.DataPlatform.Workflow.Transactions.Read.Service")
+                    .And("NServiceBus.Transports.RabbitMQ");
+            //return
+            //    new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Shared.Messaging.Billing.Messages",
+            //        assembliesToScan,
+            //        "DataPlatform.Transactions.Billing").CreateBusWithInMemoryPersistence();
 
-        private static IStoreEvents BuildEventStore(ILifetimeScope container)
-        {
-            return Wireup.Init()
-                .LogToConsoleWindow()
-                .UsingAsynchronousDispatchScheduler()
-                .DispatchTo(new DelegateMessageDispatcher(c => DispatchCommits(container, c)))
-                .Build();
-        }
 
-        private static void DispatchCommits(ILifetimeScope container, ICommit commit)
-        {
-            using (var scope = container.BeginLifetimeScope())
-            {
-                var bus = scope.Resolve<IBus>();
+            var configuration = new BusConfiguration();
+            configuration.UseTransport<RabbitMQTransport>();
+            configuration.EndpointName("DataPlatform.Transactions.Billing");
+            configuration.AssembliesToScan(assembliesToScan);
+           // configuration.Conventions().DefiningCommandsAs(t => t.Namespace != null && t.Namespace.Contains("Workflow.Lace.Messages.Events"));
+          //  configuration.Conventions().DefiningEventsAs(t => t.Namespace != null && t.Namespace.Contains("Workflow.Lace.Messages.Events"));
+          //  configuration.Conventions().DefiningMessagesAs(t => t.Namespace != null && t.typ.Contains("Workflow.Lace.Messages.Events"));
+            return Bus.CreateSendOnly(configuration);
 
-                for (var i = 0; i < commit.Events.Count; i++)
-                {
-                    var eventMessage = commit.Events.ToArray()[i];
-                    var busMessage = eventMessage.Body as IPublishableMessage;
-                    AppendHeaders(busMessage, commit.Headers, bus);
-                    AppendHeaders(busMessage, eventMessage.Headers, bus);
-                    AppendVersion(commit, i, bus);
-                    bus.Publish(busMessage);
-                }
-            }
-        }
+           
 
-        private static void AppendHeaders(IPublishableMessage message, IEnumerable<KeyValuePair<string, object>> headers, ISendOnlyBus bus)
-        {
-            headers = headers.Where(x => x.Key.StartsWith(BusPrefixKey));
-            foreach (var header in headers)
-            {
-                var key = header.Key.Substring(BusPrefixKey.Length);
-                var value = (header.Value ?? string.Empty).ToString();
-                bus.SetMessageHeader(message, key, value);
-            }
-        }
-        private static void AppendVersion(ICommit commit, int index, ISendOnlyBus bus)
-        {
-            var busMessage = commit.Events.ToArray()[index].Body as IPublishableMessage;
-            bus.SetMessageHeader(busMessage, AggregateIdKey, commit.StreamId.ToString());
-            bus.SetMessageHeader(busMessage, CommitVersionKey, commit.StreamRevision.ToString());
-            bus.SetMessageHeader(busMessage, EventVersionKey, GetSpecificEventVersion(commit, index).ToString());
-        }
-        private static int GetSpecificEventVersion(ICommit commit, int index)
-        {
-            // e.g. (StreamRevision: 120) - (5 events) + 1 + (index @ 4: the last index) = event version: 120
-            return commit.StreamRevision - commit.Events.Count + 1 + index;
+            //var assembliesToScan =
+            //    AllAssemblies.Matching("Lightstone.DataPlatform.Shared.Messaging.Billing")
+            //        .And("NServiceBus.Transports.RabbitMQ");
+            ////return
+            ////    new DataPlatform.Shared.Messaging.RabbitMQ.BusFactory("Shared.Messaging.Billing.Messages",
+            ////        assembliesToScan,
+            ////        "DataPlatform.Transactions.Billing").CreateBusWithInMemoryPersistence();
+
+
+            //var configuration = new BusConfiguration();
+
+            //configuration.UseTransport<RabbitMQTransport>();
+            //configuration.UsePersistence<InMemoryPersistence>();
+            //configuration.DisableFeature<TimeoutManager>();
+            //configuration.EndpointName("DataPlatform.Transactions.Billing");
+            //configuration.AssembliesToScan(assembliesToScan);
+            //configuration.Conventions()
+            //    .DefiningCommandsAs(
+            //        c => c.Namespace != null && c.Namespace.Equals("Shared.Messaging.Billing.Messages"));
+            //var bus = Bus.Create(configuration);
+            //return bus;
         }
     }
 }

@@ -47,16 +47,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.918\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.921\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.922\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.918, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.918\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.918, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.918\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.922\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,7 +70,6 @@
     </Compile>
     <Compile Include="AggregateFactory.cs" />
     <Compile Include="Aggregates\Request.cs" />
-    <Compile Include="Aggregates\Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

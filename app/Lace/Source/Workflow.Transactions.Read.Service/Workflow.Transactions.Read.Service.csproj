@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.918\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.922\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.918, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.918\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
@@ -59,11 +62,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Handlers\BillingTransactionCreated.cs" />
     <Compile Include="Handlers\Requests.cs" />
     <Compile Include="Handlers\Responses.cs" />
     <Compile Include="Handlers\Transactions.cs" />
@@ -72,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Workflow.Lace.Domain\Workflow.Lace.Domain.csproj">
+      <Project>{3d0d59f5-b89e-44ab-8230-abf950a09760}</Project>
+      <Name>Workflow.Lace.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
