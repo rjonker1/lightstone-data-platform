@@ -32,6 +32,8 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private readonly ISetupRepository _repositories;
         private readonly ISetupCarRepository _carRepository;
 
+        private string _vinNumber;
+
         public CallLightstoneDataProvider(ICollection<IPointToLaceRequest> request, ISetupRepository repositories,
             ISetupCarRepository carRepository)
         {
@@ -47,7 +49,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         {
             try
             {
-                ValidateVehicleDetail(response);
+                GetVinFromResponse(response);
 
                 command.Workflow.DataProviderRequest(Provider,
                     "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
@@ -106,7 +108,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
         private void GetCarInformation()
         {
             _carInformation =
-                new RetrieveCarInformationDetail(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle,
+                new GetCarInformationWithVin(_vinNumber,
                     _carRepository)
                     .SetupDataSources()
                     .GenerateData()
@@ -124,19 +126,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
                     .BuildValuation();
         }
 
-        private void ValidateVehicleDetail(IEnumerable<IPointToLaceProvider> response)
+        private void GetVinFromResponse(IEnumerable<IPointToLaceProvider> response)
         {
             var ividResponse = response.OfType<IProvideDataFromIvid>().First();
-            if (ividResponse == null)
-                return;
-
-            if (_request.GetFromRequest<IPointToVehicleRequest>().Vehicle != null &&
-                !string.IsNullOrEmpty(_request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin) &&
-                _request.GetFromRequest<IPointToVehicleRequest>()
-                    .Vehicle.Vin.Equals(ividResponse.Vin, StringComparison.CurrentCultureIgnoreCase))
-                return;
-
-            _request.GetFromRequest<IPointToVehicleRequest>().Vehicle.SetVinNumber(ividResponse.Vin);
+            _vinNumber = ividResponse != null
+                ? ividResponse.Vin
+                : _request.GetFromRequest<IPointToVehicleRequest>().Vehicle.Vin;
         }
 
     }

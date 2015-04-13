@@ -68,7 +68,7 @@
     <Compile Include="Core\Contracts\ISetupCarRepository.cs" />
     <Compile Include="Core\Models\CarInfo.cs" />
     <Compile Include="Infrastructure\Dto\CarInformationRequest.cs" />
-    <Compile Include="Infrastructure\RetrieveCarInformationDetail.cs" />
+    <Compile Include="Infrastructure\GetCarInformationWithVin.cs" />
     <Compile Include="Infrastructure\SqlStatements\SelectStatements.cs" />
     <Compile Include="Repositories\CarInfoRepository.cs" />
     <Compile Include="Repositories\Factory\RepositoryFactory.cs" />

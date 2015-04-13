@@ -24,6 +24,7 @@ namespace Workflow.Billing.Messages
             TransactionId = transactionId;
             State = state;
             Contract = contract;
+            Account = account;
         }
 
         [DataMember]

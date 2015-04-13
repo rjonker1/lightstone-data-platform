@@ -82,7 +82,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                     new TransformLightstoneResponse(
                         FakeLighstoneRetrievalData.GetValuationFromMetrics(
                             new RequestCarInformationForCarHavingId107483()),
-                        FakeLighstoneRetrievalData.GetCarInformation(new LicensePlateRequestBuilder().ForLightstone()))
+                        FakeLighstoneRetrievalData.GetCarInformation("SB1KV58E40F039277"))
                         .Result);
             return this;
         }
