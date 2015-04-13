@@ -9,7 +9,7 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer : IConsume<TransactionMessage>
+    public class TransactionConsumer : IConsume<TransactionMessage> //BillTransactionCreatedMessage
     {
         private readonly IRepository<Transaction> _transactions;
         private readonly IRepository<UserMeta> _users;
