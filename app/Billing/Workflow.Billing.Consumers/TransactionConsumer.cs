@@ -1,4 +1,6 @@
-﻿using Billing.Domain.Core.Repositories;
+﻿using System;
+using System.Linq;
+using Billing.Domain.Core.Repositories;
 using EasyNetQ.AutoSubscribe;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
@@ -7,9 +9,28 @@ namespace Workflow.Billing.Consumers
 {
     public class TransactionConsumer : IConsume<TransactionMessage>
     {
+        private readonly IRepository<Transaction> _transactions;
+        private readonly IRepository<UserMeta> _users;
+        private readonly IRepository<PreBilling> _preBillingRepository;
+
+        public TransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users, IRepository<PreBilling> preBillingRepository)
+        {
+            _transactions = transactions;
+            _users = users;
+            _preBillingRepository = preBillingRepository;
+        }
+
         public void Consume(TransactionMessage message)
         {
             var test = message;
+
+            if (_transactions.Any(x => x.Id == message.Id))
+            {
+                foreach (var transaction in _transactions)
+                {
+                    //Logic to build up Denomalized data structure for new transaction
+                }
+            }
         }
     }
 }
