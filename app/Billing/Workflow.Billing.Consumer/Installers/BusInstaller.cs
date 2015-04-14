@@ -20,6 +20,12 @@ namespace Workflow.Billing.Consumer.Installers
                     .UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container))
                     .LifestyleSingleton()
                 );
+
+            container.Register(
+                Component.For<IAdvancedBus>()
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))
+                    .LifestyleSingleton()
+                );
         }
     }
 }

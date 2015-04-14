@@ -72,7 +72,12 @@ namespace Workflow.Billing.Repository
         public void Save(T entity)
         {
             ValidateEntity(entity);
-            _session.Save(entity);
+
+            var currSession = pipelineExtensions.BeforeTransaction(_session);
+
+            currSession.SaveOrUpdate(entity);
+
+            pipelineExtensions.AfterTransaction(currSession);
         }
 
         public void Update(T entity)

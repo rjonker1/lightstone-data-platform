@@ -4,30 +4,33 @@ using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
+using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
-using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer : IConsume<InvoiceTransactionCreated>
+    public class TransactionConsumer //: IConsume<InvoiceTransactionCreated>
     {
         private readonly IRepository<Transaction> _transactions;
         private readonly IRepository<UserMeta> _users;
         private readonly IRepository<PreBilling> _preBillingRepository;
 
-        public TransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users, IRepository<PreBilling> preBillingRepository)
+        public TransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users,
+                                    IRepository<PreBilling> preBillingRepository, IMessage<InvoiceTransactionCreated> message)
         {
             _transactions = transactions;
             _users = users;
             _preBillingRepository = preBillingRepository;
+
+            Consume(message);
         }
 
-        public void Consume(InvoiceTransactionCreated message)
+        public void Consume(IMessage<InvoiceTransactionCreated> message)
         {
-            var test = message;
+            var transactionId = message.Body.TransactionId;
 
-            if (_transactions.Any(x => x.Id == message.TransactionId))
+            if (_transactions.Any(x => x.Id == transactionId))
             {
                 foreach (var transaction in _transactions)
                 {
@@ -37,9 +40,14 @@ namespace Workflow.Billing.Consumers
                     //Mappings for User, Customer, Products(Dataproviders), Transaction
                     //Build up entity with each mapping
                     var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
+                    preBillingEntity.CustomerName = "ACC NUMBER MAPPING";
+                    _preBillingRepository.Save(preBillingEntity);
                 }
+
+                return;
             }
         }
+       
     }
 }
 
