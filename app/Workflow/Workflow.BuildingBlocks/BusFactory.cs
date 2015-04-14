@@ -79,6 +79,35 @@ namespace Workflow.BuildingBlocks
 
         }
 
+        public static IAdvancedBus CreateAdvancedBus(string connectionStringKey)
+        {
+            var appSettings = new AppSettings();
+            var connectionString = appSettings.ConnectionStrings.Get(connectionStringKey, () => DefaultConnection);
+            var subscriptionPrefix = appSettings.RabbitMQ.SubscriptionPrefix;
+
+            try
+            {
+
+                Log.InfoFormat("Connecting to RabbitMQ via {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);
+
+                var logger = new RabbitMQLogger();
+
+                var bus = RabbitHutch.CreateBus(connectionString, x => x.Register<IEasyNetQLogger>(p => logger)).Advanced;
+
+                Log.DebugFormat("Connected to RabbitMQ on {0} and using subscription prefix {1}", connectionString, subscriptionPrefix);
+
+                return bus;
+            }
+            catch (Exception e)
+            {
+                Log.ErrorFormat("Failed to create a bus for RabbitMQ with connectionstring: {0}", connectionString);
+                Log.ErrorFormat("The failure was {0}", e.Message);
+
+                throw;
+            }
+
+        }
+
         public IBus CreateBus(string connectionStringKey, IWindsorContainer container)
         {
             var appSettings = new AppSettings();

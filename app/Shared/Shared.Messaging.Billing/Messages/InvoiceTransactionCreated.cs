@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using NServiceBus;
+using EasyNetQ;
 
 namespace DataPlatform.Shared.Messaging.Billing.Messages
 {
     [Serializable]
     [DataContract]
-    public class InvoiceTransactionCreated : IEvent
+    [Queue("DataPlatform.Transactions.Billing", ExchangeName = "DataPlatform.Transactions.Billing")]
+    public class InvoiceTransactionCreated : IPublishableMessage
     {
-        public InvoiceTransactionCreated() { }
+        public InvoiceTransactionCreated()
+        {
+        }
 
         public InvoiceTransactionCreated(Guid transactionId)
         {
