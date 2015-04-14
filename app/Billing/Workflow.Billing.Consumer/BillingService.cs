@@ -41,6 +41,7 @@ namespace Workflow.Billing.Consumer
                                                                                 new Repository<UserMeta>(container.Resolve<ISession>()),
                                                                                 new Repository<PreBilling>(container.Resolve<ISession>()),
                                                                                 new Repository<DataProviderTransaction>(container.Resolve<ISession>()),
+                                                                                new Repository<Product>(container.Resolve<ISession>()),
                                                                                 message))
                 );
 

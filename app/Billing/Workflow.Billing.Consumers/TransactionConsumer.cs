@@ -14,17 +14,20 @@ namespace Workflow.Billing.Consumers
         private readonly IRepository<Transaction> _transactions;
         private readonly IRepository<DataProviderTransaction> _dataProviderTransactions;
         private readonly IRepository<UserMeta> _users;
+        private readonly IRepository<Product> _products;
         private readonly IRepository<PreBilling> _preBillingRepository;
 
         public TransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users,
                                     IRepository<PreBilling> preBillingRepository,
                                     IRepository<DataProviderTransaction> dataProviderTransactions,
+                                    IRepository<Product> products,
                                     IMessage<InvoiceTransactionCreated> message)
         {
             _transactions = transactions;
             _users = users;
             _preBillingRepository = preBillingRepository;
             _dataProviderTransactions = dataProviderTransactions;
+            _products = products;
 
             Consume(message);
         }
@@ -42,6 +45,9 @@ namespace Workflow.Billing.Consumers
                     var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
 
                     var transactionProducts = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.Action == "Response");
+                    var transactionEntities = Mapper.Map<IEnumerable<DataProviderTransaction>, IEnumerable<Product>>(transactionProducts);
+
+                    _products.Save(transactionEntities);
 
                     //Mappings for User, Customer, Products(Dataproviders), Transaction
                     //Build up entity with each mapping
