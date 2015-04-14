@@ -25,14 +25,13 @@ namespace Workflow.Transactions.Read.Service.Handlers
 
         public void Handle(BillTransactionMessage message)
         {
-            var transactionId = Guid.NewGuid();
-            var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
+           var transaction = new InvoiceTransaction(Guid.NewGuid(), message.TransactionDate,
                 message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State,
                 message.Contract, message.Account);
 
             _repository.Add(transaction);
 
-           _bus.Send("DataPlatform.Transactions.Billing",new InvoiceTransactionCreated(transactionId));
+            _bus.Send("DataPlatform.Transactions.Billing", new InvoiceTransactionCreated(transaction.Id));
         }
 
     }
