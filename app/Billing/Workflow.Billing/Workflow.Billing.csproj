@@ -95,6 +95,7 @@
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\PreBillingMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\TransactionMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ProductMaps.cs" />

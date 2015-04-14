@@ -44,10 +44,14 @@ namespace Workflow.Billing.Consumers
                     var customerUsers = _users.Where(x => x.Id == transaction.UserId);
                     var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
 
+                    //Products for transaction
                     var transactionProducts = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.Action == "Response");
-                    var transactionEntities = Mapper.Map<IEnumerable<DataProviderTransaction>, IEnumerable<Product>>(transactionProducts);
+                    var productEntities = Mapper.Map<IEnumerable<DataProviderTransaction>, IEnumerable<Product>>(transactionProducts);
 
-                    _products.Save(transactionEntities);
+                    foreach (var productEntity in productEntities)
+                    {
+                        _products.Save(productEntity);
+                    }
 
                     //Mappings for User, Customer, Products(Dataproviders), Transaction
                     //Build up entity with each mapping
