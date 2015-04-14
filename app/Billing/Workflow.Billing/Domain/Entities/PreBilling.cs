@@ -6,7 +6,7 @@ namespace Workflow.Billing.Domain.Entities
 {
     public class PreBilling : Entity
     {
-        public virtual string CustomerName { get; set; }
+        public virtual string CustomerAccountId { get; set; }
         public virtual IEnumerable<UserMeta> Users { get; set; }
 
         public PreBilling()

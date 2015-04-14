@@ -40,6 +40,7 @@ namespace Workflow.Billing.Consumer
                 .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer(new Repository<Transaction>(container.Resolve<ISession>()),
                                                                                 new Repository<UserMeta>(container.Resolve<ISession>()),
                                                                                 new Repository<PreBilling>(container.Resolve<ISession>()),
+                                                                                new Repository<DataProviderTransaction>(container.Resolve<ISession>()),
                                                                                 message))
                 );
 

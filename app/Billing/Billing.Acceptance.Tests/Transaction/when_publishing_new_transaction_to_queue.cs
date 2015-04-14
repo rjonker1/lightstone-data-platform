@@ -22,9 +22,6 @@ namespace Billing.Acceptance.Tests.Transaction
             var bus = new TransactionBus(_bus);
 
             transaction = new InvoiceTransactionCreated(new Guid("BA754D23-E5A1-4DFA-A7D4-0E71A5724C5D"));
-
-            //var message = (IMessage<InvoiceTransactionCreated>) (transaction);
-
             bus.Send(transaction, "TESTEXCHANGE1", "TESTQUEUE1");
         }
 

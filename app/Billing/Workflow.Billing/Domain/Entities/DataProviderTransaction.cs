@@ -1,7 +1,7 @@
 ﻿using System;
-using Billing.Domain.Core.Entities;
+using Shared.Messaging.Billing.Helpers;
 
-namespace Billing.Domain.Entities
+namespace Workflow.Billing.Domain.Entities
 {
     public class DataProviderTransaction : Entity
     {
@@ -20,4 +20,5 @@ namespace Billing.Domain.Entities
 
         public DataProviderTransaction() { }
     }
+
 }

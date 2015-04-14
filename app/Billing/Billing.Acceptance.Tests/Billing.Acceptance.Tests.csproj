@@ -105,7 +105,8 @@
     </Compile>
     <Compile Include="Fixtures\RebuildBillingEnvironment.cs" />
     <Compile Include="Transaction\when_create_a_new_transaction.cs" />
-    <Compile Include="Transaction\when_publishing_new_transaction_to_bus.cs" />
+    <Compile Include="Transaction\when_publishing_new_customer_to_queue.cs" />
+    <Compile Include="Transaction\when_publishing_new_transaction_to_queue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -85,6 +85,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
+    <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />
     <Compile Include="Domain\Entities\Transaction.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
@@ -114,6 +115,14 @@
     <ProjectReference Include="..\Billing.Api\Billing.Api.csproj">
       <Project>{ED638DD5-E755-4B7A-940D-5C94AB425686}</Project>
       <Name>Billing.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Billing.Domain.Core\Billing.Domain.Core.csproj">
+      <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
+      <Name>Billing.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
+      <Project>{8888CF49-7DCF-4984-A710-D2660F2CDBED}</Project>
+      <Name>Billing.Domain.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
       <Project>{ea4e1ff1-8581-4680-aa28-126294163093}</Project>
