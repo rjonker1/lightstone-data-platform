@@ -32,7 +32,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
 
             _repository.Add(transaction);
 
-           _bus.Send("DataPlatform.Transactions.Billing",new BillingTransactionCreated(transactionId));
+           _bus.Send("DataPlatform.Transactions.Billing",new InvoiceTransactionCreated(transactionId));
         }
 
     }
