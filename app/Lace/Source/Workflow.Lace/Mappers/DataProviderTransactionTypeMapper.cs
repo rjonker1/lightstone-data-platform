@@ -63,7 +63,7 @@ namespace Workflow.Lace.Mappers
                     new RequestIdentifier(match.RequestId, null),
                     new DataProviderIdentifier(match.DataProvider, match.DataProviderName, match.CostPrice,
                         match.RecommendedPrice, (DataProviderAction) match.Action, (DataProviderState) match.State),
-                    new ConnectionTypeIdentifier(match.ConnectionType, match.Connection),
+                    new ConnectionTypeIdentifier(match.Connection,match.ConnectionType),
                     new ActionIdentifier(0, match.Name), new StateIdentifier(match.StateId, match.State)));
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -9,6 +10,8 @@ using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Configuration;
 using Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure.Management;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -52,16 +55,20 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
                     new {ContextMessage = "Signio Data Provider Decrypting Drivers License Configuration"},
                     Provider);
 
-                command.Workflow.DataProviderRequest(Provider,
-                    "API", _client.Url, DataProviderAction.Request, DataProviderState.Successful, _client.Operation,
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+
+                command.Workflow.DataProviderRequest(
+                   new DataProviderIdentifier(Provider, DataProviderAction.Request, DataProviderState.Successful)
+                       .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.SignioDecryptDriversLicense)),
+                   new ConnectionTypeIdentifier(_client.Operation)
+                       .ForWebApiType(), _client.Operation, _stopWatch);
 
                 _client.Run();
 
-                command.Workflow.DataProviderResponse(Provider,
-                    "API", _client.Url, DataProviderAction.Response,
-                    _client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed, _client.Resonse,
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderResponse(
+                   new DataProviderIdentifier(Provider, DataProviderAction.Request, _client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed)
+                       .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.SignioDecryptDriversLicense)),
+                   new ConnectionTypeIdentifier(_client.Operation)
+                       .ForWebApiType(),  _client.Resonse, _stopWatch);
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))
                     command.Workflow.Send(CommandType.Fault, _request,

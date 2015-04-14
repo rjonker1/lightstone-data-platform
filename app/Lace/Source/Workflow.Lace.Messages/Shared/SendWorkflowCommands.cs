@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -26,38 +25,33 @@ namespace Workflow.Lace.Messages.Shared
             _publisher = new WorkflowCommandPublisher(bus, _log);
         }
 
-        public void DataProviderRequest(DataProviderCommandSource dataProvider,
-            string connectionType,
-            string connection, DataProviderAction action, DataProviderState state, object payload,
-            DataProviderStopWatch stopWatch, decimal costPrice, decimal recommendedPrice)
+        public void DataProviderRequest(DataProviderIdentifier dataProvider,
+            ConnectionTypeIdentifier connection, object payload,
+            DataProviderStopWatch stopWatch)
         {
             new SendRequestToDataProviderCommand(Guid.NewGuid(), _requestId,
-                new DataProviderIdentifier((int) dataProvider, dataProvider.ToString(), costPrice, recommendedPrice,
-                    action, state),
-                DateTime.UtcNow,
-                new ConnectionTypeIdentifier(connectionType, connection),
+                dataProvider,
+                DateTime.UtcNow, connection,
                 new PayloadIdentifier(new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
-                    CommandDescriptions.StartExecutionDescription(dataProvider)))
+                    CommandDescriptions.StartExecutionDescription((DataProviderCommandSource) dataProvider.Id)))
                 .SendToBus(_publisher, _log);
             stopWatch.Start();
         }
 
 
-        public void DataProviderResponse(DataProviderCommandSource dataProvider, string connectionType,
-            string connection, DataProviderAction action, DataProviderState state, object payload,
-            DataProviderStopWatch stopWatch, decimal costPrice, decimal recommendedPrice)
+        public void DataProviderResponse(DataProviderIdentifier dataProvider,
+            ConnectionTypeIdentifier connection, object payload,
+            DataProviderStopWatch stopWatch)
         {
             stopWatch.Stop();
+
             new GetResponseFromDataProviderCommmand(Guid.NewGuid(), _requestId,
-                new DataProviderIdentifier((int) dataProvider, dataProvider.ToString(), costPrice, recommendedPrice,
-                    action, state),
-                DateTime.UtcNow,
-                new ConnectionTypeIdentifier(connectionType, connection),
-                new PayloadIdentifier(new MetadataContainer().ObjectToJson(), payload.ObjectToJson(),
-                    CommandDescriptions.StartExecutionDescription(dataProvider)))
-                .SendToBus(
-                    _publisher,
-                    _log);
+                dataProvider,
+                DateTime.UtcNow, connection,
+                new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
+                    payload.ObjectToJson(),
+                    CommandDescriptions.EndExecutionDescription((DataProviderCommandSource) dataProvider.Id)))
+                .SendToBus(_publisher, _log);
         }
 
         public void Begin(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
@@ -70,7 +64,7 @@ namespace Workflow.Lace.Messages.Shared
 
         public void End(object payload, DataProviderStopWatch stopWatch, DataProviderCommandSource dataProvider)
         {
-            new EndingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.StartCallDescription(dataProvider),
+            new EndingCallCommand(Guid.NewGuid(), _requestId, CommandDescriptions.EndExecutionDescription(dataProvider),
                 payload.ObjectToJson(), dataProvider, DateTime.UtcNow,
                 new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), Category.Performance).SendToBus(
                     _publisher, _log);

@@ -15,6 +15,8 @@ using Lace.Domain.DataProviders.Lightstone.Infrastructure.Factory;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Services;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -51,19 +53,23 @@ namespace Lace.Domain.DataProviders.Lightstone.Infrastructure
             {
                 GetVinFromResponse(response);
 
-                command.Workflow.DataProviderRequest(Provider,
-                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
-                    DataProviderState.Successful, new { _request }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
+                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.LightstoneAuto)),
+                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new {_request},
+                    _stopWatch);
 
                 GetCarInformation();
                 GetMetrics();
                 Dispose();
 
-                command.Workflow.DataProviderResponse(Provider,
-                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString,
-                    DataProviderAction.Response,
-                    response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new { response }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
+                    response != null && response.Any() ? DataProviderState.Successful : DataProviderState.Failed)
+                    .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders.Single(s => s.Name == DataProviderName.LightstoneAuto)),
+                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new { _carInformation, _metrics },
+                    _stopWatch);
 
                 TransformResponse(response, command);
             }

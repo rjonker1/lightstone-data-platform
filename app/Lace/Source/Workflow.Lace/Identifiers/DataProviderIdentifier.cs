@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Workflow.Lace.Identifiers
 {
@@ -39,6 +40,22 @@ namespace Workflow.Lace.Identifiers
             RecommendedPrice = recommendedPrice;
             Action = action;
             State = state;
+        }
+
+        public DataProviderIdentifier(DataProviderCommandSource dataProvider,
+            DataProviderAction action, DataProviderState state)
+        {
+            Id = (int) dataProvider;
+            Name = dataProvider.ToString();
+            Action = action;
+            State = state;
+        }
+
+        public DataProviderIdentifier SetPrice(IAmDataProvider dataProvider)
+        {
+            CostPrice = dataProvider == null ? 0 : dataProvider.CostPrice;
+            RecommendedPrice = dataProvider == null ? 0 : dataProvider.RecommendedPrice;
+            return this;
         }
     }
 }

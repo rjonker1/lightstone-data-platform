@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -13,6 +14,8 @@ using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Configuration
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Business.Infrastructure.Management;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 using DataSet = System.Data.DataSet;
@@ -51,7 +54,6 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                 // authenticate
                 // call authenticateUser to get the UserToke by email and password
 
-
                 var token = webService.Client.authenticateUser(_username, _password);
 
                 var request = new GetBusinessRequest(_request.GetFromRequest<IHaveBusiness>())
@@ -59,28 +61,29 @@ namespace Lace.Domain.DataProviders.Lightstone.Business.Infrastructure
                     .Validate();
 
                 command.Workflow.Send(CommandType.Configuration, request, null, Provider);
-
-
+                
                 if (!request.RequestIsValid)
                     throw new Exception(
                         string.Format(
                             "Minimum requirements for Lightstone Business request has not been met with user_token {0} ",
                             request.UserToken));
 
-                command.Workflow.DataProviderRequest(Provider,
-                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
-                    DataProviderState.Successful, new {request},
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
+                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.LightstoneBusiness)),
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {request},
+                    _stopWatch);
 
                 _result = webService.Client.returnCompanies(token.ToString(), request.CompanyName, request.CompanyRegnum,
                     request.CompanyVatnumber);
 
                 webService.CloseSource();
 
-                command.Workflow.DataProviderResponse(Provider,
-                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
-                    _result != null ? DataProviderState.Successful : DataProviderState.Failed, new {_result},
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
+                    _result != null ? DataProviderState.Successful : DataProviderState.Failed).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.LightstoneBusiness)),
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), new {_result},
+                    _stopWatch);
 
                 TransformResponse(response, command);
             }

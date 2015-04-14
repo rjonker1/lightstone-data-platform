@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.ServiceModel;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
@@ -12,6 +13,8 @@ using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Configuration
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Lightstone.Property.Infrastructure.Management;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -54,10 +57,12 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                             "Minimum requirements for Lightstone Property request has not been met with User id {0} and  Id or CK {1} and Max Rows to Return {2} and Tracking Number {3}",
                             request.UserId, request.IdCkOfOwner, request.MaxRowsToReturn, request.TrackingNumber));
 
-                command.Workflow.DataProviderRequest(Provider,
-                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
-                    DataProviderState.Successful, new {request},
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
+                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.LightstoneProperty)),
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(),
+                    new {request},
+                    _stopWatch);
 
                 _result = webService.Client.ReturnProperties(request.UserId, request.Province, request.Municipality,
                     request.DeedTown,
@@ -68,10 +73,13 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
 
                 webService.CloseSource();
 
-                command.Workflow.DataProviderResponse(Provider,
-                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
-                    _result != null ? DataProviderState.Successful : DataProviderState.Failed, new {_result},
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
+                     _result != null ? DataProviderState.Successful : DataProviderState.Failed)
+                    .SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.LightstoneProperty)),
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                        .ForWebApiType(), new {_result},
+                    _stopWatch);
 
                 TransformResponse(response, command);
             }

@@ -46,6 +46,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PackageBuilder.Domain.Entities.Enums">
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums.1.0.0.928\lib\net45\PackageBuilder.Domain.Entities.Enums.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -105,6 +108,10 @@
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

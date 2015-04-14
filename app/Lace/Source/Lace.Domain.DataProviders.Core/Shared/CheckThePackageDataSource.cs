@@ -22,7 +22,7 @@ namespace Lace.Domain.DataProviders.Core.Shared
         {
             if (package == null || package.DataProviders == null || !package.DataProviders.Any()) return false;
 
-            return package.DataProviders.Single(f => f.Name == dataProvider) != null;
+            return package.DataProviders.SingleOrDefault(f => f.Name == dataProvider) != null;
         }
     }
 }
