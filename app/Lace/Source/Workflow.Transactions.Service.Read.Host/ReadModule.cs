@@ -22,7 +22,7 @@ namespace Workflow.Transactions.Service.Read.Host
                             ConfigurationManager.ConnectionStrings["workflow/transactions/database/read"]
                                 .ConnectionString), new RepositoryMapper(new MappingForTypes())))
                 .As<IRepository>();
-            builder.Register(c => Bus.CreateSendOnly(new BusConfiguration())).As<ISendOnlyBus>();
+           // builder.Register(c => Bus.CreateSendOnly(new BusConfiguration())).As<ISendOnlyBus>();
         }
     }
 }

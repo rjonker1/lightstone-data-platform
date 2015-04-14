@@ -7,5 +7,6 @@ namespace Lace.Domain.Core.Requests.Contracts
         IHavePackageForRequest Package { get; }
         IHaveRequestContext Request { get; }
         IHaveContract Contract { get; }
+        IHaveUser User { get; }
     }
 }

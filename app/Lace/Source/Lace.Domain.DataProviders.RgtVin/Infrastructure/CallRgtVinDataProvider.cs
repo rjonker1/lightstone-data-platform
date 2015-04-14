@@ -14,6 +14,8 @@ using Lace.Domain.DataProviders.RgtVin.Infrastructure.Dto;
 using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Domain.DataProviders.RgtVin.UnitOfWork;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -50,19 +52,23 @@ namespace Lace.Domain.DataProviders.RgtVin.Infrastructure
 
                 command.Workflow.Send(CommandType.Configuration, new {VinNumber = vin}, null, Provider);
 
-                command.Workflow.DataProviderRequest(Provider,
-                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString, DataProviderAction.Request,
-                    DataProviderState.Successful, new { vin }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
+                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.RgtVin)),
+                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new { vin },
+                    _stopWatch);
 
                 var uow = new VehicleVinUnitOfWork(_repository.VinRepository());
                 uow.GetVin(vin);
                 _vins = uow.Vins != null ? uow.Vins.ToList() : new List<Vin>();
 
-                command.Workflow.DataProviderResponse(Provider,
-                    "Database", ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString,
-                    DataProviderAction.Response,
-                    _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed,
-                    new { _vins }, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
+                     _vins.Any() ? DataProviderState.Successful : DataProviderState.Failed).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.RgtVin)),
+                    new ConnectionTypeIdentifier(ConnectionFactory.ForAutoCarStatsDatabase().ConnectionString)
+                        .ForDatabaseType(), new { _vins },
+                    _stopWatch);
 
                 if (_vins == null || !_vins.Any())
                     command.Workflow.Send(CommandType.Fault, new {VinNumber = vin},

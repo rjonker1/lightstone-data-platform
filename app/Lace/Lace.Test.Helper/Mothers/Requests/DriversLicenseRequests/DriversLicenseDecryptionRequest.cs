@@ -1,5 +1,4 @@
 ﻿using System;
-using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Test.Helper.Builders.Scans;
 using Lace.Test.Helper.Mothers.Requests.Dto;
@@ -32,6 +31,11 @@ namespace Lace.Test.Helper.Mothers.Requests.DriversLicenseRequests
         public IHaveContract Contract
         {
             get { return new RequestContractInformation(); }
+        }
+
+        public IHaveUser User
+        {
+            get { return new RequestUserInformation();}
         }
     }
 }

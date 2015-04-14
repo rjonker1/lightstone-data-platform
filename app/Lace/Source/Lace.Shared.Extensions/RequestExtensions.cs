@@ -15,5 +15,10 @@ namespace Lace.Shared.Extensions
         {
             return request.OfType<T>().First();
         }
+
+        //public static T[] GetAllFromRequest<T>(this ICollection<IPointToLaceRequest> request)
+        //{
+        //  return request.OfType<T>().ToArray();
+        //}
     }
 }

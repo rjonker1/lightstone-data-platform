@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -11,6 +12,8 @@ using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
 using Lace.Domain.DataProviders.Core.Contracts;
 using Lace.Domain.DataProviders.Core.Shared;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -54,20 +57,21 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                             }
                     }, request, Provider);
 
-                command.Workflow.DataProviderRequest(Provider,
-                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
-                    DataProviderState.Successful, request,
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderRequest(new DataProviderIdentifier(Provider, DataProviderAction.Request,
+                    DataProviderState.Successful).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.Audatex)),
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), request,
+                    _stopWatch);
 
                 _response = webService
                     .Client
                     .GetDataEx(GetCredentials(), request.MessageType, request.Message, 0);
 
-                command.Workflow.DataProviderResponse(Provider,
-                    "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
-                    _response != null ? DataProviderState.Successful : DataProviderState.Failed,
-                    _response ?? new GetDataResult(),
-                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                command.Workflow.DataProviderResponse(new DataProviderIdentifier(Provider, DataProviderAction.Response,
+                    _response != null ? DataProviderState.Successful : DataProviderState.Failed).SetPrice(_request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                        .Single(s => s.Name == DataProviderName.Audatex)),
+                    new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString()).ForWebApiType(), _response,
+                    _stopWatch);
 
                 webService.Close();
 

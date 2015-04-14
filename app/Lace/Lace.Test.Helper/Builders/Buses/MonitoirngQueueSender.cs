@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using DataPlatform.Shared.Enums;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -60,7 +61,10 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender StartCall(object message, object metadata)
         {
-            _command.Workflow.DataProviderRequest(_dataProvider,"TEST","TEST",DataProviderAction.Request,DataProviderState.Successful,new { message}, _stopWatch,55,110);
+            _command.Workflow.DataProviderRequest(
+                new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), 55, 100,
+                    DataProviderAction.Request, DataProviderState.Successful),
+                new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
@@ -74,7 +78,10 @@ namespace Lace.Test.Helper.Builders.Buses
 
         public MonitoirngQueueSender EndCall(object message)
         {
-            _command.Workflow.DataProviderRequest(_dataProvider, "TEST", "TEST", DataProviderAction.Response, DataProviderState.Successful, new { message }, _stopWatch,0,0);
+            _command.Workflow.DataProviderRequest(
+                new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), 55, 100,
+                    DataProviderAction.Response, DataProviderState.Successful),
+                new ConnectionTypeIdentifier("TEST", "TEST"), new {message}, _stopWatch);
             Thread.Sleep(1000);
             return this;
         }
