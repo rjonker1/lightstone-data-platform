@@ -12,7 +12,7 @@ namespace UserManagement.Infrastructure.NHibernate
     {
        public override bool ShouldMap(Type type)
         {
-            return type.IsSubclassOf(typeof (Entity));
+            return type.IsSubclassOf(typeof(Entity)) || type.IsSubclassOf(typeof(IntEntity));
         }
 
         public AutoPersistenceModel GetAutoPersistenceModel()

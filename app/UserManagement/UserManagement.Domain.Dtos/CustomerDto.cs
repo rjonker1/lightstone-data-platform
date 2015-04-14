@@ -17,6 +17,7 @@ namespace UserManagement.Domain.Dtos
         [Required]
         [Display(Name = "Customer name is required")]
         public string Name { get; set; }
+        public string CustomerAccountNumber { get; set; }
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
         public string CommercialStateValue { get; set; }
