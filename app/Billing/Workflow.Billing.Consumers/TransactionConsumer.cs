@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Billing.Domain.Core.Repositories;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ.AutoSubscribe;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer : IConsume<TransactionMessage> //BillTransactionCreatedMessage
+    public class TransactionConsumer : IConsume<BillingTransactionCreated> //BillTransactionCreatedMessage
     {
         private readonly IRepository<Transaction> _transactions;
         private readonly IRepository<UserMeta> _users;
@@ -22,11 +23,11 @@ namespace Workflow.Billing.Consumers
             _preBillingRepository = preBillingRepository;
         }
 
-        public void Consume(TransactionMessage message)
+        public void Consume(BillingTransactionCreated message)
         {
             var test = message;
 
-            if (_transactions.Any(x => x.Id == message.Id))
+            if (_transactions.Any(x => x.Id == message.TransactionId))
             {
                 foreach (var transaction in _transactions)
                 {
