@@ -76,9 +76,9 @@
     <Reference Include="Lightstone.Dataplatform.Shared.BuildingBlocks.Api">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.1.0.0.704\lib\net45\Lightstone.Dataplatform.Shared.BuildingBlocks.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.885, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.924, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.885\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.924\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow, Version=1.0.0.885, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,6 +100,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
@@ -152,6 +155,10 @@
     <ProjectReference Include="..\Billing.Api\Billing.Api.csproj">
       <Project>{ed638dd5-e755-4b7a-940d-5c94ab425686}</Project>
       <Name>Billing.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Billing.Domain.Core\Billing.Domain.Core.csproj">
+      <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
+      <Name>Billing.Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Billing.TestHelper\Billing.TestHelper.csproj">
       <Project>{920b81a8-7088-4e8b-8170-228906cd127e}</Project>

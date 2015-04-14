@@ -8,6 +8,8 @@ namespace DataPlatform.Shared.Messaging.Billing.Messages
     [DataContract]
     public class InvoiceTransactionCreated : IEvent
     {
+        public InvoiceTransactionCreated() { }
+
         public InvoiceTransactionCreated(Guid transactionId)
         {
             TransactionId = transactionId;

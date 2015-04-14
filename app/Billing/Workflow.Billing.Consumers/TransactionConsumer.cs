@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Billing.Domain.Core.Repositories;
 using DataPlatform.Shared.Messaging.Billing.Messages;
+using DataPlatform.Shared.Repositories;
 using EasyNetQ.AutoSubscribe;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer : IConsume<BillingTransactionCreated> //BillTransactionCreatedMessage
+    public class TransactionConsumer : IConsume<InvoiceTransactionCreated>
     {
         private readonly IRepository<Transaction> _transactions;
         private readonly IRepository<UserMeta> _users;
@@ -23,7 +23,7 @@ namespace Workflow.Billing.Consumers
             _preBillingRepository = preBillingRepository;
         }
 
-        public void Consume(BillingTransactionCreated message)
+        public void Consume(InvoiceTransactionCreated message)
         {
             var test = message;
 

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Billing.Domain.Core.Repositories;
+﻿using AutoMapper;
+using DataPlatform.Shared.Repositories;
 using EasyNetQ.AutoSubscribe;
-using Shared.Messaging.Billing.Helpers;
 using Shared.Messaging.Billing.Messages;
-using Workflow.Billing.Domain.Dtos;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
