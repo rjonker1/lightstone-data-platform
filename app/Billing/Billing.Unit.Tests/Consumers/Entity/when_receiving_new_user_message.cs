@@ -2,10 +2,10 @@
 using AutoMapper;
 using Billing.Api.Helpers.AutoMapper.Maps;
 using Billing.Api.Installers;
-using Billing.Domain.Core.Repositories;
 using Billing.TestHelper;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using DataPlatform.Shared.Repositories;
 using Moq;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Consumers;
