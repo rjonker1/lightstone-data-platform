@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Shared.Messaging.Billing.Helpers;
 
@@ -10,7 +11,7 @@ namespace Workflow.Billing.Domain.Entities
         public virtual float CostPrice { get; set; }
         public virtual float RecommendedPrice { get; set; }
 
-        public virtual IEnumerable<Transaction> Transactions {get; set; } //Specify relationship with RequestId
+        public virtual Guid RequestId { get; set; }
 
         public Product() { }
     }

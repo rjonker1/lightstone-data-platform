@@ -8,7 +8,7 @@ namespace Workflow.Billing.Helpers.AutoMapper.MappingOverrides
     {
         public void Override(AutoMapping<Transaction> mapping)
         {
-            mapping.HasManyToMany(x => x.Products).Inverse().Cascade.SaveUpdate();
+            mapping.HasManyToMany(x => x.Products).Inverse().Cascade.SaveUpdate().ParentKeyColumn("RequestId");
         }
     }
 }
