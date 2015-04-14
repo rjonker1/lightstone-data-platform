@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
+using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
@@ -10,18 +10,13 @@ namespace Workflow.Lace.Messages.Events
     [DataContract]
     public class RequestToDataProvider : IPublishableMessage
     {
-        public RequestToDataProvider(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date, string connection, string connectionType, DataProviderState state, DataProviderAction action, string metaData, string payload, string message)
+        public RequestToDataProvider(Guid id, Guid requestId, DataProviderIdentifier dataProvider, DateTime date, ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
             DataProvider = dataProvider;
             Date = date;
             Connection = connection;
-            ConnectionType = connectionType;
-            State = state;
-            Action = action;
-            MetaData = metaData;
-            Message = message;
             Payload = payload;
         }
 
@@ -32,28 +27,15 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderIdentifier DataProvider { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
 
         [DataMember]
-        public string ConnectionType { get; private set; }
+        public ConnectionTypeIdentifier Connection { get; private set; }
 
         [DataMember]
-        public string Connection { get; private set; }
-
-        [DataMember]
-        public DataProviderState State { get; private set; }
-        [DataMember]
-        public DataProviderAction Action { get; private set; }
-        [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
     }
 }

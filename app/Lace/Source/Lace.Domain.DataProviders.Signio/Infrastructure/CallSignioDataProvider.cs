@@ -54,14 +54,14 @@ namespace Lace.Domain.DataProviders.Signio.DriversLicense.Infrastructure
 
                 command.Workflow.DataProviderRequest(Provider,
                     "API", _client.Url, DataProviderAction.Request, DataProviderState.Successful, _client.Operation,
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 _client.Run();
 
                 command.Workflow.DataProviderResponse(Provider,
                     "API", _client.Url, DataProviderAction.Response,
                     _client.IsSuccessful ? DataProviderState.Successful : DataProviderState.Failed, _client.Resonse,
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 if (string.IsNullOrWhiteSpace(_client.Resonse))
                     command.Workflow.Send(CommandType.Fault, _request,

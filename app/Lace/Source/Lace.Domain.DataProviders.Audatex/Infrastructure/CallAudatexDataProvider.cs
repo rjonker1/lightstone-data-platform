@@ -57,7 +57,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                 command.Workflow.DataProviderRequest(Provider,
                     "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
                     DataProviderState.Successful, request,
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 _response = webService
                     .Client
@@ -67,7 +67,7 @@ namespace Lace.Domain.DataProviders.Audatex.Infrastructure
                     "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
                     _response != null ? DataProviderState.Successful : DataProviderState.Failed,
                     _response ?? new GetDataResult(),
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 webService.Close();
 

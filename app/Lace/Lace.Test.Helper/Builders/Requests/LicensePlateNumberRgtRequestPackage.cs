@@ -9,7 +9,7 @@ namespace Lace.Test.Helper.Builders.Requests
     {
         public static IHavePackageForRequest LicenseNumberPackage()
         {
-            return new LicensePlateNumberPackage(new[] { DataProviderName.Rgt }, Guid.NewGuid());
+            return new LicensePlateNumberPackage(new IAmDataProvider[]  { new DataProvider(DataProviderName.Rgt,17,33) }, Guid.NewGuid());
         }
     }
 }

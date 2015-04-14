@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 
 namespace Workflow.Lace.Identifiers
 {
+    [Serializable]
+    [DataContract]
     public class DataProviderTransactionIdentifier
     {
         public DataProviderTransactionIdentifier()
@@ -24,13 +27,21 @@ namespace Workflow.Lace.Identifiers
             State = state;
         }
 
+        [DataMember]
         public Guid Id { get; private set; }
+        [DataMember]
         public Guid StreamId { get; private set; }
+        [DataMember]
         public DateTime Date { get; private set; }
+        [DataMember]
         public RequestIdentifier ParentRequest { get; private set; }
+        [DataMember]
         public DataProviderIdentifier DataProvider { get; private set; }
+        [DataMember]
         public ConnectionTypeIdentifier ConnectionType { get; private set; }
+        [DataMember]
         public ActionIdentifier Action { get; private set; }
+        [DataMember]
         public StateIdentifier State { get; private set; }
 
     }

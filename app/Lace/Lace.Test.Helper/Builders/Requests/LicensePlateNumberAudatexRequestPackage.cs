@@ -9,9 +9,9 @@ namespace Lace.Test.Helper.Builders.Requests
         public static IHavePackageForRequest LicenseNumberPackage()
         {
 
-            return new LicensePlateNumberPackage(new[] { DataProviderName.Audatex }, Guid.NewGuid());
+            return
+                new LicensePlateNumberPackage(
+                    new IAmDataProvider[] {new DataProvider(DataProviderName.Audatex, 16, 32.1M)}, Guid.NewGuid());
         }
     }
-
-    
 }

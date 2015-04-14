@@ -9,7 +9,10 @@ namespace Lace.Test.Helper.Builders.Scans
     {
         public static IHavePackageForRequest DriversLicenseDecryptionPackage()
         {
-            return new DriversLicensePackage(new[] {DataProviderName.SignioDecryptDriversLicense}, Guid.NewGuid());
+            return
+                new DriversLicensePackage(
+                    new IAmDataProvider[] {new DataProvider(DataProviderName.SignioDecryptDriversLicense, 10, 20)},
+                    Guid.NewGuid());
         }
     }
 }

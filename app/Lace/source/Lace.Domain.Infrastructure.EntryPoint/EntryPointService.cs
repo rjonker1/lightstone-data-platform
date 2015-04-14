@@ -43,7 +43,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 if (request.First().Request.RequestId == Guid.Empty)
                     throw new Exception("Request Id for Aggregation is required. Cannot complete request");
 
-                _command = CommandSender.InitCommandSender(_bus, request.First().Request.RequestId,Provider);
+                _command = CommandSender.InitCommandSender(_bus, request.First().Request.RequestId, Provider);
 
                 _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
                 _command.Workflow.Begin(request, _stopWatch, Provider);
@@ -79,7 +79,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 _workflow = new SendWorkflowCommands(_bus, request.First().Request.RequestId);
                 _workflow.DataProviderRequest(DataProviderCommandSource.EntryPoint, string.Empty,
                     string.Empty,
-                    DataProviderAction.Request, DataProviderState.Successful, request,_stopWatch);
+                    DataProviderAction.Request, DataProviderState.Successful, request, _stopWatch,
+                    request.GetFromRequest<IAmDataProvider>().CostPrice,
+                    request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _sourceChain);
                 _bootstrap.Execute();
@@ -88,7 +90,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                     string.Empty, DataProviderAction.Response,
                     _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
                         ? DataProviderState.Failed
-                        : DataProviderState.Successful, _bootstrap.DataProviderResponses ?? EmptyResponse,_stopWatch);
+                        : DataProviderState.Successful, _bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch,
+                    request.GetFromRequest<IAmDataProvider>().CostPrice,
+                    request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
                 _command.Workflow.End(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch, Provider);
 
 

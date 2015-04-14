@@ -47,13 +47,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.918\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.918, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.918\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.922\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.918, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.918\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.922\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
     </Reference>
     <Reference Include="NEventStore, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -62,6 +60,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
@@ -79,6 +78,10 @@
     <ProjectReference Include="..\Workflow.Lace.Messages\Workflow.Lace.Messages.csproj">
       <Project>{bdf29b6a-e38e-4d86-b386-2be6eb60e7e3}</Project>
       <Name>Workflow.Lace.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workflow.Lace\Workflow.Lace.csproj">
+      <Project>{758eee8f-b527-4446-b499-29cad8d63b2c}</Project>
+      <Name>Workflow.Lace</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

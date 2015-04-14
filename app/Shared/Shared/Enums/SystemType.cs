@@ -1,9 +1,12 @@
-﻿namespace DataPlatform.Shared.Enums
+﻿using System.Runtime.Serialization;
+
+namespace DataPlatform.Shared.Enums
 {
+    [DataContract]
     public enum SystemType
     {
-        Api,
-        Limm,
-        Web
+        [EnumMember] Api,
+        [EnumMember] Limm,
+        [EnumMember] Web
     }
 }

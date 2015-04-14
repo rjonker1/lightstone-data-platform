@@ -57,7 +57,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 command.Workflow.DataProviderRequest(Provider,
                     "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
                     DataProviderState.Successful, new {request},
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 _result = webService.Client.ReturnProperties(request.UserId, request.Province, request.Municipality,
                     request.DeedTown,
@@ -71,7 +71,7 @@ namespace Lace.Domain.DataProviders.Lightstone.Property.Infrastructure
                 command.Workflow.DataProviderResponse(Provider,
                     "API", webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
                     _result != null ? DataProviderState.Successful : DataProviderState.Failed, new {_result},
-                    _stopWatch);
+                    _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
 
                 TransformResponse(response, command);
             }

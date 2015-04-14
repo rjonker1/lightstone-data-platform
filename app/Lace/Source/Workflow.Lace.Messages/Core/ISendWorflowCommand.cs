@@ -8,11 +8,11 @@ namespace Workflow.Lace.Messages.Core
     {
         void DataProviderRequest(DataProviderCommandSource dataProvider, string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
-            DataProviderStopWatch stopWatch);
+            DataProviderStopWatch stopWatch, decimal costPrice, decimal recommendedPrice);
 
         void DataProviderResponse(DataProviderCommandSource dataProvider, string connectionType,
             string connection, DataProviderAction action, DataProviderState state, object payload,
-            DataProviderStopWatch stopWatch);
+            DataProviderStopWatch stopWatch, decimal costPrice, decimal recommendedPrice);
 
         void CreateTransaction(Guid packageId, long packageVersion, Guid userId, Guid requestId,
             Guid contractId, string system, long contractVersion, DataProviderState state, string accountNumber);

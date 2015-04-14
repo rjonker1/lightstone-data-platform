@@ -6,10 +6,10 @@ namespace Lace.Test.Helper.Mothers.Packages
 {
     public class LicensePlateNumberPackage : IHavePackageForRequest
     {
-        private readonly DataProviderName[] _dataProviders;
+        private readonly IAmDataProvider[] _dataProviders;
         private readonly Guid _packageId;
 
-        public LicensePlateNumberPackage(DataProviderName[] dataProviders, Guid packageId)
+        public LicensePlateNumberPackage(IAmDataProvider[] dataProviders, Guid packageId)
         {
             _dataProviders = dataProviders;
             _packageId = packageId;
@@ -28,7 +28,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return 1; }
         }
 
-        public DataProviderName[] DataProviders
+        public IAmDataProvider[] DataProviders
         {
             get { return _dataProviders; }
         }

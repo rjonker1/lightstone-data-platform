@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
 using Workflow.Billing.Repository;
 using Workflow.Lace.Domain;
@@ -22,7 +23,7 @@ namespace Workflow.Lace.Mappers
                 return new[]
                 {
                     "Id", "StreamId", "Date", "RequestId", "DataProvider", "DataProviderName", "ConnectionType",
-                    "Connection", "Action", "State", "StateId"
+                    "Connection", "Action", "State", "StateId", "CostPrice", "RecommendedPrice"
                 };
             }
         }
@@ -43,7 +44,9 @@ namespace Workflow.Lace.Mappers
                 Connection = request.Transaction.ConnectionType.Connection,
                 Action = request.Transaction.Action.Name,
                 State = request.Transaction.State.Name,
-                StateId = request.Transaction.State.Id
+                StateId = request.Transaction.State.Id,
+                CostPrice = request.Transaction.DataProvider.CostPrice,
+                RecommendedPrice = request.Transaction.DataProvider.RecommendedPrice
             };
 
             connection.Execute(sql, values);
@@ -58,7 +61,8 @@ namespace Workflow.Lace.Mappers
                 ? null
                 : new DataProviderTransaction(new DataProviderTransactionIdentifier(match.Id, match.StreamId, match.Date,
                     new RequestIdentifier(match.RequestId, null),
-                    new DataProviderIdentifier(match.DataProvider, match.DataProviderName),
+                    new DataProviderIdentifier(match.DataProvider, match.DataProviderName, match.CostPrice,
+                        match.RecommendedPrice, (DataProviderAction) match.Action, (DataProviderState) match.State),
                     new ConnectionTypeIdentifier(match.ConnectionType, match.Connection),
                     new ActionIdentifier(0, match.Name), new StateIdentifier(match.StateId, match.State)));
         }

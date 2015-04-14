@@ -1,5 +1,6 @@
 ﻿using System;
 using Lace.Domain.Core.Requests.Contracts;
+using Lace.Test.Helper.Mothers.Packages;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Builders.Property
@@ -28,9 +29,9 @@ namespace Lace.Test.Helper.Builders.Property
             get { return 1; }
         }
 
-        public DataProviderName[] DataProviders
+        public IAmDataProvider[] DataProviders
         {
-            get { return new DataProviderName[] {DataProviderName.LightstoneProperty}; }
+            get { return new IAmDataProvider[] {new DataProvider(DataProviderName.LightstoneProperty, 19, 38)}; }
         }
 
         public string Name

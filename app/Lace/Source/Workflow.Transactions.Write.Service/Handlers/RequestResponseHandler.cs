@@ -24,11 +24,11 @@ namespace Workflow.Transactions.Write.Service.Handlers
         public void Handle(SendRequestToDataProviderCommand message)
         {
             var @event = _repository.GetById<Request>(message.RequestId) ??
-                         Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date, message.Action,
-                             message.State, message.Connection, message.ConnectionType,message.MetaData,message.Payload,message.Message);
+                         Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date,
+                             message.Connection, message.Payload);
 
-            @event.RequestSentToDataProvider(message.Id, message.RequestId, message.DataProvider, message.Date,
-                message.ConnectionType, message.Connection, message.Action, message.State, message.MetaData, message.Payload, message.Message);
+            @event.RequestSentToDataProvider(message.RequestId, message.DataProvider, message.Date, message.Connection,
+                message.Payload);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }
@@ -36,10 +36,10 @@ namespace Workflow.Transactions.Write.Service.Handlers
         public void Handle(GetResponseFromDataProviderCommmand message)
         {
             var @event = _repository.GetById<Request>(message.RequestId) ??
-                        Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date, message.Action,
-                            message.State, message.Connection, message.ConnectionType, message.MetaData, message.Payload, message.Message);
-            @event.ResponseReceivedFromDataProvider(message.Id, message.RequestId, message.DataProvider, message.Date,
-                message.Connection, message.ConnectionType, message.Action, message.State, message.MetaData, message.Payload, message.Message);
+                         Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date,
+                             message.Connection, message.Payload);
+            @event.ResponseReceivedFromDataProvider(message.RequestId, message.DataProvider, message.Date,
+                message.Connection, message.Payload);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }
@@ -48,7 +48,8 @@ namespace Workflow.Transactions.Write.Service.Handlers
         {
             var @event = _repository.GetById<Request>(message.RequestId);
             @event.CreateTransaction(message.Id, message.PackageId, message.PackageVersion, message.Date, message.UserId,
-                message.RequestId, message.ContractId, message.System, message.ContractVersion, message.State, message.AccountNumber);
+                message.RequestId, message.ContractId, message.System, message.ContractVersion, message.State,
+                message.AccountNumber);
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }

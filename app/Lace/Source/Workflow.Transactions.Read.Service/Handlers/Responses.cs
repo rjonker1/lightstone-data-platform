@@ -14,7 +14,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
 
         public Response()
         {
-            
+
         }
 
         public Response(IRepository repository)
@@ -28,10 +28,9 @@ namespace Workflow.Transactions.Read.Service.Handlers
             var response =
                 new DataProviderTransaction(new DataProviderTransactionIdentifier(Guid.NewGuid(), message.Id,
                     message.Date, new RequestIdentifier(message.Id, null),
-                    new DataProviderIdentifier((int) message.DataProvider, message.DataProvider.ToString())
-                    , new ConnectionTypeIdentifier(message.ConnectionType, message.Connection),
-                    new ActionIdentifier((int) message.Action, message.Action.ToString()),
-                    new StateIdentifier((int) message.State, message.State.ToString())));
+                    message.DataProvider, message.Connection,
+                    new ActionIdentifier((int) message.DataProvider.Action, message.DataProvider.Action.ToString()),
+                    new StateIdentifier((int) message.DataProvider.State, message.DataProvider.State.ToString())));
             _repository.Add(response);
         }
     }

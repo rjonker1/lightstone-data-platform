@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,7 @@
     <Compile Include="Identifiers\DataProviderRequestIdentifier.cs" />
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
     <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
+    <Compile Include="Identifiers\PayloadIdentifier.cs" />
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
     <Compile Include="Mappers\MappingForTypes.cs" />
   </ItemGroup>

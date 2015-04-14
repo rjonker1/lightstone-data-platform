@@ -18,7 +18,9 @@ namespace Workflow.Lace.Database.Migrations
                 .WithColumn("Connection").AsString().NotNullable()
                 .WithColumn("Action").AsString().NotNullable()
                 .WithColumn("State").AsString().NotNullable()
-                .WithColumn("StateId").AsInt32().NotNullable();
+                .WithColumn("StateId").AsInt32().NotNullable()
+                .WithColumn("CostPrice").AsDecimal().NotNullable()
+                .WithColumn("RecommendedPrice").AsDecimal().NotNullable();
         }
 
         public override void Down()

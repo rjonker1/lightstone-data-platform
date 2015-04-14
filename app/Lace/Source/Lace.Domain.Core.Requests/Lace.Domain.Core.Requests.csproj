@@ -44,6 +44,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Contracts\IAmBusinessRequest.cs" />
+    <Compile Include="Contracts\IAmDataProvider.cs" />
     <Compile Include="Contracts\IAmDriversLicenseRequest.cs" />
     <Compile Include="Contracts\IAmJisRequest.cs" />
     <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
