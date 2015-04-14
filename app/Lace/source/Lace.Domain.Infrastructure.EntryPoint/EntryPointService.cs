@@ -44,26 +44,21 @@ namespace Lace.Domain.Infrastructure.EntryPoint
             {
                 RequestHasId(request.First().Request.RequestId == Guid.Empty);
 
-                _command = CommandSender.InitCommandSender(_bus, request.First().Request.RequestId, Provider);
-
-                _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
+                Init(request.First().Request.RequestId);
+                
                 _command.Workflow.Begin(request, _stopWatch, Provider);
-
-                _dataProviderChain = new CreateSourceChain(request.First().Package);
-                _dataProviderChain.Build();
 
                 if (ChainIsNotAvailable(request) || RequestIsDuplicated(request))
                     return EmptyResponse;
-
-                _workflow = new SendWorkflowCommands(_bus, request.First().Request.RequestId);
+                
                 LogRequest(request);
 
                 _bootstrap = new Initialize(new Collection<IPointToLaceProvider>(), request, _bus, _dataProviderChain);
                 _bootstrap.Execute();
 
-                 LogResponse(request);
+                LogResponse(request);
 
-                 CreateTransaction(request);
+                CreateTransaction(request, DataProviderState.Successful);
 
                 _command.Workflow.End(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch, Provider);
 
@@ -78,8 +73,16 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                     _stopWatch ?? new DataProviderStopWatch(DataProviderCommandSource.EntryPoint.ToString()), Provider);
                 _log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
+                CreateTransaction(request, DataProviderState.Failed);
                 return EmptyResponse;
             }
+        }
+
+        private void Init(Guid requestId)
+        {
+            _command = CommandSender.InitCommandSender(_bus, requestId, Provider);
+            _stopWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
+            _workflow = new SendWorkflowCommands(_bus, requestId);
         }
 
         private void LogRequest(ICollection<IPointToLaceRequest> request)
@@ -103,7 +106,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                    _stopWatch);
         }
 
-        private void CreateTransaction(ICollection<IPointToLaceRequest> request)
+        private void CreateTransaction(ICollection<IPointToLaceRequest> request,DataProviderState state)
         {
             _workflow.CreateTransaction(request.GetFromRequest<IPointToLaceRequest>().Package.Id,
                 request.GetFromRequest<IPointToLaceRequest>().Package.Version,
@@ -111,7 +114,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                 request.GetFromRequest<IPointToLaceRequest>().Request.RequestId,
                 request.GetFromRequest<IPointToLaceRequest>().Contract.ContractId,
                 request.GetFromRequest<IPointToLaceRequest>().Request.System.ToString(),
-                request.GetFromRequest<IPointToLaceRequest>().Contract.ContractVersion, DataProviderState.Successful,
+                request.GetFromRequest<IPointToLaceRequest>().Contract.ContractVersion, state,
                 request.GetFromRequest<IPointToLaceRequest>().Contract.AccountNumber);
         }
 
@@ -123,6 +126,9 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private bool ChainIsNotAvailable(ICollection<IPointToLaceRequest> request)
         {
+            _dataProviderChain = new CreateSourceChain(request.First().Package);
+            _dataProviderChain.Build();
+
             if (_dataProviderChain.SourceChain != null)
                 return false;
 
