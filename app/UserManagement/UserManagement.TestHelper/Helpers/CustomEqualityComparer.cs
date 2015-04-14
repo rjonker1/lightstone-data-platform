@@ -12,6 +12,8 @@ namespace UserManagement.TestHelper.Helpers
                 return false;
             if (x is Entity && y is Entity)
                 return ((Entity)x).Id == ((Entity)y).Id;
+            if (x is IntEntity && y is IntEntity)
+                return ((IntEntity)x).Id == ((IntEntity)y).Id;
             return x.Equals(y);
         }
 

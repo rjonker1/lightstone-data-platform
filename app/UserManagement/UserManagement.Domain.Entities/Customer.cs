@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UserManagement.Domain.Core.Entities;
 
 namespace UserManagement.Domain.Entities
@@ -7,6 +6,16 @@ namespace UserManagement.Domain.Entities
     public class Customer : NamedEntity
     {
         public virtual string AccountOwnerName { get; protected internal set; }
+
+        private CustomerAccountNumber _customerAccountNumber = new CustomerAccountNumber();
+        public virtual CustomerAccountNumber CustomerAccountNumber
+        {
+            get
+            {
+                return _customerAccountNumber ?? (_customerAccountNumber = new CustomerAccountNumber());
+            }
+        }
+
         public virtual Billing Billing { get; protected internal set; }
         public virtual CommercialState CommercialState { get; protected internal set; }
         public virtual PlatformStatus PlatformStatus { get; protected internal set; }

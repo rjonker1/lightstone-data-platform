@@ -28,13 +28,14 @@ namespace UserManagement.Domain.Entities.Tests
             var user = new User("FirstName", "LastName", "IdNumber", "ContactNumber", "UserName", "Password", false, userType, roles);
             new PersistenceSpecification<Customer>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.Name, "FirstName")
-                .CheckProperty(c => c.AccountOwnerName, "LastName")
+                .CheckProperty(c => c.Name, "Name")
+                .CheckProperty(c => c.CustomerAccountNumber, new CustomerAccountNumber())
+                .CheckProperty(c => c.AccountOwnerName, "AccountOwnerName")
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
                 .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus"))
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddress", physicalAddress, postalAddress))
-                .CheckComponentList(c => c.CreateSources, new HashSet<CreateSource> { new CreateSource("CreateSource1") })
+                .CheckComponentList(c => c.CreateSources, new HashSet<CreateSource> { new CreateSource("CreateSource") })
                 .CheckComponentList(c => c.Users, new HashSet<User>{ user })
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
                 .VerifyTheMappings(customer);

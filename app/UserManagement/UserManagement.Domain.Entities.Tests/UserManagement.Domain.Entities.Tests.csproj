@@ -89,6 +89,7 @@
     <Compile Include="when_persisting_contact_detail.cs" />
     <Compile Include="when_persisting_contract.cs" />
     <Compile Include="when_persisting_customer.cs" />
+    <Compile Include="when_persisting_customer_account_number.cs" />
     <Compile Include="when_persisting_package.cs" />
     <Compile Include="when_persisting_user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

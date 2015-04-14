@@ -109,6 +109,7 @@
     <Compile Include="Commands\Roles\ImportRole.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
     <Compile Include="ContractPackage.cs" />
+    <Compile Include="CustomerAccountNumber.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="NHibernate\Interceptors\NHInterceptor.cs" />

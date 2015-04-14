@@ -8,6 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<Customer> mapping)
         {
+            mapping.References(x => x.CustomerAccountNumber).Cascade.Persist();
             mapping.References(x => x.ContactDetail).Cascade.SaveUpdate();
             mapping.References(x => x.CommercialState).Cascade.SaveUpdate();
             mapping.References(x => x.PlatformStatus).Cascade.SaveUpdate();
