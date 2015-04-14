@@ -6,9 +6,9 @@ namespace DataPlatform.Shared.Messaging.Billing.Messages
 {
     [Serializable]
     [DataContract]
-    public class BillingTransactionCreated : IEvent
+    public class InvoiceTransactionCreated : IEvent
     {
-        public BillingTransactionCreated(Guid transactionId)
+        public InvoiceTransactionCreated(Guid transactionId)
         {
             TransactionId = transactionId;
         }
