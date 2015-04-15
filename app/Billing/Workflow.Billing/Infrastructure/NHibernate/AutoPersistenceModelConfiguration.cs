@@ -23,7 +23,8 @@ namespace Workflow.Billing.Infrastructure.NHibernate
                 //.AddEntityAssembly(typeof(Customer).Assembly)
                 .IgnoreBase<Entity>()
                 .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()
-                .UseOverridesFromAssemblyOf<PreBillingMappingOverride>()
+                //.UseOverridesFromAssemblyOf<PreBillingMappingOverride>()
+                .UseOverridesFromAssemblyOf<BillingMappingOverride>()
                 .OverrideAll(x => x.IgnoreProperties(member => member.MemberInfo.GetCustomAttributes(typeof(DoNotMapAttribute), false).Length > 0));
         }
     }

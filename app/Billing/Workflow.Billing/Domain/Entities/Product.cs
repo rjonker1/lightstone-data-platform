@@ -5,7 +5,7 @@ using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class Product : Entity
+    public class Product //: Entity
     {
         public virtual string DataProviderName { get; set; }
         public virtual float CostPrice { get; set; }

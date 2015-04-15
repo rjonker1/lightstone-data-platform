@@ -4,7 +4,7 @@ using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class Transaction : Entity
+    public class Transaction //: Entity
     {
         public virtual DateTime Date { get; protected internal set; }
         public virtual Guid PackageId { get; protected internal set; }

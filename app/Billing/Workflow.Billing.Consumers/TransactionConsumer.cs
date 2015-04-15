@@ -34,36 +34,36 @@ namespace Workflow.Billing.Consumers
 
         public void Consume(IMessage<InvoiceTransactionCreated> message)
         {
-            var transactionId = message.Body.TransactionId;
+            //var transactionId = message.Body.TransactionId;
 
-            if (_transactions.Any(x => x.Id == transactionId))
-            {
-                foreach (var transaction in _transactions)
-                {
-                    //Logic to build up Denomalized data structure for new transaction
-                    var customerUsers = _users.Where(x => x.Id == transaction.UserId);
-                    var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
+            //if (_transactions.Any(x => x.Id == transactionId))
+            //{
+            //    foreach (var transaction in _transactions)
+            //    {
+            //        //Logic to build up Denomalized data structure for new transaction
+            //        var customerUsers = _users.Where(x => x.Id == transaction.UserId);
+            //        var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
 
-                    //Products for transaction
-                    var transactionProducts = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.Action == "Response");
-                    var productEntities = Mapper.Map<IEnumerable<DataProviderTransaction>, IEnumerable<Product>>(transactionProducts);
+            //        //Products for transaction
+            //        var transactionProducts = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.Action == "Response");
+            //        var productEntities = Mapper.Map<IEnumerable<DataProviderTransaction>, IEnumerable<Product>>(transactionProducts);
 
-                    foreach (var productEntity in productEntities)
-                    {
-                        _products.Save(productEntity);
-                    }
+            //        foreach (var productEntity in productEntities)
+            //        {
+            //            _products.Save(productEntity);
+            //        }
 
-                    //Mappings for User, Customer, Products(Dataproviders), Transaction
-                    //Build up entity with each mapping
+            //        //Mappings for User, Customer, Products(Dataproviders), Transaction
+            //        //Build up entity with each mapping
                     
 
 
-                    preBillingEntity.CustomerAccountId = transaction.AccountNumber;
-                    _preBillingRepository.Save(preBillingEntity);
-                }
+            //        preBillingEntity.CustomerAccountId = transaction.AccountNumber;
+            //        _preBillingRepository.Save(preBillingEntity);
+            //    }
 
-                return;
-            }
+            //    return;
+            //}
         }
        
     }
