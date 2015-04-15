@@ -22,5 +22,29 @@ namespace Workflow.Lace.Identifiers
             Payload = payload;
             Message = message;
         }
+
+        //public PayloadIdentifier(string metaData, string payload)
+        //{
+        //    MetaData = metaData;
+        //    Payload = payload;
+        //}
+
+        //public PayloadIdentifier(string payload)
+        //{
+
+        //    Payload = payload;
+        //}
+
+        //public PayloadIdentifier SetMessage(string message)
+        //{
+        //    Message = message;
+        //    return this;
+        //}
+
+        //public PayloadIdentifier SetMetadata(string metaData)
+        //{
+        //    MetaData = metaData;
+        //    return this;
+        //}
     }
 }

@@ -2,7 +2,6 @@
 {
     public interface IPointToVehicleRequest : IPointToLaceRequest
     {
-        IHaveUser User { get; }
         IHaveVehicle Vehicle { get; }
     }
 }

@@ -12,10 +12,39 @@ namespace Workflow.Lace.Identifiers
         [DataMember]
         public string Connection { get; set; }
 
-        public ConnectionTypeIdentifier(string type, string source)
+        public ConnectionTypeIdentifier(string connection, string type)
         {
+            Connection = connection;
             Type = type;
-            Connection = source;
+        }
+
+        public ConnectionTypeIdentifier(string connection)
+        {
+            Connection = connection;
+        }
+
+        public ConnectionTypeIdentifier ForDatabaseType()
+        {
+            Type = "Database";
+            return this;
+        }
+
+        public ConnectionTypeIdentifier ForWebApiType()
+        {
+            Type = "Web Api";
+            return this;
+        }
+
+        public ConnectionTypeIdentifier ForFtpApiType()
+        {
+            Type = "Ftp Api";
+            return this;
+        }
+
+        public ConnectionTypeIdentifier ForFlatFileType()
+        {
+            Type = "Flat File";
+            return this;
         }
 
         public ConnectionTypeIdentifier()

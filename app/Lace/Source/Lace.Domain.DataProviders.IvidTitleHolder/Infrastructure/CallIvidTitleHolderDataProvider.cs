@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Common.Logging;
@@ -13,6 +14,8 @@ using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Dto;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.IvidTitleHolderServiceReference;
 using Lace.Shared.Extensions;
+using PackageBuilder.Domain.Entities.Enums.DataProviders;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 
@@ -53,9 +56,13 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
 
                     command.Workflow.Send(CommandType.Configuration, request, null, Provider);
 
-                    command.Workflow.DataProviderRequest(Provider, "API",
-                        webService.Client.Endpoint.Address.ToString(), DataProviderAction.Request,
-                        DataProviderState.Successful, _request, _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                    command.Workflow.DataProviderRequest(
+                        new DataProviderIdentifier(Provider, DataProviderAction.Request, DataProviderState.Successful)
+                            .SetPrice(
+                                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                                    .Single(s => s.Name == DataProviderName.IvidTitleHolder)),
+                        new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                            .ForWebApiType(), request, _stopWatch);
 
                     _response = webService
                         .Client
@@ -64,10 +71,14 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
                     webService
                         .CloseWebService();
 
-                    command.Workflow.DataProviderResponse(Provider, "API",
-                        webService.Client.Endpoint.Address.ToString(), DataProviderAction.Response,
-                        _response == null ? DataProviderState.Failed : DataProviderState.Successful,
-                        _response ?? new TitleholderQueryResponse(), _stopWatch, _request.GetFromRequest<IAmDataProvider>().CostPrice, _request.GetFromRequest<IAmDataProvider>().RecommendedPrice);
+                    command.Workflow.DataProviderResponse(
+                        new DataProviderIdentifier(Provider, DataProviderAction.Response,
+                            _response == null ? DataProviderState.Failed : DataProviderState.Successful)
+                            .SetPrice(
+                                _request.GetFromRequest<IPointToLaceRequest>().Package.DataProviders
+                                    .Single(s => s.Name == DataProviderName.IvidTitleHolder)),
+                        new ConnectionTypeIdentifier(webService.Client.Endpoint.Address.ToString())
+                            .ForWebApiType(), _response ?? new TitleholderQueryResponse(), _stopWatch);
 
                     if (_response == null)
                         command.Workflow.Send(CommandType.Fault, _request,
@@ -81,7 +92,7 @@ namespace Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure
             {
                 _log.ErrorFormat("Error calling Ivid Title Holder Data Provider {0}", ex.Message);
                 command.Workflow.Send(CommandType.Fault, ex.Message,
-                    new { ErrorMessage = "Error calling Ivid Title Holder Data Provider" }, Provider);
+                    new {ErrorMessage = "Error calling Ivid Title Holder Data Provider"}, Provider);
                 IvidTitleHolderResponseFailed(response);
             }
         }
