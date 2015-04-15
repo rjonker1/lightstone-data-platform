@@ -153,12 +153,6 @@
     <Compile Include="Infrastructure\Repository\SelectStatements.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Monitoring.Read.ReadModel\Monitoring.Read.ReadModel.csproj">
-      <Project>{dd57ebde-5cd4-4dda-b2f4-3b500cdf7713}</Project>
-      <Name>Monitoring.Read.ReadModel</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -57,10 +57,6 @@
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Monitoring.Queuing\Monitoring.Queuing.csproj">
-      <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>
-      <Name>Monitoring.Queuing</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
