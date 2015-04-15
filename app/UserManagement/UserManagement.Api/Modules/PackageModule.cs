@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Newtonsoft.Json;
 using Shared.BuildingBlocks.Api.ApiClients;
-using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
@@ -18,19 +18,49 @@ namespace UserManagement.Api.Modules
     {
         public Guid UserId { get; set; }
     }
+
+    [DataContract]
+    public class Test
+    {
+        [DataMember]
+        public IEnumerable<PackageDto> Data { get; set; }
+        [DataMember]
+        public int PageIndex { get; set; }
+        [DataMember]
+        public int PageSize { get; set; }
+        [DataMember]
+        public int PageTotal { get; set; }
+        [DataMember]
+        public int RecordsTotal { get; set; }
+        [DataMember]
+        public int RecordsFiltered { get; set; }
+        [DataMember]
+        public bool HasPreviousPage { get; set; }
+        [DataMember]
+        public bool HasNextPage { get; set; }
+    }
     public class PackageModule : NancyModule //: SecureModule
     {
         public PackageModule(IPackageBuilderApiClient packageBuilderApi, IRepository<User> users)
         {
-            Get["/Packages/{filter}"] = parameters =>
+            Get["/Packages"] = parameters =>
             {
+                var filter = Context.Request.Query["q_word[]"].Value.ToString();
+                var pageIndex = 0;
+                var pageSize = 0;
+                int.TryParse(Context.Request.Query["page_num"].Value, out pageIndex);
+                int.TryParse(Context.Request.Query["per_page"].Value, out pageSize);
+
                 var token = Context.Request.Headers.Authorization.Split(' ')[1];
-                var packagesJson = packageBuilderApi.Get("", "/Packages", new { parameters.filter }, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
-                var packages = JsonConvert.DeserializeObject<IEnumerable<PackageDto>>(packagesJson);
+                var resource = string.Format("/Packages/{0}/{1}/{2}", filter, pageIndex - 1, pageSize).ToString();
+                var packagesJson = packageBuilderApi.Get("", (string)resource);
+               // var packages = packageBuilderApi.Get<Test>("", string.Format("/Packages/{0}/{1}/{2}", filter, pageIndex, pageSize), null, new[] { new KeyValuePair<string, string>("Authorization", "Token " + token) });
+                var packages = JsonConvert.DeserializeObject<Test>(packagesJson);
+                //var result = packages.Select(x => new { id = x.Id, name = x.Name });
                 //var dto = Mapper.Map<IEnumerable<PackageBuilder.Domain.Entities.Packages.ReadModels.Package>, IEnumerable<PackageDto>>(packages);
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), packages);
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new {result = packages.Data, cnt_whole = packages.RecordsFiltered});
             };
 
             Post["/Packages/GetPackage"] = parameters =>

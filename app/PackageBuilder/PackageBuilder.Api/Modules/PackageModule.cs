@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
@@ -8,6 +9,7 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
 using Nancy.Json;
 using Nancy.ModelBinding;
+using PackageBuilder.Core.Helpers;
 using PackageBuilder.Core.NEventStore;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.CommandHandlers;
@@ -40,14 +42,24 @@ namespace PackageBuilder.Api.Modules
             Get["/Packages"] = parameters =>
                 Response.AsJson(readRepo.Where(x => !x.IsDeleted));
 
-            Get["/Packages/{filter}"] = parameters =>
+            Get["/Packages/{filter?}/{pageIndex:int}/{pageSize:int}"] = parameters =>
             {
                 string filter = (parameters.filter + "").Trim().ToLower();
-
-                return Response.AsJson(readRepo.Where(x => !x.IsDeleted && (x.Name + "").Trim().ToLower().StartsWith(filter)));
+                Expression<Func<Domain.Entities.Packages.Read.Package, bool>> predicate = x => !x.IsDeleted && (x.Name + "").Trim().ToLower().StartsWith(filter);
+                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(readRepo, parameters.pageIndex, parameters.pageSize, predicate);
+                return Response.AsJson(
+                        new
+                        {
+                            data = packages,
+                            pageIndex = packages.PageIndex,
+                            pageSize = packages.PageSize,
+                            pageTotal = packages.PageTotal,
+                            recordsTotal = packages.RecordsTotal,
+                            recordsFiltered = packages.RecordsFiltered
+                        });
             };
 
-            Get["/Packages/{id}/{version}"] = parameters =>
+            Get["/Packages/{id:guid}/{version:int}"] = parameters =>
                 Response.AsJson(
                     new
                     {

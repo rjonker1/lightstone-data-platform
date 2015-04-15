@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 
-namespace UserManagement.Domain.Core.Helpers
+namespace PackageBuilder.Core.Helpers
 {
     public interface IPagedList<T> : IEnumerable<T>
     {

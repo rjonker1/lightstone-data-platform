@@ -71,6 +71,7 @@
     <Compile Include="Events\DomainEvent.cs" />
     <Compile Include="Helpers\Extensions\TypeExtensions.cs" />
     <Compile Include="Helpers\Extensions\TypeRules.cs" />
+    <Compile Include="Helpers\PagedList.cs" />
     <Compile Include="MessageHandling\AbstractMessageHandler.cs" />
     <Compile Include="MessageHandling\MessageHandlerResolver.cs" />
     <Compile Include="NEventStore\AggregateFactory.cs" />
