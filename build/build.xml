@@ -134,8 +134,6 @@
         <includes>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.dll" to="lib\net45"/>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.pdb" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
         <dependency id="Lightstone.DataPlatform.Shared" />
