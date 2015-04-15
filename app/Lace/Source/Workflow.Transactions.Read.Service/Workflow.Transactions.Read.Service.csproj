@@ -52,12 +52,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.923\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
-      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.930\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.930, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.932, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.930\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.932, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.923, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
