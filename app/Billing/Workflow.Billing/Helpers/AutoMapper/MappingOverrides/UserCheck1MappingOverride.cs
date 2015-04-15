@@ -6,11 +6,16 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.MappingOverrides
 {
-    //public class UserMappingOverride : IAutoMappingOverride<User>
+    //public class UserCheck1MappingOverride : IAutoMappingOverride<UserCheck1>, ISubclassConvention
     //{
-    //    public void Override(AutoMapping<User> mapping)
+    //    public void Override(AutoMapping<UserCheck1> mapping)
     //    {
     //        //mapping.Map(x => x);
+    //    }
+
+    //    public void Apply(ISubclassInstance instance)
+    //    {
+    //        instance.DiscriminatorValue("UserCheck");
     //    }
     //}
 }

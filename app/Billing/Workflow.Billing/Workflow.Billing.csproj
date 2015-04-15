@@ -91,9 +91,12 @@
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
     <Compile Include="Domain\Entities\Billing.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
+    <Compile Include="Domain\Entities\MockProduct.cs" />
+    <Compile Include="Domain\Entities\MockTransaction.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />
     <Compile Include="Domain\Entities\Product.cs" />
     <Compile Include="Domain\Entities\Transaction.cs" />
+    <Compile Include="Domain\Entities\UserCheck1.cs" />
     <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\InvoiceTransaction.cs" />
@@ -101,8 +104,10 @@
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\PreBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\TransactionMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\UserCheck1MappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />

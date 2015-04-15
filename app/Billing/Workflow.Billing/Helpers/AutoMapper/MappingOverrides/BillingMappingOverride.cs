@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
+using FluentNHibernate.Mapping;
 
 namespace Workflow.Billing.Helpers.AutoMapper.MappingOverrides
 {
@@ -7,7 +8,7 @@ namespace Workflow.Billing.Helpers.AutoMapper.MappingOverrides
     {
         public void Override(AutoMapping<Domain.Entities.Billing> mapping)
         {
-            mapping.DiscriminateSubClassesOnColumn("UserType");
+            mapping.DiscriminateSubClassesOnColumn("Type"); //, @"null").SqlType("VARCHAR").Not.Nullable().Length(128);
         }
     }
 }

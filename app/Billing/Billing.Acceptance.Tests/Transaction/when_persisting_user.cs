@@ -18,6 +18,12 @@ namespace Billing.Acceptance.Tests.Transaction
                 .CheckProperty(c => c.LastName, "LastName")
                 .CheckProperty(c => c.Customer, "Customer1")
                 .VerifyTheMappings();
+
+            new PersistenceSpecification<UserCheck1>(Session)
+                .CheckProperty(c => c.Id, Guid.NewGuid())
+                .CheckProperty(c => c.Tester, "Test")
+                .CheckProperty(c => c.Customer, "Customer 2")
+                .VerifyTheMappings();
         }
     }
 }

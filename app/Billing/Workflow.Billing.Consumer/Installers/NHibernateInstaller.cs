@@ -8,6 +8,7 @@ using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using Workflow.Billing.Helpers.AutoMapper.MappingOverrides;
 using Workflow.Billing.Infrastructure.NHibernate;
 
 namespace Workflow.Billing.Consumer.Installers
@@ -23,6 +24,7 @@ namespace Workflow.Billing.Consumer.Installers
                 var buildConfiguration = Fluently.Configure(new Configuration().Configure())
                     .Mappings(
                         cfg => cfg.AutoMappings.Add(new AutoPersistenceModelConfiguration().GetAutoPersistenceModel()))
+                    //.Mappings(m => m.FluentMappings.AddFromAssemblyOf<BillingMappingOverride>())
                     .ExposeConfiguration(ExportSchemaConfig)
                     .BuildConfiguration();
                 return buildConfiguration;
