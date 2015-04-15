@@ -11,18 +11,19 @@ namespace Billing.Acceptance.Tests.Transaction
         [Observation]
         public void should_persist()
         {
-            new PersistenceSpecification<User>(Session)
-                .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.Username, "Username")
-                .CheckProperty(c => c.FirstName, "FirstName")
-                .CheckProperty(c => c.LastName, "LastName")
-                .CheckProperty(c => c.Customer, "Customer1")
-                .VerifyTheMappings();
+            //new PersistenceSpecification<User>(Session)
+            //    .CheckProperty(c => c.Id, Guid.NewGuid())
+            //    .CheckProperty(c => c.Username, "Username")
+            //    .CheckProperty(c => c.FirstName, "FirstName")
+            //    .CheckProperty(c => c.LastName, "LastName")
+            //    .CheckProperty(c => c.Customer, "Customer1")
+            //    .VerifyTheMappings();
 
             new PersistenceSpecification<UserCheck1>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Tester, "Test")
-                .CheckProperty(c => c.Customer, "Customer 2")
+                .CheckProperty(c => c.CustomerId, Guid.NewGuid())
+                .CheckProperty(c => c.CustomerName, "Customer 2")
                 .VerifyTheMappings();
         }
     }

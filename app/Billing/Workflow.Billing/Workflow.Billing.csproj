@@ -91,6 +91,7 @@
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
     <Compile Include="Domain\Entities\Billing.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
+    <Compile Include="Domain\Entities\MockPreBilling.cs" />
     <Compile Include="Domain\Entities\MockProduct.cs" />
     <Compile Include="Domain\Entities\MockTransaction.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />

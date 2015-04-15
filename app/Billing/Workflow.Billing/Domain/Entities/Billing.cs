@@ -1,11 +1,14 @@
-﻿using Shared.Messaging.Billing.Helpers;
+﻿using System;
+using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
     public class Billing : Entity
     {
-        public virtual string Customer { get; set; }
-        public virtual string Client { get; set; }
+        public virtual Guid CustomerId { get; set; }
+        public virtual string CustomerName { get; set; }
+        public virtual Guid ClientId { get; set; }
+        public virtual string ClientName { get; set; }
 
         public Billing()
         {
