@@ -1,12 +1,4 @@
-﻿using System;
-using Billing.TestHelper.Mothers.BillTransactionMessages;
-using Moq;
-using Workflow.Billing.Consumers;
-using Workflow.Billing.Domain;
-using Workflow.Billing.Messages;
-using Workflow.Billing.Repository;
-using Xunit.Extensions;
-
+﻿
 namespace Billing.Api.Tests.Consumers.Billing
 {
     //public class when_receiving_a_bill_transaction_message_and_no_exiting_transaction_exists : Specification

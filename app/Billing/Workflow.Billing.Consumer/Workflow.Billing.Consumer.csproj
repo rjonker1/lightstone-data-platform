@@ -120,7 +120,7 @@
     <Compile Include="Installers\AutoMapperInstaller.cs" />
     <Compile Include="Installers\BusInstaller.cs" />
     <Compile Include="Installers\ConsumerInstaller.cs" />
-    <Compile Include="Installers\MappingInstaller.cs" />
+    <None Include="Installers\MappingInstaller.cs.delete" />
     <Compile Include="Installers\NHibernateInstaller.cs" />
     <Compile Include="Installers\RepositoryInstaller.cs" />
     <Compile Include="Installers\WindsorInstaller.cs" />

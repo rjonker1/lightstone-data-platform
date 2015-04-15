@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 
-namespace Workflow.Billing.Domain
+namespace Workflow.Billing.Messages
 {
     [Serializable]
     [DataContract]

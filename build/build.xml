@@ -117,12 +117,12 @@
         <includes>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
         <dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
       </dependencies>
     </nuget>
 
@@ -260,7 +260,21 @@
 		<!-- LACE END -->
 
 
-		<!-- MONITORING START
+		<!-- MONITORING START -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Monitoring.Domain</name>
+      <folder>app/Monitoring/source/Monitoring.Domain</folder>
+      <author>CustomApp</author>
+      <description>Building blocks for ADO Net Connections</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Domain.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Domain.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
+      </dependencies>
+    </nuget>
+    <!--
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Monitoring</name>
       <folder>app/Monitoring/Monitoring</folder>
@@ -380,7 +394,7 @@
       <description>Building blocks for ADO Net Connections</description>
       <includes>
         <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.pdb" to="lib\net45"/>
       </includes>
     </nuget>
 

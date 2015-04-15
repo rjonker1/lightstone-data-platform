@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
-using Workflow.Billing.Domain;
+using Shared.BuildingBlocks.AdoNet.Mapping;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
-namespace Workflow.Billing.Repository
+namespace Workflow.Billing.Messages.Mapping
 {
     public class TransactionTypeMapper : TypeMapper
     {

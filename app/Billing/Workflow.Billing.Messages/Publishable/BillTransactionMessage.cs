@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using DataPlatform.Shared.Identifiers;
 using DataPlatform.Shared.Messaging;
 
-namespace Workflow.Billing.Messages
+namespace Workflow.Billing.Messages.Publishable
 {
     [Serializable]
     [DataContract]

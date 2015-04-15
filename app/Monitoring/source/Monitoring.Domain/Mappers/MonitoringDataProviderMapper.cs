@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Monitoring.Domain.Identifiers;
-using Workflow.Billing.Repository;
+using Shared.BuildingBlocks.AdoNet.Mapping;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Domain.Mappers
 {

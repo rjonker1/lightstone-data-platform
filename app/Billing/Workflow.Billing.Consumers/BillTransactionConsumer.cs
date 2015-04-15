@@ -1,8 +1,4 @@
-﻿using Common.Logging;
-using EasyNetQ.AutoSubscribe;
-using Workflow.Billing.Domain;
-using Workflow.Billing.Messages;
-using Workflow.Billing.Repository;
+﻿
 
 namespace Workflow.Billing.Consumers
 {
