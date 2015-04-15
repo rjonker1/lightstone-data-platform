@@ -57,9 +57,9 @@
     <Reference Include="Common.Logging.Log4Net">
       <HintPath>..\..\packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ, Version=0.35.6.302, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\EasyNetQ.0.35.6.302\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
@@ -67,21 +67,20 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.931, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.932, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.931\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.926, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks, Version=1.0.0.931, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.931\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.931, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.932, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.931\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks, Version=1.0.0.931, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.931\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Workflow.BuildingBlocks">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Workflow.BuildingBlocks.1.0.0.932\lib\net45\Lightstone.DataPlatform.Workflow.BuildingBlocks.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -96,9 +95,9 @@
     <Reference Include="NHibernate.Caches.SysCache">
       <HintPath>..\..\packages\NHibernate.Caches.SysCache.4.0.0.4000\lib\net40\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=3.3.2.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RabbitMQ.Client.3.3.2\lib\net30\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
