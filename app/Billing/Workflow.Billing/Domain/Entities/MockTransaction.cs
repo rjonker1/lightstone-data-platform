@@ -1,16 +1,11 @@
 ﻿using System;
-using FluentNHibernate.Conventions;
-using FluentNHibernate.Conventions.Instances;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    //public class MockTransaction : Billing, ISubclassConvention
-    //{
-    //    public virtual DateTime TransactionDate { get; protected internal set; }
-
-    //    public virtual void Apply(ISubclassInstance instance)
-    //    {
-    //        instance.DiscriminatorValue("Pre Transaction");
-    //    }
-    //}
+    public class MockTransaction : MockProduct
+    {
+        public virtual Guid TransactionId { get; protected internal set; }
+    }
 }

@@ -18,6 +18,9 @@ namespace Billing.Acceptance.Tests.Transaction
                 .CheckProperty(c => c.CustomerName, "CustomerName")
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
                 .CheckProperty(c => c.Username, "Username")
+                .CheckProperty(c => c.TransactionId, Guid.NewGuid())
+                .CheckProperty(c => c.ProductId, Guid.NewGuid())
+                .CheckProperty(c => c.ProductName, "Customer Product")
                 .VerifyTheMappings();
 
             new PersistenceSpecification<MockPreBilling>(Session)
@@ -27,6 +30,9 @@ namespace Billing.Acceptance.Tests.Transaction
                 .CheckProperty(c => c.ClientName, "ClientName")
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
                 .CheckProperty(c => c.Username, "Username")
+                .CheckProperty(c => c.TransactionId, Guid.NewGuid())
+                .CheckProperty(c => c.ProductId, Guid.NewGuid())
+                .CheckProperty(c => c.ProductName, "Client Product")
                 .VerifyTheMappings();
         }
     }

@@ -106,6 +106,7 @@
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionOverrideMapping.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\PreBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\TransactionMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserCheck1MappingOverride.cs" />

@@ -123,6 +123,7 @@
     <Compile Include="Transaction\when_create_a_new_transaction.cs" />
     <Compile Include="Transaction\when_persisting_billing_transaction.cs" />
     <Compile Include="Transaction\when_persisting_product.cs" />
+    <Compile Include="Transaction\when_persisting_transaction_with_products.cs" />
     <Compile Include="Transaction\when_persisting_user.cs" />
     <Compile Include="Transaction\when_publishing_new_customer_to_queue.cs" />
     <Compile Include="Transaction\when_publishing_new_transaction_to_queue.cs" />

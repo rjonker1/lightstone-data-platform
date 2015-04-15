@@ -1,10 +1,12 @@
-﻿using FluentNHibernate.Conventions;
+﻿using System;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    //public class MockProduct : MockTransaction
-    //{
-    //    public virtual string ProductName { get; set; }
-    //}
+    public class MockProduct : Billing
+    {
+        public virtual Guid ProductId { get; set; }
+        public virtual string ProductName { get; set; }
+    }
 }
