@@ -6,7 +6,7 @@ using Xunit.Extensions;
 
 namespace Billing.Acceptance.Tests.Transaction
 {
-    public class when_create_new_user : when_persisting_entities_to_db
+    public class when_persisting_user : when_persisting_entities_to_db
     {
         [Observation]
         public void should_persist()
