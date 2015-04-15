@@ -91,11 +91,10 @@
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
     <Compile Include="Domain\Entities\BillingTransaction.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
-    <Compile Include="Domain\Entities\MockPreBilling.cs" />
-    <Compile Include="Domain\Entities\MockProduct.cs" />
     <Compile Include="Domain\Entities\MockTransaction.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />
     <Compile Include="Domain\Entities\Product.cs" />
+    <Compile Include="Domain\Entities\StageBilling.cs" />
     <Compile Include="Domain\Entities\Transaction.cs" />
     <Compile Include="Domain\Entities\UserCheck1.cs" />
     <Compile Include="Domain\Entities\User.cs" />

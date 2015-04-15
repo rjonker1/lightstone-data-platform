@@ -1,11 +1,11 @@
 ﻿namespace Workflow.Billing.Domain.Entities
 {
-    public class MockPreBilling : User
+    public class StageBilling : User
     {
         public virtual int BillingId { get; set; }
 
-        public MockPreBilling()
+        public StageBilling()
         {
-        }
+        } 
     }
 }

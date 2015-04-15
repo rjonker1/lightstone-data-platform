@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class MockTransaction : MockProduct
+    public class MockTransaction : Product
     {
         public virtual Guid TransactionId { get; protected internal set; }
     }
