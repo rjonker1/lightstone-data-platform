@@ -3,10 +3,10 @@ using System.Configuration;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using NServiceBus;
+using Shared.BuildingBlocks.AdoNet.Repository;
 using Shared.Messaging.Billing.Helpers;
-using Workflow.Billing.Domain;
 using Workflow.Billing.Messages;
-using Workflow.Billing.Repository;
+using Workflow.Billing.Messages.Publishable;
 using Workflow.BuildingBlocks;
 
 namespace Workflow.Transactions.Read.Service.Handlers

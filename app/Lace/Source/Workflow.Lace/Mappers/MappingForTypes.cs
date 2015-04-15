@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Workflow.Billing.Domain;
-using Workflow.Billing.Repository;
+using Shared.BuildingBlocks.AdoNet.Mapping;
+using Workflow.Billing.Messages;
+using Workflow.Billing.Messages.Mapping;
 using Workflow.Lace.Domain;
 
 namespace Workflow.Lace.Mappers

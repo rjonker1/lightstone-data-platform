@@ -1,8 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using Autofac;
-using NServiceBus;
-using Workflow.Billing.Repository;
+using Shared.BuildingBlocks.AdoNet.Repository;
 using Workflow.Lace.Mappers;
 using Workflow.Transactions.Shared.Queuing;
 using Workflow.Transactions.Shared.RabbitMq;

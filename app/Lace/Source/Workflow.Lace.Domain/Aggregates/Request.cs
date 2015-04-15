@@ -4,7 +4,7 @@ using CommonDomain;
 using CommonDomain.Core;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
-using Workflow.Billing.Messages;
+using Workflow.Billing.Messages.Publishable;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;

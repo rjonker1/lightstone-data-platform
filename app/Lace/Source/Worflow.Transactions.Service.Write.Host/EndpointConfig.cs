@@ -20,7 +20,7 @@ namespace Worflow.Transactions.Service.Write.Host
                 .DefiningEventsAs(
                     c =>
                         c.Namespace != null &&
-                        (c.Namespace.EndsWith("Messages.Events") || c.Namespace.Equals("Workflow.Billing.Messages")));
+                        (c.Namespace.EndsWith("Messages.Events") || c.Namespace.Equals("Workflow.Billing.Messages.Publishable")));
 
 
             var builder = new ContainerBuilder();

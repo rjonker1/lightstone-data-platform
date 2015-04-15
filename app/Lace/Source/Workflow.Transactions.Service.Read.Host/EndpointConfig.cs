@@ -15,7 +15,7 @@ namespace Workflow.Transactions.Service.Read.Host
             configuration.UseTransport<RabbitMQTransport>();
             configuration.EndpointName("DataPlatform.Transactions.Host.Read");
             configuration.Conventions()
-                .DefiningEventsAs(c => c.Namespace != null && (c.Namespace.EndsWith("Messages.Events") || c.Namespace.Equals("Workflow.Billing.Messages")));
+                .DefiningEventsAs(c => c.Namespace != null && (c.Namespace.EndsWith("Messages.Events") || c.Namespace.Equals("Workflow.Billing.Messages.Publishable")));
                 
 
             var builder = new ContainerBuilder();
