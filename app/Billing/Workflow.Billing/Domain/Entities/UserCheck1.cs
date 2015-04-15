@@ -5,7 +5,7 @@ using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class UserCheck1 : Billing//, ISubclassConvention
+    public class UserCheck1 : BillingTransaction//, ISubclassConvention
     {
         public virtual string Tester { get; set; }
 

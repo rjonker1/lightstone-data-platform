@@ -17,10 +17,6 @@ namespace Billing.Acceptance.Tests.Transaction
         [Observation]
         public void should_persist()
         {
-
-            var products = new ArrayList();
-            products.Add(new MockProduct() {ProductName = "Test"});
-
             new PersistenceSpecification<MockTransaction>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())

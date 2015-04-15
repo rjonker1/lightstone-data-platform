@@ -89,7 +89,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
-    <Compile Include="Domain\Entities\Billing.cs" />
+    <Compile Include="Domain\Entities\BillingTransaction.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
     <Compile Include="Domain\Entities\MockPreBilling.cs" />
     <Compile Include="Domain\Entities\MockProduct.cs" />

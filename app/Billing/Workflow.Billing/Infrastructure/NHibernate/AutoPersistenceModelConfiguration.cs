@@ -24,7 +24,7 @@ namespace Workflow.Billing.Infrastructure.NHibernate
         public override bool IsDiscriminated(Type type)
         {
             //return true;
-            if (type.IsSubclassOf(typeof(Domain.Entities.Billing)))
+            if (type.IsSubclassOf(typeof(Domain.Entities.BillingTransaction)))
             {
                 return true;
             }
