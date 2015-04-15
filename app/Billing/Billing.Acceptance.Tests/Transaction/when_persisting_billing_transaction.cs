@@ -22,7 +22,7 @@ namespace Billing.Acceptance.Tests.Transaction
 
             new PersistenceSpecification<MockPreBilling>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
-                .CheckProperty(c => c.BillingId, 101)
+                .CheckProperty(c => c.BillingId, 102)
                 .CheckProperty(c => c.ClientId, Guid.NewGuid())
                 .CheckProperty(c => c.ClientName, "ClientName")
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
