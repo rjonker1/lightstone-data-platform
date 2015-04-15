@@ -1,11 +1,5 @@
 ﻿using System;
-using Monitoring.Queuing.Configuration;
-using Monitoring.Queuing.Contracts;
-using Monitoring.Queuing.RabbitMq;
 using Monitoring.Test.Helper.Builder;
-using Monitoring.Test.Helper.Messages;
-using Monitoring.Test.Helper.Mothers;
-using Monitoring.Test.Helper.Queues;
 using Xunit.Extensions;
 
 namespace Monitoring.Acceptance.Tests.Queues

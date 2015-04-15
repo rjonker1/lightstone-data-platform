@@ -1,5 +1,4 @@
 ﻿using System;
-using Monitoring.Read.ReadModel.Models;
 using Nancy;
 
 namespace Monitoring.Dashboard.UI.Modules
@@ -10,9 +9,10 @@ namespace Monitoring.Dashboard.UI.Modules
         {
             Get["/"] = _ =>
             {
-                var model = new MonitoringStorageModel(Guid.NewGuid());
+               // var model = new MonitoringStorageModel(Guid.NewGuid());
 
-                return View["Index", model];
+               //  return View["Index", model];
+                return null;
             };
         }
     }
