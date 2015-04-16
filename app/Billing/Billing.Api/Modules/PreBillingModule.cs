@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using AutoMapper;
 using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.Helpers;
@@ -81,39 +82,70 @@ namespace Billing.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customerList });
             };
 
+
             Get["/PreBilling/Customer/{customerId}/Users"] = param =>
             {
 
                 var customerSearchId = new Guid(param.customerId);
-                var customerUserDetailList = new List<User>();
+                var customerUsersDetailList = new List<User>();
 
                 foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
                 {
-
+                    //User
                     var user = new User
                     {
-                        Id = transaction.UserId, 
+                        Id = transaction.UserId,
                         Name = transaction.Username,
                         HasTransactions = true
                     };
 
                     //Index
-                    var userIndex = customerUserDetailList.FindIndex(x => x.Id == user.Id);
+                    var userIndex = customerUsersDetailList.FindIndex(x => x.Id == user.Id);
 
                     //Index restriction for new record
-                    if (userIndex < 0) customerUserDetailList.Add(user);
+                    if (userIndex < 0) customerUsersDetailList.Add(user);
                 }
 
-                return Response.AsJson(new { data = customerUserDetailList });
+                return Response.AsJson(new { data = customerUsersDetailList });
             };
 
-            //Get["/PreBilling/Customer/{id}/Products"] = param =>
-            //{
-            //    var searchId = new Guid(param.id);
-            //    var customerProducts = customersRepo.Get(searchId).Products;
 
-            //    return Response.AsJson(new { data = customerProducts });
-            //};
+            Get["/PreBilling/Customer/{customerId}/Packages"] = param =>
+            {
+
+                var customerSearchId = new Guid(param.customerId);
+                var customerPackagesDetailList = new List<PackageDto>();
+
+                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                {
+
+                    var dataProviderList = preBillingRepository.Where(x => x.CustomerId == customerSearchId)
+                                            .Select(x =>
+                                                new DataProviderDto()
+                                                {
+                                                    DataProviderId = x.DataProviderId,
+                                                    DataProviderName = x.DataProviderName,
+                                                    CostPrice = x.CostPrice,
+                                                    RecommendedPrice = x.RecommendedPrice
+
+                                                }).Distinct();
+
+                    //Package
+                    var package = new PackageDto()
+                    {
+                        PackageId = transaction.PackageId,
+                        DataProviders = dataProviderList
+                    };
+
+                    //Package Index
+                    var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
+
+                    //Index restriction for new record
+                    if (packageIndex < 0) customerPackagesDetailList.Add(package);
+                }
+
+                return Response.AsJson(new { data = customerPackagesDetailList });
+            };
 
             //Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
 
@@ -122,7 +154,8 @@ namespace Billing.Api.Modules
         }
     }
 
-    public class PreBillingDto //: Entity
+    //DTO's
+    public class PreBillingDto
     {
         public Guid Id { get; set; }
         public string CustomerName { get; set; }
@@ -133,23 +166,24 @@ namespace Billing.Api.Modules
         public int Transactions { get; set; }
         public string UserType { get; set; }
         public int Total { get; set; }
-
-        public PreBillingDto() { }
-
-        //public PreBillingDto(Guid id, string customerName, IEnumerable<User> users, string type, string owner, IEnumerable<Product> products, IEnumerable<TransactionMocks> transactions, string userType, int total)
-        //    : base(id)
-        //{
-        //    CustomerName = customerName;
-        //    Users = users;
-        //    Type = type;
-        //    Owner = owner;
-        //    Products = products;
-        //    Transactions = transactions;
-        //    UserType = userType;
-        //    Total = total;
-        //}
     }
 
+    public class PackageDto
+    {
+        public Guid PackageId { get; set; }
+        public Guid PackageName { get; set; }
+        public IEnumerable<DataProviderDto> DataProviders { get; set; }
+    }
+
+    public class DataProviderDto
+    {
+        public Guid DataProviderId { get; set; }
+        public string DataProviderName { get; set; }
+        public double CostPrice { get; set; }
+        public double RecommendedPrice { get; set; }
+    }
+
+    //Server side Paging
     public interface IServerPageRepo : IRepository<Domain.Entities.Transaction>
     {
         PagedList<Domain.Entities.Transaction> Search(string searchValue, int pageIndex, int pageSize);
