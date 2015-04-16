@@ -63,6 +63,7 @@
     <Compile Include="Publishable\BillTransactionMessage.cs" />
     <Compile Include="InvoiceTransaction.cs" />
     <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

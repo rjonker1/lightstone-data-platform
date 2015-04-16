@@ -8,7 +8,7 @@ namespace Monitoring.Database.Migrations
     {
         public override void Down()
         {
-            Delete.Table("MonitoringDataProvider");
+            Delete.Table("MonitoringDataProviders");
         }
 
         public override void Up()

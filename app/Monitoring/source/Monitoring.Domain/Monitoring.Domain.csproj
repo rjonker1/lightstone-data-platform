@@ -50,9 +50,11 @@
     <Compile Include="Identifiers\MonitoringDataProviderIdentifier.cs" />
     <Compile Include="Identifiers\MonitoringActionIdentifier.cs" />
     <Compile Include="Identifiers\SearchIdentifier.cs" />
+    <Compile Include="Mappers\MappingForMonitoringTypes.cs" />
     <Compile Include="Mappers\MonitoringDataProviderMapper.cs" />
     <Compile Include="MonitoringDataProviderTransaction.cs" />
     <Compile Include="Repository\IMonitoringRepository.cs" />
+    <Compile Include="Repository\MonitoringRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

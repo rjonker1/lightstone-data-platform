@@ -47,7 +47,7 @@ namespace Worflow.Transactions.Service.Write.Host
                 .UsingJsonSerialization()
                 //.Compress()
                 //.UsingEventUpconversion()
-                .UsingAsynchronousDispatchScheduler()
+                .UsingSynchronousDispatchScheduler()
                 .DispatchTo(new DelegateMessageDispatcher(c => DispatchCommits(container, c)))
                 .Build();
         }

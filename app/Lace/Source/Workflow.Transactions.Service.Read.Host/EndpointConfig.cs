@@ -17,7 +17,7 @@ namespace Workflow.Transactions.Service.Read.Host
             configuration.Conventions()
                 .DefiningEventsAs(c => c.Namespace != null && (c.Namespace.EndsWith("Messages.Events") || c.Namespace.Equals("Workflow.Billing.Messages.Publishable")));
                 
-
+            
             var builder = new ContainerBuilder();
             builder.RegisterModule(new ReadModule());
             var container = builder.Build();

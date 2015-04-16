@@ -13,7 +13,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
 {
     public class Transaction : IHandleMessages<BillTransactionMessage>
     {
-        private readonly IRepository _repository;
+        private readonly ITransactionRepository _transaction;
         private readonly IAdvancedBus _bus;
 
         public Transaction()
@@ -21,12 +21,13 @@ namespace Workflow.Transactions.Read.Service.Handlers
 
         }
 
-        public Transaction(IRepository repository)
+        public Transaction(ITransactionRepository transaction, IAdvancedBus bus)
         {
-            _repository = repository;
-            _bus =
-                BusFactory.CreateAdvancedBus(
-                    ConfigurationManager.ConnectionStrings["NServiceBus/Transport"].ConnectionString);
+            _transaction = transaction;
+            _bus = bus;
+           // _bus =
+            //   BusFactory.CreateAdvancedBus(
+            //        ConfigurationManager.ConnectionStrings["NServiceBus/Transport"].ConnectionString);
         }
 
         public void Handle(BillTransactionMessage message)
@@ -35,7 +36,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
                 message.PackageIdentifier, message.RequestIdentifier, message.UserIdentifier, message.State,
                 message.Contract, message.Account);
 
-            _repository.Add(transaction);
+            _transaction.Add(transaction);
 
             new TransactionBus(_bus).Send(new InvoiceTransactionCreated(transaction.Id),
                 "DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing");
