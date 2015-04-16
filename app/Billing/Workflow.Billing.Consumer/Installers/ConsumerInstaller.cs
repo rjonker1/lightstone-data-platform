@@ -17,12 +17,8 @@ namespace Workflow.Billing.Consumer.Installers
             _log.InfoFormat("Installing Billing Consumer");
 
             container.Register(
-                //Component.For<BillTransactionConsumer>().ImplementedBy<BillTransactionConsumer>(),
-                //Component.For<TextMessageConsumer>().ImplementedBy<TextMessageConsumer>(),
-                //Component.For<EntityConsumer>().ImplementedBy<EntityConsumer>(),
+                Component.For<EntityConsumer>().ImplementedBy<EntityConsumer>(),
                 Component.For<TransactionConsumer>().ImplementedBy<TransactionConsumer>());
-            //container.Register(Classes.FromAssemblyContaining<EntityConsumer>().BasedOn(typeof(IConsume<>)).WithServiceAllInterfaces().LifestyleTransient());
-
         }
     }
 }

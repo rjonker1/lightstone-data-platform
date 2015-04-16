@@ -21,8 +21,8 @@ namespace Billing.Acceptance.Tests.Transaction
         {
             var bus = new TransactionBus(_bus);
 
-            transaction = new InvoiceTransactionCreated(new Guid("BA754D23-E5A1-4DFA-A7D4-0E71A5724C5D"));
-            bus.Send(transaction, "TESTEXCHANGE1", "TESTQUEUE1");
+            transaction = new InvoiceTransactionCreated(new Guid("70b36ed9-2cbd-41e7-a22e-e708fd00156b"));
+            bus.Send(transaction, "DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing");
         }
 
         [Observation]

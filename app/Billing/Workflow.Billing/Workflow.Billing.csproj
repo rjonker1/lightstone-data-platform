@@ -94,7 +94,6 @@
     <Compile Include="Domain\Entities\Product.cs" />
     <Compile Include="Domain\Entities\StageBilling.cs" />
     <Compile Include="Domain\Entities\Transaction.cs" />
-    <Compile Include="Domain\Entities\UserCheck1.cs" />
     <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />

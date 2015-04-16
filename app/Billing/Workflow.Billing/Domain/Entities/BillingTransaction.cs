@@ -10,14 +10,8 @@ namespace Workflow.Billing.Domain.Entities
         public virtual Guid ClientId { get; set; }
         public virtual string ClientName { get; set; }
 
-        public BillingTransaction()
-        {
-        }
+        public virtual string AccountNumber { get; set; }
 
-        //public Billing()
-        //{
-        //    Id = Guid.NewGuid();
-        //    //base.Created = DateTime.UtcNow;
-        //}
+        public BillingTransaction() { }
     }
 }
