@@ -2,10 +2,6 @@
 {
     public class SelectStatements
     {
-        public const string GetEventsBySource =
-            @"select AggregateId, Payload,[Source],[Date],[TimeStamp] from  Monitoring where AggregateId in (select top 100 AggregateId from Monitoring where Source = @Source  group by AggregateId order by max(Date) desc)";
-
-        public const string GetEventBySourceAndId =
-            @"select AggregateId, Payload,[Source],[Date],[TimeStamp] from  Monitoring where [Source] = @Source and AggregateId = @AggregateId";
+        public const string GetDataProviderRequestResponses = "select top 100 * from MonitoringDataProvider where [action] = 'response' order by [date] desc";
     }
 }

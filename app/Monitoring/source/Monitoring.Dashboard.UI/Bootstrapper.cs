@@ -1,15 +1,17 @@
 ﻿using System.Data;
-using System.Web.Configuration;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
-using Monitoring.Dashboard.UI.Core.Contracts.Repositories;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
+using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Handlers;
-using Monitoring.Dashboard.UI.Infrastructure.Repository;
 using Monitoring.Dashboard.UI.Infrastructure.Repository.Framework.Connection;
 using Monitoring.Dashboard.UI.Infrastructure.Services;
+using Monitoring.Domain.Mappers;
+using Monitoring.Domain.Repository;
 using Nancy;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
+using Shared.BuildingBlocks.AdoNet.Mapping;
+using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Dashboard.UI
 {
@@ -17,8 +19,9 @@ namespace Monitoring.Dashboard.UI
     {
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
-            container.Register<IDbConnection>(ConnectionFactory.ForReadDatabase());
-            container.Register<IQueryStorage, Repository>();
+            container.Register<IDbConnection>(ConnectionFactory.ForMonitoringDatabase());
+            container.Register<IRepositoryMapper, RepositoryMapper>();
+            container.Register<IHaveTypeMappings, MappingForMonitoringTypes>();
             container.Register<IMonitoringRepository, MonitoringRepository>();
             container.Register<IHandleMonitoringCommands, MonitoringHandler>();
             container.Register<ICallMonitoringService, DataProviderMonitoringService>();

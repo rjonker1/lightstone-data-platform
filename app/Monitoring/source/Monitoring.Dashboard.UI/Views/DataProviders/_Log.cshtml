@@ -5,7 +5,7 @@
     <div id="data-provider-event-log" class="data-provider-container">
         <ul>
             <li ng-repeat="response in dataProviderMonitoring" class="" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
-                <h2 ng-click="Toggle($index,'log-formatted-json');">&nbsp;{{response.Metadata}}&nbsp;{{response.PeformanceData}}</h2>
+                <h2 ng-click="Toggle($index,'log-formatted-json');">&nbsp;{{response.RequestId}}&nbsp;&nbsp;{{response.SearchType}}&nbsp;{{response.Results.ElapsedTime}}</h2>
                 <div>
                     <div style="display: none;" id="toggle-{{$index}}">
                         <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>

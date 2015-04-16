@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
-using Monitoring.Dashboard.UI.Core.Contracts.Repositories;
 using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
+using Monitoring.Dashboard.UI.Infrastructure.Repository;
+using Monitoring.Domain.Repository;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 {
     public class MonitoringHandler : IHandleMonitoringCommands
     {
         private readonly IMonitoringRepository _repository;
-        public IEnumerable<MonitoringResponse> MonitoringResponse { get; private set; }
+        public IEnumerable<MonitoringDataProvider> MonitoringResponse { get; private set; }
 
         public MonitoringHandler(IMonitoringRepository repository)
         {
@@ -19,7 +20,8 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 
         public void Handle(GetMonitoringCommand command)
         {
-            MonitoringResponse = _repository.GetAllMonitoringInformation(command.Request.SourceId).ToList();
+            MonitoringResponse =
+                _repository.Items<MonitoringDataProvider>(SelectStatements.GetDataProviderRequestResponses);
         }
 
     }

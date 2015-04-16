@@ -6,6 +6,7 @@ using Monitoring.Dashboard.UI.Core.Contracts.Repositories;
 using Monitoring.Dashboard.UI.Core.Extensions;
 using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Dto;
+using Monitoring.Domain.Repository;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Repository
 {
@@ -18,8 +19,14 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
             _storage = storage;
         }
 
+        public IEnumerable<MonitoringResponse> GetMonitoringInformationForDataProviders()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<MonitoringResponse> GetAllMonitoringInformation(int source)
         {
+
             //var commands = _storage.Items<MonitoringStorageModel>(SelectStatements.GetEventsBySource,
             //    new { @Source = source })
             //    .Select(
@@ -45,5 +52,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository
             //    .OrderByDescending(o => o.Date);
             return new LinkedList<MonitoringResponse>();
         }
+
+       
     }
 }
