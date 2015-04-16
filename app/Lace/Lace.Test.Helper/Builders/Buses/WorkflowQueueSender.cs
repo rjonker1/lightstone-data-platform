@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Requests.Contracts;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
@@ -42,6 +44,19 @@ namespace Lace.Test.Helper.Builders.Buses
             _workflow.DataProviderResponse(
                 new DataProviderIdentifier((int) _dataProvider, _dataProvider.ToString(), cost, rsp, action, state),
                 new ConnectionTypeIdentifier(connection, connectionTpe), payload, _stopWatch);
+            return this;
+        }
+
+        public WorkflowQueueSender EntryPointRequest(ICollection<IPointToLaceRequest> request)
+        {
+            _workflow.EntryPointRequest(request, _stopWatch);
+            return this;
+        }
+
+        public WorkflowQueueSender EntryPointResponse(object payload, DataProviderState state, ICollection<IPointToLaceRequest> request)
+        {
+            _workflow.EntryPointResponse(payload, _stopWatch,
+                state,request);
             return this;
         }
 

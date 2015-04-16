@@ -18,6 +18,10 @@ namespace Workflow.Lace.Domain.Aggregates
         private Request(Guid id)
         {
             Id = id;
+
+            Register<EntryPointReceivedRequest>(e => e.Id = id);
+            Register<EntryPointReturnedResponse>(e => e.Id = id);
+
             Register<RequestToDataProvider>(e => e.Id = id);
             Register<ResponseFromDataProvider>(e => e.Id = id);
             Register<BillTransactionMessage>(e => e.TransactionId = id);
@@ -44,6 +48,18 @@ namespace Workflow.Lace.Domain.Aggregates
             //Message = message;
 
             RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
+        }
+
+        public Request(Guid requestId, DateTime date, SearchRequestIndentifier request,
+            PayloadIdentifier payload) : this(requestId)
+        {
+            RaiseEvent(new EntryPointReceivedRequest(Guid.NewGuid(), date, requestId, payload, request));
+        }
+
+        public Request(Guid requestId, DateTime date, StateIdentifier state,
+            PayloadIdentifier payload, SearchRequestIndentifier request) : this(requestId)
+        {
+            RaiseEvent(new EntryPointReturnedResponse(Guid.NewGuid(), requestId, date, payload, state, request));
         }
 
         public void StartCall(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -89,6 +105,17 @@ namespace Workflow.Lace.Domain.Aggregates
         }
 
 
+        public void EntryPointRequest(Guid requestId, DateTime date, SearchRequestIndentifier request,
+            PayloadIdentifier payload)
+        {
+            RaiseEvent(new EntryPointReceivedRequest(Guid.NewGuid(), date, requestId, payload, request));
+        }
+
+        public void EntryPointResponse(Guid requestId, DateTime date, StateIdentifier state,
+            PayloadIdentifier payload, SearchRequestIndentifier request)
+        {
+            RaiseEvent(new EntryPointReturnedResponse(Guid.NewGuid(), requestId, date, payload, state,request));
+        }
 
         public void RequestSentToDataProvider(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
             ConnectionTypeIdentifier connection, PayloadIdentifier payload)
@@ -144,6 +171,18 @@ namespace Workflow.Lace.Domain.Aggregates
             ConnectionTypeIdentifier connection, PayloadIdentifier payload)
         {
             return new Request(requestId, dataProvider, date, connection, payload);
+        }
+
+        public static Request ReceiveRequest(Guid requestId, DateTime date, SearchRequestIndentifier request,
+            PayloadIdentifier payload)
+        {
+            return new Request(requestId,date,request,payload);
+        }
+
+        public static Request ReceiveRequest(Guid requestId, DateTime date, StateIdentifier state,
+            PayloadIdentifier payload, SearchRequestIndentifier request)
+        {
+            return new Request(requestId, date, state, payload, request);
         }
 
         //[DataMember]

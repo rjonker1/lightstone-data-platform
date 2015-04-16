@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
+using DataPlatform.Shared.Identifiers;
+using Lace.Domain.Core.Requests.Contracts;
 using Lace.Shared.Extensions;
 using NServiceBus;
 using Workflow.Lace.Identifiers;
@@ -79,6 +82,28 @@ namespace Workflow.Lace.Messages.Shared
                 .SendToBus(_publisher, _log);
         }
 
+        public void EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch stopWatch)
+        {
+            new ReceiveEntryPointRequest(Guid.NewGuid(), _requestId, DateTime.UtcNow,
+                SearchRequestIndentifier.GetSearchRequest(request),
+                new PayloadIdentifier(new MetadataContainer().ObjectToJson(), request.ObjectToJson(),
+                    CommandDescriptions.ReceiveEntryPointRequestDescription()))
+                .SendToBus(_publisher, _log);
+            stopWatch.Start();
+        }
+
+        public void EntryPointResponse(object payload, DataProviderStopWatch stopWatch, DataProviderState state, ICollection<IPointToLaceRequest> request)
+        {
+            stopWatch.Stop();
+            new ReturnEntryPointResponse(Guid.NewGuid(), _requestId, DateTime.UtcNow,
+                new StateIdentifier((int) state, state.ToString()),
+                new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(),
+                    payload.ObjectToJson(),
+                    CommandDescriptions.ReturnEntryPointResponseDescription()),SearchRequestIndentifier.GetSearchRequest(request))
+                .SendToBus(_publisher, _log);
+
+        }
+
         public void Send(CommandType commandType, object payload, object metadata,
             DataProviderCommandSource dataProvider)
         {
@@ -133,5 +158,6 @@ namespace Workflow.Lace.Messages.Shared
                 DateTime.UtcNow, metadata.ObjectToJson(), Category.Security)
                 .SendToBus(_publisher, _log);
         }
+       
     }
 }

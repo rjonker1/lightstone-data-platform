@@ -1,5 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Identifiers;
+using Monitoring.Domain;
+using Monitoring.Domain.Identifiers;
 using NServiceBus;
 using Shared.BuildingBlocks.AdoNet.Repository;
 using Workflow.Lace.Domain;
@@ -8,7 +10,7 @@ using Workflow.Lace.Messages.Events;
 
 namespace Workflow.Transactions.Read.Service.Handlers
 {
-    public class Response : IHandleMessages<ResponseFromDataProvider>
+    public class Response : IHandleMessages<ResponseFromDataProvider>, IHandleMessages<EntryPointReturnedResponse>
     {
         private readonly IRepository _repository;
 
@@ -32,6 +34,14 @@ namespace Workflow.Transactions.Read.Service.Handlers
                     new ActionIdentifier((int) message.DataProvider.Action, message.DataProvider.Action.ToString()),
                     new StateIdentifier((int) message.DataProvider.State, message.DataProvider.State.ToString())));
             _repository.Add(response);
+        }
+
+        public void Handle(EntryPointReturnedResponse message)
+        {
+            var response =
+                new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(Guid.NewGuid(), message.Date,
+                    new SearchIdentifier(message.Request.Type, message.Request.SearchTerm, message.Payload.MetaData,
+                        message.RequestId, "Lace")));
         }
     }
 }

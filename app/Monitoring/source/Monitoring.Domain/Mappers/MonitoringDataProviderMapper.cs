@@ -16,7 +16,7 @@ namespace Monitoring.Domain.Mappers
             {
                 return new[]
                 {
-                    "Id", "RequestId", "SearchType", "SearchTerm", "ElapsedTime", "BucketId", "Date"
+                    "Id", "RequestId", "SearchType", "SearchTerm", "ElapsedTime", "BucketId", "Date", "Action"
                 };
             }
         }
@@ -33,7 +33,7 @@ namespace Monitoring.Domain.Mappers
             return
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(match.Id, match.Date,
                     new SearchIdentifier(match.SearchType, match.SearchTerm, match.ElapsedTime, match.RequestId,
-                        match.BucketId)));
+                        match.BucketId), new MonitoringActionIdentifier(match.Action)));
         }
 
         public override void Insert(IDbConnection connection, object instance)
@@ -48,7 +48,8 @@ namespace Monitoring.Domain.Mappers
                 SearchTerm = transaction.Monitoring.DataProviderSearch.SearchTerm,
                 ElapsedTime = transaction.Monitoring.DataProviderSearch.ElapsedTime,
                 BucketId = transaction.Monitoring.DataProviderSearch.BucketId,
-                Date = transaction.Monitoring.Date
+                Date = transaction.Monitoring.Date,
+                Action = transaction.Monitoring.Action.Name
             };
             connection.Execute(sql, values);
         }

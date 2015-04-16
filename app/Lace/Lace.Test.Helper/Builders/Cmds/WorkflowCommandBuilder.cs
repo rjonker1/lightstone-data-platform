@@ -13,10 +13,8 @@ using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
 using Lace.Test.Helper.Builders.Responses;
-using Lace.Test.Helper.Fakes.Lace.Consumer;
 using Lace.Test.Helper.Fakes.Responses;
 using Lace.Test.Helper.Mothers.Requests.Dto;
-using Microsoft.SqlServer.Server;
 using Workflow.Lace.Messages.Core;
 
 namespace Lace.Test.Helper.Builders.Cmds
@@ -49,9 +47,7 @@ namespace Lace.Test.Helper.Builders.Cmds
         {
             var queue = new WorkflowQueueSender(DataProviderCommandSource.EntryPoint);
             queue.InitQueue(_bus)
-                .ReceiveResponseFromDataProvider("Lace",
-                    "none", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources(),0,0);
+                .EntryPointRequest(new LicensePlateRequestBuilder().ForAllSources());
             return this;
         }
 
@@ -61,11 +57,12 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForIvid(),15,30)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForIvid(), 15, 30)
                 .ReceiveResponseFromDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Response,
                     DataProviderState.Successful,
-                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,15,30);
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    15, 30);
             return this;
         }
 
@@ -75,7 +72,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstone(),20,40)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstone(), 20, 40)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
                     DataProviderState.Successful,
@@ -83,7 +80,7 @@ namespace Lace.Test.Helper.Builders.Cmds
                         FakeLighstoneRetrievalData.GetValuationFromMetrics(
                             new RequestCarInformationForCarHavingId107483()),
                         FakeLighstoneRetrievalData.GetCarInformation("SB1KV58E40F039277"))
-                        .Result,20,40);
+                        .Result, 20, 40);
             return this;
         }
 
@@ -93,10 +90,10 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgt(),30,60)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgt(), 30, 60)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
-                    DataProviderState.Successful, new TransformRgtResponse(new List<CarSpecification>()),30,60);
+                    DataProviderState.Successful, new TransformRgtResponse(new List<CarSpecification>()), 30, 60);
             return this;
         }
 
@@ -106,11 +103,11 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgtVin(),25,50)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgtVin(), 25, 50)
                 .ReceiveResponseFromDataProvider("Database",
                     "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
                     DataProviderState.Successful,
-                    new TransformRgtVinResponse(FakeRgtVinResponse.GetRgtVinResponseForLicensePlateNumber()),25,50);
+                    new TransformRgtVinResponse(FakeRgtVinResponse.GetRgtVinResponseForLicensePlateNumber()), 25, 50);
             return this;
         }
 
@@ -120,13 +117,14 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAudatex(),0,0)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAudatex(), 0, 0)
                 .ReceiveResponseFromDataProvider("Web Service",
                     "https://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx", DataProviderAction.Response,
                     DataProviderState.Successful,
                     new TransformAudatexResponse(new SourceResponseBuilder().ForAudatexWithHuyandaiHistory(),
                         new SourceResponseBuilder().ForAudatexWithLaceResponse(),
-                        new LicensePlateRequestBuilder().ForAudatex().GetFromRequest<IPointToVehicleRequest>().Vehicle),0,0);
+                        new LicensePlateRequestBuilder().ForAudatex().GetFromRequest<IPointToVehicleRequest>().Vehicle),
+                    0, 0);
             return this;
         }
 
@@ -136,12 +134,12 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .SendRequestToDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForIvidTitleHolder(),35,70)
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForIvidTitleHolder(), 35, 70)
                 .ReceiveResponseFromDataProvider("Web Service",
                     "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Response,
                     DataProviderState.Successful,
                     new TransformIvidTitleHolderResponse(
-                        FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber()),35,70);
+                        FakeIvidTitleHolderQueryResponseData.GetTitleHolderResponseForLicenseNumber()), 35, 70);
             return this;
         }
 
@@ -149,9 +147,9 @@ namespace Lace.Test.Helper.Builders.Cmds
         {
             var queue = new WorkflowQueueSender(DataProviderCommandSource.EntryPoint);
             queue.InitQueue(_bus)
-                .ReceiveResponseFromDataProvider("Lace",
-                    "none", DataProviderAction.Response,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources(),500,1000)
+                .EntryPointResponse(
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources())
                 .CreateTransaction(_packageId, _packageVersion, _userId, _requestId, _contractId, _system,
                     0, DataProviderState.Successful, _accountNumber);
             return this;

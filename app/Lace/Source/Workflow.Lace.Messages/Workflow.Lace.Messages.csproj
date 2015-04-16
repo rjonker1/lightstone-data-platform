@@ -74,6 +74,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\Context.cs" />
+    <Compile Include="Commands\EntryPoint.cs" />
     <Compile Include="Commands\Requests.cs" />
     <Compile Include="Commands\Responses.cs" />
     <Compile Include="Commands\Transactions.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Core\ISendCommandToBus.cs" />
     <Compile Include="Core\ISendWorflowCommand.cs" />
     <Compile Include="Events\Context.cs" />
+    <Compile Include="Events\EntryPoint.cs" />
     <Compile Include="Events\Requests.cs" />
     <Compile Include="Events\Responses.cs" />
     <Compile Include="Extensions\BusExtensions.cs" />
@@ -95,6 +97,10 @@
     <Compile Include="Shared\CommandPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>

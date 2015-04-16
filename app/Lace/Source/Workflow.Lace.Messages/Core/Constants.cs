@@ -28,5 +28,11 @@ namespace Workflow.Lace.Messages.Core
 
         public static Func<DataProviderCommandSource, string> TransformationDescription =
             (source) => string.Format("Transforming response for Data Provider {0}", source.ToString());
+
+        public static Func<string> ReceiveEntryPointRequestDescription =
+            () => string.Format("Received Request in LACE");
+
+        public static Func<string> ReturnEntryPointResponseDescription =
+            () => string.Format("Return Response from LACE");
     }
 }

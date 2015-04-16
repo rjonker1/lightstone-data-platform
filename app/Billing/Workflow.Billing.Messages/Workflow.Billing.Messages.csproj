@@ -59,6 +59,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ITransactionRepository.cs" />
     <Compile Include="Publishable\BillTransactionMessage.cs" />
     <Compile Include="InvoiceTransaction.cs" />
     <Compile Include="Transaction.cs" />
