@@ -8,7 +8,7 @@ namespace Billing.Domain.Entities.DemoEntities
     {
         public virtual string TransactionDetail { get; protected internal set; }
         public virtual string State { get; protected internal set; }
-        public virtual Product Product { get; protected internal set; } 
+        //public virtual Product Product { get; protected internal set; } 
 
         public TransactionMocks() { }
     }

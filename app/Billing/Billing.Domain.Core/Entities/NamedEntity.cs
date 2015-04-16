@@ -8,7 +8,7 @@ namespace Billing.Domain.Core.Entities
     public class NamedEntity : Entity, INamedEntity
     {
         [Required, DomainSignature]
-        public virtual string Name { get; protected internal set; }
+        public virtual string Name { get; set; }
 
         protected NamedEntity() { }
 

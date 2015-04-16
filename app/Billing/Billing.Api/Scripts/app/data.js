@@ -60,16 +60,16 @@ window.userGridActionEvents = {
     }
 };
 
-function gridProductsFormatter(value, row, index) {
+function gridPackagesFormatter(value, row, index) {
 
-    var count = 0;
-    for (product in row.products) {
+    //var count = 0;
+    //for (product in row.products) {
 
-        count++;
-    }
+    //    count++;
+    //}
 
     return [
-        'Total Products: ( ' + count + ' ) ' +
+        'Total Packages: ( ' + value + ' ) ' +
         '<button type="button" class="view btn btn-primary btn-md">' +
             'View' +
             '</button>'
@@ -116,14 +116,14 @@ window.productGridActionEvents = {
 
 function gridTransactionsFormatter(value, row, index) {
 
-    var count = 0;
-    for (transaction in row.transactions) {
+    //var count = 0;
+    //for (transaction in row.transactions) {
 
-        count++;
-    }
+    //    count++;
+    //}
 
     return [
-        'Total Transactions: ( ' + count + ' ) '
+        'Total Transactions: ( ' + value + ' ) '
     ].join('');
 };
 

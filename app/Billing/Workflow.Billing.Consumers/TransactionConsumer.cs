@@ -32,7 +32,7 @@ namespace Workflow.Billing.Consumers
         public void Consume(IMessage<InvoiceTransactionCreated> message)
         {
 
-            var customerId = Guid.NewGuid();
+            var customerId = new Guid("03641AC6-1561-4F1A-8AE5-7EB391541ABB");
             var transactionId = message.Body.TransactionId;
             var currentTransaction = _transactions.Where(x => x.Id == transactionId);
 
@@ -52,14 +52,15 @@ namespace Workflow.Billing.Consumers
                         Id = Guid.NewGuid(),
                         BillingId = 101,
                         CustomerId = customerId,
-                        CustomerName = "CustomerName",
+                        CustomerName = "CustomerABC",
                         AccountNumber = transaction.AccountNumber,
                         UserId = transaction.UserId,
                         Username = user.Username,
                         TransactionId = transaction.Id,
+                        PackageId = transaction.PackageId,
                         RequestId = transaction.RequestId,
-                        ProductId = product.Id,
-                        ProductName = product.DataProviderName,
+                        DataProviderId = product.Id,
+                        DataProviderName = product.DataProviderName,
                         CostPrice = product.CostPrice,
                         RecommendedPrice = product.RecommendedPrice
                     };

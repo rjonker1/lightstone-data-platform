@@ -5,6 +5,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Repositories;
 
 namespace Billing.Api.Installers
 {

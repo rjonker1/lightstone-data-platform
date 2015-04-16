@@ -6,18 +6,20 @@ namespace Billing.Domain.Entities.DemoEntities
 {
     public class User : Entity
     {
-        public virtual string Name { get; protected internal set; }
-        public virtual string Surname { get; protected internal set; }
-        public virtual IEnumerable<TransactionMocks> Transactions { get; protected internal set; }
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public virtual IEnumerable<Transaction> Transactions { get; set; }
 
-        private bool _hasTransactions;
+        //private bool _hasTransactions;
+        public bool HasTransactions { get; set; }
 
-        public virtual bool HasTransactions
-        {
-            get { return Transactions.Any(); }
+        //public virtual bool HasTransactions
+        //{
+        //    get { return Transactions.Any(); }
 
-            set { _hasTransactions = value; }
-        }
+        //    set { _hasTransactions = value; }
+        //}
 
         //[DoNotMap]
         //public virtual IEnumerable<Product> Products

@@ -1,10 +1,8 @@
 ﻿using System;
-using Billing.Domain.Entities.DemoEntities;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
 using Shared.Messaging.Billing.Helpers;
-using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.NHibernate.Attributes;
 using Workflow.Billing.Helpers.AutoMapper.MappingOverrides;

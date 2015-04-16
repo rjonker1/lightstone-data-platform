@@ -2,6 +2,7 @@
 using Billing.Domain.Core.Repositories;
 using Billing.Domain.Entities;
 using Billing.Infrastructure.Helpers;
+using DataPlatform.Shared.Repositories;
 using NHibernate;
 
 namespace Billing.Infrastructure.Repositories

@@ -11,6 +11,10 @@ using Nancy.Conventions;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
 using Workflow;
+using Workflow.Billing.Consumer.Installers;
+using AutoMapperInstaller = Billing.Api.Installers.AutoMapperInstaller;
+using BusInstaller = Billing.Api.Installers.BusInstaller;
+using RepositoryInstaller = Billing.Api.Installers.RepositoryInstaller;
 
 namespace Billing.Api
 {
@@ -35,6 +39,7 @@ namespace Billing.Api
             base.ConfigureApplicationContainer(container);
 
             container.Install(
+                //new NHibernateInstaller(),
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
                 new CommandInstaller(),

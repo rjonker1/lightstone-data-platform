@@ -10,7 +10,7 @@ using NHibernate.Linq;
 
 namespace Billing.Domain.Core.Repositories
 {
-    public class Repository<T> : IRepository<T>
+    public class Repository<T> : DataPlatform.Shared.Repositories.IRepository<T> //IRepository<T>
     {
         private readonly ISession _session;
 

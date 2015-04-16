@@ -8,7 +8,7 @@ namespace Billing.Infrastructure.NHibernate.MappingOverrides
     {
         public void Override(AutoMapping<User> mapping)
         {
-            mapping.HasMany(x => x.Transactions).Cascade.All();
+           // mapping.HasMany(x => x.Transactions).Cascade.All();
         }
     }
 }
