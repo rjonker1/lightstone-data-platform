@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.939\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet, Version=1.0.0.941, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.941\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -47,9 +48,13 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Identifiers\MonitoringDataProviderIdentifier.cs" />
+    <Compile Include="Identifiers\MonitoringActionIdentifier.cs" />
     <Compile Include="Identifiers\SearchIdentifier.cs" />
+    <Compile Include="Mappers\MappingForMonitoringTypes.cs" />
     <Compile Include="Mappers\MonitoringDataProviderMapper.cs" />
     <Compile Include="MonitoringDataProviderTransaction.cs" />
+    <Compile Include="Repository\IMonitoringRepository.cs" />
+    <Compile Include="Repository\MonitoringRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

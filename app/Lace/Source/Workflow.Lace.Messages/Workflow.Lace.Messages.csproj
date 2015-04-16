@@ -43,17 +43,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Billing.Api.Dtos.1.0.0.906\lib\net45\Lightstone.DataPlatform.Billing.Api.Dtos.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.923, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.942, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.923\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.942\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.923, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Workflow.Billing, Version=1.0.0.942, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.923\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Workflow.Billing.Messages, Version=1.0.0.923, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.923\lib\net45\Lightstone.DataPlatform.Workflow.Billing.Messages.dll</HintPath>
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Workflow.Billing.1.0.0.942\lib\net45\Lightstone.DataPlatform.Workflow.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NEventStore">
@@ -74,6 +70,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\Context.cs" />
+    <Compile Include="Commands\EntryPoint.cs" />
     <Compile Include="Commands\Requests.cs" />
     <Compile Include="Commands\Responses.cs" />
     <Compile Include="Commands\Transactions.cs" />
@@ -83,6 +80,7 @@
     <Compile Include="Core\ISendCommandToBus.cs" />
     <Compile Include="Core\ISendWorflowCommand.cs" />
     <Compile Include="Events\Context.cs" />
+    <Compile Include="Events\EntryPoint.cs" />
     <Compile Include="Events\Requests.cs" />
     <Compile Include="Events\Responses.cs" />
     <Compile Include="Extensions\BusExtensions.cs" />
@@ -95,6 +93,10 @@
     <Compile Include="Shared\CommandPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
       <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
       <Name>Lace.Shared.Extensions</Name>

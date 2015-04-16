@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.NetworkInformation;
 using Common.Logging;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Contracts.Requests;
@@ -11,7 +10,6 @@ using Lace.Domain.Infrastructure.Core.Contracts;
 using Lace.Domain.Infrastructure.EntryPoint.Builder.Factory;
 using Lace.Shared.Extensions;
 using NServiceBus;
-using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Infrastructure;
 using Workflow.Lace.Messages.Shared;
@@ -87,23 +85,15 @@ namespace Lace.Domain.Infrastructure.EntryPoint
 
         private void LogRequest(ICollection<IPointToLaceRequest> request)
         {
-            _workflow.DataProviderRequest(
-                    new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Request,
-                        DataProviderState.Successful),
-                    new ConnectionTypeIdentifier(string.Empty, string.Empty), request,
-                    _stopWatch);
+            _workflow.EntryPointRequest(request, _stopWatch);
         }
 
         private void LogResponse(ICollection<IPointToLaceRequest> request)
         {
-            _workflow.DataProviderResponse(
-                   new DataProviderIdentifier(DataProviderCommandSource.EntryPoint, DataProviderAction.Response,
-                       _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
-                           ? DataProviderState.Failed
-                           : DataProviderState.Successful),
-                   new ConnectionTypeIdentifier(string.Empty, string.Empty),
-                   _bootstrap.DataProviderResponses ?? EmptyResponse,
-                   _stopWatch);
+            _workflow.EntryPointResponse(_bootstrap.DataProviderResponses ?? EmptyResponse, _stopWatch,
+                _bootstrap.DataProviderResponses == null || _bootstrap.DataProviderResponses.Count == 0
+                    ? DataProviderState.Failed
+                    : DataProviderState.Successful,request);
         }
 
         private void CreateTransaction(ICollection<IPointToLaceRequest> request,DataProviderState state)

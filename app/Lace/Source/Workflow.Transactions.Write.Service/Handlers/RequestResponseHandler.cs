@@ -7,7 +7,8 @@ using Workflow.Lace.Messages.Commands;
 namespace Workflow.Transactions.Write.Service.Handlers
 {
     public class RequestResponseHandler : IHandleMessages<SendRequestToDataProviderCommand>,
-        IHandleMessages<GetResponseFromDataProviderCommmand>, IHandleMessages<CreateTransactionCommand>
+        IHandleMessages<GetResponseFromDataProviderCommmand>, IHandleMessages<CreateTransactionCommand>,
+        IHandleMessages<ReceiveEntryPointRequest>, IHandleMessages<ReturnEntryPointResponse>
     {
         private readonly IRepository _repository;
 
@@ -20,16 +21,55 @@ namespace Workflow.Transactions.Write.Service.Handlers
             _repository = repository;
         }
 
+        public void Handle(ReceiveEntryPointRequest message)
+        {
+            var @event = _repository.GetById<Request>(message.RequestId);
+
+            if (@event == null)
+            {
+                @event = Request.ReceiveRequest(message.RequestId, message.Date, message.Request, message.Payload);
+            }
+            else
+            {
+                @event.EntryPointRequest(message.RequestId, message.Date, message.Request, message.Payload);
+            }
+
+            _repository.Save(@event, Guid.NewGuid(), null);
+        }
+
+        public void Handle(ReturnEntryPointResponse message)
+        {
+            var @event = _repository.GetById<Request>(message.RequestId);
+
+            if (@event == null)
+            {
+                @event = Request.ReceiveRequest(message.RequestId, message.Date, message.State, message.Payload,
+                    message.Request);
+            }
+            else
+            {
+                @event.EntryPointResponse(message.RequestId, message.Date, message.State, message.Payload,
+                    message.Request);
+            }
+
+            _repository.Save(@event, Guid.NewGuid(), null);
+        }
 
         public void Handle(SendRequestToDataProviderCommand message)
         {
-            var @event = _repository.GetById<Request>(message.RequestId) ??
-                         Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date,
-                             message.Connection, message.Payload);
+            var @event = _repository.GetById<Request>(message.RequestId);
 
-            @event.RequestSentToDataProvider(message.RequestId, message.DataProvider, message.Date, message.Connection,
-                message.Payload);
-
+            if (@event == null)
+            {
+                @event = Request.ReceiveRequest(message.RequestId, message.DataProvider, message.Date,
+                    message.Connection, message.Payload);
+            }
+            else
+            {
+                @event.RequestSentToDataProvider(message.RequestId, message.DataProvider, message.Date,
+                    message.Connection,
+                    message.Payload);
+            }
             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
@@ -53,5 +93,7 @@ namespace Workflow.Transactions.Write.Service.Handlers
 
             _repository.Save(@event, Guid.NewGuid(), null);
         }
+
+
     }
 }

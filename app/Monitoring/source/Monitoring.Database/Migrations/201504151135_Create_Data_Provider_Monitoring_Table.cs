@@ -8,7 +8,7 @@ namespace Monitoring.Database.Migrations
     {
         public override void Down()
         {
-            Delete.Table("MonitoringDataProvider");
+            Delete.Table("MonitoringDataProviders");
         }
 
         public override void Up()
@@ -20,6 +20,7 @@ namespace Monitoring.Database.Migrations
                 .WithColumn("SearchTerm").AsString().NotNullable()
                 .WithColumn("ElapsedTime").AsString().NotNullable()
                 .WithColumn("BucketId").AsString().NotNullable()
+                .WithColumn("Action").AsString().NotNullable()
                 .WithColumn("Date").AsDateTime().NotNullable();
 
         }
