@@ -126,7 +126,10 @@ namespace Billing.Api.Modules
                                                     DataProviderId = x.DataProviderId,
                                                     DataProviderName = x.DataProviderName,
                                                     CostPrice = x.CostPrice,
-                                                    RecommendedPrice = x.RecommendedPrice
+                                                    RecommendedPrice = x.RecommendedPrice,
+
+                                                    PackageId = x.PackageId,
+                                                    PackageName = "Package123"
 
                                                 }).Distinct();
 
@@ -181,6 +184,9 @@ namespace Billing.Api.Modules
         public string DataProviderName { get; set; }
         public double CostPrice { get; set; }
         public double RecommendedPrice { get; set; }
+
+        public Guid PackageId { get; set; }
+        public string PackageName { get; set; }
     }
 
     //Server side Paging
