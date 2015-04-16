@@ -4,7 +4,7 @@ using Shared.BuildingBlocks.AdoNet.Repository;
 
 namespace Monitoring.Domain.Repository
 {
-    class MonitoringRepository : IMonitoringRepository
+    public class MonitoringRepository : IMonitoringRepository
     {
        private readonly IDbConnection _connection;
         private readonly IRepositoryMapper _mapper;
