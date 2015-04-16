@@ -1,7 +1,7 @@
 ﻿using System;
 using DataPlatform.Shared.Identifiers;
 using NServiceBus;
-using Workflow.Billing.Repository;
+using Shared.BuildingBlocks.AdoNet.Repository;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Events;

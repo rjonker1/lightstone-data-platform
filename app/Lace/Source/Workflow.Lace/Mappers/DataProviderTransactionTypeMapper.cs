@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Identifiers;
-using Workflow.Billing.Repository;
+using Shared.BuildingBlocks.AdoNet.Mapping;
+using Shared.BuildingBlocks.AdoNet.Repository;
 using Workflow.Lace.Domain;
 using Workflow.Lace.Identifiers;
 

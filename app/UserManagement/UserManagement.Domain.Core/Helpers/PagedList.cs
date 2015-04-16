@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 
 namespace UserManagement.Domain.Core.Helpers
 {
@@ -16,13 +17,19 @@ namespace UserManagement.Domain.Core.Helpers
         bool HasNextPage { get; }
     }
 
+    [DataContract]
     public class PagedList<T> : IPagedList<T>
     {
         private readonly List<T> _inner;
+        [DataMember]
         public int PageIndex { get; private set; }
+        [DataMember]
         public int PageSize { get; private set; }
+        [DataMember]
         public int PageTotal { get; private set; }
+        [DataMember]
         public int RecordsTotal { get; private set; }
+        [DataMember]
         public int RecordsFiltered { get; private set; }
 
         public PagedList(IQueryable<T> source, int pageIndex, int pageSize)
@@ -54,11 +61,12 @@ namespace UserManagement.Domain.Core.Helpers
             _inner.AddRange(filtered.Skip(pageIndex * pageSize).Take(pageSize));
         }
 
+        [DataMember]
         public bool HasPreviousPage
         {
             get { return (PageIndex > 1); }
         }
-
+        [DataMember]
         public bool HasNextPage
         {
             get { return (PageIndex < PageTotal); }

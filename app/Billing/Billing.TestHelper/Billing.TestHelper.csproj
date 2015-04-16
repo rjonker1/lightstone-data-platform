@@ -124,8 +124,8 @@
     <Compile Include="Fakes\TestMessagePublisher.cs" />
     <Compile Include="Helpers\OverrideHelper.cs" />
     <Compile Include="Mothers\BillTransactionMessages\BillingTransaction.cs" />
-    <Compile Include="Mothers\BillTransactionMessages\BillTransactionMessageBuilder.cs" />
-    <Compile Include="Mothers\BillTransactionMessages\BillTransactionMessageMother.cs" />
+    <None Include="Mothers\BillTransactionMessages\BillTransactionMessageBuilder.cs.undo" />
+    <None Include="Mothers\BillTransactionMessages\BillTransactionMessageMother.cs.undo" />
     <Compile Include="Mothers\BillTransactionMessages\IDefineBillingTransaction.cs" />
     <Compile Include="Mothers\CreatTransactionDto\CreateTransactionBuilder.cs" />
     <Compile Include="Mothers\CreatTransactionDto\CreateTransactionMother.cs" />

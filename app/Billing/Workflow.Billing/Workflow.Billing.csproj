@@ -40,8 +40,7 @@
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Common.Logging">
       <HintPath>..\..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Core">
@@ -64,11 +63,14 @@
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
       <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.935\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.935\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
@@ -99,7 +101,6 @@
     <Compile Include="Domain\Entities\UserCheck1.cs" />
     <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
-    <Compile Include="Domain\InvoiceTransaction.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
     <Compile Include="Domain\Transaction.cs" />
@@ -118,15 +119,7 @@
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />
-    <Compile Include="Repository\IHaveTypeMappings.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\IRepositoryMapper.cs" />
-    <Compile Include="Repository\MappingsforTypes.cs" />
     <Compile Include="Repository\Repository.cs" />
-    <Compile Include="Repository\Dapper.cs" />
-    <Compile Include="Repository\RepositoryMapper.cs" />
-    <Compile Include="Repository\TransactionTypeMapper.cs" />
-    <Compile Include="Repository\TypeMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Billing.Api\Billing.Api.csproj">
@@ -140,10 +133,6 @@
     <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
       <Project>{8888CF49-7DCF-4984-A710-D2660F2CDBED}</Project>
       <Name>Billing.Domain.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Workflow.Billing.Messages\Workflow.Billing.Messages.csproj">
-      <Project>{ea4e1ff1-8581-4680-aa28-126294163093}</Project>
-      <Name>Workflow.Billing.Messages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

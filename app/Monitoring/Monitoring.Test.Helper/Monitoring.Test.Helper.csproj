@@ -54,34 +54,23 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fakes\" />
+    <Folder Include="Messages\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Builder\DataProviderCommands.cs" />
+    <None Include="Builder\DataProviderCommands.cs.redo" />
     <Compile Include="Builder\DataProviderEvents\EventMessageBuilder.cs" />
     <Compile Include="Builder\DataProviderInformation.cs" />
-    <Compile Include="Fakes\EventStore\FakeDatabase.cs" />
-    <Compile Include="Fakes\EventStore\FakeEventStoreRepository.cs" />
-    <Compile Include="Fakes\FakeMonitoringReadDatabase.cs" />
-    <Compile Include="Messages\MessageQueueing.cs" />
     <Compile Include="Mothers\BusFactory.cs" />
-    <Compile Include="Queues\QueueFunctions.cs" />
+    <None Include="Queues\QueueFunctions.cs.redo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\source\Monitoring.Domain.Core\Monitoring.Domain.Core.csproj">
-      <Project>{c33860b0-149b-440f-906a-ac4f20ca1a7f}</Project>
-      <Name>Monitoring.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\source\Monitoring.Queuing\Monitoring.Queuing.csproj">
-      <Project>{cb6f50d2-5750-4231-982e-5dfc3336bdc1}</Project>
-      <Name>Monitoring.Queuing</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

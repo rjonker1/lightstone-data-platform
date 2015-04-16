@@ -82,10 +82,6 @@
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\source\Monitoring.Write.Services\Monitoring.Write.Service.csproj">
-      <Project>{e5ef9629-c3af-48ec-8277-e3dcd18b2906}</Project>
-      <Name>Monitoring.Write.Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

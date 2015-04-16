@@ -209,7 +209,7 @@
 
                 <label class="control-label col-lg-4">Packages</label>
                 <div class="input-group col-lg-2 packag-autocomplete">
-                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder="Type to search & add packages" multiple class="chosen-select">
+                    <select id="PackageIdNames" name="PackageIdNames" data-placeholder=" " multiple class="chosen-select">
                         @foreach (var item in Model.Packages)
                         {
                             var isSelected = Model.Packages != null && Model.Packages.Select(x => x.Key).Contains(item.Key);

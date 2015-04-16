@@ -117,12 +117,12 @@
         <includes>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Shared.dll" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Shared.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
         <dependency id="Common.Logging" version="3.0.0.0" />
         <dependency id="Newtonsoft.Json" version="6.0.5" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
       </dependencies>
     </nuget>
 
@@ -134,8 +134,6 @@
         <includes>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.dll" to="lib\net45"/>
           <include pattern="Lightstone.DataPlatform.Workflow.Billing.pdb" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.dll" to="lib\net45"/>
-          <include pattern="Lightstone.DataPlatform.Workflow.Billing.Messages.pdb" to="lib\net45"/>
       </includes>
       <dependencies>
         <dependency id="Lightstone.DataPlatform.Shared" />
@@ -148,28 +146,6 @@
 
 
     <!-- BILLING END -->
-
-
-		<!-- EVENT TRACKING START
-		<nuget deploy="false">
-			<name>Lightstone.DataPlatform.EventTracking.Domain.Persistence</name>
-			<folder>app/EventTracking/EventTracking.Domain.Persistence</folder>
-			<author>CustomApp</author>
-			<description>EventTracking.Domain.Persistence</description>
-			<includes>
-        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Core.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Core.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Persistence.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.EventTracking.Domain.Persistence.pdb" to="lib\net45"/>
-        <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
-			</includes>
-			<dependencies>
-        <dependency id="EventStore.Client" version="2.0.2" />
-			</dependencies>
-		</nuget>-->
-		<!-- EVENT TRACKING END -->
 
 
     <!-- LACE START -->
@@ -217,27 +193,6 @@
         <dependency id="Lightstone.Dataplatform.PackageBuilder.Domain.Entities.Enums" />
       </dependencies>
     </nuget>
-
-  <!--  <nuget deploy="false">
-      <name>Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages</name>
-      <folder>app/Lace/source/Lace.Shared.Messages</folder>
-      <author>CustomApp</author>
-      <description>Lace.Shared.Monitoring.Messages</description>
-      <includes>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll" to="lib\net45"/>
-        <include pattern="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.pdb" to="lib\net45"/>
-        <include pattern="Newtonsoft.Json.dll" to="lib\net45"/>
-      </includes>
-      <dependencies>
-        <dependency id="Common.Logging" version="3.0.0.0" />
-        <dependency id="Lightstone.DataPlatform.Shared" />
-        <dependency id="NServiceBus" version="5.0.1" />
-        <dependency id="NServiceBus.RabbitMQ" version="2.0.1" />
-        <dependency id="RabbitMQ.Client" version="3.3.5" />
-      </dependencies>
-    </nuget> -->
 
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint</name>
@@ -303,7 +258,21 @@
 		<!-- LACE END -->
 
 
-		<!-- MONITORING START
+		<!-- MONITORING START -->
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Monitoring.Domain</name>
+      <folder>app/Monitoring/source/Monitoring.Domain</folder>
+      <author>CustomApp</author>
+      <description>Monitoring Messages</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Domain.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Monitoring.Domain.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
+      </dependencies>
+    </nuget>
+    <!--
     <nuget deploy="false">
       <name>Lightstone.DataPlatform.Monitoring</name>
       <folder>app/Monitoring/Monitoring</folder>
@@ -415,6 +384,18 @@
         <dependency id="Common.Logging" version="3.0.0.0" />
 			</dependencies>
 		</nuget>
+
+    <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet</name>
+      <folder>app/Shared/Shared.BuildingBlocks.AdoNet</folder>
+      <author>CustomApp</author>
+      <description>Building blocks for ADO Net Connections</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.pdb" to="lib\net45"/>
+      </includes>
+    </nuget>
+
 		<nuget deploy="false">
 			<name>Lightstone.Dataplatform.Shared.BuildingBlocks</name>
 			<folder>app/Shared/BuildingBlocks</folder>
