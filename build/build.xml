@@ -263,7 +263,7 @@
       <name>Lightstone.DataPlatform.Monitoring.Domain</name>
       <folder>app/Monitoring/source/Monitoring.Domain</folder>
       <author>CustomApp</author>
-      <description>Building blocks for ADO Net Connections</description>
+      <description>Monitoring Messages</description>
       <includes>
         <include pattern="Lightstone.DataPlatform.Monitoring.Domain.dll" to="lib\net45"/>
         <include pattern="Lightstone.DataPlatform.Monitoring.Domain.pdb" to="lib\net45"/>
