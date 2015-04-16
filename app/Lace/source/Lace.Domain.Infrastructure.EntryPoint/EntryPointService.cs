@@ -71,6 +71,7 @@ namespace Lace.Domain.Infrastructure.EntryPoint
                     _stopWatch ?? new DataProviderStopWatch(DataProviderCommandSource.EntryPoint.ToString()), Provider);
                 _log.ErrorFormat("Error occurred receiving request {0}",
                     request.ObjectToJson());
+                LogResponse(request);
                 CreateTransaction(request, DataProviderState.Failed);
                 return EmptyResponse;
             }

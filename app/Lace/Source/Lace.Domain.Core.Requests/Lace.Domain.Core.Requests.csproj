@@ -49,6 +49,7 @@
     <Compile Include="Contracts\IAmJisRequest.cs" />
     <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
     <Compile Include="Contracts\IAmMakeRequest.cs" />
+    <Compile Include="Contracts\IAmRequestField.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveBusiness.cs" />
     <Compile Include="Contracts\IHaveCarInformation.cs" />

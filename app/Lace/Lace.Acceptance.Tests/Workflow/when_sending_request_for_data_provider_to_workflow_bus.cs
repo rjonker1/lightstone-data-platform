@@ -36,12 +36,14 @@ namespace Lace.Acceptance.Tests.Workflow
             {
                 new WorkflowCommandBuilder(_bus, _packageId, _contractId, _userId, _packageVersion, _requestId, _system, _accountNumber)
                     .ForRequestReceived()
+                    .Wait()
                     .ForSuccessfulCallIvid()
                     .ForSuccessfulCallLightstoneAuto()
                     .ForSuccessfulCallToIvidTitleHolder()
                     .ForSuccessfulCallRgtVin()
                     .ForSuccessfulCallRgt()
                     .ForSuccessfulCallAudatex()
+                    .Wait()
                     .ForSuccessfulResponseToCaller();
             }
             catch (Exception ex)

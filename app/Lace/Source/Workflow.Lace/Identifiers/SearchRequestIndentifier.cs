@@ -33,12 +33,15 @@ namespace Workflow.Lace.Identifiers
         {
             
         }
+
         private static bool IsLicenseRequest(IPointToVehicleRequest request)
         {
             if (request == null)
                 return false;
 
-            return request.Vehicle.LicenceNo != string.Empty;
+            return !string.IsNullOrEmpty(request.Vehicle.LicenceNo);
+            //return !string.IsNullOrEmpty(request.Vehicle.RequestField.Field) &&
+            //       (request.Vehicle.RequestField.GetType().IsInstanceOfType(typeof (IAmLicenseNumberRequestField)));
         }
 
         private static bool IsVinRequest(IPointToVehicleRequest request)
@@ -46,7 +49,9 @@ namespace Workflow.Lace.Identifiers
             if (request == null)
                 return false;
 
-            return request.Vehicle.Vin != string.Empty;
+            return !string.IsNullOrEmpty(request.Vehicle.Vin);
+            //return !string.IsNullOrEmpty(request.Vehicle.RequestField.Field) &&
+            //       (request.Vehicle.RequestField.GetType().IsInstanceOfType(typeof(IAmVinNumberRequest)));
         }
 
         private static bool IsRegRequest(IPointToVehicleRequest request)
@@ -54,7 +59,9 @@ namespace Workflow.Lace.Identifiers
             if (request == null)
                 return false;
 
-            return request.Vehicle.RegisterNo != string.Empty;
+            return !string.IsNullOrEmpty(request.Vehicle.RegisterNo);
+            //return string.IsNullOrEmpty(request.Vehicle.RequestField.Field) &&
+            //       (request.Vehicle.RequestField.GetType().IsInstanceOfType(typeof(IAmRegisterNumberRequestField)));
         }
 
         public static SearchRequestIndentifier GetSearchRequest(ICollection<IPointToLaceRequest> request)

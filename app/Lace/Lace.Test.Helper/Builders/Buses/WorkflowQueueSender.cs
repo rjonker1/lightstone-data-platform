@@ -12,12 +12,13 @@ namespace Lace.Test.Helper.Builders.Buses
     {
         private ISendWorkflowCommand _workflow;
         private readonly DataProviderCommandSource _dataProvider;
-        private readonly DataProviderStopWatch _stopWatch;
-
+        private DataProviderStopWatch _stopWatch;
+        private DataProviderStopWatch _entryPointWatch;
         public WorkflowQueueSender(DataProviderCommandSource dataProvider)
         {
             _dataProvider = dataProvider;
             _stopWatch = new StopWatchFactory().StopWatchForDataProvider(dataProvider);
+            _entryPointWatch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
         }
 
         public WorkflowQueueSender InitQueue(ISendWorkflowCommand workflow)
@@ -47,15 +48,15 @@ namespace Lace.Test.Helper.Builders.Buses
             return this;
         }
 
-        public WorkflowQueueSender EntryPointRequest(ICollection<IPointToLaceRequest> request)
+        public WorkflowQueueSender EntryPointRequest(ICollection<IPointToLaceRequest> request, DataProviderStopWatch watch)
         {
-            _workflow.EntryPointRequest(request, _stopWatch);
+            _workflow.EntryPointRequest(request, _entryPointWatch);
             return this;
         }
 
-        public WorkflowQueueSender EntryPointResponse(object payload, DataProviderState state, ICollection<IPointToLaceRequest> request)
+        public WorkflowQueueSender EntryPointResponse(object payload, DataProviderState state, ICollection<IPointToLaceRequest> request, DataProviderStopWatch watch)
         {
-            _workflow.EntryPointResponse(payload, _stopWatch,
+            _workflow.EntryPointResponse(payload, watch,
                 state,request);
             return this;
         }
