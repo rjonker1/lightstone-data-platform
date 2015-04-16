@@ -8,12 +8,12 @@ namespace Monitoring.Database.Migrations
     {
         public override void Down()
         {
-            Delete.Table("MonitoringDataProviders");
+            Delete.Table("MonitoringDataProvider");
         }
 
         public override void Up()
         {
-            Create.Table("MonitoringDataProviders")
+            Create.Table("MonitoringDataProvider")
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("SearchType").AsString().NotNullable()

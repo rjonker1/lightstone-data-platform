@@ -47,7 +47,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(Guid.NewGuid(), message.Date,
                     new SearchIdentifier(message.Request.Type, message.Request.SearchTerm, message.Payload.MetaData,
                         message.RequestId, "Lace"),
-                    new MonitoringActionIdentifier(DataProviderAction.Request.ToString())));
+                    new MonitoringActionIdentifier(DataProviderAction.Response.ToString())));
             _monitoring.Add(response);
         }
     }
