@@ -5,6 +5,7 @@ using Billing.Domain.Core.Repositories;
 using Billing.Domain.Entities;
 using Billing.Domain.Entities.DemoEntities;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
 

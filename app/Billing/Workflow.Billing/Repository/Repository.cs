@@ -44,7 +44,7 @@ namespace Workflow.Billing.Repository
 
         public void Save(T entity)
         {
-            ValidateEntity(entity);
+            //ValidateEntity(entity);
 
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 

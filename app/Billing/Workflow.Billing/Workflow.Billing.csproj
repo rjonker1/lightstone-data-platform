@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ.0.47.10.380\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
@@ -55,7 +56,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.932\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <Private>True</Private>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.935\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
@@ -70,6 +73,7 @@
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\packages\RabbitMQ.Client.3.4.3\lib\net35\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,38 +87,34 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
+    <Compile Include="Domain\Entities\BillingTransaction.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
+    <Compile Include="Domain\Entities\MockTransaction.cs" />
+    <Compile Include="Domain\Entities\Package.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />
-    <Compile Include="Domain\Entities\Product.cs" />
+    <Compile Include="Domain\Entities\DataProvider.cs" />
+    <Compile Include="Domain\Entities\StageBilling.cs" />
     <Compile Include="Domain\Entities\Transaction.cs" />
+    <Compile Include="Domain\Entities\User.cs" />
     <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionOverrideMapping.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\PreBillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\TransactionMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\UserCheck1MappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\UserMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\ProductMaps.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviderMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\UserMetaMaps.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Infrastructure\NHibernate\AutoPersistenceModelConfiguration.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\DomainSignatureConvention.cs" />
     <Compile Include="Infrastructure\NHibernate\Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Repository\Repository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Billing.Api\Billing.Api.csproj">
-      <Project>{ED638DD5-E755-4B7A-940D-5C94AB425686}</Project>
-      <Name>Billing.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Billing.Domain.Core\Billing.Domain.Core.csproj">
-      <Project>{2A13D18D-B281-47CD-BF87-7415C857F2CD}</Project>
-      <Name>Billing.Domain.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Billing.Domain.Entities\Billing.Domain.Entities.csproj">
-      <Project>{8888CF49-7DCF-4984-A710-D2660F2CDBED}</Project>
-      <Name>Billing.Domain.Entities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

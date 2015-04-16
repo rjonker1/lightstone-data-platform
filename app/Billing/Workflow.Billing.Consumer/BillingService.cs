@@ -31,9 +31,9 @@ namespace Workflow.Billing.Consumer
                 new ConsumerInstaller(),
                 new BusInstaller());
 
-            //bus = container.Resolve<IBus>();
+            bus = container.Resolve<IBus>();
             advancedBus = container.Resolve<IAdvancedBus>();
-            var q = advancedBus.QueueDeclare("TESTQUEUE1");
+            var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
             //advancedBus.Consume(q, x => container.Resolve(typeof(IConsume<>)));
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
             advancedBus.Consume(q, x => x
@@ -41,7 +41,6 @@ namespace Workflow.Billing.Consumer
                                                                                 new Repository<UserMeta>(container.Resolve<ISession>()),
                                                                                 new Repository<PreBilling>(container.Resolve<ISession>()),
                                                                                 new Repository<DataProviderTransaction>(container.Resolve<ISession>()),
-                                                                                new Repository<Product>(container.Resolve<ISession>()),
                                                                                 message))
                 );
 

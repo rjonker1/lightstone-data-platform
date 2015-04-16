@@ -2,6 +2,7 @@
 using Billing.Domain.Core.MessageHandling;
 using Billing.Domain.Core.Repositories;
 using Billing.Domain.Entities.Commands.Entities;
+using DataPlatform.Shared.Repositories;
 
 namespace Billing.Domain.Entities
 {

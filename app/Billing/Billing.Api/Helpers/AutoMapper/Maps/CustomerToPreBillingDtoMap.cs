@@ -4,6 +4,7 @@ using AutoMapper;
 using Billing.Api.Modules;
 using Billing.Domain.Core.Repositories;
 using Billing.Domain.Entities.DemoEntities;
+using DataPlatform.Shared.Repositories;
 
 namespace Billing.Api.Helpers.AutoMapper.Maps
 {

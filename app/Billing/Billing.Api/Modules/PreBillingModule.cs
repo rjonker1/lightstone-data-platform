@@ -2,100 +2,194 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using AutoMapper;
 using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.Helpers;
+//using Billing.Domain.Core.Repositories;
 using Billing.Domain.Core.Repositories;
 using Billing.Domain.Entities;
 using Billing.Domain.Entities.DemoEntities;
 using Billing.Infrastructure.Helpers;
+//using Billing.Infrastructure.Repositories;
 using Billing.Infrastructure.Repositories;
+using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using NHibernate;
+using Workflow.Billing.Domain.Entities;
+using Product = Billing.Domain.Entities.DemoEntities.Product;
+using User = Billing.Domain.Entities.DemoEntities.User;
 
 namespace Billing.Api.Modules
 {
     public class PreBillingModule : NancyModule
     {
-        public PreBillingModule(IPreBillingRepository preBilling, IServerPageRepo serverPageRepo,
-                                IRepository<Customer> customersRepo, IRepository<User> users, IRepository<TransactionMocks> transactions, IRepository<Product> products)
+        public PreBillingModule(//IPreBillingRepository preBilling, IServerPageRepo serverPageRepo,
+                                IRepository<PreBilling> preBillingRepository)
         {
 
             Get["/PreBilling/"] = _ =>
             {
-                //var model = this.Bind<DataTablesViewModel>();
 
-                var offset = Context.Request.Query["offset"];
-                var limit = Context.Request.Query["limit"];
+                var customerList = new List<PreBillingDto>();
 
-                if (offset == null) offset = 0;
-                if (limit == null) limit = 10;
+                foreach (var transaction in preBillingRepository)
+                {
 
-                var userIds = users.ToList().Where(x => x.HasTransactions).Select(x => x.Id);
+                    var userList = new List<User>();
 
-                var customers = customersRepo.Where(c => c.Users.Any(x => userIds.Contains(x.Id)));
-                var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<PreBillingDto>>(customers, new[] { new PreBillingDto() });
+                    //Transactions total for customer
+                    var customerTransactionsTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                                                        .Select(x => x.TransactionId).Distinct().Count();
+                    //Products total for customer
+                    var customerPackagesTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
+                                                        .Select(x => x.PackageId).Distinct().Count();
 
-                //const string dto = "gh";
+                    //Customer
+                    var customer = new PreBillingDto
+                    {
+                        Id = transaction.CustomerId,
+                        CustomerName = transaction.CustomerName,
+                        Transactions = customerTransactionsTotal,
+                        Products = customerPackagesTotal
+                    };
+
+                    //Customer user
+                    var user = new User
+                    {
+                        Id = transaction.UserId,
+                        Username = transaction.Username,
+                        HasTransactions = true
+                    };
+
+                    //Indices
+                    var userIndex = userList.FindIndex(x => x.Id == user.Id);
+                    var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
+
+
+                    //Index restrictions for new records
+                    if (userIndex < 0) userList.Add(user);
+
+                    customer.Users = userList;
+
+                    if (customerIndex < 0) customerList.Add(customer);
+                }
+
+                //return Response.AsJson(new { data = customerList });
                 return Negotiate
                     .WithView("Index")
-                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
+                    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customerList });
             };
 
-            Get["/PreBilling/Customer/{id}/Users"] = param =>
+
+            Get["/PreBilling/Customer/{customerId}/Users"] = param =>
             {
-                var searchId = new Guid(param.id);
 
-                var userIds = users.ToList().Where(x => x.HasTransactions).Select(x => x.Id);
-                var customerUsers = customersRepo.Where(x => x.Id.Equals(searchId)).Select(x => x.Users.Where(u => userIds.Contains(u.Id)));
+                var customerSearchId = new Guid(param.customerId);
+                var customerUsersDetailList = new List<User>();
 
-                return Response.AsJson(new { data = customerUsers.Select(x => x).SelectMany(y => y) });
+                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                {
+                    //User
+                    var user = new User
+                    {
+                        Id = transaction.UserId,
+                        Name = transaction.Username,
+                        HasTransactions = true
+                    };
+
+                    //Index
+                    var userIndex = customerUsersDetailList.FindIndex(x => x.Id == user.Id);
+
+                    //Index restriction for new record
+                    if (userIndex < 0) customerUsersDetailList.Add(user);
+                }
+
+                return Response.AsJson(new { data = customerUsersDetailList });
             };
 
-            Get["/PreBilling/Customer/{id}/Products"] = param =>
+
+            Get["/PreBilling/Customer/{customerId}/Packages"] = param =>
             {
-                var searchId = new Guid(param.id);
-                var customerProducts = customersRepo.Get(searchId).Products;
 
-                return Response.AsJson(new { data = customerProducts });
+                var customerSearchId = new Guid(param.customerId);
+                var customerPackagesDetailList = new List<PackageDto>();
+
+                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                {
+
+                    var dataProviderList = preBillingRepository.Where(x => x.CustomerId == customerSearchId)
+                                            .Select(x =>
+                                                new DataProviderDto()
+                                                {
+                                                    DataProviderId = x.DataProviderId,
+                                                    DataProviderName = x.DataProviderName,
+                                                    CostPrice = x.CostPrice,
+                                                    RecommendedPrice = x.RecommendedPrice,
+
+                                                    PackageId = x.PackageId,
+                                                    PackageName = "Package123"
+
+                                                }).Distinct();
+
+                    //Package
+                    var package = new PackageDto()
+                    {
+                        PackageId = transaction.PackageId,
+                        DataProviders = dataProviderList
+                    };
+
+                    //Package Index
+                    var packageIndex = customerPackagesDetailList.FindIndex(x => x.PackageId == package.PackageId);
+
+                    //Index restriction for new record
+                    if (packageIndex < 0) customerPackagesDetailList.Add(package);
+                }
+
+                return Response.AsJson(new { data = customerPackagesDetailList });
             };
 
-            Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
+            //Get["/PreBilling/Transactions"] = _ => Response.AsJson(new { Products = products });
 
-            Get["/PreBilling/Customers"] = _ => Response.AsJson(new { Customers = customersRepo });
+            //Get["/PreBilling/Customers"] = _ => Response.AsJson(new { Customers = customersRepo });
 
         }
     }
 
-    public class PreBillingDto : Entity
+    //DTO's
+    public class PreBillingDto
     {
         public Guid Id { get; set; }
         public string CustomerName { get; set; }
         public IEnumerable<User> Users { get; set; }
         public string Type { get; set; }
         public string Owner { get; set; }
-        public IEnumerable<Product> Products { get; set; }
-        public IEnumerable<TransactionMocks> Transactions { get; set; }
+        public int Products { get; set; }
+        public int Transactions { get; set; }
         public string UserType { get; set; }
         public int Total { get; set; }
-
-        public PreBillingDto() { }
-
-        public PreBillingDto(Guid id, string customerName, IEnumerable<User> users, string type, string owner, IEnumerable<Product> products, IEnumerable<TransactionMocks> transactions, string userType, int total)
-            : base(id)
-        {
-            CustomerName = customerName;
-            Users = users;
-            Type = type;
-            Owner = owner;
-            Products = products;
-            Transactions = transactions;
-            UserType = userType;
-            Total = total;
-        }
     }
 
+    public class PackageDto
+    {
+        public Guid PackageId { get; set; }
+        public Guid PackageName { get; set; }
+        public IEnumerable<DataProviderDto> DataProviders { get; set; }
+    }
+
+    public class DataProviderDto
+    {
+        public Guid DataProviderId { get; set; }
+        public string DataProviderName { get; set; }
+        public double CostPrice { get; set; }
+        public double RecommendedPrice { get; set; }
+
+        public Guid PackageId { get; set; }
+        public string PackageName { get; set; }
+    }
+
+    //Server side Paging
     public interface IServerPageRepo : IRepository<Domain.Entities.Transaction>
     {
         PagedList<Domain.Entities.Transaction> Search(string searchValue, int pageIndex, int pageSize);

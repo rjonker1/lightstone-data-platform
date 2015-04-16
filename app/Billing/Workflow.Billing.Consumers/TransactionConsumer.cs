@@ -9,93 +9,69 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers
 {
-    public class TransactionConsumer //: IConsume<InvoiceTransactionCreated>
+    public class TransactionConsumer
     {
         private readonly IRepository<Transaction> _transactions;
         private readonly IRepository<DataProviderTransaction> _dataProviderTransactions;
         private readonly IRepository<UserMeta> _users;
-        private readonly IRepository<Product> _products;
         private readonly IRepository<PreBilling> _preBillingRepository;
 
         public TransactionConsumer(IRepository<Transaction> transactions, IRepository<UserMeta> users,
                                     IRepository<PreBilling> preBillingRepository,
                                     IRepository<DataProviderTransaction> dataProviderTransactions,
-                                    IRepository<Product> products,
                                     IMessage<InvoiceTransactionCreated> message)
         {
             _transactions = transactions;
             _users = users;
             _preBillingRepository = preBillingRepository;
             _dataProviderTransactions = dataProviderTransactions;
-            _products = products;
 
             Consume(message);
         }
 
         public void Consume(IMessage<InvoiceTransactionCreated> message)
         {
+
+            var customerId = new Guid("03641AC6-1561-4F1A-8AE5-7EB391541ABB");
             var transactionId = message.Body.TransactionId;
+            var currentTransaction = _transactions.Where(x => x.Id == transactionId);
 
-            if (_transactions.Any(x => x.Id == transactionId))
+            if (!_transactions.Any(x => x.Id == transactionId)) return;
+
+            foreach (var transaction in currentTransaction)
             {
-                foreach (var transaction in _transactions)
+
+                var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId);
+                var user = Mapper.Map<UserMeta, User>(_users.Get(new Guid("03641AC6-1561-4F1A-8AE5-7EB391541D3A")));
+
+                //Billing transaction recorded per product invoked
+                foreach (var product in products)
                 {
-                    //Logic to build up Denomalized data structure for new transaction
-                    var customerUsers = _users.Where(x => x.Id == transaction.UserId);
-                    var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
-
-                    //Products for transaction
-                    var transactionProducts = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId && x.Action == "Response");
-                    var productEntities = Mapper.Map<IEnumerable<DataProviderTransaction>, IEnumerable<Product>>(transactionProducts);
-
-                    foreach (var productEntity in productEntities)
+                    var preBillingTransaction = new PreBilling
                     {
-                        _products.Save(productEntity);
-                    }
+                        Id = Guid.NewGuid(),
+                        BillingId = 101,
+                        CustomerId = customerId,
+                        CustomerName = "CustomerABC",
+                        AccountNumber = transaction.AccountNumber,
+                        UserId = transaction.UserId,
+                        Username = user.Username,
+                        TransactionId = transaction.Id,
+                        PackageId = transaction.PackageId,
+                        RequestId = transaction.RequestId,
+                        DataProviderId = product.Id,
+                        DataProviderName = product.DataProviderName,
+                        CostPrice = product.CostPrice,
+                        RecommendedPrice = product.RecommendedPrice
+                    };
 
-                    //Mappings for User, Customer, Products(Dataproviders), Transaction
-                    //Build up entity with each mapping
-                    
-
-
-                    preBillingEntity.CustomerAccountId = transaction.AccountNumber;
-                    _preBillingRepository.Save(preBillingEntity);
+                    _preBillingRepository.Save(preBillingTransaction);
                 }
 
                 return;
             }
+
         }
-       
+
     }
 }
-
-
-//private readonly IRepository<UserMeta> _repository;
-//private readonly IRepository<Transaction> _transactions;
-
-//private readonly IRepository<PreBilling> _preBillings; 
-
-//public TransactionConsumer(IRepository<UserMeta> repository)//, IRepository<Transaction> transactions, IRepository<PreBilling> preBillings)
-//{
-//    _repository = repository;
-//    //_transactions = transactions;
-//    //_preBillings = preBillings;
-
-
-//    ////Add User transaction to customer in billing
-//    ////TODO: Build up based per customer
-
-//    var customerUsers = _repository.Where(x => true);
-//    //var customerTransactions = _transactions.Where(t => customerUsers.Any(u => u.Id == t.UserId));
-
-//    //var test = new PreBillingDto(customerUsers);//, customerTransactions);
-//    var preBillingEntity = Mapper.Map<IEnumerable<UserMeta>, PreBilling>(customerUsers);
-
-//    _preBillings.SaveOrUpdate(preBillingEntity);
-
-//}
-
-//public TransactionConsumer()
-//{
-
-//}
