@@ -2,6 +2,7 @@
 
 namespace DataPlatform.Shared.Enums
 {
+    [DataContract]
     public enum DataProviderAction
     {
         [EnumMember] Request = 1,
