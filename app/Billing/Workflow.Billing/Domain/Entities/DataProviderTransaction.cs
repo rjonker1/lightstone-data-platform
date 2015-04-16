@@ -3,7 +3,7 @@ using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class DataProviderTransaction //: Entity
+    public class DataProviderTransaction : Entity
     {
         public virtual Guid StreamId { get; protected internal set; }
         public virtual DateTime Date { get; protected internal set; }

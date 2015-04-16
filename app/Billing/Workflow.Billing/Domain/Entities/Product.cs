@@ -5,7 +5,7 @@ using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class Product : BillingTransaction//: Entity
+    public class Product : BillingTransaction
     {
         public virtual Guid ProductId { get; set; }
         public virtual string ProductName { get; set; }

@@ -34,6 +34,22 @@ namespace Workflow.Billing.Consumers
 
         public void Consume(IMessage<InvoiceTransactionCreated> message)
         {
+
+            var test = new PreBilling
+            {
+                Id = Guid.NewGuid(),
+                BillingId = 101,
+                CustomerId = Guid.NewGuid(),
+                CustomerName = "CustomerName",
+                UserId = Guid.NewGuid(),
+                Username = "Username",
+                TransactionId = Guid.NewGuid(),
+                ProductId = Guid.NewGuid(),
+                ProductName = "CustomerProduct"
+            };
+
+            _preBillingRepository.Save(test);
+
             //var transactionId = message.Body.TransactionId;
 
             //if (_transactions.Any(x => x.Id == transactionId))
@@ -55,7 +71,7 @@ namespace Workflow.Billing.Consumers
 
             //        //Mappings for User, Customer, Products(Dataproviders), Transaction
             //        //Build up entity with each mapping
-                    
+
 
 
             //        preBillingEntity.CustomerAccountId = transaction.AccountNumber;

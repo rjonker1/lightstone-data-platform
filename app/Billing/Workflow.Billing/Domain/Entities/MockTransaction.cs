@@ -6,6 +6,6 @@ namespace Workflow.Billing.Domain.Entities
 {
     public class MockTransaction : Product
     {
-        public virtual Guid TransactionId { get; protected internal set; }
+        public virtual Guid TransactionId { get; set; }
     }
 }

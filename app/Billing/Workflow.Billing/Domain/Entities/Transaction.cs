@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class Transaction //: Entity
+    public class Transaction : Entity
     {
         public virtual DateTime Date { get; protected internal set; }
         public virtual Guid PackageId { get; protected internal set; }
@@ -18,7 +17,6 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string State { get; protected internal set; }
         public virtual int StateId { get; protected internal set; }
         public virtual string AccountNumber { get; protected internal set; }
-        public virtual IEnumerable<Product> Products { get; protected internal set; } 
 
         public Transaction() { }
     }
