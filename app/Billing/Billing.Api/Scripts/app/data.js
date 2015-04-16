@@ -53,7 +53,7 @@ window.userGridActionEvents = {
             }, {
                 field: 'transactions',
                 title: 'User Transactions (Total)',
-                formatter: gridTransactionsFormatter
+                //formatter: gridTransactionsFormatter
             }]
         });
 

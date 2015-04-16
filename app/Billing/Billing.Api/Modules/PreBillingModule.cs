@@ -25,36 +25,19 @@ namespace Billing.Api.Modules
     public class PreBillingModule : NancyModule
     {
         public PreBillingModule(//IPreBillingRepository preBilling, IServerPageRepo serverPageRepo,
-                                //IRepository<Customer> customersRepo, IRepository<User> users, IRepository<TransactionMocks> transactions, IRepository<Product> products,
                                 IRepository<PreBilling> preBillingRepository)
         {
 
             Get["/PreBilling/"] = _ =>
             {
-                ////var model = this.Bind<DataTablesViewModel>();
-
-                //var offset = Context.Request.Query["offset"];
-                //var limit = Context.Request.Query["limit"];
-
-                //if (offset == null) offset = 0;
-                //if (limit == null) limit = 10;
-
-                //var userIds = users.ToList().Where(x => x.HasTransactions).Select(x => x.Id);
-
-                //var customers = customersRepo.Where(c => c.Users.Any(x => userIds.Contains(x.Id)));
-                //var dto = Mapper.Map<IEnumerable<Customer>, IEnumerable<PreBillingDto>>(customers, new[] { new PreBillingDto() });
-
-                ////const string dto = "gh";
-                //return Negotiate
-                //    .WithView("Index")
-                //    .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = dto });
-
 
                 var customerList = new List<PreBillingDto>();
 
-
                 foreach (var transaction in preBillingRepository)
                 {
+
+                    var userList = new List<User>();
+
                     //Transactions total for customer
                     var customerTransactionsTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.TransactionId).Distinct().Count();
@@ -62,30 +45,29 @@ namespace Billing.Api.Modules
                     var customerPackagesTotal = preBillingRepository.Where(x => x.CustomerId == transaction.CustomerId)
                                                         .Select(x => x.PackageId).Distinct().Count();
 
-                    var userList = new List<User>();
-                    //var customerTransactionsList = new List<TransactionMocks>();
-
-                    var customer = new PreBillingDto();
-                    var user = new User();
-
                     //Customer
-                    customer.Id = transaction.CustomerId;
-                    customer.CustomerName = transaction.CustomerName;
-                    customer.Transactions = customerTransactionsTotal;
-                    customer.Products = customerPackagesTotal;
+                    var customer = new PreBillingDto
+                    {
+                        Id = transaction.CustomerId,
+                        CustomerName = transaction.CustomerName,
+                        Transactions = customerTransactionsTotal,
+                        Products = customerPackagesTotal
+                    };
 
                     //Customer user
-                    user.Id = transaction.UserId;
-                    user.Username = transaction.Username;
-                    user.HasTransactions = true;
-
+                    var user = new User
+                    {
+                        Id = transaction.UserId,
+                        Username = transaction.Username,
+                        HasTransactions = true
+                    };
 
                     //Indices
                     var userIndex = userList.FindIndex(x => x.Id == user.Id);
                     var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
 
 
-                    //Check lists don't contain indices for new records
+                    //Index restrictions for new records
                     if (userIndex < 0) userList.Add(user);
 
                     customer.Users = userList;
@@ -99,15 +81,31 @@ namespace Billing.Api.Modules
                     .WithMediaRangeModel(MediaRange.FromString("application/json"), new { data = customerList });
             };
 
-            //Get["/PreBilling/Customer/{id}/Users"] = param =>
-            //{
-            //    var searchId = new Guid(param.id);
+            Get["/PreBilling/Customer/{customerId}/Users"] = param =>
+            {
 
-            //    var userIds = users.ToList().Where(x => x.HasTransactions).Select(x => x.Id);
-            //    var customerUsers = customersRepo.Where(x => x.Id.Equals(searchId)).Select(x => x.Users.Where(u => userIds.Contains(u.Id)));
+                var customerSearchId = new Guid(param.customerId);
+                var customerUserDetailList = new List<User>();
 
-            //    return Response.AsJson(new { data = customerUsers.Select(x => x).SelectMany(y => y) });
-            //};
+                foreach (var transaction in preBillingRepository.Where(x => x.CustomerId == customerSearchId))
+                {
+
+                    var user = new User
+                    {
+                        Id = transaction.UserId, 
+                        Name = transaction.Username,
+                        HasTransactions = true
+                    };
+
+                    //Index
+                    var userIndex = customerUserDetailList.FindIndex(x => x.Id == user.Id);
+
+                    //Index restriction for new record
+                    if (userIndex < 0) customerUserDetailList.Add(user);
+                }
+
+                return Response.AsJson(new { data = customerUserDetailList });
+            };
 
             //Get["/PreBilling/Customer/{id}/Products"] = param =>
             //{
