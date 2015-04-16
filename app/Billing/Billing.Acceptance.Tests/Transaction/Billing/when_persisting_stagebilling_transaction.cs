@@ -19,8 +19,8 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
                 .CheckProperty(c => c.Username, "Username")
                 .CheckProperty(c => c.TransactionId, Guid.NewGuid())
-                .CheckProperty(c => c.ProductId, Guid.NewGuid())
-                .CheckProperty(c => c.ProductName, "Customer Product")
+                .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
+                .CheckProperty(c => c.DataProviderName, "Customer Product")
                 .CheckProperty(c => c.RecommendedPrice, 100.00)
                 .VerifyTheMappings();
 
@@ -32,8 +32,8 @@ namespace Billing.Acceptance.Tests.Transaction.Billing
                 .CheckProperty(c => c.UserId, Guid.NewGuid())
                 .CheckProperty(c => c.Username, "Username")
                 .CheckProperty(c => c.TransactionId, Guid.NewGuid())
-                .CheckProperty(c => c.ProductId, Guid.NewGuid())
-                .CheckProperty(c => c.ProductName, "Client Product")
+                .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
+                .CheckProperty(c => c.DataProviderName, "Client Product")
                 .VerifyTheMappings();
         } 
     }

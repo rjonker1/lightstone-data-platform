@@ -22,8 +22,8 @@ namespace Billing.Acceptance.Tests.Transaction
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerName, "Customer")
                 .CheckProperty(c => c.TransactionId, Guid.NewGuid())
-                .CheckProperty(c => c.ProductId, Guid.NewGuid())
-                .CheckProperty(c => c.ProductName, "Test Product")
+                .CheckProperty(c => c.DataProviderId, Guid.NewGuid())
+                .CheckProperty(c => c.DataProviderName, "Test Product")
                 .VerifyTheMappings();
                     
         }
