@@ -1,28 +1,29 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Entities.Commands.Roles;
 
 namespace UserManagement.Domain.CommandHandlers.Roles
 {
     public class ImportRoleHandler : AbstractMessageHandler<ImportRole>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IBus _bus;
 
-        public ImportRoleHandler(IHandleMessages handler)
+        public ImportRoleHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportRole command)
         {
-            _handler.Handle(new ValueEntityDto("Owner", typeof(Role)));
-            _handler.Handle(new ValueEntityDto("SuperUser", typeof(Role)));
-            _handler.Handle(new ValueEntityDto("User", typeof(Role)));
-            _handler.Handle(new ValueEntityDto("Admin", typeof(Role)));
-            _handler.Handle(new ValueEntityDto("ProductManager", typeof(Role)));
-            _handler.Handle(new ValueEntityDto("Support", typeof(Role)));
-            _handler.Handle(new ValueEntityDto("AccountManager", typeof(Role)));
+            _bus.Publish(new CreateUpdateEntity(new Role("Owner"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new Role("SuperUser"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new Role("User"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new Role("Admin"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new Role("ProductManager"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new Role("Support"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new Role("AccountManager"), "Create"));
         }
     }
 }

@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using UserManagement.Domain.Enums;
 
 namespace UserManagement.Domain.Dtos
 {
     public class CustomerDto : EntityDto
     {
-        public CustomerDto()
-        {
-            CreateSourceIds = Enumerable.Empty<Guid>();
-        }
-
         public Guid Id { get; set; }
 
         [Required]
@@ -21,7 +15,7 @@ namespace UserManagement.Domain.Dtos
         public string AccountOwnerName { get; set; }
         public Guid CommercialStateId { get; set; }
         public string CommercialStateValue { get; set; }
-        public IEnumerable<Guid> CreateSourceIds { get; set; }
+        public string CreateSourceValue { get; set; }
         public Guid PlatformStatusId { get; set; }
         public string PlatformStatusValue { get; set; }
         public Guid BillingId { get; set; }
@@ -63,5 +57,6 @@ namespace UserManagement.Domain.Dtos
         public AddressDto PhysicalAddressDto { get; set; }
         // Work around for AutoMapper to map address as Nancy does not support nested Model binding when using url encoded form posts
         public AddressDto PostalAddressDto { get; set; }
+        public CreateSourceType CreateSourceType { get; set; }
     }
 }

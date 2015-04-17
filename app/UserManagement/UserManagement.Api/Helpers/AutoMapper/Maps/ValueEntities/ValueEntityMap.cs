@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Dtos;
@@ -12,39 +10,19 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.ValueEntities
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IEnumerable<ValueEntity>, IEnumerable<ValueEntityDto>>()
-                .ConvertUsing(s => s.Select(Mapper.Map<ValueEntity, ValueEntityDto>));
-       
-            Mapper.CreateMap<PaymentType, ValueEntityDto>()
+            Mapper.CreateMap<ValueEntity, ValueEntityDto>()
                 .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<PlatformStatus, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<CreateSource, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<CommercialState, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<ContractType, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<EscalationType, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<ContractDuration, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<Province, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<UserType, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
-            Mapper.CreateMap<Role, ValueEntityDto>()
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.GetType()))
-                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName));
+                .ForMember(x => x.AssemblyQualifiedName, opt => opt.MapFrom(x => x.GetType().AssemblyQualifiedName))
+                .Include<PaymentType, ValueEntityDto>()
+                .Include<PlatformStatus, PlatformStatusDto>()
+                .Include<CreateSource, CreateSourceDto>()
+                .Include<CommercialState, ValueEntityDto>()
+                .Include<ContractType, ValueEntityDto>()
+                .Include<EscalationType, ValueEntityDto>()
+                .Include<ContractDuration, ValueEntityDto>()
+                .Include<Province, ValueEntityDto>()
+                .Include<UserType, ValueEntityDto>()
+                .Include<Role, ValueEntityDto>();
 
             Mapper.CreateMap<ValueEntityDto, ValueEntity>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(x => x.Id == new Guid() ? Guid.NewGuid() : x.Id))

@@ -33,9 +33,9 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.AccountOwnerName, "AccountOwnerName")
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))
-                .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus"))
+                .CheckReference(c => c.PlatformStatus, new PlatformStatus("PlatformStatus", PlatformStatusType.Activated))
                 .CheckReference(c => c.ContactDetail, new ContactDetail("Name", "ContactName", "EmailAddress", physicalAddress, postalAddress))
-                .CheckComponentList(c => c.CreateSources, new HashSet<CreateSource> { new CreateSource("CreateSource") })
+                .CheckComponentList(c => c.CreateSource, new HashSet<CreateSource> { new CreateSource("CreateSource", CreateSourceType.Web) })
                 .CheckComponentList(c => c.Users, new HashSet<User>{ user })
                 .CheckComponentList(c => c.Contracts, new HashSet<Contract> { new Contract(DateTime.Now, "Name", "Detail", "By", DateTime.Now, "RegisteredName", "Reg#", new ContractType("Type"), new EscalationType("Esc"), new ContractDuration("Dur")) })
                 .VerifyTheMappings(customer);

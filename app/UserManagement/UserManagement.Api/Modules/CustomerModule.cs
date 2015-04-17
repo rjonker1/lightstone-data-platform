@@ -8,16 +8,18 @@ using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
 using UserManagement.Api.ViewModels;
+using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
+using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Api.Modules
 {
     public class CustomerModule : SecureModule
     {
-        public CustomerModule(IBus bus, ICustomerRepository customers)
+        public CustomerModule(IBus bus, ICustomerRepository customers, IRepository<CreateSource> createSources)
         {
             Get["/Customers"] = _ =>
             {
@@ -44,6 +46,7 @@ namespace UserManagement.Api.Modules
                 if (ModelValidationResult.IsValid)
                 {
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
+                    entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                     return View["Index"];

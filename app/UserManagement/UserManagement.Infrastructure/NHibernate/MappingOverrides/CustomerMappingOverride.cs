@@ -13,7 +13,7 @@ namespace UserManagement.Infrastructure.NHibernate.MappingOverrides
             mapping.References(x => x.CommercialState).Cascade.SaveUpdate();
             mapping.References(x => x.PlatformStatus).Cascade.SaveUpdate();
             mapping.References(x => x.Billing).Cascade.SaveUpdate();
-            mapping.HasManyToMany(x => x.CreateSources).Cascade.SaveUpdate().Table("CustomerCreateSource"); // Inverse as User entity responsible for saving
+            mapping.References(x => x.CreateSource).Cascade.SaveUpdate(); 
             mapping.HasManyToMany(x => x.Contracts).Cascade.SaveUpdate().Table("CustomerContract"); // Inverse as User entity responsible for saving
             mapping.HasManyToMany(x => x.Users).Cascade.SaveUpdate().Table("CustomerUser"); // Inverse as User entity responsible for saving
         }

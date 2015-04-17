@@ -1,24 +1,25 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Entities.Commands.EscalationTypes;
 
 namespace UserManagement.Domain.CommandHandlers.EscalationTypes
 {
     public class ImportEscalationTypeHandler : AbstractMessageHandler<ImportEscalationType>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IBus _bus;
 
-        public ImportEscalationTypeHandler(IHandleMessages handler)
+        public ImportEscalationTypeHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportEscalationType command)
         {
-            _handler.Handle(new ValueEntityDto("Annual % all products", typeof(EscalationType)));
-            _handler.Handle(new ValueEntityDto("Annual % per product", typeof(EscalationType)));
-            _handler.Handle(new ValueEntityDto("As per LSA", typeof(EscalationType)));
+            _bus.Publish(new CreateUpdateEntity(new EscalationType("Annual % all products"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new EscalationType("Annual % per product"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new EscalationType("As per LSA"), "Create"));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace UserManagement.Domain.Entities
         public virtual CommercialState CommercialState { get; protected internal set; }
         public virtual PlatformStatus PlatformStatus { get; protected internal set; }
         public virtual ContactDetail ContactDetail { get; protected internal set; }
-        public virtual ISet<CreateSource> CreateSources { get; protected internal set; }
+        public virtual CreateSource CreateSource { get; set; }
         public virtual ISet<User> Users { get; protected internal set; }
         public virtual ISet<Contract> Contracts { get; protected internal set; }
         public virtual bool IsActive { get; set; }
