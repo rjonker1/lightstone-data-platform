@@ -82,17 +82,10 @@
 
             <label class="control-label col-lg-4">Platform Status</label>
             <div class="input-group col-lg-2">
-                <select name="PlatformStatusId" data-placeholder="Select platform status" class="chosen-select">
-                    <option value=""></option>
-                    @foreach (SelectListItem item in ViewBag.PlatformStatuss.Value)
-                    {
-                        var isSelected = item.Value == Model.PlatformStatusId.ToString();
-                        <option selected="@isSelected" value="@item.Value">@item.Text</option>
-                    }
-                </select>
-            </div>
-            <div class="col-lg-6">
-                @Html.ValidationMessageFor(x => x.PlatformStatusId)
+                <span class="input-group-addon glyphicon glyphicon-pencil" id="basic-addon1"></span>
+                <div aria-describedby="basic-addon1">
+                    @Html.TextBoxFor(x => x.PlatformStatusValue, new { @class = "form-control", placeholder = "", @readonly = true })
+                </div>
             </div>
 
         </div>

@@ -11,8 +11,8 @@ using UserManagement.Domain.Entities.BusinessRules.Lookups.PaymentTypes;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.PlatformStatuses;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.Provinces;
 using UserManagement.Domain.Entities.BusinessRules.Lookups.Roles;
-using UserManagement.Domain.Entities.BusinessRules.Lookups.UserTypes;
 using UserManagement.Domain.Entities.BusinessRules.Packages;
+using UserManagement.Domain.Entities.BusinessRules.Roles;
 using UserManagement.Domain.Entities.BusinessRules.Users;
 
 namespace UserManagement.Domain.Entities.BusinessRules
@@ -47,7 +47,8 @@ namespace UserManagement.Domain.Entities.BusinessRules
             }
             else if (entity is Package && func.Equals("Create"))
                 _handler.Handle(new CreatePackageRule(entity as Package));
-
+            else if (entity is Role && func.Equals("Create"))
+                _handler.Handle(new CreateRoleRule(entity as Role));
             else if (entity is Contract)
             {
                 if(func.Equals("Create")) _handler.Handle(new CreateContractRule(entity as Contract));

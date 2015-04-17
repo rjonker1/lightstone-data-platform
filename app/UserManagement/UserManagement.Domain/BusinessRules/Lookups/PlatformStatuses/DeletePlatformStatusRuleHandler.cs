@@ -20,15 +20,15 @@ namespace UserManagement.Domain.BusinessRules.Lookups.PlatformStatuses
 
         public override void Handle(DeletePlatformStatusRule command)
         {
-            var entity = command.Entity;
-            var platformStatuses = _customerListings.Select(x => x).Where(x => x.PlatformStatus.Id.Equals(entity.Id));
+            //var entity = command.Entity;
+            //var platformStatuses = _customerListings.Select(x => x).Where(x => x.PlatformStatus.Id.Equals(entity.Id));
 
-            if (platformStatuses.Any())
-            {
-                var exception = new LightstoneAutoException("Platform Status is associated therefore cannot be deleted".FormatWith(entity.GetType().Name));
-                this.Warn(() => exception);
-                throw exception;
-            }
+            //if (platformStatuses.Any())
+            //{
+            //    var exception = new LightstoneAutoException("Platform Status is associated therefore cannot be deleted".FormatWith(entity.GetType().Name));
+            //    this.Warn(() => exception);
+            //    throw exception;
+            //}
         }
     }
 }

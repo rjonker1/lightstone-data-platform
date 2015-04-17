@@ -107,6 +107,7 @@
     <Compile Include="BusinessRules\Lookups\Provinces\DeleteProvinceRuleHandler.cs" />
     <Compile Include="BusinessRules\Lookups\Roles\DeleteRoleRuleHandler.cs" />
     <Compile Include="BusinessRules\Packages\CreatePackageRuleHandler.cs" />
+    <Compile Include="BusinessRules\Roles\CreateRoleRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRuleHandler.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRuleHandler.cs" />
     <Compile Include="CommandHandlers\AuditLogs\CreateAuditLogHandler.cs" />
