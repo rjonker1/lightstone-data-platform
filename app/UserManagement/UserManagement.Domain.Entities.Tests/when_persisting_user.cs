@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using UserManagement.Domain.Enums;
 using UserManagement.TestHelper.BaseTests;
 using UserManagement.TestHelper.Helpers;
 using Xunit.Extensions;
@@ -29,7 +30,7 @@ namespace UserManagement.Domain.Entities.Tests
                 .CheckProperty(c => c.IsActive, true)
                 .CheckReference(c => c.UserType, new UserType("Test"))
                 .CheckComponentList(c => c.Roles, roles)
-                .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer {Name = "Name", AccountOwnerName = "AccName", CommercialState = new CommercialState("State"),  PlatformStatus = new PlatformStatus("Status")} })
+                .CheckComponentList(c => c.Customers, new HashSet<Customer> { new Customer {Name = "Name", AccountOwnerName = "AccName", CommercialState = new CommercialState("State"),  PlatformStatus = new PlatformStatus("Status", PlatformStatusType.Activated)} })
                 .CheckComponentList(c => c.ClientUsers, new HashSet<ClientUser> { new ClientUser(new Client("Client"), "Alias") })
                 .VerifyTheMappings();
         }

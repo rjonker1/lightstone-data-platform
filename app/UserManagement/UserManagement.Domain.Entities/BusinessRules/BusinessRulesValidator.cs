@@ -63,7 +63,7 @@ namespace UserManagement.Domain.Entities.BusinessRules
             if (entity is EscalationType) _handler.Handle(new DeleteEscalationTypeRule(entity as EscalationType));
             if (entity is ContractDuration) _handler.Handle(new DeleteContractDurationRule(entity as ContractDuration));
             if (entity is Province) _handler.Handle(new DeleteProvinceRule(entity as Province));
-            if (entity is UserType) _handler.Handle(new DeleteUserTypeRule(entity as UserType));
+            //if (entity is UserType) _handler.Handle(new DeleteUserTypeRule(entity as UserType)); //todo: Provide implementation
             if (entity is Role) _handler.Handle(new DeleteRoleRule(entity as Role));
         }
     }

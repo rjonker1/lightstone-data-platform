@@ -15,7 +15,7 @@ namespace UserManagement.Domain.Entities.Tests
         [Observation]
         public void should_persist()
         {
-            new PersistenceSpecification<CustomerAccountNumber>(Session, new CustomEqualityComparer()).VerifyTheMappings();
+            new PersistenceSpecification<AccountNumber>(Session, new CustomEqualityComparer()).VerifyTheMappings();
         }
     }
 }

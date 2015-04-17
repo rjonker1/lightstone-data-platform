@@ -1,24 +1,25 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.CommercialStates;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Domain.CommandHandlers.CommercialStates
 {
     public class ImportCommercialStateHandler : AbstractMessageHandler<ImportCommercialState>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IBus _bus;
 
-        public ImportCommercialStateHandler(IHandleMessages handler)
+        public ImportCommercialStateHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportCommercialState command)
         {
-            _handler.Handle(new ValueEntityDto("BILLABLE", typeof(CommercialState)));
-            _handler.Handle(new ValueEntityDto("TRIAL", typeof(CommercialState)));
-            _handler.Handle(new ValueEntityDto("INTERNAL", typeof(CommercialState)));
+            _bus.Publish(new CreateUpdateEntity(new CommercialState("BILLABLE"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new CommercialState("TRIAL"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new CommercialState("INTERNAL"), "Create"));
         }
     }
 }

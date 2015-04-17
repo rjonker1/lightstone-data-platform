@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Conventions;
+using UserManagement.Domain.Core.Entities;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Infrastructure.NHibernate.Conventions
@@ -7,7 +8,7 @@ namespace UserManagement.Infrastructure.NHibernate.Conventions
     {
         public void Apply(FluentNHibernate.Conventions.Instances.IIdentityInstance instance)
         {
-            if (instance.EntityType != typeof (CustomerAccountNumber))
+            if (instance.EntityType.BaseType != typeof (IntEntity))
                 instance.GeneratedBy.Assigned();
             instance.UniqueKey(instance.EntityType.Name + "_PK_UK");
         }

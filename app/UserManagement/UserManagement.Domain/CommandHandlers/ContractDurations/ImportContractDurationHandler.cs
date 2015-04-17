@@ -1,27 +1,28 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.ContractDurations;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Domain.CommandHandlers.ContractDurations
 {
     public class ImportContractDurationHandler : AbstractMessageHandler<ImportContractDuration>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IBus _bus;
 
-        public ImportContractDurationHandler(IHandleMessages handler)
+        public ImportContractDurationHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportContractDuration command)
         {
-            _handler.Handle(new ValueEntityDto("Rolling MoM", typeof(ContractDuration)));
-            _handler.Handle(new ValueEntityDto("Custom", typeof(ContractDuration)));
-            _handler.Handle(new ValueEntityDto("6 Months", typeof(ContractDuration)));
-            _handler.Handle(new ValueEntityDto("12 Months", typeof(ContractDuration)));
-            _handler.Handle(new ValueEntityDto("18 Months", typeof(ContractDuration)));
-            _handler.Handle(new ValueEntityDto("24 Months", typeof(ContractDuration)));
+            _bus.Publish(new CreateUpdateEntity(new ContractDuration("Rolling MoM"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractDuration("Custom"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractDuration("6 Months"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractDuration("12 Months"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractDuration("18 Months"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractDuration("24 Months"), "Create"));
         }
     }
 }

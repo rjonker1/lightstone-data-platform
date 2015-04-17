@@ -1,24 +1,25 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.ContractTypes;
+using UserManagement.Domain.Entities.Commands.Entities;
 
 namespace UserManagement.Domain.CommandHandlers.ContractTypes
 {
     public class ImportContractTypeHandler : AbstractMessageHandler<ImportContractType>
     {
-        private readonly IHandleMessages _handler;
+        private readonly IBus _bus;
 
-        public ImportContractTypeHandler(IHandleMessages handler)
+        public ImportContractTypeHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportContractType command)
         {
-            _handler.Handle(new ValueEntityDto("Master Agreement", typeof(ContractType)));
-            _handler.Handle(new ValueEntityDto("Online Agreement", typeof(ContractType)));
-            _handler.Handle(new ValueEntityDto("Client Agreement", typeof(ContractType)));
+            _bus.Publish(new CreateUpdateEntity(new ContractType("Master Agreement"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractType("Online Agreement"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new ContractType("Client Agreement"), "Create"));
         }
     }
 }

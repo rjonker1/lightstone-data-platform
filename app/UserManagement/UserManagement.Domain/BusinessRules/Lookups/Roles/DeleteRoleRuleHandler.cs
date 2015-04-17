@@ -21,7 +21,7 @@ namespace UserManagement.Domain.BusinessRules.Lookups.Roles
         public override void Handle(DeleteRoleRule command)
         {
             var entity = command.Entity;
-            var roles = _userRoleListings.Select(x => x).Where(x => x.Role.Id.Equals(entity.Id));
+            var roles = _userRoleListings.Where(x => x.Role != null && x.Role.Id.Equals(entity.Id)).ToList();
 
             if (roles.Any())
             {

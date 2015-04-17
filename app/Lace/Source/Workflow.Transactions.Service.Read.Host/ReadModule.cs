@@ -26,13 +26,13 @@ namespace Workflow.Transactions.Service.Read.Host
                             ConfigurationManager.ConnectionStrings["workflow/transactions/database/read"]
                                 .ConnectionString), new RepositoryMapper(new MappingTransactionTypes())))
                 .As<ITransactionRepository>();
-            //builder.Register(
-            //    c =>
-            //        new MonitoringRepository(
-            //            new SqlConnection(
-            //                ConfigurationManager.ConnectionStrings["monitoring/database/read"]
-            //                    .ConnectionString), new RepositoryMapper(new MappingForMonitoringTypes())))
-            //    .As<IMonitoringRepository>();
+            builder.Register(
+                c =>
+                    new MonitoringRepository(
+                        new SqlConnection(
+                            ConfigurationManager.ConnectionStrings["monitoring/database/read"]
+                                .ConnectionString), new RepositoryMapper(new MappingForMonitoringTypes())))
+                .As<IMonitoringRepository>();
             builder.Register(
                 c =>
                     BusFactory.CreateAdvancedBus(

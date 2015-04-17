@@ -1,23 +1,24 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Entities.Commands.PaymentTypes;
 
 namespace UserManagement.Domain.CommandHandlers.PaymentTypes
 {
     public class ImportPaymentTypeHandler : AbstractMessageHandler<ImportPaymentType>
     {
-        private readonly IHandleMessages _handler;
+         private readonly IBus _bus;
 
-        public ImportPaymentTypeHandler(IHandleMessages handler)
+         public ImportPaymentTypeHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportPaymentType command)
         {
-            _handler.Handle(new ValueEntityDto("Debit Order", typeof(PaymentType)));
-            _handler.Handle(new ValueEntityDto("EFT", typeof(PaymentType)));
+            _bus.Publish(new CreateUpdateEntity(new PaymentType("Debit Order"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new PaymentType("EFT"), "Create"));
         }
     }
 }

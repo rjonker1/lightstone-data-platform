@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DataPlatform.Shared.Enums;
 using Lace.Domain.Core.Requests.Contracts;
 using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
@@ -16,6 +17,7 @@ using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Responses;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using Workflow.Lace.Messages.Core;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Lace.Test.Helper.Builders.Cmds
 {
@@ -29,6 +31,7 @@ namespace Lace.Test.Helper.Builders.Cmds
         private readonly string _accountNumber;
         private readonly long _packageVersion;
         private readonly string _system;
+        public readonly DataProviderStopWatch _Watch;
 
         public WorkflowCommandBuilder(ISendWorkflowCommand bus, Guid packageId, Guid contractId, Guid userId,
             long packageVersion, Guid requestId, string system, string accountNumber)
@@ -41,13 +44,20 @@ namespace Lace.Test.Helper.Builders.Cmds
             _packageVersion = packageVersion;
             _system = system;
             _accountNumber = accountNumber;
+            _Watch = new StopWatchFactory().StopWatchForDataProvider(DataProviderCommandSource.EntryPoint);
+        }
+
+        public WorkflowCommandBuilder Wait()
+        {
+            System.Threading.Thread.Sleep(30);
+            return this;
         }
 
         public WorkflowCommandBuilder ForRequestReceived()
         {
             var queue = new WorkflowQueueSender(DataProviderCommandSource.EntryPoint);
             queue.InitQueue(_bus)
-                .EntryPointRequest(new LicensePlateRequestBuilder().ForAllSources());
+                .EntryPointRequest(new LicensePlateRequestBuilder().ForAllSources(), _Watch);
             return this;
         }
 
@@ -149,7 +159,7 @@ namespace Lace.Test.Helper.Builders.Cmds
             queue.InitQueue(_bus)
                 .EntryPointResponse(
                     new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources())
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources(), _Watch)
                 .CreateTransaction(_packageId, _packageVersion, _userId, _requestId, _contractId, _system,
                     0, DataProviderState.Successful, _accountNumber);
             return this;

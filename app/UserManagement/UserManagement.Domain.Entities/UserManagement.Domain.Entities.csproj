@@ -93,6 +93,7 @@
     <Compile Include="BusinessRules\Packages\CreatePackageRule.cs" />
     <Compile Include="BusinessRules\Users\CreateUserRule.cs" />
     <Compile Include="BusinessRules\Users\SoftDeleteUserRule.cs" />
+    <Compile Include="ClientAccountNumber.cs" />
     <Compile Include="Commands\AuditLogs\CreateAuditLog.cs" />
     <Compile Include="Commands\CommercialStates\ImportCommercialState.cs" />
     <Compile Include="Commands\ContractDurations\ImportContractDuration.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Commands\Roles\ImportRole.cs" />
     <Compile Include="Commands\UserTypes\ImportUserType.cs" />
     <Compile Include="ContractPackage.cs" />
+    <Compile Include="AccountNumber.cs" />
     <Compile Include="CustomerAccountNumber.cs" />
     <Compile Include="DataImports\ImportStartupData.cs" />
     <Compile Include="IUserType.cs" />

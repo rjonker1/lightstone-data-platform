@@ -1,24 +1,24 @@
-﻿using UserManagement.Domain.Core.MessageHandling;
-using UserManagement.Domain.Dtos;
+﻿using MemBus;
+using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Domain.Entities;
+using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Entities.Commands.UserTypes;
 
 namespace UserManagement.Domain.CommandHandlers.UserTypes
 {
     public class ImportUserTypeHandler : AbstractMessageHandler<ImportUserType>
     {
+        private readonly IBus _bus;
 
-        private readonly IHandleMessages _handler;
-
-        public ImportUserTypeHandler(IHandleMessages handler)
+        public ImportUserTypeHandler(IBus bus)
         {
-            _handler = handler;
+            _bus = bus;
         }
 
         public override void Handle(ImportUserType command)
         {
-            _handler.Handle(new ValueEntityDto("Internal", typeof (UserType)));
-            _handler.Handle(new ValueEntityDto("External", typeof(UserType)));
+            _bus.Publish(new CreateUpdateEntity(new UserType("Internal"), "Create"));
+            _bus.Publish(new CreateUpdateEntity(new UserType("External"), "Create"));
         }
     }
 }

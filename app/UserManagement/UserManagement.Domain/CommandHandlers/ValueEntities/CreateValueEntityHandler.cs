@@ -22,7 +22,7 @@ namespace UserManagement.Domain.CommandHandlers.ValueEntities
         {
             if (_entityRetriever.Exists(command.Type, command.Id, command.Value)) return;
 
-            var entity = (ValueEntity)Mapper.Map(command, null, typeof(ValueEntityDto), command.Type);
+            var entity = (ValueEntity)Mapper.Map(command, typeof(ValueEntityDto), command.Type);
 
             _repository.Save(entity);
         }
