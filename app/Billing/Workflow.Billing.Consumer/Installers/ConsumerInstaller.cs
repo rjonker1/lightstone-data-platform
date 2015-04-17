@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Common.Logging;
 using EasyNetQ.AutoSubscribe;
 using Workflow.Billing.Consumers;
+using Workflow.Billing.Consumers.ConsumerTypes;
 
 namespace Workflow.Billing.Consumer.Installers
 {
@@ -18,7 +19,8 @@ namespace Workflow.Billing.Consumer.Installers
 
             container.Register(
                 Component.For<EntityConsumer>().ImplementedBy<EntityConsumer>(),
-                Component.For<TransactionConsumer>().ImplementedBy<TransactionConsumer>());
+                Component.For<InvoiceTransactionConsumer>().ImplementedBy<InvoiceTransactionConsumer>(),
+                Component.For(typeof(TransactionConsumer<>)).ImplementedBy(typeof(TransactionConsumer<>)));
         }
     }
 }

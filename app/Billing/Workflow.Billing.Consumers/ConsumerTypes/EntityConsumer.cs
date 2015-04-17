@@ -4,7 +4,7 @@ using EasyNetQ.AutoSubscribe;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 
-namespace Workflow.Billing.Consumers
+namespace Workflow.Billing.Consumers.ConsumerTypes
 {
     public class EntityConsumer : IConsume<UserMessage>
     {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using EasyNetQ;
@@ -8,46 +10,75 @@ namespace Shared.Messaging.Billing.Helpers
 {
     public class TransactionBus
     {
-        //private readonly IAdvancedBus advancedBus;
-        //private readonly IExchange exchange;
-        //private readonly IQueue queue;
-
-        //public TransactionBus(IAdvancedBus bus, string exchangeName, string queueName)
-        //{
-        //    advancedBus = bus;
-        //    exchange = advancedBus.ExchangeDeclare(exchangeName.Length > 0 ? exchangeName : "DEFAULTED_NAME", ExchangeType.Fanout);
-        //    queue = advancedBus.QueueDeclare(queueName);
-        //}
-
-        //public void Send<T>(T message) where T : class
-        //{
-        //    advancedBus.Bind(exchange, queue, "");
-
-        //    advancedBus.Publish<T>(exchange, "", true, false, new Message<T>(message));
-        //}
-
-        //public void Consume<T>()
-        //{
-        //    var queue = advancedBus.QueueDeclare("my_queue");
-        //    advancedBus.Consume(queue, (body, properties, info) => Task.Factory.StartNew(() =>
-        //    {
-        //        var message = Encoding.UTF8.GetString(body);
-        //        //Console.WriteLine("Got message: '{0}'", message);
-        //    }));
-        //}
-
-
         private readonly IAdvancedBus advancedBus;
+        private IExchange exchange;
+        private IQueue queue;
 
         public TransactionBus(IAdvancedBus bus)
         {
             advancedBus = bus;
         }
 
+        public void RegisterQueuesExchanges<T>(IEnumerable<T> messageTypes)
+        {
+            foreach (var messageType in messageTypes)
+            {
+                var attrs = Attribute.GetCustomAttributes(messageType.GetType());
+
+                foreach (Attribute attr in attrs)
+                {
+                    if (attr is QueueAttribute)
+                    {
+                        var messageQueueAttribute = (QueueAttribute)attr;
+
+                        var exchangeName = messageQueueAttribute.ExchangeName;
+                        var queueName = messageQueueAttribute.QueueName;
+
+                        exchange = advancedBus.ExchangeDeclare(exchangeName, ExchangeType.Fanout);
+                        queue = advancedBus.QueueDeclare(queueName);
+                        advancedBus.Bind(exchange, queue, "");
+                    }
+                }
+            }
+        }
+
+        private IExchange BuildMessageQueueExchange<T>(T messageType)
+        {
+            var exchangeName = "";
+            var queueName = "";
+
+            var attrs = Attribute.GetCustomAttributes(messageType.GetType());
+
+            foreach (Attribute attr in attrs)
+            {
+                if (attr is QueueAttribute)
+                {
+                    var messageQueueAttribute = (QueueAttribute)attr;
+
+                    exchangeName = messageQueueAttribute.ExchangeName;
+                    queueName = messageQueueAttribute.QueueName;
+
+                    break;
+                }
+            }
+
+            exchange = advancedBus.ExchangeDeclare(exchangeName.Length > 0 ? exchangeName : "DEFAULTED_NAME", ExchangeType.Fanout);
+            queue = advancedBus.QueueDeclare(queueName.Length > 0 ? queueName : "DEFAULTED_NAME");
+            advancedBus.Bind(exchange, queue, "");
+
+            return exchange;
+        }
+
+        public void SendDynamic<T>(T message) where T : class
+        {
+            var publishToExchange = BuildMessageQueueExchange(message);
+            advancedBus.Publish<T>(publishToExchange, "", true, false, new Message<T>(message));
+        }
+
         public void Send<T>(T message, string exchangeName, string queueName) where T : class
         {
-            var exchange = advancedBus.ExchangeDeclare(exchangeName.Length > 0 ? exchangeName : "DEFAULTED_NAME", ExchangeType.Fanout);
-            var queue = advancedBus.QueueDeclare(queueName);
+            exchange = advancedBus.ExchangeDeclare(exchangeName.Length > 0 ? exchangeName : "DEFAULTED_NAME", ExchangeType.Fanout);
+            queue = advancedBus.QueueDeclare(queueName.Length > 0 ? queueName : "DEFAULTED_NAME");
             advancedBus.Bind(exchange, queue, "");
 
             advancedBus.Publish<T>(exchange, "", true, false, new Message<T>(message));

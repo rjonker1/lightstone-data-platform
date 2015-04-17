@@ -1,8 +1,9 @@
-﻿using DataPlatform.Shared.Messaging;
+﻿using EasyNetQ;
 using Shared.Messaging.Billing.Helpers;
 
-namespace Shared.Messaging.Billing.Messages
+namespace DataPlatform.Shared.Messaging.Billing.Messages
 {
+    [Queue("DataPlatform.Transactions.Billing", ExchangeName = "DataPlatform.Transactions.Billing")]
     public class EntityMessage: IPublishableMessage
     {
         public Entity Entity { get; set; }

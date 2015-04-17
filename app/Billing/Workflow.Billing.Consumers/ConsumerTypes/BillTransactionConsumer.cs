@@ -1,6 +1,6 @@
 ﻿
 
-namespace Workflow.Billing.Consumers
+namespace Workflow.Billing.Consumers.ConsumerTypes
 {
     public class BillTransactionConsumer //: IConsume<BillTransactionMessage>
     {

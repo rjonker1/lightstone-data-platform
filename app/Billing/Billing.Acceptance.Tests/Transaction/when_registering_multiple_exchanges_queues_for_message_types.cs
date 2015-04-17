@@ -9,12 +9,12 @@ using Xunit.Extensions;
 
 namespace Billing.Acceptance.Tests.Transaction
 {
-    public class when_publishing_new_transaction_to_queue : Specification
+    public class when_registering_multiple_exchanges_queues_for_message_types : Specification
     {
         private readonly IAdvancedBus _bus;
         private InvoiceTransactionCreated transaction;
 
-        public when_publishing_new_transaction_to_queue()
+        public when_registering_multiple_exchanges_queues_for_message_types()
         {
             _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
         }
@@ -23,9 +23,15 @@ namespace Billing.Acceptance.Tests.Transaction
         {
             var bus = new TransactionBus(_bus);
 
-            transaction = new InvoiceTransactionCreated(new Guid("70b36ed9-2cbd-41e7-a22e-e708fd00156b"));
-            //bus.Send(transaction, "DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing");
-            bus.SendDynamic(transaction);
+            //Register Exchanges and Queues for multiple message types
+            var messageTypes = new ArrayList();
+            //messageTypes.Add(new InvoiceTransactionCreated());
+            messageTypes.Add(new EntityMessage());
+
+            IEnumerable<Object> listedMessageTypes = messageTypes.ToArray();
+
+            bus.RegisterQueuesExchanges(listedMessageTypes);
+            //END - Register
         }
 
         [Observation]

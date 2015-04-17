@@ -106,10 +106,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BillTransactionConsumer.cs" />
-    <Compile Include="EntityConsumer.cs" />
+    <Compile Include="ConsumerTypes\BillTransactionConsumer.cs" />
+    <Compile Include="ConsumerTypes\EntityConsumer.cs" />
+    <Compile Include="ConsumerTypes\InvoiceTransactionConsumer.cs" />
     <Compile Include="SqlServerConnectionController.cs" />
-    <Compile Include="TextMessageConsumer.cs" />
     <Compile Include="TransactionConsumer.cs" />
   </ItemGroup>
   <ItemGroup>

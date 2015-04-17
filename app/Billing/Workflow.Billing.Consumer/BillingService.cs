@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Castle.Windsor;
 using Common.Logging;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
+using EasyNetQ.AutoSubscribe;
 using NHibernate;
 using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
@@ -25,7 +27,7 @@ namespace Workflow.Billing.Consumer
             var container = new WindsorContainer().Install(
                 new NHibernateInstaller(),
                 new WindsorInstaller(),
-               // new MappingTypeInstaller(), //TODO: remove
+                // new MappingTypeInstaller(), //TODO: remove
                 new RepositoryInstaller(),
                 new AutoMapperInstaller(),
                 new ConsumerInstaller(),
@@ -37,12 +39,7 @@ namespace Workflow.Billing.Consumer
             //advancedBus.Consume(q, x => container.Resolve(typeof(IConsume<>)));
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
             advancedBus.Consume(q, x => x
-                .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer(new Repository<Transaction>(container.Resolve<ISession>()),
-                                                                                new Repository<UserMeta>(container.Resolve<ISession>()),
-                                                                                new Repository<PreBilling>(container.Resolve<ISession>()),
-                                                                                new Repository<DataProviderTransaction>(container.Resolve<ISession>()),
-                                                                                message))
-                );
+                .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container)));
 
             _log.DebugFormat("Billing service started");
         }
@@ -57,4 +54,5 @@ namespace Workflow.Billing.Consumer
             _log.DebugFormat("Stopped billing service");
         }
     }
+
 }

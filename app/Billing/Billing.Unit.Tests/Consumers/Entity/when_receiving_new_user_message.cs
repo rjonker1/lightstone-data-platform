@@ -9,6 +9,7 @@ using DataPlatform.Shared.Repositories;
 using Moq;
 using Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Consumers;
+using Workflow.Billing.Consumers.ConsumerTypes;
 using Workflow.Billing.Domain.Entities;
 using Xunit.Extensions;
 
