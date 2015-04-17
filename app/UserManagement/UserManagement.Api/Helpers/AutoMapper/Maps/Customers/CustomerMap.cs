@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Helpers.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using UserManagement.Domain.Core.Repositories;
 using UserManagement.Domain.Dtos;
@@ -17,7 +16,6 @@ namespace UserManagement.Api.Helpers.AutoMapper.Maps.Customers
             Mapper.CreateMap<IEnumerable<Customer>, IEnumerable<CustomerDto>>()
                 .ConvertUsing(s => s.Select(Mapper.Map<Customer, CustomerDto>));
             Mapper.CreateMap<Customer, CustomerDto>()
-                .ForMember(dest => dest.CustomerAccountNumber, opt => opt.MapFrom(x => "{0}{1}".FormatWith(x.Name.Substring(0, 3), x.CustomerAccountNumber.Id.ToString().PadLeft(5, '0'))))
                 .ForMember(dest => dest.CreateSourceIds, opt => opt.MapFrom(x => x.CreateSources.Select(y => y.Id)));
 
             Mapper.CreateMap<CustomerDto, Customer>()

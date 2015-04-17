@@ -29,7 +29,7 @@ namespace UserManagement.Domain.Entities.Tests
             new PersistenceSpecification<Customer>(Session, new CustomEqualityComparer())
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.Name, "Name")
-                .CheckProperty(c => c.CustomerAccountNumber, new CustomerAccountNumber())
+                .CheckProperty(c => c.CustomerAccountNumber, new AccountNumber())
                 .CheckProperty(c => c.AccountOwnerName, "AccountOwnerName")
                 .CheckReference(c => c.Billing, billing)
                 .CheckReference(c => c.CommercialState, new CommercialState("CommercialState"))

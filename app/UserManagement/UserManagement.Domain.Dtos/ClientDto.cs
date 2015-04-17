@@ -6,6 +6,7 @@ namespace UserManagement.Domain.Dtos
     {
         public Guid Id { get; set; } 
         public string Name { get; set; }
+        public string ClientAccountNumber { get; set; }
         public Guid ContactDetailId { get; set; }
         public string ContactDetailContactNumber { get; set; }
         public string ContactDetailContactPerson { get; set; }
