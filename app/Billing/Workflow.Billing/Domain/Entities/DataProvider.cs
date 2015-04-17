@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Shared.Messaging.Billing.Helpers;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Domain.Dtos

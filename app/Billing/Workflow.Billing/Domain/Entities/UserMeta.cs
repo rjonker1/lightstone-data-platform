@@ -1,4 +1,4 @@
-﻿using Shared.Messaging.Billing.Helpers;
+﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
 
 namespace Workflow.Billing.Domain.Entities
 {

@@ -1,8 +1,8 @@
 ﻿using System;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Instances;
-using Shared.Messaging.Billing.Helpers;
 using Workflow.Billing.Domain.Entities;
 using Workflow.Billing.Domain.NHibernate.Attributes;
 using Workflow.Billing.Helpers.AutoMapper.MappingOverrides;

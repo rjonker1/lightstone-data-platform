@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using Shared.Messaging.Billing.Messages;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Helpers.AutoMapper.Maps

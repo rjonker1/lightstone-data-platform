@@ -3,10 +3,10 @@ using System.IO;
 using Billing.TestHelper.Extensions;
 using Billing.TestHelper.Helpers;
 using Castle.Windsor;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Shared.Messaging.Billing.Helpers;
 using Workflow.Billing.Consumer.Installers;
 using Xunit.Extensions;
 

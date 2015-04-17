@@ -1,14 +1,8 @@
 ﻿using System;
 using AutoMapper;
-using Billing.Api.Helpers.AutoMapper.Maps;
-using Billing.Api.Installers;
-using Billing.TestHelper;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using Moq;
-using Shared.Messaging.Billing.Messages;
-using Workflow.Billing.Consumers;
 using Workflow.Billing.Consumers.ConsumerTypes;
 using Workflow.Billing.Domain.Entities;
 using Xunit.Extensions;

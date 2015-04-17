@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using DataPlatform.Shared.Helpers.Extensions;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Repositories;
 using NHibernate;
 using NHibernate.Linq;
-using Shared.Messaging.Billing.Helpers;
 using Workflow.Billing.Helpers.Extensions;
 
 namespace Workflow.Billing.Repository
