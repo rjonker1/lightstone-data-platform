@@ -24,7 +24,7 @@ namespace UserManagement.Domain.BusinessRules.Contracts
             var entity = command.Entity;
 
             var hasClients = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Clients.Where(cl => cl.IsActive.Equals(true))).ToList();
-            var hasCustomers = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Customers.Where(cus => cus.IsActive.Equals(true))).ToList();
+            var hasCustomers = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Customers.Where(cus => cus.IsLocked.Equals(true))).ToList();
             var hasPackages = _contracts.Where(x => x.Id.Equals(entity.Id)).Select(u => u.Packages.Where(pkg => pkg.IsActive.Equals(true))).ToList();
 
             if (hasClients.Any())
