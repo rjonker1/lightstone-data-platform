@@ -25,7 +25,7 @@ namespace Billing.Acceptance.Tests.Transaction
 
             transaction = new InvoiceTransactionCreated(new Guid("70b36ed9-2cbd-41e7-a22e-e708fd00156b"));
             //bus.Send(transaction, "DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing");
-            bus.SendDynamic(transaction);
+            //bus.SendDynamic(transaction);
         }
 
         [Observation]

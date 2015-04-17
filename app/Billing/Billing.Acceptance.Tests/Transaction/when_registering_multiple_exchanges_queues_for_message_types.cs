@@ -26,11 +26,11 @@ namespace Billing.Acceptance.Tests.Transaction
             //Register Exchanges and Queues for multiple message types
             var messageTypes = new ArrayList();
             //messageTypes.Add(new InvoiceTransactionCreated());
-            messageTypes.Add(new EntityMessage());
+            //messageTypes.Add(new EntityMessage());
 
             IEnumerable<Object> listedMessageTypes = messageTypes.ToArray();
 
-            bus.RegisterQueuesExchanges(listedMessageTypes);
+            //bus.RegisterQueuesExchanges(listedMessageTypes);
             //END - Register
         }
 
