@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using EasyNetQ;
 using EasyNetQ.Topology;
 
-namespace Shared.Messaging.Billing.Helpers
+namespace DataPlatform.Shared.Messaging.Billing.Helpers
 {
     public class TransactionBus
     {

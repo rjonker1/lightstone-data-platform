@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared.Messaging.Billing.Helpers
+namespace DataPlatform.Shared.Messaging.Billing.Helpers
 {
     public interface IEntity
     {

@@ -1,5 +1,5 @@
-﻿using EasyNetQ;
-using Shared.Messaging.Billing.Helpers;
+﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
+using EasyNetQ;
 
 namespace DataPlatform.Shared.Messaging.Billing.Messages
 {
