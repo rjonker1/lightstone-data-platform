@@ -1,5 +1,4 @@
 ﻿using EasyNetQ;
-using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
 namespace Billing.Acceptance.Tests.Transaction
