@@ -36,4 +36,29 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public PayloadIdentifier Payload { get; private set; }
     }
+
+    [DataContract]
+    public class RequestReceived : IPublishableMessage
+    {
+        public RequestReceived()
+        {
+            
+        }
+
+        public RequestReceived(Guid id, Guid requestId, DateTime date)
+        {
+            Id = id;
+            RequestId = requestId;
+            Date = date;
+        }
+
+        [DataMember]
+        public Guid Id { get; set; }
+
+        [DataMember]
+        public Guid RequestId { get; private set; }
+
+        [DataMember]
+        public DateTime Date { get; private set; }
+    }
 }
