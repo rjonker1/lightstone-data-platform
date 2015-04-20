@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Text.RegularExpressions;
 using Monitoring.Dashboard.UI.Core.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Workflow.Lace.Domain.Aggregates;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
@@ -18,6 +15,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
     {
         [DataMember]
         public byte[] Payload { get; private set; }
+
         [DataMember]
         public int CommitSequence { get; private set; }
 
@@ -67,7 +65,8 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         }
 
-        public MonitoringDataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date, bool hasErrors,
+        public MonitoringDataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
+            bool hasErrors,
             string elapsedTime, string searchType, string searchTerm)
         {
             Id = id;
@@ -96,57 +95,17 @@ namespace Monitoring.Dashboard.UI.Core.Models
             if (SerializedPayloads == null)
                 return string.Empty;
 
-            var json = new StringBuilder();
-           // var json = new JObject();
-           
-            foreach (var payload in SerializedPayloads.OrderBy(o => o.CommitSequence))
-            {
-                var jsonString = Encoding.UTF8.GetString(payload.Payload).Substring(1);
-
-                
-                    //.Replace(@"\",""); //.JsonToObject();
-                // Regex.Replace(a, @"\\n?", "");
-
-                jsonString = jsonString.TrimStart('[');
-                jsonString = jsonString.TrimEnd(']');
-                //a = a.TrimStart('{');
-                //a = a.TrimEnd('}');
-                //jsonString.Replace("[", "");
-                //jsonString.Replace("]", "");
-                //jsonString.Replace(@"\", "");
-                var request = jsonString.JsonToObject<Request>();
-                Debug.WriteLine(request);
-                Debug.WriteLine(jsonString);
-                //Regex.Replace(a, @"\s+", "");
-
-                //var p = a.JsonToObject();
-                //var p = a.JsonToObject();
-                //var o = p.ObjectToJson();
-                //var j = JsonExtensions.ObjectToJson(p);
-                //json.Append(p.Replace(@"\",""));
-                //json.Append(j);
-                //json.Append(a);
-                //json.Add(JObject.Parse(a.AsJsonString()));
-                //json = JValue.Parse(jsonString);
-                json.Append(jsonString);
-            }
-            Debug.WriteLine(json.ToString());
-            var jsonArray = JArray.Parse(json.ToString()) as JArray;
-
-
-            //JObject jasonObject = (JObject) JObject.Parse(json.ToString());
-            //jasonObject.Add();
-
-            //var jobject = string.Format("[{0}]",json.ToString()).JsonToObject();
-            //var jstring = JsonExtensions.ObjectToJson(jobject);
-
-            Debug.WriteLine("***********JSON************");
-            Debug.WriteLine("\n");
-            Debug.WriteLine("Serialized : {0} Length: {1}", SerializedPayloads, SerializedPayloads.Count());
-            Debug.WriteLine(jsonArray.ToString(Formatting.None));
-            Debug.WriteLine("\n");
-            Debug.WriteLine("************END***********");
-            return jsonArray.ToString(Formatting.None); // json.ToString(Formatting.None);
+            var jarray = new JArray();
+            SerializedPayloads.OrderBy(o => o.CommitSequence)
+                .ToList()
+                .ForEach(f => jarray.Add(JArray.Parse(Encoding.UTF8.GetString(f.Payload).Substring(1))));
+            return jarray.ToString(Formatting.None);
+            //foreach (var payload in SerializedPayloads.OrderBy(o => o.CommitSequence))
+            //{
+            //    var jsonString = Encoding.UTF8.GetString(payload.Payload).Substring(1);
+            //    //jarray.Add(JArray.Parse(JsonExtensions.ObjectToJson(request)));
+            //    jarray.Add(JArray.Parse(jsonString));
+            //}
         }
     }
 }

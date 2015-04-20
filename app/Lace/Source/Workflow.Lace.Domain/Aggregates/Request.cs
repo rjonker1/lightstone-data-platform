@@ -8,6 +8,7 @@ using Workflow.Billing.Messages.Publishable;
 using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 using Workflow.Lace.Messages.Events;
+using Workflow.Lace.Messages.Infrastructure;
 
 namespace Workflow.Lace.Domain.Aggregates
 {

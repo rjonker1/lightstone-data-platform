@@ -31,8 +31,18 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 var requests =
                     _monitoring.Items<MonitoringDataProvider>(SelectStatements.GetDataProviderRequestResponses).ToList();
 
-                var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForManyRequestId,
-                    new {@RequestIds = requests.FirstOrDefault().RequestId});
+                if (!requests.Any())
+                    return;
+
+                var payloads = new List<Commit>();
+
+                requests.ForEach(
+                    f =>
+                        payloads.AddRange(_commit.Items<Commit>(SelectStatements.GetCommitForRequestId,
+                            new {@RequestId = f.RequestId}).ToArray()));
+
+                //var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForRequestId,
+                //    new {@RequestIds = requests.FirstOrDefault().RequestId});
 
                 MonitoringResponse =
                     requests.Select(
