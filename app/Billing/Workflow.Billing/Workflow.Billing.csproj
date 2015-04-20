@@ -110,6 +110,7 @@
     <Compile Include="Helpers\AutoMapper\MappingOverrides\TransactionMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserCheck1MappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\UserMappingOverride.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\ClientMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\CustomerMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ICreateAutoMapperMaps.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\PreBillingMap.cs" />

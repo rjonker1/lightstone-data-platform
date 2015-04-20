@@ -21,6 +21,7 @@ namespace Workflow.Billing.Consumer.Installers
                 Component.For<InvoiceTransactionConsumer>().ImplementedBy<InvoiceTransactionConsumer>(),
                 Component.For<UserConsumer>().ImplementedBy<UserConsumer>(),
                 Component.For<CustomerConsumer>().ImplementedBy<CustomerConsumer>(),
+                Component.For<ClientConsumer>().ImplementedBy<ClientConsumer>(),
                 Component.For(typeof(TransactionConsumer<>)).ImplementedBy(typeof(TransactionConsumer<>)));
         }
     }

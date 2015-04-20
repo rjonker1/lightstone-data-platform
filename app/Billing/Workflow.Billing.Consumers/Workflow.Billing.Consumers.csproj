@@ -105,6 +105,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ConsumerTypes\BillTransactionConsumer.cs" />
+    <Compile Include="ConsumerTypes\ClientConsumer.cs" />
     <Compile Include="ConsumerTypes\CustomerConsumer.cs" />
     <Compile Include="ConsumerTypes\InvoiceTransactionConsumer.cs" />
     <Compile Include="ConsumerTypes\UserConsumer.cs" />

@@ -6,19 +6,19 @@ using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumers.ConsumerTypes
 {
-    public class CustomerConsumer
+    public class ClientConsumer
     {
         private readonly IRepository<AccountMeta> _accountRepository;
 
-        public CustomerConsumer(IRepository<AccountMeta> accountRepository)
+        public ClientConsumer(IRepository<AccountMeta> accountRepository)
         {
             _accountRepository = accountRepository;
         }
 
-        public void Consume(IMessage<CustomerMessage> message)
+        public void Consume(IMessage<ClientMessage> message)
         {
-            //New Customer
-            var entity = Mapper.Map<CustomerMessage, Customer>(message.Body);
+            //New Client
+            var entity = Mapper.Map<ClientMessage, Client>(message.Body);
             _accountRepository.SaveOrUpdate(entity);
         }
     }

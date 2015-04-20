@@ -9,6 +9,7 @@ using EasyNetQ.AutoSubscribe;
 using NHibernate;
 using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
+using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumer
 {
@@ -39,7 +40,8 @@ namespace Workflow.Billing.Consumer
             advancedBus.Consume(q, x => x
                 .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container))
                 .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container))
-                .Add<CustomerMessage>((message, info) => new TransactionConsumer<CustomerMessage>(message, container)));
+                .Add<CustomerMessage>((message, info) => new TransactionConsumer<CustomerMessage>(message, container))
+                .Add<ClientMessage>((message, info) => new TransactionConsumer<ClientMessage>(message, container)));
 
             _log.DebugFormat("Billing service started");
         }
