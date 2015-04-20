@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using AutoMapper;
 using DataPlatform.Shared.Messaging.Billing.Messages;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
@@ -8,9 +10,9 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
 {
     public class ClientConsumer
     {
-        private readonly IRepository<AccountMeta> _accountRepository;
+        private readonly IRepository<Client> _accountRepository;
 
-        public ClientConsumer(IRepository<AccountMeta> accountRepository)
+        public ClientConsumer(IRepository<Client> accountRepository)
         {
             _accountRepository = accountRepository;
         }
@@ -19,6 +21,27 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
         {
             //New Client
             var entity = Mapper.Map<ClientMessage, Client>(message.Body);
+            var dbEntity = _accountRepository.Select(x => x).Where(x => x.ClientId == message.Body.ClientId);
+
+            if (dbEntity.Any())
+            {
+
+                var updateEntity = new Client()
+                {
+                    Id = dbEntity.FirstOrDefault().Id,
+                    AccountNumber = dbEntity.FirstOrDefault().AccountNumber,
+                    Created = dbEntity.FirstOrDefault().Created,
+                    CreatedBy = dbEntity.FirstOrDefault().CreatedBy,
+                    ClientId = dbEntity.FirstOrDefault().ClientId,
+                    ClientName = entity.ClientName,
+                    Modified = DateTime.UtcNow,
+                    ModifiedBy = GetType().Assembly.FullName
+                };
+
+                _accountRepository.SaveOrUpdate(updateEntity);
+                return;
+            }
+
             _accountRepository.SaveOrUpdate(entity);
         }
     }

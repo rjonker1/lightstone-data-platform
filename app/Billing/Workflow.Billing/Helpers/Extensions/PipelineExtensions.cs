@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
+using NHibernate;
 
 namespace Workflow.Billing.Helpers.Extensions
 {
@@ -10,6 +11,13 @@ namespace Workflow.Billing.Helpers.Extensions
 
         public ISession BeforeTransaction(ISession session)
         {
+            session.Flush();
+            session.FlushMode = FlushMode.Always;
+
+            //Entity IEntity = session.Load<Entity>(entity.Id);
+
+            //if (IEntity.Id == entity.Id) session.Evict(session.Load<Entity>(entity.Id));
+
             session.BeginTransaction();
             return session;
         }

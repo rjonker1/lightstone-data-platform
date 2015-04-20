@@ -23,8 +23,10 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
             var customer = new CustomerMessage()
             {
                 Id = Guid.NewGuid(),
+                Created = DateTime.UtcNow,
+                CreatedBy = "UNITTEST",
                 AccountNumber = "CUS001",
-                CustomerId = Guid.NewGuid(),
+                CustomerId = new Guid("662872BB-38DF-4436-87A8-E4D45B6DD70B"),
                 CustomerName = "Customer 1"
             };
 

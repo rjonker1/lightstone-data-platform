@@ -47,7 +47,7 @@ namespace Workflow.Billing.Repository
 
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 
-            currSession.SaveOrUpdate(entity);
+            currSession.Save(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
         }
@@ -64,7 +64,8 @@ namespace Workflow.Billing.Repository
 
             var currSession = pipelineExtensions.BeforeTransaction(_session);
 
-            currSession.SaveOrUpdate(entity);
+            //currSession.SaveOrUpdate(entity);
+            currSession.Merge(entity);
 
             pipelineExtensions.AfterTransaction(currSession);
         }
