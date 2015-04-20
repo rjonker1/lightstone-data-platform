@@ -20,10 +20,14 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            var transaction = new InvoiceTransactionCreated(new Guid("BA754D23-E5A1-4DFA-A7D4-0E71A5724C5D"));
+            var customer = new CustomerMessage()
+            {
+                Id = Guid.NewGuid(),
+                AccountNumber = "CUS001",
+                CustomerName = "Customer 1"
+            };
 
-            //bus.Send(transaction, "TESTEXCHANGE1", "TESTQUEUE1");
-            bus.SendDynamic(transaction);
+            bus.SendDynamic(customer);
         }
 
         [Observation]

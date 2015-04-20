@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
@@ -51,9 +53,9 @@ namespace UserManagement.Api.Modules
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
 
                     ////RabbitMQ
-                    //var metaEntity = Mapper.Map(entity, new CustomerMessage());
-                    //var advancedBus = new TransactionBus(eBus);
-                    //advancedBus.SendDynamic(metaEntity);
+                    var metaEntity = Mapper.Map(entity, new CustomerMessage());
+                    var advancedBus = new TransactionBus(eBus);
+                    advancedBus.SendDynamic(metaEntity);
 
                     return View["Index"];
                 }
