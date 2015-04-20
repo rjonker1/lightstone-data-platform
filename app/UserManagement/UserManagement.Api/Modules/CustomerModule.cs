@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
-using DataPlatform.Shared.Messaging.Billing.Messages;
 using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
