@@ -68,6 +68,8 @@
   <ItemGroup>
     <Compile Include="Helpers\Entity.cs" />
     <Compile Include="Helpers\TransactionBus.cs" />
+    <Compile Include="Messages\ClientMessage.cs" />
+    <Compile Include="Messages\CustomerMessage.cs" />
     <Compile Include="Messages\EntityMessage.cs" />
     <Compile Include="Helpers\IEntity.cs" />
     <Compile Include="Messages\InvoiceTransactionCreated.cs" />

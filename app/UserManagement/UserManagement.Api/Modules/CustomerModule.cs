@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using MemBus;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
+using DataPlatform.Shared.Messaging.Billing.Messages;
+using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
@@ -14,12 +16,13 @@ using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Domain.Enums;
 using UserManagement.Infrastructure.Repositories;
+using IBus = MemBus.IBus;
 
 namespace UserManagement.Api.Modules
 {
     public class CustomerModule : SecureModule
     {
-        public CustomerModule(IBus bus, ICustomerRepository customers, IRepository<CreateSource> createSources)
+        public CustomerModule(IBus bus, IAdvancedBus eBus, ICustomerRepository customers, IRepository<CreateSource> createSources)
         {
             Get["/Customers"] = _ =>
             {
@@ -48,6 +51,11 @@ namespace UserManagement.Api.Modules
                     var entity = Mapper.Map(dto, customers.Get(dto.Id));
                     entity.CreateSource = createSources.FirstOrDefault(x => x.CreateSourceType == CreateSourceType.UserManagement);
                     bus.Publish(new CreateUpdateEntity(entity, "Create"));
+
+                    ////RabbitMQ
+                    //var metaEntity = Mapper.Map(entity, new CustomerMessage());
+                    //var advancedBus = new TransactionBus(eBus);
+                    //advancedBus.SendDynamic(metaEntity);
 
                     return View["Index"];
                 }
