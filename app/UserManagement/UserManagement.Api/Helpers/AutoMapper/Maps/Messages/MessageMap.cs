@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Shared.Messaging.Billing.Messages;
+using DataPlatform.Shared.Messaging.Billing.Messages;
 using UserManagement.Domain.Entities;
 
 namespace UserManagement.Api.Helpers.AutoMapper.Maps.Messages

@@ -2,11 +2,13 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
+using EasyNetQ;
 using MemBus;
 using MemBus.Configurators;
 using UserManagement.Domain.Core.MessageHandling;
 using UserManagement.Infrastructure;
 using Workflow.BuildingBlocks;
+using IBus = MemBus.IBus;
 
 namespace UserManagement.Api.Installers
 {
@@ -22,8 +24,8 @@ namespace UserManagement.Api.Installers
                                                                      .Construct()));
 
             container.Register(
-                Component.For<EasyNetQ.IBus>()
-                    .UsingFactoryMethod(() => BusFactory.CreateBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
+                Component.For<IAdvancedBus>()
+                    .UsingFactoryMethod(() => BusFactory.CreateAdvancedBus("workflow/billing/queue"))//.CreateBus("workflow/billing/queue", container))
                     .LifestyleSingleton()
                 );
 

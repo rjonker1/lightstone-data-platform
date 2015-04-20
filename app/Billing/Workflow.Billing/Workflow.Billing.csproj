@@ -88,7 +88,7 @@
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
     <Compile Include="Domain\Entities\BillingTransaction.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
-    <Compile Include="Domain\Entities\MockTransaction.cs" />
+    <Compile Include="Domain\Entities\UserTransaction.cs" />
     <Compile Include="Domain\Entities\Package.cs" />
     <Compile Include="Domain\Entities\PreBilling.cs" />
     <Compile Include="Domain\Entities\DataProvider.cs" />

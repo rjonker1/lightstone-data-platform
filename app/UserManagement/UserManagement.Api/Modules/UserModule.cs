@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using MemBus;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
+using DataPlatform.Shared.Messaging.Billing.Messages;
+using EasyNetQ;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
 using Shared.BuildingBlocks.Api.Security;
-using Shared.Messaging.Billing.Messages;
 using UserManagement.Api.ViewModels;
 using UserManagement.Domain.Dtos;
 using UserManagement.Domain.Entities;
 using UserManagement.Domain.Entities.Commands.Entities;
 using UserManagement.Infrastructure.Repositories;
+using IBus = MemBus.IBus;
 
 namespace UserManagement.Api.Modules
 {
     public class UserModule : SecureModule
     {
-        public UserModule(IBus bus, EasyNetQ.IBus eBus, IUserRepository users)
+        public UserModule(IBus bus, IAdvancedBus eBus, IUserRepository users)
         {
             Get["/Users/All"] = _ => Response.AsJson(Mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users));
 
@@ -56,7 +58,8 @@ namespace UserManagement.Api.Modules
 
                 ////RabbitMQ
                 var metaEntity = Mapper.Map(entity, new UserMessage());
-                eBus.Publish(metaEntity);
+                var advancedBus = new TransactionBus(eBus);
+                advancedBus.SendDynamic(metaEntity);
 
                 return null;
             };

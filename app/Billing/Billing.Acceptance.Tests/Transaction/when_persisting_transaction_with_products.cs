@@ -17,7 +17,7 @@ namespace Billing.Acceptance.Tests.Transaction
         [Observation]
         public void should_persist()
         {
-            new PersistenceSpecification<MockTransaction>(Session)
+            new PersistenceSpecification<UserTransaction>(Session)
                 .CheckProperty(c => c.Id, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerId, Guid.NewGuid())
                 .CheckProperty(c => c.CustomerName, "Customer")

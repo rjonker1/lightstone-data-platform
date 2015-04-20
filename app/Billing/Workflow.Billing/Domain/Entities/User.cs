@@ -3,7 +3,7 @@ using System;
 
 namespace Workflow.Billing.Domain.Entities
 {
-    public class User : MockTransaction
+    public class User : UserTransaction
     {
         public virtual Guid UserId { get; set; }
         public virtual string Username { get; set; }
