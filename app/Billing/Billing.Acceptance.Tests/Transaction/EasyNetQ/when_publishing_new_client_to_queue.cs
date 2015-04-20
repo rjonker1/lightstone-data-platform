@@ -7,11 +7,11 @@ using Xunit.Extensions;
 
 namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
 {
-    public class when_publishing_new_customer_to_queue : Specification
+    public class when_publishing_new_client_to_queue : Specification
     {
         private readonly IAdvancedBus _bus;
 
-        public when_publishing_new_customer_to_queue()
+        public when_publishing_new_client_to_queue()
         {
             _bus = BusFactory.CreateAdvancedBus("workflow/billing/queue");
         }
@@ -20,15 +20,15 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            var customer = new CustomerMessage()
+            var client = new ClientMessage()
             {
                 Id = Guid.NewGuid(),
-                AccountNumber = "CUS001",
-                CustomerId = Guid.NewGuid(),
-                CustomerName = "Customer 1"
+                AccountNumber = "CLI001",
+                ClientId = Guid.NewGuid(),
+                ClientName = "Client 1"
             };
 
-            bus.SendDynamic(customer);
+            bus.SendDynamic(client);
         }
 
         [Observation]

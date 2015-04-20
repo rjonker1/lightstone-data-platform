@@ -68,11 +68,11 @@
       <HintPath>..\..\packages\Iesi.Collections.3.2.0.1001\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.961\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.962\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.961, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.962, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.961\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.962\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.953\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
