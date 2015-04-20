@@ -17,7 +17,7 @@ namespace Monitoring.Database.Migrations
                 .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
                 .WithColumn("RequestId").AsGuid().NotNullable()
                 .WithColumn("SearchType").AsString().NotNullable()
-                .WithColumn("SearchTerm").AsString().NotNullable()
+                .WithColumn("SearchTerm").AsString()
                 .WithColumn("ElapsedTime").AsString().NotNullable()
                 .WithColumn("BucketId").AsString().NotNullable()
                 .WithColumn("Action").AsString().NotNullable()

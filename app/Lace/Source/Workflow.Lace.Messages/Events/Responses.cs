@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
 using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
+    
     [DataContract]
     public class ResponseFromDataProvider : IPublishableMessage
     {

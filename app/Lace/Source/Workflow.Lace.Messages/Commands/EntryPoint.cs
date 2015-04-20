@@ -5,7 +5,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Commands
 {
-    [Serializable]
+    
     [DataContract]
     public class ReceiveEntryPointRequest
     {
@@ -36,7 +36,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class ReturnEntryPointResponse
     {

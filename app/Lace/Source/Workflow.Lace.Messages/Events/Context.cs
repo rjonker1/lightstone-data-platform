@@ -6,7 +6,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
+    
     [DataContract]
     public class SecurityFlagRaised : IPublishableMessage
     {
@@ -47,7 +47,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class DataProviderConfigured : IPublishableMessage
     {
@@ -88,7 +88,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class DataProviderResponseTransformed : IPublishableMessage
     {
@@ -129,7 +129,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class DataProviderError : IPublishableMessage
     {
@@ -171,7 +171,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class DataProviderCallStarted : IPublishableMessage
     {
@@ -213,7 +213,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class DataProviderCallEnded : IPublishableMessage
     {

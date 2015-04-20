@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2B0A64
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projection", "Projection", "{8E06A796-C2FA-48E4-8C0C-2954E6A6FDAE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{8E06A796-C2FA-48E4-8C0C-2954E6A6FDAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitoring.Dashboard.UI", "Monitoring\source\Monitoring.Dashboard.UI\Monitoring.Dashboard.UI.csproj", "{8AA179C2-2BB7-4F0F-8DF1-CEADEC086D17}"
 EndProject

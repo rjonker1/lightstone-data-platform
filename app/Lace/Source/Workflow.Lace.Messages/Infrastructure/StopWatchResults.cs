@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 namespace Workflow.Lace.Messages.Infrastructure
 {
-    [Serializable]
     [DataContract]
     public class StopWatchResults
     {

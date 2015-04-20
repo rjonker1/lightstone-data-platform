@@ -2,10 +2,13 @@
 {
     public class SelectStatements
     {
-        public const string GetEventsBySource =
-            @"select AggregateId, Payload,[Source],[Date],[TimeStamp] from  Monitoring where AggregateId in (select top 100 AggregateId from Monitoring where Source = @Source  group by AggregateId order by max(Date) desc)";
+        public const string GetDataProviderRequestResponses =
+            "select top 100 * from MonitoringDataProvider where [action] = 'response' order by [date] desc";
 
-        public const string GetEventBySourceAndId =
-            @"select AggregateId, Payload,[Source],[Date],[TimeStamp] from  Monitoring where [Source] = @Source and AggregateId = @AggregateId";
+        public const string GetCommitForRequestId =
+            "select Payload, CommitSequence,[CommitStamp] from commits where StreamIdOriginal = @RequestId order by [CommitStamp], CommitSequence";
+
+        public const string GetCommitForManyRequestId =
+            "select StreamIdOriginal, Payload, CommitSequence,[CommitStamp] from commits where StreamIdOriginal in (@RequestIds) order by [CommitStamp], CommitSequence";
     }
 }
