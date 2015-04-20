@@ -4,7 +4,7 @@ namespace Workflow.Billing.Domain.Entities
 {
     public class AccountMeta : Entity
     {
-        public virtual string AccountId { get; set; }
+        public virtual string AccountNumber { get; set; }
 
         public AccountMeta()
         {
