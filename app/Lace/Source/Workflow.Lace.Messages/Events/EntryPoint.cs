@@ -56,7 +56,7 @@ namespace Workflow.Lace.Messages.Events
         public StateIdentifier State { get; private set; }
 
         [DataMember]
-        public SearchRequestIndentifier Request { get; private set; }
+        public SearchRequestIndentifier RequestContext { get; private set; }
 
         public EntryPointReturnedResponse(Guid id, Guid requestId, DateTime date, PayloadIdentifier payload,
             StateIdentifier state,SearchRequestIndentifier request)
@@ -66,7 +66,7 @@ namespace Workflow.Lace.Messages.Events
             Date = date;
             Payload = payload;
             State = state;
-            Request = request;
+            RequestContext = request;
         }
     }
 }

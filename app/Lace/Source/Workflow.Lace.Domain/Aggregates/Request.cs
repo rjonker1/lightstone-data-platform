@@ -65,43 +65,45 @@ namespace Workflow.Lace.Domain.Aggregates
         public void StartCall(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
             DateTime date, CommandType commandType, string metaData, string payload, string message)
         {
-            RaiseEvent(new DataProviderCallStarted(Guid.NewGuid(), requestId, dataProvider, date, commandType, metaData,
-                payload, message));
+            RaiseEvent(new DataProviderCallStarted(Guid.NewGuid(), requestId, dataProvider, date, commandType,
+                new PayloadIdentifier(metaData,
+                    payload, message)));
         }
 
         public void EndCall(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
             DateTime date, CommandType commandType, string metaData, string payload, string message)
         {
-            RaiseEvent(new DataProviderCallEnded(Guid.NewGuid(), requestId, dataProvider, date, commandType, metaData,
-                payload, message));
+            RaiseEvent(new DataProviderCallEnded(Guid.NewGuid(), requestId, dataProvider, date, commandType,
+                new PayloadIdentifier(metaData,
+                    payload, message)));
         }
 
         public void RaiseSecurityFlag(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
             DateTime date, CommandType commandType, string metaData, string payload, string message)
         {
-            RaiseEvent(new SecurityFlagRaised(Guid.NewGuid(), requestId, dataProvider, date, commandType, metaData,
-                payload, message));
+            RaiseEvent(new SecurityFlagRaised(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
+                    payload, message)));
         }
 
         public void Configuration(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
             DateTime date, CommandType commandType, string metaData, string payload, string message)
         {
-            RaiseEvent(new DataProviderConfigured(Guid.NewGuid(), requestId, dataProvider, date, commandType, metaData,
-                payload, message));
+            RaiseEvent(new DataProviderConfigured(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
+                    payload, message)));
         }
 
         public void Transformation(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
             DateTime date, CommandType commandType, string metaData, string payload, string message)
         {
-            RaiseEvent(new DataProviderResponseTransformed(Guid.NewGuid(), requestId, dataProvider, date, commandType, metaData,
-                payload, message));
+            RaiseEvent(new DataProviderResponseTransformed(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
+                    payload, message)));
         }
 
         public void Error(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
             DateTime date, CommandType commandType, string metaData, string payload, string message)
         {
-            RaiseEvent(new DataProviderError(Guid.NewGuid(), requestId, dataProvider, date, commandType, metaData,
-                payload, message));
+            RaiseEvent(new DataProviderError(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
+                    payload, message)));
         }
 
 
@@ -184,6 +186,36 @@ namespace Workflow.Lace.Domain.Aggregates
         {
             return new Request(requestId, date, state, payload, request);
         }
+
+     
+        [DataMember]
+        public Guid RequestId { get; private set; }
+
+        [DataMember]
+        public DataProviderIdentifier DataProvider { get; private set; }
+
+        [DataMember]
+        public DateTime Date { get; private set; }
+
+        [DataMember]
+        public ConnectionTypeIdentifier Connection { get; private set; }
+
+        [DataMember]
+        public PayloadIdentifier Payload { get; private set; }
+
+        [DataMember]
+        public CommandType CommandType { get; private set; }
+
+        [DataMember]
+        public StateIdentifier State { get; private set; }
+
+        [DataMember]
+        public SearchRequestIndentifier RequestContext { get; private set; }
+
+        [DataMember]
+        public DataProviderCommandSource DataProviderId { get; private set; }
+
+       
 
         //[DataMember]
         //public Guid RequestId { get; private set; }

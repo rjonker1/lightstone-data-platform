@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.Messaging;
+using Workflow.Lace.Identifiers;
 using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Events
@@ -17,33 +18,26 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderCommandSource DataProviderId { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
 
         [DataMember]
         public CommandType CommandType { get; private set; }
+        
         [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
-
+        public PayloadIdentifier Payload { get; private set; }
+      
         public SecurityFlagRaised(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, string metaData, string payload, string message)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
-            DataProvider = dataProvider;
+            DataProviderId = dataProvider;
             Date = date;
             CommandType = commandType;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 
@@ -58,7 +52,7 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderCommandSource DataProviderId { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -66,25 +60,17 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public CommandType CommandType { get; private set; }
         [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderConfigured(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, string metaData, string payload, string message)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
-            DataProvider = dataProvider;
+            DataProviderId = dataProvider;
             Date = date;
             CommandType = commandType;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 
@@ -99,7 +85,7 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderCommandSource DataProviderId { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -107,25 +93,17 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public CommandType CommandType { get; private set; }
         [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderResponseTransformed(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, string metaData, string payload, string message)
+            DateTime date, CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
-            DataProvider = dataProvider;
+            DataProviderId = dataProvider;
             Date = date;
             CommandType = commandType;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 
@@ -140,34 +118,25 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderCommandSource DataProviderId { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
 
         [DataMember]
         public CommandType CommandType { get; private set; }
-
         [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderError(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, string metaData, string payload, string message)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
-            DataProvider = dataProvider;
+            DataProviderId = dataProvider;
             Date = date;
             CommandType = commandType;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 
@@ -182,7 +151,7 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderCommandSource DataProviderId { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -191,25 +160,17 @@ namespace Workflow.Lace.Messages.Events
         public CommandType CommandType { get; private set; }
 
         [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderCallStarted(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, string metaData, string payload, string message)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
-            DataProvider = dataProvider;
+            DataProviderId = dataProvider;
             Date = date;
             CommandType = commandType;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 
@@ -224,7 +185,7 @@ namespace Workflow.Lace.Messages.Events
         public Guid RequestId { get; private set; }
 
         [DataMember]
-        public DataProviderCommandSource DataProvider { get; private set; }
+        public DataProviderCommandSource DataProviderId { get; private set; }
 
         [DataMember]
         public DateTime Date { get; private set; }
@@ -233,25 +194,17 @@ namespace Workflow.Lace.Messages.Events
         public CommandType CommandType { get; private set; }
 
         [DataMember]
-        public string MetaData { get; private set; }
-
-        [DataMember]
-        public string Payload { get; private set; }
-
-        [DataMember]
-        public string Message { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderCallEnded(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, string metaData, string payload, string message)
+            CommandType commandType,PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
-            DataProvider = dataProvider;
+            DataProviderId = dataProvider;
             Date = date;
             CommandType = commandType;
-            MetaData = metaData;
             Payload = payload;
-            Message = message;
         }
     }
 }
