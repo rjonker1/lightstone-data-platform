@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
+﻿using System;
+using DataPlatform.Shared.Messaging.Billing.Helpers;
 using EasyNetQ;
 
 namespace DataPlatform.Shared.Messaging.Billing.Messages
@@ -7,6 +8,7 @@ namespace DataPlatform.Shared.Messaging.Billing.Messages
     public class CustomerMessage : Entity
     {
         public virtual string AccountNumber { get; set; }
+        public virtual Guid CustomerId { get; set; }
         public virtual string CustomerName { get; set; }
 
         public CustomerMessage()

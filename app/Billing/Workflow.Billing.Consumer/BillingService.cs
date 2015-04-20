@@ -38,7 +38,8 @@ namespace Workflow.Billing.Consumer
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
             advancedBus.Consume(q, x => x
                 .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container))
-                .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container)));
+                .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container))
+                .Add<CustomerMessage>((message, info) => new TransactionConsumer<CustomerMessage>(message, container)));
 
             _log.DebugFormat("Billing service started");
         }

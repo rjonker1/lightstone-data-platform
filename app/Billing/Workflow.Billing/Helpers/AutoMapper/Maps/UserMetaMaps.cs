@@ -11,10 +11,10 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            //Used: Entity Consumer
+            //Used: EntityConsumer
             Mapper.CreateMap<UserMessage, UserMeta>();
 
-            //Used: Transaction Consumer
+            //Used: TransactionConsumer
             Mapper.CreateMap<UserMeta, User>();
         }
     }
