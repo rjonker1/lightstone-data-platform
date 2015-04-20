@@ -36,5 +36,6 @@ namespace Workflow.Lace.Messages.Events
 
         [DataMember]
         public PayloadIdentifier Payload { get; private set; }
+
     }
 }

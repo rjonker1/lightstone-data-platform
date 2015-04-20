@@ -45,7 +45,7 @@ namespace Workflow.Transactions.Read.Service.Handlers
         {
             var response =
                 new MonitoringDataProviderTransaction(new MonitoringDataProviderIdentifier(Guid.NewGuid(), message.Date,
-                    new SearchIdentifier(message.Request.Type, message.Request.SearchTerm, message.Payload.MetaData,
+                    new SearchIdentifier(message.RequestContext.Type, message.RequestContext.SearchTerm, message.Payload.MetaData,
                         message.RequestId, "Lace"),
                     new MonitoringActionIdentifier(DataProviderAction.Response.ToString())));
             _monitoring.Add(response);

@@ -10,6 +10,7 @@ using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Commands;
 using Monitoring.Dashboard.UI.Infrastructure.Repository;
 using Monitoring.Domain.Repository;
+using Workflow.Lace.Domain.Aggregates;
 
 namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
 {
@@ -42,22 +43,21 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 //    requestIds.Append(string.Format("{0},", request.RequestId));
                 //}
 
-                //var payloads = _commit.GetById<IPublishableMessage>(requests.First().RequestId);
+                var payloads = _commit.GetById<Request>(requests.First().RequestId);
 
                 //var payloads = _commit.Items<Commit>(SelectStatements.GetCommitForManyRequestId,
                 //    new {@RequestIds = requests.First().RequestId});
+               
+               
 
-                var payloads = new List<Commit>();
-
-
-                MonitoringResponse =
-                    requests.Select(
-                        s =>
-                            new MonitoringDataProviderView(s.RequestId, payloads
-                                .Where(f => f.StreamIdOriginal == s.RequestId.ToString())
-                                .Select(p => new SerializedPayload(p.Payload, p.CommitSequence))
-                                .ToList(), s.Date, false,
-                                s.ElapsedTime, s.SearchType, s.SearchTerm).GetResults().DeserializePayload());
+                //MonitoringResponse =
+                //    requests.Select(
+                //        s =>
+                //            new MonitoringDataProviderView(s.RequestId, payloads
+                //                .Where(f => f.StreamIdOriginal == s.RequestId.ToString())
+                //                .Select(p => new SerializedPayload(p.Payload, p.CommitSequence))
+                //                .ToList(), s.Date, false,
+                //                s.ElapsedTime, s.SearchType, s.SearchTerm).GetResults().DeserializePayload());
             }
             catch (Exception ex)
             {
