@@ -22,7 +22,7 @@ namespace Workflow.Billing.Infrastructure.NHibernate
         public override bool IsDiscriminated(Type type)
         {
             //return true;
-            if (type.IsSubclassOf(typeof(Domain.Entities.BillingTransaction)))
+            if (type.IsSubclassOf(typeof(BillingTransaction)) || type.IsSubclassOf(typeof(AccountMeta)))
             {
                 return true;
             }

@@ -5,7 +5,7 @@ using EasyNetQ;
 using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
-namespace Billing.Acceptance.Tests.Transaction
+namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
 {
     public class when_publishing_new_customer_to_queue : Specification
     {

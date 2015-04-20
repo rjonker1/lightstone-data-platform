@@ -18,8 +18,8 @@ namespace Workflow.Billing.Consumer.Installers
             _log.InfoFormat("Installing Billing Consumer");
 
             container.Register(
-                Component.For<EntityConsumer>().ImplementedBy<EntityConsumer>(),
                 Component.For<InvoiceTransactionConsumer>().ImplementedBy<InvoiceTransactionConsumer>(),
+                Component.For<UserConsumer>().ImplementedBy<UserConsumer>(),
                 Component.For(typeof(TransactionConsumer<>)).ImplementedBy(typeof(TransactionConsumer<>)));
         }
     }

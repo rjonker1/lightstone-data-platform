@@ -7,7 +7,7 @@ using EasyNetQ;
 using Workflow.BuildingBlocks;
 using Xunit.Extensions;
 
-namespace Billing.Acceptance.Tests.Transaction
+namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
 {
     public class when_registering_multiple_exchanges_queues_for_message_types : Specification
     {

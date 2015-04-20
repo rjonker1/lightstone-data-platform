@@ -86,7 +86,10 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Domain\Dtos\PreBillingDto.cs" />
+    <Compile Include="Domain\Entities\AccountMeta.cs" />
     <Compile Include="Domain\Entities\BillingTransaction.cs" />
+    <Compile Include="Domain\Entities\Client.cs" />
+    <Compile Include="Domain\Entities\Customer.cs" />
     <Compile Include="Domain\Entities\DataProviderTransaction.cs" />
     <Compile Include="Domain\Entities\UserTransaction.cs" />
     <Compile Include="Domain\Entities\Package.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Domain\Entities\UserMeta.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DomainSignatureAttribute.cs" />
     <Compile Include="Domain\NHibernate\Attributes\DoNotMapAttribute.cs" />
+    <Compile Include="Helpers\AutoMapper\MappingOverrides\AccountMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\BillingMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionMappingOverride.cs" />
     <Compile Include="Helpers\AutoMapper\MappingOverrides\MockTransactionOverrideMapping.cs" />

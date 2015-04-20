@@ -11,6 +11,7 @@ namespace Workflow.Billing.Consumers
         public TransactionConsumer(IMessage<T> message, IWindsorContainer container)
         {
             if (message is IMessage<InvoiceTransactionCreated>) container.Resolve<InvoiceTransactionConsumer>().Consume(message as IMessage<InvoiceTransactionCreated>);
+            if (message is IMessage<UserMessage>) container.Resolve<UserConsumer>().Consume(message as IMessage<UserMessage>);
         }
     }
 

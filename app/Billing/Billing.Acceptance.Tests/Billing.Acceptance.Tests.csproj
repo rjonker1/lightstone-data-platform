@@ -119,15 +119,16 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Fixtures\RebuildBillingEnvironment.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_publishing_new_transaction_to_queue.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_registering_multiple_exchanges_queues_for_message_types.cs" />
     <Compile Include="Transaction\when_create_a_new_transaction.cs" />
     <Compile Include="Transaction\Billing\when_persisting_prebilling_transaction.cs" />
+    <Compile Include="Transaction\when_persisting_new_customer_client.cs" />
     <Compile Include="Transaction\when_persisting_product.cs" />
     <Compile Include="Transaction\Billing\when_persisting_stagebilling_transaction.cs" />
     <Compile Include="Transaction\when_persisting_transaction_with_products.cs" />
     <Compile Include="Transaction\when_persisting_user.cs" />
-    <Compile Include="Transaction\when_publishing_new_customer_to_queue.cs" />
-    <Compile Include="Transaction\when_publishing_new_transaction_to_queue.cs" />
-    <Compile Include="Transaction\when_registering_multiple_exchanges_queues_for_message_types.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
