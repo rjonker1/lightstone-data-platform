@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading;
+using Common.Logging;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Monitoring.Dashboard.UI.Core.Models;
@@ -15,14 +16,16 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             new Lazy<DataProviderBroadcaster>(
                 () => new DataProviderBroadcaster(GlobalHost.ConnectionManager.GetHubContext<DataProviderHub>().Clients));
 
-        private readonly IHubConnectionContext _clients;
+        private readonly IHubConnectionContext<dynamic> _clients;
         private Uri _root = null;
-        private TimeSpan _interval = TimeSpan.FromMilliseconds(1000);
+        private TimeSpan _interval = TimeSpan.FromMilliseconds(15000);
         private Timer _timer;
         private bool _isFirstCall = true;
+        private readonly ILog _log;
 
-        public DataProviderBroadcaster(IHubConnectionContext clients)
+        public DataProviderBroadcaster(IHubConnectionContext<dynamic> clients)
         {
+            _log = LogManager.GetLogger<DataProviderBroadcaster>();
             _clients = clients;
             SetTimer();
         }
@@ -71,23 +74,23 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                     BaseAddress = _root
                 };
 
-                var model = new MonitoringResponse[] {};
+                var model = new MonitoringDataProviderView[] { };
 
                 var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
                 {
                     var response = t.Result;
                     var json = response.Content.ReadAsStringAsync();
                     json.Wait();
-                    model = JsonConvert.DeserializeObject<MonitoringResponse[]>(json.Result);
+                    model = JsonConvert.DeserializeObject<MonitoringDataProviderView[]>(json.Result);
                 });
 
                 task.Wait();
 
                 return model;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO: Log Error
+                _log.ErrorFormat("Error occurred in Monitoring For Data Provider Broadcaster because of {0}", ex.Message);
             }
             return null;
         }

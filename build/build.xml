@@ -194,6 +194,34 @@
       </dependencies>
     </nuget>
 
+     <nuget deploy="false">
+      <name>Lightstone.DataPlatform.Workflow.Lace.Domain</name>
+      <folder>app/Lace/source/Workflow.Lace.Domain</folder>
+      <author>CustomApp</author>
+      <description>Lace.Domain.Core.Requests</description>
+      <includes>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Domain.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Domain.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Domain.Core.Requests.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Lace.Shared.Extensions.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.Messages.pdb" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.dll" to="lib\net45"/>
+        <include pattern="Lightstone.DataPlatform.Workflow.Lace.pdb" to="lib\net45"/>
+      </includes>
+      <dependencies>
+        <dependency id="Common.Logging" version="3.0.0.0" />
+        <dependency id="Lightstone.DataPlatform.Billing.Api.Dtos" />
+        <dependency id="Lightstone.DataPlatform.Shared" />
+        <dependency id="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet" />
+        <dependency id="Lightstone.DataPlatform.Workflow.Billing.Messages" />
+        <dependency id="Newtonsoft.Json" version="6.0.5" />
+        <dependency id="NEventStore" version="5.1.0" />
+      </dependencies>
+    </nuget>
+
 		<nuget deploy="false">
 			<name>Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint</name>
 			<folder>app/Lace/source/Lace.Domain.Infrastructure.EntryPoint</folder>

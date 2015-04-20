@@ -6,7 +6,7 @@ using Workflow.Lace.Identifiers;
 
 namespace Workflow.Lace.Messages.Events
 {
-    [Serializable]
+    
     [DataContract]
     public class EntryPointReceivedRequest : IPublishableMessage
     {
@@ -36,7 +36,7 @@ namespace Workflow.Lace.Messages.Events
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class EntryPointReturnedResponse : IPublishableMessage
     {

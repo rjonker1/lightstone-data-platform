@@ -6,7 +6,7 @@ namespace Monitoring.Dashboard.UI.Core.Contracts.Handlers
 {
     public interface IHandleMonitoringCommands
     {
-        IEnumerable<MonitoringResponse> MonitoringResponse { get; }
+        IEnumerable<MonitoringDataProviderView> MonitoringResponse { get; }
         void Handle(GetMonitoringCommand command);
     }
 }

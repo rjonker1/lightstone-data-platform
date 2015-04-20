@@ -7,10 +7,15 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository.Framework.Connection
 {
     public class ConnectionFactory
     {
-        public static Func<IDbConnection> ForReadDatabase =
+        public static Func<IDbConnection> ForMonitoringDatabase =
             () =>
                 new SqlConnection(
-                    ConfigurationManager.ConnectionStrings["monitoring/read/database"].ToString());
+                    ConfigurationManager.ConnectionStrings["database/monitoring"].ToString());
+
+        public static Func<IDbConnection> ForCommandsDatabase =
+           () =>
+               new SqlConnection(
+                   ConfigurationManager.ConnectionStrings["database/commands"].ToString());
 
         
     }
