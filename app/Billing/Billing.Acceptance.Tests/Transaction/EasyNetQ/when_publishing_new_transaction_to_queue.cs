@@ -21,9 +21,9 @@ namespace Billing.Acceptance.Tests.Transaction.EasyNetQ
         {
             var bus = new TransactionBus(_bus);
 
-            transaction = new InvoiceTransactionCreated(new Guid("70b36ed9-2cbd-41e7-a22e-e708fd00156b"));
+            transaction = new InvoiceTransactionCreated(new Guid("FD720634-2959-480A-BA45-96D970DA885C"));
             //bus.Send(transaction, "DataPlatform.Transactions.Billing", "DataPlatform.Transactions.Billing");
-            //bus.SendDynamic(transaction);
+            bus.SendDynamic(transaction);
         }
 
         [Observation]
