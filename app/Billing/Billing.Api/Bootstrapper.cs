@@ -1,20 +1,13 @@
 ﻿using Billing.Api.Installers;
-using Billing.Domain.Entities;
-using Billing.Domain.Entities.Commands.Entities;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using MemBus;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Windsor;
 using Nancy.Conventions;
 using Shared.BuildingBlocks.Api.ExceptionHandling;
 using Shared.BuildingBlocks.Api.Security;
-using Workflow;
 using Workflow.Billing.Consumer.Installers;
-using AutoMapperInstaller = Billing.Api.Installers.AutoMapperInstaller;
-using BusInstaller = Billing.Api.Installers.BusInstaller;
-using RepositoryInstaller = Billing.Api.Installers.RepositoryInstaller;
 
 namespace Billing.Api
 {
@@ -39,7 +32,6 @@ namespace Billing.Api
             base.ConfigureApplicationContainer(container);
 
             container.Install(
-                //new NHibernateInstaller(),
                 new NHibernateInstaller(),
                 new RepositoryInstaller(),
                 new CommandInstaller(),
@@ -87,45 +79,6 @@ namespace Billing.Api
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/font-awesome"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
         }
-
-
-        //Default setup
-
-
-//        // The bootstrapper enables you to reconfigure the composition of the framework,
-//        // by overriding the various methods and properties.
-//        // For more information https://github.com/NancyFx/Nancy/wiki/Bootstrapper
-
-//        private IBus bus;
-//        private Publisher publisher;
-//        private static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger<Bootstrapper>();
-
-//        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
-//        {
-//            base.ApplicationStartup(container, pipelines);
-
-////            pipelines.EnableStatelessAuthentication();
-////            pipelines.OnError.AddItemToEndOfPipeline((ctx, e) =>
-////            {
-//////                if (ctx.Response.StatusCode == HttpStatusCode.InternalServerError)
-//////                {
-//////                    log.ErrorFormat("Error occured on route {0}", ctx.ResolvedRoute.ToString());
-//////                    log.ErrorFormat("The error was {0}", e);
-//////                }
-////
-////                return null;
-////            });
-//        }
-
-//        protected override void ConfigureApplicationContainer(TinyIoCContainer container)
-//        {
-//            base.ConfigureApplicationContainer(container);
-
-//            bus = BusFactory.CreateBus("workflow/billing/queue");
-//            publisher = new Publisher(bus);
-
-//            container.Register<IPublishMessages>(publisher);
-//        }
 
     }
 }

@@ -12,41 +12,41 @@ namespace Billing.Api.Modules
     {
         private readonly ILog _log;
 
-        public Transaction(IPublishMessages publisher)
-            : base("/transaction")
-        {
-            _log = LogManager.GetLogger(GetType());
+        //public Transaction(IPublishMessages publisher)
+        //    : base("/transaction")
+        //{
+        //    _log = LogManager.GetLogger(GetType());
 
-            Get["/"] = _ => string.Format("Transaction API.");
+        //    Get["/"] = _ => string.Format("Transaction API.");
 
-            Post["/"] = o =>
-            {
-                //TODO: Uncomment
-                //_log.InfoFormat("Received post to create billing transaction");
+        //    Post["/"] = o =>
+        //    {
+        //        //TODO: Uncomment
+        //        //_log.InfoFormat("Received post to create billing transaction");
 
-                //var transaction = this.Bind<CreateTransaction>();
+        //        //var transaction = this.Bind<CreateTransaction>();
 
-                //var message = new BillTransactionMessage(transaction.PackageIdentifier,
-                //    transaction.Context.User,
-                //    transaction.Context.Request,
-                //    transaction.Context.TransactionDate,
-                //    transaction.Context.TransactionId, transaction.Context.State, transaction.Contract, transaction.Account);
+        //        //var message = new BillTransactionMessage(transaction.PackageIdentifier,
+        //        //    transaction.Context.User,
+        //        //    transaction.Context.Request,
+        //        //    transaction.Context.TransactionDate,
+        //        //    transaction.Context.TransactionId, transaction.Context.State, transaction.Contract, transaction.Account);
 
-                //try
-                //{
-                //    publisher.Publish(message);
-                //    _log.DebugFormat("Message published to create billing transaction for transaction {0}", message.TransactionId);
-                //}
-                //catch (Exception e)
-                //{
-                //    _log.ErrorFormat("Failed to create a billing transaction for transaction {0}", transaction.Context.TransactionId);
-                //    _log.ErrorFormat("The reason was: {0}", e.Message);
+        //        //try
+        //        //{
+        //        //    publisher.Publish(message);
+        //        //    _log.DebugFormat("Message published to create billing transaction for transaction {0}", message.TransactionId);
+        //        //}
+        //        //catch (Exception e)
+        //        //{
+        //        //    _log.ErrorFormat("Failed to create a billing transaction for transaction {0}", transaction.Context.TransactionId);
+        //        //    _log.ErrorFormat("The reason was: {0}", e.Message);
 
-                //    return CannedResponses.Failure;
-                //}
+        //        //    return CannedResponses.Failure;
+        //        //}
 
-                return CannedResponses.OK;
-            };
-        }
+        //        return CannedResponses.OK;
+        //    };
+        //}
     }
 }

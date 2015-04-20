@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
-using AutoMapper;
-using Billing.Domain.Core.Entities;
 using Billing.Domain.Core.Helpers;
-//using Billing.Domain.Core.Repositories;
 using Billing.Domain.Core.Repositories;
-using Billing.Domain.Entities;
-using Billing.Domain.Entities.DemoEntities;
 using Billing.Infrastructure.Helpers;
-//using Billing.Infrastructure.Repositories;
-using Billing.Infrastructure.Repositories;
 using DataPlatform.Shared.Repositories;
 using Nancy;
 using Nancy.Responses.Negotiation;
 using NHibernate;
 using Workflow.Billing.Domain.Entities;
-using Product = Billing.Domain.Entities.DemoEntities.Product;
-using User = Billing.Domain.Entities.DemoEntities.User;
 
 namespace Billing.Api.Modules
 {
@@ -95,7 +84,7 @@ namespace Billing.Api.Modules
                     var user = new User
                     {
                         Id = transaction.UserId,
-                        Name = transaction.Username,
+                        FirstName = transaction.Username,
                         HasTransactions = true
                     };
 
@@ -189,24 +178,24 @@ namespace Billing.Api.Modules
         public string PackageName { get; set; }
     }
 
-    //Server side Paging
-    public interface IServerPageRepo : IRepository<Domain.Entities.Transaction>
-    {
-        PagedList<Domain.Entities.Transaction> Search(string searchValue, int pageIndex, int pageSize);
-    }
+    ////Server side Paging
+    //public interface IServerPageRepo : IRepository<Transaction>
+    //{
+    //    PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize);
+    //}
 
-    public class PreBillingDtoRepository : Repository<Domain.Entities.Transaction>, IServerPageRepo
-    {
-        public PreBillingDtoRepository(ISession session)
-            : base(session)
-        {
-        }
+    //public class PreBillingDtoRepository : Repository<Transaction>, IServerPageRepo
+    //{
+    //    public PreBillingDtoRepository(ISession session)
+    //        : base(session)
+    //    {
+    //    }
 
-        public PagedList<Domain.Entities.Transaction> Search(string searchValue, int pageIndex, int pageSize)
-        {
-            var predicate = PredicateBuilder.False<Domain.Entities.Transaction>();
-            //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
-            return new PagedList<Domain.Entities.Transaction>(this, pageIndex, pageSize);
-        }
-    }
+    //    public PagedList<Transaction> Search(string searchValue, int pageIndex, int pageSize)
+    //    {
+    //        var predicate = PredicateBuilder.False<Transaction>();
+    //        //predicate = predicate.Or(x => (x.CustomerName + "").Trim().ToLower().StartsWith((searchValue + "").Trim().ToLower()));
+    //        return new PagedList<Transaction>(this, pageIndex, pageSize);
+    //    }
+    //}
 }

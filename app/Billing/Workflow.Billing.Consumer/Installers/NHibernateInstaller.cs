@@ -1,14 +1,11 @@
-﻿using Billing.Infrastructure.NHibernate.Conventions;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DataPlatform.Shared.Helpers.Extensions;
-using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Workflow.Billing.Helpers.AutoMapper.MappingOverrides;
 using Workflow.Billing.Infrastructure.NHibernate;
 
 namespace Workflow.Billing.Consumer.Installers

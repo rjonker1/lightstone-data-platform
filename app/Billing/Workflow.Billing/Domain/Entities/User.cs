@@ -10,6 +10,8 @@ namespace Workflow.Billing.Domain.Entities
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
 
+        public virtual bool HasTransactions { get; set; }
+
         public User() { }
     }
 }
