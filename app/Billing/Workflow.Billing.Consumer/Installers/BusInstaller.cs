@@ -15,11 +15,11 @@ namespace Workflow.Billing.Consumer.Installers
         {
             _log.InfoFormat("Installing bus");
 
-            container.Register(
-                Component.For<IBus>()
-                    .UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container))
-                    .LifestyleSingleton()
-                );
+            //container.Register(
+            //    Component.For<IBus>()
+            //        .UsingFactoryMethod(() => new BusFactory().CreateBus("workflow/billing/queue", container))
+            //        .LifestyleSingleton()
+            //    );
 
             container.Register(
                 Component.For<IAdvancedBus>()

@@ -9,15 +9,13 @@ using EasyNetQ.AutoSubscribe;
 using NHibernate;
 using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
-using Workflow.Billing.Domain.Entities;
-using Workflow.Billing.Repository;
 
 namespace Workflow.Billing.Consumer
 {
     public class BillingService : IBillingService
     {
         private readonly ILog _log = LogManager.GetLogger<BillingService>();
-        private IBus bus;
+        //private IBus bus;
         private IAdvancedBus advancedBus;
 
         public void Start()
@@ -33,22 +31,23 @@ namespace Workflow.Billing.Consumer
                 new ConsumerInstaller(),
                 new BusInstaller());
 
-            bus = container.Resolve<IBus>();
+            //bus = container.Resolve<IBus>();
             advancedBus = container.Resolve<IAdvancedBus>();
             var q = advancedBus.QueueDeclare("DataPlatform.Transactions.Billing");
             //advancedBus.Consume(q, x => container.Resolve(typeof(IConsume<>)));
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
             advancedBus.Consume(q, x => x
-                .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container)));
+                .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container))
+                .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container)));
 
             _log.DebugFormat("Billing service started");
         }
 
         public void Stop()
         {
-            if (bus != null)
+            if (advancedBus != null)
             {
-                bus.Dispose();
+                advancedBus.Dispose();
             }
 
             _log.DebugFormat("Stopped billing service");
