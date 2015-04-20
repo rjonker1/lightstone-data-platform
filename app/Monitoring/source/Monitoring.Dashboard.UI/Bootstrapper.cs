@@ -3,6 +3,7 @@ using Monitoring.Dashboard.UI.Core.Contracts.Handlers;
 using Monitoring.Dashboard.UI.Core.Contracts.Services;
 using Monitoring.Dashboard.UI.Core.Models;
 using Monitoring.Dashboard.UI.Infrastructure.Handlers;
+using Monitoring.Dashboard.UI.Infrastructure.Repository;
 using Monitoring.Dashboard.UI.Infrastructure.Repository.Framework.Connection;
 using Monitoring.Dashboard.UI.Infrastructure.Services;
 using Monitoring.Domain.Mappers;
@@ -23,6 +24,10 @@ namespace Monitoring.Dashboard.UI
             container.Register<IRepositoryMapper, RepositoryMapper>();
             container.Register<IHaveTypeMappings, MappingForMonitoringTypes>();
             container.Register<IMonitoringRepository, MonitoringRepository>();
+          //  container.Register<ICommitRepository, CommitRepository>();
+            container
+                .Register
+                <CommonDomain.Persistence.IRepository, CommonDomain.Persistence.EventStore.EventStoreRepository>();
             container.Register<IHandleMonitoringCommands, MonitoringHandler>();
             container.Register<ICallMonitoringService, DataProviderMonitoringService>();
         }

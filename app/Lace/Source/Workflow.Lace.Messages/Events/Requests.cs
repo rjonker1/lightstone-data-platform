@@ -6,7 +6,7 @@ using Workflow.Lace.Identifiers;
 namespace Workflow.Lace.Messages.Events
 {
 
-    [Serializable]
+    
     [DataContract]
     public class RequestToDataProvider : IPublishableMessage
     {

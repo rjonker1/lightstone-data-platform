@@ -12,6 +12,11 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Repository.Framework.Connection
                 new SqlConnection(
                     ConfigurationManager.ConnectionStrings["database/monitoring"].ToString());
 
+        public static Func<IDbConnection> ForCommandsDatabase =
+           () =>
+               new SqlConnection(
+                   ConfigurationManager.ConnectionStrings["database/commands"].ToString());
+
         
     }
 }

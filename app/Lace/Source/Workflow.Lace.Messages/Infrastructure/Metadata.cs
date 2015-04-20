@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 
 namespace Workflow.Lace.Messages.Infrastructure
 {
-    [Serializable]
     [DataContract]
     public class MetadataContainer
     {
@@ -25,12 +24,11 @@ namespace Workflow.Lace.Messages.Infrastructure
         }
     }
 
-    [Serializable]
     [DataContract]
     public class PerformanceMetadata
     {
         [DataMember]
-        public object Results { get; private set; }
+        public StopWatchResults Results { get; private set; }
 
         [DataMember]
         public bool HasResults { get; private set; }
@@ -40,7 +38,7 @@ namespace Workflow.Lace.Messages.Infrastructure
             HasResults = false;
         }
 
-        public PerformanceMetadata(object results)
+        public PerformanceMetadata(StopWatchResults results)
         {
             HasResults = results != null;
             Results = results;

@@ -18,7 +18,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext<dynamic> _clients;
         private Uri _root = null;
-        private TimeSpan _interval = TimeSpan.FromMilliseconds(1000);
+        private TimeSpan _interval = TimeSpan.FromMilliseconds(15000);
         private Timer _timer;
         private bool _isFirstCall = true;
         private readonly ILog _log;
@@ -74,14 +74,14 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                     BaseAddress = _root
                 };
 
-                var model = new MonitoringDataProvider[] {};
+                var model = new MonitoringDataProviderView[] { };
 
                 var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
                 {
                     var response = t.Result;
                     var json = response.Content.ReadAsStringAsync();
                     json.Wait();
-                    model = JsonConvert.DeserializeObject<MonitoringDataProvider[]>(json.Result);
+                    model = JsonConvert.DeserializeObject<MonitoringDataProviderView[]>(json.Result);
                 });
 
                 task.Wait();

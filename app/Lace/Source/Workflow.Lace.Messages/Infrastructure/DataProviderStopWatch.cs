@@ -5,8 +5,7 @@ using Lace.Shared.Extensions;
 
 namespace Workflow.Lace.Messages.Infrastructure
 {
-    [Serializable]
-    [DataContract]
+   [DataContract]
     public class DataProviderStopWatch : IDisposable
     {
         private readonly Stopwatch _stopwatch;

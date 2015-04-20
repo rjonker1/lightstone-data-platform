@@ -5,7 +5,7 @@ using Workflow.Lace.Messages.Core;
 
 namespace Workflow.Lace.Messages.Commands
 {
-    [Serializable]
+    
     [DataContract]
     public class RaisingSecurityFlagCommand
     {
@@ -48,7 +48,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class ConfiguringDataProviderCommand
     {
@@ -91,7 +91,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class TransformingDataProviderResponseCommand
     {
@@ -134,7 +134,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class ErrorInDataProviderCommand
     {
@@ -177,7 +177,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class StartingCallCommand
     {
@@ -220,7 +220,7 @@ namespace Workflow.Lace.Messages.Commands
         }
     }
 
-    [Serializable]
+    
     [DataContract]
     public class EndingCallCommand
     {

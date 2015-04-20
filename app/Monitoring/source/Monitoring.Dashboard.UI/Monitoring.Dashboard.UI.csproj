@@ -46,6 +46,9 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Lightstone.DataPlatform.Shared">
+      <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.953\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet">
       <HintPath>..\..\..\packages\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.1.0.0.946\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.AdoNet.dll</HintPath>
     </Reference>
@@ -82,6 +85,12 @@
     <Reference Include="Nancy.ViewEngines.Razor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Nancy.Viewengines.Razor.1.0.0\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore">
+      <HintPath>..\..\..\packages\NEventStore.5.1.0\lib\net40\NEventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="NEventStore.Serialization.Json">
+      <HintPath>..\..\..\packages\NEventStore.Serialization.Json.4.1.0.10\lib\net40\NEventStore.Serialization.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,7 +158,9 @@
     <Compile Include="Core\Contracts\Handlers\IHandleMonitoringCommands.cs" />
     <Compile Include="Core\Contracts\Services\ICallMonitoringService.cs" />
     <Compile Include="Core\Extensions\JsonExtensions.cs" />
-    <Compile Include="Core\Models\DataProviderViews.cs" />
+    <Compile Include="Core\Models\Commit.cs" />
+    <Compile Include="Core\Models\MonitoringDataProviderView.cs" />
+    <Compile Include="Core\Models\MonitoringDataProvider.cs" />
     <Compile Include="Core\Models\MonitoringResponse.cs" />
     <Compile Include="Hubs\DataProviderHub.cs" />
     <Compile Include="Infrastructure\Commands\MonitoringCommands.cs" />
@@ -158,6 +169,7 @@
     <Compile Include="Infrastructure\Handlers\MonitoringHandler.cs" />
     <None Include="Infrastructure\Repository\MonitoringRepository.cs.delete" />
     <None Include="Infrastructure\Repository\Repository.cs.delete" />
+    <Compile Include="Infrastructure\Repository\ICommitRepository.cs" />
     <Compile Include="Infrastructure\Services\DataProviderMonitoringService.cs" />
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />

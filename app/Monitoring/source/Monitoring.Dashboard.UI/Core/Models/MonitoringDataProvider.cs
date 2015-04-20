@@ -26,25 +26,25 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         public DateTime Date { get; set; }
 
-        [DataMember]
-        public string Payload { get; private set; }
+        //[DataMember]
+        //public string Payload { get; private set; }
 
-        [DataMember]
-        public Results Results { get; private set; }
+        //[DataMember]
+        //public Results Results { get; private set; }
 
-        [DataMember]
-        public bool HasErrors
-        {
-            get
-            {
-                return false;
-            }
-        }
+        //[DataMember]
+        //public bool HasErrors
+        //{
+        //    get
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        public void GetResults()
-        {
-            Results = ElapsedTime.JsonToObject<Results>();
-        }
+        //public void GetResults()
+        //{
+        //    Results = ElapsedTime.JsonToObject<Results>();
+        //}
     }
 
     //[DataContract]

@@ -19,7 +19,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
             _handler = handler;
         }
 
-        public IEnumerable<MonitoringDataProvider> GetMonitoringForDataProviders()
+        public IEnumerable<MonitoringDataProviderView> GetMonitoringForDataProviders()
         {
             _log.InfoFormat("Getting Data Provider Monitoring View");
             _handler.Handle(

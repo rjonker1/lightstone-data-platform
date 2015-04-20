@@ -2,6 +2,13 @@
 {
     public class SelectStatements
     {
-        public const string GetDataProviderRequestResponses = "select top 100 * from MonitoringDataProvider where [action] = 'response' order by [date] desc";
+        public const string GetDataProviderRequestResponses =
+            "select top 100 * from MonitoringDataProvider where [action] = 'response' order by [date] desc";
+
+        public const string GetCommitForRequestId =
+            "select Payload, CommitSequence,[CommitStamp] from commits where StreamIdOriginal = @RequestId order by [CommitStamp], CommitSequence";
+
+        public const string GetCommitForManyRequestId =
+            "select StreamIdOriginal, Payload, CommitSequence,[CommitStamp] from commits where StreamIdOriginal in (@RequestIds) order by [CommitStamp], CommitSequence";
     }
 }
