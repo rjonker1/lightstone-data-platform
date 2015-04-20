@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
-using DataPlatform.Shared.Enums;
 using DataPlatform.Shared.ExceptionHandling;
 using Lace.Domain.Infrastructure.Core.Contracts;
 using Nancy;
@@ -17,10 +16,10 @@ using PackageBuilder.Domain.Dtos.Read;
 using PackageBuilder.Domain.Dtos.Write;
 using PackageBuilder.Domain.Entities.Contracts.Packages.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
+using PackageBuilder.Domain.Entities.Enums.States;
 using PackageBuilder.Domain.Entities.Packages.Commands;
 using PackageBuilder.Domain.Entities.States.Read;
 using PackageBuilder.TestObjects.Mothers;
-using Shared.BuildingBlocks.Api.Security;
 using DataProviderDto = PackageBuilder.Domain.Dtos.Write.DataProviderDto;
 using Package = PackageBuilder.Domain.Entities.Packages.Write.Package;
 
@@ -46,7 +45,14 @@ namespace PackageBuilder.Api.Modules
             {
                 string filter = (parameters.filter + "").Trim().ToLower();
                 Expression<Func<Domain.Entities.Packages.Read.Package, bool>> predicate = x => !x.IsDeleted && (x.Name + "").Trim().ToLower().StartsWith(filter);
-                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(readRepo, parameters.pageIndex, parameters.pageSize, predicate);
+                predicate = package => true;
+                var publishedPackages = from p in readRepo
+                           where p.Id == (from pp in readRepo
+                                  where p.State.Name == StateName.Published
+                                  orderby pp.Version descending 
+                                  select pp.Id).FirstOrDefault()
+                           select p;
+                var packages = new PagedList<Domain.Entities.Packages.Read.Package>(publishedPackages, parameters.pageIndex, parameters.pageSize, predicate);
                 return Response.AsJson(
                         new
                         {

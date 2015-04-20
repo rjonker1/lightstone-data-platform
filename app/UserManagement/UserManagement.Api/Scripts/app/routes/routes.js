@@ -345,7 +345,8 @@ function initializePlugins() {
         {
             lang: 'en',
             bind_to: 'select',
-            per_page: 2,
+            primary_key: 'packageId',
+            per_page: 10,
         }
     )
     .bind('select', function () {
