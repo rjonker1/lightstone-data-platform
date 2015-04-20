@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using Monitoring.Dashboard.UI.Core.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Workflow.Lace.Domain.Aggregates;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
@@ -97,16 +98,25 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
             var json = new StringBuilder();
            // var json = new JObject();
+           
             foreach (var payload in SerializedPayloads.OrderBy(o => o.CommitSequence))
             {
-                var a = Encoding.UTF8.GetString(payload.Payload).Substring(1); //.Replace(@"\",""); //.JsonToObject();
+                var jsonString = Encoding.UTF8.GetString(payload.Payload).Substring(1);
+
+                
+                    //.Replace(@"\",""); //.JsonToObject();
                 // Regex.Replace(a, @"\\n?", "");
 
-                a = a.TrimStart('[');
-                a = a.TrimEnd(']');
+                jsonString = jsonString.TrimStart('[');
+                jsonString = jsonString.TrimEnd(']');
                 //a = a.TrimStart('{');
                 //a = a.TrimEnd('}');
-                Debug.WriteLine(a);
+                //jsonString.Replace("[", "");
+                //jsonString.Replace("]", "");
+                //jsonString.Replace(@"\", "");
+                var request = jsonString.JsonToObject<Request>();
+                Debug.WriteLine(request);
+                Debug.WriteLine(jsonString);
                 //Regex.Replace(a, @"\s+", "");
 
                 //var p = a.JsonToObject();
@@ -115,9 +125,14 @@ namespace Monitoring.Dashboard.UI.Core.Models
                 //var j = JsonExtensions.ObjectToJson(p);
                 //json.Append(p.Replace(@"\",""));
                 //json.Append(j);
-                json.Append(a);
+                //json.Append(a);
                 //json.Add(JObject.Parse(a.AsJsonString()));
+                //json = JValue.Parse(jsonString);
+                json.Append(jsonString);
             }
+            Debug.WriteLine(json.ToString());
+            var jsonArray = JArray.Parse(json.ToString()) as JArray;
+
 
             //JObject jasonObject = (JObject) JObject.Parse(json.ToString());
             //jasonObject.Add();
@@ -128,10 +143,10 @@ namespace Monitoring.Dashboard.UI.Core.Models
             Debug.WriteLine("***********JSON************");
             Debug.WriteLine("\n");
             Debug.WriteLine("Serialized : {0} Length: {1}", SerializedPayloads, SerializedPayloads.Count());
-            Debug.WriteLine("{" + json.ToString() + "}");
+            Debug.WriteLine(jsonArray.ToString(Formatting.None));
             Debug.WriteLine("\n");
             Debug.WriteLine("************END***********");
-            return "{" + json.ToString() + "}"; // json.ToString(Formatting.None);
+            return jsonArray.ToString(Formatting.None); // json.ToString(Formatting.None);
         }
     }
 }

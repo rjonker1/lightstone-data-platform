@@ -21,5 +21,10 @@ namespace Workflow.Lace.Identifiers
             Payload = payload;
             Message = message;
         }
+
+        public PayloadIdentifier()
+        {
+            
+        }
     }
 }

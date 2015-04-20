@@ -62,9 +62,11 @@ namespace Worflow.Transactions.Service.Write.Host
                 {
                     var eventMessage = commit.Events.ToArray()[i];
                     var busMessage = eventMessage.Body as IPublishableMessage;
-                    AppendHeaders(busMessage, commit.Headers, bus);
-                    AppendHeaders(busMessage, eventMessage.Headers, bus);
-                    AppendVersion(commit, i, bus);
+                  //  AppendHeaders(busMessage, commit.Headers, bus);
+                  //  AppendHeaders(busMessage, eventMessage.Headers, bus);
+                  //  AppendVersion(commit, i, bus);
+                    if(busMessage == null)
+                        continue;
                     bus.Publish(busMessage);
                 }
             }
