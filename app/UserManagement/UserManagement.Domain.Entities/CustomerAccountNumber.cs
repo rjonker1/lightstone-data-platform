@@ -7,7 +7,7 @@ namespace UserManagement.Domain.Entities
     public class CustomerAccountNumber : AccountNumber
     {
         [DoNotMap]
-        public virtual Customer Customer { get; protected internal set; }
+        public virtual Customer Customer { get; set; }
 
         public override string ToString()
         {
