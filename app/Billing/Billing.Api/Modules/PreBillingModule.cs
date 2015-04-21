@@ -47,13 +47,13 @@ namespace Billing.Api.Modules
                     //Customer user
                     var user = new User
                     {
-                        Id = transaction.UserId,
+                        UserId = transaction.UserId,
                         Username = transaction.Username,
                         HasTransactions = true
                     };
 
                     //Indices
-                    var userIndex = userList.FindIndex(x => x.Id == user.Id);
+                    var userIndex = userList.FindIndex(x => x.UserId == user.UserId);
                     var customerIndex = customerList.FindIndex(x => x.Id == customer.Id);
 
 
@@ -83,13 +83,15 @@ namespace Billing.Api.Modules
                     //User
                     var user = new User
                     {
-                        Id = transaction.UserId,
-                        FirstName = transaction.Username,
+                        UserId = transaction.UserId,
+                        Username = transaction.Username,
+                        FirstName = transaction.FirstName,
+                        LastName = transaction.LastName,
                         HasTransactions = true
                     };
 
                     //Index
-                    var userIndex = customerUsersDetailList.FindIndex(x => x.Id == user.Id);
+                    var userIndex = customerUsersDetailList.FindIndex(x => x.UserId == user.UserId);
 
                     //Index restriction for new record
                     if (userIndex < 0) customerUsersDetailList.Add(user);

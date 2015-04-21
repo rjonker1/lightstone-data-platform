@@ -51,7 +51,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
                     client = account;
 
                 var products = _dataProviderTransactions.Where(x => x.RequestId == transaction.RequestId);
-                var user = Mapper.Map<UserMeta, User>(_users.Get(new Guid("03641AC6-1561-4F1A-8AE5-7EB391541D3A")));
+                var user = Mapper.Map<UserMeta, User>(_users.Get(transaction.UserId));
 
                 //Billing transaction recorded per product invoked
                 foreach (var product in products)

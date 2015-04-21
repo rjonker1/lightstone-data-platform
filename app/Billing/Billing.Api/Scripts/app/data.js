@@ -34,16 +34,19 @@ window.userGridActionEvents = {
             pageSize: 10,
             pageList: [10, 25, 50, 100, 'All'],
             columns: [{
-                field: 'id',
+                field: 'userId',
                 title: 'User ID',
                 visible: false
             }, {
-                field: 'name',
+                field: 'username',
                 title: 'User Name',
                 sortable: true
             }, {
-                field: 'surname',
-                title: 'Surname',
+                field: 'firstName',
+                title: 'Fisrt Name',
+            }, {
+                field: 'lastName',
+                title: 'Last Name',
             }, {
                 field: 'transactions',
                 title: 'User Transactions (Total)',
