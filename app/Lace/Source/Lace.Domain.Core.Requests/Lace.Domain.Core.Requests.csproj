@@ -43,13 +43,29 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Contracts\IAmApplicantNameRequestField.cs" />
     <Compile Include="Contracts\IAmBusinessRequest.cs" />
+    <Compile Include="Contracts\IAmChassisField.cs" />
     <Compile Include="Contracts\IAmDataProvider.cs" />
     <Compile Include="Contracts\IAmDriversLicenseRequest.cs" />
+    <Compile Include="Contracts\IAmEngineNumberRequestField.cs" />
     <Compile Include="Contracts\IAmJisRequest.cs" />
+    <Compile Include="Contracts\IAmLabelRequestField.cs" />
+    <Compile Include="Contracts\IAmLicenseNumberRequestField.cs" />
     <Compile Include="Contracts\IAmLicensePlateRequest.cs" />
     <Compile Include="Contracts\IAmMakeRequest.cs" />
+    <Compile Include="Contracts\IAmMakeRequestField.cs" />
+    <Compile Include="Contracts\IAmReasonForApplicationRequestField.cs" />
+    <Compile Include="Contracts\IAmRegisterNumberRequestField.cs" />
+    <Compile Include="Contracts\IAmRequest.cs" />
+    <Compile Include="Contracts\IAmRequesterEmailRequestField.cs" />
+    <Compile Include="Contracts\IAmRequesterNameRequestField.cs" />
+    <Compile Include="Contracts\IAmRequesterPhoneRequestField.cs" />
     <Compile Include="Contracts\IAmRequestField.cs" />
+    <Compile Include="Contracts\IAmRequestReferenceRequestField.cs" />
+    <Compile Include="Contracts\IAmStandardIvidRequest.cs" />
+    <Compile Include="Contracts\IAmVinField.cs" />
+    <Compile Include="Contracts\IAmVinRequestField.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />
     <Compile Include="Contracts\IHaveBusiness.cs" />
     <Compile Include="Contracts\IHaveCarInformation.cs" />

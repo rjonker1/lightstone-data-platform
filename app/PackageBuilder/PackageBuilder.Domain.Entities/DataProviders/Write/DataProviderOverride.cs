@@ -20,6 +20,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         [DataMember]
         public double CostOfSale { get; internal set; }
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
+        public IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; internal set; } 
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
         public IEnumerable<IDataFieldOverride> DataFieldOverrides { get; internal set; } 
     }
 }

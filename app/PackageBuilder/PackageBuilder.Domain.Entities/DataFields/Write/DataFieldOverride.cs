@@ -25,6 +25,8 @@ namespace PackageBuilder.Domain.Entities.DataFields.Write
         [DataMember]
         public int Order { get; internal set; }
         [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
+        public IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; set; }
+        [DataMember, JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<DataFieldOverride>>))]
         public IEnumerable<IDataFieldOverride> DataFieldOverrides { get; set; }
     }
 }

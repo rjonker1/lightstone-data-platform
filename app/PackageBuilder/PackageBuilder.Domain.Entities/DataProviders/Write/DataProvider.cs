@@ -44,6 +44,8 @@ namespace PackageBuilder.Domain.Entities.DataProviders.Write
         [DataMember]
         public DateTime? EditedDate { get; internal set; }
         [DataMember]
+        public IEnumerable<IDataField> RequestFields { get; set; }
+        [DataMember]
         public IEnumerable<IDataField> DataFields { get; set; }
         [DataMember]
         public int Version { get; internal set; }

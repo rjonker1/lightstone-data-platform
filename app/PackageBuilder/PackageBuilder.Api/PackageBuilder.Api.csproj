@@ -311,6 +311,7 @@
     <Compile Include="Modules\DataProviderModule.cs" />
     <Compile Include="Modules\IndexModule.cs" />
     <Compile Include="Modules\ReplayCommandModule.cs" />
+    <Compile Include="Modules\RequestModule.cs" />
     <Compile Include="Modules\StateModule.cs" />
     <Compile Include="Modules\IndustryModule.cs" />
     <Compile Include="Modules\PackageModule.cs" />
