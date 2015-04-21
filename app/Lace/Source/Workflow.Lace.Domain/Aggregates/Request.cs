@@ -47,13 +47,13 @@ namespace Workflow.Lace.Domain.Aggregates
             DataProvider = dataProvider;
             Date = date;
             Connection = connection;
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData,payload.Payload,payload.Message);
             CommandType = CommandType.BeginExecution;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = (DataProviderCommandSource) dataProvider.Id;
-           
-            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
+
+            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message)));
         }
 
         public Request(Guid requestId, DateTime date, SearchRequestIndentifier request,
@@ -64,24 +64,13 @@ namespace Workflow.Lace.Domain.Aggregates
             DataProvider = new DataProviderIdentifier();
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message);
             CommandType = CommandType.BeginExecution;
             State = new StateIdentifier();
             RequestContext = request;
             DataProviderId = DataProviderCommandSource.EntryPoint;
 
-            //RequestId = requestId;
-            //Date = date;
-            //RequestContext = request;
-            //Connection = new ConnectionTypeIdentifier();
-            //Payload = payload;
-            //DataProvider = new DataProviderIdentifier();
-            //Connection = new ConnectionTypeIdentifier();
-            //CommandType = CommandType.EndExecution;
-            //DataProviderId = (DataProviderCommandSource.EntryPoint;
-
-            //RaiseEvent(new RequestReceived(Guid.NewGuid(), requestId, date));
-            RaiseEvent(new EntryPointReceivedRequest(Guid.NewGuid(), date, requestId, payload, request));
+            RaiseEvent(new EntryPointReceivedRequest(Guid.NewGuid(), date, requestId, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message), request));
         }
 
         public Request(Guid requestId, DateTime date, StateIdentifier state,
@@ -92,13 +81,13 @@ namespace Workflow.Lace.Domain.Aggregates
             DataProvider = new DataProviderIdentifier();
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message);
             CommandType = CommandType.EndExecution;
             State = state;
             RequestContext = request;
             DataProviderId = DataProviderCommandSource.EntryPoint;
 
-            RaiseEvent(new EntryPointReturnedResponse(Guid.NewGuid(), requestId, date, payload, state, request));
+            RaiseEvent(new EntryPointReturnedResponse(Guid.NewGuid(), requestId, date, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message), state, request));
         }
 
         public void StartCall(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -110,15 +99,14 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier(metaData, payload, message);
+            Payload = PayloadObjectIdentifier.Generate(metaData, payload, message);
             CommandType = commandType;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = dataProvider;
 
             RaiseEvent(new DataProviderCallStarted(Guid.NewGuid(), requestId, dataProvider, date, commandType,
-                new PayloadIdentifier(metaData,
-                    payload, message)));
+                PayloadObjectIdentifier.Generate(metaData, payload, message)));
         }
 
         public void EndCall(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -130,15 +118,14 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier(metaData, payload, message);
+            Payload = PayloadObjectIdentifier.Generate(metaData, payload, message);
             CommandType = commandType;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = dataProvider;
 
             RaiseEvent(new DataProviderCallEnded(Guid.NewGuid(), requestId, dataProvider, date, commandType,
-                new PayloadIdentifier(metaData,
-                    payload, message)));
+               PayloadObjectIdentifier.Generate(metaData, payload, message)));
         }
 
         public void RaiseSecurityFlag(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -149,14 +136,13 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier(metaData, payload, message);
+            Payload = PayloadObjectIdentifier.Generate(metaData, payload, message);
             CommandType = commandType;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = dataProvider;
 
-            RaiseEvent(new SecurityFlagRaised(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
-                    payload, message)));
+            RaiseEvent(new SecurityFlagRaised(Guid.NewGuid(), requestId, dataProvider, date, commandType,PayloadObjectIdentifier.Generate(metaData, payload, message)));
         }
 
         public void Configuration(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -167,14 +153,13 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier(metaData, payload, message);
+            Payload = PayloadObjectIdentifier.Generate(metaData, payload, message);
             CommandType = commandType;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = dataProvider;
 
-            RaiseEvent(new DataProviderConfigured(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
-                    payload, message)));
+            RaiseEvent(new DataProviderConfigured(Guid.NewGuid(), requestId, dataProvider, date, commandType, PayloadObjectIdentifier.Generate(metaData, payload, message)));
         }
 
         public void Transformation(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -185,14 +170,13 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier(metaData, payload, message);
+            Payload = PayloadObjectIdentifier.Generate(metaData, payload, message);
             CommandType = commandType;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = dataProvider;
 
-            RaiseEvent(new DataProviderResponseTransformed(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
-                    payload, message)));
+            RaiseEvent(new DataProviderResponseTransformed(Guid.NewGuid(), requestId, dataProvider, date, commandType, PayloadObjectIdentifier.Generate(metaData, payload, message)));
         }
 
         public void Error(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
@@ -203,14 +187,13 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Failed);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier(metaData, payload, message);
+            Payload = PayloadObjectIdentifier.Generate(metaData, payload, message);
             CommandType = commandType;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = dataProvider;
 
-            RaiseEvent(new DataProviderError(Guid.NewGuid(), requestId, dataProvider, date, commandType, new PayloadIdentifier(metaData,
-                    payload, message)));
+            RaiseEvent(new DataProviderError(Guid.NewGuid(), requestId, dataProvider, date, commandType, PayloadObjectIdentifier.Generate(metaData, payload, message)));
         }
 
 
@@ -223,13 +206,13 @@ namespace Workflow.Lace.Domain.Aggregates
                 DataProviderState.Successful);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message);
             CommandType = CommandType.BeginExecution;
             State = new StateIdentifier();
             RequestContext = request;
             DataProviderId = DataProviderCommandSource.EntryPoint;
 
-            RaiseEvent(new EntryPointReceivedRequest(Guid.NewGuid(), date, requestId, payload, request));
+            RaiseEvent(new EntryPointReceivedRequest(Guid.NewGuid(), date, requestId, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message), request));
         }
 
         public void EntryPointResponse(Guid requestId, DateTime date, StateIdentifier state,
@@ -240,13 +223,13 @@ namespace Workflow.Lace.Domain.Aggregates
                 (DataProviderState) state.Id);
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message);
             CommandType = CommandType.EndExecution;
             State = state;
             RequestContext = request;
             DataProviderId = DataProviderCommandSource.EntryPoint;
 
-            RaiseEvent(new EntryPointReturnedResponse(Guid.NewGuid(), requestId, date, payload, state, request));
+            RaiseEvent(new EntryPointReturnedResponse(Guid.NewGuid(), requestId, date, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message), state, request));
         }
 
         public void RequestSentToDataProvider(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
@@ -256,13 +239,13 @@ namespace Workflow.Lace.Domain.Aggregates
             DataProvider = dataProvider;
             Date = date;
             Connection = connection;
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message);
             CommandType = CommandType.StartSourceCall;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = (DataProviderCommandSource)dataProvider.Id;
 
-            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
+            RaiseEvent(new RequestToDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message)));
         }
 
         public void ResponseReceivedFromDataProvider(Guid requestId, DataProviderIdentifier dataProvider, DateTime date,
@@ -272,13 +255,13 @@ namespace Workflow.Lace.Domain.Aggregates
             DataProvider = dataProvider;
             Date = date;
             Connection = connection;
-            Payload = payload;
+            Payload = PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message);
             CommandType = CommandType.EndSourceCall;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
             DataProviderId = (DataProviderCommandSource)dataProvider.Id;
 
-            RaiseEvent(new ResponseFromDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, payload));
+            RaiseEvent(new ResponseFromDataProvider(Guid.NewGuid(), requestId, dataProvider, date, connection, PayloadObjectIdentifier.Generate(payload.MetaData, payload.Payload, payload.Message)));
         }
 
         public void CreateTransaction(Guid id, Guid packageId, long packageVersion, DateTime date, Guid userId,
@@ -290,7 +273,7 @@ namespace Workflow.Lace.Domain.Aggregates
             DataProvider = new DataProviderIdentifier();
             Date = date;
             Connection = new ConnectionTypeIdentifier();
-            Payload = new PayloadIdentifier();
+            Payload = new PayloadObjectIdentifier();
             CommandType = CommandType.EndExecution;
             State = new StateIdentifier();
             RequestContext = new SearchRequestIndentifier();
@@ -336,7 +319,7 @@ namespace Workflow.Lace.Domain.Aggregates
         public ConnectionTypeIdentifier Connection { get; private set; }
 
         [DataMember]
-        public PayloadIdentifier Payload { get; private set; }
+        public PayloadObjectIdentifier Payload { get; private set; }
 
         [DataMember]
         public CommandType CommandType { get; private set; }

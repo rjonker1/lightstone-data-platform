@@ -12,19 +12,29 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Services
     {
         private readonly ILog _log;
         private readonly IHandleMonitoringCommands _handler;
+        private readonly IHandleDataProviderStatistics _statisticsHandler;
 
-        public DataProviderMonitoringService(IHandleMonitoringCommands handler)
+        public DataProviderMonitoringService(IHandleMonitoringCommands handler,
+            IHandleDataProviderStatistics statisticsHandler)
         {
             _log = LogManager.GetLogger<DataProviderMonitoringService>();
             _handler = handler;
+            _statisticsHandler = statisticsHandler;
         }
 
-        public IEnumerable<MonitoringDataProviderView> GetMonitoringForDataProviders()
+        public IEnumerable<DataProviderView> GetMonitoringForDataProviders()
         {
             _log.InfoFormat("Getting Data Provider Monitoring View");
             _handler.Handle(
                 new GetMonitoringCommand(new MonitoringRequestDto()));
             return _handler.MonitoringResponse;
+        }
+
+        public IEnumerable<DataProviderStatisticsView> GetDataProviderStatistics()
+        {
+            _log.InfoFormat("Getting Data Provider Monitoring Statistics View");
+            _statisticsHandler.Handle();
+            return _statisticsHandler.StatisticsResponse;
         }
     }
 }

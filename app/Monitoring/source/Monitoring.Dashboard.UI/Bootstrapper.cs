@@ -25,7 +25,8 @@ namespace Monitoring.Dashboard.UI
             container.Register<IMonitoringRepository, MonitoringRepository>();
             container.Register<ICommitRepository, CommitRepository>();
 
-            container.Register<IHandleMonitoringCommands, MonitoringHandler>();
+            container.Register<IHandleMonitoringCommands, DataProviderHandler>();
+            container.Register<IHandleDataProviderStatistics, DataProviderStatisticsHandler>();
             container.Register<ICallMonitoringService, DataProviderMonitoringService>();
         }
 
@@ -41,6 +42,9 @@ namespace Monitoring.Dashboard.UI
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/css/skins"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/ang"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/ang/app"));
+            nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins"));
+            nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/fastclick"));
+            nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/assets/plugins/slimScroll"));
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("/Scripts"));
 
             

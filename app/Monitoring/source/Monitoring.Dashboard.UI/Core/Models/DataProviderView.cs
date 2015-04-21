@@ -25,10 +25,9 @@ namespace Monitoring.Dashboard.UI.Core.Models
             CommitSequence = commitSequence;
         }
     }
-
-    [Serializable]
+    
     [DataContract]
-    public class MonitoringDataProviderView
+    public class DataProviderView
     {
         [DataMember]
         public Guid Id { get; private set; }
@@ -49,9 +48,6 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public bool HasErrors { get; private set; }
 
         [DataMember]
-        public string Results { get; private set; }
-
-        [DataMember]
         public string ElapsedTime { get; private set; }
 
         [DataMember]
@@ -60,12 +56,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
         [DataMember]
         public string JsonPayload { get; private set; }
 
-        public MonitoringDataProviderView()
+        public DataProviderView()
         {
 
         }
 
-        public MonitoringDataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
+        public DataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
             bool hasErrors,
             string elapsedTime, string searchType, string searchTerm)
         {
@@ -78,13 +74,8 @@ namespace Monitoring.Dashboard.UI.Core.Models
             SearchType = searchType;
         }
 
-        public MonitoringDataProviderView GetResults()
-        {
-            Results = ElapsedTime.JsonToObject<Results>().ElapsedTime;
-            return this;
-        }
-
-        public MonitoringDataProviderView DeserializePayload()
+      
+        public DataProviderView DeserializePayload()
         {
             JsonPayload = DeserializePayloads();
             return this;
@@ -99,13 +90,8 @@ namespace Monitoring.Dashboard.UI.Core.Models
             SerializedPayloads.OrderBy(o => o.CommitSequence)
                 .ToList()
                 .ForEach(f => jarray.Add(JArray.Parse(Encoding.UTF8.GetString(f.Payload).Substring(1))));
+
             return jarray.ToString(Formatting.None);
-            //foreach (var payload in SerializedPayloads.OrderBy(o => o.CommitSequence))
-            //{
-            //    var jsonString = Encoding.UTF8.GetString(payload.Payload).Substring(1);
-            //    //jarray.Add(JArray.Parse(JsonExtensions.ObjectToJson(request)));
-            //    jarray.Add(JArray.Parse(jsonString));
-            //}
         }
     }
 }

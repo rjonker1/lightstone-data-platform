@@ -11,6 +11,11 @@ namespace Workflow.Lace.Messages.Infrastructure
         [DataMember]
         public string Name { get; private set; }
 
+        public StopWatchResults()
+        {
+            
+        }
+
         public StopWatchResults(TimeSpan elapsedTime, string name)
         {
             ElapsedTime = elapsedTime;

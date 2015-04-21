@@ -79,6 +79,7 @@
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
     <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
     <Compile Include="Identifiers\PayloadIdentifier.cs" />
+    <Compile Include="Identifiers\PayloadObjectIdentifier.cs" />
     <Compile Include="Identifiers\SearchRequestIndentifier.cs" />
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
     <Compile Include="Mappers\MappingForTypes.cs" />
@@ -87,6 +88,10 @@
     <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
       <Project>{fce0903c-fde5-406a-ab4b-b4e71411e5f4}</Project>
       <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lace.Shared.Extensions\Lace.Shared.Extensions.csproj">
+      <Project>{129bbffe-0d3e-4cc5-95b4-5c466669421d}</Project>
+      <Name>Lace.Shared.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
