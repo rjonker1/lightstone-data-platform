@@ -1,4 +1,5 @@
-﻿using Lace.Domain.Core.Requests.Contracts;
+﻿using System.Collections.Generic;
+using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
 namespace Lace.Test.Helper.Mothers.Packages
@@ -16,12 +17,12 @@ namespace Lace.Test.Helper.Mothers.Packages
             _rsp = rsp;
         }
 
-        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest dataProviderRequest)
+        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IEnumerable<IAmRequestField> requestFields)
         {
             _name = name;
             _cost = cost;
             _rsp = rsp;
-            DataProviderRequest = dataProviderRequest;
+            RequestFields = requestFields;
         }
 
         public DataProviderName Name
@@ -29,7 +30,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return _name; }
         }
 
-        public IAmDataProviderRequest DataProviderRequest { get; private set; }
+        public IEnumerable<IAmRequestField> RequestFields { get; private set; }
 
         public decimal CostPrice
         {
