@@ -9,6 +9,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public DataProviderDto()
         {
             DataFields = Enumerable.Empty<DataProviderFieldItemDto>();
+            RequestFields = new[]{new DataProviderFieldItemDto {Name = "Vin"}, new DataProviderFieldItemDto {Name = "Lic"}};
         }
 
         public Guid Id { get; set; }
@@ -24,6 +25,7 @@ namespace PackageBuilder.Domain.Dtos.Write
         public DateTime CreatedDate { get; set; }
         public DateTime? EditedDate { get; set; }
         public int Version { get; set; }
+        public IEnumerable<DataProviderFieldItemDto> RequestFields { get; set; }
         public IEnumerable<DataProviderFieldItemDto> DataFields { get; set; }
     }
 }

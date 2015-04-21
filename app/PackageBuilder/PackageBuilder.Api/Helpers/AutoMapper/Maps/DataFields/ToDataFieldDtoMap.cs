@@ -13,8 +13,8 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataFields
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IEnumerable<DataField>, IEnumerable<DataProviderFieldItemDto>>()
-                .ConvertUsing(s => s == null ? Enumerable.Empty<DataProviderFieldItemDto>() : s.Select(Mapper.Map<DataField, DataProviderFieldItemDto>).ToList());
+            //Mapper.CreateMap<IEnumerable<DataField>, IEnumerable<DataProviderFieldItemDto>>()
+            //    .ConvertUsing(s => s == null ? Enumerable.Empty<DataProviderFieldItemDto>() : s.Select(Mapper.Map<DataField, DataProviderFieldItemDto>).ToList());
             Mapper.CreateMap<DataField, DataProviderFieldItemDto>()
                 .ForMember(d => d.Price, opt => opt.MapFrom(x => x.CostOfSale))
                 .ForMember(d => d.Industries, opt => opt.MapFrom(x => Mapper.Map<IDataField, IEnumerable<IIndustry>>(x).Cast<Industry>()));

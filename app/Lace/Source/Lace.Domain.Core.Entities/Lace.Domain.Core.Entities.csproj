@@ -82,6 +82,18 @@
     <Compile Include="PriceModel.cs" />
     <Compile Include="PropertyModel.cs" />
     <Compile Include="RepairIndexModel.cs" />
+    <Compile Include="Requests\Fields\ApplicantNameRequestField.cs" />
+    <Compile Include="Requests\Fields\EngineNumberRequestField.cs" />
+    <Compile Include="Requests\IvidStandardRequest.cs" />
+    <Compile Include="Requests\Fields\RequesterNameRequestField.cs" />
+    <Compile Include="Requests\Fields\LabelRequestField.cs" />
+    <Compile Include="Requests\Fields\LicenseNumberRequestField.cs" />
+    <Compile Include="Requests\Fields\MakeRequestField.cs" />
+    <Compile Include="Requests\Fields\ReasonForApplicationRequestField.cs" />
+    <Compile Include="Requests\Fields\RegisterNumberRequestField.cs" />
+    <Compile Include="Requests\Fields\RequesterEmailRequestField.cs" />
+    <Compile Include="Requests\Fields\RequesterPhoneRequestField.cs" />
+    <Compile Include="Requests\Fields\RequestReferenceRequestField.cs" />
     <Compile Include="RgtResponse.cs" />
     <Compile Include="RgtVinResponse.cs" />
     <Compile Include="SaleModel.cs" />
@@ -97,11 +109,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lace.Domain.Core.Requests\Lace.Domain.Core.Requests.csproj">
+      <Project>{FCE0903C-FDE5-406A-AB4B-B4E71411E5F4}</Project>
+      <Name>Lace.Domain.Core.Requests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lace.Domain.Core\Lace.Domain.Core.csproj">
       <Project>{ca721b03-efc7-45ce-a70e-bb9ef72c075b}</Project>
       <Name>Lace.Domain.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

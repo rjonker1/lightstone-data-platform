@@ -4,6 +4,7 @@ using DataPlatform.Shared.Helpers.Json;
 using Lace.Domain.Core.Contracts;
 using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Models;
+using Lace.Domain.Core.Requests.Contracts;
 using Newtonsoft.Json;
 
 namespace Lace.Domain.Core.Entities
@@ -113,6 +114,8 @@ namespace Lace.Domain.Core.Entities
             }
             return value;
         }
+
+        public IAmDataProviderStandardIvidRequest Request { get; private set; }
 
         [DataMember, JsonConverter(typeof(JsonTypeResolverConverter))]
         public IProvideVehicleSpecificInformation SpecificInformation { get; private set; }

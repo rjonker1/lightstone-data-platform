@@ -10,7 +10,7 @@ using PackageBuilder.Domain.Entities.DataFields.Write;
 using PackageBuilder.Domain.Entities.DataProviders.Write;
 using PackageBuilder.Domain.Entities.Enums.DataProviders;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
 {
     public class LaceResponseMap : ICreateAutoMapperMaps
     {

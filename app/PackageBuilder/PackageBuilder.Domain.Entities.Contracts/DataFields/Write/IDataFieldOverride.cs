@@ -10,6 +10,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataFields.Write
         double CostOfSale { get; }
         bool? IsSelected { get; }
         int Order { get; }
+        IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; set; }
         IEnumerable<IDataFieldOverride> DataFieldOverrides { get; set; }
     }
 }

@@ -4,19 +4,4 @@
     {
         string Field { get; }
     }
-
-    public interface IAmVinRequestField : IAmRequestField
-    {
-
-    }
-
-    public interface IAmLicenseNumberRequestField : IAmRequestField
-    {
-
-    }
-
-    public interface IAmRegisterNumberRequestField : IAmRequestField
-    {
-
-    }
 }

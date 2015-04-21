@@ -69,9 +69,7 @@ namespace PackageBuilder.Api.Modules
                 Response.AsJson(
                     new
                     {
-                        Response =
-                            new[]
-                            {Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
+                        Response = new[]{Mapper.Map<IPackage, PackageDto>(writeRepo.GetById(parameters.id, parameters.version))}
                     });
 
             Get["/Packages/Execute/{id}/{userId}/{searchTerm}/{requestId}"] = parameters =>

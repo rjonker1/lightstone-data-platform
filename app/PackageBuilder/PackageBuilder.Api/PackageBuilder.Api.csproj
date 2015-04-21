@@ -92,9 +92,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Entities.1.0.0.886\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.886, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Lace.Domain.Core.Requests, Version=1.0.0.965, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Infrastructure.EntryPoint.1.0.0.886\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Domain.Core.Requests.1.0.0.965\lib\net45\Lightstone.DataPlatform.Lace.Domain.Core.Requests.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Lace.Domain.DataProviders.Audatex, Version=1.0.0.886, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -265,16 +265,17 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\ComplexObjectMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Read\ToDataProviderDtoMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\LaceResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\AudatexResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\LightstonePropertyResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\PCubedFicaResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\SignioResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Requests\IvidRequestMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LaceResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\AudatexResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstonePropertyResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\PCubedFicaResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\SignioResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\ToDataProviderDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\ToDataProviderOverrideMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\IndustryMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\Industries\IndustryMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageDtoMap.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\ComplexObjectToDataFieldConverter.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\DataFields\ToDataFieldOverrideMap.cs" />
@@ -285,14 +286,14 @@
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceOverrideResolver.cs" />
     <Compile Include="Helpers\AutoMapper\ValueResolvers\DataProviderCostPriceResolver.cs" />
     <Compile Include="Helpers\AutoMapper\TypeConverters\IndustryConverter.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\IvidResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\IvidTitleHolderResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\LightstoneResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\IvidTitleHolderResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\LightstoneResponseMap.cs" />
     <Compile Include="Helpers\AutoMapper\Maps\Packages\ToPackageMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\RgtResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\RgtVinResponseMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\StateMap.cs" />
-    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Write\Responses\VehicleValuationResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\RgtVinResponseMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\States\StateMap.cs" />
+    <Compile Include="Helpers\AutoMapper\Maps\DataProviders\Responses\VehicleValuationResponseMap.cs" />
     <Compile Include="Helpers\Extensions\BodyBinderExtensions.cs" />
     <Compile Include="Helpers\Extensions\PipelineExtensions.cs" />
     <Compile Include="Helpers\Extensions\ResponseExtensions.cs" />

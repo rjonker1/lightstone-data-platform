@@ -3,7 +3,7 @@ using AutoMapper;
 using PackageBuilder.Domain.Entities.Contracts.DataFields.Write;
 using PackageBuilder.Domain.Entities.Contracts.Industries.Read;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.Industries
 {
     public class IndustryMap : ICreateAutoMapperMaps
     {

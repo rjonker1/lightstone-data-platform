@@ -38,7 +38,7 @@ namespace Workflow.Transactions.Write.Service.Handlers
             @event.RaiseSecurityFlag(message.Id, message.RequestId, message.DataProvider, message.Date,
                 CommandType.Configuration, message.MetaData, message.Payload, message.Message);
 
-            _repository.Save(@event, Guid.NewGuid(), null);
+          _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(TransformingDataProviderResponseCommand message)
@@ -47,7 +47,7 @@ namespace Workflow.Transactions.Write.Service.Handlers
             @event.RaiseSecurityFlag(message.Id, message.RequestId, message.DataProvider, message.Date,
                 CommandType.Configuration, message.MetaData, message.Payload, message.Message);
 
-            _repository.Save(@event, Guid.NewGuid(), null);
+           _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(ErrorInDataProviderCommand message)
@@ -55,8 +55,7 @@ namespace Workflow.Transactions.Write.Service.Handlers
             var @event = _repository.GetById<Request>(message.RequestId);
             @event.RaiseSecurityFlag(message.Id, message.RequestId, message.DataProvider, message.Date,
                 CommandType.Fault, message.MetaData, message.Payload, message.Message);
-
-            _repository.Save(@event, Guid.NewGuid(), null);
+             _repository.Save(@event, Guid.NewGuid(), null);
         }
 
 
@@ -66,7 +65,7 @@ namespace Workflow.Transactions.Write.Service.Handlers
             @event.RaiseSecurityFlag(message.Id, message.RequestId, message.DataProvider, message.Date,
                 CommandType.StartSourceCall, message.MetaData, message.Payload, message.Message);
 
-            _repository.Save(@event, Guid.NewGuid(), null);
+          _repository.Save(@event, Guid.NewGuid(), null);
         }
 
         public void Handle(EndingCallCommand message)
@@ -75,7 +74,8 @@ namespace Workflow.Transactions.Write.Service.Handlers
             @event.RaiseSecurityFlag(message.Id, message.RequestId, message.DataProvider, message.Date,
                 CommandType.EndSourceCall, message.MetaData, message.Payload, message.Message);
 
-            _repository.Save(@event, Guid.NewGuid(), null);
+           _repository.Save(@event, Guid.NewGuid(), null);
         }
+
     }
 }

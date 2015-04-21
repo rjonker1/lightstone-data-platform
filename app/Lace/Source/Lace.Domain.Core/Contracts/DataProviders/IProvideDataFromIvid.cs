@@ -1,9 +1,11 @@
 ﻿using Lace.Domain.Core.Contracts.Requests;
+using Lace.Domain.Core.Requests.Contracts;
 
 namespace Lace.Domain.Core.Contracts.DataProviders
 {
     public interface IProvideDataFromIvid : IPointToLaceProvider
     {
+        IAmDataProviderStandardIvidRequest Request { get; }
         IProvideVehicleSpecificInformation SpecificInformation { get; }
 
         string StatusMessage { get; }

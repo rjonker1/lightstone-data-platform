@@ -18,6 +18,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
         string Owner { get; }
         DateTime CreatedDate { get; }
         DateTime? EditedDate { get; }
+        IEnumerable<IDataField> RequestFields { get; }
         IEnumerable<IDataField> DataFields { get; }
 
         void OverrideCostValuesFromPackage(double costOfSale);

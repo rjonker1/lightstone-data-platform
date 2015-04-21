@@ -29,6 +29,7 @@
 
             getStates: getStates,
             getIndustries: getIndustries,
+            getRequestFields: getRequestFields,
 
             getPeople: getPeople,
             getMessageCount: getMessageCount
@@ -188,6 +189,19 @@
             var deferred = $q.defer();
 
             $http.get( config.apiUri + '/Industries').then(function (result) {
+                data = result.data;
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+            return $q.when(deferred.promise);
+        }
+        
+        function getRequestFields() {
+            var deferred = $q.defer();
+
+            $http.get(config.apiUri + '/Requests').then(function (result) {
                 data = result.data;
                 deferred.resolve(data);
             }, function (error) {

@@ -4,7 +4,7 @@ using Lace.Domain.Core.Contracts.DataProviders;
 using Lace.Domain.Core.Contracts.DataProviders.Specifics;
 using PackageBuilder.Domain.Entities.DataFields.Write;
 
-namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Write.Responses
+namespace PackageBuilder.Api.Helpers.AutoMapper.Maps.DataProviders.Responses
 {
     public class LightstoneResponseMap : ICreateAutoMapperMaps
     {

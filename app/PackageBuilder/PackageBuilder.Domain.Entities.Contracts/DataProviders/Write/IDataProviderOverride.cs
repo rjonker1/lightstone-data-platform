@@ -8,6 +8,7 @@ namespace PackageBuilder.Domain.Entities.Contracts.DataProviders.Write
     {
         Guid Id { get; }
         double CostOfSale { get; }
+        IEnumerable<IDataFieldOverride> RequestFieldOverrides { get; }
         IEnumerable<IDataFieldOverride> DataFieldOverrides { get; }
     }
 }

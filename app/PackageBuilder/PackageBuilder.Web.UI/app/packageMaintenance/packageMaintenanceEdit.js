@@ -197,7 +197,7 @@
         activate();
 
         function activate() {
-            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId).then(function() {
+            common.activateController([getDataProvider($routeParams.id, $routeParams.version), getStates(), getIndustries()], controllerId).then(function () {
                 log('Activated Package Maintenance View');
             }, function(error) {
                 logError(error.data.errorMessage);
@@ -266,5 +266,23 @@
                 logError(error.data.errorMessage);
             });
         }
+        
+        //function getRequestFields() {
+        //    return datacontext.getRequestFields().then(function (response) {
+        //        $scope.requestFields = response;
+        //        //$scope.filteredConstraint = $scope.industries[0];
+
+        //        //var bootFilters = [];
+
+        //        //for (var i = 0; i < $scope.requestFields.length; i++) {
+        //        //    $scope.requestFields[i].isSelected = true;
+        //        //    //bootFilters.push($scope.requestFields[i]);
+        //        //}
+
+        //        //$scope.filterData(bootFilters);
+        //    }, function (error) {
+        //        logError(error.data.errorMessage);
+        //    });
+        //}
     }
 })();

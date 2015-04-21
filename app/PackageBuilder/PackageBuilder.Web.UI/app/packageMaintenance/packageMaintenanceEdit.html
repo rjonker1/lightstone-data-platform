@@ -3,13 +3,22 @@
 
     <div style="cursor:default" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
-
             <div class="col-md-4">
                 <a style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
                 </a>
                 <div style="float: left; margin-left: 15px;">
                     {{provider.name}}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div multi-select
+                     input-model="provider.requestFields"
+                     button-label="name"
+                     item-label="name maker"
+                     max-labels="1"
+                     tick-property="isSelected"
+                     output-model="selectedRequestFields">
                 </div>
             </div>
             <div class="col-md-4" ng-show="provider.fieldLevelCostPriceOverride == false">
@@ -39,7 +48,7 @@
 
     <div style="cursor:default; background-color: #4C7E80 !important;" class="group-title angular-ui-tree-handle" data-nodrag>
         <div class="row">
-
+            
             <div class="col-md-4">
                 <a ng-if="dataField.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                     <span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span>
@@ -54,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2"></div>
+            <!--<div class="col-md-2"></div>-->
 
             <div ng-show="provider.fieldLevelCostPriceOverride == true">
                 <label class="col-md-4">Cost:</label>
@@ -115,11 +124,8 @@
 
     <ol data-nodrag type="category" class="angular-ui-tree" style="list-style-type: none;" ng-class="{hidden: !collapsed}">
         <li style="cursor:default; border: none;" class="row category-title angular-ui-tree angular-ui-tree-handle" ng-repeat="subDF in dataField.dataFields">
-
-
             <div style="cursor:default" class=" angular-ui-tree-handle" data-nodrag>
                 <div style="margin-left: -15px; margin-right: 0;" class="row">
-
                     <div class="col-md-4">
                         <a ng-if="subDF.dataFields.length > 0" style="cursor:pointer; float: left;" class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this); callRestService(this)">
                             <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
@@ -141,7 +147,6 @@
                     </div>
                 </div>
             </div>
-
         </li>
     </ol>
 
@@ -156,9 +161,7 @@
                 <div class="widget wblue">
                     <div data-cc-widget-header title="{{title}}"></div>
                     <div class="widget-content user">
-
                         <div id="info" class="row">
-
                             <div id="1" class="col-lg-3 col-md-6">
                                 <div>
                                     <label>Name:</label>
@@ -179,9 +182,12 @@
                                         <textarea class="form-control" style="resize: none;" rows="6" cols="50" ng-model="dataProvsPkg.Package[0].description"></textarea>
                                     </div>
                                 </div>
+                                <br />
+                                <div>
+                                    <button type="button" class="btn btn-danger" style="margin-left: 0;" ng-click="cancel()">Cancel</button>
+                                    <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Save Package</button>
+                                </div>
                             </div>
-
-                            <!--<div class="col-lg-4" />-->
 
                             <div id="2" class="col-lg-3 col-md-6">
                                 <div>
@@ -252,62 +258,42 @@
 
                                 </div>
 
-
                             </div>
 
 
-                            <!-- DataProvider -->
-
-                            <div class="row">
-
-                                <div class="col-lg-4 col-md-6" style="padding-bottom: 20px;">
-                                    <div style="float: left;"><h3>Data Providers</h3></div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-8">
-
-                                    <div ui-tree id="asdt" ng-model="dataProvsPkg">
-                                        <div ng-repeat="providers in dataProvsPkg.Package">
-                                            <div ng-repeat="provs in providers">
-                                                <ol ui-tree-nodes="" ng-model="provs">
-                                                    <li ng-repeat="provider in provs" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
-                                                </ol>
-                                            </div>
+                        </div> <!--End Info-->
+                        <br />
+                        <!-- DataProvider -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3>Data Providers</h3>
+                            </div>
+                            <div class="col-lg-12">
+                                <div ui-tree id="asdt" ng-model="dataProvsPkg">
+                                    <div ng-repeat="providers in dataProvsPkg.Package">
+                                        <div ng-repeat="provs in providers">
+                                            <ol ui-tree-nodes="" ng-model="provs">
+                                                <li ng-repeat="provider in provs" ui-tree-node data-collapsed="!node.collapsed" ng-include="'proivder_nodes_renderer.html'"></li>
+                                            </ol>
                                         </div>
                                     </div>
-
-                                    <br />
-
-                                    <div style="float: right;">
-                                        <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-                                        <button type="button" class="btn btn-success" ng-click="editPackage(dataProvsPkg.Package[0])">Save Package</button>
-                                    </div>
-
-
-
                                 </div>
+                                <br />
+                            </div>
 
-                                <!-- <div class="col-lg-6">
-                                         <h3>Data binding</h3>
-                                         <div class="info">
-                                             {{ info }}
-                                         </div>
-                                         <pre class="code">{{ dataProvsPkg | json }}</pre>
-                                     </div>-->
-
-                                <div class="col-lg-6">
-                                    <div style="float: right;">
-
-
-
-
-                                    </div>
-
+                            <!-- <div class="col-lg-6">
+                                <h3>Data binding</h3>
+                                <div class="info">
+                                    {{ info }}
                                 </div>
-                            </div>  <!-- End DataProvider -->
+                                <pre class="code">{{ dataProvsPkg | json }}</pre>
+                            </div>-->
 
-                        </div> <!--End Info-->
-
+                            <div class="col-lg-6">
+                                <div style="float: right;"></div>
+                            </div>
+                        </div>
+                        <!-- End DataProvider -->
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>
