@@ -1,58 +1,92 @@
-﻿<div class="data-provider-log" ng-app="dataProviderMonitoringApp" ng-controller="DataProviderController">
-    <div>
-        <input type="button" id="re-initialize-log-data" value="re-connect" ng-click="ReInitializeService();" />
-    </div>
-    <div id="data-provider-event-log" class="data-provider-container">
-        <ul>
-            <li ng-repeat="response in dataProviderMonitoring" class="" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
-                <h2 ng-click="Toggle($index,'log-formatted-json');">&nbsp;{{response.Id}}&nbsp;{{response.SearchType}}&nbsp;{{response.SearchTerm}}&nbsp;{{response.Results}}</h2>
-                <div>
-                    <div style="display: none;" id="toggle-{{$index}}">
-                        <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.JsonPayload}}</textarea>
+﻿<div ng-app="dataProviderMonitoringApp">
+    <div class="row">
+        <div ng-controller="DataProviderStatisticsController">
+
+            <div ng-repeat="response in dataProviderStatistics">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>{{response.AverageResponseTime}}</h3>
+                            <p>Average Response Time</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
                     </div>
                 </div>
-            </li>
-        </ul>
-    </div>
-    <div id="log-formatted-json" style="display: none;">
-        <div>
-            <input type="button" id="button-collapse-expand" ng-click="CollapseOrExpand('button-collapse-expand');" value="collapse" />
-        </div>
-        <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
-    </div>
-</div>
-<div style="clear: both"></div>
-
-
-        @*<div id="tab-content2" class="tab-content" ng-app="dataProviderMonitoringApp">
-                <div id="data-provider-event-log" class="data-provider-container" ng-controller="DataProviderController">
-                    <ul>
-                        <li ng-repeat="response in dataProviderMonitoring">
-                            <h2>
-                                <span><img src="../assets/images/plus.gif" alt="expand" ng-click="Toggle($index,this);" /></span>{{response.Metadata}}
-                            </h2>
-
-                            <div>
-                                <div style="display: none;" id="toggle-{{$index}}">
-                                    <div>
-                                        <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse"/> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
-                                    </div>
-                                    <div class="canvas" id="canvas-{{$index}}"><pre class="CodeContainer"></pre></div>
-                                    <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.Payload}}</textarea>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>{{response.SuccessRate}}<sup style="font-size: 20px">%</sup></h3>
+                            <p>Success Rate</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                    </div>
                 </div>
-            </div>*@
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-blue">
+                        <div class="inner">
+                            <h3>{{response.TotalRequests}}</h3>
+                            <p>Total Requests</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>{{response.TotalErrors}}</h3>
+                            <p>Total Errors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="DataProviderController">
+            <div class="col-md-4">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Log</h3>
 
-        @*<li>
-                <div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <input type="button" id="re-initialize-log-data" value="re-connect" ng-click="ReInitializeService();" />
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Request</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr ng-repeat="response in dataProviderMonitoring" class="" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
+                                <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;" ><span style="font-size: 12px">{{response.Id}}</span>&nbsp;{{response.SearchType}}&nbsp;{{response.SearchTerm}}&nbsp;{{response.ElapsedTime}}</td>
+                                <td>
+                                    <span class="label label-success">Successful</span>
+                                    <div style="display: none;" id="toggle-{{$index}}">
+                                        <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.JsonPayload}}</textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+            <div class="col-md-8">
+                <div id="log-formatted-json" style="display: none;">
                     <div>
-                        <input type="button" ng-click="CollapseAllClicked($index)" value="Collapse" /> <input type="button" value="Expand" ng-click="ExpandAllClicked($index)">
+                        <input type="button" id="button-collapse-expand" ng-click="CollapseOrExpand('button-collapse-expand');" value="collapse" />
                     </div>
                     <div class="canvas" id="canvas-display"><pre class="CodeContainer"></pre></div>
                 </div>
-            </li>*@
-
+            </div>
+        </div>
+    </div>
+</div>

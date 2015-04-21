@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Threading;
 using Common.Logging;
 using Microsoft.AspNet.SignalR;
@@ -18,8 +19,9 @@ namespace Monitoring.Dashboard.UI.Broadcasters
 
         private readonly IHubConnectionContext<dynamic> _clients;
         private Uri _root = null;
-        private TimeSpan _interval = TimeSpan.FromMilliseconds(15000);
-        private Timer _timer;
+        private TimeSpan _interval = TimeSpan.FromMilliseconds(1000);
+        private Timer _monitoringTimer;
+        private Timer _statisticsTimer;
         private bool _isFirstCall = true;
         private readonly ILog _log;
 
@@ -27,7 +29,8 @@ namespace Monitoring.Dashboard.UI.Broadcasters
         {
             _log = LogManager.GetLogger<DataProviderBroadcaster>();
             _clients = clients;
-            SetTimer();
+            SetMonitoringTimer();
+            SetStatisticsTimer();
         }
 
         public static DataProviderBroadcaster Instance
@@ -44,9 +47,14 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             }
         }
 
-        private void SetTimer()
+        private void SetMonitoringTimer()
         {
-            _timer = new Timer(BroadCastDataProviderMonitoring, null, _interval, _interval);
+            _monitoringTimer = new Timer(BroadCastDataProviderMonitoring, null, _interval, _interval);
+        }
+
+        private void SetStatisticsTimer()
+        {
+            _statisticsTimer = new Timer(BroadCastDataProvideStatistics, null, _interval, _interval);
         }
 
         private void BroadCastDataProviderMonitoring(object state)
@@ -59,7 +67,7 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             {
                 _isFirstCall = false;
                 _interval = TimeSpan.FromMilliseconds(60000);
-                SetTimer();
+                SetMonitoringTimer();
             }
 
             _clients.All.dataProviderMonitoringInfo(result);
@@ -74,14 +82,14 @@ namespace Monitoring.Dashboard.UI.Broadcasters
                     BaseAddress = _root
                 };
 
-                var model = new MonitoringDataProviderView[] { };
+                var model = new DataProviderView[] { };
 
                 var task = client.GetAsync("dataProviders/freshenLog").ContinueWith(t =>
                 {
                     var response = t.Result;
                     var json = response.Content.ReadAsStringAsync();
                     json.Wait();
-                    model = JsonConvert.DeserializeObject<MonitoringDataProviderView[]>(json.Result);
+                    model = JsonConvert.DeserializeObject<DataProviderView[]>(json.Result);
                 });
 
                 task.Wait();
@@ -91,6 +99,52 @@ namespace Monitoring.Dashboard.UI.Broadcasters
             catch (Exception ex)
             {
                 _log.ErrorFormat("Error occurred in Monitoring For Data Provider Broadcaster because of {0}", ex.Message);
+            }
+            return null;
+        }
+
+        private void BroadCastDataProvideStatistics(object state)
+        {
+            var result = GetDataProviderStatisticsFromApi();
+            if (result == null)
+                return;
+
+            if (_isFirstCall)
+            {
+                _isFirstCall = false;
+                _interval = TimeSpan.FromMilliseconds(15000);
+                SetStatisticsTimer();
+            }
+
+            _clients.All.dataProviderStatisticsInfo(result);
+        }
+
+        private object GetDataProviderStatisticsFromApi()
+        {
+            try
+            {
+                var client = new HttpClient()
+                {
+                    BaseAddress = _root
+                };
+
+                var model = new DataProviderStatisticsView[] { };
+
+                var task = client.GetAsync("dataProviders/freshenStatistics").ContinueWith(t =>
+                {
+                    var response = t.Result;
+                    var json = response.Content.ReadAsStringAsync();
+                    json.Wait();
+                    model = JsonConvert.DeserializeObject<DataProviderStatisticsView[]>(json.Result);
+                });
+
+                task.Wait();
+
+                return model;
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("Error occurred in Monitoring For Data Provider Statistics Broadcaster because of {0}", ex.Message);
             }
             return null;
         }

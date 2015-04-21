@@ -11,8 +11,7 @@ namespace Monitoring.Dashboard.UI.Modules
             {
                // var model = new MonitoringStorageModel(Guid.NewGuid());
 
-               //  return View["Index", model];
-                return null;
+              return View["Index"];
             };
         }
     }

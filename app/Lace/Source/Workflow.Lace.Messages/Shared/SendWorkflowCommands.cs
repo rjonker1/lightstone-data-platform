@@ -86,7 +86,7 @@ namespace Workflow.Lace.Messages.Shared
         {
             new ReceiveEntryPointRequest(Guid.NewGuid(), _requestId, DateTime.UtcNow,
                 SearchRequestIndentifier.GetSearchRequest(request),
-                new PayloadIdentifier(new MetadataContainer().ObjectToJson(), request.ObjectToJson(),
+                new PayloadIdentifier(new PerformanceMetadata(stopWatch.ToObject()).ObjectToJson(), request.ObjectToJson(),
                     CommandDescriptions.ReceiveEntryPointRequestDescription()))
                 .SendToBus(_publisher, _log);
             stopWatch.Start();

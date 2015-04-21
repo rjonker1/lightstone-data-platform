@@ -42,6 +42,18 @@ namespace Lace.Shared.Extensions
 
         }
 
+        public static T JsonToObject<T>(this string json) where T : class
+        {
+            try
+            {
+                return string.IsNullOrWhiteSpace(json) || !IsJson(json) ? null : JsonConvert.DeserializeObject<T>(json);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private static bool IsJson(string json)
         {
             json = json.Trim();
