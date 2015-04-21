@@ -1,4 +1,5 @@
-﻿using DataPlatform.Shared.Repositories;
+﻿using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
+using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using Workflow.Billing.Domain.Entities;
 
@@ -15,7 +16,7 @@ namespace Workflow.Billing.Consumers.ConsumerTypes
             _stageBillingRepository = stageBillingRepository;
         }
 
-        public void Consume()
+        public void Consume(IMessage<BillingMessage> message)
         {
             
         }

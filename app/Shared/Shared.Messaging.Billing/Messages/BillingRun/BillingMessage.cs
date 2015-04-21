@@ -8,7 +8,7 @@ namespace DataPlatform.Shared.Messaging.Billing.Messages.BillingRun
     public class BillingMessage : Entity
     {
         public virtual string RunType { get; set; }
-        public virtual DateTime Schedule { get; set; }
+        public virtual DateTime? Schedule { get; set; }
 
         public BillingMessage()
         {
