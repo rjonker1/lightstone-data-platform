@@ -136,6 +136,7 @@
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction.cs" />
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction_and_a_failure_occurs.cs" />
     <Compile Include="Api\Transaction\when_creating_a_new_billing_transaction_as_an_unauthorised_user.cs" />
+    <Compile Include="Consumers\Entity\when_executing_bill_run_from_pre_to_stage.cs" />
     <Compile Include="Consumers\Entity\when_receiving_new_user_message.cs" />
   </ItemGroup>
   <ItemGroup>
