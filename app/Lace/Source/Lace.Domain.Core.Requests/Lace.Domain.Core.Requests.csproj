@@ -57,13 +57,13 @@
     <Compile Include="Contracts\IAmMakeRequestField.cs" />
     <Compile Include="Contracts\IAmReasonForApplicationRequestField.cs" />
     <Compile Include="Contracts\IAmRegisterNumberRequestField.cs" />
-    <Compile Include="Contracts\IAmRequest.cs" />
+    <Compile Include="Contracts\IAmDataProviderRequest.cs" />
     <Compile Include="Contracts\IAmRequesterEmailRequestField.cs" />
     <Compile Include="Contracts\IAmRequesterNameRequestField.cs" />
     <Compile Include="Contracts\IAmRequesterPhoneRequestField.cs" />
     <Compile Include="Contracts\IAmRequestField.cs" />
     <Compile Include="Contracts\IAmRequestReferenceRequestField.cs" />
-    <Compile Include="Contracts\IAmStandardIvidRequest.cs" />
+    <Compile Include="Contracts\IAmDataProviderStandardIvidRequest.cs" />
     <Compile Include="Contracts\IAmVinField.cs" />
     <Compile Include="Contracts\IAmVinRequestField.cs" />
     <Compile Include="Contracts\IHaveRequestContext.cs" />

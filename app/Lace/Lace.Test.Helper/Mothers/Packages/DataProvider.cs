@@ -16,12 +16,12 @@ namespace Lace.Test.Helper.Mothers.Packages
             _rsp = rsp;
         }
 
-        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IAmRequest request)
+        public DataProvider(DataProviderName name, decimal cost, decimal rsp, IAmDataProviderRequest dataProviderRequest)
         {
             _name = name;
             _cost = cost;
             _rsp = rsp;
-            Request = request;
+            DataProviderRequest = dataProviderRequest;
         }
 
         public DataProviderName Name
@@ -29,7 +29,7 @@ namespace Lace.Test.Helper.Mothers.Packages
             get { return _name; }
         }
 
-        public IAmRequest Request { get; private set; }
+        public IAmDataProviderRequest DataProviderRequest { get; private set; }
 
         public decimal CostPrice
         {

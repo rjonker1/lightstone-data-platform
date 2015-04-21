@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Requests.Contracts
 {
-    public interface IAmRequest
+    public interface IAmDataProviderRequest
     {
         IEnumerable<IAmRequestField> RequestFields { get; }
     }
