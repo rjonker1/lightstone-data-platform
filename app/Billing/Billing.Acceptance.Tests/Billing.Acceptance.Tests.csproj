@@ -61,17 +61,17 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.962, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Lightstone.DataPlatform.Shared, Version=1.0.0.969, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.962\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.969\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.DataPlatform.Shared.BuildingBlocks">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.BuildingBlocks.1.0.0.953\lib\net45\Lightstone.DataPlatform.Shared.BuildingBlocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.962\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
+    <Reference Include="Lightstone.DataPlatform.Shared.Messaging.Billing, Version=1.0.0.969, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.Messaging.Billing.1.0.0.969\lib\net45\Lightstone.DataPlatform.Shared.Messaging.Billing.dll</HintPath>
     </Reference>
     <Reference Include="Lightstone.Dataplatform.Shared.Public.TestHelpers">
       <HintPath>..\..\packages\Lightstone.Dataplatform.Shared.Public.TestHelpers.1.0.0.953\lib\net45\Lightstone.Dataplatform.Shared.Public.TestHelpers.dll</HintPath>
@@ -122,6 +122,7 @@
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_client_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_customer_to_queue.cs" />
     <Compile Include="Transaction\EasyNetQ\when_publishing_new_transaction_to_queue.cs" />
+    <Compile Include="Transaction\EasyNetQ\when_publishing_stage_bill_run.cs" />
     <Compile Include="Transaction\EasyNetQ\when_registering_multiple_exchanges_queues_for_message_types.cs" />
     <Compile Include="Transaction\when_create_a_new_transaction.cs" />
     <Compile Include="Transaction\Billing\when_persisting_prebilling_transaction.cs" />

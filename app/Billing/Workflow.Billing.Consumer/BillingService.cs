@@ -3,12 +3,14 @@ using System.Threading.Tasks;
 using Castle.Windsor;
 using Common.Logging;
 using DataPlatform.Shared.Messaging.Billing.Messages;
+using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using DataPlatform.Shared.Repositories;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
 using NHibernate;
 using Workflow.Billing.Consumer.Installers;
 using Workflow.Billing.Consumers;
+using Workflow.Billing.Consumers.ConsumerTypes;
 using Workflow.Billing.Domain.Entities;
 
 namespace Workflow.Billing.Consumer
@@ -38,6 +40,7 @@ namespace Workflow.Billing.Consumer
             //advancedBus.Consume(q, x => container.Resolve(typeof(IConsume<>)));
             //advancedBus.Consume(q, x => container.Resolve<TransactionConsumer>());
             advancedBus.Consume(q, x => x
+                .Add<BillingMessage>((message, info) => new TransactionConsumer<BillingMessage>(message, container))
                 .Add<InvoiceTransactionCreated>((message, info) => new TransactionConsumer<InvoiceTransactionCreated> (message, container))
                 .Add<UserMessage>((message, info) => new TransactionConsumer<UserMessage> (message, container))
                 .Add<CustomerMessage>((message, info) => new TransactionConsumer<CustomerMessage>(message, container))

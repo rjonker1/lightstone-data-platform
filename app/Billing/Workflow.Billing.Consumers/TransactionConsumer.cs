@@ -1,5 +1,6 @@
 ﻿using Castle.Windsor;
 using DataPlatform.Shared.Messaging.Billing.Messages;
+using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.Billing.Consumers.ConsumerTypes;
 
@@ -10,6 +11,7 @@ namespace Workflow.Billing.Consumers
     {
         public TransactionConsumer(IMessage<T> message, IWindsorContainer container)
         {
+            if (message is IMessage<BillingMessage>) container.Resolve<BillRunConsumer>().Consume(message as IMessage<BillingMessage>);
             if (message is IMessage<InvoiceTransactionCreated>) container.Resolve<InvoiceTransactionConsumer>().Consume(message as IMessage<InvoiceTransactionCreated>);
             if (message is IMessage<UserMessage>) container.Resolve<UserConsumer>().Consume(message as IMessage<UserMessage>);
             if (message is IMessage<CustomerMessage>) container.Resolve<CustomerConsumer>().Consume(message as IMessage<CustomerMessage>);

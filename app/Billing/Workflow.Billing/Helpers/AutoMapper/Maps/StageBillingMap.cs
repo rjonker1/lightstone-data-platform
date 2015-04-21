@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DataPlatform.Shared.Repositories;
 using Workflow.Billing.Domain.Entities;
 
@@ -8,7 +9,9 @@ namespace Workflow.Billing.Helpers.AutoMapper.Maps
     {
         public void CreateMaps()
         {
-            Mapper.CreateMap<IRepository<PreBilling>, IRepository<StageBilling>>();
+            Mapper.CreateMap<PreBilling, StageBilling>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(s => Guid.NewGuid()))
+                .ForMember(dest => dest.PreBillingId, opt => opt.MapFrom(s => s.Id));
         }
     }
 }
