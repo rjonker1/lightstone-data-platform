@@ -5,6 +5,7 @@
     });
 
     initializePreBilling(sammy);
+    initializeStageBilling(sammy);
     intitializeMI(sammy);
     initializeAdminBilling(sammy);
 }
@@ -13,6 +14,13 @@ function initializePreBilling(sammy) {
 
     sammy.get('#/PreBilling', function(context) {
         context.load('/PreBilling', { dataType: 'html', cache: false }).swap();
+    });
+}
+
+function initializeStageBilling(sammy) {
+
+    sammy.get('#/StageBilling', function (context) {
+        context.load('/StageBilling', { dataType: 'html', cache: false }).swap();
     });
 }
 
@@ -61,92 +69,4 @@ function initializePlugins() {
         }
     });
 
-    $('.packag-autocomplete .chosen-choices input').autocomplete({
-        source: function (request, response) {
-            var $container = $(this.element).closest('.packag-autocomplete');
-            var type = $container.data('type');
-            $.ajax({
-                url: "/packages/" + request.term + "/",
-                dataType: "json",
-                beforeSend: function () { $('ul.chosen-results').empty(); },
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return {
-                            label: item.name,
-                            value: item.packageId
-                        };
-                    }));
-                }
-            });
-        },
-        select: function (event, ui) {
-            if ($('#' + ui.item.value).length) {
-                return;
-            }
-            var $container = $(this).closest('.packag-autocomplete');
-            var $select = $container.find('select');
-            $select.append('<option id="' + ui.item.value + '" selected="true" value="' + ui.item.value + '|' + ui.item.label + '">' + ui.item.label + '</option>');
-            $select.trigger("chosen:updated");
-        }
-    });
-
-    $('#ClientIds').autocomplete({
-        source: function (request, response) {
-            var $container = $(this.element).closest('div');
-            var type = $container.data('type');
-            //var $ul = $container.find('ul');
-            //var $ul = $("<ul>", {
-            //    text: "",
-            //    "class": "custom-colorize-changer"
-            //}).appendTo($container);
-            $.ajax({
-                url: "/NamedEntities/" + type + "/" + request.term + "/",
-                dataType: "json",
-                beforeSend: function () {
-                },
-                success: function (data) {
-                    response($.map(data.dto, function (item) {
-                        return {
-                            label: item.name,
-                            value: item.id
-                        };
-                    }));
-                }
-            });
-        },
-        select: function (event, ui) {
-            if ($('#' + ui.item.value).length) {
-                return;
-            }
-
-            var $container = $(this).closest('div');
-            var $listGroup = $container.find('.list-group');
-
-            var $item = $("<div>", { "class": "list-group-item" }).appendTo($listGroup);
-
-            var $left = $("<div>", { "class": "pull-left" }).appendTo($item);
-            var $remove = $("<a>", { "class": "btn btn-danger btn-xs close-box", href: "javascript:;" }).appendTo($left);
-            var $removeIcon = $("<i>", { "class": "fa fa-times" }).appendTo($remove);
-
-            var index = $listGroup.children('li').length;
-
-            var $id = $("<input>", {
-                id: ui.item.value,
-                name: "ClientId[" + index + "]",
-                value: ui.item.value,
-                type: 'hidden'
-            }).appendTo($item);
-
-            var $label = $("<label>", { text: ui.item.label }).appendTo($item);
-
-            var $value = $("<input>", {
-                name: "UserAlias[" + index + "]",
-                value: "",
-                "class": "form-control"
-            }).appendTo($item);
-        },
-        close: function (event, ui) {
-            $(this).val('');
-        }
-    });
 }

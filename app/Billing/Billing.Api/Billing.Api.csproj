@@ -561,6 +561,7 @@
     <Content Include="Views\PreBIlling\Index.cshtml" />
     <Content Include="Views\MI\Index.cshtml" />
     <Content Include="Views\AdminBilling\Index.cshtml" />
+    <Content Include="Views\StageBilling\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
