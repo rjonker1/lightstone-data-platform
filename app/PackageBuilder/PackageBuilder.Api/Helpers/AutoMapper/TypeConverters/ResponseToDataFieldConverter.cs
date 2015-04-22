@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DataPlatform.Shared.Helpers.Extensions;
 using Lace.Domain.Core.Contracts.DataProviders.Metric;
+using Lace.Domain.Core.Requests.Contracts;
 using PackageBuilder.Core.Helpers.Extensions;
 using PackageBuilder.Core.Repositories;
 using PackageBuilder.Domain.Entities.DataFields.Write;
@@ -11,11 +12,11 @@ using PackageBuilder.Domain.Entities.Industries.Read;
 
 namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
 {
-    public class ComplexObjectToDataFieldConverter : TypeConverter<object, IEnumerable<DataField>>
+    public class ResponseToDataFieldConverter : TypeConverter<object, IEnumerable<DataField>>
     {
         private readonly IRepository<Industry> _industryRepository;
 
-        public ComplexObjectToDataFieldConverter(IRepository<Industry> industryRepository)
+        public ResponseToDataFieldConverter(IRepository<Industry> industryRepository)
         {
             _industryRepository = industryRepository;
         }
@@ -42,6 +43,7 @@ namespace PackageBuilder.Api.Helpers.AutoMapper.TypeConverters
                         (property.PropertyType.IsClass || property.PropertyType.IsInterface) &&
                         !TypeExtensions.IsSimple(property.PropertyType) && 
                         !property.PropertyType.IsInstanceOfType(Type.GetType("System.Type")) &&
+                        property.PropertyType != typeof(IAmDataProviderRequest) &&
                         property.PropertyType != typeof (IPair<string, double>[])).ToList();
             var list = complexProperties.Select(property => Mapper.Map(property.GetValue(source), property.PropertyType, typeof (DataField)) as DataField).ToList();
             list.AddRange(properties.Except(complexProperties).Select(field => new DataField(field.Name, field.PropertyType, _industryRepository.ToList(), field.GetValue(source) + "")).ToList());

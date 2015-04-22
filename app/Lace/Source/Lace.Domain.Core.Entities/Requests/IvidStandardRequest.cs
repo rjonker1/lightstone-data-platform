@@ -2,7 +2,7 @@
 
 namespace Lace.Domain.Core.Entities.Requests
 {
-    public class IvidStandardRequest : IAmDataProviderStandardIvidRequest
+    public class IvidStandardRequest : IAmStandardIvidRequest
     {
         public IAmRequesterNameRequestField RequesterName { get; private set; }
         public IAmRequesterPhoneRequestField RequesterPhone { get; private set; }

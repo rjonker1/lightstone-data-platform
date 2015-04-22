@@ -80,6 +80,7 @@ namespace PackageBuilder.Domain.Entities.Requests
         public IHaveDriversLicense DriversLicense { get; private set; }
 
         public IHaveContract Contract { get; private set; }
+        public IHaveUser User { get; private set; }
 
         public IHavePackageForRequest Package { get; private set; }
 
@@ -230,7 +231,7 @@ namespace PackageBuilder.Domain.Entities.Requests
 
     public class RequestPackage : IHavePackageForRequest
     {
-        public RequestPackage(string action, DataProviderName[] dataProviders, Guid id, string name, long version)
+        public RequestPackage(string action, IAmDataProvider[] dataProviders, Guid id, string name, long version)
         {
             Action = action;
             DataProviders = dataProviders;
@@ -241,10 +242,9 @@ namespace PackageBuilder.Domain.Entities.Requests
 
         public string Action { get; private set; }
 
-        public DataProviderName[] DataProviders { get; private set; }
-
         public Guid Id { get; private set; }
 
+        public IAmDataProvider[] DataProviders { get; private set; }
         public string Name { get; private set; }
 
         public long Version { get; private set; }
