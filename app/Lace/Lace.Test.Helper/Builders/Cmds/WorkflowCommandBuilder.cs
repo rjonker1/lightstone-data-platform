@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using DataPlatform.Shared.Enums;
+using Lace.Domain.Core.Contracts.Requests;
 using Lace.Domain.Core.Requests.Contracts;
-using Lace.Domain.DataProviders.Audatex.Infrastructure.Management;
+using Lace.Domain.DataProviders.Core.Shared;
+using Lace.Domain.DataProviders.Ivid.Infrastructure.Dto;
 using Lace.Domain.DataProviders.Ivid.Infrastructure.Management;
 using Lace.Domain.DataProviders.IvidTitleHolder.Infrastructure.Management;
 using Lace.Domain.DataProviders.Lightstone.Infrastructure.Management;
@@ -13,7 +14,6 @@ using Lace.Domain.DataProviders.RgtVin.Infrastructure.Management;
 using Lace.Shared.Extensions;
 using Lace.Test.Helper.Builders.Buses;
 using Lace.Test.Helper.Builders.Requests;
-using Lace.Test.Helper.Builders.Responses;
 using Lace.Test.Helper.Fakes.Responses;
 using Lace.Test.Helper.Mothers.Requests.Dto;
 using Workflow.Lace.Messages.Core;
@@ -49,7 +49,7 @@ namespace Lace.Test.Helper.Builders.Cmds
 
         public WorkflowCommandBuilder Wait()
         {
-            System.Threading.Thread.Sleep(30);
+            System.Threading.Thread.Sleep(5000);
             return this;
         }
 
@@ -76,6 +76,57 @@ namespace Lace.Test.Helper.Builders.Cmds
             return this;
         }
 
+        public WorkflowCommandBuilder ForFailedCallIvid()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            queue.InitQueue(_bus)
+                .SendRequestToDataProvider("Web Service",
+                    "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Request,
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForIvid(), 15, 30)
+                .ReceiveResponseFromDataProvider("Web Service",
+                    "https://secure1.ubiquitech.co.za/ivid/ws/hpiService.wsdl", DataProviderAction.Response,
+                    DataProviderState.Failed, null,
+                    15, 30);
+            return this;
+        }
+
+        public WorkflowCommandBuilder ForIvidConfiguration()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            queue.InitQueue(_bus)
+                .Configuration(
+                    new IvidRequestMessage(
+                        new LicensePlateRequestBuilder().ForIvid().GetFromRequest<IPointToVehicleRequest>())
+                        .HpiQueryRequest, null);
+            return this;
+        }
+
+        public WorkflowCommandBuilder ForIvidSecurity()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            queue.InitQueue(_bus)
+                .Security(new
+                {
+                    Credentials =
+                        new
+                        {
+                            UserName = "Ivid User Name",
+                            Password = "This Is Some Password"
+                        }
+                }, new {ContextMessage = "Ivid Data Provider Credentials"});
+            return this;
+        }
+
+        public WorkflowCommandBuilder ForIvidTransformation()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.Ivid);
+            queue.InitQueue(_bus)
+                .Transformation(
+                    new TransformIvidResponse(FakeIvidResponse.GetHpiStandardQueryResponseForLicenseNoXmc167Gp()).Result,
+                    null);
+            return this;
+        }
+
         public WorkflowCommandBuilder ForSuccessfulCallLightstoneAuto()
         {
             var queue = new WorkflowQueueSender(DataProviderCommandSource.LightstoneAuto);
@@ -94,6 +145,19 @@ namespace Lace.Test.Helper.Builders.Cmds
             return this;
         }
 
+        public WorkflowCommandBuilder ForFailedCallLightstoneAuto()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.LightstoneAuto);
+            queue.InitQueue(_bus)
+                .SendRequestToDataProvider("Database",
+                    "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForLightstone(), 20, 40)
+                .ReceiveResponseFromDataProvider("Database",
+                    "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
+                    DataProviderState.Failed, null, 20, 40);
+            return this;
+        }
+
         public WorkflowCommandBuilder ForSuccessfulCallRgt()
         {
             var queue = new WorkflowQueueSender(DataProviderCommandSource.Rgt);
@@ -106,6 +170,20 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderState.Successful, new TransformRgtResponse(new List<CarSpecification>()), 30, 60);
             return this;
         }
+
+        public WorkflowCommandBuilder ForFailedCallRgt()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.Rgt);
+            queue.InitQueue(_bus)
+                .SendRequestToDataProvider("Database",
+                    "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgt(), 30, 60)
+                .ReceiveResponseFromDataProvider("Database",
+                    "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
+                    DataProviderState.Failed, null, 30, 60);
+            return this;
+        }
+
 
         public WorkflowCommandBuilder ForSuccessfulCallRgtVin()
         {
@@ -121,22 +199,35 @@ namespace Lace.Test.Helper.Builders.Cmds
             return this;
         }
 
-        public WorkflowCommandBuilder ForSuccessfulCallAudatex()
+        public WorkflowCommandBuilder ForFailedCallRgtVin()
         {
-            var queue = new WorkflowQueueSender(DataProviderCommandSource.Audatex);
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.RgtVin);
             queue.InitQueue(_bus)
-                .SendRequestToDataProvider("Web Service",
-                    "https://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx", DataProviderAction.Request,
-                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForAudatex(), 0, 0)
-                .ReceiveResponseFromDataProvider("Web Service",
-                    "https://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx", DataProviderAction.Response,
-                    DataProviderState.Successful,
-                    new TransformAudatexResponse(new SourceResponseBuilder().ForAudatexWithHuyandaiHistory(),
-                        new SourceResponseBuilder().ForAudatexWithLaceResponse(),
-                        new LicensePlateRequestBuilder().ForAudatex().GetFromRequest<IPointToVehicleRequest>().Vehicle),
-                    0, 0);
+                .SendRequestToDataProvider("Database",
+                    "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Request,
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForRgtVin(), 25, 50)
+                .ReceiveResponseFromDataProvider("Database",
+                    "Data Source=.;Initial Catalog=Auto_Carstats;Integrated Security=True;", DataProviderAction.Response,
+                    DataProviderState.Failed, null, 25, 50);
             return this;
         }
+
+        //public WorkflowCommandBuilder ForSuccessfulCallAudatex()
+        //{
+        //    var queue = new WorkflowQueueSender(DataProviderCommandSource.Audatex);
+        //    queue.InitQueue(_bus)
+        //        .SendRequestToDataProvider("Web Service",
+        //            "https://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx", DataProviderAction.Request,
+        //            DataProviderState.Successful, new LicensePlateRequestBuilder().ForAudatex(), 0, 0)
+        //        .ReceiveResponseFromDataProvider("Web Service",
+        //            "https://mobile.za.ax-aee.co.uk/audabridge/backofficeservice.asmx", DataProviderAction.Response,
+        //            DataProviderState.Successful,
+        //            new TransformAudatexResponse(new SourceResponseBuilder().ForAudatexWithHuyandaiHistory(),
+        //                new SourceResponseBuilder().ForAudatexWithLaceResponse(),
+        //                new LicensePlateRequestBuilder().ForAudatex().GetFromRequest<IPointToVehicleRequest>().Vehicle),
+        //            0, 0);
+        //    return this;
+        //}
 
         public WorkflowCommandBuilder ForSuccessfulCallToIvidTitleHolder()
         {
@@ -153,6 +244,19 @@ namespace Lace.Test.Helper.Builders.Cmds
             return this;
         }
 
+        public WorkflowCommandBuilder ForFailedCallToIvidTitleHolder()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.IvidTitleHolder);
+            queue.InitQueue(_bus)
+                .SendRequestToDataProvider("Web Service",
+                    "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Request,
+                    DataProviderState.Successful, new LicensePlateRequestBuilder().ForIvidTitleHolder(), 35, 70)
+                .ReceiveResponseFromDataProvider("Web Service",
+                    "https://secure1.ubiquitech.co.za:443/ivid/ws/", DataProviderAction.Response,
+                    DataProviderState.Failed, null, 35, 70);
+            return this;
+        }
+
         public WorkflowCommandBuilder ForSuccessfulResponseToCaller()
         {
             var queue = new WorkflowQueueSender(DataProviderCommandSource.EntryPoint);
@@ -162,6 +266,17 @@ namespace Lace.Test.Helper.Builders.Cmds
                     DataProviderState.Successful, new LicensePlateRequestBuilder().ForAllSources(), _Watch)
                 .CreateTransaction(_packageId, _packageVersion, _userId, _requestId, _contractId, _system,
                     0, DataProviderState.Successful, _accountNumber);
+            return this;
+        }
+
+        public WorkflowCommandBuilder ForFailedResponseToCaller()
+        {
+            var queue = new WorkflowQueueSender(DataProviderCommandSource.EntryPoint);
+            queue.InitQueue(_bus)
+                .EntryPointResponse(
+                    new List<IPointToLaceProvider>(),
+                    DataProviderState.Failed, new LicensePlateRequestBuilder().ForAllSources(), _Watch);
+
             return this;
         }
     }

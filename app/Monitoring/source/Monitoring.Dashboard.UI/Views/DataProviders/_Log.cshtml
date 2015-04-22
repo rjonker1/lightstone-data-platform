@@ -8,7 +8,7 @@
                     <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3>{{response.AverageResponseTime}}</h3>
-                            <p>Average Response Time</p>
+                            <p>Average Response Time<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-clock-o"></i>
@@ -19,7 +19,7 @@
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3>{{response.SuccessRate}}<sup style="font-size: 20px">%</sup></h3>
-                            <p>Success Rate</p>
+                            <p>Success Rate<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -31,7 +31,7 @@
                     <div class="small-box bg-blue">
                         <div class="inner">
                             <h3>{{response.TotalRequests}}</h3>
-                            <p>Total Requests</p>
+                            <p>Total Requests<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -43,7 +43,7 @@
                     <div class="small-box bg-red">
                         <div class="inner">
                             <h3>{{response.TotalErrors}}</h3>
-                            <p>Total Errors</p>
+                            <p>Total Errors<sup style="font-size: 10px"> for {{response.CurrentMonth}}</sup></p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-exclamation-triangle"></i>
@@ -66,10 +66,10 @@
                                 <th>Request</th>
                                 <th>Status</th>
                             </tr>
-                            <tr ng-repeat="response in dataProviderMonitoring" class="" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
+                            <tr ng-repeat="response in dataProviderMonitoring" ng-class="{'hasErrorsClass':response.HasErrors, 'hasNoErrorsClass' : !response.HasErrors}">
                                 <td ng-click="Toggle($index,'log-formatted-json');" style="cursor: pointer;" ><span style="font-size: 12px">{{response.Id}}</span>&nbsp;{{response.SearchType}}&nbsp;{{response.SearchTerm}}&nbsp;{{response.ElapsedTime}}</td>
                                 <td>
-                                    <span class="label label-success">Successful</span>
+                                    <span ng-class="{'label label-danger':response.HasErrors, 'label label-success' : !response.HasErrors}">{{response.State}}</span>
                                     <div style="display: none;" id="toggle-{{$index}}">
                                         <textarea style="display: none" id="rawJson-{{$index}}" class="rawJson">{{response.JsonPayload}}</textarea>
                                     </div>

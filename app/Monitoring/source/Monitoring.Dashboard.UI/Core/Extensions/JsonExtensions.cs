@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Monitoring.Dashboard.UI.Core.Extensions
@@ -7,8 +8,15 @@ namespace Monitoring.Dashboard.UI.Core.Extensions
     {
         public static string AsJsonString(this object value)
         {
-            return JsonConvert.SerializeObject(value, Formatting.Indented,
-                new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+            try
+            {
+                return JsonConvert.SerializeObject(value, Formatting.Indented,
+                    new JsonSerializerSettings() {ContractResolver = new CamelCasePropertyNamesContractResolver()});
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public static string ObjectToJson(this object value)

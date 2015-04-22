@@ -20,26 +20,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
             TotalErrors = totalErrors;
             TotalResponses = totalResponses;
         }
-
-        //public DataProviderStatisticsView GetAverageResponseTime()
-        //{
-
-        //    if (!_elapsedTimes.Any())
-        //        return this;
-
-        //    var timeSpans = new List<TimeSpan>();
-        //    _elapsedTimes.ToList().ForEach(f =>
-        //    {
-        //        TimeSpan dElapsedTime;
-        //        if (TimeSpan.TryParse(f, out dElapsedTime))
-        //            timeSpans.Add(dElapsedTime);
-        //    });
-
-        //    var ticks = Convert.ToInt64(timeSpans.Average(a => a.Ticks));
-        //    AverageResponseTime = new TimeSpan(ticks);
-        //    return this;
-        //}
-
+       
         public DataProviderStatisticsView DetermineSuccessRate()
         {
             SuccessRate = TotalRequests > 0 ? ((TotalRequests - TotalErrors)/TotalRequests)*100 : 0;
@@ -61,6 +42,35 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         [DataMember]
         public double SuccessRate { get; private set; }
+
+        [DataMember]
+        public string CurrentMonth
+        {
+            get
+            {
+                return DateTime.Now.ToString("MMMM");
+            }
+        }
+
+        //public DataProviderStatisticsView GetAverageResponseTime()
+        //{
+
+        //    if (!_elapsedTimes.Any())
+        //        return this;
+
+        //    var timeSpans = new List<TimeSpan>();
+        //    _elapsedTimes.ToList().ForEach(f =>
+        //    {
+        //        TimeSpan dElapsedTime;
+        //        if (TimeSpan.TryParse(f, out dElapsedTime))
+        //            timeSpans.Add(dElapsedTime);
+        //    });
+
+        //    var ticks = Convert.ToInt64(timeSpans.Average(a => a.Ticks));
+        //    AverageResponseTime = new TimeSpan(ticks);
+        //    return this;
+        //}
+
 
     }
 }

@@ -27,10 +27,10 @@ namespace Workflow.Lace.Messages.Events
         public CommandType CommandType { get; private set; }
         
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
       
         public SecurityFlagRaised(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, PayloadObjectIdentifier payload)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -60,10 +60,10 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public CommandType CommandType { get; private set; }
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderConfigured(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, PayloadObjectIdentifier payload)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -93,10 +93,10 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public CommandType CommandType { get; private set; }
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderResponseTransformed(Guid id, Guid requestId, DataProviderCommandSource dataProvider,
-            DateTime date, CommandType commandType, PayloadObjectIdentifier payload)
+            DateTime date, CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -126,10 +126,10 @@ namespace Workflow.Lace.Messages.Events
         [DataMember]
         public CommandType CommandType { get; private set; }
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderError(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, PayloadObjectIdentifier payload)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -160,10 +160,10 @@ namespace Workflow.Lace.Messages.Events
         public CommandType CommandType { get; private set; }
 
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderCallStarted(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, PayloadObjectIdentifier payload)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;
@@ -194,10 +194,10 @@ namespace Workflow.Lace.Messages.Events
         public CommandType CommandType { get; private set; }
 
         [DataMember]
-        public PayloadObjectIdentifier Payload { get; private set; }
+        public PayloadIdentifier Payload { get; private set; }
 
         public DataProviderCallEnded(Guid id, Guid requestId, DataProviderCommandSource dataProvider, DateTime date,
-            CommandType commandType, PayloadObjectIdentifier payload)
+            CommandType commandType, PayloadIdentifier payload)
         {
             Id = id;
             RequestId = requestId;

@@ -33,7 +33,7 @@ namespace Monitoring.Dashboard.UI.Infrastructure.Handlers
                 StatisticsResponse =
                     statistics.Select(
                         s =>
-                            new DataProviderStatisticsView(s.AvgerageRequestTime, s.TotalRequests, s.TotalResponses, 0)
+                            new DataProviderStatisticsView(s.AvgerageRequestTime, s.TotalRequests, s.TotalResponses, s.TotalErrors)
                                 .DetermineSuccessRate());
             }
             catch (Exception ex)

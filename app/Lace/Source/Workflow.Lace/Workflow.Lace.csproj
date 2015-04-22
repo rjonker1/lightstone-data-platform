@@ -79,7 +79,7 @@
     <Compile Include="Identifiers\DataProviderResponseIdentifier.cs" />
     <Compile Include="Identifiers\ConnectionTypeIdentifier.cs" />
     <Compile Include="Identifiers\PayloadIdentifier.cs" />
-    <Compile Include="Identifiers\PayloadObjectIdentifier.cs" />
+    <None Include="Identifiers\PayloadObjectIdentifier.cs.delete" />
     <Compile Include="Identifiers\SearchRequestIndentifier.cs" />
     <Compile Include="Mappers\DataProviderTransactionTypeMapper.cs" />
     <Compile Include="Mappers\MappingForTypes.cs" />

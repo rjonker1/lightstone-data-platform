@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -9,22 +10,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Monitoring.Dashboard.UI.Core.Models
 {
-
-    [DataContract]
-    public class SerializedPayload
-    {
-        [DataMember]
-        public byte[] Payload { get; private set; }
-
-        [DataMember]
-        public int CommitSequence { get; private set; }
-
-        public SerializedPayload(byte[] payload, int commitSequence)
-        {
-            Payload = payload;
-            CommitSequence = commitSequence;
-        }
-    }
 
     [DataContract]
     public class DataProviderView
@@ -53,6 +38,9 @@ namespace Monitoring.Dashboard.UI.Core.Models
         public string ElapsedTime { get; private set; }
 
         [DataMember]
+        public string State { get; private set; }
+
+        [DataMember]
         public IEnumerable<SerializedPayload> SerializedPayloads { get; private set; }
 
         [DataMember]
@@ -76,6 +64,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
             SearchType = searchType;
         }
 
+        public DataProviderView SetState(int errorCount)
+        {
+            State = errorCount > 0 ? "Failure" : "Successful";
+            HasErrors = errorCount > 0;
+            return this;
+        }
 
         public DataProviderView DeserializePayload()
         {
@@ -102,7 +96,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
                 _log.ErrorFormat("An error occurred deserializing the data provider payload {0}", ex.Message);
             }
 
-            return "[{}]";
+            return string.Empty;
         }
 
         private static string DersializeNestedPayload(string json)
@@ -116,6 +110,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
                 {
                     foreach (var nested in payload)
                     {
+                        Debug.WriteLine(payload.ToString(Formatting.None));
                         dynamic request = JsonConvert.DeserializeObject(nested.ToString(Formatting.None));
                         UpdateNestedPayload(request);
                         UpdateNestedMetaData(request);
@@ -136,7 +131,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         private static void UpdateNestedPayload(dynamic request)
         {
-            if (request.Body.Payload == null || request.Body.Payload.Payload == null)
+            if (request.Body.Payload == null || request.Body.Payload.Payload == null || !IsJson(request.Body.Payload.Payload.ToString()))
                 return;
 
 
@@ -155,7 +150,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         private static void UpdateNestedMetaData(dynamic request)
         {
-            if (request.Body.Payload == null || request.Body.Payload.MetaData == null)
+            if (request.Body.Payload == null || request.Body.Payload.MetaData == null || !IsJson(request.Body.Payload.Payload.ToString()))
                 return;
 
             var token = JToken.Parse(request.Body.Payload.MetaData.ToString());
@@ -169,6 +164,29 @@ namespace Monitoring.Dashboard.UI.Core.Models
                 var metaData = JObject.Parse(request.Body.Payload.MetaData.ToString());
                 request.Body.Payload.MetaData = metaData;
             }
+        }
+
+        private static bool IsJson(string json)
+        {
+            json = json.Trim();
+            return json.StartsWith("{") && json.EndsWith("}")
+                   || json.StartsWith("[") && json.EndsWith("]");
+        }
+    }
+
+    [DataContract]
+    public class SerializedPayload
+    {
+        [DataMember]
+        public byte[] Payload { get; private set; }
+
+        [DataMember]
+        public int CommitSequence { get; private set; }
+
+        public SerializedPayload(byte[] payload, int commitSequence)
+        {
+            Payload = payload;
+            CommitSequence = commitSequence;
         }
     }
 }
