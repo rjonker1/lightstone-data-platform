@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using Monitoring.Dashboard.UI.Core.Extensions;
+using Common.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -25,10 +25,12 @@ namespace Monitoring.Dashboard.UI.Core.Models
             CommitSequence = commitSequence;
         }
     }
-    
+
     [DataContract]
     public class DataProviderView
     {
+        private readonly ILog _log;
+
         [DataMember]
         public Guid Id { get; private set; }
 
@@ -58,7 +60,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
 
         public DataProviderView()
         {
-
+            _log = LogManager.GetLogger(GetType());
         }
 
         public DataProviderView(Guid id, IEnumerable<SerializedPayload> serializedPayloads, DateTime date,
@@ -74,7 +76,7 @@ namespace Monitoring.Dashboard.UI.Core.Models
             SearchType = searchType;
         }
 
-      
+
         public DataProviderView DeserializePayload()
         {
             JsonPayload = DeserializePayloads();
@@ -86,12 +88,87 @@ namespace Monitoring.Dashboard.UI.Core.Models
             if (SerializedPayloads == null)
                 return string.Empty;
 
-            var jarray = new JArray();
-            SerializedPayloads.OrderBy(o => o.CommitSequence)
-                .ToList()
-                .ForEach(f => jarray.Add(JArray.Parse(Encoding.UTF8.GetString(f.Payload).Substring(1))));
+            try
+            {
+                var jarray = new JArray();
+                SerializedPayloads.OrderBy(o => o.CommitSequence)
+                    .ToList()
+                    .ForEach(f => jarray.Add(JArray.Parse(Encoding.UTF8.GetString(f.Payload).Substring(1))));
 
-            return jarray.ToString(Formatting.None);
+                return DersializeNestedPayload(jarray.ToString(Formatting.None));
+            }
+            catch (Exception ex)
+            {
+                _log.ErrorFormat("An error occurred deserializing the data provider payload {0}", ex.Message);
+            }
+
+            return "[{}]";
+        }
+
+        private static string DersializeNestedPayload(string json)
+        {
+            var payloads = new JArray();
+
+            var array = JArray.Parse(json);
+            foreach (var payload in array)
+            {
+                if (payload is JArray)
+                {
+                    foreach (var nested in payload)
+                    {
+                        dynamic request = JsonConvert.DeserializeObject(nested.ToString(Formatting.None));
+                        UpdateNestedPayload(request);
+                        UpdateNestedMetaData(request);
+                        payloads.Add(JArray.Parse(string.Format("[{0}]", request.ToString())));
+                    }
+                }
+                else
+                {
+                    dynamic request = JsonConvert.DeserializeObject(payload.ToString(Formatting.None));
+                    UpdateNestedPayload(request);
+                    UpdateNestedMetaData(request);
+                    payloads.Add(JArray.Parse(string.Format("[{0}]", request.ToString())));
+                }
+            }
+
+            return payloads.ToString(Formatting.None);
+        }
+
+        private static void UpdateNestedPayload(dynamic request)
+        {
+            if (request.Body.Payload == null || request.Body.Payload.Payload == null)
+                return;
+
+
+            var token = JToken.Parse(request.Body.Payload.Payload.ToString());
+            if (token is JArray)
+            {
+                var payload = JArray.Parse(request.Body.Payload.Payload.ToString());
+                request.Body.Payload.Payload = payload;
+            }
+            else
+            {
+                var payload = JObject.Parse(request.Body.Payload.Payload.ToString());
+                request.Body.Payload.Payload = payload;
+            }
+        }
+
+        private static void UpdateNestedMetaData(dynamic request)
+        {
+            if (request.Body.Payload == null || request.Body.Payload.MetaData == null)
+                return;
+
+            var token = JToken.Parse(request.Body.Payload.MetaData.ToString());
+            if (token is JArray)
+            {
+                var metaData = JArray.Parse(request.Body.Payload.MetaData.ToString());
+                request.Body.Payload.MetaData = metaData;
+            }
+            else
+            {
+                var metaData = JObject.Parse(request.Body.Payload.MetaData.ToString());
+                request.Body.Payload.MetaData = metaData;
+            }
         }
     }
 }

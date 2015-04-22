@@ -38,24 +38,16 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\..\packages\EasyNetQ-Bundle.0.28.5.115\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Extensions">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.745\lib\net45\Lightstone.DataPlatform.Lace.Shared.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.1.0.0.745\lib\net45\Lightstone.DataPlatform.Lace.Shared.Monitoring.Messages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Lightstone.DataPlatform.Shared">
-      <HintPath>..\..\packages\Lightstone.DataPlatform.Shared.1.0.0.745\lib\net45\Lightstone.DataPlatform.Shared.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Core">
       <HintPath>..\..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
     </Reference>
     <Reference Include="NServiceBus.Testing">
       <HintPath>..\..\packages\NServiceBus.Testing.5.0.1\lib\net45\NServiceBus.Testing.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Transports.RabbitMQ">
-      <HintPath>..\..\packages\NServiceBus.RabbitMQ.2.0.5\lib\net45\NServiceBus.Transports.RabbitMQ.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,7 +62,8 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataProviders\when_handling_data_provider_messages.cs" />
+    <Compile Include="DataProviders\when_deserializing_data_provider_request_json.cs" />
+    <None Include="DataProviders\when_handling_data_provider_messages.cs.delete" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -81,6 +74,10 @@
     <ProjectReference Include="..\Monitoring.Test.Helper\Monitoring.Test.Helper.csproj">
       <Project>{b6ee0a80-d382-4c2c-b95b-2e16f565d7fb}</Project>
       <Name>Monitoring.Test.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\Monitoring.Dashboard.UI\Monitoring.Dashboard.UI.csproj">
+      <Project>{8aa179c2-2bb7-4f0f-8df1-ceadec086d17}</Project>
+      <Name>Monitoring.Dashboard.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
