@@ -1,6 +1,4 @@
-﻿using System;
-using DataPlatform.Shared.Messaging.Billing.Helpers;
-using DataPlatform.Shared.Messaging.Billing.Messages;
+﻿using DataPlatform.Shared.Messaging.Billing.Helpers;
 using DataPlatform.Shared.Messaging.Billing.Messages.BillingRun;
 using EasyNetQ;
 using Workflow.BuildingBlocks;

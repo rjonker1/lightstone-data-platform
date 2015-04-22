@@ -1,7 +1,6 @@
 ﻿using System;
 using Hangfire;
 using Shared.BuildingBlocks.Api.ApiClients;
-using UserManagementApiClient = Billing.Scheduler.Clients.UserManagementApiClient;
 
 namespace Billing.Scheduler.Schedules
 {

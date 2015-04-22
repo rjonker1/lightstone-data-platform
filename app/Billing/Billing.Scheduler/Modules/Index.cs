@@ -6,11 +6,10 @@ namespace Billing.Scheduler.Modules
 {
     public class Index : NancyModule
     {
-        public Index(IUserAuthenticationClient userAuthenticationClient)
+        public Index()
         {
             Get["/"] = _ =>
             {
-                var test = new ApiSchedule(userAuthenticationClient);
                 return Response.AsRedirect("/hangfire");
             };
         }
